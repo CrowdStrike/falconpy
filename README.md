@@ -141,6 +141,8 @@ account_list = falcon.QueryAWSAccounts(parameters={ "limit" : "100" })
 ```
 ### The uber-class
 This class farther abstracts token administration allowing the developer to skip this step entirely if desired.
+> You will not authenticate until your first request to the API is made. If you check your authentication status,
+your token or your token_expiration before doing so, the results will be __False__.
 
 ```python
 import falconpy.api_complete as FalconSDK
@@ -229,4 +231,18 @@ account_list = falcon.command(action="QueryAWSAccounts", parameters={"limit":"10
         ]
     }
 }
+```
+
+Authorization status and the token are still available via the class as constants.
+```python
+import falconpy.api_complete as FalconSDK
+falcon = FalconSDK.APIHarness(creds={'client_id': falcon_client_id,'client_secret': falcon_client_secret})
+falcon.authenticate()
+if falcon.authenticated:
+    print(falcon.token)
+```
+
+#### Example result
+```bash
+$ eyJhbGciOiJSUzI1NiIsImtpZCI6InB1YmxpYzph...really long token string
 ```
