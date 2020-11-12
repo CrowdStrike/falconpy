@@ -1,5 +1,4 @@
 # falcon_sdk
-+ Created by: Devin Cargill, Justin Harris and Joshua Hiller
 + Purpose: to speed up customer and partner development operations for Falcon Complete by eliminating duplicative code and presenting best practice development patterns.
 
 ### Currently implemented:
