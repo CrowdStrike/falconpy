@@ -48,7 +48,8 @@ except:
     token = False
 ```
 
-Once retrieved, the token is leveraged in subsequent requests to different API services.
+Once retrieved, the token is leveraged in subsequent requests to different API services. 
+> This examples leverages the cloud_connect_aws.py class to interact with the API and AWS.
 
 ```python
 import falcon_sdk.services.cloud_connect_aws as FalconAWS
