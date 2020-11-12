@@ -38,8 +38,8 @@ For all examples excluding the uber-class, you will first need to create an inst
 ```python
 import falconpy.services.oauth2 as FalconAuth
 authorization = FalconAuth.OAuth2(creds={
-    'client_id': falcon_client_id,
-    'client_secret': falcon_client_secret
+        'client_id': falcon_client_id,
+        'client_secret': falcon_client_secret
     }
 )
 try:
@@ -146,8 +146,12 @@ your token or your token_expiration before doing so, the results will be __False
 
 ```python
 import falconpy.api_complete as FalconSDK
-falcon = FalconSDK.APIHarness(creds={'client_id': falcon_client_id,'client_secret': falcon_client_secret})
-account_list = falcon.command(action="QueryAWSAccounts", parameters={"limit":"100"})
+falcon = FalconSDK.APIHarness(creds={
+        'client_id': falcon_client_id,
+        'client_secret': falcon_client_secret
+    }
+)
+account_list = falcon.command(action="QueryAWSAccounts", parameters={ "limit" : "100" })
 ```
 
 #### Example result
@@ -236,7 +240,11 @@ account_list = falcon.command(action="QueryAWSAccounts", parameters={"limit":"10
 Authorization status and the token are still available via the class as constants.
 ```python
 import falconpy.api_complete as FalconSDK
-falcon = FalconSDK.APIHarness(creds={'client_id': falcon_client_id,'client_secret': falcon_client_secret})
+falcon = FalconSDK.APIHarness(creds={
+        'client_id': falcon_client_id,
+        'client_secret': falcon_client_secret
+    }
+)
 falcon.authenticate()
 if falcon.authenticated:
     print(falcon.token)
