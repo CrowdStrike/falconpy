@@ -1,2 +1,2 @@
 # falconpy
-CrowdStrike Falcon Complete oAuth2 API SDK
+Python based SDK for the Crowdstrike oAuth2 API
