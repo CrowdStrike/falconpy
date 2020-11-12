@@ -1,5 +1,5 @@
-# falcon_sdk
-+ Purpose: to speed up customer and partner development operations for Falcon Complete by eliminating duplicative code and presenting best practice development patterns.
+# falconpy - Falcon Complete API Service classes
+These classes are part of the falconpy project, a python interface handler to the CrowdStrike Falcon Complete oAuth2 API.
 
 ### Currently implemented:
 + `cloud_connect_aws.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws
