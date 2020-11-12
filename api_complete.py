@@ -1,16 +1,8 @@
 #####################################################################################################
-#          .---.        .-----------                                                                #
-#         /     \  __  /    ------    CrowdStrike Falcon oAuth2 API                                 #
-#        / /     \(  )/    -----               Customer SDK                                         #
-#       //////   ' \/ `   ---                                                                       #
-#      //// / // : CS : ---                                                                         #
-#     // /   /  /`    '--                                                                           #
-#    //          //..\\                                                                             #
-#           ====UU====UU====                                                                        #
-#               '//||\\`                                                                            #
-#                 ''``                                                                              #
+# CROWDSTRIKE FALCON COMPLETE                                                                       #
+# oAuth2 API - Customer SDK                                                                         #
 #                                                                                                   #
-# api_complete.py - Josh's all-in-one Falcon Complete API interface class                           #
+# api_complete.py - All-in-one Falcon Complete API harness                                          #
 #####################################################################################################
 import requests
 import json
