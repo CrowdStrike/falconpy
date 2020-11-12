@@ -1,5 +1,5 @@
 # falconpy
-Falcon-py provides a Python native harness for interacting with the Falcon Complete oAuth2 API.
+Falconpy provides a Python native harness for interacting with the Falcon Complete oAuth2 API.
 
 ## Why falconpy
 This project contains a collection of Python classes that abstract Falcon Complete API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
@@ -28,9 +28,204 @@ Currently the solution defines a class for each service (_ex: cloud_connect_aws_
 + [spotlight_vulnerabilities.py](services/spotlight_vulnerabilities.py) - Vulnerabilities
 + [user_management.py](services/user_management.py) - User administration
 
-+ [api_complete.py](api_complete.py) - Falcon Complete API uber-class
+### Uber-class
++ [api_complete.py](api_complete.py) - Falcon Complete API interface harness
 
+## Usage examples
+For all examples excluding the uber-class, you will first need to create an instance of the OAuth2 class in order to generate a token.
 
+### Regular classes
+```python
+import falconpy.services.oauth2 as FalconAuth
+authorization = FalconAuth.OAuth2(creds={
+    'client_id': falcon_client_id,
+    'client_secret': falcon_client_secret
+    }
+)
+try:
+    token = authorized.token()["body"]["access_token"]
+except:
+    token = False
+```
 
+Once retrieved, the token is leveraged in subsequent requests to different API services.
 
+```python
+import falcon_sdk.services.cloud_connect_aws as FalconAWS
+falcon = FalconAWS.Cloud_Connect_AWS(access_token=token)
+account_list = falcon.QueryAWSAccounts(parameters={ "limit" : "100" })
+```
 
+#### Example result
+```json
+{
+    "status_code": 200,
+    "headers": {
+        "Content-Encoding": "gzip",
+        "Content-Length": "699",
+        "Content-Type": "application/json",
+        "Date": "Thu, 12 Nov 2020 20:18:29 GMT",
+        "X-Cs-Region": "us-1",
+        "X-Ratelimit-Limit": "6000",
+        "X-Ratelimit-Remaining": "5987"
+    },
+    "body": {
+        "meta": {
+            "query_time": 0.003052599,
+            "pagination": {
+                "offset": 3,
+                "limit": 100,
+                "total": 3
+            },
+            "powered_by": "cloud-connect-manager",
+            "trace_id": "7c182b49-fe3c-4704-9042-12345678e8d3"
+        },
+        "errors": [],
+        "resources": [
+            {
+                "cid": "437bcd0bf5ad4c39a2b375fe52517453",
+                "id": "987654321098",
+                "iam_role_arn": "arn:aws:iam::987654321098:role/FalconDiscover",
+                "external_id": "IwXe54tosfaSDfsE32dS",
+                "policy_version": "1",
+                "cloudtrail_bucket_owner_id": "987654321098",
+                "cloudtrail_bucket_region": "eu-west-1",
+                "created_timestamp": "2020-11-12T20:18:28Z",
+                "last_modified_timestamp": "2020-11-12T20:18:28Z",
+                "last_scanned_timestamp": "2020-11-12T20:18:28Z",
+                "provisioning_state": "registered"
+            },
+            {
+                "cid": "797bca0df5af4332a2f770ff5784125",
+                "id": "2109876543210",
+                "iam_role_arn": "arn:aws:iam::2109876543210:role/CrowdStrikeFalcon",
+                "external_id": "AnotherExternalID",
+                "policy_version": "1",
+                "cloudtrail_bucket_owner_id": "2109876543210",
+                "cloudtrail_bucket_region": "eu-west-1",
+                "created_timestamp": "2020-10-08T12:44:49Z",
+                "last_modified_timestamp": "2020-10-08T12:44:49Z",
+                "last_scanned_timestamp": "2020-11-01T00:14:13Z",
+                "provisioning_state": "registered",
+                "access_health": {
+                    "api": {
+                        "valid": true,
+                        "last_checked": "2020-11-12T20:18:00Z"
+                    }
+                }
+            },
+            {
+                "cid": "940bcf0bf5ae3f39a2b770ee52517125",
+                "id": "0123456789012",
+                "iam_role_arn": "arn:aws:iam::0123456789012:role/FalconDiscover",
+                "external_id": "CrossAccountExternalID",
+                "policy_version": "1",
+                "cloudtrail_bucket_owner_id": "0123456789012",
+                "cloudtrail_bucket_region": "us-east-1",
+                "created_timestamp": "2020-08-12T12:43:16Z",
+                "last_modified_timestamp": "2020-10-07T09:44:00Z",
+                "last_scanned_timestamp": "2020-11-01T00:13:12Z",
+                "provisioning_state": "registered",
+                "access_health": {
+                    "api": {
+                        "valid": false,
+                        "last_checked": "2020-11-12T20:18:00Z",
+                        "reason": "Assume role failed. IAM role arn and/or external is invalid."
+                    }
+                }
+            }
+        ]
+    }
+}
+```
+### The uber-class
+This class farther abstracts token administration allowing the developer to skip this step entirely if desired.
+
+```python
+import falconpy.api_complete as FalconSDK
+falcon = FalconSDK.APIHarness(creds={'client_id': falcon_client_id,'client_secret': falcon_client_secret})
+account_list = falcon.command(action="QueryAWSAccounts", parameters={"limit":"100"})
+```
+
+#### Example result
+```json
+{
+    "status_code": 200,
+    "headers": {
+        "Content-Encoding": "gzip",
+        "Content-Length": "699",
+        "Content-Type": "application/json",
+        "Date": "Thu, 12 Nov 2020 22:34:47 GMT",
+        "X-Cs-Region": "us-1",
+        "X-Ratelimit-Limit": "6000",
+        "X-Ratelimit-Remaining": "5954"
+    },
+    "body": {
+        "meta": {
+            "query_time": 0.0030413,
+            "pagination": {
+                "offset": 3,
+                "limit": 100,
+                "total": 3
+            },
+            "powered_by": "cloud-connect-manager",
+            "trace_id": "7c182b49-fe3c-4704-9042-12345678e8d3"
+        },
+        "errors": [],
+        "resources": [
+            {
+                "cid": "437bcd0bf5ad4c39a2b375fe52517453",
+                "id": "987654321098",
+                "iam_role_arn": "arn:aws:iam::987654321098:role/FalconDiscover",
+                "external_id": "IwXe54tosfaSDfsE32dS",
+                "policy_version": "1",
+                "cloudtrail_bucket_owner_id": "987654321098",
+                "cloudtrail_bucket_region": "eu-west-1",
+                "created_timestamp": "2020-11-12T20:18:28Z",
+                "last_modified_timestamp": "2020-11-12T20:18:28Z",
+                "last_scanned_timestamp": "2020-11-12T20:18:28Z",
+                "provisioning_state": "registered"
+            },
+            {
+                "cid": "797bca0df5af4332a2f770ff5784125",
+                "id": "2109876543210",
+                "iam_role_arn": "arn:aws:iam::2109876543210:role/CrowdStrikeFalcon",
+                "external_id": "AnotherExternalID",
+                "policy_version": "1",
+                "cloudtrail_bucket_owner_id": "2109876543210",
+                "cloudtrail_bucket_region": "eu-west-1",
+                "created_timestamp": "2020-10-08T12:44:49Z",
+                "last_modified_timestamp": "2020-10-08T12:44:49Z",
+                "last_scanned_timestamp": "2020-11-01T00:14:13Z",
+                "provisioning_state": "registered",
+                "access_health": {
+                    "api": {
+                        "valid": true,
+                        "last_checked": "2020-11-12T22:34:00Z"
+                    }
+                }
+            },
+            {
+                "cid": "940bcf0bf5ae3f39a2b770ee52517125",
+                "id": "0123456789012",
+                "iam_role_arn": "arn:aws:iam::0123456789012:role/FalconDiscover",
+                "external_id": "CrossAccountExternalID",
+                "policy_version": "1",
+                "cloudtrail_bucket_owner_id": "0123456789012",
+                "cloudtrail_bucket_region": "us-east-1",
+                "created_timestamp": "2020-08-12T12:43:16Z",
+                "last_modified_timestamp": "2020-10-07T09:44:00Z",
+                "last_scanned_timestamp": "2020-11-01T00:13:12Z",
+                "provisioning_state": "registered",
+                "access_health": {
+                    "api": {
+                        "valid": false,
+                        "last_checked": "2020-11-12T22:34:00Z",
+                        "reason": "Assume role failed. IAM role arn and/or external is invalid."
+                    }
+                }
+            }
+        ]
+    }
+}
+```
