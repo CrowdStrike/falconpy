@@ -83,7 +83,7 @@ account_list = falcon.QueryAWSAccounts(parameters={ "limit" : "100" })
         "errors": [],
         "resources": [
             {
-                "cid": "437bcd0bf5ad4c39a2b375fe52517453",
+                "cid": "123456-redacted-cid",
                 "id": "987654321098",
                 "iam_role_arn": "arn:aws:iam::987654321098:role/FalconDiscover",
                 "external_id": "IwXe54tosfaSDfsE32dS",
@@ -96,7 +96,7 @@ account_list = falcon.QueryAWSAccounts(parameters={ "limit" : "100" })
                 "provisioning_state": "registered"
             },
             {
-                "cid": "797bca0df5af4332a2f770ff5784125",
+                "cid": "123456-redacted-cid",
                 "id": "2109876543210",
                 "iam_role_arn": "arn:aws:iam::2109876543210:role/CrowdStrikeFalcon",
                 "external_id": "AnotherExternalID",
@@ -115,7 +115,7 @@ account_list = falcon.QueryAWSAccounts(parameters={ "limit" : "100" })
                 }
             },
             {
-                "cid": "940bcf0bf5ae3f39a2b770ee52517125",
+                "cid": "123456-redacted-cid",
                 "id": "0123456789012",
                 "iam_role_arn": "arn:aws:iam::0123456789012:role/FalconDiscover",
                 "external_id": "CrossAccountExternalID",
@@ -174,7 +174,7 @@ account_list = falcon.command(action="QueryAWSAccounts", parameters={"limit":"10
         "errors": [],
         "resources": [
             {
-                "cid": "437bcd0bf5ad4c39a2b375fe52517453",
+                "cid": "123456-redacted-cid",
                 "id": "987654321098",
                 "iam_role_arn": "arn:aws:iam::987654321098:role/FalconDiscover",
                 "external_id": "IwXe54tosfaSDfsE32dS",
@@ -187,7 +187,7 @@ account_list = falcon.command(action="QueryAWSAccounts", parameters={"limit":"10
                 "provisioning_state": "registered"
             },
             {
-                "cid": "797bca0df5af4332a2f770ff5784125",
+                "cid": "123456-redacted-cid",
                 "id": "2109876543210",
                 "iam_role_arn": "arn:aws:iam::2109876543210:role/CrowdStrikeFalcon",
                 "external_id": "AnotherExternalID",
@@ -206,7 +206,7 @@ account_list = falcon.command(action="QueryAWSAccounts", parameters={"limit":"10
                 }
             },
             {
-                "cid": "940bcf0bf5ae3f39a2b770ee52517125",
+                "cid": "123456-redacted-cid",
                 "id": "0123456789012",
                 "iam_role_arn": "arn:aws:iam::0123456789012:role/FalconDiscover",
                 "external_id": "CrossAccountExternalID",
