@@ -362,21 +362,24 @@ class APIHarness:
             CMD = [["Manual"] + override.split(",")]
         else:
             CMD = [a for a in self.commands if a[0] == action]
-        FULL_URL = self.base_url+"{}".format(CMD[0][2])
-        if ids:
-            ID_LIST = str(ids).replace(",","&ids=")
-            FULL_URL = FULL_URL.format(ID_LIST)
-        HEADERS = self.headers()
-        DATA = data
-        BODY = body
-        PARAMS = parameters
-        if self.authenticated:
-            try:
-                response = requests.request(CMD[0][1].upper(), FULL_URL, json=BODY, data=DATA, params=PARAMS, headers=HEADERS, verify=False)
-                returned = self.Result()(status_code=response.status_code, headers=response.headers, body=response.json())
-            except Exception as e:
-                returned = self.Result()(status_code=500, headers={}, body=str(e))
+        if CMD:
+            FULL_URL = self.base_url+"{}".format(CMD[0][2])
+            if ids:
+                ID_LIST = str(ids).replace(",","&ids=")
+                FULL_URL = FULL_URL.format(ID_LIST)
+            HEADERS = self.headers()
+            DATA = data
+            BODY = body
+            PARAMS = parameters
+            if self.authenticated:
+                try:
+                    response = requests.request(CMD[0][1].upper(), FULL_URL, json=BODY, data=DATA, params=PARAMS, headers=HEADERS, verify=False)
+                    returned = self.Result()(status_code=response.status_code, headers=response.headers, body=response.json())
+                except Exception as e:
+                    returned = self.Result()(status_code=500, headers={}, body=str(e))
+            else:
+                returned = self.Result()(status_code=500, headers={}, body={"errors":[{"message":"Failed to issue token."}],"resources":""})
         else:
-            returned = self.Result()(status_code=500, headers={}, body={"errors":[{"message":"Failed to issue token."}],"resources":""})
-        
+            returned = self.Result()(status_code=500, headers={}, body={"errors":[{"message":"Invalid API service method."}],"resources":""})
+
         return returned
