@@ -55,6 +55,7 @@ Once retrieved, the token is leveraged in subsequent requests to different API s
 import falcon_sdk.services.cloud_connect_aws as FalconAWS
 falcon = FalconAWS.Cloud_Connect_AWS(access_token=token)
 account_list = falcon.QueryAWSAccounts(parameters={ "limit" : "100" })
+print(account_list)
 ```
 
 #### Example result
@@ -152,6 +153,7 @@ falcon = FalconSDK.APIHarness(creds={
     }
 )
 account_list = falcon.command(action="QueryAWSAccounts", parameters={ "limit" : "100" })
+print(account_list)
 ```
 
 #### Example result
