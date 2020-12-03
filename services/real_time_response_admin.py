@@ -97,15 +97,16 @@ class Real_Time_Response_Admin:
         
         return returned
 
-    def RTR_CreatePut_Files(self, body):
+    def RTR_CreatePut_Files(self, data, files):
         """ Upload a new put-file to use for the RTR `put` command. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_CreatePut_Files
         FULL_URL = self.base_url+'/real-time-response/entities/put-files/v1'
         HEADERS = self.headers
-        DATA = body
+        DATA = data
+        FILES = files
         result = self.Result()
         try:
-            response = requests.request("POST", FULL_URL, data=DATA, headers=HEADERS, verify=False)
+            response = requests.request("POST", FULL_URL, data=DATA, files=FILES, headers=HEADERS, verify=False)
             returned = result(response.status_code, response.headers, response.json())
         except Exception as e:
             returned = result(500, {}, str(e))
@@ -142,15 +143,16 @@ class Real_Time_Response_Admin:
         
         return returned
 
-    def RTR_CreateScripts(self, body):
+    def RTR_CreateScripts(self, data, files):
         """ Upload a new custom-script to use for the RTR `runscript` command. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_CreateScripts
         FULL_URL = self.base_url+'/real-time-response/entities/scripts/v1'
         HEADERS = self.headers
-        DATA = body
+        DATA = data
+        FILES = files
         result = self.Result()
         try:
-            response = requests.request("POST", FULL_URL, data=DATA, headers=HEADERS, verify=False)
+            response = requests.request("POST", FULL_URL, data=DATA, files=FILES, headers=HEADERS, verify=False)
             returned = result(response.status_code, response.headers, response.json())
         except Exception as e:
             returned = result(500, {}, str(e))
@@ -172,15 +174,16 @@ class Real_Time_Response_Admin:
         
         return returned
 
-    def RTR_UpdateScripts(self, body):
+    def RTR_UpdateScripts(self, data, files):
         """ Upload a new scripts to replace an existing one. """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_UpdateScripts
         FULL_URL = self.base_url+'/real-time-response/entities/scripts/v1'
         HEADERS = self.headers
-        DATA = body
+        DATA = data
+        FILES = files
         result = self.Result()
         try:
-            response = requests.request("PATCH", FULL_URL, data=DATA, headers=HEADERS, verify=False)
+            response = requests.request("PATCH", FULL_URL, data=DATA, files=FILES, headers=HEADERS, verify=False)
             returned = result(response.status_code, response.headers, response.json())
         except Exception as e:
             returned = result(500, {}, str(e))
