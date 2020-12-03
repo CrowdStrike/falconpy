@@ -276,7 +276,7 @@ class APIHarness:
             ["ScanSamples", "POST", "/scanner/entities/scans/v1"], 
             ["QuerySubmissionsMixin0", "GET", "/scanner/queries/scans/v1"], 
             ["GetCombinedSensorInstallersByQuery", "GET", "/sensors/combined/installers/v1"], 
-            ["refreshActiveStreamSession", "POST", "/sensors/entities/datafeed-actions/v1/{partition}"], 
+            ["refreshActiveStreamSession", "POST", "/sensors/entities/datafeed-actions/v1/{}"], 
             ["listAvailableStreamsOAuth2", "GET", "/sensors/entities/datafeed/v2"], 
             ["DownloadSensorInstallerById", "GET", "/sensors/entities/download-installer/v1"], 
             ["GetSensorInstallersEntities", "GET", "/sensors/entities/installers/v1?ids={}"], 
@@ -354,7 +354,7 @@ class APIHarness:
             
         return revoked
 
-    def command(self, action="", parameters={}, body={}, data={}, ids=False, override=False):
+    def command(self, action="", parameters={}, body={}, data={}, ids=False, partition=False, override=False, files=[], content_type=False):
         """ Checks token expiration, renewing when necessary, then performs the request. """
         if self.token_expired():
             self.authenticate()
@@ -367,13 +367,18 @@ class APIHarness:
             if ids:
                 ID_LIST = str(ids).replace(",","&ids=")
                 FULL_URL = FULL_URL.format(ID_LIST)
+            if partition:
+                FULL_URL = FULL_URL.format(str(partition))
             HEADERS = self.headers()
+            if content_type:
+                HEADERS["Content-Type"] = str(content_type)
             DATA = data
             BODY = body
             PARAMS = parameters
+            FILES = files
             if self.authenticated:
                 try:
-                    response = requests.request(CMD[0][1].upper(), FULL_URL, json=BODY, data=DATA, params=PARAMS, headers=HEADERS, verify=False)
+                    response = requests.request(CMD[0][1].upper(), FULL_URL, json=BODY, data=DATA, params=PARAMS, headers=HEADERS, files=FILES, verify=False)
                     returned = self.Result()(status_code=response.status_code, headers=response.headers, body=response.json())
                 except Exception as e:
                     returned = self.Result()(status_code=500, headers={}, body=str(e))
