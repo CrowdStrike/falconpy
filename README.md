@@ -38,7 +38,7 @@ $ python -m pip install falconpy
 ```
 
 ## Documentation
-Documentation can be found on [GitHub](https://github.com/CrowdStrike/falconpy/wiki).
+Documentation can be found in the [GitHub Wiki](https://github.com/CrowdStrike/falconpy/wiki).
 
 ## License
 Copyright CrowdStrike 2020
