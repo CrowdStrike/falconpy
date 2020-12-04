@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="falconpy", # Replace with your own username
-    version="0.1.6",
+    version="0.1.7",
     author="CrowdStrike",
     maintainer="Joshua Hiller",
     description="The CrowdStrike Falcon API SDK for Python 3",
@@ -13,6 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/CrowdStrike/falconpy",
     packages=setuptools.find_packages(),
+    package_dir={'': 'falconpy'},
     install_requires=[
 	"requests",
 	"urllib3"
