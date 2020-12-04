@@ -1,1 +1,12 @@
 .DS_Store
+*.pyc
+*.swp
+*.egg
+env/
+.venv/
+.eggs/
+.vscode/
+build/
+dist
+falconpy.egg-info/
+__pycache__/
