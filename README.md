@@ -1,8 +1,8 @@
-# falconpy
-Falconpy provides a Python native harness for interacting with the Falcon Complete oAuth2 API.
+# FalconPy
+FalconPy provides a Python native harness for interacting with the CrowdStrike Falcon oAuth2 API.
 
-## Why falconpy
-This project contains a collection of Python classes that abstract Falcon Complete API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
+## Why FalconPy
+This project contains a collection of Python classes that abstract CrowdStrike Falcon API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
 
 ## Contents
 Currently the solution defines a class for each service (_ex: cloud_connect_aws_), with endpoint methods defined as class methods. There is also a single _uber_-class that provides an interface to the entire API with a single handler.
@@ -29,230 +29,42 @@ Currently the solution defines a class for each service (_ex: cloud_connect_aws_
 + [user_management.py](services/user_management.py) - User administration
 
 ### Uber-class
-+ [api_complete.py](api_complete.py) - Falcon Complete API interface harness
++ [api_complete.py](api_complete.py) - CrowdStrike Falcon API full interface harness
 
-## Usage examples
-For all examples excluding the uber-class, you will first need to create an instance of the OAuth2 class in order to generate a token.
-
-### Regular classes
-```python
-import falconpy.services.oauth2 as FalconAuth
-authorization = FalconAuth.OAuth2(creds={
-        'client_id': falcon_client_id,
-        'client_secret': falcon_client_secret
-    }
-)
-try:
-    token = authorized.token()["body"]["access_token"]
-except:
-    token = False
-```
-
-Once retrieved, the token is leveraged in subsequent requests to different API services. 
-> This examples leverages the cloud_connect_aws.py class to interact with the API and AWS.
-
-```python
-import falcon_sdk.services.cloud_connect_aws as FalconAWS
-falcon = FalconAWS.Cloud_Connect_AWS(access_token=token)
-account_list = falcon.QueryAWSAccounts(parameters={ "limit" : "100" })
-print(account_list)
-```
-
-#### Example result
-```json
-{
-    "status_code": 200,
-    "headers": {
-        "Content-Encoding": "gzip",
-        "Content-Length": "699",
-        "Content-Type": "application/json",
-        "Date": "Thu, 12 Nov 2020 20:18:29 GMT",
-        "X-Cs-Region": "us-1",
-        "X-Ratelimit-Limit": "6000",
-        "X-Ratelimit-Remaining": "5987"
-    },
-    "body": {
-        "meta": {
-            "query_time": 0.003052599,
-            "pagination": {
-                "offset": 3,
-                "limit": 100,
-                "total": 3
-            },
-            "powered_by": "cloud-connect-manager",
-            "trace_id": "7c182b49-fe3c-4704-9042-12345678e8d3"
-        },
-        "errors": [],
-        "resources": [
-            {
-                "cid": "123456-redacted-cid",
-                "id": "987654321098",
-                "iam_role_arn": "arn:aws:iam::987654321098:role/FalconDiscover",
-                "external_id": "IwXe54tosfaSDfsE32dS",
-                "policy_version": "1",
-                "cloudtrail_bucket_owner_id": "987654321098",
-                "cloudtrail_bucket_region": "eu-west-1",
-                "created_timestamp": "2020-11-12T20:18:28Z",
-                "last_modified_timestamp": "2020-11-12T20:18:28Z",
-                "last_scanned_timestamp": "2020-11-12T20:18:28Z",
-                "provisioning_state": "registered"
-            },
-            {
-                "cid": "123456-redacted-cid",
-                "id": "2109876543210",
-                "iam_role_arn": "arn:aws:iam::2109876543210:role/CrowdStrikeFalcon",
-                "external_id": "AnotherExternalID",
-                "policy_version": "1",
-                "cloudtrail_bucket_owner_id": "2109876543210",
-                "cloudtrail_bucket_region": "eu-west-1",
-                "created_timestamp": "2020-10-08T12:44:49Z",
-                "last_modified_timestamp": "2020-10-08T12:44:49Z",
-                "last_scanned_timestamp": "2020-11-01T00:14:13Z",
-                "provisioning_state": "registered",
-                "access_health": {
-                    "api": {
-                        "valid": true,
-                        "last_checked": "2020-11-12T20:18:00Z"
-                    }
-                }
-            },
-            {
-                "cid": "123456-redacted-cid",
-                "id": "0123456789012",
-                "iam_role_arn": "arn:aws:iam::0123456789012:role/FalconDiscover",
-                "external_id": "CrossAccountExternalID",
-                "policy_version": "1",
-                "cloudtrail_bucket_owner_id": "0123456789012",
-                "cloudtrail_bucket_region": "us-east-1",
-                "created_timestamp": "2020-08-12T12:43:16Z",
-                "last_modified_timestamp": "2020-10-07T09:44:00Z",
-                "last_scanned_timestamp": "2020-11-01T00:13:12Z",
-                "provisioning_state": "registered",
-                "access_health": {
-                    "api": {
-                        "valid": false,
-                        "last_checked": "2020-11-12T20:18:00Z",
-                        "reason": "Assume role failed. IAM role arn and/or external is invalid."
-                    }
-                }
-            }
-        ]
-    }
-}
-```
-### The uber-class
-This class farther abstracts token administration allowing the developer to skip this step entirely if desired.
-> You will not authenticate until your first request to the API is made. If you check your authentication status,
-your token or your token_expiration before doing so, the results will be __False__.
-
-```python
-import falconpy.api_complete as FalconSDK
-falcon = FalconSDK.APIHarness(creds={
-        'client_id': falcon_client_id,
-        'client_secret': falcon_client_secret
-    }
-)
-account_list = falcon.command(action="QueryAWSAccounts", parameters={ "limit" : "100" })
-print(account_list)
-```
-
-#### Example result
-```json
-{
-    "status_code": 200,
-    "headers": {
-        "Content-Encoding": "gzip",
-        "Content-Length": "699",
-        "Content-Type": "application/json",
-        "Date": "Thu, 12 Nov 2020 22:34:47 GMT",
-        "X-Cs-Region": "us-1",
-        "X-Ratelimit-Limit": "6000",
-        "X-Ratelimit-Remaining": "5954"
-    },
-    "body": {
-        "meta": {
-            "query_time": 0.0030413,
-            "pagination": {
-                "offset": 3,
-                "limit": 100,
-                "total": 3
-            },
-            "powered_by": "cloud-connect-manager",
-            "trace_id": "7c182b49-fe3c-4704-9042-12345678e8d3"
-        },
-        "errors": [],
-        "resources": [
-            {
-                "cid": "123456-redacted-cid",
-                "id": "987654321098",
-                "iam_role_arn": "arn:aws:iam::987654321098:role/FalconDiscover",
-                "external_id": "IwXe54tosfaSDfsE32dS",
-                "policy_version": "1",
-                "cloudtrail_bucket_owner_id": "987654321098",
-                "cloudtrail_bucket_region": "eu-west-1",
-                "created_timestamp": "2020-11-12T20:18:28Z",
-                "last_modified_timestamp": "2020-11-12T20:18:28Z",
-                "last_scanned_timestamp": "2020-11-12T20:18:28Z",
-                "provisioning_state": "registered"
-            },
-            {
-                "cid": "123456-redacted-cid",
-                "id": "2109876543210",
-                "iam_role_arn": "arn:aws:iam::2109876543210:role/CrowdStrikeFalcon",
-                "external_id": "AnotherExternalID",
-                "policy_version": "1",
-                "cloudtrail_bucket_owner_id": "2109876543210",
-                "cloudtrail_bucket_region": "eu-west-1",
-                "created_timestamp": "2020-10-08T12:44:49Z",
-                "last_modified_timestamp": "2020-10-08T12:44:49Z",
-                "last_scanned_timestamp": "2020-11-01T00:14:13Z",
-                "provisioning_state": "registered",
-                "access_health": {
-                    "api": {
-                        "valid": true,
-                        "last_checked": "2020-11-12T22:34:00Z"
-                    }
-                }
-            },
-            {
-                "cid": "123456-redacted-cid",
-                "id": "0123456789012",
-                "iam_role_arn": "arn:aws:iam::0123456789012:role/FalconDiscover",
-                "external_id": "CrossAccountExternalID",
-                "policy_version": "1",
-                "cloudtrail_bucket_owner_id": "0123456789012",
-                "cloudtrail_bucket_region": "us-east-1",
-                "created_timestamp": "2020-08-12T12:43:16Z",
-                "last_modified_timestamp": "2020-10-07T09:44:00Z",
-                "last_scanned_timestamp": "2020-11-01T00:13:12Z",
-                "provisioning_state": "registered",
-                "access_health": {
-                    "api": {
-                        "valid": false,
-                        "last_checked": "2020-11-12T22:34:00Z",
-                        "reason": "Assume role failed. IAM role arn and/or external is invalid."
-                    }
-                }
-            }
-        ]
-    }
-}
-```
-
-Authorization status and the token are still available via the class as constants.
-```python
-import falconpy.api_complete as FalconSDK
-falcon = FalconSDK.APIHarness(creds={
-        'client_id': falcon_client_id,
-        'client_secret': falcon_client_secret
-    }
-)
-falcon.authenticate()
-if falcon.authenticated:
-    print(falcon.token)
-```
-
-#### Example result
+## Installation
+FalconPy is available on PyPI:
 ```bash
-$ eyJhbGciOiJSUzI1NiIsImtpZCI6InB1YmxpYzph...really long token string
+$ python -m pip install falconpy
 ```
+
+## Documentation
+Documentation can be found on [GitHub](https://github.com/CrowdStrike/falconpy/wiki).
+
+## License
+Copyright CrowdStrike 2020
+
+By accessing or using this script, sample code, application programming interface, tools, 
+and/or associated documentation (if any) (collectively, “Tools”), You (i) represent and 
+warrant that You are entering into this Agreement on behalf of a company, organization 
+or another legal entity (“Entity”) that is currently a customer or partner of 
+CrowdStrike, Inc. (“CrowdStrike”), and (ii) have the authority to bind such Entity and 
+such Entity agrees to be bound by this Agreement.
+
+CrowdStrike grants Entity a non-exclusive, non-transferable, non-sublicensable, royalty 
+free and limited license to access and use the Tools solely for Entity’s internal business 
+purposes and in accordance with its obligations under any agreement(s) it may have with 
+CrowdStrike. Entity acknowledges and agrees that CrowdStrike and its licensors retain all 
+right, title and interest in and to the Tools, and all intellectual property rights 
+embodied therein, and that Entity has no right, title or interest therein except for the 
+express licenses granted hereunder and that Entity will treat such Tools as CrowdStrike’s 
+confidential information.
+
+THE TOOLS ARE PROVIDED “AS-IS” WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS, IMPLIED OR 
+STATUTORY OR OTHERWISE. CROWDSTRIKE SPECIFICALLY DISCLAIMS ALL SUPPORT OBLIGATIONS AND 
+ALL WARRANTIES, INCLUDING WITHOUT LIMITATION, ALL IMPLIED WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. IN NO EVENT SHALL CROWDSTRIKE 
+BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+OF THE TOOLS, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
