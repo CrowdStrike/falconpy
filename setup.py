@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="falconpy", # Replace with your own username
+    name="crowdstrike-falconpy",
     version="0.1.7",
     author="CrowdStrike",
     maintainer="Joshua Hiller",
@@ -12,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/CrowdStrike/falconpy",
-    packages=setuptools.find_packages(),
+    packages=["falconpy"],
     package_dir={'': 'falconpy'},
     install_requires=[
 	"requests",
