@@ -10,16 +10,16 @@ with open("README.md", "r") as fh:
 
 setup(
     name="crowdstrike-falconpy",
-    version="0.1.3",
+    version="0.1.7",
     author="CrowdStrike",
     maintainer="Joshua Hiller",
     description="The CrowdStrike Falcon API SDK for Python 3",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/CrowdStrike/falconpy",
-    packages=find_packages('falconpy'),
-    package_dir={'': 'falconpy'},
-    py_modules=[splitext(basename(path))[0] for path in glob('falconpy/*.py')],
+    packages=find_packages("src"),
+    package_dir={"": "src"},
+    py_modules=[splitext(basename(path))[0] for path in glob("src/*.py")],
     include_package_data=True,
     install_requires=[
         "requests",
