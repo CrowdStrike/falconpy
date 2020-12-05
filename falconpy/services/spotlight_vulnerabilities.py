@@ -1,6 +1,6 @@
 ################################################################################################################
 # CROWDSTRIKE FALCON                                                                                           #
-# oAuth2 API - Customer SDK                                                                                    #
+# OAuth2 API - Customer SDK                                                                                    #
 #                                                                                                              #
 # spotlight_vulnerabilities - Falcon X Spotlight Vulnerabilities API Interface Class                           #
 ################################################################################################################

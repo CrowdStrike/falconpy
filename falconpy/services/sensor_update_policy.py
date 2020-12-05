@@ -1,6 +1,6 @@
 ################################################################################################################
 # CROWDSTRIKE FALCON                                                                                           #
-# oAuth2 API - Customer SDK                                                                                    #
+# OAuth2 API - Customer SDK                                                                                    #
 #                                                                                                              #
 # sensor_update_policy - Falcon X Sensor Policy Management API Interface Class                                 #
 ################################################################################################################

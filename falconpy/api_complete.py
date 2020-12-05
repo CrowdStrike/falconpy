@@ -1,8 +1,8 @@
 #####################################################################################################
 # CROWDSTRIKE FALCON                                                                                #
-# oAuth2 API - Customer SDK                                                                         #
+# OAuth2 API - Customer SDK                                                                         #
 #                                                                                                   #
-# api_complete.py - All-in-one CrowdStrike Falcon oAuth2 API harness                                #
+# api_complete.py - All-in-one CrowdStrike Falcon OAuth2 API harness                                #
 #####################################################################################################
 # Copyright CrowdStrike 2020
 

@@ -1,6 +1,6 @@
 ################################################################################################################
 # CROWDSTRIKE FALCON                                                                                           #
-# oAuth2 API - Customer SDK                                                                                    #
+# OAuth2 API - Customer SDK                                                                                    #
 #                                                                                                              #
 # real_time_response - Falcon X Real Time Response API Interface Class                                         #
 ################################################################################################################
