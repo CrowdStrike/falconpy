@@ -1,5 +1,5 @@
 # falconpy - Falcon Complete API Service classes
-These classes are part of the falconpy project, a python interface handler to the CrowdStrike Falcon Complete oAuth2 API.
+These classes are part of the falconpy project, a python interface handler to the CrowdStrike Falcon Complete OAuth2 API.
 
 ### Currently implemented:
 + `cloud_connect_aws.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws

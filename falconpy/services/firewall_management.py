@@ -1,6 +1,6 @@
 ################################################################################################################
 # CROWDSTRIKE FALCON                                                                                           #
-# oAuth2 API - Customer SDK                                                                                    #
+# OAuth2 API - Customer SDK                                                                                    #
 #                                                                                                              #
 # firewall_management - Falcon X Firewall Management API Interface Class                                       #
 ################################################################################################################

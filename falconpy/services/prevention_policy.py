@@ -1,6 +1,6 @@
 ################################################################################################################
 # CROWDSTRIKE FALCON                                                                                           #
-# oAuth2 API - Customer SDK                                                                                    #
+# OAuth2 API - Customer SDK                                                                                    #
 #                                                                                                              #
 # prevention_policy - Falcon X Prevention Policy API Interface Class                                           #
 ################################################################################################################

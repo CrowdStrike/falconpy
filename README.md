@@ -1,5 +1,5 @@
 # FalconPy
-FalconPy provides a Python native harness for interacting with the CrowdStrike Falcon oAuth2 API.
+FalconPy provides a Python native harness for interacting with the CrowdStrike Falcon OAuth2 API.
 
 ## Why FalconPy
 This project contains a collection of Python classes that abstract CrowdStrike Falcon API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
@@ -20,7 +20,7 @@ Currently the solution defines a class for each service (_ex: cloud_connect_aws_
 + [incidents.py](services/incidents.py) - Incidents
 + [intel.py](services/intel.py) - Threat Intel
 + [iocs.py](services/iocs.py) - Indicators of Compromise
-+ [oauth2.py](services/oauth2.py) - oAuth2 authentication
++ [oauth2.py](services/oauth2.py) - OAuth2 authentication
 + [prevention_policy.py](services/prevention_policy.py) - Prevention policies
 + [real_time_response_admin.py](services/real_time_response_admin.py) - Real time response administration
 + [real_time_response.py](services/real_time_response.py) - Real time response
