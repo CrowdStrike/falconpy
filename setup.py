@@ -22,8 +22,8 @@ setup(
     py_modules=[splitext(basename(path))[0] for path in glob('falconpy/*.py')],
     include_package_data=True,
     install_requires=[
-    	"requests",
-	    "urllib3"
+        "requests",
+        "urllib3"
     ],
     classifiers=[
         "Intended Audience :: Developers",
