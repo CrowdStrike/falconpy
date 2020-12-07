@@ -4,33 +4,30 @@
 #                                                                                                              #
 # real_time_response_admin - Falcon X Real Time Response Administration API Interface Class                    #
 ################################################################################################################
-# Copyright CrowdStrike 2020
+# This is free and unencumbered software released into the public domain.
 
-# By accessing or using this script, sample code, application programming interface, tools, 
-# and/or associated documentation (if any) (collectively, “Tools”), You (i) represent and 
-# warrant that You are entering into this Agreement on behalf of a company, organization 
-# or another legal entity (“Entity”) that is currently a customer or partner of 
-# CrowdStrike, Inc. (“CrowdStrike”), and (ii) have the authority to bind such Entity and 
-# such Entity agrees to be bound by this Agreement.
+# Anyone is free to copy, modify, publish, use, compile, sell, or
+# distribute this software, either in source code form or as a compiled
+# binary, for any purpose, commercial or non-commercial, and by any
+# means.
 
-# CrowdStrike grants Entity a non-exclusive, non-transferable, non-sublicensable, royalty 
-# free and limited license to access and use the Tools solely for Entity’s internal business 
-# purposes and in accordance with its obligations under any agreement(s) it may have with 
-# CrowdStrike. Entity acknowledges and agrees that CrowdStrike and its licensors retain all 
-# right, title and interest in and to the Tools, and all intellectual property rights 
-# embodied therein, and that Entity has no right, title or interest therein except for the 
-# express licenses granted hereunder and that Entity will treat such Tools as CrowdStrike’s 
-# confidential information.
+# In jurisdictions that recognize copyright laws, the author or authors
+# of this software dedicate any and all copyright interest in the
+# software to the public domain. We make this dedication for the benefit
+# of the public at large and to the detriment of our heirs and
+# successors. We intend this dedication to be an overt act of
+# relinquishment in perpetuity of all present and future rights to this
+# software under copyright law.
 
-# THE TOOLS ARE PROVIDED “AS-IS” WITHOUT WARRANTY OF ANY KIND, WHETHER EXPRESS, IMPLIED OR 
-# STATUTORY OR OTHERWISE. CROWDSTRIKE SPECIFICALLY DISCLAIMS ALL SUPPORT OBLIGATIONS AND 
-# ALL WARRANTIES, INCLUDING WITHOUT LIMITATION, ALL IMPLIED WARRANTIES OF MERCHANTABILITY, 
-# FITNESS FOR PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. IN NO EVENT SHALL CROWDSTRIKE 
-# BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
-# DAMAGES (INCLUDING, BUT NOT LIMITED TO, LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
-# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
-# LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-# OF THE TOOLS, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+# IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+# OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+# ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+
+# For more information, please refer to <https://unlicense.org>
 
 import requests
 import json
