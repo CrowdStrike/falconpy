@@ -16,28 +16,28 @@ This project contains a collection of Python classes that abstract CrowdStrike F
 Currently the solution defines a class for each service (_ex: cloud_connect_aws_), with endpoint methods defined as class methods. There is also a single _uber_-class that provides an interface to the entire API with a single handler.
 
 ### Available classes
-+ [cloud_connect_aws.py](services/cloud_connect_aws.py) - AWS Cloud
-+ [detects.py](services/detects.py) - Detections
-+ [device_control_policies.py](services/device_control_policies.py) - Device Control
-+ [event_streams.py](services/event_streams.py) - Event Streams
-+ [falconx_sandbox.py](services/falconx_sandbox.py) - The Falcon Sandbox
-+ [firewall_management.py](services/firewall_management.py) - Firewall administration
-+ [firewall_policies.py](services/firewall_policies.py) - Firewall policy management
-+ [host_group.py](services/host_group.py) - Host groups
-+ [hosts.py](services/hosts.py) - Hosts
-+ [incidents.py](services/incidents.py) - Incidents
-+ [intel.py](services/intel.py) - Threat Intel
-+ [iocs.py](services/iocs.py) - Indicators of Compromise
-+ [oauth2.py](services/oauth2.py) - OAuth2 authentication
-+ [prevention_policy.py](services/prevention_policy.py) - Prevention policies
-+ [real_time_response_admin.py](services/real_time_response_admin.py) - Real time response administration
-+ [real_time_response.py](services/real_time_response.py) - Real time response
-+ [sensor_update_policy.py](services/sensor_update_policy.py) - Sensor policy management
-+ [spotlight_vulnerabilities.py](services/spotlight_vulnerabilities.py) - Vulnerabilities
-+ [user_management.py](services/user_management.py) - User administration
++ [cloud_connect_aws.py](src/falconpy/cloud_connect_aws.py) - AWS Cloud
++ [detects.py](src/falconpy/detects.py) - Detections
++ [device_control_policies.py](src/falconpy/device_control_policies.py) - Device Control
++ [event_streams.py](src/falconpy/event_streams.py) - Event Streams
++ [falconx_sandbox.py](src/falconpy/falconx_sandbox.py) - The Falcon Sandbox
++ [firewall_management.py](src/falconpy/firewall_management.py) - Firewall administration
++ [firewall_policies.py](src/falconpy/firewall_policies.py) - Firewall policy management
++ [host_group.py](src/falconpy/host_group.py) - Host groups
++ [hosts.py](src/falconpy/hosts.py) - Hosts
++ [incidents.py](src/falconpy/incidents.py) - Incidents
++ [intel.py](src/falconpy/intel.py) - Threat Intel
++ [iocs.py](src/falconpy/iocs.py) - Indicators of Compromise
++ [oauth2.py](src/falconpy/oauth2.py) - OAuth2 authentication
++ [prevention_policy.py](src/falconpy/prevention_policy.py) - Prevention policies
++ [real_time_response_admin.py](src/falconpy/real_time_response_admin.py) - Real time response administration
++ [real_time_response.py](src/falconpy/real_time_response.py) - Real time response
++ [sensor_update_policy.py](src/falconpy/sensor_update_policy.py) - Sensor policy management
++ [spotlight_vulnerabilities.py](src/falconpy/spotlight_vulnerabilities.py) - Vulnerabilities
++ [user_management.py](src/falconpy/user_management.py) - User administration
 
 ### Uber-class
-+ [api_complete.py](api_complete.py) - CrowdStrike Falcon API full interface harness
++ [api_complete.py](src/falconpy/api_complete.py) - CrowdStrike Falcon API full interface harness
 
 ## Installation
 FalconPy is available on PyPI:
