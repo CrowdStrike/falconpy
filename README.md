@@ -35,7 +35,6 @@ $ python -m pip uninstall crowdstrike-falconpy
 | [CrowdStrike Custom Indicators of Compromose (IOCs) APIs](https://falcon.crowdstrike.com/support/documentation/88/custom-ioc-apis) | [./src/falconpy/iocs.py](./src/falconpy/iocs.py) |
 | [CrowdStrike Detections APIs](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [./src/falconpy/detects.py](./src/falconpy/detects.py) |
 | [CrowdStrike Event Streams API](https://falcon.crowdstrike.com/support/documentation/89/event-streams-apis)| [./serices/event_streams.py](./src/falconpy/event_streams.py) |
-| [CrowdStrike Event Streams APIs](https://falcon.crowdstrike.com/support/documentation/89/event-streams-apis) | *Coming Soon* |
 | [CrowdStrike Falcon Horizon APIs](https://falcon.crowdstrike.com/support/documentation/137/falcon-horizon-apis) | *Coming Soon* |
 | [CrowdStrike Falon X APIs](https://falcon.crowdstrike.com/support/documentation/92/falcon-x-apis) | *Coming Soon* |
 | [CrowdStrike Firewall Management API](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [./src/falconpy/firewall_management.py](./src/falconpy/firewall_management.py) |

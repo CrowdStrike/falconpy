@@ -379,7 +379,7 @@ class APIHarness:
             
         return revoked
 
-    def command(self, action="", parameters={}, body={}, data={}, ids=False, partition=False, override=False, files=[], content_type=False):
+    def command(self, action="", parameters={}, body={}, data={}, headers={}, ids=False, partition=False, override=False, files=[], file_name=False, content_type=False):
         """ Checks token expiration, renewing when necessary, then performs the request. """
         if self.token_expired():
             self.authenticate()
@@ -394,7 +394,11 @@ class APIHarness:
                 FULL_URL = FULL_URL.format(ID_LIST)
             if partition:
                 FULL_URL = FULL_URL.format(str(partition))
+            if file_name:
+                FULL_URL = "{}?file_name={}".format(FULL_URL, str(file_name))
             HEADERS = self.headers()
+            for item in headers:
+                HEADERS[item] = headers[item]
             if content_type:
                 HEADERS["Content-Type"] = str(content_type)
             DATA = data
