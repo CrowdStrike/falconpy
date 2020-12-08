@@ -44,7 +44,7 @@ $ python -m pip uninstall crowdstrike-falconpy
 | [CrowdStrike Incident and Detection Monitoring APIs](https://falcon.crowdstrike.com/support/documentation/86/detections-monitoring-apis) | [./src/falconpy/incidents.py](./src/falconpy/incidents.py) |
 | [CrowdStrike Installation Token APIs](https://falcon.crowdstrike.com/support/documentation/120/Installation-token-APIs) | *Coming Soon* | 
 | [CrowdStrike Intel API](https://falcon.crowdstrike.com/support/documentation/72/intel-apis) | [./src/falconpy/intel.py](./src/falconpy/intel.py) | 
-| [CrowdStrike MapQuery API](https://falcon.crowdstrike.com/support/documentation/113/malquery-apis) | *Coming Soon* |
+| [CrowdStrike MalQuery API](https://falcon.crowdstrike.com/support/documentation/113/malquery-apis) | *Coming Soon* |
 | [CrowdStrike OAuth2 Auth Token APIs](https://falcon.crowdstrike.com/support/documentation/93/oauth2-auth-token-apis) | [./src/falconpy/oauth2.py](./src/falconpy/oauth2.py) |
 | [CrowdStrike Prevention Policy APIs](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [./src/falconpy/prevention_policy.py](./src/falconpy/prevention_policy.py) |
 | [CrowdStrike Real Time Response (RTR) APIs](https://falcon.crowdstrike.com/support/documentation/90/real-time-response-apis) | [./src/falconpy/real_time_response.py](./src/falconpy/real_time_response.py) |
