@@ -1,0 +1,9 @@
+
+- title: "<span>All in One</span> documentation site for digital product authors"
+  button_label: "Purchase Now"
+  button_link: "https://themeix.com/product/doxy-documentation-website-jekyll-template/"
+
+- title: "<span>Number #1</span> documentation template in Jekyll"
+  button_label: "Create a Ticket"
+  button_link: "/pages/submit-ticket"
+
