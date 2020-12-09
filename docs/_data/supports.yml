@@ -1,0 +1,14 @@
+- name: Live Chat
+  icon: /assets/images/looking-logo.png
+  description: psum is simply dummy text of the pritypesetting industry Lorem Ipsum has been the industry's standard 
+  button_label: Join Chatroom
+  url: #
+  animation: fadeInLeft
+
+- name: Ask the Community
+  icon: /assets/images/looking-logo2.png
+  description: psum is simply dummy text of the pritypesetting industry Lorem Ipsum has been the industry's standard 
+  button_label: Join Community
+  url: https://support.themeix.com/portal/community/newtopic
+  animation: fadeInRight
+  
