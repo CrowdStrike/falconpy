@@ -68,12 +68,24 @@ There are *many* ways you can contribute to the FalconPy project!
 
 Open to do something else but not sure where to start? Try [opening an issue](https://github.com/CrowdStrike/falconpy/issues/new) and introducing yourself and your interests. We look forward to chatting with you!
 
-# Support
-FalconPy is an open source project to assist developers implement CrowdStrike's APIs within their applications. As such it carries no formal support, express or implied. 
+# Support & Community Forums
+FalconPy is an open source project, not a formal CrowdStrike product, to assist developers implement CrowdStrike's APIs within their applications. As such it carries no formal support, express or implied. 
+
+:fire: Is something going wrong? :fire:<br/>
+GitHub Issues are used to report bugs. Submit a ticket here:<br/>
+[https://github.com/CrowdStrike/falconpy/issues/new/choose](https://github.com/CrowdStrike/falconpy/issues/new/choose)
+
+GitHub Discussions provide the community with means to communicate. There are four discussion categories:
+  * :speech_balloon: [**General**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AGeneral) : Catch all for general discussions. 
+  * :bulb: [**Ideas**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AIdeas): Have a suggestion for a feature request? Is there something the community or project could improve upon? Let us know here.
+  * :pray: [**Q&A**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A): Have a question about how to accomplish something? A usability question? Submit them here!
+  * :raised_hands: [**Show and Tell**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3A%22Show+and+tell%22): Share with the community what you're up to! Perhaps this is letting everyone know about your upcoming conference talk, share a project that has embedded FalconPy, or your recent blog.
+
 
 # Documentation & Collateral
 
 ## Official Project Documentation
+See the wiki for extended documentation: [https://github.com/CrowdStrike/falconpy/wiki](https://github.com/CrowdStrike/falconpy/wiki).
 
 ## Videos (Tutorials, Trainings, Overviews)
 *Coming soon*.
