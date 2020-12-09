@@ -18,7 +18,7 @@ $ python -m pip install crowdstrike-falconpy
 
 If you'd like to try the *absolute bleeding edge*, an automated GitHub action releases a test package with every merged pull request. To install the testing version:
 ```shell
-$ python -m pip install -i https://test.pypi.org/simple/crowdstrike-falconpy
+$ python -m pip install -i https://test.pypi.org/simple crowdstrike-falconpy
 ```
 
 To uninstall/remove FalconPy:
@@ -26,7 +26,7 @@ To uninstall/remove FalconPy:
 $ python -m pip uninstall crowdstrike-falconpy
 ```
 
-# Available Classes
+# Service classes
 | OAuth2-Based API<br>*(CrowdStrike documentation, requires CrowdStrike customer login)* | Code Location |
 |:-|:-|
 | CrowdStrike Device Control API | [./src/falconpy/device_control_policies.py](./src/falconpy/device_control_policies.py) |
@@ -56,7 +56,7 @@ $ python -m pip uninstall crowdstrike-falconpy
 | [Falcon Discover for Cloud and Containers - Azure Subscriptions APIs](https://falcon.crowdstrike.com/support/documentation/118/falcon-discover-for-cloud-and-containers-azure-subscription-apis) | *Coming Soon* |
 | [Falcon Discover for Cloud and Containers - GCP Projects APIs](https://falcon.crowdstrike.com/support/documentation/117/falcon-discover-for-cloud-and-containers-gcp-projects-apis) | *Coming Soon* |
 
-## Uber-class
+## Uber class
 + [./src/falconpy/api_complete.py](./src/falconpy/api_complete.py) - Provides an interface to all CrowdStrike APIs with a single handler.
 
 # Contributing
@@ -91,7 +91,7 @@ See the wiki for extended documentation: [https://github.com/CrowdStrike/falconp
 *Coming soon*.
 
 ## Conference Presentations
-*Coming soon.*
+*Coming soon*.
 
 ## Blogs/Articles/Prose
 *Coming soon*.
