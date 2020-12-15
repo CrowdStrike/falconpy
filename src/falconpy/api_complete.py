@@ -408,7 +408,10 @@ class APIHarness:
             if self.authenticated:
                 try:
                     response = requests.request(CMD[0][1].upper(), FULL_URL, json=BODY, data=DATA, params=PARAMS, headers=HEADERS, files=FILES, verify=False)
-                    returned = self.Result()(status_code=response.status_code, headers=response.headers, body=response.json())
+                    if response.headers.get('content-type') == "application/json":
+                        returned = self.Result()(status_code=response.status_code, headers=response.headers, body=response.json())
+                    else:
+                        returned = response.content                    
                 except Exception as e:
                     returned = self.Result()(status_code=500, headers={}, body=str(e))
             else:
