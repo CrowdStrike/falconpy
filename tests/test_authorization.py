@@ -19,8 +19,13 @@ from falconpy import cloud_connect_aws as FalconAWS
 class TestAuthorization():
     def getConfig(self):
         #Grab our config parameters
-        with open('%s/test.config' % os.path.dirname(os.path.abspath(__file__)), 'r') as file_config:
-            self.config = json.loads(file_config.read())
+        try:
+            self.config = {}
+            self.config["falcon_client_id"] = os.getenv("DEBUG_API_ID")
+            self.config["falcon_client_secret"] = os.getenv("DEBUG_API_SECRET")
+        except:
+            with open('%s/test.config' % os.path.dirname(os.path.abspath(__file__)), 'r') as file_config:
+                self.config = json.loads(file_config.read())
 
     def uberAuth(self):
         self.getConfig()       
