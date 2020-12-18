@@ -8,11 +8,11 @@ import json
 import os
 import sys
 #Import our sibling src folder into the path
-sys.path.append(os.path.abspath('./src'))
+sys.path.append(os.path.abspath('src/falconpy'))
 # Classes to test - manually imported from our sibling folder
-from falconpy import api_complete as FalconSDK
-from falconpy import oauth2 as FalconAuth
-from falconpy import cloud_connect_aws as FalconAWS
+import api_complete as FalconSDK
+import oauth2 as FalconAuth
+
 
 # The TestAuthorization class tests authentication and deauthentication
 # for both the Uber and Service classes.
@@ -34,6 +34,7 @@ class TestAuthorization():
                 "client_secret": self.config["falcon_client_secret"]
             }
         )
+        print(self.falcon.authenticate())
         self.falcon.authenticate()
         if self.falcon.authenticated:
             return True

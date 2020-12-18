@@ -35,7 +35,6 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
-      working-directory: ./src
       env:
         DEBUG_API_ID: ${{ secrets.DEBUG_API_ID }}
         DEBUG_API_SECRET: ${{ secrets.DEBUG_API_SECRET }}
