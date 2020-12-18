@@ -10,9 +10,9 @@ import sys
 #Import our sibling src folder into the path
 sys.path.append(os.path.abspath('./src'))
 # Classes to test - manually imported from our sibling folder
-import falconpy.api_complete as FalconSDK
-import falconpy.oauth2 as FalconAuth
-import falconpy.cloud_connect_aws as FalconAWS
+from falconpy import api_complete as FalconSDK
+from falconpy import oauth2 as FalconAuth
+from falconpy import cloud_connect_aws as FalconAWS
 
 # The TestAuthorization class tests authentication and deauthentication
 # for both the Uber and Service classes.
