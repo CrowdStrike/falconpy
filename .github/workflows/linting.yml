@@ -40,4 +40,4 @@ jobs:
         DEBUG_API_ID: ${{ secrets.DEBUG_API_ID }}
         DEBUG_API_SECRET: ${{ secrets.DEBUG_API_SECRET }}
       run: |
-        pytest
+        pytest -m pytest
