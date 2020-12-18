@@ -34,7 +34,6 @@ class TestAuthorization():
                 "client_secret": self.config["falcon_client_secret"]
             }
         )
-        print(self.falcon.authenticate())
         self.falcon.authenticate()
         if self.falcon.authenticated:
             return True
