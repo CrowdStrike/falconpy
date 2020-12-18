@@ -8,12 +8,12 @@ import json
 import os
 import sys
 # Authentication via the test_authorization.py
-import test_authorization as Authorization
+from tests import test_authorization as Authorization
 
 #Import our sibling src folder into the path
-sys.path.append(os.path.abspath('../src'))
+sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-import falconpy.cloud_connect_aws as FalconAWS
+from falconpy import cloud_connect_aws as FalconAWS
 
 
 # The TestCloudConnectAWS class tests the cloud_connect_aws service class
