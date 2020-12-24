@@ -1,8 +1,8 @@
 # A valid CrowdStrike Falcon API key is required to run these tests. 
 # You can store these values in your environment (this is the preferred method).
 # Example:
-#    export DEBUG_API_ID={CLIENT_ID_GOES_HERE}
-#    export DEBUG_API_SECRET={CLIENT_SECRET_GOES_HERE}
+#    export DEBUG_API_ID=CLIENT_ID_GOES_HERE
+#    export DEBUG_API_SECRET=CLIENT_SECRET_GOES_HERE
 #
 # You may also store these values locally in a configuration file.
 # DO NOT SUBMIT A COMMIT OR A PR THAT INCLUDES YOUR CONFIGURATION FILE.
