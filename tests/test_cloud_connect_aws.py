@@ -12,56 +12,39 @@ sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
 from falconpy import cloud_connect_aws as FalconAWS
 
-class TestCloudConnectAWS:
-    def authenticate(self):
-        auth = Authorization.TestAuthorization()
-        auth.serviceAuth()
-        falcon = FalconAWS.Cloud_Connect_AWS(access_token=auth.token)
-        return auth, falcon
+auth = Authorization.TestAuthorization()
+auth.serviceAuth()
+falcon = FalconAWS.Cloud_Connect_AWS(access_token=auth.token)
 
+class TestCloudConnectAWS:
     def serviceCCAWS_GetAWSSettings(self):
-        auth, falcon = self.authenticate()
         if falcon.GetAWSSettings()["status_code"] == 200:
-            auth.serviceRevoke()
             return True
         else:
-            auth.serviceRevoke()
             return False      
 
     def serviceCCAWS_QueryAWSAccounts(self):
-        auth, falcon = self.authenticate()
-        if falcon.QueryAWSAccounts(parameters={})["status_code"] == 200:
-            auth.serviceRevoke()
+        if falcon.QueryAWSAccounts()["status_code"] == 200:
             return True
         else:
-            auth.serviceRevoke()
             return False
 
     def serviceCCAWS_GetAWSAccounts(self):
-        auth, falcon = self.authenticate()
-        if falcon.GetAWSAccounts(parameters={},ids=falcon.QueryAWSAccounts(parameters={"limit":1})["body"]["resources"][0]["id"])["status_code"] == 200:
-            auth.serviceRevoke()
+        if falcon.GetAWSAccounts(ids=falcon.QueryAWSAccounts(parameters={"limit":1})["body"]["resources"][0]["id"])["status_code"] == 200:
             return True
         else:
-            auth.serviceRevoke()
             return False
         
     def serviceCCAWS_VerifyAWSAccountAccess(self):
-        auth, falcon = self.authenticate()
-        if falcon.VerifyAWSAccountAccess(parameters={},body={},ids=falcon.QueryAWSAccounts(parameters={"limit":1})["body"]["resources"][0]["id"])["status_code"] == 200:
-            auth.serviceRevoke()
+        if falcon.VerifyAWSAccountAccess(ids=falcon.QueryAWSAccounts(parameters={"limit":1})["body"]["resources"][0]["id"])["status_code"] == 200:
             return True
         else:
-            auth.serviceRevoke()
             return False
 
     def serviceCCAWS_QueryAWSAccountsForIDs(self):
-        auth, falcon = self.authenticate()
         if falcon.QueryAWSAccountsForIDs(parameters={"limit":1})["status_code"] == 200:
-            auth.serviceRevoke()
             return True
         else:
-            auth.serviceRevoke()
             return False
 
     def test_GetAWSSettings(self):
@@ -78,3 +61,6 @@ class TestCloudConnectAWS:
         
     def test_QueryAWSAccountsForIDs(self):
         assert self.serviceCCAWS_QueryAWSAccountsForIDs() == True
+
+    def test_logout(self):
+        assert auth.serviceRevoke() == True
