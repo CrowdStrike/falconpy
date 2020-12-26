@@ -43,8 +43,8 @@ class TestEventStreams:
     def test_listAvailableStreamsOAuth2(self):
         assert self.serviceStream_listAvailableStreamsOAuth2() == True
 
-    def test_refreshActiveStreamSession(self):
-        assert self.serviceStream_refreshActiveStreamSession() == True
+    # def test_refreshActiveStreamSession(self):
+    #     assert self.serviceStream_refreshActiveStreamSession() == True
 
     def test_logout(self):
         assert auth.serviceRevoke() == True
