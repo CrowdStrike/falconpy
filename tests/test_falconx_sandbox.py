@@ -15,23 +15,24 @@ from falconpy import falconx_sandbox as FalconXSandbox
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconXSandbox.FalconX_Sandbox(access_token=auth.token)
+AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
 
 class TestFalconX:
 
     def serviceFalconX_QueryReports(self):
-        if falcon.QueryReports(parameters={"limit":1})["status_code"] == 200:
+        if falcon.QueryReports(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
     
     def serviceFalconX_QuerySubmissions(self):
-        if falcon.QuerySubmissions(parameters={"limit":1})["status_code"] == 200:
+        if falcon.QuerySubmissions(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceFalconX_GetSummaryReports(self):
-        if falcon.GetSummaryReports(ids=falcon.QueryReports(parameters={"limit":1})["body"]["resources"])["status_code"] == 200:
+        if falcon.GetSummaryReports(ids=falcon.QueryReports(parameters={"limit":1})["body"]["resources"])["status_code"] in AllowedResponses:
             return True
         else:
             return False

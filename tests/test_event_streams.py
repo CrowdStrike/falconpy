@@ -17,12 +17,13 @@ from falconpy import event_streams as FalconStream
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconStream.Event_Streams(access_token=auth.token)
+AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
 
 class TestEventStreams:
 
     def serviceStream_listAvailableStreamsOAuth2(self):
         appId = "pytest-event_streams-unit-test"
-        if falcon.listAvailableStreamsOAuth2(parameters={"appId":appId})["status_code"] == 200:
+        if falcon.listAvailableStreamsOAuth2(parameters={"appId":appId})["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -34,7 +35,7 @@ class TestEventStreams:
         headers = {'Authorization': 'Token %s' % (avail["body"]["resources"][0]["sessionToken"]["token"]), 'Date': t1, 'Connection': 'Keep-Alive'}
         stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True)
         with stream:
-            if falcon.refreshActiveStreamSession(parameters={"appId": appId, "action_name":"refresh_active_stream_session"}, partition=0)["status_code"] == 200:
+            if falcon.refreshActiveStreamSession(parameters={"appId": appId, "action_name":"refresh_active_stream_session"}, partition=0)["status_code"] in AllowedResponses:
                 return True
             else:
                 return False

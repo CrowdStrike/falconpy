@@ -14,64 +14,65 @@ from falconpy import intel as FalconIntel
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconIntel.Intel(access_token=auth.token)
+AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
 
 class TestIntel:
     def serviceIntel_QueryIntelActorEntities(self):
-        if falcon.QueryIntelActorEntities(parameters={"limit":1})["status_code"] == 200:
+        if falcon.QueryIntelActorEntities(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIntel_QueryIntelIndicatorEntities(self):
-        if falcon.QueryIntelIndicatorEntities(parameters={"limit":1})["status_code"] == 200:
+        if falcon.QueryIntelIndicatorEntities(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
     
     def serviceIntel_QueryIntelReportEntities(self):
-        if falcon.QueryIntelReportEntities(parameters={"limit":1})["status_code"] == 200:
+        if falcon.QueryIntelReportEntities(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIntel_GetIntelActorEntities(self):
-        if falcon.GetIntelActorEntities(ids=falcon.QueryIntelActorEntities(parameters={"limit":1})["body"]["resources"][0])["status_code"] == 200:
+        if falcon.GetIntelActorEntities(ids=falcon.QueryIntelActorEntities(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIntel_GetIntelIndicatorEntities(self):
-        if falcon.GetIntelIndicatorEntities(body={"id": falcon.QueryIntelIndicatorIds(parameters={"limit":1})["body"]["resources"][0]})["status_code"] == 200:
+        if falcon.GetIntelIndicatorEntities(body={"id": falcon.QueryIntelIndicatorIds(parameters={"limit":1})["body"]["resources"][0]})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIntel_GetIntelReportEntities(self):
-        if falcon.GetIntelReportEntities(ids=falcon.QueryIntelReportEntities(parameters={"limit":1})["body"]["resources"][0])["status_code"] == 200:
+        if falcon.GetIntelReportEntities(ids=falcon.QueryIntelReportEntities(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIntel_QueryIntelActorIds(self):
-        if falcon.QueryIntelActorIds(parameters={"limit":1})["status_code"] == 200:
+        if falcon.QueryIntelActorIds(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIntel_QueryIntelIndicatorIds(self):
-        if falcon.QueryIntelIndicatorIds(parameters={"limit":1})["status_code"] == 200:
+        if falcon.QueryIntelIndicatorIds(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIntel_QueryIntelReportIds(self):
-        if falcon.QueryIntelReportIds(parameters={"limit":1})["status_code"] == 200:
+        if falcon.QueryIntelReportIds(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIntel_QueryIntelRuleIds(self):
-        if falcon.QueryIntelRuleIds(parameters={"limit":1,"type":"common-event-format"})["status_code"] == 200:
+        if falcon.QueryIntelRuleIds(parameters={"limit":1,"type":"common-event-format"})["status_code"] in AllowedResponses:
             return True
         else:
             return False

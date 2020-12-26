@@ -14,17 +14,18 @@ from falconpy import iocs as FalconIOCs
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconIOCs.Iocs(access_token=auth.token)
+AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
 
 class TestIOCs:
     def serviceIOCs_QueryIOCs(self):
-        if falcon.QueryIOCs()["status_code"] == 200:
+        if falcon.QueryIOCs()["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIOCs_GetIOC(self):
         
-        if falcon.GetIOC(parameters={"type":"ipv4", "value":falcon.QueryIOCs(parameters={"types":"ipv4"})["body"]["resources"][0]})["status_code"] == 200:
+        if falcon.GetIOC(parameters={"type":"ipv4", "value":falcon.QueryIOCs(parameters={"types":"ipv4"})["body"]["resources"][0]})["status_code"] in AllowedResponses:
             return True
         else:
             return False

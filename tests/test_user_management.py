@@ -14,46 +14,46 @@ from falconpy import user_management as FalconUsers
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconUsers.User_Management(access_token=auth.token)
-
+AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
 class TestFalconUserManagement:
     def serviceUserManagement_RetrieveEmailsByCID(self):
-        if falcon.RetrieveEmailsByCID()["status_code"] == 200:
+        if falcon.RetrieveEmailsByCID()["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceUserManagement_RetrieveUserUUIDsByCID(self):
-        if falcon.RetrieveUserUUIDsByCID()["status_code"] == 200:
+        if falcon.RetrieveUserUUIDsByCID()["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceUserManagement_RetrieveUserUUID(self):
-        if falcon.RetrieveUserUUID(parameters={"uid": falcon.RetrieveEmailsByCID()["body"]["resources"][0]})["status_code"] == 200:
+        if falcon.RetrieveUserUUID(parameters={"uid": falcon.RetrieveEmailsByCID()["body"]["resources"][0]})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceUserManagement_RetrieveUser(self):
-        if falcon.RetrieveUser(ids=falcon.RetrieveUserUUIDsByCID()["body"]["resources"][0])["status_code"] == 200:
+        if falcon.RetrieveUser(ids=falcon.RetrieveUserUUIDsByCID()["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceUserManagement_GetUserRoleIds(self):
-        if falcon.GetUserRoleIds(parameters={"user_uuid":falcon.RetrieveUserUUIDsByCID()["body"]["resources"][0]})["status_code"] == 200:
+        if falcon.GetUserRoleIds(parameters={"user_uuid":falcon.RetrieveUserUUIDsByCID()["body"]["resources"][0]})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceUserManagement_GetAvailableRoleIds(self):
-        if falcon.GetAvailableRoleIds()["status_code"] == 200:
+        if falcon.GetAvailableRoleIds()["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceUserManagement_GetRoles(self):
-        if falcon.GetRoles(ids=falcon.GetAvailableRoleIds()["body"]["resources"][0])["status_code"] == 200:
+        if falcon.GetRoles(ids=falcon.GetAvailableRoleIds()["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -74,7 +74,6 @@ class TestFalconUserManagement:
         assert self.serviceUserManagement_GetUserRoleIds() == True
 
     def test_GetAvailableRoleIds(self):
-        print(falcon.GetAvailableRoleIds())
         assert self.serviceUserManagement_GetAvailableRoleIds() == True
 
     def test_GetRoles(self):

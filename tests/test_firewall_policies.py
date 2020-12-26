@@ -14,11 +14,12 @@ from falconpy import firewall_policies as FalconFirewallPolicy
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconFirewallPolicy.Firewall_Policies(access_token=auth.token)
+AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
 
 class TestFirewallPolicy:
 
     def serviceFirewall_queryFirewallPolicies(self):
-        if falcon.queryFirewallPolicies(parameters={"limit":1})["status_code"] == 200:
+        if falcon.queryFirewallPolicies(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False

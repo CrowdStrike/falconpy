@@ -15,34 +15,35 @@ from falconpy import cloud_connect_aws as FalconAWS
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconAWS.Cloud_Connect_AWS(access_token=auth.token)
+AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
 
 class TestCloudConnectAWS:
     def serviceCCAWS_GetAWSSettings(self):
-        if falcon.GetAWSSettings()["status_code"] == 200:
+        if falcon.GetAWSSettings()["status_code"] in AllowedResponses:
             return True
         else:
             return False      
 
     def serviceCCAWS_QueryAWSAccounts(self):
-        if falcon.QueryAWSAccounts()["status_code"] == 200:
+        if falcon.QueryAWSAccounts()["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceCCAWS_GetAWSAccounts(self):
-        if falcon.GetAWSAccounts(ids=falcon.QueryAWSAccounts(parameters={"limit":1})["body"]["resources"][0]["id"])["status_code"] == 200:
+        if falcon.GetAWSAccounts(ids=falcon.QueryAWSAccounts(parameters={"limit":1})["body"]["resources"][0]["id"])["status_code"] in AllowedResponses:
             return True
         else:
             return False
         
     def serviceCCAWS_VerifyAWSAccountAccess(self):
-        if falcon.VerifyAWSAccountAccess(ids=falcon.QueryAWSAccounts(parameters={"limit":1})["body"]["resources"][0]["id"])["status_code"] == 200:
+        if falcon.VerifyAWSAccountAccess(ids=falcon.QueryAWSAccounts(parameters={"limit":1})["body"]["resources"][0]["id"])["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceCCAWS_QueryAWSAccountsForIDs(self):
-        if falcon.QueryAWSAccountsForIDs(parameters={"limit":1})["status_code"] == 200:
+        if falcon.QueryAWSAccountsForIDs(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False

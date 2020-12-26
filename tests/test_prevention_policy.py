@@ -14,36 +14,37 @@ from falconpy import prevention_policy as FalconPrevent
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconPrevent.Prevention_Policy(access_token=auth.token)
+AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
 
 class TestFalconPrevent:
     def servicePrevent_queryPreventionPolicies(self):
-        if falcon.queryPreventionPolicies(parameters={"limit":1})["status_code"] == 200:
+        if falcon.queryPreventionPolicies(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def servicePrevent_queryPreventionPolicyMembers(self):
-        if falcon.queryPreventionPolicyMembers(parameters={"id":falcon.queryPreventionPolicies(parameters={"limit":1})["body"]["resources"][0]})["status_code"] == 200:
+        if falcon.queryPreventionPolicyMembers(parameters={"id":falcon.queryPreventionPolicies(parameters={"limit":1})["body"]["resources"][0]})["status_code"] in AllowedResponses:
             return True
         else:
             return False
         return True
 
     def servicePrevent_getPreventionPolicies(self):
-        if falcon.getPreventionPolicies(ids=falcon.queryPreventionPolicies(parameters={"limit":1})["body"]["resources"][0])["status_code"] == 200:
+        if falcon.getPreventionPolicies(ids=falcon.queryPreventionPolicies(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
         else:
             return False
         return True
 
     def servicePrevent_queryCombinedPreventionPolicies(self):
-        if falcon.queryCombinedPreventionPolicies(parameters={"limit":1})["status_code"] == 200:
+        if falcon.queryCombinedPreventionPolicies(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def servicePrevent_queryCombinedPreventionPolicyMembers(self):
-        if falcon.queryCombinedPreventionPolicyMembers(parameters={"id":falcon.queryCombinedPreventionPolicies(parameters={"limit":1})["body"]["resources"][0]["id"]})["status_code"] == 200:
+        if falcon.queryCombinedPreventionPolicyMembers(parameters={"id":falcon.queryCombinedPreventionPolicies(parameters={"limit":1})["body"]["resources"][0]["id"]})["status_code"] in AllowedResponses:
             return True
         else:
             return False

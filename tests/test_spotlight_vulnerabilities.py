@@ -14,16 +14,17 @@ from falconpy import spotlight_vulnerabilities as FalconSpotlight
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconSpotlight.Spotlight_Vulnerabilities(access_token=auth.token)
+AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
 
 class TestSpotlight:
     def serviceSpotlight_queryVulnerabilities(self):
-        if falcon.queryVulnerabilities(parameters={"limit":1,"filter":"created_timestamp:>'2020-01-01T00:00:01Z'"})["status_code"] == 200:
+        if falcon.queryVulnerabilities(parameters={"limit":1,"filter":"created_timestamp:>'2020-01-01T00:00:01Z'"})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceSpotlight_getVulnerabilities(self):
-        if falcon.getVulnerabilities(ids=falcon.queryVulnerabilities(parameters={"limit":1,"filter":"created_timestamp:>'2020-01-01T00:00:01Z'"})["body"]["resources"][0])["status_code"] == 200:
+        if falcon.getVulnerabilities(ids=falcon.queryVulnerabilities(parameters={"limit":1,"filter":"created_timestamp:>'2020-01-01T00:00:01Z'"})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
         else:
             return False

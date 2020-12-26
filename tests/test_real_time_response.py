@@ -14,11 +14,12 @@ from falconpy import real_time_response as FalconRTR
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconRTR.Real_Time_Response(access_token=auth.token)
+AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
 
 class TestRTR:
 
     def serviceRTR_ListAllSessions(self):
-        if falcon.RTR_ListAllSessions(parameters={"limit":1})["status_code"] == 200:
+        if falcon.RTR_ListAllSessions(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
