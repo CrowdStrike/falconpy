@@ -61,7 +61,7 @@ class Prevention_Policy:
             
             return self.result_obj
 
-    def queryCombinedPreventionPolicyMembers(self, parameters):
+    def queryCombinedPreventionPolicyMembers(self, parameters={}):
         """ Search for members of a Prevention Policy in your environment by providing an FQL filter 
             and paging details. Returns a set of host details which match the filter criteria.
         """
@@ -69,16 +69,15 @@ class Prevention_Policy:
         FULL_URL = self.base_url+'/policy/combined/prevention-members/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def queryCombinedPreventionPolicies(self, parameters):
+    def queryCombinedPreventionPolicies(self, parameters={}):
         """ Search for Prevention Policies in your environment by providing an FQL filter and 
             paging details. Returns a set of Prevention Policies which match the filter criteria. 
         """
@@ -86,12 +85,11 @@ class Prevention_Policy:
         FULL_URL = self.base_url+'/policy/combined/prevention/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -102,12 +100,11 @@ class Prevention_Policy:
         HEADERS = self.headers
         PARAMS = parameters
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -120,27 +117,25 @@ class Prevention_Policy:
         FULL_URL = self.base_url+'/policy/entities/prevention-precedence/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def getPreventionPolicies(self, parameters):
+    def getPreventionPolicies(self, ids):
         """ Retrieve a set of Prevention Policies by specifying their IDs. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/getPreventionPolicies
-        FULL_URL = self.base_url+'/policy/entities/prevention/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/policy/entities/prevention/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -150,27 +145,25 @@ class Prevention_Policy:
         FULL_URL = self.base_url+'/policy/entities/prevention/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def deletePreventionPolicies(self, parameters):
+    def deletePreventionPolicies(self, ids):
         """ Delete a set of Prevention Policies by specifying their IDs. """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/deletePreventionPolicies
-        FULL_URL = self.base_url+'/policy/entities/prevention/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/policy/entities/prevention/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("DELETE", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("DELETE", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -180,16 +173,15 @@ class Prevention_Policy:
         FULL_URL = self.base_url+'/policy/entities/prevention/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("PATCH", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def queryPreventionPolicyMembers(self, parameters):
+    def queryPreventionPolicyMembers(self, parameters={}):
         """ Search for members of a Prevention Policy in your environment by providing an FQL filter 
             and paging details. Returns a set of Agent IDs which match the filter criteria.
         """
@@ -197,16 +189,15 @@ class Prevention_Policy:
         FULL_URL = self.base_url+'/policy/queries/prevention-members/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def queryPreventionPolicies(self, parameters):
+    def queryPreventionPolicies(self, parameters={}):
         """ Search for Prevention Policies in your environment by providing an FQL filter 
             and paging details. Returns a set of Prevention Policy IDs which match the filter criteria. 
         """
@@ -214,11 +205,10 @@ class Prevention_Policy:
         FULL_URL = self.base_url+'/policy/queries/prevention/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
