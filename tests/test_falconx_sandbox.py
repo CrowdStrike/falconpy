@@ -4,6 +4,7 @@
 import json
 import os
 import sys
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 
@@ -30,7 +31,8 @@ class TestFalconX:
             return True
         else:
             return False
-
+            
+    @pytest.mark.skipif(falcon.QueryReports(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceFalconX_GetSummaryReports(self):
         if falcon.GetSummaryReports(ids=falcon.QueryReports(parameters={"limit":1})["body"]["resources"])["status_code"] in AllowedResponses:
             return True

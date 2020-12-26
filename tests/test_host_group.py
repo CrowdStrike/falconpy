@@ -4,6 +4,7 @@
 import json
 import os
 import sys
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 #Import our sibling src folder into the path
@@ -24,12 +25,14 @@ class TestHostGroup:
         else:
             return False
 
+    @pytest.mark.skipif(falcon.queryHostGroups(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceHostGroup_queryGroupMembers(self):
         if falcon.queryGroupMembers(parameters={"limit":1,"id":falcon.queryHostGroups(parameters={"limit":1})["body"]["resources"][0]})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
+    @pytest.mark.skipif(falcon.queryHostGroups(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceHostGroup_getHostGroups(self):
         if falcon.getHostGroups(ids=falcon.queryHostGroups(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
@@ -42,6 +45,7 @@ class TestHostGroup:
         else:
             return False
 
+    @pytest.mark.skipif(falcon.queryCombinedHostGroups(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceHostGroup_queryCombinedGroupMembers(self):
         if falcon.queryCombinedGroupMembers(parameters={"limit":1,"id":falcon.queryCombinedHostGroups(parameters={"limit":1})["body"]["resources"][0]["id"]})["status_code"] in AllowedResponses:
             return True

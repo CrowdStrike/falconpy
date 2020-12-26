@@ -6,6 +6,7 @@ import os
 import sys
 import datetime
 import requests
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 
@@ -18,18 +19,16 @@ auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconStream.Event_Streams(access_token=auth.token)
 AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
-
+appId = "pytest-event_streams-unit-test"
 class TestEventStreams:
 
     def serviceStream_listAvailableStreamsOAuth2(self):
-        appId = "pytest-event_streams-unit-test"
         if falcon.listAvailableStreamsOAuth2(parameters={"appId":appId})["status_code"] in AllowedResponses:
             return True
         else:
             return False
-
+    @pytest.mark.skipif(falcon.listAvailableStreamsOAuth2(parameters={"appId":appId})["status_code"] == 429, reason="API rate limit reached")
     def serviceStream_refreshActiveStreamSession(self):
-        appId = "pytest-event_streams-unit-test"
         avail = falcon.listAvailableStreamsOAuth2(parameters={"appId":appId})
         t1 = datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S +0000')
         headers = {'Authorization': 'Token %s' % (avail["body"]["resources"][0]["sessionToken"]["token"]), 'Date': t1, 'Connection': 'Keep-Alive'}

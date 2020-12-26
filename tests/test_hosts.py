@@ -4,6 +4,7 @@
 import json
 import os
 import sys
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 
@@ -37,11 +38,13 @@ class TestHosts:
         else:
             return False
 
-    def serviceHosts_GetDeviceDetails(self):
-        if falcon.GetDeviceDetails(ids=falcon.QueryDevicesByFilter(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+    #Commenting out until the updated hosts service class is available
+    # @pytest.mark.skipif(falcon.QueryDevicesByFilter(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
+    # def serviceHosts_GetDeviceDetails(self):
+    #     if falcon.GetDeviceDetails(ids=falcon.QueryDevicesByFilter(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
+    #         return True
+    #     else:
+    #         return False
 
     def serviceHosts_PerformActionV2(self):
         id_list=[]

@@ -4,6 +4,7 @@
 import json
 import os
 import sys
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 #Import our sibling src folder into the path
@@ -23,6 +24,7 @@ class TestIOCs:
         else:
             return False
 
+    @pytest.mark.skipif(falcon.QueryIOCs(parameters={"types":"ipv4"})["status_code"] == 429, reason="API rate limit reached")
     def serviceIOCs_GetIOC(self):
         
         if falcon.GetIOC(parameters={"type":"ipv4", "value":falcon.QueryIOCs(parameters={"types":"ipv4"})["body"]["resources"][0]})["status_code"] in AllowedResponses:

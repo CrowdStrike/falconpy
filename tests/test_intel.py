@@ -4,6 +4,7 @@
 import json
 import os
 import sys
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 #Import our sibling src folder into the path
@@ -35,18 +36,19 @@ class TestIntel:
         else:
             return False
 
+    @pytest.mark.skipif(falcon.QueryIntelActorEntities(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceIntel_GetIntelActorEntities(self):
         if falcon.GetIntelActorEntities(ids=falcon.QueryIntelActorEntities(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
         else:
             return False
-
+    @pytest.mark.skipif(falcon.QueryIntelIndicatorIds(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceIntel_GetIntelIndicatorEntities(self):
         if falcon.GetIntelIndicatorEntities(body={"id": falcon.QueryIntelIndicatorIds(parameters={"limit":1})["body"]["resources"][0]})["status_code"] in AllowedResponses:
             return True
         else:
             return False
-
+    @pytest.mark.skipif(falcon.QueryIntelReportEntities(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceIntel_GetIntelReportEntities(self):
         if falcon.GetIntelReportEntities(ids=falcon.QueryIntelReportEntities(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True

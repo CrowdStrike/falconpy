@@ -4,6 +4,7 @@
 import json
 import os
 import sys
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 #Import our sibling src folder into the path
@@ -23,6 +24,7 @@ class TestFalconPrevent:
         else:
             return False
 
+    @pytest.mark.skipif(falcon.queryPreventionPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def servicePrevent_queryPreventionPolicyMembers(self):
         if falcon.queryPreventionPolicyMembers(parameters={"id":falcon.queryPreventionPolicies(parameters={"limit":1})["body"]["resources"][0]})["status_code"] in AllowedResponses:
             return True
@@ -30,6 +32,7 @@ class TestFalconPrevent:
             return False
         return True
 
+    @pytest.mark.skipif(falcon.queryPreventionPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def servicePrevent_getPreventionPolicies(self):
         if falcon.getPreventionPolicies(ids=falcon.queryPreventionPolicies(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
@@ -43,6 +46,7 @@ class TestFalconPrevent:
         else:
             return False
 
+    @pytest.mark.skipif(falcon.queryCombinedPreventionPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def servicePrevent_queryCombinedPreventionPolicyMembers(self):
         if falcon.queryCombinedPreventionPolicyMembers(parameters={"id":falcon.queryCombinedPreventionPolicies(parameters={"limit":1})["body"]["resources"][0]["id"]})["status_code"] in AllowedResponses:
             return True

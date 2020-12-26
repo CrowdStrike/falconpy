@@ -4,6 +4,7 @@
 import json
 import os
 import sys
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 
@@ -25,12 +26,14 @@ class TestDeviceControlPolicy:
         else:
             return False
 
+    @pytest.mark.skipif(falcon.queryDeviceControlPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceDeviceControlPolicies_queryDeviceControlPolicyMembers(self):
         if falcon.queryDeviceControlPolicyMembers(parameters={"id": falcon.queryDeviceControlPolicies(parameters={"limit":1})["body"]["resources"][0]})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
+    @pytest.mark.skipif(falcon.queryDeviceControlPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceDeviceControlPolicies_getDeviceControlPolicies(self):
         if falcon.getDeviceControlPolicies(ids=falcon.queryDeviceControlPolicies(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
@@ -43,6 +46,7 @@ class TestDeviceControlPolicy:
         else:
             return False
 
+    @pytest.mark.skipif(falcon.queryCombinedDeviceControlPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceDeviceControlPolicies_queryCombinedDeviceControlPolicyMembers(self):
         if falcon.queryCombinedDeviceControlPolicyMembers(parameters={"id": falcon.queryCombinedDeviceControlPolicies(parameters={"limit":1})["body"]["resources"][0]["id"]})["status_code"] in AllowedResponses:
             return True
