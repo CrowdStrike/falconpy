@@ -23,18 +23,18 @@ appId = "pytest-event_streams-unit-test"
 class TestEventStreams:
 
     def serviceStream_listAvailableStreamsOAuth2(self):
-        if falcon.listAvailableStreamsOAuth2(parameters={"appId":appId})["status_code"] in AllowedResponses:
+        if falcon.listAvailableStreamsOAuth2(parameters={"appId":"pytest-event_streams-unit-test"})["status_code"] in AllowedResponses:
             return True
         else:
             return False
-    @pytest.mark.skipif(falcon.listAvailableStreamsOAuth2(parameters={"appId":appId})["status_code"] == 429, reason="API rate limit reached")
+    @pytest.mark.skipif(falcon.listAvailableStreamsOAuth2(parameters={"appId":"pytest-event_streams-unit-test"})["status_code"] == 429, reason="API rate limit reached")
     def serviceStream_refreshActiveStreamSession(self):
-        avail = falcon.listAvailableStreamsOAuth2(parameters={"appId":appId})
+        avail = falcon.listAvailableStreamsOAuth2(parameters={"appId":"pytest-event_streams-unit-test"})
         t1 = datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S +0000')
         headers = {'Authorization': 'Token %s' % (avail["body"]["resources"][0]["sessionToken"]["token"]), 'Date': t1, 'Connection': 'Keep-Alive'}
         stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True)
         with stream:
-            if falcon.refreshActiveStreamSession(parameters={"appId": appId, "action_name":"refresh_active_stream_session"}, partition=0)["status_code"] in AllowedResponses:
+            if falcon.refreshActiveStreamSession(parameters={"appId": "pytest-event_streams-unit-test", "action_name":"refresh_active_stream_session"}, partition=0)["status_code"] in AllowedResponses:
                 return True
             else:
                 return False
