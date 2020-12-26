@@ -67,12 +67,12 @@ class Firewall_Management:
         FULL_URL = self.base_url+'/fwmgr/aggregates/events/GET/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
+        
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -82,12 +82,12 @@ class Firewall_Management:
         FULL_URL = self.base_url+'/fwmgr/aggregates/policy-rules/GET/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
+        
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -97,12 +97,12 @@ class Firewall_Management:
         FULL_URL = self.base_url+'/fwmgr/aggregates/rule-groups/GET/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
+        
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -112,75 +112,72 @@ class Firewall_Management:
         FULL_URL = self.base_url+'/fwmgr/aggregates/rules/GET/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
+        
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def get_events(self, parameters):
+    def get_events(self, ids):
         """ Get events entities by ID and optionally version. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_events
-        FULL_URL = self.base_url+'/fwmgr/entities/events/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/fwmgr/entities/events/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def get_firewall_fields(self, parameters):
+    def get_firewall_fields(self, ids):
         """ Get the firewall field specifications by ID. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_firewall_fields
-        FULL_URL = self.base_url+'/fwmgr/entities/firewall-fields/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/fwmgr/entities/firewall-fields/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def get_platforms(self, parameters):
+    def get_platforms(self, ids):
         """ Get platforms by ID, e.g., windows or mac or droid. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_platforms
-        FULL_URL = self.base_url+'/fwmgr/entities/platforms/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/fwmgr/entities/platforms/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def get_policy_containers(self, parameters):
+    def get_policy_containers(self, ids):
         """ Get policy container entities by policy ID. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_policy_containers
-        FULL_URL = self.base_url+'/fwmgr/entities/policies/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/fwmgr/entities/policies/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
+    #TODO: Update dynamic documentation to handle the cs_username parameter
     def update_policy_container(self, body, cs_username):
         """ Update an identified policy container. """
         # [PUT] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update_policy_container
@@ -188,180 +185,170 @@ class Firewall_Management:
         HEADERS = self.headers
         HEADERS['X-CS-USERNAME'] = cs_username
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("PUT", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def get_rule_groups(self, parameters):
+    def get_rule_groups(self, ids):
         """ Get rule group entities by ID. These groups do not contain their rule entites, just the rule IDs in precedence order. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_rule_groups
-        FULL_URL = self.base_url+'/fwmgr/entities/rule-groups/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/fwmgr/entities/rule-groups/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def create_rule_group(self, parameters, body, cs_username):
+    def create_rule_group(self, body, cs_username, parameters={}):
         """ Create new rule group on a platform for a customer with a name and description, and return the ID. """ 
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create_rule_group
         FULL_URL = self.base_url+'/fwmgr/entities/rule-groups/v1'
         HEADERS = self.headers
         HEADERS['X-CS-USERNAME'] = cs_username
         PARAMS = parameters
-        BODY = body
-        result = self.Result()
+        BODY = body        
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def delete_rule_groups(self, parameters, cs_username):
+    def delete_rule_groups(self, ids, cs_username, parameters={}):
         """ Delete rule group entities by ID. """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QueryReports
-        FULL_URL = self.base_url+'/fwmgr/entities/rule-groups/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/fwmgr/entities/rule-groups/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
         HEADERS['X-CS-USERNAME'] = cs_username
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("DELETE", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def update_rule_group(self, parameters, cs_username):
+    def update_rule_group(self, body, cs_username, parameters={}):
         """ Update name, description, or enabled status of a rule group, or create, edit, delete, or reorder rules. """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update_rule_group
         FULL_URL = self.base_url+'/fwmgr/entities/rule-groups/v1'
         HEADERS = self.headers
         HEADERS['X-CS-USERNAME'] = cs_username
         PARAMS = parameters
-        result = self.Result()
+        BODY = body
         try:
-            response = requests.request("PTACH", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("PTACH", FULL_URL, params=PARAMS, json=BODY, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def get_rules(self, parameters):
+    def get_rules(self, ids):
         """ Get rule entities by ID (64-bit unsigned int as decimal string) or Family ID (32-character hexadecimal string). """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_rules
-        FULL_URL = self.base_url+'/fwmgr/entities/rules/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/fwmgr/entities/rules/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def query_events(self, parameters):
+    def query_events(self, parameters={}):
         """ Find all event IDs matching the query with filter. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_events
         FULL_URL = self.base_url+'/fwmgr/queries/events/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def query_firewall_fields(self, parameters):
+    def query_firewall_fields(self, parameters={}):
         """ Get the firewall field specification IDs for the provided platform. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_firewall_fields
         FULL_URL = self.base_url+'/fwmgr/queries/firewall-fields/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def query_platforms(self, parameters):
+    def query_platforms(self, parameters={}):
         """ Get the list of platform names. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_platforms
         FULL_URL = self.base_url+'/fwmgr/queries/platforms/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def query_policy_rules(self, parameters):
+    def query_policy_rules(self, parameters={}):
         """ Find all firewall rule IDs matching the query with filter, and return them in precedence order. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_policy_rules
         FULL_URL = self.base_url+'/fwmgr/queries/policy-rules/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def query_rule_groups(self, parameters):
+    def query_rule_groups(self, parameters={}):
         """ Find all rule group IDs matching the query with filter. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_rule_groups
         FULL_URL = self.base_url+'/fwmgr/queries/rule-groups/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def query_rules(self, parameters):
+    def query_rules(self, parameters={}):
         """ Find all rule IDs matching the query with filter. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_rule_groups
         FULL_URL = self.base_url+'/fwmgr/queries/rules/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
