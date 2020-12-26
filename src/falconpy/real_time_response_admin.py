@@ -61,19 +61,18 @@ class Real_Time_Response_Admin:
             
             return self.result_obj
 
-    def BatchAdminCmd(self, parameters, body):
+    def BatchAdminCmd(self, body, parameters={}):
         """ Batch executes a RTR administrator command across the hosts mapped to the given batch ID. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/BatchAdminCmd
         FULL_URL = self.base_url+'/real-time-response/combined/batch-admin-command/v1'
         HEADERS = self.headers
         DATA = body
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -83,12 +82,11 @@ class Real_Time_Response_Admin:
         FULL_URL = self.base_url+'/real-time-response/entities/admin-command/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -98,27 +96,25 @@ class Real_Time_Response_Admin:
         FULL_URL = self.base_url+'/real-time-response/entities/admin-command/v1'
         HEADERS = self.headers
         DATA = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def RTR_GetPut_Files(self, parameters):
+    def RTR_GetPut_Files(self, ids):
         """ Get put-files based on the ID's given. These are used for the RTR `put` command. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_GetPut_Files
-        FULL_URL = self.base_url+'/real-time-response/entities/put-files/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/real-time-response/entities/put-files/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -127,44 +123,42 @@ class Real_Time_Response_Admin:
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_CreatePut_Files
         FULL_URL = self.base_url+'/real-time-response/entities/put-files/v1'
         HEADERS = self.headers
+        HEADERS['Content-Type'] = 'multipart/form-data'
         DATA = data
         FILES = files
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, data=DATA, files=FILES, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def RTR_DeletePut_Files(self, parameters):
+    def RTR_DeletePut_Files(self, ids):
         """ Delete a put-file based on the ID given. Can only delete one file at a time. """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_DeletePut_Files
-        FULL_URL = self.base_url+'/real-time-response/entities/put-files/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/real-time-response/entities/put-files/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("DELETE", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("DELETE", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def RTR_GetScripts(self, parameters):
+    def RTR_GetScripts(self, ids):
         """ Get custom-scripts based on the ID's given. These are used for the RTR `runscript` command. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_GetScripts
-        FULL_URL = self.base_url+'/real-time-response/entities/scripts/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/real-time-response/entities/scripts/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -173,29 +167,28 @@ class Real_Time_Response_Admin:
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_CreateScripts
         FULL_URL = self.base_url+'/real-time-response/entities/scripts/v1'
         HEADERS = self.headers
+        HEADERS['Content-Type'] = 'multipart/form-data'
         DATA = data
         FILES = files
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, data=DATA, files=FILES, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def RTR_DeleteScripts(self, parameters):
+    def RTR_DeleteScripts(self, ids):
         """ Delete a custom-script based on the ID given. Can only delete one script at a time. """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_DeleteScripts
-        FULL_URL = self.base_url+'/real-time-response/entities/scripts/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/real-time-response/entities/scripts/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("DELETE", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("DELETE", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -204,43 +197,41 @@ class Real_Time_Response_Admin:
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_UpdateScripts
         FULL_URL = self.base_url+'/real-time-response/entities/scripts/v1'
         HEADERS = self.headers
+        HEADERS['Content-Type'] = 'multipart/form-data'
         DATA = data
         FILES = files
-        result = self.Result()
         try:
             response = requests.request("PATCH", FULL_URL, data=DATA, files=FILES, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def RTR_ListPut_Files(self, parameters):
+    def RTR_ListPut_Files(self, parameters={}):
         """ Get a list of put-file ID's that are available to the user for the `put` command. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_ListPut_Files
         FULL_URL = self.base_url+'/real-time-response/queries/put-files/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def RTR_ListScripts(self, parameters):
+    def RTR_ListScripts(self, parameters={}):
         """ Get a list of custom-script ID's that are available to the user for the `runscript` command. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_ListScripts
         FULL_URL = self.base_url+'/real-time-response/queries/scripts/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned

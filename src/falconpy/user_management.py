@@ -61,18 +61,17 @@ class User_Management:
             
             return self.result_obj
 
-    def GetRoles(self, parameters):
+    def GetRoles(self, ids):
         """ Get info about a role. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetRoles
-        FULL_URL = self.base_url+'/user-roles/entities/user-roles/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/user-roles/entities/user-roles/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -83,27 +82,26 @@ class User_Management:
         HEADERS = self.headers
         DATA = body
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def RevokeUserRoleIds(self, parameters):
+    def RevokeUserRoleIds(self, ids, parameters):
         """ Revoke one or more roles from a user. """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RevokeUserRoleIds
-        FULL_URL = self.base_url+'/user-roles/entities/user-roles/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/user-roles/entities/user-roles/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("DELETE", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -114,12 +112,11 @@ class User_Management:
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetAvailableRoleIds
         FULL_URL = self.base_url+'/user-roles/queries/user-role-ids-by-cid/v1'
         HEADERS = self.headers
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -129,43 +126,39 @@ class User_Management:
         FULL_URL = self.base_url+'/user-roles/queries/user-role-ids-by-user-uuid/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def RetrieveUser(self, parameters):
+    def RetrieveUser(self, ids):
         """ Get info about a user. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUser
-        FULL_URL = self.base_url+'/users/entities/users/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/users/entities/users/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def CreateUser(self, parameters, body):
+    def CreateUser(self, body):
         """ Create a new user. After creating a user, assign one or more roles with POST /user-roles/entities/user-roles/v1. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/CreateUser
         FULL_URL = self.base_url+'/users/entities/users/v1'
         HEADERS = self.headers
         DATA = body
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("POST", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("POST", FULL_URL, json=DATA, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -175,12 +168,11 @@ class User_Management:
         FULL_URL = self.base_url+'/users/entities/users/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("DELETE", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -191,12 +183,11 @@ class User_Management:
         HEADERS = self.headers
         DATA = body
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("PATCH", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -205,12 +196,11 @@ class User_Management:
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveEmailsByCID
         FULL_URL = self.base_url+'/users/queries/emails-by-cid/v1'
         HEADERS = self.headers
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -219,12 +209,11 @@ class User_Management:
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUserUUIDsByCID
         FULL_URL = self.base_url+'/users/queries/user-uuids-by-cid/v1'
         HEADERS = self.headers
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -234,11 +223,10 @@ class User_Management:
         FULL_URL = self.base_url+'/users/queries/user-uuids-by-email/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned

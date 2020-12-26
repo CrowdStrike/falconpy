@@ -67,44 +67,41 @@ class Real_Time_Response:
         FULL_URL = self.base_url+'/real-time-response/aggregates/sessions/GET/v1'
         HEADERS = self.headers
         DATA = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def BatchActiveResponderCmd(self, parameters, body):
+    def BatchActiveResponderCmd(self, body, parameters={}):
         """ Batch executes a RTR active-responder command across the hosts mapped to the given batch ID. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchActiveResponderCmd
         FULL_URL = self.base_url+'/real-time-response/combined/batch-active-responder-command/v1'
         HEADERS = self.headers
         DATA = body
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def BatchCmd(self, parameters, body):
+    def BatchCmd(self, body, parameters={}):
         """ Batch executes a RTR read-only command across the hosts mapped to the given batch ID. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchActiveResponderCmd
         FULL_URL = self.base_url+'/real-time-response/combined/batch-command/v1'
         HEADERS = self.headers
         DATA = body
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -114,16 +111,15 @@ class Real_Time_Response:
         FULL_URL = self.base_url+'/real-time-response/combined/batch-get-command/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def BatchGetCmd(self, parameters, body):
+    def BatchGetCmd(self, body, parameters={}):
         """ Batch executes `get` command across hosts to retrieve files. 
             After this call is made `/real-time-response/combined/get-command-status/v1` is used to query for the results.
         """
@@ -132,44 +128,41 @@ class Real_Time_Response:
         HEADERS = self.headers
         DATA = body
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def BatchInitSessions(self, parameters, body):
+    def BatchInitSessions(self, body, parameters={}):
         """ Batch initialize a RTR session on multiple hosts. Before any RTR commands can be used, an active session is needed on the host. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchInitSessions
         FULL_URL = self.base_url+'/real-time-response/combined/batch-init-session/v1'
         HEADERS = self.headers
         DATA = body
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def BatchRefreshSessions(self, parameters, body):
+    def BatchRefreshSessions(self, body, parameters={}):
         """ Batch refresh a RTR session on multiple hosts. RTR sessions will expire after 10 minutes unless refreshed. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchRefreshSessions
         FULL_URL = self.base_url+'/real-time-response/combined/batch-refresh-session/v1'
         HEADERS = self.headers
         DATA = body
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -179,12 +172,11 @@ class Real_Time_Response:
         FULL_URL = self.base_url+'/real-time-response/entities/active-responder-command/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -194,12 +186,11 @@ class Real_Time_Response:
         FULL_URL = self.base_url+'/real-time-response/entities/active-responder-command/v1'
         HEADERS = self.headers
         DATA = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -209,12 +200,11 @@ class Real_Time_Response:
         FULL_URL = self.base_url+'/real-time-response/entities/command/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -224,12 +214,11 @@ class Real_Time_Response:
         FULL_URL = self.base_url+'/real-time-response/entities/command/v1'
         HEADERS = self.headers
         DATA = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -239,12 +228,14 @@ class Real_Time_Response:
         FULL_URL = self.base_url+'/real-time-response/entities/extracted-file-contents/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            if response.headers.get('content-type') == "application/json":
+                returned = self.Result()(response.status_code, response.headers, response.json())
+            else:
+                returned = response.content
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -254,27 +245,26 @@ class Real_Time_Response:
         FULL_URL = self.base_url+'/real-time-response/entities/file/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def RTR_DeleteFile(self, parameters):
+    def RTR_DeleteFile(self, ids, parameters):
         """ Delete a RTR session file. """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_DeleteFile
-        FULL_URL = self.base_url+'/real-time-response/entities/file/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/real-time-response/entities/file/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("DELETE", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -284,12 +274,11 @@ class Real_Time_Response:
         FULL_URL = self.base_url+'/real-time-response/entities/refresh-session/v1'
         HEADERS = self.headers
         DATA = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -299,27 +288,39 @@ class Real_Time_Response:
         FULL_URL = self.base_url+'/real-time-response/entities/sessions/GET/v1'
         HEADERS = self.headers
         DATA = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def InitSessionMixin0(self, body):
+    def RTR_ListQueuedSessions(self, body):
+        """ Get session metadata by session id. """
+        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_ListSessions
+        FULL_URL = self.base_url+'/real-time-response/entities/queued-sessions/GET/v1'
+        HEADERS = self.headers
+        DATA = body
+        try:
+            response = requests.request("POST", FULL_URL, json=DATA, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
+        except Exception as e:
+            returned = self.Result()(500, {}, str(e))
+        
+        return returned
+
+    def RTR_InitSession(self, body):
         """ Initialize a new session with the RTR cloud. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/InitSessionMixin0
         FULL_URL = self.base_url+'/real-time-response/entities/sessions/v1'
         HEADERS = self.headers
         DATA = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -329,26 +330,38 @@ class Real_Time_Response:
         FULL_URL = self.base_url+'/real-time-response/entities/sessions/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("DELETE", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def RTR_ListAllSessions(self, parameters):
+    def RTR_DeleteQueuedSession(self, parameters):
+        """ Delete a queued session. """
+        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_DeleteSession
+        FULL_URL = self.base_url+'/real-time-response/entities/queued-sessions/command/v1'
+        HEADERS = self.headers
+        PARAMS = parameters
+        try:
+            response = requests.request("DELETE", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
+        except Exception as e:
+            returned = self.Result()(500, {}, str(e))
+        
+        return returned
+
+    def RTR_ListAllSessions(self, parameters={}):
         """ Get a list of session_ids. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_ListAllSessions
         FULL_URL = self.base_url+'/real-time-response/queries/sessions/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned

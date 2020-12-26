@@ -61,18 +61,17 @@ class Spotlight_Vulnerabilities:
             
             return self.result_obj
 
-    def getVulnerabilities(self, parameters):
+    def getVulnerabilities(self, ids):
         """ Get details on vulnerabilities by providing one or more IDs. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/getVulnerabilities
-        FULL_URL = self.base_url+'/spotlight/entities/vulnerabilities/v2'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/spotlight/entities/vulnerabilities/v2?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -84,11 +83,10 @@ class Spotlight_Vulnerabilities:
         FULL_URL = self.base_url+'/spotlight/queries/vulnerabilities/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned

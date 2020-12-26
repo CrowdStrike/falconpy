@@ -61,7 +61,7 @@ class Firewall_Policies:
             
             return self.result_obj
 
-    def queryCombinedFirewallPolicyMembers(self, parameters):
+    def queryCombinedFirewallPolicyMembers(self, parameters={}):
         """ Search for members of a Firewall Policy in your environment by providing an FQL filter 
             and paging details. Returns a set of host details which match the filter criteria. 
         """
@@ -69,16 +69,15 @@ class Firewall_Policies:
         FULL_URL = self.base_url+'/policy/combined/firewall-members/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def queryCombinedFirewallPolicies(self, parameters):
+    def queryCombinedFirewallPolicies(self, parameters={}):
         """ Search for Firewall Policies in your environment by providing an FQL filter and paging details. 
             Returns a set of Firewall Policies which match the filter criteria. 
         """
@@ -86,12 +85,11 @@ class Firewall_Policies:
         FULL_URL = self.base_url+'/policy/combined/firewall/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -102,12 +100,11 @@ class Firewall_Policies:
         HEADERS = self.headers
         BODY = body
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -120,58 +117,54 @@ class Firewall_Policies:
         FULL_URL = self.base_url+'/policy/entities/firewall-precedence/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def getFirewallPolicies(self, parameters):
+    def getFirewallPolicies(self, ids):
         """ Retrieve a set of Firewall Policies by specifying their IDs. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/getFirewallPolicies
-        FULL_URL = self.base_url+'/policy/entities/firewall/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/policy/entities/firewall/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def createFirewallPolicies(self, parameters, body):
+    def createFirewallPolicies(self, body, parameters={}):
         """ Create Firewall Policies by specifying details about the policy to create. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/createFirewallPolicies
         FULL_URL = self.base_url+'/policy/entities/firewall/v1'
         HEADERS = self.headers
         PARAMS = parameters
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def deleteFirewallPolicies(self, parameters):
+    def deleteFirewallPolicies(self, ids):
         """ Delete a set of Firewall Policies by specifying their IDs. """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/deleteFirewallPolicies
-        FULL_URL = self.base_url+'/policy/entities/firewall/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/policy/entities/firewall/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("DELETE", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("DELETE", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -181,16 +174,15 @@ class Firewall_Policies:
         FULL_URL = self.base_url+'/policy/entities/firewall/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("PATCH", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def queryFirewallPolicyMembers(self, parameters):
+    def queryFirewallPolicyMembers(self, parameters={}):
         """ Search for members of a Firewall Policy in your environment by providing an FQL filter and 
             paging details. Returns a set of Agent IDs which match the filter criteria.
         """
@@ -198,16 +190,15 @@ class Firewall_Policies:
         FULL_URL = self.base_url+'/policy/queries/firewall-members/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def queryFirewallPolicies(self, parameters):
+    def queryFirewallPolicies(self, parameters={}):
         """ Search for Firewall Policies in your environment by providing an FQL filter and paging details.
             Returns a set of Firewall Policy IDs which match the filter criteria. 
         """
@@ -215,11 +206,10 @@ class Firewall_Policies:
         FULL_URL = self.base_url+'/policy/queries/firewall/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
