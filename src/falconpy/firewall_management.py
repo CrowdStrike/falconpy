@@ -67,7 +67,6 @@ class Firewall_Management:
         FULL_URL = self.base_url+'/fwmgr/aggregates/events/GET/v1'
         HEADERS = self.headers
         BODY = body
-        
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
             returned = self.Result()()(response.status_code, response.headers, response.json())
@@ -82,7 +81,6 @@ class Firewall_Management:
         FULL_URL = self.base_url+'/fwmgr/aggregates/policy-rules/GET/v1'
         HEADERS = self.headers
         BODY = body
-        
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
             returned = self.Result()(response.status_code, response.headers, response.json())
@@ -97,7 +95,6 @@ class Firewall_Management:
         FULL_URL = self.base_url+'/fwmgr/aggregates/rule-groups/GET/v1'
         HEADERS = self.headers
         BODY = body
-        
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
             returned = self.Result()(response.status_code, response.headers, response.json())
@@ -112,7 +109,6 @@ class Firewall_Management:
         FULL_URL = self.base_url+'/fwmgr/aggregates/rules/GET/v1'
         HEADERS = self.headers
         BODY = body
-        
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
             returned = self.Result()(response.status_code, response.headers, response.json())
