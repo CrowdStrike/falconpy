@@ -74,6 +74,7 @@ class TestHosts:
 
     # def test_GetDeviceDetails(self):
     #     assert self.serviceHosts_GetDeviceDetails() == True
+
     
     # Not working... need to pull a valid AID
     # def test_PerformActionV2(self):
