@@ -74,6 +74,7 @@ class TestFalconUserManagement:
         assert self.serviceUserManagement_GetUserRoleIds() == True
 
     def test_GetAvailableRoleIds(self):
+        print(falcon.GetAvailableRoleIds())
         assert self.serviceUserManagement_GetAvailableRoleIds() == True
 
     def test_GetRoles(self):
