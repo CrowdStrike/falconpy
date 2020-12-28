@@ -51,6 +51,7 @@ class TestCloudConnectAWS:
             return False
 
     @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
+    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
     def serviceCCAWS_AccountUpdate(self):
         account = falcon.QueryAWSAccounts(parameters={"limit":1})["body"]["resources"][0]
         accountPayload["resources"][0]["cloudtrail_bucket_owner_id"] = account["cloudtrail_bucket_owner_id"]
