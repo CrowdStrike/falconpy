@@ -61,18 +61,17 @@ class Incidents:
             
             return self.result_obj
 
-    def CrowdScore(self, parameters):
+    def CrowdScore(self, parameters={}):
         """ Query environment wide CrowdScore and return the entity data. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/CrowdScore
         FULL_URL = self.base_url+'/incidents/combined/crowdscores/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -82,12 +81,11 @@ class Incidents:
         FULL_URL = self.base_url+'/incidents/entities/behaviors/GET/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -99,12 +97,11 @@ class Incidents:
         FULL_URL = self.base_url+'/incidents/entities/incident-actions/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -114,41 +111,38 @@ class Incidents:
         FULL_URL = self.base_url+'/incidents/entities/incidents/GET/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def QueryBehaviors(self, parameters):
+    def QueryBehaviors(self, parameters={}):
         """ Search for behaviors by providing an FQL filter, sorting, and paging details. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/QueryBehaviors
         FULL_URL = self.base_url+'/incidents/queries/behaviors/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def QueryIncidents(self, parameters):
+    def QueryIncidents(self, parameters={}):
         """ Search for incidents by providing an FQL filter, sorting, and paging details. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/QueryIncidents
         FULL_URL = self.base_url+'/incidents/queries/incidents/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned

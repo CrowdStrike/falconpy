@@ -61,19 +61,17 @@ class Detects:
             
             return self.result_obj
             
-    def GetAggregateDetects(self, body, parameters):
+    def GetAggregateDetects(self, body):
         """ Get detect aggregates as specified via json in request body. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetAggregateDetects
         FULL_URL = self.base_url+'/detects/aggregates/detects/GET/v1'
         HEADERS = self.headers
-        PARAMS = parameters
         BODY = body
-        result = self.Result()
         try:
-            response = requests.request("POST", FULL_URL, json=BODY, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -83,42 +81,38 @@ class Detects:
         FULL_URL = self.base_url+'/detects/entities/detects/v2'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("PATCH", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
         
-    def GetDetectSummaries(self, body, parameters):
+    def GetDetectSummaries(self, body):
         """ View information about detections. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetDetectSummaries
         FULL_URL = self.base_url+'/detects/entities/summaries/GET/v1'
         HEADERS = self.headers
-        PARAMS = parameters
         BODY = body
-        result = self.Result()
         try:
-            response = requests.request("POST", FULL_URL, json=BODY, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def QueryDetects(self, parameters):
+    def QueryDetects(self, parameters={}):
         """ Search for detection IDs that match a given query. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/QueryDetects
         FULL_URL = self.base_url+'/detects/queries/detects/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned

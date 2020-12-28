@@ -61,49 +61,49 @@ class FalconX_Sandbox:
             
             return self.result_obj
 
-    def GetArtifacts(self, parameters):#This function will probably need to not do a result.json() if used... See Swagger
+    def GetArtifacts(self, parameters): 
         """ Download IOC packs, PCAP files, and other analysis artifacts. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetArtifacts
         FULL_URL = self.base_url+'/falconx/entities/artifacts/v1'
         HEADERS = self.headers
-        HEADERS['Accept-Encoding'] = 'gzip'
+        HEADERS['Accept-Encoding'] = 'gzip' #Force gzip compression
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            if response.headers.get('content-type') == "application/json":
+                returned = self.Result()(response.status_code, response.headers, response.json())
+            else:
+                returned = response.content
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def GetSummaryReports(self, parameters):
+    def GetSummaryReports(self, ids):
         """ Get a short summary version of a sandbox report. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetSummaryReports
-        FULL_URL = self.base_url+'/falconx/entities/report-summaries/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/falconx/entities/report-summaries/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def GetSubmissions(self, parameters):
+    def GetSubmissions(self, ids):
         """ Check the status of a sandbox analysis. Time required for analysis varies but is usually less than 15 minutes. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetSubmissions
-        FULL_URL = self.base_url+'/falconx/entities/submissions/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/falconx/entities/submissions/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -113,31 +113,29 @@ class FalconX_Sandbox:
         FULL_URL = self.base_url+'/falconx/entities/submissions/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def QueryReports(self, parameters):
+    def QueryReports(self, parameters={}):
         """ Find sandbox reports by providing an FQL filter and paging details. Returns a set of report IDs that match your criteria. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QueryReports
         FULL_URL = self.base_url+'/falconx/queries/reports/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def QuerySubmissions(self, parameters):
+    def QuerySubmissions(self, parameters={}):
         """ Find submission IDs for uploaded files by providing an FQL filter and paging details. 
             Returns a set of submission IDs that match your criteria. 
         """
@@ -145,12 +143,11 @@ class FalconX_Sandbox:
         FULL_URL = self.base_url+'/falconx/queries/submissions/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -159,13 +156,16 @@ class FalconX_Sandbox:
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/UploadSampleV2
         FULL_URL = self.base_url+'/samples/entities/samples/v2'
         HEADERS = self.headers
+        HEADERS['Content-Type'] = 'application/octet-stream'
         BODY = body
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, data=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
+
+
+# TODO: Missing methods - GetReports, DeleteReport, GetSampleV2, DeleteSampleV2, QuerySampleV1

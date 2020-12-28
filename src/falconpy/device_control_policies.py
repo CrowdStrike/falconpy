@@ -61,7 +61,7 @@ class Device_Control_Policies:
             
             return self.result_obj
 
-    def queryCombinedDeviceControlPolicyMembers(self, parameters):
+    def queryCombinedDeviceControlPolicyMembers(self, parameters={}):
         """ Search for members of a Device Control Policy in your environment by providing an FQL filter 
             and paging details. Returns a set of host details which match the filter criteria. 
         """
@@ -69,16 +69,15 @@ class Device_Control_Policies:
         FULL_URL = self.base_url+'/policy/combined/device-control-members/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def queryCombinedDeviceControlPolicies(self, parameters):
+    def queryCombinedDeviceControlPolicies(self, parameters={}):
         """ Search for Device Control Policies in your environment by providing an FQL filter and 
             paging details. Returns a set of Device Control Policies which match the filter criteria. 
         """
@@ -86,12 +85,11 @@ class Device_Control_Policies:
         FULL_URL = self.base_url+'/policy/combined/device-control/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -104,12 +102,11 @@ class Device_Control_Policies:
         HEADERS = self.headers
         BODY = body
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -122,27 +119,25 @@ class Device_Control_Policies:
         FULL_URL = self.base_url+'/policy/entities/device-control-precedence/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def getDeviceControlPolicies(self, parameters):
+    def getDeviceControlPolicies(self, ids):
         """ Retrieve a set of Device Control Policies by specifying their IDs. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/device-control-policies/getDeviceControlPolicies
-        FULL_URL = self.base_url+'/policy/entities/device-control/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/policy/entities/device-control/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -152,27 +147,25 @@ class Device_Control_Policies:
         FULL_URL = self.base_url+'/policy/entities/device-control/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def deleteDeviceControlPolicies(self, parameters):
+    def deleteDeviceControlPolicies(self, ids):
         """ Delete a set of Device Control Policies by specifying their IDs. """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/device-control-policies/createDeviceControlPolicies
-        FULL_URL = self.base_url+'/policy/entities/device-control/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/policy/entities/device-control/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("DELETE", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("DELETE", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
@@ -182,16 +175,15 @@ class Device_Control_Policies:
         FULL_URL = self.base_url+'/policy/entities/device-control/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("PATCH", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def queryDeviceControlPolicyMembers(self, parameters):
+    def queryDeviceControlPolicyMembers(self, parameters={}):
         """ Search for members of a Device Control Policy in your environment by providing an FQL filter
             and paging details. Returns a set of Agent IDs which match the filter criteria.
         """
@@ -199,16 +191,15 @@ class Device_Control_Policies:
         FULL_URL = self.base_url+'/policy/queries/device-control-members/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
 
-    def queryDeviceControlPolicies(self, parameters):
+    def queryDeviceControlPolicies(self, parameters={}):
         """ Search for Device Control Policies in your environment by providing an FQL filter and paging details. 
             Returns a set of Device Control Policy IDs which match the filter criteria. 
         """
@@ -216,11 +207,10 @@ class Device_Control_Policies:
         FULL_URL = self.base_url+'/policy/queries/device-control/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned

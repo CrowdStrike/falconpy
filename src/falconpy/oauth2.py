@@ -73,12 +73,11 @@ class OAuth2:
             'client_id': self.creds['client_id'],
             'client_secret': self.creds['client_secret']
         }
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, data=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code,response.json())
+            returned = self.Result()(response.status_code,response.json())
         except Exception as e:
-            returned = result(500, str(e))
+            returned = self.Result()(500, str(e))
 
         return returned
             
@@ -87,11 +86,10 @@ class OAuth2:
         FULL_URL = self.base_url+'/oauth2/revoke'
         HEADERS = { 'Authorization': 'basic {}'.format(token) }
         DATA = { 'token': '{}'.format(token) }
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, data=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.json())
+            returned = self.Result()(response.status_code, response.json())
         except Exception as e:
-            returned = result(500, str(e))
+            returned = self.Result()(500, str(e))
             
         return returned
