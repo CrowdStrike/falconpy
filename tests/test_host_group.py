@@ -25,14 +25,12 @@ class TestHostGroup:
         else:
             return False
 
-    @pytest.mark.skipif(falcon.queryHostGroups(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceHostGroup_queryGroupMembers(self):
         if falcon.queryGroupMembers(parameters={"limit":1,"id":falcon.queryHostGroups(parameters={"limit":1})["body"]["resources"][0]})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
-    @pytest.mark.skipif(falcon.queryHostGroups(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceHostGroup_getHostGroups(self):
         if falcon.getHostGroups(ids=falcon.queryHostGroups(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
@@ -45,7 +43,7 @@ class TestHostGroup:
         else:
             return False
 
-    @pytest.mark.skipif(falcon.queryCombinedHostGroups(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
+
     def serviceHostGroup_queryCombinedGroupMembers(self):
         if falcon.queryCombinedGroupMembers(parameters={"limit":1,"id":falcon.queryCombinedHostGroups(parameters={"limit":1})["body"]["resources"][0]["id"]})["status_code"] in AllowedResponses:
             return True
@@ -55,15 +53,18 @@ class TestHostGroup:
     def test_queryHostGroups(self):
         assert self.serviceHostGroup_queryHostGroups() == True
 
+    @pytest.mark.skipif(falcon.queryHostGroups(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_queryGroupMembers(self):
         assert self.serviceHostGroup_queryGroupMembers() == True
 
+    @pytest.mark.skipif(falcon.queryHostGroups(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_getHostGroups(self):
         assert self.serviceHostGroup_getHostGroups() == True
 
     def test_queryCombinedHostGroups(self):
         assert self.serviceHostGroup_queryCombinedHostGroups() == True
-
+    
+    @pytest.mark.skipif(falcon.queryCombinedHostGroups(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_queryCombinedGroupMembers(self):
         assert self.serviceHostGroup_queryCombinedGroupMembers() == True
 

@@ -50,14 +50,12 @@ class TestUber:
         else:
             return False 
 
-    @pytest.mark.skipif(falcon.command("QueryAWSAccounts", parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def uberCCAWS_GetAWSAccounts(self):
         if falcon.command("GetAWSAccounts", ids=falcon.command("QueryAWSAccounts", parameters={"limit":1})["body"]["resources"][0]["id"])["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
-    @pytest.mark.skipif(falcon.command("QueryAWSAccounts", parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def uberCCAWS_VerifyAWSAccountAccess(self):
         if falcon.command("VerifyAWSAccountAccess", ids=falcon.command("QueryAWSAccounts", parameters={"limit":1})["body"]["resources"][0]["id"])["status_code"] in AllowedResponses:
             return True
@@ -164,10 +162,12 @@ class TestUber:
 
     def test_QueryAWSAccounts(self):
         assert self.uberCCAWS_QueryAWSAccounts() == True
-
+    
+    @pytest.mark.skipif(falcon.command("QueryAWSAccounts", parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetAWSAccounts(self):
         assert self.uberCCAWS_GetAWSAccounts() == True
 
+    @pytest.mark.skipif(falcon.command("QueryAWSAccounts", parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_VerifyAWSAccountAccess(self):
         assert self.uberCCAWS_VerifyAWSAccountAccess() == True
     

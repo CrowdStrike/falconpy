@@ -26,14 +26,13 @@ class TestDeviceControlPolicy:
         else:
             return False
 
-    @pytest.mark.skipif(falcon.queryDeviceControlPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceDeviceControlPolicies_queryDeviceControlPolicyMembers(self):
         if falcon.queryDeviceControlPolicyMembers(parameters={"id": falcon.queryDeviceControlPolicies(parameters={"limit":1})["body"]["resources"][0]})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
-    @pytest.mark.skipif(falcon.queryDeviceControlPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
+
     def serviceDeviceControlPolicies_getDeviceControlPolicies(self):
         if falcon.getDeviceControlPolicies(ids=falcon.queryDeviceControlPolicies(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
@@ -46,7 +45,6 @@ class TestDeviceControlPolicy:
         else:
             return False
 
-    @pytest.mark.skipif(falcon.queryCombinedDeviceControlPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceDeviceControlPolicies_queryCombinedDeviceControlPolicyMembers(self):
         if falcon.queryCombinedDeviceControlPolicyMembers(parameters={"id": falcon.queryCombinedDeviceControlPolicies(parameters={"limit":1})["body"]["resources"][0]["id"]})["status_code"] in AllowedResponses:
             return True
@@ -55,16 +53,19 @@ class TestDeviceControlPolicy:
 
     def test_queryDeviceControlPolicies(self):
         assert self.serviceDeviceControlPolicies_queryDeviceControlPolicies() == True
-
+    
+    @pytest.mark.skipif(falcon.queryDeviceControlPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_queryDeviceControlPolicyMembers(self):
         assert self.serviceDeviceControlPolicies_queryDeviceControlPolicyMembers() == True
     
+    @pytest.mark.skipif(falcon.queryDeviceControlPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")    
     def test_getDeviceControlPolicies(self):
         assert self.serviceDeviceControlPolicies_getDeviceControlPolicies() == True
 
     def test_queryCombinedDeviceControlPolicies(self):
         assert self.serviceDeviceControlPolicies_queryCombinedDeviceControlPolicies() == True
-
+    
+    @pytest.mark.skipif(falcon.queryCombinedDeviceControlPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_queryCombinedDeviceControlPolicyMembers(self):
         assert self.serviceDeviceControlPolicies_queryCombinedDeviceControlPolicyMembers() == True
 

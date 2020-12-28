@@ -32,7 +32,6 @@ class TestFalconX:
         else:
             return False
             
-    @pytest.mark.skipif(falcon.QueryReports(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceFalconX_GetSummaryReports(self):
         if falcon.GetSummaryReports(ids=falcon.QueryReports(parameters={"limit":1})["body"]["resources"])["status_code"] in AllowedResponses:
             return True
@@ -45,6 +44,7 @@ class TestFalconX:
     def test_QuerySubmissions(self):
         assert self.serviceFalconX_QuerySubmissions() == True
 
+    @pytest.mark.skipif(falcon.QueryReports(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetSummaryReports(self):
         assert self.serviceFalconX_GetSummaryReports() == True
 

@@ -24,7 +24,7 @@ class TestIOCs:
         else:
             return False
 
-    @pytest.mark.skipif(falcon.QueryIOCs(parameters={"types":"ipv4"})["status_code"] == 429, reason="API rate limit reached")
+    
     def serviceIOCs_GetIOC(self):
         
         if falcon.GetIOC(parameters={"type":"ipv4", "value":falcon.QueryIOCs(parameters={"types":"ipv4"})["body"]["resources"][0]})["status_code"] in AllowedResponses:
@@ -36,6 +36,7 @@ class TestIOCs:
         assert self.serviceIOCs_QueryIOCs() == True
 
     # Current test environment doesn't have any custom IOCs configured atm
+    #@pytest.mark.skipif(falcon.QueryIOCs(parameters={"types":"ipv4"})["status_code"] == 429, reason="API rate limit reached")
     # def test_GetIOC(self):
     #     assert self.serviceIOCs_GetIOC() == True
 

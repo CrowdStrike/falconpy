@@ -38,13 +38,12 @@ class TestIncidents:
         else:
             return False
 
-    @pytest.mark.skipif(falcon.QueryBehaviors(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceIncidents_GetBehaviors(self):
         if falcon.GetBehaviors(body={"ids":falcon.QueryBehaviors(parameters={"limit":1})["body"]["resources"]})["status_code"] in AllowedResponses:
             return True
         else:
             return False
-    @pytest.mark.skipif(falcon.QueryIncidents(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
+
     def serviceIncidents_GetIncidents(self):
         if falcon.GetIncidents(body={"ids":falcon.QueryIncidents(parameters={"limit":1})["body"]["resources"]})["status_code"] in AllowedResponses:
             return True
@@ -59,10 +58,12 @@ class TestIncidents:
 
     def test_QueryIncidents(self):
         assert self.serviceIncidents_QueryIncidents() == True
-
+    
+    @pytest.mark.skipif(falcon.QueryIncidents(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetIncidents(self):
         assert self.serviceIncidents_GetIncidents() == True
-
+    
+    @pytest.mark.skipif(falcon.QueryBehaviors(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetBehaviors(self):
         assert self.serviceIncidents_GetBehaviors() == True
 

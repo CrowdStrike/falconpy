@@ -29,14 +29,13 @@ class TestFalconSensorUpdate:
             return True
         else:
             return False
-    @pytest.mark.skipif(falcon.querySensorUpdatePolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
+
     def serviceSensorUpdate_getSensorUpdatePolicies(self):
         if falcon.getSensorUpdatePolicies(ids=falcon.querySensorUpdatePolicies(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
         else:
             return False
     
-    @pytest.mark.skipif(falcon.querySensorUpdatePolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceSensorUpdate_getSensorUpdatePoliciesV2(self):
         if falcon.getSensorUpdatePoliciesV2(ids=falcon.querySensorUpdatePolicies(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
@@ -66,10 +65,12 @@ class TestFalconSensorUpdate:
 
     def test_queryCombinedSensorUpdatePolicyMembers(self):
         assert self.serviceSensorUpdate_queryCombinedSensorUpdatePolicyMembers() == True
-
+    
+    @pytest.mark.skipif(falcon.querySensorUpdatePolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_getSensorUpdatePolicies(self):
         assert self.serviceSensorUpdate_getSensorUpdatePolicies() == True
-
+    
+    @pytest.mark.skipif(falcon.querySensorUpdatePolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_getSensorUpdatePoliciesV2(self):
         assert self.serviceSensorUpdate_getSensorUpdatePoliciesV2() == True
 
