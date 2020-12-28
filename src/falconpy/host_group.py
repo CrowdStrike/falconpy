@@ -61,7 +61,7 @@ class Host_Group:
             
             return self.result_obj
 
-    def queryCombinedGroupMembers(self, parameters):
+    def queryCombinedGroupMembers(self, parameters={}):
         """ Search for members of a Host Group in your environment by providing an FQL filter 
             and paging details. Returns a set of host details which match the filter criteria.
         """
@@ -69,16 +69,15 @@ class Host_Group:
         FULL_URL = self.base_url+'/devices/combined/host-group-members/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def queryCombinedHostGroups(self, parameters):
+    def queryCombinedHostGroups(self, parameters={}):
         """ Search for Host Groups in your environment by providing an FQL filter and 
             paging details. Returns a set of Host Groups which match the filter criteria.
         """
@@ -86,12 +85,11 @@ class Host_Group:
         FULL_URL = self.base_url+'/devices/combined/host-groups/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -102,27 +100,25 @@ class Host_Group:
         HEADERS = self.headers
         PARAMS = parameters
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def getHostGroups(self, parameters):
+    def getHostGroups(self, ids):
         """ Retrieve a set of Host Groups by specifying their IDs. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/getHostGroups
-        FULL_URL = self.base_url+'/devices/entities/host-groups/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/devices/entities/host-groups/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -132,27 +128,25 @@ class Host_Group:
         FULL_URL = self.base_url+'/devices/entities/host-groups/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
             
         return returned
         
-    def deleteHostGroups(self, parameters):
+    def deleteHostGroups(self, ids):
         """ Delete a set of Host Groups by specifying their IDs. """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/deleteHostGroups
-        FULL_URL = self.base_url+'/devices/entities/host-groups/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/devices/entities/host-groups/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("DELETE", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("DELETE", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         return returned
         
     def updateHostGroups(self, body):
@@ -161,16 +155,15 @@ class Host_Group:
         FULL_URL = self.base_url+'/devices/entities/host-groups/v1'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("PATCH", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
             
         return returned
         
-    def queryGroupMembers(self, parameters):
+    def queryGroupMembers(self, parameters={}):
         """ Search for members of a Host Group in your environment by providing an FQL filter 
             and paging details. Returns a set of Agent IDs which match the filter criteria.
         """
@@ -178,16 +171,15 @@ class Host_Group:
         FULL_URL = self.base_url+'/devices/queries/host-group-members/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
             
         return returned
         
-    def queryHostGroups(self, parameters):
+    def queryHostGroups(self, parameters={}):
         """ Search for Host Groups in your environment by providing an FQL filter and 
             paging details. Returns a set of Host Group IDs which match the filter criteria. 
         """
@@ -195,11 +187,10 @@ class Host_Group:
         FULL_URL = self.base_url+'/devices/queries/host-groups/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
             
         return returned

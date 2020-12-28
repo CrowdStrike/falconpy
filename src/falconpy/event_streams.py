@@ -61,19 +61,18 @@ class Event_Streams:
             
             return self.result_obj
 
-    def refreshActiveStreamSession(self, parameters):
+    def refreshActiveStreamSession(self, parameters, partition=0):
         """ Refresh an active event stream. Use the URL shown in a GET /sensors/entities/datafeed/v2 response. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/refreshActiveStreamSession
-        FULL_URL = self.base_url+'/sensors/entities/datafeed-actions/v1/{}'.format(parameters['partition'])
+        FULL_URL = self.base_url+'/sensors/entities/datafeed-actions/v1/{}'.format(str(partition))
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("POST", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("POST", FULL_URL, json={}, params=PARAMS, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
             
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -83,12 +82,11 @@ class Event_Streams:
         FULL_URL = self.base_url+'/sensors/entities/datafeed/v2'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
             
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned

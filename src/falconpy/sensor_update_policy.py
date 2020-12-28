@@ -61,40 +61,37 @@ class Sensor_Update_Policy:
             
             return self.result_obj
 
-    def revealUninstallToken(self, parameters, body):
+    def revealUninstallToken(self, body):
         """ Reveals an uninstall token for a specific device. To retrieve the bulk maintenance token pass the value 'MAINTENANCE' as the value for 'device_id'. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/revealUninstallToken
         FULL_URL = self.base_url+'/policy/combined/reveal-uninstall-token/v1'
         HEADERS = self.headers
         DATA = body
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("POST", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("POST", FULL_URL, json=DATA, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
 
 
-    def queryCombinedSensorUpdateBuilds(self, parameters):
+    def queryCombinedSensorUpdateBuilds(self, parameters={}):
         """ Retrieve available builds for use with Sensor Update Policies. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/queryCombinedSensorUpdateBuilds
         FULL_URL = self.base_url+'/policy/combined/sensor-update-builds/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def queryCombinedSensorUpdatePolicyMembers(self, parameters):
+    def queryCombinedSensorUpdatePolicyMembers(self, parameters={}):
         """ Search for members of a Sensor Update Policy in your environment by providing an FQL 
             filter and paging details. Returns a set of host details which match the filter criteria. 
         """
@@ -102,16 +99,15 @@ class Sensor_Update_Policy:
         FULL_URL = self.base_url+'/policy/combined/sensor-update-members/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def queryCombinedSensorUpdatePolicies(self, parameters):
+    def queryCombinedSensorUpdatePolicies(self, parameters={}):
         """ Search for Sensor Update Policies in your environment by providing an FQL filter and paging details. 
             Returns a set of Sensor Update Policies which match the filter criteria. 
         """
@@ -119,16 +115,15 @@ class Sensor_Update_Policy:
         FULL_URL = self.base_url+'/policy/combined/sensor-update/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def queryCombinedSensorUpdatePoliciesV2(self, parameters):
+    def queryCombinedSensorUpdatePoliciesV2(self, parameters={}):
         """ Search for Sensor Update Policies with additional support for uninstall protection in your environment 
             by providing an FQL filter and paging details. Returns a set of Sensor Update Policies which match the filter criteria. 
         """
@@ -136,12 +131,11 @@ class Sensor_Update_Policy:
         FULL_URL = self.base_url+'/policy/combined/sensor-update/v2'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
@@ -152,16 +146,15 @@ class Sensor_Update_Policy:
         HEADERS = self.headers
         DATA = body
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def setSensorUpdatePoliciesPrecedence(self, parameters, body):
+    def setSensorUpdatePoliciesPrecedence(self, body):
         """ Sets the precedence of Sensor Update Policies based on the order of IDs specified in the request. 
             The first ID specified will have the highest precedence and the last ID specified will have the lowest. 
             You must specify all non-Default Policies for a platform when updating precedence. 
@@ -170,126 +163,113 @@ class Sensor_Update_Policy:
         FULL_URL = self.base_url+'/policy/entities/sensor-update-precedence/v1'
         HEADERS = self.headers
         DATA = body
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("POST", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("POST", FULL_URL, json=DATA, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def getSensorUpdatePolicies(self, parameters):
+    def getSensorUpdatePolicies(self, ids):
         """ Retrieve a set of Sensor Update Policies by specifying their IDs. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/getSensorUpdatePolicies
-        FULL_URL = self.base_url+'/policy/entities/sensor-update/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/policy/entities/sensor-update/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def createSensorUpdatePolicies(self, parameters, body):
+    def createSensorUpdatePolicies(self, body):
         """ Create Sensor Update Policies by specifying details about the policy to create. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/createSensorUpdatePolicies
         FULL_URL = self.base_url+'/policy/entities/sensor-update/v1'
         HEADERS = self.headers
         DATA = body
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("POST", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("POST", FULL_URL, json=DATA, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def deleteSensorUpdatePolicies(self, parameters):
+    def deleteSensorUpdatePolicies(self, ids):
         """ Delete a set of Sensor Update Policies by specifying their IDs. """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/deleteSensorUpdatePolicies
-        FULL_URL = self.base_url+'/policy/entities/sensor-update/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/policy/entities/sensor-update/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("DELETE", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("DELETE", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def updateSensorUpdatePolicies(self, parameters, body):
+    def updateSensorUpdatePolicies(self, body):
         """ Update Sensor Update Policies by specifying the ID of the policy and details to update. """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/updateSensorUpdatePolicies
         FULL_URL = self.base_url+'/policy/entities/sensor-update/v1'
         HEADERS = self.headers
         DATA = body
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("PATCH", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("PATCH", FULL_URL, json=DATA, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def getSensorUpdatePoliciesV2(self, parameters):
+    def getSensorUpdatePoliciesV2(self, ids):
         """ Retrieve a set of Sensor Update Policies with additional support for uninstall protection by specifying their IDs. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/getSensorUpdatePoliciesV2
-        FULL_URL = self.base_url+'/policy/entities/sensor-update/v2'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/policy/entities/sensor-update/v2?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def createSensorUpdatePoliciesV2(self, parameters, body):
+    def createSensorUpdatePoliciesV2(self, body):
         """ Create Sensor Update Policies by specifying details about the policy to create with additional support for uninstall protection. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/createSensorUpdatePoliciesV2
         FULL_URL = self.base_url+'/policy/entities/sensor-update/v2'
         HEADERS = self.headers
         DATA = body
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("POST", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("POST", FULL_URL, json=DATA, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def updateSensorUpdatePoliciesV2(self, parameters, body):
+    def updateSensorUpdatePoliciesV2(self, body):
         """ Update Sensor Update Policies by specifying the ID of the policy and details to update with additional support for uninstall protection. """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/updateSensorUpdatePoliciesV2
         FULL_URL = self.base_url+'/users/entities/users/v1'
         HEADERS = self.headers
         DATA = body
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("PATCH", FULL_URL, params=PARAMS, json=DATA, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("PATCH", FULL_URL, json=DATA, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def querySensorUpdatePolicyMembers(self, parameters):
+    def querySensorUpdatePolicyMembers(self, parameters={}):
         """ Search for members of a Sensor Update Policy in your environment by providing an FQL 
             filter and paging details. Returns a set of Agent IDs which match the filter criteria. 
         """
@@ -297,16 +277,15 @@ class Sensor_Update_Policy:
         FULL_URL = self.base_url+'/policy/queries/sensor-update-members/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
 
-    def querySensorUpdatePolicies(self, parameters):
+    def querySensorUpdatePolicies(self, parameters={}):
         """ Search for Sensor Update Policies in your environment by providing an FQL filter and 
             paging details. Returns a set of Sensor Update Policy IDs which match the filter criteria. 
         """
@@ -314,11 +293,10 @@ class Sensor_Update_Policy:
         FULL_URL = self.base_url+'/policy/queries/sensor-update/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned

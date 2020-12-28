@@ -68,58 +68,68 @@ class Hosts:
         HEADERS = self.headers
         PARAMS = parameters
         BODY = body
-        result = self.Result()
         try:
             response = requests.request("POST", FULL_URL, params=PARAMS, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
 
         return returned
         
-    def GetDeviceDetails(self, parameters):
+    def GetDeviceDetails(self, ids):
         """ Get details on one or more hosts by providing agent IDs (AID). 
             You can get a host's agent IDs (AIDs) from the /devices/queries/devices/v1 endpoint, the Falcon console or the Streaming API.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/GetDeviceDetails
-        FULL_URL = self.base_url+'/devices/entities/devices/v1'
+        ID_LIST = str(ids).replace(",","&ids=")
+        FULL_URL = self.base_url+'/devices/entities/devices/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        PARAMS = parameters
-        result = self.Result()
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
+
+    def QueryHiddenDevices(self, parameters={}):
+        """ Perform the specified action on the Prevention Policies specified in the request. """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryHiddenDevices
+        FULL_URL = self.base_url+'/devices/queries/devices-hidden/v1'
+        HEADERS = self.headers
+        PARAMS = parameters
+        try:
+            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
+            returned = self.Result()(response.status_code, response.headers, response.json())
+        except Exception as e:
+            returned = self.Result()(500, {}, str(e))
         
-    def QueryDevicesByFilterScroll(self, parameters):
+        return returned
+
+    def QueryDevicesByFilterScroll(self, parameters={}):
         """ Perform the specified action on the Prevention Policies specified in the request. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDevicesByFilterScroll
         FULL_URL = self.base_url+'/devices/queries/devices-scroll/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
         
         return returned
         
-    def QueryDevicesByFilter(self, parameters, body):
+    def QueryDevicesByFilter(self, parameters={}):
         """ Search for hosts in your environment by platform, hostname, IP, and other criteria. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDevicesByFilter
         FULL_URL = self.base_url+'/devices/queries/devices/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
         try:
             response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
+            returned = self.Result()(response.status_code, response.headers, response.json())
         except Exception as e:
-            returned = result(500, {}, str(e))
+            returned = self.Result()(500, {}, str(e))
             
         return returned
