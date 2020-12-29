@@ -38,6 +38,16 @@ class TestEventStreams:
                 return True
             else:
                 return False
+    
+    def serviceStream_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        if falcon.listAvailableStreamsOAuth2(parameters={})["status_code"] != 500:
+            errorChecks = False
+        if falcon.refreshActiveStreamSession(parameters={}, partition=0)["status_code"] != 500:
+            errorChecks = False
+
+        return errorChecks
 
     def test_listAvailableStreamsOAuth2(self):
         assert self.serviceStream_listAvailableStreamsOAuth2() == True
@@ -46,5 +56,8 @@ class TestEventStreams:
     # def test_refreshActiveStreamSession(self):
     #     assert self.serviceStream_refreshActiveStreamSession() == True
 
-    def test_logout(self):
+    def test_Logout(self):
         assert auth.serviceRevoke() == True
+
+    def test_Errors(self):
+        assert self.serviceStream_GenerateErrors() == True

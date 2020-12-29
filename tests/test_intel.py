@@ -77,7 +77,32 @@ class TestIntel:
             return True
         else:
             return False
-    
+
+    def serviceIntel_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        commandList = [
+            ["QueryIntelActorEntities",""],
+            ["QueryIntelIndicatorEntities",""],
+            ["QueryIntelReportEntities",""],
+            ["GetIntelActorEntities","ids='12345678'"],
+            ["GetIntelIndicatorEntities","body={}"],
+            ["GetIntelReportPDF","parameters={}"],
+            ["GetIntelReportEntities","ids='12345678'"],
+            ["GetIntelRuleFile","parameters={}"],
+            ["GetLatestIntelRuleFile","parameters={}"],
+            ["GetIntelRuleEntities", "ids='12345678'"],
+            ["QueryIntelActorIds", ""],
+            ["QueryIntelIndicatorIds", ""],
+            ["QueryIntelReportIds", ""],
+            ["QueryIntelRuleIds", "parameters={}"]
+        ]
+        for cmd in commandList:
+            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
+                errorChecks = False
+        
+        return errorChecks
+
     def test_QueryIntelActorEntities(self):
         assert self.serviceIntel_QueryIntelActorEntities() == True
 
@@ -112,5 +137,8 @@ class TestIntel:
     def test_QueryIntelRuleIds(self):
         assert self.serviceIntel_QueryIntelRuleIds() == True
 
-    def test_logout(self):
+    def test_Logout(self):
         assert auth.serviceRevoke() == True
+    
+    def test_Errors(self):
+        assert self.serviceIntel_GenerateErrors() == True

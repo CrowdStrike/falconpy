@@ -51,6 +51,27 @@ class TestDeviceControlPolicy:
         else:
             return False
 
+    def serviceDeviceControlPolicies_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        commandList = [
+            ["queryCombinedDeviceControlPolicyMembers",""],
+            ["queryCombinedDeviceControlPolicies",""],
+            ["performDeviceControlPoliciesAction","body={}, parameters={}"],
+            ["setDeviceControlPoliciesPrecedence", "body={}"],
+            ["getDeviceControlPolicies","ids='12345678'"],
+            ["createDeviceControlPolicies","body={}"],
+            ["deleteDeviceControlPolicies","ids='12345678'"],
+            ["updateDeviceControlPolicies","body={}"],
+            ["queryDeviceControlPolicyMembers",""],
+            ["queryDeviceControlPolicies",""]
+        ]
+        for cmd in commandList:
+            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
+                errorChecks = False
+        
+        return errorChecks
+
     def test_queryDeviceControlPolicies(self):
         assert self.serviceDeviceControlPolicies_queryDeviceControlPolicies() == True
     
@@ -69,5 +90,8 @@ class TestDeviceControlPolicy:
     def test_queryCombinedDeviceControlPolicyMembers(self):
         assert self.serviceDeviceControlPolicies_queryCombinedDeviceControlPolicyMembers() == True
 
-    def test_logout(self):
+    def test_Logout(self):
         assert auth.serviceRevoke() == True
+    
+    def test_Errors(self):
+        assert self.serviceDeviceControlPolicies_GenerateErrors() == True

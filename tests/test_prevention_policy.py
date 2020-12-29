@@ -51,6 +51,27 @@ class TestFalconPrevent:
             return False
         return True
 
+    def servicePrevent_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        commandList = [
+            ["queryCombinedPreventionPolicyMembers",""],
+            ["queryCombinedPreventionPolicies",""],
+            ["performPreventionPoliciesAction","body={}, parameters={}"],
+            ["setPreventionPoliciesPrecedence","body={}"],
+            ["getPreventionPolicies","ids='12345678'"],
+            ["createPreventionPolicies","body={}"],
+            ["deletePreventionPolicies","ids='12345678'"],
+            ["updatePreventionPolicies","body={}"],
+            ["queryPreventionPolicyMembers",""],
+            ["queryPreventionPolicies",""]
+        ]
+        for cmd in commandList:
+            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
+                errorChecks = False
+        
+        return errorChecks
+
     def test_queryPreventionPolicies(self):
         assert self.servicePrevent_queryPreventionPolicies() == True
 
@@ -69,5 +90,8 @@ class TestFalconPrevent:
     def test_queryCombinedPreventionPolicyMembers(self):
         assert self.servicePrevent_queryCombinedPreventionPolicyMembers() == True
 
-    def test_logout(self):
+    def test_Logout(self):
         assert auth.serviceRevoke() == True
+
+    def test_Errors(self):
+        assert self.servicePrevent_GenerateErrors() == True

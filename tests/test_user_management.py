@@ -58,6 +58,29 @@ class TestFalconUserManagement:
             return True
         else:
             return False
+    
+    def serviceUserManagement_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        commandList = [
+            ["GetRoles","ids='12345678'"],
+            ["GrantUserRoleIds","body={}, parameters={}"],
+            ["RevokeUserRoleIds","ids='12345678', parameters={}"],
+            ["GetAvailableRoleIds",""],
+            ["GetUserRoleIds","parameters={}"],
+            ["RetrieveUser","ids='12345678'"],
+            ["CreateUser","body={}"],
+            ["DeleteUser","parameters={}"],
+            ["UpdateUser","body={}, parameters={}"],
+            ["RetrieveEmailsByCID",""],
+            ["RetrieveUserUUIDsByCID",""],
+            ["RetrieveUserUUID","parameters={}"]
+        ]
+        for cmd in commandList:
+            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
+                errorChecks = False
+        
+        return errorChecks
 
     def test_RetrieveEmailsByCID(self):
         assert self.serviceUserManagement_RetrieveEmailsByCID() == True
@@ -84,5 +107,8 @@ class TestFalconUserManagement:
     def test_GetRoles(self):
         assert self.serviceUserManagement_GetRoles() == True
 
-    def test_logout(self):
+    def test_Logout(self):
         assert auth.serviceRevoke() == True
+    
+    def test_Errors(self):
+        assert self.serviceUserManagement_GenerateErrors() == True

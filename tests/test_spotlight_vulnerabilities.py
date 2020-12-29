@@ -30,6 +30,16 @@ class TestSpotlight:
         else:
             return False
 
+    def serviceSpotlight_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        if falcon.queryVulnerabilities(parameters={})["status_code"] != 500:
+            errorChecks = False
+        if falcon.getVulnerabilities(ids="12345678")["status_code"] != 500:
+            errorChecks = False
+        
+        return errorChecks
+
     def test_queryVulnerabilities(self):
         assert self.serviceSpotlight_queryVulnerabilities() == True
     
@@ -37,5 +47,8 @@ class TestSpotlight:
     def test_getVulnerabilities(self):
         assert self.serviceSpotlight_getVulnerabilities() == True
 
-    def test_logout(self):
+    def test_Logout(self):
         assert auth.serviceRevoke() == True
+
+    def test_Errors(self):
+        assert self.serviceSpotlight_GenerateErrors() == True
