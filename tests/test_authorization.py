@@ -86,12 +86,14 @@ class TestAuthorization():
             'client_id': "BadClientID",
             'client_secret': "BadClientSecret"
         })
-
+        self.authorization.base_url = "nowhere"
         try:
             self.token = self.authorization.token()['body']['access_token']
         except:
             self.token = False
         
+        self.authorization.revoke(self.token)
+
         if self.token:
             return False
         else:
