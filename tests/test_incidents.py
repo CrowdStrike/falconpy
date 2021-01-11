@@ -38,18 +38,34 @@ class TestIncidents:
         else:
             return False
 
-    @pytest.mark.skipif(falcon.QueryBehaviors(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceIncidents_GetBehaviors(self):
         if falcon.GetBehaviors(body={"ids":falcon.QueryBehaviors(parameters={"limit":1})["body"]["resources"]})["status_code"] in AllowedResponses:
             return True
         else:
             return False
-    @pytest.mark.skipif(falcon.QueryIncidents(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
+
     def serviceIncidents_GetIncidents(self):
         if falcon.GetIncidents(body={"ids":falcon.QueryIncidents(parameters={"limit":1})["body"]["resources"]})["status_code"] in AllowedResponses:
             return True
         else:
             return False
+
+    def serviceIncidents_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        commandList = [
+            ["CrowdScore",""],
+            ["GetBehaviors","body={}"],
+            ["PerformIncidentAction","body={}"],
+            ["GetIncidents","body={}"],
+            ["QueryBehaviors",""],
+            ["QueryIncidents",""]
+        ]
+        for cmd in commandList:
+            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
+                errorChecks = False
+        
+        return errorChecks
 
     def test_CrowdScore(self):
         assert self.serviceIncidents_CrowdScore() == True
@@ -59,12 +75,17 @@ class TestIncidents:
 
     def test_QueryIncidents(self):
         assert self.serviceIncidents_QueryIncidents() == True
-
+    
+    @pytest.mark.skipif(falcon.QueryIncidents(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetIncidents(self):
         assert self.serviceIncidents_GetIncidents() == True
-
+    
+    @pytest.mark.skipif(falcon.QueryBehaviors(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetBehaviors(self):
         assert self.serviceIncidents_GetBehaviors() == True
 
-    def test_logout(self):
+    def test_Logout(self):
         assert auth.serviceRevoke() == True
+
+    def test_Errors(self):
+        assert self.serviceIncidents_GenerateErrors() == True

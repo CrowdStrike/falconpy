@@ -26,7 +26,6 @@ class TestDetects:
         else:
             return False
 
-    @pytest.mark.skipif(falcon.QueryDetects(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceDetects_GetDetectSummaries(self):
         if falcon.GetDetectSummaries(body={"ids":falcon.QueryDetects(parameters={"limit":1})["body"]["resources"]})["status_code"] in AllowedResponses:
             return True
@@ -34,17 +33,31 @@ class TestDetects:
             return False
 
     # def serviceDetects_GetAggregateDetects(self):
-    #     auth, falcon = self.authenticate()
-    #     if falcon.GetAggregateDetects(body={"ids":falcon.QueryDetects(parameters={"limit":1})["body"]["resources"]})["status_code"] in AllowedResponses:
-    #         auth.serviceRevoke()
+    #     print(falcon.QueryDetects(parameters={"limit":1}))
+    #     print(falcon.GetAggregateDetects(body=[{"ranges":"ranges'{}'".format(falcon.QueryDetects(parameters={"limit":1})["body"]["resources"][0])}]))
+    #     if falcon.GetAggregateDetects(body={"id":falcon.QueryDetects(parameters={"limit":1})["body"]["resources"][0]})["status_code"] in AllowedResponses:
     #         return True
     #     else:
-    #         auth.serviceRevoke()
     #         return False
+
+    def serviceDetects_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        if falcon.QueryDetects()["status_code"] != 500:
+            errorChecks = False
+        if falcon.GetDetectSummaries(body={})["status_code"] != 500:
+            errorChecks = False
+        if falcon.GetAggregateDetects(body={})["status_code"] != 500:
+            errorChecks = False
+        if falcon.UpdateDetectsByIdsV2(body={})["status_code"] != 500:
+            errorChecks = False
+            
+        return errorChecks
 
     def test_QueryDetects(self):
         assert self.serviceDetects_QueryDetects() == True
-
+    
+    @pytest.mark.skipif(falcon.QueryDetects(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetDetectSummaries(self):
         assert self.serviceDetects_GetDetectSummaries() == True
 
@@ -53,3 +66,6 @@ class TestDetects:
 
     def test_logout(self):
         assert auth.serviceRevoke() == True
+
+    def test_Errors(self):
+        assert self.serviceDetects_GenerateErrors() == True

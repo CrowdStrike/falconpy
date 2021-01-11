@@ -28,7 +28,6 @@ class TestEventStreams:
         else:
             return False
           
-    @pytest.mark.skipif(falcon.listAvailableStreamsOAuth2(parameters={"appId":"pytest-event_streams-unit-test"})["status_code"] == 429, reason="API rate limit reached")
     def serviceStream_refreshActiveStreamSession(self):
         avail = falcon.listAvailableStreamsOAuth2(parameters={"appId":"pytest-event_streams-unit-test"})
         t1 = datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S +0000')
@@ -39,12 +38,26 @@ class TestEventStreams:
                 return True
             else:
                 return False
+    
+    def serviceStream_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        if falcon.listAvailableStreamsOAuth2(parameters={})["status_code"] != 500:
+            errorChecks = False
+        if falcon.refreshActiveStreamSession(parameters={}, partition=0)["status_code"] != 500:
+            errorChecks = False
+
+        return errorChecks
 
     def test_listAvailableStreamsOAuth2(self):
         assert self.serviceStream_listAvailableStreamsOAuth2() == True
 
+    #@pytest.mark.skipif(falcon.listAvailableStreamsOAuth2(parameters={"appId":"pytest-event_streams-unit-test"})["status_code"] == 429, reason="API rate limit reached")
     # def test_refreshActiveStreamSession(self):
     #     assert self.serviceStream_refreshActiveStreamSession() == True
 
-    def test_logout(self):
+    def test_Logout(self):
         assert auth.serviceRevoke() == True
+
+    def test_Errors(self):
+        assert self.serviceStream_GenerateErrors() == True

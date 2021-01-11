@@ -32,12 +32,34 @@ class TestFalconX:
         else:
             return False
             
-    @pytest.mark.skipif(falcon.QueryReports(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def serviceFalconX_GetSummaryReports(self):
         if falcon.GetSummaryReports(ids=falcon.QueryReports(parameters={"limit":1})["body"]["resources"])["status_code"] in AllowedResponses:
             return True
         else:
             return False
+
+    def serviceFalconX_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        commandList = [
+            ["GetArtifacts", "parameters={}"],
+            ["GetSummaryReports", "ids='12345678'"],
+         #   ["GetReports","body={}, parameters={}"],
+         #   ["DeleteReport", "body={}"],
+            ["GetSubmissions","ids='12345678'"],
+            ["Submit","body={}"],
+            ["QueryReports",""],
+            ["QuerySubmissions",""],
+         #   ["GetSampleV2","body={}"],
+            ["UploadSampleV2", "body={},parameters={}"]
+         #   ["DeleteSampleV2", ""],
+         #   ["QuerySampleV1", ""]
+        ]
+        for cmd in commandList:
+            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
+                errorChecks = False
+        
+        return errorChecks
 
     def test_QueryReports(self):
         assert self.serviceFalconX_QueryReports() == True
@@ -45,8 +67,12 @@ class TestFalconX:
     def test_QuerySubmissions(self):
         assert self.serviceFalconX_QuerySubmissions() == True
 
+    @pytest.mark.skipif(falcon.QueryReports(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetSummaryReports(self):
         assert self.serviceFalconX_GetSummaryReports() == True
 
-    def test_logout(self):
+    def test_Logout(self):
         assert auth.serviceRevoke() == True
+    
+    def test_Errors(self):
+        assert self.serviceFalconX_GenerateErrors() == True

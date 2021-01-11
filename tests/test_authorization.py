@@ -80,6 +80,26 @@ class TestAuthorization():
         else:
             return False
 
+    def failServiceAuth(self):
+        
+        self.authorization = FalconAuth.OAuth2(creds={
+            'client_id': "BadClientID",
+            'client_secret': "BadClientSecret"
+        })
+        self.authorization.base_url = "nowhere"
+        try:
+            self.token = self.authorization.token()['body']['access_token']
+        except:
+            self.token = False
+        
+        self.authorization.revoke(self.token)
+
+        if self.token:
+            return False
+        else:
+            return True
+    
+
     def serviceRevoke(self):
         try:
             result = self.authorization.revoke(token=self.token)["status_code"]
@@ -105,6 +125,9 @@ class TestAuthorization():
     def test_serviceRevoke(self):
         self.serviceAuth()
         assert self.serviceRevoke() == True
+
+    def test_failServiceAuth(self):
+        assert self.failServiceAuth() == True
 
 
 

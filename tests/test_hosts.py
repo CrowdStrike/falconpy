@@ -63,6 +63,22 @@ class TestHosts:
         else:
             return False
 
+    def serviceHosts_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        commandList = [
+            ["PerformActionV2","body={}, parameters={}"],
+            ["GetDeviceDetails","ids='12345678'"],
+            ["QueryHiddenDevices",""],
+            ["QueryDevicesByFilterScroll",""],
+            ["QueryDevicesByFilter",""]
+        ]
+        for cmd in commandList:
+            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
+                errorChecks = False
+        
+        return errorChecks
+
     def test_QueryHiddenDevices(self):
         assert self.serviceHosts_QueryHiddenDevices() == True
 
@@ -79,5 +95,8 @@ class TestHosts:
     # def test_PerformActionV2(self):
     #     assert self.serviceHosts_PerformActionV2() == True
 
-    def test_logout(self):
+    def test_Logout(self):
         assert auth.serviceRevoke() == True
+    
+    def test_Errors(self):
+        assert self.serviceHosts_GenerateErrors() == True

@@ -24,7 +24,7 @@ class TestIOCs:
         else:
             return False
 
-    @pytest.mark.skipif(falcon.QueryIOCs(parameters={"types":"ipv4"})["status_code"] == 429, reason="API rate limit reached")
+    
     def serviceIOCs_GetIOC(self):
         
         if falcon.GetIOC(parameters={"type":"ipv4", "value":falcon.QueryIOCs(parameters={"types":"ipv4"})["body"]["resources"][0]})["status_code"] in AllowedResponses:
@@ -32,13 +32,37 @@ class TestIOCs:
         else:
             return False
 
+    def serviceIOCs_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        commandList = [
+            ["DevicesCount","parameters={}"],
+            ["GetIOC","parameters={}"],
+            ["CreateIOC","body={}"],
+            ["DeleteIOC","parameters={}"],
+            ["UpdateIOC","body={}, parameters={}"],
+            ["DevicesRanOn","parameters={}"],
+            ["QueryIOCs",""],
+            ["ProcessesRanOn","parameters={}"],
+            ["entities_processes","ids='12345678'"]
+        ]
+        for cmd in commandList:
+            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
+                errorChecks = False
+        
+        return errorChecks
+
     def test_QueryIOCs(self):
         assert self.serviceIOCs_QueryIOCs() == True
 
     # Current test environment doesn't have any custom IOCs configured atm
+    #@pytest.mark.skipif(falcon.QueryIOCs(parameters={"types":"ipv4"})["status_code"] == 429, reason="API rate limit reached")
     # def test_GetIOC(self):
     #     assert self.serviceIOCs_GetIOC() == True
 
 
-    def test_logout(self):
+    def test_Logout(self):
         assert auth.serviceRevoke() == True
+
+    def test_Errors(self):
+        assert self.serviceIOCs_GenerateErrors() == True

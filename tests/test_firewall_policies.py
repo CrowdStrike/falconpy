@@ -27,6 +27,30 @@ class TestFirewallPolicy:
     # def test_queryFirewallPolicies(self):
     #     assert self.serviceFirewall_queryFirewallPolicies() == True
 
-    def test_logout(self):
+    def serviceFirewall_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        commandList = [
+            ["queryCombinedFirewallPolicyMembers",""],
+            ["queryCombinedFirewallPolicies",""],
+            ["performFirewallPoliciesAction","body={}, parameters={}"],
+            ["setFirewallPoliciesPrecedence","body={}"],
+            ["getFirewallPolicies","ids='12345678'"],
+            ["createFirewallPolicies","body={}"],
+            ["deleteFirewallPolicies","ids='12345678'"],
+            ["updateFirewallPolicies","body={}"],
+            ["queryFirewallPolicyMembers",""],
+            ["queryFirewallPolicies", ""]
+        ]
+        for cmd in commandList:
+            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
+                errorChecks = False
+        
+        return errorChecks
+
+    def test_Logout(self):
         assert auth.serviceRevoke() == True
+
+    def test_Errors(self):
+        assert self.serviceFirewall_GenerateErrors() == True
 #TODO: My current API key can't hit this API. Pending additional unit testing for now.

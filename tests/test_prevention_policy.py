@@ -24,7 +24,6 @@ class TestFalconPrevent:
         else:
             return False
 
-    @pytest.mark.skipif(falcon.queryPreventionPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def servicePrevent_queryPreventionPolicyMembers(self):
         if falcon.queryPreventionPolicyMembers(parameters={"id":falcon.queryPreventionPolicies(parameters={"limit":1})["body"]["resources"][0]})["status_code"] in AllowedResponses:
             return True
@@ -32,7 +31,6 @@ class TestFalconPrevent:
             return False
         return True
 
-    @pytest.mark.skipif(falcon.queryPreventionPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def servicePrevent_getPreventionPolicies(self):
         if falcon.getPreventionPolicies(ids=falcon.queryPreventionPolicies(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
             return True
@@ -46,7 +44,6 @@ class TestFalconPrevent:
         else:
             return False
 
-    @pytest.mark.skipif(falcon.queryCombinedPreventionPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def servicePrevent_queryCombinedPreventionPolicyMembers(self):
         if falcon.queryCombinedPreventionPolicyMembers(parameters={"id":falcon.queryCombinedPreventionPolicies(parameters={"limit":1})["body"]["resources"][0]["id"]})["status_code"] in AllowedResponses:
             return True
@@ -54,20 +51,47 @@ class TestFalconPrevent:
             return False
         return True
 
+    def servicePrevent_GenerateErrors(self):
+        falcon.base_url = "nowhere"
+        errorChecks = True
+        commandList = [
+            ["queryCombinedPreventionPolicyMembers",""],
+            ["queryCombinedPreventionPolicies",""],
+            ["performPreventionPoliciesAction","body={}, parameters={}"],
+            ["setPreventionPoliciesPrecedence","body={}"],
+            ["getPreventionPolicies","ids='12345678'"],
+            ["createPreventionPolicies","body={}"],
+            ["deletePreventionPolicies","ids='12345678'"],
+            ["updatePreventionPolicies","body={}"],
+            ["queryPreventionPolicyMembers",""],
+            ["queryPreventionPolicies",""]
+        ]
+        for cmd in commandList:
+            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
+                errorChecks = False
+        
+        return errorChecks
+
     def test_queryPreventionPolicies(self):
         assert self.servicePrevent_queryPreventionPolicies() == True
 
+    @pytest.mark.skipif(falcon.queryPreventionPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_queryPreventionPolicyMembers(self):
         assert self.servicePrevent_queryPreventionPolicyMembers() == True
-
+    
+    @pytest.mark.skipif(falcon.queryPreventionPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_getPreventionPolicies(self):
         assert self.servicePrevent_getPreventionPolicies() == True
 
     def test_queryCombinedPreventionPolicies(self):
         assert self.servicePrevent_queryCombinedPreventionPolicies() == True
-
+    
+    @pytest.mark.skipif(falcon.queryCombinedPreventionPolicies(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_queryCombinedPreventionPolicyMembers(self):
         assert self.servicePrevent_queryCombinedPreventionPolicyMembers() == True
 
-    def test_logout(self):
+    def test_Logout(self):
         assert auth.serviceRevoke() == True
+
+    def test_Errors(self):
+        assert self.servicePrevent_GenerateErrors() == True
