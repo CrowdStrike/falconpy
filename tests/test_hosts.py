@@ -1,7 +1,6 @@
 # test_hosts.py
 # This class tests the hosts service class
 
-import json
 import os
 import sys
 import pytest

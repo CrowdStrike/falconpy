@@ -1,7 +1,6 @@
 # test_iocs.py
 # This class tests the iocs service class
 
-import json
 import os
 import sys
 import pytest

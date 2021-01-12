@@ -30,7 +30,6 @@
 # For more information, please refer to <https://unlicense.org>
 
 import requests
-import json
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
 urllib3.disable_warnings(InsecureRequestWarning)

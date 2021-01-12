@@ -1,7 +1,6 @@
 # test_sensor_update_policy.py
 # This class tests the sensor_update_policy service class
 
-import json
 import os
 import sys
 import pytest

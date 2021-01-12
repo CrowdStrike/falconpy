@@ -1,7 +1,6 @@
 # test_event_streams.py
 # This class tests the event_streams service class
 
-import json
 import os
 import sys
 import datetime

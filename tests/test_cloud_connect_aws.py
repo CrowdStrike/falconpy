@@ -1,7 +1,6 @@
 # test_cloud_connect_aws.py
 # This class tests the cloud_connect_aws service class
 
-import json
 import os
 import sys
 import pytest

@@ -1,7 +1,6 @@
 # test_intel.py
 # This class tests the intel service class
 
-import json
 import os
 import sys
 import pytest

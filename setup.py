@@ -2,7 +2,6 @@ from setuptools import find_packages
 from setuptools import setup
 from glob import glob
 from os.path import basename
-from os.path import dirname
 from os.path import splitext
 
 with open("README.md", "r") as fh:

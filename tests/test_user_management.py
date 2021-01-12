@@ -1,7 +1,6 @@
 # test_user_management.py
 # This class tests the user_management service class
 
-import json
 import os
 import sys
 import pytest

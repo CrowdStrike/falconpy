@@ -1,7 +1,6 @@
 # test_spotlight_vulnerabilities.py
 # This class tests the spotlight_vulnerabilities service class
 
-import json
 import os
 import sys
 import pytest

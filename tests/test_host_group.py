@@ -1,7 +1,6 @@
 # test_host_groups.py
 # This class tests the firewall_policies service class
 
-import json
 import os
 import sys
 import pytest

@@ -1,7 +1,6 @@
 # test_detects.py
 # This class tests the detects service class
 
-import json
 import os
 import sys
 import pytest

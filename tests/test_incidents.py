@@ -1,7 +1,6 @@
 # test_incidents.py
 # This class tests the incidents service class
 
-import json
 import os
 import sys
 import pytest

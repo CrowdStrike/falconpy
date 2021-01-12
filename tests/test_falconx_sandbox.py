@@ -1,7 +1,6 @@
 # test_falconx_sandbox.py
 # This class tests the falconx_sandbox service class
 
-import json
 import os
 import sys
 import pytest

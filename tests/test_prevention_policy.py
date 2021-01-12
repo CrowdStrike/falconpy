@@ -1,7 +1,6 @@
 # test_prevention_policy.py
 # This class tests the prevention_policy service class
 
-import json
 import os
 import sys
 import pytest

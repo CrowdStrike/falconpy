@@ -1,7 +1,6 @@
 # test_device_control_poligies.py
 # This class tests the device_control_policies service class
 
-import json
 import os
 import sys
 import pytest

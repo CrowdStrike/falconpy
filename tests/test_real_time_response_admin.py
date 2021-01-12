@@ -1,7 +1,6 @@
 # test_real_time_response_admin.py
 # This class tests the real_time_response_admin service class
 
-import json
 import os
 import sys
 import pytest

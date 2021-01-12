@@ -1,7 +1,6 @@
 # test_firewall_management.py
 # This class tests the firewall_management service class
 
-import json
 import os
 import sys
 # Authentication via the test_authorization.py
