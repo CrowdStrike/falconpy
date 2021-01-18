@@ -12,6 +12,7 @@ on:
 jobs:
   build:
 
+    environment: ci
     runs-on: ubuntu-latest
     strategy:
       matrix:
