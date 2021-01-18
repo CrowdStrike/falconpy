@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-
+    environment: ci
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -37,7 +37,8 @@ jobs:
     - name: Test with pytest
       env:
         DEBUG_API_ID: ${{ secrets.DEBUG_API_ID }}
-        DEBUG_API_SECRET: ${{ secrets.DEBUG_API_SECRET }}
+        DEBUG_API_SECRET: "HARDCODED"
+        #DEBUG_API_SECRET: ${{ secrets.DEBUG_API_SECRET }}
       run: |
         coverage run --source src -m pytest -s -W ignore::Warning
         coverage report
