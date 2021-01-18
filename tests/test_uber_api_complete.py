@@ -24,7 +24,14 @@ else:
         with open('%s/test.config' % cur_path, 'r') as file_config:
             config = json.loads(file_config.read())
     else:
-        sys.exit(1)                
+        sys.exit(1)
+
+var = os.getenv("DEBUG_API_SECRET")
+print("First letter: ", var[0])
+print("Second letter: ", var[1])
+var = os.getenv("DEBUG_API_ID")
+print("First letter: ", var[0])
+print("Second letter: ", var[1])
 
 
 falcon = FalconSDK.APIHarness(
