@@ -73,6 +73,8 @@ class OAuth2:
             'client_id': self.creds['client_id'],
             'client_secret': self.creds['client_secret']
         }
+        if "member_cid" in self.creds:
+            DATA["member_cid"] = self.creds["member_cid"]
         try:
             response = requests.request("POST", FULL_URL, data=DATA, headers=HEADERS, verify=False)
             returned = self.Result()(response.status_code,response.json())

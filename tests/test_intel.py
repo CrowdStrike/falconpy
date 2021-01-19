@@ -37,7 +37,7 @@ class TestIntel:
             return False
 
     def serviceIntel_GetIntelActorEntities(self):
-        if falcon.GetIntelActorEntities(ids=falcon.QueryIntelActorEntities(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
+        if falcon.GetIntelActorEntities(ids=falcon.QueryIntelActorEntities(parameters={"limit":1})["body"]["resources"][0]["id"])["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -49,7 +49,7 @@ class TestIntel:
             return False
     
     def serviceIntel_GetIntelReportEntities(self):
-        if falcon.GetIntelReportEntities(ids=falcon.QueryIntelReportEntities(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
+        if falcon.GetIntelReportEntities(ids=falcon.QueryIntelReportEntities(parameters={"limit":1})["body"]["resources"][0]["id"])["status_code"] in AllowedResponses:
             return True
         else:
             return False
