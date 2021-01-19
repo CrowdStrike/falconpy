@@ -347,7 +347,12 @@ class APIHarness:
         FULL_URL = self.base_url+'/oauth2/token'
         DATA = {}
         if self.valid_cred_format():
-            DATA=self.creds
+            DATA = {
+                'client_id': self.creds['client_id'],
+                'client_secret': self.creds['client_secret']
+            }
+        if "member_cid" in self.creds:
+            DATA["member_cid"] = self.creds["member_cid"]
         try:
             response = requests.request("POST", FULL_URL, data=DATA, headers={}, verify=False)
             result = self.Result()(status_code=response.status_code,headers={},body=response.json())["body"]
