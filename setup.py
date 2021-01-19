@@ -10,7 +10,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="crowdstrike-falconpy",
-    version="0.2.0",
+    version="0.2.1",
     author="CrowdStrike",
     maintainer="Joshua Hiller",
     description="The CrowdStrike Falcon API SDK for Python 3",
