@@ -39,11 +39,12 @@ urllib3.disable_warnings(InsecureRequestWarning)
 class APIHarness:
     """ This one does it all. It's like the One Ring with significantly fewer orcs. """
 
-    def __init__(self, creds, base_url="https://api.crowdstrike.com"):
+    def __init__(self, creds, base_url="https://api.crowdstrike.com", ssl_verify=True):
         """ Instantiates an instance of the base class, ingests credentials and the base URL and initializes global variables. """
     
         self.creds = creds
         self.base_url = base_url
+        self.ssl_verify = ssl_verify
         self.token = False
         self.token_expiration = 0
         self.token_renew_window = 20
@@ -354,7 +355,7 @@ class APIHarness:
         if "member_cid" in self.creds:
             DATA["member_cid"] = self.creds["member_cid"]
         try:
-            response = requests.request("POST", FULL_URL, data=DATA, headers={}, verify=False)
+            response = requests.request("POST", FULL_URL, data=DATA, headers={}, verify=self.ssl_verify)
             result = self.Result()(status_code=response.status_code,headers={},body=response.json())["body"]
             self.token = result["access_token"]
             self.token_expiration = result["expires_in"]
@@ -372,7 +373,7 @@ class APIHarness:
         DATA = { 'token': '{}'.format(self.token) }
         revoked = False
         try:
-            requests.request("POST", FULL_URL, data=DATA, headers=HEADERS, verify=False)
+            requests.request("POST", FULL_URL, data=DATA, headers=HEADERS, verify=self.ssl_verify)
             self.authenticated = False
             self.token = False
             revoked = True
@@ -409,7 +410,7 @@ class APIHarness:
             FILES = files
             if self.authenticated:
                 try:
-                    response = requests.request(CMD[0][1].upper(), FULL_URL, json=BODY, data=DATA, params=PARAMS, headers=HEADERS, files=FILES, verify=False)
+                    response = requests.request(CMD[0][1].upper(), FULL_URL, json=BODY, data=DATA, params=PARAMS, headers=HEADERS, files=FILES, verify=self.ssl_verify)
                     if response.headers.get('content-type') == "application/json":
                         returned = self.Result()(status_code=response.status_code, headers=response.headers, body=response.json())
                     else:

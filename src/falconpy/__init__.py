@@ -4,7 +4,7 @@ falconpy
 The CrowdStrike Falcon API SDK
 """
 
-__version__ = '0.2.2'
+__version__ = '0.2.3'
 __maintainer__ = 'Joshua Hiller'
 __author__ = 'CrowdStrike'
 __credits__ = 'CrowdStrike'

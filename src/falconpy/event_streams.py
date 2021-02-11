@@ -40,12 +40,13 @@ class Event_Streams:
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
 
-    def __init__(self, access_token, base_url="https://api.crowdstrike.com"):
+    def __init__(self, access_token, base_url="https://api.crowdstrike.com", ssl_verify=True):
         """ Instantiates the base class, ingests the authorization token, 
             and initializes the headers and base_url global variables. 
         """
         self.headers = { 'Authorization': 'Bearer {}'.format(access_token) }
         self.base_url = base_url
+        self.ssl_verify = ssl_verify
 
     class Result:
         """ Subclass to handle parsing of result client output. """
@@ -68,7 +69,7 @@ class Event_Streams:
         HEADERS = self.headers
         PARAMS = parameters
         try:
-            response = requests.request("POST", FULL_URL, json={}, params=PARAMS, headers=HEADERS, verify=False)
+            response = requests.request("POST", FULL_URL, json={}, params=PARAMS, headers=HEADERS, verify=self.ssl_verify)
             returned = self.Result()(response.status_code, response.headers, response.json())
             
         except Exception as e:
@@ -83,7 +84,7 @@ class Event_Streams:
         HEADERS = self.headers
         PARAMS = parameters
         try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
+            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=self.ssl_verify)
             returned = self.Result()(response.status_code, response.headers, response.json())
             
         except Exception as e:
