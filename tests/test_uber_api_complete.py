@@ -11,6 +11,9 @@ import hashlib
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from our sibling folder
 from falconpy import api_complete as FalconSDK
+import urllib3
+from urllib3.exceptions import InsecureRequestWarning
+urllib3.disable_warnings(InsecureRequestWarning)
 
 AllowedResponses = [200, 400, 415, 429, 500] 
 
@@ -156,6 +159,17 @@ class TestUber:
         else:
             return False 
         
+    def uberCCAWS_DisableSSLVerify(self):
+        falcon = FalconSDK.APIHarness(
+            creds={
+                "client_id": config["falcon_client_id"],
+                "client_secret": config["falcon_client_secret"]
+            }, ssl_verify=False
+        )
+        if falcon.command("QueryAWSAccounts", parameters={"limit":1})["status_code"] in AllowedResponses:
+            return True
+        else:
+            return False 
 
     def test_GetAWSSettings(self):
         assert self.uberCCAWS_GetAWSSettings() == True
@@ -202,3 +216,7 @@ class TestUber:
 
     def test_BadAuthentication(self):
         assert self.uberCCAWS_BadAuthentication() == True
+
+    @pytest.mark.filterwarnings("ignore:Unverified HTTPS request is being made.*")
+    def test_DisableSSLVerify(self):
+        assert self.uberCCAWS_DisableSSLVerify() == True

@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ['3.5', '3.6', '3.7', '3.8', '3.9']
+        python-version: ['3.6', '3.7', '3.8', '3.9']
 
     steps:
     - uses: actions/checkout@v2
@@ -39,5 +39,5 @@ jobs:
         DEBUG_API_ID: ${{ secrets.DEBUG_API_ID }}
         DEBUG_API_SECRET: ${{ secrets.DEBUG_API_SECRET }}
       run: |
-        coverage run --source src -m pytest -s -W ignore::Warning
+        coverage run --source src -m pytest -s
         coverage report

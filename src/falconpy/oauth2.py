@@ -47,10 +47,11 @@ class OAuth2:
         }
     """
 
-    def __init__(self, creds, base_url="https://api.crowdstrike.com"):
+    def __init__(self, creds, base_url="https://api.crowdstrike.com", ssl_verify=True):
         """ Initializes the base class, ingesting credentials and the base URL. """
         self.creds = creds
         self.base_url = base_url
+        self.ssl_verify = ssl_verify
 
     class Result:
         """ Subclass to handle parsing of result client output. """
@@ -76,7 +77,7 @@ class OAuth2:
         if "member_cid" in self.creds:
             DATA["member_cid"] = self.creds["member_cid"]
         try:
-            response = requests.request("POST", FULL_URL, data=DATA, headers=HEADERS, verify=False)
+            response = requests.request("POST", FULL_URL, data=DATA, headers=HEADERS, verify=self.ssl_verify)
             returned = self.Result()(response.status_code,response.json())
         except Exception as e:
             returned = self.Result()(500, str(e))
@@ -89,7 +90,7 @@ class OAuth2:
         HEADERS = { 'Authorization': 'basic {}'.format(token) }
         DATA = { 'token': '{}'.format(token) }
         try:
-            response = requests.request("POST", FULL_URL, data=DATA, headers=HEADERS, verify=False)
+            response = requests.request("POST", FULL_URL, data=DATA, headers=HEADERS, verify=self.ssl_verify)
             returned = self.Result()(response.status_code, response.json())
         except Exception as e:
             returned = self.Result()(500, str(e))
