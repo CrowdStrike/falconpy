@@ -11,9 +11,6 @@ import hashlib
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from our sibling folder
 from falconpy import api_complete as FalconSDK
-import urllib3
-from urllib3.exceptions import InsecureRequestWarning
-urllib3.disable_warnings(InsecureRequestWarning)
 
 AllowedResponses = [200, 400, 415, 429, 500]
 
