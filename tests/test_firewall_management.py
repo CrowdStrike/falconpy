@@ -30,44 +30,64 @@ class TestFirewallManagement:
         errorChecks = True
         if falcon.aggregate_events(body={})["status_code"] != 500:
             errorChecks = False
+            print("1")
         if falcon.aggregate_policy_rules(body={})["status_code"] != 500:
             errorChecks = False
+            print("2")
         if falcon.aggregate_rule_groups(body={})["status_code"] != 500:
             errorChecks = False
+            print("3")
         if falcon.aggregate_rules(body={})["status_code"] != 500:
             errorChecks = False
+            print("4")
         if falcon.get_events(ids="12345678")["status_code"] != 500:
             errorChecks = False
+            print("5")
         if falcon.get_firewall_fields(ids="12345678")["status_code"] != 500:
             errorChecks = False
+            print("6")
         if falcon.get_platforms(ids="12345678")["status_code"] != 500:
             errorChecks = False
+            print("7")
         if falcon.get_policy_containers(ids="12345678")["status_code"] != 500:
             errorChecks = False
+            print("8")
         if falcon.update_policy_container(body={}, cs_username="BillTheCat")["status_code"] != 500:
             errorChecks = False
+            print("9")
         if falcon.get_rule_groups(ids="12345678")["status_code"] != 500:
             errorChecks = False
+            print("10")
         if falcon.create_rule_group(body={}, cs_username="HarryHenderson")["status_code"] != 500:
             errorChecks = False
+            print("11")
         if falcon.delete_rule_groups(ids="12345678", cs_username="KyloRen")["status_code"] != 500:
             errorChecks = False
+            print("12")
         if falcon.update_rule_group(body={}, cs_username="Calcifer")["status_code"] != 500:
             errorChecks = False
+            print("13")
         if falcon.get_rules(ids="12345678")["status_code"] != 500:
             errorChecks = False
+            print("14")
         if falcon.query_events()["status_code"] != 500:
             errorChecks = False
+            print("15")
         if falcon.query_firewall_fields()["status_code"] != 500:
             errorChecks = False
+            print("16")
         if falcon.query_platforms()["status_code"] != 500:
             errorChecks = False
+            print("17")
         if falcon.query_policy_rules()["status_code"] != 500:
             errorChecks = False
+            print("18")
         if falcon.query_rule_groups()["status_code"] != 500:
             errorChecks = False
+            print("19")
         if falcon.query_rules()["status_code"] != 500:
             errorChecks = False
+            print("20")
             
         return errorChecks
 

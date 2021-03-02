@@ -15,17 +15,18 @@
 import json
 import os
 import sys
-#Import our sibling src folder into the path
+# Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from our sibling folder
 from falconpy import api_complete as FalconSDK
 from falconpy import oauth2 as FalconAuth
 
+
 # The TestAuthorization class tests authentication and deauthentication
 # for both the Uber and Service classes.
 class TestAuthorization():
     def getConfig(self):
-        #Grab our config parameters
+        # Grab our config parameters
         if "DEBUG_API_ID" in os.environ and "DEBUG_API_SECRET" in os.environ:
             self.config = {}
             self.config["falcon_client_id"] = os.getenv("DEBUG_API_ID")
@@ -41,7 +42,7 @@ class TestAuthorization():
                 return False
 
     def uberAuth(self):
-        status = self.getConfig()       
+        status = self.getConfig()
         if status:
             self.falcon = FalconSDK.APIHarness(creds={
                     "client_id": self.config["falcon_client_id"],
@@ -69,10 +70,9 @@ class TestAuthorization():
 
             try:
                 self.token = self.authorization.token()['body']['access_token']
-                
             except:
                 self.token = False
-            
+
             if self.token:
                 return True
             else:
@@ -80,8 +80,26 @@ class TestAuthorization():
         else:
             return False
 
+    def serviceMSSPAuth(self):
+        status = self.getConfig()
+        result = False
+        if status:
+            authorization = FalconAuth.OAuth2(creds={
+                    'client_id': self.config["falcon_client_id"],
+                    'client_secret': self.config["falcon_client_secret"],
+                    'member_cid': '1234567890ABCDEFG'
+                })
+            try:
+                req = authorization.token()
+                if req["status_code"] in [201, 403]:  # Prolly an invalid MSSP cred, 403 is correct
+                    result = True
+            except:
+                pass
+
+        return result
+
     def failServiceAuth(self):
-        
+
         self.authorization = FalconAuth.OAuth2(creds={
             'client_id': "BadClientID",
             'client_secret': "BadClientSecret"
@@ -91,7 +109,7 @@ class TestAuthorization():
             self.token = self.authorization.token()['body']['access_token']
         except:
             self.token = False
-        
+
         self.authorization.revoke(self.token)
 
         if self.token:
@@ -121,6 +139,9 @@ class TestAuthorization():
     def test_serviceAuth(self):
         assert self.serviceAuth() == True
         self.serviceRevoke()
+
+    def test_serviceMSSPAuth(self):
+        assert self.serviceMSSPAuth() == True
 
     def test_serviceRevoke(self):
         self.serviceAuth()
