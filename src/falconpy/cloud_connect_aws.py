@@ -1,191 +1,197 @@
-################################################################################################################
-# CROWDSTRIKE FALCON                                                                                           #
-# OAuth2 API - Customer SDK                                                                                    #
-#                                                                                                              #
-# cloud_connect_aws - Falcon X Discover API Interface Class                                                    #
-################################################################################################################
-# This is free and unencumbered software released into the public domain.
+"""
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |   CROWDSTRIKE FALCON    |::.. . |    FalconPy
+`-------'                         `-------'
 
-# Anyone is free to copy, modify, publish, use, compile, sell, or
-# distribute this software, either in source code form or as a compiled
-# binary, for any purpose, commercial or non-commercial, and by any
-# means.
+OAuth2 API - Customer SDK
 
-# In jurisdictions that recognize copyright laws, the author or authors
-# of this software dedicate any and all copyright interest in the
-# software to the public domain. We make this dedication for the benefit
-# of the public at large and to the detriment of our heirs and
-# successors. We intend this dedication to be an overt act of
-# relinquishment in perpetuity of all present and future rights to this
-# software under copyright law.
+cloud_connect_aws - Falcon Discover for AWS API Interface Class
 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-# OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-# ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
+This is free and unencumbered software released into the public domain.
 
-# For more information, please refer to <https://unlicense.org>
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
 
-import requests
-import json
-import urllib3
-from urllib3.exceptions import InsecureRequestWarning
-urllib3.disable_warnings(InsecureRequestWarning)
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
 
-class Cloud_Connect_AWS:
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <https://unlicense.org>
+"""
+from ._util import service_request, parse_id_list
+from ._service_class import ServiceClass
+
+
+class Cloud_Connect_AWS(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-
-    def __init__(self, access_token, base_url="https://api.crowdstrike.com", ssl_verify=True):
-        """ Instantiates the base class, ingests the authorization token, 
-            and initializes the headers and base_url global variables. 
+    def QueryAWSAccounts(self: object, parameters: dict = {}) -> dict:
+        """ Search for provisioned AWS Accounts by providing an FQL filter and paging details.
+            Returns a set of AWS accounts which match the filter criteria.
         """
-        self.headers = {'Authorization': 'Bearer {}'.format(access_token)}
-        self.base_url = base_url
-        self.ssl_verify = ssl_verify
-
-    class Result:
-        """ Subclass to handle parsing of result client output. """
-        def __init__(self):
-            """ Instantiates the subclass and initializes the result object. """
-            self.result_obj = {}
-            
-        def __call__(self, status_code, headers, body):
-            """ Formats values into a properly formatted result object. """
-            self.result_obj['status_code'] = status_code
-            self.result_obj['headers'] = dict(headers)
-            self.result_obj['body'] = body
-            
-            return self.result_obj
-
-    def QueryAWSAccounts(self, parameters={}):
-        """ Search for provisioned AWS Accounts by providing an FQL filter and paging details. 
-            Returns a set of AWS accounts which match the filter criteria. 
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccounts 
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccounts
         FULL_URL = self.base_url+'/cloud-connect-aws/combined/accounts/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=self.ssl_verify)
-            returned = self.Result()(response.status_code, response.headers, response.json())
-        except Exception as e:
-            returned = self.Result()(500, {}, str(e))
-        
+        VALIDATOR = {
+            "limit": int,
+            "offset": int,
+            "sort": str,
+            "filter": str
+        }
+        returned = service_request(caller=self,
+                                   method="GET",
+                                   endpoint=FULL_URL,
+                                   headers=HEADERS,
+                                   params=PARAMS,
+                                   verify=self.ssl_verify,
+                                   params_validator=VALIDATOR
+                                   )
         return returned
 
-    def GetAWSSettings(self):
+    def GetAWSSettings(self: object) -> dict:
         """ Retrieve a set of Global Settings which are applicable to all provisioned AWS accounts. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/GetAWSSettings
         FULL_URL = self.base_url+'/cloud-connect-aws/combined/settings/v1'
         HEADERS = self.headers
-        try:
-            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=self.ssl_verify)
-            returned = self.Result()(response.status_code, response.headers, response.json())
-        except Exception as e:
-            returned = self.Result()(500, {}, str(e))
-            
+        returned = service_request(caller=self, method="GET", endpoint=FULL_URL, headers=HEADERS, verify=self.ssl_verify)
+
         return returned
 
-    def GetAWSAccounts(self, ids):
+    def GetAWSAccounts(self: object, ids) -> dict:
         """ Retrieve a set of AWS Accounts by specifying their IDs."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/GetAWSAccounts
-        ID_LIST = str(ids).replace(",","&ids=")
+        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
         FULL_URL = self.base_url+'/cloud-connect-aws/entities/accounts/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        try:
-            response = requests.request("GET", FULL_URL, headers=HEADERS, verify=self.ssl_verify)
-            returned = self.Result()(response.status_code, response.headers, response.json())
-        except Exception as e:
-            returned = self.Result()(500, {}, str(e))
+        returned = service_request(caller=self, method="GET", endpoint=FULL_URL, headers=HEADERS, verify=self.ssl_verify)
 
         return returned
-        
-    def ProvisionAWSAccounts(self, body, parameters={}):
+
+    def ProvisionAWSAccounts(self: object, body: dict, parameters: dict = {}) -> dict:
         """ Provision AWS Accounts by specifying details about the accounts to provision. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/ProvisionAWSAccounts
         FULL_URL = self.base_url+'/cloud-connect-aws/entities/accounts/v1'
-        PARAMS=parameters
-        BODY=body
-        try:
-            response = requests.request("POST", FULL_URL, params=PARAMS, json=BODY, headers=self.headers, verify=self.ssl_verify)
-            returned = self.Result()(response.status_code, response.headers, response.json())
-        except Exception as e:
-            returned = self.Result()(500, {}, str(e))
-
+        PARAMS = parameters
+        BODY = body
+        HEADERS = self.headers
+        VALIDATOR = {"resources": list}
+        REQUIRED = ["resources"]
+        returned = service_request(caller=self,
+                                   method="POST",
+                                   endpoint=FULL_URL,
+                                   headers=HEADERS,
+                                   params=PARAMS,
+                                   body=BODY,
+                                   body_validator=VALIDATOR,
+                                   body_required=REQUIRED,
+                                   verify=self.ssl_verify
+                                   )
         return returned
-        
-    def DeleteAWSAccounts(self, ids):
+
+    def DeleteAWSAccounts(self: object, ids) -> dict:
         """ Delete a set of AWS Accounts by specifying their IDs. """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/DeleteAWSAccounts
-        ID_LIST = str(ids).replace(",","&ids=")
+        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
         FULL_URL = self.base_url+'/cloud-connect-aws/entities/accounts/v1?ids={}'.format(ID_LIST)
-        try:
-            response = requests.request("DELETE", FULL_URL, headers=self.headers, verify=self.ssl_verify)
-            returned = self.Result()(response.status_code, response.headers, response.json())
-        except Exception as e:
-            returned = self.Result()(500, {}, str(e))
-        
+        HEADERS = self.headers
+        returned = service_request(caller=self, method="DELETE", endpoint=FULL_URL, headers=HEADERS, verify=self.ssl_verify)
+
         return returned
 
-    def UpdateAWSAccounts(self, body):
+    def UpdateAWSAccounts(self: object, body: dict) -> dict:
         """ Update AWS Accounts by specifying the ID of the account and details to update. """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/UpdateAWSAccounts
         FULL_URL = self.base_url+'/cloud-connect-aws/entities/accounts/v1'
-        BODY=body
-        try:
-            response = requests.request("PATCH", FULL_URL, json=BODY, headers=self.headers, verify=self.ssl_verify)
-            returned = self.Result()(response.status_code, response.headers, response.json())
-        except Exception as e:
-            returned = self.Result()(500, {}, str(e))
-        
+        BODY = body
+        HEADERS = self.headers
+        VALIDATOR = {"resources": list}
+        REQUIRED = ["resources"]
+        returned = service_request(caller=self,
+                                   method="PATCH",
+                                   endpoint=FULL_URL,
+                                   body=BODY,
+                                   headers=HEADERS,
+                                   body_validator=VALIDATOR,
+                                   body_required=REQUIRED,
+                                   verify=self.ssl_verify
+                                   )
         return returned
 
-    def CreateOrUpdateAWSSettings(self, body):
+    def CreateOrUpdateAWSSettings(self: object, body: dict) -> dict:
         """ Create or update Global Settings which are applicable to all provisioned AWS accounts. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/CreateOrUpdateAWSSettings
         FULL_URL = self.base_url+'/cloud-connect-aws/entities/settings/v1'
         HEADERS = self.headers
         BODY = body
-        try:
-            response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=self.ssl_verify)
-            returned = self.Result()(response.status_code, response.headers, response.json())
-        except Exception as e:
-            returned = self.Result()(500, {}, str(e))
-            
+        VALIDATOR = {"resources": list}
+        REQUIRED = ["resources"]
+        returned = service_request(caller=self,
+                                   method="POST",
+                                   endpoint=FULL_URL,
+                                   body=BODY,
+                                   headers=HEADERS,
+                                   body_validator=VALIDATOR,
+                                   body_required=REQUIRED,
+                                   verify=self.ssl_verify
+                                   )
         return returned
 
-    def VerifyAWSAccountAccess(self, ids, body={}):
+    def VerifyAWSAccountAccess(self: object, ids, body: dict = {}) -> dict:
         """ Performs an Access Verification check on the specified AWS Account IDs. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/VerifyAWSAccountAccess
-        ID_LIST = str(ids).replace(",","&ids=")
+        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
         FULL_URL = self.base_url+'/cloud-connect-aws/entities/verify-account-access/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        BODY=body
-        try:
-            response = requests.request("POST", FULL_URL, json=BODY, headers=HEADERS, verify=self.ssl_verify)
-            returned = self.Result()(response.status_code, response.headers, response.json())
-        except Exception as e:
-            returned = self.Result()(500, {}, str(e))
-        
+        BODY = body
+        returned = service_request(caller=self,
+                                   method="POST",
+                                   endpoint=FULL_URL,
+                                   body=BODY,
+                                   headers=HEADERS,
+                                   verify=self.ssl_verify
+                                   )
         return returned
 
-    def QueryAWSAccountsForIDs(self, parameters={}):
-        """ Search for provisioned AWS Accounts by providing an FQL filter and paging details. 
-            Returns a set of AWS account IDs which match the filter criteria. 
+    def QueryAWSAccountsForIDs(self: object, parameters: dict = {}) -> dict:
+        """ Search for provisioned AWS Accounts by providing an FQL filter and paging details.
+            Returns a set of AWS account IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccountsForIDs
         FULL_URL = self.base_url+'/cloud-connect-aws/queries/accounts/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=self.ssl_verify)
-            returned = self.Result()(response.status_code, response.headers, response.json())
-        except Exception as e:
-            returned = self.Result()(500, {}, str(e))
-            
+        VALIDATOR = {
+            "limit": int,
+            "offset": int,
+            "sort": str,
+            "filter": str
+        }
+        returned = service_request(caller=self,
+                                   method="GET",
+                                   endpoint=FULL_URL,
+                                   params=PARAMS,
+                                   headers=HEADERS,
+                                   params_validator=VALIDATOR,
+                                   verify=self.ssl_verify
+                                   )
         return returned
