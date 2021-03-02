@@ -11,9 +11,6 @@ import hashlib
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from our sibling folder
 from falconpy import api_complete as FalconSDK
-import urllib3
-from urllib3.exceptions import InsecureRequestWarning
-urllib3.disable_warnings(InsecureRequestWarning)
 
 AllowedResponses = [200, 400, 415, 429, 500]
 
@@ -239,8 +236,8 @@ class TestUber:
     def test_TestMSSP(self):
         assert self.uberCCAWS_TestMSSP() == True
 
-    def test_logout(self):
-        assert falcon.deauthenticate() == True
+    # def test_logout(self):
+    #     assert falcon.deauthenticate() == True
 
     def test_GenerateTokenError(self):
         assert self.uberCCAWS_GenerateTokenError() == True
