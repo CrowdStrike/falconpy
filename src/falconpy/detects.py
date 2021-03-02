@@ -1,124 +1,125 @@
-################################################################################################################
-# CROWDSTRIKE FALCON                                                                                           #
-# OAuth2 API - Customer SDK                                                                                    #
-#                                                                                                              #
-# detects - Falcon X Detections API Interface Class                                                            #
-################################################################################################################
-# This is free and unencumbered software released into the public domain.
+"""
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |   CROWDSTRIKE FALCON    |::.. . |    FalconPy
+`-------'                         `-------'
 
-# Anyone is free to copy, modify, publish, use, compile, sell, or
-# distribute this software, either in source code form or as a compiled
-# binary, for any purpose, commercial or non-commercial, and by any
-# means.
+OAuth2 API - Customer SDK
 
-# In jurisdictions that recognize copyright laws, the author or authors
-# of this software dedicate any and all copyright interest in the
-# software to the public domain. We make this dedication for the benefit
-# of the public at large and to the detriment of our heirs and
-# successors. We intend this dedication to be an overt act of
-# relinquishment in perpetuity of all present and future rights to this
-# software under copyright law.
+detects - CrowdStrike Falcon Detections API interface class
 
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-# MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-# IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
-# OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
-# ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-# OTHER DEALINGS IN THE SOFTWARE.
+This is free and unencumbered software released into the public domain.
 
-# For more information, please refer to <https://unlicense.org>
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
 
-import requests
-import json
-import urllib3
-from urllib3.exceptions import InsecureRequestWarning
-urllib3.disable_warnings(InsecureRequestWarning)
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
 
-class Detects:
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <https://unlicense.org>
+"""
+from ._util import service_request
+from ._service_class import ServiceClass
+
+
+class Detects(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-
-    def __init__(self, access_token, base_url='https://api.crowdstrike.com'):
-        """ Instantiates the base class, ingests the authorization token, 
-            and initializes the headers and base_url global variables. 
-        """
-        self.headers = { 'Authorization': 'Bearer {}'.format(access_token) }
-        self.base_url = base_url
-
-    class Result:
-        """ Subclass to handle parsing of result client output. """
-        def __init__(self):
-            """ Instantiates the subclass and initializes the result object. """
-            self.result_obj = {}
-            
-        def __call__(self, status_code, headers, body):
-            """ Formats values into a properly formatted result object. """
-            self.result_obj['status_code'] = status_code
-            self.result_obj['headers'] = dict(headers)
-            self.result_obj['body'] = body
-            
-            return self.result_obj
-            
-    def GetAggregateDetects(self, body, parameters):
+    def GetAggregateDetects(self: object, body: dict) -> dict:
         """ Get detect aggregates as specified via json in request body. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetAggregateDetects
         FULL_URL = self.base_url+'/detects/aggregates/detects/GET/v1'
         HEADERS = self.headers
-        PARAMS = parameters
         BODY = body
-        result = self.Result()
-        try:
-            response = requests.request("POST", FULL_URL, json=BODY, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
-        except Exception as e:
-            returned = result(500, {}, str(e))
-
+        VALIDATOR = {"resources": list}  # TODO: Confirm body payload format
+        REQUIRED = ["resources"]
+        returned = service_request(caller=self,
+                                   method="POST",
+                                   endpoint=FULL_URL,
+                                   headers=HEADERS,
+                                   body=BODY,
+                                   body_validator=VALIDATOR,
+                                   body_required=REQUIRED,
+                                   verify=self.ssl_verify
+                                   )
         return returned
 
-    def UpdateDetectsByIdsV2(self, body):
-        """ Modify the state, assignee, and visibility of detections. """ 
+    def UpdateDetectsByIdsV2(self: object, body: dict) -> dict:
+        """ Modify the state, assignee, and visibility of detections. """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/UpdateDetectsByIdsV2
         FULL_URL = self.base_url+'/detects/entities/detects/v2'
         HEADERS = self.headers
         BODY = body
-        result = self.Result()
-        try:
-            response = requests.request("PATCH", FULL_URL, json=BODY, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
-        except Exception as e:
-            returned = result(500, {}, str(e))
-
+        VALIDATOR = {"resources": list}  # TODO: Confirm body payload format, think it might be ids
+        REQUIRED = ["resources"]
+        returned = service_request(caller=self,
+                                   method="PATCH",
+                                   endpoint=FULL_URL,
+                                   headers=HEADERS,
+                                   body=BODY,
+                                   body_validator=VALIDATOR,
+                                   body_required=REQUIRED,
+                                   verify=self.ssl_verify
+                                   )
         return returned
-        
-    def GetDetectSummaries(self, body, parameters):
+
+    def GetDetectSummaries(self: object, body: dict) -> dict:
         """ View information about detections. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetDetectSummaries
         FULL_URL = self.base_url+'/detects/entities/summaries/GET/v1'
         HEADERS = self.headers
-        PARAMS = parameters
         BODY = body
-        result = self.Result()
-        try:
-            response = requests.request("POST", FULL_URL, json=BODY, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
-        except Exception as e:
-            returned = result(500, {}, str(e))
-
+        VALIDATOR = {"ids": list}   # TODO: Confirm list datatype for ingested IDs via the body payload
+        REQUIRED = ["ids"]
+        returned = service_request(caller=self,
+                                   method="POST",
+                                   endpoint=FULL_URL,
+                                   headers=HEADERS,
+                                   body=BODY,
+                                   body_validator=VALIDATOR,
+                                   body_required=REQUIRED,
+                                   verify=self.ssl_verify
+                                   )
         return returned
 
-    def QueryDetects(self, parameters):
+    def QueryDetects(self: object, parameters: dict = {}) -> dict:
         """ Search for detection IDs that match a given query. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/QueryDetects
         FULL_URL = self.base_url+'/detects/queries/detects/v1'
         HEADERS = self.headers
         PARAMS = parameters
-        result = self.Result()
-        try:
-            response = requests.request("GET", FULL_URL, params=PARAMS, headers=HEADERS, verify=False)
-            returned = result(response.status_code, response.headers, response.json())
-        except Exception as e:
-            returned = result(500, {}, str(e))
-
+        VALIDATOR = {
+            "limit": int,
+            "offset": int,
+            "sort": str,
+            "filter": str,
+            "q": str
+        }
+        returned = service_request(caller=self,
+                                   method="GET",
+                                   endpoint=FULL_URL,
+                                   params=PARAMS,
+                                   headers=HEADERS,
+                                   params_validator=VALIDATOR,
+                                   verify=self.ssl_verify
+                                   )
         return returned
