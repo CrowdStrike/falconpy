@@ -1,6 +1,5 @@
-![PyPI - Status](https://img.shields.io/pypi/status/crowdstrike-falconpy)<br/>
-![PyPI](https://img.shields.io/pypi/v/crowdstrike-falconpy) ![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy)<br/>
-![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy) ![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy)<br/>
+![PyPI - Status](https://img.shields.io/pypi/status/crowdstrike-falconpy) ![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy) ![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy)<br/>
+![PyPI](https://img.shields.io/pypi/v/crowdstrike-falconpy) ![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy) ![CI Tests](https://github.com/CrowdStrike/falconpy/workflows/Python%20package/badge.svg) ![CI Test Coverage](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/tests/coverage.svg)<br/>
 ![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)<br/>
 
 # FalconPy
@@ -34,7 +33,7 @@ $ python -m pip uninstall crowdstrike-falconpy
 | CrowdStrike Sensor Policy Management API | [./src/falconpy/sensor_update_policy.py](./src/falconpy/sensor_update_policy.py) |
 | [CrowdStrike Custom Indicators of Compromose (IOCs) APIs](https://falcon.crowdstrike.com/support/documentation/88/custom-ioc-apis) | [./src/falconpy/iocs.py](./src/falconpy/iocs.py) |
 | [CrowdStrike Detections APIs](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [./src/falconpy/detects.py](./src/falconpy/detects.py) |
-| [CrowdStrike Event Streams API](https://falcon.crowdstrike.com/support/documentation/89/event-streams-apis)| [./serices/event_streams.py](./src/falconpy/event_streams.py) |
+| [CrowdStrike Event Streams API](https://falcon.crowdstrike.com/support/documentation/89/event-streams-apis)| [./src/falconpy/event_streams.py](./src/falconpy/event_streams.py) |
 | [CrowdStrike Falcon Horizon APIs](https://falcon.crowdstrike.com/support/documentation/137/falcon-horizon-apis) | *Coming Soon* |
 | [CrowdStrike Falon X APIs](https://falcon.crowdstrike.com/support/documentation/92/falcon-x-apis) | *Coming Soon* |
 | [CrowdStrike Firewall Management API](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [./src/falconpy/firewall_management.py](./src/falconpy/firewall_management.py) |
