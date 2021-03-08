@@ -188,3 +188,7 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
         returned = Result()(405, {}, {"errors": [{"message": "Invalid API service method."}], "resources": ""})
 
     return returned
+
+
+def generate_error_result(message: str = "An error has occurred. Check your payloads and try again.", code: int = 500) -> dict:
+    return Result()(status_code=code, headers={}, body={"errors": [{"message": f"{message}"}], "resources": ""})

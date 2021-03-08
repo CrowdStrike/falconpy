@@ -58,20 +58,21 @@ class TestFalconSensorUpdate:
         falcon.base_url = "nowhere"
         errorChecks = True
         commandList = [
-            ["querySensorUpdatePolicies",""],
-            ["querySensorUpdatePolicyMembers",""],
-            ["getSensorUpdatePolicies","ids='12345678'"],
-            ["getSensorUpdatePoliciesV2","ids='12345678'"],
-            ["queryCombinedSensorUpdatePolicies",""],
+            ["querySensorUpdatePolicies", ""],
+            ["querySensorUpdatePolicyMembers", ""],
+            ["getSensorUpdatePolicies", "ids='12345678'"],
+            ["getSensorUpdatePoliciesV2", "ids='12345678'"],
+            ["queryCombinedSensorUpdatePolicies", ""],
             ["queryCombinedSensorUpdatePolicyMembers", ""],
-            ["revealUninstallToken","body={}"],
+            ["revealUninstallToken", "body={}"],
             ["queryCombinedSensorUpdateBuilds", ""],
             ["createSensorUpdatePolicies", "body={}"],
             ["createSensorUpdatePoliciesV2", "body={}"],
             ["deleteSensorUpdatePolicies", "ids='12345678'"],
             ["updateSensorUpdatePolicies", "body={}"],
             ["updateSensorUpdatePoliciesV2", "body={}"],
-            ["performSensorUpdatePoliciesAction", "body={},parameters={}"],
+            ["performSensorUpdatePoliciesAction", "body={}, action_name='enable', parameters={}"],
+            ["performSensorUpdatePoliciesAction", "body={}, action_name='ThisWillFail', parameters={}"],
             ["setSensorUpdatePoliciesPrecedence", "body={}"],
             ["queryCombinedSensorUpdatePoliciesV2",""]
         ]

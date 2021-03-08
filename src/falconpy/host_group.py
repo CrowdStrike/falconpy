@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import parse_id_list, service_request
+from ._util import parse_id_list, service_request, generate_error_result
 from ._service_class import ServiceClass
 
 
@@ -78,21 +78,26 @@ class Host_Group(ServiceClass):
                                    )
         return returned
 
-    def performGroupAction(self: object, parameters: dict, body: dict) -> dict:
+    def performGroupAction(self: object, parameters: dict, body: dict, action_name: str) -> dict:
         """ Perform the specified action on the Host Groups specified in the request. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/performGroupAction
-        FULL_URL = self.base_url+'/devices/entities/host-group-actions/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        BODY = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
+        ALLOWED_ACTIONS = ['add-hosts', 'remove-hosts']
+        if action_name.lower() in ALLOWED_ACTIONS:
+            FULL_URL = self.base_url+'/devices/entities/host-group-actions/v1'
+            HEADERS = self.headers
+            PARAMS = parameters
+            BODY = body
+            returned = service_request(caller=self,
+                                       method="POST",
+                                       endpoint=FULL_URL,
+                                       params=PARAMS,
+                                       body=BODY,
+                                       headers=HEADERS,
+                                       verify=self.ssl_verify
+                                       )
+        else:
+            returned = generate_error_result("Invalid value specified for action_name parameter.")
+
         return returned
 
     def getHostGroups(self: object, ids) -> dict:
