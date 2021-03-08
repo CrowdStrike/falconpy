@@ -115,7 +115,7 @@ class CSPM_Registration(ServiceClass):
 
         return returned
 
-    def GetCSPMAwsAccountScriptsAttachment(self: object) -> dict:
+    def GetCSPMAwsAccountScriptsAttachment(self: object) -> bytes:
         """Return a script for customers to run in their cloud environment
            to grant access to CrowdStrike for their AWS environment.
         """
@@ -199,7 +199,7 @@ class CSPM_Registration(ServiceClass):
                                    )
         return returned
 
-    def GetCSPMAzureUserScriptsAttachment(self: object, parameters: dict = {}) -> dict:
+    def GetCSPMAzureUserScriptsAttachment(self: object, parameters: dict = {}) -> bytes:
         """Return a script for customers to run in their cloud environment
            to grant access to CrowdStrike for their Azure environment.
         """
