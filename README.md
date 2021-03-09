@@ -12,17 +12,17 @@ This SDK provides two distinct methods for interacting with CrowdStrike's Falcon
 ## Quick Install / Uninstall
 Stable releases of FalconPy are available on PyPI:
 ```shell
-$ python -m pip install crowdstrike-falconpy
+$ python3 -m pip install crowdstrike-falconpy
 ```
 
 If you'd like to try the *absolute bleeding edge*, an automated GitHub action releases a test package with every merged pull request. To install the testing version:
 ```shell
-$ python -m pip install -i https://test.pypi.org/simple crowdstrike-falconpy
+$ python3 -m pip install -i https://test.pypi.org/simple crowdstrike-falconpy
 ```
 
 To uninstall/remove FalconPy:
 ```shell
-$ python -m pip uninstall crowdstrike-falconpy
+$ python3 -m pip uninstall crowdstrike-falconpy
 ```
 
 # Service classes
