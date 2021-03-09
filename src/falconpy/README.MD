@@ -3,6 +3,7 @@ These classes are part of the falconpy project, a python interface handler to th
 
 ### Currently implemented:
 + `cloud_connect_aws.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws
++ `cspm-registration.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration
 + `detects.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects
 + `device_control_policies.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/device-control-policies
 + `event_streams.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams
@@ -24,7 +25,6 @@ These classes are part of the falconpy project, a python interface handler to th
 
 ### Planned
 + `d4c-registration.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration
-+ `cspm-registration.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration
 + `installation-tokens.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens
 + `custom-ioa.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa
 + `malquery.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery
