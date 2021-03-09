@@ -35,7 +35,7 @@ $ python -m pip uninstall crowdstrike-falconpy
 | [CrowdStrike Detections APIs](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [./src/falconpy/detects.py](./src/falconpy/detects.py) |
 | [CrowdStrike Event Streams API](https://falcon.crowdstrike.com/support/documentation/89/event-streams-apis)| [./src/falconpy/event_streams.py](./src/falconpy/event_streams.py) |
 | [CrowdStrike Falcon Horizon APIs](https://falcon.crowdstrike.com/support/documentation/137/falcon-horizon-apis) | [./src/falconpy/cspm_registration.py](./src/falconpy/cspm_registration.py) |
-| [CrowdStrike Falon X APIs](https://falcon.crowdstrike.com/support/documentation/92/falcon-x-apis) | *Coming Soon* |
+| [CrowdStrike Falcon X APIs](https://falcon.crowdstrike.com/support/documentation/92/falcon-x-apis) | *Coming Soon* |
 | [CrowdStrike Firewall Management API](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [./src/falconpy/firewall_management.py](./src/falconpy/firewall_management.py) |
 | [CrowdStrike Firewall Policy Management](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [./src/falconpy/firewall_policies.py](./src/falconpy/firewall_policies.py) |
 | [CrowdStrike Host Groups API](https://falcon.crowdstrike.com/support/documentation/84/host-and-host-group-management-apis) | [./src/falconpy/host_group.py](./src/falconpy/host_group.py) |
