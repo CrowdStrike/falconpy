@@ -69,8 +69,12 @@ class Detects(ServiceClass):
         FULL_URL = self.base_url+'/detects/entities/detects/v2'
         HEADERS = self.headers
         BODY = body
-        VALIDATOR = {"resources": list}  # TODO: Confirm body payload format, think it might be ids
-        REQUIRED = ["resources"]
+        VALIDATOR = {"assigned_to_uuid": str,
+                     "ids": list,
+                     "show_in_ui": bool,
+                     "status": str,
+                     "comment": str}
+        REQUIRED = ["ids"]
         returned = service_request(caller=self,
                                    method="PATCH",
                                    endpoint=FULL_URL,
