@@ -147,7 +147,7 @@ class FalconX_Sandbox(ServiceClass):
         FULL_URL = self.base_url+'/samples/entities/samples/v2'
         HEADERS = self.headers
         HEADERS['Content-Type'] = 'application/octet-stream'
-        BODY = body  # TODO: Why are we sending this to the data parameter?  Check this
+        BODY = body     # TODO: Confirm this is a data element and update calling code to reflect the correct reference
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="POST",
@@ -159,5 +159,79 @@ class FalconX_Sandbox(ServiceClass):
                                    )
         return returned
 
+    def GetReports(self: object, ids) -> dict:
+        """ Retrieves a full sandbox report. """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetReports
+        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
+        FULL_URL = self.base_url+'/falconx/entities/reports/v1?ids={}'.format(ID_LIST)
+        HEADERS = self.headers
+        returned = service_request(caller=self,
+                                   method="GET",
+                                   endpoint=FULL_URL,
+                                   headers=HEADERS,
+                                   verify=self.ssl_verify
+                                   )
+        return returned
 
-# TODO: Missing methods - GetReports, DeleteReport, GetSampleV2, DeleteSampleV2, QuerySampleV1
+    def DeleteReport(self: object, ids) -> dict:
+        """ Delete report based on the report ID. Operation can be checked for success
+            by polling for the report ID on the report-summaries endpoint.
+        """
+        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/DeleteReport
+        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
+        FULL_URL = self.base_url+'/falconx/entities/reports/v1?ids={}'.format(ID_LIST)
+        HEADERS = self.headers
+        returned = service_request(caller=self,
+                                   method="DELETE",
+                                   endpoint=FULL_URL,
+                                   headers=HEADERS,
+                                   verify=self.ssl_verify
+                                   )
+        return returned
+
+    def GetSampleV2(self: object, ids, password_protect: bool = False) -> dict:
+        """ Retrieves the file associated with the given ID (SHA256). """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetSampleV2
+        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
+        FULL_URL = self.base_url+'/samples/entities/samples/v2?ids={}&password_protected={}'.format(
+            ID_LIST,
+            str(password_protect)
+        )
+        HEADERS = self.headers
+        returned = service_request(caller=self,
+                                   method="GET",
+                                   endpoint=FULL_URL,
+                                   headers=HEADERS,
+                                   verify=self.ssl_verify
+                                   )
+        return returned
+
+    def DeleteSampleV2(self: object, ids) -> dict:
+        """ Removes a sample, including file, meta and submissions from the collection. """
+        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/DeleteSampleV2
+        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
+        FULL_URL = self.base_url+'/samples/entities/samples/v2?ids={}'.format(ID_LIST)
+        HEADERS = self.headers
+        returned = service_request(caller=self,
+                                   method="DELETE",
+                                   endpoint=FULL_URL,
+                                   headers=HEADERS,
+                                   verify=self.ssl_verify
+                                   )
+        return returned
+
+    def QuerySampleV1(self: object, ids) -> dict:
+        """ Retrieves a list with sha256 of samples that exist and customer has rights to access them,
+            maximum number of accepted items is 200.
+        """
+        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/DeleteSampleV2
+        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
+        FULL_URL = self.base_url+'/samples/queries/samples/GET/v1?ids={}'.format(ID_LIST)
+        HEADERS = self.headers
+        returned = service_request(caller=self,
+                                   method="POST",
+                                   endpoint=FULL_URL,
+                                   headers=HEADERS,
+                                   verify=self.ssl_verify
+                                   )
+        return returned

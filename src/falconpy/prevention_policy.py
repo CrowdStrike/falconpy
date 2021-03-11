@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import parse_id_list, service_request
+from ._util import parse_id_list, service_request, generate_error_result
 from ._service_class import ServiceClass
 
 
@@ -80,22 +80,27 @@ class Prevention_Policy(ServiceClass):
                                    )
         return returned
 
-    def performPreventionPoliciesAction(self: object, parameters: dict, body: dict) -> dict:
+    def performPreventionPoliciesAction(self: object, parameters: dict, body: dict, action_name: str) -> dict:
         """ Perform the specified action on the Prevention Policies specified in the request. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #        ...    /prevention-policies/performPreventionPoliciesAction
-        FULL_URL = self.base_url+'/policy/entities/prevention-actions/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        BODY = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
+        ALLOWED_ACTIONS = ['add-host-group', 'disable', 'enable', 'remove-host-group']
+        if action_name.lower() in ALLOWED_ACTIONS:
+            FULL_URL = self.base_url+'/policy/entities/prevention-actions/v1'
+            HEADERS = self.headers
+            PARAMS = parameters
+            BODY = body
+            returned = service_request(caller=self,
+                                       method="POST",
+                                       endpoint=FULL_URL,
+                                       params=PARAMS,
+                                       body=BODY,
+                                       headers=HEADERS,
+                                       verify=self.ssl_verify
+                                       )
+        else:
+            returned = generate_error_result("Invalid value specified for action_name parameter.")
+
         return returned
 
     def setPreventionPoliciesPrecedence(self: object, body: dict) -> dict:

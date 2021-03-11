@@ -157,6 +157,12 @@ class TestUber:
         else:
             return False
 
+    def uberCCHosts_GenerateActionNameError(self):
+        if falcon.command("PerformActionV2", parameters={}, body={}, action_name="Squish")["status_code"] in AllowedResponses:
+            return True
+        else:
+            return False
+
     def uberCCAWS_GenerateTokenError(self):
         hold_token = falcon.token
         falcon.token = "I am a bad token!"
@@ -226,6 +232,9 @@ class TestUber:
         # Also check token auto-renewal
         falcon.token_expiration = 0
         assert self.uberCCAWS_OverrideAndHeader() == True
+
+    def test_GenerateActionNameError(self):
+        assert self.uberCCHosts_GenerateActionNameError() == True
 
     def test_BadMethod(self):
         assert self.uberCCAWS_BadMethod() == True

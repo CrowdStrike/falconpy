@@ -109,7 +109,7 @@ class APIHarness:
     # NOTE: Not specifying datatypes for "ids" and "partition" parameters
     #       to allow developers to pass str / lists / integers as necessary
     def command(self: object, action: str = "", parameters: dict = {}, body: dict = {}, data: dict = {},
-                headers: dict = {}, ids=None, partition=None, override: str = None,
+                headers: dict = {}, ids=None, partition=None, override: str = None, action_name: str = None,
                 files: list = [], file_name: str = None, content_type: str = None):  # May return dict or object datatypes
         """ Checks token expiration, renewing when necessary, then performs the request. """
         if self.token_expired():
@@ -120,13 +120,18 @@ class APIHarness:
             CMD = [a for a in self.commands if a[0] == action]
         if CMD:
             FULL_URL = self.base_url+"{}".format(CMD[0][2])
+            # Consider calculating ? vs & character replacement
             if ids:
                 ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
                 FULL_URL = FULL_URL.format(ID_LIST)
+            if action_name:
+                delim = "&" if "?" in FULL_URL else "?"
+                FULL_URL = f"{FULL_URL}{delim}action_name={str(action_name)}"  # TODO: Additional action_name restrictions?
             if partition:
                 FULL_URL = FULL_URL.format(str(partition))
             if file_name:
-                FULL_URL = "{}?file_name={}".format(FULL_URL, str(file_name))
+                delim = "&" if "?" in FULL_URL else "?"
+                FULL_URL = f"{FULL_URL}{delim}file_name={str(action_name)}"
             HEADERS = self.headers()
             for item in headers:
                 HEADERS[item] = headers[item]

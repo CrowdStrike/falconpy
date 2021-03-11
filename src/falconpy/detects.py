@@ -50,15 +50,15 @@ class Detects(ServiceClass):
         FULL_URL = self.base_url+'/detects/aggregates/detects/GET/v1'
         HEADERS = self.headers
         BODY = body
-        VALIDATOR = {"resources": list}  # TODO: Confirm body payload format
-        REQUIRED = ["resources"]
+        # VALIDATOR = {"resources": list}  # TODO: Confirm body payload format
+        # REQUIRED = ["resources"]
         returned = service_request(caller=self,
                                    method="POST",
                                    endpoint=FULL_URL,
                                    headers=HEADERS,
                                    body=BODY,
-                                   body_validator=VALIDATOR,
-                                   body_required=REQUIRED,
+                                   # body_validator=VALIDATOR,
+                                   # body_required=REQUIRED,
                                    verify=self.ssl_verify
                                    )
         return returned
@@ -69,8 +69,14 @@ class Detects(ServiceClass):
         FULL_URL = self.base_url+'/detects/entities/detects/v2'
         HEADERS = self.headers
         BODY = body
-        VALIDATOR = {"resources": list}  # TODO: Confirm body payload format, think it might be ids
-        REQUIRED = ["resources"]
+        VALIDATOR = {
+            "assigned_to_uuid": str,
+            "ids": list,
+            "show_in_ui": bool,
+            "status": str,
+            "comment": str
+        }
+        REQUIRED = ["ids"]
         returned = service_request(caller=self,
                                    method="PATCH",
                                    endpoint=FULL_URL,
