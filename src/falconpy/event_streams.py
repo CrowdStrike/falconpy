@@ -44,7 +44,7 @@ class Event_Streams(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def refreshActiveStreamSession(self, parameters, partition=0):
+    def refreshActiveStreamSession(self: object, parameters: dict, partition: int = 0) -> dict:
         """ Refresh an active event stream. Use the URL shown in a GET /sensors/entities/datafeed/v2 response. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/refreshActiveStreamSession
         FULL_URL = self.base_url+'/sensors/entities/datafeed-actions/v1/{}'.format(str(partition))
@@ -60,7 +60,7 @@ class Event_Streams(ServiceClass):
                                    )
         return returned
 
-    def listAvailableStreamsOAuth2(self, parameters):
+    def listAvailableStreamsOAuth2(self: object, parameters: dict) -> dict:
         """ Discover all event streams in your environment. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/listAvailableStreamsOAuth2
         FULL_URL = self.base_url+'/sensors/entities/datafeed/v2'

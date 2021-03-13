@@ -11,6 +11,8 @@ import hashlib
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from our sibling folder
 from falconpy import api_complete as FalconSDK
+# Import perform_request from _util so we can test generating 405's directly
+from falconpy._util import perform_request
 
 AllowedResponses = [200, 400, 415, 429, 500]
 
@@ -163,6 +165,12 @@ class TestUber:
         else:
             return False
 
+    def uberCCAWS_GenerateInvalidOperationIDError(self):
+        if perform_request(method="FETCH", endpoint="/somewhere/interesting")["status_code"] == 405:
+            return True
+        else:
+            return False
+
     def uberCCAWS_GenerateTokenError(self):
         hold_token = falcon.token
         falcon.token = "I am a bad token!"
@@ -235,6 +243,9 @@ class TestUber:
 
     def test_GenerateActionNameError(self):
         assert self.uberCCHosts_GenerateActionNameError() == True
+
+    def test_GenerateInvalidOperationIDError(self):
+        assert self.uberCCAWS_GenerateInvalidOperationIDError() == True
 
     def test_BadMethod(self):
         assert self.uberCCAWS_BadMethod() == True

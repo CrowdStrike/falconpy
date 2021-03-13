@@ -37,9 +37,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import time
-from ._util import perform_request, parse_id_list, generate_b64cred
+from ._util import perform_request, parse_id_list, generate_b64cred, _ALLOWED_METHODS, generate_error_result
 from ._endpoint import api_endpoints
-from ._result import Result
 
 
 class APIHarness:
@@ -120,7 +119,6 @@ class APIHarness:
             CMD = [a for a in self.commands if a[0] == action]
         if CMD:
             FULL_URL = self.base_url+"{}".format(CMD[0][2])
-            # Consider calculating ? vs & character replacement
             if ids:
                 ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
                 FULL_URL = FULL_URL.format(ID_LIST)
@@ -142,18 +140,15 @@ class APIHarness:
             PARAMS = parameters
             FILES = files
             if self.authenticated:
-                returned = perform_request(method=CMD[0][1].upper(), endpoint=FULL_URL, body=BODY, data=DATA,
-                                           params=PARAMS, headers=HEADERS, files=FILES, verify=self.ssl_verify)
+                METHOD = CMD[0][1].upper()
+                if METHOD in _ALLOWED_METHODS:
+                    returned = perform_request(method=METHOD, endpoint=FULL_URL, body=BODY, data=DATA,
+                                               params=PARAMS, headers=HEADERS, files=FILES, verify=self.ssl_verify)
+                else:
+                    returned = generate_error_result(message="Invalid HTTP method specified.", code=405)
             else:
-                returned = Result()(
-                                    status_code=401,
-                                    headers={},
-                                    body={"errors": [{"message": "Failed to issue token."}], "resources": ""}
-                                    )
+                returned = generate_error_result(message="Failed to issue token.", code=401)
         else:
-            returned = Result()(
-                                status_code=418,  # Send a teapot to devs who don't specify a method
-                                headers={},
-                                body={"errors": [{"message": "Invalid API service method."}], "resources": ""}
-                                )
+            returned = generate_error_result(message="Invalid API operation specified.", code=418)
+
         return returned
