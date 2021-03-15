@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-_endpoint - Internal constant library
+_endpoint - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -91,8 +91,8 @@ api_endpoints = [
     "QueryAWSAccountsForIDs",
     "GET",
     "/cloud-connect-aws/queries/accounts/v1",
-    "Search for provisioned AWS Accounts by providing an FQL filter and paging details. Returns a set of "
-    "AWS account IDs which match the filter criteria"
+    "Search for provisioned AWS Accounts by providing an FQL filter and paging details. "
+    "Returns a set of AWS account IDs which match the filter criteria"
   ],
   [
     "GetCSPMAzureAccount",
@@ -104,8 +104,8 @@ api_endpoints = [
     "CreateCSPMAzureAccount",
     "POST",
     "/cloud-connect-azure/entities/account/v1",
-    "Creates a new account in our system for a customer and generates a script for them to run in their "
-    "cloud environment to grant us access."
+    "Creates a new account in our system for a customer and generates a script for them to "
+    "run in their cloud environment to grant us access."
   ],
   [
     "UpdateCSPMAzureAccountClientID",
@@ -118,8 +118,8 @@ api_endpoints = [
     "GetCSPMAzureUserScriptsAttachment",
     "GET",
     "/cloud-connect-azure/entities/user-scripts-download/v1",
-    "Return a script for customer to run in their cloud environment to grant us access to their Azure "
-    "environment as a downloadable attachment"
+    "Return a script for customer to run in their cloud environment to grant us access to their "
+    "Azure environment as a downloadable attachment"
   ],
   [
     "GetCSPMAzureUserScripts",
@@ -209,8 +209,8 @@ api_endpoints = [
     "GetCSPMGCPUserScriptsAttachment",
     "GET",
     "/cloud-connect-gcp/entities/user-scripts-download/v1",
-    "Return a script for customer to run in their cloud environment to grant us access to their GCP "
-    "environment as a downloadable attachment"
+    "Return a script for customer to run in their cloud environment to grant us access to their "
+    "GCP environment as a downloadable attachment"
   ],
   [
     "GetCSPMGCPUserScripts",
@@ -360,8 +360,8 @@ api_endpoints = [
     "DeleteReport",
     "DELETE",
     "/falconx/entities/reports/v1?ids={}",
-    "Delete report based on the report ID. Operation can be checked for success by polling "
-    "for the report ID on the report-summaries endpoint."
+    "Delete report based on the report ID. Operation can be checked for success by "
+    "polling for the report ID on the report-summaries endpoint."
   ],
   [
     "GetSubmissions",
@@ -373,8 +373,8 @@ api_endpoints = [
     "Submit",
     "POST",
     "/falconx/entities/submissions/v1",
-    "Submit an uploaded file or a URL for sandbox analysis. Time required for analysis varies "
-    "but is usually less than 15 minutes."
+    "Submit an uploaded file or a URL for sandbox analysis. Time required for analysis "
+    "varies but is usually less than 15 minutes."
   ],
   [
     "QueryReports",
@@ -390,115 +390,121 @@ api_endpoints = [
     "Returns a set of submission IDs that match your criteria."
   ],
   [
-    "aggregate-events",
+    "aggregate_events",
     "POST",
     "/fwmgr/aggregates/events/GET/v1",
     "Aggregate events for customer"
   ],
   [
-    "aggregate-policy-rules",
+    "aggregate_policy_rules",
     "POST",
     "/fwmgr/aggregates/policy-rules/GET/v1",
     "Aggregate rules within a policy for customer"
   ],
   [
-    "aggregate-rule-groups",
+    "aggregate_rule_groups",
     "POST",
     "/fwmgr/aggregates/rule-groups/GET/v1",
     "Aggregate rule groups for customer"
   ],
   [
-    "aggregate-rules",
+    "aggregate_rules",
     "POST",
     "/fwmgr/aggregates/rules/GET/v1",
     "Aggregate rules for customer"
   ],
   [
-    "get-events",
+    "get_events",
     "GET",
     "/fwmgr/entities/events/v1?ids={}",
     "Get events entities by ID and optionally version"
   ],
   [
-    "get-firewall-fields",
+    "get_firewall_fields",
     "GET",
     "/fwmgr/entities/firewall-fields/v1?ids={}",
     "Get the firewall field specifications by ID"
   ],
   [
-    "get-platforms",
+    "get_platforms",
     "GET",
     "/fwmgr/entities/platforms/v1?ids={}",
     "Get platforms by ID, e.g., windows or mac or droid"
   ],
   [
-    "get-policy-containers",
+    "get_policy_containers",
     "GET",
     "/fwmgr/entities/policies/v1?ids={}",
     "Get policy container entities by policy ID"
   ],
   [
-    "get-rule-groups",
+    "update_policy_container",
+    "PUT",
+    "/fwmgr/entities/policies/v1",
+    "Update an identified policy container"
+  ],
+  [
+    "get_rule_groups",
     "GET",
     "/fwmgr/entities/rule-groups/v1?ids={}",
     "Get rule group entities by ID. These groups do not contain their rule entites, just the rule IDs in precedence order."
   ],
   [
-    "create-rule-group",
+    "create_rule_group",
     "POST",
     "/fwmgr/entities/rule-groups/v1",
     "Create new rule group on a platform for a customer with a name and description, and return the ID"
   ],
   [
-    "update-rule-group",
+    "update_rule_group",
     "PATCH",
     "/fwmgr/entities/rule-groups/v1",
     "Update name, description, or enabled status of a rule group, or create, edit, delete, or reorder rules"
   ],
   [
-    "delete-rule-groups",
+    "delete_rule_groups",
     "DELETE",
     "/fwmgr/entities/rule-groups/v1?ids={}",
     "Delete rule group entities by ID"
   ],
   [
-    "get-rules",
+    "get_rules",
     "GET",
     "/fwmgr/entities/rules/v1?ids={}",
     "Get rule entities by ID (64-bit unsigned int as decimal string) or Family ID (32-character hexadecimal string)"
   ],
   [
-    "query-events",
+    "query_events",
     "GET",
     "/fwmgr/queries/events/v1",
     "Find all event IDs matching the query with filter"
   ],
   [
-    "query-firewall-fields",
+    "query_firewall_fields",
     "GET",
     "/fwmgr/queries/firewall-fields/v1",
     "Get the firewall field specification IDs for the provided platform"
   ],
   [
-    "query-platforms",
+    "query_platforms",
     "GET",
     "/fwmgr/queries/platforms/v1",
     "Get the list of platform names"
   ],
   [
-    "query-policy-rules",
+    "query_policy_rules",
     "GET",
     "/fwmgr/queries/policy-rules/v1",
     "Find all firewall rule IDs matching the query with filter, and return them in precedence order"
   ],
   [
-    "query-rule-groups",
+    "query_rule_groups",
     "GET",
     "/fwmgr/queries/rule-groups/v1",
     "Find all rule group IDs matching the query with filter"
   ],
   [
-    "query-rules",
+    "query_rules",
     "GET",
     "/fwmgr/queries/rules/v1",
     "Find all rule IDs matching the query with filter"
@@ -519,8 +525,8 @@ api_endpoints = [
     "PerformIncidentAction",
     "POST",
     "/incidents/entities/incident-actions/v1",
-    "Perform a set of actions on one or more incidents, such as adding tags or comments "
-    "or updating the incident name or description"
+    "Perform a set of actions on one or more incidents, such as adding tags or "
+    "comments or updating the incident name or description"
   ],
   [
     "GetIncidents",
@@ -589,49 +595,49 @@ api_endpoints = [
     "Search for processes associated with a custom IOC"
   ],
   [
-    "audit-events-read",
+    "audit_events_read",
     "GET",
     "/installation-tokens/entities/audit-events/v1?ids={}",
     "Gets the details of one or more audit events by id."
   ],
   [
-    "customer-settings-read",
+    "customer_settings_read",
     "GET",
     "/installation-tokens/entities/customer-settings/v1",
     "Check current installation token settings."
   ],
   [
-    "tokens-read",
+    "tokens_read",
     "GET",
     "/installation-tokens/entities/tokens/v1?ids={}",
     "Gets the details of one or more tokens by id."
   ],
   [
-    "tokens-create",
+    "tokens_create",
     "POST",
     "/installation-tokens/entities/tokens/v1",
     "Creates a token."
   ],
   [
-    "tokens-update",
+    "tokens_update",
     "PATCH",
     "/installation-tokens/entities/tokens/v1?ids={}",
     "Updates one or more tokens. Use this endpoint to edit labels, change expiration, revoke, or restore."
   ],
   [
-    "tokens-delete",
+    "tokens_delete",
     "DELETE",
     "/installation-tokens/entities/tokens/v1?ids={}",
     "Deletes a token immediately. To revoke a token, use PATCH /installation-tokens/entities/tokens/v1 instead."
   ],
   [
-    "audit-events-query",
+    "audit_events_query",
     "GET",
     "/installation-tokens/queries/audit-events/v1",
     "Search for audit events by providing an FQL filter and paging details."
   ],
   [
-    "tokens-query",
+    "tokens_query",
     "GET",
     "/installation-tokens/queries/tokens/v1",
     "Search for tokens by providing an FQL filter and paging details."
@@ -721,74 +727,74 @@ api_endpoints = [
     "Search for rule IDs that match provided filter criteria."
   ],
   [
-    "get-patterns",
+    "get_patterns",
     "GET",
     "/ioarules/entities/pattern-severities/v1?ids={}",
     "Get pattern severities by ID."
   ],
   [
-    "get-platformsMixin0",
+    "get_platformsMixin0",
     "GET",
     "/ioarules/entities/platforms/v1?ids={}",
     "Get platforms by ID."
   ],
   [
-    "get-rule-groupsMixin0",
+    "get_rule_groupsMixin0",
     "GET",
     "/ioarules/entities/rule-groups/v1?ids={}",
     "Get rule groups by ID."
   ],
   [
-    "create-rule-groupMixin0",
+    "create_rule_groupMixin0",
     "POST",
     "/ioarules/entities/rule-groups/v1",
     "Create a rule group for a platform with a name and an optional description. Returns the rule group."
   ],
   [
-    "update-rule-groupMixin0",
+    "update_rule_groupMixin0",
     "PATCH",
     "/ioarules/entities/rule-groups/v1",
     "Update a rule group. The following properties can be modified: name, description, enabled."
   ],
   [
-    "delete-rule-groupsMixin0",
+    "delete_rule_groupsMixin0",
     "DELETE",
     "/ioarules/entities/rule-groups/v1?ids={}",
     "Delete rule groups by ID."
   ],
   [
-    "get-rule-types",
+    "get_rule_types",
     "GET",
     "/ioarules/entities/rule-types/v1?ids={}",
     "Get rule types by ID."
   ],
   [
-    "get-rules-get",
+    "get_rules_get",
     "POST",
     "/ioarules/entities/rules/GET/v1",
     "Get rules by ID and optionally version in the following format: `ID[:version]`."
   ],
   [
-    "get-rulesMixin0",
+    "get_rulesMixin0",
     "GET",
     "/ioarules/entities/rules/v1?ids={}",
     "Get rules by ID and optionally version in the following format: `ID[:version]`. "
     "The max number of IDs is constrained by URL size."
   ],
   [
-    "create-rule",
+    "create_rule",
     "POST",
     "/ioarules/entities/rules/v1",
     "Create a rule within a rule group. Returns the rule."
   ],
   [
-    "update-rules",
+    "update_rules",
     "PATCH",
     "/ioarules/entities/rules/v1",
     "Update rules within a rule group. Return the updated rules."
   ],
   [
-    "delete-rules",
+    "delete_rules",
     "DELETE",
     "/ioarules/entities/rules/v1?ids={}",
     "Delete rules from a rule group by ID."
@@ -800,37 +806,37 @@ api_endpoints = [
     "Validates field values and checks for matches if a test string is provided."
   ],
   [
-    "query-patterns",
+    "query_patterns",
     "GET",
     "/ioarules/queries/pattern-severities/v1",
     "Get all pattern severity IDs."
   ],
   [
-    "query-platformsMixin0",
+    "query_platformsMixin0",
     "GET",
     "/ioarules/queries/platforms/v1",
     "Get all platform IDs."
   ],
   [
-    "query-rule-groups-full",
+    "query_rule_groups_full",
     "GET",
     "/ioarules/queries/rule-groups-full/v1",
     "Find all rule groups matching the query with optional filter."
   ],
   [
-    "query-rule-groupsMixin0",
+    "query_rule_groupsMixin0",
     "GET",
     "/ioarules/queries/rule-groups/v1",
     "Finds all rule group IDs matching the query with optional filter."
   ],
   [
-    "query-rule-types",
+    "query_rule_types",
     "GET",
     "/ioarules/queries/rule-types/v1",
     "Get all rule type IDs."
   ],
   [
-    "query-rulesMixin0",
+    "query_rulesMixin0",
     "GET",
     "/ioarules/queries/rules/v1",
     "Finds all rule IDs matching the query with optional filter."
@@ -845,9 +851,8 @@ api_endpoints = [
     "PostMalQueryFuzzySearchV1",
     "POST",
     "/malquery/combined/fuzzy-search/v1",
-    "Search Falcon MalQuery quickly, but with more potential for false positives. "
-    "Search for a combination of hex patterns and strings in order to identify samples "
-    "based upon file content at byte level granularity."
+    "Search Falcon MalQuery quickly, but with more potential for false positives. Search for a combination of "
+    "hex patterns and strings in order to identify samples based upon file content at byte level granularity."
   ],
   [
     "GetMalQueryDownloadV1",
@@ -879,16 +884,16 @@ api_endpoints = [
     "PostMalQueryEntitiesSamplesMultidownloadV1",
     "POST",
     "/malquery/entities/samples-multidownload/v1",
-    "Schedule samples for download. Use the result id with the /request endpoint to check if the download is ready after "
-    "which you can call the /entities/samples-fetch to get the zip"
+    "Schedule samples for download. Use the result id with the /request endpoint to check if the download is ready "
+    "after which you can call the /entities/samples-fetch to get the zip"
   ],
   [
     "PostMalQueryExactSearchV1",
     "POST",
     "/malquery/queries/exact-search/v1",
-    "Search Falcon MalQuery for a combination of hex patterns and strings in order to identify samples based upon file "
-    "content at byte level granularity. You can filter results on criteria such as file type, file size and first seen date. "
-    "Returns a request id which can be used with the /request endpoint"
+    "Search Falcon MalQuery for a combination of hex patterns and strings in order to identify samples based "
+    "upon file content at byte level granularity. You can filter results on criteria such as file type, file size "
+    "and first seen date. Returns a request id which can be used with the /request endpoint"
   ],
   [
     "PostMalQueryHuntV1",
@@ -954,8 +959,8 @@ api_endpoints = [
     "revealUninstallToken",
     "POST",
     "/policy/combined/reveal-uninstall-token/v1",
-    "Reveals an uninstall token for a specific device. To retrieve the bulk maintenance token pass the value "
-    "'MAINTENANCE' as the value for 'device_id'"
+    "Reveals an uninstall token for a specific device. To retrieve the bulk maintenance token pass the "
+    "value 'MAINTENANCE' as the value for 'device_id'"
   ],
   [
     "queryCombinedSensorUpdateBuilds",
@@ -974,15 +979,15 @@ api_endpoints = [
     "queryCombinedSensorUpdatePolicies",
     "GET",
     "/policy/combined/sensor-update/v1",
-    "Search for Sensor Update Policies in your environment by providing an FQL filter and paging details. Returns a set of "
-    "Sensor Update Policies which match the filter criteria"
+    "Search for Sensor Update Policies in your environment by providing an FQL filter and paging details. "
+    "Returns a set of Sensor Update Policies which match the filter criteria"
   ],
   [
     "queryCombinedSensorUpdatePoliciesV2",
     "GET",
     "/policy/combined/sensor-update/v2",
-    "Search for Sensor Update Policies with additional support for uninstall protection in your environment by providing "
-    "an FQL filter and paging details. Returns a set of Sensor Update Policies which match the filter criteria"
+    "Search for Sensor Update Policies with additional support for uninstall protection in your environment by "
+    "providing an FQL filter and paging details. Returns a set of Sensor Update Policies which match the filter criteria"
   ],
   [
     "performDeviceControlPoliciesAction",
@@ -1194,15 +1199,15 @@ api_endpoints = [
     "createSensorUpdatePoliciesV2",
     "POST",
     "/policy/entities/sensor-update/v2",
-    "Create Sensor Update Policies by specifying details about the policy to create with additional support "
-    "for uninstall protection"
+    "Create Sensor Update Policies by specifying details about the policy to create with "
+    "additional support for uninstall protection"
   ],
   [
     "updateSensorUpdatePoliciesV2",
     "PATCH",
     "/policy/entities/sensor-update/v2",
-    "Update Sensor Update Policies by specifying the ID of the policy and details to update with additional "
-    "support for uninstall protection"
+    "Update Sensor Update Policies by specifying the ID of the policy and details to update with "
+    "additional support for uninstall protection"
   ],
   [
     "getSensorVisibilityExclusionsV1",
@@ -1286,8 +1291,8 @@ api_endpoints = [
     "querySensorUpdatePolicyMembers",
     "GET",
     "/policy/queries/sensor-update-members/v1",
-    "Search for members of a Sensor Update Policy in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Agent IDs which match the filter criteria"
+    "Search for members of a Sensor Update Policy in your environment by providing an FQL filter and paging "
+    "details. Returns a set of Agent IDs which match the filter criteria"
   ],
   [
     "querySensorUpdatePolicies",
@@ -1303,13 +1308,13 @@ api_endpoints = [
     "Search for sensor visibility exclusions."
   ],
   [
-    "entities.processes",
+    "entities_processes",
     "GET",
     "/processes/entities/processes/v1?ids={}",
     "For the provided ProcessID retrieve the process details"
   ],
   [
-    "RTR-AggregateSessions",
+    "RTR_AggregateSessions",
     "POST",
     "/real-time-response/aggregates/sessions/GET/v1",
     "Get aggregates on session data."
@@ -1359,151 +1364,151 @@ api_endpoints = [
     "Batch refresh a RTR session on multiple hosts. RTR sessions will expire after 10 minutes unless refreshed."
   ],
   [
-    "RTR-CheckActiveResponderCommandStatus",
+    "RTR_CheckActiveResponderCommandStatus",
     "GET",
     "/real-time-response/entities/active-responder-command/v1",
     "Get status of an executed active-responder command on a single host."
   ],
   [
-    "RTR-ExecuteActiveResponderCommand",
+    "RTR_ExecuteActiveResponderCommand",
     "POST",
     "/real-time-response/entities/active-responder-command/v1",
     "Execute an active responder command on a single host."
   ],
   [
-    "RTR-CheckAdminCommandStatus",
+    "RTR_CheckAdminCommandStatus",
     "GET",
     "/real-time-response/entities/admin-command/v1",
     "Get status of an executed RTR administrator command on a single host."
   ],
   [
-    "RTR-ExecuteAdminCommand",
+    "RTR_ExecuteAdminCommand",
     "POST",
     "/real-time-response/entities/admin-command/v1",
     "Execute a RTR administrator command on a single host."
   ],
   [
-    "RTR-CheckCommandStatus",
+    "RTR_CheckCommandStatus",
     "GET",
     "/real-time-response/entities/command/v1",
     "Get status of an executed command on a single host."
   ],
   [
-    "RTR-ExecuteCommand",
+    "RTR_ExecuteCommand",
     "POST",
     "/real-time-response/entities/command/v1",
     "Execute a command on a single host."
   ],
   [
-    "RTR-GetExtractedFileContents",
+    "RTR_GetExtractedFileContents",
     "GET",
     "/real-time-response/entities/extracted-file-contents/v1",
     "Get RTR extracted file contents for specified session and sha256."
   ],
   [
-    "RTR-ListFiles",
+    "RTR_ListFiles",
     "GET",
     "/real-time-response/entities/file/v1",
     "Get a list of files for the specified RTR session."
   ],
   [
-    "RTR-DeleteFile",
+    "RTR_DeleteFile",
     "DELETE",
     "/real-time-response/entities/file/v1?ids={}",
     "Delete a RTR session file."
   ],
   [
-    "RTR-GetPut-Files",
+    "RTR_GetPut_Files",
     "GET",
     "/real-time-response/entities/put-files/v1?ids={}",
     "Get put-files based on the ID's given. These are used for the RTR `put` command."
   ],
   [
-    "RTR-CreatePut-Files",
+    "RTR_CreatePut_Files",
     "POST",
     "/real-time-response/entities/put-files/v1",
     "Upload a new put-file to use for the RTR `put` command."
   ],
   [
-    "RTR-DeletePut-Files",
+    "RTR_DeletePut_Files",
     "DELETE",
     "/real-time-response/entities/put-files/v1?ids={}",
     "Delete a put-file based on the ID given.  Can only delete one file at a time."
   ],
   [
-    "RTR-ListQueuedSessions",
+    "RTR_ListQueuedSessions",
     "POST",
     "/real-time-response/entities/queued-sessions/GET/v1",
     "Get queued session metadata by session ID."
   ],
   [
-    "RTR-DeleteQueuedSession",
+    "RTR_DeleteQueuedSession",
     "DELETE",
     "/real-time-response/entities/queued-sessions/command/v1",
     "Delete a queued session command"
   ],
   [
-    "RTR-PulseSession",
+    "RTR_PulseSession",
     "POST",
     "/real-time-response/entities/refresh-session/v1",
     "Refresh a session timeout on a single host."
   ],
   [
-    "RTR-GetScripts",
+    "RTR_GetScripts",
     "GET",
     "/real-time-response/entities/scripts/v1?ids={}",
     "Get custom-scripts based on the ID's given. These are used for the RTR `runscript` command."
   ],
   [
-    "RTR-CreateScripts",
+    "RTR_CreateScripts",
     "POST",
     "/real-time-response/entities/scripts/v1",
     "Upload a new custom-script to use for the RTR `runscript` command."
   ],
   [
-    "RTR-UpdateScripts",
+    "RTR_UpdateScripts",
     "PATCH",
     "/real-time-response/entities/scripts/v1",
     "Upload a new scripts to replace an existing one."
   ],
   [
-    "RTR-DeleteScripts",
+    "RTR_DeleteScripts",
     "DELETE",
     "/real-time-response/entities/scripts/v1?ids={}",
     "Delete a custom-script based on the ID given.  Can only delete one script at a time."
   ],
   [
-    "RTR-ListSessions",
+    "RTR_ListSessions",
     "POST",
     "/real-time-response/entities/sessions/GET/v1",
     "Get session metadata by session id."
   ],
   [
-    "RTR-InitSession",
+    "RTR_InitSession",
     "POST",
     "/real-time-response/entities/sessions/v1",
     "Initialize a new session with the RTR cloud."
   ],
   [
-    "RTR-DeleteSession",
+    "RTR_DeleteSession",
     "DELETE",
     "/real-time-response/entities/sessions/v1",
     "Delete a session."
   ],
   [
-    "RTR-ListPut-Files",
+    "RTR_ListPut_Files",
     "GET",
     "/real-time-response/queries/put-files/v1",
     "Get a list of put-file ID's that are available to the user for the `put` command."
   ],
   [
-    "RTR-ListScripts",
+    "RTR_ListScripts",
     "GET",
     "/real-time-response/queries/scripts/v1",
     "Get a list of custom-script ID's that are available to the user for the `runscript` command."
   ],
   [
-    "RTR-ListAllSessions",
+    "RTR_ListAllSessions",
     "GET",
     "/real-time-response/queries/sessions/v1",
     "Get a list of session_ids."
@@ -1561,15 +1566,15 @@ api_endpoints = [
     "GetScans",
     "GET",
     "/scanner/entities/scans/v1?ids={}",
-    "Check the status of a volume scan. Time required for analysis increases with the number of samples "
-    "in a volume but usually it should take less than 1 minute"
+    "Check the status of a volume scan. Time required for analysis increases with the number of "
+    "samples in a volume but usually it should take less than 1 minute"
   ],
   [
     "ScanSamples",
     "POST",
     "/scanner/entities/scans/v1",
-    "Submit a volume of files for ml scanning. Time required for analysis increases with the number of "
-    "samples in a volume but usually it should take less than 1 minute"
+    "Submit a volume of files for ml scanning. Time required for analysis increases with the number "
+    "of samples in a volume but usually it should take less than 1 minute"
   ],
   [
     "QuerySubmissionsMixin0",
@@ -1737,5 +1742,456 @@ api_endpoints = [
     "GET",
     "/users/queries/user-uuids-by-email/v1",
     "Get a user's ID by providing a username (usually an email address)"
+  ],
+  #                                                                             .---.        .-----------
+  #                                                                            /     \  __  /    ------
+  #                                                                           / /     \(..)/    -----
+  #  _____                                     __            __              //////   ' \/ `   ---
+  # |     \.-----.-----.----.-----.----.---.-.|  |_.-----.--|  |            //// / // :    : ---
+  # |  --  |  -__|  _  |   _|  -__|  __|  _  ||   _|  -__|  _  |           // /   /  /`    '--
+  # |_____/|_____|   __|__| |_____|____|___._||____|_____|_____|          //          //..\\
+  #              |__|                                                                UU    UU
+  # The following operations reference legacy naming convention and are considered deprecated.
+  # These operation IDs are maintained for backwards compatibility purposes only, Move all code
+  # references to use the new operations IDs defined above that align with the IDs defined in
+  # the service classes.
+  [
+    "entities.processes",
+    "GET",
+    "/processes/entities/processes/v1?ids={}",
+    "For the provided ProcessID retrieve the process details"
+  ],
+  [
+    "aggregate-events",
+    "POST",
+    "/fwmgr/aggregates/events/GET/v1",
+    "Aggregate events for customer"
+  ],
+  [
+    "aggregate-policy-rules",
+    "POST",
+    "/fwmgr/aggregates/policy-rules/GET/v1",
+    "Aggregate rules within a policy for customer"
+  ],
+  [
+    "aggregate-rule-groups",
+    "POST",
+    "/fwmgr/aggregates/rule-groups/GET/v1",
+    "Aggregate rule groups for customer"
+  ],
+  [
+    "aggregate-rules",
+    "POST",
+    "/fwmgr/aggregates/rules/GET/v1",
+    "Aggregate rules for customer"
+  ],
+  [
+    "get-events",
+    "GET",
+    "/fwmgr/entities/events/v1?ids={}",
+    "Get events entities by ID and optionally version"
+  ],
+  [
+    "get-firewall-fields",
+    "GET",
+    "/fwmgr/entities/firewall-fields/v1?ids={}",
+    "Get the firewall field specifications by ID"
+  ],
+  [
+    "get-platforms",
+    "GET",
+    "/fwmgr/entities/platforms/v1?ids={}",
+    "Get platforms by ID, e.g., windows or mac or droid"
+  ],
+  [
+    "get-policy-containers",
+    "GET",
+    "/fwmgr/entities/policies/v1?ids={}",
+    "Get policy container entities by policy ID"
+  ],
+  [
+    "update-policy-container",
+    "PUT",
+    "/fwmgr/entities/policies/v1",
+    "Update an identified policy container"
+  ],
+  [
+    "get-rule-groups",
+    "GET",
+    "/fwmgr/entities/rule-groups/v1?ids={}",
+    "Get rule group entities by ID. These groups do not contain their rule entites, just the rule IDs in precedence order."
+  ],
+  [
+    "create-rule-group",
+    "POST",
+    "/fwmgr/entities/rule-groups/v1",
+    "Create new rule group on a platform for a customer with a name and description, and return the ID"
+  ],
+  [
+    "update-rule-group",
+    "PATCH",
+    "/fwmgr/entities/rule-groups/v1",
+    "Update name, description, or enabled status of a rule group, or create, edit, delete, or reorder rules"
+  ],
+  [
+    "delete-rule-groups",
+    "DELETE",
+    "/fwmgr/entities/rule-groups/v1?ids={}",
+    "Delete rule group entities by ID"
+  ],
+  [
+    "get-rules",
+    "GET",
+    "/fwmgr/entities/rules/v1?ids={}",
+    "Get rule entities by ID (64-bit unsigned int as decimal string) or Family ID (32-character hexadecimal string)"
+  ],
+  [
+    "query-events",
+    "GET",
+    "/fwmgr/queries/events/v1",
+    "Find all event IDs matching the query with filter"
+  ],
+  [
+    "query-firewall-fields",
+    "GET",
+    "/fwmgr/queries/firewall-fields/v1",
+    "Get the firewall field specification IDs for the provided platform"
+  ],
+  [
+    "query-platforms",
+    "GET",
+    "/fwmgr/queries/platforms/v1",
+    "Get the list of platform names"
+  ],
+  [
+    "query-policy-rules",
+    "GET",
+    "/fwmgr/queries/policy-rules/v1",
+    "Find all firewall rule IDs matching the query with filter, and return them in precedence order"
+  ],
+  [
+    "query-rule-groups",
+    "GET",
+    "/fwmgr/queries/rule-groups/v1",
+    "Find all rule group IDs matching the query with filter"
+  ],
+  [
+    "query-rules",
+    "GET",
+    "/fwmgr/queries/rules/v1",
+    "Find all rule IDs matching the query with filter"
+  ],
+  [
+    "audit-events-read",
+    "GET",
+    "/installation-tokens/entities/audit-events/v1?ids={}",
+    "Gets the details of one or more audit events by id."
+  ],
+  [
+    "customer-settings-read",
+    "GET",
+    "/installation-tokens/entities/customer-settings/v1",
+    "Check current installation token settings."
+  ],
+  [
+    "tokens-read",
+    "GET",
+    "/installation-tokens/entities/tokens/v1?ids={}",
+    "Gets the details of one or more tokens by id."
+  ],
+  [
+    "tokens-create",
+    "POST",
+    "/installation-tokens/entities/tokens/v1",
+    "Creates a token."
+  ],
+  [
+    "tokens-update",
+    "PATCH",
+    "/installation-tokens/entities/tokens/v1?ids={}",
+    "Updates one or more tokens. Use this endpoint to edit labels, change expiration, revoke, or restore."
+  ],
+  [
+    "tokens-delete",
+    "DELETE",
+    "/installation-tokens/entities/tokens/v1?ids={}",
+    "Deletes a token immediately. To revoke a token, use PATCH /installation-tokens/entities/tokens/v1 instead."
+  ],
+  [
+    "audit-events-query",
+    "GET",
+    "/installation-tokens/queries/audit-events/v1",
+    "Search for audit events by providing an FQL filter and paging details."
+  ],
+  [
+    "tokens-query",
+    "GET",
+    "/installation-tokens/queries/tokens/v1",
+    "Search for tokens by providing an FQL filter and paging details."
+  ],
+  [
+    "get-patterns",
+    "GET",
+    "/ioarules/entities/pattern-severities/v1?ids={}",
+    "Get pattern severities by ID."
+  ],
+  [
+    "get-platformsMixin0",
+    "GET",
+    "/ioarules/entities/platforms/v1?ids={}",
+    "Get platforms by ID."
+  ],
+  [
+    "get-rule-groupsMixin0",
+    "GET",
+    "/ioarules/entities/rule-groups/v1?ids={}",
+    "Get rule groups by ID."
+  ],
+  [
+    "create-rule-groupMixin0",
+    "POST",
+    "/ioarules/entities/rule-groups/v1",
+    "Create a rule group for a platform with a name and an optional description. Returns the rule group."
+  ],
+  [
+    "update-rule-groupMixin0",
+    "PATCH",
+    "/ioarules/entities/rule-groups/v1",
+    "Update a rule group. The following properties can be modified: name, description, enabled."
+  ],
+  [
+    "delete-rule-groupsMixin0",
+    "DELETE",
+    "/ioarules/entities/rule-groups/v1?ids={}",
+    "Delete rule groups by ID."
+  ],
+  [
+    "get-rule-types",
+    "GET",
+    "/ioarules/entities/rule-types/v1?ids={}",
+    "Get rule types by ID."
+  ],
+  [
+    "get-rules-get",
+    "POST",
+    "/ioarules/entities/rules/GET/v1",
+    "Get rules by ID and optionally version in the following format: `ID[:version]`."
+  ],
+  [
+    "get-rulesMixin0",
+    "GET",
+    "/ioarules/entities/rules/v1?ids={}",
+    "Get rules by ID and optionally version in the following format: `ID[:version]`. "
+    "The max number of IDs is constrained by URL size."
+  ],
+  [
+    "create-rule",
+    "POST",
+    "/ioarules/entities/rules/v1",
+    "Create a rule within a rule group. Returns the rule."
+  ],
+  [
+    "update-rules",
+    "PATCH",
+    "/ioarules/entities/rules/v1",
+    "Update rules within a rule group. Return the updated rules."
+  ],
+  [
+    "delete-rules",
+    "DELETE",
+    "/ioarules/entities/rules/v1?ids={}",
+    "Delete rules from a rule group by ID."
+  ],
+  [
+    "query-patterns",
+    "GET",
+    "/ioarules/queries/pattern-severities/v1",
+    "Get all pattern severity IDs."
+  ],
+  [
+    "query-platformsMixin0",
+    "GET",
+    "/ioarules/queries/platforms/v1",
+    "Get all platform IDs."
+  ],
+  [
+    "query-rule-groups-full",
+    "GET",
+    "/ioarules/queries/rule-groups-full/v1",
+    "Find all rule groups matching the query with optional filter."
+  ],
+  [
+    "query-rule-groupsMixin0",
+    "GET",
+    "/ioarules/queries/rule-groups/v1",
+    "Finds all rule group IDs matching the query with optional filter."
+  ],
+  [
+    "query-rule-types",
+    "GET",
+    "/ioarules/queries/rule-types/v1",
+    "Get all rule type IDs."
+  ],
+  [
+    "query-rulesMixin0",
+    "GET",
+    "/ioarules/queries/rules/v1",
+    "Finds all rule IDs matching the query with optional filter."
+  ],
+  [
+    "RTR-AggregateSessions",
+    "POST",
+    "/real-time-response/aggregates/sessions/GET/v1",
+    "Get aggregates on session data."
+  ],
+  [
+    "RTR-CheckActiveResponderCommandStatus",
+    "GET",
+    "/real-time-response/entities/active-responder-command/v1",
+    "Get status of an executed active-responder command on a single host."
+  ],
+  [
+    "RTR-ExecuteActiveResponderCommand",
+    "POST",
+    "/real-time-response/entities/active-responder-command/v1",
+    "Execute an active responder command on a single host."
+  ],
+  [
+    "RTR-CheckAdminCommandStatus",
+    "GET",
+    "/real-time-response/entities/admin-command/v1",
+    "Get status of an executed RTR administrator command on a single host."
+  ],
+  [
+    "RTR-ExecuteAdminCommand",
+    "POST",
+    "/real-time-response/entities/admin-command/v1",
+    "Execute a RTR administrator command on a single host."
+  ],
+  [
+    "RTR-CheckCommandStatus",
+    "GET",
+    "/real-time-response/entities/command/v1",
+    "Get status of an executed command on a single host."
+  ],
+  [
+    "RTR-ExecuteCommand",
+    "POST",
+    "/real-time-response/entities/command/v1",
+    "Execute a command on a single host."
+  ],
+  [
+    "RTR-GetExtractedFileContents",
+    "GET",
+    "/real-time-response/entities/extracted-file-contents/v1",
+    "Get RTR extracted file contents for specified session and sha256."
+  ],
+  [
+    "RTR-ListFiles",
+    "GET",
+    "/real-time-response/entities/file/v1",
+    "Get a list of files for the specified RTR session."
+  ],
+  [
+    "RTR-DeleteFile",
+    "DELETE",
+    "/real-time-response/entities/file/v1?ids={}",
+    "Delete a RTR session file."
+  ],
+  [
+    "RTR-GetPut-Files",
+    "GET",
+    "/real-time-response/entities/put-files/v1?ids={}",
+    "Get put-files based on the ID's given. These are used for the RTR `put` command."
+  ],
+  [
+    "RTR-CreatePut-Files",
+    "POST",
+    "/real-time-response/entities/put-files/v1",
+    "Upload a new put-file to use for the RTR `put` command."
+  ],
+  [
+    "RTR-DeletePut-Files",
+    "DELETE",
+    "/real-time-response/entities/put-files/v1?ids={}",
+    "Delete a put-file based on the ID given.  Can only delete one file at a time."
+  ],
+  [
+    "RTR-ListQueuedSessions",
+    "POST",
+    "/real-time-response/entities/queued-sessions/GET/v1",
+    "Get queued session metadata by session ID."
+  ],
+  [
+    "RTR-DeleteQueuedSession",
+    "DELETE",
+    "/real-time-response/entities/queued-sessions/command/v1",
+    "Delete a queued session command"
+  ],
+  [
+    "RTR-PulseSession",
+    "POST",
+    "/real-time-response/entities/refresh-session/v1",
+    "Refresh a session timeout on a single host."
+  ],
+  [
+    "RTR-GetScripts",
+    "GET",
+    "/real-time-response/entities/scripts/v1?ids={}",
+    "Get custom-scripts based on the ID's given. These are used for the RTR `runscript` command."
+  ],
+  [
+    "RTR-CreateScripts",
+    "POST",
+    "/real-time-response/entities/scripts/v1",
+    "Upload a new custom-script to use for the RTR `runscript` command."
+  ],
+  [
+    "RTR-UpdateScripts",
+    "PATCH",
+    "/real-time-response/entities/scripts/v1",
+    "Upload a new scripts to replace an existing one."
+  ],
+  [
+    "RTR-DeleteScripts",
+    "DELETE",
+    "/real-time-response/entities/scripts/v1?ids={}",
+    "Delete a custom-script based on the ID given.  Can only delete one script at a time."
+  ],
+  [
+    "RTR-ListSessions",
+    "POST",
+    "/real-time-response/entities/sessions/GET/v1",
+    "Get session metadata by session id."
+  ],
+  [
+    "RTR-InitSession",
+    "POST",
+    "/real-time-response/entities/sessions/v1",
+    "Initialize a new session with the RTR cloud."
+  ],
+  [
+    "RTR-DeleteSession",
+    "DELETE",
+    "/real-time-response/entities/sessions/v1",
+    "Delete a session."
+  ],
+  [
+    "RTR-ListPut-Files",
+    "GET",
+    "/real-time-response/queries/put-files/v1",
+    "Get a list of put-file ID's that are available to the user for the `put` command."
+  ],
+  [
+    "RTR-ListScripts",
+    "GET",
+    "/real-time-response/queries/scripts/v1",
+    "Get a list of custom-script ID's that are available to the user for the `runscript` command."
+  ],
+  [
+    "RTR-ListAllSessions",
+    "GET",
+    "/real-time-response/queries/sessions/v1",
+    "Get a list of session_ids."
   ]
 ]
