@@ -2194,5 +2194,8 @@ api_endpoints = [
     "/real-time-response/queries/sessions/v1",
     "Get a list of session_ids."
   ]
+<<<<<<< HEAD
 >>>>>>> origin/ver_0.4.2
+=======
+>>>>>>> ff19171b6fbf28bccefba826986a32438503495f
 ]
