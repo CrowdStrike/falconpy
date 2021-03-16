@@ -116,11 +116,9 @@ class TestHosts:
     def test_QueryDevicesByFilter(self):
         assert self.serviceHosts_QueryDevicesByFilter() == True
     
-    def test_addTag(self):
+    def test_tagging(self):
         assert self.serviceHosts_addTag() == True
 
-    def test_removeTag(self):
-        assert self.serviceHosts_removeTag() == True
     # def test_GetDeviceDetails(self):
     #     assert self.serviceHosts_GetDeviceDetails() == True
 
