@@ -68,7 +68,7 @@ class Hosts(ServiceClass):
 
         return returned
     
-    def FalconGroupingTag(self: object, action_name: str, ids: [] or str, tags: [] or str) -> dict:
+    def FalconGroupingTag(self: object, action_name: str, ids: list or str, tags: list or str) -> dict:
         """
         allows for tagging hosts. If the tags are empty
         """
@@ -96,7 +96,7 @@ class Hosts(ServiceClass):
                 "devices_ids": ids,
                 "tags": patch_tag
             }
-            returned = service_request(caller=self, method="PATCH", body=body, headers=HEADERS, verify=self.ssl_verify)
+            returned = service_request(caller=self, method="PATCH", body=BODY, headers=HEADERS, verify=self.ssl_verify)
         else:
             returned = generate_error_result("Invalid value specified for action_name parameter.")
         return returned
