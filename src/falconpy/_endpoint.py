@@ -73,6 +73,7 @@ api_endpoints = [
     ["queryCombinedGroupMembers", "GET", "/devices/combined/host-group-members/v1"],
     ["queryCombinedHostGroups", "GET", "/devices/combined/host-groups/v1"],
     ["PerformActionV2", "POST", "/devices/entities/devices-actions/v2"],
+    ["FalconGroupingTag", "PATCH", "/devices/entities/devices/tags/v1"],
     ["UpdateDeviceTags", "PATCH", "/devices/entities/devices/tags/v1"],
     ["GetDeviceDetails", "GET", "/devices/entities/devices/v1?ids={}"],
     ["performGroupAction", "POST", "/devices/entities/host-group-actions/v1"],

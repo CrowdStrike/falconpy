@@ -45,6 +45,34 @@ class TestHosts:
     #     else:
     #         return False
 
+    def serviceHosts_addTag(self):
+        id_list = []
+        id_list.append(
+            falcon.GetDeviceDetails(ids=falcon.QueryDevicesByFilter(parameters={"limit":1})["body"]["resources"][0])["body"]["resources"][0]["device_id"]
+        )
+        # test basic, id is a list, single valid tag w/o manipulation
+        if not falcon.FalconGroupingTag(action_name="add", ids=id_list, tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
+            return False
+        if not falcon.FalconGroupingTag(action_name="remove", ids=id_list, tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
+            return False
+        # id is a list, multiple tags needing manipulation
+        if not falcon.FalconGroupingTag(action_name="add", ids=id_list, tags=["testtag", "tagtest", "anothertag"])["status_code"] in AllowedResponses:
+            return False
+        if not falcon.FalconGroupingTag(action_name="remove", ids=id_list, tags=["testtag", "tagtest", "anothertag"])["status_code"] in AllowedResponses:
+            return False
+        # id is a list, mutliple tags some need manipulation
+        if not falcon.FalconGroupingTag(action_name="add", ids=id_list, tags=["FalconGroupingTags/testtag", "manipulate", "FalconGroupingTags/anothertag"])["status_code"] in AllowedResponses:
+            return False
+        if not falcon.FalconGroupingTag(action_name="remove", ids=id_list, tags=["FalconGroupingTags/testtag", "manipulate", "FalconGroupingTags/anothertag"])["status_code"] in AllowedResponses:
+            return False
+        # id is single string, single valid tag w/o manipulation
+        if not falcon.FalconGroupingTag(action_name="add", ids=id_list[0], tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
+            return False
+        if not falcon.FalconGroupingTag(action_name="remove", ids=id_list[0], tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
+            return False
+
+        return True
+
     def serviceHosts_PerformActionV2(self):
         id_list = []
         id_list.append(
@@ -87,7 +115,12 @@ class TestHosts:
 
     def test_QueryDevicesByFilter(self):
         assert self.serviceHosts_QueryDevicesByFilter() == True
+    
+    def test_addTag(self):
+        assert self.serviceHosts_addTag() == True
 
+    def test_removeTag(self):
+        assert self.serviceHosts_removeTag() == True
     # def test_GetDeviceDetails(self):
     #     assert self.serviceHosts_GetDeviceDetails() == True
 

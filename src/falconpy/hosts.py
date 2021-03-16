@@ -67,6 +67,39 @@ class Hosts(ServiceClass):
             returned = generate_error_result("Invalid value specified for action_name parameter.")
 
         return returned
+    
+    def FalconGroupingTag(self: object, action_name: str ids: [] or str, tags: [] or str) -> dict:
+        """
+        allows for tagging hosts. If the tags are empty
+        """
+        ALLOWED_ACTIONS = ["add", "remove"]
+        # validate action is allowed AND tags is "something"
+        if action_name.lower() in ALLOWED_ACTIONS and tags is not None:
+            FULL_URL = self.base_url + '/devices/entities/devices/tags/v1'
+            HEADERS = self.headers
+            # convert ids/tags to be a list object if not already
+            if isinstance(ids, str):
+                ids = [ids]
+            if isinstance(tags, str):
+                tags = [tags]
+            # tags must start with FalconGroupingTags, users probably won't know this so add it for them
+            patch_tag = []
+            for tag in tags:
+                if tag.startswith("FalconGroupingTags/"):
+                    patch_tag.append(tag)
+                else:
+                    tag_name = "FalconGroupingTags/" + tag
+                    patch_tag.append(tag)
+
+            BODY = {
+                "action": action_name,
+                "devices_ids": ids,
+                "tags": patch_tag
+            }
+            returned = service_request(caller=self, method="PATCH", body=body, headers=HEADERS, verify=self.ssl_verify)
+        else:
+            returned = generate_error_result("Invalid value specified for action_name parameter.")
+        return returned
 
     def GetDeviceDetails(self: object, ids) -> dict:
         """ Get details on one or more hosts by providing agent IDs (AID).
