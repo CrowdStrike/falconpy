@@ -68,7 +68,7 @@ class Hosts(ServiceClass):
 
         return returned
     
-    def FalconGroupingTag(self: object, action_name: str, ids: list or str, tags: list or str) -> dict:
+    def UpdateDeviceTags(self: object, action_name: str, ids: list or str, tags: list or str) -> dict:
         """
         allows for tagging hosts. If the tags are empty
         """
