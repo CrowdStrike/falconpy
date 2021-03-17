@@ -51,24 +51,24 @@ class TestHosts:
             falcon.GetDeviceDetails(ids=falcon.QueryDevicesByFilter(parameters={"limit":1})["body"]["resources"][0])["body"]["resources"][0]["device_id"]
         )
         # test basic, id is a list, single valid tag w/o manipulation
-        if not falcon.FalconGroupingTag(action_name="add", ids=id_list, tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(action_name="add", ids=id_list, tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
             return False
-        if not falcon.FalconGroupingTag(action_name="remove", ids=id_list, tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(action_name="remove", ids=id_list, tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
             return False
         # id is a list, multiple tags needing manipulation
-        if not falcon.FalconGroupingTag(action_name="add", ids=id_list, tags=["testtag", "tagtest", "anothertag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(action_name="add", ids=id_list, tags=["testtag", "tagtest", "anothertag"])["status_code"] in AllowedResponses:
             return False
-        if not falcon.FalconGroupingTag(action_name="remove", ids=id_list, tags=["testtag", "tagtest", "anothertag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(action_name="remove", ids=id_list, tags=["testtag", "tagtest", "anothertag"])["status_code"] in AllowedResponses:
             return False
         # id is a list, mutliple tags some need manipulation
-        if not falcon.FalconGroupingTag(action_name="add", ids=id_list, tags=["FalconGroupingTags/testtag", "manipulate", "FalconGroupingTags/anothertag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(action_name="add", ids=id_list, tags=["FalconGroupingTags/testtag", "manipulate", "FalconGroupingTags/anothertag"])["status_code"] in AllowedResponses:
             return False
-        if not falcon.FalconGroupingTag(action_name="remove", ids=id_list, tags=["FalconGroupingTags/testtag", "manipulate", "FalconGroupingTags/anothertag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(action_name="remove", ids=id_list, tags=["FalconGroupingTags/testtag", "manipulate", "FalconGroupingTags/anothertag"])["status_code"] in AllowedResponses:
             return False
         # id is single string, single valid tag w/o manipulation
-        if not falcon.FalconGroupingTag(action_name="add", ids=id_list[0], tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(action_name="add", ids=id_list[0], tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
             return False
-        if not falcon.FalconGroupingTag(action_name="remove", ids=id_list[0], tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(action_name="remove", ids=id_list[0], tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
             return False
 
         return True
