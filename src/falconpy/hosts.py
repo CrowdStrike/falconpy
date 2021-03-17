@@ -68,6 +68,44 @@ class Hosts(ServiceClass):
 
         return returned
 
+    def UpdateDeviceTags(self: object, action_name: str, ids: list or str, tags: list or str) -> dict:
+        """
+        allows for tagging hosts. If the tags are empty
+        """
+        ALLOWED_ACTIONS = ["add", "remove"]
+        # validate action is allowed AND tags is "something"
+        if action_name.lower() in ALLOWED_ACTIONS and tags is not None:
+            FULL_URL = self.base_url + '/devices/entities/devices/tags/v1'
+            HEADERS = self.headers
+            # convert ids/tags to be a list object if not already
+            if isinstance(ids, str):
+                ids = ids.split(",")
+            if isinstance(tags, str):
+                tags = tags.split(",")
+            # tags must start with FalconGroupingTags, users probably won't know this so add it for them
+            patch_tag = []
+            for tag in tags:
+                if tag.startswith("FalconGroupingTags/"):
+                    patch_tag.append(tag)
+                else:
+                    tag_name = "FalconGroupingTags/" + tag
+                    patch_tag.append(tag_name)
+            BODY = {
+                "action": action_name,
+                "device_ids": ids,
+                "tags": patch_tag
+            }
+            returned = service_request(caller=self,
+                                       method="PATCH",
+                                       endpoint=FULL_URL,
+                                       body=BODY,
+                                       headers=HEADERS,
+                                       verify=self.ssl_verify
+                                       )
+        else:
+            returned = generate_error_result("Invalid value specified for action_name parameter.")
+        return returned
+
     def GetDeviceDetails(self: object, ids) -> dict:
         """ Get details on one or more hosts by providing agent IDs (AID).
             You can get a host's agent IDs (AIDs) from the /devices/queries/devices/v1 endpoint,

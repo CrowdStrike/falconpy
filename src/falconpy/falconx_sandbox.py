@@ -44,7 +44,7 @@ class FalconX_Sandbox(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def GetArtifacts(self: object, parameters: dict) -> dict:
+    def GetArtifacts(self: object, parameters: dict) -> object:
         """ Download IOC packs, PCAP files, and other analysis artifacts. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetArtifacts
         FULL_URL = self.base_url+'/falconx/entities/artifacts/v1'
@@ -159,7 +159,7 @@ class FalconX_Sandbox(ServiceClass):
                                    )
         return returned
 
-    def GetReports(self: object, ids) -> dict:
+    def GetReports(self: object, ids) -> object:
         """ Retrieves a full sandbox report. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetReports
         ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
@@ -189,7 +189,7 @@ class FalconX_Sandbox(ServiceClass):
                                    )
         return returned
 
-    def GetSampleV2(self: object, ids, password_protect: bool = False) -> dict:
+    def GetSampleV2(self: object, ids, password_protect: bool = False) -> object:
         """ Retrieves the file associated with the given ID (SHA256). """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetSampleV2
         ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")

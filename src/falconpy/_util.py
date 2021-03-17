@@ -95,7 +95,7 @@ def generate_b64cred(client_id: str, client_secret: str) -> str:
     return encoded
 
 
-def service_request(caller: object = None, **kwargs):  # May return dict or object datatypes
+def service_request(caller: object = None, **kwargs) -> object:  # May return dict or object datatypes
     """ Checks for token expiration, refreshing if possible and then performs the request. """
     if caller:
         try:
@@ -115,8 +115,7 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
                     params: dict = None, body: dict = None, verify: bool = True,
                     data=None, files: list = [],
                     params_validator: dict = None, params_required: dict = None,
-                    body_validator: dict = None, body_required: dict = None):  # May return dict or object datatypes
-    # Additional parameters MUST be propagated to service_request function
+                    body_validator: dict = None, body_required: dict = None) -> object:  # May return dict or object datatypes
     """
         Leverages the requests library to perform the requested CrowdStrike OAuth2 API operation.
 
@@ -152,24 +151,22 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
         if params_validator:
             try:
                 validate_payload(params_validator, params, params_required)
-
             except ValueError as e:
-                returned = Result()(500, {}, {"errors": [{"message": f"{str(e)}"}], "resources": ""})
+                returned = generate_error_result(message=f"{str(e)}")
                 PERFORM = False
             except TypeError as e:
-                returned = Result()(500, {}, {"errors": [{"message": f"{str(e)}"}], "resources": ""})
+                returned = generate_error_result(message=f"{str(e)}")
                 PERFORM = False
 
         # Validate body payload
         if body_validator:
             try:
                 validate_payload(body_validator, body, body_required)
-
             except ValueError as e:
-                returned = Result()(500, {}, {"errors": [{"message": f"{str(e)}"}], "resources": ""})
+                returned = generate_error_result(message=f"{str(e)}")
                 PERFORM = False
             except TypeError as e:
-                returned = Result()(500, {}, {"errors": [{"message": f"{str(e)}"}], "resources": ""})
+                returned = generate_error_result(message=f"{str(e)}")
                 PERFORM = False
 
         # Perform the request
@@ -179,16 +176,17 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
                 response = requests.request(METHOD, endpoint, params=params, headers=headers,
                                             json=body, data=data, files=files, verify=verify)
                 if response.headers.get('content-type') == "application/json":
-                    returned = dict(Result()(response.status_code, response.headers, response.json()))
+                    returned = Result()(response.status_code, response.headers, response.json())
                 else:
                     returned = response.content
             except Exception as e:
-                returned = Result()(500, {}, {"errors": [{"message": f"{str(e)}"}], "resources": ""})
+                returned = generate_error_result(message=f"{str(e)}")
     else:
-        returned = Result()(405, {}, {"errors": [{"message": "Invalid API service method."}], "resources": ""})
+        returned = generate_error_result(message="Invalid API operation specified.", code=405)
 
     return returned
 
 
 def generate_error_result(message: str = "An error has occurred. Check your payloads and try again.", code: int = 500) -> dict:
-    return Result()(status_code=code, headers={}, body={"errors": [{"message": f"{message}"}], "resources": ""})
+    """ Normalized error messaging handler. """
+    return Result()(status_code=code, headers={}, body={"errors": [{"message": f"{message}"}], "resources": []})
