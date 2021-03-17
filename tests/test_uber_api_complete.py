@@ -216,11 +216,11 @@ class TestUber:
     def test_GetAWSAccounts(self):
         assert self.uberCCAWS_GetAWSAccounts() == True
 
-    @pytest.mark.skipif(falcon.command("QueryAWSAccounts",
-                        parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
-    def test_VerifyAWSAccountAccess(self):
-        assert self.uberCCAWS_VerifyAWSAccountAccess() == True
+    # @pytest.mark.skipif(falcon.command("QueryAWSAccounts",
+    #                     parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
+    # @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
+    # def test_VerifyAWSAccountAccess(self):
+    #     assert self.uberCCAWS_VerifyAWSAccountAccess() == True
 
     def test_QueryAWSAccountsForIDs(self):
         assert self.uberCCAWS_QueryAWSAccountsForIDs() == True
