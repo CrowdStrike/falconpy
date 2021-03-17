@@ -70,7 +70,20 @@ class TestHosts:
             return False
         if not falcon.UpdateDeviceTags(action_name="remove", ids=id_list[0], tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
             return False
+        # Force the unit test down line 84
+        if not falcon.UpdateDeviceTags(action_name="add", ids=id_list, tags="FalconGroupingTags/testtag")["status_code"] in AllowedResponses:
+            return False
 
+        return True
+
+    def serviceHosts_GenerateTagError(self):
+        id_list = []
+        id_list.append(
+            falcon.GetDeviceDetails(ids=falcon.QueryDevicesByFilter(parameters={"limit":1})["body"]["resources"][0])["body"]["resources"][0]["device_id"]
+        )
+        #  Generate an error by sending garbage as the action_name
+        if not falcon.UpdateDeviceTags(action_name="KaBOOM!", ids=id_list, tags=["FalconGroupingTags/testtag"])["status_code"] == 500:
+            return False
         return True
 
     def serviceHosts_PerformActionV2(self):
@@ -119,6 +132,8 @@ class TestHosts:
     def test_tagging(self):
         assert self.serviceHosts_addTag() == True
 
+    def test_GenerateTagError(self):
+        assert self.serviceHosts_GenerateTagError() == True
     # def test_GetDeviceDetails(self):
     #     assert self.serviceHosts_GetDeviceDetails() == True
 
