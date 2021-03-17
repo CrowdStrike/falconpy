@@ -263,7 +263,7 @@ api_endpoints = [
     "Take various actions on the hosts in your environment. Contain or lift containment on a host. Delete or restore a host."
   ],
   [
-    "FalconGroupingTag",
+    "UpdateDeviceTags",
     "PATCH",
     "/devices/entities/devices/tags/v1",
     "Append or remove one or more Falcon Grouping Tags on one or more hosts."
