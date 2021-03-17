@@ -197,6 +197,7 @@ class TestCloudConnectAWS:
         assert self.serviceCCAWS_GetAWSAccountsUsingList() == True
 
     @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
+    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
     def test_VerifyAWSAccountAccess(self):
         assert self.serviceCCAWS_VerifyAWSAccountAccess() == True
 
