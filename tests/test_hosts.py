@@ -14,7 +14,7 @@ from falconpy import hosts as FalconHosts
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconHosts.Hosts(access_token=auth.token)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 202, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestHosts:

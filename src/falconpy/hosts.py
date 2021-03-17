@@ -67,7 +67,7 @@ class Hosts(ServiceClass):
             returned = generate_error_result("Invalid value specified for action_name parameter.")
 
         return returned
-    
+
     def UpdateDeviceTags(self: object, action_name: str, ids: list or str, tags: list or str) -> dict:
         """
         allows for tagging hosts. If the tags are empty
@@ -79,9 +79,9 @@ class Hosts(ServiceClass):
             HEADERS = self.headers
             # convert ids/tags to be a list object if not already
             if isinstance(ids, str):
-                ids = [ids]
+                ids = ids.split(",")
             if isinstance(tags, str):
-                tags = [tags]
+                tags = tags.split(",")
             # tags must start with FalconGroupingTags, users probably won't know this so add it for them
             patch_tag = []
             for tag in tags:
@@ -89,14 +89,19 @@ class Hosts(ServiceClass):
                     patch_tag.append(tag)
                 else:
                     tag_name = "FalconGroupingTags/" + tag
-                    patch_tag.append(tag)
-
+                    patch_tag.append(tag_name)
             BODY = {
                 "action": action_name,
-                "devices_ids": ids,
+                "device_ids": ids,
                 "tags": patch_tag
             }
-            returned = service_request(caller=self, method="PATCH", body=BODY, headers=HEADERS, verify=self.ssl_verify)
+            returned = service_request(caller=self,
+                                       method="PATCH",
+                                       endpoint=FULL_URL,
+                                       body=BODY,
+                                       headers=HEADERS,
+                                       verify=self.ssl_verify
+                                       )
         else:
             returned = generate_error_result("Invalid value specified for action_name parameter.")
         return returned
