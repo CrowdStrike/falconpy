@@ -9,7 +9,7 @@ This SDK provides two distinct methods for interacting with CrowdStrike's Falcon
   * ***The Uber class***, which provides a single harness for interacting with the entire API, covering every available operation within every service collection.
 
 ## Installation & Removal
-![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy) ![PyPI](https://img.shields.io/pypi/v/crowdstrike-falconpy) 
+![PyPI](https://img.shields.io/pypi/v/crowdstrike-falconpy) ![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy) 
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy) ![CI Tests](https://github.com/CrowdStrike/falconpy/workflows/Python%20package/badge.svg) 
 ![CI Test Coverage](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/tests/coverage.svg)<br/>
 Stable releases of FalconPy are available on PyPI:
