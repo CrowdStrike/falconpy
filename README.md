@@ -1,7 +1,7 @@
 ![CrowdStrike Falcon](./docs/asset/cs-logo.png) [![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)<br/>
 
 # FalconPy
-![PyPI - Status](https://img.shields.io/pypi/status/crowdstrike-falconpy) ![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy)<br/>
+![PyPI - Status](https://img.shields.io/pypi/status/crowdstrike-falconpy) ![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy) ![CI Tests](https://github.com/CrowdStrike/falconpy/workflows/Python%20package/badge.svg) ![CI Test Coverage](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/tests/coverage.svg)<br/>
 The FalconPy SDK contains a collection of Python classes that abstract CrowdStrike Falcon OAuth2 API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
 
 This SDK provides two distinct methods for interacting with CrowdStrike's Falcon OAuth2 APIs:
@@ -10,8 +10,7 @@ This SDK provides two distinct methods for interacting with CrowdStrike's Falcon
 
 ## Installation & Removal
 ![PyPI](https://img.shields.io/pypi/v/crowdstrike-falconpy) ![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy) 
-![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy) ![CI Tests](https://github.com/CrowdStrike/falconpy/workflows/Python%20package/badge.svg) 
-![CI Test Coverage](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/tests/coverage.svg)<br/>
+![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy)<br/>
 Stable releases of FalconPy are available on PyPI:
 ```shell
 $ python3 -m pip install crowdstrike-falconpy
