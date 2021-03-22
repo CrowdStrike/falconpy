@@ -45,3 +45,6 @@ process, involving the following steps:
     - These patches will be submitted as a separate pull request and contain a version update.
     - This pull request will be flagged as a security fix.
     - Once merged, and after post-merge unit testing has been completed, the patch will be immediately published to both PyPI repositories.
+
+## Comments
+If you have suggestions on how this process could be improved, please let us know by [starting a new discussion](https://github.com/CrowdStrike/falconpy/discussions) or sending the maintainers an email at falconpy@crowdstrike.com.
