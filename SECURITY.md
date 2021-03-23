@@ -47,4 +47,4 @@ process, involving the following steps:
     - Once merged, and after post-merge unit testing has been completed, the patch will be immediately published to both PyPI repositories.
 
 ## Comments
-If you have suggestions on how this process could be improved, please let us know by [starting a new discussion](https://github.com/CrowdStrike/falconpy/discussions) or sending the maintainers an email at falconpy@crowdstrike.com.
+If you have suggestions on how this process could be improved, please let us know by [starting a new discussion](https://github.com/CrowdStrike/falconpy/discussions).
