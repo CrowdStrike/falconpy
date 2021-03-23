@@ -24,7 +24,13 @@ When discovered, we release security vulnerability patches for the most recent r
 
 ## Reporting a potential security vulnerability
 
-Please report suspected security vulnerabilities to __falconpy@crowdstrike.com__. 
+We have multiple avenues to receive security-related vulnerability reports.
+
+Please report suspected security vulnerabilities by:
++ Submitting a bug
++ Starting a new discussion
++ Submitting a PR to potential resolve the issue
++ Sending an email to __falconpy@crowdstrike.com__. 
 
 ## Disclosure and mitigation process
 
