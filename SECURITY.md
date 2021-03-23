@@ -30,7 +30,6 @@ Please report suspected security vulnerabilities by:
 + Submitting a [bug](https://github.com/CrowdStrike/falconpy/issues)
 + Starting a new [discussion](https://github.com/CrowdStrike/falconpy/discussions)
 + Submitting a [pull request](https://github.com/CrowdStrike/falconpy/pulls) to potentially resolve the issue
-+ Submitting a report to our [Bug Bounty](https://hackerone.com/crowdstrike) program
 + Sending an email to __falconpy@crowdstrike.com__. 
 
 ## Disclosure and mitigation process
