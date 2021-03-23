@@ -27,9 +27,9 @@ When discovered, we release security vulnerability patches for the most recent r
 We have multiple avenues to receive security-related vulnerability reports.
 
 Please report suspected security vulnerabilities by:
-+ Submitting a bug
-+ Starting a new discussion
-+ Submitting a PR to potential resolve the issue
++ Submitting a [bug](https://github.com/CrowdStrike/falconpy/issues)
++ Starting a new [discussion](https://github.com/CrowdStrike/falconpy/discussions)
++ Submitting a [pull request](https://github.com/CrowdStrike/falconpy/pulls) to potentially resolve the issue
 + Submitting a report to our [Bug Bounty](https://hackerone.com/crowdstrike) program
 + Sending an email to __falconpy@crowdstrike.com__. 
 
