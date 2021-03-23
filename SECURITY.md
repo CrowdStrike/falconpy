@@ -30,6 +30,7 @@ Please report suspected security vulnerabilities by:
 + Submitting a bug
 + Starting a new discussion
 + Submitting a PR to potential resolve the issue
++ Submitting a report to our [Bug Bounty](https://hackerone.com/crowdstrike) program
 + Sending an email to __falconpy@crowdstrike.com__. 
 
 ## Disclosure and mitigation process
