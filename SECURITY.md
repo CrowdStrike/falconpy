@@ -38,7 +38,7 @@ Please report suspected security vulnerabilities by:
 Upon receiving a security bug report, the issue will be assigned to one of the project maintainers. This person will coordinate the related fix and release
 process, involving the following steps:
 + Communicate with you to confirm we have received the report and provide you with a status update.
-    - You should receive this message within 48 hours.
+    - You should receive this message within 48 - 72 business hours.
 + Confirmation of the issue and a determination of affected versions.
 + An audit of the codebase to find any potentially similar problems.
 + Preparation of patches for all releases still under maintenance.
