@@ -129,7 +129,7 @@ class APIHarness:
                 FULL_URL = FULL_URL.format(str(partition))
             if file_name:
                 delim = "&" if "?" in FULL_URL else "?"
-                FULL_URL = f"{FULL_URL}{delim}file_name={str(action_name)}"
+                FULL_URL = f"{FULL_URL}{delim}file_name={str(file_name)}"
             HEADERS = self.headers()
             for item in headers:
                 HEADERS[item] = headers[item]
