@@ -20,14 +20,7 @@ FalconPy functionality is only tested to run under the following versions of Pyt
 
 ## Supported FalconPy versions
 
-We release patches for security vulnerabilities as they are discovered. 
-
-Version eligibility for receiving patches depends on the CVSS v3.0 Rating:
-
-| CVSS v3.0 | Supported Versions |
-| :------- | :-------------------- |
-| 9.0 - 10.0 | Releases within the past three months |
-| 4.0 - 8.9 | Most recent release |
+When discovered, we release security vulnerability patches for the most recent release at an accelerated cadence.  
 
 ## Reporting a potential security vulnerability
 
