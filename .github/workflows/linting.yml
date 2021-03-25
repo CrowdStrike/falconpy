@@ -39,5 +39,5 @@ jobs:
         DEBUG_API_ID: ${{ secrets.DEBUG_API_ID }}
         DEBUG_API_SECRET: ${{ secrets.DEBUG_API_SECRET }}
       run: |
-        coverage run --source src -m pytest -s
+        coverage run --source=src --omit=*shell*,*_debug.py -m pytest -s
         coverage report
