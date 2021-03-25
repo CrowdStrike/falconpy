@@ -19,7 +19,7 @@ COVERAGE RESULTS SHOULD BE POSTED HERE
 + Details of new features and functionality should be listed here
 
 ## Issues resolved
-+ Bug fix: Bugs should be listed explicitly. Please link your PR to any related issues so that they are triaged properly. Add a link to this line to the issue.
++ Bug fix: Bugs should be listed individually. Please link your PR to any related issues so that they are triaged properly. Add a link to this line to the issue.
 + BE EXPLICIT in what you are resolving
 
 ## Other
