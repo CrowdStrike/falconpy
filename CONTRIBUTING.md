@@ -41,6 +41,7 @@ If this is a concern, contact the maintainers before contributing.
 ### Additional contributor package requirements
 The file `requirements-dev.txt` contains additional Python requirements used for developing unit tests and for accessing the integrated debugger within FalconShell.
 Review this file's contents and install these requirements before proceeding:
++ flake8
 + pytest
 + pytest-cov
 + coverage
@@ -54,6 +55,9 @@ Review this file's contents and install these requirements before proceeding:
 + All new contributions __must__ pass unit testing before they will be merged.
     - For scenarios where unit testing passes in the PR and fails post-merge, a maintainer will address the issue. If the problem is programmatic and related to code within the pull request, the merge may be reverted.
 + The util folder contains BASH scripts for triggering unit tests that match unit testing performed as part of our GitHub workflows.
+
+### Linting
+All submitted code must meet minimum linting requirements. We use `flake8` for linting. Refer to the "lint.sh" script within the util folder to review our standard linting parameters.
 
 ### Branch targeting
 _Please do not target the `main` branch with your Pull Request unless directed to do so by a maintainer_. Instead, target your PR at the most recent development branch. 
