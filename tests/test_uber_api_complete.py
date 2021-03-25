@@ -106,6 +106,7 @@ class TestUber:
         hash2 = hash2.hexdigest()
         if os.path.exists(TARGET):
             os.remove(TARGET)
+        response = falcon.command("DeleteSampleV3", ids=sha)
         if hash1 == hash2:
             return True
         else:
