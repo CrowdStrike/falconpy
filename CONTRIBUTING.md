@@ -4,7 +4,7 @@
 _Welcome!_ We're excited you want to take part in the FalconPy community! 
 
 Please review this document for details regarding getting started with your first contribution, packages you'll need to install as a developer, and our pull request process. If you have any questions, please let us know by
-posting in your question in the [discussion board](https://github.com/CrowdStrike/falconpy/discussions).
+posting your question in the [discussion board](https://github.com/CrowdStrike/falconpy/discussions).
 
 ### Before you begin
 - Have you read the [Code of Conduct](CODE_OF_CONDUCT.md)? The Code of Conduct helps us establish community norms and how they'll be enforced.
