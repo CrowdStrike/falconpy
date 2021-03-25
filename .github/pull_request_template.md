@@ -1,7 +1,7 @@
 > Please review our [Code of Conduct](https://github.com/CrowdStrike/falconpy/CODE_OF_CONDUCT.md) 
 > and our [Contribution Guidelines](https://github.com/CrowdStrike/falconpy/CONTRIBUTING.md) before submitting a Pull Request.
 
-> PLEASE REMOVE ALL PR TIPS BEFORE SUBMITTING
+> REMOVE ALL PULL REQUEST HINTS BEFORE SUBMITTING
 
 ## PULL REQUEST TITLE
 Pull Request general description should go here.
