@@ -15,7 +15,7 @@ posting in your question in the [discussion board](https://github.com/CrowdStrik
 - [Suggestions](#suggestions)
 
 ## How you can contribute
-- Submit a [bug report](https://github.com/CrowdStrike/falconpy/issues).
+- See something? Say something! Submit a [bug report](https://github.com/CrowdStrike/falconpy/issues) to let the community know what you've experienced or found. Bonus points if you suggest possible fixes or what you feel may resolve the issue. For example: "_Attempted to use the XZY API class but it errored out. Could a more descriptive error code be returned?_"
 - Join the [discussion board](https://github.com/CrowdStrike/falconpy/discussions) where you can:
     - [Interact](https://github.com/CrowdStrike/falconpy/discussions/categories/general) with other members of the community
     - Suggest [new functionality](https://github.com/CrowdStrike/falconpy/discussions/categories/ideas)
