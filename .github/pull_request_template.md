@@ -7,7 +7,7 @@
 - [ ] Bug fixes 
 - [ ] Breaking Change
 - [ ] Updated unit tests
-- [ ] Additional documentation required
+- [ ] Documentation
 
 > Check the values above that match your PR and remove the remaining.
 
@@ -25,4 +25,3 @@ COVERAGE RESULTS SHOULD BE POSTED HERE
 ## Other
 + List any other details here
 + Documentation regarding your changes can also be listed here
-
