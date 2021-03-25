@@ -1,4 +1,9 @@
-## PR TITLE
+> Please review our [Code of Conduct](https://github.com/CrowdStrike/falconpy/CODE_OF_CONDUCT.md) 
+> and our [Contribution Guidelines](https://github.com/CrowdStrike/falconpy/CONTRIBUTING.md) before submitting a Pull Request.
+
+> PLEASE REMOVE ALL PR TIPS BEFORE SUBMITTING
+
+## PULL REQUEST TITLE
 > Please fill out all values and then remove any help text before submitting your PR.
 > Refer to [this PR](https://github.com/CrowdStrike/falconpy/pull/67) as a reference example!
 
