@@ -1,6 +1,6 @@
 ## PR TITLE
 > Please fill out all values and then remove any help text before submitting your PR.
-> You can use [this PR](https://github.com/CrowdStrike/falconpy/pull/67) as a reference example.
+> Refer to [this PR](https://github.com/CrowdStrike/falconpy/pull/67) as a reference example!
 
 - [ ] Enhancement
 - [ ] Major Feature update
