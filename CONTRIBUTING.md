@@ -7,7 +7,7 @@ Please review this document for details regarding getting started with your firs
 posting in your question in the [discussion board](https://github.com/CrowdStrike/falconpy/discussions).
 
 ### Before you begin
-- Have you read the [Code of Conduct](CODE_OF_CONDUCT.md)?
+- Have you read the [Code of Conduct](CODE_OF_CONDUCT.md)? The Code of Conduct helps us establish community norms and how they'll be enforced.
 
 ### Table of Contents
 - [How you can contribute](#how-you-can-contribute)
