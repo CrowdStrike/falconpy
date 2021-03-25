@@ -4,6 +4,7 @@
 > PLEASE REMOVE ALL PR TIPS BEFORE SUBMITTING
 
 ## PULL REQUEST TITLE
+Pull Request general description should go here.
 > Please fill out all values and then remove any help text before submitting your PR.
 > Refer to [this PR](https://github.com/CrowdStrike/falconpy/pull/67) as a reference example!
 
