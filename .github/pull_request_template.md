@@ -19,7 +19,10 @@ COVERAGE RESULTS SHOULD BE POSTED HERE
 + If your PR adds features or functionality, what should be included in the next release notes?
 
 ## Issues resolved
-+ Bug fix: Bugs should be listed individually. Please link your PR to any related issues so that they are triaged properly. Add a link to this line to the issue.
++ Bug fix: Please list related bugs individually. Identifying the ticket or bug report in the PR description auto-updates the affected ticket and helps the community with ticket triage. For example:
+
+* Fixes https://github.com/CrowdStrike/falconpy/issues/1234 by doing foo 
+* Mitigates https://github.com/CrowdStrike/falconpy/issues/5678 by updating bar.
 + BE EXPLICIT in what you are resolving
 
 ## Other
