@@ -48,7 +48,7 @@ def embed():
     ipshell()
 
 
-def startup():
+def startup(dbg_falcon_client_id: str, dbg_falcon_client_secret: str):
     dbg_authorization = FalconAuth.OAuth2(creds={
         'client_id': dbg_falcon_client_id,
         'client_secret': dbg_falcon_client_secret
@@ -62,7 +62,13 @@ def startup():
     return debug_token
 
 
-dbg_falcon_client_id = os.getenv("FALCON_CLIENT_ID")
-dbg_falcon_client_secret = os.getenv("FALCON_CLIENT_SECRET")
-debug_token = startup()
-embed()
+def init(dbg_falcon_client_id: str = None, dbg_falcon_client_secret: str = None, creds: dict = None):
+    if creds:
+        dbg_falcon_client_id = creds["falcon_client_id"]
+        dbg_falcon_client_secret = creds["falcon_client_secret"]
+    global debug_token
+    debug_token = startup(dbg_falcon_client_id, dbg_falcon_client_secret)
+    embed()
+
+
+debug_token = False
