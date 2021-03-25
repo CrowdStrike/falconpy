@@ -39,13 +39,7 @@ When you submit code changes, your submissions are understood to be under the sa
 If this is a concern, contact the maintainers before contributing.
 
 ### Additional contributor package requirements
-The file `requirements-dev.txt` contains additional Python requirements used for developing unit tests and for accessing the integrated debugger within FalconShell.
-Review this file's contents and install these requirements before proceeding:
-+ flake8
-+ pytest
-+ pytest-cov
-+ coverage
-+ iPython
+`requirements-dev.txt` contains Python modules required for unit test development and for accessing the integrated debugger within FalconShell. Review this file's contents and install missing requirements as needed.
 
 ### Unit testing & Code coverage
 + All submitted code must also have an associated unit test that tests __all__ code paths within this new segment. (:100: percent coverage)
