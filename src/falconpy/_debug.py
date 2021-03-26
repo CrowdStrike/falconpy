@@ -1,4 +1,3 @@
-import os
 from . import oauth2 as FalconAuth
 
 banner = """
@@ -30,7 +29,7 @@ def help(item=None):
     text = """
     This is interactive Python shell. Python help is available under python_help()
     If you have FALCON_CLIENT_ID FALCON_CLIENT_SECRET environment variable set. This
-    shell will authenticate at the start up and the 'debug_token' variable will be 
+    shell will authenticate at the start up and the 'debug_token' variable will be
     filled in with your OAuth2 token.
     """
     if item is None:
