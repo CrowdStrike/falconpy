@@ -3,3 +3,4 @@
 #
 coverage run --source=src/falconpy --omit=*shell*,*_debug.py -m pytest -s -v
 coverage report
+bandit -r src
