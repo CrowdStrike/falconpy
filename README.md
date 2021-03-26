@@ -1,7 +1,6 @@
 ![CrowdStrike Falcon](./docs/asset/cs-logo.png) [![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)<br/>
 
 # FalconPy - The CrowdStrike Falcon SDK for Python 3
-![PyPI - Status](https://img.shields.io/pypi/status/crowdstrike-falconpy)
 ![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy)
 ![CI lines tested](https://img.shields.io/tokei/lines/github/CrowdStrike/falconpy)
@@ -15,8 +14,11 @@ This SDK provides two distinct methods for interacting with CrowdStrike's Falcon
   * ***The Uber class***, which provides a single harness for interacting with the entire API, covering every available operation within every service collection.
 
 ## Installation & Removal
-![PyPI](https://img.shields.io/pypi/v/crowdstrike-falconpy) ![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy) 
-![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy) ![CI Tests](https://github.com/CrowdStrike/falconpy/workflows/Python%20package/badge.svg)<br/>
+![PyPI - Status](https://img.shields.io/pypi/status/crowdstrike-falconpy)
+![PyPI](https://img.shields.io/pypi/v/crowdstrike-falconpy)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy) 
+![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy)
+![CI Tests](https://github.com/CrowdStrike/falconpy/workflows/Python%20package/badge.svg)<br/>
 Stable releases of FalconPy are available on Python Package Index:
 ```shell
 $ python3 -m pip install crowdstrike-falconpy
