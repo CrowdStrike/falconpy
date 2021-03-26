@@ -41,7 +41,7 @@ jobs:
       run: |
         coverage run --source=src --omit=src/falconpy/debug.py -m pytest -s
         coverage report
-    - name: Analyze with Bandit
+    - name: Analyze with bandit
       run: |
         bandit -r src
 
