@@ -71,6 +71,14 @@ setup(
         "requests",
         "urllib3"
     ],
+    extras_require={
+        "dev": [
+            "flake8",
+            "coverage",
+            "pytest",
+            "bandit",
+        ],
+    },
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
