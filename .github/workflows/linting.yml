@@ -44,3 +44,4 @@ jobs:
     - name: Analyze with Bandit
       run: |
         bandit -r src
+
