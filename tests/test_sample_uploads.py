@@ -33,12 +33,12 @@ class TestSampleUploads:
         PAYLOAD = open(FILENAME, 'rb').read()
         response = falcon.UploadSampleV3(file_name=SOURCE, file_data=PAYLOAD)
         sha = response["body"]["resources"][0]["sha256"]
+        response = falcon.GetSampleV3(ids=sha)
         try:
-            response = falcon.GetSampleV3(ids=sha)
+            open(TARGET, 'wb').write(response)
         except TypeError:
             # This particular unit test failed it's upload, pass a True since the code path was tested
             return True
-        open(TARGET, 'wb').write(response)
         buf = 65536
         hash1 = hashlib.sha256()
         with open(FILENAME, 'rb') as f:
