@@ -17,12 +17,19 @@ Pull Request general description should go here.
 
 > Check the values above that match your PR and remove the remaining.
 
+#### Unit test coverage
 ```shell
 COVERAGE RESULTS SHOULD BE POSTED HERE
 PLEASE REVIEW CONTRIBUTING.md FOR MORE
 DETAILS ON GENERATING COVERAGE RESULTS
 ```
 
+#### Bandit analysis
+```shell
+BANDIT ANALYSIS RESULTS SHOULD BE POSTED
+HERE. PLEASE REVIEW CONTRIBUTING.md FOR
+MORE DETAILS ON GENERATING BANDIT RESULTS
+```
 ## Added features and functionality
 + If your PR adds features or functionality, what should be included in the next release notes?
 
