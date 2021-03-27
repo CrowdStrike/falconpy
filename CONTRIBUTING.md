@@ -98,6 +98,13 @@ All submitted code must meet minimum linting requirements. We use `flake8` for l
 
 More information about flake8 can be found [here](https://flake8.pycqa.org/en/latest/).
 
+### Breaking changes
+In an effort to maintain backwards compatibilty, we thoroughly unit test every pull request for all versions of Python we support. These unit tests are intended to catch general programmatic errors, possible vulnerabilities (via bandit) and _potential breaking changes_. 
+
+> If you have to adjust a unit test locally in order to produce passing results, there is a possibility you are working with a potential breaking change.
+
+Please fully document changes to unit tests within your pull request. If you did not specify "Breaking Change" on the punch list in the description, and the change is identified as possibly breaking, this may delay or prevent approval of your pull request.
+
 ### Branch targeting
 _Please do not target the `main` branch with your Pull Request unless directed to do so by a maintainer_. Instead, target your PR at the most recent development branch. 
 
