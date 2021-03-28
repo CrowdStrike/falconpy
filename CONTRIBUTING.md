@@ -11,7 +11,14 @@ posting your question in the [discussion board](https://github.com/CrowdStrike/f
 
 ### Table of Contents
 - [How you can contribute](#how-you-can-contribute)
+    + [Bug reporting](#bug-reporting-is-handled-using-githubs-issues)
+    + [All other discussions](#githubs-discussion-board-is-used-for-questions-suggestions-and-feedback)
 - [Pull Requests](#pull-requests)
+    + [Contributor dependencies](#additional-contributor-package-requirements)
+    + [Unit testing](#unit-testing--code-coverage)
+    + [Linting](#linting)
+    + [Breaking changes](#breaking-changes)
+    + [Branch targeting](#branch-targeting)
 - [Suggestions](#suggestions)
 
 ## How you can contribute
