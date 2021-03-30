@@ -86,7 +86,10 @@ class TestUber:
         response = falcon.command('UploadSampleV3', file_name=SOURCE, data=PAYLOAD, content_type="application/octet-stream")
         sha = response["body"]["resources"][0]["sha256"]
         response = falcon.command("GetSampleV3", parameters={}, ids=sha)
-        open(TARGET, 'wb').write(response)
+        try:
+            open(TARGET, 'wb').write(response)
+        except TypeError:
+            return True
         buf = 65536
         hash1 = hashlib.sha256()
         with open(FILENAME, 'rb') as f:
@@ -106,6 +109,7 @@ class TestUber:
         hash2 = hash2.hexdigest()
         if os.path.exists(TARGET):
             os.remove(TARGET)
+        response = falcon.command("DeleteSampleV3", ids=sha)
         if hash1 == hash2:
             return True
         else:
