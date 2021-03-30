@@ -102,7 +102,7 @@ See the wiki for extended documentation: [https://github.com/CrowdStrike/falconp
 *Coming soon*.
 
 ## Conference Presentations
-[![API Office Hour 03.23.21](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/api_office_hour_preso_thumbnail.png)](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/api_office_hour_032321.pptx?raw=true)
+[![API Office Hour 03.23.21](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/api_office_hour_preso_thumbnail.png)](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/falconpy-api-office-hour_customer_presentation.pdf?raw=true)
 
 ## Blogs/Articles/Prose
 *Coming soon*.
