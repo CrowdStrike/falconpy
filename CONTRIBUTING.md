@@ -53,7 +53,7 @@ If this is a concern, contact the maintainers before contributing.
     - If the code submission is already covered by an existing unit test, additional unit tests are not required.
     - Please include coverage testing results in your Pull Request. (Example: [PR #67](https://github.com/CrowdStrike/falconpy/pull/67))
 + Unit testing is intended to prove out code formatting and functionality, not necessarily API functionality. Unit testing does not need to communicate with the API in order to provide the necessary coverage. 
-+ We use bandit for static code analsys.
++ We use bandit for static code analysis.
     - Please include bandit analysis results in the section provided in your Pull Request.
     - Pull Requests that produce alerts in bandit may be closed without merging.
 + All new contributions __must__ pass unit testing before they will be merged.
