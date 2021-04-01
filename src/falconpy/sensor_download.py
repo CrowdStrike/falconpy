@@ -1,4 +1,4 @@
-from ._util import service_request, generate_error_result, parse_id_list
+from ._util import service_request, parse_id_list
 from ._service_class import ServiceClass
 
 import os
@@ -21,7 +21,7 @@ class Sensor_Download(ServiceClass):
                                    )
         return returned
 
-    def DownloadSensorInstallerById(self: object, _id: str, download_path: str="sensor_downloads"):
+    def DownloadSensorInstallerById(self: object, _id: str, file_name: str, download_path: str="sensor_downloads"):
         """
         download the sensor by the sha256 into the specified directory.
         the path will be created for the user if it does not already exist
@@ -37,8 +37,10 @@ class Sensor_Download(ServiceClass):
                                    headers=HEADERS,
                                    verify=self.ssl_verify
                                    )
-        # probably can't just return a response but need to chunk out the file writes
-        return returned
+        # write the newly downloaded sensor into the aforementioned directory with provided file name
+        with open(os.path.join(download_path, file_name), "wb") as sensor:
+            sensor.write(returned)
+        
 
     def GetSensorInstallersEntities(self: object, ids: list):
         """
@@ -80,7 +82,7 @@ class Sensor_Download(ServiceClass):
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=FULL_URL,
-                                   param=PARAMS,
+                                   params=PARAMS,
                                    headers=HEADERS,
                                    verify=self.ssl_verify
                                    )
