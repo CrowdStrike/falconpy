@@ -48,6 +48,11 @@ from src.falconpy import _version, _maintainer, _title, _description, _author, _
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+# Remove GitHub's emoji
+emojis = [":speech_balloon: ", ":bulb: ", ":pray: ", ":raised_hands: ", " :fire:", ":fire: "]
+for emoji in emojis:
+    long_description = long_description.replace(emoji, "")
+
 setup(
     name=_title,
     version=_version,
@@ -66,6 +71,15 @@ setup(
         "requests",
         "urllib3"
     ],
+    extras_require={
+        "dev": [
+            "flake8",
+            "coverage",
+            "pytest-cov",
+            "pytest",
+            "bandit",
+        ],
+    },
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
