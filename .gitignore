@@ -10,3 +10,4 @@ build/
 dist
 falconpy.egg-info/
 __pycache__/
+.env
