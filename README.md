@@ -3,7 +3,6 @@
 # FalconPy - The CrowdStrike Falcon SDK for Python 3
 ![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy)
-![CI lines tested](https://img.shields.io/tokei/lines/github/CrowdStrike/falconpy)
 [![CodeQL](https://github.com/CrowdStrike/falconpy/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/codeql-analysis.yml)
 ![CI Test Coverage](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/tests/coverage.svg)
 ![Maintained](https://img.shields.io/maintenance/yes/2021)<br/>
