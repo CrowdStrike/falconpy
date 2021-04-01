@@ -48,7 +48,7 @@ $ python3 -m pip uninstall crowdstrike-falconpy
 | [CrowdStrike Prevention Policy APIs](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [./src/falconpy/prevention_policy.py](./src/falconpy/prevention_policy.py) |
 | [CrowdStrike Real Time Response (RTR) APIs](https://falcon.crowdstrike.com/support/documentation/90/real-time-response-apis) | [./src/falconpy/real_time_response.py](./src/falconpy/real_time_response.py) |
 | [CrowdStrike Realtime Response (RTR) Administration API](https://falcon.crowdstrike.com/support/documentation/90/real-time-response-apis) | [./src/falconpy/real_time_response_admin.py](./src/falconpy/real_time_response_admin.py) |
-| [CrowdStrike Sensor Download APIs](https://falcon.crowdstrike.com/support/documentation/109/sensor-download-apis) | *Coming Soon* |
+| [CrowdStrike Sensor Download APIs](https://falcon.crowdstrike.com/support/documentation/109/sensor-download-apis) | ./src/sensor_download.py |
 | [CrowdStrike Spotlight APIs](https://falcon.crowdstrike.com/support/documentation/98/spotlight-apis) | [./src/falconpy/spotlight_vulnerabilities.py](./src/falconpy/spotlight_vulnerabilities.py) |
 | [CrowdStrike User and Roles API](https://falcon.crowdstrike.com/support/documentation/87/users-and-roles-apis) | [./src/falconpy/user_management.py](./src/falconpy/user_management.py) | 
 | [Falcon Discover for Cloud and Containers - AWS Accounts APIs](https://falcon.crowdstrike.com/support/documentation/91/discover-for-aws-apis) | [./src/falconpy/cloud_connect_aws.py](./src/falconpy/cloud_connect_aws.py) |
