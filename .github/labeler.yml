@@ -4,6 +4,7 @@ documentation:
 package:
 - src/*.py
 - src/falconpy/*.py
+- setup.py
 
 pipeline:
 - .github/*
