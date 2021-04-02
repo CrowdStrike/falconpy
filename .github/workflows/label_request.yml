@@ -1,7 +1,9 @@
 name: "Label Request"
 on:
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
+      - 'ver_*'
 
 jobs:
   triage:
