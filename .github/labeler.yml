@@ -1,0 +1,11 @@
+documentation:
+- any: ['docs/*', '*.md']
+
+package:
+- any: ['src/*.py']
+
+pipeline:
+- any: ['.github/*']
+
+unit testing:
+- any: ['tests/*', 'util/*']
