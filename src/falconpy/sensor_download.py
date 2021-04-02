@@ -3,6 +3,7 @@ from ._service_class import ServiceClass
 
 import os
 
+
 class Sensor_Download(ServiceClass):
 
     def GetCombinedSensorInstallersByQuery(self: object, params: dict) -> dict:
@@ -21,7 +22,7 @@ class Sensor_Download(ServiceClass):
                                    )
         return returned
 
-    def DownloadSensorInstallerById(self: object, _id: str, file_name: str, download_path: str="sensor_downloads"):
+    def DownloadSensorInstallerById(self: object, _id: str, file_name: str, download_path: str = "sensor_downloads"):
         """
         download the sensor by the sha256 into the specified directory.
         the path will be created for the user if it does not already exist
@@ -40,7 +41,7 @@ class Sensor_Download(ServiceClass):
         # write the newly downloaded sensor into the aforementioned directory with provided file name
         with open(os.path.join(download_path, file_name), "wb") as sensor:
             sensor.write(returned)
-        
+        return True if returned else False
 
     def GetSensorInstallersEntities(self: object, ids: list):
         """
