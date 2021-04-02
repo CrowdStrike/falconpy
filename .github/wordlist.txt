@@ -26,6 +26,7 @@ UUID
 USERUUID
 SHA
 sha
+MacOS
 DeleteSampleV
 upfile
 formData
