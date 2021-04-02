@@ -23,7 +23,7 @@ import json
 from falconpy import api_complete as FalconSDK
 
 # Grab our config parameters
-with open('config.json', 'r') as file_config:
+with open('../config.json', 'r') as file_config:
     config = json.loads(file_config.read())
 
 # Create an instance of the Uber class
