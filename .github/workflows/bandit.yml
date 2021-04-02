@@ -1,4 +1,4 @@
-name: Bandit Analysis
+name: Bandit
 on:
   push:
     branches: [ main ]
