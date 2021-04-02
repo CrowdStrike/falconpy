@@ -7,7 +7,7 @@ This document outlines security policy and procedures for the CrowdStrike `falco
 
 ## Supported Python versions
 
-FalconPy functionality is only tested to run under the following versions of Python.
+FalconPy functionality is unit tested to run under the following versions of Python.
 
 | Version | Supported |
 | :------- | :--------- |
@@ -17,6 +17,8 @@ FalconPy functionality is only tested to run under the following versions of Pyt
 | 3.6.x   | :white_check_mark: |
 | <= 3.5  | :x: |
 | <= 2.x.x | :x: |
+
+This unit testing is performed using Windows, MacOS, and Ubuntu Linux.
 
 ## Supported FalconPy versions
 
