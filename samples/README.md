@@ -6,7 +6,13 @@
 These examples are provided as a quick start for your project.
 
 + [Authentication for Examples](#authentication-for-these-examples)
-+ [Samples by API](#samples-by-api)
++ [Samples by API service collection](#samples-by-api-service-collection)
+    - [Detections](#detections)
+    - [Event Streams](#event-streams)
+    - [Falcon Discover](#falcon-discover)
+    - [Hosts](#hosts)
+    - [Real Time Response](#real-time-response)
+    - [Sample Uploads](#sample-uploads)
 + [Suggestions](#suggestions)
 
 ## Authentication for these Examples
@@ -17,10 +23,25 @@ This is not the only method of providing these values, and not recommended for p
 In order to test these samples locally in your development environment, rename the file `config_sample.json` to `config.json` and then
 update this file to reflect your current development API credentials.
 
-## Samples by API
-These samples are categorized by API service collection.
+## Samples by API service collection
+These samples are categorized by API service collection. The list below will grow as more samples are planned.
 
-### Sample Uploads API
+### Detections
+_Coming Soon_
+
+### Event Streams
+_Coming Soon_
+
+### Falcon Discover
+_Coming Soon_
+
+### Hosts
+_Coming Soon_
+
+### Real Time Response
+_Coming Soon_
+
+### Sample Uploads
 + [Upload, Retrieve and then Delete a file](sample_uploads/sample_uploads.py)
 
 ## Suggestions
