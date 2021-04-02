@@ -1,0 +1,15 @@
+APIs
+CrowdScore
+CrowdStrike
+CrowdStrike's
+detections
+initialisation
+SDK
+gofalcon
+oauth
+OAuth
+OAuth2
+oauth2
+pre
+falconpy
+FalconPy
