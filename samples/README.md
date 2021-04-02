@@ -14,8 +14,8 @@ In order to expedite sample delivery, we will be following a standard pattern fo
 This is not the only method of providing these values, and not recommended for production deployments as the config.json file is
 **not encrypted**.
 
-In order to test these samples locally in your development environment, update the file config.json to reflect your current 
-development API credentials.
+In order to test these samples locally in your development environment, rename the file `config_sample.json` to `config.json` and then
+update this file to reflect your current development API credentials.
 
 ## Samples by API
 These samples are categorized by API service collection.
