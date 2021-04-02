@@ -1,9 +1,13 @@
 name: Bandit
 on:
   push:
-    branches: [ main ]
+    branches: 
+      - main
+      - 'ver_*'
   pull_request:
-    branches: [ main ]
+    branches: 
+      - main
+      - 'ver_*'
 
 jobs:
   analyze:
