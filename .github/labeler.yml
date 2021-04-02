@@ -5,7 +5,9 @@ package:
 - any: ['src/*.py']
 
 pipeline:
-- any: ['.github/*']
+- .github/*
+- .github/workflows/*
+- .github/ISSUE_TEMPLATE/*
 
 unit testing:
 - any: ['tests/*', 'util/*']
