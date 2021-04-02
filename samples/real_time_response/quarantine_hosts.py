@@ -5,7 +5,7 @@
 # |_| \_\___|\__,_|_|   |_| |_|_| |_| |_|\___| |_| \_\___||___/ .__/ \___/|_| |_|___/\___|
 #                                                             |_|
 #
-# This example demonstrates how to apply or lift containment on a host using it's hostname.
+# This example demonstrates how to apply or lift containment on a host using its hostname.
 #
 
 import json
