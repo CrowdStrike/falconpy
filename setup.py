@@ -85,6 +85,7 @@ setup(
         "Intended Audience :: Developers",
         "Operating System :: Unix",
         "Operating System :: POSIX",
+        "Operating System :: MacOS",
         "Operating System :: Microsoft :: Windows",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",

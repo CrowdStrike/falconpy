@@ -2,10 +2,14 @@ documentation:
 - any: ['docs/*', '*.md']
 
 package:
-- any: ['src/*.py']
+- src/*.py
+- src/falconpy/*.py
+- setup.py
 
 pipeline:
-- any: ['.github/*']
+- .github/*
+- .github/workflows/*
+- .github/ISSUE_TEMPLATE/*
 
 unit testing:
 - any: ['tests/*', 'util/*']
