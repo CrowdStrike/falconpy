@@ -1,8 +1,4 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
-
 name: Python package
-
 on:
   push:
     branches: [ main ]
@@ -11,11 +7,7 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
-        python-version: ['3.6', '3.7', '3.8', '3.9']
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -25,22 +17,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install flake8 pytest coverage bandit
+        python -m pip install flake8
         pip install -r requirements.txt
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 src/falconpy --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 src/falconpy --count --exit-zero --max-complexity=15 --max-line-length=127 --statistics
-    - name: Test with pytest
-      env:
-        DEBUG_API_ID: ${{ secrets.DEBUG_API_ID }}
-        DEBUG_API_SECRET: ${{ secrets.DEBUG_API_SECRET }}
-      run: |
-        coverage run --source=src --omit=src/falconpy/debug.py -m pytest -s
-        coverage report
-    - name: Analyze with bandit
-      run: |
-        bandit -r src
-
+        # Stop the build on all linting errors - 04.02.21 / jshcodes@CrowdStrike
+        flake8 src/falconpy --count --max-complexity=15 --max-line-length=127 --statistics
