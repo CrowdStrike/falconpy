@@ -39,7 +39,7 @@ _Coming Soon_
 _Coming Soon_
 
 ### Real Time Response
-_Coming Soon_
++ [Quarantine a host](real_time_response/quarantine_hosts.py)
 
 ### Sample Uploads
 + [Upload, Retrieve and then Delete a file](sample_uploads/sample_uploads.py)
