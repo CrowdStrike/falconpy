@@ -151,7 +151,7 @@ All submitted code must meet minimum linting requirements.
 More information about flake8 can be found [here](https://flake8.pycqa.org/en/latest/).
 
 ### Breaking changes
-In an effort to maintain backwards compatibilty, we thoroughly unit test every Pull Request for all versions of Python we support. These unit tests are intended to catch general programmatic errors, possible vulnerabilities (via bandit) and _potential breaking changes_. 
+In an effort to maintain backwards compatibility, we thoroughly unit test every Pull Request for all versions of Python we support. These unit tests are intended to catch general programmatic errors, possible vulnerabilities (via bandit) and _potential breaking changes_. 
 
 > If you have to adjust a unit test locally in order to produce passing results, there is a possibility you are working with a potential breaking change.
 
