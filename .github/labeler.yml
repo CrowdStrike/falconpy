@@ -2,7 +2,8 @@ documentation:
 - any: ['docs/*', '*.md']
 
 package:
-- any: ['src/*.py']
+- src/*.py
+- src/falconpy/*.py
 
 pipeline:
 - .github/*
