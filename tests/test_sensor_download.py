@@ -58,3 +58,4 @@ class TestSensorDownload():
 
     def test_get_mutliple_shas(self):
         assert self._get_metadata_for_ids() == True
+        
