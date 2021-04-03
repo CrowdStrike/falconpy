@@ -1,6 +1,6 @@
 documentation:
 - docs/*
-- *.md
+- '*.md'
 - src/falconpy/*.md
 - samples/*.md
 
