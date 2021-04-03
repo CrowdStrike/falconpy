@@ -39,11 +39,15 @@ _Coming Soon_
 _Coming Soon_
 
 ### Real Time Response
-+ [Quarantine a host](real_time_response/quarantine_hosts.py)
+| Service Class | Uber Class |
+| :--- | :--- |
+| [Quarantine a host](real_time_response/quarantine_hosts.py) | |
 
 ### Sample Uploads
-+ [Upload, Retrieve and then Delete a file (Service Class)](sample_uploads/sample_uploads_service.py)
-+ [Upload, Retrieve and then Delete a file (Uber Class)](sample_uploads/sample_uploads_uber.py)
+| Service Class | Uber Class |
+| :--- | :--- |
+| [Upload, Retrieve and then Delete a file (Service Class)](sample_uploads/sample_uploads_service.py)
+| [Upload, Retrieve and then Delete a file (Uber Class)](sample_uploads/sample_uploads_uber.py) |
 
 ## Suggestions
 Got a suggestion for an example you'd like to see? Let us know by posting a message to our [discussion board](https://github.com/CrowdStrike/falconpy/discussions).
