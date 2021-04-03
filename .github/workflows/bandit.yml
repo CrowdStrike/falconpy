@@ -23,6 +23,9 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install bandit
         pip install -r requirements.txt
-    - name: Analyze with bandit
+    - name: Analyze package with bandit
       run: |
         bandit -r src
+    - name: Analyze samples with bandit
+      run: |
+        bandit -r samples
