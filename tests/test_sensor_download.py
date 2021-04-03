@@ -1,12 +1,11 @@
 import os
-import shutil
 import sys
 
 from tests import test_authorization as Authorization
 from falconpy import sensor_download as FalconSensorDownload
 
 sys.path.append(os.path.abspath('src'))
-AllowedResponses = [200, 429] # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 appId = "pytest-sensor_download-unit-test"
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
@@ -23,7 +22,7 @@ class TestSensorDownload():
     @staticmethod
     def _get_multiple_shas():
         params = {"filter": 'platform:"windows"', "sort": "release_date|desc"}
-        shas = sensor_download_client.GetSensorInstallersByQuery(params)["body"].get("resources", {"resources": ["b7dbe32495c6e23ca2e04784b98d5a1770163b9f42524cafc062292b533f03c9"]})
+        shas = sensor_download_client.GetSensorInstallersByQuery(params)["body"].get("resources", ["b7dbe32495c6e23ca2e04784b98d5a1770163b9f42524cafc062292b533f03c9"])
         return shas
 
     def _download_sensor(self):
@@ -31,7 +30,7 @@ class TestSensorDownload():
         directory_path = "sensor_downloads"
         sha_id = self._get_multiple_shas()[0]
         resp = sensor_download_client.DownloadSensorInstallerById(_id=sha_id, file_name=file_name, download_path=directory_path)
-        return True if resp else False
+        return resp
 
     @staticmethod
     def _get_metadata_for_filter():
@@ -58,4 +57,3 @@ class TestSensorDownload():
 
     def test_get_mutliple_shas(self):
         assert self._get_metadata_for_ids() == True
-        

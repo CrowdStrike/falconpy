@@ -1,4 +1,4 @@
-from ._util import service_request, parse_id_list
+from ._util import service_request, parse_id_list, generate_ok_result
 from ._service_class import ServiceClass
 
 import os
@@ -22,15 +22,13 @@ class Sensor_Download(ServiceClass):
                                    )
         return returned
 
-    def DownloadSensorInstallerById(self: object, _id: str, file_name: str, download_path: str = "sensor_downloads"):
+    def DownloadSensorInstallerById(self: object, id_: str, file_name: str = None, download_path: str = None) -> bytes or dict:
         """
         download the sensor by the sha256 into the specified directory.
         the path will be created for the user if it does not already exist
         """
-        # create the directory if doesn't exist
-        os.makedirs(download_path, exist_ok=True)
         # _id is the sha256 of the sensor
-        FULL_URL = self.base_url+"/sensors/entities/download-installer/v1?id={}".format(_id)
+        FULL_URL = self.base_url+"/sensors/entities/download-installer/v1?id={}".format(id_)
         HEADERS = self.headers
         returned = service_request(caller=self,
                                    method="GET",
@@ -38,12 +36,15 @@ class Sensor_Download(ServiceClass):
                                    headers=HEADERS,
                                    verify=self.ssl_verify
                                    )
-        # write the newly downloaded sensor into the aforementioned directory with provided file name
-        with open(os.path.join(download_path, file_name), "wb") as sensor:
-            sensor.write(returned)
-        return True if returned else False
+        if file_name and download_path and isinstance(returned, bytes):
+            os.makedirs(download_path, exist_ok=True)
+            # write the newly downloaded sensor into the aforementioned directory with provided file name
+            with open(os.path.join(download_path, file_name), "wb") as sensor:
+                sensor.write(returned)
+            returned = generate_ok_result(message="Download successful")
+        return returned
 
-    def GetSensorInstallersEntities(self: object, ids: list):
+    def GetSensorInstallersEntities(self: object, ids: list) -> object:
         """
         For a given list of SHA256's, retrieve the metadata for each installer
         such as the release_date and version among other fields
@@ -59,7 +60,7 @@ class Sensor_Download(ServiceClass):
                                    )
         return returned
 
-    def GetSensorInstallersCCIDByQuery(self: object):
+    def GetSensorInstallersCCIDByQuery(self: object) -> dict:
         """
         retrieve the CID for the current oauth environment
         """
