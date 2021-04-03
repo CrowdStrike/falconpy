@@ -17,7 +17,7 @@ import json
 # | |_| | |_) |  __/ |    | |___| | (_| \__ \__ \
 #  \___/|_.__/ \___|_|     \____|_|\__,_|___/___/
 #
-# This example shows how to interact with the 
+# This example shows how to interact with the
 # Sample Uploads API using the Uber class.
 
 from falconpy import api_complete as FalconSDK
@@ -57,7 +57,7 @@ print(json.dumps(response, indent=4))
 #  ___) |  __/ |   \ V /| | (_|  __/ | |___| | (_| \__ \__ \
 # |____/ \___|_|    \_/ |_|\___\___|  \____|_|\__,_|___/___/
 #
-# This example shows how to interact with the 
+# This example shows how to interact with the
 # Sample Uploads API using the Sample Uploads Service class.
 
 from falconpy import sample_uploads as FalconUploads
