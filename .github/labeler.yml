@@ -1,5 +1,8 @@
 documentation:
-- any: ['docs/*', '*.md']
+- docs/*
+- '*.md'
+- src/falconpy/*.md
+- samples/*.md
 
 package:
 - src/*.py
@@ -13,3 +16,8 @@ pipeline:
 
 unit testing:
 - any: ['tests/*', 'util/*']
+
+code samples:
+- samples/*.py
+- samples/real_time_response/*.py
+- samples/sample_uploads/*.py
