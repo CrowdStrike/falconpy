@@ -79,10 +79,12 @@ class Firewall_Policies(ServiceClass):
                                    )
         return returned
 
-    def performFirewallPoliciesAction(self: object, parameters: dict, body: dict, action_name: str) -> dict:
+    def performFirewallPoliciesAction(self: object, parameters: dict, body: dict, action_name: str = None) -> dict:
         """ Perform the specified action on the Firewall Policies specified in the request. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #        ...    /firewall-policies/performFirewallPoliciesAction
+        if "action_name" in parameters:
+            action_name = parameters["action_name"].lower()
         ALLOWED_ACTIONS = ['add-host-group', 'disable', 'enable', 'remove-host-group']
         if action_name.lower() in ALLOWED_ACTIONS:
             FULL_URL = self.base_url+'/policy/entities/firewall-actions/v1'

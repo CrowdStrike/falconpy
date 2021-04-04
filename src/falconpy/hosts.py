@@ -44,10 +44,12 @@ class Hosts(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def PerformActionV2(self: object, parameters: dict, body: dict, action_name: str) -> dict:
+    def PerformActionV2(self: object, parameters: dict, body: dict, action_name: str = None) -> dict:
         """ Take various actions on the hosts in your environment.
             Contain or lift containment on a host. Delete or restore a host.
         """
+        if "action_name" in parameters:
+            action_name = parameters["action_name"].lower()
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/PerformActionV2
         ALLOWED_ACTIONS = ['contain', 'lift_containment', 'hide_host', 'unhide_host']
         if action_name.lower() in ALLOWED_ACTIONS:

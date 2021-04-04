@@ -80,10 +80,12 @@ class Prevention_Policy(ServiceClass):
                                    )
         return returned
 
-    def performPreventionPoliciesAction(self: object, parameters: dict, body: dict, action_name: str) -> dict:
+    def performPreventionPoliciesAction(self: object, parameters: dict, body: dict, action_name: str = None) -> dict:
         """ Perform the specified action on the Prevention Policies specified in the request. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #        ...    /prevention-policies/performPreventionPoliciesAction
+        if "action_name" in parameters:
+            action_name = parameters["action_name"].lower()
         ALLOWED_ACTIONS = ['add-host-group', 'disable', 'enable', 'remove-host-group']
         if action_name.lower() in ALLOWED_ACTIONS:
             FULL_URL = self.base_url+'/policy/entities/prevention-actions/v1'

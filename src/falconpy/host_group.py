@@ -78,9 +78,11 @@ class Host_Group(ServiceClass):
                                    )
         return returned
 
-    def performGroupAction(self: object, parameters: dict, body: dict, action_name: str) -> dict:
+    def performGroupAction(self: object, parameters: dict, body: dict, action_name: str = None) -> dict:
         """ Perform the specified action on the Host Groups specified in the request. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/performGroupAction
+        if "action_name" in parameters:
+            action_name = parameters["action_name"].lower()
         ALLOWED_ACTIONS = ['add-hosts', 'remove-hosts']
         if action_name.lower() in ALLOWED_ACTIONS:
             FULL_URL = self.base_url+'/devices/entities/host-group-actions/v1'

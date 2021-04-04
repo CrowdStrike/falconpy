@@ -80,12 +80,14 @@ class Device_Control_Policies(ServiceClass):
                                    )
         return returned
 
-    def performDeviceControlPoliciesAction(self: object, parameters: dict, body: dict, action_name: str) -> dict:
+    def performDeviceControlPoliciesAction(self: object, parameters: dict, body: dict, action_name: str = None) -> dict:
         """ Search for Device Control Policies in your environment by providing an FQL filter
             and paging details. Returns a set of Device Control Policies which match the filter criteria.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #        ...    /device-control-policies/performDeviceControlPoliciesAction
+        if "action_name" in parameters:
+            action_name = parameters["action_name"].lower()
         ALLOWED_ACTIONS = ['add-host-group', 'disable', 'enable', 'remove-host-group']
         if action_name.lower() in ALLOWED_ACTIONS:
             FULL_URL = self.base_url+'/policy/combined/device-control/v1'
