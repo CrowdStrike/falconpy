@@ -52,8 +52,9 @@ def account_value(id, val, accts):
 
 # =============== CHECK ACCOUNTS
 def check_account():
+
     # Retrieve the account list
-    account_list = falcon_discover.QueryAWSAccounts(parameters={"limit": f"{str(query_limit)}"})["body"]["resources"]
+    account_list = falcon_discover.QueryAWSAccounts(parameters={"limit": int(query_limit)})["body"]["resources"]
     # Log the results of the account query to a file if logging is enabled
     if log_enabled:
         with open('falcon-discover-accounts.json', 'w+') as f:
@@ -163,89 +164,97 @@ def delete_account():
 
 
 # =============== MAIN
-if __name__ == "__main__":
-    # Configure argument parsing
-    parser = argparse.ArgumentParser(description="Get Params to send notification to CRWD topic")
-    # Fully optional
-    parser.add_argument('-q', '--query_limit', help='The query limit used for check account commands', required=False)
-    parser.add_argument('-l', '--log_enabled', help='Save results to a file?', required=False, action="store_true")
-    # Optionally required
-    parser.add_argument('-r', '--cloudtrail_bucket_region', help='AWS Region where the S3 bucket is hosted',
-                        required=False)
-    parser.add_argument('-o', '--cloudtrail_bucket_owner_id', help='Account where the S3 bucket is hosted',
-                        required=False)
-    parser.add_argument('-a', '--local_account', help='This AWS Account', required=False)
-    parser.add_argument('-e', '--external_id', help='External ID used to assume role in account', required=False)
-    parser.add_argument('-i', '--iam_role_arn',
-                        help='IAM AWS IAM Role ARN that grants access to resources for Crowdstrike', required=False)
-    # Always required
-    parser.add_argument('-c', '--command', help='Troubleshooting action to perform', required=True)
-    parser.add_argument("-f", "--falcon_client_id", help="Falcon Client ID", required=True)
-    parser.add_argument("-s", "--falcon_client_secret", help="Falcon Client Secret", required=True)
-    args = parser.parse_args()
 
-    # =============== SET GLOBALS
-    command = args.command
-    # Only execute our defined commands
-    if command.lower() in "check,update,register,delete":
-        if command.lower() in "update,register":
-            # All fields required for update and register
-            if (args.cloudtrail_bucket_owner_id is None or
-                    args.cloudtrail_bucket_region is None or
-                    args.local_account is None or
-                    args.external_id is None or
-                    args.iam_role_arn is None):
-                parser.error("The {} command requires the -r, -o, -a, -e, -i arguments to also be specified.".format(command))
-            else:
-                cloudtrail_bucket_region = args.cloudtrail_bucket_region
-                cloudtrail_bucket_owner_id = args.cloudtrail_bucket_owner_id
-                local_account = args.local_account
-                external_id = args.external_id
-                iam_role_arn = args.iam_role_arn
-        elif command.lower() in "delete":
-            # Delete only requires the local account ID
-            if args.local_account is None:
-                parser.error("The {} command requires the -l argument to also be specified.".format(command))
-            else:
-                local_account = args.local_account
-    else:
-        parser.error("The {} command is not recognized.".format(command))
-    # These globals exist for all requests
-    falcon_client_id = args.falcon_client_id
-    falcon_client_secret = args.falcon_client_secret
-    log_enabled = args.log_enabled
-    if args.query_limit is None:
-        query_limit = 100
-    else:
-        query_limit = args.query_limit
+# Configure argument parsing
+parser = argparse.ArgumentParser(description="Get Params to send notification to CRWD topic")
+# Fully optional
+parser.add_argument('-q', '--query_limit', help='The query limit used for check account commands', required=False)
+parser.add_argument('-l', '--log_enabled', help='Save results to a file?', required=False, action="store_true")
+# Optionally required
+parser.add_argument('-r', '--cloudtrail_bucket_region', help='AWS Region where the S3 bucket is hosted',
+                    required=False)
+parser.add_argument('-o', '--cloudtrail_bucket_owner_id', help='Account where the S3 bucket is hosted',
+                    required=False)
+parser.add_argument('-a', '--local_account', help='This AWS Account', required=False)
+parser.add_argument('-e', '--external_id', help='External ID used to assume role in account', required=False)
+parser.add_argument('-i', '--iam_role_arn',
+                    help='IAM AWS IAM Role ARN that grants access to resources for Crowdstrike', required=False)
+# Always required
+parser.add_argument('-c', '--command', help='Troubleshooting action to perform', required=True)
+parser.add_argument("-f", "--falcon_client_id", help="Falcon Client ID", required=True)
+parser.add_argument("-s", "--falcon_client_secret", help="Falcon Client Secret", required=True)
+args = parser.parse_args()
 
-    # =============== MAIN ROUTINE
-    # Authenticate using our provided falcon client_id and client_secret
+# =============== SET GLOBALS
+command = args.command
+# Only execute our defined commands
+if command.lower() in "check,update,register,delete":
+    if command.lower() in "update,register":
+        # All fields required for update and register
+        if (args.cloudtrail_bucket_owner_id is None or
+                args.cloudtrail_bucket_region is None or
+                args.local_account is None or
+                args.external_id is None or
+                args.iam_role_arn is None):
+            parser.error("The {} command requires the -r, -o, -a, -e, -i arguments to also be specified.".format(command))
+        else:
+            cloudtrail_bucket_region = args.cloudtrail_bucket_region
+            cloudtrail_bucket_owner_id = args.cloudtrail_bucket_owner_id
+            local_account = args.local_account
+            external_id = args.external_id
+            iam_role_arn = args.iam_role_arn
+    elif command.lower() in "delete":
+        # Delete only requires the local account ID
+        if args.local_account is None:
+            parser.error("The {} command requires the -l argument to also be specified.".format(command))
+        else:
+            local_account = args.local_account
+else:
+    parser.error("The {} command is not recognized.".format(command))
+# These globals exist for all requests
+falcon_client_id = args.falcon_client_id
+falcon_client_secret = args.falcon_client_secret
+log_enabled = args.log_enabled
+if args.query_limit is None:
+    query_limit = 100
+else:
+    query_limit = args.query_limit
+
+# =============== MAIN ROUTINE
+# Authenticate using our provided falcon client_id and client_secret
+try:
+    authorized = FalconAuth.OAuth2(creds={'client_id': falcon_client_id, 'client_secret': falcon_client_secret})
+except Exception:
+    # We can't communicate with the endpoint, return a false token
+    authorized.token = lambda: False
+# Try to retrieve a token from our authentication, returning false on failure
+try:
+    token = authorized.token()["body"]["access_token"]
+except Exception:
+    token = False
+
+# Confirm the token was successfully retrieved
+if token:
+    # Connect using our token and return an instance of the API gateway object
+    falcon_discover = FalconAWS.Cloud_Connect_AWS(access_token=token)
     try:
-        authorized = FalconAuth.OAuth2(creds={'client_id': falcon_client_id, 'client_secret': falcon_client_secret})
-    except Exception:
-        # We can't communicate with the endpoint, return a false token
-        authorized.token = lambda: False
-    # Try to retrieve a token from our authentication, returning false on failure
-    try:
-        token = authorized.token()["body"]["access_token"]
-    except Exception:
-        token = False
-    # Confirm the token was successfully retrieved
-    if token:
-        # Connect using our token and return an instance of the API gateway object
-        falcon_discover = FalconAWS.Cloud_Connect_AWS(access_token=token)
-        try:
-            # Execute the command by calling the named function
-            exec("{}_account()".format(command.lower()))
-        except Exception as e:
-            # Handle any previously unhandled errors
-            print("Command failed with error: {}.".format(str(e)))
-        # Discard our token before we exit
-        authorized.revoke(token)
-    else:
-        # Report that authentication failed and stop processing
-        print("Failed to retrieve authentication token.")
+        # Execute the requested command
+        if command.lower() == "delete":
+            delete_account()
+        elif command.lower() == "register":
+            register_account()
+        elif command.lower() == "update":
+            update_account()
+        else:
+            check_account()
+    except Exception as e:
+        # Handle any previously unhandled errors
+        print("Command failed with error: {}.".format(str(e)))
+    # Discard our token before we exit
+    authorized.revoke(token)
+else:
+    # Report that authentication failed and stop processing
+    print("Failed to retrieve authentication token.")
 
-    # Force clean exit
-    sys.exit(0)
+# Force clean exit
+sys.exit(0)

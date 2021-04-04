@@ -28,4 +28,4 @@ jobs:
         bandit -r src
     - name: Analyze samples with bandit
       run: |
-        bandit -r samples --exit-zero
+        bandit -r samples
