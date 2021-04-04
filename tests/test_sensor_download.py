@@ -29,7 +29,7 @@ class TestSensorDownload():
         file_name = "falconwinddows.exe"
         directory_path = "sensor_downloads"
         sha_id = self._get_multiple_shas()[0]
-        resp = sensor_download_client.DownloadSensorInstallerById(_id=sha_id, file_name=file_name, download_path=directory_path)
+        resp = sensor_download_client.DownloadSensorInstallerById(parameters={"id": sha_id}, file_name=file_name, download_path=directory_path)
         return resp
 
     @staticmethod
