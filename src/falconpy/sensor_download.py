@@ -26,7 +26,7 @@ class Sensor_Download(ServiceClass):
                                     parameters: dict,
                                     file_name: str = None,
                                     download_path: str = None
-                                   ) -> object:
+                                    ) -> object:
         """
         download the sensor by the sha256 into the specified directory.
         the path will be created for the user if it does not already exist
