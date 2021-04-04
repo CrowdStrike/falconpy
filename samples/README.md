@@ -33,7 +33,9 @@ _Coming Soon_
 _Coming Soon_
 
 ### Falcon Discover
-_Coming Soon_
+| Service Class | Uber Class |
+| :--- | :--- |
+| [Register, delete, update and check accounts](discover_aws/manage_discover_accounts_service.py) | [Register, delete, update and check accounts](discover_aws/manage_discover_accounts_uber.py) |
 
 ### Hosts
 _Coming Soon_
