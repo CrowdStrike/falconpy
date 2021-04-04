@@ -22,7 +22,7 @@ class TestSensorDownload():
     @staticmethod
     def _get_multiple_shas():
         params = {"filter": 'platform:"windows"', "sort": "release_date|desc"}
-        shas = sensor_download_client.GetSensorInstallersByQuery(params)["body"].get("resources", ["b7dbe32495c6e23ca2e04784b98d5a1770163b9f42524cafc062292b533f03c9"])
+        shas = sensor_download_client.GetSensorInstallersByQuery(params)["body"]["resources"][0]
         return shas
 
     def _download_sensor(self):
