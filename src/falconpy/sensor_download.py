@@ -6,13 +6,13 @@ import os
 
 class Sensor_Download(ServiceClass):
 
-    def GetCombinedSensorInstallersByQuery(self: object, params: dict = {}) -> dict:
+    def GetCombinedSensorInstallersByQuery(self: object, parameters: dict = {}) -> dict:
         """
         retrieve all metadata for installers from provided query
         """
         FULL_URL = self.base_url+'/sensors/combined/installers/v1'
         HEADERS = self.headers
-        PARAMS = params
+        PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=FULL_URL,
@@ -22,18 +22,19 @@ class Sensor_Download(ServiceClass):
                                    )
         return returned
 
-    def DownloadSensorInstallerById(self: object, id_: str, file_name: str = None, download_path: str = None) -> bytes or dict:
+    def DownloadSensorInstallerById(self: object, parameters: dict, file_name: str = None, download_path: str = None) -> object:
         """
         download the sensor by the sha256 into the specified directory.
         the path will be created for the user if it does not already exist
         """
-        # _id is the sha256 of the sensor
-        FULL_URL = self.base_url+"/sensors/entities/download-installer/v1?id={}".format(id_)
+        FULL_URL = self.base_url+"/sensors/entities/download-installer/v1"
         HEADERS = self.headers
+        PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=FULL_URL,
                                    headers=HEADERS,
+                                   params=PARAMS,
                                    verify=self.ssl_verify
                                    )
         if file_name and download_path and isinstance(returned, bytes):
@@ -74,7 +75,7 @@ class Sensor_Download(ServiceClass):
                                    )
         return returned
 
-    def GetSensorInstallersByQuery(self: object, params: dict = {}) -> dict:
+    def GetSensorInstallersByQuery(self: object, parameters: dict = {}) -> dict:
         """
         retrieve a list of SHA256 for installers based on the filter
         """
