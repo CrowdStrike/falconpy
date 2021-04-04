@@ -12,7 +12,7 @@
 | [get_platforms](#get-platforms) | Get platforms by ID, e.g., windows or mac or droid |
 | [get_policy_containers](#get-policy-containers) | Get policy container entities by policy ID |
 | [update_policy_container](#update-policy-container) | Update an identified policy container |
-| [get_rule_groups](#get-rule-groups) | Get rule group entities by ID. These groups do not contain their rule entites, just the rule IDs in precedence order. |
+| [get_rule_groups](#get-rule-groups) | Get rule group entities by ID. These groups do not contain their rule entities, just the rule IDs in precedence order. |
 | [create_rule_group](#create-rule-group) | Create new rule group on a platform for a customer with a name and description, and return the ID |
 | [delete_rule_groups](#delete-rule-groups) | Delete rule group entities by ID |
 | [update_rule_group](#update-rule-group) | Update name, description, or enabled status of a rule group, or create, edit, delete, or reorder rules |
@@ -513,7 +513,7 @@ print(response)
 falcon.deauthenticate()
 ```
 ### get_rule_groups
-Get rule group entities by ID. These groups do not contain their rule entites, just the rule IDs in precedence order.
+Get rule group entities by ID. These groups do not contain their rule entities, just the rule IDs in precedence order.
 
 #### Content-Type
 - Produces: _application/json_
@@ -574,7 +574,7 @@ Create new rule group on a platform for a customer with a name and description, 
 | :---: | :---- | :---- | :-------- | :---------- |
 | :white_check_mark: | __X-CS-USERNAME__ | header | _string_ | The user id |
 | | __clone_id__ | query | _string_ | A rule group ID from which to copy rules. If this is provided then the 'rules' property of the body is ignored. |
-| | __library__ | query | _string_ | If this flag is set to true then the rules will be cloned from the clone_id from the CrowdStrike Firewal Rule Groups Library. |
+| | __library__ | query | _string_ | If this flag is set to true then the rules will be cloned from the clone_id from the CrowdStrike Firewall Rule Groups Library. |
 | | __comment__ | query | _string_ | Audit log comment for this action |
 | :white_check_mark: | __body__ | body | _string_ 
 #### Usage

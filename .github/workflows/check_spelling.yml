@@ -1,0 +1,13 @@
+name: Check Spelling
+on:
+  pull_request:
+    paths:
+    - '**.txt'
+    - '**.md'
+jobs:
+  spelling:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check Spelling
+      uses: SFLScientific/spellcheck-github-actions@master

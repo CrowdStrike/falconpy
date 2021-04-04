@@ -1,0 +1,31 @@
+name: Bandit
+on:
+  push:
+    branches: 
+      - main
+      - 'ver_*'
+  pull_request:
+    branches: 
+      - main
+      - 'ver_*'
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install bandit
+        pip install -r requirements.txt
+    - name: Analyze package with bandit
+      run: |
+        bandit -r src
+    - name: Analyze samples with bandit
+      run: |
+        bandit -r samples
