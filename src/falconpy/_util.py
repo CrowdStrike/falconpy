@@ -190,3 +190,7 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
 def generate_error_result(message: str = "An error has occurred. Check your payloads and try again.", code: int = 500) -> dict:
     """ Normalized error messaging handler. """
     return Result()(status_code=code, headers={}, body={"errors": [{"message": f"{message}"}], "resources": []})
+
+
+def generate_ok_result(message: str = "Request returned with success", code: int = 200) -> dict:
+    return Result()(status_code=code, headers={}, body={"message": message, "resources": []})

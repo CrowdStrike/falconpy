@@ -8,5 +8,8 @@ env/
 .vscode/
 build/
 dist
-falconpy.egg-info/
+*.egg-info/
+sensor_downloads/
 __pycache__/
+.env
+.coverage
