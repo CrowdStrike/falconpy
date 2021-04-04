@@ -1,8 +1,12 @@
 name: Python package
 on:
   push:
+    paths:
+      - '**.py'
     branches: [ main ]
   pull_request:
+    paths:
+      - '**.py'
     branches: 
       - main
       - 'ver_*'
