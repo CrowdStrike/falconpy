@@ -6,7 +6,7 @@ import os
 
 class Sensor_Download(ServiceClass):
 
-    def GetCombinedSensorInstallersByQuery(self: object, params: dict) -> dict:
+    def GetCombinedSensorInstallersByQuery(self: object, params: dict = {}) -> dict:
         """
         retrieve all metadata for installers from provided query
         """
