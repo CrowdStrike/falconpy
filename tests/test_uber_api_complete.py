@@ -36,7 +36,7 @@ falcon = FalconSDK.APIHarness(
 )
 falcon.authenticate()
 if not falcon.authenticated:
-    pytest.exit("Unable to authenticate, exiting test.", returncode=0)
+    pytest.exit("Unable to authenticate, exiting test.", 0)
 
 
 class TestUber:
