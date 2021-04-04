@@ -191,5 +191,6 @@ def generate_error_result(message: str = "An error has occurred. Check your payl
     """ Normalized error messaging handler. """
     return Result()(status_code=code, headers={}, body={"errors": [{"message": f"{message}"}], "resources": []})
 
+  
 def generate_ok_result(message: str = "Request returned with success", code: int = 200) -> dict:
     return Result()(status_code=code, headers={}, body={"message": message, "resources": []})
