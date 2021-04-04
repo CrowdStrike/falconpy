@@ -44,7 +44,7 @@ class Sensor_Download(ServiceClass):
             returned = generate_ok_result(message="Download successful")
         return returned
 
-    def GetSensorInstallersEntities(self: object, ids: list) -> object:
+    def GetSensorInstallersEntities(self: object, ids: list or str) -> object:
         """
         For a given list of SHA256's, retrieve the metadata for each installer
         such as the release_date and version among other fields
