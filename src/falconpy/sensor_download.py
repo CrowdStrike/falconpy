@@ -81,7 +81,7 @@ class Sensor_Download(ServiceClass):
         """
         FULL_URL = self.base_url+'/sensors/queries/installers/v1'
         HEADERS = self.headers
-        PARAMS = params
+        PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=FULL_URL,
