@@ -192,4 +192,4 @@ def generate_error_result(message: str = "An error has occurred. Check your payl
     return Result()(status_code=code, headers={}, body={"errors": [{"message": f"{message}"}], "resources": []})
 
 def generate_ok_result(message: str = "Request returned with success", code: int = 200) -> dict:
-    return Result()(status_code=code, headers=[], body={"message": message, "resources": []})
+    return Result()(status_code=code, headers={}, body={"message": message, "resources": []})
