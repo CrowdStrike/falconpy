@@ -36,7 +36,8 @@ falcon = FalconSDK.APIHarness(
 )
 falcon.authenticate()
 if not falcon.authenticated:
-    sys.exit(1)
+    print("Unable to authenticate, exiting unit test.")
+    sys.exit(0)
 
 
 class TestUber:
