@@ -21,16 +21,28 @@ class TestSensorDownload():
 
     @staticmethod
     def _get_multiple_shas():
-        params = {"filter": 'platform:"windows"', "sort": "release_date|desc"}
-        shas = sensor_download_client.GetSensorInstallersByQuery(params)["body"]["resources"][0]
+        params = {"filter": 'platform:"linux"', "sort": "release_date|desc"}
+        shas = sensor_download_client.GetSensorInstallersByQuery(parameters=params)["body"]["resources"]
         return shas
 
     def _download_sensor(self):
-        file_name = "falconwinddows.exe"
-        directory_path = "sensor_downloads"
         sha_id = self._get_multiple_shas()[0]
-        resp = sensor_download_client.DownloadSensorInstallerById(parameters={"id": sha_id}, file_name=file_name, download_path=directory_path)
-        return resp
+        resp = sensor_download_client.DownloadSensorInstallerById(parameters={"id": sha_id})
+        if isinstance(resp, bytes):
+            return True
+        else:
+            return False
+
+    def _download_sensor_file(self):
+        file_name = "sensor.rpm"
+        directory_path = "."
+        sha_id = self._get_multiple_shas()[0]
+        _ = sensor_download_client.DownloadSensorInstallerById(parameters={"id": sha_id}, file_name=file_name, download_path=directory_path)
+        if os.path.exists("sensor.rpm"):
+            os.remove("sensor.rpm")
+            return True
+        else:
+            return False
 
     @staticmethod
     def _get_metadata_for_filter():
@@ -44,16 +56,19 @@ class TestSensorDownload():
         return True if resp["status_code"] in AllowedResponses else False
 
     def test_download_windows_sensor(self):
-        assert self._download_sensor() == True
+        assert self._download_sensor() is True
+
+    def test_download_windows_sensor_file(self):
+        assert self._download_sensor_file() is True
 
     def test_get_sha_window_sensor(self):
-        assert self._get_metadata_for_filter() == True
+        assert self._get_metadata_for_filter() is True
 
     def test_get_ccid(self):
-        assert self._get_cid() == True
+        assert self._get_cid() is True
 
     def test_get_shas(self):
         assert len(self._get_multiple_shas()) > 0
 
     def test_get_mutliple_shas(self):
-        assert self._get_metadata_for_ids() == True
+        assert self._get_metadata_for_ids() is True
