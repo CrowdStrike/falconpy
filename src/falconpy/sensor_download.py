@@ -22,7 +22,11 @@ class Sensor_Download(ServiceClass):
                                    )
         return returned
 
-    def DownloadSensorInstallerById(self: object, parameters: dict, file_name: str = None, download_path: str = None) -> object:
+    def DownloadSensorInstallerById(self: object,
+                                    parameters: dict,
+                                    file_name: str = None,
+                                    download_path: str = None
+                                   ) -> object:
         """
         download the sensor by the sha256 into the specified directory.
         the path will be created for the user if it does not already exist
