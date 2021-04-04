@@ -1,10 +1,14 @@
 name: Bandit
 on:
   push:
+    paths:
+      - '**.py'
     branches: 
       - main
       - 'ver_*'
   pull_request:
+    paths:
+      - '**.py'
     branches: 
       - main
       - 'ver_*'
