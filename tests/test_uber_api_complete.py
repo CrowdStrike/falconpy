@@ -36,8 +36,7 @@ falcon = FalconSDK.APIHarness(
 )
 falcon.authenticate()
 if not falcon.authenticated:
-    # Dodging the pytest SystemExit wrapper on auth fail for GH workflows
-    os._exit(0)
+    pytest.exit("Unable to authenticate, exiting test.", returncode=0)
 
 
 class TestUber:
