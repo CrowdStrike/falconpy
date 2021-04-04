@@ -74,7 +74,7 @@ class Sensor_Download(ServiceClass):
                                    )
         return returned
 
-    def GetSensorInstallersByQuery(self: object, params: dict) -> dict:
+    def GetSensorInstallersByQuery(self: object, params: dict = {}) -> dict:
         """
         retrieve a list of SHA256 for installers based on the filter
         """
