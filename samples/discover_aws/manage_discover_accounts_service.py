@@ -11,7 +11,7 @@
 # to register, update and delete AWS accounts.  An additional check function loops through all
 # accounts registered, and returns configuration detail to assist with troubleshooting setup.
 #
-# This example leverages the Cloud Connect AWS Service Class.
+# This example leverages the Cloud Connect AWS Service Class and legacy authentication.
 #
 import argparse
 import json
