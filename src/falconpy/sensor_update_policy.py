@@ -140,7 +140,7 @@ class Sensor_Update_Policy(ServiceClass):
             action_name = parameters["action_name"].lower()
         ALLOWED_ACTIONS = ['add-host-group', 'disable', 'enable', 'remove-host-group']
         if action_name.lower() in ALLOWED_ACTIONS:
-            FULL_URL = self.base_url+'/policy/entities/sensor-update-actions/v1?action_name={}'.format(action_name.lower())
+            FULL_URL = self.base_url+'/policy/entities/sensor-update-actions/v1'
             HEADERS = self.headers
             BODY = body
             PARAMS = parameters
