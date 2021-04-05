@@ -108,7 +108,7 @@ class TestHosts:
         errorChecks = True
         commandList = [
             ["PerformActionV2","body={}, action_name='unhide_host', parameters={}"],
-            ["PerformActionV2","body={}, action_name='KErrrPOW', parameters={}"],
+            ["PerformActionV2","body={}, parameters={'action_name':'PooF'}"],
             ["GetDeviceDetails", "ids='12345678'"],
             ["QueryHiddenDevices", ""],
             ["QueryDevicesByFilterScroll", ""],

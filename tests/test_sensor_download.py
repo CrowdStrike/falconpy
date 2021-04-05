@@ -1,0 +1,74 @@
+import os
+import sys
+
+from tests import test_authorization as Authorization
+from falconpy import sensor_download as FalconSensorDownload
+
+sys.path.append(os.path.abspath('src'))
+AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+appId = "pytest-sensor_download-unit-test"
+auth = Authorization.TestAuthorization()
+auth.serviceAuth()
+
+sensor_download_client = FalconSensorDownload.Sensor_Download(access_token=auth.token)
+
+class TestSensorDownload():
+    
+    @staticmethod
+    def _get_cid():
+        resp = sensor_download_client.GetSensorInstallersCCIDByQuery()
+        return True if resp["status_code"] in AllowedResponses else False
+
+    @staticmethod
+    def _get_multiple_shas():
+        params = {"filter": 'platform:"linux"', "sort": "release_date|desc"}
+        shas = sensor_download_client.GetSensorInstallersByQuery(parameters=params)["body"]["resources"]
+        return shas
+
+    def _download_sensor(self):
+        sha_id = self._get_multiple_shas()[0]
+        resp = sensor_download_client.DownloadSensorInstallerById(parameters={"id": sha_id})
+        if isinstance(resp, bytes):
+            return True
+        else:
+            return False
+
+    def _download_sensor_file(self):
+        file_name = "sensor.rpm"
+        directory_path = "."
+        sha_id = self._get_multiple_shas()[0]
+        _ = sensor_download_client.DownloadSensorInstallerById(parameters={"id": sha_id}, file_name=file_name, download_path=directory_path)
+        if os.path.exists("sensor.rpm"):
+            os.remove("sensor.rpm")
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def _get_metadata_for_filter():
+        params = {"filter": 'platform:"windows"', "sort": "release_date|desc"}
+        resp = sensor_download_client.GetCombinedSensorInstallersByQuery(params)
+        return True if resp["status_code"] in AllowedResponses else False
+
+    def _get_metadata_for_ids(self):
+        sha_ids = self._get_multiple_shas()
+        resp = sensor_download_client.GetSensorInstallersEntities(ids=sha_ids)
+        return True if resp["status_code"] in AllowedResponses else False
+
+    def test_download_windows_sensor(self):
+        assert self._download_sensor() is True
+
+    def test_download_windows_sensor_file(self):
+        assert self._download_sensor_file() is True
+
+    def test_get_sha_window_sensor(self):
+        assert self._get_metadata_for_filter() is True
+
+    def test_get_ccid(self):
+        assert self._get_cid() is True
+
+    def test_get_shas(self):
+        assert len(self._get_multiple_shas()) > 0
+
+    def test_get_mutliple_shas(self):
+        assert self._get_metadata_for_ids() is True

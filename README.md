@@ -57,7 +57,7 @@ $ python3 -m pip uninstall crowdstrike-falconpy
 | [CrowdStrike Real Time Response (RTR) APIs](https://falcon.crowdstrike.com/support/documentation/90/real-time-response-apis) | [real_time_response.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/real_time_response.py) |
 | [CrowdStrike Realtime Response (RTR) Administration API](https://falcon.crowdstrike.com/support/documentation/90/real-time-response-apis) | [real_time_response_admin.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/real_time_response_admin.py) |
 | CrowdStrike Sample Uploads API | [sample_uploads.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sample_uploads.py) |
-| [CrowdStrike Sensor Download APIs](https://falcon.crowdstrike.com/support/documentation/109/sensor-download-apis) | *Coming Soon* |
+| [CrowdStrike Sensor Download APIs](https://falcon.crowdstrike.com/support/documentation/109/sensor-download-apis) | [sensor_download.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_download.py) |
 | [CrowdStrike Spotlight APIs](https://falcon.crowdstrike.com/support/documentation/98/spotlight-apis) | [spotlight_vulnerabilities.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/spotlight_vulnerabilities.py) |
 | [CrowdStrike User and Roles API](https://falcon.crowdstrike.com/support/documentation/87/users-and-roles-apis) | [user_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/user_management.py) | 
 | [Falcon Discover for Cloud and Containers - AWS Accounts APIs](https://falcon.crowdstrike.com/support/documentation/91/discover-for-aws-apis) | [cloud_connect_aws.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/cloud_connect_aws.py) |

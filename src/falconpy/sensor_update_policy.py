@@ -132,13 +132,15 @@ class Sensor_Update_Policy(ServiceClass):
                                    )
         return returned
 
-    def performSensorUpdatePoliciesAction(self: object, parameters: dict, body: dict, action_name: str) -> dict:
+    def performSensorUpdatePoliciesAction(self: object, parameters: dict, body: dict, action_name: str = None) -> dict:
         """ Perform the specified action on the Sensor Update Policies specified in the request. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #        ...    /sensor-update-policies/performSensorUpdatePoliciesAction
+        if "action_name" in parameters:
+            action_name = parameters["action_name"].lower()
         ALLOWED_ACTIONS = ['add-host-group', 'disable', 'enable', 'remove-host-group']
         if action_name.lower() in ALLOWED_ACTIONS:
-            FULL_URL = self.base_url+'/policy/entities/sensor-update-actions/v1?action_name={}'.format(action_name.lower())
+            FULL_URL = self.base_url+'/policy/entities/sensor-update-actions/v1'
             HEADERS = self.headers
             BODY = body
             PARAMS = parameters

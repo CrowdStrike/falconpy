@@ -57,7 +57,7 @@ class TestFalconPrevent:
             ["queryCombinedPreventionPolicyMembers", ""],
             ["queryCombinedPreventionPolicies", ""],
             ["performPreventionPoliciesAction", "body={}, action_name='enable', parameters={}"],
-            ["performPreventionPoliciesAction", "body={}, action_name='kaB00M', parameters={}"],
+            ["performPreventionPoliciesAction", "body={}, parameters={'action_name':'PooF'}"],
             ["setPreventionPoliciesPrecedence", "body={}"],
             ["getPreventionPolicies", "ids='12345678'"],
             ["createPreventionPolicies", "body={}"],

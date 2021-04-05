@@ -72,7 +72,7 @@ class TestFalconSensorUpdate:
             ["updateSensorUpdatePolicies", "body={}"],
             ["updateSensorUpdatePoliciesV2", "body={}"],
             ["performSensorUpdatePoliciesAction", "body={}, action_name='enable', parameters={}"],
-            ["performSensorUpdatePoliciesAction", "body={}, action_name='ThisWillFail', parameters={}"],
+            ["performSensorUpdatePoliciesAction", "body={}, parameters={'action_name':'PooF'}"],
             ["setSensorUpdatePoliciesPrecedence", "body={}"],
             ["queryCombinedSensorUpdatePoliciesV2",""]
         ]

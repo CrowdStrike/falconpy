@@ -83,9 +83,6 @@ if token:
         print(f"\n[+] Lifting Containment: {hostname}\n")
 
     # Perform the requested action
-    # TODO: Get rid of action_name="contain" once bug is resolved
-    # BUG: https://github.com/CrowdStrike/falconpy/issues/114
-    response = falcon.PerformActionV2(parameters=PARAMS, body=BODY,
-                                      action_name="contain")
+    response = falcon.PerformActionV2(parameters=PARAMS, body=BODY)
     # Output the result
     print(json.dumps(response, indent=4))

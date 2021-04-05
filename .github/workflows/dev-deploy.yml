@@ -2,6 +2,8 @@ name: Test Package Build and Deploy
 
 on:
   push:
+    paths:
+      - '**.py'
     branches:
       - main
 

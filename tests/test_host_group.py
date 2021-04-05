@@ -57,7 +57,7 @@ class TestHostGroup:
             ["queryCombinedGroupMembers", ""],
             ["queryCombinedHostGroups", ""],
             ["performGroupAction", "action_name='add-hosts', body={}, parameters={}"],
-            ["performGroupAction", "action_name='iLikeErrorMessages', body={}, parameters={}"],
+            ["performGroupAction", "body={}, parameters={'action_name':'PooF'}"],
             ["getHostGroups", "ids='12345678'"],
             ["createHostGroups", "body={}"],
             ["deleteHostGroups", "ids='12345678'"],
