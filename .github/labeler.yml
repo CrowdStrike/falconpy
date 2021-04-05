@@ -15,7 +15,8 @@ pipeline:
 - .github/ISSUE_TEMPLATE/*
 
 unit testing:
-- any: ['tests/*', 'util/*']
+- tests/*
+- util/*
 
 code samples:
 - samples/*.py
