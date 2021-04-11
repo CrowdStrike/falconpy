@@ -23,7 +23,8 @@ Stable releases of FalconPy are available on the Python Package Index:
 $ python3 -m pip install crowdstrike-falconpy
 ```
 
-If you'd like to try the *absolute bleeding edge*, an automated GitHub action releases a test package with every merged pull request. To install the testing version:
+If you'd like to try the *absolute bleeding edge*, an automated GitHub action releases a test package with every merged pull request containing the string
+`[DEPLOY]` in the head of the commit. To install the testing version:
 ```shell
 $ python3 -m pip install -i https://test.pypi.org/simple crowdstrike-falconpy
 ```
