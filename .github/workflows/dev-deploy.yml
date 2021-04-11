@@ -1,4 +1,4 @@
-name: Test Package Build and Deploy
+name: Publish Test Python Package
 
 on:
   push:
