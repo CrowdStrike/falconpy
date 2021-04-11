@@ -81,7 +81,7 @@
 ## Issues resolved
 + Added method validation to Uber class calls to the requests library. (HTTP 418 is sent when an invalid method is specified.)
 ## Other
-+ Cleaned up event_streams.py class file to match new patterns.
++ Cleaned up `event_streams.py` class file to match new patterns.
 + Updated return type decorators for service_request and perform_request. (`_util.py`)
 + Updated return type decorators for GetArtifacts, GetReports and GetSampleV2. (`falconx_sandbox.py`)
 + Abstracted all remaining common error output code paths to a stand-alone generic method. (`_util.py`)
@@ -138,10 +138,10 @@
 + Added automatic token refresh functionality to Service Class calls
     - Developers must make use of either credential or object authentication in order to leverage this functionality.
 ## Issues resolved
-+ Added dynamic package metadata updates (Issue #14)
++ Added dynamic package metadata updates (Closes #14)
     - Generalized version control
         - New constant file: `_version.py`
-+ Added user-agent string to HTTP headers. (Issue #57)
++ Added user-agent string to HTTP headers. (Closes #57)
 + Resolved a bug with token deauthentication (Uber and Service classes)
 + Resolved a bug in Firewall_Management.update_rule_group
 ## Other
