@@ -6,6 +6,7 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 ### Currently implemented:
 + `cloud_connect_aws.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws
 + `cspm-registration.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration
++ `custom_ioa.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa
 + `detects.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects
 + `device_control_policies.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/device-control-policies
 + `event_streams.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams
@@ -30,7 +31,6 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 ### Planned
 + `d4c_registration.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration
 + `installation_tokens.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens
-+ `custom_ioa.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa
 + `malquery.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery
 + `ioa_exclusions.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions
 + `ml_exclusions.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions
