@@ -66,8 +66,9 @@ $ python3 -m pip uninstall crowdstrike-falconpy
 | [Falcon Discover for Cloud and Containers - GCP Projects APIs](https://falcon.crowdstrike.com/support/documentation/117/falcon-discover-for-cloud-and-containers-gcp-projects-apis) | *Coming Soon* |
 | [CrowdStrike Falcon Zero Trust Assessment APIs](https://falcon.crowdstrike.com/support/documentation/156/zero-trust-assessment-apis) | *Coming Soon* |
 
-## Uber class
-+ [api_complete.py](./src/falconpy/api_complete.py) - Provides an interface to all CrowdStrike APIs with a single handler.
+# The Uber class
++ [api_complete.py](./src/falconpy/api_complete.py) - The Uber class provides an interface to all CrowdStrike APIs with a single handler. 
+This soluion supports communicating with API endpoints that do not have an available Service Class or are recently released.
 
 # Contributing
 There are *many* ways you can contribute to the FalconPy project!
