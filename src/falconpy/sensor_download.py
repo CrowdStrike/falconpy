@@ -8,7 +8,7 @@ class Sensor_Download(ServiceClass):
 
     def GetCombinedSensorInstallersByQuery(self: object, parameters: dict = {}) -> dict:
         """
-        retrieve all metadata for installers from provided query
+        Retrieve all metadata for installers from provided query
         """
         FULL_URL = self.base_url+'/sensors/combined/installers/v1'
         HEADERS = self.headers
@@ -28,8 +28,8 @@ class Sensor_Download(ServiceClass):
                                     download_path: str = None
                                     ) -> object:
         """
-        download the sensor by the sha256 into the specified directory.
-        the path will be created for the user if it does not already exist
+        Download the sensor by the sha256 id, into the specified directory.
+        The path will be created for the user if it does not already exist
         """
         FULL_URL = self.base_url+"/sensors/entities/download-installer/v1"
         HEADERS = self.headers
@@ -67,7 +67,7 @@ class Sensor_Download(ServiceClass):
 
     def GetSensorInstallersCCIDByQuery(self: object) -> dict:
         """
-        retrieve the CID for the current oauth environment
+        Retrieve the CID for the current oauth environment
         """
         FULL_URL = self.base_url+'/sensors/queries/installers/ccid/v1'
         HEADERS = self.headers
@@ -81,7 +81,7 @@ class Sensor_Download(ServiceClass):
 
     def GetSensorInstallersByQuery(self: object, parameters: dict = {}) -> dict:
         """
-        retrieve a list of SHA256 for installers based on the filter
+        Retrieve a list of SHA256 for installers based on the filter
         """
         FULL_URL = self.base_url+'/sensors/queries/installers/v1'
         HEADERS = self.headers
