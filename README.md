@@ -68,7 +68,7 @@ $ python3 -m pip uninstall crowdstrike-falconpy
 
 # The Uber class
 + [api_complete.py](./src/falconpy/api_complete.py) - The Uber class provides an interface to all CrowdStrike APIs with a single handler. 
-This soluion supports communicating with API endpoints that do not have an available Service Class or are recently released.
+This solution supports communicating with API endpoints that do not have an available Service Class or are recently released.
 
 # Contributing
 There are *many* ways you can contribute to the FalconPy project!
