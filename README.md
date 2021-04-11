@@ -29,7 +29,7 @@ If you'd like to try the *absolute bleeding edge*, an automated GitHub action re
 $ python3 -m pip install -i https://test.pypi.org/simple crowdstrike-falconpy
 ```
 
-To uninstall/remove FalconPy:
+To uninstall and remove FalconPy:
 ```shell
 $ python3 -m pip uninstall crowdstrike-falconpy
 ```
