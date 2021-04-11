@@ -20,7 +20,7 @@ falcon = FalconIOA.Custom_IOA(access_token=auth.token)
 AllowedResponses = [200, 201, 207, 429]  # Adding rate-limiting as an allowed response for now
 
 
-class TestCSPMRegistration:
+class TestCustomIOA:
 
     def serviceIOA_QueryPatterns(self):
         return falcon.query_patterns()["status_code"] in AllowedResponses
