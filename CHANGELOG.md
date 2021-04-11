@@ -16,14 +16,14 @@
     * validate
     * query_patterns
     * query_platformsMixin0
-    * query_rule_groups_fulle
+    * query_rule_groups_full
     * query_rule_groupsMixin0
     * query_rule_types
     * query_rulesMixin0
     - Added unit tests (`test_custom_ioa.py`)
 
 + Added: Falcon X Quick Scan API Service Class (`quick_scan.py`)
-    * GetScansAggregate
+    * GetScansAggregates
     * GetScans
     * ScanSamples
     * QuerySubmissionsMixin0
@@ -38,6 +38,8 @@
 + Added CHANGELOG
 + Documentation updates to reflect new service class and upcoming API additions
 + Minor comment updates
++ Adjusted GitHub actions to test operating systems as separate workflows
++ Minor GitHub workflow adjustments
 
 # Version 0.4.4
 ## Added features and functionality
