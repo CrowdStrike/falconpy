@@ -1,6 +1,6 @@
 # Version 0.4.5
 ## Added features and functionality
-+ Added: Custom Indicators of Attack (IOA) API Service Class
++ Added: Custom Indicators of Attack (IOA) API Service Class (`custom_ioa.py`)
     * get_patterns
     * get_platformsMixin0
     * get_rule_groupsMixin0
@@ -20,15 +20,16 @@
     * query_rule_groupsMixin0
     * query_rule_types
     * query_rulesMixin0
-    - Added unit tests
+    - Added unit tests (`test_custom_ioa.py`)
 
-+ Added: Falcon X Quick Scan API Service Class
++ Added: Falcon X Quick Scan API Service Class (`quick_scan.py`)
     * GetScansAggregate
     * GetScans
     * ScanSamples
     * QuerySubmissionsMixin0
+    - Added unit tests (`test_quick_scan.py`)
 
-+ Added: Uber class endpoints
++ Added: Uber class endpoints (`_endpoints.py`)
     * Falcon Complete Dashboard API
     * Falcon Overwatch Dashboard API
     * Falcon Flight Control API
@@ -40,7 +41,7 @@
 
 # Version 0.4.4
 ## Added features and functionality
-+ Added: Sensor Download API Service Class (Contributor: CalebSchwartz)
++ Added: Sensor Download API Service Class (Contributor: @CalebSchwartz)
     * GetCombinedSensorInstallersByQuery
     * DownloadSensorInstallerById
     * GetSensorInstallersEntities
@@ -55,24 +56,24 @@
 
 # Version 0.4.3
 ## Added features and functionality
-+ Added: Sample_Uploads service class (sample_uploads.py)
++ Added: Sample_Uploads service class (`sample_uploads.py`)
     * UploadSampleV3
     * GetSampleV3
     * DeleteSampleV3
-    - Added: Sample_Uploads unit tests (test_sample_uploads.py)
+    - Added: Sample_Uploads unit tests (`test_sample_uploads.py`)
 + Added: FalconDebug - Interactive Python3 debugger that provides a pre-defined API token.
 ## Issues resolved
 + Fixed: Issue with Uber class command method using the action_name variable instead of file_name variable for actions passing the file_name parameter.
-+ Fixed: Issue with setup.py passing GitHub emoji text to the package description.
-+ Fixed: Issue with Uber class unit testing not deleting uploaded files from Sample_Uploads API. (test_uber_api_complete.py)
++ Fixed: Issue with `setup.py` passing GitHub emoji text to the package description.
++ Fixed: Issue with Uber class unit testing not deleting uploaded files from Sample_Uploads API. (`test_uber_api_complete.py`)
 
 
 # Version 0.4.2
 ## Added features and functionality
-+ Added missing method: hosts.py - Added UpdateDeviceTags method to Hosts service class. (Contributor: rewgord)
-    - Unit test added to test_hosts.py to test device tagging functionality.
-+ API Operation summaries added to the Uber class: _endpoint.py - This provides for upcoming functionality that will be announced in future updates.
-+ New endpoints added to the Uber class: _endpoint.py 
++ Added missing method: `hosts.py` - Added UpdateDeviceTags method to Hosts service class. (Contributor: @rewgord)
+    - Unit test added to `test_hosts.py` to test device tagging functionality.
++ API Operation summaries added to the Uber class: `_endpoint.py` - This provides for upcoming functionality that will be announced in future updates.
++ New endpoints added to the Uber class: `_endpoint.py` 
 
 > Deprecation Warning: Legacy API operation IDs that made use of the Python reserved characters "." and "-" have been deprecated. 
 > New operation IDs have been generated for each that now aligns to the method names defined in the equivalent service class.
@@ -81,9 +82,9 @@
 + Added method validation to Uber class calls to the requests library. (HTTP 418 is sent when an invalid method is specified.)
 ## Other
 + Cleaned up event_streams.py class file to match new patterns.
-+ Updated return type decorators for service_request and perform_request. (_util.py)
-+ Updated return type decorators for GetArtifacts, GetReports and GetSampleV2. (falconx_sandbox.py)
-+ Abstracted all remaining common error output code paths to a stand-alone generic method. (_util.py)
++ Updated return type decorators for service_request and perform_request. (`_util.py`)
++ Updated return type decorators for GetArtifacts, GetReports and GetSampleV2. (`falconx_sandbox.py`)
++ Abstracted all remaining common error output code paths to a stand-alone generic method. (`_util.py`)
 
 
 # Version 0.4.1
@@ -99,7 +100,7 @@
     - Unit test added
 ## Issues resolved
 + Bug fix: Resolved malformed validator in detects.py - UpdateDetectsByIdsV2
-+ Bug fix: Added action_name parameter to operations that require the parameter. (#53) 
++ Bug fix: Added action_name parameter to operations that require the parameter. Closes #53.
   This issue impacted 6 service classes in total:
     - device_control_policies.py - *Device_Control_Policies* - performDeviceControlPoliciesAction
     - firewall_policies.py - *Firewall_Policies* - performFirewallPoliciesAction
@@ -115,17 +116,17 @@
 > Breaking Change: The action_name parameter does not currently accept unspecified values. This is resolved in the 0.4.4 version of the package.
 
 ## Other
-+ Minor updates to _endpoints.py to reflect operation ID corrections for the CSPM registration API.
-+ Abstracted common error output code paths to a stand-alone method within _util.py.
++ Minor updates to `_endpoints.py` to reflect operation ID corrections for the CSPM registration API.
++ Abstracted common error output code paths to a stand-alone method within `_util.py`.
 
 
 # Version 0.4.0
 ## Added features and functionality
 + Added additional HTTP status codes
 + Added parameter input validation handling
-    - Additional validations are planned for all service classes. Currently only enabled in cloud_connect_aws.py. 
+    - Additional validations are planned for all service classes. Currently only enabled in `cloud_connect_aws.py`. 
 + Added body payload input validation handling
-    -  Additional validations are planned for all service classes. Currently only enabled in cloud_connect_aws.py.  
+    -  Additional validations are planned for all service classes. Currently only enabled in `cloud_connect_aws.py`.  
 + Added allowed HTTP method restrictions
 + Added ID list handling to API operations that require ID lists
     - Developers may now pass in a list of IDs or a comma-delimited string. 
@@ -154,7 +155,7 @@
 + Linting / code cleanup
     - Added function input parameter datatype specifications (where possible)
     - Added function output datatype decorators
-    - In order to reduce confusion, references to the json requests attribute are now always referred to as "body". 
-    - References to the data requests attribute are still referred to as "data".
+    - In order to reduce confusion, references to the `json` requests attribute are now always referred to as "body". 
+    - References to the `data` requests attribute are still referred to as "data".
 + 100% unit test coverage
 + Internal documentation updates
