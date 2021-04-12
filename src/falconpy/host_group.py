@@ -44,13 +44,15 @@ class Host_Group(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def queryCombinedGroupMembers(self: object, parameters: dict = {}) -> dict:
+    def queryCombinedGroupMembers(self: object, parameters: dict = None) -> dict:
         """ Search for members of a Host Group in your environment by providing an FQL filter
             and paging details. Returns a set of host details which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/queryCombinedGroupMembers
         FULL_URL = self.base_url+'/devices/combined/host-group-members/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -61,13 +63,15 @@ class Host_Group(ServiceClass):
                                    )
         return returned
 
-    def queryCombinedHostGroups(self: object, parameters: dict = {}) -> dict:
+    def queryCombinedHostGroups(self: object, parameters: dict = None) -> dict:
         """ Search for Host Groups in your environment by providing an FQL filter and
             paging details. Returns a set of Host Groups which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/queryCombinedHostGroups
         FULL_URL = self.base_url+'/devices/combined/host-groups/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -160,13 +164,15 @@ class Host_Group(ServiceClass):
                                    )
         return returned
 
-    def queryGroupMembers(self: object, parameters: dict = {}) -> dict:
+    def queryGroupMembers(self: object, parameters: dict = None) -> dict:
         """ Search for members of a Host Group in your environment by providing an FQL filter
             and paging details. Returns a set of Agent IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/queryGroupMembers
         FULL_URL = self.base_url+'/devices/queries/host-group-members/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -177,13 +183,15 @@ class Host_Group(ServiceClass):
                                    )
         return returned
 
-    def queryHostGroups(self: object, parameters: dict = {}) -> dict:
+    def queryHostGroups(self: object, parameters: dict = None) -> dict:
         """ Search for Host Groups in your environment by providing an FQL filter and
             paging details. Returns a set of Host Group IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/queryHostGroups
         FULL_URL = self.base_url+'/devices/queries/host-groups/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

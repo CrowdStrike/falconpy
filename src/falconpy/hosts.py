@@ -125,11 +125,13 @@ class Hosts(ServiceClass):
                                    )
         return returned
 
-    def QueryHiddenDevices(self: object, parameters: dict = {}) -> dict:
+    def QueryHiddenDevices(self: object, parameters: dict = None) -> dict:
         """ Perform the specified action on the Prevention Policies specified in the request. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryHiddenDevices
         FULL_URL = self.base_url+'/devices/queries/devices-hidden/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -140,11 +142,13 @@ class Hosts(ServiceClass):
                                    )
         return returned
 
-    def QueryDevicesByFilterScroll(self: object, parameters: dict = {}) -> dict:
+    def QueryDevicesByFilterScroll(self: object, parameters: dict = None) -> dict:
         """ Perform the specified action on the Prevention Policies specified in the request. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDevicesByFilterScroll
         FULL_URL = self.base_url+'/devices/queries/devices-scroll/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -155,11 +159,13 @@ class Hosts(ServiceClass):
                                    )
         return returned
 
-    def QueryDevicesByFilter(self: object, parameters: dict = {}) -> dict:
+    def QueryDevicesByFilter(self: object, parameters: dict = None) -> dict:
         """ Search for hosts in your environment by platform, hostname, IP, and other criteria. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDevicesByFilter
         FULL_URL = self.base_url+'/devices/queries/devices/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

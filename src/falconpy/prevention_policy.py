@@ -44,7 +44,7 @@ class Prevention_Policy(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def queryCombinedPreventionPolicyMembers(self: object, parameters: dict = {}) -> dict:
+    def queryCombinedPreventionPolicyMembers(self: object, parameters: dict = None) -> dict:
         """ Search for members of a Prevention Policy in your environment by providing an FQL filter
             and paging details. Returns a set of host details which match the filter criteria.
         """
@@ -52,6 +52,8 @@ class Prevention_Policy(ServiceClass):
         #       ...     /prevention-policies/queryCombinedPreventionPolicyMembers
         FULL_URL = self.base_url+'/policy/combined/prevention-members/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -62,7 +64,7 @@ class Prevention_Policy(ServiceClass):
                                    )
         return returned
 
-    def queryCombinedPreventionPolicies(self: object, parameters: dict = {}) -> dict:
+    def queryCombinedPreventionPolicies(self: object, parameters: dict = None) -> dict:
         """ Search for Prevention Policies in your environment by providing an FQL filter and
             paging details. Returns a set of Prevention Policies which match the filter criteria.
         """
@@ -70,6 +72,8 @@ class Prevention_Policy(ServiceClass):
         #       ...     /prevention-policies/queryCombinedPreventionPolicies
         FULL_URL = self.base_url+'/policy/combined/prevention/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -182,7 +186,7 @@ class Prevention_Policy(ServiceClass):
                                    )
         return returned
 
-    def queryPreventionPolicyMembers(self: object, parameters: dict = {}) -> dict:
+    def queryPreventionPolicyMembers(self: object, parameters: dict = None) -> dict:
         """ Search for members of a Prevention Policy in your environment by providing an FQL filter
             and paging details. Returns a set of Agent IDs which match the filter criteria.
         """
@@ -190,6 +194,8 @@ class Prevention_Policy(ServiceClass):
         #       ...     /prevention-policies/queryPreventionPolicyMembers
         FULL_URL = self.base_url+'/policy/queries/prevention-members/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -200,13 +206,15 @@ class Prevention_Policy(ServiceClass):
                                    )
         return returned
 
-    def queryPreventionPolicies(self: object, parameters: dict = {}) -> dict:
+    def queryPreventionPolicies(self: object, parameters: dict = None) -> dict:
         """ Search for Prevention Policies in your environment by providing an FQL filter
             and paging details. Returns a set of Prevention Policy IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/queryPreventionPolicies
         FULL_URL = self.base_url+'/policy/queries/prevention/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

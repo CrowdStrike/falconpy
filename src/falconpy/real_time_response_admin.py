@@ -44,12 +44,14 @@ class Real_Time_Response_Admin(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def BatchAdminCmd(self: object, body: dict, parameters: dict = {}) -> dict:
+    def BatchAdminCmd(self: object, body: dict, parameters: dict = None) -> dict:
         """ Batch executes a RTR administrator command across the hosts mapped to the given batch ID. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/BatchAdminCmd
         FULL_URL = self.base_url+'/real-time-response/combined/batch-admin-command/v1'
         HEADERS = self.headers
         BODY = body
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="POST",
@@ -203,11 +205,13 @@ class Real_Time_Response_Admin(ServiceClass):
                                    )
         return returned
 
-    def RTR_ListPut_Files(self: object, parameters: dict = {}) -> dict:
+    def RTR_ListPut_Files(self: object, parameters: dict = None) -> dict:
         """ Get a list of put-file ID's that are available to the user for the `put` command. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_ListPut_Files
         FULL_URL = self.base_url+'/real-time-response/queries/put-files/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -218,11 +222,13 @@ class Real_Time_Response_Admin(ServiceClass):
                                    )
         return returned
 
-    def RTR_ListScripts(self: object, parameters: dict = {}) -> dict:
+    def RTR_ListScripts(self: object, parameters: dict = None) -> dict:
         """ Get a list of custom-script ID's that are available to the user for the `runscript` command. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_ListScripts
         FULL_URL = self.base_url+'/real-time-response/queries/scripts/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

@@ -44,11 +44,13 @@ class Incidents(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def CrowdScore(self: object, parameters: dict = {}) -> dict:
+    def CrowdScore(self: object, parameters: dict = None) -> dict:
         """ Query environment wide CrowdScore and return the entity data. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/CrowdScore
         FULL_URL = self.base_url+'/incidents/combined/crowdscores/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -106,11 +108,13 @@ class Incidents(ServiceClass):
                                    )
         return returned
 
-    def QueryBehaviors(self: object, parameters: dict = {}) -> dict:
+    def QueryBehaviors(self: object, parameters: dict = None) -> dict:
         """ Search for behaviors by providing an FQL filter, sorting, and paging details. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/QueryBehaviors
         FULL_URL = self.base_url+'/incidents/queries/behaviors/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -121,11 +125,13 @@ class Incidents(ServiceClass):
                                    )
         return returned
 
-    def QueryIncidents(self: object, parameters: dict = {}) -> dict:
+    def QueryIncidents(self: object, parameters: dict = None) -> dict:
         """ Search for incidents by providing an FQL filter, sorting, and paging details. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/QueryIncidents
         FULL_URL = self.base_url+'/incidents/queries/incidents/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

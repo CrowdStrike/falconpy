@@ -44,7 +44,7 @@ class Device_Control_Policies(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def queryCombinedDeviceControlPolicyMembers(self: object, parameters: dict = {}) -> dict:
+    def queryCombinedDeviceControlPolicyMembers(self: object, parameters: dict = None) -> dict:
         """ Search for members of a Device Control Policy in your environment by providing an FQL filter
             and paging details. Returns a set of host details which match the filter criteria.
         """
@@ -52,6 +52,8 @@ class Device_Control_Policies(ServiceClass):
         #       ...   /device-control-policies/queryCombinedDeviceControlPolicyMembers
         FULL_URL = self.base_url+'/policy/combined/device-control-members/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -62,7 +64,7 @@ class Device_Control_Policies(ServiceClass):
                                    )
         return returned
 
-    def queryCombinedDeviceControlPolicies(self: object, parameters: dict = {}) -> dict:
+    def queryCombinedDeviceControlPolicies(self: object, parameters: dict = None) -> dict:
         """ Search for Device Control Policies in your environment by providing an FQL filter and
             paging details. Returns a set of Device Control Policies which match the filter criteria.
         """
@@ -70,6 +72,8 @@ class Device_Control_Policies(ServiceClass):
         #       ...     /device-control-policies/queryCombinedDeviceControlPolicies
         FULL_URL = self.base_url+'/policy/combined/device-control/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -188,7 +192,7 @@ class Device_Control_Policies(ServiceClass):
                                    )
         return returned
 
-    def queryDeviceControlPolicyMembers(self: object, parameters: dict = {}) -> dict:
+    def queryDeviceControlPolicyMembers(self: object, parameters: dict = None) -> dict:
         """ Search for members of a Device Control Policy in your environment by providing an FQL filter
             and paging details. Returns a set of Agent IDs which match the filter criteria.
         """
@@ -196,6 +200,8 @@ class Device_Control_Policies(ServiceClass):
         #       ...     /device-control-policies/queryDeviceControlPolicyMembers
         FULL_URL = self.base_url+'/policy/queries/device-control-members/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -206,7 +212,7 @@ class Device_Control_Policies(ServiceClass):
                                    )
         return returned
 
-    def queryDeviceControlPolicies(self: object, parameters: dict = {}) -> dict:
+    def queryDeviceControlPolicies(self: object, parameters: dict = None) -> dict:
         """ Search for Device Control Policies in your environment by providing an FQL filter and paging details.
             Returns a set of Device Control Policy IDs which match the filter criteria.
         """
@@ -214,6 +220,8 @@ class Device_Control_Policies(ServiceClass):
         #       ...     /device-control-policies/queryDeviceControlPolicyMembers
         FULL_URL = self.base_url+'/policy/queries/device-control/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

@@ -44,11 +44,13 @@ class Intel(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def QueryIntelActorEntities(self: object, parameters: dict = {}) -> dict:
+    def QueryIntelActorEntities(self: object, parameters: dict = None) -> dict:
         """ Get info about actors that match provided FQL filters. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelActorEntities
         FULL_URL = self.base_url+'/intel/combined/actors/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -59,11 +61,13 @@ class Intel(ServiceClass):
                                    )
         return returned
 
-    def QueryIntelIndicatorEntities(self: object, parameters: dict = {}) -> dict:
+    def QueryIntelIndicatorEntities(self: object, parameters: dict = None) -> dict:
         """ Get info about indicators that match provided FQL filters. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelIndicatorEntities
         FULL_URL = self.base_url+'/intel/combined/indicators/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -74,11 +78,13 @@ class Intel(ServiceClass):
                                    )
         return returned
 
-    def QueryIntelReportEntities(self: object, parameters: dict = {}) -> dict:
+    def QueryIntelReportEntities(self: object, parameters: dict = None) -> dict:
         """ Get info about reports that match provided FQL filters. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelReportEntities
         FULL_URL = self.base_url+'/intel/combined/reports/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -89,12 +95,14 @@ class Intel(ServiceClass):
                                    )
         return returned
 
-    def GetIntelActorEntities(self: object, ids, parameters: dict = {}) -> dict:
+    def GetIntelActorEntities(self: object, ids, parameters: dict = None) -> dict:
         """ Retrieve specific actors using their actor IDs. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelActorEntities
         ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
         FULL_URL = self.base_url+'/intel/entities/actors/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -135,12 +143,14 @@ class Intel(ServiceClass):
                                    )
         return returned
 
-    def GetIntelReportEntities(self: object, ids, parameters: dict = {}) -> dict:
+    def GetIntelReportEntities(self: object, ids, parameters: dict = None) -> dict:
         """ Retrieve specific reports using their report IDs. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelReportEntities
         ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
         FULL_URL = self.base_url+'/intel/entities/reports/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -197,11 +207,13 @@ class Intel(ServiceClass):
                                    )
         return returned
 
-    def QueryIntelActorIds(self: object, parameters: dict = {}) -> dict:
+    def QueryIntelActorIds(self: object, parameters: dict = None) -> dict:
         """ Get actor IDs that match provided FQL filters. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelActorIds
         FULL_URL = self.base_url+'/intel/queries/actors/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -212,11 +224,13 @@ class Intel(ServiceClass):
                                    )
         return returned
 
-    def QueryIntelIndicatorIds(self: object, parameters: dict = {}) -> dict:
+    def QueryIntelIndicatorIds(self: object, parameters: dict = None) -> dict:
         """ Get indicators IDs that match provided FQL filters. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelIndicatorIds
         FULL_URL = self.base_url+'/intel/queries/indicators/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -227,11 +241,13 @@ class Intel(ServiceClass):
                                    )
         return returned
 
-    def QueryIntelReportIds(self: object, parameters: dict = {}) -> dict:
+    def QueryIntelReportIds(self: object, parameters: dict = None) -> dict:
         """ Get report IDs that match provided FQL filters. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelReportIds
         FULL_URL = self.base_url+'/intel/queries/reports/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

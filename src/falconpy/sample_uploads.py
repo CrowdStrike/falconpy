@@ -44,12 +44,14 @@ class Sample_Uploads(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def GetSampleV3(self: object, ids: list or str, parameters: dict = {}) -> object:
+    def GetSampleV3(self: object, ids: list or str, parameters: dict = None) -> object:
         """ Retrieves the file associated with the given ID (SHA256)"""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/GetSampleV3
         ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
         FULL_URL = self.base_url+'/samples/entities/samples/v3?ids={}'.format(ID_LIST)
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -60,14 +62,22 @@ class Sample_Uploads(ServiceClass):
                                    )
         return returned
 
-    def UploadSampleV3(self: object, file_data: object, body: dict = {}, file_name: str = "", parameters: dict = {}) -> dict:
+    def UploadSampleV3(self: object,
+                       file_data: object,
+                       body: dict = None,
+                       file_name: str = "",
+                       parameters: dict = None) -> dict:
         """ Upload a file for further cloud analysis. After uploading, call the specific analysis API endpoint. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/UploadSampleV3
         FULL_URL = self.base_url+f"/samples/entities/samples/v3?file_name={str(file_name)}"
         HEADERS = self.headers
         HEADERS["Content-Type"] = "application/octet-stream"
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         DATA = file_data
+        if body is None:
+            body = {}
         BODY = body
         returned = service_request(caller=self,
                                    method="POST",

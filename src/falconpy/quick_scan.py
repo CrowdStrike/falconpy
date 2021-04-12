@@ -90,13 +90,15 @@ class Quick_Scan(ServiceClass):
                                    )
         return returned
 
-    def QuerySubmissionsMixin0(self: object, parameters: dict = {}) -> dict:
+    def QuerySubmissionsMixin0(self: object, parameters: dict = None) -> dict:
         """Find IDs for submitted scans by providing an FQL filter and paging details.
            Returns a set of volume IDs that match your criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/QuerySubmissionsMixin0
         FULL_URL = self.base_url+"/scanner/queries/scans/v1"
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

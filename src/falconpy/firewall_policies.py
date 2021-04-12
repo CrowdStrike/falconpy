@@ -44,7 +44,7 @@ class Firewall_Policies(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def queryCombinedFirewallPolicyMembers(self: object, parameters: dict = {}) -> dict:
+    def queryCombinedFirewallPolicyMembers(self: object, parameters: dict = None) -> dict:
         """ Search for members of a Firewall Policy in your environment by providing an FQL filter
             and paging details. Returns a set of host details which match the filter criteria.
         """
@@ -52,6 +52,8 @@ class Firewall_Policies(ServiceClass):
         #       ...     /firewall-policies/queryCombinedFirewallPolicyMembers
         FULL_URL = self.base_url+'/policy/combined/firewall-members/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -62,13 +64,15 @@ class Firewall_Policies(ServiceClass):
                                    )
         return returned
 
-    def queryCombinedFirewallPolicies(self: object, parameters: dict = {}) -> dict:
+    def queryCombinedFirewallPolicies(self: object, parameters: dict = None) -> dict:
         """ Search for Firewall Policies in your environment by providing an FQL filter and paging details.
             Returns a set of Firewall Policies which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/queryCombinedFirewallPolicies
         FULL_URL = self.base_url+'/policy/combined/firewall/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -137,11 +141,13 @@ class Firewall_Policies(ServiceClass):
                                    )
         return returned
 
-    def createFirewallPolicies(self: object, body: dict, parameters: dict = {}) -> dict:
+    def createFirewallPolicies(self: object, body: dict, parameters: dict = None) -> dict:
         """ Create Firewall Policies by specifying details about the policy to create. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/createFirewallPolicies
         FULL_URL = self.base_url+'/policy/entities/firewall/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         BODY = body
         returned = service_request(caller=self,
@@ -183,13 +189,15 @@ class Firewall_Policies(ServiceClass):
                                    )
         return returned
 
-    def queryFirewallPolicyMembers(self: object, parameters: dict = {}) -> dict:
+    def queryFirewallPolicyMembers(self: object, parameters: dict = None) -> dict:
         """ Search for members of a Firewall Policy in your environment by providing an FQL filter and
             paging details. Returns a set of Agent IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/queryFirewallPolicyMembers
         FULL_URL = self.base_url+'/policy/queries/firewall-members/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -200,13 +208,15 @@ class Firewall_Policies(ServiceClass):
                                    )
         return returned
 
-    def queryFirewallPolicies(self: object, parameters: dict = {}) -> dict:
+    def queryFirewallPolicies(self: object, parameters: dict = None) -> dict:
         """ Search for Firewall Policies in your environment by providing an FQL filter and paging details.
             Returns a set of Firewall Policy IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/queryFirewallPolicies
         FULL_URL = self.base_url+'/policy/queries/firewall/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

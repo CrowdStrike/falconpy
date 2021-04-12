@@ -102,13 +102,15 @@ class Custom_IOA(ServiceClass):
                                    )
         return returned
 
-    def delete_rule_groupMixin0(self: object, ids, cs_username: str, parameters: dict = {}) -> dict:
+    def delete_rule_groupMixin0(self: object, ids, cs_username: str, parameters: dict = None) -> dict:
         """Delete rule groups by ID."""
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/delete-rule-groupsMixin0
         ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
         FULL_URL = self.base_url+'/ioarules/entities/rule-groups/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
         HEADERS['X-CS-USERNAME'] = cs_username
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="DELETE",
@@ -197,13 +199,15 @@ class Custom_IOA(ServiceClass):
                                    )
         return returned
 
-    def delete_rules(self: object, ids, cs_username: str, parameters: dict = {}) -> dict:
+    def delete_rules(self: object, ids, cs_username: str, parameters: dict = None) -> dict:
         """Delete rules from a rule group by ID."""
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/delete-rules
         ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
         FULL_URL = self.base_url+'/ioarules/entities/rules/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
         HEADERS['X-CS-USERNAME'] = cs_username
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="DELETE",
@@ -245,11 +249,13 @@ class Custom_IOA(ServiceClass):
                                    )
         return returned
 
-    def query_patterns(self: object, parameters: dict = {}) -> dict:
+    def query_patterns(self: object, parameters: dict = None) -> dict:
         """Get all pattern severity IDs"""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-patterns
         FULL_URL = self.base_url+"/ioarules/queries/pattern-severities/v1"
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -260,11 +266,13 @@ class Custom_IOA(ServiceClass):
                                    )
         return returned
 
-    def query_platformsMixin0(self: object, parameters: dict = {}) -> dict:
+    def query_platformsMixin0(self: object, parameters: dict = None) -> dict:
         """Get all platform IDs."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-platformsMixin0
         FULL_URL = self.base_url+"/ioarules/queries/platforms/v1"
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -275,11 +283,13 @@ class Custom_IOA(ServiceClass):
                                    )
         return returned
 
-    def query_rule_groups_full(self: object, parameters: dict = {}) -> dict:
+    def query_rule_groups_full(self: object, parameters: dict = None) -> dict:
         """Find all rule groups matching the query with optional filter."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rule-groups-full
         FULL_URL = self.base_url+"/ioarules/queries/rule-groups-full/v1"
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -290,11 +300,13 @@ class Custom_IOA(ServiceClass):
                                    )
         return returned
 
-    def query_rule_groupsMixin0(self: object, parameters: dict = {}) -> dict:
+    def query_rule_groupsMixin0(self: object, parameters: dict = None) -> dict:
         """Finds all rule group IDs matching the query with optional filter."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rule-groupsMixin0
         FULL_URL = self.base_url+"/ioarules/queries/rule-groups/v1"
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -305,11 +317,13 @@ class Custom_IOA(ServiceClass):
                                    )
         return returned
 
-    def query_rule_types(self: object, parameters: dict = {}) -> dict:
+    def query_rule_types(self: object, parameters: dict = None) -> dict:
         """Get all rule type IDs."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rule-types
         FULL_URL = self.base_url+"/ioarules/queries/rule-types/v1"
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -320,11 +334,13 @@ class Custom_IOA(ServiceClass):
                                    )
         return returned
 
-    def query_rulesMixin0(self: object, parameters: dict = {}) -> dict:
+    def query_rulesMixin0(self: object, parameters: dict = None) -> dict:
         """Finds all rule IDs matching the query with optional filter."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rulesMixin0
         FULL_URL = self.base_url+"/ioarules/queries/rules/v1"
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

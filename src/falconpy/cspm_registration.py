@@ -44,7 +44,7 @@ class CSPM_Registration(ServiceClass):
     """The only requirement to instantiate an instance of this class
        is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def GetCSPMAwsAccount(self: object, ids, org_ids=None, parameters: dict = {}) -> dict:
+    def GetCSPMAwsAccount(self: object, ids, org_ids=None, parameters: dict = None) -> dict:
         """Returns information about the current status of an AWS account. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAwsAccount
         ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
@@ -53,6 +53,8 @@ class CSPM_Registration(ServiceClass):
             ORG_ID_LIST = str(parse_id_list(org_ids)).replace(",", "&organization-ids=")
             FULL_URL = FULL_URL + "&organization-id={}".format(ORG_ID_LIST)
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -127,13 +129,15 @@ class CSPM_Registration(ServiceClass):
 
         return returned
 
-    def GetCSPMAzureAccount(self: object, ids, parameters: dict = {}) -> dict:
+    def GetCSPMAzureAccount(self: object, ids, parameters: dict = None) -> dict:
         """Return information about Azure account registration."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAzureAccount2
         # This shows up as GetCSPMAzureAccount2 in the Uber class.
         ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
         FULL_URL = self.base_url+"/cloud-connect-cspm-azure/entities/account/v1?ids={}".format(ID_LIST)
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -178,7 +182,7 @@ class CSPM_Registration(ServiceClass):
         return returned
 
     # TODO: Confirm payload formats for IDs not passed via an array
-    def UpdateCSPMAzureAccountClientID(self: object, body: dict = {}, parameters: dict = {}) -> dict:
+    def UpdateCSPMAzureAccountClientID(self: object, body: dict = None, parameters: dict = None) -> dict:
         """Update an Azure service account in our system with the
            user-created client_id created with the public key we've provided.
         """
@@ -186,8 +190,12 @@ class CSPM_Registration(ServiceClass):
         #         ...   /cspm-registration/UpdateCSPMAzureAccountClientID2
         # This shows up as UpdateCSPMAzureAccountClientID2 in the Uber class
         FULL_URL = self.base_url+'/cloud-connect-cspm-azure/entities/client-id/v1'
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         HEADERS = self.headers
+        if body is None:
+            body = {}
         BODY = body
         returned = service_request(caller=self,
                                    method="PATCH",
@@ -199,13 +207,15 @@ class CSPM_Registration(ServiceClass):
                                    )
         return returned
 
-    def GetCSPMAzureUserScriptsAttachment(self: object, parameters: dict = {}) -> bytes:
+    def GetCSPMAzureUserScriptsAttachment(self: object, parameters: dict = None) -> bytes:
         """Return a script for customers to run in their cloud environment
            to grant access to CrowdStrike for their Azure environment.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /cspm-registration/GetCSPMAzureUserScriptsAttachment2
         FULL_URL = self.base_url+"/cloud-connect-cspm-azure/entities/user-scripts-download/v1"
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         HEADERS = self.headers
         returned = service_request(caller=self,
@@ -235,11 +245,13 @@ class CSPM_Registration(ServiceClass):
 
         return returned
 
-    def GetCSPMPolicySettings(self: object, parameters: dict = {}) -> dict:
+    def GetCSPMPolicySettings(self: object, parameters: dict = None) -> dict:
         """Returns information about current policy settings."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMPolicySettings
         FULL_URL = self.base_url+"/settings/entities/policy/v1"
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -267,11 +279,13 @@ class CSPM_Registration(ServiceClass):
                                    )
         return returned
 
-    def GetCSPMScanSchedule(self: object, parameters: dict = {}) -> dict:
+    def GetCSPMScanSchedule(self: object, parameters: dict = None) -> dict:
         """Returns scan schedule configuration for one or more cloud platforms."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMScanSchedule
         FULL_URL = self.base_url+"/settings/scan-schedule/v1"
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

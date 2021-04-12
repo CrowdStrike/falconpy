@@ -193,12 +193,14 @@ class Firewall_Management(ServiceClass):
                                    )
         return returned
 
-    def create_rule_group(self: object, body: dict, cs_username: str, parameters: dict = {}) -> dict:
+    def create_rule_group(self: object, body: dict, cs_username: str, parameters: dict = None) -> dict:
         """ Create new rule group on a platform for a customer with a name and description, and return the ID. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create_rule_group
         FULL_URL = self.base_url+'/fwmgr/entities/rule-groups/v1'
         HEADERS = self.headers
         HEADERS['X-CS-USERNAME'] = cs_username
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         BODY = body
         returned = service_request(caller=self,
@@ -211,13 +213,15 @@ class Firewall_Management(ServiceClass):
                                    )
         return returned
 
-    def delete_rule_groups(self: object, ids, cs_username: str, parameters: dict = {}) -> dict:
+    def delete_rule_groups(self: object, ids, cs_username: str, parameters: dict = None) -> dict:
         """ Delete rule group entities by ID. """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QueryReports
         ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
         FULL_URL = self.base_url+'/fwmgr/entities/rule-groups/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
         HEADERS['X-CS-USERNAME'] = cs_username
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="DELETE",
@@ -228,12 +232,14 @@ class Firewall_Management(ServiceClass):
                                    )
         return returned
 
-    def update_rule_group(self: object, body: dict, cs_username: str, parameters: dict = {}) -> dict:
+    def update_rule_group(self: object, body: dict, cs_username: str, parameters: dict = None) -> dict:
         """ Update name, description, or enabled status of a rule group, or create, edit, delete, or reorder rules. """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update_rule_group
         FULL_URL = self.base_url+'/fwmgr/entities/rule-groups/v1'
         HEADERS = self.headers
         HEADERS['X-CS-USERNAME'] = cs_username
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         BODY = body
         returned = service_request(caller=self,
@@ -260,11 +266,13 @@ class Firewall_Management(ServiceClass):
                                    )
         return returned
 
-    def query_events(self: object, parameters: dict = {}) -> dict:
+    def query_events(self: object, parameters: dict = None) -> dict:
         """ Find all event IDs matching the query with filter. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_events
         FULL_URL = self.base_url+'/fwmgr/queries/events/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -275,11 +283,13 @@ class Firewall_Management(ServiceClass):
                                    )
         return returned
 
-    def query_firewall_fields(self: object, parameters: dict = {}) -> dict:
+    def query_firewall_fields(self: object, parameters: dict = None) -> dict:
         """ Get the firewall field specification IDs for the provided platform. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_firewall_fields
         FULL_URL = self.base_url+'/fwmgr/queries/firewall-fields/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -290,11 +300,13 @@ class Firewall_Management(ServiceClass):
                                    )
         return returned
 
-    def query_platforms(self: object, parameters: dict = {}) -> dict:
+    def query_platforms(self: object, parameters: dict = None) -> dict:
         """ Get the list of platform names. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_platforms
         FULL_URL = self.base_url+'/fwmgr/queries/platforms/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -305,11 +317,13 @@ class Firewall_Management(ServiceClass):
                                    )
         return returned
 
-    def query_policy_rules(self: object, parameters: dict = {}) -> dict:
+    def query_policy_rules(self: object, parameters: dict = None) -> dict:
         """ Find all firewall rule IDs matching the query with filter, and return them in precedence order. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_policy_rules
         FULL_URL = self.base_url+'/fwmgr/queries/policy-rules/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -320,11 +334,13 @@ class Firewall_Management(ServiceClass):
                                    )
         return returned
 
-    def query_rule_groups(self: object, parameters: dict = {}) -> dict:
+    def query_rule_groups(self: object, parameters: dict = None) -> dict:
         """ Find all rule group IDs matching the query with filter. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_rule_groups
         FULL_URL = self.base_url+'/fwmgr/queries/rule-groups/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -335,11 +351,13 @@ class Firewall_Management(ServiceClass):
                                    )
         return returned
 
-    def query_rules(self: object, parameters: dict = {}) -> dict:
+    def query_rules(self: object, parameters: dict = None) -> dict:
         """ Find all rule IDs matching the query with filter. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query_rule_groups
         FULL_URL = self.base_url+'/fwmgr/queries/rules/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

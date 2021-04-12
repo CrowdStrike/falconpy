@@ -44,13 +44,15 @@ class Cloud_Connect_AWS(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def QueryAWSAccounts(self: object, parameters: dict = {}) -> dict:
+    def QueryAWSAccounts(self: object, parameters: dict = None) -> dict:
         """ Search for provisioned AWS Accounts by providing an FQL filter and paging details.
             Returns a set of AWS accounts which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccounts
         FULL_URL = self.base_url+'/cloud-connect-aws/combined/accounts/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         VALIDATOR = {
             "limit": int,
@@ -87,10 +89,12 @@ class Cloud_Connect_AWS(ServiceClass):
 
         return returned
 
-    def ProvisionAWSAccounts(self: object, body: dict, parameters: dict = {}) -> dict:
+    def ProvisionAWSAccounts(self: object, body: dict, parameters: dict = None) -> dict:
         """ Provision AWS Accounts by specifying details about the accounts to provision. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/ProvisionAWSAccounts
         FULL_URL = self.base_url+'/cloud-connect-aws/entities/accounts/v1'
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         BODY = body
         HEADERS = self.headers
@@ -156,12 +160,14 @@ class Cloud_Connect_AWS(ServiceClass):
                                    )
         return returned
 
-    def VerifyAWSAccountAccess(self: object, ids, body: dict = {}) -> dict:
+    def VerifyAWSAccountAccess(self: object, ids, body: dict = None) -> dict:
         """ Performs an Access Verification check on the specified AWS Account IDs. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/VerifyAWSAccountAccess
         ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
         FULL_URL = self.base_url+'/cloud-connect-aws/entities/verify-account-access/v1?ids={}'.format(ID_LIST)
         HEADERS = self.headers
+        if body is None:
+            body = {}
         BODY = body
         returned = service_request(caller=self,
                                    method="POST",
@@ -172,13 +178,15 @@ class Cloud_Connect_AWS(ServiceClass):
                                    )
         return returned
 
-    def QueryAWSAccountsForIDs(self: object, parameters: dict = {}) -> dict:
+    def QueryAWSAccountsForIDs(self: object, parameters: dict = None) -> dict:
         """ Search for provisioned AWS Accounts by providing an FQL filter and paging details.
             Returns a set of AWS account IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccountsForIDs
         FULL_URL = self.base_url+'/cloud-connect-aws/queries/accounts/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         VALIDATOR = {
             "limit": int,

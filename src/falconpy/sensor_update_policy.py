@@ -61,12 +61,14 @@ class Sensor_Update_Policy(ServiceClass):
                                    )
         return returned
 
-    def queryCombinedSensorUpdateBuilds(self: object, parameters: dict = {}) -> dict:
+    def queryCombinedSensorUpdateBuilds(self: object, parameters: dict = None) -> dict:
         """ Retrieve available builds for use with Sensor Update Policies. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /sensor-update-policies/queryCombinedSensorUpdateBuilds
         FULL_URL = self.base_url+'/policy/combined/sensor-update-builds/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -77,7 +79,7 @@ class Sensor_Update_Policy(ServiceClass):
                                    )
         return returned
 
-    def queryCombinedSensorUpdatePolicyMembers(self: object, parameters: dict = {}) -> dict:
+    def queryCombinedSensorUpdatePolicyMembers(self: object, parameters: dict = None) -> dict:
         """ Search for members of a Sensor Update Policy in your environment by providing an FQL
             filter and paging details. Returns a set of host details which match the filter criteria.
         """
@@ -85,6 +87,8 @@ class Sensor_Update_Policy(ServiceClass):
         #       ...     /sensor-update-policies/queryCombinedSensorUpdatePolicyMembers
         FULL_URL = self.base_url+'/policy/combined/sensor-update-members/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -95,7 +99,7 @@ class Sensor_Update_Policy(ServiceClass):
                                    )
         return returned
 
-    def queryCombinedSensorUpdatePolicies(self: object, parameters: dict = {}) -> dict:
+    def queryCombinedSensorUpdatePolicies(self: object, parameters: dict = None) -> dict:
         """ Search for Sensor Update Policies in your environment by providing an FQL filter and paging details.
             Returns a set of Sensor Update Policies which match the filter criteria.
         """
@@ -103,6 +107,8 @@ class Sensor_Update_Policy(ServiceClass):
         #       ...     /sensor-update-policies/queryCombinedSensorUpdatePolicies
         FULL_URL = self.base_url+'/policy/combined/sensor-update/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -113,7 +119,7 @@ class Sensor_Update_Policy(ServiceClass):
                                    )
         return returned
 
-    def queryCombinedSensorUpdatePoliciesV2(self: object, parameters: dict = {}) -> dict:
+    def queryCombinedSensorUpdatePoliciesV2(self: object, parameters: dict = None) -> dict:
         """ Search for Sensor Update Policies with additional support for uninstall protection in your environment
             by providing an FQL filter and paging details.
             Returns a set of Sensor Update Policies which match the filter criteria.
@@ -122,6 +128,8 @@ class Sensor_Update_Policy(ServiceClass):
         #       ...     /sensor-update-policies/queryCombinedSensorUpdatePoliciesV2
         FULL_URL = self.base_url+'/policy/combined/sensor-update/v2'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -290,7 +298,7 @@ class Sensor_Update_Policy(ServiceClass):
                                    )
         return returned
 
-    def querySensorUpdatePolicyMembers(self: object, parameters: dict = {}) -> dict:
+    def querySensorUpdatePolicyMembers(self: object, parameters: dict = None) -> dict:
         """ Search for members of a Sensor Update Policy in your environment by providing an FQL
             filter and paging details. Returns a set of Agent IDs which match the filter criteria.
         """
@@ -298,6 +306,8 @@ class Sensor_Update_Policy(ServiceClass):
         #       ...     /sensor-update-policies/querySensorUpdatePolicyMembers
         FULL_URL = self.base_url+'/policy/queries/sensor-update-members/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -308,7 +318,7 @@ class Sensor_Update_Policy(ServiceClass):
                                    )
         return returned
 
-    def querySensorUpdatePolicies(self: object, parameters: dict = {}) -> dict:
+    def querySensorUpdatePolicies(self: object, parameters: dict = None) -> dict:
         """ Search for Sensor Update Policies in your environment by providing an FQL filter and
             paging details. Returns a set of Sensor Update Policy IDs which match the filter criteria.
         """
@@ -316,6 +326,8 @@ class Sensor_Update_Policy(ServiceClass):
         #       ...     /sensor-update-policies/querySensorUpdatePolicies
         FULL_URL = self.base_url+'/policy/queries/sensor-update/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

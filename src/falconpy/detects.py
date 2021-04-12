@@ -107,11 +107,13 @@ class Detects(ServiceClass):
                                    )
         return returned
 
-    def QueryDetects(self: object, parameters: dict = {}) -> dict:
+    def QueryDetects(self: object, parameters: dict = None) -> dict:
         """ Search for detection IDs that match a given query. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/QueryDetects
         FULL_URL = self.base_url+'/detects/queries/detects/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         VALIDATOR = {
             "limit": int,

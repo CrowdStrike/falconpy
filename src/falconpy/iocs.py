@@ -138,11 +138,13 @@ class Iocs(ServiceClass):
                                    )
         return returned
 
-    def QueryIOCs(self: object, parameters: dict = {}) -> dict:
+    def QueryIOCs(self: object, parameters: dict = None) -> dict:
         """ Search the custom IOCs in your customer account. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/QueryIOCs
         FULL_URL = self.base_url+'/indicators/queries/iocs/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

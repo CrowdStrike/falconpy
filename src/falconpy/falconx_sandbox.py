@@ -105,13 +105,15 @@ class FalconX_Sandbox(ServiceClass):
                                    )
         return returned
 
-    def QueryReports(self: object, parameters: dict = {}) -> dict:
+    def QueryReports(self: object, parameters: dict = None) -> dict:
         """ Find sandbox reports by providing an FQL filter and paging details.
             Returns a set of report IDs that match your criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QueryReports
         FULL_URL = self.base_url+'/falconx/queries/reports/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
@@ -122,13 +124,15 @@ class FalconX_Sandbox(ServiceClass):
                                    )
         return returned
 
-    def QuerySubmissions(self: object, parameters: dict = {}) -> dict:
+    def QuerySubmissions(self: object, parameters: dict = None) -> dict:
         """ Find submission IDs for uploaded files by providing an FQL filter and paging details.
             Returns a set of submission IDs that match your criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QuerySubmissions
         FULL_URL = self.base_url+'/falconx/queries/submissions/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",
