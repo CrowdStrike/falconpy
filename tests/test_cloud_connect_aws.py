@@ -177,7 +177,7 @@ class TestCloudConnectAWS:
             errorChecks = False
         if falcon.CreateOrUpdateAWSSettings(body={})["status_code"] != 500:
             errorChecks = False
-        if falcon.VerifyAWSAccountAccess(ids="1234567890", body={})["status_code"] != 500:
+        if falcon.VerifyAWSAccountAccess(ids="1234567890")["status_code"] != 500:
             errorChecks = False
 
         return errorChecks
