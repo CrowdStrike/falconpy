@@ -113,7 +113,7 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
 
 def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
                     params: dict = None, body: dict = None, verify: bool = True,
-                    data=None, files: list = [],
+                    data=None, files: list = None,
                     params_validator: dict = None, params_required: dict = None,
                     body_validator: dict = None, body_required: dict = None) -> object:  # May return dict or object datatypes
     """
@@ -144,6 +144,8 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
         body_required: list - List of payload parameters required by the requested operation
             - Example: ["ids"]
     """
+    if files is None:
+        files = []
     PERFORM = True
     METHOD = method.upper()
     if METHOD in _ALLOWED_METHODS:
