@@ -75,7 +75,7 @@ def validate_payload(validator: dict, params: dict, required: list = None) -> bo
 
 def parse_id_list(id_list) -> str:
     """ Converts a list of IDs to a comma-delimited string """
-    if type(id_list) is list:
+    if isinstance(id_list, list):
         returned = ""
         for s in id_list:
             if len(returned) > 1:
