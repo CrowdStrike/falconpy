@@ -33,13 +33,19 @@
     * Falcon Complete Dashboard API
     * Falcon Overwatch Dashboard API
     * Falcon Flight Control API
-
+## Issues resolved
++ Fixed unidiomatic type check in `_util.py` (_parse_id_list_)
++ Fixed potentially problematic default payload lists and dictionaries (Service Classes and Uber Class)
 ## Other
-+ Added CHANGELOG
++ Added CHANGELOG.md
 + Documentation updates to reflect new service class and upcoming API additions
 + Minor comment updates
 + Adjusted GitHub actions to test operating systems as separate workflows
 + Minor GitHub workflow adjustments
++ Unit test updates
+    - Cloud Connect AWS
+    - CSPM Registration
+    - Sensor Download
 
 # Version 0.4.4
 ## Added features and functionality
