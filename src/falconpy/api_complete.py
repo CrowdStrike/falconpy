@@ -107,9 +107,9 @@ class APIHarness:
 
     # NOTE: Not specifying datatypes for "ids" and "partition" parameters
     #       to allow developers to pass str / lists / integers as necessary
-    def command(self: object, action: str = "", parameters: dict = None, body: dict = None, data: dict = None,
+    def command(self: object, action: str = "", parameters: dict = None, body: dict = None, data: dict = None,  # noqa: C901
                 headers: dict = None, ids=None, partition=None, override: str = None, action_name: str = None,
-                files: list = None, file_name: str = None, content_type: str = None):  # May return dict or object datatypes
+                files: list = None, file_name: str = None, content_type: str = None):
         """ Checks token expiration, renewing when necessary, then performs the request. """
         if self.token_expired():
             self.authenticate()
