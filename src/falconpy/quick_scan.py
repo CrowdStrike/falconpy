@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-sensor_download - Falcon Sensor Download API Interface Class
+quick_scan - Falcon Quick Scan API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,67 +36,36 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-import os
-from ._util import service_request, parse_id_list, generate_ok_result
+from ._util import service_request, parse_id_list
 from ._service_class import ServiceClass
 
 
-class Sensor_Download(ServiceClass):
+class Quick_Scan(ServiceClass):
     """The only requirement to instantiate an instance of this class
        is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def GetCombinedSensorInstallersByQuery(self: object, parameters: dict = None) -> dict:
-        """
-        Retrieve all metadata for installers from provided query
-        """
-        FULL_URL = self.base_url+'/sensors/combined/installers/v1'
+    def GetScansAggregates(self: object, body: dict) -> dict:
+        """Get scans aggregations as specified via json in request body."""
+        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/GetScansAggregates
+        FULL_URL = self.base_url+"/scanner/aggregates/scans/GET/v1"
         HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
+        BODY = body
         returned = service_request(caller=self,
-                                   method="GET",
+                                   method="POST",
                                    endpoint=FULL_URL,
-                                   params=PARAMS,
+                                   body=BODY,
                                    headers=HEADERS,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def DownloadSensorInstallerById(self: object,
-                                    parameters: dict,
-                                    file_name: str = None,
-                                    download_path: str = None
-                                    ) -> object:
+    def GetScans(self: object, ids) -> dict:
+        """Check the status of a volume scan. Time required for analysis increases with the number
+           of samples in a volume but usually it should take less than 1 minute
         """
-        Download the sensor by the sha256 id, into the specified directory.
-        The path will be created for the user if it does not already exist
-        """
-        FULL_URL = self.base_url+"/sensors/entities/download-installer/v1"
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
-                                   params=PARAMS,
-                                   verify=self.ssl_verify
-                                   )
-        if file_name and download_path and isinstance(returned, bytes):
-            os.makedirs(download_path, exist_ok=True)
-            # write the newly downloaded sensor into the aforementioned directory with provided file name
-            with open(os.path.join(download_path, file_name), "wb") as sensor:
-                sensor.write(returned)
-            returned = generate_ok_result(message="Download successful")
-        return returned
-
-    def GetSensorInstallersEntities(self: object, ids: list or str) -> object:
-        """
-        For a given list of SHA256's, retrieve the metadata for each installer
-        such as the release_date and version among other fields
-        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/GetScans
         ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/sensors/entities/installers/v1?ids={}'.format(ID_LIST)
+        FULL_URL = self.base_url+"/scanner/entities/scans/v1?ids={}".format(ID_LIST)
         HEADERS = self.headers
         returned = service_request(caller=self,
                                    method="GET",
@@ -106,25 +75,27 @@ class Sensor_Download(ServiceClass):
                                    )
         return returned
 
-    def GetSensorInstallersCCIDByQuery(self: object) -> dict:
-        """
-        Retrieve the CID for the current oauth environment
-        """
-        FULL_URL = self.base_url+'/sensors/queries/installers/ccid/v1'
+    def ScanSamples(self: object, body: dict) -> dict:
+        """Get scans aggregations as specified via json in request body."""
+        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/ScanSamples
+        FULL_URL = self.base_url+"/scanner/entities/scans/v1"
         HEADERS = self.headers
+        BODY = body
         returned = service_request(caller=self,
-                                   method="GET",
+                                   method="POST",
                                    endpoint=FULL_URL,
+                                   body=BODY,
                                    headers=HEADERS,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def GetSensorInstallersByQuery(self: object, parameters: dict = None) -> dict:
+    def QuerySubmissionsMixin0(self: object, parameters: dict = None) -> dict:
+        """Find IDs for submitted scans by providing an FQL filter and paging details.
+           Returns a set of volume IDs that match your criteria.
         """
-        Retrieve a list of SHA256 for installers based on the filter
-        """
-        FULL_URL = self.base_url+'/sensors/queries/installers/v1'
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/QuerySubmissionsMixin0
+        FULL_URL = self.base_url+"/scanner/queries/scans/v1"
         HEADERS = self.headers
         if parameters is None:
             parameters = {}
@@ -132,8 +103,8 @@ class Sensor_Download(ServiceClass):
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=FULL_URL,
-                                   params=PARAMS,
                                    headers=HEADERS,
+                                   params=PARAMS,
                                    verify=self.ssl_verify
                                    )
         return returned

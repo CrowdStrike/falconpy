@@ -104,8 +104,8 @@ api_endpoints = [
     "CreateCSPMAzureAccount",
     "POST",
     "/cloud-connect-azure/entities/account/v1",
-    "Creates a new account in our system for a customer and generates a script for them to "
-    "run in their cloud environment to grant us access."
+    "Creates a new account in our system for a customer and generates a script for them to run in "
+    "their cloud environment to grant us access."
   ],
   [
     "UpdateCSPMAzureAccountClientID",
@@ -137,8 +137,8 @@ api_endpoints = [
     "CreateCSPMAwsAccount",
     "POST",
     "/cloud-connect-cspm-aws/entities/account/v1",
-    "Creates a new account in our system for a customer and generates a script for them to run in their "
-    "AWS cloud environment to grant us access."
+    "Creates a new account in our system for a customer and generates a script for them to run in "
+    "their AWS cloud environment to grant us access."
   ],
   [
     "DeleteCSPMAwsAccount",
@@ -202,15 +202,15 @@ api_endpoints = [
     "CreateCSPMGCPAccount",
     "POST",
     "/cloud-connect-gcp/entities/account/v1",
-    "Creates a new account in our system for a customer and generates a new service account for them "
-    "to add access to in their GCP environment to grant us access."
+    "Creates a new account in our system for a customer and generates a new service account for them to add "
+    "access to in their GCP environment to grant us access."
   ],
   [
     "GetCSPMGCPUserScriptsAttachment",
     "GET",
     "/cloud-connect-gcp/entities/user-scripts-download/v1",
-    "Return a script for customer to run in their cloud environment to grant us access to their "
-    "GCP environment as a downloadable attachment"
+    "Return a script for customer to run in their cloud environment to grant us access to their GCP environment "
+    "as a downloadable attachment"
   ],
   [
     "GetCSPMGCPUserScripts",
@@ -339,6 +339,90 @@ api_endpoints = [
     "Returns a set of Host Group IDs which match the filter criteria"
   ],
   [
+    "AggregateAllowList",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/allowlist/GET/v1",
+    "Retrieve aggregate allowlist ticket values based on the matched filter"
+  ],
+  [
+    "AggregateBlockList",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/blocklist/GET/v1",
+    "Retrieve aggregate blocklist ticket values based on the matched filter"
+  ],
+  [
+    "AggregateDetections",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/detects/GET/v1",
+    "Retrieve aggregate detection values based on the matched filter"
+  ],
+  [
+    "AggregateDeviceCountCollection",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/devicecount-collections/GET/v1",
+    "Retrieve aggregate host/devices count based on the matched filter"
+  ],
+  [
+    "AggregateEscalations",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/escalations/GET/v1",
+    "Retrieve aggregate escalation ticket values based on the matched filter"
+  ],
+  [
+    "AggregateFCIncidents",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/incidents/GET/v1",
+    "Retrieve aggregate incident values based on the matched filter"
+  ],
+  [
+    "AggregateRemediations",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/remediations/GET/v1",
+    "Retrieve aggregate remediation ticket values based on the matched filter"
+  ],
+  [
+    "QueryAllowListFilter",
+    "GET",
+    "/falcon-complete-dashboards/queries/allowlist/v1",
+    "Retrieve allowlist tickets that match the provided filter criteria with scrolling enabled"
+  ],
+  [
+    "QueryBlockListFilter",
+    "GET",
+    "/falcon-complete-dashboards/queries/blocklist/v1",
+    "Retrieve block listtickets that match the provided filter criteria with scrolling enabled"
+  ],
+  [
+    "QueryDetectionIdsByFilter",
+    "GET",
+    "/falcon-complete-dashboards/queries/detects/v1",
+    "Retrieve DetectionsIds that match the provided FQL filter, criteria with scrolling enabled"
+  ],
+  [
+    "GetDeviceCountCollectionQueriesByFilter",
+    "GET",
+    "/falcon-complete-dashboards/queries/devicecount-collections/v1",
+    "Retrieve device count collection Ids that match the provided FQL filter, criteria with scrolling enabled"
+  ],
+  [
+    "QueryEscalationsFilter",
+    "GET",
+    "/falcon-complete-dashboards/queries/escalations/v1",
+    "Retrieve escalation tickets that match the provided filter criteria with scrolling enabled"
+  ],
+  [
+    "QueryIncidentIdsByFilter",
+    "GET",
+    "/falcon-complete-dashboards/queries/incidents/v1",
+    "Retrieve incidents that match the provided filter criteria with scrolling enabled"
+  ],
+  [
+    "QueryRemediationsFilter",
+    "GET",
+    "/falcon-complete-dashboards/queries/remediations/v1",
+    "Retrieve remediation tickets that match the provided filter criteria with scrolling enabled"
+  ],
+  [
     "GetArtifacts",
     "GET",
     "/falconx/entities/artifacts/v1",
@@ -360,8 +444,8 @@ api_endpoints = [
     "DeleteReport",
     "DELETE",
     "/falconx/entities/reports/v1?ids={}",
-    "Delete report based on the report ID. Operation can be checked for success by "
-    "polling for the report ID on the report-summaries endpoint."
+    "Delete report based on the report ID. "
+    "Operation can be checked for success by polling for the report ID on the report-summaries endpoint."
   ],
   [
     "GetSubmissions",
@@ -373,8 +457,8 @@ api_endpoints = [
     "Submit",
     "POST",
     "/falconx/entities/submissions/v1",
-    "Submit an uploaded file or a URL for sandbox analysis. Time required for analysis "
-    "varies but is usually less than 15 minutes."
+    "Submit an uploaded file or a URL for sandbox analysis. "
+    "Time required for analysis varies but is usually less than 15 minutes."
   ],
   [
     "QueryReports",
@@ -525,8 +609,8 @@ api_endpoints = [
     "PerformIncidentAction",
     "POST",
     "/incidents/entities/incident-actions/v1",
-    "Perform a set of actions on one or more incidents, such as adding tags or "
-    "comments or updating the incident name or description"
+    "Perform a set of actions on one or more incidents, "
+    "such as adding tags or comments or updating the incident name or description"
   ],
   [
     "GetIncidents",
@@ -851,8 +935,9 @@ api_endpoints = [
     "PostMalQueryFuzzySearchV1",
     "POST",
     "/malquery/combined/fuzzy-search/v1",
-    "Search Falcon MalQuery quickly, but with more potential for false positives. Search for a combination of "
-    "hex patterns and strings in order to identify samples based upon file content at byte level granularity."
+    "Search Falcon MalQuery quickly, but with more potential for false positives. "
+    "Search for a combination of hex patterns and strings in order to identify samples "
+    "based upon file content at byte level granularity."
   ],
   [
     "GetMalQueryDownloadV1",
@@ -877,29 +962,180 @@ api_endpoints = [
     "GetMalQueryEntitiesSamplesFetchV1",
     "GET",
     "/malquery/entities/samples-fetch/v1?ids={}",
-    "Fetch a zip archive with password 'infected' containing the samples. Call this once the /entities/samples-multidownload "
-    "request has finished processing"
+    "Fetch a zip archive with password 'infected' containing the samples. "
+    "Call this once the /entities/samples-multidownload request has finished processing"
   ],
   [
     "PostMalQueryEntitiesSamplesMultidownloadV1",
     "POST",
     "/malquery/entities/samples-multidownload/v1",
-    "Schedule samples for download. Use the result id with the /request endpoint to check if the download is ready "
-    "after which you can call the /entities/samples-fetch to get the zip"
+    "Schedule samples for download. Use the result id with the /request endpoint to check if the "
+    "download is ready after which you can call the /entities/samples-fetch to get the zip"
   ],
   [
     "PostMalQueryExactSearchV1",
     "POST",
     "/malquery/queries/exact-search/v1",
-    "Search Falcon MalQuery for a combination of hex patterns and strings in order to identify samples based "
-    "upon file content at byte level granularity. You can filter results on criteria such as file type, file size "
-    "and first seen date. Returns a request id which can be used with the /request endpoint"
+    "Search Falcon MalQuery for a combination of hex patterns and strings in order to identify samples "
+    "based upon file content at byte level granularity. You can filter results on criteria such as file type, "
+    "file size and first seen date. Returns a request id which can be used with the /request endpoint"
   ],
   [
     "PostMalQueryHuntV1",
     "POST",
     "/malquery/queries/hunt/v1",
     "Schedule a YARA-based search for execution. Returns a request id which can be used with the /request endpoint"
+  ],
+  [
+    "getChildren",
+    "GET",
+    "/mssp/entities/children/v1?ids={}",
+    "Get link to child customer by child CID(s)"
+  ],
+  [
+    "getCIDGroupMembersBy",
+    "GET",
+    "/mssp/entities/cid-group-members/v1",
+    "Get CID Group members by CID Group IDs."
+  ],
+  [
+    "addCIDGroupMembers",
+    "POST",
+    "/mssp/entities/cid-group-members/v1",
+    "Add new CID Group member."
+  ],
+  [
+    "deleteCIDGroupMembers",
+    "DELETE",
+    "/mssp/entities/cid-group-members/v1",
+    "Delete CID Group members entry."
+  ],
+  [
+    "getCIDGroupById",
+    "GET",
+    "/mssp/entities/cid-groups/v1",
+    "Get CID Group(s) by ID(s)."
+  ],
+  [
+    "createCIDGroups",
+    "POST",
+    "/mssp/entities/cid-groups/v1",
+    "Create new CID Group(s). Maximum 500 CID Group(s) allowed."
+  ],
+  [
+    "updateCIDGroups",
+    "PATCH",
+    "/mssp/entities/cid-groups/v1",
+    "Update existing CID Group(s). CID Group ID is expected for each CID Group definition provided in request body. "
+    "CID Group member(s) remain unaffected."
+  ],
+  [
+    "deleteCIDGroups",
+    "DELETE",
+    "/mssp/entities/cid-groups/v1",
+    "Delete CID Group(s) by ID(s)."
+  ],
+  [
+    "getRolesByID",
+    "GET",
+    "/mssp/entities/mssp-roles/v1?ids={}",
+    "Get MSSP Role assignment(s). MSSP Role assignment is of the format :."
+  ],
+  [
+    "addRole",
+    "POST",
+    "/mssp/entities/mssp-roles/v1",
+    "Assign new MSSP Role(s) between User Group and CID Group. "
+    "It does not revoke existing role(s) between User Group and CID Group. "
+    "User Group ID and CID Group ID have to be specified in request. "
+  ],
+  [
+    "deletedRoles",
+    "DELETE",
+    "/mssp/entities/mssp-roles/v1",
+    "Delete MSSP Role assignment(s) between User Group and CID Group. "
+    "User Group ID and CID Group ID have to be specified in request. "
+    "Only specified roles are removed if specified in request payload, "
+    "else association between User Group and CID Group is dissolved completely (if no roles specified)."
+  ],
+  [
+    "getUserGroupMembersByID",
+    "GET",
+    "/mssp/entities/user-group-members/v1",
+    "Get User Group members by User Group ID(s)."
+  ],
+  [
+    "addUserGroupMembers",
+    "POST",
+    "/mssp/entities/user-group-members/v1",
+    "Add new User Group member. Maximum 500 members allowed per User Group."
+  ],
+  [
+    "deleteUserGroupMembers",
+    "DELETE",
+    "/mssp/entities/user-group-members/v1",
+    "Delete User Group members entry."
+  ],
+  [
+    "getUserGroupsByID",
+    "GET",
+    "/mssp/entities/user-groups/v1",
+    "Get User Group by ID(s)."
+  ],
+  [
+    "createUserGroups",
+    "POST",
+    "/mssp/entities/user-groups/v1",
+    "Create new User Group(s). Maximum 500 User Group(s) allowed per customer."
+  ],
+  [
+    "updateUserGroups",
+    "PATCH",
+    "/mssp/entities/user-groups/v1",
+    "Update existing User Group(s). User Group ID is expected for each User Group definition "
+    "provided in request body. User Group member(s) remain unaffected."
+  ],
+  [
+    "deleteUserGroups",
+    "DELETE",
+    "/mssp/entities/user-groups/v1",
+    "Delete User Group(s) by ID(s)."
+  ],
+  [
+    "queryChildren",
+    "GET",
+    "/mssp/queries/children/v1",
+    "Query for customers linked as children"
+  ],
+  [
+    "queryCIDGroupMembers",
+    "GET",
+    "/mssp/queries/cid-group-members/v1",
+    "Query a CID Groups members by associated CID."
+  ],
+  [
+    "queryCIDGroups",
+    "GET",
+    "/mssp/queries/cid-groups/v1",
+    "Query CID Groups."
+  ],
+  [
+    "queryRoles",
+    "GET",
+    "/mssp/queries/mssp-roles/v1",
+    "Query MSSP Role assignment. At least one of CID Group ID or User Group ID should also be provided. Role ID is optional."
+  ],
+  [
+    "queryUserGroupMembers",
+    "GET",
+    "/mssp/queries/user-group-members/v1",
+    "Query User Group member by User UUID."
+  ],
+  [
+    "queryUserGroups",
+    "GET",
+    "/mssp/queries/user-groups/v1",
+    "Query User Groups."
   ],
   [
     "oauth2RevokeToken",
@@ -912,6 +1148,36 @@ api_endpoints = [
     "POST",
     "/oauth2/token",
     "Generate an OAuth2 access token"
+  ],
+  [
+    "AggregatesDetectionsGlobalCounts",
+    "GET",
+    "/overwatch-dashboards/aggregates/detections-global-counts/v1",
+    "Get the total number of detections pushed across all customers"
+  ],
+  [
+    "AggregatesEventsCollections",
+    "POST",
+    "/overwatch-dashboards/aggregates/events-collections/GET/v1",
+    "Get OverWatch detection event collection info by providing an aggregate query"
+  ],
+  [
+    "AggregatesEvents",
+    "POST",
+    "/overwatch-dashboards/aggregates/events/GET/v1",
+    "Get aggregate OverWatch detection event info by providing an aggregate query"
+  ],
+  [
+    "AggregatesIncidentsGlobalCounts",
+    "GET",
+    "/overwatch-dashboards/aggregates/incidents-global-counts/v1",
+    "Get the total number of incidents pushed across all customers"
+  ],
+  [
+    "AggregatesOWEventsGlobalCounts",
+    "GET",
+    "/overwatch-dashboards/aggregates/ow-events-global-counts/v1",
+    "Get the total number of OverWatch events across all customers"
   ],
   [
     "queryCombinedDeviceControlPolicyMembers",
@@ -959,8 +1225,8 @@ api_endpoints = [
     "revealUninstallToken",
     "POST",
     "/policy/combined/reveal-uninstall-token/v1",
-    "Reveals an uninstall token for a specific device. To retrieve the bulk maintenance token pass the "
-    "value 'MAINTENANCE' as the value for 'device_id'"
+    "Reveals an uninstall token for a specific device. To retrieve the bulk maintenance token pass "
+    "the value 'MAINTENANCE' as the value for 'device_id'"
   ],
   [
     "queryCombinedSensorUpdateBuilds",
@@ -1193,21 +1459,22 @@ api_endpoints = [
     "getSensorUpdatePoliciesV2",
     "GET",
     "/policy/entities/sensor-update/v2?ids={}",
-    "Retrieve a set of Sensor Update Policies with additional support for uninstall protection by specifying their IDs"
+    "Retrieve a set of Sensor Update Policies with additional support for uninstall "
+    "protection by specifying their IDs"
   ],
   [
     "createSensorUpdatePoliciesV2",
     "POST",
     "/policy/entities/sensor-update/v2",
-    "Create Sensor Update Policies by specifying details about the policy to create with "
-    "additional support for uninstall protection"
+    "Create Sensor Update Policies by specifying details about the policy to create "
+    "with additional support for uninstall protection"
   ],
   [
     "updateSensorUpdatePoliciesV2",
     "PATCH",
     "/policy/entities/sensor-update/v2",
-    "Update Sensor Update Policies by specifying the ID of the policy and details to update with "
-    "additional support for uninstall protection"
+    "Update Sensor Update Policies by specifying the ID of the policy and details to "
+    "update with additional support for uninstall protection"
   ],
   [
     "getSensorVisibilityExclusionsV1",
@@ -1291,8 +1558,8 @@ api_endpoints = [
     "querySensorUpdatePolicyMembers",
     "GET",
     "/policy/queries/sensor-update-members/v1",
-    "Search for members of a Sensor Update Policy in your environment by providing an FQL filter and paging "
-    "details. Returns a set of Agent IDs which match the filter criteria"
+    "Search for members of a Sensor Update Policy in your environment by providing an FQL filter and paging details. "
+    "Returns a set of Agent IDs which match the filter criteria"
   ],
   [
     "querySensorUpdatePolicies",
@@ -1347,15 +1614,15 @@ api_endpoints = [
     "BatchGetCmd",
     "POST",
     "/real-time-response/combined/batch-get-command/v1",
-    "Batch executes `get` command across hosts to retrieve files. After this call is made "
-    "`GET /real-time-response/combined/batch-get-command/v1` is used to query for the results."
+    "Batch executes `get` command across hosts to retrieve files. "
+    "After this call is made `GET /real-time-response/combined/batch-get-command/v1` is used to query for the results."
   ],
   [
     "BatchInitSessions",
     "POST",
     "/real-time-response/combined/batch-init-session/v1",
-    "Batch initialize a RTR session on multiple hosts.  Before any RTR commands can be used, "
-    "an active session is needed on the host."
+    "Batch initialize a RTR session on multiple hosts.  "
+    "Before any RTR commands can be used, an active session is needed on the host."
   ],
   [
     "BatchRefreshSessions",
@@ -1573,8 +1840,8 @@ api_endpoints = [
     "ScanSamples",
     "POST",
     "/scanner/entities/scans/v1",
-    "Submit a volume of files for ml scanning. Time required for analysis increases with the number "
-    "of samples in a volume but usually it should take less than 1 minute"
+    "Submit a volume of files for ml scanning. Time required for analysis increases with the number of "
+    "samples in a volume but usually it should take less than 1 minute"
   ],
   [
     "QuerySubmissionsMixin0",
@@ -1690,15 +1957,15 @@ api_endpoints = [
     "GetAvailableRoleIds",
     "GET",
     "/user-roles/queries/user-role-ids-by-cid/v1",
-    "Show role IDs for all roles available in your customer account. For more information on each role, "
-    "provide the role ID to `/customer/entities/roles/v1`."
+    "Show role IDs for all roles available in your customer account. "
+    "For more information on each role, provide the role ID to `/customer/entities/roles/v1`."
   ],
   [
     "GetUserRoleIds",
     "GET",
     "/user-roles/queries/user-role-ids-by-user-uuid/v1",
-    "Show role IDs of roles assigned to a user. For more information on each role, "
-    "provide the role ID to `/customer/entities/roles/v1`."
+    "Show role IDs of roles assigned to a user. "
+    "For more information on each role, provide the role ID to `/customer/entities/roles/v1`."
   ],
   [
     "RetrieveUser",
@@ -1734,14 +2001,20 @@ api_endpoints = [
     "RetrieveUserUUIDsByCID",
     "GET",
     "/users/queries/user-uuids-by-cid/v1",
-    "List user IDs for all users in your customer account. For more information on each user, "
-    "provide the user ID to `/users/entities/user/v1`."
+    "List user IDs for all users in your customer account. "
+    "For more information on each user, provide the user ID to `/users/entities/user/v1`."
   ],
   [
     "RetrieveUserUUID",
     "GET",
     "/users/queries/user-uuids-by-email/v1",
     "Get a user's ID by providing a username (usually an email address)"
+  ],
+  [
+    "getAssessmentV1",
+    "GET",
+    "/zero-trust-assessment/entities/assessments/v1?ids={}",
+    "Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID) and a customer ID (CID)."
   ],
   #                                                                             .---.        .-----------
   #                                                                            /     \  __  /    ------
@@ -1755,12 +2028,6 @@ api_endpoints = [
   # These operation IDs are maintained for backwards compatibility purposes only, Move all code
   # references to use the new operations IDs defined above that align with the IDs defined in
   # the service classes.
-  [
-    "entities.processes",
-    "GET",
-    "/processes/entities/processes/v1?ids={}",
-    "For the provided ProcessID retrieve the process details"
-  ],
   [
     "aggregate-events",
     "POST",
@@ -1981,7 +2248,7 @@ api_endpoints = [
     "get-rulesMixin0",
     "GET",
     "/ioarules/entities/rules/v1?ids={}",
-    "Get rules by ID and optionally version in the following format: `ID[:version]`. "
+    "Get rules by ID and optionally version in the following format: `ID[:version]`."
     "The max number of IDs is constrained by URL size."
   ],
   [
@@ -2037,6 +2304,12 @@ api_endpoints = [
     "GET",
     "/ioarules/queries/rules/v1",
     "Finds all rule IDs matching the query with optional filter."
+  ],
+  [
+    "entities.processes",
+    "GET",
+    "/processes/entities/processes/v1?ids={}",
+    "For the provided ProcessID retrieve the process details"
   ],
   [
     "RTR-AggregateSessions",

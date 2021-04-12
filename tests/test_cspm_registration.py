@@ -56,12 +56,12 @@ class TestCSPMRegistration:
             ["GetCSPMAzureAccount", "ids='12345678'"],
             ["CreateCSPMAzureAccount", "body={}"],
             ["DeleteCSPMAzureAccount", "ids='12345678'"],
-            ["UpdateCSPMAzureAccountClientID", "parameters={}, body={}"],
+            ["UpdateCSPMAzureAccountClientID", ""],
 #            ["GetCSPMAzureUserScriptsAttachment", ""],
             ["GetCSPMPolicy", "ids='12345678'"],
-            ["GetCSPMPolicySettings", "parameters={}"],
+            ["GetCSPMPolicySettings", ""],
             ["UpdateCSPMPolicySettings", "body={}"],
-            ["GetCSPMScanSchedule", "parameters={}"],
+            ["GetCSPMScanSchedule", ""],
             ["UpdateCSPMScanSchedule", "body={}"]
         ]
         for cmd in commandList:

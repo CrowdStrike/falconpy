@@ -2,6 +2,9 @@ APIs
 CrowdScore
 CrowdStrike
 CrowdStrike's
+Overwatch
+APIHarness
+deauthentication
 detections
 initialisation
 SDK
@@ -58,6 +61,7 @@ platformsMixin
 groupMixin
 severities
 IOA
+IOAs
 IOC
 ioa
 ioc
@@ -381,3 +385,9 @@ Unlicense
 errored
 XZY
 toc
+performFirewallPoliciesAction
+mssp
+CalebSchwartz
+rewgord
+validator
+UpdateDeviceTags

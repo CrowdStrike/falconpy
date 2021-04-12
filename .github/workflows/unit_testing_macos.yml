@@ -1,9 +1,11 @@
-name: Python package
+name: Python package (MacOS)
 on:
   push:
     paths:
       - '**.py'
-    branches: [ main ]
+    branches: 
+      - main
+      - 'ver_*'
   pull_request:
     paths:
       - '**.py'
@@ -15,9 +17,10 @@ jobs:
   build:
     strategy:
       matrix:
-        os: [macos-latest, windows-latest, ubuntu-latest]
+        # os: [macos-latest, windows-latest, ubuntu-latest]
         python-version: ['3.6', '3.7', '3.8', '3.9']
-    runs-on: ${{ matrix.os }}
+    # runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}

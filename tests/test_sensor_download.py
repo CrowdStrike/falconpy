@@ -12,8 +12,9 @@ auth.serviceAuth()
 
 sensor_download_client = FalconSensorDownload.Sensor_Download(access_token=auth.token)
 
+
 class TestSensorDownload():
-    
+    """Sensor Download unit test series"""    
     @staticmethod
     def _get_cid():
         resp = sensor_download_client.GetSensorInstallersCCIDByQuery()
@@ -55,6 +56,16 @@ class TestSensorDownload():
         resp = sensor_download_client.GetSensorInstallersEntities(ids=sha_ids)
         return True if resp["status_code"] in AllowedResponses else False
 
+    @staticmethod
+    def _get_all_metadata():
+        resp = sensor_download_client.GetCombinedSensorInstallersByQuery()
+        return True if resp["status_code"] in AllowedResponses else False
+
+    @staticmethod
+    def _get_all_metadata2():
+        resp = sensor_download_client.GetSensorInstallersByQuery()
+        return True if resp["status_code"] in AllowedResponses else False
+
     def test_download_windows_sensor(self):
         assert self._download_sensor() is True
 
@@ -72,3 +83,9 @@ class TestSensorDownload():
 
     def test_get_mutliple_shas(self):
         assert self._get_metadata_for_ids() is True
+
+    def test_get_all_metadata(self):
+        assert self._get_all_metadata() is True
+
+    def test_get_all_metadata2(self):
+        assert self._get_all_metadata2() is True

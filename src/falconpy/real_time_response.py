@@ -59,12 +59,14 @@ class Real_Time_Response(ServiceClass):
                                    )
         return returned
 
-    def BatchActiveResponderCmd(self: object, body: dict, parameters: dict = {}) -> dict:
+    def BatchActiveResponderCmd(self: object, body: dict, parameters: dict = None) -> dict:
         """ Batch executes a RTR active-responder command across the hosts mapped to the given batch ID. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchActiveResponderCmd
         FULL_URL = self.base_url+'/real-time-response/combined/batch-active-responder-command/v1'
         HEADERS = self.headers
         BODY = body
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="POST",
@@ -76,12 +78,14 @@ class Real_Time_Response(ServiceClass):
                                    )
         return returned
 
-    def BatchCmd(self: object, body: dict, parameters: dict = {}) -> dict:
+    def BatchCmd(self: object, body: dict, parameters: dict = None) -> dict:
         """ Batch executes a RTR read-only command across the hosts mapped to the given batch ID. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchActiveResponderCmd
         FULL_URL = self.base_url+'/real-time-response/combined/batch-command/v1'
         HEADERS = self.headers
         BODY = body
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="POST",
@@ -110,7 +114,7 @@ class Real_Time_Response(ServiceClass):
                                    )
         return returned
 
-    def BatchGetCmd(self: object, body: dict, parameters: dict = {}) -> dict:
+    def BatchGetCmd(self: object, body: dict, parameters: dict = None) -> dict:
         """ Batch executes `get` command across hosts to retrieve files.
             After this call is made `/real-time-response/combined/get-command-status/v1` is used to query for the results.
         """
@@ -118,6 +122,8 @@ class Real_Time_Response(ServiceClass):
         FULL_URL = self.base_url+'/real-time-response/combined/batch-get-command/v1'
         HEADERS = self.headers
         BODY = body
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="POST",
@@ -129,7 +135,7 @@ class Real_Time_Response(ServiceClass):
                                    )
         return returned
 
-    def BatchInitSessions(self: object, body: dict, parameters: dict = {}) -> dict:
+    def BatchInitSessions(self: object, body: dict, parameters: dict = None) -> dict:
         """ Batch initialize a RTR session on multiple hosts.
             Before any RTR commands can be used, an active session is needed on the host.
         """
@@ -137,6 +143,8 @@ class Real_Time_Response(ServiceClass):
         FULL_URL = self.base_url+'/real-time-response/combined/batch-init-session/v1'
         HEADERS = self.headers
         BODY = body
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="POST",
@@ -148,12 +156,14 @@ class Real_Time_Response(ServiceClass):
                                    )
         return returned
 
-    def BatchRefreshSessions(self: object, body: dict, parameters: dict = {}) -> dict:
+    def BatchRefreshSessions(self: object, body: dict, parameters: dict = None) -> dict:
         """ Batch refresh a RTR session on multiple hosts. RTR sessions will expire after 10 minutes unless refreshed. """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchRefreshSessions
         FULL_URL = self.base_url+'/real-time-response/combined/batch-refresh-session/v1'
         HEADERS = self.headers
         BODY = body
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="POST",
@@ -362,11 +372,13 @@ class Real_Time_Response(ServiceClass):
                                    )
         return returned
 
-    def RTR_ListAllSessions(self: object, parameters: dict = {}) -> dict:
+    def RTR_ListAllSessions(self: object, parameters: dict = None) -> dict:
         """ Get a list of session_ids. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_ListAllSessions
         FULL_URL = self.base_url+'/real-time-response/queries/sessions/v1'
         HEADERS = self.headers
+        if parameters is None:
+            parameters = {}
         PARAMS = parameters
         returned = service_request(caller=self,
                                    method="GET",

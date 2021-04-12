@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-_version = '0.4.4'
+_version = '0.4.5'
 _maintainer = 'Joshua Hiller'
 _author = 'CrowdStrike'
 _author_email = 'falconpy@crowdstrike.com'

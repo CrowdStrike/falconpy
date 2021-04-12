@@ -6,6 +6,7 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 ### Currently implemented:
 + `cloud_connect_aws.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws
 + `cspm-registration.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration
++ `custom_ioa.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa
 + `detects.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects
 + `device_control_policies.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/device-control-policies
 + `event_streams.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams
@@ -19,6 +20,7 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 + `iocs.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs
 + `oauth2.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2
 + `prevention_policy.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies
++ `quick_scan.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan
 + `real_time_response_admin.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin
 + `real_time_response.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response
 + `sample_uploads.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads
@@ -30,12 +32,11 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 ### Planned
 + `d4c_registration.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration
 + `installation_tokens.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens
-+ `custom_ioa.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa
++ `mssp.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp
 + `malquery.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery
 + `ioa_exclusions.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions
 + `ml_exclusions.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions
 + `sensor_visibility_exclusions.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-visibility-exclusions
-+ `quick_scan.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan
 
 ## The Uber Class
 ### A single class to interface with the entire API
