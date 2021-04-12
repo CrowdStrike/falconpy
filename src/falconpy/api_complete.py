@@ -107,9 +107,9 @@ class APIHarness:
 
     # NOTE: Not specifying datatypes for "ids" and "partition" parameters
     #       to allow developers to pass str / lists / integers as necessary
-    def command(self: object, action: str = "", parameters: dict = {}, body: dict = {}, data: dict = {},
-                headers: dict = {}, ids=None, partition=None, override: str = None, action_name: str = None,
-                files: list = [], file_name: str = None, content_type: str = None):  # May return dict or object datatypes
+    def command(self: object, action: str = "", parameters: dict = None, body: dict = None, data: dict = None,
+                headers: dict = None, ids=None, partition=None, override: str = None, action_name: str = None,
+                files: list = None, file_name: str = None, content_type: str = None):  # May return dict or object datatypes
         """ Checks token expiration, renewing when necessary, then performs the request. """
         if self.token_expired():
             self.authenticate()
@@ -131,13 +131,23 @@ class APIHarness:
                 delim = "&" if "?" in FULL_URL else "?"
                 FULL_URL = f"{FULL_URL}{delim}file_name={str(file_name)}"
             HEADERS = self.headers()
+            if headers is None:
+                headers = []
             for item in headers:
                 HEADERS[item] = headers[item]
             if content_type:
                 HEADERS["Content-Type"] = str(content_type)
+            if data is None:
+                data = {}
             DATA = data
+            if body is None:
+                body = {}
             BODY = body
+            if parameters is None:
+                parameters = {}
             PARAMS = parameters
+            if files is None:
+                files = []
             FILES = files
             if self.authenticated:
                 METHOD = CMD[0][1].upper()
