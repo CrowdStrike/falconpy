@@ -36,6 +36,8 @@ upfile
 formData
 executables
 cURL
+boto
+serverless
 boolean
 Shockwave
 Scalable
