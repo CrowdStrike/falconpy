@@ -87,7 +87,7 @@ class Configuration:  # pylint: disable=R0903
         if args.log_level:
             if args.log_level.upper() in "DEBUG,WARN,INFO,ERROR".split(","):
                 level_template = Template("logging.$lvl")
-                self.log_level = eval(level_template.substitute(lvl=args.log_level.upper()))  # pylint: disable=W0123
+                self.log_level = eval(level_template.substitute(lvl=args.log_level.upper()))  # pylint: disable=W0123 # nosec
         self.target_pattern = "**/*.*"
         if args.pattern:
             self.target_pattern = args.pattern
