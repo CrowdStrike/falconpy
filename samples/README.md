@@ -11,6 +11,7 @@ These examples are provided as a quick start for your project.
     - [Event Streams](#event-streams)
     - [Falcon Discover](#falcon-discover)
     - [Hosts](#hosts)
+    - [Quick Scan / Sample Uploads](#quick-scan)
     - [Real Time Response](#real-time-response)
     - [Sample Uploads](#sample-uploads)
 + [Suggestions](#suggestions)
@@ -40,6 +41,12 @@ _Coming Soon_
 
 ### Hosts
 _Coming Soon_
+
+### Quick Scan / Sample Uploads
+| Service Class | Uber Class |
+| :--- | :--- |
+| [Scan a target folder or bucket](quick_scan/scan_target.py) | |
+
 
 ### Real Time Response
 | Service Class | Uber Class |
