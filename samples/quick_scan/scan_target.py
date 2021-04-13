@@ -55,7 +55,6 @@ import argparse
 import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
-from string import Template
 # AWS Boto library
 import boto3                                            # pylint: disable=E0401
 # !!! Requires FalconPy v0.4.5+ !!!
@@ -85,9 +84,14 @@ class Configuration:  # pylint: disable=R0903
             self.config_file = args.config_file
         self.log_level = logging.INFO
         if args.log_level:
-            if args.log_level.upper() in "DEBUG,WARN,INFO,ERROR".split(","):
-                level_template = Template("logging.$lvl")
-                self.log_level = eval(level_template.substitute(lvl=args.log_level.upper()))  # pylint: disable=W0123 # nosec
+            if args.log_level.upper() in "DEBUG,WARN,ERROR".split(","):
+                if args.log_level.upper() == "DEBUG":
+                    self.log_level = logging.DEBUG
+                elif args.log_level.upper() == "WARN":
+                    self.log_level = logging.WARN
+                elif args.log_level.upper() == "ERROR":
+                    self.log_level = logging.ERROR
+
         self.target_pattern = "**/*.*"
         if args.pattern:
             self.target_pattern = args.pattern
