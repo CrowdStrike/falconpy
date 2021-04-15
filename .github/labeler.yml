@@ -1,0 +1,26 @@
+documentation:
+- docs/*
+- '*.md'
+- src/falconpy/*.md
+- samples/*.md
+
+package:
+- src/*.py
+- src/falconpy/*.py
+- setup.py
+
+pipeline:
+- .github/*
+- .github/workflows/*
+- .github/ISSUE_TEMPLATE/*
+
+unit testing:
+- tests/*
+- util/*
+
+code samples:
+- samples/*.py
+- samples/discover_aws/*.py
+- samples/real_time_response/*.py
+- samples/sample_uploads/*.py
+- samples/quick_scan/*.py
