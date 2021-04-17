@@ -36,7 +36,7 @@
     - Added payload parameter information to _endpoint constants
     - Adds service collection ID to endpoint lists
     - This prepares the package for new functionality planned for future releases
-+ Minor unit test update to `test_cspm_registration.py`g
++ Minor unit test update to `test_cspm_registration.py`
 + Documentation updates
 
 # Version 0.4.5
