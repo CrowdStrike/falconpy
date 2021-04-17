@@ -1,4 +1,4 @@
-name: Python package (Ubuntu)
+name: Unit testing (Ubuntu)
 on:
   push:
     paths:

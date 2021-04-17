@@ -1,4 +1,4 @@
-name: Python package (Windows)
+name: Unit testing (Windows)
 on:
   push:
     paths:
