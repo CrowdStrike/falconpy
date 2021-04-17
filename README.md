@@ -50,7 +50,7 @@ $ python3 -m pip uninstall crowdstrike-falconpy
 | [CrowdStrike Falcon X APIs](https://falcon.crowdstrike.com/support/documentation/92/falcon-x-apis) | [sample_uploads.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sample_uploads.py) <br/> [quick_scan.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quick_scan.py)|
 | [CrowdStrike Firewall Management API](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [firewall_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_management.py) |
 | [CrowdStrike Firewall Policy Management](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [firewall_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_policies.py) |
-| [CrowdStrike Falcon Flight Control APIs](https://falcon.crowdstrike.com/support/documentation/154/flight-control-apis) | *Coming Soon* |
+| [CrowdStrike Falcon Flight Control APIs](https://falcon.crowdstrike.com/support/documentation/154/flight-control-apis) | [mssp.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/mssp.py) |
 | [CrowdStrike Host Groups API](https://falcon.crowdstrike.com/support/documentation/84/host-and-host-group-management-apis) | [host_group.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/host_group.py) |
 | [CrowdStrike Hosts API](https://falcon.crowdstrike.com/support/documentation/84/host-and-host-group-management-apis) | [hosts.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/hosts.py) |
 | [CrowdStrike Incident and Detection Monitoring APIs](https://falcon.crowdstrike.com/support/documentation/86/detections-monitoring-apis) | [incidents.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/incidents.py) |
@@ -80,7 +80,7 @@ There are *many* ways you can contribute to the FalconPy project!
   * ***Fix a bug or implement a new feature***. Check out our [open issues on GitHub](https://github.com/CrowdStrike/falconpy/issues) for inspiration.
   * ***Review pull requests*** by going through the queue of [open pull requests on GitHub](https://github.com/CrowdStrike/falconpy/pulls) and giving feedback to the authors
 
-  > Review [CONTRIBUTING.md](https://github.com/CrowdStrike/falconpy/CONTRIBUTING.md) for more details regarding contributing to the FalconPy project.
+  > Review [CONTRIBUTING.md](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md) for more details regarding contributing to the FalconPy project.
 
 Open to do something else but not sure where to start? Try [opening an issue](https://github.com/CrowdStrike/falconpy/issues/new), or posting a topic in our [discussion board](https://github.com/CrowdStrike/falconpy/discussions), to introduce yourself and your interests. We look forward to chatting with you!
 
