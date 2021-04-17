@@ -286,16 +286,15 @@ class Flight_Control(ServiceClass):
                                    )
         return returned
 
-    def deleteUserGroups(self: object, body: dict) -> dict:
+    def deleteUserGroups(self: object, user_group_ids) -> dict:
         """Delete User Group(s) by ID(s)."""
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteUserGroups
-        FULL_URL = self.base_url+'/mssp/entities/user-groups/v1'
+        ID_LIST = str(parse_id_list(user_group_ids)).replace(",", "&user_group_ids=")
+        FULL_URL = self.base_url+'/mssp/entities/user-groups/v1?user_group_ids={}'.format(ID_LIST)
         HEADERS = self.headers
-        BODY = body
         returned = service_request(caller=self,
                                    method="DELETE",
                                    endpoint=FULL_URL,
-                                   body=BODY,
                                    headers=HEADERS,
                                    verify=self.ssl_verify
                                    )

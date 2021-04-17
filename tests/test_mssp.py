@@ -38,7 +38,7 @@ class TestFlightControl:
             ["deleteUserGroupMembers", "body={}"],
             ["createUserGroup", "body={}"],
             ["updateUserGroups", "body={}"],
-            ["deleteUserGroups", "body={}"],
+            ["deleteUserGroups", "user_group_ids='12345678'"],
             ["queryChildren", ""],
             ["queryCIDGroupMembers", ""],
             ["queryCIDGroups", ""],
