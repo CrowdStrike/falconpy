@@ -228,7 +228,8 @@ VerifyAWSAccountAccess
 XZY
 YARA
 addCIDGroupMembers
-addRoles
+addRole
+addUserGroupMembers
 af
 agentIDs
 api
@@ -275,6 +276,7 @@ deleteRoles
 deleteSensorUpdatePolicies
 deleteSensorVisibilityExclusionsV
 deleteUserGroups
+deleteUserGroupMembers
 desc
 desc
 detections
@@ -291,7 +293,7 @@ flatjson
 formData
 formData
 getAssessmentV
-getCIDGRoupById
+getCIDGroupById
 getCIDGroupMembersBy
 getChildren
 getDeviceControlPolicies
@@ -304,6 +306,7 @@ getSensorUpdatePolicies
 getSensorUpdatePoliciesV
 getSensorVisibilityExclusionsV
 getUserGroupsByID
+getUserGroupMembersByID
 getVulnerabilities
 github
 gofalcon
