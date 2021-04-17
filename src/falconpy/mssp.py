@@ -177,8 +177,8 @@ class Flight_Control(ServiceClass):
         return returned
 
     def addRole(self: object, body: dict) -> dict:
-        """Assign new MSSP Role(s) between User Group and CID Group. 
-           It does not revoke existing role(s) between User Group and CID Group. 
+        """Assign new MSSP Role(s) between User Group and CID Group.
+           It does not revoke existing role(s) between User Group and CID Group.
            User Group ID and CID Group ID have to be specified in request.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/addRole
@@ -195,9 +195,9 @@ class Flight_Control(ServiceClass):
         return returned
 
     def deleteRoles(self: object, body: dict) -> dict:
-        """Delete MSSP Role assignment(s) between User Group and CID Group. 
-           User Group ID and CID Group ID have to be specified in request. 
-           Only specified roles are removed if specified in request payload, 
+        """Delete MSSP Role assignment(s) between User Group and CID Group.
+           User Group ID and CID Group ID have to be specified in request.
+           Only specified roles are removed if specified in request payload,
            else association between User Group and CID Group is dissolved completely (if no roles specified).
         """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteRoles
