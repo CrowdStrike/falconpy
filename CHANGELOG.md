@@ -31,12 +31,12 @@
     * getAssessmentV1
     - Added unit tests (`test_zero_trust_assessment.py`)
 
-# Other
+## Other
 + Moved _endpoint constant library to a private submodule (No impact to existing usage)
     - Added payload parameter information to _endpoint constants
     - Adds service collection ID to endpoint lists
     - This prepares the package for new functionality planned for future releases
-+ Minor unit test update to `test_cspm_registration.py`
++ Minor unit test update to `test_cspm_registration.py`g
 + Documentation updates
 
 # Version 0.4.5
