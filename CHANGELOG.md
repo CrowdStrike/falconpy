@@ -1,3 +1,44 @@
+# Version 0.4.6
+## Added features and functionality
++ Added: MSSP (Falcon Flight Control) Service Class
+    * getChildren
+    * getCIDGroupMembersBy
+    * addCIDGroupMembers
+    * deleteCIDGroupMembers
+    * getCIDGroupById
+    * createCIDGroups
+    * deleteCIDGroups
+    * updateCIDGroups
+    * getRolesByID
+    * addRole
+    * deleteRoles
+    * getUserGroupMembersByID
+    * addUserGroupMembers
+    * deleteUserGroupMembers
+    * getUserGroupsByID
+    * createUserGroup
+    * deleteUserGroups
+    * updateUserGroups
+    * queryChildren
+    * queryCIDGroupMembers
+    * queryCIDGroups
+    * queryRoles
+    * queryUserGroupMembers
+    * queryUserGroups
+    - Added unit tests (`test_mssp.py`)
+
++ Added: Zero Trust Assessment Service Class
+    * getAssessmentV1
+    - Added unit tests (`test_zero_trust_assessment.py`)
+
+# Other
++ Moved _endpoint constant library to a private submodule (No impact to existing usage)
+    - Added payload parameter information to _endpoint constants
+    - Adds service collection ID to endpoint lists
+    - This prepares the package for new functionality planned for future releases
++ Minor unit test update to `test_cspm_registration.py`
++ Documentation updates
+
 # Version 0.4.5
 ## Added features and functionality
 + Added: Custom Indicators of Attack (IOA) API Service Class (`custom_ioa.py`)
