@@ -190,13 +190,13 @@ Search for detection IDs that match a given query
 
 **Parameters**
 
-| Required | Name | Type | Datatype | Description |  |
-| :---: | :--- | :--- | :--- | :--- | :--- |
-|  | **offset** | query | _integer_ | The first detection to return, where `0` is the latest detection. Use with the `limit` parameter to manage pagination of results. |  |
-|  | **limit** | query | _integer_ | The maximum number of detections to return in this response \(default: 9999; max: 9999\). Use with the `offset` parameter to manage pagination of results. |  |
-|  | **sort** | query | _string_ | Sort detections using these options:  - `first_behavior`: Timestamp of the first behavior associated with this detection - `last_behavior`: Timestamp of the last behavior associated with this detection - `max_severity`: Highest severity of the behaviors associated with this detection - `max_confidence`: Highest confidence of the behaviors associated with this detection - `adversary_id`: ID of the adversary associated with this detection, if any - `devices.hostname`: Hostname of the host where this detection was detected  Sort either `asc` \(ascending\) or `desc` \(descending\). For example: \`last\_behavior | asc\` |
-|  | **filter** | query | _string_ | Filter detections using a query in Falcon Query Language \(FQL\) An asterisk wildcard `*` includes all results.   Common filter options include:  - `status` - `device.device_id` - `max_severity`  The full list of valid filter options is extensive. Review it in our [documentation inside the Falcon console](https://falcon.crowdstrike.com/support/documentation/2/query-api-reference#detections_fql). |  |
-|  | **q** | query | _string_ | Search all detection metadata for the provided string |  |
+| Required | Name | Type | Datatype | Description |
+| :---: | :--- | :--- | :--- | :--- |
+|  | **offset** | query | _integer_ | The first detection to return, where `0` is the latest detection. Use with the `limit` parameter to manage pagination of results. |
+|  | **limit** | query | _integer_ | The maximum number of detections to return in this response \(default: 9999; max: 9999\). Use with the `offset` parameter to manage pagination of results. |
+|  | **sort** | query | _string_ | Sort detections using these options:  - `first_behavior`: Timestamp of the first behavior associated with this detection - `last_behavior`: Timestamp of the last behavior associated with this detection - `max_severity`: Highest severity of the behaviors associated with this detection - `max_confidence`: Highest confidence of the behaviors associated with this detection - `adversary_id`: ID of the adversary associated with this detection, if any - `devices.hostname`: Hostname of the host where this detection was detected  Sort either `asc` \(ascending\) or `desc` \(descending\). For example: \`last\_behavior \| asc\` |
+|  | **filter** | query | _string_ | Filter detections using a query in Falcon Query Language \(FQL\) An asterisk wildcard `*` includes all results.   Common filter options include:  - `status` - `device.device_id` - `max_severity`  The full list of valid filter options is extensive. Review it in our [documentation inside the Falcon console](https://falcon.crowdstrike.com/support/documentation/2/query-api-reference#detections_fql). |
+|  | **q** | query | _string_ | Search all detection metadata for the provided string |
 
 **Usage**
 
