@@ -419,6 +419,11 @@ validator
 ver
 www
 yara
+li
+ul
+unlicense
+MERCHANTABILITY
+NONINFRINGEMENT
 AggregateAllowList
 AggregateBlockList
 AggregateDetections
