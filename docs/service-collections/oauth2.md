@@ -26,7 +26,7 @@ Revoke a previously issued OAuth2 access token before the end of its standard 30
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **token** | formData | _string_ | The OAuth2 access token you want to revoke.  Include your API client ID and secret in basic auth format \(`Authorization: basic <encoded API client ID and secret>`\) in your request header. |
+| ✅ | **token** | formData | _string_ | The OAuth2 access token you want to revoke.  Include your API client ID and secret in basic auth format \(`Authorization: basic <encoded API client ID and secret>`\) in your request header. |
 
 **Usage**
 
@@ -81,8 +81,8 @@ Generate an OAuth2 access token
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **client\_id** | formData | _string_ | The API client ID to authenticate your API requests. For information on generating API clients, see [API documentation inside Falcon](https://falcon.crowdstrike.com/support/documentation/1/crowdstrike-api-introduction-for-developers). |
-| :white\_check\_mark: | **client\_secret** | formData | _string_ | The API client secret to authenticate your API requests. For information on generating API clients, see [API documentation inside Falcon](https://falcon.crowdstrike.com/support/documentation/1/crowdstrike-api-introduction-for-developers). |
+| ✅ | **client\_id** | formData | _string_ | The API client ID to authenticate your API requests. For information on generating API clients, see [API documentation inside Falcon](https://falcon.crowdstrike.com/support/documentation/1/crowdstrike-api-introduction-for-developers). |
+| ✅ | **client\_secret** | formData | _string_ | The API client secret to authenticate your API requests. For information on generating API clients, see [API documentation inside Falcon](https://falcon.crowdstrike.com/support/documentation/1/crowdstrike-api-introduction-for-developers). |
 |  | **member\_cid** | formData | _string_ | For MSSP Master CIDs, optionally lock the token to act on behalf of this member CID |
 
 **Usage**

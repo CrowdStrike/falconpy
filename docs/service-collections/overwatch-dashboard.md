@@ -29,7 +29,7 @@ Get the total number of detections pushed across all customers
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **filter** | query | _string_ | An FQL filter string |
+| ✅ | **filter** | query | _string_ | An FQL filter string |
 
 **Usage**
 
@@ -66,7 +66,7 @@ Get OverWatch detection event collection info by providing an aggregate query
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -103,7 +103,7 @@ Get aggregate OverWatch detection event info by providing an aggregate query
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -140,7 +140,7 @@ Get the total number of incidents pushed across all customers
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **filter** | query | _string_ | An FQL filter string |
+| ✅ | **filter** | query | _string_ | An FQL filter string |
 
 **Usage**
 
@@ -177,7 +177,7 @@ Get the total number of OverWatch events across all customers
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **filter** | query | _string_ | An FQL filter string |
+| ✅ | **filter** | query | _string_ | An FQL filter string |
 
 **Usage**
 

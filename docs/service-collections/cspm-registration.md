@@ -117,7 +117,7 @@ Creates a new account in our system for a customer and generates a script for th
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -396,7 +396,7 @@ Creates a new account in our system for a customer and generates a script for th
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -451,7 +451,7 @@ Deletes an Azure subscription from the system.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | Azure subscription IDs to remove |
+| ✅ | **ids** | query | array \(_string_\) | Azure subscription IDs to remove |
 
 **Usage**
 
@@ -502,9 +502,9 @@ Update an Azure service account in our system by with the user-created client\_i
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **id** | query | _string_ | ClientID to use for the Service Principal associated with the customer's Azure account |
+| ✅ | **id** | query | _string_ | ClientID to use for the Service Principal associated with the customer's Azure account |
 |  | **tenant-id** | query | _string_ | Tenant ID to update client ID for. Required if multiple tenants are registered. |
-| :white\_check\_mark: | **body** | body | _string_ | This is a placeholder only. Please ignore this field. |
+| ✅ | **body** | body | _string_ | This is a placeholder only. Please ignore this field. |
 
 **Usage**
 
@@ -623,7 +623,7 @@ Given a policy ID, returns detailed policy information.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | _string_ | Policy ID |
+| ✅ | **ids** | query | _string_ | Policy ID |
 
 **Usage**
 
@@ -674,7 +674,7 @@ Returns information about current policy settings.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **service** | query | _string_ | Service type to filter policy settings by. |
+| ✅ | **service** | query | _string_ | Service type to filter policy settings by. |
 |  | **policy-id** | query | _string_ | Policy ID |
 
 **Usage**
@@ -732,7 +732,7 @@ Updates a policy setting - can be used to override policy severity or to disable
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -848,7 +848,7 @@ Updates scan schedule configuration for one or more cloud platforms.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 

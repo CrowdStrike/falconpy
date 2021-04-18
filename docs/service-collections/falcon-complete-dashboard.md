@@ -38,7 +38,7 @@ Retrieve aggregate allowlist ticket values based on the matched filter
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -75,7 +75,7 @@ Retrieve aggregate blocklist ticket values based on the matched filter
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -112,7 +112,7 @@ Retrieve aggregate detection values based on the matched filter
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -149,7 +149,7 @@ Retrieve aggregate host/devices count based on the matched filter
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -186,7 +186,7 @@ Retrieve aggregate escalation ticket values based on the matched filter
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -223,7 +223,7 @@ Retrieve aggregate incident values based on the matched filter
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -260,7 +260,7 @@ Retrieve aggregate remediation ticket values based on the matched filter
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 

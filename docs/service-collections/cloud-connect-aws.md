@@ -142,7 +142,7 @@ Retrieve a set of AWS Accounts by specifying their IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | IDs of accounts to retrieve details |
+| ✅ | **ids** | query | array \(_string_\) | IDs of accounts to retrieve details |
 
 **Usage**
 
@@ -194,7 +194,7 @@ Provision AWS Accounts by specifying details about the accounts to provision
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
 |  | **mode** | query | _string_ | Mode for provisioning. Allowed values are `manual` or `cloudformation`. Defaults to manual if not defined. |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -257,7 +257,7 @@ Delete a set of AWS Accounts by specifying their IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | IDs of accounts to remove |
+| ✅ | **ids** | query | array \(_string_\) | IDs of accounts to remove |
 
 **Usage**
 
@@ -308,7 +308,7 @@ Update AWS Accounts by specifying the ID of the account and details to update
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -363,7 +363,7 @@ Create or update Global Settings which are applicable to all provisioned AWS acc
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -418,7 +418,7 @@ Performs an Access Verification check on the specified AWS Account IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | IDs of accounts to verify access on |
+| ✅ | **ids** | query | array \(_string_\) | IDs of accounts to verify access on |
 
 **Usage**
 

@@ -28,7 +28,7 @@ Get scans aggregations as specified via json in request body.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -82,7 +82,7 @@ Check the status of a volume scan. Time required for analysis increases with the
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | ID of a submitted scan |
+| ✅ | **ids** | query | array \(_string_\) | ID of a submitted scan |
 
 **Usage**
 
@@ -132,7 +132,7 @@ Submit a volume of files for ml scanning. Time required for analysis increases w
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Submit a batch of SHA256s for ml scanning. The samples must have been previously uploaded through `/samples/entities/samples/v3` |
+| ✅ | **body** | body | _string_ | Submit a batch of SHA256s for ml scanning. The samples must have been previously uploaded through `/samples/entities/samples/v3` |
 
 **Usage**
 

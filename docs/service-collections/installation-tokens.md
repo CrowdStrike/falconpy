@@ -133,7 +133,7 @@ Creates a token.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -169,7 +169,7 @@ Deletes a token immediately. To revoke a token, use PATCH /installation-tokens/e
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The token ids to delete. |
+| ✅ | **ids** | query | array \(_string_\) | The token ids to delete. |
 
 **Usage**
 
@@ -204,8 +204,8 @@ Updates one or more tokens. Use this endpoint to edit labels, change expiration,
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The token ids to update. |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **ids** | query | array \(_string_\) | The token ids to update. |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 

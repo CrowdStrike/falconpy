@@ -44,7 +44,7 @@ Get aggregates on session data.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Supported aggregations:  - `term` - `date_range`  Supported aggregation members:  **`date_ranges`** If performing a date range query specify the **`from`** and **`to`** date ranges.  These can be in common date formats like `2019-07-18` or `now` **`field`** Term you want to aggregate on.  If doing a `date_range` query, this is the date field you want to apply the date ranges to **`filter`** Optional filter criteria in the form of an FQL query. For more information about FQL queries, see our [FQL documentation in Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide). **`name`** Name of the aggregation **`size`** Size limit to apply to the queries. |
+| ✅ | **body** | body | _string_ | Supported aggregations:  - `term` - `date_range`  Supported aggregation members:  **`date_ranges`** If performing a date range query specify the **`from`** and **`to`** date ranges.  These can be in common date formats like `2019-07-18` or `now` **`field`** Term you want to aggregate on.  If doing a `date_range` query, this is the date field you want to apply the date ranges to **`filter`** Optional filter criteria in the form of an FQL query. For more information about FQL queries, see our [FQL documentation in Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide). **`name`** Name of the aggregation **`size`** Size limit to apply to the queries. |
 
 **Usage**
 
@@ -100,7 +100,7 @@ Batch executes a RTR active-responder command across the hosts mapped to the giv
 | :---: | :--- | :--- | :--- | :--- |
 |  | **timeout** | query | _integer_ | Timeout for how long to wait for the request in seconds, default timeout is 30 seconds. Maximum is 10 minutes. |
 |  | **timeout\_duration** | query | _string_ | Timeout duration for for how long to wait for the request in duration syntax. Example, `10s`. Valid units: `ns, us, ms, s, m, h`. Maximum is 10 minutes. |
-| :white\_check\_mark: | **body** | body | _string_ | Use this endpoint to run these [real time response commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands): - `cat` - `cd` - `clear` - `cp` - `encrypt` - `env` - `eventlog` - `filehash` - `get` - `getsid` - `help` - `history` - `ipconfig` - `kill` - `ls` - `map` - `memdump` - `mkdir` - `mount` - `mv` - `netstat` - `ps` - `reg query` - `reg set` - `reg delete` - `reg load` - `reg unload` - `restart` - `rm` - `runscript` - `shutdown` - `unmap` - `update history` - `update install` - `update list` - `update query` - `xmemdump` - `zip`  **`base_command`** Active-Responder command type we are going to execute, for example: `get` or `cp`.  Refer to the RTR documentation for the full list of commands. **`batch_id`** Batch ID to execute the command on.  Received from `/real-time-response/combined/init-sessions/v1`. **`command_string`** Full command string for the command. For example  `get some_file.txt` **`optional_hosts`** List of a subset of hosts we want to run the command on.  If this list is supplied, only these hosts will receive the command. |
+| ✅ | **body** | body | _string_ | Use this endpoint to run these [real time response commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands): - `cat` - `cd` - `clear` - `cp` - `encrypt` - `env` - `eventlog` - `filehash` - `get` - `getsid` - `help` - `history` - `ipconfig` - `kill` - `ls` - `map` - `memdump` - `mkdir` - `mount` - `mv` - `netstat` - `ps` - `reg query` - `reg set` - `reg delete` - `reg load` - `reg unload` - `restart` - `rm` - `runscript` - `shutdown` - `unmap` - `update history` - `update install` - `update list` - `update query` - `xmemdump` - `zip`  **`base_command`** Active-Responder command type we are going to execute, for example: `get` or `cp`.  Refer to the RTR documentation for the full list of commands. **`batch_id`** Batch ID to execute the command on.  Received from `/real-time-response/combined/init-sessions/v1`. **`command_string`** Full command string for the command. For example  `get some_file.txt` **`optional_hosts`** List of a subset of hosts we want to run the command on.  If this list is supplied, only these hosts will receive the command. |
 
 **Usage**
 
@@ -166,7 +166,7 @@ Batch executes a RTR read-only command across the hosts mapped to the given batc
 | :---: | :--- | :--- | :--- | :--- |
 |  | **timeout** | query | _integer_ | Timeout for how long to wait for the request in seconds, default timeout is 30 seconds. Maximum is 10 minutes. |
 |  | **timeout\_duration** | query | _string_ | Timeout duration for for how long to wait for the request in duration syntax. Example, `10s`. Valid units: `ns, us, ms, s, m, h`. Maximum is 10 minutes. |
-| :white\_check\_mark: | **body** | body | _string_ | Use this endpoint to run these [real time response commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands): - `cat` - `cd` - `clear` - `env` - `eventlog` - `filehash` - `getsid` - `help` - `history` - `ipconfig` - `ls` - `mount` - `netstat` - `ps` - `reg query`  **`base_command`** read-only command type we are going to execute, for example: `ls` or `cd`.  Refer to the RTR documentation for the full list of commands. **`batch_id`** Batch ID to execute the command on.  Received from `/real-time-response/combined/init-sessions/v1`. **`command_string`** Full command string for the command. For example  `cd C:some_directory` **`optional_hosts`** List of a subset of hosts we want to run the command on.  If this list is supplied, only these hosts will receive the command. |
+| ✅ | **body** | body | _string_ | Use this endpoint to run these [real time response commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands): - `cat` - `cd` - `clear` - `env` - `eventlog` - `filehash` - `getsid` - `help` - `history` - `ipconfig` - `ls` - `mount` - `netstat` - `ps` - `reg query`  **`base_command`** read-only command type we are going to execute, for example: `ls` or `cd`.  Refer to the RTR documentation for the full list of commands. **`batch_id`** Batch ID to execute the command on.  Received from `/real-time-response/combined/init-sessions/v1`. **`command_string`** Full command string for the command. For example  `cd C:some_directory` **`optional_hosts`** List of a subset of hosts we want to run the command on.  If this list is supplied, only these hosts will receive the command. |
 
 **Usage**
 
@@ -232,7 +232,7 @@ Retrieves the status of the specified batch get command. Will return successful 
 | :---: | :--- | :--- | :--- | :--- |
 |  | **timeout** | query | _integer_ | Timeout for how long to wait for the request in seconds, default timeout is 30 seconds. Maximum is 10 minutes. |
 |  | **timeout\_duration** | query | _string_ | Timeout duration for for how long to wait for the request in duration syntax. Example, `10s`. Valid units: `ns, us, ms, s, m, h`. Maximum is 10 minutes. |
-| :white\_check\_mark: | **batch\_get\_cmd\_req\_id** | query | _string_ | Batch Get Command Request ID received from `/real-time-response/combined/get-command/v1` |
+| ✅ | **batch\_get\_cmd\_req\_id** | query | _string_ | Batch Get Command Request ID received from `/real-time-response/combined/get-command/v1` |
 
 **Usage**
 
@@ -292,7 +292,7 @@ Batch executes `get` command across hosts to retrieve files. After this call is 
 | :---: | :--- | :--- | :--- | :--- |
 |  | **timeout** | query | _integer_ | Timeout for how long to wait for the request in seconds, default timeout is 30 seconds. Maximum is 10 minutes. |
 |  | **timeout\_duration** | query | _string_ | Timeout duration for for how long to wait for the request in duration syntax. Example, `10s`. Valid units: `ns, us, ms, s, m, h`. Maximum is 10 minutes. |
-| :white\_check\_mark: | **body** | body | _string_ | **`batch_id`** Batch ID to execute the command on.  Received from `/real-time-response/combined/init-sessions/v1`. **`file_path`** Full path to the file that is to be retrieved from each host in the batch. **`optional_hosts`** List of a subset of hosts we want to run the command on.  If this list is supplied, only these hosts will receive the command. |
+| ✅ | **body** | body | _string_ | **`batch_id`** Batch ID to execute the command on.  Received from `/real-time-response/combined/init-sessions/v1`. **`file_path`** Full path to the file that is to be retrieved from each host in the batch. **`optional_hosts`** List of a subset of hosts we want to run the command on.  If this list is supplied, only these hosts will receive the command. |
 
 **Usage**
 
@@ -358,7 +358,7 @@ Batch initialize a RTR session on multiple hosts. Before any RTR commands can be
 | :---: | :--- | :--- | :--- | :--- |
 |  | **timeout** | query | _integer_ | Timeout for how long to wait for the request in seconds, default timeout is 30 seconds. Maximum is 10 minutes. |
 |  | **timeout\_duration** | query | _string_ | Timeout duration for for how long to wait for the request in duration syntax. Example, `10s`. Valid units: `ns, us, ms, s, m, h`. Maximum is 10 minutes. |
-| :white\_check\_mark: | **body** | body | _string_ | **`host_ids`** List of host agent ID's to initialize a RTR session on **`existing_batch_id`** Optional batch ID. Use an existing batch ID if you want to initialize new hosts and add them to the existing batch |
+| ✅ | **body** | body | _string_ | **`host_ids`** List of host agent ID's to initialize a RTR session on **`existing_batch_id`** Optional batch ID. Use an existing batch ID if you want to initialize new hosts and add them to the existing batch |
 
 **Usage**
 
@@ -424,7 +424,7 @@ Batch refresh a RTR session on multiple hosts. RTR sessions will expire after 10
 | :---: | :--- | :--- | :--- | :--- |
 |  | **timeout** | query | _integer_ | Timeout for how long to wait for the request in seconds, default timeout is 30 seconds. Maximum is 10 minutes. |
 |  | **timeout\_duration** | query | _string_ | Timeout duration for for how long to wait for the request in duration syntax. Example, `10s`. Valid units: `ns, us, ms, s, m, h`. Maximum is 10 minutes. |
-| :white\_check\_mark: | **body** | body | _string_ | **`batch_id`** Batch ID to execute the command on.  Received from `/real-time-response/combined/init-sessions/v1`. **`hosts_to_remove`** Hosts to remove from the batch session.  Heartbeats will no longer happen on these hosts and the sessions will expire. |
+| ✅ | **body** | body | _string_ | **`batch_id`** Batch ID to execute the command on.  Received from `/real-time-response/combined/init-sessions/v1`. **`hosts_to_remove`** Hosts to remove from the batch session.  Heartbeats will no longer happen on these hosts and the sessions will expire. |
 
 **Usage**
 
@@ -488,8 +488,8 @@ Get status of an executed active-responder command on a single host.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **cloud\_request\_id** | query | _string_ | Cloud Request ID of the executed command to query |
-| :white\_check\_mark: | **sequence\_id** | query | _integer_ | Sequence ID that we want to retrieve. Command responses are chunked across sequences |
+| ✅ | **cloud\_request\_id** | query | _string_ | Cloud Request ID of the executed command to query |
+| ✅ | **sequence\_id** | query | _integer_ | Sequence ID that we want to retrieve. Command responses are chunked across sequences |
 
 **Usage**
 
@@ -545,7 +545,7 @@ Execute an active responder command on a single host.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Use this endpoint to run these [real time response commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands): - `cat` - `cd` - `clear` - `cp` - `encrypt` - `env` - `eventlog` - `filehash` - `get` - `getsid` - `help` - `history` - `ipconfig` - `kill` - `ls` - `map` - `memdump` - `mkdir` - `mount` - `mv` - `netstat` - `ps` - `reg query` - `reg set` - `reg delete` - `reg load` - `reg unload` - `restart` - `rm` - `runscript` - `shutdown` - `unmap` - `update history` - `update install` - `update list` - `update query` - `xmemdump` - `zip`  Required values.  The rest of the fields are unused. **`base_command`** Active-Responder command type we are going to execute, for example: `get` or `cp`.  Refer to the RTR documentation for the full list of commands. **`command_string`** Full command string for the command. For example  `get some_file.txt` **`session_id`** RTR session ID to run the command on |
+| ✅ | **body** | body | _string_ | Use this endpoint to run these [real time response commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands): - `cat` - `cd` - `clear` - `cp` - `encrypt` - `env` - `eventlog` - `filehash` - `get` - `getsid` - `help` - `history` - `ipconfig` - `kill` - `ls` - `map` - `memdump` - `mkdir` - `mount` - `mv` - `netstat` - `ps` - `reg query` - `reg set` - `reg delete` - `reg load` - `reg unload` - `restart` - `rm` - `runscript` - `shutdown` - `unmap` - `update history` - `update install` - `update list` - `update query` - `xmemdump` - `zip`  Required values.  The rest of the fields are unused. **`base_command`** Active-Responder command type we are going to execute, for example: `get` or `cp`.  Refer to the RTR documentation for the full list of commands. **`command_string`** Full command string for the command. For example  `get some_file.txt` **`session_id`** RTR session ID to run the command on |
 
 **Usage**
 
@@ -599,8 +599,8 @@ Get status of an executed command on a single host.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **cloud\_request\_id** | query | _string_ | Cloud Request ID of the executed command to query |
-| :white\_check\_mark: | **sequence\_id** | query | _integer_ | Sequence ID that we want to retrieve. Command responses are chunked across sequences |
+| ✅ | **cloud\_request\_id** | query | _string_ | Cloud Request ID of the executed command to query |
+| ✅ | **sequence\_id** | query | _integer_ | Sequence ID that we want to retrieve. Command responses are chunked across sequences |
 
 **Usage**
 
@@ -656,7 +656,7 @@ Execute a command on a single host.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Use this endpoint to run these [real time response commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands): - `cat` - `cd` - `clear` - `env` - `eventlog` - `filehash` - `getsid` - `help` - `history` - `ipconfig` - `ls` - `mount` - `netstat` - `ps` - `reg query`  Required values.  The rest of the fields are unused. **`base_command`** read-only command type we are going to execute, for example: `ls` or `cd`.  Refer to the RTR documentation for the full list of commands. **`command_string`** Full command string for the command. For example  `cd C:some_directory` **`session_id`** RTR session ID to run the command on |
+| ✅ | **body** | body | _string_ | Use this endpoint to run these [real time response commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands): - `cat` - `cd` - `clear` - `env` - `eventlog` - `filehash` - `getsid` - `help` - `history` - `ipconfig` - `ls` - `mount` - `netstat` - `ps` - `reg query`  Required values.  The rest of the fields are unused. **`base_command`** read-only command type we are going to execute, for example: `ls` or `cd`.  Refer to the RTR documentation for the full list of commands. **`command_string`** Full command string for the command. For example  `cd C:some_directory` **`session_id`** RTR session ID to run the command on |
 
 **Usage**
 
@@ -710,8 +710,8 @@ Get RTR extracted file contents for specified session and sha256.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **session\_id** | query | _string_ | RTR Session id |
-| :white\_check\_mark: | **sha256** | query | _string_ | Extracted SHA256 \(e.g. 'efa256a96af3b556cd3fc9d8b1cf587d72807d7805ced441e8149fc279db422b'\) |
+| ✅ | **session\_id** | query | _string_ | RTR Session id |
+| ✅ | **sha256** | query | _string_ | Extracted SHA256 \(e.g. 'efa256a96af3b556cd3fc9d8b1cf587d72807d7805ced441e8149fc279db422b'\) |
 |  | **filename** | query | _string_ | Filename to use for the archive name and the file within the archive. |
 
 **Usage**
@@ -770,7 +770,7 @@ Get a list of files for the specified RTR session.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **session\_id** | query | _string_ | RTR Session id |
+| ✅ | **session\_id** | query | _string_ | RTR Session id |
 
 **Usage**
 
@@ -824,8 +824,8 @@ Delete a RTR session file.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | _string_ | RTR Session file id |
-| :white\_check\_mark: | **session\_id** | query | _string_ | RTR Session id |
+| ✅ | **ids** | query | _string_ | RTR Session file id |
+| ✅ | **session\_id** | query | _string_ | RTR Session id |
 
 **Usage**
 
@@ -883,7 +883,7 @@ Get queued session metadata by session ID.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | **`ids`** List of RTR sessions to retrieve.  RTR will only return the sessions that were created by the calling user |
+| ✅ | **body** | body | _string_ | **`ids`** List of RTR sessions to retrieve.  RTR will only return the sessions that were created by the calling user |
 
 **Usage**
 
@@ -937,8 +937,8 @@ Delete a queued session command
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **session\_id** | query | _string_ | RTR Session id |
-| :white\_check\_mark: | **cloud\_request\_id** | query | _string_ | Cloud Request ID of the executed command to query |
+| ✅ | **session\_id** | query | _string_ | RTR Session id |
+| ✅ | **cloud\_request\_id** | query | _string_ | Cloud Request ID of the executed command to query |
 
 **Usage**
 
@@ -994,7 +994,7 @@ Refresh a session timeout on a single host.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | **`device_id`** The host agent ID to refresh the RTR session on.  RTR will retrieve an existing session for the calling user on this host |
+| ✅ | **body** | body | _string_ | **`device_id`** The host agent ID to refresh the RTR session on.  RTR will retrieve an existing session for the calling user on this host |
 
 **Usage**
 
@@ -1048,7 +1048,7 @@ Get session metadata by session id.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | **`ids`** List of RTR sessions to retrieve.  RTR will only return the sessions that were created by the calling user |
+| ✅ | **body** | body | _string_ | **`ids`** List of RTR sessions to retrieve.  RTR will only return the sessions that were created by the calling user |
 
 **Usage**
 
@@ -1102,7 +1102,7 @@ Initialize a new session with the RTR cloud.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | **`device_id`** The host agent ID to initialize the RTR session on.  RTR will retrieve an existing session for the calling user on this host |
+| ✅ | **body** | body | _string_ | **`device_id`** The host agent ID to initialize the RTR session on.  RTR will retrieve an existing session for the calling user on this host |
 
 **Usage**
 
@@ -1156,7 +1156,7 @@ Delete a session.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **session\_id** | query | _string_ | RTR Session id |
+| ✅ | **session\_id** | query | _string_ | RTR Session id |
 
 **Usage**
 

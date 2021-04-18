@@ -27,7 +27,7 @@ Retrieves the file associated with the given ID \(SHA256\)
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
 |  | **X-CS-USERUUID** | header | _string_ | User UUID |
-| :white\_check\_mark: | **ids** | query | _string_ | The file SHA256. |
+| ✅ | **ids** | query | _string_ | The file SHA256. |
 |  | **password\_protected** | query | _string_ | Flag whether the sample should be zipped and password protected with pass='infected' |
 
 **Usage**
@@ -96,9 +96,9 @@ Upload a file for further cloud analysis. After uploading, call the specific ana
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
 |  | **X-CS-USERUUID** | header | _string_ | User UUID |
-| :white\_check\_mark: | **body** | body | _string_ | Content of the uploaded sample in binary format. For example, use `--data-binary @$FILE_PATH` when using cURL. Max file size: 100 MB.  Accepted file formats:  - Portable executables: `.exe`, `.scr`, `.pif`, `.dll`, `.com`, `.cpl`, etc. - Office documents: `.doc`, `.docx`, `.ppt`, `.pps`, `.pptx`, `.ppsx`, `.xls`, `.xlsx`, `.rtf`, `.pub` - PDF - APK - Executable JAR - Windows script component: `.sct` - Windows shortcut: `.lnk` - Windows help: `.chm` - HTML application: `.hta` - Windows script file: `.wsf` - Javascript: `.js` - Visual Basic: `.vbs`,  `.vbe` - Shockwave Flash: `.swf` - Perl: `.pl` - Powershell: `.ps1`, `.psd1`, `.psm1` - Scalable vector graphics: `.svg` - Python: `.py` - Linux ELF executables - Email files: MIME RFC 822 `.eml`, Outlook `.msg`. |
-| :white\_check\_mark: | **upfile** | formData | _file_ | The binary file. |
-| :white\_check\_mark: | **file\_name** | query | _string_ | Name of the file. |
+| ✅ | **body** | body | _string_ | Content of the uploaded sample in binary format. For example, use `--data-binary @$FILE_PATH` when using cURL. Max file size: 100 MB.  Accepted file formats:  - Portable executables: `.exe`, `.scr`, `.pif`, `.dll`, `.com`, `.cpl`, etc. - Office documents: `.doc`, `.docx`, `.ppt`, `.pps`, `.pptx`, `.ppsx`, `.xls`, `.xlsx`, `.rtf`, `.pub` - PDF - APK - Executable JAR - Windows script component: `.sct` - Windows shortcut: `.lnk` - Windows help: `.chm` - HTML application: `.hta` - Windows script file: `.wsf` - Javascript: `.js` - Visual Basic: `.vbs`,  `.vbe` - Shockwave Flash: `.swf` - Perl: `.pl` - Powershell: `.ps1`, `.psd1`, `.psm1` - Scalable vector graphics: `.svg` - Python: `.py` - Linux ELF executables - Email files: MIME RFC 822 `.eml`, Outlook `.msg`. |
+| ✅ | **upfile** | formData | _file_ | The binary file. |
+| ✅ | **file\_name** | query | _string_ | Name of the file. |
 |  | **comment** | query | _string_ | A descriptive comment to identify the file for other users. |
 |  | **is\_confidential** | query | _boolean_ | Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon console.  - `true`: File is only shown to users within your customer account - `false`: File can be seen by other CrowdStrike customers   Default: `true`. |
 
@@ -181,7 +181,7 @@ Removes a sample, including file, meta and submissions from the collection
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
 |  | **X-CS-USERUUID** | header | _string_ | User UUID |
-| :white\_check\_mark: | **ids** | query | _string_ | The file SHA256. |
+| ✅ | **ids** | query | _string_ | The file SHA256. |
 
 **Usage**
 

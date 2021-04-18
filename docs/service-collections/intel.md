@@ -256,7 +256,7 @@ Retrieve specific actors using their actor IDs.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the actors you want to retrieve. |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the actors you want to retrieve. |
 |  | **fields** | query | array \(_string_\) | The fields to return, or a predefined set of fields in the form of the collection name surrounded by two underscores like:  .  Ex: slug **full**.  Defaults to **basic**. |
 
 **Usage**
@@ -322,7 +322,7 @@ Retrieve specific indicators using their indicator IDs.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -376,7 +376,7 @@ Return a Report PDF attachment
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **id** | query | _string_ | The ID of the report you want to download as a PDF. |
+| ✅ | **id** | query | _string_ | The ID of the report you want to download as a PDF. |
 
 **Usage**
 
@@ -430,7 +430,7 @@ Retrieve specific reports using their report IDs.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the reports you want to retrieve. |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the reports you want to retrieve. |
 |  | **fields** | query | array \(_string_\) | The fields to return, or a predefined set of fields in the form of the collection name surrounded by two underscores like:  .  Ex: slug **full**.  Defaults to **basic**. |
 
 **Usage**
@@ -496,7 +496,7 @@ Download earlier rule sets.
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
 |  | **Accept** | header | _string_ | Choose the format you want the rule set in. |
-| :white\_check\_mark: | **id** | query | _integer_ | The ID of the rule set. |
+| ✅ | **id** | query | _integer_ | The ID of the rule set. |
 |  | **format** | query | _string_ | Choose the format you want the rule set in. Valid formats are zip and gzip. Defaults to zip. |
 
 **Usage**
@@ -562,7 +562,7 @@ Download the latest rule set.
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
 |  | **Accept** | header | _string_ | Choose the format you want the rule set in. |
-| :white\_check\_mark: | **type** | query | _string_ | The rule news report type. Accepted values:  snort-suricata-master  snort-suricata-update  snort-suricata-changelog  yara-master  yara-update  yara-changelog  common-event-format  netwitness |
+| ✅ | **type** | query | _string_ | The rule news report type. Accepted values:  snort-suricata-master  snort-suricata-update  snort-suricata-changelog  yara-master  yara-update  yara-changelog  common-event-format  netwitness |
 |  | **format** | query | _string_ | Choose the format you want the rule set in. Valid formats are zip and gzip. Defaults to zip. |
 
 **Usage**
@@ -627,7 +627,7 @@ Retrieve details for rule sets for the specified ids.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The ids of rules to return. |
+| ✅ | **ids** | query | array \(_string_\) | The ids of rules to return. |
 
 **Usage**
 
@@ -882,7 +882,7 @@ Search for rule IDs that match provided filter criteria.
 |  | **limit** | query | _integer_ | The number of rule IDs to return. Defaults to 10. |  |
 |  | **sort** | query | _string_ | Order fields in ascending or descending order.  Ex: created\_date | asc. |
 |  | **name** | query | array \(_string_\) | Search by rule title. |  |
-| :white\_check\_mark: | **type** | query | _string_ | The rule news report type. Accepted values:  snort-suricata-master  snort-suricata-update  snort-suricata-changelog  yara-master  yara-update  yara-changelog  common-event-format  netwitness |  |
+| ✅ | **type** | query | _string_ | The rule news report type. Accepted values:  snort-suricata-master  snort-suricata-update  snort-suricata-changelog  yara-master  yara-update  yara-changelog  common-event-format  netwitness |  |
 |  | **description** | query | array \(_string_\) | Substring match on description field. |  |
 |  | **tags** | query | array \(_string_\) | Search for rule tags. |  |
 |  | **min\_created\_date** | query | _integer_ | Filter results to those created on or after a certain date. |  |

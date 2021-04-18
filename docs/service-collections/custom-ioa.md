@@ -42,7 +42,7 @@ Get pattern severities by ID.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the entities |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the entities |
 
 **Usage**
 
@@ -92,7 +92,7 @@ Get platforms by ID.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the entities |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the entities |
 
 **Usage**
 
@@ -142,7 +142,7 @@ Get rule groups by ID.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the entities |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the entities |
 
 **Usage**
 
@@ -193,7 +193,7 @@ Create a rule group for a platform with a name and an optional description. Retu
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -248,7 +248,7 @@ Delete rule groups by ID.
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
 |  | **comment** | query | _string_ | Explains why the entity is being deleted |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the entities |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the entities |
 
 **Usage**
 
@@ -307,7 +307,7 @@ Update a rule group. The following properties can be modified: name, description
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -361,7 +361,7 @@ Get rule types by ID.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the entities |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the entities |
 
 **Usage**
 
@@ -412,7 +412,7 @@ Get rules by ID and optionally version in the following format: `ID[:version]`.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | The "ids" field contains a list of the rules to retrieve. |
+| ✅ | **body** | body | _string_ | The "ids" field contains a list of the rules to retrieve. |
 
 **Usage**
 
@@ -466,7 +466,7 @@ Get rules by ID and optionally version in the following format: `ID[:version]`. 
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the entities |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the entities |
 
 **Usage**
 
@@ -517,7 +517,7 @@ Create a rule within a rule group. Returns the rule.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -571,9 +571,9 @@ Delete rules from a rule group by ID.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **rule\_group\_id** | query | _string_ | The parent rule group |
+| ✅ | **rule\_group\_id** | query | _string_ | The parent rule group |
 |  | **comment** | query | _string_ | Explains why the entity is being deleted |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the entities |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the entities |
 
 **Usage**
 
@@ -634,7 +634,7 @@ Update rules within a rule group. Return the updated rules.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -689,7 +689,7 @@ Validates field values and checks for matches if a test string is provided.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 

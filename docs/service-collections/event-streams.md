@@ -26,9 +26,9 @@ Refresh an active event stream. Use the URL shown in a GET /sensors/entities/dat
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **action\_name** | query | _string_ | Action name. Allowed value is refresh\_active\_stream\_session. |
-| :white\_check\_mark: | **appId** | query | _string_ | Label that identifies your connection. Max: 32 alphanumeric characters \(a-z, A-Z, 0-9\). |
-| :white\_check\_mark: | **partition** | path | _integer_ | Partition to request data for. |
+| ✅ | **action\_name** | query | _string_ | Action name. Allowed value is refresh\_active\_stream\_session. |
+| ✅ | **appId** | query | _string_ | Label that identifies your connection. Max: 32 alphanumeric characters \(a-z, A-Z, 0-9\). |
+| ✅ | **partition** | path | _integer_ | Partition to request data for. |
 
 **Usage**
 
@@ -89,7 +89,7 @@ Discover all event streams in your environment
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **appId** | query | _string_ | Label that identifies your connection. Max: 32 alphanumeric characters \(a-z, A-Z, 0-9\). |
+| ✅ | **appId** | query | _string_ | Label that identifies your connection. Max: 32 alphanumeric characters \(a-z, A-Z, 0-9\). |
 |  | **format** | query | _string_ | Format for streaming events. Valid values: json, flatjson |
 
 **Usage**

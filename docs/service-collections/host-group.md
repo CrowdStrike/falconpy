@@ -161,8 +161,8 @@ Perform the specified action on the Host Groups specified in the request
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **action\_name** | query | _string_ | The action to perform |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **action\_name** | query | _string_ | The action to perform |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -224,7 +224,7 @@ Retrieve a set of Host Groups by specifying their IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the Host Groups to return |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the Host Groups to return |
 
 **Usage**
 
@@ -274,7 +274,7 @@ Create Host Groups by specifying details about the group to create
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -328,7 +328,7 @@ Delete a set of Host Groups by specifying their IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the Host Groups to delete |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the Host Groups to delete |
 
 **Usage**
 
@@ -378,7 +378,7 @@ Update Host Groups by specifying the ID of the group and details to update
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 

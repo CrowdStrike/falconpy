@@ -162,8 +162,8 @@ Perform the specified action on the Device Control Policies specified in the req
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **action\_name** | query | _string_ | The action to perform |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **action\_name** | query | _string_ | The action to perform |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -225,7 +225,7 @@ Sets the precedence of Device Control Policies based on the order of IDs specifi
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -279,7 +279,7 @@ Retrieve a set of Device Control Policies by specifying their IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the Device Control Policies to return |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the Device Control Policies to return |
 
 **Usage**
 
@@ -329,7 +329,7 @@ Create Device Control Policies by specifying details about the policy to create
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -383,7 +383,7 @@ Delete a set of Device Control Policies by specifying their IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the Device Control Policies to delete |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the Device Control Policies to delete |
 
 **Usage**
 
@@ -433,7 +433,7 @@ Update Device Control Policies by specifying the ID of the policy and details to
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 

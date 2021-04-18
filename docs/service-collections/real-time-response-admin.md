@@ -37,7 +37,7 @@ Batch executes a RTR administrator command across the hosts mapped to the given 
 | :---: | :--- | :--- | :--- | :--- |
 |  | **timeout** | query | _integer_ | Timeout for how long to wait for the request in seconds, default timeout is 30 seconds. Maximum is 10 minutes. |
 |  | **timeout\_duration** | query | _string_ | Timeout duration for for how long to wait for the request in duration syntax. Example, `10s`. Valid units: `ns, us, ms, s, m, h`. Maximum is 10 minutes. |
-| :white\_check\_mark: | **body** | body | _string_ | Use this endpoint to run these [real time response commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands): - `cat` - `cd` - `clear` - `cp` - `encrypt` - `env` - `eventlog` - `filehash` - `get` - `getsid` - `help` - `history` - `ipconfig` - `kill` - `ls` - `map` - `memdump` - `mkdir` - `mount` - `mv` - `netstat` - `ps` - `put` - `reg query` - `reg set` - `reg delete` - `reg load` - `reg unload` - `restart` - `rm` - `run` - `runscript` - `shutdown` - `unmap` - `update history` - `update install` - `update list` - `update query` - `xmemdump` - `zip`  **`base_command`** Active-Responder command type we are going to execute, for example: `get` or `cp`.  Refer to the RTR documentation for the full list of commands. **`batch_id`** Batch ID to execute the command on.  Received from `/real-time-response/combined/init-sessions/v1`. **`command_string`** Full command string for the command. For example  `get some_file.txt` **`optional_hosts`** List of a subset of hosts we want to run the command on.  If this list is supplied, only these hosts will receive the command. |
+| ✅ | **body** | body | _string_ | Use this endpoint to run these [real time response commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands): - `cat` - `cd` - `clear` - `cp` - `encrypt` - `env` - `eventlog` - `filehash` - `get` - `getsid` - `help` - `history` - `ipconfig` - `kill` - `ls` - `map` - `memdump` - `mkdir` - `mount` - `mv` - `netstat` - `ps` - `put` - `reg query` - `reg set` - `reg delete` - `reg load` - `reg unload` - `restart` - `rm` - `run` - `runscript` - `shutdown` - `unmap` - `update history` - `update install` - `update list` - `update query` - `xmemdump` - `zip`  **`base_command`** Active-Responder command type we are going to execute, for example: `get` or `cp`.  Refer to the RTR documentation for the full list of commands. **`batch_id`** Batch ID to execute the command on.  Received from `/real-time-response/combined/init-sessions/v1`. **`command_string`** Full command string for the command. For example  `get some_file.txt` **`optional_hosts`** List of a subset of hosts we want to run the command on.  If this list is supplied, only these hosts will receive the command. |
 
 **Usage**
 
@@ -101,8 +101,8 @@ Get status of an executed RTR administrator command on a single host.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **cloud\_request\_id** | query | _string_ | Cloud Request ID of the executed command to query |
-| :white\_check\_mark: | **sequence\_id** | query | _integer_ | Sequence ID that we want to retrieve. Command responses are chunked across sequences |
+| ✅ | **cloud\_request\_id** | query | _string_ | Cloud Request ID of the executed command to query |
+| ✅ | **sequence\_id** | query | _integer_ | Sequence ID that we want to retrieve. Command responses are chunked across sequences |
 
 **Usage**
 
@@ -158,7 +158,7 @@ Execute a RTR administrator command on a single host.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Use this endpoint to run these [real time response commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands): - `cat` - `cd` - `clear` - `cp` - `encrypt` - `env` - `eventlog` - `filehash` - `get` - `getsid` - `help` - `history` - `ipconfig` - `kill` - `ls` - `map` - `memdump` - `mkdir` - `mount` - `mv` - `netstat` - `ps` - `put` - `reg query` - `reg set` - `reg delete` - `reg load` - `reg unload` - `restart` - `rm` - `run` - `runscript` - `shutdown` - `unmap` - `update history` - `update install` - `update list` - `update query` - `xmemdump` - `zip`  Required values.  The rest of the fields are unused. **`base_command`** Active-Responder command type we are going to execute, for example: `get` or `cp`.  Refer to the RTR documentation for the full list of commands. **`command_string`** Full command string for the command. For example  `get some_file.txt` **`session_id`** RTR session ID to run the command on |
+| ✅ | **body** | body | _string_ | Use this endpoint to run these [real time response commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands): - `cat` - `cd` - `clear` - `cp` - `encrypt` - `env` - `eventlog` - `filehash` - `get` - `getsid` - `help` - `history` - `ipconfig` - `kill` - `ls` - `map` - `memdump` - `mkdir` - `mount` - `mv` - `netstat` - `ps` - `put` - `reg query` - `reg set` - `reg delete` - `reg load` - `reg unload` - `restart` - `rm` - `run` - `runscript` - `shutdown` - `unmap` - `update history` - `update install` - `update list` - `update query` - `xmemdump` - `zip`  Required values.  The rest of the fields are unused. **`base_command`** Active-Responder command type we are going to execute, for example: `get` or `cp`.  Refer to the RTR documentation for the full list of commands. **`command_string`** Full command string for the command. For example  `get some_file.txt` **`session_id`** RTR session ID to run the command on |
 
 **Usage**
 
@@ -212,7 +212,7 @@ Get put-files based on the ID's given. These are used for the RTR `put` command.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | File IDs |
+| ✅ | **ids** | query | array \(_string_\) | File IDs |
 
 **Usage**
 
@@ -263,8 +263,8 @@ Upload a new put-file to use for the RTR `put` command.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **file** | formData | _file_ | put-file to upload |
-| :white\_check\_mark: | **description** | formData | _string_ | File description |
+| ✅ | **file** | formData | _file_ | put-file to upload |
+| ✅ | **description** | formData | _string_ | File description |
 |  | **name** | formData | _string_ | File name \(if different than actual file name\) |
 |  | **comments\_for\_audit\_log** | formData | _string_ | The audit log comment |
 
@@ -324,7 +324,7 @@ Delete a put-file based on the ID given. Can only delete one file at a time.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | _string_ | File id |
+| ✅ | **ids** | query | _string_ | File id |
 
 **Usage**
 
@@ -374,7 +374,7 @@ Get custom-scripts based on the ID's given. These are used for the RTR `runscrip
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | File IDs |
+| ✅ | **ids** | query | array \(_string_\) | File IDs |
 
 **Usage**
 
@@ -426,10 +426,10 @@ Upload a new custom-script to use for the RTR `runscript` command.
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
 |  | **file** | formData | _file_ | custom-script file to upload.  These should be powershell scripts. |
-| :white\_check\_mark: | **description** | formData | _string_ | File description |
+| ✅ | **description** | formData | _string_ | File description |
 |  | **name** | formData | _string_ | File name \(if different than actual file name\) |
 |  | **comments\_for\_audit\_log** | formData | _string_ | The audit log comment |
-| :white\_check\_mark: | **permission\_type** | formData | _string_ | Permission for the custom-script. Valid permission values:   - `private`, usable by only the user who uploaded it   - `group`, usable by all RTR Admins   - `public`, usable by all active-responders and RTR admins |
+| ✅ | **permission\_type** | formData | _string_ | Permission for the custom-script. Valid permission values:   - `private`, usable by only the user who uploaded it   - `group`, usable by all RTR Admins   - `public`, usable by all active-responders and RTR admins |
 |  | **content** | formData | _string_ | The script text that you want to use to upload |
 |  | **platform** | formData | array \(_string_\) | Platforms for the file. Currently supports: windows, mac, linux, . If no platform is provided, it will default to 'windows' |
 
@@ -501,7 +501,7 @@ Delete a custom-script based on the ID given. Can only delete one script at a ti
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | _string_ | File id |
+| ✅ | **ids** | query | _string_ | File id |
 
 **Usage**
 
@@ -552,7 +552,7 @@ Upload a new scripts to replace an existing one.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **id** | formData | _string_ | ID to update |
+| ✅ | **id** | formData | _string_ | ID to update |
 |  | **file** | formData | _file_ | custom-script file to upload.  These should be powershell scripts. |
 |  | **description** | formData | _string_ | File description |
 |  | **name** | formData | _string_ | File name \(if different than actual file name\) |

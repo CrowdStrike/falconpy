@@ -43,7 +43,7 @@ Aggregate events for customer
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Query criteria and settings |
+| ✅ | **body** | body | _string_ | Query criteria and settings |
 
 **Usage**
 
@@ -97,7 +97,7 @@ Aggregate rules within a policy for customer
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Query criteria and settings |
+| ✅ | **body** | body | _string_ | Query criteria and settings |
 
 **Usage**
 
@@ -151,7 +151,7 @@ Aggregate rule groups for customer
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Query criteria and settings |
+| ✅ | **body** | body | _string_ | Query criteria and settings |
 
 **Usage**
 
@@ -205,7 +205,7 @@ Aggregate rules for customer
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Query criteria and settings |
+| ✅ | **body** | body | _string_ | Query criteria and settings |
 
 **Usage**
 
@@ -259,7 +259,7 @@ Get events entities by ID and optionally version
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The events to retrieve, identified by ID |
+| ✅ | **ids** | query | array \(_string_\) | The events to retrieve, identified by ID |
 
 **Usage**
 
@@ -309,7 +309,7 @@ Get the firewall field specifications by ID
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the rule types to retrieve |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the rule types to retrieve |
 
 **Usage**
 
@@ -359,7 +359,7 @@ Get platforms by ID, e.g., windows or mac or droid
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the platforms to retrieve |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the platforms to retrieve |
 
 **Usage**
 
@@ -409,7 +409,7 @@ Get policy container entities by policy ID
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The policy container\(s\) to retrieve, identified by policy ID |
+| ✅ | **ids** | query | array \(_string_\) | The policy container\(s\) to retrieve, identified by policy ID |
 
 **Usage**
 
@@ -460,8 +460,8 @@ Update an identified policy container
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **X-CS-USERNAME** | header | _string_ | The user id |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **X-CS-USERNAME** | header | _string_ | The user id |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -523,7 +523,7 @@ Get rule group entities by ID. These groups do not contain their rule entites, j
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the rule groups to retrieve |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the rule groups to retrieve |
 
 **Usage**
 
@@ -574,11 +574,11 @@ Create new rule group on a platform for a customer with a name and description, 
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **X-CS-USERNAME** | header | _string_ | The user id |
+| ✅ | **X-CS-USERNAME** | header | _string_ | The user id |
 |  | **clone\_id** | query | _string_ | A rule group ID from which to copy rules. If this is provided then the 'rules' property of the body is ignored. |
 |  | **library** | query | _string_ | If this flag is set to true then the rules will be cloned from the clone\_id from the CrowdStrike Firewall Rule Groups Library. |
 |  | **comment** | query | _string_ | Audit log comment for this action |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -652,8 +652,8 @@ Delete rule group entities by ID
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **X-CS-USERNAME** | header | _string_ | The user id |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the rule groups to be deleted |
+| ✅ | **X-CS-USERNAME** | header | _string_ | The user id |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the rule groups to be deleted |
 |  | **comment** | query | _string_ | Audit log comment for this action |
 
 **Usage**
@@ -721,9 +721,9 @@ Update name, description, or enabled status of a rule group, or create, edit, de
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **X-CS-USERNAME** | header | _string_ | The user id |
+| ✅ | **X-CS-USERNAME** | header | _string_ | The user id |
 |  | **comment** | query | _string_ | Audit log comment for this action |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -793,7 +793,7 @@ Get rule entities by ID \(64-bit unsigned int as decimal string\) or Family ID \
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The rules to retrieve, identified by ID |
+| ✅ | **ids** | query | array \(_string_\) | The rules to retrieve, identified by ID |
 
 **Usage**
 

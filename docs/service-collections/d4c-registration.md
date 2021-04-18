@@ -73,7 +73,7 @@ Creates a new account in our system for a customer and generates a script for th
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -110,7 +110,7 @@ Update an Azure service account in our system by with the user-created client\_i
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **id** | query | _string_ | ClientID to use for the Service Principal associated with the customer's Azure account |
+| ✅ | **id** | query | _string_ | ClientID to use for the Service Principal associated with the customer's Azure account |
 
 **Usage**
 
@@ -248,7 +248,7 @@ Creates a new account in our system for a customer and generates a new service a
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 

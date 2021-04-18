@@ -25,7 +25,7 @@ Get Zero Trust Assessment data for one or more hosts by providing agent IDs \(AI
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | One or more agent IDs, which you can find in the data.zta file, or the Falcon console. |
+| ✅ | **ids** | query | array \(_string_\) | One or more agent IDs, which you can find in the data.zta file, or the Falcon console. |
 
 **Usage**
 

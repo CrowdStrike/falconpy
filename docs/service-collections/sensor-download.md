@@ -93,7 +93,7 @@ Download sensor installer by SHA256 ID
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **id** | query | _string_ | SHA256 of the installer to download |
+| ✅ | **id** | query | _string_ | SHA256 of the installer to download |
 
 **Usage**
 
@@ -148,7 +148,7 @@ Get sensor installer details by provided SHA256 IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the installers |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the installers |
 
 **Usage**
 

@@ -36,7 +36,7 @@ Get info about a role
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | ID of a role. Find a role ID from `/customer/queries/roles/v1` or `/users/queries/roles/v1`. |
+| ✅ | **ids** | query | array \(_string_\) | ID of a role. Find a role ID from `/customer/queries/roles/v1` or `/users/queries/roles/v1`. |
 
 **Usage**
 
@@ -87,8 +87,8 @@ Assign one or more roles to a user
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **user\_uuid** | query | _string_ | ID of a user. Find a user's ID from `/users/entities/user/v1`. |
-| :white\_check\_mark: | **body** | body | _string_ | Role ID\(s\) of the role you want to assign |
+| ✅ | **user\_uuid** | query | _string_ | ID of a user. Find a user's ID from `/users/entities/user/v1`. |
+| ✅ | **body** | body | _string_ | Role ID\(s\) of the role you want to assign |
 
 **Usage**
 
@@ -151,8 +151,8 @@ Revoke one or more roles from a user
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **user\_uuid** | query | _string_ | ID of a user. Find a user's ID from `/users/entities/user/v1`. |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | One or more role IDs to revoke. Find a role's ID from `/users/queries/roles/v1`. |
+| ✅ | **user\_uuid** | query | _string_ | ID of a user. Find a user's ID from `/users/entities/user/v1`. |
+| ✅ | **ids** | query | array \(_string_\) | One or more role IDs to revoke. Find a role's ID from `/users/queries/roles/v1`. |
 
 **Usage**
 
@@ -256,7 +256,7 @@ Show role IDs of roles assigned to a user. For more information on each role, pr
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **user\_uuid** | query | _string_ | ID of a user. Find a user's ID from `/users/entities/user/v1`. |
+| ✅ | **user\_uuid** | query | _string_ | ID of a user. Find a user's ID from `/users/entities/user/v1`. |
 
 **Usage**
 
@@ -311,7 +311,7 @@ Get info about a user
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | ID of a user. Find a user's ID from `/users/entities/user/v1`. |
+| ✅ | **ids** | query | array \(_string_\) | ID of a user. Find a user's ID from `/users/entities/user/v1`. |
 
 **Usage**
 
@@ -362,7 +362,7 @@ Create a new user. After creating a user, assign one or more roles with POST /us
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Attributes for this user. `uid` \(required\) is the user's email address, which is their username in Falcon.  Optional attributes:    As a best practice, we recommend omitting `password`. If single sign-on is enabled for your customer account, the `password` attribute is ignored. If single sign-on is not enabled, we send a user activation request to their email address when you create the user with no `password`. The user should use the activation email to set their own password. |
+| ✅ | **body** | body | _string_ | Attributes for this user. `uid` \(required\) is the user's email address, which is their username in Falcon.  Optional attributes:    As a best practice, we recommend omitting `password`. If single sign-on is enabled for your customer account, the `password` attribute is ignored. If single sign-on is not enabled, we send a user activation request to their email address when you create the user with no `password`. The user should use the activation email to set their own password. |
 
 **Usage**
 
@@ -417,7 +417,7 @@ Delete a user permanently
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **user\_uuid** | query | _string_ | ID of a user. Find a user's ID from `/users/entities/user/v1`. |
+| ✅ | **user\_uuid** | query | _string_ | ID of a user. Find a user's ID from `/users/entities/user/v1`. |
 
 **Usage**
 
@@ -472,8 +472,8 @@ Modify an existing user's first or last name
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **user\_uuid** | query | _string_ | ID of a user. Find a user's ID from `/users/entities/user/v1`. |
-| :white\_check\_mark: | **body** | body | _string_ | Attributes for this user. All attributes \(shown below\) are optional. |
+| ✅ | **user\_uuid** | query | _string_ | ID of a user. Find a user's ID from `/users/entities/user/v1`. |
+| ✅ | **body** | body | _string_ | Attributes for this user. All attributes \(shown below\) are optional. |
 
 **Usage**
 
@@ -626,7 +626,7 @@ Get a user's ID by providing a username \(usually an email address\)
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **uid** | query | array \(_string_\) | A username. This is usually the user's email address, but may vary based on your configuration. |
+| ✅ | **uid** | query | array \(_string_\) | A username. This is usually the user's email address, but may vary based on your configuration. |
 
 **Usage**
 

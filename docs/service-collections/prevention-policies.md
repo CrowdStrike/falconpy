@@ -162,8 +162,8 @@ Perform the specified action on the Prevention Policies specified in the request
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **action\_name** | query | _string_ | The action to perform |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **action\_name** | query | _string_ | The action to perform |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -225,7 +225,7 @@ Sets the precedence of Prevention Policies based on the order of IDs specified i
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -279,7 +279,7 @@ Retrieve a set of Prevention Policies by specifying their IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the Prevention Policies to return |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the Prevention Policies to return |
 
 **Usage**
 
@@ -329,7 +329,7 @@ Create Prevention Policies by specifying details about the policy to create
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -383,7 +383,7 @@ Delete a set of Prevention Policies by specifying their IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the Prevention Policies to delete |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the Prevention Policies to delete |
 
 **Usage**
 
@@ -433,7 +433,7 @@ Update Prevention Policies by specifying the ID of the policy and details to upd
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 

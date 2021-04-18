@@ -63,7 +63,7 @@ Search Falcon MalQuery quickly, but with more potential for false positives. Sea
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Fuzzy search parameters. See model for more details. |
+| ✅ | **body** | body | _string_ | Fuzzy search parameters. See model for more details. |
 
 **Usage**
 
@@ -99,7 +99,7 @@ Download a file indexed by MalQuery. Specify the file using its SHA256. Only one
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The file SHA256. |
+| ✅ | **ids** | query | array \(_string_\) | The file SHA256. |
 
 **Usage**
 
@@ -133,7 +133,7 @@ Retrieve indexed files metadata by their hash
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The file SHA256. |
+| ✅ | **ids** | query | array \(_string_\) | The file SHA256. |
 
 **Usage**
 
@@ -167,7 +167,7 @@ Check the status and results of an asynchronous request, such as hunt or exact-s
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | Identifier of a MalQuery request |
+| ✅ | **ids** | query | array \(_string_\) | Identifier of a MalQuery request |
 
 **Usage**
 
@@ -201,7 +201,7 @@ Fetch a zip archive with password 'infected' containing the samples. Call this o
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | _string_ | Multidownload job id |
+| ✅ | **ids** | query | _string_ | Multidownload job id |
 
 **Usage**
 
@@ -236,7 +236,7 @@ Schedule samples for download. Use the result id with the /request endpoint to c
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Download request. See model for more details. |
+| ✅ | **body** | body | _string_ | Download request. See model for more details. |
 
 **Usage**
 
@@ -273,7 +273,7 @@ Search Falcon MalQuery for a combination of hex patterns and strings in order to
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Exact search parameters. See model for more details. |
+| ✅ | **body** | body | _string_ | Exact search parameters. See model for more details. |
 
 **Usage**
 
@@ -310,7 +310,7 @@ Schedule a YARA-based search for execution. Returns a request id which can be us
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Hunt parameters. See model for more details. |
+| ✅ | **body** | body | _string_ | Hunt parameters. See model for more details. |
 
 **Usage**
 

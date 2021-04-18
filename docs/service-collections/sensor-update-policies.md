@@ -39,7 +39,7 @@ Reveals an uninstall token for a specific device. To retrieve the bulk maintenan
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -339,8 +339,8 @@ Perform the specified action on the Sensor Update Policies specified in the requ
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **action\_name** | query | _string_ | The action to perform |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **action\_name** | query | _string_ | The action to perform |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -402,7 +402,7 @@ Sets the precedence of Sensor Update Policies based on the order of IDs specifie
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -456,7 +456,7 @@ Retrieve a set of Sensor Update Policies by specifying their IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the Sensor Update Policies to return |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the Sensor Update Policies to return |
 
 **Usage**
 
@@ -506,7 +506,7 @@ Create Sensor Update Policies by specifying details about the policy to create
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -560,7 +560,7 @@ Delete a set of Sensor Update Policies by specifying their IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the Sensor Update Policies to delete |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the Sensor Update Policies to delete |
 
 **Usage**
 
@@ -610,7 +610,7 @@ Update Sensor Update Policies by specifying the ID of the policy and details to 
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -664,7 +664,7 @@ Retrieve a set of Sensor Update Policies with additional support for uninstall p
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the Sensor Update Policies to return |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the Sensor Update Policies to return |
 
 **Usage**
 
@@ -714,7 +714,7 @@ Create Sensor Update Policies by specifying details about the policy to create w
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -768,7 +768,7 @@ Update Sensor Update Policies by specifying the ID of the policy and details to 
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 

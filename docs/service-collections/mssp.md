@@ -48,7 +48,7 @@ Get link to child customer by child CID\(s\)
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | CID of a child customer |
+| ✅ | **ids** | query | array \(_string_\) | CID of a child customer |
 
 **Usage**
 
@@ -99,7 +99,7 @@ Get CID Group members by CID Group IDs.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **cid\_group\_ids** | query | array \(_string_\) | CID Group IDs to be searched on |
+| ✅ | **cid\_group\_ids** | query | array \(_string_\) | CID Group IDs to be searched on |
 
 **Usage**
 
@@ -155,7 +155,7 @@ Add new CID Group member.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -210,7 +210,7 @@ Delete CID Group members entry.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -265,7 +265,7 @@ Get CID Group\(s\) by ID\(s\).
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **cid\_group\_ids** | query | array \(_string_\) | CID Group IDs to be searched on |
+| ✅ | **cid\_group\_ids** | query | array \(_string_\) | CID Group IDs to be searched on |
 
 **Usage**
 
@@ -321,7 +321,7 @@ Create new CID Group\(s\). Maximum 500 CID Group\(s\) allowed.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -376,7 +376,7 @@ Delete CID Group\(s\) by ID\(s\).
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **cid\_group\_ids** | query | array \(_string_\) | CID group ids to be deleted |
+| ✅ | **cid\_group\_ids** | query | array \(_string_\) | CID group ids to be deleted |
 
 **Usage**
 
@@ -432,7 +432,7 @@ Update existing CID Group\(s\). CID Group ID is expected for each CID Group defi
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -487,7 +487,7 @@ Get MSSP Role assignment\(s\). MSSP Role assignment is of the format :.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | MSSP Role assignment is of the format : |
+| ✅ | **ids** | query | array \(_string_\) | MSSP Role assignment is of the format : |
 
 **Usage**
 
@@ -538,7 +538,7 @@ Assign new MSSP Role\(s\) between User Group and CID Group. It does not revoke e
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -593,7 +593,7 @@ Delete MSSP Role assignment\(s\) between User Group and CID Group. User Group ID
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -648,7 +648,7 @@ Get User Group members by User Group ID\(s\).
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **user\_group\_ids** | query | _string_ | User Group IDs to search for |
+| ✅ | **user\_group\_ids** | query | _string_ | User Group IDs to search for |
 
 **Usage**
 
@@ -701,7 +701,7 @@ Add new User Group member. Maximum 500 members allowed per User Group.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -756,7 +756,7 @@ Delete User Group members entry.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -811,7 +811,7 @@ Get User Group by ID\(s\).
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **user\_group\_ids** | query | array \(_string_\) | User Group IDs to search for |
+| ✅ | **user\_group\_ids** | query | array \(_string_\) | User Group IDs to search for |
 
 **Usage**
 
@@ -867,7 +867,7 @@ Create new User Group\(s\). Maximum 500 User Group\(s\) allowed per customer.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -922,7 +922,7 @@ Delete User Group\(s\) by ID\(s\).
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **user\_group\_ids** | query | array \(_string_\) | User Group IDs |
+| ✅ | **user\_group\_ids** | query | array \(_string_\) | User Group IDs |
 
 **Usage**
 
@@ -978,7 +978,7 @@ Update existing User Group\(s\). User Group ID is expected for each User Group d
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -1094,7 +1094,7 @@ Query a CID Groups members by associated CID.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **cid** | query | _string_ | CID to lookup associated CID group ID |
+| ✅ | **cid** | query | _string_ | CID to lookup associated CID group ID |
 |  | **sort** | query | _string_ | The sort expression used to sort the results |
 |  | **offset** | query | _integer_ | Starting index of overall result set from which to return id |
 |  | **limit** | query | _integer_ | Number of ids to return |
@@ -1292,7 +1292,7 @@ Query User Group member by User UUID.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **user\_uuid** | query | _string_ | User UUID to lookup associated user group ID |
+| ✅ | **user\_uuid** | query | _string_ | User UUID to lookup associated user group ID |
 |  | **sort** | query | _string_ | The sort expression used to sort the results |
 |  | **offset** | query | _integer_ | Starting index of overall result set from which to return ids |
 |  | **limit** | query | _integer_ | Number of ids to return |

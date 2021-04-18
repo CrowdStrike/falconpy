@@ -162,8 +162,8 @@ Perform the specified action on the Firewall Policies specified in the request
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **action\_name** | query | _string_ | The action to perform |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **action\_name** | query | _string_ | The action to perform |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -225,7 +225,7 @@ Sets the precedence of Firewall Policies based on the order of IDs specified in 
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -279,7 +279,7 @@ Retrieve a set of Firewall Policies by specifying their IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the Firewall Policies to return |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the Firewall Policies to return |
 
 **Usage**
 
@@ -329,7 +329,7 @@ Create Firewall Policies by specifying details about the policy to create
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 |  | **clone\_id** | query | _string_ | The policy ID to be cloned from |
 
 **Usage**
@@ -392,7 +392,7 @@ Delete a set of Firewall Policies by specifying their IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The IDs of the Firewall Policies to delete |
+| ✅ | **ids** | query | array \(_string_\) | The IDs of the Firewall Policies to delete |
 
 **Usage**
 
@@ -442,7 +442,7 @@ Update Firewall Policies by specifying the ID of the policy and details to updat
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 

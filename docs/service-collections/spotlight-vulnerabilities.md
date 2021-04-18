@@ -25,7 +25,7 @@ Get details on vulnerabilities by providing one or more IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | One or more vulnerability IDs \(max: 400\). Find vulnerability IDs with GET /spotlight/queries/vulnerabilities/v1 |
+| ✅ | **ids** | query | array \(_string_\) | One or more vulnerability IDs \(max: 400\). Find vulnerability IDs with GET /spotlight/queries/vulnerabilities/v1 |
 
 **Usage**
 
@@ -78,7 +78,7 @@ Search for Vulnerabilities in your environment by providing an FQL filter and pa
 |  | **after** | query | _string_ | A pagination token used with the `limit` parameter to manage pagination of results. On your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from the previous response to continue from that place in the results. |  |  |
 |  | **limit** | query | _integer_ | The number of items to return in this response \(default: 100, max: 400\). Use with the after parameter to manage pagination of results. |  |  |
 |  | **sort** | query | _string_ | Sort vulnerabilities by their properties. Common sort options include:  created\_timestamp | desc&lt;/li&gt;closed\_timestamp | asc&lt;/li&gt;&lt;/ul&gt; |
-| :white\_check\_mark: | **filter** | query | _string_ | Filter items using a query in Falcon Query Language \(FQL\). Wildcards \* are unsupported.   Common filter options include:   |  |  |
+| ✅ | **filter** | query | _string_ | Filter items using a query in Falcon Query Language \(FQL\). Wildcards \* are unsupported.   Common filter options include:   |  |  |
 
 **Usage**
 

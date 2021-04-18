@@ -31,7 +31,7 @@ Download IOC packs, PCAP files, and other analysis artifacts.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **id** | query | _string_ | ID of an artifact, such as an IOC pack, PCAP file, or actor image. Find an artifact ID in a report or summary. |
+| ✅ | **id** | query | _string_ | ID of an artifact, such as an IOC pack, PCAP file, or actor image. Find an artifact ID in a report or summary. |
 |  | **name** | query | _string_ | The name given to your downloaded file. |
 |  | **Accept-Encoding** | header | _string_ | Format used to compress your downloaded file. Currently, you must provide the value `gzip`, the only valid format. |
 
@@ -97,7 +97,7 @@ Get a short summary version of a sandbox report.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | ID of a summary. Find a summary ID from the response when submitting a malware sample or search with `/falconx/queries/reports/v1`. |
+| ✅ | **ids** | query | array \(_string_\) | ID of a summary. Find a summary ID from the response when submitting a malware sample or search with `/falconx/queries/reports/v1`. |
 
 **Usage**
 
@@ -147,7 +147,7 @@ Get a full sandbox report.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | ID of a report. Find a report ID from the response when submitting a malware sample or search with `/falconx/queries/reports/v1`. |
+| ✅ | **ids** | query | array \(_string_\) | ID of a report. Find a report ID from the response when submitting a malware sample or search with `/falconx/queries/reports/v1`. |
 
 **Usage**
 
@@ -197,7 +197,7 @@ Delete report based on the report ID. Operation can be checked for success by po
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | _string_ | ID of a report. |
+| ✅ | **ids** | query | _string_ | ID of a report. |
 
 **Usage**
 
@@ -247,7 +247,7 @@ Check the status of a sandbox analysis. Time required for analysis varies but is
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | ID of a submitted malware sample. Find a submission ID from the response when submitting a malware sample or search with `/falconx/queries/submissions/v1`. |
+| ✅ | **ids** | query | array \(_string_\) | ID of a submitted malware sample. Find a submission ID from the response when submitting a malware sample or search with `/falconx/queries/submissions/v1`. |
 
 **Usage**
 
@@ -297,7 +297,7 @@ Submit an uploaded file or a URL for sandbox analysis. Time required for analysi
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Submit either a URL or a sample SHA256 for sandbox analysis. The sample file must have been previously uploaded through `/samples/entities/samples/v2`. You must specify a JSON object that includes the `falconx.SubmissionParametersV1` key/value pairs shown below.  **`environment_id`**: Specifies the sandbox environment used for analysis. Values:  - `300`: Linux Ubuntu 16.04, 64-bit - `200`: Android \(static analysis\) - `160`: Windows 10, 64-bit - `110`: Windows 7, 64-bit - `100`: Windows 7, 32-bit  **`sha256`** ID of the sample, which is a SHA256 hash value. Find a sample ID from the response when uploading a malware sample or search with `/falconx/queries/submissions/v1`.The `url` parameter must be unset if `sha256` is used.  **`url`** A web page or file URL. It can be HTTP\(S\) or FTP. The `sha256` parameter must be unset if `url` is used.  **`action_script`** \(optional\): Runtime script for sandbox analysis. Values:  - `default` - `default_maxantievasion` - `default_randomfiles` - `default_randomtheme` - `default_openie`  **`command_line`** \(optional\): Command line script passed to the submitted file at runtime. Max length: 2048 characters  **`document_password`** \(optional\): Auto-filled for Adobe or Office files that prompt for a password. Max length: 32 characters  **`enable_tor`** \(optional\): If `true`, sandbox analysis routes network traffic via TOR. Default: `false`.  **`submit_name`** \(optional\): Name of the malware sample that's used for file type detection and analysis  **`system_date`** \(optional\): Set a custom date in the format `yyyy-MM-dd` for the sandbox environment  **`system_time`** \(optional\): Set a custom time in the format `HH:mm` for the sandbox environment. |
+| ✅ | **body** | body | _string_ | Submit either a URL or a sample SHA256 for sandbox analysis. The sample file must have been previously uploaded through `/samples/entities/samples/v2`. You must specify a JSON object that includes the `falconx.SubmissionParametersV1` key/value pairs shown below.  **`environment_id`**: Specifies the sandbox environment used for analysis. Values:  - `300`: Linux Ubuntu 16.04, 64-bit - `200`: Android \(static analysis\) - `160`: Windows 10, 64-bit - `110`: Windows 7, 64-bit - `100`: Windows 7, 32-bit  **`sha256`** ID of the sample, which is a SHA256 hash value. Find a sample ID from the response when uploading a malware sample or search with `/falconx/queries/submissions/v1`.The `url` parameter must be unset if `sha256` is used.  **`url`** A web page or file URL. It can be HTTP\(S\) or FTP. The `sha256` parameter must be unset if `url` is used.  **`action_script`** \(optional\): Runtime script for sandbox analysis. Values:  - `default` - `default_maxantievasion` - `default_randomfiles` - `default_randomtheme` - `default_openie`  **`command_line`** \(optional\): Command line script passed to the submitted file at runtime. Max length: 2048 characters  **`document_password`** \(optional\): Auto-filled for Adobe or Office files that prompt for a password. Max length: 32 characters  **`enable_tor`** \(optional\): If `true`, sandbox analysis routes network traffic via TOR. Default: `false`.  **`submit_name`** \(optional\): Name of the malware sample that's used for file type detection and analysis  **`system_date`** \(optional\): Set a custom date in the format `yyyy-MM-dd` for the sandbox environment  **`system_time`** \(optional\): Set a custom time in the format `HH:mm` for the sandbox environment. |
 
 **Usage**
 
@@ -478,7 +478,7 @@ Retrieves the file associated with the given ID \(SHA256\)
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
 |  | **X-CS-USERUUID** | header | _string_ | User UUID |
-| :white\_check\_mark: | **ids** | query | _string_ | The file SHA256. |
+| ✅ | **ids** | query | _string_ | The file SHA256. |
 |  | **password\_protected** | query | _string_ | Flag whether the sample should be zipped and password protected with pass='infected' |
 
 **Usage**
@@ -547,9 +547,9 @@ Upload a file for sandbox analysis. After uploading, use `/falconx/entities/subm
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
 |  | **X-CS-USERUUID** | header | _string_ | User UUID |
-| :white\_check\_mark: | **body** | body | _string_ | Content of the uploaded sample in binary format. For example, use `--data-binary @$FILE_PATH` when using cURL. Max file size: 100 MB.  Accepted file formats:  - Portable executables: `.exe`, `.scr`, `.pif`, `.dll`, `.com`, `.cpl`, etc. - Office documents: `.doc`, `.docx`, `.ppt`, `.pps`, `.pptx`, `.ppsx`, `.xls`, `.xlsx`, `.rtf`, `.pub` - PDF - APK - Executable JAR - Windows script component: `.sct` - Windows shortcut: `.lnk` - Windows help: `.chm` - HTML application: `.hta` - Windows script file: `.wsf` - Javascript: `.js` - Visual Basic: `.vbs`,  `.vbe` - Shockwave Flash: `.swf` - Perl: `.pl` - Powershell: `.ps1`, `.psd1`, `.psm1` - Scalable vector graphics: `.svg` - Python: `.py` - Linux ELF executables - Email files: MIME RFC 822 `.eml`, Outlook `.msg`. |
-| :white\_check\_mark: | **upfile** | formData | _file_ | The binary file. |
-| :white\_check\_mark: | **file\_name** | query | _string_ | Name of the file. |
+| ✅ | **body** | body | _string_ | Content of the uploaded sample in binary format. For example, use `--data-binary @$FILE_PATH` when using cURL. Max file size: 100 MB.  Accepted file formats:  - Portable executables: `.exe`, `.scr`, `.pif`, `.dll`, `.com`, `.cpl`, etc. - Office documents: `.doc`, `.docx`, `.ppt`, `.pps`, `.pptx`, `.ppsx`, `.xls`, `.xlsx`, `.rtf`, `.pub` - PDF - APK - Executable JAR - Windows script component: `.sct` - Windows shortcut: `.lnk` - Windows help: `.chm` - HTML application: `.hta` - Windows script file: `.wsf` - Javascript: `.js` - Visual Basic: `.vbs`,  `.vbe` - Shockwave Flash: `.swf` - Perl: `.pl` - Powershell: `.ps1`, `.psd1`, `.psm1` - Scalable vector graphics: `.svg` - Python: `.py` - Linux ELF executables - Email files: MIME RFC 822 `.eml`, Outlook `.msg`. |
+| ✅ | **upfile** | formData | _file_ | The binary file. |
+| ✅ | **file\_name** | query | _string_ | Name of the file. |
 |  | **comment** | query | _string_ | A descriptive comment to identify the file for other users. |
 |  | **is\_confidential** | query | _boolean_ | Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon console.  - `true`: File is only shown to users within your customer account - `false`: File can be seen by other CrowdStrike customers   Default: `true`. |
 
@@ -632,7 +632,7 @@ Removes a sample, including file, meta and submissions from the collection
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
 |  | **X-CS-USERUUID** | header | _string_ | User UUID |
-| :white\_check\_mark: | **ids** | query | _string_ | The file SHA256. |
+| ✅ | **ids** | query | _string_ | The file SHA256. |
 
 **Usage**
 
@@ -692,7 +692,7 @@ Retrieves a list with sha256 of samples that exist and customer has rights to ac
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
 |  | **X-CS-USERUUID** | header | _string_ | User UUID |
-| :white\_check\_mark: | **body** | body | _string_ | Pass a list of sha256s to check if the exist. It will be returned the list of existing hashes. |
+| ✅ | **body** | body | _string_ | Pass a list of sha256s to check if the exist. It will be returned the list of existing hashes. |
 
 **Usage**
 

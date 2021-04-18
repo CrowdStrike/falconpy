@@ -28,7 +28,7 @@ Get a set of IOA Exclusions by specifying their IDs
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The ids of the exclusions to retrieve |
+| ✅ | **ids** | query | array \(_string_\) | The ids of the exclusions to retrieve |
 
 **Usage**
 
@@ -62,7 +62,7 @@ Create the IOA exclusions
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 
@@ -98,7 +98,7 @@ Delete the IOA exclusions by id
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | The ids of the exclusions to delete |
+| ✅ | **ids** | query | array \(_string_\) | The ids of the exclusions to delete |
 |  | **comment** | query | _string_ | Explains why this exclusions was deleted |
 
 **Usage**
@@ -137,7 +137,7 @@ Update the IOA exclusions
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
+| ✅ | **body** | body | _string_ |  |
 
 **Usage**
 

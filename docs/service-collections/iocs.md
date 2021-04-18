@@ -33,8 +33,8 @@ Number of hosts in your customer account that have observed a given custom IOC
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **type** | query | _string_ | The type of the indicator. Valid types include:  sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  domain: A domain name. Length - min: 1, max: 200.  ipv4: An IPv4 address. Must be a valid IP address.  ipv6: An IPv6 address. Must be a valid IP address. |
-| :white\_check\_mark: | **value** | query | _string_ | The string representation of the indicator |
+| ✅ | **type** | query | _string_ | The type of the indicator. Valid types include:  sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  domain: A domain name. Length - min: 1, max: 200.  ipv4: An IPv4 address. Must be a valid IP address.  ipv6: An IPv6 address. Must be a valid IP address. |
+| ✅ | **value** | query | _string_ | The string representation of the indicator |
 
 **Usage**
 
@@ -91,8 +91,8 @@ Get an IOC by providing a type and value
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **type** | query | _string_ | The type of the indicator. Valid types include:  sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  domain: A domain name. Length - min: 1, max: 200.  ipv4: An IPv4 address. Must be a valid IP address.  ipv6: An IPv6 address. Must be a valid IP address. |
-| :white\_check\_mark: | **value** | query | _string_ | The string representation of the indicator |
+| ✅ | **type** | query | _string_ | The type of the indicator. Valid types include:  sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  domain: A domain name. Length - min: 1, max: 200.  ipv4: An IPv4 address. Must be a valid IP address.  ipv6: An IPv6 address. Must be a valid IP address. |
+| ✅ | **value** | query | _string_ | The string representation of the indicator |
 
 **Usage**
 
@@ -149,7 +149,7 @@ Create a new IOC
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Create a new IOC by providing a JSON object that includes these key/value pairs:  **type** \(required\): The type of the indicator. Valid values:  - sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  - md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  - domain: A domain name. Length - min: 1, max: 200.  - ipv4: An IPv4 address. Must be a valid IP address.  - ipv6: An IPv6 address. Must be a valid IP address.  **value** \(required\): The string representation of the indicator.  **policy** \(required\): Action to take when a host observes the custom IOC. Values:  - detect: Enable detections for this custom IOC  - none: Disable detections for this custom IOC  **share\_level** \(optional\): Visibility of this custom IOC. All custom IOCs are visible only within your customer account, so only one value is valid:  - red  **expiration\_days** \(optional\): Number of days this custom IOC is active. Only applies for the types `domain`, `ipv4`, and `ipv6`.  **source** \(optional\): The source where this indicator originated. This can be used for tracking where this indicator was defined. Limit 200 characters.  **description** \(optional\): Descriptive label for this custom IOC |
+| ✅ | **body** | body | _string_ | Create a new IOC by providing a JSON object that includes these key/value pairs:  **type** \(required\): The type of the indicator. Valid values:  - sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  - md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  - domain: A domain name. Length - min: 1, max: 200.  - ipv4: An IPv4 address. Must be a valid IP address.  - ipv6: An IPv6 address. Must be a valid IP address.  **value** \(required\): The string representation of the indicator.  **policy** \(required\): Action to take when a host observes the custom IOC. Values:  - detect: Enable detections for this custom IOC  - none: Disable detections for this custom IOC  **share\_level** \(optional\): Visibility of this custom IOC. All custom IOCs are visible only within your customer account, so only one value is valid:  - red  **expiration\_days** \(optional\): Number of days this custom IOC is active. Only applies for the types `domain`, `ipv4`, and `ipv6`.  **source** \(optional\): The source where this indicator originated. This can be used for tracking where this indicator was defined. Limit 200 characters.  **description** \(optional\): Descriptive label for this custom IOC |
 
 **Usage**
 
@@ -204,8 +204,8 @@ Delete an IOC by providing a type and value
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **type** | query | _string_ | The type of the indicator. Valid types include:  sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  domain: A domain name. Length - min: 1, max: 200.  ipv4: An IPv4 address. Must be a valid IP address.  ipv6: An IPv6 address. Must be a valid IP address. |
-| :white\_check\_mark: | **value** | query | _string_ | The string representation of the indicator |
+| ✅ | **type** | query | _string_ | The type of the indicator. Valid types include:  sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  domain: A domain name. Length - min: 1, max: 200.  ipv4: An IPv4 address. Must be a valid IP address.  ipv6: An IPv6 address. Must be a valid IP address. |
+| ✅ | **value** | query | _string_ | The string representation of the indicator |
 
 **Usage**
 
@@ -262,9 +262,9 @@ Update an IOC by providing a type and value
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ |  |
-| :white\_check\_mark: | **type** | query | _string_ | The type of the indicator. Valid types include:  sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  domain: A domain name. Length - min: 1, max: 200.  ipv4: An IPv4 address. Must be a valid IP address.  ipv6: An IPv6 address. Must be a valid IP address. |
-| :white\_check\_mark: | **value** | query | _string_ | The string representation of the indicator |
+| ✅ | **body** | body | _string_ |  |
+| ✅ | **type** | query | _string_ | The type of the indicator. Valid types include:  sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  domain: A domain name. Length - min: 1, max: 200.  ipv4: An IPv4 address. Must be a valid IP address.  ipv6: An IPv6 address. Must be a valid IP address. |
+| ✅ | **value** | query | _string_ | The string representation of the indicator |
 
 **Usage**
 
@@ -329,8 +329,8 @@ Find hosts that have observed a given custom IOC. For details about those hosts,
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **type** | query | _string_ | The type of the indicator. Valid types include:  sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  domain: A domain name. Length - min: 1, max: 200.  ipv4: An IPv4 address. Must be a valid IP address.  ipv6: An IPv6 address. Must be a valid IP address. |
-| :white\_check\_mark: | **value** | query | _string_ | The string representation of the indicator |
+| ✅ | **type** | query | _string_ | The type of the indicator. Valid types include:  sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  domain: A domain name. Length - min: 1, max: 200.  ipv4: An IPv4 address. Must be a valid IP address.  ipv6: An IPv6 address. Must be a valid IP address. |
+| ✅ | **value** | query | _string_ | The string representation of the indicator |
 |  | **limit** | query | _string_ | The first process to return, where 0 is the latest offset. Use with the offset parameter to manage pagination of results. |
 |  | **offset** | query | _string_ | The first process to return, where 0 is the latest offset. Use with the limit parameter to manage pagination of results. |
 
@@ -475,9 +475,9 @@ Search for processes associated with a custom IOC
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **type** | query | _string_ | The type of the indicator. Valid types include:  sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  domain: A domain name. Length - min: 1, max: 200.  ipv4: An IPv4 address. Must be a valid IP address.  ipv6: An IPv6 address. Must be a valid IP address. |
-| :white\_check\_mark: | **value** | query | _string_ | The string representation of the indicator |
-| :white\_check\_mark: | **device\_id** | query | _string_ | Specify a host's ID to return only processes from that host. Get a host's ID from GET /devices/queries/devices/v1, the Falcon console, or the Streaming API. |
+| ✅ | **type** | query | _string_ | The type of the indicator. Valid types include:  sha256: A hex-encoded sha256 hash string. Length - min: 64, max: 64.  md5: A hex-encoded md5 hash string. Length - min 32, max: 32.  domain: A domain name. Length - min: 1, max: 200.  ipv4: An IPv4 address. Must be a valid IP address.  ipv6: An IPv6 address. Must be a valid IP address. |
+| ✅ | **value** | query | _string_ | The string representation of the indicator |
+| ✅ | **device\_id** | query | _string_ | Specify a host's ID to return only processes from that host. Get a host's ID from GET /devices/queries/devices/v1, the Falcon console, or the Streaming API. |
 |  | **limit** | query | _string_ | The first process to return, where 0 is the latest offset. Use with the offset parameter to manage pagination of results. |
 |  | **offset** | query | _string_ | The first process to return, where 0 is the latest offset. Use with the limit parameter to manage pagination of results. |
 
@@ -541,7 +541,7 @@ For the provided ProcessID retrieve the process details
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **ids** | query | array \(_string_\) | ProcessID for the running process you want to lookup |
+| ✅ | **ids** | query | array \(_string_\) | ProcessID for the running process you want to lookup |
 
 **Usage**
 
