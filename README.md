@@ -20,7 +20,7 @@ This SDK provides two distinct methods for interacting with CrowdStrike's Falcon
 ![CI Tests](https://github.com/CrowdStrike/falconpy/workflows/Python%20package/badge.svg)<br/>
 Stable releases of FalconPy are available on the Python Package Index:
 ```shell
-$ python3 -m pip install crowdstrike-falconpy
+python3 -m pip install crowdstrike-falconpy
 ```
 
 If you'd like to try the *absolute bleeding edge*, an automated GitHub action releases a test package with every merged pull request containing the string
@@ -28,12 +28,12 @@ If you'd like to try the *absolute bleeding edge*, an automated GitHub action re
 
 To install this testing version of the package, use the command:
 ```shell
-$ python3 -m pip install -i https://test.pypi.org/simple crowdstrike-falconpy
+python3 -m pip install -i https://test.pypi.org/simple crowdstrike-falconpy
 ```
 
 To uninstall and remove FalconPy:
 ```shell
-$ python3 -m pip uninstall crowdstrike-falconpy
+python3 -m pip uninstall crowdstrike-falconpy
 ```
 
 # Service classes
