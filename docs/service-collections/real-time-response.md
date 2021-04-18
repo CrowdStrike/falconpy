@@ -44,7 +44,7 @@ Get aggregates on session data.
 
 | Required | Name | Type | Datatype | Description |
 | :---: | :--- | :--- | :--- | :--- |
-| :white\_check\_mark: | **body** | body | _string_ | Supported aggregations:  - `term` - `date_range`  Supported aggregation members:  **`date_ranges`** If peforming a date range query specify the **`from`** and **`to`** date ranges.  These can be in common date formats like `2019-07-18` or `now` **`field`** Term you want to aggregate on.  If doing a `date_range` query, this is the date field you want to apply the date ranges to **`filter`** Optional filter criteria in the form of an FQL query. For more information about FQL queries, see our [FQL documentation in Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide). **`name`** Name of the aggregation **`size`** Size limit to apply to the queries. |
+| :white\_check\_mark: | **body** | body | _string_ | Supported aggregations:  - `term` - `date_range`  Supported aggregation members:  **`date_ranges`** If performing a date range query specify the **`from`** and **`to`** date ranges.  These can be in common date formats like `2019-07-18` or `now` **`field`** Term you want to aggregate on.  If doing a `date_range` query, this is the date field you want to apply the date ranges to **`filter`** Optional filter criteria in the form of an FQL query. For more information about FQL queries, see our [FQL documentation in Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide). **`name`** Name of the aggregation **`size`** Size limit to apply to the queries. |
 
 **Usage**
 

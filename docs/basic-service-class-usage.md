@@ -7,7 +7,7 @@
 Service Classes support multiple methods of authentication depending on the needs of your solution.
 
 * [Credential Authentication](basic-service-class-usage.md#credential-authentication)
-* [Object Authentcation](basic-service-class-usage.md#object-authentication)
+* [Object Authentication](basic-service-class-usage.md#object-authentication)
 * [Legacy Authentication](basic-service-class-usage.md#legacy-authentication)
 * [Example Results](basic-service-class-usage.md#example-result)
 

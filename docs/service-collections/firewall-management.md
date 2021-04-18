@@ -576,7 +576,7 @@ Create new rule group on a platform for a customer with a name and description, 
 | :---: | :--- | :--- | :--- | :--- |
 | :white\_check\_mark: | **X-CS-USERNAME** | header | _string_ | The user id |
 |  | **clone\_id** | query | _string_ | A rule group ID from which to copy rules. If this is provided then the 'rules' property of the body is ignored. |
-|  | **library** | query | _string_ | If this flag is set to true then the rules will be cloned from the clone\_id from the CrowdStrike Firewal Rule Groups Library. |
+|  | **library** | query | _string_ | If this flag is set to true then the rules will be cloned from the clone\_id from the CrowdStrike Firewall Rule Groups Library. |
 |  | **comment** | query | _string_ | Audit log comment for this action |
 | :white\_check\_mark: | **body** | body | _string_ |  |
 
