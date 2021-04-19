@@ -110,14 +110,14 @@ Get info about indicators that match provided FQL filters.
 
 **Parameters**
 
-| Required | Name | Type | Datatype | Description |  |
-| :---: | :--- | :--- | :--- | :--- | :--- |
-|  | **offset** | query | _integer_ | Set the starting row number to return indicators from. Defaults to 0. |  |
-|  | **limit** | query | _integer_ | Set the number of indicators to return. The number must be between 1 and 50000 |  |
-|  | **sort** | query | _string_ | Order fields in ascending or descending order.  Ex: published\_date | asc. |
-|  | **filter** | query | _string_ | Filter your query by specifying FQL filter parameters. Filter parameters include:  \_marker, actors, deleted, domain\_types, id, indicator, ip\_address\_types, kill\_chains, labels, labels.created\_on, labels.last\_valid\_on, labels.name, last\_updated, malicious\_confidence, malware\_families, published\_date, reports, targets, threat\_types, type, vulnerabilities. |  |
-|  | **q** | query | _string_ | Perform a generic substring search across all fields. |  |
-|  | **include\_deleted** | query | _boolean_ | If true, include both published and deleted indicators in the response. Defaults to false. |  |
+| Required | Name | Type | Datatype | Description |
+| :---: | :--- | :--- | :--- | :--- |
+|  | **offset** | query | _integer_ | Set the starting row number to return indicators from. Defaults to 0. |
+|  | **limit** | query | _integer_ | Set the number of indicators to return. The number must be between 1 and 50000 |
+|  | **sort** | query | _string_ | Order fields in ascending or descending order.  Ex: published\_date \| asc. |
+|  | **filter** | query | _string_ | Filter your query by specifying FQL filter parameters. Filter parameters include:  \_marker, actors, deleted, domain\_types, id, indicator, ip\_address\_types, kill\_chains, labels, labels.created\_on, labels.last\_valid\_on, labels.name, last\_updated, malicious\_confidence, malware\_families, published\_date, reports, targets, threat\_types, type, vulnerabilities. |
+|  | **q** | query | _string_ | Perform a generic substring search across all fields. |
+|  | **include\_deleted** | query | _boolean_ | If true, include both published and deleted indicators in the response. Defaults to false. |
 
 **Usage**
 
@@ -179,14 +179,14 @@ Get info about reports that match provided FQL filters.
 
 **Parameters**
 
-| Required | Name | Type | Datatype | Description |  |
-| :---: | :--- | :--- | :--- | :--- | :--- |
-|  | **offset** | query | _integer_ | Set the starting row number to return reports from. Defaults to 0. |  |
-|  | **limit** | query | _integer_ | Set the number of reports to return. The value must be between 1 and 5000. |  |
-|  | **sort** | query | _string_ | Order fields in ascending or descending order. Ex: created\_date | asc. |
-|  | **filter** | query | _string_ | Filter your query by specifying FQL filter parameters. Filter parameters include:  actors, actors.id, actors.name, actors.slug, actors.url, created\_date, description, id, last\_modified\_date, motivations, motivations.id, motivations.slug, motivations.value, name, name.raw, short\_description, slug, sub\_type, sub\_type.id, sub\_type.name, sub\_type.slug, tags, tags.id, tags.slug, tags.value, target\_countries, target\_countries.id, target\_countries.slug, target\_countries.value, target\_industries, target\_industries.id, target\_industries.slug, target\_industries.value, type, type.id, type.name, type.slug, url. |  |
-|  | **q** | query | _string_ | Perform a generic substring search across all fields. |  |
-|  | **fields** | query | array \(_string_\) | The fields to return, or a predefined set of fields in the form of the collection name surrounded by two underscores like:  .  Ex: slug **full**.  Defaults to **basic**. |  |
+| Required | Name | Type | Datatype | Description |
+| :---: | :--- | :--- | :--- | :--- |
+|  | **offset** | query | _integer_ | Set the starting row number to return reports from. Defaults to 0. |
+|  | **limit** | query | _integer_ | Set the number of reports to return. The value must be between 1 and 5000. |
+|  | **sort** | query | _string_ | Order fields in ascending or descending order. Ex: created\_date \| asc. |
+|  | **filter** | query | _string_ | Filter your query by specifying FQL filter parameters. Filter parameters include:  actors, actors.id, actors.name, actors.slug, actors.url, created\_date, description, id, last\_modified\_date, motivations, motivations.id, motivations.slug, motivations.value, name, name.raw, short\_description, slug, sub\_type, sub\_type.id, sub\_type.name, sub\_type.slug, tags, tags.id, tags.slug, tags.value, target\_countries, target\_countries.id, target\_countries.slug, target\_countries.value, target\_industries, target\_industries.id, target\_industries.slug, target\_industries.value, type, type.id, type.name, type.slug, url. |
+|  | **q** | query | _string_ | Perform a generic substring search across all fields. |
+|  | **fields** | query | array \(_string_\) | The fields to return, or a predefined set of fields in the form of the collection name surrounded by two underscores like:  .  Ex: slug **full**.  Defaults to **basic**. |
 
 **Usage**
 
@@ -675,13 +675,13 @@ Get actor IDs that match provided FQL filters.
 
 **Parameters**
 
-| Required | Name | Type | Datatype | Description |  |
-| :---: | :--- | :--- | :--- | :--- | :--- |
-|  | **offset** | query | _integer_ | Set the starting row number to return actors IDs from. Defaults to 0. |  |
-|  | **limit** | query | _integer_ | Set the number of actor IDs to return. The value must be between 1 and 5000. |  |
-|  | **sort** | query | _string_ | Order fields in ascending or descending order.  Ex: created\_date | asc. |
-|  | **filter** | query | _string_ | Filter your query by specifying FQL filter parameters. Filter parameters include:  actors, actors.id, actors.name, actors.slug, actors.url, created\_date, description, id, last\_modified\_date, motivations, motivations.id, motivations.slug, motivations.value, name, name.raw, short\_description, slug, sub\_type, sub\_type.id, sub\_type.name, sub\_type.slug, tags, tags.id, tags.slug, tags.value, target\_countries, target\_countries.id, target\_countries.slug, target\_countries.value, target\_industries, target\_industries.id, target\_industries.slug, target\_industries.value, type, type.id, type.name, type.slug, url. |  |
-|  | **q** | query | _string_ | Perform a generic substring search across all fields. |  |
+| Required | Name | Type | Datatype | Description |
+| :---: | :--- | :--- | :--- | :--- |
+|  | **offset** | query | _integer_ | Set the starting row number to return actors IDs from. Defaults to 0. |
+|  | **limit** | query | _integer_ | Set the number of actor IDs to return. The value must be between 1 and 5000. |
+|  | **sort** | query | _string_ | Order fields in ascending or descending order.  Ex: created\_date \| asc. |
+|  | **filter** | query | _string_ | Filter your query by specifying FQL filter parameters. Filter parameters include:  actors, actors.id, actors.name, actors.slug, actors.url, created\_date, description, id, last\_modified\_date, motivations, motivations.id, motivations.slug, motivations.value, name, name.raw, short\_description, slug, sub\_type, sub\_type.id, sub\_type.name, sub\_type.slug, tags, tags.id, tags.slug, tags.value, target\_countries, target\_countries.id, target\_countries.slug, target\_countries.value, target\_industries, target\_industries.id, target\_industries.slug, target\_industries.value, type, type.id, type.name, type.slug, url. |
+|  | **q** | query | _string_ | Perform a generic substring search across all fields. |
 
 **Usage**
 
@@ -741,14 +741,14 @@ Get indicators IDs that match provided FQL filters.
 
 **Parameters**
 
-| Required | Name | Type | Datatype | Description |  |
-| :---: | :--- | :--- | :--- | :--- | :--- |
-|  | **offset** | query | _integer_ | Set the starting row number to return indicator IDs from. Defaults to 0. |  |
-|  | **limit** | query | _integer_ | Set the number of indicator IDs to return. The number must be between 1 and 50000 |  |
-|  | **sort** | query | _string_ | Order fields in ascending or descending order.  Ex: published\_date | asc. |
-|  | **filter** | query | _string_ | Filter your query by specifying FQL filter parameters. Filter parameters include:  \_marker, actors, deleted, domain\_types, id, indicator, ip\_address\_types, kill\_chains, labels, labels.created\_on, labels.last\_valid\_on, labels.name, last\_updated, malicious\_confidence, malware\_families, published\_date, reports, targets, threat\_types, type, vulnerabilities. |  |
-|  | **q** | query | _string_ | Perform a generic substring search across all fields. |  |
-|  | **include\_deleted** | query | _boolean_ | If true, include both published and deleted indicators in the response. Defaults to false. |  |
+| Required | Name | Type | Datatype | Description |
+| :---: | :--- | :--- | :--- | :--- |
+|  | **offset** | query | _integer_ | Set the starting row number to return indicator IDs from. Defaults to 0. |
+|  | **limit** | query | _integer_ | Set the number of indicator IDs to return. The number must be between 1 and 50000 |
+|  | **sort** | query | _string_ | Order fields in ascending or descending order.  Ex: published\_date \| asc. |
+|  | **filter** | query | _string_ | Filter your query by specifying FQL filter parameters. Filter parameters include:  \_marker, actors, deleted, domain\_types, id, indicator, ip\_address\_types, kill\_chains, labels, labels.created\_on, labels.last\_valid\_on, labels.name, last\_updated, malicious\_confidence, malware\_families, published\_date, reports, targets, threat\_types, type, vulnerabilities. |
+|  | **q** | query | _string_ | Perform a generic substring search across all fields. |
+|  | **include\_deleted** | query | _boolean_ | If true, include both published and deleted indicators in the response. Defaults to false. |
 
 **Usage**
 
@@ -810,13 +810,13 @@ Get report IDs that match provided FQL filters.
 
 **Parameters**
 
-| Required | Name | Type | Datatype | Description |  |
-| :---: | :--- | :--- | :--- | :--- | :--- |
-|  | **offset** | query | _integer_ | Set the starting row number to return report IDs from. Defaults to 0. |  |
-|  | **limit** | query | _integer_ | Set the number of report IDs to return. The value must be between 1 and 5000. |  |
-|  | **sort** | query | _string_ | Order fields in ascending or descending order.  Ex: created\_date | asc. |
-|  | **filter** | query | _string_ | Filter your query by specifying FQL filter parameters. Filter parameters include:  actors, actors.id, actors.name, actors.slug, actors.url, created\_date, description, id, last\_modified\_date, motivations, motivations.id, motivations.slug, motivations.value, name, name.raw, short\_description, slug, sub\_type, sub\_type.id, sub\_type.name, sub\_type.slug, tags, tags.id, tags.slug, tags.value, target\_countries, target\_countries.id, target\_countries.slug, target\_countries.value, target\_industries, target\_industries.id, target\_industries.slug, target\_industries.value, type, type.id, type.name, type.slug, url. |  |
-|  | **q** | query | _string_ | Perform a generic substring search across all fields. |  |
+| Required | Name | Type | Datatype | Description |
+| :---: | :--- | :--- | :--- | :--- |
+|  | **offset** | query | _integer_ | Set the starting row number to return report IDs from. Defaults to 0. |
+|  | **limit** | query | _integer_ | Set the number of report IDs to return. The value must be between 1 and 5000. |
+|  | **sort** | query | _string_ | Order fields in ascending or descending order.  Ex: created\_date \| asc. |
+|  | **filter** | query | _string_ | Filter your query by specifying FQL filter parameters. Filter parameters include:  actors, actors.id, actors.name, actors.slug, actors.url, created\_date, description, id, last\_modified\_date, motivations, motivations.id, motivations.slug, motivations.value, name, name.raw, short\_description, slug, sub\_type, sub\_type.id, sub\_type.name, sub\_type.slug, tags, tags.id, tags.slug, tags.value, target\_countries, target\_countries.id, target\_countries.slug, target\_countries.value, target\_industries, target\_industries.id, target\_industries.slug, target\_industries.value, type, type.id, type.name, type.slug, url. |
+|  | **q** | query | _string_ | Perform a generic substring search across all fields. |
 
 **Usage**
 
@@ -876,18 +876,18 @@ Search for rule IDs that match provided filter criteria.
 
 **Parameters**
 
-| Required | Name | Type | Datatype | Description |  |
-| :---: | :--- | :--- | :--- | :--- | :--- |
-|  | **offset** | query | _integer_ | Set the starting row number to return reports from. Defaults to 0. |  |
+| Required | Name | Type | Datatype | Description |
+| :---: | :--- | :--- | :--- | :--- |
+|  | **offset** | query | _integer_ | Set the starting row number to return reports from. Defaults to 0. |
 |  | **limit** | query | _integer_ | The number of rule IDs to return. Defaults to 10. |  |
-|  | **sort** | query | _string_ | Order fields in ascending or descending order.  Ex: created\_date | asc. |
+|  | **sort** | query | _string_ | Order fields in ascending or descending order.  Ex: created\_date \| asc. |
 |  | **name** | query | array \(_string_\) | Search by rule title. |  |
-| ✅ | **type** | query | _string_ | The rule news report type. Accepted values:  snort-suricata-master  snort-suricata-update  snort-suricata-changelog  yara-master  yara-update  yara-changelog  common-event-format  netwitness |  |
-|  | **description** | query | array \(_string_\) | Substring match on description field. |  |
-|  | **tags** | query | array \(_string_\) | Search for rule tags. |  |
-|  | **min\_created\_date** | query | _integer_ | Filter results to those created on or after a certain date. |  |
-|  | **max\_created\_date** | query | _string_ | Filter results to those created on or before a certain date. |  |
-|  | **q** | query | _string_ | Perform a generic substring search across all fields. |  |
+| ✅ | **type** | query | _string_ | The rule news report type. Accepted values:  snort-suricata-master  snort-suricata-update  snort-suricata-changelog  yara-master  yara-update  yara-changelog  common-event-format  netwitness |
+|  | **description** | query | array \(_string_\) | Substring match on description field. |
+|  | **tags** | query | array \(_string_\) | Search for rule tags. |
+|  | **min\_created\_date** | query | _integer_ | Filter results to those created on or after a certain date. |
+|  | **max\_created\_date** | query | _string_ | Filter results to those created on or before a certain date. |
+|  | **q** | query | _string_ | Perform a generic substring search across all fields. |
 
 **Usage**
 
