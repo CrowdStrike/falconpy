@@ -461,3 +461,4 @@ queryFirewallPolicies
 queryFirewallPolicyMembers
 setFirewallPoliciesPrecedence
 updateFirewallPolicies
+KeyError
