@@ -31,7 +31,7 @@
     * getAssessmentV1
     - Added unit tests (`test_zero_trust_assessment.py`)
 
-## Issues
+## Issues resolved
 + Fixed KeyError when providing invalid credentials to a Service Class using Credential
   or Object authentication, Closes [#134](https://github.com/CrowdStrike/falconpy/issues/134)
 
@@ -57,6 +57,8 @@
     - Reduced overall number of instance attributes
     * Unit tests updated (`test_uber_api_complete.py`)
 + Minor unit test update to `test_cspm_registration.py`
++ Added `util/coverage.config`
+    - Moved unit test coverage reporting over to configuration file for parameter management
 + Documentation updates
 
 # Version 0.4.5
