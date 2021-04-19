@@ -59,6 +59,7 @@ class OAuth2:
         self.token_expiration = 0
         self.token_renew_window = 20
         self.token_time = time.time()
+        self.token_value = False
         self.token_expired = lambda: True if (
                                               time.time() - self.token_time
                                               ) >= (
@@ -81,6 +82,7 @@ class OAuth2:
         if returned["status_code"] == 201:
             self.token_expiration = returned["body"]["expires_in"]
             self.token_time = time.time()
+            self.token_value = returned["body"]["access_token"]
 
         return returned
 
@@ -91,5 +93,6 @@ class OAuth2:
         DATA = {'token': '{}'.format(token)}
         returned = perform_request(method="POST", endpoint=FULL_URL, data=DATA, headers=HEADERS, verify=self.ssl_verify)
         self.token_expiration = 0
+        self.token_value = False
 
         return returned

@@ -102,8 +102,11 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
         try:
             if caller.auth_object:
                 if caller.auth_object.token_expired():
-                    caller.auth_object.token()
-                    caller.headers['Authorization'] = 'Bearer {}'.format(caller.auth_object.token()['body']['access_token'])
+                    auth_response = caller.auth_object.token()
+                    if auth_response["status_code"] == 201:
+                        caller.headers['Authorization'] = 'Bearer {}'.format(auth_response['body']['access_token'])
+                    else:
+                        caller.headers['Authorization'] = 'Bearer '
         except AttributeError:
             pass
 
