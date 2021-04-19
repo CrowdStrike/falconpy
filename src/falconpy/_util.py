@@ -228,7 +228,7 @@ def force_default(defaults: list, default_types: list = None):
     """
     if not default_types:
         default_types = []
-        
+
     def wrapper(func):
         """Inner wrapper."""
 
