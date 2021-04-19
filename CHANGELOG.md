@@ -31,6 +31,10 @@
     * getAssessmentV1
     - Added unit tests (`test_zero_trust_assessment.py`)
 
+## Issues
++ Fixed KeyError when providing invalid credentials to a Service Class using Credential
+  or Object authentication, Closes [#134](https://github.com/CrowdStrike/falconpy/issues/134)
+
 ## Other
 + Moved _endpoint constant library to a private submodule (No impact to existing usage)
     - Added payload parameter information to _endpoint constants
