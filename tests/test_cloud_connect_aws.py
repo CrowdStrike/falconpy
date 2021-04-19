@@ -201,23 +201,23 @@ class TestCloudConnectAWS:
     # def test_VerifyAWSAccountAccess(self):
     #     assert self.serviceCCAWS_VerifyAWSAccountAccess() == True
 
-    @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
-    def test_AccountUpdate(self):
-        assert self.serviceCCAWS_AccountUpdate() == True
+    # @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
+    # @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
+    # def test_AccountUpdate(self):
+    #     assert self.serviceCCAWS_AccountUpdate() == True
 
-    @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
-    def test_AccountDelete(self):
-        assert self.serviceCCAWS_AccountDelete() == True
+    # @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
+    # @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
+    # def test_AccountDelete(self):
+    #     assert self.serviceCCAWS_AccountDelete() == True
 
     def test_QueryAWSAccountsForIDs(self):
         assert self.serviceCCAWS_QueryAWSAccountsForIDs() == True
 
-    @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
-    def test_AccountRegister(self):
-        assert self.serviceCCAWS_AccountRegister() == True
+    # @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
+    # @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
+    # def test_AccountRegister(self):
+    #     assert self.serviceCCAWS_AccountRegister() == True
 
     def test_AuthWithCreds(self):
         assert self.serviceCCAWS_AuthWithCreds() == True

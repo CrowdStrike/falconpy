@@ -1,3 +1,66 @@
+# Version 0.4.6
+## Added features and functionality
++ Added: MSSP (Falcon Flight Control) Service Class
+    * getChildren
+    * getCIDGroupMembersBy
+    * addCIDGroupMembers
+    * deleteCIDGroupMembers
+    * getCIDGroupById
+    * createCIDGroups
+    * deleteCIDGroups
+    * updateCIDGroups
+    * getRolesByID
+    * addRole
+    * deleteRoles
+    * getUserGroupMembersByID
+    * addUserGroupMembers
+    * deleteUserGroupMembers
+    * getUserGroupsByID
+    * createUserGroup
+    * deleteUserGroups
+    * updateUserGroups
+    * queryChildren
+    * queryCIDGroupMembers
+    * queryCIDGroups
+    * queryRoles
+    * queryUserGroupMembers
+    * queryUserGroups
+    - Added unit tests (`test_mssp.py`)
+
++ Added: Zero Trust Assessment Service Class
+    * getAssessmentV1
+    - Added unit tests (`test_zero_trust_assessment.py`)
+
+## Issues resolved
++ Fixed KeyError when providing invalid credentials to a Service Class using Credential
+  or Object authentication, Closes [#134](https://github.com/CrowdStrike/falconpy/issues/134)
+
+## Other
++ Moved _endpoint constant library to a private submodule (No impact to existing usage)
+    - Added payload parameter information to _endpoint constants
+    - Adds service collection ID to endpoint lists
+    - This prepares the package for new functionality planned for future releases
++ Added: `force_default` function - decorator function that forces default values for function arguments (`_util.py`)
+    - Added: Helper function `get_default`
+    - Refactored Uber class to leverage this new functionality
+        * Unit tests refactored to cover new code paths (`test_uber_api_complete.py`)
+    - Depending upon feedback, this updated pattern will be implemented within Service Classes to reduce overall function complexity
++ Linting
+    > Developers: These patterns are being tested within the Uber Class for migration over to Service Classes in future versions
+    - Reduced Uber class method complexity
+        * Added: Helper function `calc_url_from_args` (`_util.py`)
+        * Added: Helper function `_create_header_payload` (`api_complete.py`, Requires class internal variables)
+    - Migrated Uber class variables to snake_case format
+    - Removed unnecessarily complex lambdas
+        * New class method: `valid_cred_format`, replaces previous lambda class attribute
+        * New class method: `token_expired`, replaces previous lambda class attribute
+    - Reduced overall number of instance attributes
+    * Unit tests updated (`test_uber_api_complete.py`)
++ Minor unit test update to `test_cspm_registration.py`
++ Added `util/coverage.config`
+    - Moved unit test coverage reporting over to configuration file for parameter management
++ Documentation updates
+
 # Version 0.4.5
 ## Added features and functionality
 + Added: Custom Indicators of Attack (IOA) API Service Class (`custom_ioa.py`)

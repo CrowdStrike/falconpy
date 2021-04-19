@@ -18,6 +18,7 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 + `incidents.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents
 + `intel.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel
 + `iocs.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs
++ `mssp.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp
 + `oauth2.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2
 + `prevention_policy.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies
 + `quick_scan.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan
@@ -28,11 +29,11 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 + `sensor_update_policy.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies
 + `spotlight_vulnerabilities.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities
 + `user_management.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management
++ `zero_trust_assessment.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment
 
 ### Planned
 + `d4c_registration.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration
 + `installation_tokens.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens
-+ `mssp.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp
 + `malquery.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery
 + `ioa_exclusions.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions
 + `ml_exclusions.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions

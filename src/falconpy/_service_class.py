@@ -49,7 +49,17 @@ class ServiceClass:
         self.refreshable = False
         if auth_object:
             self.auth_object = auth_object
-            self.headers = {'Authorization': 'Bearer {}'.format(auth_object.token()['body']['access_token'])}
+            if not self.authenticated():
+                _ = self.auth_object.token()
+                if _["status_code"] == 201:
+                    self.token = _["body"]["access_token"]
+                    self.headers = {'Authorization': 'Bearer {}'.format(self.token)}
+                else:
+                    self.token = False
+                    self.headers = {}
+            else:
+                self.token = self.auth_object.token_value
+                self.headers = {'Authorization': 'Bearer {}'.format(self.token)}
             self.base_url = auth_object.base_url
             self.ssl_verify = auth_object.ssl_verify
             self.refreshable = True
@@ -57,7 +67,13 @@ class ServiceClass:
             if creds:
                 auth_object = FalconAuth(creds=creds)
                 self.auth_object = auth_object
-                self.headers = {'Authorization': 'Bearer {}'.format(auth_object.token()['body']['access_token'])}
+                _ = self.auth_object.token()
+                if _["status_code"] == 201:
+                    self.token = _["body"]["access_token"]
+                    self.headers = {'Authorization': 'Bearer {}'.format(self.token)}
+                else:
+                    self.token = False
+                    self.headers = {}
                 self.base_url = base_url
                 self.ssl_verify = ssl_verify
                 self.refreshable = True

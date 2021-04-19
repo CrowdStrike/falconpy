@@ -20,7 +20,7 @@ This SDK provides two distinct methods for interacting with CrowdStrike's Falcon
 ![CI Tests](https://github.com/CrowdStrike/falconpy/workflows/Python%20package/badge.svg)<br/>
 Stable releases of FalconPy are available on the Python Package Index:
 ```shell
-$ python3 -m pip install crowdstrike-falconpy
+python3 -m pip install crowdstrike-falconpy
 ```
 
 If you'd like to try the *absolute bleeding edge*, an automated GitHub action releases a test package with every merged pull request containing the string
@@ -28,12 +28,12 @@ If you'd like to try the *absolute bleeding edge*, an automated GitHub action re
 
 To install this testing version of the package, use the command:
 ```shell
-$ python3 -m pip install -i https://test.pypi.org/simple crowdstrike-falconpy
+python3 -m pip install -i https://test.pypi.org/simple crowdstrike-falconpy
 ```
 
 To uninstall and remove FalconPy:
 ```shell
-$ python3 -m pip uninstall crowdstrike-falconpy
+python3 -m pip uninstall crowdstrike-falconpy
 ```
 
 # Service classes
@@ -50,7 +50,7 @@ $ python3 -m pip uninstall crowdstrike-falconpy
 | [CrowdStrike Falcon X APIs](https://falcon.crowdstrike.com/support/documentation/92/falcon-x-apis) | [sample_uploads.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sample_uploads.py) <br/> [quick_scan.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quick_scan.py)|
 | [CrowdStrike Firewall Management API](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [firewall_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_management.py) |
 | [CrowdStrike Firewall Policy Management](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [firewall_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_policies.py) |
-| [CrowdStrike Falcon Flight Control APIs](https://falcon.crowdstrike.com/support/documentation/154/flight-control-apis) | *Coming Soon* |
+| [CrowdStrike Falcon Flight Control APIs](https://falcon.crowdstrike.com/support/documentation/154/flight-control-apis) | [mssp.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/mssp.py) |
 | [CrowdStrike Host Groups API](https://falcon.crowdstrike.com/support/documentation/84/host-and-host-group-management-apis) | [host_group.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/host_group.py) |
 | [CrowdStrike Hosts API](https://falcon.crowdstrike.com/support/documentation/84/host-and-host-group-management-apis) | [hosts.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/hosts.py) |
 | [CrowdStrike Incident and Detection Monitoring APIs](https://falcon.crowdstrike.com/support/documentation/86/detections-monitoring-apis) | [incidents.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/incidents.py) |
@@ -67,7 +67,7 @@ $ python3 -m pip uninstall crowdstrike-falconpy
 | [Falcon Discover for Cloud and Containers - AWS Accounts APIs](https://falcon.crowdstrike.com/support/documentation/91/discover-for-aws-apis) | [cloud_connect_aws.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/cloud_connect_aws.py) |
 | [Falcon Discover for Cloud and Containers - Azure Subscriptions APIs](https://falcon.crowdstrike.com/support/documentation/118/falcon-discover-for-cloud-and-containers-azure-subscription-apis) | *Coming Soon* |
 | [Falcon Discover for Cloud and Containers - GCP Projects APIs](https://falcon.crowdstrike.com/support/documentation/117/falcon-discover-for-cloud-and-containers-gcp-projects-apis) | *Coming Soon* |
-| [CrowdStrike Falcon Zero Trust Assessment APIs](https://falcon.crowdstrike.com/support/documentation/156/zero-trust-assessment-apis) | *Coming Soon* |
+| [CrowdStrike Falcon Zero Trust Assessment APIs](https://falcon.crowdstrike.com/support/documentation/156/zero-trust-assessment-apis) | [zero_trust_assessment.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/zero_trust_assessment.py) |
 
 # The Uber class
 + [api_complete.py](./src/falconpy/api_complete.py) - The Uber class provides an interface to all CrowdStrike APIs with a single handler. 
@@ -80,7 +80,7 @@ There are *many* ways you can contribute to the FalconPy project!
   * ***Fix a bug or implement a new feature***. Check out our [open issues on GitHub](https://github.com/CrowdStrike/falconpy/issues) for inspiration.
   * ***Review pull requests*** by going through the queue of [open pull requests on GitHub](https://github.com/CrowdStrike/falconpy/pulls) and giving feedback to the authors
 
-  > Review [CONTRIBUTING.md](https://github.com/CrowdStrike/falconpy/CONTRIBUTING.md) for more details regarding contributing to the FalconPy project.
+  > Review [CONTRIBUTING.md](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md) for more details regarding contributing to the FalconPy project.
 
 Open to do something else but not sure where to start? Try [opening an issue](https://github.com/CrowdStrike/falconpy/issues/new), or posting a topic in our [discussion board](https://github.com/CrowdStrike/falconpy/discussions), to introduce yourself and your interests. We look forward to chatting with you!
 

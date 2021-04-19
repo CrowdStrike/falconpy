@@ -1,33 +1,59 @@
-## Available Classes
-- Service Classes
-  - [Cloud Connect AWS](service-class/cloud-connect-aws.md)
-  - [Detects](service-class/detects.md)
-  - [Device Control Policies](service-class/device-control-policies.md)
-  - [Event Streams](service-class/event-streams.md)
-  - [FalconX Sandbox](service-class/falconx-sandbox.md)
-  - [Firewall Management](service-class/firewall-management.md)
-  - [Host Group](service-class/host-group.md)
-  - [Hosts](service-class/hosts.md)
-  - [Incidents](service-class/incidents.md)
-  - [Intel](service-class/intel.md)
-  - [IOCs](service-class/iocs.md)
-  - [OAuth2](service-class/oauth2.md)
-  - [Prevention Policies](service-class/prevention-policies.md)
-  - [Realtime Response Admin](service-class/real-time-response-admin.md)
-  - [Realtime Response](service-class/real-time-response.md)
-  - [Sensor Update Policies](service-class/sensor-update-policies.md)
-  - [Spotlight Vulnerabilities](service-class/spotlight-vulnerabilities.md)
-  - [User Management](service-class/user-management.md)
+# Table of contents
 
-- Uber Class
-  - [CSPM Registration](uber-class/cspm-registration.md)
-  - [Custom IOA](uber-class/custom-ioa.md)
-  - [D4C Registration](uber-class/d4c-registration.md)
-  - [Installation Tokens](uber-class/installation-tokens.md)
-  - [IOA Exclusions](uber-class/ioa-exclusions.md)
-  - [MalQuery](uber-class/malquery.md)
-  - [ML Exclusions](uber-class/ml-exclusions.md)
-  - [Quick Scan](uber-class/quick-scan.md)
-  - [Sample Uploads](uber-class/sample-uploads.md)
-  - [Sensor Download](uber-class/sensor-download.md)
-  - [Sensor Visibility Exclusions](uber-class/sensor-visibility-exclusions.md)
+* [Home](README.md)
+* [Authenticating to the API](authenticating-to-the-api.md)
+* [Installation, Upgrades and Removal](installation-upgrades-and-removal.md)
+* [Service Class basics](basic-service-class-usage.md)
+* [Uber Class basics](basic-uber-class-usage.md)
+
+## API Operations
+
+* [All Operations](api-operations/all-operations.md)
+* [Operations by Collection](api-operations/operations-by-collection.md)
+
+## Service Collections
+
+* [Cloud Connect AWS](service-collections/cloud-connect-aws.md)
+* [CSPM Registration](service-collections/cspm-registration.md)
+* [Custom IOA](service-collections/custom-ioa.md)
+* [D4C Registration](service-collections/d4c-registration.md)
+* [Detects](service-collections/detects.md)
+* [Device Control Policies](service-collections/device-control-policies.md)
+* [Event Streams](service-collections/event-streams.md)
+* [Falcon Complete Dashboard](service-collections/falcon-complete-dashboard.md)
+* [FalconX Sandbox](service-collections/falconx-sandbox.md)
+* [Firewall Management](service-collections/firewall-management.md)
+* [Firewall Policies](service-collections/firewall-policies.md)
+* [Host Group](service-collections/host-group.md)
+* [Hosts](service-collections/hosts.md)
+* [Incidents](service-collections/incidents.md)
+* [Installation Tokens](service-collections/installation-tokens.md)
+* [Intel](service-collections/intel.md)
+* [IOA Exclusions](service-collections/ioa-exclusions.md)
+* [IOCs](service-collections/iocs.md)
+* [MalQuery](service-collections/malquery.md)
+* [ML Exclusions](service-collections/ml-exclusions.md)
+* [MSSP](service-collections/mssp.md)
+* [OAuth2](service-collections/oauth2.md)
+* [Overwatch Dashboard](service-collections/overwatch-dashboard.md)
+* [Prevention Policies](service-collections/prevention-policies.md)
+* [Quick Scan](service-collections/quick-scan.md)
+* [Real Time Response Admin](service-collections/real-time-response-admin.md)
+* [Real Time Response](service-collections/real-time-response.md)
+* [Sample Uploads](service-collections/sample-uploads.md)
+* [Sensor Download](service-collections/sensor-download.md)
+* [Sensor Update Policies](service-collections/sensor-update-policies.md)
+* [Sensor Visibility Exclusions](service-collections/sensor-visibility-exclusions.md)
+* [Spotlight Vulnerabilities](service-collections/spotlight-vulnerabilities.md)
+* [User Management](service-collections/user-management.md)
+* [Zero Trust Assessment](service-collections/zero-trust-assessment.md)
+
+## Support
+
+* [Ask a Question](https://github.com/CrowdStrike/falconpy/discussions/categories/q-a)
+* [Submit an Issue](https://github.com/CrowdStrike/falconpy/issues/new/choose)
+
+---
+
+* [Code Samples](https://github.com/CrowdStrike/falconpy/tree/main/samples)
+
