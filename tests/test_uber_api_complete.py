@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from our sibling folder
 from falconpy import api_complete as FalconSDK
 # Import perform_request from _util so we can test generating 405's directly
-from falconpy._util import perform_request
+from falconpy._util import perform_request, force_default
 
 AllowedResponses = [200, 400, 415, 429, 500]
 
@@ -65,9 +65,11 @@ class TestUber:
             return True
         else:
             return False
-
-    def uberCCAWS_QueryAWSAccountsForIDs(self):
-        if falcon.command("QueryAWSAccountsForIDs", parameters={"limit": 1})["status_code"] in AllowedResponses:
+    
+    # Intentionally specifying this incorrectly to test the failure code path
+    @force_default(defaults=["params"], default_types=[""])
+    def uberCCAWS_QueryAWSAccountsForIDs(self, params: dict = None):
+        if falcon.command("QueryAWSAccountsForIDs", parameters=params)["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -163,8 +165,13 @@ class TestUber:
         else:
             return False
 
-    def uberCCHosts_GenerateActionNameError(self):
-        if falcon.command("PerformActionV2", parameters={}, body={}, action_name="Squish")["status_code"] in AllowedResponses:
+    @force_default(defaults=["params"])  # Intentionally specifying this incorrectly to test the failure code path
+    def uberCCHosts_GenerateActionNameError(self, params: dict = None):
+        if falcon.command("PerformActionV2",
+                          parameters=params,
+                          body={},
+                          action_name="Squish"
+                          )["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -210,66 +217,66 @@ class TestUber:
             return False
 
     def test_GetAWSSettings(self):
-        assert self.uberCCAWS_GetAWSSettings() == True
+        assert self.uberCCAWS_GetAWSSettings() is True
 
     def test_QueryAWSAccounts(self):
-        assert self.uberCCAWS_QueryAWSAccounts() == True
+        assert self.uberCCAWS_QueryAWSAccounts() is True
 
     @pytest.mark.skipif(falcon.command("QueryAWSAccounts",
                         parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetAWSAccounts(self):
-        assert self.uberCCAWS_GetAWSAccounts() == True
+        assert self.uberCCAWS_GetAWSAccounts() is True
 
     # @pytest.mark.skipif(falcon.command("QueryAWSAccounts",
     #                     parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
     # @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
     # def test_VerifyAWSAccountAccess(self):
-    #     assert self.uberCCAWS_VerifyAWSAccountAccess() == True
+    #     assert self.uberCCAWS_VerifyAWSAccountAccess() is True
 
     def test_QueryAWSAccountsForIDs(self):
-        assert self.uberCCAWS_QueryAWSAccountsForIDs() == True
+        assert self.uberCCAWS_QueryAWSAccountsForIDs() is True
 
     def test_UploadDownload(self):
-        assert self.uberCCAWS_TestUploadDownload() == True
+        assert self.uberCCAWS_TestUploadDownload() is True
 
     def test_GenerateError(self):
-        assert self.uberCCAWS_GenerateError() == True
+        assert self.uberCCAWS_GenerateError() is True
 
     def test_GenerateInvalidPayload(self):
-        assert self.uberCCAWS_GenerateInvalidPayload() == True
+        assert self.uberCCAWS_GenerateInvalidPayload() is True
 
     def test_BadCommand(self):
-        assert self.uberCCAWS_BadCommand() == True
+        assert self.uberCCAWS_BadCommand() is True
 
     def test_OverrideAndHeader(self):
         # Also check token auto-renewal
         falcon.token_expiration = 0
-        assert self.uberCCAWS_OverrideAndHeader() == True
+        assert self.uberCCAWS_OverrideAndHeader() is True
 
     def test_GenerateActionNameError(self):
-        assert self.uberCCHosts_GenerateActionNameError() == True
+        assert self.uberCCHosts_GenerateActionNameError(params=None) is True
 
     def test_GenerateInvalidOperationIDError(self):
-        assert self.uberCCAWS_GenerateInvalidOperationIDError() == True
+        assert self.uberCCAWS_GenerateInvalidOperationIDError() is True
 
     def test_BadMethod(self):
-        assert self.uberCCAWS_BadMethod() == True
+        assert self.uberCCAWS_BadMethod() is True
 
     def test_GenerateServerError(self):
-        assert self.uberCCAWS_GenerateServerError() == True
+        assert self.uberCCAWS_GenerateServerError() is True
 
     def test_TestMSSP(self):
-        assert self.uberCCAWS_TestMSSP() == True
+        assert self.uberCCAWS_TestMSSP() is True
 
     # def test_logout(self):
-    #     assert falcon.deauthenticate() == True
+    #     assert falcon.deauthenticate() is True
 
     def test_GenerateTokenError(self):
-        assert self.uberCCAWS_GenerateTokenError() == True
+        assert self.uberCCAWS_GenerateTokenError() is True
 
     def test_BadAuthentication(self):
-        assert self.uberCCAWS_BadAuthentication() == True
+        assert self.uberCCAWS_BadAuthentication() is True
 
     @pytest.mark.filterwarnings("ignore:Unverified HTTPS request is being made.*")
     def test_DisableSSLVerify(self):
-        assert self.uberCCAWS_DisableSSLVerify() == True
+        assert self.uberCCAWS_DisableSSLVerify() is True

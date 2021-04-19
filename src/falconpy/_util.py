@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 """
 import requests
 import base64
+import functools
 import urllib3
 from ._version import _title, _version
 from ._result import Result
@@ -190,9 +191,84 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
 
 
 def generate_error_result(message: str = "An error has occurred. Check your payloads and try again.", code: int = 500) -> dict:
-    """ Normalized error messaging handler. """
+    """Normalized error messaging handler."""
     return Result()(status_code=code, headers={}, body={"errors": [{"message": f"{message}"}], "resources": []})
 
 
 def generate_ok_result(message: str = "Request returned with success", code: int = 200) -> dict:
+    """Normalized OK messaging handler."""
     return Result()(status_code=code, headers={}, body={"message": message, "resources": []})
+
+
+def get_default(types: list, position: int):
+    """I determine the requested default data type and return it."""
+    default_value_names = ["list", "str", "int", "dict", "bool"]
+    default_value_types = [[], "", 0, {}, False]
+    value_count = 0
+    retval = {}  # Default to dictionary data type as that is our most often used
+    for type_ in default_value_names:
+        try:
+            if type_ in types[position]:
+                retval = default_value_types[value_count]
+        except IndexError:
+            # Data type not specified, fall back to dictionary
+            pass
+        value_count += 1
+
+    return retval
+
+
+def force_default(defaults: list, default_types: list = None):
+    """This function forces default values and is designed to decorate other functions.
+
+       defaults = list of values to default
+       default_types = list of types to default the values to
+
+       Example: @force_default(defaults=["parameters], default_types=["dict"])
+    """
+    if not default_types:
+        default_types = []
+        
+    def wrapper(func):
+        """Inner wrapper."""
+
+        @functools.wraps(func)
+        def factory(*args, **kwargs):
+            """This method is a factory and runs through arguments passed to the called function,
+               setting defaults on values within the **kwargs dictionary when necessary
+               as specified in our "defaults" list that is passed to the parent wrapper.
+            """
+            element_count = 0   # Tracker so we can retrieve matching data types
+            # Loop through every element specified in our defaults list
+            for element in defaults:
+                if element in kwargs:
+                    # It exists but it's a NoneType
+                    if kwargs.get(element) is None:
+                        kwargs[element] = get_default(default_types, element_count)
+                    # TODO: Else branch here to do input validation?
+                else:
+                    # Not present whatsoever
+                    kwargs[element] = get_default(default_types, element_count)
+                # Increment our tracker for our sibling default_types list
+                element_count += 1
+            return func(*args, **kwargs)
+        return factory
+    return wrapper
+
+
+def calc_url_from_args(target_url: str, passed_args: dict) -> str:
+    """This function reviews arguments passed to the Uber class command method and updates the target URL accordingly."""
+    if "ids" in passed_args:
+        id_list = str(parse_id_list(passed_args['ids'])).replace(",", "&ids=")
+        target_url = target_url.format(id_list)
+    if "action_name" in passed_args:
+        delim = "&" if "?" in target_url else "?"
+        # TODO: Additional action_name restrictions?
+        target_url = f"{target_url}{delim}action_name={str(passed_args['action_name'])}"
+    if "partition" in passed_args:
+        target_url = target_url.format(str(passed_args['partition']))
+    if "file_name" in passed_args:
+        delim = "&" if "?" in target_url else "?"
+        target_url = f"{target_url}{delim}file_name={str(passed_args['file_name'])}"
+
+    return target_url
