@@ -101,5 +101,25 @@ _spotlight_vulnerabilities_endpoints = [
         "required": True
       }
     ]
+  ],
+  [
+    "getRemediations",
+    "GET",
+    "/spotlight/entities/remediations/v2?ids={}",
+    "Get details on remediations by providing one or more IDs",
+    "spotlight_vulnerabilities",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "One or more remediation IDs (max: 400).",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
   ]
 ]
