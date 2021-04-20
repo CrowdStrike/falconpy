@@ -1,3 +1,8 @@
+# Version 0.4.6-spotlight-remediations-patch-1
++ Added: Missing method to Spotlight_Vulnerabilities Service Class. (`spotlight_vulnerabilities.py`)
+    * getRemediations
+        - Unit tests pending (v0.4.7)
+        - Uber class integration pending (v0.4.7)
 # Version 0.4.6
 ## Added features and functionality
 + Added: MSSP (Falcon Flight Control) Service Class
