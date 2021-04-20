@@ -462,3 +462,5 @@ queryFirewallPolicyMembers
 setFirewallPoliciesPrecedence
 updateFirewallPolicies
 KeyError
+getRemediations
+remediations
