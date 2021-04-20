@@ -77,9 +77,9 @@ class Spotlight_Vulnerabilities(ServiceClass):
 
     def getRemediations(self: object, ids) -> dict:
         """Get details on remediations by providing one or more IDs. """
+      # [GET] Not in swagger
         ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url + \
-            '/spotlight/entities/remediations/v2?ids={}'.format(ID_LIST)
+        FULL_URL = self.base_url + '/spotlight/entities/remediations/v2?ids={}'.format(ID_LIST)
         HEADERS = self.headers
         returned = service_request(caller=self,
                                    method="GET",
