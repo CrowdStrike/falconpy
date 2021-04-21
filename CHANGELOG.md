@@ -1,4 +1,14 @@
+# Version 0.4.7
+## Added features and functionality
++ Added: ML Exclusions Service Class (`ml_exclusions.py`)
+    * getMLExclusionsV1
+    * createMLExclusionsV1
+    * deleteMLExclusionsV1
+    * updateMLExclusionsV1
+    * queryMLExclusionsV1
+    - Added unit tests (`test_ml_exclusions.py`)
 # Version 0.4.6-spotlight-remediations-patch-1
+## Added features and functionality
 + Added: Missing method to Spotlight_Vulnerabilities Service Class (`spotlight_vulnerabilities.py`)
     * getRemediations
     - Added unit test to existing test series (`test_spotlight_vulnerabilities.py`)
