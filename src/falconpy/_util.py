@@ -42,9 +42,9 @@ import inspect
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
-urllib3.disable_warnings(InsecureRequestWarning)
 from ._version import _title, _version
 from ._result import Result
+urllib3.disable_warnings(InsecureRequestWarning)
 
 # Restrict requests to only allowed HTTP methods
 _ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
@@ -83,9 +83,10 @@ def parse_id_list(id_list) -> str:
             if len(returned) > 1:
                 returned += ","
             returned += str(s)
-        return returned
     else:
-        return id_list
+        returned = id_list
+
+    return returned
 
 
 def generate_b64cred(client_id: str, client_secret: str) -> str:
