@@ -1,12 +1,37 @@
 # Version 0.4.7
 ## Added features and functionality
-+ Added: ML Exclusions Service Class (`ml_exclusions.py`)
++ Added: IOA Exclusions API Service Class (`ioa_exclusions.py`)
+    * getIOAExclusionsV1
+    * createIOAExclusionsV1
+    * deleteIOAExclusionsV1
+    * updateIOAExclusionsV1
+    * queryIOAExclusionsV1
+    - Added unit tests (`test_ioa_exclusions.py`)
++ Added: ML Exclusions API Service Class (`ml_exclusions.py`)
     * getMLExclusionsV1
     * createMLExclusionsV1
     * deleteMLExclusionsV1
     * updateMLExclusionsV1
     * queryMLExclusionsV1
     - Added unit tests (`test_ml_exclusions.py`)
++ Added: Sensor Visibility Exclusions API Service Class (`sensor_visibility_exclusions.py`)
+    * getSensorVisibilityExclusionsV1
+    * createSVExclusionsV1
+    * deleteSensorVisibilityExclusionsV1
+    * updateSensorVisibilityExclusionsV1
+    * querySensorVisibilityExclusionsV1
+    - Added unit tests (`test_sensor_visibility_exclusions.py`)
+## Other
++ Added: args_to_params function (`_util.py`) - Allows developers to specify parameter dictionary elements as function arguments
+    ### Example
+    ```python
+    import json
+    from falconpy.ml_exclusions import ML_Exclusions as FalconML
+    falcon = FalconML(creds={"client_id": client_ID, "client_secret": client_secret})
+    print(json.dumps(falcon.queryMLExclusionsV1(limit=10, offset=20, sort="value.asc"), indent=4))
+    ```
+    - Unrecognized parameter values are discarded
+    - Initial testing in a limited number of Service Classes
 # Version 0.4.6-spotlight-remediations-patch-1
 ## Added features and functionality
 + Added: Missing method to Spotlight_Vulnerabilities Service Class (`spotlight_vulnerabilities.py`)
