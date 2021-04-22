@@ -36,14 +36,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-import requests
 import base64
 import functools
+import inspect
+import requests
 import urllib3
-from ._version import _title, _version
-from ._result import Result
 from urllib3.exceptions import InsecureRequestWarning
 urllib3.disable_warnings(InsecureRequestWarning)
+from ._version import _title, _version
+from ._result import Result
 
 # Restrict requests to only allowed HTTP methods
 _ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
@@ -248,7 +249,6 @@ def force_default(defaults: list, default_types: list = None):
                     # It exists but it's a NoneType
                     if kwargs.get(element) is None:
                         kwargs[element] = get_default(default_types, element_count)
-                    # TODO: Else branch here to do input validation?
                 else:
                     # Not present whatsoever
                     kwargs[element] = get_default(default_types, element_count)
@@ -275,3 +275,22 @@ def calc_url_from_args(target_url: str, passed_args: dict) -> str:
         target_url = f"{target_url}{delim}file_name={str(passed_args['file_name'])}"
 
     return target_url
+
+
+def args_to_params(payload: dict, passed_arguments: dict, endpoints: dict) -> dict:
+    """This function reviews arguments passed to the function against arguments accepted by the endpoint.
+       If a valid argument is passed, it is added and returned as part of the payload dictionary.
+    """
+    for arg in passed_arguments:
+        caller = inspect.stack()[1][3]
+        eps = [ep[5] for ep in endpoints if caller in ep[0]][0]
+        try:
+            parm = [param for param in eps if param["name"] == arg][0]["name"]
+            if parm:
+                # Data type validation could go here
+                payload[parm] = passed_arguments[parm]
+        except IndexError:
+            # Unrecognized argument
+            pass
+
+    return payload
