@@ -3,7 +3,7 @@
 import os
 import sys
 
-# Authentication via the test_authorization.py
+# Authentication via test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
@@ -21,7 +21,7 @@ AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for
 class TestMLExclusions:
     def serviceMLE_ListExclusions(self):
         returned = False
-        if falcon.queryMLExclusionsV1()["status_code"] in AllowedResponses:
+        if falcon.queryMLExclusionsV1(limit=1, offset=2, pizza="IsDelicious")["status_code"] in AllowedResponses:
             returned = True
 
         return returned
@@ -41,7 +41,7 @@ class TestMLExclusions:
 
         return errorChecks
 
-    def test_find(self):
+    def test_Find(self):
         assert self.serviceMLE_ListExclusions() is True
 
     def test_Errors(self):

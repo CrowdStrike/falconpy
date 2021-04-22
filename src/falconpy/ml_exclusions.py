@@ -64,7 +64,7 @@ class ML_Exclusions(ServiceClass):
 
     def createMLExclusionsV1(self: object, body: dict) -> dict:
         """Create the ML exclusions"""
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/create-rule-groupMixin0
+        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/createMLExclusionsV1
         target_url = f"{self.base_url}/policy/entities/ml-exclusions/v1"
         header_payload = self.headers
         body_payload = body
