@@ -277,7 +277,7 @@ def calc_url_from_args(target_url: str, passed_args: dict) -> str:
     return target_url
 
 
-def args_to_params(payload: dict, passed_arguments: dict, endpoints: dict) -> dict:
+def args_to_params(payload: dict, passed_arguments: dict, endpoints: list) -> dict:
     """This function reviews arguments passed to the function against arguments accepted by the endpoint.
        If a valid argument is passed, it is added and returned as part of the payload dictionary.
     """
@@ -285,10 +285,10 @@ def args_to_params(payload: dict, passed_arguments: dict, endpoints: dict) -> di
         caller = inspect.stack()[1][3]
         eps = [ep[5] for ep in endpoints if caller in ep[0]][0]
         try:
-            parm = [param for param in eps if param["name"] == arg][0]["name"]
-            if parm:
+            argument = [param for param in eps if param["name"] == arg][0]["name"]
+            if argument:
                 # Data type validation could go here
-                payload[parm] = passed_arguments[parm]
+                payload[argument] = passed_arguments[argument]
         except IndexError:
             # Unrecognized argument
             pass
