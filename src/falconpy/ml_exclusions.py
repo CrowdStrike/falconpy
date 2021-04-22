@@ -37,11 +37,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=C0103
-from ._util import service_request, parse_id_list, force_default
+from ._util import service_request, parse_id_list, force_default, args_to_params
 from ._service_class import ServiceClass
+from ._endpoint._ml_exclusions import _ml_exclusions_endpoints as MLEndpoints
 
 
-class ML_Exclusions(ServiceClass):   # pylint: disable=C0103
+class ML_Exclusions(ServiceClass):
     """The only requirement to instantiate an instance of this class
        is a valid token provided by the Falcon API SDK OAuth2 class, a
        existing instance of the authentication class as an object or a
@@ -77,13 +78,13 @@ class ML_Exclusions(ServiceClass):   # pylint: disable=C0103
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def deleteMLExclusionsV1(self: object, ids, parameters: dict = None) -> dict:
+    def deleteMLExclusionsV1(self: object, ids, parameters: dict = None, **kwargs) -> dict:
         """Delete the ML Exclusions by ID."""
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/deleteMLExclusionsV1
         id_list = str(parse_id_list(ids)).replace(",", "&ids=")
         target_url = f"{self.base_url}/policy/entities/ml-exclusions/v1?ids={id_list}"
         header_payload = self.headers
-        parameter_payload = parameters
+        parameter_payload = args_to_params(parameters, kwargs, MLEndpoints)
         returned = service_request(caller=self,
                                    method="DELETE",
                                    endpoint=target_url,
@@ -109,12 +110,12 @@ class ML_Exclusions(ServiceClass):   # pylint: disable=C0103
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryMLExclusionsV1(self: object, parameters: dict = None) -> dict:
+    def queryMLExclusionsV1(self: object, parameters: dict = None, **kwargs) -> dict:
         """Search for ML Exclusions."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/queryMLExclusionsV1
         target_url = f"{self.base_url}/policy/queries/ml-exclusions/v1"
         header_payload = self.headers
-        parameter_payload = parameters
+        parameter_payload = args_to_params(parameters, kwargs, MLEndpoints)
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,
