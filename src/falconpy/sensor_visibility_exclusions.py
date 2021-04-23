@@ -98,7 +98,7 @@ class Sensor_Visibility_Exclusions(ServiceClass):
         return returned
 
     def updateSensorVisibilityExclusionsV1(self: object, body: dict) -> dict:
-        """Update the sensor_visibility Exclusions"""
+        """Update the Sensor Visibility Exclusions"""
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #           /sensor-visibility-exclusions/updateSensorVisibilityExclusionsV1
         target_url = f"{self.base_url}/policy/entities/sv-exclusions/v1"
