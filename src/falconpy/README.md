@@ -19,6 +19,7 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 + `intel.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel
 + `ioa_exclusions.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions
 + `iocs.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs
++ `malquery.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery
 + `ml_exclusions.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions
 + `mssp.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp
 + `oauth2.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2
@@ -37,7 +38,6 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 ### Planned
 + `d4c_registration.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration
 + `installation_tokens.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens
-+ `malquery.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery
 
 
 ## The Uber Class

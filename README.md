@@ -56,7 +56,7 @@ python3 -m pip uninstall crowdstrike-falconpy
 | [CrowdStrike Incident and Detection Monitoring APIs](https://falcon.crowdstrike.com/support/documentation/86/detections-monitoring-apis) | [incidents.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/incidents.py) |
 | [CrowdStrike Installation Token APIs](https://falcon.crowdstrike.com/support/documentation/120/Installation-token-APIs) | *Coming Soon* | 
 | [CrowdStrike Intel API](https://falcon.crowdstrike.com/support/documentation/72/intel-apis) | [intel.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/intel.py) | 
-| [CrowdStrike MalQuery API](https://falcon.crowdstrike.com/support/documentation/113/malquery-apis) | *Coming Soon* |
+| [CrowdStrike MalQuery API](https://falcon.crowdstrike.com/support/documentation/113/malquery-apis) | [malquery.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/malquery.py) |
 | CrowdStrike ML Exclusions APIs | [ml_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ml_exclusions.py) |
 | [CrowdStrike OAuth2 Auth Token APIs](https://falcon.crowdstrike.com/support/documentation/93/oauth2-auth-token-apis) | [oauth2.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/oauth2.py) |
 | [CrowdStrike Prevention Policy APIs](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [prevention_policy.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/prevention_policy.py) |
