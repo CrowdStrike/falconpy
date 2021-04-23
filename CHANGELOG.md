@@ -7,6 +7,17 @@
     * updateIOAExclusionsV1
     * queryIOAExclusionsV1
     - Added unit tests (`test_ioa_exclusions.py`)
++ Added: MalQuery API Service Class (`malquery.py`)
+    + GetMalQueryQuotasV1
+    + PostMalQueryFuzzySearchV1
+    + GetMalQueryDownloadV1
+    + GetMalQueryMetadataV1
+    + GetMalQueryRequestV1
+    + GetMalQueryEntitiesSamplesFetchV1
+    + PostMalQueryEntitiesSamplesMultidownloadV1
+    + PostMalQueryExactSearchV1
+    + PostMalQueryHuntV1
+    * Added unit tests (`test_malquery.py`)
 + Added: ML Exclusions API Service Class (`ml_exclusions.py`)
     * getMLExclusionsV1
     * createMLExclusionsV1
