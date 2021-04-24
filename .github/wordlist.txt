@@ -464,3 +464,6 @@ updateFirewallPolicies
 KeyError
 getRemediations
 remediations
+GetCSPMGCPAccount
+args
+params
