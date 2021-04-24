@@ -47,15 +47,20 @@ class Installation_Tokens(ServiceClass):
        existing instance of the authentication class as an object or a
        valid set of credentials.
     """
-    def audit_events_read(self: object, ids) -> dict:
+    @force_default(defaults=["parameters", "ids"], default_types=["dict", "list"])
+    def audit_events_read(self: object, ids: str or list = None, parameters: dict = None, **kwargs) -> dict:
         """Gets the details of one or more audit events by id."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/audit-events-read
-        id_list = str(parse_id_list(ids)).replace(",", "&ids=")
-        target_url = f"{self.base_url}/installation-tokens/entities/audit-events/v1?ids={id_list}"
+        target_url = f"{self.base_url}/installation-tokens/entities/audit-events/v1"
+        if ids:
+            id_list = str(parse_id_list(ids)).replace(",", "&ids=")
+            target_url = f"{target_url}?ids={id_list}"
+        parameter_payload = args_to_params(parameters, kwargs, ITEndpoints)
         header_payload = self.headers
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,
+                                   params=parameter_payload,
                                    headers=header_payload,
                                    verify=self.ssl_verify
                                    )
@@ -74,15 +79,20 @@ class Installation_Tokens(ServiceClass):
                                    )
         return returned
 
-    def tokens_read(self: object, ids) -> dict:
+    @force_default(defaults=["parameters", "ids"], default_types=["dict", "list"])
+    def tokens_read(self: object, ids: str or list = None, parameters: dict = None, **kwargs) -> dict:
         """Gets the details of one or more tokens by id."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-read
-        id_list = str(parse_id_list(ids)).replace(",", "&ids=")
-        target_url = f"{self.base_url}/installation-tokens/entities/tokens/v1?ids={id_list}"
+        target_url = f"{self.base_url}/installation-tokens/entities/tokens/v1"
+        if ids:
+            id_list = str(parse_id_list(ids)).replace(",", "&ids=")
+            target_url = f"{target_url}?ids={id_list}"
+        parameter_payload = args_to_params(parameters, kwargs, ITEndpoints)
         header_payload = self.headers
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,
+                                   params=parameter_payload,
                                    headers=header_payload,
                                    verify=self.ssl_verify
                                    )
@@ -103,15 +113,20 @@ class Installation_Tokens(ServiceClass):
                                    )
         return returned
 
-    def tokens_delete(self: object, ids, **kwargs) -> dict:
+    @force_default(defaults=["parameters", "ids"], default_types=["dict", "list"])
+    def tokens_delete(self: object, ids: str or list = None, parameters: dict = None, **kwargs) -> dict:
         """Deletes a token immediately. To revoke a token, use PATCH /installation-tokens/entities/tokens/v1 instead."""
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-delete
-        id_list = str(parse_id_list(ids)).replace(",", "&ids=")
-        target_url = f"{self.base_url}/installation-tokens/entities/tokens/v1?ids={id_list}"
+        target_url = f"{self.base_url}/installation-tokens/entities/tokens/v1"
+        if ids:
+            id_list = str(parse_id_list(ids)).replace(",", "&ids=")
+            target_url = f"{target_url}?ids={id_list}"
+        parameter_payload = args_to_params(parameters, kwargs, ITEndpoints)
         header_payload = self.headers
         returned = service_request(caller=self,
                                    method="DELETE",
                                    endpoint=target_url,
+                                   params=parameter_payload,
                                    headers=header_payload,
                                    verify=self.ssl_verify
                                    )
