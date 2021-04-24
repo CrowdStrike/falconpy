@@ -7,6 +7,7 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 + `cloud_connect_aws.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws
 + `cspm-registration.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration
 + `custom_ioa.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa
++ `d4c_registration.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration
 + `detects.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects
 + `device_control_policies.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/device-control-policies
 + `event_streams.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams
@@ -35,9 +36,6 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 + `spotlight_vulnerabilities.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities
 + `user_management.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management
 + `zero_trust_assessment.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment
-
-### Planned
-+ `d4c_registration.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration
 
 ## The Uber Class
 ### A single class to interface with the entire API
