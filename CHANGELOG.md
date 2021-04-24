@@ -1,5 +1,33 @@
 # Version 0.4.7
 ## Added features and functionality
+
+> New Service Class pattern - Query String parameters can now be passed as function arguments.
+
+> This functionality is currently only available in the following new Service Classes while
+> regression testing is underway.
+
++ Added: D4C Registration API Service Class (`d4c_registration.py`)
+    * GetCSPMAzureAccount
+    * CreateCSPMAzureAccount
+    * UpdateCSPMAzureAccountClientID
+    * GetCSPMAzureUserScriptsAttachment
+    * GetCSPMAzureUserScripts
+    * GetCSPMCGPAccount
+    * GetCSPMGCPAccount (redirects to GetCSPMCGPAccount)
+    * CreateCSPMGCPAccount
+    * GetCSPMGCPUserScriptsAttachment
+    * GetCSPMGCPUserScripts
+    - Added unit tests (`test_d4c_registration.py`)
++ Added: Installation Tokens API Service Class (`installation_tokens.py`)
+    * audit_events_read
+    * customer_settings_read
+    * tokens_read
+    * tokens_create
+    * tokens_delete
+    * tokens_update
+    * audit_events_query
+    * tokens_query
+    - Added unit tests (`test_installation_tokens.py`)
 + Added: IOA Exclusions API Service Class (`ioa_exclusions.py`)
     * getIOAExclusionsV1
     * createIOAExclusionsV1
