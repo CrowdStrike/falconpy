@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-malquery - Falcon Machine Learning Exclusions API Interface Class
+malquery - Falcon MalQuery API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
