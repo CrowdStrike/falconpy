@@ -36,26 +36,25 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import service_request, parse_id_list, args_to_params, force_default
+import sys
+from ._util import service_request, args_to_params, force_default
 from ._service_class import ServiceClass
-from ._endpoint._installation_tokens import _installation_tokens_endpoints as ITEndpoints
+from ._endpoint._installation_tokens import _installation_tokens_endpoints as Endpoints
 
 
-class Installation_Tokens(ServiceClass):
+class Installation_Tokens(ServiceClass):  # pylint: disable=C0103  # Matching API
     """The only requirement to instantiate an instance of this class
        is a valid token provided by the Falcon API SDK OAuth2 class, a
        existing instance of the authentication class as an object or a
        valid set of credentials.
     """
-    @force_default(defaults=["parameters", "ids"], default_types=["dict", "list"])
-    def audit_events_read(self: object, ids: str or list = None, parameters: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def audit_events_read(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103  # Matching API
         """Gets the details of one or more audit events by id."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/audit-events-read
-        target_url = f"{self.base_url}/installation-tokens/entities/audit-events/v1"
-        if ids:
-            id_list = str(parse_id_list(ids)).replace(",", "&ids=")
-            target_url = f"{target_url}?ids={id_list}"
-        parameter_payload = args_to_params(parameters, kwargs, ITEndpoints)
+        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}".replace("?ids={}", "")
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
         header_payload = self.headers
         returned = service_request(caller=self,
                                    method="GET",
@@ -66,10 +65,11 @@ class Installation_Tokens(ServiceClass):
                                    )
         return returned
 
-    def customer_settings_read(self: object) -> dict:
+    def customer_settings_read(self: object) -> dict:  # pylint: disable=C0103  # Matching API
         """Check current installation token settings."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/customer-settings-read
-        target_url = f"{self.base_url}/installation-tokens/entities/customer-settings/v1"
+        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
         header_payload = self.headers
         returned = service_request(caller=self,
                                    method="GET",
@@ -79,15 +79,13 @@ class Installation_Tokens(ServiceClass):
                                    )
         return returned
 
-    @force_default(defaults=["parameters", "ids"], default_types=["dict", "list"])
-    def tokens_read(self: object, ids: str or list = None, parameters: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def tokens_read(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103  # Matching API
         """Gets the details of one or more tokens by id."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-read
-        target_url = f"{self.base_url}/installation-tokens/entities/tokens/v1"
-        if ids:
-            id_list = str(parse_id_list(ids)).replace(",", "&ids=")
-            target_url = f"{target_url}?ids={id_list}"
-        parameter_payload = args_to_params(parameters, kwargs, ITEndpoints)
+        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}".replace("?ids={}", "")
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
         header_payload = self.headers
         returned = service_request(caller=self,
                                    method="GET",
@@ -98,10 +96,11 @@ class Installation_Tokens(ServiceClass):
                                    )
         return returned
 
-    def tokens_create(self: object, body: dict) -> dict:
+    def tokens_create(self: object, body: dict) -> dict:  # pylint: disable=C0103  # Matching API
         """Creates a token."""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-create
-        target_url = f"{self.base_url}/installation-tokens/entities/tokens/v1"
+        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
         returned = service_request(caller=self,
@@ -113,15 +112,13 @@ class Installation_Tokens(ServiceClass):
                                    )
         return returned
 
-    @force_default(defaults=["parameters", "ids"], default_types=["dict", "list"])
-    def tokens_delete(self: object, ids: str or list = None, parameters: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def tokens_delete(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103  # Matching API
         """Deletes a token immediately. To revoke a token, use PATCH /installation-tokens/entities/tokens/v1 instead."""
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-delete
-        target_url = f"{self.base_url}/installation-tokens/entities/tokens/v1"
-        if ids:
-            id_list = str(parse_id_list(ids)).replace(",", "&ids=")
-            target_url = f"{target_url}?ids={id_list}"
-        parameter_payload = args_to_params(parameters, kwargs, ITEndpoints)
+        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}".replace("?ids={}", "")
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
         header_payload = self.headers
         returned = service_request(caller=self,
                                    method="DELETE",
@@ -132,15 +129,13 @@ class Installation_Tokens(ServiceClass):
                                    )
         return returned
 
-    @force_default(defaults=["parameters", "ids"], default_types=["dict", "list"])
-    def tokens_update(self: object, body: dict, ids: str or list = None, parameters: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def tokens_update(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
         """Updates one or more tokens. Use this endpoint to edit labels, change expiration, revoke, or restore."""
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-update
-        target_url = f"{self.base_url}/installation-tokens/entities/tokens/v1"
-        if ids:
-            id_list = str(parse_id_list(ids)).replace(",", "&ids=")
-            target_url = f"{target_url}?ids={id_list}"
-        parameter_payload = args_to_params(parameters, kwargs, ITEndpoints)
+        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}".replace("?ids={}", "")
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
         header_payload = self.headers
         body_payload = body
         returned = service_request(caller=self,
@@ -154,12 +149,13 @@ class Installation_Tokens(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def audit_events_query(self: object, parameters: dict = None, **kwargs) -> dict:
+    def audit_events_query(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103  # Matching API
         """Search for audit events by providing an FQL filter and paging details."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/audit-events-query
-        target_url = f"{self.base_url}/installation-tokens/queries/audit-events/v1"
+        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ITEndpoints)
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,
@@ -170,12 +166,13 @@ class Installation_Tokens(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def tokens_query(self: object, parameters: dict = None, **kwargs) -> dict:
+    def tokens_query(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103  # Matching API
         """Search for tokens by providing an FQL filter and paging details."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-query
-        target_url = f"{self.base_url}/installation-tokens/queries/tokens/v1"
+        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ITEndpoints)
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,

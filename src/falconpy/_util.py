@@ -38,7 +38,6 @@ For more information, please refer to <https://unlicense.org>
 """
 import base64
 import functools
-import inspect
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
@@ -278,13 +277,12 @@ def calc_url_from_args(target_url: str, passed_args: dict) -> str:
     return target_url
 
 
-def args_to_params(payload: dict, passed_arguments: dict, endpoints: list) -> dict:
+def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epname: str) -> dict:
     """This function reviews arguments passed to the function against arguments accepted by the endpoint.
        If a valid argument is passed, it is added and returned as part of the payload dictionary.
     """
     for arg in passed_arguments:
-        caller = inspect.stack()[1][3]
-        eps = [ep[5] for ep in endpoints if caller in ep[0]][0]
+        eps = [ep[5] for ep in endpoints if epname in ep[0]][0]
         try:
             argument = [param for param in eps if param["name"] == arg][0]["name"]
             if argument:
