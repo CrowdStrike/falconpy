@@ -266,7 +266,7 @@ def calc_url_from_args(target_url: str, passed_args: dict) -> str:
         target_url = target_url.format(id_list)
     if "action_name" in passed_args:
         delim = "&" if "?" in target_url else "?"
-        # TODO: Additional action_name restrictions?
+        # Additional action_name restrictions?
         target_url = f"{target_url}{delim}action_name={str(passed_args['action_name'])}"
     if "partition" in passed_args:
         target_url = target_url.format(str(passed_args['partition']))
@@ -280,14 +280,20 @@ def calc_url_from_args(target_url: str, passed_args: dict) -> str:
 def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epname: str) -> dict:
     """This function reviews arguments passed to the function against arguments accepted by the endpoint.
        If a valid argument is passed, it is added and returned as part of the payload dictionary.
+
+       This function will convert passed comma-delimited strings to list data types when necessary.
     """
     for arg in passed_arguments:
         eps = [ep[5] for ep in endpoints if epname in ep[0]][0]
         try:
-            argument = [param for param in eps if param["name"] == arg][0]["name"]
+            argument = [param for param in eps if param["name"] == arg][0]
             if argument:
-                # Data type validation could go here
-                payload[argument] = passed_arguments[argument]
+                arg_name = argument["name"]
+                if argument["type"] == "array":
+                    if isinstance(passed_arguments[arg_name], (str)):
+                        passed_arguments[arg_name] = passed_arguments[arg_name].split(",")
+                # More data type validation can go here
+                payload[arg_name] = passed_arguments[arg_name]
         except IndexError:
             # Unrecognized argument
             pass
