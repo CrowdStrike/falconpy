@@ -16,6 +16,7 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 + `host_group.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group
 + `hosts.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts
 + `incidents.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents
++ `installation_tokens.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens
 + `intel.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel
 + `ioa_exclusions.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions
 + `iocs.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs
@@ -37,8 +38,6 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 
 ### Planned
 + `d4c_registration.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration
-+ `installation_tokens.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens
-
 
 ## The Uber Class
 ### A single class to interface with the entire API
