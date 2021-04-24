@@ -35,6 +35,22 @@
     * updateIOAExclusionsV1
     * queryIOAExclusionsV1
     - Added unit tests (`test_ioa_exclusions.py`)
++ Added: Falcon Complete Dashboard API Service Class (`falcon_complete_dashboard.py`)
+    * AggregateAllowList
+    * AggregateBlockList
+    * AggregateDetections
+    * AggregateDeviceCountCollection
+    * AggregateEscalations
+    * AggregateFCIncidents
+    * AggregateRemediations
+    * QueryAllowListFilter
+    * QueryBlockListFilter
+    * QueryDetectionIdsByFilter
+    * GetDeviceCountCollectionQueriesByFilter
+    * QueryEscalationsFilter
+    * QueryIncidentIdsByFilter
+    * QueryRemediationsFilter
+    - Added unit tests (`test_falcon_complete_dashboard.py`)
 + Added: MalQuery API Service Class (`malquery.py`)
     + GetMalQueryQuotasV1
     + PostMalQueryFuzzySearchV1
@@ -53,6 +69,13 @@
     * updateMLExclusionsV1
     * queryMLExclusionsV1
     - Added unit tests (`test_ml_exclusions.py`)
++ Added: Overwatch Dashboard API Service Class (`overwatch_dashboard.py`)
+    * AggregatesDetectionsGlobalCounts
+    * AggregatesEventsCollections
+    * AggregatesEvents
+    * AggregatesIncidentsGlobalCounts
+    * AggregatesOWEventsGlobalCounts
+    - Added unit tests (`test_overwatch_dashboard.py`)
 + Added: Sensor Visibility Exclusions API Service Class (`sensor_visibility_exclusions.py`)
     * getSensorVisibilityExclusionsV1
     * createSVExclusionsV1
