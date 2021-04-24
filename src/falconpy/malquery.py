@@ -86,7 +86,7 @@ class MalQuery(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Download a file indexed by MalQuery. Specify the file using its SHA256.
            Only one file is supported at this time.
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/getIOAExclusionsV1
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery/GetMalQueryDownloadV1
         fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
