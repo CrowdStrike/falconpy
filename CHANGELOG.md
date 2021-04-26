@@ -1,4 +1,101 @@
+# Version 0.4.7
+## Added features and functionality
+
+> New Service Class pattern - Query String parameters can now be passed as function arguments.
+
+> This functionality is currently only available in the following new Service Classes while
+> regression testing is underway.
+
++ Added: D4C Registration API Service Class (`d4c_registration.py`)
+    * GetCSPMAzureAccount
+    * CreateCSPMAzureAccount
+    * UpdateCSPMAzureAccountClientID
+    * GetCSPMAzureUserScriptsAttachment
+    * GetCSPMAzureUserScripts
+    * GetCSPMCGPAccount
+    * GetCSPMGCPAccount (redirects to GetCSPMCGPAccount)
+    * CreateCSPMGCPAccount
+    * GetCSPMGCPUserScriptsAttachment
+    * GetCSPMGCPUserScripts
+    - Added unit tests (`test_d4c_registration.py`)
++ Added: Installation Tokens API Service Class (`installation_tokens.py`)
+    * audit_events_read
+    * customer_settings_read
+    * tokens_read
+    * tokens_create
+    * tokens_delete
+    * tokens_update
+    * audit_events_query
+    * tokens_query
+    - Added unit tests (`test_installation_tokens.py`)
++ Added: IOA Exclusions API Service Class (`ioa_exclusions.py`)
+    * getIOAExclusionsV1
+    * createIOAExclusionsV1
+    * deleteIOAExclusionsV1
+    * updateIOAExclusionsV1
+    * queryIOAExclusionsV1
+    - Added unit tests (`test_ioa_exclusions.py`)
++ Added: Falcon Complete Dashboard API Service Class (`falcon_complete_dashboard.py`)
+    * AggregateAllowList
+    * AggregateBlockList
+    * AggregateDetections
+    * AggregateDeviceCountCollection
+    * AggregateEscalations
+    * AggregateFCIncidents
+    * AggregateRemediations
+    * QueryAllowListFilter
+    * QueryBlockListFilter
+    * QueryDetectionIdsByFilter
+    * GetDeviceCountCollectionQueriesByFilter
+    * QueryEscalationsFilter
+    * QueryIncidentIdsByFilter
+    * QueryRemediationsFilter
+    - Added unit tests (`test_falcon_complete_dashboard.py`)
++ Added: MalQuery API Service Class (`malquery.py`)
+    + GetMalQueryQuotasV1
+    + PostMalQueryFuzzySearchV1
+    + GetMalQueryDownloadV1
+    + GetMalQueryMetadataV1
+    + GetMalQueryRequestV1
+    + GetMalQueryEntitiesSamplesFetchV1
+    + PostMalQueryEntitiesSamplesMultidownloadV1
+    + PostMalQueryExactSearchV1
+    + PostMalQueryHuntV1
+    * Added unit tests (`test_malquery.py`)
++ Added: ML Exclusions API Service Class (`ml_exclusions.py`)
+    * getMLExclusionsV1
+    * createMLExclusionsV1
+    * deleteMLExclusionsV1
+    * updateMLExclusionsV1
+    * queryMLExclusionsV1
+    - Added unit tests (`test_ml_exclusions.py`)
++ Added: Overwatch Dashboard API Service Class (`overwatch_dashboard.py`)
+    * AggregatesDetectionsGlobalCounts
+    * AggregatesEventsCollections
+    * AggregatesEvents
+    * AggregatesIncidentsGlobalCounts
+    * AggregatesOWEventsGlobalCounts
+    - Added unit tests (`test_overwatch_dashboard.py`)
++ Added: Sensor Visibility Exclusions API Service Class (`sensor_visibility_exclusions.py`)
+    * getSensorVisibilityExclusionsV1
+    * createSVExclusionsV1
+    * deleteSensorVisibilityExclusionsV1
+    * updateSensorVisibilityExclusionsV1
+    * querySensorVisibilityExclusionsV1
+    - Added unit tests (`test_sensor_visibility_exclusions.py`)
+## Other
++ Added: args_to_params function (`_util.py`) - Allows developers to specify parameter dictionary elements as function arguments
+    ### Example
+    ```python
+    import json
+    from falconpy.ml_exclusions import ML_Exclusions as FalconML
+    falcon = FalconML(creds={"client_id": client_ID, "client_secret": client_secret})
+    print(json.dumps(falcon.queryMLExclusionsV1(limit=10, offset=20, sort="value.asc"), indent=4))
+    ```
+    - Unrecognized parameter values are discarded
+    - Initial testing in a limited number of Service Classes
 # Version 0.4.6-spotlight-remediations-patch-1
+## Added features and functionality
 + Added: Missing method to Spotlight_Vulnerabilities Service Class (`spotlight_vulnerabilities.py`)
     * getRemediations
     - Added unit test to existing test series (`test_spotlight_vulnerabilities.py`)

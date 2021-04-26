@@ -36,13 +36,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-import requests
 import base64
 import functools
+import requests
 import urllib3
+from urllib3.exceptions import InsecureRequestWarning
 from ._version import _title, _version
 from ._result import Result
-from urllib3.exceptions import InsecureRequestWarning
 urllib3.disable_warnings(InsecureRequestWarning)
 
 # Restrict requests to only allowed HTTP methods
@@ -82,9 +82,10 @@ def parse_id_list(id_list) -> str:
             if len(returned) > 1:
                 returned += ","
             returned += str(s)
-        return returned
     else:
-        return id_list
+        returned = id_list
+
+    return returned
 
 
 def generate_b64cred(client_id: str, client_secret: str) -> str:
@@ -248,7 +249,6 @@ def force_default(defaults: list, default_types: list = None):
                     # It exists but it's a NoneType
                     if kwargs.get(element) is None:
                         kwargs[element] = get_default(default_types, element_count)
-                    # TODO: Else branch here to do input validation?
                 else:
                     # Not present whatsoever
                     kwargs[element] = get_default(default_types, element_count)
@@ -266,7 +266,7 @@ def calc_url_from_args(target_url: str, passed_args: dict) -> str:
         target_url = target_url.format(id_list)
     if "action_name" in passed_args:
         delim = "&" if "?" in target_url else "?"
-        # TODO: Additional action_name restrictions?
+        # Additional action_name restrictions?
         target_url = f"{target_url}{delim}action_name={str(passed_args['action_name'])}"
     if "partition" in passed_args:
         target_url = target_url.format(str(passed_args['partition']))
@@ -275,3 +275,27 @@ def calc_url_from_args(target_url: str, passed_args: dict) -> str:
         target_url = f"{target_url}{delim}file_name={str(passed_args['file_name'])}"
 
     return target_url
+
+
+def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epname: str) -> dict:
+    """This function reviews arguments passed to the function against arguments accepted by the endpoint.
+       If a valid argument is passed, it is added and returned as part of the payload dictionary.
+
+       This function will convert passed comma-delimited strings to list data types when necessary.
+    """
+    for arg in passed_arguments:
+        eps = [ep[5] for ep in endpoints if epname in ep[0]][0]
+        try:
+            argument = [param for param in eps if param["name"] == arg][0]
+            if argument:
+                arg_name = argument["name"]
+                if argument["type"] == "array":
+                    if isinstance(passed_arguments[arg_name], (str)):
+                        passed_arguments[arg_name] = passed_arguments[arg_name].split(",")
+                # More data type validation can go here
+                payload[arg_name] = passed_arguments[arg_name]
+        except IndexError:
+            # Unrecognized argument
+            pass
+
+    return payload
