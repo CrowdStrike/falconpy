@@ -250,7 +250,7 @@ class Flight_Control(ServiceClass):  # pylint: disable=C0103,R0904  # Matching A
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getUserGroupMembersByID(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103  #Matching API
+    def getUserGroupMembersByID(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
         """Get User Group members by User Group ID(s)."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getUserGroupMembersByID
         fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
