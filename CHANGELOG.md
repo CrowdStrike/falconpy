@@ -1,3 +1,9 @@
+# Version 0.4.8
+## Issues resolved
++ Fixed: Parsing issue with __ids__ argument within MSSP.getChildren (Flight Control Service Class)
+    * Resolved by migrating `mssp.py` source to the new pattern being tested for Service Classes.
+    * Closes [#144](https://github.com/CrowdStrike/falconpy/issues/144)
+
 # Version 0.4.7
 ## Added features and functionality
 
