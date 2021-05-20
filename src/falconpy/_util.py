@@ -112,7 +112,6 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
             pass
 
     returned = perform_request(**kwargs)
-    print(returned)
 
     return returned
 
