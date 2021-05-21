@@ -149,6 +149,8 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
             - Example: { "limit": int, "offset": int, "filter": str}
         body_required: list - List of payload parameters required by the requested operation
             - Example: ["ids"]
+        proxy: dict - Dictionary containing a list of proxies to use for requests
+            - Example: {"https": "https://myproxy.com:4000", "http": "http://myhttpproxy:80"}
     """
     if files is None:
         files = []
@@ -156,15 +158,17 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
     METHOD = method.upper()
     if METHOD in _ALLOWED_METHODS:
         # Validate parameters
-        if params_validator:
-            try:
-                validate_payload(params_validator, params, params_required)
-            except ValueError as e:
-                returned = generate_error_result(message=f"{str(e)}")
-                PERFORM = False
-            except TypeError as e:
-                returned = generate_error_result(message=f"{str(e)}")
-                PERFORM = False
+        # 05.21.21/JSH - Param validation is now handled by the updated args_to_params method
+        #
+        # if params_validator:
+        #     try:
+        #         validate_payload(params_validator, params, params_required)
+        #     except ValueError as e:
+        #         returned = generate_error_result(message=f"{str(e)}")
+        #         PERFORM = False
+        #     except TypeError as e:
+        #         returned = generate_error_result(message=f"{str(e)}")
+        #         PERFORM = False
 
         # Validate body payload
         if body_validator:
@@ -181,12 +185,9 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
         if PERFORM:
             headers["User-Agent"] = _USER_AGENT  # Force all requests to pass the User-Agent identifier
             try:
-                if proxy:
-                    response = requests.request(METHOD, endpoint, params=params, headers=headers,
-                                                json=body, data=data, files=files, verify=verify, proxies=proxy)
-                else:
-                    response = requests.request(METHOD, endpoint, params=params, headers=headers,
-                                                json=body, data=data, files=files, verify=verify)
+                response = requests.request(METHOD, endpoint, params=params, headers=headers,
+                                            json=body, data=data, files=files, verify=verify, proxies=proxy)
+
                 if response.headers.get('content-type') == "application/json":
                     returned = Result()(response.status_code, response.headers, response.json())
                 else:
