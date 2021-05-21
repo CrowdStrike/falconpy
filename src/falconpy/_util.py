@@ -120,7 +120,8 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
                     params: dict = None, body: dict = None, verify: bool = True,
                     data=None, files: list = None,
                     params_validator: dict = None, params_required: dict = None,
-                    body_validator: dict = None, body_required: dict = None) -> object:  # May return dict or object datatypes
+                    body_validator: dict = None, body_required: dict = None,
+                    proxy: dict = None) -> object:  # May return dict or object datatypes
     """
         Leverages the requests library to perform the requested CrowdStrike OAuth2 API operation.
 
@@ -180,8 +181,12 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
         if PERFORM:
             headers["User-Agent"] = _USER_AGENT  # Force all requests to pass the User-Agent identifier
             try:
-                response = requests.request(METHOD, endpoint, params=params, headers=headers,
-                                            json=body, data=data, files=files, verify=verify)
+                if proxy:
+                    response = requests.request(METHOD, endpoint, params=params, headers=headers,
+                                                json=body, data=data, files=files, verify=verify, proxies=proxy)
+                else:
+                    response = requests.request(METHOD, endpoint, params=params, headers=headers,
+                                                json=body, data=data, files=files, verify=verify)
                 if response.headers.get('content-type') == "application/json":
                     returned = Result()(response.status_code, response.headers, response.json())
                 else:
