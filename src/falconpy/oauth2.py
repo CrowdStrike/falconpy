@@ -71,7 +71,7 @@ class OAuth2:
         self.authenticated = lambda: False if self.token_expired() else True
 
     def token(self: object) -> dict:
-        print(self)
+        
         """ Generates an authorization token. """
         FULL_URL = self.base_url+'/oauth2/token'
         HEADERS = {}
