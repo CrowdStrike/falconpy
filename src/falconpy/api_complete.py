@@ -50,14 +50,13 @@ class APIHarness:
     TOKEN_RENEW_WINDOW = 20  # in seconds
 
     def __init__(self: object, creds: dict, base_url: str = "https://api.crowdstrike.com",
-                 ssl_verify: bool = True, proxy: dict = None) -> object:
+                 ssl_verify: bool = True) -> object:
         """Instantiates an instance of the base class, ingests credentials, the base URL and the SSL verification
            boolean. Afterwards class attributes are initialized.
         """
         self.creds = creds
         self.base_url = base_url
         self.ssl_verify = ssl_verify
-        self.proxy = proxy
         self.token = False
         self.token_expiration = 0
         self.token_time = time.time()
@@ -93,7 +92,7 @@ class APIHarness:
         if "member_cid" in self.creds:
             data_payload["member_cid"] = self.creds["member_cid"]
 
-        result = perform_request(method="POST", endpoint=target, data=data_payload, headers={}, verify=self.ssl_verify, proxy=self.proxy)
+        result = perform_request(method="POST", endpoint=target, data=data_payload, headers={}, verify=self.ssl_verify)
         if result["status_code"] == 201:
             self.token = result["body"]["access_token"]
             self.token_expiration = result["body"]["expires_in"]
@@ -113,7 +112,7 @@ class APIHarness:
         data_payload = {'token': '{}'.format(self.token)}
         revoked = False
         if perform_request(method="POST", endpoint=target, data=data_payload,
-                           headers=header_payload, verify=self.ssl_verify, proxy=self.proxy)["status_code"] == 200:
+                           headers=header_payload, verify=self.ssl_verify)["status_code"] == 200:
             self.authenticated = False
             self.token = False
             revoked = True
@@ -198,8 +197,7 @@ class APIHarness:
                                                params=parameter_payload,
                                                headers=header_payload,
                                                files=file_list,
-                                               verify=self.ssl_verify,
-                                               proxy=self.proxy
+                                               verify=self.ssl_verify
                                                )
                 else:
                     # Bad HTTP method
