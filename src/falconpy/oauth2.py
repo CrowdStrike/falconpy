@@ -51,13 +51,11 @@ class OAuth2:
         }
     """
 
-    def __init__(self: object, creds: dict, base_url: str = "https://api.crowdstrike.com",
-                 ssl_verify: bool = True, proxy: dict = None):
+    def __init__(self: object, creds: dict, base_url: str = "https://api.crowdstrike.com", ssl_verify: bool = True):
         """ Initializes the base class by ingesting credentials, the base URL, and SSL verification options. """
         self.creds = creds
         self.base_url = base_url
         self.ssl_verify = ssl_verify
-        self.proxy = proxy
         self.token_expiration = 0
         self.token_renew_window = 20
         self.token_time = time.time()
@@ -71,7 +69,6 @@ class OAuth2:
         self.authenticated = lambda: False if self.token_expired() else True
 
     def token(self: object) -> dict:
-        
         """ Generates an authorization token. """
         FULL_URL = self.base_url+'/oauth2/token'
         HEADERS = {}
@@ -81,8 +78,7 @@ class OAuth2:
         }
         if "member_cid" in self.creds:
             DATA["member_cid"] = self.creds["member_cid"]
-        returned = perform_request(method="POST", endpoint=FULL_URL, data=DATA, headers=HEADERS,
-                                   verify=self.ssl_verify, proxy=self.proxy)
+        returned = perform_request(method="POST", endpoint=FULL_URL, data=DATA, headers=HEADERS, verify=self.ssl_verify)
         if returned["status_code"] == 201:
             self.token_expiration = returned["body"]["expires_in"]
             self.token_time = time.time()
@@ -95,8 +91,7 @@ class OAuth2:
         FULL_URL = self.base_url+'/oauth2/revoke'
         HEADERS = {'Authorization': 'basic {}'.format(generate_b64cred(self.creds["client_id"], self.creds["client_secret"]))}
         DATA = {'token': '{}'.format(token)}
-        returned = perform_request(method="POST", endpoint=FULL_URL, data=DATA, headers=HEADERS,
-                                   verify=self.ssl_verify, proxy=self.proxy)
+        returned = perform_request(method="POST", endpoint=FULL_URL, data=DATA, headers=HEADERS, verify=self.ssl_verify)
         self.token_expiration = 0
         self.token_value = False
 
