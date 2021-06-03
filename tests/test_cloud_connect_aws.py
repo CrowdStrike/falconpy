@@ -68,13 +68,16 @@ class TestCloudConnectAWS:
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
         }))
-        if falconWithObject.QueryAWSAccounts(parameters={"limite": 1})["status_code"] != 500:
+        if not falconWithObject.QueryAWSAccounts(parameters={"limite": 1})["status_code"] in AllowedResponses:
             result = False
 
-        if falconWithObject.QueryAWSAccounts(parameters={"limit": "1"})["status_code"] != 500:
+        if not falconWithObject.QueryAWSAccounts(parameters={"limit": "1"})["status_code"] in AllowedResponses:
             result = False
 
-        if falconWithObject.UpdateAWSAccounts(body={"resources": "I'm gonna go Boom!"})["status_code"] != 500:
+        if falconWithObject.UpdateAWSAccounts(body={"resource": "I'm gonna go Boom!"})["status_code"] != 500:
+            result = False
+
+        if falconWithObject.UpdateAWSAccounts(body={"resources": {"id": "I'm gonna go Boom!"}})["status_code"] != 500:
             result = False
 
         return result

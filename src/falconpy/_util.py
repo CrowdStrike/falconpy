@@ -120,7 +120,8 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
                     params: dict = None, body: dict = None, verify: bool = True,
                     data=None, files: list = None,
                     params_validator: dict = None, params_required: dict = None,
-                    body_validator: dict = None, body_required: dict = None) -> object:  # May return dict or object datatypes
+                    body_validator: dict = None, body_required: dict = None,
+                    proxy: dict = None) -> object:  # May return dict or object datatypes
     """
         Leverages the requests library to perform the requested CrowdStrike OAuth2 API operation.
 
@@ -148,6 +149,8 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
             - Example: { "limit": int, "offset": int, "filter": str}
         body_required: list - List of payload parameters required by the requested operation
             - Example: ["ids"]
+        proxy: dict - Dictionary containing a list of proxies to use for requests
+            - Example: {"https": "https://myproxy.com:4000", "http": "http://myhttpproxy:80"}
     """
     if files is None:
         files = []
@@ -155,15 +158,17 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
     METHOD = method.upper()
     if METHOD in _ALLOWED_METHODS:
         # Validate parameters
-        if params_validator:
-            try:
-                validate_payload(params_validator, params, params_required)
-            except ValueError as e:
-                returned = generate_error_result(message=f"{str(e)}")
-                PERFORM = False
-            except TypeError as e:
-                returned = generate_error_result(message=f"{str(e)}")
-                PERFORM = False
+        # 05.21.21/JSH - Param validation is now handled by the updated args_to_params method
+        #
+        # if params_validator:
+        #     try:
+        #         validate_payload(params_validator, params, params_required)
+        #     except ValueError as e:
+        #         returned = generate_error_result(message=f"{str(e)}")
+        #         PERFORM = False
+        #     except TypeError as e:
+        #         returned = generate_error_result(message=f"{str(e)}")
+        #         PERFORM = False
 
         # Validate body payload
         if body_validator:
@@ -181,7 +186,8 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
             headers["User-Agent"] = _USER_AGENT  # Force all requests to pass the User-Agent identifier
             try:
                 response = requests.request(METHOD, endpoint, params=params, headers=headers,
-                                            json=body, data=data, files=files, verify=verify)
+                                            json=body, data=data, files=files, verify=verify, proxies=proxy)
+
                 if response.headers.get('content-type') == "application/json":
                     returned = Result()(response.status_code, response.headers, response.json())
                 else:
