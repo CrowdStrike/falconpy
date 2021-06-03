@@ -93,13 +93,7 @@ class APIHarness:
         if "member_cid" in self.creds:
             data_payload["member_cid"] = self.creds["member_cid"]
 
-        result = perform_request(method="POST",
-                                 endpoint=target,
-                                 data=data_payload,
-                                 headers={},
-                                 verify=self.ssl_verify,
-                                 proxy=self.proxy
-                                 )
+        result = perform_request(method="POST", endpoint=target, data=data_payload, headers={}, verify=self.ssl_verify, proxy=self.proxy)
         if result["status_code"] == 201:
             self.token = result["body"]["access_token"]
             self.token_expiration = result["body"]["expires_in"]
