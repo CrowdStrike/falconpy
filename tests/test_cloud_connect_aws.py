@@ -74,7 +74,7 @@ class TestCloudConnectAWS:
         if not falconWithObject.QueryAWSAccounts(parameters={"limit": "1"})["status_code"] in AllowedResponses:
             result = False
 
-        if falconWithObject.UpdateAWSAccounts(body={"resource": "I'm gonna go Boom!"})["status_code"] != 500:
+        if falconWithObject.UpdateAWSAccounts(body={"resources": "I'm gonna go Boom!"})["status_code"] != 500:
             result = False
 
         if falconWithObject.UpdateAWSAccounts(body={"resources": {"id": "I'm gonna go Boom!"}})["status_code"] != 500:
