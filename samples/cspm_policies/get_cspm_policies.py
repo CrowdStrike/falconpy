@@ -1,3 +1,27 @@
+#  ___  ____  ____     ___  ____  ____  _  _    ____   __   __    __  ___  __  ____  ____ 
+# / __)(  __)(_  _)   / __)/ ___)(  _ \( \/ )  (  _ \ /  \ (  )  (  )/ __)(  )(  __)/ ___)
+#( (_ \ ) _)   )(    ( (__ \___ \ ) __// \/ \   ) __/(  O )/ (_/\ )(( (__  )(  ) _) \___ \
+# \___/(____) (__)    \___)(____/(__)  \_)(_/  (__)   \__/ \____/(__)\___)(__)(____)(____/
+#
+# The below example uses the CSPM Registration Class
+# 
+# Input parameters:
+#
+# --falcon_client_id or -f (client id of the API credentials with Horizon read capabilities)
+# --falcon_client_secret or -s (secret associated with the client_id)
+# --output_file or -o (the output file name and path (.csv extentions recommended))
+# --cloud or -c (optional: the target cloud platform policies)
+#
+# Example: below using client_id and client_secret as environment variables and will output all of the policies
+#
+#  python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -o ~/Documents/policies.csv
+#
+# Example: below using client_id and client_secret as environment variables and will output only the azure policies
+#
+#  python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c azure -o ~/Documents/azure-policies.csv
+#
+### 
+
 import argparse
 import json
 import csv
