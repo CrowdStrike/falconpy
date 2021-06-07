@@ -12,17 +12,22 @@
 # --output_file or -o (the output file name and path (.csv extentions recommended))
 # --cloud or -c (optional: the target cloud platform policies)
 #
-# Example: below using client_id and client_secret as environment variables and will output all of the policies
+# Example: below using client_id and client_secret as environment 
+# variables and will output all of the policies
 #
-#  python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -o ~/Documents/policies.csv
+#  python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET \
+#              -o ~/Documents/policies.csv
 #
-# Example: below using client_id and client_secret as environment variables and will output only the azure policies
+# Example: Below using client_id and client_secret as environment variables and 
+#          will output only the azure policies
 #
-#  python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c azure -o ~/Documents/azure-policies.csv
+#  python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET \
+#              -c azure -o ~/Documents/azure-policies.csv
 #
 ### The script can also be ran with the config.json file
 #
 #  python3 get_cspm_policies.py -c azure -o ~/Documents/azure-policies.csv
+#
 ###
 
 import argparse
