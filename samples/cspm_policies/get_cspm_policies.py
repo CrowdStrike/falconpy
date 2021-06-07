@@ -20,6 +20,9 @@
 #
 #  python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c azure -o ~/Documents/azure-policies.csv
 #
+### The script can also be ran with the config.json file
+#
+#  python3 get_cspm_policies.py -c azure -o ~/Documents/azure-policies.csv
 ###
 
 import argparse
@@ -70,8 +73,6 @@ falcon = FalconCSPM.CSPM_Registration(
 # Format api json data to accommodate for missing keys
 # The goal of this function is to bring uniformtity to the api
 # returned data so it can be reported in csv format
-
-
 def format_json_data(json_data):
     length = 0
     headers = []
