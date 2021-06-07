@@ -3,7 +3,7 @@
 # ( (_ \ ) _)   )(    ( (__ \___ \ ) __// \/ \   ) __/(  O )/ (_/\ )(( (__  )(  ) _) \___ \
 # \___/(____) (__)    \___)(____/(__)  \_)(_/  (__)   \__/ \____/(__)\___)(__)(____)(____/
 #
-# The below example uses the CSPM Registration Class
+# The below example uses the CSPM Registration Class to output Horizon policies to csv
 #
 # Input parameters:
 #
