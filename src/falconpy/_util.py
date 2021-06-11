@@ -110,12 +110,12 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
                         caller.headers['Authorization'] = 'Bearer '
         except AttributeError:
             pass
-        
+
         try:
             proxy = caller.proxy
         except AttributeError:
             proxy = None
-        
+
         try:
             timeout = caller.timeout
         except AttributeError:
