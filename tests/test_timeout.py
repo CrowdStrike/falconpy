@@ -61,7 +61,7 @@ class TestTimeouts:
         falconStandardFail = FalconAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, timeout=(.01)
+        }, timeout=.01
         )
         success = False
         result = falconStandardFail.QueryAWSAccounts()
