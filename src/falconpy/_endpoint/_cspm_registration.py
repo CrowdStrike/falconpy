@@ -114,7 +114,7 @@ _cspm_registration_endpoints = [
     "POST",
     "/cloud-connect-cspm-aws/entities/account/v1",
     "Creates a new account in our system for a customer and generates a script for "
-	"them to run in their AWS cloud environment to grant us access.",
+    "them to run in their AWS cloud environment to grant us access.",
     "cspm_registration",
     [
       {

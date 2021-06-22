@@ -140,7 +140,9 @@ _recon_endpoints = [
     "GetNotificationsDetailedTranslatedV1",
     "GET",
     "/recon/entities/notifications-detailed-translated/v1?ids={}",
-    "Get detailed notifications based on their IDs. These include the raw intelligence content that generated the match.This endpoint will return translated notification content. The only target language available is English. A single notification can be translated per request",
+    "Get detailed notifications based on their IDs. These include the raw intelligence content that generated the match. "
+    "This endpoint will return translated notification content. The only target language available is English. "
+    "A single notification can be translated per request",
     "recon",
     [
       {
@@ -180,7 +182,8 @@ _recon_endpoints = [
     "GetNotificationsTranslatedV1",
     "GET",
     "/recon/entities/notifications-translated/v1?ids={}",
-    "Get notifications based on their IDs. IDs can be retrieved using the GET /queries/notifications/v1 endpoint. This endpoint will return translated notification content. The only target language available is English.",
+    "Get notifications based on their IDs. IDs can be retrieved using the GET /queries/notifications/v1 endpoint. "
+    "This endpoint will return translated notification content. The only target language available is English.",
     "recon",
     [
       {
@@ -346,7 +349,8 @@ _recon_endpoints = [
     "QueryActionsV1",
     "GET",
     "/recon/queries/actions/v1",
-    "Query actions based on provided criteria. Use the IDs from this response to get the action entities on GET /entities/actions/v1.",
+    "Query actions based on provided criteria. Use the IDs from this response "
+    "to get the action entities on GET /entities/actions/v1.",
     "recon",
     [
       {
@@ -369,7 +373,8 @@ _recon_endpoints = [
       },
       {
         "type": "string",
-        "description": "FQL query to filter actions by. Possible filter properties are: [id cid user_uuid rule_id type frequency recipients status created_timestamp updated_timestamp]",
+        "description": "FQL query to filter actions by. Possible filter properties are: "
+        "[id cid user_uuid rule_id type frequency recipients status created_timestamp updated_timestamp]",
         "name": "filter",
         "in": "query"
       },
@@ -385,7 +390,8 @@ _recon_endpoints = [
     "QueryNotificationsV1",
     "GET",
     "/recon/queries/notifications/v1",
-    "Query notifications based on provided criteria. Use the IDs from this response to get the notification entities on GET /entities/notifications/v1 or GET /entities/notifications-detailed/v1.",
+    "Query notifications based on provided criteria. Use the IDs from this response to get "
+    "the notification entities on GET /entities/notifications/v1 or GET /entities/notifications-detailed/v1.",
     "recon",
     [
       {
@@ -408,7 +414,8 @@ _recon_endpoints = [
       },
       {
         "type": "string",
-        "description": "FQL query to filter notifications by. Possible filter properties are: [id cid user_uuid status rule_id rule_name rule_topic rule_priority item_type created_date updated_date]",
+        "description": "FQL query to filter notifications by. Possible filter properties are: "
+        "[id cid user_uuid status rule_id rule_name rule_topic rule_priority item_type created_date updated_date]",
         "name": "filter",
         "in": "query"
       },
@@ -424,7 +431,8 @@ _recon_endpoints = [
     "QueryRulesV1",
     "GET",
     "/recon/queries/rules/v1",
-    "Query monitoring rules based on provided criteria. Use the IDs from this response to fetch the rules on /entities/rules/v1.",
+    "Query monitoring rules based on provided criteria. "
+    "Use the IDs from this response to fetch the rules on /entities/rules/v1.",
     "recon",
     [
       {
@@ -447,13 +455,15 @@ _recon_endpoints = [
       },
       {
         "type": "string",
-        "description": "Possible order by fields: created_timestamp, last_updated_timestamp. Ex: 'last_updated_timestamp|desc'.",
+        "description": "Possible order by fields: created_timestamp, "
+        "last_updated_timestamp. Ex: 'last_updated_timestamp|desc'.",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "FQL query to filter rules by. Possible filter properties are: [id cid user_uuid topic priority permissions filter status created_timestamp last_updated_timestamp]",
+        "description": "FQL query to filter rules by. Possible filter properties are: "
+        "[id cid user_uuid topic priority permissions filter status created_timestamp last_updated_timestamp]",
         "name": "filter",
         "in": "query"
       },

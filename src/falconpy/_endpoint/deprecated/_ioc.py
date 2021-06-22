@@ -53,7 +53,8 @@ _ioc_endpoints = [
       },
       {
         "type": "integer",
-        "description": "The offset to start retrieving records from. Offset and After params are mutually exclusive. If none provided then scrolling will be used by default.",
+        "description": "The offset to start retrieving records from. Offset and After params are mutually exclusive. "
+        "If none provided then scrolling will be used by default.",
         "name": "offset",
         "in": "query"
       },
@@ -186,7 +187,8 @@ _ioc_endpoints = [
     [
       {
         "type": "string",
-        "description": "The FQL expression to delete Indicators in bulk. If both 'filter' and 'ids' are provided, then filter takes precedence and ignores ids.",
+        "description": "The FQL expression to delete Indicators in bulk. If both 'filter' and 'ids' are provided, "
+        "then filter takes precedence and ignores ids.",
         "name": "filter",
         "in": "query"
       },
@@ -196,7 +198,8 @@ _ioc_endpoints = [
           "type": "string"
         },
         "collectionFormat": "csv",
-        "description": "The ids of the Indicators to delete. If both 'filter' and 'ids' are provided, then filter takes precedence and ignores ids",
+        "description": "The ids of the Indicators to delete. If both 'filter' and 'ids' are provided, "
+        "then filter takes precedence and ignores ids",
         "name": "ids",
         "in": "query"
       },
@@ -223,7 +226,8 @@ _ioc_endpoints = [
       },
       {
         "type": "integer",
-        "description": "The offset to start retrieving records from. Offset and After params are mutually exclusive. If none provided then scrolling will be used by default.",
+        "description": "The offset to start retrieving records from. Offset and After params are mutually exclusive. "
+        "If none provided then scrolling will be used by default.",
         "name": "offset",
         "in": "query"
       },
