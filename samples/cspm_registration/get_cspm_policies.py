@@ -76,7 +76,7 @@ falcon = FalconCSPM.CSPM_Registration(
            })
 
 # Format api json data to accommodate for missing keys
-# The goal of this function is to bring uniformtity to the api
+# The goal of this function is to bring uniformity to the api
 # returned data so it can be reported in csv format
 def format_json_data(json_data):
     length = 0
