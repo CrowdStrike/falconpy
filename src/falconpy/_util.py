@@ -111,7 +111,17 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
         except AttributeError:
             pass
 
-    returned = perform_request(**kwargs)
+        try:
+            proxy = caller.proxy
+        except AttributeError:
+            proxy = None
+
+        try:
+            timeout = caller.timeout
+        except AttributeError:
+            timeout = None
+
+    returned = perform_request(proxy=proxy, timeout=timeout, **kwargs)
 
     return returned
 
@@ -121,7 +131,7 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
                     data=None, files: list = None,
                     params_validator: dict = None, params_required: dict = None,
                     body_validator: dict = None, body_required: dict = None,
-                    proxy: dict = None) -> object:  # May return dict or object datatypes
+                    proxy: dict = None, timeout: float or tuple = None) -> object:  # May return dict or object datatypes
     """
         Leverages the requests library to perform the requested CrowdStrike OAuth2 API operation.
 
@@ -151,6 +161,10 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
             - Example: ["ids"]
         proxy: dict - Dictionary containing a list of proxies to use for requests
             - Example: {"https": "https://myproxy.com:4000", "http": "http://myhttpproxy:80"}
+        timeout: float or tuple
+            Float representing the global timeout for requests or a tuple containing the connect / read timeouts.
+            - Example: 30
+            - Example: (5.05, 25)
     """
     if files is None:
         files = []
@@ -186,7 +200,7 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
             headers["User-Agent"] = _USER_AGENT  # Force all requests to pass the User-Agent identifier
             try:
                 response = requests.request(METHOD, endpoint, params=params, headers=headers,
-                                            json=body, data=data, files=files, verify=verify, proxies=proxy)
+                                            json=body, data=data, files=files, verify=verify, proxies=proxy, timeout=timeout)
 
                 if response.headers.get('content-type') == "application/json":
                     returned = Result()(response.status_code, response.headers, response.json())

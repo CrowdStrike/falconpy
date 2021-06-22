@@ -41,12 +41,14 @@ from .oauth2 import OAuth2 as FalconAuth
 
 class ServiceClass:
     """ Base class of all service classes. Contains the default __init__ method. """
-    def __init__(self: object, access_token: str = None, auth_object: object = None, creds: dict = None,
-                 base_url: str = "https://api.crowdstrike.com", ssl_verify: bool = True) -> object:
+    def __init__(self: object, access_token: str = None, auth_object: object = None,
+                 creds: dict = None, base_url: str = "https://api.crowdstrike.com",
+                 ssl_verify: bool = True, proxy: dict = None, timeout: float or tuple = None) -> object:
         """ Instantiates the base class, ingests the authorization token,
             and initializes the headers and base_url global variables.
         """
         self.refreshable = False
+        self.timeout = timeout
         if auth_object:
             self.auth_object = auth_object
             if not self.authenticated():
@@ -60,8 +62,10 @@ class ServiceClass:
             else:
                 self.token = self.auth_object.token_value
                 self.headers = {'Authorization': 'Bearer {}'.format(self.token)}
+
             self.base_url = auth_object.base_url
             self.ssl_verify = auth_object.ssl_verify
+            self.proxy = auth_object.proxy
             self.refreshable = True
         else:
             if creds:
@@ -74,14 +78,14 @@ class ServiceClass:
                 else:
                     self.token = False
                     self.headers = {}
-                self.base_url = base_url
-                self.ssl_verify = ssl_verify
                 self.refreshable = True
             else:
                 self.auth_object = None
                 self.headers = {'Authorization': 'Bearer {}'.format(access_token)}
-                self.base_url = base_url
-                self.ssl_verify = ssl_verify
+
+            self.base_url = base_url
+            self.ssl_verify = ssl_verify
+            self.proxy = proxy
 
     def authenticated(self):
         result = None
