@@ -38,6 +38,11 @@ _Coming Soon_
 | :--- | :--- |
 | [Register, delete, update and check accounts](discover_aws/manage_discover_accounts_service.py) | [Register, delete, update and check accounts](discover_aws/manage_discover_accounts_uber.py) |
 
+### Falcon Horizon
+| Service Class | Uber Class |
+| :--- | :--- |
+| [Report or export as CSV, all or selective CSP Falcon CSPM Policies](cspm_registration/get_cspm_policies.py) | |
+
 
 ### Hosts
 | Service Class | Uber Class |
