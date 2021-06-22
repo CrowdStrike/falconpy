@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0103  # Aligning method names to API operation IDs
 from ._util import service_request, force_default, args_to_params
 from ._service_class import ServiceClass
 from ._endpoint._kubernetes_protection import _kubernetes_protection_endpoints as Endpoints
@@ -147,7 +148,7 @@ class Kubernetes_Protection(ServiceClass):
                                    )
         return returned
 
-    def RegenerateAPIKey(self: object, body: dict = None) -> dict:
+    def RegenerateAPIKey(self: object, body: dict = None) -> dict:  # pylint: disable=W0613  # No params accepted for POST
         """Regenerate API key for docker registry integrations"""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/RegenerateAPIKey
         operation_id = "RegenerateAPIKey"
