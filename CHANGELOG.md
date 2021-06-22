@@ -1,3 +1,20 @@
+# Version 0.4.10
+## Added features and functionality
++ Added: Timeout support - Float / tuple that is passed to the requests library when performing
+requests to the API. Can specify timeouts for connect, read and global.
+
+## Issues resolved
++ Fixed: Service Class proxy functionality support
+
+## Other
++ Timeout functionality unit tests (`test_timeout.py`)
+
+# Version 0.4.9
+## Added features and functionality
++ Added: Proxy support - dictionary of proxies that are passed to the requests library when
+performing requests to the API.
++ Related to discussion post [#154](https://github.com/CrowdStrike/falconpy/discussions/154)
+
 # Version 0.4.8
 ## Issues resolved
 + Fixed: Parsing issue with __ids__ argument within MSSP.getChildren (Flight Control Service Class)
