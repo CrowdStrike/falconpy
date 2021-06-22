@@ -20,7 +20,9 @@
 """
 from .deprecated import _custom_ioa_deprecated
 from .deprecated import _firewall_management_deprecated
+from .deprecated import _identity_detections_deprecated
 from .deprecated import _installation_tokens_deprecated
+from .deprecated import _ioc_deprecated
 from .deprecated import _iocs_deprecated
 from .deprecated import _real_time_response_deprecated
 from .deprecated import _real_time_response_admin_deprecated
@@ -38,11 +40,14 @@ from ._firewall_management import _firewall_management_endpoints
 from ._firewall_policies import _firewall_policies_endpoints
 from ._host_group import _host_group_endpoints
 from ._hosts import _hosts_endpoints
+from ._identity_detections import _identity_detections_endpoints
 from ._incidents import _incidents_endpoints
 from ._installation_tokens import _installation_tokens_endpoints
 from ._intel import _intel_endpoints
 from ._ioa_exclusions import _ioa_exclusions_endpoints
+from ._ioc import _ioc_endpoints
 from ._iocs import _iocs_endpoints
+from ._kubernetes_protection import _kubernetes_protection_endpoints
 from ._malquery import _malquery_endpoints
 from ._ml_exclusions import _ml_exclusions_endpoints
 from ._mssp import _mssp_endpoints
@@ -52,6 +57,8 @@ from ._prevention_policies import _prevention_policies_endpoints
 from ._quick_scan import _quick_scan_endpoints
 from ._real_time_response import _real_time_response_endpoints
 from ._real_time_response_admin import _real_time_response_admin_endpoints
+from ._recon import _recon_endpoints
+from ._response_policies import _response_policies_endpoints
 from ._sample_uploads import _sample_uploads_endpoints
 from ._sensor_download import _sensor_download_endpoints
 from ._sensor_update_policies import _sensor_update_policies_endpoints
@@ -74,11 +81,14 @@ api_endpoints.extend(_firewall_management_endpoints)
 api_endpoints.extend(_firewall_policies_endpoints)
 api_endpoints.extend(_host_group_endpoints)
 api_endpoints.extend(_hosts_endpoints)
+api_endpoints.extend(_identity_detections_endpoints)
 api_endpoints.extend(_incidents_endpoints)
 api_endpoints.extend(_installation_tokens_endpoints)
 api_endpoints.extend(_intel_endpoints)
 api_endpoints.extend(_ioa_exclusions_endpoints)
+api_endpoints.extend(_ioc_endpoints)
 api_endpoints.extend(_iocs_endpoints)
+api_endpoints.extend(_kubernetes_protection_endpoints)
 api_endpoints.extend(_malquery_endpoints)
 api_endpoints.extend(_ml_exclusions_endpoints)
 api_endpoints.extend(_mssp_endpoints)
@@ -88,6 +98,8 @@ api_endpoints.extend(_prevention_policies_endpoints)
 api_endpoints.extend(_quick_scan_endpoints)
 api_endpoints.extend(_real_time_response_endpoints)
 api_endpoints.extend(_real_time_response_admin_endpoints)
+api_endpoints.extend(_recon_endpoints)
+api_endpoints.extend(_response_policies_endpoints)
 api_endpoints.extend(_sample_uploads_endpoints)
 api_endpoints.extend(_sensor_download_endpoints)
 api_endpoints.extend(_sensor_update_policies_endpoints)
@@ -100,7 +112,9 @@ api_endpoints.extend(_zero_trust_assessment_endpoints)
 deprecated_endpoints = []
 deprecated_endpoints.extend(_custom_ioa_deprecated)
 deprecated_endpoints.extend(_firewall_management_deprecated)
+deprecated_endpoints.extend(_identity_detections_deprecated)
 deprecated_endpoints.extend(_installation_tokens_deprecated)
+deprecated_endpoints.extend(_ioc_deprecated)
 deprecated_endpoints.extend(_iocs_deprecated)
 deprecated_endpoints.extend(_real_time_response_deprecated)
 deprecated_endpoints.extend(_real_time_response_admin_deprecated)
