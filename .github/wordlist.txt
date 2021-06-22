@@ -18,6 +18,7 @@ CCID
 CID
 CIDs
 CSPM
+CSPM
 CalebSchwartz
 CheckActiveResponderCommandStatus
 CheckAdminCommandStatus
@@ -38,6 +39,7 @@ CreateUser
 CrowdScore
 CrowdStrike
 CrowdStrike's
+CSV
 DeleteAWSAccounts
 DeleteCSPMAwsAccount
 DeleteCSPMAwsAccount
