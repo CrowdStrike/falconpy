@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0103  # Aligning method names to API operation IDs
 from ._util import service_request, force_default, args_to_params
 from ._service_class import ServiceClass
 from ._endpoint._response_policies import _response_policies_endpoints as Endpoints

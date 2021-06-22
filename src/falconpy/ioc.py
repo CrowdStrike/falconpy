@@ -46,7 +46,7 @@ class IOC(ServiceClass):
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def indicator_combined_v1(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
+    def indicator_combined_v1(self: object, parameters: dict = None, **kwargs) -> dict:
         """Get Combined for Indicators."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.combined.v1
         operation_id = "indicator_combined_v1"
@@ -63,7 +63,7 @@ class IOC(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def indicator_get_v1(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
+    def indicator_get_v1(self: object, parameters: dict = None, **kwargs) -> dict:
         """Get Indicators by ids."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.v1
         operation_id = "indicator_get_v1"
@@ -79,7 +79,7 @@ class IOC(ServiceClass):
                                    )
         return returned
 
-    def indicator_create_v1(self: object, body: dict) -> dict:  # pylint: disable=C0103  # Matching API
+    def indicator_create_v1(self: object, body: dict) -> dict:
         """Create Indicators."""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.create.v1
         operation_id = "indicator_create_v1"
@@ -96,7 +96,7 @@ class IOC(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def indicator_delete_v1(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
+    def indicator_delete_v1(self: object, parameters: dict = None, **kwargs) -> dict:
         """Delete Indicators by ids."""
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.delete.v1
         operation_id = "indicator_delete_v1"
@@ -112,7 +112,7 @@ class IOC(ServiceClass):
                                    )
         return returned
 
-    def indicator_update_v1(self: object, body: dict) -> dict:  # pylint: disable=C0103  # Matching API
+    def indicator_update_v1(self: object, body: dict) -> dict:
         """Update Indicators."""
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.update.v1
         operation_id = "indicator_update_v1"
@@ -129,7 +129,7 @@ class IOC(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def indicator_search_v1(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
+    def indicator_search_v1(self: object, parameters: dict = None, **kwargs) -> dict:
         """Search for Indicators."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.search.v1
         operation_id = "indicator_search_v1"
