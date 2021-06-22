@@ -45,7 +45,10 @@ _Coming Soon_
 
 
 ### Hosts
-_Coming Soon_
+| Service Class | Uber Class |
+| :--- | :--- |
+| [List sensor versions by hostname](hosts/sensor_versions_by_hostname.py)
+
 
 ### Quick Scan / Sample Uploads
 | Service Class | Uber Class |
