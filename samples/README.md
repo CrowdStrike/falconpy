@@ -41,7 +41,7 @@ _Coming Soon_
 ### Falcon Horizon
 | Service Class | Uber Class |
 | :--- | :--- |
-| [Report or export as CSV, All or Selective CSP Falcon CSPM Policies](cspm_registration/get_cspm_policies.py) | |
+| [Report or export as CSV, All or selective CSP Falcon CSPM Policies](cspm_registration/get_cspm_policies.py) | |
 
 
 ### Hosts
