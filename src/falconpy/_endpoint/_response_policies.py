@@ -42,7 +42,8 @@ _response_policies_endpoints = [
     "queryCombinedRTResponsePolicyMembers",
     "GET",
     "/policy/combined/response-members/v1",
-    "Search for members of a Response policy in your environment by providing an FQL filter and paging details. Returns a set of host details which match the filter criteria",
+    "Search for members of a Response policy in your environment by providing an FQL filter and paging details."
+    "Returns a set of host details which match the filter criteria",
     "response_policies",
     [
       {
@@ -84,7 +85,8 @@ _response_policies_endpoints = [
     "queryCombinedRTResponsePolicies",
     "GET",
     "/policy/combined/response/v1",
-    "Search for Response Policies in your environment by providing an FQL filter and paging details. Returns a set of Response Policies which match the filter criteria",
+    "Search for Response Policies in your environment by providing an FQL filter and paging details."
+    "Returns a set of Response Policies which match the filter criteria",
     "response_policies",
     [
       {
@@ -167,7 +169,9 @@ _response_policies_endpoints = [
     "setRTResponsePoliciesPrecedence",
     "POST",
     "/policy/entities/response-precedence/v1",
-    "Sets the precedence of Response Policies based on the order of IDs specified in the request. The first ID specified will have the highest precedence and the last ID specified will have the lowest. You must specify all non-Default Policies for a platform when updating precedence",
+    "Sets the precedence of Response Policies based on the order of IDs specified in the request."
+    "The first ID specified will have the highest precedence and the last ID specified will have the lowest."
+    "You must specify all non-Default Policies for a platform when updating precedence",
     "response_policies",
     [
       {
@@ -253,7 +257,8 @@ _response_policies_endpoints = [
     "queryRTResponsePolicyMembers",
     "GET",
     "/policy/queries/response-members/v1",
-    "Search for members of a Response policy in your environment by providing an FQL filter and paging details. Returns a set of Agent IDs which match the filter criteria",
+    "Search for members of a Response policy in your environment by providing an FQL filter and paging details."
+    "Returns a set of Agent IDs which match the filter criteria",
     "response_policies",
     [
       {
@@ -295,7 +300,8 @@ _response_policies_endpoints = [
     "queryRTResponsePolicies",
     "GET",
     "/policy/queries/response/v1",
-    "Search for Response Policies in your environment by providing an FQL filter with sort and/or paging details. This returns a set of Response Policy IDs that match the given criteria.",
+    "Search for Response Policies in your environment by providing an FQL filter with sort and/or paging details."
+    "This returns a set of Response Policy IDs that match the given criteria.",
     "response_policies",
     [
       {
