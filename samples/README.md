@@ -10,6 +10,7 @@ These examples are provided as a quick start for your project.
     - [Detections](#detections)
     - [Event Streams](#event-streams)
     - [Falcon Discover](#falcon-discover)
+    - [Falcon Horizon](#falcon-horizon)
     - [Hosts](#hosts)
     - [Quick Scan / Sample Uploads](#quick-scan)
     - [Real Time Response](#real-time-response)
