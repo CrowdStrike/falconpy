@@ -10,6 +10,7 @@ These examples are provided as a quick start for your project.
     - [Detections](#detections)
     - [Event Streams](#event-streams)
     - [Falcon Discover](#falcon-discover)
+    - [Falcon Horizon](#falcon-horizon)
     - [Hosts](#hosts)
     - [Quick Scan / Sample Uploads](#quick-scan)
     - [Real Time Response](#real-time-response)
@@ -37,6 +38,11 @@ _Coming Soon_
 | Service Class | Uber Class |
 | :--- | :--- |
 | [Register, delete, update and check accounts](discover_aws/manage_discover_accounts_service.py) | [Register, delete, update and check accounts](discover_aws/manage_discover_accounts_uber.py) |
+
+### Falcon Horizon
+| Service Class | Uber Class |
+| :--- | :--- |
+| [Report or export as CSV, all or selective CSP Falcon CSPM Policies](cspm_registration/get_cspm_policies.py) | |
 
 
 ### Hosts

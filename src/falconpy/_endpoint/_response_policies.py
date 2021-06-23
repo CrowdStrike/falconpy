@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-_endpoint._prevention_policies - Internal API endpoint constant library
+_endpoint._response_policies - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -37,18 +37,18 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 
-_prevention_policies_endpoints = [
+_response_policies_endpoints = [
   [
-    "queryCombinedPreventionPolicyMembers",
+    "queryCombinedRTResponsePolicyMembers",
     "GET",
-    "/policy/combined/prevention-members/v1",
-    "Search for members of a Prevention Policy in your environment by providing an "
-    "FQL filter and paging details. Returns a set of host details which match the filter criteria",
-    "prevention_policies",
+    "/policy/combined/response-members/v1",
+    "Search for members of a Response policy in your environment by providing an FQL filter and paging details."
+    "Returns a set of host details which match the filter criteria",
+    "response_policies",
     [
       {
         "type": "string",
-        "description": "The ID of the Prevention Policy to search for members of",
+        "description": "The ID of the Response policy to search for members of",
         "name": "id",
         "in": "query"
       },
@@ -82,12 +82,12 @@ _prevention_policies_endpoints = [
     ]
   ],
   [
-    "queryCombinedPreventionPolicies",
+    "queryCombinedRTResponsePolicies",
     "GET",
-    "/policy/combined/prevention/v1",
-    "Search for Prevention Policies in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Prevention Policies which match the filter criteria",
-    "prevention_policies",
+    "/policy/combined/response/v1",
+    "Search for Response Policies in your environment by providing an FQL filter and paging details."
+    "Returns a set of Response Policies which match the filter criteria",
+    "response_policies",
     [
       {
         "type": "string",
@@ -137,11 +137,11 @@ _prevention_policies_endpoints = [
     ]
   ],
   [
-    "performPreventionPoliciesAction",
+    "performRTResponsePoliciesAction",
     "POST",
-    "/policy/entities/prevention-actions/v1",
-    "Perform the specified action on the Prevention Policies specified in the request",
-    "prevention_policies",
+    "/policy/entities/response-actions/v1",
+    "Perform the specified action on the Response Policies specified in the request",
+    "response_policies",
     [
       {
         "enum": [
@@ -166,13 +166,13 @@ _prevention_policies_endpoints = [
     ]
   ],
   [
-    "setPreventionPoliciesPrecedence",
+    "setRTResponsePoliciesPrecedence",
     "POST",
-    "/policy/entities/prevention-precedence/v1",
-    "Sets the precedence of Prevention Policies based on the order of IDs specified in the request. "
-    "The first ID specified will have the highest precedence and the last ID specified will have the lowest. "
+    "/policy/entities/response-precedence/v1",
+    "Sets the precedence of Response Policies based on the order of IDs specified in the request."
+    "The first ID specified will have the highest precedence and the last ID specified will have the lowest."
     "You must specify all non-Default Policies for a platform when updating precedence",
-    "prevention_policies",
+    "response_policies",
     [
       {
         "name": "body",
@@ -182,11 +182,11 @@ _prevention_policies_endpoints = [
     ]
   ],
   [
-    "getPreventionPolicies",
+    "getRTResponsePolicies",
     "GET",
-    "/policy/entities/prevention/v1?ids={}",
-    "Retrieve a set of Prevention Policies by specifying their IDs",
-    "prevention_policies",
+    "/policy/entities/response/v1?ids={}",
+    "Retrieve a set of Response Policies by specifying their IDs",
+    "response_policies",
     [
       {
         "type": "array",
@@ -196,7 +196,7 @@ _prevention_policies_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "The IDs of the Prevention Policies to return",
+        "description": "The IDs of the RTR Policies to return",
         "name": "ids",
         "in": "query",
         "required": True
@@ -204,11 +204,11 @@ _prevention_policies_endpoints = [
     ]
   ],
   [
-    "createPreventionPolicies",
+    "createRTResponsePolicies",
     "POST",
-    "/policy/entities/prevention/v1",
-    "Create Prevention Policies by specifying details about the policy to create",
-    "prevention_policies",
+    "/policy/entities/response/v1",
+    "Create Response Policies by specifying details about the policy to create",
+    "response_policies",
     [
       {
         "name": "body",
@@ -218,11 +218,11 @@ _prevention_policies_endpoints = [
     ]
   ],
   [
-    "updatePreventionPolicies",
+    "updateRTResponsePolicies",
     "PATCH",
-    "/policy/entities/prevention/v1",
-    "Update Prevention Policies by specifying the ID of the policy and details to update",
-    "prevention_policies",
+    "/policy/entities/response/v1",
+    "Update Response Policies by specifying the ID of the policy and details to update",
+    "response_policies",
     [
       {
         "name": "body",
@@ -232,11 +232,11 @@ _prevention_policies_endpoints = [
     ]
   ],
   [
-    "deletePreventionPolicies",
+    "deleteRTResponsePolicies",
     "DELETE",
-    "/policy/entities/prevention/v1?ids={}",
-    "Delete a set of Prevention Policies by specifying their IDs",
-    "prevention_policies",
+    "/policy/entities/response/v1?ids={}",
+    "Delete a set of Response Policies by specifying their IDs",
+    "response_policies",
     [
       {
         "type": "array",
@@ -246,7 +246,7 @@ _prevention_policies_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "The IDs of the Prevention Policies to delete",
+        "description": "The IDs of the Response Policies to delete",
         "name": "ids",
         "in": "query",
         "required": True
@@ -254,16 +254,16 @@ _prevention_policies_endpoints = [
     ]
   ],
   [
-    "queryPreventionPolicyMembers",
+    "queryRTResponsePolicyMembers",
     "GET",
-    "/policy/queries/prevention-members/v1",
-    "Search for members of a Prevention Policy in your environment by providing an FQL filter and paging details. "
+    "/policy/queries/response-members/v1",
+    "Search for members of a Response policy in your environment by providing an FQL filter and paging details."
     "Returns a set of Agent IDs which match the filter criteria",
-    "prevention_policies",
+    "response_policies",
     [
       {
         "type": "string",
-        "description": "The ID of the Prevention Policy to search for members of",
+        "description": "The ID of the Response policy to search for members of",
         "name": "id",
         "in": "query"
       },
@@ -297,23 +297,23 @@ _prevention_policies_endpoints = [
     ]
   ],
   [
-    "queryPreventionPolicies",
+    "queryRTResponsePolicies",
     "GET",
-    "/policy/queries/prevention/v1",
-    "Search for Prevention Policies in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Prevention Policy IDs which match the filter criteria",
-    "prevention_policies",
+    "/policy/queries/response/v1",
+    "Search for Response Policies in your environment by providing an FQL filter with sort and/or paging details."
+    "This returns a set of Response Policy IDs that match the given criteria.",
+    "response_policies",
     [
       {
         "type": "string",
-        "description": "The filter expression that should be used to limit the results",
+        "description": "The filter expression that should be used to determine the results.",
         "name": "filter",
         "in": "query"
       },
       {
         "minimum": 0,
         "type": "integer",
-        "description": "The offset to start retrieving records from",
+        "description": "The offset of the first record to retrieve from",
         "name": "offset",
         "in": "query"
       },
@@ -321,7 +321,7 @@ _prevention_policies_endpoints = [
         "maximum": 5000,
         "minimum": 1,
         "type": "integer",
-        "description": "The maximum records to return. [1-5000]",
+        "description": "The maximum number of records to return [1-5000]",
         "name": "limit",
         "in": "query"
       },
@@ -345,7 +345,7 @@ _prevention_policies_endpoints = [
           "precedence.desc"
         ],
         "type": "string",
-        "description": "The property to sort by",
+        "description": "The property to sort results by",
         "name": "sort",
         "in": "query"
       }

@@ -97,6 +97,15 @@ _cspm_registration_endpoints = [
         "description": "The offset to start retrieving records from",
         "name": "offset",
         "in": "query"
+      },
+      {
+        "enum": [
+          "organization"
+        ],
+        "type": "string",
+        "description": "Field to group by.",
+        "name": "group_by",
+        "in": "query"
       }
     ]
   ],
@@ -106,6 +115,20 @@ _cspm_registration_endpoints = [
     "/cloud-connect-cspm-aws/entities/account/v1",
     "Creates a new account in our system for a customer and generates a script for "
     "them to run in their AWS cloud environment to grant us access.",
+    "cspm_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "PatchCSPMAwsAccount",
+    "PATCH",
+    "/cloud-connect-cspm-aws/entities/account/v1",
+    "Patches a existing account in our system for a customer.",
     "cspm_registration",
     [
       {
@@ -292,6 +315,34 @@ _cspm_registration_endpoints = [
     ]
   ],
   [
+    "UpdateCSPMAzureTenantDefaultSubscriptionID",
+    "PATCH",
+    "/cloud-connect-cspm-azure/entities/default-subscription-id/v1",
+    "Update an Azure default subscription_id in our system for given tenant_id",
+    "cspm_registration",
+    [
+      {
+        "maxLength": 36,
+        "minLength": 36,
+        "pattern": "^[0-9a-z-]{36}$",
+        "type": "string",
+        "description": "Tenant ID to update client ID for. Required if multiple tenants are registered.",
+        "name": "tenant-id",
+        "in": "query"
+      },
+      {
+        "maxLength": 36,
+        "minLength": 36,
+        "pattern": "^[0-9a-z-]{36}$",
+        "type": "string",
+        "description": "Default Subscription ID to patch for all subscriptions belonged to a tenant.",
+        "name": "subscription_id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetCSPMAzureUserScriptsAttachment",
     "GET",
     "/cloud-connect-cspm-azure/entities/user-scripts-download/v1",
@@ -306,6 +357,102 @@ _cspm_registration_endpoints = [
         "type": "string",
         "description": "Tenant ID to generate script for. Defaults to most recently registered tenant.",
         "name": "tenant-id",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetIOAEvents",
+    "GET",
+    "/ioa/entities/events/v1",
+    "For CSPM IOA events, gets list of IOA events.",
+    "cspm_registration",
+    [
+      {
+        "pattern": "\\d{*}",
+        "type": "string",
+        "description": "Policy ID",
+        "name": "policy_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "pattern": "^(aws|azure|gcp)$",
+        "type": "string",
+        "description": "Cloud Provider (e.g.: aws|azure|gcp)",
+        "name": "cloud_provider",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Cloud account ID (e.g.: AWS accountID, Azure subscriptionID)",
+        "name": "account_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Azure tenantID",
+        "name": "azure_tenant_id",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "user IDs",
+        "name": "user_ids",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Starting index of overall result set from which to return events.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The maximum records to return. [1-500]",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetIOAUsers",
+    "GET",
+    "/ioa/entities/users/v1",
+    "For CSPM IOA users, gets list of IOA users.",
+    "cspm_registration",
+    [
+      {
+        "pattern": "\\d{*}",
+        "type": "string",
+        "description": "Policy ID",
+        "name": "policy_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "pattern": "^(aws|azure|gcp)$",
+        "type": "string",
+        "description": "Cloud Provider (e.g.: aws|azure|gcp)",
+        "name": "cloud_provider",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Cloud account ID (e.g.: AWS accountID, Azure subscriptionID)",
+        "name": "account_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Azure tenantID",
+        "name": "azure_tenant_id",
         "in": "query"
       }
     ]
@@ -342,14 +489,25 @@ _cspm_registration_endpoints = [
         "type": "string",
         "description": "Service type to filter policy settings by.",
         "name": "service",
-        "in": "query",
-        "required": True
+        "in": "query"
       },
       {
         "pattern": "\\d{*}",
         "type": "string",
         "description": "Policy ID",
         "name": "policy-id",
+        "in": "query"
+      },
+      {
+        "pattern": "^(aws|azure|gcp)$",
+        "enum": [
+          "aws",
+          "azure",
+          "gcp"
+        ],
+        "type": "string",
+        "description": "Cloud Platform (e.g.: aws|azure|gcp)",
+        "name": "cloud-platform",
         "in": "query"
       }
     ]

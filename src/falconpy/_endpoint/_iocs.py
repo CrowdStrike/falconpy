@@ -69,7 +69,8 @@ _iocs_endpoints = [
     "GetIOC",
     "GET",
     "/indicators/entities/iocs/v1",
-    "Get an IOC by providing a type and value",
+    "Get an IOC by providing a type and value. "
+    "*** Deprecated - Use the new IOC Management endpoint (GET /iocs/entities/indicators/v1). ***",
     "iocs",
     [
       {
@@ -96,7 +97,7 @@ _iocs_endpoints = [
     "CreateIOC",
     "POST",
     "/indicators/entities/iocs/v1",
-    "Create a new IOC",
+    "Create a new IOC. *** Deprecated - Use the new IOC Management endpoint (POST /iocs/entities/indicators/v1). ***",
     "iocs",
     [
       {
@@ -122,7 +123,8 @@ _iocs_endpoints = [
     "UpdateIOC",
     "PATCH",
     "/indicators/entities/iocs/v1",
-    "Update an IOC by providing a type and value",
+    "Update an IOC by providing a type and value. "
+    "*** Deprecated - Use the new IOC Management endpoint (PATCH /iocs/entities/indicators/v1). ***",
     "iocs",
     [
       {
@@ -153,7 +155,8 @@ _iocs_endpoints = [
     "DeleteIOC",
     "DELETE",
     "/indicators/entities/iocs/v1",
-    "Delete an IOC by providing a type and value",
+    "Delete an IOC by providing a type and value. "
+    "*** Deprecated - Use the new IOC Management endpoint (DELETE /iocs/entities/indicators/v1). ***",
     "iocs",
     [
       {
@@ -219,7 +222,8 @@ _iocs_endpoints = [
     "QueryIOCs",
     "GET",
     "/indicators/queries/iocs/v1",
-    "Search the custom IOCs in your customer account",
+    "Search the custom IOCs in your customer account. "
+    "*** Deprecated - Use the new IOC Management endpoint (GET /iocs/queries/indicators/v1). ***",
     "iocs",
     [
       {

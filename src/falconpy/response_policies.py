@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-iocs - CrowdStrike Falcon Prevention Policy API interface class
+response_policies - CrowdStrike Falcon Real Time Response Policies API interface class
 
 This is free and unencumbered software released into the public domain.
 
@@ -39,21 +39,21 @@ For more information, please refer to <https://unlicense.org>
 # pylint: disable=C0103  # Aligning method names to API operation IDs
 from ._util import service_request, force_default, args_to_params
 from ._service_class import ServiceClass
-from ._endpoint._prevention_policies import _prevention_policies_endpoints as Endpoints
+from ._endpoint._response_policies import _response_policies_endpoints as Endpoints
 
 
-class Prevention_Policy(ServiceClass):
+class Response_Policies(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryCombinedPreventionPolicyMembers(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for members of a Prevention Policy in your environment by providing an FQL filter
-           and paging details. Returns a set of host details which match the filter criteria.
+    def queryCombinedRTResponsePolicyMembers(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for members of a Response policy in your environment by providing an FQL filter and paging details.
+           Returns a set of host details which match the filter criteria
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #       ...     /prevention-policies/queryCombinedPreventionPolicyMembers
-        operation_id = "queryCombinedPreventionPolicyMembers"
+        #           /response-policies/queryCombinedRTResponsePolicyMembers
+        operation_id = "queryCombinedRTResponsePolicyMembers"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
@@ -67,13 +67,13 @@ class Prevention_Policy(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryCombinedPreventionPolicies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Prevention Policies in your environment by providing an FQL filter and
-           paging details. Returns a set of Prevention Policies which match the filter criteria.
+    def queryCombinedRTResponsePolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for Response Policies in your environment by providing an FQL filter and paging details.
+           Returns a set of Response Policies which match the filter criteria
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #       ...     /prevention-policies/queryCombinedPreventionPolicies
-        operation_id = "queryCombinedPreventionPolicies"
+        #           /response-policies/queryCombinedRTResponsePolicies
+        operation_id = "queryCombinedRTResponsePolicies"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
@@ -87,11 +87,11 @@ class Prevention_Policy(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def performPreventionPoliciesAction(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
-        """Perform the specified action on the Prevention Policies specified in the request."""
+    def performRTResponsePoliciesAction(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+        """Perform the specified action on the Response Policies specified in the request"""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #        ...    /prevention-policies/performPreventionPoliciesAction
-        operation_id = "performPreventionPoliciesAction"
+        #           /response-policies/performRTResponsePoliciesAction
+        operation_id = "performRTResponsePoliciesAction"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
@@ -106,14 +106,14 @@ class Prevention_Policy(ServiceClass):
                                    )
         return returned
 
-    def setPreventionPoliciesPrecedence(self: object, body: dict) -> dict:
-        """Sets the precedence of Prevention Policies based on the order of IDs specified in the request.
+    def setRTResponsePoliciesPrecedence(self: object, body: dict) -> dict:
+        """Sets the precedence of Response Policies based on the order of IDs specified in the request.
            The first ID specified will have the highest precedence and the last ID specified will have the lowest.
-           You must specify all non-Default Policies for a platform when updating precedence.
+           You must specify all non-Default Policies for a platform when updating precedence
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #        ...    /prevention-policies/setPreventionPoliciesPrecedence
-        operation_id = "setPreventionPoliciesPrecedence"
+        #           /response-policies/setRTResponsePoliciesPrecedence
+        operation_id = "setRTResponsePoliciesPrecedence"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
@@ -127,10 +127,10 @@ class Prevention_Policy(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getPreventionPolicies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve a set of Prevention Policies by specifying their IDs."""
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/getPreventionPolicies
-        operation_id = "getPreventionPolicies"
+    def getRTResponsePolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve a set of Response Policies by specifying their IDs"""
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/getRTResponsePolicies
+        operation_id = "getRTResponsePolicies"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
@@ -143,10 +143,11 @@ class Prevention_Policy(ServiceClass):
                                    )
         return returned
 
-    def createPreventionPolicies(self: object, body: dict) -> dict:
-        """Create Prevention Policies by specifying details about the policy to create."""
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/createPreventionPolicies
-        operation_id = "createPreventionPolicies"
+    def createRTResponsePolicies(self: object, body: dict) -> dict:
+        """Create Response Policies by specifying details about the policy to create"""
+        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        #           /response-policies/createRTResponsePolicies
+        operation_id = "createRTResponsePolicies"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
@@ -160,10 +161,11 @@ class Prevention_Policy(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def deletePreventionPolicies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Delete a set of Prevention Policies by specifying their IDs."""
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/deletePreventionPolicies
-        operation_id = "deletePreventionPolicies"
+    def deleteRTResponsePolicies(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
+        """Delete a set of Response Policies by specifying their IDs"""
+        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        #              /response-policies/deleteRTResponsePolicies
+        operation_id = "deleteRTResponsePolicies"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
@@ -176,10 +178,11 @@ class Prevention_Policy(ServiceClass):
                                    )
         return returned
 
-    def updatePreventionPolicies(self: object, body: dict) -> dict:
-        """Update Prevention Policies by specifying the ID of the policy and details to update."""
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/updatePreventionPolicies
-        operation_id = "updatePreventionPolicies"
+    def updateRTResponsePolicies(self: object, body: dict) -> dict:  # pylint: disable=C0103  # Matching API
+        """Update Response Policies by specifying the ID of the policy and details to update"""
+        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        #           /response-policies/updateRTResponsePolicies
+        operation_id = "updateRTResponsePolicies"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
@@ -193,13 +196,13 @@ class Prevention_Policy(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryPreventionPolicyMembers(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for members of a Prevention Policy in your environment by providing an FQL filter
-           and paging details. Returns a set of Agent IDs which match the filter criteria.
+    def queryRTResponsePolicyMembers(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for members of a Response policy in your environment by providing an FQL filter and paging details.
+           Returns a set of Agent IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #       ...     /prevention-policies/queryPreventionPolicyMembers
-        operation_id = "queryPreventionPolicyMembers"
+        #           /response-policies/queryRTResponsePolicyMembers
+        operation_id = "queryRTResponsePolicyMembers"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
@@ -213,12 +216,13 @@ class Prevention_Policy(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryPreventionPolicies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Prevention Policies in your environment by providing an FQL filter
-           and paging details. Returns a set of Prevention Policy IDs which match the filter criteria.
+    def queryRTResponsePolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for Response Policies in your environment by providing an FQL filter with sort and/or paging details.
+           This returns a set of Response Policy IDs that match the given criteria.
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies/queryPreventionPolicies
-        operation_id = "queryPreventionPolicies"
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        #           /response-policies/queryRTResponsePolicies
+        operation_id = "queryRTResponsePolicies"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)

@@ -59,7 +59,11 @@ class TestCSPMRegistration:
             ["GetCSPMPolicySettings", ""],
             ["UpdateCSPMPolicySettings", "body={}"],
             ["GetCSPMScanSchedule", ""],
-            ["UpdateCSPMScanSchedule", "body={}"]
+            ["UpdateCSPMScanSchedule", "body={}"],
+            ["PatchCSPMAwsAccount", "body={}"],
+            ["UpdateCSPMAzureTenantDefaultSubscriptionID", "body={}"],
+            ["GetIOAEvents", ""],
+            ["GetIOAUsers", ""],
         ]
         for cmd in commandList:
             if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:

@@ -1,3 +1,106 @@
+# Version 0.5.0
+## Added features and functionality
++ Added: IOC API Service Class (`ioc.py`)
+    * indicator_combined_v1
+    * indicator_get_v1
+    * indicator_create_v1
+    * indicator_delete_v1
+    * indicator_update_v1
+    * indicator_search_v1
++ Added: Kubernetes Protection API Service Class (`kubernetes_protection.py`)
+    * GetAWSAccountsMixin0
+    * CreateAWSAccount
+    * DeleteAWSAccountsMixin0
+    * UpdateAWSAccount
+    * GetLocations
+    * GetHelmValuesYaml
+    * RegenerateAPIKey
+    * GetClusters
+    * TriggerScan
++ Added: Recon API Service Class (`recon.py`)
+    * AggregateNotificationsV1
+    * PreviewRuleV1
+    * GetActionsV1
+    * CreateActionsV1
+    * DeleteActionV1
+    * UpdateActionV1
+    * GetNotificationsDetailedTranslatedV1
+    * GetNotificationsDetailedV1
+    * GetNotificationsTranslatedV1
+    * GetNotificationsV1
+    * DeleteNotificationsV1
+    * UpdateNotificationsV1
+    * GetRulesV1
+    * CreateRulesV1
+    * DeleteRulesV1
+    * UpdateRulesV1
+    * QueryActionsV1
+    * QueryActionsV1
+    * QueryNotificationsV1
+    * QueryRulesV1
++ Added: Response Policies API Service Class (`response_policies.py`)
+    * queryCombinedRTResponsePolicyMembers
+    * queryCombinedRTResponsePolicies
+    * performRTResponsePoliciesAction
+    * setRTResponsePoliciesPrecedence
+    * getRTResponsePolicies
+    * createRTResponsePolicies
+    * deleteRTResponsePolicies
+    * updateRTResponsePolicies
+    * queryRTResponsePolicyMembers
+    * queryRTResponsePolicies
++ Updated: CSPM Registration API Service Class (`cspm_registration.py`)
+    * Refactored to utilized updated pattern for Service Classes
+    * Added: PatchCSPMAwsAccount function
+    * Added: UpdateCSPMAzureTenantDefaultSubscriptionID function
+    * Added: GetIOAEvents function
+    * Added: GetIOAUsers function
+    * Updated: Unit tests
++ Updated: Discover for Cloud Registration API Service Class (`d4c_registration.py`)
+    * Refactored to remove unnecessary private method call / import of the sys library
++ Updated: IOA Exclusions API Service Class (`ioa_exclusions.py`)
+    * Refactored to remove unnecessary private method call / import of the sys library
++ Updated: IOCs API Service Class (`iocs.py`)
+    * Refactored to utilized updated pattern for Service Classes
+    * Updated: Deprecated multiple endpoints as part of the release of the new IOC Service Class (`_endpoint/_iocs.py`)
++ Updated: Falcon Complete Dashboard API Service Class (`falcon_complete_dashboard.py`)
+    * Refactored to remove unnecessary private method call / import of the sys library
++ Updated: Falcon Flight Control API Service Class (`mssp.py`)
+    * Refactored to remove unnecessary private method call / import of the sys library
++ Updated: Installation Tokens API Service Class (`installation_tokens.py`)
+    * Refactored to remove unnecessary private method call / import of the sys library
++ Updated: Malquery API Service Class (`malquery.py`)
+    * Refactored to remove unnecessary private method call / import of the sys library
++ Updated: ML Exclusions API Service Class (`ml_exclusions.py`)
+    * Refactored to remove unnecessary private method call / import of the sys library
++ Updated: Overwatch Dashboard API Service Class (`overwatch_dashboard.py`)
+    * Refactored to remove unnecessary private method call / import of the sys library
++ Updated: Prevention Policies API Service Class (`prevention_policy.py`)
+    * Refactored to utilized updated pattern for Service Classes
+    * Updated: Added _add-rule-group_ and _remove-rule-group_ actions to __action_name__ parameter for performPreventionPoliciesAction function. (`_endpoint/_prevention_policy.py`)
++ Updated: Sensor Visibility Exclusions API Service Class (`sensor_visibility_exclusions.py`)
+    * Refactored to remove unnecessary private method call / import of the sys library
+
+## Other
++ Added: CSPM Registration API sample - CSPM registration policy export (@mccbryan3)
+
+# Version 0.4.10
+## Added features and functionality
++ Added: Timeout support - Float / tuple that is passed to the requests library when performing
+requests to the API. Can specify timeouts for connect, read and global.
+
+## Issues resolved
++ Fixed: Service Class proxy functionality support
+
+## Other
++ Timeout functionality unit tests (`test_timeout.py`)
+
+# Version 0.4.9
+## Added features and functionality
++ Added: Proxy support - dictionary of proxies that are passed to the requests library when
+performing requests to the API.
++ Related to discussion post [#154](https://github.com/CrowdStrike/falconpy/discussions/154)
+
 # Version 0.4.8
 ## Issues resolved
 + Fixed: Parsing issue with __ids__ argument within MSSP.getChildren (Flight Control Service Class)

@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-cspm_registration - Falcon Horizon for AWS API Interface Class
+recon - CrowdStrike Falcon X Recon API interface class
 
 This is free and unencumbered software released into the public domain.
 
@@ -39,36 +39,33 @@ For more information, please refer to <https://unlicense.org>
 # pylint: disable=C0103  # Aligning method names to API operation IDs
 from ._util import service_request, force_default, args_to_params
 from ._service_class import ServiceClass
-from ._endpoint._cspm_registration import _cspm_registration_endpoints as Endpoints
+from ._endpoint._recon import _recon_endpoints as Endpoints
 
 
-class CSPM_Registration(ServiceClass):
-    """The only requirement to instantiate an instance of this class
-       is a valid token provided by the Falcon API SDK OAuth2 class.
+class Recon(ServiceClass):
+    """ The only requirement to instantiate an instance of this class
+        is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetCSPMAwsAccount(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Returns information about the current status of an AWS account."""
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAwsAccount
-        operation_id = "GetCSPMAwsAccount"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+    def AggregateNotificationsV1(self: object, body: dict) -> dict:
+        """Get notification aggregates as specified via JSON in request body."""
+        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/AggregateNotificationsV1
+        operation_id = "AggregateNotificationsV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
+        body_payload = body
         returned = service_request(caller=self,
-                                   method="GET",
+                                   method="POST",
                                    endpoint=target_url,
-                                   params=parameter_payload,
+                                   body=body_payload,
                                    headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def CreateCSPMAwsAccount(self: object, body: dict) -> dict:
-        """Creates a new account in our system for a customer and generates a script
-           to run in their AWS cloud environment to grant CrowdStrike Horizon access.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMAwsAccount
-        operation_id = "CreateCSPMAwsAccount"
+    def PreviewRuleV1(self: object, body: dict) -> dict:
+        """Get notification aggregates as specified via JSON in request body."""
+        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/PreviewRuleV1
+        operation_id = "PreviewRuleV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
@@ -82,10 +79,43 @@ class CSPM_Registration(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def DeleteCSPMAwsAccount(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Delete an existing AWS Account or Organization by specifying their IDs."""
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/DeleteCSPMAwsAccount
-        operation_id = "DeleteCSPMAwsAccount"
+    def GetActionsV1(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Get actions based on their IDs. IDs can be retrieved using the GET /queries/actions/v1 endpoint."""
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetActionsV1
+        operation_id = "GetActionsV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
+        returned = service_request(caller=self,
+                                   method="GET",
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
+                                   verify=self.ssl_verify
+                                   )
+        return returned
+
+    def CreateActionsV1(self: object, body: dict) -> dict:
+        """Create actions for a monitoring rule. Accepts a list of actions that will be attached to the monitoring rule"""
+        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateActionsV1
+        operation_id = "CreateActionsV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        body_payload = body
+        returned = service_request(caller=self,
+                                   method="POST",
+                                   endpoint=target_url,
+                                   body=body_payload,
+                                   headers=header_payload,
+                                   verify=self.ssl_verify
+                                   )
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def DeleteActionV1(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Delete an action from a monitoring rule based on the action ID."""
+        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/DeleteActionV1
+        operation_id = "DeleteActionV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
@@ -98,10 +128,10 @@ class CSPM_Registration(ServiceClass):
                                    )
         return returned
 
-    def PatchCSPMAwsAccount(self: object, body: dict) -> dict:
-        """Patches a existing account in our system for a customer."""
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/PatchCSPMAwsAccount
-        operation_id = "PatchCSPMAwsAccount"
+    def UpdateActionV1(self: object, body: dict) -> dict:
+        """Update an action for a monitoring rule."""
+        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateActionV1
+        operation_id = "UpdateActionV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
@@ -114,42 +144,14 @@ class CSPM_Registration(ServiceClass):
                                    )
         return returned
 
-    def GetCSPMAwsConsoleSetupURLs(self: object) -> dict:
-        """Returns a URL for customers to visit in their cloud environment to grant access to CrowdStrike"""
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAwsConsoleSetupURLs
-        operation_id = "GetCSPMAwsConsoleSetupURLs"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
-
-    def GetCSPMAwsAccountScriptsAttachment(self: object) -> dict:
-        """Return a script for customers to run in their cloud environment
-           to grant access to CrowdStrike for their AWS environment.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #       ...     /cspm-registration/GetCSPMAwsAccountScriptsAttachment
-        operation_id = "GetCSPMAwsAccountScriptsAttachment"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
-
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetCSPMAzureAccount(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Return information about Azure account registration."""
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAzureAccount
-        operation_id = "GetCSPMAzureAccount"
+    def GetNotificationsDetailedTranslatedV1(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Get detailed notifications based on their IDs. These include the raw intelligence content that generated the match.
+           This endpoint will return translated notification content.
+           The only target language available is English. A single notification can be translated per request
+        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetNotificationsDetailedTranslatedV1
+        operation_id = "GetNotificationsDetailedTranslatedV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
@@ -162,29 +164,66 @@ class CSPM_Registration(ServiceClass):
                                    )
         return returned
 
-    def CreateCSPMAzureAccount(self: object, body: dict) -> dict:
-        """Creates a new account in our system for a customer and generates a script
-           to run in their cloud environment to grant CrowdStrike Horizon access.
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetNotificationsDetailedV1(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Get detailed notifications based on their IDs.
+           These include the raw intelligence content that generated the match.
         """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMAzureAccount
-        operation_id = "CreateCSPMAzureAccount"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetNotificationsDetailedV1
+        operation_id = "GetNotificationsDetailedV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
-        body_payload = body
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
-                                   method="POST",
+                                   method="GET",
                                    endpoint=target_url,
-                                   body=body_payload,
+                                   params=parameter_payload,
                                    headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def DeleteCSPMAzureAccount(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Delete an existing Azure Subscription by specifying their IDs."""
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/DeleteCSPMAzureAccount
-        operation_id = "DeleteCSPMAzureAccount"
+    def GetNotificationsTranslatedV1(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Get notifications based on their IDs. IDs can be retrieved using the GET /queries/notifications/v1 endpoint.
+           This endpoint will return translated notification content. The only target language available is English.
+        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetNotificationsTranslatedV1
+        operation_id = "GetNotificationsTranslatedV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
+        returned = service_request(caller=self,
+                                   method="GET",
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
+                                   verify=self.ssl_verify
+                                   )
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetNotificationsV1(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Get notifications based on their IDs. IDs can be retrieved using the GET /queries/notifications/v1 endpoint."""
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetNotificationsV1
+        operation_id = "GetNotificationsV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
+        returned = service_request(caller=self,
+                                   method="GET",
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
+                                   verify=self.ssl_verify
+                                   )
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def DeleteNotificationsV1(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Delete notifications based on IDs. Notifications cannot be recovered after they are deleted."""
+        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/DeleteNotificationsV1
+        operation_id = "DeleteNotificationsV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
@@ -197,110 +236,27 @@ class CSPM_Registration(ServiceClass):
                                    )
         return returned
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def UpdateCSPMAzureAccountClientID(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
-        """Update an Azure service account in our system with the
-           user-created client_id created with the public key we've provided.
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         ...   /cspm-registration/UpdateCSPMAzureAccountClientID2
-        # This shows up as UpdateCSPMAzureAccountClientID2 in the Uber class
-        operation_id = "UpdateCSPMAzureAccountClientID"
+    def UpdateNotificationsV1(self: object, body: dict) -> dict:
+        """Update notification status or assignee. Accepts bulk requests"""
+        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateNotificationsV1
+        operation_id = "UpdateNotificationsV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        if body is None:
-            body = {}
         body_payload = body
         returned = service_request(caller=self,
                                    method="PATCH",
                                    endpoint=target_url,
                                    body=body_payload,
-                                   params=parameter_payload,
                                    headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def UpdateCSPMAzureTenantDefaultSubscriptionID(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Update an Azure service account in our system with the
-           user-created client_id created with the public key we've provided.
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         ...  /cspm-registration/UpdateCSPMAzureTenantDefaultSubscriptionID
-        operation_id = "UpdateCSPMAzureTenantDefaultSubscriptionID"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="PATCH",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
-
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetCSPMAzureUserScriptsAttachment(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Return a script for customers to run in their cloud environment
-           to grant access to CrowdStrike for their Azure environment.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #       ...     /cspm-registration/GetCSPMAzureUserScriptsAttachment
-        operation_id = "GetCSPMAzureUserScriptsAttachment"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
-
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetIOAEvents(self: object, parameters: dict = None, **kwargs) -> dict:
-        """For CSPM IOA events, gets list of IOA events."""
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetIOAEvents
-        operation_id = "GetIOAEvents"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
-
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetIOAUsers(self: object, parameters: dict = None, **kwargs) -> dict:
-        """For CSPM IOA users, gets list of IOA users."""
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetIOAUsers
-        operation_id = "GetIOAUsers"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
-
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetCSPMPolicy(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Given a policy ID, returns detailed policy information."""
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMPolicy
-        operation_id = "GetCSPMPolicy"
+    def GetRulesV1(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Get monitoring rules rules by provided IDs."""
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetRulesV1
+        operation_id = "GetRulesV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
@@ -313,16 +269,32 @@ class CSPM_Registration(ServiceClass):
                                    )
         return returned
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetCSPMPolicySettings(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Returns information about current policy settings."""
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMPolicySettings
-        operation_id = "GetCSPMPolicySettings"
+    def CreateRulesV1(self: object, body: dict) -> dict:
+        """Create monitoring rules."""
+        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateRulesV1
+        operation_id = "CreateRulesV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        body_payload = body
+        returned = service_request(caller=self,
+                                   method="POST",
+                                   endpoint=target_url,
+                                   body=body_payload,
+                                   headers=header_payload,
+                                   verify=self.ssl_verify
+                                   )
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def DeleteRulesV1(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Delete monitoring rules."""
+        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/DeleteRulesV1
+        operation_id = "DeleteRulesV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
-                                   method="GET",
+                                   method="DELETE",
                                    endpoint=target_url,
                                    params=parameter_payload,
                                    headers=header_payload,
@@ -330,11 +302,10 @@ class CSPM_Registration(ServiceClass):
                                    )
         return returned
 
-    def UpdateCSPMPolicySettings(self: object, body: dict) -> dict:
-        """Updates a policy setting - can be used to override policy severity or to disable a policy entirely."""
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         ...   /cspm-registration/UpdateCSPMPolicySettings
-        operation_id = "UpdateCSPMPolicySettings"
+    def UpdateRulesV1(self: object, body: dict) -> dict:
+        """Update monitoring rules."""
+        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateRulesV1
+        operation_id = "UpdateRulesV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
@@ -348,10 +319,12 @@ class CSPM_Registration(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetCSPMScanSchedule(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Returns scan schedule configuration for one or more cloud platforms."""
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMScanSchedule
-        operation_id = "GetCSPMScanSchedule"
+    def QueryActionsV1(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Query actions based on provided criteria.
+           Use the IDs from this response to get the action entities on GET /entities/actions/v1.
+        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/QueryActionsV1
+        operation_id = "QueryActionsV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
@@ -364,17 +337,40 @@ class CSPM_Registration(ServiceClass):
                                    )
         return returned
 
-    def UpdateCSPMScanSchedule(self: object, body: dict) -> dict:
-        """Updates scan schedule configuration for one or more cloud platforms."""
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMScanSchedule
-        operation_id = "UpdateCSPMScanSchedule"
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def QueryNotificationsV1(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Query notifications based on provided criteria.
+           Use the IDs from this response to get the notification entities on GET /entities/notifications/v1
+           or GET /entities/notifications-detailed/v1.
+        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/QueryNotificationsV1
+        operation_id = "QueryNotificationsV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
-        body_payload = body
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
-                                   method="POST",
+                                   method="GET",
                                    endpoint=target_url,
-                                   body=body_payload,
+                                   params=parameter_payload,
+                                   headers=header_payload,
+                                   verify=self.ssl_verify
+                                   )
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def QueryRulesV1(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Query monitoring rules based on provided criteria.
+           Use the IDs from this response to fetch the rules on /entities/rules/v1.
+        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/QueryRulesV1
+        operation_id = "QueryRulesV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
+        returned = service_request(caller=self,
+                                   method="GET",
+                                   endpoint=target_url,
+                                   params=parameter_payload,
                                    headers=header_payload,
                                    verify=self.ssl_verify
                                    )

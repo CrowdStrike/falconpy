@@ -36,13 +36,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-import sys
+# pylint: disable=C0103  # Aligning method names to API operation IDs
 from ._util import service_request, force_default, args_to_params
 from ._service_class import ServiceClass
 from ._endpoint._falcon_complete_dashboard import _falcon_complete_dashboard_endpoints as Endpoints
 
 
-class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
+class Complete_Dashboard(ServiceClass):
     """The only requirement to instantiate an instance of this class
        is a valid token provided by the Falcon API SDK OAuth2 class, a
        existing instance of the authentication class as an object or a
@@ -52,8 +52,8 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve aggregate allowlist ticket values based on the matched filter"""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateAllowList
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "AggregateAllowList"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
         returned = service_request(caller=self,
@@ -69,8 +69,8 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve aggregate blocklist ticket values based on the matched filter"""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateBlockList
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "AggregateBlockList"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
         returned = service_request(caller=self,
@@ -86,8 +86,8 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve aggregate detection values based on the matched filter"""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateDetections
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "AggregateDetections"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
         returned = service_request(caller=self,
@@ -103,8 +103,8 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve aggregate host/devices count based on the matched filter"""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateDeviceCountCollection
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "AggregateDeviceCountCollection"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
         returned = service_request(caller=self,
@@ -120,8 +120,8 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve aggregate escalation ticket values based on the matched filter"""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateEscalations
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "AggregateEscalations"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
         returned = service_request(caller=self,
@@ -137,8 +137,8 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve aggregate incident values based on the matched filter"""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateFCIncidents
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "AggregateFCIncidents"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
         returned = service_request(caller=self,
@@ -154,8 +154,8 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve aggregate remediation ticket values based on the matched filter"""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateRemediations
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "AggregateRemediations"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
         returned = service_request(caller=self,
@@ -172,10 +172,10 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve allowlist tickets that match the provided filter criteria with scrolling enabled"""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/QueryAllowListFilter
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "QueryAllowListFilter"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,
@@ -190,10 +190,10 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve block listtickets that match the provided filter criteria with scrolling enabled"""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/QueryBlockListFilter
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "QueryBlockListFilter"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,
@@ -208,10 +208,10 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve DetectionsIds that match the provided FQL filter, criteria with scrolling enabled"""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/QueryDetectionIdsByFilter
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "QueryDetectionIdsByFilter"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,
@@ -226,10 +226,10 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve device count collection Ids that match the provided FQL filter, criteria with scrolling enabled"""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/GetDeviceCountCollectionQueriesByFilter
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "GetDeviceCountCollectionQueriesByFilter"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,
@@ -244,10 +244,10 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve escalation tickets that match the provided filter criteria with scrolling enabled"""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/QueryEscalationsFilter
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "QueryEscalationsFilter"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,
@@ -262,10 +262,10 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve incidents that match the provided filter criteria with scrolling enabled"""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/QueryIncidentIdsByFilter
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "QueryIncidentIdsByFilter"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,
@@ -280,10 +280,10 @@ class Complete_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
         """Retrieve remediation tickets that match the provided filter criteria with scrolling enabled"""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/QueryRemediationsFilter
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "QueryRemediationsFilter"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,

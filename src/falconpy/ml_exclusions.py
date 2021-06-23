@@ -36,24 +36,23 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-
-import sys
+# pylint: disable=C0103  # Aligning method names to API operation IDs
 from ._util import service_request, force_default, args_to_params
 from ._service_class import ServiceClass
 from ._endpoint._ml_exclusions import _ml_exclusions_endpoints as Endpoints
 
 
-class ML_Exclusions(ServiceClass):  # pylint: disable=C0103  # Matching API
+class ML_Exclusions(ServiceClass):
     """The only requirement to instantiate an instance of this class
        is a valid token provided by the Falcon API SDK OAuth2 class, a
        existing instance of the authentication class as an object or a
        valid set of credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getMLExclusionsV1(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103  # Matching API
+    def getMLExclusionsV1(self: object, parameters: dict = None, **kwargs) -> dict:
         """Get a set of ML Exclusions by specifying their IDs"""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/getMLExclusionsV1
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        fname = "getMLExclusionsV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
@@ -66,10 +65,10 @@ class ML_Exclusions(ServiceClass):  # pylint: disable=C0103  # Matching API
                                    )
         return returned
 
-    def createMLExclusionsV1(self: object, body: dict) -> dict:  # pylint: disable=C0103  # Matching API
+    def createMLExclusionsV1(self: object, body: dict) -> dict:
         """Create the ML exclusions"""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/createMLExclusionsV1
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        fname = "createMLExclusionsV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
@@ -86,7 +85,7 @@ class ML_Exclusions(ServiceClass):  # pylint: disable=C0103  # Matching API
     def deleteMLExclusionsV1(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103 # Matching API
         """Delete the ML Exclusions by ID."""
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/deleteMLExclusionsV1
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        fname = "deleteMLExclusionsV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
@@ -99,10 +98,10 @@ class ML_Exclusions(ServiceClass):  # pylint: disable=C0103  # Matching API
                                    )
         return returned
 
-    def updateMLExclusionsV1(self: object, body: dict) -> dict:  # pylint: disable=C0103  # Matching API
+    def updateMLExclusionsV1(self: object, body: dict) -> dict:
         """Update the ML Exclusions"""
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/updateMLExclusionsV1
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        fname = "updateMLExclusionsV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
@@ -116,10 +115,10 @@ class ML_Exclusions(ServiceClass):  # pylint: disable=C0103  # Matching API
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryMLExclusionsV1(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103  # Matching API
+    def queryMLExclusionsV1(self: object, parameters: dict = None, **kwargs) -> dict:
         """Search for ML Exclusions."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/queryMLExclusionsV1
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        fname = "queryMLExclusionsV1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)

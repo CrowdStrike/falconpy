@@ -32,14 +32,18 @@
 # the service classes.
 from ._custom_ioa import _custom_ioa_endpoints
 from ._firewall_management import _firewall_management_endpoints
+# from ._identity_detections import _identity_detections_endpoints
 from ._installation_tokens import _installation_tokens_endpoints
+from ._ioc import _ioc_endpoints
 from ._iocs import _iocs_endpoints
 from ._real_time_response import _real_time_response_endpoints
 from ._real_time_response_admin import _real_time_response_admin_endpoints
 
 _custom_ioa_deprecated = _custom_ioa_endpoints
 _firewall_management_deprecated = _firewall_management_endpoints
+# _identity_detections_deprecated = _identity_detections_endpoints
 _installation_tokens_deprecated = _installation_tokens_endpoints
+_ioc_deprecated = _ioc_endpoints
 _iocs_deprecated = _iocs_endpoints
 _real_time_response_deprecated = _real_time_response_endpoints
 _real_time_response_admin_deprecated = _real_time_response_admin_endpoints
