@@ -8,15 +8,15 @@ import datetime
 import hashlib
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
-#Import our sibling src folder into the path
-sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
 from falconpy import sample_uploads as FalconSampleUploads
+# Import our sibling src folder into the path
+sys.path.append(os.path.abspath('src'))
 
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconSampleUploads.Sample_Uploads(access_token=auth.token)
-AllowedResponses = [200, 429] # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestSampleUploads:
@@ -77,18 +77,18 @@ class TestSampleUploads:
         falcon.base_url = "nowhere"
         errorChecks = True
         commandList = [
-            ["UploadSampleV3","file_data={}, file_name='oops_I_broke_it.jpg'"],
-            ["GetSampleV3","ids='DoesNotExist'"],
-            ["DeleteSampleV3","ids='12345678'"]
+            ["UploadSampleV3", "file_data={}, file_name='oops_I_broke_it.jpg'"],
+            ["GetSampleV3", "ids='DoesNotExist'"],
+            ["DeleteSampleV3", "ids='12345678'"]
         ]
         for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
+            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
                 errorChecks = False
 
         return errorChecks
 
     def test_TestAllFunctionality(self):
-        assert self.serviceSampleUploads_TestAllFunctionality() == True
+        assert self.serviceSampleUploads_TestAllFunctionality() is True
 
     def test_Errors(self):
-        assert self.serviceSampleUploads_GenerateErrors() == True
+        assert self.serviceSampleUploads_GenerateErrors() is True

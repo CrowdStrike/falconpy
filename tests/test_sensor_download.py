@@ -44,7 +44,10 @@ class TestSensorDownload():
         file_name = "sensor.rpm"
         directory_path = "."
         sha_id = self._get_multiple_shas()[0]
-        _ = sensor_download_client.DownloadSensorInstallerById(parameters={"id": sha_id}, file_name=file_name, download_path=directory_path)
+        _ = sensor_download_client.DownloadSensorInstallerById(parameters={"id": sha_id},
+                                                               file_name=file_name,
+                                                               download_path=directory_path
+                                                               )
         if os.path.exists("sensor.rpm"):
             os.remove("sensor.rpm")
             return True
