@@ -36,150 +36,168 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import parse_id_list, service_request
+# pylint: disable=C0103  # Aligning method names to API operation IDs
+from ._util import service_request, force_default, args_to_params
 from ._service_class import ServiceClass
+from ._endpoint._iocs import _iocs_endpoints as Endpoints
 
 
 class Iocs(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def DevicesCount(self: object, parameters: dict) -> dict:
-        """ Number of hosts in your customer account that have observed a given custom IOC. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def DevicesCount(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Number of hosts in your customer account that have observed a given custom IOC."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DevicesCount
-        FULL_URL = self.base_url+'/indicators/aggregates/devices-count/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
+        operation_id = "DevicesCount"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def GetIOC(self: object, parameters: dict) -> dict:
-        """ Get an IOC by providing a type and value. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetIOC(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Get an IOC by providing a type and value."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/GetIOC
-        FULL_URL = self.base_url+'/indicators/entities/iocs/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
+        operation_id = "GetIOC"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
     def CreateIOC(self: object, body: dict) -> dict:
-        """ Create a new IOC. """
+        """Create a new IOC."""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/CreateIOC
-        FULL_URL = self.base_url+'/indicators/entities/iocs/v1'
-        HEADERS = self.headers
-        BODY = body
+        operation_id = "CreateIOC"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        body_payload = body
         returned = service_request(caller=self,
                                    method="POST",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   body=body_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def DeleteIOC(self: object, parameters: dict) -> dict:
-        """ Delete an IOC by providing a type and value. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def DeleteIOC(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Delete an IOC by providing a type and value."""
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DeleteIOC
-        FULL_URL = self.base_url+'/indicators/entities/iocs/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
+        operation_id = "DeleteIOC"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="DELETE",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def UpdateIOC(self: object, parameters: dict, body: dict) -> dict:
-        """ Update an IOC by providing a type and value. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def UpdateIOC(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+        """Update an IOC by providing a type and value."""
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/UpdateIOC
-        FULL_URL = self.base_url+'/indicators/entities/iocs/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        BODY = body
+        operation_id = "UpdateIOC"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
+        body_payload = body
         returned = service_request(caller=self,
                                    method="PATCH",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   body=BODY,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   body=body_payload,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def DevicesRanOn(self: object, parameters: dict) -> dict:
-        """ Find hosts that have observed a given custom IOC.
-            For details about those hosts, use the hosts API interface.
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def DevicesRanOn(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Find hosts that have observed a given custom IOC.
+           For details about those hosts, use the hosts API interface.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DevicesRanOn
-        FULL_URL = self.base_url+'/indicators/queries/devices/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
+        operation_id = "DevicesRanOn"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def QueryIOCs(self: object, parameters: dict = None) -> dict:
-        """ Search the custom IOCs in your customer account. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def QueryIOCs(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search the custom IOCs in your customer account."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/QueryIOCs
-        FULL_URL = self.base_url+'/indicators/queries/iocs/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
+        operation_id = "QueryIOCs"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def ProcessesRanOn(self: object, parameters: dict) -> dict:
-        """ Search for processes associated with a custom IOC. """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/QueryIOCs
-        FULL_URL = self.base_url+'/indicators/queries/processes/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def ProcessesRanOn(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for processes associated with a custom IOC"""
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/ProcessesRanOn
+        operation_id = "ProcessesRanOn"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def entities_processes(self: object, ids) -> dict:
-        """ For the provided ProcessID retrieve the process details. """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/entities_processes
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/processes/entities/processes/v1?ids={}'.format(ID_LIST)
-        HEADERS = self.headers
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def entities_processes(self: object, parameters: dict = None, **kwargs) -> dict:
+        """For the provided ProcessID retrieve the process details."""
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/entities.processes
+        operation_id = "entities_processes"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
