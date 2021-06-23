@@ -12,6 +12,7 @@ These examples are provided as a quick start for your project.
     - [Falcon Discover](#falcon-discover)
     - [Falcon Horizon](#falcon-horizon)
     - [Hosts](#hosts)
+    - [IOC](#ioc)
     - [Quick Scan / Sample Uploads](#quick-scan)
     - [Real Time Response](#real-time-response)
     - [Sample Uploads](#sample-uploads)
@@ -49,6 +50,12 @@ _Coming Soon_
 | Service Class | Uber Class |
 | :--- | :--- |
 | [List sensor versions by hostname](hosts/sensor_versions_by_hostname.py)
+
+
+### IOC
+| Service Class | Uber Class |
+| :--- | :--- |
+| [Create an IOC](ioc/create_ioc.py) | [Create an IOC](ioc/create_ioc.py) |
 
 
 ### Quick Scan / Sample Uploads
