@@ -7,7 +7,7 @@
     * indicator_delete_v1
     * indicator_update_v1
     * indicator_search_v1
-+ Added: Kubernetes Protection API Service Class (`kubernetes_protection`)
++ Added: Kubernetes Protection API Service Class (`kubernetes_protection.py`)
     * GetAWSAccountsMixin0
     * CreateAWSAccount
     * DeleteAWSAccountsMixin0
@@ -38,7 +38,7 @@
     * QueryActionsV1
     * QueryNotificationsV1
     * QueryRulesV1
-+ Added: Response Policies API Service Class (`response_policies`)
++ Added: Response Policies API Service Class (`response_policies.py`)
     * queryCombinedRTResponsePolicyMembers
     * queryCombinedRTResponsePolicies
     * performRTResponsePoliciesAction
