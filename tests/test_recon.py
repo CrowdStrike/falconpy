@@ -2,7 +2,7 @@
 # This class tests the Falcon X Recon service class
 import os
 import sys
-
+import ast
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -41,6 +41,10 @@ class TestRecon:
             ["QueryRulesV1", "limit=1"],
         ]
         for cmd in commandList:
+            # result = getattr(falcon, cmd[0])(cmd[1])
+            # result = globals()[f"falcon.{cmd[0]}"]()
+            # result = getattr(falcon, f"{cmd[0]}")(f"{cmd[1]}")
+
             result = eval("falcon.{}({})".format(cmd[0], cmd[1]))
             if result['status_code'] not in AllowedResponses:
                 errorChecks = False
