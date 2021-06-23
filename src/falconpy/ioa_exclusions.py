@@ -36,28 +36,28 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-import sys
+# pylint: disable=C0103  # Aligning method names to API operation IDs
 from ._util import service_request, force_default, args_to_params
 from ._service_class import ServiceClass
 from ._endpoint._ioa_exclusions import _ioa_exclusions_endpoints as Endpoints
 
 
-class IOA_Exclusions(ServiceClass):  # pylint: disable=C0103  # Matching API
+class IOA_Exclusions(ServiceClass):
     """The only requirement to instantiate an instance of this class
        is a valid token provided by the Falcon API SDK OAuth2 class, a
        existing instance of the authentication class as an object or a
        valid set of credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getIOAExclusionsV1(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103  # Matching API
+    def getIOAExclusionsV1(self: object, parameters: dict = None, **kwargs) -> dict:
         """Get a set of IOA Exclusions by specifying their IDs"""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/getIOAExclusionsV1
         # id_list = str(parse_id_list(ids)).replace(",", "&ids=")
         # target_url = f"{self.base_url}/policy/entities/ioa-exclusions/v1?ids={id_list}"
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}".replace("?ids={}", "")
+        operation_id = "getIOAExclusionsV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,
@@ -67,11 +67,11 @@ class IOA_Exclusions(ServiceClass):  # pylint: disable=C0103  # Matching API
                                    )
         return returned
 
-    def createIOAExclusionsV1(self: object, body: dict) -> dict:  # pylint: disable=C0103  # Matching API
+    def createIOAExclusionsV1(self: object, body: dict) -> dict:
         """Create the IOA exclusions"""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/createIOAExclusionsV1
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "createIOAExclusionsV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
         returned = service_request(caller=self,
@@ -87,10 +87,10 @@ class IOA_Exclusions(ServiceClass):  # pylint: disable=C0103  # Matching API
     def deleteIOAExclusionsV1(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
         """Delete the IOA Exclusions by ID."""
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/deleteIOAExclusionsV1
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}".replace("?ids={}", "")
+        operation_id = "deleteIOAExclusionsV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="DELETE",
                                    endpoint=target_url,
@@ -100,11 +100,11 @@ class IOA_Exclusions(ServiceClass):  # pylint: disable=C0103  # Matching API
                                    )
         return returned
 
-    def updateIOAExclusionsV1(self: object, body: dict) -> dict:  # pylint: disable=C0103  # Matching API
+    def updateIOAExclusionsV1(self: object, body: dict) -> dict:
         """Update the IOA Exclusions"""
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/updateIOAExclusionsV1
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}".replace("?ids={}", "")
+        operation_id = "updateIOAExclusionsV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
         body_payload = body
         returned = service_request(caller=self,
@@ -120,10 +120,10 @@ class IOA_Exclusions(ServiceClass):  # pylint: disable=C0103  # Matching API
     def queryIOAExclusionsV1(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
         """Search for IOA Exclusions."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioa-exclusions/queryIOAExclusionsV1
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
+        operation_id = "queryIOAExclusionsV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
                                    endpoint=target_url,

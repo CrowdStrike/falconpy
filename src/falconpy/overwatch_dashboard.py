@@ -36,24 +36,24 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-import sys
+# pylint: disable=C0103  # Aligning method names to API operation IDs
 from ._util import service_request, force_default, args_to_params
 from ._service_class import ServiceClass
 from ._endpoint._overwatch_dashboard import _overwatch_dashboard_endpoints as Endpoints
 
 
-class Overwatch_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching API
+class Overwatch_Dashboard(ServiceClass):
     """The only requirement to instantiate an instance of this class
        is a valid token provided by the Falcon API SDK OAuth2 class, a
        existing instance of the authentication class as an object or a
        valid set of credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def AggregatesDetectionsGlobalCounts(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
+    def AggregatesDetectionsGlobalCounts(self: object, parameters: dict = None, **kwargs) -> dict:
         """Get the total number of detections pushed across all customers"""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Overwatch%20Dashboard/AggregatesDetectionsGlobalCounts
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        fname = "AggregatesDetectionsGlobalCounts"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
@@ -66,11 +66,11 @@ class Overwatch_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching AP
                                    )
         return returned
 
-    def AggregatesEventsCollections(self: object, body: list) -> dict:  # pylint: disable=C0103
+    def AggregatesEventsCollections(self: object, body: list) -> dict:
         """Get OverWatch detection event collection info by providing an aggregate query"""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Overwatch%20Dashboard/AggregatesEventsCollections
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        fname = "AggregatesEventsCollections"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
@@ -83,10 +83,10 @@ class Overwatch_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching AP
                                    )
         return returned
 
-    def AggregatesEvents(self: object, body: list) -> dict:  # pylint: disable=C0103  # Matching API
+    def AggregatesEvents(self: object, body: list) -> dict:
         """Get aggregate OverWatch detection event info by providing an aggregate query"""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Overwatch%20Dashboard/AggregatesEvents
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        fname = "AggregatesEvents"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
@@ -100,11 +100,11 @@ class Overwatch_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching AP
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def AggregatesIncidentsGlobalCounts(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
+    def AggregatesIncidentsGlobalCounts(self: object, parameters: dict = None, **kwargs) -> dict:
         """Get the total number of incidents pushed across all customers."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Overwatch%20Dashboard/AggregatesIncidentsGlobalCounts
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        fname = "AggregatesIncidentsGlobalCounts"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
@@ -118,11 +118,11 @@ class Overwatch_Dashboard(ServiceClass):  # pylint: disable=C0103  # Matching AP
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def AggregatesOWEventsGlobalCounts(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
+    def AggregatesOWEventsGlobalCounts(self: object, parameters: dict = None, **kwargs) -> dict:
         """Get the total number of incidents pushed across all customers."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Overwatch%20Dashboard/AggregatesOWEventsGlobalCounts
-        fname = sys._getframe().f_code.co_name  # pylint: disable=W0212  # Name lookup only
+        fname = "AggregatesOWEventsGlobalCounts"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if fname in ep[0]][0]}"
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, fname)
