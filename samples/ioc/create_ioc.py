@@ -33,13 +33,13 @@ def connectAPI(class_type: str = "service"):
     return falcon
 
 
-def createIOCPayload(source: str, policy: str, expiration: int, desc: str, type: str, val: str, platforms: list):
+def createIOCPayload(source: str, action: str, expiration: str, desc: str, type: str, val: str, platforms: list):
     payload = {
         "indicators": [
             {
                 "source": source,
-                "policy": policy,
-                "expiration_days": expiration,
+                "action": action,
+                "expiration": expiration,
                 "description": desc,
                 "type": type,
                 "value": val,
@@ -53,12 +53,12 @@ def createIOCPayload(source: str, policy: str, expiration: int, desc: str, type:
 
 # Create an IOC using the IOC Service class
 falcon = connectAPI("service")
-BODY = createIOCPayload("Test", "detect", 1, "Testing", "ipv4", "9.8.7.6", ["Linux"])
+BODY = createIOCPayload("Test", "detect", "2021-06-30T05:00:00.000Z", "Testing", "ipv4", "9.8.7.6", ["linux"])
 response = falcon.indicator_create_v1(body=BODY)
 print(response)
 
 # Create an IOC using the Uber class
 falcon = connectAPI("uber")
-BODY = createIOCPayload("Test", "detect", 1, "Testing", "ipv4", "8.7.6.5", ["Linux"])
+BODY = createIOCPayload("Test", "detect", "2021-06-30T05:00:00.000Z", "Testing", "ipv4", "8.7.6.5", ["linux"])
 response = falcon.command('indicator_create_v1', body=BODY)
 print(response)
