@@ -79,17 +79,20 @@ class IOC(ServiceClass):
                                    )
         return returned
 
-    def indicator_create_v1(self: object, body: dict) -> dict:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def indicator_create_v1(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """Create Indicators."""
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.create.v1
         operation_id = "indicator_create_v1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         body_payload = body
         returned = service_request(caller=self,
                                    method="POST",
                                    endpoint=target_url,
                                    body=body_payload,
+                                   params=parameter_payload,
                                    headers=header_payload,
                                    verify=self.ssl_verify
                                    )
@@ -112,17 +115,20 @@ class IOC(ServiceClass):
                                    )
         return returned
 
-    def indicator_update_v1(self: object, body: dict) -> dict:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def indicator_update_v1(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """Update Indicators."""
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.update.v1
         operation_id = "indicator_update_v1"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
         body_payload = body
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="PATCH",
                                    endpoint=target_url,
                                    body=body_payload,
+                                   params=parameter_payload,
                                    headers=header_payload,
                                    verify=self.ssl_verify
                                    )
