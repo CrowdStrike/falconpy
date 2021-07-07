@@ -286,7 +286,7 @@ class Sensor_Update_Policy(ServiceClass):
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         ...   /sensor-update-policies/updateSensorUpdatePoliciesV2
-        FULL_URL = self.base_url+'/users/entities/users/v1'
+        FULL_URL = self.base_url+'/policy/entities/sensor-update/v2'
         HEADERS = self.headers
         BODY = body
         returned = service_request(caller=self,
