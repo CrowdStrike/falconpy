@@ -190,7 +190,7 @@ class Iocs(ServiceClass):
         """For the provided ProcessID retrieve the process details."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/entities.processes
         operation_id = "entities_processes"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
         header_payload = self.headers
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
