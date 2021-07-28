@@ -43,8 +43,8 @@ _identity_protection_endpoints = [
     "POST",
     "/identity-protection/combined/graphql/v1",
     "Identity Protection GraphQL API. Allows to retrieve entities, timeline activities, "
-	"identity-based incidents and security assessment. Allows to perform actions on entities "
-	"and identity-based incidents.",
+    "identity-based incidents and security assessment. Allows to perform actions on entities "
+    "and identity-based incidents.",
     "identity_protection",
     [
       {
