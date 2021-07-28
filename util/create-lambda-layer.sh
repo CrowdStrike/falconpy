@@ -1,7 +1,7 @@
 #!/bin/bash
-# Uses Docker, Python and requirements.txt to
-# generates a zip archive to be used for an 
-# AWS lambda layer.
+# Uses Docker, Python and a requirements.txt
+# file to generate a zip archive to be used 
+# as an AWS lambda layer.
 
 # Tested on Darwin and AWS Linux 2
 
