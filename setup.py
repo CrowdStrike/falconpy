@@ -43,7 +43,8 @@ from setuptools import setup
 from glob import glob
 from os.path import basename
 from os.path import splitext
-from src.falconpy import _version, _maintainer, _title, _description, _author, _author_email, _project_url
+from src.falconpy import _version, _maintainer, _title, _description, _author
+from src.falconpy import _author_email, _project_url, _docs_url, _keywords
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -59,7 +60,10 @@ setup(
     author=_author,
     author_email=_author_email,
     maintainer=_maintainer,
+    maintainer_email=_author_email,
+    docs_url=_docs_url,
     description=_description,
+    keywords=_keywords,
     long_description=long_description,
     long_description_content_type="text/markdown",
     url=_project_url,

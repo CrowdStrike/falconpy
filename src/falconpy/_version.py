@@ -44,3 +44,5 @@ _credits = 'CrowdStrike'
 _description = "The CrowdStrike Falcon OAuth2 API SDK for Python 3"
 _title = "crowdstrike-falconpy"
 _project_url = "https://github.com/CrowdStrike/falconpy"
+_docs_url = "https://www.falconpy.io"
+_keywords = ["crowdstrike", "falcon", "api", "sdk", "oauth2", "devsecops", "crowdstrike-falcon"]

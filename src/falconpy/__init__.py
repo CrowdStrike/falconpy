@@ -18,7 +18,8 @@
                                                         |::.|     CrowdStrike Falcon      |::.|
                                                         `---' OAuth2 API SDK for Python 3 `---'
 """
-from ._version import _version, _maintainer, _author, _author_email, _credits, _description, _title, _project_url
+from ._version import _version, _maintainer, _author, _author_email
+from ._version import _credits, _description, _title, _project_url, _docs_url, _keywords
 
 __version__ = _version
 __maintainer__ = _maintainer
@@ -28,6 +29,8 @@ __credits__ = _credits
 __description__ = _description
 __title__ = _title
 __project_url__ = _project_url
+__docs_url__ = _docs_url
+__keywords__ = _keywords
 
 """
 This is free and unencumbered software released into the public domain.
