@@ -1,6 +1,5 @@
 # test_cloud_connect_aws.py
 # This class tests the cloud_connect_aws service class
-
 import os
 import sys
 import pytest
@@ -74,10 +73,10 @@ class TestCloudConnectAWS:
         if not falconWithObject.QueryAWSAccounts(parameters={"limit": "1"})["status_code"] in AllowedResponses:
             result = False
 
-        if falconWithObject.UpdateAWSAccounts(body={"resource": "I'm gonna go Boom!"})["status_code"] != 500:
+        if falconWithObject.UpdateAWSAccounts(body={"resource": "I'm gonna go Boom!"})["status_code"] != 400:
             result = False
 
-        if falconWithObject.UpdateAWSAccounts(body={"resources": {"id": "I'm gonna go Boom!"}})["status_code"] != 500:
+        if falconWithObject.UpdateAWSAccounts(body={"resources": {"id": "I'm gonna go Boom!"}})["status_code"] != 400:
             result = False
 
         return result
@@ -95,7 +94,9 @@ class TestCloudConnectAWS:
             return False
 
     def serviceCCAWS_GetAWSAccounts(self):
-        if falcon.GetAWSAccounts(ids=falcon.QueryAWSAccounts(parameters={"limit": 1})["body"]["resources"][0]["id"])["status_code"] in AllowedResponses:
+        if falcon.GetAWSAccounts(ids=falcon.QueryAWSAccounts(
+                parameters={"limit": 1}
+                )["body"]["resources"][0]["id"])["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -137,7 +138,11 @@ class TestCloudConnectAWS:
             return False
 
     def serviceCCAWS_VerifyAWSAccountAccess(self):
-        if falcon.VerifyAWSAccountAccess(ids=falcon.QueryAWSAccounts(parameters={"limit":1})["body"]["resources"][0]["id"])["status_code"] in AllowedResponses:
+        if falcon.VerifyAWSAccountAccess(
+                ids=falcon.QueryAWSAccounts(
+                    parameters={"limit": 1}
+                    )["body"]["resources"][0]["id"]
+                )["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -186,59 +191,43 @@ class TestCloudConnectAWS:
         return errorChecks
 
     def test_GetAWSSettings(self):
-        assert self.serviceCCAWS_GetAWSSettings() == True
+        assert self.serviceCCAWS_GetAWSSettings() is True
 
     def test_QueryAWSAccounts(self):
-        assert self.serviceCCAWS_QueryAWSAccounts() == True
+        assert self.serviceCCAWS_QueryAWSAccounts() is True
 
-    @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
+    @pytest.mark.skipif(falcon.QueryAWSAccounts(
+        parameters={"limit": 1}
+        )["status_code"] == 429, reason="API rate limit reached")
     def test_GetAWSAccounts(self):
-        assert self.serviceCCAWS_GetAWSAccounts() == True
+        assert self.serviceCCAWS_GetAWSAccounts() is True
 
-    @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
+    @pytest.mark.skipif(falcon.QueryAWSAccounts(
+        parameters={"limit": 1}
+        )["status_code"] == 429, reason="API rate limit reached")
     def test_GetAWSAccountsUsingList(self):
-        assert self.serviceCCAWS_GetAWSAccountsUsingList() == True
-
-    # @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
-    # @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
-    # def test_VerifyAWSAccountAccess(self):
-    #     assert self.serviceCCAWS_VerifyAWSAccountAccess() == True
-
-    # @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
-    # @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
-    # def test_AccountUpdate(self):
-    #     assert self.serviceCCAWS_AccountUpdate() == True
-
-    # @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
-    # @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
-    # def test_AccountDelete(self):
-    #     assert self.serviceCCAWS_AccountDelete() == True
+        assert self.serviceCCAWS_GetAWSAccountsUsingList() is True
 
     def test_QueryAWSAccountsForIDs(self):
-        assert self.serviceCCAWS_QueryAWSAccountsForIDs() == True
-
-    # @pytest.mark.skipif(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
-    # @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
-    # def test_AccountRegister(self):
-    #     assert self.serviceCCAWS_AccountRegister() == True
+        assert self.serviceCCAWS_QueryAWSAccountsForIDs() is True
 
     def test_AuthWithCreds(self):
-        assert self.serviceCCAWS_AuthWithCreds() == True
+        assert self.serviceCCAWS_AuthWithCreds() is True
 
     def test_AuthWithObject(self):
-        assert self.serviceCCAWS_AuthWithObject() == True
+        assert self.serviceCCAWS_AuthWithObject() is True
 
     def test_RefreshToken(self):
-        assert self.serviceCCAWS_RefreshToken() == True
+        assert self.serviceCCAWS_RefreshToken() is True
 
     def test_InvalidPayloads(self):
-        assert self.serviceCCAWS_InvalidPayloads() == True
+        assert self.serviceCCAWS_InvalidPayloads() is True
 
     def test_ForceAttributeError(self):
-        assert self.serviceCCAWS_ForceAttributeError() == True
+        assert self.serviceCCAWS_ForceAttributeError() is True
 
     def test_Logout(self):
-        assert auth.serviceRevoke() == True
+        assert auth.serviceRevoke() is True
 
     def test_Errors(self):
-        assert self.serviceCCAWS_GenerateErrors() == True
+        assert self.serviceCCAWS_GenerateErrors() is True
