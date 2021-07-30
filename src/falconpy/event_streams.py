@@ -36,41 +36,49 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import service_request
+# pylint: disable=C0103  # Aligning method names to API operation IDs
+from ._util import service_request, force_default, args_to_params
 from ._service_class import ServiceClass
+from ._endpoint._event_streams import _event_streams_endpoints as Endpoints
 
 
 class Event_Streams(ServiceClass):
-    """ The only requirement to instantiate an instance of this class
-        is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def refreshActiveStreamSession(self: object, parameters: dict, partition: int = 0) -> dict:
-        """ Refresh an active event stream. Use the URL shown in a GET /sensors/entities/datafeed/v2 response. """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class.
+    """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def refreshActiveStreamSession(self: object, partition: int = 0, parameters: dict = None, **kwargs) -> dict:
+        """
+        Refresh an active event stream. Use the URL shown in a GET /sensors/entities/datafeed/v2 response.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/refreshActiveStreamSession
-        FULL_URL = self.base_url+'/sensors/entities/datafeed-actions/v1/{}'.format(str(partition))
-        HEADERS = self.headers
-        PARAMS = parameters
+        operation_id = "refreshActiveStreamSession"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("{}", str(partition))
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="POST",
-                                   endpoint=FULL_URL,
-                                   body={},
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def listAvailableStreamsOAuth2(self: object, parameters: dict) -> dict:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def listAvailableStreamsOAuth2(self: object, parameters: dict = None, **kwargs) -> dict:
         """ Discover all event streams in your environment. """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/listAvailableStreamsOAuth2
-        FULL_URL = self.base_url+'/sensors/entities/datafeed/v2'
-        HEADERS = self.headers
-        PARAMS = parameters
+        operation_id = "listAvailableStreamsOAuth2"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
