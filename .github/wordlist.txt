@@ -361,6 +361,7 @@ ip
 ipv
 ipython
 json
+kubernetes
 linux
 listAvailableStreamsOAuth
 malquery
@@ -373,6 +374,7 @@ netwitness
 notificationsnnnone
 oauth
 oauth2
+overwatch
 performDeviceControlPoliciesAction
 performFirewallPoliciesAction
 performGroupAction
@@ -383,6 +385,7 @@ platformsMixin
 powershell
 pre
 py
+pylint
 pytest
 queryCIDGroupMembers
 queryCIDGroups
