@@ -22,7 +22,7 @@ class TestSpotlight:
     def serviceSpotlight_queryVulnerabilities(self):
         if falcon.queryVulnerabilities(
                                        parameters={"limit": 1,
-                                                   "filter": "created_timestamp:>'2020-01-01T00:00:01Z'"
+                                                   "filter": "created_timestamp:>'2021-01-01T00:00:01Z'"
                                                    }
                                        )["status_code"] in AllowedResponses:
             return True
@@ -32,7 +32,7 @@ class TestSpotlight:
     def serviceSpotlight_getVulnerabilities(self):
         try:
             id_list = falcon.queryVulnerabilities(parameters={"limit": 1,
-                                                              "filter": "created_timestamp:>'2020-01-01T00:00:01Z'"
+                                                              "filter": "created_timestamp:>'2021-01-01T00:00:01Z'"
                                                               }
                                                   )["body"]["resources"][0]
             if falcon.getVulnerabilities(ids=id_list)["status_code"] in AllowedResponses:
@@ -61,7 +61,7 @@ class TestSpotlight:
 
     @pytest.mark.skipif(falcon.queryVulnerabilities(
                                                     parameters={"limit": 1,
-                                                                "filter": "created_timestamp:>'2020-01-01T00:00:01Z'"
+                                                                "filter": "created_timestamp:>'2021-01-01T00:00:01Z'"
                                                                 }
                                                     )["status_code"] == 429, reason="API rate limit reached")
     def test_getVulnerabilities(self):
