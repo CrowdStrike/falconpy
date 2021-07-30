@@ -68,7 +68,9 @@ class Event_Streams(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def listAvailableStreamsOAuth2(self: object, parameters: dict = None, **kwargs) -> dict:
-        """ Discover all event streams in your environment. """
+        """
+        Discover all event streams in your environment.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/listAvailableStreamsOAuth2
         operation_id = "listAvailableStreamsOAuth2"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
