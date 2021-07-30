@@ -1,4 +1,4 @@
-name: PyLint
+name: Pylint
 on:
   push:
     paths:
