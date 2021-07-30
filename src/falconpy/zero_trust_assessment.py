@@ -36,24 +36,30 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import service_request, parse_id_list
+from ._util import service_request, force_default, args_to_params
 from ._service_class import ServiceClass
+from ._endpoint._zero_trust_assessment import _zero_trust_assessment_endpoints as Endpoints
 
 
 class Zero_Trust_Assessment(ServiceClass):
     """The only requirement to instantiate an instance of this class
        is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def getAssessmentV1(self: object, ids) -> dict:
-        """Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID) and a customer ID (CID)."""
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def getAssessmentV1(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID) and a customer ID (CID).
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getAssessmentV1
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+"/zero-trust-assessment/entities/assessments/v1?ids={}".format(ID_LIST)
-        HEADERS = self.headers
+        operation_id = "getAssessmentV1"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
