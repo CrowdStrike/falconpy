@@ -42,8 +42,9 @@ from ._endpoint._zero_trust_assessment import _zero_trust_assessment_endpoints a
 
 
 class Zero_Trust_Assessment(ServiceClass):
-    """The only requirement to instantiate an instance of this class
-       is a valid token provided by the Falcon API SDK OAuth2 class.
+    """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def getAssessmentV1(self: object, parameters: dict = None, **kwargs) -> dict:

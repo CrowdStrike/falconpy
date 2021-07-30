@@ -43,16 +43,19 @@ from ._endpoint._identity_protection import _identity_protection_endpoints as En
 
 
 class Identity_Protection(ServiceClass):
-    """The only requirement to instantiate an instance of this class
-       is a valid token provided by the Falcon API SDK OAuth2 class, a
-       existing instance of the authentication class as an object or a
-       valid set of credentials.
+    """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class, a
+    existing instance of the authentication class as an object or a
+    valid set of credentials.
     """
 
     def GraphQL(self: object, body: dict) -> dict:
-        """Identity Protection GraphQL API. Allows to retrieve entities, timeline activities,
-           identity-based incidents and security assessment. Allows to perform actions on entities
-           and identity-based incidents."""
+        """
+        Identity Protection GraphQL API. Allows to retrieve entities, timeline activities,
+        identity-based incidents and security assessment. Allows to perform actions on entities
+        and identity-based incidents.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html
         #           /identity-protection/api.preempt.proxy.post.graphql
         operation_id = "api_preempt_proxy_post_graphql"

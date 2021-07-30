@@ -43,13 +43,15 @@ from ._endpoint._cloud_connect_aws import _cloud_connect_aws_endpoints as Endpoi
 
 
 class Cloud_Connect_AWS(ServiceClass):
-    """ The only requirement to instantiate an instance of this class
-        is a valid token provided by the Falcon API SDK OAuth2 class.
+    """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def QueryAWSAccounts(self: object, parameters: dict = None, **kwargs) -> dict:
-        """ Search for provisioned AWS Accounts by providing an FQL filter and paging details.
-            Returns a set of AWS accounts which match the filter criteria.
+        """
+        Search for provisioned AWS Accounts by providing an FQL filter and paging details.
+        Returns a set of AWS accounts which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccounts
         operation_id = "QueryAWSAccounts"
@@ -67,7 +69,9 @@ class Cloud_Connect_AWS(ServiceClass):
         return returned
 
     def GetAWSSettings(self: object) -> dict:
-        """ Retrieve a set of Global Settings which are applicable to all provisioned AWS accounts. """
+        """
+        Retrieve a set of Global Settings which are applicable to all provisioned AWS accounts.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/GetAWSSettings
         operation_id = "GetAWSSettings"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
@@ -83,7 +87,9 @@ class Cloud_Connect_AWS(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def GetAWSAccounts(self: object, parameters: dict = None, **kwargs) -> dict:
-        """ Retrieve a set of AWS Accounts by specifying their IDs."""
+        """
+        Retrieve a set of AWS Accounts by specifying their IDs.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/GetAWSAccounts
         operation_id = "GetAWSAccounts"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
@@ -101,7 +107,9 @@ class Cloud_Connect_AWS(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def ProvisionAWSAccounts(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
-        """ Provision AWS Accounts by specifying details about the accounts to provision. """
+        """
+        Provision AWS Accounts by specifying details about the accounts to provision.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/ProvisionAWSAccounts
         operation_id = "ProvisionAWSAccounts"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
@@ -140,7 +148,9 @@ class Cloud_Connect_AWS(ServiceClass):
         return returned
 
     def UpdateAWSAccounts(self: object, body: dict) -> dict:
-        """ Update AWS Accounts by specifying the ID of the account and details to update. """
+        """
+        Update AWS Accounts by specifying the ID of the account and details to update.
+        """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/UpdateAWSAccounts
         operation_id = "UpdateAWSAccounts"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"

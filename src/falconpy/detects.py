@@ -43,11 +43,14 @@ from ._endpoint._detects import _detects_endpoints as Endpoints
 
 
 class Detects(ServiceClass):
-    """ The only requirement to instantiate an instance of this class
-        is a valid token provided by the Falcon API SDK OAuth2 class.
+    """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     def GetAggregateDetects(self: object, body: dict) -> dict:
-        """ Get detect aggregates as specified via json in request body. """
+        """
+        Get detect aggregates as specified via json in request body.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetAggregateDetects
         operation_id = "GetAggregateDetects"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
@@ -63,7 +66,9 @@ class Detects(ServiceClass):
         return returned
 
     def UpdateDetectsByIdsV2(self: object, body: dict) -> dict:
-        """ Modify the state, assignee, and visibility of detections. """
+        """
+        Modify the state, assignee, and visibility of detections.
+        """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/UpdateDetectsByIdsV2
         operation_id = "UpdateDetectsByIdsV2"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
@@ -89,7 +94,9 @@ class Detects(ServiceClass):
         return returned
 
     def GetDetectSummaries(self: object, body: dict) -> dict:
-        """ View information about detections. """
+        """
+        View information about detections.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetDetectSummaries
         operation_id = "GetDetectSummaries"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
