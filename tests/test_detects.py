@@ -1,14 +1,12 @@
 # test_detects.py
 # This class tests the detects service class
-
 import json
 import os
 import sys
 import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
-
-#Import our sibling src folder into the path
+# Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
 from falconpy import detects as FalconDetections
@@ -16,18 +14,21 @@ from falconpy import detects as FalconDetections
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 falcon = FalconDetections.Detects(access_token=auth.token)
-AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+
 
 class TestDetects:
 
     def serviceDetects_QueryDetects(self):
-        if falcon.QueryDetects(parameters={"limit":1})["status_code"] in AllowedResponses:
+        if falcon.QueryDetects(parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceDetects_GetDetectSummaries(self):
-        if falcon.GetDetectSummaries(body={"ids":falcon.QueryDetects(parameters={"limit":1})["body"]["resources"]})["status_code"] in AllowedResponses:
+        if falcon.GetDetectSummaries(
+                body={"ids": falcon.QueryDetects(parameters={"limit": 1})["body"]["resources"]}
+                )["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -43,29 +44,36 @@ class TestDetects:
     def serviceDetects_GenerateErrors(self):
         falcon.base_url = "nowhere"
         errorChecks = True
-        if falcon.QueryDetects()["status_code"] != 500:
+        if falcon.QueryDetects()["status_code"] not in [400, 500]:
             errorChecks = False
-        if falcon.GetDetectSummaries(body={})["status_code"] != 500:
+        if falcon.GetDetectSummaries(body={"ids": {"oops": False}})["status_code"] not in [400, 500]:
             errorChecks = False
-        if falcon.GetAggregateDetects(body={})["status_code"] != 500:
+        if falcon.GetAggregateDetects(body={"resource": {"bad": True}})["status_code"] not in [400, 500]:
             errorChecks = False
-        if falcon.UpdateDetectsByIdsV2(body={})["status_code"] != 500:
+        if falcon.UpdateDetectsByIdsV2(body={"bananas": "Are yellow or green"})["status_code"] not in [400, 500]:
             errorChecks = False
-            
+        if falcon.GetDetectSummaries(body={"something": "something"})["status_code"] not in [400, 500]:
+            errorChecks = False
+        if falcon.GetDetectSummaries(body={"something": "something", "ids": "12345678"})["status_code"] not in [400, 500]:
+            errorChecks = False
+
+        # else:
+        #     print(f"Correct fail {falcon.GetDetectSummaries(body={'something': 'something'})['status_code']}")
+        #     print(falcon.GetDetectSummaries(body={"something": "something"}))
         return errorChecks
 
     def test_QueryDetects(self):
-        assert self.serviceDetects_QueryDetects() == True
-    
-    @pytest.mark.skipif(falcon.QueryDetects(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
+        assert self.serviceDetects_QueryDetects() is True
+
+    @pytest.mark.skipif(falcon.QueryDetects(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetDetectSummaries(self):
-        assert self.serviceDetects_GetDetectSummaries() == True
+        assert self.serviceDetects_GetDetectSummaries() is True
 
     # def test_GetAggregateDetects(self):
     #     assert self.serviceDetects_GetAggregateDetects() == True
 
     def test_logout(self):
-        assert auth.serviceRevoke() == True
+        assert auth.serviceRevoke() is True
 
     def test_Errors(self):
-        assert self.serviceDetects_GenerateErrors() == True
+        assert self.serviceDetects_GenerateErrors() is True

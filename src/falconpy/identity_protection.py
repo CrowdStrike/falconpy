@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-zero_trust_assessment - Falcon Zero Trust Assessment API Interface Class
+identity_protection - Identity Protection API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -37,30 +37,35 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
+from ._util import service_request
 from ._service_class import ServiceClass
-from ._endpoint._zero_trust_assessment import _zero_trust_assessment_endpoints as Endpoints
+from ._endpoint._identity_protection import _identity_protection_endpoints as Endpoints
 
 
-class Zero_Trust_Assessment(ServiceClass):
+class Identity_Protection(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, a
+    existing instance of the authentication class as an object or a
+    valid set of credentials.
     """
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def getAssessmentV1(self: object, parameters: dict = None, **kwargs) -> dict:
+
+    def GraphQL(self: object, body: dict) -> dict:
         """
-        Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID) and a customer ID (CID).
+        Identity Protection GraphQL API. Allows to retrieve entities, timeline activities,
+        identity-based incidents and security assessment. Allows to perform actions on entities
+        and identity-based incidents.
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getAssessmentV1
-        operation_id = "getAssessmentV1"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html
+        #           /identity-protection/api.preempt.proxy.post.graphql
+        operation_id = "api_preempt_proxy_post_graphql"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
+        body_payload = body
         returned = service_request(caller=self,
-                                   method="GET",
+                                   method="POST",
                                    endpoint=target_url,
-                                   params=parameter_payload,
+                                   body=body_payload,
                                    headers=header_payload,
                                    verify=self.ssl_verify
                                    )

@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-zero_trust_assessment - Falcon Zero Trust Assessment API Interface Class
+_endpoint._identity_protection - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,32 +36,24 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
-from ._service_class import ServiceClass
-from ._endpoint._zero_trust_assessment import _zero_trust_assessment_endpoints as Endpoints
 
-
-class Zero_Trust_Assessment(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
-    """
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def getAssessmentV1(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID) and a customer ID (CID).
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getAssessmentV1
-        operation_id = "getAssessmentV1"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+_identity_protection_endpoints = [
+  [
+    "api_preempt_proxy_post_graphql",
+    "POST",
+    "/identity-protection/combined/graphql/v1",
+    "Identity Protection GraphQL API. Allows to retrieve entities, timeline activities, "
+    "identity-based incidents and security assessment. Allows to perform actions on entities "
+    "and identity-based incidents.",
+    "identity_protection",
+    [
+      {
+        "type": "string",
+        "description": "Authorization Header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      }
+    ]
+  ]
+]

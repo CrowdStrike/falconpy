@@ -36,98 +36,101 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import service_request
+# pylint: disable=C0103  # Aligning method names to API operation IDs
+from ._util import service_request, args_to_params, force_default
 from ._service_class import ServiceClass
+from ._endpoint._detects import _detects_endpoints as Endpoints
 
 
 class Detects(ServiceClass):
-    """ The only requirement to instantiate an instance of this class
-        is a valid token provided by the Falcon API SDK OAuth2 class.
+    """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     def GetAggregateDetects(self: object, body: dict) -> dict:
-        """ Get detect aggregates as specified via json in request body. """
+        """
+        Get detect aggregates as specified via json in request body.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetAggregateDetects
-        FULL_URL = self.base_url+'/detects/aggregates/detects/GET/v1'
-        HEADERS = self.headers
-        BODY = body
-        # VALIDATOR = {"resources": list}  # TODO: Confirm body payload format
-        # REQUIRED = ["resources"]
+        operation_id = "GetAggregateDetects"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        body_payload = body
         returned = service_request(caller=self,
                                    method="POST",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
-                                   body=BODY,
-                                   # body_validator=VALIDATOR,
-                                   # body_required=REQUIRED,
+                                   endpoint=target_url,
+                                   body=body_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
     def UpdateDetectsByIdsV2(self: object, body: dict) -> dict:
-        """ Modify the state, assignee, and visibility of detections. """
+        """
+        Modify the state, assignee, and visibility of detections.
+        """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/UpdateDetectsByIdsV2
-        FULL_URL = self.base_url+'/detects/entities/detects/v2'
-        HEADERS = self.headers
-        BODY = body
-        VALIDATOR = {
+        operation_id = "UpdateDetectsByIdsV2"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        body_payload = body
+        body_validator = {
             "assigned_to_uuid": str,
             "ids": list,
             "show_in_ui": bool,
             "status": str,
             "comment": str
         }
-        REQUIRED = ["ids"]
+        body_required = ["ids"]
         returned = service_request(caller=self,
                                    method="PATCH",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
-                                   body=BODY,
-                                   body_validator=VALIDATOR,
-                                   body_required=REQUIRED,
+                                   endpoint=target_url,
+                                   body=body_payload,
+                                   body_validator=body_validator,
+                                   body_required=body_required,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
     def GetDetectSummaries(self: object, body: dict) -> dict:
-        """ View information about detections. """
+        """
+        View information about detections.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetDetectSummaries
-        FULL_URL = self.base_url+'/detects/entities/summaries/GET/v1'
-        HEADERS = self.headers
-        BODY = body
-        VALIDATOR = {"ids": list}   # TODO: Confirm list datatype for ingested IDs via the body payload
-        REQUIRED = ["ids"]
+        operation_id = "GetDetectSummaries"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        body_payload = body
+        body_validator = {"ids": list}
+        body_required = ["ids"]
         returned = service_request(caller=self,
                                    method="POST",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
-                                   body=BODY,
-                                   body_validator=VALIDATOR,
-                                   body_required=REQUIRED,
+                                   endpoint=target_url,
+                                   body=body_payload,
+                                   body_validator=body_validator,
+                                   body_required=body_required,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def QueryDetects(self: object, parameters: dict = None) -> dict:
-        """ Search for detection IDs that match a given query. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def QueryDetects(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Search for detection IDs that match a given query.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/QueryDetects
-        FULL_URL = self.base_url+'/detects/queries/detects/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        VALIDATOR = {
-            "limit": int,
-            "offset": int,
-            "sort": str,
-            "filter": str,
-            "q": str
-        }
+        operation_id = "QueryDetects"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   params_validator=VALIDATOR,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
+
         return returned

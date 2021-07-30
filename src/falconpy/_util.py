@@ -62,15 +62,17 @@ def validate_payload(validator: dict, params: dict, required: list = None) -> bo
     #                                        (____)) _     Thanks
     #                                        (____))       James!
     #                                        (____))____/----
+    if required:
+        for key in required:
+            if key not in params:
+                raise ValueError(f"Argument {key} must be specified.")
+
     for key in params:
         if key not in validator:
             raise ValueError(f"{key} is not a valid argument.")
         if not isinstance(params[key], validator[key]):
             raise TypeError(f"{key} is not the valid type. Should be: {validator[key]}, was {type(params[key])}")
-    if required:
-        for key in required:
-            if key not in params:
-                raise ValueError(f"Argument {key} must be specified.")
+
     return True
 
 
@@ -78,10 +80,10 @@ def parse_id_list(id_list) -> str:
     """ Converts a list of IDs to a comma-delimited string """
     if isinstance(id_list, list):
         returned = ""
-        for s in id_list:
+        for string in id_list:
             if len(returned) > 1:
                 returned += ","
-            returned += str(s)
+            returned += str(string)
     else:
         returned = id_list
 
@@ -90,8 +92,8 @@ def parse_id_list(id_list) -> str:
 
 def generate_b64cred(client_id: str, client_secret: str) -> str:
     """ base64 encodes passed client_id and client_secret for authorization headers. """
-    cr = "{}:{}".format(client_id, client_secret)
-    b64_byt = base64.b64encode(cr.encode("ascii"))
+    cred = "{}:{}".format(client_id, client_secret)
+    b64_byt = base64.b64encode(cred.encode("ascii"))
     encoded = b64_byt.decode("ascii")
 
     return encoded
@@ -129,7 +131,6 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
 def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
                     params: dict = None, body: dict = None, verify: bool = True,
                     data=None, files: list = None,
-                    params_validator: dict = None, params_required: dict = None,
                     body_validator: dict = None, body_required: dict = None,
                     proxy: dict = None, timeout: float or tuple = None) -> object:  # May return dict or object datatypes
     """
@@ -168,46 +169,35 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
     """
     if files is None:
         files = []
-    PERFORM = True
-    METHOD = method.upper()
-    if METHOD in _ALLOWED_METHODS:
+    perform = True
+    if method.upper() in _ALLOWED_METHODS:
         # Validate parameters
         # 05.21.21/JSH - Param validation is now handled by the updated args_to_params method
-        #
-        # if params_validator:
-        #     try:
-        #         validate_payload(params_validator, params, params_required)
-        #     except ValueError as e:
-        #         returned = generate_error_result(message=f"{str(e)}")
-        #         PERFORM = False
-        #     except TypeError as e:
-        #         returned = generate_error_result(message=f"{str(e)}")
-        #         PERFORM = False
 
         # Validate body payload
         if body_validator:
             try:
                 validate_payload(body_validator, body, body_required)
-            except ValueError as e:
-                returned = generate_error_result(message=f"{str(e)}")
-                PERFORM = False
-            except TypeError as e:
-                returned = generate_error_result(message=f"{str(e)}")
-                PERFORM = False
+            except ValueError as err:
+                returned = generate_error_result(message=f"{str(err)}")
+                perform = False
+            except TypeError as err:
+                returned = generate_error_result(message=f"{str(err)}")
+                perform = False
 
         # Perform the request
-        if PERFORM:
+        if perform:
             headers["User-Agent"] = _USER_AGENT  # Force all requests to pass the User-Agent identifier
             try:
-                response = requests.request(METHOD, endpoint, params=params, headers=headers,
+                response = requests.request(method.upper(), endpoint, params=params, headers=headers,
                                             json=body, data=data, files=files, verify=verify, proxies=proxy, timeout=timeout)
 
                 if response.headers.get('content-type') == "application/json":
                     returned = Result()(response.status_code, response.headers, response.json())
                 else:
                     returned = response.content
-            except Exception as e:
-                returned = generate_error_result(message=f"{str(e)}")
+            except Exception as err:
+                returned = generate_error_result(message=f"{str(err)}")
     else:
         returned = generate_error_result(message="Invalid API operation specified.", code=405)
 

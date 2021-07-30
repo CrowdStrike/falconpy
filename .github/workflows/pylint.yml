@@ -1,0 +1,44 @@
+name: Pylint
+on:
+  push:
+    paths:
+      - '**.py'
+    branches:
+      - main
+      - 'ver_*'
+  pull_request:
+    paths:
+      - '**.py'
+    branches: 
+      - main
+      - 'ver_*'
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install pylint
+        pip install -r requirements.txt
+    - name: Lint package source with pylint
+      run: |
+        # NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE!
+        # -----------------------------------------------------------------------------
+        # PYLINT WORKFLOWS WILL BEGIN STOPPING BUILDS AFTER THE                       |
+        # LAST SERVICE CLASSES HAVE BEEN REFACTORED - 07.28.21 / jshcodes@CrowdStrike |
+        # Review https://github.com/CrowdStrike/falconpy/projects/1 for more detail.  |
+        # -----------------------------------------------------------------------------
+        # 
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        pylint src/falconpy --max-line-length=127 --disable=R0801 --exit-zero
+    - name: Lint samples with pylint
+      run: |
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        pylint samples --max-line-length=127 --disable=R0801 --exit-zero

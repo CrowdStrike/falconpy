@@ -14,3 +14,4 @@ sensor_downloads/
 __pycache__/
 .env
 .coverage
+htmlcov/

@@ -43,7 +43,8 @@ from setuptools import setup
 from glob import glob
 from os.path import basename
 from os.path import splitext
-from src.falconpy import _version, _maintainer, _title, _description, _author, _author_email, _project_url
+from src.falconpy import _version, _maintainer, _title, _description, _author
+from src.falconpy import _author_email, _project_url, _docs_url, _keywords
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -59,7 +60,10 @@ setup(
     author=_author,
     author_email=_author_email,
     maintainer=_maintainer,
+    maintainer_email=_author_email,
+    docs_url=_docs_url,
     description=_description,
+    keywords=_keywords,
     long_description=long_description,
     long_description_content_type="text/markdown",
     url=_project_url,
@@ -75,6 +79,7 @@ setup(
         "dev": [
             "flake8",
             "coverage",
+            "pylint",
             "pytest-cov",
             "pytest",
             "bandit",
@@ -87,13 +92,16 @@ setup(
         "Operating System :: POSIX",
         "Operating System :: MacOS",
         "Operating System :: Microsoft :: Windows",
+        "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "License :: OSI Approved :: The Unlicense (Unlicense)",
-        "Operating System :: OS Independent",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+        "Topic :: System :: Systems Administration",
+        "Topic :: Utilities"
     ],
     python_requires='>=3.6',
 )
