@@ -79,6 +79,7 @@ setup(
         "dev": [
             "flake8",
             "coverage",
+            "pylint",
             "pytest-cov",
             "pytest",
             "bandit",
