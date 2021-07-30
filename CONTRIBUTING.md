@@ -141,14 +141,17 @@ To read more about bandit, you can visit [their documentation website](https://b
 
 ### Linting
 All submitted code must meet minimum linting requirements. 
-+ We use `flake8` for linting. 
-+ All code that is included within the installation package must pass linting when the Pull Request checks have completed.
++ We use `flake8` and `pylint` for linting. 
++ All code that is included within the installation package must pass linting workflows when the Pull Request checks have completed.
     - You will be asked to correct linting errors before your Pull Request will be approved.
 + Unit tests do not need to meet this requirement, but try to keep linting errors to a minimum.
++ Samples are checked for linting, but failures will not stop builds at this time.
 + Refer to the `lint.sh` script within the util folder to review our standard linting parameters.
 > You can quickly check the linting for all code within the src folder by executing the command `util/lint.sh` from the root of the project directory.
 
 More information about flake8 can be found [here](https://flake8.pycqa.org/en/latest/).
+
+More information about pylint can be found [here](https://www.pylint.org/).
 
 ### Breaking changes
 In an effort to maintain backwards compatibility, we thoroughly unit test every Pull Request for all versions of Python we support. These unit tests are intended to catch general programmatic errors, possible vulnerabilities (via bandit) and _potential breaking changes_. 
@@ -158,7 +161,7 @@ In an effort to maintain backwards compatibility, we thoroughly unit test every 
 Please fully document changes to unit tests within your Pull Request. If you did not specify "Breaking Change" on the punch list in the description, and the change is identified as possibly breaking, this may delay or prevent approval of your PR.
 
 ### Branch targeting
-_Please do not target the `main` branch with your Pull Request unless directed to do so by a maintainer_. Instead, target your PR at the most recent development branch. 
+_Please do not target the `main` branch with your Pull Request unless it is the only branch or you are directed to do so by a maintainer_. Instead, target your PR at the most recent development branch. 
 
 We use [SemVer](https://semver.org/) as our versioning scheme. (Example branch name: _ver_0.4.3_) 
 
