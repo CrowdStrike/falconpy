@@ -33,6 +33,7 @@ jobs:
         # -----------------------------------------------------------------------------
         # PYLINT WORKFLOWS WILL BEGIN STOPPING BUILDS AFTER THE                       |
         # LAST SERVICE CLASSES HAVE BEEN REFACTORED - 07.28.21 / jshcodes@CrowdStrike |
+        # Review https://github.com/CrowdStrike/falconpy/projects/1 for more detail.  |
         # -----------------------------------------------------------------------------
         # 
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
