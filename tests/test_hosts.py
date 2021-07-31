@@ -38,40 +38,68 @@ class TestHosts:
             return False
 
     # Commenting out until the updated hosts service class is available
-    # @pytest.mark.skipif(falcon.QueryDevicesByFilter(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
+    # @pytest.mark.skipif(
+    #     falcon.QueryDevicesByFilter(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
+    #     )
     # def serviceHosts_GetDeviceDetails(self):
-    #     if falcon.GetDeviceDetails(ids=falcon.QueryDevicesByFilter(parameters={"limit":1})["body"]["resources"][0])["status_code"] in AllowedResponses:
-    #         return True
-    #     else:
-    #         return False
+        # if falcon.GetDeviceDetails(
+        #     ids=falcon.QueryDevicesByFilter(parameters={"limit":1})["body"]["resources"][0]
+        # )["status_code"] in AllowedResponses:
+        #     return True
+        # else:
+        #     return False
 
     def serviceHosts_addTag(self):
         id_list = []
         id_list.append(
-            falcon.GetDeviceDetails(ids=falcon.QueryDevicesByFilter(parameters={"limit":1})["body"]["resources"][0])["body"]["resources"][0]["device_id"]
+            falcon.GetDeviceDetails(
+                ids=falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]
+            )["body"]["resources"][0]["device_id"]
         )
         # test basic, id is a list, single valid tag w/o manipulation
-        if not falcon.UpdateDeviceTags(action_name="add", ids=id_list, tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(
+            action_name="add", ids=id_list, tags=["FalconGroupingTags/testtag"]
+        )["status_code"] in AllowedResponses:
             return False
-        if not falcon.UpdateDeviceTags(action_name="remove", ids=id_list, tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(
+            action_name="remove", ids=id_list, tags=["FalconGroupingTags/testtag"]
+        )["status_code"] in AllowedResponses:
             return False
         # id is a list, multiple tags needing manipulation
-        if not falcon.UpdateDeviceTags(action_name="add", ids=id_list, tags=["testtag", "tagtest", "anothertag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(
+            action_name="add", ids=id_list, tags=["testtag", "tagtest", "anothertag"]
+        )["status_code"] in AllowedResponses:
             return False
-        if not falcon.UpdateDeviceTags(action_name="remove", ids=id_list, tags=["testtag", "tagtest", "anothertag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(
+            action_name="remove", ids=id_list, tags=["testtag", "tagtest", "anothertag"]
+        )["status_code"] in AllowedResponses:
             return False
         # id is a list, mutliple tags some need manipulation
-        if not falcon.UpdateDeviceTags(action_name="add", ids=id_list, tags=["FalconGroupingTags/testtag", "manipulate", "FalconGroupingTags/anothertag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(
+            action_name="add",
+            ids=id_list,
+            tags=["FalconGroupingTags/testtag", "manipulate", "FalconGroupingTags/anothertag"]
+        )["status_code"] in AllowedResponses:
             return False
-        if not falcon.UpdateDeviceTags(action_name="remove", ids=id_list, tags=["FalconGroupingTags/testtag", "manipulate", "FalconGroupingTags/anothertag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(
+            action_name="remove",
+            ids=id_list,
+            tags=["FalconGroupingTags/testtag", "manipulate", "FalconGroupingTags/anothertag"]
+        )["status_code"] in AllowedResponses:
             return False
         # id is single string, single valid tag w/o manipulation
-        if not falcon.UpdateDeviceTags(action_name="add", ids=id_list[0], tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(
+            action_name="add", ids=id_list[0], tags=["FalconGroupingTags/testtag"]
+        )["status_code"] in AllowedResponses:
             return False
-        if not falcon.UpdateDeviceTags(action_name="remove", ids=id_list[0], tags=["FalconGroupingTags/testtag"])["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(
+            action_name="remove", ids=id_list[0], tags=["FalconGroupingTags/testtag"]
+        )["status_code"] in AllowedResponses:
             return False
         # Force the unit test down line 84
-        if not falcon.UpdateDeviceTags(action_name="add", ids=id_list, tags="FalconGroupingTags/testtag")["status_code"] in AllowedResponses:
+        if not falcon.UpdateDeviceTags(
+            action_name="add", ids=id_list, tags="FalconGroupingTags/testtag"
+        )["status_code"] in AllowedResponses:
             return False
 
         return True
@@ -79,17 +107,23 @@ class TestHosts:
     def serviceHosts_GenerateTagError(self):
         id_list = []
         id_list.append(
-            falcon.GetDeviceDetails(ids=falcon.QueryDevicesByFilter(parameters={"limit":1})["body"]["resources"][0])["body"]["resources"][0]["device_id"]
+            falcon.GetDeviceDetails(
+                ids=falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]
+                )["body"]["resources"][0]["device_id"]
         )
         #  Generate an error by sending garbage as the action_name
-        if not falcon.UpdateDeviceTags(action_name="KaBOOM!", ids=id_list, tags=["FalconGroupingTags/testtag"])["status_code"] == 500:
+        if not falcon.UpdateDeviceTags(
+            action_name="KaBOOM!", ids=id_list, tags=["FalconGroupingTags/testtag"]
+        )["status_code"] == 500:
             return False
         return True
 
     def serviceHosts_PerformActionV2(self):
         id_list = []
         id_list.append(
-            falcon.GetDeviceDetails(ids=falcon.QueryDevicesByFilter(parameters={"limit":1})["body"]["resources"][0])["body"]["resources"][0]["device_id"]
+            falcon.GetDeviceDetails(
+                ids=falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]
+                )["body"]["resources"][0]["device_id"]
         )
         if falcon.PerformActionV2(
                 parameters={
@@ -107,8 +141,9 @@ class TestHosts:
         falcon.base_url = "nowhere"
         errorChecks = True
         commandList = [
-            ["PerformActionV2","body={}, action_name='unhide_host', parameters={}"],
-            ["PerformActionV2","body={}, parameters={'action_name':'PooF'}"],
+            ["PerformActionV2", "body={}, action_name='unhide_host', parameters={}"],
+            ["PerformActionV2", "body={}, parameters={'action_name':'PooF'}"],
+            ["PerformActionV2", "body={}, parameters={}"],
             ["GetDeviceDetails", "ids='12345678'"],
             ["QueryHiddenDevices", ""],
             ["QueryDevicesByFilterScroll", ""],
@@ -121,28 +156,28 @@ class TestHosts:
         return errorChecks
 
     def test_QueryHiddenDevices(self):
-        assert self.serviceHosts_QueryHiddenDevices() == True
+        assert self.serviceHosts_QueryHiddenDevices() is True
 
     def test_QueryDevicesByFilterScroll(self):
-        assert self.serviceHosts_QueryDevicesByFilterScroll() == True
+        assert self.serviceHosts_QueryDevicesByFilterScroll() is True
 
     def test_QueryDevicesByFilter(self):
-        assert self.serviceHosts_QueryDevicesByFilter() == True
-    
+        assert self.serviceHosts_QueryDevicesByFilter() is True
+
     def test_tagging(self):
-        assert self.serviceHosts_addTag() == True
+        assert self.serviceHosts_addTag() is True
 
     def test_GenerateTagError(self):
-        assert self.serviceHosts_GenerateTagError() == True
+        assert self.serviceHosts_GenerateTagError() is True
     # def test_GetDeviceDetails(self):
-    #     assert self.serviceHosts_GetDeviceDetails() == True
+    #     assert self.serviceHosts_GetDeviceDetails() is True
 
     # Not working... need to pull a valid AID
     # def test_PerformActionV2(self):
-    #     assert self.serviceHosts_PerformActionV2() == True
+    #     assert self.serviceHosts_PerformActionV2() is True
 
     def test_Logout(self):
-        assert auth.serviceRevoke() == True
+        assert auth.serviceRevoke() is True
 
     def test_Errors(self):
-        assert self.serviceHosts_GenerateErrors() == True
+        assert self.serviceHosts_GenerateErrors() is True
