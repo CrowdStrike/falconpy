@@ -56,8 +56,10 @@ class TestSensorDownload():
 
     @staticmethod
     def _get_metadata_for_filter():
-        params = {"filter": 'platform:"windows"', "sort": "release_date|desc"}
-        resp = sensor_download_client.GetCombinedSensorInstallersByQuery(params)
+        # Testing new parameter functionality
+        # params = {"filter": 'platform:"windows"', "sort": "release_date|desc"}
+        # resp = sensor_download_client.GetCombinedSensorInstallersByQuery(parameters=params)
+        resp = sensor_download_client.GetCombinedSensorInstallersByQuery(filter='platform:"windows"', sort="release_date|desc")
         return True if resp["status_code"] in AllowedResponses else False
 
     def _get_metadata_for_ids(self):
