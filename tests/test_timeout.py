@@ -33,7 +33,7 @@ class TestTimeouts:
         falconConnectFail = FalconAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, timeout=(.01, 5)
+        }, timeout=(.001, 5)
         )
         success = False
         result = falconConnectFail.QueryAWSAccounts()
@@ -47,7 +47,7 @@ class TestTimeouts:
         falconReadFail = FalconAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, timeout=(5, .01)
+        }, timeout=(5, .001)
         )
         success = False
         result = falconReadFail.QueryAWSAccounts()
@@ -61,7 +61,7 @@ class TestTimeouts:
         falconStandardFail = FalconAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, timeout=.01
+        }, timeout=.001
         )
         success = False
         result = falconStandardFail.QueryAWSAccounts()
