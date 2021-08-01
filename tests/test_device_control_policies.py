@@ -66,6 +66,7 @@ class TestDeviceControlPolicy:
             ["queryCombinedDeviceControlPolicies", ""],
             ["performDeviceControlPoliciesAction", "body={}, parameters={}, action_name='enable'"],
             ["performDeviceControlPoliciesAction", "body={}, parameters={'action_name':'PooF'}"],
+            ["performDeviceControlPoliciesAction", "body={}, parameters={}"],
             ["setDeviceControlPoliciesPrecedence", "body={}"],
             ["getDeviceControlPolicies", "ids='12345678'"],
             ["createDeviceControlPolicies", "body={}"],
