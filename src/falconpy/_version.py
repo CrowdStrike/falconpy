@@ -36,13 +36,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-_version = '0.5.5'
-_maintainer = 'Joshua Hiller'
-_author = 'CrowdStrike'
-_author_email = 'falconpy@crowdstrike.com'
-_credits = 'CrowdStrike'
-_description = "The CrowdStrike Falcon OAuth2 API SDK for Python 3"
-_title = "crowdstrike-falconpy"
-_project_url = "https://github.com/CrowdStrike/falconpy"
-_docs_url = "https://www.falconpy.io"
-_keywords = ["crowdstrike", "falcon", "api", "sdk", "oauth2", "devsecops", "crowdstrike-falcon"]
+_VERSION = '0.5.5'
+_MAINTAINER = 'Joshua Hiller'
+_AUTHOR = 'CrowdStrike'
+_AUTHOR_EMAIL = 'falconpy@crowdstrike.com'
+_CREDITS = 'CrowdStrike'
+_DESCRIPTION = "The CrowdStrike Falcon OAuth2 API SDK for Python 3"
+_TITLE = "crowdstrike-falconpy"
+_PROJECT_URL = "https://github.com/CrowdStrike/falconpy"
+_DOCS_URL = "https://www.falconpy.io"
+_KEYWORDS = ["crowdstrike", "falcon", "api", "sdk", "oauth2", "devsecops", "crowdstrike-falcon"]

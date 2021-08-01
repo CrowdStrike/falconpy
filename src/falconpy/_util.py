@@ -41,14 +41,14 @@ import functools
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
-from ._version import _title, _version
+from ._version import _TITLE, _VERSION
 from ._result import Result
 urllib3.disable_warnings(InsecureRequestWarning)
 
 # Restrict requests to only allowed HTTP methods
 _ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
 # Default user-agent string
-_USER_AGENT = f"{_title}/{str(_version)}"
+_USER_AGENT = f"{_TITLE}/{str(_VERSION)}"
 
 
 def validate_payload(validator: dict, params: dict, required: list = None) -> bool:
