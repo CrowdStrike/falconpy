@@ -1,3 +1,5 @@
+# pylint: disable=W1401  # Pylint doesn't appreciate fine art
+# flake8: noqa  # Neither does flake8   ¯\_(ツ)_/¯
 """
 
                 .---.        .-----------
