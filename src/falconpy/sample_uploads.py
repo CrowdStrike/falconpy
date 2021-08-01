@@ -65,11 +65,10 @@ class Sample_Uploads(ServiceClass):
                                    )
         return returned
 
-    @force_default(defaults=["parameters","body"], default_types=["dict", "dict"])
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def UploadSampleV3(self: object,
                        file_data: object,
                        body: dict = None,
-#                       file_name: str = "",
                        parameters: dict = None,
                        **kwargs) -> dict:
         """
