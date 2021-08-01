@@ -36,74 +36,82 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import service_request, parse_id_list, generate_error_result
+# pylint: disable=C0103  # Aligning method names to API operation IDs
+from ._util import service_request, generate_error_result, force_default, args_to_params
 from ._service_class import ServiceClass
+from ._endpoint._device_control_policies import _device_control_policies_endpoints as Endpoints
 
 
 class Device_Control_Policies(ServiceClass):
-    """ The only requirement to instantiate an instance of this class
-        is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def queryCombinedDeviceControlPolicyMembers(self: object, parameters: dict = None) -> dict:
-        """ Search for members of a Device Control Policy in your environment by providing an FQL filter
-            and paging details. Returns a set of host details which match the filter criteria.
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class.
+    """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def queryCombinedDeviceControlPolicyMembers(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Search for members of a Device Control Policy in your environment by providing an FQL filter
+        and paging details. Returns a set of host details which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...   /device-control-policies/queryCombinedDeviceControlPolicyMembers
-        FULL_URL = self.base_url+'/policy/combined/device-control-members/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
+        operation_id = "queryCombinedDeviceControlPolicyMembers"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def queryCombinedDeviceControlPolicies(self: object, parameters: dict = None) -> dict:
-        """ Search for Device Control Policies in your environment by providing an FQL filter and
-            paging details. Returns a set of Device Control Policies which match the filter criteria.
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def queryCombinedDeviceControlPolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Search for Device Control Policies in your environment by providing an FQL filter and
+        paging details. Returns a set of Device Control Policies which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /device-control-policies/queryCombinedDeviceControlPolicies
-        FULL_URL = self.base_url+'/policy/combined/device-control/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
+        operation_id = "queryCombinedDeviceControlPolicies"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def performDeviceControlPoliciesAction(self: object, parameters: dict, body: dict, action_name: str = None) -> dict:
-        """ Search for Device Control Policies in your environment by providing an FQL filter
-            and paging details. Returns a set of Device Control Policies which match the filter criteria.
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def performDeviceControlPoliciesAction(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+        """
+        Search for Device Control Policies in your environment by providing an FQL filter
+        and paging details. Returns a set of Device Control Policies which match the filter criteria.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #        ...    /device-control-policies/performDeviceControlPoliciesAction
-        if "action_name" in parameters:
-            action_name = parameters["action_name"].lower()
-        ALLOWED_ACTIONS = ['add-host-group', 'disable', 'enable', 'remove-host-group']
-        if action_name.lower() in ALLOWED_ACTIONS:
-            FULL_URL = self.base_url+'/policy/combined/device-control/v1'
-            HEADERS = self.headers
-            BODY = body
-            PARAMS = parameters
+        _allowed_actions = ['add-host-group', 'disable', 'enable', 'remove-host-group']
+        operation_id = "performDeviceControlPoliciesAction"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        body_payload = body
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
+        if "action_name" not in parameter_payload:
+            parameter_payload["action_name"] = "Not Specified"
+        if parameter_payload["action_name"].lower() in _allowed_actions:
             returned = service_request(caller=self,
                                        method="POST",
-                                       endpoint=FULL_URL,
-                                       params=PARAMS,
-                                       body=BODY,
-                                       headers=HEADERS,
+                                       endpoint=target_url,
+                                       body=body_payload,
+                                       params=parameter_payload,
+                                       headers=header_payload,
                                        verify=self.ssl_verify
                                        )
         else:
@@ -112,122 +120,142 @@ class Device_Control_Policies(ServiceClass):
         return returned
 
     def setDeviceControlPoliciesPrecedence(self: object, body: dict) -> dict:
-        """ Sets the precedence of Device Control Policies based on the order of IDs specified in the request.
-            The first ID specified will have the highest precedence and the last ID specified will have the lowest.
-            You must specify all non-Default Policies for a platform when updating precedence.
+        """
+        Sets the precedence of Device Control Policies based on the order of IDs specified in the request.
+        The first ID specified will have the highest precedence and the last ID specified will have the lowest.
+        You must specify all non-Default Policies for a platform when updating precedence.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #        ...    /device-control-policies/performDeviceControlPoliciesAction
-        FULL_URL = self.base_url+'/policy/entities/device-control-precedence/v1'
-        HEADERS = self.headers
-        BODY = body
+        operation_id = "setDeviceControlPoliciesPrecedence"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        body_payload = body
         returned = service_request(caller=self,
                                    method="POST",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   body=body_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def getDeviceControlPolicies(self: object, ids) -> dict:
-        """ Retrieve a set of Device Control Policies by specifying their IDs. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def getDeviceControlPolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Retrieve a set of Device Control Policies by specifying their IDs.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /device-control-policies/getDeviceControlPolicies
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/policy/entities/device-control/v1?ids={}'.format(ID_LIST)
-        HEADERS = self.headers
+        operation_id = "getDeviceControlPolicies"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
     def createDeviceControlPolicies(self: object, body: dict) -> dict:
-        """ Create Device Control Policies by specifying details about the policy to create. """
+        """
+        Create Device Control Policies by specifying details about the policy to create.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #        ...    /device-control-policies/createDeviceControlPolicies
-        FULL_URL = self.base_url+'/policy/entities/device-control/v1'
-        HEADERS = self.headers
-        BODY = body
+        operation_id = "createDeviceControlPolicies"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        body_payload = body
         returned = service_request(caller=self,
                                    method="POST",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   body=body_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def deleteDeviceControlPolicies(self: object, ids) -> dict:
-        """ Delete a set of Device Control Policies by specifying their IDs. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def deleteDeviceControlPolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Delete a set of Device Control Policies by specifying their IDs.
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          ...  /device-control-policies/createDeviceControlPolicies
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/policy/entities/device-control/v1?ids={}'.format(ID_LIST)
-        HEADERS = self.headers
+        operation_id = "deleteDeviceControlPolicies"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="DELETE",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
     def updateDeviceControlPolicies(self: object, body: dict) -> dict:
-        """ Update Device Control Policies by specifying the ID of the policy and details to update. """
+        """
+        Update Device Control Policies by specifying the ID of the policy and details to update.
+        """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         ...   /device-control-policies/updateDeviceControlPolicies
-        FULL_URL = self.base_url+'/policy/entities/device-control/v1'
-        HEADERS = self.headers
-        BODY = body
+        operation_id = "updateDeviceControlPolicies"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        body_payload = body
         returned = service_request(caller=self,
                                    method="PATCH",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   body=body_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def queryDeviceControlPolicyMembers(self: object, parameters: dict = None) -> dict:
-        """ Search for members of a Device Control Policy in your environment by providing an FQL filter
-            and paging details. Returns a set of Agent IDs which match the filter criteria.
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def queryDeviceControlPolicyMembers(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Search for members of a Device Control Policy in your environment by providing an FQL filter
+        and paging details. Returns a set of Agent IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /device-control-policies/queryDeviceControlPolicyMembers
-        FULL_URL = self.base_url+'/policy/queries/device-control-members/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
+        operation_id = "queryDeviceControlPolicyMembers"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def queryDeviceControlPolicies(self: object, parameters: dict = None) -> dict:
-        """ Search for Device Control Policies in your environment by providing an FQL filter and paging details.
-            Returns a set of Device Control Policy IDs which match the filter criteria.
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def queryDeviceControlPolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Search for Device Control Policies in your environment by providing an FQL filter and paging details.
+        Returns a set of Device Control Policy IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /device-control-policies/queryDeviceControlPolicyMembers
-        FULL_URL = self.base_url+'/policy/queries/device-control/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
+        operation_id = "queryDeviceControlPolicies"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
