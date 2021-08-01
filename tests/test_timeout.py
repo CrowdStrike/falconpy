@@ -9,6 +9,7 @@ from tests import test_authorization as Authorization
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
 from falconpy.cloud_connect_aws import Cloud_Connect_AWS as FalconAWS
+from falconpy.oauth2 import OAuth2 as FalconAuth
 
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
@@ -71,6 +72,19 @@ class TestTimeouts:
 
         return success
 
+    def timeout_legacy_auth(self):
+        falconLegacyFail = FalconAuth(creds={
+            'client_id': auth.config["falcon_client_id"],
+            'client_secret': auth.config["falcon_client_secret"]
+        }, timeout=.001)
+        success = False
+        result = falconLegacyFail.token()
+        if result["status_code"] in AllowedResponses:
+            if "connect timeout" in result["body"]["errors"][0]["message"]:
+                success = True
+
+        return success
+
     def test_NoTimeout(self):
         assert self.timeout_test() is True
 
@@ -82,3 +96,6 @@ class TestTimeouts:
 
     def test_ReadTimeout(self):
         assert self.timeout_read() is True
+
+    def test_LegacyTimeout(self):
+        assert self.timeout_legacy_auth() is True
