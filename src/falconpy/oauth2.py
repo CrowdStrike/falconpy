@@ -52,11 +52,12 @@ class OAuth2:
     """
 
     def __init__(self: object, creds: dict, base_url: str = "https://api.crowdstrike.com",
-                 ssl_verify: bool = True, proxy: dict = None):
+                 ssl_verify: bool = True, proxy: dict = None, timeout: float or tuple = None):
         """ Initializes the base class by ingesting credentials, the base URL, and SSL verification options. """
         self.creds = creds
         self.base_url = base_url
         self.ssl_verify = ssl_verify
+        self.timeout = timeout
         self.proxy = proxy
         self.token_expiration = 0
         self.token_renew_window = 20
@@ -81,7 +82,7 @@ class OAuth2:
         if "member_cid" in self.creds:
             DATA["member_cid"] = self.creds["member_cid"]
         returned = perform_request(method="POST", endpoint=FULL_URL, data=DATA, headers=HEADERS,
-                                   verify=self.ssl_verify, proxy=self.proxy)
+                                   verify=self.ssl_verify, proxy=self.proxy, timeout=self.timeout)
         if returned["status_code"] == 201:
             self.token_expiration = returned["body"]["expires_in"]
             self.token_time = time.time()
@@ -95,7 +96,7 @@ class OAuth2:
         HEADERS = {'Authorization': 'basic {}'.format(generate_b64cred(self.creds["client_id"], self.creds["client_secret"]))}
         DATA = {'token': '{}'.format(token)}
         returned = perform_request(method="POST", endpoint=FULL_URL, data=DATA, headers=HEADERS,
-                                   verify=self.ssl_verify, proxy=self.proxy)
+                                   verify=self.ssl_verify, proxy=self.proxy, timeout=self.timeout)
         self.token_expiration = 0
         self.token_value = False
 
