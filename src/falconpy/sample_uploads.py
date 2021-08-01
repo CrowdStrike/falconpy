@@ -43,8 +43,9 @@ from ._endpoint._sample_uploads import _sample_uploads_endpoints as Endpoints
 
 
 class Sample_Uploads(ServiceClass):
-    """ The only requirement to instantiate an instance of this class
-        is a valid token provided by the Falcon API SDK OAuth2 class.
+    """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def GetSampleV3(self: object, parameters: dict = None, **kwargs) -> object:
