@@ -36,66 +36,79 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import service_request, parse_id_list
+# pylint: disable=C0103  # Aligning method names to API operation IDs
+from ._util import service_request, force_default, args_to_params
 from ._service_class import ServiceClass
+from ._endpoint._sample_uploads import _sample_uploads_endpoints as Endpoints
 
 
 class Sample_Uploads(ServiceClass):
     """ The only requirement to instantiate an instance of this class
         is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def GetSampleV3(self: object, ids: list or str, parameters: dict = None) -> object:
-        """ Retrieves the file associated with the given ID (SHA256)"""
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetSampleV3(self: object, parameters: dict = None, **kwargs) -> object:
+        """
+        Retrieves the file associated with the given ID (SHA256)
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/GetSampleV3
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/samples/entities/samples/v3?ids={}'.format(ID_LIST)
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
+        operation_id = "GetSampleV3"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
-                                   params=PARAMS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
+    @force_default(defaults=["parameters","body"], default_types=["dict", "dict"])
     def UploadSampleV3(self: object,
                        file_data: object,
                        body: dict = None,
-                       file_name: str = "",
-                       parameters: dict = None) -> dict:
-        """ Upload a file for further cloud analysis. After uploading, call the specific analysis API endpoint. """
+#                       file_name: str = "",
+                       parameters: dict = None,
+                       **kwargs) -> dict:
+        """
+        Upload a file for further cloud analysis. After uploading, call the specific analysis API endpoint.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/UploadSampleV3
-        FULL_URL = self.base_url+f"/samples/entities/samples/v3?file_name={str(file_name)}"
-        HEADERS = self.headers
-        HEADERS["Content-Type"] = "application/octet-stream"
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        DATA = file_data
-        if body is None:
-            body = {}
-        BODY = body
+        operation_id = "UploadSampleV3"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        header_payload["Content-Type"] = "application/octet-stream"
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
+        body_payload = body
+        data_payload = file_data
         returned = service_request(caller=self,
                                    method="POST",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   data=DATA,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   body=body_payload,
+                                   data=data_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def DeleteSampleV3(self: object, ids: str or list) -> dict:
-        """ Removes a sample, including file, meta and submissions from the collection. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def DeleteSampleV3(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Removes a sample, including file, meta and submissions from the collection.
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/DeleteSampleV3
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/samples/entities/samples/v3?ids={}'.format(ID_LIST)
-        HEADERS = self.headers
-        returned = service_request(caller=self, method="DELETE", endpoint=FULL_URL, headers=HEADERS, verify=self.ssl_verify)
-
+        operation_id = "DeleteSampleV3"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
+        returned = service_request(caller=self,
+                                   method="DELETE",
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
+                                   verify=self.ssl_verify
+                                   )
         return returned
