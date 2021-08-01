@@ -51,7 +51,7 @@ class TestCustomIOA:
             ["delete_rule_groupMixin0", "ids='12345678', cs_username='falconpy_unit_testing'"],
             ["update_rule_groupMixin0", "body={}, cs_username='falconpy_unit_testing'"],
             ["get_rule_types", "ids='12345678'"],
-            ["get_rules_get", "ids='12345678'"],
+            ["get_rules_get", "ids=['12345678','23456789','09876544']"],
             ["get_rulesMixin0", "ids='12345678'"],
             ["create_rule", "body={}, cs_username='falconpy_unit_testing'"],
             ["delete_rules", "ids='12345678', cs_username='falconpy_unit_testing'"],

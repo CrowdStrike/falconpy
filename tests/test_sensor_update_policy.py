@@ -81,11 +81,11 @@ class TestFalconSensorUpdate:
             ["queryCombinedSensorUpdateBuilds", ""],
             ["createSensorUpdatePolicies", "body={}"],
             ["createSensorUpdatePoliciesV2", "body={}"],
-            ["deleteSensorUpdatePolicies", "ids='12345678'"],
+            ["deleteSensorUpdatePolicies", "ids=['12345678','98765432','01234567']"],
             ["updateSensorUpdatePolicies", "body={}"],
             ["updateSensorUpdatePoliciesV2", "body={}"],
-            ["performSensorUpdatePoliciesAction", "body={}, action_name='enable', parameters={}"],
-            ["performSensorUpdatePoliciesAction", "body={}, parameters={'action_name':'PooF'}"],
+            ["performSensorUpdatePoliciesAction", "body={}, action_name='enable'"],
+            ["performSensorUpdatePoliciesAction", "body={}"],
             ["setSensorUpdatePoliciesPrecedence", "body={}"],
             ["queryCombinedSensorUpdatePoliciesV2", ""]
         ]
