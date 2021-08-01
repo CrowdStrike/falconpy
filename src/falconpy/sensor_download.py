@@ -36,50 +36,54 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0103  # Aligning method names to API operation IDs
 import os
-from ._util import service_request, parse_id_list, generate_ok_result
+from ._util import service_request, generate_ok_result, force_default, args_to_params
 from ._service_class import ServiceClass
+from ._endpoint._sensor_download import _sensor_download_endpoints as Endpoints
 
 
 class Sensor_Download(ServiceClass):
     """The only requirement to instantiate an instance of this class
        is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def GetCombinedSensorInstallersByQuery(self: object, parameters: dict = None) -> dict:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetCombinedSensorInstallersByQuery(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve all metadata for installers from provided query
         """
-        FULL_URL = self.base_url+'/sensors/combined/installers/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
+        operation_id = "GetCombinedSensorInstallersByQuery"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def DownloadSensorInstallerById(self: object,
-                                    parameters: dict,
+                                    parameters: dict = None,
                                     file_name: str = None,
-                                    download_path: str = None
-                                    ) -> object:
+                                    download_path: str = None,
+                                    **kwargs) -> object:
         """
         Download the sensor by the sha256 id, into the specified directory.
         The path will be created for the user if it does not already exist
         """
-        FULL_URL = self.base_url+"/sensors/entities/download-installer/v1"
-        HEADERS = self.headers
-        PARAMS = parameters
+        operation_id = "DownloadSensorInstallerById"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
-                                   params=PARAMS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         if file_name and download_path and isinstance(returned, bytes):
@@ -90,18 +94,21 @@ class Sensor_Download(ServiceClass):
             returned = generate_ok_result(message="Download successful")
         return returned
 
-    def GetSensorInstallersEntities(self: object, ids: list or str) -> object:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetSensorInstallersEntities(self: object, parameters: dict = None, **kwargs) -> object:
         """
         For a given list of SHA256's, retrieve the metadata for each installer
         such as the release_date and version among other fields
         """
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/sensors/entities/installers/v1?ids={}'.format(ID_LIST)
-        HEADERS = self.headers
+        operation_id = "GetSensorInstallersEntities"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
@@ -110,30 +117,31 @@ class Sensor_Download(ServiceClass):
         """
         Retrieve the CID for the current oauth environment
         """
-        FULL_URL = self.base_url+'/sensors/queries/installers/ccid/v1'
-        HEADERS = self.headers
+        operation_id = "GetSensorInstallersCCIDByQuery"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
 
-    def GetSensorInstallersByQuery(self: object, parameters: dict = None) -> dict:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetSensorInstallersByQuery(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve a list of SHA256 for installers based on the filter
         """
-        FULL_URL = self.base_url+'/sensors/queries/installers/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
+        operation_id = "GetSensorInstallersByQuery"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = self.headers
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         returned = service_request(caller=self,
                                    method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
+                                   endpoint=target_url,
+                                   params=parameter_payload,
+                                   headers=header_payload,
                                    verify=self.ssl_verify
                                    )
         return returned
