@@ -17,7 +17,8 @@ This SDK provides two distinct methods for interacting with CrowdStrike's Falcon
 ![PyPI](https://img.shields.io/pypi/v/crowdstrike-falconpy)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy) 
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy)
-![CI Tests](https://github.com/CrowdStrike/falconpy/workflows/Python%20package/badge.svg)<br/>
+![CI Tests](https://github.com/CrowdStrike/falconpy/workflows/Python%20package/badge.svg)
+[![Pylint](https://github.com/CrowdStrike/falconpy/actions/workflows/pylint.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/pylint.yml)<br/>
 Stable releases of FalconPy are available on the Python Package Index:
 ```shell
 python3 -m pip install crowdstrike-falconpy
