@@ -9,7 +9,7 @@ from tests import test_authorization as Authorization
 
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
-# Classes to test - manually imported from sibling folder
+# flake8: noqa=E401   # Classes to test - manually imported from sibling folder
 from falconpy import device_control_policies as FalconDeviceControlPolicy
 
 auth = Authorization.TestAuthorization()
