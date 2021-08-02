@@ -37,7 +37,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
+from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._quick_scan import _quick_scan_endpoints as Endpoints
 
@@ -52,18 +52,12 @@ class Quick_Scan(ServiceClass):
         Get scans aggregations as specified via json in request body.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/GetScansAggregates
-        operation_id = "GetScansAggregates"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetScansAggregates",
+            method="POST",
+            body=body)
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def GetScans(self: object, parameters: dict = None, **kwargs) -> dict:
@@ -72,36 +66,24 @@ class Quick_Scan(ServiceClass):
         of samples in a volume but usually it should take less than 1 minute
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/GetScans
-        operation_id = "GetScans"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetScans",
+            keywords=kwargs,
+            params=parameters)
 
     def ScanSamples(self: object, body: dict) -> dict:
         """
         Get scans aggregations as specified via json in request body.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/ScanSamples
-        operation_id = "ScanSamples"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ScanSamples",
+            method="POST",
+            body=body)
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def QuerySubmissionsMixin0(self: object, parameters: dict = None, **kwargs) -> dict:
@@ -110,15 +92,9 @@ class Quick_Scan(ServiceClass):
         Returns a set of volume IDs that match your criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/QuerySubmissionsMixin0
-        operation_id = "QuerySubmissionsMixin0"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QuerySubmissionsMixin0",
+            keywords=kwargs,
+            params=parameters)
