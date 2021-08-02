@@ -45,12 +45,14 @@ from ._endpoint import api_endpoints
 class APIHarness:
     """ This one does it all. It's like the One Ring with significantly fewer orcs. """
     # pylint: disable=too-many-instance-attributes
-    # Nine attributes is perfectly reasonable
+    # Nine attributes is reasonable
 
     TOKEN_RENEW_WINDOW = 20  # in seconds
 
-    def __init__(self: object, creds: dict, base_url: str = "https://api.crowdstrike.com",
-                 ssl_verify: bool = True, proxy: dict = None, timeout: float or tuple = None) -> object:
+    def __init__(self: object, creds: dict,  # pylint: disable=R0913  # Six is fine
+                 base_url: str = "https://api.crowdstrike.com",
+                 ssl_verify: bool = True, proxy: dict = None,
+                 timeout: float or tuple = None) -> object:
         """Instantiates an instance of the base class, ingests credentials, the base URL and the SSL verification
            boolean. Afterwards class attributes are initialized.
         """
