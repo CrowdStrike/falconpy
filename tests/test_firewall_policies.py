@@ -1,13 +1,12 @@
 # test_firewall_policies.py
 # This class tests the firewall_policies service class
-
 import os
 import sys
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
-# Classes to test - manually imported from sibling folder
+# flake8: noqa=R0402  # Classes to test - manually imported from sibling folder
 from falconpy import firewall_policies as FalconFirewallPolicy
 
 auth = Authorization.TestAuthorization()
@@ -23,9 +22,6 @@ class TestFirewallPolicy:
             return True
         else:
             return False
-
-    # def test_queryFirewallPolicies(self):
-    #     assert self.serviceFirewall_queryFirewallPolicies() == True
 
     def serviceFirewall_GenerateErrors(self):
         falcon.base_url = "nowhere"
@@ -51,7 +47,7 @@ class TestFirewallPolicy:
         return errorChecks
 
     def test_Logout(self):
-        assert auth.serviceRevoke() == True
+        assert auth.serviceRevoke() is True
 
     def test_Errors(self):
-        assert self.serviceFirewall_GenerateErrors() == True
+        assert self.serviceFirewall_GenerateErrors() is True
