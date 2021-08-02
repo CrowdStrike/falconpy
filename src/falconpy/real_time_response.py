@@ -36,355 +36,318 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import parse_id_list, service_request
+# pylint: disable=C0103  # Aligning method names to API operation IDs
+# pylint: disable=R0904  # Aligning method count to API service collection operation count
+from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
+from ._endpoint._real_time_response import _real_time_response_endpoints as Endpoints
 
 
 class Real_Time_Response(ServiceClass):
-    """ The only requirement to instantiate an instance of this class
-        is a valid token provided by the Falcon API SDK OAuth2 class.
+    """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     def RTR_AggregateSessions(self: object, body: dict) -> dict:
-        """ Get aggregates on session data. """
+        """
+        Get aggregates on session data.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_AggregateSessions
-        FULL_URL = self.base_url+'/real-time-response/aggregates/sessions/GET/v1'
-        HEADERS = self.headers
-        BODY = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_AggregateSessions",
+            method="POST",
+            body=body
+            )
 
-    def BatchActiveResponderCmd(self: object, body: dict, parameters: dict = None) -> dict:
-        """ Batch executes a RTR active-responder command across the hosts mapped to the given batch ID. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def BatchActiveResponderCmd(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+        """
+        Batch executes a RTR active-responder command across the hosts mapped to the given batch ID.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchActiveResponderCmd
-        FULL_URL = self.base_url+'/real-time-response/combined/batch-active-responder-command/v1'
-        HEADERS = self.headers
-        BODY = body
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BatchActiveResponderCmd",
+            method="POST",
+            body=body,
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def BatchCmd(self: object, body: dict, parameters: dict = None) -> dict:
-        """ Batch executes a RTR read-only command across the hosts mapped to the given batch ID. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def BatchCmd(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+        """
+        Batch executes a RTR read-only command across the hosts mapped to the given batch ID.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchActiveResponderCmd
-        FULL_URL = self.base_url+'/real-time-response/combined/batch-command/v1'
-        HEADERS = self.headers
-        BODY = body
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BatchCmd",
+            method="POST",
+            body=body,
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def BatchGetCmdStatus(self: object, parameters: dict) -> dict:
-        """ Retrieves the status of the specified batch get command.
-            Will return successful files when they are finished processing.
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def BatchGetCmdStatus(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Retrieves the status of the specified batch get command.
+        Will return successful files when they are finished processing.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchGetCmdStatus
-        FULL_URL = self.base_url+'/real-time-response/combined/batch-get-command/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BatchGetCmdStatus",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def BatchGetCmd(self: object, body: dict, parameters: dict = None) -> dict:
-        """ Batch executes `get` command across hosts to retrieve files.
-            After this call is made `/real-time-response/combined/get-command-status/v1` is used to query for the results.
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def BatchGetCmd(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+        """
+        Batch executes `get` command across hosts to retrieve files.
+        After this call is made `/real-time-response/combined/get-command-status/v1` is used to query for the results.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchActiveResponderCmd
-        FULL_URL = self.base_url+'/real-time-response/combined/batch-get-command/v1'
-        HEADERS = self.headers
-        BODY = body
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BatchGetCmd",
+            method="POST",
+            body=body,
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def BatchInitSessions(self: object, body: dict, parameters: dict = None) -> dict:
-        """ Batch initialize a RTR session on multiple hosts.
-            Before any RTR commands can be used, an active session is needed on the host.
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def BatchInitSessions(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+        """
+        Batch initialize a RTR session on multiple hosts.
+        Before any RTR commands can be used, an active session is needed on the host.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchInitSessions
-        FULL_URL = self.base_url+'/real-time-response/combined/batch-init-session/v1'
-        HEADERS = self.headers
-        BODY = body
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BatchInitSessions",
+            method="POST",
+            body=body,
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def BatchRefreshSessions(self: object, body: dict, parameters: dict = None) -> dict:
-        """ Batch refresh a RTR session on multiple hosts. RTR sessions will expire after 10 minutes unless refreshed. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def BatchRefreshSessions(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+        """
+        Batch refresh a RTR session on multiple hosts. RTR sessions will expire after 10 minutes unless refreshed.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchRefreshSessions
-        FULL_URL = self.base_url+'/real-time-response/combined/batch-refresh-session/v1'
-        HEADERS = self.headers
-        BODY = body
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BatchRefreshSessions",
+            method="POST",
+            body=body,
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def RTR_CheckActiveResponderCommandStatus(self: object, parameters: dict) -> dict:
-        """ Get status of an executed active-responder command on a single host. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def RTR_CheckActiveResponderCommandStatus(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get status of an executed active-responder command on a single host.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /real-time-response/RTR_CheckActiveResponderCommandStatus
-        FULL_URL = self.base_url+'/real-time-response/entities/active-responder-command/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_CheckActiveResponderCommandStatus",
+            keywords=kwargs,
+            params=parameters
+            )
 
     def RTR_ExecuteActiveResponderCommand(self: object, body: dict) -> dict:
-        """ Execute an active responder command on a single host. """
+        """
+        Execute an active responder command on a single host.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/BatchRefreshSessions
-        FULL_URL = self.base_url+'/real-time-response/entities/active-responder-command/v1'
-        HEADERS = self.headers
-        BODY = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_ExecuteActiveResponderCommand",
+            method="POST",
+            body=body
+            )
 
-    def RTR_CheckCommandStatus(self: object, parameters: dict) -> dict:
-        """ Get status of an executed command on a single host. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def RTR_CheckCommandStatus(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get status of an executed command on a single host.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_CheckCommandStatus
-        FULL_URL = self.base_url+'/real-time-response/entities/command/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_CheckCommandStatus",
+            keywords=kwargs,
+            params=parameters
+            )
 
     def RTR_ExecuteCommand(self: object, body: dict) -> dict:
-        """ Execute a command on a single host. """
+        """
+        Execute a command on a single host.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_ExecuteCommand
-        FULL_URL = self.base_url+'/real-time-response/entities/command/v1'
-        HEADERS = self.headers
-        BODY = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_ExecuteCommand",
+            method="POST",
+            body=body
+            )
 
-    def RTR_GetExtractedFileContents(self: object, parameters: dict) -> dict:
-        """ Get RTR extracted file contents for specified session and sha256. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def RTR_GetExtractedFileContents(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get RTR extracted file contents for specified session and sha256.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_GetExtractedFileContents
-        FULL_URL = self.base_url+'/real-time-response/entities/extracted-file-contents/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_GetExtractedFileContents",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def RTR_ListFiles(self: object, parameters: dict) -> dict:
-        """ Get a list of files for the specified RTR session. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def RTR_ListFiles(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get a list of files for the specified RTR session.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_ListFiles
-        FULL_URL = self.base_url+'/real-time-response/entities/file/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_ListFiles",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def RTR_DeleteFile(self: object, ids, parameters: dict) -> dict:
-        """ Delete a RTR session file. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def RTR_DeleteFile(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Delete a RTR session file.
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_DeleteFile
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/real-time-response/entities/file/v1?ids={}'.format(ID_LIST)
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_DeleteFile",
+            method="DELETE",
+            keywords=kwargs,
+            params=parameters
+            )
 
     def RTR_PulseSession(self: object, body: dict) -> dict:
-        """ Refresh a session timeout on a single host. """
+        """
+        Refresh a session timeout on a single host.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_PulseSession
-        FULL_URL = self.base_url+'/real-time-response/entities/refresh-session/v1'
-        HEADERS = self.headers
-        BODY = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_PulseSession",
+            method="POST",
+            body=body
+            )
 
     def RTR_ListSessions(self: object, body: dict) -> dict:
-        """ Get session metadata by session id. """
+        """
+        Get session metadata by session id.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_ListSessions
-        FULL_URL = self.base_url+'/real-time-response/entities/sessions/GET/v1'
-        HEADERS = self.headers
-        BODY = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_ListSessions",
+            method="POST",
+            body=body
+            )
 
     def RTR_ListQueuedSessions(self: object, body: dict) -> dict:
-        """ Get session metadata by session id. """
+        """
+        Get session metadata by session id.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_ListSessions
-        FULL_URL = self.base_url+'/real-time-response/entities/queued-sessions/GET/v1'
-        HEADERS = self.headers
-        BODY = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_ListQueuedSessions",
+            method="POST",
+            body=body
+            )
 
     def RTR_InitSession(self: object, body: dict) -> dict:
-        """ Initialize a new session with the RTR cloud. """
+        """
+        Initialize a new session with the RTR cloud.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/InitSessionMixin0
-        FULL_URL = self.base_url+'/real-time-response/entities/sessions/v1'
-        HEADERS = self.headers
-        BODY = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_InitSession",
+            method="POST",
+            body=body
+            )
 
-    def RTR_DeleteSession(self: object, parameters: dict) -> dict:
-        """ Delete a session. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def RTR_DeleteSession(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Delete a session.
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_DeleteSession
-        FULL_URL = self.base_url+'/real-time-response/entities/sessions/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_DeleteSession",
+            method="DELETE",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def RTR_DeleteQueuedSession(self: object, parameters: dict) -> dict:
-        """ Delete a queued session. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def RTR_DeleteQueuedSession(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Delete a queued session.
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_DeleteSession
-        FULL_URL = self.base_url+'/real-time-response/entities/queued-sessions/command/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_DeleteQueuedSession",
+            method="DELETE",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def RTR_ListAllSessions(self: object, parameters: dict = None) -> dict:
-        """ Get a list of session_ids. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def RTR_ListAllSessions(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get a list of session_ids.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR_ListAllSessions
-        FULL_URL = self.base_url+'/real-time-response/queries/sessions/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_ListAllSessions",
+            keywords=kwargs,
+            params=parameters
+            )
