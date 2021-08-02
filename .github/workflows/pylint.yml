@@ -29,16 +29,14 @@ jobs:
         pip install -r requirements.txt
     - name: Lint package source with pylint
       run: |
-        # NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE!
-        # -----------------------------------------------------------------------------
-        # PYLINT WORKFLOWS WILL BEGIN STOPPING BUILDS AFTER THE                       |
-        # LAST SERVICE CLASSES HAVE BEEN REFACTORED - 07.28.21 / jshcodes@CrowdStrike |
-        # Review https://github.com/CrowdStrike/falconpy/projects/1 for more detail.  |
-        # -----------------------------------------------------------------------------
-        # 
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        pylint src/falconpy --max-line-length=127 --disable=R0801 --exit-zero
+        pylint src/falconpy --max-line-length=127 --disable=R0801 --ignore=debug.py
     - name: Lint samples with pylint
       run: |
+        # NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE!
+        # -----------------------------------------------------------------------------
+        # PYLINT WORKFLOWS DO NOT STOP BUILDS FOR LINTING FAILURES WITHIN SAMPLE CODE |
+        #                                    - 08.02.21 / jshcodes@CrowdStrike        |
+        # -----------------------------------------------------------------------------
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         pylint samples --max-line-length=127 --disable=R0801 --exit-zero

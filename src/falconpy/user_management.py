@@ -36,195 +36,181 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import parse_id_list, service_request
+# pylint: disable=C0103  # Aligning method names to API operation IDs
+from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
+from ._endpoint._user_management import _user_management_endpoints as Endpoints
 
 
 class User_Management(ServiceClass):
-    """ The only requirement to instantiate an instance of this class
-        is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def GetRoles(self: object, ids) -> dict:
-        """ Get info about a role. """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class.
+    """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetRoles(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get info about a role.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetRoles
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/user-roles/entities/user-roles/v1?ids={}'.format(ID_LIST)
-        HEADERS = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetRoles",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def GrantUserRoleIds(self: object, parameters: dict, body: dict) -> dict:
-        """ Assign one or more roles to a user. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GrantUserRoleIds(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+        """
+        Assign one or more roles to a user.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GrantUserRoleIds
-        FULL_URL = self.base_url+'/user-roles/entities/user-roles/v1'
-        HEADERS = self.headers
-        BODY = body
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GrantUserRoleIds",
+            method="POST",
+            body=body,
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def RevokeUserRoleIds(self: object, ids, parameters: dict) -> dict:
-        """ Revoke one or more roles from a user. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def RevokeUserRoleIds(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Revoke one or more roles from a user.
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RevokeUserRoleIds
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/user-roles/entities/user-roles/v1?ids={}'.format(ID_LIST)
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RevokeUserRoleIds",
+            method="DELETE",
+            keywords=kwargs,
+            params=parameters
+            )
 
     def GetAvailableRoleIds(self: object) -> dict:
-        """ Show role IDs for all roles available in your customer account.
-            For more information on each role, provide the role ID to `/customer/entities/roles/v1`.
+        """
+        Show role IDs for all roles available in your customer account.
+        For more information on each role, provide the role ID to `/customer/entities/roles/v1`.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetAvailableRoleIds
-        FULL_URL = self.base_url+'/user-roles/queries/user-role-ids-by-cid/v1'
-        HEADERS = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetAvailableRoleIds"
+            )
 
-    def GetUserRoleIds(self: object, parameters: dict) -> dict:
-        """ Show role IDs of roles assigned to a user. For more information on each role,
-            provide the role ID to `/customer/entities/roles/v1`.
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetUserRoleIds(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Show role IDs of roles assigned to a user. For more information on each role,
+        provide the role ID to `/customer/entities/roles/v1`.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetUserRoleIds
-        FULL_URL = self.base_url+'/user-roles/queries/user-role-ids-by-user-uuid/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetUserRoleIds",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def RetrieveUser(self: object, ids) -> dict:
-        """ Get info about a user. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def RetrieveUser(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get info about a user.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUser
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/users/entities/users/v1?ids={}'.format(ID_LIST)
-        HEADERS = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RetrieveUser",
+            keywords=kwargs,
+            params=parameters
+            )
 
     def CreateUser(self: object, body: dict) -> dict:
-        """ Create a new user. After creating a user,
-            assign one or more roles with POST /user-roles/entities/user-roles/v1.
+        """
+        Create a new user. After creating a user,
+        assign one or more roles with POST /user-roles/entities/user-roles/v1.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/CreateUser
-        FULL_URL = self.base_url+'/users/entities/users/v1'
-        HEADERS = self.headers
-        BODY = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateUser",
+            method="POST",
+            body=body
+            )
 
-    def DeleteUser(self: object, parameters: dict) -> dict:
-        """ Delete a user permanently. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def DeleteUser(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Delete a user permanently.
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/DeleteUser
-        FULL_URL = self.base_url+'/users/entities/users/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteUser",
+            method="DELETE",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def UpdateUser(self: object, parameters: dict, body: dict) -> dict:
-        """ Modify an existing user. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def UpdateUser(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+        """
+        Modify an existing user.
+        """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/UpdateUser
-        FULL_URL = self.base_url+'/users/entities/users/v1'
-        HEADERS = self.headers
-        BODY = body
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="PATCH",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateUser",
+            method="PATCH",
+            body=body,
+            keywords=kwargs,
+            params=parameters
+            )
 
     def RetrieveEmailsByCID(self: object) -> dict:
-        """ List the usernames (usually an email address) for all users in your customer account. """
+        """
+        List the usernames (usually an email address) for all users in your customer account.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveEmailsByCID
-        FULL_URL = self.base_url+'/users/queries/emails-by-cid/v1'
-        HEADERS = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RetrieveEmailsByCID"
+            )
 
     def RetrieveUserUUIDsByCID(self: object) -> dict:
-        """ List user IDs for all users in your customer account.
-            For more information on each user, provide the user ID to `/users/entities/user/v1`.
+        """
+        List user IDs for all users in your customer account.
+        For more information on each user, provide the user ID to `/users/entities/user/v1`.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUserUUIDsByCID
-        FULL_URL = self.base_url+'/users/queries/user-uuids-by-cid/v1'
-        HEADERS = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RetrieveUserUUIDsByCID"
+            )
 
-    def RetrieveUserUUID(self: object, parameters: dict) -> dict:
-        """ Get a user's ID by providing a username (usually an email address). """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def RetrieveUserUUID(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get a user's ID by providing a username (usually an email address).
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUserUUID
-        FULL_URL = self.base_url+'/users/queries/user-uuids-by-email/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RetrieveUserUUID",
+            keywords=kwargs,
+            params=parameters
+            )

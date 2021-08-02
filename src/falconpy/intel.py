@@ -36,239 +36,210 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import parse_id_list, service_request
+# pylint: disable=C0103  # Aligning method names to API operation IDs
+from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
+from ._endpoint._intel import _intel_endpoints as Endpoints
 
 
 class Intel(ServiceClass):
-    """ The only requirement to instantiate an instance of this class
-        is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def QueryIntelActorEntities(self: object, parameters: dict = None) -> dict:
-        """ Get info about actors that match provided FQL filters. """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class.
+    """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def QueryIntelActorEntities(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get info about actors that match provided FQL filters.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelActorEntities
-        FULL_URL = self.base_url+'/intel/combined/actors/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryIntelActorEntities",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def QueryIntelIndicatorEntities(self: object, parameters: dict = None) -> dict:
-        """ Get info about indicators that match provided FQL filters. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def QueryIntelIndicatorEntities(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get info about indicators that match provided FQL filters.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelIndicatorEntities
-        FULL_URL = self.base_url+'/intel/combined/indicators/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryIntelIndicatorEntities",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def QueryIntelReportEntities(self: object, parameters: dict = None) -> dict:
-        """ Get info about reports that match provided FQL filters. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def QueryIntelReportEntities(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get info about reports that match provided FQL filters.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelReportEntities
-        FULL_URL = self.base_url+'/intel/combined/reports/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryIntelReportEntities",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def GetIntelActorEntities(self: object, ids, parameters: dict = None) -> dict:
-        """ Retrieve specific actors using their actor IDs. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetIntelActorEntities(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Retrieve specific actors using their actor IDs.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelActorEntities
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/intel/entities/actors/v1?ids={}'.format(ID_LIST)
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIntelActorEntities",
+            keywords=kwargs,
+            params=parameters
+            )
 
     def GetIntelIndicatorEntities(self: object, body: dict) -> dict:
-        """ Retrieve specific indicators using their indicator IDs. """
+        """
+        Retrieve specific indicators using their indicator IDs.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelIndicatorEntities
-        FULL_URL = self.base_url+'/intel/entities/indicators/GET/v1'
-        HEADERS = self.headers
-        BODY = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=FULL_URL,
-                                   body=BODY,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIntelIndicatorEntities",
+            method="POST",
+            body=body
+            )
 
-    def GetIntelReportPDF(self: object, parameters: dict) -> dict:
-        """ Return a Report PDF attachment. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetIntelReportPDF(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Return a Report PDF attachment.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelReportPDF
-        FULL_URL = self.base_url+'/intel/entities/report-files/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIntelReportPDF",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def GetIntelReportEntities(self: object, ids, parameters: dict = None) -> dict:
-        """ Retrieve specific reports using their report IDs. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetIntelReportEntities(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Retrieve specific reports using their report IDs.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelReportEntities
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/intel/entities/reports/v1?ids={}'.format(ID_LIST)
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIntelReportEntities",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def GetIntelRuleFile(self: object, parameters: dict) -> dict:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetIntelRuleFile(self: object, parameters: dict = None, **kwargs) -> dict:
         # There is an optional header you can see Accept to choose the result format. See Swagger.
-        """ Download earlier rule sets. """
+        """
+        Download earlier rule sets.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelRuleFile
-        FULL_URL = self.base_url+'/intel/entities/rules-files/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIntelRuleFile",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def GetLatestIntelRuleFile(self: object, parameters: dict) -> dict:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetLatestIntelRuleFile(self: object, parameters: dict = None, **kwargs) -> dict:
         # There is an optional header you can see Accept to choose the result format. See Swagger.
-        """ Download the latest rule set. """
+        """
+        Download the latest rule set.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetLatestIntelRuleFile
-        FULL_URL = self.base_url+'/intel/entities/rules-latest-files/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetLatestIntelRuleFile",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def GetIntelRuleEntities(self: object, ids) -> dict:
-        """ Retrieve details for rule sets for the specified ids. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def GetIntelRuleEntities(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Retrieve details for rule sets for the specified ids.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelRuleEntities
-        ID_LIST = str(parse_id_list(ids)).replace(",", "&ids=")
-        FULL_URL = self.base_url+'/intel/entities/rules/v1?ids={}'.format(ID_LIST)
-        HEADERS = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIntelRuleEntities",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def QueryIntelActorIds(self: object, parameters: dict = None) -> dict:
-        """ Get actor IDs that match provided FQL filters. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def QueryIntelActorIds(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get actor IDs that match provided FQL filters.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelActorIds
-        FULL_URL = self.base_url+'/intel/queries/actors/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryIntelActorIds",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def QueryIntelIndicatorIds(self: object, parameters: dict = None) -> dict:
-        """ Get indicators IDs that match provided FQL filters. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def QueryIntelIndicatorIds(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get indicators IDs that match provided FQL filters.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelIndicatorIds
-        FULL_URL = self.base_url+'/intel/queries/indicators/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryIntelIndicatorIds",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def QueryIntelReportIds(self: object, parameters: dict = None) -> dict:
-        """ Get report IDs that match provided FQL filters. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def QueryIntelReportIds(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get report IDs that match provided FQL filters.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelReportIds
-        FULL_URL = self.base_url+'/intel/queries/reports/v1'
-        HEADERS = self.headers
-        if parameters is None:
-            parameters = {}
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryIntelReportIds",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def QueryIntelRuleIds(self: object, parameters: dict) -> dict:
-        """ Search for rule IDs that match provided filter criteria. """
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def QueryIntelRuleIds(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Search for rule IDs that match provided filter criteria.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryIntelReportIds
-        FULL_URL = self.base_url+'/intel/queries/rules/v1'
-        HEADERS = self.headers
-        PARAMS = parameters
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=FULL_URL,
-                                   params=PARAMS,
-                                   headers=HEADERS,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryIntelRuleIds",
+            keywords=kwargs,
+            params=parameters
+            )

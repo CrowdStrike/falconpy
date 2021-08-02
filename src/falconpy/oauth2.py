@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 """
 import time
 from ._util import perform_request, generate_b64cred
+from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
 
 
 class OAuth2:
@@ -50,38 +51,42 @@ class OAuth2:
             "client_secret": FALCON_CLIENT_SECRET
         }
     """
-
+    # pylint: disable=too-many-instance-attributes,too-many-arguments
     def __init__(self: object, creds: dict, base_url: str = "https://api.crowdstrike.com",
-                 ssl_verify: bool = True, proxy: dict = None):
-        """ Initializes the base class by ingesting credentials, the base URL, and SSL verification options. """
+                 ssl_verify: bool = True, proxy: dict = None, timeout: float or tuple = None):
+        """
+        Initializes the base class by ingesting credentials, the proxies dictionary and specifications
+        for the base URL, SSL verification, and timeouts.
+        """
         self.creds = creds
         self.base_url = base_url
         self.ssl_verify = ssl_verify
+        self.timeout = timeout
         self.proxy = proxy
         self.token_expiration = 0
         self.token_renew_window = 20
         self.token_time = time.time()
         self.token_value = False
-        self.token_expired = lambda: True if (
-                                              time.time() - self.token_time
-                                              ) >= (
-                                                    self.token_expiration - self.token_renew_window
-                                                    ) else False
-
-        self.authenticated = lambda: False if self.token_expired() else True
+        self.token_expired = lambda: bool(
+            (time.time() - self.token_time) >= (self.token_expiration - self.token_renew_window)
+            )
+        self.authenticated = lambda: not bool(self.token_expired())
 
     def token(self: object) -> dict:
-        """ Generates an authorization token. """
-        FULL_URL = self.base_url+'/oauth2/token'
-        HEADERS = {}
-        DATA = {
+        """
+        Generates an authorization token.
+        """
+        operation_id = "oauth2AccessToken"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = {}
+        data_payload = {
             'client_id': self.creds['client_id'],
             'client_secret': self.creds['client_secret']
         }
         if "member_cid" in self.creds:
-            DATA["member_cid"] = self.creds["member_cid"]
-        returned = perform_request(method="POST", endpoint=FULL_URL, data=DATA, headers=HEADERS,
-                                   verify=self.ssl_verify, proxy=self.proxy)
+            data_payload["member_cid"] = self.creds["member_cid"]
+        returned = perform_request(method="POST", endpoint=target_url, data=data_payload, headers=header_payload,
+                                   verify=self.ssl_verify, proxy=self.proxy, timeout=self.timeout)
         if returned["status_code"] == 201:
             self.token_expiration = returned["body"]["expires_in"]
             self.token_time = time.time()
@@ -90,12 +95,17 @@ class OAuth2:
         return returned
 
     def revoke(self: object, token: str) -> dict:
-        """ Revokes the specified authorization token. """
-        FULL_URL = self.base_url+'/oauth2/revoke'
-        HEADERS = {'Authorization': 'basic {}'.format(generate_b64cred(self.creds["client_id"], self.creds["client_secret"]))}
-        DATA = {'token': '{}'.format(token)}
-        returned = perform_request(method="POST", endpoint=FULL_URL, data=DATA, headers=HEADERS,
-                                   verify=self.ssl_verify, proxy=self.proxy)
+        """
+        Revokes the specified authorization token.
+        """
+        operation_id = "oauth2RevokeToken"
+        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
+        header_payload = {'Authorization': 'basic {}'.format(
+            generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
+            )}
+        data_payload = {'token': '{}'.format(token)}
+        returned = perform_request(method="POST", endpoint=target_url, data=data_payload, headers=header_payload,
+                                   verify=self.ssl_verify, proxy=self.proxy, timeout=self.timeout)
         self.token_expiration = 0
         self.token_value = False
 

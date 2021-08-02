@@ -1,4 +1,4 @@
-# A valid CrowdStrike Falcon API key is required to run these tests. 
+# A valid CrowdStrike Falcon API key is required to run these tests.
 # You can store these values in your environment (this is the preferred method).
 # Example:
 #    export DEBUG_API_ID=CLIENT_ID_GOES_HERE
@@ -11,15 +11,18 @@
 #    "falcon_client_id": "CLIENT_ID_GOES_HERE",
 #    "falcon_client_secret": "CLIENT_SECRET_GOES_HERE"
 # }
-
 import json
 import os
 import sys
+import pytest
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from our sibling folder
+# flake8: noqa=E402
 from falconpy import api_complete as FalconSDK
 from falconpy import oauth2 as FalconAuth
+# Importing this to test disabling SSL Verification in a service class
+from falconpy import hosts as FalconHosts
 
 
 # The TestAuthorization class tests authentication and deauthentication
@@ -70,10 +73,26 @@ class TestAuthorization():
 
             try:
                 self.token = self.authorization.token()['body']['access_token']
-            except:
+            except KeyError:
                 self.token = False
 
             if self.token:
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def serviceAuthNoSSL(self):
+        status = self.getConfig()
+        if status:
+            self.authorization = FalconHosts.Hosts(creds={
+                'client_id': self.config["falcon_client_id"],
+                'client_secret': self.config["falcon_client_secret"]
+            }, ssl_verify=False)
+
+            if self.authorization.token:
+                self.authorization.auth_object.revoke(self.authorization.token)
                 return True
             else:
                 return False
@@ -93,13 +112,12 @@ class TestAuthorization():
                 req = authorization.token()
                 if req["status_code"] in [201, 403]:  # Prolly an invalid MSSP cred, 403 is correct
                     result = True
-            except:
+            except KeyError:
                 pass
 
         return result
 
     def failServiceAuth(self):
-
         self.authorization = FalconAuth.OAuth2(creds={
             'client_id': "BadClientID",
             'client_secret': "BadClientSecret"
@@ -107,7 +125,7 @@ class TestAuthorization():
         self.authorization.base_url = "nowhere"
         try:
             self.token = self.authorization.token()['body']['access_token']
-        except:
+        except KeyError:
             self.token = False
 
         self.authorization.revoke(self.token)
@@ -116,7 +134,6 @@ class TestAuthorization():
             return False
         else:
             return True
-    
 
     def serviceRevoke(self):
         try:
@@ -125,30 +142,32 @@ class TestAuthorization():
                 return True
             else:
                 return False
-        except:
+        except KeyError:
             return False
-        
+
     def test_uberAuth(self):
-        assert self.uberAuth() == True
+        assert self.uberAuth() is True
         self.uberRevoke()
-    
+
     def test_uberRevoke(self):
         self.uberAuth()
-        assert self.uberRevoke() == True
+        assert self.uberRevoke() is True
 
     def test_serviceAuth(self):
-        assert self.serviceAuth() == True
+        assert self.serviceAuth() is True
         self.serviceRevoke()
 
+    # This test disables SSL and will generate a warning in pytest if we don't disable it
+    @pytest.mark.filterwarnings("ignore:Unverified HTTPS request is being made.*")
+    def test_serviceAuthNoSSL(self):
+        assert self.serviceAuthNoSSL() is True
+
     def test_serviceMSSPAuth(self):
-        assert self.serviceMSSPAuth() == True
+        assert self.serviceMSSPAuth() is True
 
     def test_serviceRevoke(self):
         self.serviceAuth()
-        assert self.serviceRevoke() == True
+        assert self.serviceRevoke() is True
 
     def test_failServiceAuth(self):
-        assert self.failServiceAuth() == True
-
-
-
+        assert self.failServiceAuth() is True

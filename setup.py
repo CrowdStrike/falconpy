@@ -1,3 +1,5 @@
+# pylint: disable=W1401  # Pylint doesn't appreciate fine art
+# flake8: noqa  # Neither does flake8   ¯\_(ツ)_/¯
 """
 
                 .---.        .-----------
@@ -38,13 +40,13 @@ j888888888888888888888888888888888888888'  8888888888888
 setup.py - PyPI packaging utility for CrowdStrike FalconPy
 """
 
-from setuptools import find_packages
-from setuptools import setup
 from glob import glob
 from os.path import basename
 from os.path import splitext
-from src.falconpy import _version, _maintainer, _title, _description, _author
-from src.falconpy import _author_email, _project_url, _docs_url, _keywords
+from setuptools import find_packages
+from setuptools import setup
+from src.falconpy import _VERSION, _MAINTAINER, _TITLE, _DESCRIPTION, _AUTHOR
+from src.falconpy import _AUTHOR_EMAIL, _PROJECT_URL, _DOCS_URL, _KEYWORDS
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -55,18 +57,18 @@ for emoji in emojis:
     long_description = long_description.replace(emoji, "")
 
 setup(
-    name=_title,
-    version=_version,
-    author=_author,
-    author_email=_author_email,
-    maintainer=_maintainer,
-    maintainer_email=_author_email,
-    docs_url=_docs_url,
-    description=_description,
-    keywords=_keywords,
+    name=_TITLE,
+    version=_VERSION,
+    author=_AUTHOR,
+    author_email=_AUTHOR_EMAIL,
+    maintainer=_MAINTAINER,
+    maintainer_email=_AUTHOR_EMAIL,
+    docs_url=_DOCS_URL,
+    description=_DESCRIPTION,
+    keywords=_KEYWORDS,
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url=_project_url,
+    url=_PROJECT_URL,
     packages=find_packages("src"),
     package_dir={"": "src"},
     py_modules=[splitext(basename(path))[0] for path in glob("src/*.py")],

@@ -38,17 +38,23 @@ For more information, please refer to <https://unlicense.org>
 """
 from .oauth2 import OAuth2 as FalconAuth
 
+# pylint: disable=R0902  # Eight is reasonable here
+
 
 class ServiceClass:
-    """ Base class of all service classes. Contains the default __init__ method. """
-    def __init__(self: object, access_token: str = None, auth_object: object = None,
+    """
+    Base class of all service classes. Contains the default __init__ method.
+    """
+    def __init__(self: object, auth_object: object = None,
                  creds: dict = None, base_url: str = "https://api.crowdstrike.com",
-                 ssl_verify: bool = True, proxy: dict = None, timeout: float or tuple = None) -> object:
-        """ Instantiates the base class, ingests the authorization token,
-            and initializes the headers and base_url global variables.
+                 proxy: dict = None, **kwargs) -> object:
         """
+        Instantiates the base class, ingests the authorization token,
+        and initializes the headers and base_url global variables.
+        """
+        access_token, self.ssl_verify, self.timeout = self.parse_keywords(kwargs)
         self.refreshable = False
-        self.timeout = timeout
+
         if auth_object:
             self.auth_object = auth_object
             if not self.authenticated():
@@ -66,6 +72,8 @@ class ServiceClass:
             self.base_url = auth_object.base_url
             self.ssl_verify = auth_object.ssl_verify
             self.proxy = auth_object.proxy
+            # At this point in time, you cannot override the auth_object's timeout per class
+            self.timeout = auth_object.timeout
             self.refreshable = True
         else:
             if creds:
@@ -84,10 +92,12 @@ class ServiceClass:
                 self.headers = {'Authorization': 'Bearer {}'.format(access_token)}
 
             self.base_url = base_url
-            self.ssl_verify = ssl_verify
             self.proxy = proxy
 
     def authenticated(self):
+        """
+        Authenticates using the credentials provided.
+        """
         result = None
         if self.auth_object:
             result = self.auth_object.authenticated()
@@ -95,8 +105,29 @@ class ServiceClass:
         return result
 
     def token_expired(self):
+        """
+        Returns a boolean reflecting token expiration status
+        """
         result = None
         if self.auth_object:
             result = self.auth_object.token_expired()
 
         return result
+
+    @staticmethod
+    def parse_keywords(passed_keywords: dict):
+        """
+        Parses passed keywords to _init, setting defaults
+        """
+        access_token = None
+        ssl_verify = True
+        timeout = None
+        for key, val in passed_keywords.items():
+            if key.lower() == "access_token":
+                access_token = val
+            if key.lower() == "ssl_verify":
+                ssl_verify = val
+            if key.lower() == "timeout":
+                timeout = val
+
+        return access_token, ssl_verify, timeout

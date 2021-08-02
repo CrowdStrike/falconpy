@@ -38,21 +38,24 @@ For more information, please refer to <https://unlicense.org>
 """
 import base64
 import functools
+# pylint: disable=E0401  # Pylint might not have these in our path
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
-from ._version import _title, _version
+from ._version import _TITLE, _VERSION
 from ._result import Result
 urllib3.disable_warnings(InsecureRequestWarning)
 
 # Restrict requests to only allowed HTTP methods
 _ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
 # Default user-agent string
-_USER_AGENT = f"{_title}/{str(_version)}"
+_USER_AGENT = f"{_TITLE}/{str(_VERSION)}"
 
 
 def validate_payload(validator: dict, params: dict, required: list = None) -> bool:
-    """ Validates parameters and body payloads sent to the API """
+    """
+    Validates parameters and body payloads sent to the API.
+    """
     # Repurposed with permission from https://github.com/yaleman/crowdstrike_api
     #                                          __
     #                                         ( (\
@@ -77,7 +80,9 @@ def validate_payload(validator: dict, params: dict, required: list = None) -> bo
 
 
 def parse_id_list(id_list) -> str:
-    """ Converts a list of IDs to a comma-delimited string """
+    """
+    Converts a list of IDs to a comma-delimited string.
+    """
     if isinstance(id_list, list):
         returned = ""
         for string in id_list:
@@ -91,7 +96,9 @@ def parse_id_list(id_list) -> str:
 
 
 def generate_b64cred(client_id: str, client_secret: str) -> str:
-    """ base64 encodes passed client_id and client_secret for authorization headers. """
+    """
+    base64 encodes passed client_id and client_secret for authorization headers.
+    """
     cred = "{}:{}".format(client_id, client_secret)
     b64_byt = base64.b64encode(cred.encode("ascii"))
     encoded = b64_byt.decode("ascii")
@@ -99,8 +106,49 @@ def generate_b64cred(client_id: str, client_secret: str) -> str:
     return encoded
 
 
+def force_default(defaults: list, default_types: list = None):
+    """
+    This function forces default values and is designed to decorate other functions.
+
+    defaults = list of values to default
+    default_types = list of types to default the values to
+
+    Example: @force_default(defaults=["parameters], default_types=["dict"])
+    """
+    if not default_types:
+        default_types = []
+
+    def wrapper(func):
+        """Inner wrapper."""
+
+        @functools.wraps(func)
+        def factory(*args, **kwargs):
+            """
+            This method is a factory and runs through arguments passed to the called function,
+            setting defaults on values within the **kwargs dictionary when necessary
+            as specified in our "defaults" list that is passed to the parent wrapper.
+            """
+            element_count = 0   # Tracker so we can retrieve matching data types
+            # Loop through every element specified in our defaults list
+            for element in defaults:
+                if element in kwargs:
+                    # It exists but it's a NoneType
+                    if kwargs.get(element) is None:
+                        kwargs[element] = get_default(default_types, element_count)
+                else:
+                    # Not present whatsoever
+                    kwargs[element] = get_default(default_types, element_count)
+                # Increment our tracker for our sibling default_types list
+                element_count += 1
+            return func(*args, **kwargs)
+        return factory
+    return wrapper
+
+
 def service_request(caller: object = None, **kwargs) -> object:  # May return dict or object datatypes
-    """ Checks for token expiration, refreshing if possible and then performs the request. """
+    """
+    Checks for token expiration, refreshing if possible and then performs the request.
+    """
     if caller:
         try:
             if caller.auth_object:
@@ -128,47 +176,41 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
     return returned
 
 
-def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
-                    params: dict = None, body: dict = None, verify: bool = True,
-                    data=None, files: list = None,
-                    body_validator: dict = None, body_required: dict = None,
-                    proxy: dict = None, timeout: float or tuple = None) -> object:  # May return dict or object datatypes
+@force_default(defaults=["headers"], default_types=["dict"])
+def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> object:  # May return dict or object datatypes
     """
-        Leverages the requests library to perform the requested CrowdStrike OAuth2 API operation.
+    Leverages the requests library to perform the requested CrowdStrike OAuth2 API operation.
 
-        method: str - HTTP method to use when communicating with the API
-            - Example: GET, POST, PATCH, DELETE or UPDATE
-        endpoint: str - API endpoint, do not include the URL base
-            - Example: /oauth2/revoke
-        headers: dict - HTTP headers to send to the API
-            - Example: {"AdditionalHeader": "AdditionalValue"}
-        params: dict - HTTP query string parameters to send to the API
-            - Example: {"limit": 1, "sort": "state.asc"}
-        body: dict - HTTP body payload to send to the API
-            - Example: {"ids": "123456789abcdefg,987654321zyxwvutsr"}
-        verify: bool - Enable / Disable SSL certificate checks
-            - Example: True
-        data - Encoded data to send to the API
-            - Example: PAYLOAD = open(FILENAME, 'rb').read()
-        files: list - List of files to upload
-            - Example: [('file',('testfile2.jpg',open('testfile2.jpg','rb'),'image/jpeg'))]
-        params_validator: dict - Dictionary containing parameters to be validated for the requested operation (key / datatype)
-            - Example: { "limit": int, "offset": int, "filter": str}
-        params_required: list - List of parameters required by the requested operation
-            - Example: ["ids"]
-        body_validator: dict - Dictionary containing payload to be validated for the requested operation (key / datatype)
-            - Example: { "limit": int, "offset": int, "filter": str}
-        body_required: list - List of payload parameters required by the requested operation
-            - Example: ["ids"]
-        proxy: dict - Dictionary containing a list of proxies to use for requests
-            - Example: {"https": "https://myproxy.com:4000", "http": "http://myhttpproxy:80"}
-        timeout: float or tuple
-            Float representing the global timeout for requests or a tuple containing the connect / read timeouts.
-            - Example: 30
-            - Example: (5.05, 25)
+    method: str - HTTP method to use when communicating with the API
+        - Example: GET, POST, PATCH, DELETE or UPDATE
+    endpoint: str - API endpoint, do not include the URL base
+        - Example: /oauth2/revoke
+    headers: dict - HTTP headers to send to the API
+        - Example: {"AdditionalHeader": "AdditionalValue"}
+    params: dict - HTTP query string parameters to send to the API
+        - Example: {"limit": 1, "sort": "state.asc"}
+    body: dict - HTTP body payload to send to the API
+        - Example: {"ids": "123456789abcdefg,987654321zyxwvutsr"}
+    verify: bool - Enable / Disable SSL certificate checks
+        - Example: True
+    data - Encoded data to send to the API
+        - Example: PAYLOAD = open(FILENAME, 'rb').read()
+    files: list - List of files to upload
+        - Example: [('file',('testfile2.jpg',open('testfile2.jpg','rb'),'image/jpeg'))]
+    body_validator: dict - Dictionary containing payload to be validated for the requested operation (key / datatype)
+        - Example: { "limit": int, "offset": int, "filter": str}
+    body_required: list - List of payload parameters required by the requested operation
+        - Example: ["ids"]
+    proxy: dict - Dictionary containing a list of proxies to use for requests
+        - Example: {"https": "https://myproxy.com:4000", "http": "http://myhttpproxy:80"}
+    timeout: float or tuple
+        Float representing the global timeout for requests or a tuple containing the connect / read timeouts.
+        - Example: 30
+        - Example: (5.05, 25)
     """
-    if files is None:
-        files = []
+    method = kwargs.get("method", "GET")
+    body = kwargs.get("body", None)
+    body_validator = kwargs.get("body_validator", None)
     perform = True
     if method.upper() in _ALLOWED_METHODS:
         # Validate parameters
@@ -177,7 +219,7 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
         # Validate body payload
         if body_validator:
             try:
-                validate_payload(body_validator, body, body_required)
+                validate_payload(body_validator, body, kwargs.get("body_required", None))
             except ValueError as err:
                 returned = generate_error_result(message=f"{str(err)}")
                 perform = False
@@ -189,14 +231,17 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
         if perform:
             headers["User-Agent"] = _USER_AGENT  # Force all requests to pass the User-Agent identifier
             try:
-                response = requests.request(method.upper(), endpoint, params=params, headers=headers,
-                                            json=body, data=data, files=files, verify=verify, proxies=proxy, timeout=timeout)
+                response = requests.request(method.upper(), endpoint, params=kwargs.get("params", None),
+                                            headers=headers, json=kwargs.get("body", None), data=kwargs.get("data", None),
+                                            files=kwargs.get("files", []), verify=kwargs.get("verify", True),
+                                            proxies=kwargs.get("proxy", None), timeout=kwargs.get("timeout", None)
+                                            )
 
                 if response.headers.get('content-type') == "application/json":
                     returned = Result()(response.status_code, response.headers, response.json())
                 else:
                     returned = response.content
-            except Exception as err:
+            except Exception as err:  # pylint: disable=W0703  # General catch-all for anything coming out of requests
                 returned = generate_error_result(message=f"{str(err)}")
     else:
         returned = generate_error_result(message="Invalid API operation specified.", code=405)
@@ -205,17 +250,23 @@ def perform_request(method: str = "", endpoint: str = "", headers: dict = None,
 
 
 def generate_error_result(message: str = "An error has occurred. Check your payloads and try again.", code: int = 500) -> dict:
-    """Normalized error messaging handler."""
+    """
+    Normalized error messaging handler.
+    """
     return Result()(status_code=code, headers={}, body={"errors": [{"message": f"{message}"}], "resources": []})
 
 
 def generate_ok_result(message: str = "Request returned with success", code: int = 200) -> dict:
-    """Normalized OK messaging handler."""
+    """
+    Normalized OK messaging handler.
+    """
     return Result()(status_code=code, headers={}, body={"message": message, "resources": []})
 
 
 def get_default(types: list, position: int):
-    """I determine the requested default data type and return it."""
+    """
+    I determine the requested default data type and return it.
+    """
     default_value_names = ["list", "str", "int", "dict", "bool"]
     default_value_types = [[], "", 0, {}, False]
     value_count = 0
@@ -232,45 +283,10 @@ def get_default(types: list, position: int):
     return retval
 
 
-def force_default(defaults: list, default_types: list = None):
-    """This function forces default values and is designed to decorate other functions.
-
-       defaults = list of values to default
-       default_types = list of types to default the values to
-
-       Example: @force_default(defaults=["parameters], default_types=["dict"])
-    """
-    if not default_types:
-        default_types = []
-
-    def wrapper(func):
-        """Inner wrapper."""
-
-        @functools.wraps(func)
-        def factory(*args, **kwargs):
-            """This method is a factory and runs through arguments passed to the called function,
-               setting defaults on values within the **kwargs dictionary when necessary
-               as specified in our "defaults" list that is passed to the parent wrapper.
-            """
-            element_count = 0   # Tracker so we can retrieve matching data types
-            # Loop through every element specified in our defaults list
-            for element in defaults:
-                if element in kwargs:
-                    # It exists but it's a NoneType
-                    if kwargs.get(element) is None:
-                        kwargs[element] = get_default(default_types, element_count)
-                else:
-                    # Not present whatsoever
-                    kwargs[element] = get_default(default_types, element_count)
-                # Increment our tracker for our sibling default_types list
-                element_count += 1
-            return func(*args, **kwargs)
-        return factory
-    return wrapper
-
-
 def calc_url_from_args(target_url: str, passed_args: dict) -> str:
-    """This function reviews arguments passed to the Uber class command method and updates the target URL accordingly."""
+    """
+    This function reviews arguments passed to the Uber class command method and updates the target URL accordingly.
+    """
     if "ids" in passed_args:
         id_list = str(parse_id_list(passed_args['ids'])).replace(",", "&ids=")
         target_url = target_url.format(id_list)
@@ -288,10 +304,11 @@ def calc_url_from_args(target_url: str, passed_args: dict) -> str:
 
 
 def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epname: str) -> dict:
-    """This function reviews arguments passed to the function against arguments accepted by the endpoint.
-       If a valid argument is passed, it is added and returned as part of the payload dictionary.
+    """
+    This function reviews arguments passed to the function against arguments accepted by the endpoint.
+    If a valid argument is passed, it is added and returned as part of the payload dictionary.
 
-       This function will convert passed comma-delimited strings to list data types when necessary.
+    This function will convert passed comma-delimited strings to list data types when necessary.
     """
     for arg in passed_arguments:
         eps = [ep[5] for ep in endpoints if epname in ep[0]][0]
@@ -309,3 +326,48 @@ def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epnam
             pass
 
     return payload
+
+
+def process_service_request(calling_object: object,
+                            endpoints: list,
+                            operation_id: str,
+                            **kwargs
+                            ):
+    """
+    Performs a request originating from a service class module.
+    Calculates the target_url based upon the provided operation ID and endpoint list.
+
+    PARAMETERS:
+        endpoints: list - List of service class endpoints, defined as Endpoints in a service class. [required]
+        operation_id: The name of the operation ID. Normally this is also the function name from the service class. [required]
+        method: HTTP method to execute. GET, POST, PATCH, DELETE, PUT accepted. Defaults to GET.
+        keywords: Dictionary of kwargs that were passed to the function within the service class.
+        params: Dictionary of parameters passed to the service class function.
+        headers: Dictionary of headers passed to and calculated by the service class function.
+        body: Dictionary representing the body payload passed to the service class function.
+        data: Dictionary representing the data payload passed to the service class function.
+        files: List of files to be uploaded.
+    """
+    # ID replacement happening at the end of this statement planned for removal in v0.5.6+
+    # (after all classes have been updated to no longer need it and it has been removed from the _endpoints module)
+    target_url = f"{calling_object.base_url}{[ep[2] for ep in endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+    # Retrieve our keyword arguments
+    passed_keywords = kwargs.get("keywords", None)
+    passed_params = kwargs.get("params", None)
+    parameter_payload = None
+    if passed_keywords or passed_params:
+        parameter_payload = args_to_params(passed_params, passed_keywords, endpoints, operation_id)
+    passed_headers = kwargs.get("headers", None) if kwargs.get("headers", None) else calling_object.headers
+    new_keywords = {
+        "caller": calling_object,
+        "method": kwargs.get("method", "GET"),  # Default to GET.
+        "endpoint": target_url,
+        "verify": calling_object.ssl_verify,
+        "headers": passed_headers,
+        "params": parameter_payload,
+        "body": kwargs.get("body", None),
+        "data": kwargs.get("data", None),
+        "files": kwargs.get("files", None)
+    }
+
+    return service_request(**new_keywords)
