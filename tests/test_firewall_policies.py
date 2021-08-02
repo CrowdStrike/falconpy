@@ -35,6 +35,7 @@ class TestFirewallPolicy:
             ["queryCombinedFirewallPolicies", ""],
             ["performFirewallPoliciesAction", "action_name='enable', body={}, parameters={}"],
             ["performFirewallPoliciesAction", "body={}, parameters={'action_name':'PooF'}"],
+            ["performFirewallPoliciesAction", "body={}, parameters={}"],
             ["setFirewallPoliciesPrecedence", "body={}"],
             ["getFirewallPolicies", "ids='12345678'"],
             ["createFirewallPolicies", "body={}"],
