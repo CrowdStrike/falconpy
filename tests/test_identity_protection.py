@@ -22,7 +22,7 @@ class TestIdentityProtection:
     def serviceIDP_GraphQL(self):
         payload = {"query":"{\n  entities(first: 1)\n  {\n    nodes {\n      entityId    \n    }\n  }\n}"}
         # GraphQL is currently returning results as binary encoded
-        if json.loads(str(falcon.GraphQL(body=payload)).decode())["extensions"]["remainingPoints"] > 0:
+        if json.loads(falcon.GraphQL(body=payload).decode())["extensions"]["remainingPoints"] > 0:
             return True
         else:
             return False
