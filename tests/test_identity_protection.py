@@ -24,10 +24,14 @@ class TestIdentityProtection:
         # GraphQL is sometimes returning results as binary encoded
         result = falcon.GraphQL(body=payload)
         if not isinstance(result, dict):
-            result = result.decode()
-        if json.loads(result)["extensions"]["remainingPoints"] > 0:
-            return True
+            result = json.loads(result.decode())
+        if "extensions" in result:
+            if result["extensions"]["remainingPoints"] > 0:
+                return True
+            else:
+                return False
         else:
+            # Prolly failed login, check yer API key
             return False
 
     def test_GraphQL(self):

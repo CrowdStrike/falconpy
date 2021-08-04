@@ -28,7 +28,6 @@ class TestRTR:
         else:
             return False
 
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
     def serviceRTR_SessionTester(self):
         returned = False
         # This will have to be periodically updated using this solution, but for now it provides the necessary code coverage.
@@ -78,6 +77,7 @@ class TestRTR:
     def test_RTR_ListAllSessions(self):
         assert self.serviceRTR_ListAllSessions() is True
 
+    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
     def test_RTR_SessionConnect(self):
         assert self.serviceRTR_SessionTester() is True
 
