@@ -1,6 +1,6 @@
 ![CrowdStrike Falcon](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png) [![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)<br/>
 
-# FalconPy - The CrowdStrike Falcon SDK for Python 3
+# FalconPy<BR/>The CrowdStrike Falcon SDK for Python 3
 ![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy)
 [![CodeQL](https://github.com/CrowdStrike/falconpy/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/codeql-analysis.yml)
