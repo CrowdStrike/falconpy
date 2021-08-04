@@ -2,6 +2,7 @@
 # This class tests the real_time_response service class
 
 import os
+import pytest
 import sys
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
@@ -27,6 +28,7 @@ class TestRTR:
         else:
             return False
 
+    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
     def serviceRTR_SessionTester(self):
         returned = False
         # This will have to be periodically updated using this solution, but for now it provides the necessary code coverage.
