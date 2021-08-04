@@ -98,19 +98,21 @@ def import_module(module: str = None):
     found = False
     if module:
         module = module.lower()
+        import_location = "src.falconpy"
         try:
             # Assume they're working from the repo first
-            _ = [importlib.import_module(f"src.falconpy.{module}")]
+            _ = [importlib.import_module(f"{import_location}.{module}")]
             found = True
         except ImportError:
             try:
+                import_location = "falconpy"
                 # Then try to import from the installed module
-                _ = [importlib.import_module(f"falconpy.{module}")]
+                _ = [importlib.import_module(f"{import_location}.{module}")]
                 found = True
             except ImportError:
                 print("Unable to import requested service class")
         if found:
-            current_module = sys.modules[f"src.falconpy.{module}"]
+            current_module = sys.modules[f"{import_location}.{module}"]
             for key in dir(current_module):
                 if isinstance(getattr(current_module, key), type) and not key == "ServiceClass":
                     _.append(getattr(_[0], key))
