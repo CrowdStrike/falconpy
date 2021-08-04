@@ -40,6 +40,8 @@ import os
 import sys
 import importlib
 import atexit
+from os.path import dirname, join
+import glob
 from . import oauth2 as FalconAuth
 
 
@@ -58,6 +60,9 @@ def help(item=None):  # pylint: disable=W0622
     AVAILABLE VARIABLES
         'DEBUG_TOKEN' - your OAuth2 token.
         'AUTH_OBJECT' - an instance of the OAuth2 authorization class (authenticated).
+
+    LISTING AVAILABLE SERVICE CLASSES
+    Use list_modules() to retrieve a list of all available service classes.
 
     IMPORTING MODULES
     Use import_module("MODULE_NAME") to import any of the available service classes.
@@ -88,6 +93,31 @@ def embed():
     ipshell = _.InteractiveShellEmbed(banner1=BANNER)
     ipshell.confirm_exit = False
     ipshell()
+
+
+def list_modules():
+    """
+    Lists all available Service Classes
+    """
+    modules = glob.glob(join(dirname(__file__), "*.py"))
+    result = []
+    for key in modules:
+        branched = key.split("/")
+        position = len(branched)-1
+        module_name = branched[position].replace(".py", "")
+        if "_" not in module_name[0] and module_name not in ["debug", "api_complete"]:
+            result.append(module_name)
+    result.sort()
+    print("Available modules")
+    msg = ""
+    for idx, val in enumerate(result):
+        msg = f"{msg}%-35s" % val
+        cnt = idx + 1
+        if cnt % 2 == 0:
+            print(msg)
+            msg = ""
+    print(msg)
+    print("\nLoad modules with import_module('MODULE_NAME')")
 
 
 def import_module(module: str = None):
