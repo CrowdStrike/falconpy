@@ -116,7 +116,7 @@ GitHub Discussions provide the community with means to communicate. There are fo
   * :raised_hands: [**Show and Tell**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3A%22Show+and+tell%22): Share with the community what you're up to! Perhaps this is letting everyone know about your upcoming conference talk, share a project that has embedded FalconPy, or your recent blog.
 
 
-## Documentation and Collateral
+## Documentation & Collateral
 
 ### Official Project Documentation
 See the wiki for extended documentation: [https://github.com/CrowdStrike/falconpy/wiki](https://github.com/CrowdStrike/falconpy/wiki).
