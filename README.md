@@ -23,7 +23,7 @@ This SDK provides two distinct methods for interacting with CrowdStrike's Falcon
 ### Service classes
 Representing a single API service collection, each service class has a method defined for every operation available in that service collection.
 
-| OAuth2-Based API<br>![#f03c15](https://via.placeholder.com/10/f03c15/000000?text=+)<small> *CrowdStrike documentation requires a CrowdStrike customer login*</small> | Code Location |
+| OAuth2-Based API<br>![#f03c15](https://via.placeholder.com/10/f03c15/000000?text=+)<small> *Documentation requires a CrowdStrike customer login*</small> | Code Location |
 |:-|:-|
 | CrowdStrike Device Control API | [device_control_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/device_control_policies.py) |
 | CrowdStrike Sensor Policy Management API | [sensor_update_policy.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_update_policy.py) |
