@@ -21,8 +21,11 @@ AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for
 class TestIdentityProtection:
     def serviceIDP_GraphQL(self):
         payload = {"query":"{\n  entities(first: 1)\n  {\n    nodes {\n      entityId    \n    }\n  }\n}"}
-        # GraphQL is currently returning results as binary encoded
-        if json.loads(falcon.GraphQL(body=payload).decode())["extensions"]["remainingPoints"] > 0:
+        # GraphQL is sometimes returning results as binary encoded
+        result = falcon.GraphQL(body=payload)
+        if not isinstance(result, dict):
+            result = result.decode()
+        if json.loads(result)["extensions"]["remainingPoints"] > 0:
             return True
         else:
             return False
