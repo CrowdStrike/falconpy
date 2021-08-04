@@ -50,12 +50,13 @@ def help(item=None):  # pylint: disable=W0622
     Debugger help function. Overrides the built in python function.
     """
     text = """
-    This is interactive Python shell. Python help is available under python_help().
+    This is an interactive Python shell. Python help is available under python_help().
 
     AUTHENTICATION
     If you have FALCON_CLIENT_ID and FALCON_CLIENT_SECRET environment variables set,
-    this shell will authenticate you at the start up. You can also call the init()
-    function passing these values, or passing a credential dictionary containing them.
+    this shell will authenticate you at start up. You can also call the init()
+    function passing the values dbg_falcon_client_id and dbg_falcon_client_secret, or
+    you can pass a credential dictionary containing them.
 
     AVAILABLE VARIABLES
         'DEBUG_TOKEN' - your OAuth2 token.
@@ -71,7 +72,7 @@ def help(item=None):  # pylint: disable=W0622
     In [1]: hosts = import_module("hosts")
     In [2]: hosts.QueryDevicesByFilter(filter="hostname:'whatever'")
 
-    Importing the detects module and querying for all available detections:
+    Importing the detects module and querying for all available detections with one command:
     In [1]: import_module("detects").QueryDetects()
 
     EXIT THE DEBUG
