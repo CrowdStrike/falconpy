@@ -95,13 +95,27 @@ def import_module(module: str = None):
     Dynamically imports the module requested and returns an authenticated instance of the Service Class.
     """
     returned_object = False
+    found = False
     if module:
-        _ = [importlib.import_module(f"src.falconpy.{module}")]
-        current_module = sys.modules[f"src.falconpy.{module}"]
-        for key in dir(current_module):
-            if isinstance(getattr(current_module, key), type) and not key == "ServiceClass":
-                _.append(getattr(_[0], key))
-                returned_object = _[1](auth_object=AUTH_OBJECT)
+        module = module.lower()
+        try:
+            # Assume they're working from the repo first
+            _ = [importlib.import_module(f"src.falconpy.{module}")]
+            found = True
+        except ImportError:
+            try:
+                # Then try to import from the installed module
+                _ = [importlib.import_module(f"falconpy.{module}")]
+                found = True
+            except ImportError:
+                print("Unable to import requested service class")
+        if found:
+            current_module = sys.modules[f"src.falconpy.{module}"]
+            for key in dir(current_module):
+                if isinstance(getattr(current_module, key), type) and not key == "ServiceClass":
+                    _.append(getattr(_[0], key))
+                    returned_object = _[1](auth_object=AUTH_OBJECT)
+                    print(f"Service Class {key} imported successfully.")
     else:
         print("No module specified.")
 
@@ -184,3 +198,5 @@ DEBUG_TOKEN = False
 AUTH_OBJECT = False
 
 atexit.register(exit_handler)
+
+init()
