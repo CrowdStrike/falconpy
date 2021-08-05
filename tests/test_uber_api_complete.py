@@ -198,7 +198,7 @@ class TestUber:
         else:
             return False
 
-    # Token revokation is returning a 200 regardless of the token we send.
+    # Token revocation is returning a 200 regardless of the token we send.
     # Changed to client ID on 08.02.21 - jshcodes@CrowdStrike
     def uberCCAWS_GenerateTokenError(self):
         #hold_token = falcon.token
