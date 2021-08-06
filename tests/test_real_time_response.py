@@ -32,7 +32,7 @@ class TestRTR:
         returned = False
         # This will have to be periodically updated using this solution, but for now it provides the necessary code coverage.
         # Highly dependant upon my test CID / API keys
-        aid_to_check = falcon_hosts.QueryDevicesByFilter(filter="hostname:'ip-172-31-30-80.us-west-1.compute.internal'")["body"]["resources"][0]
+        aid_to_check = falcon_hosts.QueryDevicesByFilter(filter="hostname:'ip-172-31-30-80*'")["body"]["resources"][0]
         if aid_to_check:
             session_id = falcon.RTR_InitSession(body={"device_id": aid_to_check})["body"]["resources"][0]["session_id"]
             if falcon.RTR_DeleteSession(session_id=session_id)["status_code"] == 204:
