@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-iocs - CrowdStrike Falcon Real Time Response Administration API interface class
+real_time_response_admin - CrowdStrike Falcon Real Time Response Administration API interface class
 
 This is free and unencumbered software released into the public domain.
 

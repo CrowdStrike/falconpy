@@ -77,7 +77,12 @@ class ServiceClass:
             self.refreshable = True
         else:
             if creds:
-                auth_object = FalconAuth(creds=creds)
+                auth_object = FalconAuth(creds=creds,
+                                         base_url=base_url,
+                                         proxy=proxy,
+                                         ssl_verify=self.ssl_verify,
+                                         timeout=self.timeout
+                                         )
                 self.auth_object = auth_object
                 _ = self.auth_object.token()
                 if _["status_code"] == 201:

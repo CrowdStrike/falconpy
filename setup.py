@@ -69,6 +69,11 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url=_PROJECT_URL,
+    project_urls = {
+        "Documentation": "https://www.falconpy.io",
+        "Source": "https://github.com/CrowdStrike/falconpy/tree/main/src/falconpy",
+        "Tracker": "https://github.com/CrowdStrike/falconpy/issues"
+    },
     packages=find_packages("src"),
     package_dir={"": "src"},
     py_modules=[splitext(basename(path))[0] for path in glob("src/*.py")],

@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-api_complete.py - All-in-one CrowdStrike Falcon OAuth2 API harness
+api_complete - All-in-one CrowdStrike Falcon OAuth2 API harness
 
 This is free and unencumbered software released into the public domain.
 

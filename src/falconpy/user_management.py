@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-iocs - CrowdStrike Falcon User Management API interface class
+user_management - CrowdStrike Falcon User Management API interface class
 
 This is free and unencumbered software released into the public domain.
 

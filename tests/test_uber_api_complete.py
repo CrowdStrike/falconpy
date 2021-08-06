@@ -7,12 +7,15 @@ import sys
 import pytest
 import datetime
 import hashlib
+# Import our sibling src folder into the path
+sys.path.append(os.path.abspath('src'))
+# flake8: noqa=E402
+# pylint: disable=C0103
 # Classes to test - manually imported from our sibling folder
 from falconpy import api_complete as FalconSDK
 # Import perform_request from _util so we can test generating 405's directly
 from falconpy._util import perform_request, force_default
-# Import our sibling src folder into the path
-sys.path.append(os.path.abspath('src'))
+
 
 AllowedResponses = [200, 400, 415, 429, 500]
 
@@ -195,14 +198,18 @@ class TestUber:
         else:
             return False
 
+    # Token revocation is returning a 200 regardless of the token we send.
+    # Changed to client ID on 08.02.21 - jshcodes@CrowdStrike
     def uberCCAWS_GenerateTokenError(self):
-        hold_token = falcon.token
-        falcon.token = "I am a bad token!"
+        #hold_token = falcon.token
+        #falcon.token = "I am a bad token!"
+        hold_id = falcon.creds["client_id"]
+        falcon.creds["client_id"] = "Gonna Crash"
         if not falcon.deauthenticate():
-            falcon.token = hold_token
+            falcon.creds["client_id"] = hold_id
             return True
         else:
-            falcon.token = hold_token
+            falcon.creds["client_id"] = hold_id
             return False
 
     def uberCCAWS_BadAuthentication(self):

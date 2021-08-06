@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-iocs - CrowdStrike Falcon Sensor Policy Management API interface class
+sensor_update_policy - CrowdStrike Falcon Sensor Policy Management API interface class
 
 This is free and unencumbered software released into the public domain.
 

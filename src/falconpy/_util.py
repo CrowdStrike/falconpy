@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 """
 import base64
 import functools
+from json.decoder import JSONDecodeError
 # pylint: disable=E0401  # Pylint might not have these in our path
 import requests
 import urllib3
@@ -241,6 +242,13 @@ def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> objec
                     returned = Result()(response.status_code, response.headers, response.json())
                 else:
                     returned = response.content
+            except JSONDecodeError:
+                # No response content, but a successful request was made
+                returned = generate_ok_result(
+                    message="No content returned",
+                    code=response.status_code,
+                    headers=response.headers
+                    )
             except Exception as err:  # pylint: disable=W0703  # General catch-all for anything coming out of requests
                 returned = generate_error_result(message=f"{str(err)}")
     else:
@@ -256,11 +264,12 @@ def generate_error_result(message: str = "An error has occurred. Check your payl
     return Result()(status_code=code, headers={}, body={"errors": [{"message": f"{message}"}], "resources": []})
 
 
-def generate_ok_result(message: str = "Request returned with success", code: int = 200) -> dict:
+def generate_ok_result(message: str = "Request returned with success", code: int = 200, **kwargs) -> dict:
     """
     Normalized OK messaging handler.
     """
-    return Result()(status_code=code, headers={}, body={"message": message, "resources": []})
+    return_headers = kwargs.get("headers", {})
+    return Result()(status_code=code, headers=return_headers, body={"message": message, "resources": []})
 
 
 def get_default(types: list, position: int):

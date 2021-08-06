@@ -30,7 +30,7 @@ jobs:
     - name: Lint package source with pylint
       run: |
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        pylint src/falconpy --max-line-length=127 --disable=R0801 --ignore=debug.py
+        pylint src/falconpy --max-line-length=127 --disable=R0801
     - name: Lint samples with pylint
       run: |
         # NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE! NOTE!

@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-iocs - CrowdStrike Falcon Prevention Policy API interface class
+prevention_policy - CrowdStrike Falcon Prevention Policy API interface class
 
 This is free and unencumbered software released into the public domain.
 
