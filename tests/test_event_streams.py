@@ -5,6 +5,7 @@ import sys
 import datetime
 import requests
 import pytest
+import platform
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 
@@ -72,6 +73,7 @@ class TestEventStreams:
         assert self.serviceStream_listAvailableStreamsOAuth2() is True
 
     @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
+    @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
     def test_refresh(self):
         assert self.serviceStream_refreshActiveStreamSession() is True
 
