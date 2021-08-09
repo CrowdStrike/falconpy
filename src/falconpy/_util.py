@@ -356,10 +356,14 @@ def process_service_request(calling_object: object,
         body: Dictionary representing the body payload passed to the service class function.
         data: Dictionary representing the data payload passed to the service class function.
         files: List of files to be uploaded.
+        partition: ID of the partition to open (Event Streams API)
     """
     # ID replacement happening at the end of this statement planned for removal in v0.5.6+
     # (after all classes have been updated to no longer need it and it has been removed from the _endpoints module)
     target_url = f"{calling_object.base_url}{[ep[2] for ep in endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+    passed_partition = kwargs.get("partition", None)
+    if passed_partition:
+        target_url = target_url.format(str(passed_partition))
     # Retrieve our keyword arguments
     passed_keywords = kwargs.get("keywords", None)
     passed_params = kwargs.get("params", None)
