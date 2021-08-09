@@ -71,11 +71,7 @@ class TestEventStreams:
     def test_list(self):
         assert self.serviceStream_listAvailableStreamsOAuth2() is True
 
-    @pytest.mark.skipif(
-      falcon.listAvailableStreamsOAuth2(
-          parameters={"appId": "pytest-event_streams-unit-test"}
-          )["status_code"] == 429, reason="API rate limit reached"
-      )
+    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
     def test_refresh(self):
         assert self.serviceStream_refreshActiveStreamSession() is True
 
