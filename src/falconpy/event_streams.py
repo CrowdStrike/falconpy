@@ -77,13 +77,13 @@ class EventStreams(ServiceClass):
             params=parameters
             )
 
-    # These method names do not conform to snake_case and are being phased out
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are being phased out
     # They are being defined here for backwards compatibility
     refreshActiveStreamSession = refresh_active_stream    # pylint: disable=C0103
     listAvailableStreamsOAuth2 = list_available_streams   # pylint: disable=C0103
 
 
-# The legacy name for this class does not conform to
-# PascalCase naming style and is being phased out. It
-# is being defined here for backwards compatibility.
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is being defined here for backwards compatibility purposes only.
 Event_Streams = EventStreams  # pylint: disable=C0103
