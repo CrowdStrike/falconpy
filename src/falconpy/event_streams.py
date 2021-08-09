@@ -77,7 +77,7 @@ class EventStreams(ServiceClass):
             params=parameters
             )
 
-    # These methods names do not conform to snake_case and are being phased out
+    # These method names do not conform to snake_case and are being phased out
     # They are being defined here for backwards compatibility
     refreshActiveStreamSession = refresh_active_stream    # pylint: disable=C0103
     listAvailableStreamsOAuth2 = list_available_streams   # pylint: disable=C0103
