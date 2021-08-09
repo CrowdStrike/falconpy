@@ -36,51 +36,54 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
+from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._event_streams import _event_streams_endpoints as Endpoints
 
 
-class Event_Streams(ServiceClass):
+class EventStreams(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def refreshActiveStreamSession(self: object, partition: int = 0, parameters: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def refresh_active_stream(self: object, partition: int = 0, parameters: dict = None, body: dict = None, **kwargs) -> dict:
         """
         Refresh an active event stream. Use the URL shown in a GET /sensors/entities/datafeed/v2 response.
         """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/refreshActiveStreamSession
-        operation_id = "refreshActiveStreamSession"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("{}", str(partition))
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="refreshActiveStreamSession",
+            method="POST",
+            body=body,  # BODY is being passed here even though it is likely empty, addresses issue #247
+            keywords=kwargs,
+            params=parameters,
+            partition=partition
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def listAvailableStreamsOAuth2(self: object, parameters: dict = None, **kwargs) -> dict:
+    def list_available_streams(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Discover all event streams in your environment.
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/listAvailableStreamsOAuth2
-        operation_id = "listAvailableStreamsOAuth2"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="listAvailableStreamsOAuth2",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    # These methods names do not conform to snake_case and are being phased out
+    # They are being defined here for backwards compatibility
+    refreshActiveStreamSession = refresh_active_stream    # pylint: disable=C0103
+    listAvailableStreamsOAuth2 = list_available_streams   # pylint: disable=C0103
+
+
+# The legacy name for this class does not conform to
+# PascalCase naming style and is being phased out. It
+# is being defined here for backwards compatibility.
+Event_Streams = EventStreams  # pylint: disable=C0103
