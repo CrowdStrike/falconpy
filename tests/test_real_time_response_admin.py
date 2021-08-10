@@ -14,7 +14,7 @@ auth = Authorization.TestAuthorization()
 auth.getConfig()
 falcon = FalconRTR(creds={"client_id": auth.config["falcon_client_id"],
                           "client_secret": auth.config["falcon_client_secret"]})
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 201, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestRTR:
@@ -55,7 +55,7 @@ class TestRTR:
         return errorChecks
 
     def rtr_logout(self):
-        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] == 200:
+        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] in AllowedResponses:
             return True
         else:
             return False
