@@ -78,12 +78,12 @@ class EventStreams(ServiceClass):
             )
 
     # These method names align to the operation IDs in the API but
-    # do not conform to snake_case / PEP8 and are being phased out
-    # They are being defined here for backwards compatibility
-    refreshActiveStreamSession = refresh_active_stream    # pylint: disable=C0103
-    listAvailableStreamsOAuth2 = list_available_streams   # pylint: disable=C0103
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    refreshActiveStreamSession = refresh_active_stream
+    listAvailableStreamsOAuth2 = list_available_streams
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
-# It is being defined here for backwards compatibility purposes only.
+# It is defined here for backwards compatibility purposes only.
 Event_Streams = EventStreams  # pylint: disable=C0103
