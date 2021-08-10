@@ -36,79 +36,79 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
+import json
+from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._sample_uploads import _sample_uploads_endpoints as Endpoints
 
 
-class Sample_Uploads(ServiceClass):
+class SampleUploads(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetSampleV3(self: object, parameters: dict = None, **kwargs) -> object:
+    def get_sample(self: object, parameters: dict = None, **kwargs) -> object:
         """
         Retrieves the file associated with the given ID (SHA256)
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/GetSampleV3
-        operation_id = "GetSampleV3"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetSampleV3",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def UploadSampleV3(self: object,
-                       file_data: object,
-                       body: dict = None,
-                       parameters: dict = None,
-                       **kwargs) -> dict:
+    def upload_sample(self: object,
+                      file_data: object,
+                      body: dict = None,
+                      parameters: dict = None,
+                      **kwargs) -> dict:
         """
         Upload a file for further cloud analysis. After uploading, call the specific analysis API endpoint.
         """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/UploadSampleV3
-        operation_id = "UploadSampleV3"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # Set our content-type header
         header_payload["Content-Type"] = "application/octet-stream"
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        body_payload = body
-        data_payload = file_data
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   body=body_payload,
-                                   data=data_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="UploadSampleV3",
+            headers=header_payload,  # Pass our custom headers
+            body=body,
+            data=file_data,
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def DeleteSampleV3(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_sample(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Removes a sample, including file, meta and submissions from the collection.
         """
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/DeleteSampleV3
-        operation_id = "DeleteSampleV3"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="DELETE",
+            operation_id="DeleteSampleV3",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    GetSampleV3 = get_sample
+    UploadSampleV3 = upload_sample
+    DeleteSampleV3 = delete_sample
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Sample_Uploads = SampleUploads  # pylint: disable=C0103
