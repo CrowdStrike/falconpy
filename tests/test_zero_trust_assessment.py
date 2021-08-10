@@ -13,6 +13,7 @@ auth = Authorization.TestAuthorization()
 auth.getConfig()
 falcon = FalconZTA(creds={"client_id": auth.config["falcon_client_id"],
                           "client_secret": auth.config["falcon_client_secret"]})
+AllowedResponses = [200, 201, 429]
 
 
 class TestZeroTrustAssessment:
@@ -25,7 +26,7 @@ class TestZeroTrustAssessment:
         return errorChecks
 
     def zta_logout(self):
-        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] == 200:
+        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] in AllowedResponses:
             return True
         else:
             return False
