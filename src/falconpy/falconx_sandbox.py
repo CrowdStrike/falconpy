@@ -36,251 +36,222 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
+import json
+from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._falconx_sandbox import _falconx_sandbox_endpoints as Endpoints
 
 
-class FalconX_Sandbox(ServiceClass):
+class FalconXSandbox(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
     is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetArtifacts(self: object, parameters: dict = None, **kwargs) -> object:
+    def get_artifacts(self: object, parameters: dict = None, **kwargs) -> object:
         """
         Download IOC packs, PCAP files, and other analysis artifacts.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetArtifacts
-        operation_id = "GetArtifacts"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # Set our content-type header
         header_payload['Accept-Encoding'] = 'gzip'  # Force gzip compression
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetArtifacts",
+            keywords=kwargs,
+            params=parameters,
+            headers=header_payload
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetSummaryReports(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_summary_reports(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get a short summary version of a sandbox report.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetSummaryReports
-        operation_id = "GetSummaryReports"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetSummaryReports",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetSubmissions(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_submissions(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Check the status of a sandbox analysis. Time required for analysis varies but is usually less than 15 minutes.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetSubmissions
-        operation_id = "GetSubmissions"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetSubmissions",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def Submit(self: object, body: dict) -> dict:
+    def submit(self: object, body: dict) -> dict:
         """
         Submit an uploaded file or a URL for sandbox analysis.
         Time required for analysis varies but is usually less than 15 minutes.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/Submit
-        operation_id = "Submit"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="Submit",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryReports(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_reports(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Find sandbox reports by providing an FQL filter and paging details.
         Returns a set of report IDs that match your criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QueryReports
-        operation_id = "QueryReports"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryReports",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QuerySubmissions(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_submissions(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Find submission IDs for uploaded files by providing an FQL filter and paging details.
         Returns a set of submission IDs that match your criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QuerySubmissions
-        operation_id = "QuerySubmissions"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QuerySubmissions",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def UploadSampleV2(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def upload_sample(self: object, file_data: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
         """
         Upload a file for sandbox analysis. After uploading,
         use `/falconx/entities/submissions/v1` to start analyzing the file.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/UploadSampleV2
-        operation_id = "UploadSampleV2"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # Set our content-type header
         header_payload["Content-Type"] = "application/octet-stream"
-        body_payload = body
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="UploadSampleV2",
+            body=body,
+            data=file_data,
+            params=parameters,
+            keywords=kwargs,
+            headers=header_payload
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetReports(self: object, parameters: dict = None, **kwargs) -> object:
+    def get_reports(self: object, parameters: dict = None, **kwargs) -> object:
         """
         Retrieves a full sandbox report.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetReports
-        operation_id = "GetReports"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetReports",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def DeleteReport(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_report(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Delete report based on the report ID. Operation can be checked for success
         by polling for the report ID on the report-summaries endpoint.
         """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/DeleteReport
-        operation_id = "DeleteReport"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="DELETE",
+            operation_id="DeleteReport",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetSampleV2(self: object, parameters: dict = None, **kwargs) -> object:
+    def get_sample(self: object, parameters: dict = None, **kwargs) -> object:
         """
         Retrieves the file associated with the given ID (SHA256).
         Use the password_protected boolean to specify if you want your zip to have a password.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetSampleV2
-        operation_id = "GetSampleV2"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetSampleV2",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def DeleteSampleV2(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_sample(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Removes a sample, including file, meta and submissions from the collection.
         """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/DeleteSampleV2
-        operation_id = "DeleteSampleV2"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="DELETE",
+            operation_id="DeleteSampleV2",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def QuerySampleV1(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_sample(self: object, body: dict) -> dict:
         """
         Retrieves a list with sha256 of samples that exist and customer has rights to access them,
         maximum number of accepted items is 200.
         """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/DeleteSampleV2
-        operation_id = "QuerySampleV1"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QuerySampleV1
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="QuerySampleV1",
+            body=body
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    GetArtifacts = get_artifacts
+    GetSummaryReports = get_summary_reports
+    GetSubmissions = get_submissions
+    Submit = submit
+    QueryReports = query_reports
+    QuerySubmissions = query_submissions
+    UploadSampleV2 = upload_sample
+    GetReports = get_reports
+    DeleteReport = delete_report
+    GetSampleV2 = get_sample
+    DeleteSampleV2 = delete_sample
+    QuerySampleV1 = query_sample
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+FalconX_Sandbox = FalconXSandbox  # pylint: disable=C0103
