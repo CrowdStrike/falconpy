@@ -8,19 +8,19 @@ import datetime
 import hashlib
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
-# Classes to test - manually imported from sibling folder
-from falconpy import sample_uploads as FalconSampleUploads
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
+# Classes to test - manually imported from sibling folder
+from falconpy.sample_uploads import Sample_Uploads
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconSampleUploads.Sample_Uploads(access_token=auth.token)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+auth.getConfig()
+falcon = Sample_Uploads(creds={"client_id": auth.config["falcon_client_id"],
+                               "client_secret": auth.config["falcon_client_secret"]})
 
 
 class TestSampleUploads:
-    def serviceSampleUploads_TestAllFunctionality(self):
+    def sample_upload_download_delete(self):
         FILENAME = "tests/testfile.png"
         fmt = '%Y-%m-%d %H:%M:%S'
         stddate = datetime.datetime.now().strftime(fmt)
@@ -42,6 +42,7 @@ class TestSampleUploads:
                 open(TARGET, 'wb').write(response)
             except TypeError:
                 # This particular unit test failed it's upload, pass a True since the code path was tested
+                pytest.skip("Unable to open test file, skipping.")
                 return True
             buf = 65536
             hash1 = hashlib.sha256()
@@ -73,7 +74,7 @@ class TestSampleUploads:
             pytest.skip("Workflow-related upload error, skipping.")
             return True
 
-    def serviceSampleUploads_GenerateErrors(self):
+    def sample_errors(self):
         falcon.base_url = "nowhere"
         errorChecks = True
         commandList = [
@@ -87,8 +88,17 @@ class TestSampleUploads:
 
         return errorChecks
 
-    def test_TestAllFunctionality(self):
-        assert self.serviceSampleUploads_TestAllFunctionality() is True
+    def sample_logout(self):
+        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] == 200:
+            return True
+        else:
+            return False
 
-    def test_Errors(self):
-        assert self.serviceSampleUploads_GenerateErrors() is True
+    def test_TestAllFunctionality(self):
+        assert self.sample_upload_download_delete() is True
+
+    def test_errors(self):
+        assert self.sample_errors() is True
+
+    def test_logout(self):
+        assert self.sample_logout() is True

@@ -10,11 +10,12 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import falconx_sandbox as FalconXSandbox
+from falconpy.falconx_sandbox import FalconXSandbox
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconXSandbox.FalconX_Sandbox(access_token=auth.token)
+auth.getConfig()
+falcon = FalconXSandbox(creds={"client_id": auth.config["falcon_client_id"],
+                               "client_secret": auth.config["falcon_client_secret"]})
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -55,9 +56,9 @@ class TestFalconX:
             ["QueryReports", ""],
             ["QuerySubmissions", ""],
             ["GetSampleV2", "ids='12345678'"],
-            ["UploadSampleV2", "body={}, parameters={}"],
+            ["UploadSampleV2", "body={}, parameters={}, file_data=''"],
             ["DeleteSampleV2", "ids='12345678'"],
-            ["QuerySampleV1", "ids='12345678'"]
+            ["QuerySampleV1", "{'sha256s': ['12345678']}"]
         ]
         for cmd in commandList:
             if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
@@ -65,18 +66,24 @@ class TestFalconX:
 
         return errorChecks
 
+    def falconx_logout(self):
+        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] == 200:
+            return True
+        else:
+            return False
+
     def test_QueryReports(self):
-        assert self.serviceFalconX_QueryReports() == True
-    
+        assert self.serviceFalconX_QueryReports() is True
+
     def test_QuerySubmissions(self):
-        assert self.serviceFalconX_QuerySubmissions() == True
+        assert self.serviceFalconX_QuerySubmissions() is True
 
     @pytest.mark.skipif(falcon.QueryReports(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetSummaryReports(self):
-        assert self.serviceFalconX_GetSummaryReports() == True
+        assert self.serviceFalconX_GetSummaryReports() is True
 
     def test_Logout(self):
-        assert auth.serviceRevoke() == True
-    
+        assert self.falconx_logout() is True
+
     def test_Errors(self):
-        assert self.serviceFalconX_GenerateErrors() == True
+        assert self.serviceFalconX_GenerateErrors() is True

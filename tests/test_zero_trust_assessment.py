@@ -2,7 +2,6 @@
 # This class tests the zero_trust_assessment service class
 import os
 import sys
-
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -11,26 +10,28 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.zero_trust_assessment import Zero_Trust_Assessment as FalconZTA
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconZTA(access_token=auth.token)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+auth.getConfig()
+falcon = FalconZTA(creds={"client_id": auth.config["falcon_client_id"],
+                          "client_secret": auth.config["falcon_client_secret"]})
 
 
 class TestZeroTrustAssessment:
-    def serviceZTA_GenerateErrors(self):
+    def zta_notfound(self):
         falcon.base_url = "nowhere"
         errorChecks = True
-        commandList = [
-            ["getAssessmentV1", "ids='12345678'"]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+        if falcon.getAssessmentV1(ids="12345678")["status_code"] != 500:
+            errorChecks = False
 
         return errorChecks
 
-    def test_Logout(self):
-        assert auth.serviceRevoke() is True
+    def zta_logout(self):
+        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] == 200:
+            return True
+        else:
+            return False
 
-    def test_Errors(self):
-        assert self.serviceZTA_GenerateErrors() is True
+    def test_logout(self):
+        assert self.zta_logout() is True
+
+    def test_notfound(self):
+        assert self.zta_notfound() is True

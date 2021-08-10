@@ -12,11 +12,12 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import custom_ioa as FalconIOA
+from falconpy.custom_ioa import Custom_IOA as FalconIOA
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconIOA.Custom_IOA(access_token=auth.token)
+auth.getConfig()
+falcon = FalconIOA(creds={"client_id": auth.config["falcon_client_id"],
+                          "client_secret": auth.config["falcon_client_secret"]})
 AllowedResponses = [200, 201, 207, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -70,6 +71,12 @@ class TestCustomIOA:
 
         return errorChecks
 
+    def ioa_logout(self):
+        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] == 200:
+            return True
+        else:
+            return False
+
     def test_QueryPatterns(self):
         assert self.serviceIOA_QueryPatterns() is True
 
@@ -89,7 +96,7 @@ class TestCustomIOA:
         assert self.serviceIOA_QueryRulesMixin0() is True
 
     def test_Logout(self):
-        assert auth.serviceRevoke() is True
+        assert self.ioa_logout() is True
 
     def test_Errors(self):
         assert self.serviceIOA_GenerateErrors() is True

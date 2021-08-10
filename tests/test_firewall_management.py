@@ -1,20 +1,20 @@
 # test_firewall_management.py
 # This class tests the firewall_management service class
-
-import json
 import os
 import sys
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
-#Import our sibling src folder into the path
+# Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import firewall_management as FalconFirewall
+from falconpy.firewall_management import Firewall_Management as FalconFirewall
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconFirewall.Firewall_Management(access_token=auth.token)
-AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
+auth.getConfig()
+falcon = FalconFirewall(creds={"client_id": auth.config["falcon_client_id"],
+                               "client_secret": auth.config["falcon_client_secret"]})
+AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+
 
 class TestFirewallManagement:
 
@@ -23,7 +23,6 @@ class TestFirewallManagement:
             return True
         else:
             return False
-
 
     def serviceFirewall_GenerateErrors(self):
         falcon.base_url = "nowhere"
@@ -88,16 +87,22 @@ class TestFirewallManagement:
         if falcon.query_rules()["status_code"] != 500:
             errorChecks = False
             print("20")
-            
+
         return errorChecks
+
+    def firewall_logout(self):
+        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] == 200:
+            return True
+        else:
+            return False
 
     # def test_query_rules(self):
     #     assert self.serviceFirewall_query_rules() == True
 
     def test_Logout(self):
-        assert auth.serviceRevoke() == True
+        assert self.firewall_logout() is True
 
     def test_Errors(self):
-        assert self.serviceFirewall_GenerateErrors() == True
+        assert self.serviceFirewall_GenerateErrors() is True
 
 #TODO: My current API key can't hit this API. Pending additional unit testing for now.
