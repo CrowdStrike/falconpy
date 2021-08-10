@@ -17,6 +17,7 @@ auth = Authorization.TestAuthorization()
 auth.getConfig()
 falcon = Sample_Uploads(creds={"client_id": auth.config["falcon_client_id"],
                                "client_secret": auth.config["falcon_client_secret"]})
+AllowedResponses = [200, 201, 429]
 
 
 class TestSampleUploads:
@@ -89,7 +90,7 @@ class TestSampleUploads:
         return errorChecks
 
     def sample_logout(self):
-        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] == 200:
+        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] in AllowedResponses:
             return True
         else:
             return False
