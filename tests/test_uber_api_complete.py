@@ -99,7 +99,7 @@ class TestUber:
         response = falcon.command('UploadSampleV3', file_name=SOURCE, data=PAYLOAD, content_type="application/octet-stream")
         try:
             sha = response["body"]["resources"][0]["sha256"]
-            response = falcon.command("GetSampleV3", parameters={}, ids=sha)
+            response = falcon.command("GetSampleV3", ids=sha)
             try:
                 open(TARGET, 'wb').write(response)
             except TypeError:
