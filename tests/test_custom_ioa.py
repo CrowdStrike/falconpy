@@ -1,14 +1,10 @@
-# test_custom_ioa.py
-# This class tests the custom_ioa service class
-
-# import json
+"""
+test_custom_ioa.py - This class tests the custom_ioa service class
+"""
 import os
 import sys
-# import datetime
-# import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
-
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
@@ -22,81 +18,73 @@ AllowedResponses = [200, 201, 207, 429]  # Adding rate-limiting as an allowed re
 
 
 class TestCustomIOA:
-
-    def serviceIOA_QueryPatterns(self):
-        return falcon.query_patterns()["status_code"] in AllowedResponses
-
-    def serviceIOA_QueryPlatformsMixin0(self):
-        return falcon.query_platformsMixin0()["status_code"] in AllowedResponses
-
-    def serviceIOA_QueryRuleGroupsFull(self):
-        return falcon.query_rule_groups_full()["status_code"] in AllowedResponses
-
-    def serviceIOA_QueryRuleGroupsMixin0(self):
-        return falcon.query_rule_groupsMixin0()["status_code"] in AllowedResponses
-
-    def serviceIOA_QueryRuleTypes(self):
-        return falcon.query_rule_types()["status_code"] in AllowedResponses
-
-    def serviceIOA_QueryRulesMixin0(self):
-        return falcon.query_rulesMixin0()["status_code"] in AllowedResponses
-
-    def serviceIOA_GenerateErrors(self):
+    """Custom IOA Service Class test harness"""
+    @staticmethod
+    def ioa_generate_errors():
+        """Generates errors for every operation and tests every code path"""
         falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["get_patterns", "ids='12345678'"],
-            ["get_platformsMixin0", "ids='12345678'"],
-            ["get_rule_groupsMixin0", "ids='12345678'"],
-            ["create_rule_groupMixin0", "body={}, cs_username='falconpy_unit_testing'"],
-            ["delete_rule_groupMixin0", "ids='12345678', cs_username='falconpy_unit_testing'"],
-            ["update_rule_groupMixin0", "body={}, cs_username='falconpy_unit_testing'"],
-            ["get_rule_types", "ids='12345678'"],
-            ["get_rules_get", "ids=['12345678','23456789','09876544']"],
-            ["get_rulesMixin0", "ids='12345678'"],
-            ["create_rule", "body={}, cs_username='falconpy_unit_testing'"],
-            ["delete_rules", "ids='12345678', cs_username='falconpy_unit_testing'"],
-            ["update_rules", "body={}, cs_username='falconpy_unit_testing'"],
-            ["validate", "body={}"],
-            ["query_patterns", ""],
-            ["query_platformsMixin0", ""],
-            ["query_rule_groups_full", ""],
-            ["query_rule_groupsMixin0", ""],
-            ["query_rule_types", ""],
-            ["query_rulesMixin0", ""]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+        error_checks = True
+        # Intentionally crossing both code patterns for a while with this - jshcodes @ 08.10.21
+        tests = {
+            "get_patterns": falcon.get_patterns(ids='12345678')["status_code"],
+            "get_platforms": falcon.get_platformsMixin0(ids='12345678')["status_code"],
+            "get_rule_groups": falcon.get_rule_groupsMixin0(ids='12345678')["status_code"],
+            "create_rule_group": falcon.create_rule_groupMixin0(body={}, cs_username='falconpy_unit_testing')["status_code"],
+            "delete_rule_group": falcon.delete_rule_groupMixin0(
+                ids='12345678', cs_username='falconpy_unit_testing'
+                )["status_code"],
+            "update_rule_group": falcon.update_rule_groupMixin0(body={}, cs_username='falconpy_unit_testing')["status_code"],
+            "get_rule_types": falcon.get_rule_types(ids='12345678')["status_code"],
+            "get_rules_get": falcon.get_rules_get(ids=['12345678', '23456789', '09876544'])["status_code"],
+            "get_rules": falcon.get_rulesMixin0(ids='12345678')["status_code"],
+            "create_rule": falcon.create_rule(body={}, cs_username='falconpy_unit_testing')["status_code"],
+            "delete_rules": falcon.delete_rules(ids='12345678', cs_username='falconpy_unit_testing')["status_code"],
+            "update_rules": falcon.update_rules(body={}, cs_username='falconpy_unit_testing')["status_code"],
+            "validate": falcon.validate(body={})["status_code"],
+            "query_patterns": falcon.query_patterns()["status_code"],
+            "query_platforms": falcon.query_platformsMixin0()["status_code"],
+            "query_rule_groups_full": falcon.query_rule_groups_full()["status_code"],
+            "query_rule_groups": falcon.query_rule_groupsMixin0()["status_code"],
+            "query_rule_types": falcon.query_rule_types()["status_code"],
+            "query_rules": falcon.query_rulesMixin0()["status_code"]
+        }
+        for key in tests:
+            if tests[key] != 500:
+                error_checks = False
 
-        return errorChecks
+        return error_checks
 
-    def ioa_logout(self):
-        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] == 200:
-            return True
-        else:
-            return False
+    def test_query_patterns(self):
+        """Pytest harness hook"""
+        assert bool(falcon.query_patterns()["status_code"] in AllowedResponses) is True
 
-    def test_QueryPatterns(self):
-        assert self.serviceIOA_QueryPatterns() is True
+    def test_query_platforms(self):
+        """Pytest harness hook"""
+        assert bool(falcon.query_platformsMixin0()["status_code"] in AllowedResponses) is True
 
-    def test_QueryPlatformsMixin0(self):
-        assert self.serviceIOA_QueryPlatformsMixin0() is True
+    def test_query_rule_groups_full(self):
+        """Pytest harness hook"""
+        assert bool(falcon.query_rule_groups_full()["status_code"] in AllowedResponses) is True
 
-    def test_QueryRuleGroupsFull(self):
-        assert self.serviceIOA_QueryRuleGroupsFull() is True
+    def test_query_rule_groups(self):
+        """Pytest harness hook"""
+        assert bool(falcon.query_rule_groupsMixin0()["status_code"] in AllowedResponses) is True
 
-    def test_QueryRuleGroupsMixin0(self):
-        assert self.serviceIOA_QueryRuleGroupsMixin0() is True
+    def test_query_rule_types(self):
+        """Pytest harness hook"""
+        assert bool(falcon.query_rule_types()["status_code"] in AllowedResponses) is True
 
-    def test_QueryRuleTypes(self):
-        assert self.serviceIOA_QueryRuleTypes() is True
+    def test_query_rules(self):
+        """Pytest harness hook"""
+        assert bool(falcon.query_rulesMixin0()["status_code"] in AllowedResponses) is True
 
-    def test_QueryRulesMixin0(self):
-        assert self.serviceIOA_QueryRulesMixin0() is True
+    def test_errors(self):
+        """Pytest harness hook"""
+        assert self.ioa_generate_errors() is True
 
-    def test_Logout(self):
-        assert self.ioa_logout() is True
-
-    def test_Errors(self):
-        assert self.serviceIOA_GenerateErrors() is True
+    @staticmethod
+    def test_logout():
+        """Pytest harness hook"""
+        assert bool(falcon.auth_object.revoke(
+            falcon.auth_object.token()["body"]["access_token"]
+            )["status_code"] in [200, 201]) is True
