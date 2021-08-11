@@ -145,7 +145,7 @@ def import_module(module: str = None):
         if found:
             current_module = sys.modules[f"{import_location}.{module}"]
             for key in dir(current_module):
-                if isinstance(getattr(current_module, key), type) and not key == "ServiceClass":
+                if isinstance(getattr(current_module, key), type) and not key == "ServiceClass" and "_" not in key:
                     _.append(getattr(_[0], key))
                     returned_object = _[1](auth_object=AUTH_OBJECT)
                     print(f"Service Class {key} imported successfully.")
