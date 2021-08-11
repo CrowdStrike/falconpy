@@ -149,23 +149,19 @@ class RealTimeResponseAdmin(ServiceClass):
             params=parameters
             )
 
-    def create_scripts(self: object, data, files) -> dict:
+    @force_default(defaults=["files"], default_types=["list"])
+    def create_scripts(self: object, data, files: list = None) -> dict:
         """
         Upload a new custom-script to use for the RTR `runscript` command.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_CreateScripts
-        # Create a copy of our default header dictionary
-        header_payload = json.loads(json.dumps(self.headers))
-        # Set our content-type header
-        header_payload['Content-Type'] = 'multipart/form-data'
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_CreateScripts",
             method="POST",
             data=data,
-            files=files,
-            headers=header_payload
+            files=files
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -188,18 +184,13 @@ class RealTimeResponseAdmin(ServiceClass):
         Upload a new scripts to replace an existing one.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_UpdateScripts
-        # Create a copy of our default header dictionary
-        header_payload = json.loads(json.dumps(self.headers))
-        # Set our content-type header
-        header_payload['Content-Type'] = 'multipart/form-data'
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_UpdateScripts",
             method="PATCH",
             data=data,
-            files=files,
-            headers=header_payload
+            files=files
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
