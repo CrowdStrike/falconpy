@@ -106,23 +106,18 @@ class RealTimeResponseAdmin(ServiceClass):
             params=parameters
             )
 
-    def create_put_files(self: object, data, files) -> dict:
+    def create_put_files(self: object, data: dict, files: list) -> dict:
         """
         Upload a new put-file to use for the RTR `put` command.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_CreatePut_Files
-        # Create a copy of our default header dictionary
-        header_payload = json.loads(json.dumps(self.headers))
-        # Set our content-type header
-        header_payload['Content-Type'] = 'multipart/form-data'
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_CreatePut_Files",
             method="POST",
             data=data,
-            files=files,
-            headers=header_payload
+            files=files
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
