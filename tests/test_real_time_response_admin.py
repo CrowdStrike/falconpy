@@ -20,33 +20,35 @@ falcon = FalconRTR(creds={"client_id": auth.config["falcon_client_id"],
 AllowedResponses = [200, 201, 202, 400, 404, 429]
 
 
-class TestRTR:
-    """RTR Admin test harness"""
+class TestRTRAdmin:
+    """
+    Real Time Response Admin Test Harness
+    """
     @staticmethod
     def rtra_retrieve_script_id(script_name: str):
-        """Retrieve a script ID by name"""
+        """
+        Helper to retrieve a script ID by name
+        """
         found_id = "1234567890"  # Force an error if we can't find it
-        scripts = falcon.list_scripts()
-        for resource in scripts["body"]["resources"]:
-            script = falcon.get_scripts(ids=resource)
-            for file in script["body"]["resources"]:
-                if "name" in file:
-                    if file["name"] == script_name:
-                        found_id = file["id"]
+        script = falcon.get_scripts(ids=falcon.list_scripts()["body"]["resources"])
+        for file in script["body"]["resources"]:
+            if "name" in file:
+                if file["name"] == script_name:
+                    found_id = file["id"]
 
         return found_id
 
     @staticmethod
     def rtra_retrieve_file_id(file_name: str):
-        """Retrieve a script ID by name"""
+        """
+        Helper to retrieve a put file ID by name
+        """
         found_id = "1234567890"  # Force an error if we can't find it
-        files = falcon.list_put_files()
-        for resource in files["body"]["resources"]:
-            file = falcon.get_put_files(ids=resource)
-            for item in file["body"]["resources"]:
-                if "name" in item:
-                    if item["name"] == file_name:
-                        found_id = item["id"]
+        file = falcon.get_put_files(ids=falcon.list_put_files()["body"]["resources"])
+        for item in file["body"]["resources"]:
+            if "name" in item:
+                if item["name"] == file_name:
+                    found_id = item["id"]
 
         return found_id
 
@@ -55,7 +57,9 @@ class TestRTR:
         return orig_payload
 
     def rtra_test_all_code_paths(self):
-        """Tests all code paths, accepts all errors except 500"""
+        """
+        Tests all code paths, accepts all errors except 500
+        """
         upload_file = "tests/testfile.png"
         fmt = '%Y-%m-%d %H:%M:%S'
         stddate = datetime.datetime.now().strftime(fmt)
@@ -85,12 +89,10 @@ class TestRTR:
             "check_admin_command_status": falcon.RTR_CheckAdminCommandStatus(parameters={})["status_code"],     # 400
             "execute_admin_command": falcon.RTR_ExecuteAdminCommand(body={})["status_code"],                    # 400
             "create_put_files": falcon.RTR_CreatePut_Files(data=file_payload, files=files_detail)["status_code"],
-            "get_put_files": falcon.RTR_GetPut_Files(ids=self.rtra_retrieve_file_id(file_name=upload_filename))["status_code"],
             "delete_put_files": falcon.RTR_DeletePut_Files(
                 ids=self.rtra_retrieve_file_id(file_name=upload_filename)
                 )["status_code"],
             "create_scripts": falcon.RTR_CreateScripts(data=script_payload, files=script_detail)["status_code"],
-            "get_scripts": falcon.RTR_GetScripts(ids=self.rtra_retrieve_script_id(script_filename))["status_code"],
             "update_scripts": falcon.RTR_UpdateScripts(
                 data=self.rtra_create_updated_payload(script_filename, new_script_payload), files=script_detail
                 )["status_code"],
@@ -106,23 +108,17 @@ class TestRTR:
 
         return error_checks
 
-    @staticmethod
-    def test_list_scripts():
-        """Pytest harness hook"""
-        assert bool(falcon.RTR_ListScripts(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
-
-    @staticmethod
-    def test_list_put_files():
-        """Pytest harness hook"""
-        assert bool(falcon.RTR_ListPut_Files(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
-
     def test_all_code_paths(self):
-        """Pytest harness hook"""
+        """
+        Pytest harness hook - Singular test will execute every statement in every method within the class
+        """
         assert self.rtra_test_all_code_paths() is True
 
     @staticmethod
     def test_logout():
-        """Pytest harness hook"""
+        """
+        Pytest harness hook
+        """
         assert bool(falcon.auth_object.revoke(
             falcon.auth_object.token()["body"]["access_token"]
             )["status_code"] in [200, 201]) is True
