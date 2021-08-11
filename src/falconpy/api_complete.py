@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 """
 import time
 from ._util import _ALLOWED_METHODS
-from ._util import perform_request, generate_b64cred, force_default, generate_error_result, calc_url_from_args
+from ._util import perform_request, generate_b64cred, generate_error_result, calc_url_from_args
 from ._endpoint import api_endpoints
 
 
@@ -136,28 +136,14 @@ class APIHarness:
     def _create_header_payload(self: object, passed_arguments: dict) -> dict:
         """Creates the HTTP header payload based upon the existing class headers and passed arguments."""
         payload = self.headers()
-        for item in passed_arguments["headers"]:
-            payload[item] = passed_arguments["headers"][item]
+        if "headers" in passed_arguments:
+            for item in passed_arguments["headers"]:
+                payload[item] = passed_arguments["headers"][item]
         if "content_type" in passed_arguments:
             payload["Content-Type"] = str(passed_arguments["content_type"])
 
         return payload
 
-    @force_default(defaults=[
-        "parameters",
-        "body",
-        "data",
-        "files",
-        "headers",
-        "action",
-    ], default_types=[
-        "dict",
-        "dict",
-        "dict",
-        "list",
-        "dict",
-        "string",
-    ])
     def command(self: object, *args, **kwargs):
         """ Checks token expiration, renewing when necessary, then performs the request.
 
@@ -175,13 +161,15 @@ class APIHarness:
             file_name: str = None                               - Name of the file to upload
             content_type: str = None                            - Content_Type HTTP header
         """
+
         if self.token_expired():
             # Authenticate them if we can
             self.authenticate()
         try:
-            if not kwargs["action"]:
+            if not kwargs.get("action", None):
                 # Assume they're passing it in as the first param
                 kwargs["action"] = args[0]
+
         except IndexError:
             pass  # They didn't specify an action, use the default and try for an override instead
         uber_command = [a for a in self.commands if a[0] == kwargs["action"]]
@@ -194,10 +182,10 @@ class APIHarness:
             # Calculate our header payload using arguments passed to the function and our token
             header_payload = self._create_header_payload(kwargs)
             # These have their defaults set by the force_defaults decorator
-            data_payload = kwargs["data"]
-            body_payload = kwargs["body"]
-            file_list = kwargs["files"]
-            parameter_payload = kwargs["parameters"]
+            data_payload = kwargs.get("data", {})
+            body_payload = kwargs.get("body", {})
+            file_list = kwargs.get("files", [])
+            parameter_payload = kwargs.get("parameters", {})
             # Check for authentication
             if self.authenticated:
                 selected_method = uber_command[0][1].upper()            # Which HTTP method to execute
