@@ -34,6 +34,8 @@ class TestAuthorization():
             self.config = {}
             self.config["falcon_client_id"] = os.getenv("DEBUG_API_ID")
             self.config["falcon_client_secret"] = os.getenv("DEBUG_API_SECRET")
+            if "DEBUG_API_BASE_URL" in os.environ:
+                self.config["falcon_base_url"] = os.getenv("DEBUG_API_BASE_URL")
             return True
         else:
             cur_path = os.path.dirname(os.path.abspath(__file__))
@@ -143,6 +145,12 @@ class TestAuthorization():
             else:
                 return False
         except KeyError:
+            return False
+
+    def credential_logout(self, api: object = None):
+        if api:
+            return bool(api.auth_object.revoke(api.auth_object.token()["body"]["access_token"])["status_code"] in [200, 201])
+        else:
             return False
 
     def test_uberAuth(self):
