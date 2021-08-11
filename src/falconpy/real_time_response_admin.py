@@ -36,7 +36,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-import json
 from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._real_time_response_admin import _real_time_response_admin_endpoints as Endpoints
