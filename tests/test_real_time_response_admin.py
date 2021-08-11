@@ -1,7 +1,7 @@
-# test_real_time_response_admin.py
-# This class tests the real_time_response_admin service class
+"""
+test_real_time_response_admin.py - This class tests the real_time_response_admin service class
+"""
 import datetime
-import requests
 import os
 import sys
 # Authentication via the test_authorization.py
@@ -20,20 +20,10 @@ AllowedResponses = [200, 201, 400, 404, 429]
 
 
 class TestRTR:
-
-    def rtra_list_put_files(self):
-        if falcon.RTR_ListPut_Files(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def rtra_list_scripts(self):
-        if falcon.RTR_ListScripts(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def rtra_test_all_code_paths(self):
+    """RTR Admin test harness"""
+    @staticmethod
+    def rtra_test_all_code_paths():
+        """Tests all code paths, accepts all errors except 500"""
         upload_file = "tests/testfile.png"
         fmt = '%Y-%m-%d %H:%M:%S'
         stddate = datetime.datetime.now().strftime(fmt)
@@ -69,13 +59,18 @@ class TestRTR:
 
         return error_checks
 
-    def test_list_scripts(self):
-        assert self.rtra_list_scripts() is True
+    @staticmethod
+    def test_list_scripts():
+        """Pytest harness hook"""
+        assert bool(falcon.RTR_ListScripts(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
-    def test_list_put_files(self):
-        assert self.rtra_list_put_files() is True
+    @staticmethod
+    def test_list_put_files():
+        """Pytest harness hook"""
+        assert bool(falcon.RTR_ListPut_Files(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
-    def test_logout(self):
+    @staticmethod
+    def test_logout():
         """Pytest harness hook"""
         assert auth.credential_logout(falcon) is True
 
