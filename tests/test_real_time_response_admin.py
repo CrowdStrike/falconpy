@@ -69,10 +69,13 @@ class TestRTR:
         """Pytest harness hook"""
         assert bool(falcon.RTR_ListPut_Files(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
-    def test_logout(self):
-        """Pytest harness hook"""
-        assert auth.credential_logout(falcon) is True
-
     def test_all_code_paths(self):
         """Pytest harness hook"""
         assert self.rtra_test_all_code_paths() is True
+
+    @staticmethod
+    def test_logout():
+        """Pytest harness hook"""
+        assert bool(falcon.auth_object.revoke(
+            falcon.auth_object.token()["body"]["access_token"]
+            )["status_code"] in [200, 201]) is True
