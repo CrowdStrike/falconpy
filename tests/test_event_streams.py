@@ -66,11 +66,6 @@ class TestEventStreams:
 
         return error_checks
 
-    @staticmethod
-    def stream_logout():
-        """Tests logout and discards the token"""
-        return bool(falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] == 200)
-
     def test_list(self):
         """Pylint test harness hook"""
         assert self.stream_list() is True
@@ -78,13 +73,17 @@ class TestEventStreams:
     @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
     @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
     def test_refresh(self):
-        """Pylint test harness hook"""
+        """Pytest harness hook"""
         assert self.stream_refresh() is True
 
-    def test_logout(self):
-        """Pylint test harness hook"""
-        assert self.stream_logout() is True
 
     def test_errors(self):
-        """Pylint test harness hook"""
+        """Pytest harness hook"""
         assert self.stream_errors() is True
+
+    @staticmethod
+    def test_logout():
+        """Pytest harness hook"""
+        assert bool(falcon.auth_object.revoke(
+            falcon.auth_object.token()["body"]["access_token"]
+            )["status_code"] in [200, 201]) is True
