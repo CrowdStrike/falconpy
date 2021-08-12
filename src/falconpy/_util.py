@@ -125,7 +125,7 @@ def force_default(defaults: list, default_types: list = None):
         @functools.wraps(func)
         def factory(*args, **kwargs):
             """
-            This method is a factory and runs through arguments passed to the called function,
+            This method is a factory and runs through keywords passed to the called function,
             setting defaults on values within the **kwargs dictionary when necessary
             as specified in our "defaults" list that is passed to the parent wrapper.
             """
