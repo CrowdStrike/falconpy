@@ -1,12 +1,13 @@
 # Version 0.5.7
 ## Added features and functionality
-+ Refactored Sample Uploads Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #255. `sample_uploads.py`
-+ Refactored Real Time Response Admin Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #256. `real_time_response_admin.py`
-+ Refactored Firewall Management Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #257. `firewall_management.py`
++ Refactored Events Streams Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #248. `event_streams.py`
 + Refactored Custom IOA Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #258. `custom_ioa.py`
 + Refactored Falcon X Sandbox Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #259. `falconx_sandbox.py`
++ Refactored Firewall Management Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #257. `firewall_management.py`
++ Refactored Intel Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #264. `intel.py`
++ Refactored Real Time Response Admin Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #256. `real_time_response_admin.py`
++ Refactored Sample Uploads Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #255. `sample_uploads.py`
 + Refactored Zero Trust Assessment Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #260. `zero_trust_assessment.py`
-+ Refactored Events Streams Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #248. `event_streams.py`
 
 ## Issues resolved
 + Bug fix: Resolved HTTP status code 415 on calls to refreshActiveStreamSession (refresh_active_stream). Closes #247. `event_streams.py`
@@ -39,6 +40,7 @@ print(bad_result)                                # that the "ids" parameter is n
     - `test_custom_ioa.py`
     - `test_event_streams.py`
     - `test_falconx_sandbox.py`
+    - `test_intel.py`
     - `test_firewall_management.py`
     - `test_real_time_response_admin.py` (Updated to cover additional API operations)
     - `test_sample_uploads.py`
