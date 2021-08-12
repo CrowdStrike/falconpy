@@ -8,31 +8,40 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy.ioc import IOC as FalconIOC
+from falconpy.ioc import IOC
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconIOC(access_token=auth.token)
+auth.getConfig()
+falcon = IOC(creds={"client_id": auth.config["falcon_client_id"],
+                          "client_secret": auth.config["falcon_client_secret"]})
 AllowedResponses = [200, 201, 404, 429]
 
 
 class TestIOC:
-    def serviceIOC_RunAllTests(self):
-        errorChecks = True
-        commandList = [
-            ["indicator_combined_v1", "limit=1"],
-            ["indicator_get_v1", "ids='12345678'"],
-            ["indicator_create_v1", "body={}"],
-            ["indicator_delete_v1", "ids='12345678'"],
-            ["indicator_update_v1", "body={}"],
-            ["indicator_search_v1", "parameters={'limit':1}"],
-        ]
-        for cmd in commandList:
-            result = eval("falcon.{}({})".format(cmd[0], cmd[1]))
-            if result['status_code'] not in AllowedResponses:
-                errorChecks = False
+    def ioc_run_all_tests(self):
+        error_checks = True
+        tests = {
+            "indicator_combined": falcon.indicator_combined_v1(limit=1)["status_code"],
+            "indicator_get": falcon.indicator_get_v1(ids='12345678')["status_code"],
+            "indicator_create": falcon.indicator_create_v1(body={})["status_code"],
+            "indicator_delete": falcon.indicator_delete_v1(ids='12345678')["status_code"],
+            "indicator_update": falcon.indicator_update_v1(body={})["status_code"],
+            "indicator_search": falcon.indicator_search_v1(parameters={'limit': 1})["status_code"],
+        }
+        for key in tests:
+            if tests[key] not in AllowedResponses:
+                error_checks = False
 
-        return errorChecks
+            # print(f"{key} operation returned a {tests[key]} status code")
 
-    def test_RunAllTests(self):
-        assert self.serviceIOC_RunAllTests() is True
+        return error_checks
+
+    def test_all_functionality(self):
+        assert self.ioc_run_all_tests() is True
+
+    @staticmethod
+    def test_logout():
+        """Pytest harness hook"""
+        assert bool(falcon.auth_object.revoke(
+            falcon.auth_object.token()["body"]["access_token"]
+            )["status_code"] in [200, 201]) is True
