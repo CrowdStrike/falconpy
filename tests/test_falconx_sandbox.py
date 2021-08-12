@@ -1,6 +1,6 @@
-# test_falconx_sandbox.py
-# This class tests the falconx_sandbox service class
-
+"""
+test_falconx_sandbox.py - This class tests the falconx_sandbox service class
+"""
 import os
 import sys
 import pytest
@@ -16,74 +16,64 @@ auth = Authorization.TestAuthorization()
 auth.getConfig()
 falcon = FalconXSandbox(creds={"client_id": auth.config["falcon_client_id"],
                                "client_secret": auth.config["falcon_client_secret"]})
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 201, 400, 403, 404, 429]  # Adding rate-limiting as an allowed response for now
 
 
-class TestFalconX:
+class TestFalconXSandbox:
+    """
+    Test Harness for the Falcon X Sandbox Service Class
+    """
+    def falconx_generate_errors(self):
+        """
+        Executes every statement in every method of the class, accepts all errors except 500
+        """
+        error_checks = True
+        tests = {
+            "get_artifacts": falcon.GetArtifacts(parameters={})["status_code"],
+            "get_summary_reports": falcon.GetSummaryReports(ids='12345678')["status_code"],
+            "get_reports": falcon.GetReports(ids='12345678')["status_code"],
+            "delete_report": falcon.DeleteReport(ids='12345678')["status_code"],
+            "get_submissions": falcon.GetSubmissions(ids='12345678')["status_code"],
+            "submit": falcon.Submit(body={})["status_code"],
+            "query_reports": falcon.QueryReports()["status_code"],
+            "query_submissions": falcon.QuerySubmissions()["status_code"],
+            "get_sample": falcon.GetSampleV2(ids='12345678')["status_code"],
+            "upload_sample": falcon.UploadSampleV2(body={}, parameters={}, file_data='')["status_code"],
+            "delete_sample": falcon.DeleteSampleV2(ids='12345678')["status_code"],
+            "query_sample": falcon.QuerySampleV1({'sha256s': ['12345678']})["status_code"]
+        }
+        for key in tests:
+            if tests[key] not in AllowedResponses:
+                error_checks = False
 
-    def serviceFalconX_QueryReports(self):
-        if falcon.QueryReports(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+            # print(f"{key} operation returned a {tests[key]} status code")
 
-    def serviceFalconX_QuerySubmissions(self):
-        if falcon.QuerySubmissions(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+        return error_checks
 
-    def serviceFalconX_GetSummaryReports(self):
-        if falcon.GetSummaryReports(
-                    ids=falcon.QueryReports(
-                        parameters={"limit": 1}
-                    )["body"]["resources"]
-                )["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+    def test_query_reports(self):
+        """Pytest harness hook"""
+        assert bool(falcon.QueryReports(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
-    def serviceFalconX_GenerateErrors(self):
-        falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["GetArtifacts", "parameters={}"],
-            ["GetSummaryReports", "ids='12345678'"],
-            ["GetReports", "ids='12345678'"],
-            ["DeleteReport", "ids='12345678'"],
-            ["GetSubmissions", "ids='12345678'"],
-            ["Submit", "body={}"],
-            ["QueryReports", ""],
-            ["QuerySubmissions", ""],
-            ["GetSampleV2", "ids='12345678'"],
-            ["UploadSampleV2", "body={}, parameters={}, file_data=''"],
-            ["DeleteSampleV2", "ids='12345678'"],
-            ["QuerySampleV1", "{'sha256s': ['12345678']}"]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
-
-        return errorChecks
-
-    def falconx_logout(self):
-        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] == 200:
-            return True
-        else:
-            return False
-
-    def test_QueryReports(self):
-        assert self.serviceFalconX_QueryReports() is True
-
-    def test_QuerySubmissions(self):
-        assert self.serviceFalconX_QuerySubmissions() is True
+    def test_query_submissions(self):
+        """Pytest harness hook"""
+        assert bool(falcon.QuerySubmissions(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
     @pytest.mark.skipif(falcon.QueryReports(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
-    def test_GetSummaryReports(self):
-        assert self.serviceFalconX_GetSummaryReports() is True
+    def test_get_summary_reports(self):
+        """Pytest harness hook"""
+        assert bool(falcon.GetSummaryReports(
+                        ids=falcon.QueryReports(
+                            parameters={"limit": 1}
+                        )["body"]["resources"]
+                    )["status_code"] in AllowedResponses) is True
 
-    def test_Logout(self):
-        assert self.falconx_logout() is True
+    def test_errors(self):
+        """Pytest harness hook"""
+        assert self.falconx_generate_errors() is True
 
-    def test_Errors(self):
-        assert self.serviceFalconX_GenerateErrors() is True
+    @staticmethod
+    def test_logout():
+        """Pytest harness hook"""
+        assert bool(falcon.auth_object.revoke(
+            falcon.auth_object.token()["body"]["access_token"]
+            )["status_code"] in [200, 201]) is True

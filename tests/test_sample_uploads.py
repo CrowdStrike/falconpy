@@ -1,6 +1,6 @@
-# test_sample_uploads.py
-# This class tests the sample_uploads service class
-
+"""
+test_sample_uploads.py - This class tests the sample_uploads service class
+"""
 import os
 import sys
 import pytest
@@ -17,11 +17,14 @@ auth = Authorization.TestAuthorization()
 auth.getConfig()
 falcon = Sample_Uploads(creds={"client_id": auth.config["falcon_client_id"],
                                "client_secret": auth.config["falcon_client_secret"]})
-AllowedResponses = [200, 201, 429]
+AllowedResponses = [200, 201, 400, 404, 429]
 
 
 class TestSampleUploads:
     def sample_upload_download_delete(self):
+        """
+        Tests all functionality within the class by performing an upload / download / compare / delete.
+        """
         FILENAME = "tests/testfile.png"
         fmt = '%Y-%m-%d %H:%M:%S'
         stddate = datetime.datetime.now().strftime(fmt)
@@ -76,30 +79,34 @@ class TestSampleUploads:
             return True
 
     def sample_errors(self):
-        falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["UploadSampleV3", "file_data={}, file_name='oops_I_broke_it.jpg'"],
-            ["GetSampleV3", "ids='DoesNotExist'"],
-            ["DeleteSampleV3", "ids='12345678'"]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+        """
+        Executes every statement in every method of the class, accepts all errors except 500
+        """
+        error_checks = True
+        tests = {
+            "upload_sample": falcon.UploadSampleV3(file_data={}, file_name='oops_I_broke_it.jpg')["status_code"],
+            "get_sample": falcon.GetSampleV3(ids='DoesNotExist')["status_code"],
+            "delete_sample": falcon.DeleteSampleV3(ids='12345678')["status_code"]
+        }
+        for key in tests:
+            if tests[key] not in AllowedResponses:
+                error_checks = False
 
-        return errorChecks
+            # print(f"{key} operation returned a {tests[key]} status code")
 
-    def sample_logout(self):
-        if falcon.auth_object.revoke(falcon.auth_object.token()["body"]["access_token"])["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+        return error_checks
 
-    def test_TestAllFunctionality(self):
+    def test_all_functionality(self):
+        """Pytest harness hook"""
         assert self.sample_upload_download_delete() is True
 
     def test_errors(self):
+        """Pytest harness hook"""
         assert self.sample_errors() is True
 
-    def test_logout(self):
-        assert self.sample_logout() is True
+    @staticmethod
+    def test_logout():
+        """Pytest harness hook"""
+        assert bool(falcon.auth_object.revoke(
+            falcon.auth_object.token()["body"]["access_token"]
+            )["status_code"] in [200, 201]) is True
