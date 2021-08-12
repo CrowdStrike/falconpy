@@ -42,8 +42,11 @@ from ._endpoint._ioc import _ioc_endpoints as Endpoints
 
 
 class IOC(ServiceClass):
-    """ The only requirement to instantiate an instance of this class
-        is a valid token provided by the Falcon API SDK OAuth2 class.
+    """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def indicator_combined(self: object, parameters: dict = None, **kwargs) -> dict:
@@ -122,6 +125,8 @@ class IOC(ServiceClass):
             params=parameters
             )
 
+    # These names are acceptable and match the API operation IDs.
+    # They are defined here for ease of use purposes.
     indicator_combined_v1 = indicator_combined
     indicator_get_v1 = indicator_get
     indicator_create_v1 = indicator_create
