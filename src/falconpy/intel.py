@@ -36,7 +36,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
 from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._intel import _intel_endpoints as Endpoints
@@ -45,10 +44,12 @@ from ._endpoint._intel import _intel_endpoints as Endpoints
 class Intel(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryIntelActorEntities(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_actor_entities(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get info about actors that match provided FQL filters.
         """
@@ -62,7 +63,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryIntelIndicatorEntities(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_indicator_entities(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get info about indicators that match provided FQL filters.
         """
@@ -76,7 +77,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryIntelReportEntities(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_report_entities(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get info about reports that match provided FQL filters.
         """
@@ -90,7 +91,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetIntelActorEntities(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_actor_entities(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve specific actors using their actor IDs.
         """
@@ -103,7 +104,7 @@ class Intel(ServiceClass):
             params=parameters
             )
 
-    def GetIntelIndicatorEntities(self: object, body: dict) -> dict:
+    def get_indicator_entities(self: object, body: dict) -> dict:
         """
         Retrieve specific indicators using their indicator IDs.
         """
@@ -117,7 +118,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetIntelReportPDF(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_report_pdf(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Return a Report PDF attachment.
         """
@@ -131,7 +132,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetIntelReportEntities(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_report_entities(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve specific reports using their report IDs.
         """
@@ -145,7 +146,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetIntelRuleFile(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_rule_file(self: object, parameters: dict = None, **kwargs) -> dict:
         # There is an optional header you can see Accept to choose the result format. See Swagger.
         """
         Download earlier rule sets.
@@ -160,7 +161,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetLatestIntelRuleFile(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_latest_rule_file(self: object, parameters: dict = None, **kwargs) -> dict:
         # There is an optional header you can see Accept to choose the result format. See Swagger.
         """
         Download the latest rule set.
@@ -175,7 +176,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetIntelRuleEntities(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_rule_entities(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve details for rule sets for the specified ids.
         """
@@ -189,7 +190,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryIntelActorIds(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_actor_ids(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get actor IDs that match provided FQL filters.
         """
@@ -203,7 +204,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryIntelIndicatorIds(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_indicator_ids(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get indicators IDs that match provided FQL filters.
         """
@@ -217,7 +218,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryIntelReportIds(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_report_ids(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get report IDs that match provided FQL filters.
         """
@@ -231,7 +232,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryIntelRuleIds(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_rule_ids(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for rule IDs that match provided filter criteria.
         """
@@ -243,3 +244,21 @@ class Intel(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    QueryIntelActorEntities = query_actor_entities
+    QueryIntelIndicatorEntities = query_indicator_entities
+    QueryIntelReportEntities = query_report_entities
+    GetIntelActorEntities = get_actor_entities
+    GetIntelIndicatorEntities = get_indicator_entities
+    GetIntelReportPDF = get_report_pdf
+    GetIntelReportEntities = get_report_entities
+    GetIntelRuleFile = get_rule_file
+    GetLatestIntelRuleFile = get_latest_rule_file
+    GetIntelRuleEntities = get_rule_entities
+    QueryIntelActorIds = query_actor_ids
+    QueryIntelIndicatorIds = query_indicator_ids
+    QueryIntelReportIds = query_report_ids
+    QueryIntelRuleIds = query_rule_ids
