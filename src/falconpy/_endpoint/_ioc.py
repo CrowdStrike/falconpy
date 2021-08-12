@@ -59,6 +59,14 @@ _ioc_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "A pagination token used with the `limit` parameter to manage pagination "
+        "of results. On your first request, don't provide an `after` token. On subsequent requests, "
+        "provide the `after` token from the previous response to continue from that place in the results.",
+        "name": "after",
+        "in": "query"
+      },
+      {
         "type": "integer",
         "description": "The maximum records to return.",
         "name": "limit",
@@ -229,6 +237,14 @@ _ioc_endpoints = [
         "description": "The offset to start retrieving records from. Offset and After params are mutually exclusive. "
         "If none provided then scrolling will be used by default.",
         "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "A pagination token used with the `limit` parameter to manage pagination "
+        "of results. On your first request, don't provide an `after` token. On subsequent requests, "
+        "provide the `after` token from the previous response to continue from that place in the results.",
+        "name": "after",
         "in": "query"
       },
       {
