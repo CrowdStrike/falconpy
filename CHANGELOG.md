@@ -33,6 +33,7 @@ print(bad_result)                                # that the "ids" parameter is n
 
 + Related to #263: Updated Uber class to no longer leverage the force_default helper, allowing users to still use the first argument to specify the action to be performed. `api_complete.py`
 > Note: This functionality _only_ works when using the Uber class, and _only_ with the __action__ parameter.
++ Bug fix: Added the **after** parameter to the endpoint parameter definitions for _indicator_combined_v1_ and _indicator_search_v1_. Closes #266. `_endpoint/_ioc.py`
 
 ## Other
 + Initial refactoring of unit test harnesses for service classes detailed above.
