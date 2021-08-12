@@ -113,7 +113,7 @@ print(bad_result)                                # that the "ids" parameter is n
 + Added unit testing for new service class.
 + Unit testing updates to complete code coverage.
 + README.md updated.
-+ Added additional classifers and developer requirements to PIP package metadata. (`setup.py`)
++ Added additional classifiers and developer requirements to PIP package metadata. (`setup.py`)
 
 # Version 0.5.3
 ## Issues resolved
