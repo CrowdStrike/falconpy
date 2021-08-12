@@ -143,7 +143,7 @@ def force_default(defaults: list, default_types: list = None):
                 element_count += 1
             # The passed us an argument but did not specify what it was (non-keyword) [Issue #263]
             if len(args) > 1:
-                args = args[:-1]
+                args = [args[0]]
             return func(*args, **kwargs)
         return factory
     return wrapper
