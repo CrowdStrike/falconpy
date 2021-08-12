@@ -45,7 +45,9 @@ from ._endpoint._custom_ioa import _custom_ioa_endpoints as Endpoints
 class CustomIOA(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_patterns(self: object, parameters: dict = None, **kwargs) -> dict:

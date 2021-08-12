@@ -45,7 +45,9 @@ from ._endpoint._falconx_sandbox import _falconx_sandbox_endpoints as Endpoints
 class FalconXSandbox(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_artifacts(self: object, parameters: dict = None, **kwargs) -> object:

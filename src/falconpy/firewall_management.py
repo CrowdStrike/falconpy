@@ -45,7 +45,9 @@ from ._endpoint._firewall_management import _firewall_management_endpoints as En
 class FirewallManagement(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
     def aggregate_events(self: object, body: dict) -> dict:
         """

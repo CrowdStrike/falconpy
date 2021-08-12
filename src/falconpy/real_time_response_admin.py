@@ -44,7 +44,9 @@ from ._endpoint._real_time_response_admin import _real_time_response_admin_endpo
 class RealTimeResponseAdmin(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def batch_admin_command(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
