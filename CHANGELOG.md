@@ -4,6 +4,7 @@
 + Refactored Custom IOA Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #258. `custom_ioa.py`
 + Refactored Falcon X Sandbox Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #259. `falconx_sandbox.py`
 + Refactored Firewall Management Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #257. `firewall_management.py`
++ Refactored IOC Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #267. `ioc.py`
 + Refactored Intel Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #264. `intel.py`
 + Refactored Real Time Response Admin Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #256. `real_time_response_admin.py`
 + Refactored Sample Uploads Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #255. `sample_uploads.py`
