@@ -1,3 +1,129 @@
+# Version 0.5.7
+## Added features and functionality
++ Refactored Sample Uploads Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #255. `sample_uploads.py`
++ Refactored Real Time Response Admin Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #256. `real_time_response_admin.py`
++ Refactored Firewall Management Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #257. `firewall_management.py`
++ Refactored Custom IOA Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #258. `custom_ioa.py`
++ Refactored Falcon X Sandbox Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #259. `falconx_sandbox.py`
++ Refactored Zero Trust Assessment Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #260. `zero_trust_assessment.py`
++ Refactored Events Streams Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #248. `event_streams.py`
+
+## Issues resolved
++ Bug fix: Resolved HTTP status code 415 on calls to refreshActiveStreamSession (refresh_active_stream). Closes #247. `event_streams.py`
++ Bug fix: Resolved header pollution issue within Falcon X Sandbox Service Class. Closes #250. `falconx_sandbox.py`
++ Bug fix: Resolved header pollution issue within Firewall Management Service Class. Closes #252. `firewall_management.py`
++ Bug fix: Resolved header pollution issue within Custom IOA Service Class. Closes #253. `custom_ioa.py`
++ Bug fix: Resolved header pollution issue within Sample Uploads Service Class. Closes #254. `sample_uploads.py`
++ Bug fix: Resolved HTTP status code 500 error on calls to RTR_CreatePut_Files (create_put_files). Closes #261. `real_time_response_admin.py`
++ Bug fix: Resolved HTTP status code 400 or 500 error on calls to RTR_UpdateScripts (update_scripts) and calls to RTR_CreateScripts (create_scripts). Closes #262. `real_time_response_admin.py`
++ Bug fix: Updated force_default helper function to drop all but the first argument passed to the method, forcing Service Classes to support keywords only. Closes #263. `_util.py`
+> Potential __*breaking change*__: Developers must use keywords, __not arguments__, when specifying parameters provided to Service Class methods.
+#### Example
+```python
+from falconpy.hosts import Hosts
+falcon = Hosts(creds={"client_id": CLIENT_ID_HERE, "client_secret": CLIENT_SECRET_HERE})
+
+result = falcon.GetDeviceDetails(ids="12345"))   # This command will work
+print(result)
+
+bad_result = falcon.GetDeviceDetails("12345")    # This command will fail with the API complaining
+print(bad_result)                                # that the "ids" parameter is not present.
+```
+
++ Related to #263: Updated Uber class to no longer leverage the force_default helper, allowing users to still use the first argument to specify the action to be performed. `api_complete.py`
+> Note: This functionality _only_ works when using the Uber class, and _only_ with the __action__ parameter.
+
+## Other
++ Initial refactoring of unit test harnesses for service classes detailed above.
+    - `test_cloud_connect_aws.py`
+    - `test_custom_ioa.py`
+    - `test_event_streams.py`
+    - `test_falconx_sandbox.py`
+    - `test_firewall_management.py`
+    - `test_real_time_response_admin.py` (Updated to cover additional API operations)
+    - `test_sample_uploads.py`
+    - `zero_trust_assessment.py`
++ Minor adjustment to Uber class unit tests to better demonstrate proper method usage. `test_uber_api_complete.py`
++ Initial refactoring of unit tests to support US-2 / Gov base URL testing.
+    - `test_authorization.py`
+
+# Version 0.5.6
+## Added features and functionality
++ Added: New functionality for handling service class modules within FalconDebug.
+
+## Issues resolved
++ Bug fix: Resolved JSONDecode error on RTR_DeleteSession. Closes #238.
++ Bug fix: Resolved issue with credential authentication in service classes not respecting custom API configuration attributes. Closes #242. 
+
+## Other
++ Package metadata updates
++ Updated IDP unit tests to more accurately cover functionality
++ Flaky unit test adjustments
++ FalconDebug added to linting workflows `debug.py`
+
+# Version 0.5.5
+## Added features and functionality
++ Refactored Custom IOA Service Class to the new pattern to provide for new parameter handling functionality, closes #217. `custom_ioa.py`
++ Refactored Device Control Policies Service Class to the new pattern to provide for new parameter handling functionality, closes #224. `device_control_policies.py`
++ Refactored Firewall Policies Service Class to the new pattern to provide for new parameter handling functionality, closes #227. `firewall_policies.py`
++ Refactored Firewall Management Service Class to match the most recent pattern, closes #232. `firewall_management.py`
++ Refactored Falcon X Sandbox Service Class to the new pattern to provide for new parameter handling functionality, closes #226. `falconx_sandbox.py`
++ Refactored Hosts Service Class to the new pattern to provide for new parameter handling functionality, closes #218. `hosts.py`
++ Refactored Host Group Service Class to the new pattern to provide for new parameter handling functionality, closes #223. `host_group.py`
++ Refactored Intel Service Class to match the most recent pattern, closes #231. `intel.py`
++ Refactored OAuth2 class to reflect new functionality and linting patterns, closes #233. `oauth2.py`
++ Refactored Quick Scan Service Class to match the most recent pattern, closes #219. `quick_scan.py`
++ Refactored Real Time Response Service Class to match the most recent pattern, closes #230. `real_time_response.py`
++ Refactored Real Time Response Admin Service Class to match the most recent pattern, closes #229. `real_time_response_admin.py`
++ Refactored Sensor Updated Policy Service Class to the new pattern to provide for new parameter handling functionality, closes #222. `sensor_update_policy.py`
++ Refactored Sensor Downloads Service Class to the new pattern to provide for new parameter handling functionality, closes #221. `sensor_downloads.py`
++ Refactored Sample Uploads Service Class to the new pattern to provide for new parameter handling functionality, closes #220. `sample_uploads.py`
++ Refactored User Management Service Class to match the most recent pattern, closes #228. `user_management.py`
+
+## Issues resolved
++ Bug fix: Resolved issue with the timeout parameter not being passed to the OAuth2 class when legacy authentication was being used. Closes #225.
+
+## Other
++ Enabled Pylint stopping the build on linting failures within package source.
++ Unit test updates to expand code coverage for new code paths.
++ This update provides part of the functionality requested in #115.
+
+# Version 0.5.4
+## Added features and functionality
++ Added `identity_protection.py` - Identity Protection service class.
++ Added utility to create a zip archive to be used with AWS Lambda layers. (`create-lambda-layer.sh`)
+
+## Issues resolved
++ Bug fix: Resolved order of operations issue with body validation in __validate_payload__ helper function. (`_util.py`)
++ Updated `cloud_connect_aws.py` - Cloud_Connect_AWS Service Class. Closes #209.
++ Updated `detects.py` - Detects Service Class. Closes #210.
++ Updated `event_streams.py` - Event Streams Service Class. Closes #212.
++ Updated `incidents.py` - Incidents Service Class. Closes #213.
++ Updated `spotlight_vulnerabilities.py` - Spotlight Vulnerabilities Service Class. Closes #214.
++ Updated `zero_trust_assessment.py` - Zero Trust Assessment Service Class. Closes #211.
++ Updated query used for unit testing of Spotlight Vulnerabilities service class. 2020 -> 2021 (`test_spotlight_vulnerabilities.py`)
++ Bug fix: Resolved flaky unit test for RegenerateAPIKey for Kubernetes Protection service class. (`test_kubernetes_protection.py`).
+
+## Other
++ Added pylint workflow to push / pull_request actions.
++ _endpoint module updates to support new service class.
++ Added unit testing for new service class.
++ Unit testing updates to complete code coverage.
++ README.md updated.
++ Added additional classifers and developer requirements to PIP package metadata. (`setup.py`)
+
+# Version 0.5.3
+## Issues resolved
++ Bug fix: Resolves #200 by moving the failing method (entities_processes) in `iocs.py` to the latest code pattern.
+
+# Version 0.5.2
+## Issues resolved
++ Fixed: Incorrect endpoint specified in the updateSensorUpdatePoliciesV2 method within the Sensor Update Policy service class.
+
+# Version 0.5.1
+## Issues resolved
++ Fixed: https://github.com/CrowdStrike/falconpy/issues/181 by adding the parameters to the create and update ioc functions.
+
 # Version 0.5.0
 ## Added features and functionality
 + Added: IOC API Service Class (`ioc.py`)
