@@ -1,5 +1,6 @@
-# test_intel.py
-# This class tests the intel service class
+"""
+test_intel.py - This class tests the intel service class
+"""
 import os
 import sys
 import pytest
@@ -8,152 +9,54 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # flake8: noqa=E401  # Classes to test - manually imported from sibling folder
-from falconpy import intel as FalconIntel
+from falconpy.intel import Intel
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconIntel.Intel(access_token=auth.token)
+auth.getConfig()
+falcon = Intel(creds={"client_id": auth.config["falcon_client_id"],
+                      "client_secret": auth.config["falcon_client_secret"]})
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestIntel:
-    def serviceIntel_QueryIntelActorEntities(self):
-        if falcon.QueryIntelActorEntities(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+    """
+    Intel Service Class test harness
+    """
+    def intel_test_all_code_paths(self):
+        """
+        Tests every statement within every method of the class, accepts all errors except 500
+        """
+        error_checks = True
+        tests = {
+            "query_intel_actor_entities": falcon.QueryIntelActorEntities(limit=1)["status_code"],
+            "query_intel_indicator_entities": falcon.QueryIntelIndicatorEntities(parameters={"limit": 1})["status_code"],
+            "query_intel_report_entities": falcon.QueryIntelReportEntities()["status_code"],
+            "get_intel_actor_entities": falcon.GetIntelActorEntities(ids='12345678')["status_code"],
+            "get_intel_indicator_entities": falcon.GetIntelIndicatorEntities(body={})["status_code"],
+            "get_intel_report_pdf": falcon.GetIntelReportPDF(parameters={})["status_code"],
+            "get_intel_report_entities": falcon.GetIntelReportEntities(ids='12345678')["status_code"],
+            "get_intel_rule_file": falcon.GetIntelRuleFile(parameters={})["status_code"],
+            "get_latest_intel_rule_file": falcon.GetLatestIntelRuleFile(parameters={})["status_code"],
+            "get_intel_rule_entities": falcon.GetIntelRuleEntities(ids='12345678')["status_code"],
+            "query_intel_actor_ids": falcon.QueryIntelActorIds()["status_code"],
+            "query_intel_indicator_ids": falcon.QueryIntelIndicatorIds(limit=5)["status_code"],
+            "query_intel_report_ids": falcon.QueryIntelReportIds(limit=1)["status_code"],
+            "query_intel_rule_ids": falcon.QueryIntelRuleIds(parameters={"type": "common-event-format"})["status_code"]
+        }
+        for key in tests:
+            if tests[key] not in AllowedResponses:
+                error_checks = False
 
-    def serviceIntel_QueryIntelIndicatorEntities(self):
-        if falcon.QueryIntelIndicatorEntities(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+            # print(f"{key} operation returned a {tests[key]} status code")
 
-    def serviceIntel_QueryIntelReportEntities(self):
-        if falcon.QueryIntelReportEntities(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+        return error_checks
 
-    def serviceIntel_GetIntelActorEntities(self):
-        result = falcon.GetIntelActorEntities(
-            ids=falcon.QueryIntelActorEntities(parameters={"limit": 1})["body"]["resources"][0]["id"]
-            )
-        if result["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+    def test_all_code_paths(self):
+        assert self.intel_test_all_code_paths() is True
 
-    def serviceIntel_GetIntelIndicatorEntities(self):
-        result = falcon.GetIntelIndicatorEntities(
-            body={"id": falcon.QueryIntelIndicatorIds(parameters={"limit": 1})["body"]["resources"][0]}
-            )
-        if result["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceIntel_GetIntelReportEntities(self):
-        result = falcon.GetIntelReportEntities(
-            ids=falcon.QueryIntelReportEntities(parameters={"limit": 1})["body"]["resources"][0]["id"]
-            )
-        if result["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceIntel_QueryIntelActorIds(self):
-        if falcon.QueryIntelActorIds(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceIntel_QueryIntelIndicatorIds(self):
-        if falcon.QueryIntelIndicatorIds(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceIntel_QueryIntelReportIds(self):
-        if falcon.QueryIntelReportIds(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceIntel_QueryIntelRuleIds(self):
-        result = falcon.QueryIntelRuleIds(parameters={"limit": 1, "type": "common-event-format"})
-        if result["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceIntel_GenerateErrors(self):
-        falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["QueryIntelActorEntities", ""],
-            ["QueryIntelIndicatorEntities", ""],
-            ["QueryIntelReportEntities", ""],
-            ["GetIntelActorEntities", "ids='12345678'"],
-            ["GetIntelIndicatorEntities", "body={}"],
-            ["GetIntelReportPDF", "parameters={}"],
-            ["GetIntelReportEntities", "ids='12345678'"],
-            ["GetIntelRuleFile", "parameters={}"],
-            ["GetLatestIntelRuleFile", "parameters={}"],
-            ["GetIntelRuleEntities", "ids='12345678'"],
-            ["QueryIntelActorIds", ""],
-            ["QueryIntelIndicatorIds", ""],
-            ["QueryIntelReportIds", ""],
-            ["QueryIntelRuleIds", "parameters={}"]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
-
-        return errorChecks
-
-    def test_QueryIntelActorEntities(self):
-        assert self.serviceIntel_QueryIntelActorEntities() is True
-
-    def test_QueryIntelIndicatorEntities(self):
-        assert self.serviceIntel_QueryIntelIndicatorEntities() is True
-
-    def test_QueryIntelReportEntities(self):
-        assert self.serviceIntel_QueryIntelReportEntities() is True
-
-    @pytest.mark.skipif(
-        falcon.QueryIntelActorEntities(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
-        )
-    def test_GetIntelActorEntities(self):
-        assert self.serviceIntel_GetIntelActorEntities() is True
-
-    # Not working - data issue with input body payload
-    # @pytest.mark.skipif(
-    #     falcon.QueryIntelIndicatorIds(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached"
-    #     )
-    # def test_GetIntelIndicatorEntities(self):
-    #     assert self.serviceIntel_GetIntelIndicatorEntities() is True
-
-    @pytest.mark.skipif(
-        falcon.QueryIntelReportEntities(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
-        )
-    def test_GetIntelReportEntities(self):
-        assert self.serviceIntel_GetIntelReportEntities() is True
-
-    def test_QueryIntelActorIds(self):
-        assert self.serviceIntel_QueryIntelActorIds() is True
-
-    def test_QueryIntelIndicatorIds(self):
-        assert self.serviceIntel_QueryIntelIndicatorIds() is True
-
-    def test_QueryIntelReportIds(self):
-        assert self.serviceIntel_QueryIntelReportIds() is True
-
-    def test_QueryIntelRuleIds(self):
-        assert self.serviceIntel_QueryIntelRuleIds() is True
-
-    def test_Logout(self):
-        assert auth.serviceRevoke() is True
-
-    def test_Errors(self):
-        assert self.serviceIntel_GenerateErrors() is True
+    @staticmethod
+    def test_logout():
+        """Pytest harness hook"""
+        assert bool(falcon.auth_object.revoke(
+            falcon.auth_object.token()["body"]["access_token"]
+            )["status_code"] in [200, 201]) is True
