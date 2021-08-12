@@ -50,7 +50,9 @@ class IOC(ServiceClass):
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def indicator_combined(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Get Combined for Indicators."""
+        """
+        Get Combined for Indicators.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.combined.v1
         return process_service_request(
             calling_object=self,
@@ -62,7 +64,9 @@ class IOC(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def indicator_get(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Get Indicators by ids."""
+        """
+        Get Indicators by ids.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.v1
         return process_service_request(
             calling_object=self,
@@ -74,7 +78,9 @@ class IOC(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def indicator_create(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
-        """Create Indicators."""
+        """
+        Create Indicators.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.create.v1
         return process_service_request(
             calling_object=self,
@@ -88,7 +94,9 @@ class IOC(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def indicator_delete(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Delete Indicators by ids."""
+        """
+        Delete Indicators by ids.
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.delete.v1
         return process_service_request(
             calling_object=self,
@@ -101,7 +109,9 @@ class IOC(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def indicator_update(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
-        """Update Indicators."""
+        """
+        Update Indicators.
+        """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.update.v1
         return process_service_request(
             calling_object=self,
@@ -115,7 +125,9 @@ class IOC(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def indicator_search(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Indicators."""
+        """
+        Search for Indicators.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.search.v1
         return process_service_request(
             calling_object=self,
