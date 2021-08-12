@@ -66,4 +66,4 @@ class TestFirewallManagement:
         """Pytest harness hook"""
         assert bool(falcon.auth_object.revoke(
             falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in [200, 201]) is True
+            )["status_code"] in AllowedResponses) is True
