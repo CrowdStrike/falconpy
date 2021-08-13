@@ -108,10 +108,14 @@ def generate_b64cred(client_id: str, client_secret: str) -> str:
 
 
 def handle_single_argument(passed_arguments: list, passed_keywords: dict, search_key: str) -> dict:
-    if len(passed_arguments) > 0:                   # Argument specification - Using arguments to specify IDs will override
-        passed_keywords[search_key] = passed_arguments[0]     # values specified in the ids keyword or parameters dictionary
+    """
+    Reviews arguments passed to a method and injects them into the keyword dictionary if they match the search string
+    """
+    if len(passed_arguments) > 0:
+        passed_keywords[search_key] = passed_arguments[0]
 
     return passed_keywords
+
 
 def force_default(defaults: list, default_types: list = None):
     """
