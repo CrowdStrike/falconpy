@@ -1,5 +1,6 @@
-# test_detects.py
-# This class tests the detects service class
+"""
+test_detects.py - This class tests the detects service class
+"""
 import json
 import os
 import sys
@@ -12,18 +13,17 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import detects as FalconDetections
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconDetections.Detects(access_token=auth.token)
+auth.getConfig()
+falcon = FalconDetections.Detects(creds={"client_id": auth.config["falcon_client_id"],
+                                         "client_secret": auth.config["falcon_client_secret"]
+                                         })
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestDetects:
-
-    def serviceDetects_QueryDetects(self):
-        if falcon.QueryDetects(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+    """
+    Detects Service Class test harness
+    """
 
     def serviceDetects_GetDetectSummaries(self):
         if falcon.GetDetectSummaries(
@@ -63,7 +63,7 @@ class TestDetects:
         return errorChecks
 
     def test_QueryDetects(self):
-        assert self.serviceDetects_QueryDetects() is True
+        assert bool(falcon.QueryDetects(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
     @pytest.mark.skipif(falcon.QueryDetects(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetDetectSummaries(self):
@@ -72,8 +72,14 @@ class TestDetects:
     # def test_GetAggregateDetects(self):
     #     assert self.serviceDetects_GetAggregateDetects() == True
 
-    def test_logout(self):
-        assert auth.serviceRevoke() is True
+    @staticmethod
+    def test_logout():
+        """
+        Pytest harness hook
+        """
+        assert bool(falcon.auth_object.revoke(
+            falcon.auth_object.token()["body"]["access_token"]
+            )["status_code"] in AllowedResponses) is True
 
     def test_Errors(self):
         assert self.serviceDetects_GenerateErrors() is True
