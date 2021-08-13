@@ -1,5 +1,6 @@
-# test_hosts.py
-# This class tests the hosts service class
+"""
+test_hosts.py -  This class tests the hosts service class
+"""
 
 import os
 import sys
@@ -12,44 +13,20 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import hosts as FalconHosts
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconHosts.Hosts(access_token=auth.token)
+auth.getConfig()
+falcon = FalconHosts.Hosts(creds={"client_id": auth.config["falcon_client_id"],
+                                  "client_secret": auth.config["falcon_client_secret"]})
 AllowedResponses = [200, 202, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestHosts:
-
-    def serviceHosts_QueryHiddenDevices(self):
-        if falcon.QueryHiddenDevices(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceHosts_QueryDevicesByFilterScroll(self):
-        if falcon.QueryDevicesByFilterScroll(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceHosts_QueryDevicesByFilter(self):
-        if falcon.QueryDevicesByFilter(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    # Commenting out until the updated hosts service class is available
-    # @pytest.mark.skipif(
-    #     falcon.QueryDevicesByFilter(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
-    #     )
-    # def serviceHosts_GetDeviceDetails(self):
-        # if falcon.GetDeviceDetails(
-        #     ids=falcon.QueryDevicesByFilter(parameters={"limit":1})["body"]["resources"][0]
-        # )["status_code"] in AllowedResponses:
-        #     return True
-        # else:
-        #     return False
-
-    def serviceHosts_addTag(self):
+    """
+    Hosts Service Class test harness
+    """
+    def hosts_add_tag(self):
+        """
+        Tests tagging functionality
+        """
         id_list = []
         id_list.append(
             falcon.GetDeviceDetails(
@@ -104,7 +81,10 @@ class TestHosts:
 
         return True
 
-    def serviceHosts_GenerateTagError(self):
+    def hosts_generate_tag_error(self):
+        """
+        Tests tag error handling
+        """
         id_list = []
         id_list.append(
             falcon.GetDeviceDetails(
@@ -118,66 +98,83 @@ class TestHosts:
             return False
         return True
 
-    def serviceHosts_PerformActionV2(self):
-        id_list = []
-        id_list.append(
-            falcon.GetDeviceDetails(
-                ids=falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]
-                )["body"]["resources"][0]["device_id"]
-        )
-        if falcon.PerformActionV2(
-                parameters={
-                    "action_name": "unhide_host"
-                },
-                body={
-                    "ids": id_list
-                }
-                )["status_code"] in AllowedResponses:
-            return True
+    def hosts_perform_action(self):
+        """
+        Tests the perform action endpoint
+        """
+        test_id = [falcon.QueryDevicesByFilter(limit=1)["body"]["resources"][0]]
+        payload = {"ids": test_id}
+        action_test = falcon.PerformActionV2(action_name="hide_host", body=payload)
+        if action_test["status_code"] == 202:
+            action_test = falcon.PerformActionV2(action_name="unhide_host", body=payload)
+            if action_test["status_code"] == 202:
+                return True
+            else:
+                return False
         else:
             return False
 
-    def serviceHosts_GenerateErrors(self):
+    def hosts_generate_errors(self):
+        """
+        Generates a series of 500 errors to test remaining code paths
+        """
         falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["PerformActionV2", "body={}, action_name='unhide_host', parameters={}"],
-            ["PerformActionV2", "body={}, parameters={'action_name':'PooF'}"],
-            ["PerformActionV2", "body={}, parameters={}"],
-            ["GetDeviceDetails", "ids='12345678'"],
-            ["QueryHiddenDevices", ""],
-            ["QueryDevicesByFilterScroll", ""],
-            ["QueryDevicesByFilter", ""]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+        error_checks = True
+        tests = {
+            "perform_action": falcon.PerformActionV2(body={}, action_name='unhide_host', parameters={})["status_code"],
+            "perform_action_params": falcon.PerformActionV2(body={}, parameters={'action_name': 'PooF'})["status_code"],
+            "perform_action_null": falcon.PerformActionV2(body={}, parameters={})["status_code"],
+            "get_device_details": falcon.GetDeviceDetails(ids='12345678')["status_code"],
+            "query_hidden_devices": falcon.QueryHiddenDevices()["status_code"],
+            "query_devices_by_filter_scroll": falcon.QueryDevicesByFilterScroll()["status_code"],
+            "query_devices_by_filter": falcon.QueryDevicesByFilter()["status_code"]
+        }
+        for key in tests:
+            if tests[key] != 500:
+                error_checks = False
+            # print(f"{key} test returned a {tests[key]} status code")
+        return error_checks
 
-        return errorChecks
+    def test_query_hidden_devices(self):
+        """Pytest harness hook"""
+        assert bool(falcon.QueryHiddenDevices(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
-    def test_QueryHiddenDevices(self):
-        assert self.serviceHosts_QueryHiddenDevices() is True
+    def test_query_devices_by_filter_scroll(self):
+        """Pytest harness hook"""
+        assert bool(falcon.QueryDevicesByFilterScroll(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
-    def test_QueryDevicesByFilterScroll(self):
-        assert self.serviceHosts_QueryDevicesByFilterScroll() is True
-
-    def test_QueryDevicesByFilter(self):
-        assert self.serviceHosts_QueryDevicesByFilter() is True
+    def test_query_devices_by_filter(self):
+        """Pytest harness hook"""
+        assert bool(falcon.QueryDevicesByFilter(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
     def test_tagging(self):
-        assert self.serviceHosts_addTag() is True
+        """Pytest harness hook"""
+        assert self.hosts_add_tag() is True
 
-    def test_GenerateTagError(self):
-        assert self.serviceHosts_GenerateTagError() is True
-    # def test_GetDeviceDetails(self):
-    #     assert self.serviceHosts_GetDeviceDetails() is True
+    def test_generate_tag_error(self):
+        """Pytest harness hook"""
+        assert self.hosts_generate_tag_error() is True
 
-    # Not working... need to pull a valid AID
-    # def test_PerformActionV2(self):
-    #     assert self.serviceHosts_PerformActionV2() is True
+    def test_get_device_details(self):
+        """Pytest harness hook"""
+        # Test lazy loading of the ids parameter
+        assert bool(
+            falcon.GetDeviceDetails(
+                falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]
+                )["status_code"] in AllowedResponses
+        ) is True
 
-    def test_Logout(self):
-        assert auth.serviceRevoke() is True
+    def test_perform_action(self):
+        """Pytest harness hook"""
+        assert self.hosts_perform_action() is True
 
-    def test_Errors(self):
-        assert self.serviceHosts_GenerateErrors() is True
+    @staticmethod
+    def test_logout():
+        """Pytest harness hook"""
+        assert bool(falcon.auth_object.revoke(
+            falcon.auth_object.token()["body"]["access_token"]
+            )["status_code"] in AllowedResponses) is True
+
+    def test_errors(self):
+        """Pytest harness hook"""
+        assert self.hosts_generate_errors() is True
