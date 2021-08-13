@@ -229,7 +229,9 @@ class TestCloudConnectAWS:
         assert self.serviceCCAWS_ForceAttributeError() is True
 
     def test_argument_vs_keyword(self):
-        assert bool(falcon.QueryAWSAccounts(5, limit=1)) is True
+        assert bool(
+            falcon.VerifyAWSAccountAccess(falcon.QueryAWSAccountsForIDs(limit=1)["body"]["resources"][0])
+            ) is True
 
     def test_Logout(self):
         assert auth.serviceRevoke() is True
