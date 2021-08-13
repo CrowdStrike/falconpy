@@ -36,173 +36,150 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
+from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._d4c_registration import _d4c_registration_endpoints as Endpoints
 
 
-class D4C_Registration(ServiceClass):  # pylint: disable=C0103  # Matching API
+class D4CRegistration(ServiceClass):  # pylint: disable=C0103  # Matching API
     """The only requirement to instantiate an instance of this class
        is a valid token provided by the Falcon API SDK OAuth2 class, a
        existing instance of the authentication class as an object or a
        valid set of credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetCSPMAzureAccount(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_azure_account(self: object, parameters: dict = None, **kwargs) -> dict:
         """Return information about Azure account registration"""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMAzureAccount
-        operation_id = "GetCSPMAzureAccount"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMAzureAccount",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def CreateCSPMAzureAccount(self: object, body: dict) -> dict:
+    def create_azure_account(self: object, body: dict) -> dict:
         """Creates a new account in our system for a customer and generates a
            script for them to run in their cloud environment to grant us access.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateCSPMAzureAccount
-        operation_id = "CreateCSPMAzureAccount"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="CreateCSPMAzureAccount",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def UpdateCSPMAzureAccountClientID(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Update an Azure service account in our system by with the
-           user-created client_id created with the public key we've provided
+    def update_azure_account_client_id(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Update an Azure service account in our system by with the
+        user-created client_id created with the public key we've provided
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #           /d4c-registration/UpdateCSPMAzureAccountClientID
-        operation_id = "UpdateCSPMAzureAccountClientID"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="PATCH",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="PATCH",
+            operation_id="UpdateCSPMAzureAccountClientID",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def GetCSPMAzureUserScriptsAttachment(self: object) -> dict:
-        """Return a script for customer to run in their cloud environment to
-           grant us access to their Azure environment as a downloadable attachment
+    def get_azure_user_scripts_attachment(self: object) -> dict:
+        """
+        Return a script for customer to run in their cloud environment to
+        grant us access to their Azure environment as a downloadable attachment
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /d4c-registration/GetCSPMAzureUserScriptsAttachment
-        operation_id = "GetCSPMAzureUserScriptsAttachment"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMAzureUserScriptsAttachment"
+            )
 
-    def GetCSPMAzureUserScripts(self: object) -> dict:
-        """Return a script for customer to run in their cloud environment to grant us access to their Azure environment"""
+    def get_azure_user_scripts(self: object) -> dict:
+        """
+        Return a script for customer to run in their cloud environment to grant us access to their Azure environment
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMAzureUserScripts
-        operation_id = "GetCSPMAzureUserScripts"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
-
-    # I'm here to assist those who spell it correctly
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetCSPMGCPAccount(self: object, *args, **kwargs) -> dict:
-        """Returns information about the current status of an GCP account."""
-        returned = self.GetCSPMCGPAccount(*args, **kwargs)
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMAzureUserScripts"
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetCSPMCGPAccount(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Returns information about the current status of an GCP account."""
+    def get_gcp_account(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Returns information about the current status of an GCP account.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMCGPAccount
-        operation_id = "GetCSPMCGPAccount"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMCGPAccount",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def CreateCSPMGCPAccount(self: object, body: dict) -> dict:
-        """Creates a new account in our system for a customer and generates a new service
-           account for them to add access to in their GCP environment to grant us access.
+    def create_gcp_account(self: object, body: dict) -> dict:
+        """
+        Creates a new account in our system for a customer and generates a new service
+        account for them to add access to in their GCP environment to grant us access.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateCSPMGCPAccount
-        operation_id = "CreateCSPMGCPAccount"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="CreateCSPMGCPAccount",
+            body=body
+            )
 
-    def GetCSPMGCPUserScriptsAttachment(self: object) -> dict:
-        """Return a script for customer to run in their cloud environment to
-           grant us access to their GCP environment as a downloadable attachment
+    def get_gcp_user_scripts_attachment(self: object) -> dict:
+        """
+        Return a script for customer to run in their cloud environment to
+        grant us access to their GCP environment as a downloadable attachment
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /d4c-registration/GetCSPMGCPUserScriptsAttachment
-        operation_id = "GetCSPMGCPUserScriptsAttachment"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMGCPUserScriptsAttachment"
+            )
 
-    def GetCSPMGCPUserScripts(self: object) -> dict:
-        """Return a script for customer to run in their cloud environment to grant us access to their GCP environment"""
+    def get_gcp_user_scripts(self: object) -> dict:
+        """
+        Return a script for customer to run in their cloud environment to grant us access to their GCP environment
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMGCPUserScripts
-        operation_id = "GetCSPMGCPUserScripts"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMGCPUserScripts"
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    GetCSPMAzureAccount = get_azure_account
+    CreateCSPMAzureAccount = create_azure_account
+    UpdateCSPMAzureAccountClientID = update_azure_account_client_id
+    GetCSPMAzureUserScriptsAttachment = get_azure_user_scripts_attachment
+    GetCSPMAzureUserScripts = get_azure_user_scripts
+    GetCSPMGCPAccount = get_gcp_account   # Typo fix
+    GetCSPMCGPAccount = get_gcp_account
+    CreateCSPMGCPAccount = create_gcp_account
+    GetCSPMGCPUserScriptsAttachment = get_gcp_user_scripts_attachment
+    GetCSPMGCPUserScripts = get_gcp_user_scripts
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+D4C_Registration = D4CRegistration  # pylint: disable=C0103
