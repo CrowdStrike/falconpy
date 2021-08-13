@@ -42,14 +42,17 @@ from ._endpoint._d4c_registration import _d4c_registration_endpoints as Endpoint
 
 
 class D4CRegistration(ServiceClass):
-    """The only requirement to instantiate an instance of this class
-       is a valid token provided by the Falcon API SDK OAuth2 class, a
-       existing instance of the authentication class as an object or a
-       valid set of credentials.
+    """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class, a
+    existing instance of the authentication class as an object or a
+    valid set of credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_azure_account(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Return information about Azure account registration"""
+        """
+        Return information about Azure account registration
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMAzureAccount
         return process_service_request(
             calling_object=self,
@@ -60,8 +63,9 @@ class D4CRegistration(ServiceClass):
             )
 
     def create_azure_account(self: object, body: dict) -> dict:
-        """Creates a new account in our system for a customer and generates a
-           script for them to run in their cloud environment to grant us access.
+        """
+        Creates a new account in our system for a customer and generates a
+        script for them to run in their cloud environment to grant us access.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateCSPMAzureAccount
         return process_service_request(
