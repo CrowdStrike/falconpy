@@ -2,9 +2,11 @@
 test_real_time_response_admin.py - This class tests the real_time_response_admin service class
 """
 import datetime
+# import platform
 import os
 import sys
 import json
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -108,6 +110,8 @@ class TestRTRAdmin:
 
         return error_checks
 
+    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
+    # @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
     def test_all_code_paths(self):
         """
         Pytest harness hook - Singular test will execute every statement in every method within the class
