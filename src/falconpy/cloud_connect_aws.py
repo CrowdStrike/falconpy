@@ -36,192 +36,159 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
+from ._util import force_default, process_service_request, handle_single_argument
 from ._service_class import ServiceClass
 from ._endpoint._cloud_connect_aws import _cloud_connect_aws_endpoints as Endpoints
 
 
-class Cloud_Connect_AWS(ServiceClass):
+class CloudConnectAWS(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryAWSAccounts(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_aws_accounts(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for provisioned AWS Accounts by providing an FQL filter and paging details.
         Returns a set of AWS accounts which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccounts
-        operation_id = "QueryAWSAccounts"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryAWSAccounts",
+            keywords=kwargs,
+            params=parameters
+            )
 
-        return returned
-
-    def GetAWSSettings(self: object) -> dict:
+    def get_aws_settings(self: object) -> dict:
         """
         Retrieve a set of Global Settings which are applicable to all provisioned AWS accounts.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/GetAWSSettings
-        operation_id = "GetAWSSettings"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetAWSSettings"
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetAWSAccounts(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_aws_accounts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve a set of AWS Accounts by specifying their IDs.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/GetAWSAccounts
-        operation_id = "GetAWSAccounts"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetAWSAccounts",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def ProvisionAWSAccounts(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def provision_aws_accounts(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Provision AWS Accounts by specifying details about the accounts to provision.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/ProvisionAWSAccounts
-        operation_id = "ProvisionAWSAccounts"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="ProvisionAWSAccounts",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def DeleteAWSAccounts(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_aws_accounts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Delete a set of AWS Accounts by specifying their IDs.
         """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/DeleteAWSAccounts
-        operation_id = "DeleteAWSAccounts"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="DELETE",
+            operation_id="DeleteAWSAccounts",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
-        return returned
-
-    def UpdateAWSAccounts(self: object, body: dict) -> dict:
+    def update_aws_accounts(self: object, body: dict) -> dict:
         """
         Update AWS Accounts by specifying the ID of the account and details to update.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/UpdateAWSAccounts
-        operation_id = "UpdateAWSAccounts"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="PATCH",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="PATCH",
+            operation_id="UpdateAWSAccounts",
+            body=body
+            )
 
-    def CreateOrUpdateAWSSettings(self: object, body: dict) -> dict:
+    def create_or_update_aws_settings(self: object, body: dict) -> dict:
         """
         Create or update Global Settings which are applicable to all provisioned AWS accounts.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/CreateOrUpdateAWSSettings
-        operation_id = "CreateOrUpdateAWSSettings"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="CreateOrUpdateAWSSettings",
+            body=body
+            )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict"])
-    def VerifyAWSAccountAccess(self: object, parameters: dict = None, body: dict = None, **kwargs) -> dict:
+    def verify_aws_account_access(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Performs an Access Verification check on the specified AWS Account IDs.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/VerifyAWSAccountAccess
-        operation_id = "VerifyAWSAccountAccess"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        body_payload = body
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="VerifyAWSAccountAccess",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryAWSAccountsForIDs(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_aws_accounts_for_ids(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for provisioned AWS Accounts by providing an FQL filter and paging details.
         Returns a set of AWS account IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccountsForIDs
-        operation_id = "QueryAWSAccountsForIDs"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryAWSAccountsForIDs",
+            keywords=kwargs,
+            params=parameters
+            )
 
-        return returned
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    QueryAWSAccounts = query_aws_accounts
+    GetAWSSettings = get_aws_settings
+    GetAWSAccounts = get_aws_accounts
+    ProvisionAWSAccounts = provision_aws_accounts
+    DeleteAWSAccounts = delete_aws_accounts
+    UpdateAWSAccounts = update_aws_accounts
+    CreateOrUpdateAWSSettings = create_or_update_aws_settings
+    VerifyAWSAccountAccess = verify_aws_account_access
+    QueryAWSAccountsForIDs = query_aws_accounts_for_ids
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Cloud_Connect_AWS = CloudConnectAWS  # pylint: disable=C0103
