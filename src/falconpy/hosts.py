@@ -120,8 +120,6 @@ class Hosts(ServiceClass):
         the Falcon console or the Streaming API.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/GetDeviceDetails
-        # if len(args) > 0:                   # Argument specification - Using arguments to specify IDs will override
-        #     parameters["ids"] = args[0]     # values specified in the ids keyword or parameters dictionary
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
