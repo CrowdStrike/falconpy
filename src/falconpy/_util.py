@@ -371,6 +371,8 @@ def process_service_request(calling_object: object,
         data: Dictionary representing the data payload passed to the service class function.
         files: List of files to be uploaded.
         partition: ID of the partition to open (Event Streams API)
+        body_validator: Dictionary containing details regarding body payload validation
+        body_required: List of required body payload parameters
     """
     # ID replacement happening at the end of this statement planned for removal in v0.5.6+
     # (after all classes have been updated to no longer need it and it has been removed from the _endpoints module)
@@ -394,7 +396,9 @@ def process_service_request(calling_object: object,
         "params": parameter_payload,
         "body": kwargs.get("body", None),
         "data": kwargs.get("data", None),
-        "files": kwargs.get("files", None)
+        "files": kwargs.get("files", None),
+        "body_validator": kwargs.get("body_validator", None),   # May be deprecated after BODY payload abstraction
+        "body_required": kwargs.get("body_required", None)      # May be deprecated after BODY payload abstraction
     }
 
     return service_request(**new_keywords)
