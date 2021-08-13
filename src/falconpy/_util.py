@@ -107,6 +107,12 @@ def generate_b64cred(client_id: str, client_secret: str) -> str:
     return encoded
 
 
+def handle_single_argument(passed_arguments: list, passed_keywords: dict, search_key: str) -> dict:
+    if len(passed_arguments) > 0:                   # Argument specification - Using arguments to specify IDs will override
+        passed_keywords[search_key] = passed_arguments[0]     # values specified in the ids keyword or parameters dictionary
+
+    return passed_keywords
+
 def force_default(defaults: list, default_types: list = None):
     """
     This function forces default values and is designed to decorate other functions.
@@ -142,8 +148,9 @@ def force_default(defaults: list, default_types: list = None):
                 # Increment our tracker for our sibling default_types list
                 element_count += 1
             # They passed us an argument but did not specify what it was (non-keyword) [Issue #263]
-            if len(args) > 1:
-                args = [args[0]]
+            # Need to test scenarios with multiple arguments / keyword variations
+            # if len(args) > 1:
+            #     args = [args[0]]
             return func(*args, **kwargs)
         return factory
     return wrapper
