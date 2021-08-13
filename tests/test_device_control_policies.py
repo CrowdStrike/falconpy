@@ -1,6 +1,6 @@
-# test_device_control_poligies.py
-# This class tests the device_control_policies service class
-
+"""
+test_device_control_poligies.py - This class tests the device_control_policies service class
+"""
 import os
 import sys
 import pytest
@@ -13,91 +13,77 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import device_control_policies as FalconDeviceControlPolicy
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconDeviceControlPolicy.Device_Control_Policies(access_token=auth.token)
+auth.getConfig()
+falcon = FalconDeviceControlPolicy.Device_Control_Policies(creds={"client_id": auth.config["falcon_client_id"],
+                                                                  "client_secret": auth.config["falcon_client_secret"]})
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestDeviceControlPolicy:
-
-    def serviceDeviceControlPolicies_queryDeviceControlPolicies(self):
-        if falcon.queryDeviceControlPolicies(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceDeviceControlPolicies_queryDeviceControlPolicyMembers(self):
-        if falcon.queryDeviceControlPolicyMembers(
-                parameters={"id": falcon.queryDeviceControlPolicies(parameters={"limit": 1})["body"]["resources"][0]}
-                )["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceDeviceControlPolicies_getDeviceControlPolicies(self):
-        if falcon.getDeviceControlPolicies(
-                ids=falcon.queryDeviceControlPolicies(parameters={"limit": 1})["body"]["resources"][0]
-                )["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceDeviceControlPolicies_queryCombinedDeviceControlPolicies(self):
-        if falcon.queryCombinedDeviceControlPolicies(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceDeviceControlPolicies_queryCombinedDeviceControlPolicyMembers(self):
-        if falcon.queryCombinedDeviceControlPolicyMembers(
-                parameters={"id": falcon.queryCombinedDeviceControlPolicies(
-                    parameters={"limit": 1}
-                    )["body"]["resources"][0]["id"]}
-                )["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
+    """
+    Test harness for the Device Control Policies Service Class
+    """
     def serviceDeviceControlPolicies_GenerateErrors(self):
+        """
+        Generates a series of 500 errors to test remaining code paths
+        """
         falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["queryCombinedDeviceControlPolicyMembers", ""],
-            ["queryCombinedDeviceControlPolicies", ""],
-            ["performDeviceControlPoliciesAction", "body={}, parameters={}, action_name='enable'"],
-            ["performDeviceControlPoliciesAction", "body={}, parameters={'action_name':'PooF'}"],
-            ["performDeviceControlPoliciesAction", "body={}, parameters={}"],
-            ["setDeviceControlPoliciesPrecedence", "body={}"],
-            ["getDeviceControlPolicies", "ids='12345678'"],
-            ["createDeviceControlPolicies", "body={}"],
-            ["deleteDeviceControlPolicies", "ids='12345678'"],
-            ["updateDeviceControlPolicies", "body={}"],
-            ["queryDeviceControlPolicyMembers", ""],
-            ["queryDeviceControlPolicies", ""]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+        error_checks = True
+        tests = {
+            "query_combined_device_control_policy_members": falcon.queryCombinedDeviceControlPolicyMembers()["status_code"],
+            "query_combined_device_control_policies": falcon.queryCombinedDeviceControlPolicies()["status_code"],
+            "perform_device_control_policies_action": falcon.performDeviceControlPoliciesAction(body={}, parameters={}, action_name='enable')["status_code"],
+            "perform_device_control_policies_action_two": falcon.performDeviceControlPoliciesAction(body={}, parameters={'action_name':'PooF'})["status_code"],
+            "perform_device_control_policies_action_three": falcon.performDeviceControlPoliciesAction(body={}, parameters={})["status_code"],
+            "set_device_control_policies_precedence": falcon.setDeviceControlPoliciesPrecedence(body={})["status_code"],
+            "get_device_control_policies": falcon.getDeviceControlPolicies(ids='12345678')["status_code"],
+            "create_device_control_policies": falcon.createDeviceControlPolicies(body={})["status_code"],
+            "delete_device_control_policies": falcon.deleteDeviceControlPolicies(ids='12345678')["status_code"],
+            "update_device_control_policies": falcon.updateDeviceControlPolicies(body={})["status_code"],
+            "query_device_control_policy_members": falcon.queryDeviceControlPolicyMembers()["status_code"],
+            "query_device_control_policies": falcon.queryDeviceControlPolicies()["status_code"]
+        }
+        for key in tests:
+            if tests[key] != 500:
+                error_checks = False
 
-        return errorChecks
+            # print(f"{key} operation returned a {tests[key]} status code")
+
+        return error_checks
 
     def test_queryDeviceControlPolicies(self):
-        assert self.serviceDeviceControlPolicies_queryDeviceControlPolicies() is True
+        """
+        Pytest harness hook
+        """
+        assert bool(falcon.queryDeviceControlPolicies(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
     @pytest.mark.skipif(
         falcon.queryDeviceControlPolicies(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
         )
     def test_queryDeviceControlPolicyMembers(self):
-        assert self.serviceDeviceControlPolicies_queryDeviceControlPolicyMembers() is True
+        """
+        Pytest harness hook
+        """
+        assert bool(falcon.queryDeviceControlPolicyMembers(
+                parameters={"id": falcon.queryDeviceControlPolicies(parameters={"limit": 1})["body"]["resources"][0]}
+                )["status_code"] in AllowedResponses) is True
 
     @pytest.mark.skipif(
         falcon.queryDeviceControlPolicies(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
         )
     def test_getDeviceControlPolicies(self):
-        assert self.serviceDeviceControlPolicies_getDeviceControlPolicies() is True
+        """
+        Pytest harness hook
+        """
+        assert bool(falcon.getDeviceControlPolicies(
+                ids=falcon.queryDeviceControlPolicies(parameters={"limit": 1})["body"]["resources"][0]
+                )["status_code"] in AllowedResponses) is True
 
     def test_queryCombinedDeviceControlPolicies(self):
-        assert self.serviceDeviceControlPolicies_queryCombinedDeviceControlPolicies() is True
+        """
+        Pytest harness hook
+        """
+        assert bool(falcon.queryCombinedDeviceControlPolicies(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
     @pytest.mark.skipif(
         falcon.queryCombinedDeviceControlPolicies(
@@ -105,10 +91,26 @@ class TestDeviceControlPolicy:
             )["status_code"] == 429, reason="API rate limit reached"
         )
     def test_queryCombinedDeviceControlPolicyMembers(self):
-        assert self.serviceDeviceControlPolicies_queryCombinedDeviceControlPolicyMembers() is True
+        """
+        Pytest harness hook
+        """
+        assert bool(falcon.queryCombinedDeviceControlPolicyMembers(
+                parameters={"id": falcon.queryCombinedDeviceControlPolicies(
+                    parameters={"limit": 1}
+                    )["body"]["resources"][0]["id"]}
+                )["status_code"] in AllowedResponses) is True
 
-    def test_Logout(self):
-        assert auth.serviceRevoke() is True
-
-    def test_Errors(self):
+    def test_errors(self):
+        """
+        Pytest harness hook
+        """
         assert self.serviceDeviceControlPolicies_GenerateErrors() is True
+
+    @staticmethod
+    def test_logout():
+        """
+        Pytest harness hook
+        """
+        assert bool(falcon.auth_object.revoke(
+            falcon.auth_object.token()["body"]["access_token"]
+            )["status_code"] in AllowedResponses) is True
