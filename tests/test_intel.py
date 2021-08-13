@@ -15,7 +15,7 @@ auth = Authorization.TestAuthorization()
 auth.getConfig()
 falcon = Intel(creds={"client_id": auth.config["falcon_client_id"],
                       "client_secret": auth.config["falcon_client_secret"]})
-AllowedResponses = [200, 400, 500]  # Temporarily allowing 500s due to an API issue with indicators - jshcodes @ 08.12.21
+AllowedResponses = [200, 201, 400, 404, 429]
 
 
 class TestIntel:
