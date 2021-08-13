@@ -41,7 +41,7 @@ from ._service_class import ServiceClass
 from ._endpoint._d4c_registration import _d4c_registration_endpoints as Endpoints
 
 
-class D4CRegistration(ServiceClass):  # pylint: disable=C0103  # Matching API
+class D4CRegistration(ServiceClass):
     """The only requirement to instantiate an instance of this class
        is a valid token provided by the Falcon API SDK OAuth2 class, a
        existing instance of the authentication class as an object or a
