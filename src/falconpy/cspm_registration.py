@@ -49,8 +49,8 @@ class CSPMRegistration(ServiceClass):
     def get_aws_account(self: object, parameters: dict = None, **kwargs) -> dict:
         """Returns information about the current status of an AWS account."""
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAwsAccount
-        # Since there are multiple inbound "id" possibilities here.
-        # we are unable to calls leveraging a single argument, keywords only are supported
+        # Since there are multiple inbound "id" possibilities here. We are unable
+        # to make calls leveraging a single argument, keywords only are supported
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
