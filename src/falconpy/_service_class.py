@@ -57,8 +57,8 @@ class ServiceClass:
         client_id = kwargs.get("client_id", None)
         client_secret = kwargs.get("client_secret", None)
         if client_id and client_secret and not creds:
-            # Passing client_id and client_secret will overwrite
-            # the contents of the creds dictionary
+            # Passing client_id and client_secret will not
+            # overwrite the contents of the creds dictionary
             creds = {
                 "client_id": client_id,
                 "client_secret": client_secret
