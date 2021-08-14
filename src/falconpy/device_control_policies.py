@@ -47,7 +47,7 @@ class DeviceControlPolicies(ServiceClass):
     is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_device_control_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for members of a Device Control Policy in your environment by providing an FQL filter
         and paging details. Returns a set of host details which match the filter criteria.
@@ -63,7 +63,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_device_control_policies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policies(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for Device Control Policies in your environment by providing an FQL filter and
         paging details. Returns a set of Device Control Policies which match the filter criteria.
@@ -79,7 +79,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def perform_device_control_policies_action(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def perform_action(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Search for Device Control Policies in your environment by providing an FQL filter
         and paging details. Returns a set of Device Control Policies which match the filter criteria.
@@ -105,7 +105,7 @@ class DeviceControlPolicies(ServiceClass):
 
         return returned
 
-    def set_device_control_policies_precedence(self: object, body: dict) -> dict:
+    def set_precedence(self: object, body: dict) -> dict:
         """
         Sets the precedence of Device Control Policies based on the order of IDs specified in the request.
         The first ID specified will have the highest precedence and the last ID specified will have the lowest.
@@ -122,7 +122,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_device_control_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve a set of Device Control Policies by specifying their IDs.
         """
@@ -136,7 +136,7 @@ class DeviceControlPolicies(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    def create_device_control_policies(self: object, body: dict) -> dict:
+    def create_policies(self: object, body: dict) -> dict:
         """
         Create Device Control Policies by specifying details about the policy to create.
         """
@@ -151,7 +151,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_device_control_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Delete a set of Device Control Policies by specifying their IDs.
         """
@@ -166,7 +166,7 @@ class DeviceControlPolicies(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    def update_device_control_policies(self: object, body: dict) -> dict:
+    def update_policies(self: object, body: dict) -> dict:
         """
         Update Device Control Policies by specifying the ID of the policy and details to update.
         """
@@ -181,7 +181,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_device_control_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for members of a Device Control Policy in your environment by providing an FQL filter
         and paging details. Returns a set of Agent IDs which match the filter criteria.
@@ -197,7 +197,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_device_control_policies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policies(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for Device Control Policies in your environment by providing an FQL filter and paging details.
         Returns a set of Device Control Policy IDs which match the filter criteria.
@@ -215,16 +215,16 @@ class DeviceControlPolicies(ServiceClass):
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
-    queryCombinedDeviceControlPolicyMembers = query_combined_device_control_policy_members
-    queryCombinedDeviceControlPolicies = query_combined_device_control_policies
-    performDeviceControlPoliciesAction = perform_device_control_policies_action
-    setDeviceControlPoliciesPrecedence = set_device_control_policies_precedence
-    getDeviceControlPolicies = get_device_control_policies
-    createDeviceControlPolicies = create_device_control_policies
-    deleteDeviceControlPolicies = delete_device_control_policies
-    updateDeviceControlPolicies = update_device_control_policies
-    queryDeviceControlPolicyMembers = query_device_control_policy_members
-    queryDeviceControlPolicies = query_device_control_policies
+    queryCombinedDeviceControlPolicyMembers = query_policy_members
+    queryCombinedDeviceControlPolicies = query_policies
+    performDeviceControlPoliciesAction = perform_action
+    setDeviceControlPoliciesPrecedence = set_precedence
+    getDeviceControlPolicies = get_policies
+    createDeviceControlPolicies = create_policies
+    deleteDeviceControlPolicies = delete_policies
+    updateDeviceControlPolicies = update_policies
+    queryDeviceControlPolicyMembers = query_policy_members
+    queryDeviceControlPolicies = query_policies
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
