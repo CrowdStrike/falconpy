@@ -19,7 +19,8 @@ AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for
 class TestMLExclusions:
     def serviceMLE_ListExclusions(self):
         returned = False
-        if falcon.queryMLExclusionsV1(limit=1, offset=2, pizza="IsDelicious")["status_code"] in AllowedResponses:
+        result = falcon.queryMLExclusionsV1(limit=1, offset=2, pizza="IsDelicious")
+        if result["status_code"] in AllowedResponses:
             returned = True
 
         return returned
