@@ -47,7 +47,7 @@ class DeviceControlPolicies(ServiceClass):
     is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for members of a Device Control Policy in your environment by providing an FQL filter
         and paging details. Returns a set of host details which match the filter criteria.
@@ -63,7 +63,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for Device Control Policies in your environment by providing an FQL filter and
         paging details. Returns a set of Device Control Policies which match the filter criteria.
@@ -215,8 +215,8 @@ class DeviceControlPolicies(ServiceClass):
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
-    queryCombinedDeviceControlPolicyMembers = query_policy_members
-    queryCombinedDeviceControlPolicies = query_policies
+    queryCombinedDeviceControlPolicyMembers = query_combined_policy_members
+    queryCombinedDeviceControlPolicies = query_combined_policies
     performDeviceControlPoliciesAction = perform_action
     setDeviceControlPoliciesPrecedence = set_precedence
     getDeviceControlPolicies = get_policies
