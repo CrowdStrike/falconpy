@@ -11,32 +11,28 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.zero_trust_assessment import Zero_Trust_Assessment as FalconZTA
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconZTA(creds={"client_id": auth.config["falcon_client_id"],
-                          "client_secret": auth.config["falcon_client_secret"]})
+token = auth.getConfigExtended()
+falcon = FalconZTA(access_token=token)
 AllowedResponses = [200, 201, 404, 429]
 
 
 class TestZeroTrustAssessment:
-    def zta_notfound(self):
-        """
-        Executes every statement in every method of the class, accepts all errors except 500
-        """
-        error_checks = True
-        if falcon.getAssessmentV1(ids="12345678")["status_code"] not in AllowedResponses:
-            error_checks = False
+    # def zta_notfound(self):
+    #     """
+    #     Executes every statement in every method of the class, accepts all errors except 500
+    #     """
+    #     error_checks = True
+    #     if falcon.getAssessmentV1(ids="12345678")["status_code"] not in AllowedResponses:
+    #         error_checks = False
 
-        return error_checks
+    #     return error_checks
 
     def test_notfound(self):
         """Pytest harness hook"""
-        assert bool(falcon.auth_object.revoke(
-            falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in AllowedResponses) is True
+        assert bool(falcon.getAssessmentV1(ids="12345678")["status_code"] in AllowedResponses) is True
 
+    # This should be the last test executed, log out the token
     @staticmethod
     def test_logout():
         """Pytest harness hook"""
-        assert bool(falcon.auth_object.revoke(
-            falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in AllowedResponses) is True
+        assert bool(auth.clear_env_token()) is True

@@ -11,9 +11,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import cspm_registration as FalconCSPM  # noqa: E402
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconCSPM.CSPM_Registration(creds={"client_id": auth.config["falcon_client_id"],
-                                             "client_secret": auth.config["falcon_client_secret"]})
+token = auth.getConfigExtended()
+falcon = FalconCSPM.CSPM_Registration(access_token=token)
 AllowedResponses = [200, 201, 207, 429]  # Adding rate-limiting as an allowed response for now
 textchars = bytearray({7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7f})
 is_binary_string = lambda bytes: bool(bytes.translate(None, textchars))  # noqa: E731
@@ -81,12 +80,12 @@ class TestCSPMRegistration:
         """Pytest harness hook"""
         assert self.cspm_get_azure_user_scripts_attachment() is True
 
-    @staticmethod
-    def test_logout():
-        """Pytest harness hook"""
-        assert bool(falcon.auth_object.revoke(
-            falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in AllowedResponses) is True
+    # @staticmethod
+    # def test_logout():
+    #     """Pytest harness hook"""
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True
 
     def test_errors(self):
         """Pytest harness hook"""

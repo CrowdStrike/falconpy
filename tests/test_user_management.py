@@ -12,10 +12,8 @@ from falconpy import user_management as FalconUsers
 sys.path.append(os.path.abspath('src'))
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconUsers.User_Management(creds={"client_id": auth.config["falcon_client_id"],
-                                            "client_secret": auth.config["falcon_client_secret"]
-                                            })
+token = auth.getConfigExtended()
+falcon = FalconUsers.User_Management(access_token=token)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -159,11 +157,11 @@ class TestFalconUserManagement:
         """
         assert self.um_generate_errors() is True
 
-    @staticmethod
-    def test_logout():
-        """
-        Pytest harness hook
-        """
-        assert bool(falcon.auth_object.revoke(
-            falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in AllowedResponses) is True
+    # @staticmethod
+    # def test_logout():
+    #     """
+    #     Pytest harness hook
+    #     """
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True

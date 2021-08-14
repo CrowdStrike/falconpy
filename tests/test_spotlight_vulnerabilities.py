@@ -13,8 +13,8 @@ sys.path.append(os.path.abspath('src'))
 
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconSpotlight.Spotlight_Vulnerabilities(access_token=auth.token)
+token = auth.getConfigExtended()
+falcon = FalconSpotlight.Spotlight_Vulnerabilities(access_token=token)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -66,9 +66,6 @@ class TestSpotlight:
                                                     )["status_code"] == 429, reason="API rate limit reached")
     def test_getVulnerabilities(self):
         assert self.serviceSpotlight_getVulnerabilities() is True
-
-    def test_Logout(self):
-        assert auth.serviceRevoke() is True
 
     def test_Errors(self):
         assert self.serviceSpotlight_GenerateErrors() is True

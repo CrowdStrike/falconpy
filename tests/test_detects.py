@@ -13,10 +13,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import detects as FalconDetections
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconDetections.Detects(creds={"client_id": auth.config["falcon_client_id"],
-                                         "client_secret": auth.config["falcon_client_secret"]
-                                         })
+token = auth.getConfigExtended()
+falcon = FalconDetections.Detects(access_token=token)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -72,14 +70,14 @@ class TestDetects:
     # def test_GetAggregateDetects(self):
     #     assert self.serviceDetects_GetAggregateDetects() == True
 
-    @staticmethod
-    def test_logout():
-        """
-        Pytest harness hook
-        """
-        assert bool(falcon.auth_object.revoke(
-            falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in AllowedResponses) is True
+    # @staticmethod
+    # def test_logout():
+    #     """
+    #     Pytest harness hook
+    #     """
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True
 
     def test_Errors(self):
         assert self.serviceDetects_GenerateErrors() is True

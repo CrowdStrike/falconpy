@@ -8,9 +8,9 @@ sys.path.append(os.path.abspath('src'))
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 appId = "pytest-sensor_download-unit-test"
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
+token = auth.getConfigExtended()
 
-sensor_download_client = FalconSensorDownload.Sensor_Download(access_token=auth.token)
+sensor_download_client = FalconSensorDownload.Sensor_Download(access_token=token)
 
 
 class TestSensorDownload():

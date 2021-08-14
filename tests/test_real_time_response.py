@@ -14,9 +14,9 @@ from falconpy import real_time_response as FalconRTR
 from falconpy import hosts as FalconHosts
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconRTR.Real_Time_Response(access_token=auth.token)
-falcon_hosts = FalconHosts.Hosts(access_token=auth.token)
+token = auth.getConfigExtended()
+falcon = FalconRTR.Real_Time_Response(access_token=token)
+falcon_hosts = FalconHosts.Hosts(access_token=token)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -80,9 +80,6 @@ class TestRTR:
     @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
     def test_RTR_SessionConnect(self):
         assert self.serviceRTR_SessionTester() is True
-
-    def test_Logout(self):
-        assert auth.serviceRevoke() is True
 
     def test_Errors(self):
         assert self.serviceRTR_GenerateErrors() is True

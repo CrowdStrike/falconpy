@@ -11,8 +11,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.mssp import Flight_Control  # noqa: E402  pylint: disable=E0401
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = Flight_Control(access_token=auth.token)
+token = auth.getConfigExtended()
+falcon = Flight_Control(access_token=token)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -52,9 +52,6 @@ class TestFlightControl:
                 errorChecks = False
 
         return errorChecks
-
-    def test_Logout(self):
-        assert auth.serviceRevoke() is True
 
     def test_Errors(self):
         assert self.serviceFlight_GenerateErrors() is True

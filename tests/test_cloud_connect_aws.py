@@ -15,11 +15,11 @@ from falconpy._util import service_request
 
 auth = Authorization.TestAuthorization()
 
-auth.getConfig()
-# falcon = FalconAWS.Cloud_Connect_AWS(access_token=auth.token)
-falcon = FalconAWS.Cloud_Connect_AWS(creds={"client_id": auth.config["falcon_client_id"],
-                                            "client_secret": auth.config["falcon_client_secret"]
-                                            })
+token = auth.getConfigExtended()
+falcon = FalconAWS.Cloud_Connect_AWS(access_token=token)
+# falcon = FalconAWS.Cloud_Connect_AWS(creds={"client_id": auth.config["falcon_client_id"],
+#                                             "client_secret": auth.config["falcon_client_secret"]
+#                                             })
 AllowedResponses = [200, 201, 429]  # Adding rate-limiting as an allowed response for now
 accountPayload = {
         "resources": [
@@ -240,11 +240,11 @@ class TestCloudConnectAWS:
     def test_Errors(self):
         assert self.serviceCCAWS_GenerateErrors() is True
 
-    @staticmethod
-    def test_logout():
-        """
-        Pytest harness hook
-        """
-        assert bool(falcon.auth_object.revoke(
-            falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in AllowedResponses) is True
+    # @staticmethod
+    # def test_logout():
+    #     """
+    #     Pytest harness hook
+    #     """
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True

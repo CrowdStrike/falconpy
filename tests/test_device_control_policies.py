@@ -13,9 +13,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import device_control_policies as FalconDeviceControlPolicy
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconDeviceControlPolicy.Device_Control_Policies(creds={"client_id": auth.config["falcon_client_id"],
-                                                                  "client_secret": auth.config["falcon_client_secret"]})
+token = auth.getConfigExtended()
+falcon = FalconDeviceControlPolicy.Device_Control_Policies(access_token=token)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -106,11 +105,11 @@ class TestDeviceControlPolicy:
         """
         assert self.serviceDeviceControlPolicies_GenerateErrors() is True
 
-    @staticmethod
-    def test_logout():
-        """
-        Pytest harness hook
-        """
-        assert bool(falcon.auth_object.revoke(
-            falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in AllowedResponses) is True
+    # @staticmethod
+    # def test_logout():
+    #     """
+    #     Pytest harness hook
+    #     """
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True

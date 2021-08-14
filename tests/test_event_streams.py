@@ -18,10 +18,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.event_streams import Event_Streams
 
 auth = Authorization.TestAuthorization()
-# Moving to credential authentication
-auth.getConfig()
-falcon = Event_Streams(creds={"client_id": auth.config["falcon_client_id"],
-                              "client_secret": auth.config["falcon_client_secret"]})
+token = auth.getConfigExtended()
+falcon = Event_Streams(access_token=token)
 
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 APP_ID = "pytest-event_streams-unit-test"
@@ -81,9 +79,9 @@ class TestEventStreams:
         """Pytest harness hook"""
         assert self.stream_errors() is True
 
-    @staticmethod
-    def test_logout():
-        """Pytest harness hook"""
-        assert bool(falcon.auth_object.revoke(
-            falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in AllowedResponses) is True
+    # @staticmethod
+    # def test_logout():
+    #     """Pytest harness hook"""
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True

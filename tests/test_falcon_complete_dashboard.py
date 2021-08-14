@@ -11,10 +11,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.falcon_complete_dashboard import Complete_Dashboard as FalconCD
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconCD(creds={"client_id": auth.config["falcon_client_id"],
-                         "client_secret": auth.config["falcon_client_secret"]
-                         })
+token = auth.getConfigExtended()
+falcon = FalconCD(access_token=token)
 AllowedResponses = [200, 403, 429]
 
 

@@ -11,8 +11,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.response_policies import Response_Policies as FalconRTRPolicy
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconRTRPolicy(access_token=auth.token)
+token = auth.getConfigExtended()
+falcon = FalconRTRPolicy(access_token=token)
 AllowedResponses = [200, 201, 400, 404, 429]
 
 

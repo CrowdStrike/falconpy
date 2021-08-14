@@ -9,10 +9,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.firewall_management import Firewall_Management as FalconFirewall
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconFirewall(creds={"client_id": auth.config["falcon_client_id"],
-                               "client_secret": auth.config["falcon_client_secret"]
-                               })
+token = auth.getConfigExtended()
+falcon = FalconFirewall(access_token=token)
 AllowedResponses = [200, 201, 400, 404, 429]
 
 
@@ -61,9 +59,9 @@ class TestFirewallManagement:
         """Pytest harness hook"""
         assert self.firewall_test_all_code_paths() is True
 
-    @staticmethod
-    def test_logout():
-        """Pytest harness hook"""
-        assert bool(falcon.auth_object.revoke(
-            falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in AllowedResponses) is True
+    # @staticmethod
+    # def test_logout():
+    #     """Pytest harness hook"""
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True

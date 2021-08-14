@@ -14,8 +14,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import quick_scan as FalconScan
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconScan.Quick_Scan(access_token=auth.token)
+token = auth.getConfigExtended()
+falcon = FalconScan.Quick_Scan(access_token=token)
 AllowedResponses = [200, 201, 207, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -35,9 +35,6 @@ class TestQuickScan:
                 errorChecks = False
 
         return errorChecks
-
-    def test_Logout(self):
-        assert auth.serviceRevoke() is True
 
     def test_Errors(self):
         assert self.serviceScan_GenerateErrors() is True

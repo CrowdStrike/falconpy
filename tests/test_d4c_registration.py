@@ -11,10 +11,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.d4c_registration import D4C_Registration as FalconD4C
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconD4C(creds={"client_id": auth.config["falcon_client_id"],
-                          "client_secret": auth.config["falcon_client_secret"]
-                          })
+token = auth.getConfigExtended()
+falcon = FalconD4C(access_token=token)
 AllowedResponses = [200, 429, 404]
 
 
@@ -134,11 +132,11 @@ class TestD4CRegistration:
         """
         assert self.d4c_generate_errors() is True
 
-    @staticmethod
-    def test_logout():
-        """
-        Pytest harness hook
-        """
-        assert bool(falcon.auth_object.revoke(
-            falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in AllowedResponses) is True
+    # @staticmethod
+    # def test_logout():
+    #     """
+    #     Pytest harness hook
+    #     """
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True

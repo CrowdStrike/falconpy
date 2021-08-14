@@ -11,10 +11,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.sensor_visibility_exclusions import Sensor_Visibility_Exclusions as FalconSVE
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconSVE(creds={"client_id": auth.config["falcon_client_id"],
-                          "client_secret": auth.config["falcon_client_secret"]
-                          })
+token = auth.getConfigExtended()
+falcon = FalconSVE(access_token=token)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 

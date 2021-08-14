@@ -15,10 +15,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.real_time_response_admin import Real_Time_Response_Admin as FalconRTR
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconRTR(creds={"client_id": auth.config["falcon_client_id"],
-                          "client_secret": auth.config["falcon_client_secret"]
-                          })
+token = auth.getConfigExtended()
+falcon = FalconRTR(access_token=token)
 AllowedResponses = [200, 201, 202, 400, 404, 429]
 
 
@@ -118,11 +116,11 @@ class TestRTRAdmin:
         """
         assert self.rtra_test_all_code_paths() is True
 
-    @staticmethod
-    def test_logout():
-        """
-        Pytest harness hook
-        """
-        assert bool(falcon.auth_object.revoke(
-            falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in AllowedResponses) is True
+    # @staticmethod
+    # def test_logout():
+    #     """
+    #     Pytest harness hook
+    #     """
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True

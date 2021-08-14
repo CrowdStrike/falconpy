@@ -11,9 +11,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.ioc import IOC
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = IOC(creds={"client_id": auth.config["falcon_client_id"],
-                          "client_secret": auth.config["falcon_client_secret"]})
+token = auth.getConfigExtended()
+falcon = IOC(access_token=token)
 AllowedResponses = [200, 201, 404, 429]
 
 
@@ -39,9 +38,9 @@ class TestIOC:
     def test_all_functionality(self):
         assert self.ioc_run_all_tests() is True
 
-    @staticmethod
-    def test_logout():
-        """Pytest harness hook"""
-        assert bool(falcon.auth_object.revoke(
-            falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in AllowedResponses) is True
+    # @staticmethod
+    # def test_logout():
+    #     """Pytest harness hook"""
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True

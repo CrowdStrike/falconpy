@@ -12,8 +12,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import prevention_policy as FalconPrevent
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconPrevent.Prevention_Policy(access_token=auth.token)
+token = auth.getConfigExtended()
+falcon = FalconPrevent.Prevention_Policy(access_token=token)
 AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
 
 class TestFalconPrevent:
@@ -89,9 +89,6 @@ class TestFalconPrevent:
     @pytest.mark.skipif(falcon.queryCombinedPreventionPolicies(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
     def test_queryCombinedPreventionPolicyMembers(self):
         assert self.servicePrevent_queryCombinedPreventionPolicyMembers() == True
-
-    def test_Logout(self):
-        assert auth.serviceRevoke() == True
 
     def test_Errors(self):
         assert self.servicePrevent_GenerateErrors() == True

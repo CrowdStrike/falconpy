@@ -14,9 +14,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import hosts as FalconHosts
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconHosts.Hosts(creds={"client_id": auth.config["falcon_client_id"],
-                                  "client_secret": auth.config["falcon_client_secret"]})
+token = auth.getConfigExtended()
+falcon = FalconHosts.Hosts(access_token=token)
 AllowedResponses = [200, 202, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -172,12 +171,12 @@ class TestHosts:
         """Pytest harness hook"""
         assert self.hosts_perform_action() is True
 
-    @staticmethod
-    def test_logout():
-        """Pytest harness hook"""
-        assert bool(falcon.auth_object.revoke(
-            falcon.auth_object.token()["body"]["access_token"]
-            )["status_code"] in AllowedResponses) is True
+    # @staticmethod
+    # def test_logout():
+    #     """Pytest harness hook"""
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True
 
     def test_errors(self):
         """Pytest harness hook"""

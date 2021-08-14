@@ -11,10 +11,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.ioa_exclusions import IOA_Exclusions as FalconIOAE
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconIOAE(creds={"client_id": auth.config["falcon_client_id"],
-                           "client_secret": auth.config["falcon_client_secret"]
-                           })
+token = auth.getConfigExtended()
+falcon = FalconIOAE(access_token=token)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 

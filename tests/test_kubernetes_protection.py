@@ -11,8 +11,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.kubernetes_protection import Kubernetes_Protection as FalconKube
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconKube(access_token=auth.token)
+token = auth.getConfigExtended()
+falcon = FalconKube(access_token=token)
 AllowedResponses = [200, 207, 400, 403, 429, 500]  # Allowing 500 to reduce flakiness
 
 

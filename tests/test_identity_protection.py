@@ -12,9 +12,9 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.identity_protection import Identity_Protection as FalconIDP
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
+token = auth.getConfigExtended()
 
-falcon = FalconIDP(creds=json.loads(str(auth.config).replace("falcon_","").replace("'",'"')))
+falcon = FalconIDP(access_token=token)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
