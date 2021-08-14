@@ -56,22 +56,23 @@ class TestDeviceControlPolicy:
         """
         assert bool(falcon.queryDeviceControlPolicies(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
-    @pytest.mark.skipif(
-        falcon.queryDeviceControlPolicies(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
-        )
+    # @pytest.mark.skipif(
+    #     falcon.queryDeviceControlPolicies(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
+    #     )
     def test_queryDeviceControlPolicyMembers(self):
         """
         Pytest harness hook
         """
         policies = falcon.queryDeviceControlPolicies(limit=1)
-        result = falcon.queryDeviceControlPolicyMembers(
-                id=policies["body"]["resources"][0]
-                )
+        if policies["status_code"] == 500:
+            pytest.skip("API communication failure")
+        else:
+            result = falcon.queryDeviceControlPolicyMembers(id=policies["body"]["resources"][0])
         assert bool(result["status_code"] in AllowedResponses) is True
 
-    @pytest.mark.skipif(
-        falcon.queryDeviceControlPolicies(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
-        )
+    # @pytest.mark.skipif(
+    #     falcon.queryDeviceControlPolicies(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
+    #     )
     def test_getDeviceControlPolicies(self):
         """
         Pytest harness hook
@@ -90,11 +91,11 @@ class TestDeviceControlPolicy:
         """
         assert bool(falcon.queryCombinedDeviceControlPolicies(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
-    @pytest.mark.skipif(
-        falcon.queryCombinedDeviceControlPolicies(
-            parameters={"limit": 1}
-            )["status_code"] == 429, reason="API rate limit reached"
-        )
+    # @pytest.mark.skipif(
+    #     falcon.queryCombinedDeviceControlPolicies(
+    #         parameters={"limit": 1}
+    #         )["status_code"] == 429, reason="API rate limit reached"
+    #     )
     def test_queryCombinedDeviceControlPolicyMembers(self):
         """
         Pytest harness hook
