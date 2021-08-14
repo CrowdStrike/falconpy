@@ -63,10 +63,11 @@ class TestDeviceControlPolicy:
         """
         Pytest harness hook
         """
-        policies = falcon.queryCombinedDeviceControlPolicies(limit=1)
-        assert bool(falcon.queryDeviceControlPolicyMembers(
+        policies = falcon.queryDeviceControlPolicies(limit=1)
+        result = falcon.queryDeviceControlPolicyMembers(
                 id=policies["body"]["resources"][0]
-                )["status_code"] in AllowedResponses) is True
+                )
+        assert bool(result["status_code"] in AllowedResponses) is True
 
     @pytest.mark.skipif(
         falcon.queryDeviceControlPolicies(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
@@ -95,7 +96,7 @@ class TestDeviceControlPolicy:
         Pytest harness hook
         """
         policies = falcon.queryCombinedDeviceControlPolicies(parameters={"limit": 1})
-        result = falcon.queryCombinedDeviceControlPolicyMembers(parameters={"id": policies["body"]["resources"][0]})
+        result = falcon.queryCombinedDeviceControlPolicyMembers(parameters={"id": policies["body"]["resources"][0]["id"]})
         assert bool(result["status_code"] in AllowedResponses) is True
 
     def test_errors(self):
