@@ -36,19 +36,18 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
 # pylint: disable=R0904  # Aligning method count to API service collection operation count
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
 from ._service_class import ServiceClass
 from ._endpoint._real_time_response import _real_time_response_endpoints as Endpoints
 
 
-class Real_Time_Response(ServiceClass):
+class RealTimeResponse(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
     is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def RTR_AggregateSessions(self: object, body: dict) -> dict:
+    def aggregate_sessions(self: object, body: dict) -> dict:
         """
         Get aggregates on session data.
         """
@@ -62,7 +61,7 @@ class Real_Time_Response(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def BatchActiveResponderCmd(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def batch_active_responder_command(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Batch executes a RTR active-responder command across the hosts mapped to the given batch ID.
         """
@@ -78,7 +77,7 @@ class Real_Time_Response(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def BatchCmd(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def batch_command(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Batch executes a RTR read-only command across the hosts mapped to the given batch ID.
         """
@@ -94,7 +93,7 @@ class Real_Time_Response(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def BatchGetCmdStatus(self: object, parameters: dict = None, **kwargs) -> dict:
+    def batch_get_command_status(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieves the status of the specified batch get command.
         Will return successful files when they are finished processing.
@@ -109,7 +108,7 @@ class Real_Time_Response(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def BatchGetCmd(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def batch_get_command(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Batch executes `get` command across hosts to retrieve files.
         After this call is made `/real-time-response/combined/get-command-status/v1` is used to query for the results.
@@ -126,7 +125,7 @@ class Real_Time_Response(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def BatchInitSessions(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def batch_init_sessions(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Batch initialize a RTR session on multiple hosts.
         Before any RTR commands can be used, an active session is needed on the host.
@@ -143,7 +142,7 @@ class Real_Time_Response(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def BatchRefreshSessions(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def batch_refresh_sessions(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Batch refresh a RTR session on multiple hosts. RTR sessions will expire after 10 minutes unless refreshed.
         """
@@ -159,7 +158,7 @@ class Real_Time_Response(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_CheckActiveResponderCommandStatus(self: object, parameters: dict = None, **kwargs) -> dict:
+    def check_active_responder_command_status(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get status of an executed active-responder command on a single host.
         """
@@ -173,7 +172,7 @@ class Real_Time_Response(ServiceClass):
             params=parameters
             )
 
-    def RTR_ExecuteActiveResponderCommand(self: object, body: dict) -> dict:
+    def execute_active_responder_command(self: object, body: dict) -> dict:
         """
         Execute an active responder command on a single host.
         """
@@ -187,7 +186,7 @@ class Real_Time_Response(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_CheckCommandStatus(self: object, parameters: dict = None, **kwargs) -> dict:
+    def check_command_status(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get status of an executed command on a single host.
         """
@@ -200,7 +199,7 @@ class Real_Time_Response(ServiceClass):
             params=parameters
             )
 
-    def RTR_ExecuteCommand(self: object, body: dict) -> dict:
+    def execute_command(self: object, body: dict) -> dict:
         """
         Execute a command on a single host.
         """
@@ -214,7 +213,7 @@ class Real_Time_Response(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_GetExtractedFileContents(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_extracted_file_contents(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get RTR extracted file contents for specified session and sha256.
         """
@@ -228,7 +227,7 @@ class Real_Time_Response(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_ListFiles(self: object, parameters: dict = None, **kwargs) -> dict:
+    def list_files(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Get a list of files for the specified RTR session.
         """
@@ -238,11 +237,11 @@ class Real_Time_Response(ServiceClass):
             endpoints=Endpoints,
             operation_id="RTR_ListFiles",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "session_id")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_DeleteFile(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_file(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Delete a RTR session file.
         """
@@ -256,7 +255,7 @@ class Real_Time_Response(ServiceClass):
             params=parameters
             )
 
-    def RTR_PulseSession(self: object, body: dict) -> dict:
+    def pulse_session(self: object, body: dict) -> dict:
         """
         Refresh a session timeout on a single host.
         """
@@ -269,7 +268,7 @@ class Real_Time_Response(ServiceClass):
             body=body
             )
 
-    def RTR_ListSessions(self: object, body: dict) -> dict:
+    def list_sessions(self: object, body: dict) -> dict:
         """
         Get session metadata by session id.
         """
@@ -282,7 +281,7 @@ class Real_Time_Response(ServiceClass):
             body=body
             )
 
-    def RTR_ListQueuedSessions(self: object, body: dict) -> dict:
+    def list_queued_sessions(self: object, body: dict) -> dict:
         """
         Get session metadata by session id.
         """
@@ -295,7 +294,7 @@ class Real_Time_Response(ServiceClass):
             body=body
             )
 
-    def RTR_InitSession(self: object, body: dict) -> dict:
+    def init_session(self: object, body: dict) -> dict:
         """
         Initialize a new session with the RTR cloud.
         """
@@ -309,7 +308,7 @@ class Real_Time_Response(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_DeleteSession(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_session(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Delete a session.
         """
@@ -320,11 +319,11 @@ class Real_Time_Response(ServiceClass):
             operation_id="RTR_DeleteSession",
             method="DELETE",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "session_id")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_DeleteQueuedSession(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_queued_session(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Delete a queued session.
         """
@@ -339,7 +338,7 @@ class Real_Time_Response(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_ListAllSessions(self: object, parameters: dict = None, **kwargs) -> dict:
+    def list_all_sessions(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get a list of session_ids.
         """
@@ -351,3 +350,33 @@ class Real_Time_Response(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    RTR_AggregateSessions = aggregate_sessions
+    BatchActiveResponderCmd = batch_active_responder_command
+    BatchCmd = batch_command
+    BatchGetCmdStatus = batch_get_command_status
+    BatchGetCmd = batch_get_command
+    BatchInitSessions = batch_init_sessions
+    BatchRefreshSessions = batch_refresh_sessions
+    RTR_CheckActiveResponderCommandStatus = check_active_responder_command_status
+    RTR_ExecuteActiveResponderCommand = execute_active_responder_command
+    RTR_CheckCommandStatus = check_command_status
+    RTR_ExecuteCommand = execute_command
+    RTR_GetExtractedFileContents = get_extracted_file_contents
+    RTR_ListFiles = list_files
+    RTR_DeleteFile = delete_file
+    RTR_ListQueuedSessions = list_queued_sessions
+    RTR_DeleteQueuedSession = delete_queued_session
+    RTR_PulseSession = pulse_session
+    RTR_ListSessions = list_sessions
+    RTR_InitSession = init_session
+    RTR_DeleteSession = delete_session
+    RTR_ListAllSessions = list_all_sessions
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Real_Time_Response = RealTimeResponse  # pylint: disable=C0103
