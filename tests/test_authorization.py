@@ -31,9 +31,18 @@ class TestAuthorization():
     def getConfigExtended(self):
         if "FALCONPY_DEBUG_TOKEN" in os.environ:
             self.token = os.getenv("FALCONPY_DEBUG_TOKEN")
+            self.config = {}
+            self.config["falcon_client_id"] = os.environ["FALCONPY_DEBUG_CLIENT_ID"]
+            self.config["falcon_client_secret"] = os.environ["FALCONPY_DEBUG_CLIENT_SECRET"]
+            if "DEBUG_API_BASE_URL" in os.environ:
+                self.config["falcon_base_url"] = os.getenv("DEBUG_API_BASE_URL")
+            else:
+                self.config["falcon_base_url"] = "https://api.crowdstrike.com"
         else:
             status = self.getConfig()
             if status:
+                os.environ["FALCONPY_DEBUG_CLIENT_ID"] = self.config["falcon_client_id"]
+                os.environ["FALCONPY_DEBUG_CLIENT_SECRET"] = self.config["falcon_client_secret"]
                 self.authorization = FalconAuth.OAuth2(creds={
                     "client_id": self.config["falcon_client_id"],
                     "client_secret": self.config["falcon_client_secret"]
@@ -50,6 +59,8 @@ class TestAuthorization():
     def clear_env_token(self):
         if "FALCONPY_DEBUG_TOKEN" in os.environ:
             os.environ["FALCONPY_DEBUG_TOKEN"] = ""
+            os.environ["FALCONPY_DEBUG_CLIENT_ID"] = ""
+            os.environ["FALCONPY_DEBUG_CLIENT_SECRET"] = ""
         return True
 
     def getConfig(self):

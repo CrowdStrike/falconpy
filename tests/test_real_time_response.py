@@ -16,7 +16,11 @@ from falconpy import hosts as FalconHosts
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
 falcon = FalconRTR.Real_Time_Response(access_token=token)
-falcon_hosts = FalconHosts.Hosts(access_token=token)
+# Testing direct credential specification here - jshcodes 08.14.21
+falcon_hosts = FalconHosts.Hosts(client_id=auth.config["falcon_client_id"],
+    client_secret=auth.config["falcon_client_secret"],
+    base_url=auth.config["falcon_base_url"]
+    )
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -32,9 +36,11 @@ class TestRTR:
         returned = False
         # This will have to be periodically updated using this solution, but for now it provides the necessary code coverage.
         # Highly dependant upon my test CID / API keys
-        aid_to_check = falcon_hosts.QueryDevicesByFilter(filter="hostname:'ip-172-31-30-80*'")["body"]["resources"][0]
+        aid_lookup = falcon_hosts.QueryDevicesByFilter(filter="hostname:'ip-172-31-30-80*'")
+        aid_to_check = aid_lookup["body"]["resources"][0]
         if aid_to_check:
-            session_id = falcon.RTR_InitSession(body={"device_id": aid_to_check})["body"]["resources"][0]["session_id"]
+            result = falcon.RTR_InitSession(body={"device_id": aid_to_check})
+            session_id = result["body"]["resources"][0]["session_id"]
             if falcon.RTR_DeleteSession(session_id=session_id)["status_code"] == 204:
                 returned = True
             else:
