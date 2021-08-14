@@ -36,18 +36,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
 from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._quick_scan import _quick_scan_endpoints as Endpoints
 
 
-class Quick_Scan(ServiceClass):
+class QuickScan(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
     is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def GetScansAggregates(self: object, body: dict) -> dict:
+    def get_scans_aggregates(self: object, body: dict) -> dict:
         """
         Get scans aggregations as specified via json in request body.
         """
@@ -57,10 +56,11 @@ class Quick_Scan(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetScansAggregates",
             method="POST",
-            body=body)
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetScans(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_scans(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Check the status of a volume scan. Time required for analysis increases with the number
         of samples in a volume but usually it should take less than 1 minute
@@ -71,9 +71,10 @@ class Quick_Scan(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetScans",
             keywords=kwargs,
-            params=parameters)
+            params=parameters
+            )
 
-    def ScanSamples(self: object, body: dict) -> dict:
+    def scan_samples(self: object, body: dict) -> dict:
         """
         Get scans aggregations as specified via json in request body.
         """
@@ -83,10 +84,11 @@ class Quick_Scan(ServiceClass):
             endpoints=Endpoints,
             operation_id="ScanSamples",
             method="POST",
-            body=body)
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QuerySubmissionsMixin0(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_submissions(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Find IDs for submitted scans by providing an FQL filter and paging details.
         Returns a set of volume IDs that match your criteria.
@@ -97,4 +99,18 @@ class Quick_Scan(ServiceClass):
             endpoints=Endpoints,
             operation_id="QuerySubmissionsMixin0",
             keywords=kwargs,
-            params=parameters)
+            params=parameters
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    GetScansAggregates = get_scans_aggregates
+    GetScans = get_scans
+    ScanSamples = scan_samples
+    QuerySubmissionsMixin0 = query_submissions
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Quick_Scan = QuickScan  # pylint: disable=C0103
