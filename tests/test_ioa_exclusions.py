@@ -13,7 +13,7 @@ from falconpy.ioa_exclusions import IOA_Exclusions as FalconIOAE
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
 falcon = FalconIOAE(access_token=token)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 429, 500]  # Adding rate-limiting as an allowed response for now
 
 
 class TestIOAExclusions:

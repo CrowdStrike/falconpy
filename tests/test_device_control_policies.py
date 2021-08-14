@@ -15,7 +15,7 @@ from falconpy import device_control_policies as FalconDeviceControlPolicy
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
 falcon = FalconDeviceControlPolicy.Device_Control_Policies(access_token=token)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 429, 500]  # Adding 500
 
 
 class TestDeviceControlPolicy:
