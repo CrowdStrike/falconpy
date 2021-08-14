@@ -15,7 +15,7 @@ sys.path.append(os.path.abspath('src'))
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
 falcon = FalconSensorUpdate.Sensor_Update_Policy(access_token=token)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 429, 500]  # Adding 500 as an allowed response for now
 
 
 class TestFalconSensorUpdate:
