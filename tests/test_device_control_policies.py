@@ -67,7 +67,10 @@ class TestDeviceControlPolicy:
         if policies["status_code"] == 500:
             pytest.skip("API communication failure")
         else:
-            result = falcon.queryDeviceControlPolicyMembers(id=policies["body"]["resources"][0])
+            if "resources" in policies["body"]:
+                result = falcon.queryDeviceControlPolicyMembers(id=policies["body"]["resources"][0])
+            else:
+                pytest.skip("API communication failure")
         assert bool(result["status_code"] in AllowedResponses) is True
 
     # @pytest.mark.skipif(
@@ -81,9 +84,12 @@ class TestDeviceControlPolicy:
         if policy["status_code"] == 500:  # Can't hit the API
             pytest.skip("Unable to communicate with the Device Control API")
         else:
-            assert bool(falcon.getDeviceControlPolicies(
-                    ids=policy["body"]["resources"][0]
-                    )["status_code"] in AllowedResponses) is True
+            if "resources" in policy["body"]:
+                assert bool(falcon.getDeviceControlPolicies(
+                        ids=policy["body"]["resources"][0]
+                        )["status_code"] in AllowedResponses) is True
+            else:
+                pytest.skip("Unable to communicate with the Device Control API")
 
     def test_queryCombinedDeviceControlPolicies(self):
         """
@@ -104,8 +110,11 @@ class TestDeviceControlPolicy:
         if policies["status_code"] == 500:  # Can't hit the API
             pytest.skip("Unable to communicate with the Device Control API")
         else:
-            result = falcon.queryCombinedDeviceControlPolicyMembers(parameters={"id": policies["body"]["resources"][0]["id"]})
-            assert bool(result["status_code"] in AllowedResponses) is True
+            if "resources" in policies["body"]:
+                result = falcon.queryCombinedDeviceControlPolicyMembers(parameters={"id": policies["body"]["resources"][0]["id"]})
+                assert bool(result["status_code"] in AllowedResponses) is True
+            else:
+                pytest.skip("API communication failure")
 
     def test_errors(self):
         """

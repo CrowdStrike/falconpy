@@ -40,12 +40,15 @@ class TestRTR:
         aid_to_check = aid_lookup["body"]["resources"][0]
         if aid_to_check:
             result = falcon.RTR_InitSession(body={"device_id": aid_to_check})
-            session_id = result["body"]["resources"][0]["session_id"]
-            if falcon.RTR_DeleteSession(session_id=session_id)["status_code"] == 204:
-                returned = True
+            if "resources" in result["body"]:
+                session_id = result["body"]["resources"][0]["session_id"]
+                if falcon.RTR_DeleteSession(session_id=session_id)["status_code"] == 204:
+                    returned = True
+                else:
+                    returned = False
             else:
-                returned = False
-
+                pytest.skip("API communication failure")
+                
         return returned
 
     def serviceRTR_GenerateErrors(self):
