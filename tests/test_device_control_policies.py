@@ -76,9 +76,13 @@ class TestDeviceControlPolicy:
         """
         Pytest harness hook
         """
-        assert bool(falcon.getDeviceControlPolicies(
-                ids=falcon.queryDeviceControlPolicies(parameters={"limit": 1})["body"]["resources"][0]
-                )["status_code"] in AllowedResponses) is True
+        policy = falcon.queryDeviceControlPolicies(parameters={"limit": 1})
+        if policy["status_code"] == 500:  # Can't hit the API
+            pytest.skip("Unable to communicate with the Device Control API")
+        else:
+            assert bool(falcon.getDeviceControlPolicies(
+                    ids=policy["body"]["resources"][0]
+                    )["status_code"] in AllowedResponses) is True
 
     def test_queryCombinedDeviceControlPolicies(self):
         """
@@ -96,8 +100,11 @@ class TestDeviceControlPolicy:
         Pytest harness hook
         """
         policies = falcon.queryCombinedDeviceControlPolicies(parameters={"limit": 1})
-        result = falcon.queryCombinedDeviceControlPolicyMembers(parameters={"id": policies["body"]["resources"][0]["id"]})
-        assert bool(result["status_code"] in AllowedResponses) is True
+        if policies["status_code"] == 500:  # Can't hit the API
+            pytest.skip("Unable to communicate with the Device Control API")
+        else:
+            result = falcon.queryCombinedDeviceControlPolicyMembers(parameters={"id": policies["body"]["resources"][0]["id"]})
+            assert bool(result["status_code"] in AllowedResponses) is True
 
     def test_errors(self):
         """
