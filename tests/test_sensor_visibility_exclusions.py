@@ -2,7 +2,7 @@
 # This class tests the sensor_visibility_exclusions service class
 import os
 import sys
-
+import pytest
 # Authentication via test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -13,15 +13,17 @@ from falconpy.sensor_visibility_exclusions import Sensor_Visibility_Exclusions a
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
 falcon = FalconSVE(access_token=token)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 429]
 
 
 class TestSVExclusions:
     def serviceSVE_ListExclusions(self):
         returned = False
-        if falcon.querySensorVisibilityExclusionsV1(limit=1, offset=2, pizza="IsDelicious")["status_code"] in AllowedResponses:
+        exclusions = falcon.querySensorVisibilityExclusionsV1(limit=1, offset=2, pizza="IsDelicious")
+        if exclusions["status_code"] in AllowedResponses:
             returned = True
-
+        elif exclusions["status_code"] == 500:
+            pytest.skip("API communication failure")
         return returned
 
     def serviceSVE_GenerateErrors(self):
