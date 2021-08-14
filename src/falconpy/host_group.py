@@ -36,194 +36,173 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, generate_error_result, force_default, args_to_params
+
+from ._util import generate_error_result, force_default, args_to_params, handle_single_argument, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._host_group import _host_group_endpoints as Endpoints
 
 
-class Host_Group(ServiceClass):
+class HostGroup(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, a
+    existing instance of the authentication class as an object or a
+    valid set of credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryCombinedGroupMembers(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_group_members(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for members of a Host Group in your environment by providing an FQL filter
         and paging details. Returns a set of host details which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/queryCombinedGroupMembers
-        operation_id = "queryCombinedGroupMembers"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryCombinedGroupMembers",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryCombinedHostGroups(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_host_groups(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for Host Groups in your environment by providing an FQL filter and
         paging details. Returns a set of Host Groups which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/queryCombinedHostGroups
-        operation_id = "queryCombinedHostGroups"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryCombinedHostGroups",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def performGroupAction(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def perform_group_action(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Perform the specified action on the Host Groups specified in the request.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/performGroupAction
         _allowed_actions = ['add-hosts', 'remove-hosts']
         operation_id = "performGroupAction"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         if "action_name" not in parameter_payload:
             parameter_payload["action_name"] = "Not Specified"
-        if parameter_payload["action_name"].lower() in _allowed_actions:
-            returned = service_request(caller=self,
-                                       method="POST",
-                                       endpoint=target_url,
-                                       body=body_payload,
-                                       params=parameter_payload,
-                                       headers=header_payload,
-                                       verify=self.ssl_verify
-                                       )
+        action_name = parameter_payload.get("action_name", "Not Specified")
+        if action_name.lower() in _allowed_actions:
+            returned = process_service_request(
+                            calling_object=self,
+                            endpoints=Endpoints,
+                            operation_id=operation_id,
+                            body=body,
+                            keywords=kwargs,
+                            params=parameters
+                            )
         else:
             returned = generate_error_result("Invalid value specified for action_name parameter.")
 
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getHostGroups(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_host_groups(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve a set of Host Groups by specifying their IDs.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/getHostGroups
-        operation_id = "getHostGroups"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getHostGroups",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
-    def createHostGroups(self: object, body: dict) -> dict:
+    def create_host_groups(self: object, body: dict) -> dict:
         """
         Create Host Groups by specifying details about the group to create.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/createHostGroups
-        operation_id = "createHostGroups"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="createHostGroups",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def deleteHostGroups(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_host_groups(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Delete a set of Host Groups by specifying their IDs.
         """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/deleteHostGroups
-        operation_id = "deleteHostGroups"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="DELETE",
+            operation_id="deleteHostGroups",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
-    def updateHostGroups(self: object, body: dict) -> dict:
+    def update_host_groups(self: object, body: dict) -> dict:
         """
         Update Host Groups by specifying the ID of the group and details to update.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/updateHostGroups
-        operation_id = "updateHostGroups"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="PATCH",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="PATCH",
+            operation_id="updateHostGroups",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryGroupMembers(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_group_members(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for members of a Host Group in your environment by providing an FQL filter
         and paging details. Returns a set of Agent IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/queryGroupMembers
-        operation_id = "queryGroupMembers"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryGroupMembers",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryHostGroups(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_host_groups(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for Host Groups in your environment by providing an FQL filter and
         paging details. Returns a set of Host Group IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group/queryHostGroups
-        operation_id = "queryHostGroups"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryHostGroups",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    queryCombinedGroupMembers = query_combined_group_members
+    queryCombinedHostGroups = query_combined_host_groups
+    performGroupAction = perform_group_action
+    getHostGroups = get_host_groups
+    createHostGroups = create_host_groups
+    deleteHostGroups = delete_host_groups
+    updateHostGroups = update_host_groups
+    queryGroupMembers = query_group_members
+    queryHostGroups = query_host_groups
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Host_Group = HostGroup  # pylint: disable=C0103
