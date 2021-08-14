@@ -67,7 +67,7 @@ class TestDeviceControlPolicy:
         if policies["status_code"] == 500:
             pytest.skip("API communication failure")
         else:
-            if "resources" in policies["body"]:
+            if policies["body"]["resources"]:
                 result = falcon.queryDeviceControlPolicyMembers(id=policies["body"]["resources"][0])
             else:
                 pytest.skip("API communication failure")
@@ -84,7 +84,7 @@ class TestDeviceControlPolicy:
         if policy["status_code"] == 500:  # Can't hit the API
             pytest.skip("Unable to communicate with the Device Control API")
         else:
-            if "resources" in policy["body"]:
+            if policy["body"]["resources"]:
                 assert bool(falcon.getDeviceControlPolicies(
                         ids=policy["body"]["resources"][0]
                         )["status_code"] in AllowedResponses) is True
@@ -110,7 +110,7 @@ class TestDeviceControlPolicy:
         if policies["status_code"] == 500:  # Can't hit the API
             pytest.skip("Unable to communicate with the Device Control API")
         else:
-            if "resources" in policies["body"]:
+            if policies["body"]["resources"]:
                 result = falcon.queryCombinedDeviceControlPolicyMembers(parameters={"id": policies["body"]["resources"][0]["id"]})
                 assert bool(result["status_code"] in AllowedResponses) is True
             else:
