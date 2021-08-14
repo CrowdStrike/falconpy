@@ -26,7 +26,7 @@ class TestFalconPrevent:
 
     def servicePrevent_queryPreventionPolicyMembers(self):
         policies = falcon.queryPreventionPolicies(limit=1)
-        if policies["status_code"] in AllowedResponses:
+        if policies["status_code"] != 500:
             if falcon.queryPreventionPolicyMembers(
                     parameters={"id": policies["body"]["resources"][0]}
                     )["status_code"] in AllowedResponses:
@@ -37,12 +37,16 @@ class TestFalconPrevent:
             return True  # Can't hit the API for some reason
 
     def servicePrevent_getPreventionPolicies(self):
-        if falcon.getPreventionPolicies(
-                ids=falcon.queryPreventionPolicies(parameters={"limit": 1})["body"]["resources"][0]
-                )["status_code"] in AllowedResponses:
-            return True
+        policies = falcon.queryPreventionPolicies(parameters={"limit": 1})
+        if policies["status_code"] != 500:
+            if falcon.getPreventionPolicies(
+                    ids=policies["body"]["resources"][0]
+                    )["status_code"] in AllowedResponses:
+                return True
+            else:
+                return False
         else:
-            return False
+            return True  # Can't hit the API
 
     def servicePrevent_queryCombinedPreventionPolicies(self):
         if falcon.queryCombinedPreventionPolicies(limit=1)["status_code"] in AllowedResponses:
@@ -53,12 +57,16 @@ class TestFalconPrevent:
             #return False
 
     def servicePrevent_queryCombinedPreventionPolicyMembers(self):
-        if falcon.queryCombinedPreventionPolicyMembers(
-                parameters={"id": falcon.queryCombinedPreventionPolicies(parameters={"limit": 1})["body"]["resources"][0]["id"]}
-                )["status_code"] in AllowedResponses:
-            return True
+        policies = falcon.queryCombinedPreventionPolicies(parameters={"limit": 1})
+        if policies["status_code"] != 500:
+            if falcon.queryCombinedPreventionPolicyMembers(
+                    parameters={"id": policies["body"]["resources"][0]["id"]}
+                    )["status_code"] in AllowedResponses:
+                return True
+            else:
+                return False
         else:
-            return False
+            return True  # Can't hit the API
 
     def servicePrevent_GenerateErrors(self):
         falcon.base_url = "nowhere"
