@@ -36,112 +36,112 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
 import os
-from ._util import service_request, generate_ok_result, force_default, args_to_params
+from ._util import generate_ok_result, force_default, handle_single_argument, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._sensor_download import _sensor_download_endpoints as Endpoints
 
 
-class Sensor_Download(ServiceClass):
-    """The only requirement to instantiate an instance of this class
-       is a valid token provided by the Falcon API SDK OAuth2 class.
+class SensorDownload(ServiceClass):
+    """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class, a
+    existing instance of the authentication class as an object or a
+    valid set of credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetCombinedSensorInstallersByQuery(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_combined_sensor_installers_by_query(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve all metadata for installers from provided query
         """
-        operation_id = "GetCombinedSensorInstallersByQuery"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        #           /sensor-download/GetCombinedSensorInstallersByQuery
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCombinedSensorInstallersByQuery",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def DownloadSensorInstallerById(self: object,
-                                    parameters: dict = None,
-                                    file_name: str = None,
-                                    download_path: str = None,
-                                    **kwargs) -> object:
+    def download_sensor_installer(self: object,
+                                  *args,
+                                  parameters: dict = None,
+                                  file_name: str = None,
+                                  download_path: str = None,
+                                  **kwargs) -> object:
         """
         Download the sensor by the sha256 id, into the specified directory.
         The path will be created for the user if it does not already exist
         """
-        operation_id = "DownloadSensorInstallerById"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/DownloadSensorInstallerById
+        returned = process_service_request(
+                        calling_object=self,
+                        endpoints=Endpoints,
+                        operation_id="DownloadSensorInstallerById",
+                        keywords=kwargs,
+                        params=handle_single_argument(args, parameters, "ids")
+                        )
         if file_name and download_path and isinstance(returned, bytes):
             os.makedirs(download_path, exist_ok=True)
             # write the newly downloaded sensor into the aforementioned directory with provided file name
             with open(os.path.join(download_path, file_name), "wb") as sensor:
                 sensor.write(returned)
             returned = generate_ok_result(message="Download successful")
+
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetSensorInstallersEntities(self: object, parameters: dict = None, **kwargs) -> object:
+    def get_sensor_installer_entities(self: object, parameters: dict = None, **kwargs) -> object:
         """
         For a given list of SHA256's, retrieve the metadata for each installer
         such as the release_date and version among other fields
         """
-        operation_id = "GetSensorInstallersEntities"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersEntities
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetSensorInstallersEntities",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def GetSensorInstallersCCIDByQuery(self: object) -> dict:
+    def get_sensor_installer_ccid(self: object) -> dict:
         """
         Retrieve the CID for the current oauth environment
         """
-        operation_id = "GetSensorInstallersCCIDByQuery"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersCCIDByQuery
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetSensorInstallersCCIDByQuery"
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetSensorInstallersByQuery(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_sensor_installers_by_query(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve a list of SHA256 for installers based on the filter
         """
-        operation_id = "GetSensorInstallersByQuery"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersByQuery
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetSensorInstallersByQuery",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    GetCombinedSensorInstallersByQuery = get_combined_sensor_installers_by_query
+    DownloadSensorInstallerById = download_sensor_installer
+    GetSensorInstallersEntities = get_sensor_installer_entities
+    GetSensorInstallersCCIDByQuery = get_sensor_installer_ccid
+    GetSensorInstallersByQuery = get_sensor_installers_by_query
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Sensor_Download = SensorDownload  # pylint: disable=C0103
