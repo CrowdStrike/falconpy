@@ -27,9 +27,13 @@ class TestZeroTrustAssessment:
 
     #     return error_checks
 
-    def test_notfound(self):
+    def test_get_assessment(self):
         """Pytest harness hook"""
         assert bool(falcon.getAssessmentV1(ids="12345678")["status_code"] in AllowedResponses) is True
+
+    def test_get_complance(self):
+        """Pytest harness hook"""
+        assert bool(falcon.get_compliance()["status_code"] in AllowedResponses) is True
 
     # This should be the last test executed, log out the token
     @staticmethod
