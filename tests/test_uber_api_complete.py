@@ -32,11 +32,9 @@ else:
         sys.exit(1)
 
 falcon = FalconSDK.APIHarness(
-    creds={
-        "client_id": config["falcon_client_id"],
-        "client_secret": config["falcon_client_secret"]
-    }
-)
+    client_id=config["falcon_client_id"],
+    client_secret=config["falcon_client_secret"]
+    )
 falcon.authenticate()
 if not falcon.authenticated:
     sys.exit(1)
@@ -213,12 +211,7 @@ class TestUber:
             return False
 
     def uberCCAWS_BadAuthentication(self):
-        falcon = FalconSDK.APIHarness(
-            creds={
-                "client_id": "BadClientID",
-                "client_secret": "BadClientSecret"
-            }
-        )
+        falcon = FalconSDK.APIHarness()
         if falcon.command("QueryAWSAccounts", parameters={"limit": 1})["status_code"] == 401:
             return True
         else:
