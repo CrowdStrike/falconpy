@@ -41,7 +41,7 @@ _zero_trust_assessment_endpoints = [
   [
     "getAssessmentV1",
     "GET",
-    "/zero-trust-assessment/entities/assessments/v1?ids={}",
+    "/zero-trust-assessment/entities/assessments/v1",
     "Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID) and a customer ID (CID).",
     "zero_trust_assessment",
     [
@@ -57,5 +57,13 @@ _zero_trust_assessment_endpoints = [
         "required": True
       }
     ]
+  ],
+  [
+    "getComplianceV1",
+    "GET",
+    "/zero-trust-assessment/entities/compliance/v1",
+    "Get the Zero Trust Assessment compliance report for one customer ID (CID).",
+    "zero_trust_assessment",
+    []
   ]
 ]
