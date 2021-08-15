@@ -41,7 +41,7 @@ _scheduled_reports_endpoints = [
   [
     "scheduled_reports_get",
     "GET",
-    "/reports/entities/scheduled-reports/v1",
+    "/reports/entities/scheduled-reports/v1?ids={}",
     "Retrieve scheduled reports for the provided report IDs.",
     "scheduled_reports",
     [
