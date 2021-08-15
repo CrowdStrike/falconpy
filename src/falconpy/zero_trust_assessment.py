@@ -53,6 +53,7 @@ class ZeroTrustAssessment(ServiceClass):
         """
         Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID) and a customer ID (CID).
         """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getAssessmentV1
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -61,10 +62,22 @@ class ZeroTrustAssessment(ServiceClass):
             params=parameters
             )
 
+    def get_compliance(self: object) -> dict:
+        """
+        Get the Zero Trust Assessment compliance report for one customer ID (CID).
+        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getComplianceV1
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getComplianceV1"
+            )
+
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here for
     # backwards compatibility / ease of use purposes
     getAssessmentV1 = get_assessment
+    getComplianceV1 = get_compliance
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
