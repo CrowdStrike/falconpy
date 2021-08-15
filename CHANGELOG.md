@@ -54,6 +54,8 @@
 + Added _new_ Schedule Reports Service Class. `scheduled_reports.py`
     - Basic unit test implemented: `test_scheduled_reports.py`
 
++ Added new operation (getComplianceV1) to Zero Trust Assessment Service Class. `zero_trust_assessment.py`
+
 ## Issues resolved
 + Bug fix: Resolved HTTP status code 415 on calls to refreshActiveStreamSession (refresh_active_stream). Closes #247. `event_streams.py`
 + Bug fix: Resolved header pollution issue within Falcon X Sandbox Service Class. Closes #250. `falconx_sandbox.py`
