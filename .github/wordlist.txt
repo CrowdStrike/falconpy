@@ -298,6 +298,7 @@ createSVExclusionsV
 createSensorUpdatePolicies
 createSensorUpdatePoliciesV
 createUserGroup
+creds
 crowdstrike
 cspm
 datafeed
