@@ -1,14 +1,53 @@
-# Version 0.5.7
+# Version 0.6.0
 ## Added features and functionality
-+ Refactored Events Streams Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #248. `event_streams.py`
++ Refactored Cloud Connect AWS Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #271. `cloud_connect_aws.py`
++ Refactored CSPM Registration Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #272. `cspm_registration.py`
 + Refactored Custom IOA Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #258. `custom_ioa.py`
++ Refactored D4C Registration Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #273. `d4c_registration.py`
++ Refactored Detects Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #274. `detects.py`
++ Refactored Device Control Policies Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #275. `device_control_policies.py`
++ Refactored Events Streams Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #248. `event_streams.py`
++ Refactored Falcon Complete Dashboard Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #294. `falcon_complete_dashboard.py` 
++ Refactored Falcon Flight Control Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #292. `mssp.py`
 + Refactored Falcon X Sandbox Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #259. `falconx_sandbox.py`
 + Refactored Firewall Management Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #257. `firewall_management.py`
-+ Refactored IOC Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #267. `ioc.py`
++ Refactored Firewall Policies Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #296. `firewall_policies.py`
++ Refactored Hosts Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #269. `hosts.py` 
++ Refactored Host Group Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #286. `host_group.py` 
++ Refactored Identity Protection Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #299. `identity_protection.py` 
++ Refactored Incidents Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #289. `incidents.py`
++ Refactored Installation Tokens Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #287. `installation_tokens.py` 
 + Refactored Intel Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #264. `intel.py`
++ Refactored IOA Exclusions Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #283. `ioa_exclusions.py`
++ Refactored IOC Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #267. `ioc.py` 
++ Refactored IOCs Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #284. `iocs.py`
++ Refactored Kubernetes Protection Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #293. `kubernetes_protection.py` 
++ Refactored MalQuery Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #298. `malquery.py` 
++ Refactored ML Exclusions Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #281. `ml_exclusions.py`
++ Refactored Overwatch Dashboard Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #278. `overwatch_dashboard.py`
++ Refactored Prevention Policy Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #290. `prevention_policy.py`
++ Refactored Quick Scan Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #282. `quick_scan.py`
++ Refactored Real Time Response Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #280. `real_time_response.py`
 + Refactored Real Time Response Admin Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #256. `real_time_response_admin.py`
++ Refactored Recon Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #297. `recon.py` 
++ Refactored Response Policies Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #295. `response_policies.py`
 + Refactored Sample Uploads Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #255. `sample_uploads.py`
++ Refactored Sensor Download Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #285. `sensor_download.py`
++ Refactored Sensor Update Policy Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #288. `sensor_update_policy.py`
++ Refactored Sensor Visibility Exclusions Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #279. `sensor_visibility_exclusions.py`
++ Refactored Spotlight Vulnerabilities Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #277. `spotlight_vulnerabilities.py`
++ Refactored User Management Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #276. `user_management.py`
 + Refactored Zero Trust Assessment Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #260. `zero_trust_assessment.py`
+
++ Added client_id and client_secret as keywords to the base Service Class, Uber Class, and Authentication class. `api_complete.py`, `oauth2.py`, `_service_class.py`
+
+    > This change allows you to specify your API ID and secret when you create an instance of any of the service class. (Direct Authentication)
+    ```python
+    from falconpy.hosts import Hosts
+    falcon = Hosts(client_id="CLIENT_ID_HERE", client_secret="CLIENT_SECRET_HERE")
+    results = falcon.query_devices_by_filter(sort="devices.hostname|desc", limit=10)
+    print(results)
+    ```
 
 ## Issues resolved
 + Bug fix: Resolved HTTP status code 415 on calls to refreshActiveStreamSession (refresh_active_stream). Closes #247. `event_streams.py`
@@ -19,37 +58,29 @@
 + Bug fix: Resolved HTTP status code 500 error on calls to RTR_CreatePut_Files (create_put_files). Closes #261. `real_time_response_admin.py`
 + Bug fix: Resolved HTTP status code 400 or 500 error on calls to RTR_UpdateScripts (update_scripts) and calls to RTR_CreateScripts (create_scripts). Closes #262. `real_time_response_admin.py`
 + Bug fix: Updated force_default helper function to drop all but the first argument passed to the method, forcing Service Classes to support keywords only. Closes #263. `_util.py`
-> Potential __*breaking change*__: Developers must use keywords, __not arguments__, when specifying parameters provided to Service Class methods.
-#### Example
-```python
-from falconpy.hosts import Hosts
-falcon = Hosts(creds={"client_id": CLIENT_ID_HERE, "client_secret": CLIENT_SECRET_HERE})
+    > Potential __*breaking change*__: Developers should use keywords, __not arguments__, when specifying parameters provided to Service Class methods.
+    #### Example
+    ```python
+    from falconpy.hosts import Hosts
+    falcon = Hosts(creds={"client_id": CLIENT_ID_HERE, "client_secret": CLIENT_SECRET_HERE})
 
-result = falcon.GetDeviceDetails(ids="12345"))   # This command will work
-print(result)
-
-bad_result = falcon.GetDeviceDetails("12345")    # This command will fail with the API complaining
-print(bad_result)                                # that the "ids" parameter is not present.
-```
-
+    result = falcon.GetDeviceDetails(ids="12345"))   # This syntax will always work
+    print(result)
+    result = falcon.GetDeviceDetails("12345")        # This syntax may fail depending on method
+    print(result)
+    bad_result = falcon.QueryHiddenDevices(1, 0, "devices.hostname|desc", "")
+    print(bad_result)                                # This syntax will fail
+    ```
+    > Whenever possible, Service Classes attempt to guess the keyword for the first argument passed (if present). Typically these are aligned to the one required parameter for the method. (_Example: the **ids** parameter_)
 + Related to #263: Updated Uber class to no longer leverage the force_default helper, allowing users to still use the first argument to specify the action to be performed. `api_complete.py`
-> Note: This functionality _only_ works when using the Uber class, and _only_ with the __action__ parameter.
 + Bug fix: Added the **after** parameter to the endpoint parameter definitions for _indicator_combined_v1_ and _indicator_search_v1_. Closes #266. `_endpoint/_ioc.py`
++ Bug fix: Multiple methods within the Flight Control Service Class make use of the wrong HTTP method. Closes #291. `mssp.py`
 
 ## Other
 + Initial refactoring of unit test harnesses for service classes detailed above.
-    - `test_cloud_connect_aws.py`
-    - `test_custom_ioa.py`
-    - `test_event_streams.py`
-    - `test_falconx_sandbox.py`
-    - `test_intel.py`
-    - `test_firewall_management.py`
-    - `test_real_time_response_admin.py` (Updated to cover additional API operations)
-    - `test_sample_uploads.py`
-    - `zero_trust_assessment.py`
-+ Minor adjustment to Uber class unit tests to better demonstrate proper method usage. `test_uber_api_complete.py`
-+ Initial refactoring of unit tests to support US-2 / Gov base URL testing.
-    - `test_authorization.py`
++ Reduced token-related API requests performed by unit testing series.
++ Minor adjustment to Uber class unit tests to better demonstrate proper method usage.
++ Updated unit tests to support US-2 / Gov base URL testing.
 
 # Version 0.5.6
 ## Added features and functionality
