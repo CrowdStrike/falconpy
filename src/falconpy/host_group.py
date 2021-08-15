@@ -87,8 +87,6 @@ class HostGroup(ServiceClass):
         _allowed_actions = ['add-hosts', 'remove-hosts']
         operation_id = "performGroupAction"
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        if "action_name" not in parameter_payload:
-            parameter_payload["action_name"] = "Not Specified"
         action_name = parameter_payload.get("action_name", "Not Specified")
         if action_name.lower() in _allowed_actions:
             returned = process_service_request(
