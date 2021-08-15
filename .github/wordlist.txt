@@ -335,6 +335,7 @@ getAssessmentV
 getCIDGroupById
 getCIDGroupMembersBy
 getChildren
+getComplianceV
 getDeviceControlPolicies
 getHostGroups
 getIOAExclusionsV
