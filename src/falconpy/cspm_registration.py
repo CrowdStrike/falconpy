@@ -42,12 +42,17 @@ from ._endpoint._cspm_registration import _cspm_registration_endpoints as Endpoi
 
 
 class CSPMRegistration(ServiceClass):
-    """The only requirement to instantiate an instance of this class
-       is a valid token provided by the Falcon API SDK OAuth2 class.
+    """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_aws_account(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Returns information about the current status of an AWS account."""
+        """
+        Returns information about the current status of an AWS account.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAwsAccount
         # Since there are multiple inbound "id" possibilities here. We are unable
         # to make calls leveraging a single argument, keywords only are supported
@@ -60,8 +65,9 @@ class CSPMRegistration(ServiceClass):
             )
 
     def create_aws_account(self: object, body: dict) -> dict:
-        """Creates a new account in our system for a customer and generates a script
-           to run in their AWS cloud environment to grant CrowdStrike Horizon access.
+        """
+        Creates a new account in our system for a customer and generates a script
+        to run in their AWS cloud environment to grant CrowdStrike Horizon access.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMAwsAccount
         return process_service_request(
@@ -74,7 +80,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_aws_account(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Delete an existing AWS Account or Organization by specifying their IDs."""
+        """
+        Delete an existing AWS Account or Organization by specifying their IDs.
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/DeleteCSPMAwsAccount
         # Since there are multiple inbound "id" possibilities here.
         # we are unable to calls leveraging a single argument, keywords only are supported
@@ -88,7 +96,9 @@ class CSPMRegistration(ServiceClass):
             )
 
     def update_aws_account(self: object, body: dict) -> dict:
-        """Patches a existing account in our system for a customer."""
+        """
+        Patches a existing account in our system for a customer.
+        """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/PatchCSPMAwsAccount
         return process_service_request(
             calling_object=self,
@@ -99,7 +109,9 @@ class CSPMRegistration(ServiceClass):
             )
 
     def get_aws_console_setup_urls(self: object) -> dict:
-        """Returns a URL for customers to visit in their cloud environment to grant access to CrowdStrike"""
+        """
+        Returns a URL for customers to visit in their cloud environment to grant access to CrowdStrike
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAwsConsoleSetupURLs
         return process_service_request(
             calling_object=self,
@@ -108,8 +120,9 @@ class CSPMRegistration(ServiceClass):
             )
 
     def get_aws_account_scripts_attachment(self: object) -> dict:
-        """Return a script for customers to run in their cloud environment
-           to grant access to CrowdStrike for their AWS environment.
+        """
+        Return a script for customers to run in their cloud environment
+        to grant access to CrowdStrike for their AWS environment.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /cspm-registration/GetCSPMAwsAccountScriptsAttachment
@@ -121,7 +134,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_azure_account(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Return information about Azure account registration."""
+        """
+        Return information about Azure account registration.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAzureAccount
         return process_service_request(
             calling_object=self,
@@ -132,8 +147,9 @@ class CSPMRegistration(ServiceClass):
             )
 
     def create_azure_account(self: object, body: dict) -> dict:
-        """Creates a new account in our system for a customer and generates a script
-           to run in their cloud environment to grant CrowdStrike Horizon access.
+        """
+        Creates a new account in our system for a customer and generates a script
+        to run in their cloud environment to grant CrowdStrike Horizon access.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMAzureAccount
         return process_service_request(
@@ -146,7 +162,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_azure_account(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Delete an existing Azure Subscription by specifying their IDs."""
+        """
+        Delete an existing Azure Subscription by specifying their IDs.
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/DeleteCSPMAzureAccount
         # This method supports calls using a single argument as opposed to keywords
         return process_service_request(
@@ -160,8 +178,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def update_azure_account_client_id(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
-        """Update an Azure service account in our system with the
-           user-created client_id created with the public key we've provided.
+        """
+        Update an Azure service account in our system with the
+        user-created client_id created with the public key we've provided.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         ...   /cspm-registration/UpdateCSPMAzureAccountClientID2
@@ -180,8 +199,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def update_azure_tenant_default_subscription_id(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Update an Azure service account in our system with the
-           user-created client_id created with the public key we've provided.
+        """
+        Update an Azure service account in our system with the
+        user-created client_id created with the public key we've provided.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         ...  /cspm-registration/UpdateCSPMAzureTenantDefaultSubscriptionID
@@ -196,8 +216,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_azure_user_scripts_attachment(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Return a script for customers to run in their cloud environment
-           to grant access to CrowdStrike for their Azure environment.
+        """
+        Return a script for customers to run in their cloud environment
+        to grant access to CrowdStrike for their Azure environment.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /cspm-registration/GetCSPMAzureUserScriptsAttachment
@@ -211,7 +232,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_ioa_events(self: object, parameters: dict = None, **kwargs) -> dict:
-        """For CSPM IOA events, gets list of IOA events."""
+        """
+        For CSPM IOA events, gets list of IOA events.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetIOAEvents
         return process_service_request(
             calling_object=self,
@@ -223,7 +246,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_ioa_users(self: object, parameters: dict = None, **kwargs) -> dict:
-        """For CSPM IOA users, gets list of IOA users."""
+        """
+        For CSPM IOA users, gets list of IOA users.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetIOAUsers
         return process_service_request(
             calling_object=self,
@@ -235,7 +260,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_policy(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Given a policy ID, returns detailed policy information."""
+        """
+        Given a policy ID, returns detailed policy information.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMPolicy
         # Supports single argument calls
         return process_service_request(
@@ -248,7 +275,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_policy_settings(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Returns information about current policy settings."""
+        """
+        Returns information about current policy settings.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMPolicySettings
         return process_service_request(
             calling_object=self,
@@ -259,7 +288,9 @@ class CSPMRegistration(ServiceClass):
             )
 
     def update_policy_settings(self: object, body: dict) -> dict:
-        """Updates a policy setting - can be used to override policy severity or to disable a policy entirely."""
+        """
+        Updates a policy setting - can be used to override policy severity or to disable a policy entirely.
+        """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         ...   /cspm-registration/UpdateCSPMPolicySettings
         return process_service_request(
@@ -272,7 +303,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_scan_schedule(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Returns scan schedule configuration for one or more cloud platforms."""
+        """
+        Returns scan schedule configuration for one or more cloud platforms.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMScanSchedule
         return process_service_request(
             calling_object=self,
@@ -283,7 +316,9 @@ class CSPMRegistration(ServiceClass):
             )
 
     def update_scan_schedule(self: object, body: dict) -> dict:
-        """Updates scan schedule configuration for one or more cloud platforms."""
+        """
+        Updates scan schedule configuration for one or more cloud platforms.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMScanSchedule
         return process_service_request(
             calling_object=self,
