@@ -57,8 +57,8 @@
 + Bug fix: Resolved header pollution issue within Sample Uploads Service Class. Closes #254. `sample_uploads.py`
 + Bug fix: Resolved HTTP status code 500 error on calls to RTR_CreatePut_Files (create_put_files). Closes #261. `real_time_response_admin.py`
 + Bug fix: Resolved HTTP status code 400 or 500 error on calls to RTR_UpdateScripts (update_scripts) and calls to RTR_CreateScripts (create_scripts). Closes #262. `real_time_response_admin.py`
-+ Bug fix: Updated force_default helper function to drop all but the first argument passed to the method, forcing Service Classes to support keywords only. Closes #263. `_util.py`
-    > Potential __*breaking change*__: Developers should use keywords, __not arguments__, when specifying parameters provided to Service Class methods.
++ Bug fix: Added handle_single_argument helper to attempt to handle single arguments passed to Service Class methods. Addresses a potential breaking change introduced by v0.5.4. Closes #263. `_util.py` 
+    > Developers should use keywords, __not arguments__, when specifying parameters provided to Service Class or the Uber Class command methods.
     #### Example
     ```python
     from falconpy.hosts import Hosts
