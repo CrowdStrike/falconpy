@@ -62,7 +62,7 @@
     #### Example
     ```python
     from falconpy.hosts import Hosts
-    falcon = Hosts(creds={"client_id": CLIENT_ID_HERE, "client_secret": CLIENT_SECRET_HERE})
+    falcon = Hosts(creds={"client_id": "CLIENT_ID_HERE", "client_secret": "CLIENT_SECRET_HERE"})
 
     result = falcon.GetDeviceDetails(ids="12345"))   # This syntax will always work
     print(result)
