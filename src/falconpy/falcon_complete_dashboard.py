@@ -36,259 +36,240 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
+from ._util import process_service_request, force_default
 from ._service_class import ServiceClass
 from ._endpoint._falcon_complete_dashboard import _falcon_complete_dashboard_endpoints as Endpoints
 
 
-class Complete_Dashboard(ServiceClass):
-    """The only requirement to instantiate an instance of this class
-       is a valid token provided by the Falcon API SDK OAuth2 class, a
-       existing instance of the authentication class as an object or a
-       valid set of credentials.
+class CompleteDashboard(ServiceClass):
     """
-    def AggregateAllowList(self: object, body: list) -> dict:
-        """Retrieve aggregate allowlist ticket values based on the matched filter"""
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class, a
+    existing instance of the authentication class as an object or a
+    valid set of credentials.
+    """
+    def aggregate_allow_list(self: object, body: list) -> dict:
+        """
+        Retrieve aggregate allowlist ticket values based on the matched filter
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateAllowList
-        operation_id = "AggregateAllowList"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="AggregateAllowList",
+            body=body
+            )
 
-    def AggregateBlockList(self: object, body: list) -> dict:
-        """Retrieve aggregate blocklist ticket values based on the matched filter"""
+    def aggregate_block_list(self: object, body: list) -> dict:
+        """
+        Retrieve aggregate blocklist ticket values based on the matched filter
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateBlockList
-        operation_id = "AggregateBlockList"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="AggregateBlockList",
+            body=body
+            )
 
-    def AggregateDetections(self: object, body: list) -> dict:
-        """Retrieve aggregate detection values based on the matched filter"""
+    def aggregate_detections(self: object, body: list) -> dict:
+        """
+        Retrieve aggregate detection values based on the matched filter
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateDetections
-        operation_id = "AggregateDetections"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="AggregateDetections",
+            body=body
+            )
 
-    def AggregateDeviceCountCollection(self: object, body: list) -> dict:
-        """Retrieve aggregate host/devices count based on the matched filter"""
+    def aggregate_device_count_collection(self: object, body: list) -> dict:
+        """
+        Retrieve aggregate host/devices count based on the matched filter
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateDeviceCountCollection
-        operation_id = "AggregateDeviceCountCollection"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            methods="POST",
+            operation_id="AggregateDeviceCountCollection",
+            body=body
+            )
 
-    def AggregateEscalations(self: object, body: list) -> dict:
-        """Retrieve aggregate escalation ticket values based on the matched filter"""
+    def aggregate_escalations(self: object, body: list) -> dict:
+        """
+        Retrieve aggregate escalation ticket values based on the matched filter
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateEscalations
-        operation_id = "AggregateEscalations"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="AggregateEscalations",
+            body=body
+            )
 
-    def AggregateFCIncidents(self: object, body: list) -> dict:
-        """Retrieve aggregate incident values based on the matched filter"""
+    def aggregate_fc_incidents(self: object, body: list) -> dict:
+        """
+        Retrieve aggregate incident values based on the matched filter
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateFCIncidents
-        operation_id = "AggregateFCIncidents"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="AggregateFCIncidents",
+            body=body
+            )
 
-    def AggregateRemediations(self: object, body: list) -> dict:
-        """Retrieve aggregate remediation ticket values based on the matched filter"""
+    def aggregate_remediations(self: object, body: list) -> dict:
+        """
+        Retrieve aggregate remediation ticket values based on the matched filter
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /Falcon%20Complete%20Dashboard/AggregateRemediations
-        operation_id = "AggregateRemediations"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            method="POST",
+            operation_id="AggregateRemediations",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryAllowListFilter(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve allowlist tickets that match the provided filter criteria with scrolling enabled"""
+    def query_allow_list_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Retrieve allowlist tickets that match the provided filter criteria with scrolling enabled
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/QueryAllowListFilter
-        operation_id = "QueryAllowListFilter"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   params=parameter_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryAllowListFilter",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryBlockListFilter(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve block listtickets that match the provided filter criteria with scrolling enabled"""
+    def query_block_list_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Retrieve block listtickets that match the provided filter criteria with scrolling enabled
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/QueryBlockListFilter
-        operation_id = "QueryBlockListFilter"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   params=parameter_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryBlockListFilter",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryDetectionIdsByFilter(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve DetectionsIds that match the provided FQL filter, criteria with scrolling enabled"""
+    def query_detection_ids_by_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Retrieve DetectionsIds that match the provided FQL filter, criteria with scrolling enabled
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/QueryDetectionIdsByFilter
-        operation_id = "QueryDetectionIdsByFilter"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   params=parameter_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryDetectionIdsByFilter",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetDeviceCountCollectionQueriesByFilter(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve device count collection Ids that match the provided FQL filter, criteria with scrolling enabled"""
+    def get_device_count_collection_queries_by_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Retrieve device count collection Ids that match the provided FQL filter, criteria with scrolling enabled
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/GetDeviceCountCollectionQueriesByFilter
-        operation_id = "GetDeviceCountCollectionQueriesByFilter"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   params=parameter_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetDeviceCountCollectionQueriesByFilter",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryEscalationsFilter(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve escalation tickets that match the provided filter criteria with scrolling enabled"""
+    def query_escalations_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Retrieve escalation tickets that match the provided filter criteria with scrolling enabled
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/QueryEscalationsFilter
-        operation_id = "QueryEscalationsFilter"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   params=parameter_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryEscalationsFilter",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryIncidentIdsByFilter(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve incidents that match the provided filter criteria with scrolling enabled"""
+    def query_incident_ids_by_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Retrieve incidents that match the provided filter criteria with scrolling enabled
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/QueryIncidentIdsByFilter
-        operation_id = "QueryIncidentIdsByFilter"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   params=parameter_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryIncidentIdsByFilter",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryRemediationsFilter(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve remediation tickets that match the provided filter criteria with scrolling enabled"""
+    def query_remediations_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Retrieve remediation tickets that match the provided filter criteria with scrolling enabled
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /Falcon%20Complete%20Dashboard/QueryRemediationsFilter
-        operation_id = "QueryRemediationsFilter"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   params=parameter_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryRemediationsFilter",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    AggregateAllowList = aggregate_allow_list
+    AggregateBlockList = aggregate_block_list
+    AggregateDetections = aggregate_detections
+    AggregateDeviceCountCollection = aggregate_device_count_collection
+    AggregateEscalations = aggregate_escalations
+    AggregateFCIncidents = aggregate_fc_incidents
+    AggregateRemediations = aggregate_remediations
+    QueryAllowListFilter = query_allow_list_filter
+    QueryBlockListFilter = query_block_list_filter
+    QueryDetectionIdsByFilter = query_detection_ids_by_filter
+    GetDeviceCountCollectionQueriesByFilter = get_device_count_collection_queries_by_filter
+    QueryEscalationsFilter = query_escalations_filter
+    QueryIncidentIdsByFilter = query_incident_ids_by_filter
+    QueryRemediationsFilter = query_remediations_filter
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Complete_Dashboard = CompleteDashboard  # pylint: disable=C0103
