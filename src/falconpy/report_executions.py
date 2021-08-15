@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request, handle_single_argument
 from ._service_class import ServiceClass
-from ._endpoint._scheduled_reports import _scheduled_reports_endpoints as Endpoints
+from ._endpoint._report_executions import _report_executions_endpoints as Endpoints
 
 
 class ReportExecutions(ServiceClass):
