@@ -67,9 +67,9 @@
     result = falcon.GetDeviceDetails(ids="12345"))   # This syntax will always work
     print(result)
     result = falcon.GetDeviceDetails("12345")        # This syntax may fail depending on method
-    print(result)
+    print(result)                                    # (will work in this example)
     bad_result = falcon.QueryHiddenDevices(1, 0, "devices.hostname|desc", "")
-    print(bad_result)                                # This syntax will fail
+    print(bad_result)                                # This syntax will always fail
     ```
     > Whenever possible, Service Classes attempt to guess the keyword for the first argument passed (if present). Typically these are aligned to the one required parameter for the method. (_Example: the **ids** parameter_)
 + Related to #263: Updated Uber class to no longer leverage the force_default helper, allowing users to still use the first argument to specify the action to be performed. `api_complete.py`
