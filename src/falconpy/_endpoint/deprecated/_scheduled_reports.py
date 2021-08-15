@@ -73,7 +73,10 @@ _scheduled_reports_endpoints = [
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters. Filter term criteria: type, trigger_reference, recipients, user_uuid, cid, trigger_params.metadata. Filter range criteria: created_on, modified_on; use any common date format, such as '2010-05-15T14:55:21.892315096Z'.",
+        "description": "FQL query specifying the filter parameters."
+        "Filter term criteria: type, trigger_reference, recipients, user_uuid, cid, trigger_params.metadata."
+        "Filter range criteria: created_on, modified_on; use any common date format,"
+        "such as '2010-05-15T14:55:21.892315096Z'.",
         "name": "filter",
         "in": "query"
       },

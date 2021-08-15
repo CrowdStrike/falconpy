@@ -89,7 +89,9 @@ _report_executions_endpoints = [
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters. Filter term criteria: type, scheduled_report_id, status. Filter range criteria: created_on, last_updated_on, expiration_on; use any common date format, such as '2010-05-15T14:55:21.892315096Z'.",
+        "description": "FQL query specifying the filter parameters. Filter term criteria: type, scheduled_report_id, status."
+        "Filter range criteria: created_on, last_updated_on, expiration_on; use any common date format,"
+        "such as '2010-05-15T14:55:21.892315096Z'.",
         "name": "filter",
         "in": "query"
       },
