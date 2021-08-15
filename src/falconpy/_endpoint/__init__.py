@@ -26,6 +26,8 @@ from .deprecated import _ioc_deprecated
 from .deprecated import _iocs_deprecated
 from .deprecated import _real_time_response_deprecated
 from .deprecated import _real_time_response_admin_deprecated
+from .deprecated import _report_executions_deprecated
+from .deprecated import _scheduled_reports_deprecated
 
 from ._cloud_connect_aws import _cloud_connect_aws_endpoints
 from ._cspm_registration import _cspm_registration_endpoints
@@ -58,8 +60,10 @@ from ._quick_scan import _quick_scan_endpoints
 from ._real_time_response import _real_time_response_endpoints
 from ._real_time_response_admin import _real_time_response_admin_endpoints
 from ._recon import _recon_endpoints
+from ._report_executions import _report_executions_endpoints
 from ._response_policies import _response_policies_endpoints
 from ._sample_uploads import _sample_uploads_endpoints
+from ._scheduled_reports import _scheduled_reports_endpoints
 from ._sensor_download import _sensor_download_endpoints
 from ._sensor_update_policies import _sensor_update_policies_endpoints
 from ._sensor_visibility_exclusions import _sensor_visibility_exclusions_endpoints
@@ -99,8 +103,10 @@ api_endpoints.extend(_quick_scan_endpoints)
 api_endpoints.extend(_real_time_response_endpoints)
 api_endpoints.extend(_real_time_response_admin_endpoints)
 api_endpoints.extend(_recon_endpoints)
+api_endpoints.extend(_report_executions_endpoints)
 api_endpoints.extend(_response_policies_endpoints)
 api_endpoints.extend(_sample_uploads_endpoints)
+api_endpoints.extend(_scheduled_reports_endpoints)
 api_endpoints.extend(_sensor_download_endpoints)
 api_endpoints.extend(_sensor_update_policies_endpoints)
 api_endpoints.extend(_sensor_visibility_exclusions_endpoints)
@@ -118,6 +124,8 @@ deprecated_endpoints.extend(_ioc_deprecated)
 deprecated_endpoints.extend(_iocs_deprecated)
 deprecated_endpoints.extend(_real_time_response_deprecated)
 deprecated_endpoints.extend(_real_time_response_admin_deprecated)
+deprecated_endpoints.extend(_report_executions_deprecated)
+deprecated_endpoints.extend(_scheduled_reports_deprecated)
 
 # api_endpoints contains all endpoints, production and deprecated
 api_endpoints.extend(deprecated_endpoints)
