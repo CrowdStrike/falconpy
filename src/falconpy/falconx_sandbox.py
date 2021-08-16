@@ -105,7 +105,6 @@ class FalconXSandbox(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="Submit",
             body=body
             )
@@ -154,7 +153,6 @@ class FalconXSandbox(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="UploadSampleV2",
             body=body,
             data=file_data,
@@ -187,7 +185,6 @@ class FalconXSandbox(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="DeleteReport",
             keywords=kwargs,
             params=parameters
@@ -217,7 +214,6 @@ class FalconXSandbox(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="DeleteSampleV2",
             keywords=kwargs,
             params=parameters
@@ -232,7 +228,6 @@ class FalconXSandbox(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="QuerySampleV1",
             body=body
             )

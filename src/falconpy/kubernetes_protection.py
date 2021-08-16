@@ -70,7 +70,6 @@ class KubernetesProtection(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="CreateAWSAccount",
             body=body
             )
@@ -85,7 +84,6 @@ class KubernetesProtection(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="DeleteAWSAccountsMixin0",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -100,7 +98,6 @@ class KubernetesProtection(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="UpdateAWSAccount",
             keywords=kwargs,
             params=parameters
@@ -142,7 +139,6 @@ class KubernetesProtection(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="RegenerateAPIKey",
             # body={}
             )
@@ -170,7 +166,6 @@ class KubernetesProtection(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="TriggerScan",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "scan_type")

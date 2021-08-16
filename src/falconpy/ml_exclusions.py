@@ -70,7 +70,6 @@ class MLExclusions(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="createMLExclusionsV1",
             body=body
             )
@@ -84,7 +83,6 @@ class MLExclusions(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="deleteMLExclusionsV1",
             keywords=kwargs,
             params=parameters
@@ -98,7 +96,6 @@ class MLExclusions(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="updateMLExclusionsV1",
             body=body
             )

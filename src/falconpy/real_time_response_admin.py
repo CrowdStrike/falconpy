@@ -58,7 +58,6 @@ class RealTimeResponseAdmin(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="BatchAdminCmd",
-            method="POST",
             body=body,
             keywords=kwargs,
             params=parameters
@@ -89,7 +88,6 @@ class RealTimeResponseAdmin(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_ExecuteAdminCommand",
-            method="POST",
             body=body
             )
 
@@ -116,7 +114,6 @@ class RealTimeResponseAdmin(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_CreatePut_Files",
-            method="POST",
             data=data,
             files=files
             )
@@ -131,7 +128,6 @@ class RealTimeResponseAdmin(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_DeletePut_Files",
-            method="DELETE",
             keywords=kwargs,
             params=parameters
             )
@@ -160,7 +156,6 @@ class RealTimeResponseAdmin(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_CreateScripts",
-            method="POST",
             data=data,
             files=files
             )
@@ -175,7 +170,6 @@ class RealTimeResponseAdmin(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_DeleteScripts",
-            method="DELETE",
             keywords=kwargs,
             params=parameters
             )
@@ -189,7 +183,6 @@ class RealTimeResponseAdmin(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_UpdateScripts",
-            method="PATCH",
             data=data,
             files=files
             )

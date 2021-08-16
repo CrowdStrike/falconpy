@@ -85,7 +85,6 @@ class IOC(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="indicator_create_v1",
             body=body,
             keywords=kwargs,
@@ -101,7 +100,6 @@ class IOC(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="indicator_delete_v1",
             keywords=kwargs,
             params=parameters
@@ -116,7 +114,6 @@ class IOC(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="indicator_update_v1",
             body=body,
             keywords=kwargs,

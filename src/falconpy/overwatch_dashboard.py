@@ -72,7 +72,6 @@ class OverwatchDashboard(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="AggregatesEventsCollections",
             body=body
             )
@@ -85,7 +84,6 @@ class OverwatchDashboard(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="AggregatesEvents",
             body=body
             )

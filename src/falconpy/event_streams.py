@@ -57,7 +57,6 @@ class EventStreams(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="refreshActiveStreamSession",
-            method="POST",
             body=body,  # BODY is being passed here even though it is likely empty, addresses issue #247
             keywords=kwargs,
             params=parameters,

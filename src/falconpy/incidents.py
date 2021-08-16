@@ -70,7 +70,6 @@ class Incidents(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="GetBehaviors",
             body=body
             )
@@ -84,7 +83,6 @@ class Incidents(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="PerformIncidentAction",
             body=body
             )
@@ -97,7 +95,6 @@ class Incidents(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="GetIncidents",
             body=body
             )

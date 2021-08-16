@@ -67,7 +67,6 @@ class MalQuery(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="PostMalQueryFuzzySearchV1",
             body=body
             )
@@ -141,7 +140,6 @@ class MalQuery(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="PostMalQueryEntitiesSamplesMultidownloadV1",
             body=body
             )
@@ -156,7 +154,6 @@ class MalQuery(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="PostMalQueryExactSearchV1",
             body=body
             )
@@ -170,7 +167,6 @@ class MalQuery(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="PostMalQueryHuntV1",
             body=body
             )

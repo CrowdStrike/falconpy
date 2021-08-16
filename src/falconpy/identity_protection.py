@@ -60,7 +60,6 @@ class IdentityProtection(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="api_preempt_proxy_post_graphql",
             body=body
             )

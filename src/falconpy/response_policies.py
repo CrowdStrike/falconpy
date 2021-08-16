@@ -90,7 +90,6 @@ class ResponsePolicies(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="performRTResponsePoliciesAction",
             keywords=kwargs,
             params=parameters,
@@ -108,7 +107,6 @@ class ResponsePolicies(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="setRTResponsePoliciesPrecedence",
             body=body
             )
@@ -136,7 +134,6 @@ class ResponsePolicies(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="createRTResponsePolicies",
             body=body
             )
@@ -151,7 +148,6 @@ class ResponsePolicies(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="deleteRTResponsePolicies",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -166,7 +162,6 @@ class ResponsePolicies(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="updateRTResponsePolicies",
             body=body
             )

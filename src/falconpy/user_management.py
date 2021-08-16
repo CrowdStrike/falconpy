@@ -70,7 +70,6 @@ class UserManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GrantUserRoleIds",
-            method="POST",
             body=body,
             keywords=kwargs,
             params=parameters
@@ -86,7 +85,6 @@ class UserManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RevokeUserRoleIds",
-            method="DELETE",
             keywords=kwargs,
             params=parameters
             )
@@ -142,7 +140,6 @@ class UserManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="CreateUser",
-            method="POST",
             body=body
             )
 
@@ -156,7 +153,6 @@ class UserManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="DeleteUser",
-            method="DELETE",
             keywords=kwargs,
             params=parameters
             )
@@ -171,7 +167,6 @@ class UserManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="UpdateUser",
-            method="PATCH",
             body=body,
             keywords=kwargs,
             params=parameters

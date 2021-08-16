@@ -55,7 +55,6 @@ class SensorUpdatePolicy(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="revealUninstallToken",
             body=body
             )
@@ -139,7 +138,6 @@ class SensorUpdatePolicy(ServiceClass):
             returned = process_service_request(
                             calling_object=self,
                             endpoints=Endpoints,
-                            method="POST",
                             operation_id=operation_id,
                             body=body,
                             keywords=kwargs,
@@ -161,7 +159,6 @@ class SensorUpdatePolicy(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="setSensorUpdatePoliciesPrecedence",
             body=body
             )
@@ -189,7 +186,6 @@ class SensorUpdatePolicy(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="createSensorUpdatePolicies",
             body=body
             )
@@ -204,7 +200,6 @@ class SensorUpdatePolicy(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="deleteSensorUpdatePolicies",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -219,7 +214,6 @@ class SensorUpdatePolicy(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="updateSensorUpdatePolicies",
             body=body
             )
@@ -250,7 +244,6 @@ class SensorUpdatePolicy(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="createSensorUpdatePoliciesV2",
             body=body
             )
@@ -265,7 +258,6 @@ class SensorUpdatePolicy(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="updateSensorUpdatePoliciesV2",
             body=body
             )

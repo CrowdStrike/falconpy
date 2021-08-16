@@ -82,7 +82,6 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="addCIDGroupMembers",
             body=body
             )
@@ -95,7 +94,6 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="deleteCIDGroupMembers",
             body=body
             )
@@ -122,7 +120,6 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="createCIDGroups",
             body=body
             )
@@ -136,7 +133,6 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="deleteCIDGroups",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "cid_group_ids")
@@ -151,7 +147,6 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="updateCIDGroups",
             body=body
             )
@@ -180,7 +175,6 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="addRole",
             body=body
             )
@@ -196,7 +190,6 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="deletedRoles",
             body=body
             )
@@ -223,7 +216,6 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="addUserGroupMembers",
             body=body
             )
@@ -236,7 +228,6 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="deleteUserGroupMembers",
             body=body
             )
@@ -263,7 +254,6 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="createUserGroup",
             body=body
             )
@@ -277,7 +267,6 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="deleteUserGroups",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "user_group_ids")
@@ -292,7 +281,6 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="updateUserGroups",
             body=body
             )

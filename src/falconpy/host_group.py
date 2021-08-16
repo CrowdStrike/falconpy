@@ -92,7 +92,6 @@ class HostGroup(ServiceClass):
             returned = process_service_request(
                             calling_object=self,
                             endpoints=Endpoints,
-                            method="POST",
                             operation_id=operation_id,
                             body=body,
                             keywords=kwargs,
@@ -125,7 +124,6 @@ class HostGroup(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="createHostGroups",
             body=body
             )
@@ -139,7 +137,6 @@ class HostGroup(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="deleteHostGroups",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -153,7 +150,6 @@ class HostGroup(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="updateHostGroups",
             body=body
             )

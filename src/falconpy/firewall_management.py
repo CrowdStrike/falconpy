@@ -58,7 +58,6 @@ class FirewallManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="aggregate_events",
-            method="POST",
             body=body
             )
 
@@ -71,7 +70,6 @@ class FirewallManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="aggregate_policy_rules",
-            method="POST",
             body=body
             )
 
@@ -84,7 +82,6 @@ class FirewallManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="aggregate_rule_groups",
-            method="POST",
             body=body
             )
 
@@ -97,7 +94,6 @@ class FirewallManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="aggregate_rules",
-            method="POST",
             body=body
             )
 
@@ -170,7 +166,6 @@ class FirewallManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="update_policy_container",
-            method="PUT",
             body=body,
             headers=header_payload
             )
@@ -204,7 +199,6 @@ class FirewallManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="create_rule_group",
-            method="POST",
             body=body,
             params=parameters,
             keywords=kwargs,
@@ -225,7 +219,6 @@ class FirewallManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="create_rule_group",
-            method="DELETE",
             params=parameters,
             keywords=kwargs,
             headers=header_payload
@@ -245,7 +238,6 @@ class FirewallManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="create_rule_group",
-            method="PATCH",
             body=body,
             params=parameters,
             keywords=kwargs,

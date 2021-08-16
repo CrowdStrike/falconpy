@@ -73,7 +73,6 @@ class CSPMRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="CreateCSPMAwsAccount",
             body=body
             )
@@ -89,7 +88,6 @@ class CSPMRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="DeleteCSPMAwsAccount",
             keywords=kwargs,
             params=parameters
@@ -103,7 +101,6 @@ class CSPMRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="PatchCSPMAwsAccount",
             body=body
             )
@@ -155,7 +152,6 @@ class CSPMRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="CreateCSPMAzureAccount",
             body=body
             )
@@ -170,7 +166,6 @@ class CSPMRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="DeleteCSPMAzureAccount",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -190,7 +185,6 @@ class CSPMRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="UpdateCSPMAzureAccountClientID",
             body=body,
             keywords=kwargs,
@@ -208,7 +202,6 @@ class CSPMRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="UpdateCSPMAzureTenantDefaultSubscriptionID",
             keywords=kwargs,
             params=parameters
@@ -296,7 +289,6 @@ class CSPMRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="UpdateCSPMPolicySettings",
             body=body
             )
@@ -323,7 +315,6 @@ class CSPMRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="UpdateCSPMScanSchedule",
             body=body
             )

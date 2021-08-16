@@ -90,7 +90,6 @@ class PreventionPolicy(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="performPreventionPoliciesAction",
             keywords=kwargs,
             params=parameters,
@@ -108,7 +107,6 @@ class PreventionPolicy(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="setPreventionPoliciesPrecedence",
             body=body
             )
@@ -135,7 +133,6 @@ class PreventionPolicy(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="createPreventionPolicies",
             body=body
             )
@@ -149,7 +146,6 @@ class PreventionPolicy(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="deletePreventionPolicies",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -163,7 +159,6 @@ class PreventionPolicy(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="updatePreventionPolicies",
             body=body
             )

@@ -55,7 +55,6 @@ class QuickScan(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetScansAggregates",
-            method="POST",
             body=body
             )
 
@@ -83,7 +82,6 @@ class QuickScan(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="ScanSamples",
-            method="POST",
             body=body
             )
 

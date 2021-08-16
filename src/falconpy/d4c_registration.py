@@ -71,7 +71,6 @@ class D4CRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="CreateCSPMAzureAccount",
             body=body
             )
@@ -87,7 +86,6 @@ class D4CRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="UpdateCSPMAzureAccountClientID",
             keywords=kwargs,
             params=parameters
@@ -140,7 +138,6 @@ class D4CRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="CreateCSPMGCPAccount",
             body=body
             )

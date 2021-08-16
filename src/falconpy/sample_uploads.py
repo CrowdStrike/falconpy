@@ -78,7 +78,6 @@ class SampleUploads(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="UploadSampleV3",
             headers=header_payload,  # Pass our custom headers
             body=body,
@@ -95,7 +94,6 @@ class SampleUploads(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="DeleteSampleV3",
             keywords=kwargs,
             params=parameters

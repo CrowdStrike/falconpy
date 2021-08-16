@@ -66,7 +66,6 @@ class IOAExclusions(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="createIOAExclusionsV1",
             body=body
             )
@@ -78,7 +77,6 @@ class IOAExclusions(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="deleteIOAExclusionsV1",
             keywords=kwargs,
             params=parameters
@@ -90,7 +88,6 @@ class IOAExclusions(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="updateIOAExclusionsV1",
             body=body
             )

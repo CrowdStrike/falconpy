@@ -56,7 +56,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_AggregateSessions",
-            method="POST",
             body=body
             )
 
@@ -70,7 +69,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="BatchActiveResponderCmd",
-            method="POST",
             body=body,
             keywords=kwargs,
             params=parameters
@@ -86,7 +84,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="BatchCmd",
-            method="POST",
             body=body,
             keywords=kwargs,
             params=parameters
@@ -118,7 +115,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="BatchGetCmd",
-            method="POST",
             body=body,
             keywords=kwargs,
             params=parameters
@@ -135,7 +131,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="BatchInitSessions",
-            method="POST",
             body=body,
             keywords=kwargs,
             params=parameters
@@ -151,7 +146,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="BatchRefreshSessions",
-            method="POST",
             body=body,
             keywords=kwargs,
             params=parameters
@@ -181,7 +175,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_ExecuteActiveResponderCommand",
-            method="POST",
             body=body
             )
 
@@ -208,7 +201,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_ExecuteCommand",
-            method="POST",
             body=body
             )
 
@@ -250,7 +242,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_DeleteFile",
-            method="DELETE",
             keywords=kwargs,
             params=parameters
             )
@@ -264,7 +255,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_PulseSession",
-            method="POST",
             body=body
             )
 
@@ -277,7 +267,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_ListSessions",
-            method="POST",
             body=body
             )
 
@@ -290,7 +279,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_ListQueuedSessions",
-            method="POST",
             body=body
             )
 
@@ -303,7 +291,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_InitSession",
-            method="POST",
             body=body
             )
 
@@ -317,7 +304,7 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_DeleteSession",
-            method="DELETE",
+
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "session_id")
             )
@@ -332,7 +319,6 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_DeleteQueuedSession",
-            method="DELETE",
             keywords=kwargs,
             params=parameters
             )

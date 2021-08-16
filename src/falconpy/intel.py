@@ -113,7 +113,6 @@ class Intel(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetIntelIndicatorEntities",
-            method="POST",
             body=body
             )
 

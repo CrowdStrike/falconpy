@@ -56,7 +56,6 @@ class Recon(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="AggregateNotificationsV1",
             body=body
             )
@@ -69,7 +68,6 @@ class Recon(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="PreviewRuleV1",
             body=body
             )
@@ -96,7 +94,6 @@ class Recon(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="CreateActionsV1",
             body=body
             )
@@ -110,7 +107,6 @@ class Recon(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="DeleteActionV1",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -124,7 +120,6 @@ class Recon(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="UpdateActionV1",
             body=body
             )
@@ -198,7 +193,6 @@ class Recon(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="DeleteNotificationsV1",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -212,7 +206,6 @@ class Recon(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="UpdateNotificationsV1",
             body=body
             )
@@ -239,7 +232,6 @@ class Recon(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="CreateRulesV1",
             body=body
             )
@@ -253,7 +245,6 @@ class Recon(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="DeleteRulesV1",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -267,7 +258,6 @@ class Recon(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="UpdateRulesV1",
             body=body
             )

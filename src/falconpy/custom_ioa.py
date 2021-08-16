@@ -103,7 +103,6 @@ class CustomIOA(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="create_rule_groupMixin0",
             body=body,
             headers=header_payload
@@ -122,7 +121,6 @@ class CustomIOA(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="delete_rule_groupsMixin0",
             keywords=kwargs,
             params=parameters,
@@ -141,7 +139,6 @@ class CustomIOA(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="update_rule_groupMixin0",
             body=body,
             headers=header_payload
@@ -171,7 +168,6 @@ class CustomIOA(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="get_rules_get",
             body=body_payload
             )
@@ -203,7 +199,6 @@ class CustomIOA(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="create_rule",
             body=body,
             headers=header_payload
@@ -222,7 +217,6 @@ class CustomIOA(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="delete_rules",
             keywords=kwargs,
             params=parameters,
@@ -241,7 +235,6 @@ class CustomIOA(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="update_rules",
             body=body,
             headers=header_payload
@@ -255,7 +248,6 @@ class CustomIOA(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="validate",
             body=body
             )

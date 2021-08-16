@@ -96,7 +96,6 @@ class DeviceControlPolicies(ServiceClass):
             returned = process_service_request(
                             calling_object=self,
                             endpoints=Endpoints,
-                            method="POST",
                             operation_id=operation_id,
                             body=body,
                             keywords=kwargs,
@@ -118,7 +117,6 @@ class DeviceControlPolicies(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="setDeviceControlPoliciesPrecedence",
             body=body
             )
@@ -147,7 +145,6 @@ class DeviceControlPolicies(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="createDeviceControlPolicies",
             body=body
             )
@@ -162,7 +159,6 @@ class DeviceControlPolicies(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="deleteDeviceControlPolicies",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -177,7 +173,6 @@ class DeviceControlPolicies(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="updateDeviceControlPolicies",
             body=body
             )

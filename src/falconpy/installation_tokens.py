@@ -95,7 +95,6 @@ class InstallationTokens(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="tokens_create",
             body=body
             )
@@ -109,7 +108,6 @@ class InstallationTokens(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="tokens_delete",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -124,7 +122,6 @@ class InstallationTokens(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="tokens_update",
             body=body,
             keywords=kwargs,

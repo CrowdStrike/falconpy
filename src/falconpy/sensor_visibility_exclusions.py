@@ -72,7 +72,6 @@ class SensorVisibilityExclusions(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="createSVExclusionsV1",
             body=body
             )
@@ -87,7 +86,6 @@ class SensorVisibilityExclusions(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="deleteSensorVisibilityExclusionsV1",
             keywords=kwargs,
             params=parameters
@@ -102,7 +100,6 @@ class SensorVisibilityExclusions(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="updateSensorVisibilityExclusionsV1",
             body=body
             )

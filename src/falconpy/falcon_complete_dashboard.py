@@ -57,7 +57,6 @@ class CompleteDashboard(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="AggregateAllowList",
             body=body
             )
@@ -71,7 +70,6 @@ class CompleteDashboard(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="AggregateBlockList",
             body=body
             )
@@ -85,7 +83,6 @@ class CompleteDashboard(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="AggregateDetections",
             body=body
             )
@@ -113,7 +110,6 @@ class CompleteDashboard(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="AggregateEscalations",
             body=body
             )
@@ -127,7 +123,6 @@ class CompleteDashboard(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="AggregateFCIncidents",
             body=body
             )
@@ -141,7 +136,6 @@ class CompleteDashboard(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="AggregateRemediations",
             body=body
             )

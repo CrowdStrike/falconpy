@@ -54,7 +54,6 @@ class Detects(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="GetAggregateDetects",
             body=body
             )
@@ -74,7 +73,6 @@ class Detects(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="UpdateDetectsByIdsV2",
             body=body,
             body_validator=body_validator,
@@ -89,7 +87,6 @@ class Detects(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="GetDetectSummaries",
             body=body,
             body_validator={"ids": list},

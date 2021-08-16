@@ -65,7 +65,6 @@ class Hosts(ServiceClass):
             returned = process_service_request(
                 calling_object=self,
                 endpoints=Endpoints,
-                method="POST",
                 operation_id=operation_id,
                 body=body,
                 keywords=kwargs,
@@ -104,7 +103,6 @@ class Hosts(ServiceClass):
             returned = process_service_request(
                 calling_object=self,
                 endpoints=Endpoints,
-                method="PATCH",
                 operation_id="UpdateDeviceTags",
                 body=body_payload,
                 )

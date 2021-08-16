@@ -97,7 +97,6 @@ class CloudConnectAWS(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="ProvisionAWSAccounts",
             keywords=kwargs,
             params=parameters,
@@ -113,7 +112,6 @@ class CloudConnectAWS(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="DeleteAWSAccounts",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -127,7 +125,6 @@ class CloudConnectAWS(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="UpdateAWSAccounts",
             body=body
             )
@@ -140,7 +137,6 @@ class CloudConnectAWS(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="CreateOrUpdateAWSSettings",
             body=body
             )
@@ -154,7 +150,6 @@ class CloudConnectAWS(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="VerifyAWSAccountAccess",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")

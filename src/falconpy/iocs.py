@@ -84,7 +84,6 @@ class Iocs(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="POST",
             operation_id="CreateIOC",
             body=body
             )
@@ -98,7 +97,6 @@ class Iocs(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="DELETE",
             operation_id="DeleteIOC",
             keywords=kwargs,
             params=parameters
@@ -113,7 +111,6 @@ class Iocs(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            method="PATCH",
             operation_id="UpdateIOC",
             body=body,
             keywords=kwargs,
