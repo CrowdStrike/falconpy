@@ -218,7 +218,7 @@ class FirewallManagement(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="create_rule_group",
+            operation_id="delete_rule_groups",
             params=parameters,
             keywords=kwargs,
             headers=header_payload
