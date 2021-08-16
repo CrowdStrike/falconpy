@@ -374,9 +374,12 @@ def process_service_request(calling_object: object,
         body_validator: Dictionary containing details regarding body payload validation
         body_required: List of required body payload parameters
     """
-    # ID replacement happening at the end of this statement planned for removal in v0.5.6+
-    # (after all classes have been updated to no longer need it and it has been removed from the _endpoints module)
-    target_url = f"{calling_object.base_url}{[ep[2] for ep in endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+    target_endpoint = [ep for ep in endpoints if operation_id in ep[0]][0]
+    # target_url = f"{calling_object.base_url}{[ep[2] for ep in endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+    # ID replacement happening at the end of this statement planned for removal in v0.6.0+
+    # (after the uber class has been updated to no longer need it and the _endpoints module has been updated)
+    target_url = f"{calling_object.base_url}{target_endpoint[2]}".replace("?ids={}", "")
+    target_method = target_endpoint[1]
     passed_partition = kwargs.get("partition", None)
     if passed_partition:
         target_url = target_url.format(str(passed_partition))
@@ -389,7 +392,7 @@ def process_service_request(calling_object: object,
     passed_headers = kwargs.get("headers", None) if kwargs.get("headers", None) else calling_object.headers
     new_keywords = {
         "caller": calling_object,
-        "method": kwargs.get("method", "GET"),  # Default to GET.
+        "method": target_method,
         "endpoint": target_url,
         "verify": calling_object.ssl_verify,
         "headers": passed_headers,
