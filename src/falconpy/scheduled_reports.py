@@ -71,7 +71,7 @@ class ScheduledReports(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="scheduled_reports_get",
+            operation_id="scheduled_reports_query",
             keywords=kwargs,
             params=parameters
             )
