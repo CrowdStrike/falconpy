@@ -23,7 +23,7 @@ class TestQuickScan:
 
     def serviceScan_GenerateErrors(self):
         falcon.base_url = "nowhere"
-        errorChecks = True
+        error_checks = True
         commandList = [
             ["GetScansAggregates", "body={}"],
             ["GetScans", "ids='12345678'"],
@@ -32,9 +32,9 @@ class TestQuickScan:
         ]
         for cmd in commandList:
             if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+                error_checks = False
 
-        return errorChecks
+        return error_checks
 
     def test_Errors(self):
         assert self.serviceScan_GenerateErrors() is True
