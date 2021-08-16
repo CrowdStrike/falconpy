@@ -36,100 +36,78 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, generate_error_result, force_default, args_to_params
+from ._util import generate_error_result, args_to_params, force_default, handle_single_argument, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._sensor_update_policies import _sensor_update_policies_endpoints as Endpoints
 
 
-class Sensor_Update_Policy(ServiceClass):
+class SensorUpdatePolicy(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
     is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def revealUninstallToken(self: object, body: dict) -> dict:
+    def reveal_uninstall_token(self: object, body: dict) -> dict:
         """
         Reveals an uninstall token for a specific device.
         To retrieve the bulk maintenance token pass the value 'MAINTENANCE' as the value for 'device_id'.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/revealUninstallToken
-        operation_id = "revealUninstallToken"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="revealUninstallToken",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryCombinedSensorUpdateBuilds(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_builds(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve available builds for use with Sensor Update Policies.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /sensor-update-policies/queryCombinedSensorUpdateBuilds
-        operation_id = "queryCombinedSensorUpdateBuilds"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryCombinedSensorUpdateBuilds",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "platform")
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryCombinedSensorUpdatePolicyMembers(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for members of a Sensor Update Policy in your environment by providing an FQL
         filter and paging details. Returns a set of host details which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /sensor-update-policies/queryCombinedSensorUpdatePolicyMembers
-        operation_id = "queryCombinedSensorUpdatePolicyMembers"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryCombinedSensorUpdatePolicyMembers",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryCombinedSensorUpdatePolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for Sensor Update Policies in your environment by providing an FQL filter and paging details.
         Returns a set of Sensor Update Policies which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /sensor-update-policies/queryCombinedSensorUpdatePolicies
-        operation_id = "queryCombinedSensorUpdatePolicies"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryCombinedSensorUpdatePolicies",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryCombinedSensorUpdatePoliciesV2(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policies_v2(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for Sensor Update Policies with additional support for uninstall protection in your environment
         by providing an FQL filter and paging details.
@@ -137,21 +115,16 @@ class Sensor_Update_Policy(ServiceClass):
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /sensor-update-policies/queryCombinedSensorUpdatePoliciesV2
-        operation_id = "queryCombinedSensorUpdatePoliciesV2"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryCombinedSensorUpdatePoliciesV2",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def performSensorUpdatePoliciesAction(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def perform_policies_action(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Perform the specified action on the Sensor Update Policies specified in the request.
         """
@@ -159,27 +132,23 @@ class Sensor_Update_Policy(ServiceClass):
         #        ...    /sensor-update-policies/performSensorUpdatePoliciesAction
         _allowed_actions = ['add-host-group', 'disable', 'enable', 'remove-host-group']
         operation_id = "performSensorUpdatePoliciesAction"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        if "action_name" not in parameter_payload:
-            parameter_payload["action_name"] = "Not Specified"
-        if parameter_payload["action_name"].lower() in _allowed_actions:
-            returned = service_request(caller=self,
-                                       method="POST",
-                                       endpoint=target_url,
-                                       body=body_payload,
-                                       params=parameter_payload,
-                                       headers=header_payload,
-                                       verify=self.ssl_verify
-                                       )
+        action_name = parameter_payload.get("action_name", "Not Specified")
+        if action_name.lower() in _allowed_actions:
+            returned = process_service_request(
+                            calling_object=self,
+                            endpoints=Endpoints,
+                            operation_id=operation_id,
+                            body=body,
+                            keywords=kwargs,
+                            params=parameters
+                            )
         else:
             returned = generate_error_result("Invalid value specified for action_name parameter.")
 
         return returned
 
-    def setSensorUpdatePoliciesPrecedence(self: object, body: dict) -> dict:
+    def set_policies_precedence(self: object, body: dict) -> dict:
         """
         Sets the precedence of Sensor Update Policies based on the order of IDs specified in the request.
         The first ID specified will have the highest precedence and the last ID specified will have the lowest.
@@ -187,195 +156,165 @@ class Sensor_Update_Policy(ServiceClass):
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #        ...    /sensor-update-policies/setSensorUpdatePoliciesPrecedence
-        operation_id = "setSensorUpdatePoliciesPrecedence"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="setSensorUpdatePoliciesPrecedence",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getSensorUpdatePolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve a set of Sensor Update Policies by specifying their IDs.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/getSensorUpdatePolicies
-        operation_id = "getSensorUpdatePolicies"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getSensorUpdatePolicies",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
-    def createSensorUpdatePolicies(self: object, body: dict) -> dict:
+    def create_policies(self: object, body: dict) -> dict:
         """
         Create Sensor Update Policies by specifying details about the policy to create.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #        ...    /sensor-update-policies/createSensorUpdatePolicies
-        operation_id = "createSensorUpdatePolicies"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="createSensorUpdatePolicies",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def deleteSensorUpdatePolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Delete a set of Sensor Update Policies by specifying their IDs.
         """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          ...  /sensor-update-policies/deleteSensorUpdatePolicies
-        operation_id = "deleteSensorUpdatePolicies"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="deleteSensorUpdatePolicies",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
-    def updateSensorUpdatePolicies(self: object, body: dict) -> dict:
+    def update_policies(self: object, body: dict) -> dict:
         """
         Update Sensor Update Policies by specifying the ID of the policy and details to update.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         ...   /sensor-update-policies/updateSensorUpdatePolicies
-        operation_id = "updateSensorUpdatePolicies"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="PATCH",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateSensorUpdatePolicies",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getSensorUpdatePoliciesV2(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_policies_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve a set of Sensor Update Policies with additional
         support for uninstall protection by specifying their IDs.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /sensor-update-policies/getSensorUpdatePoliciesV2
-        operation_id = "getSensorUpdatePoliciesV2"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getSensorUpdatePoliciesV2",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
-    def createSensorUpdatePoliciesV2(self: object, body: dict) -> dict:
+    def create_policies_v2(self: object, body: dict) -> dict:
         """
         Create Sensor Update Policies by specifying details about the
         policy to create with additional support for uninstall protection.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #        ...    /sensor-update-policies/createSensorUpdatePoliciesV2
-        operation_id = "createSensorUpdatePoliciesV2"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="createSensorUpdatePoliciesV2",
+            body=body
+            )
 
-    def updateSensorUpdatePoliciesV2(self: object, body: dict) -> dict:
+    def update_policies_v2(self: object, body: dict) -> dict:
         """
         Update Sensor Update Policies by specifying the ID of the policy
         and details to update with additional support for uninstall protection.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         ...   /sensor-update-policies/updateSensorUpdatePoliciesV2
-        operation_id = "updateSensorUpdatePoliciesV2"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="PATCH",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateSensorUpdatePoliciesV2",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def querySensorUpdatePolicyMembers(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for members of a Sensor Update Policy in your environment by providing an FQL
         filter and paging details. Returns a set of Agent IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /sensor-update-policies/querySensorUpdatePolicyMembers
-        operation_id = "querySensorUpdatePolicyMembers"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="querySensorUpdatePolicyMembers",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def querySensorUpdatePolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policies(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for Sensor Update Policies in your environment by providing an FQL filter and
         paging details. Returns a set of Sensor Update Policy IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /sensor-update-policies/querySensorUpdatePolicies
-        operation_id = "querySensorUpdatePolicies"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="querySensorUpdatePolicies",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    revealUninstallToken = reveal_uninstall_token
+    queryCombinedSensorUpdateBuilds = query_combined_builds
+    queryCombinedSensorUpdatePolicyMembers = query_combined_policy_members
+    queryCombinedSensorUpdatePolicies = query_combined_policies
+    queryCombinedSensorUpdatePoliciesV2 = query_combined_policies_v2
+    performSensorUpdatePoliciesAction = perform_policies_action
+    setSensorUpdatePoliciesPrecedence = set_policies_precedence
+    getSensorUpdatePolicies = get_policies
+    createSensorUpdatePolicies = create_policies
+    deleteSensorUpdatePolicies = delete_policies
+    updateSensorUpdatePolicies = update_policies
+    getSensorUpdatePoliciesV2 = get_policies_v2
+    createSensorUpdatePoliciesV2 = create_policies_v2
+    updateSensorUpdatePoliciesV2 = update_policies_v2
+    querySensorUpdatePolicyMembers = query_policy_members
+    querySensorUpdatePolicies = query_policies
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Sensor_Update_Policy = SensorUpdatePolicy  # pylint: disable=C0103

@@ -36,60 +36,49 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, generate_error_result, force_default, args_to_params
+from ._util import process_service_request, generate_error_result, force_default, args_to_params, handle_single_argument
 from ._service_class import ServiceClass
 from ._endpoint._firewall_policies import _firewall_policies_endpoints as Endpoints
 
 
-class Firewall_Policies(ServiceClass):
+class FirewallPolicies(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
     is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryCombinedFirewallPolicyMembers(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for members of a Firewall Policy in your environment by providing an FQL filter
         and paging details. Returns a set of host details which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #       ...     /firewall-policies/queryCombinedFirewallPolicyMembers
-        operation_id = "queryCombinedFirewallPolicyMembers"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryCombinedFirewallPolicyMembers",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryCombinedFirewallPolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for Firewall Policies in your environment by providing an FQL filter and paging details.
         Returns a set of Firewall Policies which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/queryCombinedFirewallPolicies
-        operation_id = "queryCombinedFirewallPolicies"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryCombinedFirewallPolicies",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def performFirewallPoliciesAction(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def perform_policies_action(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Perform the specified action on the Firewall Policies specified in the request.
         """
@@ -98,27 +87,23 @@ class Firewall_Policies(ServiceClass):
 
         _allowed_actions = ['add-host-group', 'disable', 'enable', 'remove-host-group']
         operation_id = "performFirewallPoliciesAction"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        if "action_name" not in parameter_payload:
-            parameter_payload["action_name"] = "Not Specified"
-        if parameter_payload["action_name"].lower() in _allowed_actions:
-            returned = service_request(caller=self,
-                                       method="POST",
-                                       endpoint=target_url,
-                                       body=body_payload,
-                                       params=parameter_payload,
-                                       headers=header_payload,
-                                       verify=self.ssl_verify
-                                       )
+        action_name = parameter_payload.get("action_name", "Not Specified")
+        if action_name.lower() in _allowed_actions:
+            returned = process_service_request(
+                            calling_object=self,
+                            endpoints=Endpoints,
+                            operation_id=operation_id,
+                            keywords=kwargs,
+                            params=parameters,
+                            body=body
+                            )
         else:
             returned = generate_error_result("Invalid value specified for action_name parameter.")
 
         return returned
 
-    def setFirewallPoliciesPrecedence(self: object, body: dict) -> dict:
+    def set_policies_precedence(self: object, body: dict) -> dict:
         """
         Sets the precedence of Firewall Policies based on the order of IDs specified in the request.
         The first ID specified will have the highest precedence and the last ID specified will have the lowest.
@@ -126,132 +111,113 @@ class Firewall_Policies(ServiceClass):
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #        ...    /firewall-policies/setFirewallPoliciesPrecedence
-        operation_id = "setFirewallPoliciesPrecedence"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="setFirewallPoliciesPrecedence",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getFirewallPolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Retrieve a set of Firewall Policies by specifying their IDs.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/getFirewallPolicies
-        operation_id = "getFirewallPolicies"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getFirewallPolicies",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def createFirewallPolicies(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def create_policies(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Create Firewall Policies by specifying details about the policy to create.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/createFirewallPolicies
-        operation_id = "createFirewallPolicies"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="createFirewallPolicies",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def deleteFirewallPolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Delete a set of Firewall Policies by specifying their IDs.
         """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/deleteFirewallPolicies
-        operation_id = "deleteFirewallPolicies"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="deleteFirewallPolicies",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
-    def updateFirewallPolicies(self: object, body: dict) -> dict:
+    def update_policies(self: object, body: dict) -> dict:
         """
         Update Firewall Policies by specifying the ID of the policy and details to update.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/updateFirewallPolicies
-        operation_id = "updateFirewallPolicies"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="PATCH",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateFirewallPolicies",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryFirewallPolicyMembers(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for members of a Firewall Policy in your environment by providing an FQL filter and
         paging details. Returns a set of Agent IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/queryFirewallPolicyMembers
-        operation_id = "queryFirewallPolicyMembers"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryFirewallPolicyMembers",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryFirewallPolicies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policies(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for Firewall Policies in your environment by providing an FQL filter and paging details.
         Returns a set of Firewall Policy IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/queryFirewallPolicies
-        operation_id = "queryFirewallPolicies"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryFirewallPolicies",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    queryCombinedFirewallPolicyMembers = query_combined_policy_members
+    queryCombinedFirewallPolicies = query_combined_policies
+    performFirewallPoliciesAction = perform_policies_action
+    setFirewallPoliciesPrecedence = set_policies_precedence
+    getFirewallPolicies = get_policies
+    createFirewallPolicies = create_policies
+    deleteFirewallPolicies = delete_policies
+    updateFirewallPolicies = update_policies
+    queryFirewallPolicyMembers = query_policy_members
+    queryFirewallPolicies = query_policies
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Firewall_Policies = FirewallPolicies  # pylint: disable=C0103

@@ -36,19 +36,20 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
 from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._real_time_response_admin import _real_time_response_admin_endpoints as Endpoints
 
 
-class Real_Time_Response_Admin(ServiceClass):
+class RealTimeResponseAdmin(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def BatchAdminCmd(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def batch_admin_command(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Batch executes a RTR administrator command across the hosts mapped to the given batch ID.
         """
@@ -57,14 +58,13 @@ class Real_Time_Response_Admin(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="BatchAdminCmd",
-            method="POST",
             body=body,
             keywords=kwargs,
             params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_CheckAdminCommandStatus(self: object, parameters: dict = None, **kwargs) -> dict:
+    def check_admin_command_status(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get status of an executed RTR administrator command on a single host.
         """
@@ -78,7 +78,7 @@ class Real_Time_Response_Admin(ServiceClass):
             params=parameters
             )
 
-    def RTR_ExecuteAdminCommand(self: object, body: dict) -> dict:
+    def execute_admin_command(self: object, body: dict) -> dict:
         """
         Execute a RTR administrator command on a single host.
         """
@@ -88,12 +88,11 @@ class Real_Time_Response_Admin(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_ExecuteAdminCommand",
-            method="POST",
             body=body
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_GetPut_Files(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_put_files(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get put-files based on the ID's given. These are used for the RTR `put` command.
         """
@@ -106,25 +105,21 @@ class Real_Time_Response_Admin(ServiceClass):
             params=parameters
             )
 
-    def RTR_CreatePut_Files(self: object, data, files) -> dict:
+    def create_put_files(self: object, data: dict, files: list) -> dict:
         """
         Upload a new put-file to use for the RTR `put` command.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_CreatePut_Files
-        header_payload = self.headers
-        header_payload['Content-Type'] = 'multipart/form-data'
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_CreatePut_Files",
-            method="POST",
             data=data,
-            files=files,
-            headers=header_payload
+            files=files
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_DeletePut_Files(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_put_files(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Delete a put-file based on the ID given. Can only delete one file at a time.
         """
@@ -133,13 +128,12 @@ class Real_Time_Response_Admin(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_DeletePut_Files",
-            method="DELETE",
             keywords=kwargs,
             params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_GetScripts(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_scripts(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get custom-scripts based on the ID's given. These are used for the RTR `runscript` command.
         """
@@ -152,25 +146,22 @@ class Real_Time_Response_Admin(ServiceClass):
             params=parameters
             )
 
-    def RTR_CreateScripts(self: object, data, files) -> dict:
+    @force_default(defaults=["files"], default_types=["list"])
+    def create_scripts(self: object, data, files: list = None) -> dict:
         """
         Upload a new custom-script to use for the RTR `runscript` command.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_CreateScripts
-        header_payload = self.headers
-        header_payload['Content-Type'] = 'multipart/form-data'
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_CreateScripts",
-            method="POST",
             data=data,
-            files=files,
-            headers=header_payload
+            files=files
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_DeleteScripts(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_scripts(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Delete a custom-script based on the ID given. Can only delete one script at a time.
         """
@@ -179,30 +170,25 @@ class Real_Time_Response_Admin(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_DeleteScripts",
-            method="DELETE",
             keywords=kwargs,
             params=parameters
             )
 
-    def RTR_UpdateScripts(self: object, data, files) -> dict:
+    def update_scripts(self: object, data, files) -> dict:
         """
         Upload a new scripts to replace an existing one.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_UpdateScripts
-        header_payload = self.headers
-        header_payload['Content-Type'] = 'multipart/form-data'
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_UpdateScripts",
-            method="PATCH",
             data=data,
-            files=files,
-            headers=header_payload
+            files=files
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_ListPut_Files(self: object, parameters: dict = None, **kwargs) -> dict:
+    def list_put_files(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get a list of put-file ID's that are available to the user for the `put` command.
         """
@@ -216,7 +202,7 @@ class Real_Time_Response_Admin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RTR_ListScripts(self: object, parameters: dict = None, **kwargs) -> dict:
+    def list_scripts(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get a list of custom-script ID's that are available to the user for the `runscript` command.
         """
@@ -228,3 +214,24 @@ class Real_Time_Response_Admin(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    BatchAdminCmd = batch_admin_command
+    RTR_CheckAdminCommandStatus = check_admin_command_status
+    RTR_ExecuteAdminCommand = execute_admin_command
+    RTR_GetPut_Files = get_put_files
+    RTR_CreatePut_Files = create_put_files
+    RTR_DeletePut_Files = delete_put_files
+    RTR_GetScripts = get_scripts
+    RTR_CreateScripts = create_scripts
+    RTR_DeleteScripts = delete_scripts
+    RTR_UpdateScripts = update_scripts
+    RTR_ListPut_Files = list_put_files
+    RTR_ListScripts = list_scripts
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Real_Time_Response_Admin = RealTimeResponseAdmin  # pylint: disable=C0103

@@ -13,9 +13,9 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import iocs as FalconIOCs
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconIOCs.Iocs(access_token=auth.token)
-AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
+token = auth.getConfigExtended()
+falcon = FalconIOCs.Iocs(access_token=token)
+AllowedResponses = [200, 429]
 
 class TestIOCs:
     def serviceIOCs_QueryIOCs(self):
@@ -60,9 +60,6 @@ class TestIOCs:
     # def test_GetIOC(self):
     #     assert self.serviceIOCs_GetIOC() == True
 
-
-    def test_Logout(self):
-        assert auth.serviceRevoke() == True
 
     def test_Errors(self):
         assert self.serviceIOCs_GenerateErrors() == True

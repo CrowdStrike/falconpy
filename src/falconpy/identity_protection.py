@@ -36,13 +36,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request
+from ._util import process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._identity_protection import _identity_protection_endpoints as Endpoints
 
 
-class Identity_Protection(ServiceClass):
+class IdentityProtection(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
     is a valid token provided by the Falcon API SDK OAuth2 class, a
@@ -50,7 +49,7 @@ class Identity_Protection(ServiceClass):
     valid set of credentials.
     """
 
-    def GraphQL(self: object, body: dict) -> dict:
+    def graphql(self: object, body: dict) -> dict:
         """
         Identity Protection GraphQL API. Allows to retrieve entities, timeline activities,
         identity-based incidents and security assessment. Allows to perform actions on entities
@@ -58,15 +57,19 @@ class Identity_Protection(ServiceClass):
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html
         #           /identity-protection/api.preempt.proxy.post.graphql
-        operation_id = "api_preempt_proxy_post_graphql"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="api_preempt_proxy_post_graphql",
+            body=body
+            )
+
+    # This method name aligns to the operation ID in the API but
+    # does not conform to snake_case / PEP8 and is defined here
+    # for backwards compatibility / ease of use purposes
+    GraphQL = graphql
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Identity_Protection = IdentityProtection  # pylint: disable=C0103

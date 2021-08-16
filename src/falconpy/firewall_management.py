@@ -36,16 +36,18 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
+import json
 from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._firewall_management import _firewall_management_endpoints as Endpoints
 
 
-class Firewall_Management(ServiceClass):
+class FirewallManagement(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
     def aggregate_events(self: object, body: dict) -> dict:
         """
@@ -56,7 +58,6 @@ class Firewall_Management(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="aggregate_events",
-            method="POST",
             body=body
             )
 
@@ -69,7 +70,6 @@ class Firewall_Management(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="aggregate_policy_rules",
-            method="POST",
             body=body
             )
 
@@ -82,7 +82,6 @@ class Firewall_Management(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="aggregate_rule_groups",
-            method="POST",
             body=body
             )
 
@@ -95,7 +94,6 @@ class Firewall_Management(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="aggregate_rules",
-            method="POST",
             body=body
             )
 
@@ -160,13 +158,14 @@ class Firewall_Management(ServiceClass):
         Update an identified policy container.
         """
         # [PUT] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update_policy_container
-        header_payload = self.headers
-        header_payload['X-CS-USERNAME'] = cs_username
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # Set our X-CS-USERNAME header
+        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="update_policy_container",
-            method="PUT",
             body=body,
             headers=header_payload
             )
@@ -192,13 +191,14 @@ class Firewall_Management(ServiceClass):
         Create new rule group on a platform for a customer with a name and description, and return the ID.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create_rule_group
-        header_payload = self.headers
-        header_payload['X-CS-USERNAME'] = cs_username
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # Set our X-CS-USERNAME header
+        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="create_rule_group",
-            method="POST",
             body=body,
             params=parameters,
             keywords=kwargs,
@@ -211,13 +211,14 @@ class Firewall_Management(ServiceClass):
         Delete rule group entities by ID.
         """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QueryReports
-        header_payload = self.headers
-        header_payload['X-CS-USERNAME'] = cs_username
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # Set our X-CS-USERNAME header
+        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="create_rule_group",
-            method="DELETE",
+            operation_id="delete_rule_groups",
             params=parameters,
             keywords=kwargs,
             headers=header_payload
@@ -229,13 +230,14 @@ class Firewall_Management(ServiceClass):
         Update name, description, or enabled status of a rule group, or create, edit, delete, or reorder rules.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update_rule_group
-        header_payload = self.headers
-        header_payload['X-CS-USERNAME'] = cs_username
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # Set our X-CS-USERNAME header
+        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="create_rule_group",
-            method="PATCH",
             body=body,
             params=parameters,
             keywords=kwargs,
@@ -339,3 +341,8 @@ class Firewall_Management(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Firewall_Management = FirewallManagement  # pylint: disable=C0103

@@ -14,7 +14,7 @@ from falconpy import oauth2 as FalconAuth
 
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
-AllowedResponses = [200, 429, 401]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 401, 403, 429]
 
 
 class TestAuthentications:
@@ -23,6 +23,14 @@ class TestAuthentications:
         bad_falcon = FalconZTA(creds={"client_id": "This", "client_secret": "WontWork"})
         result = bad_falcon.getAssessmentV1(ids='12345678')
 
+        if result["status_code"] in AllowedResponses:
+            return True
+        else:
+            return False
+
+    def serviceAny_TestBadCredRevoke(self):
+        bad_falcon = FalconAuth.OAuth2()
+        result = bad_falcon.revoke("Will generate a 403")
         if result["status_code"] in AllowedResponses:
             return True
         else:
@@ -41,10 +49,10 @@ class TestAuthentications:
             return False
 
     def serviceAny_TestObjectAuth(self):
-        auth_obj = FalconAuth.OAuth2(creds={
-                                            "client_id": auth.config["falcon_client_id"],
-                                            "client_secret": auth.config["falcon_client_secret"]
-                                            })
+        # Should also test direct auth in the authentication class
+        auth_obj = FalconAuth.OAuth2(client_id=auth.config["falcon_client_id"],
+                                     client_secret=auth.config["falcon_client_secret"]
+                                     )
         auth_obj.token()
         falcon = FalconAWS(auth_object=auth_obj)
         result = falcon.QueryAWSAccounts()
@@ -54,11 +62,8 @@ class TestAuthentications:
             return False
 
     def serviceAny_TestBadObjectAuth(self):
-
-        falcon = FalconAWS(auth_object=FalconAuth.OAuth2(creds={
-                                                                "client_id": "ThisAlso",
-                                                                "client_secret": "WontWork"
-                                                                }))
+        # Should also test bad direct auth in the authentication class
+        falcon = FalconAWS(auth_object=FalconAuth.OAuth2())
         result = falcon.QueryAWSAccounts()
         if result["status_code"] in AllowedResponses:
             return True
@@ -67,6 +72,9 @@ class TestAuthentications:
 
     def test_BadCredentialAuth(self):
         assert self.serviceAny_TestCredentialAuthFailure() is True
+
+    def test_BadCredRevoke(self):
+        assert self.serviceAny_TestBadCredRevoke() is True
 
     def test_StaleObjectAuth(self):
         assert self.serviceAny_TestStaleObjectAuth() is True

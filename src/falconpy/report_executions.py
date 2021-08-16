@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-event_streams - CrowdStrike Falcon Event Stream API interface class
+report_executions - Falcon Report Executions API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,53 +36,63 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
 from ._service_class import ServiceClass
-from ._endpoint._event_streams import _event_streams_endpoints as Endpoints
+from ._endpoint._report_executions import _report_executions_endpoints as Endpoints
 
 
-class EventStreams(ServiceClass):
+class ReportExecutions(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
     is a valid token provided by the Falcon API SDK OAuth2 class, an
     authorization object (oauth2.py) or a credential dictionary with
     client_id and client_secret containing valid API credentials.
     """
-    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def refresh_active_stream(self: object, partition: int = 0, parameters: dict = None, body: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_download(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
-        Refresh an active event stream. Use the URL shown in a GET /sensors/entities/datafeed/v2 response.
+        Get report entity download
         """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+        #           /report-executions/report-executions-download.get
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="refreshActiveStreamSession",
-            body=body,  # BODY is being passed here even though it is likely empty, addresses issue #247
+            operation_id="report_executions_download_get",
             keywords=kwargs,
-            params=parameters,
-            partition=partition
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def list_available_streams(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
-        Discover all event streams in your environment.
+        Retrieve report details for the provided report IDs.
         """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/report-executions/report-executions.get
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="listAvailableStreamsOAuth2",
+            operation_id="report_executions_get",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_reports(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Find all report execution IDs matching the query with filter
+        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/report-executions/report-executions.query
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="report_executions_query",
             keywords=kwargs,
             params=parameters
             )
 
-    # These method names align to the operation IDs in the API but
-    # do not conform to snake_case / PEP8 and are defined here for
-    # backwards compatibility / ease of use purposes
-    refreshActiveStreamSession = refresh_active_stream
-    listAvailableStreamsOAuth2 = list_available_streams
-
-
-# The legacy name for this class does not conform to PascalCase / PEP8
-# It is defined here for backwards compatibility purposes only.
-Event_Streams = EventStreams  # pylint: disable=C0103
+    # These method names align to the operation ID in the
+    # API and are defined here for ease of use purposes
+    report_executions_download_get = get_download
+    report_executions_get = get_reports
+    scheduled_reports_query = query_reports

@@ -14,8 +14,12 @@ from falconpy import oauth2 as FalconAuth
 from falconpy._util import service_request
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconAWS.Cloud_Connect_AWS(access_token=auth.token)
+
+token = auth.getConfigExtended()
+falcon = FalconAWS.Cloud_Connect_AWS(access_token=token)
+# falcon = FalconAWS.Cloud_Connect_AWS(creds={"client_id": auth.config["falcon_client_id"],
+#                                             "client_secret": auth.config["falcon_client_secret"]
+#                                             })
 AllowedResponses = [200, 201, 429]  # Adding rate-limiting as an allowed response for now
 accountPayload = {
         "resources": [
@@ -81,25 +85,25 @@ class TestCloudConnectAWS:
 
         return result
 
-    def serviceCCAWS_GetAWSSettings(self):
-        if falcon.GetAWSSettings()["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+    # def serviceCCAWS_GetAWSSettings(self):
+    #     if falcon.GetAWSSettings()["status_code"] in AllowedResponses:
+    #         return True
+    #     else:
+    #         return False
 
-    def serviceCCAWS_QueryAWSAccounts(self):
-        if falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+    # def serviceCCAWS_QueryAWSAccounts(self):
+    #     if falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] in AllowedResponses:
+    #         return True
+    #     else:
+    #         return False
 
-    def serviceCCAWS_GetAWSAccounts(self):
-        if falcon.GetAWSAccounts(ids=falcon.QueryAWSAccounts(
-                parameters={"limit": 1}
-                )["body"]["resources"][0]["id"])["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+    # def serviceCCAWS_GetAWSAccounts(self):
+    #     if falcon.GetAWSAccounts(ids=falcon.QueryAWSAccounts(
+    #             parameters={"limit": 1}
+    #             )["body"]["resources"][0]["id"])["status_code"] in AllowedResponses:
+    #         return True
+    #     else:
+    #         return False
 
     def serviceCCAWS_GetAWSAccountsUsingList(self):
         liste = []
@@ -125,33 +129,33 @@ class TestCloudConnectAWS:
             accountPayload["resources"][0]["external_id"] = orig_external_id
             return False
 
-    def serviceCCAWS_AccountDelete(self):
-        if falcon.DeleteAWSAccounts(ids=accountPayload["resources"][0]["id"])["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+    # def serviceCCAWS_AccountDelete(self):
+    #     if falcon.DeleteAWSAccounts(ids=accountPayload["resources"][0]["id"])["status_code"] in AllowedResponses:
+    #         return True
+    #     else:
+    #         return False
 
-    def serviceCCAWS_AccountRegister(self):
-        if falcon.ProvisionAWSAccounts(body=accountPayload)["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+    # def serviceCCAWS_AccountRegister(self):
+    #     if falcon.ProvisionAWSAccounts(body=accountPayload)["status_code"] in AllowedResponses:
+    #         return True
+    #     else:
+    #         return False
 
-    def serviceCCAWS_VerifyAWSAccountAccess(self):
-        if falcon.VerifyAWSAccountAccess(
-                ids=falcon.QueryAWSAccounts(
-                    parameters={"limit": 1}
-                    )["body"]["resources"][0]["id"]
-                )["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+    # def serviceCCAWS_VerifyAWSAccountAccess(self):
+    #     if falcon.VerifyAWSAccountAccess(
+    #             ids=falcon.QueryAWSAccounts(
+    #                 parameters={"limit": 1}
+    #                 )["body"]["resources"][0]["id"]
+    #             )["status_code"] in AllowedResponses:
+    #         return True
+    #     else:
+    #         return False
 
-    def serviceCCAWS_QueryAWSAccountsForIDs(self):
-        if falcon.QueryAWSAccountsForIDs(parameters={"limit": 1})["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+    # def serviceCCAWS_QueryAWSAccountsForIDs(self):
+    #     if falcon.QueryAWSAccountsForIDs(parameters={"limit": 1})["status_code"] in AllowedResponses:
+    #         return True
+    #     else:
+    #         return False
 
     def serviceCCAWS_ForceAttributeError(self):
         FULL_URL = falcon.base_url+'/cloud-connect-aws/combined/accounts/v1'
@@ -191,16 +195,18 @@ class TestCloudConnectAWS:
         return errorChecks
 
     def test_GetAWSSettings(self):
-        assert self.serviceCCAWS_GetAWSSettings() is True
+        assert bool(falcon.GetAWSSettings()["status_code"] in AllowedResponses) is True
 
     def test_QueryAWSAccounts(self):
-        assert self.serviceCCAWS_QueryAWSAccounts() is True
+        assert bool(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
     @pytest.mark.skipif(falcon.QueryAWSAccounts(
         parameters={"limit": 1}
         )["status_code"] == 429, reason="API rate limit reached")
     def test_GetAWSAccounts(self):
-        assert self.serviceCCAWS_GetAWSAccounts() is True
+        assert bool(falcon.GetAWSAccounts(ids=falcon.QueryAWSAccounts(
+                    parameters={"limit": 1}
+                    )["body"]["resources"][0]["id"])["status_code"] in AllowedResponses) is True
 
     @pytest.mark.skipif(falcon.QueryAWSAccounts(
         parameters={"limit": 1}
@@ -209,7 +215,7 @@ class TestCloudConnectAWS:
         assert self.serviceCCAWS_GetAWSAccountsUsingList() is True
 
     def test_QueryAWSAccountsForIDs(self):
-        assert self.serviceCCAWS_QueryAWSAccountsForIDs() is True
+        assert bool(falcon.QueryAWSAccountsForIDs(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
     def test_AuthWithCreds(self):
         assert self.serviceCCAWS_AuthWithCreds() is True
@@ -226,8 +232,19 @@ class TestCloudConnectAWS:
     def test_ForceAttributeError(self):
         assert self.serviceCCAWS_ForceAttributeError() is True
 
-    def test_Logout(self):
-        assert auth.serviceRevoke() is True
+    def test_argument_vs_keyword(self):
+        assert bool(
+            falcon.VerifyAWSAccountAccess(falcon.QueryAWSAccountsForIDs(limit=1)["body"]["resources"][0])
+            ) is True
 
     def test_Errors(self):
         assert self.serviceCCAWS_GenerateErrors() is True
+
+    # @staticmethod
+    # def test_logout():
+    #     """
+    #     Pytest harness hook
+    #     """
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True

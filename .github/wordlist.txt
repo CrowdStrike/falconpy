@@ -150,6 +150,7 @@ GetSubmissions
 GetSummaryReports
 GetUserRoleIds
 GrantUserRoleIds
+IDP
 IOA
 IOAs
 IOC
@@ -158,6 +159,7 @@ IPs
 IPv
 InitSession
 JSON
+JSONDecode
 Javascript
 Javascript
 Kubernetes
@@ -214,6 +216,7 @@ QuerySubmissions
 QuerySubmissionsMixin
 RTR
 Realtime
+README
 RegenerateAPIKey
 Responder
 RetrieveEmailsByCID
@@ -279,6 +282,7 @@ cd
 ced
 changelog
 cid
+classifiers
 cmd
 codebase
 config
@@ -294,6 +298,7 @@ createSVExclusionsV
 createSensorUpdatePolicies
 createSensorUpdatePoliciesV
 createUserGroup
+creds
 crowdstrike
 cspm
 datafeed
@@ -330,6 +335,7 @@ getAssessmentV
 getCIDGroupById
 getCIDGroupMembersBy
 getChildren
+getComplianceV
 getDeviceControlPolicies
 getHostGroups
 getIOAExclusionsV

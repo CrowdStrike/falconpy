@@ -11,10 +11,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.installation_tokens import Installation_Tokens as FalconIT
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconIT(creds={"client_id": auth.config["falcon_client_id"],
-                         "client_secret": auth.config["falcon_client_secret"]
-                         })
+token = auth.getConfigExtended()
+falcon = FalconIT(access_token=token)
 AllowedResponses = [200, 429]
 
 

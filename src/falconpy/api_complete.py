@@ -38,24 +38,34 @@ For more information, please refer to <https://unlicense.org>
 """
 import time
 from ._util import _ALLOWED_METHODS
-from ._util import perform_request, generate_b64cred, force_default, generate_error_result, calc_url_from_args
+from ._util import perform_request, generate_b64cred, generate_error_result, calc_url_from_args
 from ._endpoint import api_endpoints
 
 
 class APIHarness:
     """ This one does it all. It's like the One Ring with significantly fewer orcs. """
     # pylint: disable=too-many-instance-attributes
-    # Nine attributes is reasonable
 
     TOKEN_RENEW_WINDOW = 20  # in seconds
 
-    def __init__(self: object, creds: dict,  # pylint: disable=R0913  # Six is fine
+    def __init__(self: object,  # pylint: disable=R0913
                  base_url: str = "https://api.crowdstrike.com",
+                 creds: dict = None,
+                 client_id: str = None, client_secret: str = None,
                  ssl_verify: bool = True, proxy: dict = None,
                  timeout: float or tuple = None) -> object:
-        """Instantiates an instance of the base class, ingests credentials, the base URL and the SSL verification
-           boolean. Afterwards class attributes are initialized.
         """
+        Instantiates an instance of the base class, ingests credentials,
+        the base URL and the SSL verification boolean.
+        Afterwards class attributes are initialized.
+        """
+        if client_id and client_secret and not creds:
+            creds = {
+                "client_id": client_id,
+                "client_secret": client_secret
+            }
+        elif not creds:
+            creds = {}
         self.creds = creds
         self.base_url = base_url
         self.ssl_verify = ssl_verify
@@ -136,28 +146,14 @@ class APIHarness:
     def _create_header_payload(self: object, passed_arguments: dict) -> dict:
         """Creates the HTTP header payload based upon the existing class headers and passed arguments."""
         payload = self.headers()
-        for item in passed_arguments["headers"]:
-            payload[item] = passed_arguments["headers"][item]
+        if "headers" in passed_arguments:
+            for item in passed_arguments["headers"]:
+                payload[item] = passed_arguments["headers"][item]
         if "content_type" in passed_arguments:
             payload["Content-Type"] = str(passed_arguments["content_type"])
 
         return payload
 
-    @force_default(defaults=[
-        "parameters",
-        "body",
-        "data",
-        "files",
-        "headers",
-        "action",
-    ], default_types=[
-        "dict",
-        "dict",
-        "dict",
-        "list",
-        "dict",
-        "string",
-    ])
     def command(self: object, *args, **kwargs):
         """ Checks token expiration, renewing when necessary, then performs the request.
 
@@ -175,13 +171,15 @@ class APIHarness:
             file_name: str = None                               - Name of the file to upload
             content_type: str = None                            - Content_Type HTTP header
         """
+
         if self.token_expired():
             # Authenticate them if we can
             self.authenticate()
         try:
-            if not kwargs["action"]:
+            if not kwargs.get("action", None):
                 # Assume they're passing it in as the first param
                 kwargs["action"] = args[0]
+
         except IndexError:
             pass  # They didn't specify an action, use the default and try for an override instead
         uber_command = [a for a in self.commands if a[0] == kwargs["action"]]
@@ -194,10 +192,10 @@ class APIHarness:
             # Calculate our header payload using arguments passed to the function and our token
             header_payload = self._create_header_payload(kwargs)
             # These have their defaults set by the force_defaults decorator
-            data_payload = kwargs["data"]
-            body_payload = kwargs["body"]
-            file_list = kwargs["files"]
-            parameter_payload = kwargs["parameters"]
+            data_payload = kwargs.get("data", {})
+            body_payload = kwargs.get("body", {})
+            file_list = kwargs.get("files", [])
+            parameter_payload = kwargs.get("parameters", {})
             # Check for authentication
             if self.authenticated:
                 selected_method = uber_command[0][1].upper()            # Which HTTP method to execute

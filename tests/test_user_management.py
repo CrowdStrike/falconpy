@@ -1,6 +1,6 @@
-# test_user_management.py
-# This class tests the user_management service class
-
+"""
+test_user_management.py - This class tests the user_management service class
+"""
 import os
 import sys
 import pytest
@@ -11,27 +11,20 @@ from falconpy import user_management as FalconUsers
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 
-
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconUsers.User_Management(access_token=auth.token)
+token = auth.getConfigExtended()
+falcon = FalconUsers.User_Management(access_token=token)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestFalconUserManagement:
-    def serviceUserManagement_RetrieveEmailsByCID(self):
-        if falcon.RetrieveEmailsByCID()["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceUserManagement_RetrieveUserUUIDsByCID(self):
-        if falcon.RetrieveUserUUIDsByCID()["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceUserManagement_RetrieveUserUUID(self):
+    """
+    User Management Service Class test harness
+    """
+    def um_retrieve_user_uuid(self):
+        """
+        retrieve_user_uuid
+        """
         try:
             id_list = falcon.RetrieveEmailsByCID()["body"]["resources"][0]
             if falcon.RetrieveUserUUID(parameters={"uid": id_list})["status_code"] in AllowedResponses:
@@ -42,7 +35,10 @@ class TestFalconUserManagement:
             pytest.skip("Workflow-related error, skipping")
             return True
 
-    def serviceUserManagement_RetrieveUser(self):
+    def um_retrieve_user(self):
+        """
+        retrieve_user
+        """
         try:
             id_list = falcon.RetrieveUserUUIDsByCID()["body"]["resources"][0]
             if falcon.RetrieveUser(ids=id_list)["status_code"] in AllowedResponses:
@@ -53,7 +49,10 @@ class TestFalconUserManagement:
             pytest.skip("Workflow-related error, skipping")
             return True
 
-    def serviceUserManagement_GetUserRoleIds(self):
+    def um_get_user_role_ids(self):
+        """
+        get_user_role_ids
+        """
         try:
             id_list = falcon.RetrieveUserUUIDsByCID()["body"]["resources"][0]
             if falcon.GetUserRoleIds(parameters={"user_uuid": id_list})["status_code"] in AllowedResponses:
@@ -64,13 +63,10 @@ class TestFalconUserManagement:
             pytest.skip("Workflow-related error, skipping")
             return True
 
-    def serviceUserManagement_GetAvailableRoleIds(self):
-        if falcon.GetAvailableRoleIds()["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
-
-    def serviceUserManagement_GetRoles(self):
+    def um_get_roles(self):
+        """
+        get_roles
+        """
         try:
             id_list = falcon.GetAvailableRoleIds()["body"]["resources"][0]
             if falcon.GetRoles(ids=id_list)["status_code"] in AllowedResponses:
@@ -81,56 +77,91 @@ class TestFalconUserManagement:
             pytest.skip("Workflow-related error, skipping")
             return True
 
-    def serviceUserManagement_GenerateErrors(self):
+    def um_generate_errors(self):
+        """
+        Test every code path within every method by generating 500s, does not hit the API
+        """
         falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["GetRoles", "ids='12345678'"],
-            ["GrantUserRoleIds", "body={}, parameters={}"],
-            ["RevokeUserRoleIds", "ids='12345678', parameters={}"],
-            ["GetAvailableRoleIds", ""],
-            ["GetUserRoleIds", "parameters={}"],
-            ["RetrieveUser", "ids='12345678'"],
-            ["CreateUser", "body={}"],
-            ["DeleteUser", "parameters={}"],
-            ["UpdateUser", "body={}, parameters={}"],
-            ["RetrieveEmailsByCID", ""],
-            ["RetrieveUserUUIDsByCID", ""],
-            ["RetrieveUserUUID", "parameters={}"]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+        error_checks = True
+        tests = {
+            "get_roles": falcon.GetRoles(ids='12345678')["status_code"],
+            "grant_user_role_ids": falcon.GrantUserRoleIds(body={}, parameters={})["status_code"],
+            "revoke_user_role_ids": falcon.RevokeUserRoleIds(ids='12345678', parameters={})["status_code"],
+            "get_available_role_ids": falcon.GetAvailableRoleIds()["status_code"],
+            "get_user_role_ids": falcon.GetUserRoleIds(parameters={})["status_code"],
+            "retrieve_user": falcon.RetrieveUser(ids='12345678')["status_code"],
+            "create_user": falcon.CreateUser(body={})["status_code"],
+            "delete_user": falcon.DeleteUser(parameters={})["status_code"],
+            "update_user": falcon.UpdateUser(body={}, parameters={})["status_code"],
+            "retrieve_emails_by_cid": falcon.RetrieveEmailsByCID()["status_code"],
+            "retrieve_user_uuids_by_cid": falcon.RetrieveUserUUIDsByCID()["status_code"],
+            "retrieve_user_uuid": falcon.RetrieveUserUUID(parameters={})["status_code"]
+        }
+        for key in tests:
+            if tests[key] != 500:
+                error_checks = False
 
-        return errorChecks
+            # print(f"{key} processed with a {tests[key]} response")
 
-    def test_RetrieveEmailsByCID(self):
-        assert self.serviceUserManagement_RetrieveEmailsByCID() is True
+        return error_checks
 
-    def test_RetrieveUserUUIDsByCID(self):
-        assert self.serviceUserManagement_RetrieveUserUUIDsByCID() is True
+    def test_retrieve_emails_by_cid(self):
+        """
+        Pytest harness hook
+        """
+        assert bool(falcon.RetrieveEmailsByCID()["status_code"] in AllowedResponses) is True
+
+    def test_retrieve_user_uuids_by_cid(self):
+        """
+        Pytest harness hook
+        """
+        assert bool(falcon.RetrieveUserUUIDsByCID()["status_code"] in AllowedResponses) is True
 
     @pytest.mark.skipif(falcon.RetrieveEmailsByCID()["status_code"] == 429, reason="API rate limit reached")
-    def test_RetrieveUserUUID(self):
-        assert self.serviceUserManagement_RetrieveUserUUID() is True
+    def test_retrieve_user_uuid(self):
+        """
+        Pytest harness hook
+        """
+        assert self.um_retrieve_user_uuid() is True
 
     @pytest.mark.skipif(falcon.RetrieveUserUUIDsByCID()["status_code"] == 429, reason="API rate limit reached")
-    def test_RetrieveUser(self):
-        assert self.serviceUserManagement_RetrieveUser() is True
+    def test_retrieve_user(self):
+        """
+        Pytest harness hook
+        """
+        assert self.um_retrieve_user() is True
 
     @pytest.mark.skipif(falcon.RetrieveUserUUIDsByCID()["status_code"] == 429, reason="API rate limit reached")
-    def test_GetUserRoleIds(self):
-        assert self.serviceUserManagement_GetUserRoleIds() is True
+    def test_get_user_role_ids(self):
+        """
+        Pytest harness hook
+        """
+        assert self.um_get_user_role_ids() is True
 
-    def test_GetAvailableRoleIds(self):
-        assert self.serviceUserManagement_GetAvailableRoleIds() is True
+    def test_get_available_role_ids(self):
+        """
+        Pytest harness hook
+        """
+        assert bool(falcon.GetAvailableRoleIds()["status_code"] in AllowedResponses) is True
 
     @pytest.mark.skipif(falcon.GetAvailableRoleIds()["status_code"] == 429, reason="API rate limit reached")
-    def test_GetRoles(self):
-        assert self.serviceUserManagement_GetRoles() is True
+    def test_get_roles(self):
+        """
+        Pytest harness hook
+        """
+        assert self.um_get_roles() is True
 
-    def test_Logout(self):
-        assert auth.serviceRevoke() is True
+    def test_errors(self):
+        """
+        Pytest harness hook
+        """
+        assert self.um_generate_errors() is True
 
-    def test_Errors(self):
-        assert self.serviceUserManagement_GenerateErrors() is True
+    # @staticmethod
+    # def test_logout():
+    #     """
+    #     Pytest harness hook
+    #     """
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True

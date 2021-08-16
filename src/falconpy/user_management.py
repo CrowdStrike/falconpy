@@ -36,19 +36,18 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
 from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._user_management import _user_management_endpoints as Endpoints
 
 
-class User_Management(ServiceClass):
+class UserManagement(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
     is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetRoles(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_roles(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get info about a role.
         """
@@ -62,7 +61,7 @@ class User_Management(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GrantUserRoleIds(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def grant_user_role_ids(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Assign one or more roles to a user.
         """
@@ -71,14 +70,13 @@ class User_Management(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GrantUserRoleIds",
-            method="POST",
             body=body,
             keywords=kwargs,
             params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RevokeUserRoleIds(self: object, parameters: dict = None, **kwargs) -> dict:
+    def revoke_user_role_ids(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Revoke one or more roles from a user.
         """
@@ -87,12 +85,11 @@ class User_Management(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RevokeUserRoleIds",
-            method="DELETE",
             keywords=kwargs,
             params=parameters
             )
 
-    def GetAvailableRoleIds(self: object) -> dict:
+    def get_available_role_ids(self: object) -> dict:
         """
         Show role IDs for all roles available in your customer account.
         For more information on each role, provide the role ID to `/customer/entities/roles/v1`.
@@ -105,7 +102,7 @@ class User_Management(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def GetUserRoleIds(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_user_role_ids(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Show role IDs of roles assigned to a user. For more information on each role,
         provide the role ID to `/customer/entities/roles/v1`.
@@ -120,7 +117,7 @@ class User_Management(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RetrieveUser(self: object, parameters: dict = None, **kwargs) -> dict:
+    def retrieve_user(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get info about a user.
         """
@@ -133,7 +130,7 @@ class User_Management(ServiceClass):
             params=parameters
             )
 
-    def CreateUser(self: object, body: dict) -> dict:
+    def create_user(self: object, body: dict) -> dict:
         """
         Create a new user. After creating a user,
         assign one or more roles with POST /user-roles/entities/user-roles/v1.
@@ -143,12 +140,11 @@ class User_Management(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="CreateUser",
-            method="POST",
             body=body
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def DeleteUser(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_user(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Delete a user permanently.
         """
@@ -157,13 +153,12 @@ class User_Management(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="DeleteUser",
-            method="DELETE",
             keywords=kwargs,
             params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def UpdateUser(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def update_user(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """
         Modify an existing user.
         """
@@ -172,13 +167,12 @@ class User_Management(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="UpdateUser",
-            method="PATCH",
             body=body,
             keywords=kwargs,
             params=parameters
             )
 
-    def RetrieveEmailsByCID(self: object) -> dict:
+    def retrieve_emails_by_cid(self: object) -> dict:
         """
         List the usernames (usually an email address) for all users in your customer account.
         """
@@ -189,7 +183,7 @@ class User_Management(ServiceClass):
             operation_id="RetrieveEmailsByCID"
             )
 
-    def RetrieveUserUUIDsByCID(self: object) -> dict:
+    def retrieve_user_uuids_by_cid(self: object) -> dict:
         """
         List user IDs for all users in your customer account.
         For more information on each user, provide the user ID to `/users/entities/user/v1`.
@@ -202,7 +196,7 @@ class User_Management(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def RetrieveUserUUID(self: object, parameters: dict = None, **kwargs) -> dict:
+    def retrieve_user_uuid(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get a user's ID by providing a username (usually an email address).
         """
@@ -214,3 +208,24 @@ class User_Management(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    GetRoles = get_roles
+    GrantUserRoleIds = grant_user_role_ids
+    RevokeUserRoleIds = revoke_user_role_ids
+    GetAvailableRoleIds = get_available_role_ids
+    GetUserRoleIds = get_user_role_ids
+    RetrieveUser = retrieve_user
+    CreateUser = create_user
+    DeleteUser = delete_user
+    UpdateUser = update_user
+    RetrieveEmailsByCID = retrieve_emails_by_cid
+    RetrieveUserUUIDsByCID = retrieve_user_uuids_by_cid
+    RetrieveUserUUID = retrieve_user_uuid
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+User_Management = UserManagement  # pylint: disable=C0103

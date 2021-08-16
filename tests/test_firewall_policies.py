@@ -10,8 +10,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import firewall_policies as FalconFirewallPolicy
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconFirewallPolicy.Firewall_Policies(access_token=auth.token)
+token = auth.getConfigExtended()
+falcon = FalconFirewallPolicy.Firewall_Policies(access_token=token)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -45,9 +45,6 @@ class TestFirewallPolicy:
                 errorChecks = False
 
         return errorChecks
-
-    def test_Logout(self):
-        assert auth.serviceRevoke() is True
 
     def test_Errors(self):
         assert self.serviceFirewall_GenerateErrors() is True

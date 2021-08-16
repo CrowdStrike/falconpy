@@ -36,436 +36,371 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
+# pylint: disable=R0904  # Matching API operation counts
+from ._util import force_default, handle_single_argument, process_service_request
 from ._service_class import ServiceClass
-from ._endpoint._mssp import _mssp_endpoints as ENDPOINTS
+from ._endpoint._mssp import _mssp_endpoints as Endpoints
 
 
-class Flight_Control(ServiceClass):  # pylint: disable=C0103,R0904  # Matching API
+class FlightControl(ServiceClass):
     """The only requirement to instantiate an instance of this class
        is a valid token provided by the Falcon API SDK OAuth2 class.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getChildren(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Get link to child customer by child CID(s)"""
+    def get_children(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get link to child customer by child CID(s)
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getChildren
-        operation_id = "getChildren"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getChildren",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getCIDGroupMembersBy(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Get CID Group members by CID Group IDs."""
+    def get_cid_group_members_by(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get CID Group members by CID Group IDs.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getCIDGroupMembersBy
-        operation_id = "getCIDGroupMembersBy"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getCIDGroupMembersBy",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "cid_group_ids")
+            )
 
-    def addCIDGroupMembers(self: object, body: dict) -> dict:
-        """Add new CID Group member."""
+    def add_cid_group_members(self: object, body: dict) -> dict:
+        """
+        Add new CID Group member.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/addCIDGroupMembers
-        operation_id = "addCIDGroupMembers"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="addCIDGroupMembers",
+            body=body
+            )
 
-    def deleteCIDGroupMembers(self: object, body: dict) -> dict:
-        """ Delete a set of Prevention Policies by specifying their IDs. """
+    def delete_cid_group_members(self: object, body: dict) -> dict:
+        """
+        Delete CID Group members entry.
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteCIDGroupMembers
-        operation_id = "deleteCIDGroupMembers"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="deleteCIDGroupMembers",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getCIDGroupById(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Get CID Group(s) by ID(s)."""
+    def get_cid_group_by_id(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get CID Group(s) by ID(s).
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getCIDGroupById
-        operation_id = "getCIDGroupById"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getCIDGroupById",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "cid_group_ids")
+            )
 
-    def createCIDGroups(self: object, body: dict) -> dict:
-        """Create new CID Group(s). Maximum 500 CID Group(s) allowed."""
+    def create_cid_groups(self: object, body: dict) -> dict:
+        """
+        Create new CID Group(s). Maximum 500 CID Group(s) allowed.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/createCIDGroups
-        operation_id = "createCIDGroups"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="createCIDGroups",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def deleteCIDGroups(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Delete CID Group(s) by ID(s)."""
+    def delete_cid_groups(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """
+        Delete CID Group(s) by ID(s).
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteCIDGroups
-        operation_id = "deleteCIDGroups"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="deleteCIDGroups",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "cid_group_ids")
+            )
 
-    def updateCIDGroups(self: object, body: dict) -> dict:
-        """Update existing CID Group(s). CID Group ID is expected for each CID
-           Group definition provided in request body. CID Group member(s) remain unaffected.
+    def update_cid_groups(self: object, body: dict) -> dict:
+        """
+        Update existing CID Group(s). CID Group ID is expected for each CID
+        Group definition provided in request body. CID Group member(s) remain unaffected.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/updateCIDGroups
-        operation_id = "updateCIDGroups"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="PATCH",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateCIDGroups",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getRolesByID(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Get MSSP Role assignment(s). MSSP Role assignment is of the format <user_group_id>:<cid_group_id>."""
+    def get_roles_by_id(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get MSSP Role assignment(s). MSSP Role assignment is of the format <user_group_id>:<cid_group_id>.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getRolesByID
-        operation_id = "getRolesByID"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getRolesByID",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
-    def addRole(self: object, body: dict) -> dict:
-        """Assign new MSSP Role(s) between User Group and CID Group.
-           It does not revoke existing role(s) between User Group and CID Group.
-           User Group ID and CID Group ID have to be specified in request.
+    def add_role(self: object, body: dict) -> dict:
+        """
+        Assign new MSSP Role(s) between User Group and CID Group.
+        It does not revoke existing role(s) between User Group and CID Group.
+        User Group ID and CID Group ID have to be specified in request.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/addRole
-        operation_id = "addRole"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="addRole",
+            body=body
+            )
 
-    def deleteRoles(self: object, *args, **kwargs) -> dict:
-        """Delete MSSP Role assignment(s) between User Group and CID Group.
-           User Group ID and CID Group ID have to be specified in request.
-           Only specified roles are removed if specified in request payload,
-           else association between User Group and CID Group is dissolved completely (if no roles specified).
-
-           Redirects to deletedRoles()
+    def delete_roles(self: object, body: dict) -> dict:
+        """
+        Delete MSSP Role assignment(s) between User Group and CID Group.
+        User Group ID and CID Group ID have to be specified in request.
+        Only specified roles are removed if specified in request payload,
+        else association between User Group and CID Group is dissolved completely (if no roles specified).
         """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deletedRoles
-        returned = self.deletedRoles(*args, **kwargs)
-
-        return returned
-
-    def deletedRoles(self: object, body: dict) -> dict:
-        """Delete MSSP Role assignment(s) between User Group and CID Group.
-           User Group ID and CID Group ID have to be specified in request.
-           Only specified roles are removed if specified in request payload,
-           else association between User Group and CID Group is dissolved completely (if no roles specified).
-        """
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deletedRoles
-        operation_id = "deletedRoles"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="deletedRoles",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getUserGroupMembersByID(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Get User Group members by User Group ID(s)."""
+    def get_user_group_members_by_id(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get User Group members by User Group ID(s).
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getUserGroupMembersByID
-        operation_id = "getUserGroupMembersByID"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getUserGroupMembersByID",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "user_group_ids")
+            )
 
-    def addUserGroupMembers(self: object, body: dict) -> dict:
-        """Add new User Group member. Maximum 500 members allowed per User Group."""
+    def add_user_group_members(self: object, body: dict) -> dict:
+        """
+        Add new User Group member. Maximum 500 members allowed per User Group.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/addUserGroupMembers
-        operation_id = "addUserGroupMembers"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="addUserGroupMembers",
+            body=body
+            )
 
-    def deleteUserGroupMembers(self: object, body: dict) -> dict:
-        """Delete User Group members entry."""
+    def delete_user_group_members(self: object, body: dict) -> dict:
+        """
+        Delete User Group members entry.
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteUserGroupMembers
-        operation_id = "deleteUserGroupMembers"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="deleteUserGroupMembers",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getUserGroupsByID(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Get User Groups by ID(s)."""
+    def get_user_groups_by_id(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get User Groups by ID(s).
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getUserGroupsByID
-        operation_id = "getUserGroupsByID"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getUserGroupsByID",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "user_group_ids")
+            )
 
-    def createUserGroup(self: object, body: dict) -> dict:
-        """Create new User Group(s). Maximum 500 User Group(s) allowed per customer."""
+    def create_user_groups(self: object, body: dict) -> dict:
+        """
+        Create new User Group(s). Maximum 500 User Group(s) allowed per customer.
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/createUserGroup
-        operation_id = "createUserGroup"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="createUserGroup",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def deleteUserGroups(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Delete User Group(s) by ID(s)."""
+    def delete_user_groups(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """
+        Delete User Group(s) by ID(s).
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteUserGroups
-        operation_id = "deleteUserGroups"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="deleteUserGroups",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "user_group_ids")
+            )
 
-    def updateUserGroups(self: object, body: dict) -> dict:
-        """Update existing User Group(s). User Group ID is expected for each User Group
-           definition provided in request body. User Group member(s) remain unaffected.
+    def update_user_groups(self: object, body: dict) -> dict:
+        """
+        Update existing User Group(s). User Group ID is expected for each User Group
+        definition provided in request body. User Group member(s) remain unaffected.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/updateUserGroups
-        operation_id = "updateUserGroups"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateUserGroups",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryChildren(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Query for customers linked as children"""
+    def query_children(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Query for customers linked as children
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/queryChildren
-        operation_id = "queryChildren"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryChildren",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryCIDGroupMembers(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Query a CID Groups members by associated CID."""
+    def query_cid_group_members(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Query a CID Groups members by associated CID.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/queryCIDGroupMembers
-        operation_id = "queryCIDGroupMembers"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryCIDGroupMembers",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryCIDGroups(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Query a CID Groups."""
+    def query_cid_groups(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Query a CID Groups.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/queryCIDGroups
-        operation_id = "queryCIDGroups"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryCIDGroups",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryRoles(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Query MSSP Role assignment. At least one of CID Group ID or
-           User Group ID should also be provided. Role ID is optional.
+    def query_roles(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Query MSSP Role assignment. At least one of CID Group ID or
+        User Group ID should also be provided. Role ID is optional.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/queryRoles
-        operation_id = "queryRoles"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryRoles",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryUserGroupMembers(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Query User Group member by User UUID."""
+    def query_user_group_members(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Query User Group member by User UUID.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/queryRoles
-        operation_id = "queryUserGroupMembers"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryUserGroupMembers",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryUserGroups(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Query User Groups."""
+    def query_user_groups(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Query User Groups.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/queryUserGroups
-        operation_id = "queryUserGroups"
-        target_url = f"{self.base_url}{[ep[2] for ep in ENDPOINTS if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, ENDPOINTS, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryUserGroups",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    getChildren = get_children
+    getCIDGroupMembersBy = get_cid_group_members_by
+    addCIDGroupMembers = add_cid_group_members
+    deleteCIDGroupMembers = delete_cid_group_members
+    getCIDGroupById = get_cid_group_by_id
+    createCIDGroups = create_cid_groups
+    deleteCIDGroups = delete_cid_groups
+    updateCIDGroups = update_cid_groups
+    getRolesByID = get_roles_by_id
+    addRole = add_role
+    deletedRoles = delete_roles
+    deleteRoles = delete_roles  # Typo fix
+    getUserGroupMembersByID = get_user_group_members_by_id
+    addUserGroupMembers = add_user_group_members
+    deleteUserGroupMembers = delete_user_group_members
+    getUserGroupsByID = get_user_groups_by_id
+    createUserGroup = create_user_groups    # Typo fix
+    createUserGroups = create_user_groups
+    deleteUserGroups = delete_user_groups
+    updateUserGroups = update_user_groups
+    queryChildren = query_children
+    queryCIDGroupMembers = query_cid_group_members
+    queryCIDGroups = query_cid_groups
+    queryRoles = query_roles
+    queryUserGroupMembers = query_user_group_members
+    queryUserGroups = query_user_groups
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Flight_Control = FlightControl  # pylint: disable=C0103

@@ -107,6 +107,16 @@ def generate_b64cred(client_id: str, client_secret: str) -> str:
     return encoded
 
 
+def handle_single_argument(passed_arguments: list, passed_keywords: dict, search_key: str) -> dict:
+    """
+    Reviews arguments passed to a method and injects them into the keyword dictionary if they match the search string
+    """
+    if len(passed_arguments) > 0:
+        passed_keywords[search_key] = passed_arguments[0]
+
+    return passed_keywords
+
+
 def force_default(defaults: list, default_types: list = None):
     """
     This function forces default values and is designed to decorate other functions.
@@ -125,7 +135,7 @@ def force_default(defaults: list, default_types: list = None):
         @functools.wraps(func)
         def factory(*args, **kwargs):
             """
-            This method is a factory and runs through arguments passed to the called function,
+            This method is a factory and runs through keywords passed to the called function,
             setting defaults on values within the **kwargs dictionary when necessary
             as specified in our "defaults" list that is passed to the parent wrapper.
             """
@@ -141,6 +151,10 @@ def force_default(defaults: list, default_types: list = None):
                     kwargs[element] = get_default(default_types, element_count)
                 # Increment our tracker for our sibling default_types list
                 element_count += 1
+            # They passed us an argument but did not specify what it was (non-keyword) [Issue #263]
+            # Need to test scenarios with multiple arguments / keyword variations
+            # if len(args) > 1:
+            #     args = [args[0]]
             return func(*args, **kwargs)
         return factory
     return wrapper
@@ -356,10 +370,19 @@ def process_service_request(calling_object: object,
         body: Dictionary representing the body payload passed to the service class function.
         data: Dictionary representing the data payload passed to the service class function.
         files: List of files to be uploaded.
+        partition: ID of the partition to open (Event Streams API)
+        body_validator: Dictionary containing details regarding body payload validation
+        body_required: List of required body payload parameters
     """
-    # ID replacement happening at the end of this statement planned for removal in v0.5.6+
-    # (after all classes have been updated to no longer need it and it has been removed from the _endpoints module)
-    target_url = f"{calling_object.base_url}{[ep[2] for ep in endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+    target_endpoint = [ep for ep in endpoints if operation_id in ep[0]][0]
+    # target_url = f"{calling_object.base_url}{[ep[2] for ep in endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+    # ID replacement happening at the end of this statement planned for removal in v0.6.0+
+    # (after the uber class has been updated to no longer need it and the _endpoints module has been updated)
+    target_url = f"{calling_object.base_url}{target_endpoint[2]}".replace("?ids={}", "")
+    target_method = target_endpoint[1]
+    passed_partition = kwargs.get("partition", None)
+    if passed_partition:
+        target_url = target_url.format(str(passed_partition))
     # Retrieve our keyword arguments
     passed_keywords = kwargs.get("keywords", None)
     passed_params = kwargs.get("params", None)
@@ -369,14 +392,16 @@ def process_service_request(calling_object: object,
     passed_headers = kwargs.get("headers", None) if kwargs.get("headers", None) else calling_object.headers
     new_keywords = {
         "caller": calling_object,
-        "method": kwargs.get("method", "GET"),  # Default to GET.
+        "method": target_method,
         "endpoint": target_url,
         "verify": calling_object.ssl_verify,
         "headers": passed_headers,
         "params": parameter_payload,
         "body": kwargs.get("body", None),
         "data": kwargs.get("data", None),
-        "files": kwargs.get("files", None)
+        "files": kwargs.get("files", None),
+        "body_validator": kwargs.get("body_validator", None),   # May be deprecated after BODY payload abstraction
+        "body_required": kwargs.get("body_required", None)      # May be deprecated after BODY payload abstraction
     }
 
     return service_request(**new_keywords)

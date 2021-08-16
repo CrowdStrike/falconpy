@@ -37,27 +37,37 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import time
-from ._util import perform_request, generate_b64cred
+from ._util import perform_request, generate_b64cred, generate_error_result
 from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
 
 
 class OAuth2:
-    """ To create an instance of this class, you must pass a properly formatted JSON object containing your falcon
-        client_id and falcon client_secret for the key you wish to use to connect to the API.
+    """ To create an instance of this class, you must pass your client_id and client_secret
+        OR
+        a properly formatted dictionary containing your client_id and client_secret
+        for the key you wish to use to connect to the API.
 
-        Example:
+        Credential dictionary example:
         {
             "client_id": FALCON_CLIENT_ID,
             "client_secret": FALCON_CLIENT_SECRET
         }
     """
     # pylint: disable=too-many-instance-attributes,too-many-arguments
-    def __init__(self: object, creds: dict, base_url: str = "https://api.crowdstrike.com",
-                 ssl_verify: bool = True, proxy: dict = None, timeout: float or tuple = None):
+    def __init__(self: object, base_url: str = "https://api.crowdstrike.com",
+                 ssl_verify: bool = True, proxy: dict = None, timeout: float or tuple = None,
+                 creds: dict = None, client_id: str = None, client_secret: str = None):
         """
         Initializes the base class by ingesting credentials, the proxies dictionary and specifications
         for the base URL, SSL verification, and timeouts.
         """
+        if client_id and client_secret and not creds:
+            creds = {
+                "client_id": client_id,
+                "client_secret": client_secret
+            }
+        elif not creds:
+            creds = {}
         self.creds = creds
         self.base_url = base_url
         self.ssl_verify = ssl_verify
@@ -79,18 +89,21 @@ class OAuth2:
         operation_id = "oauth2AccessToken"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = {}
-        data_payload = {
-            'client_id': self.creds['client_id'],
-            'client_secret': self.creds['client_secret']
-        }
-        if "member_cid" in self.creds:
-            data_payload["member_cid"] = self.creds["member_cid"]
-        returned = perform_request(method="POST", endpoint=target_url, data=data_payload, headers=header_payload,
-                                   verify=self.ssl_verify, proxy=self.proxy, timeout=self.timeout)
-        if returned["status_code"] == 201:
-            self.token_expiration = returned["body"]["expires_in"]
-            self.token_time = time.time()
-            self.token_value = returned["body"]["access_token"]
+        if "client_id" in self.creds and "client_secret" in self.creds:
+            data_payload = {
+                'client_id': self.creds['client_id'],
+                'client_secret': self.creds['client_secret']
+            }
+            if "member_cid" in self.creds:
+                data_payload["member_cid"] = self.creds["member_cid"]
+            returned = perform_request(method="POST", endpoint=target_url, data=data_payload, headers=header_payload,
+                                       verify=self.ssl_verify, proxy=self.proxy, timeout=self.timeout)
+            if returned["status_code"] == 201:
+                self.token_expiration = returned["body"]["expires_in"]
+                self.token_time = time.time()
+                self.token_value = returned["body"]["access_token"]
+        else:
+            returned = generate_error_result("Invalid credentials specified", 403)
 
         return returned
 
@@ -100,13 +113,16 @@ class OAuth2:
         """
         operation_id = "oauth2RevokeToken"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = {'Authorization': 'basic {}'.format(
-            generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
-            )}
-        data_payload = {'token': '{}'.format(token)}
-        returned = perform_request(method="POST", endpoint=target_url, data=data_payload, headers=header_payload,
-                                   verify=self.ssl_verify, proxy=self.proxy, timeout=self.timeout)
-        self.token_expiration = 0
-        self.token_value = False
+        if "client_id" in self.creds and "client_secret" in self.creds:
+            header_payload = {'Authorization': 'basic {}'.format(
+                generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
+                )}
+            data_payload = {'token': '{}'.format(token)}
+            returned = perform_request(method="POST", endpoint=target_url, data=data_payload, headers=header_payload,
+                                       verify=self.ssl_verify, proxy=self.proxy, timeout=self.timeout)
+            self.token_expiration = 0
+            self.token_value = False
+        else:
+            returned = generate_error_result("Invalid credentials specified", 403)
 
         return returned

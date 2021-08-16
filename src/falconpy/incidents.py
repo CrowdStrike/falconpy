@@ -36,8 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
+from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._incidents import _incidents_endpoints as Endpoints
 
@@ -45,116 +44,95 @@ from ._endpoint._incidents import _incidents_endpoints as Endpoints
 class Incidents(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, a
+    existing instance of the authentication class as an object or a
+    valid set of credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def CrowdScore(self: object, parameters: dict = None, **kwargs) -> dict:
+    def crowdscore(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Query environment wide CrowdScore and return the entity data.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/CrowdScore
-        operation_id = "CrowdScore"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CrowdScore",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def GetBehaviors(self: object, body: dict) -> dict:
+    def get_behaviors(self: object, body: dict) -> dict:
         """
         Get details on behaviors by providing behavior IDs.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/GetBehaviors
-        operation_id = "GetBehaviors"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetBehaviors",
+            body=body
+            )
 
-    def PerformIncidentAction(self: object, body: dict) -> dict:
+    def perform_incident_action(self: object, body: dict) -> dict:
         """
         Perform a set of actions on one or more incidents, such as
         adding tags or comments or updating the incident name or description.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/PerformIncidentAction
-        operation_id = "PerformIncidentAction"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="PerformIncidentAction",
+            body=body
+            )
 
-    def GetIncidents(self: object, body: dict) -> dict:
+    def get_incidents(self: object, body: dict) -> dict:
         """
         Get details on incidents by providing incident IDs.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/GetIncidents
-        operation_id = "GetIncidents"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIncidents",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryBehaviors(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_behaviors(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for behaviors by providing an FQL filter, sorting, and paging details.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/QueryBehaviors
-        operation_id = "QueryBehaviors"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryBehaviors",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryIncidents(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_incidents(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for incidents by providing an FQL filter, sorting, and paging details.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/QueryIncidents
-        operation_id = "QueryIncidents"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryIncidents",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    CrowdScore = crowdscore
+    GetBehaviors = get_behaviors
+    PerformIncidentAction = perform_incident_action
+    GetIncidents = get_incidents
+    QueryBehaviors = query_behaviors
+    QueryIncidents = query_incidents

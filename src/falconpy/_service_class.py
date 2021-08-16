@@ -54,7 +54,15 @@ class ServiceClass:
         """
         access_token, self.ssl_verify, self.timeout = self.parse_keywords(kwargs)
         self.refreshable = False
-
+        client_id = kwargs.get("client_id", None)
+        client_secret = kwargs.get("client_secret", None)
+        if client_id and client_secret and not creds:
+            # Passing client_id and client_secret will not
+            # overwrite the contents of the creds dictionary
+            creds = {
+                "client_id": client_id,
+                "client_secret": client_secret
+            }
         if auth_object:
             self.auth_object = auth_object
             if not self.authenticated():

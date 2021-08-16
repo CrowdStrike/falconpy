@@ -14,8 +14,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import incidents as FalconIncidents
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconIncidents.Incidents(access_token=auth.token)
+token = auth.getConfigExtended()
+falcon = FalconIncidents.Incidents(access_token=token)
 AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
 
 class TestIncidents:
@@ -83,9 +83,6 @@ class TestIncidents:
     @pytest.mark.skipif(falcon.QueryBehaviors(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetBehaviors(self):
         assert self.serviceIncidents_GetBehaviors() == True
-
-    def test_Logout(self):
-        assert auth.serviceRevoke() == True
 
     def test_Errors(self):
         assert self.serviceIncidents_GenerateErrors() == True

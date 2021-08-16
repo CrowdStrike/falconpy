@@ -13,9 +13,9 @@ sys.path.append(os.path.abspath('src'))
 
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconSensorUpdate.Sensor_Update_Policy(access_token=auth.token)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+token = auth.getConfigExtended()
+falcon = FalconSensorUpdate.Sensor_Update_Policy(access_token=token)
+AllowedResponses = [200, 429, 500]  # Adding 500 as an allowed response for now
 
 
 class TestFalconSensorUpdate:
@@ -117,9 +117,6 @@ class TestFalconSensorUpdate:
                         reason="API rate limit reached")
     def test_getSensorUpdatePoliciesV2(self):
         assert self.serviceSensorUpdate_getSensorUpdatePoliciesV2() is True
-
-    def test_Logout(self):
-        assert auth.serviceRevoke() is True
 
     def test_Errors(self):
         assert self.serviceSensorUpdate_GenerateErrors() is True

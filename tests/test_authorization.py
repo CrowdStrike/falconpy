@@ -28,12 +28,51 @@ from falconpy import hosts as FalconHosts
 # The TestAuthorization class tests authentication and deauthentication
 # for both the Uber and Service classes.
 class TestAuthorization():
+    def getConfigExtended(self):
+        if "FALCONPY_DEBUG_TOKEN" in os.environ:
+            self.token = os.getenv("FALCONPY_DEBUG_TOKEN")
+            self.config = {}
+            self.config["falcon_client_id"] = os.environ["FALCONPY_DEBUG_CLIENT_ID"]
+            self.config["falcon_client_secret"] = os.environ["FALCONPY_DEBUG_CLIENT_SECRET"]
+            if "DEBUG_API_BASE_URL" in os.environ:
+                self.config["falcon_base_url"] = os.getenv("DEBUG_API_BASE_URL")
+            else:
+                self.config["falcon_base_url"] = "https://api.crowdstrike.com"
+        else:
+            status = self.getConfig()
+            if status:
+                os.environ["FALCONPY_DEBUG_CLIENT_ID"] = self.config["falcon_client_id"]
+                os.environ["FALCONPY_DEBUG_CLIENT_SECRET"] = self.config["falcon_client_secret"]
+                self.authorization = FalconAuth.OAuth2(creds={
+                    "client_id": self.config["falcon_client_id"],
+                    "client_secret": self.config["falcon_client_secret"]
+                },
+                base_url = self.config["falcon_base_url"])
+            try:
+                self.token = self.authorization.token()['body']['access_token']
+                os.environ["FALCONPY_DEBUG_TOKEN"] = self.token
+            except KeyError:
+                self.token = False
+        
+        return self.token
+
+    def clear_env_token(self):
+        if "FALCONPY_DEBUG_TOKEN" in os.environ:
+            os.environ["FALCONPY_DEBUG_TOKEN"] = ""
+            os.environ["FALCONPY_DEBUG_CLIENT_ID"] = ""
+            os.environ["FALCONPY_DEBUG_CLIENT_SECRET"] = ""
+        return True
+
     def getConfig(self):
         # Grab our config parameters
         if "DEBUG_API_ID" in os.environ and "DEBUG_API_SECRET" in os.environ:
             self.config = {}
             self.config["falcon_client_id"] = os.getenv("DEBUG_API_ID")
             self.config["falcon_client_secret"] = os.getenv("DEBUG_API_SECRET")
+            if "DEBUG_API_BASE_URL" in os.environ:
+                self.config["falcon_base_url"] = os.getenv("DEBUG_API_BASE_URL")
+            else:
+                self.config["falcon_base_url"] = "https://api.crowdstrike.com"
             return True
         else:
             cur_path = os.path.dirname(os.path.abspath(__file__))
@@ -143,6 +182,12 @@ class TestAuthorization():
             else:
                 return False
         except KeyError:
+            return False
+
+    def credential_logout(self, api: object = None):
+        if api:
+            return bool(api.auth_object.revoke(api.auth_object.token()["body"]["access_token"])["status_code"] in [200, 201])
+        else:
             return False
 
     def test_uberAuth(self):

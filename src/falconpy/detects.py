@@ -36,8 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, args_to_params, force_default
+from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._detects import _detects_endpoints as Endpoints
 
@@ -47,33 +46,23 @@ class Detects(ServiceClass):
     The only requirement to instantiate an instance of this class
     is a valid token provided by the Falcon API SDK OAuth2 class.
     """
-    def GetAggregateDetects(self: object, body: dict) -> dict:
+    def get_aggregate_detects(self: object, body: dict) -> dict:
         """
         Get detect aggregates as specified via json in request body.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetAggregateDetects
-        operation_id = "GetAggregateDetects"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetAggregateDetects",
+            body=body
+            )
 
-    def UpdateDetectsByIdsV2(self: object, body: dict) -> dict:
+    def update_detects_by_ids(self: object, body: dict) -> dict:
         """
         Modify the state, assignee, and visibility of detections.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/UpdateDetectsByIdsV2
-        operation_id = "UpdateDetectsByIdsV2"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
         body_validator = {
             "assigned_to_uuid": str,
             "ids": list,
@@ -81,56 +70,47 @@ class Detects(ServiceClass):
             "status": str,
             "comment": str
         }
-        body_required = ["ids"]
-        returned = service_request(caller=self,
-                                   method="PATCH",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   body_validator=body_validator,
-                                   body_required=body_required,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateDetectsByIdsV2",
+            body=body,
+            body_validator=body_validator,
+            body_required=["ids"]
+            )
 
-    def GetDetectSummaries(self: object, body: dict) -> dict:
+    def get_detect_summaries(self: object, body: dict) -> dict:
         """
         View information about detections.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetDetectSummaries
-        operation_id = "GetDetectSummaries"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        body_validator = {"ids": list}
-        body_required = ["ids"]
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   body_validator=body_validator,
-                                   body_required=body_required,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetDetectSummaries",
+            body=body,
+            body_validator={"ids": list},
+            body_required=["ids"]
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def QueryDetects(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_detects(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Search for detection IDs that match a given query.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/QueryDetects
-        operation_id = "QueryDetects"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryDetects",
+            keywords=kwargs,
+            params=parameters
+            )
 
-        return returned
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    GetAggregateDetects = get_aggregate_detects
+    UpdateDetectsByIdsV2 = update_detects_by_ids
+    GetDetectSummaries = get_detect_summaries
+    QueryDetects = query_detects

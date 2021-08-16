@@ -36,102 +36,99 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
+from ._util import force_default, process_service_request, handle_single_argument
 from ._service_class import ServiceClass
 from ._endpoint._sensor_visibility_exclusions import _sensor_visibility_exclusions_endpoints as Endpoints
 
 
-class Sensor_Visibility_Exclusions(ServiceClass):
-    """The only requirement to instantiate an instance of this class
-       is a valid token provided by the Falcon API SDK OAuth2 class, a
-       existing instance of the authentication class as an object or a
-       valid set of credentials.
+class SensorVisibilityExclusions(ServiceClass):
+    """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class, a
+    existing instance of the authentication class as an object or a
+    valid set of credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getSensorVisibilityExclusionsV1(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Get a set of Sensor Visibility Exclusions by specifying their IDs"""
+    def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """
+        Get a set of Sensor Visibility Exclusions by specifying their IDs
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #         /sensor-visibility-exclusions/getSensorVisibilityExclusionsV1
-        operation_id = "getSensorVisibilityExclusionsV1"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getSensorVisibilityExclusionsV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
-    def createSVExclusionsV1(self: object, body: dict) -> dict:
-        """Create the Sensor Visibility exclusions"""
+    def create_exclusions(self: object, body: dict) -> dict:
+        """
+        Create the Sensor Visibility exclusions
+        """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #          /sensor-visibility-exclusions/createSVExclusionsV1
-        operation_id = "createSVExclusionsV1"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="POST",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="createSVExclusionsV1",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def deleteSensorVisibilityExclusionsV1(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Delete the Sensor Visibility exclusions by ID."""
+    def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Delete the Sensor Visibility exclusions by ID.
+        """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #            /sensor-visibility-exclusions/deleteSensorVisibilityExclusionsV1
-        operation_id = "deleteSensorVisibilityExclusionsV1"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="DELETE",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="deleteSensorVisibilityExclusionsV1",
+            keywords=kwargs,
+            params=parameters
+            )
 
-    def updateSensorVisibilityExclusionsV1(self: object, body: dict) -> dict:
-        """Update the Sensor Visibility Exclusions"""
+    def update_exclusions(self: object, body: dict) -> dict:
+        """
+        Update the Sensor Visibility Exclusions
+        """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #           /sensor-visibility-exclusions/updateSensorVisibilityExclusionsV1
-        operation_id = "updateSensorVisibilityExclusionsV1"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        body_payload = body
-        returned = service_request(caller=self,
-                                   method="PATCH",
-                                   endpoint=target_url,
-                                   body=body_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateSensorVisibilityExclusionsV1",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def querySensorVisibilityExclusionsV1(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Sensor Visibility Exclusions."""
+    def query_exclusions(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Search for Sensor Visibility Exclusions.
+        """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
         #           /sensor-visibility-exclusions/querySensorVisibilityExclusionsV1
-        operation_id = "querySensorVisibilityExclusionsV1"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   headers=header_payload,
-                                   params=parameter_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="querySensorVisibilityExclusionsV1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    getSensorVisibilityExclusionsV1 = get_exclusions
+    createSVExclusionsV1 = create_exclusions
+    deleteSensorVisibilityExclusionsV1 = delete_exclusions
+    updateSensorVisibilityExclusionsV1 = update_exclusions
+    querySensorVisibilityExclusionsV1 = query_exclusions
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Sensor_Visibility_Exclusions = SensorVisibilityExclusions  # pylint: disable=C0103

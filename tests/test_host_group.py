@@ -13,8 +13,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import host_group as FalconHostGroup
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
-falcon = FalconHostGroup.Host_Group(access_token=auth.token)
+token = auth.getConfigExtended()
+falcon = FalconHostGroup.Host_Group(access_token=token)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -100,9 +100,6 @@ class TestHostGroup:
         )
     def test_queryCombinedGroupMembers(self):
         assert self.serviceHostGroup_queryCombinedGroupMembers() is True
-
-    def test_Logout(self):
-        assert auth.serviceRevoke() is True
 
     def test_Errors(self):
         assert self.serviceHostGroup_GenerateErrors() is True

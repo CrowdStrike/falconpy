@@ -36,32 +36,50 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
+from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._zero_trust_assessment import _zero_trust_assessment_endpoints as Endpoints
 
 
-class Zero_Trust_Assessment(ServiceClass):
+class ZeroTrustAssessment(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getAssessmentV1(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_assessment(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID) and a customer ID (CID).
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getAssessmentV1
-        operation_id = "getAssessmentV1"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getAssessmentV1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    def get_compliance(self: object) -> dict:
+        """
+        Get the Zero Trust Assessment compliance report for one customer ID (CID).
+        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getComplianceV1
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getComplianceV1"
+            )
+
+    # This method name aligns to the operation ID in the API but
+    # does not conform to snake_case / PEP8 and is defined here for
+    # backwards compatibility / ease of use purposes
+    getAssessmentV1 = get_assessment
+    getComplianceV1 = get_compliance
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Zero_Trust_Assessment = ZeroTrustAssessment  # pylint: disable=C0103

@@ -36,71 +36,69 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
-from ._util import service_request, force_default, args_to_params
+from ._util import force_default, process_service_request, handle_single_argument
 from ._service_class import ServiceClass
 from ._endpoint._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints as Endpoints
 
 
-class Spotlight_Vulnerabilities(ServiceClass):
+class SpotlightVulnerabilities(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    is a valid token provided by the Falcon API SDK OAuth2 class, a
+    existing instance of the authentication class as an object or a
+    valid set of credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getVulnerabilities(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_vulnerabilities(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """
         Get details on vulnerabilities by providing one or more IDs.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/getVulnerabilities
-        operation_id = "getVulnerabilities"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getVulnerabilities",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def queryVulnerabilities(self: object, parameters: dict = None,  **kwargs) -> dict:
+    def query_vulnerabilities(self: object, parameters: dict = None,  **kwargs) -> dict:
         """
         Search for Vulnerabilities in your environment by providing an FQL filter
         and paging details. Returns a set of Vulnerability IDs which match the filter criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/queryVulnerabilities
-        operation_id = "queryVulnerabilities"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryVulnerabilities",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def getRemediations(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_remediations(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get details on remediations by providing one or more IDs.
         """
         # [GET] Not in swagger
-        operation_id = "getRemediations"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
-        header_payload = self.headers
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        returned = service_request(caller=self,
-                                   method="GET",
-                                   endpoint=target_url,
-                                   params=parameter_payload,
-                                   headers=header_payload,
-                                   verify=self.ssl_verify
-                                   )
-        return returned
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getRemediations",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    getVulnerabilities = get_vulnerabilities
+    queryVulnerabilities = query_vulnerabilities
+    getRemediations = get_remediations
+
+
+# The legacy name for this class does not conform to PascalCase / PEP8
+# It is defined here for backwards compatibility purposes only.
+Spotlight_Vulnerabilities = SpotlightVulnerabilities  # pylint: disable=C0103

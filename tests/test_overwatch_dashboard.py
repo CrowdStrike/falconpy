@@ -1,8 +1,8 @@
-# test_overwatch_dashboard.py
-# This class tests the overwatch_dashboard service class
+"""
+test_overwatch_dashboard.py - This class tests the overwatch_dashboard service class
+"""
 import os
 import sys
-
 # Authentication via test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -11,56 +11,62 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.overwatch_dashboard import Overwatch_Dashboard as FalconOWD
 
 auth = Authorization.TestAuthorization()
-auth.getConfig()
-falcon = FalconOWD(creds={"client_id": auth.config["falcon_client_id"],
-                          "client_secret": auth.config["falcon_client_secret"]
-                          })
+token = auth.getConfigExtended()
+falcon = FalconOWD(access_token=token)
 AllowedResponses = [200, 403, 429]
 
 
 class TestOverwatchDashboard:
-    def serviceOWD_AggregatesDetectionsGlobalCounts(self):
-        returned = False
-        if falcon.AggregatesDetectionsGlobalCounts()["status_code"] in AllowedResponses:
-            returned = True
-
-        return returned
-
-    def serviceOWD_AggregatesIncidentsGlobalCounts(self):
-        returned = False
-        if falcon.AggregatesIncidentsGlobalCounts()["status_code"] in AllowedResponses:
-            returned = True
-
-        return returned
-
-    def serviceOWD_AggregatesOWEventsGlobalCounts(self):
-        returned = False
-        if falcon.AggregatesOWEventsGlobalCounts(bananas="yellow")["status_code"] in AllowedResponses:
-            returned = True
-
-        return returned
-
-    def serviceOWD_GenerateErrors(self):
+    """
+    Overwatch Dashboard Service Class test harness
+    """
+    def overwatch_generate_errors(self):
+        """
+        Test code paths within methods by generating 500s, does not hit the API
+        """
         falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["AggregatesEvents", "body={}"],
-            ["AggregatesEventsCollections", "body=[{}]"]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+        error_checks = True
+        tests = {
+            "aggregates_events": falcon.AggregatesEvents(body={})["status_code"],
+            "aggregates_events_collections": falcon.AggregatesEventsCollections(body=[{}])["status_code"]
+        }
+        for key in tests:
+            if tests[key] != 500:
+                error_checks = False
 
-        return errorChecks
+            # print(f"{key} processed with a {tests[key]} response")
 
-    def test_AggregatesDetectionsGlobalCounts(self):
-        assert self.serviceOWD_AggregatesDetectionsGlobalCounts() is True
+        return error_checks
 
-    def test_AggregatesIncidentsGlobalCounts(self):
-        assert self.serviceOWD_AggregatesIncidentsGlobalCounts() is True
+    def test_aggregates_detections_global_counts(self):
+        """
+        Pytest harness hook
+        """
+        assert bool(falcon.AggregatesDetectionsGlobalCounts()["status_code"] in AllowedResponses) is True
 
-    def test_AggregatesOWEventsGlobalCounts(self):
-        assert self.serviceOWD_AggregatesOWEventsGlobalCounts() is True
+    def test_aggregates_incidents_global_counts(self):
+        """
+        Pytest harness hook
+        """
+        assert bool(falcon.AggregatesIncidentsGlobalCounts()["status_code"] in AllowedResponses) is True
 
-    def test_Errors(self):
-        assert self.serviceOWD_GenerateErrors() is True
+    def test_aggregates_events_global_counts(self):
+        """
+        Pytest harness hook
+        """
+        assert bool(falcon.AggregatesOWEventsGlobalCounts(bananas="yellow")["status_code"] in AllowedResponses) is True
+
+    def test_errors(self):
+        """
+        Pytest harness hook
+        """
+        assert self.overwatch_generate_errors() is True
+
+    # @staticmethod
+    # def test_logout():
+    #     """
+    #     Pytest harness hook
+    #     """
+    #     assert bool(falcon.auth_object.revoke(
+    #         falcon.auth_object.token()["body"]["access_token"]
+    #         )["status_code"] in AllowedResponses) is True
