@@ -374,8 +374,7 @@ def process_service_request(calling_object: object,
         body_validator: Dictionary containing details regarding body payload validation
         body_required: List of required body payload parameters
     """
-    target_endpoint = [ep for ep in endpoints if operation_id in ep[0]][0]
-    # target_url = f"{calling_object.base_url}{[ep[2] for ep in endpoints if operation_id in ep[0]][0]}".replace("?ids={}", "")
+    target_endpoint = [ep for ep in endpoints if operation_id == ep[0]][0]
     # ID replacement happening at the end of this statement planned for removal in v0.6.0+
     # (after the uber class has been updated to no longer need it and the _endpoints module has been updated)
     target_url = f"{calling_object.base_url}{target_endpoint[2]}".replace("?ids={}", "")
