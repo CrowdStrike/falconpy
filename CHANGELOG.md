@@ -1,3 +1,9 @@
+# Version 0.6.1
+## Issues resolved
++ Bug fix: Fixed bad comparison for endpoint lookups when using Service Classes. Closes #305. `_util.py`
++ Bug fix: Fixed typo in operation ID for query_platforms method within CustomIOA Service Class. Closes #307. `custom_ioa.py`
++ Bug fix: Fixed typo in operation ID for create_user_groups method within FlightControl Service Class. Closes #308. `mssp.py`
+
 # Version 0.6.0
 ## Added features and functionality
 + Refactored Cloud Connect AWS Service Class to the latest pattern (rev 3), aligns syntax to PEP8. Closes #271. `cloud_connect_aws.py`

@@ -45,6 +45,7 @@ CrowdScore
 CrowdStrike
 CrowdStrike's
 CSV
+CustomIOA
 DeleteActionV
 DeleteAWSAccounts
 DeleteAWSAccountsMixin
@@ -77,6 +78,7 @@ FalconPy
 FalconShell
 FalconX
 Falconx
+FlightControl
 GCP
 GetActionsV
 GetAWSAccounts
@@ -370,6 +372,7 @@ json
 kubernetes
 linux
 listAvailableStreamsOAuth
+lookups
 malquery
 mccbryan
 md
