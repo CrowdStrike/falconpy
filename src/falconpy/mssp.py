@@ -254,7 +254,7 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="createUserGroup",
+            operation_id="createUserGroups",
             body=body
             )
 
