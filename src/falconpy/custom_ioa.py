@@ -275,7 +275,7 @@ class CustomIOA(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="query_platforms",
+            operation_id="query_platformsMixin0",
             keywords=kwargs,
             params=parameters
             )
