@@ -323,6 +323,9 @@ def calc_url_from_args(target_url: str, passed_args: dict) -> str:
         delim = "&" if "?" in target_url else "?"
         target_url = f"{target_url}{delim}file_name={str(passed_args['file_name'])}"
 
+    # Bug fix: Issue #313 - Passing an empty ids array is causing a 400 in the IOC API
+    target_url = target_url.replace("?ids={}", "")
+
     return target_url
 
 
