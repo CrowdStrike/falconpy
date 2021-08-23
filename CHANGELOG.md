@@ -1,3 +1,7 @@
+# Version 0.6.2
+## Issues resolved
++ Bug fix: Fixed Uber class passing empty **ids** parameter array when no _ids_ had been provided to the command method. Closes #314. `_util.py`
+
 # Version 0.6.1
 ## Issues resolved
 + Bug fix: Fixed bad comparison for endpoint lookups when using Service Classes. Closes #305. `_util.py`
