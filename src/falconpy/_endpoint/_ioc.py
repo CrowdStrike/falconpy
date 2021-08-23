@@ -189,7 +189,7 @@ _ioc_endpoints = [
   [
     "indicator_delete_v1",
     "DELETE",
-    "/iocs/entities/indicators/v1?ids={}",
+    "/iocs/entities/indicators/v1",
     "Delete Indicators by ids.",
     "ioc",
     [
