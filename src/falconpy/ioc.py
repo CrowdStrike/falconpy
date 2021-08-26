@@ -36,9 +36,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
 from ._service_class import ServiceClass
 from ._endpoint._ioc import _ioc_endpoints as Endpoints
+from ._endpoint._iocs import _iocs_endpoints as LegacyEndpoints
 
 
 class IOC(ServiceClass):
@@ -134,6 +135,64 @@ class IOC(ServiceClass):
             params=parameters
             )
 
+    # These methods are ported from the legacy IOCS Service Class, as they have not been deprecated
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def devices_count(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Number of hosts in your customer account that have observed a given custom IOC.
+        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DevicesCount
+        return process_service_request(
+            calling_object=self,
+            endpoints=LegacyEndpoints,
+            operation_id="DevicesCount",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def devices_ran_on(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Find hosts that have observed a given custom IOC.
+        For details about those hosts, use the hosts API interface.
+        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DevicesRanOn
+        return process_service_request(
+            calling_object=self,
+            endpoints=LegacyEndpoints,
+            operation_id="DevicesRanOn",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def processes_ran_on(self: object, parameters: dict = None, **kwargs) -> dict:
+        """
+        Search for processes associated with a custom IOC
+        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/ProcessesRanOn
+        return process_service_request(
+            calling_object=self,
+            endpoints=LegacyEndpoints,
+            operation_id="ProcessesRanOn",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def entities_processes(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """
+        For the provided ProcessID retrieve the process details.
+        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/entities.processes
+        return process_service_request(
+            calling_object=self,
+            endpoints=LegacyEndpoints,
+            operation_id="entities_processes",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
     # These names are acceptable and match the API operation IDs.
     # They are defined here for ease of use purposes.
     indicator_combined_v1 = indicator_combined
@@ -142,3 +201,9 @@ class IOC(ServiceClass):
     indicator_delete_v1 = indicator_delete
     indicator_update_v1 = indicator_update
     indicator_search_v1 = indicator_search
+    # Legacy operation IDs, these are not acceptable PEP8 syntax
+    # and are defined here for backwards compatibility / ease of
+    # use purposes. - Ported from IOCS.py
+    DevicesCount = devices_count
+    DevicesRanOn = devices_ran_on
+    ProcessesRanOn = processes_ran_on
