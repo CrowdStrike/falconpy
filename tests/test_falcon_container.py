@@ -16,7 +16,7 @@ falcon = FalconContainer(access_token=token)
 AllowedResponses = [200, 201, 404, 429]
 
 
-class TestZeroTrustAssessment:
+class TestFalconContainer:
 
     def test_get_credentials(self):
         """Pytest harness hook"""
