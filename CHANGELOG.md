@@ -1,12 +1,12 @@
 # Version 0.6.3
 ## Added features and functionality
 + Added: New FalconContainer Service Class. `falcon_container.py`
-+ Added: Two new operations (methods) to the Hosts Service Class. `hosts.py`
++ Added: Two new methods (operations)) to the Hosts Service Class. `hosts.py`
     - query_device_login_history / QueryDeviceLoginHistory
     - query_network_address_history / QueryGetNetworkAddressHistoryV1
-+ Added: New operation (method) to the SpotlightVulnerabilities Service Class. `spotlight_vulnerabilities.py`
-    - getRemediationsV2
-+ Migrated: Still viable methods from legacy IOCS Service Class `iocs.py` to the new IOC Service Class. `ioc.py`
++ Added: New method (operation)) to the SpotlightVulnerabilities Service Class. `spotlight_vulnerabilities.py`
+    - get_remediations_v2 - getRemediationsV2
++ Migrated: Ported still viable methods from legacy IOCS Service Class `iocs.py` to the new IOC Service Class. `ioc.py`
     - devices_count / DevicesCount
     - devices_ran_on / DevicesRanOn
     - processes_ran_on / ProcessesRanOn
