@@ -1,3 +1,23 @@
+# Version 0.6.3
+## Added features and functionality
++ Added: New FalconContainer Service Class. `falcon_container.py`
++ Added: Two new operations (methods) to the Hosts Service Class. `hosts.py`
+    - query_device_login_history / QueryDeviceLoginHistory
+    - query_network_address_history / QueryGetNetworkAddressHistoryV1
++ Added: New operation (method) to the SpotlightVulnerabilities Service Class. `spotlight_vulnerabilities.py`
+    - getRemediationsV2
++ Migrated: Still viable methods from legacy IOCS Service Class `iocs.py` to the new IOC Service Class. `ioc.py`
+    - devices_count / DevicesCount
+    - devices_ran_on / DevicesRanOn
+    - processes_ran_on / ProcessesRanOn
+    - entities_processes / entities_processes
++ Updated: Deprecated 5 methods within the legacy IOCS Service Class. `iocs.py`
+    - get_ioc / GetIOC
+    - create_ioc / CreateIOC
+    - delete_ioc / DeleteIOC
+    - update_ioc / UpdateIOC
+    - query_iocs / QueryIOCs
+
 # Version 0.6.2
 ## Issues resolved
 + Bug fix: Fixed Uber class passing empty **ids** parameter array when no _ids_ had been provided to the command method. Closes #314. `_util.py`
