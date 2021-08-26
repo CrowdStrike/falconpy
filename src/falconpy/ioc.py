@@ -203,7 +203,7 @@ class IOC(ServiceClass):
     indicator_search_v1 = indicator_search
     # Legacy operation IDs, these are not acceptable PEP8 syntax
     # and are defined here for backwards compatibility / ease of
-    # use purposes. These endpoints were ported from IOCS.py 
+    # use purposes. These endpoints were ported from IOCS.py
     #                - jshcodes@CrowdStrike, see Discussion #319
     DevicesCount = devices_count
     DevicesRanOn = devices_ran_on
