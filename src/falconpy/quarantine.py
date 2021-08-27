@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-spotlight_vulnerabilities - CrowdStrike Falcon Spotlight Vulnerability API interface class
+quarantine - Falcon Quarantine API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,83 +36,99 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import force_default, process_service_request, handle_single_argument
+from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
-from ._endpoint._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints as Endpoints
+from ._endpoint._quarantine import _quarantine_endpoints as Endpoints
 
 
-class SpotlightVulnerabilities(ServiceClass):
+class Quarantine(ServiceClass):
     """
     The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, a
-    existing instance of the authentication class as an object or a
-    valid set of credentials.
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_vulnerabilities(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def action_update_count(self: object, parameters: dict = None, **kwargs) -> dict:
         """
-        Get details on vulnerabilities by providing one or more IDs.
+        Returns count of potentially affected quarantined files for each action.
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/getVulnerabilities
+        # [GET]
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="getVulnerabilities",
-            keywords=kwargs,
-            params=handle_single_argument(args, parameters, "ids")
-            )
-
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_vulnerabilities(self: object, parameters: dict = None,  **kwargs) -> dict:
-        """
-        Search for Vulnerabilities in your environment by providing an FQL filter
-        and paging details. Returns a set of Vulnerability IDs which match the filter criteria.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/queryVulnerabilities
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="queryVulnerabilities",
+            operation_id="ActionUpdateCount",
             keywords=kwargs,
             params=parameters
             )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_remediations(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_aggregate_files(self: object, body: dict) -> dict:
         """
-        Get details on remediations by providing one or more IDs.
+        Get quarantine file aggregates as specified via json in request body.
         """
-        # [GET] Not in swagger
+        # [POST]
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="getRemediations",
-            keywords=kwargs,
-            params=handle_single_argument(args, parameters, "ids")
+            operation_id="GetAggregateFiles",
+            body=body
+            )
+
+    def get_quarantine_files(self: object, body: dict) -> dict:
+        """
+        Get quarantine file metadata for specified ids.
+        """
+        # [POST]
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetQuarantineFiles",
+            body=body
+            )
+
+    def update_quarantined_detects_by_id(self: object, body: dict) -> dict:
+        """
+        Apply action by quarantine file ids
+        """
+        # [PATCH]
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateQuarantinedDetectsByIds",
+            body=body
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_remediations_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def query_quarantine_files(self: object, parameters: dict = None, **kwargs) -> dict:
         """
-        Get details on remediations by providing one or more IDs.
+        Get quarantine file ids that match the provided filter criteria.
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/getRemediationsV2
+        # [GET]
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="getRemediationsV2",
+            operation_id="QueryQuarantineFiles",
             keywords=kwargs,
-            params=handle_single_argument(args, parameters, "ids")
+            params=parameters
+            )
+
+    def update_quarantined_detects_by_query(self: object, body: dict) -> dict:
+        """
+        Apply quarantine file actions by query.
+        """
+        # [PATCH]
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateQfByQuery",
+            body=body
             )
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
-    getVulnerabilities = get_vulnerabilities
-    queryVulnerabilities = query_vulnerabilities
-    getRemediations = get_remediations
-    getRemediationsV2 = get_remediations_v2
-
-
-# The legacy name for this class does not conform to PascalCase / PEP8
-# It is defined here for backwards compatibility purposes only.
-Spotlight_Vulnerabilities = SpotlightVulnerabilities  # pylint: disable=C0103
+    ActionUpdateCount = action_update_count
+    GetAggregateFiles = get_aggregate_files
+    GetQuarantineFiles = get_quarantine_files
+    UpdateQuarantinedDetectsByIds = update_quarantined_detects_by_id
+    QueryQuarantineFiles = query_quarantine_files
+    UpdateQfByQuery = update_quarantined_detects_by_query

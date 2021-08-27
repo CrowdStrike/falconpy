@@ -36,7 +36,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-import json
 from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._firewall_management import _firewall_management_endpoints as Endpoints
@@ -153,21 +152,19 @@ class FirewallManagement(ServiceClass):
             params=parameters
             )
 
-    def update_policy_container(self: object, body: dict, cs_username: str) -> dict:
+    def update_policy_container(self: object,
+                                body: dict,
+                                cs_username: str = None  # pylint: disable=W0613  # cs_username is deprecated
+                                ) -> dict:
         """
         Update an identified policy container.
         """
         # [PUT] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update_policy_container
-        # Create a copy of our default header dictionary
-        header_payload = json.loads(json.dumps(self.headers))
-        # Set our X-CS-USERNAME header
-        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="update_policy_container",
-            body=body,
-            headers=header_payload
+            body=body
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -186,62 +183,61 @@ class FirewallManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def create_rule_group(self: object, body: dict, cs_username: str, parameters: dict = None, **kwargs) -> dict:
+    def create_rule_group(self: object,
+                          body: dict,
+                          cs_username: str = None,  # pylint: disable=W0613  # cs_username is deprecated
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> dict:
         """
         Create new rule group on a platform for a customer with a name and description, and return the ID.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create_rule_group
-        # Create a copy of our default header dictionary
-        header_payload = json.loads(json.dumps(self.headers))
-        # Set our X-CS-USERNAME header
-        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="create_rule_group",
             body=body,
             params=parameters,
-            keywords=kwargs,
-            headers=header_payload
+            keywords=kwargs
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_rule_groups(self: object, cs_username: str, parameters: dict = None, **kwargs) -> dict:
+    def delete_rule_groups(self: object,
+                           cs_username: str = None,  # pylint: disable=W0613  # cs_username is deprecated
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> dict:
         """
         Delete rule group entities by ID.
         """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QueryReports
-        # Create a copy of our default header dictionary
-        header_payload = json.loads(json.dumps(self.headers))
-        # Set our X-CS-USERNAME header
-        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="delete_rule_groups",
             params=parameters,
-            keywords=kwargs,
-            headers=header_payload
+            keywords=kwargs
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def update_rule_group(self: object, body: dict, cs_username: str, parameters: dict = None, **kwargs) -> dict:
+    def update_rule_group(self: object,
+                          body: dict,
+                          cs_username: str = None,  # pylint: disable=W0613  # cs_username is deprecated
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> dict:
         """
         Update name, description, or enabled status of a rule group, or create, edit, delete, or reorder rules.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update_rule_group
-        # Create a copy of our default header dictionary
-        header_payload = json.loads(json.dumps(self.headers))
-        # Set our X-CS-USERNAME header
-        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="update_rule_group",
             body=body,
             params=parameters,
-            keywords=kwargs,
-            headers=header_payload
+            keywords=kwargs
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])

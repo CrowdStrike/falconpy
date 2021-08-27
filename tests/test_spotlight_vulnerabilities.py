@@ -53,7 +53,8 @@ class TestSpotlight:
             errorChecks = False
         if falcon.getRemediations(ids="12345678")["status_code"] != 500:
             errorChecks = False
-
+        if falcon.getRemediationsV2(ids="12345678")["status_code"] != 500:
+            errorChecks = False
         return errorChecks
 
     def test_queryVulnerabilities(self):

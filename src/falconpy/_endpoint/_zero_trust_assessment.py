@@ -61,7 +61,7 @@ _zero_trust_assessment_endpoints = [
   [
     "getComplianceV1",
     "GET",
-    "/zero-trust-assessment/entities/compliance/v1",
+    "/zero-trust-assessment/entities/audit/v1",
     "Get the Zero Trust Assessment compliance report for one customer ID (CID).",
     "zero_trust_assessment",
     []

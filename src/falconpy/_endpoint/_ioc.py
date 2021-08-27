@@ -97,6 +97,21 @@ _ioc_endpoints = [
         "description": "The sort expression that should be used to sort the results.",
         "name": "sort",
         "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. "
+        "On your first request, don't provide an 'after' token. On subsequent requests, provide the 'after' "
+        "token from the previous response to continue from that place in the results. To access more than 10k "
+        "indicators, use the 'after' parameter instead of 'offset'.",
+        "name": "after",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "description": "The filter for returning either only indicators for the request customer or its MSSP parents",
+        "name": "from_parent",
+        "in": "query"
       }
     ]
   ],
@@ -240,14 +255,6 @@ _ioc_endpoints = [
         "in": "query"
       },
       {
-        "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination "
-        "of results. On your first request, don't provide an `after` token. On subsequent requests, "
-        "provide the `after` token from the previous response to continue from that place in the results.",
-        "name": "after",
-        "in": "query"
-      },
-      {
         "type": "integer",
         "description": "The maximum records to return.",
         "name": "limit",
@@ -277,6 +284,15 @@ _ioc_endpoints = [
         "type": "string",
         "description": "The sort expression that should be used to sort the results.",
         "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. "
+        "On your first request, don't provide an 'after' token. On subsequent requests, provide the 'after' "
+        "token from the previous response to continue from that place in the results. To access more than 10k "
+        "indicators, use the 'after' parameter instead of 'offset'.",
+        "name": "after",
         "in": "query"
       }
     ]

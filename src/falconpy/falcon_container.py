@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-_version - Internal version control constants
+falcon_container - Falcon Container API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,13 +36,30 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-_VERSION = '0.6.3'
-_MAINTAINER = 'Joshua Hiller'
-_AUTHOR = 'CrowdStrike'
-_AUTHOR_EMAIL = 'falconpy@crowdstrike.com'
-_CREDITS = 'CrowdStrike'
-_DESCRIPTION = "The CrowdStrike Falcon OAuth2 API SDK for Python 3"
-_TITLE = "crowdstrike-falconpy"
-_PROJECT_URL = "https://github.com/CrowdStrike/falconpy"
-_DOCS_URL = "https://www.falconpy.io"
-_KEYWORDS = ["crowdstrike", "falcon", "api", "sdk", "oauth2", "devsecops", "crowdstrike-falcon"]
+from ._util import process_service_request
+from ._service_class import ServiceClass
+from ._endpoint._falcon_container import _falcon_container_endpoints as Endpoints
+
+
+class FalconContainer(ServiceClass):
+    """
+    The only requirement to instantiate an instance of this class
+    is a valid token provided by the Falcon API SDK OAuth2 class, an
+    authorization object (oauth2.py) or a credential dictionary with
+    client_id and client_secret containing valid API credentials.
+    """
+    def get_credentials(self: object) -> dict:
+        """
+        Gets the registry credentials
+        """
+        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container/GetCredentials
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCredentials"
+            )
+
+    # This method name aligns to the operation ID in the API but
+    # does not conform to snake_case / PEP8 and is defined here for
+    # backwards compatibility / ease of use purposes
+    GetCredentials = get_credentials

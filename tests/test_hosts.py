@@ -165,18 +165,26 @@ class TestHosts:
                 )["status_code"] in AllowedResponses
         ) is True
 
+    def test_get_device_login_history(self):
+        """Pytest harness hook"""
+        assert bool(
+            falcon.query_device_login_history(body={
+                "ids": [falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]]
+                })["status_code"] in AllowedResponses
+        ) is True
+
+    def test_get_device_network_history(self):
+        """Pytest harness hook"""
+        assert bool(
+            falcon.query_network_address_history(body={
+                "ids": [falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]]
+                })["status_code"] in AllowedResponses
+        ) is True
     @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
     @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
     def test_perform_action(self):
         """Pytest harness hook"""
         assert self.hosts_perform_action() is True
-
-    # @staticmethod
-    # def test_logout():
-    #     """Pytest harness hook"""
-    #     assert bool(falcon.auth_object.revoke(
-    #         falcon.auth_object.token()["body"]["access_token"]
-    #         )["status_code"] in AllowedResponses) is True
 
     def test_errors(self):
         """Pytest harness hook"""

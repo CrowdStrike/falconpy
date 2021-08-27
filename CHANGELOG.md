@@ -1,3 +1,26 @@
+# Version 0.6.3
+## Added features and functionality
++ Added: New FalconContainer Service Class. `falcon_container.py`
++ Added: Two new methods (operations)) to the Hosts Service Class. `hosts.py`
+    - query_device_login_history / QueryDeviceLoginHistory
+    - query_network_address_history / QueryGetNetworkAddressHistoryV1
++ Added: New method (operation)) to the SpotlightVulnerabilities Service Class. `spotlight_vulnerabilities.py`
+    - get_remediations_v2 - getRemediationsV2
++ Migrated: Ported still viable methods from legacy IOCS Service Class `iocs.py` to the new IOC Service Class. `ioc.py`
+    - devices_count / DevicesCount
+    - devices_ran_on / DevicesRanOn
+    - processes_ran_on / ProcessesRanOn
+    - entities_processes / entities_processes
++ Updated: Deprecated 5 methods within the legacy IOCS Service Class. `iocs.py`
+    - get_ioc / GetIOC
+    - create_ioc / CreateIOC
+    - delete_ioc / DeleteIOC
+    - update_ioc / UpdateIOC
+    - query_iocs / QueryIOCs
++ Updated: Deprecated cs_username keyword from all methods within CustomIOA and FirewallManagement Service Classes. `custom_ioa.py`, `firewall_management.py`
++ Added: New Quarantine Service Class and endpoints. `quarantine.py`
++ Updated: Updated endpoint for getComplianceV1 operation within ZeroTrustAssessment Service Class. `zero_trust_assessment.py`
+
 # Version 0.6.2
 ## Issues resolved
 + Bug fix: Fixed Uber class passing empty **ids** parameter array when no _ids_ had been provided to the command method. Closes #314. `_util.py`
