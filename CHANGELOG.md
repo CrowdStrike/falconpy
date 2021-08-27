@@ -17,6 +17,9 @@
     - delete_ioc / DeleteIOC
     - update_ioc / UpdateIOC
     - query_iocs / QueryIOCs
++ Updated: Deprecated cs_username keyword from all methods within CustomIOA and FirewallManagement Service Classes. `custom_ioa.py`, `firewall_management.py`
++ Added: New Quarantine Service Class and endpoints. `quarantine.py`
++ Updated: Updated endpoint for getComplianceV1 operation within ZeroTrustAssessment Service Class. `zero_trust_assessment.py`
 
 # Version 0.6.2
 ## Issues resolved
