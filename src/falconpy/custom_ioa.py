@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+import json
 from ._util import parse_id_list, force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._custom_ioa import _custom_ioa_endpoints as Endpoints
@@ -90,51 +91,57 @@ class CustomIOA(ServiceClass):
             params=parameters
             )
 
-    def create_rule_group(self: object,
-                          body: dict,
-                          cs_username: str = None  # pylint: disable=W0613  # cs_username is deprecated
-                          ) -> dict:
+    def create_rule_group(self: object, body: dict, cs_username: str) -> dict:
         """
         Create a rule group for a platform with a name and an optional description. Returns the rule group.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/create-rule-groupMixin0
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # Set our X-CS-USERNAME header
+        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="create_rule_groupMixin0",
-            body=body
+            body=body,
+            headers=header_payload
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_rule_groups(self: object,
-                           cs_username: str = None,  # pylint: disable=W0613  # cs_username is deprecated
-                           parameters: dict = None,
-                           **kwargs) -> dict:
+    def delete_rule_groups(self: object, cs_username: str, parameters: dict = None, **kwargs) -> dict:
         """
         Delete rule groups by ID.
         """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/delete-rule-groupsMixin0
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # Set our X-CS-USERNAME header
+        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="delete_rule_groupsMixin0",
             keywords=kwargs,
-            params=parameters
+            params=parameters,
+            headers=header_payload
             )
 
-    def update_rule_group(self: object,
-                          body: dict,
-                          cs_username: str = None  # pylint: disable=W0613  # cs_username is deprecated
-                          ) -> dict:
+    def update_rule_group(self: object, body: dict, cs_username: str) -> dict:
         """
         Update a rule group. The following properties can be modified: name, description, enabled.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/update-rule-groupMixin0
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # Set our X-CS-USERNAME header
+        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="update_rule_groupMixin0",
-            body=body
+            body=body,
+            headers=header_payload
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -180,52 +187,57 @@ class CustomIOA(ServiceClass):
             params=parameters
             )
 
-    def create_rule(self: object,
-                    body: dict,
-                    cs_username: str = None  # pylint: disable=W0613  # cs_username is deprecated
-                    ) -> dict:
+    def create_rule(self: object, body: dict, cs_username: str) -> dict:
         """
         Create a rule within a rule group. Returns the rule.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/create-rule
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # Set our X-CS-USERNAME header
+        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="create_rule",
-            body=body
+            body=body,
+            headers=header_payload
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_rules(self: object,
-                     cs_username: str = None,  # pylint: disable=W0613  # cs_username is deprecated
-                     parameters: dict = None,
-                     **kwargs
-                     ) -> dict:
+    def delete_rules(self: object, cs_username: str, parameters: dict = None, **kwargs) -> dict:
         """
         Delete rules from a rule group by ID.
         """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/delete-rules
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # Set our X-CS-USERNAME header
+        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="delete_rules",
             keywords=kwargs,
-            params=parameters
+            params=parameters,
+            headers=header_payload
             )
 
-    def update_rules(self: object,
-                     body: dict,
-                     cs_username: str = None  # pylint: disable=W0613  # cs_username is deprecated
-                     ) -> dict:
+    def update_rules(self: object, body: dict, cs_username: str) -> dict:
         """
         Update rules within a rule group. Return the updated rules.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/update-rules
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # Set our X-CS-USERNAME header
+        header_payload["X-CS-USERNAME"] = cs_username
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="update_rules",
-            body=body
+            body=body,
+            headers=header_payload
             )
 
     def validate(self: object, body: dict) -> dict:

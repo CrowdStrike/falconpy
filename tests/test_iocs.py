@@ -15,7 +15,7 @@ from falconpy import iocs as FalconIOCs
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
 falcon = FalconIOCs.Iocs(access_token=token)
-AllowedResponses = [200, 429, 500] # Half of the class is deprecated, allow 500
+AllowedResponses = [200, 429]
 
 class TestIOCs:
     def serviceIOCs_QueryIOCs(self):
