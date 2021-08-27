@@ -39,34 +39,6 @@ For more information, please refer to <https://unlicense.org>
 
 _hosts_endpoints = [
   [
-    "QueryDeviceLoginHistory",
-    "POST",
-    "/devices/combined/devices/login-history/v1",
-    "Retrieve details about recent login sessions for a set of devices.",
-    "hosts",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "QueryGetNetworkAddressHistoryV1",
-    "POST",
-    "/devices/combined/devices/network-address-history/v1",
-    "Retrieve history of IP and MAC addresses of devices.",
-    "hosts",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "PerformActionV2",
     "POST",
     "/devices/entities/devices-actions/v2",

@@ -78,7 +78,7 @@ class SpotlightVulnerabilities(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_remediations(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_remediations(self: object, parameters: dict = None, **kwargs) -> dict:
         """
         Get details on remediations by providing one or more IDs.
         """
@@ -88,29 +88,15 @@ class SpotlightVulnerabilities(ServiceClass):
             endpoints=Endpoints,
             operation_id="getRemediations",
             keywords=kwargs,
-            params=handle_single_argument(args, parameters, "ids")
+            params=parameters
             )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_remediations_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """
-        Get details on remediations by providing one or more IDs.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/getRemediationsV2
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="getRemediationsV2",
-            keywords=kwargs,
-            params=handle_single_argument(args, parameters, "ids")
-            )
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
     getVulnerabilities = get_vulnerabilities
     queryVulnerabilities = query_vulnerabilities
     getRemediations = get_remediations
-    getRemediationsV2 = get_remediations_v2
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8

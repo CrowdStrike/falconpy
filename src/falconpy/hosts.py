@@ -167,30 +167,6 @@ class Hosts(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
-
-    def query_device_login_history(self: object, body: dict) -> dict:
-        """
-        Retrieve details about recent login sessions for a set of devices.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDeviceLoginHistory
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="QueryDeviceLoginHistory",
-            body=body
-            )
-
-    def query_network_address_history(self: object, body: dict) -> dict:
-        """
-        Retrieve history of IP and MAC addresses of devices.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryGetNetworkAddressHistoryV1
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="QueryGetNetworkAddressHistoryV1",
-            body=body
-            )
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
@@ -200,5 +176,3 @@ class Hosts(ServiceClass):
     QueryHiddenDevices = query_hidden_devices
     QueryDevicesByFilterScroll = query_devices_by_filter_scroll
     QueryDevicesByFilter = query_devices_by_filter
-    QueryDeviceLoginHistory = query_device_login_history
-    QueryGetNetworkAddressHistoryV1 = query_network_address_history

@@ -36,12 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# The bulk of the methods within this class have been deprecated. Those
-# that are not, have been ported into the new IOC Service Class. Developers
-# should move all code over to use this new class (ioc.py) as support for
-# this class will eventually be dropped.
-# pylint: disable=W0613,R0201   # Allowing unused params and kwargs to prevent breaking change, no self use is ok
-from ._util import force_default, handle_single_argument, process_service_request, generate_error_result
+from ._util import force_default, handle_single_argument, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._iocs import _iocs_endpoints as Endpoints
 
@@ -73,14 +68,12 @@ class Iocs(ServiceClass):
         Get an IOC by providing a type and value.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/GetIOC
-
-        # * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
-        # This API endpoint is no longer available. Please use the new IOC.indicator_get
-        # method defined in the new IOC service class in order to perform this operation.
-
-        return generate_error_result(
-            "This method has been deprecated. Please use the new IOC Service Class method "
-            "IOC.indicator_get to perform this operation."
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIOC",
+            keywords=kwargs,
+            params=parameters
             )
 
     def create_ioc(self: object, body: dict) -> dict:
@@ -88,14 +81,11 @@ class Iocs(ServiceClass):
         Create a new IOC.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/CreateIOC
-
-        # * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
-        # This API endpoint is no longer available. Please use the new IOC.indicator_create
-        # method defined in the new IOC service class in order to perform this operation.
-
-        return generate_error_result(
-            "This method has been deprecated. Please use the new IOC Service Class method "
-            "IOC.indicator_create to perform this operation."
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateIOC",
+            body=body
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -104,14 +94,12 @@ class Iocs(ServiceClass):
         Delete an IOC by providing a type and value.
         """
         # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DeleteIOC
-
-        # * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
-        # This API endpoint is no longer available. Please use the new IOC.indicator_delete
-        # method defined in the new IOC service class in order to perform this operation.
-
-        return generate_error_result(
-            "This method has been deprecated. Please use the new IOC Service Class method "
-            "IOC.indicator_delete to perform this operation."
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteIOC",
+            keywords=kwargs,
+            params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -120,14 +108,13 @@ class Iocs(ServiceClass):
         Update an IOC by providing a type and value.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/UpdateIOC
-
-        # * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
-        # This API endpoint is no longer available. Please use the new IOC.indicator_update
-        # method defined in the new IOC service class in order to perform this operation.
-
-        return generate_error_result(
-            "This method has been deprecated. Please use the new IOC Service Class method "
-            "IOC.indicator_update to perform this operation."
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateIOC",
+            body=body,
+            keywords=kwargs,
+            params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -151,14 +138,12 @@ class Iocs(ServiceClass):
         Search the custom IOCs in your customer account.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/QueryIOCs
-
-        # * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
-        # This API endpoint is no longer available. Please use the new IOC.indicator_search
-        # method defined in the new IOC service class in order to perform this operation.
-
-        return generate_error_result(
-            "This method has been deprecated. Please use the new IOC Service Class method "
-            "IOC.indicator_search to perform this operation."
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryIOCs",
+            keywords=kwargs,
+            params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
