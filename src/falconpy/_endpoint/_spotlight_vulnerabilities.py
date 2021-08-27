@@ -39,6 +39,26 @@ For more information, please refer to <https://unlicense.org>
 
 _spotlight_vulnerabilities_endpoints = [
   [
+    "getRemediationsV2",
+    "GET",
+    "/spotlight/entities/remediations/v2?ids={}",
+    "Get details on remediation by providing one or more IDs",
+    "spotlight_vulnerabilities",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "One or more remediation IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "getVulnerabilities",
     "GET",
     "/spotlight/entities/vulnerabilities/v2?ids={}",

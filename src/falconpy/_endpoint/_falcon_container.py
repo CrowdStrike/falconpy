@@ -9,7 +9,7 @@
 
 OAuth2 API - Customer SDK
 
-_version - Internal version control constants
+_endpoint._falcon_container - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,13 +36,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-_VERSION = '0.6.3'
-_MAINTAINER = 'Joshua Hiller'
-_AUTHOR = 'CrowdStrike'
-_AUTHOR_EMAIL = 'falconpy@crowdstrike.com'
-_CREDITS = 'CrowdStrike'
-_DESCRIPTION = "The CrowdStrike Falcon OAuth2 API SDK for Python 3"
-_TITLE = "crowdstrike-falconpy"
-_PROJECT_URL = "https://github.com/CrowdStrike/falconpy"
-_DOCS_URL = "https://www.falconpy.io"
-_KEYWORDS = ["crowdstrike", "falcon", "api", "sdk", "oauth2", "devsecops", "crowdstrike-falcon"]
+
+_falcon_container_endpoints = [
+  [
+    "GetCredentials",
+    "GET",
+    "/container-security/entities/image-registry-credentials/v1",
+    "Gets the registry credentials",
+    "falcon_container",
+    []
+  ]
+]

@@ -73,11 +73,13 @@ ExecuteAdminCommand
 ExecuteCommand
 FH
 FQL
+FalconContainer
 FalconDebug
 FalconPy
 FalconShell
 FalconX
 Falconx
+FirewallManagement
 FlightControl
 GCP
 GetActionsV
@@ -137,6 +139,7 @@ GetNotificationsDetailedV
 GetNotificationsTranslatedV
 GetNotificationsV
 GetPut
+getRemediationsV
 GetReports
 GetRoles
 GetRulesV
@@ -200,6 +203,8 @@ QueryBehaviors
 QueryDetects
 QueryDevicesByFilter
 QueryDevicesByFilterScroll
+QueryDeviceLoginHistory
+QueryGetNetworkAddressHistoryV
 QueryHiddenDevices
 QueryIOCs
 QueryIncidents
@@ -234,6 +239,7 @@ Scalable
 ScanSamples
 SemVer
 Shockwave
+SpotlightVulnerabilities
 SubscriptionID
 SubscriptionIDs
 Substring
@@ -264,6 +270,7 @@ UploadSampleV
 VerifyAWSAccountAccess
 XZY
 YARA
+ZeroTrustAssessment
 addCIDGroupMembers
 addRole
 addUserGroupMembers
