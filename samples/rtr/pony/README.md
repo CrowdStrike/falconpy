@@ -1,8 +1,10 @@
 ![CrowdStrike Falcon](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png)
 ![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)
 
-# Real Time Response - Retrieve basic system information
-This example leverages an open-source project that retrieves system information to pull details for a specific host attached to your CID.
+# My Little RTR
+### Using Real Time Response to retrieve basic system information
+
+This example leverages an open-source project that retrieves system information to pull details for a specific host attached to your CID. In order to retrieve system information detail (and draw ponies), this example installs __git__ (when not present) and then clones the [ASCII-Pony](https://gitlab.com/mattia.basaglia/ASCII-Pony) repo. Once successfully cloned, the executable _systempony_ is executed with its output being saved to a local file. Finally, the contents of this output file are retrieved and all artifacts are removed from the target system.
 
 ### Example output
 ```bash
@@ -64,6 +66,7 @@ This example leverages an open-source project that retrieves system information 
 The source code for this example can be found [here](my_little_rtr.py).
 
 ## The open-source system information project - ASCII-Pony
-In order to retrieve system information detail (and draw ponies), this example installs __git__ (when not present) and then clones the [ASCII-Pony](https://gitlab.com/mattia.basaglia/ASCII-Pony) repo. Once successfully cloned, the executable _systempony_ is executed with its output being saved to a local file.
-
+<table>
+<tr>
+<td align="center">![Glax](docs/asset/glax.png)</td></tr></table>
 The [ASCII-Pony](https://gitlab.com/mattia.basaglia/ASCII-Pony) repo was developed by [Mattia "Glax" Basaglia](https://dragon.best/), and has been around for many years. It is a fun (and useful) project [@jshcodes](https://github.com/jshcodes) has used in several places over time. Glax is best Dragon!
