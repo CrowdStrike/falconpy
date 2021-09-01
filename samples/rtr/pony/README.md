@@ -66,4 +66,4 @@ The source code for this example can be found [here](my_little_rtr.py).
 ## The open-source system information project - ASCII-Pony
 In order to retrieve system information detail (and draw ponies), this example installs __git__ (when not present) and then clones the [ASCII-Pony](https://gitlab.com/mattia.basaglia/ASCII-Pony) repo. Once successfully cloned, the executable _systempony_ is executed with its output being saved to a local file.
 
-The [ASCII-Pony](https://gitlab.com/mattia.basaglia/ASCII-Pony) repo was developed by [Mattia "Glax" Basaglia](https://dragon.best/), and has been around for many years. It is a fun (and useful) project @jshcodes has used in several places over time. Glax is best Dragon!
+The [ASCII-Pony](https://gitlab.com/mattia.basaglia/ASCII-Pony) repo was developed by [Mattia "Glax" Basaglia](https://dragon.best/), and has been around for many years. It is a fun (and useful) project [@jshcodes](https://github.com/jshcodes) has used in several places over time. Glax is best Dragon!
