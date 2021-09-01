@@ -68,5 +68,5 @@ The source code for this example can be found [here](my_little_rtr.py).
 ## The open-source system information project - ASCII-Pony
 <table>
 <tr>
-<td align="center">![Glax](docs/asset/glax.png)</td></tr></table>
+<td align="center">![Glax](https://raw.githubusercontent.com/CrowdStrike/falconpy/sep21-docs-samples/docs/asset/glax.png)</td></tr></table>
 The [ASCII-Pony](https://gitlab.com/mattia.basaglia/ASCII-Pony) repo was developed by [Mattia "Glax" Basaglia](https://dragon.best/), and has been around for many years. It is a fun (and useful) project [@jshcodes](https://github.com/jshcodes) has used in several places over time. Glax is best Dragon!
