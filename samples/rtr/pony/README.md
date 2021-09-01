@@ -66,7 +66,9 @@ This example leverages an open-source project that retrieves system information 
 The source code for this example can be found [here](my_little_rtr.py).
 
 ## The open-source system information project - ASCII-Pony
-<table>
-<tr>
-<td align="center">![Glax](https://raw.githubusercontent.com/CrowdStrike/falconpy/sep21-docs-samples/docs/asset/glax.png)</td></tr></table>
-The [ASCII-Pony](https://gitlab.com/mattia.basaglia/ASCII-Pony) repo was developed by [Mattia "Glax" Basaglia](https://dragon.best/), and has been around for many years. It is a fun (and useful) project [@jshcodes](https://github.com/jshcodes) has used in several places over time. Glax is best Dragon!
+<table><tr>
+<td align="center"><img src="../../../docs/asset/glax.png" width="200"></td>
+<td align="left">
+The <a href="https://gitlab.com/mattia.basaglia/ASCII-Pony">ASCII-Pony</a> repo was developed by <a href="https://dragon.best/">Mattia "Glax" Basaglia</a>, and has been around for many years. It is a fun (and useful) project <a href="https://github.com/jshcodes">@jshcodes</a> has used in several places over time.<BR/><BR/>Glax is best Dragon!
+</td>
+</tr></table>
