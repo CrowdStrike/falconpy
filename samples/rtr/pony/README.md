@@ -6,6 +6,8 @@
 
 This example leverages an open-source project that retrieves system information to pull details for a specific host attached to your CID. In order to retrieve system information detail (and draw ponies), this example installs __git__ (when not present) and then clones the [ASCII-Pony](https://gitlab.com/mattia.basaglia/ASCII-Pony) repo. Once successfully cloned, the executable _systempony_ is executed with its output being saved to a local file. Finally, the contents of this output file are retrieved and all artifacts are removed from the target system.
 
+> This example requires FalconPy v0.6.0+
+
 ### Example output
 ```bash
                                                 .....-----...
