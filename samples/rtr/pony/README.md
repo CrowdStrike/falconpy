@@ -69,8 +69,8 @@ In order to run this demonstration, you will need a partial hostname for the tar
 | Service Collection | Scope |
 | :---- | :---- |
 | Hosts | __READ__ |
-| Real Time Response | __WRITE__ |
-| Real Time Response Admin | __WRITE__ |
+| Real Time Response | __READ__, __WRITE__ |
+| Real Time Response Admin | __READ__, __WRITE__ |
 
 ### Execution syntax
 The following command should execute the demonstration in your environment.
