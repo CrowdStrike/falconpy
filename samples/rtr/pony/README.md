@@ -64,6 +64,59 @@ This example leverages an open-source project that retrieves system information 
 9. The Real Time Response session is closed and deleted.
 10. The results of our _systempony_ command are displayed.
 
+## Running the program
+In order to run this demonstration, you will need a partial hostname for the target system and access to CrowdStrike API keys with the following scopes:
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+| Real Time Response | __WRITE__ |
+| Real Time Response Admin | __WRITE__ |
+
+### Execution syntax
+The following command should execute the demonstration in your environment.
+
+```bash
+python3 my_little_rtr.py -t TARGET_HOSTNAME -k FALCON_CLIENT_ID -s FALCON_CLIENT_SECRET
+```
+
+A small command-line syntax help utility is available using the `-h` flag.
+
+```bash
+% python3 my_little_rtr.py -h
+usage: my_little_rtr.py [-h] -t TARGET -k KEY -s SECRET
+
+ ⠴⢮⠭⠍⠉⠉⠒⠤⣀
+⢀⢊　　　　　　 ⢱⠊⠑⡀
+⠋⡎  ⣀⡠⠤⠠⠖⠋⢉⠉  ⡄⢸
+⣘⡠⠊⣩⡅  ⣴⡟⣯⠙⣊  ⢁⠜   The My Little RTR demo
+　　 ⣿⡇⢸⣿⣷⡿⢀⠇⢀⢎          FalconPy v0.6.0+
+　 ⠰⡉  ⠈⠛⠛⠋⠁⢀⠜ ⢂
+　 　 ⠈⠒⠒⡲⠂⣠⣔⠁   ⡇  ⢀⡴⣾⣛⡛⠻⣦
+　　　　⢠⠃  ⢠⠞    ⡸⠉⠲⣿⠿⢿⣿⣿⣷⡌⢷
+   ⢀⠔⠂⢼    ⡎⡔⡄⠰⠃      ⢣  ⢻⣿⣿⣿⠘⣷
+ ⡐⠁    ⠸⡀  ⠏  ⠈⠃      ⢸　 ⣿⣿⣿⡇⣿⡇
+ ⡇    ⡎⠉⠉⢳    ⡤⠤⡤⠲⡀   ⢇   ⣿⣿⣿⣇⣿⣷
+ ⡇  ⡠⠃    ⡸    ⡇ ⡇ ⢱⡀ ⢣   ⠙⣿⣿⣿⣿⣿⡄
+ ⠑⠊ 　 　⢰　   ⠇⢸  ⡇⡇ ⡇    ⢳⣿⣿⣿⣿⡇
+　　　　⢠⠃    ⡸⡎  ⡜⡇  ⡇     ⠻⡏⠻⣿⣿⣄
+　　　 ⣔⣁⣀⣀⡠⠁ ⠈⠉⠉⠁⣎⣀⣀⡸
+
+   CrowdStrike - We STOP Breaches
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -t TARGET, --target TARGET
+                        Hostname of your target.
+                        Must be part of your CID.
+  -k KEY, --key KEY     Your CrowdStrike API key ID
+                             Required Scopes
+                             Hosts:     READ
+                             RTR:       WRITE
+                             RTR Admin: WRITE
+  -s SECRET, --secret SECRET
+                        Your CrowdStrike API key secret
+```
+
 ## Example source code
 The source code for this example can be found [here](my_little_rtr.py).
 
