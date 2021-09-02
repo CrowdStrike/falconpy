@@ -11,11 +11,22 @@ falconx_scan_example.py - Falcon X Sandbox - Upload / Scan example
 
 - jshcodes@CrowdStrike 09.01.2021
 """
-import os
 import argparse
+from enum import Enum
 from falconpy.falconx_sandbox import FalconXSandbox
 from falconpy.sample_uploads import SampleUploads
 from falconpy.oauth2 import OAuth2
+
+
+class Environment(Enum):
+    """
+    Enum to hold our different environment specifiers
+    """
+    WIN7 = 100
+    WIN7_64 = 110
+    WIN10 = 160
+    DROID = 200
+    LINUX = 300
 
 
 def check_scan_status(id: str) -> dict:
@@ -57,7 +68,7 @@ def submit_for_analysis(sha_value: str) -> dict:
         body={
             "sandbox": [{
                 "sha256": sha_value,
-                "environment_id": 160
+                "environment_id": Environment[sandbox_env].value
             }]
         }
     )
@@ -136,6 +147,12 @@ parser.add_argument(
     help='File to analyze',
     required=True
     )
+# Environment to use for analysis
+parser.add_argument(
+    '-e', '--environment',
+    help="Environment to use for analysis (win7, win7_64, win10, droid, linux)",
+    required=False
+)
 # CrowdStrike API Client ID
 parser.add_argument(
     '-k', '--key',
@@ -150,7 +167,21 @@ parser.add_argument(
     help='Your CrowdStrike API key secret', required=True
     )
 args = parser.parse_args()
-
+# Check for environment
+if not args.environment:
+    sandbox_env = "WIN10"
+else:
+    # Convert the submitted environment name to upper case
+    sandbox_env = str(args.environment).upper()
+    matched = False
+    # Loop thru our defined environment names
+    for env in Environment:
+        # User submitted name matches an accepted type
+        if env.name == sandbox_env:
+            matched = True
+    if not matched:
+        # We only accept the environments defined in our Enum above
+        raise SystemExit("Invalid sandbox environment specified.")
 # Announce progress
 inform("[   Init   ]")
 # Create an instance of our authentication object
