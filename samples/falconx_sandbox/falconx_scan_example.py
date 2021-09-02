@@ -1,6 +1,8 @@
 """
 falconx_scan_example.py - Falcon X Sandbox - Upload / Scan example
 
+Supports scanning a single file only.
+
 - jshcodes@CrowdStrike 09.01.2021
 """
 #  _______       __                   ___ ___  _______                __ __
@@ -11,6 +13,7 @@ falconx_scan_example.py - Falcon X Sandbox - Upload / Scan example
 # |::.|                             (::. |:.  |::.. . |           FalconPy v0.6.3
 # `---'                              `--- ---'`-------'
 #
+import os
 import argparse
 from enum import Enum
 from falconpy.falconx_sandbox import FalconXSandbox
@@ -188,6 +191,11 @@ else:
     if not MATCHED:
         # We only accept the environments defined in our Enum above
         raise SystemExit("Invalid sandbox environment specified.")
+
+if not os.path.isfile(args.file):
+    # We were not provided a valid filename
+    raise SystemExit("Invalid filename specified.")
+
 # Announce progress
 inform("[   Init   ]")
 # Create an instance of our authentication object
@@ -233,16 +241,31 @@ while RUNNING == "running":
         # Grab our latest status
         RUNNING = result["body"]["resources"][0]["state"]
 
-# We've finished, retrieve the report
-result = sandbox.get_reports(ids=submit_id)
+# We've finished, retrieve the report. There will only be one in this example.
+analysis = sandbox.get_reports(ids=submit_id)["body"]["resources"][0]["sandbox"][0]
 
 # Announce progress
 inform("[  Delete  ]")
 # Remove our test file
 delete_response = delete_file(sha)
 
-# Display the results
-print(result)
+# Display the analysis results
+if "error_type" in analysis:
+    # Error occurred, display the detail
+    print(f"{analysis['error_type']}: {analysis['error_message']}")
+else:
+    # No error, display the full analysis
+    print(f"Detonated on: {analysis['environment_description']}")
+    print(f"File type: {analysis['file_type']}")
+    for classification in analysis['classification']:
+        print("\nClassifications")
+        print(classification)
+    if len(analysis['extracted_interesting_strings']):
+        print("\nInteresting strings")
+        for interesting in analysis['extracted_interesting_strings']:
+            print(f"Source: {interesting['source']}   Type: {interesting['type']}")
+            print(f"{interesting['value']}\n")
+    print(f"\nVerdict: {analysis['verdict']}")
 
 # Inform the user of our deletion failure
 if delete_response != 200:
