@@ -86,6 +86,6 @@ _Coming Soon_
 | [Upload, Retrieve and then Delete a file](sample_uploads/sample_uploads_service.py) | [Upload, Retrieve and then Delete a file](sample_uploads/sample_uploads_uber.py) |
 
 ## Suggestions
-Got a suggestion for an example you'd like to see? Let us know by posting a message to our [discussion board](https://github.com/CrowdStrike/falconpy/discussions).
+Got a suggestion for an example you'd like to see? One of the examples not working as expected? Let us know by posting a message to our [discussion board](https://github.com/CrowdStrike/falconpy/discussions).
 
 Have an example you've developed yourself that you'd like to share?  **_Excellent!_** Please review our [contributing guidelines](/CONTRIBUTING.md) and then submit a pull request.
