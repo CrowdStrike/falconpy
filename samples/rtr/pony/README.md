@@ -9,7 +9,7 @@ This example leverages an open-source project that retrieves system information 
 > This example requires FalconPy v0.6.0+
 
 ### Example output
-```bash
+```shell
                                                 .....-----...
                                          __  .-`             `.
                                         /  \`             .:'--:.
@@ -75,13 +75,13 @@ In order to run this demonstration, you will need a partial hostname for the tar
 ### Execution syntax
 The following command should execute the demonstration in your environment.
 
-```bash
+```shell
 python3 my_little_rtr.py -t TARGET_HOSTNAME -k FALCON_CLIENT_ID -s FALCON_CLIENT_SECRET
 ```
 
 A small command-line syntax help utility is available using the `-h` flag.
 
-```bash
+```shell
 % python3 my_little_rtr.py -h
 usage: my_little_rtr.py [-h] -t TARGET -k KEY -s SECRET
 
