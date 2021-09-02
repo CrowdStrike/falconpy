@@ -1,16 +1,16 @@
 """
- _______       __                   ___ ___  _______                __ __
-|   _   .---.-|  .----.-----.-----.(   Y   )|   _   .---.-.-----.--|  |  |--.-----.--.--.
-|.  1___|  _  |  |  __|  _  |     | \  1  / |   1___|  _  |     |  _  |  _  |  _  |_   _|
-|.  __) |___._|__|____|_____|__|__| /  _  \ |____   |___._|__|__|_____|_____|_____|__.__|
-|:  |                              /:  |   \|:  1   |
-|::.|                             (::. |:.  |::.. . |           FalconPy v0.6.3
-`---'                              `--- ---'`-------'
-
 falconx_scan_example.py - Falcon X Sandbox - Upload / Scan example
 
 - jshcodes@CrowdStrike 09.01.2021
 """
+#  _______       __                   ___ ___  _______                __ __
+# |   _   .---.-|  .----.-----.-----.(   Y   )|   _   .---.-.-----.--|  |  |--.-----.--.--.
+# |.  1___|  _  |  |  __|  _  |     | \  1  / |   1___|  _  |     |  _  |  _  |  _  |_   _|
+# |.  __) |___._|__|____|_____|__|__| /  _  \ |____   |___._|__|__|_____|_____|_____|__.__|
+# |:  |                              /:  |   \|:  1   |
+# |::.|                             (::. |:.  |::.. . |           FalconPy v0.6.3
+# `---'                              `--- ---'`-------'
+#
 import argparse
 from enum import Enum
 from falconpy.falconx_sandbox import FalconXSandbox
@@ -20,7 +20,7 @@ from falconpy.oauth2 import OAuth2
 
 class Environment(Enum):
     """
-    Enum to hold our different environment specifiers
+    Enum to hold our different environment specifiers.
     """
     WIN7 = 100
     WIN7_64 = 110
@@ -29,12 +29,12 @@ class Environment(Enum):
     LINUX = 300
 
 
-def check_scan_status(id: str) -> dict:
+def check_scan_status(check_id: str) -> dict:
     """
-    Retrieves the status of a submission and returns it
+    Retrieves the status of a submission and returns it.
     """
     # Return our submission response by ID
-    return sandbox.GetSubmissions(ids=id)
+    return sandbox.GetSubmissions(ids=check_id)
 
 
 def upload_file(filename: str,
@@ -47,19 +47,19 @@ def upload_file(filename: str,
     applying any provided attributes. Returns the result.
     """
     # Read in our binary payload
-    PAYLOAD = open(filename, 'rb').read()
-    # Upload this file to the Sample Uploads API
-    return samples.upload_sample(file_data=PAYLOAD,
-                                 file_name=upload_name,
-                                 comment=submit_comment,
-                                 is_confidential=confidential
-                                 )
+    with open(filename, 'rb') as payload:
+        # Upload this file to the Sample Uploads API
+        return samples.upload_sample(file_data=payload.read(),
+                                     file_name=upload_name,
+                                     comment=submit_comment,
+                                     is_confidential=confidential
+                                     )
 
 
 def submit_for_analysis(sha_value: str) -> dict:
     """
-    Submits an uploaded file that matches the provided
-    SHA256 to Falcon X Sandbox for analysis
+    Submits an uploaded file that matches the provided SHA256
+    to Falcon X Sandbox for analysis. Returns the result.
     """
     # Call the submit method and provide the SHA256
     # of our upload file. Select Windows 10 64-bit
@@ -68,44 +68,50 @@ def submit_for_analysis(sha_value: str) -> dict:
         body={
             "sandbox": [{
                 "sha256": sha_value,
-                "environment_id": Environment[sandbox_env].value
+                "environment_id": Environment[SANDBOX_ENV].value
             }]
         }
     )
 
 
-def delete_file(id_value: str) -> dict:
+def delete_file(id_value: str) -> int:
     """
-    Deletes a file from CrowdStrike cloud
-    based upon the SHA256 provided.
+    Deletes a file from CrowdStrike cloud based upon the
+    SHA256 provided. Returns the operation status code.
     """
     # Call the delete_sample method using the SHA256
-    return samples.delete_sample(ids=sha)["status_code"]
+    return samples.delete_sample(ids=id_value)["status_code"]
 
 
-def get_indicator():
+def indicator_position(position: int, direction: bool) -> int:
     """
-    Tracks the current position of the progress indicator
-    and returns it's value when requested.
+    Calculates and returns the position and direction of the
+    indicator based upon the position and direction provided.
     """
-    # indicator_position and indicator_forward are global
-    global indicator_position
-    global indicator_forward
-    # If our counter exceeds the list length flip our direction
-    if indicator_position >= len(indicator) - 1:
-        indicator_forward = False
-    if indicator_position <= 0:
-        indicator_forward = True
+    if position >= len(indicator) - 1:
+        direction = False
+    if position <= 0:
+        direction = True
 
-    if indicator_forward:
+    if direction:
         # Increment it by 1
-        indicator_position += 1
+        position += 1
     else:
         # Decrement it by 1
-        indicator_position -= 1
+        position -= 1
+    # Return both position and direction
+    return position, direction
 
-    # Return our current indicator
-    return f"[ {indicator[indicator_position]} ]"
+
+def get_indicator(pos: int, direct: bool) -> str:
+    """
+    Tracks the current position of the progress indicator
+    and returns it's value, position and direction when requested.
+    """
+    # Retrieve our current indicator position and direction
+    new_pos, new_dir = indicator_position(pos, direct)
+    # Return the new indicator display, position and direction back
+    return f"[ {indicator[new_pos]} ]", new_pos, new_dir
 
 
 def inform(msg: str):
@@ -133,9 +139,10 @@ indicator = [
     "........"
 ]
 # Current indicator position
-indicator_position = -1
+INDICATOR_POSITION = -1
 # Current indicator direction
-indicator_forward = True
+INDICATOR_FORWARD = True
+
 
 # Argument parser for our command line
 parser = argparse.ArgumentParser(
@@ -169,17 +176,17 @@ parser.add_argument(
 args = parser.parse_args()
 # Check for environment
 if not args.environment:
-    sandbox_env = "WIN10"
+    SANDBOX_ENV = "WIN10"
 else:
     # Convert the submitted environment name to upper case
-    sandbox_env = str(args.environment).upper()
-    matched = False
+    SANDBOX_ENV = str(args.environment).upper()
+    MATCHED = False
     # Loop thru our defined environment names
     for env in Environment:
         # User submitted name matches an accepted type
-        if env.name == sandbox_env:
-            matched = True
-    if not matched:
+        if env.name == SANDBOX_ENV:
+            MATCHED = True
+    if not MATCHED:
         # We only accept the environments defined in our Enum above
         raise SystemExit("Invalid sandbox environment specified.")
 # Announce progress
@@ -212,18 +219,23 @@ inform("[  Submit  ]")
 submit_response = submit_for_analysis(sha)
 
 # Track our running status
-running = "running"
+RUNNING = "running"
 # Loop until success or error
-while running == "running":
+while RUNNING == "running":
     # Submission ID
     submit_id = submit_response["body"]["resources"][0]["id"]
     # Check the scan status
     result = check_scan_status(submit_id)
     if result["body"]["resources"]:
+        # Retrieve our indicator and position
+        indicator_display, INDICATOR_POSITION, INDICATOR_FORWARD = get_indicator(
+            INDICATOR_POSITION,
+            INDICATOR_FORWARD
+            )
         # Announce progress with our KITT indicator
-        inform(f"{get_indicator()}")
+        inform(f"{indicator_display}")
         # Grab our latest status
-        running = result["body"]["resources"][0]["state"]
+        RUNNING = result["body"]["resources"][0]["state"]
 
 # We've finished, retrieve the report
 result = sandbox.get_reports(ids=submit_id)
