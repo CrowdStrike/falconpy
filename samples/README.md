@@ -13,6 +13,7 @@ These examples are provided as a quick start for your project.
     - [Falcon Horizon](#falcon-horizon)
     - [Hosts](#hosts)
     - [IOC](#ioc)
+    - [MalQuery](#malquery)
     - [Quick Scan / Sample Uploads](#quick-scan)
     - [Real Time Response](#real-time-response)
     - [Sample Uploads](#sample-uploads)
@@ -57,6 +58,8 @@ _Coming Soon_
 | :--- | :--- |
 | [Create an IOC](ioc/create_ioc.py) | [Create an IOC](ioc/create_ioc.py) |
 
+### MalQuery
+_Coming Soon_
 
 ### Quick Scan / Sample Uploads
 | Service Class | Uber Class |
