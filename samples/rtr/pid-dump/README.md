@@ -4,6 +4,8 @@
 # Real Time Response - Dump memory for a running process
 This sample leverages CrowdStrike's Hosts and Real Time Response APIs to dump the memory for a process runnning in memory.
 
+> This example requires FalconPy v0.6.0+
+
 ## Procedure
 1. The AID for the provided hostname is retreived.
     - If not found, the routine will stop at this point.
