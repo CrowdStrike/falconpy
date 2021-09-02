@@ -66,4 +66,4 @@ optional arguments:
 ```
 
 ## Example source code
-The source code for this example can be found [here](falconx_scan_example.py)
+The source code for this example can be found [here](falconx_scan_example.py).
