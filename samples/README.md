@@ -21,9 +21,10 @@ These examples are provided as a quick start for your project.
 + [Suggestions](#suggestions)
 
 ## Authentication for these Examples
-In order to expedite sample delivery, we will be following a standard pattern for defining and providing credentials to the API.
-This is not the only method of providing these values, and not recommended for production deployments as the config.json file is
-**not encrypted**.
+In order to expedite sample delivery, we will be following a standard pattern for defining and providing credentials to the API. Credentials are either ingested
+at runtime, or consumed via a standardized "credential" file named `config.json`. These are not the only methods for providing these values.  
+
+> Please note: The file `config.json` is __not encrypted__ and may not be suitable for production deployments.
 
 In order to test these samples locally in your development environment, rename the file `config_sample.json` to `config.json` and then
 update this file to reflect your current development API credentials.
