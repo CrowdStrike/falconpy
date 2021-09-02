@@ -54,8 +54,7 @@ class Indicator():
 
     def step(self):
         """
-        Calculates and returns the position and direction of the
-        indicator based upon the position and direction provided.
+        Calculates the position and direction of the indicator.
         """
         if self.position >= len(self.indicator) - 1:
             # Too long - out of bounds
@@ -73,8 +72,7 @@ class Indicator():
 
     def display(self) -> str:
         """
-        Tracks the current position of the progress indicator
-        and returns it's value, position and direction when requested.
+        Increments the indicator position and returns its value.
         """
         # Step the indicator forward
         self.step()
