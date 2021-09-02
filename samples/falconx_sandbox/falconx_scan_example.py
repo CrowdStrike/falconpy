@@ -197,6 +197,7 @@ while running == "running":
 # We've finished, retrieve the report
 result = sandbox.get_reports(ids=submit_id)
 
+# Announce progress
 inform("[  Delete  ]")
 # Remove our test file
 delete_response = delete_file(sha)
