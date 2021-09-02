@@ -52,7 +52,7 @@ class Indicator():
             "........"
         ]
 
-    def step(self) -> int:
+    def step(self):
         """
         Calculates and returns the position and direction of the
         indicator based upon the position and direction provided.
