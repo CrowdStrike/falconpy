@@ -37,7 +37,7 @@ python3 falconx_scan_example.py -k FALCON_CLIENT_ID -s FALCON_CLIENT_SECRET -f F
 ```
 
 ### Selecting the detonation environment
-The Falcon X Sandbox API supports the following environments. If you wish to specify the sandbox environment where your file is detonated, you may do so using the `-e` argument. You must choose one of the identifiers provided by the list below.  When not provided, this example will default to Windows 10 64-bit.
+The Falcon X Sandbox API supports the following environments. If you wish to specify the sandbox environment where your file is detonated, you may do so using the `-e` argument. You must provide one of the identifiers from the list below.  When not provided, this example will default to Windows 10 64-bit.
 | Identifier | Environment |
 | :--- | :--- |
 | `win7` | Windows 7, 32-bit |
