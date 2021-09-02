@@ -102,8 +102,8 @@ def calc_stale_date(num_days: int) -> str:
     Calculates the "stale" datetime based upon the number of days
     provided by the user.
     """
-    today = datetime.today()
-    return str(today - timedelta(days=num_days)).replace(" ", "T")
+    today = datetime.strptime(str(datetime.now(timezone.utc)), "%Y-%m-%d %H:%M:%S.%f%z")
+    return str(today - timedelta(days=num_days)).replace(" ", "T")[:-6]
 
 
 def parse_host_detail(detail: dict):
@@ -118,7 +118,7 @@ def parse_host_detail(detail: dict):
         detail.get("device_id", "Unknown"),
         detail.get("local_ip", "Unknown"),
         detail["last_seen"],
-        distance
+        f"{distance} days"
         ])
 
 
@@ -129,16 +129,21 @@ def hide_hosts(id_list: list) -> dict:
     return falcon.perform_action(action_name="hide_host", body={"ids": id_list})
 
 
+# Parse our command line
 args = parse_command_line()
+# Default SORT to ASC if not present
 if not args.reverse:
     SORT = False
 else:
     SORT = bool(args.reverse)
 
+# Credentials
 api_client_id = args.client_id
 api_client_secret = args.client_secret
 if not api_client_id and not api_client_secret:
     raise SystemExit("Invalid API credentials provided.")
+
+# Set our stale date to 120 days if not present
 if not args.days:
     STALE_DAYS = 120
 else:
@@ -147,24 +152,33 @@ else:
     except ValueError as bad_day_value:
         raise SystemExit("Invalid value specified for days. Integer required.") from bad_day_value
 
+# Do not hide hosts if it is not requested
 if not args.remove:
     HIDE = False
 else:
     HIDE = bool(args.remove)
 
+# Calculate our stale date filter
 STALE_DATE = calc_stale_date(STALE_DAYS)
 
+# Connect to the API
 falcon = connect_api(api_client_id, api_client_secret)
 
+# List to hold our identified hosts
 stale = []
+# For each stale host identified
 for host in get_host_details(get_hosts(STALE_DATE)):
+    # Retrieve is detail
     parse_host_detail(host)
 
+# If we produced stale host results
 if stale:
+    # Display only
     if not HIDE:
         headers = ["Hostname", "Device ID", "Local IP", "Last Seen", "Stale period"]
         print(tabulate(sorted(stale, key=get_sort_key, reverse=SORT), headers))
     else:
+        # Remove the hosts
         host_list = [x[1] for x in stale]
         remove_result = hide_hosts(host_list)["body"]["resources"]
         for deleted in remove_result:
