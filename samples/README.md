@@ -56,8 +56,8 @@ _Coming Soon_
 ### Hosts
 | Service Class | Uber Class |
 | :--- | :--- |
-| [List sensor versions by hostname](hosts/sensor_versions_by_hostname.py) | |
-| [List (and optionally remove) stale sensors](hosts/stale_sensors.py) | |
+| [List sensor versions by hostname](hosts#list-sensors-by-hostname) | |
+| [List (and optionally remove) stale sensors](hosts#list-stale-sensors) | |
 
 
 ### IOC
