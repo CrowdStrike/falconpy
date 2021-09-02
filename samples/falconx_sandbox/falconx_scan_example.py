@@ -143,7 +143,6 @@ INDICATOR_POSITION = -1
 # Current indicator direction
 INDICATOR_FORWARD = True
 
-
 # Argument parser for our command line
 parser = argparse.ArgumentParser(
     description="Falcon X Sandbox example"
