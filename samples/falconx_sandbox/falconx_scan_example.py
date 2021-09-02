@@ -122,7 +122,7 @@ indicator = [
     "........"
 ]
 # Current indicator position
-indicator_position = 0
+indicator_position = -1
 # Current indicator direction
 indicator_forward = True
 
