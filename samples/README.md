@@ -51,7 +51,7 @@ _Coming Soon_
 ### Falcon X Sandbox
 | Service Class | Uber Class |
 | :--- | :--- |
-| [Analyze a single file](falconx_sandbox) | |
+| [Analyze a single file](falconx_sandbox/single_scan) | |
 
 ### Hosts
 | Service Class | Uber Class |
