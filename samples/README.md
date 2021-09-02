@@ -30,7 +30,7 @@ In order to test these samples locally in your development environment, rename t
 update this file to reflect your current development API credentials.
 
 ## Samples by API service collection
-These samples are categorized by API service collection. The list below will grow as more samples are planned.
+These samples are categorized by API service collection.
 
 ### Detections
 _Coming Soon_
