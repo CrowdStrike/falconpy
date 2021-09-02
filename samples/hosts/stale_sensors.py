@@ -94,7 +94,7 @@ def get_sort_key(sorting) -> list:
     """
     Sorting method for table display.
     """
-    return sorting[4]
+    return (sorting[4], sorting[0])
 
 
 def calc_stale_date(num_days: int) -> str:
@@ -106,20 +106,22 @@ def calc_stale_date(num_days: int) -> str:
     return str(today - timedelta(days=num_days)).replace(" ", "T")[:-6]
 
 
-def parse_host_detail(detail: dict):
+def parse_host_detail(detail: dict, found: list):
     """
     Parses the returned host detail and adds it to the stale list.
     """
     now = datetime.strptime(str(datetime.now(timezone.utc)), "%Y-%m-%d %H:%M:%S.%f%z")
     then = datetime.strptime(detail["last_seen"], "%Y-%m-%dT%H:%M:%S%z")
     distance = (now - then).days
-    stale.append([
+    found.append([
         detail.get("hostname", "Unknown"),
         detail.get("device_id", "Unknown"),
         detail.get("local_ip", "Unknown"),
         detail["last_seen"],
         f"{distance} days"
         ])
+
+    return found
 
 
 def hide_hosts(id_list: list) -> dict:
@@ -168,8 +170,8 @@ falcon = connect_api(api_client_id, api_client_secret)
 stale = []
 # For each stale host identified
 for host in get_host_details(get_hosts(STALE_DATE)):
-    # Retrieve is detail
-    parse_host_detail(host)
+    # Retrieve host detail
+    stale = parse_host_detail(host, stale)
 
 # If we produced stale host results
 if stale:
