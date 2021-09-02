@@ -307,9 +307,9 @@ def main():
                         "wb") as save_file:
                     save_file.write(download)                       # Save this file in our current folder as DUMP_FILENAME
             inform("  Extracting save file contents")
-            archive = py7zr.SevenZipFile(                           # Open our downloaded archive file using the
-                f"{DUMP_FILENAME}.zip",                             # password of "infected"
-                mode="r",
+            archive = py7zr.SevenZipFile(                           # nosec - Open our downloaded archive file using the
+                f"{DUMP_FILENAME}.zip",                             # password of "infected". Bandit will consider this
+                mode="r",                                           # hard-coded password a low threat and cry about it.
                 password="infected"
                 )
             archive.extractall(path="./extracted")                  # Extract this archive into the "extracted" folder
