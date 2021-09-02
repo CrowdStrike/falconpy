@@ -24,7 +24,7 @@ def parse_command_line() -> object:
         |::.. . |::.. . |::.. . |::.. . |::.. . |::.. . /
         `-------`-------`-------`-------`-------`------'
 
-    CrowdStrike Unmonitored Stale Sensor Environment Detector
+    CrowdStrike Unattended Stale Sensor Environment Detector
     """
     parser = argparse.ArgumentParser(
         description=header,
