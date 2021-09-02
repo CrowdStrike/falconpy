@@ -67,7 +67,9 @@ _Coming Soon_
 ### Real Time Response
 | Service Class | Uber Class |
 | :--- | :--- |
-| [Quarantine a host](real_time_response/quarantine_hosts.py) | |
+| [Dump memory for a running process](rtr/pid-dump) | |
+| [Quarantine a host](rtr/quarantine_hosts.py) | |
+| [Retrieve basic system information](rtr/pony) | |
 
 ### Sample Uploads
 | Service Class | Uber Class |
