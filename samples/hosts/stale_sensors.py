@@ -12,7 +12,7 @@ try:
     from falconpy.hosts import Hosts
 except ImportError as no_falconpy:
     raise SystemExit(
-        "CrowdStrike FalconPy must be installed in order to use the application.\n"
+        "CrowdStrike FalconPy must be installed in order to use this application.\n"
         "Please execute `python3 -m pip install crowdstrike-falconpy and try again."
         ) from no_falconpy
 
