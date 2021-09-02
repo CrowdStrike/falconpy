@@ -11,6 +11,7 @@ These examples are provided as a quick start for your project.
     - [Event Streams](#event-streams)
     - [Falcon Discover](#falcon-discover)
     - [Falcon Horizon](#falcon-horizon)
+    - [Falcon X Sandbox](#falcon-x-sandbox)
     - [Hosts](#hosts)
     - [IOC](#ioc)
     - [MalQuery](#malquery)
@@ -46,6 +47,10 @@ _Coming Soon_
 | :--- | :--- |
 | [Report or export as CSV, all or selective CSP Falcon CSPM Policies](cspm_registration/get_cspm_policies.py) | |
 
+### Falcon X Sandbox
+| Service Class | Uber Class |
+| :--- | :--- |
+| [Upload a file, submit it for analysis and then remove it](falconx_sandbox/falconx_scan_example.py) | |
 
 ### Hosts
 | Service Class | Uber Class |
