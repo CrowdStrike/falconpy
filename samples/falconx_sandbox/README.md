@@ -4,7 +4,7 @@
 # Analyze a single file with Falcon X Sandbox
 This example uploads a single file you specify to the CrowdStrike Sample Uploads API.
 The file is then submitted to the CrowdStrike Falcon X Sandbox for detonation and analysis.
-Result for the analysis are displayed upon completion, and then the file is removed from the 
+Results for the analysis are displayed upon completion, and then the file is removed from the 
 CrowdStrike sandbox.
 
 > This example requires FalconPy v0.6.3+
