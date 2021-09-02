@@ -257,9 +257,10 @@ else:
     # No error, display the full analysis
     print(f"Detonated on: {analysis['environment_description']}")
     print(f"File type: {analysis['file_type']}")
-    for classification in analysis['classification']:
+    if len(analysis['classification']):
         print("\nClassifications")
-        print(classification)
+        for classification in analysis['classification']:
+            print(classification)
     if len(analysis['extracted_interesting_strings']):
         print("\nInteresting strings")
         for interesting in analysis['extracted_interesting_strings']:
