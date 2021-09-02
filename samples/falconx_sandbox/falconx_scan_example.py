@@ -78,7 +78,7 @@ def get_indicator():
     and returns it's value when requested.
     """
     # indicator_position and indicator_forward are global
-    global indicator_position                                       
+    global indicator_position
     global indicator_forward
     # If our counter exceeds the list length flip our direction
     if indicator_position >= len(indicator) - 1:
