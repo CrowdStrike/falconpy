@@ -93,6 +93,8 @@ def get_hosts(date_filter: str) -> list:
 def get_sort_key(sorting) -> list:
     """
     Sorting method for table display.
+    Column 4 = Stale Period
+    Column 0 = Hostname
     """
     return (sorting[4], sorting[0])
 
@@ -177,8 +179,8 @@ for host in get_host_details(get_hosts(STALE_DATE)):
 if stale:
     # Display only
     if not HIDE:
-        headers = ["Hostname", "Device ID", "Local IP", "Last Seen", "Stale period"]
-        print(tabulate(sorted(stale, key=get_sort_key, reverse=SORT), headers))
+        headers = ["Hostname", "Device ID", "Local IP", "Last Seen", "Stale Period"]
+        print(f"\n{tabulate(sorted(stale, key=get_sort_key, reverse=SORT), headers)}")
     else:
         # Remove the hosts
         host_list = [x[1] for x in stale]
