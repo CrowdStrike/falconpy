@@ -29,6 +29,59 @@ class Environment(Enum):
     LINUX = 300
 
 
+class Indicator():
+    """
+    Silly progress indicator styled after KITT.
+    """
+    def __init__(self, start_position: int = -1, start_direction: bool = True):
+        self.position = start_position
+        self.direction = start_direction
+        # Insert "whoo whoo" noise here
+        self.indicator = [
+            "........",
+            "o.......",
+            "Oo......",
+            "oOo.....",
+            ".oOo....",
+            "..oOo...",
+            "...oOo..",
+            "....oOo.",
+            ".....oOo",
+            "......oO",
+            ".......o",
+            "........"
+        ]
+
+    def step(self) -> int:
+        """
+        Calculates and returns the position and direction of the
+        indicator based upon the position and direction provided.
+        """
+        if self.position >= len(self.indicator) - 1:
+            # Too long - out of bounds
+            self.direction = False
+        if self.position <= 0:
+            # Too short - out of bounds
+            self.direction = True
+
+        if self.direction:
+            # Increment position by 1
+            self.position += 1
+        else:
+            # Decrement position by 1
+            self.position -= 1
+
+    def display(self) -> str:
+        """
+        Tracks the current position of the progress indicator
+        and returns it's value, position and direction when requested.
+        """
+        # Step the indicator forward
+        self.step()
+        # Return the new indicator display
+        return f"[ {self.indicator[self.position]} ]"
+
+
 def check_scan_status(check_id: str) -> dict:
     """
     Retrieves the status of a submission and returns it.
@@ -59,11 +112,11 @@ def upload_file(filename: str,
 def submit_for_analysis(sha_value: str) -> dict:
     """
     Submits an uploaded file that matches the provided SHA256
-    to Falcon X Sandbox for analysis. Returns the result.
+    to the specified Falcon X Sandbox environment for analysis.
+    Returns the result.
     """
     # Call the submit method and provide the SHA256
-    # of our upload file. Select Windows 10 64-bit
-    # as our analysis environment.
+    # of our upload file and our desired environment type.
     return sandbox.submit(
         body={
             "sandbox": [{
@@ -83,37 +136,6 @@ def delete_file(id_value: str) -> int:
     return samples.delete_sample(ids=id_value)["status_code"]
 
 
-def indicator_position(position: int, direction: bool) -> int:
-    """
-    Calculates and returns the position and direction of the
-    indicator based upon the position and direction provided.
-    """
-    if position >= len(indicator) - 1:
-        direction = False
-    if position <= 0:
-        direction = True
-
-    if direction:
-        # Increment it by 1
-        position += 1
-    else:
-        # Decrement it by 1
-        position -= 1
-    # Return both position and direction
-    return position, direction
-
-
-def get_indicator(pos: int, direct: bool) -> str:
-    """
-    Tracks the current position of the progress indicator
-    and returns it's value, position and direction when requested.
-    """
-    # Retrieve our current indicator position and direction
-    new_pos, new_dir = indicator_position(pos, direct)
-    # Return the new indicator display, position and direction back
-    return f"[ {indicator[new_pos]} ]", new_pos, new_dir
-
-
 def inform(msg: str):
     """
     Provides informational updates to
@@ -122,26 +144,6 @@ def inform(msg: str):
     # Dynamic user update messages
     print("  %-80s" % msg, end="\r", flush=True)
 
-
-# Silly KITT progress indicator
-indicator = [
-    "........",
-    "o.......",
-    "Oo......",
-    "oOo.....",
-    ".oOo....",
-    "..oOo...",
-    "...oOo..",
-    "....oOo.",
-    ".....oOo",
-    "......oO",
-    ".......o",
-    "........"
-]
-# Current indicator position
-INDICATOR_POSITION = -1
-# Current indicator direction
-INDICATOR_FORWARD = True
 
 # Argument parser for our command line
 parser = argparse.ArgumentParser(
@@ -219,6 +221,8 @@ submit_response = submit_for_analysis(sha)
 
 # Track our running status
 RUNNING = "running"
+# Create a new progress indicator
+indicator = Indicator()
 # Loop until success or error
 while RUNNING == "running":
     # Submission ID
@@ -226,13 +230,8 @@ while RUNNING == "running":
     # Check the scan status
     result = check_scan_status(submit_id)
     if result["body"]["resources"]:
-        # Retrieve our indicator and position
-        indicator_display, INDICATOR_POSITION, INDICATOR_FORWARD = get_indicator(
-            INDICATOR_POSITION,
-            INDICATOR_FORWARD
-            )
         # Announce progress with our KITT indicator
-        inform(f"{indicator_display}")
+        inform(f"{indicator.display()}")
         # Grab our latest status
         RUNNING = result["body"]["resources"][0]["state"]
 
