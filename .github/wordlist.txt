@@ -542,3 +542,4 @@ proc
 pid
 rw
 sed
+gdb
