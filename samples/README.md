@@ -51,7 +51,7 @@ _Coming Soon_
 ### Falcon X Sandbox
 | Service Class | Uber Class |
 | :--- | :--- |
-| [Upload a file, submit it for analysis and then remove it](falconx_sandbox/falconx_scan_example.py) | |
+| [Analyze a single file](falconx_sandbox) | |
 
 ### Hosts
 | Service Class | Uber Class |
