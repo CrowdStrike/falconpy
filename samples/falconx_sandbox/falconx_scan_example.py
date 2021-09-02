@@ -94,7 +94,7 @@ def get_indicator():
         indicator_position -= 1
 
     # Return our current indicator
-    return f"[{indicator[indicator_position]}]"
+    return f"[ {indicator[indicator_position]} ]"
 
 
 def inform(msg: str):
@@ -152,7 +152,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 # Announce progress
-inform("[  Init  ]")
+inform("[   Init   ]")
 # Create an instance of our authentication object
 # and provide our API credentials for authorization
 auth = OAuth2(client_id=args.key,
@@ -164,7 +164,7 @@ samples = SampleUploads(auth_object=auth)
 sandbox = FalconXSandbox(auth_object=auth)
 
 # Announce progress
-inform("[ Upload ]")
+inform("[  Upload  ]")
 # Upload our test file
 response = upload_file(args.file,
                        "example-file.jpg",
@@ -176,7 +176,7 @@ response = upload_file(args.file,
 sha = response["body"]["resources"][0]["sha256"]
 
 # Announce progress
-inform("[ Submit ]")
+inform("[  Submit  ]")
 # Submit the file for analysis to Falcon X Sandbox
 submit_response = submit_for_analysis(sha)
 
@@ -197,7 +197,7 @@ while running == "running":
 # We've finished, retrieve the report
 result = sandbox.get_reports(ids=submit_id)
 
-inform("[ Delete ]")
+inform("[  Delete  ]")
 # Remove our test file
 delete_response = delete_file(sha)
 
