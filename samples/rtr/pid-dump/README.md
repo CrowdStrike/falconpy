@@ -19,7 +19,7 @@ This sample leverages CrowdStrike's Hosts and Real Time Response APIs to dump th
     * Command of "dump"
         - Process ID is confirmed to be provided by the end user.
         - If process ID has not been provided, the routine terminates with an error.
-4. The `memdump` utility script is uploaded to CrowdStrike cloud.
+4. The `dump-pid-memory.sh` utility script is uploaded to CrowdStrike cloud.
 
     **Script contents**
     ```
@@ -32,11 +32,11 @@ This sample leverages CrowdStrike's Hosts and Real Time Response APIs to dump th
             "dump memory $1-$start-$stop.dump 0x$start 0x$stop"; \
     done
     ```
-5. A _put_ command is issued, requesting the `memdump` utility be dropped on the target machine.
+5. A _put_ command is issued, requesting the `dump-pid-memory.sh` utility be dropped on the target machine.
 6. Two helper scripts are uploaded to CrowdStrike cloud.
     - `pid-memdump` - Installs __gdb__, calls the `memdump` utility to perform the memory dump of the specified PID and then zips up the generated dump files.
     - `pid-memdump-cleanup` - Removes the dump archive, dump files, and all remaining artifacts on the target machine.
-7. The `memdump` utility is executed on the target machine.
+7. The `dump-pid-memory.sh` utility script is executed on the target machine.
     - The routine waits for this execution to complete.
 8. The archive containing the generated dump files is retrieved using a _get_ command. This file is uploaded to CrowdStrike cloud.
     - The routine waits for this upload to complete.
@@ -48,7 +48,7 @@ This sample leverages CrowdStrike's Hosts and Real Time Response APIs to dump th
 13. All temporary download files and folders are removed from your local system.
 14. The `pip-memdump-cleanup` command is executed, removing all artifacts from the target system.
 15. The helper scripts `pid-memdump` and `pid-memdump-cleanup` are removed from CrowdStrike cloud.
-16. The `memdump` utility is removed from CrowdStrike cloud.
+16. The `dump-pid-memory.sh` utility script is removed from CrowdStrike cloud.
 17. The Real Time Response session is closed and deleted.
 18. All remaining local temporary files are removed.
 
