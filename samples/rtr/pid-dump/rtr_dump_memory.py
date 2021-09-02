@@ -16,9 +16,9 @@ Created 08.19.21 - jshcodes@CrowdStrike
 import argparse                                                         # Argument parsing for the command line
 import datetime                                                         # DateTime to calculate a Julian date
 import time     # You can prolly remove the delays                      # Time handling - used for delays
-import py7zr                                                            # 7zip handling
 import zipfile                                                          # Generic zip handling
 import os                                                               # OS functions
+import py7zr                                                            # 7zip handling
 try:
     from falconpy.oauth2 import OAuth2                                      # CrowdStrike Authentication API
     from falconpy.hosts import Hosts                                        # CrowdStrike Hosts API
@@ -31,8 +31,12 @@ except ImportError as no_falconpy:
         ) from no_falconpy
 
 
-def get_dump_filename():                                            # Creates a unique file name by calculating
-    fmt = '%Y-%m-%d %H:%M:%S'                                       # the Julian date based off of the current time
+def get_dump_filename():
+    """
+    Creates a unique file name by calculating
+    the Julian date based off of the current time.
+    """
+    fmt = '%Y-%m-%d %H:%M:%S'
     stddate = datetime.datetime.now().strftime(fmt)
     sdtdate = datetime.datetime.strptime(stddate, fmt)
     jdate = sdtdate.timetuple().tm_yday
@@ -54,12 +58,12 @@ def get_indicator():
     Tracks the current position of the progress indicator
     and returns it's value when requested.
     """
-    global indicator_position                                       # indicator_position is global
-    indicator_position += 1                                         # Increment it by 1
-    if indicator_position >= len(indicator):                        # If our counter exceeds the list length
-        indicator_position = 0                                      # Reset it back to zero
+    global INDICATOR_POSITION                                       # pylint: disable=W0603  # indicator_position is global
+    INDICATOR_POSITION += 1                                         # pylint: disable=E0602  # Increment it by 1
+    if INDICATOR_POSITION >= len(indicator):                        # If our counter exceeds the list length
+        INDICATOR_POSITION = 0                                      # Reset it back to zero
 
-    return indicator[indicator_position]                            # Return our value
+    return indicator[INDICATOR_POSITION]                            # Return our value
 
 
 def inform(msg: str):
@@ -164,7 +168,7 @@ def get_host_aid(host: str):
         if len(result["body"]["resources"]) == 0:                   # We got no results back from the API for this hostname
             raise SystemExit(
                     "%80s" % f"{' ' * 80}\nUnable to retrieve "
-                    "AID for target.  ¯\_(ツ)_/¯\n"                 # noqa=W605 pylint: disable=W1401  Linters hate my art
+                    "AID for target.  ¯\_(ツ)_/¯\n"                 # noqa=W605 pylint: disable=W1401  # Linters hate my art
                     "Check target hostname value."
                 )
         returned = result["body"]["resources"][0]
@@ -206,19 +210,27 @@ def delete_session(ses_id: str):
 
 
 def upload_helper(helper: str):
-    payload = {
+    """
+    Uploads the dynamically generated utility helper
+    to CrowdStrike cloud for execution.
+    """
+    helper_payload = {
         "Description": "Memory Dump helper script",
         "platform": ["linux"],
         "permission_type": "private",
         "Name": helper
     }
-    file = [('file',                                                # Payload containing our dynamically generated script file
-            (helper,
-             open(helper, 'rb').read(),
-             'application/octet-stream'
-             )
-             )]
-    res = falcon_rtra.create_put_files(data=payload, files=file)    # Upload our dynamically generated script file
+    with open(helper, "rb") as helper_script:
+        file = [('file',                                            # Payload containing our dynamically generated script file
+                (helper,
+                 helper_script.read(),
+                 'application/octet-stream'
+                 )
+                 )]
+    res = falcon_rtra.create_put_files(                             # Upload our dynamically generated script file
+        data=helper_payload,
+        files=file
+        )
     if res["status_code"] == "409":                                 # This helper already exists and may be stale
         remove_helper(helper)                                       # Remove it
         res = falcon_rtra.create_put_files(                         # ... and upload it again
@@ -226,11 +238,17 @@ def upload_helper(helper: str):
             files=file
             )
     elif res["status_code"] not in [200, 201]:                      # Upload failure
-        raise SystemExit("%80s" % f"{' ' * 80}\nUnable to upload memory dump helper")     # Crash out, we need this helper to continue
+        raise SystemExit(                                           # Crash out, we need this helper to continue
+            "%80s" % f"{' ' * 80}\nUnable to upload memory dump helper"
+            )
     inform(f"  Helper {helper} uploaded")                           # Inform the user of successful upload
 
 
 def remove_helper(helper: str):
+    """
+    Removes the dynamically generated utility helper
+    from CrowdStrike cloud.
+    """
     helper_lookup = falcon_rtra.list_put_files(                     # Retrieve our helper ID by looking for it's name
         filter=f"name:'{helper}'"
         )
@@ -414,7 +432,7 @@ rm /root/{MEMDUMP_HELPER}
 MEMDUMP_HELPER_CONTENT = """#!/bin/bash
 
 grep rw-p /proc/$1/maps \\
-| sed -n 's/^\([0-9a-f]*\)-\([0-9a-f]*\) .*$/\\1 \\2/p' \\
+| sed -n 's/^\\([0-9a-f]*\\)-\\([0-9a-f]*\\) .*$/\\1 \\2/p' \\
 | while read start stop; do \\
     gdb --batch --pid $1 -ex \\
         "dump memory $1-$start-$stop.dump 0x$start 0x$stop"; \\
@@ -428,7 +446,7 @@ GET_COMMAND = f"get /root/{DUMP_FILENAME}.zip"                                  
 PS_COMMAND = "ps"                                                                   # Command to list processes
 CLEANUP_COMMAND = "runscript -CloudFile='pid-memdump-cleanup'"                      # Command to remove all artifacts
 payload = {"base_command": BASE_COMMAND}                                            # Initial payload with base_command loaded
-indicator_position = 0                                                              # Position of our progress indicator
+INDICATOR_POSITION = 0                                                              # Position of our progress indicator
 indicator = ["|", "/", "-", "\\"]
 
 if __name__ == "__main__":
