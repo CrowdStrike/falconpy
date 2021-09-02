@@ -2,12 +2,12 @@
 ![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)
 
 # Real Time Response - Dump memory for a running process
-This sample leverages CrowdStrike's Hosts and Real Time Response APIs to dump the memory for a process runnning in memory.
+This sample leverages CrowdStrike's Hosts and Real Time Response APIs to dump the memory for a process running in memory.
 
 > This example requires FalconPy v0.6.0+
 
 ## Procedure
-1. The AID for the provided hostname is retreived.
+1. The AID for the provided hostname is retrieved.
     - If not found, the routine will stop at this point.
 2. A Real Time Response session is initialized between your host and the target host.
     - If a session cannot be instantiated, the routine will stop processing.

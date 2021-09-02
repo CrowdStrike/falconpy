@@ -58,7 +58,7 @@ This example leverages an open-source project that retrieves system information 
     cat ~/pony.txt
     ```
     - The results of this command are temporarily stored in memory.
-7. The `cleanup-pony` command is executed, all artificts are removed from the target system.
+7. The `cleanup-pony` command is executed, all artifacts are removed from the target system.
 > If any of these commands fail on execution, the procedure will be halted.
 8. All three uploaded 'pony' scripts are removed from CrowdStrike cloud.
 9. The Real Time Response session is closed and deleted.
