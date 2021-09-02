@@ -19,10 +19,16 @@ import time     # You can prolly remove the delays                      # Time h
 import py7zr                                                            # 7zip handling
 import zipfile                                                          # Generic zip handling
 import os                                                               # OS functions
-from falconpy.oauth2 import OAuth2                                      # CrowdStrike Authentication API
-from falconpy.hosts import Hosts                                        # CrowdStrike Hosts API
-from falconpy.real_time_response import RealTimeResponse                # CrowdStrike RTR API
-from falconpy.real_time_response_admin import RealTimeResponseAdmin     # CrowdStrike RTR Admin API
+try:
+    from falconpy.oauth2 import OAuth2                                      # CrowdStrike Authentication API
+    from falconpy.hosts import Hosts                                        # CrowdStrike Hosts API
+    from falconpy.real_time_response import RealTimeResponse                # CrowdStrike RTR API
+    from falconpy.real_time_response_admin import RealTimeResponseAdmin     # CrowdStrike RTR Admin API
+except ImportError as no_falconpy:
+    raise SystemExit(
+        "CrowdStrike FalconPy must be install to use the application.\n"
+        "Please execute `python3 -m pip install crowdstrike-falconpy and try again."
+        ) from no_falconpy
 
 
 def get_dump_filename():                                            # Creates a unique file name by calculating

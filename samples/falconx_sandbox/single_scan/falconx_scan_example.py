@@ -16,9 +16,15 @@ Supports scanning a single file only.
 import os
 import argparse
 from enum import Enum
-from falconpy.falconx_sandbox import FalconXSandbox
-from falconpy.sample_uploads import SampleUploads
-from falconpy.oauth2 import OAuth2
+try:
+    from falconpy.falconx_sandbox import FalconXSandbox
+    from falconpy.sample_uploads import SampleUploads
+    from falconpy.oauth2 import OAuth2
+except ImportError as no_falconpy:
+    raise SystemExit(
+        "CrowdStrike FalconPy must be install to use the application.\n"
+        "Please execute `python3 -m pip install crowdstrike-falconpy and try again."
+        ) from no_falconpy
 
 
 class Environment(Enum):

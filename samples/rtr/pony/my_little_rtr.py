@@ -45,10 +45,16 @@ Created 08.16.21 - jshcodes@CrowdStrike
 import argparse
 import time     # You can prolly remove the delays
 from argparse import RawTextHelpFormatter
-from falconpy.oauth2 import OAuth2
-from falconpy.hosts import Hosts
-from falconpy.real_time_response import RealTimeResponse
-from falconpy.real_time_response_admin import RealTimeResponseAdmin
+try:
+    from falconpy.oauth2 import OAuth2
+    from falconpy.hosts import Hosts
+    from falconpy.real_time_response import RealTimeResponse
+    from falconpy.real_time_response_admin import RealTimeResponseAdmin
+except ImportError as no_falconpy:
+    raise SystemExit(
+        "CrowdStrike FalconPy must be install to use the application.\n"
+        "Please execute `python3 -m pip install crowdstrike-falconpy and try again."
+        ) from no_falconpy
 
 
 def inform(msg: str):

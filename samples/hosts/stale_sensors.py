@@ -7,8 +7,14 @@ stale_sensors.py - Detects devices that haven't checked into
 from datetime import datetime, timedelta, timezone
 from argparse import RawTextHelpFormatter
 import argparse
-from falconpy.hosts import Hosts
 from tabulate import tabulate
+try:
+    from falconpy.hosts import Hosts
+except ImportError as no_falconpy:
+    raise SystemExit(
+        "CrowdStrike FalconPy must be install to use the application.\n"
+        "Please execute `python3 -m pip install crowdstrike-falconpy and try again."
+        ) from no_falconpy
 
 
 def parse_command_line() -> object:
