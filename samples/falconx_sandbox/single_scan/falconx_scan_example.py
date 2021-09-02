@@ -22,7 +22,7 @@ try:
     from falconpy.oauth2 import OAuth2
 except ImportError as no_falconpy:
     raise SystemExit(
-        "CrowdStrike FalconPy must be install to use the application.\n"
+        "CrowdStrike FalconPy must be installed in order to use the application.\n"
         "Please execute `python3 -m pip install crowdstrike-falconpy and try again."
         ) from no_falconpy
 
