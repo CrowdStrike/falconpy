@@ -18,6 +18,7 @@ import time
 import argparse
 from enum import Enum
 from datetime import timedelta
+from argparse import RawTextHelpFormatter
 try:
     from falconpy.falconx_sandbox import FalconXSandbox
     from falconpy.sample_uploads import SampleUploads
@@ -89,6 +90,43 @@ class Indicator():
         self.step()
         # Return the new indicator display
         return f"[ {self.indicator[self.position]} ]"
+
+
+def parse_command_line():
+    """
+    Parses and returns inbound command line arguments.
+    """
+    # Argument parser for our command line
+    parser = argparse.ArgumentParser(
+        description="Falcon X Sandbox example",
+        formatter_class=RawTextHelpFormatter
+        )
+    # File to be analyzed
+    parser.add_argument(
+        '-f', '--file',
+        help='File to analyze',
+        required=True
+        )
+    # Environment to use for analysis
+    parser.add_argument(
+        '-e', '--environment',
+        help="Environment to use for analysis (win7, win7_64, win10, droid, linux)",
+        required=False
+    )
+    # CrowdStrike API Client ID
+    parser.add_argument(
+        '-k', '--key',
+        help='Your CrowdStrike API key ID\n'
+        '     Required Scopes\n'
+        '     Sample Uploads:   WRITE\n'
+        '     Sandbox:          WRITE\n', required=True
+        )
+    # CrowdStrike API Client secret
+    parser.add_argument(
+        '-s', '--secret',
+        help='Your CrowdStrike API key secret', required=True
+        )
+    return parser.parse_args()
 
 
 def check_scan_status(check_id: str) -> dict:
@@ -163,36 +201,8 @@ def running_time(begin: time):
 
 # Start the clock
 start_time = time.time()
-# Argument parser for our command line
-parser = argparse.ArgumentParser(
-    description="Falcon X Sandbox example"
-    )
-# File to be analyzed
-parser.add_argument(
-    '-f', '--file',
-    help='File to analyze',
-    required=True
-    )
-# Environment to use for analysis
-parser.add_argument(
-    '-e', '--environment',
-    help="Environment to use for analysis (win7, win7_64, win10, droid, linux)",
-    required=False
-)
-# CrowdStrike API Client ID
-parser.add_argument(
-    '-k', '--key',
-    help='Your CrowdStrike API key ID\n'
-    '     Required Scopes\n'
-    '     Sample Uploads:   WRITE\n'
-    '     Sandbox:          WRITE\n', required=True
-    )
-# CrowdStrike API Client secret
-parser.add_argument(
-    '-s', '--secret',
-    help='Your CrowdStrike API key secret', required=True
-    )
-args = parser.parse_args()
+# Parse our command line arguments
+args = parse_command_line()
 # Check for environment
 if not args.environment:
     SANDBOX_ENV = "WIN10"
