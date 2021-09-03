@@ -283,7 +283,7 @@ if "error_type" in analysis:
     print(f"{analysis['error_type']}: {analysis['error_message']}")
 else:
     # No error, display the full analysis
-    print(f"Detonated on: {analysis['environment_description']}")
+    print(f"Detonated on: {analysis['environment_description']}{' ' * 20}")
     print(f"File type: {analysis['file_type']}")
     if len(analysis['classification']):
         print("\nClassifications")
