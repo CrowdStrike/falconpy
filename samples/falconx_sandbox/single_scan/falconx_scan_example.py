@@ -14,6 +14,7 @@ Supports scanning a single file only.
 # `---'                              `--- ---'`-------'
 #
 import os
+import time
 import argparse
 from enum import Enum
 try:
@@ -216,9 +217,10 @@ sandbox = FalconXSandbox(auth_object=auth)
 
 # Announce progress
 inform("[  Upload  ]")
+
 # Upload our test file
 response = upload_file(args.file,
-                       "example-file.jpg",
+                       f"FalconX File Analysis: {time.strftime('%v %r %Z')}",
                        "Falcon X upload and scan example",
                        confidential=False
                        )
