@@ -530,3 +530,16 @@ remediations
 GetCSPMGCPAccount
 args
 params
+systempony
+repo
+Mattia
+Basaglia
+Glax
+jshcodes
+ps
+memdump
+proc
+pid
+rw
+sed
+gdb
