@@ -17,6 +17,7 @@ import os
 import time
 import argparse
 from enum import Enum
+from datetime import timedelta
 try:
     from falconpy.falconx_sandbox import FalconXSandbox
     from falconpy.sample_uploads import SampleUploads
@@ -153,6 +154,15 @@ def inform(msg: str):
     print("  %-80s" % msg, end="\r", flush=True)
 
 
+def running_time(begin: time):
+    """
+    Calculates the current running time and returns it.
+    """
+    return f"[ Time running: {str(timedelta(seconds=(time.time() - begin)))} ]"
+
+
+# Start the clock
+start_time = time.time()
 # Argument parser for our command line
 parser = argparse.ArgumentParser(
     description="Falcon X Sandbox example"
@@ -204,7 +214,7 @@ if not os.path.isfile(args.file):
     raise SystemExit("Invalid filename specified.")
 
 # Announce progress
-inform("[   Init   ]")
+inform(f"[   Init   ] {running_time(start_time)}")
 # Create an instance of our authentication object
 # and provide our API credentials for authorization
 auth = OAuth2(client_id=args.key,
@@ -216,7 +226,7 @@ samples = SampleUploads(auth_object=auth)
 sandbox = FalconXSandbox(auth_object=auth)
 
 # Announce progress
-inform("[  Upload  ]")
+inform(f"[  Upload  ] {running_time(start_time)}")
 
 # Upload our test file
 response = upload_file(args.file,
@@ -229,7 +239,7 @@ response = upload_file(args.file,
 sha = response["body"]["resources"][0]["sha256"]
 
 # Announce progress
-inform("[  Submit  ]")
+inform(f"[  Submit  ] {running_time(start_time)}")
 # Submit the file for analysis to Falcon X Sandbox
 submit_response = submit_for_analysis(sha)
 
@@ -245,7 +255,7 @@ while RUNNING == "running":
     result = check_scan_status(submit_id)
     if result["body"]["resources"]:
         # Announce progress with our KITT indicator
-        inform(f"{indicator.display()}")
+        inform(f"{indicator.display()} {running_time(start_time)}")
         # Grab our latest status
         RUNNING = result["body"]["resources"][0]["state"]
 
@@ -253,7 +263,7 @@ while RUNNING == "running":
 analysis = sandbox.get_reports(ids=submit_id)["body"]["resources"][0]["sandbox"][0]
 
 # Announce progress
-inform("[  Delete  ]")
+inform(f"[  Delete  ] {running_time(start_time)}")
 # Remove our test file
 delete_response = delete_file(sha)
 
@@ -279,3 +289,7 @@ else:
 # Inform the user of our deletion failure
 if delete_response != 200:
     print("Unable to remove test file from Falcon X Sandbox")
+
+# Display our total execution time
+complete_time = str(timedelta(seconds=(time.time() - start_time)))
+print(f"Total running time: {complete_time}")
