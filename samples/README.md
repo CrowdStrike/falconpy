@@ -15,7 +15,7 @@ These examples are provided as a quick start for your project.
     - [Hosts](#hosts)
     - [IOC](#ioc)
     - [MalQuery](#malquery)
-    - [Quick Scan / Sample Uploads](#quick-scan)
+    - [Quick Scan / Sample Uploads](#quick-scan--sample-uploads)
     - [Real Time Response](#real-time-response)
     - [Sample Uploads](#sample-uploads)
 + [Suggestions](#suggestions)
@@ -66,7 +66,10 @@ _Coming Soon_
 | [Create an IOC](ioc/create_ioc.py) | [Create an IOC](ioc/create_ioc.py) |
 
 ### MalQuery
-_Coming Soon_
+| Service Class | Uber Class |
+| :--- | :--- |
+| | [Download MalQuery samples (MalQueryinator)](malquery/malqueryinator.py) |
+
 
 ### Quick Scan / Sample Uploads
 | Service Class | Uber Class |
