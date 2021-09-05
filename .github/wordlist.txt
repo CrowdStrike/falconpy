@@ -543,3 +543,4 @@ pid
 rw
 sed
 gdb
+MalQueryinator
