@@ -58,6 +58,7 @@ _Coming Soon_
 | :--- | :--- |
 | [List sensor versions by hostname](hosts#list-sensors-by-hostname) | |
 | [List (and optionally remove) stale sensors](hosts#list-stale-sensors) | |
+| [Offset vs. Token](hosts#comparing-querydevicesbyfilter-and-querydevicesbyfilterscroll-offset-vs-token) | |
 
 
 ### IOC
