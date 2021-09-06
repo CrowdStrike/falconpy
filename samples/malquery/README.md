@@ -7,7 +7,7 @@ The examples in this folder focus on leveraging CrowdStrike's Hosts API to perfo
 
 ## Search and Download samples from MalQuery
 Downloads a specified number of examples from MalQuery that match the search term and type you specify.
-Results will be stored in _zip_ archive fromat with the password of `infected`.
+Results will be stored in _zip_ archive format with the password of `infected`.
 
 ### Running the program
 In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
