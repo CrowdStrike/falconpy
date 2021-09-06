@@ -31,5 +31,27 @@ Downloads 3 `trickbot` samples from MalQuery
 python3 malqueryinator.py -v trickbot -f samples.zip -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -e 3
 ```
 
+#### Command-line help
+Command-line help is available using the `-h` or `--help` parameters.
+
+```shell
+% python3 malqueryinator.py -h
+usage: malquery.py [-h] [-t TYPE] -v VALUE -f FILE [-e EXAMPLES] -k KEY -s SECRET
+
+Malquerinator
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -t TYPE, --type TYPE  Type of pattern for the malware query: ascii, hex, or wide
+  -v VALUE, --value VALUE
+                        Value for malware query of type determined by --t/--type arg
+  -f FILE, --file FILE  Name of file to write to
+  -e EXAMPLES, --examples EXAMPLES
+                        Number of examples to download
+  -k KEY, --key KEY     Falcon API Client ID
+  -s SECRET, --secret SECRET
+                        Falcon API Client secret
+```
+
 ### Example source code
 The source code for this example can be found [here](malqueryinator.py).
