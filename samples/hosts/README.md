@@ -5,7 +5,7 @@
 The examples in this folder focus on leveraging CrowdStrike's Hosts API to perform administrative operations.
 - [List sensor versions by Hostname](#list-sensors-by-hostname)
 - [List (and optionally remove) stale sensors](#list-stale-sensors)
-- [Offset vs. Offset Tokens](#)
+- [Offset vs. Offset Tokens](#comparing-querydevicesbyfilter-and-querydevicesbyfilterscroll-offset-vs-token)
 
 ## List sensors by hostname
 Loops through all hosts and displays the hostname and sensor version.
