@@ -68,7 +68,7 @@ _Coming Soon_
 ### MalQuery
 | Service Class | Uber Class |
 | :--- | :--- |
-| | [Download MalQuery samples (MalQueryinator)](malquery/malqueryinator.py) |
+| | [Download MalQuery samples (MalQueryinator)](malquery#search-and-download-samples-from-malquery) |
 
 
 ### Quick Scan / Sample Uploads
