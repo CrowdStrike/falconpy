@@ -2,7 +2,7 @@
 ![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)
 
 # Analyze a single file with Falcon X Sandbox
-This example uploads a single file you specify to the CrowdStrike Sample Uploads API.
+These examples upload a single file you specify to the CrowdStrike Sample Uploads API.
 The file is then submitted to the CrowdStrike Falcon X Sandbox for detonation and analysis.
 Results for the analysis are displayed upon completion, and then the file is removed from the 
 CrowdStrike sandbox.
@@ -36,6 +36,12 @@ The following command will perform an analysis of a single file.
 python3 falconx_scan_example.py -k FALCON_CLIENT_ID -s FALCON_CLIENT_SECRET -f FILE_TO_SCAN -e ENVIRONMENT
 ```
 
+##### Uber class variation
+There is no functional difference between the Service and Uber Class examples.
+```shell
+python3 falconx_scan_example_uber.py -k FALCON_CLIENT_ID -s FALCON_CLIENT_SECRET -f FILE_TO_SCAN -e ENVIRONMENT
+```
+
 ### Selecting the detonation environment
 The Falcon X Sandbox API supports the following environments. If you wish to specify the sandbox environment where your file is detonated, you may do so using the `-e` argument. You must provide one of the identifiers from the list below.  When not provided, this example will default to Windows 10 64-bit.
 | Identifier | Environment |
@@ -66,4 +72,4 @@ optional arguments:
 ```
 
 ## Example source code
-The source code for this example can be found [here](falconx_scan_example.py).
+The source code for this example can be found at [Service Class](falconx_scan_example.py) and [Uber Class](falconx_scan_example_uber.py).
