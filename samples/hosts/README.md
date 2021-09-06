@@ -90,7 +90,7 @@ The source code for this example can be found [here](stale_sensors.py).
 ---
 
 ## Comparing QueryDevicesByFilter and QueryDevicesByFilterScroll (Offset vs. Token)
-This routine queries all of the hosts in your environment using the [QueryDevicesByFilter](wiki/Hosts#querydevicesbyfilter) and the [QueryDevicesByFilterScroll](wiki/Hosts#querydevicesbyfilterscroll) operations. The results of the two methods are then compared for equivalency. This sample demonstrates how to use both operations to paginate through large result sets, and discusses the inherent limitations of the QueryDevicesByFilter operation.
+This routine queries all of the hosts in your environment using the [QueryDevicesByFilter](https://github.com/CrowdStrike/falconpy/wiki/Hosts#querydevicesbyfilter) and the [QueryDevicesByFilterScroll](https://github.com/CrowdStrike/falconpy/wiki/Hosts#querydevicesbyfilterscroll) operations. The results of the two methods are then compared for equivalency. This sample demonstrates how to use both operations to paginate through large result sets, and discusses the inherent limitations of the QueryDevicesByFilter operation.
 
 ### Running the program.
 In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
