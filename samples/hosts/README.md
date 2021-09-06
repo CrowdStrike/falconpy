@@ -5,7 +5,7 @@
 The examples in this folder focus on leveraging CrowdStrike's Hosts API to perform administrative operations.
 - [List sensor versions by Hostname](#list-sensors-by-hostname)
 - [List (and optionally remove) stale sensors](#list-stale-sensors)
-
+- [Offset vs. Offset Tokens](#)
 
 ## List sensors by hostname
 Loops through all hosts and displays the hostname and sensor version.
@@ -86,3 +86,24 @@ optional arguments:
 
 ### Example source code
 The source code for this example can be found [here](stale_sensors.py).
+
+---
+
+## Comparing QueryDevicesByFilter and QueryDevicesByFilterScroll (Offset vs. Token)
+This routine queries all of the hosts in your environment using the QueryDevicesByFilter operation and the QueryDevicesByFilterScroll operation. The results of the two methods are then compared for equivalency. This sample demonstrates how to use both operations to paginate through large result sets, and discusses the inherent limitations of the QueryDevicesByFilter operation.
+
+### Running the program.
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+
+### Execution syntax
+This example requires no input parameters.
+
+```shell
+python3 offset_vs_token.py
+```
+
+### Example source code
+The source code for this example can be found [here](offset_vs_token.py)
