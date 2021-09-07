@@ -3,7 +3,7 @@
 + Added: New Hash Analyzer Service Class `hash_analyzer.py`
     - Related unit tests `test_hash_analyzer.py`
     - Related endpoint module `_hash_analyzer.py`
-+ Added: Quarantine Service Class unit tests
++ Added: Quarantine Service Class unit tests `test_quarantine.py`
 
 # Version 0.6.3
 ## Added features and functionality
