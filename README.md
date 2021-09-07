@@ -10,8 +10,8 @@ The FalconPy SDK contains a collection of Python classes that abstract CrowdStri
 
 ## Table of Contents
 + [Overview](#overview)
-  - [Service classes](#service-classes)
-  - [The Uber class](#the-uber-class)
+    - [Service classes](#service-classes)
+    - [The Uber class](#the-uber-class)
 + [Installation & Removal](#installation--removal)
 + [Contributing](#contributing)
 + [Support & Community Forums](#support--community-forums)
