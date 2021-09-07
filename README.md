@@ -9,19 +9,13 @@
 The FalconPy SDK contains a collection of Python classes that abstract CrowdStrike Falcon OAuth2 API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
 
 ## Table of Contents
-- [FalconPy<BR/>*The CrowdStrike Falcon SDK for Python 3*](#falconpythe-crowdstrike-falcon-sdk-for-python-3)
-  - [Table of Contents](#table-of-contents)
-  - [Overview](#overview)
-    - [Service classes](#service-classes)
-    - [The Uber class](#the-uber-class)
-  - [Installation & Removal](#installation--removal)
-  - [Contributing](#contributing)
-  - [Support & Community Forums](#support--community-forums)
-  - [Documentation & Collateral](#documentation--collateral)
-    - [Official Project Documentation](#official-project-documentation)
-    - [Videos (Tutorials, Trainings, Overviews)](#videos-tutorials-trainings-overviews)
-    - [Conference Presentations](#conference-presentations)
-    - [Blogs/Articles/Prose](#blogsarticlesprose)
+- [Overview](#overview)
+  - [Service classes](#service-classes)
+  - [The Uber class](#the-uber-class)
+- [Installation & Removal](#installation--removal)
+- [Contributing](#contributing)
+- [Support & Community Forums](#support--community-forums)
+- [Documentation & Collateral](#documentation--collateral)
 
 ## Overview
 This SDK provides two distinct methods for interacting with CrowdStrike's Falcon OAuth2 APIs, Service classes and the Uber class.
