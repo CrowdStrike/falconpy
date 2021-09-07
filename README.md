@@ -9,12 +9,19 @@
 The FalconPy SDK contains a collection of Python classes that abstract CrowdStrike Falcon OAuth2 API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
 
 ## Table of Contents
-+ [Overview](#overview)
+- [FalconPy<BR/>*The CrowdStrike Falcon SDK for Python 3*](#falconpythe-crowdstrike-falcon-sdk-for-python-3)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
     - [Service classes](#service-classes)
     - [The Uber class](#the-uber-class)
-+ [Installation & Removal](#installation--removal)
-+ [Support & Community Forums](#support--community-forums)
-+ [Documentation & Collateral](#documentation--collateral)
+  - [Installation & Removal](#installation--removal)
+  - [Contributing](#contributing)
+  - [Support & Community Forums](#support--community-forums)
+  - [Documentation & Collateral](#documentation--collateral)
+    - [Official Project Documentation](#official-project-documentation)
+    - [Videos (Tutorials, Trainings, Overviews)](#videos-tutorials-trainings-overviews)
+    - [Conference Presentations](#conference-presentations)
+    - [Blogs/Articles/Prose](#blogsarticlesprose)
 
 ## Overview
 This SDK provides two distinct methods for interacting with CrowdStrike's Falcon OAuth2 APIs, Service classes and the Uber class.
@@ -31,6 +38,7 @@ Representing a single API service collection, each service class has a method de
 | [CrowdStrike Custom Indicators of Compromise (IOCs) API](https://falcon.crowdstrike.com/support/documentation/88/custom-ioc-apis) | [ioc.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ioc.py) <BR/> [iocs.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/iocs.py) ![#f03c15](https://via.placeholder.com/10/f03c15/000000?text=+) <small>*Deprecated*</small> |
 | [CrowdStrike Detections API](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [detects.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/detects.py) |
 | [CrowdStrike Event Streams API](https://falcon.crowdstrike.com/support/documentation/89/event-streams-apis)| [event_streams.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/event_streams.py) |
+| [CrowdStrike Falon Container](https://falcon.crowdstrike.com/documentation/146/falcon-container-sensor-for-linux) | [falcon_container.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falcon_container.py) |
 | [CrowdStrike Falcon Horizon API](https://falcon.crowdstrike.com/support/documentation/137/falcon-horizon-apis) | [cspm_registration.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/cspm_registration.py) |
 | [CrowdStrike Falcon X APIs](https://falcon.crowdstrike.com/support/documentation/92/falcon-x-apis) | [sample_uploads.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sample_uploads.py) <br/> [falconx_sandbox.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falconx_sandbox.py) <BR/> [quick_scan.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quick_scan.py)|
 | [CrowdStrike Firewall Management API](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [firewall_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_management.py) |
