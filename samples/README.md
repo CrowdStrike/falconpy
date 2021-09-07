@@ -15,7 +15,7 @@ These examples are provided as a quick start for your project.
     - [Hosts](#hosts)
     - [IOC](#ioc)
     - [MalQuery](#malquery)
-    - [Quick Scan / Sample Uploads](#quick-scan)
+    - [Quick Scan / Sample Uploads](#quick-scan--sample-uploads)
     - [Real Time Response](#real-time-response)
     - [Sample Uploads](#sample-uploads)
 + [Suggestions](#suggestions)
@@ -51,13 +51,14 @@ _Coming Soon_
 ### Falcon X Sandbox
 | Service Class | Uber Class |
 | :--- | :--- |
-| [Analyze a single file](falconx_sandbox/single_scan) | |
+| [Analyze a single file](falconx_sandbox/single_scan) | [Analyze a single file](falconx_sandbox/single_scan) |
 
 ### Hosts
 | Service Class | Uber Class |
 | :--- | :--- |
 | [List sensor versions by hostname](hosts#list-sensors-by-hostname) | |
 | [List (and optionally remove) stale sensors](hosts#list-stale-sensors) | |
+| [Offset vs. Token](hosts#comparing-querydevicesbyfilter-and-querydevicesbyfilterscroll-offset-vs-token) | |
 
 
 ### IOC
@@ -66,7 +67,10 @@ _Coming Soon_
 | [Create an IOC](ioc/create_ioc.py) | [Create an IOC](ioc/create_ioc.py) |
 
 ### MalQuery
-_Coming Soon_
+| Service Class | Uber Class |
+| :--- | :--- |
+| | [Download MalQuery samples (MalQueryinator)](malquery#search-and-download-samples-from-malquery) |
+
 
 ### Quick Scan / Sample Uploads
 | Service Class | Uber Class |

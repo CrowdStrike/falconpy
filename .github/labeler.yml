@@ -25,6 +25,7 @@ code samples:
 - samples/falconx_sandbox/*.py
 - samples/hosts/*.py
 - samples/ioc/*.py
+- samples/malquery/*.py
 - samples/rtr/*.py
 - samples/sample_uploads/*.py
 - samples/quick_scan/*.py
