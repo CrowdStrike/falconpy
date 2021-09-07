@@ -1,3 +1,10 @@
+# Version 0.6.4
+## Added features and functionality
++ Added: New Hash Analyzer Service Class `hash_analyzer.py`
+    - Related unit tests `test_hash_analyzer.py`
+    - Related endpoint module `_hash_analyzer.py`
++ Added: Quarantine Service Class unit tests
+
 # Version 0.6.3
 ## Added features and functionality
 + Added: New FalconContainer Service Class. `falcon_container.py`
