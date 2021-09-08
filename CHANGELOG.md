@@ -1,3 +1,12 @@
+# Version 0.6.5
+## Issues resolved
++ Removed: Hash Analyzer Service Class and all related unit tests. (Unavailable at this time)
+    - `hash_analyzer.py`
+    - `_endpoint/_hash_analyzer.py`
+    - `test_hash_analyzer.py`
++ Fixed: Missing reference to _quarantine_endpoints in endpoint module.  `_endpoint/__init__.py`
+    - This issue only impacted users leveraging the Uber class for these endpoints.
+
 # Version 0.6.4
 ## Added features and functionality
 + Added: New Hash Analyzer Service Class `hash_analyzer.py`
