@@ -50,6 +50,7 @@ Representing a single API service collection, each service class has a method de
 | [CrowdStrike OAuth2 Auth Token API](https://falcon.crowdstrike.com/support/documentation/93/oauth2-auth-token-apis) | [oauth2.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/oauth2.py) |
 | CrowdStrike Overwatch Dashboard API | [overwatch_dashboard.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/overwatch_dashboard.py) | 
 | [CrowdStrike Prevention Policy API](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [prevention_policy.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/prevention_policy.py) |
+| CrowdStrike Quarantine API | [quarantine.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quarantine.py) |
 | [CrowdStrike Real Time Response (RTR) API](https://falcon.crowdstrike.com/support/documentation/90/real-time-response-apis) | [real_time_response.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/real_time_response.py) |
 | [CrowdStrike Realtime Response (RTR) Administration API](https://falcon.crowdstrike.com/support/documentation/90/real-time-response-apis) | [real_time_response_admin.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/real_time_response_admin.py) |
 | CrowdStrike Realtime Response (RTR) Policies API | [response_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/response_policies.py) |
