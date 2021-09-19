@@ -1,11 +1,11 @@
 # Version 0.7.0
 ## Added features and functionality
 + Added: Payload handling utility library. `_payload.py`
-+ Updated: Hosts Service Class - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests. `hosts.py`
-    - perform_action
-    - query_device_login_history
-    - query_network_address_history
-    > Note: update_device_tags already provided this functionality
++ Updated: Hosts Service Class - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests into keywords. Legacy usage pattern of passing the BODY payload directly as the _body_ keyword is still supported. `hosts.py`
+    - perform_action (Keyword usage support only)
+    - query_device_login_history (Supports argument usage)
+    - query_network_address_history (Supports argument usage)
+    > Note: update_device_tags already provided this functionality (Keyword usage support only)
 
 ## Issues resolved
 + Updated: Linter updates now result in usage of `format` being marked as a failure for scenarios where an `f-string` can be used. Updated all occurances of this issue to make use of `f-string` formatting.
