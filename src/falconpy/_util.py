@@ -100,7 +100,7 @@ def generate_b64cred(client_id: str, client_secret: str) -> str:
     """
     base64 encodes passed client_id and client_secret for authorization headers.
     """
-    cred = "{}:{}".format(client_id, client_secret)
+    cred = f"{client_id}:{client_secret}"
     b64_byt = base64.b64encode(cred.encode("ascii"))
     encoded = b64_byt.decode("ascii")
 
@@ -170,9 +170,9 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
                 if caller.auth_object.token_expired():
                     auth_response = caller.auth_object.token()
                     if auth_response["status_code"] == 201:
-                        caller.headers['Authorization'] = 'Bearer {}'.format(auth_response['body']['access_token'])
+                        caller.headers['Authorization'] = f"Bearer {auth_response['body']['access_token']}"
                     else:
-                        caller.headers['Authorization'] = 'Bearer '
+                        caller.headers['Authorization'] = "Bearer "
         except AttributeError:
             pass
 

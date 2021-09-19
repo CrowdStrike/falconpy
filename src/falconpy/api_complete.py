@@ -75,7 +75,7 @@ class APIHarness:
         self.token_expiration = 0
         self.token_time = time.time()
         self.authenticated = False
-        self.headers = lambda: {'Authorization': 'Bearer {}'.format(self.token)} if self.token else {}
+        self.headers = lambda: {"Authorization": f"Bearer {self.token}"} if self.token else {}
         self.commands = api_endpoints
 
     def valid_cred_format(self: object) -> bool:
@@ -127,10 +127,9 @@ class APIHarness:
     def deauthenticate(self: object) -> bool:
         """ Revokes the specified authorization token. """
         target = str(self.base_url)+'/oauth2/revoke'
-        header_payload = {'Authorization': 'basic {}'.format(generate_b64cred(self.creds["client_id"],
-                                                                              self.creds["client_secret"]
-                                                                              ))}
-        data_payload = {'token': '{}'.format(self.token)}
+        b64cred = generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
+        header_payload = {"Authorization": f"basic {b64cred}"}
+        data_payload = {"token": f"{self.token}"}
         revoked = False
         if perform_request(method="POST", endpoint=target, data=data_payload,
                            headers=header_payload, verify=self.ssl_verify, proxy=self.proxy, timeout=self.timeout

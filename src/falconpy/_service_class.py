@@ -69,13 +69,13 @@ class ServiceClass:
                 _ = self.auth_object.token()
                 if _["status_code"] == 201:
                     self.token = _["body"]["access_token"]
-                    self.headers = {'Authorization': 'Bearer {}'.format(self.token)}
+                    self.headers = {"Authorization": f"Bearer {self.token}"}
                 else:
                     self.token = False
                     self.headers = {}
             else:
                 self.token = self.auth_object.token_value
-                self.headers = {'Authorization': 'Bearer {}'.format(self.token)}
+                self.headers = {"Authorization": f"Bearer {self.token}"}
 
             self.base_url = auth_object.base_url
             self.ssl_verify = auth_object.ssl_verify
@@ -95,14 +95,14 @@ class ServiceClass:
                 _ = self.auth_object.token()
                 if _["status_code"] == 201:
                     self.token = _["body"]["access_token"]
-                    self.headers = {'Authorization': 'Bearer {}'.format(self.token)}
+                    self.headers = {"Authorization": f"Bearer {self.token}"}
                 else:
                     self.token = False
                     self.headers = {}
                 self.refreshable = True
             else:
                 self.auth_object = None
-                self.headers = {'Authorization': 'Bearer {}'.format(access_token)}
+                self.headers = {"Authorization": f"Bearer {access_token}"}
 
             self.base_url = base_url
             self.proxy = proxy
