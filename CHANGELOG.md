@@ -1,3 +1,19 @@
+# Version 0.7.0
+## Added features and functionality
++ Added: Payload handling utility library. `_payload.py`
++ Updated: Hosts Service Class - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests. `hosts.py`
+    - perform_action
+    - query_device_login_history
+    - query_network_address_history
+    > Note: update_device_tags already provided this functionality
+
+## Issues resolved
++ Updated: Linter updates now result in usage of `format` being marked as a failure for scenarios where an `f-string` can be used. Updated all occurances of this issue to make use of `f-string` formatting.
+    - `_service_class.py`
+    - `_util.py`
+    - `api_complete.py`
+    - `oauth2.py`
+
 # Version 0.6.5
 ## Issues resolved
 + Removed: Hash Analyzer Service Class and all related unit tests. (Unavailable at this time)
