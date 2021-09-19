@@ -37,6 +37,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import generate_error_result, force_default, args_to_params, process_service_request, handle_single_argument
+from ._payload import create_generic_payload_list
 from ._service_class import ServiceClass
 from ._endpoint._hosts import _hosts_endpoints as Endpoints
 
@@ -48,39 +49,6 @@ class Hosts(ServiceClass):
     authorization object (oauth2.py) or a credential dictionary with
     client_id and client_secret containing valid API credentials.
     """
-    @staticmethod
-    def create_ids_payload(submitted_arguments: list, submitted_keywords: dict) -> dict:
-        """
-        Creates a standardized BODY payload based upon the required body model.
-        """
-        #
-        # BODY PAYLOAD MODEL
-        # {
-        #   "ids": [
-        #     "string"
-        #   ]
-        # }
-        #
-        body_payload = {}
-        submitted_ids = submitted_keywords.get("ids", None)
-        if submitted_ids:
-            if not isinstance(submitted_ids, list):
-                submitted_ids = submitted_ids.split(",")
-            body_payload["ids"] = submitted_ids
-        else:
-            if submitted_arguments[0]:
-                if isinstance(submitted_arguments[0], dict):
-                    # They're passing us a full payload
-                    body_payload = submitted_arguments[0]
-                else:
-                    # They're just passing us IDs
-                    submitted_ids = submitted_arguments[0]
-                    if not isinstance(submitted_ids, list):
-                        submitted_ids = submitted_ids.split(",")
-                    body_payload["ids"] = submitted_ids
-
-        return body_payload
-
     @force_default(defaults=["parameters", "body"], default_types=["dict"])
     def perform_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
         """
@@ -104,11 +72,8 @@ class Hosts(ServiceClass):
         #   ]
         # }
         if not body:
-            submitted_ids = kwargs.get("ids", None)
-            if submitted_ids:
-                if not isinstance(submitted_ids, list):
-                    submitted_ids = submitted_ids.split(",")
-                body["ids"] = submitted_ids
+            body = create_generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+
         _allowed_actions = ['contain', 'lift_containment', 'hide_host', 'unhide_host']
         operation_id = "PerformActionV2"
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
@@ -247,8 +212,15 @@ class Hosts(ServiceClass):
         #
         # See create_ids_payload for body payload model
         #
+        # BODY PAYLOAD MODEL
+        # {
+        #   "ids": [
+        #     "string"
+        #   ]
+        # }
+        #
         if not body:
-            body = self.create_ids_payload(submitted_arguments=args, submitted_keywords=kwargs)
+            body = create_generic_payload_list(submitted_arguments=args, submitted_keywords=kwargs, payload_value="ids")
 
         return process_service_request(
             calling_object=self,
@@ -266,8 +238,15 @@ class Hosts(ServiceClass):
         #
         # See create_ids_payload for body payload model
         #
+        # BODY PAYLOAD MODEL
+        # {
+        #   "ids": [
+        #     "string"
+        #   ]
+        # }
+        #
         if not body:
-            body = self.create_ids_payload(submitted_arguments=args, submitted_keywords=kwargs)
+            body = create_generic_payload_list(submitted_arguments=args, submitted_keywords=kwargs, payload_value="ids")
 
         return process_service_request(
             calling_object=self,
