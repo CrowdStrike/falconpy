@@ -244,6 +244,8 @@ class Hosts(ServiceClass):
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDeviceLoginHistory
         #
+        # See create_ids_payload for body payload model
+        #
         if not body:
             body = self.create_ids_payload(submitted_arguments=args, submitted_keywords=kwargs)
 
@@ -260,6 +262,8 @@ class Hosts(ServiceClass):
         Retrieve history of IP and MAC addresses of devices.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryGetNetworkAddressHistoryV1
+        #
+        # See create_ids_payload for body payload model
         #
         if not body:
             body = self.create_ids_payload(submitted_arguments=args, submitted_keywords=kwargs)
