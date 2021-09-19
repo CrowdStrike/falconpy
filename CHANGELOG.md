@@ -1,7 +1,7 @@
 # Version 0.7.0
 ## Added features and functionality
 + Added: Payload handling utility library. `_payload.py`
-+ Updated: Hosts Service Class - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests into keywords. Legacy usage pattern of passing the BODY payload directly as the _body_ keyword is still supported. `hosts.py`
++ Updated: Hosts Service Class - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests into keywords. Legacy usage pattern of passing the BODY payload directly as the _body_ keyword is still supported. Closes #340. `hosts.py`
     - perform_action (Keyword usage support only)
     - query_device_login_history (Supports argument usage)
     - query_network_address_history (Supports argument usage)
