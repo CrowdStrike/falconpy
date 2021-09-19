@@ -36,7 +36,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0103  # Aligning method names to API operation IDs
 from ._util import generate_error_result, force_default, args_to_params, process_service_request, handle_single_argument
 from ._service_class import ServiceClass
 from ._endpoint._hosts import _hosts_endpoints as Endpoints
@@ -49,13 +48,66 @@ class Hosts(ServiceClass):
     authorization object (oauth2.py) or a credential dictionary with
     client_id and client_secret containing valid API credentials.
     """
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def perform_action(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    @staticmethod
+    def create_ids_payload(submitted_arguments: list, submitted_keywords: dict) -> dict:
+        """
+        Creates a standardized BODY payload based upon the required body model.
+        """
+        # BODY PAYLOAD MODEL
+        # {
+        #   "ids": [
+        #     "string"
+        #   ]
+        # }
+        #
+        body_payload = {}
+        submitted_ids = submitted_keywords.get("ids", None)
+        if submitted_ids:
+            if not isinstance(submitted_ids, list):
+                submitted_ids = submitted_ids.split(",")
+            body_payload["ids"] = submitted_ids
+        else:
+            if submitted_arguments[0]:
+                if isinstance(submitted_arguments[0], dict):
+                    # They're passing us a full payload
+                    body_payload = submitted_arguments[0]
+                else:
+                    # They're just passing us IDs
+                    submitted_ids = submitted_arguments[0]
+                    if not isinstance(submitted_ids, list):
+                        submitted_ids = submitted_ids.split(",")
+                    body_payload["ids"] = submitted_ids
+
+        return body_payload
+
+    @force_default(defaults=["parameters", "body"], default_types=["dict"])
+    def perform_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
         """
         Take various actions on the hosts in your environment.
         Contain or lift containment on a host. Delete or restore a host.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/PerformActionV2
+        #
+        # Note: action_parameters not currently supported with keyword abstraction. - jshcodes@CrowdStrike, 09.18.21
+        #
+        # BODY PAYLOAD MODEL
+        # {
+        #   "action_parameters": [
+        #     {
+        #       "name": "string",
+        #       "value": "string"
+        #     }
+        #   ],
+        #   "ids": [
+        #     "string"
+        #   ]
+        # }
+        if not body:
+            submitted_ids = kwargs.get("ids", None)
+            if submitted_ids:
+                if not isinstance(submitted_ids, list):
+                    submitted_ids = submitted_ids.split(",")
+                body["ids"] = submitted_ids
         _allowed_actions = ['contain', 'lift_containment', 'hide_host', 'unhide_host']
         operation_id = "PerformActionV2"
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
@@ -79,6 +131,19 @@ class Hosts(ServiceClass):
         """
         Allows for tagging hosts. If the tags are empty
         """
+        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/UpdateDeviceTags
+        #
+        # BODY PAYLOAD MODEL
+        # {
+        #   "action": "string",
+        #   "device_ids": [
+        #     "string"
+        #   ],
+        #   "tags": [
+        #     "string"
+        #   ]
+        # }
+        #
         _allowed_actions = ["add", "remove"]
         # validate action is allowed AND tags is "something"
         if action_name.lower() in _allowed_actions and tags is not None:
@@ -118,6 +183,7 @@ class Hosts(ServiceClass):
         the Falcon console or the Streaming API.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/GetDeviceDetails
+        #
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -132,6 +198,7 @@ class Hosts(ServiceClass):
         Perform the specified action on the Prevention Policies specified in the request.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryHiddenDevices
+        #
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -146,6 +213,7 @@ class Hosts(ServiceClass):
         Perform the specified action on the Prevention Policies specified in the request.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDevicesByFilterScroll
+        #
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -160,6 +228,7 @@ class Hosts(ServiceClass):
         Search for hosts in your environment by platform, hostname, IP, and other criteria.
         """
         # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDevicesByFilter
+        #
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -168,11 +237,16 @@ class Hosts(ServiceClass):
             params=parameters
             )
 
-    def query_device_login_history(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def query_device_login_history(self: object, *args, body: dict = None, **kwargs) -> dict:
         """
         Retrieve details about recent login sessions for a set of devices.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDeviceLoginHistory
+        #
+        if not body:
+            body = self.create_ids_payload(submitted_arguments=args, submitted_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -180,11 +254,16 @@ class Hosts(ServiceClass):
             body=body
             )
 
-    def query_network_address_history(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def query_network_address_history(self: object, *args, body: dict = None, **kwargs) -> dict:
         """
         Retrieve history of IP and MAC addresses of devices.
         """
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryGetNetworkAddressHistoryV1
+        #
+        if not body:
+            body = self.create_ids_payload(submitted_arguments=args, submitted_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
