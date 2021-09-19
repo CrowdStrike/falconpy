@@ -106,7 +106,7 @@ class TestHosts:
         payload = {"ids": test_id}
         action_test = falcon.PerformActionV2(action_name="hide_host", body=payload)
         if action_test["status_code"] == 202:
-            action_test = falcon.PerformActionV2(action_name="unhide_host", body=payload)
+            action_test = falcon.PerformActionV2(action_name="unhide_host", ids=test_id)
             if action_test["status_code"] == 202:
                 return True
             else:
@@ -122,7 +122,7 @@ class TestHosts:
         falcon.base_url = "nowhere"
         error_checks = True
         tests = {
-            "perform_action": falcon.PerformActionV2(body={}, action_name='unhide_host', parameters={})["status_code"],
+            "perform_action": falcon.PerformActionV2(ids="12345,67890", action_name='unhide_host', parameters={})["status_code"],
             "perform_action_params": falcon.PerformActionV2(body={}, parameters={'action_name': 'PooF'})["status_code"],
             "perform_action_null": falcon.PerformActionV2(body={}, parameters={})["status_code"],
             "get_device_details": falcon.GetDeviceDetails(ids='12345678')["status_code"],
@@ -168,9 +168,25 @@ class TestHosts:
     def test_get_device_login_history(self):
         """Pytest harness hook"""
         assert bool(
-            falcon.query_device_login_history(body={
+            falcon.query_device_login_history({
                 "ids": [falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]]
                 })["status_code"] in AllowedResponses
+        ) is True
+
+    def test_get_device_login_history_two(self):
+        """Pytest harness hook"""
+        assert bool(
+            falcon.query_device_login_history(
+                ids=falcon.QueryDevicesByFilter(limit=1)["body"]["resources"][0]
+                )["status_code"] in AllowedResponses
+        ) is True
+
+    def test_get_device_login_history_three(self):
+        """Pytest harness hook"""
+        assert bool(
+            falcon.query_device_login_history(
+                falcon.QueryDevicesByFilter(limit=1)["body"]["resources"][0]
+                )["status_code"] in AllowedResponses
         ) is True
 
     def test_get_device_network_history(self):
@@ -180,6 +196,15 @@ class TestHosts:
                 "ids": [falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]]
                 })["status_code"] in AllowedResponses
         ) is True
+
+    def test_get_device_network_history_two(self):
+        """Pytest harness hook"""
+        assert bool(
+            falcon.query_network_address_history(
+                ids=falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]
+                )["status_code"] in AllowedResponses
+        ) is True
+
     @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
     @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
     def test_perform_action(self):
