@@ -63,7 +63,9 @@ class Hosts(ServiceClass):
         body_payload = {}
         submitted_ids = submitted_keywords.get("ids", None)
         if submitted_ids:
-            body_payload["ids"] = submitted_ids.split(",")
+            if not isinstance(submitted_ids, list):
+                submitted_ids = submitted_ids.split(",")
+            body_payload["ids"] = submitted_ids
         else:
             if submitted_arguments[0]:
                 if isinstance(submitted_arguments[0], dict):
@@ -71,7 +73,10 @@ class Hosts(ServiceClass):
                     body_payload = submitted_arguments[0]
                 else:
                     # They're just passing us IDs
-                    body_payload["ids"] = submitted_arguments[0].split(",")
+                    submitted_ids = submitted_arguments[0]
+                    if not isinstance(submitted_ids, list):
+                        submitted_ids = submitted_ids.split(",")
+                    body_payload["ids"] = submitted_ids
 
         return body_payload
 
@@ -100,7 +105,9 @@ class Hosts(ServiceClass):
         if not body:
             submitted_ids = kwargs.get("ids", None)
             if submitted_ids:
-                body["ids"] = submitted_ids.split(",")
+                if not isinstance(submitted_ids, list):
+                    submitted_ids = submitted_ids.split(",")
+                body["ids"] = submitted_ids
         _allowed_actions = ['contain', 'lift_containment', 'hide_host', 'unhide_host']
         operation_id = "PerformActionV2"
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
