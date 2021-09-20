@@ -45,8 +45,8 @@ class ServiceClass:
     def __init__(self: object, auth_object: object = None,
                  creds: dict = None, base_url: str = "https://api.crowdstrike.com",
                  proxy: dict = None, **kwargs) -> object:
-        """Instantiates the base class, ingests the authorization token,
-        and initializes the headers and base_url global variables.
+        """Instantiates the object, ingests authorization credentials,
+        and initializes attributes.
 
         Keyword arguments:
         access_token -- Token string to use for all requests performed.
