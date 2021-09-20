@@ -1,5 +1,12 @@
 # Version 0.7.0
 ## Added features and functionality
++ Added: Updated `__all__` parameter in root `__init__.py`, publishing all PEP8 class names. This change allows developers to import these classes directly.
+    ```python
+    from falconpy import Hosts
+    falcon = Hosts(client_id="CLIENT_ID_HERE", client_secret="CLIENT_SECRET_HERE")
+    result = falcon.query_devices_by_filter()
+    print(result)
+    ```
 + Added: Payload handling utility library. `_payload.py`
 + Updated: Hosts Service Class - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests into keywords. Legacy usage pattern of passing the BODY payload directly as the _body_ keyword is still supported. Closes #340. `hosts.py`
     - perform_action (Keyword usage support only)
@@ -15,7 +22,7 @@
     - `oauth2.py`
 
 ## Other
-+ Updated: PEP-257 syntax applied to docstrings in all files impacted by this update.
++ Updated: PEP-257 syntax applied to all docstrings in all files.
 
 # Version 0.6.5
 ## Issues resolved
