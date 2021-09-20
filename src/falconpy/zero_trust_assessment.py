@@ -1,4 +1,5 @@
-"""
+"""Falcon Zero Trust Assessment API Interface Class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-zero_trust_assessment - Falcon Zero Trust Assessment API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,37 +35,55 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
 from ._service_class import ServiceClass
 from ._endpoint._zero_trust_assessment import _zero_trust_assessment_endpoints as Endpoints
 
 
 class ZeroTrustAssessment(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
+    """The only requirement to instantiate an instance of this class
     is a valid token provided by the Falcon API SDK OAuth2 class, an
     authorization object (oauth2.py) or a credential dictionary with
     client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_assessment(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_assessment(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID).
+
+        Keyword arguments:
+        ids -- One or more agent IDs, which you can find in the data.zta file,
+               or the Falcon console. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getAssessmentV1
         """
-        Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID) and a customer ID (CID).
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getAssessmentV1
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="getAssessmentV1",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     def get_compliance(self: object) -> dict:
+        """Get the Zero Trust Assessment compliance report for one customer ID (CID).
+
+        This method does not accept arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getComplianceV1
         """
-        Get the Zero Trust Assessment compliance report for one customer ID (CID).
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getComplianceV1
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
