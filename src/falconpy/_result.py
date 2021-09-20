@@ -1,4 +1,5 @@
-"""
+"""API Response formatting class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_result - API Response formatting class
 
 This is free and unencumbered software released into the public domain.
 
@@ -40,21 +39,16 @@ For more information, please refer to <https://unlicense.org>
 
 
 class Result:
-    """
-    Callable subclass to handle parsing of result client output.
-    """
+    """Callable subclass to handle parsing of result client output."""
     def __init__(self: object) -> dict:
-        """
-        Instantiates the subclass and initializes the result object.
-        """
+        """Instantiates the subclass and initializes the result object."""
         self.result_obj = {}
 
     def __call__(self: object, status_code: int, headers, body: dict) -> dict:
-        """
-        Formats values into a properly formatted result object.
-        """
+        """Formats values into a properly formatted result object."""
         self.result_obj['status_code'] = status_code
-        self.result_obj['headers'] = dict(headers)  # force standard dictionary to prevent json issues
+        # force standard dictionary to prevent json issues
+        self.result_obj['headers'] = dict(headers)
         self.result_obj['body'] = body
 
         return self.result_obj
