@@ -203,6 +203,24 @@ class Hosts(ServiceClass):
         limit -- The maximum number of records to return. [integer, 1-5000]
         offset -- The integer offset to start retrieving records from.
         sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
+                Available sort fields
+                device_id               machine_domain
+                agent_load_flags        major_version
+                agent_version           minor_version
+                bios_manufacturer       modified_timestamp
+                bios_version            os_version
+                config_id_base          ou
+                config_id_build         platform_id
+                config_id_platform      platform_name
+                cpu_signature           product_type_desc
+                external_ip             reduced_functionality_mode
+                first_seen              release_group
+                hostname                serial_number
+                last_login_timestamp    site_name
+                last_seen               status
+                local_ip                system_manufacturer
+                local_ip.raw            system_product_name
+                mac_address
 
         This method only supports keywords for providing arguments.
 
@@ -232,6 +250,24 @@ class Hosts(ServiceClass):
         limit -- The maximum number of records to return. [integer, 1-5000]
         offset -- The string offset to page from, for the next result set.
         sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
+                Available sort fields
+                device_id               machine_domain
+                agent_load_flags        major_version
+                agent_version           minor_version
+                bios_manufacturer       modified_timestamp
+                bios_version            os_version
+                config_id_base          ou
+                config_id_build         platform_id
+                config_id_platform      platform_name
+                cpu_signature           product_type_desc
+                external_ip             reduced_functionality_mode
+                first_seen              release_group
+                hostname                serial_number
+                last_login_timestamp    site_name
+                last_seen               status
+                local_ip                system_manufacturer
+                local_ip.raw            system_product_name
+                mac_address
 
         This method only supports keywords for providing arguments.
 
@@ -259,6 +295,24 @@ class Hosts(ServiceClass):
         limit -- The maximum number of records to return. [integer, 1-5000]
         offset -- The integer offset to start retrieving records from.
         sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
+                Available sort fields
+                device_id               machine_domain
+                agent_load_flags        major_version
+                agent_version           minor_version
+                bios_manufacturer       modified_timestamp
+                bios_version            os_version
+                config_id_base          ou
+                config_id_build         platform_id
+                config_id_platform      platform_name
+                cpu_signature           product_type_desc
+                external_ip             reduced_functionality_mode
+                first_seen              release_group
+                hostname                serial_number
+                last_login_timestamp    site_name
+                last_seen               status
+                local_ip                system_manufacturer
+                local_ip.raw            system_product_name
+                mac_address
 
         This method only supports keywords for providing arguments.
 
