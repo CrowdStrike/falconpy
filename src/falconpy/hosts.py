@@ -36,41 +36,52 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import generate_error_result, force_default, args_to_params, process_service_request, handle_single_argument
+from ._util import generate_error_result, force_default, args_to_params
+from ._util import process_service_request, handle_single_argument
 from ._payload import create_generic_payload_list
 from ._service_class import ServiceClass
 from ._endpoint._hosts import _hosts_endpoints as Endpoints
 
 
 class Hosts(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
+    """The only requirement to instantiate an instance of this class
     is a valid token provided by the Falcon API SDK OAuth2 class, an
     authorization object (oauth2.py) or a credential dictionary with
     client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters", "body"], default_types=["dict"])
     def perform_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
-        """
-        Take various actions on the hosts in your environment.
+        """Take various actions on the hosts in your environment.
         Contain or lift containment on a host. Delete or restore a host.
+
+        Keyword arguments:
+        action_name -- action to perform, 'contain', 'lift_containment',
+                       'hide_host' or 'unhide_host'.
+        body -- full body payload, not required if ids are provided as keyword.
+                You must use body if you are going to specify action_parameters.
+                {
+                    "action_parameters": [
+                        {
+                        "name": "string",
+                        "value": "string"
+                        }
+                    ],
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- AID(s) to perform actions against. String or list of strings.
+        parameters - full parameters payload, not required if action_name is provide as a keyword.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/PerformActionV2
         """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/PerformActionV2
-        #
-        # Note: action_parameters not currently supported with keyword abstraction. - jshcodes@CrowdStrike, 09.18.21
-        #
-        # BODY PAYLOAD MODEL
-        # {
-        #   "action_parameters": [
-        #     {
-        #       "name": "string",
-        #       "value": "string"
-        #     }
-        #   ],
-        #   "ids": [
-        #     "string"
-        #   ]
-        # }
         if not body:
             body = create_generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
 
@@ -93,13 +104,28 @@ class Hosts(ServiceClass):
 
         return returned
 
-    def update_device_tags(self: object, action_name: str, ids: list or str, tags: list or str) -> dict:
+    def update_device_tags(self: object,
+                           action_name: str,
+                           ids: list or str,
+                           tags: list or str
+                           ) -> dict:
+        """Append or remove one or more Falcon Grouping Tags on one or more hosts.
+
+        Keyword arguments:
+        action_name -- action to perform, 'add' or 'remove'.
+        ids -- AID(s) of the hosts to update. String or list of strings.
+        tags -- Tag(s) to update. String or list of strings.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/UpdateDeviceTags
         """
-        Append or remove one or more Falcon Grouping Tags on one or more hosts.
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/UpdateDeviceTags
-        #
-        # BODY PAYLOAD MODEL
+        # BODY PAYLOAD MODEL (For Uber class reference)
         # {
         #   "action": "string",
         #   "device_ids": [
@@ -118,7 +144,8 @@ class Hosts(ServiceClass):
                 ids = ids.split(",")
             if isinstance(tags, str):
                 tags = tags.split(",")
-            # tags must start with FalconGroupingTags, users probably won't know this so add it for them
+            # tags must start with FalconGroupingTags,
+            # users may won't know this so add it for them
             patch_tag = []
             for tag in tags:
                 if tag.startswith("FalconGroupingTags/"):
@@ -143,13 +170,23 @@ class Hosts(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_device_details(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """
-        Get details on one or more hosts by providing agent IDs (AID).
+        """Get details on one or more hosts by providing agent IDs (AID).
         You can get a host's agent IDs (AIDs) from the /devices/queries/devices/v1 endpoint,
         the Falcon console or the Streaming API.
+
+        Keyword arguments:
+        ids -- AID(s) of the hosts to retrieve. String or list of strings.
+
+        Arguments: When not specified, any arguments to this method are assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/GetDeviceDetails
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/GetDeviceDetails
-        #
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -160,11 +197,23 @@ class Hosts(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_hidden_devices(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve hidden hosts that match the provided filter criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return. [integer, 1-5000]
+        offset -- The integer offset to start retrieving records from.
+        sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryHiddenDevices
         """
-        Perform the specified action on the Prevention Policies specified in the request.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryHiddenDevices
-        #
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -175,11 +224,25 @@ class Hosts(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_devices_by_filter_scroll(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for hosts in your environment by platform, hostname,
+        IP, and other criteria with continuous pagination capability
+        (based on offset pointer which expires after 2 minutes with no maximum limit)
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return. [integer, 1-5000]
+        offset -- The string offset to page from, for the next result set.
+        sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDevicesByFilterScroll
         """
-        Perform the specified action on the Prevention Policies specified in the request.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDevicesByFilterScroll
-        #
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -190,11 +253,23 @@ class Hosts(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_devices_by_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for hosts in your environment by platform, hostname, IP, and other criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return. [integer, 1-5000]
+        offset -- The integer offset to start retrieving records from.
+        sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDevicesByFilter
         """
-        Search for hosts in your environment by platform, hostname, IP, and other criteria.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDevicesByFilter
-        #
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -205,22 +280,32 @@ class Hosts(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def query_device_login_history(self: object, *args, body: dict = None, **kwargs) -> dict:
+        """Retrieve details about recent login sessions for a set of devices.
+
+        Keyword arguments:
+        body -- full body payload, not required when ids keyword is provided.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- AID(s) of the hosts to retrieve. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDeviceLoginHistory
         """
-        Retrieve details about recent login sessions for a set of devices.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDeviceLoginHistory
-        #
-        # See create_ids_payload for body payload model
-        #
-        # BODY PAYLOAD MODEL
-        # {
-        #   "ids": [
-        #     "string"
-        #   ]
-        # }
-        #
         if not body:
-            body = create_generic_payload_list(submitted_arguments=args, submitted_keywords=kwargs, payload_value="ids")
+            body = create_generic_payload_list(submitted_arguments=args,
+                                               submitted_keywords=kwargs,
+                                               payload_value="ids"
+                                               )
 
         return process_service_request(
             calling_object=self,
@@ -231,22 +316,32 @@ class Hosts(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def query_network_address_history(self: object, *args, body: dict = None, **kwargs) -> dict:
+        """Retrieve history of IP and MAC addresses of devices.
+
+        Keyword arguments:
+        body -- full body payload, not required when ids keyword is provided.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- AID(s) of the hosts to retrieve. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryGetNetworkAddressHistoryV1
         """
-        Retrieve history of IP and MAC addresses of devices.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryGetNetworkAddressHistoryV1
-        #
-        # See create_ids_payload for body payload model
-        #
-        # BODY PAYLOAD MODEL
-        # {
-        #   "ids": [
-        #     "string"
-        #   ]
-        # }
-        #
         if not body:
-            body = create_generic_payload_list(submitted_arguments=args, submitted_keywords=kwargs, payload_value="ids")
+            body = create_generic_payload_list(submitted_arguments=args,
+                                               submitted_keywords=kwargs,
+                                               payload_value="ids"
+                                               )
 
         return process_service_request(
             calling_object=self,
@@ -254,6 +349,7 @@ class Hosts(ServiceClass):
             operation_id="QueryGetNetworkAddressHistoryV1",
             body=body
             )
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
