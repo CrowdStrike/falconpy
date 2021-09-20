@@ -176,7 +176,7 @@ class Hosts(ServiceClass):
         Keyword arguments:
         ids -- AID(s) of the hosts to retrieve. String or list of strings.
 
-        Arguments: When not specified, any arguments to this method are assumed to be 'ids'.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
 
         Returns: dict object containing API response.
