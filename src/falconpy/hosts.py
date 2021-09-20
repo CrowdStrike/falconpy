@@ -95,7 +95,7 @@ class Hosts(ServiceClass):
 
     def update_device_tags(self: object, action_name: str, ids: list or str, tags: list or str) -> dict:
         """
-        Allows for tagging hosts. If the tags are empty
+        Append or remove one or more Falcon Grouping Tags on one or more hosts.
         """
         # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/UpdateDeviceTags
         #
