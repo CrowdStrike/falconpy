@@ -1,4 +1,5 @@
-"""
+"""CrowdStrike Falcon Hosts API interface class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-hosts - CrowdStrike Falcon Hosts API interface class
 
 This is free and unencumbered software released into the public domain.
 
