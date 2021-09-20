@@ -1,4 +1,4 @@
-"""
+"""CrowdStrike Falcon Spotlight Vulnerability API interface class
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +8,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-spotlight_vulnerabilities - CrowdStrike Falcon Spotlight Vulnerability API interface class
 
 This is free and unencumbered software released into the public domain.
 
@@ -42,18 +40,28 @@ from ._endpoint._spotlight_vulnerabilities import _spotlight_vulnerabilities_end
 
 
 class SpotlightVulnerabilities(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
+    """The only requirement to instantiate an instance of this class
     is a valid token provided by the Falcon API SDK OAuth2 class, a
     existing instance of the authentication class as an object or a
     valid set of credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_vulnerabilities(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get details on vulnerabilities by providing one or more IDs.
+
+        Keyword arguments:
+        ids -- One or more vulnerability IDs (max: 400). String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/getVulnerabilities
         """
-        Get details on vulnerabilities by providing one or more IDs.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/getVulnerabilities
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -64,11 +72,30 @@ class SpotlightVulnerabilities(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_vulnerabilities(self: object, parameters: dict = None,  **kwargs) -> dict:
-        """
-        Search for Vulnerabilities in your environment by providing an FQL filter
+        """Search for Vulnerabilities in your environment by providing an FQL filter
         and paging details. Returns a set of Vulnerability IDs which match the filter criteria.
+
+        Keyword arguments:
+        after -- A pagination token used with the limit parameter to manage pagination of results.
+                 On your first request, don't provide an after token. On subsequent requests,
+                 provide the after token from the previous response to continue from that place in
+                 the results.
+        filter -- Filter items using a query in Falcon Query Language (FQL).
+                  Wildcards '*' are unsupported.
+        limit -- The number of items to return in this response (default: 100, max: 400).
+                 Use with the after parameter to manage pagination of results. Integer.
+        sort -- The property to sort by.
+                FQL syntax (e.g. created_timestamp|desc, closed_timestamp|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/queryVulnerabilities
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/queryVulnerabilities
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -79,10 +106,21 @@ class SpotlightVulnerabilities(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_remediations(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get details on remediations by providing one or more IDs.
+
+        Keyword arguments:
+        ids -- One or more remediation IDs. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        This endpoint is not published in swagger.
         """
-        Get details on remediations by providing one or more IDs.
-        """
-        # [GET] Not in swagger
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -93,10 +131,21 @@ class SpotlightVulnerabilities(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_remediations_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get details on remediations by providing one or more IDs.
+
+        Keyword arguments:
+        ids -- One or more remediation IDs. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/getRemediationsV2
         """
-        Get details on remediations by providing one or more IDs.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities/getRemediationsV2
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
