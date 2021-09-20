@@ -187,7 +187,6 @@ class APIHarness:
 
         Returns: dict object containing API response or binary object depending on operation ID.
         """
-
         if self.token_expired():
             # Authenticate them if we can
             self.authenticate()
