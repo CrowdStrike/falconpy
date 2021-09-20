@@ -14,6 +14,9 @@
     - `api_complete.py`
     - `oauth2.py`
 
+## Other
++ Updated: PEP-257 syntax applied to docstrings in all files impacted by this update.
+
 # Version 0.6.5
 ## Issues resolved
 + Removed: Hash Analyzer Service Class and all related unit tests. (Unavailable at this time)
