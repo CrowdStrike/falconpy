@@ -1,4 +1,5 @@
-"""
+"""Internal payload handling library
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_payload - Internal payload handling library
 
 This is free and unencumbered software released into the public domain.
 
@@ -38,19 +37,22 @@ For more information, please refer to <https://unlicense.org>
 """
 
 
-def create_generic_payload_list(submitted_keywords: dict, payload_value: str, submitted_arguments: list = None) -> dict:
-    """
-    Creates a standardized BODY payload based upon the requested payload value and passed keywords.
+def create_generic_payload_list(submitted_keywords: dict,
+                                payload_value: str,
+                                submitted_arguments: list = None
+                                ) -> dict:
+    """Creates a standardized BODY payload based upon the
+    requested payload value and passed keywords.
+
     Resulting payload provides passed keywords values in list format.
+
+    Creates the following payload:
+    {
+      "payload_value": [
+        "keyword provided values"
+      ]
+    }
     """
-    #
-    # BODY PAYLOAD MODEL
-    # {
-    #   "payload_value": [
-    #     "keyword provided values"
-    #   ]
-    # }
-    #
     returned_payload = {}
     submitted_values = submitted_keywords.get(payload_value, None)
     if submitted_values:

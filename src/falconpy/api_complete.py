@@ -1,4 +1,5 @@
-"""
+"""All-in-one CrowdStrike Falcon OAuth2 API harness
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-api_complete - All-in-one CrowdStrike Falcon OAuth2 API harness
 
 This is free and unencumbered software released into the public domain.
 
@@ -43,7 +42,7 @@ from ._endpoint import api_endpoints
 
 
 class APIHarness:
-    """ This one does it all. It's like the One Ring with significantly fewer orcs. """
+    """This one does it all. It's like the One Ring with significantly fewer orcs."""
     # pylint: disable=too-many-instance-attributes
 
     TOKEN_RENEW_WINDOW = 20  # in seconds
@@ -54,10 +53,21 @@ class APIHarness:
                  client_id: str = None, client_secret: str = None,
                  ssl_verify: bool = True, proxy: dict = None,
                  timeout: float or tuple = None) -> object:
-        """
-        Instantiates an instance of the base class, ingests credentials,
+        """Instantiates an instance of the class, ingests credentials,
         the base URL and the SSL verification boolean.
         Afterwards class attributes are initialized.
+
+        Keyword arguments:
+        base_url -- CrowdStrike API URL to use for requests. [Default: US-1]
+        ssl_verify -- Boolean specifying if SSL verification should be used. [Default: True]
+        proxy -- Dictionary of proxies to be used for requests.
+        timeout -- Float or tuple specifying timeouts to use for requests.
+        creds -- Dictionary containing CrowdStrike API credentials.
+                 Mutually exclusive to client_id / client_secret.
+        client_id -- Client ID for the CrowdStrike API. Mutually exclusive to creds.
+        client_secret -- Client Secret for the CrowdStriek API. Mutually exclusive to creds.
+
+        This method only accepts keywords to specify arguments.
         """
         if client_id and client_secret and not creds:
             creds = {
@@ -79,7 +89,8 @@ class APIHarness:
         self.commands = api_endpoints
 
     def valid_cred_format(self: object) -> bool:
-        """Returns a boolean indicating if the client_id and client_secret are present in the creds dictionary."""
+        """Returns a boolean indicating if the client_id and
+        client_secret are present in the creds dictionary."""
         retval = False
         if "client_id" in self.creds and "client_secret" in self.creds:
             retval = True
@@ -95,7 +106,7 @@ class APIHarness:
         return retval
 
     def authenticate(self: object) -> bool:
-        """ Generates an authorization token. """
+        """Generates an authorization token."""
         target = self.base_url+'/oauth2/token'
         data_payload = {}
         if self.valid_cred_format():
@@ -125,14 +136,15 @@ class APIHarness:
         return self.authenticated
 
     def deauthenticate(self: object) -> bool:
-        """ Revokes the specified authorization token. """
+        """Revokes the current authorization token. """
         target = str(self.base_url)+'/oauth2/revoke'
         b64cred = generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
         header_payload = {"Authorization": f"basic {b64cred}"}
         data_payload = {"token": f"{self.token}"}
         revoked = False
         if perform_request(method="POST", endpoint=target, data=data_payload,
-                           headers=header_payload, verify=self.ssl_verify, proxy=self.proxy, timeout=self.timeout
+                           headers=header_payload, verify=self.ssl_verify,
+                           proxy=self.proxy, timeout=self.timeout
                            )["status_code"] == 200:
             self.authenticated = False
             self.token = False
@@ -143,7 +155,8 @@ class APIHarness:
         return revoked
 
     def _create_header_payload(self: object, passed_arguments: dict) -> dict:
-        """Creates the HTTP header payload based upon the existing class headers and passed arguments."""
+        """Creates the HTTP header payload based upon
+        the existing class headers and passed arguments."""
         payload = self.headers()
         if "headers" in passed_arguments:
             for item in passed_arguments["headers"]:
@@ -154,21 +167,25 @@ class APIHarness:
         return payload
 
     def command(self: object, *args, **kwargs):
-        """ Checks token expiration, renewing when necessary, then performs the request.
+        """Checks token expiration, renewing when necessary, then performs the request.
 
-            Accepted arguments (name: type = default)
-            action: str = ""                                    - API Operation to perform
-            parameters: dict = {}                               - Parameter payload (Query string)
-            body: dict = {}                                     - Body payload (Body)
-            data: dict = {}                                     - Data payload (Data)
-            headers: dict = {}                                  - Headers dictionary (HTTP Headers)
-            ids: list or str = None                             - ID list (IDs to handle)
-            partition: int or str = None                        - Partition number
-            override: str = None   (format: 'METHOD,ENDPOINT')  - Override method and endpoint
-            action_name: str = None                             - Action to perform (API specific)
-            files: list = []                                    - List of files to upload
-            file_name: str = None                               - Name of the file to upload
-            content_type: str = None                            - Content_Type HTTP header
+        Keyword arguments:
+        action: str = ""                                    - API Operation ID to perform
+        parameters: dict = {}                               - Parameter payload (Query string)
+        body: dict = {}                                     - Body payload (Body)
+        data: dict = {}                                     - Data payload (Data)
+        headers: dict = {}                                  - Headers dictionary (HTTP Headers)
+        ids: list or str = None                             - ID list (IDs to handle)
+        partition: int or str = None                        - Partition number
+        override: str = None   (format: 'METHOD,ENDPOINT')  - Override method and endpoint
+        action_name: str = None                             - Action to perform (API specific)
+        files: list = []                                    - List of files to upload
+        file_name: str = None                               - Name of the file to upload
+        content_type: str = None                            - Content_Type HTTP header
+
+        The first argument passed to this method is assumed to be 'action'. All others are ignored.
+
+        Returns: dict object containing API response or binary object depending on operation ID.
         """
 
         if self.token_expired():
@@ -197,8 +214,10 @@ class APIHarness:
             parameter_payload = kwargs.get("parameters", {})
             # Check for authentication
             if self.authenticated:
-                selected_method = uber_command[0][1].upper()            # Which HTTP method to execute
-                if selected_method in _ALLOWED_METHODS:                 # Only accept allowed HTTP methods
+                # Which HTTP method to execute
+                selected_method = uber_command[0][1].upper()
+                # Only accept allowed HTTP methods
+                if selected_method in _ALLOWED_METHODS:
                     returned = perform_request(method=selected_method,
                                                endpoint=target,
                                                body=body_payload,
@@ -212,7 +231,8 @@ class APIHarness:
                                                )
                 else:
                     # Bad HTTP method
-                    returned = generate_error_result(message="Invalid HTTP method specified.", code=405)
+                    returned = generate_error_result(message="Invalid HTTP method specified.",
+                                                     code=405)
             else:
                 # Invalid token / Bad creds
                 returned = generate_error_result(message="Failed to issue token.", code=401)

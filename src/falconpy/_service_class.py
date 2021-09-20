@@ -1,4 +1,5 @@
-"""
+"""ServiceClass base class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_service_class - ServiceClass base class
 
 This is free and unencumbered software released into the public domain.
 
@@ -42,15 +41,27 @@ from .oauth2 import OAuth2 as FalconAuth
 
 
 class ServiceClass:
-    """
-    Base class of all service classes. Contains the default __init__ method.
-    """
+    """Base class of all service classes. Contains the default __init__ method."""
     def __init__(self: object, auth_object: object = None,
                  creds: dict = None, base_url: str = "https://api.crowdstrike.com",
                  proxy: dict = None, **kwargs) -> object:
-        """
-        Instantiates the base class, ingests the authorization token,
+        """Instantiates the base class, ingests the authorization token,
         and initializes the headers and base_url global variables.
+
+        Keyword arguments:
+        access_token -- Token string to use for all requests performed.
+                        Mutually exclusive to all other authentication elements.
+        auth_object - Properly authenticated instance of the OAuth2 Authentication service class.
+        base_url -- CrowdStrike API URL to use for requests. [Default: US-1]
+        ssl_verify -- Boolean specifying if SSL verification should be used. [Default: True]
+        proxy -- Dictionary of proxies to be used for requests.
+        timeout -- Float or tuple specifying timeouts to use for requests.
+        creds -- Dictionary containing CrowdStrike API credentials.
+                 Mutually exclusive to client_id / client_secret.
+        client_id -- Client ID for the CrowdStrike API. Mutually exclusive to creds.
+        client_secret -- Client Secret for the CrowdStriek API. Mutually exclusive to creds.
+
+        This method only accepts keywords to specify arguments.
         """
         access_token, self.ssl_verify, self.timeout = self.parse_keywords(kwargs)
         self.refreshable = False
@@ -108,9 +119,7 @@ class ServiceClass:
             self.proxy = proxy
 
     def authenticated(self):
-        """
-        Authenticates using the credentials provided.
-        """
+        """Returns the current authentication status."""
         result = None
         if self.auth_object:
             result = self.auth_object.authenticated()
@@ -118,9 +127,7 @@ class ServiceClass:
         return result
 
     def token_expired(self):
-        """
-        Returns a boolean reflecting token expiration status
-        """
+        """Returns a boolean reflecting token expiration status."""
         result = None
         if self.auth_object:
             result = self.auth_object.token_expired()
@@ -129,9 +136,7 @@ class ServiceClass:
 
     @staticmethod
     def parse_keywords(passed_keywords: dict):
-        """
-        Parses passed keywords to _init, setting defaults
-        """
+        """Parses passed keywords to _init, setting defaults"""
         access_token = None
         ssl_verify = True
         timeout = None
