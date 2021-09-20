@@ -64,6 +64,10 @@ class APIHarness:
         timeout -- Float or tuple specifying timeouts to use for requests.
         creds -- Dictionary containing CrowdStrike API credentials.
                  Mutually exclusive to client_id / client_secret.
+                 {
+                     "client_id": "CLIENT_ID_HERE",
+                     "client_secret": "CLIENT_SECRET_HERE"
+                 }
         client_id -- Client ID for the CrowdStrike API. Mutually exclusive to creds.
         client_secret -- Client Secret for the CrowdStriek API. Mutually exclusive to creds.
 
