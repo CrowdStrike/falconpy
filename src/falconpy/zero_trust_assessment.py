@@ -53,6 +53,7 @@ class ZeroTrustAssessment(ServiceClass):
         Keyword arguments:
         ids -- One or more agent IDs, which you can find in the data.zta file,
                or the Falcon console. String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.

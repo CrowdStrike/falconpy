@@ -60,6 +60,7 @@ class SensorDownload(ServiceClass):
         limit -- The maximum number of records to return. [integer, 1-5000]
         offset -- The first item to return, where 0 is the latest item. (Integer)
                   Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
         sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
 
         This method only supports keywords for providing arguments.
@@ -90,7 +91,11 @@ class SensorDownload(ServiceClass):
         The path will be created for the user if it does not already exist
 
         Keyword arguments:
+        download_path -- path to the folder to save installer file.
+                         Must be presetn to cause a file download.
         ids -- SHA256 of the installer to download.
+        file_name -- name to use for saved file. Must be present to cause a file download.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -130,6 +135,7 @@ class SensorDownload(ServiceClass):
 
         Keyword arguments:
         ids -- List of SHA256s for installers to retrieve details for. String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -176,6 +182,7 @@ class SensorDownload(ServiceClass):
         limit -- The maximum number of records to return. [integer, 1-500]
         offset -- The first item to return, where 0 is the latest item. (Integer)
                   Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
         sort -- The property to sort by. FQL syntax (e.g. version|ASC, release_date|DESC).
 
         This method only supports keywords for providing arguments.

@@ -51,6 +51,7 @@ class SpotlightVulnerabilities(ServiceClass):
 
         Keyword arguments:
         ids -- One or more vulnerability IDs (max: 400). String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -84,6 +85,7 @@ class SpotlightVulnerabilities(ServiceClass):
                   Wildcards '*' are unsupported.
         limit -- The number of items to return in this response (default: 100, max: 400).
                  Use with the after parameter to manage pagination of results. Integer.
+        parameters - full parameters payload, not required if using other keywords.
         sort -- The property to sort by.
                 FQL syntax (e.g. created_timestamp|desc, closed_timestamp|asc).
 
@@ -110,6 +112,7 @@ class SpotlightVulnerabilities(ServiceClass):
 
         Keyword arguments:
         ids -- One or more remediation IDs. String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -135,6 +138,7 @@ class SpotlightVulnerabilities(ServiceClass):
 
         Keyword arguments:
         ids -- One or more remediation IDs. String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.

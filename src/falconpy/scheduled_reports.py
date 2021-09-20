@@ -52,6 +52,7 @@ class ScheduledReports(ServiceClass):
 
         Keyword arguments:
         ids -- ID(s) of the reports to retrieve. String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -82,6 +83,7 @@ class ScheduledReports(ServiceClass):
                     use any common date format, such as '2010-05-15T14:55:21.892315096Z'.
         limit -- The maximum number of ids to return.
         offset -- Starting integer index of overall result set from which to return ids.
+        parameters - full parameters payload, not required if using other keywords.
         q -- Match query criteria, which includes all the filter string fields.
         sort -- The property to sort by. FQL syntax. (e.g. created_on.asc, last_updated_on.desc)
                 Possible sort fields: created_on, last_updated_on, last_execution_on, next_execution_on

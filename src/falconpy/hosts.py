@@ -175,6 +175,7 @@ class Hosts(ServiceClass):
 
         Keyword arguments:
         ids -- AID(s) of the hosts to retrieve. String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -202,6 +203,7 @@ class Hosts(ServiceClass):
         filter -- The filter expression that should be used to limit the results. FQL syntax.
         limit -- The maximum number of records to return. [integer, 1-5000]
         offset -- The integer offset to start retrieving records from.
+        parameters - full parameters payload, not required if using other keywords.
         sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
                 Available sort fields
                 device_id               machine_domain
@@ -249,6 +251,7 @@ class Hosts(ServiceClass):
         filter -- The filter expression that should be used to limit the results. FQL syntax.
         limit -- The maximum number of records to return. [integer, 1-5000]
         offset -- The string offset to page from, for the next result set.
+        parameters - full parameters payload, not required if using other keywords.
         sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
                 Available sort fields
                 device_id               machine_domain
@@ -294,6 +297,7 @@ class Hosts(ServiceClass):
         filter -- The filter expression that should be used to limit the results. FQL syntax.
         limit -- The maximum number of records to return. [integer, 1-5000]
         offset -- The integer offset to start retrieving records from.
+        parameters - full parameters payload, not required if using other keywords.
         sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
                 Available sort fields
                 device_id               machine_domain
