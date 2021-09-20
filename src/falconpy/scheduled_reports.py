@@ -1,4 +1,5 @@
-"""
+"""Falcon Scheduled Reports API Interface Class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-scheduled_reports - Falcon Scheduled Reports API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -42,18 +41,28 @@ from ._endpoint._scheduled_reports import _scheduled_reports_endpoints as Endpoi
 
 
 class ScheduledReports(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
+    """The only requirement to instantiate an instance of this class
     is a valid token provided by the Falcon API SDK OAuth2 class, an
     authorization object (oauth2.py) or a credential dictionary with
     client_id and client_secret containing valid API credentials.
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve scheduled reports for the provided report IDs.
+
+        Keyword arguments:
+        ids -- ID(s) of the reports to retrieve. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scheduled-reports/scheduled-reports.get
         """
-        Retrieve scheduled reports for the provided report IDs.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scheduled-reports/scheduled-reports.get
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -64,10 +73,28 @@ class ScheduledReports(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_reports(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Find all report IDs matching the query with filter
+
+        Keyword arguments:
+        filter -- FQL query specifying the filter parameters.
+                  Filter term criteria: type, trigger_reference, recipients, user_uuid, cid, trigger_params.metadata.
+                  Filter range criteria: created_on, modified_on;
+                    use any common date format, such as '2010-05-15T14:55:21.892315096Z'.
+        limit -- The maximum number of ids to return.
+        offset -- Starting integer index of overall result set from which to return ids.
+        q -- Match query criteria, which includes all the filter string fields.
+        sort -- The property to sort by. FQL syntax. (e.g. created_on.asc, last_updated_on.desc)
+                Possible sort fields: created_on, last_updated_on, last_execution_on, next_execution_on
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scheduled-reports/scheduled-reports.query
         """
-        Find all report IDs matching the query with filter
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scheduled-reports/scheduled-reports.query
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
