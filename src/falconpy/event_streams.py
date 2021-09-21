@@ -1,4 +1,5 @@
-"""
+"""CrowdStrike Falcon Event Stream API interface class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-event_streams - CrowdStrike Falcon Event Stream API interface class
 
 This is free and unencumbered software released into the public domain.
 
@@ -42,22 +41,48 @@ from ._endpoint._event_streams import _event_streams_endpoints as Endpoints
 
 
 class EventStreams(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, an
-    authorization object (oauth2.py) or a credential dictionary with
-    client_id and client_secret containing valid API credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (OAuth2.token())
     """
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def refresh_active_stream(self: object, partition: int = 0, parameters: dict = None, body: dict = None, **kwargs) -> dict:
-        """
-        Refresh an active event stream. Use the URL shown in a GET /sensors/entities/datafeed/v2 response.
+    def refresh_active_stream(self: object,
+                              partition: int = 0,
+                              parameters: dict = None,
+                              body: dict = None,
+                              **kwargs
+                              ) -> dict:
+        """Refresh an active event stream.
+        Use the URL shown in a listAvailableStreamsOAuth2 response.
+
+        Keyword arguments:
+        action_name -- Action to perform. Only allowed value is "refresh_active_stream_session".
+        appId -- Label that identifies your connection. 32 character alphanumeric.
+        body -- accepted but not used.
+        parameters -- full parameters payload, not required if using other keywords.
+        partition -- Instance partition to request data for.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/refreshActiveStreamSession
         """
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="refreshActiveStreamSession",
-            body=body,  # BODY is being passed here even though it is likely empty, addresses issue #247
+            body=body,  # Issue 247 - BODY is passed here even though it is empty
             keywords=kwargs,
             params=parameters,
             partition=partition
@@ -65,8 +90,21 @@ class EventStreams(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def list_available_streams(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Discover all event streams in your environment.
+        """Discover all event streams in your environment.
+
+        Keyword arguments:
+        appId -- Label that identifies your connection. 32 character alphanumeric.
+        format -- format for streaming events. Either 'json' or 'flatjson'.
+        parameters -- full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/listAvailableStreamsOAuth2
         """
         return process_service_request(
             calling_object=self,
