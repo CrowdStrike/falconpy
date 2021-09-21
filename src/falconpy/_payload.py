@@ -74,7 +74,7 @@ def create_generic_payload_list(submitted_keywords: dict,
     return returned_payload
 
 
-def create_quick_scan_aggregate_payload(submitted_keywords: dict) -> dict:
+def create_quick_scan_aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R0912
     """Creates the standardized BODY payload necessary for using the
     GetScansAggregates operation (get_scans_aggregates).
 
@@ -109,47 +109,47 @@ def create_quick_scan_aggregate_payload(submitted_keywords: dict) -> dict:
     }
     """
     returned_payload = {}
-    date_ranges = submitted_keywords.get("date_ranges", None)
-    if date_ranges:
-        returned_payload["date_ranges"] = date_ranges
-    field = submitted_keywords.get("field", None)
-    if field:
-        returned_payload["field"] = field
-    filter = submitted_keywords.get("filter", None)
-    if filter:
-        returned_payload["filter"] = filter
-    interval = submitted_keywords.get("interval", None)
-    if interval:
-        returned_payload["interval"] = interval
-    min_doc_count = submitted_keywords.get("min_doc_count", -1)
-    if min_doc_count >= 0:
-        returned_payload["min_doc_count"] = min_doc_count
-    missing = submitted_keywords.get("missing", None)
-    if missing:
-        returned_payload["missing"] = missing
-    name = submitted_keywords.get("name", None)
-    if name:
-        returned_payload["name"] = name
-    qstring = submitted_keywords.get("q", None)
-    if qstring:
-        returned_payload["q"] = qstring
-    ranges = submitted_keywords.get("ranges", None)
-    if ranges:
-        returned_payload["ranges"] = ranges
-    size = submitted_keywords.get("size", None)
-    if size:
-        returned_payload["size"] = size
-    sort = submitted_keywords.get("sort", None)
-    if sort:
-        returned_payload["sort"] = sort
-    sub_aggregates = submitted_keywords.get("sub_aggregates", None)
-    if sub_aggregates:
-        returned_payload["sub_aggregates"] = sub_aggregates
-    time_zone = submitted_keywords.get("time_zone", None)
-    if time_zone:
-        returned_payload["time_zone"] = time_zone
-    type_ = submitted_keywords.get("type", None)
-    if type_:
-        returned_payload["type"] = type_
+
+    if submitted_keywords.get("date_ranges", None):
+        returned_payload["date_ranges"] = submitted_keywords.get("date_ranges", None)
+
+    if submitted_keywords.get("field", None):
+        returned_payload["field"] = submitted_keywords.get("field", None)
+
+    if submitted_keywords.get("filter", None):
+        returned_payload["filter"] = submitted_keywords.get("filter", None)
+
+    if submitted_keywords.get("interval", None):
+        returned_payload["interval"] = submitted_keywords.get("interval", None)
+
+    if submitted_keywords.get("min_doc_count", -1) >= 0:
+        returned_payload["min_doc_count"] = submitted_keywords.get("min_doc_count", -1)
+
+    if submitted_keywords.get("missing", None):
+        returned_payload["missing"] = submitted_keywords.get("missing", None)
+
+    if submitted_keywords.get("name", None):
+        returned_payload["name"] = submitted_keywords.get("name", None)
+
+    if submitted_keywords.get("q", None):
+        returned_payload["q"] = submitted_keywords.get("q", None)
+
+    if submitted_keywords.get("ranges", None):
+        returned_payload["ranges"] = submitted_keywords.get("ranges", None)
+
+    if submitted_keywords.get("size", None):
+        returned_payload["size"] = submitted_keywords.get("size", None)
+
+    if submitted_keywords.get("sort", None):
+        returned_payload["sort"] = submitted_keywords.get("sort", None)
+
+    if submitted_keywords.get("sub_aggregates", None):
+        returned_payload["sub_aggregates"] = submitted_keywords.get("sub_aggregates", None)
+
+    if submitted_keywords.get("time_zone", None):
+        returned_payload["time_zone"] = submitted_keywords.get("time_zone", None)
+
+    if submitted_keywords.get("type", None):
+        returned_payload["type"] = submitted_keywords.get("type", None)
 
     return returned_payload
