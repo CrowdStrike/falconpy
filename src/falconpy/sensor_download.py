@@ -93,9 +93,9 @@ class SensorDownload(ServiceClass):
         Keyword arguments:
         download_path -- path to the folder to save installer file.
                          Must be presetn to cause a file download.
-        ids -- SHA256 of the installer to download.
+        id -- SHA256 of the installer to download.
         file_name -- name to use for saved file. Must be present to cause a file download.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
+        parameters - full parameters payload, not required if id is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
