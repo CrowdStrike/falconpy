@@ -78,7 +78,7 @@ def create_quick_scan_aggregate_payload(submitted_keywords: dict) -> dict:  # py
     """Creates the standardized BODY payload necessary for using the
     GetScansAggregates operation (get_scans_aggregates).
 
-    Creates the following payload, no parameters are required:
+    Creates the following payload, no parameters shown below are required:
     {
         "date_ranges": [
             {
