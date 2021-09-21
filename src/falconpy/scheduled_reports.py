@@ -41,10 +41,16 @@ from ._endpoint._scheduled_reports import _scheduled_reports_endpoints as Endpoi
 
 
 class ScheduledReports(ServiceClass):
-    """The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, an
-    authorization object (oauth2.py) or a credential dictionary with
-    client_id and client_secret containing valid API credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (oauth2.py)
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> dict:

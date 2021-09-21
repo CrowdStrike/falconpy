@@ -43,10 +43,16 @@ from ._endpoint._hosts import _hosts_endpoints as Endpoints
 
 
 class Hosts(ServiceClass):
-    """The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, an
-    authorization object (oauth2.py) or a credential dictionary with
-    client_id and client_secret containing valid API credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (oauth2.py)
     """
     @force_default(defaults=["parameters", "body"], default_types=["dict"])
     def perform_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
