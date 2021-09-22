@@ -26,6 +26,7 @@ class TestIntel:
             "query_intel_report_entities": falcon.QueryIntelReportEntities(),
             "get_intel_actor_entities": falcon.GetIntelActorEntities(ids='12345678'),
             "get_intel_indicator_entities": falcon.GetIntelIndicatorEntities(body={"ids":["1234567"]}),
+            "get_intel_indicator_entities_also": falcon.GetIntelIndicatorEntities("1234567"),
             "get_intel_report_pdf": falcon.GetIntelReportPDF(parameters={}),
             "get_intel_report_entities": falcon.GetIntelReportEntities(ids='12345678'),
             "get_intel_rule_file": falcon.GetIntelRuleFile(parameters={}),
