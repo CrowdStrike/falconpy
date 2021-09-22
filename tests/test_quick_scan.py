@@ -27,7 +27,7 @@ class TestQuickScan:
             "get_scans_aggregates": falcon.get_scans_aggregates(body={}),
             "get_scans": falcon.get_scans(ids="12345678"),
             "scan_samples": falcon.scan_samples(body={"samples": ["123456"]}),
-            "scan_samples": falcon.scan_samples("123456"),
+            "scan_samples_two": falcon.scan_samples("123456"),
             "query_submissions": falcon.query_submissions(),
         }
         for key in tests:
@@ -37,7 +37,7 @@ class TestQuickScan:
         return error_checks
 
     def service_scan_test_aggregate(self):
-        """Test the aggregate payload generate. Currently generates a 400."""
+        """Test the aggregate payload generated. Currently generates a 400 from the API."""
         result = falcon.get_scans_aggregates(date_ranges=[
                                                 {
                                                     "from": "string",
