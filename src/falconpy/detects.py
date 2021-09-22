@@ -1,4 +1,5 @@
-"""
+"""CrowdStrike Falcon Detections API interface class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-detects - CrowdStrike Falcon Detections API interface class
 
 This is free and unencumbered software released into the public domain.
 
@@ -37,20 +36,87 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request
+from ._payload import create_generic_payload_list, create_update_detects_payload
+from ._payload import create_aggregate_payload
 from ._service_class import ServiceClass
 from ._endpoint._detects import _detects_endpoints as Endpoints
 
 
 class Detects(ServiceClass):
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (OAuth2.token())
     """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
-    """
-    def get_aggregate_detects(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_aggregate_detects(self: object, body: dict = None, **kwargs) -> dict:
+        """Get detect aggregates as specified via json in request body.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "field": "string",
+                        "filter": "string",
+                        "interval": "string",
+                        "min_doc_count": 0,
+                        "missing": "string",
+                        "name": "string",
+                        "q": "string",
+                        "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                        ],
+                        "size": 0,
+                        "sort": "string",
+                        "sub_aggregates": [
+                            null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
+        date_ranges -- List of dictionaries.
+        field -- String.
+        filter -- FQL syntax. String.
+        interval -- String.
+        min_doc_count -- Minimum number of documents required to match. Integer.
+        missing -- String.
+        name -- Scan name. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetAggregateDetects
         """
-        Get detect aggregates as specified via json in request body.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetAggregateDetects
+        if not body:
+            body = create_aggregate_payload(submitted_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -58,47 +124,145 @@ class Detects(ServiceClass):
             body=body
             )
 
-    def update_detects_by_ids(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_detects_by_ids(self: object, *args, body: dict = None, **kwargs) -> dict:
+        """Modify the state, assignee, and visibility of detections.
+
+        Keyword arguments:
+        assigned_to_uuid -- A user ID to assign the detection to.
+        body -- full body payload, not required when using other keywords.
+                {
+                    "assigned_to_uuid": "string",
+                    "comment": "string",
+                    "ids": [
+                        "string"
+                    ],
+                    "show_in_ui": true,
+                    "status": "string"
+                }
+        comment -- Optional comment to add to the detection. Comments are displayed with
+                   the detection in Falcon and are usually used to provide context or
+                   notes for other Falcon users. A detection can have multiple comments
+                   over time.
+        ids -- ID(s) of the detection to update. String or list of strings.
+        show_in_ui -- Boolean determining if this detection is displayed in the Falcon
+                      console.
+        status -- Current status of the detection. Allowed values:
+                  ignored           new
+                  in_progress       true_positive
+                  false_positive
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/UpdateDetectsByIdsV2
         """
-        Modify the state, assignee, and visibility of detections.
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/UpdateDetectsByIdsV2
-        body_validator = {
-            "assigned_to_uuid": str,
-            "ids": list,
-            "show_in_ui": bool,
-            "status": str,
-            "comment": str
-        }
+        if not body:
+            body = create_update_detects_payload(current_payload=create_generic_payload_list(
+                                                    submitted_arguments=args,
+                                                    submitted_keywords=kwargs,
+                                                    payload_value="ids"
+                                                    ),
+                                                 passed_keywords=kwargs
+                                                 )
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="UpdateDetectsByIdsV2",
             body=body,
-            body_validator=body_validator,
-            body_required=["ids"]
+            body_validator={
+                    "assigned_to_uuid": str,
+                    "comment": str,
+                    "ids": list,
+                    "show_in_ui": bool,
+                    "status": str
+                    } if self.validate_payloads else None,
+            body_required=["ids"] if self.validate_payloads else None
             )
 
-    def get_detect_summaries(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_detect_summaries(self: object, *args, body: dict = None, **kwargs) -> dict:
+        """View information about detections.
+
+        Keyword arguments:
+        body -- full body payload, not required when ids keyword is provided.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- ID(s) of the indicator entities to retrieve. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetDetectSummaries
         """
-        View information about detections.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetDetectSummaries
+        if not body:
+            body = create_generic_payload_list(submitted_arguments=args,
+                                               submitted_keywords=kwargs,
+                                               payload_value="ids"
+                                               )
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetDetectSummaries",
             body=body,
-            body_validator={"ids": list},
-            body_required=["ids"]
+            body_validator={"ids": list} if self.validate_payloads else None,
+            body_required=["ids"] if self.validate_payloads else None
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_detects(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for detection IDs that match a given query.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  An asterisk wildcard '*' includes all results.
+                  Available filter parameters:
+                  adversary_ids         max_confidence
+                  assigned_to_name      max_severity
+                  cid                   max_severity_displayname
+                  date_updated          seconds_to_triaged
+                  detection_id          seconds_to_resolved
+                  first_behavior        status
+                  last_behavior
+
+        Find more filtering options at
+        https://falcon.crowdstrike.com/documentation/86/detections-monitoring-apis#find-detections
+
+        limit -- The maximum number of detections to return in this response.
+                 [Integer, default: 9999; max: 9999]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The first detection to return, where 0 is the latest detection.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        q -- Search all detection metadata for the provided string.
+        sort -- The property to sort by. FQL syntax (e.g. last_behavior|asc).
+                Available sort fields:
+                adversary_id        last_behavior
+                devices.hostname    max_confidence
+                first_behavior      max_severity
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/QueryDetects
         """
-        Search for detection IDs that match a given query.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/QueryDetects
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
