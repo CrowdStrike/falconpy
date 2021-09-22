@@ -27,6 +27,7 @@ class TestQuickScan:
             "get_scans_aggregates": falcon.get_scans_aggregates(body={}),
             "get_scans": falcon.get_scans(ids="12345678"),
             "scan_samples": falcon.scan_samples(body={"samples": ["123456"]}),
+            "scan_samples": falcon.scan_samples("123456"),
             "query_submissions": falcon.query_submissions(),
         }
         for key in tests:
@@ -73,5 +74,5 @@ class TestQuickScan:
     def test_scan_aggregates_payload(self):
         assert self.service_scan_test_aggregate() is True
 
-    def test_errors(self):
+    def test_all_functionality(self):
         assert self.service_scan_test_all() is True
