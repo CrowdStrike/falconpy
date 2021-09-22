@@ -102,7 +102,9 @@ class Hosts(ServiceClass):
                 operation_id=operation_id,
                 body=body,
                 keywords=kwargs,
-                params=parameters
+                params=parameters,
+                body_validator={"ids": list} if self.validate_payloads else None,
+                body_required=["ids"] if self.validate_payloads else None
                 )
         else:
             returned = generate_error_result("Invalid value specified for action_name parameter.")
@@ -374,7 +376,9 @@ class Hosts(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="QueryDeviceLoginHistory",
-            body=body
+            body=body,
+            body_validator={"ids": list} if self.validate_payloads else None,
+            body_required=["ids"] if self.validate_payloads else None
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -410,7 +414,9 @@ class Hosts(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="QueryGetNetworkAddressHistoryV1",
-            body=body
+            body=body,
+            body_validator={"ids": list} if self.validate_payloads else None,
+            body_required=["ids"] if self.validate_payloads else None
             )
 
     # These method names align to the operation IDs in the API but

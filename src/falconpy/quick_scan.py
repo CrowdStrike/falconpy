@@ -104,6 +104,8 @@ class QuickScan(ServiceClass):
 
         This method only supports keywords for providing arguments.
 
+        This method does not support body payload validation.
+
         Returns: dict object containing API response.
 
         HTTP Method: POST
@@ -182,7 +184,9 @@ class QuickScan(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="ScanSamples",
-            body=body
+            body=body,
+            body_validator={"samples": list} if self.validate_payloads else None,
+            body_required=["samples"] if self.validate_payloads else None
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
