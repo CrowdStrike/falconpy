@@ -54,15 +54,17 @@ _USER_AGENT = f"{_TITLE}/{str(_VERSION)}"
 
 def validate_payload(validator: dict, params: dict, required: list = None) -> bool:
     """Validates parameters and body payloads sent to the API."""
-    # Repurposed with permission from https://github.com/yaleman/crowdstrike_api
-    #                                          __
-    #                                         ( (\
-    #                                          \ =\
-    #                                         __\_ `--\
-    #                                        (____))(  \----
-    #                                        (____)) _     Thanks
-    #                                        (____))       James!
-    #                                        (____))____/----
+    # Repurposed with permission from
+    # https://github.com/yaleman/crowdstrike_api
+    #         __
+    #        ( (\
+    #         \ =\
+    #        __\_ `--\
+    #       (____))(  \----
+    #       (____)) _     Thanks
+    #       (____))       James!
+    #       (____))____/----
+    #
     if required:
         for key in required:
             if key not in params:
@@ -72,7 +74,9 @@ def validate_payload(validator: dict, params: dict, required: list = None) -> bo
         if key not in validator:
             raise ValueError(f"{key} is not a valid argument.")
         if not isinstance(params[key], validator[key]):
-            raise TypeError(f"{key} is not the valid type. Should be: {validator[key]}, was {type(params[key])}")
+            should = validator[key]
+            was = type(params[key])
+            raise TypeError(f"{key} is not the valid type. Should be: {should}, was {was}")
 
     return True
 

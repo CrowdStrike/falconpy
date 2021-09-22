@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from .oauth2 import OAuth2 as FalconAuth
 
-# pylint: disable=R0902  # Eight is reasonable here
+# pylint: disable=R0902  # Nine is reasonable
 
 
 class ServiceClass:
@@ -64,10 +64,15 @@ class ServiceClass:
                  }
         client_id -- Client ID for the CrowdStrike API. Mutually exclusive to creds.
         client_secret -- Client Secret for the CrowdStriek API. Mutually exclusive to creds.
+        validate_payload -- Boolean specifying if body payloads should be validated.
+                            Defaults to True.
 
         This method only accepts keywords to specify arguments.
         """
-        access_token, self.ssl_verify, self.timeout = self.parse_keywords(kwargs)
+        access_token = kwargs.get("access_token", None)
+        self.ssl_verify = kwargs.get("ssl_verify", True)
+        self.timeout = kwargs.get("timeout", None)
+        self.validate_payloads = kwargs.get("validate_payloads", True)
         self.refreshable = False
         client_id = kwargs.get("client_id", None)
         client_secret = kwargs.get("client_secret", None)
@@ -95,7 +100,8 @@ class ServiceClass:
             self.base_url = auth_object.base_url
             self.ssl_verify = auth_object.ssl_verify
             self.proxy = auth_object.proxy
-            # At this point in time, you cannot override the auth_object's timeout per class
+            # At this point in time, you cannot override
+            # the auth_object's timeout per class instance
             self.timeout = auth_object.timeout
             self.refreshable = True
         else:
@@ -137,19 +143,3 @@ class ServiceClass:
             result = self.auth_object.token_expired()
 
         return result
-
-    @staticmethod
-    def parse_keywords(passed_keywords: dict):
-        """Parses passed keywords to _init, setting defaults"""
-        access_token = None
-        ssl_verify = True
-        timeout = None
-        for key, val in passed_keywords.items():
-            if key.lower() == "access_token":
-                access_token = val
-            if key.lower() == "ssl_verify":
-                ssl_verify = val
-            if key.lower() == "timeout":
-                timeout = val
-
-        return access_token, ssl_verify, timeout
