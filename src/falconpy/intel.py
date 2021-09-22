@@ -265,7 +265,9 @@ class Intel(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetIntelIndicatorEntities",
-            body=body
+            body=body,
+            body_validator={"ids": list} if self.validate_payloads else None,
+            body_required=["ids"] if self.validate_payloads else None
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
