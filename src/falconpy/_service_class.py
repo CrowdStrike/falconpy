@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from ._util import confirm_base_url
 from .oauth2 import OAuth2 as FalconAuth
 
 # pylint: disable=R0902  # Nine is reasonable
@@ -72,8 +73,8 @@ class ServiceClass:
         access_token = kwargs.get("access_token", None)
         self.ssl_verify = kwargs.get("ssl_verify", True)
         self.timeout = kwargs.get("timeout", None)
-        # Currently defaulting to validation disabled
-        self.validate_payloads = kwargs.get("validate_payloads", False)
+        # Currently defaulting to validation enabled
+        self.validate_payloads = kwargs.get("validate_payloads", True)
         self.refreshable = False
         client_id = kwargs.get("client_id", None)
         client_secret = kwargs.get("client_secret", None)
@@ -108,7 +109,7 @@ class ServiceClass:
         else:
             if creds:
                 auth_object = FalconAuth(creds=creds,
-                                         base_url=base_url,
+                                         base_url=confirm_base_url(base_url),
                                          proxy=proxy,
                                          ssl_verify=self.ssl_verify,
                                          timeout=self.timeout
@@ -126,7 +127,7 @@ class ServiceClass:
                 self.auth_object = None
                 self.headers = {"Authorization": f"Bearer {access_token}"}
 
-            self.base_url = base_url
+            self.base_url = confirm_base_url(base_url)
             self.proxy = proxy
 
     def authenticated(self):

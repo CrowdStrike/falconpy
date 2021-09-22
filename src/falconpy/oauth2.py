@@ -36,7 +36,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import time
-from ._util import perform_request, generate_b64cred, generate_error_result
+from ._util import perform_request, generate_b64cred
+from ._util import confirm_base_url, generate_error_result
 from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
 
 
@@ -79,7 +80,7 @@ class OAuth2:
         elif not creds:
             creds = {}
         self.creds = creds
-        self.base_url = base_url
+        self.base_url = confirm_base_url(base_url)
         self.ssl_verify = ssl_verify
         self.timeout = timeout
         self.proxy = proxy

@@ -37,7 +37,8 @@ For more information, please refer to <https://unlicense.org>
 """
 import time
 from ._util import _ALLOWED_METHODS
-from ._util import perform_request, generate_b64cred, generate_error_result, calc_url_from_args
+from ._util import perform_request, generate_b64cred, generate_error_result
+from ._util import confirm_base_url, calc_url_from_args
 from ._endpoint import api_endpoints
 
 
@@ -81,7 +82,7 @@ class APIHarness:
         elif not creds:
             creds = {}
         self.creds = creds
-        self.base_url = base_url
+        self.base_url = confirm_base_url(base_url)
         self.ssl_verify = ssl_verify
         self.proxy = proxy
         self.timeout = timeout

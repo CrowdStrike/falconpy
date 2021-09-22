@@ -44,6 +44,7 @@ import urllib3
 from urllib3.exceptions import InsecureRequestWarning
 from ._version import _TITLE, _VERSION
 from ._result import Result
+from ._base_url import BaseURL
 urllib3.disable_warnings(InsecureRequestWarning)
 
 # Restrict requests to only allowed HTTP methods
@@ -394,3 +395,19 @@ def process_service_request(calling_object: object,
     }
 
     return service_request(**new_keywords)
+
+
+def confirm_base_url(provided_base: str = "https://api.crowdstrike.com"):
+    returned_base = "https://api.crowdstrike.com"
+    if "://" not in provided_base:
+        # They're passing the name instead of the URL
+        try:
+            returned_base = f"https://{BaseURL[provided_base.upper()].value}"
+        except KeyError:
+            # Invalid base URL name, fall back to US-1
+            pass
+    else:
+        # They passed a full URL
+        returned_base = provided_base
+
+    return returned_base
