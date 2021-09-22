@@ -26,7 +26,7 @@ class TestQuickScan:
         tests = {
             "get_scans_aggregates": falcon.get_scans_aggregates(body={}),
             "get_scans": falcon.get_scans(ids="12345678"),
-            "scan_samples": falcon.scan_samples(body={}),
+            "scan_samples": falcon.scan_samples(body={"samples": ["123456"]}),
             "query_submissions": falcon.query_submissions(),
         }
         for key in tests:
