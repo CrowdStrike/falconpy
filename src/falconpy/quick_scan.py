@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import create_generic_payload_list, create_quick_scan_aggregate_payload
+from ._payload import create_generic_payload_list, create_aggregate_payload
 from ._service_class import ServiceClass
 from ._endpoint._quick_scan import _quick_scan_endpoints as Endpoints
 
@@ -112,7 +112,7 @@ class QuickScan(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/GetScansAggregates
         """
         if not body:
-            body = create_quick_scan_aggregate_payload(submitted_keywords=kwargs)
+            body = create_aggregate_payload(submitted_keywords=kwargs)
 
         return process_service_request(
             calling_object=self,
