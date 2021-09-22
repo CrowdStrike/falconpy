@@ -74,9 +74,10 @@ def create_generic_payload_list(submitted_keywords: dict,
     return returned_payload
 
 
-def create_quick_scan_aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R0912
+def create_aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R0912
     """Creates the standardized BODY payload necessary for using the
-    GetScansAggregates operation (get_scans_aggregates).
+    GetScansAggregates (get_scans_aggregates) and GetAggregateDetects
+    (get_aggregate_detects) operations.
 
     Creates the following payload, no parameters shown below are required:
     {
@@ -153,3 +154,17 @@ def create_quick_scan_aggregate_payload(submitted_keywords: dict) -> dict:  # py
         returned_payload["type"] = submitted_keywords.get("type", None)
 
     return returned_payload
+
+
+def create_update_detects_payload(current_payload: dict, passed_keywords: dict) -> dict:
+    """Updates the provided payload with any viable parameters provided as keywords."""
+    if passed_keywords.get("assigned_to_uuid", None):
+        current_payload["assigned_to_uuid"] = passed_keywords.get("assigned_to_uuid", None)
+    if passed_keywords.get("show_in_ui", None):
+        current_payload["show_in_ui"] = passed_keywords.get("show_in_ui", None)
+    if passed_keywords.get("status", None):
+        current_payload["status"] = passed_keywords.get("status", None)
+    if passed_keywords.get("comment", None):
+        current_payload["comment"] = passed_keywords.get("comment", None)
+
+    return current_payload
