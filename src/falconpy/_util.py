@@ -398,14 +398,18 @@ def process_service_request(calling_object: object,
 
 
 def confirm_base_url(provided_base: str = "https://api.crowdstrike.com"):
+    """Confirms the passed base_url value matches URL syntax. If it does
+    not, it is looked up in the BaseURL enum. If the value is not found
+    within the enum, https:// is prepended to the value and then it is
+    used for API requests."""
     returned_base = "https://api.crowdstrike.com"
     if "://" not in provided_base:
         # They're passing the name instead of the URL
         try:
             returned_base = f"https://{BaseURL[provided_base.upper()].value}"
         except KeyError:
-            # Invalid base URL name, fall back to US-1
-            pass
+            # Invalid base URL name, assume they didn't give us https
+            returned_base = f"https://{provided_base}"
     else:
         # They passed a full URL
         returned_base = provided_base

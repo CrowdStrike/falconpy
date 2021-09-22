@@ -39,6 +39,9 @@ from enum import Enum
 
 
 class BaseURL(Enum):
+    """This enum enables developers to specify base URL by
+    name instead of URL. Case insensitive. Passing a URL
+    with or without https:// is still supported."""
     US1 = "api.crowdstrike.com"
     US2 = "api.us-2.crowdstrike.com"
     EU1 = "api.eu-1.crowdstrike.com"
