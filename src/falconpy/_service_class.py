@@ -72,8 +72,8 @@ class ServiceClass:
         access_token = kwargs.get("access_token", None)
         self.ssl_verify = kwargs.get("ssl_verify", True)
         self.timeout = kwargs.get("timeout", None)
-        # Currently defaulting to validation enabled
-        self.validate_payloads = kwargs.get("validate_payloads", True)
+        # Currently defaulting to validation disabled
+        self.validate_payloads = kwargs.get("validate_payloads", False)
         self.refreshable = False
         client_id = kwargs.get("client_id", None)
         client_secret = kwargs.get("client_secret", None)
