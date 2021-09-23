@@ -84,7 +84,7 @@ class TestRecon:
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
-                print(f"{key}: {tests[key]}")
+                # print(f"{key}: {tests[key]}")
                 error_checks = False
 
         return error_checks
