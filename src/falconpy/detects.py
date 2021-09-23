@@ -196,7 +196,7 @@ class Detects(ServiceClass):
                         "string"
                     ]
                 }
-        ids -- ID(s) of the indicator entities to retrieve. String or list of strings.
+        ids -- ID(s) of the detections to retrieve. String or list of strings.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
