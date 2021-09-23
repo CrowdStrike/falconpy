@@ -229,7 +229,7 @@ class Detects(ServiceClass):
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
                   An asterisk wildcard '*' includes all results.
-                  
+
                   AVAILABLE FILTERS
                   General
                   ----------------------------------------------------
