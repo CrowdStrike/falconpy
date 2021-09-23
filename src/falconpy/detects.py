@@ -229,7 +229,9 @@ class Detects(ServiceClass):
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
                   An asterisk wildcard '*' includes all results.
-                  Available filter parameters:
+                  AVAILABLE FILTERS
+                  General: (filter)
+                  ----------------------------------------------------
                   adversary_ids         max_confidence
                   assigned_to_name      max_severity
                   cid                   max_severity_displayname
@@ -238,7 +240,55 @@ class Detects(ServiceClass):
                   first_behavior        status
                   last_behavior
 
-        Find more filtering options at
+                  Behavioral (behaviors.filter)
+                  ----------------------------------------------------
+                  alleged_filetype          pattern_disposition
+                  behavior_id               scenario
+                  cmdline                   severity
+                  confidence                sha256
+                  control_graph_id          tactic
+                  device_id                 technique
+                  filename                  timestamp
+                  ioc_source                triggering_process_id
+                  ioc_type                  triggering_process_graph_id
+                  ioc_value                 user_id
+                  md5                       user_name
+                  objective
+                  parent_details.parent_cmdline
+                  parent_details.parent_md5
+                  parent_details.parent_process_id
+                  parent_details.parent_process_graph_id
+                  parent_details.parent_sha256
+
+                  Devices (device.filter)
+                  ----------------------------------------------------
+                  agent_load_flags          machine_domain
+                  agent_local_time          major_version
+                  agent_version             minor_version
+                  bios_manufacturer         modified_timestamp
+                  bios_version              os_version
+                  cid                       ou
+                  config_id_base            platform_id
+                  config_id_build           platform_name
+                  config_id_platform        product_type
+                  cpu_signature             product_type_desc
+                  device_id                 release_group
+                  external_ip               reduced_functionality_mode
+                  first_seen                serial_number
+                  hostname                  site_name
+                  last_seen                 status
+                  local_ip                  system_product_name
+                  mac_address               system_manufacturer
+
+                  Misc (filter)
+                  ----------------------------------------------------
+                  hostinfo.domain
+                  hostinfo.active_directory_dn_display
+
+                  quarantined_files.id      quarantined_files.state
+                  quarantined_files.paths   quarantined_files.sha256
+
+        For more detail regarding filtering options, please review:
         https://falcon.crowdstrike.com/documentation/86/detections-monitoring-apis#find-detections
 
         limit -- The maximum number of detections to return in this response.
