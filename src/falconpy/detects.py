@@ -229,8 +229,9 @@ class Detects(ServiceClass):
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
                   An asterisk wildcard '*' includes all results.
+                  
                   AVAILABLE FILTERS
-                  General: (filter)
+                  General
                   ----------------------------------------------------
                   adversary_ids         max_confidence
                   assigned_to_name      max_severity
@@ -240,7 +241,7 @@ class Detects(ServiceClass):
                   first_behavior        status
                   last_behavior
 
-                  Behavioral (behaviors.filter)
+                  Behavioral (behaviors.filter) Ex: behaviors.md5
                   ----------------------------------------------------
                   alleged_filetype          pattern_disposition
                   behavior_id               scenario
@@ -260,7 +261,7 @@ class Detects(ServiceClass):
                   parent_details.parent_process_graph_id
                   parent_details.parent_sha256
 
-                  Devices (device.filter)
+                  Devices (device.filter)  Ex: device.platform_name
                   ----------------------------------------------------
                   agent_load_flags          machine_domain
                   agent_local_time          major_version
@@ -280,7 +281,7 @@ class Detects(ServiceClass):
                   local_ip                  system_product_name
                   mac_address               system_manufacturer
 
-                  Misc (filter)
+                  Misc
                   ----------------------------------------------------
                   hostinfo.domain
                   hostinfo.active_directory_dn_display
