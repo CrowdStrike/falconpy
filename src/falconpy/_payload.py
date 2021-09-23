@@ -75,9 +75,7 @@ def create_generic_payload_list(submitted_keywords: dict,
 
 
 def create_aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R0912
-    """Creates the standardized BODY payload necessary for using the
-    GetScansAggregates (get_scans_aggregates) and GetAggregateDetects
-    (get_aggregate_detects) operations.
+    """Creates the standardized BODY payload necessary for aggregate operations.
 
     Creates the following payload, no parameters shown below are required:
     {
@@ -168,3 +166,152 @@ def create_update_detects_payload(current_payload: dict, passed_keywords: dict) 
         current_payload["comment"] = passed_keywords.get("comment", None)
 
     return current_payload
+
+
+def handle_recon_rule_params(inbound: dict) -> dict:
+    """Handles the payload formatting for a single rule object"""
+    returned_dict = {}
+    if inbound.get("filter", None):
+        returned_dict["filter"] = inbound.get("filter", None)
+    if inbound.get("id", None):
+        returned_dict["id"] = inbound.get("id", None)
+    if inbound.get("name", None):
+        returned_dict["name"] = inbound.get("name", None)
+    if inbound.get("permissions", None):
+        returned_dict["permissions"] = inbound.get("permissions", None)
+    if inbound.get("priority", None):
+        returned_dict["priority"] = inbound.get("priority", None)
+
+    return returned_dict
+
+
+def create_recon_rules_payload(passed_keywords: dict) -> dict:
+    """Creates a properly formatted payload for recon rule handling.
+    Creates a list of dictionaries.
+            [
+                {
+                    "filter": "string",
+                    "id": "string",
+                    "name": "string",
+                    "permissions": "string",
+                    "priority": "string"
+                }
+            ]
+    """
+    returned_rules = []
+    provided_rules = passed_keywords.get("rules", None)
+    if provided_rules:
+        # Not entirely sure why you wouldn't just pass the body
+        if isinstance(provided_rules, list):
+            for rule in passed_keywords.get("rules", None):
+                returned_rules.append(handle_recon_rule_params(rule))
+        else:
+            # Fall back to a single rule
+            returned_rules.append(handle_recon_rule_params(passed_keywords))
+    else:
+        # Only one rule was provided, use the keywords
+        returned_rules.append(handle_recon_rule_params(passed_keywords))
+
+    return returned_rules
+
+
+def create_recon_notifications_payload(passed_keywords: dict) -> dict:
+    """Creates a properly formatted payload for a recon notification
+    payload. Generates a list of dictionaries, but is designed to handle
+    just one notification. (For multiple notifications use the body
+    payload keyword.)
+    [
+        {
+            "assigned_to_uuid": "string",
+            "id": "string",
+            "status": "string"
+        }
+    ]
+    """
+    returned_payload = []
+    notification = {}
+    if passed_keywords.get("assigned_to_uuid", None):
+        notification["assigned_to_uuid"] = passed_keywords.get("assigned_to_uuid", None)
+    if passed_keywords.get("id", None):
+        notification["id"] = passed_keywords.get("id", None)
+    if passed_keywords.get("status", None):
+        notification["status"] = passed_keywords.get("status", None)
+
+    returned_payload.append(notification)
+
+    return returned_payload
+
+
+def create_recon_action_update_payload(passed_keywords: dict) -> dict:
+    """Creates a properly formatted payload for handling recon actions.
+    {
+        "frequency": "string",
+        "id": "string",
+        "recipients": [
+            "string"
+        ],
+        "status": "string"
+    }
+    """
+    returned_payload = {}
+    if passed_keywords.get("frequency", None):
+        returned_payload["frequency"] = passed_keywords.get("frequency", None)
+    if passed_keywords.get("id", None):
+        returned_payload["id"] = passed_keywords.get("id", None)
+    if passed_keywords.get("recipients", None):
+        returned_payload["recipients"] = passed_keywords.get("recipients", None)
+    if passed_keywords.get("status", None):
+        returned_payload["status"] = passed_keywords.get("status", None)
+
+    return returned_payload
+
+
+def create_recon_action_payload(passed_keywords: dict) -> dict:
+    """Creates a properly formatted payload for attaching recon
+    actions to a monitoring rule.
+    {
+        "actions": [
+            {
+                "frequency": "string",
+                "recipients": [
+                    "string"
+                ],
+                "type": "string"
+            }
+        ],
+        "rule_id": "string"
+    }
+    """
+    returned_payload = {}
+    returned_payload["rule_id"] = passed_keywords.get("rule_id", None)
+    if passed_keywords.get("actions", None):
+        returned_payload["actions"] = passed_keywords.get("actions", None)
+    else:
+        action = {}
+        if passed_keywords.get("frequency", None):
+            action["frequency"] = passed_keywords.get("frequency", None)
+        if passed_keywords.get("recipients", None):
+            action["recipients"] = passed_keywords.get("recipients", None)
+        if passed_keywords.get("type", None):
+            action["type"] = passed_keywords.get("type", None)
+        returned_payload["actions"] = []
+        returned_payload["actions"].append(action)
+
+    return returned_payload
+
+
+def create_recon_rule_preview_payload(passed_keywords: dict) -> dict:
+    """Creates a properly formatted payload for retrieving
+    a rule preview from recon.
+    {
+        "filter": "string",
+        "topic": "string"
+    }
+    """
+    returned_payload = {}
+    if passed_keywords.get("filter", None):
+        returned_payload["filter"] = passed_keywords.get("filter", None)
+    if passed_keywords.get("topic", None):
+        returned_payload["topic"] = passed_keywords.get("topic", None)
+
+    return returned_payload
