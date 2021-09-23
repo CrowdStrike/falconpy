@@ -233,12 +233,12 @@ class Detects(ServiceClass):
                   AVAILABLE FILTERS
                   General
                   ----------------------------------------------------
-                  adversary_ids         max_confidence
-                  assigned_to_name      max_severity
-                  cid                   max_severity_displayname
-                  date_updated          seconds_to_triaged
-                  detection_id          seconds_to_resolved
-                  first_behavior        status
+                  adversary_ids             max_confidence
+                  assigned_to_name          max_severity
+                  cid                       max_severity_displayname
+                  date_updated              seconds_to_triaged
+                  detection_id              seconds_to_resolved
+                  first_behavior            status
                   last_behavior
 
                   Behavioral (behaviors.filter) Ex: behaviors.md5
