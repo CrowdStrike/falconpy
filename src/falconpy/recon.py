@@ -37,9 +37,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import process_service_request, force_default, handle_single_argument
-from ._payload import create_recon_rules_payload, create_recon_notifications_payload
-from ._payload import create_recon_action_payload, create_recon_action_update_payload
-from ._payload import create_recon_rule_preview_payload, create_aggregate_payload
+from ._payload import recon_rules_payload, recon_notifications_payload
+from ._payload import recon_action_payload, recon_action_update_payload
+from ._payload import recon_rule_preview_payload, aggregate_payload
 from ._service_class import ServiceClass
 from ._endpoint._recon import _recon_endpoints as Endpoints
 
@@ -117,7 +117,7 @@ class Recon(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/AggregateNotificationsV1
         """
         if not body:
-            body = create_aggregate_payload(submitted_keywords=kwargs)
+            body = aggregate_payload(submitted_keywords=kwargs)
 
         return process_service_request(
             calling_object=self,
@@ -149,7 +149,7 @@ class Recon(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/PreviewRuleV1
         """
         if not body:
-            body = create_recon_rule_preview_payload(passed_keywords=kwargs)
+            body = recon_rule_preview_payload(passed_keywords=kwargs)
 
         return process_service_request(
             calling_object=self,
@@ -230,7 +230,7 @@ class Recon(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateActionV1
         """
         if not body:
-            body = create_recon_action_payload(passed_keywords=kwargs)
+            body = recon_action_payload(passed_keywords=kwargs)
 
         # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateActionsV1
         return process_service_request(
@@ -295,7 +295,7 @@ class Recon(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateActionV1
         """
         if not body:
-            body = create_recon_action_update_payload(passed_keywords=kwargs)
+            body = recon_action_update_payload(passed_keywords=kwargs)
 
         return process_service_request(
             calling_object=self,
@@ -480,7 +480,7 @@ class Recon(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateNotificationsV1
         """
         if not body:
-            body = create_recon_notifications_payload(passed_keywords=kwargs)
+            body = recon_notifications_payload(passed_keywords=kwargs)
 
         return process_service_request(
             calling_object=self,
@@ -548,7 +548,7 @@ class Recon(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateRulesV1
         """
         if not body:
-            body = create_recon_rules_payload(passed_keywords=kwargs)
+            body = recon_rules_payload(passed_keywords=kwargs)
 
         return process_service_request(
             calling_object=self,
@@ -616,7 +616,7 @@ class Recon(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateRulesV1
         """
         if not body:
-            body = create_recon_rules_payload(passed_keywords=kwargs)
+            body = recon_rules_payload(passed_keywords=kwargs)
 
         return process_service_request(
             calling_object=self,

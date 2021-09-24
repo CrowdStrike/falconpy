@@ -36,8 +36,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request
-from ._payload import create_generic_payload_list, create_update_detects_payload
-from ._payload import create_aggregate_payload
+from ._payload import generic_payload_list, update_detects_payload
+from ._payload import aggregate_payload
 from ._service_class import ServiceClass
 from ._endpoint._detects import _detects_endpoints as Endpoints
 
@@ -115,7 +115,7 @@ class Detects(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetAggregateDetects
         """
         if not body:
-            body = create_aggregate_payload(submitted_keywords=kwargs)
+            body = aggregate_payload(submitted_keywords=kwargs)
 
         return process_service_request(
             calling_object=self,
@@ -163,13 +163,14 @@ class Detects(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/UpdateDetectsByIdsV2
         """
         if not body:
-            body = create_update_detects_payload(current_payload=create_generic_payload_list(
-                                                    submitted_arguments=args,
-                                                    submitted_keywords=kwargs,
-                                                    payload_value="ids"
-                                                    ),
-                                                 passed_keywords=kwargs
-                                                 )
+            body = update_detects_payload(current_payload=generic_payload_list(
+                                                submitted_arguments=args,
+                                                submitted_keywords=kwargs,
+                                                payload_value="ids"
+                                                ),
+                                          passed_keywords=kwargs
+                                          )
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -209,10 +210,11 @@ class Detects(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetDetectSummaries
         """
         if not body:
-            body = create_generic_payload_list(submitted_arguments=args,
-                                               submitted_keywords=kwargs,
-                                               payload_value="ids"
-                                               )
+            body = generic_payload_list(submitted_arguments=args,
+                                        submitted_keywords=kwargs,
+                                        payload_value="ids"
+                                        )
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,

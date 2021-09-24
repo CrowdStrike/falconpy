@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import create_generic_payload_list
+from ._payload import generic_payload_list
 from ._service_class import ServiceClass
 from ._endpoint._intel import _intel_endpoints as Endpoints
 
@@ -257,10 +257,11 @@ class Intel(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetIntelIndicatorEntities
         """
         if not body:
-            body = create_generic_payload_list(submitted_arguments=args,
-                                               submitted_keywords=kwargs,
-                                               payload_value="ids"
-                                               )
+            body = generic_payload_list(submitted_arguments=args,
+                                        submitted_keywords=kwargs,
+                                        payload_value="ids"
+                                        )
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,

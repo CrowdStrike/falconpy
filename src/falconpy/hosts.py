@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from ._util import generate_error_result, force_default, args_to_params
 from ._util import process_service_request, handle_single_argument
-from ._payload import create_generic_payload_list
+from ._payload import generic_payload_list
 from ._service_class import ServiceClass
 from ._endpoint._hosts import _hosts_endpoints as Endpoints
 
@@ -88,7 +88,7 @@ class Hosts(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/PerformActionV2
         """
         if not body:
-            body = create_generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
 
         _allowed_actions = ['contain', 'lift_containment', 'hide_host', 'unhide_host']
         operation_id = "PerformActionV2"
@@ -367,10 +367,10 @@ class Hosts(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDeviceLoginHistory
         """
         if not body:
-            body = create_generic_payload_list(submitted_arguments=args,
-                                               submitted_keywords=kwargs,
-                                               payload_value="ids"
-                                               )
+            body = generic_payload_list(submitted_arguments=args,
+                                        submitted_keywords=kwargs,
+                                        payload_value="ids"
+                                        )
 
         return process_service_request(
             calling_object=self,
@@ -405,10 +405,10 @@ class Hosts(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryGetNetworkAddressHistoryV1
         """
         if not body:
-            body = create_generic_payload_list(submitted_arguments=args,
-                                               submitted_keywords=kwargs,
-                                               payload_value="ids"
-                                               )
+            body = generic_payload_list(submitted_arguments=args,
+                                        submitted_keywords=kwargs,
+                                        payload_value="ids"
+                                        )
 
         return process_service_request(
             calling_object=self,
