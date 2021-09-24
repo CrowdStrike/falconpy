@@ -1,4 +1,5 @@
-"""
+"""Falcon Machine Learning Exclusions API Interface Class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-sensor_visibility_exclusions - Falcon Machine Learning Exclusions API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -37,24 +36,41 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import exclusion_payload
 from ._service_class import ServiceClass
 from ._endpoint._sensor_visibility_exclusions import _sensor_visibility_exclusions_endpoints as Endpoints
 
 
 class SensorVisibilityExclusions(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, a
-    existing instance of the authentication class as an object or a
-    valid set of credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (OAuth2.token())
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get a set of Sensor Visibility Exclusions by specifying their IDs
+
+        Keyword arguments:
+        ids -- List of exclusion IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        /sensor-visibility-exclusions/getSensorVisibilityExclusionsV1
         """
-        Get a set of Sensor Visibility Exclusions by specifying their IDs
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         /sensor-visibility-exclusions/getSensorVisibilityExclusionsV1
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -63,12 +79,35 @@ class SensorVisibilityExclusions(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    def create_exclusions(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_exclusions(self: object, body: dict = None, **kwargs) -> dict:
+        """Create the Sensor Visibility exclusions
+
+        Keyword arguments:
+        body -- full body payload, not required when ids keyword is provided.
+                {
+                    "comment": "string",
+                    "groups": [
+                        "string"
+                    ],
+                    "value": "string"
+                }
+        comment -- String comment describing why the exclusion is entered.
+        groups -- Group IDs to exclude. List of strings.
+        value -- Value to exclude. String
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        /sensor-visibility-exclusions/createSVExclusionsV1
         """
-        Create the Sensor Visibility exclusions
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #          /sensor-visibility-exclusions/createSVExclusionsV1
+        if not body:
+            body = exclusion_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -77,26 +116,66 @@ class SensorVisibilityExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Delete the Sensor Visibility exclusions by ID.
+
+        Keyword arguments:
+        comment -- Explains why this exclusions was deleted. String.
+        ids -- List of exclusion IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        /sensor-visibility-exclusions/deleteSensorVisibilityExclusionsV1
         """
-        Delete the Sensor Visibility exclusions by ID.
-        """
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #            /sensor-visibility-exclusions/deleteSensorVisibilityExclusionsV1
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="deleteSensorVisibilityExclusionsV1",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
-    def update_exclusions(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_exclusions(self: object, body: dict = None, **kwargs) -> dict:
+        """Update the Sensor Visibility Exclusions
+
+
+        Keyword arguments:
+        body -- full body payload, not required when ids keyword is provided.
+                {
+                    "comment": "string",
+                    "groups": [
+                        "string"
+                    ],
+                    "id": "string",
+                    "value": "string"
+                }
+        comment -- String comment describing why the exclusion is entered.
+        groups -- Group IDs to exclude. List of strings.
+        id -- Exclusion ID to update. String.
+        value -- Value to exclude. String
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        /sensor-visibility-exclusions/updateSensorVisibilityExclusionsV1
         """
-        Update the Sensor Visibility Exclusions
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #           /sensor-visibility-exclusions/updateSensorVisibilityExclusionsV1
+        if not body:
+            body = exclusion_payload(passed_keywords=kwargs)
+        if kwargs.get("id", None):
+            body["id"] = kwargs.get("id", None)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -106,11 +185,36 @@ class SensorVisibilityExclusions(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_exclusions(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for Sensor Visibility Exclusions.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  An asterisk wildcard '*' includes all results.
+                  AVAILABLE FILTERS
+                  applied_globally            last_modified
+                  created_by                  modified_by
+                  created_on                  value
+        limit -- The maximum number of detections to return in this response.
+                 [Integer, default: 100; max: 500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The first detection to return, where 0 is the latest detection.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax (e.g. last_behavior|asc).
+                Available sort fields:
+                applied_globally            last_modified
+                created_by                  modified_by
+                created_on                  value
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        /sensor-visibility-exclusions/querySensorVisibilityExclusionsV1
         """
-        Search for Sensor Visibility Exclusions.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #           /sensor-visibility-exclusions/querySensorVisibilityExclusionsV1
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
