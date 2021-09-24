@@ -55,7 +55,7 @@ class FalconContainer(ServiceClass):
     def get_credentials(self: object) -> dict:
         """Gets the registry credentials
 
-        This method does not accept arguments.
+        This method does not accept arguments or keywords.
 
         Returns: dict object containing API response.
 
