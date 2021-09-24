@@ -360,7 +360,7 @@ def handle_malquery_search_params(passed_params: dict) -> dict:
     max_size = passed_params.get("max_size", None)
     min_date = passed_params.get("min_date", None)
     min_size = passed_params.get("min_size", None)
-    if filters or filter_meta or limit or max_date or max_size or min_date or min_size:
+    if any([filters, filter_meta, limit, max_date, max_size, min_date, min_size]):
         returned_base["options"] = {}
     if filters:
         returned_base["options"]["filter_filetypes"] = filters
