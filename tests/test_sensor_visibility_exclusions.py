@@ -17,7 +17,7 @@ AllowedResponses = [200, 429]
 
 
 class TestSVExclusions:
-    def serviceSVE_ListExclusions(self):
+    def sve_list_exclusions(self):
         returned = False
         exclusions = falcon.querySensorVisibilityExclusionsV1(limit=1, offset=2, pizza="IsDelicious")
         if exclusions["status_code"] in AllowedResponses:
@@ -26,23 +26,31 @@ class TestSVExclusions:
             pytest.skip("API communication failure")
         return returned
 
-    def serviceSVE_GenerateErrors(self):
-        falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["getSensorVisibilityExclusionsV1", "ids='12345678'"],
-            ["createSVExclusionsV1", "body={}"],
-            ["updateSensorVisibilityExclusionsV1", "body={}"],
-            ["deleteSensorVisibilityExclusionsV1", "ids='12345678'"]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+    def sve_test_all_paths(self):
+        error_checks = True
+        tests = {
+            "get_sv_exclusions": falcon.get_exclusions(ids="12345678"),
+            "create_exclusion": falcon.create_exclusions(body={}),
+            "create_exclusion_too": falcon.create_exclusions(comment="Unit Testing",
+                                                             groups=["1234578"],
+                                                             value="Charlie"
+                                                             ),
+            "update_exclusion": falcon.update_exclusions(body={}),
+            "update_exclusion_also": falcon.update_exclusions(comment="Unit Testing",
+                                                              groups=["12345678"],
+                                                              id="12345678",
+                                                              value="Bananas"
+                                                              ),
+            "delete_exclusion": falcon.delete_exclusions(ids="12345678"),
+        }
+        for key in tests:
+            if tests[key]["status_code"] == 500:
+                error_checks = False
 
-        return errorChecks
+        return error_checks
 
-    def test_Find(self):
-        assert self.serviceSVE_ListExclusions() is True
+    def test_find(self):
+        assert self.sve_list_exclusions() is True
 
-    def test_Errors(self):
-        assert self.serviceSVE_GenerateErrors() is True
+    def test_all_functionality(self):
+        assert self.sve_test_all_paths() is True
