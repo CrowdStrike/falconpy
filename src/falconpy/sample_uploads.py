@@ -1,4 +1,5 @@
-"""
+"""CrowdStrike Falcon Sample Upload API interface class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-sample_uploads - CrowdStrike Falcon Sample Upload API interface class
 
 This is free and unencumbered software released into the public domain.
 
@@ -43,16 +42,36 @@ from ._endpoint._sample_uploads import _sample_uploads_endpoints as Endpoints
 
 
 class SampleUploads(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, an
-    authorization object (oauth2.py) or a credential dictionary with
-    client_id and client_secret containing valid API credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (OAuth2.token())
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_sample(self: object, parameters: dict = None, **kwargs) -> object:
-        """
-        Retrieves the file associated with the given ID (SHA256)
+        """Retrieves the file associated with the given ID (SHA256)
+
+        Keyword arguments:
+        ids -- List of SHA256s to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+        password_protected -- Flag whether the sample should be zipped and password protected
+                              with the pass of 'infected'. Defaults to False.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/GetSampleV3
         """
         return process_service_request(
             calling_object=self,
@@ -64,13 +83,61 @@ class SampleUploads(ServiceClass):
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def upload_sample(self: object,
-                      file_data: object,
+                      file_data: object = None,
                       body: dict = None,
                       parameters: dict = None,
                       **kwargs) -> dict:
+        """Upload a file for further cloud analysis.
+        After uploading, call the specific analysis API endpoint.
+
+        Keyword arguments:
+        comment -- A descriptive comment to identify the file for other users. String.
+        file_data -- Content of the uploaded sample in binary format. Max file size is 256 MB.
+                     'sample' and 'upfile' are also accepted as this parameter.
+
+                     Accepted File Formats:
+                     Portable executables: .exe, .scr, .pif, .dll, .com, .cpl, etc.
+                     Office documents: .doc, .docx, .ppt, .pps, .pptx, .ppsx, .xls, .xlsx, .rtf, .pub
+                     PDF
+                     APK
+                     Executable JAR
+                     Windows script component: .sct
+                     Windows shortcut: .lnk
+                     Windows help: .chm
+                     HTML application: .hta
+                     Windows script file: .wsf
+                     Javascript: .js
+                     Visual Basic: .vbs, .vbe
+                     Shockwave Flash: .swf
+                     Perl: .pl
+                     Powershell: .ps1, .psd1, .psm1
+                     Scalable vector graphics: .svg
+                     Python: .py
+                     Linux ELF executables
+                     Email files: MIME RFC 822 .eml, Outlook .msg
+        file_name -- Name of the file. String.
+        is_confidential -- Defines the visibility of this file in Falcon MalQuery, either
+                           via the  API or the Falcon console.
+                           True = File is only shown to users within your customer account.
+                           False = File can be seen by other CrowdStrike customers.
+                           Defaults to True.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/UploadSampleV3
         """
-        Upload a file for further cloud analysis. After uploading, call the specific analysis API endpoint.
-        """
+        # Try to find the binary object they provided us
+        if not file_data:
+            file_data = kwargs.get("sample", None)
+            if not file_data:
+                file_data = kwargs.get("upfile", None)
         # Create a copy of our default header dictionary
         header_payload = json.loads(json.dumps(self.headers))
         # Set our content-type header
@@ -88,8 +155,21 @@ class SampleUploads(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_sample(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Removes a sample, including file, meta and submissions from the collection.
+        """Removes a sample, including file, meta and submissions from the collection.
+
+        Keyword arguments:
+        ids -- List of SHA256s to delete. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/DeleteSampleV3
         """
         return process_service_request(
             calling_object=self,
