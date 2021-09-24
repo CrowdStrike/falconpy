@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import json
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
 from ._service_class import ServiceClass
 from ._endpoint._sample_uploads import _sample_uploads_endpoints as Endpoints
 
@@ -154,7 +154,7 @@ class SampleUploads(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_sample(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_sample(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Removes a sample, including file, meta and submissions from the collection.
 
         Keyword arguments:
@@ -176,7 +176,7 @@ class SampleUploads(ServiceClass):
             endpoints=Endpoints,
             operation_id="DeleteSampleV3",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     # These method names align to the operation IDs in the API but
