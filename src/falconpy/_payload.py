@@ -37,10 +37,10 @@ For more information, please refer to <https://unlicense.org>
 """
 
 
-def create_generic_payload_list(submitted_keywords: dict,
-                                payload_value: str,
-                                submitted_arguments: list = None
-                                ) -> dict:
+def generic_payload_list(submitted_keywords: dict,
+                         payload_value: str,
+                         submitted_arguments: list = None
+                         ) -> dict:
     """Creates a standardized BODY payload based upon the
     requested payload value and passed keywords.
 
@@ -74,7 +74,7 @@ def create_generic_payload_list(submitted_keywords: dict,
     return returned_payload
 
 
-def create_aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R0912
+def aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R0912
     """Creates the standardized BODY payload necessary for aggregate operations.
 
     Creates the following payload, no parameters shown below are required:
@@ -154,7 +154,7 @@ def create_aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disab
     return returned_payload
 
 
-def create_update_detects_payload(current_payload: dict, passed_keywords: dict) -> dict:
+def update_detects_payload(current_payload: dict, passed_keywords: dict) -> dict:
     """Updates the provided payload with any viable parameters provided as keywords."""
     if passed_keywords.get("assigned_to_uuid", None):
         current_payload["assigned_to_uuid"] = passed_keywords.get("assigned_to_uuid", None)
@@ -185,7 +185,7 @@ def handle_recon_rule_params(inbound: dict) -> dict:
     return returned_dict
 
 
-def create_recon_rules_payload(passed_keywords: dict) -> dict:
+def recon_rules_payload(passed_keywords: dict) -> dict:
     """Creates a properly formatted payload for recon rule handling.
     Creates a list of dictionaries.
             [
@@ -215,7 +215,7 @@ def create_recon_rules_payload(passed_keywords: dict) -> dict:
     return returned_rules
 
 
-def create_recon_notifications_payload(passed_keywords: dict) -> dict:
+def recon_notifications_payload(passed_keywords: dict) -> dict:
     """Creates a properly formatted payload for a recon notification
     payload. Generates a list of dictionaries, but is designed to handle
     just one notification. (For multiple notifications use the body
@@ -242,7 +242,7 @@ def create_recon_notifications_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def create_recon_action_update_payload(passed_keywords: dict) -> dict:
+def recon_action_update_payload(passed_keywords: dict) -> dict:
     """Creates a properly formatted payload for handling recon actions.
     {
         "frequency": "string",
@@ -266,7 +266,7 @@ def create_recon_action_update_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def create_recon_action_payload(passed_keywords: dict) -> dict:
+def recon_action_payload(passed_keywords: dict) -> dict:
     """Creates a properly formatted payload for attaching recon
     actions to a monitoring rule.
     {
@@ -300,7 +300,7 @@ def create_recon_action_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def create_recon_rule_preview_payload(passed_keywords: dict) -> dict:
+def recon_rule_preview_payload(passed_keywords: dict) -> dict:
     """Creates a properly formatted payload for retrieving
     a rule preview from recon.
     {
@@ -313,5 +313,149 @@ def create_recon_rule_preview_payload(passed_keywords: dict) -> dict:
         returned_payload["filter"] = passed_keywords.get("filter", None)
     if passed_keywords.get("topic", None):
         returned_payload["topic"] = passed_keywords.get("topic", None)
+
+    return returned_payload
+
+
+def malquery_fuzzy_payload(passed_keywords: dict) -> dict:
+    """Generates a properly formatted MalQuery fuzzy search payload
+    {
+        "options": {
+            "filter_meta": [
+                "string"
+            ],
+            "limit": 0
+        },
+        "patterns": [
+            {
+            "type": "string",
+            "value": "string"
+            }
+        ]
+    }
+    """
+    returned_payload = {}
+    filters = passed_keywords.get("filter_meta", None)
+    limit = passed_keywords.get("limit", None)
+    if filters or limit:
+        returned_payload["options"] = {}
+    if filters:
+        returned_payload["options"]["filter_meta"] = filters
+    if limit:
+        returned_payload["options"]["limit"] = limit
+    patterns = passed_keywords.get("patterns", None)
+    if patterns:
+        returned_payload["patterns"] = patterns
+
+    return returned_payload
+
+
+def handle_malquery_search_params(passed_params: dict) -> dict:
+    """Creates the base payload used by exact_search and hunt"""
+    returned_base = {}
+    filters = passed_params.get("filter_filetypes", None)
+    filter_meta = passed_params.get("filter_meta", None)
+    limit = passed_params.get("limit", None)
+    max_date = passed_params.get("max_date", None)
+    max_size = passed_params.get("max_size", None)
+    min_date = passed_params.get("min_date", None)
+    min_size = passed_params.get("min_size", None)
+    if filters or filter_meta or limit or max_date or max_size or min_date or min_size:
+        returned_base["options"] = {}
+    if filters:
+        returned_base["options"]["filter_filetypes"] = filters
+    if filter_meta:
+        returned_base["options"]["filter_meta"] = filter_meta
+    if limit:
+        returned_base["options"]["limit"] = limit
+    if max_date:
+        returned_base["options"]["max_date"] = max_date
+    if min_date:
+        returned_base["options"]["min_date"] = min_date
+    if max_size:
+        returned_base["options"]["max_size"] = max_size
+    if min_size:
+        returned_base["options"]["min_size"] = min_size
+
+    return returned_base
+
+
+def malquery_exact_search_payload(passed_keywords: dict) -> dict:
+    """Creates a properly formatted payload for performing
+    a MalQuery exact search request
+    {
+    "options": {
+        "filter_filetypes": [
+            "string"
+        ],
+        "filter_meta": [
+            "string"
+        ],
+        "limit": 0,
+        "max_date": "string",
+        "max_size": "string",
+        "min_date": "string",
+        "min_size": "string"
+    },
+    "patterns": [
+        {
+        "type": "string",
+        "value": "string"
+        }
+    ]
+    }
+    """
+    returned_payload = handle_malquery_search_params(passed_params=passed_keywords)
+    if passed_keywords.get("patterns", None):
+        returned_payload["patterns"] = passed_keywords.get("patterns", None)
+
+    return returned_payload
+
+
+def malquery_hunt_payload(passed_keywords: dict) -> dict:
+    """Creates a properly formatted payload for performing
+    a MalQuery hunt request.
+
+    {
+        "options": {
+            "filter_filetypes": [
+                "string"
+            ],
+            "filter_meta": [
+                "string"
+            ],
+            "limit": 0,
+            "max_date": "string",
+            "max_size": "string",
+            "min_date": "string",
+            "min_size": "string"
+        },
+        "yara_rule": "string"
+    }
+    """
+    returned_payload = handle_malquery_search_params(passed_params=passed_keywords)
+    if passed_keywords.get("yara_rule", None):
+        returned_payload["yara_rule"] = passed_keywords.get("yara_rule", None)
+
+    return returned_payload
+
+
+def exclusion_payload(passed_keywords: dict) -> dict:
+    """Creates a properly formatted exclusion payload
+        {
+            "comment": "string",
+            "groups": [
+                "string"
+            ],
+            "value": "string"
+        }
+    """
+    returned_payload = {}
+    if passed_keywords.get("comment", None):
+        returned_payload["comment"] = passed_keywords.get("comment", None)
+    if passed_keywords.get("groups", None):
+        returned_payload["groups"] = passed_keywords.get("groups", None)
+    if passed_keywords.get("value", None):
+        returned_payload["value"] = passed_keywords.get("value", None)
 
     return returned_payload
