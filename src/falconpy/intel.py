@@ -277,9 +277,9 @@ class Intel(ServiceClass):
 
         Keyword arguments:
         id -- One or more actor IDs. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
+        parameters - full parameters payload, not required if id is provided as a keyword.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
                    All others are ignored.
 
         Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
@@ -333,7 +333,7 @@ class Intel(ServiceClass):
         Keyword arguments:
         format -- Choose the format you want the rule set in. Either zip or gzip. Defaults to zip.
         id -- One or more actor IDs. String or list of strings.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
+        parameters - full parameters payload, not required if id is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'id'.
                    All others are ignored.
@@ -359,7 +359,7 @@ class Intel(ServiceClass):
 
         Keyword arguments:
         format -- Choose the format you want the rule set in. Either zip or gzip. Defaults to zip.
-        parameters - full parameters payload, not required if ids is provided as a keyword.
+        parameters - full parameters payload, not required if other keywords are used.
         type -- The rule news report type. The following values are accepted:
                 common-event-format         snort-suricata-update
                 netwitness                  yara-changelog
