@@ -150,7 +150,7 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_metadata(self: object, *args, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
+    def get_metadata(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Retrieve indexed files metadata by their hash
 
         Keyword arguments:
