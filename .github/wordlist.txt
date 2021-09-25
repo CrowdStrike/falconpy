@@ -249,6 +249,7 @@ Trainings
 TriggerScan
 UI
 USERUUID
+USGOV
 UUID
 Uber
 Unlicense
@@ -334,6 +335,7 @@ docstring
 docstrings
 duplicative
 efa
+enum
 errored
 executables
 falconpy
