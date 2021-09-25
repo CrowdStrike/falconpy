@@ -7,6 +7,12 @@
     result = falcon.query_devices_by_filter()
     print(result)
     ```
++ Added: Private Base URL enum. `_base_url.py`
+    - You may now specify your base URL by name or by URL.
+        + US1
+        + US2
+        + USGOV1
+        + EU1
 + Added: Payload handling utility library. `_payload.py`
 + Updated: Service Class Refactoring (Rev 4) 
     * Provides: Body Payload Abstraction - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests into keywords. Legacy usage pattern of passing the BODY payload directly as the _body_ keyword is still supported. 
