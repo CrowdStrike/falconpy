@@ -154,7 +154,7 @@ class MalQuery(ServiceClass):
         """Retrieve indexed files metadata by their hash
 
         Keyword arguments:
-        ids -- List of SHA256s to retrieve. String or list of strings.
+        ids -- List of SHA256s to retrieve metadata for. String or list of strings.
         parameters -- full parameters payload, not required if ids is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
