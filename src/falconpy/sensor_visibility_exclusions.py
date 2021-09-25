@@ -1,4 +1,4 @@
-"""Falcon Machine Learning Exclusions API Interface Class
+"""Falcon Sensor Visibility Exclusions API Interface Class
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
