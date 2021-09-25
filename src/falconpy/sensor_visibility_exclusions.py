@@ -121,7 +121,7 @@ class SensorVisibilityExclusions(ServiceClass):
 
         Keyword arguments:
         comment -- Explains why this exclusions was deleted. String.
-        ids -- List of exclusion IDs to retrieve. String or list of strings.
+        ids -- List of exclusion IDs to delete. String or list of strings.
         parameters -- full parameters payload, not required if ids is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
