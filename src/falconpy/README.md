@@ -12,6 +12,7 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 + `device_control_policies.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/device-control-policies
 + `event_streams.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams
 + `falcon_complete_dashboard.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard
++ `falcon_container.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container
 + `falconx_sandbox.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox
 + `firewall_management.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management
 + `firewall_policies.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies
@@ -31,12 +32,15 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 + `oauth2.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2
 + `overwatch_dashboard.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/overwatch-dashboard
 + `prevention_policy.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies
++ `quarantine.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quarantine
 + `quick_scan.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan
 + `real_time_response_admin.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin
 + `real_time_response.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response
 + `recon.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon
++ `report_executions.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/report-executions
 + `response_policies.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies
 + `sample_uploads.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads
++ `scheduled_reports.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scheduled-reports
 + `sensor_download.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download
 + `sensor_update_policy.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies
 + `sensor_visibility_exclusions.py` https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-visibility-exclusions
