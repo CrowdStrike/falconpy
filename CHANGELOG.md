@@ -8,21 +8,34 @@
     print(result)
     ```
 + Added: Payload handling utility library. `_payload.py`
-+ Updated: Hosts Service Class - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests into keywords. Legacy usage pattern of passing the BODY payload directly as the _body_ keyword is still supported. Closes #340. `hosts.py`
-    - perform_action (Keyword usage support only)
-    - query_device_login_history (Supports argument usage)
-    - query_network_address_history (Supports argument usage)
-    > Note: update_device_tags already provided this functionality (Keyword usage support only)
++ Updated: Service Class Refactoring (Rev 4) 
+    * Provides: Body Payload Abstraction - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests into keywords. Legacy usage pattern of passing the BODY payload directly as the _body_ keyword is still supported. 
+    * Provides: PEP-257 formatting of all docstrings.
+    - `detects.py` - Closes #353.
+    - `event_streams.py` - Closes #349
+    - `falcon_container.py` - Closes #348
+    - `hosts.py` - Closes #340.
+    - `intel.py` - Closes #352
+    - `malquery.py` - Closes #354
+    - `quick_scan.py` - Closes #351
+    - `recon.py` - Closes #350
+    - `report_executions.py` - Closes #346
+    - `sample_uploads.py` - Closes #344
+    - `scheduled_reports.py` - Closes #345
+    - `sensor_download.py` - Closes #343
+    - `sensor_visibility_exclusions.py` - Closes #347
+    - `spotlight_vulnerabilities.py` - Closes #342
+    - `zero_trust_assessment.py` - Closes #341
 
 ## Issues resolved
-+ Updated: Linter updates now result in usage of `format` being marked as a failure for scenarios where an `f-string` can be used. Updated all occurances of this issue to make use of `f-string` formatting.
++ Updated: Linter updates now result in usage of `format` being marked as a failure for scenarios where an `f-string` can be used. Updated all occurrences of this issue to make use of `f-string` formatting.
     - `_service_class.py`
     - `_util.py`
     - `api_complete.py`
     - `oauth2.py`
 
 ## Other
-+ Updated: PEP-257 syntax applied to all docstrings in all files.
++ Updated: PEP-257 syntax applied to all docstrings in all touched files.
 
 # Version 0.6.5
 ## Issues resolved
