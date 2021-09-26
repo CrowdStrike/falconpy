@@ -68,6 +68,7 @@ DeleteUser
 DevicesCount
 DevicesRanOn
 DownloadSensorInstallerById
+EventStreams
 ExecuteActiveResponderCommand
 ExecuteAdminCommand
 ExecuteCommand
