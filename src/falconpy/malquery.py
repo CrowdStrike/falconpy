@@ -241,9 +241,9 @@ class MalQuery(ServiceClass):
                         "string"
                     ]
                 }
-        ids -- SHA256(s) of the samples to retrieve. String or list of strings.
+        samples -- SHA256(s) of the samples to retrieve. String or list of strings.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+        Arguments: When not specified, the first argument to this method is assumed to be 'samples'.
                    All others are ignored.
 
         Returns: dict object containing API response.
