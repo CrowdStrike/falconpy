@@ -78,6 +78,9 @@ class EventStreams(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/refreshActiveStreamSession
         """
+        if not kwargs.get("action_name", None):
+            parameters["action_name"] = "refresh_active_stream_session"
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
