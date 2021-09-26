@@ -14,7 +14,12 @@
         + USGOV1
         + EU1
 + Added: Default value for _action_name_ parameter in __refresh_active_stream__ method of EventStreams service class. `event_streams.py`
-+ Added: Payload handling utility library. `_payload.py`
++ Added: Payload handling sub-module. `_payload/`
+    - `_payload/__init__.py`
+    - `_payload/_detects.py`
+    - `_payload/generic.py`
+    - `_payload/malquery.py`
+    - `_payload/recon.py`
 + Updated: Service Class Refactoring (Rev 4) 
     * Provides: Body Payload Abstraction - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests into keywords. Legacy usage pattern of passing the BODY payload directly as the _body_ keyword is still supported. 
     * Provides: PEP-257 formatting of all docstrings.
