@@ -43,6 +43,7 @@
 
 ## Other
 + Updated: PEP-257 syntax applied to all docstrings in all touched files.
++ Updated: README.md updated
 
 # Version 0.6.5
 ## Issues resolved
