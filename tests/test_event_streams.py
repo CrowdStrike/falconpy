@@ -53,6 +53,24 @@ class TestEventStreams:
             return bool(result["status_code"] in AllowedResponses)
 
     @staticmethod
+    def stream_refresh_default_action():
+        """refresh_active_stream"""
+        avail = falcon.listAvailableStreamsOAuth2(parameters={"appId": f"{APP_ID}"})
+        current_time = datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S +0000')
+        headers = {
+            'Authorization': 'Token %s' % (
+                avail["body"]["resources"][0]["sessionToken"]["token"]
+                ), 'Date': current_time, 'Connection': 'Keep-Alive'
+            }
+        stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True)
+        with stream:
+            result = falcon.refreshActiveStreamSession(appId=f"{APP_ID}",
+                                                       partition="0"
+                                                       )
+            return bool(result["status_code"] in AllowedResponses)
+
+
+    @staticmethod
     def stream_errors():
         """Generates errors to test remaining code paths"""
         falcon.base_url = "nowhere"
@@ -73,6 +91,12 @@ class TestEventStreams:
     def test_refresh(self):
         """Pytest harness hook"""
         assert self.stream_refresh() is True
+
+    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
+    @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
+    def test_default_refresh(self):
+        """Pytest harness hook"""
+        assert self.stream_refresh_default_action() is True
 
 
     def test_errors(self):
