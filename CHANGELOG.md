@@ -38,6 +38,9 @@
     - `sensor_visibility_exclusions.py` - Closes #347
     - `spotlight_vulnerabilities.py` - Closes #342
     - `zero_trust_assessment.py` - Closes #341
++ Updated: Endpoint module updated to reflect recent swagger changes.
+    - `_cspm_registration.py`
+    - `mssp.py`
 
 ## Issues resolved
 + Updated: Linter updates now result in usage of `format` being marked as a failure for scenarios where an `f-string` can be used. Updated all occurrences of this issue to make use of `f-string` formatting.
