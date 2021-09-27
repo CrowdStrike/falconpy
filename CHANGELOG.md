@@ -1,3 +1,58 @@
+# Version 0.7.0
+## Added features and functionality
++ Added: Updated `__all__` parameter in root `__init__.py`, publishing all PEP8 class names. This change allows developers to import these classes directly.
+    ```python
+    from falconpy import Hosts
+    falcon = Hosts(client_id="CLIENT_ID_HERE", client_secret="CLIENT_SECRET_HERE")
+    result = falcon.query_devices_by_filter()
+    print(result)
+    ```
++ Added: Private Base URL enum. `_base_url.py`
+    - You may now specify your base URL by name or by URL.
+        + US1
+        + US2
+        + USGOV1
+        + EU1
++ Added: Default value for _action_name_ parameter in __refresh_active_stream__ method of EventStreams service class. `event_streams.py`
++ Added: Payload handling sub-module. `_payload/`
+    - `_payload/__init__.py`
+    - `_payload/_detects.py`
+    - `_payload/generic.py`
+    - `_payload/malquery.py`
+    - `_payload/recon.py`
++ Updated: Service Class Refactoring (Rev 4) 
+    * Provides: Body Payload Abstraction - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests into keywords. Legacy usage pattern of passing the BODY payload directly as the _body_ keyword is still supported. 
+    * Provides: PEP-257 formatting of all docstrings.
+    - `detects.py` - Closes #353.
+    - `event_streams.py` - Closes #349
+    - `falcon_container.py` - Closes #348
+    - `hosts.py` - Closes #340.
+    - `intel.py` - Closes #352
+    - `malquery.py` - Closes #354
+    - `quick_scan.py` - Closes #351
+    - `recon.py` - Closes #350
+    - `report_executions.py` - Closes #346
+    - `sample_uploads.py` - Closes #344
+    - `scheduled_reports.py` - Closes #345
+    - `sensor_download.py` - Closes #343
+    - `sensor_visibility_exclusions.py` - Closes #347
+    - `spotlight_vulnerabilities.py` - Closes #342
+    - `zero_trust_assessment.py` - Closes #341
++ Updated: Endpoint module updated to reflect recent swagger changes.
+    - `_cspm_registration.py`
+    - `_mssp.py`
+
+## Issues resolved
++ Updated: Linter updates now result in usage of `format` being marked as a failure for scenarios where an `f-string` can be used. Updated all occurrences of this issue to make use of `f-string` formatting.
+    - `_service_class.py`
+    - `_util.py`
+    - `api_complete.py`
+    - `oauth2.py`
+
+## Other
++ Updated: PEP-257 syntax applied to all docstrings in all touched files.
++ Updated: README.md updated
+
 # Version 0.6.5
 ## Issues resolved
 + Removed: Hash Analyzer Service Class and all related unit tests. (Unavailable at this time)

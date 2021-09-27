@@ -1,4 +1,5 @@
-"""
+"""Internal utilities library
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_util - Internal utilities library
 
 This is free and unencumbered software released into the public domain.
 
@@ -45,6 +44,7 @@ import urllib3
 from urllib3.exceptions import InsecureRequestWarning
 from ._version import _TITLE, _VERSION
 from ._result import Result
+from ._base_url import BaseURL
 urllib3.disable_warnings(InsecureRequestWarning)
 
 # Restrict requests to only allowed HTTP methods
@@ -54,18 +54,18 @@ _USER_AGENT = f"{_TITLE}/{str(_VERSION)}"
 
 
 def validate_payload(validator: dict, params: dict, required: list = None) -> bool:
-    """
-    Validates parameters and body payloads sent to the API.
-    """
-    # Repurposed with permission from https://github.com/yaleman/crowdstrike_api
-    #                                          __
-    #                                         ( (\
-    #                                          \ =\
-    #                                         __\_ `--\
-    #                                        (____))(  \----
-    #                                        (____)) _     Thanks
-    #                                        (____))       James!
-    #                                        (____))____/----
+    """Validates parameters and body payloads sent to the API."""
+    # Repurposed with permission from
+    # https://github.com/yaleman/crowdstrike_api
+    #         __
+    #        ( (\
+    #         \ =\
+    #        __\_ `--\
+    #       (____))(  \----
+    #       (____)) _     Thanks
+    #       (____))       James!
+    #       (____))____/----
+    #
     if required:
         for key in required:
             if key not in params:
@@ -75,15 +75,15 @@ def validate_payload(validator: dict, params: dict, required: list = None) -> bo
         if key not in validator:
             raise ValueError(f"{key} is not a valid argument.")
         if not isinstance(params[key], validator[key]):
-            raise TypeError(f"{key} is not the valid type. Should be: {validator[key]}, was {type(params[key])}")
+            should = validator[key]
+            was = type(params[key])
+            raise TypeError(f"{key} is not the valid type. Should be: {should}, was {was}")
 
     return True
 
 
 def parse_id_list(id_list) -> str:
-    """
-    Converts a list of IDs to a comma-delimited string.
-    """
+    """Converts a list of IDs to a comma-delimited string."""
     if isinstance(id_list, list):
         returned = ""
         for string in id_list:
@@ -97,10 +97,8 @@ def parse_id_list(id_list) -> str:
 
 
 def generate_b64cred(client_id: str, client_secret: str) -> str:
-    """
-    base64 encodes passed client_id and client_secret for authorization headers.
-    """
-    cred = "{}:{}".format(client_id, client_secret)
+    """base64 encodes passed client_id and client_secret for authorization headers."""
+    cred = f"{client_id}:{client_secret}"
     b64_byt = base64.b64encode(cred.encode("ascii"))
     encoded = b64_byt.decode("ascii")
 
@@ -108,8 +106,8 @@ def generate_b64cred(client_id: str, client_secret: str) -> str:
 
 
 def handle_single_argument(passed_arguments: list, passed_keywords: dict, search_key: str) -> dict:
-    """
-    Reviews arguments passed to a method and injects them into the keyword dictionary if they match the search string
+    """Reviews arguments passed to a method and injects them into the
+    keyword dictionary if they match the search string
     """
     if len(passed_arguments) > 0:
         passed_keywords[search_key] = passed_arguments[0]
@@ -118,9 +116,9 @@ def handle_single_argument(passed_arguments: list, passed_keywords: dict, search
 
 
 def force_default(defaults: list, default_types: list = None):
-    """
-    This function forces default values and is designed to decorate other functions.
+    """This function forces default values and is designed to decorate other functions.
 
+    Keyword arguments:
     defaults = list of values to default
     default_types = list of types to default the values to
 
@@ -134,8 +132,7 @@ def force_default(defaults: list, default_types: list = None):
 
         @functools.wraps(func)
         def factory(*args, **kwargs):
-            """
-            This method is a factory and runs through keywords passed to the called function,
+            """This method is a factory and runs through keywords passed to the called function,
             setting defaults on values within the **kwargs dictionary when necessary
             as specified in our "defaults" list that is passed to the parent wrapper.
             """
@@ -161,18 +158,16 @@ def force_default(defaults: list, default_types: list = None):
 
 
 def service_request(caller: object = None, **kwargs) -> object:  # May return dict or object datatypes
-    """
-    Checks for token expiration, refreshing if possible and then performs the request.
-    """
+    """Checks for token expiration, refreshing if possible and then performs the request."""
     if caller:
         try:
             if caller.auth_object:
                 if caller.auth_object.token_expired():
                     auth_response = caller.auth_object.token()
                     if auth_response["status_code"] == 201:
-                        caller.headers['Authorization'] = 'Bearer {}'.format(auth_response['body']['access_token'])
+                        caller.headers['Authorization'] = f"Bearer {auth_response['body']['access_token']}"
                     else:
-                        caller.headers['Authorization'] = 'Bearer '
+                        caller.headers['Authorization'] = "Bearer "
         except AttributeError:
             pass
 
@@ -193,9 +188,9 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
 
 @force_default(defaults=["headers"], default_types=["dict"])
 def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> object:  # May return dict or object datatypes
-    """
-    Leverages the requests library to perform the requested CrowdStrike OAuth2 API operation.
+    """Leverages the requests library to perform the requested CrowdStrike OAuth2 API operation.
 
+    Keyword arguments:
     method: str - HTTP method to use when communicating with the API
         - Example: GET, POST, PATCH, DELETE or UPDATE
     endpoint: str - API endpoint, do not include the URL base
@@ -272,24 +267,18 @@ def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> objec
 
 
 def generate_error_result(message: str = "An error has occurred. Check your payloads and try again.", code: int = 500) -> dict:
-    """
-    Normalized error messaging handler.
-    """
+    """Normalized error messaging handler."""
     return Result()(status_code=code, headers={}, body={"errors": [{"message": f"{message}"}], "resources": []})
 
 
 def generate_ok_result(message: str = "Request returned with success", code: int = 200, **kwargs) -> dict:
-    """
-    Normalized OK messaging handler.
-    """
+    """Normalized OK messaging handler."""
     return_headers = kwargs.get("headers", {})
     return Result()(status_code=code, headers=return_headers, body={"message": message, "resources": []})
 
 
 def get_default(types: list, position: int):
-    """
-    I determine the requested default data type and return it.
-    """
+    """I determine the requested default data type and return it."""
     default_value_names = ["list", "str", "int", "dict", "bool"]
     default_value_types = [[], "", 0, {}, False]
     value_count = 0
@@ -307,9 +296,8 @@ def get_default(types: list, position: int):
 
 
 def calc_url_from_args(target_url: str, passed_args: dict) -> str:
-    """
-    This function reviews arguments passed to the Uber class command method and updates the target URL accordingly.
-    """
+    """This function reviews arguments passed to the Uber class
+    command method and updates the target URL accordingly."""
     if "ids" in passed_args:
         id_list = str(parse_id_list(passed_args['ids'])).replace(",", "&ids=")
         target_url = target_url.format(id_list)
@@ -330,8 +318,9 @@ def calc_url_from_args(target_url: str, passed_args: dict) -> str:
 
 
 def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epname: str) -> dict:
-    """
-    This function reviews arguments passed to the function against arguments accepted by the endpoint.
+    """This function reviews arguments passed to the function
+    against arguments accepted by the endpoint.
+
     If a valid argument is passed, it is added and returned as part of the payload dictionary.
 
     This function will convert passed comma-delimited strings to list data types when necessary.
@@ -359,11 +348,10 @@ def process_service_request(calling_object: object,
                             operation_id: str,
                             **kwargs
                             ):
-    """
-    Performs a request originating from a service class module.
+    """Performs a request originating from a service class module.
     Calculates the target_url based upon the provided operation ID and endpoint list.
 
-    PARAMETERS:
+    Keyword arguments:
         endpoints: list - List of service class endpoints, defined as Endpoints in a service class. [required]
         operation_id: The name of the operation ID. Normally this is also the function name from the service class. [required]
         method: HTTP method to execute. GET, POST, PATCH, DELETE, PUT accepted. Defaults to GET.
@@ -407,3 +395,23 @@ def process_service_request(calling_object: object,
     }
 
     return service_request(**new_keywords)
+
+
+def confirm_base_url(provided_base: str = "https://api.crowdstrike.com"):
+    """Confirms the passed base_url value matches URL syntax. If it does
+    not, it is looked up in the BaseURL enum. If the value is not found
+    within the enum, https:// is prepended to the value and then it is
+    used for API requests."""
+    returned_base = "https://api.crowdstrike.com"
+    if "://" not in provided_base:
+        # They're passing the name instead of the URL
+        try:
+            returned_base = f"https://{BaseURL[provided_base.upper()].value}"
+        except KeyError:
+            # Invalid base URL name, assume they didn't give us https
+            returned_base = f"https://{provided_base}"
+    else:
+        # They passed a full URL
+        returned_base = provided_base
+
+    return returned_base

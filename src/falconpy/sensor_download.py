@@ -1,4 +1,5 @@
-"""
+"""Falcon Sensor Download API Interface Class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-sensor_download - Falcon Sensor Download API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -37,25 +36,48 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import os
-from ._util import generate_ok_result, force_default, handle_single_argument, process_service_request
+from ._util import generate_ok_result, force_default
+from ._util import handle_single_argument, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._sensor_download import _sensor_download_endpoints as Endpoints
 
 
 class SensorDownload(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, a
-    existing instance of the authentication class as an object or a
-    valid set of credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (oauth2.py)
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_combined_sensor_installers_by_query(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_combined_sensor_installers_by_query(self: object,
+                                                parameters: dict = None,
+                                                **kwargs
+                                                ) -> dict:
+        """Retrieve all metadata for installers from provided query
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return. [integer, 1-5000]
+        offset -- The first item to return, where 0 is the latest item. (Integer)
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetCombinedSensorInstallersByQuery
         """
-        Retrieve all metadata for installers from provided query
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #           /sensor-download/GetCombinedSensorInstallersByQuery
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -71,11 +93,26 @@ class SensorDownload(ServiceClass):
                                   file_name: str = None,
                                   download_path: str = None,
                                   **kwargs) -> object:
-        """
-        Download the sensor by the sha256 id, into the specified directory.
+        """Download the sensor by the sha256 id, into the specified directory.
         The path will be created for the user if it does not already exist
+
+        Keyword arguments:
+        download_path -- path to the folder to save installer file.
+                         Must be present to cause a file download.
+        id -- SHA256 of the installer to download.
+        file_name -- name to use for saved file. Must be present to cause a file download.
+        parameters - full parameters payload, not required if id is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/DownloadSensorInstallerById
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/DownloadSensorInstallerById
         returned = process_service_request(
                         calling_object=self,
                         endpoints=Endpoints,
@@ -85,7 +122,8 @@ class SensorDownload(ServiceClass):
                         )
         if file_name and download_path and isinstance(returned, bytes):
             os.makedirs(download_path, exist_ok=True)
-            # write the newly downloaded sensor into the aforementioned directory with provided file name
+            # write the newly downloaded sensor into the
+            # aforementioned directory with provided file name
             with open(os.path.join(download_path, file_name), "wb") as sensor:
                 sensor.write(returned)
             returned = generate_ok_result(message="Download successful")
@@ -93,25 +131,48 @@ class SensorDownload(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_sensor_installer_entities(self: object, parameters: dict = None, **kwargs) -> object:
+    def get_sensor_installer_entities(self: object,
+                                      *args,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> object:
+        """For a given list of SHA256's, retrieve the metadata for each installer
+        such as the release_date and version among other fields.
+
+        Keyword arguments:
+        ids -- List of SHA256s for installers to retrieve details for. String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersEntities
         """
-        For a given list of SHA256's, retrieve the metadata for each installer
-        such as the release_date and version among other fields
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersEntities
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetSensorInstallersEntities",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     def get_sensor_installer_ccid(self: object) -> dict:
+        """Retrieve the CID for the current oauth environment
+
+        This method does not accept arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersCCIDByQuery
         """
-        Retrieve the CID for the current oauth environment
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersCCIDByQuery
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -120,10 +181,25 @@ class SensorDownload(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_sensor_installers_by_query(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve a list of SHA256 for installers based on the filter
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return. [integer, 1-500]
+        offset -- The first item to return, where 0 is the latest item. (Integer)
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax (e.g. version|ASC, release_date|DESC).
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersByQuery
         """
-        Retrieve a list of SHA256 for installers based on the filter
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download/GetSensorInstallersByQuery
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,

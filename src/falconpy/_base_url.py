@@ -1,4 +1,4 @@
-"""API Response formatting class
+"""CrowdStrike API Base URL Enumerator
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,20 +35,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=R0903  # Using a class so that the data structure is callable
+from enum import Enum
 
 
-class Result:
-    """Callable subclass to handle parsing of result client output."""
-    def __init__(self: object) -> dict:
-        """Instantiates the subclass and initializes the result object."""
-        self.result_obj = {}
-
-    def __call__(self: object, status_code: int, headers, body: dict) -> dict:
-        """Formats values into a properly formatted result object."""
-        self.result_obj['status_code'] = status_code
-        # force standard dictionary to prevent json issues
-        self.result_obj['headers'] = dict(headers)
-        self.result_obj['body'] = body
-
-        return self.result_obj
+class BaseURL(Enum):
+    """This enum enables developers to specify base URL by
+    name instead of URL. Case insensitive. Passing a URL
+    with or without https:// is still supported."""
+    US1 = "api.crowdstrike.com"
+    US2 = "api.us-2.crowdstrike.com"
+    EU1 = "api.eu-1.crowdstrike.com"
+    USGOV1 = "api.laggar.gcw.crowdstrike.com"

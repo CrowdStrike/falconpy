@@ -68,6 +68,7 @@ DeleteUser
 DevicesCount
 DevicesRanOn
 DownloadSensorInstallerById
+EventStreams
 ExecuteActiveResponderCommand
 ExecuteAdminCommand
 ExecuteCommand
@@ -168,6 +169,7 @@ JSONDecode
 Javascript
 Javascript
 Kubernetes
+Linter
 ListAllSessions
 ListFiles
 ListPut
@@ -248,6 +250,7 @@ Trainings
 TriggerScan
 UI
 USERUUID
+USGOV
 UUID
 Uber
 Unlicense
@@ -329,8 +332,11 @@ desc
 desc
 detections
 dev
+docstring
+docstrings
 duplicative
 efa
+enum
 errored
 executables
 falconpy

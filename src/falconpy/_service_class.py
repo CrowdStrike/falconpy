@@ -1,4 +1,5 @@
-"""
+"""ServiceClass base class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_service_class - ServiceClass base class
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,23 +35,46 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from ._util import confirm_base_url
 from .oauth2 import OAuth2 as FalconAuth
 
-# pylint: disable=R0902  # Eight is reasonable here
+# pylint: disable=R0902  # Nine is reasonable
 
 
 class ServiceClass:
-    """
-    Base class of all service classes. Contains the default __init__ method.
-    """
+    """Base class of all service classes. Contains the default __init__ method."""
     def __init__(self: object, auth_object: object = None,
                  creds: dict = None, base_url: str = "https://api.crowdstrike.com",
                  proxy: dict = None, **kwargs) -> object:
+        """Instantiates the object, ingests authorization credentials,
+        and initializes attributes.
+
+        Keyword arguments:
+        access_token -- Token string to use for all requests performed.
+                        Mutually exclusive to all other authentication elements.
+        auth_object - Properly authenticated instance of the OAuth2 Authentication service class.
+        base_url -- CrowdStrike API URL to use for requests. [Default: US-1]
+        ssl_verify -- Boolean specifying if SSL verification should be used. [Default: True]
+        proxy -- Dictionary of proxies to be used for requests.
+        timeout -- Float or tuple specifying timeouts to use for requests.
+        creds -- Dictionary containing CrowdStrike API credentials.
+                 Mutually exclusive to client_id / client_secret.
+                 {
+                     "client_id": "CLIENT_ID_HERE",
+                     "client_secret": "CLIENT_SECRET_HERE"
+                 }
+        client_id -- Client ID for the CrowdStrike API. Mutually exclusive to creds.
+        client_secret -- Client Secret for the CrowdStriek API. Mutually exclusive to creds.
+        validate_payload -- Boolean specifying if body payloads should be validated.
+                            Defaults to True.
+
+        This method only accepts keywords to specify arguments.
         """
-        Instantiates the base class, ingests the authorization token,
-        and initializes the headers and base_url global variables.
-        """
-        access_token, self.ssl_verify, self.timeout = self.parse_keywords(kwargs)
+        access_token = kwargs.get("access_token", None)
+        self.ssl_verify = kwargs.get("ssl_verify", True)
+        self.timeout = kwargs.get("timeout", None)
+        # Currently defaulting to validation enabled
+        self.validate_payloads = kwargs.get("validate_payloads", True)
         self.refreshable = False
         client_id = kwargs.get("client_id", None)
         client_secret = kwargs.get("client_secret", None)
@@ -69,24 +91,25 @@ class ServiceClass:
                 _ = self.auth_object.token()
                 if _["status_code"] == 201:
                     self.token = _["body"]["access_token"]
-                    self.headers = {'Authorization': 'Bearer {}'.format(self.token)}
+                    self.headers = {"Authorization": f"Bearer {self.token}"}
                 else:
                     self.token = False
                     self.headers = {}
             else:
                 self.token = self.auth_object.token_value
-                self.headers = {'Authorization': 'Bearer {}'.format(self.token)}
+                self.headers = {"Authorization": f"Bearer {self.token}"}
 
             self.base_url = auth_object.base_url
             self.ssl_verify = auth_object.ssl_verify
             self.proxy = auth_object.proxy
-            # At this point in time, you cannot override the auth_object's timeout per class
+            # At this point in time, you cannot override
+            # the auth_object's timeout per class instance
             self.timeout = auth_object.timeout
             self.refreshable = True
         else:
             if creds:
                 auth_object = FalconAuth(creds=creds,
-                                         base_url=base_url,
+                                         base_url=confirm_base_url(base_url),
                                          proxy=proxy,
                                          ssl_verify=self.ssl_verify,
                                          timeout=self.timeout
@@ -95,22 +118,20 @@ class ServiceClass:
                 _ = self.auth_object.token()
                 if _["status_code"] == 201:
                     self.token = _["body"]["access_token"]
-                    self.headers = {'Authorization': 'Bearer {}'.format(self.token)}
+                    self.headers = {"Authorization": f"Bearer {self.token}"}
                 else:
                     self.token = False
                     self.headers = {}
                 self.refreshable = True
             else:
                 self.auth_object = None
-                self.headers = {'Authorization': 'Bearer {}'.format(access_token)}
+                self.headers = {"Authorization": f"Bearer {access_token}"}
 
-            self.base_url = base_url
+            self.base_url = confirm_base_url(base_url)
             self.proxy = proxy
 
     def authenticated(self):
-        """
-        Authenticates using the credentials provided.
-        """
+        """Returns the current authentication status."""
         result = None
         if self.auth_object:
             result = self.auth_object.authenticated()
@@ -118,29 +139,9 @@ class ServiceClass:
         return result
 
     def token_expired(self):
-        """
-        Returns a boolean reflecting token expiration status
-        """
+        """Returns a boolean reflecting token expiration status."""
         result = None
         if self.auth_object:
             result = self.auth_object.token_expired()
 
         return result
-
-    @staticmethod
-    def parse_keywords(passed_keywords: dict):
-        """
-        Parses passed keywords to _init, setting defaults
-        """
-        access_token = None
-        ssl_verify = True
-        timeout = None
-        for key, val in passed_keywords.items():
-            if key.lower() == "access_token":
-                access_token = val
-            if key.lower() == "ssl_verify":
-                ssl_verify = val
-            if key.lower() == "timeout":
-                timeout = val
-
-        return access_token, ssl_verify, timeout

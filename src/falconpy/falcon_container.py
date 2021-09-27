@@ -1,4 +1,5 @@
-"""
+"""Falcon Container API Interface Class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-falcon_container - Falcon Container API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -42,17 +41,29 @@ from ._endpoint._falcon_container import _falcon_container_endpoints as Endpoint
 
 
 class FalconContainer(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, an
-    authorization object (oauth2.py) or a credential dictionary with
-    client_id and client_secret containing valid API credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (oauth2.py)
     """
     def get_credentials(self: object) -> dict:
+        """Gets the registry credentials
+
+        This method does not accept arguments or keywords.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container/GetCredentials
         """
-        Gets the registry credentials
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container/GetCredentials
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,

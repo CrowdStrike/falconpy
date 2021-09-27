@@ -1,4 +1,4 @@
-"""API Response formatting class
+"""Internal payload handling library - Detects
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,20 +35,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=R0903  # Using a class so that the data structure is callable
 
 
-class Result:
-    """Callable subclass to handle parsing of result client output."""
-    def __init__(self: object) -> dict:
-        """Instantiates the subclass and initializes the result object."""
-        self.result_obj = {}
+def update_detects_payload(current_payload: dict, passed_keywords: dict) -> dict:
+    """Updates the provided payload with any viable parameters provided as keywords."""
+    if passed_keywords.get("assigned_to_uuid", None):
+        current_payload["assigned_to_uuid"] = passed_keywords.get("assigned_to_uuid", None)
+    if passed_keywords.get("show_in_ui", None):
+        current_payload["show_in_ui"] = passed_keywords.get("show_in_ui", None)
+    if passed_keywords.get("status", None):
+        current_payload["status"] = passed_keywords.get("status", None)
+    if passed_keywords.get("comment", None):
+        current_payload["comment"] = passed_keywords.get("comment", None)
 
-    def __call__(self: object, status_code: int, headers, body: dict) -> dict:
-        """Formats values into a properly formatted result object."""
-        self.result_obj['status_code'] = status_code
-        # force standard dictionary to prevent json issues
-        self.result_obj['headers'] = dict(headers)
-        self.result_obj['body'] = body
-
-        return self.result_obj
+    return current_payload

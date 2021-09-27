@@ -19,10 +19,10 @@ import pytest
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from our sibling folder
 # flake8: noqa=E402
-from falconpy import api_complete as FalconSDK
-from falconpy import oauth2 as FalconAuth
+from falconpy import APIHarness
+from falconpy import OAuth2
 # Importing this to test disabling SSL Verification in a service class
-from falconpy import hosts as FalconHosts
+from falconpy import Hosts
 
 
 # The TestAuthorization class tests authentication and deauthentication
@@ -43,7 +43,7 @@ class TestAuthorization():
             if status:
                 os.environ["FALCONPY_DEBUG_CLIENT_ID"] = self.config["falcon_client_id"]
                 os.environ["FALCONPY_DEBUG_CLIENT_SECRET"] = self.config["falcon_client_secret"]
-                self.authorization = FalconAuth.OAuth2(creds={
+                self.authorization = OAuth2(creds={
                     "client_id": self.config["falcon_client_id"],
                     "client_secret": self.config["falcon_client_secret"]
                 },
@@ -86,7 +86,7 @@ class TestAuthorization():
     def uberAuth(self):
         status = self.getConfig()
         if status:
-            self.falcon = FalconSDK.APIHarness(creds={
+            self.falcon = APIHarness(creds={
                     "client_id": self.config["falcon_client_id"],
                     "client_secret": self.config["falcon_client_secret"]
                 }
@@ -105,7 +105,7 @@ class TestAuthorization():
     def serviceAuth(self):
         status = self.getConfig()
         if status:
-            self.authorization = FalconAuth.OAuth2(creds={
+            self.authorization = OAuth2(creds={
                 'client_id': self.config["falcon_client_id"],
                 'client_secret': self.config["falcon_client_secret"]
             })
@@ -125,7 +125,7 @@ class TestAuthorization():
     def serviceAuthNoSSL(self):
         status = self.getConfig()
         if status:
-            self.authorization = FalconHosts.Hosts(creds={
+            self.authorization = Hosts(creds={
                 'client_id': self.config["falcon_client_id"],
                 'client_secret': self.config["falcon_client_secret"]
             }, ssl_verify=False)
@@ -142,7 +142,7 @@ class TestAuthorization():
         status = self.getConfig()
         result = False
         if status:
-            authorization = FalconAuth.OAuth2(creds={
+            authorization = OAuth2(creds={
                     'client_id': self.config["falcon_client_id"],
                     'client_secret': self.config["falcon_client_secret"],
                     'member_cid': '1234567890ABCDEFG'
@@ -157,7 +157,7 @@ class TestAuthorization():
         return result
 
     def failServiceAuth(self):
-        self.authorization = FalconAuth.OAuth2(creds={
+        self.authorization = OAuth2(creds={
             'client_id': "BadClientID",
             'client_secret': "BadClientSecret"
         })
@@ -216,3 +216,25 @@ class TestAuthorization():
 
     def test_failServiceAuth(self):
         assert self.failServiceAuth() is True
+
+    def test_base_url_lookup(self):
+        status = self.getConfig()
+        test_falcon = OAuth2(
+            client_id=self.config["falcon_client_id"],
+            client_secret=self.config["falcon_client_secret"],
+            base_url="us1"
+        )
+        assert bool(
+            test_falcon.token()["status_code"] == 201
+        )
+
+    def test_fail_base_url_lookup(self):
+        status = self.getConfig()
+        test_falcon = OAuth2(
+            client_id=self.config["falcon_client_id"],
+            client_secret=self.config["falcon_client_secret"],
+            base_url="nowhere"
+        )
+        assert bool(
+            test_falcon.token()["status_code"] != 201
+        )
