@@ -369,7 +369,7 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
-        "pattern": "\\d{*}",
+        "pattern": "^\\d+$",
         "type": "string",
         "description": "Policy ID",
         "name": "policy_id",
@@ -392,7 +392,19 @@ _cspm_registration_endpoints = [
       },
       {
         "type": "string",
-        "description": "Azure tenantID",
+        "description": "AWS accountID",
+        "name": "aws_account_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Azure subscription ID",
+        "name": "azure_subscription_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Azure tenant ID",
         "name": "azure_tenant_id",
         "in": "query"
       },
@@ -404,6 +416,12 @@ _cspm_registration_endpoints = [
         "collectionFormat": "multi",
         "description": "user IDs",
         "name": "user_ids",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "state",
+        "name": "state",
         "in": "query"
       },
       {
@@ -428,12 +446,18 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
-        "pattern": "\\d{*}",
+        "pattern": "^\\d+$",
         "type": "string",
         "description": "Policy ID",
         "name": "policy_id",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "state",
+        "name": "state",
+        "in": "query"
       },
       {
         "pattern": "^(aws|azure|gcp)$",
@@ -451,7 +475,19 @@ _cspm_registration_endpoints = [
       },
       {
         "type": "string",
-        "description": "Azure tenantID",
+        "description": "AWS accountID",
+        "name": "aws_account_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Azure subscription ID",
+        "name": "azure_subscription_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Azure tenant ID",
         "name": "azure_tenant_id",
         "in": "query"
       }
@@ -482,17 +518,60 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
-        "maxLength": 13,
-        "minLength": 2,
-        "pattern": "^(EC2|IAM|KMS|ACM|ELB|NLB/ALB|EBS|RDS|S3|Redshift|NetworkSecurityGroup|"
-        "VirtualNetwork|Disk|PostgreSQL|AppService|KeyVault|VirtualMachine|Monitor|StorageAccount|LoadBalancer|SQLServer)$",
+        "enum": [
+          "ACM",
+          "ACR",
+          "AppService",
+          "CloudFormation",
+          "CloudTrail",
+          "CloudWatch Logs",
+          "Cloudfront",
+          "Config",
+          "Disk",
+          "DynamoDB",
+          "EBS",
+          "EC2",
+          "ECR",
+          "EFS",
+          "EKS",
+          "ELB",
+          "EMR",
+          "Elasticache",
+          "GuardDuty",
+          "IAM",
+          "Identity",
+          "KMS",
+          "KeyVault",
+          "Kinesis",
+          "Kubernetes",
+          "Lambda",
+          "LoadBalancer",
+          "Monitor",
+          "NLB/ALB",
+          "NetworkSecurityGroup",
+          "PostgreSQL",
+          "RDS",
+          "Redshift",
+          "S3",
+          "SES",
+          "SNS",
+          "SQLDatabase",
+          "SQLServer",
+          "SQS",
+          "SSM",
+          "Serverless Application Repository",
+          "StorageAccount",
+          "Subscriptions",
+          "VirtualMachine",
+          "VirtualNetwork"
+        ],
         "type": "string",
         "description": "Service type to filter policy settings by.",
         "name": "service",
         "in": "query"
       },
       {
-        "pattern": "\\d{*}",
+        "pattern": "^\\d+$",
         "type": "string",
         "description": "Policy ID",
         "name": "policy-id",

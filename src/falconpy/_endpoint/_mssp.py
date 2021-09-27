@@ -50,7 +50,7 @@ _mssp_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
+        "collectionFormat": "multi",
         "description": "CID of a child customer",
         "name": "ids",
         "in": "query",
@@ -62,7 +62,7 @@ _mssp_endpoints = [
     "getCIDGroupMembersBy",
     "GET",
     "/mssp/entities/cid-group-members/v1",
-    "Get CID Group members by CID Group IDs.",
+    "Get CID group members by CID group ID.",
     "mssp",
     [
       {
@@ -70,8 +70,8 @@ _mssp_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
-        "description": "CID Group IDs to be searched on",
+        "collectionFormat": "multi",
+        "description": "CID group IDs to search for",
         "name": "cid_group_ids",
         "in": "query",
         "required": True
@@ -110,7 +110,7 @@ _mssp_endpoints = [
     "getCIDGroupById",
     "GET",
     "/mssp/entities/cid-groups/v1",
-    "Get CID Group(s) by ID(s).",
+    "Get CID groups by ID.",
     "mssp",
     [
       {
@@ -118,8 +118,8 @@ _mssp_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
-        "description": "CID Group IDs to be searched on",
+        "collectionFormat": "multi",
+        "description": "CID group IDs to be searched on",
         "name": "cid_group_ids",
         "in": "query",
         "required": True
@@ -159,7 +159,7 @@ _mssp_endpoints = [
     "deleteCIDGroups",
     "DELETE",
     "/mssp/entities/cid-groups/v1",
-    "Delete CID Group(s) by ID(s).",
+    "Delete CID groups by ID.",
     "mssp",
     [
       {
@@ -167,8 +167,8 @@ _mssp_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
-        "description": "CID group ids to be deleted",
+        "collectionFormat": "multi",
+        "description": "CID group ids to delete",
         "name": "cid_group_ids",
         "in": "query",
         "required": True
@@ -230,12 +230,16 @@ _mssp_endpoints = [
     "getUserGroupMembersByID",
     "GET",
     "/mssp/entities/user-group-members/v1",
-    "Get User Group members by User Group ID(s).",
+    "Get user group members by user group ID.",
     "mssp",
     [
       {
-        "type": "string",
-        "description": "User Group IDs to search for",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "User group IDs to search for",
         "name": "user_group_ids",
         "in": "query",
         "required": True
@@ -274,7 +278,7 @@ _mssp_endpoints = [
     "getUserGroupsByID",
     "GET",
     "/mssp/entities/user-groups/v1",
-    "Get User Group by ID(s).",
+    "Get user groups by ID.",
     "mssp",
     [
       {
@@ -282,7 +286,7 @@ _mssp_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
+        "collectionFormat": "multi",
         "description": "User Group IDs to search for",
         "name": "user_group_ids",
         "in": "query",
@@ -323,7 +327,7 @@ _mssp_endpoints = [
     "deleteUserGroups",
     "DELETE",
     "/mssp/entities/user-groups/v1",
-    "Delete User Group(s) by ID(s).",
+    "Delete user groups by ID.",
     "mssp",
     [
       {
@@ -331,8 +335,8 @@ _mssp_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
-        "description": "User Group IDs",
+        "collectionFormat": "multi",
+        "description": "User group IDs to delete",
         "name": "user_group_ids",
         "in": "query",
         "required": True
@@ -376,7 +380,7 @@ _mssp_endpoints = [
     "queryCIDGroupMembers",
     "GET",
     "/mssp/queries/cid-group-members/v1",
-    "Query a CID Groups members by associated CID.",
+    "Query a CID groups members by associated CID.",
     "mssp",
     [
       {
@@ -388,7 +392,8 @@ _mssp_endpoints = [
       },
       {
         "enum": [
-          "last_modified_timestamp"
+          "last_modified_timestamp|asc",
+          "last_modified_timestamp|desc"
         ],
         "type": "string",
         "default": "last_modified_timestamp|desc",
@@ -406,7 +411,7 @@ _mssp_endpoints = [
       {
         "type": "integer",
         "default": 10,
-        "description": "Number of ids to return",
+        "description": "Maximum number of results to return",
         "name": "limit",
         "in": "query"
       }
@@ -461,13 +466,13 @@ _mssp_endpoints = [
     [
       {
         "type": "string",
-        "description": "User Group ID to fetch MSSP role for",
+        "description": "User group ID to fetch MSSP role for",
         "name": "user_group_id",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "CID Group ID to fetch MSSP role for",
+        "description": "CID group ID to fetch MSSP role for",
         "name": "cid_group_id",
         "in": "query"
       },
@@ -479,7 +484,8 @@ _mssp_endpoints = [
       },
       {
         "enum": [
-          "last_modified_timestamp"
+          "last_modified_timestamp|asc",
+          "last_modified_timestamp|desc"
         ],
         "type": "string",
         "default": "last_modified_timestamp|desc",
@@ -497,7 +503,7 @@ _mssp_endpoints = [
       {
         "type": "integer",
         "default": 10,
-        "description": "Number of ids to return",
+        "description": "Maximum number of results to return",
         "name": "limit",
         "in": "query"
       }
