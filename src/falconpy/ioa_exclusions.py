@@ -55,7 +55,7 @@ class IOAExclusions(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get a set of IOA Exclusions by specifying their IDs
-        
+
         Keyword arguments:
         ids -- List of exclusion IDs to retrieve. String or list of strings.
         parameters -- full parameters payload, not required if ids is provided as a keyword.
@@ -77,7 +77,7 @@ class IOAExclusions(ServiceClass):
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
-    
+
     @force_default(defaults=["body"], default_types=["dict"])
     def create_exclusions(self: object, body: dict = None, **kwargs) -> dict:
         """Create the IOA exclusions
@@ -118,7 +118,7 @@ class IOAExclusions(ServiceClass):
         """
         if not body:
             body = ioa_exclusion_payload(passed_keywords=kwargs)
-        
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -177,7 +177,7 @@ class IOAExclusions(ServiceClass):
         description --
         detection_json --
         groups -- Group IDs to exclude. List of strings.
-        id -- 
+        id --
         ifn_regex --
         name --
         pattern_id --
@@ -194,7 +194,7 @@ class IOAExclusions(ServiceClass):
 
         """
         if not body:
-            body = ioa_exclusion_payload(passed_keywords=kwargs)        
+            body = ioa_exclusion_payload(passed_keywords=kwargs)
             if kwargs.get("id", None):
                 body["id"] = kwargs.get("id", None)
 
