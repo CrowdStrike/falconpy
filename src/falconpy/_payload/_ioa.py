@@ -37,8 +37,6 @@ For more information, please refer to <https://unlicense.org>
 """
 
 
-
-
 def ioa_exclusion_payload(passed_keywords: dict) -> dict:
     """Creates a properly formatted exclusion payload
        {
@@ -63,7 +61,7 @@ def ioa_exclusion_payload(passed_keywords: dict) -> dict:
     if passed_keywords.get("cl_regex", None):
         returned_payload["cl_regex"] = passed_keywords.get("cl_regex", None)
     if passed_keywords.get("description", None):
-        returned_payload["description"]  = passed_keywords.get("description", None)
+        returned_payload["description"] = passed_keywords.get("description", None)
     if passed_keywords.get("detection_json", None):
         returned_payload["detection_json"] = passed_keywords.get("detection_json", None)
     if passed_keywords.get("groups", None):

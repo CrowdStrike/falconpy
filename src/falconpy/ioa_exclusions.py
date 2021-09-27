@@ -40,6 +40,7 @@ from ._service_class import ServiceClass
 from ._endpoint._ioa_exclusions import _ioa_exclusions_endpoints as Endpoints
 from ._payload import ioa_exclusion_payload
 
+
 class IOAExclusions(ServiceClass):
     """The only requirement to instantiate an instance of this class is one of the following:
 
