@@ -13,7 +13,7 @@ from falconpy.ml_exclusions import ML_Exclusions as FalconMLE
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
 falcon = FalconMLE(access_token=token)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 400, 404, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestMLExclusions:
@@ -28,19 +28,29 @@ class TestMLExclusions:
         return returned
 
     def serviceMLE_GenerateErrors(self):
-        falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["getMLExclusionsV1", "ids='12345678'"],
-            ["createMLExclusionsV1", "body={}"],
-            ["updateMLExclusionsV1", "body={}"],
-            ["deleteMLExclusionsV1", "ids='12345678'"]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+        error_checks = True
+        tests = {
+            "get_ml_exclusions": falcon.get_exclusions(ids="12345678"),
+            "create_exclusion": falcon.create_exclusions(body={}),
+            "create_exclusion_too": falcon.create_exclusions(comment="Unit Testing",
+                                                             groups=["12345678"],
+                                                             value="Charlie",
+                                                             excluded_from=["blocking"]
+                                                             ),
+            "update_exclusion": falcon.update_exclusions(body={}),
+            "update_exclusion_also": falcon.update_exclusions(comment="Unit Testing",
+                                                              groups=["12345678"],
+                                                              id="12345678",
+                                                              value="Bananas"
+                                                              ),
+            "delete_exclusion": falcon.delete_exclusions(ids="12345678"),
+        }
+        for key in tests:
+            if tests[key]["status_code"] not in AllowedResponses:
+                print(f"{key} \n {tests[key]}")
+                error_checks = False
 
-        return errorChecks
+        return error_checks
 
     def test_Find(self):
         assert self.serviceMLE_ListExclusions() is True
