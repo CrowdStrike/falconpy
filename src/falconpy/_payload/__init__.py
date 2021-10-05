@@ -20,6 +20,7 @@
                                                         `---' OAuth2 API SDK for Python 3 `---'
 """
 from ._generic import generic_payload_list, aggregate_payload, exclusion_payload
+from ._generic import installation_token_payload
 from ._host_group import host_group_create_payload, host_group_update_payload
 from ._recon import recon_action_payload, recon_action_update_payload, recon_rules_payload
 from ._recon import recon_notifications_payload, recon_rule_preview_payload
@@ -32,5 +33,5 @@ __all__ = [
     "recon_action_update_payload", "recon_notifications_payload", "recon_rule_preview_payload",
     "malquery_exact_search_payload", "malquery_hunt_payload", "malquery_fuzzy_payload",
     "update_detects_payload", "exclusion_payload", "ioa_exclusion_payload",
-    "host_group_create_payload", "host_group_update_payload"
+    "host_group_create_payload", "host_group_update_payload", "installation_token_payload"
 ]
