@@ -1,4 +1,5 @@
-"""
+"""Falcon Installation Tokens API Interface Class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-installation_tokens - Falcon Installation Tokens API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -37,23 +36,41 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import installation_token_payload
 from ._service_class import ServiceClass
 from ._endpoint._installation_tokens import _installation_tokens_endpoints as Endpoints
 
 
 class InstallationTokens(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, a
-    existing instance of the authentication class as an object or a
-    valid set of credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (OAuth2.token())
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def audit_events_read(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Gets the details of one or more audit events by id.
+
+        Keyword arguments:
+        ids -- List of audit event IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/audit-events-read
         """
-        Gets the details of one or more audit events by id.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/audit-events-read
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -63,10 +80,17 @@ class InstallationTokens(ServiceClass):
             )
 
     def customer_settings_read(self: object) -> dict:
+        """Check current installation token settings.
+
+        This method does not accept arguments or keywords.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/customer-settings-read
         """
-        Check current installation token settings.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/customer-settings-read
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -75,10 +99,22 @@ class InstallationTokens(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def tokens_read(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Gets the details of one or more tokens by id.
+
+        Keyword arguments:
+        ids -- List of installation token IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-read
         """
-        Gets the details of one or more tokens by id.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-read
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -87,11 +123,35 @@ class InstallationTokens(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    def tokens_create(self: object, body: dict) -> dict:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def tokens_create(self: object, body: dict = None, **kwargs) -> dict:
+        """Creates a token.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                {
+                    "expires_timestamp": "2021-09-22T02:28:11.762Z",
+                    "label": "string",
+                    "type": "string"
+                }
+        expires_timestamp -- Installation token expiration date. UTC formatted string.
+        label -- Installation token label. String.
+        type -- Installation token type. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-create
         """
-        Creates a token.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-create
+        if not body:
+            body = installation_token_payload(passed_keywords=kwargs)
+            if kwargs.get("type", None):
+                body["type"] = kwargs.get("type", None)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -101,10 +161,22 @@ class InstallationTokens(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def tokens_delete(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Deletes a token immediately. To revoke a token, use PATCH tokens_update instead.
+
+        Keyword arguments:
+        ids -- List of installation token IDs to delete. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-delete
         """
-        Deletes a token immediately. To revoke a token, use PATCH /installation-tokens/entities/tokens/v1 instead.
-        """
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-delete
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -113,12 +185,37 @@ class InstallationTokens(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def tokens_update(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
+        """Updates one or more tokens.
+        Use this endpoint to edit labels, change expiration, revoke, or restore.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                {
+                    "expires_timestamp": "2021-09-22T02:28:11.762Z",
+                    "label": "string",
+                    "revoked": boolean
+                }
+        expires_timestamp -- Installation token expiration date. UTC formatted string.
+        ids -- The token IDs to be updated. String or list of strings.
+        label -- Installation token label. String.
+        revoked -- Boolean representing if this token is revoked.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-update
         """
-        Updates one or more tokens. Use this endpoint to edit labels, change expiration, revoke, or restore.
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-update
+        if not body:
+            body = installation_token_payload(passed_keywords=kwargs)
+            if kwargs.get("revoked", None):
+                body["revoked"] = kwargs.get("revoked", None)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -130,10 +227,27 @@ class InstallationTokens(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def audit_events_query(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for audit events by providing an FQL filter and paging details.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  Example: action:'token_create'
+        limit -- The maximum number of records to return in this response. [Integer, 1-1000]
+                 Use with the offset parameter to manage pagination of results. Defaults to 50.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax (e.g. timestamp|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/audit-events-query
         """
-        Search for audit events by providing an FQL filter and paging details.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/audit-events-query
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -144,10 +258,27 @@ class InstallationTokens(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def tokens_query(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for tokens by providing an FQL filter and paging details.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  Example: status:'valid'
+        limit -- The maximum number of records to return in this response. [Integer, 1-1000]
+                 Use with the offset parameter to manage pagination of results. Defaults to 50.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax (e.g. created_timestamp|desc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-query
         """
-        Search for tokens by providing an FQL filter and paging details.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens/tokens-query
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
