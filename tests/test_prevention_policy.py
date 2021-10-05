@@ -4,6 +4,7 @@
 import os
 import sys
 import pytest
+import datetime
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -18,13 +19,13 @@ AllowedResponses = [200, 201, 400, 404, 429, 500]  # Allowing 500 for now due to
 
 
 class TestFalconPrevent:
-    def servicePrevent_queryPreventionPolicies(self):
+    def prev_queryPreventionPolicies(self):
         if falcon.queryPreventionPolicies(limit=1)["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
-    def servicePrevent_queryPreventionPolicyMembers(self):
+    def prev_queryPreventionPolicyMembers(self):
         policies = falcon.queryPreventionPolicies(limit=1)
         if policies["status_code"] != 500 and "resources" in policies["body"]:
             check = falcon.queryPreventionPolicyMembers(
@@ -38,7 +39,7 @@ class TestFalconPrevent:
         else:
             return True  # Can't hit the API for some reason
 
-    def servicePrevent_getPreventionPolicies(self):
+    def prev_getPreventionPolicies(self):
         policies = falcon.queryPreventionPolicies(parameters={"limit": 1})
         if policies["status_code"] != 500 and "resources" in policies["body"]:
             check = falcon.getPreventionPolicies(
@@ -52,7 +53,7 @@ class TestFalconPrevent:
         else:
             return True  # Can't hit the API
 
-    def servicePrevent_queryCombinedPreventionPolicies(self):
+    def prev_queryCombinedPreventionPolicies(self):
         if falcon.queryCombinedPreventionPolicies(limit=1)["status_code"] in AllowedResponses:
             return True
         else:
@@ -60,7 +61,7 @@ class TestFalconPrevent:
             pytest.skip("API communication failure")
             # return False
 
-    def servicePrevent_queryCombinedPreventionPolicyMembers(self):
+    def prev_queryCombinedPreventionPolicyMembers(self):
         policies = falcon.queryCombinedPreventionPolicies(parameters={"limit": 1})
         if policies["status_code"] != 500 and "resources" in policies["body"]:
             if falcon.queryCombinedPreventionPolicyMembers(
@@ -72,51 +73,62 @@ class TestFalconPrevent:
         else:
             return True  # Can't hit the API
 
-    def servicePrevent_GenerateErrors(self):
-        falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["queryCombinedPreventionPolicyMembers", ""],
-            ["queryCombinedPreventionPolicies", ""],
-            ["performPreventionPoliciesAction", "body={}, action_name='enable', parameters={}"],
-            ["performPreventionPoliciesAction", "body={}, parameters={'action_name':'PooF'}"],
-            ["setPreventionPoliciesPrecedence", "body={}"],
-            ["getPreventionPolicies", "ids='12345678'"],
-            ["createPreventionPolicies", "body={}"],
-            ["deletePreventionPolicies", "ids='12345678'"],
-            ["updatePreventionPolicies", "body={}"],
-            ["queryPreventionPolicyMembers", ""],
-            ["queryPreventionPolicies", ""]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+    def prev_remaining_paths(self):
+        fmt = '%Y-%m-%d %H:%M:%S'
+        stddate = datetime.datetime.now().strftime(fmt)
+        sdtdate = datetime.datetime.strptime(stddate, fmt)
+        sdtdate = sdtdate.timetuple()
+        jdate = sdtdate.tm_yday
+        jdate = "{}{}".format(stddate.replace("-", "").replace(":", "").replace(" ", ""), jdate)
+        error_checks = True
+        tests = {
+            "perform_action": falcon.perform_policies_action(body={}, action_parameters=[{"name": "filter", "value": ""}]),
+            "perform_action_also": falcon.perform_policies_action(action_name="disable", ids="12345678"),
+            "set_precedence": falcon.set_policies_precedence(body={
+                                                                "ids": ["12345678"],
+                                                                "platform_name": "Windows"
+                                                            }),
+            "set_precedence_as_well": falcon.set_policies_precedence(ids="12345678", platform_name="Windows"),
+            "create_policy_first": falcon.create_policies(body={}, clone_id="12345678"),
+            "create_policy": falcon.create_policies(description=f"FalconPy Unit Test {jdate}",
+                                                    name=f"falconpy-unit-test-{jdate}",
+                                                    platform_name="Windows",
+                                                    settings=[{"id": "12345678", "value": {}}]
+                                                    ),
+            "update_policy": falcon.update_policies(body={"id": "12345678"}),
+            "update_policy_too": falcon.update_policies(id="12345678",
+                                                        name="whatevers",
+                                                        settings=[{"id": "12345678", "value": {}}],
+                                                        description="something"
+                                                        ),
 
-        return errorChecks
+        }
+        for key in tests:
+            # print(f"{key}\n{tests[key]}")
+            if tests[key]["status_code"] not in AllowedResponses:
+                error_checks = False
+                # print(f"Failed on {key} with {tests[key]}")
 
-    def test_queryPreventionPolicies(self):
-        assert self.servicePrevent_queryPreventionPolicies() is True
+        for item in falcon.get_policies(ids=falcon.query_policies()["body"]["resources"])["body"]["resources"]:
+            if jdate in item["name"]:
+                falcon.delete_policies(ids=item["id"])
+
+        return error_checks
 
     @pytest.mark.skipif(
         falcon.queryPreventionPolicies(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
         )
-    def test_queryPreventionPolicyMembers(self):
-        assert self.servicePrevent_queryPreventionPolicyMembers() is True
+    def test_query_policy_members(self):
+        assert self.prev_queryPreventionPolicyMembers() is True
 
-    @pytest.mark.skipif(
-        falcon.queryPreventionPolicies(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
-        )
-    def test_getPreventionPolicies(self):
-        assert self.servicePrevent_getPreventionPolicies() is True
-
-    def test_queryCombinedPreventionPolicies(self):
-        assert self.servicePrevent_queryCombinedPreventionPolicies() is True
+    def test_query_combined_policies(self):
+        assert self.prev_queryCombinedPreventionPolicies() is True
 
     @pytest.mark.skipif(
         falcon.queryCombinedPreventionPolicies(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
         )
-    def test_queryCombinedPreventionPolicyMembers(self):
-        assert self.servicePrevent_queryCombinedPreventionPolicyMembers() is True
+    def test_query_combined_policy_members(self):
+        assert self.prev_queryCombinedPreventionPolicyMembers() is True
 
-    def test_Errors(self):
-        assert self.servicePrevent_GenerateErrors() is True
+    def test_remaining_paths(self):
+        assert self.prev_remaining_paths() is True
