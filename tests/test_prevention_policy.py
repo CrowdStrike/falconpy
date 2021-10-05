@@ -26,7 +26,7 @@ class TestFalconPrevent:
 
     def servicePrevent_queryPreventionPolicyMembers(self):
         policies = falcon.queryPreventionPolicies(limit=1)
-        if policies["status_code"] != 500 and policies["body"]["resources"]:
+        if policies["status_code"] != 500 and "resources" in policies["body"]:
             check = falcon.queryPreventionPolicyMembers(
                     parameters={"id": policies["body"]["resources"][0]}
                     )
@@ -40,7 +40,7 @@ class TestFalconPrevent:
 
     def servicePrevent_getPreventionPolicies(self):
         policies = falcon.queryPreventionPolicies(parameters={"limit": 1})
-        if policies["status_code"] != 500 and policies["body"]["resources"]:
+        if policies["status_code"] != 500 and "resources" in policies["body"]:
             check = falcon.getPreventionPolicies(
                     ids=policies["body"]["resources"][0]
                     )
