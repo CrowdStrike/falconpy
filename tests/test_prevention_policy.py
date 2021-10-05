@@ -62,7 +62,7 @@ class TestFalconPrevent:
 
     def servicePrevent_queryCombinedPreventionPolicyMembers(self):
         policies = falcon.queryCombinedPreventionPolicies(parameters={"limit": 1})
-        if policies["status_code"] != 500:
+        if policies["status_code"] != 500 and "resources" in policies["body"]:
             if falcon.queryCombinedPreventionPolicyMembers(
                     parameters={"id": policies["body"]["resources"][0]["id"]}
                     )["status_code"] in AllowedResponses:
