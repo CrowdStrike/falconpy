@@ -4,7 +4,8 @@
 import os
 import sys
 import pytest
-import datetime
+import string
+import random
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -74,12 +75,7 @@ class TestFalconPrevent:
             return True  # Can't hit the API
 
     def prev_remaining_paths(self):
-        fmt = '%Y-%m-%d %H:%M:%S'
-        stddate = datetime.datetime.now().strftime(fmt)
-        sdtdate = datetime.datetime.strptime(stddate, fmt)
-        sdtdate = sdtdate.timetuple()
-        jdate = sdtdate.tm_yday
-        jdate = "{}{}".format(stddate.replace("-", "").replace(":", "").replace(" ", ""), jdate)
+        jdate = ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
         error_checks = True
         tests = {
             "perform_action": falcon.perform_policies_action(body={}, action_parameters=[{"name": "filter", "value": ""}]),
@@ -130,6 +126,6 @@ class TestFalconPrevent:
     def test_query_combined_policy_members(self):
         assert self.prev_queryCombinedPreventionPolicyMembers() is True
 
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
+    # @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
     def test_remaining_paths(self):
         assert self.prev_remaining_paths() is True
