@@ -87,5 +87,6 @@ class TestInstallationTokens:
     def test_query_tokens(self):
         assert self.svc_tokens_query_tokens() is True
 
+    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to token API rate limit configuration")
     def test_remaining_code_paths(self):
         assert self.svc_tokens_test_code_paths() is True
