@@ -51,18 +51,7 @@ class TestInstallationTokens:
                                                   expires_timestamp="2022-12-01T00:00:00Z",
                                                   label=f"Unit testing {ran_string}"
                                                   ),
-            "tokens_update_first": falcon.tokens_update(body={}, ids="12345678"),
-            "tokens_update": falcon.tokens_update(ids=falcon.tokens_query(
-                                                                filter=f"label:'Unit testing {ran_string}'"
-                                                                )["body"]["resources"][0],
-                                                  expires_timestamp="2022-12-31T00:00:00Z",
-                                                  label=f"Unit testing {ran_string}",
-                                                  revoked=True
-                                                  ),
-            "tokens_delete": falcon.tokens_delete(
-                ids=falcon.tokens_query(filter=f"label:'Unit testing {ran_string}'")["body"]["resources"][0]
-                ),
-
+            "tokens_update_first": falcon.tokens_update(body={}, ids="12345678")
         }
         for key in tests:
             # print(f"{key} \n {tests[key]}")
@@ -70,6 +59,22 @@ class TestInstallationTokens:
             if tests[key]["status_code"] not in AllowedResponses:
                 # print(f"{key} \n {tests[key]}")
                 error_checks = False
+
+        # Test update / delete after a slight delay
+        try:
+            id_list = falcon.tokens_query(filter=f"label:'Unit testing {ran_string}'")
+            if id_list["status_code"] != 429:
+                falcon.tokens_update(ids=id_list["body"]["resources"],
+                                     expires_timestamp="2022-12-31T00:00:00Z",
+                                     label=f"Unit testing {ran_string}",
+                                     revoked=True
+                                     )
+                falcon.tokens_delete(ids=id_list["body"]["resources"])
+            else:
+                pytest.skip("Rate limit hit, skipping")
+
+        except KeyError:
+            error_checks = False
 
         return error_checks
 
@@ -82,6 +87,5 @@ class TestInstallationTokens:
     def test_query_tokens(self):
         assert self.svc_tokens_query_tokens() is True
 
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
     def test_remaining_code_paths(self):
         assert self.svc_tokens_test_code_paths() is True
