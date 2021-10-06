@@ -75,7 +75,7 @@ class TestFalconPrevent:
             return True  # Can't hit the API
 
     def prev_remaining_paths(self):
-        jdate = ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
+        ran_string = ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
         error_checks = True
         tests = {
             "perform_action": falcon.perform_policies_action(body={}, action_parameters=[{"name": "filter", "value": ""}]),
@@ -86,8 +86,8 @@ class TestFalconPrevent:
                                                             }),
             "set_precedence_as_well": falcon.set_policies_precedence(ids="12345678", platform_name="Windows"),
             "create_policy_first": falcon.create_policies(body={}, clone_id="12345678"),
-            "create_policy": falcon.create_policies(description=f"FalconPy Unit Test {jdate}",
-                                                    name=f"falconpy-unit-test-{jdate}",
+            "create_policy": falcon.create_policies(description=f"FalconPy Unit Test {ran_string}",
+                                                    name=f"falconpy-unit-test-{ran_string}",
                                                     platform_name="Windows",
                                                     settings=[{"id": "12345678", "value": {}}]
                                                     ),
@@ -106,7 +106,7 @@ class TestFalconPrevent:
                 # print(f"Failed on {key} with {tests[key]}")
 
         for item in falcon.get_policies(ids=falcon.query_policies()["body"]["resources"])["body"]["resources"]:
-            if jdate in item["name"]:
+            if ran_string in item["name"]:
                 falcon.delete_policies(ids=item["id"])
 
         return error_checks

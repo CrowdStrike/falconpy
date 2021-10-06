@@ -2,7 +2,8 @@
 # This class tests the installation_tokens service class
 import os
 import sys
-import datetime
+import string
+import random
 import pytest
 # Authentication via test_authorization.py
 from tests import test_authorization as Authorization
@@ -41,30 +42,25 @@ class TestInstallationTokens:
 
     def svc_tokens_test_code_paths(self):
         error_checks = True
-        fmt = '%Y-%m-%d %H:%M:%S'
-        stddate = datetime.datetime.now().strftime(fmt)
-        sdtdate = datetime.datetime.strptime(stddate, fmt)
-        sdtdate = sdtdate.timetuple()
-        jdate = sdtdate.tm_yday
-        jdate = "{}{}".format(stddate.replace("-", "").replace(":", "").replace(" ", ""), jdate)
+        ran_string = ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
         tests = {
             "audit_events_read": falcon.audit_events_read(ids="12345678"),
             "tokens_read": falcon.tokens_read(ids="12345678"),
             "tokens_create_first": falcon.tokens_create(body={}),
             "tokens_create": falcon.tokens_create(type="customer_managed",
                                                   expires_timestamp="2022-12-01T00:00:00Z",
-                                                  label=f"Unit testing {jdate}"
+                                                  label=f"Unit testing {ran_string}"
                                                   ),
             "tokens_update_first": falcon.tokens_update(body={}, ids="12345678"),
             "tokens_update": falcon.tokens_update(ids=falcon.tokens_query(
-                                                                filter=f"label:'Unit testing {jdate}'"
+                                                                filter=f"label:'Unit testing {ran_string}'"
                                                                 )["body"]["resources"][0],
                                                   expires_timestamp="2022-12-31T00:00:00Z",
-                                                  label=f"Unit testing {jdate}",
+                                                  label=f"Unit testing {ran_string}",
                                                   revoked=True
                                                   ),
             "tokens_delete": falcon.tokens_delete(
-                ids=falcon.tokens_query(filter=f"label:'Unit testing {jdate}'")["body"]["resources"][0]
+                ids=falcon.tokens_query(filter=f"label:'Unit testing {ran_string}'")["body"]["resources"][0]
                 ),
 
         }
