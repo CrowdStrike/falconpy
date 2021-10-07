@@ -181,7 +181,12 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
         except AttributeError:
             timeout = None
 
-    returned = perform_request(proxy=proxy, timeout=timeout, **kwargs)
+        try:
+            user_agent = caller.user_agent
+        except AttributeError:
+            user_agent = None
+
+    returned = perform_request(proxy=proxy, timeout=timeout, user_agent=user_agent, **kwargs)
 
     return returned
 
@@ -217,10 +222,13 @@ def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> objec
         Float representing the global timeout for requests or a tuple containing the connect / read timeouts.
         - Example: 30
         - Example: (5.05, 25)
+    user_agent: string
+        - Example: companyname-integrationname/version
     """
     method = kwargs.get("method", "GET")
     body = kwargs.get("body", None)
     body_validator = kwargs.get("body_validator", None)
+    user_agent = kwargs.get("user_agent", None)
     perform = True
     if method.upper() in _ALLOWED_METHODS:
         # Validate parameters
@@ -239,7 +247,11 @@ def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> objec
 
         # Perform the request
         if perform:
-            headers["User-Agent"] = _USER_AGENT  # Force all requests to pass the User-Agent identifier
+            if user_agent:
+                headers["User-Agent"] = user_agent
+            else:
+                headers["User-Agent"] = _USER_AGENT  # Force all requests to pass the User-Agent identifier
+            headers["CrowdStrike-SDK"] = _USER_AGENT
             try:
                 response = requests.request(method.upper(), endpoint, params=kwargs.get("params", None),
                                             headers=headers, json=kwargs.get("body", None), data=kwargs.get("data", None),

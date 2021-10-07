@@ -67,6 +67,8 @@ class ServiceClass:
         client_secret -- Client Secret for the CrowdStriek API. Mutually exclusive to creds.
         validate_payload -- Boolean specifying if body payloads should be validated.
                             Defaults to True.
+        user_agent -- User-Agent string to use for all requests made to the CrowdStrike API.
+                      String. Defaults to crowdstrike-falconpy/VERSION.
 
         This method only accepts keywords to specify arguments.
         """
@@ -129,6 +131,8 @@ class ServiceClass:
 
             self.base_url = confirm_base_url(base_url)
             self.proxy = proxy
+
+        self.user_agent = kwargs.get("user_agent", None)
 
     def authenticated(self):
         """Returns the current authentication status."""
