@@ -235,7 +235,8 @@ class APIHarness:
                                                files=file_list,
                                                verify=self.ssl_verify,
                                                proxy=self.proxy,
-                                               timeout=self.timeout
+                                               timeout=self.timeout,
+                                               user_agent=self.user_agent
                                                )
                 else:
                     # Bad HTTP method
