@@ -11,6 +11,7 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.zero_trust_assessment import Zero_Trust_Assessment as FalconZTA
 from falconpy.cloud_connect_aws import Cloud_Connect_AWS as FalconAWS
 from falconpy import oauth2 as FalconAuth
+from falconpy._version import _TITLE, _VERSION
 
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
@@ -54,7 +55,8 @@ class TestAuthentications:
                                      client_secret=auth.config["falcon_client_secret"]
                                      )
         auth_obj.token()
-        falcon = FalconAWS(auth_object=auth_obj)
+        # While we're at it, test user_agent override
+        falcon = FalconAWS(auth_object=auth_obj, user_agent=f"{_TITLE}/{str(_VERSION)}")
         result = falcon.QueryAWSAccounts()
         if result["status_code"] in AllowedResponses:
             return True
