@@ -39,6 +39,8 @@ from ._util import confirm_base_url
 from .oauth2 import OAuth2 as FalconAuth
 
 # pylint: disable=R0902  # Nine is reasonable
+# pylint: disable=R0912  # Currently at 13 branches
+# pylint: disable=R0915  # 51/50 statements. Allowing for now. 10.07.21 - jshcodes
 
 
 class ServiceClass:
