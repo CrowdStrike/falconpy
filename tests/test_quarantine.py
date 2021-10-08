@@ -23,7 +23,10 @@ class TestQuarantine:
             "action_update_count": falcon.action_update_count(filter=""),
             "get_aggregate_files": falcon.get_aggregate_files(body={}),
             "get_quarantine_files": falcon.get_quarantine_files(body={}),
-            "update_quarantined_detects_by_id": falcon.update_quarantined_detects_by_id(body={}),
+            "update_quarantined_detects_by_id": falcon.update_quarantined_detects_by_id(body={},
+                                                                                        action="release",
+                                                                                        comment="Unit testing"
+                                                                                        ),
             "update_quarantined_detects_by_query": falcon.update_quarantined_detects_by_query(body={}),
             "query_quarantine_files": falcon.query_quarantine_files(limit=10)
         }
