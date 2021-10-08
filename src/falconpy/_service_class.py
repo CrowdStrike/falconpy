@@ -75,6 +75,7 @@ class ServiceClass:
         access_token = kwargs.get("access_token", None)
         self.ssl_verify = kwargs.get("ssl_verify", True)
         self.timeout = kwargs.get("timeout", None)
+        user_agent = kwargs.get("user_agent", None)
         # Currently defaulting to validation enabled
         self.validate_payloads = kwargs.get("validate_payloads", True)
         self.refreshable = False
@@ -104,6 +105,11 @@ class ServiceClass:
             self.base_url = auth_object.base_url
             self.ssl_verify = auth_object.ssl_verify
             self.proxy = auth_object.proxy
+            # Supports overriding user-agent per class
+            if not user_agent:
+                self.user_agent = auth_object.user_agent
+            else:
+                self.user_agent = user_agent
             # At this point in time, you cannot override
             # the auth_object's timeout per class instance
             self.timeout = auth_object.timeout
@@ -114,7 +120,8 @@ class ServiceClass:
                                          base_url=confirm_base_url(base_url),
                                          proxy=proxy,
                                          ssl_verify=self.ssl_verify,
-                                         timeout=self.timeout
+                                         timeout=self.timeout,
+                                         user_agent=user_agent
                                          )
                 self.auth_object = auth_object
                 _ = self.auth_object.token()
@@ -131,8 +138,7 @@ class ServiceClass:
 
             self.base_url = confirm_base_url(base_url)
             self.proxy = proxy
-
-        self.user_agent = kwargs.get("user_agent", None)
+            self.user_agent = user_agent
 
     def authenticated(self):
         """Returns the current authentication status."""

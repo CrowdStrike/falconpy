@@ -132,7 +132,8 @@ class APIHarness:
                                  headers={},
                                  verify=self.ssl_verify,
                                  proxy=self.proxy,
-                                 timeout=self.timeout
+                                 timeout=self.timeout,
+                                 user_agent=self.user_agent
                                  )
         if result["status_code"] == 201:
             self.token = result["body"]["access_token"]
@@ -153,7 +154,7 @@ class APIHarness:
         revoked = False
         if perform_request(method="POST", endpoint=target, data=data_payload,
                            headers=header_payload, verify=self.ssl_verify,
-                           proxy=self.proxy, timeout=self.timeout
+                           proxy=self.proxy, timeout=self.timeout, user_agent=self.user_agent
                            )["status_code"] == 200:
             self.authenticated = False
             self.token = False
