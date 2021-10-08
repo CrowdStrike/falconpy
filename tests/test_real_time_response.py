@@ -37,7 +37,10 @@ class TestRTR:
         # This will have to be periodically updated using this solution, but for now it provides the necessary code coverage.
         # Highly dependant upon my test CID / API keys
         aid_lookup = falcon_hosts.QueryDevicesByFilter(filter="hostname:'ip-172-31-30-80*'")
-        aid_to_check = aid_lookup["body"]["resources"][0]
+        if aid_lookup["body"]["resources"]:
+            aid_to_check = aid_lookup["body"]["resources"][0]
+        else:
+            pytest.skip("Race condition met, skipping.")
         if aid_to_check:
             result = falcon.RTR_InitSession(body={"device_id": aid_to_check})
             if "resources" in result["body"]:
