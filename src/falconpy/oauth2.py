@@ -55,7 +55,8 @@ class OAuth2:
     # pylint: disable=too-many-instance-attributes,too-many-arguments
     def __init__(self: object, base_url: str = "https://api.crowdstrike.com",
                  ssl_verify: bool = True, proxy: dict = None, timeout: float or tuple = None,
-                 creds: dict = None, client_id: str = None, client_secret: str = None):
+                 creds: dict = None, client_id: str = None, client_secret: str = None,
+                 user_agent: str = None):
         """Initializes the base class by ingesting credentials,
         the proxies dictionary and specifications
         for the base URL, SSL verification, and timeouts.
@@ -84,6 +85,7 @@ class OAuth2:
         self.ssl_verify = ssl_verify
         self.timeout = timeout
         self.proxy = proxy
+        self.user_agent = user_agent
         self.token_expiration = 0
         self.token_renew_window = 20
         self.token_time = time.time()
@@ -110,8 +112,10 @@ class OAuth2:
             }
             if "member_cid" in self.creds:
                 data_payload["member_cid"] = self.creds["member_cid"]
-            returned = perform_request(method="POST", endpoint=target_url, data=data_payload, headers=header_payload,
-                                       verify=self.ssl_verify, proxy=self.proxy, timeout=self.timeout)
+            returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
+                                       headers=header_payload, verify=self.ssl_verify,
+                                       proxy=self.proxy, timeout=self.timeout,
+                                       user_agent=self.user_agent)
             if returned["status_code"] == 201:
                 self.token_expiration = returned["body"]["expires_in"]
                 self.token_time = time.time()
@@ -137,8 +141,10 @@ class OAuth2:
             b64cred = generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
             header_payload = {"Authorization": f"basic {b64cred}"}
             data_payload = {"token": f"{token}"}
-            returned = perform_request(method="POST", endpoint=target_url, data=data_payload, headers=header_payload,
-                                       verify=self.ssl_verify, proxy=self.proxy, timeout=self.timeout)
+            returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
+                                       headers=header_payload, verify=self.ssl_verify,
+                                       proxy=self.proxy, timeout=self.timeout,
+                                       user_agent=self.user_agent)
             self.token_expiration = 0
             self.token_value = False
         else:
