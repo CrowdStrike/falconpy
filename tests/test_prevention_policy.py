@@ -86,18 +86,12 @@ class TestFalconPrevent:
                                                             }),
             "set_precedence_as_well": falcon.set_policies_precedence(ids="12345678", platform_name="Windows"),
             "create_policy_first": falcon.create_policies(body={}, clone_id="12345678"),
-            "create_policy": falcon.create_policies(description=f"FalconPy Unit Test {ran_string}",
-                                                    name=f"falconpy-unit-test-{ran_string}",
-                                                    platform_name="Windows",
-                                                    settings=[{"id": "12345678", "value": {}}]
-                                                    ),
             "update_policy": falcon.update_policies(body={"id": "12345678"}),
             "update_policy_too": falcon.update_policies(id="12345678",
                                                         name="whatevers",
                                                         settings=[{"id": "12345678", "value": {}}],
                                                         description="something"
-                                                        ),
-
+                                                        )
         }
         for key in tests:
             # print(f"{key}\n{tests[key]}")
@@ -105,9 +99,16 @@ class TestFalconPrevent:
                 error_checks = False
                 # print(f"Failed on {key} with {tests[key]}")
 
-        for item in falcon.get_policies(ids=falcon.query_policies()["body"]["resources"])["body"]["resources"]:
-            if ran_string in item["name"]:
-                falcon.delete_policies(ids=item["id"])
+        falcon.create_policies(description=f"FalconPy Unit Test {ran_string}",
+                               name=f"falconpy-unit-test-{ran_string}",
+                               platform_name="Windows",
+                               settings=[{"id": "12345678", "value": {}}]
+                               )
+        policy_list = falcon.query_policies() 
+        if policy_list["status_code"] != 429:
+            for item in falcon.get_policies(ids=policy_list["body"]["resources"])["body"]["resources"]:
+                if ran_string in item["name"]:
+                    falcon.delete_policies(ids=item["id"])
 
         return error_checks
 
