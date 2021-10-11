@@ -99,7 +99,7 @@ class TestFalconSensorUpdate:
             "create_policy": falcon.create_policies(description="Unit test",
                                                     name="Unit test",
                                                     platform_name="Winders",
-                                                    build="1309"
+                                                    settings={"build": "1309"}
                                                     ),
             "create_policy_also": falcon.create_policies_v2(description="Unit test",
                                                             name="Unit test",
