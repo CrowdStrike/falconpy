@@ -50,7 +50,7 @@ from .ml_exclusions import MLExclusions
 from .mssp import FlightControl
 from .oauth2 import OAuth2
 from .overwatch_dashboard import OverwatchDashboard
-from .prevention_policy import PreventionPolicy
+from .prevention_policy import PreventionPolicy, PreventionPolicies
 from .quarantine import Quarantine
 from .quick_scan import QuickScan
 from .real_time_response_admin import RealTimeResponseAdmin
@@ -61,7 +61,7 @@ from .response_policies import ResponsePolicies
 from .sample_uploads import SampleUploads
 from .scheduled_reports import ScheduledReports
 from .sensor_download import SensorDownload
-from .sensor_update_policy import SensorUpdatePolicy
+from .sensor_update_policy import SensorUpdatePolicy, SensorUpdatePolicies
 from .sensor_visibility_exclusions import SensorVisibilityExclusions
 from .spotlight_vulnerabilities import SpotlightVulnerabilities
 from .user_management import UserManagement
@@ -86,7 +86,8 @@ __all__ = [
     "OverwatchDashboard", "PreventionPolicy", "Quarantine", "QuickScan", "RealTimeResponseAdmin",
     "RealTimeResponse", "Recon", "ReportExecutions", "ResponsePolicies", "SampleUploads",
     "ScheduledReports", "SensorDownload", "SensorUpdatePolicy", "SensorVisibilityExclusions",
-    "SpotlightVulnerabilities", "UserManagement", "ZeroTrustAssessment"
+    "SpotlightVulnerabilities", "UserManagement", "ZeroTrustAssessment", "PreventionPolicies",
+    "SensorUpdatePolicies"
  ]
 """
 This is free and unencumbered software released into the public domain.
