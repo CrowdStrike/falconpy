@@ -1,4 +1,5 @@
-"""
+"""CrowdStrike Falcon User Management API interface class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-user_management - CrowdStrike Falcon User Management API interface class
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,36 +35,82 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import generic_payload_list
 from ._service_class import ServiceClass
 from ._endpoint._user_management import _user_management_endpoints as Endpoints
 
 
 class UserManagement(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (OAuth2.token())
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_roles(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_roles(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get info about a role.
+
+        Keyword arguments:
+        ids -- List of role IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetRoles
         """
-        Get info about a role.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetRoles
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetRoles",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def grant_user_role_ids(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+        """Assign one or more roles to a user.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                {
+                    "roleIds": [
+                        "string"
+                    ]
+                }
+        parameters -- full parameters payload, not required if other keywords are used.
+        role_ids -- Role IDs you want to assign to the user id. (Can also use roleIds)
+        user_uuid -- User ID to grant roles access to.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GrantUserRoleIds
         """
-        Assign one or more roles to a user.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GrantUserRoleIds
+        if not body:
+            if kwargs.get("role_ids", None):
+                kwargs["roleIds"] = kwargs.get("role_ids", None)
+
+            body = generic_payload_list(submitted_keywords=kwargs,
+                                        payload_value="roleIds"
+                                        )
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -77,10 +122,22 @@ class UserManagement(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def revoke_user_role_ids(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Revoke one or more roles from a user.
+
+        Keyword arguments:
+        ids -- List of role IDs. String or list of strings.
+        parameters -- full parameters payload, not required if other keywords are used.
+        user_uuid -- User ID to revoke roles for.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RevokeUserRoleIds
         """
-        Revoke one or more roles from a user.
-        """
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RevokeUserRoleIds
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -90,11 +147,18 @@ class UserManagement(ServiceClass):
             )
 
     def get_available_role_ids(self: object) -> dict:
+        """Show role IDs for all roles available in your customer account.
+        For more information on each role, provide the role ID to get_roles.
+
+        This method does not accept arguments or keywords.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetAvailableRoleIds
         """
-        Show role IDs for all roles available in your customer account.
-        For more information on each role, provide the role ID to `/customer/entities/roles/v1`.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetAvailableRoleIds
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -102,40 +166,99 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_user_role_ids(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Show role IDs of roles assigned to a user. For more information on each role,
+    def get_user_role_ids(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Show role IDs of roles assigned to a user. For more information on each role,
         provide the role ID to `/customer/entities/roles/v1`.
+
+        Keyword arguments:
+        user_uuid -- User ID to retrieve roles for. String.
+        parameters -- full parameters payload, not required if user_uuid is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'user_uuid'. All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetUserRoleIds
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/GetUserRoleIds
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetUserRoleIds",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "user_uuid")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def retrieve_user(self: object, parameters: dict = None, **kwargs) -> dict:
+    def retrieve_user(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get info about a user.
+
+        Keyword arguments:
+        ids -- List of User IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUser
         """
-        Get info about a user.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUser
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RetrieveUser",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
-    def create_user(self: object, body: dict) -> dict:
-        """
-        Create a new user. After creating a user,
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_user(self: object, body: dict = None, **kwargs) -> dict:
+        """Create a new user. After creating a user,
         assign one or more roles with POST /user-roles/entities/user-roles/v1.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                {
+                    "firstName": "string",
+                    "lastName": "string",
+                    "password": "string",
+                    "uid": "string"
+                }
+        first_name -- First name of the user. String. (can also use firstName)
+        last_name -- Last name of the user. String. (can also use lastName)
+        password -- Password. String.
+                    As a best practice, we recommend ommitting password. If single sign-on is
+                    enabled for your customer account, the password attribute is ignored. If
+                    single sign-on is not enabled, we send a user activation request to their
+                    email address when you create the user with no password. The user should use
+                    the activation email to set their own password.
+        uid -- The user's email address, which will be the assigned username. String. Required.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/CreateUser
         """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/CreateUser
+        if not body:
+            body = {}
+            body["uid"] = kwargs.get("uid", None)
+            body["firstName"] = kwargs.get("firstName", None)
+            body["firstName"] = kwargs.get("first_name", None)
+            body["lastName"] = kwargs.get("lastName", None)
+            body["lastName"] = kwargs.get("last_name", None)
+            body["password"] = kwargs.get("password", None)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -144,25 +267,62 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_user(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_user(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Delete a user permanently.
+
+        Keyword arguments:
+        parameters -- full parameters payload, not required if user_uuid is provided as a keyword.
+        user_uuid -- User ID to delete.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'user_uuid'. All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/DeleteUser
         """
-        Delete a user permanently.
-        """
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/DeleteUser
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="DeleteUser",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "user_uuid")
             )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def update_user(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+        """Modify an existing user.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                {
+                    "firstName": "string",
+                    "lastName": "string"
+                }
+        first_name -- First name to apply to the user. String. (Can also use firstName)
+        last_name -- Last name to apply to the user. String. (Can also use lastName)
+        parameters -- full parameters payload, not required if using other keywords.
+        user_uuid -- User ID to modify.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/UpdateUser
         """
-        Modify an existing user.
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/UpdateUser
+        if not body:
+            body = {}
+            body["firstName"] = kwargs.get("firstName", None)
+            body["firstName"] = kwargs.get("first_name", None)
+            body["lastName"] = kwargs.get("lastName", None)
+            body["lastName"] = kwargs.get("last_name", None)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -173,10 +333,17 @@ class UserManagement(ServiceClass):
             )
 
     def retrieve_emails_by_cid(self: object) -> dict:
+        """List the usernames (usually an email address) for all users in your customer account.
+
+        This method does not accept arguments or keywords.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveEmailsByCID
         """
-        List the usernames (usually an email address) for all users in your customer account.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveEmailsByCID
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -184,11 +351,18 @@ class UserManagement(ServiceClass):
             )
 
     def retrieve_user_uuids_by_cid(self: object) -> dict:
+        """List user IDs for all users in your customer account.
+        For more information on each user, provide the user ID to retrieve_user.
+
+        This method does not accept arguments or keywords.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUserUUIDsByCID
         """
-        List user IDs for all users in your customer account.
-        For more information on each user, provide the user ID to `/users/entities/user/v1`.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUserUUIDsByCID
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -196,17 +370,29 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def retrieve_user_uuid(self: object, parameters: dict = None, **kwargs) -> dict:
+    def retrieve_user_uuid(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get a user's ID by providing a username (usually an email address).
+
+        Keyword arguments:
+        uid -- List of User IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if uid is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'uid'. All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUserUUID
         """
-        Get a user's ID by providing a username (usually an email address).
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/RetrieveUserUUID
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RetrieveUserUUID",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "uid")
             )
 
     # These method names align to the operation IDs in the API but
