@@ -456,3 +456,5 @@ class PreventionPolicy(ServiceClass):
 # The legacy name for this class does not conform to PascalCase / PEP8
 # It is defined here for backwards compatibility purposes only.
 Prevention_Policy = PreventionPolicy  # pylint: disable=C0103
+# Service collection name mapping typo fix
+PreventionPolicies = PreventionPolicy
