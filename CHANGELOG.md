@@ -1,3 +1,30 @@
+# Version 0.7.1
+## Added features and functionality
++ Updated: Service Class Refactoring (Rev 4) 
+    * Provides: Body Payload Abstraction - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests into keywords. Legacy usage pattern of passing the BODY payload directly as the _body_ keyword is still supported. 
+    * Provides: PEP-257 formatting of all docstrings.
+    - `host_group.py` - Closes #361
+    - `ioa_exclusions.py` - Closes #359
+    - `installation_tokens.py` - Closes #363
+    - `ml_exclusions.py` - Closes #360
+    - `prevention_policy.py` - Closes #364
+    - `quarantine.py` - Closes #366
+    - `sensor_update_policy.py` - Closes #368
+    - `user_management.py` - Closes #367
++ Added: Class aliases for Sensor Update Policies and Prevention Policies service collections to provide classes that align to plural naming convention.
+
+## Issues resolved
++ Fixed: Hard-coded user-agent header for all requests. Moving forward, developers may specify a custom string to be used as the User-Agent header for all requests. Closes #365.
+    ```python
+    from falconpy import Hosts
+    falcon = Hosts(client_id="CLIENT_ID_HERE",
+                   client_secret="CLIENT_SECRET_HERE",
+                   user_agent="company-product/version"
+                   )
+    result = falcon.query_devices_by_filter_scroll()
+    print(result)
+    ```
+
 # Version 0.7.0
 ## Added features and functionality
 + Added: Updated `__all__` parameter in root `__init__.py`, publishing all PEP8 class names. This change allows developers to import these classes directly.

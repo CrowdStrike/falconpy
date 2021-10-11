@@ -1,4 +1,4 @@
-"""Internal version control constants
+"""Internal payload handling library - Prevention Policy Payloads
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,13 +35,44 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-_VERSION = '0.7.1'
-_MAINTAINER = 'Joshua Hiller'
-_AUTHOR = 'CrowdStrike'
-_AUTHOR_EMAIL = 'falconpy@crowdstrike.com'
-_CREDITS = 'CrowdStrike'
-_DESCRIPTION = "The CrowdStrike Falcon OAuth2 API SDK for Python 3"
-_TITLE = "crowdstrike-falconpy"
-_PROJECT_URL = "https://github.com/CrowdStrike/falconpy"
-_DOCS_URL = "https://www.falconpy.io"
-_KEYWORDS = ["crowdstrike", "falcon", "api", "sdk", "oauth2", "devsecops", "crowdstrike-falcon"]
+
+
+def prevention_policy_payload(passed_keywords: dict) -> dict:
+    """Creates a properly formatted prevention policy payload.
+    Supports create and update operations.
+    {
+        "resources": [
+            {
+                "clone_id": "string",
+                "description": "string",
+                "name": "string",
+                "platform_name": "Windows",
+                "settings": [
+                    {
+                        "id": "string",
+                        "value": {}
+                    }
+                ]
+            }
+        ]
+    }
+    """
+    returned_payload = {}
+    resources = []
+    item = {}
+    if passed_keywords.get("clone_id", None):
+        item["clone_id"] = passed_keywords.get("clone_id", None)
+    if passed_keywords.get("id", None):
+        item["id"] = passed_keywords.get("id", None)
+    if passed_keywords.get("description", None):
+        item["description"] = passed_keywords.get("description", None)
+    if passed_keywords.get("name", None):
+        item["name"] = passed_keywords.get("name", None)
+    if passed_keywords.get("platform_name", None):
+        item["platform_name"] = passed_keywords.get("platform_name", None)
+    if passed_keywords.get("settings", None):
+        item["settings"] = passed_keywords.get("settings", None)
+    resources.append(item)
+    returned_payload["resources"] = resources
+
+    return returned_payload

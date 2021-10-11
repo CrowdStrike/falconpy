@@ -53,7 +53,8 @@ class APIHarness:
                  creds: dict = None,
                  client_id: str = None, client_secret: str = None,
                  ssl_verify: bool = True, proxy: dict = None,
-                 timeout: float or tuple = None) -> object:
+                 timeout: float or tuple = None,
+                 user_agent: str = None) -> object:
         """Instantiates an instance of the class, ingests credentials,
         the base URL and the SSL verification boolean.
         Afterwards class attributes are initialized.
@@ -70,7 +71,9 @@ class APIHarness:
                      "client_secret": "CLIENT_SECRET_HERE"
                  }
         client_id -- Client ID for the CrowdStrike API. Mutually exclusive to creds.
-        client_secret -- Client Secret for the CrowdStriek API. Mutually exclusive to creds.
+        client_secret -- Client Secret for the CrowdStrike API. Mutually exclusive to creds.
+        user_agent -- User-Agent string to use for all requests made to the CrowdStrike API.
+                      String. Defaults to crowdstrike-falconpy/VERSION.
 
         This method only accepts keywords to specify arguments.
         """
@@ -92,6 +95,7 @@ class APIHarness:
         self.authenticated = False
         self.headers = lambda: {"Authorization": f"Bearer {self.token}"} if self.token else {}
         self.commands = api_endpoints
+        self.user_agent = user_agent  # Issue #365
 
     def valid_cred_format(self: object) -> bool:
         """Returns a boolean indicating if the client_id and
@@ -128,7 +132,8 @@ class APIHarness:
                                  headers={},
                                  verify=self.ssl_verify,
                                  proxy=self.proxy,
-                                 timeout=self.timeout
+                                 timeout=self.timeout,
+                                 user_agent=self.user_agent
                                  )
         if result["status_code"] == 201:
             self.token = result["body"]["access_token"]
@@ -149,7 +154,7 @@ class APIHarness:
         revoked = False
         if perform_request(method="POST", endpoint=target, data=data_payload,
                            headers=header_payload, verify=self.ssl_verify,
-                           proxy=self.proxy, timeout=self.timeout
+                           proxy=self.proxy, timeout=self.timeout, user_agent=self.user_agent
                            )["status_code"] == 200:
             self.authenticated = False
             self.token = False
@@ -231,7 +236,8 @@ class APIHarness:
                                                files=file_list,
                                                verify=self.ssl_verify,
                                                proxy=self.proxy,
-                                               timeout=self.timeout
+                                               timeout=self.timeout,
+                                               user_agent=self.user_agent
                                                )
                 else:
                     # Bad HTTP method

@@ -84,21 +84,38 @@ class TestFalconUserManagement:
         falcon.base_url = "nowhere"
         error_checks = True
         tests = {
-            "get_roles": falcon.GetRoles(ids='12345678')["status_code"],
-            "grant_user_role_ids": falcon.GrantUserRoleIds(body={}, parameters={})["status_code"],
-            "revoke_user_role_ids": falcon.RevokeUserRoleIds(ids='12345678', parameters={})["status_code"],
-            "get_available_role_ids": falcon.GetAvailableRoleIds()["status_code"],
-            "get_user_role_ids": falcon.GetUserRoleIds(parameters={})["status_code"],
-            "retrieve_user": falcon.RetrieveUser(ids='12345678')["status_code"],
-            "create_user": falcon.CreateUser(body={})["status_code"],
-            "delete_user": falcon.DeleteUser(parameters={})["status_code"],
-            "update_user": falcon.UpdateUser(body={}, parameters={})["status_code"],
-            "retrieve_emails_by_cid": falcon.RetrieveEmailsByCID()["status_code"],
-            "retrieve_user_uuids_by_cid": falcon.RetrieveUserUUIDsByCID()["status_code"],
-            "retrieve_user_uuid": falcon.RetrieveUserUUID(parameters={})["status_code"]
+            "get_roles": falcon.GetRoles(ids='12345678'),
+            "grant_user_role_ids_first": falcon.GrantUserRoleIds(body={}, parameters={}),
+            "grant_user_role_ids": falcon.GrantUserRoleIds(user_uuid="12345678", roleIds=["12345678"]),
+            "grant_user_role_ids_as_well": falcon.GrantUserRoleIds(user_uuid="12345678",
+                                                                   role_ids=["12345678"]
+                                                                   ),
+            "revoke_user_role_ids": falcon.RevokeUserRoleIds(ids='12345678',
+                                                             parameters={},
+                                                             user_uuid="whatever@nowhere.com"
+                                                             ),
+            "get_available_role_ids": falcon.GetAvailableRoleIds(),
+            "get_user_role_ids": falcon.GetUserRoleIds(parameters={}),
+            "retrieve_user": falcon.RetrieveUser(ids='12345678'),
+            "create_user": falcon.CreateUser(body={},
+                                             uid="whatever@nowhere.com",
+                                             first_name="Unit",
+                                             last_name="Testing",
+                                             password="DontUseThis"
+                                             ),
+            "delete_user": falcon.DeleteUser(parameters={}),
+            "delete_user_again": falcon.DeleteUser(ids="12345678"),
+            "update_user_first": falcon.UpdateUser(body={}, parameters={}),
+            "update_user": falcon.UpdateUser(user_uuid="12345678",
+                                             first_name="unit",
+                                             last_name="testing"
+                                             ),
+            "retrieve_emails_by_cid": falcon.RetrieveEmailsByCID(),
+            "retrieve_user_uuids_by_cid": falcon.RetrieveUserUUIDsByCID(),
+            "retrieve_user_uuid": falcon.RetrieveUserUUID(parameters={})
         }
         for key in tests:
-            if tests[key] != 500:
+            if tests[key]["status_code"] != 500:
                 error_checks = False
 
             # print(f"{key} processed with a {tests[key]} response")

@@ -39,6 +39,8 @@ from ._util import confirm_base_url
 from .oauth2 import OAuth2 as FalconAuth
 
 # pylint: disable=R0902  # Nine is reasonable
+# pylint: disable=R0912  # Currently at 13 branches
+# pylint: disable=R0915  # 51/50 statements. Allowing for now. 10.07.21 - jshcodes
 
 
 class ServiceClass:
@@ -67,12 +69,15 @@ class ServiceClass:
         client_secret -- Client Secret for the CrowdStriek API. Mutually exclusive to creds.
         validate_payload -- Boolean specifying if body payloads should be validated.
                             Defaults to True.
+        user_agent -- User-Agent string to use for all requests made to the CrowdStrike API.
+                      String. Defaults to crowdstrike-falconpy/VERSION.
 
         This method only accepts keywords to specify arguments.
         """
         access_token = kwargs.get("access_token", None)
         self.ssl_verify = kwargs.get("ssl_verify", True)
         self.timeout = kwargs.get("timeout", None)
+        user_agent = kwargs.get("user_agent", None)
         # Currently defaulting to validation enabled
         self.validate_payloads = kwargs.get("validate_payloads", True)
         self.refreshable = False
@@ -102,6 +107,11 @@ class ServiceClass:
             self.base_url = auth_object.base_url
             self.ssl_verify = auth_object.ssl_verify
             self.proxy = auth_object.proxy
+            # Supports overriding user-agent per class
+            if not user_agent:
+                self.user_agent = auth_object.user_agent
+            else:
+                self.user_agent = user_agent
             # At this point in time, you cannot override
             # the auth_object's timeout per class instance
             self.timeout = auth_object.timeout
@@ -112,7 +122,8 @@ class ServiceClass:
                                          base_url=confirm_base_url(base_url),
                                          proxy=proxy,
                                          ssl_verify=self.ssl_verify,
-                                         timeout=self.timeout
+                                         timeout=self.timeout,
+                                         user_agent=user_agent
                                          )
                 self.auth_object = auth_object
                 _ = self.auth_object.token()
@@ -129,6 +140,7 @@ class ServiceClass:
 
             self.base_url = confirm_base_url(base_url)
             self.proxy = proxy
+            self.user_agent = user_agent
 
     def authenticated(self):
         """Returns the current authentication status."""

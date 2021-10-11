@@ -1,7 +1,7 @@
-# test_host_groups.py
-# This class tests the firewall_policies service class
+"""test_host_groups.py
+This class tests the firewall_policies service class
+"""
 
-import json
 import os
 import sys
 import pytest
@@ -10,96 +10,113 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import host_group as FalconHostGroup
+from falconpy import HostGroup
 
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
-falcon = FalconHostGroup.Host_Group(access_token=token)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+falcon = HostGroup(access_token=token)
+AllowedResponses = [200, 400, 404, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestHostGroup:
 
-    def serviceHostGroup_queryHostGroups(self):
-        if falcon.queryHostGroups(parameters={"limit": 1})["status_code"] in AllowedResponses:
+    def svc_hg_query_host_groups(self):
+        if falcon.query_host_groups(parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
-    def serviceHostGroup_queryGroupMembers(self):
-        if falcon.queryGroupMembers(
-                parameters={"limit": 1, "id": falcon.queryHostGroups(parameters={"limit": 1})["body"]["resources"][0]}
+    def svc_hg_query_group_members(self):
+        if falcon.query_group_members(
+                parameters={"limit": 1, "id": falcon.query_host_groups(parameters={"limit": 1})["body"]["resources"][0]}
                 )["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
-    def serviceHostGroup_getHostGroups(self):
-        if falcon.getHostGroups(
-                ids=falcon.queryHostGroups(parameters={"limit": 1})["body"]["resources"][0]
+    def svc_hg_get_host_groups(self):
+        if falcon.get_host_groups(
+                ids=falcon.query_host_groups(parameters={"limit": 1})["body"]["resources"][0]
                 )["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
-    def serviceHostGroup_queryCombinedHostGroups(self):
-        if falcon.queryCombinedHostGroups(parameters={"limit": 1})["status_code"] in AllowedResponses:
+    def svc_hg_query_combined_host_groups(self):
+        if falcon.query_combined_host_groups(parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
-    def serviceHostGroup_queryCombinedGroupMembers(self):
-        if falcon.queryCombinedGroupMembers(
+    def svc_hg_query_combined_group_members(self):
+        if falcon.query_combined_group_members(
             parameters={"limit": 1,
-                        "id": falcon.queryCombinedHostGroups(parameters={"limit": 1})["body"]["resources"][0]["id"]
+                        "id": falcon.query_combined_host_groups(parameters={"limit": 1})["body"]["resources"][0]["id"]
                         })["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
-    def serviceHostGroup_GenerateErrors(self):
-        falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["queryCombinedGroupMembers", ""],
-            ["queryCombinedHostGroups", ""],
-            ["performGroupAction", "action_name='add-hosts', body={}, parameters={}"],
-            ["performGroupAction", "body={}, parameters={'action_name':'PooF'}"],
-            ["performGroupAction", "body={}, parameters={}"],
-            ["getHostGroups", "ids='12345678'"],
-            ["createHostGroups", "body={}"],
-            ["deleteHostGroups", "ids='12345678'"],
-            ["updateHostGroups", "body={}"],
-            ["queryGroupMembers", ""],
-            ["queryHostGroups", ""]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+    def svc_hg_test_all_functionality(self):
+        error_checks = True
+        tests = {
+            "perform_group_action": falcon.perform_group_action(ids="12345678",
+                                                                action_name="add-hosts",
+                                                                action_parameters=[{
+                                                                    "name": "filter",
+                                                                    "value": "platform_name:'Windows'"
+                                                                }]
+                                                                ),
+            "create_host_groups": falcon.create_host_groups(body={}, group_type="Dunno"),
+            "create_host_groups_also": falcon.create_host_groups(assignment_rule="WhateverBro",
+                                                                 description="FalconPy Unit Testing",
+                                                                 name="UnitTestWhatevers"
+                                                                 ),
+            "delete_host_groups": falcon.delete_host_groups(ids="12345678"),
+            "update_host_groups_first": falcon.update_host_groups(body={}),
+            "update_host_groups": falcon.update_host_groups(assignment_rule="WhateverBro",
+                                                            description="FalconPy Unit Testing",
+                                                            name="UnitTestWhatevers",
+                                                            id="12345678"
+                                                            ),
+        }
+        for key in tests:
+            if tests[key]["status_code"] not in AllowedResponses:
+                # print(f"{key} \n {tests[key]}")
+                error_checks = False
 
-        return errorChecks
+        return error_checks
 
-    def test_queryHostGroups(self):
-        assert self.serviceHostGroup_queryHostGroups() is True
+    def test_query_host_groups(self):
+        assert self.svc_hg_query_host_groups() is True
 
-    @pytest.mark.skipif(falcon.queryHostGroups(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
-    def test_queryGroupMembers(self):
-        assert self.serviceHostGroup_queryGroupMembers() is True
+    @pytest.mark.skipif(falcon.query_host_groups(
+        parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
+        )
+    def test_query_group_members(self):
+        assert self.svc_hg_query_group_members() is True
 
     @pytest.mark.skipif(
-        falcon.queryHostGroups(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
+        falcon.query_host_groups(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
         )
-    def test_getHostGroups(self):
-        assert self.serviceHostGroup_getHostGroups() is True
+    def test_get_host_groups(self):
+        assert self.svc_hg_get_host_groups() is True
 
-    def test_queryCombinedHostGroups(self):
-        assert self.serviceHostGroup_queryCombinedHostGroups() is True
+    def test_query_combined_host_groups(self):
+        assert self.svc_hg_query_combined_host_groups() is True
 
     @pytest.mark.skipif(
-        falcon.queryCombinedHostGroups(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
+        falcon.query_combined_host_groups(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
         )
-    def test_queryCombinedGroupMembers(self):
-        assert self.serviceHostGroup_queryCombinedGroupMembers() is True
+    def test_query_combined_group_members(self):
+        assert self.svc_hg_query_combined_group_members() is True
 
-    def test_Errors(self):
-        assert self.serviceHostGroup_GenerateErrors() is True
+    def test_post_functionality(self):
+        assert self.svc_hg_test_all_functionality() is True
+
+    def test_invalid_action_error(self):
+        assert bool(
+            int(
+                falcon.perform_group_action(body={}, action_name="boogie")["status_code"]
+            ) == 500
+        )

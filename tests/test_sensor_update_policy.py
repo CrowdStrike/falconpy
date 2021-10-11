@@ -7,15 +7,15 @@ import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Classes to test - manually imported from sibling folder
-from falconpy import sensor_update_policy as FalconSensorUpdate
+from falconpy import SensorUpdatePolicies
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 
 
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
-falcon = FalconSensorUpdate.Sensor_Update_Policy(access_token=token)
-AllowedResponses = [200, 429, 500]  # Adding 500 as an allowed response for now
+falcon = SensorUpdatePolicies(access_token=token)
+AllowedResponses = [200, 400, 404, 429]
 
 
 class TestFalconSensorUpdate:
@@ -61,6 +61,18 @@ class TestFalconSensorUpdate:
         else:
             return False
 
+    def serviceSensorUpdate_queryCombinedSensorUpdatePoliciesV2(self):
+        if falcon.queryCombinedSensorUpdatePoliciesV2(parameters={"limit": 1})["status_code"] in AllowedResponses:
+            return True
+        else:
+            return False
+
+    def serviceSensorUpdate_queryCombinedSensorUpdateBuilds(self):
+        if falcon.queryCombinedSensorUpdateBuilds(limit=1)["status_code"] in AllowedResponses:
+            return True
+        else:
+            return False
+
     def serviceSensorUpdate_queryCombinedSensorUpdatePolicyMembers(self):
         if falcon.queryCombinedSensorUpdatePolicyMembers(parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
@@ -68,33 +80,53 @@ class TestFalconSensorUpdate:
             return False
 
     def serviceSensorUpdate_GenerateErrors(self):
-        falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["querySensorUpdatePolicies", ""],
-            ["querySensorUpdatePolicyMembers", ""],
-            ["getSensorUpdatePolicies", "ids='12345678'"],
-            ["getSensorUpdatePoliciesV2", "ids='12345678'"],
-            ["queryCombinedSensorUpdatePolicies", ""],
-            ["queryCombinedSensorUpdatePolicyMembers", ""],
-            ["revealUninstallToken", "body={}"],
-            ["queryCombinedSensorUpdateBuilds", ""],
-            ["createSensorUpdatePolicies", "body={}"],
-            ["createSensorUpdatePoliciesV2", "body={}"],
-            ["deleteSensorUpdatePolicies", "ids=['12345678','98765432','01234567']"],
-            ["updateSensorUpdatePolicies", "body={}"],
-            ["updateSensorUpdatePoliciesV2", "body={}"],
-            ["performSensorUpdatePoliciesAction", "body={}, action_name='enable'"],
-            ["performSensorUpdatePoliciesAction", "body={}"],
-            ["setSensorUpdatePoliciesPrecedence", "body={}"],
-            ["queryCombinedSensorUpdatePoliciesV2", ""]
-        ]
+        error_checks = True
+        tests = {
+            "uninstall_token": falcon.reveal_uninstall_token(device_id="MAINTENANCE"),
+            "delete_policy": falcon.delete_policies(ids="12345678"),
+            "update_policy": falcon.update_policies(description="whatever",
+                                                    name="unit test",
+                                                    id="12345678",
+                                                    build="1309"
+                                                    ),
+            "update_policy_also": falcon.update_policies_v2(description="whatever",
+                                                            name="unit test",
+                                                            id="12345678",
+                                                            build="1309",
+                                                            uninstall_protection="DISABLED"
+                                                            ),
+            "set_precedence": falcon.set_policies_precedence(ids="12345678", platform_name="Windows"),
+            "create_policy": falcon.create_policies(description="Unit test",
+                                                    name="Unit test",
+                                                    platform_name="Winders",
+                                                    settings={"build": "1309"}
+                                                    ),
+            "create_policy_also": falcon.create_policies_v2(description="Unit test",
+                                                            name="Unit test",
+                                                            platform_name="Windowz",
+                                                            build="1309",
+                                                            uninstall_protection="DISABLED"
+                                                            ),
+            "perform_action": falcon.perform_policies_action(action_name="disable",
+                                                             ids="12345678",
+                                                             action_parameters=[{
+                                                                 "name": "group_id",
+                                                                 "value": "123456789abcdef987654321"
+                                                             }])
+        }
 
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+        for key in tests:
+            # print(f"{key}\n{tests[key]}")
+            if tests[key]["status_code"] not in AllowedResponses:
+                error_checks = False
+                # print(f"Failed on {key} with {tests[key]}")
 
-        return errorChecks
+        if falcon.perform_policies_action(action_name="dance",
+                                          ids="12345678"
+                                          )["status_code"] != 500:
+            error_checks = False
+
+        return error_checks
 
     def test_querySensorUpdatePolicies(self):
         assert self.serviceSensorUpdate_querySensorUpdatePolicies() is True
@@ -104,6 +136,12 @@ class TestFalconSensorUpdate:
 
     def test_queryCombinedSensorUpdatePolicies(self):
         assert self.serviceSensorUpdate_queryCombinedSensorUpdatePolicies() is True
+
+    def test_queryCombinedSensorUpdateBuilds(self):
+        assert self.serviceSensorUpdate_queryCombinedSensorUpdateBuilds() is True
+
+    def test_queryCombinedSensorUpdatePoliciesV2(self):
+        assert self.serviceSensorUpdate_queryCombinedSensorUpdatePoliciesV2() is True
 
     def test_queryCombinedSensorUpdatePolicyMembers(self):
         assert self.serviceSensorUpdate_queryCombinedSensorUpdatePolicyMembers() is True
@@ -118,5 +156,5 @@ class TestFalconSensorUpdate:
     def test_getSensorUpdatePoliciesV2(self):
         assert self.serviceSensorUpdate_getSensorUpdatePoliciesV2() is True
 
-    def test_Errors(self):
+    def test_remaining_code_paths(self):
         assert self.serviceSensorUpdate_GenerateErrors() is True

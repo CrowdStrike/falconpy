@@ -1,4 +1,5 @@
-"""
+"""CrowdStrike Falcon Sensor Policy Management API interface class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-sensor_update_policy - CrowdStrike Falcon Sensor Policy Management API interface class
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,22 +35,55 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import generate_error_result, args_to_params, force_default, handle_single_argument, process_service_request
+from ._util import generate_error_result, args_to_params, force_default
+from ._util import handle_single_argument, process_service_request
+from ._payload import generic_payload_list, sensor_policy_payload
 from ._service_class import ServiceClass
 from ._endpoint._sensor_update_policies import _sensor_update_policies_endpoints as Endpoints
 
 
 class SensorUpdatePolicy(ServiceClass):
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (OAuth2.token())
     """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class.
-    """
-    def reveal_uninstall_token(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def reveal_uninstall_token(self: object, body: dict = None, **kwargs) -> dict:
+        """Reveals an uninstall token for a specific device.
+        To retrieve the bulk maintenance token pass the value
+        'MAINTENANCE' as the value for 'device_id'.
+
+        Keyword arguments:
+        audit_message -- Message to list in the audit log for this action. String.
+        body -- full body payload, not required if keywords are used.
+                {
+                    "audit_message": "string",
+                    "device_id": "string"
+                }
+        device_id -- Device ID to retrieve the uninstall token for. Pass the value "MAINTENANCE"
+                     to retrieve the bulk maintenance token.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/revealUninstallToken
         """
-        Reveals an uninstall token for a specific device.
-        To retrieve the bulk maintenance token pass the value 'MAINTENANCE' as the value for 'device_id'.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/revealUninstallToken
+        if not body:
+            body = {}
+            body["audit_message"] = kwargs.get("audit_message", None)
+            body["device_id"] = kwargs.get("device_id", None)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -61,11 +93,24 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_builds(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve available builds for use with Sensor Update Policies.
+
+        Keyword arguments:
+        platform -- The platform to return builds for. String.
+                    Allowed values: "linux", "mac", "windows"
+        parameters -- full parameters payload, not required if platform is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'platform'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/queryCombinedSensorUpdateBuilds
         """
-        Retrieve available builds for use with Sensor Update Policies.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #       ...     /sensor-update-policies/queryCombinedSensorUpdateBuilds
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -76,12 +121,29 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Search for members of a Sensor Update Policy in your environment by providing an FQL
+        """Search for members of a Sensor Update Policy in your environment by providing an FQL
         filter and paging details. Returns a set of host details which match the filter criteria.
+
+        Keyword arguments:
+        id -- The ID of the Sensor Update Policy to search for members of
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/queryCombinedSensorUpdatePolicyMembers
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #       ...     /sensor-update-policies/queryCombinedSensorUpdatePolicyMembers
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -92,12 +154,32 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Search for Sensor Update Policies in your environment by providing an FQL filter and paging details.
+        """Search for Sensor Update Policies in your environment by providing an FQL filter and paging details.
         Returns a set of Sensor Update Policies which match the filter criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax.
+                created_by                      modified_timestamp
+                created_timestamp               name
+                enabled                         platform_name
+                modified_by                     precedence
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/queryCombinedSensorUpdatePolicies
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #       ...     /sensor-update-policies/queryCombinedSensorUpdatePolicies
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -108,13 +190,33 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_policies_v2(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Search for Sensor Update Policies with additional support for uninstall protection in your environment
-        by providing an FQL filter and paging details.
+        """Search for Sensor Update Policies with additional support for
+        uninstall protection in your environment by providing an FQL filter and paging details.
         Returns a set of Sensor Update Policies which match the filter criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax.
+                created_by                      modified_timestamp
+                created_timestamp               name
+                enabled                         platform_name
+                modified_by                     precedence
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/queryCombinedSensorUpdatePoliciesV2
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #       ...     /sensor-update-policies/queryCombinedSensorUpdatePoliciesV2
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -123,18 +225,53 @@ class SensorUpdatePolicy(ServiceClass):
             params=parameters
             )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def perform_policies_action(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def perform_policies_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
+        """Perform the specified action on the Sensor Update Policies specified in the request.
+
+        Keyword arguments:
+        action_name -- action to perform: 'add-host-group', 'disable', 'enable',
+                       or 'remove-host-group'.
+        action_parameters -- Action specific parameter options. List of dictionaries.
+                             {
+                                 "name": "string",
+                                 "value": "string"
+                             }
+        body -- full body payload, not required if keywords are used.
+                {
+                    "action_parameters": [
+                        {
+                            "name": "string",
+                            "value": "string"
+                        }
+                    ],
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- Sensor Update policy ID(s) to perform actions against. String or list of strings.
+        parameters - full parameters payload, not required if action_name is provide as a keyword.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/performSensorUpdatePoliciesAction
         """
-        Perform the specified action on the Sensor Update Policies specified in the request.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #        ...    /sensor-update-policies/performSensorUpdatePoliciesAction
         _allowed_actions = ['add-host-group', 'disable', 'enable', 'remove-host-group']
         operation_id = "performSensorUpdatePoliciesAction"
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         action_name = parameter_payload.get("action_name", "Not Specified")
         if action_name.lower() in _allowed_actions:
+            if not body:
+                body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+                if kwargs.get("action_parameters", None):
+                    body["action_parameters"] = kwargs.get("action_parameters", None)
+
             returned = process_service_request(
                             calling_object=self,
                             endpoints=Endpoints,
@@ -148,14 +285,39 @@ class SensorUpdatePolicy(ServiceClass):
 
         return returned
 
-    def set_policies_precedence(self: object, body: dict) -> dict:
-        """
-        Sets the precedence of Sensor Update Policies based on the order of IDs specified in the request.
-        The first ID specified will have the highest precedence and the last ID specified will have the lowest.
+    @force_default(defaults=["body"], default_types=["dict"])
+    def set_policies_precedence(self: object, body: dict = None, **kwargs) -> dict:
+        """Sets the precedence of Sensor Update Policies based on the order
+        of IDs specified in the request. The first ID specified will have the
+        highest precedence and the last ID specified will have the lowest.
         You must specify all non-Default Policies for a platform when updating precedence.
+
+        Keyword arguments:
+        body -- full body payload, not required if keywords are used.
+                {
+                    "ids": [
+                        "string"
+                    ],
+                    "platform_name": "Windows"
+                }
+        ids -- Sensor Update policy ID(s) to perform actions against. String or list of strings.
+        platform_name -- OS platform name.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/setSensorUpdatePoliciesPrecedence
         """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #        ...    /sensor-update-policies/setSensorUpdatePoliciesPrecedence
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+            if kwargs.get("platform_name", None):
+                body["platform_name"] = kwargs.get("platform_name", None)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -165,10 +327,22 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve a set of Sensor Update Policies by specifying their IDs.
+
+        Keyword arguments:
+        ids -- List of Sensor Update Policy IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/getSensorUpdatePolicies
         """
-        Retrieve a set of Sensor Update Policies by specifying their IDs.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies/getSensorUpdatePolicies
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -177,12 +351,47 @@ class SensorUpdatePolicy(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    def create_policies(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_policies(self: object, body: dict = None, **kwargs) -> dict:
+        """Create Sensor Update Policies by specifying details about the policy to create.
+
+        Keyword arguments:
+        body -- full body payload, not required if keywords are used.
+                {
+                    "resources": [
+                        {
+                            "description": "string",
+                            "name": "string",
+                            "platform_name": "Windows",
+                            "settings": {
+                                    "build": "string"
+                            }
+                        }
+                    ]
+                }
+        build -- Build policy applies to. String.
+        description -- Sensor Update Policy description. String.
+        name -- Sensor Update Policy name. String.
+        platform_name -- Name of the operating system platform. String.
+        settings -- Sensor update policy specific settings. Dictionary.
+                    OVERRIDES the value of the "build" keyword if provided.
+                    {
+                        "build": "string"
+                    }
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/createSensorUpdatePolicies
         """
-        Create Sensor Update Policies by specifying details about the policy to create.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #        ...    /sensor-update-policies/createSensorUpdatePolicies
+        if not body:
+            body = sensor_policy_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -192,11 +401,23 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Delete a set of Sensor Update Policies by specifying their IDs.
+
+        Keyword arguments:
+        ids -- List of Sensor Update Policy IDs to delete. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/deleteSensorUpdatePolicies
         """
-        Delete a set of Sensor Update Policies by specifying their IDs.
-        """
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #          ...  /sensor-update-policies/deleteSensorUpdatePolicies
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -205,12 +426,47 @@ class SensorUpdatePolicy(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    def update_policies(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_policies(self: object, body: dict = None, **kwargs) -> dict:
+        """Update Sensor Update Policies by specifying the ID of the policy and details to update.
+
+        Keyword arguments:
+        body -- full body payload, not required if keywords are used.
+                {
+                    "resources": [
+                        {
+                            "description": "string",
+                            "id": "string",
+                            "name": "string",
+                            "settings": {
+                                    "build": "string"
+                            }
+                        }
+                    ]
+                }
+        build -- Build policy applies to . String.
+        description -- Sensor Update Policy description. String.
+        id -- Sensor Update Policy ID to update. String.
+        name -- Sensor Update Policy name. String.
+        settings -- Sensor Update policy specific settings. Dictionary.
+                    OVERRIDES the value of the "build" keyword if provided.
+                    {
+                        "build": "string"
+                    }
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/updateSensorUpdatePolicies
         """
-        Update Sensor Update Policies by specifying the ID of the policy and details to update.
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         ...   /sensor-update-policies/updateSensorUpdatePolicies
+        if not body:
+            body = sensor_policy_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -220,12 +476,24 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_policies_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """
-        Retrieve a set of Sensor Update Policies with additional
+        """Retrieve a set of Sensor Update Policies with additional
         support for uninstall protection by specifying their IDs.
+
+        Keyword arguments:
+        ids -- List of Sensor Update Policy IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/getSensorUpdatePoliciesV2
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #       ...     /sensor-update-policies/getSensorUpdatePoliciesV2
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -234,13 +502,53 @@ class SensorUpdatePolicy(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    def create_policies_v2(self: object, body: dict) -> dict:
-        """
-        Create Sensor Update Policies by specifying details about the
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_policies_v2(self: object, body: dict = None, **kwargs) -> dict:
+        """Create Sensor Update Policies by specifying details about the
         policy to create with additional support for uninstall protection.
+
+        Keyword arguments:
+        body -- full body payload, not required if keywords are used.
+                {
+                    "resources": [
+                        {
+                            "description": "string",
+                            "name": "string",
+                            "platform_name": "Windows",
+                            "settings": {
+                                    "build": "string",
+                                    "uninstall_protection": "ENABLED"
+                            }
+                        }
+                    ]
+                }
+        build -- Build policy applies to. String.
+        description -- Sensor Update Policy description. String.
+        name -- Sensor Update Policy name. String.
+        platform_name -- Name of the operating system platform. String.
+        settings -- Sensor update policy specific settings. Dictionary.
+                    OVERRIDES the value of the "build" and "uninstall_protection"
+                    keywords if provided.
+                    {
+                        "build": "string",
+                        "uninstall_protection": "ENABLED"
+                    }
+        uninstall_protection -- Boolean indicating if uninstall protection should be enabled.
+                                String. Allowed values: "ENABLED", "DISABLED"
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/createSensorUpdatePoliciesV2
         """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #        ...    /sensor-update-policies/createSensorUpdatePoliciesV2
+        if not body:
+            body = sensor_policy_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -248,13 +556,52 @@ class SensorUpdatePolicy(ServiceClass):
             body=body
             )
 
-    def update_policies_v2(self: object, body: dict) -> dict:
-        """
-        Update Sensor Update Policies by specifying the ID of the policy
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_policies_v2(self: object, body: dict = None, **kwargs) -> dict:
+        """Update Sensor Update Policies by specifying the ID of the policy
         and details to update with additional support for uninstall protection.
+
+        Keyword arguments:
+        body -- full body payload, not required if keywords are used.
+                {
+                    "resources": [
+                        {
+                            "description": "string",
+                            "id": "string",
+                            "name": "string",
+                            "settings": {
+                                    "build": "string",
+                                    "uninstall_protection": "ENABLED"
+                            }
+                        }
+                    ]
+                }
+        build -- Build policy applies to . String.
+        description -- Sensor Update Policy description. String.
+        id -- Sensor Update Policy ID to update. String.
+        name -- Sensor Update Policy name. String.
+        settings -- Sensor Update policy specific settings. Dictionary.
+                    OVERRIDES the value of the "build" keyword if provided.
+                    {
+                        "build": "string",
+                        "uninstall_protection": "ENABLED"
+                    }
+        uninstall_protection -- Boolean indicating if uninstall protection should be enabled.
+                                String. Allowed values: "ENABLED", "DISABLED"
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/updateSensorUpdatePoliciesV2
         """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         ...   /sensor-update-policies/updateSensorUpdatePoliciesV2
+        if not body:
+            body = sensor_policy_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -264,12 +611,29 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Search for members of a Sensor Update Policy in your environment by providing an FQL
+        """Search for members of a Sensor Update Policy in your environment by providing an FQL
         filter and paging details. Returns a set of Agent IDs which match the filter criteria.
+
+        Keyword arguments:
+        id -- The ID of the Sensor Update Policy to search for members of
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/querySensorUpdatePolicyMembers
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #       ...     /sensor-update-policies/querySensorUpdatePolicyMembers
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -280,12 +644,32 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Search for Sensor Update Policies in your environment by providing an FQL filter and
+        """Search for Sensor Update Policies in your environment by providing an FQL filter and
         paging details. Returns a set of Sensor Update Policy IDs which match the filter criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax.
+                created_by                      modified_timestamp
+                created_timestamp               name
+                enabled                         platform_name
+                modified_by                     precedence
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/querySensorUpdatePolicies
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #       ...     /sensor-update-policies/querySensorUpdatePolicies
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -318,3 +702,5 @@ class SensorUpdatePolicy(ServiceClass):
 # The legacy name for this class does not conform to PascalCase / PEP8
 # It is defined here for backwards compatibility purposes only.
 Sensor_Update_Policy = SensorUpdatePolicy  # pylint: disable=C0103
+# Service collection name mapping typo fix
+SensorUpdatePolicies = SensorUpdatePolicy
