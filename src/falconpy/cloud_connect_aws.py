@@ -142,7 +142,12 @@ class CloudConnectAWS(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict"])
-    def verify_aws_account_access(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def verify_aws_account_access(self: object,
+                                  *args,
+                                  body: dict = None,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> dict:
         """
         Performs an Access Verification check on the specified AWS Account IDs.
         """
@@ -152,6 +157,7 @@ class CloudConnectAWS(ServiceClass):
             endpoints=Endpoints,
             operation_id="VerifyAWSAccountAccess",
             keywords=kwargs,
+            body=body,
             params=handle_single_argument(args, parameters, "ids")
             )
 

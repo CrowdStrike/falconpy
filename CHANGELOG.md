@@ -1,3 +1,7 @@
+# Version 0.7.2
+## Issues resolved
++ Fixed: Missing body payload in CloudConnectAWS.verify_aws_account_access. Closes #376.
+
 # Version 0.7.1
 ## Added features and functionality
 + Updated: Service Class Refactoring (Rev 4) 
