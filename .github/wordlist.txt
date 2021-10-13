@@ -26,6 +26,7 @@ CheckActiveResponderCommandStatus
 CheckAdminCommandStatus
 CheckCommandStatus
 ClientID
+CloudConnectAWS
 CodeQL
 CreateActionsV
 CreateAWSAccount
