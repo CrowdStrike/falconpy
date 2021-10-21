@@ -29,6 +29,7 @@ from ._detects import update_detects_payload
 from ._ioa import ioa_exclusion_payload
 from ._prevention_policy import prevention_policy_payload
 from ._sensor_update_policy import sensor_policy_payload
+from ._response_policy import response_policy_payload
 
 __all__ = [
     "generic_payload_list", "aggregate_payload", "recon_action_payload", "recon_rules_payload",
@@ -36,5 +37,5 @@ __all__ = [
     "malquery_exact_search_payload", "malquery_hunt_payload", "malquery_fuzzy_payload",
     "update_detects_payload", "exclusion_payload", "ioa_exclusion_payload",
     "host_group_create_payload", "host_group_update_payload", "installation_token_payload",
-    "prevention_policy_payload", "sensor_policy_payload"
+    "prevention_policy_payload", "sensor_policy_payload", "response_policy_payload"
 ]
