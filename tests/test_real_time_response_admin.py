@@ -12,11 +12,11 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy.real_time_response_admin import Real_Time_Response_Admin as FalconRTR
+from falconpy import RealTimeResponseAdmin
 
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
-falcon = FalconRTR(access_token=token)
+falcon = RealTimeResponseAdmin(access_token=token)
 AllowedResponses = [200, 201, 202, 400, 404, 429]
 
 
