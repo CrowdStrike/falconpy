@@ -52,6 +52,46 @@ class SpotlightVulnerabilities(ServiceClass):
     - a valid token provided by the authentication service class (oauth2.py)
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_vulnerabilities_combined(self: object, parameters: dict = None,  **kwargs) -> dict:
+        """Search for Vulnerabilities in your environment by providing an FQL filter
+        and paging details. Returns a set of Vulnerability IDs which match the filter criteria.
+
+        Keyword arguments:
+        after -- A pagination token used with the limit parameter to manage pagination of results.
+                 On your first request, don't provide an after token. On subsequent requests,
+                 provide the after token from the previous response to continue from that place in
+                 the results.
+        facet -- Select various details blocks to be returned for each vulnerability entry.
+                 Supported values:
+                 cve_details            host_info
+                 remediation_details
+        filter -- Filter items using a query in Falcon Query Language (FQL).
+                  Wildcards '*' are unsupported.
+        limit -- The number of items to return in this response (default: 100, max: 400).
+                 Use with the after parameter to manage pagination of results. Integer.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by.
+                FQL syntax (e.g. created_timestamp|desc, closed_timestamp|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /spotlight-vulnerabilities/combinedQueryVulnerabilities
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="combinedQueryVulnerabilities",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_vulnerabilities(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get details on vulnerabilities by providing one or more IDs.
 
@@ -168,6 +208,7 @@ class SpotlightVulnerabilities(ServiceClass):
     # backwards compatibility / ease of use purposes
     getVulnerabilities = get_vulnerabilities
     queryVulnerabilities = query_vulnerabilities
+    combinedQueryVulnerabilities = query_vulnerabilities_combined
     getRemediations = get_remediations
     getRemediationsV2 = get_remediations_v2
 
