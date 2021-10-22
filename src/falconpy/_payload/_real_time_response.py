@@ -98,3 +98,35 @@ def command_payload(passed_keywords: dict) -> dict:  # pylint: disable=R0912  # 
         returned_payload["origin"] = passed_keywords.get("origin", None)
 
     return returned_payload
+
+
+def data_payload(passed_keywords: dict) -> dict:
+    """Creates a properly formatted formData payload for
+    RTR file uploads.
+    {
+        "id": "string",
+        "description": "string",
+        "name": "string",
+        "comments_for_audit_log": "string",
+        "content": "string",
+        "platform": "string",
+        "permission_type": "string"
+    }
+    """
+    returned_payload = {}
+    if passed_keywords.get("id", None):
+        returned_payload["id"] = passed_keywords.get("id", None)
+    if passed_keywords.get("description", None):
+        returned_payload["description"] = passed_keywords.get("description", None)
+    if passed_keywords.get("name", None):
+        returned_payload["name"] = passed_keywords.get("name", None)
+    if passed_keywords.get("comments_for_audit_log", None):
+        returned_payload["comments_for_audit_log"] = passed_keywords.get("comments_for_audit_log", None)
+    if passed_keywords.get("content", None):
+        returned_payload["content"] = passed_keywords.get("content", None)
+    if passed_keywords.get("platform", None):
+        returned_payload["platform"] = passed_keywords.get("platform", None)
+    if passed_keywords.get("permission_type", None):
+        returned_payload["permission_type"] = passed_keywords.get("permission_type", None)
+
+    return returned_payload
