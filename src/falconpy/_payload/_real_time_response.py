@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 
 
-def command_payload(passed_keywords: dict) -> dict:
+def command_payload(passed_keywords: dict) -> dict:  # pylint: disable=R0912  # noqa: C901
     """Creates a properly formatted payload for RTR command.
     {
         "base_command": "string",
@@ -63,6 +63,8 @@ def command_payload(passed_keywords: dict) -> dict:
         "origin": "string"
     }
     """
+    # flake8 / pylint both complain about complexity due to the number of if statements.
+    # Ignoring the complaint as this is just running through the potential passed keywords.
     returned_payload = {}
     if passed_keywords.get("base_command", None):
         returned_payload["base_command"] = passed_keywords.get("base_command", None)
