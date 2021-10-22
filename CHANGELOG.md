@@ -7,6 +7,15 @@
 + Updated: Service Class Refactoring (Rev 4) 
     * Provides: Body Payload Abstraction - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests into keywords. Legacy usage pattern of passing the BODY payload directly as the _body_ keyword is still supported. 
     * Provides: PEP-257 formatting of all docstrings.
+    - `cloud_connect_aws.py` - Closes #386
+    - `d4c_registration.py` - Closes #391
+    - `ioc.py` - Closes #388
+    - `iocs.py` - Closes #387
+    - `identity_protection.py` - Closes #385
+    - `incidents.py` - Closes #390
+    - `overwatch_dashboard.py` - Closes #389
+    - `real_time_response.py` - Closes #383
+    - `real_time_response_admin.py` - Closes #384
     - `response_policies.py` - Closes #382
 
 
