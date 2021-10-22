@@ -1,4 +1,5 @@
-"""
+"""CrowdStrike Identity Protection API Interface Class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-identity_protection - Identity Protection API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,27 +35,56 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import process_service_request
+from ._util import process_service_request, force_default
 from ._service_class import ServiceClass
 from ._endpoint._identity_protection import _identity_protection_endpoints as Endpoints
 
 
 class IdentityProtection(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, a
-    existing instance of the authentication class as an object or a
-    valid set of credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (oauth2.py)
     """
 
-    def graphql(self: object, body: dict) -> dict:
-        """
-        Identity Protection GraphQL API. Allows to retrieve entities, timeline activities,
+    @force_default(defaults=["body"], default_types=["dict"])
+    def graphql(self: object, body: dict = None, **kwargs) -> dict:
+        """Identity Protection GraphQL API. Allows to retrieve entities, timeline activities,
         identity-based incidents and security assessment. Allows to perform actions on entities
         and identity-based incidents.
+
+        Keyword arguments:
+        body -- full body payload, not required if keywords are used.
+                {
+                    "query": "string"
+                }
+        query -- JSON-similar string.
+
+        This method only supports keywords for providing arguments.
+        Currently using a non-standard body payload format.
+        Example payload: 
+        {
+            "query": "{\n  entities(first: 1)\n  {\n    nodes {\n      entityId    \n    }\n  }\n}"
+        }
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html
+                   /identity-protection/api.preempt.proxy.post.graphql
         """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html
-        #           /identity-protection/api.preempt.proxy.post.graphql
+        if not body:
+            body = {}
+            body["query"] = kwargs.get("query", "{}")
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
