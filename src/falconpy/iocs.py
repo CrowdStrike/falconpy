@@ -1,4 +1,5 @@
-"""
+"""CrowdStrike Falcon Indicators of Compromise API interface class (Legacy)
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-iocs - CrowdStrike Falcon Indicators of Compromise API interface class
 
 This is free and unencumbered software released into the public domain.
 
@@ -40,25 +39,50 @@ For more information, please refer to <https://unlicense.org>
 # that are not, have been ported into the new IOC Service Class. Developers
 # should move all code over to use this new class (ioc.py) as support for
 # this class will eventually be dropped.
-# pylint: disable=W0613,R0201   # Allowing unused params and kwargs to prevent breaking change, no self use is ok
-from ._util import force_default, handle_single_argument, process_service_request, generate_error_result
+# Allowing unused params and kwargs to prevent breaking change, no self use is ok
+# pylint: disable=W0613,R0201
+from ._util import force_default, handle_single_argument
+from ._util import process_service_request, generate_error_result
 from ._service_class import ServiceClass
 from ._endpoint._iocs import _iocs_endpoints as Endpoints
 
 
 class Iocs(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, a
-    existing instance of the authentication class as an object or a
-    valid set of credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (oauth2.py)
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def devices_count(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Number of hosts in your customer account that have observed a given custom IOC.
+
+        Keyword arguments:
+        type -- The type of indicator. String. Required.
+                Valid types include:
+                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+                `domain`: A domain name. Length - min: 1, max: 200.
+                `ipv4`: An IPv4 address. Must be a valid IP address.
+                `ipv6`: An IPv6 address. Must be a valid IP address.
+        parameters -- full parameters payload, not required if using other keywords.
+        value -- The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DevicesCount
         """
-        Number of hosts in your customer account that have observed a given custom IOC.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DevicesCount
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -69,30 +93,38 @@ class Iocs(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_ioc(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Get an IOC by providing a type and value.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/GetIOC
+        """Get an IOC by providing a type and value.
 
-        # * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
-        # This API endpoint is no longer available. Please use the new IOC.indicator_get
-        # method defined in the new IOC service class in order to perform this operation.
+        * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
+        This API endpoint is no longer available. Please use the new IOC.indicator_get
+        method defined in the new IOC service class in order to perform this operation.
 
+        This method performs no actions, ignoring all consumed arguments or keywords.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/GetIOC
+        """
         return generate_error_result(
             "This method has been deprecated. Please use the new IOC Service Class method "
             "IOC.indicator_get to perform this operation."
             )
 
     def create_ioc(self: object, body: dict) -> dict:
-        """
-        Create a new IOC.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/CreateIOC
+        """Create a new IOC.
 
-        # * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
-        # This API endpoint is no longer available. Please use the new IOC.indicator_create
-        # method defined in the new IOC service class in order to perform this operation.
+        * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
+        This API endpoint is no longer available. Please use the new IOC.indicator_create
+        method defined in the new IOC service class in order to perform this operation.
 
+        This method performs no actions, ignoring all consumed arguments or keywords.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/CreateIOC
+        """
         return generate_error_result(
             "This method has been deprecated. Please use the new IOC Service Class method "
             "IOC.indicator_create to perform this operation."
@@ -100,15 +132,19 @@ class Iocs(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_ioc(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Delete an IOC by providing a type and value.
-        """
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DeleteIOC
+        """Delete an IOC by providing a type and value.
 
-        # * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
-        # This API endpoint is no longer available. Please use the new IOC.indicator_delete
-        # method defined in the new IOC service class in order to perform this operation.
+        * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
+        This API endpoint is no longer available. Please use the new IOC.indicator_delete
+        method defined in the new IOC service class in order to perform this operation.
 
+        This method performs no actions, ignoring all consumed arguments or keywords.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DeleteIOC
+        """
         return generate_error_result(
             "This method has been deprecated. Please use the new IOC Service Class method "
             "IOC.indicator_delete to perform this operation."
@@ -116,15 +152,19 @@ class Iocs(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def update_ioc(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
-        """
-        Update an IOC by providing a type and value.
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/UpdateIOC
+        """Update an IOC by providing a type and value.
 
-        # * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
-        # This API endpoint is no longer available. Please use the new IOC.indicator_update
-        # method defined in the new IOC service class in order to perform this operation.
+        * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
+        This API endpoint is no longer available. Please use the new IOC.indicator_update
+        method defined in the new IOC service class in order to perform this operation.
 
+        This method performs no actions, ignoring all consumed arguments or keywords.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/UpdateIOC
+        """
         return generate_error_result(
             "This method has been deprecated. Please use the new IOC Service Class method "
             "IOC.indicator_update to perform this operation."
@@ -132,11 +172,33 @@ class Iocs(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def devices_ran_on(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Find hosts that have observed a given custom IOC.
+        """Find hosts that have observed a given custom IOC.
         For details about those hosts, use the hosts API interface.
+
+        Keyword arguments:
+        type -- The type of indicator. String. Required.
+                Valid types include:
+                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+                `domain`: A domain name. Length - min: 1, max: 200.
+                `ipv4`: An IPv4 address. Must be a valid IP address.
+                `ipv6`: An IPv6 address. Must be a valid IP address.
+        limit -- The first process to return, where 0 is the latest offset.
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The first process to return, where 0 is the latest offset.
+                  Use with the limit parameter to manage pagination of results.
+        parameters -- full parameters payload, not required if using other keywords.
+        value -- The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DevicesRanOn
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/DevicesRanOn
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -147,15 +209,19 @@ class Iocs(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_iocs(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Search the custom IOCs in your customer account.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/QueryIOCs
+        """Search the custom IOCs in your customer account.
 
-        # * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
-        # This API endpoint is no longer available. Please use the new IOC.indicator_search
-        # method defined in the new IOC service class in order to perform this operation.
+        * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
+        This API endpoint is no longer available. Please use the new IOC.indicator_search
+        method defined in the new IOC service class in order to perform this operation.
 
+        This method performs no actions, ignoring all consumed arguments or keywords.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/QueryIOCs
+        """
         return generate_error_result(
             "This method has been deprecated. Please use the new IOC Service Class method "
             "IOC.indicator_search to perform this operation."
@@ -163,10 +229,35 @@ class Iocs(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def processes_ran_on(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for processes associated with a custom IOC
+
+        Keyword arguments:
+        type -- The type of indicator. String. Required.
+                Valid types include:
+                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+                `domain`: A domain name. Length - min: 1, max: 200.
+                `ipv4`: An IPv4 address. Must be a valid IP address.
+                `ipv6`: An IPv6 address. Must be a valid IP address.
+        limit -- The first process to return, where 0 is the latest offset.
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The first process to return, where 0 is the latest offset.
+                  Use with the limit parameter to manage pagination of results.
+        device_id -- Specify a host's ID to return only processes from that host.
+                     Get a host's ID from get_device_details, the Falcon console,
+                     or the Streaming API.
+        parameters -- full parameters payload, not required if using other keywords.
+        value -- The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/ProcessesRanOn
         """
-        Search for processes associated with a custom IOC
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/ProcessesRanOn
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -177,10 +268,23 @@ class Iocs(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def entities_processes(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """For the provided ProcessID retrieve the process details.
+
+        Keyword arguments:
+        ids -- List of Process ID(s) for the running process you want to lookup.
+               String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/entities.processes
         """
-        For the provided ProcessID retrieve the process details.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs/entities.processes
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
