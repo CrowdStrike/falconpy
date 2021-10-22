@@ -54,8 +54,8 @@ class RealTimeResponse(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
-    @force_default(defaults=["body"], default_types=["dict"])
-    def aggregate_sessions(self: object, body: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_sessions(self: object, body: list = None, **kwargs) -> dict:
         """Get aggregates on session data.
 
         Supported aggregations:
