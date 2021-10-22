@@ -37,6 +37,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request
+from ._payload import generic_payload_list
 from ._service_class import ServiceClass
 from ._endpoint._incidents import _incidents_endpoints as Endpoints
 
@@ -50,10 +51,26 @@ class Incidents(ServiceClass):
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def crowdscore(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Query environment wide CrowdScore and return the entity data.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return in this response. [Integer, 1-2500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax. Ex: score.asc, timestamp.desc
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/CrowdScore
         """
-        Query environment wide CrowdScore and return the entity data.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/CrowdScore
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -62,11 +79,31 @@ class Incidents(ServiceClass):
             params=parameters
             )
 
-    def get_behaviors(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_behaviors(self: object, body: dict = None, **kwargs) -> dict:
+        """Get details on behaviors by providing behavior IDs.
+
+        Keyword arguments:
+        body -- full body payload, not required if ids are provided as keyword.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- Behavior ID(s) to retrieve. String or list of strings.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/GetBehaviors
         """
-        Get details on behaviors by providing behavior IDs.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/GetBehaviors
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -74,12 +111,42 @@ class Incidents(ServiceClass):
             body=body
             )
 
-    def perform_incident_action(self: object, body: dict) -> dict:
-        """
-        Perform a set of actions on one or more incidents, such as
+    @force_default(defaults=["body"], default_types=["dict"])
+    def perform_incident_action(self: object, body: dict = None, **kwargs) -> dict:
+        """Perform a set of actions on one or more incidents, such as
         adding tags or comments or updating the incident name or description.
+
+        Keyword arguments:
+        action_parameters -- Action specific parameters. List of dictionaries.
+        body -- full body payload, not required if ids is provided as keyword.
+                {
+                    "action_parameters": [
+                        {
+                        "name": "string",
+                        "value": "string"
+                        }
+                    ],
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- Incident ID(s) to perform actions against. String or list of strings.
+
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/PerformIncidentAction
         """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/PerformIncidentAction
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+            if kwargs.get("action_parameters", None):
+                body["action_parameters"] = kwargs.get("action_parameters", None)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -87,11 +154,31 @@ class Incidents(ServiceClass):
             body=body
             )
 
-    def get_incidents(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_incidents(self: object, body: dict = None, **kwargs) -> dict:
+        """Get details on incidents by providing incident IDs.
+
+        Keyword arguments:
+        body -- full body payload, not required if ids are provided as keyword.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- Incident ID(s) to retrieve. String or list of strings.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/GetIncidents
         """
-        Get details on incidents by providing incident IDs.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/GetIncidents
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -101,10 +188,26 @@ class Incidents(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_behaviors(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for behaviors by providing an FQL filter, sorting, and paging details.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax. Ex: timestamp.desc
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/QueryBehaviors
         """
-        Search for behaviors by providing an FQL filter, sorting, and paging details.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/QueryBehaviors
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -115,10 +218,32 @@ class Incidents(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_incidents(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for incidents by providing an FQL filter, sorting, and paging details.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax. Ex: state.asc, name.desc
+                Available sort fields:
+                assigned_to                 sort_score
+                assigned_to_name            start
+                end                         state
+                modified_timestamp          status
+                name
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/QueryIncidents
         """
-        Search for incidents by providing an FQL filter, sorting, and paging details.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/incidents/QueryIncidents
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
