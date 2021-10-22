@@ -1,4 +1,5 @@
-"""
+"""CrowdStrike Falcon Discover for AWS API Interface Class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-cloud_connect_aws - Falcon Discover for AWS API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -37,24 +36,46 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import aws_registration_payload
 from ._service_class import ServiceClass
 from ._endpoint._cloud_connect_aws import _cloud_connect_aws_endpoints as Endpoints
 
 
 class CloudConnectAWS(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, an
-    authorization object (oauth2.py) or a credential dictionary with
-    client_id and client_secret containing valid API credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (oauth2.py)
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_aws_accounts(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Search for provisioned AWS Accounts by providing an FQL filter and paging details.
+        """Search for provisioned AWS Accounts by providing an FQL filter and paging details.
         Returns a set of AWS accounts which match the filter criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum records to return. [1-500]. Defaults to 100.
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by (e.g. alias.desc or state.asc). FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccounts
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccounts
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -64,10 +85,17 @@ class CloudConnectAWS(ServiceClass):
             )
 
     def get_aws_settings(self: object) -> dict:
+        """Retrieve a set of Global Settings which are applicable to all provisioned AWS accounts.
+
+        This method does not accept arguments or keywords.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/GetAWSSettings
         """
-        Retrieve a set of Global Settings which are applicable to all provisioned AWS accounts.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/GetAWSSettings
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -76,10 +104,22 @@ class CloudConnectAWS(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_aws_accounts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve a set of AWS Accounts by specifying their IDs.
+
+        Keyword arguments:
+        ids -- List of AWS Account IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/GetAWSAccounts
         """
-        Retrieve a set of AWS Accounts by specifying their IDs.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/GetAWSAccounts
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -88,12 +128,48 @@ class CloudConnectAWS(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def provision_aws_accounts(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+        """Provision AWS Accounts by specifying details about the accounts to provision.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                            {
+                                "cloudtrail_bucket_owner_id": "string",
+                                "cloudtrail_bucket_region": "string",
+                                "external_id": "string",
+                                "iam_role_arn": "string",
+                                "id": "string",
+                                "rate_limit_reqs": integer,
+                                "rate_limit_time": integer
+                            }
+                        ]
+                    }
+        cloudtrail_bucket_owner_id -- AWS IAM ID for bucket owner. String.
+        cloudtrail_bucket_region -- AWS region for bucket. String.
+        external_id -- AWS cross-account role secret. String.
+        iam_role_arn -- ARN used for cross-account role. String.
+        id -- AWS account ID. String.
+        mode -- Mode for provisioning. Allowed values are `manual` or `cloudformation`.
+                Defaults to `manual` if not defined.
+        parameters -- full parameters payload, not required if mode is provided as a keyword.
+        rate_limit_reqs -- Integer.
+        rate_limit_time -- Integer.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/ProvisionAWSAccounts
         """
-        Provision AWS Accounts by specifying details about the accounts to provision.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/ProvisionAWSAccounts
+        if not body:
+            body = aws_registration_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -105,10 +181,22 @@ class CloudConnectAWS(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_aws_accounts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Delete a set of AWS Accounts by specifying their IDs.
+
+        Keyword arguments:
+        ids -- List of AWS Account IDs to delete. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/DeleteAWSAccounts
         """
-        Delete a set of AWS Accounts by specifying their IDs.
-        """
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/DeleteAWSAccounts
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -117,11 +205,45 @@ class CloudConnectAWS(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    def update_aws_accounts(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_aws_accounts(self: object, body: dict = None, **kwargs) -> dict:
+        """Update AWS Accounts by specifying the ID of the account and details to update.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                            {
+                                "cloudtrail_bucket_owner_id": "string",
+                                "cloudtrail_bucket_region": "string",
+                                "external_id": "string",
+                                "iam_role_arn": "string",
+                                "id": "string",
+                                "rate_limit_reqs": integer,
+                                "rate_limit_time": integer
+                            }
+                    ]
+                }
+        cloudtrail_bucket_owner_id -- AWS IAM ID for bucket owner. String.
+        cloudtrail_bucket_region -- AWS region for bucket. String.
+        external_id -- AWS cross-account role secret. String.
+        iam_role_arn -- ARN used for cross-account role. String.
+        id -- AWS account ID. String.
+        rate_limit_reqs -- Integer.
+        rate_limit_time -- Integer.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/UpdateAWSAccounts
         """
-        Update AWS Accounts by specifying the ID of the account and details to update.
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/UpdateAWSAccounts
+        if not body:
+            body = aws_registration_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -129,11 +251,35 @@ class CloudConnectAWS(ServiceClass):
             body=body
             )
 
-    def create_or_update_aws_settings(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_or_update_aws_settings(self: object, body: dict = None, **kwargs) -> dict:
+        """Create or update Global Settings which are applicable to all provisioned AWS accounts.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "cloudtrail_bucket_owner_id": "string",
+                            "static_external_id": "string"
+                        }
+                    ]
+                }
+        cloudtrail_bucket_owner_id -- AWS IAM ID for bucket owner. String.
+        static_external_id -- AWS cross-account role secret. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/CreateOrUpdateAWSSettings
         """
-        Create or update Global Settings which are applicable to all provisioned AWS accounts.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/CreateOrUpdateAWSSettings
+        if not body:
+            body = aws_registration_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -148,10 +294,23 @@ class CloudConnectAWS(ServiceClass):
                                   parameters: dict = None,
                                   **kwargs
                                   ) -> dict:
+        """Performs an Access Verification check on the specified AWS Account IDs.
+
+        Keyword arguments:
+        body -- full body payload, ignored by API.
+        ids -- List of AWS Account IDs to delete. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/VerifyAWSAccountAccess
         """
-        Performs an Access Verification check on the specified AWS Account IDs.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/VerifyAWSAccountAccess
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -163,11 +322,27 @@ class CloudConnectAWS(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_aws_accounts_for_ids(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Search for provisioned AWS Accounts by providing an FQL filter and paging details.
+        """Search for provisioned AWS Accounts by providing an FQL filter and paging details.
         Returns a set of AWS account IDs which match the filter criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum records to return. [1-500]. Defaults to 100.
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by (e.g. alias.desc or state.asc). FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccountsForIDs
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws/QueryAWSAccountsForIDs
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,

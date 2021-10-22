@@ -28,7 +28,7 @@ class TestOverwatchDashboard:
         error_checks = True
         tests = {
             "aggregates_events": falcon.AggregatesEvents(body={})["status_code"],
-            "aggregates_events_collections": falcon.AggregatesEventsCollections(body=[{}])["status_code"]
+            "aggregates_events_collections": falcon.AggregatesEventsCollections(field="whatevers")["status_code"]
         }
         for key in tests:
             if tests[key] != 500:

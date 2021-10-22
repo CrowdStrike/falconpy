@@ -1,4 +1,5 @@
-"""
+"""Falcon Overwatch Dashboard API Interface Class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-overwatch_dashboard - Falcon Overwatch Dashboard API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -37,24 +36,45 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, handle_single_argument, process_service_request
+from ._payload import aggregate_payload
 from ._service_class import ServiceClass
 from ._endpoint._overwatch_dashboard import _overwatch_dashboard_endpoints as Endpoints
 
 
 class OverwatchDashboard(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, a
-    existing instance of the authentication class as an object or a
-    valid set of credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (oauth2.py)
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregates_detections_global_counts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def aggregates_detections_global_counts(self: object,
+                                            *args,
+                                            parameters: dict = None,
+                                            **kwargs
+                                            ) -> dict:
+        """Get the total number of detections pushed across all customers
+
+        Keyword arguments:
+        filter -- FQL filter to limit the results. String.
+        parameters -- full parameters payload, not required if filter is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'filter'.  All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Overwatch%20Dashboard/AggregatesDetectionsGlobalCounts
         """
-        Get the total number of detections pushed across all customers
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         /Overwatch%20Dashboard/AggregatesDetectionsGlobalCounts
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -63,12 +83,75 @@ class OverwatchDashboard(ServiceClass):
             params=handle_single_argument(args, parameters, "filter")
             )
 
-    def aggregates_events_collections(self: object, body: list) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def aggregates_events_collections(self: object, body: list = None, **kwargs) -> dict:
+        """Get OverWatch detection event collection info by providing an aggregate query.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                List of dictionaries.
+                [{
+                    "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "field": "string",
+                    "filter": "string",
+                    "interval": "string",
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "q": "string",
+                    "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        null
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }]
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        interval -- String.
+        min_doc_count -- Minimum number of documents required to match. Integer.
+        missing -- String.
+        name -- Name of the aggregation. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Size limit to apply to the queries. Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        This method does not support body payload validation.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Overwatch%20Dashboard/AggregatesEventsCollections
         """
-        Get OverWatch detection event collection info by providing an aggregate query
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #          /Overwatch%20Dashboard/AggregatesEventsCollections
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -76,11 +159,75 @@ class OverwatchDashboard(ServiceClass):
             body=body
             )
 
-    def aggregates_events(self: object, body: list) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def aggregates_events(self: object, body: list = None, **kwargs) -> dict:
+        """Get aggregate OverWatch detection event info by providing an aggregate query
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                List of dictionaries.
+                [{
+                    "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "field": "string",
+                    "filter": "string",
+                    "interval": "string",
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "q": "string",
+                    "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        null
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }]
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        interval -- String.
+        min_doc_count -- Minimum number of documents required to match. Integer.
+        missing -- String.
+        name -- Name of the aggregation. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Size limit to apply to the queries. Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        This method does not support body payload validation.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Overwatch%20Dashboard/AggregatesEvents
         """
-        Get aggregate OverWatch detection event info by providing an aggregate query
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Overwatch%20Dashboard/AggregatesEvents
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -89,12 +236,27 @@ class OverwatchDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregates_incidents_global_counts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def aggregates_incidents_global_counts(self: object,
+                                           *args,
+                                           parameters: dict = None,
+                                           **kwargs
+                                           ) -> dict:
+        """Get the total number of incidents pushed across all customers.
+
+        Keyword arguments:
+        filter -- FQL filter to limit the results. String.
+        parameters -- full parameters payload, not required if filter is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'filter'.  All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Overwatch%20Dashboard/AggregatesIncidentsGlobalCounts
         """
-        Get the total number of incidents pushed across all customers.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         /Overwatch%20Dashboard/AggregatesIncidentsGlobalCounts
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -104,12 +266,27 @@ class OverwatchDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregates_events_global_counts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def aggregates_events_global_counts(self: object,
+                                        *args,
+                                        parameters: dict = None,
+                                        **kwargs
+                                        ) -> dict:
+        """Get the total number of incidents pushed across all customers.
+
+        Keyword arguments:
+        filter -- FQL filter to limit the results. String.
+        parameters -- full parameters payload, not required if filter is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'filter'.  All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Overwatch%20Dashboard/AggregatesOWEventsGlobalCounts
         """
-        Get the total number of incidents pushed across all customers.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         /Overwatch%20Dashboard/AggregatesOWEventsGlobalCounts
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,

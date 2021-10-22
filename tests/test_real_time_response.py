@@ -26,21 +26,25 @@ AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for
 
 class TestRTR:
 
-    def serviceRTR_ListAllSessions(self):
+    def rtr_list_all_sessions(self):
         if falcon.RTR_ListAllSessions(parameters={"limit":1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
-    def serviceRTR_SessionTester(self):
+    def rtr_session_tester(self):
         returned = False
         # This will have to be periodically updated using this solution, but for now it provides the necessary code coverage.
         # Highly dependant upon my test CID / API keys
         aid_lookup = falcon_hosts.QueryDevicesByFilter(filter="hostname:'ip-172-31-30-80*'")
-        if aid_lookup["body"]["resources"]:
-            aid_to_check = aid_lookup["body"]["resources"][0]
-        else:
+        try:
+            if aid_lookup["body"]["resources"]:
+                aid_to_check = aid_lookup["body"]["resources"][0]
+            else:
+                pytest.skip("Race condition met, skipping.")
+        except KeyError:
             pytest.skip("Race condition met, skipping.")
+
         if aid_to_check:
             result = falcon.RTR_InitSession(body={"device_id": aid_to_check})
             if "resources" in result["body"]:
@@ -54,44 +58,78 @@ class TestRTR:
                 
         return returned
 
-    def serviceRTR_GenerateErrors(self):
+    def rtr_test_all_paths_with_errors(self):
         falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["RTR_AggregateSessions","body={}"],
-            ["BatchActiveResponderCmd","body={}"],
-            ["BatchCmd","body={}"],
-            ["BatchGetCmdStatus","parameters={}"],
-            ["BatchGetCmd","body={}"],
-            ["BatchInitSessions","body={}"],
-            ["BatchRefreshSessions","body={}"],
-            ["RTR_CheckActiveResponderCommandStatus","parameters={}"],
-            ["RTR_ExecuteActiveResponderCommand","body={}"],
-            ["RTR_CheckCommandStatus","parameters={}"],
-            ["RTR_ExecuteCommand","body={}"],
-            ["RTR_GetExtractedFileContents","parameters={}"],
-            ["RTR_ListFiles","parameters={}"],
-            ["RTR_DeleteFile","ids='12345678', parameters={}"],
-            ["RTR_ListQueuedSessions","body={}"],
-            ["RTR_DeleteQueuedSession","parameters={}"],
-            ["RTR_PulseSession","body={}"],
-            ["RTR_ListSessions","body={}"],
-            ["RTR_InitSession","body={}"],
-            ["RTR_DeleteSession","parameters={}"],
-            ["RTR_ListAllSessions",""]
+        error_checks = True
+        # "base_command": "string",
+        # "batch_id": "string",
+        # "command_string": "string",
+        # "optional_hosts": [
+        #     "string"
+        # ],
+        # "file_path": "string",
+        # "persist_all": true,
+        # "existing_batch_id": "string",
+        # "host_ids": [
+        #     "string"
+        # ],
+        # "queue_offline": true,
+        # "hosts_to_remove": [
+        #     "string"
+        # ]
+        # "device_id": "string",
+        # "id": integer,
+        # "persist": boolean,
+        # "session_id": "string",
+        # "origin": "string"
+        commands = [
+            ["RTR_AggregateSessions", falcon.aggregate_sessions()],
+            ["BatchActiveResponderCmd", falcon.batch_active_responder_command(body={})],
+            ["BatchCmd", falcon.batch_command(batch_id="12345678",
+                                              optional_hosts=["12345678"],
+                                              persist_all=True,
+                                              queue_offline=True
+                                              )],
+            ["BatchGetCmdStatus", falcon.batch_get_command_status(parameters={})],
+            ["BatchGetCmd", falcon.batch_get_command(file_path="whatevers")],
+            ["BatchInitSessions", falcon.batch_init_sessions(existing_batch_id="12345678",
+                                                             host_ids="12345678")],
+            ["BatchRefreshSessions", falcon.batch_refresh_sessions(body={})],
+            ["RTR_CheckActiveResponderCommandStatus", falcon.check_active_responder_command_status(parameters={})],
+            ["RTR_ExecuteActiveResponderCommand", falcon.execute_active_responder_command(base_command="ls",
+                                                                                          command_string="ls",
+                                                                                          device_id="12345678",
+                                                                                          persist=True,
+                                                                                          id=0
+                                                                                          )],
+            ["RTR_CheckCommandStatus", falcon.check_command_status(parameters={})],
+            ["RTR_ExecuteCommand", falcon.execute_command()],
+            ["RTR_GetExtractedFileContents", falcon.get_extracted_file_contents(parameters={})],
+            ["RTR_ListFiles", falcon.list_files(parameters={})],
+            ["RTR_DeleteFile", falcon.delete_file(ids='12345678', parameters={})],
+            ["RTR_ListQueuedSessions", falcon.list_queued_sessions(body={})],
+            ["RTR_DeleteQueuedSession", falcon.delete_queued_session(parameters={})],
+            ["RTR_PulseSession", falcon.pulse_session(hosts_to_remove="BobJustBecause",
+                                                      origin="Somewheres",
+                                                      session_id="12345678"
+                                                      )],
+            ["RTR_ListSessions", falcon.list_sessions(body={})],
+            ["RTR_InitSession", falcon.init_session(body={})],
+            ["RTR_DeleteSession", falcon.delete_session(parameters={})],
+            ["RTR_ListAllSessions", falcon.list_all_sessions()]
         ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+        for cmd in commands:
+            if cmd[1]["status_code"] != 500:
+                error_checks = False
 
-        return errorChecks
+        return error_checks
 
-    def test_RTR_ListAllSessions(self):
-        assert self.serviceRTR_ListAllSessions() is True
+    def test_rtr_list_all_sessions(self):
+        assert self.rtr_list_all_sessions() is True
 
     @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
-    def test_RTR_SessionConnect(self):
-        assert self.serviceRTR_SessionTester() is True
+    def test_rtr_session_connect(self):
+        assert self.rtr_session_tester() is True
 
-    def test_Errors(self):
-        assert self.serviceRTR_GenerateErrors() is True
+    def test_all_code_paths_with_five_hundreds(self):
+        assert self.rtr_test_all_paths_with_errors() is True

@@ -1,4 +1,4 @@
-"""Internal version control constants
+"""Internal payload handling library - D4C Registration Payloads
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,13 +35,26 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-_VERSION = '0.7.3'
-_MAINTAINER = 'Joshua Hiller'
-_AUTHOR = 'CrowdStrike'
-_AUTHOR_EMAIL = 'falconpy@crowdstrike.com'
-_CREDITS = 'CrowdStrike'
-_DESCRIPTION = "The CrowdStrike Falcon OAuth2 API SDK for Python 3"
-_TITLE = "crowdstrike-falconpy"
-_PROJECT_URL = "https://github.com/CrowdStrike/falconpy"
-_DOCS_URL = "https://www.falconpy.io"
-_KEYWORDS = ["crowdstrike", "falcon", "api", "sdk", "oauth2", "devsecops", "crowdstrike-falcon"]
+
+
+def azure_registration_payload(passed_keywords: dict) -> dict:
+    """Creates a properly formatted Azure registration payload.
+    {
+        "resources": [
+            {
+                "subscription_id": "string",
+                "tenant_id": "string"
+            }
+        ]
+    }
+    """
+    returned_payload = {}
+    returned_payload["resources"] = []
+    item = {}
+    if passed_keywords.get("subscription_id", None):
+        item["subscription_id"] = passed_keywords.get("subscription_id", None)
+    if passed_keywords.get("tenant_id", None):
+        item["tenant_id"] = passed_keywords.get("tenant_id", None)
+    returned_payload["resources"].append(item)
+
+    return returned_payload

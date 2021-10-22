@@ -12,11 +12,11 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy.real_time_response_admin import Real_Time_Response_Admin as FalconRTR
+from falconpy import RealTimeResponseAdmin
 
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
-falcon = FalconRTR(access_token=token)
+falcon = RealTimeResponseAdmin(access_token=token)
 AllowedResponses = [200, 201, 202, 400, 404, 429]
 
 
@@ -44,13 +44,30 @@ class TestRTRAdmin:
         Helper to retrieve a put file ID by name
         """
         found_id = "1234567890"  # Force an error if we can't find it
-        file = falcon.get_put_files(ids=falcon.list_put_files()["body"]["resources"])
+        files = falcon.list_put_files()
+        try:
+            file = falcon.get_put_files(ids=files["body"]["resources"])
+        except KeyError:
+            pytest.skip("Race condition met, skipping")
+
         for item in file["body"]["resources"]:
             if "name" in item:
                 if item["name"] == file_name:
                     found_id = item["id"]
 
         return found_id
+
+    def rtra_generate_errors(self):
+        error_checks = True
+        script_test = falcon.create_scripts(data={})
+        putfile_test = falcon.create_put_files(data={}, files=[])
+        if script_test["status_code"] != 415:
+            error_checks = False
+
+        if putfile_test["status_code"] != 415:
+            error_checks = False
+
+        return error_checks
 
     def rtra_create_updated_payload(self, file_name: str, orig_payload: dict):
         orig_payload["id"] = self.rtra_retrieve_script_id(file_name)
@@ -94,7 +111,14 @@ class TestRTRAdmin:
                 )["status_code"],
             "create_scripts": falcon.RTR_CreateScripts(data=script_payload, files=script_detail)["status_code"],
             "update_scripts": falcon.RTR_UpdateScripts(
-                data=self.rtra_create_updated_payload(script_filename, new_script_payload), files=script_detail
+                id=self.rtra_create_updated_payload(script_filename, new_script_payload),
+                files=script_detail,
+                description="UnitTesting",
+                name=f"UnitTesting{jdate}",
+                platform="windows",
+                permission_type="private",
+                comments_for_audit_log="Unit Testing",
+                content="#!/bin/bash"
                 )["status_code"],
             "delete_scripts": falcon.RTR_DeleteScripts(ids=self.rtra_retrieve_script_id(script_filename))["status_code"],
             "list_put_files": falcon.RTR_ListPut_Files()["status_code"],
@@ -110,6 +134,10 @@ class TestRTRAdmin:
             pytest.skip("500 error generated, code paths still tested")
         return error_checks
 
+    def test_errors(self):
+        """Pytest harness hook"""
+        assert self.rtra_generate_errors() is True
+
     @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
     # @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
     def test_all_code_paths(self):
@@ -117,12 +145,3 @@ class TestRTRAdmin:
         Pytest harness hook - Singular test will execute every statement in every method within the class
         """
         assert self.rtra_test_all_code_paths() is True
-
-    # @staticmethod
-    # def test_logout():
-    #     """
-    #     Pytest harness hook
-    #     """
-    #     assert bool(falcon.auth_object.revoke(
-    #         falcon.auth_object.token()["body"]["access_token"]
-    #         )["status_code"] in AllowedResponses) is True

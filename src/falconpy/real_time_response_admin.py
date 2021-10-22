@@ -1,4 +1,5 @@
-"""
+"""CrowdStrike Falcon Real Time Response Administration API interface class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-real_time_response_admin - CrowdStrike Falcon Real Time Response Administration API interface class
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,24 +35,71 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import command_payload, data_payload
 from ._service_class import ServiceClass
 from ._endpoint._real_time_response_admin import _real_time_response_admin_endpoints as Endpoints
 
 
 class RealTimeResponseAdmin(ServiceClass):
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (oauth2.py)
     """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, an
-    authorization object (oauth2.py) or a credential dictionary with
-    client_id and client_secret containing valid API credentials.
-    """
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def batch_admin_command(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def batch_admin_command(self: object,
+                            body: dict = None,
+                            parameters: dict = None,
+                            **kwargs
+                            ) -> dict:
+        """Batch executes a RTR administrator command across
+        the hosts mapped to the given batch ID.
+
+        Keyword arguments:
+        body -- full body payload, not required if keywords are used.
+                {
+                    "base_command": "string",
+                    "batch_id": "string",
+                    "command_string": "string",
+                    "optional_hosts": [
+                        "string"
+                    ],
+                    "persist_all": true
+                }
+        base_command -- Active-Responder command type we are going to execute,
+                        for example: `get` or `cp`.  String.
+                        Refer to the RTR documentation for the full list of commands.
+        batch_id -- Batch ID to execute the command on. Received from batch_init_session. String.
+        command_string -- Full command string for the command. For example `get some_file.txt`.
+        optional_hosts -- List of a subset of hosts we want to run the command on.
+                          If this list is supplied, only these hosts will receive the command.
+        parameters -- full parameters payload in JSON format. Not required if using other keywords.
+        persist_all -- Boolean.
+        timeout -- Timeout for how long to wait for the request in seconds.
+                   Default timeout: 30 seconds  Max timeout: 10 minutes
+        timeout_duration -- Timeout duration for how long to wait for the request in duration
+                            syntax. Example: `10s`.   Default value: `30s`. Maximum is `10m`.
+                            Valid units: `ns`, `us`, `ms`, `s`, `m`, `h`
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/BatchAdminCmd
         """
-        Batch executes a RTR administrator command across the hosts mapped to the given batch ID.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/BatchAdminCmd
+        if not body:
+            body = command_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -64,26 +110,70 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def check_admin_command_status(self: object, parameters: dict = None, **kwargs) -> dict:
+    def check_admin_command_status(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get status of an executed RTR administrator command on a single host.
+
+        Keyword arguments:
+        cloud_request_id -- Cloud Request ID of the executed command to query.
+        sequence_id -- Sequence ID that we want to retrieve. Command responses are
+                       chunked across sequences. Default value: 0
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'cloud_request_id'. All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                    /real-time-response-admin/RTR_CheckAdminCommandStatus
         """
-        Get status of an executed RTR administrator command on a single host.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #       ...     /real-time-response-admin/RTR_CheckAdminCommandStatus
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_CheckAdminCommandStatus",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "cloud_request_id")
             )
 
-    def execute_admin_command(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def execute_admin_command(self: object, body: dict = None, **kwargs) -> dict:
+        """Execute a RTR administrator command on a single host.
+
+        Keyword arguments:
+        body -- full body payload, not required if keywords are used.
+                {
+                    "base_command": "string",
+                    "command_string": "string",
+                    "device_id": "string",
+                    "id": integer,
+                    "persist": boolean,
+                    "session_id": "string"
+                }
+        base_command -- Active-Responder command type we are going to execute,
+                        for example: `get` or `cp`.  String.
+                        Refer to the RTR documentation for the full list of commands.
+        command_string -- Full command string for the command. For example `get some_file.txt`.
+        device_id -- ID of the device to execute the command on. String.
+        id -- Command sequence. Integer.
+        persist -- Execute this command when host returns to service. Boolean.
+        session_id -- RTR session ID. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                    /real-time-response-admin/RTR_ExecuteAdminCommand
         """
-        Execute a RTR administrator command on a single host.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #        ...    /real-time-response-admin/RTR_ExecuteAdminCommand
+        if not body:
+            body = command_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -92,24 +182,60 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_put_files(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_put_files(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get put-files based on the ID's given. These are used for the RTR `put` command.
+
+        Keyword arguments:
+        ids -- List of File IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_GetPut_Files
         """
-        Get put-files based on the ID's given. These are used for the RTR `put` command.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_GetPut_Files
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_GetPut_Files",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
-    def create_put_files(self: object, data: dict, files: list) -> dict:
+    @force_default(defaults=["data"], default_types=["dict"])
+    def create_put_files(self: object, files: list, data: dict = None, **kwargs) -> dict:
+        """Upload a new put-file to use for the RTR `put` command.
+
+        Keyword arguments:
+        data -- full formData payload, not required if other keywords are used.
+                {
+                    "description": "string",
+                    "name": "string",
+                    "comments_for_audit_log": "string"
+                }
+        files -- File to be uploaded. List of tuples. *REQUIRED*
+                 Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
+        description -- File description. String.
+        name -- File name (if different than actual file name). String.
+        comments_for_audit_log -- Audit log comment. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-CreatePut-Files
         """
-        Upload a new put-file to use for the RTR `put` command.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_CreatePut_Files
+        if not data:
+            data = data_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -119,39 +245,99 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_put_files(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_put_files(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Delete a put-file based on the ID given. Can only delete one file at a time.
+
+        Keyword arguments:
+        ids -- File ID to delete. String. Only one file can be deleted per request.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_DeletePut_Files
         """
-        Delete a put-file based on the ID given. Can only delete one file at a time.
-        """
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_DeletePut_Files
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_DeletePut_Files",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scripts(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_scripts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get custom-scripts based on the ID's given.
+        These are used for the RTR `runscript` command.
+
+        Keyword arguments:
+        ids -- List of Script IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-GetScripts
         """
-        Get custom-scripts based on the ID's given. These are used for the RTR `runscript` command.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_GetScripts
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_GetScripts",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
-    @force_default(defaults=["files"], default_types=["list"])
-    def create_scripts(self: object, data, files: list = None) -> dict:
+    @force_default(defaults=["data", "files"], default_types=["dict", "list"])
+    def create_scripts(self: object, data: dict = None, files: list = None, **kwargs) -> dict:
+        """Upload a new custom-script to use for the RTR `runscript` command.
+
+        Keyword arguments:
+        data -- full formData payload, not required if other keywords are used.
+                {
+                    "description": "string",
+                    "name": "string",
+                    "comments_for_audit_log": "string",
+                    "content": "string",
+                    "platform": "string",
+                    "permission_type": "string"
+                }
+        files -- File to be uploaded. List of tuples. *REQUIRED*
+                 Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
+        description -- File description. String.
+        name -- File name (if different than actual file name). String.
+        comments_for_audit_log -- Audit log comment. String.
+        permission_type -- Permission for the custom-script.
+                           Valid permission values:
+                             `private` - usable by only the user who uploaded it
+                             `group` - usable by all RTR Admins
+                             `public` - usable by all active-responders and RTR admins
+        content -- The script text that you want to use to upload.
+        platform -- Platforms for the file. Currently supports: windows, mac, linux.
+                    If no platform is provided, it will default to 'windows'.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-CreateScripts
         """
-        Upload a new custom-script to use for the RTR `runscript` command.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_CreateScripts
+        if not data:
+            data = data_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -161,24 +347,73 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_scripts(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_scripts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Delete a custom-script based on the ID given. Can only delete one script at a time.
+
+        Keyword arguments:
+        ids -- Script ID to delete. String. Only one file can be deleted per request.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_DeleteScripts
         """
-        Delete a custom-script based on the ID given. Can only delete one script at a time.
-        """
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_DeleteScripts
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_DeleteScripts",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
-    def update_scripts(self: object, data, files) -> dict:
+    @force_default(defaults=["data", "files"], default_types=["dict", "list"])
+    def update_scripts(self: object, data: dict = None, files: list = None, **kwargs) -> dict:
+        """Upload a new scripts to replace an existing one.
+
+        Keyword arguments:
+        data -- full formData payload, not required if other keywords are used.
+                {
+                    "id": "string",
+                    "description": "string",
+                    "name": "string",
+                    "comments_for_audit_log": "string",
+                    "content": "string",
+                    "platform": "string",
+                    "permission_type": "string"
+                }
+        files -- File to be uploaded. List of tuples. *REQUIRED*
+                 Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
+        description -- File description. String.
+        id -- Script ID to be updated. String.
+        name -- File name (if different than actual file name). String.
+        comments_for_audit_log -- Audit log comment. String.
+        permission_type -- Permission for the custom-script.
+                           Valid permission values:
+                             `private` - usable by only the user who uploaded it
+                             `group` - usable by all RTR Admins
+                             `public` - usable by all active-responders and RTR admins
+        content -- The script text that you want to use to upload.
+        platform -- Platforms for the file. Currently supports: windows, mac, linux.
+                    If no platform is provided, it will default to 'windows'.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-UpdateScripts
         """
-        Upload a new scripts to replace an existing one.
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_UpdateScripts
+        if not data:
+            data = data_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -189,10 +424,26 @@ class RealTimeResponseAdmin(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def list_put_files(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Get a list of put-file ID's that are available to the user for the `put` command.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax. Ex: `created_at|desc`
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-ListPut-Files
         """
-        Get a list of put-file ID's that are available to the user for the `put` command.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_ListPut_Files
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -203,10 +454,27 @@ class RealTimeResponseAdmin(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def list_scripts(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Get a list of custom-script ID's that are
+        available to the user for the `runscript` command.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax. Ex: `created_at|desc`
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-ListScripts
         """
-        Get a list of custom-script ID's that are available to the user for the `runscript` command.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_ListScripts
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,

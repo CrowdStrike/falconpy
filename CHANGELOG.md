@@ -1,6 +1,28 @@
+# Version 0.7.3
+## Added features and functionality
++ Added: New combinedQueryVulnerabilities operation to SpotlightVulnerabilities Service Class.
+    - `spotlight_vulnerabilities.py` - Service Class
+    - `_endpoint/_spotlight_vulnerabilities.py` - Endpoint module
+    - `tests/test_spotlight_vulnerabilities.py` - Unit testing
++ Updated: Service Class Refactoring (Rev 4) 
+    * Provides: Body Payload Abstraction - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests into keywords. Legacy usage pattern of passing the BODY payload directly as the _body_ keyword is still supported. 
+    * Provides: PEP-257 formatting of all docstrings.
+    - `cloud_connect_aws.py` - Closes #386
+    - `d4c_registration.py` - Closes #391
+    - `ioc.py` - Closes #388
+    - `iocs.py` - Closes #387
+    - `identity_protection.py` - Closes #385
+    - `incidents.py` - Closes #390
+    - `overwatch_dashboard.py` - Closes #389
+    - `real_time_response.py` - Closes #383
+    - `real_time_response_admin.py` - Closes #384
+    - `response_policies.py` - Closes #382
+
+
 # Version 0.7.2
 ## Issues resolved
 + Fixed: Missing body payload in CloudConnectAWS.verify_aws_account_access. Closes #376.
+
 
 # Version 0.7.1
 ## Added features and functionality

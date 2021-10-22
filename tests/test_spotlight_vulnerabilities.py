@@ -19,7 +19,7 @@ AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for
 
 
 class TestSpotlight:
-    def serviceSpotlight_queryVulnerabilities(self):
+    def spotlight_queryVulnerabilities(self):
         if falcon.queryVulnerabilities(
                                        parameters={"limit": 1,
                                                    "filter": "created_timestamp:>'2021-01-01T00:00:01Z'"
@@ -29,7 +29,15 @@ class TestSpotlight:
         else:
             return False
 
-    def serviceSpotlight_getVulnerabilities(self):
+    def spotlight_query_vulnerabilities_combined(self):
+        if falcon.query_vulnerabilities_combined(limit=1,
+                                                 filter="created_timestamp:>'2021-01-01T00:00:01Z'"
+                                                 )["status_code"] in AllowedResponses:
+            return True
+        else:
+            return False
+
+    def spotlight_getVulnerabilities(self):
         try:
             id_list = falcon.queryVulnerabilities(parameters={"limit": 1,
                                                               "filter": "created_timestamp:>'2021-01-01T00:00:01Z'"
@@ -44,7 +52,7 @@ class TestSpotlight:
             pytest.skip("Workflow-related error, skipping")
             return True
 
-    def serviceSpotlight_GenerateErrors(self):
+    def spotlight_GenerateErrors(self):
         falcon.base_url = "nowhere"
         errorChecks = True
         if falcon.queryVulnerabilities(parameters={})["status_code"] != 500:
@@ -58,7 +66,10 @@ class TestSpotlight:
         return errorChecks
 
     def test_queryVulnerabilities(self):
-        assert self.serviceSpotlight_queryVulnerabilities() is True
+        assert self.spotlight_queryVulnerabilities() is True
+
+    def test_queryVulnerabilities_combined(self):
+        assert self.spotlight_query_vulnerabilities_combined() is True
 
     @pytest.mark.skipif(falcon.queryVulnerabilities(
                                                     parameters={"limit": 1,
@@ -66,7 +77,7 @@ class TestSpotlight:
                                                                 }
                                                     )["status_code"] == 429, reason="API rate limit reached")
     def test_getVulnerabilities(self):
-        assert self.serviceSpotlight_getVulnerabilities() is True
+        assert self.spotlight_getVulnerabilities() is True
 
     def test_Errors(self):
-        assert self.serviceSpotlight_GenerateErrors() is True
+        assert self.spotlight_GenerateErrors() is True

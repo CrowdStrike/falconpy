@@ -1,4 +1,5 @@
-"""
+"""Falcon Discover registration for Azure / GCP API Interface Class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-d4c_registration - Falcon Discover for Azure / GCP API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,38 +35,85 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import azure_registration_payload
 from ._service_class import ServiceClass
 from ._endpoint._d4c_registration import _d4c_registration_endpoints as Endpoints
 
 
 class D4CRegistration(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, a
-    existing instance of the authentication class as an object or a
-    valid set of credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (oauth2.py)
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_azure_account(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_azure_account(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Return information about Azure account registration.
+
+        Keyword arguments:
+        ids -- List of Response Policy IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+        scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMAzureAccount
         """
-        Return information about Azure account registration
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMAzureAccount
+        if kwargs.get("scan_type", None):
+            kwargs["scan-type"] = kwargs.get("scan_type", None)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetCSPMAzureAccount",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
-    def create_azure_account(self: object, body: dict) -> dict:
-        """
-        Creates a new account in our system for a customer and generates a
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_azure_account(self: object, body: dict = None, **kwargs) -> dict:
+        """Creates a new account in our system for a customer and generates a
         script for them to run in their cloud environment to grant us access.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "subscription_id": "string",
+                            "tenant_id": "string"
+                        }
+                    ]
+                }
+        subscription_id -- Azure subscription ID. String.
+        tenant_id -- Azure tenant ID. String.
+
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateCSPMAzureAccount
         """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateCSPMAzureAccount
+        if not body:
+            body = azure_registration_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -76,28 +122,50 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def update_azure_account_client_id(self: object, parameters: dict = None, **kwargs) -> dict:
+    def update_azure_account_client_id(self: object,
+                                       *args,
+                                       parameters: dict = None,
+                                       **kwargs
+                                       ) -> dict:
+        """Update an Azure service account in our system by with the
+        user-created client_id created with the public key we've provided.
+
+        Keyword arguments:
+        id -- ClientID to use for the Service Principal associated
+              with the customer's Azure Account.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/UpdateCSPMAzureAccountClientID
         """
-        Update an Azure service account in our system by with the
-        user-created client_id created with the public key we've provided
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #           /d4c-registration/UpdateCSPMAzureAccountClientID
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="UpdateCSPMAzureAccountClientID",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "id")
             )
 
     def get_azure_user_scripts_attachment(self: object) -> dict:
+        """Return a script for customer to run in their cloud environment to
+        grant us access to their Azure environment as a downloadable attachment.
+
+        This method does not accept arguments or keywords.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMAzureUserScriptsAttachment
         """
-        Return a script for customer to run in their cloud environment to
-        grant us access to their Azure environment as a downloadable attachment
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #          /d4c-registration/GetCSPMAzureUserScriptsAttachment
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -105,10 +173,18 @@ class D4CRegistration(ServiceClass):
             )
 
     def get_azure_user_scripts(self: object) -> dict:
+        """Return a script for customer to run in their cloud
+        environment to grant us access to their Azure environment.
+
+        This method does not accept arguments or keywords.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMAzureUserScripts
         """
-        Return a script for customer to run in their cloud environment to grant us access to their Azure environment
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMAzureUserScripts
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -117,10 +193,23 @@ class D4CRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_gcp_account(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Returns information about the current status of an GCP account.
+
+        Keyword arguments:
+        ids -- List of Response Policy IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+        scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMCGPAccount
         """
-        Returns information about the current status of an GCP account.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMCGPAccount
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -129,12 +218,36 @@ class D4CRegistration(ServiceClass):
             params=parameters
             )
 
-    def create_gcp_account(self: object, body: dict) -> dict:
-        """
-        Creates a new account in our system for a customer and generates a new service
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_gcp_account(self: object, body: dict = None, **kwargs) -> dict:
+        """Creates a new account in our system for a customer and generates a new service
         account for them to add access to in their GCP environment to grant us access.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "parent_id": "string"
+                        }
+                    ]
+                }
+        parent_id -- GCP parent ID. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateCSPMGCPAccount
         """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateCSPMGCPAccount
+        if not body:
+            body = {}
+            body["resources"] = []
+            body["resources"].append({"parent_id": kwargs.get("parent_id", None)})
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -143,12 +256,18 @@ class D4CRegistration(ServiceClass):
             )
 
     def get_gcp_user_scripts_attachment(self: object) -> dict:
+        """Return a script for customer to run in their cloud environment to
+        grant us access to their GCP environment as a downloadable attachment.
+
+        This method does not accept arguments or keywords.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMGCPUserScriptsAttachment
         """
-        Return a script for customer to run in their cloud environment to
-        grant us access to their GCP environment as a downloadable attachment
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         /d4c-registration/GetCSPMGCPUserScriptsAttachment
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -156,10 +275,18 @@ class D4CRegistration(ServiceClass):
             )
 
     def get_gcp_user_scripts(self: object) -> dict:
+        """Return a script for customer to run in their cloud
+        environment to grant us access to their GCP environment.
+
+        This method does not accept arguments or keywords.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMGCPUserScripts
         """
-        Return a script for customer to run in their cloud environment to grant us access to their GCP environment
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetCSPMGCPUserScripts
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,

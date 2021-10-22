@@ -21,6 +21,7 @@ CIDs
 CSP
 CSPM
 CSPM
+combinedQueryVulnerabilities
 CalebSchwartz
 CheckActiveResponderCommandStatus
 CheckAdminCommandStatus

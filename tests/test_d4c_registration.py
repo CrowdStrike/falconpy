@@ -87,15 +87,15 @@ class TestD4CRegistration:
         falcon.base_url = "nowhere"
         error_checks = True
         tests = {
-            "get_azure_account": falcon.GetCSPMAzureAccount(ids='12345678', scan_type='dry')["status_code"],
-            "update_azure_account_client_id": falcon.UpdateCSPMAzureAccountClientID(ids='12345678')["status_code"],
-            "get_cgp_account": falcon.GetCSPMCGPAccount(ids='12345678', parameters={'scan_type': 'dry'})["status_code"],
-            "get_gcp_acocunt": falcon.GetCSPMGCPAccount(ids='12345678')["status_code"],  # Test the typo fix version
-            "create_gcp_account": falcon.CreateCSPMGCPAccount(body={})["status_code"],
-            "create_azure_account": falcon.CreateCSPMAzureAccount(body={})["status_code"]
+            "get_azure_account": falcon.GetCSPMAzureAccount(ids='12345678', scan_type='dry'),
+            "update_azure_account_client_id": falcon.UpdateCSPMAzureAccountClientID(ids='12345678'),
+            "get_cgp_account": falcon.GetCSPMCGPAccount(ids='12345678', parameters={'scan_type': 'dry'}),
+            "get_gcp_acocunt": falcon.GetCSPMGCPAccount(ids='12345678'),  # Test the typo fix version
+            "create_gcp_account": falcon.CreateCSPMGCPAccount(body={}, parent_id="12345678"),
+            "create_azure_account": falcon.CreateCSPMAzureAccount(body={}, subscription_id="12345678", tenant_id="12345678")
         }
         for key in tests:
-            if tests[key] != 500:
+            if tests[key]["status_code"] != 500:
                 error_checks = False
 
             # print(f"{key} processed with a {tests[key]} response")
