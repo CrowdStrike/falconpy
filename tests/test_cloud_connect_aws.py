@@ -17,9 +17,6 @@ auth = Authorization.TestAuthorization()
 
 token = auth.getConfigExtended()
 falcon = FalconAWS.Cloud_Connect_AWS(access_token=token)
-# falcon = FalconAWS.Cloud_Connect_AWS(creds={"client_id": auth.config["falcon_client_id"],
-#                                             "client_secret": auth.config["falcon_client_secret"]
-#                                             })
 AllowedResponses = [200, 201, 429]  # Adding rate-limiting as an allowed response for now
 accountPayload = {
         "resources": [
@@ -85,26 +82,6 @@ class TestCloudConnectAWS:
 
         return result
 
-    # def serviceCCAWS_GetAWSSettings(self):
-    #     if falcon.GetAWSSettings()["status_code"] in AllowedResponses:
-    #         return True
-    #     else:
-    #         return False
-
-    # def serviceCCAWS_QueryAWSAccounts(self):
-    #     if falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] in AllowedResponses:
-    #         return True
-    #     else:
-    #         return False
-
-    # def serviceCCAWS_GetAWSAccounts(self):
-    #     if falcon.GetAWSAccounts(ids=falcon.QueryAWSAccounts(
-    #             parameters={"limit": 1}
-    #             )["body"]["resources"][0]["id"])["status_code"] in AllowedResponses:
-    #         return True
-    #     else:
-    #         return False
-
     def serviceCCAWS_GetAWSAccountsUsingList(self):
         liste = []
         for thing in falcon.QueryAWSAccounts(parameters={"limit": 2})["body"]["resources"]:
@@ -128,34 +105,6 @@ class TestCloudConnectAWS:
         else:
             accountPayload["resources"][0]["external_id"] = orig_external_id
             return False
-
-    # def serviceCCAWS_AccountDelete(self):
-    #     if falcon.DeleteAWSAccounts(ids=accountPayload["resources"][0]["id"])["status_code"] in AllowedResponses:
-    #         return True
-    #     else:
-    #         return False
-
-    # def serviceCCAWS_AccountRegister(self):
-    #     if falcon.ProvisionAWSAccounts(body=accountPayload)["status_code"] in AllowedResponses:
-    #         return True
-    #     else:
-    #         return False
-
-    # def serviceCCAWS_VerifyAWSAccountAccess(self):
-    #     if falcon.VerifyAWSAccountAccess(
-    #             ids=falcon.QueryAWSAccounts(
-    #                 parameters={"limit": 1}
-    #                 )["body"]["resources"][0]["id"]
-    #             )["status_code"] in AllowedResponses:
-    #         return True
-    #     else:
-    #         return False
-
-    # def serviceCCAWS_QueryAWSAccountsForIDs(self):
-    #     if falcon.QueryAWSAccountsForIDs(parameters={"limit": 1})["status_code"] in AllowedResponses:
-    #         return True
-    #     else:
-    #         return False
 
     def serviceCCAWS_ForceAttributeError(self):
         FULL_URL = falcon.base_url+'/cloud-connect-aws/combined/accounts/v1'
@@ -185,7 +134,16 @@ class TestCloudConnectAWS:
             errorChecks = False
         if falcon.DeleteAWSAccounts(ids="1234567890")["status_code"] != 500:
             errorChecks = False
-        if falcon.ProvisionAWSAccounts(body={})["status_code"] != 500:
+        if falcon.ProvisionAWSAccounts(
+                cloudtrail_bucket_owner_id="string",
+                cloudtrail_bucket_region="string",
+                external_id="string",
+                iam_role_arn="string",
+                id="string",
+                rate_limit_reqs=0,
+                rate_limit_time=0,
+                static_external_id="string"
+                )["status_code"] != 500:
             errorChecks = False
         if falcon.CreateOrUpdateAWSSettings(body={})["status_code"] != 500:
             errorChecks = False
