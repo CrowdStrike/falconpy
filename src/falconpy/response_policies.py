@@ -76,8 +76,7 @@ class ResponsePolicies(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                   /response-policies/queryCombinedRTResponsePolicyMembers
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/queryCombinedRTResponsePolicyMembers
         """
         return process_service_request(
             calling_object=self,
@@ -109,8 +108,7 @@ class ResponsePolicies(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                  /response-policies/queryCombinedRTResponsePolicies
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/queryCombinedRTResponsePolicies
         """
         return process_service_request(
             calling_object=self,
@@ -158,8 +156,7 @@ class ResponsePolicies(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                   /response-policies/performRTResponsePoliciesAction
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/performRTResponsePoliciesAction
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -200,8 +197,7 @@ class ResponsePolicies(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                   /response-policies/setRTResponsePoliciesPrecedence
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/setRTResponsePoliciesPrecedence
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
@@ -280,8 +276,7 @@ class ResponsePolicies(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                   /response-policies/createRTResponsePolicies
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/createRTResponsePolicies
         """
         if not body:
             body = response_policy_payload(passed_keywords=kwargs)
@@ -309,8 +304,7 @@ class ResponsePolicies(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                      /response-policies/deleteRTResponsePolicies
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/deleteRTResponsePolicies
         """
         return process_service_request(
             calling_object=self,
@@ -357,8 +351,7 @@ class ResponsePolicies(ServiceClass):
         HTTP Method: PATCH
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                   /response-policies/updateRTResponsePolicies
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/updateRTResponsePolicies
         """
         if not body:
             body = response_policy_payload(passed_keywords=kwargs)
@@ -393,8 +386,7 @@ class ResponsePolicies(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                   /response-policies/queryRTResponsePolicyMembers
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/queryRTResponsePolicyMembers
         """
         return process_service_request(
             calling_object=self,
@@ -426,8 +418,7 @@ class ResponsePolicies(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                   /response-policies/queryRTResponsePolicies
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/response-policies/queryRTResponsePolicies
         """
         return process_service_request(
             calling_object=self,
