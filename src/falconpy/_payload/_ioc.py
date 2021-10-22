@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 
 
-def indicator_object(passed_keywords: dict) -> dict:  # pylint: disable=R0912
+def indicator_object(passed_keywords: dict) -> dict:  # pylint: disable=R0912  # noqa: C901
     """Creates a properly formatted single indicator payload.
     {
       "action": "string",
@@ -63,6 +63,8 @@ def indicator_object(passed_keywords: dict) -> dict:  # pylint: disable=R0912
       "value": "string"
     }
     """
+    # flake8 / pylint both complain about complexity due to the number of if statements.
+    # Ignoring the complaint as this is just running through the potential passed keywords.
     returned_payload = {}
     if passed_keywords.get("action", None):
         returned_payload["action"] = passed_keywords.get("action", None)
