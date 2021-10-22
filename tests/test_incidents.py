@@ -54,35 +54,38 @@ class TestIncidents:
         falcon.base_url = "nowhere"
         errorChecks = True
         commandList = [
-            ["CrowdScore",""],
-            ["GetBehaviors","body={}"],
-            ["PerformIncidentAction","body={}"],
-            ["GetIncidents","body={}"],
-            ["QueryBehaviors",""],
-            ["QueryIncidents",""]
+            ["CrowdScore", falcon.crowdscore()],
+            ["GetBehaviors", falcon.get_behaviors()],
+            ["PerformIncidentAction", falcon.perform_incident_action(action_parameters=[
+                {"name": "whatever", "value": "something"}
+                ])],
+            ["GetIncidents", falcon.get_incidents()],
+            ["QueryBehaviors", falcon.query_behaviors()],
+            ["QueryIncidents", falcon.query_incidents()]
         ]
         for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
+            if cmd[1]["status_code"] != 500:
+#            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
                 errorChecks = False
-        
+
         return errorChecks
 
     def test_CrowdScore(self):
-        assert self.serviceIncidents_CrowdScore() == True
+        assert self.serviceIncidents_CrowdScore() is True
 
     def test_QueryBehaviors(self):
-        assert self.serviceIncidents_QueryBehaviors() == True
+        assert self.serviceIncidents_QueryBehaviors() is True
 
     def test_QueryIncidents(self):
-        assert self.serviceIncidents_QueryIncidents() == True
-    
-    @pytest.mark.skipif(falcon.QueryIncidents(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
+        assert self.serviceIncidents_QueryIncidents() is True
+
+    @pytest.mark.skipif(falcon.QueryIncidents(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetIncidents(self):
-        assert self.serviceIncidents_GetIncidents() == True
-    
-    @pytest.mark.skipif(falcon.QueryBehaviors(parameters={"limit":1})["status_code"] == 429, reason="API rate limit reached")
+        assert self.serviceIncidents_GetIncidents() is True
+
+    @pytest.mark.skipif(falcon.QueryBehaviors(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
     def test_GetBehaviors(self):
-        assert self.serviceIncidents_GetBehaviors() == True
+        assert self.serviceIncidents_GetBehaviors() is True
 
     def test_Errors(self):
-        assert self.serviceIncidents_GenerateErrors() == True
+        assert self.serviceIncidents_GenerateErrors() is True
