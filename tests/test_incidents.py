@@ -1,51 +1,55 @@
-# test_incidents.py
-# This class tests the incidents service class
+"""test_incidents.py
 
-import json
+This class tests the incidents service class
+"""
 import os
 import sys
 import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 
-#Import our sibling src folder into the path
+# Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import incidents as FalconIncidents
+from falconpy import Incidents
 
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
-falcon = FalconIncidents.Incidents(access_token=token)
-AllowedResponses = [200, 429] #Adding rate-limiting as an allowed response for now
+falcon = Incidents(access_token=token)
+AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+
 
 class TestIncidents:
-
     def serviceIncidents_CrowdScore(self):
-        if falcon.CrowdScore(parameters={"limit":1})["status_code"] in AllowedResponses:
+        if falcon.CrowdScore(parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIncidents_QueryBehaviors(self):
-        if falcon.QueryBehaviors(parameters={"limit":1})["status_code"] in AllowedResponses:
+        if falcon.QueryBehaviors(parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIncidents_QueryIncidents(self):
-        if falcon.QueryIncidents(parameters={"limit":1})["status_code"] in AllowedResponses:
+        if falcon.QueryIncidents(parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIncidents_GetBehaviors(self):
-        if falcon.GetBehaviors(body={"ids":falcon.QueryBehaviors(parameters={"limit":1})["body"]["resources"]})["status_code"] in AllowedResponses:
+        if falcon.GetBehaviors(body={
+                            "ids": falcon.QueryBehaviors(parameters={"limit": 1})["body"]["resources"]
+                            })["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIncidents_GetIncidents(self):
-        if falcon.GetIncidents(body={"ids":falcon.QueryIncidents(parameters={"limit":1})["body"]["resources"]})["status_code"] in AllowedResponses:
+        if falcon.GetIncidents(body={
+                            "ids": falcon.QueryIncidents(parameters={"limit": 1})["body"]["resources"]
+                            })["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -65,7 +69,6 @@ class TestIncidents:
         ]
         for cmd in commandList:
             if cmd[1]["status_code"] != 500:
-#            if eval("falcon.{}({})['status_code']".format(cmd[0],cmd[1])) != 500:
                 errorChecks = False
 
         return errorChecks
