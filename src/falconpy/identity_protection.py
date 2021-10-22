@@ -68,7 +68,7 @@ class IdentityProtection(ServiceClass):
 
         This method only supports keywords for providing arguments.
         Currently using a non-standard body payload format.
-        Example payload: 
+        Example payload:
         {
             "query": "{\n  entities(first: 1)\n  {\n    nodes {\n      entityId    \n    }\n  }\n}"
         }
