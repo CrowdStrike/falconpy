@@ -34,6 +34,7 @@ from ._real_time_response import command_payload, data_payload
 from ._cloud_connect_aws import aws_registration_payload
 from ._ioc import indicator_payload, indicator_update_payload
 from ._d4c_registration import azure_registration_payload
+from ._cspm_registration import cspm_registration_payload, cspm_policy_payload, cspm_scan_payload
 
 __all__ = [
     "generic_payload_list", "aggregate_payload", "recon_action_payload", "recon_rules_payload",
@@ -43,5 +44,6 @@ __all__ = [
     "host_group_create_payload", "host_group_update_payload", "installation_token_payload",
     "prevention_policy_payload", "sensor_policy_payload", "response_policy_payload",
     "command_payload", "data_payload", "aws_registration_payload", "indicator_payload",
-    "indicator_update_payload", "azure_registration_payload"
+    "indicator_update_payload", "azure_registration_payload", "cspm_registration_payload",
+    "cspm_policy_payload", "cspm_scan_payload"
 ]
