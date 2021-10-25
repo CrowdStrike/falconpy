@@ -28,21 +28,26 @@ class TestFalconXSandbox:
         """
         error_checks = True
         tests = {
-            "get_artifacts": falcon.GetArtifacts(parameters={})["status_code"],
-            "get_summary_reports": falcon.GetSummaryReports(ids='12345678')["status_code"],
-            "get_reports": falcon.GetReports(ids='12345678')["status_code"],
-            "delete_report": falcon.DeleteReport(ids='12345678')["status_code"],
-            "get_submissions": falcon.GetSubmissions(ids='12345678')["status_code"],
-            "submit": falcon.Submit(body={})["status_code"],
-            "query_reports": falcon.QueryReports()["status_code"],
-            "query_submissions": falcon.QuerySubmissions()["status_code"],
-            "get_sample": falcon.GetSampleV2(ids='12345678')["status_code"],
-            "upload_sample": falcon.UploadSampleV2(body={}, parameters={}, file_data='')["status_code"],
-            "delete_sample": falcon.DeleteSampleV2(ids='12345678')["status_code"],
-            "query_sample": falcon.QuerySampleV1({'sha256s': ['12345678']})["status_code"]
+            "get_artifacts": falcon.GetArtifacts(parameters={}),
+            "get_summary_reports": falcon.GetSummaryReports(ids='12345678'),
+            "get_reports": falcon.GetReports(ids='12345678'),
+            "delete_report": falcon.DeleteReport(ids='12345678'),
+            "get_submissions": falcon.GetSubmissions(ids='12345678'),
+            "submit": falcon.Submit(document_password="banana",
+                                    enable_tor=False,
+                                    environment_id=300,
+                                    send_email_notifications=False,
+                                    user_tags=["apples"]
+                                    ),
+            "query_reports": falcon.QueryReports(),
+            "query_submissions": falcon.QuerySubmissions(),
+            "get_sample": falcon.GetSampleV2(ids='12345678'),
+            "upload_sample": falcon.UploadSampleV2(body={}, parameters={}, file_data=''),
+            "delete_sample": falcon.DeleteSampleV2(ids='12345678'),
+            "query_sample": falcon.QuerySampleV1(sha256s='12345678')
         }
         for key in tests:
-            if tests[key] not in AllowedResponses:
+            if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
 
             # print(f"{key} operation returned a {tests[key]} status code")
@@ -69,10 +74,3 @@ class TestFalconXSandbox:
     def test_errors(self):
         """Pytest harness hook"""
         assert self.falconx_generate_errors() is True
-
-    # @staticmethod
-    # def test_logout():
-    #     """Pytest harness hook"""
-    #     assert bool(falcon.auth_object.revoke(
-    #         falcon.auth_object.token()["body"]["access_token"]
-    #         )["status_code"] in AllowedResponses) is True
