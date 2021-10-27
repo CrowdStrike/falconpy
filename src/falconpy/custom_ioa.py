@@ -1,4 +1,5 @@
-"""
+"""Falcon Custom Indicators of Attack API Interface Class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-custom_ioa - Falcon Custom Indicators of Attack API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -36,68 +35,130 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import parse_id_list, force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import ioa_custom_payload, generic_payload_list
 from ._service_class import ServiceClass
 from ._endpoint._custom_ioa import _custom_ioa_endpoints as Endpoints
 
 
 class CustomIOA(ServiceClass):
-    """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, an
-    authorization object (oauth2.py) or a credential dictionary with
-    client_id and client_secret containing valid API credentials.
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (OAuth2.token())
     """
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_patterns(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_patterns(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get pattern severities by ID
+
+        Keyword arguments:
+        ids -- Entity IDs. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword is used.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-patterns
         """
-        Get pattern severities by ID
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-patterns
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="get_patterns",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_platforms(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_platforms(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get platforms by ID
+
+        Keyword arguments:
+        ids -- Entity IDs. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword is used.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-platformsMixin0
         """
-        Get platforms by ID
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-platformsMixin0
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="get_platformsMixin0",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rule_groups(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_rule_groups(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get rule groups by ID
+
+        Keyword arguments:
+        ids -- Entity IDs. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword is used.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-rule-groupsMixin0
         """
-        Get rule groups by ID
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-rule-groupsMixin0
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="get_rule_groupsMixin0",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
     def create_rule_group(self: object,
-                          body: dict,
-                          cs_username: str = None  # pylint: disable=W0613  # cs_username is deprecated
+                          body: dict = None,
+                          cs_username: str = None,  # pylint: disable=W0613  # deprecated
+                          **kwargs
                           ) -> dict:
+        """Create a rule group for a platform with a name and an optional description.
+        Returns the rule group.
+
+        Keyword arguments:
+        body -- Full body payload in JSON format. Not required if other keywords are provided.
+        comment -- Comment for the rule group. String.
+        description -- Rule group description. String.
+        name -- Name of the rule group. String.
+        platform -- Platform this rule group applies to. Allowed values: `windows`, `mac`, `linux`
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/create-rule-groupMixin0
         """
-        Create a rule group for a platform with a name and an optional description. Returns the rule group.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/create-rule-groupMixin0
+        if not body:
+            body = ioa_custom_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -107,29 +168,74 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_rule_groups(self: object,
+                           *args,
                            cs_username: str = None,  # pylint: disable=W0613  # cs_username is deprecated
                            parameters: dict = None,
-                           **kwargs) -> dict:
+                           **kwargs
+                           ) -> dict:
+        """Delete rule groups by ID.
+
+        Keyword arguments:
+        comment -- Explains why the entity is being deleted. String.
+        ids -- Entity IDs. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword is used.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/delete-rule-groupsMixin0
         """
-        Delete rule groups by ID.
-        """
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/delete-rule-groupsMixin0
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="delete_rule_groupsMixin0",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
     def update_rule_group(self: object,
-                          body: dict,
-                          cs_username: str = None  # pylint: disable=W0613  # cs_username is deprecated
+                          body: dict = None,
+                          cs_username: str = None,  # pylint: disable=W0613  # deprecated
+                          **kwargs
                           ) -> dict:
+        """Update a rule group.
+        The following properties can be modified: `name`, `description`, `enabled`.
+
+        Keyword arguments:
+        body -- Full body payload in JSON format. Not required if other keywords are provided.
+                {
+                    "comment": "string",
+                    "description": "string",
+                    "enabled": true,
+                    "id": "string",
+                    "name": "string",
+                    "rulegroup_version": 0
+                }
+        comment -- Comment for the rule group. String.
+        description -- Rule group description. String.
+        enabled -- Flag indicating if the group is enabled. Boolean.
+        id -- ID of the rule group. String.
+        name -- Name of the rule group. String.
+        rulegroup_version -- Rule group version to modify. Integer.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/update-rule-groupMixin0
         """
-        Update a rule group. The following properties can be modified: name, description, enabled.
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/update-rule-groupMixin0
+        if not body:
+            body = ioa_custom_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -138,56 +244,154 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rule_types(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_rule_types(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get rule types by ID
+
+        Keyword arguments:
+        ids -- Entity IDs. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword is used.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-rule-types
         """
-        Get rule types by ID
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-rule-types
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="get_rule_types",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
-    def get_rules_get(self: object, ids) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_rules_get(self: object, body: dict = None, **kwargs) -> dict:
+        """Get rules by ID and optionally version in the following format: ID[:version]
+
+        Keyword arguments:
+        body -- full body payload in JSON format, not required if using `ids` keyword is used.
+        ids -- Rule IDs to retrieve. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-rules-get
         """
-        Get rules by ID and optionally version in the following format: ID[:version]
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-rules-get
-        body_payload = {}
-        body_payload["ids"] = parse_id_list(ids).split(",")
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="get_rules_get",
-            body=body_payload
+            body=body
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rules(self: object, parameters: dict = None, **kwargs) -> dict:
-        """
-        Get rules by ID and optionally version in the following format: ID[:version].
+    def get_rules(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get rules by ID and optionally version in the following format: ID[:version].
         The max number of IDs is constrained by URL size.
+
+        Keyword arguments:
+        ids -- Entity IDs. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword is used.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-rulesMixin0
         """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/get-rulesMixin0
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="get_rulesMixin0",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
     def create_rule(self: object,
-                    body: dict,
-                    cs_username: str = None  # pylint: disable=W0613  # cs_username is deprecated
+                    body: dict = None,
+                    cs_username: str = None,  # pylint: disable=W0613  # deprecated
+                    **kwargs
                     ) -> dict:
+        """Create a rule within a rule group. Returns the rule.
+
+        Keyword arguments:
+        body -- full body payload in JSON format, not required if using other keywords.
+                {
+                    "comment": "string",
+                    "description": "string",
+                    "disposition_id": 0,
+                    "field_values": [
+                        {
+                            "final_value": "string",
+                            "label": "string",
+                            "name": "string",
+                            "type": "string",
+                            "value": "string",
+                            "values": [
+                                {
+                                    "label": "string",
+                                    "value": "string"
+                                }
+                            ]
+                        }
+                    ],
+                    "name": "string",
+                    "pattern_severity": "string",
+                    "rulegroup_id": "string",
+                    "ruletype_id": "string"
+                }
+        comment -- Comment related to this update. String.
+        description -- Rule description. String.
+        disposition_id -- Disposition ID. Integer.
+        field_values -- Rule values represented as an object. Dictionary.
+                        {
+                            "final_value": "string",
+                            "label": "string",
+                            "name": "string",
+                            "type": "string",
+                            "value": "string",
+                            "values": [
+                                {
+                                    "label": "string",
+                                    "value": "string"
+                                }
+                            ]
+                        }
+        name -- Name of the rule. String.
+        pattern_severity -- Severity. String.
+        rulegroup_id -- ID of the rule group. String.
+        ruletype_id -- ID of the rule type. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/create-rule
         """
-        Create a rule within a rule group. Returns the rule.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/create-rule
+        if not body:
+            body = ioa_custom_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -197,14 +401,27 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_rules(self: object,
-                     cs_username: str = None,  # pylint: disable=W0613  # cs_username is deprecated
+                     cs_username: str = None,  # pylint: disable=W0613  # deprecated
                      parameters: dict = None,
                      **kwargs
                      ) -> dict:
+        """Delete rules from a rule group by ID.
+
+        Keyword arguments:
+        comment -- Explains why the entity is being deleted. String.
+        ids -- Entity IDs. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword is used.
+        rule_group_id -- The parent rule group. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/delete-rules
         """
-        Delete rules from a rule group by ID.
-        """
-        # [DELETE] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/delete-rules
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -213,14 +430,90 @@ class CustomIOA(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
     def update_rules(self: object,
-                     body: dict,
-                     cs_username: str = None  # pylint: disable=W0613  # cs_username is deprecated
+                     body: dict = None,
+                     cs_username: str = None,  # pylint: disable=W0613  # deprecated
+                     **kwargs
                      ) -> dict:
+        """Update rules within a rule group. Return the updated rules.
+
+        Keyword arguments:
+        body -- full body payload in JSON format, not required if using other keywords.
+                {
+                    "comment": "string",
+                    "rule_updates": [
+                        {
+                            "description": "string",
+                            "disposition_id": 0,
+                            "enabled": true,
+                            "field_values": [
+                                {
+                                    "final_value": "string",
+                                    "label": "string",
+                                    "name": "string",
+                                    "type": "string",
+                                    "value": "string",
+                                    "values": [
+                                        {
+                                            "label": "string",
+                                            "value": "string"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "instance_id": "string",
+                            "name": "string",
+                            "pattern_severity": "string",
+                            "rulegroup_version": 0
+                        }
+                    ],
+                    "rulegroup_id": "string",
+                    "rulegroup_version": 0
+                }
+        comment -- Comment related to this update. String.
+        rulegroup_id -- ID of the rule group. String.
+        rule_updates -- JSON dictionary representing the rule updates to
+                        be performed. Only one rule update can be done
+                        in this manner. Dictionary.
+                        {
+                            "description": "string",
+                            "disposition_id": 0,
+                            "enabled": true,
+                            "field_values": [
+                                {
+                                    "final_value": "string",
+                                    "label": "string",
+                                    "name": "string",
+                                    "type": "string",
+                                    "value": "string",
+                                    "values": [
+                                        {
+                                            "label": "string",
+                                            "value": "string"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "instance_id": "string",
+                            "name": "string",
+                            "pattern_severity": "string",
+                            "rulegroup_version": 0
+                        }
+        rulegroup_version -- Version of the rule group. Integer.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/update-rules
         """
-        Update rules within a rule group. Return the updated rules.
-        """
-        # [PATCH] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/update-rules
+        if not body:
+            body = ioa_custom_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -228,11 +521,53 @@ class CustomIOA(ServiceClass):
             body=body
             )
 
-    def validate(self: object, body: dict) -> dict:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def validate(self: object, body: dict = None, **kwargs) -> dict:
+        """Validates field values and checks for matches if a test string is provided.
+
+        Keyword arguments:
+        body -- full body payload in JSON format, not required if using other keywords.
+                {
+                    "fields": [
+                        {
+                            "name": "string",
+                            "test_data": "string",
+                            "type": "string",
+                            "values": [
+                                {
+                                    "label": "string",
+                                    "value": "string"
+                                }
+                            ]
+                        }
+                    ]
+                }
+        fields -- List of fields to validate. List of dictionaries.
+                  {
+                      "name": "string",
+                      "test_data": "string",
+                      "type": "string",
+                      "values": [
+                          {
+                              "label": "string",
+                              "value": "string"
+                          }
+                      ]
+                  }
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'fields'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/validate
         """
-        Validates field values and checks for matches if a test string is provided.
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/validate
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="fields")
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -242,10 +577,24 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_patterns(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Get all pattern severity IDs
+
+        Keyword arguments:
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters -- full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-patterns
         """
-        Get all pattern severity IDs
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-patterns
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -256,10 +605,24 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_platforms(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Get all platform IDs.
+
+        Keyword arguments:
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters -- full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-platformsMixin0
         """
-        Get all platform IDs.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-platformsMixin0
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -270,10 +633,42 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_rule_groups_full(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Find all rule groups matching the query with optional filter.
+
+        Keyword arguments:
+        filter -- FQL query specifying the filter parameters. String.
+                  Filter term criteria:
+                  enabled                   rules.name
+                  platform                  rules.description
+                  name                      rules.pattern_severity
+                  description               rules.ruletype_name
+                  rules.action_label        rules.enabled
+
+                  Filter range criteria:
+                  created_on
+                  modified_on (use any common date format, e.g. '2010-05-15T14:55:21.892315096Z')
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters -- full parameters payload, not required if using other keywords.
+        q -- Match query criteria, which includes all the filter string fields. String.
+        sort -- FQL syntax specifying sort criteria. String.
+                Possible order by fields:
+                created_by              enabled
+                created_on              name
+                modified_by             description
+                modified_on
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rule-groups-full
         """
-        Find all rule groups matching the query with optional filter.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rule-groups-full
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -284,10 +679,42 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_rule_groups(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Finds all rule group IDs matching the query with optional filter.
+
+        Keyword arguments:
+        filter -- FQL query specifying the filter parameters. String.
+                  Filter term criteria:
+                  enabled                   rules.name
+                  platform                  rules.description
+                  name                      rules.pattern_severity
+                  description               rules.ruletype_name
+                  rules.action_label        rules.enabled
+
+                  Filter range criteria:
+                  created_on
+                  modified_on (use any common date format, e.g. '2010-05-15T14:55:21.892315096Z')
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters -- full parameters payload, not required if using other keywords.
+        q -- Match query criteria, which includes all the filter string fields. String.
+        sort -- FQL syntax specifying sort criteria. String.
+                Possible order by fields:
+                created_by              enabled
+                created_on              name
+                modified_by             description
+                modified_on
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rule-groupsMixin0
         """
-        Finds all rule group IDs matching the query with optional filter.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rule-groupsMixin0
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -298,10 +725,24 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_rule_types(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Get all rule type IDs.
+
+        Keyword arguments:
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters -- full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rule-types
         """
-        Get all rule type IDs.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rule-types
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -312,10 +753,43 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_rules(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Finds all rule IDs matching the query with optional filter.
+
+        Keyword arguments:
+        filter -- FQL query specifying the filter parameters. String.
+                  Filter term criteria:
+                  enabled                   rules.name
+                  platform                  rules.description
+                  name                      rules.pattern_severity
+                  description               rules.ruletype_name
+                  rules.action_label        rules.enabled
+
+                  Filter range criteria:
+                  created_on
+                  modified_on (use any common date format, e.g. '2010-05-15T14:55:21.892315096Z')
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters -- full parameters payload, not required if using other keywords.
+        q -- Match query criteria, which includes all the filter string fields. String.
+        sort -- FQL syntax specifying sort criteria. String.
+                Possible order by fields:
+                rules.ruletype_name                 rules.created_on
+                rules.enabled                       rules.current_version.description
+                rules.created_by                    rules.current_version.pattern_severity
+                rules.current_version.name          rules.current_version.action_label
+                rules.current_version.modified_by   rules.current_version.modified_on
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rulesMixin0
         """
-        Finds all rule IDs matching the query with optional filter.
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/query-rulesMixin0
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
