@@ -68,22 +68,22 @@ class TestFalconCompleteDashboard:
 
     def ServiceFCD_GenerateErrors(self):
         falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["AggregateAllowList", "body={}"],
-            ["AggregateBlockList", "body=[{}]"],
-            ["AggregateDetections", "body={}"],
-            ["AggregateDeviceCountCollection", "body=[{}]"],
-            ["AggregateEscalations", "body={}"],
-            ["AggregateFCIncidents", "body=[{}]"],
-            ["AggregateRemediations", "body={}"],
+        error_checks = True
+        tests = {
+            "AggregateAllowList": falcon.aggregate_allow_list(),
+            "AggregateBlockList": falcon.aggregate_block_list(),
+            "AggregateDetections": falcon.aggregate_detections(),
+            "AggregateDeviceCountCollection": falcon.aggregate_device_count_collection(),
+            "AggregateEscalations": falcon.aggregate_escalations(),
+            "AggregateFCIncidents": falcon.aggregate_fc_incidents(),
+            "AggregateRemediations": falcon.aggregate_remediations(),
 
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+        }
+        for key in tests:
+            if tests[key]["status_code"] != 500:
+                error_checks = False
 
-        return errorChecks
+        return error_checks
 
     def test_QueryAllowListFilter(self):
         assert self.ServiceFCD_QueryAllowListFilter() is True
