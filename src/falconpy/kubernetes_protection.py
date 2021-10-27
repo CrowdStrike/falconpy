@@ -240,7 +240,7 @@ class KubernetesProtection(ServiceClass):
 
         Returns: dict object containing API response.
 
-        HTTP Method: GET
+        HTTP Method: POST
 
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/RegenerateAPIKey
