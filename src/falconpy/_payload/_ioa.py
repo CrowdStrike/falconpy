@@ -76,3 +76,83 @@ def ioa_exclusion_payload(passed_keywords: dict) -> dict:
         returned_payload["pattern_name"] = passed_keywords.get("pattern_name", None)
 
     return returned_payload
+
+
+def ioa_custom_payload(passed_keywords: dict) -> dict:
+    """Creates a properly formatted custom IOA payload.
+        {
+            "comment": "string",
+            "description": "string",
+            "name": "string",
+            "platform": "string",
+            "enabled": true,
+            "id": "string",
+            "rulegroup_version": 0,
+            "disposition_id": 0,
+            "field_values": [
+                {
+                    "final_value": "string",
+                    "label": "string",
+                    "name": "string",
+                    "type": "string",
+                    "value": "string",
+                    "values": [
+                        {
+                            "label": "string",
+                            "value": "string"
+                        }
+                    ]
+                }
+            ],
+            "pattern_severity": "string",
+            "rulegroup_id": "string",
+            "ruletype_id": "string",
+            "rule_updates": [
+                {
+                    "description": "string",
+                    "disposition_id": 0,
+                    "enabled": true,
+                    "field_values": [
+                        {
+                            "final_value": "string",
+                            "label": "string",
+                            "name": "string",
+                            "type": "string",
+                            "value": "string",
+                            "values": [
+                                {
+                                    "label": "string",
+                                    "value": "string"
+                                }
+                            ]
+                        }
+                    ],
+                    "instance_id": "string",
+                    "name": "string",
+                    "pattern_severity": "string",
+                    "rulegroup_version": 0
+                }
+            ]
+        }
+    """
+    returned_payload = {}
+    keys = [
+        "comment", "description", "name", "platform", "id", "pattern_severity",
+        "rulegroup_id", "ruletype_id"
+        ]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    if passed_keywords.get("enabled", None) is not None:
+        returned_payload["enabled"] = passed_keywords.get("enabled", None)
+    if passed_keywords.get("rulegroup_version", -1) >= 0:
+        returned_payload["rulegroup_version"] = passed_keywords.get("rulegroup_version", None)
+    if passed_keywords.get("disposition_id", -1) >= 0:
+        returned_payload["disposition_id"] = passed_keywords.get("disposition_id", None)
+    if passed_keywords.get("field_values", None):
+        returned_payload["field_values"] = [passed_keywords.get("field_values", None)]
+    if passed_keywords.get("rule_updates", None):
+        returned_payload["rule_updates"] = [passed_keywords.get("rule_updates", None)]
+
+    return returned_payload

@@ -26,7 +26,7 @@ from ._recon import recon_action_payload, recon_action_update_payload, recon_rul
 from ._recon import recon_notifications_payload, recon_rule_preview_payload
 from ._malquery import malquery_exact_search_payload, malquery_hunt_payload, malquery_fuzzy_payload
 from ._detects import update_detects_payload
-from ._ioa import ioa_exclusion_payload
+from ._ioa import ioa_exclusion_payload, ioa_custom_payload
 from ._prevention_policy import prevention_policy_payload
 from ._sensor_update_policy import sensor_policy_payload
 from ._response_policy import response_policy_payload
@@ -50,5 +50,5 @@ __all__ = [
     "command_payload", "data_payload", "aws_registration_payload", "indicator_payload",
     "indicator_update_payload", "azure_registration_payload", "cspm_registration_payload",
     "cspm_policy_payload", "cspm_scan_payload", "device_policy_payload", "falconx_payload",
-    "mssp_payload"
+    "mssp_payload", "ioa_custom_payload"
 ]
