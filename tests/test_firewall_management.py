@@ -28,10 +28,10 @@ class TestFirewallManagement:
 
     @staticmethod
     def set_rule_group_id():
-        result = falcon.create_rule_group(body={
-            "name": rule_group_name,
-            "enabled": False
-        }, cs_username="HarryHenderson")
+        result = falcon.create_rule_group(name=rule_group_name,
+                                          enabled=False,
+                                          cs_username="HarryHenderson"
+                                          )
         global rule_group_id
         rule_group_id = result["body"]["resources"][0]
 
@@ -49,14 +49,31 @@ class TestFirewallManagement:
             "get_firewall_fields": falcon.get_firewall_fields(ids="12345678"),
             "get_platforms": falcon.get_platforms(ids="12345678"),
             "get_policy_containers": falcon.get_policy_containers(ids="12345678"),
-            "update_policy_container": falcon.update_policy_container(body={}, cs_username="BillTheCat"),
+            "update_policy_container": falcon.update_policy_container(default_inbound="something",
+                                                                      default_outbound="something_else",
+                                                                      platform_id="linux",
+                                                                      tracking="Bob",
+                                                                      cs_username="BillTheCat",
+                                                                      enforce=False,
+                                                                      is_default_policy=False,
+                                                                      test_mode=True,
+                                                                      rule_group_ids=["123456789"]
+                                                                      ),
             "create_rule_group": self.set_rule_group_id(),
+            "create_rule_group_fail_one": falcon.create_rule_group(rules={"whatever": "bro"}),
+            "create_rule_group_fail_two": falcon.create_rule_group(rules=[{"whatever": "bro"}]),
             "get_rule_groups": falcon.get_rule_groups(ids=rule_group_id),
-            "update_rule_group": falcon.update_rule_group(body={
-                "id": rule_group_id,
-                "name": rule_group_name,
-                "enabled": True
-            }, cs_username="Calcifer"),
+            "updat3_rule_group": falcon.update_rule_group(id="12345678",
+                                                          tracking="Whatever",
+                                                          diff_operations=[{"whatever": "brah"}],
+                                                          rule_ids=["12345"],
+                                                          rule_versions=[1, 2, 3]
+                                                          ),
+            "update_rule_group": falcon.update_rule_group(id="12345678",
+                                                          name=rule_group_name,
+                                                          enabled=False,
+                                                          diff_operations={"whatever": "brah"}
+                                                          ),
             "delete_rule_groups": falcon.delete_rule_groups(ids=rule_group_id, cs_username="KyloRen"),
             "get_rules": falcon.get_rules(ids="12345678"),
             "query_events": falcon.query_events(),
