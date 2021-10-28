@@ -1,4 +1,4 @@
-# test_firewall_policies.py
+# test_firewall_policies.py 
 # This class tests the firewall_policies service class
 import os
 import sys
@@ -25,26 +25,43 @@ class TestFirewallPolicy:
 
     def serviceFirewall_GenerateErrors(self):
         falcon.base_url = "nowhere"
-        errorChecks = True
-        commandList = [
-            ["queryCombinedFirewallPolicyMembers", ""],
-            ["queryCombinedFirewallPolicies", ""],
-            ["performFirewallPoliciesAction", "action_name='enable', body={}, parameters={}"],
-            ["performFirewallPoliciesAction", "body={}, parameters={'action_name':'PooF'}"],
-            ["performFirewallPoliciesAction", "body={}, parameters={}"],
-            ["setFirewallPoliciesPrecedence", "body={}"],
-            ["getFirewallPolicies", "ids='12345678'"],
-            ["createFirewallPolicies", "body={}"],
-            ["deleteFirewallPolicies", "ids='12345678'"],
-            ["updateFirewallPolicies", "body={}"],
-            ["queryFirewallPolicyMembers", ""],
-            ["queryFirewallPolicies", ""]
-        ]
-        for cmd in commandList:
-            if eval("falcon.{}({})['status_code']".format(cmd[0], cmd[1])) != 500:
-                errorChecks = False
+        error_checks = True
+        tests = {
+            "query_combined_device_control_policy_members": falcon.queryCombinedFirewallPolicyMembers(),
+            "query_combined_device_control_policies": falcon.queryCombinedFirewallPolicies(),
+            "perform_device_control_policies_action": falcon.performFirewallPoliciesAction(body={}, parameters={}, action_name='enable'),
+            "perform_device_control_policies_action_two": falcon.performFirewallPoliciesAction(body={}, parameters={'action_name':'PooF'}),
+            "perform_device_control_policies_action_three": falcon.perform_action(action_name="disable",
+                                                                                  ids="12345678",
+                                                                                  action_parameters=[{
+                                                                                    "name": "group_id",
+                                                                                    "value": "123456789abcdef987654321"
+                                                                                    }]
+                                                                                  ),
+            "set_device_control_policies_precedence": falcon.setFirewallPoliciesPrecedence(ids="12345678", platform_name="Windows"),
+            "get_device_control_policies": falcon.getFirewallPolicies(ids='12345678'),
+            "create_device_control_policies": falcon.createFirewallPolicies(clone_id="12345678",
+                                                                                 description="whatever",
+                                                                                 name="UnitTesting",
+                                                                                 platform_name="Linux",
+                                                                                 settings={"classes": []}
+                                                                                 ),
+            "delete_device_control_policies": falcon.deleteFirewallPolicies(ids='12345678'),
+            "update_device_control_policies": falcon.updateFirewallPolicies(id="12345678",
+                                                                                 description="More unit testing",
+                                                                                 name="UnitTesting",
+                                                                                 settings={"classes": []}
+                                                                                 ),
+            "query_device_control_policy_members": falcon.queryFirewallPolicyMembers(),
+            "query_device_control_policies": falcon.queryFirewallPolicies()
+        }
+        for key in tests:
+            if tests[key]["status_code"] != 500:
+                error_checks = False
 
-        return errorChecks
+            # print(f"{key} operation returned a {tests[key]} status code")
+
+        return error_checks
 
     def test_Errors(self):
         assert self.serviceFirewall_GenerateErrors() is True
