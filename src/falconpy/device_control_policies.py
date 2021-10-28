@@ -150,7 +150,7 @@ class DeviceControlPolicies(ServiceClass):
                         "string"
                     ]
                 }
-        ids -- Sensor Update policy ID(s) to perform actions against. String or list of strings.
+        ids -- Device Control policy ID(s) to perform actions against. String or list of strings.
         parameters - full parameters payload, not required if action_name is provided as a keyword.
 
         This method only supports keywords for providing arguments.
@@ -201,7 +201,7 @@ class DeviceControlPolicies(ServiceClass):
                     ],
                     "platform_name": "Windows"
                 }
-        ids -- Sensor Update policy ID(s) to perform actions against. String or list of strings.
+        ids -- Device Control policy ID(s) to perform actions against. String or list of strings.
         platform_name -- OS platform name.
 
         This method only supports keywords for providing arguments.
