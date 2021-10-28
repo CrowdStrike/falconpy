@@ -38,6 +38,7 @@ from ._cspm_registration import cspm_registration_payload, cspm_policy_payload, 
 from ._device_control_policy import device_policy_payload
 from ._falconx import falconx_payload
 from ._mssp import mssp_payload
+from ._firewall_policy import firewall_policy_payload
 
 
 __all__ = [
@@ -50,5 +51,5 @@ __all__ = [
     "command_payload", "data_payload", "aws_registration_payload", "indicator_payload",
     "indicator_update_payload", "azure_registration_payload", "cspm_registration_payload",
     "cspm_policy_payload", "cspm_scan_payload", "device_policy_payload", "falconx_payload",
-    "mssp_payload", "ioa_custom_payload"
+    "mssp_payload", "ioa_custom_payload", "firewall_policy_payload"
 ]
