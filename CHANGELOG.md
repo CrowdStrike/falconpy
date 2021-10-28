@@ -1,3 +1,19 @@
+# Version 0.7.4
+## Added features and functionality
++ Updated: Service Class Refactoring (Rev 4) 
+    * Provides: Body Payload Abstraction - Abstracted BODY payload parameters for all methods using PATCH, POST or PUT requests into keywords. Legacy usage pattern of passing the BODY payload directly as the _body_ keyword is still supported. 
+    * Provides: PEP-257 formatting of all docstrings.
+    - `cspm_registration.py` - Closes #394
+    - `device_control_policies.py` - Closes #396
+    - `falconx_sandbox.py` - Closes #397
+    - `mssp.py` - Closes #398
+    - `kubernetes_protection.py` - Closes #399
+    - `custom_ioa.py` - Closes #400
+    - `falcon_complete_dashboard.py` - Closes #401
+    - `firewall_policies.py` - Closes #402
+    - `firewall_management.py` - Closes #403
+
+
 # Version 0.7.3
 ## Added features and functionality
 + Added: New combinedQueryVulnerabilities operation to SpotlightVulnerabilities Service Class.

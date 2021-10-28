@@ -23,27 +23,40 @@ class TestDeviceControlPolicy:
     Test harness for the Device Control Policies Service Class
     """
     def serviceDeviceControlPolicies_GenerateErrors(self):
-        """
-        Generates a series of 500 errors to test remaining code paths
-        """
+        """Generates a series of 500 errors to test remaining code paths"""
         falcon.base_url = "nowhere"
         error_checks = True
         tests = {
-            "query_combined_device_control_policy_members": falcon.queryCombinedDeviceControlPolicyMembers()["status_code"],
-            "query_combined_device_control_policies": falcon.queryCombinedDeviceControlPolicies()["status_code"],
-            "perform_device_control_policies_action": falcon.performDeviceControlPoliciesAction(body={}, parameters={}, action_name='enable')["status_code"],
-            "perform_device_control_policies_action_two": falcon.performDeviceControlPoliciesAction(body={}, parameters={'action_name':'PooF'})["status_code"],
-            "perform_device_control_policies_action_three": falcon.performDeviceControlPoliciesAction(body={}, parameters={})["status_code"],
-            "set_device_control_policies_precedence": falcon.setDeviceControlPoliciesPrecedence(body={})["status_code"],
-            "get_device_control_policies": falcon.getDeviceControlPolicies(ids='12345678')["status_code"],
-            "create_device_control_policies": falcon.createDeviceControlPolicies(body={})["status_code"],
-            "delete_device_control_policies": falcon.deleteDeviceControlPolicies(ids='12345678')["status_code"],
-            "update_device_control_policies": falcon.updateDeviceControlPolicies(body={})["status_code"],
-            "query_device_control_policy_members": falcon.queryDeviceControlPolicyMembers()["status_code"],
-            "query_device_control_policies": falcon.queryDeviceControlPolicies()["status_code"]
+            "query_combined_device_control_policy_members": falcon.queryCombinedDeviceControlPolicyMembers(),
+            "query_combined_device_control_policies": falcon.queryCombinedDeviceControlPolicies(),
+            "perform_device_control_policies_action": falcon.performDeviceControlPoliciesAction(body={}, parameters={}, action_name='enable'),
+            "perform_device_control_policies_action_two": falcon.performDeviceControlPoliciesAction(body={}, parameters={'action_name':'PooF'}),
+            "perform_device_control_policies_action_three": falcon.perform_action(action_name="disable",
+                                                                                  ids="12345678",
+                                                                                  action_parameters=[{
+                                                                                    "name": "group_id",
+                                                                                    "value": "123456789abcdef987654321"
+                                                                                    }]
+                                                                                  ),
+            "set_device_control_policies_precedence": falcon.setDeviceControlPoliciesPrecedence(ids="12345678", platform_name="Windows"),
+            "get_device_control_policies": falcon.getDeviceControlPolicies(ids='12345678'),
+            "create_device_control_policies": falcon.createDeviceControlPolicies(clone_id="12345678",
+                                                                                 description="whatever",
+                                                                                 name="UnitTesting",
+                                                                                 platform_name="Linux",
+                                                                                 settings={"classes": []}
+                                                                                 ),
+            "delete_device_control_policies": falcon.deleteDeviceControlPolicies(ids='12345678'),
+            "update_device_control_policies": falcon.updateDeviceControlPolicies(id="12345678",
+                                                                                 description="More unit testing",
+                                                                                 name="UnitTesting",
+                                                                                 settings={"classes": []}
+                                                                                 ),
+            "query_device_control_policy_members": falcon.queryDeviceControlPolicyMembers(),
+            "query_device_control_policies": falcon.queryDeviceControlPolicies()
         }
         for key in tests:
-            if tests[key] != 500:
+            if tests[key]["status_code"] != 500:
                 error_checks = False
 
             # print(f"{key} operation returned a {tests[key]} status code")

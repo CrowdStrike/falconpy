@@ -47,7 +47,7 @@ class TestMLExclusions:
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
-                print(f"{key} \n {tests[key]}")
+                # print(f"{key} \n {tests[key]}")
                 error_checks = False
 
         return error_checks

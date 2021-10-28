@@ -1,4 +1,5 @@
-"""
+"""Falcon Complete Dashboard API Interface Class
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-falcon_complete_dashboard - Falcon Complete Dashboard API Interface Class
 
 This is free and unencumbered software released into the public domain.
 
@@ -37,23 +36,92 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import process_service_request, force_default
+from ._payload import aggregate_payload
 from ._service_class import ServiceClass
 from ._endpoint._falcon_complete_dashboard import _falcon_complete_dashboard_endpoints as Endpoints
 
 
 class CompleteDashboard(ServiceClass):
+    """The only requirement to instantiate an instance of this class is one of the following:
+
+    - a valid client_id and client_secret provided as keywords.
+    - a credential dictionary with client_id and client_secret containing valid API credentials
+      {
+          "client_id": "CLIENT_ID_HERE",
+          "client_secret": "CLIENT_SECRET_HERE"
+      }
+    - a previously-authenticated instance of the authentication service class (oauth2.py)
+    - a valid token provided by the authentication service class (OAuth2.token())
     """
-    The only requirement to instantiate an instance of this class
-    is a valid token provided by the Falcon API SDK OAuth2 class, a
-    existing instance of the authentication class as an object or a
-    valid set of credentials.
-    """
-    def aggregate_allow_list(self: object, body: list) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_allow_list(self: object, body: list = None, **kwargs) -> dict:
+        """Retrieve aggregate allowlist ticket values based on the matched filter.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                List of dictionaries.
+                [{
+                    "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "field": "string",
+                    "filter": "string",
+                    "interval": "string",
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "q": "string",
+                    "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        null
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }]
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        interval -- String.
+        min_doc_count -- Minimum number of documents required to match. Integer.
+        missing -- String.
+        name -- Name of the aggregation. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Size limit to apply to the queries. Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        This method does not support body payload validation.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateAllowList
         """
-        Retrieve aggregate allowlist ticket values based on the matched filter
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #          /Falcon%20Complete%20Dashboard/AggregateAllowList
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -61,12 +129,75 @@ class CompleteDashboard(ServiceClass):
             body=body
             )
 
-    def aggregate_block_list(self: object, body: list) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_block_list(self: object, body: list = None, **kwargs) -> dict:
+        """Retrieve aggregate blocklist ticket values based on the matched filter.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                List of dictionaries.
+                [{
+                    "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "field": "string",
+                    "filter": "string",
+                    "interval": "string",
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "q": "string",
+                    "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        null
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }]
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        interval -- String.
+        min_doc_count -- Minimum number of documents required to match. Integer.
+        missing -- String.
+        name -- Name of the aggregation. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Size limit to apply to the queries. Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        This method does not support body payload validation.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateBlockList
         """
-        Retrieve aggregate blocklist ticket values based on the matched filter
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #          /Falcon%20Complete%20Dashboard/AggregateBlockList
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -74,12 +205,75 @@ class CompleteDashboard(ServiceClass):
             body=body
             )
 
-    def aggregate_detections(self: object, body: list) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_detections(self: object, body: list = None, **kwargs) -> dict:
+        """Retrieve aggregate detection values based on the matched filter.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                List of dictionaries.
+                [{
+                    "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "field": "string",
+                    "filter": "string",
+                    "interval": "string",
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "q": "string",
+                    "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        null
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }]
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        interval -- String.
+        min_doc_count -- Minimum number of documents required to match. Integer.
+        missing -- String.
+        name -- Name of the aggregation. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Size limit to apply to the queries. Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        This method does not support body payload validation.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateDetections
         """
-        Retrieve aggregate detection values based on the matched filter
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #          /Falcon%20Complete%20Dashboard/AggregateDetections
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -87,12 +281,76 @@ class CompleteDashboard(ServiceClass):
             body=body
             )
 
-    def aggregate_device_count_collection(self: object, body: list) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_device_count_collection(self: object, body: list = None, **kwargs) -> dict:
+        """Retrieve aggregate host/devices count based on the matched filter.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                List of dictionaries.
+                [{
+                    "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "field": "string",
+                    "filter": "string",
+                    "interval": "string",
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "q": "string",
+                    "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        null
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }]
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        interval -- String.
+        min_doc_count -- Minimum number of documents required to match. Integer.
+        missing -- String.
+        name -- Name of the aggregation. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Size limit to apply to the queries. Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        This method does not support body payload validation.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                /Falcon%20Complete%20Dashboard/AggregateDeviceCountCollection
         """
-        Retrieve aggregate host/devices count based on the matched filter
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #          /Falcon%20Complete%20Dashboard/AggregateDeviceCountCollection
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -101,12 +359,75 @@ class CompleteDashboard(ServiceClass):
             body=body
             )
 
-    def aggregate_escalations(self: object, body: list) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_escalations(self: object, body: list = None, **kwargs) -> dict:
+        """Retrieve aggregate escalation ticket values based on the matched filter.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                List of dictionaries.
+                [{
+                    "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "field": "string",
+                    "filter": "string",
+                    "interval": "string",
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "q": "string",
+                    "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        null
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }]
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        interval -- String.
+        min_doc_count -- Minimum number of documents required to match. Integer.
+        missing -- String.
+        name -- Name of the aggregation. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Size limit to apply to the queries. Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        This method does not support body payload validation.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateEscalations
         """
-        Retrieve aggregate escalation ticket values based on the matched filter
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #          /Falcon%20Complete%20Dashboard/AggregateEscalations
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -114,12 +435,75 @@ class CompleteDashboard(ServiceClass):
             body=body
             )
 
-    def aggregate_fc_incidents(self: object, body: list) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_fc_incidents(self: object, body: list = None, **kwargs) -> dict:
+        """Retrieve aggregate incident values based on the matched filter.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                List of dictionaries.
+                [{
+                    "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "field": "string",
+                    "filter": "string",
+                    "interval": "string",
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "q": "string",
+                    "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        null
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }]
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        interval -- String.
+        min_doc_count -- Minimum number of documents required to match. Integer.
+        missing -- String.
+        name -- Name of the aggregation. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Size limit to apply to the queries. Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        This method does not support body payload validation.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateFCIncidents
         """
-        Retrieve aggregate incident values based on the matched filter
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #          /Falcon%20Complete%20Dashboard/AggregateFCIncidents
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -127,12 +511,75 @@ class CompleteDashboard(ServiceClass):
             body=body
             )
 
-    def aggregate_remediations(self: object, body: list) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_remediations(self: object, body: list = None, **kwargs) -> dict:
+        """Retrieve aggregate remediation ticket values based on the matched filter.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                List of dictionaries.
+                [{
+                    "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "field": "string",
+                    "filter": "string",
+                    "interval": "string",
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "q": "string",
+                    "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        null
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }]
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        interval -- String.
+        min_doc_count -- Minimum number of documents required to match. Integer.
+        missing -- String.
+        name -- Name of the aggregation. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Size limit to apply to the queries. Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        This method does not support body payload validation.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateRemediations
         """
-        Retrieve aggregate remediation ticket values based on the matched filter
-        """
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #          /Falcon%20Complete%20Dashboard/AggregateRemediations
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -142,11 +589,26 @@ class CompleteDashboard(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_allow_list_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve allowlist tickets that match the provided filter criteria with scrolling enabled
+
+        Keyword arguments:
+        filter -- Optional filter and sort criteria in the form of an FQL query. String.
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort on, followed by a dot `.`, followed by the sort direction.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/QueryAllowListFilter
         """
-        Retrieve allowlist tickets that match the provided filter criteria with scrolling enabled
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         /Falcon%20Complete%20Dashboard/QueryAllowListFilter
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -157,11 +619,27 @@ class CompleteDashboard(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_block_list_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve block listtickets that match the provided filter criteria
+        with scrolling enabled.
+
+        Keyword arguments:
+        filter -- Optional filter and sort criteria in the form of an FQL query. String.
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort on, followed by a dot `.`, followed by the sort direction.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/QueryBlockListFilter
         """
-        Retrieve block listtickets that match the provided filter criteria with scrolling enabled
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         /Falcon%20Complete%20Dashboard/QueryBlockListFilter
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -172,11 +650,28 @@ class CompleteDashboard(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_detection_ids_by_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve DetectionsIds that match the provided FQL filter
+        criteria with scrolling enabled.
+
+        Keyword arguments:
+        filter -- Optional filter and sort criteria in the form of an FQL query. String.
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort on, followed by a dot `.`, followed by the sort direction.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                /Falcon%20Complete%20Dashboard/QueryDetectionIdsByFilter
         """
-        Retrieve DetectionsIds that match the provided FQL filter, criteria with scrolling enabled
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         /Falcon%20Complete%20Dashboard/QueryDetectionIdsByFilter
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -187,11 +682,28 @@ class CompleteDashboard(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_device_count_collection_queries_by_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve device count collection Ids that match the provided FQL filter,
+        criteria with scrolling enabled.
+
+        Keyword arguments:
+        filter -- Optional filter and sort criteria in the form of an FQL query. String.
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort on, followed by a dot `.`, followed by the sort direction.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                /Falcon%20Complete%20Dashboard/GetDeviceCountCollectionQueriesByFilter
         """
-        Retrieve device count collection Ids that match the provided FQL filter, criteria with scrolling enabled
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         /Falcon%20Complete%20Dashboard/GetDeviceCountCollectionQueriesByFilter
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -202,11 +714,28 @@ class CompleteDashboard(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_escalations_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve escalation tickets that match the provided filter criteria
+        with scrolling enabled.
+
+        Keyword arguments:
+        filter -- Optional filter and sort criteria in the form of an FQL query. String.
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort on, followed by a dot `.`, followed by the sort direction.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                 /Falcon%20Complete%20Dashboard/QueryEscalationsFilter
         """
-        Retrieve escalation tickets that match the provided filter criteria with scrolling enabled
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         /Falcon%20Complete%20Dashboard/QueryEscalationsFilter
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -217,11 +746,27 @@ class CompleteDashboard(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_incident_ids_by_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve incidents that match the provided filter criteria with scrolling enabled.
+
+        Keyword arguments:
+        filter -- Optional filter and sort criteria in the form of an FQL query. String.
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort on, followed by a dot `.`, followed by the sort direction.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                 /Falcon%20Complete%20Dashboard/QueryIncidentIdsByFilter
         """
-        Retrieve incidents that match the provided filter criteria with scrolling enabled
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         /Falcon%20Complete%20Dashboard/QueryIncidentIdsByFilter
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -232,11 +777,28 @@ class CompleteDashboard(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_remediations_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve remediation tickets that match the provided filter criteria
+        with scrolling enabled.
+
+        Keyword arguments:
+        filter -- Optional filter and sort criteria in the form of an FQL query. String.
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort on, followed by a dot `.`, followed by the sort direction.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                 /Falcon%20Complete%20Dashboard/QueryRemediationsFilter
         """
-        Retrieve remediation tickets that match the provided filter criteria with scrolling enabled
-        """
-        # [GET] https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-        #         /Falcon%20Complete%20Dashboard/QueryRemediationsFilter
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,

@@ -42,26 +42,40 @@ class TestCSPMRegistration:
         falcon.base_url = "nowhere"
         error_checks = True
         tests = {
-            "get_aws_account": falcon.GetCSPMAwsAccount(ids='12345678', org_ids='12345678')["status_code"],
-            "create_aws_account": falcon.CreateCSPMAwsAccount(body={})["status_code"],
-            "delete_aws_account": falcon.DeleteCSPMAwsAccount(ids='12345678', org_ids='12345678')["status_code"],
-            "delete_aws_account_org": falcon.DeleteCSPMAwsAccount(org_ids='12345678')["status_code"],
-            "get_azure_account": falcon.GetCSPMAzureAccount(ids='12345678')["status_code"],
-            "create_azure_account": falcon.CreateCSPMAzureAccount(body={})["status_code"],
-            "delete_azure_account": falcon.DeleteCSPMAzureAccount(ids='12345678')["status_code"],
-            "update_azure_account_client_id": falcon.UpdateCSPMAzureAccountClientID()["status_code"],
-            "get_policy": falcon.GetCSPMPolicy(ids='12345678')["status_code"],
-            "get_policy_settings": falcon.GetCSPMPolicySettings()["status_code"],
-            "update_policy_settings": falcon.UpdateCSPMPolicySettings(body={})["status_code"],
-            "get_scan_schedule": falcon.GetCSPMScanSchedule()["status_code"],
-            "update_scan_schedule": falcon.UpdateCSPMScanSchedule(body={})["status_code"],
-            "update_aws_account": falcon.PatchCSPMAwsAccount(body={})["status_code"],
-            "update_azure_tenant_default_subscription_id": falcon.UpdateCSPMAzureTenantDefaultSubscriptionID(body={})["status_code"],
-            "get_ioa_events": falcon.GetIOAEvents()["status_code"],
-            "get_ioa_users": falcon.GetIOAUsers()["status_code"],
+            "get_aws_account": falcon.GetCSPMAwsAccount(ids='12345678', org_ids='12345678', scan_type="dry"),
+            "create_aws_account": falcon.CreateCSPMAwsAccount(account_id="12345678",
+                                                              cloudtrail_region="us-east-1",
+                                                              organization_id="12345678"
+                                                              ),
+            "delete_aws_account": falcon.DeleteCSPMAwsAccount(ids='12345678', org_ids='12345678'),
+            "delete_aws_account_org": falcon.DeleteCSPMAwsAccount(org_ids='12345678'),
+            "get_azure_account": falcon.GetCSPMAzureAccount(ids='12345678', scan_type="dry"),
+            "create_azure_account": falcon.CreateCSPMAzureAccount(tenant_id="12345678",
+                                                                  subscription_id="12345678"
+                                                                  ),
+            "delete_azure_account": falcon.DeleteCSPMAzureAccount(ids='12345678'),
+            "update_azure_account_client_id": falcon.UpdateCSPMAzureAccountClientID(tenant_id="12345678", id="12345678"),
+            "get_policy": falcon.GetCSPMPolicy(ids='12345678'),
+            "get_policy_settings": falcon.GetCSPMPolicySettings(cloud_platform="aws", policy_id=1),
+            "update_policy_settings": falcon.UpdateCSPMPolicySettings(enabled=False,
+                                                                      policy_id=1,
+                                                                      severity="LOW"
+                                                                      ),
+            "get_scan_schedule": falcon.GetCSPMScanSchedule(cloud_platform="gcp"),
+            "update_scan_schedule": falcon.UpdateCSPMScanSchedule(cloud_platform="gcp",
+                                                                  next_scan_timestamp="2021-10-25T05:22:27.365Z",
+                                                                  scan_schedule="daily"
+                                                                  ),
+            "update_aws_account": falcon.PatchCSPMAwsAccount(account_id="12345678", cloudtrail_region="us-east-1"),
+            "update_azure_tenant_default_subscription_id": falcon.UpdateCSPMAzureTenantDefaultSubscriptionID(
+                                                                    tenant_id="12345678"
+                                                                    ),
+            "get_azure_user_scripts_attachment": falcon.get_azure_user_scripts_attachment(tenant_id="12345678"),
+            "get_ioa_events": falcon.GetIOAEvents(),
+            "get_ioa_users": falcon.GetIOAUsers(),
         }
         for key in tests:
-            if tests[key] != 500:
+            if tests[key]["status_code"] != 500:
                 error_checks = False
 
             # print(f"{key} operation returned a {tests[key]} status code")

@@ -1,4 +1,4 @@
-"""Internal version control constants
+"""Internal payload handling library - Falcon Flight Control (MSSP)
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,13 +35,37 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-_VERSION = '0.7.4'
-_MAINTAINER = 'Joshua Hiller'
-_AUTHOR = 'CrowdStrike'
-_AUTHOR_EMAIL = 'falconpy@crowdstrike.com'
-_CREDITS = 'CrowdStrike'
-_DESCRIPTION = "The CrowdStrike Falcon OAuth2 API SDK for Python 3"
-_TITLE = "crowdstrike-falconpy"
-_PROJECT_URL = "https://github.com/CrowdStrike/falconpy"
-_DOCS_URL = "https://www.falconpy.io"
-_KEYWORDS = ["crowdstrike", "falcon", "api", "sdk", "oauth2", "devsecops", "crowdstrike-falcon"]
+
+
+def mssp_payload(passed_keywords: dict) -> dict:
+    """Creates a properly formatted Flight Control payload
+    {
+        "resources": [
+            {
+                "cid": "string",
+                "cid_group_id": "string",
+                "description": "string",
+                "name": "string"
+                "id": "string",
+                "role_ids": [
+                    "string"
+                ],
+                "user_group_id": "string"
+            }
+        ]
+    }
+    """
+    returned_payload = {}
+    resources_item = {}
+    keys = [
+        "cid", "cid_group_id", "description", "name", "id",
+        "user_group_id", "role_ids", "user_uuids"
+        ]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            resources_item[key] = passed_keywords.get(key, None)
+
+    if resources_item:
+        returned_payload["resources"] = [resources_item]
+
+    return returned_payload
