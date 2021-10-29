@@ -82,20 +82,6 @@ def validate_payload(validator: dict, params: dict, required: list = None) -> bo
     return True
 
 
-def parse_id_list(id_list) -> str:
-    """Converts a list of IDs to a comma-delimited string."""
-    if isinstance(id_list, list):  # pragma: no cover   DEPRECATING - jshcodes@CrowdStrike
-        returned = ""
-        for string in id_list:
-            if len(returned) > 1:
-                returned += ","
-            returned += str(string)
-    else:
-        returned = id_list
-
-    return returned
-
-
 def generate_b64cred(client_id: str, client_secret: str) -> str:
     """base64 encodes passed client_id and client_secret for authorization headers."""
     cred = f"{client_id}:{client_secret}"
@@ -205,7 +191,7 @@ def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> objec
     params: dict - HTTP query string parameters to send to the API
         - Example: {"limit": 1, "sort": "state.asc"}
     body: dict - HTTP body payload to send to the API
-        - Example: {"ids": "123456789abcdefg,987654321zyxwvutsr"}
+        - Example: {"ids": ["123456789abcdefg", "987654321zyxwvutsr"]}
     verify: bool - Enable / Disable SSL certificate checks
         - Example: True
     data - Encoded data to send to the API
@@ -307,50 +293,43 @@ def get_default(types: list, position: int):
     return retval
 
 
-def calc_url_from_args(target_url: str, passed_args: dict) -> str:
-    """This function reviews arguments passed to the Uber class
-    command method and updates the target URL accordingly."""
-    if "ids" in passed_args:
-        id_list = str(parse_id_list(passed_args['ids'])).replace(",", "&ids=")
-        target_url = target_url.format(id_list)
-    if "action_name" in passed_args:
-        delim = "&" if "?" in target_url else "?"
-        # Additional action_name restrictions?
-        target_url = f"{target_url}{delim}action_name={str(passed_args['action_name'])}"
-    if "partition" in passed_args:
-        target_url = target_url.format(str(passed_args['partition']))
-    if "file_name" in passed_args:
-        delim = "&" if "?" in target_url else "?"
-        target_url = f"{target_url}{delim}file_name={str(passed_args['file_name'])}"
-
-    # Bug fix: Issue #314 - Passing an empty ids array is causing a 400 in the IOC API
-    target_url = target_url.replace("?ids={}", "")
-
-    return target_url
-
-
 def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epname: str) -> dict:
-    """This function reviews arguments passed to the function
-    against arguments accepted by the endpoint.
-
-    If a valid argument is passed, it is added and returned as part of the payload dictionary.
+    """This function reviews arguments passed to the function against arguments accepted by the
+    endpoint. If a valid argument is passed, it is added and returned as part of the QueryString
+    payload dictionary.
 
     This function will convert passed comma-delimited strings to list data types when necessary.
+
+    The method only handles QueryString parameters, and will skip any Body payload parameters it
+    encounters.
+
+    When using override functionality via the Uber class, this method skips processing. (Override
+    functionality does not support QueryString parameter abstraction.)
+
+    Keyword arguments:
+        payload -- Existing QueryString parameter payload. Dictionary.
+        passed_arguments -- Keywords provided to the calling method.
+        endpoints -- List of API endpoints available to the calling method.
+        epname -- Operation ID to be retrieved from the endpoints list.
+
+    Returns: dictionary representing QueryString parameters.
     """
-    for arg in passed_arguments:
-        eps = [ep[5] for ep in endpoints if epname in ep[0]][0]
-        try:
-            argument = [param for param in eps if param["name"] == arg][0]
-            if argument:
-                arg_name = argument["name"]
-                if argument["type"] == "array":
-                    if isinstance(passed_arguments[arg_name], (str)):
-                        passed_arguments[arg_name] = passed_arguments[arg_name].split(",")
-                # More data type validation can go here
-                payload[arg_name] = passed_arguments[arg_name]
-        except IndexError:
-            # Unrecognized argument
-            pass
+    if epname != "Manual":  # pylint: disable=R1702
+        for arg in passed_arguments:
+            eps = [ep[5] for ep in endpoints if epname in ep[0]][0]
+            try:
+                argument = [param for param in eps if param["name"] == arg][0]
+                if argument:
+                    arg_name = argument["name"]
+                    if "type" in argument:  # Body payload parameters do not have a type field
+                        if argument["type"] == "array":
+                            if isinstance(passed_arguments[arg_name], (str)):
+                                passed_arguments[arg_name] = passed_arguments[arg_name].split(",")
+                        # More data type validation can go here
+                        payload[arg_name] = passed_arguments[arg_name]
+            except IndexError:
+                # Unrecognized argument
+                pass
 
     return payload
 
@@ -380,7 +359,8 @@ def process_service_request(calling_object: object,
     target_endpoint = [ep for ep in endpoints if operation_id == ep[0]][0]
     # ID replacement happening at the end of this statement planned for removal in v0.6.0+
     # (after the uber class has been updated to no longer need it and the _endpoints module has been updated)
-    target_url = f"{calling_object.base_url}{target_endpoint[2]}".replace("?ids={}", "")
+    # target_url = f"{calling_object.base_url}{target_endpoint[2]}".replace("?ids={}", "")
+    target_url = f"{calling_object.base_url}{target_endpoint[2]}"
     target_method = target_endpoint[1]
     passed_partition = kwargs.get("partition", None)
     if passed_partition:
@@ -402,8 +382,8 @@ def process_service_request(calling_object: object,
         "body": kwargs.get("body", None),
         "data": kwargs.get("data", None),
         "files": kwargs.get("files", None),
-        "body_validator": kwargs.get("body_validator", None),   # May be deprecated after BODY payload abstraction
-        "body_required": kwargs.get("body_required", None)      # May be deprecated after BODY payload abstraction
+        "body_validator": kwargs.get("body_validator", None),
+        "body_required": kwargs.get("body_required", None)
     }
 
     return service_request(**new_keywords)
