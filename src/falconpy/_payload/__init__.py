@@ -1,4 +1,4 @@
-"""The CrowdStrike Falcon OAuth2 API SDK payloads module
+"""The CrowdStrike Falcon OAuth2 API SDK payloads module.
 
  @@@@@@@  @@@@@@@    @@@@@@   @@@  @@@  @@@  @@@@@@@    @@@@@@   @@@@@@@  @@@@@@@   @@@  @@@  @@@  @@@@@@@@
 @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@  @@@  @@@  @@@@@@@@  @@@@@@@   @@@@@@@  @@@@@@@@  @@@  @@@  @@@  @@@@@@@@

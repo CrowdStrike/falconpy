@@ -1,4 +1,4 @@
-"""Internal payload handling library - Sensor Update Policy Payloads
+"""Internal payload handling library - Sensor Update Policy Payloads.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,8 @@ For more information, please refer to <https://unlicense.org>
 
 
 def sensor_policy_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted prevention policy payload.
+    """Create a properly formatted prevention policy payload.
+
     Supports create and update operations. Single policy only.
     {
         "resources": [

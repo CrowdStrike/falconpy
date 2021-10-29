@@ -1,4 +1,4 @@
-"""Internal payload handling library - Falcon X Sandbox
+"""Internal payload handling library - Falcon X Sandbox.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,8 @@ For more information, please refer to <https://unlicense.org>
 
 
 def falconx_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatting submit payload.
+    """Create a properly formatting submit payload.
+
     {
         "sandbox": [
             {

@@ -1,4 +1,4 @@
-"""Internal payload handling library - Host Group Payloads
+"""Internal payload handling library - Host Group Payloads.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,9 +38,10 @@ For more information, please refer to <https://unlicense.org>
 
 
 def host_group_create_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted payload for host group update
-    and create operations. `id` and `group_type` values should be
-    added by the calling method after creating this payload.
+    """Create a properly formatted payload for host group operations.
+
+    Create operations are supported. `id` and `group_type`
+    values should be added by the calling method after creating this payload.
     {
         "resources": [
             {
@@ -70,9 +71,10 @@ def host_group_create_payload(passed_keywords: dict) -> dict:
 
 
 def host_group_update_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted payload for host group update
-    and create operations. `id` and `group_type` values should be
-    added by the calling method after creating this payload.
+    """Create a properly formatted payload for host group operations.
+
+    Update operations are supported. `id` and `group_type`
+    values should be added by the calling method after creating this payload.
     {
         "resources": [
             {

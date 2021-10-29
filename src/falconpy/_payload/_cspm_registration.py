@@ -1,4 +1,4 @@
-"""Internal payload handling library - CSPM Registration (Horizon) Payloads
+"""Internal payload handling library - CSPM Registration (Horizon) Payloads.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,8 @@ For more information, please refer to <https://unlicense.org>
 
 
 def cspm_registration_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted CSPM registration payload.
+    """Create a properly formatted CSPM registration payload.
+
     {
         "resources": [
             {
@@ -65,16 +66,17 @@ def cspm_registration_payload(passed_keywords: dict) -> dict:
 
 
 def cspm_policy_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted CSPM policy update payload.
-        {
-            "resources": [
-                {
-                    "enabled": true,
-                    "policy_id": 0,
-                    "severity": "string"
-                }
-            ]
-        }
+    """Create a properly formatted CSPM policy update payload.
+
+    {
+        "resources": [
+            {
+                "enabled": true,
+                "policy_id": 0,
+                "severity": "string"
+            }
+        ]
+    }
     """
     returned_payload = {}
     returned_payload["resources"] = []
@@ -92,16 +94,17 @@ def cspm_policy_payload(passed_keywords: dict) -> dict:
 
 
 def cspm_scan_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formmatted CSPM scan schedule payload.
-        {
-            "resources": [
-                {
-                    "cloud_platform": "string",
-                    "next_scan_timestamp": "2021-10-25T05:22:27.365Z",
-                    "scan_schedule": "string"
-                }
-            ]
-        }
+    """Create a properly formmatted CSPM scan schedule payload.
+
+    {
+        "resources": [
+            {
+                "cloud_platform": "string",
+                "next_scan_timestamp": "2021-10-25T05:22:27.365Z",
+                "scan_schedule": "string"
+            }
+        ]
+    }
     """
     returned_payload = {}
     returned_payload["resources"] = []

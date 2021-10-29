@@ -1,4 +1,4 @@
-"""Internal payload handling library - Detects
+"""Internal payload handling library - Detects.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 
 def update_detects_payload(current_payload: dict, passed_keywords: dict) -> dict:
-    """Updates the provided payload with any viable parameters provided as keywords."""
+    """Update the provided payload with any viable parameters provided as keywords."""
     if passed_keywords.get("assigned_to_uuid", None):
         current_payload["assigned_to_uuid"] = passed_keywords.get("assigned_to_uuid", None)
     if passed_keywords.get("show_in_ui", None):

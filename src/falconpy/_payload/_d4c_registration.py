@@ -1,4 +1,4 @@
-"""Internal payload handling library - D4C Registration Payloads
+"""Internal payload handling library - D4C Registration Payloads.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,8 @@ For more information, please refer to <https://unlicense.org>
 
 
 def azure_registration_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted Azure registration payload.
+    """Create a properly formatted Azure registration payload.
+
     {
         "resources": [
             {

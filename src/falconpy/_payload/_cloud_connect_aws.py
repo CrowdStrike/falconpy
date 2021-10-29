@@ -1,4 +1,4 @@
-"""Internal payload handling library - Discover for AWS
+"""Internal payload handling library - Discover for AWS.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,8 @@ For more information, please refer to <https://unlicense.org>
 
 
 def aws_registration_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted payload for RTR command.
+    """Create a properly formatted payload for RTR command.
+
     {
         "resources": [
             {

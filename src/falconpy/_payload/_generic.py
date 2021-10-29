@@ -1,4 +1,4 @@
-"""Internal payload handling library - Generic Payloads
+"""Internal payload handling library - Generic Payloads.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -41,7 +41,9 @@ def generic_payload_list(submitted_keywords: dict,
                          payload_value: str,
                          submitted_arguments: list = None
                          ) -> dict:
-    """Creates a standardized BODY payload based upon the
+    """Handle a generic list payload.
+
+    Creates a standardized BODY payload based upon the
     requested payload value and passed keywords.
 
     Resulting payload provides passed keywords values in list format.
@@ -75,7 +77,7 @@ def generic_payload_list(submitted_keywords: dict,
 
 
 def aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R0912
-    """Creates the standardized BODY payload necessary for aggregate operations.
+    """Create the standardized BODY payload necessary for aggregate operations.
 
     Creates the following payload, no parameters shown below are required:
     {
@@ -155,14 +157,15 @@ def aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R091
 
 
 def exclusion_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted exclusion payload
-        {
-            "comment": "string",
-            "groups": [
-                "string"
-            ],
-            "value": "string"
-        }
+    """Create a properly formatted exclusion payload.
+
+    {
+        "comment": "string",
+        "groups": [
+            "string"
+        ],
+        "value": "string"
+    }
     """
     returned_payload = {}
     if passed_keywords.get("comment", None):
@@ -176,13 +179,14 @@ def exclusion_payload(passed_keywords: dict) -> dict:
 
 
 def installation_token_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted payload for handling installation tokens.
-        {
-            "expires_timestamp": "2021-09-22T02:28:11.762Z",
-            "label": "string",
-            "type": "string",            [CREATE only]
-            "revoked": boolean           [UPDATE only]
-        }
+    """Create a properly formatted payload for handling installation tokens.
+
+    {
+        "expires_timestamp": "2021-09-22T02:28:11.762Z",
+        "label": "string",
+        "type": "string",            [CREATE only]
+        "revoked": boolean           [UPDATE only]
+    }
     """
     returned_payload = {}
     if passed_keywords.get("expires_timestamp", None):

@@ -1,4 +1,4 @@
-"""Internal payload handling library - Real Time Response
+"""Internal payload handling library - Real Time Response.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,8 @@ For more information, please refer to <https://unlicense.org>
 
 
 def command_payload(passed_keywords: dict) -> dict:  # pylint: disable=R0912  # noqa: C901
-    """Creates a properly formatted payload for RTR command.
+    """Create a properly formatted payload for RTR command.
+
     {
         "base_command": "string",
         "batch_id": "string",
@@ -101,8 +102,8 @@ def command_payload(passed_keywords: dict) -> dict:  # pylint: disable=R0912  # 
 
 
 def data_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted formData payload for
-    RTR file uploads.
+    """Create a properly formatted formData payload for RTR file uploads.
+
     {
         "id": "string",
         "description": "string",
