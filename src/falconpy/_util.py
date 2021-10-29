@@ -1,4 +1,4 @@
-"""Internal utilities library
+"""Internal utilities library.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -53,7 +53,7 @@ _USER_AGENT = f"{_TITLE}/{str(_VERSION)}"
 
 
 def validate_payload(validator: dict, params: dict, required: list = None) -> bool:
-    """Validates parameters and body payloads sent to the API."""
+    """Validate parameters and body payloads sent to the API."""
     # Repurposed with permission from
     # https://github.com/yaleman/crowdstrike_api
     #         __
@@ -91,8 +91,10 @@ def generate_b64cred(client_id: str, client_secret: str) -> str:
 
 
 def handle_single_argument(passed_arguments: list, passed_keywords: dict, search_key: str) -> dict:
-    """Reviews arguments passed to a method and injects them into the
-    keyword dictionary if they match the search string
+    """Handler for when a single argument is provided without keywords.
+
+    Reviews arguments passed to a method and injects them into the keyword dictionary if they
+    match the search string.
     """
     if len(passed_arguments) > 0:
         passed_keywords[search_key] = passed_arguments[0]
@@ -101,7 +103,9 @@ def handle_single_argument(passed_arguments: list, passed_keywords: dict, search
 
 
 def force_default(defaults: list, default_types: list = None):
-    """This function forces default values and is designed to decorate other functions.
+    """Force default values.
+
+    Intended to decorate other functions.
 
     Keyword arguments:
     defaults = list of values to default
@@ -114,10 +118,11 @@ def force_default(defaults: list, default_types: list = None):
 
     def wrapper(func):
         """Inner wrapper."""
-
         @functools.wraps(func)
         def factory(*args, **kwargs):
-            """This method is a factory and runs through keywords passed to the called function,
+            """Parameter factory.
+
+            This method is a factory and runs through keywords passed to the called function,
             setting defaults on values within the **kwargs dictionary when necessary
             as specified in our "defaults" list that is passed to the parent wrapper.
             """
@@ -143,7 +148,7 @@ def force_default(defaults: list, default_types: list = None):
 
 
 def service_request(caller: object = None, **kwargs) -> object:  # May return dict or object datatypes
-    """Checks for token expiration, refreshing if possible and then performs the request."""
+    """Check for token expiration, refresh if possible and then perform the request."""
     if caller:
         try:
             if caller.auth_object:
@@ -178,7 +183,7 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
 
 @force_default(defaults=["headers"], default_types=["dict"])
 def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> object:  # May return dict or object datatypes
-    """Leverages the requests library to perform the requested CrowdStrike OAuth2 API operation.
+    """Leverage the requests library to perform the requested CrowdStrike OAuth2 API operation.
 
     Keyword arguments:
     method: str - HTTP method to use when communicating with the API
@@ -293,7 +298,9 @@ def get_default(types: list, position: int):
 
 
 def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epname: str) -> dict:
-    """This function reviews arguments passed to the function against arguments accepted by the
+    """Query String parameter abstraction handler.
+
+    This function reviews arguments passed to the function against arguments accepted by the
     endpoint. If a valid argument is passed, it is added and returned as part of the QueryString
     payload dictionary.
 
@@ -338,7 +345,8 @@ def process_service_request(calling_object: object,
                             operation_id: str,
                             **kwargs
                             ):
-    """Performs a request originating from a service class module.
+    """Perform a request originating from a service class module.
+
     Calculates the target_url based upon the provided operation ID and endpoint list.
 
     Keyword arguments:
@@ -389,10 +397,11 @@ def process_service_request(calling_object: object,
 
 
 def confirm_base_url(provided_base: str = "https://api.crowdstrike.com"):
-    """Confirms the passed base_url value matches URL syntax. If it does
-    not, it is looked up in the BaseURL enum. If the value is not found
-    within the enum, https:// is prepended to the value and then it is
-    used for API requests."""
+    """Confirm the passed base_url value matches URL syntax.
+
+    If it does not, it is looked up in the BaseURL enum. If the value is not found
+    within the enum, https:// is prepended to the value and then it is used for API requests.
+    """
     returned_base = "https://api.crowdstrike.com"
     if "://" not in provided_base:
         # They're passing the name instead of the URL

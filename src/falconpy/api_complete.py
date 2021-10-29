@@ -1,4 +1,4 @@
-"""All-in-one CrowdStrike Falcon OAuth2 API harness
+"""All-in-one CrowdStrike Falcon OAuth2 API harness.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -44,6 +44,7 @@ from ._endpoint import api_endpoints
 
 class APIHarness:
     """This one does it all. It's like the One Ring with significantly fewer orcs."""
+
     # pylint: disable=too-many-instance-attributes
 
     TOKEN_RENEW_WINDOW = 20  # in seconds
@@ -58,7 +59,9 @@ class APIHarness:
                  timeout: float or tuple = None,
                  user_agent: str = None
                  ) -> object:
-        """Instantiates an instance of the class, ingests credentials,
+        """Uber class constructor.
+
+        Instantiates an instance of the class, ingests credentials,
         the base URL and the SSL verification boolean.
         Afterwards class attributes are initialized.
 
@@ -101,7 +104,9 @@ class APIHarness:
         self.user_agent = user_agent  # Issue #365
 
     def valid_cred_format(self: object) -> bool:
-        """Returns a boolean indicating if the client_id and
+        """Confirm credential dictionary format.
+
+        Returns a boolean indicating if the client_id and
         client_secret are present in the creds dictionary.
         """
         retval = False
@@ -111,7 +116,7 @@ class APIHarness:
         return retval
 
     def token_expired(self: object) -> bool:
-        """Returns a boolean based upon the token expiration status."""
+        """Return a boolean based upon the token expiration status."""
         retval = False
         if (time.time() - self.token_time) >= (self.token_expiration - self.TOKEN_RENEW_WINDOW):
             retval = True
@@ -119,7 +124,7 @@ class APIHarness:
         return retval
 
     def authenticate(self: object) -> bool:
-        """Generates an authorization token."""
+        """Generate an authorization token."""
         target = self.base_url+'/oauth2/token'
         data_payload = {}
         if self.valid_cred_format():
@@ -150,7 +155,7 @@ class APIHarness:
         return self.authenticated
 
     def deauthenticate(self: object) -> bool:
-        """Revokes the current authorization token."""
+        """Revoke the current authorization token."""
         target = str(self.base_url)+'/oauth2/revoke'
         b64cred = generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
         header_payload = {"Authorization": f"basic {b64cred}"}
@@ -169,8 +174,9 @@ class APIHarness:
         return revoked
 
     def _create_header_payload(self: object, passed_arguments: dict) -> dict:
-        """Creates the HTTP header payload based upon
-        the existing class headers and passed arguments.
+        """Create the HTTP header payload.
+
+        Creates the HTTP header payload based upon the existing class headers and passed arguments.
         """
         payload = self.headers()
         if "headers" in passed_arguments:
@@ -182,7 +188,9 @@ class APIHarness:
         return payload
 
     def command(self: object, *args, **kwargs):
-        """Checks token expiration, renewing when necessary, then performs the request.
+        """Uber Class API command method.
+
+        Checks token expiration, renewing when necessary, then performs the request.
 
         Keyword arguments:
         action: str = ""                                    - API Operation ID to perform
