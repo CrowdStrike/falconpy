@@ -38,7 +38,6 @@ For more information, please refer to <https://unlicense.org>
 import base64
 import functools
 from json.decoder import JSONDecodeError
-# pylint: disable=E0401  # Pylint might not have these in our path
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
