@@ -1,6 +1,6 @@
 #!/bin/bash
 # Command line usage: 
-#       util/unit-test.sh CLASS_NAME
+#       util/unit-test.sh MODULE_NAME
 # ex:   util/unit-test.sh sample_uploads
 #
 # If you don't specify a class, this script
