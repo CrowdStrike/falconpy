@@ -29,5 +29,5 @@ jobs:
         pip install -r requirements.txt
     - name: Check package docstrings with pydocstyle
       run: |
-        # stop the build if there are Python syntax errors or undefined names
+        # Check docstring syntax
         pydocstyle src/falconpy --count
