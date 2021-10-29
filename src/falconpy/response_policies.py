@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Real Time Response Policies API interface class
+"""CrowdStrike Falcon Real Time Response Policies API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._response_policies import _response_policies_endpoints as Endpoi
 
 
 class ResponsePolicies(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,11 +53,12 @@ class ResponsePolicies(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for members of a Response policy in your environment
-        by providing an FQL filter and paging details. Returns a set of
-        host details which match the filter criteria.
+        """Search for members of a Response policy by providing an FQL filter and paging details.
+
+        Returns a set of host details which match the filter criteria.
 
         Keyword arguments:
         id -- The ID of the Response Policy to search for members of
@@ -88,9 +89,9 @@ class ResponsePolicies(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Response Policies in your environment by providing
-        an FQL filter and paging details. Returns a set of Response Policies
-        which match the filter criteria.
+        """Search for Response Policies by providing an FQL filter and paging details.
+
+        Returns a set of Response Policies which match the filter criteria.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
@@ -124,7 +125,7 @@ class ResponsePolicies(ServiceClass):
                                 parameters: dict = None,
                                 **kwargs
                                 ) -> dict:
-        """Perform the specified action on the Response Policies specified in the request
+        """Perform the specified action on the Response Policies specified in the request.
 
         Keyword arguments:
         action_name -- action to perform: 'add-host-group', 'add-rule-group', 'disable',
@@ -174,10 +175,11 @@ class ResponsePolicies(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def set_policies_precedence(self: object, body: dict = None, **kwargs) -> dict:
-        """Sets the precedence of Response Policies based on the order of IDs
-        specified in the request. The first ID specified will have the highest
-        precedence and the last ID specified will have the lowest. You must
-        specify all non-Default Policies for a platform when updating precedence.
+        """Set the precedence of Response Policies based on the order of IDs in the request.
+
+        The first ID specified will have the highest precedence and the last ID specified will
+        have the lowest. You must specify all non-Default Policies for a platform when updating
+        precedence.
 
         Keyword arguments:
         body -- full body payload, not required if keywords are used.
@@ -290,7 +292,7 @@ class ResponsePolicies(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Delete a set of Response Policies by specifying their IDs
+        """Delete a set of Response Policies by specifying their IDs.
 
         Keyword arguments:
         ids -- List of Response Policy IDs to delete. String or list of strings.
@@ -365,9 +367,9 @@ class ResponsePolicies(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for members of a Response policy in your environment
-        by providing an FQL filter and paging details. Returns a set of
-        Agent IDs which match the filter criteria.
+        """Search for members of a Response policy by providing an FQL filter and paging details.
+
+        Returns a set of Agent IDs which match the filter criteria.
 
         Keyword arguments:
         id -- The ID of the Response Policy to search for members of
@@ -398,9 +400,9 @@ class ResponsePolicies(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Response Policies in your environment by providing an FQL
-        filter with sort and/or paging details. This returns a set of Response
-        Policy IDs that match the given criteria.
+        """Search for Response Policies by providing an FQL filter with sort and/or paging details.
+
+        This returns a set of Response Policy IDs that match the given criteria.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.

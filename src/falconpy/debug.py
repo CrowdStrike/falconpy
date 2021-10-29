@@ -1,4 +1,5 @@
-"""
+"""Interactive debugger for the crowdstrike-falconpy project.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-debug - Interactive debugger for the crowdstrike-falconpy project.
 
 This is free and unencumbered software released into the public domain.
 
@@ -46,9 +45,7 @@ from . import oauth2 as FalconAuth
 
 
 def help(item=None):  # pylint: disable=W0622
-    """
-    Debugger help function. Overrides the built in python function.
-    """
+    """Debugger help function. Overrides the built in python function."""
     text = """
     This is an interactive Python shell. Python help is available under python_help().
 
@@ -75,7 +72,7 @@ def help(item=None):  # pylint: disable=W0622
     Importing the detects module and querying for all available detections with one command:
     In [1]: import_module("detects").QueryDetects()
 
-    EXIT THE DEBUG
+    EXIT THE DEBUGGER
     Use exit / quit / CTRL-D to exit the debugger.
     """
     if item is None:
@@ -87,9 +84,7 @@ def help(item=None):  # pylint: disable=W0622
 
 
 def embed():
-    """
-    Embeds the IPython interactive shell.
-    """
+    """Embed the IPython interactive shell."""
     _ = importlib.import_module("IPython.terminal.embed")
     ipshell = _.InteractiveShellEmbed(banner1=BANNER)
     ipshell.confirm_exit = False
@@ -97,9 +92,7 @@ def embed():
 
 
 def list_modules():
-    """
-    Lists all available Service Classes
-    """
+    """List all available Service Classes."""
     modules = glob.glob(join(dirname(__file__), "*.py"))
     result = []
     for key in modules:
@@ -122,9 +115,7 @@ def list_modules():
 
 
 def import_module(module: str = None):
-    """
-    Dynamically imports the module requested and returns an authenticated instance of the Service Class.
-    """
+    """Dynamically imports the module requested and returns an authenticated instance of the Service Class."""
     returned_object = False
     found = False
     if module:
@@ -156,9 +147,7 @@ def import_module(module: str = None):
 
 
 def exit_handler():
-    """
-    Revokes the DEBUG_TOKEN and gracefully quits the debugger. Overrides the built in python function.
-    """
+    """Revoke the DEBUG_TOKEN and gracefully quit the debugger. Overrides the built in python function."""
     if AUTH_OBJECT:
         print("Discarding token")
         AUTH_OBJECT.revoke(token=DEBUG_TOKEN)
@@ -166,9 +155,7 @@ def exit_handler():
 
 
 def startup(dbg_falcon_client_id: str, dbg_falcon_client_secret: str):
-    """
-    Authenticates using the credentials provided and returns the token / authentication object.
-    """
+    """Authenticate using the credentials provided and return the token / authentication object."""
     auth_object = FalconAuth.OAuth2(creds={
         'client_id': dbg_falcon_client_id,
         'client_secret': dbg_falcon_client_secret
@@ -184,9 +171,7 @@ def startup(dbg_falcon_client_id: str, dbg_falcon_client_secret: str):
 
 
 def init(dbg_falcon_client_id: str = None, dbg_falcon_client_secret: str = None, creds: dict = None):
-    """
-    Initializes the debugger by retrieving any available credentials and performing initial authentication.
-    """
+    """Initialize the debugger by retrieving any available credentials and performing initial authentication."""
     if creds:
         dbg_falcon_client_id = creds["falcon_client_id"]
         dbg_falcon_client_secret = creds["falcon_client_secret"]

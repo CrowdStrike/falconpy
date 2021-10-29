@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Indicators of Compromise API interface class (Legacy)
+"""CrowdStrike Falcon Indicators of Compromise API interface class (Legacy).
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -48,7 +48,7 @@ from ._endpoint._iocs import _iocs_endpoints as Endpoints
 
 
 class Iocs(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -59,9 +59,10 @@ class Iocs(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def devices_count(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Number of hosts in your customer account that have observed a given custom IOC.
+        """Get the number of hosts in your customer account that have observed a given custom IOC.
 
         Keyword arguments:
         type -- The type of indicator. String. Required.
@@ -173,6 +174,7 @@ class Iocs(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def devices_ran_on(self: object, parameters: dict = None, **kwargs) -> dict:
         """Find hosts that have observed a given custom IOC.
+
         For details about those hosts, use the hosts API interface.
 
         Keyword arguments:
@@ -229,7 +231,7 @@ class Iocs(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def processes_ran_on(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for processes associated with a custom IOC
+        """Search for processes associated with a custom IOC.
 
         Keyword arguments:
         type -- The type of indicator. String. Required.

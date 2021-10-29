@@ -1,4 +1,4 @@
-"""Falcon MalQuery API Interface Class
+"""Falcon MalQuery API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -43,7 +43,7 @@ from ._endpoint._malquery import _malquery_endpoints as Endpoints
 
 
 class MalQuery(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -54,8 +54,9 @@ class MalQuery(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     def get_quotas(self: object) -> dict:
-        """Get information about search and download quotas in your environment
+        """Get information about search and download quotas in your environment.
 
         This method does not accept arguments or keywords.
 
@@ -75,6 +76,7 @@ class MalQuery(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def fuzzy_search(self: object, body: dict = None, **kwargs) -> dict:
         """Search Falcon MalQuery quickly, but with more potential for false positives.
+
         Search for a combination of hex patterns and strings in order to identify
         samples based upon file content at byte level granularity.
 
@@ -124,6 +126,7 @@ class MalQuery(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_download(self: object, *args, parameters: dict = None, **kwargs) -> object:
         """Download a file indexed by MalQuery.
+
         Specify the file using its SHA256.
         Only one file is supported at this time.
 
@@ -151,7 +154,7 @@ class MalQuery(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_metadata(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve indexed files metadata by their hash
+        """Retrieve indexed files metadata by their hash.
 
         Keyword arguments:
         ids -- List of SHA256s to retrieve metadata for. String or list of strings.
@@ -178,6 +181,7 @@ class MalQuery(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_request(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Check the status and results of an asynchronous request, such as hunt or exact-search.
+
         Supports a single request id at this time.
 
         Keyword arguments:
@@ -205,6 +209,7 @@ class MalQuery(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_samples(self: object, *args, parameters: dict = None, **kwargs) -> object:
         """Fetch a zip archive with password 'infected' containing the samples.
+
         Call this once the samples-multidownload request has finished processing
 
         Keyword arguments:
@@ -231,8 +236,10 @@ class MalQuery(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def samples_multidownload(self: object, *args, body: dict = None, **kwargs) -> dict:
-        """Schedule samples for download. Use the result id with the /request endpoint to check
-        if the download is ready after which you can call get_samples to get the zip.
+        """Schedule samples for download.
+
+        Use the result id with the /request endpoint to check if the download is ready
+        after which you can call get_samples to get the zip.
 
         Keyword arguments:
         body -- full body payload, not required when ids keyword is provided.
@@ -268,7 +275,9 @@ class MalQuery(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def exact_search(self: object, body: dict = None, **kwargs) -> dict:
-        """Search Falcon MalQuery for a combination of hex patterns
+        """Perform a MalQuery Exact Search.
+
+        Search Falcon MalQuery for a combination of hex patterns
         and strings in order to identify samples based upon file content
         at byte level granularity. You can filter results on criteria such
         as file type, file size and first seen date.
@@ -333,6 +342,7 @@ class MalQuery(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def hunt(self: object, body: dict = None, **kwargs) -> dict:
         """Schedule a YARA-based search for execution.
+
         Returns a request id which can be used with the /request endpoint.
 
         Keyword arguments:

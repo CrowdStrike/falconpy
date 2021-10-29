@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Incidents API interface class
+"""CrowdStrike Falcon Incidents API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._incidents import _incidents_endpoints as Endpoints
 
 
 class Incidents(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,6 +53,7 @@ class Incidents(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def crowdscore(self: object, parameters: dict = None, **kwargs) -> dict:
         """Query environment wide CrowdScore and return the entity data.
@@ -117,8 +118,9 @@ class Incidents(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def perform_incident_action(self: object, body: dict = None, **kwargs) -> dict:
-        """Perform a set of actions on one or more incidents, such as
-        adding tags or comments or updating the incident name or description.
+        """Perform a set of actions on one or more incidents.
+
+        Such as: adding tags or comments or updating the incident name or description.
 
         Keyword arguments:
         action_parameters -- Action specific parameters. List of dictionaries.

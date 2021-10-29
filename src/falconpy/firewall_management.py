@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Firewall Management API interface class
+"""CrowdStrike Falcon Firewall Management API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -44,7 +44,7 @@ from ._endpoint._firewall_management import _firewall_management_endpoints as En
 
 
 class FirewallManagement(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -55,6 +55,7 @@ class FirewallManagement(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["body"], default_types=["list"])
     def aggregate_events(self: object, body: list = None, **kwargs) -> dict:
         """Aggregate events for customer.
@@ -518,6 +519,7 @@ class FirewallManagement(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_rule_groups(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get rule group entities by ID.
+
         These groups do not contain their rule entites, just the rule IDs in precedence order.
 
         Keyword arguments:
@@ -549,8 +551,9 @@ class FirewallManagement(ServiceClass):
                           parameters: dict = None,
                           **kwargs
                           ) -> dict:
-        """Create new rule group on a platform for a customer with a name
-        and description, and return the ID.
+        """Create new rule group on a platform for a customer with a name and description.
+
+        Returns the ID.
 
         Keyword arguments:
         body -- Full body payload in JSON format. Not required if other keywords are provided.
@@ -747,8 +750,9 @@ class FirewallManagement(ServiceClass):
                           parameters: dict = None,
                           **kwargs
                           ) -> dict:
-        """Update name, description, or enabled status of a rule group,
-        or create, edit, delete, or reorder rules.
+        """Update name, description, or enabled status of a rule group and underlying rules.
+
+        Can also create, edit, delete, or reorder rules.
 
         Keyword arguments:
         body -- Full body payload in JSON format. Not required if other keywords are provided.
@@ -803,8 +807,10 @@ class FirewallManagement(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_rules(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Get rule entities by ID (64-bit unsigned int as decimal string)
-        or Family ID (32-character hexadecimal string).
+        """Get rule entities by ID or Family ID.
+
+        ID = 64-bit unsigned int as decimal string
+        Family ID = 32-character hexadecimal string
 
         Keyword arguments:
         ids -- The IDs of the rule(s) to retrieve. String or list of strings.
@@ -925,8 +931,9 @@ class FirewallManagement(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policy_rules(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Find all firewall rule IDs matching the query with filter,
-        and return them in precedence order.
+        """Find all firewall rule IDs matching the query with filter.
+
+        Results are returned in precedence order.
 
         Keyword arguments:
         after -- A pagination token used with the limit parameter to manage pagination

@@ -1,4 +1,4 @@
-"""CrowdStrike Identity Protection API Interface Class
+"""CrowdStrike Identity Protection API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -41,7 +41,7 @@ from ._endpoint._identity_protection import _identity_protection_endpoints as En
 
 
 class IdentityProtection(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -55,9 +55,10 @@ class IdentityProtection(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def graphql(self: object, body: dict = None, **kwargs) -> dict:
-        """Identity Protection GraphQL API. Allows to retrieve entities, timeline activities,
-        identity-based incidents and security assessment. Allows to perform actions on entities
-        and identity-based incidents.
+        r"""Identity Protection GraphQL API.
+
+        Allows to retrieve entities, timeline activities, identity-based incidents and
+        security assessment. Allows to perform actions on entities and identity-based incidents.
 
         Keyword arguments:
         body -- full body payload, not required if keywords are used.

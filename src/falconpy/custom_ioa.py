@@ -1,4 +1,4 @@
-"""Falcon Custom Indicators of Attack API Interface Class
+"""Falcon Custom Indicators of Attack API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._custom_ioa import _custom_ioa_endpoints as Endpoints
 
 
 class CustomIOA(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,9 +53,10 @@ class CustomIOA(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_patterns(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Get pattern severities by ID
+        """Get pattern severities by ID.
 
         Keyword arguments:
         ids -- Entity IDs. String or list of strings.
@@ -81,7 +82,7 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_platforms(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Get platforms by ID
+        """Get platforms by ID.
 
         Keyword arguments:
         ids -- Entity IDs. String or list of strings.
@@ -107,7 +108,7 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_rule_groups(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Get rule groups by ID
+        """Get rule groups by ID.
 
         Keyword arguments:
         ids -- Entity IDs. String or list of strings.
@@ -138,6 +139,7 @@ class CustomIOA(ServiceClass):
                           **kwargs
                           ) -> dict:
         """Create a rule group for a platform with a name and an optional description.
+
         Returns the rule group.
 
         Keyword arguments:
@@ -205,6 +207,7 @@ class CustomIOA(ServiceClass):
                           **kwargs
                           ) -> dict:
         """Update a rule group.
+
         The following properties can be modified: `name`, `description`, `enabled`.
 
         Keyword arguments:
@@ -245,7 +248,7 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_rule_types(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Get rule types by ID
+        """Get rule types by ID.
 
         Keyword arguments:
         ids -- Entity IDs. String or list of strings.
@@ -271,7 +274,7 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def get_rules_get(self: object, body: dict = None, **kwargs) -> dict:
-        """Get rules by ID and optionally version in the following format: ID[:version]
+        """Get rules by ID and optionally version in the following format: ID[:version].
 
         Keyword arguments:
         body -- full body payload in JSON format, not required if using `ids` keyword is used.
@@ -300,6 +303,7 @@ class CustomIOA(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_rules(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get rules by ID and optionally version in the following format: ID[:version].
+
         The max number of IDs is constrained by URL size.
 
         Keyword arguments:
@@ -523,7 +527,7 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def validate(self: object, body: dict = None, **kwargs) -> dict:
-        """Validates field values and checks for matches if a test string is provided.
+        """Validate field values and check for matches if a test string is provided.
 
         Keyword arguments:
         body -- full body payload in JSON format, not required if using other keywords.
@@ -577,7 +581,7 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_patterns(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Get all pattern severity IDs
+        """Get all pattern severity IDs.
 
         Keyword arguments:
         limit -- The maximum number of records to return in this response. [Integer, 1-500]
@@ -679,7 +683,7 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_rule_groups(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Finds all rule group IDs matching the query with optional filter.
+        """Find all rule group IDs matching the query with optional filter.
 
         Keyword arguments:
         filter -- FQL query specifying the filter parameters. String.
@@ -753,7 +757,7 @@ class CustomIOA(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_rules(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Finds all rule IDs matching the query with optional filter.
+        """Find all rule IDs matching the query with optional filter.
 
         Keyword arguments:
         filter -- FQL query specifying the filter parameters. String.

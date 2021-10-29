@@ -1,4 +1,4 @@
-"""Falcon IOA Exclusions API Interface Class
+"""Falcon IOA Exclusions API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._payload import ioa_exclusion_payload
 
 
 class IOAExclusions(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,9 +53,10 @@ class IOAExclusions(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Get a set of IOA Exclusions by specifying their IDs
+        """Get a set of IOA Exclusions by specifying their IDs.
 
         Keyword arguments:
         ids -- List of exclusion IDs to retrieve. String or list of strings.
@@ -81,7 +82,7 @@ class IOAExclusions(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def create_exclusions(self: object, body: dict = None, **kwargs) -> dict:
-        """Create the IOA exclusions
+        """Create the IOA exclusions.
 
         Keyword arguments:
         body -- full body payload, not required when ids keyword is provided.
@@ -156,7 +157,8 @@ class IOAExclusions(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_exclusions(self: object, body: dict = None, **kwargs) -> dict:
-        """Update the IOA Exclusions
+        """Update the IOA Exclusions.
+
         Keyword arguments:
         body -- full body payload, not required when ids keyword is provided.
             {

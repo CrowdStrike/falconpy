@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Threat Intelligence API interface class
+"""CrowdStrike Falcon Threat Intelligence API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._intel import _intel_endpoints as Endpoints
 
 
 class Intel(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,6 +53,7 @@ class Intel(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_actor_entities(self: object, parameters: dict = None, **kwargs) -> dict:
         """Get info about actors that match provided FQL filters.
@@ -234,8 +235,7 @@ class Intel(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def get_indicator_entities(self: object, *args, body: dict = None, **kwargs) -> dict:
-        """
-        Retrieve specific indicators using their indicator IDs.
+        """Retrieve specific indicators using their indicator IDs.
 
         Keyword arguments:
         body -- full body payload, not required when ids keyword is provided.

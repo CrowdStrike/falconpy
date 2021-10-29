@@ -1,4 +1,4 @@
-"""Falcon Complete Dashboard API Interface Class
+"""Falcon Complete Dashboard API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._falcon_complete_dashboard import _falcon_complete_dashboard_end
 
 
 class CompleteDashboard(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,6 +53,7 @@ class CompleteDashboard(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["body"], default_types=["list"])
     def aggregate_allow_list(self: object, body: list = None, **kwargs) -> dict:
         """Retrieve aggregate allowlist ticket values based on the matched filter.
@@ -589,7 +590,7 @@ class CompleteDashboard(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_allow_list_filter(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve allowlist tickets that match the provided filter criteria with scrolling enabled
+        """Retrieve allowlist tickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
         filter -- Optional filter and sort criteria in the form of an FQL query. String.
@@ -619,8 +620,7 @@ class CompleteDashboard(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_block_list_filter(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve block listtickets that match the provided filter criteria
-        with scrolling enabled.
+        """Retrieve block listtickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
         filter -- Optional filter and sort criteria in the form of an FQL query. String.
@@ -650,8 +650,7 @@ class CompleteDashboard(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_detection_ids_by_filter(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve DetectionsIds that match the provided FQL filter
-        criteria with scrolling enabled.
+        """Retrieve DetectionsIds that match the provided FQL filter criteria with scrolling enabled.
 
         Keyword arguments:
         filter -- Optional filter and sort criteria in the form of an FQL query. String.
@@ -682,8 +681,7 @@ class CompleteDashboard(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_device_count_collection_queries_by_filter(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve device count collection Ids that match the provided FQL filter,
-        criteria with scrolling enabled.
+        """Retrieve device count collection Ids that match the provided FQL filter, criteria with scrolling enabled.
 
         Keyword arguments:
         filter -- Optional filter and sort criteria in the form of an FQL query. String.
@@ -714,8 +712,7 @@ class CompleteDashboard(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_escalations_filter(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve escalation tickets that match the provided filter criteria
-        with scrolling enabled.
+        """Retrieve escalation tickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
         filter -- Optional filter and sort criteria in the form of an FQL query. String.
@@ -777,8 +774,7 @@ class CompleteDashboard(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_remediations_filter(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve remediation tickets that match the provided filter criteria
-        with scrolling enabled.
+        """Retrieve remediation tickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
         filter -- Optional filter and sort criteria in the form of an FQL query. String.

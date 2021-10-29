@@ -1,4 +1,4 @@
-"""Falcon OAuth2 Authentication API Interface Class
+"""Falcon OAuth2 Authentication API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,8 @@ from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
 
 
 class OAuth2:
-    """To create an instance of this class, you must pass your client_id and client_secret
+    """To create an instance of this class, you must pass your client_id and client_secret.
+
     OR a properly formatted dictionary containing your client_id and client_secret
     for the key you wish to use to connect to the API.
 
@@ -52,12 +53,15 @@ class OAuth2:
         "client_secret": FALCON_CLIENT_SECRET
     }
     """
+
     # pylint: disable=too-many-instance-attributes,too-many-arguments
     def __init__(self: object, base_url: str = "https://api.crowdstrike.com",
                  ssl_verify: bool = True, proxy: dict = None, timeout: float or tuple = None,
                  creds: dict = None, client_id: str = None, client_secret: str = None,
                  user_agent: str = None):
-        """Initializes the base class by ingesting credentials,
+        """Class constructor.
+
+        Initializes the base class by ingesting credentials,
         the proxies dictionary and specifications
         for the base URL, SSL verification, and timeouts.
 
@@ -96,7 +100,7 @@ class OAuth2:
         self.authenticated = lambda: not bool(self.token_expired())
 
     def token(self: object) -> dict:
-        """Generates an authorization token.
+        """Generate an authorization token.
 
         This method does not accept arguments or keywords.
 
@@ -126,7 +130,7 @@ class OAuth2:
         return returned
 
     def revoke(self: object, token: str) -> dict:
-        """Revokes the specified authorization token.
+        """Revoke the specified authorization token.
 
         Keyword arguments:
         token -- Token string to be revoked.

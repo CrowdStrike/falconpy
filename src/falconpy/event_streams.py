@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Event Stream API interface class
+"""CrowdStrike Falcon Event Stream API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -41,7 +41,7 @@ from ._endpoint._event_streams import _event_streams_endpoints as Endpoints
 
 
 class EventStreams(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -52,6 +52,7 @@ class EventStreams(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def refresh_active_stream(self: object,
                               partition: int = 0,
@@ -60,6 +61,7 @@ class EventStreams(ServiceClass):
                               **kwargs
                               ) -> dict:
         """Refresh an active event stream.
+
         Use the URL shown in a listAvailableStreamsOAuth2 response.
 
         Keyword arguments:

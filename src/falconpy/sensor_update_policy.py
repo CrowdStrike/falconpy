@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Sensor Policy Management API interface class
+"""CrowdStrike Falcon Sensor Policy Management API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -43,7 +43,7 @@ from ._endpoint._sensor_update_policies import _sensor_update_policies_endpoints
 
 
 class SensorUpdatePolicy(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -54,9 +54,11 @@ class SensorUpdatePolicy(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["body"], default_types=["dict"])
     def reveal_uninstall_token(self: object, body: dict = None, **kwargs) -> dict:
         """Reveals an uninstall token for a specific device.
+
         To retrieve the bulk maintenance token pass the value
         'MAINTENANCE' as the value for 'device_id'.
 
@@ -100,8 +102,8 @@ class SensorUpdatePolicy(ServiceClass):
                     Allowed values: "linux", "mac", "windows"
         parameters -- full parameters payload, not required if platform is provided as a keyword.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'platform'.
-                   All others are ignored.
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'platform'. All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -121,8 +123,9 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for members of a Sensor Update Policy in your environment by providing an FQL
-        filter and paging details. Returns a set of host details which match the filter criteria.
+        """Search for members of a Sensor Update Policy by providing a FQL filter and paging detail.
+
+        Returns a set of host details which match the filter criteria.
 
         Keyword arguments:
         id -- The ID of the Sensor Update Policy to search for members of
@@ -154,7 +157,8 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Sensor Update Policies in your environment by providing an FQL filter and paging details.
+        """Search for Sensor Update Policies by providing an FQL filter and paging details.
+
         Returns a set of Sensor Update Policies which match the filter criteria.
 
         Keyword arguments:
@@ -190,8 +194,9 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_policies_v2(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Sensor Update Policies with additional support for
-        uninstall protection in your environment by providing an FQL filter and paging details.
+        """Search for Sensor Update Policies by providing an FQL filter and paging details.
+
+        Provides additional support for uninstall protection.
         Returns a set of Sensor Update Policies which match the filter criteria.
 
         Keyword arguments:
@@ -226,7 +231,11 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def perform_policies_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
+    def perform_policies_action(self: object,
+                                body: dict = None,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> dict:
         """Perform the specified action on the Sensor Update Policies specified in the request.
 
         Keyword arguments:
@@ -287,10 +296,11 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def set_policies_precedence(self: object, body: dict = None, **kwargs) -> dict:
-        """Sets the precedence of Sensor Update Policies based on the order
-        of IDs specified in the request. The first ID specified will have the
-        highest precedence and the last ID specified will have the lowest.
-        You must specify all non-Default Policies for a platform when updating precedence.
+        """Set the precedence of Sensor Update Policies based on the order of IDs in the request.
+
+        The first ID specified will have the highest precedence and the last ID specified will have
+        the lowest. You must specify all non-Default Policies for a platform when updating
+        precedence.
 
         Keyword arguments:
         body -- full body payload, not required if keywords are used.
@@ -476,8 +486,9 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_policies_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve a set of Sensor Update Policies with additional
-        support for uninstall protection by specifying their IDs.
+        """Retrieve a set of Sensor Update Policies by specifying their IDs.
+
+        Provides additional support for uninstall protection.
 
         Keyword arguments:
         ids -- List of Sensor Update Policy IDs to retrieve. String or list of strings.
@@ -504,8 +515,9 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def create_policies_v2(self: object, body: dict = None, **kwargs) -> dict:
-        """Create Sensor Update Policies by specifying details about the
-        policy to create with additional support for uninstall protection.
+        """Create Sensor Update Policies by specifying details about the policy.
+
+        Provides additional support for uninstall protection.
 
         Keyword arguments:
         body -- full body payload, not required if keywords are used.
@@ -558,9 +570,9 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_policies_v2(self: object, body: dict = None, **kwargs) -> dict:
-        """Update Sensor Update Policies by specifying the ID of the policy
-        and details to update with additional support for uninstall protection.
+        """Update Sensor Update Policies by specifying the ID of the policy and update details.
 
+        Provides additional support for uninstall protection.
         Keyword arguments:
         body -- full body payload, not required if keywords are used.
                 {
@@ -611,8 +623,9 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for members of a Sensor Update Policy in your environment by providing an FQL
-        filter and paging details. Returns a set of Agent IDs which match the filter criteria.
+        """Search for members of a Sensor Update Policy by providing a FQL filter and paging detail.
+
+        Returns a set of Agent IDs which match the filter criteria.
 
         Keyword arguments:
         id -- The ID of the Sensor Update Policy to search for members of
@@ -644,8 +657,9 @@ class SensorUpdatePolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Sensor Update Policies in your environment by providing an FQL filter and
-        paging details. Returns a set of Sensor Update Policy IDs which match the filter criteria.
+        """Search for Sensor Update Policies by providing a FQL filter and paging details.
+
+        Returns a set of Sensor Update Policy IDs which match the filter criteria.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.

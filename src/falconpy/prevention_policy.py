@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Prevention Policy API interface class
+"""CrowdStrike Falcon Prevention Policy API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._prevention_policies import _prevention_policies_endpoints as En
 
 
 class PreventionPolicy(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,11 +53,12 @@ class PreventionPolicy(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for members of a Prevention Policy in your environment
-        by providing an FQL filter and paging details. Returns a set of
-        host details which match the filter criteria.
+        """Search for members of a Prevention Policy by providing an FQL filter and paging details.
+
+        Returns a set of host details which match the filter criteria.
 
         Keyword arguments:
         id -- The ID of the Prevention Policy to search for members of
@@ -89,8 +90,9 @@ class PreventionPolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Prevention Policies in your environment by providing an FQL filter and
-        paging details. Returns a set of Prevention Policies which match the filter criteria.
+        """Search for Prevention Policies by providing an FQL filter and paging details.
+
+        Returns a set of Prevention Policies which match the filter criteria.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
@@ -180,10 +182,11 @@ class PreventionPolicy(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def set_policies_precedence(self: object, body: dict = None, **kwargs) -> dict:
-        """Sets the precedence of Prevention Policies based on the order
-        of IDs specified in the request. The first ID specified will have
-        the highest precedence and the last ID specified will have the lowest.
-        You must specify all non-Default Policies for a platform when updating precedence.
+        """Set the precedence of Prevention Policies based on the order of IDs in the request.
+
+        The first ID specified will have the highest precedence and the last ID specified will
+        have the lowest. You must specify all non-Default Policies for a platform when updating
+        precedence.
 
         Keyword arguments:
         body -- full body payload, not required if keywords are used.
@@ -372,8 +375,9 @@ class PreventionPolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for members of a Prevention Policy in your environment by providing a FQL filter
-        and paging details. Returns a set of Agent IDs which match the filter criteria.
+        """Search for members of a Prevention Policy by providing a FQL filter and paging details.
+
+        Returns a set of Agent IDs which match the filter criteria.
 
         Keyword arguments:
         id -- The ID of the Prevention Policy to search for members of
@@ -405,8 +409,9 @@ class PreventionPolicy(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Prevention Policies in your environment by providing an FQL filter
-        and paging details. Returns a set of Prevention Policy IDs which match the filter criteria.
+        """Search for Prevention Policies by providing an FQL filter and paging details.
+
+        Returns a set of Prevention Policy IDs which match the filter criteria.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.

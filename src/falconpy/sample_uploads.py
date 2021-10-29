@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Sample Upload API interface class
+"""CrowdStrike Falcon Sample Upload API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._sample_uploads import _sample_uploads_endpoints as Endpoints
 
 
 class SampleUploads(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,9 +53,10 @@ class SampleUploads(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_sample(self: object, parameters: dict = None, **kwargs) -> object:
-        """Retrieves the file associated with the given ID (SHA256)
+        """Retrieve the file associated with the given ID (SHA256).
 
         Keyword arguments:
         ids -- List of SHA256s to retrieve. String or list of strings.
@@ -88,6 +89,7 @@ class SampleUploads(ServiceClass):
                       parameters: dict = None,
                       **kwargs) -> dict:
         """Upload a file for further cloud analysis.
+
         After uploading, call the specific analysis API endpoint.
 
         Keyword arguments:
@@ -97,7 +99,8 @@ class SampleUploads(ServiceClass):
 
                      Accepted File Formats:
                      Portable executables: .exe, .scr, .pif, .dll, .com, .cpl, etc.
-                     Office documents: .doc, .docx, .ppt, .pps, .pptx, .ppsx, .xls, .xlsx, .rtf, .pub
+                     Office documents: .doc, .docx, .ppt, .pps, .pptx, .ppsx, .xls,
+                                       .xlsx, .rtf, .pub
                      PDF
                      APK
                      Executable JAR
@@ -155,7 +158,7 @@ class SampleUploads(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_sample(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Removes a sample, including file, meta and submissions from the collection.
+        """Remove a sample, including file, meta and submissions from the collection.
 
         Keyword arguments:
         ids -- List of SHA256s to delete. String or list of strings.

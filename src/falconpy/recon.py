@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon X Recon API interface class
+"""CrowdStrike Falcon X Recon API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -44,7 +44,7 @@ from ._endpoint._recon import _recon_endpoints as Endpoints
 
 
 class Recon(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -55,6 +55,7 @@ class Recon(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["body"], default_types=["dict"])
     def aggregate_notifications(self: object, body: dict = None, **kwargs) -> dict:
         """Get notification aggregates as specified via JSON in request body.
@@ -186,6 +187,7 @@ class Recon(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def create_actions(self: object, body: dict = None, **kwargs) -> dict:
         """Create actions for a monitoring rule.
+
         Accepts a list of actions that will be attached to the monitoring rule.
 
         Keyword arguments:
@@ -226,12 +228,11 @@ class Recon(ServiceClass):
         HTTP Method: PATCH
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/UpdateActionV1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateActionsV1
         """
         if not body:
             body = recon_action_payload(passed_keywords=kwargs)
 
-        # [POST] https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateActionsV1
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -311,8 +312,13 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_notifications_detailed_translated(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_notifications_detailed_translated(self: object,
+                                              *args,
+                                              parameters: dict = None,
+                                              **kwargs
+                                              ) -> dict:
         """Get detailed notifications based on their IDs.
+
         These include the raw intelligence content that generated the match.
         This endpoint will return translated notification content.
         The only target language available is English.
@@ -343,6 +349,7 @@ class Recon(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_notifications_detailed(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get detailed notifications based on their IDs.
+
         These include the raw intelligence content that generated the match.
 
         Keyword arguments:
@@ -368,8 +375,13 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_notifications_translated(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_notifications_translated(self: object,
+                                     *args,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> dict:
         """Get notifications based on their IDs.
+
         IDs can be retrieved using query_notifications.
         This endpoint will return translated notification content.
         The only target language available is English.
@@ -399,6 +411,7 @@ class Recon(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_notifications(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get notifications based on their IDs.
+
         IDs can be retrieved using get_notifications.
 
         Keyword arguments:
@@ -426,6 +439,7 @@ class Recon(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_notifications(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Delete notifications based on IDs.
+
         Notifications cannot be recovered after they are deleted.
 
         Keyword arguments:
@@ -452,7 +466,7 @@ class Recon(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_notifications(self: object, body: dict = None, **kwargs) -> dict:
-        """Update notification status or assignee. Accepts bulk requests
+        """Update notification status or assignee. Accepts bulk requests.
 
         Keyword arguments:
         assigned_to_uuid - UUID of the assigned user. String.
@@ -627,6 +641,7 @@ class Recon(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_actions(self: object, parameters: dict = None, **kwargs) -> dict:
         """Query actions based on provided criteria.
+
         Use the IDs from this response to get the action entities with get_actions.
 
         Keyword arguments:
@@ -665,6 +680,7 @@ class Recon(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_notifications(self: object, parameters: dict = None, **kwargs) -> dict:
         """Query notifications based on provided criteria.
+
         Use the IDs from this response to get the notification
         entities with get_notifications or get_notifications detailed.
 
@@ -704,6 +720,7 @@ class Recon(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_rules(self: object, parameters: dict = None, **kwargs) -> dict:
         """Query monitoring rules based on provided criteria.
+
         Use the IDs from this response to fetch the rules with get_rules.
 
         Keyword arguments:
