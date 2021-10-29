@@ -41,7 +41,7 @@ _user_management_endpoints = [
   [
     "GetRoles",
     "GET",
-    "/user-roles/entities/user-roles/v1?ids={}",
+    "/user-roles/entities/user-roles/v1",
     "Get info about a role",
     "user_management",
     [
@@ -83,7 +83,7 @@ _user_management_endpoints = [
   [
     "RevokeUserRoleIds",
     "DELETE",
-    "/user-roles/entities/user-roles/v1?ids={}",
+    "/user-roles/entities/user-roles/v1",
     "Revoke one or more roles from a user",
     "user_management",
     [
@@ -136,7 +136,7 @@ _user_management_endpoints = [
   [
     "RetrieveUser",
     "GET",
-    "/users/entities/users/v1?ids={}",
+    "/users/entities/users/v1",
     "Get info about a user",
     "user_management",
     [

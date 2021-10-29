@@ -96,7 +96,7 @@ _spotlight_vulnerabilities_endpoints = [
   [
     "getRemediationsV2",
     "GET",
-    "/spotlight/entities/remediations/v2?ids={}",
+    "/spotlight/entities/remediations/v2",
     "Get details on remediation by providing one or more IDs",
     "spotlight_vulnerabilities",
     [
@@ -116,7 +116,7 @@ _spotlight_vulnerabilities_endpoints = [
   [
     "getVulnerabilities",
     "GET",
-    "/spotlight/entities/vulnerabilities/v2?ids={}",
+    "/spotlight/entities/vulnerabilities/v2",
     "Get details on vulnerabilities by providing one or more IDs",
     "spotlight_vulnerabilities",
     [
@@ -180,7 +180,7 @@ _spotlight_vulnerabilities_endpoints = [
   [
     "getRemediations",
     "GET",
-    "/spotlight/entities/remediations/v2?ids={}",
+    "/spotlight/entities/remediations/v2",
     "Get details on remediations by providing one or more IDs",
     "spotlight_vulnerabilities",
     [

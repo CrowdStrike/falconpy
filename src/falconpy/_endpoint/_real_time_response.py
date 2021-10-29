@@ -423,7 +423,7 @@ _real_time_response_endpoints = [
   [
     "RTR_DeleteFile",
     "DELETE",
-    "/real-time-response/entities/file/v1?ids={}",
+    "/real-time-response/entities/file/v1",
     "Delete a RTR session file.",
     "real_time_response",
     [

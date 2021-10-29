@@ -41,7 +41,7 @@ _custom_ioa_endpoints = [
   [
     "get-patterns",
     "GET",
-    "/ioarules/entities/pattern-severities/v1?ids={}",
+    "/ioarules/entities/pattern-severities/v1",
     "Get pattern severities by ID.",
     "custom_ioa",
     [
@@ -61,7 +61,7 @@ _custom_ioa_endpoints = [
   [
     "get-platformsMixin0",
     "GET",
-    "/ioarules/entities/platforms/v1?ids={}",
+    "/ioarules/entities/platforms/v1",
     "Get platforms by ID.",
     "custom_ioa",
     [
@@ -81,7 +81,7 @@ _custom_ioa_endpoints = [
   [
     "get-rule-groupsMixin0",
     "GET",
-    "/ioarules/entities/rule-groups/v1?ids={}",
+    "/ioarules/entities/rule-groups/v1",
     "Get rule groups by ID.",
     "custom_ioa",
     [
@@ -129,7 +129,7 @@ _custom_ioa_endpoints = [
   [
     "delete-rule-groupsMixin0",
     "DELETE",
-    "/ioarules/entities/rule-groups/v1?ids={}",
+    "/ioarules/entities/rule-groups/v1",
     "Delete rule groups by ID.",
     "custom_ioa",
     [
@@ -155,7 +155,7 @@ _custom_ioa_endpoints = [
   [
     "get-rule-types",
     "GET",
-    "/ioarules/entities/rule-types/v1?ids={}",
+    "/ioarules/entities/rule-types/v1",
     "Get rule types by ID.",
     "custom_ioa",
     [
@@ -190,7 +190,7 @@ _custom_ioa_endpoints = [
   [
     "get-rulesMixin0",
     "GET",
-    "/ioarules/entities/rules/v1?ids={}",
+    "/ioarules/entities/rules/v1",
     "Get rules by ID and optionally version in the following format: `ID[:version]`. "
     "The max number of IDs is constrained by URL size.",
     "custom_ioa",
@@ -239,7 +239,7 @@ _custom_ioa_endpoints = [
   [
     "delete-rules",
     "DELETE",
-    "/ioarules/entities/rules/v1?ids={}",
+    "/ioarules/entities/rules/v1",
     "Delete rules from a rule group by ID.",
     "custom_ioa",
     [

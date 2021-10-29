@@ -41,7 +41,7 @@ _mssp_endpoints = [
   [
     "getChildren",
     "GET",
-    "/mssp/entities/children/v1?ids={}",
+    "/mssp/entities/children/v1",
     "Get link to child customer by child CID(s)",
     "mssp",
     [
@@ -178,7 +178,7 @@ _mssp_endpoints = [
   [
     "getRolesByID",
     "GET",
-    "/mssp/entities/mssp-roles/v1?ids={}",
+    "/mssp/entities/mssp-roles/v1",
     "Get MSSP Role assignment(s). MSSP Role assignment is of the format :.",
     "mssp",
     [

@@ -41,7 +41,7 @@ _sample_uploads_endpoints = [
   [
     "GetSampleV3",
     "GET",
-    "/samples/entities/samples/v3?ids={}",
+    "/samples/entities/samples/v3",
     "Retrieves the file associated with the given ID (SHA256)",
     "sample_uploads",
     [
@@ -128,7 +128,7 @@ _sample_uploads_endpoints = [
   [
     "DeleteSampleV3",
     "DELETE",
-    "/samples/entities/samples/v3?ids={}",
+    "/samples/entities/samples/v3",
     "Removes a sample, including file, meta and submissions from the collection",
     "sample_uploads",
     [

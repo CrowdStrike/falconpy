@@ -184,7 +184,7 @@ _prevention_policies_endpoints = [
   [
     "getPreventionPolicies",
     "GET",
-    "/policy/entities/prevention/v1?ids={}",
+    "/policy/entities/prevention/v1",
     "Retrieve a set of Prevention Policies by specifying their IDs",
     "prevention_policies",
     [
@@ -234,7 +234,7 @@ _prevention_policies_endpoints = [
   [
     "deletePreventionPolicies",
     "DELETE",
-    "/policy/entities/prevention/v1?ids={}",
+    "/policy/entities/prevention/v1",
     "Delete a set of Prevention Policies by specifying their IDs",
     "prevention_policies",
     [

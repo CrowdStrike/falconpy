@@ -115,7 +115,7 @@ _hosts_endpoints = [
   [
     "GetDeviceDetails",
     "GET",
-    "/devices/entities/devices/v1?ids={}",
+    "/devices/entities/devices/v1",
     "Get details on one or more hosts by providing agent IDs (AID). You can get a host's agent IDs "
     "(AIDs) from the /devices/queries/devices/v1 endpoint, the Falcon console or the Streaming API",
     "hosts",

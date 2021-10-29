@@ -41,7 +41,7 @@ _sensor_visibility_exclusions_endpoints = [
   [
     "getSensorVisibilityExclusionsV1",
     "GET",
-    "/policy/entities/sv-exclusions/v1?ids={}",
+    "/policy/entities/sv-exclusions/v1",
     "Get a set of Sensor Visibility Exclusions by specifying their IDs",
     "sensor_visibility_exclusions",
     [
@@ -89,7 +89,7 @@ _sensor_visibility_exclusions_endpoints = [
   [
     "deleteSensorVisibilityExclusionsV1",
     "DELETE",
-    "/policy/entities/sv-exclusions/v1?ids={}",
+    "/policy/entities/sv-exclusions/v1",
     "Delete the sensor visibility exclusions by id",
     "sensor_visibility_exclusions",
     [

@@ -184,7 +184,7 @@ _response_policies_endpoints = [
   [
     "getRTResponsePolicies",
     "GET",
-    "/policy/entities/response/v1?ids={}",
+    "/policy/entities/response/v1",
     "Retrieve a set of Response Policies by specifying their IDs",
     "response_policies",
     [
@@ -234,7 +234,7 @@ _response_policies_endpoints = [
   [
     "deleteRTResponsePolicies",
     "DELETE",
-    "/policy/entities/response/v1?ids={}",
+    "/policy/entities/response/v1",
     "Delete a set of Response Policies by specifying their IDs",
     "response_policies",
     [

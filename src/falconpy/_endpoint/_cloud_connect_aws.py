@@ -86,7 +86,7 @@ _cloud_connect_aws_endpoints = [
   [
     "GetAWSAccounts",
     "GET",
-    "/cloud-connect-aws/entities/accounts/v1?ids={}",
+    "/cloud-connect-aws/entities/accounts/v1",
     "Retrieve a set of AWS Accounts by specifying their IDs",
     "cloud_connect_aws",
     [
@@ -148,7 +148,7 @@ _cloud_connect_aws_endpoints = [
   [
     "DeleteAWSAccounts",
     "DELETE",
-    "/cloud-connect-aws/entities/accounts/v1?ids={}",
+    "/cloud-connect-aws/entities/accounts/v1",
     "Delete a set of AWS Accounts by specifying their IDs",
     "cloud_connect_aws",
     [
@@ -184,7 +184,7 @@ _cloud_connect_aws_endpoints = [
   [
     "VerifyAWSAccountAccess",
     "POST",
-    "/cloud-connect-aws/entities/verify-account-access/v1?ids={}",
+    "/cloud-connect-aws/entities/verify-account-access/v1",
     "Performs an Access Verification check on the specified AWS Account IDs",
     "cloud_connect_aws",
     [

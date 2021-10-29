@@ -182,7 +182,7 @@ _firewall_policies_endpoints = [
   [
     "getFirewallPolicies",
     "GET",
-    "/policy/entities/firewall/v1?ids={}",
+    "/policy/entities/firewall/v1",
     "Retrieve a set of Firewall Policies by specifying their IDs",
     "firewall_policies",
     [
@@ -240,7 +240,7 @@ _firewall_policies_endpoints = [
   [
     "deleteFirewallPolicies",
     "DELETE",
-    "/policy/entities/firewall/v1?ids={}",
+    "/policy/entities/firewall/v1",
     "Delete a set of Firewall Policies by specifying their IDs",
     "firewall_policies",
     [

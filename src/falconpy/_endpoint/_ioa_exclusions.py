@@ -41,7 +41,7 @@ _ioa_exclusions_endpoints = [
   [
     "getIOAExclusionsV1",
     "GET",
-    "/policy/entities/ioa-exclusions/v1?ids={}",
+    "/policy/entities/ioa-exclusions/v1",
     "Get a set of IOA Exclusions by specifying their IDs",
     "ioa_exclusions",
     [
@@ -89,7 +89,7 @@ _ioa_exclusions_endpoints = [
   [
     "deleteIOAExclusionsV1",
     "DELETE",
-    "/policy/entities/ioa-exclusions/v1?ids={}",
+    "/policy/entities/ioa-exclusions/v1",
     "Delete the IOA exclusions by id",
     "ioa_exclusions",
     [

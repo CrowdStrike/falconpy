@@ -66,7 +66,7 @@ _malquery_endpoints = [
   [
     "GetMalQueryDownloadV1",
     "GET",
-    "/malquery/entities/download-files/v1?ids={}",
+    "/malquery/entities/download-files/v1",
     "Download a file indexed by MalQuery. Specify the file using its SHA256. Only one file is supported at this time",
     "malquery",
     [
@@ -86,7 +86,7 @@ _malquery_endpoints = [
   [
     "GetMalQueryMetadataV1",
     "GET",
-    "/malquery/entities/metadata/v1?ids={}",
+    "/malquery/entities/metadata/v1",
     "Retrieve indexed files metadata by their hash",
     "malquery",
     [
@@ -106,7 +106,7 @@ _malquery_endpoints = [
   [
     "GetMalQueryRequestV1",
     "GET",
-    "/malquery/entities/requests/v1?ids={}",
+    "/malquery/entities/requests/v1",
     "Check the status and results of an asynchronous request, such as hunt or exact-search. "
     "Supports a single request id at this time.",
     "malquery",
@@ -127,7 +127,7 @@ _malquery_endpoints = [
   [
     "GetMalQueryEntitiesSamplesFetchV1",
     "GET",
-    "/malquery/entities/samples-fetch/v1?ids={}",
+    "/malquery/entities/samples-fetch/v1",
     "Fetch a zip archive with password 'infected' containing the samples. "
     "Call this once the /entities/samples-multidownload request has finished processing",
     "malquery",

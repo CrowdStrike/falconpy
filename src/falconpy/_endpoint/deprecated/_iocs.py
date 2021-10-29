@@ -41,7 +41,7 @@ _iocs_endpoints = [
   [
     "entities.processes",
     "GET",
-    "/processes/entities/processes/v1?ids={}",
+    "/processes/entities/processes/v1",
     "For the provided ProcessID retrieve the process details",
     "iocs",
     [

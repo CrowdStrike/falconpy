@@ -101,7 +101,7 @@ _firewall_management_endpoints = [
   [
     "get-events",
     "GET",
-    "/fwmgr/entities/events/v1?ids={}",
+    "/fwmgr/entities/events/v1",
     "Get events entities by ID and optionally version",
     "firewall_management",
     [
@@ -121,7 +121,7 @@ _firewall_management_endpoints = [
   [
     "get-firewall-fields",
     "GET",
-    "/fwmgr/entities/firewall-fields/v1?ids={}",
+    "/fwmgr/entities/firewall-fields/v1",
     "Get the firewall field specifications by ID",
     "firewall_management",
     [
@@ -141,7 +141,7 @@ _firewall_management_endpoints = [
   [
     "get-platforms",
     "GET",
-    "/fwmgr/entities/platforms/v1?ids={}",
+    "/fwmgr/entities/platforms/v1",
     "Get platforms by ID, e.g., windows or mac or droid",
     "firewall_management",
     [
@@ -161,7 +161,7 @@ _firewall_management_endpoints = [
   [
     "get-policy-containers",
     "GET",
-    "/fwmgr/entities/policies/v1?ids={}",
+    "/fwmgr/entities/policies/v1",
     "Get policy container entities by policy ID",
     "firewall_management",
     [
@@ -202,7 +202,7 @@ _firewall_management_endpoints = [
   [
     "get-rule-groups",
     "GET",
-    "/fwmgr/entities/rule-groups/v1?ids={}",
+    "/fwmgr/entities/rule-groups/v1",
     "Get rule group entities by ID. These groups do not contain their rule entites, just the rule IDs in precedence order.",
     "firewall_management",
     [
@@ -290,7 +290,7 @@ _firewall_management_endpoints = [
   [
     "delete-rule-groups",
     "DELETE",
-    "/fwmgr/entities/rule-groups/v1?ids={}",
+    "/fwmgr/entities/rule-groups/v1",
     "Delete rule group entities by ID",
     "firewall_management",
     [
@@ -323,7 +323,7 @@ _firewall_management_endpoints = [
   [
     "get-rules",
     "GET",
-    "/fwmgr/entities/rules/v1?ids={}",
+    "/fwmgr/entities/rules/v1",
     "Get rule entities by ID (64-bit unsigned int as decimal string) or Family ID (32-character hexadecimal string)",
     "firewall_management",
     [

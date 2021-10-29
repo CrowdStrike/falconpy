@@ -41,7 +41,7 @@ _installation_tokens_endpoints = [
   [
     "audit_events_read",
     "GET",
-    "/installation-tokens/entities/audit-events/v1?ids={}",
+    "/installation-tokens/entities/audit-events/v1",
     "Gets the details of one or more audit events by id.",
     "installation_tokens",
     [
@@ -68,7 +68,7 @@ _installation_tokens_endpoints = [
   [
     "tokens_read",
     "GET",
-    "/installation-tokens/entities/tokens/v1?ids={}",
+    "/installation-tokens/entities/tokens/v1",
     "Gets the details of one or more tokens by id.",
     "installation_tokens",
     [
@@ -101,7 +101,7 @@ _installation_tokens_endpoints = [
   [
     "tokens_update",
     "PATCH",
-    "/installation-tokens/entities/tokens/v1?ids={}",
+    "/installation-tokens/entities/tokens/v1",
     "Updates one or more tokens. Use this endpoint to edit labels, change expiration, revoke, or restore.",
     "installation_tokens",
     [
@@ -126,7 +126,7 @@ _installation_tokens_endpoints = [
   [
     "tokens_delete",
     "DELETE",
-    "/installation-tokens/entities/tokens/v1?ids={}",
+    "/installation-tokens/entities/tokens/v1",
     "Deletes a token immediately. To revoke a token, use PATCH /installation-tokens/entities/tokens/v1 instead.",
     "installation_tokens",
     [

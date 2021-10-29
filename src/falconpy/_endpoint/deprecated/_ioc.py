@@ -95,7 +95,7 @@ _ioc_endpoints = [
   [
     "indicator.get.v1",
     "GET",
-    "/iocs/entities/indicators/v1?ids={}",
+    "/iocs/entities/indicators/v1",
     "Get Indicators by ids.",
     "ioc",
     [
@@ -181,7 +181,7 @@ _ioc_endpoints = [
   [
     "indicator.delete.v1",
     "DELETE",
-    "/iocs/entities/indicators/v1?ids={}",
+    "/iocs/entities/indicators/v1",
     "Delete Indicators by ids.",
     "ioc",
     [

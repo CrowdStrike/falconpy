@@ -41,7 +41,7 @@ _d4c_registration_endpoints = [
   [
     "GetCSPMAzureAccount",
     "GET",
-    "/cloud-connect-azure/entities/account/v1?ids={}",
+    "/cloud-connect-azure/entities/account/v1",
     "Return information about Azure account registration",
     "d4c_registration",
     [
@@ -126,7 +126,7 @@ _d4c_registration_endpoints = [
   [
     "GetCSPMCGPAccount",
     "GET",
-    "/cloud-connect-gcp/entities/account/v1?ids={}",
+    "/cloud-connect-gcp/entities/account/v1",
     "Returns information about the current status of an GCP account.",
     "d4c_registration",
     [

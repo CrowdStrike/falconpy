@@ -205,7 +205,7 @@ _intel_endpoints = [
   [
     "GetIntelActorEntities",
     "GET",
-    "/intel/entities/actors/v1?ids={}",
+    "/intel/entities/actors/v1",
     "Retrieve specific actors using their actor IDs.",
     "intel",
     [
@@ -267,7 +267,7 @@ _intel_endpoints = [
   [
     "GetIntelReportEntities",
     "GET",
-    "/intel/entities/reports/v1?ids={}",
+    "/intel/entities/reports/v1",
     "Retrieve specific reports using their report IDs.",
     "intel",
     [
@@ -357,7 +357,7 @@ _intel_endpoints = [
   [
     "GetIntelRuleEntities",
     "GET",
-    "/intel/entities/rules/v1?ids={}",
+    "/intel/entities/rules/v1",
     "Retrieve details for rule sets for the specified ids.",
     "intel",
     [

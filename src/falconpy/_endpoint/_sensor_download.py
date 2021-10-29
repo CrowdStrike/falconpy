@@ -95,7 +95,7 @@ _sensor_download_endpoints = [
   [
     "GetSensorInstallersEntities",
     "GET",
-    "/sensors/entities/installers/v1?ids={}",
+    "/sensors/entities/installers/v1",
     "Get sensor installer details by provided SHA256 IDs",
     "sensor_download",
     [

@@ -71,7 +71,7 @@ _falconx_sandbox_endpoints = [
   [
     "GetSummaryReports",
     "GET",
-    "/falconx/entities/report-summaries/v1?ids={}",
+    "/falconx/entities/report-summaries/v1",
     "Get a short summary version of a sandbox report.",
     "falconx_sandbox",
     [
@@ -92,7 +92,7 @@ _falconx_sandbox_endpoints = [
   [
     "GetReports",
     "GET",
-    "/falconx/entities/reports/v1?ids={}",
+    "/falconx/entities/reports/v1",
     "Get a full sandbox report.",
     "falconx_sandbox",
     [
@@ -113,7 +113,7 @@ _falconx_sandbox_endpoints = [
   [
     "DeleteReport",
     "DELETE",
-    "/falconx/entities/reports/v1?ids={}",
+    "/falconx/entities/reports/v1",
     "Delete report based on the report ID. Operation can be checked for success by polling for the "
     "report ID on the report-summaries endpoint.",
     "falconx_sandbox",
@@ -130,7 +130,7 @@ _falconx_sandbox_endpoints = [
   [
     "GetSubmissions",
     "GET",
-    "/falconx/entities/submissions/v1?ids={}",
+    "/falconx/entities/submissions/v1",
     "Check the status of a sandbox analysis. Time required for analysis varies but is usually less than 15 minutes.",
     "falconx_sandbox",
     [
@@ -257,7 +257,7 @@ _falconx_sandbox_endpoints = [
   [
     "GetSampleV2",
     "GET",
-    "/samples/entities/samples/v2?ids={}",
+    "/samples/entities/samples/v2",
     "Retrieves the file associated with the given ID (SHA256)",
     "falconx_sandbox",
     [
@@ -344,7 +344,7 @@ _falconx_sandbox_endpoints = [
   [
     "DeleteSampleV2",
     "DELETE",
-    "/samples/entities/samples/v2?ids={}",
+    "/samples/entities/samples/v2",
     "Removes a sample, including file, meta and submissions from the collection",
     "falconx_sandbox",
     [

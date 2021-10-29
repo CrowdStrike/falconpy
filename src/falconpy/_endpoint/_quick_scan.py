@@ -55,7 +55,7 @@ _quick_scan_endpoints = [
   [
     "GetScans",
     "GET",
-    "/scanner/entities/scans/v1?ids={}",
+    "/scanner/entities/scans/v1",
     "Check the status of a volume scan. Time required for analysis increases with "
     "the number of samples in a volume but usually it should take less than 1 minute",
     "quick_scan",

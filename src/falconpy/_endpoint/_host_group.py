@@ -160,7 +160,7 @@ _host_group_endpoints = [
   [
     "getHostGroups",
     "GET",
-    "/devices/entities/host-groups/v1?ids={}",
+    "/devices/entities/host-groups/v1",
     "Retrieve a set of Host Groups by specifying their IDs",
     "host_group",
     [
@@ -210,7 +210,7 @@ _host_group_endpoints = [
   [
     "deleteHostGroups",
     "DELETE",
-    "/devices/entities/host-groups/v1?ids={}",
+    "/devices/entities/host-groups/v1",
     "Delete a set of Host Groups by specifying their IDs",
     "host_group",
     [
