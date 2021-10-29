@@ -91,7 +91,7 @@ def generate_b64cred(client_id: str, client_secret: str) -> str:
 
 
 def handle_single_argument(passed_arguments: list, passed_keywords: dict, search_key: str) -> dict:
-    """Handler for when a single argument is provided without keywords.
+    """Handle a single argument that is provided without keywords.
 
     Reviews arguments passed to a method and injects them into the keyword dictionary if they
     match the search string.
@@ -269,12 +269,12 @@ def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> objec
 
 
 def generate_error_result(message: str = "An error has occurred. Check your payloads and try again.", code: int = 500) -> dict:
-    """Normalized error messaging handler."""
+    """Normalize error messages."""
     return Result()(status_code=code, headers={}, body={"errors": [{"message": f"{message}"}], "resources": []})
 
 
 def generate_ok_result(message: str = "Request returned with success", code: int = 200, **kwargs) -> dict:
-    """Normalized OK messaging handler."""
+    """Normalize OK messages."""
     return_headers = kwargs.get("headers", {})
     return Result()(status_code=code, headers=return_headers, body={"message": message, "resources": []})
 

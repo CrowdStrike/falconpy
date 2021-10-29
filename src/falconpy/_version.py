@@ -1,4 +1,4 @@
-"""Internal version control constants
+"""Internal version control constants.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
