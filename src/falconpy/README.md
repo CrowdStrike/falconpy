@@ -4,6 +4,8 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 
 ## Service Classes
 ### Currently implemented
+Each class defined below represents a single CrowdStrike Falcon API service collection, with methods defined
+for every single operation available within that service collection.
 | Source file | Swagger documentation |
 | :--- | :--- |
 | `cloud_connect_aws.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-connect-aws |
@@ -52,7 +54,9 @@ This folder contains the FalconPy project, a Python 3 interface handler for the 
 
 ## The Uber Class
 #### A single class to interface with the entire API
-The Uber class is harness that leverages the operation IDs provided by swagger to interact with the entire API.
+The Uber class is a harness that leverages operation IDs to look up the necessary detail to interact with the entire API.
+You can also leverage the Uber Class to interact with operations not yet defined within the private endpoint submodule by
+making use of the `override` keyword.
 | Source file | Swagger documentation |
 | :--- | :--- |
 | `api_complete.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html |
