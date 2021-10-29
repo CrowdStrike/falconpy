@@ -11,4 +11,7 @@ if ! [ -z "$1" ]
 then
 	TARGET="tests/test_$1.py"	
 fi
-pytest -s -v $TARGET
+
+coverage run --rcfile=util/coverage.config -m pytest -s -v $TARGET
+coverage report
+# pytest -s -v $TARGET
