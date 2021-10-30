@@ -1,3 +1,19 @@
+# Version 0.8.0
+## Added features and functionality
++ Added: Parameter abstraction for the Uber Class.
+    * Provides: Query string parameter payload abstraction for calls made using the Uber class.
+    - `api_complete.py`
+    - `_util.py`
++ Added: PEP-8 friendly `app_id` keyword for the `appId` parameter used by methods within the EventStreams Service Class. `event_streams.py`
+
+## Issues resolved
++ Fixed: Minor formatting issues within docstrings in all package files.
+
+## Other
++ Added: Docstring syntax validation workflow leveraging pydocstyle.
++ Removed: Deprecated `calc_url_from_args` method - `_util.py`.
++ Removed: Deprecated `parse_id_list` method - `_util.py`.
+
 # Version 0.7.4
 ## Added features and functionality
 + Updated: Service Class Refactoring (Rev 4) 
