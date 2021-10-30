@@ -66,7 +66,8 @@ class EventStreams(ServiceClass):
 
         Keyword arguments:
         action_name -- Action to perform. Only allowed value is "refresh_active_stream_session".
-        appId -- Label that identifies your connection. 32 character alphanumeric.
+        app_id -- Label that identifies your connection. Will also accept `appId`.
+                  32 character alphanumeric.
         body -- accepted but not used.
         parameters -- full parameters payload, not required if using other keywords.
         partition -- Instance partition to request data for.
@@ -82,6 +83,8 @@ class EventStreams(ServiceClass):
         """
         if not kwargs.get("action_name", None):
             parameters["action_name"] = "refresh_active_stream_session"
+        if kwargs.get("app_id", None):
+            parameters["appId"] = kwargs.get("app_id", None)
 
         return process_service_request(
             calling_object=self,
@@ -98,7 +101,8 @@ class EventStreams(ServiceClass):
         """Discover all event streams in your environment.
 
         Keyword arguments:
-        appId -- Label that identifies your connection. 32 character alphanumeric.
+        app_id -- Label that identifies your connection. Will also accept `appId`.
+                  32 character alphanumeric.
         format -- format for streaming events. Either 'json' or 'flatjson'.
         parameters -- full parameters payload, not required if using other keywords.
 
@@ -111,6 +115,9 @@ class EventStreams(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams/listAvailableStreamsOAuth2
         """
+        if kwargs.get("app_id", None):
+            parameters["appId"] = kwargs.get("app_id", None)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
