@@ -605,17 +605,17 @@ class Recon(ServiceClass):
                 [
                     {
                         "filter": "string",
+                        "id": "string",
                         "name": "string",
                         "permissions": "string",
-                        "priority": "string",
-                        "topic": "string"
+                        "priority": "string"
                     }
                 ]
         filter -- Rule filter. String.
         name -- Rule name. String.
         permissions -- String. (private / public)
         priority -- String. (high / medium / low)
-        topic -- Rule topic. String.
+        id -- Rule ID. String.
 
         This method only supports keywords for providing arguments.
 

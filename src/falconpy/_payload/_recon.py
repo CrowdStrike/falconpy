@@ -50,6 +50,8 @@ def handle_recon_rule_params(inbound: dict) -> dict:
         returned_dict["permissions"] = inbound.get("permissions", None)
     if inbound.get("priority", None):
         returned_dict["priority"] = inbound.get("priority", None)
+    if inbound.get("topic", None):
+        returned_dict["topic"] = inbound.get("topic", None)
 
     return returned_dict
 
@@ -64,7 +66,8 @@ def recon_rules_payload(passed_keywords: dict) -> dict:
                     "id": "string",
                     "name": "string",
                     "permissions": "string",
-                    "priority": "string"
+                    "priority": "string",
+                    "topic": "string"
                 }
             ]
     """
