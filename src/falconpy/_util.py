@@ -313,10 +313,10 @@ def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epnam
     functionality does not support QueryString parameter abstraction.)
 
     Keyword arguments:
-        payload -- Existing QueryString parameter payload. Dictionary.
-        passed_arguments -- Keywords provided to the calling method.
-        endpoints -- List of API endpoints available to the calling method.
-        epname -- Operation ID to be retrieved from the endpoints list.
+    payload -- Existing QueryString parameter payload. Dictionary.
+    passed_arguments -- Keywords provided to the calling method.
+    endpoints -- List of API endpoints available to the calling method.
+    epname -- Operation ID to be retrieved from the endpoints list.
 
     Returns: dictionary representing QueryString parameters.
     """
@@ -350,23 +350,20 @@ def process_service_request(calling_object: object,
     Calculates the target_url based upon the provided operation ID and endpoint list.
 
     Keyword arguments:
-        endpoints: list - List of service class endpoints, defined as Endpoints in a service class. [required]
-        operation_id: The name of the operation ID. Normally this is also the function name from the service class. [required]
-        method: HTTP method to execute. GET, POST, PATCH, DELETE, PUT accepted. Defaults to GET.
-        keywords: Dictionary of kwargs that were passed to the function within the service class.
-        params: Dictionary of parameters passed to the service class function.
-        headers: Dictionary of headers passed to and calculated by the service class function.
-        body: Dictionary representing the body payload passed to the service class function.
-        data: Dictionary representing the data payload passed to the service class function.
-        files: List of files to be uploaded.
-        partition: ID of the partition to open (Event Streams API)
-        body_validator: Dictionary containing details regarding body payload validation
-        body_required: List of required body payload parameters
+    endpoints -- list - List of service class endpoints, defined as Endpoints in a service class. [required]
+    operation_id -- The name of the operation ID. Normally this is also the function name from the service class. [required]
+    method -- HTTP method to execute. GET, POST, PATCH, DELETE, PUT accepted. Defaults to GET.
+    keywords -- Dictionary of kwargs that were passed to the function within the service class.
+    params -- Dictionary of parameters passed to the service class function.
+    headers -- Dictionary of headers passed to and calculated by the service class function.
+    body -- Dictionary representing the body payload passed to the service class function.
+    data -- Dictionary representing the data payload passed to the service class function.
+    files -- List of files to be uploaded.
+    partition -- ID of the partition to open (Event Streams API)
+    body_validator -- Dictionary containing details regarding body payload validation
+    body_required -- List of required body payload parameters
     """
     target_endpoint = [ep for ep in endpoints if operation_id == ep[0]][0]
-    # ID replacement happening at the end of this statement planned for removal in v0.6.0+
-    # (after the uber class has been updated to no longer need it and the _endpoints module has been updated)
-    # target_url = f"{calling_object.base_url}{target_endpoint[2]}".replace("?ids={}", "")
     target_url = f"{calling_object.base_url}{target_endpoint[2]}"
     target_method = target_endpoint[1]
     passed_partition = kwargs.get("partition", None)
