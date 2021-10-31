@@ -464,8 +464,8 @@ class Recon(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def update_notifications(self: object, body: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def update_notifications(self: object, body: list = None, **kwargs) -> dict:
         """Update notification status or assignee. Accepts bulk requests.
 
         Keyword arguments:
