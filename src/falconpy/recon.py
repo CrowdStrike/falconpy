@@ -528,8 +528,8 @@ class Recon(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def create_rules(self: object, body: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def create_rules(self: object, body: list = None, **kwargs) -> dict:
         """Create monitoring rules.
 
         Keyword arguments:
