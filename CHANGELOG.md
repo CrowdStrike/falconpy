@@ -4,15 +4,22 @@
     * Provides: Query string parameter payload abstraction for calls made using the Uber class.
     - `api_complete.py`
     - `_util.py`
-+ Added: PEP-8 friendly `app_id` keyword for the `appId` parameter used by methods within the EventStreams Service Class. `event_streams.py`
++ Added: PEP-8 friendly `app_id` keyword for the `appId` parameter used by methods within the EventStreams Service Class.
+    - `event_streams.py`
 
 ## Issues resolved
++ Fixed: Aggregate payload datatype mismatches in Recon Service Class methods.
+    - `recon.py`
++ Fixed: Missing payload parameter in recon rule payload handler.
+    - `_payload/_recon.py`
 + Fixed: Minor formatting issues within docstrings in all package files.
 
 ## Other
 + Added: Docstring syntax validation workflow leveraging pydocstyle.
-+ Removed: Deprecated `calc_url_from_args` method - `_util.py`.
-+ Removed: Deprecated `parse_id_list` method - `_util.py`.
++ Removed: Deprecated `calc_url_from_args` method
+    - `_util.py`
++ Removed: Deprecated `parse_id_list` method
+    - `_util.py`
 
 # Version 0.7.4
 ## Added features and functionality
