@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._hosts - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -115,7 +114,7 @@ _hosts_endpoints = [
   [
     "GetDeviceDetails",
     "GET",
-    "/devices/entities/devices/v1?ids={}",
+    "/devices/entities/devices/v1",
     "Get details on one or more hosts by providing agent IDs (AID). You can get a host's agent IDs "
     "(AIDs) from the /devices/queries/devices/v1 endpoint, the Falcon console or the Streaming API",
     "hosts",

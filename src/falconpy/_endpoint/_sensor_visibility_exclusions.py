@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._sensor_visibility_exclusions - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -41,7 +40,7 @@ _sensor_visibility_exclusions_endpoints = [
   [
     "getSensorVisibilityExclusionsV1",
     "GET",
-    "/policy/entities/sv-exclusions/v1?ids={}",
+    "/policy/entities/sv-exclusions/v1",
     "Get a set of Sensor Visibility Exclusions by specifying their IDs",
     "sensor_visibility_exclusions",
     [
@@ -89,7 +88,7 @@ _sensor_visibility_exclusions_endpoints = [
   [
     "deleteSensorVisibilityExclusionsV1",
     "DELETE",
-    "/policy/entities/sv-exclusions/v1?ids={}",
+    "/policy/entities/sv-exclusions/v1",
     "Delete the sensor visibility exclusions by id",
     "sensor_visibility_exclusions",
     [

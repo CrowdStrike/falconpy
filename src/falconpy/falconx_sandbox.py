@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon X Sanbox API interface class
+"""CrowdStrike Falcon X Sanbox API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -43,7 +43,7 @@ from ._endpoint._falconx_sandbox import _falconx_sandbox_endpoints as Endpoints
 
 
 class FalconXSandbox(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -54,6 +54,7 @@ class FalconXSandbox(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_artifacts(self: object, *args, parameters: dict = None, **kwargs) -> object:
         """Download IOC packs, PCAP files, and other analysis artifacts.
@@ -117,6 +118,7 @@ class FalconXSandbox(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_submissions(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Check the status of a sandbox analysis.
+
         Time required for analysis varies but is usually less than 15 minutes.
 
         Keyword arguments:
@@ -146,6 +148,7 @@ class FalconXSandbox(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def submit(self: object, body: dict = None, **kwargs) -> dict:
         """Submit an uploaded file or a URL for sandbox analysis.
+
         The sample file must have been previously uploaded through `upload_sample`.
         Time required for analysis varies but is usually less than 15 minutes.
 
@@ -230,6 +233,7 @@ class FalconXSandbox(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_reports(self: object, parameters: dict = None, **kwargs) -> dict:
         """Find sandbox reports by providing an FQL filter and paging details.
+
         Returns a set of report IDs that match your criteria.
 
         Keyword arguments:
@@ -261,6 +265,7 @@ class FalconXSandbox(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_submissions(self: object, parameters: dict = None, **kwargs) -> dict:
         """Find submission IDs for uploaded files by providing an FQL filter and paging details.
+
         Returns a set of submission IDs that match your criteria.
 
         Keyword arguments:
@@ -296,8 +301,9 @@ class FalconXSandbox(ServiceClass):
                       parameters: dict = None,
                       **kwargs
                       ) -> dict:
-        """Upload a file for sandbox analysis. After uploading,
-        use `/falconx/entities/submissions/v1` to start analyzing the file.
+        """Upload a file for sandbox analysis.
+
+        After uploading, use `submit` to start analyzing the file.
 
         Keyword arguments:
         comment -- A descriptive comment to identify the file for other users. String.
@@ -366,7 +372,7 @@ class FalconXSandbox(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> object:
-        """Retrieves a full sandbox report.
+        """Retrieve a full sandbox report.
 
         Keyword arguments:
         ids -- ID(s) of report. Find a report ID from the response when
@@ -394,8 +400,9 @@ class FalconXSandbox(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_report(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Delete report based on the report ID. Operation can be checked for success
-        by polling for the report ID on the report-summaries endpoint.
+        """Delete a report based on the report ID.
+
+        Operation can be checked for success by polling for the report ID on the get_summary_reports endpoint.
 
         Keyword arguments:
         ids -- ID(s) of report to delete. Find a report ID from the response when
@@ -423,7 +430,8 @@ class FalconXSandbox(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_sample(self: object, *args, parameters: dict = None, **kwargs) -> object:
-        """Retrieves the file associated with the given ID (SHA256).
+        """Retrieve the file associated with the given ID (SHA256).
+
         Use the password_protected boolean to specify if you want your zip to be password
         protected with the value "infected".
 
@@ -455,7 +463,7 @@ class FalconXSandbox(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_sample(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Removes a sample, including file, meta and submissions from the collection.
+        """Remove a sample, including file, meta and submissions from the collection.
 
         Keyword arguments:
         ids -- SHA256 of the file to delete. Find the SHA256 from the response when
@@ -483,8 +491,9 @@ class FalconXSandbox(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def query_sample(self: object, body: dict = None, **kwargs) -> dict:
-        """Retrieves a list with sha256 of samples that exist and customer has rights to access
-        them, maximum number of accepted items is 200.
+        """Retrieve a list with sha256 of samples that exist and customer has rights to access.
+
+        Maximum number of accepted items is 200.
 
         Keyword arguments:
         ids -- List of SHA256s to confirm existence for. You will be returned a list of

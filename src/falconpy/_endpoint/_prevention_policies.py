@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._prevention_policies - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -184,7 +183,7 @@ _prevention_policies_endpoints = [
   [
     "getPreventionPolicies",
     "GET",
-    "/policy/entities/prevention/v1?ids={}",
+    "/policy/entities/prevention/v1",
     "Retrieve a set of Prevention Policies by specifying their IDs",
     "prevention_policies",
     [
@@ -234,7 +233,7 @@ _prevention_policies_endpoints = [
   [
     "deletePreventionPolicies",
     "DELETE",
-    "/policy/entities/prevention/v1?ids={}",
+    "/policy/entities/prevention/v1",
     "Delete a set of Prevention Policies by specifying their IDs",
     "prevention_policies",
     [

@@ -1,4 +1,4 @@
-"""Falcon Horizon for AWS API Interface Class
+"""Falcon Horizon for AWS API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._cspm_registration import _cspm_registration_endpoints as Endpoi
 
 
 class CSPMRegistration(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,9 +53,10 @@ class CSPMRegistration(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_aws_account(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Returns information about the current status of an AWS account.
+        """Return information about the current status of an AWS account.
 
         Keyword arguments:
         scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts
@@ -91,7 +92,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def create_aws_account(self: object, body: dict = None, **kwargs) -> dict:
-        """Creates a new account in our system for a customer and generates a script
+        """Register a new AWS account.
+
+        Creates a new account in our system for a customer and generates a script
         to run in their AWS cloud environment to grant CrowdStrike Horizon access.
 
         Keyword arguments:
@@ -191,7 +194,9 @@ class CSPMRegistration(ServiceClass):
             )
 
     def get_aws_console_setup_urls(self: object) -> dict:
-        """Returns a URL for customers to visit in their cloud environment
+        """Retrieve setup URLs for the AWS console.
+
+        Returns a URL for customers to visit in their cloud environment
         to grant access to CrowdStrike.
 
         This method does not accept arguments or keywords.
@@ -210,7 +215,9 @@ class CSPMRegistration(ServiceClass):
             )
 
     def get_aws_account_scripts_attachment(self: object) -> dict:
-        """Return a script for customers to run in their cloud environment
+        """Retrieve AWS account scripts.
+
+        Return a script for customers to run in their cloud environment
         to grant access to CrowdStrike for their AWS environment.
 
         This method does not accept arguments or keywords.
@@ -264,7 +271,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def create_azure_account(self: object, body: dict = None, **kwargs) -> dict:
-        """Creates a new account in our system for a customer and generates a script
+        """Register new Azure account.
+
+        Creates a new account in our system for a customer and generates a script
         to run in their cloud environment to grant CrowdStrike Horizon access.
 
         Keyword arguments:
@@ -331,7 +340,9 @@ class CSPMRegistration(ServiceClass):
                                        parameters: dict = None,
                                        **kwargs
                                        ) -> dict:
-        """Update an Azure service account in our system with the
+        """Update Azure account Client ID.
+
+        Update an Azure service account in our system with the
         user-created client_id created with the public key we've provided.
 
         Keyword arguments:
@@ -368,7 +379,9 @@ class CSPMRegistration(ServiceClass):
                                                     parameters: dict = None,
                                                     **kwargs
                                                     ) -> dict:
-        """Update an Azure service account in our system with the
+        """Update default subscription ID.
+
+        Update an Azure service account in our system with the
         user-created client_id created with the public key we've provided.
 
         Keyword arguments:
@@ -408,6 +421,8 @@ class CSPMRegistration(ServiceClass):
                                           **kwargs
                                           ) -> dict:
         """
+        Retrieve Azure user script.
+
         Return a script for customers to run in their cloud environment
         to grant access to CrowdStrike for their Azure environment.
 
@@ -532,7 +547,7 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_policy_settings(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Returns information about current policy settings.
+        """Return information about current policy settings.
 
         Keyword arguments:
         policy_id -- Policy ID. String.
@@ -588,8 +603,9 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_policy_settings(self: object, body: dict = None, **kwargs) -> dict:
-        """Updates a policy setting - can be used to override
-        policy severity or to disable a policy entirely.
+        """Update a policy setting.
+
+        Can be used to override policy severity or to disable a policy entirely.
 
         Keyword arguments:
         body -- full body payload, not required when using other keywords.
@@ -627,7 +643,7 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_scan_schedule(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Returns scan schedule configuration for one or more cloud platforms.
+        """Return scan schedule configuration for one or more cloud platforms.
 
         Keyword arguments:
         cloud_platform -- Cloud Platform. String. Allowed Values: `azure`, `aws`, `gcp`
@@ -656,7 +672,7 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_scan_schedule(self: object, body: dict = None, **kwargs) -> dict:
-        """Updates scan schedule configuration for one or more cloud platforms.
+        """Update scan schedule configuration for one or more cloud platforms.
 
         Keyword arguments:
         body -- full body payload, not required when using other keywords.

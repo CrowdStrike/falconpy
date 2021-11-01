@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._recon - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -75,7 +74,7 @@ _recon_endpoints = [
   [
     "GetActionsV1",
     "GET",
-    "/recon/entities/actions/v1?ids={}",
+    "/recon/entities/actions/v1",
     "Get actions based on their IDs. IDs can be retrieved using the GET /queries/actions/v1 endpoint.",
     "recon",
     [
@@ -139,7 +138,7 @@ _recon_endpoints = [
   [
     "GetNotificationsDetailedTranslatedV1",
     "GET",
-    "/recon/entities/notifications-detailed-translated/v1?ids={}",
+    "/recon/entities/notifications-detailed-translated/v1",
     "Get detailed notifications based on their IDs. These include the raw intelligence content that generated the match. "
     "This endpoint will return translated notification content. The only target language available is English. "
     "A single notification can be translated per request",
@@ -161,7 +160,7 @@ _recon_endpoints = [
   [
     "GetNotificationsDetailedV1",
     "GET",
-    "/recon/entities/notifications-detailed/v1?ids={}",
+    "/recon/entities/notifications-detailed/v1",
     "Get detailed notifications based on their IDs. These include the raw intelligence content that generated the match.",
     "recon",
     [
@@ -181,7 +180,7 @@ _recon_endpoints = [
   [
     "GetNotificationsTranslatedV1",
     "GET",
-    "/recon/entities/notifications-translated/v1?ids={}",
+    "/recon/entities/notifications-translated/v1",
     "Get notifications based on their IDs. IDs can be retrieved using the GET /queries/notifications/v1 endpoint. "
     "This endpoint will return translated notification content. The only target language available is English.",
     "recon",
@@ -202,7 +201,7 @@ _recon_endpoints = [
   [
     "GetNotificationsV1",
     "GET",
-    "/recon/entities/notifications/v1?ids={}",
+    "/recon/entities/notifications/v1",
     "Get notifications based on their IDs. IDs can be retrieved using the GET /queries/notifications/v1 endpoint.",
     "recon",
     [
@@ -236,7 +235,7 @@ _recon_endpoints = [
   [
     "DeleteNotificationsV1",
     "DELETE",
-    "/recon/entities/notifications/v1?ids={}",
+    "/recon/entities/notifications/v1",
     "Delete notifications based on IDs. Notifications cannot be recovered after they are deleted.",
     "recon",
     [
@@ -256,7 +255,7 @@ _recon_endpoints = [
   [
     "GetRulesV1",
     "GET",
-    "/recon/entities/rules/v1?ids={}",
+    "/recon/entities/rules/v1",
     "Get monitoring rules rules by provided IDs.",
     "recon",
     [
@@ -322,7 +321,7 @@ _recon_endpoints = [
   [
     "DeleteRulesV1",
     "DELETE",
-    "/recon/entities/rules/v1?ids={}",
+    "/recon/entities/rules/v1",
     "Delete monitoring rules.",
     "recon",
     [

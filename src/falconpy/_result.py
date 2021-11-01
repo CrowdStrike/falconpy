@@ -1,4 +1,4 @@
-"""API Response formatting class
+"""API Response formatting class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -40,12 +40,13 @@ For more information, please refer to <https://unlicense.org>
 
 class Result:
     """Callable subclass to handle parsing of result client output."""
+
     def __init__(self: object) -> dict:
-        """Instantiates the subclass and initializes the result object."""
+        """Instantiate the subclass and initializes the result object."""
         self.result_obj = {}
 
     def __call__(self: object, status_code: int, headers, body: dict) -> dict:
-        """Formats values into a properly formatted result object."""
+        """Format values into a properly formatted result object."""
         self.result_obj['status_code'] = status_code
         # force standard dictionary to prevent json issues
         self.result_obj['headers'] = dict(headers)

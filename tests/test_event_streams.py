@@ -31,8 +31,8 @@ class TestEventStreams:
     def stream_list():
         """list_available_streams"""
         return bool(falcon.listAvailableStreamsOAuth2(
-                parameters={"appId": f"{APP_ID}"}
-                )["status_code"] in AllowedResponses)
+                    app_id=APP_ID
+                    )["status_code"] in AllowedResponses)
 
     @staticmethod
     def stream_refresh():
@@ -46,7 +46,7 @@ class TestEventStreams:
             }
         stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True)
         with stream:
-            result = falcon.refreshActiveStreamSession(appId=f"{APP_ID}",
+            result = falcon.refreshActiveStreamSession(app_id=f"{APP_ID}",
                                                        action_name="refresh_active_stream_session",
                                                        partition="0"
                                                        )

@@ -1,4 +1,4 @@
-"""The CrowdStrike Falcon OAuth2 API SDK deprecated endpoints module
+"""The CrowdStrike Falcon OAuth2 API SDK deprecated endpoints module.
 
  @@@@@@@  @@@@@@@    @@@@@@   @@@  @@@  @@@  @@@@@@@    @@@@@@   @@@@@@@  @@@@@@@   @@@  @@@  @@@  @@@@@@@@
 @@@@@@@@  @@@@@@@@  @@@@@@@@  @@@  @@@  @@@  @@@@@@@@  @@@@@@@   @@@@@@@  @@@@@@@@  @@@  @@@  @@@  @@@@@@@@

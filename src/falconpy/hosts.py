@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Hosts API interface class
+"""CrowdStrike Falcon Hosts API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -43,7 +43,7 @@ from ._endpoint._hosts import _hosts_endpoints as Endpoints
 
 
 class Hosts(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -54,9 +54,11 @@ class Hosts(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters", "body"], default_types=["dict"])
     def perform_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
         """Take various actions on the hosts in your environment.
+
         Contain or lift containment on a host. Delete or restore a host.
 
         Keyword arguments:
@@ -178,7 +180,8 @@ class Hosts(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_device_details(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get details on one or more hosts by providing agent IDs (AID).
-        You can get a host's agent IDs (AIDs) from the /devices/queries/devices/v1 endpoint,
+
+        You can get a host's agent IDs (AIDs) from query_devices_by_filter,
         the Falcon console or the Streaming API.
 
         Keyword arguments:
@@ -251,9 +254,10 @@ class Hosts(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_devices_by_filter_scroll(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for hosts in your environment by platform, hostname,
-        IP, and other criteria with continuous pagination capability
-        (based on offset pointer which expires after 2 minutes with no maximum limit)
+        """Search for hosts in your environment by platform, hostname, IP, and other criteria.
+
+        Provides continuous pagination capability (based on offset pointer which expires after
+        2 minutes with no maximum limit)
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.

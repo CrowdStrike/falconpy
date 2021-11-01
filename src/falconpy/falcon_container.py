@@ -1,4 +1,4 @@
-"""Falcon Container API Interface Class
+"""Falcon Container API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -41,7 +41,7 @@ from ._endpoint._falcon_container import _falcon_container_endpoints as Endpoint
 
 
 class FalconContainer(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -52,8 +52,9 @@ class FalconContainer(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     def get_credentials(self: object) -> dict:
-        """Gets the registry credentials
+        """Retrieve the registry credentials.
 
         This method does not accept arguments or keywords.
 

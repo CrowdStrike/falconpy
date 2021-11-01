@@ -1,4 +1,4 @@
-"""ServiceClass base class
+"""ServiceClass base class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -45,10 +45,13 @@ from .oauth2 import OAuth2 as FalconAuth
 
 class ServiceClass:
     """Base class of all service classes. Contains the default __init__ method."""
+
     def __init__(self: object, auth_object: object = None,
                  creds: dict = None, base_url: str = "https://api.crowdstrike.com",
                  proxy: dict = None, **kwargs) -> object:
-        """Instantiates the object, ingests authorization credentials,
+        """Service Class base constructor.
+
+        Instantiates the object, ingests authorization credentials,
         and initializes attributes.
 
         Keyword arguments:
@@ -143,7 +146,7 @@ class ServiceClass:
             self.user_agent = user_agent
 
     def authenticated(self):
-        """Returns the current authentication status."""
+        """Return the current authentication status."""
         result = None
         if self.auth_object:
             result = self.auth_object.authenticated()
@@ -151,7 +154,7 @@ class ServiceClass:
         return result
 
     def token_expired(self):
-        """Returns a boolean reflecting token expiration status."""
+        """Return a boolean reflecting token expiration status."""
         result = None
         if self.auth_object:
             result = self.auth_object.token_expired()

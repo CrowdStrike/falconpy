@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Real Time Response Administration API interface class
+"""CrowdStrike Falcon Real Time Response Administration API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._real_time_response_admin import _real_time_response_admin_endpo
 
 
 class RealTimeResponseAdmin(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,14 +53,14 @@ class RealTimeResponseAdmin(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def batch_admin_command(self: object,
                             body: dict = None,
                             parameters: dict = None,
                             **kwargs
                             ) -> dict:
-        """Batch executes a RTR administrator command across
-        the hosts mapped to the given batch ID.
+        """Batch executes a RTR administrator command across the hosts mapped to a given batch ID.
 
         Keyword arguments:
         body -- full body payload, not required if keywords are used.
@@ -273,6 +273,7 @@ class RealTimeResponseAdmin(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_scripts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get custom-scripts based on the ID's given.
+
         These are used for the RTR `runscript` command.
 
         Keyword arguments:
@@ -289,7 +290,6 @@ class RealTimeResponseAdmin(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-GetScripts
         """
-
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -454,8 +454,9 @@ class RealTimeResponseAdmin(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def list_scripts(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Get a list of custom-script ID's that are
-        available to the user for the `runscript` command.
+        """Get a list of custom-script ID's that are available for the `runscript` command.
+
+        Only displays scripts the user has permissions to access.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.

@@ -1,4 +1,4 @@
-"""Internal payload handling library - Response Policy Payloads
+"""Internal payload handling library - Response Policy Payloads.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,8 @@ For more information, please refer to <https://unlicense.org>
 
 
 def response_policy_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted response policy payload.
+    """Create a properly formatted response policy payload.
+
     Supports create and update operations.
     {
         "resources": [

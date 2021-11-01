@@ -1,6 +1,6 @@
 #!/bin/bash
 # Command line usage: 
-#       util/unit-test.sh CLASS_NAME
+#       util/unit-test.sh MODULE_NAME
 # ex:   util/unit-test.sh sample_uploads
 #
 # If you don't specify a class, this script
@@ -11,4 +11,7 @@ if ! [ -z "$1" ]
 then
 	TARGET="tests/test_$1.py"	
 fi
-pytest -s -v $TARGET
+
+coverage run --rcfile=util/coverage.config -m pytest -s -v $TARGET
+coverage report
+# pytest -s -v $TARGET

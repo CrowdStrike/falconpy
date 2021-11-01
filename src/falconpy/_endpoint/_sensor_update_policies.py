@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._sensor_update_policies - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -272,7 +271,7 @@ _sensor_update_policies_endpoints = [
   [
     "getSensorUpdatePolicies",
     "GET",
-    "/policy/entities/sensor-update/v1?ids={}",
+    "/policy/entities/sensor-update/v1",
     "Retrieve a set of Sensor Update Policies by specifying their IDs",
     "sensor_update_policies",
     [
@@ -322,7 +321,7 @@ _sensor_update_policies_endpoints = [
   [
     "deleteSensorUpdatePolicies",
     "DELETE",
-    "/policy/entities/sensor-update/v1?ids={}",
+    "/policy/entities/sensor-update/v1",
     "Delete a set of Sensor Update Policies by specifying their IDs",
     "sensor_update_policies",
     [
@@ -344,7 +343,7 @@ _sensor_update_policies_endpoints = [
   [
     "getSensorUpdatePoliciesV2",
     "GET",
-    "/policy/entities/sensor-update/v2?ids={}",
+    "/policy/entities/sensor-update/v2",
     "Retrieve a set of Sensor Update Policies with additional support for uninstall protection by specifying their IDs",
     "sensor_update_policies",
     [

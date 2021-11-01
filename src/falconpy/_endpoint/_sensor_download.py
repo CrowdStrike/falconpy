@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._sensor_download - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -95,7 +94,7 @@ _sensor_download_endpoints = [
   [
     "GetSensorInstallersEntities",
     "GET",
-    "/sensors/entities/installers/v1?ids={}",
+    "/sensors/entities/installers/v1",
     "Get sensor installer details by provided SHA256 IDs",
     "sensor_download",
     [

@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._cloud_connect_aws - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -86,7 +85,7 @@ _cloud_connect_aws_endpoints = [
   [
     "GetAWSAccounts",
     "GET",
-    "/cloud-connect-aws/entities/accounts/v1?ids={}",
+    "/cloud-connect-aws/entities/accounts/v1",
     "Retrieve a set of AWS Accounts by specifying their IDs",
     "cloud_connect_aws",
     [
@@ -148,7 +147,7 @@ _cloud_connect_aws_endpoints = [
   [
     "DeleteAWSAccounts",
     "DELETE",
-    "/cloud-connect-aws/entities/accounts/v1?ids={}",
+    "/cloud-connect-aws/entities/accounts/v1",
     "Delete a set of AWS Accounts by specifying their IDs",
     "cloud_connect_aws",
     [
@@ -184,7 +183,7 @@ _cloud_connect_aws_endpoints = [
   [
     "VerifyAWSAccountAccess",
     "POST",
-    "/cloud-connect-aws/entities/verify-account-access/v1?ids={}",
+    "/cloud-connect-aws/entities/verify-account-access/v1",
     "Performs an Access Verification check on the specified AWS Account IDs",
     "cloud_connect_aws",
     [

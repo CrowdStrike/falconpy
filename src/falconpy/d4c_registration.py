@@ -1,4 +1,4 @@
-"""Falcon Discover registration for Azure / GCP API Interface Class
+"""Falcon Discover registration for Azure / GCP API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._d4c_registration import _d4c_registration_endpoints as Endpoint
 
 
 class D4CRegistration(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,6 +53,7 @@ class D4CRegistration(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_azure_account(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Return information about Azure account registration.
@@ -85,7 +86,9 @@ class D4CRegistration(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def create_azure_account(self: object, body: dict = None, **kwargs) -> dict:
-        """Creates a new account in our system for a customer and generates a
+        """Register a new Azure account.
+
+        Creates a new account in our system for a customer and generates a
         script for them to run in their cloud environment to grant us access.
 
         Keyword arguments:
@@ -127,7 +130,9 @@ class D4CRegistration(ServiceClass):
                                        parameters: dict = None,
                                        **kwargs
                                        ) -> dict:
-        """Update an Azure service account in our system by with the
+        """Update Azure account client ID.
+
+        Update an Azure service account in our system by with the
         user-created client_id created with the public key we've provided.
 
         Keyword arguments:
@@ -154,7 +159,9 @@ class D4CRegistration(ServiceClass):
             )
 
     def get_azure_user_scripts_attachment(self: object) -> dict:
-        """Return a script for customer to run in their cloud environment to
+        """Retrieve Azure user script attachment.
+
+        Return a script for customer to run in their cloud environment to
         grant us access to their Azure environment as a downloadable attachment.
 
         This method does not accept arguments or keywords.
@@ -173,7 +180,9 @@ class D4CRegistration(ServiceClass):
             )
 
     def get_azure_user_scripts(self: object) -> dict:
-        """Return a script for customer to run in their cloud
+        """Retrieve Azure user script.
+
+        Return a script for customer to run in their cloud
         environment to grant us access to their Azure environment.
 
         This method does not accept arguments or keywords.
@@ -193,7 +202,7 @@ class D4CRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_gcp_account(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Returns information about the current status of an GCP account.
+        """Return information about the current status of an GCP account.
 
         Keyword arguments:
         ids -- List of Response Policy IDs to retrieve. String or list of strings.
@@ -220,7 +229,9 @@ class D4CRegistration(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def create_gcp_account(self: object, body: dict = None, **kwargs) -> dict:
-        """Creates a new account in our system for a customer and generates a new service
+        """Register new GCP account.
+
+        Creates a new account in our system for a customer and generates a new service
         account for them to add access to in their GCP environment to grant us access.
 
         Keyword arguments:
@@ -256,7 +267,9 @@ class D4CRegistration(ServiceClass):
             )
 
     def get_gcp_user_scripts_attachment(self: object) -> dict:
-        """Return a script for customer to run in their cloud environment to
+        """Retrieve GCP user script attachment.
+
+        Return a script for customer to run in their cloud environment to
         grant us access to their GCP environment as a downloadable attachment.
 
         This method does not accept arguments or keywords.
@@ -275,7 +288,9 @@ class D4CRegistration(ServiceClass):
             )
 
     def get_gcp_user_scripts(self: object) -> dict:
-        """Return a script for customer to run in their cloud
+        """Retrieve GCP user script.
+
+        Return a script for customer to run in their cloud
         environment to grant us access to their GCP environment.
 
         This method does not accept arguments or keywords.

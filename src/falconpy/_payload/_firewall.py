@@ -1,4 +1,4 @@
-"""Internal payload handling library - Firewall Policy Payloads
+"""Internal payload handling library - Firewall Payloads.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,8 @@ For more information, please refer to <https://unlicense.org>
 
 
 def firewall_policy_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted firewall policy payload.
+    """Create a properly formatted firewall policy payload.
+
     Supports create and update operations. Single policy only.
     {
         "resources": [
@@ -66,7 +67,7 @@ def firewall_policy_payload(passed_keywords: dict) -> dict:
 
 
 def firewall_container_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted firewall policy container payload.
+    """Create a properly formatted firewall policy container payload.
 
     {
         "default_inbound": "string",
@@ -100,7 +101,8 @@ def firewall_container_payload(passed_keywords: dict) -> dict:
 
 
 def firewall_rule_group_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted firewall rule group payload.
+    """Create a properly formatted firewall rule group payload.
+
     {
         "description": "string",
         "enabled": true,
@@ -185,7 +187,7 @@ def firewall_rule_group_payload(passed_keywords: dict) -> dict:
 
 
 def firewall_rule_group_update_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted firewall rule group payload.
+    """Create a properly formatted firewall rule group payload.
 
     {
         "diff_operations": [

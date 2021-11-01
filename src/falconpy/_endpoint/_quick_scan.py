@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._quick_scan - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -55,7 +54,7 @@ _quick_scan_endpoints = [
   [
     "GetScans",
     "GET",
-    "/scanner/entities/scans/v1?ids={}",
+    "/scanner/entities/scans/v1",
     "Check the status of a volume scan. Time required for analysis increases with "
     "the number of samples in a volume but usually it should take less than 1 minute",
     "quick_scan",

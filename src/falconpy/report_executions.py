@@ -1,4 +1,4 @@
-"""Falcon Report Executions API Interface Class
+"""Falcon Report Executions API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -41,7 +41,7 @@ from ._endpoint._report_executions import _report_executions_endpoints as Endpoi
 
 
 class ReportExecutions(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -52,9 +52,10 @@ class ReportExecutions(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_download(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Get report entity download
+        """Get report entity download.
 
         Keyword arguments:
         ids -- ID of the report entity to retrieve.
@@ -106,7 +107,7 @@ class ReportExecutions(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_reports(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Find all report execution IDs matching the query with filter
+        """Find all report execution IDs matching the query with filter.
 
         Keyword arguments:
         filter -- FQL query specifying the filter parameters.

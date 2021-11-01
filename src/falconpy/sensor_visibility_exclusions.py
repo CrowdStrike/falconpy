@@ -1,4 +1,4 @@
-"""Falcon Sensor Visibility Exclusions API Interface Class
+"""Falcon Sensor Visibility Exclusions API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,11 +38,11 @@ For more information, please refer to <https://unlicense.org>
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import exclusion_payload
 from ._service_class import ServiceClass
-from ._endpoint._sensor_visibility_exclusions import _sensor_visibility_exclusions_endpoints as Endpoints
+from ._endpoint._sensor_visibility_exclusions import _sensor_visibility_exclusions_endpoints as EPS
 
 
 class SensorVisibilityExclusions(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,9 +53,10 @@ class SensorVisibilityExclusions(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Get a set of Sensor Visibility Exclusions by specifying their IDs
+        """Get a set of Sensor Visibility Exclusions by specifying their IDs.
 
         Keyword arguments:
         ids -- List of exclusion IDs to retrieve. String or list of strings.
@@ -73,7 +74,7 @@ class SensorVisibilityExclusions(ServiceClass):
         """
         return process_service_request(
             calling_object=self,
-            endpoints=Endpoints,
+            endpoints=EPS,
             operation_id="getSensorVisibilityExclusionsV1",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -81,7 +82,7 @@ class SensorVisibilityExclusions(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def create_exclusions(self: object, body: dict = None, **kwargs) -> dict:
-        """Create the Sensor Visibility exclusions
+        """Create the Sensor Visibility exclusions.
 
         Keyword arguments:
         body -- full body payload, not required when ids keyword is provided.
@@ -110,7 +111,7 @@ class SensorVisibilityExclusions(ServiceClass):
 
         return process_service_request(
             calling_object=self,
-            endpoints=Endpoints,
+            endpoints=EPS,
             operation_id="createSVExclusionsV1",
             body=body
             )
@@ -136,7 +137,7 @@ class SensorVisibilityExclusions(ServiceClass):
         """
         return process_service_request(
             calling_object=self,
-            endpoints=Endpoints,
+            endpoints=EPS,
             operation_id="deleteSensorVisibilityExclusionsV1",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
@@ -144,8 +145,7 @@ class SensorVisibilityExclusions(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_exclusions(self: object, body: dict = None, **kwargs) -> dict:
-        """Update the Sensor Visibility Exclusions
-
+        """Update the Sensor Visibility Exclusions.
 
         Keyword arguments:
         body -- full body payload, not required when ids keyword is provided.
@@ -178,7 +178,7 @@ class SensorVisibilityExclusions(ServiceClass):
 
         return process_service_request(
             calling_object=self,
-            endpoints=Endpoints,
+            endpoints=EPS,
             operation_id="updateSensorVisibilityExclusionsV1",
             body=body
             )
@@ -217,7 +217,7 @@ class SensorVisibilityExclusions(ServiceClass):
         """
         return process_service_request(
             calling_object=self,
-            endpoints=Endpoints,
+            endpoints=EPS,
             operation_id="querySensorVisibilityExclusionsV1",
             keywords=kwargs,
             params=parameters

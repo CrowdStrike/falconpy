@@ -1,4 +1,4 @@
-"""Internal payload handling library - MalQuery
+"""Internal payload handling library - MalQuery.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,8 @@ For more information, please refer to <https://unlicense.org>
 
 
 def malquery_fuzzy_payload(passed_keywords: dict) -> dict:
-    """Generates a properly formatted MalQuery fuzzy search payload
+    """Generate a properly formatted MalQuery fuzzy search payload.
+
     {
         "options": {
             "filter_meta": [
@@ -71,7 +72,7 @@ def malquery_fuzzy_payload(passed_keywords: dict) -> dict:
 
 
 def handle_malquery_search_params(passed_params: dict) -> dict:
-    """Creates the base payload used by exact_search and hunt"""
+    """Create the base payload used by exact_search and hunt."""
     returned_base = {}
     filters = passed_params.get("filter_filetypes", None)
     filter_meta = passed_params.get("filter_meta", None)
@@ -101,8 +102,8 @@ def handle_malquery_search_params(passed_params: dict) -> dict:
 
 
 def malquery_exact_search_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted payload for performing
-    a MalQuery exact search request
+    """Create a properly formatted payload for performing a MalQuery exact search request.
+
     {
     "options": {
         "filter_filetypes": [
@@ -133,8 +134,7 @@ def malquery_exact_search_payload(passed_keywords: dict) -> dict:
 
 
 def malquery_hunt_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted payload for performing
-    a MalQuery hunt request.
+    """Create a properly formatted payload for performing a MalQuery hunt request.
 
     {
         "options": {

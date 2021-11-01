@@ -1,4 +1,4 @@
-"""Falcon Installation Tokens API Interface Class
+"""Falcon Installation Tokens API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._installation_tokens import _installation_tokens_endpoints as En
 
 
 class InstallationTokens(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,9 +53,10 @@ class InstallationTokens(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def audit_events_read(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Gets the details of one or more audit events by id.
+        """Get the details of one or more audit events by id.
 
         Keyword arguments:
         ids -- List of audit event IDs to retrieve. String or list of strings.
@@ -99,7 +100,7 @@ class InstallationTokens(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def tokens_read(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Gets the details of one or more tokens by id.
+        """Get the details of one or more tokens by id.
 
         Keyword arguments:
         ids -- List of installation token IDs to retrieve. String or list of strings.
@@ -125,7 +126,7 @@ class InstallationTokens(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def tokens_create(self: object, body: dict = None, **kwargs) -> dict:
-        """Creates a token.
+        """Create a token.
 
         Keyword arguments:
         body -- full body payload, not required when using other keywords.
@@ -161,7 +162,7 @@ class InstallationTokens(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def tokens_delete(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Deletes a token immediately. To revoke a token, use PATCH tokens_update instead.
+        """Delete a token immediately. To revoke a token, use PATCH tokens_update instead.
 
         Keyword arguments:
         ids -- List of installation token IDs to delete. String or list of strings.
@@ -187,7 +188,8 @@ class InstallationTokens(ServiceClass):
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def tokens_update(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
-        """Updates one or more tokens.
+        """Update one or more tokens.
+
         Use this endpoint to edit labels, change expiration, revoke, or restore.
 
         Keyword arguments:

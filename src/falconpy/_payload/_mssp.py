@@ -1,4 +1,4 @@
-"""Internal payload handling library - Falcon Flight Control (MSSP)
+"""Internal payload handling library - Falcon Flight Control (MSSP).
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,8 @@ For more information, please refer to <https://unlicense.org>
 
 
 def mssp_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted Flight Control payload
+    """Create a properly formatted Flight Control payload.
+
     {
         "resources": [
             {

@@ -1,4 +1,4 @@
-"""Internal payload handling library - Indicators of Compromise
+"""Internal payload handling library - Indicators of Compromise.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,8 @@ For more information, please refer to <https://unlicense.org>
 
 
 def indicator_object(passed_keywords: dict) -> dict:  # pylint: disable=R0912  # noqa: C901
-    """Creates a properly formatted single indicator payload.
+    """Create a properly formatted single indicator payload.
+
     {
       "action": "string",
       "applied_globally": true,
@@ -103,7 +104,8 @@ def indicator_object(passed_keywords: dict) -> dict:  # pylint: disable=R0912  #
 
 
 def indicator_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted indicator payload.
+    """Create a properly formatted indicator payload.
+
     {
         "comment": "string",
         "indicators": [
@@ -145,7 +147,8 @@ def indicator_payload(passed_keywords: dict) -> dict:
 
 
 def indicator_update_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted indicator update payload.
+    """Create a properly formatted indicator update payload.
+
     {
         "bulk_update": {
             "action": "string",

@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Detections API interface class
+"""CrowdStrike Falcon Detections API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -43,7 +43,7 @@ from ._endpoint._detects import _detects_endpoints as Endpoints
 
 
 class Detects(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -54,6 +54,7 @@ class Detects(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["body"], default_types=["dict"])
     def get_aggregate_detects(self: object, body: dict = None, **kwargs) -> dict:
         """Get detect aggregates as specified via json in request body.

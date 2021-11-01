@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon User Management API interface class
+"""CrowdStrike Falcon User Management API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._user_management import _user_management_endpoints as Endpoints
 
 
 class UserManagement(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,6 +53,7 @@ class UserManagement(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_roles(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get info about a role.
@@ -148,6 +149,7 @@ class UserManagement(ServiceClass):
 
     def get_available_role_ids(self: object) -> dict:
         """Show role IDs for all roles available in your customer account.
+
         For more information on each role, provide the role ID to get_roles.
 
         This method does not accept arguments or keywords.
@@ -167,8 +169,9 @@ class UserManagement(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_user_role_ids(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Show role IDs of roles assigned to a user. For more information on each role,
-        provide the role ID to `/customer/entities/roles/v1`.
+        """Show role IDs of roles assigned to a user.
+
+        For more information on each role, provide the role ID to get_role.
 
         Keyword arguments:
         user_uuid -- User ID to retrieve roles for. String.
@@ -220,8 +223,9 @@ class UserManagement(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def create_user(self: object, body: dict = None, **kwargs) -> dict:
-        """Create a new user. After creating a user,
-        assign one or more roles with POST /user-roles/entities/user-roles/v1.
+        """Create a new user.
+
+        After creating a user, assign one or more roles with grant_user_role_ids.
 
         Keyword arguments:
         body -- full body payload, not required when using other keywords.
@@ -352,6 +356,7 @@ class UserManagement(ServiceClass):
 
     def retrieve_user_uuids_by_cid(self: object) -> dict:
         """List user IDs for all users in your customer account.
+
         For more information on each user, provide the user ID to retrieve_user.
 
         This method does not accept arguments or keywords.

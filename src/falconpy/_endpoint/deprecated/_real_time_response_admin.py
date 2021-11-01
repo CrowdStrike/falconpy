@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint.deprecated._real_time_response_admin - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -90,7 +89,7 @@ _real_time_response_admin_endpoints = [
   [
     "RTR-GetPut-Files",
     "GET",
-    "/real-time-response/entities/put-files/v1?ids={}",
+    "/real-time-response/entities/put-files/v1",
     "Get put-files based on the ID's given. These are used for the RTR `put` command.",
     "real_time_response_admin",
     [
@@ -146,7 +145,7 @@ _real_time_response_admin_endpoints = [
   [
     "RTR-DeletePut-Files",
     "DELETE",
-    "/real-time-response/entities/put-files/v1?ids={}",
+    "/real-time-response/entities/put-files/v1",
     "Delete a put-file based on the ID given.  Can only delete one file at a time.",
     "real_time_response_admin",
     [
@@ -162,7 +161,7 @@ _real_time_response_admin_endpoints = [
   [
     "RTR-GetScripts",
     "GET",
-    "/real-time-response/entities/scripts/v1?ids={}",
+    "/real-time-response/entities/scripts/v1",
     "Get custom-scripts based on the ID's given. These are used for the RTR `runscript` command.",
     "real_time_response_admin",
     [
@@ -316,7 +315,7 @@ _real_time_response_admin_endpoints = [
   [
     "RTR-DeleteScripts",
     "DELETE",
-    "/real-time-response/entities/scripts/v1?ids={}",
+    "/real-time-response/entities/scripts/v1",
     "Delete a custom-script based on the ID given.  Can only delete one script at a time.",
     "real_time_response_admin",
     [

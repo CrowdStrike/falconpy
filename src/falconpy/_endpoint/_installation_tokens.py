@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._installation_tokens - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -41,7 +40,7 @@ _installation_tokens_endpoints = [
   [
     "audit_events_read",
     "GET",
-    "/installation-tokens/entities/audit-events/v1?ids={}",
+    "/installation-tokens/entities/audit-events/v1",
     "Gets the details of one or more audit events by id.",
     "installation_tokens",
     [
@@ -68,7 +67,7 @@ _installation_tokens_endpoints = [
   [
     "tokens_read",
     "GET",
-    "/installation-tokens/entities/tokens/v1?ids={}",
+    "/installation-tokens/entities/tokens/v1",
     "Gets the details of one or more tokens by id.",
     "installation_tokens",
     [
@@ -101,7 +100,7 @@ _installation_tokens_endpoints = [
   [
     "tokens_update",
     "PATCH",
-    "/installation-tokens/entities/tokens/v1?ids={}",
+    "/installation-tokens/entities/tokens/v1",
     "Updates one or more tokens. Use this endpoint to edit labels, change expiration, revoke, or restore.",
     "installation_tokens",
     [
@@ -126,7 +125,7 @@ _installation_tokens_endpoints = [
   [
     "tokens_delete",
     "DELETE",
-    "/installation-tokens/entities/tokens/v1?ids={}",
+    "/installation-tokens/entities/tokens/v1",
     "Deletes a token immediately. To revoke a token, use PATCH /installation-tokens/entities/tokens/v1 instead.",
     "installation_tokens",
     [

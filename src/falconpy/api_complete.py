@@ -1,4 +1,4 @@
-"""All-in-one CrowdStrike Falcon OAuth2 API harness
+"""All-in-one CrowdStrike Falcon OAuth2 API harness.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,12 +38,13 @@ For more information, please refer to <https://unlicense.org>
 import time
 from ._util import _ALLOWED_METHODS
 from ._util import perform_request, generate_b64cred, generate_error_result
-from ._util import confirm_base_url, calc_url_from_args
+from ._util import confirm_base_url, args_to_params
 from ._endpoint import api_endpoints
 
 
 class APIHarness:
     """This one does it all. It's like the One Ring with significantly fewer orcs."""
+
     # pylint: disable=too-many-instance-attributes
 
     TOKEN_RENEW_WINDOW = 20  # in seconds
@@ -51,11 +52,16 @@ class APIHarness:
     def __init__(self: object,  # pylint: disable=R0913
                  base_url: str = "https://api.crowdstrike.com",
                  creds: dict = None,
-                 client_id: str = None, client_secret: str = None,
-                 ssl_verify: bool = True, proxy: dict = None,
+                 client_id: str = None,
+                 client_secret: str = None,
+                 ssl_verify: bool = True,
+                 proxy: dict = None,
                  timeout: float or tuple = None,
-                 user_agent: str = None) -> object:
-        """Instantiates an instance of the class, ingests credentials,
+                 user_agent: str = None
+                 ) -> object:
+        """Uber class constructor.
+
+        Instantiates an instance of the class, ingests credentials,
         the base URL and the SSL verification boolean.
         Afterwards class attributes are initialized.
 
@@ -98,8 +104,11 @@ class APIHarness:
         self.user_agent = user_agent  # Issue #365
 
     def valid_cred_format(self: object) -> bool:
-        """Returns a boolean indicating if the client_id and
-        client_secret are present in the creds dictionary."""
+        """Confirm credential dictionary format.
+
+        Returns a boolean indicating if the client_id and
+        client_secret are present in the creds dictionary.
+        """
         retval = False
         if "client_id" in self.creds and "client_secret" in self.creds:
             retval = True
@@ -107,7 +116,7 @@ class APIHarness:
         return retval
 
     def token_expired(self: object) -> bool:
-        """Returns a boolean based upon the token expiration status."""
+        """Return a boolean based upon the token expiration status."""
         retval = False
         if (time.time() - self.token_time) >= (self.token_expiration - self.TOKEN_RENEW_WINDOW):
             retval = True
@@ -115,7 +124,7 @@ class APIHarness:
         return retval
 
     def authenticate(self: object) -> bool:
-        """Generates an authorization token."""
+        """Generate an authorization token."""
         target = self.base_url+'/oauth2/token'
         data_payload = {}
         if self.valid_cred_format():
@@ -146,7 +155,7 @@ class APIHarness:
         return self.authenticated
 
     def deauthenticate(self: object) -> bool:
-        """Revokes the current authorization token. """
+        """Revoke the current authorization token."""
         target = str(self.base_url)+'/oauth2/revoke'
         b64cred = generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
         header_payload = {"Authorization": f"basic {b64cred}"}
@@ -165,8 +174,10 @@ class APIHarness:
         return revoked
 
     def _create_header_payload(self: object, passed_arguments: dict) -> dict:
-        """Creates the HTTP header payload based upon
-        the existing class headers and passed arguments."""
+        """Create the HTTP header payload.
+
+        Creates the HTTP header payload based upon the existing class headers and passed arguments.
+        """
         payload = self.headers()
         if "headers" in passed_arguments:
             for item in passed_arguments["headers"]:
@@ -177,7 +188,9 @@ class APIHarness:
         return payload
 
     def command(self: object, *args, **kwargs):
-        """Checks token expiration, renewing when necessary, then performs the request.
+        """Uber Class API command method.
+
+        Checks token expiration, renewing when necessary, then performs the request.
 
         Keyword arguments:
         action: str = ""                                    - API Operation ID to perform
@@ -208,19 +221,14 @@ class APIHarness:
         except IndexError:
             pass  # They didn't specify an action, use the default and try for an override instead
         uber_command = [a for a in self.commands if a[0] == kwargs["action"]]
-        if "override" in kwargs:
-            if kwargs["override"]:
-                uber_command = [["Manual"] + kwargs["override"].split(",")]
+        if kwargs.get("override", None):
+            uber_command = [["Manual"] + kwargs["override"].split(",")]
         if uber_command:
-            # Calculate our target endpoint based upon arguments passed to the function
-            target = calc_url_from_args(f"{self.base_url}{uber_command[0][2]}", kwargs)
-            # Calculate our header payload using arguments passed to the function and our token
-            header_payload = self._create_header_payload(kwargs)
-            # These have their defaults set by the force_defaults decorator
-            data_payload = kwargs.get("data", {})
-            body_payload = kwargs.get("body", {})
-            file_list = kwargs.get("files", [])
-            parameter_payload = kwargs.get("parameters", {})
+            # Retrieve the endpoint URL from the command list
+            target = f"{self.base_url}{uber_command[0][2]}"
+            if kwargs.get("partition", None) is not None:
+                # Partition needs to be embedded into the endpoint URL
+                target = target.format(str(kwargs.get("partition", None)))
             # Check for authentication
             if self.authenticated:
                 # Which HTTP method to execute
@@ -229,11 +237,15 @@ class APIHarness:
                 if selected_method in _ALLOWED_METHODS:
                     returned = perform_request(method=selected_method,
                                                endpoint=target,
-                                               body=body_payload,
-                                               data=data_payload,
-                                               params=parameter_payload,
-                                               headers=header_payload,
-                                               files=file_list,
+                                               body=kwargs.get("body", {}),
+                                               data=kwargs.get("data", {}),
+                                               params=args_to_params(kwargs.get("parameters", {}),
+                                                                     kwargs,
+                                                                     self.commands,
+                                                                     uber_command[0][0]
+                                                                     ),
+                                               headers=self._create_header_payload(kwargs),
+                                               files=kwargs.get("files", []),
                                                verify=self.ssl_verify,
                                                proxy=self.proxy,
                                                timeout=self.timeout,
@@ -242,7 +254,8 @@ class APIHarness:
                 else:
                     # Bad HTTP method
                     returned = generate_error_result(message="Invalid HTTP method specified.",
-                                                     code=405)
+                                                     code=405
+                                                     )
             else:
                 # Invalid token / Bad creds
                 returned = generate_error_result(message="Failed to issue token.", code=401)

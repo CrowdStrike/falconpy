@@ -1,4 +1,4 @@
-"""Falcon Sensor Download API Interface Class
+"""Falcon Sensor Download API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -43,7 +43,7 @@ from ._endpoint._sensor_download import _sensor_download_endpoints as Endpoints
 
 
 class SensorDownload(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -54,12 +54,13 @@ class SensorDownload(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_combined_sensor_installers_by_query(self: object,
                                                 parameters: dict = None,
                                                 **kwargs
                                                 ) -> dict:
-        """Retrieve all metadata for installers from provided query
+        """Retrieve all metadata for installers from provided query.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
@@ -94,7 +95,8 @@ class SensorDownload(ServiceClass):
                                   download_path: str = None,
                                   **kwargs) -> object:
         """Download the sensor by the sha256 id, into the specified directory.
-        The path will be created for the user if it does not already exist
+
+        The path will be created for the user if it does not already exist.
 
         Keyword arguments:
         download_path -- path to the folder to save installer file.
@@ -136,8 +138,9 @@ class SensorDownload(ServiceClass):
                                       parameters: dict = None,
                                       **kwargs
                                       ) -> object:
-        """For a given list of SHA256's, retrieve the metadata for each installer
-        such as the release_date and version among other fields.
+        """For a given list of SHA256's, retrieve the metadata for each installer.
+
+        (Examples: release_date, version).
 
         Keyword arguments:
         ids -- List of SHA256s for installers to retrieve details for. String or list of strings.
@@ -162,7 +165,7 @@ class SensorDownload(ServiceClass):
             )
 
     def get_sensor_installer_ccid(self: object) -> dict:
-        """Retrieve the CID for the current oauth environment
+        """Retrieve the CID for the current oauth environment.
 
         This method does not accept arguments.
 
@@ -181,7 +184,7 @@ class SensorDownload(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_sensor_installers_by_query(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve a list of SHA256 for installers based on the filter
+        """Retrieve a list of SHA256 for installers based on the filter.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.

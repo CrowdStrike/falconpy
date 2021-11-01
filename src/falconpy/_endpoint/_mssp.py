@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._mssp - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -41,7 +40,7 @@ _mssp_endpoints = [
   [
     "getChildren",
     "GET",
-    "/mssp/entities/children/v1?ids={}",
+    "/mssp/entities/children/v1",
     "Get link to child customer by child CID(s)",
     "mssp",
     [
@@ -178,7 +177,7 @@ _mssp_endpoints = [
   [
     "getRolesByID",
     "GET",
-    "/mssp/entities/mssp-roles/v1?ids={}",
+    "/mssp/entities/mssp-roles/v1",
     "Get MSSP Role assignment(s). MSSP Role assignment is of the format :.",
     "mssp",
     [

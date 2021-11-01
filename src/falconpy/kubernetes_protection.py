@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Kubernetes Protection API interface class
+"""CrowdStrike Falcon Kubernetes Protection API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -41,7 +41,7 @@ from ._endpoint._kubernetes_protection import _kubernetes_protection_endpoints a
 
 
 class KubernetesProtection(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -52,9 +52,10 @@ class KubernetesProtection(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_aws_accounts(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Provides a list of AWS accounts.
+        """Provide a list of AWS accounts.
 
         Keyword arguments:
         ids -- AWS Account IDs. String or list of strings.
@@ -84,8 +85,7 @@ class KubernetesProtection(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def create_aws_account(self: object, body: dict = None, **kwargs) -> dict:
-        """Creates a new AWS account in our system for a
-        customer and generates the installation script.
+        """Create a new AWS customer account in our system and generates the installation script.
 
         Keyword arguments:
         body -- full body payload, not required if using other keywords.
@@ -152,7 +152,7 @@ class KubernetesProtection(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def update_aws_account(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Updates the AWS account per the query parameters provided
+        """Update the AWS account per the query parameters provided.
 
         Keyword arguments:
         ids -- ID(s) of AWS accounts to update. String or list of strings.
@@ -178,7 +178,7 @@ class KubernetesProtection(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_locations(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Provides the cloud locations acknowledged by the Kubernetes Protection service
+        """Provide the cloud locations acknowledged by the Kubernetes Protection service.
 
         Keyword arguments:
         clouds -- Cloud provider. String or list of strings.
@@ -204,8 +204,7 @@ class KubernetesProtection(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_helm_values_yaml(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Provides a sample Helm values.yaml file for a customer to install
-        alongside the agent Helm chart.
+        """Provide a sample Helm values.yaml file to install alongside the agent Helm chart.
 
         Keyword arguments:
         cluster_name -- Cloud provider. String.
@@ -231,7 +230,7 @@ class KubernetesProtection(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def regenerate(self: object, body: dict = None) -> dict:
-        """Regenerate API key for docker registry integrations
+        """Regenerate API key for docker registry integrations.
 
         Keyword arguments:
         body -- Body payload is accepted but is not used.
@@ -254,7 +253,7 @@ class KubernetesProtection(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_clusters(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Provides the clusters acknowledged by the Kubernetes Protection service
+        """Provide the clusters acknowledged by the Kubernetes Protection service.
 
         Keyword arguments:
         account_ids -- Cluster Account IDs. For EKS, this would be the AWS Account ID.
@@ -292,7 +291,7 @@ class KubernetesProtection(ServiceClass):
                      parameters: dict = None,
                      **kwargs
                      ) -> dict:
-        """Triggers a dry run or a full scan of a customer's kubernetes footprint
+        """Trigger a dry run or a full scan of a customer's kubernetes footprint.
 
         Keyword arguments:
         body -- Body payload is accepted but is not used.

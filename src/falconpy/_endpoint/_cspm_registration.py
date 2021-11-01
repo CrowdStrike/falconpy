@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._cspm_registration - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -41,7 +40,7 @@ _cspm_registration_endpoints = [
   [
     "GetCSPMAwsAccount",
     "GET",
-    "/cloud-connect-cspm-aws/entities/account/v1?ids={}",
+    "/cloud-connect-cspm-aws/entities/account/v1",
     "Returns information about the current status of an AWS account.",
     "cspm_registration",
     [
@@ -141,7 +140,7 @@ _cspm_registration_endpoints = [
   [
     "DeleteCSPMAwsAccount",
     "DELETE",
-    "/cloud-connect-cspm-aws/entities/account/v1?ids={}",
+    "/cloud-connect-cspm-aws/entities/account/v1",
     "Deletes an existing AWS account or organization in our system.",
     "cspm_registration",
     [
@@ -190,7 +189,7 @@ _cspm_registration_endpoints = [
   [
     "GetCSPMAzureAccount",
     "GET",
-    "/cloud-connect-cspm-azure/entities/account/v1?ids={}",
+    "/cloud-connect-cspm-azure/entities/account/v1",
     "Return information about Azure account registration",
     "cspm_registration",
     [
@@ -259,7 +258,7 @@ _cspm_registration_endpoints = [
   [
     "DeleteCSPMAzureAccount",
     "DELETE",
-    "/cloud-connect-cspm-azure/entities/account/v1?ids={}",
+    "/cloud-connect-cspm-azure/entities/account/v1",
     "Deletes an Azure subscription from the system.",
     "cspm_registration",
     [
@@ -496,7 +495,7 @@ _cspm_registration_endpoints = [
   [
     "GetCSPMPolicy",
     "GET",
-    "/settings/entities/policy-details/v1?ids={}",
+    "/settings/entities/policy-details/v1",
     "Given a policy ID, returns detailed policy information.",
     "cspm_registration",
     [

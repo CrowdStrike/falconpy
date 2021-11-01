@@ -1,4 +1,4 @@
-"""Internal utilities library
+"""Internal utilities library.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,6 @@ For more information, please refer to <https://unlicense.org>
 import base64
 import functools
 from json.decoder import JSONDecodeError
-# pylint: disable=E0401  # Pylint might not have these in our path
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
@@ -54,7 +53,7 @@ _USER_AGENT = f"{_TITLE}/{str(_VERSION)}"
 
 
 def validate_payload(validator: dict, params: dict, required: list = None) -> bool:
-    """Validates parameters and body payloads sent to the API."""
+    """Validate parameters and body payloads sent to the API."""
     # Repurposed with permission from
     # https://github.com/yaleman/crowdstrike_api
     #         __
@@ -82,20 +81,6 @@ def validate_payload(validator: dict, params: dict, required: list = None) -> bo
     return True
 
 
-def parse_id_list(id_list) -> str:
-    """Converts a list of IDs to a comma-delimited string."""
-    if isinstance(id_list, list):  # pragma: no cover   DEPRECATING - jshcodes@CrowdStrike
-        returned = ""
-        for string in id_list:
-            if len(returned) > 1:
-                returned += ","
-            returned += str(string)
-    else:
-        returned = id_list
-
-    return returned
-
-
 def generate_b64cred(client_id: str, client_secret: str) -> str:
     """base64 encodes passed client_id and client_secret for authorization headers."""
     cred = f"{client_id}:{client_secret}"
@@ -106,8 +91,10 @@ def generate_b64cred(client_id: str, client_secret: str) -> str:
 
 
 def handle_single_argument(passed_arguments: list, passed_keywords: dict, search_key: str) -> dict:
-    """Reviews arguments passed to a method and injects them into the
-    keyword dictionary if they match the search string
+    """Handle a single argument that is provided without keywords.
+
+    Reviews arguments passed to a method and injects them into the keyword dictionary if they
+    match the search string.
     """
     if len(passed_arguments) > 0:
         passed_keywords[search_key] = passed_arguments[0]
@@ -116,7 +103,9 @@ def handle_single_argument(passed_arguments: list, passed_keywords: dict, search
 
 
 def force_default(defaults: list, default_types: list = None):
-    """This function forces default values and is designed to decorate other functions.
+    """Force default values.
+
+    Intended to decorate other functions.
 
     Keyword arguments:
     defaults = list of values to default
@@ -129,10 +118,11 @@ def force_default(defaults: list, default_types: list = None):
 
     def wrapper(func):
         """Inner wrapper."""
-
         @functools.wraps(func)
         def factory(*args, **kwargs):
-            """This method is a factory and runs through keywords passed to the called function,
+            """Parameter factory.
+
+            This method is a factory and runs through keywords passed to the called function,
             setting defaults on values within the **kwargs dictionary when necessary
             as specified in our "defaults" list that is passed to the parent wrapper.
             """
@@ -158,7 +148,7 @@ def force_default(defaults: list, default_types: list = None):
 
 
 def service_request(caller: object = None, **kwargs) -> object:  # May return dict or object datatypes
-    """Checks for token expiration, refreshing if possible and then performs the request."""
+    """Check for token expiration, refresh if possible and then perform the request."""
     if caller:
         try:
             if caller.auth_object:
@@ -193,7 +183,7 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
 
 @force_default(defaults=["headers"], default_types=["dict"])
 def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> object:  # May return dict or object datatypes
-    """Leverages the requests library to perform the requested CrowdStrike OAuth2 API operation.
+    """Leverage the requests library to perform the requested CrowdStrike OAuth2 API operation.
 
     Keyword arguments:
     method: str - HTTP method to use when communicating with the API
@@ -205,7 +195,7 @@ def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> objec
     params: dict - HTTP query string parameters to send to the API
         - Example: {"limit": 1, "sort": "state.asc"}
     body: dict - HTTP body payload to send to the API
-        - Example: {"ids": "123456789abcdefg,987654321zyxwvutsr"}
+        - Example: {"ids": ["123456789abcdefg", "987654321zyxwvutsr"]}
     verify: bool - Enable / Disable SSL certificate checks
         - Example: True
     data - Encoded data to send to the API
@@ -279,12 +269,12 @@ def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> objec
 
 
 def generate_error_result(message: str = "An error has occurred. Check your payloads and try again.", code: int = 500) -> dict:
-    """Normalized error messaging handler."""
+    """Normalize error messages."""
     return Result()(status_code=code, headers={}, body={"errors": [{"message": f"{message}"}], "resources": []})
 
 
 def generate_ok_result(message: str = "Request returned with success", code: int = 200, **kwargs) -> dict:
-    """Normalized OK messaging handler."""
+    """Normalize OK messages."""
     return_headers = kwargs.get("headers", {})
     return Result()(status_code=code, headers=return_headers, body={"message": message, "resources": []})
 
@@ -307,50 +297,45 @@ def get_default(types: list, position: int):
     return retval
 
 
-def calc_url_from_args(target_url: str, passed_args: dict) -> str:
-    """This function reviews arguments passed to the Uber class
-    command method and updates the target URL accordingly."""
-    if "ids" in passed_args:
-        id_list = str(parse_id_list(passed_args['ids'])).replace(",", "&ids=")
-        target_url = target_url.format(id_list)
-    if "action_name" in passed_args:
-        delim = "&" if "?" in target_url else "?"
-        # Additional action_name restrictions?
-        target_url = f"{target_url}{delim}action_name={str(passed_args['action_name'])}"
-    if "partition" in passed_args:
-        target_url = target_url.format(str(passed_args['partition']))
-    if "file_name" in passed_args:
-        delim = "&" if "?" in target_url else "?"
-        target_url = f"{target_url}{delim}file_name={str(passed_args['file_name'])}"
-
-    # Bug fix: Issue #314 - Passing an empty ids array is causing a 400 in the IOC API
-    target_url = target_url.replace("?ids={}", "")
-
-    return target_url
-
-
 def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epname: str) -> dict:
-    """This function reviews arguments passed to the function
-    against arguments accepted by the endpoint.
+    """Query String parameter abstraction handler.
 
-    If a valid argument is passed, it is added and returned as part of the payload dictionary.
+    This function reviews arguments passed to the function against arguments accepted by the
+    endpoint. If a valid argument is passed, it is added and returned as part of the QueryString
+    payload dictionary.
 
     This function will convert passed comma-delimited strings to list data types when necessary.
+
+    The method only handles QueryString parameters, and will skip any Body payload parameters it
+    encounters.
+
+    When using override functionality via the Uber class, this method skips processing. (Override
+    functionality does not support QueryString parameter abstraction.)
+
+    Keyword arguments:
+    payload -- Existing QueryString parameter payload. Dictionary.
+    passed_arguments -- Keywords provided to the calling method.
+    endpoints -- List of API endpoints available to the calling method.
+    epname -- Operation ID to be retrieved from the endpoints list.
+
+    Returns: dictionary representing QueryString parameters.
     """
-    for arg in passed_arguments:
-        eps = [ep[5] for ep in endpoints if epname in ep[0]][0]
-        try:
-            argument = [param for param in eps if param["name"] == arg][0]
-            if argument:
-                arg_name = argument["name"]
-                if argument["type"] == "array":
-                    if isinstance(passed_arguments[arg_name], (str)):
-                        passed_arguments[arg_name] = passed_arguments[arg_name].split(",")
-                # More data type validation can go here
-                payload[arg_name] = passed_arguments[arg_name]
-        except IndexError:
-            # Unrecognized argument
-            pass
+    if epname != "Manual":  # pylint: disable=R1702
+        for arg in passed_arguments:
+            eps = [ep[5] for ep in endpoints if epname in ep[0]][0]
+            try:
+                argument = [param for param in eps if param["name"] == arg][0]
+                if argument:
+                    arg_name = argument["name"]
+                    if "type" in argument:  # Body payload parameters do not have a type field
+                        if argument["type"] == "array":
+                            if isinstance(passed_arguments[arg_name], (str)):
+                                passed_arguments[arg_name] = passed_arguments[arg_name].split(",")
+                        # More data type validation can go here
+                        payload[arg_name] = passed_arguments[arg_name]
+            except IndexError:
+                # Unrecognized argument
+                pass
 
     return payload
 
@@ -360,27 +345,26 @@ def process_service_request(calling_object: object,
                             operation_id: str,
                             **kwargs
                             ):
-    """Performs a request originating from a service class module.
+    """Perform a request originating from a service class module.
+
     Calculates the target_url based upon the provided operation ID and endpoint list.
 
     Keyword arguments:
-        endpoints: list - List of service class endpoints, defined as Endpoints in a service class. [required]
-        operation_id: The name of the operation ID. Normally this is also the function name from the service class. [required]
-        method: HTTP method to execute. GET, POST, PATCH, DELETE, PUT accepted. Defaults to GET.
-        keywords: Dictionary of kwargs that were passed to the function within the service class.
-        params: Dictionary of parameters passed to the service class function.
-        headers: Dictionary of headers passed to and calculated by the service class function.
-        body: Dictionary representing the body payload passed to the service class function.
-        data: Dictionary representing the data payload passed to the service class function.
-        files: List of files to be uploaded.
-        partition: ID of the partition to open (Event Streams API)
-        body_validator: Dictionary containing details regarding body payload validation
-        body_required: List of required body payload parameters
+    endpoints -- list - List of service class endpoints, defined as Endpoints in a service class. [required]
+    operation_id -- The name of the operation ID. Normally this is also the function name from the service class. [required]
+    method -- HTTP method to execute. GET, POST, PATCH, DELETE, PUT accepted. Defaults to GET.
+    keywords -- Dictionary of kwargs that were passed to the function within the service class.
+    params -- Dictionary of parameters passed to the service class function.
+    headers -- Dictionary of headers passed to and calculated by the service class function.
+    body -- Dictionary representing the body payload passed to the service class function.
+    data -- Dictionary representing the data payload passed to the service class function.
+    files -- List of files to be uploaded.
+    partition -- ID of the partition to open (Event Streams API)
+    body_validator -- Dictionary containing details regarding body payload validation
+    body_required -- List of required body payload parameters
     """
     target_endpoint = [ep for ep in endpoints if operation_id == ep[0]][0]
-    # ID replacement happening at the end of this statement planned for removal in v0.6.0+
-    # (after the uber class has been updated to no longer need it and the _endpoints module has been updated)
-    target_url = f"{calling_object.base_url}{target_endpoint[2]}".replace("?ids={}", "")
+    target_url = f"{calling_object.base_url}{target_endpoint[2]}"
     target_method = target_endpoint[1]
     passed_partition = kwargs.get("partition", None)
     if passed_partition:
@@ -402,18 +386,19 @@ def process_service_request(calling_object: object,
         "body": kwargs.get("body", None),
         "data": kwargs.get("data", None),
         "files": kwargs.get("files", None),
-        "body_validator": kwargs.get("body_validator", None),   # May be deprecated after BODY payload abstraction
-        "body_required": kwargs.get("body_required", None)      # May be deprecated after BODY payload abstraction
+        "body_validator": kwargs.get("body_validator", None),
+        "body_required": kwargs.get("body_required", None)
     }
 
     return service_request(**new_keywords)
 
 
 def confirm_base_url(provided_base: str = "https://api.crowdstrike.com"):
-    """Confirms the passed base_url value matches URL syntax. If it does
-    not, it is looked up in the BaseURL enum. If the value is not found
-    within the enum, https:// is prepended to the value and then it is
-    used for API requests."""
+    """Confirm the passed base_url value matches URL syntax.
+
+    If it does not, it is looked up in the BaseURL enum. If the value is not found
+    within the enum, https:// is prepended to the value and then it is used for API requests.
+    """
     returned_base = "https://api.crowdstrike.com"
     if "://" not in provided_base:
         # They're passing the name instead of the URL

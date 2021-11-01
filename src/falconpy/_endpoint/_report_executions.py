@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._report_executions - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -41,7 +40,7 @@ _report_executions_endpoints = [
   [
     "report_executions_download_get",
     "GET",
-    "/reports/entities/report-executions-download/v1?ids={}",
+    "/reports/entities/report-executions-download/v1",
     "Get report entity download",
     "report_executions",
     [
@@ -57,7 +56,7 @@ _report_executions_endpoints = [
   [
     "report_executions_get",
     "GET",
-    "/reports/entities/report-executions/v1?ids={}",
+    "/reports/entities/report-executions/v1",
     "Retrieve report details for the provided report IDs.",
     "report_executions",
     [

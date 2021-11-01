@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Host Groups API interface class
+"""CrowdStrike Falcon Host Groups API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import generate_error_result, force_default
+from ._util import generate_error_result, force_default, args_to_params
 from ._util import handle_single_argument, process_service_request
 from ._payload import host_group_create_payload, host_group_update_payload
 from ._payload import generic_payload_list
@@ -44,7 +44,7 @@ from ._endpoint._host_group import _host_group_endpoints as Endpoints
 
 
 class HostGroup(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -55,10 +55,14 @@ class HostGroup(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_group_members(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for members of a Host Group in your environment by providing an FQL filter
-        and paging details. Returns a set of host details which match the filter criteria.
+        """Search for members of a Host Group in your environment.
+
+        Provide a FQL filter and paging details.
+
+        Returns a set of host details which match the filter criteria.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
@@ -91,8 +95,9 @@ class HostGroup(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_host_groups(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Host Groups in your environment by providing an FQL filter and
-        paging details. Returns a set of Host Groups which match the filter criteria.
+        """Search for Host Groups in your environment by providing an FQL filter and paging details.
+
+        Returns a set of Host Groups which match the filter criteria.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
@@ -171,16 +176,14 @@ class HostGroup(ServiceClass):
             if kwargs.get("action_parameters", None):
                 body["action_parameters"] = kwargs.get("action_parameters", None)
 
-#        _allowed_actions = ['add-hosts', 'remove-hosts']
-#        operation_id = "performGroupAction"
-#        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-#        action_name = parameter_payload.get("action_name", "Not Specified")
-#        act = kwargs.get("action_name", "Not Specified")
-        if kwargs.get("action_name", "Not Specified").lower() in ['add-hosts', 'remove-hosts']:
+        _allowed_actions = ['add-hosts', 'remove-hosts']
+        operation_id = "performGroupAction"
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
+        if parameter_payload.get("action_name", "Not Specified").lower() in _allowed_actions:
             returned = process_service_request(
                             calling_object=self,
                             endpoints=Endpoints,
-                            operation_id="performGroupAction",
+                            operation_id=operation_id,
                             body=body,
                             keywords=kwargs,
                             params=parameters
@@ -284,8 +287,7 @@ class HostGroup(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_host_groups(self: object, body: dict = None, **kwargs) -> dict:
-        """
-        Update Host Groups by specifying the ID of the group and details to update.
+        """Update Host Groups by specifying the ID of the group and details to update.
 
         Keyword arguments:
         assignment_rule -- Assignment rule to apply. String.
@@ -325,8 +327,11 @@ class HostGroup(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_group_members(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for members of a Host Group in your environment by providing an FQL filter
-        and paging details. Returns a set of Agent IDs which match the filter criteria.
+        """Search for members of a Host Group in your environment.
+
+        Provide a FQL filter and paging details.
+
+        Returns a set of Agent IDs which match the filter criteria.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
@@ -358,8 +363,9 @@ class HostGroup(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_host_groups(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Host Groups in your environment by providing an FQL filter and
-        paging details. Returns a set of Host Group IDs which match the filter criteria.
+        """Search for Host Groups in your environment by providing an FQL filter and paging details.
+
+        Returns a set of Host Group IDs which match the filter criteria.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.

@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._ml_exclusions - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -41,7 +40,7 @@ _ml_exclusions_endpoints = [
   [
     "getMLExclusionsV1",
     "GET",
-    "/policy/entities/ml-exclusions/v1?ids={}",
+    "/policy/entities/ml-exclusions/v1",
     "Get a set of ML Exclusions by specifying their IDs",
     "ml_exclusions",
     [
@@ -89,7 +88,7 @@ _ml_exclusions_endpoints = [
   [
     "deleteMLExclusionsV1",
     "DELETE",
-    "/policy/entities/ml-exclusions/v1?ids={}",
+    "/policy/entities/ml-exclusions/v1",
     "Delete the ML exclusions by id",
     "ml_exclusions",
     [

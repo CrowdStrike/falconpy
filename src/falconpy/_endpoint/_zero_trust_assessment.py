@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._zero_trust_assessment - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -41,7 +40,7 @@ _zero_trust_assessment_endpoints = [
   [
     "getAssessmentV1",
     "GET",
-    "/zero-trust-assessment/entities/assessments/v1?ids={}",
+    "/zero-trust-assessment/entities/assessments/v1",
     "Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID) and a customer ID (CID).",
     "zero_trust_assessment",
     [

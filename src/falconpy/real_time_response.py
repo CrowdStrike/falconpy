@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Real Time Response API interface class
+"""CrowdStrike Falcon Real Time Response API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -43,7 +43,7 @@ from ._endpoint._real_time_response import _real_time_response_endpoints as Endp
 
 
 class RealTimeResponse(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -54,6 +54,7 @@ class RealTimeResponse(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["body"], default_types=["list"])
     def aggregate_sessions(self: object, body: list = None, **kwargs) -> dict:
         """Get aggregates on session data.
@@ -140,8 +141,7 @@ class RealTimeResponse(ServiceClass):
                                        parameters: dict = None,
                                        **kwargs
                                        ) -> dict:
-        """Batch executes a RTR active-responder command across
-        the hosts mapped to the given batch ID.
+        """Batch executes a RTR active-responder command across hosts mapped to a given batch ID.
 
         Keyword arguments:
         body -- full body payload, not required if keywords are used.
@@ -243,7 +243,8 @@ class RealTimeResponse(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def batch_get_command_status(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Retrieves the status of the specified batch get command.
+        """Retrieve the status of the specified batch get command.
+
         Will return successful files when they are finished processing.
 
         Keyword arguments:
@@ -280,6 +281,7 @@ class RealTimeResponse(ServiceClass):
                           **kwargs
                           ) -> dict:
         """Batch executes `get` command across hosts to retrieve files.
+
         After this call is made batch_get_command_status is used to query for the results.
 
         Keyword arguments:
@@ -331,6 +333,7 @@ class RealTimeResponse(ServiceClass):
                             **kwargs
                             ) -> dict:
         """Batch initialize a RTR session on multiple hosts.
+
         Before any RTR commands can be used, an active session is needed on the host.
 
         Keyword arguments:
@@ -383,6 +386,7 @@ class RealTimeResponse(ServiceClass):
                                **kwargs
                                ) -> dict:
         """Batch refresh a RTR session on multiple hosts.
+
         RTR sessions will expire after 10 minutes unless refreshed.
 
         Keyword arguments:

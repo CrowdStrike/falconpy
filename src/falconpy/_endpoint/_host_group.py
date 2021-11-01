@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._host_group - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -160,7 +159,7 @@ _host_group_endpoints = [
   [
     "getHostGroups",
     "GET",
-    "/devices/entities/host-groups/v1?ids={}",
+    "/devices/entities/host-groups/v1",
     "Retrieve a set of Host Groups by specifying their IDs",
     "host_group",
     [
@@ -210,7 +209,7 @@ _host_group_endpoints = [
   [
     "deleteHostGroups",
     "DELETE",
-    "/devices/entities/host-groups/v1?ids={}",
+    "/devices/entities/host-groups/v1",
     "Delete a set of Host Groups by specifying their IDs",
     "host_group",
     [

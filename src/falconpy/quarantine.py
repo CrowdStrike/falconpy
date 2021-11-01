@@ -1,4 +1,4 @@
-"""Falcon Quarantine API Interface Class
+"""Falcon Quarantine API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._quarantine import _quarantine_endpoints as Endpoints
 
 
 class Quarantine(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,9 +53,10 @@ class Quarantine(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def action_update_count(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Returns count of potentially affected quarantined files for each action.
+        """Return the count of potentially affected quarantined files for each action.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
@@ -187,7 +188,7 @@ class Quarantine(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_quarantined_detects_by_id(self: object, body: dict = None, **kwargs) -> dict:
-        """Apply action by quarantine file ids
+        """Apply action by quarantine file ids.
 
         Keyword arguments:
         action -- Action to perform against the quarantined file. String.
@@ -247,7 +248,10 @@ class Quarantine(ServiceClass):
                   last_behavior                 max_severity
 
         q -- Match phrase_prefix query criteria, searches all filter string fields.
-             (sha256, state, paths.path, paths.state, hostname, username, date_updated, date_created)
+             sha256                 hostname
+             state                  username
+             paths.path             date_updated
+             paths.state            date_created
 
         limit -- The maximum number of records to return in this response. Integer.
                  Use with the offset parameter to manage pagination of results.

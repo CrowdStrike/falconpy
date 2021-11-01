@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._user_management - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -41,7 +40,7 @@ _user_management_endpoints = [
   [
     "GetRoles",
     "GET",
-    "/user-roles/entities/user-roles/v1?ids={}",
+    "/user-roles/entities/user-roles/v1",
     "Get info about a role",
     "user_management",
     [
@@ -83,7 +82,7 @@ _user_management_endpoints = [
   [
     "RevokeUserRoleIds",
     "DELETE",
-    "/user-roles/entities/user-roles/v1?ids={}",
+    "/user-roles/entities/user-roles/v1",
     "Revoke one or more roles from a user",
     "user_management",
     [
@@ -136,7 +135,7 @@ _user_management_endpoints = [
   [
     "RetrieveUser",
     "GET",
-    "/users/entities/users/v1?ids={}",
+    "/users/entities/users/v1",
     "Get info about a user",
     "user_management",
     [

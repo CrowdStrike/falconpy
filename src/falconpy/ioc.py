@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Indicators of Compromise API interface class v2
+"""CrowdStrike Falcon Indicators of Compromise API interface class v2.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -43,7 +43,7 @@ from ._endpoint._iocs import _iocs_endpoints as LegacyEndpoints
 
 
 class IOC(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -54,6 +54,7 @@ class IOC(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def indicator_combined(self: object, parameters: dict = None, **kwargs) -> dict:
         """Get Combined for Indicators.
@@ -131,7 +132,11 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def indicator_create(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
+    def indicator_create(self: object,
+                         body: dict = None,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> dict:
         """Create Indicators.
 
         Keyword arguments:
@@ -385,7 +390,7 @@ class IOC(ServiceClass):
     # These methods are ported from the legacy IOCS Service Class, as they have not been deprecated
     @force_default(defaults=["parameters"], default_types=["dict"])
     def devices_count(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Number of hosts in your customer account that have observed a given custom IOC.
+        """Return the number of hosts in your customer account that have observed a given custom IOC.
 
         Keyword arguments:
         type -- The type of indicator. String. Required.
@@ -418,6 +423,7 @@ class IOC(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def devices_ran_on(self: object, parameters: dict = None, **kwargs) -> dict:
         """Find hosts that have observed a given custom IOC.
+
         For details about those hosts, use the hosts API interface.
 
         Keyword arguments:
@@ -454,7 +460,7 @@ class IOC(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def processes_ran_on(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for processes associated with a custom IOC
+        """Search for processes associated with a custom IOC.
 
         Keyword arguments:
         type -- The type of indicator. String. Required.

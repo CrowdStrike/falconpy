@@ -1,4 +1,4 @@
-"""Internal payload handling library - Recon
+"""Internal payload handling library - Recon.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 
 def handle_recon_rule_params(inbound: dict) -> dict:
-    """Handles the payload formatting for a single rule object"""
+    """Handle the payload formatting for a single rule object."""
     returned_dict = {}
     if inbound.get("filter", None):
         returned_dict["filter"] = inbound.get("filter", None)
@@ -50,12 +50,15 @@ def handle_recon_rule_params(inbound: dict) -> dict:
         returned_dict["permissions"] = inbound.get("permissions", None)
     if inbound.get("priority", None):
         returned_dict["priority"] = inbound.get("priority", None)
+    if inbound.get("topic", None):
+        returned_dict["topic"] = inbound.get("topic", None)
 
     return returned_dict
 
 
 def recon_rules_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted payload for recon rule handling.
+    """Create a properly formatted payload for recon rule handling.
+
     Creates a list of dictionaries.
             [
                 {
@@ -63,7 +66,8 @@ def recon_rules_payload(passed_keywords: dict) -> dict:
                     "id": "string",
                     "name": "string",
                     "permissions": "string",
-                    "priority": "string"
+                    "priority": "string",
+                    "topic": "string"
                 }
             ]
     """
@@ -85,7 +89,9 @@ def recon_rules_payload(passed_keywords: dict) -> dict:
 
 
 def recon_notifications_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted payload for a recon notification
+    """Recon notification payload handler.
+
+    Creates a properly formatted payload for a recon notification
     payload. Generates a list of dictionaries, but is designed to handle
     just one notification. (For multiple notifications use the body
     payload keyword.)
@@ -112,7 +118,8 @@ def recon_notifications_payload(passed_keywords: dict) -> dict:
 
 
 def recon_action_update_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted payload for handling recon actions.
+    """Create a properly formatted payload for handling recon actions.
+
     {
         "frequency": "string",
         "id": "string",
@@ -136,8 +143,8 @@ def recon_action_update_payload(passed_keywords: dict) -> dict:
 
 
 def recon_action_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted payload for attaching recon
-    actions to a monitoring rule.
+    """Create a properly formatted payload for attaching recon actions to a monitoring rule.
+
     {
         "actions": [
             {
@@ -170,8 +177,8 @@ def recon_action_payload(passed_keywords: dict) -> dict:
 
 
 def recon_rule_preview_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted payload for retrieving
-    a rule preview from recon.
+    """Create a properly formatted payload for retrieving a rule preview from recon.
+
     {
         "filter": "string",
         "topic": "string"

@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._device_control_policies - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -182,7 +181,7 @@ _device_control_policies_endpoints = [
   [
     "getDeviceControlPolicies",
     "GET",
-    "/policy/entities/device-control/v1?ids={}",
+    "/policy/entities/device-control/v1",
     "Retrieve a set of Device Control Policies by specifying their IDs",
     "device_control_policies",
     [
@@ -232,7 +231,7 @@ _device_control_policies_endpoints = [
   [
     "deleteDeviceControlPolicies",
     "DELETE",
-    "/policy/entities/device-control/v1?ids={}",
+    "/policy/entities/device-control/v1",
     "Delete a set of Device Control Policies by specifying their IDs",
     "device_control_policies",
     [

@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint.deprecated._real_time_response - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -203,7 +202,7 @@ _real_time_response_endpoints = [
   [
     "RTR-DeleteFile",
     "DELETE",
-    "/real-time-response/entities/file/v1?ids={}",
+    "/real-time-response/entities/file/v1",
     "Delete a RTR session file.",
     "real_time_response",
     [

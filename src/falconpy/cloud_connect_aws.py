@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Discover for AWS API Interface Class
+"""CrowdStrike Falcon Discover for AWS API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._cloud_connect_aws import _cloud_connect_aws_endpoints as Endpoi
 
 
 class CloudConnectAWS(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,9 +53,11 @@ class CloudConnectAWS(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_aws_accounts(self: object, parameters: dict = None, **kwargs) -> dict:
         """Search for provisioned AWS Accounts by providing an FQL filter and paging details.
+
         Returns a set of AWS accounts which match the filter criteria.
 
         Keyword arguments:
@@ -294,7 +296,7 @@ class CloudConnectAWS(ServiceClass):
                                   parameters: dict = None,
                                   **kwargs
                                   ) -> dict:
-        """Performs an Access Verification check on the specified AWS Account IDs.
+        """Perform an Access Verification check on the specified AWS Account IDs.
 
         Keyword arguments:
         body -- full body payload, ignored by API.
@@ -323,6 +325,7 @@ class CloudConnectAWS(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_aws_accounts_for_ids(self: object, parameters: dict = None, **kwargs) -> dict:
         """Search for provisioned AWS Accounts by providing an FQL filter and paging details.
+
         Returns a set of AWS account IDs which match the filter criteria.
 
         Keyword arguments:

@@ -1,4 +1,4 @@
-"""Falcon Overwatch Dashboard API Interface Class
+"""Falcon Overwatch Dashboard API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._overwatch_dashboard import _overwatch_dashboard_endpoints as En
 
 
 class OverwatchDashboard(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,13 +53,14 @@ class OverwatchDashboard(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def aggregates_detections_global_counts(self: object,
                                             *args,
                                             parameters: dict = None,
                                             **kwargs
                                             ) -> dict:
-        """Get the total number of detections pushed across all customers
+        """Get the total number of detections pushed across all customers.
 
         Keyword arguments:
         filter -- FQL filter to limit the results. String.
@@ -161,7 +162,7 @@ class OverwatchDashboard(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["list"])
     def aggregates_events(self: object, body: list = None, **kwargs) -> dict:
-        """Get aggregate OverWatch detection event info by providing an aggregate query
+        """Get aggregate OverWatch detection event info by providing an aggregate query.
 
         Keyword arguments:
         body -- full body payload, not required when using other keywords.

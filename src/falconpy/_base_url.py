@@ -1,4 +1,4 @@
-"""CrowdStrike API Base URL Enumerator
+"""CrowdStrike API Base URL Enumerator.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -39,9 +39,13 @@ from enum import Enum
 
 
 class BaseURL(Enum):
-    """This enum enables developers to specify base URL by
+    """Base URL enumerator.
+
+    This enum enables developers to specify base URL by
     name instead of URL. Case insensitive. Passing a URL
-    with or without https:// is still supported."""
+    with or without https:// is still supported.
+    """
+
     US1 = "api.crowdstrike.com"
     US2 = "api.us-2.crowdstrike.com"
     EU1 = "api.eu-1.crowdstrike.com"

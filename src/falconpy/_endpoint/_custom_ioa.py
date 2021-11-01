@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._custom_ioa - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -41,7 +40,7 @@ _custom_ioa_endpoints = [
   [
     "get_patterns",
     "GET",
-    "/ioarules/entities/pattern-severities/v1?ids={}",
+    "/ioarules/entities/pattern-severities/v1",
     "Get pattern severities by ID.",
     "custom_ioa",
     [
@@ -61,7 +60,7 @@ _custom_ioa_endpoints = [
   [
     "get_platformsMixin0",
     "GET",
-    "/ioarules/entities/platforms/v1?ids={}",
+    "/ioarules/entities/platforms/v1",
     "Get platforms by ID.",
     "custom_ioa",
     [
@@ -81,7 +80,7 @@ _custom_ioa_endpoints = [
   [
     "get_rule_groupsMixin0",
     "GET",
-    "/ioarules/entities/rule-groups/v1?ids={}",
+    "/ioarules/entities/rule-groups/v1",
     "Get rule groups by ID.",
     "custom_ioa",
     [
@@ -129,7 +128,7 @@ _custom_ioa_endpoints = [
   [
     "delete_rule_groupsMixin0",
     "DELETE",
-    "/ioarules/entities/rule-groups/v1?ids={}",
+    "/ioarules/entities/rule-groups/v1",
     "Delete rule groups by ID.",
     "custom_ioa",
     [
@@ -155,7 +154,7 @@ _custom_ioa_endpoints = [
   [
     "get_rule_types",
     "GET",
-    "/ioarules/entities/rule-types/v1?ids={}",
+    "/ioarules/entities/rule-types/v1",
     "Get rule types by ID.",
     "custom_ioa",
     [
@@ -190,7 +189,7 @@ _custom_ioa_endpoints = [
   [
     "get_rulesMixin0",
     "GET",
-    "/ioarules/entities/rules/v1?ids={}",
+    "/ioarules/entities/rules/v1",
     "Get rules by ID and optionally version in the following format: `ID[:version]`. "
     "The max number of IDs is constrained by URL size.",
     "custom_ioa",
@@ -239,7 +238,7 @@ _custom_ioa_endpoints = [
   [
     "delete_rules",
     "DELETE",
-    "/ioarules/entities/rules/v1?ids={}",
+    "/ioarules/entities/rules/v1",
     "Delete rules from a rule group by ID.",
     "custom_ioa",
     [

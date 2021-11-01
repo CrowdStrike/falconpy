@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._sample_uploads - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -41,7 +40,7 @@ _sample_uploads_endpoints = [
   [
     "GetSampleV3",
     "GET",
-    "/samples/entities/samples/v3?ids={}",
+    "/samples/entities/samples/v3",
     "Retrieves the file associated with the given ID (SHA256)",
     "sample_uploads",
     [
@@ -128,7 +127,7 @@ _sample_uploads_endpoints = [
   [
     "DeleteSampleV3",
     "DELETE",
-    "/samples/entities/samples/v3?ids={}",
+    "/samples/entities/samples/v3",
     "Removes a sample, including file, meta and submissions from the collection",
     "sample_uploads",
     [

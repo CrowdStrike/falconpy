@@ -1,4 +1,5 @@
-"""CrowdStrike Falcon Spotlight Vulnerability API interface class
+"""CrowdStrike Falcon Spotlight Vulnerability API interface class.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -40,7 +41,7 @@ from ._endpoint._spotlight_vulnerabilities import _spotlight_vulnerabilities_end
 
 
 class SpotlightVulnerabilities(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -51,10 +52,12 @@ class SpotlightVulnerabilities(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_vulnerabilities_combined(self: object, parameters: dict = None,  **kwargs) -> dict:
-        """Search for Vulnerabilities in your environment by providing an FQL filter
-        and paging details. Returns a set of Vulnerability IDs which match the filter criteria.
+        """Search for Vulnerabilities by providing an FQL filter and paging details.
+
+        Returns a set of Vulnerability IDs which match the filter criteria.
 
         Keyword arguments:
         after -- A pagination token used with the limit parameter to manage pagination of results.
@@ -119,8 +122,9 @@ class SpotlightVulnerabilities(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_vulnerabilities(self: object, parameters: dict = None,  **kwargs) -> dict:
-        """Search for Vulnerabilities in your environment by providing an FQL filter
-        and paging details. Returns a set of Vulnerability IDs which match the filter criteria.
+        """Search for Vulnerabilities by providing an FQL filter and paging details.
+
+        Returns a set of Vulnerability IDs which match the filter criteria.
 
         Keyword arguments:
         after -- A pagination token used with the limit parameter to manage pagination of results.

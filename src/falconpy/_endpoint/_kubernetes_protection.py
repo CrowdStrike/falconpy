@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._kubernetes_protection - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -41,7 +40,7 @@ _kubernetes_protection_endpoints = [
   [
     "GetAWSAccountsMixin0",
     "GET",
-    "/kubernetes-protection/entities/accounts/aws/v1?ids={}",
+    "/kubernetes-protection/entities/accounts/aws/v1",
     "Provides a list of AWS accounts.",
     "kubernetes_protection",
     [
@@ -98,7 +97,7 @@ _kubernetes_protection_endpoints = [
   [
     "UpdateAWSAccount",
     "PATCH",
-    "/kubernetes-protection/entities/accounts/aws/v1?ids={}",
+    "/kubernetes-protection/entities/accounts/aws/v1",
     "Updates the AWS account per the query parameters provided",
     "kubernetes_protection",
     [
@@ -128,7 +127,7 @@ _kubernetes_protection_endpoints = [
   [
     "DeleteAWSAccountsMixin0",
     "DELETE",
-    "/kubernetes-protection/entities/accounts/aws/v1?ids={}",
+    "/kubernetes-protection/entities/accounts/aws/v1",
     "Delete AWS accounts.",
     "kubernetes_protection",
     [

@@ -1,4 +1,4 @@
-"""Internal payload handling library - IOA Payloads
+"""Internal payload handling library - IOA Payloads.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,20 +38,21 @@ For more information, please refer to <https://unlicense.org>
 
 
 def ioa_exclusion_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted exclusion payload
-       {
-            "cl_regex": "string",
-            "comment": "string",
-            "description": "string",
-            "detection_json": "string",
-            "groups": [
-                "string"
-            ],
-            "ifn_regex": "string",
-            "name": "string",
-            "pattern_id": "string",
-            "pattern_name": "string"
-        }
+    """Create a properly formatted exclusion payload.
+
+    {
+        "cl_regex": "string",
+        "comment": "string",
+        "description": "string",
+        "detection_json": "string",
+        "groups": [
+            "string"
+        ],
+        "ifn_regex": "string",
+        "name": "string",
+        "pattern_id": "string",
+        "pattern_name": "string"
+    }
     """
     returned_payload = {}
     if passed_keywords.get("comment", None):
@@ -79,61 +80,62 @@ def ioa_exclusion_payload(passed_keywords: dict) -> dict:
 
 
 def ioa_custom_payload(passed_keywords: dict) -> dict:
-    """Creates a properly formatted custom IOA payload.
-        {
-            "comment": "string",
-            "description": "string",
-            "name": "string",
-            "platform": "string",
-            "enabled": true,
-            "id": "string",
-            "rulegroup_version": 0,
-            "disposition_id": 0,
-            "field_values": [
-                {
-                    "final_value": "string",
-                    "label": "string",
-                    "name": "string",
-                    "type": "string",
-                    "value": "string",
-                    "values": [
-                        {
-                            "label": "string",
-                            "value": "string"
-                        }
-                    ]
-                }
-            ],
-            "pattern_severity": "string",
-            "rulegroup_id": "string",
-            "ruletype_id": "string",
-            "rule_updates": [
-                {
-                    "description": "string",
-                    "disposition_id": 0,
-                    "enabled": true,
-                    "field_values": [
-                        {
-                            "final_value": "string",
-                            "label": "string",
-                            "name": "string",
-                            "type": "string",
-                            "value": "string",
-                            "values": [
-                                {
-                                    "label": "string",
-                                    "value": "string"
-                                }
-                            ]
-                        }
-                    ],
-                    "instance_id": "string",
-                    "name": "string",
-                    "pattern_severity": "string",
-                    "rulegroup_version": 0
-                }
-            ]
-        }
+    """Create a properly formatted custom IOA payload.
+
+    {
+        "comment": "string",
+        "description": "string",
+        "name": "string",
+        "platform": "string",
+        "enabled": true,
+        "id": "string",
+        "rulegroup_version": 0,
+        "disposition_id": 0,
+        "field_values": [
+            {
+                "final_value": "string",
+                "label": "string",
+                "name": "string",
+                "type": "string",
+                "value": "string",
+                "values": [
+                    {
+                        "label": "string",
+                        "value": "string"
+                    }
+                ]
+            }
+        ],
+        "pattern_severity": "string",
+        "rulegroup_id": "string",
+        "ruletype_id": "string",
+        "rule_updates": [
+            {
+                "description": "string",
+                "disposition_id": 0,
+                "enabled": true,
+                "field_values": [
+                    {
+                        "final_value": "string",
+                        "label": "string",
+                        "name": "string",
+                        "type": "string",
+                        "value": "string",
+                        "values": [
+                            {
+                                "label": "string",
+                                "value": "string"
+                            }
+                        ]
+                    }
+                ],
+                "instance_id": "string",
+                "name": "string",
+                "pattern_severity": "string",
+                "rulegroup_version": 0
+            }
+        ]
+    }
     """
     returned_payload = {}
     keys = [

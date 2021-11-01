@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._scheduled_reports - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -41,7 +40,7 @@ _scheduled_reports_endpoints = [
   [
     "scheduled_reports_get",
     "GET",
-    "/reports/entities/scheduled-reports/v1?ids={}",
+    "/reports/entities/scheduled-reports/v1",
     "Retrieve scheduled reports for the provided report IDs.",
     "scheduled_reports",
     [

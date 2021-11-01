@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Device Control Policies API interface class
+"""CrowdStrike Falcon Device Control Policies API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -43,7 +43,7 @@ from ._endpoint._device_control_policies import _device_control_policies_endpoin
 
 
 class DeviceControlPolicies(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -54,9 +54,12 @@ class DeviceControlPolicies(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for members of a Device Control Policy in your environment by
+        """Search for a Device Control Policy members and return full detail.
+
+        Search for members of a Device Control Policy in your environment by
         providing an FQL filter and paging details. Returns a set of host details
         which match the filter criteria.
 
@@ -90,7 +93,9 @@ class DeviceControlPolicies(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Device Control Policies in your environment by providing an FQL filter and
+        """Search for a Device Control Policies and return full detail.
+
+        Search for Device Control Policies in your environment by providing an FQL filter and
         paging details. Returns a set of Device Control Policies which match the filter criteria.
 
         Keyword arguments:
@@ -126,9 +131,7 @@ class DeviceControlPolicies(ServiceClass):
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def perform_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
-        """Search for Device Control Policies in your environment by providing an FQL filter
-        and paging details. Returns a set of Device Control Policies which match the filter
-        criteria.
+        """Perform a Device Control Policy action.
 
         Keyword arguments:
         action_name -- action to perform: 'add-host-group', 'disable', 'enable',
@@ -188,7 +191,9 @@ class DeviceControlPolicies(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def set_precedence(self: object, body: dict = None, **kwargs) -> dict:
-        """Sets the precedence of Device Control Policies based on the order of IDs specified in
+        """Set Device Control Policy precedence.
+
+        Sets the precedence of Device Control Policies based on the order of IDs specified in
         the request. The first ID specified will have the highest precedence and the last ID
         specified will have the lowest. You must specify all non-Default Policies for a platform
         when updating precedence.
@@ -421,7 +426,9 @@ class DeviceControlPolicies(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for members of a Device Control Policy in your environment by providing
+        """Search for a Device Control Policy members and return their IDs.
+
+        Search for members of a Device Control Policy in your environment by providing
         an FQL filter and paging details. Returns a set of Agent IDs which match the filter
         criteria.
 
@@ -455,7 +462,9 @@ class DeviceControlPolicies(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policies(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Search for Device Control Policies in your environment by providing an
+        """Search for a Device Control Policies and return their IDs.
+
+        Search for Device Control Policies in your environment by providing an
         FQL filter and paging details. Returns a set of Device Control Policy IDs
         which match the filter criteria.
 

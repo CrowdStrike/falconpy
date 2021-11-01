@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._intel - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -205,7 +204,7 @@ _intel_endpoints = [
   [
     "GetIntelActorEntities",
     "GET",
-    "/intel/entities/actors/v1?ids={}",
+    "/intel/entities/actors/v1",
     "Retrieve specific actors using their actor IDs.",
     "intel",
     [
@@ -267,7 +266,7 @@ _intel_endpoints = [
   [
     "GetIntelReportEntities",
     "GET",
-    "/intel/entities/reports/v1?ids={}",
+    "/intel/entities/reports/v1",
     "Retrieve specific reports using their report IDs.",
     "intel",
     [
@@ -357,7 +356,7 @@ _intel_endpoints = [
   [
     "GetIntelRuleEntities",
     "GET",
-    "/intel/entities/rules/v1?ids={}",
+    "/intel/entities/rules/v1",
     "Retrieve details for rule sets for the specified ids.",
     "intel",
     [

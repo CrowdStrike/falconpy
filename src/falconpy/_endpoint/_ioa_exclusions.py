@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._ioa_exclusions - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -41,7 +40,7 @@ _ioa_exclusions_endpoints = [
   [
     "getIOAExclusionsV1",
     "GET",
-    "/policy/entities/ioa-exclusions/v1?ids={}",
+    "/policy/entities/ioa-exclusions/v1",
     "Get a set of IOA Exclusions by specifying their IDs",
     "ioa_exclusions",
     [
@@ -89,7 +88,7 @@ _ioa_exclusions_endpoints = [
   [
     "deleteIOAExclusionsV1",
     "DELETE",
-    "/policy/entities/ioa-exclusions/v1?ids={}",
+    "/policy/entities/ioa-exclusions/v1",
     "Delete the IOA exclusions by id",
     "ioa_exclusions",
     [

@@ -1,4 +1,4 @@
-"""Falcon Zero Trust Assessment API Interface Class
+"""Falcon Zero Trust Assessment API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -41,7 +41,7 @@ from ._endpoint._zero_trust_assessment import _zero_trust_assessment_endpoints a
 
 
 class ZeroTrustAssessment(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -52,6 +52,7 @@ class ZeroTrustAssessment(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_assessment(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID).

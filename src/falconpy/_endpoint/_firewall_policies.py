@@ -1,4 +1,5 @@
-"""
+"""Internal API endpoint constant library.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,8 +9,6 @@
 `-------'                         `-------'
 
 OAuth2 API - Customer SDK
-
-_endpoint._firewall_policies - Internal API endpoint constant library
 
 This is free and unencumbered software released into the public domain.
 
@@ -182,7 +181,7 @@ _firewall_policies_endpoints = [
   [
     "getFirewallPolicies",
     "GET",
-    "/policy/entities/firewall/v1?ids={}",
+    "/policy/entities/firewall/v1",
     "Retrieve a set of Firewall Policies by specifying their IDs",
     "firewall_policies",
     [
@@ -240,7 +239,7 @@ _firewall_policies_endpoints = [
   [
     "deleteFirewallPolicies",
     "DELETE",
-    "/policy/entities/firewall/v1?ids={}",
+    "/policy/entities/firewall/v1",
     "Delete a set of Firewall Policies by specifying their IDs",
     "firewall_policies",
     [

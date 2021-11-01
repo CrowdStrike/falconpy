@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Flight Control (MSSP) API interface class
+"""CrowdStrike Falcon Flight Control (MSSP) API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -43,7 +43,7 @@ from ._endpoint._mssp import _mssp_endpoints as Endpoints
 
 
 class FlightControl(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -54,9 +54,10 @@ class FlightControl(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_children(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Get link to child customer by child CID(s)
+        """Get link to child customer by child CID(s).
 
         Keyword arguments:
         ids -- CID of a child customer. String or list of strings.
@@ -285,8 +286,11 @@ class FlightControl(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_cid_groups(self: object, body: dict = None, **kwargs) -> dict:
-        """Update existing CID Group(s). CID Group ID is expected for each CID
-        Group definition provided in request body. CID Group member(s) remain unaffected.
+        """Update existing CID Group(s).
+
+        CID Group ID is expected for each CID Group definition provided in request body.
+
+        CID Group member(s) remain unaffected.
 
         Keyword arguments:
         body -- full body payload, not required if sha256 is provided as a keyword.
@@ -327,6 +331,7 @@ class FlightControl(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_roles_by_id(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get MSSP Role assignment(s).
+
         MSSP Role assignment is of the format <user_group_id>:<cid_group_id>.
 
         Keyword arguments:
@@ -355,6 +360,7 @@ class FlightControl(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def add_role(self: object, body: dict = None, **kwargs) -> dict:
         """Assign new MSSP Role(s) between User Group and CID Group.
+
         It does not revoke existing role(s) between User Group and CID Group.
         User Group ID and CID Group ID have to be specified in request.
 
@@ -399,6 +405,7 @@ class FlightControl(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def delete_roles(self: object, body: dict = None, **kwargs) -> dict:
         """Delete MSSP Role assignment(s) between User Group and CID Group.
+
         User Group ID and CID Group ID have to be specified in request.
         Only specified roles are removed if specified in request payload,
         else association between User Group and CID Group is dissolved completely
@@ -645,8 +652,11 @@ class FlightControl(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_user_groups(self: object, body: dict = None, **kwargs) -> dict:
-        """Update existing User Group(s). User Group ID is expected for each User Group
-        definition provided in request body. User Group member(s) remain unaffected.
+        """Update existing User Group(s).
+
+        User Group ID is expected for each User Group definition provided in request body.
+
+        User Group member(s) remain unaffected.
 
         Keyword arguments:
         body -- full body payload, not required if sha256 is provided as a keyword.
@@ -686,7 +696,7 @@ class FlightControl(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_children(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Query for customers linked as children
+        """Query for customers linked as children.
 
         Keyword arguments:
         limit -- The maximum number of records to return in this response. [Integer, 1-1000]
@@ -775,8 +785,9 @@ class FlightControl(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_roles(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Query links between user groups and CID groups. At least one of CID Group ID or
-        User Group ID should also be provided. Role ID is optional.
+        """Query links between user groups and CID groups.
+
+        At least one of CID Group ID or User Group ID should also be provided. Role ID is optional.
 
         Keyword arguments:
         user_group_id -- User group ID to fetch MSSP role for

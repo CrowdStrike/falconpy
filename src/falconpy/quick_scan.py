@@ -1,4 +1,4 @@
-"""Falcon Quick Scan API Interface Class
+"""Falcon Quick Scan API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,7 +42,7 @@ from ._endpoint._quick_scan import _quick_scan_endpoints as Endpoints
 
 
 class QuickScan(ServiceClass):
-    """The only requirement to instantiate an instance of this class is one of the following:
+    """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
     - a credential dictionary with client_id and client_secret containing valid API credentials
@@ -53,6 +53,7 @@ class QuickScan(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["body"], default_types=["dict"])
     def get_scans_aggregates(self: object, body: dict = None, **kwargs) -> dict:
         """Get scans aggregations as specified via json in request body.
@@ -125,8 +126,9 @@ class QuickScan(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_scans(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Check the status of a volume scan. Time required for
-        analysis increases with the number of samples in a volume
+        """Check the status of a volume scan.
+
+        Time required for analysis increases with the number of samples in a volume
         but usually it should take less than 1 minute.
 
         Keyword arguments:
@@ -193,6 +195,7 @@ class QuickScan(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_submissions(self: object, parameters: dict = None, **kwargs) -> dict:
         """Find IDs for submitted scans by providing an FQL filter and paging details.
+
         Returns a set of volume IDs that match your criteria.
 
         Keyword arguments:

@@ -76,7 +76,8 @@ class TestRecon:
                                                      id="1754251",
                                                      permissions="private",
                                                      priority="moderate",
-                                                     name="MelloYellow"
+                                                     name="MelloYellow",
+                                                     topic="whatevers"
                                                      ),
             "query_actions": falcon.query_actions(),
             "query_notifications": falcon.query_notifications(),
