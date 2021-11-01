@@ -409,6 +409,7 @@ platformsMixin
 powershell
 pre
 py
+pydocstyle
 pylint
 pytest
 queryCIDGroupMembers
