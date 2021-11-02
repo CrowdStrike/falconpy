@@ -12,6 +12,8 @@
     - `recon.py`
 + Fixed: Missing payload parameter in recon rule payload handler.
     - `_payload/_recon.py`
++ Fixed: Invalid query string parameter referenced in body payload handler for `query_sample` method within FalconXSandbox Service Class. Also resolved matching invalid docstring reference. Closes #409.
+    - `falconx_sandbox.py`
 + Fixed: Minor formatting issues within docstrings in all package files.
 
 ## Other
