@@ -82,6 +82,7 @@ FalconPy
 FalconShell
 FalconX
 Falconx
+FalconXSandbox
 FirewallManagement
 FlightControl
 GCP
