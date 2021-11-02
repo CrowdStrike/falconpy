@@ -496,7 +496,7 @@ class FalconXSandbox(ServiceClass):
         Maximum number of accepted items is 200.
 
         Keyword arguments:
-        ids -- List of SHA256s to confirm existence for. You will be returned a list of
+        sha256s -- List of SHA256s to confirm existence for. You will be returned a list of
                existing hashes. String or list of strings.
         body -- full body payload, not required if sha256 is provided as a keyword.
                 {
@@ -515,7 +515,7 @@ class FalconXSandbox(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QuerySampleV1
         """
         if not body:
-            body = generic_payload_list(submitted_keywords=kwargs, payload_value="sha256")
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="sha256s")
 
         return process_service_request(
             calling_object=self,
