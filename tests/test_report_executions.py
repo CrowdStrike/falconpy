@@ -23,7 +23,8 @@ class TestIOC:
         tests = {
             "get_download": falcon.get_download(ids='12345678'),
             "get_reports": falcon.get_reports(ids='12345678'),
-            "query_reports": falcon.query_reports(limit=1)
+            "query_reports": falcon.query_reports(limit=1),
+            "retry_reports": falcon.retry_reports(ids="123456789")
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
