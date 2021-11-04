@@ -38,6 +38,20 @@ For more information, please refer to <https://unlicense.org>
 
 _scheduled_reports_endpoints = [
   [
+    "scheduled_reports_launch",
+    "POST",
+    "/reports/entities/scheduled-reports/execution/v1",
+    "Launch scheduled reports executions for the provided report IDs.",
+    "scheduled_reports",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "scheduled_reports_get",
     "GET",
     "/reports/entities/scheduled-reports/v1",
