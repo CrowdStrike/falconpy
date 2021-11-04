@@ -65,7 +65,7 @@ class ScheduledReports(ServiceClass):
                         "id": "string"
                     }
                 ]
-        ids -- ID of the report to re-attempt execution. String or list of strings.
+        ids -- ID of the report to launch. String or list of strings.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
