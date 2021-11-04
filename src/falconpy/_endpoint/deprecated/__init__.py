@@ -32,6 +32,7 @@
 # references to use the new operations IDs defined above that align with the IDs defined in
 # the service classes.
 from ._custom_ioa import _custom_ioa_endpoints
+from ._discover import _discover_endpoints
 from ._firewall_management import _firewall_management_endpoints
 from ._identity_protection import _identity_protection_endpoints
 from ._installation_tokens import _installation_tokens_endpoints
@@ -43,6 +44,7 @@ from ._report_executions import _report_executions_endpoints
 from ._scheduled_reports import _scheduled_reports_endpoints
 
 _custom_ioa_deprecated = _custom_ioa_endpoints
+_discover_deprecated = _discover_endpoints
 _firewall_management_deprecated = _firewall_management_endpoints
 _identity_protection_deprecated = _identity_protection_endpoints
 _installation_tokens_deprecated = _installation_tokens_endpoints
