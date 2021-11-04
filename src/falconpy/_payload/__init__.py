@@ -40,6 +40,7 @@ from ._falconx import falconx_payload
 from ._mssp import mssp_payload
 from ._firewall import firewall_policy_payload, firewall_container_payload
 from ._firewall import firewall_rule_group_payload, firewall_rule_group_update_payload
+from ._reports import reports_payload
 
 
 __all__ = [
@@ -53,5 +54,5 @@ __all__ = [
     "indicator_update_payload", "azure_registration_payload", "cspm_registration_payload",
     "cspm_policy_payload", "cspm_scan_payload", "device_policy_payload", "falconx_payload",
     "mssp_payload", "ioa_custom_payload", "firewall_policy_payload", "firewall_container_payload",
-    "firewall_rule_group_payload", "firewall_rule_group_update_payload"
+    "firewall_rule_group_payload", "firewall_rule_group_update_payload", "reports_payload"
 ]
