@@ -1,3 +1,20 @@
+# Version 0.8.1
+## Added features and functionality
++ Added: New Discover Service Class and matching unit testing to represent the recently released Falcon Discover API.
+    - `discover.py`
+    - `_endpoint/_discover.py`
+    - `_endpoint/_deprecated/discover.py`
+    - `tests/test_discover.py`
++ Added: New generic body payload handler for report execution / scheduling payloads.
+    - `_payload/_reports.py`
++ Added: New `report_executions_retry` method and matching unit tests to ReportExecutions Service Class.
+    - `report_executions.py`
+    - `_endpoint/_report_executions.py`
++ Added: New `scheduled_reports_launch` method and matching unit tests to ScheduledReports Service Class.
+    - `scheduled_reports.py`
+    - `_endpoint/_scheduled_reports.py`
+
+
 # Version 0.8.0
 ## Added features and functionality
 + Added: Parameter abstraction for the Uber Class.
@@ -22,6 +39,7 @@
     - `_util.py`
 + Removed: Deprecated `parse_id_list` method
     - `_util.py`
+
 
 # Version 0.7.4
 ## Added features and functionality
