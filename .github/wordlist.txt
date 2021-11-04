@@ -231,6 +231,7 @@ RTR
 Realtime
 README
 RegenerateAPIKey
+ReportExecutions
 Responder
 RetrieveEmailsByCID
 RetrieveUser
@@ -243,6 +244,7 @@ SDK
 SHA
 Scalable
 ScanSamples
+ScheduledReports
 SemVer
 Shockwave
 SpotlightVulnerabilities

@@ -1,4 +1,4 @@
-"""Falcon Scheduled Reports API Interface Class.
+"""CrowdStrike Falcon Discover API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,13 +35,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import reports_payload
+from ._util import process_service_request, force_default, handle_single_argument
 from ._service_class import ServiceClass
-from ._endpoint._scheduled_reports import _scheduled_reports_endpoints as Endpoints
+from ._endpoint._discover import _discover_endpoints as Endpoints
 
 
-class ScheduledReports(ServiceClass):
+class Discover(ServiceClass):
     """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
@@ -54,45 +53,14 @@ class ScheduledReports(ServiceClass):
     - a valid token provided by the authentication service class (oauth2.py)
     """
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def launch(self: object, *args, body: dict = None, **kwargs) -> dict:
-        """Launch scheduled report executions for the provided ID(s).
-
-        Keyword arguments:
-        body -- full body payload, not required if keywords are used.
-                [
-                    {
-                        "id": "string"
-                    }
-                ]
-        ids -- ID of the report to launch. String or list of strings.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scheduled-reports/scheduled-reports.launch
-        """
-        if not body:
-            body = reports_payload(passed_arguments=args, passed_keywords=kwargs)
-
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="scheduled_reports_launch",
-            body=body
-            )
-
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Retrieve scheduled reports for the provided report IDs.
+    def get_hosts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get details on assets by providing one or more IDs.
+
+        Find asset IDs with `query_hosts`.
 
         Keyword arguments:
-        ids -- ID(s) of the reports to retrieve. String or list of strings.
+        ids -- One or more asset IDs (max: 100). String or list of strings.
         parameters - full parameters payload, not required if ids is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
@@ -103,33 +71,59 @@ class ScheduledReports(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scheduled-reports/scheduled-reports.get
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/get-hosts
         """
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="scheduled_reports_get",
+            operation_id="get_hosts",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_reports(self: object, parameters: dict = None, **kwargs) -> dict:
-        """Find all report IDs matching the query with filter.
+    def query_hosts(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for assets in your environment.
+
+        Supports providing a FQL (Falcon Query Language) filter and paging details.
+        Returns a set of asset IDs which match the filter criteria.
 
         Keyword arguments:
-        filter -- FQL query specifying the filter parameters.
-                  Filter term criteria: type, trigger_reference, recipients, user_uuid,
-                                        cid, trigger_params.metadata.
-                  Filter range criteria: created_on, modified_on;
-                    use any common date format, such as '2010-05-15T14:55:21.892315096Z'.
-        limit -- The maximum number of ids to return.
-        offset -- Starting integer index of overall result set from which to return ids.
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  Available Filters:
+                  agent_version                   kernel_version
+                  aid                             last_discoverer_aid
+                  bios_manufacturer               last_seen_timestamp
+                  bios_version                    local_ips_count
+                  cid                             machine_domain
+                  city                            network_interfaces
+                  confidence                      network_interfaces.interface_alias
+                  country                         network_interfaces.interface_description
+                  current_local_ip                network_interfaces.local_ip
+                  discoverer_aids                 network_interfaces.mac_address
+                  discoverer_count                network_interfaces.network_prefix
+                  discoverer_platform_names       os_version
+                  discoverer_product_type_descs   ou
+                  discoverer_tags                 platform_name
+                  entity_type                     product_type
+                  external_ip                     product_type_desc
+                  first_discoverer_aid            site_name
+                  first_discoverer_ip             system_manufacturer
+                  first_seen_timestamp            system_product_name
+                  groups                          system_serial_number
+                  hostname                        tags
+                  id
+        limit -- The number of asset IDs to return in this response. (Max: 100, default: 100)
+                 Use with the offset parameter to manage pagination of results.
+        offset -- An offset used with the limit parameter to manage pagination of results.
+                  On your first request, don’t provide an offset. On subsequent requests,
+                  provide the offset from the previous response to continue from that place
+                  in the results.
         parameters - full parameters payload, not required if using other keywords.
-        q -- Match query criteria, which includes all the filter string fields.
-        sort -- The property to sort by. FQL syntax. (e.g. created_on.asc, last_updated_on.desc)
-                Possible sort fields: created_on, last_updated_on, last_execution_on,
-                                      next_execution_on
+        sort -- Sort assets by their properties. A single sort field is allowed.
+                Common sort options include:
+                hostname|asc
+                product_type|desc
 
         This method only supports keywords for providing arguments.
 
@@ -138,18 +132,12 @@ class ScheduledReports(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scheduled-reports/scheduled-reports.query
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/query-hosts
         """
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="scheduled_reports_query",
+            operation_id="query_hosts",
             keywords=kwargs,
             params=parameters
             )
-
-    # These method names align to the operation ID in the
-    # API and are defined here for ease of use purposes
-    scheduled_reports_get = get_reports
-    scheduled_reports_query = query_reports
-    scheduled_reports_launch = launch

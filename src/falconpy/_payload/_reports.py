@@ -1,4 +1,4 @@
-"""Internal version control constants.
+"""Internal payload handling library - Reports Payloads.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,13 +35,36 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-_VERSION = '0.8.1'
-_MAINTAINER = 'Joshua Hiller'
-_AUTHOR = 'CrowdStrike'
-_AUTHOR_EMAIL = 'falconpy@crowdstrike.com'
-_CREDITS = 'CrowdStrike'
-_DESCRIPTION = "The CrowdStrike Falcon OAuth2 API SDK for Python 3"
-_TITLE = "crowdstrike-falconpy"
-_PROJECT_URL = "https://github.com/CrowdStrike/falconpy"
-_DOCS_URL = "https://www.falconpy.io"
-_KEYWORDS = ["crowdstrike", "falcon", "api", "sdk", "oauth2", "devsecops", "crowdstrike-falcon"]
+
+
+def reports_payload(passed_keywords: dict = None, passed_arguments: list = None) -> dict:
+    """Create a properly formatted payload for report execution / scheduling.
+
+    [
+        {
+            "id": "string"
+        }
+    ]
+    """
+    returned_payload = []
+    submitted = ""
+    if passed_keywords.get("ids", None):
+        key = passed_keywords.get("ids", None)
+        if isinstance(key, list):
+            submitted = key
+        else:
+            submitted = key.split(",")
+    elif passed_arguments:
+        key = passed_arguments[0]
+        if isinstance(key, list):
+            submitted = key
+        else:
+            submitted = key.split(",")
+
+        submitted = str(passed_arguments[0]).split(",")
+    for submitted_id in submitted:
+        item = {}
+        item["id"] = submitted_id
+        returned_payload.append(item)
+
+    return returned_payload

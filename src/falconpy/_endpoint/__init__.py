@@ -20,6 +20,7 @@
                                                         `---' OAuth2 API SDK for Python 3 `---'
 """
 from .deprecated import _custom_ioa_deprecated
+from .deprecated import _discover_deprecated
 from .deprecated import _firewall_management_deprecated
 from .deprecated import _identity_protection_deprecated
 from .deprecated import _installation_tokens_deprecated
@@ -36,6 +37,7 @@ from ._custom_ioa import _custom_ioa_endpoints
 from ._d4c_registration import _d4c_registration_endpoints
 from ._detects import _detects_endpoints
 from ._device_control_policies import _device_control_policies_endpoints
+from ._discover import _discover_endpoints
 from ._event_streams import _event_streams_endpoints
 from ._falcon_complete_dashboard import _falcon_complete_dashboard_endpoints
 from ._falcon_container import _falcon_container_endpoints
@@ -81,6 +83,7 @@ api_endpoints.extend(_custom_ioa_endpoints)
 api_endpoints.extend(_d4c_registration_endpoints)
 api_endpoints.extend(_detects_endpoints)
 api_endpoints.extend(_device_control_policies_endpoints)
+api_endpoints.extend(_discover_endpoints)
 api_endpoints.extend(_event_streams_endpoints)
 api_endpoints.extend(_falcon_complete_dashboard_endpoints)
 api_endpoints.extend(_falcon_container_endpoints)
@@ -122,6 +125,7 @@ api_endpoints.extend(_zero_trust_assessment_endpoints)
 # Deprecated endpoints
 deprecated_endpoints = []
 deprecated_endpoints.extend(_custom_ioa_deprecated)
+deprecated_endpoints.extend(_discover_deprecated)
 deprecated_endpoints.extend(_firewall_management_deprecated)
 deprecated_endpoints.extend(_identity_protection_deprecated)
 deprecated_endpoints.extend(_installation_tokens_deprecated)

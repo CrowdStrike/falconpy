@@ -36,27 +36,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 
-_scheduled_reports_endpoints = [
+_discover_endpoints = [
   [
-    "scheduled_reports_launch",
-    "POST",
-    "/reports/entities/scheduled-reports/execution/v1",
-    "Launch scheduled reports executions for the provided report IDs.",
-    "scheduled_reports",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "scheduled_reports_get",
+    "get_hosts",
     "GET",
-    "/reports/entities/scheduled-reports/v1",
-    "Retrieve scheduled reports for the provided report IDs.",
-    "scheduled_reports",
+    "/discover/entities/hosts/v1",
+    "Get details on assets by providing one or more IDs.",
+    "discover",
     [
       {
         "type": "array",
@@ -64,7 +50,7 @@ _scheduled_reports_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "The scheduled_report id to get details about.",
+        "description": "One or more asset IDs (max: 100). Find asset IDs with GET `/discover/queries/hosts/v1`",
         "name": "ids",
         "in": "query",
         "required": True
@@ -72,43 +58,44 @@ _scheduled_reports_endpoints = [
     ]
   ],
   [
-    "scheduled_reports_query",
+    "query_hosts",
     "GET",
-    "/reports/queries/scheduled-reports/v1",
-    "Find all report IDs matching the query with filter",
-    "scheduled_reports",
+    "/discover/queries/hosts/v1",
+    "Search for assets in your environment by providing an FQL (Falcon Query Language) filter and paging details. "
+    "Returns a set of asset IDs which match the filter criteria.",
+    "discover",
     [
       {
+        "minimum": 0,
+        "type": "integer",
+        "description": "An offset used with the `limit` parameter to manage pagination of results. "
+        "On your first request, don’t provide an `offset`. On subsequent requests, provide the `offset` "
+        "from the previous response to continue from that place in the results.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "maximum": 100,
+        "minimum": 1,
+        "type": "integer",
+        "description": "The number of asset IDs to return in this response (min: 1, max: 100, default: 100). "
+        "Use with the `offset` parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
         "type": "string",
-        "description": "Possible order by fields: created_on, last_updated_on, last_execution_on, next_execution_on",
+        "description": "Sort assets by their properties. A single sort field is allowed. "
+        "Common sort options include:\n\n<ul><li>hostname|asc</li><li>product_type_desc|desc</li></ul>",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters. Filter term criteria: type,"
-        "trigger_reference, recipients, user_uuid, cid, trigger_params.metadata."
-        "Filter range criteria: created_on, modified_on; use any common date format,"
-        "such as '2010-05-15T14:55:21.892315096Z'.",
+        "description": "Filter assets using an FQL query. Common filter options include:\n\n"
+        "<ul><li>entity_type:'managed'</li><li>product_type_desc:'Workstation'</li><li>platform_name:'Windows'</li>"
+        "<li>last_seen_timestamp:>'now-7d'</li></ul>",
         "name": "filter",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Match query criteria, which includes all the filter string fields",
-        "name": "q",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Starting index of overall result set from which to return ids.",
-        "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "integer",
-        "description": "Number of ids to return.",
-        "name": "limit",
         "in": "query"
       }
     ]

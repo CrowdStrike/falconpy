@@ -29,6 +29,7 @@ from .custom_ioa import CustomIOA
 from .d4c_registration import D4CRegistration
 from .detects import Detects
 from .device_control_policies import DeviceControlPolicies
+from .discover import Discover
 from .event_streams import EventStreams
 from .falcon_complete_dashboard import CompleteDashboard
 from .falcon_container import FalconContainer
@@ -79,7 +80,7 @@ __docs_url__ = _DOCS_URL
 __keywords__ = _KEYWORDS
 __all__ = [
     "APIHarness", "CloudConnectAWS", "CSPMRegistration", "CustomIOA", "D4CRegistration",
-    "Detects", "DeviceControlPolicies", "EventStreams", "CompleteDashboard",
+    "Detects", "DeviceControlPolicies", "Discover", "EventStreams", "CompleteDashboard",
     "FalconContainer", "FalconXSandbox", "FirewallManagement", "FirewallPolicies", "HostGroup",
     "Hosts", "IdentityProtection", "Incidents", "InstallationTokens", "Intel", "IOAExclusions",
     "IOC", "Iocs", "KubernetesProtection", "MalQuery", "MLExclusions", "FlightControl", "OAuth2",

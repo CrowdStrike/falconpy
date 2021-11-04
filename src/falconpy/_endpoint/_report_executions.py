@@ -54,6 +54,33 @@ _report_executions_endpoints = [
     ]
   ],
   [
+    "report_executions_retry",
+    "POST",
+    "/reports/entities/report-executions-retry/v1",
+    "This endpoint will be used to retry report executions",
+    "report_executions",
+    [
+      {
+        "type": "string",
+        "description": "The user id",
+        "name": "X-CS-USERID",
+        "in": "header"
+      },
+      {
+        "type": "string",
+        "description": "The user uuid",
+        "name": "X-CS-USERUUID",
+        "in": "header",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "report_executions_get",
     "GET",
     "/reports/entities/report-executions/v1",

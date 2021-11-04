@@ -14,6 +14,7 @@ for every single operation available within that service collection.
 | `d4c_registration.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration |
 | `detects.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects |
 | `device_control_policies.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/device-control-policies |
+| `discover.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover |
 | `event_streams.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/event-streams |
 | `falcon_complete_dashboard.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard |
 | `falcon_container.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container |

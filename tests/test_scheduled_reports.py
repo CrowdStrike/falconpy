@@ -9,7 +9,7 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy.scheduled_reports import ScheduledReports
+from falconpy import ScheduledReports
 
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
@@ -17,12 +17,15 @@ falcon = ScheduledReports(access_token=token)
 AllowedResponses = [200, 201, 403, 404, 429]  # Getting 403's atm
 
 
-class TestIOC:
-    def ioc_run_all_tests(self):
+class TestScheduledReports:
+    def run_all_tests(self):
         error_checks = True
         tests = {
             "get_reports": falcon.get_reports(ids='12345678'),
-            "query_reports": falcon.query_reports(limit=1)
+            "query_reports": falcon.query_reports(limit=1),
+            "launch": falcon.launch(ids="12345678"),
+            "launch_two": falcon.launch(ids="12345,67890"),
+            "launch_three": falcon.launch(ids=["12345", "67890"])
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
@@ -34,4 +37,4 @@ class TestIOC:
         return error_checks
 
     def test_all_functionality(self):
-        assert self.ioc_run_all_tests() is True
+        assert self.run_all_tests() is True
