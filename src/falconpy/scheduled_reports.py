@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import reports_payload
 from ._service_class import ServiceClass
 from ._endpoint._scheduled_reports import _scheduled_reports_endpoints as Endpoints
 
@@ -52,6 +53,39 @@ class ScheduledReports(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def launch(self: object, *args, body: dict = None, **kwargs) -> dict:
+        """Launch scheduled report executions for the provided ID(s).
+
+        Keyword arguments:
+        body -- full body payload, not required if keywords are used.
+                [
+                    {
+                        "id": "string"
+                    }
+                ]
+        ids -- ID of the report to re-attempt execution. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/scheduled-reports/scheduled-reports.launch
+        """
+        if not body:
+            body = reports_payload(passed_arguments=args, passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="scheduled_reports_launch",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> dict:
@@ -118,3 +152,4 @@ class ScheduledReports(ServiceClass):
     # API and are defined here for ease of use purposes
     scheduled_reports_get = get_reports
     scheduled_reports_query = query_reports
+    scheduled_reports_launch = launch
