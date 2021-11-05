@@ -61,7 +61,6 @@ def reports_payload(passed_keywords: dict = None, passed_arguments: list = None)
         else:
             submitted = key.split(",")
 
-        submitted = str(passed_arguments[0]).split(",")
     for submitted_id in submitted:
         item = {}
         item["id"] = submitted_id
