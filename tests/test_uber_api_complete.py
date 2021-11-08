@@ -230,12 +230,12 @@ class TestUber:
             return False
 
     def uber_test_invalid_reserved_word_payload(self):
-        parameters = {
+        params = {
             "limit": 1,
             "facet": "cve,host_info",
             filter:"created_timestamp:>'2021-01-01T00:00:01Z'"
         }
-        if falcon.command("combinedQueryVulnerabilities", params=parameters)["status_code"] in AllowedResponses:
+        if falcon.command("combinedQueryVulnerabilities", parameters=params)["status_code"] in AllowedResponses:
             return True
         else:
             return False
