@@ -320,6 +320,7 @@ def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epnam
 
     Returns: dictionary representing QueryString parameters.
     """
+    returned_payload = {}
     if epname != "Manual":  # pylint: disable=R1702
         for arg in passed_arguments:
             eps = [ep[5] for ep in endpoints if epname in ep[0]][0]
@@ -337,7 +338,14 @@ def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epnam
                 # Unrecognized argument
                 pass
 
-    return payload
+    # Clean up reserved word conversions when passing in a raw payload
+    for element in payload:
+        if not isinstance(element, str):
+            returned_payload[element.__name__] = payload[element]
+        else:
+            returned_payload[element] = payload[element]
+
+    return returned_payload
 
 
 def process_service_request(calling_object: object,
