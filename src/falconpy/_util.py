@@ -338,7 +338,7 @@ def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epnam
                 # Unrecognized argument
                 pass
 
-    # Clean up reserved word conversions when passing in a raw payload
+    # Clean up reserved word conversions when passing in an invalid raw payload
     for element in payload:
         if not isinstance(element, str):
             returned_payload[element.__name__] = payload[element]
