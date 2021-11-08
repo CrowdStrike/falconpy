@@ -1,3 +1,8 @@
+# Version 0.8.2
+## Issues resolved
++ Fixed: Bug in `_util.args_to_params` when handling Python reserved words defined as keys in the parameter dictionary. Closes #422.
+    - Special thanks to @valerianrossigneux for originally identifying this issue, and his assistance testing a fix. :bow:
+
 # Version 0.8.1
 ## Added features and functionality
 + Added: New Discover Service Class and matching unit testing to represent the recently released Falcon Discover API.
