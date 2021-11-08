@@ -229,8 +229,22 @@ class TestUber:
         else:
             return False
 
+    def uber_test_invalid_reserved_word_payload(self):
+        parameters = {
+            "limit": 1,
+            "facet": "cve,host_info",
+            filter:"created_timestamp:>'2021-01-01T00:00:01Z'"
+        }
+        if falcon.command("combinedQueryVulnerabilities", params=parameters)["status_code"] in AllowedResponses:
+            return True
+        else:
+            return False
+
     def test_GetAWSSettings(self):
         assert self.uberCCAWS_GetAWSSettings() is True
+
+    def test_reserved_words(self):
+        assert self.uber_test_invalid_reserved_word_payload() is True
 
     def test_QueryAWSAccounts(self):
         assert self.uberCCAWS_QueryAWSAccounts() is True
