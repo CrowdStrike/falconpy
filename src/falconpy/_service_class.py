@@ -66,10 +66,12 @@ class ServiceClass:
                  Mutually exclusive to client_id / client_secret.
                  {
                      "client_id": "CLIENT_ID_HERE",
-                     "client_secret": "CLIENT_SECRET_HERE"
+                     "client_secret": "CLIENT_SECRET_HERE",
+                     "member_cid": "CHILD_CID_MSSP_ONLY"
                  }
         client_id -- Client ID for the CrowdStrike API. Mutually exclusive to creds.
         client_secret -- Client Secret for the CrowdStriek API. Mutually exclusive to creds.
+        member_cid -- CID of the child account to authenticate to (MSSP only)
         validate_payload -- Boolean specifying if body payloads should be validated.
                             Defaults to True.
         user_agent -- User-Agent string to use for all requests made to the CrowdStrike API.
@@ -81,6 +83,7 @@ class ServiceClass:
         self.ssl_verify = kwargs.get("ssl_verify", True)
         self.timeout = kwargs.get("timeout", None)
         user_agent = kwargs.get("user_agent", None)
+        member_cid = kwargs.get("member_cid", None)
         # Currently defaulting to validation enabled
         self.validate_payloads = kwargs.get("validate_payloads", True)
         self.refreshable = False
@@ -93,6 +96,10 @@ class ServiceClass:
                 "client_id": client_id,
                 "client_secret": client_secret
             }
+            if member_cid:
+                # Passing member_cid will not overwrite the
+                # existing value in the creds dictionary
+                creds["member_cid"] = member_cid
         if auth_object:
             self.auth_object = auth_object
             if not self.authenticated():
