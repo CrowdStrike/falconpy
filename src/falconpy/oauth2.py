@@ -58,7 +58,7 @@ class OAuth2:
     def __init__(self: object, base_url: str = "https://api.crowdstrike.com",
                  ssl_verify: bool = True, proxy: dict = None, timeout: float or tuple = None,
                  creds: dict = None, client_id: str = None, client_secret: str = None,
-                 user_agent: str = None):
+                 user_agent: str = None, member_cid: str = None):
         """Class constructor.
 
         Initializes the base class by ingesting credentials,
@@ -73,17 +73,23 @@ class OAuth2:
         creds -- Dictionary containing CrowdStrike API credentials.
                  Mutually exclusive to client_id / client_secret.
         client_id -- Client ID for the CrowdStrike API. Mutually exclusive to creds.
-        client_secret -- Client Secret for the CrowdStriek API. Mutually exclusive to creds.
+        client_secret -- Client Secret for the CrowdStrike API. Mutually exclusive to creds.
+        member_cid -- Child CID to connec to. Mutually exclusive to creds.
 
-        This method only accepts keywords to specify arguments.
+        This method only supports keywords to specify arguments.
         """
         if client_id and client_secret and not creds:
             creds = {
                 "client_id": client_id,
                 "client_secret": client_secret
             }
+            # Have to pass member_cid the same way you pass client_id / secret
+            # If you use a creds dictionary, pass the member_cid there instead
+            if member_cid:
+                creds["member_cid"] = member_cid
         elif not creds:
             creds = {}
+
         self.creds = creds
         self.base_url = confirm_base_url(base_url)
         self.ssl_verify = ssl_verify
