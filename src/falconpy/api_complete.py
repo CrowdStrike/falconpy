@@ -54,6 +54,7 @@ class APIHarness:
                  creds: dict = None,
                  client_id: str = None,
                  client_secret: str = None,
+                 member_cid: str = None,
                  ssl_verify: bool = True,
                  proxy: dict = None,
                  timeout: float or tuple = None,
@@ -74,10 +75,12 @@ class APIHarness:
                  Mutually exclusive to client_id / client_secret.
                  {
                      "client_id": "CLIENT_ID_HERE",
-                     "client_secret": "CLIENT_SECRET_HERE"
+                     "client_secret": "CLIENT_SECRET_HERE",
+                     "member_cid": "CHILD_CID_MSSP_ONLY"
                  }
         client_id -- Client ID for the CrowdStrike API. Mutually exclusive to creds.
         client_secret -- Client Secret for the CrowdStrike API. Mutually exclusive to creds.
+        member_cid -- Child CID to connect to. (MSSP only) Mutually exclusive to creds.
         user_agent -- User-Agent string to use for all requests made to the CrowdStrike API.
                       String. Defaults to crowdstrike-falconpy/VERSION.
 
@@ -88,6 +91,10 @@ class APIHarness:
                 "client_id": client_id,
                 "client_secret": client_secret
             }
+            # Have to pass member_cid the same way you pass client_id / secret
+            # If you use a creds dictionary, pass the member_cid there instead
+            if member_cid:
+                creds["member_cid"] = member_cid
         elif not creds:
             creds = {}
         self.creds = creds

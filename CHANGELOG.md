@@ -1,3 +1,11 @@
+# Version 0.8.3
+## Added features and functionality
++ Added: MSSP Direct Authentication - Additional authentication keyword is now available, `member_cid`, allowing developers targeting MSSP functionality to make use of Direct Authentication as opposed to still using Credential Authentication. This functionality is supported in all Service Classes and the Uber Class.
+    - `_service_class.py`
+    - `api_complete.py`
+    - `oauth2.py`
+    - `tests/test_authorization.py`
+
 # Version 0.8.2
 ## Issues resolved
 + Fixed: Issue in `_util.args_to_params` when handling Python reserved words defined as keys incorrectly in the parameter dictionary. Closes #422.

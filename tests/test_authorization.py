@@ -99,6 +99,21 @@ class TestAuthorization():
         else:
             return False
 
+    def failUberMSSPAuth(self):
+        status = self.getConfig()
+        if status:
+            self.falcon = APIHarness(client_id=self.config["falcon_client_id"],
+                                     client_secret=self.config["falcon_client_secret"],
+                                     member_cid="1234567890ABCDEFG"
+                                     )
+            self.falcon.authenticate()
+            if not self.falcon.authenticated:
+                return True
+            else:
+                return False
+        else:
+            return False
+
     def uberRevoke(self):
         return self.falcon.deauthenticate()
 
@@ -142,11 +157,10 @@ class TestAuthorization():
         status = self.getConfig()
         result = False
         if status:
-            authorization = OAuth2(creds={
-                    'client_id': self.config["falcon_client_id"],
-                    'client_secret': self.config["falcon_client_secret"],
-                    'member_cid': '1234567890ABCDEFG'
-                })
+            authorization = OAuth2(client_id=self.config["falcon_client_id"],
+                                   client_secret=self.config["falcon_client_secret"],
+                                   member_cid='1234567890ABCDEFG'
+                                   )
             try:
                 req = authorization.token()
                 if req["status_code"] in [201, 403]:  # Prolly an invalid MSSP cred, 403 is correct
@@ -157,17 +171,17 @@ class TestAuthorization():
         return result
 
     def failServiceAuth(self):
-        self.authorization = OAuth2(creds={
-            'client_id': "BadClientID",
-            'client_secret': "BadClientSecret"
-        })
-        self.authorization.base_url = "nowhere"
+        self.authorization = Hosts(client_id="BadClientID",
+                                   client_secret="BadClientSecret",
+                                   member_cid="123456789ABCDEFG"
+                                   )
+        self.authorization.auth_object.base_url = "nowhere"
         try:
-            self.token = self.authorization.token()['body']['access_token']
+            self.token = self.authorization.auth_object.token()['body']['access_token']
         except KeyError:
             self.token = False
 
-        self.authorization.revoke(self.token)
+        self.authorization.auth_object.revoke(self.token)
 
         if self.token:
             return False
@@ -209,6 +223,9 @@ class TestAuthorization():
 
     def test_serviceMSSPAuth(self):
         assert self.serviceMSSPAuth() is True
+
+    def test_uberMSSPAuthFailure(self):
+        assert self.failUberMSSPAuth() is True
 
     def test_serviceRevoke(self):
         self.serviceAuth()
