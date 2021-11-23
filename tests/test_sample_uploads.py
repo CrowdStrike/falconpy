@@ -73,7 +73,7 @@ class TestSampleUploads:
             if os.path.exists(TARGET):
                 os.remove(TARGET)
             if hash1 == hash2:
-                response = falcon.DeleteSampleV3(ids=sha)
+                _ = falcon.DeleteSampleV3(ids=sha)
                 return True
             else:
                 _ = falcon.DeleteSampleV3(ids=sha)
