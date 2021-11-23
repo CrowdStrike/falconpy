@@ -49,6 +49,12 @@ def parse_command_line() -> object:
         required=True
         )
     parser.add_argument(
+        '-b',
+        '--base_url',
+        help='CrowdStrike API region (us1, us2, eu1, usgov1)',
+        required=False
+    )
+    parser.add_argument(
         '-d',
         '--days',
         help='Number of days since a host was seen before it is considered stale',
@@ -72,11 +78,11 @@ def parse_command_line() -> object:
     return parser.parse_args()
 
 
-def connect_api(key: str, secret: str) -> object:
+def connect_api(key: str, secret: str, base_url: str) -> object:
     """
     Connects to the API and returns an instance of the Hosts Service Class.
     """
-    return Hosts(client_id=key, client_secret=secret)
+    return Hosts(client_id=key, client_secret=secret, base_url=base_url)
 
 
 def get_host_details(id_list: list) -> list:
@@ -147,6 +153,11 @@ if not args.reverse:
 else:
     SORT = bool(args.reverse)
 
+if not args.base_url:
+    BASE = "us1"
+else:
+    BASE = args.base_url
+
 # Credentials
 api_client_id = args.client_id
 api_client_secret = args.client_secret
@@ -172,14 +183,17 @@ else:
 STALE_DATE = calc_stale_date(STALE_DAYS)
 
 # Connect to the API
-falcon = connect_api(api_client_id, api_client_secret)
+falcon = connect_api(api_client_id, api_client_secret, BASE)
 
 # List to hold our identified hosts
 stale = []
 # For each stale host identified
-for host in get_host_details(get_hosts(STALE_DATE)):
-    # Retrieve host detail
-    stale = parse_host_detail(host, stale)
+try:
+    for host in get_host_details(get_hosts(STALE_DATE)):
+        # Retrieve host detail
+        stale = parse_host_detail(host, stale)
+except KeyError:
+    raise SystemExit("Unable to communicate with CrowdStrike API, check credentials and try again.")
 
 # If we produced stale host results
 if stale:
