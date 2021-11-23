@@ -19,13 +19,13 @@ This document outlines security policy and procedures for the CrowdStrike `falco
 FalconPy functionality is unit tested to run under the following versions of Python.
 
 | Version | Supported |
-| :------- | :--------- |
-| 3.9.x   | :white_check_mark: |
-| 3.8.x   | :white_check_mark: |
-| 3.7.x   | :white_check_mark: |
-| 3.6.x   | :white_check_mark: |
-| <= 3.5  | :x: |
-| <= 2.x.x | :x: |
+| :------- | :--------: |
+| 3.9.x   | ![Yes](https://img.shields.io/badge/-YES-green) |
+| 3.8.x   | ![Yes](https://img.shields.io/badge/-YES-green) |
+| 3.7.x   | ![Yes](https://img.shields.io/badge/-YES-green) |
+| 3.6.x   | ![Yes](https://img.shields.io/badge/-YES-green) |
+| <= 3.5  | ![No](https://img.shields.io/badge/-NO-red) |
+| <= 2.x.x | ![No](https://img.shields.io/badge/-NO-red) |
 
 This unit testing is performed using Windows, MacOS, and Ubuntu Linux.
 
