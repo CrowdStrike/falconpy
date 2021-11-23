@@ -126,10 +126,13 @@ class OAuth2:
                                        headers=header_payload, verify=self.ssl_verify,
                                        proxy=self.proxy, timeout=self.timeout,
                                        user_agent=self.user_agent)
-            if returned["status_code"] == 201:
-                self.token_expiration = returned["body"]["expires_in"]
-                self.token_time = time.time()
-                self.token_value = returned["body"]["access_token"]
+            if isinstance(returned, dict):  # Issue #433
+                if returned["status_code"] == 201:
+                    self.token_expiration = returned["body"]["expires_in"]
+                    self.token_time = time.time()
+                    self.token_value = returned["body"]["access_token"]
+            else:
+                returned = generate_error_result("Unexpected API response received", 403)
         else:
             returned = generate_error_result("Invalid credentials specified", 403)
 
@@ -161,3 +164,11 @@ class OAuth2:
             returned = generate_error_result("Invalid credentials specified", 403)
 
         return returned
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
+    # backwards compatibility / ease of use purposes
+    oauth2AccessToken = token
+    oAuth2AccessToken = token
+    oauth2RevokeToken = revoke
+    oAuth2RevokeToken = revoke

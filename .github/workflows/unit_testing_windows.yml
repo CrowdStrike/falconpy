@@ -36,6 +36,7 @@ jobs:
       env:
         DEBUG_API_ID: ${{ secrets.DEBUG_API_ID }}
         DEBUG_API_SECRET: ${{ secrets.DEBUG_API_SECRET }}
+        CROSS_DEBUG_KEY: ${{ secrets.CROSS_DEBUG_KEY }}
       run: |
         coverage run --source=src --omit=src/falconpy/debug.py -m pytest -s
         coverage report

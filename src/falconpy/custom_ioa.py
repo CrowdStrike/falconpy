@@ -59,8 +59,8 @@ class CustomIOA(ServiceClass):
         """Get pattern severities by ID.
 
         Keyword arguments:
-        ids -- Entity IDs. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword is used.
+        ids -- Pattern IDs. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -85,8 +85,8 @@ class CustomIOA(ServiceClass):
         """Get platforms by ID.
 
         Keyword arguments:
-        ids -- Entity IDs. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword is used.
+        ids -- Platform IDs. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -111,8 +111,8 @@ class CustomIOA(ServiceClass):
         """Get rule groups by ID.
 
         Keyword arguments:
-        ids -- Entity IDs. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword is used.
+        ids -- Rule group IDs. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -178,9 +178,9 @@ class CustomIOA(ServiceClass):
         """Delete rule groups by ID.
 
         Keyword arguments:
-        comment -- Explains why the entity is being deleted. String.
-        ids -- Entity IDs. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword is used.
+        comment -- Explains why the rule group is being deleted. String.
+        ids -- Rule group IDs to be deleted. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -251,8 +251,8 @@ class CustomIOA(ServiceClass):
         """Get rule types by ID.
 
         Keyword arguments:
-        ids -- Entity IDs. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword is used.
+        ids -- Rule type IDs. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -307,8 +307,8 @@ class CustomIOA(ServiceClass):
         The max number of IDs is constrained by URL size.
 
         Keyword arguments:
-        ids -- Entity IDs. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword is used.
+        ids -- Rule IDs. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -413,8 +413,8 @@ class CustomIOA(ServiceClass):
 
         Keyword arguments:
         comment -- Explains why the entity is being deleted. String.
-        ids -- Entity IDs. String or list of strings.
-        parameters -- full parameters payload, not required if using `ids` keyword is used.
+        ids -- Rule IDs to be deleted. String or list of strings.
+        parameters -- full parameters payload, not required if using `ids` keyword.
         rule_group_id -- The parent rule group. String.
 
         This method only supports keywords for providing arguments.
