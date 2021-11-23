@@ -49,7 +49,7 @@ class TestAuthentications:
             return False
 
     def serviceAny_forceCrossCloudResponseFailure(self):
-        falcon = FalconAuth.OAuth2(client_id=os.environ["FALCON_CLIENT_ID_USGOV1"],
+        falcon = FalconAuth.OAuth2(client_id=os.environ["CROSS_DEBUG_KEY"],
                                    client_secret="will_not_work",
                                    base_url="us1"
                                    )
