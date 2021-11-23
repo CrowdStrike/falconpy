@@ -1,7 +1,5 @@
 ##########################################################################################
 # Customize file classifications.                                                        #
-# Results from files under any classifier will be excluded from LGTM                     #
-# statistics.                                                                            #
 ##########################################################################################
 
 ##########################################################################################
@@ -65,5 +63,4 @@ queries:
         - "security"
         - "correctness"           
         - "maintainability"
-  # Specifically hide the results of two queries.
   - exclude: py/implicit-string-concatenation-in-list
