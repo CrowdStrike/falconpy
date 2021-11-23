@@ -235,7 +235,7 @@ class TestAuthorization():
         assert self.failServiceAuth() is True
 
     def test_base_url_lookup(self):
-        status = self.getConfig()
+        _ = self.getConfig()
         test_falcon = OAuth2(
             client_id=self.config["falcon_client_id"],
             client_secret=self.config["falcon_client_secret"],
@@ -246,7 +246,7 @@ class TestAuthorization():
         )
 
     def test_fail_base_url_lookup(self):
-        status = self.getConfig()
+        _ = self.getConfig()
         test_falcon = OAuth2(
             client_id=self.config["falcon_client_id"],
             client_secret=self.config["falcon_client_secret"],
