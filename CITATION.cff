@@ -5,7 +5,7 @@ message: >-
   metadata from this file.
 type: software
 authors:
-  - given-names: CrowdStrike
+  - family-names: CrowdStrike
     email: falconpy@crowdstrike.com
   - given-names: Joshua
     family-names: Hiller
