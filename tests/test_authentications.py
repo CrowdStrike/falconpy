@@ -39,12 +39,22 @@ class TestAuthentications:
 
     def serviceAny_TestStaleObjectAuth(self):
 
-        falcon = FalconAWS(auth_object=FalconAuth.OAuth2(creds={
-                                                                "client_id": auth.config["falcon_client_id"],
+        falcon = FalconAWS(auth_object=FalconAuth.OAuth2(creds={"client_id": auth.config["falcon_client_id"],
                                                                 "client_secret": auth.config["falcon_client_secret"]
                                                                 }))
         result = falcon.QueryAWSAccounts()
         if result["status_code"] in AllowedResponses:
+            return True
+        else:
+            return False
+
+    def serviceAny_forceCrossCloudResponseFailure(self):
+        falcon = FalconAuth.OAuth2(client_id=os.environ["FALCON_CLIENT_ID_USGOV1"],
+                                   client_secret="will_not_work",
+                                   base_url="us1"
+                                   )
+        result = falcon.token()
+        if result["status_code"] == 403:
             return True
         else:
             return False
@@ -83,6 +93,9 @@ class TestAuthentications:
 
     def test_BadObjectAuth(self):
         assert self.serviceAny_TestBadObjectAuth() is True
+
+    def test_crossCloudFailure(self):
+        assert self.serviceAny_forceCrossCloudResponseFailure() is True
 
     def test_ObjectAuth(self):
         assert self.serviceAny_TestObjectAuth() is True
