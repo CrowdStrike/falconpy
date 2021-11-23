@@ -56,11 +56,4 @@ path_classifiers:
 #########################################################################################
 
 queries:
-  # Start by hiding the results of all queries.
-  - exclude: "*"
-  - include:           
-      tags:
-        - "security"
-        - "correctness"           
-        - "maintainability"
   - exclude: py/implicit-string-concatenation-in-list
