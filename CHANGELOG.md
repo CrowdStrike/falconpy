@@ -5,7 +5,10 @@
     - `test_authentications.py`
     - Gratz to @tsullivan06 for his assistance in identifying and resolving this issue.
 + Fixed: Missing method aliases in OAuth2 Service Class. Closes #432.
+    - `oauth2.py`
     - Kudos to @tsullivan06 for identifying this issue.
++ Fixed: Docstring typos in Custom IOA Service Class source.
+    - `custom_ioa.py`
 
 # Version 0.8.3
 ## Added features and functionality
