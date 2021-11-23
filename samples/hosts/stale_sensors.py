@@ -9,7 +9,7 @@ from argparse import RawTextHelpFormatter
 import argparse
 from tabulate import tabulate
 try:
-    from falconpy.hosts import Hosts
+    from falconpy import Hosts
 except ImportError as no_falconpy:
     raise SystemExit(
         "CrowdStrike FalconPy must be installed in order to use this application.\n"
