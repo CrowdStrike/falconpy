@@ -558,3 +558,6 @@ rw
 sed
 gdb
 MalQueryinator
+tsullivan
+TypeError
+Gratz
