@@ -16,6 +16,7 @@ path_classifiers:
     - exclude: /
     # Classify all files in the top-level directories test/ and testsuites/ as test code.
     - test
+    - tests
     - testsuites
     # Classify all files with suffix `.test` as test code.
     #        Note: use only forward slash / as a path separator.
