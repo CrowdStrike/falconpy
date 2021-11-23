@@ -1,10 +1,8 @@
 # test_iocs.py
 # This class tests the iocs service class
 
-import json
 import os
 import sys
-import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 #Import our sibling src folder into the path
