@@ -1,3 +1,12 @@
+# Version 0.8.4
+## Issues resolved
++ Fixed: TypeError when using a valid credential in the wrong cloud environment. (GOV -> US1 only). Closes #433.
+    - `oauth2.py`
+    - `test_authentications.py`
+    - Gratz to @tsullivan06 for his assistance in identifying and resolving this issue.
++ Fixed: Missing method aliases in OAuth2 Service Class. Closes #432.
+    - Kudos to @tsullivan06 for identifying this issue.
+
 # Version 0.8.3
 ## Added features and functionality
 + Added: MSSP Direct Authentication - Additional authentication keyword is now available, `member_cid`, allowing developers targeting MSSP functionality to make use of Direct Authentication as opposed to still using Credential Authentication. This functionality is supported in all Service Classes and the Uber Class.
