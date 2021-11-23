@@ -76,7 +76,7 @@ class TestSampleUploads:
                 response = falcon.DeleteSampleV3(ids=sha)
                 return True
             else:
-                response = falcon.DeleteSampleV3(ids=sha)
+                _ = falcon.DeleteSampleV3(ids=sha)
                 return False
         else:
             # Workflow download error, skip it
