@@ -41,7 +41,8 @@ class TestAuthentications:
 
         falcon = FalconAWS(auth_object=FalconAuth.OAuth2(creds={"client_id": auth.config["falcon_client_id"],
                                                                 "client_secret": auth.config["falcon_client_secret"]
-                                                                }))
+                                                                }
+                                                         ))
         result = falcon.QueryAWSAccounts()
         if result["status_code"] in AllowedResponses:
             return True
