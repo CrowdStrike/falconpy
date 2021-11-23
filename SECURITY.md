@@ -1,5 +1,14 @@
+![CrowdStrike Falcon](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png) [![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)<br/>
+
+![GitHub top language](https://img.shields.io/github/languages/top/crowdstrike/falconpy?logo=python&logoColor=white)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/CrowdStrike/falconpy.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/CrowdStrike/falconpy/context:python)
+![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/crowdstrike/falconpy?logo=snyk)
+![GitHub issues](https://img.shields.io/github/issues-raw/crowdstrike/falconpy?logo=github)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/crowdstrike/falconpy?color=green&logo=github)
+
 # Security Policy
 This document outlines security policy and procedures for the CrowdStrike `falconpy` project.
+
 + [Supported Python versions](#supported-python-versions)
 + [Supported FalconPy versions](#supported-falconpy-versions)
 + [Reporting a potential security vulnerability](#reporting-a-potential-security-vulnerability)
@@ -19,6 +28,12 @@ FalconPy functionality is unit tested to run under the following versions of Pyt
 | <= 2.x.x | :x: |
 
 This unit testing is performed using Windows, MacOS, and Ubuntu Linux.
+
+| Operating System | Most Recent Result |
+| :--- | :--- |
+| MacOS | [![Unit testing (MacOS)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_macos.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_macos.yml) |
+| Ubuntu Linux | [![Unit testing (Ubuntu)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_ubuntu.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_ubuntu.yml) |
+| Windows | [![Unit testing (Windows)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_windows.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_windows.yml) |
 
 ## Supported FalconPy versions
 
