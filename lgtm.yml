@@ -52,3 +52,21 @@ path_classifiers:
     # called tools).
     - tools
     - utils
+
+#########################################################################################
+# Use the `queries` block to change the default display of query results.               #
+#########################################################################################
+
+queries:
+  # Start by hiding the results of all queries.
+  - exclude: "*"
+  - include:           
+      tags:
+        - "security"
+        - "correctness"           
+        - "maintainability"
+      severity: 
+        - "error"
+        - "warning"
+  # Specifically hide the results of two queries.
+  - exclude: py/implicit-string-concatenation-in-list
