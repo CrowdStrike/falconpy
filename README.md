@@ -1,6 +1,6 @@
-![CrowdStrike Falcon](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png) [![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)<br/>
+![CrowdStrike Falcon](/docs/asset/falconpy-social-graphic.png) [![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)<br/>
 
-# FalconPy<BR/>*The CrowdStrike Falcon SDK for Python 3*
+# The CrowdStrike Falcon SDK for Python 3
 ![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy)
 [![CodeQL](https://github.com/CrowdStrike/falconpy/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/codeql-analysis.yml)
@@ -24,45 +24,47 @@ This SDK provides two distinct methods for interacting with CrowdStrike's Falcon
 ### Service Classes
 Representing a single API service collection, each service class has a method defined for every operation available in that service collection.
 
-| OAuth2-Based API<br>![#f03c15](https://via.placeholder.com/10/f03c15/000000?text=+)<small> *Documentation requires a CrowdStrike customer login*</small> | Code Location |
+| Service Collection | Code Location |
 |:-|:-|
-| CrowdStrike Device Control API | [device_control_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/device_control_policies.py) |
-| CrowdStrike Sensor Policy Management API | [sensor_update_policy.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_update_policy.py) |
-| CrowdStrike Custom Indicators of Attack (IOAs) APIs | [custom_ioa.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/custom_ioa.py) <br/> [ioa_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ioa_exclusions.py)|
-| [CrowdStrike Custom Indicators of Compromise (IOCs) API](https://falcon.crowdstrike.com/support/documentation/88/custom-ioc-apis) | [ioc.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ioc.py) <BR/> [iocs.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/iocs.py) ![#f03c15](https://via.placeholder.com/10/f03c15/000000?text=+) <small>*Deprecated*</small> |
-| [CrowdStrike Detections API](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [detects.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/detects.py) |
-| CrowdStrike Falcon Discover API | [discover.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/discover.py) |
-| [CrowdStrike Event Streams API](https://falcon.crowdstrike.com/support/documentation/89/event-streams-apis)| [event_streams.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/event_streams.py) |
+| [CrowdStrike Device Control](https://falcon.crowdstrike.com/documentation/167/usb-device-control-policy-apis) | [device_control_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/device_control_policies.py) |
+| [CrowdStrike Sensor Update Policy Management](https://falcon.crowdstrike.com/documentation/201/sensor-update-policy-apis) | [sensor_update_policy.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_update_policy.py) |
+| CrowdStrike Custom Indicators of Attack (IOAs) | [custom_ioa.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/custom_ioa.py) <br/> [ioa_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ioa_exclusions.py)|
+| [CrowdStrike Custom Indicators of Compromise (IOCs)](https://falcon.crowdstrike.com/support/documentation/88/custom-ioc-apis) | [ioc.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ioc.py) <BR/> [iocs.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/iocs.py) ![#f03c15](https://via.placeholder.com/10/f03c15/000000?text=+) <small>*Deprecated*</small> |
+| [CrowdStrike Detections](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [detects.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/detects.py) |
+| [CrowdStrike Falcon Discover](https://falcon.crowdstrike.com/documentation/197/falcon-discover-apis) | [discover.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/discover.py) |
+| [CrowdStrike Event Streams](https://falcon.crowdstrike.com/support/documentation/89/event-streams-apis)| [event_streams.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/event_streams.py) |
 | [CrowdStrike Falcon Container](https://falcon.crowdstrike.com/documentation/146/falcon-container-sensor-for-linux) | [falcon_container.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falcon_container.py) |
-| [CrowdStrike Falcon Horizon API](https://falcon.crowdstrike.com/support/documentation/137/falcon-horizon-apis) | [cspm_registration.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/cspm_registration.py) |
-| [CrowdStrike Falcon X APIs](https://falcon.crowdstrike.com/support/documentation/92/falcon-x-apis) | [sample_uploads.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sample_uploads.py) <br/> [falconx_sandbox.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falconx_sandbox.py) <BR/> [quick_scan.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quick_scan.py)|
-| [CrowdStrike Firewall Management API](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [firewall_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_management.py) |
-| [CrowdStrike Firewall Policy Management API](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [firewall_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_policies.py) |
-| CrowdStrike Falcon Complete Dashboard API | [falcon_complete_dashboard.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falcon_complete_dashboard.py) |
-| [CrowdStrike Falcon Flight Control API](https://falcon.crowdstrike.com/support/documentation/154/flight-control-apis) | [mssp.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/mssp.py) |
-| [CrowdStrike Host Groups API](https://falcon.crowdstrike.com/support/documentation/84/host-and-host-group-management-apis) | [host_group.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/host_group.py) |
-| [CrowdStrike Hosts API](https://falcon.crowdstrike.com/support/documentation/84/host-and-host-group-management-apis) | [hosts.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/hosts.py) |
-| [CrowdStrike Incident and Detection Monitoring API](https://falcon.crowdstrike.com/support/documentation/86/detections-monitoring-apis) | [incidents.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/incidents.py) |
-| [CrowdStrike Installation Tokens API](https://falcon.crowdstrike.com/support/documentation/120/Installation-token-APIs) | [installation_tokens.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/installation_tokens.py) |
-| [CrowdStrike Intel API](https://falcon.crowdstrike.com/support/documentation/72/intel-apis) | [intel.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/intel.py) |
-| CrowdStrike Kubernetes Protection API | [kubernetes_protection.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/kubernetes_protection.py) |
-| [CrowdStrike MalQuery API](https://falcon.crowdstrike.com/support/documentation/113/malquery-apis) | [malquery.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/malquery.py) |
-| CrowdStrike ML Exclusions APIs | [ml_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ml_exclusions.py) |
-| [CrowdStrike OAuth2 Auth Token API](https://falcon.crowdstrike.com/support/documentation/93/oauth2-auth-token-apis) | [oauth2.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/oauth2.py) |
-| CrowdStrike Overwatch Dashboard API | [overwatch_dashboard.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/overwatch_dashboard.py) |
-| [CrowdStrike Prevention Policy API](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [prevention_policy.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/prevention_policy.py) |
-| CrowdStrike Quarantine API | [quarantine.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quarantine.py) |
-| [CrowdStrike Real Time Response (RTR) API](https://falcon.crowdstrike.com/support/documentation/90/real-time-response-apis) | [real_time_response.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/real_time_response.py) |
-| [CrowdStrike Realtime Response (RTR) Administration API](https://falcon.crowdstrike.com/support/documentation/90/real-time-response-apis) | [real_time_response_admin.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/real_time_response_admin.py) |
-| CrowdStrike Realtime Response (RTR) Policies API | [response_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/response_policies.py) |
-| [CrowdStrike Sensor Download API](https://falcon.crowdstrike.com/support/documentation/109/sensor-download-apis) | [sensor_download.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_download.py) |
-| CrowdStrike Sensor Visibility Exclusions API | [sensor_visibility_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_visibility_exclusions.py) |
-| [CrowdStrike Spotlight API](https://falcon.crowdstrike.com/support/documentation/98/spotlight-apis) | [spotlight_vulnerabilities.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/spotlight_vulnerabilities.py) |
-| [CrowdStrike User and Roles API](https://falcon.crowdstrike.com/support/documentation/87/users-and-roles-apis) | [user_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/user_management.py) |
-| [Falcon Discover for Cloud and Containers - AWS Accounts API](https://falcon.crowdstrike.com/support/documentation/91/discover-for-aws-apis) | [cloud_connect_aws.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/cloud_connect_aws.py) |
-| [Falcon Discover for Cloud and Containers - Azure Subscriptions API](https://falcon.crowdstrike.com/support/documentation/118/falcon-discover-for-cloud-and-containers-azure-subscription-apis) | [d4c_registration.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/d4c_registration.py) |
-| [Falcon Discover for Cloud and Containers - GCP Projects API](https://falcon.crowdstrike.com/support/documentation/117/falcon-discover-for-cloud-and-containers-gcp-projects-apis) | [d4c_registration.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/d4c_registration.py) |
-| [CrowdStrike Falcon Zero Trust Assessment API](https://falcon.crowdstrike.com/support/documentation/156/zero-trust-assessment-apis) | [zero_trust_assessment.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/zero_trust_assessment.py) |
+| [CrowdStrike Falcon Horizon](https://falcon.crowdstrike.com/support/documentation/137/falcon-horizon-apis) | [cspm_registration.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/cspm_registration.py) |
+| [CrowdStrike Falcon X](https://falcon.crowdstrike.com/support/documentation/92/falcon-x-apis) | [sample_uploads.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sample_uploads.py) <br/> [falconx_sandbox.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falconx_sandbox.py) <BR/> [quick_scan.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quick_scan.py)|
+| [CrowdStrike Firewall Management](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [firewall_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_management.py) |
+| [CrowdStrike Firewall Policy Management](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [firewall_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_policies.py) |
+| [CrowdStrike Falcon Complete Dashboard](https://falcon.crowdstrike.com/documentation/151/falcon-complete-dashboard-apis) | [falcon_complete_dashboard.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falcon_complete_dashboard.py) |
+| [CrowdStrike Falcon Flight Control](https://falcon.crowdstrike.com/support/documentation/154/flight-control-apis) | [mssp.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/mssp.py) |
+| [CrowdStrike Host Groups](https://falcon.crowdstrike.com/support/documentation/84/host-and-host-group-management-apis) | [host_group.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/host_group.py) |
+| [CrowdStrike Hosts](https://falcon.crowdstrike.com/support/documentation/84/host-and-host-group-management-apis) | [hosts.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/hosts.py) |
+| [CrowdStrike Incident and Detection Monitoring](https://falcon.crowdstrike.com/support/documentation/86/detections-monitoring-apis) | [incidents.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/incidents.py) |
+| [CrowdStrike Installation Tokens](https://falcon.crowdstrike.com/support/documentation/120/Installation-token-APIs) | [installation_tokens.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/installation_tokens.py) |
+| [CrowdStrike Intel](https://falcon.crowdstrike.com/support/documentation/72/intel-apis) | [intel.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/intel.py) |
+| [CrowdStrike Kubernetes Protection](https://falcon.crowdstrike.com/documentation/177/kubernetes-protection) | [kubernetes_protection.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/kubernetes_protection.py) |
+| [CrowdStrike MalQuery](https://falcon.crowdstrike.com/support/documentation/113/malquery-apis) | [malquery.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/malquery.py) |
+| CrowdStrike ML Exclusions | [ml_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ml_exclusions.py) |
+| [CrowdStrike OAuth2 Auth Token](https://falcon.crowdstrike.com/support/documentation/93/oauth2-auth-token-apis) | [oauth2.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/oauth2.py) |
+| [CrowdStrike Overwatch Dashboard](https://falcon.crowdstrike.com/documentation/155/falcon-overwatch-dashboard-apis) | [overwatch_dashboard.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/overwatch_dashboard.py) |
+| [CrowdStrike Prevention Policy](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [prevention_policy.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/prevention_policy.py) |
+| CrowdStrike Quarantine | [quarantine.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quarantine.py) |
+| [CrowdStrike Real Time Response (RTR)](https://falcon.crowdstrike.com/support/documentation/90/real-time-response-apis) | [real_time_response.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/real_time_response.py) |
+| [CrowdStrike Realtime Response (RTR) Administration](https://falcon.crowdstrike.com/support/documentation/90/real-time-response-apis) | [real_time_response_admin.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/real_time_response_admin.py) |
+| [CrowdStrike Realtime Response (RTR) Policies](https://falcon.crowdstrike.com/documentation/161/real-time-response-policy-apis) | [response_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/response_policies.py) |
+| [CrowdStrike Sensor Download](https://falcon.crowdstrike.com/support/documentation/109/sensor-download-apis) | [sensor_download.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_download.py) |
+| CrowdStrike Sensor Visibility Exclusions | [sensor_visibility_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_visibility_exclusions.py) |
+| [CrowdStrike Spotlight](https://falcon.crowdstrike.com/support/documentation/98/spotlight-apis) | [spotlight_vulnerabilities.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/spotlight_vulnerabilities.py) |
+| [CrowdStrike User and Roles](https://falcon.crowdstrike.com/support/documentation/87/users-and-roles-apis) | [user_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/user_management.py) |
+| [Falcon Discover for Cloud and Containers - AWS Accounts](https://falcon.crowdstrike.com/support/documentation/91/discover-for-aws-apis) | [cloud_connect_aws.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/cloud_connect_aws.py) |
+| [Falcon Discover for Cloud and Containers - Azure Subscriptions](https://falcon.crowdstrike.com/support/documentation/118/falcon-discover-for-cloud-and-containers-azure-subscription-apis) | [d4c_registration.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/d4c_registration.py) |
+| [Falcon Discover for Cloud and Containers - GCP Projects](https://falcon.crowdstrike.com/support/documentation/117/falcon-discover-for-cloud-and-containers-gcp-projects-apis) | [d4c_registration.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/d4c_registration.py) |
+| [CrowdStrike Falcon Zero Trust Assessment](https://falcon.crowdstrike.com/support/documentation/156/zero-trust-assessment-apis) | [zero_trust_assessment.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/zero_trust_assessment.py) |
+
+> ![#f03c15](https://via.placeholder.com/10/f03c15/000000?text=+)<small> *Documentation requires a CrowdStrike customer login*</small>
 
 ### The Uber Class
 Provides a single harness for interacting with the entire API, covering every available operation within every API service collection.
