@@ -64,7 +64,7 @@ Representing a single API service collection, each service class has a method de
 | [Falcon Discover for Cloud and Containers - GCP Projects](https://falcon.crowdstrike.com/support/documentation/117/falcon-discover-for-cloud-and-containers-gcp-projects-apis) | [d4c_registration.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/d4c_registration.py) |
 | [CrowdStrike Falcon Zero Trust Assessment](https://falcon.crowdstrike.com/support/documentation/156/zero-trust-assessment-apis) | [zero_trust_assessment.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/zero_trust_assessment.py) |
 
-> ![#f03c15](https://via.placeholder.com/10/f03c15/000000?text=+)<small> *Documentation requires a CrowdStrike customer login*</small>
+> ![#f03c15](https://via.placeholder.com/10/f03c15/000000?text=+)<small> *Documentation links shown in the table above require a CrowdStrike customer login. Check [falconpy.io](https://falconpy.io) or the [FalconPy wiki](https://github.com/CrowdStrike/falconpy/wiki) for library-specific documentation.*</small>
 
 ### The Uber Class
 Provides a single harness for interacting with the entire API, covering every available operation within every API service collection.
@@ -125,7 +125,7 @@ GitHub Discussions provide the community with means to communicate. There are fo
 ## Documentation & Collateral
 
 ### Official Project Documentation
-See the wiki for extended documentation: [https://github.com/CrowdStrike/falconpy/wiki](https://github.com/CrowdStrike/falconpy/wiki).
+Extended documentation is available via our [wiki](https://github.com/CrowdStrike/falconpy/wiki) or at [falconpy.io](https://falconpy.io).
 
 ### Videos (Tutorials, Trainings, Overviews)
 *Coming soon*.
