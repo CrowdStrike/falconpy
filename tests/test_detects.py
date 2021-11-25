@@ -35,7 +35,7 @@ class TestDetects:
             "get_detect_summaries": falcon.get_detect_summaries(body={"ids": ["12345678"]}),
             "get_aggregate_detects": falcon.get_aggregate_detects(body={"resource": {"bad": True}}),
             "update_detects_by_id_2": falcon.update_detects_by_ids(
-                                        ids=falcon.query_detects(limit=1)["body"]["resources"],
+                                        ids=",".join(falcon.query_detects(limit=2)["body"]["resources"]),
                                         show_in_ui=True, assigned_to_uuid="12345678", status="ignored",
                                         comment="FalconPy unit testing"
                                         ),
