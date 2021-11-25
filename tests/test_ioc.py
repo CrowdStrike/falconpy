@@ -34,7 +34,7 @@ class TestIOC:
             "indicator_create_also": falcon.indicator_create_v1(body={},
                                                                 type="ipv4",
                                                                 value="1.2.3.4",
-                                                                platforms=["linux"],
+                                                                platforms="linux,windows",
                                                                 applied_globally=True
                                                                 ),
             "indicator_delete": falcon.indicator_delete_v1(ids='12345678'),
