@@ -8,7 +8,7 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy.ioc import IOC
+from falconpy import IOC
 
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
