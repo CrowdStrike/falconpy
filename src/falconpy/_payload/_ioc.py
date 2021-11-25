@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 
 
-def indicator_object(passed_keywords: dict) -> dict:  # pylint: disable=R0912  # noqa: C901
+def indicator_object(passed_keywords: dict) -> dict:
     """Create a properly formatted single indicator payload.
 
     {
@@ -64,41 +64,30 @@ def indicator_object(passed_keywords: dict) -> dict:  # pylint: disable=R0912  #
       "value": "string"
     }
     """
-    # flake8 / pylint both complain about complexity due to the number of if statements.
-    # Ignoring the complaint as this is just running through the potential passed keywords.
     returned_payload = {}
-    if passed_keywords.get("action", None):
-        returned_payload["action"] = passed_keywords.get("action", None)
-    if passed_keywords.get("applied_globally", None):
+    keys = [
+        "action", "description", "expiration", "metadata", "id",
+        "mobile_action", "severity", "source", "type", "value"
+        ]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    if not passed_keywords.get("applied_globally", None) is None:
         returned_payload["applied_globally"] = passed_keywords.get("applied_globally", None)
-    if passed_keywords.get("description", None):
-        returned_payload["description"] = passed_keywords.get("description", None)
-    if passed_keywords.get("expiration", None):
-        returned_payload["expiration"] = passed_keywords.get("expiration", None)
-    if passed_keywords.get("host_groups", None):
-        returned_payload["host_groups"] = passed_keywords.get("host_groups", None)
-    if passed_keywords.get("metadata", None):
-        returned_payload["metadata"] = passed_keywords.get("metadata", None)
+
+    list_keys = ["host_groups", "platforms", "tags"]
+    for list_key in list_keys:
+        passed_list = passed_keywords.get(list_key, None)
+        if passed_list:
+            if isinstance(passed_list, str):
+                passed_list = passed_list.split(",")
+            returned_payload[list_key] = passed_list
+
     if passed_keywords.get("filename", None):
         returned_payload["metadata"] = {
             "filename": passed_keywords.get("filename", None)
         }
-    if passed_keywords.get("mobile_action", None):
-        returned_payload["mobile_action"] = passed_keywords.get("mobile_action", None)
-    if passed_keywords.get("platforms", None):
-        returned_payload["platforms"] = passed_keywords.get("platforms", None)
-    if passed_keywords.get("severity", None):
-        returned_payload["severity"] = passed_keywords.get("severity", None)
-    if passed_keywords.get("source", None):
-        returned_payload["source"] = passed_keywords.get("source", None)
-    if passed_keywords.get("tags", None):
-        returned_payload["tags"] = passed_keywords.get("tags", None)
-    if passed_keywords.get("type", None):
-        returned_payload["type"] = passed_keywords.get("type", None)
-    if passed_keywords.get("value", None):
-        returned_payload["value"] = passed_keywords.get("value", None)
-    if passed_keywords.get("id", None):
-        returned_payload["id"] = passed_keywords.get("id", None)
 
     return returned_payload
 
