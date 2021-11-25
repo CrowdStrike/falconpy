@@ -55,26 +55,20 @@ def ioa_exclusion_payload(passed_keywords: dict) -> dict:
     }
     """
     returned_payload = {}
-    if passed_keywords.get("comment", None):
-        returned_payload["comment"] = passed_keywords.get("comment", None)
-    if passed_keywords.get("groups", None):
-        returned_payload["groups"] = passed_keywords.get("groups", None)
-    if passed_keywords.get("cl_regex", None):
-        returned_payload["cl_regex"] = passed_keywords.get("cl_regex", None)
-    if passed_keywords.get("description", None):
-        returned_payload["description"] = passed_keywords.get("description", None)
-    if passed_keywords.get("detection_json", None):
-        returned_payload["detection_json"] = passed_keywords.get("detection_json", None)
-    if passed_keywords.get("groups", None):
-        returned_payload["groups"] = passed_keywords.get("groups", None)
-    if passed_keywords.get("ifn_regex", None):
-        returned_payload["ifn_regex"] = passed_keywords.get("ifn_regex", None)
-    if passed_keywords.get("name", None):
-        returned_payload["name"] = passed_keywords.get("name", None)
-    if passed_keywords.get("pattern_id", None):
-        returned_payload["pattern_id"] = passed_keywords.get("pattern_id", None)
-    if passed_keywords.get("pattern_name", None):
-        returned_payload["pattern_name"] = passed_keywords.get("pattern_name", None)
+
+    keys = [
+        "cl_regex", "comment", "description", "detection_json",
+        "ifn_regex", "name", "pattern_id", "pattern_name"
+        ]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    passed_list = passed_keywords.get("groups", None)
+    if passed_list:
+        if isinstance(passed_list, str):
+            passed_list = passed_list.split(",")
+        returned_payload["groups"] = passed_list
 
     return returned_payload
 
