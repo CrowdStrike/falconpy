@@ -109,7 +109,7 @@ class TestRTR:
             ["RTR_DeleteFile", falcon.delete_file(ids='12345678', parameters={})],
             ["RTR_ListQueuedSessions", falcon.list_queued_sessions(body={})],
             ["RTR_DeleteQueuedSession", falcon.delete_queued_session(parameters={})],
-            ["RTR_PulseSession", falcon.pulse_session(hosts_to_remove="BobJustBecause",
+            ["RTR_PulseSession", falcon.pulse_session(hosts_to_remove="BobJustBecause,AndLarry",
                                                       origin="Somewheres",
                                                       session_id="12345678"
                                                       )],
