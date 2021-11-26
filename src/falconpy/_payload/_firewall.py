@@ -94,8 +94,11 @@ def firewall_container_payload(passed_keywords: dict) -> dict:
         returned_payload["is_default_policy"] = passed_keywords.get("is_default_policy", None)
     if passed_keywords.get("test_mode", None) is not None:
         returned_payload["test_mode"] = passed_keywords.get("test_mode", None)
-    if passed_keywords.get("rule_group_ids", None):
-        returned_payload["rule_group_ids"] = passed_keywords.get("rule_group_ids", None)
+    rg_list = passed_keywords.get("rule_group_ids", None)
+    if rg_list:
+        if isinstance(rg_list, str):
+            rg_list = rg_list.split(",")
+        returned_payload["rule_group_ids"] = rg_list
 
     return returned_payload
 
@@ -213,10 +216,16 @@ def firewall_rule_group_update_payload(passed_keywords: dict) -> dict:
     for key in keys:
         if passed_keywords.get(key, None):
             returned_payload[key] = passed_keywords.get(key, None)
-    if passed_keywords.get("rule_ids", None):
-        returned_payload["rule_ids"] = passed_keywords.get("rule_ids", None)
-    if passed_keywords.get("rule_versions", None):
-        returned_payload["rule_versions"] = passed_keywords.get("rule_versions", None)
+    id_list = passed_keywords.get("rule_ids", None)
+    if id_list:
+        if isinstance(id_list, str):
+            id_list = id_list.split(",")
+        returned_payload["rule_ids"] = id_list
+    ver_list = passed_keywords.get("rule_versions", None)
+    if ver_list:
+        if isinstance(ver_list, str):
+            ver_list = ver_list.split(",")
+        returned_payload["rule_versions"] = ver_list
     diffs = passed_keywords.get("diff_operations", None)
     if diffs:
         if isinstance(diffs, list):

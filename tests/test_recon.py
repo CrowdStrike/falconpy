@@ -47,7 +47,7 @@ class TestRecon:
             "update_action_as_well": falcon.update_action(id="1234567",
                                                           frequency="often",
                                                           status="new",
-                                                          recipients=["123456"]
+                                                          recipients="123456,654321"
                                                           ),
             "get_notifications_detailed_translated": falcon.get_notifications_detailed_translated(ids="1234567"),
             "get_notfications_detailed": falcon.get_notifications_detailed(ids="1234567"),

@@ -134,8 +134,11 @@ def recon_action_update_payload(passed_keywords: dict) -> dict:
         returned_payload["frequency"] = passed_keywords.get("frequency", None)
     if passed_keywords.get("id", None):
         returned_payload["id"] = passed_keywords.get("id", None)
-    if passed_keywords.get("recipients", None):
-        returned_payload["recipients"] = passed_keywords.get("recipients", None)
+    recip_list = passed_keywords.get("recipients", None)
+    if recip_list:
+        if isinstance(recip_list, str):
+            recip_list = recip_list.split(",")
+        returned_payload["recipients"] = recip_list
     if passed_keywords.get("status", None):
         returned_payload["status"] = passed_keywords.get("status", None)
 

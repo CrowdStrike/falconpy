@@ -57,10 +57,12 @@ def malquery_fuzzy_payload(passed_keywords: dict) -> dict:
     """
     returned_payload = {}
     filters = passed_keywords.get("filter_meta", None)
-    limit = passed_keywords.get("limit", None)
+    limit = passed_keywords.get("limit", 0)
     if filters or limit:
         returned_payload["options"] = {}
     if filters:
+        if isinstance(filters, str):
+            filters = filters.split(",")
         returned_payload["options"]["filter_meta"] = filters
     if limit:
         returned_payload["options"]["limit"] = limit
@@ -76,7 +78,7 @@ def handle_malquery_search_params(passed_params: dict) -> dict:
     returned_base = {}
     filters = passed_params.get("filter_filetypes", None)
     filter_meta = passed_params.get("filter_meta", None)
-    limit = passed_params.get("limit", None)
+    limit = passed_params.get("limit", 0)
     max_date = passed_params.get("max_date", None)
     max_size = passed_params.get("max_size", None)
     min_date = passed_params.get("min_date", None)
@@ -84,8 +86,12 @@ def handle_malquery_search_params(passed_params: dict) -> dict:
     if any([filters, filter_meta, limit, max_date, max_size, min_date, min_size]):
         returned_base["options"] = {}
     if filters:
+        if isinstance(filters, str):
+            filters = filters.split(",")
         returned_base["options"]["filter_filetypes"] = filters
     if filter_meta:
+        if isinstance(filter_meta, str):
+            filter_meta = filter_meta.split(",")
         returned_base["options"]["filter_meta"] = filter_meta
     if limit:
         returned_base["options"]["limit"] = limit

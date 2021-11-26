@@ -138,8 +138,8 @@ def aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R091
     if submitted_keywords.get("ranges", None):
         returned_payload["ranges"] = submitted_keywords.get("ranges", None)
 
-    if submitted_keywords.get("size", None):
-        returned_payload["size"] = submitted_keywords.get("size", None)
+    if submitted_keywords.get("size", -1) >= 0:
+        returned_payload["size"] = submitted_keywords.get("size", 0)
 
     if submitted_keywords.get("sort", None):
         returned_payload["sort"] = submitted_keywords.get("sort", None)
@@ -170,8 +170,11 @@ def exclusion_payload(passed_keywords: dict) -> dict:
     returned_payload = {}
     if passed_keywords.get("comment", None):
         returned_payload["comment"] = passed_keywords.get("comment", None)
-    if passed_keywords.get("groups", None):
-        returned_payload["groups"] = passed_keywords.get("groups", None)
+    group_list = passed_keywords.get("groups", None)
+    if group_list:
+        if isinstance(group_list, str):
+            group_list = group_list.split(",")
+        returned_payload["groups"] = group_list
     if passed_keywords.get("value", None):
         returned_payload["value"] = passed_keywords.get("value", None)
 

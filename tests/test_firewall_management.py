@@ -57,7 +57,7 @@ class TestFirewallManagement:
                                                                       enforce=False,
                                                                       is_default_policy=False,
                                                                       test_mode=True,
-                                                                      rule_group_ids=["123456789"]
+                                                                      rule_group_ids="12345,67890"
                                                                       ),
             "create_rule_group": self.set_rule_group_id(),
             "create_rule_group_fail_one": falcon.create_rule_group(rules={"whatever": "bro"}),
@@ -66,8 +66,8 @@ class TestFirewallManagement:
             "updat3_rule_group": falcon.update_rule_group(id="12345678",
                                                           tracking="Whatever",
                                                           diff_operations=[{"whatever": "brah"}],
-                                                          rule_ids=["12345"],
-                                                          rule_versions=[1, 2, 3]
+                                                          rule_ids="12345,67890",
+                                                          rule_versions="1,2,3"
                                                           ),
             "update_rule_group": falcon.update_rule_group(id="12345678",
                                                           name=rule_group_name,

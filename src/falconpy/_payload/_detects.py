@@ -38,14 +38,30 @@ For more information, please refer to <https://unlicense.org>
 
 
 def update_detects_payload(current_payload: dict, passed_keywords: dict) -> dict:
-    """Update the provided payload with any viable parameters provided as keywords."""
-    if passed_keywords.get("assigned_to_uuid", None):
-        current_payload["assigned_to_uuid"] = passed_keywords.get("assigned_to_uuid", None)
-    if passed_keywords.get("show_in_ui", None):
+    """Update the provided payload with any viable parameters provided as keywords.
+
+    {
+        "assigned_to_uuid": "string",
+        "comment": "string",
+        "ids": [
+            "string"
+        ],
+        "show_in_ui": true,
+        "status": "string"
+    }
+    """
+    keys = ["assigned_to_uuid", "comment", "status"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            current_payload[key] = passed_keywords.get(key, None)
+
+    if passed_keywords.get("show_in_ui", None) is not None:
         current_payload["show_in_ui"] = passed_keywords.get("show_in_ui", None)
-    if passed_keywords.get("status", None):
-        current_payload["status"] = passed_keywords.get("status", None)
-    if passed_keywords.get("comment", None):
-        current_payload["comment"] = passed_keywords.get("comment", None)
+
+    passed_list = passed_keywords.get("ids", None)
+    if passed_list:
+        if isinstance(passed_list, str):
+            passed_list = passed_list.split(",")
+        current_payload["ids"] = passed_list
 
     return current_payload

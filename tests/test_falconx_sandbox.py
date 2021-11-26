@@ -10,7 +10,7 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy.falconx_sandbox import FalconXSandbox
+from falconpy import FalconXSandbox
 
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
@@ -37,7 +37,7 @@ class TestFalconXSandbox:
                                     enable_tor=False,
                                     environment_id=300,
                                     send_email_notifications=False,
-                                    user_tags=["apples"]
+                                    user_tags="apples,bananas"
                                     ),
             "query_reports": falcon.QueryReports(),
             "query_submissions": falcon.QuerySubmissions(),

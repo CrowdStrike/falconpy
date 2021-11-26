@@ -67,36 +67,30 @@ def command_payload(passed_keywords: dict) -> dict:  # pylint: disable=R0912  # 
     # flake8 / pylint both complain about complexity due to the number of if statements.
     # Ignoring the complaint as this is just running through the potential passed keywords.
     returned_payload = {}
-    if passed_keywords.get("base_command", None):
-        returned_payload["base_command"] = passed_keywords.get("base_command", None)
-    if passed_keywords.get("batch_id", None):
-        returned_payload["batch_id"] = passed_keywords.get("batch_id", None)
-    if passed_keywords.get("command_string", None):
-        returned_payload["command_string"] = passed_keywords.get("command_string", None)
-    if passed_keywords.get("optional_hosts", None):
-        returned_payload["optional_hosts"] = passed_keywords.get("optional_hosts", None)
-    if passed_keywords.get("persist_all", None):
-        returned_payload["persist_all"] = passed_keywords.get("persist_all", None)
-    if passed_keywords.get("file_path", None):
-        returned_payload["file_path"] = passed_keywords.get("file_path", None)
-    if passed_keywords.get("existing_batch_id", None):
-        returned_payload["existing_batch_id"] = passed_keywords.get("existing_batch_id", None)
-    if passed_keywords.get("host_ids", None):
-        returned_payload["host_ids"] = passed_keywords.get("host_ids", None)
-    if passed_keywords.get("queue_offline", None):
-        returned_payload["queue_offline"] = passed_keywords.get("queue_offline", None)
-    if passed_keywords.get("hosts_to_remove", None):
-        returned_payload["hosts_to_remove"] = passed_keywords.get("hosts_to_remove", None)
-    if passed_keywords.get("device_id", None):
-        returned_payload["device_id"] = passed_keywords.get("device_id", None)
+
+    keys = [
+        "base_command", "batch_id", "command_string", "file_path",
+        "existing_batch_id", "device_id", "session_id", "origin"
+        ]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    bool_keys = ["persist_all", "queue_offline", "persist"]
+    for boolean in bool_keys:
+        if passed_keywords.get(boolean, None) is not None:
+            returned_payload[key] = passed_keywords.get(boolean, None)
+
     if passed_keywords.get("id", -1) > -1:
         returned_payload["id"] = passed_keywords.get("id", None)
-    if passed_keywords.get("persist", None):
-        returned_payload["persist"] = passed_keywords.get("persist", None)
-    if passed_keywords.get("session_id", None):
-        returned_payload["session_id"] = passed_keywords.get("session_id", None)
-    if passed_keywords.get("origin", None):
-        returned_payload["origin"] = passed_keywords.get("origin", None)
+
+    list_keys = ["optional_hosts", "host_ids", "hosts_to_remove"]
+    for list_key in list_keys:
+        passed_list = passed_keywords.get(list_key, None)
+        if passed_list:
+            if isinstance(passed_list, str):
+                passed_list = passed_list.split(",")
+            returned_payload[list_key] = passed_list
 
     return returned_payload
 
@@ -115,19 +109,12 @@ def data_payload(passed_keywords: dict) -> dict:
     }
     """
     returned_payload = {}
-    if passed_keywords.get("id", None):
-        returned_payload["id"] = passed_keywords.get("id", None)
-    if passed_keywords.get("description", None):
-        returned_payload["description"] = passed_keywords.get("description", None)
-    if passed_keywords.get("name", None):
-        returned_payload["name"] = passed_keywords.get("name", None)
-    if passed_keywords.get("comments_for_audit_log", None):
-        returned_payload["comments_for_audit_log"] = passed_keywords.get("comments_for_audit_log", None)
-    if passed_keywords.get("content", None):
-        returned_payload["content"] = passed_keywords.get("content", None)
-    if passed_keywords.get("platform", None):
-        returned_payload["platform"] = passed_keywords.get("platform", None)
-    if passed_keywords.get("permission_type", None):
-        returned_payload["permission_type"] = passed_keywords.get("permission_type", None)
+    keys = [
+        "id", "description", "name", "comments_for_audit_log",
+        "content", "platform", "permission_type"
+        ]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key, None)
 
     return returned_payload
