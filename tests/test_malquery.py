@@ -41,7 +41,7 @@ class TestMalQuery:
                                                         }
                                                     ]
                                                     }),
-            "really_fuzzy": falcon.fuzzy_search(filter_meta="whatevs",
+            "really_fuzzy": falcon.fuzzy_search(filter_meta="whatevs,something_else",
                                                 limit=1,
                                                 patterns=[{"type": "file", "value": "test"}]
                                                 ),
@@ -51,8 +51,8 @@ class TestMalQuery:
             "get_samples": falcon.get_samples(ids="12345678"),
             "multi_download": falcon.samples_multidownload(ids="12345678"),
             "exact_search": falcon.exact_search(body={}),
-            "exact_search_too": falcon.exact_search(filter_filetypes=["xls"],
-                                                    filter_meta="whatevers",
+            "exact_search_too": falcon.exact_search(filter_filetypes="xls,doc",
+                                                    filter_meta="whatevers,something",
                                                     limit=1,
                                                     max_date="UTC_Date_Here",
                                                     min_date="UTC Date Here",
