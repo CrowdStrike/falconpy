@@ -24,7 +24,7 @@
 + Fixed: Issue with passing comma-delimited string for `recipients` within body payload handler for `update_action` method within Recon Service Class. Closes #454.
     - `_payload/_recon.py`
     - `tests/test_recon.py`
-+ Fixed: Issue wtih passing comma-delimited strings for `rule_ids` and `rule_versions` keywords within FirewallManagement Service Class body payload handlers. Closes #455.
++ Fixed: Issue with passing comma-delimited strings for `rule_ids` and `rule_versions` keywords within FirewallManagement Service Class body payload handlers. Closes #455.
     - `_payload/firewall.py`
     - `tests/test_firewall_management.py`
 + Fixed: Issue with passing comma-delimited string for the `groups` keyword within the generic exclusion body payload handler. Closes #456.
