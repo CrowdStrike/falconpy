@@ -60,11 +60,17 @@ def mssp_payload(passed_keywords: dict) -> dict:
     resources_item = {}
     keys = [
         "cid", "cid_group_id", "description", "name", "id",
-        "user_group_id", "role_ids", "user_uuids"
+        "user_group_id", "user_uuids"
         ]
     for key in keys:
         if passed_keywords.get(key, None):
             resources_item[key] = passed_keywords.get(key, None)
+
+    passed_role_ids = passed_keywords.get("role_ids", None)
+    if passed_role_ids:
+        if isinstance(passed_role_ids, str):
+            passed_role_ids = passed_role_ids.split(",")
+        resources_item["role_ids"] = passed_role_ids
 
     if resources_item:
         returned_payload["resources"] = [resources_item]
