@@ -82,8 +82,12 @@ def falconx_payload(passed_keywords: dict) -> dict:
     if passed_keywords.get("send_email_notifications", None) is not None:
         email_notify = passed_keywords.get("send_email_notifications", None)
         returned_payload["send_email_notifications"] = email_notify
-    if passed_keywords.get("user_tags", None):
-        returned_payload["user_tags"] = passed_keywords.get("user_tags", None)
+
+    passed_tags = passed_keywords.get("user_tags", None)
+    if passed_tags:
+        if isinstance(passed_tags, str):
+            passed_tags = passed_tags.split(",")
+        returned_payload["user_tags"] = passed_tags
 
     if sandbox:
         returned_payload["sandbox"] = sandbox
