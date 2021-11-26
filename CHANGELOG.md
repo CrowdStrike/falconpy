@@ -1,3 +1,36 @@
+# Version 0.8.5
+## Issues resolved
++ Fixed: Issue when passing comma-delimited strings or boolean values as keywords to the body payload handler for `indicator_object`. Closes #447.
+    - `_payload/_ioc.py`
+    - `tests/test_ioc.py`
++ Fixed: Issue when passing comma-delimited string for the `groups` keyword to the body payload handler for `ioa_exclusion_payload`. Closes #448.
+    - `_payload/_ioa.py`
+    - `tests/test_ioa_exclusions.py`
++ Fixed: Issue when passing comma-delimited string for the `ids` keyword to the body payload handler for `update_detects_payload`. Resolved boolean handling of `show_in_ui` keyword. Closes #449.
+    - `_payload/_detects.py`
+    - `tests/test_detects.py`
++ Fixed: Issue when passing comma-delimited string for `user_tags` keyword to the body payload handler for `submit`. Closes #450.
+    - `_payload/_falconx.py`
+    - `tests/test_falconx_sandbox.py`
++ Fixed: Issue when passing comma-delimited string for `role_ids` keyword to the body payload handler for Flight Control POST / PATCH operations. Closed #451.
+    - `_payload/_mssp.py`
+    - `tests/test_mssp.py`
++ Fixed: Issue when passing comma-delimited strings or boolean False to certain keywords within the `command_payload` body payload handler. Closes #452.
+    - `_payload/_real_time_response.py`
+    - `tests/test_real_time_response.py`
++ Fixed: Issue when passing comma-delimited strings to MalQuery Service Class body payload handlers. Closes #453.
+    - `_payload/_malquery.py`
+    - `tests/test_malquery.py`
++ Fixed: Issue with passing comma-delimited string for `recipients` within body payload handler for `update_action` method within Recon Service Class. Closes #454.
+    - `_payload/_recon.py`
+    - `tests/test_recon.py`
++ Fixed: Issue wtih passing comma-delimited strings for `rule_ids` and `rule_versions` keywords within FirewallManagement Service Class body payload handlers. Closes #455.
+    - `_payload/firewall.py`
+    - `tests/test_firewall_management.py`
++ Fixed: Issue with passing comma-delimited string for the `groups` keyword within the generic exclusion body payload handler. Closes #456.
+    - `_payload/_generic.py`
+    - `tests/test_ml_exclusions.py`
+
 # Version 0.8.4
 ## Issues resolved
 + Fixed: TypeError when using a valid credential in the wrong cloud environment. (GOV -> US1 only). Closes #433.
