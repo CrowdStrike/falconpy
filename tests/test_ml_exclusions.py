@@ -39,7 +39,7 @@ class TestMLExclusions:
                                                              ),
             "update_exclusion": falcon.update_exclusions(body={}),
             "update_exclusion_also": falcon.update_exclusions(comment="Unit Testing",
-                                                              groups=["12345678"],
+                                                              groups="12345,67890",
                                                               id="12345678",
                                                               value="Bananas"
                                                               ),
