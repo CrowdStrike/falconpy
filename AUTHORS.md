@@ -37,7 +37,7 @@ from the community.
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
 
-#### Current Herder of Cats
+#### Herder of Cats
 + @ckachigian, `Chris Kachigian`
 
 ### Colonel-in-Chief
