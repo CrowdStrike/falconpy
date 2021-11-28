@@ -11,6 +11,9 @@ authors:
   - given-names: Joshua
     family-names: Hiller
     affiliation: CrowdStrike
+  - given-names: Dixon
+    family-name: Styres
+    affiliation: CrowdStrike
 repository-code: 'https://github.com/CrowdStrike/falconpy'
 url: 'https://www.falconpy.io'
 repository-artifact: 'https://pypi.org/project/crowdstrike-falconpy/'
