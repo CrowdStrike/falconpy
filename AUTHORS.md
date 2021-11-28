@@ -17,10 +17,14 @@ from the community.
 | @soggysec, `Shane Shellenbarger` | Maintainer |
 
 ## Contributors
+
+![GitHub contributors](https://img.shields.io/github/contributors/CrowdStrike/falconpy)
+
 + @jhseceng, `Justin Harris`
 + @mccbryan3, `Bryan Mclellan`
 + @redhatrises, `Gabe Alford`
 + @rewgord, `Caleb Schwartz`
++ @bk-cs
 + @aneisch, `Andrew`
 + @woodtechie1428
 + @EdgeSync, `Chris S`
