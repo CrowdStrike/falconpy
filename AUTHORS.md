@@ -34,10 +34,10 @@ from the community.
 Without the support of these executives, the FalconPy project would not have happened.
 
 #### Current Herder of Cats
-@ckachigian, `Chris Kachigian`
++ @ckachigian, `Chris Kachigian`
 
 ### Colonel-in-Chief
-@shawndwells, `Shawn Wells`
++ @shawndwells, `Shawn Wells`
 
 
 # Want to see your name on this list?
