@@ -12,7 +12,7 @@ authors:
     family-names: Hiller
     affiliation: CrowdStrike
   - given-names: Dixon
-    family-name: Styres
+    family-names: Styres
     affiliation: CrowdStrike
 repository-code: 'https://github.com/CrowdStrike/falconpy'
 url: 'https://www.falconpy.io'
