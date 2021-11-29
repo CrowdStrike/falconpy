@@ -22,7 +22,7 @@ from the community.
 ![GitHub contributors](https://img.shields.io/github/contributors/CrowdStrike/falconpy)
 
 + @jhseceng, `Justin Harris`
-+ @mccbryan3, `Bryan Mclellan`
++ @mccbryan3, `Bryan McClellan`
 + @rewgord, `Caleb Schwartz`
 + @bk-cs, `Brendan Kremian`
 + @modubyk
