@@ -25,6 +25,7 @@ from the community.
 + @mccbryan3, `Bryan Mclellan`
 + @rewgord, `Caleb Schwartz`
 + @bk-cs
++ @modubyk
 + @aneisch, `Andrew`
 + @woodtechie1428
 + @sshahar
