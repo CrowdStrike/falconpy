@@ -13,6 +13,7 @@ from the community.
 | @crowdstrikedcs, `Dixon Styres` | Author |
 | @isimluk, `Šimon Lukašík` | Sanity Checker |
 | @jlangdev, `Josh Lang` | Maintainer |
+| @redhatrises, `Gabe Alford` | Maintainer |
 | @falcon-pioupiou, `Christophe Viaud` | Maintainer |
 | @soggysec, `Shane Shellenbarger` | Maintainer |
 
@@ -22,17 +23,16 @@ from the community.
 
 + @jhseceng, `Justin Harris`
 + @mccbryan3, `Bryan Mclellan`
-+ @redhatrises, `Gabe Alford`
 + @rewgord, `Caleb Schwartz`
 + @bk-cs
 + @aneisch, `Andrew`
 + @woodtechie1428
++ @sshahar
 + @EdgeSync, `Chris S`
 + @alexandreborgo, `Alexandre Borgo`
 + @tsullivan06, `Timothy Sullivan`
 + @mrxinu, `Steve Klassen`
 + @valerianrossigneux, `Valerian Rossigneux`
-+ @sshahar
 
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
