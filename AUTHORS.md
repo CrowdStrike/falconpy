@@ -40,6 +40,12 @@ Without the support of these executives, the FalconPy project would not have hap
 #### Herder of Cats
 + @ckachigian, `Chris Kachigian`
 
+#### Gatekeeper
++ `Rekha Das`
+
+#### Keymaster
++ @erraggy, `Robbie Coleman`
+
 ### Colonel-in-Chief
 + @shawndwells, `Shawn Wells`
 
