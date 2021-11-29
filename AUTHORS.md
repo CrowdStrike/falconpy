@@ -24,7 +24,7 @@ from the community.
 + @jhseceng, `Justin Harris`
 + @mccbryan3, `Bryan Mclellan`
 + @rewgord, `Caleb Schwartz`
-+ @bk-cs
++ @bk-cs, `Brendan Kremian`
 + @modubyk
 + @aneisch, `Andrew`
 + @woodtechie1428
