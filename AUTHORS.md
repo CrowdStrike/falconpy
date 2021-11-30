@@ -18,7 +18,7 @@ from the community.
 | @soggysec, `Shane Shellenbarger` | Maintainer |
 
 ## Contributors
-The following people have made requests, suggestions, code contributions or provided feedback and reported bugs. This has been a key element in the development of the FalconPy project.
+The following members of the community have made requests, suggestions, code contributions or provided feedback and reported bugs. This has been a key element in the development of the FalconPy project.
 
 ![GitHub contributors](https://img.shields.io/github/contributors/CrowdStrike/falconpy?label=code%20contributors)
 
