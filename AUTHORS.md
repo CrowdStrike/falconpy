@@ -18,20 +18,27 @@ from the community.
 | @soggysec, `Shane Shellenbarger` | Maintainer |
 
 ## Contributors
+The following people have made requests, suggestions, code contributions or provided feedback and reported bugs. This has been a key element in the development of the FalconPy project.
 
-![GitHub contributors](https://img.shields.io/github/contributors/CrowdStrike/falconpy)
+![GitHub contributors](https://img.shields.io/github/contributors/CrowdStrike/falconpy?label=code%20contributors)
 
 + @jhseceng, `Justin Harris`
 + @mccbryan3, `Bryan McClellan`
 + @rewgord, `Caleb Schwartz`
 + @bk-cs, `Brendan Kremian`
 + @modubyk
++ @matcha-shake
++ @nighttardis
 + @aneisch, `Andrew`
++ @cah-sean-whalen, `Sean Whalen`
 + @woodtechie1428
 + @sshahar
 + @EdgeSync, `Chris S`
 + @alexandreborgo, `Alexandre Borgo`
++ @cozadk, `Kyle Cozad`
++ @sspencer-hubble
 + @tsullivan06, `Timothy Sullivan`
++ @t-lark
 + @mrxinu, `Steve Klassen`
 + @valerianrossigneux, `Valerian Rossigneux`
 
