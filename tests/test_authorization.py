@@ -72,7 +72,7 @@ class TestAuthorization():
             if "DEBUG_API_BASE_URL" in os.environ:
                 self.config["falcon_base_url"] = os.getenv("DEBUG_API_BASE_URL")
             else:
-                self.config["falcon_base_url"] = "https://api.crowdstrike.com"
+                self.config["falcon_base_url"] = "auto"
             return True
         else:
             cur_path = os.path.dirname(os.path.abspath(__file__))
@@ -88,8 +88,8 @@ class TestAuthorization():
         if status:
             self.falcon = APIHarness(creds={
                     "client_id": self.config["falcon_client_id"],
-                    "client_secret": self.config["falcon_client_secret"]
-                }
+                    "client_secret": self.config["falcon_client_secret"],
+                }, base_url="us1"
             )
             self.falcon.authenticate()
             if self.falcon.authenticated:
@@ -173,9 +173,10 @@ class TestAuthorization():
     def failServiceAuth(self):
         self.authorization = Hosts(client_id="BadClientID",
                                    client_secret="BadClientSecret",
-                                   member_cid="123456789ABCDEFG"
+                                   member_cid="123456789ABCDEFG",
+                                   base_url = "us3"
                                    )
-        self.authorization.auth_object.base_url = "nowhere"
+        # self.authorization.auth_object.base_url = "nowhere"
         try:
             self.token = self.authorization.auth_object.token()['body']['access_token']
         except KeyError:
