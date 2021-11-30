@@ -41,6 +41,7 @@ The following people have made requests, suggestions, code contributions or prov
 + @t-lark
 + @mrxinu, `Steve Klassen`
 + @valerianrossigneux, `Valerian Rossigneux`
++ @KennyOps, `Kenny Mancuso`
 
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
