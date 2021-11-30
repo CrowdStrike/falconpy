@@ -8,6 +8,7 @@
     - `api_complete.py`
     - `oauth2.py`
     - `test_authentications.py`
+    - `test_authorization.py`
     - All unit testing workflows updated to leverage new cross-region testing parameters.
 > Please note: This functionality does __not__ support the GovCloud region or GovCloud API credentials.
 
