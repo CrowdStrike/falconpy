@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 import time
 from ._util import _ALLOWED_METHODS
 from ._util import perform_request, generate_b64cred, generate_error_result
-from ._util import confirm_base_url, args_to_params
+from ._util import confirm_base_url, args_to_params, confirm_base_region
 from ._endpoint import api_endpoints
 
 
@@ -151,11 +151,23 @@ class APIHarness:
                                  timeout=self.timeout,
                                  user_agent=self.user_agent
                                  )
-        if result["status_code"] == 201:
-            self.token = result["body"]["access_token"]
-            self.token_expiration = result["body"]["expires_in"]
-            self.token_time = time.time()
-            self.authenticated = True
+        if isinstance(result, dict):  # Issue #433
+            if result["status_code"] == 201:
+                self.token = result["body"]["access_token"]
+                self.token_expiration = result["body"]["expires_in"]
+                self.token_time = time.time()
+                self.authenticated = True
+                # Swap to the correct region if they've provided the incorrect one
+                try:
+                    token_region = result["headers"]["X-Cs-Region"].replace("-", "")
+                except KeyError:
+                    # GovCloud autodiscovery is not currently supported
+                    token_region = confirm_base_region(confirm_base_url(self.base_url))
+                requested_region = confirm_base_region(confirm_base_url(self.base_url))
+                if token_region != requested_region:
+                    self.base_url = confirm_base_url(token_region.upper())
+            else:
+                self.authenticated = False
         else:
             self.authenticated = False
 
