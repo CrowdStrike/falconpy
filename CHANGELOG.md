@@ -1,3 +1,16 @@
+# Version 0.8.6
+## Added features and functionality
++ Added: Cloud Region Autodiscovery - Automatically select the correct cloud region for _US1_, _US2_ and _EU1_ users.
+    - When using a _valid_ login for _US1_, _US2_, and _EU1_, developers will no longer need to specify `base_url` when creating an instance of any Service Class, or the Uber Class.  Upon successful login, your correct region will be identified and used for all subsequent requests.  If you specify the wrong region for your instance, this will be corrected as part of authentication.
+    - `_base_url.py`
+    - `_util.py`
+    - `_service_class.py`
+    - `api_complete.py`
+    - `oauth2.py`
+    - `test_authentications.py`
+    - All unit testing workflows updated to leverage new cross-region testing parameters.
+> Please note: This functionality does __not__ support the GovCloud region or GovCloud API credentials.
+
 # Version 0.8.5
 ## Issues resolved
 + Fixed: Issue when passing comma-delimited strings or boolean values as keywords to the body payload handler for `indicator_object`. Closes #447.
