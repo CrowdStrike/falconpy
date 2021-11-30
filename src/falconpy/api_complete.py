@@ -158,11 +158,11 @@ class APIHarness:
                 self.token_time = time.time()
                 self.authenticated = True
                 # Swap to the correct region if they've provided the incorrect one
-                try:
-                    token_region = result["headers"]["X-Cs-Region"].replace("-", "")
-                except KeyError:
+                if "X-Cs-Region" not in result["headers"]:
                     # GovCloud autodiscovery is not currently supported
                     token_region = confirm_base_region(confirm_base_url(self.base_url))
+                else:
+                    token_region = result["headers"]["X-Cs-Region"].replace("-", "")
                 requested_region = confirm_base_region(confirm_base_url(self.base_url))
                 if token_region != requested_region:
                     self.base_url = confirm_base_url(token_region.upper())

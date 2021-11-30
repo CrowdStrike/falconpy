@@ -132,11 +132,11 @@ class OAuth2:
                     self.token_time = time.time()
                     self.token_value = returned["body"]["access_token"]
                     # Swap to the correct region if they've provided the incorrect one
-                    try:
-                        token_region = returned["headers"]["X-Cs-Region"].replace("-", "")
-                    except KeyError:
+                    if "X-Cs-Region" not in returned["headers"]:
                         # GovCloud autodiscovery is not currently supported
                         token_region = confirm_base_region(confirm_base_url(self.base_url))
+                    else:
+                        token_region = returned["headers"]["X-Cs-Region"].replace("-", "")
                     requested_region = confirm_base_region(confirm_base_url(self.base_url))
                     if token_region != requested_region:
                         self.base_url = confirm_base_url(token_region.upper())

@@ -143,11 +143,11 @@ class ServiceClass:
                     self.token = _["body"]["access_token"]
                     self.headers = {"Authorization": f"Bearer {self.token}"}
                     # Swap to the correct region if they've provided the incorrect one
-                    try:
-                        token_region = _["headers"]["X-Cs-Region"].replace("-", "")
-                    except KeyError:
+                    if "X-Cs-Region" not in _["headers"]:
                         # GovCloud autodiscovery is not currently supported
                         token_region = confirm_base_region(confirmed_base)
+                    else:
+                        token_region = _["headers"]["X-Cs-Region"].replace("-", "")
                     requested_region = confirm_base_region(confirmed_base)
                     if token_region != requested_region:
                         self.base_url = confirm_base_url(token_region.upper())
