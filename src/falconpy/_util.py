@@ -352,7 +352,7 @@ def process_service_request(calling_object: object,
                             endpoints: list,
                             operation_id: str,
                             **kwargs
-                            ):
+                            ) -> dict:
     """Perform a request originating from a service class module.
 
     Calculates the target_url based upon the provided operation ID and endpoint list.
@@ -401,7 +401,7 @@ def process_service_request(calling_object: object,
     return service_request(**new_keywords)
 
 
-def confirm_base_url(provided_base: str = "https://api.crowdstrike.com"):
+def confirm_base_url(provided_base: str = "https://api.crowdstrike.com") -> str:
     """Confirm the passed base_url value matches URL syntax.
 
     If it does not, it is looked up in the BaseURL enum. If the value is not found
@@ -418,3 +418,13 @@ def confirm_base_url(provided_base: str = "https://api.crowdstrike.com"):
             returned_base = f"https://{provided_base}"
 
     return returned_base
+
+
+def confirm_base_region(provided_base_url: str = "https://api.crowdstrike.com") -> str:
+    """Retrieve the base url shortname based upon the provided base url value."""
+    try:
+        shortname = BaseURL(provided_base_url.replace("https://", "").lower()).name
+    except (KeyError, ValueError):
+        shortname = "us1"  # Fall back to US-1
+
+    return shortname

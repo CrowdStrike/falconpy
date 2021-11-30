@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import confirm_base_url
+from ._util import confirm_base_url, confirm_base_region
 from .oauth2 import OAuth2 as FalconAuth
 
 # pylint: disable=R0902  # Nine is reasonable
@@ -127,9 +127,11 @@ class ServiceClass:
             self.timeout = auth_object.timeout
             self.refreshable = True
         else:
+            confirmed_base = confirm_base_url(base_url)
+            self.base_url = confirmed_base
             if creds:
                 auth_object = FalconAuth(creds=creds,
-                                         base_url=confirm_base_url(base_url),
+                                         base_url=confirmed_base,
                                          proxy=proxy,
                                          ssl_verify=self.ssl_verify,
                                          timeout=self.timeout,
@@ -140,6 +142,15 @@ class ServiceClass:
                 if _["status_code"] == 201:
                     self.token = _["body"]["access_token"]
                     self.headers = {"Authorization": f"Bearer {self.token}"}
+                    # Swap to the correct region if they've provided the incorrect one
+                    if "X-Cs-Region" not in _["headers"]:
+                        # GovCloud autodiscovery is not currently supported
+                        token_region = confirm_base_region(confirmed_base)
+                    else:
+                        token_region = _["headers"]["X-Cs-Region"].replace("-", "")
+                    requested_region = confirm_base_region(confirmed_base)
+                    if token_region != requested_region:
+                        self.base_url = confirm_base_url(token_region.upper())
                 else:
                     self.token = False
                     self.headers = {}
@@ -148,7 +159,6 @@ class ServiceClass:
                 self.auth_object = None
                 self.headers = {"Authorization": f"Bearer {access_token}"}
 
-            self.base_url = confirm_base_url(base_url)
             self.proxy = proxy
             self.user_agent = user_agent
 
