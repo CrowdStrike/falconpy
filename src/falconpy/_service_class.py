@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import confirm_base_url
+from ._util import confirm_base_url, confirm_base_region
 from .oauth2 import OAuth2 as FalconAuth
 
 # pylint: disable=R0902  # Nine is reasonable
@@ -140,6 +140,15 @@ class ServiceClass:
                 if _["status_code"] == 201:
                     self.token = _["body"]["access_token"]
                     self.headers = {"Authorization": f"Bearer {self.token}"}
+                    # Swap to the correct region if they've provided the incorrect one
+                    try:
+                        token_region = _["headers"]["X-Cs-Region"].replace("-", "")
+                    except KeyError:
+                        # GovCloud autodiscovery is not currently supported
+                        token_region = confirm_base_region(confirm_base_url(self.base_url))
+                    requested_region = confirm_base_region(confirm_base_url(base_url))
+                    if token_region != requested_region:
+                        self.base_url = confirm_base_url(token_region.upper())
                 else:
                     self.token = False
                     self.headers = {}

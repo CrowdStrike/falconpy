@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import time
-from ._util import perform_request, generate_b64cred
+from ._util import perform_request, generate_b64cred, confirm_base_region
 from ._util import confirm_base_url, generate_error_result
 from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
 
@@ -131,6 +131,15 @@ class OAuth2:
                     self.token_expiration = returned["body"]["expires_in"]
                     self.token_time = time.time()
                     self.token_value = returned["body"]["access_token"]
+                    # Swap to the correct region if they've provided the incorrect one
+                    try:
+                        token_region = returned["headers"]["X-Cs-Region"].replace("-", "")
+                    except KeyError:
+                        # GovCloud autodiscovery is not currently supported
+                        token_region = confirm_base_region(confirm_base_url(self.base_url))
+                    requested_region = confirm_base_region(confirm_base_url(self.base_url))
+                    if token_region != requested_region:
+                        self.base_url = confirm_base_url(token_region.upper())
             else:
                 returned = generate_error_result("Unexpected API response received", 403)
         else:
