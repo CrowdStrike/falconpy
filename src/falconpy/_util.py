@@ -323,7 +323,7 @@ def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epnam
     returned_payload = {}
     if epname != "Manual":  # pylint: disable=R1702
         for arg in passed_arguments:
-            eps = [ep[5] for ep in endpoints if epname in ep[0]][0]
+            eps = [ep[5] for ep in endpoints if epname == ep[0]][0]
             try:
                 argument = [param for param in eps if param["name"] == arg][0]
                 if argument:
