@@ -19,8 +19,6 @@ This sample requires FalconPy v0.8.6+
 # | |_| | |_) |  __/ |    | |___| | (_| \__ \__ \
 #  \___/|_.__/ \___|_|     \____|_|\__,_|___/___/
 #
-# These examples show how to interact with the Sample Uploads API using the Uber class.
-#
 import os
 import json
 # Import the Uber Class
