@@ -1,3 +1,8 @@
+# Version 0.8.7
+## Issues resolved
++ Fixed: Stemmed vs. exact comparison for endpoint operation lookup within `args_to_params` method. Closes #467.
+    - `_util.py`
+
 # Version 0.8.6
 ## Added features and functionality
 + Added: Cloud Region Autodiscovery - Automatically select the correct cloud region for _US1_, _US2_ and _EU1_ users.
