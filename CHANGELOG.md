@@ -1,6 +1,6 @@
 # Version 0.8.8
 ## Issues resolved
-+ Fixed: Added missing payload parameters to body payload handler for `update_policy_settings` method (UpdateCSPMPolicySettings operation) within the CSPMRegistration Service Class.
++ Fixed: Added missing payload parameters to body payload handler for `update_policy_settings` method (UpdateCSPMPolicySettings operation) within the CSPMRegistration Service Class. Closes #473.
     - `cspm_registration.py`
     - `_payload/_cspm_registration.py`
     - `tests/test_cspm_registration.py`
