@@ -59,7 +59,10 @@ class TestCSPMRegistration:
             "get_policy_settings": falcon.GetCSPMPolicySettings(cloud_platform="aws", policy_id=1),
             "update_policy_settings": falcon.UpdateCSPMPolicySettings(enabled=False,
                                                                       policy_id=1,
-                                                                      severity="LOW"
+                                                                      severity="LOW",
+                                                                      regions="us-east-1,us-west-1",
+                                                                      tag_excluded=False,
+                                                                      account_id="1234567"
                                                                       ),
             "get_scan_schedule": falcon.GetCSPMScanSchedule(cloud_platform="gcp"),
             "update_scan_schedule": falcon.UpdateCSPMScanSchedule(cloud_platform="gcp",

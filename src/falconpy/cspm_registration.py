@@ -612,15 +612,23 @@ class CSPMRegistration(ServiceClass):
                 {
                     "resources": [
                         {
-                            "enabled": true,
-                            "policy_id": 0,
-                            "severity": "string"
+                            "account_id": "string",
+                            "enabled": boolean,
+                            "policy_id": integer,
+                            "regions": [
+                                "string"
+                            ],
+                            "severity": "string",
+                            "tag_excluded": boolean
                         }
                     ]
                 }
+        account_id -- Account ID to update. String.
         enabled -- Enabled / Disable flag. Boolean.
         policy_id -- Policy ID to be updated. Integer.
+        region -- List of regions. String or list of strings.
         severity -- Severity value to set for policy. String.
+        tag_excluded -- Exclude tags flag. Boolean.
 
         This method only supports keywords for providing arguments.
 

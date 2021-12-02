@@ -69,24 +69,38 @@ def cspm_policy_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted CSPM policy update payload.
 
     {
-        "resources": [
-            {
-                "enabled": true,
-                "policy_id": 0,
-                "severity": "string"
-            }
-        ]
+    "resources": [
+        {
+            "account_id": "string",
+            "enabled": boolean,
+            "policy_id": integer,
+            "regions": [
+                "string"
+            ],
+            "severity": "string",
+            "tag_excluded": boolean
+        }
+    ]
     }
     """
     returned_payload = {}
     returned_payload["resources"] = []
     item = {}
+    if passed_keywords.get("account_id", None):
+        item["account_id"] = passed_keywords.get("account_id", None)
     if passed_keywords.get("enabled", None) is not None:
         item["enabled"] = passed_keywords.get("enabled", None)
     if passed_keywords.get("policy_id", -1) > 0:
         item["policy_id"] = passed_keywords.get("policy_id", None)
     if passed_keywords.get("severity", None):
         item["severity"] = passed_keywords.get("severity", None)
+    if passed_keywords.get("tag_excluded", None) is not None:
+        item["tag_excluded"] = passed_keywords.get("tag_excluded", None)
+    region_list = passed_keywords.get("regions", None)
+    if region_list:
+        if isinstance(region_list, str):
+            region_list = region_list.split(",")
+        item["regions"] = region_list
 
     returned_payload["resources"].append(item)
 
