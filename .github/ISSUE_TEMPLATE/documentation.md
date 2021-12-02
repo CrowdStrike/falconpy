@@ -2,7 +2,7 @@
 name: Documentation issue
 about: Create an issue report to help FalconPy documentation improve.
 title: "[ DOC ] ..."
-labels: documentation
+labels: "documentation 📖"
 assignees: ''
 
 ---
