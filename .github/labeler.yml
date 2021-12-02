@@ -1,4 +1,4 @@
-documentation:
+"documentation :book:":
 - docs/*
 - '*.md'
 - src/falconpy/*.md
