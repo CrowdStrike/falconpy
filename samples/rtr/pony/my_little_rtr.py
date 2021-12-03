@@ -4,7 +4,7 @@
 |.  l   |  -__|  _  |  ||.|   | |  |        |  -__||.  l   |  -__|__ --|  _  |  _  |     |__ --|  -__|
 |.  _   |_____|___._|__|`-|.  |-|__|__|__|__|_____||.  _   |_____|_____|   __|_____|__|__|_____|_____|
 |:  |   |                 |:  |                    |:  |   |           |__|
-|::.|:. |                 |::.|                    |::.|:. |                    FalconPy v0.6.0+
+|::.|:. |                 |::.|                    |::.|:. |                    FalconPy v0.7.0+
 `--- ---'                 `---'                    `--- ---'
 
 CrowdStrike FalconPy demonstration - Real Time Response, Service Class version / aka. The My Little RTR demo
@@ -46,10 +46,8 @@ import argparse
 import time     # You can prolly remove the delays
 from argparse import RawTextHelpFormatter
 try:
-    from falconpy.oauth2 import OAuth2
-    from falconpy.hosts import Hosts
-    from falconpy.real_time_response import RealTimeResponse
-    from falconpy.real_time_response_admin import RealTimeResponseAdmin
+    from falconpy import OAuth2, Hosts, RealTimeResponse, RealTimeResponseAdmin
+
 except ImportError as no_falconpy:
     raise SystemExit(
         "CrowdStrike FalconPy must be installed in order to use this application.\n"
@@ -71,7 +69,7 @@ def execute_command(passed_payload: str, hdr: str, cmd: str):
     """
     passed_payload["command_string"] = cmd
     req = falcon_rtra.execute_admin_command(                        # Call the command
-        passed_payload                                              # Execute the command
+        body=passed_payload                                         # Execute the command
         )
     if req["status_code"] != 201:                                   # Confirm execution success
         raise SystemExit(                                           # There is no retry, crash out
@@ -155,7 +153,7 @@ def get_host_aid(host: str):
     Retrieves the AID for a given hostname
     """
     inform("  Retrieving AID for target host")
-    result = falcon_hosts.QueryDevicesByFilter(                     # Retrieve our test instance's AID
+    result = falcon_hosts.query_devices_by_filter(                     # Retrieve our test instance's AID
         filter=f"hostname:'{host}*'"                                # Filter our request to the Hosts API by hostname
         )
     if result["status_code"] == 200:
