@@ -4,7 +4,7 @@
 |.  l   |  -__|  _  |  ||.|   | |  |        |  -__||.  l   |  -__|__ --|  _  |  _  |     |__ --|  -__|
 |.  _   |_____|___._|__|`-|.  |-|__|__|__|__|_____||.  _   |_____|_____|   __|_____|__|__|_____|_____|
 |:  |   |                 |:  |                    |:  |   |           |__|
-|::.|:. |                 |::.|                    |::.|:. |                    FalconPy v0.7.0+
+|::.|:. |                 |::.|                    |::.|:. |                    FalconPy v0.8.6+
 `--- ---'                 `---'                    `--- ---'
 
 CrowdStrike FalconPy demonstration - Real Time Response, Service Class version / aka. The My Little RTR demo
