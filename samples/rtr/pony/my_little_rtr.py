@@ -59,7 +59,7 @@ def inform(msg: str):
     """
     Provides informational updates to the user as the program progresses
     """
-    print("%-80s" % msg, end="\r", flush=True)
+    print("%-80s" % msg, end="\r", flush=True)  # pylint: disable=C0209
 
 
 def execute_command(passed_payload: str, hdr: str, cmd: str):
@@ -159,7 +159,7 @@ def get_host_aid(host: str):
     if result["status_code"] == 200:
         if len(result["body"]["resources"]) == 0:
             raise SystemExit(
-                    "%50s" % f"{' ' * 50}\nUnable to retrieve "
+                    "%50s" % f"{' ' * 50}\nUnable to retrieve "     # pylint: disable=C0209
                     "AID for target.  ¯\_(ツ)_/¯\n"                 # noqa=W605 pylint: disable=W1401
                     "Check target hostname value."
                 )
