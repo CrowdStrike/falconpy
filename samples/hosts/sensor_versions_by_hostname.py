@@ -25,7 +25,7 @@ def parse_command_line() -> object:
         '-b',
         '--base_url',
         help='CrowdStrike API region (us1, us2, eu1, usgov1).'
-        ' NOT required unless you are on usgov1.',
+        ' NOT required unless you are using `usgov1`.',
         required=False
     )
     parser.add_argument(
