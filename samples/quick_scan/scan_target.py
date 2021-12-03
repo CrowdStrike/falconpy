@@ -32,7 +32,7 @@
 #
 # The log file rotates because cool kids don't leave messes on other people's file systems.
 #
-# This solution is dependant upon Amazon's boto3 library, and CrowdStrike FalconPy >= v0.4.5.
+# This solution is dependant upon Amazon's boto3 library, and CrowdStrike FalconPy >= v0.8.7.
 #     python3 -m pip install boto3 crowdstrike-falconpy
 #
 # Example config.json file:
@@ -46,6 +46,7 @@
 # This solution has been tested on Python 3.7 / 3.9 running under Amazon Linux 2 and MacOS 10.15.
 #
 # ================================================================================================
+# pylint: disable=E0401, R0903
 #
 import io
 import os
@@ -56,18 +57,14 @@ import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 # AWS Boto library
-import boto3                                            # pylint: disable=E0401
-# !!! Requires FalconPy v0.4.5+ !!!
-# Authorization
-from falconpy import oauth2 as FalconAuth               # pylint: disable=E0401
-# Sandbox Uploads
-from falconpy import sample_uploads as FalconUploads    # pylint: disable=E0401
-# Quick Scan
-from falconpy import quick_scan as FalconScan           # pylint: disable=E0401
+import boto3
+# !!! Requires FalconPy v0.8.7+ !!!
+# Authorization, Sample Uploads and QuickScan Service Classes
+from falconpy import OAuth2, SampleUploads, QuickScan
 
 
-class Analysis:  # pylint: disable=R0903
-    """Class to hold our analysis and status"""
+class Analysis:
+    """Class to hold our analysis and status."""
     def __init__(self):
         self.uploaded = []
         self.files = []
@@ -76,8 +73,8 @@ class Analysis:  # pylint: disable=R0903
         self.payload = lambda: {"samples": self.uploaded}
 
 
-class Configuration:  # pylint: disable=R0903
-    """Class to hold our running configuration"""
+class Configuration:
+    """Class to hold our running configuration."""
     def __init__(self, args):
         self.config_file = "../config.json"
         if args.config_file:
@@ -116,7 +113,7 @@ class Configuration:  # pylint: disable=R0903
 
 
 def upload_samples():
-    """Uploads the samples identified within the target to the Sandbox API"""
+    """Upload the samples identified within the target to the Sandbox API."""
     # Retrieve a list of all files and paths within the target
     paths = Path(Config.target_dir).glob(Config.target_pattern)
     # Inform the user as to what we're doing
@@ -128,9 +125,10 @@ def upload_samples():
         # Grab the file name
         filename = os.path.basename(filepath)
         # Open the file for binary read, this will be our payload
-        payload = open(filepath, 'rb').read()
+        with open(filepath, 'rb') as upload_file:
+            payload = upload_file.read()
         # Upload the file using the Sandbox
-        response = Samples.UploadSampleV3(file_name=filename, file_data=payload)
+        response = Samples.upload_sample(file_name=filename, sample=payload)
         # Grab the SHA256 unique identifier for the file we just uploaded
         sha = response["body"]["resources"][0]["sha256"]
         # Add this SHA256 to the volume payload element
@@ -142,10 +140,12 @@ def upload_samples():
 
 
 def upload_bucket_samples():
-    """Retrieves keys from a bucket and then uploads them to the Sandbox API"""
+    """Retrieve keys from a bucket and then uploads them to the Sandbox API."""
     if not Config.region:
         logger.error("You must specify a region in order to scan a bucket target")
-        raise SystemExit("Target region not specified. Use -r or --region to specify the target region.")
+        raise SystemExit(
+            "Target region not specified. Use -r or --region to specify the target region."
+            )
     # Connect to S3 in our target region
     s_3 = boto3.resource("s3", region_name=Config.region)
     # Connect to our target bucket
@@ -160,9 +160,11 @@ def upload_bucket_samples():
         filename = os.path.basename(item.key)
         # Teensy bit of witch-doctor magic to download the file
         # straight into the payload used for our upload to the Sandbox
-        response = Samples.UploadSampleV3(file_name=filename,
-                                          file_data=io.BytesIO(bucket.Object(key=item.key).get()["Body"].read())
-                                          )
+        response = Samples.upload_sample(file_name=filename,
+                                         file_data=io.BytesIO(
+                                             bucket.Object(key=item.key).get()["Body"].read()
+                                             )
+                                         )
         # Retrieve our uploaded file SHA256 identifier
         sha = response["body"]["resources"][0]["sha256"]
         # Add this SHA256 to the upload payload element
@@ -173,11 +175,11 @@ def upload_bucket_samples():
         logger.debug("Uploaded %s to %s", filename, sha)
 
 
-def scan_samples() -> dict:
-    """Retrieves a scan using the ID of the scan provided by the scan submission"""
+def scan_uploaded_samples() -> dict:
+    """Retrieve a scan using the ID of the scan provided by the scan submission."""
     while Analyzer.scanning:
         # Retrieve the scan results
-        scan_results = Scanner.GetScans(ids=scan_id)
+        scan_results = Scanner.get_scans(ids=scan_id)
         try:
             if scan_results["body"]["resources"][0]["status"] == "done":
                 # Scan is complete, retrieve our results
@@ -195,7 +197,7 @@ def scan_samples() -> dict:
 
 
 def report_results(results: dict):
-    """Retrieves the scan results for the submitted scan"""
+    """Retrieve the scan results for the submitted scan."""
     # Loop thru our results, compare to our upload and return the verdict
     for result in results:
         for item in Analyzer.files:
@@ -209,11 +211,11 @@ def report_results(results: dict):
 
 
 def clean_up_artifacts():
-    """Removes uploaded files from the Sandbox"""
+    """Remove uploaded files from the Sandbox."""
     logger.info("Removing artifacts from Sandbox")
     for item in Analyzer.uploaded:
         # Perform the delete
-        response = Samples.DeleteSampleV3(ids=item)
+        response = Samples.delete_sample(ids=item)
         if response["status_code"] > 201:
             # File was not removed, log the failure
             logger.warning("Failed to delete %s", item)
@@ -223,37 +225,57 @@ def clean_up_artifacts():
 
 
 def parse_command_line():
-    """Parse any inbound command line arguments and set defaults"""
+    """Parse any inbound command line arguments and set defaults."""
     parser = argparse.ArgumentParser("Falcon Quick Scan")
-    parser.add_argument("-f", "--config", dest="config_file", help="Path to the configuration file", required=False)
-    parser.add_argument("-l", "--log-level", dest="log_level", help="Default log level (DEBUG, WARN, INFO, ERROR)",
-                        required=False)
-    parser.add_argument("-d", "--check-delay", dest="check_delay", help="Delay between checks for scan results",
-                        required=False)
-    parser.add_argument("-p", "--pattern", dest="pattern", help="Target file patterns to scan (defaults to *.*)",
-                        required=False)
-    parser.add_argument("-r", "--region", dest="region", help="Region the target bucket resides in", required=False)
-    parser.add_argument("-t", "--target", dest="target",
-                        help="Target folder or bucket to scan. Bucket must have 's3://' prefix.", required=True)
+    parser.add_argument("-f", "--config",
+                        dest="config_file",
+                        help="Path to the configuration file",
+                        required=False
+                        )
+    parser.add_argument("-l", "--log-level",
+                        dest="log_level",
+                        help="Default log level (DEBUG, WARN, INFO, ERROR)",
+                        required=False
+                        )
+    parser.add_argument("-d", "--check-delay",
+                        dest="check_delay",
+                        help="Delay between checks for scan results",
+                        required=False
+                        )
+    parser.add_argument("-p", "--pattern",
+                        dest="pattern",
+                        help="Target file patterns to scan (defaults to *.*)",
+                        required=False
+                        )
+    parser.add_argument("-r", "--region",
+                        dest="region",
+                        help="Region the target bucket resides in",
+                        required=False
+                        )
+    parser.add_argument("-t", "--target",
+                        dest="target",
+                        help="Target folder or bucket to scan. Bucket must have 's3://' prefix.",
+                        required=True
+                        )
 
     return parser.parse_args()
 
 
 def load_api_config():
-    """Grab our config parameters from our provided config file (JSON format)"""
-    with open(Config.config_file, 'r') as file_config:
+    """Grab our config parameters from our provided config file (JSON format)."""
+    with open(Config.config_file, 'r', encoding="utf-8") as file_config:
         conf = json.loads(file_config.read())
 
-    return FalconAuth.OAuth2(creds={
-            "client_id": conf["falcon_client_id"],
-            "client_secret": conf["falcon_client_secret"]
-        }
-    )
+    return OAuth2(client_id=conf["falcon_client_id"],
+                  client_secret=conf["falcon_client_secret"]
+                  )
 
 
 def enable_logging():
-    """Configure logging"""
-    logging.basicConfig(level=Config.log_level, format="%(asctime)s %(name)s %(levelname)s %(message)s")
+    """Configure logging."""
+    logging.basicConfig(level=Config.log_level,
+                        format="%(asctime)s %(name)s %(levelname)s %(message)s"
+                        )
     # Create our logger
     log = logging.getLogger("Quick Scan")
     # Rotate log file handler
@@ -278,9 +300,9 @@ if __name__ == '__main__':
     # Grab our authentication object
     auth = load_api_config()
     # Connect to the Samples Sandbox API
-    Samples = FalconUploads.Sample_Uploads(auth_object=auth)
+    Samples = SampleUploads(auth_object=auth)
     # Connect to the Quick Scan API
-    Scanner = FalconScan.Quick_Scan(auth_object=auth)
+    Scanner = QuickScan(auth_object=auth)
     # Create our analysis object
     Analyzer = Analysis()
     # Log that startup is done
@@ -293,11 +315,11 @@ if __name__ == '__main__':
         # Local folder
         upload_samples()
     # Submit our volume for analysis and grab the id of our scan submission
-    scan_id = Scanner.ScanSamples(body=Analyzer.payload())["body"]["resources"][0]
+    scan_id = Scanner.scan_samples(body=Analyzer.payload())["body"]["resources"][0]
     # Inform the user of our progress
     logger.info("Scan %s submitted for analysis", scan_id)
     # Retrieve our scan results from the API and report them
-    report_results(scan_samples())
+    report_results(scan_uploaded_samples())
     # Clean up our uploaded files from out of the API
     clean_up_artifacts()
     # We're done, let everyone know

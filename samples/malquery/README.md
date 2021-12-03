@@ -2,7 +2,7 @@
 ![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)
 
 # MalQuery examples
-The examples in this folder focus on leveraging CrowdStrike's Hosts API to perform administrative operations.
+The examples in this folder focus on leveraging CrowdStrike's MalQuery API to perform threat hunting operations.
 - [MalQueryinator - Search and Download samples](#search-and-download-samples-from-malquery)
 
 ## Search and Download samples from MalQuery
