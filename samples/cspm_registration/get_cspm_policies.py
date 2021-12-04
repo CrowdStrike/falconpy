@@ -1,42 +1,47 @@
-#  ___  ____  ____     ___  ____  ____  _  _    ____   __   __    __  ___  __  ____  ____
-# / __)(  __)(_  _)   / __)/ ___)(  _ \( \/ )  (  _ \ /  \ (  )  (  )/ __)(  )(  __)/ ___)
-#( (_ \ ) _)   )(    ( (__ \___ \ ) __// \/ \   ) __/(  O )/ (_/\ )(( (__  )(  ) _) \___ \
-# \___/(____) (__)    \___)(____/(__)  \_)(_/  (__)   \__/ \____/(__)\___)(__)(____)(____/
-#
-# The below example uses the CSPM Registration Class to output Horizon policies to csv
-#
-# Input parameters:
-#
-# --falcon_client_id or -f (client id of the API credentials with Horizon read capabilities)
-# --falcon_client_secret or -s (secret associated with the client_id)
-# --output_file or -o (the output file name and path (.csv extentions recommended))
-# --cloud or -c (optional: the target cloud platform policies)
-#
-# Example: below using client_id and client_secret as environment 
-# variables and will output all of the policies
-#
-#  python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET \
-#              -o ~/Documents/policies.csv
-#
-# Example: Below using client_id and client_secret as environment variables and 
-#          will output only the azure policies
-#
-#  python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET \
-#              -c azure -o ~/Documents/azure-policies.csv
-#
-### The script can also be ran with the config.json file
-#
-#  python3 get_cspm_policies.py -c azure -o ~/Documents/azure-policies.csv
-#
-###
+"""CrowdStrike Horizon - Retrieve CSPM Policies
 
+This example uses the CSPM Registration Class to output Horizon policies to CSV.
+
+This sample requires FalconPy v0.7.4+.
+
+Input parameters:
+
+  --falcon_client_id or -f (client id of the API credentials with Horizon read capabilities)
+  --falcon_client_secret or -s (secret associated with the client_id)
+  --output_file or -o (the output file name and path (.csv extentions recommended))
+  --cloud or -c (optional: the target cloud platform policies)
+
+Examples:
+Using client_id and client_secret as environment variables and will output all of the policies.
+
+ python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET \
+             -o ~/Documents/policies.csv
+
+Using client_id and client_secret as environment variables and will output only the azure policies.
+
+ python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET \
+             -c azure -o ~/Documents/azure-policies.csv
+
+The script can also be ran using the config.json example credential file.
+
+ python3 get_cspm_policies.py -c azure -o ~/Documents/azure-policies.csv
+
+"""
+#     ___  ____  ____     ___  ____  ____  _  _    ____   __   __    __  ___  __  ____  ____
+#    / __)(  __)(_  _)   / __)/ ___)(  _ \( \/ )  (  _ \ /  \ (  )  (  )/ __)(  )(  __)/ ___)
+#   ( (_ \ ) _)   )(    ( (__ \___ \ ) __// \/ \   ) __/(  O )/ (_/\ )(( (__  )(  ) _) \___ \
+#    \___/(____) (__)    \___)(____/(__)  \_)(_/  (__)   \__/ \____/(__)\___)(__)(____)(____/
+#
+# pylint: disable=C0209
+#
 import argparse
 import json
 import csv
+from json.decoder import JSONDecodeError
 import os
 import sys
 import logging
-from falconpy import cspm_registration as FalconCSPM
+from falconpy import CSPMRegistration
 
 # Capture command line arguments
 parser = argparse.ArgumentParser(
@@ -52,9 +57,9 @@ parser.add_argument(
 args = parser.parse_args()
 
 # Grab our client_id and client_secret or exit
-config_file = '../config.json'
-if os.path.isfile(config_file):
-    with open(config_file, 'r') as file_config:
+CONFIG_FILE = '../config.json'
+if os.path.isfile(CONFIG_FILE):
+    with open(CONFIG_FILE, 'r', encoding="utf-8") as file_config:
         config = json.loads(file_config.read())
         falcon_client_id = config['falcon_client_id']
         falcon_client_secret = config['falcon_client_secret']
@@ -70,57 +75,59 @@ data_file = args.output_file
 cloud = args.cloud
 
 # Instantiate CSPM_Registration service class
-falcon = FalconCSPM.CSPM_Registration(
-    creds={"client_id": falcon_client_id,
-           "client_secret": falcon_client_secret
-           })
+falcon = CSPMRegistration(client_id=falcon_client_id,
+                          client_secret=falcon_client_secret
+                          )
 
-# Format api json data to accommodate for missing keys
-# The goal of this function is to bring uniformity to the api
-# returned data so it can be reported in csv format
+
 def format_json_data(json_data):
+    """Format API results for CSV.
+
+    Format api json data to accommodate for missing keys
+    The goal of this function is to bring uniformity to the api
+    returned data so it can be reported in csv format.
+    """
     length = 0
     headers = []
-    for p in json_data:
-        if len(p.keys()) > length:
-            length = len(p.keys())
-            headers = [*p]
+    for pol in json_data:
+        if len(pol.keys()) > length:
+            length = len(pol.keys())
+            headers = [*pol]
     list_dict = []
-    for p in json_data:
+    for pol in json_data:
         policy = ""
-        for h in headers:
-            if h in p.keys():
-                if h == headers[-1]:
+        for head in headers:
+            if head in pol.keys():
+                if head == headers[-1]:
                     str_line = "\"{}\": \"{}\"".format(
-                        h, str(p[h]).strip("\n").replace('"', ''))
+                        head, str(pol[head]).strip("\n").replace('"', ''))
                 else:
                     str_line = "\"{}\": \"{}\", ".format(
-                        h, str(p[h]).strip("\n").replace('"', ''))
+                        head, str(pol[head]).strip("\n").replace('"', ''))
             else:
-                if h == headers[-1]:
-                    str_line = "\"{}\": \"{}\"".format(h, "")
+                if head == headers[-1]:
+                    str_line = "\"{}\": \"{}\"".format(head, "")
                 else:
-                    str_line = "\"{}\": \"{}\", ".format(h, "")
+                    str_line = "\"{}\": \"{}\", ".format(head, "")
             policy += str_line
         new_dict = "{{{}}}".format(policy)
-        list_dict.append(json.loads(new_dict))
+        try:
+            list_dict.append(json.loads(new_dict))
+        except JSONDecodeError:
+            # Throw out any decode errors
+            pass
     return list_dict
 
 
-# determine if we are reporting on a single cloud-platform
-if cloud:
-    policies = falcon.GetCSPMPolicySettings(
-        "cloud-platform=" + cloud)['body']['resources']
-else:
-    policies = falcon.GetCSPMPolicySettings()['body']['resources']
-
+# Retrieve our list of policy settings
+policies = falcon.get_policy_settings(cloud_platform=cloud)['body']['resources']
 # Call format function on the returned api data
 return_data = format_json_data(policies)
 
 # Determine if an output file is specified and write out or print
 if data_file:
     keys = return_data[0].keys()
-    with open(data_file, 'w', newline='') as output_file:
+    with open(data_file, 'w', newline='', encoding="utf-8") as output_file:
         dict_writer = csv.DictWriter(output_file, keys)
         dict_writer.writeheader()
         dict_writer.writerows(return_data)
