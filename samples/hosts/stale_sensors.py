@@ -2,6 +2,8 @@
 stale_sensors.py - Detects devices that haven't checked into
                    CrowdStrike for a specified period of time.
 
+REQUIRES: FalconPy v0.8.6+, tabulate
+
 - jshcodes@CrowdStrike, 09.01.21
 """
 from datetime import datetime, timedelta, timezone
@@ -51,7 +53,8 @@ def parse_command_line() -> object:
     parser.add_argument(
         '-b',
         '--base_url',
-        help='CrowdStrike API region (us1, us2, eu1, usgov1)',
+        help='CrowdStrike API region (us1, us2, eu1, usgov1)'
+        ' NOT required unless you are using `usgov1`',
         required=False
     )
     parser.add_argument(
@@ -78,7 +81,7 @@ def parse_command_line() -> object:
     return parser.parse_args()
 
 
-def connect_api(key: str, secret: str, base_url: str) -> object:
+def connect_api(key: str, secret: str, base_url: str) -> Hosts:
     """
     Connects to the API and returns an instance of the Hosts Service Class.
     """

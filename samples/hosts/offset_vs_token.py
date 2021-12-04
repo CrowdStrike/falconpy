@@ -16,12 +16,12 @@ that limits the number of hosts returned. (See get_query_results method.)
 # |.  1   |  _  |__ --|   _|__ --|
 # |.  _   |_____|_____|____|_____|
 # |:  |   |
-# |::.|:. |     FalconPy v0.6.3
+# |::.|:. |     FalconPy v0.8.6+
 # `--- ---'
 import os
 import collections
 try:
-    from falconpy.hosts import Hosts
+    from falconpy import Hosts
 except ImportError as no_falconpy:
     raise SystemExit(
         "CrowdStrike FalconPy must be installed in order to use this application.\n"
@@ -240,7 +240,6 @@ indicator = check_list(
 
 # Success, the list match
 print("%-80s" % "Lists are equivalent")
-
 
 
 # ░█████╗░███████╗███████╗░██████╗███████╗████████╗

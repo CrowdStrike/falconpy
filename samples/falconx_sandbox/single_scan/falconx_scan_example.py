@@ -1,5 +1,4 @@
-"""
-falconx_scan_example.py - Falcon X Sandbox - Upload / Scan example
+"""Falcon X Sandbox - Upload / Scan example.
 
 Supports scanning a single file only.
 
@@ -10,7 +9,7 @@ Supports scanning a single file only.
 # |.  1___|  _  |  |  __|  _  |     | \  1  / |   1___|  _  |     |  _  |  _  |  _  |_   _|
 # |.  __) |___._|__|____|_____|__|__| /  _  \ |____   |___._|__|__|_____|_____|_____|__.__|
 # |:  |                              /:  |   \|:  1   |
-# |::.|                             (::. |:.  |::.. . |           FalconPy v0.6.3
+# |::.|                             (::. |:.  |::.. . |           FalconPy v0.8.6+
 # `---'                              `--- ---'`-------'
 #
 import os
@@ -20,9 +19,7 @@ from enum import Enum
 from datetime import timedelta
 from argparse import RawTextHelpFormatter
 try:
-    from falconpy.falconx_sandbox import FalconXSandbox
-    from falconpy.sample_uploads import SampleUploads
-    from falconpy.oauth2 import OAuth2
+    from falconpy import FalconXSandbox, SampleUploads, OAuth2
 except ImportError as no_falconpy:
     raise SystemExit(
         "CrowdStrike FalconPy must be installed in order to use this application.\n"
@@ -31,9 +28,7 @@ except ImportError as no_falconpy:
 
 
 class Environment(Enum):
-    """
-    Enum to hold our different environment specifiers.
-    """
+    """Enum to hold our different environment specifiers."""
     WIN7 = 100
     WIN7_64 = 110
     WIN10 = 160
@@ -42,9 +37,7 @@ class Environment(Enum):
 
 
 class Indicator():
-    """
-    Silly progress indicator styled after KITT.
-    """
+    """Silly progress indicator styled after KITT."""
     def __init__(self, start_position: int = -1, start_direction: bool = True):
         self.position = start_position
         self.direction = start_direction
@@ -65,9 +58,7 @@ class Indicator():
         ]
 
     def step(self):
-        """
-        Calculates the position and direction of the indicator.
-        """
+        """Calculate the position and direction of the indicator."""
         if self.position >= len(self.indicator) - 1:
             # Too long - out of bounds
             self.direction = False
@@ -83,9 +74,7 @@ class Indicator():
             self.position -= 1
 
     def display(self) -> str:
-        """
-        Increments the indicator position and returns its value.
-        """
+        """Increments the indicator position and returns its value."""
         # Step the indicator forward
         self.step()
         # Return the new indicator display
@@ -93,9 +82,7 @@ class Indicator():
 
 
 def parse_command_line():
-    """
-    Parses and returns inbound command line arguments.
-    """
+    """Parse and return inbound command line arguments."""
     # Argument parser for our command line
     parser = argparse.ArgumentParser(
         description="Falcon X Sandbox example",
@@ -130,11 +117,9 @@ def parse_command_line():
 
 
 def check_scan_status(check_id: str) -> dict:
-    """
-    Retrieves the status of a submission and returns it.
-    """
+    """Retrieve the status of a submission and return it."""
     # Return our submission response by ID
-    return sandbox.GetSubmissions(ids=check_id)
+    return sandbox.get_submissions(ids=check_id)
 
 
 def upload_file(filename: str,
@@ -142,9 +127,9 @@ def upload_file(filename: str,
                 submit_comment: str,
                 confidential: bool
                 ) -> dict:
-    """
-    Uploads the specified file to CrowdStrike cloud
-    applying any provided attributes. Returns the result.
+    """Upload the specified file to CrowdStrike cloud.
+
+    Uploads and applies any provided attributes. Returns the result.
     """
     # Read in our binary payload
     with open(filename, 'rb') as payload:
@@ -157,7 +142,8 @@ def upload_file(filename: str,
 
 
 def submit_for_analysis(sha_value: str) -> dict:
-    """
+    """Submit file for analysis.
+
     Submits an uploaded file that matches the provided SHA256
     to the specified Falcon X Sandbox environment for analysis.
     Returns the result.
@@ -175,7 +161,8 @@ def submit_for_analysis(sha_value: str) -> dict:
 
 
 def delete_file(id_value: str) -> int:
-    """
+    """Delete file from sandbox.
+
     Deletes a file from CrowdStrike cloud based upon the
     SHA256 provided. Returns the operation status code.
     """
@@ -184,18 +171,13 @@ def delete_file(id_value: str) -> int:
 
 
 def inform(msg: str):
-    """
-    Provides informational updates to
-    the user as the program progresses.
-    """
+    """Provide informational updates to the user as the program progresses."""
     # Dynamic user update messages
     print("  %-80s" % msg, end="\r", flush=True)
 
 
 def running_time(begin: time):
-    """
-    Calculates the current running time and returns it.
-    """
+    """Calculate the current running time and return it."""
     return f"[ Time running: {str(timedelta(seconds=(time.time() - begin)))} ]"
 
 

@@ -1,6 +1,6 @@
 """This sample demonstrates retrieving sensor versions by hostname.
 
-This example requires FalconPy v0.7.0+
+This example requires FalconPy v0.8.6+
 """
 import argparse
 from falconpy import Hosts
@@ -24,7 +24,8 @@ def parse_command_line() -> object:
     parser.add_argument(
         '-b',
         '--base_url',
-        help='CrowdStrike API region (us1, us2, eu1, usgov1)',
+        help='CrowdStrike API region (us1, us2, eu1, usgov1).'
+        ' NOT required unless you are using `usgov1`.',
         required=False
     )
     parser.add_argument(
@@ -40,7 +41,7 @@ def parse_command_line() -> object:
 
 def device_list(off: int, limit: int, sort: str):
     """Return a list of all devices for the CID, paginating when necessary."""
-    result = falcon.QueryDevicesByFilter(limit=limit, offset=off, sort=sort)
+    result = falcon.query_devices_by_filter(limit=limit, offset=off, sort=sort)
     new_offset = result["body"]["meta"]["pagination"]["offset"]
     total = result["body"]["meta"]["pagination"]["total"]
     returned_device_list = result["body"]["resources"]
@@ -49,7 +50,7 @@ def device_list(off: int, limit: int, sort: str):
 
 def device_detail(aids: list):
     """Return the device_id and agent_version for a list of AIDs provided."""
-    result = falcon.GetDeviceDetails(ids=aids)
+    result = falcon.get_device_details(ids=aids)
     device_details = []
     # return just the aid and agent version
     for device in result["body"]["resources"]:

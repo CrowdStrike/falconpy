@@ -12,12 +12,12 @@ downloading a specified number of examples if found.
 # |. \_/  |___._|__|.  |   |_____|_____|__| |___  |
 # |:  |   |        |:  1   |                |_____|
 # |::.|:. |        |::..   |
-# `--- ---'        `----|:.|    FalconPy v0.6.3
+# `--- ---'        `----|:.|    FalconPy v0.7.0+
 #                       `--'
 
 import argparse
 try:
-    from falconpy.api_complete import APIHarness
+    from falconpy import APIHarness
 except ImportError as no_falconpy:
     raise SystemExit(
         "CrowdStrike FalconPy must be installed in order to use this application.\n"
