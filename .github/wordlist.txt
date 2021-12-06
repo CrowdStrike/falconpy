@@ -595,3 +595,5 @@ cozadk
 hubble
 sspencer
 KennyOps
+GetConfigurationDetections
+GetBehaviorDetections

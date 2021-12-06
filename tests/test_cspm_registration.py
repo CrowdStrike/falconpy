@@ -76,6 +76,8 @@ class TestCSPMRegistration:
             "get_azure_user_scripts_attachment": falcon.get_azure_user_scripts_attachment(tenant_id="12345678"),
             "get_ioa_events": falcon.GetIOAEvents(),
             "get_ioa_users": falcon.GetIOAUsers(),
+            "get_behavior_detections": falcon.get_behavior_detections(limit=1),
+            "get_configuration_detections": falcon.get_configuration_detections(limit=1)
         }
         for key in tests:
             if tests[key]["status_code"] != 500:
