@@ -453,6 +453,135 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_behavior_detections(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve list of detected behaviors.
+
+        Keyword arguments:
+        account_id -- Cloud Account ID (AWS account ID, Azure Subscription ID, etc.)
+        aws_account_id -- AWS account ID. String.
+        azure_subscription_id -- Azure subscription ID. String.
+        azure_tenant_id -- Azure tenant ID. String.
+        cloud_provider -- Cloud provider. Allowed values: `azure`, `aws`, `gcp`. String.
+        date_time_since -- Filter to retrieve all events after this date. RFC3339 formatted string.
+                           Example: 2006-01-01T12:00:01Z07:00
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+        next_token -- String to get next page of results, associated with the previous
+                      execution. Must include all filters from previous execution. String.
+        service -- Cloud Service (Example: `EC2` or `S3`). String.
+                   Available options
+                   ACM                      Identity
+                   ACR                      KMS
+                   Any                      KeyVault
+                   App Engine               Kinesis
+                   BigQuery                 Kubernetes
+                   Cloud Load Balancing     Lambda
+                   Cloud Logging            LoadBalancer
+                   Cloud SQL                Monitor
+                   Cloud Storage            NLB/ALB
+                   CloudFormation           NetworkSecurityGroup
+                   CloudTrail               PostgreSQL
+                   CloudWatch Logs          RDS
+                   Cloudfront               Redshift
+                   Compute Engine           S3
+                   Config                   SES
+                   Disk                     SNS
+                   DynamoDB                 SQLDatabase
+                   EBS                      SQLServer
+                   EC2                      SQS
+                   ECR                      SSM
+                   EFS                      Serverless Application Repository
+                   EKS                      StorageAccount
+                   ELB                      Subscriptions
+                   EMR                      VPC
+                   Elasticache              VirtualMachine
+                   GuardDuty                VirtualNetwork
+                   IAM
+        severity -- Severity (e.g. `High`, `Medium` or `Informational`). String.
+        state -- State. (e.g. `open` or `closed`). String.
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetBehaviorDetections
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetBehaviorDetections",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_configuration_detections(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve list of active misconfigurations.
+
+        Keyword arguments:
+        account_id -- Cloud Account ID (AWS account ID, Azure Subscription ID, etc.)
+        aws_account_id -- AWS account ID. String.
+        azure_subscription_id -- Azure subscription ID. String.
+        azure_tenant_id -- Azure tenant ID. String.
+        cloud_provider -- Cloud provider. Allowed values: `azure`, `aws`, `gcp`. String.
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+        next_token -- String to get next page of results, associated with the previous
+                      execution. Cannot be combined with any filter except `limit`. String.
+        region -- Cloud Provider Region (Example: `us-east-1`). String.
+        service -- Cloud Service (Example: `EC2` or `S3`). String.
+                   Available options
+                   ACM                      Identity
+                   ACR                      KMS
+                   Any                      KeyVault
+                   App Engine               Kinesis
+                   BigQuery                 Kubernetes
+                   Cloud Load Balancing     Lambda
+                   Cloud Logging            LoadBalancer
+                   Cloud SQL                Monitor
+                   Cloud Storage            NLB/ALB
+                   CloudFormation           NetworkSecurityGroup
+                   CloudTrail               PostgreSQL
+                   CloudWatch Logs          RDS
+                   Cloudfront               Redshift
+                   Compute Engine           S3
+                   Config                   SES
+                   Disk                     SNS
+                   DynamoDB                 SQLDatabase
+                   EBS                      SQLServer
+                   EC2                      SQS
+                   ECR                      SSM
+                   EFS                      Serverless Application Repository
+                   EKS                      StorageAccount
+                   ELB                      Subscriptions
+                   EMR                      VPC
+                   Elasticache              VirtualMachine
+                   GuardDuty                VirtualNetwork
+                   IAM
+        severity -- Severity (e.g. `High`, `Medium` or `Informational`). String.
+        status -- Status (e.g. `new`, `recurring`, or `all`). String.
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetConfigurationDetections
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetConfigurationDetections",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_ioa_events(self: object, parameters: dict = None, **kwargs) -> dict:
         """For CSPM IOA events, gets list of IOA events.
 
@@ -731,6 +860,8 @@ class CSPMRegistration(ServiceClass):
     UpdateCSPMAzureAccountClientID = update_azure_account_client_id
     UpdateCSPMAzureTenantDefaultSubscriptionID = update_azure_tenant_default_subscription_id
     GetCSPMAzureUserScriptsAttachment = get_azure_user_scripts_attachment
+    GetBehaviorDetections = get_behavior_detections
+    GetConfigurationDetections = get_configuration_detections
     GetIOAEvents = get_ioa_events
     GetIOAUsers = get_ioa_users
     GetCSPMPolicy = get_policy
