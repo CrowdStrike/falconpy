@@ -596,3 +596,4 @@ hubble
 sspencer
 KennyOps
 GetConfigurationDetections
+GetBehaviorDetections
