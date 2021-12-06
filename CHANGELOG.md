@@ -1,6 +1,6 @@
 # Version 0.8.9
 ## Added features and functionality
-+ Added: New operations (GetBehaviorDetections, GetConfigurationDetections) to both the CSPMRegistration Service Class and the Uber Class.
++ Added: New operations (GetBehaviorDetections, GetConfigurationDetections) to both the CSPMRegistration Service Class and the Uber Class. Closes #482.
     - `_endpoint/_cspm_registration.py`
     - `cspm_registration.py`
     - `tests/test_cspm_registration.py`
