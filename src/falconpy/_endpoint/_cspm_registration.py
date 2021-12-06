@@ -361,6 +361,297 @@ _cspm_registration_endpoints = [
     ]
   ],
   [
+    "GetBehaviorDetections",
+    "GET",
+    "/detects/entities/ioa/v1",
+    "Get list of detected behaviors",
+    "cspm_registration",
+    [
+      {
+        "pattern": "^(aws|azure)$",
+        "enum": [
+          "aws",
+          "azure"
+        ],
+        "type": "string",
+        "description": "Cloud Provider (e.g.: aws|azure)",
+        "name": "cloud_provider",
+        "in": "query",
+        "required": True
+      },
+      {
+        "enum": [
+          "ACM",
+          "ACR",
+          "Any",
+          "App Engine",
+          "AppService",
+          "BigQuery",
+          "Cloud Load Balancing",
+          "Cloud Logging",
+          "Cloud SQL",
+          "Cloud Storage",
+          "CloudFormation",
+          "CloudTrail",
+          "CloudWatch Logs",
+          "Cloudfront",
+          "Compute Engine",
+          "Config",
+          "Disk",
+          "DynamoDB",
+          "EBS",
+          "EC2",
+          "ECR",
+          "EFS",
+          "EKS",
+          "ELB",
+          "EMR",
+          "Elasticache",
+          "GuardDuty",
+          "IAM",
+          "Identity",
+          "KMS",
+          "KeyVault",
+          "Kinesis",
+          "Kubernetes",
+          "Lambda",
+          "LoadBalancer",
+          "Monitor",
+          "NLB/ALB",
+          "NetworkSecurityGroup",
+          "PostgreSQL",
+          "RDS",
+          "Redshift",
+          "S3",
+          "SES",
+          "SNS",
+          "SQLDatabase",
+          "SQLServer",
+          "SQS",
+          "SSM",
+          "Serverless Application Repository",
+          "StorageAccount",
+          "Subscriptions",
+          "VPC",
+          "VirtualMachine",
+          "VirtualNetwork"
+        ],
+        "type": "string",
+        "description": "Cloud Service (e.g. EC2 | EBS | S3)",
+        "name": "service",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Cloud Account ID (e.g.: AWS accountID, Azure subscriptionID)",
+        "name": "account_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "AWS Account ID",
+        "name": "aws_account_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Azure Subscription ID",
+        "name": "azure_subscription_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Azure Tenant ID",
+        "name": "azure_tenant_id",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "closed",
+          "open"
+        ],
+        "type": "string",
+        "description": "State (e.g.: open | closed)",
+        "name": "state",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter to get all events after this date, in format RFC3339 : e.g. 2006-01-02T15:04:05Z07:00",
+        "name": "date_time_since",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "High",
+          "Informational",
+          "Medium"
+        ],
+        "type": "string",
+        "description": "Severity (e.g.: High | Medium | Informational)",
+        "name": "severity",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "String to get next page of results, is associated with a previous execution "
+        "of GetBehaviorDetections. Must include all filters from previous execution.",
+        "name": "next_token",
+        "in": "query"
+      },
+      {
+        "pattern": "^\\d+$",
+        "type": "integer",
+        "description": "The maximum records to return. [1-500]",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetConfigurationDetections",
+    "GET",
+    "/detects/entities/iom/v1",
+    "Get list of active misconfigurations",
+    "cspm_registration",
+    [
+      {
+        "enum": [
+          "aws",
+          "azure",
+          "gcp"
+        ],
+        "type": "string",
+        "description": "Cloud Provider (e.g.: aws|azure|gcp)",
+        "name": "cloud_provider",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "AWS account ID or GCP Project Number or Azure subscription ID",
+        "name": "account_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Azure Subscription ID",
+        "name": "azure_subscription_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Azure Tenant ID",
+        "name": "azure_tenant_id",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "all",
+          "new",
+          "reoccurring"
+        ],
+        "type": "string",
+        "description": "Status (e.g.: new|reoccurring|all)",
+        "name": "status",
+        "in": "query"
+      },
+      {
+        "pattern": "^[0-9a-z-]{2,}$",
+        "type": "string",
+        "description": "Cloud Provider Region",
+        "name": "region",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "High",
+          "Informational",
+          "Medium"
+        ],
+        "type": "string",
+        "description": "Severity (e.g.: High | Medium | Informational)",
+        "name": "severity",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "ACM",
+          "ACR",
+          "Any",
+          "App Engine",
+          "AppService",
+          "BigQuery",
+          "Cloud Load Balancing",
+          "Cloud Logging",
+          "Cloud SQL",
+          "Cloud Storage",
+          "CloudFormation",
+          "CloudTrail",
+          "CloudWatch Logs",
+          "Cloudfront",
+          "Compute Engine",
+          "Config",
+          "Disk",
+          "DynamoDB",
+          "EBS",
+          "EC2",
+          "ECR",
+          "EFS",
+          "EKS",
+          "ELB",
+          "EMR",
+          "Elasticache",
+          "GuardDuty",
+          "IAM",
+          "Identity",
+          "KMS",
+          "KeyVault",
+          "Kinesis",
+          "Kubernetes",
+          "Lambda",
+          "LoadBalancer",
+          "Monitor",
+          "NLB/ALB",
+          "NetworkSecurityGroup",
+          "PostgreSQL",
+          "RDS",
+          "Redshift",
+          "S3",
+          "SES",
+          "SNS",
+          "SQLDatabase",
+          "SQLServer",
+          "SQS",
+          "SSM",
+          "Serverless Application Repository",
+          "StorageAccount",
+          "Subscriptions",
+          "VPC",
+          "VirtualMachine",
+          "VirtualNetwork"
+        ],
+        "type": "string",
+        "description": "Cloud Service (e.g.: EBS|EC2|S3 etc.)",
+        "name": "service",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "String to get next page of results, is associated with a previous execution of "
+        "GetConfigurationDetections. Cannot be combined with any filter except limit.",
+        "name": "next_token",
+        "in": "query"
+      },
+      {
+        "pattern": "^\\d+$",
+        "type": "integer",
+        "description": "The maximum records to return. [1-500]",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "GetIOAEvents",
     "GET",
     "/ioa/entities/events/v1",
