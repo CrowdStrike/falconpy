@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=R0904  # Matching API operation counts
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import cspm_registration_payload, cspm_policy_payload, cspm_scan_payload
 from ._service_class import ServiceClass
