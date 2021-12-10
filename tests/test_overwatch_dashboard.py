@@ -62,11 +62,3 @@ class TestOverwatchDashboard:
         """
         assert self.overwatch_generate_errors() is True
 
-    # @staticmethod
-    # def test_logout():
-    #     """
-    #     Pytest harness hook
-    #     """
-    #     assert bool(falcon.auth_object.revoke(
-    #         falcon.auth_object.token()["body"]["access_token"]
-    #         )["status_code"] in AllowedResponses) is True
