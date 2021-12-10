@@ -138,11 +138,14 @@ def force_default(defaults: list, default_types: list = None):
                     kwargs[element] = get_default(default_types, element_count)
                 # Increment our tracker for our sibling default_types list
                 element_count += 1
-            # They passed us an argument but did not specify what it was (non-keyword) [Issue #263]
-            # Need to test scenarios with multiple arguments / keyword variations
-            # if len(args) > 1:
-            #     args = [args[0]]
-            return func(*args, **kwargs)
+
+            try:
+                created = func(*args, **kwargs)
+            except TypeError:
+                # They passed us an argument but did not specify what it was (non-keyword) [Issue #263]
+                created = generate_error_result("Keyword arguments must be used for this method.")
+
+            return created
         return factory
     return wrapper
 
@@ -339,11 +342,12 @@ def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epnam
                 pass
 
     # Clean up reserved word conversions when passing in an invalid raw payload
-    for element in payload:
-        if not isinstance(element, str):
-            returned_payload[element.__name__] = payload[element]
-        else:
-            returned_payload[element] = payload[element]
+    if payload:
+        for element in payload:
+            if not isinstance(element, str):
+                returned_payload[element.__name__] = payload[element]
+            else:
+                returned_payload[element] = payload[element]
 
     return returned_payload
 
