@@ -597,3 +597,4 @@ sspencer
 KennyOps
 GetConfigurationDetections
 GetBehaviorDetections
+MessageCenter
