@@ -65,25 +65,26 @@ def activity_payload(passed_keywords: dict) -> dict:
 
 def case_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted case payload.
-       {
-           "body": "string",
-           "detections": [
-               {
-                   "id": "string",
-                   "url": "string"
-               }
-           ],
-           "id": "string",
-           "incidents": [
-               {
-                   "id": "string",
-                   "url": "string"
-               }
-           ],
-           "title": "string",
-           "type": "string",
-           "user_uuid": "string"
-       }
+
+    {
+        "body": "string",
+        "detections": [
+            {
+                "id": "string",
+                "url": "string"
+            }
+        ],
+        "id": "string",
+        "incidents": [
+            {
+                "id": "string",
+                "url": "string"
+            }
+        ],
+        "title": "string",
+        "type": "string",
+        "user_uuid": "string"
+    }
     """
     returned_payload = {}
 

@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library
+"""Internal API endpoint constant library.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
