@@ -55,7 +55,7 @@ class SampleUploads(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_sample(self: object, parameters: dict = None, **kwargs) -> object:
+    def get_sample(self: object, *args, parameters: dict = None, **kwargs) -> object:
         """Retrieve the file associated with the given ID (SHA256).
 
         Keyword arguments:
@@ -79,7 +79,7 @@ class SampleUploads(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetSampleV3",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
@@ -87,7 +87,8 @@ class SampleUploads(ServiceClass):
                       file_data: object = None,
                       body: dict = None,
                       parameters: dict = None,
-                      **kwargs) -> dict:
+                      **kwargs
+                      ) -> dict:
         """Upload a file for further cloud analysis.
 
         After uploading, call the specific analysis API endpoint.
@@ -124,7 +125,7 @@ class SampleUploads(ServiceClass):
                            True = File is only shown to users within your customer account.
                            False = File can be seen by other CrowdStrike customers.
                            Defaults to True.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
+        parameters -- full parameters payload, not required if using other keywords.
 
 
         This method only supports keywords for providing arguments.
