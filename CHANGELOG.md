@@ -8,6 +8,7 @@
     - `message_center.py`
     - `__init.py__`
     - `tests/test_message_center.py`
+    - `.github/wordlist.txt`
 
 ## Issues resolved
 + Fixed: Argument passed to a keyword argument only method error handling.
