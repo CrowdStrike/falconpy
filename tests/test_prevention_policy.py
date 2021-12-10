@@ -11,7 +11,7 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import message_center, prevention_policy as FalconPrevent
+from falconpy import prevention_policy as FalconPrevent
 
 auth = Authorization.TestAuthorization()
 token = auth.getConfigExtended()
