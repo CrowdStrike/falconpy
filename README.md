@@ -49,6 +49,7 @@ Representing a single API service collection, each service class has a method de
 | [CrowdStrike Intel](https://falcon.crowdstrike.com/support/documentation/72/intel-apis) | [intel.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/intel.py) |
 | [CrowdStrike Kubernetes Protection](https://falcon.crowdstrike.com/documentation/177/kubernetes-protection) | [kubernetes_protection.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/kubernetes_protection.py) |
 | [CrowdStrike MalQuery](https://falcon.crowdstrike.com/support/documentation/113/malquery-apis) | [malquery.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/malquery.py) |
+| CrowdStrike Message Center | [message_center.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/message_center.py) |
 | CrowdStrike ML Exclusions | [ml_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ml_exclusions.py) |
 | [CrowdStrike OAuth2 Auth Token](https://falcon.crowdstrike.com/support/documentation/93/oauth2-auth-token-apis) | [oauth2.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/oauth2.py) |
 | [CrowdStrike Overwatch Dashboard](https://falcon.crowdstrike.com/documentation/155/falcon-overwatch-dashboard-apis) | [overwatch_dashboard.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/overwatch_dashboard.py) |
