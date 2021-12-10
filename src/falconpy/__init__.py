@@ -47,6 +47,7 @@ from .ioc import IOC
 from .iocs import Iocs
 from .kubernetes_protection import KubernetesProtection
 from .malquery import MalQuery
+from .message_center import MessageCenter
 from .ml_exclusions import MLExclusions
 from .mssp import FlightControl
 from .oauth2 import OAuth2
@@ -88,7 +89,7 @@ __all__ = [
     "RealTimeResponse", "Recon", "ReportExecutions", "ResponsePolicies", "SampleUploads",
     "ScheduledReports", "SensorDownload", "SensorUpdatePolicy", "SensorVisibilityExclusions",
     "SpotlightVulnerabilities", "UserManagement", "ZeroTrustAssessment", "PreventionPolicies",
-    "SensorUpdatePolicies"
+    "SensorUpdatePolicies", "MessageCenter"
  ]
 """
 This is free and unencumbered software released into the public domain.
