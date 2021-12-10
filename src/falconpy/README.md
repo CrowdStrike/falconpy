@@ -32,6 +32,7 @@ for every single operation available within that service collection.
 | `iocs.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/iocs |
 | `kubernetes_protection.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection |
 | `malquery.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery |
+| `message_center.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center |
 | `ml_exclusions.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions |
 | `mssp.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp |
 | `oauth2.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2 |

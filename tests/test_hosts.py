@@ -211,6 +211,12 @@ class TestHosts:
         """Pytest harness hook"""
         assert self.hosts_perform_action() is True
 
+    def test_missing_keyword(self):
+        """Pytest harness hook."""
+        assert bool(
+            falcon.query_devices_by_filter("Arguments not accepted")["status_code"] == 500
+        ) is True
+
     def test_errors(self):
         """Pytest harness hook"""
         assert self.hosts_generate_errors() is True

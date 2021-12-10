@@ -1,3 +1,30 @@
+# Version 0.8.10
+## Added features and functionality
++ Added: MessageCenter Service Class.
+    - `_endpoint/_message_center.py`
+    - `_endpoint/__init__.py`
+    - `_payload/_message_center.py`
+    - `_payload/__init__.py`
+    - `message_center.py`
+    - `__init.py__`
+    - `tests/test_message_center.py`
+    - `.github/wordlist.txt`
+
+## Issues resolved
++ Fixed: Argument passed to a keyword argument only method error handling.
+    - `_util.py`
+    - `tests/test_hosts.py`
++ Fixed: Added non-keyword argument handler for `get_sample` method.
+    - `sample_uploads.py`
+
+## Other
++ Updated: Minor linting adjustments.
+    - `sample_uploads.py`
+    - `tests/test_overwatch_dashboard.py`
+    - `tests/test_prevention_policy.py`
++ Updated: README files updated to reflect new service collection.
+
+
 # Version 0.8.9
 ## Added features and functionality
 + Added: New operations (GetBehaviorDetections, GetConfigurationDetections) to both the CSPMRegistration Service Class and the Uber Class. Closes #482.
