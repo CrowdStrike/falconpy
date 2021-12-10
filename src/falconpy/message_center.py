@@ -149,7 +149,7 @@ class MessageCenter(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/GetCaseActivityByIds
         """
         if not body:
-            body = generic_payload_list(  # submitted_arguments=args,
+            body = generic_payload_list(submitted_arguments=args,
                                         submitted_keywords=kwargs,
                                         payload_value="ids"
                                         )
