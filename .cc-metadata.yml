@@ -1,6 +1,0 @@
-    # Whether this GitHub repo is for a CC-led engineering project
-    engineering_project: true
-    # All technologies used
-    technologies: Python, CrowdStrike
-    # Whether this repository should be featured on the CC Open Source site's "Projects" page
-    featured: true
