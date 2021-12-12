@@ -6,7 +6,9 @@ GitHub Issues are used to report bugs. Submit a ticket here:
 [https://github.com/CrowdStrike/falconpy/issues/new/choose](https://github.com/CrowdStrike/falconpy/issues/new/choose)
 
 ## Community Forums
-GitHub Discussions provide the community with means to communicate. There are four discussion categories:
+GitHub Discussions provide the community with means to communicate. 
+
+There are four discussion categories:
   * :speech_balloon: [**General**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AGeneral): Catch all for general discussions.
   * :bulb: [**Ideas**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AIdeas): Have a suggestion for a feature request? Is there something the community or project could improve upon? Let us know here.
   * :pray: [**Q&A**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A): Have a question about how to accomplish something? A usability question? Submit them here!
@@ -17,7 +19,7 @@ Extended FalconPy project documentation is available via our [wiki](https://gith
 This content is updated as part of our release cycle.
 
 # Contributing
-As our current [contributor list](https://github.com/CrowdStrike/falconpy/blob/jshcodes-repo-additions/AUTHORS.md#contributors) demonstrates, there are *many* ways you can contribute to the FalconPy project!
+As our current [contributor list](https://github.com/CrowdStrike/falconpy/blob/main/AUTHORS.md#contributors) demonstrates, there are *many* ways you can contribute to the FalconPy project!
   * ***Providing feedback*** by opening a GitHub ticket. Even a fly-by "Hey, this worked!" is appreciated and helps validate approaches. Ideas on improving the project are most welcome.
   * ***Documenting, blogging, or creating videos***, of how you've used FalconPy! This type of content is *invaluable* and helps communities grow. Open a pull request for inclusion in the [Documentation and Collateral](https://github.com/CrowdStrike/falconpy#documentation-and-collateral) section.
   * ***Fix a bug or implement a new feature***. Check out our [open issues on GitHub](https://github.com/CrowdStrike/falconpy/issues) for inspiration.
