@@ -1,8 +1,10 @@
 # Support
 FalconPy is an open source project, not a formal CrowdStrike product, to assist developers implement CrowdStrike's APIs within their applications. As such it carries no formal support, expressed or implied.
 
-:fire: **Is something not working as expected?** :fire:<br/>
-GitHub Issues are used to report bugs. Submit a ticket here: 
+## Bug Reporting
+GitHub Issues are used to report bugs. 🐛
+
+Submit a ticket here: 
 [https://github.com/CrowdStrike/falconpy/issues/new/choose](https://github.com/CrowdStrike/falconpy/issues/new/choose)
 
 [![GitHub issues](https://img.shields.io/github/issues-raw/crowdstrike/falconpy?logo=github)](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aopen+is%3Aissue)
@@ -12,10 +14,12 @@ GitHub Issues are used to report bugs. Submit a ticket here:
 GitHub Discussions provide the community with means to communicate. 
 
 There are four discussion categories:
-  * :speech_balloon: [**General**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AGeneral): Catch all for general discussions.
-  * :bulb: [**Ideas**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AIdeas): Have a suggestion for a feature request? Is there something the community or project could improve upon? Let us know here.
-  * :pray: [**Q&A**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A): Have a question about how to accomplish something? A usability question? Submit them here!
-  * :raised_hands: [**Show and Tell**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3A%22Show+and+tell%22): Share with the community what you're up to! Perhaps this is letting everyone know about your upcoming conference talk, sharing a project that has embedded FalconPy, or your recent blog.
+| | <img width=100> Category | <BR/> Purpose |
+| :--: | :--- | :--- |
+| :speech_balloon: | [**General**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AGeneral) | Catch all for general discussions. |
+| :bulb: | [**Ideas**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AIdeas) | Have a suggestion for a feature request? Is there something the community or project could improve upon? Let us know here. |
+| :pray: | [**Q&A**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A) | Have a question about how to accomplish something? A usability question? Submit them here! |
+| :raised_hands: | [**Show and Tell**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3A%22Show+and+tell%22) | Share with the community what you're up to! Perhaps this is letting everyone know about your upcoming conference talk, sharing a project that has embedded FalconPy, or your recent blog. |
 
 [![GitHub Discussions](https://img.shields.io/github/discussions/CrowdStrike/falconpy?logo=github&logoColor=white)](https://github.com/CrowdStrike/falconpy/discussions)
 
