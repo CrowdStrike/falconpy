@@ -17,7 +17,7 @@ There are four discussion categories:
   * :pray: [**Q&A**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A): Have a question about how to accomplish something? A usability question? Submit them here!
   * :raised_hands: [**Show and Tell**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3A%22Show+and+tell%22): Share with the community what you're up to! Perhaps this is letting everyone know about your upcoming conference talk, sharing a project that has embedded FalconPy, or your recent blog.
 
-![GitHub Discussions](https://img.shields.io/github/discussions/CrowdStrike/falconpy)
+![GitHub Discussions](https://img.shields.io/github/discussions/CrowdStrike/falconpy?logo=github&logoColor=white)
 
 # Documentation
 Extended FalconPy project documentation is available via our [wiki](https://github.com/CrowdStrike/falconpy/wiki) or at [falconpy.io](https://falconpy.io).
@@ -38,4 +38,4 @@ Interested in earning a place on our [contributors list](https://github.com/Crow
 
 Open to do something else but not sure where to start? Try [opening an issue](https://github.com/CrowdStrike/falconpy/issues/new) or posting a topic on our [discussion board](https://github.com/CrowdStrike/falconpy/discussions) to introduce yourself and your interests. We look forward to chatting with you!
 
-[![GitHub contributors](https://img.shields.io/github/contributors/CrowdStrike/falconpy?label=code%20contributors)](https://github.com/CrowdStrike/falconpy/blob/main/AUTHORS.md#contributors)
+[![GitHub contributors](https://img.shields.io/github/contributors/CrowdStrike/falconpy?label=code%20contributors&logo=github&logoColor=white)](https://github.com/CrowdStrike/falconpy/blob/main/AUTHORS.md#contributors)
