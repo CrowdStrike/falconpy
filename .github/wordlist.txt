@@ -83,6 +83,7 @@ FalconShell
 FalconX
 Falconx
 FalconXSandbox
+FileVantage
 FirewallManagement
 FlightControl
 GCP
