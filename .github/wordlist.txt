@@ -84,6 +84,7 @@ FalconX
 Falconx
 FalconXSandbox
 FileVantage
+filevantage
 FirewallManagement
 FlightControl
 GCP
