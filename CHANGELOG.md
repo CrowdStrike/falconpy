@@ -1,6 +1,14 @@
+# Version 0.8.11
+## Added features and functionality
++ Added: FileVantage Service Class and all related endpoints.
+    - `_endpoint/_filevantage.py`
+    - `_endpoint/__init__.py`
+    - `filevantage.py`
+    - `tests/test_filevantage.py`
+
 # Version 0.8.10
 ## Added features and functionality
-+ Added: MessageCenter Service Class.
++ Added: MessageCenter Service Class and all related endpoints.
     - `_endpoint/_message_center.py`
     - `_endpoint/__init__.py`
     - `_payload/_message_center.py`
