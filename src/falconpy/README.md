@@ -19,6 +19,7 @@ for every single operation available within that service collection.
 | `falcon_complete_dashboard.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-complete-dashboard |
 | `falcon_container.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container |
 | `falconx_sandbox.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox |
+| `filevantage.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage |
 | `firewall_management.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management |
 | `firewall_policies.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies |
 | `host_group.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-group |
