@@ -27,6 +27,7 @@ The following members of the community have made requests, suggestions, code con
 + @rewgord, `Caleb Schwartz`
 + @bk-cs, `Brendan Kremian`
 + @modubyk
++ @yaleman, `James Hodgkinson`
 + @matcha-shake
 + @nighttardis
 + @aneisch, `Andrew`
