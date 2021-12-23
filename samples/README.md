@@ -36,7 +36,9 @@ These samples are categorized by API service collection.
 _Coming Soon_
 
 ### Event Streams
-_Coming Soon_
+| Service Class | Uber Class |
+| :--- | :--- |
+| | [Send Event Streams Detections to AWS Security Hub](https://github.com/CrowdStrike/Cloud-AWS/tree/main/Security-Hub) |
 
 ### Falcon Discover
 | Service Class | Uber Class |
@@ -76,6 +78,7 @@ _Coming Soon_
 | Service Class | Uber Class |
 | :--- | :--- |
 | [Scan a target folder or bucket](quick_scan/scan_target.py) | |
+| [Scan files as they are uploaded to an AWS bucket](https://github.com/CrowdStrike/Cloud-AWS/tree/main/s3-bucket-protection) | |
 
 
 ### Real Time Response
@@ -89,6 +92,7 @@ _Coming Soon_
 | Service Class | Uber Class |
 | :--- | :--- |
 | [Upload, Retrieve and then Delete a file](sample_uploads/sample_uploads_service.py) | [Upload, Retrieve and then Delete a file](sample_uploads/sample_uploads_uber.py) |
+
 
 ## Suggestions
 Got a suggestion for an example you'd like to see? One of the examples not working as expected? Let us know by posting a message to our [discussion board](https://github.com/CrowdStrike/falconpy/discussions).
