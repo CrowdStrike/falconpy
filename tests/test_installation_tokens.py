@@ -15,7 +15,7 @@ from falconpy import InstallationTokens
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = InstallationTokens(auth_object=config)
-AllowedResponses = [200, 201, 400, 404, 429]
+AllowedResponses = [200, 201, 400, 403, 404, 409, 429]
 
 
 class TestInstallationTokens:
@@ -57,7 +57,7 @@ class TestInstallationTokens:
             # print(f"{key} \n {tests[key]}")
             _ = f"{key} \n {tests[key]}"
             if tests[key]["status_code"] not in AllowedResponses:
-                # print(f"{key} \n {tests[key]}")
+                print(f"{key} \n {tests[key]}")
                 error_checks = False
 
         # Test update / delete after a slight delay
