@@ -64,12 +64,14 @@ class TestInstallationTokens:
         try:
             id_list = falcon.tokens_query(filter=f"label:'Unit testing {ran_string}'")
             if id_list["status_code"] != 429:
-                falcon.tokens_update(ids=id_list["body"]["resources"],
-                                     expires_timestamp="2022-12-31T00:00:00Z",
-                                     label=f"Unit testing {ran_string}",
-                                     revoked=True
-                                     )
-                falcon.tokens_delete(ids=id_list["body"]["resources"])
+                if id_list["body"]["resources"]:
+                    ids_list = id_list["body"]["resources"]
+                    falcon.tokens_update(ids=ids_list,
+                                         expires_timestamp="2022-12-31T00:00:00Z",
+                                         label=f"Unit testing {ran_string}",
+                                         revoked=True
+                                         )
+                    falcon.tokens_delete(ids=ids_list)
             else:
                 pytest.skip("Rate limit hit, skipping")
 
