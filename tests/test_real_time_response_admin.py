@@ -138,7 +138,7 @@ class TestRTRAdmin:
         """Pytest harness hook"""
         assert self.rtra_generate_errors() is True
 
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
+    @pytest.mark.skipif(sys.version_info.minor < 10, reason="Frequency reduced due to test flakiness")
     # @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
     def test_all_code_paths(self):
         """

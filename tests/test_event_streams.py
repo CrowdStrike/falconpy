@@ -86,13 +86,13 @@ class TestEventStreams:
         """Pylint test harness hook"""
         assert self.stream_list() is True
 
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
+    @pytest.mark.skipif(sys.version_info.minor < 10, reason="Frequency reduced due to test flakiness")
     @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
     def test_refresh(self):
         """Pytest harness hook"""
         assert self.stream_refresh() is True
 
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
+    @pytest.mark.skipif(sys.version_info.minor < 10, reason="Frequency reduced due to test flakiness")
     @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
     def test_default_refresh(self):
         """Pytest harness hook"""

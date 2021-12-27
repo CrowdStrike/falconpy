@@ -127,7 +127,7 @@ class TestRTR:
     def test_rtr_list_all_sessions(self):
         assert self.rtr_list_all_sessions() is True
 
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
+    @pytest.mark.skipif(sys.version_info.minor < 10, reason="Frequency reduced due to potential race condition")
     def test_rtr_session_connect(self):
         assert self.rtr_session_tester() is True
 
