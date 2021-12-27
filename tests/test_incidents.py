@@ -39,17 +39,24 @@ class TestIncidents:
             return False
 
     def serviceIncidents_GetBehaviors(self):
+        be_lookup = falcon.QueryBehaviors(parameters={"limit": 1})
+        be_result="1234567890"
+        if be_lookup["status_code"] != 429:
+            if be_lookup["body"]["resources"]:
+                be_result = be_lookup["body"]["resources"]
         if falcon.GetBehaviors(body={
-                            "ids": falcon.QueryBehaviors(parameters={"limit": 1})["body"]["resources"]
+                            "ids": be_result
                             })["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIncidents_GetIncidents(self):
-        inc = falcon.QueryIncidents(parameters={"limit": 1})["body"]["resources"]
-        if not inc:
-            inc = "12345678"
+        inc_lookup = falcon.QueryIncidents(parameters={"limit": 1})
+        inc = "1234567890"
+        if inc_lookup["status_code"] != 429:
+            if inc_lookup["body"]["resources"]:
+                inc = ["body"]["resources"]
         if falcon.GetIncidents(body={
                             "ids": inc
                             })["status_code"] in AllowedResponses:
