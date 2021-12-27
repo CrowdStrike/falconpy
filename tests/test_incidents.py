@@ -56,7 +56,7 @@ class TestIncidents:
         inc = "1234567890"
         if inc_lookup["status_code"] != 429:
             if inc_lookup["body"]["resources"]:
-                inc = ["body"]["resources"]
+                inc = inc_lookup["body"]["resources"]
         if falcon.GetIncidents(body={
                             "ids": inc
                             })["status_code"] in AllowedResponses:
