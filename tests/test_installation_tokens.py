@@ -57,7 +57,7 @@ class TestInstallationTokens:
             # print(f"{key} \n {tests[key]}")
             _ = f"{key} \n {tests[key]}"
             if tests[key]["status_code"] not in AllowedResponses:
-                print(f"{key} \n {tests[key]}")
+                # print(f"{key} \n {tests[key]}")
                 error_checks = False
 
         # Test update / delete after a slight delay
