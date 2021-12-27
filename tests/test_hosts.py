@@ -11,11 +11,11 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import hosts as FalconHosts
+from falconpy import Hosts
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconHosts.Hosts(access_token=token)
+config = auth.getConfigObject()
+falcon = Hosts(auth_object=config)
 AllowedResponses = [200, 202, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -167,41 +167,65 @@ class TestHosts:
 
     def test_get_device_login_history(self):
         """Pytest harness hook"""
+        id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
+        id_list = "1234567890"
+        if id_lookup["status_code"] != 429:
+            if id_lookup["body"]["resources"]:
+                id_list = id_lookup["body"]["resources"][0]
+
         assert bool(
             falcon.query_device_login_history({
-                "ids": [falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]]
+                "ids": [id_list]
                 })["status_code"] in AllowedResponses
         ) is True
 
     def test_get_device_login_history_two(self):
         """Pytest harness hook"""
+        id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
+        id_list = "1234567890"
+        if id_lookup["status_code"] != 429:
+            if id_lookup["body"]["resources"]:
+                id_list = id_lookup["body"]["resources"][0]
         assert bool(
             falcon.query_device_login_history(
-                ids=falcon.QueryDevicesByFilter(limit=1)["body"]["resources"][0]
+                ids=id_list
                 )["status_code"] in AllowedResponses
         ) is True
 
     def test_get_device_login_history_three(self):
         """Pytest harness hook"""
+        id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
+        id_list = "1234567890"
+        if id_lookup["status_code"] != 429:
+            if id_lookup["body"]["resources"]:
+                id_list = id_lookup["body"]["resources"][0]
         assert bool(
-            falcon.query_device_login_history(
-                falcon.QueryDevicesByFilter(limit=1)["body"]["resources"][0]
-                )["status_code"] in AllowedResponses
+            falcon.query_device_login_history(id_list)["status_code"] in AllowedResponses
         ) is True
 
     def test_get_device_network_history(self):
         """Pytest harness hook"""
+        id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
+        id_list = "1234567890"
+        if id_lookup["status_code"] != 429:
+            if id_lookup["body"]["resources"]:
+                id_list = id_lookup["body"]["resources"][0]
         assert bool(
             falcon.query_network_address_history(body={
-                "ids": [falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]]
+                "ids": [id_list]
                 })["status_code"] in AllowedResponses
         ) is True
 
     def test_get_device_network_history_two(self):
         """Pytest harness hook"""
+        id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
+        id_list = "1234567890"
+        if id_lookup["status_code"] != 429:
+            if id_lookup["body"]["resources"]:
+                id_list = id_lookup["body"]["resources"][0]
         assert bool(
             falcon.query_network_address_history(
-                ids=falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]
+                ids=id_list
                 )["status_code"] in AllowedResponses
         ) is True
 

@@ -11,8 +11,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import KubernetesProtection
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = KubernetesProtection(access_token=token)
+config = auth.getConfigObject()
+falcon = KubernetesProtection(auth_object=config)
 AllowedResponses = [200, 207, 400, 403, 429, 500]  # Allowing 500 to reduce flakiness
 
 

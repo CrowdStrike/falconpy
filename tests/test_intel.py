@@ -9,8 +9,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.intel import Intel
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = Intel(access_token=token)
+config = auth.getConfigObject()
+falcon = Intel(auth_object=config)
 AllowedResponses = [200, 201, 400, 404, 429]
 
 

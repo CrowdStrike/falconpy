@@ -14,8 +14,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import FileVantage
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FileVantage(access_token=token)
+config = auth.getConfigObject()
+falcon = FileVantage(auth_object=config)
 AllowedResponses = [200, 202, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -23,10 +23,12 @@ class TestFileVantage:
     """
     FileVantage Service Class test harness
     """
+    @pytest.mark.skipif(config.base_url != "https://api.crowdstrike.com", reason="Unit testing unavailable on US-2")
     def test_query_changes(self):
         """Pytest harness hook"""
         assert bool(falcon.query_changes(limit=1)["status_code"] in AllowedResponses) is True
 
+    @pytest.mark.skipif(config.base_url != "https://api.crowdstrike.com", reason="Unit testing unavailable on US-2")
     def test_get_changes(self):
         """Pytest harness hook"""
         # Also testing lazy loading of the ids parameter

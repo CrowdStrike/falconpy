@@ -10,8 +10,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import Detects
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = Detects(access_token=token, validate_payloads=True)
+config = auth.getConfigObject()
+falcon = Detects(auth_object=config, validate_payloads=True)
 AllowedResponses = [200, 400, 429]
 
 
@@ -73,7 +73,7 @@ class TestDetects:
             # print(tests[key])
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
-
+                print(f"{key}: {tests[key]}")
         return error_checks
 
     def test_query_detects(self):
@@ -113,7 +113,7 @@ class TestDetects:
         ) is True
 
     def test_validation_disable(self):
-        quiet_falcon = Detects(access_token=token, validate_payloads=False)
+        quiet_falcon = Detects(auth_object=config, validate_payloads=False)
         assert bool(
             quiet_falcon.get_detect_summaries(body={
                             "ids": ["123456789"],

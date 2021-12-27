@@ -13,8 +13,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import InstallationTokens
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = InstallationTokens(access_token=token)
+config = auth.getConfigObject()
+falcon = InstallationTokens(auth_object=config)
 AllowedResponses = [200, 201, 400, 404, 429]
 
 

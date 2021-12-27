@@ -9,8 +9,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import MessageCenter
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = MessageCenter(access_token=token)
+config = auth.getConfigObject()
+falcon = MessageCenter(auth_object=config)
 AllowedResponses = [200, 403, 429]
 
 

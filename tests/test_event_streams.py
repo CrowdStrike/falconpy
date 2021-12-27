@@ -15,11 +15,11 @@ from tests import test_authorization as Authorization
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
 # flake8: noqa=E402
-from falconpy.event_streams import Event_Streams
+from falconpy import EventStreams
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = Event_Streams(access_token=token)
+config = auth.getConfigObject()
+falcon = EventStreams(auth_object=config)
 
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 APP_ID = "pytest-event_streams-unit-test"

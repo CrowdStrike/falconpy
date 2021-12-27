@@ -8,11 +8,11 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy.malquery import MalQuery as FalconMQ
+from falconpy import MalQuery
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconMQ(access_token=token)
+config = auth.getConfigObject()
+falcon = MalQuery(auth_object=config)
 AllowedResponses = [200, 400, 404, 429]  # Adding rate-limiting as an allowed response for now
 
 

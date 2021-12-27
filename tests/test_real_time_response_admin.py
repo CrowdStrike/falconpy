@@ -15,8 +15,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import RealTimeResponseAdmin
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = RealTimeResponseAdmin(access_token=token)
+config = auth.getConfigObject()
+falcon = RealTimeResponseAdmin(auth_object=config)
 AllowedResponses = [200, 201, 202, 400, 404, 429]
 
 

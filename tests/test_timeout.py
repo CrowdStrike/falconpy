@@ -8,18 +8,19 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy.cloud_connect_aws import Cloud_Connect_AWS as FalconAWS
-from falconpy.oauth2 import OAuth2 as FalconAuth
+from falconpy import CloudConnectAWS
+from falconpy import OAuth2
 
 auth = Authorization.TestAuthorization()
-auth.serviceAuth()
+config = auth.getConfigObject()
+# auth.serviceAuth()
 
 AllowedResponses = [200, 429, 500]  # Adding rate-limiting as an allowed response for now
 
 
 class TestTimeouts:
     def timeout_test(self):
-        falcon = FalconAWS(creds={
+        falcon = CloudConnectAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
         })
@@ -31,7 +32,7 @@ class TestTimeouts:
         return success
 
     def timeout_connect(self):
-        falconConnectFail = FalconAWS(creds={
+        falconConnectFail = CloudConnectAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
         }, timeout=(.001, 5)
@@ -45,7 +46,7 @@ class TestTimeouts:
         return success
 
     def timeout_read(self):
-        falconReadFail = FalconAWS(creds={
+        falconReadFail = CloudConnectAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
         }, timeout=(5, .001)
@@ -59,7 +60,7 @@ class TestTimeouts:
         return success
 
     def timeout_standard(self):
-        falconStandardFail = FalconAWS(creds={
+        falconStandardFail = CloudConnectAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
         }, timeout=.001
@@ -73,7 +74,7 @@ class TestTimeouts:
         return success
 
     def timeout_legacy_auth(self):
-        falconLegacyFail = FalconAuth(creds={
+        falconLegacyFail = OAuth2(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
         }, timeout=.001)

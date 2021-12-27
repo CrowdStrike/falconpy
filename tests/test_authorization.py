@@ -24,10 +24,30 @@ from falconpy import OAuth2
 # Importing this to test disabling SSL Verification in a service class
 from falconpy import Hosts
 
+shared_token = None
 
 # The TestAuthorization class tests authentication and deauthentication
 # for both the Uber and Service classes.
 class TestAuthorization():
+    def getConfigObject(self):
+        status = self.getConfig()
+        if status:
+            os.environ["FALCONPY_DEBUG_CLIENT_ID"] = self.config["falcon_client_id"]
+            os.environ["FALCONPY_DEBUG_CLIENT_SECRET"] = self.config["falcon_client_secret"]
+            self.authorization = OAuth2(creds={
+                "client_id": self.config["falcon_client_id"],
+                "client_secret": self.config["falcon_client_secret"]
+            },
+            base_url = self.config["falcon_base_url"])
+        try:
+            global shared_token
+            if not shared_token:
+                shared_token = self.authorization.token()['body']['access_token']
+        except KeyError:
+            shared_token = False
+        
+        return self.authorization
+
     def getConfigExtended(self):
         if "FALCONPY_DEBUG_TOKEN" in os.environ:
             self.token = os.getenv("FALCONPY_DEBUG_TOKEN")

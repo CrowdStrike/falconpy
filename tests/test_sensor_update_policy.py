@@ -13,8 +13,8 @@ sys.path.append(os.path.abspath('src'))
 
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = SensorUpdatePolicies(access_token=token)
+config = auth.getConfigObject()
+falcon = SensorUpdatePolicies(auth_object=config)
 AllowedResponses = [200, 400, 404, 429]
 
 

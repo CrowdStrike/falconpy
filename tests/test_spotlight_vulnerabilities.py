@@ -7,15 +7,15 @@ import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Classes to test - manually imported from sibling folder
-from falconpy import spotlight_vulnerabilities as FalconSpotlight
+from falconpy import SpotlightVulnerabilities
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconSpotlight.Spotlight_Vulnerabilities(access_token=token)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+config = auth.getConfigObject()
+falcon = SpotlightVulnerabilities(auth_object=config)
+AllowedResponses = [200, 400, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestSpotlight:
@@ -39,16 +39,18 @@ class TestSpotlight:
 
     def spotlight_getVulnerabilities(self):
         try:
-            id_list = falcon.queryVulnerabilities(parameters={"limit": 1,
-                                                              "filter": "created_timestamp:>'2021-01-01T00:00:01Z'"
-                                                              }
-                                                  )["body"]["resources"][0]
+            id_lookup = falcon.queryVulnerabilities(limit=1,
+                                                    filter="created_timestamp:>'2021-01-01T00:00:01Z'"
+                                                    )
+            if id_lookup["body"]["resources"]:
+                id_list = id_lookup["body"]["resources"]
+            else:
+                id_list = "1234567890"
             if falcon.getVulnerabilities(ids=id_list)["status_code"] in AllowedResponses:
                 return True
             else:
                 return False
         except KeyError:
-            # Flaky
             pytest.skip("Workflow-related error, skipping")
             return True
 

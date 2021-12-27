@@ -8,11 +8,11 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy.overwatch_dashboard import Overwatch_Dashboard as FalconOWD
+from falconpy import OverwatchDashboard
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconOWD(access_token=token)
+config = auth.getConfigObject()
+falcon = OverwatchDashboard(auth_object=config)
 AllowedResponses = [200, 403, 429]
 
 

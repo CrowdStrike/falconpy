@@ -3,18 +3,19 @@
 import os
 import sys
 import json
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
 # flake8: noqa=E402
-from falconpy.identity_protection import Identity_Protection as FalconIDP
+from falconpy import IdentityProtection
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
+config = auth.getConfigObject()
 
-falcon = FalconIDP(access_token=token)
+falcon = IdentityProtection(auth_object=config)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -49,9 +50,10 @@ class TestIdentityProtection:
             # Prolly failed login, check yer API key
             return False
 
-
+    @pytest.mark.skipif(config.base_url != "https://api.crowdstrike.com", reason="Unit testing unavailable on US-2")
     def test_graphql(self):
         assert self.idp_graphql() is True
 
+    @pytest.mark.skipif(config.base_url != "https://api.crowdstrike.com", reason="Unit testing unavailable on US-2")
     def test_graphql_keywords(self):
         assert self.idp_graphql_keywords() is True

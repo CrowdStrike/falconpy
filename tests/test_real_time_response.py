@@ -10,14 +10,14 @@ from tests import test_authorization as Authorization
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
 # flake8: noqa: E402
-from falconpy import real_time_response as FalconRTR
-from falconpy import hosts as FalconHosts
+from falconpy import RealTimeResponse
+from falconpy import Hosts
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconRTR.Real_Time_Response(access_token=token)
+config = auth.getConfigObject()
+falcon = RealTimeResponse(auth_object=config)
 # Testing direct credential specification here - jshcodes 08.14.21
-falcon_hosts = FalconHosts.Hosts(client_id=auth.config["falcon_client_id"],
+falcon_hosts = Hosts(client_id=auth.config["falcon_client_id"],
     client_secret=auth.config["falcon_client_secret"],
     base_url=auth.config["falcon_base_url"]
     )
@@ -36,7 +36,7 @@ class TestRTR:
         returned = False
         # This will have to be periodically updated using this solution, but for now it provides the necessary code coverage.
         # Highly dependant upon my test CID / API keys
-        aid_lookup = falcon_hosts.QueryDevicesByFilter(filter="hostname:'ip-172-31-30-80*'")
+        aid_lookup = falcon_hosts.QueryDevicesByFilter(filter="hostname:'falconpy-unit-testing'")
         try:
             if aid_lookup["body"]["resources"]:
                 aid_to_check = aid_lookup["body"]["resources"][0]

@@ -12,8 +12,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import ScheduledReports
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = ScheduledReports(access_token=token)
+config = auth.getConfigObject()
+falcon = ScheduledReports(auth_object=config)
 AllowedResponses = [200, 201, 403, 404, 429]  # Getting 403's atm
 
 

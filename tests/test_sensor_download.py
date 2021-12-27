@@ -2,15 +2,15 @@ import os
 import sys
 import pytest
 from tests import test_authorization as Authorization
-from falconpy import sensor_download as FalconSensorDownload
+from falconpy import SensorDownload
 
 sys.path.append(os.path.abspath('src'))
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 appId = "pytest-sensor_download-unit-test"
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
+config = auth.getConfigObject()
 
-sensor_download_client = FalconSensorDownload.Sensor_Download(access_token=token)
+sensor_download_client = SensorDownload(auth_object=config)
 
 
 class TestSensorDownload():

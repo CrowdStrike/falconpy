@@ -8,11 +8,11 @@ from tests import test_authorization as Authorization
 #Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import iocs as FalconIOCs
+from falconpy import Iocs
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconIOCs.Iocs(access_token=token)
+config = auth.getConfigObject()
+falcon = Iocs(auth_object=config)
 AllowedResponses = [200, 429, 500] # Half of the class is deprecated, allow 500
 
 class TestIOCs:

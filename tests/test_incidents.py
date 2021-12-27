@@ -14,9 +14,9 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import Incidents
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = Incidents(access_token=token)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+config = auth.getConfigObject()
+falcon = Incidents(auth_object=config)
+AllowedResponses = [200, 400, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestIncidents:
@@ -47,8 +47,11 @@ class TestIncidents:
             return False
 
     def serviceIncidents_GetIncidents(self):
+        inc = falcon.QueryIncidents(parameters={"limit": 1})["body"]["resources"]
+        if not inc:
+            inc = "12345678"
         if falcon.GetIncidents(body={
-                            "ids": falcon.QueryIncidents(parameters={"limit": 1})["body"]["resources"]
+                            "ids": inc
                             })["status_code"] in AllowedResponses:
             return True
         else:
