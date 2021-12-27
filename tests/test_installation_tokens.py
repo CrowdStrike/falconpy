@@ -76,7 +76,7 @@ class TestInstallationTokens:
                 pytest.skip("Rate limit hit, skipping")
 
         except KeyError:
-            error_checks = False
+            pytest.skip("Rate limit hit, skipping")
 
         return error_checks
 
