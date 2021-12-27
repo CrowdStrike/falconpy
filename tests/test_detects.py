@@ -73,7 +73,7 @@ class TestDetects:
             # print(tests[key])
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
-                print(f"{key}: {tests[key]}")
+                # print(f"{key}: {tests[key]}")
         return error_checks
 
     def test_query_detects(self):
