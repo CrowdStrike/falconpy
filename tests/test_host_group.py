@@ -13,8 +13,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import HostGroup
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = HostGroup(access_token=token)
+config = auth.getConfigObject()
+falcon = HostGroup(auth_object=config)
 AllowedResponses = [200, 400, 404, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -27,16 +27,28 @@ class TestHostGroup:
             return False
 
     def svc_hg_query_group_members(self):
+        hgs = falcon.query_host_groups(parameters={"limit": 1})
+        hostgroup_id = "1234567890"
+        if hgs["status_code"] != 429:
+            if hgs["body"]["resources"]:
+                hostgroup_id = hgs["body"]["resources"][0]
+
         if falcon.query_group_members(
-                parameters={"limit": 1, "id": falcon.query_host_groups(parameters={"limit": 1})["body"]["resources"][0]}
+                parameters={"limit": 1, "id": hostgroup_id}
                 )["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def svc_hg_get_host_groups(self):
+        hgs = falcon.query_host_groups(parameters={"limit": 1})
+        hostgroup_id = "1234567890"
+        if hgs["status_code"] != 429:
+            if hgs["body"]["resources"]:
+                hostgroup_id = hgs["body"]["resources"][0]
+
         if falcon.get_host_groups(
-                ids=falcon.query_host_groups(parameters={"limit": 1})["body"]["resources"][0]
+                ids=hostgroup_id
                 )["status_code"] in AllowedResponses:
             return True
         else:
@@ -49,9 +61,15 @@ class TestHostGroup:
             return False
 
     def svc_hg_query_combined_group_members(self):
+        hgs = falcon.query_combined_host_groups(parameters={"limit": 1})
+        hostgroup_id = "1234567890"
+        if hgs["status_code"] != 429:
+            if hgs["body"]["resources"]:
+                hostgroup_id = hgs["body"]["resources"][0]
+
         if falcon.query_combined_group_members(
             parameters={"limit": 1,
-                        "id": falcon.query_combined_host_groups(parameters={"limit": 1})["body"]["resources"][0]["id"]
+                        "id": hostgroup_id
                         })["status_code"] in AllowedResponses:
             return True
         else:

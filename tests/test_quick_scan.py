@@ -14,8 +14,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import QuickScan
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = QuickScan(access_token=token)
+config = auth.getConfigObject()
+falcon = QuickScan(auth_object=config)
 AllowedResponses = [200, 201, 207, 429]  # Adding rate-limiting as an allowed response for now
 
 

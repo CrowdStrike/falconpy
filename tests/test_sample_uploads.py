@@ -14,9 +14,9 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import SampleUploads
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = SampleUploads(access_token=token)
-AllowedResponses = [200, 201, 400, 404, 429]
+config = auth.getConfigObject()
+falcon = SampleUploads(auth_object=config)
+AllowedResponses = [200, 201, 400, 403, 404, 429]
 
 
 class TestSampleUploads:

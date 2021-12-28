@@ -8,11 +8,11 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import cspm_registration as FalconCSPM  # noqa: E402
+from falconpy import CSPMRegistration  # noqa: E402
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconCSPM.CSPM_Registration(access_token=token)
+config = auth.getConfigObject()
+falcon = CSPMRegistration(auth_object=config)
 AllowedResponses = [200, 201, 207, 429]  # Adding rate-limiting as an allowed response for now
 textchars = bytearray({7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7f})
 is_binary_string = lambda bytes: bool(bytes.translate(None, textchars))  # noqa: E731

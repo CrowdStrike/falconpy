@@ -11,8 +11,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import Recon
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = Recon(access_token=token)
+config = auth.getConfigObject()
+falcon = Recon(auth_object=config)
 AllowedResponses = [200, 201, 403, 404, 429]
 
 

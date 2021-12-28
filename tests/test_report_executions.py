@@ -9,11 +9,11 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy.report_executions import ReportExecutions
+from falconpy import ReportExecutions
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = ReportExecutions(access_token=token)
+config = auth.getConfigObject()
+falcon = ReportExecutions(auth_object=config)
 AllowedResponses = [200, 201, 403, 404, 429]  # Getting 403's atm
 
 

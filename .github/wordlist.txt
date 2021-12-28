@@ -600,3 +600,5 @@ KennyOps
 GetConfigurationDetections
 GetBehaviorDetections
 MessageCenter
+yaleman
+Fal

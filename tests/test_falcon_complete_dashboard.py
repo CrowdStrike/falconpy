@@ -8,11 +8,11 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy.falcon_complete_dashboard import Complete_Dashboard as FalconCD
+from falconpy import CompleteDashboard
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconCD(access_token=token)
+config = auth.getConfigObject()
+falcon = CompleteDashboard(auth_object=config)
 AllowedResponses = [200, 403, 429]
 
 

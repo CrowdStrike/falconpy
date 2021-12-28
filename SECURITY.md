@@ -20,6 +20,7 @@ FalconPy functionality is unit tested to run under the following versions of Pyt
 
 | Version | Supported |
 | :------- | :--------: |
+| 3.10.x  | ![Yes](https://img.shields.io/badge/-YES-green) |
 | 3.9.x   | ![Yes](https://img.shields.io/badge/-YES-green) |
 | 3.8.x   | ![Yes](https://img.shields.io/badge/-YES-green) |
 | 3.7.x   | ![Yes](https://img.shields.io/badge/-YES-green) |

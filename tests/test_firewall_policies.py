@@ -7,11 +7,11 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # flake8: noqa=R0402  # Classes to test - manually imported from sibling folder
-from falconpy import firewall_policies as FalconFirewallPolicy
+from falconpy import FirewallPolicies
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconFirewallPolicy.Firewall_Policies(access_token=token)
+config = auth.getConfigObject()
+falcon = FirewallPolicies(auth_object=config)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 

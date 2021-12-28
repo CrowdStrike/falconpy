@@ -11,8 +11,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import FlightControl  # noqa: E402  pylint: disable=E0401
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FlightControl(access_token=token)
+config = auth.getConfigObject()
+falcon = FlightControl(auth_object=config)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 

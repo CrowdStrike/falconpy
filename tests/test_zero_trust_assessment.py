@@ -8,11 +8,11 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy.zero_trust_assessment import Zero_Trust_Assessment as FalconZTA
+from falconpy import ZeroTrustAssessment
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconZTA(access_token=token)
+config = auth.getConfigObject()
+falcon = ZeroTrustAssessment(auth_object=config)
 AllowedResponses = [200, 201, 404, 429]
 
 

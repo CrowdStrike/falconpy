@@ -7,12 +7,12 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy.firewall_management import Firewall_Management as FalconFirewall
+from falconpy import FirewallManagement
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconFirewall(access_token=token)
-AllowedResponses = [200, 201, 202, 203, 204, 400, 404, 429]
+config = auth.getConfigObject()
+falcon = FirewallManagement(auth_object=config)
+AllowedResponses = [200, 201, 202, 203, 204, 400, 403, 404, 429]
 fmt = '%Y-%m-%d %H:%M:%S'
 stddate = datetime.datetime.now().strftime(fmt)
 sdtdate = datetime.datetime.strptime(stddate, fmt)
@@ -33,7 +33,10 @@ class TestFirewallManagement:
                                           cs_username="HarryHenderson"
                                           )
         global rule_group_id
-        rule_group_id = result["body"]["resources"][0]
+        rule_group_id = "1234567890"
+        if result["status_code"] not in [400, 403, 404, 429]:
+            if result["body"]["resources"]:
+                rule_group_id = result["body"]["resources"][0]
 
         return result
 
@@ -87,7 +90,7 @@ class TestFirewallManagement:
 
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
-#               print(f"Failed on {key} with {tests[key]}")
+#                print(f"Failed on {key} with {tests[key]}")
 #            print(tests[key])
         return error_checks
 

@@ -11,11 +11,11 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import hosts as FalconHosts
+from falconpy import Hosts
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconHosts.Hosts(access_token=token)
+config = auth.getConfigObject()
+falcon = Hosts(auth_object=config)
 AllowedResponses = [200, 202, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -28,9 +28,14 @@ class TestHosts:
         Tests tagging functionality
         """
         id_list = []
+        id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
+        found_id = "1234567890"
+        if id_lookup["status_code"] != 429:
+            if id_lookup["body"]["resources"]:
+                found_id = id_lookup["body"]["resources"]
         id_list.append(
             falcon.GetDeviceDetails(
-                ids=falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]
+                ids=found_id
             )["body"]["resources"][0]["device_id"]
         )
         # test basic, id is a list, single valid tag w/o manipulation
@@ -86,10 +91,15 @@ class TestHosts:
         Tests tag error handling
         """
         id_list = []
+        id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
+        found_id = "1234567890"
+        if id_lookup["status_code"] != 429:
+            if id_lookup["body"]["resources"]:
+                found_id = id_lookup["body"]["resources"]
         id_list.append(
             falcon.GetDeviceDetails(
-                ids=falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]
-                )["body"]["resources"][0]["device_id"]
+                ids=found_id
+            )["body"]["resources"][0]["device_id"]
         )
         #  Generate an error by sending garbage as the action_name
         if not falcon.UpdateDeviceTags(
@@ -158,54 +168,81 @@ class TestHosts:
 
     def test_get_device_details(self):
         """Pytest harness hook"""
+        id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
+        found_id = "1234567890"
+        if id_lookup["status_code"] != 429:
+            if id_lookup["body"]["resources"]:
+                found_id = id_lookup["body"]["resources"][0]
         # Test lazy loading of the ids parameter
         assert bool(
-            falcon.GetDeviceDetails(
-                falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]
-                )["status_code"] in AllowedResponses
+            falcon.GetDeviceDetails(found_id)["status_code"] in AllowedResponses
         ) is True
 
     def test_get_device_login_history(self):
         """Pytest harness hook"""
+        id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
+        id_list = "1234567890"
+        if id_lookup["status_code"] != 429:
+            if id_lookup["body"]["resources"]:
+                id_list = id_lookup["body"]["resources"][0]
+
         assert bool(
             falcon.query_device_login_history({
-                "ids": [falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]]
+                "ids": [id_list]
                 })["status_code"] in AllowedResponses
         ) is True
 
     def test_get_device_login_history_two(self):
         """Pytest harness hook"""
+        id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
+        id_list = "1234567890"
+        if id_lookup["status_code"] != 429:
+            if id_lookup["body"]["resources"]:
+                id_list = id_lookup["body"]["resources"][0]
         assert bool(
             falcon.query_device_login_history(
-                ids=falcon.QueryDevicesByFilter(limit=1)["body"]["resources"][0]
+                ids=id_list
                 )["status_code"] in AllowedResponses
         ) is True
 
     def test_get_device_login_history_three(self):
         """Pytest harness hook"""
+        id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
+        id_list = "1234567890"
+        if id_lookup["status_code"] != 429:
+            if id_lookup["body"]["resources"]:
+                id_list = id_lookup["body"]["resources"][0]
         assert bool(
-            falcon.query_device_login_history(
-                falcon.QueryDevicesByFilter(limit=1)["body"]["resources"][0]
-                )["status_code"] in AllowedResponses
+            falcon.query_device_login_history(id_list)["status_code"] in AllowedResponses
         ) is True
 
     def test_get_device_network_history(self):
         """Pytest harness hook"""
+        id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
+        id_list = "1234567890"
+        if id_lookup["status_code"] != 429:
+            if id_lookup["body"]["resources"]:
+                id_list = id_lookup["body"]["resources"][0]
         assert bool(
             falcon.query_network_address_history(body={
-                "ids": [falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]]
+                "ids": [id_list]
                 })["status_code"] in AllowedResponses
         ) is True
 
     def test_get_device_network_history_two(self):
         """Pytest harness hook"""
+        id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
+        id_list = "1234567890"
+        if id_lookup["status_code"] != 429:
+            if id_lookup["body"]["resources"]:
+                id_list = id_lookup["body"]["resources"][0]
         assert bool(
             falcon.query_network_address_history(
-                ids=falcon.QueryDevicesByFilter(parameters={"limit": 1})["body"]["resources"][0]
+                ids=id_list
                 )["status_code"] in AllowedResponses
         ) is True
 
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
+    @pytest.mark.skipif(sys.version_info.minor < 10, reason="Frequency reduced due to test flakiness")
     @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
     def test_perform_action(self):
         """Pytest harness hook"""

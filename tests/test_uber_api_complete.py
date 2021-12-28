@@ -12,17 +12,21 @@ sys.path.append(os.path.abspath('src'))
 # flake8: noqa=E402
 # pylint: disable=C0103
 # Classes to test - manually imported from our sibling folder
-from falconpy import api_complete as FalconSDK
+from falconpy import APIHarness
 # Import perform_request from _util so we can test generating 405's directly
 from falconpy._util import perform_request, force_default
 
 
-AllowedResponses = [200, 400, 415, 429, 500]
+AllowedResponses = [200, 400, 404, 415, 429, 500]
 
 if "DEBUG_API_ID" in os.environ and "DEBUG_API_SECRET" in os.environ:
     config = {}
     config["falcon_client_id"] = os.getenv("DEBUG_API_ID")
     config["falcon_client_secret"] = os.getenv("DEBUG_API_SECRET")
+    if "DEBUG_API_BASE_URL" in os.environ:
+        config["falcon_base_url"] = os.getenv("DEBUG_API_BASE_URL")
+    else:
+        config["falcon_base_url"] = "us1"
 else:
     cur_path = os.path.dirname(os.path.abspath(__file__))
     if os.path.exists('%s/test.config' % cur_path):
@@ -31,9 +35,10 @@ else:
     else:
         sys.exit(1)
 
-falcon = FalconSDK.APIHarness(
+falcon = APIHarness(
     client_id=config["falcon_client_id"],
-    client_secret=config["falcon_client_secret"]
+    client_secret=config["falcon_client_secret"],
+    base_url=config["falcon_base_url"]
     )
 falcon.authenticate()
 if not falcon.authenticated:
@@ -55,7 +60,11 @@ class TestUber:
 
     def uberCCAWS_GetAWSAccounts(self):
         try:
-            id_list = falcon.command("QueryAWSAccounts", parameters={"limit": 1})["body"]["resources"][0]["id"]
+            id_lookup = falcon.command("QueryAWSAccounts", parameters={"limit": 1})
+            if id_lookup["body"]["resources"]:
+                id_list = id_lookup["body"]["resources"][0]["id"]
+            else:
+                id_list = "123456789012"
             if falcon.command("GetAWSAccounts", ids=id_list)["status_code"] in AllowedResponses:
                 return True
             else:
@@ -211,14 +220,14 @@ class TestUber:
             return False
 
     def uberCCAWS_BadAuthentication(self):
-        falcon = FalconSDK.APIHarness()
+        falcon = APIHarness()
         if falcon.command("QueryAWSAccounts", parameters={"limit": 1})["status_code"] == 401:
             return True
         else:
             return False
 
     def uberCCAWS_DisableSSLVerify(self):
-        falcon = FalconSDK.APIHarness(
+        falcon = APIHarness(
             creds={
                 "client_id": config["falcon_client_id"],
                 "client_secret": config["falcon_client_secret"]
@@ -256,7 +265,7 @@ class TestUber:
 
     # @pytest.mark.skipif(falcon.command("QueryAWSAccounts",
     #                     parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
-    # @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to potential race condition")
+    # @pytest.mark.skipif(sys.version_info.minor < 10, reason="Frequency reduced due to potential race condition")
     # def test_VerifyAWSAccountAccess(self):
     #     assert self.uberCCAWS_VerifyAWSAccountAccess() is True
 

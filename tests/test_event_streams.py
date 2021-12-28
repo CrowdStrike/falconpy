@@ -15,11 +15,11 @@ from tests import test_authorization as Authorization
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
 # flake8: noqa=E402
-from falconpy.event_streams import Event_Streams
+from falconpy import EventStreams
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = Event_Streams(access_token=token)
+config = auth.getConfigObject()
+falcon = EventStreams(auth_object=config)
 
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 APP_ID = "pytest-event_streams-unit-test"
@@ -86,13 +86,13 @@ class TestEventStreams:
         """Pylint test harness hook"""
         assert self.stream_list() is True
 
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
+    @pytest.mark.skipif(sys.version_info.minor < 10, reason="Frequency reduced due to test flakiness")
     @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
     def test_refresh(self):
         """Pytest harness hook"""
         assert self.stream_refresh() is True
 
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to test flakiness")
+    @pytest.mark.skipif(sys.version_info.minor < 10, reason="Frequency reduced due to test flakiness")
     @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
     def test_default_refresh(self):
         """Pytest harness hook"""

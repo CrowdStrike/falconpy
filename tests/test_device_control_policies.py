@@ -10,11 +10,11 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # flake8: noqa=E401   # Classes to test - manually imported from sibling folder
-from falconpy import device_control_policies as FalconDeviceControlPolicy
+from falconpy import DeviceControlPolicies
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconDeviceControlPolicy.Device_Control_Policies(access_token=token)
+config = auth.getConfigObject()
+falcon = DeviceControlPolicies(auth_object=config)
 AllowedResponses = [200, 429, 500]  # Adding 500
 
 
@@ -69,9 +69,6 @@ class TestDeviceControlPolicy:
         """
         assert bool(falcon.queryDeviceControlPolicies(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
-    # @pytest.mark.skipif(
-    #     falcon.queryDeviceControlPolicies(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
-    #     )
     def test_queryDeviceControlPolicyMembers(self):
         """
         Pytest harness hook
@@ -86,9 +83,6 @@ class TestDeviceControlPolicy:
                 pytest.skip("API communication failure")
         assert bool(result["status_code"] in AllowedResponses) is True
 
-    # @pytest.mark.skipif(
-    #     falcon.queryDeviceControlPolicies(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached"
-    #     )
     def test_getDeviceControlPolicies(self):
         """
         Pytest harness hook
@@ -110,11 +104,6 @@ class TestDeviceControlPolicy:
         """
         assert bool(falcon.queryCombinedDeviceControlPolicies(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
-    # @pytest.mark.skipif(
-    #     falcon.queryCombinedDeviceControlPolicies(
-    #         parameters={"limit": 1}
-    #         )["status_code"] == 429, reason="API rate limit reached"
-    #     )
     def test_queryCombinedDeviceControlPolicyMembers(self):
         """
         Pytest harness hook
@@ -134,12 +123,3 @@ class TestDeviceControlPolicy:
         Pytest harness hook
         """
         assert self.serviceDeviceControlPolicies_GenerateErrors() is True
-
-    # @staticmethod
-    # def test_logout():
-    #     """
-    #     Pytest harness hook
-    #     """
-    #     assert bool(falcon.auth_object.revoke(
-    #         falcon.auth_object.token()["body"]["access_token"]
-    #         )["status_code"] in AllowedResponses) is True

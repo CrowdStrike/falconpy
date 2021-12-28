@@ -13,9 +13,9 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import InstallationTokens
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = InstallationTokens(access_token=token)
-AllowedResponses = [200, 201, 400, 404, 429]
+config = auth.getConfigObject()
+falcon = InstallationTokens(auth_object=config)
+AllowedResponses = [200, 201, 400, 403, 404, 409, 429]
 
 
 class TestInstallationTokens:
@@ -64,17 +64,19 @@ class TestInstallationTokens:
         try:
             id_list = falcon.tokens_query(filter=f"label:'Unit testing {ran_string}'")
             if id_list["status_code"] != 429:
-                falcon.tokens_update(ids=id_list["body"]["resources"],
-                                     expires_timestamp="2022-12-31T00:00:00Z",
-                                     label=f"Unit testing {ran_string}",
-                                     revoked=True
-                                     )
-                falcon.tokens_delete(ids=id_list["body"]["resources"])
+                if id_list["body"]["resources"]:
+                    ids_list = id_list["body"]["resources"]
+                    falcon.tokens_update(ids=ids_list,
+                                         expires_timestamp="2022-12-31T00:00:00Z",
+                                         label=f"Unit testing {ran_string}",
+                                         revoked=True
+                                         )
+                    falcon.tokens_delete(ids=ids_list)
             else:
                 pytest.skip("Rate limit hit, skipping")
 
         except KeyError:
-            error_checks = False
+            pytest.skip("Rate limit hit, skipping")
 
         return error_checks
 
@@ -87,6 +89,6 @@ class TestInstallationTokens:
     def test_query_tokens(self):
         assert self.svc_tokens_query_tokens() is True
 
-    @pytest.mark.skipif(sys.version_info.minor < 9, reason="Frequency reduced due to token API rate limit configuration")
+    @pytest.mark.skipif(sys.version_info.minor < 10, reason="Frequency reduced due to token API rate limit configuration")
     def test_remaining_code_paths(self):
         assert self.svc_tokens_test_code_paths() is True

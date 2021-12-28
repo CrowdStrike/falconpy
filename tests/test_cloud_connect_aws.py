@@ -9,15 +9,15 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import cloud_connect_aws as FalconAWS
+from falconpy import CloudConnectAWS
 from falconpy import oauth2 as FalconAuth
 from falconpy._util import service_request
 
 auth = Authorization.TestAuthorization()
 
-token = auth.getConfigExtended()
-falcon = FalconAWS.Cloud_Connect_AWS(access_token=token)
-AllowedResponses = [200, 201, 429]  # Adding rate-limiting as an allowed response for now
+config = auth.getConfigObject()
+falcon = CloudConnectAWS(auth_object=config)
+AllowedResponses = [200, 201, 404, 429]  # Adding rate-limiting as an allowed response for now
 accountPayload = {
         "resources": [
             {
@@ -32,7 +32,7 @@ falconWithObject = None
 
 class TestCloudConnectAWS:
     def serviceCCAWS_AuthWithCreds(self):
-        falconWithCreds = FalconAWS.Cloud_Connect_AWS(creds={
+        falconWithCreds = CloudConnectAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
         })
@@ -40,7 +40,7 @@ class TestCloudConnectAWS:
         return falconWithCreds.authenticated()
 
     def serviceCCAWS_AuthWithObject(self):
-        falconWithObject = FalconAWS.Cloud_Connect_AWS(auth_object=FalconAuth.OAuth2(creds={
+        falconWithObject = CloudConnectAWS(auth_object=FalconAuth.OAuth2(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
         }))
@@ -48,7 +48,7 @@ class TestCloudConnectAWS:
         return falconWithObject.authenticated()
 
     def serviceCCAWS_RefreshToken(self):
-        falconWithObject = FalconAWS.Cloud_Connect_AWS(auth_object=FalconAuth.OAuth2(creds={
+        falconWithObject = CloudConnectAWS(auth_object=FalconAuth.OAuth2(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
         }))
@@ -64,7 +64,7 @@ class TestCloudConnectAWS:
 
     def serviceCCAWS_InvalidPayloads(self):
         result = True
-        falconWithObject = FalconAWS.Cloud_Connect_AWS(auth_object=FalconAuth.OAuth2(creds={
+        falconWithObject = CloudConnectAWS(auth_object=FalconAuth.OAuth2(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
         }))
@@ -83,10 +83,14 @@ class TestCloudConnectAWS:
         return result
 
     def serviceCCAWS_GetAWSAccountsUsingList(self):
-        liste = []
-        for thing in falcon.QueryAWSAccounts(parameters={"limit": 2})["body"]["resources"]:
-            liste.append(thing["id"])
-        if falcon.GetAWSAccounts(ids=liste)["status_code"] in AllowedResponses:
+        testing = falcon.QueryAWSAccounts(parameters={"limit": 2})
+        if testing["body"]["resources"]:
+            for registration in testing["body"]["resources"]:
+                test_ids = registration["id"]
+        else:
+            test_ids = ["123456789012", "210987654321"]
+
+        if falcon.GetAWSAccounts(ids=test_ids)["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -162,9 +166,12 @@ class TestCloudConnectAWS:
         parameters={"limit": 1}
         )["status_code"] == 429, reason="API rate limit reached")
     def test_GetAWSAccounts(self):
-        assert bool(falcon.GetAWSAccounts(ids=falcon.QueryAWSAccounts(
-                    parameters={"limit": 1}
-                    )["body"]["resources"][0]["id"])["status_code"] in AllowedResponses) is True
+        testing = falcon.QueryAWSAccounts(parameters={"limit": 1})
+        if testing["body"]["resources"]:
+            test_id = testing["body"]["resources"][0]["id"]
+        else:
+            test_id = "123456789012"
+        assert bool(falcon.GetAWSAccounts(ids=test_id)["status_code"] in AllowedResponses) is True
 
     @pytest.mark.skipif(falcon.QueryAWSAccounts(
         parameters={"limit": 1}
@@ -191,18 +198,7 @@ class TestCloudConnectAWS:
         assert self.serviceCCAWS_ForceAttributeError() is True
 
     def test_argument_vs_keyword(self):
-        assert bool(
-            falcon.VerifyAWSAccountAccess(falcon.QueryAWSAccountsForIDs(limit=1)["body"]["resources"][0])
-            ) is True
+        assert bool(falcon.get_aws_accounts("123456789012")["status_code"] in AllowedResponses) is True
 
     def test_Errors(self):
         assert self.serviceCCAWS_GenerateErrors() is True
-
-    # @staticmethod
-    # def test_logout():
-    #     """
-    #     Pytest harness hook
-    #     """
-    #     assert bool(falcon.auth_object.revoke(
-    #         falcon.auth_object.token()["body"]["access_token"]
-    #         )["status_code"] in AllowedResponses) is True

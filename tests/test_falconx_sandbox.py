@@ -13,8 +13,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import FalconXSandbox
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconXSandbox(access_token=token)
+config = auth.getConfigObject()
+falcon = FalconXSandbox(auth_object=config)
 AllowedResponses = [200, 201, 400, 403, 404, 429]  # Adding rate-limiting as an allowed response for now
 
 
@@ -50,7 +50,7 @@ class TestFalconXSandbox:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
 
-            # print(f"{key} operation returned a {tests[key]} status code")
+                # print(f"{key} operation returned {tests[key]}")
 
         return error_checks
 
@@ -65,10 +65,14 @@ class TestFalconXSandbox:
     @pytest.mark.skipif(falcon.QueryReports(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
     def test_get_summary_reports(self):
         """Pytest harness hook"""
+        id_lookup = falcon.query_reports(limit=1)
+        id_list = "1234567890"
+        if id_lookup["status_code"] not in [403, 429]:
+            if id_lookup["body"]["resources"]:
+                id_list = id_lookup["body"]["resources"]
+
         assert bool(falcon.GetSummaryReports(
-                        ids=falcon.QueryReports(
-                            parameters={"limit": 1}
-                        )["body"]["resources"]
+                        ids=id_list
                     )["status_code"] in AllowedResponses) is True
 
     def test_errors(self):

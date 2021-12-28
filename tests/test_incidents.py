@@ -14,9 +14,9 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import Incidents
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = Incidents(access_token=token)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+config = auth.getConfigObject()
+falcon = Incidents(auth_object=config)
+AllowedResponses = [200, 400, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestIncidents:
@@ -39,16 +39,26 @@ class TestIncidents:
             return False
 
     def serviceIncidents_GetBehaviors(self):
+        be_lookup = falcon.QueryBehaviors(parameters={"limit": 1})
+        be_result="1234567890"
+        if be_lookup["status_code"] != 429:
+            if be_lookup["body"]["resources"]:
+                be_result = be_lookup["body"]["resources"]
         if falcon.GetBehaviors(body={
-                            "ids": falcon.QueryBehaviors(parameters={"limit": 1})["body"]["resources"]
+                            "ids": be_result
                             })["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def serviceIncidents_GetIncidents(self):
+        inc_lookup = falcon.QueryIncidents(parameters={"limit": 1})
+        inc = "1234567890"
+        if inc_lookup["status_code"] != 429:
+            if inc_lookup["body"]["resources"]:
+                inc = inc_lookup["body"]["resources"]
         if falcon.GetIncidents(body={
-                            "ids": falcon.QueryIncidents(parameters={"limit": 1})["body"]["resources"]
+                            "ids": inc
                             })["status_code"] in AllowedResponses:
             return True
         else:

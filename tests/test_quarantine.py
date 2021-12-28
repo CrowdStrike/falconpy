@@ -9,8 +9,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy.quarantine import Quarantine
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = Quarantine(access_token=token)
+config = auth.getConfigObject()
+falcon = Quarantine(auth_object=config)
 AllowedResponses = [200, 201, 202, 203, 204, 400, 404, 429]
 
 

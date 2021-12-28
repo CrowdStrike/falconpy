@@ -7,13 +7,13 @@ import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Classes to test - manually imported from sibling folder
-from falconpy import user_management as FalconUsers
+from falconpy import UserManagement
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 
 auth = Authorization.TestAuthorization()
-token = auth.getConfigExtended()
-falcon = FalconUsers.User_Management(access_token=token)
+config = auth.getConfigObject()
+falcon = UserManagement(auth_object=config)
 AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
 
 
