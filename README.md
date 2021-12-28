@@ -131,8 +131,8 @@ GitHub Discussions provide the community with means to communicate. There are fo
 ### Official Project Documentation
 Extended documentation is available via our [wiki](https://github.com/CrowdStrike/falconpy/wiki) or at [falconpy.io](https://falconpy.io).
 
-### Videos (Tutorials, Trainings, Overviews)
-*Coming soon*.
+### Videos
+[![Fal.Con 2021](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/fal.con-2021-presentation.png)](https://www.crowdstrike.com/falcon/video-on-demand-2021/?wchannelid=w0jyzi2b8e&wmediaid=z5jymvzhyu)
 
 ### Conference Presentations
 [![API Office Hour 03.23.21](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/api_office_hour_preso_thumbnail.png)](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/falconpy-api-office-hour_customer_presentation.pdf?raw=true)
