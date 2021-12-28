@@ -34,7 +34,7 @@ class TestFirewallManagement:
                                           )
         global rule_group_id
         rule_group_id = "1234567890"
-        if result["status_code"] != 429:
+        if result["status_code"] not in [400, 403, 404, 429]:
             if result["body"]["resources"]:
                 rule_group_id = result["body"]["resources"][0]
 
