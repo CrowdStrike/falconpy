@@ -15,7 +15,7 @@ from falconpy import DeviceControlPolicies
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = DeviceControlPolicies(auth_object=config)
-AllowedResponses = [200, 429, 500]  # Adding 500
+AllowedResponses = [200, 429, 500]
 
 
 class TestDeviceControlPolicy:
@@ -77,8 +77,11 @@ class TestDeviceControlPolicy:
         if policies["status_code"] in [429, 500]:
             pytest.skip("API communication failure")
         else:
-            if policies["body"]["resources"]:
-                result = falcon.queryDeviceControlPolicyMembers(id=policies["body"]["resources"][0])
+            if "resources" in policies["body"]:
+                if policies["body"]["resources"]:
+                    result = falcon.queryDeviceControlPolicyMembers(id=policies["body"]["resources"][0])
+                else:
+                    pytest.skip("API communication failure")
             else:
                 pytest.skip("API communication failure")
         assert bool(result["status_code"] in AllowedResponses) is True
@@ -91,10 +94,13 @@ class TestDeviceControlPolicy:
         if policy["status_code"] in [429, 500]:  # Can't hit the API
             pytest.skip("Unable to communicate with the Device Control API")
         else:
-            if policy["body"]["resources"]:
-                assert bool(falcon.getDeviceControlPolicies(
-                        ids=policy["body"]["resources"][0]
-                        )["status_code"] in AllowedResponses) is True
+            if "resources" in policy["body"]:
+                if policy["body"]["resources"]:
+                    assert bool(falcon.getDeviceControlPolicies(
+                            ids=policy["body"]["resources"][0]
+                            )["status_code"] in AllowedResponses) is True
+                else:
+                    pytest.skip("Unable to communicate with the Device Control API")
             else:
                 pytest.skip("Unable to communicate with the Device Control API")
 

@@ -27,17 +27,16 @@ class TestHosts:
         """
         Tests tagging functionality
         """
-        id_list = []
+        id_list = "1234567890"
         id_lookup = falcon.QueryDevicesByFilter(parameters={"limit": 1})
-        found_id = "1234567890"
         if id_lookup["status_code"] != 429:
             if id_lookup["body"]["resources"]:
-                found_id = id_lookup["body"]["resources"]
-        id_list.append(
-            falcon.GetDeviceDetails(
-                ids=found_id
-            )["body"]["resources"][0]["device_id"]
-        )
+                id_list = id_lookup["body"]["resources"]
+        # id_list.append(
+        #     falcon.GetDeviceDetails(
+        #         ids=found_id
+        #     )["body"]["resources"][0]["device_id"]
+        # )
         # test basic, id is a list, single valid tag w/o manipulation
         if not falcon.UpdateDeviceTags(
             action_name="add", ids=id_list, tags=["FalconGroupingTags/testtag"]
@@ -96,14 +95,15 @@ class TestHosts:
         if id_lookup["status_code"] != 429:
             if id_lookup["body"]["resources"]:
                 found_id = id_lookup["body"]["resources"]
-        id_list.append(
-            falcon.GetDeviceDetails(
-                ids=found_id
-            )["body"]["resources"][0]["device_id"]
-        )
+
+        # id_list.append(
+        #     falcon.GetDeviceDetails(
+        #         ids=found_id
+        #     )["body"]["resources"][0]["device_id"]
+        # )
         #  Generate an error by sending garbage as the action_name
         if not falcon.UpdateDeviceTags(
-            action_name="KaBOOM!", ids=id_list, tags=["FalconGroupingTags/testtag"]
+            action_name="KaBOOM!", ids=found_id, tags=["FalconGroupingTags/testtag"]
         )["status_code"] == 500:
             return False
         return True

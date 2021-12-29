@@ -44,6 +44,9 @@ class TestTimeouts:
         if result['status_code'] in AllowedResponses:
             if "connect timeout" in result["body"]["errors"][0]["message"]:
                 success = True
+            else:
+                if auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com":
+                    pytest.skip("GovCloud rate limit met")
 
         return success
 
@@ -60,6 +63,9 @@ class TestTimeouts:
         if result['status_code'] in AllowedResponses:
             if "read timeout" in result["body"]["errors"][0]["message"]:
                 success = True
+            else:
+                if auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com":
+                    pytest.skip("GovCloud rate limit met")
 
         return success
 
@@ -76,6 +82,9 @@ class TestTimeouts:
         if result['status_code'] in AllowedResponses:
             if "connect timeout" in result["body"]["errors"][0]["message"]:
                 success = True
+            else:
+                if auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com":
+                    pytest.skip("GovCloud rate limit met")
 
         return success
 
@@ -91,6 +100,9 @@ class TestTimeouts:
         if result["status_code"] in AllowedResponses:
             if "connect timeout" in result["body"]["errors"][0]["message"]:
                 success = True
+            else:
+                if auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com":
+                    pytest.skip("GovCloud rate limit met")
 
         return success
 

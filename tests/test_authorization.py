@@ -15,6 +15,7 @@ import json
 import os
 import sys
 import pytest
+
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from our sibling folder
@@ -23,7 +24,7 @@ from falconpy import APIHarness
 from falconpy import OAuth2
 # Importing this to test disabling SSL Verification in a service class
 from falconpy import Hosts
-
+AllowedResponses = [200, 201, 202, 400, 401, 404, 405, 415, 418, 429]
 shared_token = None
 
 # The TestAuthorization class tests authentication and deauthentication
@@ -115,7 +116,10 @@ class TestAuthorization():
             if self.falcon.authenticated:
                 return True
             else:
-                return False
+                if self.falcon.command("QueryDevicesByFilter", limit=1) in AllowedResponses:
+                    return True
+                else:
+                    return False
         else:
             return False
 

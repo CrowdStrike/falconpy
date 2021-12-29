@@ -17,7 +17,7 @@ from falconpy import APIHarness
 from falconpy._util import perform_request, force_default
 
 
-AllowedResponses = [200, 400, 401, 404, 415, 429, 500]
+AllowedResponses = [200, 400, 401, 404, 405, 415, 418, 429, 500]
 
 if "DEBUG_API_ID" in os.environ and "DEBUG_API_SECRET" in os.environ:
     config = {}
@@ -172,13 +172,13 @@ class TestUber:
 
     def uberCCAWS_BadMethod(self):
         if falcon.command(action="", override="BANANA,/cloud-connect-aws/combined/accounts/v1",
-                          headers={"Nothing": "Special"})["status_code"] in [405, 429]:
+                          headers={"Nothing": "Special"})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def uberCCAWS_BadCommand(self):
-        if falcon.command(action="IWantTheImpossible", parameters={"limit": 1})["status_code"] in [418, 429]:
+        if falcon.command(action="IWantTheImpossible", parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -201,7 +201,7 @@ class TestUber:
             return False
 
     def uberCCAWS_GenerateInvalidOperationIDError(self):
-        if perform_request(method="FETCH", endpoint="/somewhere/interesting")["status_code"] in [405, 429]:
+        if perform_request(method="FETCH", endpoint="/somewhere/interesting")["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -222,7 +222,7 @@ class TestUber:
 
     def uberCCAWS_BadAuthentication(self):
         falcon = APIHarness()
-        if falcon.command("QueryAWSAccounts", parameters={"limit": 1})["status_code"] in [401, 429]:
+        if falcon.command("QueryAWSAccounts", parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
