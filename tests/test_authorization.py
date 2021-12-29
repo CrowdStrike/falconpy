@@ -109,7 +109,7 @@ class TestAuthorization():
             self.falcon = APIHarness(creds={
                     "client_id": self.config["falcon_client_id"],
                     "client_secret": self.config["falcon_client_secret"],
-                }, base_url="us1"
+                }, base_url=self.config["falcon_base_url"]
             )
             self.falcon.authenticate()
             if self.falcon.authenticated:
@@ -143,10 +143,15 @@ class TestAuthorization():
             self.authorization = OAuth2(creds={
                 'client_id': self.config["falcon_client_id"],
                 'client_secret': self.config["falcon_client_secret"]
-            })
+                },
+                base_url=self.config["falcon_base_url"]
+            )
 
             try:
-                self.token = self.authorization.token()['body']['access_token']
+                check = self.authorization.token()
+                if check["status_code"] == 429:
+                    pytest.skip("Rate limit hit")
+                self.token = check['body']['access_token']
             except KeyError:
                 self.token = False
 
@@ -163,10 +168,13 @@ class TestAuthorization():
             self.authorization = Hosts(creds={
                 'client_id': self.config["falcon_client_id"],
                 'client_secret': self.config["falcon_client_secret"]
-            }, ssl_verify=False)
+            }, ssl_verify=False, base_url=self.config["falcon_base_url"])
 
-            if self.authorization.token:
-                self.authorization.auth_object.revoke(self.authorization.token)
+            check = self.authorization.auth_object.token()
+            if check["status_code"] == 429:
+                pytest.skip("Rate limit hit")
+            if check["body"]["access_token"]:
+                self.authorization.auth_object.revoke(check["body"]["access_token"])
                 return True
             else:
                 return False
@@ -255,6 +263,9 @@ class TestAuthorization():
     def test_failServiceAuth(self):
         assert self.failServiceAuth() is True
 
+    @pytest.mark.skipif(os.getenv("DEBUG_API_BASE_URL", "us1").lower() in ["https://api.laggar.gcw.crowdstrike.com","usgov1"],
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     def test_base_url_lookup(self):
         _ = self.getConfig()
         test_falcon = OAuth2(

@@ -35,23 +35,30 @@ class TestCloudConnectAWS:
         falconWithCreds = CloudConnectAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        })
-
+        }, base_url=auth.config["falcon_base_url"])
+        check = falconWithCreds.auth_object.token()
+        if check["status_code"] == 429:
+            pytest.skip("Rate limit hit")
         return falconWithCreds.authenticated()
 
     def serviceCCAWS_AuthWithObject(self):
         falconWithObject = CloudConnectAWS(auth_object=FalconAuth.OAuth2(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }))
-
+        }, base_url=auth.config["falcon_base_url"]))
+        check = falconWithObject.auth_object.token()
+        if check["status_code"] == 429:
+            pytest.skip("Rate limit hit")
         return falconWithObject.authenticated()
 
     def serviceCCAWS_RefreshToken(self):
         falconWithObject = CloudConnectAWS(auth_object=FalconAuth.OAuth2(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }))
+        }, base_url=auth.config["falcon_base_url"]))
+        check = falconWithObject.auth_object.token()
+        if check["status_code"] == 429:
+            pytest.skip("Rate limit hit")
 
         if not falconWithObject.token_expired():
             falconWithObject.auth_object.token_expiration = 0  # Forcibly expire the current token
@@ -67,7 +74,11 @@ class TestCloudConnectAWS:
         falconWithObject = CloudConnectAWS(auth_object=FalconAuth.OAuth2(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }))
+        }, base_url=auth.config["falcon_base_url"]))
+        check = falconWithObject.auth_object.token()
+        if check["status_code"] == 429:
+            pytest.skip("Rate limit hit")
+        
         if not falconWithObject.QueryAWSAccounts(parameters={"limite": 1})["status_code"] in AllowedResponses:
             result = False
 

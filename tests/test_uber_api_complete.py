@@ -40,10 +40,6 @@ falcon = APIHarness(
     client_secret=config["falcon_client_secret"],
     base_url=config["falcon_base_url"]
     )
-falcon.authenticate()
-if not falcon.authenticated:
-    sys.exit(1)
-
 
 class TestUber:
     def uberCCAWS_GetAWSSettings(self):
@@ -231,7 +227,7 @@ class TestUber:
             creds={
                 "client_id": config["falcon_client_id"],
                 "client_secret": config["falcon_client_secret"]
-            }, ssl_verify=False
+            }, ssl_verify=False, base_url=config["falcon_base_url"]
         )
         if falcon.command("QueryAWSAccounts", parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
@@ -240,11 +236,9 @@ class TestUber:
 
     def uber_test_invalid_reserved_word_payload(self):
         params = {
-            "limit": 1,
-            "facet": "cve,host_info",
-            filter:"created_timestamp:>'2021-01-01T00:00:01Z'"
+            filter:"hostname:'falconpy-unit-testing'"
         }
-        if falcon.command("combinedQueryVulnerabilities", parameters=params)["status_code"] in AllowedResponses:
+        if falcon.command("QueryDevicesByFilter", parameters=params)["status_code"] in AllowedResponses:
             return True
         else:
             return False

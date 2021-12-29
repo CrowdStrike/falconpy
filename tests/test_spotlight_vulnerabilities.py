@@ -15,7 +15,7 @@ sys.path.append(os.path.abspath('src'))
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = SpotlightVulnerabilities(auth_object=config)
-AllowedResponses = [200, 400, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 400, 403, 429]
 
 
 class TestSpotlight:

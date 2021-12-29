@@ -1,6 +1,7 @@
 """This class tests the MessageCenter service class"""
 import os
 import sys
+import pytest
 # Authentication via test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -78,6 +79,9 @@ class TestMessageCenter:
 
         return error_checks
 
+    @pytest.mark.skipif(auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com",
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     def test_all_methods(self):
         """Pytest harness hook."""
         assert self.message_center_full_series() is True

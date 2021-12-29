@@ -2,7 +2,7 @@
 # Tests different service class authentication styles
 import os
 import sys
-
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -79,6 +79,8 @@ class TestAuthentications:
         result = falcon.token()
         if result["status_code"] == 400:
             return True
+        elif result["status_code"] == 429:
+            pytest.skip("Rate limit hit")
         else:
             return False
 
@@ -111,6 +113,8 @@ class TestAuthentications:
                                          base_url="usgov1"
                                          )
                 result = falcon.auth_object.token()
+                if result["status_code"] == 429:
+                    pytest.skip("Rate limit hit")
                 if result["status_code"] == 201:
                     return True
                 else:
@@ -161,9 +165,15 @@ class TestAuthentications:
     def test_crossCloudFailure(self):
         assert self.serviceAny_forceCrossCloudResponseFailure() is True
 
+    @pytest.mark.skipif(auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com",
+                        reason="Unsupported in GovCloud"
+                        )
     def test_checkRegionLookups(self):
         assert self.serviceAny_checkRegionNameLookups() is True
 
+    @pytest.mark.skipif(auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com",
+                        reason="Unsupported in GovCloud"
+                        )
     def test_crossGovCloudSelectFailure(self):
         assert self.serviceAny_forceGovCloudAutoSelectFailure() is True
 

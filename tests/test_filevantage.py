@@ -1,7 +1,6 @@
 """
 test_filevantage.py -  This class tests the FileVantage service class
 """
-import platform
 import os
 import sys
 import pytest
@@ -23,12 +22,16 @@ class TestFileVantage:
     """
     FileVantage Service Class test harness
     """
-    @pytest.mark.skipif(config.base_url != "https://api.crowdstrike.com", reason="Unit testing unavailable on US-2")
+    @pytest.mark.skipif(config.base_url == "https://api.laggar.gcw.crowdstrike.com",
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     def test_query_changes(self):
         """Pytest harness hook"""
         assert bool(falcon.query_changes(limit=1)["status_code"] in AllowedResponses) is True
 
-    @pytest.mark.skipif(config.base_url != "https://api.crowdstrike.com", reason="Unit testing unavailable on US-2")
+    @pytest.mark.skipif(config.base_url == "https://api.laggar.gcw.crowdstrike.com",
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     def test_get_changes(self):
         """Pytest harness hook"""
         # Also testing lazy loading of the ids parameter

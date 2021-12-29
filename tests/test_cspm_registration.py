@@ -3,6 +3,7 @@ test_cspm_registration.py - This class tests the cspm_registration service class
 """
 import os
 import sys
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -13,7 +14,7 @@ from falconpy import CSPMRegistration  # noqa: E402
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = CSPMRegistration(auth_object=config)
-AllowedResponses = [200, 201, 207, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 201, 207, 403, 429]  # Adding rate-limiting as an allowed response for now
 textchars = bytearray({7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7f})
 is_binary_string = lambda bytes: bool(bytes.translate(None, textchars))  # noqa: E731
 
@@ -93,8 +94,15 @@ class TestCSPMRegistration:
 
     def test_get_aws_account_scripts_attachment(self):
         """Pytest harness hook"""
-        assert bool(type(falcon.GetCSPMAwsAccountScriptsAttachment()) == bytes) is True
+        check = falcon.GetCSPMAwsAccountScriptsAttachment()
+        if isinstance(check, dict):
+            assert bool(check["status_code"] in AllowedResponses)
+        else:
+            assert bool(type(falcon.GetCSPMAwsAccountScriptsAttachment()) == bytes) is True
 
+    @pytest.mark.skipif(os.getenv("DEBUG_API_BASE_URL", "us1").lower() in ["https://api.laggar.gcw.crowdstrike.com","usgov1"],
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     def test_get_azure_user_scripts_attachment(self):
         """Pytest harness hook"""
         assert self.cspm_get_azure_user_scripts_attachment() is True

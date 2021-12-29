@@ -23,7 +23,7 @@ class TestTimeouts:
         falcon = CloudConnectAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        })
+        }, base_url=auth.config["falcon_base_url"])
         success = False
         result = falcon.QueryAWSAccounts()
         if result['status_code'] in AllowedResponses:
@@ -49,7 +49,7 @@ class TestTimeouts:
         falconReadFail = CloudConnectAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, timeout=(5, .001)
+        }, timeout=(5, .001), base_url=auth.config["falcon_base_url"]
         )
         success = False
         result = falconReadFail.QueryAWSAccounts()
@@ -63,7 +63,7 @@ class TestTimeouts:
         falconStandardFail = CloudConnectAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, timeout=.001
+        }, timeout=.001, base_url=auth.config["falcon_base_url"]
         )
         success = False
         result = falconStandardFail.QueryAWSAccounts()
@@ -77,7 +77,7 @@ class TestTimeouts:
         falconLegacyFail = OAuth2(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, timeout=.001)
+        }, timeout=.001, base_url=auth.config["falcon_base_url"])
         success = False
         result = falconLegacyFail.token()
         if result["status_code"] in AllowedResponses:
