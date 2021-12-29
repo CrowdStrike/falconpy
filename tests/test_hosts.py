@@ -112,8 +112,13 @@ class TestHosts:
         """
         Tests the perform action endpoint
         """
-        test_id = [falcon.QueryDevicesByFilter(limit=1)["body"]["resources"][0]]
-        payload = {"ids": test_id}
+
+        id_lookup = falcon.QueryDevicesByFilter(limit=1)
+        if id_lookup["status_code"] != 429:
+            test_id = id_lookup["body"]["resources"][0]
+        else:
+            pytest.skip("Rate limit met")
+        payload = {"ids": [test_id]}
         action_test = falcon.PerformActionV2(action_name="hide_host", body=payload)
         if action_test["status_code"] == 202:
             action_test = falcon.PerformActionV2(action_name="unhide_host", ids=test_id)
