@@ -28,7 +28,9 @@ class TestTimeouts:
         result = falcon.QueryAWSAccounts()
         if result['status_code'] in AllowedResponses:
             success = True
-
+        else:
+            if auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com":
+                pytest.skip("GovCloud rate limit met")
         return success
 
     def timeout_connect(self):

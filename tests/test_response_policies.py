@@ -14,7 +14,7 @@ from falconpy import ResponsePolicies
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = ResponsePolicies(auth_object=config)
-AllowedResponses = [200, 201, 400, 404, 429]
+AllowedResponses = [200, 201, 400, 401, 404, 429]
 
 
 class TestRTRPolicy:

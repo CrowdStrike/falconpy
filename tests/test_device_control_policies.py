@@ -75,15 +75,15 @@ class TestDeviceControlPolicy:
         """
         policies = falcon.queryDeviceControlPolicies(limit=1)
         if policies["status_code"] in [429, 500]:
-            pytest.skip("API communication failure")
+            pytest.skip("Rate limit hit")
         else:
             if "resources" in policies["body"]:
                 if policies["body"]["resources"]:
                     result = falcon.queryDeviceControlPolicyMembers(id=policies["body"]["resources"][0])
                 else:
-                    pytest.skip("API communication failure")
+                    pytest.skip("Rate limit hit")
             else:
-                pytest.skip("API communication failure")
+                pytest.skip("Rate limit hit")
         assert bool(result["status_code"] in AllowedResponses) is True
 
     def test_getDeviceControlPolicies(self):
@@ -118,11 +118,14 @@ class TestDeviceControlPolicy:
         if policies["status_code"] == [429, 500]:  # Can't hit the API
             pytest.skip("Unable to communicate with the Device Control API")
         else:
-            if policies["body"]["resources"]:
-                result = falcon.queryCombinedDeviceControlPolicyMembers(parameters={"id": policies["body"]["resources"][0]["id"]})
-                assert bool(result["status_code"] in AllowedResponses) is True
+            if "resources" in policies["body"]:
+                if policies["body"]["resources"]:
+                    result = falcon.queryCombinedDeviceControlPolicyMembers(parameters={"id": policies["body"]["resources"][0]["id"]})
+                    assert bool(result["status_code"] in AllowedResponses) is True
+                else:
+                    pytest.skip("Rate limit hit")
             else:
-                pytest.skip("API communication failure")
+                pytest.skip("Rate limit hit")
 
     def test_errors(self):
         """
