@@ -24,7 +24,7 @@ from falconpy import APIHarness
 from falconpy import OAuth2
 # Importing this to test disabling SSL Verification in a service class
 from falconpy import Hosts
-AllowedResponses = [200, 201, 202, 400, 401, 404, 405, 415, 418, 429]
+
 shared_token = None
 
 # The TestAuthorization class tests authentication and deauthentication
@@ -116,8 +116,8 @@ class TestAuthorization():
             if self.falcon.authenticated:
                 return True
             else:
-                if self.falcon.command("QueryDevicesByFilter", limit=1) in AllowedResponses:
-                    return True
+                if self.falcon.base_url == "https://api.laggar.gcw.crowdstrike.com":
+                    pytest.skip("GovCloud rate limit hit")
                 else:
                     return False
         else:
