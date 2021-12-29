@@ -41,6 +41,8 @@ falcon = APIHarness(
     base_url=config["falcon_base_url"]
     )
 
+rate_limit_check = falcon.command("QueryAWSAccounts", limit=1)["status_code"]
+
 class TestUber:
     def uberCCAWS_GetAWSSettings(self):
         if falcon.command("GetAWSSettings")["status_code"] in AllowedResponses:
@@ -263,50 +265,64 @@ class TestUber:
     # def test_VerifyAWSAccountAccess(self):
     #     assert self.uberCCAWS_VerifyAWSAccountAccess() is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     def test_QueryAWSAccountsForIDs(self):
         assert self.uberCCAWS_QueryAWSAccountsForIDs() is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     def test_UploadDownload(self):
         assert self.uberCCAWS_TestUploadDownload() is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     def test_GenerateError(self):
         assert self.uberCCAWS_GenerateError() is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     def test_GenerateInvalidPayload(self):
         assert self.uberCCAWS_GenerateInvalidPayload() is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     def test_BadCommand(self):
         assert self.uberCCAWS_BadCommand() is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     def test_OverrideAndHeader(self):
         # Also check token auto-renewal
         falcon.token_expiration = 0
         assert self.uberCCAWS_OverrideAndHeader() is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     def test_GenerateActionNameError(self):
         assert self.uberCCHosts_GenerateActionNameError(params=None) is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     def test_GenerateInvalidOperationIDError(self):
         assert self.uberCCAWS_GenerateInvalidOperationIDError() is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     def test_BadMethod(self):
         assert self.uberCCAWS_BadMethod() is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     def test_GenerateServerError(self):
         assert self.uberCCAWS_GenerateServerError() is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     def test_TestMSSP(self):
         assert self.uberCCAWS_TestMSSP() is True
 
     # def test_logout(self):
     #     assert falcon.deauthenticate() is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     def test_GenerateTokenError(self):
         assert self.uberCCAWS_GenerateTokenError() is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     def test_BadAuthentication(self):
         assert self.uberCCAWS_BadAuthentication() is True
 
+    @pytest.mark.skipif(rate_limit_check == 429, reason="API rate limit reached")
     @pytest.mark.filterwarnings("ignore:Unverified HTTPS request is being made.*")
     def test_DisableSSLVerify(self):
         assert self.uberCCAWS_DisableSSLVerify() is True

@@ -2,7 +2,7 @@
 # This class tests request timeouts
 import os
 import sys
-
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -39,6 +39,8 @@ class TestTimeouts:
         )
         success = False
         result = falconConnectFail.QueryAWSAccounts()
+        if result["status_code"] == 429:
+            pytest.skip("Rate limit hit")
         if result['status_code'] in AllowedResponses:
             if "connect timeout" in result["body"]["errors"][0]["message"]:
                 success = True
@@ -53,6 +55,8 @@ class TestTimeouts:
         )
         success = False
         result = falconReadFail.QueryAWSAccounts()
+        if result["status_code"] == 429:
+            pytest.skip("Rate limit hit")
         if result['status_code'] in AllowedResponses:
             if "read timeout" in result["body"]["errors"][0]["message"]:
                 success = True
@@ -67,6 +71,8 @@ class TestTimeouts:
         )
         success = False
         result = falconStandardFail.QueryAWSAccounts()
+        if result["status_code"] == 429:
+            pytest.skip("Rate limit hit")
         if result['status_code'] in AllowedResponses:
             if "connect timeout" in result["body"]["errors"][0]["message"]:
                 success = True
@@ -80,6 +86,8 @@ class TestTimeouts:
         }, timeout=.001, base_url=auth.config["falcon_base_url"])
         success = False
         result = falconLegacyFail.token()
+        if result["status_code"] == 429:
+            pytest.skip("Rate limit hit")
         if result["status_code"] in AllowedResponses:
             if "connect timeout" in result["body"]["errors"][0]["message"]:
                 success = True
