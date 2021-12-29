@@ -21,8 +21,15 @@ class TestDetects:
     """
 
     def service_detects_get_detect_summaries(self):
+        check = falcon.query_detects(parameters={"limit": 1})
+        if check["status_code"] == 429:
+            pytest.skip("Rate limit hit")
+        if check["body"]["resources"]:
+            id_list = check["body"]["resources"]
+        else:
+            id_list = "12345678"
         if falcon.get_detect_summaries(
-                body={"ids": falcon.query_detects(parameters={"limit": 1})["body"]["resources"]}
+                body={"ids": id_list}
                 )["status_code"] in AllowedResponses:
             return True
         else:
@@ -30,12 +37,17 @@ class TestDetects:
 
     def service_detects_test_all(self):
         error_checks = True
+        check = falcon.query_detects(limit=2)
+        if check["status_code"] == 429:
+            pytest.skip("Rate Limit hit")
+        if check["body"]["resources"]:
+            id_list = ",".join(check["body"]["resources"])
         tests = {
             "query_detects": falcon.query_detects(),
             "get_detect_summaries": falcon.get_detect_summaries(body={"ids": ["12345678"]}),
             "get_aggregate_detects": falcon.get_aggregate_detects(body={"resource": {"bad": True}}),
             "update_detects_by_id_2": falcon.update_detects_by_ids(
-                                        ids=",".join(falcon.query_detects(limit=2)["body"]["resources"]),
+                                        ids=id_list,
                                         show_in_ui=True, assigned_to_uuid="12345678", status="ignored",
                                         comment="FalconPy unit testing"
                                         ),

@@ -17,7 +17,7 @@ from falconpy import APIHarness
 from falconpy._util import perform_request, force_default
 
 
-AllowedResponses = [200, 400, 404, 415, 429, 500]
+AllowedResponses = [200, 400, 401, 404, 415, 429, 500]
 
 if "DEBUG_API_ID" in os.environ and "DEBUG_API_SECRET" in os.environ:
     config = {}
@@ -262,12 +262,6 @@ class TestUber:
     def test_GetAWSAccounts(self):
         assert self.uberCCAWS_GetAWSAccounts() is True
 
-    # @pytest.mark.skipif(falcon.command("QueryAWSAccounts",
-    #                     parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
-    # @pytest.mark.skipif(sys.version_info.minor < 10, reason="Frequency reduced due to potential race condition")
-    # def test_VerifyAWSAccountAccess(self):
-    #     assert self.uberCCAWS_VerifyAWSAccountAccess() is True
-
     def test_QueryAWSAccountsForIDs(self):
         assert self.uberCCAWS_QueryAWSAccountsForIDs() is True
 
@@ -302,9 +296,6 @@ class TestUber:
 
     def test_TestMSSP(self):
         assert self.uberCCAWS_TestMSSP() is True
-
-    # def test_logout(self):
-    #     assert falcon.deauthenticate() is True
 
     def test_GenerateTokenError(self):
         assert self.uberCCAWS_GenerateTokenError() is True
