@@ -104,7 +104,10 @@ class TestUber:
         try:
             if response["status_code"] == 429:
                 pytest.skip("Rate limit hit")
-            sha = response["body"]["resources"][0]["sha256"]
+            if response["body"]["resources"]:
+                sha = response["body"]["resources"][0]["sha256"]
+            else:
+                pytest.skip("Rate limit hit")
             response = falcon.command("GetSampleV3", ids=sha)
             try:
                 open(TARGET, 'wb').write(response)
