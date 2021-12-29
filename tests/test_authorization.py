@@ -156,6 +156,8 @@ class TestAuthorization():
                 if check["status_code"] == 429:
                     pytest.skip("Rate limit hit")
                 self.token = check['body']['access_token']
+                # Force a token authentication
+                _ = Hosts(access_token=self.token)
             except KeyError:
                 self.token = False
 

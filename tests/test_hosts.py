@@ -242,8 +242,9 @@ class TestHosts:
                 )["status_code"] in AllowedResponses
         ) is True
 
-    @pytest.mark.skipif(sys.version_info.minor < 10, reason="Frequency reduced due to test flakiness")
-    @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
+    @pytest.mark.skipif(sys.version_info.minor < 10 and platform.system() != "Darwin",
+                        reason="Frequency reduced due to test flakiness"
+                        )
     def test_perform_action(self):
         """Pytest harness hook"""
         assert self.hosts_perform_action() is True

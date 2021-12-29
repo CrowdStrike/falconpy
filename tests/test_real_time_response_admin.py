@@ -5,6 +5,7 @@ import datetime
 # import platform
 import os
 import sys
+import platform
 import json
 import pytest
 # Authentication via the test_authorization.py
@@ -138,8 +139,7 @@ class TestRTRAdmin:
         """Pytest harness hook"""
         assert self.rtra_generate_errors() is True
 
-    @pytest.mark.skipif(sys.version_info.minor < 10, reason="Frequency reduced due to test flakiness")
-    # @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
+    @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to test flakiness")
     def test_all_code_paths(self):
         """
         Pytest harness hook - Singular test will execute every statement in every method within the class
