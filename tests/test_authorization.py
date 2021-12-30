@@ -15,6 +15,7 @@ import json
 import os
 import sys
 import pytest
+
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from our sibling folder
@@ -109,13 +110,16 @@ class TestAuthorization():
             self.falcon = APIHarness(creds={
                     "client_id": self.config["falcon_client_id"],
                     "client_secret": self.config["falcon_client_secret"],
-                }, base_url="us1"
+                }, base_url=self.config["falcon_base_url"]
             )
             self.falcon.authenticate()
             if self.falcon.authenticated:
                 return True
             else:
-                return False
+                if self.falcon.base_url == "https://api.laggar.gcw.crowdstrike.com":
+                    pytest.skip("GovCloud rate limit hit")
+                else:
+                    return False
         else:
             return False
 
@@ -143,10 +147,17 @@ class TestAuthorization():
             self.authorization = OAuth2(creds={
                 'client_id': self.config["falcon_client_id"],
                 'client_secret': self.config["falcon_client_secret"]
-            })
+                },
+                base_url=self.config["falcon_base_url"]
+            )
 
             try:
-                self.token = self.authorization.token()['body']['access_token']
+                check = self.authorization.token()
+                if check["status_code"] == 429:
+                    pytest.skip("Rate limit hit")
+                self.token = check['body']['access_token']
+                # Force a token authentication
+                _ = Hosts(access_token=self.token)
             except KeyError:
                 self.token = False
 
@@ -163,10 +174,13 @@ class TestAuthorization():
             self.authorization = Hosts(creds={
                 'client_id': self.config["falcon_client_id"],
                 'client_secret': self.config["falcon_client_secret"]
-            }, ssl_verify=False)
+            }, ssl_verify=False, base_url=self.config["falcon_base_url"])
 
-            if self.authorization.token:
-                self.authorization.auth_object.revoke(self.authorization.token)
+            check = self.authorization.auth_object.token()
+            if check["status_code"] == 429:
+                pytest.skip("Rate limit hit")
+            if check["body"]["access_token"]:
+                self.authorization.auth_object.revoke(check["body"]["access_token"])
                 return True
             else:
                 return False
@@ -255,6 +269,9 @@ class TestAuthorization():
     def test_failServiceAuth(self):
         assert self.failServiceAuth() is True
 
+    @pytest.mark.skipif(os.getenv("DEBUG_API_BASE_URL", "us1").lower() in ["https://api.laggar.gcw.crowdstrike.com","usgov1"],
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     def test_base_url_lookup(self):
         _ = self.getConfig()
         test_falcon = OAuth2(

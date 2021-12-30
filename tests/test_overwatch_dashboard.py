@@ -13,7 +13,7 @@ from falconpy import OverwatchDashboard
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = OverwatchDashboard(auth_object=config)
-AllowedResponses = [200, 403, 429]
+AllowedResponses = [200, 401, 403, 429]
 
 
 class TestOverwatchDashboard:

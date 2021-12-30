@@ -1,4 +1,4 @@
-name: Unit testing (Windows)
+name: Unit testing (USGOV1)
 on:
   push:
     paths:
@@ -14,20 +14,14 @@ on:
       - 'ver_*'
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        # os: [macos-latest, windows-latest, ubuntu-latest]
-        # python-version: ['3.6', '3.7', '3.8', '3.9', '3.10']
-        python-version: ['3.10']
-    # runs-on: ${{ matrix.os }}
-    runs-on: windows-latest
+  usgov1:
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: '3.10'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -35,8 +29,9 @@ jobs:
         pip install -r requirements.txt
     - name: Test with pytest
       env:
-        DEBUG_API_ID: ${{ secrets.DEBUG_API_ID }}
-        DEBUG_API_SECRET: ${{ secrets.DEBUG_API_SECRET }}
+        DEBUG_API_ID: ${{ secrets.DEBUG_API_ID_USGOV1 }}
+        DEBUG_API_SECRET: ${{ secrets.DEBUG_API_SECRET_USGOV1 }}
+        DEBUG_API_BASE_URL: usgov1
         CROSS_DEBUG_KEY: ${{ secrets.CROSS_DEBUG_KEY }}
         CROSS_DEBUG_SECRET: ${{ secrets.CROSS_DEBUG_SECRET }}
       run: |

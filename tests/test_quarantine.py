@@ -11,7 +11,7 @@ from falconpy.quarantine import Quarantine
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Quarantine(auth_object=config)
-AllowedResponses = [200, 201, 202, 203, 204, 400, 404, 429]
+AllowedResponses = [200, 201, 202, 203, 204, 400, 401, 404, 429]
 
 
 class TestQuarantine:

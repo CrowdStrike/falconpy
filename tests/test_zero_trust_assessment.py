@@ -13,7 +13,7 @@ from falconpy import ZeroTrustAssessment
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = ZeroTrustAssessment(auth_object=config)
-AllowedResponses = [200, 201, 404, 429]
+AllowedResponses = [200, 201, 401, 404, 429]
 
 
 class TestZeroTrustAssessment:

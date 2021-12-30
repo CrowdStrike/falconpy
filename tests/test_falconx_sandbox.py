@@ -67,7 +67,7 @@ class TestFalconXSandbox:
         """Pytest harness hook"""
         id_lookup = falcon.query_reports(limit=1)
         id_list = "1234567890"
-        if id_lookup["status_code"] not in [403, 429]:
+        if id_lookup["status_code"] not in [403, 404, 429]:
             if id_lookup["body"]["resources"]:
                 id_list = id_lookup["body"]["resources"]
 

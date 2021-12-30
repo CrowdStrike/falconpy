@@ -13,7 +13,7 @@ from falconpy import SensorVisibilityExclusions
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = SensorVisibilityExclusions(auth_object=config)
-AllowedResponses = [200, 429]
+AllowedResponses = [200, 401, 404, 429]
 
 
 class TestSVExclusions:

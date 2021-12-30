@@ -2,7 +2,7 @@
 # This class tests request timeouts
 import os
 import sys
-
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -23,12 +23,14 @@ class TestTimeouts:
         falcon = CloudConnectAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        })
+        }, base_url=auth.config["falcon_base_url"])
         success = False
         result = falcon.QueryAWSAccounts()
         if result['status_code'] in AllowedResponses:
             success = True
-
+        else:
+            if auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com":
+                pytest.skip("GovCloud rate limit met")
         return success
 
     def timeout_connect(self):
@@ -39,9 +41,14 @@ class TestTimeouts:
         )
         success = False
         result = falconConnectFail.QueryAWSAccounts()
+        if result["status_code"] == 429:
+            pytest.skip("Rate limit hit")
         if result['status_code'] in AllowedResponses:
             if "connect timeout" in result["body"]["errors"][0]["message"]:
                 success = True
+            else:
+                if auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com":
+                    pytest.skip("GovCloud rate limit met")
 
         return success
 
@@ -49,13 +56,18 @@ class TestTimeouts:
         falconReadFail = CloudConnectAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, timeout=(5, .001)
+        }, timeout=(5, .001), base_url=auth.config["falcon_base_url"]
         )
         success = False
         result = falconReadFail.QueryAWSAccounts()
+        if result["status_code"] == 429:
+            pytest.skip("Rate limit hit")
         if result['status_code'] in AllowedResponses:
             if "read timeout" in result["body"]["errors"][0]["message"]:
                 success = True
+            else:
+                if auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com":
+                    pytest.skip("GovCloud rate limit met")
 
         return success
 
@@ -63,13 +75,18 @@ class TestTimeouts:
         falconStandardFail = CloudConnectAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, timeout=.001
+        }, timeout=.001, base_url=auth.config["falcon_base_url"]
         )
         success = False
         result = falconStandardFail.QueryAWSAccounts()
+        if result["status_code"] == 429:
+            pytest.skip("Rate limit hit")
         if result['status_code'] in AllowedResponses:
             if "connect timeout" in result["body"]["errors"][0]["message"]:
                 success = True
+            else:
+                if auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com":
+                    pytest.skip("GovCloud rate limit met")
 
         return success
 
@@ -77,12 +94,17 @@ class TestTimeouts:
         falconLegacyFail = OAuth2(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, timeout=.001)
+        }, timeout=.001, base_url=auth.config["falcon_base_url"])
         success = False
         result = falconLegacyFail.token()
+        if result["status_code"] == 429:
+            pytest.skip("Rate limit hit")
         if result["status_code"] in AllowedResponses:
             if "connect timeout" in result["body"]["errors"][0]["message"]:
                 success = True
+            else:
+                if auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com":
+                    pytest.skip("GovCloud rate limit met")
 
         return success
 

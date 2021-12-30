@@ -14,7 +14,7 @@ sys.path.append(os.path.abspath('src'))
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = UserManagement(auth_object=config)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 401, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestFalconUserManagement:
