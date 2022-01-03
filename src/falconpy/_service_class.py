@@ -87,7 +87,8 @@ class ServiceClass:
         # Currently defaulting to validation enabled
         self.validate_payloads = kwargs.get("validate_payloads", True)
         self.refreshable = False
-        self.token_fail_reason = False
+        self.token_fail_reason = None
+        self.token_status = None
         client_id = kwargs.get("client_id", None)
         client_secret = kwargs.get("client_secret", None)
         if client_id and client_secret and not creds:
@@ -105,7 +106,8 @@ class ServiceClass:
             self.auth_object = auth_object
             if not self.authenticated():
                 token_result = self.auth_object.token()
-                if token_result["status_code"] == 201:
+                self.token_status = token_result["status_code"]
+                if self.token_status == 201:
                     self.token = token_result["body"]["access_token"]
                     self.headers = {"Authorization": f"Bearer {self.token}"}
                 else:
@@ -140,7 +142,8 @@ class ServiceClass:
                                           user_agent=user_agent
                                           )
                 token_result = self.auth_object.token()
-                if token_result["status_code"] == 201:
+                self.token_status = token_result["status_code"]
+                if self.token_status == 201:
                     self.token = token_result["body"]["access_token"]
                     self.headers = {"Authorization": f"Bearer {self.token}"}
                     # Swap to the correct region if they've provided the incorrect one

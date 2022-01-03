@@ -107,6 +107,7 @@ class APIHarness:
         self.token_time = time.time()
         self.authenticated = False
         self.token_fail_reason = None
+        self.token_status = None
         self.headers = lambda: {"Authorization": f"Bearer {self.token}"} if self.token else {}
         self.commands = api_endpoints
         self.user_agent = user_agent  # Issue #365
@@ -153,7 +154,8 @@ class APIHarness:
                                  user_agent=self.user_agent
                                  )
         if isinstance(result, dict):  # Issue #433
-            if result["status_code"] == 201:
+            self.token_status = result["status_code"]
+            if self.token_status == 201:
                 self.token = result["body"]["access_token"]
                 self.token_expiration = result["body"]["expires_in"]
                 self.token_time = time.time()
@@ -176,6 +178,7 @@ class APIHarness:
         else:
             self.authenticated = False
             self.token_fail_reason = "Unexpected API response received"
+            self.token_status = 403
 
         return self.authenticated
 
