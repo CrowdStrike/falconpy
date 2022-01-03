@@ -106,6 +106,7 @@ class APIHarness:
         self.token_expiration = 0
         self.token_time = time.time()
         self.authenticated = False
+        self.token_fail_reason = None
         self.headers = lambda: {"Authorization": f"Bearer {self.token}"} if self.token else {}
         self.commands = api_endpoints
         self.user_agent = user_agent  # Issue #365
@@ -157,6 +158,7 @@ class APIHarness:
                 self.token_expiration = result["body"]["expires_in"]
                 self.token_time = time.time()
                 self.authenticated = True
+                self.token_fail_reason = None
                 # Swap to the correct region if they've provided the incorrect one
                 if "X-Cs-Region" not in result["headers"]:
                     # GovCloud autodiscovery is not currently supported
@@ -168,8 +170,12 @@ class APIHarness:
                     self.base_url = confirm_base_url(token_region.upper())
             else:
                 self.authenticated = False
+                if "errors" in result["body"]:
+                    if result["body"]["errors"]:
+                        self.token_fail_reason = result["body"]["errors"][0]["message"]
         else:
             self.authenticated = False
+            self.token_fail_reason = "Unexpected API response received"
 
         return self.authenticated
 

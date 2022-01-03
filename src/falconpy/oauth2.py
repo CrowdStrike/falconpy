@@ -103,6 +103,7 @@ class OAuth2:
         self.token_expired = lambda: bool(
             (time.time() - self.token_time) >= (self.token_expiration - self.token_renew_window)
             )
+        self.token_fail_reason = None
         self.authenticated = lambda: not bool(self.token_expired())
 
     def token(self: object) -> dict:
@@ -131,6 +132,7 @@ class OAuth2:
                     self.token_expiration = returned["body"]["expires_in"]
                     self.token_time = time.time()
                     self.token_value = returned["body"]["access_token"]
+                    self.token_fail_reason = None
                     # Swap to the correct region if they've provided the incorrect one
                     if "X-Cs-Region" not in returned["headers"]:
                         # GovCloud autodiscovery is not currently supported
@@ -140,10 +142,16 @@ class OAuth2:
                     requested_region = confirm_base_region(confirm_base_url(self.base_url))
                     if token_region != requested_region:
                         self.base_url = confirm_base_url(token_region.upper())
+                else:
+                    if "errors" in returned["body"]:
+                        if returned["body"]["errors"]:
+                            self.token_fail_reason = returned["body"]["errors"][0]["message"]
             else:
                 returned = generate_error_result("Unexpected API response received", 403)
+                self.token_fail_reason = "Unexpected API response received"
         else:
             returned = generate_error_result("Invalid credentials specified", 403)
+            self.token_fail_reason = "Invalid credentials specified"
 
         return returned
 
