@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import confirm_base_url, confirm_base_region
-from .oauth2 import OAuth2 as FalconAuth
+from .oauth2 import OAuth2
 
 # pylint: disable=R0902  # Nine is reasonable
 # pylint: disable=R0912  # Currently at 13 branches
@@ -87,6 +87,7 @@ class ServiceClass:
         # Currently defaulting to validation enabled
         self.validate_payloads = kwargs.get("validate_payloads", True)
         self.refreshable = False
+        self.token_fail_reason = False
         client_id = kwargs.get("client_id", None)
         client_secret = kwargs.get("client_secret", None)
         if client_id and client_secret and not creds:
@@ -103,12 +104,13 @@ class ServiceClass:
         if auth_object:
             self.auth_object = auth_object
             if not self.authenticated():
-                _ = self.auth_object.token()
-                if _["status_code"] == 201:
-                    self.token = _["body"]["access_token"]
+                token_result = self.auth_object.token()
+                if token_result["status_code"] == 201:
+                    self.token = token_result["body"]["access_token"]
                     self.headers = {"Authorization": f"Bearer {self.token}"}
                 else:
                     self.token = False
+                    self.token_fail_reason = self.auth_object.token_fail_reason
                     self.headers = {}
             else:
                 self.token = self.auth_object.token_value
@@ -130,29 +132,29 @@ class ServiceClass:
             confirmed_base = confirm_base_url(base_url)
             self.base_url = confirmed_base
             if creds:
-                auth_object = FalconAuth(creds=creds,
-                                         base_url=confirmed_base,
-                                         proxy=proxy,
-                                         ssl_verify=self.ssl_verify,
-                                         timeout=self.timeout,
-                                         user_agent=user_agent
-                                         )
-                self.auth_object = auth_object
-                _ = self.auth_object.token()
-                if _["status_code"] == 201:
-                    self.token = _["body"]["access_token"]
+                self.auth_object = OAuth2(creds=creds,
+                                          base_url=confirmed_base,
+                                          proxy=proxy,
+                                          ssl_verify=self.ssl_verify,
+                                          timeout=self.timeout,
+                                          user_agent=user_agent
+                                          )
+                token_result = self.auth_object.token()
+                if token_result["status_code"] == 201:
+                    self.token = token_result["body"]["access_token"]
                     self.headers = {"Authorization": f"Bearer {self.token}"}
                     # Swap to the correct region if they've provided the incorrect one
-                    if "X-Cs-Region" not in _["headers"]:
+                    if "X-Cs-Region" not in token_result["headers"]:
                         # GovCloud autodiscovery is not currently supported
                         token_region = confirm_base_region(confirmed_base)
                     else:
-                        token_region = _["headers"]["X-Cs-Region"].replace("-", "")
+                        token_region = token_result["headers"]["X-Cs-Region"].replace("-", "")
                     requested_region = confirm_base_region(confirmed_base)
                     if token_region != requested_region:
                         self.base_url = confirm_base_url(token_region.upper())
                 else:
                     self.token = False
+                    self.token_fail_reason = self.auth_object.token_fail_reason
                     self.headers = {}
                 self.refreshable = True
             else:
