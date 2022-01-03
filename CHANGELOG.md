@@ -1,3 +1,18 @@
+# Version 0.9.0
+## Added features and functionality
++ Added: Token generation failure reason tracking to Service and Uber classes. Closes #501.
+    - `_service_class.py`
+    - `api_complete.py`
+    - `oauth2.py`
+
+    **Example usage**
+    ```python
+    from falconpy import Detects
+
+    detects = Detects(client_id="bad ID", client_secret="bad secret")
+    print(detects.token_fail_reason)
+    ```
+
 # Version 0.8.11
 ## Added features and functionality
 + Added: FileVantage Service Class and all related endpoints.
