@@ -89,6 +89,7 @@ class ServiceClass:
         self.refreshable = False
         self.token_fail_reason = None
         self.token_status = None
+        self.auth_object = None
         client_id = kwargs.get("client_id", None)
         client_secret = kwargs.get("client_secret", None)
         if client_id and client_secret and not creds:
@@ -161,7 +162,6 @@ class ServiceClass:
                     self.headers = {}
                 self.refreshable = True
             else:
-                self.auth_object = None
                 self.headers = {"Authorization": f"Bearer {access_token}"}
 
             self.proxy = proxy
