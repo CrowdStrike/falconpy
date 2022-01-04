@@ -603,3 +603,4 @@ MessageCenter
 yaleman
 Fal
 morcef
+PyCharm
