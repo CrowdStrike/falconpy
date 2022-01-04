@@ -14,6 +14,10 @@
         print(detects.token_fail_reason)
     ```
 
+## Issues resolved
++ Fixed: Code hint warning in PyCharm for missing auth_object definition within _service_class.py.
+
+
 # Version 0.8.11
 ## Added features and functionality
 + Added: FileVantage Service Class and all related endpoints.
