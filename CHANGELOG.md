@@ -10,7 +10,8 @@
     from falconpy import Detects
 
     detects = Detects(client_id="bad ID", client_secret="bad secret")
-    print(detects.token_fail_reason)
+    if detects.token_status != 201:
+        print(detects.token_fail_reason)
     ```
 
 # Version 0.8.11
