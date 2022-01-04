@@ -137,7 +137,7 @@ _detects_endpoints = [
         "includes all results. \n\nCommon filter options include:\n\n- `status`\n- `device.device_id`\n"
         "- `max_severity`\n\nThe full list of valid filter options is extensive. "
         "Review it in our [documentation inside the Falcon console]"
-        "(https://falcon.crowdstrike.com/support/documentation/2/query-api-reference#detections_fql).",
+        "(https://falcon.crowdstrike.com/documentation/45/falcon-query-language-fql).",
         "name": "filter",
         "in": "query"
       },
