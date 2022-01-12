@@ -5,3 +5,4 @@
 The examples within this folder focus on leveraging CrowdStrike's Falcon X Sandbox and Sample Uploads APIs to analyze potential malware in different environments.
 
 - [Analyze a single file](single_scan)
+- [Retrieve all artifacts for all Falcon X reports](get_all_artifacts.py)

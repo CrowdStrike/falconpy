@@ -50,10 +50,16 @@ _Coming Soon_
 | :--- | :--- |
 | [Report or export as CSV, all or selective CSP Falcon CSPM Policies](cspm_registration/get_cspm_policies.py) | |
 
+### Falcon Flight Control
+| Service Class | Uber Class |
+| :--- | :--- |
+| [Find child CID](flight_control/find_child_cid.py)
+
 ### Falcon X Sandbox
 | Service Class | Uber Class |
 | :--- | :--- |
 | [Analyze a single file](falconx_sandbox/single_scan) | [Analyze a single file](falconx_sandbox/single_scan) |
+| [Retrieve all artifacts for all reports](falconx_sandbox/get_all_artifacts.py) | |
 
 ### Hosts
 | Service Class | Uber Class |
