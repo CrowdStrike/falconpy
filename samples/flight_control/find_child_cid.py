@@ -24,7 +24,7 @@ from falconpy import Hosts, FlightControl, OAuth2
 
 def parse_command_line() -> object:
     """Parse the command line for inbound configuration parameters."""
-    parser = argparse.ArgumentParser(description="Falcon X Artifact retrieval")
+    parser = argparse.ArgumentParser(description="Falcon Flight Control child host CID lookup.")
     parser.add_argument(
         '-k',
         '--client_id',
