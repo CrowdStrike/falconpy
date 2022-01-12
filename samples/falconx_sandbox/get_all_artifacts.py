@@ -77,7 +77,7 @@ def get_artifact_list() -> list:
 
 def retrieve_all_artifacts():
     """Retrieve all artifacts found within the list of artifacts returned."""
-    download_message = "No artificts found within any reports reviewed."
+    download_message = "No artifacts found within any reports reviewed."
     # Loop thru all artifacts selected for download and download them according to format
     for artifact in get_artifact_list():
         if not os.path.exists(artifact[3]):
