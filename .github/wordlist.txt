@@ -48,6 +48,7 @@ CrowdStrike
 CrowdStrike's
 CSV
 CustomIOA
+CVE
 DeleteActionV
 DeleteAWSAccounts
 DeleteAWSAccountsMixin
