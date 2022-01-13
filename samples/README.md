@@ -19,6 +19,7 @@ These examples are provided as a quick start for your project.
     - [Quick Scan / Sample Uploads](#quick-scan--sample-uploads)
     - [Real Time Response](#real-time-response)
     - [Sample Uploads](#sample-uploads)
+    - [Spotlight Vulnerabilities](#spotlight-vulnerabilities)
 + [Suggestions](#suggestions)
 
 ## Authentication for these Examples
@@ -95,10 +96,17 @@ _Coming Soon_
 | [Quarantine a host](rtr/quarantine_hosts.py) | |
 | [Retrieve basic system information](rtr/pony) | |
 
+
 ### Sample Uploads
 | Service Class | Uber Class |
 | :--- | :--- |
 | [Upload, Retrieve and then Delete a file](sample_uploads/sample_uploads_service.py) | [Upload, Retrieve and then Delete a file](sample_uploads/sample_uploads_uber.py) |
+
+
+### Spotlight Vulnerabilities
+| Service Class | Uber Class |
+| :--- | :--- |
+| [Identify hosts with vulnerabilities by CVE](find_hosts_by_cve.py) | |
 
 
 ## Suggestions
