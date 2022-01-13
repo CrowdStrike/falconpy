@@ -202,14 +202,15 @@ if args.exclude:
 
 TABLE_FORMAT = "grid"
 if args.format:
-    for table_format in TABLE_FORMATS:
-        if args.format.strip().lower() == table_format:
-            TABLE_FORMAT = table_format
+    table_format = args.format.strip().lower()
+    if table_format in TABLE_FORMATS:
+        TABLE_FORMAT = table_format
 
 SORT = "asc"
 if args.sort:
-    if args.sort.strip().lower() in ["asc", "desc"]:
-        SORT = args.sort.strip().lower()
+    sort_dir = args.sort.strip().lower()
+    if sort_dir in ["asc", "desc"]:
+        SORT = sort_dir
 
 auth = OAuth2(client_id=args.client_id,
               client_secret=args.client_secret,
