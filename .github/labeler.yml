@@ -23,9 +23,11 @@ code samples:
 - samples/cspm_registration/*.py
 - samples/discover_aws/*.py
 - samples/falconx_sandbox/*.py
+- samples/flight_control/*.py
 - samples/hosts/*.py
 - samples/ioc/*.py
 - samples/malquery/*.py
 - samples/rtr/*.py
 - samples/sample_uploads/*.py
+- samples/spotlight/*.py
 - samples/quick_scan/*.py
