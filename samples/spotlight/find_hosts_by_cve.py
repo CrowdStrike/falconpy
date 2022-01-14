@@ -234,6 +234,7 @@ def get_match_details(match_list: list) -> list:
     if SORT_REVERSE:
         reversing = True
 
+    inform("[Sorting results]")
     returned = sorted(returned, key=lambda item: item[SORT], reverse=reversing)
 
     return returned
