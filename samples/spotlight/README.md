@@ -142,7 +142,12 @@ Retrieve hosts by CVE vulnerability.
 
 Creation date: 01.13.2021 - jshcodes@CrowdStrike
 
-This solution requires crowdstrike-falconpy v0.8.6+ and tabulate
+This solution requires the crowdstrike-falconpy (v0.8.6+) and tabulate packages.
+    python3 -m pip install crowdstrike-falconpy tabulate
+
+Required API scopes
+    Hosts: READ
+    Spotlight: READ
 
 optional arguments:
   -h, --help            show this help message and exit
