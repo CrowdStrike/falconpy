@@ -113,7 +113,7 @@ class SpotlightCVEMatch():  # pylint: disable=R0902
 def parse_command_line() -> object:
     """Parse the command line for inbound configuration parameters."""
     parser = ArgumentParser(
-        description=BANNER,
+        description=__doc__,
         formatter_class=RawTextHelpFormatter
         )
     parser.add_argument(
@@ -167,7 +167,17 @@ def parse_command_line() -> object:
     parser.add_argument(
         '-o',
         '--sort',
-        help='Sort results by creation time (asc or desc).',
+        help='Sort results by display column.\n'
+        "(cve, score, severity, cve_description, created_on, updated_on,\n"
+        " hostname, local_ip, os_version, service_provider, remediation)",
+        required=False
+    )
+
+    parser.add_argument(
+        '-r',
+        '--reverse',
+        help='Reverse the sort direction.',
+        action="store_true",
         required=False
     )
 
@@ -190,10 +200,7 @@ def inform(msg: str):
 
 def get_spotlight_matches(cves: list) -> list:
     """Retrieve a list of matches to the CVEs specified."""
-    returned = spotlight.query_vulnerabilities(
-        filter=f"cve.id:{cves}",
-        sort=f"created_timestamp|{SORT}"
-        )
+    returned = spotlight.query_vulnerabilities(filter=f"cve.id:{cves}")
     if returned["status_code"] >= 400:
         raise SystemExit(returned["body"]["errors"][0]["message"])
 
@@ -223,11 +230,14 @@ def get_match_details(match_list: list) -> list:
         inform(f"[{row['cve']}] Found {row['hostname']}/{row['local_ip']}")
         returned.append(row)
 
+    reversing = False
+    if SORT_REVERSE:
+        reversing = True
+
+    returned = sorted(returned, key=lambda item: item[SORT], reverse=reversing)
+
     return returned
 
-
-# Use our module docstring for the banner to our help text
-BANNER = __doc__
 
 # Allow formats for our tabular output
 TABLE_FORMATS = [
@@ -259,12 +269,16 @@ if args.format:
     if table_format in TABLE_FORMATS:
         TABLE_FORMAT = table_format
 
-SORT = "asc"
+SORT = "created_on"
 if args.sort:
-    sort_dir = args.sort.strip().lower()
-    if sort_dir in ["asc", "desc"]:
-        SORT = sort_dir
+    sort_types = ["cve", "score", "severity", "cve_description", "created_on", "updated_on",
+                  "hostname", "local_ip", "os_version", "service_provider", "remediation"
+                  ]
+    sort_type = args.sort.strip().lower()
+    if sort_type in sort_types:
+        SORT = sort_type
 
+SORT_REVERSE = args.reverse
 PROGRESS = args.show_progress
 
 # Connect to the API and create instances of the SpotlightVulnerabilities and Hosts Service Classes
