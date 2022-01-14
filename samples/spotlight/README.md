@@ -167,7 +167,7 @@ optional arguments:
                         latext, latex_raw, latex_booktabs, latex_longtable, textile, tsv)
   -o SORT, --sort SORT  Sort results by display column.
                         (cve, score, severity, cve_description, created_on, updated_on,
-                         hostname, local_ip, os_version, service_provider, remediation)
+                        hostname, local_ip, os_version, service_provider, remediation)
   -r, --reverse         Reverse the sort direction.
   -p, --show_progress   Show a progress indicator as data is retrieved.
 ```
