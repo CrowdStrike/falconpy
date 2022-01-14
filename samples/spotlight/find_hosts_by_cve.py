@@ -14,12 +14,31 @@
 
 Creation date: 01.13.2021 - jshcodes@CrowdStrike
 
-This solution requires crowdstrike-falconpy v0.8.6+ and tabulate
+This solution requires the crowdstrike-falconpy (v0.8.6+) and tabulate packages.
+    python3 -m pip install crowdstrike-falconpy tabulate
+
+Required API scopes
+    Hosts: READ
+    Spotlight: READ
 """
 from argparse import ArgumentParser, RawTextHelpFormatter
 import json
-from tabulate import tabulate
-from falconpy import SpotlightVulnerabilities, Hosts, OAuth2
+try:
+    from tabulate import tabulate
+except ImportError as no_tabulate:
+    raise SystemExit(
+        "The tabulate library is not installed.\n"
+        "Install this package using the following command:\n"
+        "   python3 -m pip install tabulate"
+        ) from no_tabulate
+try:
+    from falconpy import SpotlightVulnerabilities, Hosts, OAuth2
+except ImportError as no_falconpy:
+    raise SystemExit(
+        "The crowdstrike-falconpy package is not installed.\n"
+        "Install this package using the following command:\n"
+        "   python3 -m pip install crowdstrike-falconpy"
+        ) from no_falconpy
 
 
 class SpotlightCVEMatch():  # pylint: disable=R0902
@@ -113,7 +132,7 @@ class SpotlightCVEMatch():  # pylint: disable=R0902
 def parse_command_line() -> object:
     """Parse the command line for inbound configuration parameters."""
     parser = ArgumentParser(
-        description=BANNER,
+        description=__doc__,
         formatter_class=RawTextHelpFormatter
         )
     parser.add_argument(
@@ -134,16 +153,14 @@ def parse_command_line() -> object:
         help='CrowdStrike API region (us1, us2, eu1, usgov1)\n'
         'NOT required unless you are using `usgov1`',
         required=False
-    )
-
+        )
     parser.add_argument(
         '-c',
         '--cve',
         help='CVE IDs to search for. (ex: CVE-2022-12345,CVE-2022-54321)\n'
         'Delimit with a comma (no spaces). The string CVE- is not required.',
         required=True
-    )
-
+        )
     parser.add_argument(
         '-x',
         '--exclude',
@@ -152,8 +169,7 @@ def parse_command_line() -> object:
         '(cve, score, severity, cve_description, created_on, updated_on,\n'
         'hostname, local_ip, os_version, service_provider, remediation)',
         required=False
-    )
-
+        )
     parser.add_argument(
         '-f',
         '--format',
@@ -162,22 +178,29 @@ def parse_command_line() -> object:
         'pretty, psql, rst, mediawiki, moinmoin, youtrack, html, unsafehtml, \n'
         'latext, latex_raw, latex_booktabs, latex_longtable, textile, tsv)',
         required=False
-    )
-
+        )
     parser.add_argument(
         '-o',
         '--sort',
-        help='Sort results by creation time (asc or desc).',
+        help='Sort results by display column.\n'
+        "(cve, score, severity, cve_description, created_on, updated_on,\n"
+        "hostname, local_ip, os_version, service_provider, remediation)",
         required=False
-    )
-
+        )
+    parser.add_argument(
+        '-r',
+        '--reverse',
+        help='Reverse the sort direction.',
+        action="store_true",
+        required=False
+        )
     parser.add_argument(
         '-p',
         '--show_progress',
         help='Show a progress indicator as data is retrieved.',
         action="store_true",
         required=False
-    )
+        )
 
     return parser.parse_args()
 
@@ -190,10 +213,7 @@ def inform(msg: str):
 
 def get_spotlight_matches(cves: list) -> list:
     """Retrieve a list of matches to the CVEs specified."""
-    returned = spotlight.query_vulnerabilities(
-        filter=f"cve.id:{cves}",
-        sort=f"created_timestamp|{SORT}"
-        )
+    returned = spotlight.query_vulnerabilities(filter=f"cve.id:{cves}")
     if returned["status_code"] >= 400:
         raise SystemExit(returned["body"]["errors"][0]["message"])
 
@@ -204,8 +224,7 @@ def remove_exclusions(resultset: dict) -> dict:
     """Remove requested columns from the table display."""
     for result in resultset:
         for exclusion in EXCLUDE:
-            if not isinstance(result, str):
-                del result[exclusion]
+            del result[exclusion]
 
     return resultset
 
@@ -213,21 +232,25 @@ def remove_exclusions(resultset: dict) -> dict:
 def get_match_details(match_list: list) -> list:
     """Retrieve details for individual matches to the specified CVEs."""
     returned = []
-    inform("[Retrieve CVE matches]")
+    inform("[ Retrieve matches ]")
     match_results = spotlight.get_vulnerabilities(ids=match_list)
     if match_results["status_code"] >= 400:
         raise SystemExit(match_results["body"]["errors"][0]["message"])
 
     for result in match_results["body"]["resources"]:
         row = SpotlightCVEMatch(result).to_object()
-        inform(f"[{row['cve']}] Found {row['hostname']}/{row['local_ip']}")
+        inform(f"[ {row['cve']} ] Found {row['hostname']}/{row['local_ip']}")
         returned.append(row)
+
+    reversing = False
+    if SORT_REVERSE:
+        reversing = True
+
+    inform("[ Results sort ]")
+    returned = sorted(returned, key=lambda item: item[SORT], reverse=reversing)
 
     return returned
 
-
-# Use our module docstring for the banner to our help text
-BANNER = __doc__
 
 # Allow formats for our tabular output
 TABLE_FORMATS = [
@@ -259,12 +282,16 @@ if args.format:
     if table_format in TABLE_FORMATS:
         TABLE_FORMAT = table_format
 
-SORT = "asc"
+SORT = "created_on"
 if args.sort:
-    sort_dir = args.sort.strip().lower()
-    if sort_dir in ["asc", "desc"]:
-        SORT = sort_dir
+    sort_types = ["cve", "score", "severity", "cve_description", "created_on", "updated_on",
+                  "hostname", "local_ip", "os_version", "service_provider", "remediation"
+                  ]
+    sort_type = args.sort.strip().lower()
+    if sort_type in sort_types:
+        SORT = sort_type
 
+SORT_REVERSE = args.reverse
 PROGRESS = args.show_progress
 
 # Connect to the API and create instances of the SpotlightVulnerabilities and Hosts Service Classes
@@ -291,15 +318,15 @@ HEADERS = {
 }
 
 # Run the process
-inform("[Process startup]")
+inform("[ Process startup ]")
 details = get_match_details(get_spotlight_matches(CVE_LIST))
 
 # Display results
-inform("[Results display]")
+inform("[ Results display ]")
 print(
     tabulate(
         tabular_data=remove_exclusions(details),
-        headers=remove_exclusions(HEADERS),
+        headers=HEADERS,
         tablefmt=TABLE_FORMAT
         )
     )

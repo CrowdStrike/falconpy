@@ -31,36 +31,66 @@ In order to run this demonstration, you you will need access to CrowdStrike API 
 ### Execution syntax
 The following command will retrieve a list of hosts matching the specified CVE.
 
+#### Basic usage
 ```shell
-python3 find_hosts_by_cve.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c 2021-22947
+python3 find_hosts_by_cve.py -k "API_CLIENT_ID_HERE" -s "API_CLIENT_SECRET_HERE" -c CVE-2021-22947
 ```
 
 > You do not need to prepend the `CVE-` string to your CVE ID. Both formats are accepted.
-
-> You can search for multiple CVEs by passing a comma delimited string for the `-c` argument.
-
-You can filter columns from the result display using the `-x` argument.
-
 ```shell
-python3 find_hosts_by_cve.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c CVE-2021-22947 -x cve_description
+python3 find_hosts_by_cve.py -k "API_CLIENT_ID_HERE" -s "API_CLIENT_SECRET_HERE" -c 2021-22947
 ```
 
+> You can search for multiple CVEs by passing a comma delimited string for the `-c` argument.
+```shell
+python3 find_hosts_by_cve.py -k "API_CLIENT_ID_HERE" -s "API_CLIENT_SECRET_HERE" -c CVE-2021-22947,CVE-2021-36085
+```
+
+#### Excluding columns
+You can exclude columns from the result display using the `-x` argument.
+
+```shell
+python3 find_hosts_by_cve.py -k "API_CLIENT_ID_HERE" -s "API_CLIENT_SECRET_HERE" -c CVE-2021-22947 -x cve_description
+```
+
+#### Enabling the progress indicator
 To show a progress indicator, use the `-p` option.
 
 ```shell
-python3 find_hosts_by_cve.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c 2021-22947 -p
+python3 find_hosts_by_cve.py -k "API_CLIENT_ID_HERE" -s "API_CLIENT_SECRET_HERE" -c 2021-22947 -p
 ```
 
-Sort results by creation date (`asc` / `desc`) using the `-o` argument.
+#### Changing the sort
+By default, results are sorted by creation date (`created_on`). You can specify the column to sort by using the `-o` argument.
 
 ```shell
-python3 find_hosts_by_cve.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c 2021-22947 -o desc
+python3 find_hosts_by_cve.py -k "API_CLIENT_ID_HERE" -s "API_CLIENT_SECRET_HERE" -c 2021-22947 -o local_ip
 ```
 
-Multiple table formats are supported with the `-f` argument.
+##### Available sort columns
+- cve
+- score
+- severity
+- cve_description
+- created_on
+- updated_on
+- hostname
+- local_ip
+- os_version
+- service_provider
+- remediation
+
+By default, results are sorted in ascending order. You can change this behavior using the `-r` argument.
 
 ```shell
-python3 find_hosts_by_cve.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c 2021-22947 -f simple
+python3 find_hosts_by_cve.py -k "API_CLIENT_ID_HERE" -s "API_CLIENT_SECRET_HERE" -c 2021-22947 -o local_ip -r
+```
+
+#### Changing the tabular display format
+Multiple formats are supported for displaying results. You can change format using the `-f` argument. Invalid selections are ignored.
+
+```shell
+python3 find_hosts_by_cve.py -k "API_CLIENT_ID_HERE" -s "API_CLIENT_SECRET_HERE" -c 2021-22947 -f simple
 ```
 
 ##### Available table formats
@@ -94,7 +124,7 @@ Command-line help is available via the `-h` argument.
 
 ```shell
 python3 find_hosts_by_cve.py -h
-usage: find_hosts_by_cve.py [-h] -k CLIENT_ID -s CLIENT_SECRET [-b BASE_URL] -c CVE [-x EXCLUDE] [-f FORMAT] [-o SORT] [-p]
+usage: find_hosts_by_cve.py [-h] -k CLIENT_ID -s CLIENT_SECRET [-b BASE_URL] -c CVE [-x EXCLUDE] [-f FORMAT] [-o SORT] [-r] [-p]
 
 Retrieve hosts by CVE vulnerability.
 
@@ -135,7 +165,10 @@ optional arguments:
                         (plain, simple, github, grid, fancy_grid, pipe, orgtbl, jira, presto,
                         pretty, psql, rst, mediawiki, moinmoin, youtrack, html, unsafehtml,
                         latext, latex_raw, latex_booktabs, latex_longtable, textile, tsv)
-  -o SORT, --sort SORT  Sort results by creation time (asc or desc).
+  -o SORT, --sort SORT  Sort results by display column.
+                        (cve, score, severity, cve_description, created_on, updated_on,
+                        hostname, local_ip, os_version, service_provider, remediation)
+  -r, --reverse         Reverse the sort direction.
   -p, --show_progress   Show a progress indicator as data is retrieved.
 ```
 
