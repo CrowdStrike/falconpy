@@ -140,4 +140,4 @@ optional arguments:
 ```
 
 ### Example source code
-The soruce code for this example can be found [here](find_hosts_by_cve.py).
+The source code for this example can be found [here](find_hosts_by_cve.py).
