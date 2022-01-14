@@ -106,7 +106,7 @@ _Coming Soon_
 ### Spotlight Vulnerabilities
 | Service Class | Uber Class |
 | :--- | :--- |
-| [Identify hosts with vulnerabilities by CVE](find_hosts_by_cve.py) | |
+| [Identify hosts with vulnerabilities by CVE](spotlight#identify-hosts-with-vulnerabilities-by-cve) | |
 
 
 ## Suggestions
