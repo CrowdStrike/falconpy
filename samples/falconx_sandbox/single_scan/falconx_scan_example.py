@@ -267,15 +267,24 @@ else:
     # No error, display the full analysis
     print(f"Detonated on: {analysis['environment_description']}{' ' * 20}")
     print(f"File type: {analysis['file_type']}")
-    if len(analysis['classification']):
-        print("\nClassifications")
-        for classification in analysis['classification']:
-            print(classification)
-    if len(analysis['extracted_interesting_strings']):
-        print("\nInteresting strings")
-        for interesting in analysis['extracted_interesting_strings']:
-            print(f"Source: {interesting['source']}   Type: {interesting['type']}")
-            print(f"{interesting['value']}\n")
+    try:
+        if len(analysis['classification']):
+            print("\nClassifications")
+            for classification in analysis['classification']:
+                print(classification)
+    except KeyError:
+        # No classification branch, skip
+        pass
+    try:
+        if len(analysis['extracted_interesting_strings']):
+            print("\nInteresting strings")
+            for interesting in analysis['extracted_interesting_strings']:
+                print(f"Source: {interesting['source']}   Type: {interesting['type']}")
+                print(f"{interesting['value']}\n")
+    except KeyError:
+        # No extracted strings branch
+        pass
+
     print(f"\nVerdict: {analysis['verdict']}")
 
 # Inform the user of our deletion failure
