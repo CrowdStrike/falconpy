@@ -29,7 +29,7 @@ except ImportError as no_tabulate:
     raise SystemExit(
         "The tabulate library is not installed.\n"
         "Install this package using the following command:\n"
-        "python3 -m pip install tabulate"
+        "   python3 -m pip install tabulate"
         ) from no_tabulate
 try:
     from falconpy import SpotlightVulnerabilities, Hosts, OAuth2
