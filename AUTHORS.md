@@ -45,6 +45,7 @@ The following members of the community have made requests, suggestions, code con
 + @KennyOps, `Kenny Mancuso`
 + @morcef
 + @ciberesponce, `Andrew Harris`
++ @philldtaylor
 
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
