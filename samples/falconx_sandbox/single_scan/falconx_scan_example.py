@@ -222,7 +222,7 @@ inform(f"[  Upload  ] {running_time(start_time)}")
 
 # Upload our test file
 response = upload_file(args.file,
-                       f"FalconX File Analysis: {time.strftime('%v %r %Z')}",
+                       f"FalconX File Analysis: {time.strftime('%V %r %Z')}",
                        "Falcon X upload and scan example",
                        confidential=False
                        )
