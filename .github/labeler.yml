@@ -31,3 +31,4 @@ code samples:
 - samples/sample_uploads/*.py
 - samples/spotlight/*.py
 - samples/quick_scan/*.py
+- samples/sensor_download/*.py
