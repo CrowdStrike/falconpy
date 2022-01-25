@@ -35,6 +35,7 @@ parser.add_argument('-d', '--download', help="Shortcut for '--command download'"
 parser.add_argument('-c', '--command', help='Command to perform. (list or download, defaults to list)', required=False)
 parser.add_argument('-o', '--os', help='Sensor operating system', required=False)
 parser.add_argument('-v', '--osver', help='Sensor operating system version', required=False)
+parser.add_argument('-n', '--filename', help="Name to use for downloaded file", required=False)
 parser.add_argument('-f',
                     '--format',
                     help='Table format to use for display.\n'
@@ -70,6 +71,10 @@ if args.os:
         OS = "Container"
     if check_os in ["idp", "identity", "identity protection"]:
         OS = "Identity*"
+
+FILENAME = ""
+if args.filename:
+    FILENAME = args.filename
 
 FORMAT = "fancy_grid"
 if args.format:
@@ -127,10 +132,13 @@ elif CMD in "download":
     for sensor in sensors["body"]["resources"]:
         if sensor["os_version"] in ["", OSVER]:
             if DO_DOWNLOAD:
-                filename = sensor["name"]
                 print(f"Downloading {sensor['description']} version {sensor['version']}")
-                if sensor["os"] in ["Windows", "macOS"]:
-                    filename = f"{filename[:-4]}_{sensor['version']}{filename[len(filename)-4:]}"
+                if not FILENAME:
+                    filename = sensor["name"]
+                    if sensor["os"] in ["Windows", "macOS"]:
+                        filename = f"{filename[:-4]}_{sensor['version']}{filename[len(filename)-4:]}"
+                else:
+                    filename=FILENAME
                 download = falcon.command(action="DownloadSensorInstallerById", id=sensor["sha256"])
                 if isinstance(download, dict):
                     raise SystemExit("Unable to download requested sensor.")
