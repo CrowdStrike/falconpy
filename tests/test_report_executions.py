@@ -3,6 +3,7 @@ test_scheduled_reports.py - This class tests the Scheduled Reports service class
 """
 import os
 import sys
+import pytest
 
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
@@ -17,7 +18,7 @@ falcon = ReportExecutions(auth_object=config)
 AllowedResponses = [200, 201, 403, 404, 429]  # Getting 403's atm
 
 
-class TestIOC:
+class TestReportExecutions:
     def ioc_run_all_tests(self):
         error_checks = True
         tests = {
@@ -32,10 +33,12 @@ class TestIOC:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
 
-            # print(f"{key} operation returned a {tests[key]} status code")
-            # print(tests[key])
+                # print(tests[key])
 
         return error_checks
 
+    @pytest.mark.skipif(config.base_url == "https://api.laggar.gcw.crowdstrike.com",
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     def test_all_functionality(self):
         assert self.ioc_run_all_tests() is True
