@@ -71,9 +71,9 @@ if args.os:
         OS = "Container"
     if check_os in ["idp", "identity", "identity protection"]:
         OS = "Identity*"
-os_filter = ""
+OS_FILTER = ""
 if OS:
-    os_filter = f"os:'{str(OS)}'"
+    OS_FILTER = f"os:'{str(OS)}'"
 
 FILENAME = ""
 if args.filename:
@@ -93,7 +93,7 @@ if args.osver:
 
 # Login to the Falcon API and retrieve our list of sensors
 falcon = APIHarness(client_id=CLIENTID, client_secret=CLIENTSECRET)
-sensors = falcon.command(action="GetCombinedSensorInstallersByQuery", filter=os_filter)
+sensors = falcon.command(action="GetCombinedSensorInstallersByQuery", filter=OS_FILTER)
 if CMD in "list":
     # List sensors
     data = []
@@ -116,7 +116,7 @@ if CMD in "list":
         headers.pop("file_size")
         headers.pop("file_type")
     for sensor in sensors["body"]["resources"]:
-        if sensor["os_version"] in ["", OSVER]:
+        if OSVER in [sensor["os_version"], ""]:
             if not SHOW_ALL:
                 sensor.pop("description")
                 sensor.pop("platform")
@@ -133,7 +133,7 @@ elif CMD in "download":
     # Download sensors
     DO_DOWNLOAD = True
     for sensor in sensors["body"]["resources"]:
-        if sensor["os_version"] in ["", OSVER]:
+        if OSVER in [sensor["os_version"], ""]:
             if DO_DOWNLOAD:
                 print(f"Downloading {sensor['description']} version {sensor['version']}")
                 if not FILENAME:
