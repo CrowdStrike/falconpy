@@ -19,6 +19,7 @@ These examples are provided as a quick start for your project.
     - [Quick Scan / Sample Uploads](#quick-scan--sample-uploads)
     - [Real Time Response](#real-time-response)
     - [Sample Uploads](#sample-uploads)
+    - [Sensor Download](#sensor-download)
     - [Spotlight Vulnerabilities](#spotlight-vulnerabilities)
 + [Suggestions](#suggestions)
 
@@ -102,6 +103,10 @@ _Coming Soon_
 | :--- | :--- |
 | [Upload, Retrieve and then Delete a file](sample_uploads/sample_uploads_service.py) | [Upload, Retrieve and then Delete a file](sample_uploads/sample_uploads_uber.py) |
 
+### Sensor Download
+| Service Class | Uber Class |
+| :--- | :--- |
+| | [List or download sensor by operating system and version](sensor_download/download_sensor.py) |
 
 ### Spotlight Vulnerabilities
 | Service Class | Uber Class |
