@@ -71,6 +71,9 @@ if args.os:
         OS = "Container"
     if check_os in ["idp", "identity", "identity protection"]:
         OS = "Identity*"
+os_filter = ""
+if OS:
+    os_filter = f"os:'{str(OS)}'"
 
 FILENAME = ""
 if args.filename:
@@ -90,7 +93,7 @@ if args.osver:
 
 # Login to the Falcon API and retrieve our list of sensors
 falcon = APIHarness(client_id=CLIENTID, client_secret=CLIENTSECRET)
-sensors = falcon.command(action="GetCombinedSensorInstallersByQuery", filter=f"os:'{str(OS)}'")
+sensors = falcon.command(action="GetCombinedSensorInstallersByQuery", filter=os_filter)
 if CMD in "list":
     # List sensors
     data = []
