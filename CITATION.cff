@@ -1,8 +1,8 @@
 cff-version: 1.2.0
 title: 'FalconPy: The CrowdStrike Falcon SDK for Python'
 message: >-
-  If you use this software, please cite it using the
-  metadata from this file.
+  If you use this software, and wish to cite the origins, 
+  please use metadata from this file.
 type: software
 authors:
   - given-names: 
@@ -13,6 +13,9 @@ authors:
     affiliation: CrowdStrike
   - given-names: Dixon
     family-names: Styres
+    affiliation: CrowdStrike
+  - given-names: Devin
+    family-names: Cargill
     affiliation: CrowdStrike
 repository-code: 'https://github.com/CrowdStrike/falconpy'
 url: 'https://www.falconpy.io'
