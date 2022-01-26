@@ -11,6 +11,7 @@ from the community.
 | :--- | :--- |
 | @jshcodes, `Joshua Hiller` | Lord of the FalconPys 🪰 |
 | @crowdstrikedcs, `Dixon Styres` | Author |
+| @dcargs, `Devin Cargill` | Author |
 | @isimluk, `Šimon Lukašík` | Sanity Checker |
 | @jlangdev, `Josh Lang` | Maintainer |
 | @redhatrises, `Gabe Alford` | Maintainer |
