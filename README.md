@@ -27,7 +27,7 @@ FalconPy also supports interaction with all CrowdStrike regions, custom connecti
 
 > If the CrowdStrike APIs were rings of great power, that the Dark Lord Sauron gifted to the kings of dwarves, elves and men, then CrowdStrike's FalconPy would be the One Ring.
 > 
-> "...One SDK to rule them all, One SDK to find them, One SDK to bring them all and in the darkness bind them."
+> "... One SDK to rule them all, One SDK to find them, One SDK to bring them all and in the darkness bind them."
 
 #### Supported versions of Python
 FalconPy was developed for Python 3, and does not support versions of Python below 3.6. Every commit to the FalconPy code base is tested for functionality using all versions of Python the library currently supports.
