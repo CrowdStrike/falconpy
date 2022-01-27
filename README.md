@@ -48,7 +48,7 @@ FalconPy has been tested on the following operating systems.
 Details regarding supported operating systems and Python versions, and project security and testing procedures can be found [here](https://github.com/CrowdStrike/falconpy/blob/main/SECURITY.md).
 
 ### Components
-This SDK provides two distinct methods for interacting with CrowdStrike's Falcon APIs: 
+The CrowdStrike Falcon SDK for Python provides two distinct methods for interacting with CrowdStrike's Falcon APIs: 
 
 - [Service Classes](#service-classes) - each Service Class represents a single API service collection, there is one Service Class per collection.
 - [The Uber Class](#the-uber-class) - an all-in-one class that provides a singular interface for the entire CrowdStrike API.
