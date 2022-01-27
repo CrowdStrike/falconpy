@@ -2,140 +2,259 @@
 
 [![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)<br/>
 
-# FalconPy - *The CrowdStrike Falcon SDK for Python 3*
-![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy)
-[![CodeQL](https://github.com/CrowdStrike/falconpy/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/codeql-analysis.yml)
-![CI Test Coverage](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/tests/coverage.svg)
-![OSS Lifecycle](https://img.shields.io/osslifecycle/crowdstrike/falconpy)<br/>
+# FalconPy - The CrowdStrike Falcon SDK for Python
+
+[![Repo status](https://img.shields.io/osslifecycle/crowdstrike/falconpy?label=repo%20status)](https://github.com/CrowdStrike/falconpy/graphs/code-frequency)
+[![Package Status](https://img.shields.io/pypi/status/crowdstrike-falconpy?label=package%20status)](https://pypi.org/project/crowdstrike-falconpy/)
+[![PyPI](https://img.shields.io/pypi/v/crowdstrike-falconpy?label=current%20version)](https://pypi.org/project/crowdstrike-falconpy/#history)
+[![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy)](https://pypi.org/project/crowdstrike-falconpy/#files)
+[![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy)](https://pypi.org/project/crowdstrike-falconpy/#files)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy)](https://pypistats.org/packages/crowdstrike-falconpy)
+
 The FalconPy SDK contains a collection of Python classes that abstract CrowdStrike Falcon OAuth2 API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
 
-## Table of Contents
-+ [Overview](#overview)
-    - [Service Classes](#service-classes)
-    - [The Uber Class](#the-uber-class)
-+ [Installation & Removal](#installation--removal)
-+ [Contributing](#contributing)
-+ [Support & Community Forums](#support--community-forums)
-+ [Documentation & Collateral](#documentation--collateral)
++ [Overview](#overview-mag_right)
++ [Quick Start](#quick-start-dizzy)
++ [Documentation and Support](#documentation-and-support-book)
++ [Contribute to FalconPy](#contribute-to-falconpy-coffee)
 
-## Overview
-This SDK provides two distinct methods for interacting with CrowdStrike's Falcon OAuth2 APIs: [Service Classes](#service-classes) and the [Uber Class](#the-uber-class).
-![Class Types](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/class_types.png)
+## Overview :mag_right:
+There are a large number of CrowdStrike Falcon API service collections (45+) collectively containing hundreds of individual operations, all of which are accessible to your project via FalconPy.
+
+FalconPy also supports interaction with all CrowdStrike regions, custom connection and response timeouts, 
+routing requests thru a list of proxies, disabling SSL verification, and custom header configuration.
+
+> If the CrowdStrike APIs were rings of great power, that the Dark Lord Sauron gifted to the kings of dwarves, elves and men, then CrowdStrike's FalconPy would be the One Ring.
+> 
+> _"One SDK to rule them all, One SDK to find them, One SDK to bring them all and in the darkness bind them."_
+
+#### Supported versions of Python
+FalconPy was developed for Python 3, and does not support versions of Python below 3.6. Every commit to the FalconPy code base is unit tested for functionality using all versions of Python the library currently supports.
+
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy?logo=python&label=Supported%20versions&logoColor=white)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_ubuntu.yml)
+
+> While Python 3.5 should not have problems running FalconPy, as of February 2021 this version is no longer analyzed as part of our unit testing.
+
+
+#### Supported Operating Systems
+FalconPy has been tested on the following operating systems.
+
+[![Amazon Linux](https://img.shields.io/badge/-Amazon-darkgreen?logo=amazon&style=for-the-badge&labelColor=teal)](https://aws.amazon.com/amazon-linux-ami/)
+[![CentOS](https://img.shields.io/badge/-CentOS-magenta?logo=centos&style=for-the-badge&labelColor=purple)](https://www.centos.org/)
+[![Fedora](https://img.shields.io/badge/-Fedora-teal?logo=fedora&style=for-the-badge&labelColor=darkblue)](https://getfedora.org/)
+[![RedHat](https://img.shields.io/badge/-RedHat-red?logo=redhat&style=for-the-badge&labelColor=maroon)](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux)
+[![macOS](https://img.shields.io/badge/-macOS-silver?logo=apple&style=for-the-badge&labelColor=gray)](https://www.apple.com/macos/)
+[![Windows](https://img.shields.io/badge/-Windows-blue?logo=windows&style=for-the-badge&labelColor=darkblue)](https://www.microsoft.com/en-us/windows/)
+
+[![Debian](https://img.shields.io/badge/-Debian-darkred?logo=debian&style=for-the-badge&labelColor=red)](https://www.debian.org/)
+[![Kali](https://img.shields.io/badge/-Kali-gray?logo=kalilinux&logoColor=red&style=for-the-badge&labelColor=black)](https://www.kali.org/)
+[![Pop! OS](https://img.shields.io/badge/-Pop!%20OS-orange?logo=popos&logoColor=black&style=for-the-badge&labelColor=yellow)](https://pop.system76.com/)
+[![Ubuntu](https://img.shields.io/badge/-Ubuntu-964?logo=ubuntu&style=for-the-badge&labelColor=tan)](https://ubuntu.com/)
+[![Arch](https://img.shields.io/badge/-Arch-darkgray?logo=archlinux&style=for-the-badge&labelColor=gray)](https://archlinux.org/)
+[![SUSE](https://img.shields.io/badge/-SUSE-yellow?logo=suse&style=for-the-badge&labelColor=orange)](https://www.suse.com/)
+
+Details regarding supported operating systems and Python versions, and project security and testing procedures can be found [here](https://github.com/CrowdStrike/falconpy/blob/main/SECURITY.md).
+
+### Components
+The CrowdStrike Falcon SDK for Python provides two distinct methods for interacting with CrowdStrike's API. 
+
+| **[Service Classes](#service-classes)** | **[The Uber Class](#the-uber-class)** |
+| :-- | :-- |
+| <BR/>[![Service Classes](docs/asset/service-class-relationships.png)](#service-classes) | [![The Uber Class](docs/asset/uber-class-relationships.png)](#the-uber-class) | 
+| Each Service Class represents a single CrowdStrike API service collection providing an interface to the [operations available](https://www.falconpy.io/Operations/Operations-by-Collection.html) within that service collection.| An all-in-one class that provides a singular interface for [all operations](https://www.falconpy.io/Operations/All-Operations.html) in every CrowdStrike API service collection. |
+
 
 ### Service Classes
-Representing a single API service collection, each service class has a method defined for every operation available in that service collection.
+Representing a single CrowdStrike Falcon API service collection, each Service Class has a method defined for [every operation available](https://www.falconpy.io/Operations/Operations-by-Collection.html) within that service collection.
 
-| Service Collection | Code Location |
-|:-|:-|
-| [CrowdStrike Device Control](https://falcon.crowdstrike.com/documentation/167/usb-device-control-policy-apis) | [device_control_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/device_control_policies.py) |
-| [CrowdStrike Sensor Update Policy Management](https://falcon.crowdstrike.com/documentation/201/sensor-update-policy-apis) | [sensor_update_policy.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_update_policy.py) |
-| CrowdStrike Custom Indicators of Attack (IOAs) | [custom_ioa.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/custom_ioa.py) <br/> [ioa_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ioa_exclusions.py)|
-| [CrowdStrike Custom Indicators of Compromise (IOCs)](https://falcon.crowdstrike.com/support/documentation/88/custom-ioc-apis) | [ioc.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ioc.py) <BR/> [iocs.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/iocs.py) ![#f03c15](https://via.placeholder.com/10/f03c15/000000?text=+) <small>*Deprecated*</small> |
-| [CrowdStrike Detections](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [detects.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/detects.py) |
-| [CrowdStrike Falcon Discover](https://falcon.crowdstrike.com/documentation/197/falcon-discover-apis) | [discover.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/discover.py) |
-| [CrowdStrike Event Streams](https://falcon.crowdstrike.com/support/documentation/89/event-streams-apis)| [event_streams.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/event_streams.py) |
-| [CrowdStrike Falcon Container](https://falcon.crowdstrike.com/documentation/146/falcon-container-sensor-for-linux) | [falcon_container.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falcon_container.py) |
-| [CrowdStrike Falcon Horizon](https://falcon.crowdstrike.com/support/documentation/137/falcon-horizon-apis) | [cspm_registration.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/cspm_registration.py) |
-| [CrowdStrike Falcon X](https://falcon.crowdstrike.com/support/documentation/92/falcon-x-apis) | [sample_uploads.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sample_uploads.py) <br/> [falconx_sandbox.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falconx_sandbox.py) <BR/> [quick_scan.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quick_scan.py)|
-| CrowdStrike FileVantage | [filevantage.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/filevantage.py) |
-| [CrowdStrike Firewall Management](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [firewall_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_management.py) |
-| [CrowdStrike Firewall Policy Management](https://falcon.crowdstrike.com/support/documentation/107/falcon-firewall-management-apis) | [firewall_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_policies.py) |
-| [CrowdStrike Falcon Complete Dashboard](https://falcon.crowdstrike.com/documentation/151/falcon-complete-dashboard-apis) | [falcon_complete_dashboard.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falcon_complete_dashboard.py) |
-| [CrowdStrike Falcon Flight Control](https://falcon.crowdstrike.com/support/documentation/154/flight-control-apis) | [mssp.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/mssp.py) |
-| [CrowdStrike Host Groups](https://falcon.crowdstrike.com/support/documentation/84/host-and-host-group-management-apis) | [host_group.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/host_group.py) |
-| [CrowdStrike Hosts](https://falcon.crowdstrike.com/support/documentation/84/host-and-host-group-management-apis) | [hosts.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/hosts.py) |
-| [CrowdStrike Incident and Detection Monitoring](https://falcon.crowdstrike.com/support/documentation/86/detections-monitoring-apis) | [incidents.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/incidents.py) |
-| [CrowdStrike Installation Tokens](https://falcon.crowdstrike.com/support/documentation/120/Installation-token-APIs) | [installation_tokens.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/installation_tokens.py) |
-| [CrowdStrike Intel](https://falcon.crowdstrike.com/support/documentation/72/intel-apis) | [intel.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/intel.py) |
-| [CrowdStrike Kubernetes Protection](https://falcon.crowdstrike.com/documentation/177/kubernetes-protection) | [kubernetes_protection.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/kubernetes_protection.py) |
-| [CrowdStrike MalQuery](https://falcon.crowdstrike.com/support/documentation/113/malquery-apis) | [malquery.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/malquery.py) |
-| CrowdStrike Message Center | [message_center.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/message_center.py) |
-| CrowdStrike ML Exclusions | [ml_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ml_exclusions.py) |
-| [CrowdStrike OAuth2 Auth Token](https://falcon.crowdstrike.com/support/documentation/93/oauth2-auth-token-apis) | [oauth2.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/oauth2.py) |
-| [CrowdStrike Overwatch Dashboard](https://falcon.crowdstrike.com/documentation/155/falcon-overwatch-dashboard-apis) | [overwatch_dashboard.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/overwatch_dashboard.py) |
-| [CrowdStrike Prevention Policy](https://falcon.crowdstrike.com/support/documentation/85/detection-and-prevention-policies-apis) | [prevention_policy.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/prevention_policy.py) |
-| CrowdStrike Quarantine | [quarantine.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quarantine.py) |
-| [CrowdStrike Real Time Response (RTR)](https://falcon.crowdstrike.com/support/documentation/90/real-time-response-apis) | [real_time_response.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/real_time_response.py) |
-| [CrowdStrike Realtime Response (RTR) Administration](https://falcon.crowdstrike.com/support/documentation/90/real-time-response-apis) | [real_time_response_admin.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/real_time_response_admin.py) |
-| [CrowdStrike Realtime Response (RTR) Policies](https://falcon.crowdstrike.com/documentation/161/real-time-response-policy-apis) | [response_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/response_policies.py) |
-| [CrowdStrike Sensor Download](https://falcon.crowdstrike.com/support/documentation/109/sensor-download-apis) | [sensor_download.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_download.py) |
-| CrowdStrike Sensor Visibility Exclusions | [sensor_visibility_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_visibility_exclusions.py) |
-| [CrowdStrike Spotlight](https://falcon.crowdstrike.com/support/documentation/98/spotlight-apis) | [spotlight_vulnerabilities.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/spotlight_vulnerabilities.py) |
-| [CrowdStrike User and Roles](https://falcon.crowdstrike.com/support/documentation/87/users-and-roles-apis) | [user_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/user_management.py) |
-| [Falcon Discover for Cloud and Containers - AWS Accounts](https://falcon.crowdstrike.com/support/documentation/91/discover-for-aws-apis) | [cloud_connect_aws.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/cloud_connect_aws.py) |
-| [Falcon Discover for Cloud and Containers - Azure Subscriptions](https://falcon.crowdstrike.com/support/documentation/118/falcon-discover-for-cloud-and-containers-azure-subscription-apis) | [d4c_registration.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/d4c_registration.py) |
-| [Falcon Discover for Cloud and Containers - GCP Projects](https://falcon.crowdstrike.com/support/documentation/117/falcon-discover-for-cloud-and-containers-gcp-projects-apis) | [d4c_registration.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/d4c_registration.py) |
-| [CrowdStrike Falcon Zero Trust Assessment](https://falcon.crowdstrike.com/support/documentation/156/zero-trust-assessment-apis) | [zero_trust_assessment.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/zero_trust_assessment.py) |
+#### Available Service Classes
+For each CrowdStrike Falcon API service collection, a matching Service Class is available in the FalconPy library.
 
-> ![#f03c15](https://via.placeholder.com/10/f03c15/000000?text=+)<small> *Documentation links shown in the table above require a CrowdStrike customer login. Check [falconpy.io](https://falconpy.io) or the [FalconPy wiki](https://github.com/CrowdStrike/falconpy/wiki) for library-specific documentation.*</small>
+| Service Collection | Code Location | Class Name |
+|:-| :-| :-|
+| CrowdStrike Device Control | [device_control_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/device_control_policies.py) | [DeviceControlPolicies](https://www.falconpy.io/Service-Collections/Device-Control-Policies.html) |
+| CrowdStrike Custom Indicators of Attack (IOAs) | [custom_ioa.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/custom_ioa.py) <br/> [ioa_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ioa_exclusions.py)| [CustomIOA](https://www.falconpy.io/Service-Collections/Custom-IOA.html)<BR/>[IOAExclusions](https://www.falconpy.io/Service-Collections/IOA-Exclusions.html) |
+| CrowdStrike Custom Indicators of Compromise (IOCs) | [ioc.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ioc.py) <BR/> [iocs.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/iocs.py) ![#f03c15](https://via.placeholder.com/10/f03c15/000000?text=+) <small>*Deprecated*</small> | [IOC](https://www.falconpy.io/Service-Collections/IOC.html)<BR/>[Iocs](https://www.falconpy.io/Service-Collections/IOCs.html) |
+| CrowdStrike Detections | [detects.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/detects.py) | [Detects](https://www.falconpy.io/Service-Collections/Detects.html) |
+| CrowdStrike Falcon Discover | [discover.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/discover.py) | [Discover](https://www.falconpy.io/Service-Collections/Discover.html) |
+| Discover for Cloud and Containers<BR/>AWS Accounts<BR/>Azure Subscriptions, GCP Projects | <BR/>[cloud_connect_aws.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/cloud_connect_aws.py)<BR/>[d4c_registration.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/d4c_registration.py) | <BR/>[CloudConnectAWS](https://www.falconpy.io/Service-Collections/Cloud-Connect-AWS.html)<BR/>[D4CRegistration](https://www.falconpy.io/Service-Collections/D4C-Registration.html) |
+| CrowdStrike Event Streams | [event_streams.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/event_streams.py) | [EventStreams](https://www.falconpy.io/Service-Collections/Event-Streams.html) |
+| CrowdStrike Falcon Container | [falcon_container.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falcon_container.py) | [FalconContainer](https://www.falconpy.io/Service-Collections/Falcon-Container.html) |
+| CrowdStrike Falcon Horizon | [cspm_registration.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/cspm_registration.py) | [CSPMRegistration](https://www.falconpy.io/Service-Collections/CSPM-Registration.html) |
+| CrowdStrike FileVantage | [filevantage.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/filevantage.py) | [FileVantage](https://www.falconpy.io/Service-Collections/FileVantage.html) |
+| CrowdStrike Firewall Management | [firewall_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_management.py) | [FirewallManagement](https://www.falconpy.io/Service-Collections/Firewall-Management.html) |
+| CrowdStrike Firewall Policy Management | [firewall_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_policies.py) | [FirewallPolicies](https://www.falconpy.io/Service-Collections/Firewall-Policies.html) |
+| CrowdStrike Falcon Complete Dashboard | [falcon_complete_dashboard.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falcon_complete_dashboard.py) | [FalconCompleteDashboard](https://www.falconpy.io/Service-Collections/Falcon-Complete-Dashboard.html) |
+| CrowdStrike Falcon Flight Control | [mssp.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/mssp.py) | [FlightControl](https://www.falconpy.io/Service-Collections/MSSP.html) |
+| CrowdStrike Falcon Sandbox | [sample_uploads.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sample_uploads.py) <br/> [falconx_sandbox.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falconx_sandbox.py) <BR/> [quick_scan.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quick_scan.py)| [SampleUploads](https://www.falconpy.io/Service-Collections/Sample-Uploads.html)<BR/>[FalconXSandbox](https://www.falconpy.io/Service-Collections/Falconx-Sandbox.html)<BR/>[QuickScan](https://www.falconpy.io/Service-Collections/Quick-Scan.html) |
+| CrowdStrike Falcon X | [intel.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/intel.py)<BR/>[recon.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/recon.py) | [Intel](https://www.falconpy.io/Service-Collections/Intel.html)<BR/><a href="https://www.falconpy.io/Service-Collections/Recon.html" target="_blank">Recon</a> |
+| CrowdStrike Host Groups | [host_group.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/host_group.py) | [HostGroup](https://www.falconpy.io/Service-Collections/Host-Group.html) |
+| CrowdStrike Hosts | [hosts.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/hosts.py) | [Hosts](https://www.falconpy.io/Service-Collections/Hosts.html) |
+| CrowdStrike Incident and Detection Monitoring | [incidents.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/incidents.py) | [Incidents](https://www.falconpy.io/Service-Collections/Incidents.html) |
+| CrowdStrike Identity Protections | [identity_protection.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/identity_protection.py) | [IdentityProtection](https://www.falconpy.io/Service-Collections/Identity-Protection.html) |
+| CrowdStrike Installation Tokens | [installation_tokens.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/installation_tokens.py) | [InstallationTokens](https://www.falconpy.io/Service-Collections/Installation-Tokens.html) |
+| CrowdStrike Kubernetes Protection | [kubernetes_protection.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/kubernetes_protection.py) | [KubernetesProtection](https://www.falconpy.io/Service-Collections/Kubernetes-Protection.html) |
+| CrowdStrike MalQuery | [malquery.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/malquery.py) | [MalQuery](https://www.falconpy.io/Service-Collections/MalQuery.html) |
+| CrowdStrike Message Center | [message_center.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/message_center.py) | [MessageCenter](https://www.falconpy.io/Service-Collections/Message-Center.html) |
+| CrowdStrike ML Exclusions | [ml_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ml_exclusions.py) | [MLExclusions](https://www.falconpy.io/Service-Collections/Ml-Exclusions.html) |
+| CrowdStrike OAuth2 Auth Token | [oauth2.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/oauth2.py) | [OAuth2](https://www.falconpy.io/Service-Collections/OAuth2.html) |
+| CrowdStrike Overwatch Dashboard | [overwatch_dashboard.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/overwatch_dashboard.py) | [OverwatchDashboard](https://www.falconpy.io/Service-Collections/Overwatch-Dashboard.html) |
+| CrowdStrike Prevention Policy | [prevention_policy.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/prevention_policy.py) | [PreventionPolicy](https://www.falconpy.io/Service-Collections/Prevention-Policy.html) |
+| CrowdStrike Quarantine | [quarantine.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quarantine.py) | [Quarantine](https://www.falconpy.io/Service-Collections/Quarantine.html) |
+| CrowdStrike Real Time Response (RTR) | [real_time_response.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/real_time_response.py) | [RealTimeResponse](https://www.falconpy.io/Service-Collections/Real-Time-Response.html) |
+| CrowdStrike Realtime Response (RTR) Administration | [real_time_response_admin.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/real_time_response_admin.py) | [RealTimeResponseAdmin](https://www.falconpy.io/Service-Collections/Real-Time-Response-Admin.html) |
+| CrowdStrike Realtime Response (RTR) Policies | [response_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/response_policies.py) | [ResponsePolicies](https://www.falconpy.io/Service-Collections/Response-Policies.html) |
+| CrowdStrike Report Executions | [report_executions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/report_executions.py) | [ReportExecutions](https://www.falconpy.io/Service-Collections/Report-Executions.html) |
+| CrowdStrike Scheduled Reports | [scheduled_reports.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/scheduled_reports.py) | [ScheduledReports](https://www.falconpy.io/Service-Collections/Scheduled-Reports.html) |
+| CrowdStrike Sensor Download | [sensor_download.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_download.py) | [SensorDownload](https://www.falconpy.io/Service-Collections/Sensor-Download.html) |
+| CrowdStrike Sensor Visibility Exclusions | [sensor_visibility_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_visibility_exclusions.py) | [SensorVisibilityExclusions](https://www.falconpy.io/Service-Collections/Sensor-Visibility-Exclusions.html) |
+| CrowdStrike Sensor Update Policy Management | [sensor_update_policy.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_update_policy.py) | [SensorUpdatePolicy](https://www.falconpy.io/Service-Collections/Sensor-Update-Policy.html) |
+| CrowdStrike Spotlight | [spotlight_vulnerabilities.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/spotlight_vulnerabilities.py) | [SpotlightVulnerabilities](https://www.falconpy.io/Service-Collections/Spotlight-Vulnerabilities.html) |
+| CrowdStrike User and Roles | [user_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/user_management.py) | [UserManagement](https://www.falconpy.io/Service-Collections/User-Management.html) |
+| CrowdStrike Falcon Zero Trust Assessment | [zero_trust_assessment.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/zero_trust_assessment.py) | [ZeroTrustAssessment](https://www.falconpy.io/Service-Collections/Zero-Trust-Assessment.html) |
+
+
+#### Service Class benefits
+
+- Closesly follows Python and OpenAPI best practice for code style and syntax. PEP-8 compliant.
+- Completely abstracts token management, automatically refreshing your token when it expires.
+- Provides simple programmatic patterns for interacting with CrowdStrike Falcon APIs.
+- Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
+- Supports dynamic [configuration](https://www.falconpy.io/Usage/Environment-Configuration.html) based upon the needs of your environment.
+- Supports CrowdStrike Falcon API [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
+- Supports CrowdStrike Falcon API [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) functionality.
 
 ### The Uber Class
-Provides a single harness for interacting with the entire API, covering every available operation within every API service collection.
+Operating as a single harness for interacting with the entire CrowdStrike Falcon API, the _Uber Class_ can access [every available operation](https://www.falconpy.io/Operations/All-Operations.html) within [every API service collection](https://www.falconpy.io/Operations/Operations-by-Collection.html).
 
-[api_complete.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/api_complete.py) - The Uber Class provides an interface to all CrowdStrike APIs with a single handler.
-This solution supports communicating with API endpoints that do not have an available Service Class or are recently released.
+| Code Location | |
+| :--- | :--- |
+| [api_complete.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/api_complete.py) | The Uber Class provides an interface to all CrowdStrike APIs with a single handler. This solution supports communicating with API endpoints that do not have an available Service Class or are recently released. |
 
-## Installation & Removal
-![PyPI - Status](https://img.shields.io/pypi/status/crowdstrike-falconpy)
-![PyPI](https://img.shields.io/pypi/v/crowdstrike-falconpy)
-![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy)
-![CI Tests](https://github.com/CrowdStrike/falconpy/workflows/Python%20package/badge.svg)
-[![Pylint](https://github.com/CrowdStrike/falconpy/actions/workflows/pylint.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/pylint.yml)<br/>
-Stable releases of FalconPy are available on the Python Package Index:
+#### Uber Class benefits
+
+- Access the entire API with only one import and only one class.
+- Completely abstracts token management, automatically refreshing your token when it expires.
+- Interact with newly released API operations not yet available in the library via the [`override`](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html#the-command-method) keyword.
+- Provides simple programmatic patterns for interacting with CrowdStrike Falcon APIs.
+- Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
+- Supports CrowdStrike Falcon API [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
+- Supports all [environment configuration](https://www.falconpy.io/Usage/Environment-Configuration.html) options supported by FalconPy Service Classes.
+
+
+### Comparing FalconPy class types
+While the [usage syntax](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html) varies slightly, the Uber Class provides the same performance and [output](https://www.falconpy.io/Usage/Response-Handling.html) as FalconPy Service Classes, and can perform all of the same [operations](https://www.falconpy.io/Operations/All-Operations.html). The Uber Class does **not** support [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) but does provide unique [`override`](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html#the-command-method) functionality that is not available when you are using Service Classes.
+
+
+<img width="1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+
+![CrowdStrike Divider](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/adversary-lineup-1.png)
+
+
+## Quick Start :dizzy:
+
+Stable releases of FalconPy are available on the Python Package Index. In a terminal, execute the following command:
+
 ```shell
 python3 -m pip install crowdstrike-falconpy
 ```
 
-If you'd like to try the *absolute bleeding edge*, an automated GitHub action releases a test package with every merged pull request containing the string
-`[DEPLOY]` in the head of the commit.
+Once installed, you can immediately begin using CrowdStrike functionality in your Python projects.
 
-To install this testing version of the package, use the command:
-```shell
-python3 -m pip install -i https://test.pypi.org/simple crowdstrike-falconpy
+```python
+"""CrowdStrike FalconPy Quick Start."""
+from falconpy import Hosts
+
+hosts = Hosts(client_id="CROWDSTRIKE_API_CLIENT_ID", client_secret="CROWDSTRIKE_API_SECRET")
+
+SEARCH_FILTER = "hostname-search-string"
+
+# Retrieve a list of hosts that have a hostname that matches our search filter
+hosts_search_result = hosts.query_devices_by_filter(filter=f"hostname:'{SEARCH_FILTER}'")
+
+# Confirm we received a success response back from the CrowdStrike API
+if hosts_search_result["status_code"] == 200:
+    hosts_found = hosts_search_result["body"]["resources"]
+    # Confirm our search produced results
+    if hosts_found:
+        # Retrieve the details for all matches
+        hosts_detail = hosts.get_device_details(ids=hosts_found)["body"]["resources"]
+        for detail in hosts_detail:
+            # Display the AID and hostname for this match
+            aid = detail["device_id"]
+            hostname = detail["hostname"]
+            print(f"{hostname} ({aid})")
+    else:
+        print("No hosts found matching that hostname within your Falcon tenant.")
+else:
+    # Retrieve the details of the error response
+    error_detail = hosts_search_result["body"]["errors"]
+    for error in error_detail:
+        # Display the API error detail
+        error_code = error["code"]
+        error_message = error["message"]
+        print(f"[Error {error_code}] {error_message}")
 ```
 
-To uninstall and remove FalconPy:
-```shell
-python3 -m pip uninstall crowdstrike-falconpy
-```
+### More samples
+If you are interesting in reviewing more examples of FalconPy usage, this repository also maintains a collection of [samples](https://github.com/CrowdStrike/falconpy/tree/main/samples) to help get you started with integrating CrowdStrike Falcon into your DevOps processes.
 
-## Contributing
-There are *many* ways you can contribute to the FalconPy project!
-  * ***Providing feedback*** by opening a GitHub ticket. Even a fly-by "Hey, this worked!" is appreciated and helps validate approaches. Ideas on improving the project are most welcome.
-  * ***Documenting, blogging, or creating videos***, of how you've used FalconPy! This type of content is *invaluable* and helps communities grow. Open a pull request for inclusion in the [Documentation and Collateral](https://github.com/CrowdStrike/falconpy#documentation-and-collateral) section.
-  * ***Fix a bug or implement a new feature***. Check out our [open issues on GitHub](https://github.com/CrowdStrike/falconpy/issues) for inspiration.
-  * ***Review pull requests*** by going through the queue of [open pull requests on GitHub](https://github.com/CrowdStrike/falconpy/pulls) and giving feedback to the authors.
+## Documentation and Support :book:
+FalconPy is a community-driven open source project designed to assist developers with implementing CrowdStrike's APIs within their applications, and is not a formal CrowdStrike product. As such it carries no formal support, expressed or implied.
 
-  > Review [CONTRIBUTING.md](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md) for more details regarding contributing to the FalconPy project.
+### Official Project Documentation: [falconpy.io](https://falconpy.io)
+Extended documentation is also available via the [wiki](https://github.com/CrowdStrike/falconpy/wiki) for this repository.
 
-Open to do something else but not sure where to start? Try [opening an issue](https://github.com/CrowdStrike/falconpy/issues/new) or posting a topic on our [discussion board](https://github.com/CrowdStrike/falconpy/discussions) to introduce yourself and your interests. We look forward to chatting with you!
+### Issues and Questions
 
-## Support & Community Forums
-FalconPy is an open source project, not a formal CrowdStrike product, to assist developers implement CrowdStrike's APIs within their applications. As such it carries no formal support, expressed or implied.
+Is something going wrong? :fire:
 
-:fire: Is something going wrong? :fire:<br/>
-GitHub Issues are used to report bugs. Submit a ticket here:<br/>
-[https://github.com/CrowdStrike/falconpy/issues/new/choose](https://github.com/CrowdStrike/falconpy/issues/new/choose)
+GitHub Issues are used to report bugs and errors.
 
-GitHub Discussions provide the community with means to communicate. There are four discussion categories:
-  * :speech_balloon: [**General**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AGeneral): Catch all for general discussions.
-  * :bulb: [**Ideas**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AIdeas): Have a suggestion for a feature request? Is there something the community or project could improve upon? Let us know here.
-  * :pray: [**Q&A**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A): Have a question about how to accomplish something? A usability question? Submit them here!
-  * :raised_hands: [**Show and Tell**](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3A%22Show+and+tell%22): Share with the community what you're up to! Perhaps this is letting everyone know about your upcoming conference talk, sharing a project that has embedded FalconPy, or your recent blog.
+[![Report Issue](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/report-issue.png)](https://github.com/CrowdStrike/falconpy/issues/new/choose)
+
+Have a question you can't find answered in the documentation?
+
+Please submit usage questions to the Q&A section of our discussion board.
+
+[![Discussions](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/ask-a-question.png)](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A)
+
+### Community forums
+
+The discussion board for this repository also provides the community with means to communicate regarding [enhancements ideas](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AIdeas), [integration examples](https://github.com/CrowdStrike/falconpy/discussions/496) and [new releases](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3A%22Show+and+tell%22).
+
+[![Discussions](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/join-the-discussion.png)](https://github.com/CrowdStrike/falconpy/discussions)
+
+### Additional content
+The following materials have been produced by the maintainers and members of the community regarding FalconPy.
+
+| Content | Description |
+| :--- | :--- |
+| [![API Office Hour 03.23.21](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/api_office_hour_preso_thumbnail.png)](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/falconpy-api-office-hour_customer_presentation.pdf?raw=true) | **API Office Hour 03-23-21**<BR/>Presentation deck used to discuss FalconPy functionality, structure and roadmap for a virtual API office hour event in March 2021. |
+| [![Fal.Con 2021](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/fal.con-2021-presentation.png)](https://www.crowdstrike.com/falcon/video-on-demand-2021/?wchannelid=w0jyzi2b8e&wmediaid=z5jymvzhyu) | **Fal.Con 2021**<BR/>Virtual presentation given by `@jshcodes` at Fal.Con 2021. Focused on basic functionality and usage, existing integrations that leverage FalconPy, available library documentation, and the FalconPy community. |
 
 
-## Documentation & Collateral
+More information regarding FalconPy documentation and support can be found [here](https://github.com/CrowdStrike/falconpy/blob/main/SUPPORT.md).
 
-### Official Project Documentation
-Extended documentation is available via our [wiki](https://github.com/CrowdStrike/falconpy/wiki) or at [falconpy.io](https://falconpy.io).
 
-### Videos
-[![Fal.Con 2021](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/fal.con-2021-presentation.png)](https://www.crowdstrike.com/falcon/video-on-demand-2021/?wchannelid=w0jyzi2b8e&wmediaid=z5jymvzhyu)
+## Contribute to FalconPy :coffee:
+Interested in [being acknowledged](https://github.com/CrowdStrike/falconpy/blob/main/AUTHORS.md#contributors) as a member of an elite community of security-focused Python developers that **stop breaches**? 
 
-### Conference Presentations
-[![API Office Hour 03.23.21](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/api_office_hour_preso_thumbnail.png)](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/falconpy-api-office-hour_customer_presentation.pdf?raw=true)
+There are *many* ways you can contribute to the FalconPy project! 
 
-### Blogs/Articles/Prose
-*Coming soon*.
+_Providing feedback_ by opening a GitHub ticket. Even a fly-by "hey, this worked..." is appreciated and helps validate approaches. Ideas on improving the project are most welcome.
+
+_Documenting, blogging, or creating videos_, of how you've used FalconPy! This type of content is *invaluable* and helps our community grow. Open a pull request for inclusion in the [Additional content](https://github.com/CrowdStrike/falconpy#additional-content) section of this page.
+
+_Fix a bug or implement a new feature_. Check out our [open issues on GitHub](https://github.com/CrowdStrike/falconpy/issues) or our [discussion board](https://github.com/CrowdStrike/falconpy/discussions) for inspiration.
+
+_Review pull requests_ by going through the queue of [open pull requests on GitHub](https://github.com/CrowdStrike/falconpy/pulls) and giving feedback to the authors.
+
+To get started, review the [Code of Conduct](https://github.com/CrowdStrike/falconpy/blob/main/CODE_OF_CONDUCT.md) for community guidelines, and the [contribution guide](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md) for more detail regarding contributing to the CrowdStrike FalconPy project.
+
+
+---
+
+
+<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="250px" src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/adversary-red-eyes.png"></P>
+<h3><P align="center">WE STOP BREACHES</P></h3>
