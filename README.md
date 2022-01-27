@@ -138,6 +138,7 @@ Operating as a single harness for interacting with the entire CrowdStrike Falcon
 - Access the entire API with only one import and only one class.
 - Completely abstracts token management, automatically refreshing your token when it expires.
 - Interact with newly released API operations not yet available in the library via the `override` keyword.
+- Provides simple programmatic patterns for interacting with CrowdStrike Falcon APIs.
 - Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
 - Supports CrowdStrike Falcon API [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
 - Supports all [environment configuration](https://www.falconpy.io/Usage/Environment-Configuration.html) options supported by FalconPy Service Classes.
