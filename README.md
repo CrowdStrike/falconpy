@@ -50,7 +50,7 @@ Details regarding supported operating systems and Python versions, and project s
 ### Components
 The CrowdStrike Falcon SDK for Python provides two distinct methods for interacting with CrowdStrike's Falcon APIs: 
 
-- [Service Classes](#service-classes) - each Service Class represents a single CrowdStrike API service collection, and provides an interface to the operations available within that service collection.
+- [Service Classes](#service-classes) - each Service Class represents a single CrowdStrike API service collection providing an interface to the operations available within that service collection.
 - [The Uber Class](#the-uber-class) - an all-in-one class that provides a singular interface for all operations in every CrowdStrike API service collection.
 
 ![Class Types](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/class_types.png)
