@@ -71,7 +71,7 @@ Without the support of these executives, the FalconPy project would not have hap
 | Mike Cryer | Colonel-in-Chief |
 
 #### Honorable mentions
-+ Jaime Franklin
++ Jaime Franklin, `@franklinjff`
 + Shawn Wells, `@shawndwells`
 
 
