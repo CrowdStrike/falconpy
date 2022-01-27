@@ -156,7 +156,7 @@ python3 -m pip install crowdstrike-falconpy
 Once installed, you can immediately begin using CrowdStrike functionality in your Python projects.
 
 ```python
-"""CrowdStrike FalconPy Quick Start"""
+"""CrowdStrike FalconPy Quick Start."""
 from falconpy import Hosts
 
 hosts = Hosts(client_id="CROWDSTRIKE_API_CLIENT_ID", client_secret="CROWDSTRIKE_API_SECRET")
