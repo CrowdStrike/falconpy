@@ -34,7 +34,6 @@ FalconPy has been tested for functionality using the following versions of Pytho
 FalconPy has been tested on the following operating systems.
 
 ![Amazon Linux](https://img.shields.io/badge/-Amazon-darkgreen?logo=amazon)
-![Arch Linux](https://img.shields.io/badge/-Arch-tan?logo=archlinux)
 ![CentOS](https://img.shields.io/badge/-CentOS-purple?logo=centos)
 ![Debian](https://img.shields.io/badge/-Debian-darkred?logo=debian)
 ![Fedora](https://img.shields.io/badge/-Fedora-darkblue?logo=fedora)
