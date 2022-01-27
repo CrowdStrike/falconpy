@@ -163,9 +163,12 @@ FalconPy is a community-driven open source project designed to assist developers
 Extended documentation is also available via the [wiki](https://github.com/CrowdStrike/falconpy/wiki) for this repository.
 
 ### Supported versions of Python and Operating Systems
-FalconPy has been tested for functionality using the following versions of Python running on the following operating systems.
+FalconPy has been tested for functionality using the following versions of Python.
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy?logo=python&label=Python)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy?logo=python&label=Supported%20versions&logoColor=white)
+
+FalconPy has been tested on the following operating systems.
+
 ![Amazon Linux](https://img.shields.io/badge/-Amazon-darkgreen?logo=amazon)
 ![CentOS](https://img.shields.io/badge/-CentOS-purple?logo=centos)
 ![Debian](https://img.shields.io/badge/-Debian-darkred?logo=debian)
