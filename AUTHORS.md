@@ -80,6 +80,6 @@ Become a member of an elite community of security-focused Python coders.
 
 <img width="350" src="docs/asset/alliance_team.png">
 
-_**Excellent**_, we want your contributions! 
+We want your contributions! 
 
 ### Start [here](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md).
