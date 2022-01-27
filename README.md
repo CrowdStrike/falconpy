@@ -31,7 +31,11 @@ There are currently 46 CrowdStrike Falcon API service collections containing 397
 FalconPy also supports interaction with all CrowdStrike regions (`US-1`, `US-2`, `EU-1` and `US-GOV-1`), custom connection and response timeouts, routing requests thru a list of proxies, and disabling SSL verification when required.
 
 
-This SDK provides two distinct methods for interacting with CrowdStrike's Falcon OAuth2 APIs: [Service Classes](#service-classes) and the [Uber Class](#the-uber-class).
+This SDK provides two distinct methods for interacting with CrowdStrike's Falcon APIs: 
+
+- [Service Classes](#service-classes) - each Service Class represents a single CrowdStrike API service collection
+- [The Uber Class](#the-uber-class) - an all-in-one class that provides a singular interface for the entire CrowdStrike API
+
 ![Class Types](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/class_types.png)
 
 ### Service Classes
@@ -93,6 +97,7 @@ For each CrowdStrike API service collection, a matching Service Class is availab
 - Closesly follows Python / OpenAPI best practices for code style and syntax. PEP-8 compliant.
 - Completely abstracts token management, automatically refreshing your token when it expires.
 - Provides a simple to use and easy to follow programmatic pattern for interacting with the CrowdStrike Falcon API.
+- Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
 - Supports dynamic [configuration](https://www.falconpy.io/Usage/Environment-Configuration.html) based upon the needs of your environment.
 - Supports FalconPy [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
 - Supports FalconPy [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) functionality.
@@ -109,6 +114,7 @@ Operating as a single harness for interacting with the entire CrowdStrike Falcon
 - Access the entire API with only one import and only one class.
 - Completely abstracts token management, automatically refreshing your token when it expires.
 - Provides the `override` keyword, allowing you to specify new endpoints that are not yet available within the library.
+- Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
 - Supports FalconPy [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
 - Supports all [environment configuration](https://www.falconpy.io/Usage/Environment-Configuration.html) options supported by FalconPy Service Classes.
 
@@ -137,7 +143,7 @@ from falconpy import Hosts
 
 hosts = Hosts(client_id="CROWDSTRIKE_API_CLIENT_ID", client_secret="CROWDSTRIKE_API_SECRET")
 
-search_filter = "TARGET_HOSTNAME"
+search_filter = "hostname-search-string"
 
 # Retrieve a list of hosts that have a hostname that matches our search filter
 hosts_search_result = hosts.query_devices_by_filter(filter=f"hostname:'{search_filter}'")
@@ -148,12 +154,13 @@ if hosts_search_result["status_code"] == 200:
 
 # Confirm our search produced results
 if hosts_found:
-    # Retrieve the first match
-    hosts_detail = hosts.get_device_details(ids=hosts_found)["body"]["resources"][0]
-    # Display the AID and hostname for this match
-    aid = hosts_detail["device_id"]
-    hostname = hosts_detail["hostname"]
-    print(f"{hostname} ({aid})")
+    # Retrieve the details for all matches
+    hosts_detail = hosts.get_device_details(ids=hosts_found)["body"]["resources"]
+    for detail in hosts_detail:
+        # Display the AID and hostname for this match
+        aid = detail["device_id"]
+        hostname = detail["hostname"]
+        print(f"{hostname} ({aid})")
 ```
 
 ## Documentation and Support :book:
@@ -224,7 +231,7 @@ Interested in joining an elite community of security-focused Python developers a
 
 There are *many* ways you can contribute to the FalconPy project! 
 
-_Providing feedback_ by opening a GitHub ticket. Even a fly-by "Hey, this worked!" is appreciated and helps validate approaches. Ideas on improving the project are most welcome.
+_Providing feedback_ by opening a GitHub ticket. Even a fly-by "hey, this worked..." is appreciated and helps validate approaches. Ideas on improving the project are most welcome.
 
 _Documenting, blogging, or creating videos_, of how you've used FalconPy! This type of content is *invaluable* and helps our community grow. Open a pull request for inclusion in the [Additional content](https://github.com/CrowdStrike/falconpy#additional-content) section of this page.
 
