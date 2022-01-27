@@ -33,17 +33,20 @@ FalconPy has been tested for functionality using the following versions of Pytho
 #### Supported Operating Systems
 FalconPy has been tested on the following operating systems.
 
-![Amazon Linux](https://img.shields.io/badge/-Amazon-darkgreen?logo=amazon)
-![CentOS](https://img.shields.io/badge/-CentOS-purple?logo=centos)
-![Debian](https://img.shields.io/badge/-Debian-darkred?logo=debian)
-![Fedora](https://img.shields.io/badge/-Fedora-darkblue?logo=fedora)
-![Kali](https://img.shields.io/badge/-Kali-black?logo=kalilinux&logoColor=white)
-![macOS](https://img.shields.io/badge/-macOS-silver?logo=apple)
-![Pop! OS](https://img.shields.io/badge/-Pop!%20OS-orange?logo=popos&logoColor=black)
-![RedHat](https://img.shields.io/badge/-RedHat-maroon?logo=redhat)
-![SUSE](https://img.shields.io/badge/-SUSE-yellow?logo=suse)
-![Ubuntu](https://img.shields.io/badge/-Ubuntu-964?logo=ubuntu)
-![Windows](https://img.shields.io/badge/-Windows-blue?logo=windows)
+![Amazon Linux](https://img.shields.io/badge/-Amazon-darkgreen?logo=amazon&style=for-the-badge&labelColor=teal) 
+![CentOS](https://img.shields.io/badge/-CentOS-magenta?logo=centos&style=for-the-badge&labelColor=purple)
+![Fedora](https://img.shields.io/badge/-Fedora-teal?logo=fedora&style=for-the-badge&labelColor=darkblue) 
+![RedHat](https://img.shields.io/badge/-RedHat-red?logo=redhat&style=for-the-badge&labelColor=maroon) 
+
+![Debian](https://img.shields.io/badge/-Debian-darkred?logo=debian&style=for-the-badge&labelColor=red)
+![Kali](https://img.shields.io/badge/-Kali-gray?logo=kalilinux&logoColor=red&style=for-the-badge&labelColor=black) 
+![Pop! OS](https://img.shields.io/badge/-Pop!%20OS-orange?logo=popos&logoColor=black&style=for-the-badge&labelColor=yellow) 
+![Ubuntu](https://img.shields.io/badge/-Ubuntu-964?logo=ubuntu&style=for-the-badge&labelColor=tan) 
+
+![Arch](https://img.shields.io/badge/-Arch-darkgray?logo=archlinux&style=for-the-badge&labelColor=gray) 
+![SUSE](https://img.shields.io/badge/-SUSE-yellow?logo=suse&style=for-the-badge&labelColor=orange) 
+![macOS](https://img.shields.io/badge/-macOS-silver?logo=apple&style=for-the-badge&labelColor=gray) 
+![Windows](https://img.shields.io/badge/-Windows-blue?logo=windows&style=for-the-badge&labelColor=darkblue) 
 
 Details regarding supported operating systems and Python versions, and project security and testing procedures can be found [here](https://github.com/CrowdStrike/falconpy/blob/main/SECURITY.md).
 
