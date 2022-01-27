@@ -123,8 +123,8 @@ For each CrowdStrike API service collection, a matching Service Class is availab
 - Provides simple programmatic patterns for interacting with CrowdStrike Falcon APIs.
 - Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
 - Supports dynamic [configuration](https://www.falconpy.io/Usage/Environment-Configuration.html) based upon the needs of your environment.
-- Supports FalconPy [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
-- Supports FalconPy [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) functionality.
+- Supports CrowdStrike Falcon API [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
+- Supports CrowdStrike Falcon [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) functionality.
 
 ### The Uber Class
 Operating as a single harness for interacting with the entire CrowdStrike Falcon API, the _Uber Class_ can access every available operation within every API service collection.
@@ -139,7 +139,7 @@ Operating as a single harness for interacting with the entire CrowdStrike Falcon
 - Interact with newly released API operations not yet available in the library via the `override` keyword.
 - Completely abstracts token management, automatically refreshing your token when it expires.
 - Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
-- Supports FalconPy [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
+- Supports CrowdStrike Falcon API [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
 - Supports all [environment configuration](https://www.falconpy.io/Usage/Environment-Configuration.html) options supported by FalconPy Service Classes.
 
 
