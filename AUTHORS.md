@@ -76,7 +76,7 @@ Without the support of these executives, the FalconPy project would not have hap
 
 
 # Want to see your name on this list?
-Interested in joining an elite community of security-focused Python developers? 
+Become a member of an elite community of security-focused Python coders.
 
 <img width="350" src="docs/asset/alliance_team.png">
 
