@@ -129,8 +129,8 @@ Operating as a single harness for interacting with the entire CrowdStrike Falcon
 #### Uber Class benefits
 
 - Access the entire API with only one import and only one class.
+- Allows you to interact with new endpoints that are not yet available within the library via the `override` keyword,.
 - Completely abstracts token management, automatically refreshing your token when it expires.
-- Provides the `override` keyword, allowing you to specify new endpoints that are not yet available within the library.
 - Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
 - Supports FalconPy [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
 - Supports all [environment configuration](https://www.falconpy.io/Usage/Environment-Configuration.html) options supported by FalconPy Service Classes.
