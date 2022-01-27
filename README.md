@@ -3,18 +3,13 @@
 [![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)<br/>
 
 # The CrowdStrike Falcon SDK for Python (FalconPy)
+
+![Repo status](https://img.shields.io/osslifecycle/crowdstrike/falconpy?label=repo%20status)
 ![Package Status](https://img.shields.io/pypi/status/crowdstrike-falconpy?label=package%20status)
 ![PyPI](https://img.shields.io/pypi/v/crowdstrike-falconpy?label=current%20version)
 ![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy)
-![Repo status](https://img.shields.io/osslifecycle/crowdstrike/falconpy?label=repo%20status)
-<!-- ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy)
-[![CodeQL](https://github.com/CrowdStrike/falconpy/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/codeql-analysis.yml)
-![CI Test Coverage](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/tests/coverage.svg) 
-![CI Tests](https://github.com/CrowdStrike/falconpy/workflows/Python%20package/badge.svg)
-[![Pylint](https://github.com/CrowdStrike/falconpy/actions/workflows/pylint.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/pylint.yml)<br/>
--->
 
 The FalconPy SDK contains a collection of Python classes that abstract CrowdStrike Falcon OAuth2 API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
 

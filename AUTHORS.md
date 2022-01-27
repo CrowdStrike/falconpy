@@ -3,7 +3,7 @@
 [![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)
 
 # FalconPy Project Authors
-The FalconPy project exists to enhance developer interactions with the CrowdStrike Falcon API. Designed to be easy to integrate and use within your Python projects, the library is released under the [Unlicense](LICENSE) license. Developed and maintained by a passionate group of security specialists, FalconPy has received multiple contributions from the community at large.
+The FalconPy project exists to enhance developer interactions with the CrowdStrike Falcon API. Designed to be easy to integrate and use within your Python projects, the library is released under the [Unlicense](LICENSE) license. Developed and maintained by a passionate group of security architects and specialists, FalconPy has received multiple contributions from the community at large.
 
 | Name | |
 | :--- | :--- |
@@ -23,9 +23,9 @@ The following contributors have demonstrated their passion for the FalconPy proj
 
 | Name | Role |
 | :--- | :--- |
-| Šimon Lukašík, `@isimluk` | Sanity Checker |
-| Josh Lang, `@jlangdev` | Maintainer |
-| Gabe Alford, `@redhatrises` | Git Whisperer |
+| Šimon Lukašík, `@isimluk` | [Sanity Checker](https://xkcd.com/1926/) |
+| Josh Lang, `@jlangdev` | [Lint Purveyor](https://xkcd.com/1833/) |
+| Gabe Alford, `@redhatrises` | [Git Whisperer](https://xkcd.com/1597/) |
 | Christophe Viaud, `@falcon-pioupiou` | Maintainer |
 | Shane Shellenbarger, `@soggysec` | Maintainer |
 
@@ -82,4 +82,4 @@ Interested in joining an elite community of security-focused Python developers?
 
 _**Excellent**_, we want your contributions! 
 
-### Start [here](CONTRIBUTING.md).
+### Start [here](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md).
