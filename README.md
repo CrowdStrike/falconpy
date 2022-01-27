@@ -30,11 +30,33 @@ There are currently 45 CrowdStrike Falcon API service collections containing 397
 
 FalconPy also supports interaction with all CrowdStrike regions (`US-1`, `US-2`, `EU-1` and `US-GOV-1`), custom connection and response timeouts, routing requests thru a list of proxies, and disabling SSL verification when required.
 
+#### Supported versions of Python
+FalconPy has been tested for functionality using the following versions of Python.
 
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy?logo=python&label=Supported%20versions&logoColor=white)
+
+#### Supported Operating Systems
+FalconPy has been tested on the following operating systems.
+
+![Amazon Linux](https://img.shields.io/badge/-Amazon-darkgreen?logo=amazon)
+![Arch Linux](https://img.shields.io/badge/-Arch-tan?logo=archlinux)
+![CentOS](https://img.shields.io/badge/-CentOS-purple?logo=centos)
+![Debian](https://img.shields.io/badge/-Debian-darkred?logo=debian)
+![Fedora](https://img.shields.io/badge/-Fedora-darkblue?logo=fedora)
+![Kali](https://img.shields.io/badge/-Kali-black?logo=kalilinux&logoColor=white)
+![macOS](https://img.shields.io/badge/-macOS-silver?logo=apple)
+![Pop! OS](https://img.shields.io/badge/-Pop!%20OS-orange?logo=popos&logoColor=black)
+![RedHat](https://img.shields.io/badge/-RedHat-maroon?logo=redhat)
+![Ubuntu](https://img.shields.io/badge/-Ubuntu-964?logo=ubuntu)
+![Windows](https://img.shields.io/badge/-Windows-blue?logo=windows)
+
+Details regarding supported operating systems and Python versions, and project security and testing procedures can be found [here](https://github.com/CrowdStrike/falconpy/blob/main/SECURITY.md).
+
+### Components
 This SDK provides two distinct methods for interacting with CrowdStrike's Falcon APIs: 
 
-- [Service Classes](#service-classes) - each Service Class represents a single CrowdStrike API service collection
-- [The Uber Class](#the-uber-class) - an all-in-one class that provides a singular interface for the entire CrowdStrike API
+- [Service Classes](#service-classes) - each Service Class represents a single API service collection, there is one Service Class per collection.
+- [The Uber Class](#the-uber-class) - an all-in-one class that provides a singular interface for the entire CrowdStrike API.
 
 ![Class Types](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/class_types.png)
 
@@ -178,27 +200,6 @@ FalconPy is a community-driven open source project designed to assist developers
 
 ### Official Project Documentation: [falconpy.io](https://falconpy.io)
 Extended documentation is also available via the [wiki](https://github.com/CrowdStrike/falconpy/wiki) for this repository.
-
-### Supported versions of Python and Operating Systems
-FalconPy has been tested for functionality using the following versions of Python.
-
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy?logo=python&label=Supported%20versions&logoColor=white)
-
-FalconPy has been tested on the following operating systems.
-
-![Amazon Linux](https://img.shields.io/badge/-Amazon-darkgreen?logo=amazon)
-![Arch Linux](https://img.shields.io/badge/-Arch-tan?logo=archlinux)
-![CentOS](https://img.shields.io/badge/-CentOS-purple?logo=centos)
-![Debian](https://img.shields.io/badge/-Debian-darkred?logo=debian)
-![Fedora](https://img.shields.io/badge/-Fedora-darkblue?logo=fedora)
-![Kali](https://img.shields.io/badge/-Kali-black?logo=kalilinux&logoColor=white)
-![macOS](https://img.shields.io/badge/-macOS-silver?logo=apple)
-![Pop! OS](https://img.shields.io/badge/-Pop!%20OS-orange?logo=popos&logoColor=black)
-![RedHat](https://img.shields.io/badge/-RedHat-maroon?logo=redhat)
-![Ubuntu](https://img.shields.io/badge/-Ubuntu-964?logo=ubuntu)
-![Windows](https://img.shields.io/badge/-Windows-blue?logo=windows)
-
-Details regarding supported operating systems and Python versions, and project security and testing procedures can be found [here](https://github.com/CrowdStrike/falconpy/blob/main/SECURITY.md).
 
 ### Sample code
 This repository also maintains a collection of [samples](https://github.com/CrowdStrike/falconpy/tree/main/samples) for use as examples to get you started with integrating CrowdStrike Falcon into your DevOps processes.
