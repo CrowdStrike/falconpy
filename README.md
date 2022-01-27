@@ -124,7 +124,7 @@ For each CrowdStrike API service collection, a matching Service Class is availab
 - Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
 - Supports dynamic [configuration](https://www.falconpy.io/Usage/Environment-Configuration.html) based upon the needs of your environment.
 - Supports CrowdStrike Falcon API [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
-- Supports CrowdStrike Falcon [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) functionality.
+- Supports CrowdStrike Falcon API [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) functionality.
 
 ### The Uber Class
 Operating as a single harness for interacting with the entire CrowdStrike Falcon API, the _Uber Class_ can access every available operation within every API service collection.
