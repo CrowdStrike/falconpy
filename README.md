@@ -16,9 +16,9 @@ The FalconPy SDK contains a collection of Python classes that abstract CrowdStri
 + [Overview](#overview)
     - [Service Classes](#service-classes)
     - [The Uber Class](#the-uber-class)
-+ [Quick Start](#quick-start)
-+ [Documentation and Support](#documentation-and-support)
-+ [Contribute to FalconPy](#contribute-to-falconpy)
++ [Quick Start](#quick-start-dizzy)
++ [Documentation and Support](#documentation-and-support-book)
++ [Contribute to FalconPy](#contribute-to-falconpy-coffee)
 
 ## Overview :mag_right:
 There are currently 45 CrowdStrike Falcon API service collections containing 397 individual operations, all of which are accessible via FalconPy.
