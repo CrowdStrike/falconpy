@@ -222,7 +222,7 @@ More information regarding FalconPy documentation and support can be found [here
 ## Contribute to FalconPy :coffee:
 Interested in joining an elite community of security-focused Python developers and earning your place on our [contributors list](https://github.com/CrowdStrike/falconpy/blob/main/AUTHORS.md#contributors)? 
 
-There are *many* ways you can contribute to the FalconPy project and we want to hear from you! 
+There are *many* ways you can contribute to the FalconPy project! 
 
 _Providing feedback_ by opening a GitHub ticket. Even a fly-by "Hey, this worked!" is appreciated and helps validate approaches. Ideas on improving the project are most welcome.
 
@@ -239,4 +239,4 @@ To become a member of the community, review the [Code of Conduct](https://github
 
 
 <p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="250px" src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/adversary-red-eyes.png"></P>
-<h3><P align="center">WE STOP BREACHES <BR/><small><small>(and we can do it with Python)</small></small></P></h3>
+<h3><P align="center">WE STOP BREACHES <BR/><small><small>(and we can do it using Python)</small></small></P></h3>
