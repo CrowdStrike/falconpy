@@ -113,7 +113,7 @@ For each CrowdStrike API service collection, a matching Service Class is availab
 
 - Closesly follows Python / OpenAPI best practices for code style and syntax. PEP-8 compliant.
 - Completely abstracts token management, automatically refreshing your token when it expires.
-- Provides simple to follow programmatic pattern for interacting with CrowdStrike Falcon APIs.
+- Provides simple programmatic patterns for interacting with CrowdStrike Falcon APIs.
 - Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
 - Supports dynamic [configuration](https://www.falconpy.io/Usage/Environment-Configuration.html) based upon the needs of your environment.
 - Supports FalconPy [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
