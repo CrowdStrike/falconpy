@@ -42,6 +42,7 @@ FalconPy has been tested on the following operating systems.
 ![macOS](https://img.shields.io/badge/-macOS-silver?logo=apple)
 ![Pop! OS](https://img.shields.io/badge/-Pop!%20OS-orange?logo=popos&logoColor=black)
 ![RedHat](https://img.shields.io/badge/-RedHat-maroon?logo=redhat)
+![SUSE](https://img.shields.io/badge/-SUSE-yellow?logo=suse)
 ![Ubuntu](https://img.shields.io/badge/-Ubuntu-964?logo=ubuntu)
 ![Windows](https://img.shields.io/badge/-Windows-blue?logo=windows)
 
