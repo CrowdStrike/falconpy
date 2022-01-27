@@ -26,9 +26,12 @@ There are currently 45 CrowdStrike Falcon API service collections containing 397
 FalconPy also supports interaction with all CrowdStrike regions, custom connection and response timeouts, routing requests thru a list of proxies, and disabling SSL verification when required.
 
 #### Supported versions of Python
-FalconPy has been tested for functionality using the following versions of Python.
+FalconPy was developed for Python 3, and does not support versions of Python below 3.6. Every commit to the FalconPy code base is tested for functionality using all versions of Python the library currently supports.
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy?logo=python&label=Supported%20versions&logoColor=white)
+
+> Python 3.5 should not have problems running FalconPy, but this version is no longer analyzed as part of our unit testing.
+
 
 #### Supported Operating Systems
 FalconPy has been tested on the following operating systems.
