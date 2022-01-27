@@ -30,7 +30,7 @@ FalconPy was developed for Python 3, and does not support versions of Python bel
 
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy?logo=python&label=Supported%20versions&logoColor=white)
 
-> Python 3.5 should not have problems running FalconPy, but this version is no longer analyzed as part of our unit testing.
+> While Python 3.5 should not have problems running FalconPy, as of February 2021 this version is no longer analyzed as part of our unit testing.
 
 
 #### Supported Operating Systems
@@ -225,20 +225,19 @@ The discussion board for this repository also provides the community with means 
 [![Discussions](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/join-the-discussion.png)](https://github.com/CrowdStrike/falconpy/discussions)
 
 ### Additional content
-Community materials discussing FalconPy are linked below.
+The following materials have been produced by the maintainers and members of the community regarding FalconPy.
 
-[![API Office Hour 03.23.21](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/api_office_hour_preso_thumbnail.png)](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/falconpy-api-office-hour_customer_presentation.pdf?raw=true) 
-<img width="50" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
-[![Fal.Con 2021](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/fal.con-2021-presentation.png)](https://www.crowdstrike.com/falcon/video-on-demand-2021/?wchannelid=w0jyzi2b8e&wmediaid=z5jymvzhyu)
-
-**API Office Hour 03-23-21** <img width="156" height="1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="> **Fal.Con 2021** 
+| Content | Description |
+| :--- | :--- |
+| [![API Office Hour 03.23.21](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/api_office_hour_preso_thumbnail.png)](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/falconpy-api-office-hour_customer_presentation.pdf?raw=true) | **API Office Hour 03-23-21**<BR/>Presentation deck used to discuss FalconPy functionality, structure and roadmap for a virtual API office hour event in March 2021. |
+| [![Fal.Con 2021](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/fal.con-2021-presentation.png)](https://www.crowdstrike.com/falcon/video-on-demand-2021/?wchannelid=w0jyzi2b8e&wmediaid=z5jymvzhyu) | **Fal.Con 2021**<BR/>Virtual presentation given by `@jshcodes` at Fal.Con 2021. Focused on basic functionality and usage, existing integrations that leverage FalconPy, available library documentation, and the FalconPy community. |
 
 
 More information regarding FalconPy documentation and support can be found [here](https://github.com/CrowdStrike/falconpy/blob/main/SUPPORT.md).
 
 
 ## Contribute to FalconPy :coffee:
-Interested in joining an elite community of security-focused Python developers and earning your place on our [contributors list](https://github.com/CrowdStrike/falconpy/blob/main/AUTHORS.md#contributors)? 
+Interested in [being acknowledged](https://github.com/CrowdStrike/falconpy/blob/main/AUTHORS.md#contributors) as a member of an elite community of security-focused Python developers? 
 
 There are *many* ways you can contribute to the FalconPy project! 
 
@@ -257,4 +256,4 @@ To become a member of the community, review the [Code of Conduct](https://github
 
 
 <p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="250px" src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/adversary-red-eyes.png"></P>
-<h3><P align="center">WE STOP BREACHES <BR/><small><small>(and we can stop them using Python)</small></small></P></h3>
+<h3><P align="center">WE STOP BREACHES <BR/><small><small>(and we know Python)</small></small></P></h3>
