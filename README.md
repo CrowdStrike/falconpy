@@ -98,7 +98,7 @@ For each CrowdStrike API service collection, a matching Service Class is availab
 - Supports FalconPy [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) functionality.
 
 ### The Uber Class
-Provides a single harness for interacting with the entire API, covering every available operation within every API service collection.
+Operating as a single harness for interacting with the entire CrowdStrike Falcon API, the _Uber Class_ can access every available operation within every API service collection.
 
 | Code Location | |
 | :--- | :--- |
@@ -170,6 +170,7 @@ FalconPy has been tested for functionality using the following versions of Pytho
 FalconPy has been tested on the following operating systems.
 
 ![Amazon Linux](https://img.shields.io/badge/-Amazon-darkgreen?logo=amazon)
+![Arch Linux](https://img.shields.io/badge/-Arch-tan?logo=archlinux)
 ![CentOS](https://img.shields.io/badge/-CentOS-purple?logo=centos)
 ![Debian](https://img.shields.io/badge/-Debian-darkred?logo=debian)
 ![Fedora](https://img.shields.io/badge/-Fedora-darkblue?logo=fedora)
