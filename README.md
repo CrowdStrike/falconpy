@@ -253,4 +253,4 @@ To become a member of the community, review the [Code of Conduct](https://github
 
 
 <p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="250px" src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/adversary-red-eyes.png"></P>
-<h3><P align="center">WE STOP BREACHES <BR/><small><small>(and we know Python)</small></small></P></h3>
+<h3><P align="center">WE STOP BREACHES <BR/><small><small>(and support Python)</small></small></P></h3>
