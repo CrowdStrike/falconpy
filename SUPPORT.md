@@ -14,13 +14,13 @@ GitHub Issues are used to report bugs and issues. 🐛
 
 Have a question you can't find answered in the [documentation](https://falconpy.io) or [samples](https://github.com/CrowdStrike/falconpy/tree/main/samples)?
 
-Please submit usage questions to the Q&A section of our discussion board.
+Please submit usage questions to the [Q&A section]((https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A)) of our [discussion board](#community-forums).
 
 [![Discussions](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/ask-a-question.png)](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A)
 
 Not sure which one to choose? :thinking:
 
-Issue reports that do not result in a bug finding, security alert, or enhancement request are converted into discussions. Discussions that relate to potential errors, security concerns or enhancement requests will result in the generation of an issue report.  So, either button should get the job done.
+Issue reports that do not result in a bug finding, documentation or link update, security alert, or enhancement request are converted into discussions. Discussions that relate to potential errors, security concerns or enhancement requests will result in the generation of an issue report.  So, either button should get the job done.
 
 [![GitHub issues](https://img.shields.io/github/issues-raw/crowdstrike/falconpy?logo=github)](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aopen+is%3Aissue)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/crowdstrike/falconpy?color=green&logo=github)](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+is%3Aclosed)
