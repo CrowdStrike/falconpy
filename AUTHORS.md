@@ -20,6 +20,7 @@ The FalconPy project exists to enhance developer interactions with the CrowdStri
 
 ## Maintainers
 The following contributors have demonstrated their passion for the FalconPy project by going above and beyond to assist with the maintainence of this repository.
+These coders deserve accolades and laurels, as well as cool titles and cartoons. Their efforts have definitely earned them the community's gratitude.
 
 | Name | Role |
 | :--- | :--- |
