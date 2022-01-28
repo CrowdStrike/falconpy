@@ -65,11 +65,11 @@ This has been a critical element in the development of the FalconPy project.
 _We all have grown ups._ Fortunate coders have grown ups who support them in pursuing their personal passions. 
 The authors of FalconPy consider themselves members of this select group.
 
-```
-Children succeed when grown-ups care about them.
 
-- Chris Meledandri
-```
+_“I have a lot of growing up to do. I realized that the other day inside my fort.”_
+
+—Zach Galifianakis
+
 
 Without the support of these executives, the FalconPy project would not have happened.
 
