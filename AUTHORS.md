@@ -62,7 +62,8 @@ This has been a critical element in the development of the FalconPy project.
 + `@philldtaylor`
 
 ## Sponsors
-_We all have grown ups._ It's a fortunate coder whose grown ups support their personal passions.
+_We all have grown ups._ Fortunate coders have grown ups who support their personal passions. 
+The authors of FalconPy consider themselves members of this select group.
 
 Without the support of these executives, the FalconPy project would not have happened.
 
