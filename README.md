@@ -155,7 +155,7 @@ The Uber Class provides the same performance and output as FalconPy Service Clas
 
 ## Quick Start :dizzy:
 
-Stable releases of FalconPy are available on the Python Package Index:
+Stable releases of FalconPy are available on the Python Package Index. In your terminal, execute the following command:
 
 ```shell
 python3 -m pip install crowdstrike-falconpy
