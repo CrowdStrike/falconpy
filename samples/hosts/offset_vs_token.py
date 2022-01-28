@@ -4,7 +4,7 @@ QueryDevicesByFilter and QueryDevicesByFilterScroll for equivalency.
 
 For environments with more than 10K hosts, this routine will fail as the
 operation QueryDevicesByFilter is limited to a maximum of 10K records.
-(Setting your offset to 10K or higher will produce a 500 error.)
+(Setting your offset to 10K or higher will produce a 400 error.)
 
 In order to run this routine in environments this large, add a filter
 that limits the number of hosts returned. (See get_query_results method.)
