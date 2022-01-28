@@ -6,22 +6,22 @@
 FalconPy is a community-driven open source project designed to assist developers with implementing CrowdStrike's APIs within their applications, and is not a formal CrowdStrike product.
 As such it carries no formal support, expressed or implied.
 
-- [Issue Reporting and Questions](#issue-reporting-and-questions)
+- [Issue Reporting and Questions](#issue-reporting-and-questions-bug)
 - [Community Forums](#community-forums)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
 
 ![Adversary Lineup](docs/asset/adversary-lineup-2.png)
 
-## Issue Reporting and Questions 🐛
+## Issue Reporting and Questions :bug:
 
-Issue tracking is maintained within this reposity and used to track bugs, documentation and link updates, enhancement requests and security concerns. 
+Issues may be reported [here](https://github.com/CrowdStrike/falconpy/issues/new/choose) and are used to track bugs, documentation and link updates, enhancement requests and security concerns. 
 
 [![Report Issue](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/report-issue.png)](https://github.com/CrowdStrike/falconpy/issues/new/choose)
 
 Have a question you can't find answered in the [documentation](https://falconpy.io) or [samples](https://github.com/CrowdStrike/falconpy/tree/main/samples)?
 
-Please submit usage questions to the [Q&A section]((https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A)) of our [discussion board](#community-forums).
+Find out if anyone else in the community is experiencing the same issue on our [discussion board](#community-forums). Your questions are welcome, please submit them to the [Q&A section]((https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A)).
 
 [![Discussions](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/ask-a-question.png)](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A)
 
