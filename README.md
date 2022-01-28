@@ -138,7 +138,7 @@ Operating as a single harness for interacting with the entire CrowdStrike Falcon
 
 - Access the entire API with only one import and only one class.
 - Completely abstracts token management, automatically refreshing your token when it expires.
-- Interact with newly released API operations not yet available in the library via the `override` keyword.
+- Interact with newly released API operations not yet available in the library via the [`override`](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html#the-command-method) keyword.
 - Provides simple programmatic patterns for interacting with CrowdStrike Falcon APIs.
 - Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
 - Supports CrowdStrike Falcon API [parameter abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#parameter-abstraction) functionality.
@@ -146,7 +146,7 @@ Operating as a single harness for interacting with the entire CrowdStrike Falcon
 
 
 ### Comparing FalconPy class types
-While the [usage syntax](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html) varies slightly, the Uber Class provides the same performance and [output](https://www.falconpy.io/Usage/Response-Handling.html) as FalconPy Service Classes, and can perform all of the same operations. The Uber Class does **not** support [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) but does provide unique [`override`](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html#the-command-method) functionality that is not available when you are using Service Classes.
+While the [usage syntax](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html) varies slightly, the Uber Class provides the same performance and [output](https://www.falconpy.io/Usage/Response-Handling.html) as FalconPy Service Classes, and can perform all of the same [operations](https://www.falconpy.io/Operations/All-Operations.html). The Uber Class does **not** support [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) but does provide unique [`override`](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html#the-command-method) functionality that is not available when you are using Service Classes.
 
 
 <img width="1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
