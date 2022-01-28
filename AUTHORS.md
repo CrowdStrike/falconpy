@@ -63,7 +63,7 @@ This has been a critical element in the development of the FalconPy project.
 
 ## Sponsors
 _We all have [grown ups](https://xkcd.com/218/)._ Fortunate coders have grown ups who support them in pursuing their personal passions. 
-The authors of FalconPy consider themselves members of this select group.
+The authors of the FalconPy project consider themselves members of this select group.
 
 
 _“I have a lot of growing up to do. I realized that the other day inside my fort.”_
