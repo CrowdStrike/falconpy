@@ -62,7 +62,7 @@ This has been a critical element in the development of the FalconPy project.
 + `@philldtaylor`
 
 ## Sponsors
-_We all have grown ups._ Fortunate coders have grown ups who support them in pursuing their personal passions. 
+_We all have [grown ups](https://xkcd.com/218/)._ Fortunate coders have grown ups who support them in pursuing their personal passions. 
 The authors of FalconPy consider themselves members of this select group.
 
 
