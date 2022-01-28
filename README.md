@@ -146,7 +146,7 @@ Operating as a single harness for interacting with the entire CrowdStrike Falcon
 
 
 ### Comparing FalconPy class types
-While the [usage syntax](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html) varies slightly, the Uber Class provides the same performance and output as FalconPy Service Classes, and can perform all of the same operations. The Uber Class does **not** support [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) but does provide unique [`override`](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html#the-command-method) functionality that is not available when you are using Service Classes.
+While the [usage syntax](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html) varies slightly, the Uber Class provides the same performance and [output](https://www.falconpy.io/Usage/Response-Handling.html) as FalconPy Service Classes, and can perform all of the same operations. The Uber Class does **not** support [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) but does provide unique [`override`](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html#the-command-method) functionality that is not available when you are using Service Classes.
 
 
 <img width="1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
