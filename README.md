@@ -4,12 +4,12 @@
 
 # FalconPy - The CrowdStrike Falcon SDK for Python
 
-![Repo status](https://img.shields.io/osslifecycle/crowdstrike/falconpy?label=repo%20status)
-![Package Status](https://img.shields.io/pypi/status/crowdstrike-falconpy?label=package%20status)
-![PyPI](https://img.shields.io/pypi/v/crowdstrike-falconpy?label=current%20version)
-![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy)
-![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy)
+[![Repo status](https://img.shields.io/osslifecycle/crowdstrike/falconpy?label=repo%20status)](https://github.com/CrowdStrike/falconpy/graphs/code-frequency)
+[![Package Status](https://img.shields.io/pypi/status/crowdstrike-falconpy?label=package%20status)](https://pypi.org/project/crowdstrike-falconpy/)
+[![PyPI](https://img.shields.io/pypi/v/crowdstrike-falconpy?label=current%20version)](https://pypi.org/project/crowdstrike-falconpy/#history)
+[![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy)](https://pypi.org/project/crowdstrike-falconpy/#files)
+[![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy)](https://pypi.org/project/crowdstrike-falconpy/#files)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy)](https://pypistats.org/packages/crowdstrike-falconpy)
 
 The FalconPy SDK contains a collection of Python classes that abstract CrowdStrike Falcon OAuth2 API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
 
@@ -31,9 +31,9 @@ routing requests thru a list of proxies, disabling SSL verification, and custom 
 > _"...One SDK to rule them all, One SDK to find them, One SDK to bring them all and in the darkness bind them."_
 
 #### Supported versions of Python
-FalconPy was developed for Python 3, and does not support versions of Python below 3.6. Every commit to the FalconPy code base is tested for functionality using all versions of Python the library currently supports.
+FalconPy was developed for Python 3, and does not support versions of Python below 3.6. Every commit to the FalconPy code base is unit tested for functionality using all versions of Python the library currently supports.
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy?logo=python&label=Supported%20versions&logoColor=white)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy?logo=python&label=Supported%20versions&logoColor=white)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_ubuntu.yml)
 
 > While Python 3.5 should not have problems running FalconPy, as of February 2021 this version is no longer analyzed as part of our unit testing.
 
