@@ -6,7 +6,14 @@
 FalconPy is a community-driven open source project designed to assist developers with implementing CrowdStrike's APIs within their applications, and is not a formal CrowdStrike product.
 As such it carries no formal support, expressed or implied.
 
-## Issue Reporting
+- [Issue Reporting and Questions](#issue-reporting-and-questions)
+- [Community Forums](#community-forums)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+
+![Adversary Lineup](docs/asset/adversary-lineup-2.png)
+
+## Issue Reporting and Questions
 
 GitHub Issues are used to report bugs and issues. 🐛
 
@@ -25,8 +32,6 @@ Issue reports that do not result in a bug finding, documentation or link update,
 [![GitHub issues](https://img.shields.io/github/issues-raw/crowdstrike/falconpy?logo=github)](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aopen+is%3Aissue)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/crowdstrike/falconpy?color=green&logo=github)](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+is%3Aclosed)
 
-![Adversary Lineup](docs/asset/adversary-lineup-2.png)
-
 ## Community Forums
 The discussion board for this repository also provides the community with means to communicate regarding [enhancements ideas](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AIdeas), [integration examples](https://github.com/CrowdStrike/falconpy/discussions/496) and [new releases](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3A%22Show+and+tell%22).
 
@@ -40,7 +45,7 @@ There are four discussion categories:
 
 [![GitHub Discussions](https://img.shields.io/github/discussions/CrowdStrike/falconpy?logo=github&logoColor=white)](https://github.com/CrowdStrike/falconpy/discussions)
 
-# Documentation
+## Documentation
 ### Official Project Documentation: [falconpy.io](https://falconpy.io)
 
 Extended documentation is also available via the [wiki](https://github.com/CrowdStrike/falconpy/wiki) for this repository.
@@ -49,7 +54,7 @@ This content is updated as part of our release cycle and synchronized hourly.
 
 [![Documentation Version](https://img.shields.io/endpoint?url=https%3A%2F%2Ffalconpy.io%2F_version.json&label=documentation%20version)](https://falconpy.io)
 
-# Contributing
+## Contributing
 Interested in earning a place on our [contributors list](https://github.com/CrowdStrike/falconpy/blob/main/AUTHORS.md#contributors)?
 
 Join an elite community of security-focused Python coders and help **stop breaches**.
