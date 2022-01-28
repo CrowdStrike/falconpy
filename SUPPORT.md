@@ -13,9 +13,9 @@ As such it carries no formal support, expressed or implied.
 
 ![Adversary Lineup](docs/asset/adversary-lineup-2.png)
 
-## Issue Reporting and Questions
+## Issue Reporting and Questions 🐛
 
-GitHub Issues are used to report bugs and issues. 🐛
+Issue tracking is maintained within this reposity and used to track bugs, documentation and link updates, enhancement requests and security concerns. 
 
 [![Report Issue](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/report-issue.png)](https://github.com/CrowdStrike/falconpy/issues/new/choose)
 
