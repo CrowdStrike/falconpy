@@ -52,7 +52,7 @@ This content is updated as part of our release cycle and synchronized hourly.
 # Contributing
 Interested in earning a place on our [contributors list](https://github.com/CrowdStrike/falconpy/blob/main/AUTHORS.md#contributors)?
 
-Join an elite community of security-focused Python coders.
+Join an elite community of security-focused Python coders and help **stop breaches**.
 
 We want your contributions!
 
