@@ -23,7 +23,8 @@ The FalconPy SDK contains a collection of Python classes that abstract CrowdStri
 ## Overview :mag_right:
 There are currently 45 CrowdStrike Falcon API service collections containing 397 individual operations, all of which are accessible via FalconPy.
 
-FalconPy also supports interaction with all CrowdStrike regions, custom connection and response timeouts, routing requests thru a list of proxies, and disabling SSL verification when required.
+FalconPy also supports interaction with all CrowdStrike regions, custom connection and response timeouts, 
+routing requests thru a list of proxies, disabling SSL verification, and configuring custom headers.
 
 > If the CrowdStrike APIs were rings of great power, that the Dark Lord Sauron gifted to the kings of dwarves, elves and men, then CrowdStrike's FalconPy would be the One Ring.
 > 
