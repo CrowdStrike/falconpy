@@ -12,14 +12,20 @@ GitHub Issues are used to report bugs and issues. 🐛
 
 [![Report Issue](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/report-issue.png)](https://github.com/CrowdStrike/falconpy/issues/new/choose)
 
-Have a question you can't find answered in the documentation?
+Have a question you can't find answered in the [documentation](https://falconpy.io) or [samples](https://github.com/CrowdStrike/falconpy/tree/main/samples)?
 
 Please submit usage questions to the Q&A section of our discussion board.
 
 [![Discussions](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/ask-a-question.png)](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A)
 
+Not sure which one to choose? :thinking:
+
+Issue reports that do not result in a bug finding, security alert, or enhancement requests are converted into discussions. Discussions that relate to potential errors, security concerns or enhancement requests will result in the generation of an issue report.  So, either button should get the job done.
+
 [![GitHub issues](https://img.shields.io/github/issues-raw/crowdstrike/falconpy?logo=github)](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aopen+is%3Aissue)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/crowdstrike/falconpy?color=green&logo=github)](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+is%3Aclosed)
+
+![Adversary Lineup](docs/asset/adversary-lineup-2.png)
 
 ## Community Forums
 The discussion board for this repository also provides the community with means to communicate regarding [enhancements ideas](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AIdeas), [integration examples](https://github.com/CrowdStrike/falconpy/discussions/496) and [new releases](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3A%22Show+and+tell%22).
@@ -53,3 +59,9 @@ Join an elite community of security-focused Python coders.
 We want your contributions!
 
 ### Start [here](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md).
+
+---
+
+
+<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="250px" src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/adversary-red-eyes.png"></P>
+<h3><P align="center">WE STOP BREACHES <BR/></P></h3>
