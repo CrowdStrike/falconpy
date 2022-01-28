@@ -68,7 +68,7 @@ The authors of FalconPy consider themselves members of this select group.
 
 _“I have a lot of growing up to do. I realized that the other day inside my fort.”_
 
-—Zach Galifianakis
+_—Zach Galifianakis_
 
 
 Without the support of these executives, the FalconPy project would not have happened.
