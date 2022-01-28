@@ -145,7 +145,7 @@ Operating as a single harness for interacting with the entire CrowdStrike Falcon
 
 
 ### Comparing FalconPy class types
-While the [usage syntax](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html) varies slightly, the Uber Class provides the same performance and output as FalconPy Service Classes, and can perform all of the same operations. The Uber Class does **not** support [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) but does provide unique [`override`](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html#the-command-method) functionality not found within Service Classes.
+While the [usage syntax](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html) varies slightly, the Uber Class provides the same performance and output as FalconPy Service Classes, and can perform all of the same operations. The Uber Class does **not** support [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) but does provide unique [`override`](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html#the-command-method) functionality that is not available when you are using Service Classes.
 
 
 <img width="1" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
@@ -198,14 +198,14 @@ else:
         print(f"[Error {error_code}] {error_message}")
 ```
 
+### More samples
+If you are interesting in reviewing more examples of FalconPy usage, this repository also maintains a collection of [samples](https://github.com/CrowdStrike/falconpy/tree/main/samples) to help get you started with integrating CrowdStrike Falcon into your DevOps processes.
+
 ## Documentation and Support :book:
 FalconPy is a community-driven open source project designed to assist developers with implementing CrowdStrike's APIs within their applications, and is not a formal CrowdStrike product. As such it carries no formal support, expressed or implied.
 
 ### Official Project Documentation: [falconpy.io](https://falconpy.io)
 Extended documentation is also available via the [wiki](https://github.com/CrowdStrike/falconpy/wiki) for this repository.
-
-### Sample code
-This repository also maintains a collection of [samples](https://github.com/CrowdStrike/falconpy/tree/main/samples) for use as examples to get you started with integrating CrowdStrike Falcon into your DevOps processes.
 
 ### Issues and Questions
 
