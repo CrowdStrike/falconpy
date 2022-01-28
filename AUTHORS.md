@@ -27,6 +27,7 @@ These coders deserve accolades and laurels, as well as cool titles and cartoons.
 | Šimon Lukašík, `@isimluk` | [Sanity Checker](https://xkcd.com/1926/) |
 | Josh Lang, `@jlangdev` | [Lint Purveyor](https://xkcd.com/1833/) |
 | Gabe Alford, `@redhatrises` | [Git Whisperer](https://xkcd.com/1597/) |
+| Brendan Kremian, `@bk-cs` | [Disparate Ringbearer](https://xkcd.com/353/)
 | Christophe Viaud, `@falcon-pioupiou` | Maintainer |
 | Shane Shellenbarger, `@soggysec` | Maintainer |
 
@@ -39,7 +40,6 @@ This has been a critical element in the development of the FalconPy project.
 + Justin Harris, `@jhseceng`
 + Bryan McClellan, `@mccbryan3`
 + Caleb Schwartz, `@rewgord`
-+ Brendan Kremian, `@bk-cs`
 + `@modubyk`
 + James Hodgkinson, `@yaleman`
 + `@matcha-shake`
