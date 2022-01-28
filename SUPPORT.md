@@ -21,7 +21,8 @@ Issues may be reported [here](https://github.com/CrowdStrike/falconpy/issues/new
 
 Have a question you can't find answered in the [documentation](https://falconpy.io) or [samples](https://github.com/CrowdStrike/falconpy/tree/main/samples)?
 
-Find out if anyone else in the community is experiencing the same issue on our [discussion board](#community-forums). Your questions are welcome, please submit them to the [Q&A section]((https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A)).
+Find out if anyone else in the community is experiencing the same issue on our [discussion board](#community-forums). 
+Your questions are welcome, please submit them to the [Q&A section](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A).
 
 [![Discussions](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/ask-a-question.png)](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A)
 
