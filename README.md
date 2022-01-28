@@ -62,11 +62,11 @@ The CrowdStrike Falcon SDK for Python provides two distinct methods for interact
 | **[Service Classes](#service-classes)** | **[The Uber Class](#the-uber-class)** |
 | :-- | :-- |
 | <BR/>![Service Classes](docs/asset/service-class-relationships.png) | ![The Uber Class](docs/asset/uber-class-relationships.png) | 
-| Each Service Class represents a single CrowdStrike API service collection providing an interface to the operations available within that service collection.| An all-in-one class that provides a singular interface for all operations in every CrowdStrike API service collection. |
+| Each Service Class represents a single CrowdStrike API service collection providing an interface to the [operations available](https://www.falconpy.io/Operations/Operations-by-Collection.html) within that service collection.| An all-in-one class that provides a singular interface for [all operations](https://www.falconpy.io/Operations/All-Operations.html) in every CrowdStrike API service collection. |
 
 
 ### Service Classes
-Representing a single CrowdStrike Falcon API service collection, each Service Class has a method defined for every operation available within that service collection.
+Representing a single CrowdStrike Falcon API service collection, each Service Class has a method defined for [every operation available](https://www.falconpy.io/Operations/Operations-by-Collection.html) within that service collection.
 
 #### Available Service Classes
 For each CrowdStrike Falcon API service collection, a matching Service Class is available in the FalconPy library.
@@ -127,7 +127,7 @@ For each CrowdStrike Falcon API service collection, a matching Service Class is 
 - Supports CrowdStrike Falcon API [body payload abstraction](https://www.falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction) functionality.
 
 ### The Uber Class
-Operating as a single harness for interacting with the entire CrowdStrike Falcon API, the _Uber Class_ can access every available operation within every API service collection.
+Operating as a single harness for interacting with the entire CrowdStrike Falcon API, the _Uber Class_ can access [every available operation](https://www.falconpy.io/Operations/All-Operations.html) within [every API service collection](https://www.falconpy.io/Operations/Operations-by-Collection.html).
 
 | Code Location | |
 | :--- | :--- |
