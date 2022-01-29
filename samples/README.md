@@ -4,13 +4,12 @@
 
 # FalconPy Sample Library
 
-![Adversary Bust Museum](../docs/asset/musee-des-origines.png)
+<!--![Adversary Bust Museum](../docs/asset/musee-des-origines.png)-->
 
 These examples are provided as a quick start for your project.
 
 + [Authentication for Examples](#authentication-for-these-examples)
 + [Samples by API service collection](#samples-by-api-service-collection)
-    - [Detections](#detections)
     - [Event Streams](#event-streams)
     - [Falcon Discover](#falcon-discover)
     - [Falcon Horizon](#falcon-horizon)
@@ -36,8 +35,6 @@ In order to expedite sample delivery, examples will following one of three stand
 | Standardized "credential" file | This file is named `config.json`, and is in JSON format. A sample of this file, [`config_sample.json`](config_sample.json) is provided within this folder. Rename this file to `config.json`, and then update it's contents to reflect your current development API credentials.  |
 
 > Please note: These are not the only methods for providing these values. The file `config.json` is __not encrypted__ and may not be suitable for production deployments.
-
-
 
 ## Samples by API service collection
 These samples are categorized by API service collection.
@@ -127,5 +124,5 @@ Have an example you've developed yourself that you'd like to share?  **_Excellen
 
 ---
 
-<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="300px" src="../docs/asset/adversary-panda-1.png"></P>
+<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="450px" src="../docs/asset/turbine-panda-lines.png"></P>
 <h3><P align="center">WE STOP BREACHES</P></h3>
