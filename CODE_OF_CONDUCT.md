@@ -4,6 +4,8 @@
 
 # FalconPy Community Code of Conduct
 
+![Hollywood Adversaries](docs/asset/hollywood-adversaries.jpg)
+
 ## Our Pledge
 
 We as members, contributors, and leaders pledge to make participation in our
