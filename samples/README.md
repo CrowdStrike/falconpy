@@ -2,7 +2,10 @@
 
 [![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)
 
-# FalconPy usage examples
+# FalconPy Sample Library
+
+![Adversary Bust Museum](../docs/asset/musee-des-origines.png)
+
 These examples are provided as a quick start for your project.
 
 + [Authentication for Examples](#authentication-for-these-examples)
@@ -24,19 +27,20 @@ These examples are provided as a quick start for your project.
 + [Suggestions](#suggestions)
 
 ## Authentication for these Examples
-In order to expedite sample delivery, we will be following a standard pattern for defining and providing credentials to the API. Credentials are either ingested
-at runtime, or consumed via a standardized "credential" file named `config.json`. These are not the only methods for providing these values.  
+In order to expedite sample delivery, examples will following one of three standard patterns for defining and providing credentials for API access. 
 
-> Please note: The file `config.json` is __not encrypted__ and may not be suitable for production deployments.
+| Pattern | Usage detail |
+| :--- | :--- |
+| Environment variables | Credentials are retrieved from the local environment of the machine the example is executed on.<BR/><BR/>These values are named:<ul><li>`FALCON_CLIENT_ID`</li><li>`FALCON_CLIENT_SECRET`</li></ul> |
+| Runtime (Command line arguments) | Credentials are consumed at runtime via command line parameters. Typically this handled via the [`argparse`](https://docs.python.org/3/library/argparse.html) module. |
+| Standardized "credential" file | This file is named `config.json`, and is in JSON format. A sample of this file, [`config_sample.json`](config_sample.json) is provided within this folder. Rename this file to `config.json`, and then update it's contents to reflect your current development API credentials.  |
 
-In order to test these samples locally in your development environment, rename the file `config_sample.json` to `config.json` and then
-update this file to reflect your current development API credentials.
+> Please note: These are not the only methods for providing these values. The file `config.json` is __not encrypted__ and may not be suitable for production deployments.
+
+
 
 ## Samples by API service collection
 These samples are categorized by API service collection.
-
-### Detections
-_Coming Soon_
 
 ### Event Streams
 | Service Class | Uber Class |
@@ -118,3 +122,10 @@ _Coming Soon_
 Got a suggestion for an example you'd like to see? One of the examples not working as expected? Let us know by posting a message to our [discussion board](https://github.com/CrowdStrike/falconpy/discussions).
 
 Have an example you've developed yourself that you'd like to share?  **_Excellent!_** Please review our [contributing guidelines](/CONTRIBUTING.md) and then submit a pull request.
+
+
+
+---
+
+<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="300px" src="../docs/asset/adversary-panda-1.png"></P>
+<h3><P align="center">WE STOP BREACHES</P></h3>
