@@ -7,7 +7,7 @@ The FalconPy project exists to enhance developer interactions with the CrowdStri
 
 | Name | |
 | :--- | :--- |
-| Joshua Hiller, `@jshcodes` | Lord of the FalconPys 🪰 |
+| Joshua Hiller, `@jshcodes` | Lord of the FalconPys [:fly:](https://xkcd.com/1856/) |
 | Dixon Styres, `@crowdstrikedcs` | Author |
 | Devin Cargill, `@dcargs` | Author |
 
