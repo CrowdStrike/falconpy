@@ -95,5 +95,5 @@ We want your contributions!
 ---
 
 
-<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="350px" src="docs/asset/alliance_team.png"></P>
+<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="350px" src="docs/asset/cs-adversaries-group.png"></P>
 <h3><P align="center">WE STOP BREACHES</P></h3>
