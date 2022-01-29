@@ -25,6 +25,8 @@ These examples are provided as a quick start for your project.
     - [Spotlight Vulnerabilities](#spotlight-vulnerabilities)
 + [Suggestions](#suggestions)
 
+![Turbine Panda](../docs/asset/turbine-panda-fullcolor.png)
+
 ## Authentication for these Examples
 In order to expedite sample delivery, examples will following one of three standard patterns for defining and providing credentials for API access. 
 
