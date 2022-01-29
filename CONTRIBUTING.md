@@ -25,6 +25,8 @@ posting your question in the [discussion board](https://github.com/CrowdStrike/f
     + [Branch targeting](#branch-targeting)
 - [Suggestions](#suggestions)
 
+![Adversary Bust Museum](docs/asset/musee-des-origines.png)
+
 ## How you can contribute
 - See something? Say something! Submit a [bug report](https://github.com/CrowdStrike/falconpy/issues) to let the community know what you've experienced or found. Bonus points if you suggest possible fixes or what you feel may resolve the issue. For example: "_Attempted to use the XZY API class but it errored out. Could a more descriptive error code be returned?_"
 - Join the [discussion board](https://github.com/CrowdStrike/falconpy/discussions) where you can:
