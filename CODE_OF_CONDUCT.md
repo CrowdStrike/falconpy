@@ -4,7 +4,7 @@
 
 # FalconPy Community Code of Conduct
 
-![Hollywood Adversaries](docs/asset/hollywood-adversaries.jpg)
+![Adversary Bust Museum](docs/asset/musee-des-origines.png)
 
 ## Our Pledge
 
