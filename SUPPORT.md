@@ -2,7 +2,7 @@
 
 [![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)
 
-# Support
+# FalconPy support
 FalconPy is a community-driven open source project designed to assist developers with implementing CrowdStrike's APIs within their applications, and is not a formal CrowdStrike product.
 As such it carries no formal support, expressed or implied.
 
@@ -11,7 +11,7 @@ As such it carries no formal support, expressed or implied.
 - [Documentation](#documentation)
 - [Contributing](#contributing)
 
-![Adversary Lineup](docs/asset/adversary-lineup-2.png)
+![Adversary Lineup](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/adversary-lineup-2.png)
 
 ## Issue Reporting and Questions :bug:
 
@@ -67,5 +67,5 @@ We want your contributions!
 ---
 
 
-<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="300px" src="docs/asset/adversary-bear-1.png"></P>
+<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="300px" src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/adversary-bear-1.png"></P>
 <h3><P align="center">WE STOP BREACHES</P></h3>

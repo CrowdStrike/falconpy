@@ -3,13 +3,13 @@
 [![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)
 
 # FalconPy Project Authors
-The FalconPy project exists to enhance developer interactions with the CrowdStrike Falcon API. Designed to be easy to integrate and use within your Python projects, the library is released under the [Unlicense](LICENSE) license. Developed and maintained by a diverse group of security architects, engineers and specialists, FalconPy has received multiple contributions from the community at large.
+The FalconPy project exists to enable developer interactions with the CrowdStrike Falcon API. Designed to be easy to integrate and use within your Python projects, the library is released under the [Unlicense](LICENSE) license. Developed and maintained by a diverse group of security architects, engineers and specialists, FalconPy has received multiple contributions from the community at large.
 
 | Name | |
 | :--- | :--- |
-| Joshua Hiller, `@jshcodes` | Lord of the FalconPys [:fly:](https://xkcd.com/1856/) |
-| Dixon Styres, `@crowdstrikedcs` | Author |
-| Devin Cargill, `@dcargs` | Author |
+| Joshua Hiller, `@jshcodes` | [Lord of the FalconPys](https://xkcd.com/1604/) [:fly:](https://xkcd.com/1856/) |
+| Dixon Styres, `@crowdstrikedcs` | [Unification Formulator](https://xkcd.com/1646/) |
+| Devin Cargill, `@dcargs` | [Amalgamation Deviser](https://xkcd.com/722/) |
 
 <BR/>
 
@@ -20,7 +20,7 @@ The FalconPy project exists to enhance developer interactions with the CrowdStri
 
 ## Maintainers
 The following contributors have demonstrated their passion for the FalconPy project by going above and beyond to assist with the maintenance of this repository.
-These coders deserve accolades and laurels as well as cool titles and cartoons. Their efforts have definitely earned them the community's gratitude.
+These coders deserve accolades and laurels as well as cool titles and cartoons. Their efforts have earned them the community's appreciation.
 
 | Name | Role |
 | :--- | :--- |
@@ -28,8 +28,8 @@ These coders deserve accolades and laurels as well as cool titles and cartoons. 
 | Josh Lang, `@jlangdev` | [Lint Purveyor](https://xkcd.com/1833/) |
 | Gabe Alford, `@redhatrises` | [Git Whisperer](https://xkcd.com/1597/) |
 | Brendan Kremian, `@bk-cs` | [Disparate Ringbearer](https://xkcd.com/353/)
-| Christophe Viaud, `@falcon-pioupiou` | Maintainer |
-| Shane Shellenbarger, `@soggysec` | Maintainer |
+| Christophe Viaud, `@falcon-pioupiou` | [Consequence Substantiator](https://xkcd.com/1678/) |
+| Shane Shellenbarger, `@soggysec` | [Calamity Validator](https://xkcd.com/1700/) |
 
 ## Contributors
 The following members of the community have made requests, suggestions, code contributions or provided feedback and reported bugs.
@@ -95,5 +95,5 @@ We want your contributions!
 ---
 
 
-<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="350px" src="docs/asset/cs-adversaries-group.png"></P>
+<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="350px" src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-adversaries-group.png"></P>
 <h3><P align="center">WE STOP BREACHES</P></h3>
