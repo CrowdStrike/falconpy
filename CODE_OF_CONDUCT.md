@@ -4,8 +4,6 @@
 
 # FalconPy Community Code of Conduct
 
-![CrowdStrike subheader](docs/asset/crowdstrike-header.png)
-
 ## Our Pledge
 
 We as members, contributors, and leaders pledge to make participation in our
@@ -133,3 +131,8 @@ For answers to common questions about this code of conduct, see the FAQ at
 https://www.contributor-covenant.org/faq. Translations are available at
 https://www.contributor-covenant.org/translations.
 
+
+---
+
+<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="300px" src="docs/asset/alliance_team.png"></P>
+<h3><P align="center">WE STOP BREACHES</P></h3>
