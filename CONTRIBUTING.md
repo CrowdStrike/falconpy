@@ -189,3 +189,10 @@ processes related to package deployment. At this time, contributors _do not_ hav
 
 ## Suggestions
 If you have suggestions on how this process could be improved, please let us know by [starting a new discussion](https://github.com/CrowdStrike/falconpy/discussions).
+
+
+---
+
+
+<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="350px" src="docs/asset/turbine-panda.png"></P>
+<h3><P align="center">WE STOP BREACHES</P></h3>
