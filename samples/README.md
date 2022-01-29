@@ -10,19 +10,6 @@ These examples are provided as a quick start for your project.
 
 + [Authentication for Examples](#authentication-for-these-examples)
 + [Samples by API service collection](#samples-by-api-service-collection)
-    - [Event Streams](#event-streams)
-    - [Falcon Discover](#falcon-discover)
-    - [Falcon Horizon](#falcon-horizon)
-    - [Falcon Flight Control](#falcon-flight-control)
-    - [Falcon X Sandbox](#falcon-x-sandbox)
-    - [Hosts](#hosts)
-    - [IOC](#ioc)
-    - [MalQuery](#malquery)
-    - [Quick Scan / Sample Uploads](#quick-scan--sample-uploads)
-    - [Real Time Response](#real-time-response)
-    - [Sample Uploads](#sample-uploads)
-    - [Sensor Download](#sensor-download)
-    - [Spotlight Vulnerabilities](#spotlight-vulnerabilities)
 + [Suggestions](#suggestions)
 
 ## Authentication for these Examples
@@ -37,7 +24,21 @@ In order to expedite sample delivery, examples will following one of three stand
 > Please note: These are not the only methods for providing these values. The file `config.json` is __not encrypted__ and may not be suitable for production deployments.
 
 ## Samples by API service collection
-These samples are categorized by API service collection.
+These following samples are categorized by API service collection.
+
+- [Event Streams](#event-streams)
+- [Falcon Discover](#falcon-discover)
+- [Falcon Horizon](#falcon-horizon)
+- [Falcon Flight Control](#falcon-flight-control)
+- [Falcon X Sandbox](#falcon-x-sandbox)
+- [Hosts](#hosts)
+- [IOC](#ioc)
+- [MalQuery](#malquery)
+- [Quick Scan / Sample Uploads](#quick-scan--sample-uploads)
+- [Real Time Response](#real-time-response)
+- [Sample Uploads](#sample-uploads)
+- [Sensor Download](#sensor-download)
+- [Spotlight Vulnerabilities](#spotlight-vulnerabilities)
 
 ### Class type legend
 Provided examples are further categorized by the type of class used to interact with the CrowdStrike API.
