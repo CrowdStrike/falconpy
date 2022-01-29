@@ -25,8 +25,6 @@ These examples are provided as a quick start for your project.
     - [Spotlight Vulnerabilities](#spotlight-vulnerabilities)
 + [Suggestions](#suggestions)
 
-![Turbine Panda](../docs/asset/turbine-panda-fullcolor.png)
-
 ## Authentication for these Examples
 In order to expedite sample delivery, examples will following one of three standard patterns for defining and providing credentials for API access. 
 
@@ -39,7 +37,7 @@ In order to expedite sample delivery, examples will following one of three stand
 > Please note: These are not the only methods for providing these values. The file `config.json` is __not encrypted__ and may not be suitable for production deployments.
 
 ## Samples by API service collection
-These samples are categorized by API service collection.
+These samples are categorized by API service collection and broken out by class method (Service Class vs. Uber class).
 
 ### Event Streams
 | Service Class | Uber Class |
