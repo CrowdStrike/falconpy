@@ -67,5 +67,5 @@ We want your contributions!
 ---
 
 
-<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="300px" src="docs/asset/lunar-wizard.png"></P>
+<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="300px" src="docs/asset/adversary-bear-1.png"></P>
 <h3><P align="center">WE STOP BREACHES</P></h3>
