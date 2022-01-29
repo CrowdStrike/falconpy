@@ -23,7 +23,7 @@ In order to expedite sample delivery, examples will following one of three stand
 
 > Please note: These are not the only methods for providing these values. The file `config.json` is __not encrypted__ and may not be suitable for production deployments.
 
-![Turbine Panda](../docs/asset/turbine-panda-fullcolor.png)
+![Turbine Panda](../docs/asset/musee-des-origines.png)
 
 ## Samples by API service collection
 These following samples are categorized by API service collection.
