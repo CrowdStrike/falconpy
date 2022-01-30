@@ -1,4 +1,24 @@
+# Version 1.0.0
+**Stable Release**
+
+## Other
++ Updated: Author information, `AUTHORS.md`
++ Updated: Contributor documentation, `CONTRIBUTING.md`
++ Formatting: Code of Conduct, `CODE_OF_CONDUCT.md`
++ Updated: Documentation primer, `docs/README.md`
++ Updated: Package metadata and classifiers, `setup.py`
++ Updated: Package information and repository overview, `README.md`
++ Updated: Pull Request template, `.github/pull_request_template.md`
++ Updated: Samples documentation, `samples/README.md`
++ Updated: Security Policy, `SECURITY.md`
++ Updated: Support documentation, `SUPPORT.md`
++ Added: Unit testing documentation, `tests/README.md`
++ Updated: Utilities documentation, `util/README.md`
++ Fixed: Minor comment typo in Offset vs. Token sample, `samples/hosts/offset_vs_token.py`
+
 # Version 0.9.0
+**Release Candidate**
+
 ## Added features and functionality
 + Added: Token generation failure reason tracking to Service and Uber classes. Closes #501.
     - `_service_class.py`

@@ -1,10 +1,10 @@
 # pylint: disable=W1401  # Pylint doesn't appreciate fine art
-# flake8: noqa  # Neither does flake8   ¯\_(ツ)_/¯
+# flake8: noqa=W605  # Neither does flake8   ¯\_(ツ)_/¯
 """
 
                 .---.        .-----------
                /     \  __  /    ------
-              / /     \(  )/    -----
+              / /     \(..)/    -----
              //////   ' \/ `   ---
             //// / // :    : ---     CrowdStrike
            // /   /  /`    '--              FalconPy
@@ -52,7 +52,10 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 # Remove GitHub's emoji
-emojis = [":speech_balloon: ", ":bulb: ", ":pray: ", ":raised_hands: ", " :fire:", ":fire: ", "<small>", "</small>"]
+emojis = [
+    ":speech_balloon: ", ":bulb: ", ":pray: ", ":raised_hands: ", " :fire:", ":fire: ",
+    "<small>", "</small>", " :mag_right:", " :dizzy:", " :memo:", " :coffee:", " :book:"
+    ]
 for emoji in emojis:
     long_description = long_description.replace(emoji, "")
 
@@ -69,7 +72,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url=_PROJECT_URL,
-    project_urls = {
+    project_urls={
         "Documentation": "https://www.falconpy.io",
         "Source": "https://github.com/CrowdStrike/falconpy/tree/main/src/falconpy",
         "Tracker": "https://github.com/CrowdStrike/falconpy/issues"
@@ -93,20 +96,25 @@ setup(
         ],
     },
     classifiers=[
-        "Development Status :: 4 - Beta",
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
+        "Natural Language :: English",
         "Operating System :: Unix",
         "Operating System :: POSIX",
+        "Operating System :: POSIX :: Linux",
         "Operating System :: MacOS",
         "Operating System :: Microsoft :: Windows",
         "Operating System :: OS Independent",
+        "Programming Language :: Python",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
+        "Framework :: Flake8",
         "License :: OSI Approved :: The Unlicense (Unlicense)",
+        "Topic :: Security",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: System :: Systems Administration",
         "Topic :: Utilities"

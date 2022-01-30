@@ -18,6 +18,8 @@ The FalconPy project exists to enable developer interactions with the CrowdStrik
 [![Sponsors](https://img.shields.io/badge/-Sponsors-silver?style=for-the-badge)](#sponsors)
 [![Get on the list](https://img.shields.io/badge/-Get%20on%20the%20list-red?style=for-the-badge)](#want-to-see-your-name-on-this-list)
 
+![Adversary Lineup](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/adversary-lineup-2.png)
+
 ## Maintainers
 The following contributors have demonstrated their passion for the FalconPy project by going above and beyond to assist with the maintenance of this repository.
 These coders deserve accolades and laurels as well as cool titles and cartoons. Their efforts have earned them the community's appreciation.
@@ -62,15 +64,6 @@ This has been a critical element in the development of the FalconPy project.
 + `@philldtaylor`
 
 ## Sponsors
-_We all have [grown ups](https://xkcd.com/218/)._ Fortunate coders have grown ups who support them in pursuing their personal passions. 
-The authors of the FalconPy project consider themselves members of this select group.
-
-
-_“I have a lot of growing up to do. I realized that the other day inside my fort.”_
-
-_—Zach Galifianakis_
-
-
 Without the support of these executives, the FalconPy project would not have happened.
 
 | Name | Role |

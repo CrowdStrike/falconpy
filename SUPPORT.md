@@ -11,8 +11,6 @@ As such it carries no formal support, expressed or implied.
 - [Documentation](#documentation)
 - [Contributing](#contributing)
 
-![Adversary Lineup](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/adversary-lineup-2.png)
-
 ## Issue Reporting and Questions :bug:
 
 Issues may be reported [here](https://github.com/CrowdStrike/falconpy/issues/new/choose) and are used to track bugs, documentation and link updates, enhancement requests and security concerns. 
