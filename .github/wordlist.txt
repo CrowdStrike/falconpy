@@ -680,7 +680,9 @@ DevOps
 roadmap
 integrations
 Lukašík
+Lukasik
 Substantiator
 openSUSE
 LGTM
 Copywrited
+submodules
