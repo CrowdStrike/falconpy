@@ -8,8 +8,8 @@ The FalconPy project exists to enable developer interactions with the CrowdStrik
 | Name | |
 | :--- | :--- |
 | Joshua Hiller, `@jshcodes` | [Lord of the FalconPys](https://xkcd.com/1604/) [:fly:](https://xkcd.com/1856/) |
-| Dixon Styres, `@crowdstrikedcs` | [Unification Formulator](https://xkcd.com/1646/) |
-| Devin Cargill, `@dcargs` | [Amalgamation Deviser](https://xkcd.com/722/) |
+| Dixon Styres, `@crowdstrikedcs` | [Author](https://xkcd.com/1646/) |
+| Devin Cargill, `@dcargs` | [Author](https://xkcd.com/722/) |
 
 <BR/>
 
