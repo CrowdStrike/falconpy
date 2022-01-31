@@ -5,10 +5,10 @@
 # FalconPy Unit Testing
 The contents of this folder are used to unit test the FalconPy code base.
 Developers who are wanting to contribute to the FalconPy project can review this documentation for
-detail regarding how to unit test successfuly so that pull request submissions are not delayed.
+detail regarding how to unit test successfully so that pull request submissions are not delayed.
 
 + [Available tests](#available-tests)
-+ [Configuring your environemnt](#configuring-your-environment)
++ [Configuring your environment](#configuring-your-environment)
 + [Running a single unit test](#running-a-single-unit-test)
 + [Executing the entire unit test series](#executing-the-entire-unit-test-series)
 + [Checking code and docstring style](#checking-code-and-docstring-style)
