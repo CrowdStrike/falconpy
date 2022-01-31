@@ -4,25 +4,28 @@
 
 # Contributing to this repository <!-- omit in toc -->
 
-## Getting started <!-- omit in toc -->
+![Hollywood Adversaries](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/hollywood-adversaries.jpg)
+
 _Welcome!_ We're excited you want to take part in the FalconPy community! 
 
 Please review this document for details regarding getting started with your first contribution, packages you'll need to install as a developer, and our Pull Request process. If you have any questions, please let us know by
 posting your question in the [discussion board](https://github.com/CrowdStrike/falconpy/discussions).
 
-### Before you begin
-- Have you read the [Code of Conduct](CODE_OF_CONDUCT.md)? The Code of Conduct helps us establish community norms and how they'll be enforced.
+> **Before you begin**: Have you read the [Code of Conduct](https://github.com/CrowdStrike/falconpy/blob/main/CODE_OF_CONDUCT.md)?
+> The Code of Conduct helps us establish community norms and how they'll be enforced.
 
-### Table of Contents
 - [How you can contribute](#how-you-can-contribute)
-    + [Bug reporting](#bug-reporting-is-handled-using-githubs-issues)
-    + [All other discussions](#githubs-discussion-board-is-used-for-questions-suggestions-and-feedback)
+    + [Bug reporting](#bug-reporting-is-handled-using-github-issues)
+    + [All other discussions](#discussions-are-used-for-questions-suggestions-and-feedback)
 - [Pull Requests](#pull-requests)
     + [Contributor dependencies](#additional-contributor-package-requirements)
-    + [Unit testing](#unit-testing--code-coverage)
-    + [Linting](#linting)
+    + [Unit testing and Code coverage](#unit-testing-and-code-coverage)
+    + [Code Quality and Style (Linting)](#code-quality-and-style-linting)
     + [Breaking changes](#breaking-changes)
     + [Branch targeting](#branch-targeting)
+    + [Pull Request Template](#pull-request-template)
+    + :warning: [Pull Request Restrictions](#pull-request-restrictions)
+    + [Approval and Merging](#approval-and-merging)
 - [Suggestions](#suggestions)
 
 ## How you can contribute
@@ -31,39 +34,73 @@ posting your question in the [discussion board](https://github.com/CrowdStrike/f
     - [Interact](https://github.com/CrowdStrike/falconpy/discussions/categories/general) with other members of the community
     - Suggest [new functionality](https://github.com/CrowdStrike/falconpy/discussions/categories/ideas)
     - Provide [feedback](https://github.com/CrowdStrike/falconpy/discussions/categories/q-a)
-    - [Show others](https://github.com/CrowdStrike/falconpy/discussions/categories/show-and-tell) how you are using FalconPy today
+    - [Show others](https://github.com/CrowdStrike/falconpy/discussions/categories/show-and-tell) how you are using FalconPy
 - Submit a [Pull Request](#pull-requests)
 
-### Bug reporting is handled using GitHub's issues
-We use GitHub issues to track bugs. Report a bug by opening a [new issue](https://github.com/CrowdStrike/falconpy/issues).
+### Bug reporting is handled using GitHub issues
+[![GitHub issues](https://img.shields.io/github/issues-raw/crowdstrike/falconpy?logo=github)](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aopen+is%3Aissue)
+[![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/crowdstrike/falconpy?color=green&logo=github)](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+is%3Aclosed)
 
-### GitHub's discussion board is used for questions, suggestions and feedback.
-We use GitHub's discussion board functionality to handling community discussions related to 
-[questions](https://github.com/CrowdStrike/falconpy/discussions/categories/q-a), 
-[feedback](https://github.com/CrowdStrike/falconpy/discussions/categories/general) 
-or [functionality enhancements](https://github.com/CrowdStrike/falconpy/discussions/categories/ideas).
+We use [GitHub issues](https://github.com/CrowdStrike/falconpy/issues) to track:
+
++ [bugs](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+label%3A%22bug+%3Abug%3A%22) (`BUG`)
++ [documentation](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+label%3A%22documentation+%3Abook%3A%22) and [linking](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+label%3A%22broken+link+%3Alink%3A%22) issues (`DOC`, `LINK`)
++ [enhancements](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+label%3A%22enhancement+%3Astar2%3A%22) (`ENH`)
++ [security concerns](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+label%3Asecurity) (`SEC`)
+
+[![Report Issue](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/report-issue.png)](https://github.com/CrowdStrike/falconpy/issues/new/choose)
+
+### Discussions are used for questions, suggestions and feedback.
+[![GitHub Discussions](https://img.shields.io/github/discussions/CrowdStrike/falconpy?logo=github&logoColor=white)](https://github.com/CrowdStrike/falconpy/discussions)
+
+We use GitHub's discussion board functionality to handle community discussions related to:
+
++ [questions](https://github.com/CrowdStrike/falconpy/discussions/categories/q-a)
++ [feedback](https://github.com/CrowdStrike/falconpy/discussions/categories/general)
++ [functionality enhancements](https://github.com/CrowdStrike/falconpy/discussions/categories/ideas)
++ [new releases and usage examples](https://github.com/CrowdStrike/falconpy/discussions/categories/show-and-tell)
+
+[![Discussions](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/ask-a-question.png)](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A)
+[![Discussions](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/join-the-discussion.png)](https://github.com/CrowdStrike/falconpy/discussions)
+
+---
 
 ## Pull Requests
+In order for your pull request to be merged, it must pass code style and unit testing requirements. Pull requests that do not receive responses to feedback or requests for changes will be closed.
 
 ### All contributions will be submitted under the Unlicense license
 When you submit code changes, your submissions are understood to be under the same Unlicense [license](LICENSE) that covers the project. 
 If this is a concern, contact the maintainers before contributing.
 
 ### Additional contributor package requirements
-`requirements-dev.txt` contains Python modules required for unit test development and for accessing the integrated debugger within FalconShell. Review this file's contents and install missing requirements as needed.
+`requirements-dev.txt` contains Python modules required for unit test development. Review this file's contents and install missing requirements as needed or install them all with the following command.
 
-### Unit testing & Code coverage
+```shell
+pip3 install -r requirements-dev.txt
+```
+
+### Unit testing and Code coverage
 + All submitted code must also have an associated unit test that tests __all__ code paths within this new segment. (:100: percent coverage)
     - If the code submission is already covered by an existing unit test, additional unit tests are not required.
     - Please include coverage testing results in your Pull Request. (Example: [PR #67](https://github.com/CrowdStrike/falconpy/pull/67))
 + Unit testing is intended to prove out code formatting and functionality, not necessarily API functionality. Unit testing does not need to communicate with the API in order to provide the necessary coverage. 
-+ We use bandit for static code analysis.
++ We use `bandit`, [LGTM](https://lgtm.com/projects/g/CrowdStrike/falconpy), and `pylint` for static code analysis.
     - Please include bandit analysis results in the section provided in your Pull Request.
-    - Pull Requests that produce alerts in bandit may be closed without merging.
+    - Pull Requests that produce alerts in bandit or [LGTM](https://lgtm.com/projects/g/CrowdStrike/falconpy) may be closed without merging.
 + All new contributions __must__ pass unit testing before they will be merged.
     - For scenarios where unit testing passes in the PR and fails post-merge, a maintainer will address the issue. If the problem is programmatic and related to code within the pull request, the merge may be reverted.
 + The util folder contains a BASH script, `run-tests.sh`, that contains the parameters used that match unit testing performed as part of our GitHub workflows.
+
 > You can run all unit tests and perform a bandit analysis by executing the command `util/run-tests.sh` from the root of the project directory.
+
+| Test type | Result |
+| :--- | :--- |
+| Cross-operating system unit testing | [![Unit testing (MacOS)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_macos.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_macos.yml)<BR/>[![Unit testing (Ubuntu)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_ubuntu.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_ubuntu.yml)<BR/>[![Unit testing (Windows)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_windows.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_windows.yml) |
+| Cross-region unit testing | [![Unit testing (EU1)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_eu1.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_eu1.yml)<BR/>[![Unit testing (US2)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_us2.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_us2.yml)<BR/>[![Unit testing (USGOV1)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_usgov1.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_usgov1.yml)<BR/>
+| Coverage | ![CI Test Coverage](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/tests/coverage.svg) |
+| Static analysis | [![Bandit](https://github.com/CrowdStrike/falconpy/actions/workflows/bandit.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/bandit.yml) |
+
+> Cross-operating system unit testing is performed in US1.
 
 #### Posting coverage results to Pull Requests
 Our Pull Request template provides an area for you to post the coverage results from your local unit tests. This table is generated by the command `coverage report` and is executed when you use the "run-tests.sh" BASH script found in the util folder. This table is output only when all unit tests have passed successfully, and is a required element for Pull Request approval.
@@ -137,39 +174,47 @@ Files skipped (0):
 ```
 
 #### More details regarding PyTest, Coverage and Bandit
-For more information regarding PyTest, and how we leverage it to perform unit testing, refer to the [PyTest documentation](https://docs.pytest.org/en/stable/contents.html#toc).
+For more information regarding _PyTest_, and how we leverage it to perform unit testing, refer to the [PyTest documentation](https://docs.pytest.org/en/stable/contents.html#toc).
 
-To find out more above Coverage, review their [website](https://coverage.readthedocs.io/en/coverage-5.5/).
+To find out more above _Coverage_, review their [website](https://coverage.readthedocs.io/en/coverage-5.5/).
 
-To read more about bandit, you can visit [their documentation website](https://bandit.readthedocs.io/en/latest/). 
+To read more about _bandit_, you can visit [their documentation website](https://bandit.readthedocs.io/en/latest/). 
 
-### Linting
-All submitted code must meet minimum linting requirements. 
-+ We use `flake8` and `pylint` for linting. 
+### Code Quality and Style (Linting)
+[![Check Docstrings](https://github.com/CrowdStrike/falconpy/actions/workflows/pydocstyle.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/pydocstyle.yml)
+[![Flake8](https://github.com/CrowdStrike/falconpy/actions/workflows/flake8.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/flake8.yml)
+[![Pylint](https://github.com/CrowdStrike/falconpy/actions/workflows/pylint.yml/badge.svg)](https://github.com/CrowdStrike/falconpy/actions/workflows/pylint.yml)
+
+All submitted code must meet minimum linting requirements. We use the Flake8 framework for our lint specification.
 + All code that is included within the installation package must pass linting workflows when the Pull Request checks have completed.
+    - We use `flake8`, [LGTM](https://lgtm.com/projects/g/CrowdStrike/falconpy), `pydocstyle` and `pylint` to power our linting workflows. 
     - You will be asked to correct linting errors before your Pull Request will be approved.
 + Unit tests do not need to meet this requirement, but try to keep linting errors to a minimum.
 + Samples are checked for linting, but failures will not stop builds at this time.
 + Refer to the `lint.sh` script within the util folder to review our standard linting parameters.
 > You can quickly check the linting for all code within the src folder by executing the command `util/lint.sh` from the root of the project directory.
 
-More information about flake8 can be found [here](https://flake8.pycqa.org/en/latest/).
+More information about _Flake8_ can be found [here](https://flake8.pycqa.org/en/latest/).
 
-More information about pylint can be found [here](https://www.pylint.org/).
+More information about _pydocstyle_ can be found [here](http://www.pydocstyle.org/en/stable/).
+
+More information about _Pylint_ can be found [here](https://www.pylint.org/).
 
 ### Breaking changes
-In an effort to maintain backwards compatibility, we thoroughly unit test every Pull Request for all versions of Python we support. These unit tests are intended to catch general programmatic errors, possible vulnerabilities (via bandit) and _potential breaking changes_. 
+In an effort to maintain backwards compatibility, we thoroughly unit test every Pull Request for all versions of Python we support. These unit tests are intended to catch general programmatic errors, possible vulnerabilities (via `bandit` and [LGTM](https://lgtm.com/projects/g/CrowdStrike/falconpy)) and _potential breaking changes_. 
 
 > If you have to adjust a unit test locally in order to produce passing results, there is a possibility you are working with a potential breaking change.
 
 Please fully document changes to unit tests within your Pull Request. If you did not specify "Breaking Change" on the punch list in the description, and the change is identified as possibly breaking, this may delay or prevent approval of your PR.
 
 ### Branch targeting
-_Please do not target the `main` branch with your Pull Request unless it is the only branch or you are directed to do so by a maintainer_. Instead, target your PR at the most recent development branch. 
+_Please do not target the `main` branch with your Pull Request unless it is the only branch or you are directed to do so by a maintainer_. 
 
-We use [SemVer](https://semver.org/) as our versioning scheme. (Example branch name: _ver_0.4.3_) 
+If you are submitting a sample for inclusion in our [samples library](https://github.com/CrowdStrike/falconpy/tree/main/samples) your submission should target the `samples` branch.
 
-If you are unable to identify the current development branch, please reach out to the maintainers or post a message to the general discussion board.
+All other pull requests should target the `dev` branch.  
+
+Depending on the nature of your pull request, you may be contacted by a maintainer and asked to target a new branch specific to your submission.
 
 ### Pull Request template
 Please use the pull request template provided, making sure the following details are included in your request:
@@ -181,9 +226,31 @@ Please use the pull request template provided, making sure the following details
     - Does additional documentation need to be developed beyond what is listed in your Pull Request?
 + Any other salient points of interest.
 
-### Approval / Merging
+### Pull Request restrictions
+Please review this list and confirm none of the following concerns exist within your request.
+Pull requests containing any of these elements will be prevented from merging to the code base and may be closed.
+
+| Concern | Restriction |
+| :--- | :--- |
+| **Archives** | Limited exceptions to be reviewed by maintainers on a case by case basis. Absolutely unacceptable within the `src` folder. |
+| **Binaries** | Compiled binaries, regardless of intent should not be included in the code base or in samples. |
+| **Disparaging references to 3rd party vendors in source or content** | We here to collaborate regarding FalconPy, not bash the work of others. |
+| **Inappropriate language, comments or references found within source or content** | Comments (and comment art) must not detract from code legibility or impact overall package size. **All** content published to this repository (source or otherwise) must follow the [Code of Conduct](https://github.com/CrowdStrike/falconpy/blob/main/CODE_OF_CONDUCT.md). |
+| **Intellectual property that is not yours** | Copywrited works, trademarks, source code or image assets belonging to others should not be posted to this repository whatsoever. CrowdStrike assets which are already released into the Public Domain will be accepted as long as their usage meets other restrictions, the [Code of Conduct](https://github.com/CrowdStrike/falconpy/blob/main/CODE_OF_CONDUCT.md) and the [CrowdStrike Brand Guide](https://crowdstrikebrand.com/brand-guide/). |
+| **Relative links in README files** | This impacts our package deployment as these files are consumed as part of the build process. All link and image references within README files must contain the full URL. |
+
+### Approval and Merging
 All Pull Requests must be approved by at least one maintainer. Once approved, a maintainer will perform the merge and execute any backend 
-processes related to package deployment. At this time, contributors _do not_ have the ability to merge to the `main` branch.
+processes related to package deployment. 
+
+At this time, contributors _do not_ have the ability to merge to the `main`, `dev` or `samples` branches.
 
 ## Suggestions
 If you have suggestions on how this process could be improved, please let us know by [starting a new discussion](https://github.com/CrowdStrike/falconpy/discussions).
+
+
+---
+
+
+<p align="center"><img src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-footer.png"><BR/><img width="350px" src="https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/turbine-panda.png"></P>
+<h3><P align="center">WE STOP BREACHES</P></h3>

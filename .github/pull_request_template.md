@@ -14,6 +14,7 @@ Pull Request general description should go here.
 - [ ] Breaking Change
 - [ ] Updated unit tests
 - [ ] Documentation
+- [ ] Code sample
 
 > Check the values above that match your PR and remove the remaining.
 
