@@ -679,3 +679,8 @@ autodiscovery
 DevOps
 roadmap
 integrations
+Lukašík
+Substantiator
+openSUSE
+LGTM
+Copywrited
