@@ -64,7 +64,7 @@ The FalconPy SDK provides two distinct methods for interacting with CrowdStrike'
 
 | **[Service Classes](#service-classes)** | **[The Uber Class](#the-uber-class)** |
 | :-- | :-- |
-| <BR/>[![Service Classes](docs/asset/service-class-relationships.png)](#service-classes) | [![The Uber Class](docs/asset/uber-class-relationships.png)](#the-uber-class) | 
+| <BR/>[![Service Classes](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/service-class-relationships.png)](#service-classes) | [![The Uber Class](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/uber-class-relationships.png)](#the-uber-class) | 
 | Each Service Class represents a single CrowdStrike API service collection providing an interface to the [operations available](https://www.falconpy.io/Operations/Operations-by-Collection.html) within that service collection.| An all-in-one class that provides a singular interface for [all operations](https://www.falconpy.io/Operations/All-Operations.html) in every CrowdStrike API service collection. |
 
 
