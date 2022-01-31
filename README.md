@@ -211,7 +211,7 @@ Extended documentation is also available via the [wiki](https://github.com/Crowd
 
 ### Issues and Questions
 
-Is something going wrong? :fire:
+Is something going wrong? 🔥
 
 GitHub Issues are used to report bugs and errors.
 
