@@ -26,7 +26,7 @@ These coders deserve accolades and laurels as well as cool titles and cartoons. 
 
 | Name | Role |
 | :--- | :--- |
-| Šimon Lukašík, `@isimluk` | [Sanity Checker](https://xkcd.com/1926/) |
+| Šimon L., `@isimluk` | [Sanity Checker](https://xkcd.com/1926/) |
 | Josh Lang, `@jlangdev` | [Lint Purveyor](https://xkcd.com/1833/) |
 | Gabe Alford, `@redhatrises` | [Git Whisperer](https://xkcd.com/1597/) |
 | Brendan Kremian, `@bk-cs` | [Disparate Ringbearer](https://xkcd.com/353/)
