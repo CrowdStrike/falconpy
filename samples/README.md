@@ -13,7 +13,7 @@ These examples are provided as a quick start for your project.
 ![Adversary Bust Museum](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/origins-mural.png)
 
 # Authentication for these Examples
-In order to expedite sample delivery, examples will following one of three standard patterns for defining and providing credentials for API access. 
+In order to expedite sample delivery, examples will follow one of three standard patterns for defining and providing credentials for API access. 
 
 | Pattern | Usage detail |
 | :--- | :--- |
