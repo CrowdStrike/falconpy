@@ -13,12 +13,12 @@
 
 The FalconPy SDK contains a collection of Python classes that abstract CrowdStrike Falcon OAuth2 API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
 
-+ [Overview](#overview-mag_right)
-+ [Quick Start](#quick-start-dizzy)
-+ [Documentation and Support](#documentation-and-support-book)
-+ [Contribute to FalconPy](#contribute-to-falconpy-coffee)
++ [Overview](#overview-)
++ [Quick Start](#quick-start-)
++ [Documentation and Support](#documentation-and-support-)
++ [Contribute to FalconPy](#contribute-to-falconpy-)
 
-## Overview :mag_right:
+## Overview 🔎
 There are a large number of CrowdStrike Falcon API [service collections](https://www.falconpy.io/Operations/Operations-by-Collection.html) (45+) collectively containing hundreds of [individual operations](https://www.falconpy.io/Operations/All-Operations.html), all of which are accessible to your project via FalconPy.
 
 The CrowdStrike Falcon SDK for Python also supports interaction with all CrowdStrike regions, custom connection and response timeouts, 
@@ -155,7 +155,7 @@ While the [usage syntax](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.ht
 ![CrowdStrike Divider](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/adversary-lineup-1.png)
 
 
-## Quick Start :dizzy:
+## Quick Start 💫
 
 Stable releases of FalconPy are available on the Python Package Index. In a terminal, execute the following command:
 
@@ -203,7 +203,7 @@ else:
 ### More samples
 If you are interesting in reviewing more examples of FalconPy usage, this repository also maintains a collection of [samples](https://github.com/CrowdStrike/falconpy/tree/main/samples) to help get you started with integrating CrowdStrike Falcon into your DevOps processes.
 
-## Documentation and Support :book:
+## Documentation and Support 📖
 FalconPy is a community-driven open source project designed to assist developers with implementing CrowdStrike's APIs within their applications, and is not a formal CrowdStrike product. As such it carries no formal support, expressed or implied.
 
 ### Official Project Documentation: [falconpy.io](https://falconpy.io)
@@ -241,7 +241,7 @@ The following materials have been produced by the maintainers and members of the
 More information regarding FalconPy documentation and support can be found [here](https://github.com/CrowdStrike/falconpy/blob/main/SUPPORT.md).
 
 
-## Contribute to FalconPy :coffee:
+## Contribute to FalconPy ☕
 Interested in [being acknowledged](https://github.com/CrowdStrike/falconpy/blob/main/AUTHORS.md#contributors) as a member of an elite community of security-focused Python developers that **stop breaches**? 
 
 There are *many* ways you can contribute to the FalconPy project! 
