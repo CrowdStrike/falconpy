@@ -26,7 +26,7 @@ Your questions are welcome, please submit them to the [Q&A section](https://gith
 
 Not sure which one to choose? :thinking:
 
-Issue reports that do not result in a bug finding, documentation or link update, security alert, or enhancement request are converted into discussions. Discussions that relate to potential errors, documentation and link updates, security concerns or enhancement requests will result in the generation of an issue report.  So, either button should get the job done.
+Issue reports that do not result in a bug finding, documentation or link update, security alert, or enhancement request are converted into discussions. Discussions that relate to potential errors, documentation and link updates, security concerns or enhancement requests will result in the generation of an issue report. Either button should get the job done.
 
 [![GitHub issues](https://img.shields.io/github/issues-raw/crowdstrike/falconpy?logo=github)](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aopen+is%3Aissue)
 [![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/crowdstrike/falconpy?color=green&logo=github)](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+is%3Aclosed)
