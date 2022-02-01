@@ -234,7 +234,7 @@ Pull requests containing any of these elements will be prevented from merging to
 | :--- | :--- |
 | **Archives** | Limited exceptions to be reviewed by maintainers on a case by case basis. Absolutely unacceptable within the `src` folder. |
 | **Binaries** | Compiled binaries, regardless of intent should not be included in the code base or in samples. |
-| **Disparaging references to 3rd party vendors in source or content** | We here to collaborate regarding FalconPy, not bash the work of others. |
+| **Disparaging references to 3rd party vendors in source or content** | We are here to collaborate regarding FalconPy, not bash the work of others. |
 | **Inappropriate language, comments or references found within source or content** | Comments (and comment art) must not detract from code legibility or impact overall package size. **All** content published to this repository (source or otherwise) must follow the [Code of Conduct](https://github.com/CrowdStrike/falconpy/blob/main/CODE_OF_CONDUCT.md). |
 | **Intellectual property that is not yours** | Copywrited works, trademarks, source code or image assets belonging to others should not be posted to this repository whatsoever. CrowdStrike assets which are already released into the Public Domain will be accepted as long as their usage meets other restrictions, the [Code of Conduct](https://github.com/CrowdStrike/falconpy/blob/main/CODE_OF_CONDUCT.md) and the [CrowdStrike Brand Guide](https://crowdstrikebrand.com/brand-guide/). |
 | **Relative links in README files** | This impacts our package deployment as these files are consumed as part of the build process. All link and image references within README files must contain the full URL. |
