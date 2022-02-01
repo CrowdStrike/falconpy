@@ -62,7 +62,7 @@ Unit test series are designed to test every code path within every module of the
 
 Developers should either limit their local unit testing to API service collections they are focused on, leveraging API credentials scoped to these collections, or use a development key that is scoped to all of the API service collections being tested.
 
-> An API credential scoped to the every CrowdStrike API service collection is an _extremely powerful_ token. This credential should be guarded closely with the secret rotated on a regular basis.
+> An API credential scoped to every CrowdStrike API service collection is an _extremely powerful_ token. This credential should be guarded closely with the secret rotated on a regular basis.
 
 ## Running a single unit test
 A single unit test can be executed using the `unit-test.sh` utility within the `util` folder.
