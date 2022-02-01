@@ -137,7 +137,7 @@ Operating as a single harness for interacting with the entire CrowdStrike Falcon
 
 #### Uber Class benefits
 
-- Access the entire API with only one import and only one class.
+- Access every CrowdStrike Falcon API service collection with only one import and only one class.
 - Completely abstracts token management, automatically refreshing your token when it expires.
 - Interact with newly released API operations not yet available in the library via the [`override`](https://www.falconpy.io/Usage/Basic-Uber-Class-usage.html#the-command-method) keyword.
 - Provides simple programmatic patterns for interacting with CrowdStrike Falcon APIs.
