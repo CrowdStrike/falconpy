@@ -1,3 +1,9 @@
+# Version 1.0.1
+## Issues resolved
++ Fixed: Parameter abstraction handling issue with the `organization_ids` keyword of the `delete_aws_account` and `get_aws_account` methods within the CSPMRegistration Service Class. Closes #539.
+    - `cspm_registration.py`
+    - `tests/test_cspm_registration.py`
+
 # Version 1.0.0
 **Stable Release**
 
