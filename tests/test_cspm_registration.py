@@ -43,13 +43,13 @@ class TestCSPMRegistration:
         falcon.base_url = "nowhere"
         error_checks = True
         tests = {
-            "get_aws_account": falcon.GetCSPMAwsAccount(ids='12345678', org_ids='12345678', scan_type="dry"),
+            "get_aws_account": falcon.GetCSPMAwsAccount(ids='12345678', organization_ids='12345678', scan_type="dry"),
             "create_aws_account": falcon.CreateCSPMAwsAccount(account_id="12345678",
                                                               cloudtrail_region="us-east-1",
                                                               organization_id="12345678"
                                                               ),
-            "delete_aws_account": falcon.DeleteCSPMAwsAccount(ids='12345678', org_ids='12345678'),
-            "delete_aws_account_org": falcon.DeleteCSPMAwsAccount(org_ids='12345678'),
+            "delete_aws_account": falcon.DeleteCSPMAwsAccount(ids='12345678', organization_ids='12345678'),
+            "delete_aws_account_org": falcon.DeleteCSPMAwsAccount(organization_ids='12345678'),
             "get_azure_account": falcon.GetCSPMAzureAccount(ids='12345678', scan_type="dry"),
             "create_azure_account": falcon.CreateCSPMAzureAccount(tenant_id="12345678",
                                                                   subscription_id="12345678"
@@ -100,7 +100,7 @@ class TestCSPMRegistration:
         else:
             assert bool(type(falcon.GetCSPMAwsAccountScriptsAttachment()) == bytes) is True
 
-    @pytest.mark.skipif(os.getenv("DEBUG_API_BASE_URL", "us1").lower() in ["https://api.laggar.gcw.crowdstrike.com","usgov1"],
+    @pytest.mark.skipif(os.getenv("DEBUG_API_BASE_URL", "us1").lower() in ["https://api.laggar.gcw.crowdstrike.com", "usgov1"],
                         reason="Unit testing unavailable on US-GOV-1"
                         )
     def test_get_azure_user_scripts_attachment(self):
