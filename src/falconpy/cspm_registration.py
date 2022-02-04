@@ -62,7 +62,7 @@ class CSPMRegistration(ServiceClass):
         Keyword arguments:
         scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts
         ids -- AWS account IDs. String or list of strings.
-        organization-ids -- AWS organization IDs. String or list of strings.
+        organization_ids -- AWS organization IDs. String or list of strings.
         limit -- The maximum number of records to return in this response. [Integer, 1-1000]
                  Use with the offset parameter to manage pagination of results. Defaults to 100.
         offset -- The offset to start retrieving records from. Integer.
@@ -82,6 +82,9 @@ class CSPMRegistration(ServiceClass):
         """
         if kwargs.get("scan_type", None):
             kwargs["scan-type"] = kwargs.get("scan_type", None)
+
+        if kwargs.get("organization_ids", None):
+            kwargs["organization-ids"] = kwargs.get("organization_ids", None)
 
         return process_service_request(
             calling_object=self,
@@ -150,6 +153,9 @@ class CSPMRegistration(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/DeleteCSPMAwsAccount
         """
+        if kwargs.get("organization_ids", None):
+            kwargs["organization-ids"] = kwargs.get("organization_ids", None)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -681,7 +687,7 @@ class CSPMRegistration(ServiceClass):
 
         Keyword arguments:
         policy_id -- Policy ID. String.
-        cloud_platform -- Cloud pplatform. Allowed values: `azure`, `aws`, `gcp`. String.
+        cloud_platform -- Cloud platform. Allowed values: `azure`, `aws`, `gcp`. String.
         service -- Service type to filter policy settings by.
                    Available values:
                    ACM                          Kinesis
