@@ -122,6 +122,36 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_combined_kernels(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve kernel compatibility info for Sensor Update Builds.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters -- full parameters payload, not required if platform is provided as a keyword.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/queryCombinedSensorUpdateKernels
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryCombinedSensorUpdateKernels",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
         """Search for members of a Sensor Update Policy by providing a FQL filter and paging detail.
 
@@ -622,6 +652,39 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_kernels(self: object, distinct_field: str = "id", parameters: dict = None, **kwargs) -> dict:
+        """Retrieve kernel compatibility info for Sensor Update Builds.
+
+        Keyword arguments:
+        distinct_field -- The field name to get distinct values for. If you do not
+                          specify a value for this field it will default to `id`.
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return in this response. [Integer, 1-5000]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                        /sensor-update-policies/querySensorUpdateKernelsDistinct
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="querySensorUpdateKernelsDistinct",
+            keywords=kwargs,
+            params=parameters,
+            distinct_field=distinct_field
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
         """Search for members of a Sensor Update Policy by providing a FQL filter and paging detail.
 
@@ -697,6 +760,7 @@ class SensorUpdatePolicy(ServiceClass):
     # backwards compatibility / ease of use purposes
     revealUninstallToken = reveal_uninstall_token
     queryCombinedSensorUpdateBuilds = query_combined_builds
+    queryCombinedSensorUpdateKernels = query_combined_kernels
     queryCombinedSensorUpdatePolicyMembers = query_combined_policy_members
     queryCombinedSensorUpdatePolicies = query_combined_policies
     queryCombinedSensorUpdatePoliciesV2 = query_combined_policies_v2
@@ -709,6 +773,7 @@ class SensorUpdatePolicy(ServiceClass):
     getSensorUpdatePoliciesV2 = get_policies_v2
     createSensorUpdatePoliciesV2 = create_policies_v2
     updateSensorUpdatePoliciesV2 = update_policies_v2
+    querySensorUpdateKernelsDistinct = query_kernels
     querySensorUpdatePolicyMembers = query_policy_members
     querySensorUpdatePolicies = query_policies
 
