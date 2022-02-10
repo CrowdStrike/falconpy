@@ -228,6 +228,7 @@ class APIHarness:
         headers: dict = {}                                  - Headers dictionary (HTTP Headers)
         ids: list or str = None                             - ID list (IDs to handle)
         partition: int or str = None                        - Partition number
+        distinct_field: str = None                          - Distinct Field
         override: str = None   (format: 'METHOD,ENDPOINT')  - Override method and endpoint
         action_name: str = None                             - Action to perform (API specific)
         files: list = []                                    - List of files to upload
@@ -257,6 +258,9 @@ class APIHarness:
             if kwargs.get("partition", None) is not None:
                 # Partition needs to be embedded into the endpoint URL
                 target = target.format(str(kwargs.get("partition", None)))
+            if kwargs.get("distinct_field", None) is not None:
+                # distinct_field also needs to be embedded into the endpoint URL
+                target = target.format(str(kwargs.get("distinct_field", None)))
             # Check for authentication
             if self.authenticated:
                 # Which HTTP method to execute
