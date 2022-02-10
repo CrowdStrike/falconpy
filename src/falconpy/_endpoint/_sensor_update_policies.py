@@ -73,6 +73,36 @@ _sensor_update_policies_endpoints = [
     ]
   ],
   [
+    "queryCombinedSensorUpdateKernels",
+    "GET",
+    "/policy/combined/sensor-update-kernels/v1",
+    "Retrieve kernel compatibility info for Sensor Update Builds",
+    "sensor_update_policies",
+    [
+      {
+        "type": "string",
+        "description": "The filter expression that should be used to limit the results",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "integer",
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "maximum": 5000,
+        "minimum": 1,
+        "type": "integer",
+        "description": "The maximum records to return. [1-5000]",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "queryCombinedSensorUpdatePolicyMembers",
     "GET",
     "/policy/combined/sensor-update-members/v1",
@@ -389,6 +419,43 @@ _sensor_update_policies_endpoints = [
         "name": "body",
         "in": "body",
         "required": True
+      }
+    ]
+  ],
+  [
+    "querySensorUpdateKernelsDistinct",
+    "GET",
+    "/policy/queries/sensor-update-kernels/{}/v1",
+    "Retrieve kernel compatibility info for Sensor Update Builds",
+    "sensor_update_policies",
+    [
+      {
+        "type": "string",
+        "description": "The field name to get distinct values for",
+        "name": "distinct-field",
+        "in": "path",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The filter expression that should be used to limit the results",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "integer",
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "maximum": 5000,
+        "minimum": 1,
+        "type": "integer",
+        "description": "The maximum records to return. [1-5000]",
+        "name": "limit",
+        "in": "query"
       }
     ]
   ],
