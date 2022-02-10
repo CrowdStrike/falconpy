@@ -251,11 +251,20 @@ class TestUber:
         else:
             return False
 
+    def uber_test_distinct_field(self):
+        if falcon.command("querySensorUpdateKernelsDistinct", distinct_field="flavor")["status_code"] in AllowedResponses:
+            return True
+        else:
+            return False
+
     def test_GetAWSSettings(self):
         assert self.uberCCAWS_GetAWSSettings() is True
 
     def test_reserved_words(self):
         assert self.uber_test_invalid_reserved_word_payload() is True
+
+    def test_distinct_field(self):
+        assert self.uber_test_distinct_field() is True
 
     def test_QueryAWSAccounts(self):
         assert self.uberCCAWS_QueryAWSAccounts() is True
