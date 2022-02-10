@@ -686,3 +686,5 @@ openSUSE
 LGTM
 Copywrited
 submodules
+queryCombinedSensorUpdateKernels
+querySensorUpdateKernelsDistinct
