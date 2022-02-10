@@ -1,3 +1,15 @@
+# Version 1.0.2
+## Added features and functionality
++ Added: New _queryCombinedSensorUpdateKernels_ and _querySensorUpdateKernelsDistinct_ operations. (**SensorUpdatePolicy Service Class, Uber Class**)
+    - `_endpoint/_sensor_update_policies.py`
+    - `_util.py`
+    - `_version.py`
+    - `api_complete.py`
+    - `sensor_update_policy.py`
+    - `tests/test_sensor_update_policy.py`
+    - `tests/test_uber_api_complete.py`
+
+
 # Version 1.0.1
 ## Issues resolved
 + Fixed: Parameter abstraction handling issue with the `organization_ids` keyword of the `delete_aws_account` and `get_aws_account` methods within the CSPMRegistration Service Class. Closes #539.
