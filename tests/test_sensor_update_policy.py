@@ -31,6 +31,18 @@ class TestFalconSensorUpdate:
         else:
             return False
 
+    def serviceSensorUpdate_querySensorUpdateKernelsDistinct(self):
+        if falcon.query_kernels(distinct_field="flavor", limit=1)["status_code"] in AllowedResponses:
+            return True
+        else:
+            return False
+
+    def serviceSensorUpdate_queryCombinedSensorUpdateKernels(self):
+        if falcon.query_combined_kernels(limit=1)["status_code"] in AllowedResponses:
+            return True
+        else:
+            return False
+
     def serviceSensorUpdate_getSensorUpdatePolicies(self):
         try:
             id_lookup = falcon.querySensorUpdatePolicies(parameters={"limit": 1})
@@ -145,6 +157,12 @@ class TestFalconSensorUpdate:
 
     def test_querySensorUpdatePolicyMembers(self):
         assert self.serviceSensorUpdate_querySensorUpdatePolicyMembers() is True
+
+    def test_serviceSensorUpdate_querySensorUpdateKernelsDistinct(self):
+        assert self.serviceSensorUpdate_querySensorUpdateKernelsDistinct() is True
+
+    def test_serviceSensorUpdate_queryCombinedSensorUpdateKernels(self):
+        assert self.serviceSensorUpdate_queryCombinedSensorUpdateKernels() is True
 
     def test_queryCombinedSensorUpdatePolicies(self):
         assert self.serviceSensorUpdate_queryCombinedSensorUpdatePolicies() is True
