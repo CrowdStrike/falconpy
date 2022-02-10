@@ -372,6 +372,7 @@ def process_service_request(calling_object: object,
     data -- Dictionary representing the data payload passed to the service class function.
     files -- List of files to be uploaded.
     partition -- ID of the partition to open (Event Streams API)
+    distinct_field -- Field name to retrieve distinct values for (Sensor Update Policies API)
     body_validator -- Dictionary containing details regarding body payload validation
     body_required -- List of required body payload parameters
     """
@@ -381,6 +382,9 @@ def process_service_request(calling_object: object,
     passed_partition = kwargs.get("partition", None)
     if passed_partition:
         target_url = target_url.format(str(passed_partition))
+    passed_distinct_field = kwargs.get("distinct_field", None)
+    if passed_distinct_field:
+        target_url = target_url.format(str(passed_distinct_field))
     # Retrieve our keyword arguments
     passed_keywords = kwargs.get("keywords", None)
     passed_params = kwargs.get("params", None)
