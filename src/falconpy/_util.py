@@ -380,7 +380,7 @@ def process_service_request(calling_object: object,
     target_url = f"{calling_object.base_url}{target_endpoint[2]}"
     target_method = target_endpoint[1]
     passed_partition = kwargs.get("partition", None)
-    if passed_partition:
+    if isinstance(passed_partition, int):
         target_url = target_url.format(str(passed_partition))
     passed_distinct_field = kwargs.get("distinct_field", None)
     if passed_distinct_field:
