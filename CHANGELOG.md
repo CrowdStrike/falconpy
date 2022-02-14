@@ -1,3 +1,10 @@
+# Version 1.0.3
+## Issues resolved
++ Fixed: Bug in `process_service_request` (`_util.py`) impacting the `partition` keyword argument of the `refresh_active_stream` method in the Event Streams Service Class.
+    - `_util.py`
+    - `tests/test_event_streams.py`
+    - Thanks go out to @kra-ts for contribution this fix!
+
 # Version 1.0.2
 ## Added features and functionality
 + Added: New _queryCombinedSensorUpdateKernels_ and _querySensorUpdateKernelsDistinct_ operations. (**SensorUpdatePolicy Service Class, Uber Class**)
