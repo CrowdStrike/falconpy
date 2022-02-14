@@ -688,3 +688,5 @@ Copywrited
 submodules
 queryCombinedSensorUpdateKernels
 querySensorUpdateKernelsDistinct
+Kevin
+Kragh
