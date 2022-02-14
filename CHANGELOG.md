@@ -1,6 +1,6 @@
 # Version 1.0.3
 ## Issues resolved
-+ Fixed: Bug in `process_service_request` (`_util.py`) impacting the `partition` keyword argument of the `refresh_active_stream` method in the Event Streams Service Class.
++ Fixed: Bug in `process_service_request` (`_util.py`) impacting the `partition` keyword argument of the `refresh_active_stream` method in the Event Streams Service Class. Closes #547.
     - `_util.py`
     - `tests/test_event_streams.py`
     - Thanks go out to @kra-ts for contributing this fix!
