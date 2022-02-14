@@ -48,7 +48,7 @@ class TestEventStreams:
         with stream:
             result = falcon.refreshActiveStreamSession(app_id=f"{APP_ID}",
                                                        action_name="refresh_active_stream_session",
-                                                       partition="0"
+                                                       partition=0
                                                        )
             return bool(result["status_code"] in AllowedResponses)
 
