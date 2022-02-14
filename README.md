@@ -36,7 +36,7 @@ The CrowdStrike Falcon SDK for Python was developed for Python 3, and does not s
 
 [![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy)](https://pypi.org/project/crowdstrike-falconpy/#files)
 [![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy)](https://pypi.org/project/crowdstrike-falconpy/#files)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy?label=Supported%20versions)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_ubuntu.yml)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy?label=supported%20versions)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_ubuntu.yml)
 
 #### Supported Operating Systems
 The FalconPy SDK is unit tested on the following operating systems.
@@ -211,7 +211,7 @@ FalconPy is a community-driven open source project designed to assist developers
 ### Official Project Documentation: [falconpy.io](https://falconpy.io)
 
 [![Website](https://img.shields.io/website?down_color=lightgrey&down_message=offline&label=falconpy.io&logo=data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f%2BCE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H%2Be9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu%2B7hHg512MZ%2Fm%2F%2B3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO%2BkPFY5bzFWStVWKNO%2FsNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338%2Fa5fIpdCrg0wcsyjDA2y6wefwe%2FeWvnxMS8pHAfaXxznYxAI7QL1quN8HztO%2FQQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL%2BTzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19%2B%2FdNo38%2Fhq9yr%2BiELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM%2BlkjFIlVEYht%2Fzn3sFkYYUyUnIRcemhCtCU6JQOLiIU%2BQeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17%2F97%2FvO9b4NK4g25157hfHCGB773%2FcA0HZIEAKiMj%2BLWiOxljG%2Fi96pnCFP58XHnrWX2%2B9cj0dYl9Yu2FE9%2F9rXrcAAgs2eSyiBfOe%2FXRD503h%2FCuffOubQVUXL%2BJh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx%2FbbXapMy21My%2BYizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL%2FQ3V0%2FmX95ILMXTTGYVfaut%2FaP2%2BoCMAvnZgCcsF5fcR0dg65YHAdwB%2BQApADvu0AuOe%2FftlJAD7Nsgmm6yBjDtfWORJZlNtFyo%2FlR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ%2FwOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg%3D%3D&up_color=green&up_message=online&url=https%3A%2F%2Ffalconpy.io)](https://falconpy.io)
-![Documentation Version](https://img.shields.io/endpoint?url=https%3A%2F%2Ffalconpy.io%2F_version.json)
+![Documentation Version](https://img.shields.io/endpoint?url=https%3A%2F%2Ffalconpy.io%2F_version.json&label=documentation%20version)
 
 Extended documentation is also available via the [wiki](https://github.com/CrowdStrike/falconpy/wiki) for this repository.
 
