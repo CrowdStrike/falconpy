@@ -18,7 +18,7 @@ The FalconPy SDK contains a collection of Python classes that abstract CrowdStri
 + [Contribute to FalconPy](#contribute-to-falconpy-)
 
 ## Overview 🔎
-There are a large number of CrowdStrike Falcon API [service collections](https://www.falconpy.io/Operations/Operations-by-Collection.html) (45+) collectively containing hundreds of [individual operations](https://www.falconpy.io/Operations/All-Operations.html), all of which are accessible to your project via FalconPy.
+There are many CrowdStrike Falcon API [service collections](https://www.falconpy.io/Operations/Operations-by-Collection.html) collectively containing hundreds of [individual operations](https://www.falconpy.io/Operations/All-Operations.html), all of which are accessible to your project via FalconPy.
 
 The CrowdStrike Falcon SDK for Python also supports interaction with all CrowdStrike regions, custom connection and response timeouts, 
 routing requests through a list of proxies, disabling SSL verification, and custom header configuration.
