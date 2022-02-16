@@ -62,7 +62,7 @@ This program accepts the following command line arguments.
 |  -c _COMMAND_ | --command _COMMAND_ | Command to perform, one of:<BR/>list or view. |
 |  -t _TABLE_FORMAT_ | --table_format _TABLE_FORMAT_ | Table format to use for display, one of: <BR/>plain, simple, github, grid, fancy_grid, pipe, orgtbl,<BR/>jira, presto, pretty, psql, rst, mediawiki, moinmoin,<BR/>youtrack, html, unsafehtml, latext, latex_raw,<BR/>latex_booktabs, latex_longtable, textile, or tsv. |
 |  -f _FILTER_ | --filter _FILTER_ | FQL filter to use to filter detections |
-|  -o _SORT_ | --sort _SORT_  | Field to sort by, one of:<BR/>id, device_id, status, hostname, tactic, technique, or first_occurance<BR/>Defaults to first_occurance (asc) |
+|  -o _SORT_ | --sort _SORT_  | Field to sort by, one of:<BR/>id, device_id, status, hostname, tactic, technique, or first_occurrence<BR/>Defaults to first_occurrence (asc) |
 |  -r | --reverse | Reverses the sort order |
 |  -l _LIMIT_ | --limit _LIMIT_ | Total number of detections to return. (Max: 1000) |
 |  -n | --no_color | Disable color output in result displays |
@@ -77,7 +77,7 @@ This program accepts the following command line arguments.
 #### Basic usage
 The only required command line arguments are `-k` (CrowdStrike Falcon API Client ID) and `-s` (CrowdStrike Falcon API Client Secret).
 
-The default command is "list" with no filters specified, sorting by first behavior occurance.
+The default command is "list" with no filters specified, sorting by first behavior occurrence.
 
 ##### Example
 
@@ -160,7 +160,7 @@ Results can be sorted by any of the following columns:
 | `hostname` | Device Hostname |
 | `tactic` | Behavior Tactic |
 | `technique` | Behavior Technique |
-| `first_occurance` | First behavior timestamp |
+| `first_occurrence` | First behavior timestamp |
 
 Sort order can be reversed using the `-r` argument.
 
@@ -385,8 +385,8 @@ optional arguments:
   -f FILTER, --filter FILTER
                         FQL filter to use to filter detections
   -o SORT, --sort SORT  Field to sort by, one of:
-                        id, device_id, status, hostname, tactic, technique, or first_occurance
-                        Defaults to first_occurance (asc)
+                        id, device_id, status, hostname, tactic, technique, or first_occurrence
+                        Defaults to first_occurrence (asc)
   -r, --reverse         Reverse the sort order
   -l LIMIT, --limit LIMIT
                         Total number of detections to display (Max: 1000)
