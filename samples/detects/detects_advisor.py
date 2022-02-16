@@ -110,8 +110,8 @@ def parse_command_line():  # pylint: disable=R0914
                         )
     parser.add_argument("-o", "--sort",
                         help="Field to sort by, one of:\n"
-                        "id, device_id, status, hostname, tactic, technique, or first_occurance\n"
-                        "Defaults to first_occurance (asc)",
+                        "id, device_id, status, hostname, tactic, technique, or first_occurrence\n"
+                        "Defaults to first_occurrence (asc)",
                         required=False
                         )
     parser.add_argument("-r", "--reverse",
@@ -244,7 +244,7 @@ def argument_handling(arguments: object):
     s_tbl_fmt = "fancy_grid"
     s_filt = None
     s_col = False
-    s_srt = "first_occurance"
+    s_srt = "first_occurrence"
     s_rev = False
     s_lmt = 1000
     s_cmd, s_det, s_stat, s_assgn = create_action_list(parsed=arguments)
@@ -289,7 +289,7 @@ def show_result(results: list, style: str, sorting: str, reversing: bool):
     for row in end_result:
         row.pop("id", None)
         row.pop("status", None)
-        row.pop("first_occurance", None)
+        row.pop("first_occurrence", None)
         row.pop("device_id", None)
     print(f"{Color.MAGENTA}{LIST_BANNER}{Color.END}")
     print(tabulate(tabular_data=end_result,
@@ -326,7 +326,7 @@ def clean_result(itm: dict, extend: bool = False) -> dict:
     bcnt = 0
     for beh in itm["behaviors"]:
         if bcnt == 0:
-            cln["first_occurance"] = beh["timestamp"]
+            cln["first_occurrence"] = beh["timestamp"]
             bcnt += 1
         if extend:
             behave = {}
