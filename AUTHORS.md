@@ -42,6 +42,7 @@ This has been a critical element in the development of the FalconPy project.
 + Justin Harris, `@jhseceng`
 + Bryan McClellan, `@mccbryan3`
 + Caleb Schwartz, `@rewgord`
++ Christopher Hammond, `ChristopherHammond13`
 + `@modubyk`
 + James Hodgkinson, `@yaleman`
 + `@matcha-shake`
