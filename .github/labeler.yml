@@ -19,7 +19,7 @@ unit testing:
 - util/*
 
 code samples:
-- samples/*.py
+- samples/**.py
 - samples/cspm_registration/*.py
 - samples/discover_aws/*.py
 - samples/falconx_sandbox/*.py
