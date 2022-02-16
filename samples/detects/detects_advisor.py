@@ -438,7 +438,7 @@ def display_detail(detection: str):
             print(f"{Color.MAGENTA}{DETAIL_BANNER}{Color.END}")
             for ioc in result["behaviors"]:
                 print(f"%-15s {Color.BOLD}{ioc['tactic']}{Color.END}" % "Tactic:",
-                      f" ({ioc['tactic_id']})"
+                      f"({ioc['tactic_id']})"
                       )
                 print(f"%-15s {Color.RED}{ioc['technique']}{Color.END}" % "Technique:",
                       f"({ioc['technique_id']})"
