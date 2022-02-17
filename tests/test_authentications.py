@@ -110,7 +110,8 @@ class TestAuthentications:
             if result["status_code"] == 201:
                 falcon = CloudConnectAWS(client_id=os.environ["CROSS_DEBUG_KEY"],
                                          client_secret=os.environ["CROSS_DEBUG_SECRET"],
-                                         base_url="usgov1"
+                                         base_url="usgov1",
+                                         renew_window=300
                                          )
                 result = falcon.auth_object.token()
                 if result["status_code"] == 429:

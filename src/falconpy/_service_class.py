@@ -55,33 +55,36 @@ class ServiceClass:
         and initializes attributes.
 
         Keyword arguments:
-        access_token -- Token string to use for all requests performed.
+        access_token: Token string to use for all requests performed.
                         Mutually exclusive to all other authentication elements.
-        auth_object - Properly authenticated instance of the OAuth2 Authentication service class.
-        base_url -- CrowdStrike API URL to use for requests. [Default: US-1]
-        ssl_verify -- Boolean specifying if SSL verification should be used. [Default: True]
-        proxy -- Dictionary of proxies to be used for requests.
-        timeout -- Float or tuple specifying timeouts to use for requests.
-        creds -- Dictionary containing CrowdStrike API credentials.
-                 Mutually exclusive to client_id / client_secret.
-                 {
-                     "client_id": "CLIENT_ID_HERE",
-                     "client_secret": "CLIENT_SECRET_HERE",
-                     "member_cid": "CHILD_CID_MSSP_ONLY"
-                 }
-        client_id -- Client ID for the CrowdStrike API. Mutually exclusive to creds.
-        client_secret -- Client Secret for the CrowdStriek API. Mutually exclusive to creds.
-        member_cid -- CID of the child account to authenticate to (MSSP only)
-        validate_payload -- Boolean specifying if body payloads should be validated.
-                            Defaults to True.
-        user_agent -- User-Agent string to use for all requests made to the CrowdStrike API.
-                      String. Defaults to crowdstrike-falconpy/VERSION.
+        auth_object: Properly authenticated instance of the OAuth2 Authentication service class.
+        base_url: CrowdStrike API URL to use for requests. [Default: US-1]
+        ssl_verify: Boolean specifying if SSL verification should be used. [Default: True]
+        proxy: Dictionary of proxies to be used for requests.
+        timeout: Float or tuple specifying timeouts to use for requests.
+        creds: Dictionary containing CrowdStrike API credentials.
+               Mutually exclusive to client_id / client_secret.
+               {
+                   "client_id": "CLIENT_ID_HERE",
+                   "client_secret": "CLIENT_SECRET_HERE",
+                   "member_cid": "CHILD_CID_MSSP_ONLY"
+               }
+        client_id: Client ID for the CrowdStrike API. Mutually exclusive to creds.
+        client_secret: Client Secret for the CrowdStriek API. Mutually exclusive to creds.
+        member_cid: CID of the child account to authenticate to (MSSP only)
+        validate_payload: Boolean specifying if body payloads should be validated.
+                          Defaults to True.
+        user_agent: User-Agent string to use for all requests made to the CrowdStrike API.
+                    String. Defaults to crowdstrike-falconpy/VERSION.
+        renew_window: Amount of time (in seconds) between now and the token expiration before
+                      a refresh of the token is performed. Default: 120
 
         This method only accepts keywords to specify arguments.
         """
         access_token = kwargs.get("access_token", None)
         self.ssl_verify = kwargs.get("ssl_verify", True)
         self.timeout = kwargs.get("timeout", None)
+        self.token_renew_window = kwargs.get("renew_window", 120)
         user_agent = kwargs.get("user_agent", None)
         member_cid = kwargs.get("member_cid", None)
         # Currently defaulting to validation enabled

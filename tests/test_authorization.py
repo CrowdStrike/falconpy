@@ -110,7 +110,7 @@ class TestAuthorization():
             self.falcon = APIHarness(creds={
                     "client_id": self.config["falcon_client_id"],
                     "client_secret": self.config["falcon_client_secret"],
-                }, base_url=self.config["falcon_base_url"]
+                }, base_url=self.config["falcon_base_url"], renew_window=300
             )
             self.falcon.authenticate()
             if self.falcon.authenticated:
