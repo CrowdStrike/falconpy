@@ -1,0 +1,40 @@
+{
+  "resources": [
+    {
+        "first_name": "User",
+        "last_name": "One",
+        "uid": "user.one@my-company.com",
+        "role_list": ["security_lead", "remote_responder", "image_admin"]
+    },
+    {
+        "first_name": "User",
+        "last_name": "Two",
+        "uid": "user.two@my-company.com",
+        "role_list": ["dashboard_admin"]
+    },
+    {
+        "first_name": "User",
+        "last_name": "Three",
+        "uid": "user.three@my-company.com",
+        "role_list": ["remediation_manager", "remote_responder", "scheduled_report_admin", "horizon_admin"]
+    },
+    {
+        "first_name": "User",
+        "last_name": "Four",
+        "uid": "user.four@my-company.com",
+        "role_list": ["endpoint_manager", "event_viewer", "desktop_support"]
+    },
+    {
+        "first_name": "User",
+        "last_name": "Five",
+        "uid": "user.five@my-company.com",
+        "role_list": ["dashboard_admin"]
+    },
+    {
+        "first_name": "User",
+        "last_name": "Six",
+        "uid": "user.six@my-company.com",
+        "role_list": []
+    }
+  ]
+}
