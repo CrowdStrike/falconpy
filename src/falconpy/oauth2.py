@@ -58,7 +58,7 @@ class OAuth2:
     def __init__(self: object, base_url: str = "https://api.crowdstrike.com",
                  ssl_verify: bool = True, proxy: dict = None, timeout: float or tuple = None,
                  creds: dict = None, client_id: str = None, client_secret: str = None,
-                 user_agent: str = None, member_cid: str = None):
+                 user_agent: str = None, member_cid: str = None, renew_window: int = 120):
         """Class constructor.
 
         Initializes the base class by ingesting credentials,
@@ -66,15 +66,17 @@ class OAuth2:
         for the base URL, SSL verification, and timeouts.
 
         Keyword arguments:
-        base_url -- CrowdStrike API URL to use for requests. [Default: US-1]
-        ssl_verify -- Boolean specifying if SSL verification should be used. [Default: True]
-        proxy -- Dictionary of proxies to be used for requests.
-        timeout -- Float or tuple specifying timeouts to use for requests.
-        creds -- Dictionary containing CrowdStrike API credentials.
-                 Mutually exclusive to client_id / client_secret.
-        client_id -- Client ID for the CrowdStrike API. Mutually exclusive to creds.
-        client_secret -- Client Secret for the CrowdStrike API. Mutually exclusive to creds.
-        member_cid -- Child CID to connec to. Mutually exclusive to creds.
+        base_url: CrowdStrike API URL to use for requests. [Default: US-1]
+        ssl_verify: Boolean specifying if SSL verification should be used. [Default: True]
+        proxy: Dictionary of proxies to be used for requests.
+        timeout: Float or tuple specifying timeouts to use for requests.
+        creds: Dictionary containing CrowdStrike API credentials.
+               Mutually exclusive to client_id / client_secret.
+        client_id: Client ID for the CrowdStrike API. Mutually exclusive to creds.
+        client_secret: Client Secret for the CrowdStrike API. Mutually exclusive to creds.
+        member_cid: Child CID to connect to. Mutually exclusive to creds.
+        renew_window: Amount of time (in seconds) between now and the token expiration before
+                      a refresh of the token is performed. Default: 120
 
         This method only supports keywords to specify arguments.
         """
@@ -97,7 +99,7 @@ class OAuth2:
         self.proxy = proxy
         self.user_agent = user_agent
         self.token_expiration = 0
-        self.token_renew_window = 20
+        self.token_renew_window = renew_window
         self.token_time = time.time()
         self.token_value = False
         self.token_expired = lambda: bool(
@@ -163,7 +165,7 @@ class OAuth2:
         """Revoke the specified authorization token.
 
         Keyword arguments:
-        token -- Token string to be revoked.
+        token: Token string to be revoked.
 
         When not specified as a keyword, token is assumed as the only accepted argument.
 

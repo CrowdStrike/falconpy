@@ -47,8 +47,6 @@ class APIHarness:
 
     # pylint: disable=too-many-instance-attributes
 
-    TOKEN_RENEW_WINDOW = 20  # in seconds
-
     def __init__(self: object,  # pylint: disable=R0913
                  base_url: str = "https://api.crowdstrike.com",
                  creds: dict = None,
@@ -58,7 +56,8 @@ class APIHarness:
                  ssl_verify: bool = True,
                  proxy: dict = None,
                  timeout: float or tuple = None,
-                 user_agent: str = None
+                 user_agent: str = None,
+                 renew_window: int = 120
                  ) -> object:
         """Uber class constructor.
 
@@ -67,22 +66,24 @@ class APIHarness:
         Afterwards class attributes are initialized.
 
         Keyword arguments:
-        base_url -- CrowdStrike API URL to use for requests. [Default: US-1]
-        ssl_verify -- Boolean specifying if SSL verification should be used. [Default: True]
-        proxy -- Dictionary of proxies to be used for requests.
-        timeout -- Float or tuple specifying timeouts to use for requests.
-        creds -- Dictionary containing CrowdStrike API credentials.
-                 Mutually exclusive to client_id / client_secret.
-                 {
-                     "client_id": "CLIENT_ID_HERE",
-                     "client_secret": "CLIENT_SECRET_HERE",
-                     "member_cid": "CHILD_CID_MSSP_ONLY"
-                 }
-        client_id -- Client ID for the CrowdStrike API. Mutually exclusive to creds.
-        client_secret -- Client Secret for the CrowdStrike API. Mutually exclusive to creds.
-        member_cid -- Child CID to connect to. (MSSP only) Mutually exclusive to creds.
-        user_agent -- User-Agent string to use for all requests made to the CrowdStrike API.
-                      String. Defaults to crowdstrike-falconpy/VERSION.
+        base_url: CrowdStrike API URL to use for requests. [Default: US-1]
+        ssl_verify: Boolean specifying if SSL verification should be used. [Default: True]
+        proxy: Dictionary of proxies to be used for requests.
+        timeout: Float or tuple specifying timeouts to use for requests.
+        creds: Dictionary containing CrowdStrike API credentials.
+               Mutually exclusive to client_id / client_secret.
+               {
+                   "client_id": "CLIENT_ID_HERE",
+                   "client_secret": "CLIENT_SECRET_HERE",
+                   "member_cid": "CHILD_CID_MSSP_ONLY"
+               }
+        client_id: Client ID for the CrowdStrike API. Mutually exclusive to creds.
+        client_secret: Client Secret for the CrowdStrike API. Mutually exclusive to creds.
+        member_cid: Child CID to connect to. (MSSP only) Mutually exclusive to creds.
+        user_agent: User-Agent string to use for all requests made to the CrowdStrike API.
+                    String. Defaults to crowdstrike-falconpy/VERSION.
+        renew_window: Amount of time (in seconds) between now and the token expiration before
+                      a refresh of the token is performed. Default: 120
 
         This method only accepts keywords to specify arguments.
         """
@@ -111,6 +112,7 @@ class APIHarness:
         self.headers = lambda: {"Authorization": f"Bearer {self.token}"} if self.token else {}
         self.commands = api_endpoints
         self.user_agent = user_agent  # Issue #365
+        self.token_renew_window = renew_window  # in seconds
 
     def valid_cred_format(self: object) -> bool:
         """Confirm credential dictionary format.
@@ -127,7 +129,7 @@ class APIHarness:
     def token_expired(self: object) -> bool:
         """Return a boolean based upon the token expiration status."""
         retval = False
-        if (time.time() - self.token_time) >= (self.token_expiration - self.TOKEN_RENEW_WINDOW):
+        if (time.time() - self.token_time) >= (self.token_expiration - self.token_renew_window):
             retval = True
 
         return retval
