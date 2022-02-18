@@ -76,7 +76,8 @@ class OAuth2:
         client_secret: Client Secret for the CrowdStrike API. Mutually exclusive to creds.
         member_cid: Child CID to connect to. Mutually exclusive to creds.
         renew_window: Amount of time (in seconds) between now and the token expiration before
-                      a refresh of the token is performed. Default: 120
+                      a refresh of the token is performed. Default: 120, Max: 1200
+                      Values over 1200 will be reset to the maximum.
 
         This method only supports keywords to specify arguments.
         """
@@ -100,6 +101,9 @@ class OAuth2:
         self.user_agent = user_agent
         self.token_expiration = 0
         self.token_renew_window = renew_window
+        if self.token_renew_window > 1200:
+            # Maximum renewal window is 20 minutes
+            self.token_renew_window = 1200
         self.token_time = time.time()
         self.token_value = False
         self.token_expired = lambda: bool(
