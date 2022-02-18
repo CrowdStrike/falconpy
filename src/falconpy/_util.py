@@ -425,6 +425,9 @@ def confirm_base_url(provided_base: str = "https://api.crowdstrike.com") -> str:
             # Invalid base URL name, fall back to assuming they didn't give us https
             returned_base = f"https://{provided_base}"
 
+    if returned_base[-1] == "/":  # Issue 558
+        returned_base = returned_base[:-1]
+
     return returned_base
 
 
