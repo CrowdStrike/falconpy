@@ -16,7 +16,7 @@ from falconpy import Hosts
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Hosts(auth_object=config)
-AllowedResponses = [200, 202, 400, 404, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 202, 400, 401, 404, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestHosts:
