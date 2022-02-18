@@ -1,3 +1,37 @@
+# Version 1.0.4
+## Added features and functionality
++ Added: Token renewal window customization. Developers may now customize the length of time between token expiration and token renewal. (Max: 20 minutes)
+    ```python
+    from falconpy import APIHarness
+    from falconpy import OAuth2
+
+    uber = APIHarness(client_id="CLIENT_ID", client_secret="CLIENT_SECRET", renew_window=300)
+    service = OAuth2(client_id="CLIENT_ID", client_secret="CLIENT_SECRET", renew_window=60)
+    ```
+    - `_service_class.py`
+    - `api_complete.py`
+    - `oauth2.py`
+    - `tests/test_authentications.py`
+    - Thank you to @tsullivan06 for this contribution!
+
++ Added: Error handling for when calling `query_vulnerabilities_combined` (combinedQueryVulnerabilities) wihtout specifying a `filter` argument. (Must be present as a keyword or as part of the `parameters` dictionary.)
+    - `spotlight_vulnerabilities.py`
+    - `tests/test_spotlight_vulnerabilities.py`
+    - Thank you to @tsullivan06 for this contribution!
+
++ Added: Export of `ServiceClass` generic base class as part of `__all__` within `__init__.py`. This change will allow developers to inherit from the Service Class base class without importing a protected module (which generates a warning in some editors).
+    ```python
+    from falconpy import ServiceClass
+    ```
+    - `__init__.py`
+    - Thank you to @morcef for this contribution!
+
+## Issues resolved
++ Fixed: Authentication issue when provided a base_url containing a trailing backslash.
+    - `_util.py`
+    - `tests/test_authorizations.py`
+    - Thanks to @mwb8 for identifying and reporting this issue!
+
 # Version 1.0.3
 ## Issues resolved
 + Fixed: Bug in `process_service_request` (`_util.py`) impacting the `partition` keyword argument of the `refresh_active_stream` method in the Event Streams Service Class. Closes #547.
