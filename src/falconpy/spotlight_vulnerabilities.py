@@ -35,7 +35,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import force_default, process_service_request, handle_single_argument
+from ._util import force_default, process_service_request
+from ._util import handle_single_argument, generate_error_result
 from ._service_class import ServiceClass
 from ._endpoint._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints as Endpoints
 
@@ -86,13 +87,25 @@ class SpotlightVulnerabilities(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
             /spotlight-vulnerabilities/combinedQueryVulnerabilities
         """
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="combinedQueryVulnerabilities",
-            keywords=kwargs,
-            params=parameters
-            )
+        if not kwargs.get("filter", None) and not parameters.get("filter", None):
+            fail_msg = [
+                "The filter argument is required to use this method.",
+                "You may provide this as a keyword or as part of the parameters dictionary."
+            ]
+            returned = generate_error_result(
+                code=500,
+                message=" ".join(fail_msg)
+                )
+        else:
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="combinedQueryVulnerabilities",
+                keywords=kwargs,
+                params=parameters
+                )
+
+        return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_vulnerabilities(self: object, *args, parameters: dict = None, **kwargs) -> dict:
