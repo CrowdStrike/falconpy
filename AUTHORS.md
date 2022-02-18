@@ -64,6 +64,7 @@ This has been a critical element in the development of the FalconPy project.
 + Andrew Harris, `@ciberesponce`
 + `@philldtaylor`
 + Kevin K. Kragh, `@kra-ts`
++ `@mwb8`
 
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
