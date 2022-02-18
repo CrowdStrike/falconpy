@@ -83,7 +83,8 @@ class APIHarness:
         user_agent: User-Agent string to use for all requests made to the CrowdStrike API.
                     String. Defaults to crowdstrike-falconpy/VERSION.
         renew_window: Amount of time (in seconds) between now and the token expiration before
-                      a refresh of the token is performed. Default: 120
+                      a refresh of the token is performed. Default: 120, Max: 1200
+                      Values over 1200 will be reset to the maximum.
 
         This method only accepts keywords to specify arguments.
         """
@@ -113,6 +114,9 @@ class APIHarness:
         self.commands = api_endpoints
         self.user_agent = user_agent  # Issue #365
         self.token_renew_window = renew_window  # in seconds
+        if self.token_renew_window > 1200:
+            # Maximum renewal window is 20 minutes
+            self.token_renew_window = 1200
 
     def valid_cred_format(self: object) -> bool:
         """Confirm credential dictionary format.

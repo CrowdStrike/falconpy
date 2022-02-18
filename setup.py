@@ -87,6 +87,7 @@ setup(
         "dev": [
             "flake8",
             "coverage",
+            "pydocstyle",
             "pylint",
             "pytest-cov",
             "pytest",
