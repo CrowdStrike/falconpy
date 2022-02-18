@@ -14,7 +14,7 @@
     - `tests/test_authentications.py`
     - Thank you to @tsullivan06 for this contribution!
 
-+ Added: Error handling for when calling `query_vulnerabilities_combined` (combinedQueryVulnerabilities) wihtout specifying a `filter` argument. (Must be present as a keyword or as part of the `parameters` dictionary.)
++ Added: Error handling for when calling `query_vulnerabilities_combined` (combinedQueryVulnerabilities) without specifying a `filter` argument. (Must be present as a keyword or as part of the `parameters` dictionary.)
     - `spotlight_vulnerabilities.py`
     - `tests/test_spotlight_vulnerabilities.py`
     - Thank you to @tsullivan06 for this contribution!
