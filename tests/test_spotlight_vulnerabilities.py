@@ -57,6 +57,8 @@ class TestSpotlight:
     def spotlight_GenerateErrors(self):
         falcon.base_url = "nowhere"
         errorChecks = True
+        if falcon.combinedQueryVulnerabilities()["status_code"] != 500:
+            errorChecks = False
         if falcon.queryVulnerabilities(parameters={})["status_code"] != 500:
             errorChecks = False
         if falcon.getVulnerabilities(ids="12345678")["status_code"] != 500:

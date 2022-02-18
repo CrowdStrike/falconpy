@@ -100,7 +100,7 @@ class TestAuthentications:
         if result["status_code"] == 201:
             falcon = APIHarness(client_id=os.environ["CROSS_DEBUG_KEY"],
                                 client_secret=os.environ["CROSS_DEBUG_SECRET"],
-                                base_url="usgov1"
+                                base_url="https://api.laggar.gcw.crowdstrike.com/"  # Testing for issue 558
                                 )
             t_creds = {
                 "client_id": os.environ["CROSS_DEBUG_KEY"],
