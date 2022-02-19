@@ -1,3 +1,9 @@
+# Version 1.0.5
+## Added features and functionality
++ Added: Minimum value check for `renew_window` argument. (Min: 120 seconds)
+    - `api_complete.py`
+    - `oauth2.py`
+
 # Version 1.0.4
 ## Added features and functionality
 + Added: Token renewal window customization. Developers may now customize the length of time between token expiration and token renewal. (Max: 20 minutes)
