@@ -100,8 +100,8 @@ class OAuth2:
         self.proxy = proxy
         self.user_agent = user_agent
         self.token_expiration = 0
-        # Maximum renewal window is 20 minutes
-        self.token_renew_window = min(renew_window, 1200)
+        # Maximum renewal window is 20 minutes, Minimum is 2 minutes
+        self.token_renew_window = max(min(renew_window, 1200), 120)
         self.token_time = time.time()
         self.token_value = False
         self.token_expired = lambda: bool(

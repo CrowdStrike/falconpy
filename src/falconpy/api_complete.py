@@ -113,7 +113,8 @@ class APIHarness:
         self.headers = lambda: {"Authorization": f"Bearer {self.token}"} if self.token else {}
         self.commands = api_endpoints
         self.user_agent = user_agent  # Issue #365
-        self.token_renew_window = min(renew_window, 1200)  # in seconds
+        # Maximum renewal window is 20 minutes, Minimum is 2 minutes
+        self.token_renew_window = max(min(renew_window, 1200), 120)  # in seconds
 
     def valid_cred_format(self: object) -> bool:
         """Confirm credential dictionary format.
