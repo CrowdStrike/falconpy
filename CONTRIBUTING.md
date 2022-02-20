@@ -26,6 +26,7 @@ posting your question in the [discussion board](https://github.com/CrowdStrike/f
     + [Pull Request Template](#pull-request-template)
     + :warning: [Pull Request Restrictions](#pull-request-restrictions)
     + [Approval and Merging](#approval-and-merging)
+    + [Releases](#releases)
 - [Suggestions](#suggestions)
 
 ## How you can contribute
@@ -236,14 +237,21 @@ Pull requests containing any of these elements will be prevented from merging to
 | **Binaries** | Compiled binaries, regardless of intent should not be included in the code base or in samples. |
 | **Disparaging references to 3rd party vendors in source or content** | We are here to collaborate regarding FalconPy, not bash the work of others. |
 | **Inappropriate language, comments or references found within source or content** | Comments (and comment art) must not detract from code legibility or impact overall package size. **All** content published to this repository (source or otherwise) must follow the [Code of Conduct](https://github.com/CrowdStrike/falconpy/blob/main/CODE_OF_CONDUCT.md). |
-| **Intellectual property that is not yours** | Copywrited works, trademarks, source code or image assets belonging to others should not be posted to this repository whatsoever. CrowdStrike assets which are already released into the Public Domain will be accepted as long as their usage meets other restrictions, the [Code of Conduct](https://github.com/CrowdStrike/falconpy/blob/main/CODE_OF_CONDUCT.md) and the [CrowdStrike Brand Guide](https://crowdstrikebrand.com/brand-guide/). |
+| **Intellectual property that is not yours** | Copywrited works, trademarks, source code or image assets belonging to others should not be posted to this repository whatsoever. CrowdStrike assets which are already released into the Public Domain will be accepted as long as their usage meets other restrictions, the rules specified in the [Code of Conduct](https://github.com/CrowdStrike/falconpy/blob/main/CODE_OF_CONDUCT.md), and the guidelines set forth in the [CrowdStrike Brand Guide](https://crowdstrikebrand.com/brand-guide/). |
 | **Relative links in README files** | This impacts our package deployment as these files are consumed as part of the build process. All link and image references within README files must contain the full URL. |
 
 ### Approval and Merging
 All Pull Requests must be approved by at least one maintainer. Once approved, a maintainer will perform the merge and execute any backend 
 processes related to package deployment. 
 
-At this time, contributors _do not_ have the ability to merge to the `main`, `dev` or `samples` branches.
+At this point in time, `main`, `dev` and `samples` are protected branches.
+
+To read more about the FalconPy code review and packaging cycle, please review the contents of [this page](https://github.com/CrowdStrike/falconpy/blob/main/docs/PACKAGING.md).
+
+### Releases
+Stable versions of __crowdstrike-falconpy__ and __crowdstrike-falconpy-dev__ are released by maintainers on a regular cadence based upon current activity and the results of testing.
+
+For more detail, review the [package release cycle](https://github.com/CrowdStrike/falconpy/blob/main/docs/PACKAGING.md) documentation.
 
 ## Suggestions
 If you have suggestions on how this process could be improved, please let us know by [starting a new discussion](https://github.com/CrowdStrike/falconpy/discussions).
