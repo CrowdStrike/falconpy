@@ -10,14 +10,14 @@ and [__production__](https://pypi.org/project/crowdstrike-falconpy/).
 These packages are released on a regular cadence based upon the [code review](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md#code-quality-and-style-linting) and [testing](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md#unit-testing-and-code-coverage) cycle currently in place for this repository.
 
 * [Process overview](#process-overview)
-* [Development Package (__crowstrike-falconpy-dev__)](#development-package-crowstrike-falconpy-dev)
+* [Development Package (__crowdstrike-falconpy-dev__)](#development-package-crowdstrike-falconpy-dev)
 * [Production Package (__crowdstrike-falconpy__)](#production-package-crowdstrike-falconpy)
 * [Questions and Feedback](#questions-and-feedback)
 
 ## Process overview
 ![FalconPy Code Review Process](asset/falconpy_code_review_process.png)
 
-## Development Package (__crowstrike-falconpy-dev__)
+## Development Package (__crowdstrike-falconpy-dev__)
 The development package for FalconPy is released from the [__dev__](https://github.com/CrowdStrike/falconpy/tree/dev) branch as part of the [code review](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md#code-quality-and-style-linting) and [testing](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md#unit-testing-and-code-coverage) process. Depending on the nature of the changes undergoing testing, there may be several development packages released.
 
 These packages will follow the [Semantic Versioning Specification](https://semver.org) (SemVer) for specifying versions,
@@ -45,7 +45,7 @@ package deployment to the [__production__ PyPI package index](https://pypi.org).
 > Please note: Bleeding edge packages published to the [__test__ PyPI package index](https://test.pypi.org) are periodically deleted en masse.
 
 ## Production Package (__crowdstrike-falconpy__)
-After a second round of [code review](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md#code-quality-and-style-linting) and [testing](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md#unit-testing-and-code-coverage) has succesfully been completed, updates are merged to the [__main__](https://github.com/CrowdStrike/falconpy/tree/main) branch of this repository. Shortly afterwards, a _bleeding edge_ package will be released to the [__test__ PyPI package index](https://test.pypi.org). Developers are encouraged to leverage the _bleeding edge_ build to perform local testing before upgrading to the latest version. After a period of time used for soak and acceptance testing (specified in the development build announcement), the production package for FalconPy is released to the [__production__ PyPI package index](https://pypi.org). All production versions of FalconPy strictly follow [SemVer](https://semver.org) for version specification.
+After a second round of [code review](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md#code-quality-and-style-linting) and [testing](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md#unit-testing-and-code-coverage) has successfully been completed, updates are merged to the [__main__](https://github.com/CrowdStrike/falconpy/tree/main) branch of this repository. Shortly afterwards, a _bleeding edge_ package will be released to the [__test__ PyPI package index](https://test.pypi.org). Developers are encouraged to leverage the _bleeding edge_ build to perform local testing before upgrading to the latest version. After a period of time used for soak and acceptance testing (specified in the development build announcement), the production package for FalconPy is released to the [__production__ PyPI package index](https://pypi.org). All production versions of FalconPy strictly follow [SemVer](https://semver.org) for version specification.
 
 A release announcement is posted to the [Show and Tell section](https://github.com/CrowdStrike/falconpy/discussions/categories/show-and-tell)
 of the discussion board after every release of a production package.
