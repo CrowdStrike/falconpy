@@ -88,10 +88,19 @@ class TestDetects:
                 # print(f"{key}: {tests[key]}")
         return error_checks
 
+    def service_detects_test_comment(self):
+        if falcon.update_detects_by_ids(ids=falcon.query_detects(limit=1)["body"]["resources"], comment="FalconPy Unit Testing")["status_code"] == 200:
+            return True
+        else:
+            return False
+
     def test_query_detects(self):
         assert bool(
             falcon.query_detects(parameters={"limit": 1})["status_code"] in AllowedResponses
             ) is True
+
+    def test_comment_update(self):
+        assert self.service_detects_test_comment() is True
 
     @pytest.mark.skipif(falcon.query_detects(parameters={"limit": 1})["status_code"] == 429,
                         reason="API rate limit reached"

@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, generate_error_result
 from ._payload import generic_payload_list, update_detects_payload
 from ._payload import aggregate_payload
 from ._service_class import ServiceClass
@@ -171,6 +171,10 @@ class Detects(ServiceClass):
                                                 ),
                                           passed_keywords=kwargs
                                           )
+        if body.get("comment", None):
+            if not body.get("show_in_ui", None) and not body.get("status", None):
+                # Issue 563
+                body["show_in_ui"] = True
 
         return process_service_request(
             calling_object=self,
