@@ -20,16 +20,18 @@ These packages are released on a regular cadence based upon the [code review](ht
 ## Development Package (__crowdstrike-falconpy-dev__)
 The development package for FalconPy is released from the [__dev__](https://github.com/CrowdStrike/falconpy/tree/dev) branch as part of the [code review](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md#code-quality-and-style-linting) and [testing](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md#unit-testing-and-code-coverage) process. Depending on the nature of the changes undergoing testing, there may be several development packages released.
 
-These packages will follow the [Semantic Versioning Specification](https://semver.org) (SemVer) for specifying versions,
-with the "final" build aligning to the version for the next release.
+These packages will loosely follow the [Semantic Versioning Specification](https://semver.org) (SemVer) for specifying versions,
+with the final release aligning to the version for the next release of the production package.
+
+> Due to [differences](https://github.com/semver/semver/issues/483) between [SemVer](https://semver.org) and [PEP 440](https://www.python.org/dev/peps/pep-0440/), pre-release version numbers will not be SemVer compliant.
 
 ### Example
 | Package | Version number |
 | :-- | :-- |
 | Current production version | __1.0.1__ |
-|Development package 1 | __1.0.2-dev.1__ |
-|Development package 2 | __1.0.2-dev.2__ |
-|Development package (Final) | __1.0.2__ |
+|Development package 1 (pre-release) | __1.0.2.dev1__ |
+|Development package 2 (pre-release) | __1.0.2.dev2__ |
+|Development package (release) | __1.0.2__ |
 
 A bleeding edge / development build announcement is posted to the [Show and Tell section](https://github.com/CrowdStrike/falconpy/discussions/categories/show-and-tell) of the discussion board for each published release of a final development package build.
 
