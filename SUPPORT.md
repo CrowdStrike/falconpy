@@ -29,7 +29,9 @@ Not sure which one to choose? :thinking:
 Issue reports that do not result in a bug finding, documentation or link update, security alert, or enhancement request are converted into discussions. Discussions that relate to potential errors, documentation and link updates, security concerns or enhancement requests will result in the generation of an issue report. Either button should get the job done.
 
 [![GitHub issues](https://img.shields.io/github/issues-raw/crowdstrike/falconpy?logo=github)](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aopen+is%3Aissue)
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/CrowdStrike/falconpy.svg)](http://isitmaintained.com/project/CrowdStrike/falconpy "Percentage of issues still open")
 [![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/crowdstrike/falconpy?color=green&logo=github)](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+is%3Aclosed)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/CrowdStrike/falconpy.svg)](http://isitmaintained.com/project/CrowdStrike/falconpy "Average time to resolve an issue")
 
 ## Community Forums
 The discussion board for this repository also provides the community with means to communicate regarding [enhancements ideas](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AIdeas), [integration examples](https://github.com/CrowdStrike/falconpy/discussions/496) and [new releases](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3A%22Show+and+tell%22).
