@@ -16,3 +16,4 @@ flake8>=3.9.0       # via -r requirements-dev.in
 pytest-cov>=2.11.1  # via -r requirements-dev.in
 pytest>=6.2.2       # via -r requirements-dev.in
 ipython>=7.21.0     # via -r requirements-dev.in
+pydocstyle>=6.1.0
