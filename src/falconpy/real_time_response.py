@@ -453,6 +453,9 @@ class RealTimeResponse(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
                    /real-time-response/RTR-CheckActiveResponderCommandStatus
         """
+        if not kwargs.get("sequence_id", None) and not parameters.get("sequence_id", None):
+            parameters["sequence_id"] = 0
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -523,6 +526,9 @@ class RealTimeResponse(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-CheckCommandStatus
         """
+        if not kwargs.get("sequence_id", None) and not parameters.get("sequence_id", None):
+            parameters["sequence_id"] = 0
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
