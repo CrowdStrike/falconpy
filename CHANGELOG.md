@@ -6,6 +6,13 @@
 + Added: Default value of `0` for `sequence_id` keyword in `check_command_status`, `check_active_responder_command_status` and `check_admin_command_status` methods within Real Time Response Service Classes.
     - `real_time_response.py`
     - `real_time_response_admin.py`
++ Added: Publicly exposed `confirm_base_region`, `confirm_base_url` methods and `BaseURL` enumerator.
+    - `__init__.py`
+
+## Issues resolved
++ Fixed: Missing alias for `api_preempt_proxy_post_graphql` (Operation ID syntax) in Identity Protection Service Class. Closes #567.
+    - `identity_protection.py`
+    - Thanks to @tsullivan06 for identifying and reporting this issue!
 
 # Version 1.0.4
 ## Added features and functionality
