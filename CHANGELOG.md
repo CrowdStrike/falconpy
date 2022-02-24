@@ -1,3 +1,12 @@
+# Version 1.0.5
+## Added features and functionality
++ Added: Argument check in `update_detects_by_ids` (UpdateDetectsByIdsV2). When only a `comment` keyword is provided, `show_in_ui` is appended to the request with a `True` value, which satisfies update requirements.
+    - `detects.py`
+    - `tests/test_detects.py`
++ Added: Default value of `0` for `sequence_id` keyword in `check_command_status`, `check_active_responder_command_status` and `check_admin_command_status` methods within Real Time Response Service Classes.
+    - `real_time_response.py`
+    - `real_time_response_admin.py`
+
 # Version 1.0.4
 ## Added features and functionality
 + Added: Token renewal window customization. Developers may now customize the length of time between token expiration and token renewal. (Max: 20 minutes)

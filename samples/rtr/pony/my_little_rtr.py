@@ -88,7 +88,7 @@ def execute_command(passed_payload: str, hdr: str, cmd: str):
         requested = falcon_rtra.check_admin_command_status(         # Retrieve the results command
             cloud_request_id=request_id,                            # Passing in the cloud_request_id
             sequence_id=0                                           # Results are chunked, but we just need the first result
-            )
+            )                                                       # Starting in v1.0.5, this value defaults to '0'.
         completed = requested["body"]["resources"][0]["complete"]   # Check to see if our command has finished executing
 
     inform(
