@@ -79,7 +79,7 @@ def command_payload(passed_keywords: dict) -> dict:  # pylint: disable=R0912  # 
     bool_keys = ["persist_all", "queue_offline", "persist"]
     for boolean in bool_keys:
         if passed_keywords.get(boolean, None) is not None:
-            returned_payload[key] = passed_keywords.get(boolean, None)
+            returned_payload[boolean] = passed_keywords.get(boolean, None)
 
     if passed_keywords.get("id", -1) > -1:
         returned_payload["id"] = passed_keywords.get("id", None)
