@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import force_default, process_service_request, generate_error_result
+from ._util import force_default, process_service_request
 from ._payload import generic_payload_list, update_detects_payload
 from ._payload import aggregate_payload
 from ._service_class import ServiceClass

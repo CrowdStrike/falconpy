@@ -436,6 +436,6 @@ def confirm_base_region(provided_base_url: str = "https://api.crowdstrike.com") 
     try:
         shortname = BaseURL(provided_base_url.replace("https://", "").lower()).name
     except (KeyError, ValueError):
-        shortname = "us1"  # Fall back to US-1
+        shortname = "US1"  # Fall back to US-1
 
     return shortname
