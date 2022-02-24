@@ -99,6 +99,7 @@ class IdentityProtection(ServiceClass):
     GraphQL = graphql
     api_preempt_proxy_post_graphql = graphql
 
+
 # The legacy name for this class does not conform to PascalCase / PEP8
 # It is defined here for backwards compatibility purposes only.
 Identity_Protection = IdentityProtection  # pylint: disable=C0103
