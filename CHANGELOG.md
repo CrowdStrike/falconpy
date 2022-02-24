@@ -13,6 +13,9 @@
 + Fixed: Missing alias for `api_preempt_proxy_post_graphql` (Operation ID syntax) in Identity Protection Service Class. Closes #567.
     - `identity_protection.py`
     - Thanks to @tsullivan06 for identifying and reporting this issue!
++ Fixed: Incorrect variable used for dictionary key on boolean values within `command_payload` body payload handler. Closes #568.
+    - `_payload/_real_time_response.py`
+    - Relates to discussion [#415](https://github.com/CrowdStrike/falconpy/discussions/415)
 
 # Version 1.0.4
 ## Added features and functionality
