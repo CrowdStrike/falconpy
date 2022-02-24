@@ -97,7 +97,7 @@ class IdentityProtection(ServiceClass):
     # does not conform to snake_case / PEP8 and is defined here
     # for backwards compatibility / ease of use purposes
     GraphQL = graphql
-
+    api_preempt_proxy_post_graphql = graphql
 
 # The legacy name for this class does not conform to PascalCase / PEP8
 # It is defined here for backwards compatibility purposes only.

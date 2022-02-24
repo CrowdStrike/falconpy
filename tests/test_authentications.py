@@ -86,7 +86,7 @@ class TestAuthentications:
 
     def serviceAny_reallyBadBaseURL(self):
         result = confirm_base_region("https://this-url-does-not-exist")
-        if result == "us1":
+        if result == "US1":
             return True
         else:
             return False
