@@ -23,6 +23,8 @@ from ._version import _VERSION, _MAINTAINER, _AUTHOR, _AUTHOR_EMAIL
 from ._version import _CREDITS, _DESCRIPTION, _TITLE, _PROJECT_URL
 from ._version import _DOCS_URL, _KEYWORDS
 from ._service_class import ServiceClass
+from ._util import confirm_base_region, confirm_base_url
+from ._base_url import BaseURL
 from .api_complete import APIHarness
 from .cloud_connect_aws import CloudConnectAWS
 from .cspm_registration import CSPMRegistration
@@ -82,6 +84,7 @@ __project_url__ = _PROJECT_URL
 __docs_url__ = _DOCS_URL
 __keywords__ = _KEYWORDS
 __all__ = [
+    "confirm_base_url", "confirm_base_region", "BaseURL", "ServiceClass",
     "APIHarness", "CloudConnectAWS", "CSPMRegistration", "CustomIOA", "D4CRegistration",
     "Detects", "DeviceControlPolicies", "Discover", "EventStreams", "CompleteDashboard",
     "FalconContainer", "FalconXSandbox", "FirewallManagement", "FirewallPolicies", "HostGroup",
@@ -91,7 +94,7 @@ __all__ = [
     "RealTimeResponse", "Recon", "ReportExecutions", "ResponsePolicies", "SampleUploads",
     "ScheduledReports", "SensorDownload", "SensorUpdatePolicy", "SensorVisibilityExclusions",
     "SpotlightVulnerabilities", "UserManagement", "ZeroTrustAssessment", "PreventionPolicies",
-    "SensorUpdatePolicies", "MessageCenter", "FileVantage", "ServiceClass"
+    "SensorUpdatePolicies", "MessageCenter", "FileVantage"
 ]
 """
 This is free and unencumbered software released into the public domain.
