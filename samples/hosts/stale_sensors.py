@@ -51,6 +51,12 @@ def parse_command_line() -> object:
         required=True
         )
     parser.add_argument(
+        '-m',
+        '--mssp',
+        help='Child CID to access (MSSP only)',
+        required=False
+        )
+    parser.add_argument(
         '-b',
         '--base_url',
         help='CrowdStrike API region (us1, us2, eu1, usgov1)'
@@ -81,11 +87,11 @@ def parse_command_line() -> object:
     return parser.parse_args()
 
 
-def connect_api(key: str, secret: str, base_url: str) -> Hosts:
+def connect_api(key: str, secret: str, base_url: str, child_cid: str = None) -> Hosts:
     """
     Connects to the API and returns an instance of the Hosts Service Class.
     """
-    return Hosts(client_id=key, client_secret=secret, base_url=base_url)
+    return Hosts(client_id=key, client_secret=secret, base_url=base_url, member_cid=child_cid)
 
 
 def get_host_details(id_list: list) -> list:
@@ -150,16 +156,19 @@ def hide_hosts(id_list: list) -> dict:
 
 # Parse our command line
 args = parse_command_line()
+
 # Default SORT to ASC if not present
-if not args.reverse:
-    SORT = False
-else:
+SORT = False
+if args.reverse:
     SORT = bool(args.reverse)
 
-if not args.base_url:
-    BASE = "us1"
-else:
+BASE = "auto"
+if args.base_url:
     BASE = args.base_url
+
+CHILD = None
+if args.mssp:
+    CHILD = args.mssp
 
 # Credentials
 api_client_id = args.client_id
@@ -168,25 +177,23 @@ if not api_client_id and not api_client_secret:
     raise SystemExit("Invalid API credentials provided.")
 
 # Set our stale date to 120 days if not present
-if not args.days:
-    STALE_DAYS = 120
-else:
+STALE_DAYS = 120
+if args.days:
     try:
         STALE_DAYS = int(args.days)
     except ValueError as bad_day_value:
         raise SystemExit("Invalid value specified for days. Integer required.") from bad_day_value
 
 # Do not hide hosts if it is not requested
-if not args.remove:
-    HIDE = False
-else:
+HIDE = False
+if args.remove:
     HIDE = bool(args.remove)
 
 # Calculate our stale date filter
 STALE_DATE = calc_stale_date(STALE_DAYS)
 
 # Connect to the API
-falcon = connect_api(api_client_id, api_client_secret, BASE)
+falcon = connect_api(api_client_id, api_client_secret, BASE, CHILD)
 
 # List to hold our identified hosts
 stale = []
