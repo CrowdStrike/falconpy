@@ -56,6 +56,7 @@ The following arguments are accepted at run time.
 | `-c` COMMAND | `--command` COMMAND | Action to perform<ul><li>list</li><li>add</li><li>remove</li><li>update</li><li>getroles</li></ul>Defaults to __list__ |
 | `-k` FALCON_CLIENT_ID | `--falcon_client_id` FALCON_CLIENT_ID | Falcon Client ID |
 | `-s` FALCON_CLIENT_SECRET | `--falcon_client_secret` FALCON_CLIENT_SECRET | Falcon Client Secret |
+| `-m` CHILD_CID | `--mssp` CHILD_CID | CID for the child instance you wish to access. (MSSP scenarios only) |
 | `-o` SORT | `--sort` SORT  | Field to sort by, one of:<ul><li>firstName</li><li>lastName</li><li>roles</li><li>uid</li><li>uuid</li></ul>Defaults to __lastName__ (_asc_) |
 | `-r` | `--reverse` | Reverse the sort order |
 | `-n` | `--no_color` | Disable color output in result displays |
@@ -70,6 +71,13 @@ The default command is _list_ which requires no additional input.
 
 ```shell
 python3 bulk_user.py -k CLIENT_ID -s CLIENT_SECRET
+```
+
+#### MSSP access
+To access child user data, you will need to provide the child CID when you execute the program.
+
+```shell
+python3 bulk_user.py -k CLIENT_ID -s CLIENT_SECRET -m CHILD_CID
 ```
 
 #### Sorting results
