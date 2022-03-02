@@ -57,7 +57,7 @@ class Color:  # pylint: disable=R0903
 
 
 def inform(msg: str):
-    """Provides informational updates to the user as the program progresses."""
+    """Provide informational updates to the user as the program progresses."""
     print("  %-80s" % msg, end="\r", flush=True)  # pylint: disable=C0209
 
 
@@ -160,7 +160,7 @@ def import_users_from_file(file):
         return users
 
 
-def list_users(table_fmt: str, sorting: str, reversing: bool):
+def list_users(table_fmt: str, sorting: str, reversing: bool):  # pylint: disable=R0915
     """List all current users within the tenant."""
 
     def lookup_fail(resultset: dict):
@@ -248,6 +248,7 @@ def parse_command_line():
                         )
     parser.add_argument("-k", "--falcon_client_id", help="Falcon Client ID", required=True)
     parser.add_argument("-s", "--falcon_client_secret", help="Falcon Client Secret", required=True)
+    parser.add_argument("-m", "--mssp", help="Child CID to access", required=False)
     parser.add_argument("-o", "--sort",
                         help="Field to sort by, one of:\n"
                         "firstName, lastName, roles, uid, uuid\n"
@@ -283,7 +284,10 @@ def parse_command_line():
             parser.error(f"The {cmd} command requires the -d arguments to also be specified.")
         file = args.data_file
         falcon_client_id = args.falcon_client_id
-        falcon_client_secret = args.falcon_client_secret
+        falcon_secret = args.falcon_client_secret
+        mssp = None
+        if args.mssp:
+            mssp = args.mssp
         colors = False
         if args.no_color:
             colors = args.no_color
@@ -302,7 +306,7 @@ def parse_command_line():
     else:
         parser.error(f"The {cmd} command is not recognized.")
 
-    return cmd, file, falcon_client_id, falcon_client_secret, colors, table_style, sort, reverse
+    return cmd, file, falcon_client_id, falcon_secret, mssp, colors, table_style, sort, reverse
 
 
 USER_BANNER = r"""
@@ -316,7 +320,7 @@ USER_BANNER = r"""
 
 if __name__ == "__main__":
     # Parse the command line arguments and set our variables
-    command, filename, client_id, client_secret, no_colors, tables, \
+    command, filename, client_id, client_secret, child_cid, no_colors, tables, \
         sort_column, sort_direction = parse_command_line()
     if no_colors:
         for attr in dir(Color):
@@ -324,7 +328,10 @@ if __name__ == "__main__":
                 setattr(Color, attr, "")
 
     # Authenticate using our provided falcon client_id and client_secret
-    falcon_user = UserManagement(client_id=client_id, client_secret=client_secret)
+    falcon_user = UserManagement(client_id=client_id,
+                                 client_secret=client_secret,
+                                 member_cid=child_cid
+                                 )
     # Confirm we authenticated
     if falcon_user.token_fail_reason:
         # Report that authentication failed and stop processing
