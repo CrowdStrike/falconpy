@@ -1,4 +1,9 @@
-"""CrowdStrike Horizon - Retrieve CSPM Policies
+r"""CrowdStrike Horizon - Retrieve CSPM Policies
+
+  ___  ____  ____     ___  ____  ____  _  _    ____   __   __    __  ___  __  ____  ____
+ / __)(  __)(_  _)   / __)/ ___)(  _ \( \/ )  (  _ \ /  \ (  )  (  )/ __)(  )(  __)/ ___)
+( (_ \ ) _)   )(    ( (__ \___ \ ) __// \/ \   ) __/(  O )/ (_/\ )(( (__  )(  ) _) \___ \
+ \___/(____) (__)    \___)(____/(__)  \_)(_/  (__)   \__/ \____/(__)\___)(__)(____)(____/
 
 This example uses the CSPM Registration Class to output Horizon policies to CSV.
 
@@ -27,25 +32,25 @@ The script can also be ran using the config.json example credential file.
  python3 get_cspm_policies.py -c azure -o ~/Documents/azure-policies.csv
 
 """
-#     ___  ____  ____     ___  ____  ____  _  _    ____   __   __    __  ___  __  ____  ____
-#    / __)(  __)(_  _)   / __)/ ___)(  _ \( \/ )  (  _ \ /  \ (  )  (  )/ __)(  )(  __)/ ___)
-#   ( (_ \ ) _)   )(    ( (__ \___ \ ) __// \/ \   ) __/(  O )/ (_/\ )(( (__  )(  ) _) \___ \
-#    \___/(____) (__)    \___)(____/(__)  \_)(_/  (__)   \__/ \____/(__)\___)(__)(____)(____/
-#
 # pylint: disable=C0209
 #
-import argparse
 import json
 import csv
-from json.decoder import JSONDecodeError
 import os
 import sys
 import logging
-from falconpy import CSPMRegistration
+from argparse import ArgumentParser, RawTextHelpFormatter
+from tabulate import tabulate
+try:
+    from falconpy import CSPMRegistration
+except ImportError as no_falconpy:
+    raise SystemExit(
+        "The crowdstrike-falconpy package must be installed to run this program."
+        ) from no_falconpy
+
 
 # Capture command line arguments
-parser = argparse.ArgumentParser(
-    description="Gather API client_id and client_secret from arguments")
+parser = ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
 parser.add_argument("-f", "--falcon_client_id",
                     help="Falcon Client ID", default=None, required=False)
 parser.add_argument("-s", "--falcon_client_secret",
@@ -87,36 +92,34 @@ def format_json_data(json_data):
     The goal of this function is to bring uniformity to the api
     returned data so it can be reported in csv format.
     """
-    length = 0
-    headers = []
-    for pol in json_data:
-        if len(pol.keys()) > length:
-            length = len(pol.keys())
-            headers = [*pol]
     list_dict = []
-    for pol in json_data:
-        policy = ""
-        for head in headers:
-            if head in pol.keys():
-                if head == headers[-1]:
-                    str_line = "\"{}\": \"{}\"".format(
-                        head, str(pol[head]).strip("\n").replace('"', ''))
-                else:
-                    str_line = "\"{}\": \"{}\", ".format(
-                        head, str(pol[head]).strip("\n").replace('"', ''))
-            else:
-                if head == headers[-1]:
-                    str_line = "\"{}\": \"{}\"".format(head, "")
-                else:
-                    str_line = "\"{}\": \"{}\", ".format(head, "")
-            policy += str_line
-        new_dict = "{{{}}}".format(policy)
-        try:
-            list_dict.append(json.loads(new_dict))
-        except JSONDecodeError:
-            # Throw out any decode errors
-            pass
+    checks = ["cloud_service", "cloud_asset_type_id", "cloud_asset_type", "nist_benchmark",
+              "cis_benchmark", "fql_policy", "policy_settings", "pci_benchmark",
+              "soc2_benchmark", "cloud_service_subtype"]
+    for data_row in json_data:
+        for check in checks:
+            if check not in data_row:
+                data_row[check] = ""
+        list_dict.append(data_row)
+
     return list_dict
+
+
+def chunk_long_description(desc, col_width) -> str:
+    """Chunks a long string by delimiting with CR based upon column length."""
+    desc_chunks = []
+    chunk = ""
+    for word in desc.split():
+        new_chunk = f"{chunk} {word.strip()}"
+        if len(new_chunk) >= col_width:
+            desc_chunks.append(new_chunk)
+            chunk = ""
+        else:
+            chunk = new_chunk
+
+    delim = "\n"
+
+    return delim.join(desc_chunks)
 
 
 # Retrieve our list of policy settings
@@ -132,4 +135,45 @@ if data_file:
         dict_writer.writeheader()
         dict_writer.writerows(return_data)
 else:
-    print(return_data)
+    results = []
+    for row in return_data:
+        row.pop("cloud_service", None)
+        row.pop("cloud_asset_type_id", None)
+        row.pop("cloud_asset_type", None)
+        row.pop("fql_policy", None)
+        row.pop("is_remediable", None)
+        name_val = f"[{row['policy_id']}] {chunk_long_description(row['name'], 40)}"
+        name_val = f"{name_val}\n{row['policy_type']}"
+        if row["cloud_service_subtype"]:
+            name_val = f"{name_val} // {row['cloud_service_subtype']}"
+        name_val = f"{name_val}\n{row['default_severity'].title()} severity"
+        name_val = f"{name_val}\nCloud provider: {row['cloud_provider'].upper()}"
+        row["name"] = name_val
+        row.pop("policy_settings", None)
+        row.pop("policy_id", None)
+        row.pop("policy_type", None)
+        row.pop("cloud_provider", None)
+        row.pop("default_severity", None)
+        row.pop("policy_timestamp", None)
+        row.pop("cloud_service_subtype", None)
+        benchmarks = ["cis", "pci", "nist", "soc2"]
+        benchmark_list = []
+        for benchmark_name in benchmarks:
+            for benchmark in row[f"{benchmark_name}_benchmark"]:
+                bench_value = [f"[{benchmark['id']}]",
+                               f"{benchmark['benchmark_short']}",
+                               f"({benchmark['recommendation_number']})"
+                               ]
+                benchmark_list.append(" ".join(bench_value))
+            row[f"{benchmark_name}_benchmark"] = "\n".join(benchmark_list)
+
+        results.append(row)
+
+    headers = {
+        "name": "Name",
+        "cis_benchmark": "CIS",
+        "pci_benchmark": "PCI",
+        "nist_benchmark": "NIST",
+        "soc2_benchmark": "SOC2"
+    }
+    print(tabulate(tabular_data=results, tablefmt="fancy_grid", headers=headers))
