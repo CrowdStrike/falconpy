@@ -46,6 +46,7 @@ class APIHarness:
     """This one does it all. It's like the One Ring with significantly fewer orcs."""
 
     # pylint: disable=too-many-instance-attributes
+    _token_fail_headers = {}  # Issue #578
 
     def __init__(self: object,  # pylint: disable=R0913
                  base_url: str = "https://api.crowdstrike.com",
@@ -176,6 +177,7 @@ class APIHarness:
                     self.base_url = confirm_base_url(token_region.upper())
             else:
                 self.authenticated = False
+                self._token_fail_headers = result["headers"]
                 if "errors" in result["body"]:
                     if result["body"]["errors"]:
                         self.token_fail_reason = result["body"]["errors"][0]["message"]
@@ -294,7 +296,10 @@ class APIHarness:
                                                      )
             else:
                 # Invalid token / Bad creds
-                returned = generate_error_result(message="Failed to issue token.", code=401)
+                returned = generate_error_result(message="Failed to issue token.",
+                                                 code=401,
+                                                 headers=self._token_fail_headers
+                                                 )
         else:
             # That command doesn't exist, have a cup of tea instead
             returned = generate_error_result(message="Invalid API operation specified.", code=418)
