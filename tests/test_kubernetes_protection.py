@@ -13,7 +13,7 @@ from falconpy import KubernetesProtection
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = KubernetesProtection(auth_object=config)
-AllowedResponses = [200, 207, 400, 403, 429, 500]  # Allowing 500 to reduce flakiness
+AllowedResponses = [200, 207, 400, 404, 403, 429, 500]  # Allowing 500 to reduce flakiness
 
 
 class TestKubeProtect:
@@ -34,6 +34,7 @@ class TestKubeProtect:
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
+                # print(f"{tests[key]}")
 
         return error_checks
 
