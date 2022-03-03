@@ -271,9 +271,14 @@ def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> objec
     return returned
 
 
-def generate_error_result(message: str = "An error has occurred. Check your payloads and try again.", code: int = 500) -> dict:
+def generate_error_result(
+    message: str = "An error has occurred. Check your payloads and try again.",
+    code: int = 500,
+    **kwargs
+    ) -> dict:
     """Normalize error messages."""
-    return Result()(status_code=code, headers={}, body={"errors": [{"message": f"{message}"}], "resources": []})
+    return_headers = kwargs.get("headers", {})
+    return Result()(status_code=code, headers=return_headers, body={"errors": [{"message": f"{message}"}], "resources": []})
 
 
 def generate_ok_result(message: str = "Request returned with success", code: int = 200, **kwargs) -> dict:
