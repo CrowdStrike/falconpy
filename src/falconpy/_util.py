@@ -424,6 +424,9 @@ def confirm_base_url(provided_base: str = "https://api.crowdstrike.com") -> str:
     returned_base = provided_base
     if "://" not in provided_base:
         # They're passing the name instead of the URL
+        dashed_bases = ["US-1", "US-2", "EU-1", "US-GOV-1"]
+        if provided_base.upper() in dashed_bases:
+            provided_base = provided_base.replace("-", "")  # Strip the dash
         try:
             returned_base = f"https://{BaseURL[provided_base.upper()].value}"
         except KeyError:
