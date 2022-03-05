@@ -40,7 +40,8 @@ class TestAuthentications:
 
         falcon = CloudConnectAWS(auth_object=OAuth2(creds={"client_id": auth.config["falcon_client_id"],
                                                            "client_secret": auth.config["falcon_client_secret"]
-                                                           }
+                                                           },
+                                                    base_url = "us-1"  # Testing dashed base specifier
                                                     ))
         result = falcon.QueryAWSAccounts()
         if result["status_code"] in AllowedResponses:
