@@ -1,3 +1,23 @@
+# Version 1.0.6
+## Added features and functionality
++ Added: Return headers on failed authorization (401) when using the Uber class. Closes #578.
+    - `_util.py`
+    - `api_complete.py`
+    - Thank you to @tsullivan06 for this enhancement suggestion!
++ Added: Allow dashed base url specifiers when creating instances of any class. Closes #580.
+    - `_util.py`
+    - Thanks to @jhseceng for this enhancement suggestion!
+
+## Issues resolved
++ Fixed: Bandit false positive introduced by changes to hardcoded password scanning in v1.7.3. Relates to PyCQA/bandit#843.
+    - `_token_fail_reason.py`
+    - `api_complete.py`
+    - `oauth2.py`
+
+## Other
++ Updated: Docstrings updated to reflect newly availably platform names. (`android`, `iOS`)
+    - `prevention_policy.py`
+
 # Version 1.0.5
 ## Added features and functionality
 + Added: Argument check in `update_detects_by_ids` (UpdateDetectsByIdsV2). When only a `comment` keyword is provided, `show_in_ui` is appended to the request with a `True` value, which satisfies update requirements.
