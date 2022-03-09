@@ -39,6 +39,7 @@ import time
 from ._util import _ALLOWED_METHODS
 from ._util import perform_request, generate_b64cred, generate_error_result
 from ._util import confirm_base_url, args_to_params, confirm_base_region
+from ._token_fail_reason import TokenFailReason
 from ._endpoint import api_endpoints
 
 
@@ -183,7 +184,7 @@ class APIHarness:
                         self.token_fail_reason = result["body"]["errors"][0]["message"]
         else:
             self.authenticated = False
-            self.token_fail_reason = "Unexpected API response received"
+            self.token_fail_reason = TokenFailReason["UNEXPECTED"].value
             self.token_status = 403
 
         return self.authenticated

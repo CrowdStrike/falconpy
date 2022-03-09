@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 import time
 from ._util import perform_request, generate_b64cred, confirm_base_region
 from ._util import confirm_base_url, generate_error_result
+from ._token_fail_reason import TokenFailReason
 from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
 
 
@@ -154,11 +155,11 @@ class OAuth2:
                             self.token_fail_reason = returned["body"]["errors"][0]["message"]
             else:
                 returned = generate_error_result("Unexpected API response received", 403)
-                self.token_fail_reason = "Unexpected API response received"
+                self.token_fail_reason = TokenFailReason["UNEXPECTED"].value
                 self.token_status = 403
         else:
             returned = generate_error_result("Invalid credentials specified", 403)
-            self.token_fail_reason = "Invalid credentials specified"
+            self.token_fail_reason = TokenFailReason["INVALID"].value
             self.token_status = 403
 
         return returned
