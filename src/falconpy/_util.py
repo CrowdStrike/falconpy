@@ -272,10 +272,10 @@ def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> objec
 
 
 def generate_error_result(
-    message: str = "An error has occurred. Check your payloads and try again.",
-    code: int = 500,
-    **kwargs
-    ) -> dict:
+        message: str = "An error has occurred. Check your payloads and try again.",
+        code: int = 500,
+        **kwargs
+        ) -> dict:
     """Normalize error messages."""
     return_headers = kwargs.get("headers", {})
     return Result()(status_code=code, headers=return_headers, body={"errors": [{"message": f"{message}"}], "resources": []})
