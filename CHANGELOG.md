@@ -9,13 +9,13 @@
     - Thanks to @jhseceng for this enhancement suggestion!
 
 ## Issues resolved
-+ Fixed: Bandit false positive introduced by changes to hardcoded password scanning in v1.7.3. Relates to PyCQA/bandit#843.
++ Fixed: Bandit false positive introduced by changes to hard-coded password scanning in v1.7.3. Relates to PyCQA/bandit#843.
     - `_token_fail_reason.py`
     - `api_complete.py`
     - `oauth2.py`
 
 ## Other
-+ Updated: Docstrings updated to reflect newly availably platform names. (`android`, `iOS`)
++ Updated: Docstrings updated to reflect newly available platform names. (`android`, `iOS`)
     - `prevention_policy.py`
 
 # Version 1.0.5
