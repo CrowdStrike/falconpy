@@ -197,7 +197,7 @@ class PreventionPolicy(ServiceClass):
                     "platform_name": "Windows"
                 }
         ids -- Prevention policy ID(s) to perform actions against. String or list of strings.
-        platform_name -- OS platform name.
+        platform_name -- OS platform name. (Windows, Mac, Linux, Android, iOS)
 
         This method only supports keywords for providing arguments.
 
@@ -273,6 +273,7 @@ class PreventionPolicy(ServiceClass):
         description -- Prevention Policy description. String.
         name -- Prevention Policy name. String.
         platform_name -- Name of the operating system platform. String.
+                         Allowed values: Windows, Mac, Linux, iOS, Android
         settings -- Prevention policy specific settings. List of dictionaries.
                     {
                         "id": "string",
