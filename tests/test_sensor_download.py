@@ -5,7 +5,7 @@ from tests import test_authorization as Authorization
 from falconpy import SensorDownload
 
 sys.path.append(os.path.abspath('src'))
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 401, 429]  # Adding rate-limiting as an allowed response for now
 appId = "pytest-sensor_download-unit-test"
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
@@ -92,7 +92,7 @@ class TestSensorDownload():
     def test_get_shas(self):
         assert len(self._get_multiple_shas()) > 0
 
-    def test_get_mutliple_shas(self):
+    def test_get_multiple_shas(self):
         assert self._get_metadata_for_ids() is True
 
     def test_get_all_metadata(self):
