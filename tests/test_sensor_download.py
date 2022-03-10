@@ -18,6 +18,7 @@ class TestSensorDownload():
     @staticmethod
     def _get_cid():
         resp = sensor_download_client.GetSensorInstallersCCIDByQuery()
+        print(resp["status_code"])
         return True if resp["status_code"] in AllowedResponses else False
 
     @staticmethod
