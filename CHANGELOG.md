@@ -15,7 +15,7 @@
     - `oauth2.py`
 
 ## Other
-+ Updated: Docstrings updated to reflect newly available platform names. (`android`, `iOS`)
++ Updated: Docstrings updated to reflect newly available platform names (`android`, `iOS`). Closes #582.
     - `prevention_policy.py`
 
 # Version 1.0.5
