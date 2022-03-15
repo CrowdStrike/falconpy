@@ -63,7 +63,8 @@ class Hosts(ServiceClass):
 
         Keyword arguments:
         action_name -- action to perform, 'contain', 'lift_containment',
-                       'hide_host' or 'unhide_host'.
+                       'hide_host', 'unhide_host', 'detection_suppress', or
+                       'detection_unsuppress'.
         body -- full body payload, not required if ids are provided as keyword.
                 You must use body if you are going to specify action_parameters.
                 {
