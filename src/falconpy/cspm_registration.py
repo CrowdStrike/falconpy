@@ -568,7 +568,7 @@ class CSPMRegistration(ServiceClass):
                    GuardDuty                VirtualNetwork
                    IAM
         severity -- Severity (e.g. `High`, `Medium` or `Informational`). String.
-        status -- Status (e.g. `new`, `recurring`, or `all`). String.
+        status -- Status (e.g. `new`, `reoccurring`, or `all`). String.
         parameters - full parameters payload, not required if using other keywords.
 
         This method only supports keywords for providing arguments.
