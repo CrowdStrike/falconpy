@@ -17,7 +17,7 @@ from falconpy import APIHarness
 from falconpy._util import perform_request, force_default
 
 
-AllowedResponses = [200, 400, 401, 404, 405, 415, 418, 429, 500]
+AllowedResponses = [200, 400, 401, 404, 405, 415, 418, 429]
 
 if "DEBUG_API_ID" in os.environ and "DEBUG_API_SECRET" in os.environ:
     config = {}
@@ -187,7 +187,7 @@ class TestUber:
             return False
 
     def uberCCAWS_GenerateServerError(self):
-        if falcon.command("GetAWSAccounts", ids="123", data=['Kerash!'])["status_code"] in AllowedResponses:
+        if falcon.command("GetAWSAccounts", ids="123", data=['Kerash!'])["status_code"] == 500:
             return True
         else:
             return False
@@ -293,6 +293,11 @@ class TestUber:
         # Also check token auto-renewal
         falcon.token_expiration = 0
         assert self.uberCCAWS_OverrideAndHeader() is True
+
+    def test_PreferredDefaultLookup(self):
+        assert bool(
+            falcon.command("report_executions_download_get", ids="1234567890")["status_code"] in AllowedResponses
+        ) is True
 
     def test_GenerateActionNameError(self):
         assert self.uberCCHosts_GenerateActionNameError(params=None) is True
