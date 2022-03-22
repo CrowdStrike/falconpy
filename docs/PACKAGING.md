@@ -35,7 +35,7 @@ with the final release aligning to the version for the next release of the produ
 
 A bleeding edge / development build announcement is posted to the [Show and Tell section](https://github.com/CrowdStrike/falconpy/discussions/categories/show-and-tell) of the discussion board for each published release of a final development package build.
 
-[![Current development version](https://img.shields.io/piwheels/v/crowdstrike-falconpy-dev?include_prereleases&label=development%20version)](https://pypi.org/project/crowdstrike-falconpy-dev/)
+[![Current development version](https://img.shields.io/endpoint?url=https%3A%2F%2Ffalconpy.io%2F_development_version.json)](https://pypi.org/project/crowdstrike-falconpy-dev/)
 [![Next release](https://img.shields.io/endpoint?url=https%3A%2F%2Ffalconpy.io%2F_next_release.json)](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=label%3A%22bleeding+edge+%3Adrop_of_blood%3A%22)
 
 ### Development Package bleeding edge releases
