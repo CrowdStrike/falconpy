@@ -1,3 +1,17 @@
+# Version 1.0.7
+## Issues resolved
++ Fixed: Invalid empty payload sent by `report_executions_download_get` operation when leveraging the Uber Class. Closes #596.
+    - `_util.py`
+    - `api_complete.py`
+    - `tests/test_uber_api_complete.py`
+    - Thanks to @tsullivan06 for his assistance in identifying this issue!
+
+## Other
++ Fixed: Typo in docstring - cspm_registration.py#571, `recurring` -> `reoccurring`.  Closes #592.
+    - `cspm_registration.py`
++ Added: Updated docstring to reflect newly available host actions. Closes #585.
+    - `hosts.py`
+
 # Version 1.0.6
 ## Added features and functionality
 + Added: Return headers on failed authorization (401) when using the Uber class. Closes #578.
