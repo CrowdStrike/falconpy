@@ -11,8 +11,8 @@ auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 
 # Temp workaround due to 500s outta GovCloud
-if config.base_url == "https://api.laggar.gcw.crowdstrike.com":
-    AllowedResponses.append(500)
+# if config.base_url == "https://api.laggar.gcw.crowdstrike.com":
+#     AllowedResponses.append(500)
 
 sensor_download_client = SensorDownload(auth_object=config)
 
