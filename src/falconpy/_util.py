@@ -44,6 +44,7 @@ from urllib3.exceptions import InsecureRequestWarning
 from ._version import _TITLE, _VERSION
 from ._result import Result
 from ._base_url import BaseURL
+from ._uber_default_preference import PREFER_NONETYPE
 urllib3.disable_warnings(InsecureRequestWarning)
 
 # Restrict requests to only allowed HTTP methods
@@ -447,3 +448,15 @@ def confirm_base_region(provided_base_url: str = "https://api.crowdstrike.com") 
         shortname = "US1"  # Fall back to US-1
 
     return shortname
+
+
+def return_preferred_default(method_name: str = None, keyword_type: str = "dict"):
+    """Use the PREFER_NONETYPE list lookup to determine the default to use for empty payloads."""
+    default_return = {}
+    if method_name:
+        if keyword_type.lower() == "list":
+            default_return = []
+        if method_name in PREFER_NONETYPE:
+            default_return = None
+
+    return default_return
