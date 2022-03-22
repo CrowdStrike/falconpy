@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 import time
 from ._util import _ALLOWED_METHODS
 from ._util import perform_request, generate_b64cred, generate_error_result
-from ._util import confirm_base_url, args_to_params, confirm_base_region
+from ._util import confirm_base_url, args_to_params, confirm_base_region, return_preferred_default
 from ._token_fail_reason import TokenFailReason
 from ._endpoint import api_endpoints
 
@@ -272,19 +272,22 @@ class APIHarness:
             if self.authenticated:
                 # Which HTTP method to execute
                 selected_method = uber_command[0][1].upper()
+                selected_operation = uber_command[0][0]
                 # Only accept allowed HTTP methods
                 if selected_method in _ALLOWED_METHODS:
                     returned = perform_request(method=selected_method,
                                                endpoint=target,
-                                               body=kwargs.get("body", {}),
-                                               data=kwargs.get("data", {}),
+                                               body=kwargs.get("body", return_preferred_default(selected_operation)),
+                                               data=kwargs.get("data", return_preferred_default(selected_operation)),
                                                params=args_to_params(kwargs.get("parameters", {}),
                                                                      kwargs,
                                                                      self.commands,
-                                                                     uber_command[0][0]
+                                                                     selected_operation
                                                                      ),
                                                headers=self._create_header_payload(kwargs),
-                                               files=kwargs.get("files", []),
+                                               files=kwargs.get("files",
+                                                                return_preferred_default(selected_operation, "list")
+                                                                ),
                                                verify=self.ssl_verify,
                                                proxy=self.proxy,
                                                timeout=self.timeout,
