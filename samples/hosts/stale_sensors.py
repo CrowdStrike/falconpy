@@ -1,11 +1,11 @@
 """
-stale_sensors_tag.py  - Detects devices that haven't checked into
-                  CrowdStrike for a specified period of time.
+stale_sensors.py - Detects devices that haven't checked into
+                   CrowdStrike for a specified period of time.
 
 REQUIRES: FalconPy v0.8.6+, tabulate
 
 - jshcodes@CrowdStrike, 09.01.21
-- ray.heffer@crowdstrike.com, 03.29.22 - Added new argument for Grouping Tag (--grouping, -g)
+- ray.heffer@crowdstrike.com, 03.29.22 - Added new argument for Grouping Tags (--grouping, -g)
 """
 from datetime import datetime, timedelta, timezone
 from argparse import RawTextHelpFormatter
