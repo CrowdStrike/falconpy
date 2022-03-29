@@ -1,11 +1,11 @@
 """
-stale_sensors.py - Detects devices that haven't checked into
-                   CrowdStrike for a specified period of time.
+stale_sensors_tag.py  - Detects devices that haven't checked into
+                  CrowdStrike for a specified period of time.
 
 REQUIRES: FalconPy v0.8.6+, tabulate
 
 - jshcodes@CrowdStrike, 09.01.21
-- Updated to support Grouping Tags, @rayheffer, 03.24.22
+- ray.heffer@crowdstrike.com, 03.29.22 - Added new argument for Grouping Tag (--grouping, -g)
 """
 from datetime import datetime, timedelta, timezone
 from argparse import RawTextHelpFormatter
@@ -84,6 +84,12 @@ def parse_command_line() -> object:
         required=False,
         action='store_true'
     )
+    parser.add_argument(
+        '-g',
+        '--grouping_tag',
+        help='Falcon Grouping Tag name for the hosts',
+        required=False
+        )
 
     return parser.parse_args()
 
@@ -102,13 +108,17 @@ def get_host_details(id_list: list) -> list:
     return falcon.get_device_details(ids=id_list)["body"]["resources"]
 
 
-def get_hosts(date_filter: str) -> list:
+def get_hosts(date_filter: str, tag_filter: str) -> list:
     """
     Retrieves a list of hosts IDs that match the last_seen date filter.
     """
+    FILTER_STRING = f"last_seen:<='{date_filter}Z'"
+    if tag_filter:
+        FILTER_STRING = f"{FILTER_STRING} + tags:*'*{tag_filter}*'"
+
     return falcon.query_devices_by_filter_scroll(
         limit=5000,
-        filter=f"last_seen:<='{date_filter}Z'"
+        filter=FILTER_STRING
     )["body"]["resources"]
 
 
@@ -137,10 +147,14 @@ def parse_host_detail(detail: dict, found: list):
     now = datetime.strptime(str(datetime.now(timezone.utc)), "%Y-%m-%d %H:%M:%S.%f%z")
     then = datetime.strptime(detail["last_seen"], "%Y-%m-%dT%H:%M:%S%z")
     distance = (now - then).days
+    tagname = detail.get("tags")
+    newtag = str(tagname)[1:-1]
+        
     found.append([
         detail.get("hostname", "Unknown"),
         detail.get("device_id", "Unknown"),
         detail.get("local_ip", "Unknown"),
+        newtag,
         detail["last_seen"],
         f"{distance} days"
         ])
@@ -184,6 +198,11 @@ if args.days:
         STALE_DAYS = int(args.days)
     except ValueError as bad_day_value:
         raise SystemExit("Invalid value specified for days. Integer required.") from bad_day_value
+    
+# Grouping Tags
+GROUPING_TAG = None
+if args.grouping_tag:
+    GROUPING_TAG = args.grouping_tag
 
 # Do not hide hosts if it is not requested
 HIDE = False
@@ -200,7 +219,7 @@ falcon = connect_api(api_client_id, api_client_secret, BASE, CHILD)
 stale = []
 # For each stale host identified
 try:
-    for host in get_host_details(get_hosts(STALE_DATE)):
+    for host in get_host_details(get_hosts(STALE_DATE, GROUPING_TAG)):
         # Retrieve host detail
         stale = parse_host_detail(host, stale)
 except KeyError:
@@ -210,7 +229,7 @@ except KeyError:
 if stale:
     # Display only
     if not HIDE:
-        headers = ["Hostname", "Device ID", "Local IP", "Last Seen", "Stale Period"]
+        headers = ["Hostname", "Device ID", "Local IP", "Tag", "Last Seen", "Stale Period"]
         print(f"\n{tabulate(sorted(stale, key=get_sort_key, reverse=SORT), headers)}")
     else:
         # Remove the hosts
