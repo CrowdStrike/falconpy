@@ -162,6 +162,7 @@ GetSubmissions
 GetSummaryReports
 GetUserRoleIds
 GrantUserRoleIds
+Heffer
 IDP
 IOA
 IOAs
