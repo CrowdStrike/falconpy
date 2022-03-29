@@ -5,6 +5,7 @@ stale_sensors.py - Detects devices that haven't checked into
 REQUIRES: FalconPy v0.8.6+, tabulate
 
 - jshcodes@CrowdStrike, 09.01.21
+- Updated to support Grouping Tags, @rayheffer, 03.24.22
 """
 from datetime import datetime, timedelta, timezone
 from argparse import RawTextHelpFormatter
