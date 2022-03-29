@@ -147,8 +147,9 @@ def parse_host_detail(detail: dict, found: list):
     now = datetime.strptime(str(datetime.now(timezone.utc)), "%Y-%m-%d %H:%M:%S.%f%z")
     then = datetime.strptime(detail["last_seen"], "%Y-%m-%dT%H:%M:%S%z")
     distance = (now - then).days
-    tagname = detail.get("tags")
-    newtag = str(tagname)[1:-1]
+    # tagname = detail.get("tags")
+    tagname = detail.get("tags", "Not Found")
+    newtag = str(tagname)[2:-2]
         
     found.append([
         detail.get("hostname", "Unknown"),
