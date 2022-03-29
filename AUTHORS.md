@@ -66,7 +66,7 @@ This has been a critical element in the development of the FalconPy project.
 + Kevin K. Kragh, `@kra-ts`
 + `@mwb8`
 + `@TheITSecurityGuy`
-+ Ray Heffer, `rayheffer`
++ Ray Heffer, `@rayheffer`
 
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
