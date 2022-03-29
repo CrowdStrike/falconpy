@@ -45,6 +45,12 @@ The following command will retrieve a list of hosts that haven't checked in to C
 python3 stale_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d 30
 ```
 
+This variation will retrieve a list of hosts that haven't checked in to CrowdStrike in 30 days or more that have the tag `testtag`.
+
+```shell
+python3 stale_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d 30 -g testtag
+```
+
 You can reverse the list sort with the `-r` or `--reverse` argument.
 
 ```shell
@@ -61,7 +67,7 @@ Command-line help is available via the `-h` argument.
 
 ```shell
 % python3 stale_sensors.py -h
-usage: stale_sensors.py [-h] -k CLIENT_ID -s CLIENT_SECRET [-d DAYS] [-r] [-x]
+usage: stale_sensors.py [-h] -k CLIENT_ID -s CLIENT_SECRET [-m MSSP] [-b BASE_URL] [-d DAYS] [-r] [-x] [-g GROUPING_TAG]
 
          _______ ___ ___ _______ _______ _______ ______
         |   _   |   Y   |   _   |   _   |   _   |   _  \
@@ -71,7 +77,7 @@ usage: stale_sensors.py [-h] -k CLIENT_ID -s CLIENT_SECRET [-d DAYS] [-r] [-x]
         |::.. . |::.. . |::.. . |::.. . |::.. . |::.. . /
         `-------`-------`-------`-------`-------`------'
 
-    CrowdStrike Unmonitored Stale Sensor Environment Detector
+    CrowdStrike Unattended Stale Sensor Environment Detector
 
 
 optional arguments:
@@ -80,9 +86,14 @@ optional arguments:
                         CrowdStrike Falcon API key ID
   -s CLIENT_SECRET, --client_secret CLIENT_SECRET
                         CrowdStrike Falcon API key secret
+  -m MSSP, --mssp MSSP  Child CID to access (MSSP only)
+  -b BASE_URL, --base_url BASE_URL
+                        CrowdStrike API region (us1, us2, eu1, usgov1) NOT required unless you are using `usgov1`
   -d DAYS, --days DAYS  Number of days since a host was seen before it is considered stale
   -r, --reverse         Reverse sort (defaults to ASC)
   -x, --remove          Remove hosts identified as stale
+  -g GROUPING_TAG, --grouping_tag GROUPING_TAG
+                        Falcon Grouping Tag name for the hosts
 ```
 
 ### Example source code
