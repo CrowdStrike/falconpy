@@ -70,6 +70,7 @@ from .sensor_download import SensorDownload
 from .sensor_update_policy import SensorUpdatePolicy, SensorUpdatePolicies
 from .sensor_visibility_exclusions import SensorVisibilityExclusions
 from .spotlight_vulnerabilities import SpotlightVulnerabilities
+from .spotlight_evaluation_logic import SpotlightEvaluationLogic
 from .user_management import UserManagement
 from .zero_trust_assessment import ZeroTrustAssessment
 
@@ -93,8 +94,9 @@ __all__ = [
     "OverwatchDashboard", "PreventionPolicy", "Quarantine", "QuickScan", "RealTimeResponseAdmin",
     "RealTimeResponse", "Recon", "ReportExecutions", "ResponsePolicies", "SampleUploads",
     "ScheduledReports", "SensorDownload", "SensorUpdatePolicy", "SensorVisibilityExclusions",
-    "SpotlightVulnerabilities", "UserManagement", "ZeroTrustAssessment", "PreventionPolicies",
-    "SensorUpdatePolicies", "MessageCenter", "FileVantage"
+    "SpotlightVulnerabilities", "SpotlightEvaluationLogic", "UserManagement",
+    "ZeroTrustAssessment", "PreventionPolicies", "SensorUpdatePolicies", "MessageCenter",
+    "FileVantage"
 ]
 """
 This is free and unencumbered software released into the public domain.
