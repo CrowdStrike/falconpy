@@ -1,3 +1,4 @@
+ai
 AID
 AIDs
 APIHarness
@@ -18,6 +19,8 @@ BatchRefreshSessions
 CCID
 CID
 CIDs
+CISA
+CISA's
 CSP
 CSPM
 CSPM
@@ -70,11 +73,14 @@ DeleteSession
 DeleteUser
 DevicesCount
 DevicesRanOn
+Domo
 DownloadSensorInstallerById
 EventStreams
 ExecuteActiveResponderCommand
 ExecuteAdminCommand
 ExecuteCommand
+ExPERT
+ExPERT.ai
 FH
 FQL
 FalconContainer
@@ -194,10 +200,12 @@ PatchCSPMAwsAccount
 PCAP
 PerformActionV
 PerformIncidentAction
+Pipenv
 PostMalQueryEntitiesSamplesMultidownloadV
 PostMalQueryExactSearchV
 PostMalQueryFuzzySearchV
 PostMalQueryHuntV
+PowerBI
 Powershell
 PreviewRuleV
 ProcessID
@@ -704,3 +712,4 @@ uber
 masse
 PyCQA
 SpotlightEvaluationLogic
+vulns
