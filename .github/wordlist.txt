@@ -713,3 +713,7 @@ masse
 PyCQA
 SpotlightEvaluationLogic
 vulns
+CVE's
+Gov't
+GUID
+CTO
