@@ -154,8 +154,6 @@ class CloudConnectAWS(ServiceClass):
         external_id -- AWS cross-account role secret. String.
         iam_role_arn -- ARN used for cross-account role. String.
         id -- AWS account ID. String.
-        mode -- Mode for provisioning. Allowed values are `manual` or `cloudformation`.
-                Defaults to `manual` if not defined.
         parameters -- full parameters payload, not required if mode is provided as a keyword.
         rate_limit_reqs -- Integer.
         rate_limit_time -- Integer.
