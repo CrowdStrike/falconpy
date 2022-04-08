@@ -1,3 +1,8 @@
+# Version 1.0.9
+## Other
++ Fixed: Docstring typo for the `ProvisionAWSAccounts` operation within the Cloud Connect AWS Service Class.
+    - `cloud_connect_aws.py`
+
 # Version 1.0.8
 ## Added features and functionality
 + Added: Spotlight Evaluation Logic Service Class, related service collection endpoints and related unit tests.
