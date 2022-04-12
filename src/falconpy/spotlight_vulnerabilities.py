@@ -68,7 +68,7 @@ class SpotlightVulnerabilities(ServiceClass):
         facet -- Select various details blocks to be returned for each vulnerability entry.
                  Supported values:
                  cve_details            host_info
-                 remediation_details
+                 remediation_details    evaluation_logic
         filter -- Filter items using a query in Falcon Query Language (FQL).
                   Wildcards '*' are unsupported.
         limit -- The number of items to return in this response (default: 100, max: 400).
