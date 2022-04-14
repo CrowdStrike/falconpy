@@ -5,7 +5,7 @@ stale_sensors.py - Detects devices that haven't checked into
 REQUIRES: FalconPy v0.8.6+, tabulate
 
 - jshcodes@CrowdStrike, 09.01.21
-- ray.heffer@crowdstrike.com, 03.29.22 - Added new argument for Grouping Tags (--grouping, -g)
+- rayheffer@CrowdStrike.com, 03.29.22 - Added new argument for Grouping Tags (--grouping, -g)
 """
 from datetime import datetime, timedelta, timezone
 from argparse import RawTextHelpFormatter
@@ -142,12 +142,11 @@ def calc_stale_date(num_days: int) -> str:
 
 def parse_host_detail(detail: dict, found: list):
     """
-    Parses the returned host detail and adds it to the stale list.
+    Parses the returned host details and adds it to the stale list
     """
     now = datetime.strptime(str(datetime.now(timezone.utc)), "%Y-%m-%d %H:%M:%S.%f%z")
     then = datetime.strptime(detail["last_seen"], "%Y-%m-%dT%H:%M:%S%z")
     distance = (now - then).days
-    # tagname = detail.get("tags")
     tagname = detail.get("tags", "Not Found")
     newtag = str(tagname)[2:-2]
         
