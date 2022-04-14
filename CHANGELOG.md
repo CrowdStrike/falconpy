@@ -1,3 +1,12 @@
+# Version 1.0.8
+## Added features and functionality
++ Added: Spotlight Evaluation Logic Service Class, related service collection endpoints and related unit tests.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_spotlight_evaluation_logic.py`
+    - `__init__.py`
+    - `spotlight_evaluation_logic.py`
+    - `tests/test_spotlight_evaluation_logic.py`
+
 # Version 1.0.7
 ## Issues resolved
 + Fixed: Invalid empty payload sent by `report_executions_download_get` operation when leveraging the Uber Class. Closes #596.
