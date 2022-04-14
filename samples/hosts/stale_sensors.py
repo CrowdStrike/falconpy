@@ -239,3 +239,4 @@ if stale:
             print(f"Removed host {deleted['id']}")
 else:
     print("No stale hosts identified for the range specified.")
+
