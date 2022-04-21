@@ -101,13 +101,16 @@ _discover_endpoints = [
     "query_accounts",
     "GET",
     "/discover/queries/accounts/v1",
-    "Search for accounts in your environment by providing an FQL (Falcon Query Language) filter and paging details. Returns a set of account IDs which match the filter criteria.",
+    "Search for accounts in your environment by providing an FQL (Falcon Query Language) filter and paging details. "
+    "Returns a set of account IDs which match the filter criteria.",
     "discover",
     [
       {
         "minimum": 0,
         "type": "integer",
-        "description": "An offset used with the `limit` parameter to manage pagination of results. On your first request, don’t provide an `offset`. On subsequent requests, provide the `offset` from the previous response to continue from that place in the results.",
+        "description": "An offset used with the `limit` parameter to manage pagination of results. "
+        "On your first request, don’t provide an `offset`. On subsequent requests, provide the `offset` "
+        "from the previous response to continue from that place in the results.",
         "name": "offset",
         "in": "query"
       },
@@ -115,19 +118,23 @@ _discover_endpoints = [
         "maximum": 100,
         "minimum": 1,
         "type": "integer",
-        "description": "The number of account IDs to return in this response (min: 1, max: 100, default: 100). Use with the `offset` parameter to manage pagination of results.",
+        "description": "The number of account IDs to return in this response (min: 1, max: 100, default: 100). "
+        "Use with the `offset` parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Sort accounts by their properties. A single sort field is allowed. Common sort options include:\n\n<ul><li>username|asc</li><li>last_failed_login_timestamp|desc</li></ul>",
+        "description": "Sort accounts by their properties. A single sort field is allowed. "
+        "Common sort options include:\n\n<ul><li>username|asc</li><li>last_failed_login_timestamp|desc</li></ul>",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Filter accounts using an FQL query. Common filter options include:\n\n<ul><li>account_type:'Local'</li><li>admin_privileges:'Yes'</li><li>first_seen_timestamp:<'now-7d'</li><li>last_successful_login_type:'Terminal server'</li></ul>",
+        "description": "Filter accounts using an FQL query. "
+        "Common filter options include:\n\n<ul><li>account_type:'Local'</li><li>admin_privileges:'Yes'</li>"
+        "<li>first_seen_timestamp:<'now-7d'</li><li>last_successful_login_type:'Terminal server'</li></ul>",
         "name": "filter",
         "in": "query"
       }
@@ -144,7 +151,9 @@ _discover_endpoints = [
       {
         "minimum": 0,
         "type": "integer",
-        "description": "An offset used with the `limit` parameter to manage pagination of results. On your first request, don’t provide an `offset`. On subsequent requests, provide the `offset` from the previous response to continue from that place in the results.",
+        "description": "An offset used with the `limit` parameter to manage pagination of results. "
+        "On your first request, don’t provide an `offset`. On subsequent requests, provide the `offset` "
+        "from the previous response to continue from that place in the results.",
         "name": "offset",
         "in": "query"
       },
@@ -152,19 +161,23 @@ _discover_endpoints = [
         "maximum": 100,
         "minimum": 1,
         "type": "integer",
-        "description": "The number of asset IDs to return in this response (min: 1, max: 100, default: 100). Use with the `offset` parameter to manage pagination of results.",
+        "description": "The number of asset IDs to return in this response (min: 1, max: 100, default: 100). "
+        "Use with the `offset` parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Sort assets by their properties. A single sort field is allowed. Common sort options include:\n\n<ul><li>hostname|asc</li><li>product_type_desc|desc</li></ul>",
+        "description": "Sort assets by their properties. A single sort field is allowed. "
+        "Common sort options include:\n\n<ul><li>hostname|asc</li><li>product_type_desc|desc</li></ul>",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Filter assets using an FQL query. Common filter options include:\n\n<ul><li>entity_type:'managed'</li><li>product_type_desc:'Workstation'</li><li>platform_name:'Windows'</li><li>last_seen_timestamp:>'now-7d'</li></ul>",
+        "description": "Filter assets using an FQL query. Common filter options include:\n\n"
+        "<ul><li>entity_type:'managed'</li><li>product_type_desc:'Workstation'</li><li>platform_name:'Windows'</li>"
+        "<li>last_seen_timestamp:>'now-7d'</li></ul>",
         "name": "filter",
         "in": "query"
       }
@@ -174,13 +187,16 @@ _discover_endpoints = [
     "query_logins",
     "GET",
     "/discover/queries/logins/v1",
-    "Search for logins in your environment by providing an FQL (Falcon Query Language) filter and paging details. Returns a set of login IDs which match the filter criteria.",
+    "Search for logins in your environment by providing an FQL (Falcon Query Language) filter and paging details. "
+    "Returns a set of login IDs which match the filter criteria.",
     "discover",
     [
       {
         "minimum": 0,
         "type": "integer",
-        "description": "An offset used with the `limit` parameter to manage pagination of results. On your first request, don’t provide an `offset`. On subsequent requests, provide the `offset` from the previous response to continue from that place in the results.",
+        "description": "An offset used with the `limit` parameter to manage pagination of results. "
+        "On your first request, don’t provide an `offset`. On subsequent requests, provide the `offset` "
+        "from the previous response to continue from that place in the results.",
         "name": "offset",
         "in": "query"
       },
