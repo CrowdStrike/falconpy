@@ -24,11 +24,27 @@ class TestDiscover:
         if check["status_code"] == 429:
             pytest.skip("Rate limit hit")
         if check["body"]["resources"]:
-            id_list = check["body"]["resources"]
+            hosts_id_list = check["body"]["resources"]
         else:
-            id_list = "1234567890"
+            hosts_id_list = "1234567890"
+        check = falcon.query_accounts(limit=1)
+        if check["status_code"] == 429:
+            pytest.skip("Rate limit hit")
+        if check["body"]["resources"]:
+            accounts_id_list = check["body"]["resources"]
+        else:
+            accounts_id_list = "1234567890"
+        check = falcon.query_logins(limit=1)
+        if check["status_code"] == 429:
+            pytest.skip("Rate limit hit")
+        if check["body"]["resources"]:
+            logins_id_list = check["body"]["resources"]
+        else:
+            logins_id_list = "1234567890"
         tests = {
-            "query_and_get_hosts": falcon.get_hosts(ids=id_list)
+            "query_and_get_accounts": falcon.get_accounts(ids=accounts_id_list),
+            "query_and_get_hosts": falcon.get_hosts(ids=hosts_id_list),
+            "query_and_get_logins": falcon.get_logins(ids=logins_id_list)
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
