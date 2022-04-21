@@ -8,8 +8,6 @@
     - `discover.py`
     - `tests/test_discover.py`
 ## Other
-+ Fixed: Docstring typo for the `ProvisionAWSAccounts` operation within the Cloud Connect AWS Service Class.
-    - `cloud_connect_aws.py`
 + Fixed: Docstring typo for the `combinedQueryVulnerabilities` operation within the Spotlight Vulnerabilities Service Class. Closes #608.
     - `spotlight_vulnerabilities.py`
 
