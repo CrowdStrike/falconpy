@@ -54,6 +54,34 @@ class Discover(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_accounts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get details on accounts by providing one or more IDs.
+
+        Find account IDs with `query_accounts`.
+
+        Keyword arguments:
+        ids -- One or more account IDs (max: 100). String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/get-accounts
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_accounts",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_hosts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get details on assets by providing one or more IDs.
 
@@ -79,6 +107,85 @@ class Discover(ServiceClass):
             operation_id="get_hosts",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_logins(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get details on logins by providing one or more IDs.
+
+        Find login IDs with `query_logins`.
+
+        Keyword arguments:
+        ids -- One or more login IDs (max: 100). String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/get-logins
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_logins",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_accounts(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for accounts in your environment.
+
+        Supports providing a FQL (Falcon Query Language) filter and paging details.
+        Returns a set of account IDs which match the filter criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  Available Filters:
+                  id                            last_successful_login_timestamp
+                  cid                           last_successful_login_hostname
+                  user_sid                      last_successful_login_remote_ip
+                  login_domain                  last_successful_login_host_country
+                  account_name                  last_successful_login_host_city
+                  username                      last_failed_login_type
+                  account_type                  last_failed_login_timestamp
+                  admin_privileges              last_failed_login_hostname
+                  first_seen_timestamp          password_last_set_timestamp
+                  last_successful_login_type
+        limit -- The number of account IDs to return in this response. (Max: 100, default: 100)
+                 Use with the offset parameter to manage pagination of results.
+        offset -- An offset used with the limit parameter to manage pagination of results.
+                  On your first request, don’t provide an offset. On subsequent requests,
+                  provide the offset from the previous response to continue from that place
+                  in the results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- Sort assets by their properties. A single sort field is allowed.
+                Common sort options include:
+                account_type:'Local'
+                admin_privileges:'Yes'
+                first_seen_timestamp:<'now-7d'
+                last_successful_login_type:'Terminal server'
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/query-accounts
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="query_accounts",
+            keywords=kwargs,
+            params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -138,6 +245,59 @@ class Discover(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="query_hosts",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_logins(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for logins in your environment.
+
+        Supports providing a FQL (Falcon Query Language) filter and paging details.
+        Returns a set of asset IDs which match the filter criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  Available Filters:
+                  id                  login_timestamp
+                  cid                 login_domain
+                  login_status        admin_privileges
+                  account_id          local_ip
+                  host_id             remote_ip
+                  user_sid            host_country
+                  aid                 host_city
+                  account_name        is_suspicious
+                  username            failure_description
+                  hostname            login_event_count
+                  account_type        aggregation_time_interval
+                  login_type
+        limit -- The number of login IDs to return in this response. (Max: 100, default: 100)
+                 Use with the offset parameter to manage pagination of results.
+        offset -- An offset used with the limit parameter to manage pagination of results.
+                  On your first request, don’t provide an offset. On subsequent requests,
+                  provide the offset from the previous response to continue from that place
+                  in the results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- Sort logins by their properties. A single sort field is allowed.
+                Common sort options include:
+                account_type:'Local'
+                login_type:'Interactive'
+                first_seen_timestamp:<'now-7d'
+                admin_privileges:'No'
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/query-logins
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="query_logins",
             keywords=kwargs,
             params=parameters
             )
