@@ -1,7 +1,17 @@
 # Version 1.0.9
+## Added features and functionality
++ Added: New Discover service collection endpoints, matching Service Class operations and unit testing.
+    * New method: _`get_accounts`_
+    * New method: _`get_logins`_
+    * New method: _`query_accounts`_
+    * New method: _`query_logins`_
+    - `discover.py`
+    - `tests/test_discover.py`
 ## Other
 + Fixed: Docstring typo for the `ProvisionAWSAccounts` operation within the Cloud Connect AWS Service Class.
     - `cloud_connect_aws.py`
++ Fixed: Docstring typo for the `combinedQueryVulnerabilities` operation within the Spotlight Vulnerabilities Service Class. Closes #608.
+    - `spotlight_vulnerabilities.py`
 
 # Version 1.0.8
 ## Added features and functionality
