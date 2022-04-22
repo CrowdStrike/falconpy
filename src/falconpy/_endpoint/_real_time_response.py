@@ -443,6 +443,45 @@ _real_time_response_endpoints = [
     ]
   ],
   [
+    "RTR_ListFilesV2",
+    "GET",
+    "/real-time-response/entities/file/v2",
+    "Get a list of files for the specified RTR session.",
+    "real_time_response",
+    [
+      {
+        "type": "string",
+        "description": "RTR Session id",
+        "name": "session_id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "RTR_DeleteFileV2",
+    "DELETE",
+    "/real-time-response/entities/file/v2",
+    "Delete a RTR session file.",
+    "real_time_response",
+    [
+      {
+        "type": "string",
+        "description": "RTR Session file id",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "RTR Session id",
+        "name": "session_id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "RTR_ListQueuedSessions",
     "POST",
     "/real-time-response/entities/queued-sessions/GET/v1",
