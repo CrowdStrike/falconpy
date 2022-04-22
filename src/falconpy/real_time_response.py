@@ -634,6 +634,32 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_files_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get a list of files for the specified RTR session.
+
+        Keyword arguments:
+        session_id -- RTR Session ID. String.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'session_id'. All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-ListFilesV2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_ListFilesV2",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "session_id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_file(self: object, parameters: dict = None, **kwargs) -> dict:
         """Delete a RTR session file.
 
@@ -655,6 +681,32 @@ class RealTimeResponse(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_DeleteFile",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_file_v2(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Delete a RTR session file.
+
+        Keyword arguments:
+        ids -- RTR Session file ID. String.
+        session_id -- RTR Session ID. String.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response/RTR-DeleteFileV2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_DeleteFileV2",
             keywords=kwargs,
             params=parameters
             )
@@ -900,7 +952,9 @@ class RealTimeResponse(ServiceClass):
     RTR_ExecuteCommand = execute_command
     RTR_GetExtractedFileContents = get_extracted_file_contents
     RTR_ListFiles = list_files
+    RTR_ListFilesV2 = list_files_v2
     RTR_DeleteFile = delete_file
+    RTR_DeleteFileV2 = delete_file_v2
     RTR_ListQueuedSessions = list_queued_sessions
     RTR_DeleteQueuedSession = delete_queued_session
     RTR_PulseSession = pulse_session
