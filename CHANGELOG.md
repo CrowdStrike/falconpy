@@ -1,3 +1,10 @@
+# Version 1.0.10
+## Added features and functionality
++ Added: New versions of two operations within the Real Time Response Service Class. `list_files_v2` and `delete_file_v2` are used the same as the original methods, but provide more results detail. You should leverage `delete_file_v2` if you are retrieving files using `list_files_v2`.
+    - `_endpoint/_real_time_response.py`
+    - `real_time_response.py`
+    - `tests/test_real_time_response.py`
+
 # Version 1.0.9
 ## Added features and functionality
 + Added: New Discover service collection endpoints, matching Service Class operations and unit testing.
@@ -5,8 +12,10 @@
     * New method: _`get_logins`_
     * New method: _`query_accounts`_
     * New method: _`query_logins`_
+    - `_endpoint/_discover.py`
     - `discover.py`
     - `tests/test_discover.py`
+
 ## Other
 + Fixed: Docstring typo for the `combinedQueryVulnerabilities` operation within the Spotlight Vulnerabilities Service Class. Closes #608.
     - `spotlight_vulnerabilities.py`
