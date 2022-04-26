@@ -1,3 +1,9 @@
+# Version 1.0.11
+
+## Other
++ Fixed: Docstring typo in sort options for `query_accounts` and `query_logins` methods within Discover Service Class.
+    - `discover.py`
+
 # Version 1.0.10
 ## Added features and functionality
 + Added: New versions of two operations within the Real Time Response Service Class. `list_files_v2` and `delete_file_v2` are used the same as the original methods, but provide more results detail. You should leverage `delete_file_v2` if you are retrieving files using `list_files_v2`.

@@ -146,17 +146,22 @@ class Discover(ServiceClass):
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  Common filter options include:
+                    account_type:'Local'
+                    admin_privileges:'Yes'
+                    first_seen_timestamp:<'now-7d'
+                    last_successful_login_type:'Terminal server'
                   Available Filters:
-                  id                            last_successful_login_timestamp
-                  cid                           last_successful_login_hostname
-                  user_sid                      last_successful_login_remote_ip
-                  login_domain                  last_successful_login_host_country
-                  account_name                  last_successful_login_host_city
-                  username                      last_failed_login_type
-                  account_type                  last_failed_login_timestamp
-                  admin_privileges              last_failed_login_hostname
-                  first_seen_timestamp          password_last_set_timestamp
-                  last_successful_login_type
+                    id                            last_successful_login_timestamp
+                    cid                           last_successful_login_hostname
+                    user_sid                      last_successful_login_remote_ip
+                    login_domain                  last_successful_login_host_country
+                    account_name                  last_successful_login_host_city
+                    username                      last_failed_login_type
+                    account_type                  last_failed_login_timestamp
+                    admin_privileges              last_failed_login_hostname
+                    first_seen_timestamp          password_last_set_timestamp
+                    last_successful_login_type
         limit -- The number of account IDs to return in this response. (Max: 100, default: 100)
                  Use with the offset parameter to manage pagination of results.
         offset -- An offset used with the limit parameter to manage pagination of results.
@@ -166,10 +171,8 @@ class Discover(ServiceClass):
         parameters - full parameters payload, not required if using other keywords.
         sort -- Sort assets by their properties. A single sort field is allowed.
                 Common sort options include:
-                account_type:'Local'
-                admin_privileges:'Yes'
-                first_seen_timestamp:<'now-7d'
-                last_successful_login_type:'Terminal server'
+                  username|asc
+                  last_failed_login_timestamp|desc
 
         This method only supports keywords for providing arguments.
 
@@ -198,28 +201,28 @@ class Discover(ServiceClass):
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
                   Available Filters:
-                  agent_version                   kernel_version
-                  aid                             last_discoverer_aid
-                  bios_manufacturer               last_seen_timestamp
-                  bios_version                    local_ips_count
-                  cid                             machine_domain
-                  city                            network_interfaces
-                  confidence                      network_interfaces.interface_alias
-                  country                         network_interfaces.interface_description
-                  current_local_ip                network_interfaces.local_ip
-                  discoverer_aids                 network_interfaces.mac_address
-                  discoverer_count                network_interfaces.network_prefix
-                  discoverer_platform_names       os_version
-                  discoverer_product_type_descs   ou
-                  discoverer_tags                 platform_name
-                  entity_type                     product_type
-                  external_ip                     product_type_desc
-                  first_discoverer_aid            site_name
-                  first_discoverer_ip             system_manufacturer
-                  first_seen_timestamp            system_product_name
-                  groups                          system_serial_number
-                  hostname                        tags
-                  id
+                    agent_version                   kernel_version
+                    aid                             last_discoverer_aid
+                    bios_manufacturer               last_seen_timestamp
+                    bios_version                    local_ips_count
+                    cid                             machine_domain
+                    city                            network_interfaces
+                    confidence                      network_interfaces.interface_alias
+                    country                         network_interfaces.interface_description
+                    current_local_ip                network_interfaces.local_ip
+                    discoverer_aids                 network_interfaces.mac_address
+                    discoverer_count                network_interfaces.network_prefix
+                    discoverer_platform_names       os_version
+                    discoverer_product_type_descs   ou
+                    discoverer_tags                 platform_name
+                    entity_type                     product_type
+                    external_ip                     product_type_desc
+                    first_discoverer_aid            site_name
+                    first_discoverer_ip             system_manufacturer
+                    first_seen_timestamp            system_product_name
+                    groups                          system_serial_number
+                    hostname                        tags
+                    id
         limit -- The number of asset IDs to return in this response. (Max: 100, default: 100)
                  Use with the offset parameter to manage pagination of results.
         offset -- An offset used with the limit parameter to manage pagination of results.
@@ -229,8 +232,8 @@ class Discover(ServiceClass):
         parameters - full parameters payload, not required if using other keywords.
         sort -- Sort assets by their properties. A single sort field is allowed.
                 Common sort options include:
-                hostname|asc
-                product_type|desc
+                  hostname|asc
+                  product_type|desc
 
         This method only supports keywords for providing arguments.
 
@@ -258,19 +261,24 @@ class Discover(ServiceClass):
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  Common sort options include:
+                    account_type:'Local'
+                    login_type:'Interactive'
+                    first_seen_timestamp:<'now-7d'
+                    admin_privileges:'No'
                   Available Filters:
-                  id                  login_timestamp
-                  cid                 login_domain
-                  login_status        admin_privileges
-                  account_id          local_ip
-                  host_id             remote_ip
-                  user_sid            host_country
-                  aid                 host_city
-                  account_name        is_suspicious
-                  username            failure_description
-                  hostname            login_event_count
-                  account_type        aggregation_time_interval
-                  login_type
+                    id                  login_timestamp
+                    cid                 login_domain
+                    login_status        admin_privileges
+                    account_id          local_ip
+                    host_id             remote_ip
+                    user_sid            host_country
+                    aid                 host_city
+                    account_name        is_suspicious
+                    username            failure_description
+                    hostname            login_event_count
+                    account_type        aggregation_time_interval
+                    login_type
         limit -- The number of login IDs to return in this response. (Max: 100, default: 100)
                  Use with the offset parameter to manage pagination of results.
         offset -- An offset used with the limit parameter to manage pagination of results.
@@ -280,10 +288,8 @@ class Discover(ServiceClass):
         parameters - full parameters payload, not required if using other keywords.
         sort -- Sort logins by their properties. A single sort field is allowed.
                 Common sort options include:
-                account_type:'Local'
-                login_type:'Interactive'
-                first_seen_timestamp:<'now-7d'
-                admin_privileges:'No'
+                  account_name|asc
+                  login_timestamp|desc
 
         This method only supports keywords for providing arguments.
 
