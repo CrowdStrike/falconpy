@@ -5,12 +5,14 @@ on:
       - '**.py'
     branches:
       - main
+      - dev
       - 'ver_*'
   pull_request:
     paths:
       - '**.py'
     branches: 
       - main
+      - dev
       - 'ver_*'
 
 jobs:
