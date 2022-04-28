@@ -413,7 +413,7 @@ Extended filtering documentation is provided when you use the `-q` argument.
 
 > This content may be easier to review when piped thru `more` or `less`.
 
-> `python3 detects_advisor.py -k CLIENT_ID -s CLIENT_SECRET -h | less`
+> `python3 detects_advisor.py -k CLIENT_ID -s CLIENT_SECRET -q | less`
 
 ```shell
  _______ _______ ___         ___ ___       __
