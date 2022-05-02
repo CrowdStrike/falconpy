@@ -65,7 +65,7 @@ class ReportExecutions(ServiceClass):
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
 
-        Returns: dict object containing API response.
+        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
 
         HTTP Method: GET
 
