@@ -300,7 +300,8 @@ class IOC(ServiceClass):
         expiration -- UTC formatted date string. String.
         filename -- Filename to use in the metadata dictionary. String.
         host_groups -- List of host groups to apply this IOC to. List of strings.
-        id -- ID of the indicator to be updated.
+        id -- ID of the indicator to be updated. At least one ID must be specified using this
+              keyword, or as part of the indicators list using the indicators keyword.
         indicators -- List of indicators to update. List of dictionaries.
         ignore_warnings -- Set to true to ignore warnings and add all IOCs. Boolean. Default: False
         metadata -- Dictionary containing the filename for the IOC.
