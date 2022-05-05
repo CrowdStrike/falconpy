@@ -163,6 +163,10 @@ class TestHosts:
         """Pytest harness hook"""
         assert bool(falcon.QueryDevicesByFilter(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
+    def test_expanded_host_result(self):
+        """Tests for result expansion in a non-binary payload."""
+        assert bool(falcon.query_devices_by_filter(limit=1, expand_result=True)[0] in AllowedResponses) is True
+
     def test_tagging(self):
         """Pytest harness hook"""
         assert self.hosts_add_tag() is True

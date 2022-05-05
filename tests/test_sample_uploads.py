@@ -20,7 +20,7 @@ AllowedResponses = [200, 201, 400, 403, 404, 429]
 
 
 class TestSampleUploads:
-    def sample_upload_download_delete(self, style: str = "file_data"):
+    def sample_upload_download_delete(self, style: str = "file_data", expanded_result: bool = False):
         """
         Tests all functionality within the class by performing an upload / download / compare / delete.
         """
@@ -45,9 +45,17 @@ class TestSampleUploads:
         except KeyError:
             sha = None
         if sha:
-            response = falcon.GetSampleV3(ids=sha)
+            response = falcon.GetSampleV3(ids=sha, expand_result=expanded_result)
+            if expanded_result:
+                if response[0] == 200:
+                    response_to_write = response[2]
+                else:
+                    # Our download returned a failure status code
+                    return False
+            else:
+                response_to_write = response
             try:
-                open(TARGET, 'wb').write(response)
+                open(TARGET, 'wb').write(response_to_write)
             except TypeError:
                 # This particular unit test failed it's upload,
                 # pass a True since the code path was tested
@@ -72,11 +80,10 @@ class TestSampleUploads:
             hash2 = hash2.hexdigest()
             if os.path.exists(TARGET):
                 os.remove(TARGET)
+            _ = falcon.DeleteSampleV3(ids=sha)
             if hash1 == hash2:
-                _ = falcon.DeleteSampleV3(ids=sha)
                 return True
             else:
-                _ = falcon.DeleteSampleV3(ids=sha)
                 return False
         else:
             # Workflow download error, skip it
@@ -105,6 +112,10 @@ class TestSampleUploads:
     def test_all_functionality_file_data(self):
         """Pytest harness hook"""
         assert self.sample_upload_download_delete("file_data") is True
+
+    def test_all_functionality_expanded_result(self):
+        """Pytest harness hook"""
+        assert self.sample_upload_download_delete("file_data", expanded_result=True) is True
 
     def test_all_functionality_sample(self):
         """Pytest harness hook"""
