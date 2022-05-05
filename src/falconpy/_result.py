@@ -1,4 +1,4 @@
-"""API Response formatting class.
+"""API Response formatting classes.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -53,3 +53,21 @@ class Result:
         self.result_obj['body'] = body
 
         return self.result_obj
+
+
+class ExpandedResult:
+    """Callable subsclass to handle parsing of expanded result client output."""
+
+    def __init__(self: object) -> tuple:
+        """Instantiate the subclass and intialize the expanded result object."""
+        self.result_tuple = ()
+
+    def __call__(self: object, status_code: int, headers, content) -> tuple:
+        """Formats ingested values into a properly formatted expanded result object."""
+        content_result = content
+        if isinstance(content, dict):
+            content_result = content["body"]
+            
+        self.result_tuple = (status_code, dict(headers), content_result)
+
+        return self.result_tuple
