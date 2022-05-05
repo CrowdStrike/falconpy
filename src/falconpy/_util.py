@@ -186,7 +186,10 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
 
 
 @force_default(defaults=["headers"], default_types=["dict"])
-def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> object:  # May return dict or object datatypes
+def perform_request(endpoint: str = "",  # pylint: disable=R0912
+                    headers: dict = None,
+                    **kwargs
+                    ) -> object:  # May return dict or object data types
     """Leverage the requests library to perform the requested CrowdStrike OAuth2 API operation.
 
     Keyword arguments:

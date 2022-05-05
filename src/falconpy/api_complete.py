@@ -241,6 +241,7 @@ class APIHarness:
         files: list = []                                    - List of files to upload
         file_name: str = None                               - Name of the file to upload
         content_type: str = None                            - Content_Type HTTP header
+        expand_result: bool = False                         - Request expanded results (Tuple)
 
         The first argument passed to this method is assumed to be 'action'. All others are ignored.
 
@@ -291,7 +292,8 @@ class APIHarness:
                                                verify=self.ssl_verify,
                                                proxy=self.proxy,
                                                timeout=self.timeout,
-                                               user_agent=self.user_agent
+                                               user_agent=self.user_agent,
+                                               expand_result=kwargs.get("expand_result", False)
                                                )
                 else:
                     # Bad HTTP method

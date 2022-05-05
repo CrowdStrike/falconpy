@@ -63,11 +63,11 @@ class ExpandedResult:
         self.result_tuple = ()
 
     def __call__(self: object, status_code: int, headers, content) -> tuple:
-        """Formats ingested values into a properly formatted expanded result object."""
+        """Format ingested values into a properly formatted expanded result object."""
         content_result = content
         if isinstance(content, dict):
             content_result = content["body"]
-            
+
         self.result_tuple = (status_code, dict(headers), content_result)
 
         return self.result_tuple
