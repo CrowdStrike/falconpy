@@ -42,7 +42,7 @@ import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
 from ._version import _TITLE, _VERSION
-from ._result import Result
+from ._result import Result, ExpandedResult
 from ._base_url import BaseURL
 from ._uber_default_preference import PREFER_NONETYPE
 urllib3.disable_warnings(InsecureRequestWarning)
@@ -218,11 +218,14 @@ def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> objec
         - Example: (5.05, 25)
     user_agent: string
         - Example: companyname-integrationname/version
+    expand_result: bool - Enable expanded results output
+        - Example: True
     """
     method = kwargs.get("method", "GET")
     body = kwargs.get("body", None)
     body_validator = kwargs.get("body_validator", None)
     user_agent = kwargs.get("user_agent", None)
+    expand_result = kwargs.get("expand_result", False)
     perform = True
     if method.upper() in _ALLOWED_METHODS:
         # Validate parameters
@@ -253,11 +256,18 @@ def perform_request(endpoint: str = "", headers: dict = None, **kwargs) -> objec
                                             proxies=kwargs.get("proxy", None), timeout=kwargs.get("timeout", None)
                                             )
 
-                if response.headers.get('content-type') == "application/json":
-                    returned = Result()(response.status_code, response.headers, response.json())
+                returning_content_type = response.headers.get('content-type')
+                if returning_content_type == "application/json":
+                    content_return = Result()(response.status_code, response.headers, response.json())
                 else:
-                    returned = response.content
-            except JSONDecodeError:
+                    content_return = response.content
+                # Expanded results allow for status code and header checks on binary returns
+                if expand_result:
+                    returned = ExpandedResult()(response.status_code, response.headers, content_return)
+                else:
+                    returned = content_return
+
+            except JSONDecodeError:  # pragma: no cover
                 # No response content, but a successful request was made
                 returned = generate_ok_result(
                     message="No content returned",
@@ -381,6 +391,7 @@ def process_service_request(calling_object: object,
     distinct_field -- Field name to retrieve distinct values for (Sensor Update Policies API)
     body_validator -- Dictionary containing details regarding body payload validation
     body_required -- List of required body payload parameters
+    expand_result -- Request expanded results output
     """
     target_endpoint = [ep for ep in endpoints if operation_id == ep[0]][0]
     target_url = f"{calling_object.base_url}{target_endpoint[2]}"
@@ -398,6 +409,7 @@ def process_service_request(calling_object: object,
     if passed_keywords or passed_params:
         parameter_payload = args_to_params(passed_params, passed_keywords, endpoints, operation_id)
     passed_headers = kwargs.get("headers", None) if kwargs.get("headers", None) else calling_object.headers
+    expand_result = passed_keywords.get("expand_result", False) if passed_keywords else kwargs.get("expand_result", False)
     new_keywords = {
         "caller": calling_object,
         "method": target_method,
@@ -409,7 +421,8 @@ def process_service_request(calling_object: object,
         "data": kwargs.get("data", None),
         "files": kwargs.get("files", None),
         "body_validator": kwargs.get("body_validator", None),
-        "body_required": kwargs.get("body_required", None)
+        "body_required": kwargs.get("body_required", None),
+        "expand_result": expand_result
     }
 
     return service_request(**new_keywords)
