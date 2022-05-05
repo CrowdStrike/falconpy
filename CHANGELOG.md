@@ -1,8 +1,20 @@
-# Version 1.0.11
+# Version 1.1.0
+## Added features and functionality
++ Added: Results object expansion - expanded results are returned as a tuple, Ex: `(status_code, headers, content)`. This allows for
+headers and status to be check on binary API returns. Expanded results are supported for all calls to the API and can be requests from
+any Service Class method or the Uber Class __command__ method using the keyword `expand_result`.
+    - `_result.py`
+    - `_util.py`
+    - `api_complete.py`
+    - `test_sample_uploads.py`
 
 ## Other
-+ Fixed: Docstring typo in sort options for `query_accounts` and `query_logins` methods within Discover Service Class.
++ Fixed: Docstring typo in sort options for `query_accounts` and `query_logins` methods within the Discover Service Class.
     - `discover.py`
++ Fixed: Docstring typo not listing `id` requirements for keyword submissions to the `indicator_update` method within the IOC Service Class.
+    - `ioc.py`
++ Fixed: Docstring typo listing an incorrect return type for the `get_download` operation within the ReportExecutions Service Class.
+    - `report_executions.py`
 
 # Version 1.0.10
 ## Added features and functionality
