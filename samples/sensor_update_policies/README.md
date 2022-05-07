@@ -44,92 +44,94 @@ This example accepts the following input parameters.
 |  `-s` FALCON_CLIENT_SECRET, `--falcon_client_secret` FALCON_CLIENT_SECRET | Falcon Client Secret | always required |
 
 #### Examples
-Show command line help.
+These examples demonstrate command line usage of this sample.
+
+##### Show command line help.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -h
 ```
 
-List all sensor update policies.
+##### List all sensor update policies.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
 ```
 
-List all sensor update policies (display members and host groups).
+##### List all sensor update policies (display members and host groups).
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET --show_groups --show_members
 ```
 
-Search for a specific sensor policy by name.
+##### Search for a specific sensor policy by name.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -q SEARCH_STRING
 ```
 
-List all available builds.
+##### List all available builds.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -b
 ```
 
-List all available kernels.
+##### List all available kernels.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -k
 ```
 
-Show bulk maintenance token.
+##### Show bulk maintenance token.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -m
 ```
 
-Show uninstall token. Multiple device IDs may be specified by delimiting with a comma.
+##### Show uninstall token. Multiple device IDs may be specified by delimiting with a comma.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -m -i DEVICE_ID_1,DEVICE_ID_2,DEVICE_ID_3
 ```
 
-List all available host groups.
+##### List all available host groups.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -o
 ```
 
-Search for a specific host group by name.
+##### Search for a specific host group by name.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -o -q SEARCH_STRING
 ```
 
-Disable a sensor update policy. Multiple policy IDs may be specified by delimiting with a comma.
+##### Disable a sensor update policy. Multiple policy IDs may be specified by delimiting with a comma.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d -i POLICY_ID
 ```
 
-Enable a sensor update policy. Multiple policy IDs may be specified by delimiting with a comma.
+##### Enable a sensor update policy. Multiple policy IDs may be specified by delimiting with a comma.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -e -i POLICY_ID
 ```
 
-Disable uninstall protection on a sensor update policy. Multiple policy IDs may be specified by delimiting with a comma.
+##### Disable uninstall protection on a sensor update policy. Multiple policy IDs may be specified by delimiting with a comma.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -x -i POLICY_ID
 ```
 
-Enable uninstall protection on a sensor update policy. Multiple policy IDs may be specified by delimiting with a comma.
+##### Enable uninstall protection on a sensor update policy. Multiple policy IDs may be specified by delimiting with a comma.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -u POLICY_ID
 ```
 
-Add a host group to a sensor update policy. Multiple host groups and policy IDs may be specified by delimiting with a comma.
+##### Add a host group to a sensor update policy. Multiple host groups and policy IDs may be specified by delimiting with a comma.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -g HOST_GROUP_ID -i POLICY_ID
 ```
 
-Remove a host group to a sensor update policy. Multiple host groups and policy IDs may be specified by delimiting with a comma.
+##### Remove a host group to a sensor update policy. Multiple host groups and policy IDs may be specified by delimiting with a comma.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -y HOST_GROUP_ID -i POLICY_ID
 ```
 
-Set policy precedence. Precedence will be determined by the order of the list provided.
+##### Set policy precedence. Precedence will be determined by the order of the list provided.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -p -i POLICY_ID_1,POLICY_ID_2,POLICY_ID3 -n PLATFORM_NAME
 ```
 
-Create a new sensor update policy.
+##### Create a new sensor update policy.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c
 ```
