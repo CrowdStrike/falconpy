@@ -28,20 +28,20 @@ This example accepts the following input parameters.
 |  `-m`, `--maintenance` | Show maintenance or a specific uninstall token | list |
 |  `-v`, `--show_members` | Show policy members in results | list |
 |  `-z`, `--show_groups` | Show host groups assigned to policies in results | list |
-|  `-q` SEARCH_STRING, `--search_string` SEARCH_STRING | String to match against policy or host group name | search |
+|  `-q` SEARCH_STRING,<BR/>`--search_string` SEARCH_STRING | String to match against policy or host group name | search |
 |  `-c`, `--create` | Create a new policy | create |
 |  `-d`, `--disable` | Disable the policy | update and delete |
 |  `-e`, `--enable` | Enable the policy | update and delete |
 |  `-x`, `--disable_uninstall_protection` | Disable uninstall protection for the policy | update and delete |
 |  `-u`, `--enable_uninstall_protection` | Enable uninstall protection for the policy | update and delete |
-|  `-p`, `--precedence` | Set policy precedence (will apply list in order received)<BR/>Use the policy_id argument to provide the list | update and delete |
+|  `-p`, `--precedence`<BR/><img width=700> | Set policy precedence to match the order of the list, use the policy_id argument to provide the list | update and delete |
 |  `-r`, `--remove` | Remove the policy | update and delete |
-|  `-g` ADD_HOST_GROUP, `--add_host_group` ADD_HOST_GROUP | Add host group to the specified policy<BR/>(comma delimit) | update and delete |
-|  `-y` YANK_HOST_GROUP, `--yank_host_group` YANK_HOST_GROUP | Remove host group from the specified policy<BR/>(comma delimit) | update and delete |
-|  `-i` POLICY_ID, `--policy_id` POLICY_ID | ID(s) of the policy to update or remove (comma delimit) | required for update and delete |
-|  `-n` PLATFORM_NAME, `--platform_name` PLATFORM_NAME | Platform name for policy precedence configurations | required for update and delete |
-|  `-f` FALCON_CLIENT_ID, `--falcon_client_id` FALCON_CLIENT_ID | Falcon Client ID | always required |
-|  `-s` FALCON_CLIENT_SECRET, `--falcon_client_secret` FALCON_CLIENT_SECRET | Falcon Client Secret | always required |
+|  `-g` ADD_HOST_GROUP,<BR/>`--add_host_group` ADD_HOST_GROUP | Add host group to the specified policy<BR/>(comma delimit) | update and delete |
+|  `-y` YANK_HOST_GROUP,<BR/>`--yank_host_group` YANK_HOST_GROUP | Remove host group from the specified policy<BR/>(comma delimit) | update and delete |
+|  `-i` POLICY_ID,<BR/>`--policy_id` POLICY_ID | ID(s) of the policy to update or remove (comma delimit) | required for update and delete |
+|  `-n` PLATFORM_NAME,<BR/>`--platform_name` PLATFORM_NAME | Platform name for policy precedence configurations | required for update and delete |
+|  `-f` FALCON_CLIENT_ID,<BR/>`--falcon_client_id` FALCON_CLIENT_ID | Falcon Client ID | always required |
+|  `-s` FALCON_CLIENT_SECRET,<BR/>`--falcon_client_secret` FALCON_CLIENT_SECRET | Falcon Client Secret | always required |
 
 #### Examples
 These examples demonstrate command line usage of this sample. Commands may be chained on the same command line as long as all actions make sense for the arguments provided.
