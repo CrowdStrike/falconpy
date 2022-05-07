@@ -61,8 +61,9 @@ These examples demonstrate command line usage of this sample. Commands may be ch
 * [Disable uninstall protection on a sensor update policy.](#disable-uninstall-protection-on-a-sensor-update-policy-multiple-policy-ids-may-be-specified-by-delimiting-with-a-comma)
 * [Enable uninstall protection on a sensor update policy.](#enable-uninstall-protection-on-a-sensor-update-policy-multiple-policy-ids-may-be-specified-by-delimiting-with-a-comma)
 * [Add a host group to a sensor update policy.](#add-a-host-group-to-a-sensor-update-policy-multiple-host-groups-and-policy-ids-may-be-specified-by-delimiting-with-a-comma)
-* [Remove a host group to a sensor update policy.](#remove-a-host-group-to-a-sensor-update-policy-multiple-host-groups-and-policy-ids-may-be-specified-by-delimiting-with-a-comma)
+* [Remove a host group from a sensor update policy.](#remove-a-host-group-from-a-sensor-update-policy-multiple-host-groups-and-policy-ids-may-be-specified-by-delimiting-with-a-comma)
 * [Set policy precedence.](#set-policy-precedence-precedence-will-be-determined-by-the-order-of-the-list-provided)
+* [Delete a sensor update policy.](#delete-a-sensor-update-policy)
 * [Create a new sensor update policy.](#create-a-new-sensor-update-policy)
 
 
@@ -170,7 +171,7 @@ python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -u POLICY_I
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -g HOST_GROUP_ID -i POLICY_ID
 ```
 
-##### Remove a host group to a sensor update policy. Multiple host groups and policy IDs may be specified by delimiting with a comma.
+##### Remove a host group from a sensor update policy. Multiple host groups and policy IDs may be specified by delimiting with a comma.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -y HOST_GROUP_ID -i POLICY_ID
 ```
@@ -178,6 +179,11 @@ python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -y HOST_GRO
 ##### Set policy precedence. Precedence will be determined by the order of the list provided.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -p -i POLICY_ID_1,POLICY_ID_2,POLICY_ID3 -n PLATFORM_NAME
+```
+
+##### Delete a sensor update policy.
+```shell
+python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -r -i POLICY_ID
 ```
 
 ##### Create a new sensor update policy.
