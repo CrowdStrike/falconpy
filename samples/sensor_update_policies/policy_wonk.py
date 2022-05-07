@@ -549,15 +549,15 @@ def create_policy():
 
 
 
-def show_token(id_for_token: str = "MAINTENANCE"):
+def show_token(id_for: str = "MAINTENANCE"):
     """Display uninstall and bulk maintenance tokens."""
-    maint_token_lookup = falcon.reveal_uninstall_token(device_id=id_for_token)
+    maint_token_lookup = falcon.reveal_uninstall_token(device_id=id_for)
     if maint_token_lookup["status_code"] != 200:
         raise SystemExit("Unable to retrieve maintenance tokens.")
     maint_token = maint_token_lookup["body"]["resources"][0]["uninstall_token"]
     disp_text = "Bulk maintenance token: "
-    if id_for_token != "MAINTENANCE":
-        disp_text = f"Uninstall token for {id_for_token}: "
+    if id_for != "MAINTENANCE":
+        disp_text = f"Uninstall token for {id_for}: "
     print(f"{disp_text}{Color.BOLD}{maint_token}{Color.END}")
 
 
