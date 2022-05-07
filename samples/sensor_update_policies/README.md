@@ -44,17 +44,66 @@ This example accepts the following input parameters.
 |  `-s` FALCON_CLIENT_SECRET, `--falcon_client_secret` FALCON_CLIENT_SECRET | Falcon Client Secret | always required |
 
 #### Examples
-These examples demonstrate command line usage of this sample.
+These examples demonstrate command line usage of this sample. Commands may be chained on the same command line as long as all actions make sense for the arguments provided.
+
+* [Show command line help.](#show-command-line-help)
+* [List all sensor update policies.](#list-all-sensor-update-policies)
+* [List all sensor update policies (display members and host groups).](#list-all-sensor-update-policies--display-members-and-host-groups-)
+* [Search for a specific sensor policy by name.](#search-for-a-specific-sensor-policy-by-name)
+* [List all available builds.](#list-all-available-builds)
+* [List all available kernels.](#list-all-available-kernels)
+* [Show bulk maintenance token.](#show-bulk-maintenance-token)
+* [Show uninstall token.](#show-uninstall-token-multiple-device-ids-may-be-specified-by-delimiting-with-a-comma)
+* [List all available host groups.](#list-all-available-host-groups)
+* [Search for a specific host group by name.](#search-for-a-specific-host-group-by-name)
+* [Disable a sensor update policy.](#disable-a-sensor-update-policy-multiple-policy-ids-may-be-specified-by-delimiting-with-a-comma)
+* [Enable a sensor update policy.](#enable-a-sensor-update-policy-multiple-policy-ids-may-be-specified-by-delimiting-with-a-comma)
+* [Disable uninstall protection on a sensor update policy.](#disable-uninstall-protection-on-a-sensor-update-policy-multiple-policy-ids-may-be-specified-by-delimiting-with-a-comma)
+* [Enable uninstall protection on a sensor update policy.](#enable-uninstall-protection-on-a-sensor-update-policy-multiple-policy-ids-may-be-specified-by-delimiting-with-a-comma)
+* [Add a host group to a sensor update policy.](#add-a-host-group-to-a-sensor-update-policy-multiple-host-groups-and-policy-ids-may-be-specified-by-delimiting-with-a-comma)
+* [Remove a host group to a sensor update policy.](#remove-a-host-group-to-a-sensor-update-policy-multiple-host-groups-and-policy-ids-may-be-specified-by-delimiting-with-a-comma)
+* [Set policy precedence.](#set-policy-precedence-precedence-will-be-determined-by-the-order-of-the-list-provided)
+* [Create a new sensor update policy.](#create-a-new-sensor-update-policy)
+
 
 ##### Show command line help.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -h
 ```
 
+[See output example](#command-line-help).
+
 ##### List all sensor update policies.
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
 ```
+
+###### Result
+
+```shell
+╒══════════════════════════════════╤════════════╤═══════════╤════════════════════════╤══════════════════╤════════════════════╕
+│ Name                             │ Platform   │ Enabled   │ Uninstall Protection   │ Sensor version   │ Build              │
+╞══════════════════════════════════╪════════════╪═══════════╪════════════════════════╪══════════════════╪════════════════════╡
+│ Latest Greatest for Windows      │ Windows    │ True      │ ENABLED                │ 6.33.14704       │ 14704              │
+│ policy_id_4                      │            │           │                        │                  │                    │
+├──────────────────────────────────┼────────────┼───────────┼────────────────────────┼──────────────────┼────────────────────┤
+│ Josh Test Linux                  │ Linux      │ False     │ IGNORE                 │ Not set          │ Not set            │
+│ policy_id_5                      │            │           │                        │                  │                    │
+├──────────────────────────────────┼────────────┼───────────┼────────────────────────┼──────────────────┼────────────────────┤
+│ platform_default                 │ Mac        │ True      │ ENABLED                │ 6.37.15001       │ 15001|n-1|tagged|3 │
+│ policy_id_1                      │            │           │                        │                  │                    │
+│ Platform default policy          │            │           │                        │                  │                    │
+├──────────────────────────────────┼────────────┼───────────┼────────────────────────┼──────────────────┼────────────────────┤
+│ platform_default                 │ Linux      │ True      │ IGNORE                 │ Not set          │ Not set            │
+│ policy_id_2                      │            │           │                        │                  │                    │
+│ Platform default policy          │            │           │                        │                  │                    │
+├──────────────────────────────────┼────────────┼───────────┼────────────────────────┼──────────────────┼────────────────────┤
+│ platform_default                 │ Windows    │ True      │ DISABLED               │ 6.33.14704       │ 14704              │
+│ policy_id_3                      │            │           │                        │                  │                    │
+│ Platform default policy          │            │           │                        │                  │                    │
+╘══════════════════════════════════╧════════════╧═══════════╧════════════════════════╧══════════════════╧════════════════════╛
+```
+
 
 ##### List all sensor update policies (display members and host groups).
 ```shell
