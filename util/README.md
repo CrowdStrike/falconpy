@@ -1,20 +1,23 @@
 ![CrowdStrike Falcon](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png)<br/>[![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)<br/>
 
 # Utilities
-These utilities are meant to assist developers working on FalconPy, the CrowdStrike Falcon SDK for Python.
+These scripts are meant to assist developers working on FalconPy, the CrowdStrike Falcon SDK for Python, and are mostly focused on automating tasks that have to be performed consistently.
 
 ## Inventory
-All of these utilities are designed to be executed from within the parent folder.
+All of these utilities are designed to be executed from within the repository root folder, but several include functionality allowing for passing this location instead.
 
 | File | Purpose |
 | :--- | :--- |
 | `coverage.config` | Configuration settings for coverage.py integration. |
 | `create-lambda-layer.sh` | Leverages docker to create a ZIP archive of FalconPy to be used as an AWS lambda layer. A modified version of this utility is used to generate the download available on [falconpy.io](https://falconpy.io/downloads/falconpy-layer.zip). |
-| `debug.sh` | Starts the FalconPy interactive debugger. Execute this from the main directory. Example: `util/debug.sh` |
-| `docstyle.sh` | Lints the package docstrings using `pydocstyle` and returns the result. |
-| `lint.sh` | Lints the package source with `flake8` and `pylint` and returns the result. |
-| `run-tests.sh` | Runs a complete unit test series, reports code coverage and runs a bandit analysis. |
+| `debug.sh` | Starts the FalconPy interactive debugger. Execute this from the repository root directory.<BR/>Example: `util/debug.sh` |
+| `docstyle.sh` | Lints the package docstrings using `pydocstyle` and returns the result.<BR/>Execute from the root of the repository: `util/docstyle.sh` |
+| `find-strings.sh`<BR/><img width=300> | Search the code base for a string or list of strings. Returns module file name and line number for all matches. Run from within the root of the repository folder or pass the folder location as the second argument.<BR/>`find-strings.sh SEARCH1,SEARCH2 /path/to/repo/home` |
+| `lint.sh` | Lints the package source with `flake8` and `pylint` and returns the result. Execute from the root of the repository or pass the location you wish to lint as the first argument: `util/lint.sh /path/to/folder` |
+| `public-modules.sh` | Returns a list of all public FalconPy modules and the count of their available methods. Execute from the root of the repository folder or pass this location as the first argument.<BR/>`public-modules.sh /path/to/repo/home`
+| `run-tests.sh` | Runs a complete unit test series, reports code coverage and runs a bandit analysis.<BR/>Should be executed from the repository root: `util/run-tests.sh` |
 | `unit-test.sh` | Runs a single unit test series and reports code coverage. Execute individual tests by specifying their module name. Example: `util/unit-test.sh real_time_response` |
+| `vcheck.sh` | Checks your installed version of FalconPy against the latest release version.<BR/>Will attempt to detect `Pipenv` / `Poetry`.<BR/>Can be executed locally (`util/vcheck.sh`) or online with:<BR/>`curl https://falconpy.io/vcheck --silent \| bash` |
 
 ## Discussion forums
 Our community maintains a discussion board for interacting about FalconPy usage and for handling questions.  This content is labeled by API and fully searchable.
