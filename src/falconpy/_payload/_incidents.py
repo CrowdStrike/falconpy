@@ -85,10 +85,8 @@ def incident_action_parameters(passed_keywords: dict) -> dict:
         if key in valid_keywords and key != "unassign":
             if key in ["add_tag", "delete_tag"]:
                 if isinstance(val, str):
-                    tag_list = val.split(",")
-                else:
-                    tag_list = val
-                for tag_val in tag_list:
+                    val = val.split(",")
+                for tag_val in val:
                     returned_payload.append({
                         "name": key,
                         "value": tag_val

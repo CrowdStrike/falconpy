@@ -125,9 +125,11 @@ class Incidents(ServiceClass):
         Keyword arguments:
         action_parameters -- Action specific parameters. List of dictionaries.
         add_tag -- Adds the associated value as a new tag on all the incidents of the ids list.
-                   Overridden if action_parameters is specified. String.
+                   Overridden if action_parameters is specified. Multiple values may be provided.
+                   String, comma delimited string, or list.
         delete_tag -- Deletes tags matching the value from all the incidents in the ids list.
-                      Overridden if action_parameters is specified. String.
+                      Overridden if action_parameters is specified. Multiple values may be provided.
+                      String, comma delimited string or list.
         unassign -- Unassigns all users from all of the incidents in the ids list.
                     Overridden if action_parameters is specified. Boolean.
         update_name -- Updates the name to the parameter value of all the incidents
