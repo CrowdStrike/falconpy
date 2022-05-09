@@ -752,7 +752,6 @@ class RealTimeResponse(ServiceClass):
 
         Keyword arguments:
         body -- full body payload, not required if ids are provided as keyword.
-                You must use body if you are going to specify action_parameters.
                 {
                     "ids": [
                         "string"
@@ -787,7 +786,6 @@ class RealTimeResponse(ServiceClass):
 
         Keyword arguments:
         body -- full body payload, not required if ids are provided as keyword.
-                You must use body if you are going to specify action_parameters.
                 {
                     "ids": [
                         "string"
