@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request
-from ._payload import generic_payload_list
+from ._payload import generic_payload_list, incident_action_parameters
 from ._service_class import ServiceClass
 from ._endpoint._incidents import _incidents_endpoints as Endpoints
 
@@ -128,8 +128,8 @@ class Incidents(ServiceClass):
                 {
                     "action_parameters": [
                         {
-                        "name": "string",
-                        "value": "string"
+                            "name": "string",
+                            "value": "string"
                         }
                     ],
                     "ids": [
@@ -137,7 +137,6 @@ class Incidents(ServiceClass):
                     ]
                 }
         ids -- Incident ID(s) to perform actions against. String or list of strings.
-
 
         This method only supports keywords for providing arguments.
 
@@ -150,6 +149,10 @@ class Incidents(ServiceClass):
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+            act_params = incident_action_parameters(passed_keywords=kwargs)
+            if act_params:
+                body["action_parameters"] = act_params
+            # Passing an action_parameters list will override provided individual keywords
             if kwargs.get("action_parameters", None):
                 body["action_parameters"] = kwargs.get("action_parameters", None)
 
