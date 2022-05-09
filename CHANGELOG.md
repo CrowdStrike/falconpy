@@ -1,12 +1,43 @@
 # Version 1.1.0
 ## Added features and functionality
 + Added: Results object expansion - expanded results are returned as a tuple, Ex: `(status_code, headers, content)`. This allows for
-headers and status to be check on binary API returns. Expanded results are supported for all calls to the API and can be requests from
+headers and status to be checked on binary API returns. Expanded results are supported for all calls to the API and can be requested from
 any Service Class method or the Uber Class __command__ method using the keyword `expand_result`.
     - `_result.py`
     - `_util.py`
     - `api_complete.py`
     - `test_sample_uploads.py`
+
+    __Example__
+    ```python
+    # Pass a boolean True to the `expand_result` keyword to request expanded results.
+    download_result = samples.get_sample(ids=file_sha, expand_result=True)
+
+    # We're returned a tuple (status, headers, content)
+    # Status will be in 0
+    print(f"Status returned: {download_result[0]}")
+    # Headers will be in 1
+    print(f"Headers returned: {download_result[1]}")
+    # File content will be in 2
+    with open(example_file, "wb") as download_file:
+        download_file.write(download_result[2])
+    ```
+
++ Added: Specify action_parameters keys for __perform__ operations using keywords instead of a list of dictionaries. 
+    * Keyword: `group_id`
+        - `device_control_policies.py` (_perform_action_ method)
+        - `firewall_policies.py` (_perform_action_ method)
+        - `prevention_policy.py` (_perform_policies_action_ method)
+        - `response_policies.py` (_perform_policies_action_ method)
+        - `sensor_update_policy.py` (_perform_policies_action_ method)
+    * Keyword: `filter`
+        - `host_group.py` (_perform_group_action_ method)
+    * Keyword: `note`
+        - `hosts.py` (_perform_action_ method)
+    * Keywords: `add_tag`, `delete_tag`, `unassign`, `update_name`, `update_assigned_to_v2`, `update_description`, `update_status`
+        - `_payload/__init__.py`
+        - `_payload/_incidents.py`
+        - `incidents.py` (_perform_incident_action_ method)
 
 ## Other
 + Fixed: Docstring typo in sort options for `query_accounts` and `query_logins` methods within the Discover Service Class.
@@ -15,6 +46,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `ioc.py`
 + Fixed: Docstring typo listing an incorrect return type for the `get_download` operation within the ReportExecutions Service Class.
     - `report_executions.py`
++ Fixed: Docstring type in Real Time Response Service Class referencing non-existent `action_parameters` payload element.
+    - `real_time_response.py`
 
 # Version 1.0.10
 ## Added features and functionality
