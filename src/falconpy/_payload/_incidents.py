@@ -79,11 +79,15 @@ def incident_action_parameters(passed_keywords: dict) -> dict:
         "update_description", "update_status"
         ]
     for key, val in passed_keywords.items():
-        if key in valid_keywords:
-            act_param = {
+        if key in valid_keywords and key != "unassign":
+            returned_payload.append({
                 "name": key,
                 "value": val
-            }
-            returned_payload.append(act_param)
+            })
+        if key == "unassign":
+            if val:
+                returned_payload.append({
+                    "name": key
+                })
 
     return returned_payload
