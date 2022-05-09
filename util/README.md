@@ -8,6 +8,7 @@ All of these utilities are designed to be executed from within the repository ro
 
 | File | Purpose |
 | :--- | :--- |
+| `babel_fish.py` | Lists all available operations, their HTTP method, endpoint and service collection. Can search for a specific string across all four columns. Must be run from the `src` folder or you must have FalconPy available within your environment. (Python application) |
 | `coverage.config` | Configuration settings for coverage.py integration. |
 | `create-lambda-layer.sh` | Leverages docker to create a ZIP archive of FalconPy to be used as an AWS lambda layer. A modified version of this utility is used to generate the download available on [falconpy.io](https://falconpy.io/downloads/falconpy-layer.zip). |
 | `debug.sh` | Starts the FalconPy interactive debugger. Execute this from the repository root directory.<BR/>Example: `util/debug.sh` |
