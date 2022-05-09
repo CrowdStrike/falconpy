@@ -124,6 +124,28 @@ class Incidents(ServiceClass):
 
         Keyword arguments:
         action_parameters -- Action specific parameters. List of dictionaries.
+        add_tag -- Adds the associated value as a new tag on all the incidents of the ids list.
+                   Overridden if action_parameters is specified. String.
+        delete_tag -- Deletes tags matching the value from all the incidents in the ids list.
+                      Overridden if action_parameters is specified. String.
+        unassign -- Unassigns all users from all of the incidents in the ids list.
+                    Overridden if action_parameters is specified. Boolean.
+        update_name -- Updates the name to the parameter value of all the incidents
+                       in the ids list. Overridden if action_parameters is specified. String.
+        update_assigned_to_v2 -- Assigns the user matching the UUID in the parameter
+                                 value to all of the incidents in the ids list. For information
+                                 on getting the UUID of a user, see Find existing users.
+                                 Overridden if action_parameters is specified. UUID string.
+        update_description -- Updates the description to the parameter value of all the
+                              incidents listed in the ids list.
+                              Overridden if action_parameters is specified. String.
+        update_status -- Updates the status to the parameter value of all the incidents
+                         in the ids list. Valid status values are 20, 25, 30, or 40:
+                            20: New
+                            25: Reopened
+                            30: In Progress
+                            40: Closed
+                         Overridden if action_parameters is specified. Integer string.
         body -- full body payload, not required if ids is provided as keyword.
                 {
                     "action_parameters": [
