@@ -149,6 +149,8 @@ class FirewallPolicies(ServiceClass):
                         "string"
                     ]
                 }
+        group_id -- Host Group ID to apply the policy to. String.
+                    Overridden if action_parameters is specified.
         ids -- Firewall policy ID(s) to perform actions against. String or list of strings.
         parameters - full parameters payload, not required if action_name is provided as a keyword.
 
@@ -168,6 +170,12 @@ class FirewallPolicies(ServiceClass):
         if action_name.lower() in _allowed_actions:
             if not body:
                 body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+                if kwargs.get("group_id", None):
+                    body["action_parameters"] = [{
+                        "name": "group_id",
+                        "value": kwargs.get("group_id", None)
+                    }]
+                # Passing an action_parameters list will override the group_id keyword
                 if kwargs.get("action_parameters", None):
                     body["action_parameters"] = kwargs.get("action_parameters", None)
 
