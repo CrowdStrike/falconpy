@@ -42,21 +42,24 @@ def incident_action_parameters(passed_keywords: dict) -> dict:
 
     Available keywords
     add_tag - Adds the associated value as a new tag on all the incidents of the ids list.
-    delete_tag - Deletes tags matching the value from all the incidents in the ids list
-    unassign - Unassigns all users from all of the incidents in the ids list.
+              Multiple tags may be provided as a list or comma delimited string.
+    delete_tag - Deletes tags matching the value from all the incidents in the ids list.
+                 Multiple tags may be provided as a list or a comma delimited string.
+    unassign - Unassigns all users from all of the incidents in the ids list. Boolean.
                This action does not require a value parameter. For example:
                "action_parameters": [
                     {
                         "name": "unassign"
                     }
                 ]
-    update_name - Updates the name to the parameter value of all the incidents in the ids list.
+    update_name - Updates the name to the parameter value of all the incidents in the ids list. String.
     update_assigned_to_v2 - Assigns the user matching the UUID in the parameter value to all of
-                            the incidents in the ids list.
+                            the incidents in the ids list. String.
                             For information on getting the UUID of a user, see Find existing users.
-    update_description - Updates the description to the parameter value of all the incidents listed in the ids list.
+    update_description - Updates the description to the parameter value of all the incidents listed
+                         in the ids list. String.
     update_status - Updates the status to the parameter value of all the incidents in the ids list.
-                    Valid status values are 20, 25, 30, or 40:
+                    Integer string. Valid status values are 20, 25, 30, or 40:
                         20: New
                         25: Reopened
                         30: In Progress
@@ -80,10 +83,21 @@ def incident_action_parameters(passed_keywords: dict) -> dict:
         ]
     for key, val in passed_keywords.items():
         if key in valid_keywords and key != "unassign":
-            returned_payload.append({
-                "name": key,
-                "value": val
-            })
+            if key in ["add_tag", "delete_tag"]:
+                if isinstance(val, str):
+                    tag_list = val.split(",")
+                else:
+                    tag_list = val
+                for tag_val in tag_list:
+                    returned_payload.append({
+                        "name": key,
+                        "value": tag_val
+                    })
+            else:
+                returned_payload.append({
+                    "name": key,
+                    "value": val
+                })
         if key == "unassign":
             if val:
                 returned_payload.append({
