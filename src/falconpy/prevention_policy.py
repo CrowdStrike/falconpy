@@ -145,7 +145,7 @@ class PreventionPolicy(ServiceClass):
                 {
                     "action_parameters": [
                         {
-                            "name": "string",
+                            "name": "group_id",
                             "value": "string"
                         }
                     ],
@@ -153,6 +153,8 @@ class PreventionPolicy(ServiceClass):
                         "string"
                     ]
                 }
+        group_id -- Host Group ID to apply the policy to. String.
+                    Overridden if action_parameters is provided.
         ids -- Prevention policy ID(s) to perform actions against. String or list of strings.
         parameters - full parameters payload, not required if action_name is provide as a keyword.
 

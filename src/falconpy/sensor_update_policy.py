@@ -280,7 +280,7 @@ class SensorUpdatePolicy(ServiceClass):
                 {
                     "action_parameters": [
                         {
-                            "name": "string",
+                            "name": "group_id",
                             "value": "string"
                         }
                     ],
@@ -288,6 +288,8 @@ class SensorUpdatePolicy(ServiceClass):
                         "string"
                     ]
                 }
+        group_id -- Host Group ID to apply the policy to. String.
+                    Overridden if action_parameters is specified.
         ids -- Sensor Update policy ID(s) to perform actions against. String or list of strings.
         parameters - full parameters payload, not required if action_name is provided as a keyword.
 
