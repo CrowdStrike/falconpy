@@ -93,14 +93,6 @@ class Hosts(ServiceClass):
         """
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
-            if kwargs.get("note", None):
-                body["action_parameters"] = [{
-                    "name": "note",
-                    "value": kwargs.get("note", None)
-                }]
-            # Passing an action_parameters list will override the note keyword
-            if kwargs.get("action_parameters", None):
-                body["action_parameters"] = kwargs.get("action_parameters", None)
 
         _allowed_actions = ['contain', 'lift_containment', 'hide_host', 'unhide_host']
         operation_id = "PerformActionV2"
