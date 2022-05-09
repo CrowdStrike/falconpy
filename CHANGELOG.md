@@ -32,8 +32,6 @@ any Service Class method or the Uber Class __command__ method using the keyword 
         - `sensor_update_policy.py` (_perform_policies_action_ method)
     * Keyword: `filter`
         - `host_group.py` (_perform_group_action_ method)
-    * Keyword: `note`
-        - `hosts.py` (_perform_action_ method)
     * Keywords: `add_tag`, `delete_tag`, `unassign`, `update_name`, `update_assigned_to_v2`, `update_description`, `update_status`
         - `_payload/__init__.py`
         - `_payload/_incidents.py`
@@ -46,8 +44,16 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `ioc.py`
 + Fixed: Docstring typo listing an incorrect return type for the `get_download` operation within the ReportExecutions Service Class.
     - `report_executions.py`
-+ Fixed: Docstring type in Real Time Response Service Class referencing non-existent `action_parameters` payload element.
++ Fixed: Docstring typo in Real Time Response Service Class referencing non-existent `action_parameters` payload element.
     - `real_time_response.py`
++ Added: Babel fish operation ID to endpoint translator.
+    - `util/babel_fish.py`
++ Added: FalconPy terminal word search utility.
+    - `util/find-strings.sh`
++ Added: FalconPy module listing utility.
+    - `util/public-modules.sh`
++ Added: FalconPy version check utility.
+    - `util/vcheck.sh`
 
 # Version 1.0.10
 ## Added features and functionality
