@@ -173,6 +173,12 @@ class HostGroup(ServiceClass):
             body = generic_payload_list(submitted_keywords=kwargs,
                                         payload_value="ids"
                                         )
+            if kwargs.get("filter", None):
+                body["action_parameters"] = [{
+                    "name": "filter",
+                    "value": kwargs.get("filter", None)
+                }]
+            # Passing an action_parameters list will override the filter keyword
             if kwargs.get("action_parameters", None):
                 body["action_parameters"] = kwargs.get("action_parameters", None)
 
