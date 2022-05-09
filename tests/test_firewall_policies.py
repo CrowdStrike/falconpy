@@ -36,7 +36,8 @@ class TestFirewallPolicy:
                                                                                   action_parameters=[{
                                                                                     "name": "group_id",
                                                                                     "value": "123456789abcdef987654321"
-                                                                                    }]
+                                                                                    }],
+                                                                                  group_id="group_id_can_go_here_too"
                                                                                   ),
             "set_device_control_policies_precedence": falcon.setFirewallPoliciesPrecedence(ids="12345678", platform_name="Windows"),
             "get_device_control_policies": falcon.getFirewallPolicies(ids='12345678'),

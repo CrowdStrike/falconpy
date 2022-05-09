@@ -36,7 +36,8 @@ class TestDeviceControlPolicy:
                                                                                   action_parameters=[{
                                                                                     "name": "group_id",
                                                                                     "value": "123456789abcdef987654321"
-                                                                                    }]
+                                                                                    }],
+                                                                                  group_id="12345678943413135245"
                                                                                   ),
             "set_device_control_policies_precedence": falcon.setDeviceControlPoliciesPrecedence(ids="12345678", platform_name="Windows"),
             "get_device_control_policies": falcon.getDeviceControlPolicies(ids='12345678'),

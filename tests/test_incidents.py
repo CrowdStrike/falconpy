@@ -72,7 +72,15 @@ class TestIncidents:
             ["GetBehaviors", falcon.get_behaviors()],
             ["PerformIncidentAction", falcon.perform_incident_action(action_parameters=[
                 {"name": "whatever", "value": "something"}
-                ])],
+                ],
+                add_tag="Something",
+                delete_tag="something",
+                update_name="something",
+                update_description="dark side",
+                unassign=True,
+                update_assigned_to_v2="UUID here",
+                update_status="40"
+                )],
             ["GetIncidents", falcon.get_incidents()],
             ["QueryBehaviors", falcon.query_behaviors()],
             ["QueryIncidents", falcon.query_incidents()]

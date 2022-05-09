@@ -79,7 +79,7 @@ class TestFalconPrevent:
         error_checks = True
         tests = {
             "perform_action": falcon.perform_policies_action(body={}, action_parameters=[{"name": "filter", "value": ""}]),
-            "perform_action_also": falcon.perform_policies_action(action_name="disable", ids="12345678"),
+            "perform_action_also": falcon.perform_policies_action(action_name="disable", ids="12345678", group_id="whatevers"),
             "set_precedence": falcon.set_policies_precedence(body={
                                                                 "ids": ["12345678"],
                                                                 "platform_name": "Windows"

@@ -136,7 +136,9 @@ class TestFalconSensorUpdate:
                                                              action_parameters=[{
                                                                  "name": "group_id",
                                                                  "value": "123456789abcdef987654321"
-                                                             }])
+                                                             }],
+                                                             group_id="whatever"
+                                                             )
         }
 
         for key in tests:

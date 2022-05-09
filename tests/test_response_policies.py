@@ -29,7 +29,8 @@ class TestRTRPolicy:
                                                                               ),
             "perform_action_too": falcon.perform_policies_action(action_name="whatevers",
                                                                  action_parameters={"name": "filter", "value": ""},
-                                                                 ids="12345678"
+                                                                 ids="12345678",
+                                                                 group_id="whatever"
                                                                  ),
             "setRTResponsePoliciesPrecedence": falcon.set_policies_precedence(body={
                                                                                 'ids': ['12345678', '98765432'],

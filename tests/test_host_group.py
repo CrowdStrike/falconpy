@@ -83,7 +83,8 @@ class TestHostGroup:
                                                                 action_parameters=[{
                                                                     "name": "filter",
                                                                     "value": "platform_name:'Windows'"
-                                                                }]
+                                                                }],
+                                                                filter="platform_name:'Windows'"
                                                                 ),
             "create_host_groups": falcon.create_host_groups(body={}, group_type="Dunno"),
             "create_host_groups_also": falcon.create_host_groups(assignment_rule="WhateverBro",
