@@ -25,6 +25,7 @@ This example accepts the following input parameters.
 | `-n`, `--no-color` | Disable color output | optional |
 | `-x` CHART_SIZE,<BR/>`--chart-size` CHART_SIZE | Size of the chart to display (Max: 100, Default: 25) | optional |
 | `-m` MAX_ROWS,<BR/>`--max-rows` MAX_ROWS | Maximum number of rows to return (5 - 250, Default: 100) | optional |
+| `-b` BASE_URL,<BR/>`--base-url` BASE_URL | CrowdStrike cloud region. (auto or usgov1, Default: auto) | optional |
 |  `-f` FALCON_CLIENT_ID,<BR/>`--falcon_client_id` FALCON_CLIENT_ID | Falcon Client ID | always required |
 |  `-s` FALCON_CLIENT_SECRET,<BR/>`--falcon_client_secret` FALCON_CLIENT_SECRET | Falcon Client Secret | always required |
 
@@ -35,6 +36,7 @@ These examples demonstrate command line usage of this sample. Commands may be ch
 - [Show your current CrowdScore and plot the past 24 hours](#show-your-current-crowdscore-and-plot-the-past-24-hours)
 - [Show the data table for the chart display](#show-the-data-table-for-the-chart-display)
 - [Reverse the table sort](#reverse-the-table-sort)
+- [Create a chart in the US-GOV-1 region](#create-a-chart-in-the-us-gov-1-region)
 - [Increase the number of rows returned](#increase-the-number-of-rows-returned)
 - [Increase the chart size](#increase-the-chart-size)
 - [Disable color output](#disable-color-output)
@@ -103,6 +105,11 @@ python3 crowdscore_quickchart.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -
 python3 crowdscore_quickchart.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -r
 ```
 
+##### Create a chart in the `US-GOV-1` region
+```shell
+python3 crowdscore_quickchart.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -b usgov1
+```
+
 ##### Increase the number of rows returned
 This argument has a range of 5 - 250.
 ```shell
@@ -164,6 +171,8 @@ optional arguments:
                         Size of the chart to display (Max: 100, Default: 25)
   -m MAX_ROWS, --max-rows MAX_ROWS
                         Maximum number of rows to return (5 - 250, Default: 100)
+  -b BASE_URL, --base-url BASE_URL
+                        CrowdStrike cloud region. (auto or usgov1, Default: auto)
 
 required arguments:
   -k FALCON_CLIENT_ID, --falcon_client_id FALCON_CLIENT_ID
