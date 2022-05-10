@@ -118,13 +118,13 @@ def format_current_score(current_score: str, chart_hidden: bool):
         new_line = f"{RED}{line}{ENDMARK}"
         new_line = new_line.replace(
             "                        __ _______                        __",
-            f"                        __ _______                        __{ENDMARK}{cs_color}"
+            f"                        __ _______                        {ENDMARK}__{cs_color}"
             )
-        new_line = new_line.replace("-----.|__|", f"-----.|__|{ENDMARK}{cs_color}")
-        new_line = new_line.replace("|   _|  -__| __", f"|   _|  -__| __{ENDMARK}{cs_color}")
+        new_line = new_line.replace("-----.|__|", f"-----.{ENDMARK}|__|{cs_color}")
+        new_line = new_line.replace("|   _|  -__| __", f"|   _|  -__| {ENDMARK}__{cs_color}")
         new_line = new_line.replace(
             "_____|__| |_____||__|",
-            f"_____|__| |_____||__|{ENDMARK}{cs_color}"
+            f"_____|__| |_____|{ENDMARK}|__|{cs_color}"
             )
         new_line = new_line.replace(
             "|:  1   |                         |:  1   |",
