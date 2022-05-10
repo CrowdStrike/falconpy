@@ -6,7 +6,7 @@ The examples in this folder focus on leveraging CrowdStrike's Incidents API.
 - [CrowdScore QuickChart](#chart-your-crowdscore-for-the-past-day)
 
 ## Chart your CrowdScore for the past day
-This example demonstrates retreiving CrowdScore detail and then charting it a simple histogram.
+This example demonstrates retrieving CrowdScore detail and then charting it a simple histogram.
 
 ### Running the program
 In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
