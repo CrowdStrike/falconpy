@@ -32,6 +32,7 @@ These coders deserve accolades and laurels as well as cool titles and cartoons. 
 | Brendan Kremian, `@bk-cs` | [Disparate Ringbearer](https://xkcd.com/353/)
 | Christophe Viaud, `@falcon-pioupiou` | [Consequence Substantiator](https://xkcd.com/1678/) |
 | Shane Shellenbarger, `@soggysec` | [Calamity Validator](https://xkcd.com/1700/) |
+| Timothy Sullivan, `@tsullivan06` | [Functionality Determinator](https://xkcd.com/1349/) |
 
 ## Contributors
 The following members of the community have made requests, suggestions, code contributions or provided feedback and reported bugs.
@@ -42,7 +43,7 @@ This has been a critical element in the development of the FalconPy project.
 + Justin Harris, `@jhseceng`
 + Bryan McClellan, `@mccbryan3`
 + Caleb Schwartz, `@rewgord`
-+ Christopher Hammond, `ChristopherHammond13`
++ Christopher Hammond, `@ChristopherHammond13`
 + `@modubyk`
 + James Hodgkinson, `@yaleman`
 + `@matcha-shake`
@@ -55,7 +56,6 @@ This has been a critical element in the development of the FalconPy project.
 + Alexandre Borgo, `@alexandreborgo`
 + Kyle Cozad, `@cozadk`
 + `@sspencer-hubble`
-+ Timothy Sullivan, `@tsullivan06`
 + `@t-lark`
 + Steve Klassen, `@mrxinu`
 + Valerian Rossigneux, `@valerianrossigneux`
