@@ -26,6 +26,7 @@ code samples:
 - samples/falconx_sandbox/*.py
 - samples/flight_control/*.py
 - samples/hosts/*.py
+- samples/incidents/*.py
 - samples/ioc/*.py
 - samples/malquery/*.py
 - samples/rtr/*.py
@@ -33,5 +34,6 @@ code samples:
 - samples/spotlight/*.py
 - samples/quick_scan/*.py
 - samples/sensor_download/*.py
+- samples/sensor_update_policies/*.py
 - samples/spotlight/*.py
 - samples/user_management/*.py
