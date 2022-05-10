@@ -27,9 +27,9 @@ import tabulate
 from falconpy import Incidents
 
 
-def connect_api(key: str, secret: str):
+def connect_api(key: str, secret: str, base: str):
     """Return a connected instance of the Incidents Service Class."""
-    return Incidents(client_id=key, client_secret=secret)
+    return Incidents(client_id=key, client_secret=secret, base_url=base)
 
 
 def consume_command_line():
@@ -68,6 +68,12 @@ def consume_command_line():
                         help="Maximum number of rows to return (5 - 250, Default: 100)",
                         required=False
                         )
+    parser.add_argument("-b", "--base-url",
+                        dest="base_url",
+                        help="CrowdStrike cloud region. (auto or usgov1, Default: auto)",
+                        required=False,
+                        default="auto"
+                        )
     req = parser.add_argument_group("required arguments")
     req.add_argument("-k", "--falcon_client_id", help="Search string", required=True)
     req.add_argument("-s", "--falcon_client_secret", help="Search string", required=True)
@@ -75,10 +81,10 @@ def consume_command_line():
     return parser.parse_args()
 
 
-def get_crowdscore_data(client_id: str, client_secret: str, max_rows: str = None):
+def get_crowdscore_data(client_id: str, client_secret: str, base_url: str, max_rows: str = None):
     """Retrieve the CrowdScore dataset using the Incidents Service Class."""
     # Connect to the API
-    incidents_api = connect_api(client_id, client_secret)
+    incidents_api = connect_api(client_id, client_secret, base_url)
     ts_range = (datetime.now() + timedelta(hours=-36)).strftime("%Y-%m-%dT%H:%M:%SZ")
     row_limit = DEFAULT_ROW_LIMIT
     if max_rows:
@@ -201,6 +207,7 @@ def display_crowdscores(arguments: ArgumentParser):
     # Grab all the CrowdScores
     current_crowdscore_lookup = get_crowdscore_data(arguments.falcon_client_id,
                                                     arguments.falcon_client_secret,
+                                                    arguments.base_url,
                                                     arguments.max_rows
                                                     )
     # Grab the most recent CrowdScore, format and display it
