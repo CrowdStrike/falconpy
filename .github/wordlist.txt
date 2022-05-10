@@ -720,3 +720,6 @@ CTO
 Wonk
 wonk
 wb
+Determinator
+QuickChart
+usgov
