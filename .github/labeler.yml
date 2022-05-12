@@ -29,6 +29,7 @@ code samples:
 - samples/incidents/*.py
 - samples/ioc/*.py
 - samples/malquery/*.py
+- samples/prevention_policy/*.py
 - samples/rtr/*.py
 - samples/sample_uploads/*.py
 - samples/spotlight/*.py
