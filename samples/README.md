@@ -119,7 +119,7 @@ This sample demonstrate the following CrowdStrike Event Streams API operations:
 | Operation | Description |
 | :--- | :--- |
 | [listAvailableStreamsOAuth2](https://falconpy.io/Service-Collections/Event-Streams.html#listavailablestreamsoauth2) | Discover all event streams in your environment. |
-| [refreshActiveStreamSession](https://falconpy.io/Service-Collections/Event-Streams.html#refreshactivestreamsession) | Refresh an active event stream. Use the URL shown in a GET /sensors/entities/datafeed/v2 response. |
+| [refreshActiveStreamSession](https://falconpy.io/Service-Collections/Event-Streams.html#refreshactivestreamsession) | Refresh an active event stream. Use the URL shown in a [listAvailableStreamsOAuth2](https://falconpy.io/Service-Collections/Event-Streams.html#listavailablestreamsoauth2) response. |
 
 ## Falcon Discover
 The samples in this section focus on the CrowdStrike Falcon Discover API service collection.
