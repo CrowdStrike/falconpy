@@ -32,7 +32,7 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
   * [Send detections to AWS Security Hub](#send-detections-to-aws-security-hub)
 - [Falcon Discover](#falcon-discover)
   * [List discovered hosts](#list-discovered-hosts)
-- [Falcon Discover for Cloud and Containers (AWS Accounts)](#falcon-discover-for-cloud-and-containers--aws-accounts-)
+- [Falcon Discover for Cloud and Containers (AWS Accounts)](#falcon-discover-for-cloud-and-containers-aws-accounts)
   * [Manage Discover accounts](#manage-discover-accounts)
 - [Falcon Horizon](#falcon-horizon)
   * [Get CSPM policies](#get-cspm-policies)
@@ -46,10 +46,10 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
   * [S3 Bucket Protection](#s3-bucket-protection)
 - [Hosts](#hosts)
   * [List sensors by hostname](#list-sensors-by-hostname)
-  * [CUSSED (Manage stale sensors)](#cussed--manage-stale-sensors-)
+  * [CUSSED (Manage stale sensors)](#cussed-manage-stale-sensors)
   * [Offset vs. Token](#offset-vs-token)
   * [Quarantine a host](#quarantine-a-host)
-  * [Quarantine a host (updated version)](#quarantine-a-host--updated-version-)
+  * [Quarantine a host (updated version)](#quarantine-a-host-updated-version)
 - [Incidents](#incidents)
   * [CrowdScore QuickChart](#crowdscore-quickchart)
 - [Intel](#intel)
@@ -62,7 +62,7 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
   * [Prevention Policy Hawk](#prevention-policy-hawk)
 - [Real Time Response](#real-time-response)
   * [Bulk execute a command](#bulk-execute-a-command)
-  * [Bulk execute a command (queued)](#bulk-execute-a-command--queued-)
+  * [Bulk execute a command (queued)](#bulk-execute-a-command-queued)
   * [Dump memory for a running process](#dump-memory-for-a-running-process)
   * [My Little RTR](#my-little-rtr)
 - [Sensor Download](#sensor-download)
@@ -275,7 +275,7 @@ This sample demonstrates the following CrowdStrike Quick Scan and Sample Uploads
 
 ### S3 Bucket Protection
 
-Building on the previous example, this [integration](https://github.com/CrowdStrike/Cloud-AWS/tree/main/s3-bucket-protection) demonstrates a complete integration with AWS Lambda, AWS S3 and AWS Security Hub that scans files as they are uploaded to the bucket. Files that are found to be malicious are removed from the bucket and a finding is published to AWS Security Hub.
+Building on the previous example, this [solution](https://github.com/CrowdStrike/Cloud-AWS/tree/main/s3-bucket-protection) demonstrates a complete integration with AWS Lambda, AWS S3 and AWS Security Hub that scans files as they are uploaded to the bucket. Files that are found to be malicious are removed from the bucket and a finding is published to AWS Security Hub.
 
 [![Quick Scan / Sample Uploads](https://img.shields.io/badge/Service%20Class-S3%20Bucket%20Protection-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](https://github.com/CrowdStrike/Cloud-AWS/tree/main/s3-bucket-protection)
 
