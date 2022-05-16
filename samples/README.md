@@ -24,57 +24,30 @@ In order to expedite sample delivery, examples will follow one of three standard
 > Please note: These are not the only methods for providing these values. 
 
 # Samples by API service collection
-The following samples are categorized by CrowdStrike Falcon API service collection.
+The following samples are categorized by CrowdStrike Falcon API service collection. Some samples have specific FalconPy version requirements, check documentation maintained within the source or the sample `README.md` for more details.
 
-- [Detects](#detects)
-  * [Detects Advisor](#detects-advisor)
-- [Event Streams](#event-streams)
-  * [Send detections to AWS Security Hub](#send-detections-to-aws-security-hub)
-- [Falcon Discover](#falcon-discover)
-  * [List discovered hosts](#list-discovered-hosts)
-- [Falcon Discover for Cloud and Containers (AWS Accounts)](#falcon-discover-for-cloud-and-containers-aws-accounts)
-  * [Manage Discover accounts](#manage-discover-accounts)
-- [Falcon Horizon](#falcon-horizon)
-  * [Get CSPM policies](#get-cspm-policies)
-- [Falcon Flight Control](#falcon-flight-control)
-  * [Find child CID](#find-child-cid)
-- [Falcon X](#falcon-x)
-  * [Manage sandbox uploads](#manage-sandbox-uploads)
-  * [Falcon X single scan](#falcon-x-single-scan)
-  * [Get all artifacts](#get-all-artifacts)
-  * [Quick Scan a target](#quick-scan-a-target)
-  * [S3 Bucket Protection](#s3-bucket-protection)
-- [Hosts](#hosts)
-  * [List sensors by hostname](#list-sensors-by-hostname)
-  * [CUSSED (Manage stale sensors)](#cussed-manage-stale-sensors)
-  * [Offset vs. Token](#offset-vs-token)
-  * [Quarantine a host](#quarantine-a-host)
-  * [Quarantine a host (updated version)](#quarantine-a-host-updated-version)
-- [Incidents](#incidents)
-  * [CrowdScore QuickChart](#crowdscore-quickchart)
-  * [Incident Triage](#incident-triage)
-- [Intel](#intel)
-  * [MISP Import](#misp-import)
-- [IOC](#ioc)
-  * [Create indicators](#create-indicators)
-- [MalQuery](#malquery)
-  * [Malqueryinator](#malqueryinator)
-- [Prevention Policy](#prevention-policy)
-  * [Prevention Policy Hawk](#prevention-policy-hawk)
-- [Real Time Response](#real-time-response)
-  * [Bulk execute a command](#bulk-execute-a-command)
-  * [Bulk execute a command (queued)](#bulk-execute-a-command-queued)
-  * [Dump memory for a running process](#dump-memory-for-a-running-process)
-  * [My Little RTR](#my-little-rtr)
-- [Sensor Download](#sensor-download)
-  * [Download the CrowdStrike sensor](#download-the-crowdstrike-sensor)
-- [Sensor Update Policies](#sensor-update-policies)
-  * [Policy Wonk](#policy-wonk)
-- [Spotlight](#spotlight)
-  * [Find vulnerable hosts by CVE ID](#find-vulnerable-hosts-by-cve-id)
-  * [CISA DHS Known Exploited Vulnerabilities](#cisa-dhs-known-exploited-vulnerabilities)
-- [User Management](#user-management)
-  * [Bulk user administration](#bulk-user-administration)
+![Total samples](https://img.shields.io/endpoint?url=https%3A%2F%2Ffalconpy.io%2F_samples.json&style=for-the-badge)
+
+| Service Collection | Samples |
+| :--- | :--- |
+| [Detects](#detects) | [Detects Advisor](#detects-advisor) |
+| [Event Streams](#event-streams) | [Send detections to AWS Security Hub](#send-detections-to-aws-security-hub) |
+| [Falcon Discover](#falcon-discover) | [List discovered hosts](#list-discovered-hosts) |
+| [Falcon Discover for Cloud and Containers](#falcon-discover-for-cloud-and-containers-aws-accounts) | [Manage Discover accounts (AWS)](#manage-discover-accounts) |
+| [Falcon Horizon](#falcon-horizon) | [Get CSPM policies](#get-cspm-policies) |
+| [Falcon Flight Control](#falcon-flight-control) | [Find child CID](#find-child-cid) |
+| [Falcon X](#falcon-x) | [Manage sandbox uploads](#manage-sandbox-uploads)<BR/>[Falcon X single scan](#falcon-x-single-scan)<BR/>[Get all artifacts](#get-all-artifacts)<BR/>[Quick Scan a target](#quick-scan-a-target)<BR/>[S3 Bucket Protection](#s3-bucket-protection) |
+| [Hosts](#hosts) | [List sensors by hostname](#list-sensors-by-hostname)<BR/>[CUSSED (Manage stale sensors)](#cussed-manage-stale-sensors)<BR/>[Offset vs. Token](#offset-vs-token)<BR/>[Quarantine a host](#quarantine-a-host)<BR/>[Quarantine a host (updated version)](#quarantine-a-host-updated-version) |
+| [Incidents](#incidents) | [CrowdScore QuickChart](#crowdscore-quickchart)<BR/>[Incident Triage](#incident-triage) |
+| [Intel](#intel) | [MISP Import](#misp-import) |
+| [IOC](#ioc) | [Create indicators](#create-indicators) |
+| [MalQuery](#malquery) | [Malqueryinator](#malqueryinator) |
+| [Prevention Policy](#prevention-policy) | [Prevention Policy Hawk](#prevention-policy-hawk) |
+| [Real Time Response](#real-time-response) | [Bulk execute a command](#bulk-execute-a-command)<BR/>[Bulk execute a command (queued)](#bulk-execute-a-command-queued)<BR/>[Dump memory for a running process](#dump-memory-for-a-running-process)<BR/>[My Little RTR](#my-little-rtr) |
+| [Sensor Download](#sensor-download) | [Download the CrowdStrike sensor](#download-the-crowdstrike-sensor) |
+| [Sensor Update Policies](#sensor-update-policies) | [Policy Wonk](#policy-wonk) |
+| [Spotlight](#spotlight) | [Find vulnerable hosts by CVE ID](#find-vulnerable-hosts-by-cve-id)<BR/>[CISA DHS Known Exploited Vulnerabilities](#cisa-dhs-known-exploited-vulnerabilities) |
+| [User Management](#user-management) | [Bulk user administration](#bulk-user-administration) |
 
 
 ##### Class type legend
