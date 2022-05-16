@@ -78,7 +78,7 @@ def incident_action_parameters(passed_keywords: dict) -> dict:
     """
     returned_payload = []
     valid_keywords = [
-        "add_tag", "delete_tag", "unassign", "update_name", "update_assigned_to_v2"
+        "add_tag", "delete_tag", "unassign", "update_name", "update_assigned_to_v2",
         "update_description", "update_status"
         ]
     for key, val in passed_keywords.items():
