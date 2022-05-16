@@ -1,3 +1,8 @@
+# Version 1.1.1
+## Issues resolved
++ Bug fix: Resolved issue impacting the creation of certain action parameters used within payloads for the `perform_incident_action` method of the Incidents Service Class. Closes #656.
+    - `_payload/_incidents.py`
+
 # Version 1.1.0
 ## Added features and functionality
 + Added: Results object expansion - expanded results are returned as a tuple, Ex: `(status_code, headers, content)`. This allows for
@@ -943,6 +948,7 @@ performing requests to the API.
     * updateSensorVisibilityExclusionsV1
     * querySensorVisibilityExclusionsV1
     - Added unit tests (`test_sensor_visibility_exclusions.py`)
+
 ## Other
 + Added: args_to_params function (`_util.py`) - Allows developers to specify parameter dictionary elements as function arguments
     ### Example
@@ -954,11 +960,13 @@ performing requests to the API.
     ```
     - Unrecognized parameter values are discarded
     - Initial testing in a limited number of Service Classes
+
 # Version 0.4.6-spotlight-remediations-patch-1
 ## Added features and functionality
 + Added: Missing method to Spotlight_Vulnerabilities Service Class (`spotlight_vulnerabilities.py`)
     * getRemediations
     - Added unit test to existing test series (`test_spotlight_vulnerabilities.py`)
+
 # Version 0.4.6
 ## Added features and functionality
 + Added: MSSP (Falcon Flight Control) Service Class
@@ -1057,9 +1065,11 @@ performing requests to the API.
     * Falcon Complete Dashboard API
     * Falcon Overwatch Dashboard API
     * Falcon Flight Control API
+
 ## Issues resolved
 + Fixed unidiomatic type check in `_util.py` (_parse_id_list_)
 + Fixed potentially problematic default payload lists and dictionaries (Service Classes and Uber Class)
+
 ## Other
 + Added CHANGELOG.md
 + Documentation updates to reflect new service class and upcoming API additions
@@ -1080,8 +1090,10 @@ performing requests to the API.
     * GetSensorInstallersCCIDByQuery
     * GetSensorInstallersByQuery
     - Added unit tests
+
 ## Issues resolved
 + Fixed: action_name parameter default bug. Resolved by setting a default value and overriding this value if action_name is present in the parameters dictionary, Closes #114. 
+
 ## Other
 + Documentation updated to reflect the new Sensor Download Service Class
 
@@ -1094,6 +1106,7 @@ performing requests to the API.
     * DeleteSampleV3
     - Added: Sample_Uploads unit tests (`test_sample_uploads.py`)
 + Added: FalconDebug - Interactive Python3 debugger that provides a pre-defined API token.
+
 ## Issues resolved
 + Fixed: Issue with Uber class command method using the action_name variable instead of file_name variable for actions passing the file_name parameter.
 + Fixed: Issue with `setup.py` passing GitHub emoji text to the package description.
@@ -1112,6 +1125,7 @@ performing requests to the API.
 
 ## Issues resolved
 + Added method validation to Uber class calls to the requests library. (HTTP 418 is sent when an invalid method is specified.)
+
 ## Other
 + Cleaned up `event_streams.py` class file to match new patterns.
 + Updated return type decorators for service_request and perform_request. (`_util.py`)
@@ -1130,6 +1144,7 @@ performing requests to the API.
     * DeleteReport
     * GetReports
     - Unit test added
+
 ## Issues resolved
 + Bug fix: Resolved malformed validator in detects.py - UpdateDetectsByIdsV2
 + Bug fix: Added action_name parameter to operations that require the parameter. Closes #53.
@@ -1169,6 +1184,7 @@ performing requests to the API.
     > Please note: Passing a token into Service classes is still fully supported. This is now referred to as "legacy authentication".
 + Added automatic token refresh functionality to Service Class calls
     - Developers must make use of either credential or object authentication in order to leverage this functionality.
+
 ## Issues resolved
 + Added dynamic package metadata updates (Closes #14)
     - Generalized version control
@@ -1176,6 +1192,7 @@ performing requests to the API.
 + Added user-agent string to HTTP headers. (Closes #57)
 + Resolved a bug with token deauthentication (Uber and Service classes)
 + Resolved a bug in Firewall_Management.update_rule_group
+
 ## Other
 + Abstracted calls to the requests library from all classes, reducing code segment size
     - New library: _util.py
