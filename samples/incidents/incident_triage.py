@@ -258,7 +258,7 @@ def hosts_information(inc_data: dict):
 
 
 def check_version():
-    """Confirm the running version of FalconPy, exit on uncompatible versions."""
+    """Confirm the running version of FalconPy, exit on incompatible versions."""
     version_detail = FALCONPY_VERSION.split(".")
     version_fail = False
     if float(f"{version_detail[0]}.{version_detail[1]}") < 1.1:
