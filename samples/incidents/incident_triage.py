@@ -425,6 +425,14 @@ def update_description(inc_id: str, desc_str: str):
         hard_fail(change_result["body"]["errors"][0])
 
 
+BANNER = fr"""{Color.BOLD}{Color.DARKCYAN}
+  _____            _     _            _     {Color.YELLOW} _____      _{Color.DARKCYAN}
+  \_   \_ __   ___(_) __| | ___ _ __ | |__ {Color.YELLOW} /__   \_ __(_) __ _  __ _  ___{Color.DARKCYAN}
+   / /\/ '_ \ / __| |/ _` |/ _ \ '_ \| __/  {Color.YELLOW}  / /\/ '__| |/ _` |/ _` |/ _ \{Color.DARKCYAN}
+/\/ /_ | | | | (__| | (_| |  __/ | | | |_   {Color.YELLOW} / /  | |  | | (_| | (_| |  __/{Color.DARKCYAN}
+\____/ |_| |_|\___|_|\__,_|\___|_| |_|\__|  {Color.YELLOW} \/   |_|  |_|\__,_|\__, |\___|
+                                                                |___/{Color.END}  for {Color.LIGHTRED}CrowdStrike{Color.RED} Falcon{Color.END}
+"""
 # Check for an invalid version of FalconPy
 check_version()
 # Consume any provided command line arguments
@@ -463,5 +471,7 @@ if args.assign:
 if args.description:
     # Perform a description change
     update_description(inc_id=args.incident, desc_str=args.description)
-# Any updates requires are complete. Show our result table.
+
+print(BANNER)
+# Any updates required are complete. Show our result table.
 show_incident_table(get_incident_data(incident_ids))
