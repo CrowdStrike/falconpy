@@ -263,7 +263,7 @@ This sample demonstrates the following CrowdStrike Quick Scan and Sample Uploads
 | [ScanSamples](https://falconpy.io/Service-Collections/Quick-Scan.html#scansamples) | Submit a volume of files for ml scanning. Time required for analysis increases with the number of samples in a volume but usually it should take less than 1 minute. |
 | [UploadSampleV3](https://falconpy.io/Service-Collections/Sample-Uploads.html#uploadsamplev3) | Upload a file for further cloud analysis. After uploading, call the specific analysis API endpoint. |
 
-## Falcon Management
+## Firewall Management
 The CrowdStrike Falcon Firewall Management and Firewall Policies APIs are the focus of this section.
 
 ### Export Firewall events to a file
