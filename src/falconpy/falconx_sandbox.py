@@ -188,6 +188,7 @@ class FalconXSandbox(ServiceClass):
                       If true, sandbox analysis routes network traffic via TOR.
         environment_id -- Specifies the sandbox environment used for analysis.
                           Accepted values:
+                          400 - macOS Catalina 10.15
                           300 - Linux Ubuntu 16.04, 64-bit
                           200 - Android (static analysis)
                           160 - Windows 10, 64-bit
