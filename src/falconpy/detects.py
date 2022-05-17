@@ -55,8 +55,8 @@ class Detects(ServiceClass):
     - a valid token provided by the authentication service class (OAuth2.token())
     """
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def get_aggregate_detects(self: object, body: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def get_aggregate_detects(self: object, body: list = None, **kwargs) -> dict:
         """Get detect aggregates as specified via json in request body.
 
         Keyword arguments:
@@ -116,7 +116,8 @@ class Detects(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/detects/GetAggregateDetects
         """
         if not body:
-            body = aggregate_payload(submitted_keywords=kwargs)
+            # Similar to 664: Detects aggregates expects a list
+            body = [aggregate_payload(submitted_keywords=kwargs)]
 
         return process_service_request(
             calling_object=self,
