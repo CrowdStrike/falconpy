@@ -24,6 +24,7 @@ code samples:
 - samples/detects/*.py
 - samples/discover_aws/*.py
 - samples/falconx_sandbox/*.py
+- samples/firewall_management/*.py
 - samples/flight_control/*.py
 - samples/hosts/*.py
 - samples/incidents/*.py
