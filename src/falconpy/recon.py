@@ -117,7 +117,8 @@ class Recon(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/AggregateNotificationsV1
         """
         if not body:
-            body = aggregate_payload(submitted_keywords=kwargs)
+            # Issue 664: Recon aggregate requires a list.
+            body = [aggregate_payload(submitted_keywords=kwargs)]
 
         return process_service_request(
             calling_object=self,

@@ -55,13 +55,13 @@ class MessageCenter(ServiceClass):
     - a valid token provided by the authentication service class (oauth2.py)
     """
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def aggregate_cases(self: object, body: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_cases(self: object, body: list = None, **kwargs) -> dict:
         """Retrieve aggregate case values based on the matched filter.
 
         Keyword arguments:
         body -- full body payload, not required when using other keywords.
-                {
+                [{
                     "date_ranges": [
                         {
                             "from": "string",
@@ -88,7 +88,7 @@ class MessageCenter(ServiceClass):
                     ],
                     "time_zone": "string",
                     "type": "string"
-                }
+                }]
         date_ranges -- List of dictionaries.
         field -- String.
         filter -- FQL syntax. String.
@@ -116,7 +116,8 @@ class MessageCenter(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/AggregateCases
         """
         if not body:
-            body = aggregate_payload(submitted_keywords=kwargs)
+            # Similar to 664: This aggregate payload must be a list
+            body = [aggregate_payload(submitted_keywords=kwargs)]
 
         return process_service_request(
             calling_object=self,
