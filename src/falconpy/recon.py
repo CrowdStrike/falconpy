@@ -56,8 +56,8 @@ class Recon(ServiceClass):
     - a valid token provided by the authentication service class (OAuth2.token())
     """
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def aggregate_notifications(self: object, body: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_notifications(self: object, body: list = None, **kwargs) -> dict:
         """Get notification aggregates as specified via JSON in request body.
 
         Keyword arguments:
