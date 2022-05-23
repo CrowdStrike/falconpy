@@ -1,3 +1,15 @@
+# Version 1.1.2
+## Issues resolved
++ Fixed: Resolved issue with aggregate payload generation within the Detects, MessageCenter and Recon Service Classes. Closes #664.
+    - `detects.py`
+    - `message_center.py`
+    - `recon.py`
+
+## Other
++ Updated: Added macOS environment detail to docstring in `submit` method of the Falcon X Sandbox Service Class.
+    - `falconx_sandbox.py`
+
+
 # Version 1.1.1
 ## Issues resolved
 + Bug fix: Resolved issue impacting the creation of certain action parameters used within payloads for the `perform_incident_action` method of the Incidents Service Class. Closes #656.
