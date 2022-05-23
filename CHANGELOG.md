@@ -6,7 +6,7 @@
     - `recon.py`
 
 ## Other
-+ Updated: Added macOS environment detail to docstring in `submit` method of the Falcon X Sandbox Service Class.
++ Updated: Added macOS environment detail to docstring in `submit` method of the Falcon X Sandbox Service Class. Closes #651.
     - `falconx_sandbox.py`
 
 
