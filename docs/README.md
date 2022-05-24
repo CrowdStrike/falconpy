@@ -41,7 +41,7 @@ Check there to see if someone else hasn't encountered the issue you are having. 
 [![Discussions](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/ask-a-question.png)](https://github.com/CrowdStrike/falconpy/discussions?discussions_q=category%3AQ%26A)
 
 ## Issues
-Think perhaps the error your receiving is a [bug](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+label%3A%22bug+%3Abug%3A%22+) within FalconPy? 
+Think perhaps the error you're receiving is a [bug](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+label%3A%22bug+%3Abug%3A%22+) within FalconPy? 
 
 Have you found a piece of documentation that is [incorrect](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+label%3A%22documentation+%3Abook%3A%22), pointing to a [broken link](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+label%3A%22broken+link+%3Alink%3A%22) or [missing](https://github.com/CrowdStrike/falconpy/issues?q=is%3Aissue+label%3A%22documentation+%3Abook%3A%22)?
 
