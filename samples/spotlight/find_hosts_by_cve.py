@@ -117,6 +117,7 @@ class SpotlightCVEMatch():  # pylint: disable=R0902
                 chunk = new_chunk
 
         delim = "\n"
+        desc_chunks.append(chunk)
 
         return delim.join(desc_chunks)
 
@@ -158,8 +159,9 @@ def parse_command_line() -> object:
         '-c',
         '--cve',
         help='CVE IDs to search for. (ex: CVE-2022-12345,CVE-2022-54321)\n'
-        'Delimit with a comma (no spaces). The string CVE- is not required.',
-        required=True
+        'Delimit with a comma (no spaces). The string CVE- is not required.\n'
+        'When not provided, all matches with a valid severity are returned.',
+        required=False
         )
     parser.add_argument(
         '-x',
@@ -196,9 +198,9 @@ def parse_command_line() -> object:
         )
     parser.add_argument(
         '-p',
-        '--show_progress',
-        help='Show a progress indicator as data is retrieved.',
-        action="store_true",
+        '--hide_progress',
+        help='Hide progress indicator as data is retrieved.',
+        action="store_false",
         required=False
         )
 
@@ -213,7 +215,11 @@ def inform(msg: str):
 
 def get_spotlight_matches(cves: list) -> list:
     """Retrieve a list of matches to the CVEs specified."""
-    returned = spotlight.query_vulnerabilities(filter=f"cve.id:{cves}")
+    # Unspecified searches return all with a severity
+    filter_string = "cve.severity:!'UNKNOWN'"
+    if cves:
+        filter_string = f"cve.id:{cves}"
+    returned = spotlight.query_vulnerabilities(filter=filter_string)
     if returned["status_code"] >= 400:
         raise SystemExit(returned["body"]["errors"][0]["message"])
 
@@ -266,17 +272,18 @@ if args.base_url:
     BASE = args.base_url
 
 CVE_LIST = []
-for cve in args.cve.upper().split(","):
-    if "CVE-" not in cve:
-        CVE_LIST.append(f"CVE-{cve}")
-    else:
-        CVE_LIST.append(cve)
+if args.cve:
+    for cve in args.cve.upper().split(","):
+        if "CVE-" not in cve:
+            CVE_LIST.append(f"CVE-{cve}")
+        else:
+            CVE_LIST.append(cve)
 
 EXCLUDE = []
 if args.exclude:
     EXCLUDE = args.exclude.split(",")
 
-TABLE_FORMAT = "grid"
+TABLE_FORMAT = "fancy_grid"
 if args.format:
     table_format = args.format.strip().lower()
     if table_format in TABLE_FORMATS:
@@ -292,7 +299,7 @@ if args.sort:
         SORT = sort_type
 
 SORT_REVERSE = args.reverse
-PROGRESS = args.show_progress
+PROGRESS = args.hide_progress
 
 # Connect to the API and create instances of the SpotlightVulnerabilities and Hosts Service Classes
 auth = OAuth2(client_id=args.client_id,
