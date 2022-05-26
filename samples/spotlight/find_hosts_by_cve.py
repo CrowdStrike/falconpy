@@ -90,7 +90,7 @@ class SpotlightCVEMatch():  # pylint: disable=R0902
                     spotlight.get_remediations_v2(
                         ids=api_response["remediation"]["ids"]
                         )["body"]["resources"][0]["action"],
-                    30
+                    32
                     )
         except KeyError:
             pass
@@ -99,8 +99,8 @@ class SpotlightCVEMatch():  # pylint: disable=R0902
             self.remediation = "Not found"
 
         self.cve_description = self.chunk_long_description(
-            api_response["cve"]["description"].strip(),
-            15
+            api_response['cve']['description'].strip(),
+            30
             )
 
     @staticmethod
@@ -111,13 +111,13 @@ class SpotlightCVEMatch():  # pylint: disable=R0902
         for word in desc.split():
             new_chunk = f"{chunk} {word.strip()}"
             if len(new_chunk) >= col_width:
-                desc_chunks.append(new_chunk)
+                desc_chunks.append(new_chunk.strip())
                 chunk = ""
             else:
                 chunk = new_chunk
 
         delim = "\n"
-        desc_chunks.append(chunk)
+        desc_chunks.append(chunk.strip())
 
         return delim.join(desc_chunks)
 
