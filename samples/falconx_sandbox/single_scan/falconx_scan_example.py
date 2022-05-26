@@ -253,7 +253,17 @@ while RUNNING == "running":
         RUNNING = result["body"]["resources"][0]["state"]
 
 # We've finished, retrieve the report. There will only be one in this example.
-analysis = sandbox.get_reports(ids=submit_id)["body"]["resources"][0]["sandbox"][0]
+analysis_result = sandbox.get_reports(ids=submit_id)["body"]
+if RUNNING == "error":
+    if analysis_result["errors"]:
+        raise SystemExit(analysis_result["errors"][0]["message"])
+    else:
+        raise SystemExit("\nAn error occurred while attempting this analysis")
+
+try:
+    analysis = analysis_result["resources"][0]["sandbox"][0]
+except (TypeError, KeyError):
+    raise SystemExit("\nUnable to retrieve analysis results")
 
 # Announce progress
 inform(f"[  Delete  ] {running_time(start_time)}")
