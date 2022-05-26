@@ -34,6 +34,7 @@ class Environment(Enum):
     WIN10 = 160
     DROID = 200
     LINUX = 300
+    MACOS = 400
 
 
 class Indicator():
@@ -97,7 +98,7 @@ def parse_command_line():
     # Environment to use for analysis
     parser.add_argument(
         '-e', '--environment',
-        help="Environment to use for analysis (win7, win7_64, win10, droid, linux)",
+        help="Environment to use for analysis (win7, win7_64, win10, droid, linux, macos)",
         required=False
     )
     # CrowdStrike API Client ID

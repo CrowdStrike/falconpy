@@ -51,6 +51,7 @@ The Falcon X Sandbox API supports the following environments. If you wish to spe
 | `win10` | Windows 10, 64-bit |
 | `droid` | Android (static analysis) |
 | `linux` | Ubuntu 16.04, 64-bit |
+| `macos` | macOS Catalina 10.15 |
 
 ### Command-line help
 Command-line help is available via the `-h` argument.
