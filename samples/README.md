@@ -38,7 +38,7 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
 | [Falcon Flight Control](#falcon-flight-control) | [Find child CID](#find-child-cid) |
 | [Falcon X](#falcon-x) | [Manage sandbox uploads](#manage-sandbox-uploads)<BR/>[Falcon X single scan](#falcon-x-single-scan)<BR/>[Get all artifacts](#get-all-artifacts)<BR/>[Quick Scan a target](#quick-scan-a-target)<BR/>[S3 Bucket Protection](#s3-bucket-protection) |
 | [Firewall Management](#firewall-management) | [Export Firewall events to a file](#export-firewall-events-to-a-file) |
-| [Hosts](#hosts) | [List sensors by hostname](#list-sensors-by-hostname)<BR/>[CUSSED (Manage stale sensors)](#cussed-manage-stale-sensors)<BR/>[Offset vs. Token](#offset-vs-token)<BR/>[Quarantine a host](#quarantine-a-host)<BR/>[Quarantine a host (updated version)](#quarantine-a-host-updated-version) |
+| [Hosts](#hosts) | [List sensors by hostname](#list-sensors-by-hostname)<BR/>[CUSSED (Manage stale sensors)](#cussed-manage-stale-sensors)<BR/>[Match usernames to hosts](#match-usernames-to-hosts)<BR/>[Offset vs. Token](#offset-vs-token)<BR/>[Quarantine a host](#quarantine-a-host)<BR/>[Quarantine a host (updated version)](#quarantine-a-host-updated-version) |
 | [Incidents](#incidents) | [CrowdScore QuickChart](#crowdscore-quickchart)<BR/>[Incident Triage](#incident-triage) |
 | [Intel](#intel) | [MISP Import](#misp-import) |
 | [IOC](#ioc) | [Create indicators](#create-indicators) |
@@ -285,6 +285,7 @@ The samples collected in this section demonstrate leveraging CrowdStrike's Hosts
 
 - [List sensors by hostname](#list-sensors-by-hostname)
 - [CUSSED (Stale sensor detector)](#cussed-manage-stale-sensors)
+- [Match usernames to hosts](#match-usernames-to-hosts)
 - [Offset vs. Token](#offset-vs-token)
 - [Quarantine a host](#quarantine-a-host)
 - [Quarantine a host (updated)](#quarantine-a-host-updated-version)
@@ -299,7 +300,7 @@ This sample demonstrates the following CrowdStrike Hosts API operations:
 
 | Operation | Description |
 | :--- | :--- |
-| [GetDeviceDetails](https://falconpy.io/Service-Collections/Hosts.html#getdevicedetails) | Get details on one or more hosts by providing agent IDs (AID). You can get a host's agent IDs (AIDs) from the /devices/queries/devices/v1 endpoint, the Falcon console or the Streaming API. |
+| [GetDeviceDetails](https://falconpy.io/Service-Collections/Hosts.html#getdevicedetails) | Get details on one or more hosts by providing agent IDs (AID). You can get a host's agent IDs (AIDs) from the [QueryDevicesByFilter](https://www.falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilter) operation, the Falcon console or the Streaming API. |
 | [QueryDevicesByFilter](https://falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilter) | Search for hosts in your environment by platform, hostname, IP, and other criteria. |
 
 ---
@@ -314,10 +315,26 @@ This sample demonstrates the following CrowdStrike Hosts API operations:
 
 | Operation | Description |
 | :--- | :--- |
-| [GetDeviceDetails](https://falconpy.io/Service-Collections/Hosts.html#getdevicedetails) | Get details on one or more hosts by providing agent IDs (AID). You can get a host's agent IDs (AIDs) from the /devices/queries/devices/v1 endpoint, the Falcon console or the Streaming API. |
+| [GetDeviceDetails](https://falconpy.io/Service-Collections/Hosts.html#getdevicedetails) | Get details on one or more hosts by providing agent IDs (AID). You can get a host's agent IDs (AIDs) from the [QueryDevicesByFilter](https://www.falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilter) operation, the Falcon console or the Streaming API. |
 | [PerformActionV2](https://falconpy.io/Service-Collections/Hosts.html#performactionv2) | Take various actions on the hosts in your environment. Contain or lift containment on a host. Delete or restore a host. |
 | [QueryDevicesByFilterScroll](https://falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilterscroll) | Search for hosts in your environment by platform, hostname, IP, and other criteria with continuous pagination capability (based on offset pointer which expires after 2 minutes with no maximum limit). |
 
+---
+
+### Match usernames to hosts
+Submitted by `@micgoetz`, the [Match Username to Host](hosts#match-usernames-to-hosts) sample demonstrates mapping usernames to hosts with Falcon Grouping tags.
+
+[![Hosts](https://img.shields.io/badge/Service%20Class-Match_Username_to_Host-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](hosts#match-usernames-to-hosts) [![MSSP Use supported](https://img.shields.io/badge/-Supports%20MSSP-darkblue?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==&style=for-the-badge)](hosts#match-usernames-to-hosts)
+
+#### Hosts API operations discussed
+This sample demonstrates the following CrowdStrike Hosts API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [GetDeviceDetails](https://falconpy.io/Service-Collections/Hosts.html#getdevicedetails) | Get details on one or more hosts by providing agent IDs (AID). You can get a host's agent IDs (AIDs) from the [QueryDevicesByFilter](https://www.falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilter) operation, the Falcon console or the Streaming API. |
+| [QueryDevicesByFilter](https://falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilter) | Search for hosts in your environment by platform, hostname, IP, and other criteria. |
+| [QueryDeviceLoginHistory](https://www.falconpy.io/Service-Collections/Hosts.html#querydeviceloginhistory) | Retrieve details about recent login sessions for a set of devices. |
+| [UpdateDeviceTags](https://www.falconpy.io/Service-Collections/Hosts.html#updatedevicetags) | Append or remove one or more Falcon Grouping Tags on one or more hosts. |
 ---
 
 ### Offset vs. Token
