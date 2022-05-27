@@ -68,6 +68,7 @@ This has been a critical element in the development of the FalconPy project.
 + `@TheITSecurityGuy`
 + Ray Heffer, `@rayheffer`
 + Philip Scheidl, `@wozboz`
++ `@micgoetz`
 
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
