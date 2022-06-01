@@ -257,21 +257,34 @@ def firewall_rule_group_update_payload(passed_keywords: dict) -> dict:
     }
     """
     returned_payload = {}
-    keys = ["diff_type", "id", "tracking"]
-    for key in keys:
+    for key in ["id", "tracking"]:
         if passed_keywords.get(key, None):
             returned_payload[key] = passed_keywords.get(key, None)
+    # There is only one allowed value for this keyword
+    returned_payload["diff_type"] = passed_keywords.get("diff_type", "application/json-patch+json")
+    # Grab the rule_ids keyword and check for list formatting
     id_list = passed_keywords.get("rule_ids", None)
     if id_list:
         if isinstance(id_list, str):
             id_list = id_list.split(",")
         returned_payload["rule_ids"] = id_list
+    # Grab the rule_versions keyword and check for list formatting
     ver_list = passed_keywords.get("rule_versions", None)
     if ver_list:
         if isinstance(ver_list, str):
             ver_list = ver_list.split(",")
         returned_payload["rule_versions"] = ver_list
     diffs = passed_keywords.get("diff_operations", None)
+    # diff_operations overrides any subsequent diff_operation keywords
+    if not diffs:
+        # Check for a singular diff operation provided as keywords
+        diffs = {}
+        # Handle the reserved word collision by prepending 'diff_' to each keyword
+        diff_keys = ["diff_from", "diff_op", "diff_path"]
+        for key in diff_keys:
+            if passed_keywords.get(key, None):
+                diffs[f"{key.replace('diff_', '')}"] = passed_keywords.get(key, None)
+    # diff_operations keyword needs to be a list
     if diffs:
         if isinstance(diffs, list):
             returned_payload["diff_operations"] = diffs
