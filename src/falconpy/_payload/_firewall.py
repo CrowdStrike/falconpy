@@ -103,12 +103,52 @@ def firewall_container_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
+def create_rule_payload_from_keys(incoming_keywords: dict) -> dict:
+    """Create a singular rules payload branch."""
+    new_rule = {}
+    rule_keys = [
+        "action", "address_family", "rule_description", "direction", "rule_enabled", "fields",
+        "icmp", "local_address", "local_port", "log", "monitor", "rule_name", "platform_ids",
+        "protocol", "remote_address", "remote_port", "temp_id"
+    ]
+    for key in rule_keys:
+        if incoming_keywords.get(key, None) is not None:
+            # Can't have duplicate keywords coming into the function
+            if key == "rule_description":
+                new_rule["description"] = incoming_keywords.get(key, None)
+            elif key == "rule_name":
+                new_rule["name"] = incoming_keywords.get(key, None)
+            elif key == "rule_enabled":
+                # Default to disabled if not specified
+                new_rule["enabled"] = incoming_keywords.get(key, False)
+            elif key in ["direction", "address_family", "action"]:
+                # Upper case these since the API is particular with their format
+                new_rule[key] = incoming_keywords.get(key, None).upper()
+            elif key in ["fields", "local_address", "local_port", "remote_address", "remote_port"]:
+                # Check for any dictionaries that are supposed to be lists of dictionaries
+                val_to_set = incoming_keywords.get(key, None)
+                if isinstance(val_to_set, dict):
+                    val_to_set = [val_to_set]
+                new_rule[key] = val_to_set
+            elif key == "platform_ids":
+                # Allow them to specify platform IDs with a comma delimited string
+                val_to_set = incoming_keywords.get(key, None)
+                if isinstance(val_to_set, str):
+                    new_rule[key] = val_to_set.split(",")
+                else:
+                    new_rule[key] = val_to_set
+            else:
+                new_rule[key] = incoming_keywords.get(key, None)
+
+    return new_rule
+
+
 def firewall_rule_group_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted firewall rule group payload.
 
     {
         "description": "string",
-        "enabled": true,
+        "enabled": boolean,
         "name": "string",
         "rules": [
             {
@@ -116,7 +156,7 @@ def firewall_rule_group_payload(passed_keywords: dict) -> dict:
                 "address_family": "string",
                 "description": "string",
                 "direction": "string",
-                "enabled": true,
+                "enabled": boolean,
                 "fields": [
                     {
                         "final_value": "string",
@@ -136,16 +176,16 @@ def firewall_rule_group_payload(passed_keywords: dict) -> dict:
                 "local_address": [
                     {
                         "address": "string",
-                        "netmask": 0
+                        "netmask": integer
                     }
                 ],
                 "local_port": [
                     {
-                        "end": 0,
-                        "start": 0
+                        "end": integer,
+                        "start": integer
                     }
                 ],
-                "log": true,
+                "log": boolean,
                 "monitor": {
                     "count": "string",
                     "period_ms": "string"
@@ -158,13 +198,13 @@ def firewall_rule_group_payload(passed_keywords: dict) -> dict:
                 "remote_address": [
                     {
                         "address": "string",
-                        "netmask": 0
+                        "netmask": integer
                     }
                 ],
                 "remote_port": [
                     {
-                        "end": 0,
-                        "start": 0
+                        "end": integer,
+                        "start": integer
                     }
                 ],
                 "temp_id": "string"
@@ -179,7 +219,12 @@ def firewall_rule_group_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key, None)
     if passed_keywords.get("enabled", None) is not None:
         returned_payload["enabled"] = passed_keywords.get("enabled", None)
+
     rules = passed_keywords.get("rules", None)
+    # Passing a rules keyword overrides subsequent rule parameter keywords
+    if not rules:
+        rules = create_rule_payload_from_keys(passed_keywords)
+
     if rules:
         if isinstance(rules, list):
             returned_payload["rules"] = rules
