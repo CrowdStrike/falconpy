@@ -1,3 +1,10 @@
+# Version 1.1.3
+## Added features and functionality
++ Added: Firewall rules payload abstraction for the `create_rule_group` method. Firewall diff_operations payload abstraction for the `update_rule_group` method.
+    - `_payload/_firewall.py`
+    - `firewall_management.py`
+    - `tests/test_firewall_management.py`
+
 # Version 1.1.2
 ## Issues resolved
 + Fixed: Resolved issue with aggregate payload generation within the Detects, MessageCenter and Recon Service Classes. Closes #664.
