@@ -40,7 +40,7 @@ For more information, please refer to <https://unlicense.org>
 # should move all code over to use this new class (ioc.py) as support for
 # this class will eventually be dropped.
 # Allowing unused params and kwargs to prevent breaking change, no self use is ok
-# pylint: disable=W0613,R0201
+# pylint: disable=W0613
 from ._util import force_default, handle_single_argument
 from ._util import process_service_request, generate_error_result
 from ._service_class import ServiceClass
