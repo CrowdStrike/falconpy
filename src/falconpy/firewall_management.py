@@ -556,6 +556,9 @@ class FirewallManagement(ServiceClass):
         Returns the ID.
 
         Keyword arguments:
+        action -- Rule action to perform. String. Overridden if 'rules' keyword is provided.
+        address_family -- Address type, String. Either 'IP4', 'IP6' or 'NONE'.
+                          Overridden if 'rules' keyword is provided.
         body -- Full body payload in JSON format. Not required if other keywords are provided.
                 {
                     "description": "string",
@@ -626,11 +629,35 @@ class FirewallManagement(ServiceClass):
                     If this is provided the `rules` keyword is ignored.
         comment -- Audit log comment for this action. String.
         description -- Rule group description. String.
+        direction -- Traffic direction for created rule. String. Either 'IN', 'OUT' or 'BOTH'.
+                     Overridden if 'rules' keyword is provided.
         enabled -- Flag indicating if the rule group is enabled. Boolean.
+        fields -- Fields to impact. Dictionary or list of dictionaries.
+                  Overridden if 'rules' keyword is provided.
+        icmp -- ICMP protocol options. Dictionary.  Overridden if 'rules' keyword is provided.
         library -- If this flag is set to true then the rules will be cloned from the
                    clone_id from the CrowdStrike Firewall Rule Groups Library. String.
+        local_address -- Local address and netmask detail. Dictionary or list of dictionaries.
+                         Overridden if 'rules' keyword is provided.
+        local_port -- Local port range. Dictionary or list of dictionaries.
+                      Overridden if 'rules' keyword is provided.
+        log -- Log rule matches. Boolean. Overridden if 'rules' keyword is provided.
         name -- Rule group name. String.
+        monitor -- Monitor count / period. Dictionary. Overridden if 'rules' keyword is provided.
         parameters - full parameters payload, not required if using other keywords.
+        platform_ids -- OS platform(s) covered by rule. Comma-delimited string or list of strings.
+                        Overridden if 'rules' keyword is provided.
+        protocol -- Integer protocol specified. Integer. Overridden if 'rules' keyword is provided.
+                    (TCP = 6, UDP = 17)
+        remote_address -- Local address and netmask detail. Dictionary or list of dictionaries.
+                          Overridden if 'rules' keyword is provided.
+        remote_port -- Local port range. Dictionary or list of dictionaries.
+                       Overridden if 'rules' keyword is provided.
+        rule_description -- Description for created rule. String.
+                            Overridden if 'rules' keyword is provided.
+        rule_enabled -- Enablement status for new rule. Boolean.
+                        Overridden if 'rules' keyword is provided.
+        rule_name -- Name for the new rule. String.  Overridden if 'rules' keyword is provided.
         rules - Rule(s) in JSON format. Single dictionary or List of dictionaries.
                 {
                     "action": "string",
@@ -690,6 +717,8 @@ class FirewallManagement(ServiceClass):
                     ],
                     "temp_id": "string"
                 }
+        temp_id -- String to use for rule temporary ID. String.
+                   Overridden if 'rules' keyword is provided.
 
         This method only supports keywords for providing arguments.
 
@@ -775,8 +804,11 @@ class FirewallManagement(ServiceClass):
                     "tracking": "string"
                 }
         comment -- Audit log comment for this action. String.
+        diff_from -- From value for diff. String. Overridden if 'diff_operations' is provided.
+        diff_op -- Operation for diff. String. Overridden if 'diff_operations' is provided.
         diff_operations -- Diff operations to perform against the rule group.
                            Single dictionary or List of dictionaries.
+        diff_path -- Path for diff. String. Overridden if 'diff_operations' is provided.
         diff_type -- Type of diff to apply. String.
         id -- ID of the rule group to update. String.
         parameters - full parameters payload, not required if using other keywords.
