@@ -46,10 +46,16 @@ The following command will retrieve a list of hosts that haven't checked in to C
 python3 stale_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d 30
 ```
 
+Perform the same lookup against a tenant within GovCloud.
+
+```shell
+python3 stale_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d 30 -g
+```
+
 This variation will retrieve a list of hosts that haven't checked in to CrowdStrike in 30 days or more that have the tag `testtag`.
 
 ```shell
-python3 stale_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d 30 -g testtag
+python3 stale_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d 30 -t testtag
 ```
 
 You can reverse the list sort with the `-r` or `--reverse` argument.
@@ -68,7 +74,9 @@ Command-line help is available via the `-h` argument.
 
 ```shell
 % python3 stale_sensors.py -h
-usage: stale_sensors.py [-h] -k CLIENT_ID -s CLIENT_SECRET [-m MSSP] [-b BASE_URL] [-d DAYS] [-r] [-x] [-g GROUPING_TAG]
+usage: stale_sensors.py [-h] -k CLIENT_ID -s CLIENT_SECRET [-m MSSP] [-g] [-d DAYS] [-r] [-x] [-t TAG]
+
+CrowdStrike Unattended Stale Sensor Environment Detector.
 
          _______ ___ ___ _______ _______ _______ ______
         |   _   |   Y   |   _   |   _   |   _   |   _  \
@@ -78,8 +86,18 @@ usage: stale_sensors.py [-h] -k CLIENT_ID -s CLIENT_SECRET [-m MSSP] [-b BASE_UR
         |::.. . |::.. . |::.. . |::.. . |::.. . |::.. . /
         `-------`-------`-------`-------`-------`------'
 
-    CrowdStrike Unattended Stale Sensor Environment Detector
+stale_sensors.py - Detects devices that haven't checked into
+                   CrowdStrike for a specified period of time.
 
+REQUIRES: crowdstrike-falconpy v0.9.0+, python-dateutil, tabulate
+
+This example will work for all CrowdStrike regions. In order to produce
+results for the US-GOV-1 region, pass the '-g' argument.
+
+- jshcodes@CrowdStrike; 09.01.21
+- ray.heffer@crowdstrike.com; 03.29.22 - Added new argument for Grouping Tags (--grouping, -g)
+- @morcef, jshcodes@CrowdStrike; 06.05.22 - More reasonable date calcs, Linting, Easier arg parsing
+                                            Easier base_url handling, renamed grouping_tag to tag
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -88,13 +106,11 @@ optional arguments:
   -s CLIENT_SECRET, --client_secret CLIENT_SECRET
                         CrowdStrike Falcon API key secret
   -m MSSP, --mssp MSSP  Child CID to access (MSSP only)
-  -b BASE_URL, --base_url BASE_URL
-                        CrowdStrike API region (us1, us2, eu1, usgov1) NOT required unless you are using `usgov1`
+  -g, --govcloud        Use the US-GOV-1 region
   -d DAYS, --days DAYS  Number of days since a host was seen before it is considered stale
   -r, --reverse         Reverse sort (defaults to ASC)
   -x, --remove          Remove hosts identified as stale
-  -g GROUPING_TAG, --grouping_tag GROUPING_TAG
-                        Falcon Grouping Tag name for the hosts
+  -t TAG, --tag TAG     Falcon Grouping Tag name for the hosts
 ```
 
 ### Example source code
