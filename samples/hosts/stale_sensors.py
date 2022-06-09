@@ -1,15 +1,29 @@
-"""
+r"""CrowdStrike Unattended Stale Sensor Environment Detector.
+
+         _______ ___ ___ _______ _______ _______ ______
+        |   _   |   Y   |   _   |   _   |   _   |   _  \
+        |.  1___|.  |   |   1___|   1___|.  1___|.  |   \
+        |.  |___|.  |   |____   |____   |.  __)_|.  |    \
+        |:  1   |:  1   |:  1   |:  1   |:  1   |:  1    /
+        |::.. . |::.. . |::.. . |::.. . |::.. . |::.. . /
+        `-------`-------`-------`-------`-------`------'
+
 stale_sensors.py - Detects devices that haven't checked into
                    CrowdStrike for a specified period of time.
 
-REQUIRES: FalconPy v0.8.6+, tabulate
+REQUIRES: crowdstrike-falconpy v0.9.0+, python-dateutil, tabulate
 
-- jshcodes@CrowdStrike, 09.01.21
-- ray.heffer@crowdstrike.com, 03.29.22 - Added new argument for Grouping Tags (--grouping, -g)
+This example will work for all CrowdStrike regions. In order to produce
+results for the US-GOV-1 region, pass the '-g' argument.
+
+- jshcodes@CrowdStrike; 09.01.21
+- ray.heffer@crowdstrike.com; 03.29.22 - Added new argument for Grouping Tags (--grouping, -g)
+- @morcef, jshcodes@CrowdStrike; 06.05.22 - More reasonable date calcs, Linting, Easier arg parsing
+                                            Easier base_url handling, renamed grouping_tag to tag
 """
+from argparse import ArgumentParser, RawTextHelpFormatter
 from datetime import datetime, timedelta, timezone
-from argparse import RawTextHelpFormatter
-import argparse
+from dateutil import parser as dparser
 from tabulate import tabulate
 try:
     from falconpy import Hosts
@@ -21,22 +35,9 @@ except ImportError as no_falconpy:
 
 
 def parse_command_line() -> object:
-    """
-    Parses command-line arguments and returns them back as an object.
-    """
-    header = """
-         _______ ___ ___ _______ _______ _______ ______
-        |   _   |   Y   |   _   |   _   |   _   |   _  \\
-        |.  1___|.  |   |   1___|   1___|.  1___|.  |   \\
-        |.  |___|.  |   |____   |____   |.  __)_|.  |    \\
-        |:  1   |:  1   |:  1   |:  1   |:  1   |:  1    /
-        |::.. . |::.. . |::.. . |::.. . |::.. . |::.. . /
-        `-------`-------`-------`-------`-------`------'
-
-    CrowdStrike Unattended Stale Sensor Environment Detector
-    """
-    parser = argparse.ArgumentParser(
-        description=header,
+    """Parse command-line arguments and return them back as an ArgumentParser object."""
+    parser = ArgumentParser(
+        description=__doc__,
         formatter_class=RawTextHelpFormatter
         )
     parser.add_argument(
@@ -55,14 +56,17 @@ def parse_command_line() -> object:
         '-m',
         '--mssp',
         help='Child CID to access (MSSP only)',
-        required=False
+        required=False,
+        default=None
         )
     parser.add_argument(
-        '-b',
-        '--base_url',
-        help='CrowdStrike API region (us1, us2, eu1, usgov1)'
-        ' NOT required unless you are using `usgov1`',
-        required=False
+        '-g',
+        '--govcloud',
+        help='Use the US-GOV-1 region',
+        required=False,
+        action="store_const",
+        const="usgov1",
+        default="auto"
     )
     parser.add_argument(
         '-d',
@@ -75,82 +79,63 @@ def parse_command_line() -> object:
         '--reverse',
         help='Reverse sort (defaults to ASC)',
         required=False,
-        action="store_true"
+        action="store_true",
+        default=False
         )
     parser.add_argument(
         '-x',
         '--remove',
         help='Remove hosts identified as stale',
         required=False,
-        action='store_true'
+        action='store_true',
+        default=False
     )
     parser.add_argument(
-        '-g',
-        '--grouping_tag',
+        '-t',
+        '--tag',
         help='Falcon Grouping Tag name for the hosts',
-        required=False
+        required=False,
+        default=None
         )
 
     return parser.parse_args()
 
 
 def connect_api(key: str, secret: str, base_url: str, child_cid: str = None) -> Hosts:
-    """
-    Connects to the API and returns an instance of the Hosts Service Class.
-    """
+    """Connect to the API and return an instance of the Hosts Service Class."""
     return Hosts(client_id=key, client_secret=secret, base_url=base_url, member_cid=child_cid)
 
 
 def get_host_details(id_list: list) -> list:
-    """
-    Retrieves a list containing device infomration based upon the ID list provided.
-    """
+    """Retrieve a list containing device infomration based upon the ID list provided."""
     return falcon.get_device_details(ids=id_list)["body"]["resources"]
 
 
 def get_hosts(date_filter: str, tag_filter: str) -> list:
-    """
-    Retrieves a list of hosts IDs that match the last_seen date filter.
-    """
-    FILTER_STRING = f"last_seen:<='{date_filter}Z'"
+    """Retrieve a list of hosts IDs that match the last_seen date filter."""
+    filter_string = f"last_seen:<='{date_filter}Z'"
     if tag_filter:
-        FILTER_STRING = f"{FILTER_STRING} + tags:*'*{tag_filter}*'"
+        filter_string = f"{filter_string} + tags:*'*{tag_filter}*'"
 
     return falcon.query_devices_by_filter_scroll(
         limit=5000,
-        filter=FILTER_STRING
+        filter=filter_string
     )["body"]["resources"]
 
 
-def get_sort_key(sorting) -> list:
-    """
-    Sorting method for table display.
-    Column 4 = Stale Period
-    Column 0 = Hostname
-    """
-    return (sorting[4], sorting[0])
-
-
 def calc_stale_date(num_days: int) -> str:
-    """
-    Calculates the "stale" datetime based upon the number of days
-    provided by the user.
-    """
-    today = datetime.strptime(str(datetime.now(timezone.utc)), "%Y-%m-%d %H:%M:%S.%f%z")
-    return str(today - timedelta(days=num_days)).replace(" ", "T")[:-6]
+    """Calculate the 'stale' datetime based upon the number of days provided by the user."""
+    today = datetime.utcnow()
+    return str(today - timedelta(days=num_days)).replace(" ", "T")
 
 
 def parse_host_detail(detail: dict, found: list):
-    """
-    Parses the returned host detail and adds it to the stale list.
-    """
-    now = datetime.strptime(str(datetime.now(timezone.utc)), "%Y-%m-%d %H:%M:%S.%f%z")
-    then = datetime.strptime(detail["last_seen"], "%Y-%m-%dT%H:%M:%S%z")
+    """Parse the returned host detail and add it to the stale list."""
+    now = datetime.now(timezone.utc)
+    then = dparser.parse(detail["last_seen"])
     distance = (now - then).days
-    # tagname = detail.get("tags")
     tagname = detail.get("tags", "Not Found")
-    newtag = str(tagname)[2:-2]
-        
+    newtag = "\n".join(tagname)
     found.append([
         detail.get("hostname", "Unknown"),
         detail.get("device_id", "Unknown"),
@@ -164,79 +149,57 @@ def parse_host_detail(detail: dict, found: list):
 
 
 def hide_hosts(id_list: list) -> dict:
-    """
-    Hides hosts identified as stale.
-    """
+    """Hide hosts identified as stale."""
     return falcon.perform_action(action_name="hide_host", body={"ids": id_list})
 
 
 # Parse our command line
 args = parse_command_line()
 
-# Default SORT to ASC if not present
-SORT = False
-if args.reverse:
-    SORT = bool(args.reverse)
-
-BASE = "auto"
-if args.base_url:
-    BASE = args.base_url
-
-CHILD = None
-if args.mssp:
-    CHILD = args.mssp
-
-# Credentials
-api_client_id = args.client_id
-api_client_secret = args.client_secret
-if not api_client_id and not api_client_secret:
-    raise SystemExit("Invalid API credentials provided.")
-
-# Set our stale date to 120 days if not present
+# Set our stale date to 120 days if not present, make sure they didn't give us garbage
 STALE_DAYS = 120
 if args.days:
     try:
         STALE_DAYS = int(args.days)
     except ValueError as bad_day_value:
         raise SystemExit("Invalid value specified for days. Integer required.") from bad_day_value
-    
-# Grouping Tags
-GROUPING_TAG = None
-if args.grouping_tag:
-    GROUPING_TAG = args.grouping_tag
-
-# Do not hide hosts if it is not requested
-HIDE = False
-if args.remove:
-    HIDE = bool(args.remove)
 
 # Calculate our stale date filter
 STALE_DATE = calc_stale_date(STALE_DAYS)
 
 # Connect to the API
-falcon = connect_api(api_client_id, api_client_secret, BASE, CHILD)
+falcon = connect_api(args.client_id, args.client_secret, args.govcloud, args.mssp)
 
 # List to hold our identified hosts
 stale = []
 # For each stale host identified
 try:
-    for host in get_host_details(get_hosts(STALE_DATE, GROUPING_TAG)):
+    for host in get_host_details(get_hosts(STALE_DATE, args.tag)):
         # Retrieve host detail
         stale = parse_host_detail(host, stale)
-except KeyError:
-    raise SystemExit("Unable to communicate with CrowdStrike API, check credentials and try again.")
+except KeyError as api_error:
+    raise SystemExit(
+        "Unable to communicate with CrowdStrike API, check credentials and try again."
+        ) from api_error
 
 # If we produced stale host results
 if stale:
-    # Display only
-    if not HIDE:
-        headers = ["Hostname", "Device ID", "Local IP", "Tag", "Last Seen", "Stale Period"]
-        print(f"\n{tabulate(sorted(stale, key=get_sort_key, reverse=SORT), headers)}")
+    # Display only is the default
+    if not bool(args.remove):
+        stale_display = tabulate(
+            sorted(stale, key=lambda x: (x[4], x[0]), reverse=args.reverse),
+            ["Hostname", "Device ID", "Local IP", "Tag", "Last Seen", "Stale Period"]
+            )
+        print(f"\n{stale_display}")
     else:
         # Remove the hosts
         host_list = [x[1] for x in stale]
-        remove_result = hide_hosts(host_list)["body"]["resources"]
-        for deleted in remove_result:
-            print(f"Removed host {deleted['id']}")
+        remove_result = hide_hosts(host_list)
+        if remove_result["status_code"] == 202:
+            for deleted in remove_result["body"]["resources"]:
+                print(f"Removed host {deleted['id']}")
+        else:
+            for deleted in remove_result["body"]["errors"]:
+                print(f"[{deleted['code']}] {deleted['message']}")
 else:
     print("No stale hosts identified for the range specified.")
