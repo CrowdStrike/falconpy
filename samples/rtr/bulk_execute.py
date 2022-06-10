@@ -51,6 +51,11 @@ def parse_command_line():
                         help="String to match against hostname to select hosts.",
                         required=True
                         )
+    parser.add_argument("-t", "--timeout",
+                        help="Timeout duration for command execution in seconds. (Max: 600)",
+                        default="30",
+                        required=False
+                        )
 
     return parser.parse_args()
 
@@ -74,6 +79,11 @@ if args.falcon_client_secret:
 COMMAND = "ls -al"
 if args.command:
     COMMAND = args.command
+
+try:
+    TIMEOUT = min(max(int(args.timeout), 30), 600)
+except ValueError:
+    raise SystemExit("You must specify an integer between 30 and 600 for timeout.")
 
 HOST_MATCH = args.find
 
@@ -128,6 +138,7 @@ print(f"\nExecuting command (`{COMMAND}`) against target hosts.\n")
 # Execute our command against the hosts in our batch session
 cloud_request = rtr_admin.batch_admin_command(base_command="runscript",
                                               batch_id=batch_id,
+                                              timeout_duration=f"{TIMEOUT}s",
                                               command_string=f"runscript -Raw=```{COMMAND}```"
                                               )
 
