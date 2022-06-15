@@ -75,6 +75,7 @@ class TestCSPMRegistration:
                                                                     tenant_id="12345678"
                                                                     ),
             "get_azure_user_scripts_attachment": falcon.get_azure_user_scripts_attachment(tenant_id="12345678"),
+            "azure_download_certificate": falcon.azure_download_certificate(tenant_id="1234567"),
             "get_ioa_events": falcon.GetIOAEvents(),
             "get_ioa_users": falcon.GetIOAUsers(),
             "get_behavior_detections": falcon.get_behavior_detections(limit=1),

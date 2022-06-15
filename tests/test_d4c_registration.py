@@ -92,7 +92,8 @@ class TestD4CRegistration:
             "get_cgp_account": falcon.GetCSPMCGPAccount(ids='12345678', parameters={'scan_type': 'dry'}),
             "get_gcp_acocunt": falcon.GetCSPMGCPAccount(ids='12345678'),  # Test the typo fix version
             "create_gcp_account": falcon.CreateCSPMGCPAccount(body={}, parent_id="12345678"),
-            "create_azure_account": falcon.CreateCSPMAzureAccount(body={}, subscription_id="12345678", tenant_id="12345678")
+            "create_azure_account": falcon.CreateCSPMAzureAccount(body={}, subscription_id="12345678", tenant_id="12345678"),
+            "azure_download_certificate": falcon.DiscoverCloudAzureDownloadCertificate("12345678")  # Also testing arg handling
         }
         for key in tests:
             if tests[key]["status_code"] != 500:
