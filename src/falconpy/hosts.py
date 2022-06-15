@@ -211,7 +211,7 @@ class Hosts(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_online_state(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get the online status for one or more hosts by specifying each host’s unique ID.
-        
+
         Successful requests return an HTTP 200 response and the status for each host identified
         by a `state` of `online`, `offline`, or `unknown` for each host, identified by host `id`.
         Make a `GET` request to `QueryDevicesByFilter` or `QueryDevicesByFilterScroll` to get a
