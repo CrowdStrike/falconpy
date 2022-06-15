@@ -141,6 +141,12 @@ _intel_endpoints = [
         "description": "If true, include both published and deleted indicators in the response. Defaults to false.",
         "name": "include_deleted",
         "in": "query"
+      },
+      {
+        "type": "boolean",
+        "description": "If true, include related indicators in the response. Defaults to true.",
+        "name": "include_relations",
+        "in": "query"
       }
     ]
   ],
@@ -462,6 +468,12 @@ _intel_endpoints = [
         "type": "boolean",
         "description": "If true, include both published and deleted indicators in the response. Defaults to false.",
         "name": "include_deleted",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "description": "If true, include related indicators in the response. Defaults to true.",
+        "name": "include_relations",
         "in": "query"
       }
     ]
