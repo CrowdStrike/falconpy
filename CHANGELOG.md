@@ -1,3 +1,36 @@
+# Version 1.1.4
+## Added features and functionality
++ Added: New operation - AzureDownloadCertificate (CSPMRegistration)
+    - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
+    - `tests/test_cspm_registration.py`
++ Added: New operation - DiscoverCloudAzureDownloadCertificate (D4CRegistration)
+    - `_endpoint/_d4c_registration.py`
+    - `d4c_registation.py`
+    - `tests/test_d4c_registration.py`
++ Added: New parameter - `disable_hostname_check` (QueryString) in performGroupAction (HostGroup)
+    - `_endpoint/_host_group.py`
+    - `host_group.py`
++ Added: New operation - GetOnlineState_V1 (Hosts)
+    - `_endpoint/_hosts.py`
+    - `hosts.py`
+    - `tests/test_hosts.py`
++ Added: New parameter - `include_relations` in QueryIntelIndicatorEntities and QueryIntelIndicatorIds (Intel)
+    - `_endpoint/_intel.py`
+    - `intel.py`
++ Added: New operations - RTR_GetPut_FilesV2 and RTR_GetScriptsV2 (RTR Administration)
+    - `_endpoint/_real_time_response_admin.py`
+    - `real_time_response_admin.py`
+    - `tests/test_real_time_response_admin.py`
++ Updated: DataType - `csv` -> `multi` for the `facet` parameter in combinedQueryVulnerabilities (SpotlightVulnerabilities)
+    - `_endpoint/_spotlight_vulnerabilities.py`
+
+## Issues resolved
++ Fixed: Docstring typo in `create_rule_group` method (FirewallManagement)
+    - `firewall_management.py`
++ Fixed: Typo in Support values definition for combinedQueryVulnerabilities endpoint definition.
+    _ `_endpoint/_spotlight_vulnerabilities.py`
+
 # Version 1.1.3
 ## Added features and functionality
 + Added: Firewall rules payload abstraction for the `create_rule_group` method. Firewall diff_operations payload abstraction for the `update_rule_group` method.
