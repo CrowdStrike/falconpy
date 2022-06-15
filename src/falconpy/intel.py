@@ -121,7 +121,7 @@ class Intel(ServiceClass):
                   deleted               malicious_confidence
                   domain_types          malware_families
                   id                    published_date
-                  indicator             reports 
+                  indicator             reports
                   ip_address_types      targets
                   kill_chains           threat_types
                   labels                type

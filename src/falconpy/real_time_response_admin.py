@@ -210,7 +210,6 @@ class RealTimeResponseAdmin(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_put_files_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get put-files based on the ID's given. These are used for the RTR `put` command.
