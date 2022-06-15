@@ -26,12 +26,14 @@ class TestRTRAdmin:
     Real Time Response Admin Test Harness
     """
     @staticmethod
-    def rtra_retrieve_script_id(script_name: str):
-        """
-        Helper to retrieve a script ID by name
-        """
+    def rtra_retrieve_script_id(script_name: str, ver: int = 1):
+        """Helper to retrieve a script ID by name."""
         found_id = "1234567890"  # Force an error if we can't find it
-        script = falcon.get_scripts(ids=falcon.list_scripts()["body"]["resources"])
+        if ver == 2:
+            script = falcon.get_scripts_v2(ids=falcon.list_scripts()["body"]["resources"])
+        else:
+            script = falcon.get_scripts(ids=falcon.list_scripts()["body"]["resources"])
+        
         for file in script["body"]["resources"]:
             if "name" in file:
                 if file["name"] == script_name:
@@ -40,14 +42,17 @@ class TestRTRAdmin:
         return found_id
 
     @staticmethod
-    def rtra_retrieve_file_id(file_name: str):
+    def rtra_retrieve_file_id(file_name: str, ver: int = 1):
         """
         Helper to retrieve a put file ID by name
         """
         found_id = "1234567890"  # Force an error if we can't find it
         files = falcon.list_put_files()
         try:
-            file = falcon.get_put_files(ids=files["body"]["resources"])
+            if ver == 2:
+                file = falcon.get_put_files_v2(ids=files["body"]["resources"])
+            else:
+                file = falcon.get_put_files(ids=files["body"]["resources"])
         except KeyError:
             pytest.skip("Race condition met, skipping")
 
@@ -72,6 +77,7 @@ class TestRTRAdmin:
 
     def rtra_create_updated_payload(self, file_name: str, orig_payload: dict):
         orig_payload["id"] = self.rtra_retrieve_script_id(file_name)
+        orig_payload["id"] = self.rtra_retrieve_script_id(file_name, 2)
         return orig_payload
 
     def rtra_test_all_code_paths(self):
@@ -107,6 +113,7 @@ class TestRTRAdmin:
             "check_admin_command_status": falcon.RTR_CheckAdminCommandStatus(parameters={})["status_code"],     # 400
             "execute_admin_command": falcon.RTR_ExecuteAdminCommand(body={})["status_code"],                    # 400
             "create_put_files": falcon.RTR_CreatePut_Files(data=file_payload, files=files_detail)["status_code"],
+            "get_again": self.rtra_retrieve_file_id(file_name=upload_filename, ver=2),
             "delete_put_files": falcon.RTR_DeletePut_Files(
                 ids=self.rtra_retrieve_file_id(file_name=upload_filename)
                 )["status_code"],

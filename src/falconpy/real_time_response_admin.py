@@ -210,6 +210,33 @@ class RealTimeResponseAdmin(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_put_files_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get put-files based on the ID's given. These are used for the RTR `put` command.
+
+        Keyword arguments:
+        ids -- List of File IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-GetPut-FilesV2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_GetPut_FilesV2",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
     @force_default(defaults=["data"], default_types=["dict"])
     def create_put_files(self: object, files: list, data: dict = None, **kwargs) -> dict:
         """Upload a new put-file to use for the RTR `put` command.
@@ -297,6 +324,34 @@ class RealTimeResponseAdmin(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="RTR_GetScripts",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_scripts_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get custom-scripts based on the ID's given.
+
+        These are used for the RTR `runscript` command.
+
+        Keyword arguments:
+        ids -- List of Script IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-GetScriptsV2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_GetScriptsV2",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
@@ -494,9 +549,11 @@ class RealTimeResponseAdmin(ServiceClass):
     RTR_CheckAdminCommandStatus = check_admin_command_status
     RTR_ExecuteAdminCommand = execute_admin_command
     RTR_GetPut_Files = get_put_files
+    RTR_GetPut_FilesV2 = get_put_files_v2
     RTR_CreatePut_Files = create_put_files
     RTR_DeletePut_Files = delete_put_files
     RTR_GetScripts = get_scripts
+    RTR_GetScriptsV2 = get_scripts_v2
     RTR_CreateScripts = create_scripts
     RTR_DeleteScripts = delete_scripts
     RTR_UpdateScripts = update_scripts
