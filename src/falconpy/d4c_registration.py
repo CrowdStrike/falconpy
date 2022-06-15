@@ -266,6 +266,36 @@ class D4CRegistration(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def azure_download_certificate(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Download Azure Certificate.
+
+        Returns JSON object(s) that contain the base64 encoded certificate for a service principal.
+
+        Keyword arguments:
+        tenant_id -- Azure Tenant ID to generate script for.
+                     Defaults to the most recently registered tenant.
+        parameters -- full parameters payload, not required if tenant-id keyword is used.
+        refresh -- Force a refresh of the certificate. Boolean. Defaults to False.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'tenant_id'. All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/DiscoverCloudAzureDownloadCertificate
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DiscoverCloudAzureDownloadCertificate",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "tenant_id")
+            )
+
     def get_gcp_user_scripts_attachment(self: object) -> dict:
         """Retrieve GCP user script attachment.
 
@@ -315,6 +345,7 @@ class D4CRegistration(ServiceClass):
     CreateCSPMAzureAccount = create_azure_account
     UpdateCSPMAzureAccountClientID = update_azure_account_client_id
     GetCSPMAzureUserScriptsAttachment = get_azure_user_scripts_attachment
+    DiscoverCloudAzureDownloadCertificate = azure_download_certificate
     GetCSPMAzureUserScripts = get_azure_user_scripts
     GetCSPMGCPAccount = get_gcp_account   # Typo fix
     GetCSPMCGPAccount = get_gcp_account

@@ -422,6 +422,40 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def azure_download_certificate(self: object,
+                                   *args,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> dict:
+        """Retrieve Azure certificate.
+
+        Returns JSON object(s) that contain the base64 encoded certificate for a service principal.
+
+        Keyword arguments:
+        tenant_id -- Azure Tenant ID to generate script for.
+                     Defaults to the most recently registered tenant.
+        parameters -- full parameters payload, not required if tenant-id keyword is used.
+        refresh -- Force a refresh of the certificate. Boolean. Defaults to False.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'tenant_id'. All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/AzureDownloadCertificate
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="AzureDownloadCertificate",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "tenant_id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_azure_user_scripts_attachment(self: object,
                                           *args,
                                           parameters: dict = None,
@@ -867,6 +901,7 @@ class CSPMRegistration(ServiceClass):
     UpdateCSPMAzureAccountClientID = update_azure_account_client_id
     UpdateCSPMAzureTenantDefaultSubscriptionID = update_azure_tenant_default_subscription_id
     GetCSPMAzureUserScriptsAttachment = get_azure_user_scripts_attachment
+    AzureDownloadCertificate = azure_download_certificate
     GetBehaviorDetections = get_behavior_detections
     GetConfigurationDetections = get_configuration_detections
     GetIOAEvents = get_ioa_events
