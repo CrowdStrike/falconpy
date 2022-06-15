@@ -121,7 +121,7 @@ class Intel(ServiceClass):
                   deleted               malicious_confidence
                   domain_types          malware_families
                   id                    published_date
-                  indicator             reports
+                  indicator             reports 
                   ip_address_types      targets
                   kill_chains           threat_types
                   labels                type
@@ -129,6 +129,7 @@ class Intel(ServiceClass):
                   labels.last_valid_on
         include_deleted -- include both published and deleted indicators.
                            Boolean, defaults to False.
+        include_relations -- include related indicators. Boolean, defaults to True.
         limit -- The maximum number of indicators to return. [integer, 1-50000]
         offset -- The integer offset to start retrieving records from.
         parameters - full parameters payload, not required if using other keywords.
@@ -479,6 +480,7 @@ class Intel(ServiceClass):
                   labels.last_valid_on
         include_deleted -- include both published and deleted indicators.
                            Boolean, defaults to False.
+        include_relations -- include related indicators. Boolean, defaults to True.
         limit -- The maximum number of indicators to return. [integer, 1-50000]
         offset -- The integer offset to start retrieving records from.
         parameters - full parameters payload, not required if using other keywords.
