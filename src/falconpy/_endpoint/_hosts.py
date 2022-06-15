@@ -133,6 +133,26 @@ _hosts_endpoints = [
     ]
   ],
   [
+    "GetOnlineState_V1",
+    "GET",
+    "/devices/entities/online-state/v1",
+    "Get the online status for one or more hosts by specifying each host’s unique ID. Successful requests return an HTTP 200 response and the status for each host identified by a `state` of `online`, `offline`, or `unknown` for each host, identified by host `id`.\n\nMake a `GET` request to `/devices/queries/devices/v1` to get a list of host IDs.",
+    "hosts",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The unique ID of the host to get the online status of.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "QueryHiddenDevices",
     "GET",
     "/devices/queries/devices-hidden/v1",
