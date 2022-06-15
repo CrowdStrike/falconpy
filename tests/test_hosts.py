@@ -143,7 +143,8 @@ class TestHosts:
             "get_device_details": falcon.GetDeviceDetails(ids='12345678')["status_code"],
             "query_hidden_devices": falcon.QueryHiddenDevices()["status_code"],
             "query_devices_by_filter_scroll": falcon.QueryDevicesByFilterScroll()["status_code"],
-            "query_devices_by_filter": falcon.QueryDevicesByFilter()["status_code"]
+            "query_devices_by_filter": falcon.QueryDevicesByFilter()["status_code"],
+            "get_online_state": falcon.get_online_state("12345678")["status_code"]
         }
         for key in tests:
             if tests[key] != 500:
