@@ -209,6 +209,37 @@ class Hosts(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_online_state(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get the online status for one or more hosts by specifying each host’s unique ID.
+        
+        Successful requests return an HTTP 200 response and the status for each host identified
+        by a `state` of `online`, `offline`, or `unknown` for each host, identified by host `id`.
+        Make a `GET` request to `QueryDevicesByFilter` or `QueryDevicesByFilterScroll` to get a
+        list of host IDs.
+
+        Keyword arguments:
+        ids -- AID(s) of the hosts to retrieve state information. String or list of strings.
+        parameters - full parameters payload, not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/GetOnlineState.V1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetOnlineState_V1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def query_hidden_devices(self: object, parameters: dict = None, **kwargs) -> dict:
         """Retrieve hidden hosts that match the provided filter criteria.
 
@@ -432,6 +463,7 @@ class Hosts(ServiceClass):
     UpdateDeviceTags = update_device_tags
     GetDeviceDetails = get_device_details
     QueryHiddenDevices = query_hidden_devices
+    GetOnlineState_V1 = get_online_state
     QueryDevicesByFilterScroll = query_devices_by_filter_scroll
     QueryDevicesByFilter = query_devices_by_filter
     QueryDeviceLoginHistory = query_device_login_history
