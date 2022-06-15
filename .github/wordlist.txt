@@ -730,3 +730,10 @@ wozboz
 tokenized
 Scheidl
 ethicspoint
+AzureDownloadCertificate
+DiscoverCloudAzureDownloadCertificate
+QueryString
+GetOnlineState
+FilesV
+GetScriptsV
+DataType
