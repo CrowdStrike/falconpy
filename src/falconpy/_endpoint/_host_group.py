@@ -150,6 +150,13 @@ _host_group_endpoints = [
         "required": True
       },
       {
+        "type": "boolean",
+        "default": False,
+        "description": "Bool to disable hostname check on add-member",
+        "name": "disable_hostname_check",
+        "in": "query"
+      },
+      {
         "name": "body",
         "in": "body",
         "required": True

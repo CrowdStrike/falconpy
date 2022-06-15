@@ -158,6 +158,7 @@ class HostGroup(ServiceClass):
                         "string"
                     ]
                 }
+        disable_hostname_check -- Disables hostname checking before the action. Boolean.
         filter -- Filter to use to specify hosts to apply this action to. FQL formatted string.
                   Overridden if action_parameters is specified.
         ids -- List of host group IDs to perform an action against. String or list of strings.
