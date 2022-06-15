@@ -86,7 +86,8 @@ _spotlight_vulnerabilities_endpoints = [
         },
         "collectionFormat": "multi",
         "description": "Select various details blocks to be returned for each vulnerability entity. "
-        "Supported values:\n\n<ul><li>host_info</li><li>remediation_details</li><li>cve_details</li></ul>",
+        "Supported values:\n\n<ul><li>host_info</li><li>remediation</li><li>cve</li>"
+        "<li>evaluation_logic</li></ul>",
         "name": "facet",
         "in": "query"
       }
