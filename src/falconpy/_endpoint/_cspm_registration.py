@@ -342,6 +342,42 @@ _cspm_registration_endpoints = [
     ]
   ],
   [
+    "AzureDownloadCertificate",
+    "GET",
+    "/cloud-connect-cspm-azure/entities/download-certificate/v1",
+    "Returns JSON object(s) that contain the base64 encoded certificate for a service principal.",
+    "cspm_registration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "maxLength": 36,
+          "minLength": 36,
+          "pattern": "^[0-9a-z-]{36}$",
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Azure Tenant ID",
+        "name": "tenant_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "maxLength": 5,
+        "minLength": 4,
+        "pattern": "^(true|false)$",
+        "enum": [
+          "false",
+          "true"
+        ],
+        "type": "string",
+        "default": False,
+        "name": "refresh",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "GetCSPMAzureUserScriptsAttachment",
     "GET",
     "/cloud-connect-cspm-azure/entities/user-scripts-download/v1",
