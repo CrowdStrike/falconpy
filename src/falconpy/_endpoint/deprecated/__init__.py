@@ -34,6 +34,7 @@
 from ._custom_ioa import _custom_ioa_endpoints
 from ._discover import _discover_endpoints
 from ._firewall_management import _firewall_management_endpoints
+from ._hosts import _hosts_endpoints
 from ._identity_protection import _identity_protection_endpoints
 from ._installation_tokens import _installation_tokens_endpoints
 from ._ioc import _ioc_endpoints
@@ -46,6 +47,7 @@ from ._scheduled_reports import _scheduled_reports_endpoints
 _custom_ioa_deprecated = _custom_ioa_endpoints
 _discover_deprecated = _discover_endpoints
 _firewall_management_deprecated = _firewall_management_endpoints
+_hosts_deprecated = _hosts_endpoints
 _identity_protection_deprecated = _identity_protection_endpoints
 _installation_tokens_deprecated = _installation_tokens_endpoints
 _ioc_deprecated = _ioc_endpoints
