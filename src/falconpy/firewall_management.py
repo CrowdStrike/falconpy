@@ -649,9 +649,9 @@ class FirewallManagement(ServiceClass):
                         Overridden if 'rules' keyword is provided.
         protocol -- Integer protocol specified. Integer. Overridden if 'rules' keyword is provided.
                     (TCP = 6, UDP = 17)
-        remote_address -- Local address and netmask detail. Dictionary or list of dictionaries.
+        remote_address -- Remote address and netmask detail. Dictionary or list of dictionaries.
                           Overridden if 'rules' keyword is provided.
-        remote_port -- Local port range. Dictionary or list of dictionaries.
+        remote_port -- Remote port range. Dictionary or list of dictionaries.
                        Overridden if 'rules' keyword is provided.
         rule_description -- Description for created rule. String.
                             Overridden if 'rules' keyword is provided.
