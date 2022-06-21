@@ -1,17 +1,17 @@
-"""Add monitoring rules for email addresses provided in a csv file (1 email address per row)
- _____     _                  __  __  ____                      
-|  ___|_ _| | ___ ___  _ __   \ \/ / |  _ \ ___  ___ ___  _ __  
-| |_ / _` | |/ __/ _ \| '_ \   \  /  | |_) / _ \/ __/ _ \| '_ \ 
+r"""Add monitoring rules for email addresses provided in a csv file (1 email address per row)
+
+ _____     _                  __  __  ____
+|  ___|_ _| | ___ ___  _ __   \ \/ / |  _ \ ___  ___ ___  _ __
+| |_ / _` | |/ __/ _ \| '_ \   \  /  | |_) / _ \/ __/ _ \| '_ \
 |  _| (_| | | (_| (_) | | | |  /  \  |  _ <  __/ (_| (_) | | | |
 |_|  \__,_|_|\___\___/|_| |_| /_/\_\ |_| \_\___|\___\___/|_| |_|
 
 Creation: 06.21.2022, wozboz@CrowdStrike
 """
-
-
-from falconpy import Recon
 from csv import reader
 from argparse import ArgumentParser, RawTextHelpFormatter
+from falconpy import Recon
+
 
 parser = ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
 req = parser.add_argument_group("required arguments")
@@ -44,31 +44,31 @@ falcon = Recon(client_id=args.falcon_client_id,
                base_url=args.base_url
                )
 
-query = "("
-with open(EMAIL_FILE) as read_file:
+QUERY = "("
+with open(EMAIL_FILE, encoding="utf-8") as read_file:
     csv_reader = reader(read_file)
-    n = 0
+    NUM_FOUND = 0
     for row in csv_reader:
-        n += 1
-        query += "email:'" + str(row[0]) + "',"
-        if n%20 == 0:
-            query = query[:-1]
-            query += ")"
-            response = falcon.create_rules(filter=f"{query}",
-                                    name=f"Functional Email Addresses{int(n/20)}",
-                                    priority="medium",
-                                    topic="SA_EMAIL",
-                                    permissions="public",
-                                    )
-            query = "("
+        NUM_FOUND += 1
+        QUERY += "email:'" + str(row[0]) + "',"
+        if NUM_FOUND % 20 == 0:
+            QUERY = QUERY[:-1]
+            QUERY += ")"
+            response = falcon.create_rules(filter=f"{QUERY}",
+                                           name=f"Functional Email Addresses{int(NUM_FOUND/20)}",
+                                           priority="medium",
+                                           topic="SA_EMAIL",
+                                           permissions="public",
+                                           )
+            QUERY = "("
 
-query = query[:-1]
-query += ")"
-response = falcon.create_rules(filter=f"{query}",
-                                    name=f"Functional Email Addresses{n}",
-                                    priority="medium",
-                                    topic="SA_EMAIL",
-                                    permissions="public",
-                                    )
+QUERY = QUERY[:-1]
+QUERY += ")"
+response = falcon.create_rules(filter=f"{QUERY}",
+                               name=f"Functional Email Addresses{NUM_FOUND}",
+                               priority="medium",
+                               topic="SA_EMAIL",
+                               permissions="public",
+                               )
 
-print(f"Successfully created monitoring rules for {n} email addresses.")
+print(f"Successfully created monitoring rules for {NUM_FOUND} email addresses.")
