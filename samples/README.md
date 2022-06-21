@@ -45,6 +45,7 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
 | [MalQuery](#malquery) | [Malqueryinator](#malqueryinator) |
 | [Prevention Policy](#prevention-policy) | [Prevention Policy Hawk](#prevention-policy-hawk) |
 | [Real Time Response](#real-time-response) | [Bulk execute a command](#bulk-execute-a-command)<BR/>[Bulk execute a command (queued)](#bulk-execute-a-command-queued)<BR/>[Dump memory for a running process](#dump-memory-for-a-running-process)<BR/>[My Little RTR](#my-little-rtr) |
+| [Recon](#recon) | [Create monitoring rules for an email list](#create-monitoring-rules-for-an-email-list) |
 | [Sensor Download](#sensor-download) | [Download the CrowdStrike sensor](#download-the-crowdstrike-sensor) |
 | [Sensor Update Policies](#sensor-update-policies) | [Policy Wonk](#policy-wonk) |
 | [Spotlight](#spotlight) | [Find vulnerable hosts by CVE ID](#find-vulnerable-hosts-by-cve-id)<BR/>[CISA DHS Known Exploited Vulnerabilities](#cisa-dhs-known-exploited-vulnerabilities) |
@@ -577,6 +578,27 @@ This sample demonstrates the following CrowdStrike Real Time Response and Real T
 | [RTR_ExecuteAdminCommand](https://falconpy.io/Service-Collections/Real-Time-Response-Admin.html#rtr_executeadmincommand) | Execute a RTR administrator command on a single host. |
 | [RTR_InitSession](https://falconpy.io/Service-Collections/Real-Time-Response.html#rtr_initsession) | Initialize a new session with the RTR cloud. |
 | [RTR_ListScripts](https://falconpy.io/Service-Collections/Real-Time-Response-Admin.html#rtr_listscripts) | Get a list of custom-script ID's that are available to the user for the `runscript` command. |
+
+---
+
+## Recon
+These samples focus on CrowdStrike's Falcon X Recon API service collection.
+
+- [Create monitoring rules for an email list](#create-monitoring-rules-for-an-email-list)
+
+### Create monitoring rules for an email list
+Provided by `@wozboz`, this example demonstrates creating Falcon X Recon monitoring rules for a list of email addresses provided in CSV format.
+
+[![Recon](https://img.shields.io/badge/Service%20Class-Create_Monitoring_Rules_For_a_List-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](recon/email_monitoring_recon.py)
+
+#### Recon API operations discussed
+This sample demonstrates the following CrowdStrike Recon API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [CreateRulesV1](https://www.falconpy.io/Service-Collections/Recon.html#createrulesv1) | Create monitoring rules. |
+
+---
 
 ## Sensor Download
 The samples in this section focus on CrowdStrike Sensor Download API service collection.
