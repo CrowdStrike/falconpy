@@ -63,14 +63,14 @@ class Color:  # pylint: disable=R0903
     END = "\033[0m"
 
 
-def connect_sensor_update_api(key: str, sec: str):
+def connect_sensor_update_api(key: str, sec: str, kid: str):
     """Connect to the sensor update policies service collection."""
-    return SensorUpdatePolicy(client_id=key, client_secret=sec)
+    return SensorUpdatePolicy(client_id=key, client_secret=sec, member_cid=kid)
 
 
-def connect_host_group_api(key: str, sec: str):
+def connect_host_group_api(key: str, sec: str, kid: str):
     """Connect to the Host Group service collection."""
-    return HostGroup(client_id=key, client_secret=sec)
+    return HostGroup(client_id=key, client_secret=sec, member_cid=kid)
 
 
 def generate_api_error_list(error_object: list):
@@ -160,6 +160,9 @@ def consume_arguments():
     idg = parser.add_argument_group("required arguments for updating or removing policies")
     idg.add_argument("-i", "--policy_id", help="ID(s) of the policy to update or remove (comma delimit)", required=False)
     idg.add_argument("-n", "--platform_name", help="Platform name for policy precedence configurations", required=False)
+    # MSSP
+    msp = parser.add_argument_group("MSSP arguments")
+    msp.add_argument("-w", "--member_cid", help="Child CID (MSSP access)", required=False)
     # Always required
     req = parser.add_argument_group("always required arguments")
     req.add_argument("-f", "--falcon_client_id", help="Falcon Client ID", required=True)
@@ -239,8 +242,13 @@ def process_command_line():  # pylint: disable=R0912,R0915
     if args.show_groups:
         hide_groups = False
 
+    mssp_access = None
+    if args.member_cid:
+        mssp_access = args.member_cid
+
     return command_to_perform, args.falcon_client_id, args.falcon_client_secret, args.search_string,\
-        args.policy_id, update_type, flag_type, hide_members, args.platform_name, group_id, hide_groups
+        args.policy_id, update_type, flag_type, hide_members, args.platform_name, group_id,\
+        hide_groups, mssp_access
 
 
 def hide_members_column():
@@ -655,9 +663,9 @@ INDICATOR = ["|", "/", "-", "\\"]
 INDICATOR_POSITION = 0
 
 command, client_id, client_secret, API_SEARCH, policy_id, which_update, \
-    enable_disable, HIDE, platform_name, hg_id, GROUP_HIDE = process_command_line()
-falcon = connect_sensor_update_api(client_id, client_secret)
-falcon_groups = connect_host_group_api(client_id, client_secret)
+    enable_disable, HIDE, platform_name, hg_id, GROUP_HIDE, member_cid = process_command_line()
+falcon = connect_sensor_update_api(client_id, client_secret, member_cid)
+falcon_groups = connect_host_group_api(client_id, client_secret, member_cid)
 
 if "kernel" in command:
     list_kernel_compatibility()
