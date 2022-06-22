@@ -19,11 +19,14 @@ y="\033[33m"
 g="\033[92m"
 p="\033[4m"
 o="\033[32m"
+bz="\033[34m"
 k="|"
 ub="Uber$e"
 ub="$g$ub"
+ax=" Auth$e"
+ax="$b$bz$ax"
 # If you squint, it looks just like a falcon. Honest.
-bf="$e     we stop"
+bf="$e     we$b stop$e"
 be="$o            \" \"$e"
 bd="$o         =^\`-'^="
 bc="$o          <$r*$o,$r*$o>"
@@ -66,11 +69,13 @@ n=$(wc -w <<< $a)
 az=" $p      MODULE                      "
 ab="     CLASS NAME                      METHODS $e"
 echo -e "$az$ab"
+tops=0
 for fn in $a
 do
     u=""
     t=$(($t+1))
     op=$(cat $fn | grep "(self:" | wc -l)
+    tops=$(($tops+$op))
     q=$(cat $fn | grep \(Service)
     q=${q/\(ServiceClass\):/}
     q=${q/class /}
@@ -83,6 +88,15 @@ do
     then
       u="           Uber"
       q="APIHarness"
+#    else
+#      if [ "$q" != "Iocs" ]
+#      then
+#	tops=$(($tops+$op))
+#      fi
+    fi
+    if [ ${fn/$fp$m\//} == oauth2.py ]
+    then
+      u="               Auth"
     fi
     if [ $t == $n ]
     then
@@ -92,8 +106,12 @@ do
     w=$(printf "%-35s" "$z")
     v=$(printf "%-28s" "$q $u")
     c=$(echo " $w | $v ")
-    echo -e "$k$j${c/Uber/$ub} |$op $e$k"
+    c=${c/Uber/$ub}
+    c=${c/\ Auth/$ax}
+    echo -e "$k$j$c |$op $e$k"
 done
+echo
+echo "$tops total methods"
 echo
 
 if [[ "$2" == *--egg* ]]
