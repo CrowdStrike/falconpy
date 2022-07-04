@@ -737,3 +737,4 @@ GetOnlineState
 FilesV
 GetScriptsV
 DataType
+Cloner
