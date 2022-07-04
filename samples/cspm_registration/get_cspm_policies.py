@@ -126,10 +126,13 @@ def chunk_long_description(desc, col_width) -> str:
 policies = falcon.get_policy_settings(cloud_platform=cloud)['body']['resources']
 # Call format function on the returned api data
 return_data = format_json_data(policies)
-
 # Determine if an output file is specified and write out or print
 if data_file:
-    keys = return_data[0].keys()
+    keys = []
+    for row in return_data:
+        for key in row.keys():
+            if key not in keys:
+                keys.append(key)
     with open(data_file, 'w', newline='', encoding="utf-8") as output_file:
         dict_writer = csv.DictWriter(output_file, keys)
         dict_writer.writeheader()
