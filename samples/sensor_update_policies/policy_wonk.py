@@ -63,14 +63,14 @@ class Color:  # pylint: disable=R0903
     END = "\033[0m"
 
 
-def connect_sensor_update_api(key: str, sec: str, kid: str):
+def connect_sensor_update_api(key: str, sec: str, kid: str, base: str):
     """Connect to the sensor update policies service collection."""
-    return SensorUpdatePolicy(client_id=key, client_secret=sec, member_cid=kid)
+    return SensorUpdatePolicy(client_id=key, client_secret=sec, member_cid=kid, base_url=base)
 
 
-def connect_host_group_api(key: str, sec: str, kid: str):
+def connect_host_group_api(key: str, sec: str, kid: str, base: str):
     """Connect to the Host Group service collection."""
-    return HostGroup(client_id=key, client_secret=sec, member_cid=kid)
+    return HostGroup(client_id=key, client_secret=sec, member_cid=kid, base_url=base)
 
 
 def generate_api_error_list(error_object: list):
@@ -163,6 +163,9 @@ def consume_arguments():
     # MSSP
     msp = parser.add_argument_group("MSSP arguments")
     msp.add_argument("-w", "--member_cid", help="Child CID (MSSP access)", required=False)
+    # Other
+    oth = parser.add_argument_group("other arguments")
+    oth.add_argument("-t", "--base_url", help="Specify the API base URL", required=False)
     # Always required
     req = parser.add_argument_group("always required arguments")
     req.add_argument("-f", "--falcon_client_id", help="Falcon Client ID", required=True)
@@ -245,10 +248,14 @@ def process_command_line():  # pylint: disable=R0912,R0915
     mssp_access = None
     if args.member_cid:
         mssp_access = args.member_cid
+    
+    base_url = "auto"
+    if args.base_url:
+        base_url = args.base_url
 
     return command_to_perform, args.falcon_client_id, args.falcon_client_secret, args.search_string,\
         args.policy_id, update_type, flag_type, hide_members, args.platform_name, group_id,\
-        hide_groups, mssp_access
+        hide_groups, mssp_access, base_url
 
 
 def hide_members_column():
@@ -663,9 +670,9 @@ INDICATOR = ["|", "/", "-", "\\"]
 INDICATOR_POSITION = 0
 
 command, client_id, client_secret, API_SEARCH, policy_id, which_update, \
-    enable_disable, HIDE, platform_name, hg_id, GROUP_HIDE, member_cid = process_command_line()
-falcon = connect_sensor_update_api(client_id, client_secret, member_cid)
-falcon_groups = connect_host_group_api(client_id, client_secret, member_cid)
+    enable_disable, HIDE, platform_name, hg_id, GROUP_HIDE, member_cid, base_url = process_command_line()
+falcon = connect_sensor_update_api(client_id, client_secret, member_cid, base_url)
+falcon_groups = connect_host_group_api(client_id, client_secret, member_cid, base_url)
 
 if "kernel" in command:
     list_kernel_compatibility()
