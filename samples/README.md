@@ -30,6 +30,7 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
 
 | Service Collection | Samples |
 | :--- | :--- |
+| [Custom IOA](#custom-ioa) | [Custom IOA Cloner](#custom-ioa-cloner) |
 | [Detects](#detects) | [Detects Advisor](#detects-advisor) |
 | [Event Streams](#event-streams) | [Send detections to AWS Security Hub](#send-detections-to-aws-security-hub) |
 | [Falcon Discover](#falcon-discover) | [List discovered hosts](#list-discovered-hosts) |
@@ -62,6 +63,26 @@ Provided examples are further categorized by the type of class used to interact 
 | [![MSSP Usage supported](https://img.shields.io/badge/-Supports%20MSSP-darkblue?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==&style=for-the-badge)](https://falconpy.io/Usage/Authenticating-to-the-API.html#mssp-examples-hosts) | These samples support MSSP usage scenarios.
 
 
+## Custom IOA
+This category demonstrates using CrowdStrike's Custom IOA service collection.
+
+### Custom IOA Cloner
+The [Custom IOA Cloner](custom_ioa#custom-ioa-cloner) demonstrates displaying, deleting and cloning Custom IOA rule groups.
+
+[![Custom IOA](https://img.shields.io/badge/Service%20Class-Custom_IOA_Cloner-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](custom_ioa#custom-ioa-cloner)
+
+#### Custom IOA API operations discussed
+This sample demonstrates the following CrowdStrike Custom IOA API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [create_rule](https://www.falconpy.io/Service-Collections/Custom-IOA.html#create_rule) | Create a rule within a rule group. Returns the rule. |
+| [create_rule_groupMixin0](https://www.falconpy.io/Service-Collections/Custom-IOA.html#create_rule_groupmixin0) | Create a rule group for a platform with a name and an optional description. Returns the rule group. |
+| [delete_rule_groupsMixin0](https://www.falconpy.io/Service-Collections/Custom-IOA.html#delete_rule_groupsmixin0) | Delete rule groups by ID. |
+| [query_rule_groups_full](https://www.falconpy.io/Service-Collections/Custom-IOA.html#query_rule_groups_full) | Find all rule groups matching the query with optional filter. |
+
+---
+
 ## Detects
 The CrowdStrike Detects API service collection is the sole focus of this category.
 
@@ -71,7 +92,7 @@ The CrowdStrike Detects API service collection is the sole focus of this categor
 [![Detects](https://img.shields.io/badge/Service%20Class-Detects%20Advisor-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](detects#detects-advisor)
 
 #### Detects API operations discussed
-This sample demonstrate the following CrowdStrike Detects API operations:
+This sample demonstrates the following CrowdStrike Detects API operations:
 
 | Operation | Description |
 | :--- | :--- |
@@ -79,7 +100,7 @@ This sample demonstrate the following CrowdStrike Detects API operations:
 | [QueryDetects](https://falconpy.io/Service-Collections/Detects.html#querydetects) | Search for detection IDs that match a given query. |
 | [UpdateDetectsByIdsV2](https://falconpy.io/Service-Collections/Detects.html#updatedetectsbyidsv2) | Modify the state, assignee, and visibility of detections. |
 
-
+---
 
 ## Event Streams
 This category is focused on the CrowdStrike Event Streams API service collection.
@@ -90,12 +111,14 @@ This [example](https://github.com/CrowdStrike/Cloud-AWS/tree/main/Security-Hub) 
 [![Event Streams](https://img.shields.io/badge/Uber%20Class-Send%20Detections%20to%20AWS%20Security%20Hub-silver?style=for-the-badge&labelColor=maroon&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](https://github.com/CrowdStrike/Cloud-AWS/tree/main/Security-Hub)
 
 #### Event Streams API operations discussed
-This sample demonstrate the following CrowdStrike Event Streams API operations:
+This sample demonstrates the following CrowdStrike Event Streams API operations:
 
 | Operation | Description |
 | :--- | :--- |
 | [listAvailableStreamsOAuth2](https://falconpy.io/Service-Collections/Event-Streams.html#listavailablestreamsoauth2) | Discover all event streams in your environment. |
 | [refreshActiveStreamSession](https://falconpy.io/Service-Collections/Event-Streams.html#refreshactivestreamsession) | Refresh an active event stream. Use the URL shown in a [listAvailableStreamsOAuth2](https://falconpy.io/Service-Collections/Event-Streams.html#listavailablestreamsoauth2) response. |
+
+---
 
 ## Falcon Discover
 The samples in this section focus on the CrowdStrike Falcon Discover API service collection.
@@ -106,14 +129,15 @@ In this [example](discover/list_discovered_hosts.py), we demonstrate listing up 
 
 [![Falcon Discover](https://img.shields.io/badge/Service%20Class-List%20Discovered%20Hosts-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](discover/list_discovered_hosts.py) 
 
-#### Cloud Connect AWS API operations discussed
-This sample demonstrate the following CrowdStrike Discover API operations:
+#### Discover API operations discussed
+This sample demonstrates the following CrowdStrike Discover API operations:
 
 | Operation | Description |
 | :--- | :--- |
 | [get_hosts](https://falconpy.io/Service-Collections/Discover.html#get_hosts) | Get details on assets by providing one or more IDs. |
 | [query_hosts](https://falconpy.io/Service-Collections/Discover.html#query_hosts) | Search for assets in your environment by providing a FQL (Falcon Query Language) filter and paging details. Returns a set of asset IDs which match the filter criteria. |
 
+---
 
 ## Falcon Discover for Cloud and Containers (AWS Accounts)
 This section discusses Falcon Discover for Cloud and Containers, and the two API service collections, Cloud Connect AWS and D4C Registration.
@@ -135,6 +159,8 @@ These samples demonstrate the following CrowdStrike Cloud Connect AWS (Discover 
 | [UpdateAWSAccounts](https://falconpy.io/Service-Collections/Cloud-Connect-AWS.html#updateawsaccounts) | Update AWS Accounts by specifying the ID of the account and details to update. |
 | [VerifyAWSAccountAccess](https://falconpy.io/Service-Collections/Cloud-Connect-AWS.html#verifyawsaccountaccess) | Search for provisioned AWS Accounts by providing a FQL filter and paging details. Returns a set of AWS account IDs which match the filter criteria. |
 
+---
+
 ## Falcon Horizon
 These samples focus on CrowdStrike Falcon Horizon and the available API operations within the CSPM Registration service collection.
 
@@ -144,12 +170,13 @@ Submitted by `@mccbryan3`, this [example](cspm_registration/get_cspm_policies.py
 [![Falcon Horizon](https://img.shields.io/badge/Service%20Class-Report%20Horizon%20Policies-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](cspm_registration/get_cspm_policies.py) 
 
 #### CSPM Registration API operations discussed
-This sample demonstrate the following CrowdStrike CSPM Registration (Horizon) API operations:
+This sample demonstrates the following CrowdStrike CSPM Registration (Horizon) API operations:
 
 | Operation | Description |
 | :--- | :--- |
 | [GetCSPMPolicySettings](https://falconpy.io/Service-Collections/CSPM-Registration.html#getcspmpolicysettings) | Returns information about current policy settings. |
 
+---
 
 ## Falcon Flight Control
 The samples in this category demonstrate functionality for MSSP scenarios using the Falcon Flight Control API service collection.
@@ -160,11 +187,13 @@ This [example](flight_control/find_child_cid.py) demonstrates retrieving a child
 [![Falcon Flight Control](https://img.shields.io/badge/Service%20Class-Find%20Child%20CID-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](flight_control/find_child_cid.py) [![MSSP Use supported](https://img.shields.io/badge/-Supports%20MSSP-darkblue?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==&style=for-the-badge)](flight_control/find_child_cid.py)
 
 #### Flight Control API operations discussed
-This sample demonstrate the following CrowdStrike Flight Control API operations:
+This sample demonstrates the following CrowdStrike Flight Control API operations:
 
 | Operation | Description |
 | :--- | :--- |
 | [QueryChildren](https://falconpy.io/Service-Collections/MSSP.html#querychildren) | Query for customers linked as children. |
+
+---
 
 ## Falcon X
 This category is dedicated to Falcon X, and discusses the Falcon X Sandbox, Quick Scan, and Sample Uploads API service collections.
@@ -264,6 +293,8 @@ This sample demonstrates the following CrowdStrike Quick Scan and Sample Uploads
 | [ScanSamples](https://falconpy.io/Service-Collections/Quick-Scan.html#scansamples) | Submit a volume of files for ml scanning. Time required for analysis increases with the number of samples in a volume but usually it should take less than 1 minute. |
 | [UploadSampleV3](https://falconpy.io/Service-Collections/Sample-Uploads.html#uploadsamplev3) | Upload a file for further cloud analysis. After uploading, call the specific analysis API endpoint. |
 
+---
+
 ## Firewall Management
 The CrowdStrike Falcon Firewall Management and Firewall Policies APIs are the focus of this section.
 
@@ -273,13 +304,14 @@ Developed by `@wozboz`, this [example](firewall_management/get_firewall_events.p
 [![Firewall Management](https://img.shields.io/badge/Service%20Class-Export_Firewall_Events-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](firewall_management/get_firewall_events.py)
 
 #### Firewall Management operations discussed
-This sample demonstrate the following CrowdStrike Firewall Management API operations:
+This sample demonstrates the following CrowdStrike Firewall Management API operations:
 
 | Operation | Description |
 | :--- | :--- |
 | [get_events](https://falconpy.io/Service-Collections/Firewall-Management.html#get_events) | Get events entities by ID and optionally version. |
 | [query_events](https://falconpy.io/Service-Collections/Firewall-Management.html#query_events) | Find all event IDs matching the query with filter. |
 
+---
 
 ## Hosts
 The samples collected in this section demonstrate leveraging CrowdStrike's Hosts and Host Group API service collections to secure your endpoints.
@@ -336,6 +368,7 @@ This sample demonstrates the following CrowdStrike Hosts API operations:
 | [QueryDevicesByFilter](https://falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilter) | Search for hosts in your environment by platform, hostname, IP, and other criteria. |
 | [QueryDeviceLoginHistory](https://www.falconpy.io/Service-Collections/Hosts.html#querydeviceloginhistory) | Retrieve details about recent login sessions for a set of devices. |
 | [UpdateDeviceTags](https://www.falconpy.io/Service-Collections/Hosts.html#updatedevicetags) | Append or remove one or more Falcon Grouping Tags on one or more hosts. |
+
 ---
 
 ### Offset vs. Token
@@ -381,6 +414,8 @@ This sample demonstrates the following CrowdStrike Hosts API operations:
 | [PerformActionV2](https://falconpy.io/Service-Collections/Hosts.html#performactionv2) | Take various actions on the hosts in your environment. Contain or lift containment on a host. Delete or restore a host. |
 | [QueryDevicesByFilter](https://falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilter) | Search for hosts in your environment by platform, hostname, IP, and other criteria. |
 
+---
+
 ## Incidents
 This category is dedicated to demonstrating the functionality provided by the CrowdStrike Incidents API service collection.
 
@@ -399,6 +434,8 @@ This sample demonstrates the following CrowdStrike Incidents API operations:
 | :--- | :--- |
 | [CrowdScore](https://falconpy.io/Service-Collections/Incidents.html#crowdscore) | Query environment wide CrowdScore and return the entity data. |
 
+---
+
 ### Incident Triage
 This example demonstrates triaging Incidents. You can assign / unassign responders, add / remove tags, and change name, description and status of an incident using the [Incident Triage](incidents#incident-triage) utility.
 
@@ -412,6 +449,8 @@ This sample demonstrates the following CrowdStrike Incidents API operations:
 | [PerformIncidentAction](https://falconpy.io/Service-Collections/Incidents.html#performincidentaction) | Perform a set of actions on one or more incidents, such as adding tags or comments or updating the incident name or description. |
 | [GetIncidents](https://falconpy.io/Service-Collections/Incidents.html#getincidents) | Get details on incidents by providing incident IDs. |
 | [QueryIncidents](https://falconpy.io/Service-Collections/Incidents.html#queryincidents) | Search for incidents by providing a FQL filter, sorting, and paging details. |
+
+---
 
 ## Intel
 This category provides samples that demonstrate the CrowdStrike Falcon Intel API service collection.
@@ -433,7 +472,7 @@ This sample demonstrates the following CrowdStrike Intel API operations:
 | [QueryIntelIndicatorEntities](https://falconpy.io/Service-Collections/Intel.html#queryintelindicatorentities) | Get info about indicators that match provided FQL filters. |
 | [QueryIntelReportEntities](https://falconpy.io/Service-Collections/Intel.html#queryintelreportentities) | Get info about reports that match provided FQL filters. |
 
-
+---
 
 ## IOC
 The samples in this section focus on the CrowdStrike IOC API service collection.
@@ -451,6 +490,7 @@ This sample demonstrates the following CrowdStrike IOC API operations:
 | :--- | :--- |
 | [indicator_create_v1](https://falconpy.io/Service-Collections/IOC.html#indicator_create_v1) | Create indicators. |
 
+---
 
 ## MalQuery
 This section is dedicated to the CrowdStrike MalQuery API service collection.
@@ -472,6 +512,8 @@ This sample demonstrates the following CrowdStrike MalQuery API operations:
 | [PostMalQueryEntitiesSamplesMultidownloadV1](https://falconpy.io/Service-Collections/MalQuery.html#postmalqueryentitiessamplesmultidownloadv1) | Schedule samples for download. Use the result id with the /request endpoint to check if the download is ready after which you can call the /entities/samples-fetch to get the zip. |
 | [PostMalQueryFuzzySearchV1](https://falconpy.io/Service-Collections/MalQuery.html#postmalqueryfuzzysearchv1) | Search Falcon MalQuery quickly, but with more potential for false positives. Search for a combination of hex patterns and strings in order to identify samples based upon file content at byte level granularity. |
 
+---
+
 ## Prevention Policy
 The samples in this section demonstrate using CrowdStrike's Prevention Policy API service collection.
 
@@ -492,7 +534,7 @@ This sample demonstrates the following CrowdStrike Prevention Policy API operati
 | [queryPreventionPolicies](https://falconpy.io/Service-Collections/Prevention-Policy.html#querypreventionpolicies) | Search for Prevention Policies in your environment by providing a FQL filter and paging details. Returns a set of Prevention Policy IDs which match the filter criteria. |
 | [updatePreventionPolicies](https://falconpy.io/Service-Collections/Prevention-Policy.html#updatepreventionpolicies) | Update Prevention Policies by specifying the ID of the policy and details to update. |
 
-
+---
 
 ## Real Time Response
 These samples focus on CrowdStrike's Real Time Response and Real Time Response Admin API service collections.
@@ -616,6 +658,8 @@ This sample demonstrates the following CrowdStrike Sensor Download API operation
 | [DownloadSensorInstallerById](https://falconpy.io/Service-Collections/Sensor-Download.html#downloadsensorinstallerbyid) | Get sensor installer details by providing a query. |
 | [GetCombinedSensorInstallersByQuery](https://falconpy.io/Service-Collections/Sensor-Download.html#getcombinedsensorinstallersbyquery) | Download sensor installer by SHA256 ID. |
 
+---
+
 ## Sensor Update Policies
 This section has samples that focus on the CrowdStrike Sensor Update Policies API service collection.
 
@@ -640,6 +684,7 @@ This sample demonstrates the following CrowdStrike Sensor Update Policies API op
 | [setSensorUpdatePoliciesPrecedence](https://falconpy.io/Service-Collections/Sensor-Update-Policy.html#setsensorupdatepoliciesprecedence) | Sets the precedence of Sensor Update Policies based on the order of IDs specified in the request. The first ID specified will have the highest precedence and the last ID specified will have the lowest. You must specify all non-Default Policies for a platform when updating precedence. |
 | [updateSensorUpdatePoliciesV2](https://falconpy.io/Service-Collections/Sensor-Update-Policy.html#updatesensorupdatepolicies) | Update Sensor Update Policies by specifying the ID of the policy and details to update with additional support for uninstall protection. |
 
+---
 
 ## Spotlight
 These samples discuss leveraging the CrowdStrike Spotlight Evaluation Logic and Spotlight Vulnerabilities API service collections.
@@ -675,6 +720,8 @@ This sample demonstrates the following CrowdStrike Spotlight Vulnerability API o
 | :--- | :--- |
 | [queryVulnerabilities](https://falconpy.io/Service-Collections/Spotlight-Vulnerabilities.html#queryvulnerabilities) | Search for Vulnerabilities in your environment by providing a FQL filter and paging details. Returns a set of Vulnerability IDs which match the filter criteria. |
 
+---
+
 ## User Management
 This sample category is focused on examples that leverage CrowdStrike's User Management API service collection.
 
@@ -698,7 +745,7 @@ This sample demonstrates the following CrowdStrike User Management API operation
 | [RetrieveUserUUIDsByCID](https://falconpy.io/Service-Collections/User-Management.html#retrieveuseruuidsbycid) | List user IDs for all users in your customer account. For more information on each user, provide the user ID to [RetrieveUser](https://falconpy.io/Service-Collections/User-Management.html#retrieveuser). |
 | [RevokeUserRoleIds](https://falconpy.io/Service-Collections/User-Management.html#revokeuserroleids) | Revoke one or more roles from a user. |
 
-
+---
 
 
 ## Suggestions
