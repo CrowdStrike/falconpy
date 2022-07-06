@@ -260,7 +260,7 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
                                             )
 
                 returning_content_type = response.headers.get('content-type')
-                if returning_content_type == "application/json":
+                if returning_content_type.startswith("application/json"):
                     content_return = Result()(response.status_code, response.headers, response.json())
                 else:
                     content_return = response.content
