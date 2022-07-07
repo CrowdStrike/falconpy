@@ -32,6 +32,7 @@ from .deprecated import _real_time_response_admin_deprecated
 from .deprecated import _report_executions_deprecated
 from .deprecated import _scheduled_reports_deprecated
 
+from ._alerts import _alerts_endpoints
 from ._cloud_connect_aws import _cloud_connect_aws_endpoints
 from ._cspm_registration import _cspm_registration_endpoints
 from ._custom_ioa import _custom_ioa_endpoints
@@ -81,6 +82,7 @@ from ._user_management import _user_management_endpoints
 from ._zero_trust_assessment import _zero_trust_assessment_endpoints
 
 api_endpoints = []
+api_endpoints.extend(_alerts_endpoints)
 api_endpoints.extend(_cloud_connect_aws_endpoints)
 api_endpoints.extend(_cspm_registration_endpoints)
 api_endpoints.extend(_custom_ioa_endpoints)
