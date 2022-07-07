@@ -258,9 +258,9 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
                                             files=kwargs.get("files", []), verify=kwargs.get("verify", True),
                                             proxies=kwargs.get("proxy", None), timeout=kwargs.get("timeout", None)
                                             )
-
-                returning_content_type = response.headers.get('content-type')
-                if returning_content_type.startswith("application/json"):
+                # Force binary when content-type is not provided
+                returning_content_type = response.headers.get('content-type', "Binary")
+                if returning_content_type.startswith("application/json"):  # Issue 708
                     content_return = Result()(response.status_code, response.headers, response.json())
                 else:
                     content_return = response.content
