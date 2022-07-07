@@ -22,10 +22,11 @@ AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for
 class TestIdentityProtection:
     def idp_graphql(self):
         payload = {"query":"{\n  entities(first: 1)\n  {\n    nodes {\n      entityId    \n    }\n  }\n}"}
-        # GraphQL is sometimes returning results as binary encoded
         result = falcon.GraphQL(body=payload)
         if not isinstance(result, dict):
             result = json.loads(result.decode())
+        else:
+            result = result["body"]
         if "extensions" in result:
             if result["extensions"]["remainingPoints"] > 0:
                 return True
@@ -37,10 +38,11 @@ class TestIdentityProtection:
 
     def idp_graphql_keywords(self):
         test_query = "{\n  entities(first: 1)\n  {\n    nodes {\n      entityId    \n    }\n  }\n}"
-        # GraphQL is sometimes returning results as binary encoded
         result = falcon.graphql(query=test_query)
         if not isinstance(result, dict):
             result = json.loads(result.decode())
+        else:
+            result = result["body"]
         if "extensions" in result:
             if result["extensions"]["remainingPoints"] > 0:
                 return True
@@ -50,10 +52,8 @@ class TestIdentityProtection:
             # Prolly failed login, check yer API key
             return False
 
-    @pytest.mark.skipif(config.base_url != "https://api.crowdstrike.com", reason="Unit testing unavailable on US-2")
     def test_graphql(self):
         assert self.idp_graphql() is True
 
-    @pytest.mark.skipif(config.base_url != "https://api.crowdstrike.com", reason="Unit testing unavailable on US-2")
     def test_graphql_keywords(self):
         assert self.idp_graphql_keywords() is True
