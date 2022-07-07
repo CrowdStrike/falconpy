@@ -476,3 +476,25 @@ def return_preferred_default(method_name: str = None, keyword_type: str = "dict"
             default_return = None
 
     return default_return
+
+
+def base_url_regions():
+    """Return a list of available Base URL regions."""
+    return [bu.name for bu in BaseURL]
+
+
+def autodiscover_region(provided_base_url: str, auth_result: dict):
+    """Autodiscovers the correct region for the token response."""
+    new_base_url = confirm_base_url(provided_base_url)
+    # Swap to the correct region if they've provided the incorrect one
+    if "X-Cs-Region" not in auth_result["headers"]:
+        # GovCloud autodiscovery is not currently supported
+        token_region = confirm_base_region(confirm_base_url(provided_base_url))
+    else:
+        token_region = auth_result["headers"]["X-Cs-Region"].replace("-", "")
+    if token_region.upper() in base_url_regions():
+        requested_region = confirm_base_region(confirm_base_url(provided_base_url))
+        if token_region != requested_region:
+            new_base_url = confirm_base_url(token_region.upper())
+
+    return new_base_url

@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import confirm_base_url, confirm_base_region
+from ._util import confirm_base_url, autodiscover_region
 from .oauth2 import OAuth2
 
 # pylint: disable=R0902  # Nine is reasonable
@@ -152,15 +152,7 @@ class ServiceClass:
                 if self.token_status == 201:
                     self.token = token_result["body"]["access_token"]
                     self.headers = {"Authorization": f"Bearer {self.token}"}
-                    # Swap to the correct region if they've provided the incorrect one
-                    if "X-Cs-Region" not in token_result["headers"]:
-                        # GovCloud autodiscovery is not currently supported
-                        token_region = confirm_base_region(confirmed_base)
-                    else:
-                        token_region = token_result["headers"]["X-Cs-Region"].replace("-", "")
-                    requested_region = confirm_base_region(confirmed_base)
-                    if token_region != requested_region:
-                        self.base_url = confirm_base_url(token_region.upper())
+                    self.base_url = autodiscover_region(confirmed_base, token_result)
                 else:
                     self.token = False
                     self.token_fail_reason = self.auth_object.token_fail_reason
