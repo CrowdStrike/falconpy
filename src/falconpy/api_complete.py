@@ -37,8 +37,15 @@ For more information, please refer to <https://unlicense.org>
 """
 import time
 from ._util import _ALLOWED_METHODS
-from ._util import perform_request, generate_b64cred, generate_error_result
-from ._util import confirm_base_url, args_to_params, confirm_base_region, return_preferred_default
+from ._util import (
+    perform_request,
+    generate_b64cred,
+    generate_error_result,
+    confirm_base_url,
+    args_to_params,
+    return_preferred_default,
+    autodiscover_region,
+    )
 from ._token_fail_reason import TokenFailReason
 from ._endpoint import api_endpoints
 
@@ -167,15 +174,7 @@ class APIHarness:
                 self.token_time = time.time()
                 self.authenticated = True
                 self.token_fail_reason = None
-                # Swap to the correct region if they've provided the incorrect one
-                if "X-Cs-Region" not in result["headers"]:
-                    # GovCloud autodiscovery is not currently supported
-                    token_region = confirm_base_region(confirm_base_url(self.base_url))
-                else:
-                    token_region = result["headers"]["X-Cs-Region"].replace("-", "")
-                requested_region = confirm_base_region(confirm_base_url(self.base_url))
-                if token_region != requested_region:
-                    self.base_url = confirm_base_url(token_region.upper())
+                self.base_url = autodiscover_region(self.base_url, result)
             else:
                 self.authenticated = False
                 self._token_fail_headers = result["headers"]
@@ -257,7 +256,7 @@ class APIHarness:
 
         except IndexError:
             pass  # They didn't specify an action, use the default and try for an override instead
-        uber_command = [a for a in self.commands if a[0] == kwargs["action"]]
+        uber_command = [a for a in self.commands if a[0] == kwargs.get("action", None)]
         if kwargs.get("override", None):
             uber_command = [["Manual"] + kwargs["override"].split(",")]
         if uber_command:
