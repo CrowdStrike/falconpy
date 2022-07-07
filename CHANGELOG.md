@@ -1,3 +1,28 @@
+# Version 1.1.5
+## Added features and functionality
++ Added: New Service Collection - Alerts. Matching Service Class / Uber class functionality. Unit testing expanded to cover new methods.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_alerts.py`
+    - `_payload/__init__.py`
+    - `_payload/_alerts.py`
+    - `alerts.py`
+    - `__init__.py`
+    - `tests/test_alerts.py`
++ Added: Expanded IdentityProtection unit testing to cover `US-2`.
+    - `tests/test_identity_protection.py`
+
+## Issues resolved
++ Fixed: Uber Class override keyword requires a null action parameter. Closes #706.
+    - `api_complete.py`
++ Fixed: Responses containing charset are not parsed as JSON. This impacted responses from the Identity Protection service collection. Closes #708.
+    - `_util.py`
+    - `tests/test_identity_protection.py`
+    - Thanks to @hod-alpert for identifying and resolving this issue!
+
+## Other
++ Moved: Abstracted Cloud Region autodiscovery functionality into a standalone method to reduce code segment size.
+    - `_util.py`
+
 # Version 1.1.4
 ## Added features and functionality
 + Added: New operation - AzureDownloadCertificate (CSPMRegistration)
@@ -28,7 +53,7 @@
 ## Issues resolved
 + Fixed: Docstring typo in `create_rule_group` method (FirewallManagement)
     - `firewall_management.py`
-+ Fixed: Typo in Support values definition for combinedQueryVulnerabilities endpoint definition.
++ Fixed: Typo in supported values definition for combinedQueryVulnerabilities endpoint definition.
     _ `_endpoint/_spotlight_vulnerabilities.py`
 
 # Version 1.1.3
