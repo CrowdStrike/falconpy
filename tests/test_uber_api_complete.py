@@ -156,7 +156,7 @@ class TestUber:
             return False
 
     def uberCCAWS_OverrideAndHeader(self):
-        if falcon.command(action="", override="GET,/cloud-connect-aws/combined/accounts/v1",
+        if falcon.command(override="GET,/cloud-connect-aws/combined/accounts/v1",
                           headers={"Nothing": "Special"})["status_code"] in AllowedResponses:
             return True
         else:
