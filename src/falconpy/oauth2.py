@@ -36,8 +36,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import time
-from ._util import perform_request, generate_b64cred, confirm_base_region
-from ._util import confirm_base_url, generate_error_result
+from ._util import (
+    perform_request,
+    generate_b64cred,
+    confirm_base_url,
+    generate_error_result,
+    autodiscover_region,
+    )
 from ._token_fail_reason import TokenFailReason
 from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
 
@@ -140,15 +145,7 @@ class OAuth2:
                     self.token_time = time.time()
                     self.token_value = returned["body"]["access_token"]
                     self.token_fail_reason = None
-                    # Swap to the correct region if they've provided the incorrect one
-                    if "X-Cs-Region" not in returned["headers"]:
-                        # GovCloud autodiscovery is not currently supported
-                        token_region = confirm_base_region(confirm_base_url(self.base_url))
-                    else:
-                        token_region = returned["headers"]["X-Cs-Region"].replace("-", "")
-                    requested_region = confirm_base_region(confirm_base_url(self.base_url))
-                    if token_region != requested_region:
-                        self.base_url = confirm_base_url(token_region.upper())
+                    self.base_url = autodiscover_region(self.base_url, returned)
                 else:
                     if "errors" in returned["body"]:
                         if returned["body"]["errors"]:
