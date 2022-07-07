@@ -13,7 +13,7 @@ from falconpy import IOC
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = IOC(auth_object=config)
-AllowedResponses = [200, 201, 400, 404, 429]
+AllowedResponses = [200, 201, 400, 403, 404, 429]
 
 
 class TestIOC:
