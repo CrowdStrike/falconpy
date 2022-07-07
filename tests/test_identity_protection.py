@@ -52,8 +52,14 @@ class TestIdentityProtection:
             # Prolly failed login, check yer API key
             return False
 
+    @pytest.mark.skipif(falcon.base_url.lower() in ["https://api.laggar.gcw.crowdstrike.com","usgov1"],
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     def test_graphql(self):
         assert self.idp_graphql() is True
 
+    @pytest.mark.skipif(falcon.base_url.lower() in ["https://api.laggar.gcw.crowdstrike.com","usgov1"],
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     def test_graphql_keywords(self):
         assert self.idp_graphql_keywords() is True
