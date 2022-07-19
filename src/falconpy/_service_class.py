@@ -179,3 +179,12 @@ class ServiceClass:
             result = self.auth_object.token_expired()
 
         return result
+
+    def logout(self):
+        """Force this Service Class object to revoke it's token."""
+        result = self.auth_object.revoke(self.token)
+        if result["status_code"] == 200:
+            self.token = False
+            self.token_status = 0
+            self.token_fail_reason = None
+        return result["status_code"]
