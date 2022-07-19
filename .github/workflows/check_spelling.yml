@@ -8,6 +8,6 @@ jobs:
   spelling:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Check Spelling
       uses: SFLScientific/spellcheck-github-actions@master
