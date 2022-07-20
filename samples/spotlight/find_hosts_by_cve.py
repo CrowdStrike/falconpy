@@ -57,6 +57,7 @@ class SpotlightCVEMatch():  # pylint: disable=R0902
         self.os_version = "Unknown"
         self.service_provider = "Unknown"
         self.remediation = "Not found"
+        self.status = "open"
 
         cve_detail = api_response["cve"]
         if "id" in cve_detail:
@@ -69,6 +70,8 @@ class SpotlightCVEMatch():  # pylint: disable=R0902
             self.created_on = api_response["created_timestamp"]
         if "updated_timestamp" in api_response:
             self.updated_on = api_response["updated_timestamp"]
+        if "status" in api_response:
+            self.status = api_response["status"]
 
         host_detail = hosts.get_device_details(ids=api_response["aid"])["body"]["resources"]
         if host_detail:
@@ -111,6 +114,8 @@ class SpotlightCVEMatch():  # pylint: disable=R0902
         for word in desc.split():
             new_chunk = f"{chunk} {word.strip()}"
             if len(new_chunk) >= col_width:
+                if new_chunk[0] == " ":
+                    new_chunk = new_chunk[1:]
                 desc_chunks.append(new_chunk.strip())
                 chunk = ""
             else:
@@ -186,7 +191,7 @@ def parse_command_line() -> object:
         '--sort',
         help='Sort results by display column.\n'
         "(cve, score, severity, cve_description, created_on, updated_on,\n"
-        "hostname, local_ip, os_version, service_provider, remediation)",
+        "hostname, local_ip, os_version, service_provider, remediation, status)",
         required=False
         )
     parser.add_argument(
@@ -292,7 +297,7 @@ if args.format:
 SORT = "created_on"
 if args.sort:
     sort_types = ["cve", "score", "severity", "cve_description", "created_on", "updated_on",
-                  "hostname", "local_ip", "os_version", "service_provider", "remediation"
+                  "hostname", "local_ip", "os_version", "service_provider", "remediation", "status"
                   ]
     sort_type = args.sort.strip().lower()
     if sort_type in sort_types:
@@ -321,7 +326,8 @@ HEADERS = {
     "local_ip": "IP Address",
     "os_version": "Operating System",
     "service_provider": "Service Provider",
-    "remediation": "Remediation"
+    "remediation": "Remediation",
+    "status": "Status"
 }
 
 # Run the process
