@@ -5,3 +5,4 @@
 The examples within this folder focus on leveraging CrowdStrike's Falcon Flight Control to interact with child hosts.
 
 - [Retrieve child CID](find_child_cid.py)
+- [Execute a command on hosts across multiple children](multicid.py)
