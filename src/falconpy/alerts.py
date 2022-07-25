@@ -201,6 +201,78 @@ class Alerts(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
+    def update_alerts_v2(self: object, *args, body: dict = None, **kwargs) -> dict:
+        """Perform actions on alerts identified by detection ID(s) in request.
+
+        Keyword arguments:
+        action_parameters -- List of dictionaries containing action specific parameter settings.
+        add_tag -- add a tag to 1 or more alert(s). String. Overridden by action_parameters.
+        append_comment -- appends new comment to existing comments. String.
+                          Overridden by action_parameters.
+        assign_to_name -- assign 1 or more alert(s) to a user identified by user name. String.
+                          Overridden by action_parameters.
+        assign_to_user_id -- assign 1 or more alert(s) to a user identified by user id
+                             (eg: user1@example.com). String. Overridden by action_parameters.
+        assign_to_uuid -- assign 1 or more alert(s) to a user identified by UUID. String.
+                          Overridden by action_parameters.
+        body -- full body payload, not required when using other keywords.
+                {
+                    "ids": [
+                        "string"
+                    ],
+                    "action_parameters": [
+                        {
+                            "name": "string",
+                            "value": "string"
+                        }
+                    ]
+                }
+        ids -- ID(s) of the alert to update. String or list of strings.
+        new_behavior_processed -- adds a newly processed behavior to 1 or more alert(s). String.
+                                  Overridden by action_parameters.
+        remove_tag -- remove a tag from 1 or more alert(s). String.
+                      Overridden by action_parameters.
+        remove_tags_by_prefix -- remove tags with given prefix from 1 or more alert(s). String.
+                                 Overridden by action_parameters.
+        show_in_ui -- shows 1 or more alert(s) on UI if set to true, hides otherwise.
+                      An empty/nil value is also valid. Overridden by action_parameters.
+        unassign -- unassign an previously assigned user from 1 or more alert(s).
+                    The value passed to this action is ignored. Overridden by action_parameters.
+        update_status -- update status for 1 or more alert(s). String.
+                         Overridden by action_parameters.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PatchEntitiesAlertsV2
+        """
+        if not body:
+            body = update_alerts_payload(
+                current_payload=generic_payload_list(submitted_arguments=args,
+                                                     submitted_keywords=kwargs,
+                                                     payload_value="ids"
+                                                     ),
+                passed_keywords=kwargs,
+                two=True  # Version two of the payload handler.
+                )
+
+        # Passing action_parameters overrides other keywords
+        if kwargs.get("action_parameters", None):
+            body["action_parameters"] = kwargs.get("action_parameters", None)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="PatchEntitiesAlertsV2",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
     def get_alerts(self: object, *args, body: dict = None, **kwargs) -> dict:
         """Retrieve all Alerts given their IDs.
 
@@ -279,5 +351,6 @@ class Alerts(ServiceClass):
     # backwards compatibility / ease of use purposes
     PostAggregatesAlertsV1 = get_aggregate_alerts
     PatchEntitiesAlertsV1 = update_alerts
+    PatchEntitiesAlertsV2 = update_alerts_v2
     PostEntitiesAlertsV1 = get_alerts
     GetQueriesAlertsV1 = query_alerts
