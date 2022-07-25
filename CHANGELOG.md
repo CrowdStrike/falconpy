@@ -1,3 +1,38 @@
+# Version 1.1.6
+## Added features and functionality
++ Added: New Alerts service collection operation - `PatchEntitiesAlertsV2` (`update_alerts_v2`).
+    - `_endpoint/_alerts.py`
+    - `_payload/_alerts.py`
+    - `alerts.py`
+    - `tests/test_alerts.py`
++ Added: New Service Collection - Mobile Enrollment. Matching Service Class / Uber Class functionality. Unit testing expanded to cover new methods.
+    - `_endpoint/_mobile_enrollment.py`
+    - `mobile_enrollment.py`
+    - `tests/test_mobile_enrollment.py`
++ Added: New User Management service collection operations
+    * combinedUserRolesV1 - `get_user_grants`
+    * get_user_roles - `get_user_grants`
+    * get_user_roles_combined - `get_user_grants`
+    * entitiesRolesV1 - `get_roles_mssp`
+    * userActionV1 - `user_action`
+    * userRolesActionV1 - `user_roles_action`
+    * retrieveUsersGETV1 - `retrieve_users`
+    * createUserV1 - `create_user_mssp`
+    * deleteUserV1 - `delete_user_mssp`
+    * updateUserV1 - `update_user_mssp`
+    * queryRolesV1 - `query_roles`
+    * queriesRolesV1 - `query_roles`
+    * queryUserV1 - `query_users`
+    - `user_management.py`
+    - `tests/test_user_management.py`
+
++ Added: Extended custom headers (`ext_headers`) functionality for Service Classes.
+    - `_service_class.py`
+
+## Issues resolved
++ Added: Alias for `get_online_state_v1`. Closes #739.
+    - `hosts.py`
+
 # Version 1.1.5
 ## Added features and functionality
 + Added: New Service Collection - Alerts. Matching Service Class / Uber class functionality. Unit testing expanded to cover new methods.
