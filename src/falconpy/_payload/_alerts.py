@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 
 
-def update_alerts_payload(current_payload: dict, passed_keywords: dict, two: bool = False) -> dict:
+def update_alerts_payload(current_payload: dict, passed_keywords: dict) -> dict:
     """Update the provided payload with any viable parameters provided as keywords.
 
     {
@@ -65,11 +65,6 @@ def update_alerts_payload(current_payload: dict, passed_keywords: dict, two: boo
             param["value"] = passed_keywords.get(key, None)
             act_params.append(param)
 
-    if two:
-        current_payload["action_parameters"] = act_params
-    else:
-        # Unusual action parameter payload format within the v1 operation
-        current_payload["request"] = {}
-        current_payload["request"]["action_parameters"] = act_params
+    current_payload["action_parameters"] = act_params
 
     return current_payload
