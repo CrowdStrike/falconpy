@@ -21,26 +21,26 @@ class TestDiscover:
     def run_all_tests(self):
         error_checks = True
         check = falcon.query_hosts(limit=1)
+        hosts_id_list = "1234567890"
         if check["status_code"] == 429:
             pytest.skip("Rate limit hit")
-        if check["body"]["resources"]:
-            hosts_id_list = check["body"]["resources"]
-        else:
-            hosts_id_list = "1234567890"
+        if check["status_code"] == 200:
+            if check["body"]["resources"]:
+                hosts_id_list = check["body"]["resources"]
         check = falcon.query_accounts(limit=1)
+        accounts_id_list = "1234567890"
         if check["status_code"] == 429:
             pytest.skip("Rate limit hit")
-        if check["body"]["resources"]:
-            accounts_id_list = check["body"]["resources"]
-        else:
-            accounts_id_list = "1234567890"
+        if check["status_code"] == 200:
+            if check["body"]["resources"]:
+                accounts_id_list = check["body"]["resources"]
         check = falcon.query_logins(limit=1)
+        logins_id_list = "1234567890"
         if check["status_code"] == 429:
             pytest.skip("Rate limit hit")
-        if check["body"]["resources"]:
-            logins_id_list = check["body"]["resources"]
-        else:
-            logins_id_list = "1234567890"
+        if check["status_code"] == 200:
+            if check["body"]["resources"]:
+                logins_id_list = check["body"]["resources"]
         tests = {
             "query_and_get_accounts": falcon.get_accounts(ids=accounts_id_list),
             "query_and_get_hosts": falcon.get_hosts(ids=hosts_id_list),
