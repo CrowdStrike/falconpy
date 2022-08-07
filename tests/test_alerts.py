@@ -54,12 +54,6 @@ class TestAlerts:
                                                       "show_in_ui": False
                                                       }]
                                                   ),
-            "update_alerts_v2": falcon.update_alerts_v2(ids="12345678",
-                                                        show_in_ui=False,
-                                                        action_parameters=[{
-                                                            "show_in_ui": False
-                                                            }]
-                                                        ),
             "get_alerts": falcon.get_alerts(ids="12345678"),
             "query_alerts": falcon.query_alerts()
 
