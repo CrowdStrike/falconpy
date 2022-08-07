@@ -464,6 +464,7 @@ class Hosts(ServiceClass):
     GetDeviceDetails = get_device_details
     QueryHiddenDevices = query_hidden_devices
     GetOnlineState_V1 = get_online_state
+    get_online_state_v1 = get_online_state  # Issue 739  Helper alias
     QueryDevicesByFilterScroll = query_devices_by_filter_scroll
     QueryDevicesByFilter = query_devices_by_filter
     QueryDeviceLoginHistory = query_device_login_history
