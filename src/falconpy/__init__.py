@@ -54,6 +54,7 @@ from .kubernetes_protection import KubernetesProtection
 from .malquery import MalQuery
 from .message_center import MessageCenter
 from .ml_exclusions import MLExclusions
+from .mobile_enrollment import MobileEnrollment
 from .mssp import FlightControl
 from .oauth2 import OAuth2
 from .overwatch_dashboard import OverwatchDashboard
@@ -97,7 +98,7 @@ __all__ = [
     "ScheduledReports", "SensorDownload", "SensorUpdatePolicy", "SensorVisibilityExclusions",
     "SpotlightVulnerabilities", "SpotlightEvaluationLogic", "UserManagement",
     "ZeroTrustAssessment", "PreventionPolicies", "SensorUpdatePolicies", "MessageCenter",
-    "FileVantage"
+    "FileVantage", "MobileEnrollment"
 ]
 """
 This is free and unencumbered software released into the public domain.
