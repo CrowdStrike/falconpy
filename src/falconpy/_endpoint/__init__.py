@@ -60,6 +60,7 @@ from ._kubernetes_protection import _kubernetes_protection_endpoints
 from ._malquery import _malquery_endpoints
 from ._message_center import _message_center_endpoints
 from ._ml_exclusions import _ml_exclusions_endpoints
+from ._mobile_enrollment import _mobile_enrollment_endpoints
 from ._mssp import _mssp_endpoints
 from ._oauth2 import _oauth2_endpoints
 from ._overwatch_dashboard import _overwatch_dashboard_endpoints
@@ -110,6 +111,7 @@ api_endpoints.extend(_kubernetes_protection_endpoints)
 api_endpoints.extend(_malquery_endpoints)
 api_endpoints.extend(_message_center_endpoints)
 api_endpoints.extend(_ml_exclusions_endpoints)
+api_endpoints.extend(_mobile_enrollment_endpoints)
 api_endpoints.extend(_mssp_endpoints)
 api_endpoints.extend(_oauth2_endpoints)
 api_endpoints.extend(_overwatch_dashboard_endpoints)
