@@ -740,3 +740,14 @@ DataType
 Cloner
 charset
 alpert
+queryUserV
+queriesRolesV
+queryRolesV
+updateUserV
+deleteUserV
+createUserV
+retrieveUsersGETV
+userRolesActionV
+userActionV
+entitiesRolesV
+combinedUserRolesV
