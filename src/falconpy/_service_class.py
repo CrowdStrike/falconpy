@@ -70,7 +70,7 @@ class ServiceClass:
                    "member_cid": "CHILD_CID_MSSP_ONLY"
                }
         client_id: Client ID for the CrowdStrike API. Mutually exclusive to creds.
-        client_secret: Client Secret for the CrowdStriek API. Mutually exclusive to creds.
+        client_secret: Client Secret for the CrowdStrike API. Mutually exclusive to creds.
         member_cid: CID of the child account to authenticate to (MSSP only)
         validate_payload: Boolean specifying if body payloads should be validated.
                           Defaults to True.
@@ -79,6 +79,8 @@ class ServiceClass:
         renew_window: Amount of time (in seconds) between now and the token expiration before
                       a refresh of the token is performed. Default: 120, Max: 1200
                       Values over 1200 will be reset to the maximum.
+        ext_headers: Additional headers to be prepended to the default headers dictionary.
+                     Dictionary.
 
         This method only accepts keywords to specify arguments.
         """
@@ -88,6 +90,7 @@ class ServiceClass:
         self.token_renew_window = kwargs.get("renew_window", 120)
         user_agent = kwargs.get("user_agent", None)
         member_cid = kwargs.get("member_cid", None)
+        self.headers = kwargs.get("ext_headers", {})
         # Currently defaulting to validation enabled
         self.validate_payloads = kwargs.get("validate_payloads", True)
         self.refreshable = False
@@ -114,14 +117,13 @@ class ServiceClass:
                 self.token_status = token_result["status_code"]
                 if self.token_status == 201:
                     self.token = token_result["body"]["access_token"]
-                    self.headers = {"Authorization": f"Bearer {self.token}"}
+                    self.headers["Authorization"] = f"Bearer {self.token}"
                 else:
                     self.token = False
                     self.token_fail_reason = self.auth_object.token_fail_reason
-                    self.headers = {}
             else:
                 self.token = self.auth_object.token_value
-                self.headers = {"Authorization": f"Bearer {self.token}"}
+                self.headers["Authorization"] = f"Bearer {self.token}"
 
             self.base_url = auth_object.base_url
             self.ssl_verify = auth_object.ssl_verify
@@ -151,15 +153,14 @@ class ServiceClass:
                 self.token_status = token_result["status_code"]
                 if self.token_status == 201:
                     self.token = token_result["body"]["access_token"]
-                    self.headers = {"Authorization": f"Bearer {self.token}"}
+                    self.headers["Authorization"] = f"Bearer {self.token}"
                     self.base_url = autodiscover_region(confirmed_base, token_result)
                 else:
                     self.token = False
                     self.token_fail_reason = self.auth_object.token_fail_reason
-                    self.headers = {}
                 self.refreshable = True
             else:
-                self.headers = {"Authorization": f"Bearer {access_token}"}
+                self.headers["Authorization"] = f"Bearer {access_token}"
 
             self.proxy = proxy
             self.user_agent = user_agent
