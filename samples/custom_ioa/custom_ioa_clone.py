@@ -21,7 +21,7 @@ r"""Custom IOA duplicator.
                                                  CrowdStrike FalconPy v.1.1
 """
 from argparse import ArgumentParser, RawTextHelpFormatter
-from falconpy import CustomIOA
+from falconpy import CustomIOA, FlightControl
 from tabulate import tabulate
 
 
@@ -82,6 +82,12 @@ def consume_arguments():
                      required=False,
                      default=None
                      )
+    msp = parser.add_argument_group("mssp arguments")
+    msp.add_argument("-m", "--managed_targets",
+                     help="Comma delimited list of children to clone rules to.",
+                     required=False,
+                     default=None
+                     )
     req = parser.add_argument_group("required arguments")
     req.add_argument("-k", "--falcon_client_id",
                      help="CrowdStrike Falcon API Client ID",
@@ -95,9 +101,22 @@ def consume_arguments():
     return parser.parse_args()
 
 
-def open_sdk(client_id: str, client_secret: str, base: str):
-    """Create instances of our the Custom IOA Service Class and return it."""
-    return CustomIOA(client_id=client_id, client_secret=client_secret, base_url=base)
+def open_sdk(client_id: str, client_secret: str, base: str, member_cid: str = None):
+    """Create instances of the Custom IOA Service Class and return it."""
+    init_params = {
+        "client_id": client_id,
+        "client_secret": client_secret,
+        "base_url": base
+    }
+    if member_cid:
+        init_params["member_cid"] = member_cid
+
+    return CustomIOA(**init_params)
+
+
+def open_mssp(client_id: str, client_secret: str, base: str):
+    """Create instances of the Flight Control Service Class and return it."""
+    return FlightControl(client_id=client_id, client_secret=client_secret, base_url=base)
 
 
 def chunk_long_description(desc, col_width) -> str:
@@ -151,7 +170,7 @@ def show_ioas(matches: dict, table_format: str):
             enabled = f"{Color.GREEN}Enabled{Color.END}"
         else:
             enabled = f"{Color.LIGHTRED}Disabled{Color.END}"
-        platform = [f"{match['platform']}",
+        platform = [f"{str(match['platform']).title()}",
                     f"{enabled}",
                     f"Version: {Color.BOLD}{match['version']}{Color.END}"
                     ]
@@ -175,11 +194,11 @@ def show_ioas(matches: dict, table_format: str):
 def duplicate_ioas(sdk: CustomIOA, matches: dict, filter_string: str = None):
     """Duplicate all IOAs that match our provided filter."""
     for rulegroup in matches["body"]["resources"]:
-        create = falcon.create_rule_group(name=f"{rulegroup['name']} clone",
-                                          description=rulegroup["description"],
-                                          comment=f"Cloned from Rule Group {rulegroup['id']}",
-                                          platform=rulegroup["platform"]
-                                          )
+        create = sdk.create_rule_group(name=f"{rulegroup['name']} clone",
+                                       description=rulegroup["description"],
+                                       comment=f"Cloned from Rule Group {rulegroup['id']}",
+                                       platform=rulegroup["platform"]
+                                       )
         create_id = create["body"]["resources"][0]["id"]
         print(f"Cloned rule group {rulegroup['name']} to new rule group {create_id}")
         for rule in rulegroup["rules"]:
@@ -193,7 +212,7 @@ def duplicate_ioas(sdk: CustomIOA, matches: dict, filter_string: str = None):
                 "rulegroup_id": create_id,
                 "ruletype_id": rule["ruletype_id"]
             }
-            rule_create = falcon.create_rule(body=rule_body)
+            rule_create = sdk.create_rule(body=rule_body)
             print(f"Cloned rule to new rule {rule_create['body']['resources'][0]['name']}")
         print(f"Completed clone of rule group {rulegroup['name']}")
 
@@ -232,10 +251,42 @@ if __name__ == "__main__":
     falcon = open_sdk(args.falcon_client_id, args.falcon_client_secret, args.base_url)
     # Retrieve all IOA rule groups matching the provided filter
     ioa_rules = get_ioa_list(falcon, args.filter)
+    DO_MSSP = False
+    if args.managed_targets:
+        parent = open_mssp(args.falcon_client_id, args.falcon_client_secret, args.base_url)
+        kid_lookup = parent.query_children()
+        if "resources" in kid_lookup["body"]:
+            kids = kid_lookup["body"]["resources"]
+            # Only allow MSSP operations if child lookups work (i.e. this API key has MSSP access).
+            DO_MSSP = True
+
     if args.clone:
         if args.filter:
-            # Clone any rule groups that match our filter
-            ioa_rules = duplicate_ioas(falcon, ioa_rules, args.filter)
+            if DO_MSSP:
+                SHOWN = False
+                # We're dealing with a MSSP scenario
+                for target in str(args.managed_targets).split(","):
+                    if target in kids:
+                        # Identify the output list as the children IOAs with a banner
+                        if not SHOWN:
+                            print(f"\n{Color.BOLD}{Color.LIGHTBLUE}Child IOA rules{Color.END}")
+                            SHOWN = True
+
+                        # Only work in children we've confirmed we have access to
+                        print(f"Working in CID: {Color.BOLD}{target}{Color.END}")
+                        target_api = open_sdk(args.falcon_client_id,
+                                              args.falcon_client_secret,
+                                              args.base_url,
+                                              member_cid=target
+                                              )
+                        # Clone any rule groups that match our filter and show the result
+                        show_ioas(duplicate_ioas(target_api,
+                                                 ioa_rules,
+                                                 args.filter
+                                                 ), args.table_format)
+            else:
+                # Clone any rule groups that match our filter
+                ioa_rules = duplicate_ioas(falcon, ioa_rules, args.filter)
         else:
             # Prevent them from cloning every IOA rule group within the tenant
             fail_msg = f"{Color.YELLOW}You must specify a filter in order to clone rule groups"
@@ -243,7 +294,22 @@ if __name__ == "__main__":
                 f"\n{Color.BOLD}[{Color.LIGHTRED}400{Color.END}{Color.BOLD}] {fail_msg}{Color.END}"
             )
     if args.delete:
-        # Delete any rule groups with IDs in the provided ID list
-        ioa_rules = delete_ioas(falcon, args.delete, args.filter)
+        if DO_MSSP:
+            # Delete rules in a child. Only one child may be targeted at a time.
+            # Multiple rules within the child may be deleted using a comma delimited list.
+            # Only allow deletes in children we have access to by checking the kids array.
+            if args.managed_targets in kids:
+                print(f"\n{Color.BOLD}{Color.LIGHTBLUE}Child IOA rules{Color.END}")
+                target_api = open_sdk(args.falcon_client_id,
+                                      args.falcon_client_secret,
+                                      args.base_url,
+                                      member_cid=args.managed_targets
+                                      )
+                show_ioas(delete_ioas(target_api, args.delete, args.filter), args.table_format)
+        else:
+            # Delete any rule groups with IDs in the provided ID list
+            ioa_rules = delete_ioas(falcon, args.delete, args.filter)
+    if DO_MSSP:
+        print(f"\n{Color.BOLD}{Color.LIGHTBLUE}Parent IOA rules{Color.END}")
     # Display all IOA rule group matches in tabular format
     show_ioas(ioa_rules, args.table_format)
