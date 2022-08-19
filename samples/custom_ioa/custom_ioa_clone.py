@@ -256,6 +256,12 @@ if __name__ == "__main__":
         parent = open_mssp(args.falcon_client_id, args.falcon_client_secret, args.base_url)
         kid_lookup = parent.query_children()
         if "resources" in kid_lookup["body"]:
+            kid_detail = {}
+            if kid_lookup["body"]["resources"]:
+                child_detail = parent.get_children(ids=kid_lookup["body"]["resources"])
+                if "resources" in child_detail["body"]:
+                    for child in child_detail["body"]["resources"]:
+                        kid_detail[child["child_cid"]] = child["name"]
             kids = kid_lookup["body"]["resources"]
             # Only allow MSSP operations if child lookups work (i.e. this API key has MSSP access).
             DO_MSSP = True
@@ -271,9 +277,9 @@ if __name__ == "__main__":
                         if not SHOWN:
                             print(f"\n{Color.BOLD}{Color.LIGHTBLUE}Child IOA rules{Color.END}")
                             SHOWN = True
-
+                        child_name = f" ({kid_detail.get(target, '')})"
                         # Only work in children we've confirmed we have access to
-                        print(f"Working in CID: {Color.BOLD}{target}{Color.END}")
+                        print(f"Working in CID: {Color.BOLD}{target}{Color.END}{child_name}")
                         target_api = open_sdk(args.falcon_client_id,
                                               args.falcon_client_secret,
                                               args.base_url,
