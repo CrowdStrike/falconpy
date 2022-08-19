@@ -5,6 +5,8 @@
 # Custom IOA examples
 The examples in this folder focus on leveraging CrowdStrike's Custom IOA API to manage Indicators of Attack within your Falcon Tenant.
 
+> This solution supports MSSP scenarios and can clone rules to and delete rules from children.
+
 - [Custom IOA Cloner](#custom-ioa-cloner) - Clone, delete and display Custom IOA rule groups.
 
 ## Custom IOA Cloner
@@ -27,7 +29,9 @@ This demonstration was developed to leverage easy to use command-line arguments.
 - [Basic usage](#basic-usage)
 - [Filtering by name](#filtering-by-name)
 - [Cloning IOA rule groups](#cloning-ioa-rule-groups)
+- [Cloning IOA rule groups to a child](#cloning-ioa-rule-groups-to-a-child)
 - [Deleting IOA rule groups](#deleting-ioa-rule-groups)
+- [Deleting IOA rule groups within a child](#deleting-ioa-rule-groups-within-a-child)
 - [Command-line help](#command-line-help)
 
 
@@ -42,7 +46,8 @@ This program accepts the following command line arguments.
 | `-t` _TABLE_FORMAT_ | `--table_format` _TABLE_FORMAT_ | Table format to use for display, one of: <BR/>`plain`, `simple`, `github`, `grid`, `fancy_grid`, `pipe`, `orgtbl`, `jira`, `presto`, `pretty`, `psql`, `rst`, `mediawiki`, `moinmoin`, `youtrack`, `html`, `unsafehtml`, `latext`, `latex_raw`, `latex_booktabs`, `latex_longtable`, `textile`, or `tsv`. |
 | `-f` _FILTER_ | `--filter` _FILTER_ | String to filter results (IOA rule group name) |
 | `-c` | `--clone` | Clone all IOA rule group matches to new rule groups |
-| `-d` DELETE | `--delete` DELETE | List of rule group IDs to delete (comma-delimit) |
+| `-d` _DELETE_LIST_ | `--delete` _DELETE_LIST_ | List of rule group IDs to delete (comma-delimit) |
+| `-m` _MANAGED_TARGETS_ | `--managed_targets` _MANAGED_TARGETS_ | List of child CIDs to target for cloning / deletions (comma-delimit) |
 | `-k` _FALCON_CLIENT_ID_ | `--falcon_client_id` _FALCON_CLIENT_ID_ | CrowdStrike Falcon API Client ID |
 | `-s` _FALCON_CLIENT_SECRET_ | `--falcon_client_secret` _FALCON_CLIENT_SECRET_ | CrowdStrike Falcon API Client Secret |
 
@@ -102,6 +107,13 @@ Cloning IOA rule groups can be performed by passing the `-c` argument. Any match
 python3 custom_ioa_clone.py -k CLIENT_ID_HERE -s CLIENT_SECRET_HERE -f SEARCH_STRING -c
 ```
 
+#### Cloning IOA rule groups to a child
+Cloning IOA rule groups to a child can be performed by passing the `-c` argument along with the `-m` argument. Any matches to the filter string (`-f`) are cloned into valid children specified within the comma delimited list provided.
+
+```shell
+python3 custom_ioa_clone.py -k CLIENT_ID_HERE -s CLIENT_SECRET_HERE -f SEARCH_STRING -c -m TARGET_CID_1,TARGET_CID_2
+```
+
 #### Deleting IOA rule groups
 You must provide the exact rule group ID in order to delete using the `-d` argument. Multiple IDs may be specified at the
 same time if you provide these as a comma-delimited list.
@@ -110,11 +122,18 @@ same time if you provide these as a comma-delimited list.
 python3 custom_ioa_clone.py -k CLIENT_ID_HERE -s CLIENT_SECRET_HERE -d RULE_GROUP_ID1,RULE_GROUP_ID2
 ```
 
+#### Deleting IOA rule groups within a child
+You may delete rule groups from within a single child by passing the child CID with the `-m` argument. You must provide the exact rule group ID in order to delete using the `-d` argument. Multiple IDs may be specified at the same time if you provide these as a comma-delimited list.
+
+```shell
+python3 custom_ioa_clone.py -k CLIENT_ID_HERE -s CLIENT_SECRET_HERE -m TARGET_CID_1 -d RULE_GROUP_ID1,RULE_GROUP_ID2
+```
+
 #### Command-line help
 Command-line help is available via the `-h` argument.
 
 ```shell
-usage: custom_ioa_clone.py [-h] [-n] [-b BASE_URL] [-t TABLE_FORMAT] [-f FILTER] [-c] [-d DELETE] [-k FALCON_CLIENT_ID] [-s FALCON_CLIENT_SECRET]
+usage: custom_ioa_clone.py [-h] [-n] [-b BASE_URL] [-t TABLE_FORMAT] [-f FILTER] [-c] [-d DELETE] [-m MANAGED_TARGETS] [-k FALCON_CLIENT_ID] [-s FALCON_CLIENT_SECRET]
 
 Custom IOA duplicator.
 
@@ -154,6 +173,10 @@ action arguments:
   -c, --clone           Clone all IOA rule group matches to new rule groups
   -d DELETE, --delete DELETE
                         List of rule group IDs to delete (comma-delimit)
+
+mssp arguments:
+  -m MANAGED_TARGETS, --managed_targets MANAGED_TARGETS
+                        Comma delimited list of children to clone rules to.
 
 required arguments:
   -k FALCON_CLIENT_ID, --falcon_client_id FALCON_CLIENT_ID
