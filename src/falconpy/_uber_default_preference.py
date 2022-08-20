@@ -36,5 +36,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 PREFER_NONETYPE = [
-    "report_executions_download_get", "report_executions_download.get"
+    "report_executions_download_get", "report_executions_download.get",
+    "RTR_ListFiles", "RTR_ListFilesV2"
 ]
