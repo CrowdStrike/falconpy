@@ -279,7 +279,7 @@ if __name__ == "__main__":
     args = parse_command_line()
       
     if args.client_secret is None:
-        args.cliet_id = getpass.getpass("ClientSecret: ") 
+        args.cliet_secret = getpass.getpass("ClientSecret: ") 
     
     BASE = "auto"
     if args.base_url:
