@@ -31,6 +31,7 @@ With permissions:
 """
 import argparse
 import csv
+import getpass
 try:
     from falconpy import Hosts
 except ImportError as no_falconpy:
@@ -276,6 +277,13 @@ if __name__ == "__main__":
         ]
 
     args = parse_command_line()
+    
+    if args.client_id is None:
+        args.cliet_id = getpass.getpass("ClientID: ") 
+        
+    if args.client_secret is None:
+        args.cliet_id = getpass.getpass("ClientSecret: ") 
+    
     BASE = "auto"
     if args.base_url:
         BASE = args.base_url
