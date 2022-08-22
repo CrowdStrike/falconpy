@@ -277,10 +277,7 @@ if __name__ == "__main__":
         ]
 
     args = parse_command_line()
-    
-    if args.client_id is None:
-        args.cliet_id = getpass.getpass("ClientID: ") 
-        
+      
     if args.client_secret is None:
         args.cliet_id = getpass.getpass("ClientSecret: ") 
     
