@@ -56,7 +56,7 @@ def parse_command_line() -> object:
         "-s",
         "--client_secret",
         help="CrowdStrike Falcon API key secret",
-        required=True
+        required=False
     )
     parser.add_argument(
         "-b",
@@ -277,10 +277,10 @@ if __name__ == "__main__":
         ]
 
     args = parse_command_line()
-      
+
     if args.client_secret is None:
-        args.cliet_secret = getpass.getpass("ClientSecret: ") 
-    
+        args.client_secret = getpass.getpass("ClientSecret: ") 
+
     BASE = "auto"
     if args.base_url:
         BASE = args.base_url
