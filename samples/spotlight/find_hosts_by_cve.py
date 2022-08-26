@@ -73,7 +73,11 @@ class SpotlightCVEMatch():  # pylint: disable=R0902
         if "status" in api_response:
             self.status = api_response["status"]
 
-        host_detail = hosts.get_device_details(ids=api_response["aid"])["body"]["resources"]
+        host_detail = []
+        detail_lookup = hosts.get_device_details(ids=api_response["aid"])
+        if "resources" in detail_lookup["body"]:
+            host_detail = detail_lookup["body"]["resources"]
+
         if host_detail:
             for host in host_detail:
                 if "hostname" in host:
