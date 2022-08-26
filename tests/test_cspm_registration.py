@@ -95,8 +95,8 @@ class TestCSPMRegistration:
     def test_get_aws_console_setup_urls(self):
         """Pytest harness hook"""
         assert bool(falcon.GetCSPMAwsConsoleSetupURLs()["status_code"] in AllowedResponses) is True
-    @pytest.mark.skipif(os.getenv("DEBUG_API_BASE_URL", "us1").lower() in ["https://api.eu-1.crowdstrike.com", "eu1"],
-                        reason="Unit testing unavailable on EU-1"
+    @pytest.mark.skipif(os.getenv("DEBUG_API_BASE_URL", "us1").lower() in ["https://api.eu-1.crowdstrike.com", "eu1", "https://api.us-2.crowdstrike.com", "us2"],
+                        reason="Unit testing unavailable on US-2 / EU-1"
                         )
     def test_get_aws_account_scripts_attachment(self):
         """Pytest harness hook"""
