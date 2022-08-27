@@ -25,6 +25,7 @@ from ._version import _DOCS_URL, _KEYWORDS
 from ._service_class import ServiceClass
 from ._util import confirm_base_region, confirm_base_url
 from ._base_url import BaseURL
+from ._container_base_url import ContainerBaseURL
 from .alerts import Alerts
 from .api_complete import APIHarness
 from .cloud_connect_aws import CloudConnectAWS
@@ -98,7 +99,7 @@ __all__ = [
     "ScheduledReports", "SensorDownload", "SensorUpdatePolicy", "SensorVisibilityExclusions",
     "SpotlightVulnerabilities", "SpotlightEvaluationLogic", "UserManagement",
     "ZeroTrustAssessment", "PreventionPolicies", "SensorUpdatePolicies", "MessageCenter",
-    "FileVantage", "MobileEnrollment"
+    "FileVantage", "MobileEnrollment", "ContainerBaseURL"
 ]
 """
 This is free and unencumbered software released into the public domain.
