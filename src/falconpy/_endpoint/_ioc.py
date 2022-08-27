@@ -58,14 +58,6 @@ _ioc_endpoints = [
         "in": "query"
       },
       {
-        "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination "
-        "of results. On your first request, don't provide an `after` token. On subsequent requests, "
-        "provide the `after` token from the previous response to continue from that place in the results.",
-        "name": "after",
-        "in": "query"
-      },
-      {
         "type": "integer",
         "description": "The maximum records to return.",
         "name": "limit",
@@ -148,13 +140,13 @@ _ioc_endpoints = [
         "in": "header"
       },
       {
-        "type": "bool",
+        "type": "boolean",
         "description": "Whether to submit to retrodetects",
         "name": "retrodetects",
         "in": "query"
       },
       {
-        "type": "bool",
+        "type": "boolean",
         "default": False,
         "description": "Set to true to ignore warnings and add all IOCs",
         "name": "ignore_warnings",
@@ -181,13 +173,13 @@ _ioc_endpoints = [
         "in": "header"
       },
       {
-        "type": "bool",
+        "type": "boolean",
         "description": "Whether to submit to retrodetects",
         "name": "retrodetects",
         "in": "query"
       },
       {
-        "type": "bool",
+        "type": "boolean",
         "default": False,
         "description": "Set to true to ignore warnings and add all IOCs",
         "name": "ignore_warnings",
