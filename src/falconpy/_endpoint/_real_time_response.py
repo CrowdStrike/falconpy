@@ -84,6 +84,16 @@ _real_time_response_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "default": "tiny bit less than overall request timeout",
+        "description": "Timeout duration for how long a host has time to complete processing. "
+        "Default value is a bit less than the overall timeout value. It cannot be greater than "
+        "the overall request timeout. Maximum is < 10 minutes. "
+        "Example, `10s`. Valid units: `ns, us, ms, s, m, h`. ",
+        "name": "host_timeout_duration",
+        "in": "query"
+      },
+      {
         "description": "Use this endpoint to run these [real time response commands]"
         "(https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands):"
         "\n- `cat`\n- `cd`\n- `clear`\n- `cp`\n- `encrypt`\n- `env`\n- `eventlog`\n- `filehash`\n- "
@@ -124,6 +134,16 @@ _real_time_response_endpoints = [
         "description": "Timeout duration for for how long to wait for the request in duration syntax. "
         "Example, `10s`. Valid units: `ns, us, ms, s, m, h`. Maximum is 10 minutes.",
         "name": "timeout_duration",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "tiny bit less than overall request timeout",
+        "description": "Timeout duration for how long a host has time to complete processing. "
+        "Default value is a bit less than the overall timeout value. It cannot be greater than "
+        "the overall request timeout. Maximum is < 10 minutes. "
+        "Example, `10s`. Valid units: `ns, us, ms, s, m, h`. ",
+        "name": "host_timeout_duration",
         "in": "query"
       },
       {
@@ -201,6 +221,16 @@ _real_time_response_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "default": "tiny bit less than overall request timeout",
+        "description": "Timeout duration for how long a host has time to complete processing. "
+        "Default value is a bit less than the overall timeout value. It cannot be greater than "
+        "the overall request timeout. Maximum is < 10 minutes. "
+        "Example, `10s`. Valid units: `ns, us, ms, s, m, h`. ",
+        "name": "host_timeout_duration",
+        "in": "query"
+      },
+      {
         "description": "**`batch_id`** Batch ID to execute the command on.  "
         "Received from `/real-time-response/combined/init-sessions/v1`.\n**`file_path`** "
         "Full path to the file that is to be retrieved from each host in the batch.\n**`optional_hosts`** "
@@ -234,6 +264,16 @@ _real_time_response_endpoints = [
         "description": "Timeout duration for for how long to wait for the request in duration syntax. "
         "Example, `10s`. Valid units: `ns, us, ms, s, m, h`. Maximum is 10 minutes.",
         "name": "timeout_duration",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "tiny bit less than overall request timeout",
+        "description": "Timeout duration for how long a host has time to complete processing. "
+        "Default value is a bit less than the overall timeout value. It cannot be greater than "
+        "the overall request timeout. Maximum is < 10 minutes. "
+        "Example, `10s`. Valid units: `ns, us, ms, s, m, h`. ",
+        "name": "host_timeout_duration",
         "in": "query"
       },
       {
