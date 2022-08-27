@@ -10,8 +10,6 @@
 
 OAuth2 API - Customer SDK
 
-_endpoint._d4c_registration - Internal API endpoint constant library
-
 This is free and unencumbered software released into the public domain.
 
 Anyone is free to copy, modify, publish, use, compile, sell, or
