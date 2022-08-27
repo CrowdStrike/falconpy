@@ -113,6 +113,20 @@ _hosts_endpoints = [
   ],
   [
     "GetDeviceDetails",
+    "POST",
+    "/devices/entities/devices/v2",
+    "Get details on one or more hosts by providing host IDs in a POST body.  Supports up to a maximum 5000 IDs.",
+    "hosts",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetDeviceDetailsV1",
     "GET",
     "/devices/entities/devices/v1",
     "Get details on one or more hosts by providing agent IDs (AID). You can get a host's agent IDs "
@@ -128,6 +142,41 @@ _hosts_endpoints = [
         "description": "The host agentIDs used to get details on",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetDeviceDetailsV2",
+    "GET",
+    "/devices/entities/devices/v2",
+    "Get details on one or more hosts by providing host IDs as a query parameter.  Supports up to a maximum 100 IDs.",
+    "hosts",
+    [
+      {
+        "maxItems": 100,
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The host agentIDs used to get details on",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "PostDeviceDetailsV2",
+    "POST",
+    "/devices/entities/devices/v2",
+    "Get details on one or more hosts by providing host IDs in a POST body.  Supports up to a maximum 5000 IDs.",
+    "hosts",
+    [
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
