@@ -180,7 +180,7 @@ class Hosts(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_device_details(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_device_details_v1(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get details on one or more hosts by providing agent IDs (AID).
 
         You can get a host's agent IDs (AIDs) from query_devices_by_filter,
@@ -203,9 +203,98 @@ class Hosts(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="GetDeviceDetails",
+            operation_id="GetDeviceDetailsV1",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_device_details_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get details on one or more hosts by providing agent IDs (AID).
+
+        You can get a host's agent IDs (AIDs) from query_devices_by_filter,
+        the Falcon console or the Streaming API. Supports up to a maximum of 100 IDs.
+
+        For most scenarios, developers should leverage the 'get_device_details' method
+        (PostDeviceDetailsV2 operation) instead of this method.
+
+        Keyword arguments:
+        ids -- AID(s) of the hosts to retrieve. String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/GetDeviceDetailsV2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetDeviceDetailsV2",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def get_device_details(self: object,
+                           *args,
+                           body: dict = None,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> dict:
+        """Get details on one or more hosts by providing agent IDs (AID).
+
+        You can get a host's agent IDs (AIDs) from query_devices_by_filter,
+        the Falcon console or the Streaming API. Supports up to a maximum of 5000 IDs.
+
+        FOR DEVELOPERS: This Operation ID is `PostDeviceDetailsV2`, and is the preferred method
+        for retrieving device details from the API. In order to assist developers leveraging the
+        legacy GetDeviceDetails operation, this method has been updated to handle IDs passed as
+        a query string parameter, allowing for legacy aliases and methods to be redirected to this
+        new method.
+
+        Keyword arguments:
+        body -- full body payload, not required if ids is provided as a keyword.
+        ids -- AID(s) of the hosts to retrieve. String or list of strings.
+        parameters - full parameters payload, ignored unless this is the only location of the
+                     'ids' list. Should not be used.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/PostDeviceDetailsV2
+        """
+        # Catch any IDs passed as arguments, will be discarded if a body payload is provided
+        parameters = handle_single_argument(args, parameters, "ids")
+
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+            # Try to gracefully catch IDs passed incorrectly as a query string parameter
+            if parameters:
+                if "ids" in parameters and "ids" not in body:
+                    body["ids"] = parameters["ids"]
+
+        if "ids" in body:
+            # Make sure the provided ids are a properly formatted list
+            if isinstance(body["ids"], str):
+                body["ids"] = body["ids"].split(",")
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="PostDeviceDetailsV2",
+            keywords=kwargs,
+            body=body
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -461,11 +550,16 @@ class Hosts(ServiceClass):
     # backwards compatibility / ease of use purposes
     PerformActionV2 = perform_action
     UpdateDeviceTags = update_device_tags
-    GetDeviceDetails = get_device_details
+    GetDeviceDetails = get_device_details  # v1.2 - Now redirects to PostDeviceDetailsV2
+    GetDeviceDetailsV1 = get_device_details_v1
+    GetDeviceDetailsV2 = get_device_details_v2
+    PostDeviceDetailsV2 = get_device_details
     QueryHiddenDevices = query_hidden_devices
     GetOnlineState_V1 = get_online_state
     get_online_state_v1 = get_online_state  # Issue 739  Helper alias
     QueryDevicesByFilterScroll = query_devices_by_filter_scroll
     QueryDevicesByFilter = query_devices_by_filter
+    QueryDevices = query_devices_by_filter_scroll
+    query_devices = query_devices_by_filter_scroll
     QueryDeviceLoginHistory = query_device_login_history
     QueryGetNetworkAddressHistoryV1 = query_network_address_history
