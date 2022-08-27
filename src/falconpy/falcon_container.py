@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import process_service_request
+from ._util import process_service_request, force_default
 from ._service_class import ServiceClass
 from ._endpoint._falcon_container import _falcon_container_endpoints as Endpoints
 
@@ -56,14 +56,24 @@ class FalconContainer(ServiceClass):
     def get_credentials(self: object) -> dict:
         """Retrieve the registry credentials.
 
-        This method does not accept arguments or keywords.
-
-        Returns: dict object containing API response.
-
         HTTP Method: GET
 
         Swagger URL
+        ----
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container/GetCredentials
+
+        Keyword arguments
+        ----
+        This method does not accept keyword arguments.
+
+        Arguments
+        ----
+        This method does not accept arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
         """
         return process_service_request(
             calling_object=self,
@@ -71,7 +81,113 @@ class FalconContainer(ServiceClass):
             operation_id="GetCredentials"
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_assessment(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve an assessment report for an image by specifying repository and tag.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        This operation does not exist in swagger.
+
+        Keyword arguments
+        ----
+        repository : str (required)
+            Repository where the image resides.
+        parameters : str (JSON)
+            Full parameters payload in JSON string format. Not required if using keywords.
+        tag : str (required)
+            Tag used for the image assessed.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetImageAssessmentReport",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    def delete_image_details(self: object, *args, image_id: str = None) -> dict:
+        """Delete image details from the CrowdStrike registry.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        ----
+        This operation does not exist in swagger.
+
+        Keyword arguments
+        ----
+        image_id : str (required)
+            ID of the image to delete details for.
+
+        Arguments
+        ----
+        When not specified, the first argument to this method is assumed
+        to be 'image_id'. All others are ignored.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        if args:
+            image_id = args[0]
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteImageDetails",
+            image_id=image_id
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def image_matches_policy(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Check if an image matches a policy by specifying repository and tag.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        This operation does not exist in swagger.
+
+        Keyword arguments
+        ----
+        repository : str (required)
+            Repository where the image resides.
+        parameters : str (JSON)
+            Full parameters payload in JSON string format. Not required if using keywords.
+        tag : str (required)
+            Tag used for the image assessed.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        parameters["policy_type"] = "image-prevention-policy"
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ImageMatchesPolicy",
+            keywords=kwargs,
+            params=parameters
+            )
+
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here for
     # backwards compatibility / ease of use purposes
     GetCredentials = get_credentials
+    GetImageAssessmentReport = get_assessment
+    DeleteImageDetails = delete_image_details
+    ImageMatchesPolicy = image_matches_policy
