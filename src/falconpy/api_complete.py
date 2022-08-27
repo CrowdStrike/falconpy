@@ -46,6 +46,9 @@ from ._util import (
     return_preferred_default,
     autodiscover_region,
     )
+from ._base_url import BaseURL
+from ._container_base_url import ContainerBaseURL
+from ._uber_default_preference import PREFER_IDS_IN_BODY, MOCK_OPERATIONS
 from ._token_fail_reason import TokenFailReason
 from ._endpoint import api_endpoints
 
@@ -221,7 +224,57 @@ class APIHarness:
 
         return payload
 
-    def command(self: object, *args, **kwargs):
+    @staticmethod
+    def _handle_partition(tgt: str, kwa: dict):
+        if kwa.get("partition", None) is not None:
+            # Partition needs to be embedded into the endpoint URL
+            tgt = tgt.format(str(kwa.get("partition", None)))
+        return tgt
+
+    @staticmethod
+    def _handle_distinct_field(tgt: str, kwa: dict):
+        if kwa.get("distinct_field", None) is not None:
+            # distinct_field also needs to be embedded into the endpoint URL
+            tgt = tgt.format(str(kwa.get("distinct_field", None)))
+        return tgt
+
+    @staticmethod
+    def _handle_container_image_id(tgt: str, kwa: dict):
+        if kwa.get("image_id", None) is not None:
+            # container image ID also needs to be embedded into the endpoint URL
+            tgt = tgt.format(str(kwa.get("image_id", None)))
+        return tgt
+
+    @staticmethod
+    def _handle_body_payload_ids(kwa: dict):
+        if kwa.get("action", None) in PREFER_IDS_IN_BODY:
+            if kwa.get("ids", None):
+                # Handle the GET to POST method redirection for passed IDs
+                if not kwa.get("body", {}).get("ids", None):
+                    if "body" not in kwa:
+                        kwa["body"] = {}
+                    kwa["body"]["ids"] = kwa["ids"]
+            # Handle any body payload ID lists that are still strings
+            if isinstance(kwa.get("body", {}).get("ids", {}), str):
+                kwa["body"]["ids"] = kwa["body"]["ids"].split(",")
+        return kwa
+
+    def _handle_container_operations(self, kwa: dict, base_string: str):
+        """Handle Base URLs and keyword arguments for container registry operations."""
+        # Default to non-container registry operations
+        do_container = False
+        if kwa.get("action", None) in MOCK_OPERATIONS:
+            for base in [burl for burl in dir(BaseURL) if "__" not in burl]:
+                if BaseURL[base].value == self.base_url.replace("https://", ""):
+                    base_string = f"https://{ContainerBaseURL[base].value}"
+                    do_container = True
+            if kwa.get("action", None) == "ImageMatchesPolicy":
+                if "parameters" not in kwa:
+                    kwa["parameters"] = {}
+                kwa["parameters"]["policy_type"] = "image-prevention-policy"
+        return kwa, base_string, do_container
+
+    def command(self: object, *args, **kwargs) -> dict or bytes:
         """Uber Class API command method.
 
         Checks token expiration, renewing when necessary, then performs the request.
@@ -241,6 +294,7 @@ class APIHarness:
         file_name: str = None                               - Name of the file to upload
         content_type: str = None                            - Content_Type HTTP header
         expand_result: bool = False                         - Request expanded results (Tuple)
+        image_id: str = None                                - Container image ID (Falcon Container only)
 
         The first argument passed to this method is assumed to be 'action'. All others are ignored.
 
@@ -249,25 +303,32 @@ class APIHarness:
         if self.token_expired():
             # Authenticate them if we can
             self.authenticate()
+
         try:
             if not kwargs.get("action", None):
                 # Assume they're passing it in as the first param
                 kwargs["action"] = args[0]
-
         except IndexError:
             pass  # They didn't specify an action, use the default and try for an override instead
+
         uber_command = [a for a in self.commands if a[0] == kwargs.get("action", None)]
         if kwargs.get("override", None):
             uber_command = [["Manual"] + kwargs["override"].split(",")]
         if uber_command:
-            # Retrieve the endpoint URL from the command list
-            target = f"{self.base_url}{uber_command[0][2]}"
-            if kwargs.get("partition", None) is not None:
-                # Partition needs to be embedded into the endpoint URL
-                target = target.format(str(kwargs.get("partition", None)))
-            if kwargs.get("distinct_field", None) is not None:
-                # distinct_field also needs to be embedded into the endpoint URL
-                target = target.format(str(kwargs.get("distinct_field", None)))
+            # Retrieve our default base URL
+            url_base = self.base_url
+            # Alter keywords and base URL if we are performing a container registry operation
+            kwargs, url_base, container = self._handle_container_operations(kwargs, url_base)
+            # Retrieve the endpoint URL from the command list and append to our base URL
+            target = f"{url_base}{uber_command[0][2]}"
+            # Container image ID
+            target = self._handle_container_image_id(target, kwargs)
+            # Partition
+            target = self._handle_partition(target, kwargs)
+            # Distinct field
+            target = self._handle_distinct_field(target, kwargs)
+            # Handle any IDs that are in the wrong payload
+            kwargs = self._handle_body_payload_ids(kwargs)
             # Check for authentication
             if self.authenticated:
                 # Which HTTP method to execute
@@ -292,7 +353,8 @@ class APIHarness:
                                                proxy=self.proxy,
                                                timeout=self.timeout,
                                                user_agent=self.user_agent,
-                                               expand_result=kwargs.get("expand_result", False)
+                                               expand_result=kwargs.get("expand_result", False),
+                                               container=container
                                                )
                 else:
                     # Bad HTTP method
