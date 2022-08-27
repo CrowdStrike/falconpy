@@ -9,6 +9,7 @@
 [![Release date](https://img.shields.io/github/release-date/CrowdStrike/falconpy)](https://github.com/CrowdStrike/falconpy/releases)
 [![Repo status](https://img.shields.io/osslifecycle/crowdstrike/falconpy?label=repo%20status)](https://github.com/CrowdStrike/falconpy/graphs/code-frequency)
 [![Commit activity](https://img.shields.io/github/commits-since/CrowdStrike/falconpy/latest)](https://github.com/CrowdStrike/falconpy/commits/main)
+![GitHub forks](https://img.shields.io/github/forks/crowdstrike/falconpy)
 
 The FalconPy SDK contains a collection of Python classes that abstract CrowdStrike Falcon OAuth2 API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
 
@@ -26,7 +27,8 @@ The CrowdStrike Falcon SDK for Python completely abstracts token management, whi
 > 
 > _"One SDK to rule them all, One SDK to find them, One SDK to bring them all and in the darkness bind them."_
 
-[![PyPI - Downloads](https://img.shields.io/pypi/dm/crowdstrike-falconpy)](https://pypistats.org/packages/crowdstrike-falconpy)
+[![Downloads](https://static.pepy.tech/personalized-badge/crowdstrike-falconpy?left_text=package%20installs/month&left_color=gray&right_color=blue&period=month)](https://pepy.tech/project/crowdstrike-falconpy)
+[![Development Installs](https://static.pepy.tech/personalized-badge/crowdstrike-falconpy-dev?left_text=development%20package%20installs/month&left_color=gray&right_color=blue&period=month)](https://pepy.tech/project/crowdstrike-falconpy-dev)
 
 #### Supported versions of Python
 The CrowdStrike Falcon SDK for Python was developed for Python 3, and does not support versions of Python below 3.6. Every commit to the FalconPy code base is unit tested for functionality using all versions of Python the library currently supports.
@@ -77,6 +79,7 @@ For each CrowdStrike Falcon API service collection, a matching Service Class is 
 
 | Service Collection | Code Location | Class Name |
 |:-| :-| :-|
+| CrowdStrike Alerts | [alerts.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/alerts.py) | [Alerts](https://www.falconpy.io/Service-Collections/Alerts.html) |
 | CrowdStrike Device Control | [device_control_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/device_control_policies.py) | [DeviceControlPolicies](https://www.falconpy.io/Service-Collections/Device-Control-Policies.html) |
 | CrowdStrike Custom Indicators of Attack (IOAs) | [custom_ioa.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/custom_ioa.py) <br/> [ioa_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ioa_exclusions.py)| [CustomIOA](https://www.falconpy.io/Service-Collections/Custom-IOA.html)<BR/>[IOAExclusions](https://www.falconpy.io/Service-Collections/IOA-Exclusions.html) |
 | CrowdStrike Custom Indicators of Compromise (IOCs) | [ioc.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ioc.py) <BR/> [iocs.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/iocs.py) <small>*Deprecated*</small> | [IOC](https://www.falconpy.io/Service-Collections/IOC.html)<BR/>[Iocs](https://www.falconpy.io/Service-Collections/IOCs.html) |
@@ -102,6 +105,7 @@ For each CrowdStrike Falcon API service collection, a matching Service Class is 
 | CrowdStrike MalQuery | [malquery.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/malquery.py) | [MalQuery](https://www.falconpy.io/Service-Collections/MalQuery.html) |
 | CrowdStrike Message Center | [message_center.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/message_center.py) | [MessageCenter](https://www.falconpy.io/Service-Collections/Message-Center.html) |
 | CrowdStrike ML Exclusions | [ml_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ml_exclusions.py) | [MLExclusions](https://www.falconpy.io/Service-Collections/Ml-Exclusions.html) |
+| CrowdStrike Mobile Enrollment | [mobile_enrollment.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/mobile_enrollment.py) | [Mobile Enrollment](https://www.falconpy.io/Service-Collections/Mobile-Enrollment.html) |
 | CrowdStrike OAuth2 Auth Token | [oauth2.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/oauth2.py) | [OAuth2](https://www.falconpy.io/Service-Collections/OAuth2.html) |
 | CrowdStrike Overwatch Dashboard | [overwatch_dashboard.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/overwatch_dashboard.py) | [OverwatchDashboard](https://www.falconpy.io/Service-Collections/Overwatch-Dashboard.html) |
 | CrowdStrike Prevention Policy | [prevention_policy.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/prevention_policy.py) | [PreventionPolicy](https://www.falconpy.io/Service-Collections/Prevention-Policy.html) |
