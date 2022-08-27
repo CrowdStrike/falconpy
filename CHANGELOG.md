@@ -1,3 +1,54 @@
+# Version 1.2.0
+## Added features and functionality
++ Updated: Updated operation payload parameter datatype details.
+    - `_endpoint/_ioc.py`
+    - `_endpoint/_recon.py`
+    - `_endpoint/_sample_uploads.py`
+
++ Updated: Updated operation payload parameter data location details.
+    - `_endpoint/_falconx_sandbox.py`
+    - `_endpoint/_sample_uploads.py`
+
++ Added: New `host_timeout_duration` parameter to `BatchActiveResponderCmd`, `BatchCmd`, `BatchGetCmd` and `BatchInitSessions` operations within the Real Time Response Service Collection.
+    - `_endpoint/_real_time_response.py`
+
++ Added: New `GetDeviceDetailsV2` and `PostDeviceDetailsV2` operations to Hosts Service Collection.
+    > The operation `GetDeviceDetails` is now deprecated, and will eventually be removed from the CrowdStrike API. Due to backwards compatibility considerations, and the added functionality provided by the new endpoint, FalconPy will continue to support this operation ID by redirecting requests to `PostDeviceDetailsV2`. IDs that are provided in incorrect payload destinations due to the differences between a GET and POST operation are migrated to the appropriate dictionary before the request is made. This solution is implemented within the Hosts Service Class (`GetDeviceDetails`, `get_device_details`) and within the Uber Class. Developers __must__ upgrade installations to FalconPy v1.2.0 to benefit from this new functionality. __Administrators and end users are strongly urged to consider upgrading to v1.2.0 before this endpoint is removed.__
+    - `_endpoint/_hosts.py`
+    - `_uber_default_preference.py`
+    - `api_complete.py`
+    - `hosts.py`
+    - `tests/test_get_device_details.py`
+
++ Added: Falcon Container registry functionality to Falcon Container Service Class.
+    > This solution implements three "mock" operation IDs; `GetImageAssessmentReport` (`get_assessment`), `DeleteImageDetails` (`delete_image_details`), and `ImageMatchesPolicy` (`image_matches_policy`). All mocked operations are available from both the Service and Uber classes. The Falcon Container Registry base URL is calculated based upon the base URL used for authentication.
+    - `_endpoint/_falcon_container.py`
+    - `__init__.py`
+    - `_container_base_url.py`
+    - `_uber_default_preference.py`
+    - `_util.py`
+    - `api_complete.py`
+    - `falcon_container.py`
+    - `tests/test_falcon_container.py`
+
+## Issues resolved
++ Fixed: Default NoneType preference for body payloads sent to the `RTR_ListFiles` and `RTR_ListFilesV2` operations. Closes #750.
+    - `_uber_default_preference.py`
+
++ Removed: Unused header payload parameters from operation payloads.
+    - `_endpoint/_falconx_sandbox.py`
+    - `_endpoint/_firewall_management.py`
+    - `_endpoint/_recon.py`
+    - `_endpoint/_report_executions.py`
+    - `_endpoint/_sample_uploads.py`
+
++ Removed: Duplicate parameter definition (`after`) from `indicator_combined_v1` operation.
+    - `_endpoint/_ioc.py`
+
+## Other
++ Updated: Comment updates.
+    - `_endpoint/_d4c_registration.py`
+
 # Version 1.1.6
 ## Added features and functionality
 + Added: New Alerts service collection operation - `PatchEntitiesAlertsV2` (`update_alerts_v2`).
