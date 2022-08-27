@@ -39,3 +39,9 @@ PREFER_NONETYPE = [
     "report_executions_download_get", "report_executions_download.get",
     "RTR_ListFiles", "RTR_ListFilesV2"
 ]
+PREFER_IDS_IN_BODY = [
+    "GetDeviceDetails", "PostDeviceDetailsV2"
+]
+MOCK_OPERATIONS = [
+    "GetImageAssessmentReport", "DeleteImageDetails", "ImageMatchesPolicy"
+]
