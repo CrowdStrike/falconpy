@@ -185,13 +185,6 @@ _firewall_management_endpoints = [
     "firewall_management",
     [
       {
-        "type": "string",
-        "description": "The user id",
-        "name": "X-CS-USERNAME",
-        "in": "header",
-        "required": True
-      },
-      {
         "name": "body",
         "in": "body",
         "required": True
@@ -225,13 +218,6 @@ _firewall_management_endpoints = [
     "Create new rule group on a platform for a customer with a name and description, and return the ID",
     "firewall_management",
     [
-      {
-        "type": "string",
-        "description": "The user id",
-        "name": "X-CS-USERNAME",
-        "in": "header",
-        "required": True
-      },
       {
         "type": "string",
         "description": "A rule group ID from which to copy rules. "
@@ -268,13 +254,6 @@ _firewall_management_endpoints = [
     [
       {
         "type": "string",
-        "description": "The user id",
-        "name": "X-CS-USERNAME",
-        "in": "header",
-        "required": True
-      },
-      {
-        "type": "string",
         "description": "Audit log comment for this action",
         "name": "comment",
         "in": "query"
@@ -293,13 +272,6 @@ _firewall_management_endpoints = [
     "Delete rule group entities by ID",
     "firewall_management",
     [
-      {
-        "type": "string",
-        "description": "The user id",
-        "name": "X-CS-USERNAME",
-        "in": "header",
-        "required": True
-      },
       {
         "type": "array",
         "items": {
