@@ -59,12 +59,6 @@ _recon_endpoints = [
     "recon",
     [
       {
-        "type": "string",
-        "description": "User UUID",
-        "name": "X-CS-USERUUID",
-        "in": "header"
-      },
-      {
         "name": "body",
         "in": "body",
         "required": True
@@ -260,12 +254,6 @@ _recon_endpoints = [
     "recon",
     [
       {
-        "type": "string",
-        "description": "User UUID",
-        "name": "X-CS-USERUUID",
-        "in": "header"
-      },
-      {
         "type": "array",
         "items": {
           "type": "string"
@@ -286,12 +274,6 @@ _recon_endpoints = [
     "recon",
     [
       {
-        "type": "string",
-        "description": "User UUID",
-        "name": "X-CS-USERUUID",
-        "in": "header"
-      },
-      {
         "name": "body",
         "in": "body",
         "required": True
@@ -306,12 +288,6 @@ _recon_endpoints = [
     "recon",
     [
       {
-        "type": "string",
-        "description": "User UUID",
-        "name": "X-CS-USERUUID",
-        "in": "header"
-      },
-      {
         "name": "body",
         "in": "body",
         "required": True
@@ -325,12 +301,6 @@ _recon_endpoints = [
     "Delete monitoring rules.",
     "recon",
     [
-      {
-        "type": "string",
-        "description": "User UUID",
-        "name": "X-CS-USERUUID",
-        "in": "header"
-      },
       {
         "type": "array",
         "items": {
@@ -435,20 +405,16 @@ _recon_endpoints = [
     "recon",
     [
       {
-        "type": "string",
-        "description": "User UUID",
-        "name": "X-CS-USERUUID",
-        "in": "header"
-      },
-      {
-        "type": "string",
+        "type": "integer",
         "description": "Starting index of overall result set from which to return ids.",
         "name": "offset",
         "in": "query"
       },
       {
+        "maximum": 500,
+        "minimum": 1,
         "type": "integer",
-        "description": "Number of ids to return.",
+        "description": "Number of IDs to return. Offset + limit should NOT be above 10K.",
         "name": "limit",
         "in": "query"
       },
