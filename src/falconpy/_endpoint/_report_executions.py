@@ -61,19 +61,6 @@ _report_executions_endpoints = [
     "report_executions",
     [
       {
-        "type": "string",
-        "description": "The user id",
-        "name": "X-CS-USERID",
-        "in": "header"
-      },
-      {
-        "type": "string",
-        "description": "The user uuid",
-        "name": "X-CS-USERUUID",
-        "in": "header",
-        "required": True
-      },
-      {
         "name": "body",
         "in": "body",
         "required": True
