@@ -46,19 +46,13 @@ _sample_uploads_endpoints = [
     [
       {
         "type": "string",
-        "description": "User UUID",
-        "name": "X-CS-USERUUID",
-        "in": "header"
-      },
-      {
-        "type": "string",
         "description": "The file SHA256.",
         "name": "ids",
         "in": "query",
         "required": True
       },
       {
-        "type": "string",
+        "type": "boolean",
         "default": False,
         "description": "Flag whether the sample should be zipped and password protected with pass='infected'",
         "name": "password_protected",
@@ -73,12 +67,6 @@ _sample_uploads_endpoints = [
     "Upload a file for further cloud analysis. After uploading, call the specific analysis API endpoint.",
     "sample_uploads",
     [
-      {
-        "type": "string",
-        "description": "User UUID",
-        "name": "X-CS-USERUUID",
-        "in": "header"
-      },
       {
         "description": "Content of the uploaded sample in binary format. For example, use `--data-binary "
         "@$FILE_PATH` when using cURL. Max file size: 100 MB.\n\nAccepted file formats:\n\n- Portable "
@@ -104,14 +92,14 @@ _sample_uploads_endpoints = [
         "type": "string",
         "description": "Name of the file.",
         "name": "file_name",
-        "in": "query",
+        "in": "formData",
         "required": True
       },
       {
         "type": "string",
         "description": "A descriptive comment to identify the file for other users.",
         "name": "comment",
-        "in": "query"
+        "in": "formData"
       },
       {
         "type": "boolean",
@@ -120,7 +108,7 @@ _sample_uploads_endpoints = [
         "Falcon console.\n\n- `true`: File is only shown to users within your customer account\n- `false`: "
         "File can be seen by other CrowdStrike customers \n\nDefault: `true`.",
         "name": "is_confidential",
-        "in": "query"
+        "in": "formData"
       }
     ]
   ],
@@ -131,12 +119,6 @@ _sample_uploads_endpoints = [
     "Removes a sample, including file, meta and submissions from the collection",
     "sample_uploads",
     [
-      {
-        "type": "string",
-        "description": "User UUID",
-        "name": "X-CS-USERUUID",
-        "in": "header"
-      },
       {
         "type": "string",
         "description": "The file SHA256.",
