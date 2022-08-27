@@ -44,5 +44,68 @@ _falcon_container_endpoints = [
     "Gets the registry credentials",
     "falcon_container",
     []
+  ],
+  [
+    "GetImageAssessmentReport",
+    "GET",
+    "/reports",
+    "Retrieves the Assessment report for the Image ID provided.",
+    "falcon_container",
+    [
+      {
+        "type": "string",
+        "description": "The repository the image resides within.",
+        "name": "repository",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The image tag.",
+        "name": "tag",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeleteImageDetails",
+    "DELETE",
+    "/images/{}",
+    "Delete Images by ids.",
+    "falcon_container",
+    [
+      {
+        "type": "string",
+        "description": "The ID of the image to be deleted.",
+        "name": "image_id",
+        "in": "path",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ImageMatchesPolicy",
+    "GET",
+    "/policy-checks",
+    "After an image scan, use this operation to see if any images match a policy. If deny is true,"
+    " the policy suggestion is that you do not deploy the image in your environment.",
+    "falcon_container",
+    [
+      {
+        "type": "string",
+        "description": "The repository the image resides within.",
+        "name": "repository",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The image tag.",
+        "name": "tag",
+        "in": "query",
+        "required": True
+      }
+    ]
   ]
 ]
