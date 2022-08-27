@@ -44,7 +44,8 @@ from urllib3.exceptions import InsecureRequestWarning
 from ._version import _TITLE, _VERSION
 from ._result import Result, ExpandedResult
 from ._base_url import BaseURL
-from ._uber_default_preference import PREFER_NONETYPE
+from ._container_base_url import ContainerBaseURL
+from ._uber_default_preference import PREFER_NONETYPE, MOCK_OPERATIONS
 urllib3.disable_warnings(InsecureRequestWarning)
 
 # Restrict requests to only allowed HTTP methods
@@ -195,8 +196,8 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
     Keyword arguments:
     method: str - HTTP method to use when communicating with the API
         - Example: GET, POST, PATCH, DELETE or UPDATE
-    endpoint: str - API endpoint, do not include the URL base
-        - Example: /oauth2/revoke
+    endpoint: str - API endpoint, including the URL base
+        - Example: https://api.crowdstrike.com/oauth2/revoke
     headers: dict - HTTP headers to send to the API
         - Example: {"AdditionalHeader": "AdditionalValue"}
     params: dict - HTTP query string parameters to send to the API
@@ -223,6 +224,8 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
         - Example: companyname-integrationname/version
     expand_result: bool - Enable expanded results output
         - Example: True
+    container: bool - Is this request being sent to a Falcon Container registry endpoint
+        - Example: False
     """
     method = kwargs.get("method", "GET")
     body = kwargs.get("body", None)
@@ -261,6 +264,8 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
                 # Force binary when content-type is not provided
                 returning_content_type = response.headers.get('content-type', "Binary")
                 if returning_content_type.startswith("application/json"):  # Issue 708
+                    content_return = Result()(response.status_code, response.headers, response.json())
+                elif kwargs.get("container", False):
                     content_return = Result()(response.status_code, response.headers, response.json())
                 else:
                     content_return = response.content
@@ -371,7 +376,7 @@ def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epnam
     return returned_payload
 
 
-def process_service_request(calling_object: object,
+def process_service_request(calling_object: object,  # pylint: disable=R0914 # (19/15)
                             endpoints: list,
                             operation_id: str,
                             **kwargs
@@ -392,12 +397,20 @@ def process_service_request(calling_object: object,
     files -- List of files to be uploaded.
     partition -- ID of the partition to open (Event Streams API)
     distinct_field -- Field name to retrieve distinct values for (Sensor Update Policies API)
+    image_id -- Image ID to be deleted (Falcon Container API)
     body_validator -- Dictionary containing details regarding body payload validation
     body_required -- List of required body payload parameters
     expand_result -- Request expanded results output
     """
     target_endpoint = [ep for ep in endpoints if operation_id == ep[0]][0]
-    target_url = f"{calling_object.base_url}{target_endpoint[2]}"
+    base_url = calling_object.base_url
+    container = False
+    if operation_id in MOCK_OPERATIONS:
+        for base in [burl for burl in dir(BaseURL) if "__" not in burl]:
+            if BaseURL[base].value == calling_object.base_url.replace("https://", ""):
+                base_url = f"https://{ContainerBaseURL[base].value}"
+                container = True
+    target_url = f"{base_url}{target_endpoint[2]}"
     target_method = target_endpoint[1]
     passed_partition = kwargs.get("partition", None)
     if passed_partition or isinstance(passed_partition, int):
@@ -405,6 +418,9 @@ def process_service_request(calling_object: object,
     passed_distinct_field = kwargs.get("distinct_field", None)
     if passed_distinct_field:
         target_url = target_url.format(str(passed_distinct_field))
+    passed_image_id = kwargs.get("image_id", None)
+    if passed_image_id:
+        target_url = target_url.format(str(passed_image_id))
     # Retrieve our keyword arguments
     passed_keywords = kwargs.get("keywords", None)
     passed_params = kwargs.get("params", None)
@@ -425,7 +441,8 @@ def process_service_request(calling_object: object,
         "files": kwargs.get("files", None),
         "body_validator": kwargs.get("body_validator", None),
         "body_required": kwargs.get("body_required", None),
-        "expand_result": expand_result
+        "expand_result": expand_result,
+        "container": container
     }
 
     return service_request(**new_keywords)
