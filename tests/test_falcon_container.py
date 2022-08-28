@@ -3,6 +3,7 @@ test_falcon_container.py - This class tests the falcon_container service class
 """
 import os
 import sys
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -44,6 +45,9 @@ class TestFalconContainer:
         """Pytest harness hook"""
         assert bool(falcon.get_credentials()["status_code"] in AllowedResponses) is True
 
+    @pytest.mark.skipif(os.getenv("DEBUG_API_BASE_URL", "us1").lower() in ["https://api.eu-1.crowdstrike.com", "eu1", "https://api.laggar.gcw.crowdstrike.com", "usgov1"],
+                        reason="Unit testing unavailable on US-GOV-1 / EU-1"
+                        )
     def test_remaining_code_paths(self):
         """Pytest harness hook"""
         assert self.run_tests() is True
