@@ -9,7 +9,12 @@
 TARGET=""
 if ! [ -z "$1" ]
 then
-	TARGET="tests/test_$1.py"	
+    if [[ $1 == *"manual"* ]]
+    then
+        TARGET="tests/manual/test_${1/manual\//}.py"
+    else
+    	TARGET="tests/test_$1.py"	
+    fi
 fi
 
 coverage run --rcfile=util/coverage.config -m pytest -s -v $TARGET
