@@ -35,5 +35,5 @@ jobs:
         CROSS_DEBUG_KEY: ${{ secrets.CROSS_DEBUG_KEY }}
         CROSS_DEBUG_SECRET: ${{ secrets.CROSS_DEBUG_SECRET }}
       run: |
-        coverage run --source=src --omit=src/falconpy/debug.py -m pytest -s
+        coverage run --source=src --omit=src/falconpy/debug.py -m pytest -s --ignore-glob=**/manual/*
         coverage report
