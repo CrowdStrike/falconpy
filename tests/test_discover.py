@@ -3,6 +3,7 @@ test_discover.py - This class tests the Discover service class
 """
 import os
 import sys
+import platform
 import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
@@ -55,6 +56,6 @@ class TestDiscover:
 
         return error_checks
 
-    @pytest.mark.skipif(sys.version_info.minor < 10, reason="Frequency reduced due to potential race condition")
+    @pytest.mark.skipif(platform.system() != "Darwin", reason="Frequency reduced due to potential race condition")
     def test_all_functionality(self):
         assert self.run_all_tests() is True
