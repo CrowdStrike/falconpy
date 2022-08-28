@@ -141,6 +141,8 @@ class TestHosts:
             "perform_action_params": falcon.PerformActionV2(body={}, parameters={'action_name': 'PooF'})["status_code"],
             "perform_action_null": falcon.PerformActionV2(body={}, parameters={})["status_code"],
             "get_device_details": falcon.GetDeviceDetails(ids='12345678')["status_code"],
+            "get_device_detailsv1": falcon.GetDeviceDetailsV1(ids='12345678')["status_code"],
+            "get_device_detailsv2": falcon.GetDeviceDetailsV2(ids='12345678')["status_code"],
             "query_hidden_devices": falcon.QueryHiddenDevices()["status_code"],
             "query_devices_by_filter_scroll": falcon.QueryDevicesByFilterScroll()["status_code"],
             "query_devices_by_filter": falcon.QueryDevicesByFilter()["status_code"],

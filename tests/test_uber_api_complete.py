@@ -162,6 +162,13 @@ class TestUber:
         else:
             return False
 
+    def uberContainer_TestBodyIDsPayload(self):
+        successful = False
+        if falcon.command("GetDeviceDetails", ids="12345678")["status_code"] in AllowedResponses:
+            successful = True
+
+        return successful
+
     def uberCCAWS_TestMSSP(self):
         if falcon.command("QueryDetects", limit=1)["status_code"] == 429:
             pytest.skip("Rate limit hit")
@@ -298,6 +305,9 @@ class TestUber:
         assert bool(
             falcon.command("report_executions_download_get", ids="1234567890")["status_code"] in AllowedResponses
         ) is True
+
+    def test_ContainerBodyIDPayload(self):
+        assert self.uberContainer_TestBodyIDsPayload() is True
 
     def test_GenerateActionNameError(self):
         assert self.uberCCHosts_GenerateActionNameError(params=None) is True
