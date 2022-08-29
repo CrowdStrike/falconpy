@@ -168,10 +168,10 @@ class UserManagement(ServiceClass):
         body : str
             Full body payload in JSON format, not required when using other keywords.
                 {
-                    "action": [{
+                    "action": {
                         "action_name": "string",
                         "action_value": "string"
-                    }],
+                    },
                     "ids": [
                         "string"
                     ]

@@ -48,6 +48,8 @@
 ## Other
 + Updated: Comment updates.
     - `_endpoint/_d4c_registration.py`
++ Updated: Fixed docstring typo within `userActionV1` operation. Closes #763.
+    - `user_management.py`
 
 # Version 1.1.6
 ## Added features and functionality
