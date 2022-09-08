@@ -70,6 +70,14 @@ class TestGetDeviceDetails:
                 returned = True
         return returned
 
+    def alias_pep_syntax(self):
+        """Test the new PostDeviceDetailsV2 operation using PEP 8 syntax."""
+        returned = False
+        if self.get_a_device_id():
+            if self.valid_status_code(falcon.post_device_details_v2(ids=DEVICE_ID)):
+                returned = True
+        return returned
+
     def redirected_pep_syntax(self):
         """Tests PEP 8 syntax variations using the newly redirected method."""
         returned = self.get_a_device_id()
@@ -140,6 +148,10 @@ class TestGetDeviceDetails:
     def test_new_pep_syntax(self):
         """Pytest harness hook."""
         assert self.new_pep_syntax() is True
+
+    def test_alias_pep_syntax(self):
+        """Pytest harness hook."""
+        assert self.alias_pep_syntax() is True
 
     def test_redirected_opid_syntax(self):
         """Pytest harness hook."""
