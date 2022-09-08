@@ -554,6 +554,7 @@ class Hosts(ServiceClass):
     GetDeviceDetailsV1 = get_device_details_v1
     GetDeviceDetailsV2 = get_device_details_v2
     PostDeviceDetailsV2 = get_device_details
+    post_device_details_v2 = get_device_details
     QueryHiddenDevices = query_hidden_devices
     GetOnlineState_V1 = get_online_state
     get_online_state_v1 = get_online_state  # Issue 739  Helper alias
