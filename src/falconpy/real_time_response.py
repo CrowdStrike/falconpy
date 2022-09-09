@@ -159,6 +159,10 @@ class RealTimeResponse(ServiceClass):
                         Refer to the RTR documentation for the full list of commands.
         batch_id -- Batch ID to execute the command on. Received from batch_init_session. String.
         command_string -- Full command string for the command. For example `get some_file.txt`.
+        host_timeout_duration -- Timeout duration for how long a host has time to complete processing.
+                                 Default value is a bit less than the overall timeout value.
+                                 It cannot be greater than the overall request timeout. Maximum is < 10 minutes.
+                                 Example, `10s`. Valid units: `ns, us, ms, s, m, h`.
         optional_hosts -- List of a subset of hosts we want to run the command on.
                           If this list is supplied, only these hosts will receive the command.
         parameters -- full parameters payload in JSON format. Not required if using other keywords.
@@ -210,6 +214,10 @@ class RealTimeResponse(ServiceClass):
                         Refer to the RTR documentation for the full list of commands.
         batch_id -- Batch ID to execute the command on. Received from batch_init_session. String.
         command_string -- Full command string for the command. For example `get some_file.txt`.
+        host_timeout_duration -- Timeout duration for how long a host has time to complete processing.
+                                 Default value is a bit less than the overall timeout value.
+                                 It cannot be greater than the overall request timeout. Maximum is < 10 minutes.
+                                 Example, `10s`. Valid units: `ns, us, ms, s, m, h`.
         optional_hosts -- List of a subset of hosts we want to run the command on.
                           If this list is supplied, only these hosts will receive the command.
         parameters -- full parameters payload in JSON format. Not required if using other keywords.
@@ -296,6 +304,10 @@ class RealTimeResponse(ServiceClass):
 
         batch_id -- Batch ID to execute the command on. Received from batch_init_session. String.
         file_path -- Full path to the file that is to be retrieved from each host in the batch.
+        host_timeout_duration -- Timeout duration for how long a host has time to complete processing.
+                                 Default value is a bit less than the overall timeout value.
+                                 It cannot be greater than the overall request timeout. Maximum is < 10 minutes.
+                                 Example, `10s`. Valid units: `ns, us, ms, s, m, h`.
         optional_hosts -- List of a subset of hosts we want to run the command on.
                           If this list is supplied, only these hosts will receive the command.
         parameters -- full parameters payload in JSON format. Not required if using other keywords.
@@ -349,6 +361,10 @@ class RealTimeResponse(ServiceClass):
         existing_batch_id -- Optional batch ID. Use an existing batch ID if you want to
                              initialize new hosts and add them to the existing batch. String.
         host_ids -- List of host agent ID's to initialize a RTR session on. List of strings.
+        host_timeout_duration -- Timeout duration for how long a host has time to complete processing.
+                                 Default value is a bit less than the overall timeout value.
+                                 It cannot be greater than the overall request timeout. Maximum is < 10 minutes.
+                                 Example, `10s`. Valid units: `ns, us, ms, s, m, h`.
         queue_offline -- Boolean indicating if the command should be queued for execution when
                          the host returns online.
         parameters -- full parameters payload in JSON format. Not required if using other keywords.
