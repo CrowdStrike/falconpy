@@ -120,7 +120,9 @@ class Incidents(ServiceClass):
     def perform_incident_action(self: object, body: dict = None, **kwargs) -> dict:
         """Perform a set of actions on one or more incidents.
 
-        Such as: adding tags or comments or updating the incident name or description.
+        Such as: adding tags or updating the incident name or description.
+
+        A maximum of 5000 incidents may be updated per request.
 
         Keyword arguments:
         action_parameters -- Action specific parameters. List of dictionaries.
