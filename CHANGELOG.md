@@ -1,3 +1,20 @@
+# Version 1.2.1
+## Added features and functionality
++ Added: Added alias for `post_device_details_v2` to Hosts Service Class. Closes #773.
+    - `hosts.py`
+    - `tests/manual/test_get_device_details.py`
+
+## Issues resolved
++ Fixed: Typo in docstring for `perform_incident_action` method. Closes #776.
+    - `incidents.py`
++ Fixed: Added `host_timeout_duration` documentation to docstrings within operations in the Real Time Response Service Class.
+    - `real_time_response.py`
+
+## Other
++ Updated: Adjusted unit testing to cover new API returns.
+    - `tests/falcon_container.py`
+    - `tests/kubernetes_protection.py`
+
 # Version 1.2.0
 ## Added features and functionality
 + Updated: Updated operation payload parameter datatype details.
