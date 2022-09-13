@@ -91,7 +91,7 @@ host_groups_to_migrate = get_host_group_matches(parent_groups, args.hostgroup_fi
 for child in children:
     creds["member_cid"] = child  # Set member_cid in the credentials dictionary
     print(f"Tenant ID: {child}")
-    groups = HostGroup(creds=creds)
+    groups = HostGroup(creds=creds, base_url=args.region)
     # Loop through all groups returned that match our filter
     for group in host_groups_to_migrate:
         # Create the group
