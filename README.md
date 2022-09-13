@@ -174,7 +174,13 @@ Once installed, you can immediately begin using CrowdStrike functionality in you
 """CrowdStrike FalconPy Quick Start."""
 from falconpy import Hosts
 
-hosts = Hosts(client_id="CROWDSTRIKE_API_CLIENT_ID", client_secret="CROWDSTRIKE_API_SECRET")
+# Use the API Clients and Keys page within your Falcon console to generate credentials.
+# You will need to assign the Hosts: READ scope to your client to run this example.
+
+# CrowdStrike does not recommend you hardcode credentials within source code.
+# Instead, provide these values as variables that are retrieved from the environment,
+# read from a file, provided at runtime, etc.
+hosts = Hosts(client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
 
 SEARCH_FILTER = "hostname-search-string"
 
