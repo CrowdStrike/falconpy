@@ -71,6 +71,7 @@ This has been a critical element in the development of the FalconPy project.
 + `@micgoetz`
 + Hod Alpert, `@hod-alpert`
 + `@mwilco03`
++ Glenn, `@hiddenillusion`
 
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
