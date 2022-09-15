@@ -111,7 +111,13 @@ class ServiceClass:
                 # existing value in the creds dictionary
                 creds["member_cid"] = member_cid
         if auth_object:
+            # Assume they've passed us an OAuth2 object
             self.auth_object = auth_object
+            if not isinstance(auth_object, OAuth2):
+                # If they didn't, look for one as an attribute to the object they provided.
+                for attr in [x for x in dir(auth_object) if "__" not in x]:
+                    if attr == "auth_object":
+                        self.auth_object = auth_object.auth_object
             if not self.authenticated():
                 token_result = self.auth_object.token()
                 self.token_status = token_result["status_code"]
