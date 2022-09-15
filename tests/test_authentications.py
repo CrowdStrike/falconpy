@@ -149,6 +149,20 @@ class TestAuthentications:
         else:
             return False
 
+    def serviceAny_TestEasyObjectAuth(self):
+        auth_obj = ZeroTrustAssessment(client_id=auth.config["falcon_client_id"],
+                          client_secret=auth.config["falcon_client_secret"]
+                          )
+        #auth_obj.token()
+        # Test passing just the service class object, not the auth_object attribute
+        # Service Class base object should detect and handle this.
+        falcon = CloudConnectAWS(auth_object=auth_obj)
+        result = falcon.QueryAWSAccounts()
+        if result["status_code"] in AllowedResponses:
+            return True
+        else:
+            return False
+
     def test_BadCredentialAuth(self):
         assert self.serviceAny_TestCredentialAuthFailure() is True
 
@@ -157,6 +171,9 @@ class TestAuthentications:
 
     def test_StaleObjectAuth(self):
         assert self.serviceAny_TestStaleObjectAuth() is True
+
+    def test_EasyObjectAuth(self):
+        assert self.serviceAny_TestEasyObjectAuth() is True
 
     def test_BadObjectAuth(self):
         assert self.serviceAny_TestBadObjectAuth() is True
