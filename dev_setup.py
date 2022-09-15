@@ -96,6 +96,7 @@ emojis = [
 for emoji in emojis:
     LONG_DESCRIPTION = LONG_DESCRIPTION.replace(emoji, "")
 
+LONG_DESCRIPTION = LONG_DESCRIPTION.replace("from falconpy import", "from falconpydev import")
 
 setup(
     name=project_title,
