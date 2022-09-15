@@ -20,6 +20,10 @@ These packages are released on a regular cadence based upon the [code review](ht
 ## Development Package (__crowdstrike-falconpy-dev__)
 The development package for FalconPy is released from the [__dev__](https://github.com/CrowdStrike/falconpy/tree/dev) branch as part of the [code review](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md#code-quality-and-style-linting) and [testing](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md#unit-testing-and-code-coverage) process. Depending on the nature of the changes undergoing testing, there may be several development packages released.
 
+> The module name for the `crowdstrike-falconpy-dev` package is `falconpydev`.
+>
+> Example: `from falconpydev import Hosts`
+
 These packages will loosely follow the [Semantic Versioning Specification](https://semver.org) (SemVer) for specifying versions,
 with the final release aligning to the version for the next release of the production package.
 
