@@ -97,6 +97,7 @@ for emoji in emojis:
     LONG_DESCRIPTION = LONG_DESCRIPTION.replace(emoji, "")
 
 LONG_DESCRIPTION = LONG_DESCRIPTION.replace("from falconpy import", "from falconpydev import")
+LONG_DESCRIPTION = LONG_DESCRIPTION.replace("install crowdstrike-falconpy", "install crowdstrike-falconpy-dev")
 
 setup(
     name=project_title,
