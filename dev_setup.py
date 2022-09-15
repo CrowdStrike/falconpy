@@ -42,8 +42,8 @@ from os.path import basename
 from os.path import splitext
 from setuptools import find_packages
 from setuptools import setup
-from src.falconpy import _VERSION, _MAINTAINER, _TITLE, _DESCRIPTION, _AUTHOR
-from src.falconpy import _AUTHOR_EMAIL, _PROJECT_URL, _DOCS_URL, _KEYWORDS
+from src.falconpydev import _VERSION, _MAINTAINER, _TITLE, _DESCRIPTION, _AUTHOR
+from src.falconpydev import _AUTHOR_EMAIL, _PROJECT_URL, _DOCS_URL, _KEYWORDS
 
 
 LOGO = []
