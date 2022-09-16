@@ -1,3 +1,30 @@
+# Version 1.2.2
+## Added features and functionality
++ Added: Easy Object Authentication syntax.  You no longer need to specify the `auth_object` attribute of the Service Class you are using to authenticate to subsequent Service Classes. Legacy Object Authentication is still (and will always be) fully supported.
+    ```python
+    import os
+    from falconpy import Hosts
+    from falconpy import HostGroup
+
+    # Old Syntax
+    hosts = Hosts(client_id=os.getenv("FALCON_CLIENT_ID"),
+                  client_secret=os.getenv("FALCON_CLIENT_SECRET")
+                  )
+    hostgroups = HostGroup(auth_object=hosts.auth_object)
+
+    # New Syntax
+    hosts = Hosts(client_id=os.getenv("FALCON_CLIENT_ID"),
+                  client_secret=os.getenv("FALCON_CLIENT_SECRET")
+                  )
+    hostgroups = HostGroup(auth_object=hosts)
+    ```
+    - `_service_class.py`
+    - `tests/test_authentications.py`
+
+## Other
++ Changed: Updated development package module name to be `falconpydev` to prevent confusion with the production package module name.
+    - `dev_setup.py`
+
 # Version 1.2.1
 ## Added features and functionality
 + Added: Added alias for `post_device_details_v2` to Hosts Service Class. Closes #773.
