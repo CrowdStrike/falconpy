@@ -753,3 +753,5 @@ entitiesRolesV
 combinedUserRolesV
 NoneType
 Trueblood
+getenv
+hostgroups
