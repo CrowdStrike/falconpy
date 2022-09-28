@@ -231,7 +231,7 @@ def upload_helper(helper: str):
         data=helper_payload,
         files=file
         )
-    if res["status_code"] == "409":                                 # This helper already exists and may be stale
+    if res["status_code"] == 409:                                   # This helper already exists and may be stale
         remove_helper(helper)                                       # Remove it
         res = falcon_rtra.create_put_files(                         # ... and upload it again
             data=payload,
