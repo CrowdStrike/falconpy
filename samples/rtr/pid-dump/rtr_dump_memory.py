@@ -81,7 +81,7 @@ def execute_command(passed_payload: str, hdr: str, cmd: str):
     """
     passed_payload["command_string"] = cmd
     req = falcon_rtra.execute_admin_command(                        # Call the command
-        passed_payload                                              # Execute the command
+        **passed_payload                                            # Execute the command
         )
     if req["status_code"] != 201:                                   # Confirm execution success
         raise SystemExit(                                           # There is no retry, crash out
