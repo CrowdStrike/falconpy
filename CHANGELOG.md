@@ -1,3 +1,19 @@
+# Version 1.2.3
+## Added features and functionality
++ Added: Specify `N-1` and `N-2` within the Sensor Download sample. Closes #793.
+    - `samples/sensor_download/download_sensor.py`
+
+## Issues resolved
++ Fixed: Invalid `body` payload passed when leveraging the Uber Class to call the `RTR_GetExtractedFileContents` operation. Closes #788.
+    - `_uber_default_preference.py`
+
++ Fixed: Invalid data type comparison in RTR dump memory sample.
+    - `samples/rtr/pid-dump/rtr_dump_memory.py`
+
++ Fixed: Invalid arguments provided to `execute_admin_command` method within RTR dump memory sample. Closes #789.
+    - `samples/rtr/pid-dump/rtr_dump_memory.py`
+
+
 # Version 1.2.2
 ## Added features and functionality
 + Added: Easy Object Authentication syntax.  You no longer need to specify the `auth_object` attribute of the Service Class you are using to authenticate to subsequent Service Classes. Legacy Object Authentication is still (and will always be) fully supported.
