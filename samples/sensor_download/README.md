@@ -13,10 +13,11 @@ This sample demonstrates how to list and download sensors by operating system an
 In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
 
 | Service Collection | Scope |
+| :-- | :-- |
 | Sensor Download | __READ__ |
 
 ### Execution syntax
-This demonstration was developed to elverage easy to use command-line arguments.
+This demonstration was developed to leverage easy to use command-line arguments.
 
 - [Command line arguments](#command-line-arguments)
 - [Basic usage](#basic-usage)
@@ -93,7 +94,7 @@ python3 download_sensor.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -o cent
 You can specify the previous, or 2nd previous version to download by leveraging the `-n` argument.
 
 | Argument value | Result |
-| :-: | :-: |
+| :-: | :-- |
 | 0 | Current |
 | 1 | `N-1` (previous) |
 | 2 | `N-2` (second previous) |
@@ -110,7 +111,7 @@ python3 download_sensor.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d -a
 ```
 
 #### Command-line help
-Command-line help is avialable via the `-h` argument.
+Command-line help is available via the `-h` argument.
 
 ```shell
 usage: download_sensor.py [-h] -k KEY -s SECRET [-a] [-d] [-n NMINUS] [-c COMMAND] [-o OS] [-v OSVER] [-f FILENAME] [-t TABLE_FORMAT]
