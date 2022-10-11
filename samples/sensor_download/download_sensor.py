@@ -1,5 +1,4 @@
-# flake8: noqa=W605  pylint: disable=W1401
-"""CrowdStrike Falcon Sensor Download utility.
+r"""CrowdStrike Falcon Sensor Download utility.
 
             CrowdStrike Falcon
  _______                               ______                        __                __
@@ -24,72 +23,158 @@ except ImportError as no_falconpy:
         "Install this application with the command `python3 -m pip install crowdstrike-falconpy`."
     ) from no_falconpy
 
-parser = ArgumentParser(
-        description=__doc__,
-        formatter_class=RawTextHelpFormatter
-        )
-parser.add_argument('-k', '--key', help="CrowdStrike API Key", required=True)
-parser.add_argument('-s', '--secret', help="CrowdStrike API Secret", required=True)
-parser.add_argument('-a', '--all', help='Show all columns / Download all versions', required=False, action="store_true")
-parser.add_argument('-d', '--download', help="Shortcut for '--command download'", required=False, action="store_true")
-parser.add_argument('-c', '--command', help='Command to perform. (list or download, defaults to list)', required=False)
-parser.add_argument('-o', '--os', help='Sensor operating system', required=False)
-parser.add_argument('-v', '--osver', help='Sensor operating system version', required=False)
-parser.add_argument('-n', '--filename', help="Name to use for downloaded file", required=False)
-parser.add_argument('-f',
-                    '--format',
-                    help='Table format to use for display.\n'
-                    '(plain, simple, github, grid, fancy_grid, pipe, orgtbl, jira, presto, \n'
-                    'pretty, psql, rst, mediawiki, moinmoin, youtrack, html, unsafehtml, \n'
-                    'latext, latex_raw, latex_booktabs, latex_longtable, textile, tsv)',
-                    required=False
-                    )
-args = parser.parse_args()
-CMD = args.command
-if CMD == "" or not CMD:
-    CMD = "list"
-if args.download:
-    CMD = "download"
-CLIENTID = args.key
-CLIENTSECRET = args.secret
-OS = ""
-if args.os:
-    check_os = args.os.lower()
-    if check_os in ["rhel", "centos", "oracle", "rhel/centos/oracle"]:
-        OS = "RHEL/CentOS/Oracle"
-    if check_os in ["amzn", "az", "amazon", "amazon linux"]:
-        OS = "Amazon Linux"
-    if check_os in ["sles", "suse"]:
-        OS = "SLES"
-    if check_os in ["ubuntu", "kali", "deb", "debian"]:
-        OS = "Debian"
-    if check_os in ["win", "windows", "microsoft"]:
-        OS = "Windows"
-    if check_os in ["mac", "macos", "apple"]:
-        OS = "macOS"
-    if check_os in ["container", "docker", "kubernetes"]:
-        OS = "Container"
-    if check_os in ["idp", "identity", "identity protection"]:
-        OS = "Identity*"
-OS_FILTER = ""
-if OS:
-    OS_FILTER = f"os:'{str(OS)}'"
+def consume_arguments():
+    """Consume any provided command line arguments."""
+    parser = ArgumentParser(
+            description=__doc__,
+            formatter_class=RawTextHelpFormatter
+            )
+    parser.add_argument('-k', '--key', help="CrowdStrike API Key", required=True)
+    parser.add_argument('-s', '--secret', help="CrowdStrike API Secret", required=True)
+    parser.add_argument('-a', '--all', help='Show all columns / Download all versions',
+                        required=False,
+                        action="store_true",
+                        default=False
+                        )
+    parser.add_argument('-d', '--download', help="Shortcut for '--command download'",
+                        required=False,
+                        default=False,
+                        action="store_true"
+                        )
+    parser.add_argument('-n', '--nminus',
+                        help='Download previous version (n-1, n-2, 0 = current, 2 = n-2)',
+                        default=0,
+                        required=False
+                        )
+    parser.add_argument('-c', '--command',
+                        help='Command to perform. (list or download, defaults to list)',
+                        required=False,
+                        default="list"
+                        )
+    parser.add_argument('-o', '--os', help='Sensor operating system', required=False, default="")
+    parser.add_argument('-v', '--osver',
+                        help='Sensor operating system version',
+                        required=False,
+                        default=""
+                        )
+    parser.add_argument('-f', '--filename',
+                        help="Name to use for downloaded file",
+                        required=False,
+                        default=""
+                        )
+    parser.add_argument('-t',
+                        '--table_format',
+                        help='Table format to use for display.\n'
+                        '(plain, simple, github, grid, fancy_grid, pipe, orgtbl, jira, presto, \n'
+                        'pretty, psql, rst, mediawiki, moinmoin, youtrack, html, unsafehtml, \n'
+                        'latext, latex_raw, latex_booktabs, latex_longtable, textile, tsv)',
+                        required=False, default="fancy_grid"
+                        )
+    return parser.parse_args()
 
-FILENAME = ""
-if args.filename:
-    FILENAME = args.filename
+def get_version_map(sensor_versions: list):  # pylint: disable=R0914
+    """Create a mapping of all available sensor versions."""
+    version_map = {
+        "windows": {},
+        "mac": {},
+        "linux": {}
+    }
 
-FORMAT = "fancy_grid"
-if args.format:
-    FORMAT = args.format
+    for version in sensor_versions["body"]["resources"]:
+        ver = version.get("version", None)
+        plat = version.get("platform", None)
+        os_name = version.get("os", None)
+        os_ver = version.get("os_version", None)
+        name = version.get("name", None)
+        desc = version.get("description", None)
+        sha = version.get("sha256", None)
+        tracked = False
+        current = False
+        prev = False
+        eldest = False
+        if plat and os_name:
+            for os_type, os_detail in version_map.get(plat, {}).items():
+                if os_type == f"{os_name} {os_ver}".strip():
+                    #check_ver = ver.split(".")
+                    #vers = os_detail.get("current", {}).get("version", "0.0.0").split(".")
+                    if not os_detail.get("current", {}):
+                        os_detail["current"] = {}
+                        os_detail["current"]["name"] = name
+                        os_detail["current"]["version"] = ver
+                        os_detail["current"]["description"] = desc
+                        os_detail["current"]["sha256"] = sha
+                        tracked = True
+                    else:
+                        current = True
+                    if current and not os_detail.get("previous", {}):
+                        #pvers = os_detail.get("previous", {}).get("version", "0.0.0").split(".")
+                        os_detail["previous"] = {}
+                        os_detail["previous"]["name"] = name
+                        os_detail["previous"]["version"] = ver
+                        os_detail["previous"]["description"] = desc
+                        os_detail["previous"]["sha256"] = sha
+                        tracked = True
+                    elif current and os_detail.get("previous", {}):
+                        prev = True
+                    if current and prev and not os_detail.get("oldest", {}):
+                        #pvers = os_detail.get("previous", {}).get("version", "0.0.0").split(".")
+                        os_detail["oldest"] = {}
+                        os_detail["oldest"]["name"] = name
+                        os_detail["oldest"]["version"] = ver
+                        os_detail["oldest"]["description"] = desc
+                        os_detail["oldest"]["sha256"] = sha
+                        tracked = True
+                    elif current and prev and os_detail.get("oldest", {}):
+                        eldest = True
 
-SHOW_ALL = False
-if args.all:
-    SHOW_ALL = True
+            if not tracked and not current and not prev and not eldest:
+                version_map[plat][f"{os_name} {os_ver}".strip()] = {}
+                version_map[plat][f"{os_name} {os_ver}".strip()]["current"] = {
+                    "name": name,
+                    "version": ver,
+                    "description": desc,
+                    "sha256": sha
+                }
 
-OSVER = ""
-if args.osver:
-    OSVER = args.osver
+    return version_map
+
+def create_constants():
+    """Create constants from the provided command-line arguments."""
+    args = consume_arguments()
+    cmd = args.command
+    if args.download:
+        cmd = "download"
+
+    os_name = ""
+    if args.os:
+        check_os = args.os.lower()
+        if check_os in ["rhel", "centos", "oracle", "rhel/centos/oracle"]:
+            os_name = "RHEL/CentOS/Oracle"
+        if check_os in ["amzn", "az", "amazon", "amazon linux"]:
+            os_name = "Amazon Linux"
+        if check_os in ["sles", "suse"]:
+            os_name = "SLES"
+        if check_os in ["ubuntu", "kali", "deb", "debian"]:
+            os_name = "Debian"
+        if check_os in ["win", "windows", "microsoft"]:
+            os_name = "Windows"
+        if check_os in ["mac", "macos", "apple"]:
+            os_name = "macOS"
+        if check_os in ["container", "docker", "kubernetes"]:
+            os_name = "Container"
+        if check_os in ["idp", "identity", "identity protection"]:
+            os_name = "Identity*"
+
+    os_filter = ""
+    if os_name:
+        os_filter = f"os:'{str(os_name)}'"
+
+    return cmd, args.key, args.secret, os_filter, args.filename, args.table_format, args.all, \
+        args.osver, args.nminus
+
+
+CMD, CLIENTID, CLIENTSECRET, OS_FILTER, FILENAME, FORMAT, SHOW_ALL, \
+    OSVER, NMINUS = create_constants()
 
 # Login to the Falcon API and retrieve our list of sensors
 falcon = APIHarness(client_id=CLIENTID, client_secret=CLIENTSECRET)
@@ -130,24 +215,43 @@ if CMD in "list":
     else:
         print(tabulate(data, headers=headers, tablefmt=FORMAT))
 elif CMD in "download":
+    NMVER = "current"
+    # Get a complete mapping of sensor versions, including n-1 and n-2
+    version_detail = get_version_map(sensors)
+    if NMINUS:
+        if int(NMINUS) == 1:
+            NMVER = "previous"
+        elif int(NMINUS) == 2:
+            NMVER = "oldest"
+    dl_complete = []
     # Download sensors
     DO_DOWNLOAD = True
     for sensor in sensors["body"]["resources"]:
+        full_name = f"{sensor['os']} {sensor['os_version']}".strip()
         if OSVER in [sensor["os_version"], ""]:
-            if DO_DOWNLOAD:
-                print(f"Downloading {sensor['description']} version {sensor['version']}")
-                if not FILENAME:
-                    filename = sensor["name"]
-                    if sensor["os"] in ["Windows", "macOS"]:
-                        filename = f"{filename[:-4]}_{sensor['version']}{filename[len(filename)-4:]}"
-                else:
-                    filename=FILENAME
-                download = falcon.command(action="DownloadSensorInstallerById", id=sensor["sha256"])
-                if isinstance(download, dict):
-                    raise SystemExit("Unable to download requested sensor.")
-                with open(filename, "wb") as save_file:
-                    save_file.write(download)
-                if not SHOW_ALL:
-                    DO_DOWNLOAD = False
+            if DO_DOWNLOAD and full_name not in dl_complete:
+                plat_spec = sensor["platform"]
+                if plat_spec:
+                    sha_to_retrieve = version_detail[plat_spec][full_name][NMVER]["sha256"]
+                    if not FILENAME:
+                        fname = version_detail[plat_spec][full_name][NMVER]["name"]
+                        if sensor["os"] in ["Windows", "macOS"]:
+                            fname = f"{fname[:-4]}_{sensor['version']}{fname[len(fname)-4:]}"
+                    else:
+                        fname=FILENAME
+                    dl_desc = version_detail[plat_spec][full_name][NMVER]['description']
+                    dl_ver = version_detail[plat_spec][full_name][NMVER]['version']
+                    print(f"Downloading {dl_desc} version {dl_ver}")
+                    download = falcon.command(
+                        action="DownloadSensorInstallerById",
+                        id=sha_to_retrieve
+                        )
+                    if isinstance(download, dict):
+                        raise SystemExit("Unable to download requested sensor.")
+                    with open(fname, "wb") as save_file:
+                        save_file.write(download)
+                    dl_complete.append(full_name)
+                    if not SHOW_ALL:
+                        DO_DOWNLOAD = False
 else:
     print("Stop mumbling!")
