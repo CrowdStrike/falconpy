@@ -67,11 +67,13 @@ class TestRTRAdmin:
         error_checks = True
         script_test = falcon.create_scripts(data={})
         putfile_test = falcon.create_put_files(data={}, files=[])
-        if script_test["status_code"] != 415:
+        if script_test["status_code"] not in [406, 415]:
             error_checks = False
+            print(script_test)
 
-        if putfile_test["status_code"] != 415:
+        if putfile_test["status_code"] not in [406, 415]:
             error_checks = False
+            print(putfile_test)
 
         return error_checks
 
@@ -136,7 +138,7 @@ class TestRTRAdmin:
             if tests[key] not in AllowedResponses:
                 error_checks = False
 
-            # print(f"{key} processed with a {tests[key]} response")
+                #print(f"{key} processed with a {tests[key]} response")
         # Code paths still get tested, skip the test on a 500
         if not error_checks:
             pytest.skip("500 error generated, code paths still tested")
