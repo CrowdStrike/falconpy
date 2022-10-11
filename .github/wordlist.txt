@@ -755,3 +755,6 @@ NoneType
 Trueblood
 getenv
 hostgroups
+NMINUS
+OSVER
+nd
