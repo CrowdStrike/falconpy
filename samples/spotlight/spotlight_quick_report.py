@@ -155,6 +155,7 @@ def inform(msg: str):
 def process_matches(arg: Namespace):
     """Process Spotlight Vulnerability matches."""
     retrieved = 0
+    valid = 0
     if arg.file:
         with open(arg.file, "r", encoding="utf-8") as loader:
             matches = json.load(loader)
@@ -191,8 +192,17 @@ def process_matches(arg: Namespace):
                 if aid not in matches["cve"][severity_match][cve_id] or arg.allow_dupes:
                     matches["cve"][severity_match][cve_id].append(aid)
             inform(f" {formatted(retrieved)} of {formatted(total)}")
-        inform(f"{formatted(retrieved)} total matches retrieved.")
-    return matches, retrieved
+        msg = f"{' '*30}\n{formatted(retrieved)} total matches retrieved"
+        if arg.allow_dupes:
+            msg = f"{msg}."
+        else:
+            for match_list in matches["sensor"].values():
+                valid += sum(len(x) for x in match_list.values())
+            dupes = retrieved - valid
+            msg = f"{msg}, {formatted(dupes)} duplicate{'s' if dupes > 1 else ''} discarded."
+        inform(msg)
+
+    return matches, retrieved if arg.allow_dupes else valid
 
 
 def formatted(num_to_format: int):
@@ -252,7 +262,7 @@ def process_results(output_file: str, matches: dict, total_matched: int):  # pyl
     if output_file:
         with open(args.output, "w", encoding="utf-8") as save_file:
             json.dump(matches, save_file, indent=4)
-        print(f"The data used in thsi report has been saved to {output_file}")
+        print(f"The data used in this report has been saved to {output_file}")
 
 if __name__ == "__main__":
     vers = _VERSION.split(".")
