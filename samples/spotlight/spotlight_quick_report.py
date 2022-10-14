@@ -160,7 +160,7 @@ def process_matches(arg: Namespace):
         with open(arg.file, "r", encoding="utf-8") as loader:
             matches = json.load(loader)
             for match_list in matches["sensor"].values():
-                retrieved += sum(len(x) for x in match_list.values())
+                valid += sum(len(x) for x in match_list.values())
     else:
         matches = {}
         matches["sensor"] = {}
@@ -198,6 +198,7 @@ def process_matches(arg: Namespace):
         else:
             for match_list in matches["sensor"].values():
                 valid += sum(len(x) for x in match_list.values())
+
             dupes = retrieved - valid
             msg = f"{msg}, {formatted(dupes)} duplicate{'s' if dupes > 1 else ''} discarded."
         inform(msg)
