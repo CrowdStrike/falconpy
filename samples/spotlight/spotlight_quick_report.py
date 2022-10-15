@@ -106,7 +106,7 @@ def query_spotlight(key: str, secret: str, days: str, aft: str = None):
     global HOST_AUTH  # pylint: disable=W0603
     HOST_AUTH = spotlight  # Save this here so we can use it to auth to hosts
 
-    query_filter = "cve.id:!['']+status:!'closed'"
+    query_filter = "cve.id:!['']+status:!'closed'+status:!'expired'"
     if int(days) >= 3:
         query_filter = f"{query_filter}+last_seen_within:'{days}'"
     stat, all_results = do_query(query_filter)
