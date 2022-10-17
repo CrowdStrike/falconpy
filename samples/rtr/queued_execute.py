@@ -31,9 +31,31 @@ API Scopes:
     Hosts       - READ
     RTR         - READ, WRITE
     RTR ADMIN   - READ, WRITE
+
+Modified: 10.17.22, add AID consumption via a file - jshcodes@CrowdStrike
+Allowed formats:
+  JSON                  or
+  [                     {
+      "AID1",               "hosts": [
+      "AID2",                   "AID1",
+      "etc"                     "AID2",
+  ]                             "etc"
+                            ]
+                        }
+
+ASCII - List of AIDs only, commas will be ignored
+AID1
+AID2
+AID3
+etc.
+
+JSON is attempted first, then we fall back to ASCII when it doesn't decode.
+
+Duplicates are ignored.
 """
 import os
 import time
+import json
 from argparse import ArgumentParser, RawTextHelpFormatter
 try:
     from falconpy import Hosts, RealTimeResponse, RealTimeResponseAdmin
@@ -60,10 +82,22 @@ def parse_command_line():
                         )
     parser.add_argument("-f", "--find",
                         help="String to match against hostname to select hosts.",
-                        required=True
+                        required=False
+                        )
+    parser.add_argument("-l", "--load_file",
+                        help="File containing the list of AIDs to target (JSON or ASCII list)",
+                        required=False,
+                        default=None
                         )
 
-    return parser.parse_args()
+
+    parsed = parser.parse_args()
+    if not parsed.find and not parsed.load_file:
+        parser.error("You must specify a string to search (`-f`) "
+                     "or a load file (`-l`) containing a list of AIDs."
+                     )
+
+    return parsed
 
 
 # Constants used for display formatting
@@ -95,10 +129,33 @@ hosts = Hosts(client_id=CLIENT_ID,
 rtr = RealTimeResponse(auth_object=hosts.auth_object)
 rtr_admin = RealTimeResponseAdmin(auth_object=hosts.auth_object)
 
-# Retrieve a list of host AIDs that match our search string
-host_ids = hosts.query_devices_by_filter(filter=f"hostname:*'*{HOST_MATCH}*'", sort="hostname.asc")
-if host_ids["status_code"] != 200:
-    raise SystemExit("Unable to communicate with the CrowdStrike API. Check permissions.")
+if args.load_file:
+# Retrieve a list of host AIDs from our load file
+    if not os.path.exists(args.load_file):
+        raise SystemExit(f"The load file: {args.load_file} cannot be found.")
+    # Mock up our expected host_ids dictionary
+    host_ids = {}
+    host_ids["body"] = {}
+    try:
+        # Simple tricks to identify file type.  Properly done this should use Python magic.
+        with open(args.load_file, "r", encoding="utf-8") as loader:
+            file_detail = json.load(loader)
+        if "hosts" in file_detail:
+            host_ids["body"]["resources"] = file_detail["hosts"]
+        else:
+            host_ids["body"]["resources"] = file_detail
+    except json.JSONDecodeError as err:
+        # Fall back to the flat file method
+        with open(args.load_file, "r", encoding="utf-8") as loader:
+            file_detail = loader.read()
+        host_ids["body"]["resources"] = list(filter(None, file_detail.replace(",", "").split("\n")))
+else:
+    # Retrieve a list of host AIDs that match our search string
+    host_ids = hosts.query_devices_by_filter(filter=f"hostname:*'*{HOST_MATCH}*'",
+                                             sort="hostname.asc"
+                                             )
+    if host_ids["status_code"] != 200:
+        raise SystemExit("Unable to communicate with the CrowdStrike API. Check permissions.")
 
 if not host_ids["body"]["resources"]:
     raise SystemExit("Unable to find any hosts matching the specified search string.\n"
