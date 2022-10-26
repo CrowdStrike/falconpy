@@ -60,7 +60,7 @@ class AESCrypt:
     """Wrapper class for the functionality provided by pyCryptodome."""
 
     class InvalidKeySpecified(Exception):
-        """Class specific custom error handling for when a key us not specified."""
+        """Class specific custom error handling for when a key is not specified."""
 
         def __init__(self, *args, message: str = "The string '{}' is not a valid key."):
             """Initialize an instance of the exception."""
@@ -227,10 +227,8 @@ def perform_api_example(creds: dict):
     # Number of records per query
     data_batch_size = 5000
 
-    # Demonstrate API access using these encrypted credentials
-    hosts = Hosts(client_id=creds["client_id"],
-                  client_secret=creds["client_secret"]
-                  )
+    # Demonstrate API access using the encrypted credentials
+    hosts = Hosts(**creds)
     if hosts.token_status != 201:
         raise SystemExit(
             "  ⚠️  Unable to authenticate with the CrowdStrike API using the credentials provided."
@@ -349,9 +347,7 @@ def do_simple_decrypt(cmd_line: Namespace):
     cmd_line.text = get_text_to_handle(cmd_line, "decrypt")
     try:
         print(f"  🔓 Decrypted: {decryptor.decrypt(cmd_line.text)}")
-    except (
-        AESCrypt.InvalidSecret
-    ) as bad_key:
+    except AESCrypt.InvalidSecret as bad_key:
         raise SystemExit("  ⛔ Invalid secret key provided for this encryption.") from bad_key
     end_of_line(0)
 
@@ -415,12 +411,12 @@ if __name__ == "__main__":
             # ____ _  _ ____ ____ _   _ ___  ___    ___ ____ _  _ ___
             # |___ |\ | |    |__/  \_/  |__]  |      |  |___  \/   |
             # |___ | \| |___ |  \   |   |     |      |  |___ _/\_  |
-            # Perform a simple decryption operation
+            # Perform a simple encryption operation
             do_simple_encrypt(cmdline)
 
         # Retrieve the encrypted credential file
         cmdline.keyfile = get_cred_file(cmdline)
-        # Retrieve their secret key
+        # Retrieve the secret key
         cmdline.key = get_key(cmdline)
         # Decrypt and consume the encrypted file and retrieve the API credentials
         credentials = loads(consume_key_file(cmdline.keyfile, cmdline.key))
