@@ -233,7 +233,7 @@ def perform_api_example(creds: dict):
                   )
     if hosts.token_status != 201:
         raise SystemExit(
-            "  ⚠️ Unable to authenticate with the CrowdStrike API using the credentials provided."
+            "  ⚠️  Unable to authenticate with the CrowdStrike API using the credentials provided."
             )
     total = 1
     offset = None
