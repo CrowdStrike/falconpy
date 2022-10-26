@@ -138,7 +138,7 @@ class AESCrypt:
 
 def hash_file(source_file: str, buf_size: int):
     """Run MD5 and SHA256 hashes on the file specified and return the result."""
-    md5_hash = md5()
+    md5_hash = md5()  # nosec  # Not used for cryptographic operations, False Positive
     sha_hash = sha256()
 
     with open(source_file, 'rb') as file_of_interest:
