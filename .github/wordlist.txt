@@ -758,3 +758,4 @@ hostgroups
 NMINUS
 OSVER
 nd
+Arifur
