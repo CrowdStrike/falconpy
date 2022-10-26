@@ -22,13 +22,14 @@ Token authentication is the process of authenticating to a FalconPy Service Clas
 a previously assigned bearer token directly to the `auth_token` keyword when instantiating
 the Service Class. This is the original method of authentication provided by Service Classes,
 and while it is frequently eschewed in preference to Direct and Object Authentication, there
-are multiple scenarios where it is still the best option for the scenario. Token Authentication
-support will always be maintained within Falconpy.
+are multiple scenarios where it is still the best option for the situation.
+
+Token Authentication support will always be maintained within Falconpy.
 
 Please note: Token Authentication creates an instance of a FalconPy Service Class that
              cannot reauthenticate itself as it does not have awareness of your API
              credentials. You will have to regenerate your bearer token before it expires
-             and update the creds dictionary within the Service Class if you are implmenting
+             and update the creds dictionary within the Service Class if you are implementing
              a long running process.
 
 This sample should run using any version of FalconPy and requires the colorama and click libraries.
