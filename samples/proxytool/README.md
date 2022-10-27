@@ -4,7 +4,7 @@
 # ProxyTool v3
 This example focuses on leveraging CrowdStrike's Hosts, Host Groups, and Real-Time Response API.
 
-It is a script that fetches CID or Host Group hosts, and uses the batch command and offline queuing of Real-Tike Response API to centrally 
+It is a script that fetches CID or Host Group hosts, and uses the batch command and offline queuing of Real-Time Response API to centrally 
 and conveniently issue Falcon sensor proxy configuration changes.
 
 - It uses native RTR commands, which will not trigger a detection/prevention in relation to sensor anti-tampering. 
