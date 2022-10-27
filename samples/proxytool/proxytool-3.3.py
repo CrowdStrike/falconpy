@@ -174,14 +174,14 @@ def main():
                 log("Error, Response: " + response["status_code"] + " - " + response.text)
                 exit()           
         
-    #    code = falcon.batch_active_responder_command(batch_id=batch_id, base_command="reg set", command_string="reg set " + store + " CsProxyHostname -ValueType=REG_SZ -Value=" + creds.proxy_hostname)
+        code = falcon.batch_active_responder_command(batch_id=batch_id, base_command="reg set", command_string="reg set " + store + " CsProxyHostname -ValueType=REG_SZ -Value=" + creds.proxy_hostname)
         if response["status_code"] == 201:
             log("-- Issuing registry setting of CsProxyHostname to " + args.proxy_hostname + " in " + store)
         else:
             log("Error, Response: " + response["status_code"] + " - " + response.text)
             exit()   
 
-    #    code = falcon.batch_active_responder_command(batch_id=batch_id, base_command="reg set", command_string="reg set " + store + " CsProxyport -ValueType=REG_DWORD -Value=" + creds.proxy_port)
+        code = falcon.batch_active_responder_command(batch_id=batch_id, base_command="reg set", command_string="reg set " + store + " CsProxyport -ValueType=REG_DWORD -Value=" + creds.proxy_port)
         if response["status_code"] == 201:
             log("-- Issuing registry setting of CsProxyport to " + args.proxy_port + " in " + store)
         else:
