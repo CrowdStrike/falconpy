@@ -2,7 +2,7 @@
 ![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)
 
 # ProxyTool v3
-This example focuses on leveraging CrowdStrike's Hosts, Host Groups, and Real-Rime Response API.
+This example focuses on leveraging CrowdStrike's Hosts, Host Groups, and Real-Time Response API.
 
 It is a script that fetches CID or Host Group hosts, and uses the batch command and offline queuing of Real-Tike Response API to centrally 
 and conveniently issue Falcon sensor proxy configuration changes.
