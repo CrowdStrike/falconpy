@@ -157,10 +157,9 @@ def main():
     ## Commands to change proxy config
     ## Delete DisableProxy, PAC, PN, PP in both locations. Change CsProxyHostname and CsProxyport with new values
 
-
-    registry_stores = ["HKLM:\SYSTEM\Crowdstrike\{9b03c1d9-3138-44ed-9fae-d9f4c034b88d}\{16e0423f-7058-48c9-a204-725362b67639}\Default", 
-                        "HKLM:\SYSTEM\CurrentControlSet\Services\CSAgent\Sim"]
-
+    registry_stores = [r"HKLM:\SYSTEM\Crowdstrike\{9b03c1d9-3138-44ed-9fae-d9f4c034b88d}\{16e0423f-7058-48c9-a204-725362b67639}\Default", 
+                       r"HKLM:\SYSTEM\CurrentControlSet\Services\CSAgent\Sim"]
+                       
     registry_keys_to_delete = ["DisableProxy", "PAC", "PN", "PP"]
 
     response = falcon.batch_active_responder_command(batch_id=batch_id, base_command="reg delete", command_string="reg delete HKLM:\SYSTEM\CurrentControlSet Test")
