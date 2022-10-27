@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
 
-##
-##     ___                   ______          __       ____
-##    / _ \_______ __ ____ _/_  __/__  ___  / / _  __|_  /
-##   / ___/ __/ _ \\ \ / // // / / _ \/ _ \/ / | |/ //_ < 
-##  /_/  /_/  \___/_\_\\_, //_/  \___/\___/_/  |___/____/ 
-##                    /___/                               
-##
-## Use RTR API to change Falcon sensor proxy configuration across CID or host group
-## FalconPy v1.0
-##
-## CHANGE LOG
-##
-## 27/10/2022   v3.3    Use command line arguments instead of external file for config
-## 26/10/2022   v3.2    Add support for Host Group or CID selection
-## 25/10/2022   v3.1    Ported to falconpy SDK instead of reinventing the wheel
-## 23/10/2022   v3.0    Rewrote 2.0 for error handling, logging and fetching host IDs from API
-##
+r"""ProxyTool - Update Falcon Sensor proxy configurations remotely.
+     ___                   ______          __       ____
+    / _ \_______ __ ____ _/_  __/__  ___  / / _  __|_  /
+   / ___/ __/ _ \\ \ / // // / / _ \/ _ \/ / | |/ //_ < 
+  /_/  /_/  \___/_\_\\_, //_/  \___/\___/_/  |___/____/ 
+                    /___/                               
+
+ Use RTR API to change Falcon sensor proxy configuration across CID or host group
+ FalconPy v1.0
+
+ CHANGE LOG
+
+ 27/10/2022   v3.3    Use command line arguments instead of external file for config
+ 26/10/2022   v3.2    Add support for Host Group or CID selection
+ 25/10/2022   v3.1    Ported to falconpy SDK instead of reinventing the wheel
+ 23/10/2022   v3.0    Rewrote 2.0 for error handling, logging and fetching host IDs from API
+"""
 
 
 ## Import dependencies and define logging function
@@ -174,14 +174,14 @@ def main():
                 log("Error, Response: " + response["status_code"] + " - " + response.text)
                 exit()           
         
-        code = falcon.batch_active_responder_command(batch_id=batch_id, base_command="reg set", command_string="reg set " + store + " CsProxyHostname -ValueType=REG_SZ -Value=" + creds.proxy_hostname)
+        response = falcon.batch_active_responder_command(batch_id=batch_id, base_command="reg set", command_string="reg set " + store + " CsProxyHostname -ValueType=REG_SZ -Value=" + creds.proxy_hostname)
         if response["status_code"] == 201:
             log("-- Issuing registry setting of CsProxyHostname to " + args.proxy_hostname + " in " + store)
         else:
             log("Error, Response: " + response["status_code"] + " - " + response.text)
             exit()   
 
-        code = falcon.batch_active_responder_command(batch_id=batch_id, base_command="reg set", command_string="reg set " + store + " CsProxyport -ValueType=REG_DWORD -Value=" + creds.proxy_port)
+        response = falcon.batch_active_responder_command(batch_id=batch_id, base_command="reg set", command_string="reg set " + store + " CsProxyport -ValueType=REG_DWORD -Value=" + creds.proxy_port)
         if response["status_code"] == 201:
             log("-- Issuing registry setting of CsProxyport to " + args.proxy_port + " in " + store)
         else:
