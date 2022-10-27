@@ -11,6 +11,9 @@ and conveniently issue Falcon sensor proxy configuration changes.
 - Because it uses the RTR API it is run centrally through our cloud, it does NOT need to be distributed to each targeted host. 
 - The script uses the queuing feature of RTR, so hosts don't need to be online at the time the script is executed, they will receive the commands if they connect to our cloud within the next 7 days. 
 
+
+__WARNING: This script has the potential to disrupt the communications between the Falcon sensor and the cloud. It is suggested to test with a limited Host Group first to troubleshoot any issues.__
+
 ### Running the program
 In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
 | Service Collection | Scope |
