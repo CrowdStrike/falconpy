@@ -76,6 +76,8 @@ This has been a critical element in the development of the FalconPy project.
 + `@mtobias-getty`
 + `@WDmoose` 
 + Arifur, `@arahman63`
++ `@areino`
+
 
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
