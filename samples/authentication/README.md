@@ -230,7 +230,7 @@ This program accepts the following command line arguments.
 You must provide a key (`-k`), a source (`-s`), a target (`-t`) and an operation (`-d` or `-e`) in order for this application to execute.
 
 #### Example encryption
-Encryping a file can be performed by providing a key, a source and a target file. For our examples, we'll use the following plain text file, `plain.txt`.
+Encrypting a file can be performed by providing a key, a source and a target file. For our examples, we'll use the following plain text file, `plain.txt`.
 
 ###### plain.txt
 ```text
@@ -257,7 +257,7 @@ python3 aes_file_crypt.py -k MySuperSecretKey -s plain.txt -t cipher.txt -e
 ```
 
 #### Example decryption
-Decryping a file can be performed by providing a key, a source and a target file. For our examples, we'll use the cipher text file, `cipher.txt` we created above.
+Decrypting a file can be performed by providing a key, a source and a target file. For our examples, we'll use the cipher text file, `cipher.txt` we created above.
 
 ```shell
 python3 aes_file_crypt.py -k MySuperSecretKey -s cipher.txt -t decrypted.txt -d
