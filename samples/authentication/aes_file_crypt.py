@@ -250,7 +250,7 @@ def consume_arguments():
         parsed.buffer = 65536
 
     if parsed.buffer < 32:
-        raise SystemExit("  ⛔ Invalid buffer size specified (must be greater than 32).")
+        raise SystemExit("  ⛔ Invalid buffer size specified (must be >= 32).")
 
     return parsed
 
