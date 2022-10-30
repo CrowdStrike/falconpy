@@ -761,3 +761,16 @@ nd
 Arifur
 FQDN
 ProxyTool
+cryptographic
+decrypt
+checksums
+Decrypt
+Ciphertext
+ciphertext
+keyfile
+KEYFILE
+Decrypting
+Cryptographic
+txt
+reauthenticate
+AES
