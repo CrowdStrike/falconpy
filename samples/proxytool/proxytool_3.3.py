@@ -67,7 +67,7 @@ req.add_argument("--proxy_port",
                  )
 
 req.add_argument("--scope",
-                 help="Which hosts to change, an be 'cid' or 'hostgroup'",
+                 help="Which hosts to change, can be 'cid' or 'hostgroup'",
                  required=True
                  )
 
