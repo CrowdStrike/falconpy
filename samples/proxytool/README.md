@@ -35,7 +35,6 @@ This example accepts the following input parameters.
 | `--base_url` | CrowdStrike base URL (only required for GovCloud, pass usgov1) | optional |
 
 
-##### Show command line help.
 ```shell
 python3 proxytool_3.3.py --falcon_client_id FALCON_CLIENT_ID --falcon_client_secret FALCON_CLIENT_SECRET 
                         --proxy_hostname PROXY_HOST --proxy_port PROXY_PORT --scope hostgroup --scope_id HOST_GROUP_ID
