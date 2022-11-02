@@ -20,7 +20,9 @@ results for the US-GOV-1 region, pass the '-g' argument.
 - ray.heffer@crowdstrike.com; 03.29.22 - Added new argument for Grouping Tags (--grouping, -g)
 - @morcef, jshcodes@CrowdStrike; 06.05.22 - More reasonable date calcs, Linting, Easier arg parsing
                                             Easier base_url handling, renamed grouping_tag to tag
+- jshcodes@Crowdstrike; 11.02.22 - Added CSV output options and cleaner date outputs.
 """
+import csv
 from argparse import ArgumentParser, RawTextHelpFormatter
 from datetime import datetime, timedelta, timezone
 from dateutil import parser as dparser
@@ -97,7 +99,29 @@ def parse_command_line() -> object:
         required=False,
         default=None
         )
-
+    parser.add_argument(
+        '-c',
+        '--csv',
+        help='Export results to CSV',
+        required=False,
+        default=False,
+        action="store_true"
+        )
+    parser.add_argument(
+        '-o',
+        '--output_file',
+        help='File to output CSV results to. Ignored when "-c" is not specified.',
+        required=False,
+        default="stale_results.csv"
+        )
+    parser.add_argument(
+        '-q',
+        '--quotes',
+        help='Quote non-numeric fields in CSV output.',
+        required=False,
+        default=False,
+        action="store_true"
+        )
     return parser.parse_args()
 
 
@@ -108,7 +132,10 @@ def connect_api(key: str, secret: str, base_url: str, child_cid: str = None) -> 
 
 def get_host_details(id_list: list) -> list:
     """Retrieve a list containing device infomration based upon the ID list provided."""
-    return falcon.get_device_details(ids=id_list)["body"]["resources"]
+    returned = falcon.get_device_details(ids=id_list)["body"]["resources"]
+    if not returned:
+        returned = []
+    return returned
 
 
 def get_hosts(date_filter: str, tag_filter: str) -> list:
@@ -141,7 +168,7 @@ def parse_host_detail(detail: dict, found: list):
         detail.get("device_id", "Unknown"),
         detail.get("local_ip", "Unknown"),
         newtag,
-        detail["last_seen"],
+        dparser.parse(detail["last_seen"], ignoretz=True),
         f"{distance} days"
         ])
 
@@ -186,11 +213,23 @@ except KeyError as api_error:
 if stale:
     # Display only is the default
     if not bool(args.remove):
-        stale_display = tabulate(
-            sorted(stale, key=lambda x: (x[4], x[0]), reverse=args.reverse),
-            ["Hostname", "Device ID", "Local IP", "Tag", "Last Seen", "Stale Period"]
-            )
-        print(f"\n{stale_display}")
+        sorted_results = sorted(stale, key=lambda x: (x[4], x[0]), reverse=args.reverse)
+        fields = ["Hostname", "Device ID", "Local IP", "Tag", "Last Seen", "Stale Period"]
+        if args.csv:
+            with open(args.output_file, "w", encoding="utf-8") as csv_file:
+                QUOTES = csv.QUOTE_MINIMAL
+                if args.quotes:
+                    QUOTES = csv.QUOTE_NONNUMERIC
+                writer = csv.writer(csv_file, dialect="excel", quoting=QUOTES)
+                writer.writerow(fields)
+                writer.writerows(sorted_results)
+                print(f"Results written to {args.output_file}.")
+        else:
+            stale_display = tabulate(
+                sorted_results,
+                fields
+                )
+            print(f"\n{stale_display}")
     else:
         # Remove the hosts
         host_list = [x[1] for x in stale]
