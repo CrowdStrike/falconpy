@@ -77,6 +77,7 @@ This has been a critical element in the development of the FalconPy project.
 + `@WDmoose` 
 + Arifur, `@arahman63`
 + `@areino`
++ `@kmccb`
 
 
 ## Sponsors
