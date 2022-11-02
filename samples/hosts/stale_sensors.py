@@ -216,7 +216,7 @@ if stale:
         sorted_results = sorted(stale, key=lambda x: (x[4], x[0]), reverse=args.reverse)
         fields = ["Hostname", "Device ID", "Local IP", "Tag", "Last Seen", "Stale Period"]
         if args.csv:
-            with open(args.output_file, "w", encoding="utf-8") as csv_file:
+            with open(args.output_file, "w", newline="", encoding="utf-8") as csv_file:
                 QUOTES = csv.QUOTE_MINIMAL
                 if args.quotes:
                     QUOTES = csv.QUOTE_NONNUMERIC
