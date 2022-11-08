@@ -5,17 +5,107 @@
 # Authentication examples
 The examples in this folder focus on authentication to CrowdStrike's APIs.
 
-
+- [Azure Key Vault Authentication](#azure-key-vault-authentication) - CrowdStrike API authentication leveraging Azure Key Vault for credential storage.
 - [AES Authentication](#aes-authentication) - Leverage AES/CBC to encrypt credentials for use with authentication to the CrowdStrike API.
 - [AES File Crypt](#aes-file-crypt) - Encrypt arbitrary files with AES/CBC.
 - [Token Authentication](#token-authentication) - Token Authentication is the original solution for authenticating to a Service Class, and is still fully supported. This example demonstrates how to use Token Authentication to interact with multiple Service Classes.
 
+## Azure Key Vault Authentication
+This application demonstrates storing CrowdStrike API credentials within the
+Azure Key Vault service, and retrieving them to access the CrowdStrike API.
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+
+You will also need to ensure you have the following:
+1. An Azure Key Vault (https://docs.microsoft.com/azure/key-vault/quick-create-cli)
+    > :exclamation: Make note of the **Vault URI** :exclamation:</br>
+    > You will use this as a command line argument.
+2. Secrets created for your *Falcon Client ID* and *Client Secret*
+3. `azure-keyvault-secrets` and `azure-identity` libraries
+    ```shell
+    pip install azure-keyvault-secrets azure-identity
+    ```
+4. Set up your environment to use azure-identity's DefaultAzureCredential.
+    > For more information about how to configure
+    > the DefaultAzureCredential, refer to https://aka.ms/azsdk/python/identity/docs#azure.identity.DefaultAzureCredential
+
+#### Command line arguments
+This program accepts the following command line arguments.
+
+| Argument | Long Argument | Description |
+| :-- | :-- | :-- |
+| `-h` | `--help` | Display command line help and exit |
+|  `-k` _CLIENT_ID_PARAMETER_ | `--client_id_parameter` _CLIENT_ID_PARAMETER_ | Name of the Key Vault Secrets parameter storing your API client ID |
+|  `-s` _CLIENT_SECRET_PARAMETER_ | `--client_secret_parameter` _CLIENT_SECRET_PARAMETER_ | Name of the Key Vault Secrets parameter storing your API client secret |
+|  `-u` _VAULT_URI_ | `--vault_uri` _VAULT_URI_ | URI of the Azure Key Vault containing the API credentials |
+
+#### Basic usage
+You must provide the Vault URI (`-u`) in order for this application to execute.
+
+> If you choose to omit the *Client ID parameter* (`-k`) and *Client Secret parameter* (`-s`),
+the default values `falcon-client-id` and `falcon-client-secret` will be used.
+
+#### Example
+Perform a simple API demonstration using the credentials retrieved to list hosts by AID.
+```shell
+python3 azure_key_vault.py -u https://example-kv-name.vault.azure.net/
+```
+
+##### Example result
+```
+Client API credentials successfully retrieved from Azure Key Vault.
+host1 [a18sdfasdfasdfasafdf7cac44deb8d1]
+host2 [asdfasdfuiuiwjkjlhxhjwdfkljh3891]
+host3 [jlk2j3klnf289jflskjf02jfoi2j0jj3]
+Demonstration completed.
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```
+usage: azure_key_vault.py [-h] [-k CLIENT_ID_PARAMETER] [-s CLIENT_SECRET_PARAMETER] -u VAULT_URI
+
+CrowdStrike API authentication leveraging Azure Key Vault for credential storage.
+   _____
+  /  _  \ __________ _________   ____
+ /  /_\  \\___   /  |  \_  __ \_/ __ \
+/    |    \/    /|  |  /|  | \/\  ___/
+\____|__  /_____ \____/ |__|    \___  >
+        \/      \/                  \/
+     ____  __.             ____   ____            .__   __
+    |    |/ _|____ ___.__. \   \ /   /____   __ __|  |_/  |_
+    |      <_/ __ <   |  |  \   Y   /\__  \ |  |  \  |\   __\
+    |    |  \  ___/\___  |   \     /  / __ \|  |  /  |_|  |
+    |____|__ \___  > ____|    \___/  (____  /____/|____/__|
+
+This application demonstrates storing CrowdStrike API credentials within the
+Azure Key Vault service, and retrieving them to access the CrowdStrike API.
+
+options:
+  -h, --help            show this help message and exit
+  -k CLIENT_ID_PARAMETER, --client_id_parameter CLIENT_ID_PARAMETER
+                        Name of the Key Vault Secrets parameter storing your API client ID
+  -s CLIENT_SECRET_PARAMETER, --client_secret_parameter CLIENT_SECRET_PARAMETER
+                        Name of the Key Vault Secrets parameter storing your API client secret
+  -u VAULT_URI, --vault_uri VAULT_URI
+                        URI of the Azure Key Vault containing the API credentials
+```
+
+### Example source code
+Source code for this example can be found [here](azure_key_vault.py).
+
+---
 ## AES Authentication
 Leverage AES/CBC to encrypt credentials for use with authentication to the CrowdStrike API.
 
 > ⚠️ Please note ⚠️
-> 
-> Cryptographic implementation samples should not be seen as recommendations on which encryption algorithms, modes or methods to use in your environment. These examples focus only on the technical aspects of cryptographic authentication scenarios using Python 3 and are provided here to assist developers with their implementation when interacting with the FalconPy SDK. 
+>
+> Cryptographic implementation samples should not be seen as recommendations on which encryption algorithms, modes or methods to use in your environment. These examples focus only on the technical aspects of cryptographic authentication scenarios using Python 3 and are provided here to assist developers with their implementation when interacting with the FalconPy SDK.
 
 + [Running the program](#running-the-program)
 + [Execution syntax](#execution-syntax)
@@ -367,7 +457,7 @@ file arguments:
 ### Example source code
 Source code for this example can be found [here](aes_file_crypt.py).
 
---- 
+---
 
 ## Token Authentication
 [Token authentication](https://www.falconpy.io/Usage/Authenticating-to-the-API.html#legacy-authentication) (also referred to as _legacy authentication_) is the process of authenticating to a FalconPy Service Class by providing a previously assigned bearer token directly to the [`auth_token`](https://www.falconpy.io/Usage/Basic-Service-Class-usage.html#legacy-authentication) keyword when instantiating the Service Class. This is the original method of authentication provided by Service Classes, and while it is frequently eschewed in preference to [Direct](https://www.falconpy.io/Usage/Authenticating-to-the-API.html#direct-authentication) and [Object](https://www.falconpy.io/Usage/Authenticating-to-the-API.html#object-authentication) [Authentication](https://www.falconpy.io/Usage/Authenticating-to-the-API.html), there are multiple scenarios where it is still the best option for the situation.
@@ -378,7 +468,7 @@ Token Authentication support will always be maintained within Falconpy.
 >
 > Token Authentication creates an instance of a FalconPy Service Class that
 > cannot reauthenticate itself as it does not have awareness of your API credentials. You will have to
-> regenerate your bearer token before it expires and update the creds dictionary within the Service Class 
+> regenerate your bearer token before it expires and update the creds dictionary within the Service Class
 > if you are implementing a long running process.
 
 + [Running the program](#running-the-program-2)
