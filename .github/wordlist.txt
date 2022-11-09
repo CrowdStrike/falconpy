@@ -52,6 +52,7 @@ CrowdStrike's
 CSV
 CustomIOA
 CVE
+DefaultAzureCredential
 DeleteActionV
 DeleteAWSAccounts
 DeleteAWSAccountsMixin
