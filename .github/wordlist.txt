@@ -774,3 +774,7 @@ Cryptographic
 txt
 reauthenticate
 AES
+URI
+azsdk
+cli
+microsoft
