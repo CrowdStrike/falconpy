@@ -67,18 +67,18 @@ def consume_arguments() -> Namespace:
     return parser.parse_args()
 
 
-def access_secret_version(secret_id, project_id, version_id):
+def access_secret_version(sec_id, project_id, version_id):
     """Access the secret value."""
     client = secretmanager.SecretManagerServiceClient()
 
-    name = f"projects/{project_id}/secrets/{secret_id}/versions/{version_id}"
+    name = f"projects/{project_id}/secrets/{sec_id}/versions/{version_id}"
 
     try:
         response = client.access_secret_version(request={"name": name})
     except Exception as eception:
         raise SystemExit(eception) from eception
 
-    print(f"Retrieved secret {secret_id} version {version_id} from GCP Secrets Manager.")
+    print(f"Retrieved secret {sec_id} version {version_id} from GCP Secrets Manager.")
 
     return response.payload.data.decode('UTF-8')
 
