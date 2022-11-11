@@ -2,7 +2,18 @@ r"""CrowdStrike API authentication leveraging GCP Secrets Manager for credential
 
 Using
 
-GCP Secrets Manager
+  ____  ____ ____
+ / ___|/ ___|  _ \
+| |  _| |   | |_) |
+| |_| | |___|  __/
+ \____|\____|_|
+
+   ____                     _         __  __
+  / ___|  ___  ___ _ __ ___| |_ ___  |  \/  | __ _ _ __   __ _  __ _  ___ _ __ 
+  \___ \ / _ \/ __| '__/ _ \ __/ __| | |\/| |/ _` | '_ \ / _` |/ _` |/ _ \ '__|
+   ___) |  __/ (__| | |  __/ |_\__ \ | |  | | (_| | | | | (_| | (_| |  __/ |
+  |____/ \___|\___|_|  \___|\__|___/ |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|
+                                                               |___/
 
 to retrieve
 
@@ -29,17 +40,19 @@ try:
 except ImportError as no_falconpy:
     raise SystemExit(
         "The crowdstrike-falconpy library must be installed to use this program"
-        ) from no_falconpy
+    ) from no_falconpy
 try:
     from google.cloud import secretmanager
 except ImportError as no_google:
     raise SystemExit(
         "The google-cloud-secretmanager library must be installed to use this program"
-        ) from no_google
+    ) from no_google
+
 
 def consume_arguments() -> Namespace:
     """Consume any provided command line arguments."""
-    parser = ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
+    parser = ArgumentParser(description=__doc__,
+                            formatter_class=RawTextHelpFormatter)
     # Authenticating to GCP: https://googleapis.dev/python/google-api-core/latest/auth.html
     parser.add_argument("-p", "--project_id",
                         help="The GCP Project ID where the secret is stored",
@@ -78,8 +91,6 @@ def access_secret_version(sec_id, project_id, version_id):
     except Exception as eception:
         raise SystemExit(eception) from eception
 
-    print(f"Retrieved secret {sec_id} version {version_id} from GCP Secrets Manager.")
-
     return response.payload.data.decode('UTF-8')
 
 
@@ -87,12 +98,14 @@ def perform_simple_demonstration(client_id: str, client_secret: str):
     """Perform a simple API demonstration using the credentials retrieved."""
     falcon = Hosts(client_id=client_id, client_secret=client_secret)
     # Retrieve 500 hosts and sort ascending by hostname
-    aid_lookup = falcon.query_devices_by_filter_scroll(sort="hostname.asc", limit=500)
+    aid_lookup = falcon.query_devices_by_filter_scroll(
+        sort="hostname.asc", limit=500)
     if not aid_lookup["status_code"] == 200:
         raise SystemExit(aid_lookup["body"]["errors"][0]["message"])
     if not aid_lookup["body"]["resources"]:
         raise SystemExit("No hosts found.")
-    device_details = falcon.get_device_details(ids=aid_lookup["body"]["resources"])
+    device_details = falcon.get_device_details(
+        ids=aid_lookup["body"]["resources"])
     if not device_details["status_code"] == 200:
         raise SystemExit(device_details["body"]["errors"][0]["message"])
     for host in device_details["body"]["resources"]:
@@ -103,7 +116,9 @@ def perform_simple_demonstration(client_id: str, client_secret: str):
 
 if __name__ == "__main__":
     args = consume_arguments()
-    falcon_client_id = access_secret_version(args.client_id_name, args.project_id, args.secret_version)
-    falcon_client_secret = access_secret_version(args.client_secret_name, args.project_id, args.secret_version)
+    falcon_client_id = access_secret_version(
+        args.client_id_name, args.project_id, args.secret_version)
+    falcon_client_secret = access_secret_version(
+        args.client_secret_name, args.project_id, args.secret_version)
     print("Client API credentials successfully retrieved from GCP Secrets Manager.")
     perform_simple_demonstration(falcon_client_id, falcon_client_secret)
