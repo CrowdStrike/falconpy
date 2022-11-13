@@ -78,7 +78,8 @@ This has been a critical element in the development of the FalconPy project.
 + Arifur, `@arahman63`
 + `@areino`
 + `@kmccb`
-+ Carlos Matos, `carlosmmatos`
++ Carlos Matos, `@carlosmmatos`
++ `@ffalor`
 
 
 ## Sponsors
