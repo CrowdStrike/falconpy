@@ -21,7 +21,7 @@ In order to run this demonstration, you will need access to CrowdStrike API keys
 | Hosts | __READ__ |
 
 You will also need to ensure you have the following:
-1. An Azure Key Vault (https://docs.microsoft.com/azure/key-vault/quick-create-cli)
+1. An Azure Key Vault `https://docs.microsoft.com/azure/key-vault/quick-create-cli`
     > :exclamation: Make note of the **Vault URI** :exclamation:</br>
     > You will use this as a command line argument.
 2. Secrets created for your *Falcon Client ID* and *Client Secret*
