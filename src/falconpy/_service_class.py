@@ -1,4 +1,3 @@
-from __future__ import annotations
 """ServiceClass base class.
 
  _______                        __ _______ __        __ __
@@ -36,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from __future__ import annotations
 import inspect
 
 from typing import Type
@@ -95,7 +95,6 @@ class ServiceClass:
         renew_window: Amount of time (in seconds) between now and the token expiration before
                       a refresh of the token is performed. Default: 120, Max: 1200
                       Values over 1200 will be reset to the maximum.
-        
 
         This method only accepts keywords to specify arguments.
         """
@@ -116,7 +115,7 @@ class ServiceClass:
                         self.auth_object = auth_object.auth_object
 
         else:
-            # Get all the arguments of the authentication class's constructor 
+            # Get all the arguments of the authentication class's constructor
             auth_object_class_sig = inspect.signature(default_auth_object_class)
             auth_kwargs = {}
             for param in auth_object_class_sig.parameters:
