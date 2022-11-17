@@ -106,7 +106,7 @@ class ServiceClass:
         # Passing an auth_object will automatically ignore the rest of the parameters, as
         # this can be treated as an atomic collection of all authentication information.
         if auth_object:
-            if issubclass(FalconPyAuth, auth_object):
+            if issubclass(type(FalconPyAuth), auth_object):
                 self.auth_object = auth_object
             else:
                 # Look for an OAuth2 object as an attribute to the object they provided.
