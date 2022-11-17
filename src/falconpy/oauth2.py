@@ -90,6 +90,13 @@ class OAuth2(FalconPyAuth):
 
         This method only supports keywords to specify arguments.
         """
+        super().__init__(
+            base_url=confirm_base_url(base_url),
+            ssl_verify=ssl_verify,
+            timeout=timeout,
+            proxy=proxy,
+            user_agent=user_agent,
+        )
         if client_id and client_secret and not creds:
             creds = {
                 "client_id": client_id,
@@ -103,11 +110,6 @@ class OAuth2(FalconPyAuth):
             creds = {}
 
         self.creds: Dict[str, str] = creds
-        self.base_url: str = confirm_base_url(base_url)
-        self.ssl_verify: bool = ssl_verify
-        self.timeout: int = timeout
-        self.proxy: Dict[str, str] = proxy
-        self.user_agent: str = user_agent
         self.token_expiration: int = 0
         # Maximum renewal window is 20 minutes, Minimum is 2 minutes
         self.token_renew_window: int = max(min(renew_window, 1200), 120)
