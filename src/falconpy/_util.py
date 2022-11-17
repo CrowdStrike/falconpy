@@ -35,13 +35,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from __future__ import annotations
 import base64
 import functools
 try:
     from simplejson import JSONDecodeError
 except ImportError:
     from json.decoder import JSONDecodeError
-from typing import Dict
+from typing import Dict, TYPE_CHECKING
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
@@ -49,9 +50,11 @@ from ._version import _TITLE, _VERSION
 from ._result import Result, ExpandedResult
 from ._base_url import BaseURL
 from ._container_base_url import ContainerBaseURL
-from ._service_class import ServiceClass
 from ._uber_default_preference import PREFER_NONETYPE, MOCK_OPERATIONS
 urllib3.disable_warnings(InsecureRequestWarning)
+
+if TYPE_CHECKING:
+    from ._service_class import ServiceClass
 
 # Restrict requests to only allowed HTTP methods
 _ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']

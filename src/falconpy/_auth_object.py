@@ -27,6 +27,7 @@ class FalconPyAuth(ABC):
     This class is not usable by developers alone. You must expect to work with
     a derivative of this class, such as an OAuth2 object.
     """
+
     @property
     @abstractmethod
     def auth_headers(self) -> Dict[str, str]:
@@ -34,7 +35,7 @@ class FalconPyAuth(ABC):
 
         This function will always return a dictionary (which could be empty), containing
         all the HTTP headers required to authenticate a request. For example, an OAuth2
-        implementation of this class should return a dictionary containing a 
+        implementation of this class should return a dictionary containing a
         key -> value pair of the Authorization header and a Bearer token.
 
         If the headers need renewed data, such as updated tokens that can expire, the logic
