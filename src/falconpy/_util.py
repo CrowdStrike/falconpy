@@ -41,6 +41,7 @@ try:
     from simplejson import JSONDecodeError
 except ImportError:
     from json.decoder import JSONDecodeError
+from typing import Dict
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
@@ -48,6 +49,7 @@ from ._version import _TITLE, _VERSION
 from ._result import Result, ExpandedResult
 from ._base_url import BaseURL
 from ._container_base_url import ContainerBaseURL
+from ._service_class import ServiceClass
 from ._uber_default_preference import PREFER_NONETYPE, MOCK_OPERATIONS
 urllib3.disable_warnings(InsecureRequestWarning)
 
@@ -155,38 +157,37 @@ def force_default(defaults: list, default_types: list = None):
     return wrapper
 
 
-def service_request(caller: object = None, **kwargs) -> object:  # May return dict or object datatypes
+def service_request(caller: ServiceClass = None, **kwargs) -> object:  # May return dict or object datatypes
     """Check for token expiration, refresh if possible and then perform the request."""
+    headers: Dict[str, str] = kwargs['headers']
     if caller:
         try:
-            if caller.auth_object:
-                if caller.auth_object.token_expired():
-                    auth_response = caller.auth_object.token()
-                    if auth_response["status_code"] == 201:
-                        caller.headers['Authorization'] = f"Bearer {auth_response['body']['access_token']}"
-                    else:
-                        caller.headers['Authorization'] = "Bearer "
-                else:
-                    caller.headers['Authorization'] = f"Bearer {caller.auth_object.token_value}"
+            headers.update(caller.auth_object.auth_headers)
         except AttributeError:
             pass
 
         try:
-            proxy = caller.proxy
+            proxy: Dict[str, str] = caller.auth_object.proxy
         except AttributeError:
             proxy = None
 
         try:
-            timeout = caller.timeout
+            timeout: int = caller.auth_object.timeout
         except AttributeError:
             timeout = None
 
         try:
-            user_agent = caller.user_agent
+            user_agent: str = caller.auth_object.user_agent
         except AttributeError:
             user_agent = None
 
-    returned = perform_request(proxy=proxy, timeout=timeout, user_agent=user_agent, **kwargs)
+    returned = perform_request(
+        proxy=proxy,
+        timeout=timeout,
+        user_agent=user_agent,
+        headers=headers,
+        **kwargs,
+    )
 
     return returned
 

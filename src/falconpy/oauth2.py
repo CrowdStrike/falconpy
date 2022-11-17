@@ -36,6 +36,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import time
+from typing import Dict, Optional
+
+from ._auth_object import FalconPyAuth
+from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
+from ._token_fail_reason import TokenFailReason
 from ._util import (
     perform_request,
     generate_b64cred,
@@ -43,11 +48,9 @@ from ._util import (
     generate_error_result,
     autodiscover_region,
     )
-from ._token_fail_reason import TokenFailReason
-from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
 
 
-class OAuth2:
+class OAuth2(FalconPyAuth):
     """To create an instance of this class, you must pass your client_id and client_secret.
 
     OR a properly formatted dictionary containing your client_id and client_secret
@@ -99,23 +102,19 @@ class OAuth2:
         elif not creds:
             creds = {}
 
-        self.creds = creds
-        self.base_url = confirm_base_url(base_url)
-        self.ssl_verify = ssl_verify
-        self.timeout = timeout
-        self.proxy = proxy
-        self.user_agent = user_agent
-        self.token_expiration = 0
+        self.creds: Dict[str, str] = creds
+        self.base_url: str = confirm_base_url(base_url)
+        self.ssl_verify: bool = ssl_verify
+        self.timeout: int = timeout
+        self.proxy: Dict[str, str] = proxy
+        self.user_agent: str = user_agent
+        self.token_expiration: int = 0
         # Maximum renewal window is 20 minutes, Minimum is 2 minutes
-        self.token_renew_window = max(min(renew_window, 1200), 120)
-        self.token_time = time.time()
-        self.token_value = False
-        self.token_expired = lambda: bool(
-            (time.time() - self.token_time) >= (self.token_expiration - self.token_renew_window)
-            )
-        self.token_fail_reason = None
-        self.token_status = None
-        self.authenticated = lambda: not bool(self.token_expired())
+        self.token_renew_window: int = max(min(renew_window, 1200), 120)
+        self.token_time: float = time.time()
+        self.token_value: Optional[str] = None
+        self.token_fail_reason: Optional[str] = None
+        self.token_status: Optional[int] = None
 
     def token(self: object) -> dict:
         """Generate an authorization token.
@@ -161,7 +160,11 @@ class OAuth2:
 
         return returned
 
-    def revoke(self: object, token: str, client_id: str = None) -> dict:
+    @property
+    def token_expired(self) -> bool:
+        return (time.time() - self.token_time) >= (self.token_expiration - self.token_renew_window)
+
+    def revoke(self: object, token: str) -> dict:
         """Revoke the specified authorization token.
 
         Keyword arguments:
@@ -178,18 +181,31 @@ class OAuth2:
             b64cred = generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
             header_payload = {"Authorization": f"basic {b64cred}"}
             data_payload = {"token": f"{token}"}
-            if client_id:
-                data_payload["client_id"] = client_id
             returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
                                        headers=header_payload, verify=self.ssl_verify,
                                        proxy=self.proxy, timeout=self.timeout,
                                        user_agent=self.user_agent)
             self.token_expiration = 0
-            self.token_value = False
+            self.token_value = None
         else:
             returned = generate_error_result("Invalid credentials specified", 403)
 
         return returned
+
+    @property
+    def auth_headers(self) -> Dict[str, str]:
+        self.token()
+
+        return {
+            'Authorization': 'Bearer ' + self.token_value,
+        }
+
+    @property
+    def authenticated(self) -> bool:
+        return not self.token_expired
+
+    def logout(self) -> Dict:
+        return self.revoke(self.token_value)
 
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
