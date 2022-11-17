@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from __future__ import annotations
 import inspect
 
-from typing import Type
+from typing import Dict, Type
 
 from ._auth_object import FalconPyAuth
 from .oauth2 import OAuth2
@@ -98,7 +98,7 @@ class ServiceClass:
 
         This method only accepts keywords to specify arguments.
         """
-        self.headers = kwargs.get("ext_headers", {})
+        self.ext_headers = kwargs.get("ext_headers", {})
         # Currently defaulting to validation enabled
         self.validate_payloads = kwargs.get("validate_payloads", True)
         self.auth_object: FalconPyAuth = None
@@ -106,13 +106,16 @@ class ServiceClass:
         # Passing an auth_object will automatically ignore the rest of the parameters, as
         # this can be treated as an atomic collection of all authentication information.
         if auth_object:
-            if issubclass(type(FalconPyAuth), auth_object):
+            if issubclass(type(auth_object), FalconPyAuth):
                 self.auth_object = auth_object
             else:
                 # Look for an OAuth2 object as an attribute to the object they provided.
                 for attr in [x for x in dir(auth_object) if "__" not in x]:
                     if attr == "auth_object":
                         self.auth_object = auth_object.auth_object
+
+            if self.auth_object is None:
+                raise Exception("Unknown auth_object passed")
 
         else:
             # Get all the arguments of the authentication class's constructor
@@ -131,3 +134,31 @@ class ServiceClass:
     def token_expired(self) -> bool:
         """Return a boolean reflecting token expiration status."""
         return not self.authenticated
+
+    @property
+    def headers(self) -> Dict[str, str]:
+        """Provide a combination of headers needed for auth and additional supplied headers."""
+        return {
+            ** self.auth_object.auth_headers,
+            ** self.ext_headers,
+        }
+
+    @property
+    def base_url(self) -> str:
+        """Provide the base_url to legacy code that reads it straight from the service class."""
+        return self.auth_object.base_url
+
+    @base_url.setter
+    def base_url(self, value: str):
+        """Set the base_url in the underlying auth_object."""
+        self.auth_object.base_url = value
+
+    @property
+    def ssl_verify(self) -> bool:
+        """Provide the ssl_verify value to legacy code."""
+        return self.auth_object.ssl_verify
+
+    @ssl_verify.setter
+    def ssl_verify(self, value: bool):
+        """Allow legacy code to flip the SSL verify flag in the auth_object via the this class."""
+        self.auth_object.ssl_verify = value
