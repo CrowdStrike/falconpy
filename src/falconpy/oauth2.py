@@ -162,6 +162,7 @@ class OAuth2(FalconPyAuth):
 
     @property
     def token_expired(self) -> bool:
+        """Return whether the token is ready to be renewerd."""
         return (time.time() - self.token_time) >= (self.token_expiration - self.token_renew_window)
 
     def revoke(self: object, token: str) -> dict:
@@ -193,6 +194,7 @@ class OAuth2(FalconPyAuth):
 
     @property
     def auth_headers(self) -> Dict[str, str]:
+        """Return a Bearer token baked into an Authorization header ready for an HTTP request."""
         self.token()
 
         return {
@@ -201,9 +203,11 @@ class OAuth2(FalconPyAuth):
 
     @property
     def authenticated(self) -> bool:
+        """Return whether we are authentication (i.e., token is not expired)."""
         return not self.token_expired
 
     def logout(self) -> Dict:
+        """Revoke the token."""
         return self.revoke(self.token_value)
 
     # These method names align to the operation IDs in the API but
