@@ -46,11 +46,13 @@ from typing import Dict, TYPE_CHECKING
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
-from ._version import _TITLE, _VERSION
-from ._result import Result, ExpandedResult
+
+from ._auth_object import FalconPyAuth
 from ._base_url import BaseURL
 from ._container_base_url import ContainerBaseURL
+from ._result import Result, ExpandedResult
 from ._uber_default_preference import PREFER_NONETYPE, MOCK_OPERATIONS
+from ._version import _TITLE, _VERSION
 urllib3.disable_warnings(InsecureRequestWarning)
 
 if TYPE_CHECKING:
@@ -162,13 +164,7 @@ def force_default(defaults: list, default_types: list = None):
 
 def service_request(caller: ServiceClass = None, **kwargs) -> object:  # May return dict or object datatypes
     """Check for token expiration, refresh if possible and then perform the request."""
-    headers: Dict[str, str] = kwargs['headers']
     if caller:
-        try:
-            headers.update(caller.auth_object.auth_headers)
-        except AttributeError:
-            pass
-
         try:
             proxy: Dict[str, str] = caller.auth_object.proxy
         except AttributeError:
@@ -188,7 +184,7 @@ def service_request(caller: ServiceClass = None, **kwargs) -> object:  # May ret
         proxy=proxy,
         timeout=timeout,
         user_agent=user_agent,
-        headers=headers,
+        # headers=headers,
         **kwargs,
     )
 
@@ -412,11 +408,18 @@ def process_service_request(calling_object: object,  # pylint: disable=R0914 # (
     expand_result -- Request expanded results output
     """
     target_endpoint = [ep for ep in endpoints if operation_id == ep[0]][0]
-    base_url = calling_object.base_url
+    if issubclass(type(calling_object), type(FalconPyAuth)):
+        auth_object: FalconPyAuth = calling_object
+    elif hasattr(calling_object, 'auth_object'):
+        auth_object: FalconPyAuth = calling_object.auth_object
+    else:
+        raise Exception("Could not locate an auth_object to extract a base_url from")
+
+    base_url = auth_object.base_url
     container = False
     if operation_id in MOCK_OPERATIONS:
         for base in [burl for burl in dir(BaseURL) if "__" not in burl]:
-            if BaseURL[base].value == calling_object.base_url.replace("https://", ""):
+            if BaseURL[base].value == auth_object.base_url.replace("https://", ""):
                 base_url = f"https://{ContainerBaseURL[base].value}"
                 container = True
     target_url = f"{base_url}{target_endpoint[2]}"
@@ -442,7 +445,7 @@ def process_service_request(calling_object: object,  # pylint: disable=R0914 # (
         "caller": calling_object,
         "method": target_method,
         "endpoint": target_url,
-        "verify": calling_object.ssl_verify,
+        "verify": calling_object.auth_object.ssl_verify,
         "headers": passed_headers,
         "params": parameter_payload,
         "body": kwargs.get("body", None),
