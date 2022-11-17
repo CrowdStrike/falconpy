@@ -35,7 +35,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from __future__ import annotations
 import inspect
 
 from typing import Dict, Type
