@@ -37,11 +37,12 @@ For more information, please refer to <https://unlicense.org>
 """
 import base64
 import functools
+
 try:
     from simplejson import JSONDecodeError
 except ImportError:
     from json.decoder import JSONDecodeError
-from typing import Dict, TYPE_CHECKING
+from typing import Dict
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
@@ -53,9 +54,6 @@ from ._result import Result, ExpandedResult
 from ._uber_default_preference import PREFER_NONETYPE, MOCK_OPERATIONS
 from ._version import _TITLE, _VERSION
 urllib3.disable_warnings(InsecureRequestWarning)
-
-if TYPE_CHECKING:
-    from ._service_class import ServiceClass
 
 # Restrict requests to only allowed HTTP methods
 _ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
@@ -161,7 +159,7 @@ def force_default(defaults: list, default_types: list = None):
     return wrapper
 
 
-def service_request(caller: ServiceClass = None, **kwargs) -> object:  # May return dict or object datatypes
+def service_request(caller: object = None, **kwargs) -> object:  # May return dict or object datatypes
     """Check for token expiration, refresh if possible and then perform the request."""
     if caller:
         try:
