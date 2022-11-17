@@ -18,7 +18,7 @@ from abc import (
     ABC,
     abstractmethod,
 )
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 
 class FalconPyAuth(ABC):
@@ -54,3 +54,17 @@ class FalconPyAuth(ABC):
 
         This function may return any reasonable type, such as a dictionary.
         """
+
+    def __init__(
+        self,
+        base_url: str,
+        ssl_verify: bool = True,
+        timeout: int = 30,
+        proxy: Optional[Dict[str, str]] = None,
+        user_agent: str = None,
+    ):
+        self.base_url = base_url
+        self.ssl_verify = ssl_verify
+        self.timeout = timeout
+        self.proxy = proxy
+        self.user_agent = user_agent
