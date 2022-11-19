@@ -159,6 +159,7 @@ def force_default(defaults: list, default_types: list = None):
     return wrapper
 
 
+# Caller is defined as an object below until our Python minimum version is >= 3.7
 def service_request(caller: object = None, **kwargs) -> object:  # May return dict or object datatypes
     """Check for token expiration, refresh if possible and then perform the request."""
     if caller:
@@ -176,7 +177,7 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
             user_agent: str = caller.auth_object.user_agent
         except AttributeError:
             user_agent = None
-
+        
     returned = perform_request(
         proxy=proxy,
         timeout=timeout,
