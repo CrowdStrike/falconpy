@@ -161,3 +161,38 @@ class ServiceClass:
     def ssl_verify(self, value: bool):
         """Allow legacy code to flip the SSL verify flag in the auth_object via the this class."""
         self.auth_object.ssl_verify = value
+
+    @property
+    def timeout(self) -> int:
+        """Provide the timeout from the auth_object."""
+        return self.auth_object.timeout
+
+    @timeout.setter
+    def timeout(self, value: int):
+        """Allow the timeout to be overriden."""
+        self.auth_object.timeout = value
+
+    @property
+    def token_renew_window(self) -> int:
+        """Provide the token_renew_window from the auth_object."""
+        return self.auth_object.token_renew_window
+
+    @token_renew_window.setter
+    def token_renew_window(self, value: int):
+        """Allow the token_renew_window to be overriden."""
+        self.auth_object.token_renew_window = value
+
+    @property
+    def token_status(self) -> int:
+        """Provide the token_status from the auth_object."""
+        return self.auth_object.token_status
+
+    @property
+    def token_fail_reason(self) -> str:
+        """Error message received on token generation failure."""
+        return self.auth_object.token_fail_reason
+
+    @property
+    def refreshable(self) -> bool:
+        """Is the token for this auth_object refreshable?"""
+        return self.auth_object.refreshable
