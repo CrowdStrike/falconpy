@@ -14,6 +14,7 @@ auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = IOC(auth_object=config)
 AllowedResponses = [200, 201, 400, 404, 429]
+Allowed403 = ["indicator_aggregate", "GetIndicatorsReport"]
 
 
 class TestIOC:
@@ -59,14 +60,22 @@ class TestIOC:
             "devices_count": falcon.devices_count(type='domain', value='hax0r.ru'),
             "devices_ran_on": falcon.devices_ran_on(type='domain', value='hax0r.ru'),
             "processes_ran_on": falcon.processes_ran_on(type='domain', value='hax0r.ru', device_id=bogey),
-            "entities_processes": falcon.entities_processes(ids=['12345678'])
+            "entities_processes": falcon.entities_processes(ids=['12345678']),
+            "indicator_aggregate": falcon.indicator_aggregate(),
+            "action_get": falcon.action_get("123456789"),
+            "GetIndicatorsReport": falcon.get_indicators_report(filter="FQL something", search={"filter": "FQL"}),
+            "action_query": falcon.action_query(),
+            "ioc_type_query": falcon.ioc_type_query(),
+            "platform_query": falcon.platform_query(),
+            "severity_query": falcon.severity_query()
 
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
-                error_checks = False
-                # print(tests[key])
-                # print(f"{key} operation returned a {tests[key]['status_code']} status code")
+                if not (tests[key]["status_code"] == 403 and key in Allowed403):
+                    error_checks = False
+                    # print(tests[key])
+                    # print(f"{key} operation returned a {tests[key]['status_code']} status code")
 
         return error_checks
 
