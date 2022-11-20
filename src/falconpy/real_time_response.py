@@ -845,6 +845,11 @@ class RealTimeResponse(ServiceClass):
                      RTR will retrieve an existing session for the calling user on this host.
         origin -- String.
         queue_offline -- Boolean.
+        timeout -- Timeout for how long to wait for the request in seconds. Integer.
+                   Default: 30  Maximum: 600
+        timeout_duration -- Timeout duration for how long to wait for the request in duration syntax.
+                            Example: 10s  Valid units: ns, us, ms, s, m, h
+                            Maximum is 10 minutes. Integer.
 
         This method only supports keywords for providing arguments.
 
