@@ -779,3 +779,4 @@ URI
 azsdk
 cli
 Matos
+setuptools
