@@ -335,7 +335,6 @@ _custom_ioa_endpoints = [
         "enum": [
           "created_by",
           "created_on",
-          "description",
           "enabled",
           "modified_by",
           "modified_on",
@@ -343,7 +342,7 @@ _custom_ioa_endpoints = [
         ],
         "type": "string",
         "description": "Possible order by fields: {created_by, created_on, modified_by, "
-        "modified_on, enabled, name, description}",
+        "modified_on, enabled, name}",
         "name": "sort",
         "in": "query"
       },
@@ -387,7 +386,6 @@ _custom_ioa_endpoints = [
         "enum": [
           "created_by",
           "created_on",
-          "description",
           "enabled",
           "modified_by",
           "modified_on",
@@ -395,7 +393,7 @@ _custom_ioa_endpoints = [
         ],
         "type": "string",
         "description": "Possible order by fields: {created_by, created_on, modified_by, "
-        "modified_on, enabled, name, description}",
+        "modified_on, enabled, name}",
         "name": "sort",
         "in": "query"
       },
