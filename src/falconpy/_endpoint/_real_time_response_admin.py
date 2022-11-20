@@ -63,7 +63,10 @@ _real_time_response_admin_endpoints = [
       {
         "type": "string",
         "default": "tiny bit less than overall request timeout",
-        "description": "Timeout duration for how long a host has time to complete processing. Default value is a bit less than the overall timeout value. It cannot be greater than the overall request timeout. Maximum is < 10 minutes. Example, `10s`. Valid units: `ns, us, ms, s, m, h`. ",
+        "description": "Timeout duration for how long a host has time to complete processing. "
+        "Default value is a bit less than the overall timeout value. "
+        "It cannot be greater than the overall request timeout. Maximum is < 10 minutes. "
+        "Example, `10s`. Valid units: `ns, us, ms, s, m, h`. ",
         "name": "host_timeout_duration",
         "in": "query"
       },

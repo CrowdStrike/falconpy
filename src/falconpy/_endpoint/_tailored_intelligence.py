@@ -141,7 +141,8 @@ _tailored_intelligence_endpoints = [
       },
       {
         "type": "string",
-        "description": "Possible order by fields: name, value, rule_type, customer_id, created_date, updated_date. Ex: 'updated_date|asc'.",
+        "description": "Possible order by fields: name, value, rule_type, customer_id, "
+        "created_date, updated_date. Ex: 'updated_date|asc'.",
         "name": "sort",
         "in": "query"
       },

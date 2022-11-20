@@ -113,7 +113,7 @@ _d4c_registration_endpoints = [
     "POST",
     "/cloud-connect-aws/entities/account/v2",
     "Creates a new account in our system for a customer and generates a script "
-	"for them to run in their AWS cloud environment to grant us access.",
+    "for them to run in their AWS cloud environment to grant us access.",
     "d4c_registration",
     [
       {
@@ -157,7 +157,7 @@ _d4c_registration_endpoints = [
     "GET",
     "/cloud-connect-aws/entities/console-setup-urls/v1",
     "Return a URL for customer to visit in their cloud environment to grant "
-	"us access to their AWS environment.",
+    "us access to their AWS environment.",
     "d4c_registration",
     [
       {
@@ -174,7 +174,7 @@ _d4c_registration_endpoints = [
     "GET",
     "/cloud-connect-aws/entities/user-scripts-download/v1",
     "Return a script for customer to run in their cloud environment to grant "
-	"us access to their AWS environment as a downloadable attachment.",
+    "us access to their AWS environment as a downloadable attachment.",
     "d4c_registration",
     [
       {
@@ -415,7 +415,7 @@ _d4c_registration_endpoints = [
         ],
         "type": "string",
         "description": "Account type (e.g.: commercial,gov) Only applicable when "
-		"registering AWS commercial account in a Gov environment",
+        "registering AWS commercial account in a Gov environment",
         "name": "account_type",
         "in": "query"
       }

@@ -209,7 +209,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_indicators_report(self: object, *args, body: dict = None, **kwargs) -> dict:
+    def get_indicators_report(self: object, body: dict = None, **kwargs) -> dict:
         """Launch an indicators report creation job.
 
         Keyword arguments:
@@ -493,7 +493,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def action_query(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def action_query(self: object, parameters: dict = None, **kwargs) -> dict:
         """Query Actions.
 
         Keyword arguments:
@@ -567,7 +567,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def ioc_type_query(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def ioc_type_query(self: object, parameters: dict = None, **kwargs) -> dict:
         """Query IOC types.
 
         Keyword arguments:
@@ -593,7 +593,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def platform_query(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def platform_query(self: object, parameters: dict = None, **kwargs) -> dict:
         """Query platforms.
 
         Keyword arguments:
@@ -619,7 +619,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def severity_query(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def severity_query(self: object, parameters: dict = None, **kwargs) -> dict:
         """Query severities.
 
         Keyword arguments:

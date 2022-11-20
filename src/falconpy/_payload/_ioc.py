@@ -197,6 +197,7 @@ def indicator_update_payload(passed_keywords: dict) -> dict:
 
     return returned_payload
 
+
 def indicator_report_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted indicator report payload.
 

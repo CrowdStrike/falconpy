@@ -181,7 +181,8 @@ _firewall_management_endpoints = [
     "update-policy-container-v1",
     "PUT",
     "/fwmgr/entities/policies/v1",
-    "Update an identified policy container. WARNING: This endpoint is deprecated in favor of v2, using this endpoint could disable your local logging setting.",
+    "Update an identified policy container. WARNING: This endpoint is deprecated in "
+    "favor of v2, using this endpoint could disable your local logging setting.",
     "firewall_management",
     [
       {
@@ -209,7 +210,8 @@ _firewall_management_endpoints = [
     "get-rule-groups",
     "GET",
     "/fwmgr/entities/rule-groups/v1",
-    "Get rule group entities by ID. These groups do not contain their rule entites, just the rule IDs in precedence order.",
+    "Get rule group entities by ID. These groups do not contain their rule entites, "
+    "just the rule IDs in precedence order.",
     "firewall_management",
     [
       {
@@ -234,7 +236,8 @@ _firewall_management_endpoints = [
     [
       {
         "type": "string",
-        "description": "A rule group ID from which to copy rules. If this is provided then the 'rules' property of the body is ignored.",
+        "description": "A rule group ID from which to copy rules. "
+        "If this is provided then the 'rules' property of the body is ignored.",
         "name": "clone_id",
         "in": "query"
       },
@@ -313,13 +316,15 @@ _firewall_management_endpoints = [
     [
       {
         "type": "string",
-        "description": "A rule group ID from which to copy rules. If this is provided then the 'rules' property of the body is ignored.",
+        "description": "A rule group ID from which to copy rules. "
+        "If this is provided then the 'rules' property of the body is ignored.",
         "name": "clone_id",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "If this flag is set to true then the rules will be cloned from the clone_id from the CrowdStrike Firewall Rule Groups Library.",
+        "description": "If this flag is set to true then the rules will be cloned from the "
+        "clone_id from the CrowdStrike Firewall Rule Groups Library.",
         "name": "library",
         "in": "query"
       },
@@ -340,7 +345,8 @@ _firewall_management_endpoints = [
     "update-rule-group-validation",
     "PATCH",
     "/fwmgr/entities/rule-groups/validation/v1",
-    "Validates the request of updating name, description, or enabled status of a rule group, or create, edit, delete, or reorder rules",
+    "Validates the request of updating name, description, or enabled status of a rule group, "
+    "or create, edit, delete, or reorder rules",
     "firewall_management",
     [
       {
