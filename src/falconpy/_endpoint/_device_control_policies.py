@@ -188,8 +188,6 @@ _device_control_policies_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 32,
-          "minLength": 32,
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -238,8 +236,6 @@ _device_control_policies_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 32,
-          "minLength": 32,
           "type": "string"
         },
         "collectionFormat": "multi",

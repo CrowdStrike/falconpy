@@ -188,8 +188,6 @@ _firewall_policies_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 32,
-          "minLength": 32,
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -246,8 +244,6 @@ _firewall_policies_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 32,
-          "minLength": 32,
           "type": "string"
         },
         "collectionFormat": "multi",

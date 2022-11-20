@@ -308,8 +308,6 @@ _sensor_update_policies_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 32,
-          "minLength": 32,
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -358,8 +356,6 @@ _sensor_update_policies_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 32,
-          "minLength": 32,
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -380,8 +376,6 @@ _sensor_update_policies_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 32,
-          "minLength": 32,
           "type": "string"
         },
         "collectionFormat": "multi",

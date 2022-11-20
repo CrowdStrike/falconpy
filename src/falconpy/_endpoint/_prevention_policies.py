@@ -190,8 +190,6 @@ _prevention_policies_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 32,
-          "minLength": 32,
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -240,8 +238,6 @@ _prevention_policies_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 32,
-          "minLength": 32,
           "type": "string"
         },
         "collectionFormat": "multi",
