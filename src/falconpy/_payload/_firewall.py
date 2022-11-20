@@ -292,3 +292,98 @@ def firewall_rule_group_update_payload(passed_keywords: dict) -> dict:
             returned_payload["diff_operations"] = [diffs]
 
     return returned_payload
+
+
+def firewall_rule_group_validation_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted firewall rule group validation body payload.
+
+       {
+            "description": "string",
+            "enabled": true,
+            "name": "string",
+            "platform": "string",
+            "rules": [
+                {
+                "action": "string",
+                "address_family": "string",
+                "description": "string",
+                "direction": "string",
+                "enabled": true,
+                "fields": [
+                    {
+                    "final_value": "string",
+                    "label": "string",
+                    "name": "string",
+                    "type": "string",
+                    "value": "string",
+                    "values": [
+                        "string"
+                    ]
+                    }
+                ],
+                "icmp": {
+                    "icmp_code": "string",
+                    "icmp_type": "string"
+                },
+                "local_address": [
+                    {
+                    "address": "string",
+                    "netmask": 0
+                    }
+                ],
+                "local_port": [
+                    {
+                    "end": 0,
+                    "start": 0
+                    }
+                ],
+                "log": true,
+                "monitor": {
+                    "count": "string",
+                    "period_ms": "string"
+                },
+                "name": "string",
+                "protocol": "string",
+                "remote_address": [
+                    {
+                    "address": "string",
+                    "netmask": 0
+                    }
+                ],
+                "remote_port": [
+                    {
+                    "end": 0,
+                    "start": 0
+                    }
+                ],
+                "temp_id": "string"
+                }
+            ]
+       }
+    """
+    returned_payload = {}
+    keys = ["description", "name", "platform", "rules"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key, None)
+    if passed_keywords.get("enabled", None) != None:
+        returned_payload["enabled"] = passed_keywords.get("enabled")
+
+    return returned_payload
+
+
+def firewall_filepattern_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted filepath pattern validation body payload.
+    
+       {
+           "filepath_pattern": "string",
+           "filepath_test_string": "string"
+       }
+    """
+    returned_payload = {}
+    keys = ["filepath_pattern", "filepath_test_string"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    return returned_payload
