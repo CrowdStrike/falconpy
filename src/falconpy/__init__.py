@@ -74,6 +74,7 @@ from .sensor_update_policy import SensorUpdatePolicy, SensorUpdatePolicies
 from .sensor_visibility_exclusions import SensorVisibilityExclusions
 from .spotlight_vulnerabilities import SpotlightVulnerabilities
 from .spotlight_evaluation_logic import SpotlightEvaluationLogic
+from .tailored_intelligence import TailoredIntelligence
 from .user_management import UserManagement
 from .zero_trust_assessment import ZeroTrustAssessment
 
@@ -99,7 +100,7 @@ __all__ = [
     "ScheduledReports", "SensorDownload", "SensorUpdatePolicy", "SensorVisibilityExclusions",
     "SpotlightVulnerabilities", "SpotlightEvaluationLogic", "UserManagement",
     "ZeroTrustAssessment", "PreventionPolicies", "SensorUpdatePolicies", "MessageCenter",
-    "FileVantage", "MobileEnrollment", "ContainerBaseURL"
+    "FileVantage", "MobileEnrollment", "ContainerBaseURL", "TailoredIntelligence"
 ]
 """
 This is free and unencumbered software released into the public domain.
