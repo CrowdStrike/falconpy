@@ -323,14 +323,16 @@ _recon_endpoints = [
     "recon",
     [
       {
-        "type": "string",
+        "type": "integer",
         "description": "Starting index of overall result set from which to return IDs.",
         "name": "offset",
         "in": "query"
       },
       {
+        "maximum": 500,
+        "minimum": 1,
         "type": "integer",
-        "description": "Number of IDs to return.",
+        "description": "Number of IDs to return. Offset + limit should NOT be above 10K.",
         "name": "limit",
         "in": "query"
       },
@@ -370,8 +372,10 @@ _recon_endpoints = [
         "in": "query"
       },
       {
+        "maximum": 500,
+        "minimum": 1,
         "type": "integer",
-        "description": "Number of ids to return.",
+        "description": "Number of IDs to return. Offset + limit should NOT be above 10K.",
         "name": "limit",
         "in": "query"
       },
