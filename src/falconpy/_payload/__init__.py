@@ -43,7 +43,7 @@ from ._sensor_update_policy import sensor_policy_payload
 from ._response_policy import response_policy_payload
 from ._real_time_response import command_payload, data_payload
 from ._cloud_connect_aws import aws_registration_payload
-from ._ioc import indicator_payload, indicator_update_payload
+from ._ioc import indicator_payload, indicator_update_payload, indicator_report_payload
 from ._d4c_registration import azure_registration_payload, aws_registration_payload
 from ._cspm_registration import cspm_registration_payload, cspm_policy_payload, cspm_scan_payload
 from ._device_control_policy import device_policy_payload
@@ -76,5 +76,5 @@ __all__ = [
     "firewall_rule_group_payload", "firewall_rule_group_update_payload", "reports_payload",
     "activity_payload", "case_payload", "incident_action_parameters", "update_alerts_payload",
     "firewall_rule_group_validation_payload", "firewall_filepattern_payload",
-    "aws_registration_payload", "image_payload"
+    "aws_registration_payload", "image_payload", "indicator_report_payload"
 ]

@@ -196,3 +196,31 @@ def indicator_update_payload(passed_keywords: dict) -> dict:
         returned_payload["indicators"] = [indicator_object(passed_keywords=passed_keywords)]
 
     return returned_payload
+
+def indicator_report_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted indicator report payload.
+
+    {
+        "report_format": "string",
+        "search": {
+            "filter": "string",
+            "query": "string",
+            "sort": "string"
+        }
+    }
+    """
+    returned_payload = {}
+    keys = ["report_format", "search"]
+    search_keys = ["filter", "query", "sort"]
+    search = {}
+    for key in search_keys:
+        if passed_keywords.get(key, None):
+            search[key] = passed_keywords.get(key)
+    if search:
+        returned_payload["search"] = search
+    # Passed search dictionary will override subkeys
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
