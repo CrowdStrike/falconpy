@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import azure_registration_payload
+from ._payload import azure_registration_payload, aws_registration_payload
 from ._service_class import ServiceClass
 from ._endpoint._d4c_registration import _d4c_registration_endpoints as Endpoints
 
@@ -55,11 +55,170 @@ class D4CRegistration(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_aws_account(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Returns information about the current status of an AWS account.
+
+        Keyword arguments:
+        ids -- List of AWS Account IDs to retrieve. String or list of strings.
+        limit -- The maximum records to return. Defaults to 100. Integer.
+        migrated -- Only return migrated D4C accounts. Boolean.
+        offset -- The offset to start retrieving records from. Integer.
+        organization_ids -- List of AWS Organization IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+        scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts.
+        status -- Account status to filter results by. String.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetD4CAwsAccount
+        """
+        if kwargs.get("scan_type", None):
+            kwargs["scan-type"] = kwargs.get("scan_type", None)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetD4CAwsAccount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_aws_account(self: object, body: dict = None, **kwargs) -> dict:
+        """Register a new AWS account.
+
+        Creates a new account in our system for a customer and generates a
+        script for them to run in their AWS cloud environment to grant us access.
+
+        Keyword arguments:
+        account_id -- AWS account ID. String.
+        account_type -- AWS account type. String.
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "account_id": "string",
+                            "account_type": "string",
+                            "cloudtrail_region": "string",
+                            "is_master": true,
+                            "organization_id": "string"
+                        }
+                    ]
+                }
+        cloudtrail_region -- AWS region for CloudTrail log access.
+        is_master -- Flag indicating if this is the master account. Boolean.
+        organization_id -- AWS organization ID. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateD4CAwsAccount
+        """
+        if not body:
+            body = aws_registration_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateD4CAwsAccount",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_aws_account(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Deletes an existing AWS account or organization from the tenant.
+
+        Keyword arguments:
+        ids -- List of AWS Account IDs to retrieve. String or list of strings.
+        organization_ids -- List of AWS Organization IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/DeleteD4CAwsAccount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteD4CAwsAccount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_aws_console_setup(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Return a URL for customer to visit in their cloud environment to grant CrowdStrike access.
+
+        Keyword arguments:
+        region -- AWS region to generate the URL for. String.
+        parameters -- full parameters payload, not required if region is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'region'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetD4CAwsConsoleSetupURLs
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetD4CAwsConsoleSetupURLs",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "region")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_aws_account_scripts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Return a script for customer to run in their cloud environment to grant CrowdStrike access.
+
+        Keyword arguments:
+        ids -- List of AWS Account IDs to retrieve the script for. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetD4CAWSAccountScriptsAttachment
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetD4CAWSAccountScriptsAttachment",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_azure_account(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Return information about Azure account registration.
 
         Keyword arguments:
-        ids -- List of Response Policy IDs to retrieve. String or list of strings.
+        ids -- List of Azure Account IDs to retrieve. String or list of strings.
         parameters -- full parameters payload, not required if ids is provided as a keyword.
         scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts.
 
@@ -103,7 +262,6 @@ class D4CRegistration(ServiceClass):
                 }
         subscription_id -- Azure subscription ID. String.
         tenant_id -- Azure tenant ID. String.
-
 
         This method only supports keywords for providing arguments.
 
@@ -338,9 +496,43 @@ class D4CRegistration(ServiceClass):
             operation_id="GetCSPMGCPUserScripts"
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_aws_horizon_scripts(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Return a script for customer to run in their cloud environment to grant CrowdStrike access.
+
+        Keyword arguments:
+        account_type -- Account type (commercial, gov). Only applicable when registering AWS
+                        commercial accounts in a Gov environment. String.
+        delete -- Generate a delete script. Boolean.
+        organization_id -- AWS organization ID. String.
+        parameters -- full parameters payload, not required if using other keywords.
+        single_account -- Get static script for single account. Boolean.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response or a binary script.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetHorizonD4CScripts
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetHorizonD4CScripts",
+            keywords=kwargs,
+            params=parameters
+            )
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
+    GetD4CAwsAccount = get_aws_account
+    CreateD4CAwsAccount = create_aws_account
+    DeleteD4CAwsAccount = delete_aws_account
+    GetD4CAwsConsoleSetupURLs = get_aws_console_setup
+    GetD4CAWSAccountScriptsAttachment = get_aws_account_scripts
     GetCSPMAzureAccount = get_azure_account
     CreateCSPMAzureAccount = create_azure_account
     UpdateCSPMAzureAccountClientID = update_azure_account_client_id
@@ -352,6 +544,7 @@ class D4CRegistration(ServiceClass):
     CreateCSPMGCPAccount = create_gcp_account
     GetCSPMGCPUserScriptsAttachment = get_gcp_user_scripts_attachment
     GetCSPMGCPUserScripts = get_gcp_user_scripts
+    GetHorizonD4CScripts = get_aws_horizon_scripts
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
