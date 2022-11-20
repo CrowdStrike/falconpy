@@ -78,6 +78,10 @@ class RealTimeResponseAdmin(ServiceClass):
                         Refer to the RTR documentation for the full list of commands.
         batch_id -- Batch ID to execute the command on. Received from batch_init_session. String.
         command_string -- Full command string for the command. For example `get some_file.txt`.
+        host_timeout_duration -- Timeout duration for how long a host has time to complete processing.
+                                 Default value is slightly less than the overall timeout value.
+                                 This value cannot be greater than the overall request timeout. Max < 10 minutes.
+                                 Example: 10s  Valid units: ns, us, ms, s, m, h
         optional_hosts -- List of a subset of hosts we want to run the command on.
                           If this list is supplied, only these hosts will receive the command.
         parameters -- full parameters payload in JSON format. Not required if using other keywords.
