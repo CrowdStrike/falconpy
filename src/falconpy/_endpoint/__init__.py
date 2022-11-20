@@ -79,6 +79,7 @@ from ._sensor_update_policies import _sensor_update_policies_endpoints
 from ._sensor_visibility_exclusions import _sensor_visibility_exclusions_endpoints
 from ._spotlight_evaluation_logic import _spotlight_evaluation_logic_endpoints
 from ._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints
+from ._tailored_intelligence import _tailored_intelligence_endpoints
 from ._user_management import _user_management_endpoints
 from ._zero_trust_assessment import _zero_trust_assessment_endpoints
 
@@ -130,6 +131,7 @@ api_endpoints.extend(_sensor_update_policies_endpoints)
 api_endpoints.extend(_sensor_visibility_exclusions_endpoints)
 api_endpoints.extend(_spotlight_evaluation_logic_endpoints)
 api_endpoints.extend(_spotlight_vulnerabilities_endpoints)
+api_endpoints.extend(_tailored_intelligence_endpoints)
 api_endpoints.extend(_user_management_endpoints)
 api_endpoints.extend(_zero_trust_assessment_endpoints)
 
