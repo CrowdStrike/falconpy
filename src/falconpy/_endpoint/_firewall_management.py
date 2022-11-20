@@ -178,10 +178,25 @@ _firewall_management_endpoints = [
     ]
   ],
   [
-    "update_policy_container",
+    "update_policy_container_v1",
     "PUT",
     "/fwmgr/entities/policies/v1",
-    "Update an identified policy container",
+    "Update an identified policy container. WARNING: This endpoint is deprecated in favor "
+	"of v2, using this endpoint could disable your local logging setting.",
+    "firewall_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "update_policy_container",
+    "PUT",
+    "/fwmgr/entities/policies/v2",
+    "Update an identified policy container, including local logging functionality.",
     "firewall_management",
     [
       {
@@ -292,6 +307,58 @@ _firewall_management_endpoints = [
     ]
   ],
   [
+    "create_rule_group_validation",
+    "POST",
+    "/fwmgr/entities/rule-groups/validation/v1",
+    "Validates the request of creating a new rule group on a platform for a customer with a name and description",
+    "firewall_management",
+    [
+      {
+        "type": "string",
+        "description": "A rule group ID from which to copy rules. If this is provided then the 'rules' property of the body is ignored.",
+        "name": "clone_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "If this flag is set to true then the rules will be cloned from the clone_id from the CrowdStrike Firewall Rule Groups Library.",
+        "name": "library",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Audit log comment for this action",
+        "name": "comment",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "update_rule_group_validation",
+    "PATCH",
+    "/fwmgr/entities/rule-groups/validation/v1",
+    "Validates the request of updating name, description, or enabled status of a rule group, or create, edit, delete, or reorder rules",
+    "firewall_management",
+    [
+      {
+        "type": "string",
+        "description": "Audit log comment for this action",
+        "name": "comment",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "get_rules",
     "GET",
     "/fwmgr/entities/rules/v1",
@@ -307,6 +374,20 @@ _firewall_management_endpoints = [
         "description": "The rules to retrieve, identified by ID",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "validate_filepath_pattern",
+    "POST",
+    "/fwmgr/entities/rules/validate-filepath/v1",
+    "Validates that the test pattern matches the executable filepath glob pattern.",
+    "firewall_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
