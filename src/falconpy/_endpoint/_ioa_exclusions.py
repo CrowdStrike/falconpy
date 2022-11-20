@@ -49,7 +49,7 @@ _ioa_exclusions_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
+        "collectionFormat": "multi",
         "description": "The ids of the exclusions to retrieve",
         "name": "ids",
         "in": "query",
@@ -97,7 +97,7 @@ _ioa_exclusions_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
+        "collectionFormat": "multi",
         "description": "The ids of the exclusions to delete",
         "name": "ids",
         "in": "query",
