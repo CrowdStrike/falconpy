@@ -93,7 +93,18 @@ class TestD4CRegistration:
             "get_gcp_acocunt": falcon.GetCSPMGCPAccount(ids='12345678'),  # Test the typo fix version
             "create_gcp_account": falcon.CreateCSPMGCPAccount(body={}, parent_id="12345678"),
             "create_azure_account": falcon.CreateCSPMAzureAccount(body={}, subscription_id="12345678", tenant_id="12345678"),
-            "azure_download_certificate": falcon.DiscoverCloudAzureDownloadCertificate("12345678")  # Also testing arg handling
+            "azure_download_certificate": falcon.DiscoverCloudAzureDownloadCertificate("12345678"),  # Also testing arg handling
+            "GetD4CAwsAccount": falcon.get_aws_account("123456789", scan_type="dry"),
+            "CreateD4CAwsAccount": falcon.create_aws_account(account_id="123456789",
+                                                             account_type="single",
+                                                             cloudtrail_region="us-east-2",
+                                                             is_master=False,
+                                                             organization_id="12345678"
+                                                             ),
+            "DeleteD4CAwsAccount": falcon.delete_aws_account("ID_DOES_NOT_EXIST"),
+            "GetD4CAwsConsoleSetupURLs": falcon.get_aws_console_setup("us-east-2"),
+            "GetD4CAwsAccountScriptsAttachment": falcon.get_aws_account_scripts("123456789"),
+            "GetHorizonD4CScripts": falcon.get_aws_horizon_scripts(organization_id="123456789")
         }
         for key in tests:
             if tests[key]["status_code"] != 500:

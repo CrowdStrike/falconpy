@@ -31,7 +31,8 @@ class TestFalconContainer:
             "ImageMatchesPolicy": falcon.image_matches_policy(repository="whatever", tag="whatever", body={}),
             "GetAssessmentUber": uber.command("GetImageAssessmentReport", repository="whatever", tag="whatever"),
             "DeleteImageDetailsUber": uber.command("DeleteImageDetails", image_id="12345678"),
-            "ImageMatchesPolicyUber": uber.command("ImageMatchesPolicy", repository="whatever", tag="whatever")
+            "ImageMatchesPolicyUber": uber.command("ImageMatchesPolicy", repository="whatever", tag="whatever"),
+            "read_image_vulnerabilities": falcon.read_image_vulnerabilities(osversion="Windows", packages={"LayerIndex": 1})
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

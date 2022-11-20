@@ -72,6 +72,17 @@ class TestAuthentications:
         else:
             return False
 
+    def serviceAny_forceCrossCloudResponseGovFailure(self):
+        falcon = OAuth2(client_id=os.environ["CROSS_DEBUG_KEY"],
+                        client_secret=os.environ["CROSS_DEBUG_SECRET"],
+                        base_url="us1"
+                        )
+        result = falcon.token()
+        if result["status_code"] == 403:
+            return True
+        else:
+            return False
+
     def serviceAny_checkRegionNameLookups(self):
         falcon = OAuth2(client_id=auth.config["falcon_client_id"],
                         client_secret=auth.config["falcon_client_secret"],
@@ -195,6 +206,9 @@ class TestAuthentications:
                         )
     def test_crossGovCloudSelectFailure(self):
         assert self.serviceAny_forceGovCloudAutoSelectFailure() is True
+
+    def test_crossGovCloudSelectGovFailure(self):
+        assert self.serviceAny_forceCrossCloudResponseGovFailure() is True
 
     def test_ObjectAuth(self):
         assert self.serviceAny_TestObjectAuth() is True
