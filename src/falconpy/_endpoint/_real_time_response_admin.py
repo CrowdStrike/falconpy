@@ -61,6 +61,13 @@ _real_time_response_admin_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "default": "tiny bit less than overall request timeout",
+        "description": "Timeout duration for how long a host has time to complete processing. Default value is a bit less than the overall timeout value. It cannot be greater than the overall request timeout. Maximum is < 10 minutes. Example, `10s`. Valid units: `ns, us, ms, s, m, h`. ",
+        "name": "host_timeout_duration",
+        "in": "query"
+      },
+      {
         "description": "Use this endpoint to run these [real time response commands]"
         "(https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands):\n- "
         "`cat`\n- `cd`\n- `clear`\n- `cp`\n- `encrypt`\n- `env`\n- `eventlog`\n- `filehash`\n- `get`\n- "
