@@ -46,6 +46,20 @@ _falcon_container_endpoints = [
     []
   ],
   [
+    "ReadImageVulnerabilities",
+    "POST",
+    "/image-assessment/combined/vulnerability-lookups/v1",
+    "Retrieve known vulnerabilities for the provided image",
+    "falcon_container_cli",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetImageAssessmentReport",
     "GET",
     "/reports",
