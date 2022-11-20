@@ -54,6 +54,20 @@ _report_executions_endpoints = [
     ]
   ],
   [
+    "report-executions.retry",
+    "POST",
+    "/reports/entities/report-executions-retry/v1",
+    "This endpoint will be used to retry report executions",
+    "report_executions",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "report-executions.get",
     "GET",
     "/reports/entities/report-executions/v1",
