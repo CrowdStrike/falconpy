@@ -36,7 +36,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import indicator_payload, indicator_update_payload
+from ._payload import (
+    aggregate_payload,
+    indicator_payload,
+    indicator_update_payload,
+    indicator_report_payload
+    )
 from ._service_class import ServiceClass
 from ._endpoint._ioc import _ioc_endpoints as Endpoints
 from ._endpoint._iocs import _iocs_endpoints as LegacyEndpoints
@@ -54,6 +59,78 @@ class IOC(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def indicator_aggregate(self: object, parameters: dict = None, body: dict = None, **kwargs) -> dict:
+        """Get indicator aggregates as specified via json in request body.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                {
+                    "date_ranges": [
+                    {
+                        "from": "string",
+                        "to": "string"
+                    }
+                    ],
+                    "field": "string",
+                    "filter": "string",
+                    "interval": "string",
+                    "min_doc_count": 0,
+                    "missing": "string",
+                    "name": "string",
+                    "q": "string",
+                    "ranges": [
+                    {
+                        "From": 0,
+                        "To": 0
+                    }
+                    ],
+                    "size": 0,
+                    "sort": "string",
+                    "sub_aggregates": [
+                        null
+                    ],
+                    "time_zone": "string",
+                    "type": "string"
+                }
+        date_ranges -- List of dictionaries.
+        field -- String.
+        filter -- FQL syntax. String.
+        from_parent -- The filter for returning either only indicators for the
+                       requested customer or its MSSP parents. Boolean.
+        interval -- String.
+        min_doc_count -- Minimum number of documents required to match. Integer.
+        missing -- String.
+        name -- Scan name. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.aggregate.v1
+        """
+        if not body:
+            # IOC aggregate payload does NOT expect a list
+            body = aggregate_payload(submitted_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="indicator_aggregate_v1",
+            body=body,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def indicator_combined(self: object, parameters: dict = None, **kwargs) -> dict:
@@ -103,6 +180,80 @@ class IOC(ServiceClass):
             operation_id="indicator_combined_v1",
             keywords=kwargs,
             params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def action_get(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get Actions by IDs.
+
+        Keyword arguments:
+        ids -- List of Indicator ID(s) you wish to lookup. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/action.get.v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="action_get_v1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_indicators_report(self: object, *args, body: dict = None, **kwargs) -> dict:
+        """Launch an indicators report creation job.
+
+        Keyword arguments:
+        body -- full parameters payload, not required if using other keywords.
+                {
+                    "report_format": "string",
+                    "search": {
+                        "filter": "string",
+                        "query": "string",
+                        "sort": "string"
+                    }
+                }
+        filter -- FQL formatted string specifying the search filter.
+                  Overridden if 'search' keyword is provided.
+        query -- FQL formatted string specifying the search query.
+                 Overridden if 'search' keyword is provided.
+        report_format -- Format of the report. String.
+        search -- Search parameters. Strings are in FQL format. Dictionary.
+                  {
+                      "filter": "string",
+                      "query": "string",
+                      "sort": "string"
+                  }
+        sort -- FQL formatted string specifying the search sort.
+                Overridden if 'search' keyword is provided.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/GetIndicatorsReport
+        """
+        if not body:
+            body = indicator_report_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIndicatorsReport",
+            keywords=kwargs,
+            body=body
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -341,6 +492,32 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def action_query(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Query Actions.
+
+        Keyword arguments:
+        limit -- Number of IDs to return. Integer.
+        offset -- Starting index of overall result set from which to return IDs. String.
+        parameters -- full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/action.query.v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="action_query_v1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def indicator_search(self: object, parameters: dict = None, **kwargs) -> dict:
         """Search for Indicators.
 
@@ -384,6 +561,84 @@ class IOC(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="indicator_search_v1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def ioc_type_query(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Query IOC types.
+
+        Keyword arguments:
+        limit -- Number of IDs to return. Integer.
+        offset -- Starting index of overall result set from which to return IDs. String.
+        parameters -- full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/ioc_type.query.v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ioc_type_query_v1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def platform_query(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Query platforms.
+
+        Keyword arguments:
+        limit -- Number of IDs to return. Integer.
+        offset -- Starting index of overall result set from which to return IDs. String.
+        parameters -- full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/platform.query.v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="platform_query_v1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def severity_query(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Query severities.
+
+        Keyword arguments:
+        limit -- Number of IDs to return. Integer.
+        offset -- Starting index of overall result set from which to return IDs. String.
+        parameters -- full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/severity.query.v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="severity_query_v1",
             keywords=kwargs,
             params=parameters
             )
@@ -527,12 +782,19 @@ class IOC(ServiceClass):
 
     # These names are acceptable and match the API operation IDs.
     # They are defined here for ease of use purposes.
+    action_get_v1 = action_get
+    action_query_v1 = action_query
+    GetIndicatorsReport = get_indicators_report
+    indicator_aggregate_v1 = indicator_aggregate
     indicator_combined_v1 = indicator_combined
     indicator_get_v1 = indicator_get
     indicator_create_v1 = indicator_create
     indicator_delete_v1 = indicator_delete
     indicator_update_v1 = indicator_update
     indicator_search_v1 = indicator_search
+    ioc_type_query_v1 = ioc_type_query
+    platform_query_v1 = platform_query
+    severity_query_v1 = severity_query
     # Legacy operation IDs, these are not acceptable PEP8 syntax
     # and are defined here for backwards compatibility / ease of
     # use purposes. These endpoints were ported from IOCS.py
