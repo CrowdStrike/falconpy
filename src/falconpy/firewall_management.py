@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0302
+# pylint: disable=C0302,R0904
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import (
     aggregate_payload,
@@ -472,11 +472,13 @@ class FirewallManagement(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_policy_container_v1(self: object,
-                                body: dict,
-                                cs_username: str = None,  # pylint: disable=W0613  # deprecated
-                                **kwargs
-                                ) -> dict:
-        """Update an identified policy container. **DEPRECATED**
+                                   body: dict,
+                                   cs_username: str = None,  # pylint: disable=W0613  # deprecated
+                                   **kwargs
+                                   ) -> dict:
+        """Update an identified policy container.
+
+        **DEPRECATED**
 
         Keyword arguments:
         body -- Full body payload in JSON format. Not required if other keywords are provided.
@@ -899,7 +901,7 @@ class FirewallManagement(ServiceClass):
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
     def create_rule_group_validation(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
-        """Validates the request of creating a new rule group on a platform for a customer with a name and description.
+        """Validate the request for creating a new rule group on a platform for a customer with a name and description.
 
         Keyword arguments:
         body -- Full body payload in JSON format. Not required if other keywords are provided.
@@ -1001,14 +1003,15 @@ class FirewallManagement(ServiceClass):
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def update_rule_group_validation(self: object,
-                          body: dict = None,
-                          cs_username: str = None,  # pylint: disable=W0613  # deprecated
-                          parameters: dict = None,
-                          **kwargs
-                          ) -> dict:
-        """Validates the request of updating name, description, or enabled status of a rule group, or create, edit, delete, or reorder rules
+                                     body: dict = None,
+                                     cs_username: str = None,  # pylint: disable=W0613  # deprecated
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> dict:
+        """Validate the request.
 
-        Can also create, edit, delete, or reorder rules.
+        Validates the request of updating name, description, or enabled status
+        of a rule group, or create, edit, delete, or reorder rules.
 
         Keyword arguments:
         body -- Full body payload in JSON format. Not required if other keywords are provided.
@@ -1095,7 +1098,7 @@ class FirewallManagement(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def validate_filepath_pattern(self: object, body: dict = None, **kwargs) -> dict:
-        """Validates that the test pattern matches the executable filepath glob pattern.
+        """Validate that the test pattern matches the executable filepath glob pattern.
 
         Keyword arguments:
         body -- Full body payload in JSON format. Not required if using other keywords. Dictionary.

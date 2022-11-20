@@ -342,19 +342,24 @@ _real_time_response_endpoints = [
       {
         "type": "integer",
         "default": 30,
-        "description": "Timeout for how long to wait for the request in seconds, default timeout is 30 seconds. Maximum is 10 minutes.",
+        "description": "Timeout for how long to wait for the request in seconds, default timeout is 30 seconds. "
+        "Maximum is 10 minutes.",
         "name": "timeout",
         "in": "query"
       },
       {
         "type": "string",
         "default": "30s",
-        "description": "Timeout duration for how long to wait for the request in duration syntax. Example, `10s`. Valid units: `ns, us, ms, s, m, h`. Maximum is 10 minutes.",
+        "description": "Timeout duration for how long to wait for the request in duration syntax. "
+        "Example, `10s`. Valid units: `ns, us, ms, s, m, h`. Maximum is 10 minutes.",
         "name": "timeout_duration",
         "in": "query"
       },
       {
-        "description": "**`device_id`** The host agent ID to initialize the RTR session on.  RTR will retrieve an existing session for the calling user on this host\n**`queue_offline`** If we should queue this session if the host is offline.  Any commands run against an offline-queued session will be queued up and executed when the host comes online.",
+        "description": "**`device_id`** The host agent ID to initialize the RTR session on. "
+        "RTR will retrieve an existing session for the calling user on this host\n**`queue_offline`** "
+        "If we should queue this session if the host is offline. "
+        "Any commands run against an offline-queued session will be queued up and executed when the host comes online.",
         "name": "body",
         "in": "body",
         "required": True

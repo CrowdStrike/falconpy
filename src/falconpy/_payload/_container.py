@@ -35,6 +35,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+
+
 def image_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted image vulnerability request payload.
 

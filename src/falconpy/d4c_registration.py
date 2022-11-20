@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import azure_registration_payload, aws_registration_payload
+from ._payload import azure_registration_payload, aws_d4c_registration_payload
 from ._service_class import ServiceClass
 from ._endpoint._d4c_registration import _d4c_registration_endpoints as Endpoints
 
@@ -56,7 +56,7 @@ class D4CRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_aws_account(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Returns information about the current status of an AWS account.
+        """Return information about the current status of an AWS account.
 
         Keyword arguments:
         ids -- List of AWS Account IDs to retrieve. String or list of strings.
@@ -125,7 +125,7 @@ class D4CRegistration(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateD4CAwsAccount
         """
         if not body:
-            body = aws_registration_payload(passed_keywords=kwargs)
+            body = aws_d4c_registration_payload(passed_keywords=kwargs)
 
         return process_service_request(
             calling_object=self,
@@ -136,7 +136,7 @@ class D4CRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_aws_account(self: object, *args, parameters: dict = None, **kwargs) -> dict:
-        """Deletes an existing AWS account or organization from the tenant.
+        """Delete an existing AWS account or organization from the tenant.
 
         Keyword arguments:
         ids -- List of AWS Account IDs to retrieve. String or list of strings.

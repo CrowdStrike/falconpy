@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 
 
-def aws_registration_payload(passed_keywords: dict) -> dict:
+def aws_d4c_registration_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted AWS registration payload.
 
     {
@@ -50,7 +50,7 @@ def aws_registration_payload(passed_keywords: dict) -> dict:
                 "organization_id": "string"
             }
         ]
-    }    
+    }
     """
     returned_payload = {}
     returned_payload["resources"] = []
@@ -59,12 +59,13 @@ def aws_registration_payload(passed_keywords: dict) -> dict:
     for key in keys:
         if passed_keywords.get(key, None):
             item[key] = passed_keywords.get(key)
-    if passed_keywords.get("is_master", None) != None:
+    if passed_keywords.get("is_master", None) is not None:
         item["is_master"] = passed_keywords.get("is_master")
 
     returned_payload["resources"].append(item)
 
     return returned_payload
+
 
 def azure_registration_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted Azure registration payload.
