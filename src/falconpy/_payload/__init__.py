@@ -34,6 +34,7 @@ from ._recon import (
     recon_rule_preview_payload
     )
 from ._malquery import malquery_exact_search_payload, malquery_hunt_payload, malquery_fuzzy_payload
+from ._container import image_payload
 from ._detects import update_detects_payload
 from ._incidents import incident_action_parameters
 from ._ioa import ioa_exclusion_payload, ioa_custom_payload
@@ -75,5 +76,5 @@ __all__ = [
     "firewall_rule_group_payload", "firewall_rule_group_update_payload", "reports_payload",
     "activity_payload", "case_payload", "incident_action_parameters", "update_alerts_payload",
     "firewall_rule_group_validation_payload", "firewall_filepattern_payload",
-    "aws_registration_payload"
+    "aws_registration_payload", "image_payload"
 ]
