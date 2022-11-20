@@ -37,6 +37,35 @@ For more information, please refer to <https://unlicense.org>
 """
 
 
+def aws_registration_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted AWS registration payload.
+
+    {
+        "resources": [
+            {
+                "account_id": "string",
+                "account_type": "string",
+                "cloudtrail_region": "string",
+                "is_master": true,
+                "organization_id": "string"
+            }
+        ]
+    }    
+    """
+    returned_payload = {}
+    returned_payload["resources"] = []
+    keys = ["account_id", "account_type", "cloudtrail_region", "organization_id"]
+    item = {}
+    for key in keys:
+        if passed_keywords.get(key, None):
+            item[key] = passed_keywords.get(key)
+    if passed_keywords.get("is_master", None) != None:
+        item["is_master"] = passed_keywords.get("is_master")
+
+    returned_payload["resources"].append(item)
+
+    return returned_payload
+
 def azure_registration_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted Azure registration payload.
 
