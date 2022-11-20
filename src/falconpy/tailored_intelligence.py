@@ -65,7 +65,7 @@ class TailoredIntelligence(ServiceClass):
         Arguments: When not specified, the first argument to this method is assumed to be 'id'.
                    All others are ignored.
 
-        Returns: dict object containing API response.
+        Returns: binary object containing the body content.
 
         HTTP Method: GET
 
