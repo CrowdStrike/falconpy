@@ -159,6 +159,26 @@ _real_time_response_admin_endpoints = [
     ]
   ],
   [
+    "RTR-GetPut-FilesV2",
+    "GET",
+    "/real-time-response/entities/put-files/v2",
+    "Get put-files based on the ID's given. These are used for the RTR `put` command.",
+    "real_time_response_admin",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "File IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "RTR-GetScripts",
     "GET",
     "/real-time-response/entities/scripts/v1",
@@ -322,6 +342,26 @@ _real_time_response_admin_endpoints = [
       {
         "type": "string",
         "description": "File id",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "RTR-GetScriptsV2",
+    "GET",
+    "/real-time-response/entities/scripts/v2",
+    "Get custom-scripts based on the ID's given. These are used for the RTR `runscript` command.",
+    "real_time_response_admin",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "File IDs",
         "name": "ids",
         "in": "query",
         "required": True
