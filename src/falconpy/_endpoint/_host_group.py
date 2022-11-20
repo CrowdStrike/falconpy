@@ -173,8 +173,6 @@ _host_group_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 32,
-          "minLength": 32,
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -223,8 +221,6 @@ _host_group_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 32,
-          "minLength": 32,
           "type": "string"
         },
         "collectionFormat": "multi",
