@@ -38,6 +38,32 @@ For more information, please refer to <https://unlicense.org>
 
 _ioc_endpoints = [
   [
+    "indicator_aggregate_v1",
+    "POST",
+    "/iocs/aggregates/indicators/v1",
+    "Get Indicators aggregates as specified via json in the request body.",
+    "ioc",
+    [
+      {
+        "type": "string",
+        "description": "The filter to narrow down the aggregation data",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "description": "The filter for returning either only indicators for the request customer or its MSSP parents",
+        "name": "from_parent",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "indicator_combined_v1",
     "GET",
     "/iocs/combined/indicator/v1",
@@ -107,6 +133,39 @@ _ioc_endpoints = [
     ]
   ],
   [
+    "action_get_v1",
+    "GET",
+    "/iocs/entities/actions/v1",
+    "Get Actions by ids.",
+    "ioc",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "The ids of the Actions to retrieve",
+        "name": "ids",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetIndicatorsReport",
+    "POST",
+    "/iocs/entities/indicators-reports/v1",
+    "Launch an indicators report creation job",
+    "ioc",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "indicator_get_v1",
     "GET",
     "/iocs/entities/indicators/v1",
@@ -134,12 +193,6 @@ _ioc_endpoints = [
     "ioc",
     [
       {
-        "type": "string",
-        "description": "The username",
-        "name": "X-CS-USERNAME",
-        "in": "header"
-      },
-      {
         "type": "boolean",
         "description": "Whether to submit to retrodetects",
         "name": "retrodetects",
@@ -166,12 +219,6 @@ _ioc_endpoints = [
     "Update Indicators.",
     "ioc",
     [
-      {
-        "type": "string",
-        "description": "The username",
-        "name": "X-CS-USERNAME",
-        "in": "header"
-      },
       {
         "type": "boolean",
         "description": "Whether to submit to retrodetects",
@@ -221,6 +268,33 @@ _ioc_endpoints = [
         "type": "string",
         "description": "The comment why these indicators were deleted",
         "name": "comment",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "description": "The filter for returning either only indicators for the request customer or its MSSP parents",
+        "name": "from_parent",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "action_query_v1",
+    "GET",
+    "/iocs/queries/actions/v1",
+    "Query Actions.",
+    "ioc",
+    [
+      {
+        "type": "string",
+        "description": "Starting index of overall result set from which to return ids.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Number of ids to return.",
+        "name": "limit",
         "in": "query"
       }
     ]
@@ -284,6 +358,69 @@ _ioc_endpoints = [
         "token from the previous response to continue from that place in the results. To access more than 10k "
         "indicators, use the 'after' parameter instead of 'offset'.",
         "name": "after",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ioc_type_query_v1",
+    "GET",
+    "/iocs/queries/ioc-types/v1",
+    "Query IOC Types.",
+    "ioc",
+    [
+      {
+        "type": "string",
+        "description": "Starting index of overall result set from which to return ids.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Number of ids to return.",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "platform_query_v1",
+    "GET",
+    "/iocs/queries/platforms/v1",
+    "Query Platforms.",
+    "ioc",
+    [
+      {
+        "type": "string",
+        "description": "Starting index of overall result set from which to return ids.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Number of ids to return.",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "severity_query_v1",
+    "GET",
+    "/iocs/queries/severities/v1",
+    "Query Severities.",
+    "ioc",
+    [
+      {
+        "type": "string",
+        "description": "Starting index of overall result set from which to return ids.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Number of ids to return.",
+        "name": "limit",
         "in": "query"
       }
     ]
