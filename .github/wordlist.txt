@@ -780,3 +780,7 @@ azsdk
 cli
 Matos
 setuptools
+TailoredIntelligence
+collectionFormat
+maxLength
+minLength
