@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import process_service_request, force_default
+from ._payload import image_payload
 from ._service_class import ServiceClass
 from ._endpoint._falcon_container import _falcon_container_endpoints as Endpoints
 
@@ -79,6 +80,60 @@ class FalconContainer(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetCredentials"
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def read_image_vulnerabilities(self: object, body: dict = None, **kwargs) -> dict:
+        """Retrieve an assessment report for an image by specifying repository and tag.
+
+        HTTP Method: POST
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-cli/ReadImageVulnerabilities
+
+        Keyword arguments
+        ----
+        body : str
+            Full body payload in JSON format, not required when using other keywords.
+            {
+                "osversion": "string",
+                "packages": [
+                    {
+                        "LayerHash": "string",
+                        "LayerIndex": 0,
+                        "MajorVersion": "string",
+                        "PackageHash": "string",
+                        "PackageProvider": "string",
+                        "PackageSource": "string",
+                        "Product": "string",
+                        "SoftwareArchitecture": "string",
+                        "Status": "string",
+                        "Vendor": "string"
+                    }
+                ]
+            }
+        packages : list[dict]
+            List of images to retrieve vulnerabilities for.
+        osversion : str
+            Operating system version for the image to be checked.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = image_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadImageVulnerabilities",
+            keywords=kwargs,
+            body=body
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
