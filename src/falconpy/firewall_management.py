@@ -37,8 +37,14 @@ For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=C0302
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import aggregate_payload, firewall_container_payload
-from ._payload import firewall_rule_group_payload, firewall_rule_group_update_payload
+from ._payload import (
+    aggregate_payload,
+    firewall_container_payload,
+    firewall_rule_group_validation_payload,
+    firewall_rule_group_payload,
+    firewall_rule_group_update_payload,
+    firewall_filepattern_payload
+    )
 from ._service_class import ServiceClass
 from ._endpoint._firewall_management import _firewall_management_endpoints as Endpoints
 
@@ -465,12 +471,12 @@ class FirewallManagement(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policy_container(self: object,
+    def update_policy_container_v1(self: object,
                                 body: dict,
                                 cs_username: str = None,  # pylint: disable=W0613  # deprecated
                                 **kwargs
                                 ) -> dict:
-        """Update an identified policy container.
+        """Update an identified policy container. **DEPRECATED**
 
         Keyword arguments:
         body -- Full body payload in JSON format. Not required if other keywords are provided.
@@ -504,7 +510,61 @@ class FirewallManagement(ServiceClass):
         HTTP Method: PUT
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update_policy_container
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-policy-container-v1
+        """
+        if not body:
+            body = firewall_container_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="update_policy_container_v1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_policy_container(self: object,
+                                body: dict,
+                                cs_username: str = None,  # pylint: disable=W0613  # deprecated
+                                **kwargs
+                                ) -> dict:
+        """Update an identified policy container.
+
+        Keyword arguments:
+        body -- Full body payload in JSON format. Not required if other keywords are provided.
+                {
+                    "default_inbound": "string",
+                    "default_outbound": "string",
+                    "enforce": boolean,
+                    "is_default_policy": boolean,
+                    "local_logging": boolean
+                    "platform_id": "string",
+                    "policy_id": "string",
+                    "rule_group_ids": [
+                        "string"
+                    ],
+                    "test_mode": boolean,
+                    "tracking": "string"
+                }
+        default_inbound -- Default inbound. String.
+        default_outbound -- Default outbound. String.
+        enforce -- Flag indicating if the policy is enforced. Boolean.
+        is_default_policy -- Flag indicating if the policy is the default. Boolean.
+        local_logging -- Flag indicating if local logging functionality is enabled. Boolean.
+        platform_id -- Platform ID. (`windows`, `mac`, `linux`) String.
+        policy_id -- ID of the policy to be updated. String.
+        rule_group_ids -- Rule group IDs this policy applies to. String or list of strings.
+        test_mode -- Flag indicating if this policy is in test mode. Boolean.
+        tracking -- Tracking. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PUT
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-policy-container
         """
         if not body:
             body = firewall_container_payload(passed_keywords=kwargs)
@@ -727,7 +787,7 @@ class FirewallManagement(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create_rule_group
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create-rule-group
         """
         if not body:
             body = firewall_rule_group_payload(passed_keywords=kwargs)
@@ -762,7 +822,7 @@ class FirewallManagement(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QueryReports
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/delete-rule-groups
         """
         return process_service_request(
             calling_object=self,
@@ -823,7 +883,7 @@ class FirewallManagement(ServiceClass):
         HTTP Method: PATCH
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update_rule_group
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-rule-group
         """
         if not body:
             body = firewall_rule_group_update_payload(passed_keywords=kwargs)
@@ -832,6 +892,173 @@ class FirewallManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="update_rule_group",
+            body=body,
+            params=parameters,
+            keywords=kwargs
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def create_rule_group_validation(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
+        """Validates the request of creating a new rule group on a platform for a customer with a name and description.
+
+        Keyword arguments:
+        body -- Full body payload in JSON format. Not required if other keywords are provided.
+                {
+                    "description": "string",
+                    "enabled": true,
+                    "name": "string",
+                    "platform": "string",
+                    "rules": [
+                        {
+                        "action": "string",
+                        "address_family": "string",
+                        "description": "string",
+                        "direction": "string",
+                        "enabled": true,
+                        "fields": [
+                            {
+                            "final_value": "string",
+                            "label": "string",
+                            "name": "string",
+                            "type": "string",
+                            "value": "string",
+                            "values": [
+                                "string"
+                            ]
+                            }
+                        ],
+                        "icmp": {
+                            "icmp_code": "string",
+                            "icmp_type": "string"
+                        },
+                        "local_address": [
+                            {
+                            "address": "string",
+                            "netmask": 0
+                            }
+                        ],
+                        "local_port": [
+                            {
+                            "end": 0,
+                            "start": 0
+                            }
+                        ],
+                        "log": true,
+                        "monitor": {
+                            "count": "string",
+                            "period_ms": "string"
+                        },
+                        "name": "string",
+                        "protocol": "string",
+                        "remote_address": [
+                            {
+                            "address": "string",
+                            "netmask": 0
+                            }
+                        ],
+                        "remote_port": [
+                            {
+                            "end": 0,
+                            "start": 0
+                            }
+                        ],
+                        "temp_id": "string"
+                        }
+                    ]
+                }
+        clone_id -- A rule group ID from which to copy rules. If this is provided then the
+                    'rules' property of the body and the 'rules' keyword are ignored. String.
+        comment -- Audit log comment for this action. String.
+        description -- Description of the rule. String.
+        enabled -- Flag indicating if this rule is enabled. Boolean.
+        library -- If this flag is set to true then the rules will be cloned from the clone_id
+                   from the CrowdStrike Firewall Rule Groups Library. Boolean.
+        name -- Name for this rule. String.
+        parameters - full parameters payload, not required if using other keywords.
+        platform -- Platform name this rule applies to. String.
+        rules -- JSON formatted list of rules to validate. List of dictionaries.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create-rule-group-validation
+        """
+        if not body:
+            body = firewall_rule_group_validation_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="create_rule_group_validation",
+            keywords=kwargs,
+            body=body,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def update_rule_group_validation(self: object,
+                          body: dict = None,
+                          cs_username: str = None,  # pylint: disable=W0613  # deprecated
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> dict:
+        """Validates the request of updating name, description, or enabled status of a rule group, or create, edit, delete, or reorder rules
+
+        Can also create, edit, delete, or reorder rules.
+
+        Keyword arguments:
+        body -- Full body payload in JSON format. Not required if other keywords are provided.
+                {
+                    "diff_operations": [
+                        {
+                            "from": "string",
+                            "op": "string",
+                            "path": "string"
+                        }
+                    ],
+                    "diff_type": "string",
+                    "id": "string",
+                    "rule_ids": [
+                        "string"
+                    ],
+                    "rule_versions": [
+                        0
+                    ],
+                    "tracking": "string"
+                }
+        comment -- Audit log comment for this action. String.
+        diff_from -- From value for diff. String. Overridden if 'diff_operations' is provided.
+        diff_op -- Operation for diff. String. Overridden if 'diff_operations' is provided.
+        diff_operations -- Diff operations to perform against the rule group.
+                           Single dictionary or List of dictionaries.
+        diff_path -- Path for diff. String. Overridden if 'diff_operations' is provided.
+        diff_type -- Type of diff to apply. String.
+        id -- ID of the rule group to update. String.
+        parameters - full parameters payload, not required if using other keywords.
+        rule_ids -- Rule ID(s). List of strings.
+        rule_versions -- Rule version(s). List of integers.
+        tracking -- Tracking. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-rule-group-validation
+        """
+        if not body:
+            body = firewall_rule_group_update_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="update_rule_group_validation",
             body=body,
             params=parameters,
             keywords=kwargs
@@ -864,6 +1091,39 @@ class FirewallManagement(ServiceClass):
             operation_id="get_rules",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def validate_filepath_pattern(self: object, body: dict = None, **kwargs) -> dict:
+        """Validates that the test pattern matches the executable filepath glob pattern.
+
+        Keyword arguments:
+        body -- Full body payload in JSON format. Not required if using other keywords. Dictionary.
+                {
+                    "filepath_pattern": "string",
+                    "filepath_test_string": "string"
+                }
+        filepath_pattern -- Pattern to test against. String.
+        filepath_test_string -- File path string to be tested. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/validate-filepath-pattern
+        """
+        if not body:
+            body = firewall_filepattern_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="validate_filepath_pattern",
+            keywords=kwargs,
+            body=body
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
