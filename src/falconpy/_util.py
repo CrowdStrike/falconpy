@@ -504,8 +504,9 @@ def autodiscover_region(provided_base_url: str, auth_result: dict):
     """Autodiscovers the correct region for the token response."""
     new_base_url = confirm_base_url(provided_base_url)
     # Swap to the correct region if they've provided the incorrect one
-    if "X-Cs-Region" not in auth_result["headers"]:
-        # GovCloud autodiscovery is not currently supported
+    if "X-Cs-Region" not in auth_result["headers"]:  # pragma: no cover
+        # Starting in v1.2.4, us-gov-1 headers are returned
+        # but autoselection is still unsupported
         token_region = confirm_base_region(confirm_base_url(provided_base_url))
     else:
         token_region = auth_result["headers"]["X-Cs-Region"].replace("-", "")
