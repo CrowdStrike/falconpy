@@ -1,3 +1,83 @@
+# Version 1.2.4
+## Added features and functionality
++ Added: New __TailoredIntelligence__ Service Class.
+    - `__init__.py`
+    - `tailored_intelligence.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_tailored_intelligence.py`
+    - `tests/test_tailored_intelligence.py`
+    > Unit testing expanded to complete code coverage.
++ Added: `GetD4CAwsAccount`, `CreateD4CAwsAccount`, `DeleteD4CAwsAccount`, `GetD4CAwsConsoleSetupURLs`, `GetD4CAWSAccountScriptsAttachment`, and `GetHorizonD4CScripts` operations to the __D4CRegistration__ Service Class.
+    - `d4c_registration.py`
+    - `_endpoint/_d4c_registration.py`
+    - `_payload/__init__.py`
+    - `_payload/_d4c_registration.py`
+    > Adds one new payload handler.
+    - `tests/test_d4c_registration.py`
+    > Unit testing expanded to complete code coverage.
++ Added: `update_policy_container_v1`, `create_rule_group_validation`, `update_rule_group_validation`, and `validate_filepath_pattern` operations to the __FirewallManagement__ Service Class.
+    - `firewall_management.py`
+    - `_endpoint/_firewall_management.py`
+    > The legacy operation `update_policy_container` now points to the updated endpoint `/fwmgr/entities/policies/v2`.
+    - `_payload/__init__.py`
+    - `_payload/_firewall.py`
+    > Adds two new payload handlers.
+    - `tests/test_firewall_management.py`
+    > Unit testing expanded to complete code coverage.
++ Added: `indicator_aggregate_v1`, `action_get_v1`, `GetIndicatorsReport`, `action_query_v1`, `ioc_type_query_v1`, `platform_query_v1`, and `severity_query_v1` operations to the __IOC__ Service Class.
+    - `ioc.py`
+    - `_endpoint/_ioc.py`
+    - `_payload/__init__.py`
+    - `_payload/_ioc.py`
+    > Adds one new payload handler.
+    - `tests/test_ioc.py`
+    > Unit testing expanded to complete code coverage.
++ Added: _from_parent_ parameter to the `indicator_delete_v1` operation within the __IOC__ Service Class.
+    - `ioc.py`
+    - `_endpoint/_ioc.py`
++ Added: _timeout_ and _timeout_duration_ parameters to the `RTR_InitSession` operation within the __RealTimeResponse__ Service Class.
+    - `real_time_response.py`
+    - `_endpoint/_real_time_response.py`
++ Added: _host_timeout_duration_ parameter to the `BatchAdminCmd` operation within the __RealTimeResponseAdmin__ Service Class.
+    - `real_time_response_admin.py`
+    - `_endpoint/_real_time_response_admin.py`
++ Added: Maximum and minimum limits for the _limit_ parameter used by the `QueryNotificationsV1` operation within the __Recon__ Service Class.
+    - `_endpoint/_recon.py`
++ Added: New `ReadImageVulnerabilities` operation to the __FalconContainer__ Service Class.
+    - `falcon_container.py`
+    - `_endpoint/_falcon_container.py`
+    - `_payload/__init__.py`
+    - `_payload/_container.py`
+    > Adds one new payload handler.
+    - `tests/test_falcon_container.py`
+    > Unit testing expanded to complete code coverage.
+
+## Other
++ Updated: Updated the description, changed datatype from `string` to `int` and added maximum / minimum limits for the _offset_ parameter used by the `QueryActionsV1` operation within the __Recon__ Service Class.
+    - `_endpoint/_recon.py`
++ Removed: `X-CS-USERNAME` parameter from all operations within the __IOC__ Service Class.
+    - `_endpoint/_ioc.py`
++ Updated: _query_rule_groups_full_ and _query_rule_groupsMixin0_ operations - Removed `description` as an available field from enum. Updated operation description.
+    - `_endpoint/_custom_ioa.py`
++ Updated: Changed _collectionFormat_ value from `csv` to `multi` for multiple operations within the `_endpoint` module.
+    - `_endpoint/_ioa_exclusions.py` (_getIOAExclusionsV1_, _deleteIOAExclusionsV1_)
+    - `_endpoint/_ml_exclusions.py` (_getMLExclusionsV1_, _deleteMLExclusionsV1_)
+    - `_endpoint/_sensor_visibility_exclusions.py` (_getSensorVisibilityExclusionsV1_, _deleteSensorVisibilityExclusionsV1_)
++ Updated: Removed _maxLength_ and _minLength_ values for multiple operations within the `_endpoint` module.
+    - `_endpoint/_device_control_policies.py` (_getDeviceControlPolicies_, _deleteDeviceControlPolicies_)
+    - `_endpoint/_firewall_policies.py` (_getFirewallPolicies_, _deleteFirewallPolicies_)
+    - `_endpoint/_host_group.py` (_getHostGroups_, _deleteHostGroups_)
+    - `_endpoint/_prevention_policies.py` (_getPreventionPolicies_, _deletePreventionPolicies_)
+    - `_endpoint/_response_policies.py` (_getRTResponsePolicies_, _deleteRTResponsePolicies_)
+    - `_endpoint/_sensor_update_policies.py` (_getSensorUpdatePolicies_, _deleteSensorUpdatePolicies_, _getSensorUpdatePoliciesV2_)
++ Updated: GovCloud headers are now returned when providing GovCloud credentials to a commercial cloud region. Deprecated fallback handler within `autodiscover_region` method.
+    - `_util.py`
+    > This code will be retained for now. As of this version, GovCloud region autodiscovery is __not__ supported.
++ Updated: Pinned `setuptools` version to 65.5.1 ([SNYK-PYTHON-SETUPTOOLS-3113904](https://security.snyk.io/vuln/SNYK-PYTHON-SETUPTOOLS-3113904)).
+    - `requirements-dev.txt`
+
+---
+
 # Version 1.2.3
 ## Added features and functionality
 + Added: Specify `N-1` and `N-2` within the Sensor Download sample. Closes #793.
@@ -13,6 +93,8 @@
 + Fixed: Invalid arguments provided to `execute_admin_command` method within RTR dump memory sample. Closes #789.
     - `samples/rtr/pid-dump/rtr_dump_memory.py`
 
+
+---
 
 # Version 1.2.2
 ## Added features and functionality
@@ -41,6 +123,8 @@
 + Changed: Updated development package module name to be `falconpydev` to prevent confusion with the production package module name.
     - `dev_setup.py`
 
+---
+
 # Version 1.2.1
 ## Added features and functionality
 + Added: Added alias for `post_device_details_v2` to Hosts Service Class. Closes #773.
@@ -57,6 +141,8 @@
 + Updated: Adjusted unit testing to cover new API returns.
     - `tests/falcon_container.py`
     - `tests/kubernetes_protection.py`
+
+---
 
 # Version 1.2.0
 ## Added features and functionality
@@ -111,6 +197,8 @@
 + Updated: Fixed docstring typo within `userActionV1` operation. Closes #763.
     - `user_management.py`
 
+---
+
 # Version 1.1.6
 ## Added features and functionality
 + Added: New Alerts service collection operation - `PatchEntitiesAlertsV2` (`update_alerts_v2`).
@@ -146,6 +234,8 @@
 + Added: Alias for `get_online_state_v1`. Closes #739.
     - `hosts.py`
 
+---
+
 # Version 1.1.5
 ## Added features and functionality
 + Added: New Service Collection - Alerts. Matching Service Class / Uber class functionality. Unit testing expanded to cover new methods.
@@ -170,6 +260,8 @@
 ## Other
 + Moved: Abstracted Cloud Region autodiscovery functionality into a standalone method to reduce code segment size.
     - `_util.py`
+
+---
 
 # Version 1.1.4
 ## Added features and functionality
@@ -204,12 +296,16 @@
 + Fixed: Typo in supported values definition for combinedQueryVulnerabilities endpoint definition.
     _ `_endpoint/_spotlight_vulnerabilities.py`
 
+---
+
 # Version 1.1.3
 ## Added features and functionality
 + Added: Firewall rules payload abstraction for the `create_rule_group` method. Firewall diff_operations payload abstraction for the `update_rule_group` method.
     - `_payload/_firewall.py`
     - `firewall_management.py`
     - `tests/test_firewall_management.py`
+
+---
 
 # Version 1.1.2
 ## Issues resolved
@@ -223,10 +319,14 @@
     - `falconx_sandbox.py`
 
 
+---
+
 # Version 1.1.1
 ## Issues resolved
 + Bug fix: Resolved issue impacting the creation of certain action parameters used within payloads for the `perform_incident_action` method of the Incidents Service Class. Closes #656.
     - `_payload/_incidents.py`
+
+---
 
 # Version 1.1.0
 ## Added features and functionality
@@ -285,12 +385,16 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Added: FalconPy version check utility.
     - `util/vcheck.sh`
 
+---
+
 # Version 1.0.10
 ## Added features and functionality
 + Added: New versions of two operations within the Real Time Response Service Class. `list_files_v2` and `delete_file_v2` are used the same as the original methods, but provide more results detail. You should leverage `delete_file_v2` if you are retrieving files using `list_files_v2`.
     - `_endpoint/_real_time_response.py`
     - `real_time_response.py`
     - `tests/test_real_time_response.py`
+
+---
 
 # Version 1.0.9
 ## Added features and functionality
@@ -307,6 +411,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Fixed: Docstring typo for the `combinedQueryVulnerabilities` operation within the Spotlight Vulnerabilities Service Class. Closes #608.
     - `spotlight_vulnerabilities.py`
 
+---
+
 # Version 1.0.8
 ## Added features and functionality
 + Added: Spotlight Evaluation Logic Service Class, related service collection endpoints and related unit tests.
@@ -315,6 +421,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `__init__.py`
     - `spotlight_evaluation_logic.py`
     - `tests/test_spotlight_evaluation_logic.py`
+
+---
 
 # Version 1.0.7
 ## Issues resolved
@@ -329,6 +437,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `cspm_registration.py`
 + Added: Updated docstring to reflect newly available host actions. Closes #585.
     - `hosts.py`
+
+---
 
 # Version 1.0.6
 ## Added features and functionality
@@ -350,6 +460,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Updated: Docstrings updated to reflect newly available platform names (`android`, `iOS`). Closes #582.
     - `prevention_policy.py`
 
+---
+
 # Version 1.0.5
 ## Added features and functionality
 + Added: Argument check in `update_detects_by_ids` (UpdateDetectsByIdsV2). When only a `comment` keyword is provided, `show_in_ui` is appended to the request with a `True` value, which satisfies update requirements.
@@ -368,6 +480,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Fixed: Incorrect variable used for dictionary key on boolean values within `command_payload` body payload handler. Closes #568.
     - `_payload/_real_time_response.py`
     - Relates to discussion [#415](https://github.com/CrowdStrike/falconpy/discussions/415)
+
+---
 
 # Version 1.0.4
 ## Added features and functionality
@@ -403,12 +517,16 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `tests/test_authorizations.py`
     - Thanks to @mwb8 for identifying and reporting this issue!
 
+---
+
 # Version 1.0.3
 ## Issues resolved
 + Fixed: Bug in `process_service_request` (`_util.py`) impacting the `partition` keyword argument of the `refresh_active_stream` method in the Event Streams Service Class. Closes #547.
     - `_util.py`
     - `tests/test_event_streams.py`
     - Thanks go out to @kra-ts for contributing this fix!
+
+---
 
 # Version 1.0.2
 ## Added features and functionality
@@ -422,11 +540,15 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `tests/test_uber_api_complete.py`
 
 
+---
+
 # Version 1.0.1
 ## Issues resolved
 + Fixed: Parameter abstraction handling issue with the `organization_ids` keyword of the `delete_aws_account` and `get_aws_account` methods within the CSPMRegistration Service Class. Closes #539.
     - `cspm_registration.py`
     - `tests/test_cspm_registration.py`
+
+---
 
 # Version 1.0.0
 **Stable Release**
@@ -445,6 +567,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Added: Unit testing documentation, `tests/README.md`
 + Updated: Utilities documentation, `util/README.md`
 + Fixed: Minor comment typo in Offset vs. Token sample, `samples/hosts/offset_vs_token.py`
+
+---
 
 # Version 0.9.0
 **Release Candidate**
@@ -468,6 +592,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Fixed: Code hint warning in PyCharm for missing auth_object definition within _service_class.py.
 
 
+---
+
 # Version 0.8.11
 ## Added features and functionality
 + Added: FileVantage Service Class and all related endpoints.
@@ -475,6 +601,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `_endpoint/__init__.py`
     - `filevantage.py`
     - `tests/test_filevantage.py`
+
+---
 
 # Version 0.8.10
 ## Added features and functionality
@@ -503,12 +631,16 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Updated: README files updated to reflect new service collection.
 
 
+---
+
 # Version 0.8.9
 ## Added features and functionality
 + Added: New operations (GetBehaviorDetections, GetConfigurationDetections) to both the CSPMRegistration Service Class and the Uber Class. Closes #482.
     - `_endpoint/_cspm_registration.py`
     - `cspm_registration.py`
     - `tests/test_cspm_registration.py`
+
+---
 
 # Version 0.8.8
 ## Issues resolved
@@ -517,10 +649,14 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `_payload/_cspm_registration.py`
     - `tests/test_cspm_registration.py`
 
+---
+
 # Version 0.8.7
 ## Issues resolved
 + Fixed: Stemmed vs. exact comparison for endpoint operation lookup within `args_to_params` method. Closes #467.
     - `_util.py`
+
+---
 
 # Version 0.8.6
 ## Added features and functionality
@@ -535,6 +671,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `test_authorization.py`
     - All unit testing workflows updated to leverage new cross-region testing parameters.
 > Please note: This functionality does __not__ support the GovCloud region or GovCloud API credentials.
+
+---
 
 # Version 0.8.5
 ## Issues resolved
@@ -569,6 +707,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `_payload/_generic.py`
     - `tests/test_ml_exclusions.py`
 
+---
+
 # Version 0.8.4
 ## Issues resolved
 + Fixed: TypeError when using a valid credential in the wrong cloud environment. (GOV -> US1 only). Closes #433.
@@ -581,6 +721,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Fixed: Docstring typos in Custom IOA Service Class source.
     - `custom_ioa.py`
 
+---
+
 # Version 0.8.3
 ## Added features and functionality
 + Added: MSSP Direct Authentication - Additional authentication keyword is now available, `member_cid`, allowing developers targeting MSSP functionality to make use of Direct Authentication as opposed to still using Credential Authentication. This functionality is supported in all Service Classes and the Uber Class.
@@ -589,10 +731,14 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `oauth2.py`
     - `tests/test_authorization.py`
 
+---
+
 # Version 0.8.2
 ## Issues resolved
 + Fixed: Issue in `_util.args_to_params` when handling Python reserved words defined as keys incorrectly in the parameter dictionary. Closes #422.
     - Special thanks to @valerianrossigneux for originally identifying this issue, and his assistance testing a fix. :bow:
+
+---
 
 # Version 0.8.1
 ## Added features and functionality
@@ -610,6 +756,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `scheduled_reports.py`
     - `_endpoint/_scheduled_reports.py`
 
+
+---
 
 # Version 0.8.0
 ## Added features and functionality
@@ -637,6 +785,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `_util.py`
 
 
+---
+
 # Version 0.7.4
 ## Added features and functionality
 + Updated: Service Class Refactoring (Rev 4) 
@@ -652,6 +802,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `firewall_policies.py` - Closes #402
     - `firewall_management.py` - Closes #403
 
+
+---
 
 # Version 0.7.3
 ## Added features and functionality
@@ -674,10 +826,14 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     - `response_policies.py` - Closes #382
 
 
+---
+
 # Version 0.7.2
 ## Issues resolved
 + Fixed: Missing body payload in CloudConnectAWS.verify_aws_account_access. Closes #376.
 
+
+---
 
 # Version 0.7.1
 ## Added features and functionality
@@ -705,6 +861,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
     result = falcon.query_devices_by_filter_scroll()
     print(result)
     ```
+
+---
 
 # Version 0.7.0
 ## Added features and functionality
@@ -761,6 +919,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Updated: PEP-257 syntax applied to all docstrings in all touched files.
 + Updated: README.md updated
 
+---
+
 # Version 0.6.5
 ## Issues resolved
 + Removed: Hash Analyzer Service Class and all related unit tests. (Unavailable at this time)
@@ -770,12 +930,16 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Fixed: Missing reference to _quarantine_endpoints in endpoint module.  `_endpoint/__init__.py`
     - This issue only impacted users leveraging the Uber class for these endpoints.
 
+---
+
 # Version 0.6.4
 ## Added features and functionality
 + Added: New Hash Analyzer Service Class `hash_analyzer.py`
     - Related unit tests `test_hash_analyzer.py`
     - Related endpoint module `_hash_analyzer.py`
 + Added: Quarantine Service Class unit tests `test_quarantine.py`
+
+---
 
 # Version 0.6.3
 ## Added features and functionality
@@ -800,15 +964,21 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Added: New Quarantine Service Class and endpoints. `quarantine.py`
 + Updated: Updated endpoint for getComplianceV1 operation within ZeroTrustAssessment Service Class. `zero_trust_assessment.py`
 
+---
+
 # Version 0.6.2
 ## Issues resolved
 + Bug fix: Fixed Uber class passing empty **ids** parameter array when no _ids_ had been provided to the command method. Closes #314. `_util.py`
+
+---
 
 # Version 0.6.1
 ## Issues resolved
 + Bug fix: Fixed bad comparison for endpoint lookups when using Service Classes. Closes #305. `_util.py`
 + Bug fix: Fixed typo in operation ID for query_platforms method within CustomIOA Service Class. Closes #307. `custom_ioa.py`
 + Bug fix: Fixed typo in operation ID for create_user_groups method within FlightControl Service Class. Closes #308. `mssp.py`
+
+---
 
 # Version 0.6.0
 ## Added features and functionality
@@ -902,6 +1072,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Minor adjustment to Uber class unit tests to better demonstrate proper method usage.
 + Updated unit tests to support US-2 / Gov base URL testing.
 
+---
+
 # Version 0.5.6
 ## Added features and functionality
 + Added: New functionality for handling service class modules within FalconDebug.
@@ -915,6 +1087,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Updated IDP unit tests to more accurately cover functionality
 + Flaky unit test adjustments
 + FalconDebug added to linting workflows `debug.py`
+
+---
 
 # Version 0.5.5
 ## Added features and functionality
@@ -943,6 +1117,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + Unit test updates to expand code coverage for new code paths.
 + This update provides part of the functionality requested in #115.
 
+---
+
 # Version 0.5.4
 ## Added features and functionality
 + Added `identity_protection.py` - Identity Protection service class.
@@ -967,17 +1143,25 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 + README.md updated.
 + Added additional classifiers and developer requirements to PIP package metadata. (`setup.py`)
 
+---
+
 # Version 0.5.3
 ## Issues resolved
 + Bug fix: Resolves #200 by moving the failing method (entities_processes) in `iocs.py` to the latest code pattern.
+
+---
 
 # Version 0.5.2
 ## Issues resolved
 + Fixed: Incorrect endpoint specified in the updateSensorUpdatePoliciesV2 method within the Sensor Update Policy service class.
 
+---
+
 # Version 0.5.1
 ## Issues resolved
 + Fixed: https://github.com/CrowdStrike/falconpy/issues/181 by adding the parameters to the create and update ioc functions.
+
+---
 
 # Version 0.5.0
 ## Added features and functionality
@@ -1065,6 +1249,8 @@ any Service Class method or the Uber Class __command__ method using the keyword 
 ## Other
 + Added: CSPM Registration API sample - CSPM registration policy export (@mccbryan3)
 
+---
+
 # Version 0.4.10
 ## Added features and functionality
 + Added: Timeout support - Float / tuple that is passed to the requests library when performing
@@ -1076,17 +1262,23 @@ requests to the API. Can specify timeouts for connect, read and global.
 ## Other
 + Timeout functionality unit tests (`test_timeout.py`)
 
+---
+
 # Version 0.4.9
 ## Added features and functionality
 + Added: Proxy support - dictionary of proxies that are passed to the requests library when
 performing requests to the API.
 + Related to discussion post [#154](https://github.com/CrowdStrike/falconpy/discussions/154)
 
+---
+
 # Version 0.4.8
 ## Issues resolved
 + Fixed: Parsing issue with __ids__ argument within MSSP.getChildren (Flight Control Service Class)
     * Resolved by migrating `mssp.py` source to the new pattern being tested for Service Classes.
     * Closes [#144](https://github.com/CrowdStrike/falconpy/issues/144)
+
+---
 
 # Version 0.4.7
 ## Added features and functionality
@@ -1186,11 +1378,15 @@ performing requests to the API.
     - Unrecognized parameter values are discarded
     - Initial testing in a limited number of Service Classes
 
+---
+
 # Version 0.4.6-spotlight-remediations-patch-1
 ## Added features and functionality
 + Added: Missing method to Spotlight_Vulnerabilities Service Class (`spotlight_vulnerabilities.py`)
     * getRemediations
     - Added unit test to existing test series (`test_spotlight_vulnerabilities.py`)
+
+---
 
 # Version 0.4.6
 ## Added features and functionality
@@ -1255,6 +1451,8 @@ performing requests to the API.
     - Moved unit test coverage reporting over to configuration file for parameter management
 + Documentation updates
 
+---
+
 # Version 0.4.5
 ## Added features and functionality
 + Added: Custom Indicators of Attack (IOA) API Service Class (`custom_ioa.py`)
@@ -1306,6 +1504,8 @@ performing requests to the API.
     - CSPM Registration
     - Sensor Download
 
+---
+
 # Version 0.4.4
 ## Added features and functionality
 + Added: Sensor Download API Service Class (Contributor: @CalebSchwartz)
@@ -1323,6 +1523,8 @@ performing requests to the API.
 + Documentation updated to reflect the new Sensor Download Service Class
 
 
+---
+
 # Version 0.4.3
 ## Added features and functionality
 + Added: Sample_Uploads service class (`sample_uploads.py`)
@@ -1337,6 +1539,8 @@ performing requests to the API.
 + Fixed: Issue with `setup.py` passing GitHub emoji text to the package description.
 + Fixed: Issue with Uber class unit testing not deleting uploaded files from Sample_Uploads API. (`test_uber_api_complete.py`)
 
+
+---
 
 # Version 0.4.2
 ## Added features and functionality
@@ -1357,6 +1561,8 @@ performing requests to the API.
 + Updated return type decorators for GetArtifacts, GetReports and GetSampleV2. (`falconx_sandbox.py`)
 + Abstracted all remaining common error output code paths to a stand-alone generic method. (`_util.py`)
 
+
+---
 
 # Version 0.4.1
 ## Added features and functionality
@@ -1391,6 +1597,8 @@ performing requests to the API.
 + Minor updates to `_endpoints.py` to reflect operation ID corrections for the CSPM registration API.
 + Abstracted common error output code paths to a stand-alone method within `_util.py`.
 
+
+---
 
 # Version 0.4.0
 ## Added features and functionality
@@ -1433,3 +1641,5 @@ performing requests to the API.
     - References to the `data` requests attribute are still referred to as "data".
 + 100% unit test coverage
 + Internal documentation updates
+
+---
