@@ -371,6 +371,7 @@ class IOC(ServiceClass):
 
         Keyword arguments:
         ids -- List of Indicator ID(s) you wish to delete. String or list of strings.
+        from_parent -- Limit action to IOCs originating from the MSSP parent.
         parameters -- full parameters payload, not required if ids is provided as a keyword.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
