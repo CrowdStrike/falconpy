@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import time
+from typing import Dict, Optional, Tuple
 from ._util import _ALLOWED_METHODS
 from ._util import (
     perform_request,
@@ -46,6 +47,7 @@ from ._util import (
     return_preferred_default,
     autodiscover_region,
     )
+from ._auth_object import FalconAuth
 from ._base_url import BaseURL
 from ._container_base_url import ContainerBaseURL
 from ._uber_default_preference import PREFER_IDS_IN_BODY, MOCK_OPERATIONS
@@ -53,24 +55,31 @@ from ._token_fail_reason import TokenFailReason
 from ._endpoint import api_endpoints
 
 
-class APIHarness:
+class APIHarness(FalconAuth):
     """This one does it all. It's like the One Ring with significantly fewer orcs."""
 
     # pylint: disable=too-many-instance-attributes
     _token_fail_headers = {}  # Issue #578
+    refreshable: bool = True
+    token_expiration: int = 0
+    token_time: float = time.time()
+    token_fail_reason: str = None
+    token_status: int = None
 
-    def __init__(self: object,  # pylint: disable=R0913
-                 base_url: str = "https://api.crowdstrike.com",
-                 creds: dict = None,
-                 client_id: str = None,
-                 client_secret: str = None,
-                 member_cid: str = None,
-                 ssl_verify: bool = True,
-                 proxy: dict = None,
-                 timeout: float or tuple = None,
-                 user_agent: str = None,
-                 renew_window: int = 120
-                 ) -> object:
+    # pylint: disable=R0913
+    def __init__(self,
+                 access_token: Optional[str or bool] = False,
+                 base_url: Optional[str] = "https://api.crowdstrike.com",
+                 creds: Optional[dict] = None,
+                 client_id: Optional[str] = None,
+                 client_secret: Optional[str] = None,
+                 member_cid: Optional[str] = None,
+                 ssl_verify: Optional[bool] = True,
+                 proxy: Optional[dict] = None,
+                 timeout: Optional[float or tuple] = None,
+                 user_agent: Optional[str] = None,
+                 renew_window: Optional[int] = 120
+                 ) -> "APIHarness":
         """Uber class constructor.
 
         Instantiates an instance of the class, ingests credentials,
@@ -102,6 +111,13 @@ class APIHarness:
 
         This method only accepts keywords to specify arguments.
         """
+        super().__init__(base_url=confirm_base_url(base_url),
+                         ssl_verify=ssl_verify,
+                         timeout=timeout,
+                         proxy=proxy,
+                         user_agent=user_agent
+                         )
+        # Direct Authentication
         if client_id and client_secret and not creds:
             creds = {
                 "client_id": client_id,
@@ -113,46 +129,30 @@ class APIHarness:
                 creds["member_cid"] = member_cid
         elif not creds:
             creds = {}
-        self.creds = creds
-        self.base_url = confirm_base_url(base_url)
-        self.ssl_verify = ssl_verify
-        self.proxy = proxy
-        self.timeout = timeout
-        self.token = False
-        self.token_expiration = 0
-        self.token_time = time.time()
-        self.authenticated = False
-        self.token_fail_reason = None
-        self.token_status = None
-        self.headers = lambda: {"Authorization": f"Bearer {self.token}"} if self.token else {}
+        # Credential Authentication (powers Direct Authentication)
+        self.creds: Dict[str, str] = creds
+        # Legacy (Token) Authentication
+        self.token_value: str or bool = access_token
+        if access_token:
+            # We do not have API credentials, disable token refresh.
+            self.refreshable = False
+            # Assume the token was just generated.
+            self.token_expiration = 1799
+
+        # Complete list of available API operations.
         self.commands = api_endpoints
-        self.user_agent = user_agent  # Issue #365
+
         # Maximum renewal window is 20 minutes, Minimum is 2 minutes
         self.token_renew_window = max(min(renew_window, 1200), 120)  # in seconds
 
-    def valid_cred_format(self: object) -> bool:
-        """Confirm credential dictionary format.
+    def valid_cred_format(self) -> bool:
+        """Legacy property to confirm credential dictionary format."""
+        return self.cred_format_valid
 
-        Returns a boolean indicating if the client_id and
-        client_secret are present in the creds dictionary.
-        """
-        retval = False
-        if "client_id" in self.creds and "client_secret" in self.creds:
-            retval = True
-
-        return retval
-
-    def token_expired(self: object) -> bool:
-        """Return a boolean based upon the token expiration status."""
-        retval = False
-        if (time.time() - self.token_time) >= (self.token_expiration - self.token_renew_window):
-            retval = True
-
-        return retval
-
-    def authenticate(self: object) -> bool:
+    def authenticate(self) -> bool:
         """Generate an authorization token."""
-        target = self.base_url+'/oauth2/token'
+        operation_id = "oauth2AccessToken"
+        target = f"{self.base_url}{[ep[2] for ep in self.commands if operation_id in ep[0]][0]}"
         data_payload = {}
         if self.valid_cred_format():
             data_payload = {
@@ -174,50 +174,48 @@ class APIHarness:
         if isinstance(result, dict):  # Issue #433
             self.token_status = result["status_code"]
             if self.token_status == 201:
-                self.token = result["body"]["access_token"]
+                self.token_value = result["body"]["access_token"]
                 self.token_expiration = result["body"]["expires_in"]
                 self.token_time = time.time()
-                self.authenticated = True
                 self.token_fail_reason = None
                 self.base_url = autodiscover_region(self.base_url, result)
             else:
-                self.authenticated = False
+                self.token_expiration = 0
                 self._token_fail_headers = result["headers"]
                 if "errors" in result["body"]:
                     if result["body"]["errors"]:
                         self.token_fail_reason = result["body"]["errors"][0]["message"]
         else:
-            self.authenticated = False
+            self.token_expiration = 0
             self.token_fail_reason = TokenFailReason["UNEXPECTED"].value
             self.token_status = 403
 
         return self.authenticated
 
-    def deauthenticate(self: object) -> bool:
+    def deauthenticate(self) -> bool:
         """Revoke the current authorization token."""
-        target = str(self.base_url)+'/oauth2/revoke'
+        operation_id = "oauth2RevokeToken"
+        target = f"{self.base_url}{[ep[2] for ep in self.commands if operation_id in ep[0]][0]}"
         b64cred = generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
         header_payload = {"Authorization": f"basic {b64cred}"}
-        data_payload = {"token": f"{self.token}"}
+        data_payload = {"token": f"{self.token_value}"}
         revoked = False
         if perform_request(method="POST", endpoint=target, data=data_payload,
                            headers=header_payload, verify=self.ssl_verify,
                            proxy=self.proxy, timeout=self.timeout, user_agent=self.user_agent
                            )["status_code"] == 200:
-            self.authenticated = False
-            self.token = False
+            self.token_expiration = 0
+            self.token_value = False
             revoked = True
-        else:
-            revoked = False
 
         return revoked
 
-    def _create_header_payload(self: object, passed_arguments: dict) -> dict:
+    def _create_header_payload(self, passed_arguments: dict) -> dict:
         """Create the HTTP header payload.
 
         Creates the HTTP header payload based upon the existing class headers and passed arguments.
         """
-        payload = self.headers()
+        payload = self.auth_headers
         if "headers" in passed_arguments:
             for item in passed_arguments["headers"]:
                 payload[item] = passed_arguments["headers"][item]
@@ -227,28 +225,13 @@ class APIHarness:
         return payload
 
     @staticmethod
-    def _handle_partition(tgt: str, kwa: dict):
-        if kwa.get("partition", None) is not None:
-            # Partition needs to be embedded into the endpoint URL
-            tgt = tgt.format(str(kwa.get("partition", None)))
-        return tgt
+    def _handle_field(tgt: str, kwa: dict, fld: str) -> str:
+        """Embed the distinct_field value (SensorUpdatePolicy) within the endpoint URL."""
+        # Could potentially be zero
+        return tgt.format(str(kwa.get(fld, None))) if kwa.get(fld, None) is not None else tgt
 
     @staticmethod
-    def _handle_distinct_field(tgt: str, kwa: dict):
-        if kwa.get("distinct_field", None) is not None:
-            # distinct_field also needs to be embedded into the endpoint URL
-            tgt = tgt.format(str(kwa.get("distinct_field", None)))
-        return tgt
-
-    @staticmethod
-    def _handle_container_image_id(tgt: str, kwa: dict):
-        if kwa.get("image_id", None) is not None:
-            # container image ID also needs to be embedded into the endpoint URL
-            tgt = tgt.format(str(kwa.get("image_id", None)))
-        return tgt
-
-    @staticmethod
-    def _handle_body_payload_ids(kwa: dict):
+    def _handle_body_payload_ids(kwa: dict) -> dict:
         if kwa.get("action", None) in PREFER_IDS_IN_BODY:
             if kwa.get("ids", None):
                 # Handle the GET to POST method redirection for passed IDs
@@ -261,7 +244,7 @@ class APIHarness:
                 kwa["body"]["ids"] = kwa["body"]["ids"].split(",")
         return kwa
 
-    def _handle_container_operations(self, kwa: dict, base_string: str):
+    def _handle_container_operations(self, kwa: dict, base_string: str) -> Tuple[dict, str, bool]:
         """Handle Base URLs and keyword arguments for container registry operations."""
         # Default to non-container registry operations
         do_container = False
@@ -276,88 +259,123 @@ class APIHarness:
                 kwa["parameters"]["policy_type"] = "image-prevention-policy"
         return kwa, base_string, do_container
 
-    def command(self: object, *args, **kwargs) -> dict or bytes:
+    def _request_keywords(self, meth: str, oper: str, tgt: str, kwa: dict, do_cont: bool) -> dict:
+        """Generate a properly formatted mapping of the keywords for this request."""
+        return {
+            "method": meth,
+            "endpoint": tgt,
+            "body": kwa.get("body", return_preferred_default(oper)),
+            "data": kwa.get("data", return_preferred_default(oper)),
+            "params": args_to_params(kwa.get("parameters", {}), kwa, self.commands, oper),
+            "headers": self._create_header_payload(kwa),
+            "files": kwa.get("files", return_preferred_default(oper, "list")),
+            "verify": self.ssl_verify,
+            "proxy": self.proxy,
+            "timeout": self.timeout,
+            "user_agent": self.user_agent,
+            "expand_result": kwa.get("expand_result", False),
+            "container": do_cont
+        }
+
+    def _scrub_target(self, oper: str, scrubbed: str, kwas: dict) -> str:
+        """Scrubs the endpoint target by performing any outstanding string replacements."""
+        field_mapping = {
+            "image_id": "DeleteImageDetails",
+            "partition": "refreshActiveStreamSession",
+            "distinct_field": "querySensorUpdateKernelsDistinct"
+        }
+        for field_name, field_value in field_mapping.items():
+            if oper == field_value:  # Only perform replacements on mapped operation IDs.
+                scrubbed = self._handle_field(scrubbed, kwas, field_name)
+
+        return scrubbed
+
+    def command(self, *args, **kwargs) -> dict or bytes:
         """Uber Class API command method.
 
         Checks token expiration, renewing when necessary, then performs the request.
 
-        Keyword arguments:
-        action: str = ""                                    - API Operation ID to perform
-        parameters: dict = {}                               - Parameter payload (Query string)
-        body: dict = {}                                     - Body payload (Body)
-        data: dict = {}                                     - Data payload (Data)
-        headers: dict = {}                                  - Headers dictionary (HTTP Headers)
-        ids: list or str = None                             - ID list (IDs to handle)
-        partition: int or str = None                        - Partition number
-        distinct_field: str = None                          - Distinct Field
-        override: str = None   (format: 'METHOD,ENDPOINT')  - Override method and endpoint
-        action_name: str = None                             - Action to perform (API specific)
-        files: list = []                                    - List of files to upload
-        file_name: str = None                               - Name of the file to upload
-        content_type: str = None                            - Content_Type HTTP header
-        expand_result: bool = False                         - Request expanded results (Tuple)
-        image_id: str = None                                - Container image ID (Falcon Container only)
+        HTTP Method: Any
 
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html
+
+        Keyword arguments
+        ----
+        action : str (Default: None)
+            API Operation ID to perform
+        parameters : dict (Default: {})
+            Parameter payload (Query string)
+        body : dict (Default: {})
+            Body payload (Body)
+        data : dict (Default: {})
+            Data payload (Data)
+        headers : dict (Default: {})
+            Headers dictionary (HTTP Headers)
+        ids : list or str (Default: None)
+            ID list (IDs to handle)
+        partition : int or str (Default: None)
+            Partition number (Event Streams only)
+        distinct_field : str (Default: None)
+            Distinct Field (Sensor Update Policy only)
+        override : str (Default: None)
+            Override method and endpoint. Example: 'METHOD,ENDPOINT'
+        action_name : str (Default: None)
+            Action to perform (API specific)
+        files : list (Default: [])
+            List of files to upload
+        file_name : str (Default: None)
+            Name of the file to upload
+        content_type : str (Default: None)
+            Content_Type HTTP header
+        expand_result : bool (Default: False)
+            Request expanded results (returns a tuple)
+        image_id : str (Default: None)
+            Container image ID (Falcon Container only)
+
+        Arguments
+        ----
         The first argument passed to this method is assumed to be 'action'. All others are ignored.
 
-        Returns: dict object containing API response or binary object depending on operation ID.
+        Returns
+        ----
+        dict or bytes
+            Dictionary or binary object containing API response depending on requested operation.
         """
-        if self.token_expired():
-            # Authenticate them if we can
+        if not self.authenticated or (self.token_expired and self.refreshable):
+            # Authenticate them if they're not yet authenticated or expired.
             self.authenticate()
 
         try:
             if not kwargs.get("action", None):
-                # Assume they're passing it in as the first param
+                # Assume they're passing it in as the first argument.
                 kwargs["action"] = args[0]
         except IndexError:
-            pass  # They didn't specify an action, use the default and try for an override instead
+            pass  # They didn't specify an action, try for an override instead.
 
         uber_command = [a for a in self.commands if a[0] == kwargs.get("action", None)]
         if kwargs.get("override", None):
             uber_command = [["Manual"] + kwargs["override"].split(",")]
         if uber_command:
-            # Retrieve our default base URL
-            url_base = self.base_url
-            # Alter keywords and base URL if we are performing a container registry operation
-            kwargs, url_base, container = self._handle_container_operations(kwargs, url_base)
-            # Retrieve the endpoint URL from the command list and append to our base URL
-            target = f"{url_base}{uber_command[0][2]}"
-            # Container image ID
-            target = self._handle_container_image_id(target, kwargs)
-            # Partition
-            target = self._handle_partition(target, kwargs)
-            # Distinct field
-            target = self._handle_distinct_field(target, kwargs)
+            # Which API operation to perform.
+            operation = uber_command[0][0]
+            # Retrieve our base URL and alter keywords if we are performing a container operation.
+            kwargs, url_base, container = self._handle_container_operations(kwargs, self.base_url)
+            # Retrieve the endpoint from the command list and append to our base URL and
+            # then perform any outstanding string replacements on the target endpoint URL.
+            target = self._scrub_target(operation, f"{url_base}{uber_command[0][2]}", kwargs)
             # Handle any IDs that are in the wrong payload
             kwargs = self._handle_body_payload_ids(kwargs)
             # Check for authentication
             if self.authenticated:
                 # Which HTTP method to execute
-                selected_method = uber_command[0][1].upper()
-                selected_operation = uber_command[0][0]
+                method = uber_command[0][1].upper()
                 # Only accept allowed HTTP methods
-                if selected_method in _ALLOWED_METHODS:
-                    returned = perform_request(method=selected_method,
-                                               endpoint=target,
-                                               body=kwargs.get("body", return_preferred_default(selected_operation)),
-                                               data=kwargs.get("data", return_preferred_default(selected_operation)),
-                                               params=args_to_params(kwargs.get("parameters", {}),
-                                                                     kwargs,
-                                                                     self.commands,
-                                                                     selected_operation
-                                                                     ),
-                                               headers=self._create_header_payload(kwargs),
-                                               files=kwargs.get("files",
-                                                                return_preferred_default(selected_operation, "list")
-                                                                ),
-                                               verify=self.ssl_verify,
-                                               proxy=self.proxy,
-                                               timeout=self.timeout,
-                                               user_agent=self.user_agent,
-                                               expand_result=kwargs.get("expand_result", False),
-                                               container=container
-                                               )
+                if method in _ALLOWED_METHODS:
+                    returned = perform_request(
+                        **self._request_keywords(method, operation, target, kwargs, container)
+                        )
                 else:
                     # Bad HTTP method
                     returned = generate_error_result(message="Invalid HTTP method specified.",
@@ -374,3 +392,32 @@ class APIHarness:
             returned = generate_error_result(message="Invalid API operation specified.", code=418)
 
         return returned
+
+    # Legacy properties
+    def headers(self) -> Dict[str, str]:
+        """Legacy property getter for the current authorization headers."""
+        return self.auth_headers
+
+    # Generic logout interface
+    logout = deauthenticate
+
+    # Read only properties
+    @property
+    def auth_headers(self) -> Dict[str, str]:
+        """Return a Bearer token baked into an Authorization header ready for an HTTP request."""
+        return {"Authorization": f"Bearer {self.token_value}"}
+
+    @property
+    def token_expired(self) -> bool:
+        """Return whether the token is ready to be renewed."""
+        return (time.time() - self.token_time) >= (self.token_expiration - self.token_renew_window)
+
+    @property
+    def authenticated(self) -> bool:
+        """Return if we are authenticated by retrieving the inverse of token_expired."""
+        return not self.token_expired
+
+    @property
+    def token(self) -> str:
+        """Return the token string."""
+        return self.token_value
