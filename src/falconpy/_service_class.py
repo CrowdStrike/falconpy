@@ -42,9 +42,18 @@ from .oauth2 import OAuth2
 
 
 class ServiceClass:
-    """ServiceClass base class.
-    
+    r"""ServiceClass base class.
+
     Contains the default __init__ method leveraged by all service classes.
+
+    ┌──────────────────────┐
+    │     Encapsulated     ├─── Attributes
+    │      Base Class      ├─── Constructor (__init__)
+    │    ______________    ├─── Properties
+    └──/│ Inherited by │\──┘
+      /─┴──────────────┴─\
+      │   ServiceClass   ├─── Methods (API operations)
+      └──────────────────┘
 
     This class is intended to be inherited by a class that represents a service collection.
     """
@@ -108,7 +117,7 @@ class ServiceClass:
         Returns
         ----
         class
-            Instance of ServiceClass derivative
+            Instance of a ServiceClass derivative.
         """
         self.ext_headers: dict = kwargs.get("ext_headers", {})
         # Currently defaulting to validation enabled
