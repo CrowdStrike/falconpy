@@ -17,7 +17,7 @@ from falconpy import APIHarness
 from falconpy._util import perform_request, force_default
 
 
-AllowedResponses = [200, 400, 401, 404, 405, 415, 418, 429]
+AllowedResponses = [200, 400, 401, 403, 404, 405, 415, 418, 429]
 
 if "DEBUG_API_ID" in os.environ and "DEBUG_API_SECRET" in os.environ:
     config = {}
@@ -174,11 +174,12 @@ class TestUber:
             pytest.skip("Rate limit hit")
         falcon.creds["member_cid"] = "1234567890ABCDEFG"
         if not falcon.authenticate():
-            falcon.creds.pop("member_cid")
-            return True
+            returned = True
         else:
-            falcon.creds.pop("member_cid")
-            return False
+            returned = False
+        falcon.creds.pop("member_cid")
+
+        return returned
 
     def uberCCAWS_BadMethod(self):
         if falcon.command(action="", override="BANANA,/cloud-connect-aws/combined/accounts/v1",
@@ -224,11 +225,12 @@ class TestUber:
         hold_id = falcon.creds["client_id"]
         falcon.creds["client_id"] = "Gonna Crash"
         if not falcon.deauthenticate():
-            falcon.creds["client_id"] = hold_id
-            return True
+            returned = True
         else:
-            falcon.creds["client_id"] = hold_id
-            return False
+            returned = False
+        falcon.creds["client_id"] = hold_id
+
+        return returned
 
     def uberCCAWS_BadAuthentication(self):
         falcon = APIHarness()
