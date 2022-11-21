@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 import time
 from typing import Dict
 
-from ._auth_object import FalconPyAuth
+from ._auth_object import FalconAuth
 from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
 from ._token_fail_reason import TokenFailReason
 from ._util import (
@@ -46,11 +46,12 @@ from ._util import (
     generate_b64cred,
     confirm_base_url,
     generate_error_result,
+    generate_ok_result,
     autodiscover_region,
     )
 
 
-class OAuth2(FalconPyAuth):
+class OAuth2(FalconAuth):
     """To create an instance of this class, you must pass your client_id and client_secret.
 
     OR a properly formatted dictionary containing your client_id and client_secret
@@ -111,8 +112,6 @@ class OAuth2(FalconPyAuth):
 
         self.creds: Dict[str, str] = creds
         self.token_expiration: int = 0
-        # Maximum renewal window is 20 minutes, Minimum is 2 minutes
-        #self.token_renew_window: int = max(min(renew_window, 1200), 120)
         self.token_time: float = time.time()
         self.token_value: str = False
         self.token_fail_reason: str = None
@@ -162,12 +161,6 @@ class OAuth2(FalconPyAuth):
 
         return returned
 
-    @property
-    def token_expired(self) -> bool:
-        """Return whether the token is ready to be renewed."""
-        return (time.time() - self.token_time) >= (self.token_expiration - self.token_renew_window)
-
-
     def revoke(self: object, token: str) -> dict:
         """Revoke the specified authorization token.
 
@@ -189,9 +182,21 @@ class OAuth2(FalconPyAuth):
                                        proxy=self.proxy, timeout=self.timeout,
                                        user_agent=self.user_agent)
             self.token_expiration = 0
-            self.token_value = None
+            self.token_value = False
         else:
             returned = generate_error_result("Invalid credentials specified", 403)
+
+        return returned
+
+    def logout(self) -> dict:
+        """Revoke the token."""
+        returned = self.revoke(self.token_value)
+        if returned["status_code"] == 200:
+            returned = generate_ok_result(message="Current token successfully revoked.",
+                                          headers=returned["headers"]
+                                          )
+        else:
+            returned = generate_error_result("Unable to revoke current token.", 500)
 
         return returned
 
@@ -204,13 +209,14 @@ class OAuth2(FalconPyAuth):
         return {"Authorization": f"Bearer {self.token_value}"}
 
     @property
-    def authenticated(self) -> bool:
-        """Return whether we are authenticated (i.e., token is not expired)."""
-        return not self.token_expired
+    def token_expired(self) -> bool:
+        """Return whether the token is ready to be renewed."""
+        return (time.time() - self.token_time) >= (self.token_expiration - self.token_renew_window)
 
-    def logout(self) -> Dict:
-        """Revoke the token."""
-        return self.revoke(self.token_value)
+    @property
+    def authenticated(self) -> bool:
+        """Return if we are authenticated by retrieving the inverse of token_expired."""
+        return not self.token_expired
 
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
