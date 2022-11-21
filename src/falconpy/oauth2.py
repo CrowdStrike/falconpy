@@ -35,9 +35,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=R0902,R0913
 import time
-from typing import Dict
-
+from typing import Dict, Optional
 from ._auth_object import FalconAuth
 from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
 from ._token_fail_reason import TokenFailReason
@@ -52,77 +52,132 @@ from ._util import (
 
 
 class OAuth2(FalconAuth):
-    """To create an instance of this class, you must pass your client_id and client_secret.
+    """OAuth2 Service Class.
 
-    OR a properly formatted dictionary containing your client_id and client_secret
-    for the key you wish to use to connect to the API.
+    To create an instance of this class you must provide either:
+        - your client_id and client_secret.
+        - a properly formatted dictionary containing your client_id and client_secret
+          Example:
+          {
+              "client_id": FALCON_CLIENT_ID,
+              "client_secret": FALCON_CLIENT_SECRET,
+              "member_cid": OPTIONAL_CHILD_CID
+          }
+        - a valid access_token
 
-    Credential dictionary example:
-    {
-        "client_id": FALCON_CLIENT_ID,
-        "client_secret": FALCON_CLIENT_SECRET
-    }
+    All other class constructor arguments are optional.
     """
 
-    # pylint: disable=too-many-instance-attributes,too-many-arguments
-    def __init__(self: object, base_url: str = "https://api.crowdstrike.com",
-                 ssl_verify: bool = True, proxy: dict = None, timeout: float or tuple = None,
-                 creds: dict = None, client_id: str = None, client_secret: str = None,
-                 user_agent: str = None, member_cid: str = None, renew_window: int = 120):
-        """Class constructor.
+    # Default attributes
+    refreshable: bool = True
+    token_expiration: int = 0
+    token_time: float = time.time()
+    token_fail_reason: str = None
+    token_status: int = None
+
+    def __init__(self,
+                 access_token: Optional[str or bool] = False,
+                 base_url: Optional[str] = "https://api.crowdstrike.com",
+                 ssl_verify: Optional[bool] = True,
+                 proxy: Optional[Dict[str, str]] = None,
+                 timeout: Optional[float or tuple] = None,
+                 creds: Optional[Dict[str, str]] = None,
+                 client_id: Optional[str] = None,
+                 client_secret: Optional[str] = None,
+                 user_agent: Optional[str] = None,
+                 member_cid: Optional[str] = None,
+                 renew_window: Optional[int] = 120
+                 ) -> "OAuth2":
+        """Construct an instance of the class.
 
         Initializes the base class by ingesting credentials,
-        the proxies dictionary and specifications
-        for the base URL, SSL verification, and timeouts.
+        the proxy dictionary and specifications for other attributes
+        such as the base URL, SSL verification, and timeout.
 
-        Keyword arguments:
-        base_url: CrowdStrike API URL to use for requests. [Default: US-1]
-        ssl_verify: Boolean specifying if SSL verification should be used. [Default: True]
-        proxy: Dictionary of proxies to be used for requests.
-        timeout: Float or tuple specifying timeouts to use for requests.
-        creds: Dictionary containing CrowdStrike API credentials.
-               Mutually exclusive to client_id / client_secret.
-        client_id: Client ID for the CrowdStrike API. Mutually exclusive to creds.
-        client_secret: Client Secret for the CrowdStrike API. Mutually exclusive to creds.
-        member_cid: Child CID to connect to. Mutually exclusive to creds.
-        renew_window: Amount of time (in seconds) between now and the token expiration before
-                      a refresh of the token is performed. Default: 120, Max: 1200
-                      Values over 1200 will be reset to the maximum.
+        Keyword arguments
+        ----
+        base_url : str
+            CrowdStrike API URL to use for requests. [Default: US-1]
+        ssl_verify : bool
+            Flag specifying if SSL verification should be used. [Default: True]
+        proxy : dict
+            Dictionary of proxies to be used for requests.
+        timeout : float or tuple
+            Value specifying timeouts to use for requests.
+        creds : dict
+            Dictionary containing CrowdStrike API credentials.
+            Mutually exclusive to client_id / client_secret.
+        client_id : str
+            Client ID for the CrowdStrike API. Mutually exclusive to creds.
+        client_secret : str
+            Client Secret for the CrowdStrike API. Mutually exclusive to creds.
+        member_cid : str
+            Child CID to connect to. Mutually exclusive to creds.
+        renew_window : int
+            Amount of time (in seconds) between now and the token expiration before
+            a refresh of the token is performed. Default: 120, Max: 1200
+            Values over 1200 will be reset to the maximum.
 
+        Arguments
+        ----
         This method only supports keywords to specify arguments.
+
+        Returns
+        ----
+        class (OAuth2)
+            A constructed instance of the OAuth2 Service Class.
         """
         super().__init__(base_url=confirm_base_url(base_url),
                          ssl_verify=ssl_verify,
                          timeout=timeout,
                          proxy=proxy,
-                         user_agent=user_agent,
-                         renew_window=renew_window
+                         user_agent=user_agent
                          )
+        # Direct Authentication
         if client_id and client_secret and not creds:
             creds = {
                 "client_id": client_id,
                 "client_secret": client_secret
             }
-            # Have to pass member_cid the same way you pass client_id / secret
-            # If you use a creds dictionary, pass the member_cid there instead
+            # You must pass member_cid the same way you pass client_id / secret.
+            # If you use a creds dictionary, pass the member_cid there instead.
             if member_cid:
                 creds["member_cid"] = member_cid
         elif not creds:
             creds = {}
-
+        # Credential Authentication (also powers Direct Authentication)
         self.creds: Dict[str, str] = creds
-        self.token_expiration: int = 0
-        self.token_time: float = time.time()
-        self.token_value: str = False
-        self.token_fail_reason: str = None
-        self.token_status: int = None
+        # Legacy (Token) Authentication (fallback)
+        self.token_value: str or bool = access_token
+        if access_token:
+            # We do not have API credentials, disable token refresh.
+            self.refreshable = False
+            # Assume the token was just generated.
+            self.token_expiration = 1799
+        # Set the token renewal window, ignored when using Legacy Authentication.
+        self.token_renew_window: int = max(min(renew_window, 1200), 120)
 
-    def token(self: object) -> dict:
+    def token(self) -> dict:
         """Generate an authorization token.
 
-        This method does not accept arguments or keywords.
+        HTTP Method: POST
 
-        Returns: dict object containing API response.
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2/oauth2AccessToken
+
+        Keyword arguments
+        ----
+        This method does not accept keyword arguments.
+
+        Arguments
+        ----
+        This method does not accept arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
         """
         operation_id = "oauth2AccessToken"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
@@ -161,15 +216,28 @@ class OAuth2(FalconAuth):
 
         return returned
 
-    def revoke(self: object, token: str) -> dict:
+    def revoke(self, token: str) -> dict:
         """Revoke the specified authorization token.
 
-        Keyword arguments:
-        token: Token string to be revoked.
+        HTTP Method: POST
 
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2/oauth2RevokeToken
+
+        Keyword arguments
+        ----
+        token : str
+            Token string to be revoked.
+
+        Arguments
+        ----
         When not specified as a keyword, token is assumed as the only accepted argument.
 
-        Returns: dict object containing API response.
+        Returns
+        ----
+        dict
+            Dictionary containing API response.
         """
         operation_id = "oauth2RevokeToken"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
@@ -189,7 +257,21 @@ class OAuth2(FalconAuth):
         return returned
 
     def logout(self) -> dict:
-        """Revoke the token."""
+        """Revoke the current token.
+
+        Keyword arguments
+        ----
+        This method does not accept keyword arguments.
+
+        Arguments
+        ----
+        This method does not accept arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
         returned = self.revoke(self.token_value)
         if returned["status_code"] == 200:
             returned = generate_ok_result(message="Current token successfully revoked.",
@@ -203,7 +285,7 @@ class OAuth2(FalconAuth):
     @property
     def auth_headers(self) -> Dict[str, str]:
         """Return a Bearer token baked into an Authorization header ready for an HTTP request."""
-        if self.token_expired:
+        if self.token_expired and self.refreshable:
             self.token()
 
         return {"Authorization": f"Bearer {self.token_value}"}
