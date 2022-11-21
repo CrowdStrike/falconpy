@@ -45,9 +45,11 @@ from typing import Dict, Optional
 class FalconAuth(ABC):
     """Abstract class to provide authentication to the CrowdStrike Falcon OAuth2 API.
 
-    This class is not usable by developers alone.
+    This class is not intended to be used by developers directly.
     You must work with a derivative of this class, such as an OAuth2 object.
     """
+
+    creds: Dict[str, str] = {}
 
     @property
     @abstractmethod
@@ -75,10 +77,15 @@ class FalconAuth(ABC):
                  timeout: Optional[float or tuple] = None,
                  proxy: Optional[Dict[str, str]] = None,
                  user_agent: Optional[str] = None
-                 ):
+                 ) -> "FalconAuth":
         """Construct an instance of the base class."""
         self.base_url: str = base_url
         self.ssl_verify: bool = ssl_verify
         self.timeout: float or tuple = timeout
         self.proxy: Dict[str, str] = proxy
         self.user_agent: str = user_agent
+
+    @property
+    def cred_format_valid(self) -> bool:
+        """Return a boolean creds dictionary is valid."""
+        return ("client_id" in self.creds and "client_secret" in self.creds)
