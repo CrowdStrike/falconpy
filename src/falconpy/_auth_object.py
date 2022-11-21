@@ -18,14 +18,14 @@ from abc import (
     ABC,
     abstractmethod,
 )
-from typing import Any, Dict, Optional
+from typing import Dict, Optional
 
 
-class FalconPyAuth(ABC):
+class FalconAuth(ABC):
     """Abstract class to provide authentication to Falcon.
 
-    This class is not usable by developers alone. You must expect to work with
-    a derivative of this class, such as an OAuth2 object.
+    This class is not usable by developers alone. You must work
+    with a derivative of this class, such as an OAuth2 object.
     """
 
     @property
@@ -46,15 +46,18 @@ class FalconPyAuth(ABC):
     @property
     @abstractmethod
     def authenticated(self) -> bool:
-        """Read-only property can will return whether authentication is complete."""
+        """Read-only property to return whether authentication is successful."""
+
+    @property
+    @abstractmethod
+    def token_expired(self) -> bool:
+        """Read-only property that returns the current token expiration status."""
 
     @abstractmethod
-    def logout(self) -> Any:
-        """Log out of Falcon, such as by revoking a token.
+    def logout(self) -> dict:
+        """Log out of Falcon by revoking the current token."""
 
-        This function may return any reasonable type, such as a dictionary.
-        """
-
+    # pylint: disable=R0913
     def __init__(self,
                  base_url: Optional[str] = "https://api.crowdstrike.com",
                  ssl_verify: Optional[bool] = True,
@@ -63,7 +66,7 @@ class FalconPyAuth(ABC):
                  user_agent: Optional[str] = None,
                  renew_window: Optional[int] = 120
                  ):
-        """Base class constructor."""
+        """Construct an instance of the base class."""
         self.base_url = base_url
         self.ssl_verify = ssl_verify
         self.timeout = timeout
