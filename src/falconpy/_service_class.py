@@ -36,115 +36,121 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import inspect
-
 from typing import Dict, Type
-
-from ._auth_object import FalconPyAuth
+from ._auth_object import FalconAuth
 from .oauth2 import OAuth2
-
-# pylint: disable=R0902  # Nine is reasonable
-# pylint: disable=R0912  # Currently at 13 branches
-# pylint: disable=R0915  # 51/50 statements. Allowing for now. 10.07.21 - jshcodes
 
 
 class ServiceClass:
-    """Base class of all service classes. Contains the default __init__ method."""
+    """ServiceClass base class.
+    
+    Contains the default __init__ method leveraged by all service classes.
 
-    def __init__(
-        self: object,
-        auth_object: FalconPyAuth = None,
-        default_auth_object_class: Type[FalconPyAuth] = OAuth2,
-        **kwargs,
-    ):
+    This class is intended to be inherited by a class that represents a service collection.
+    """
+
+    def __init__(self: object,
+                 auth_object: FalconAuth = None,
+                 default_auth_object_class: Type[FalconAuth] = OAuth2,
+                 **kwargs
+                 ):
         """Service Class base constructor.
 
         Instantiates the object, ingests authorization credentials,
         and initializes attributes.
 
-        Keyword arguments:
-        access_token: Token string to use for all requests performed.
-                      Mutually exclusive to all other authentication elements.
-        auth_object: Properly authenticated instance of an authentication backend, such as
-                     the OAuth2 Authentication service class. Mutually exclusive to all other
-                     authentication elements.
-        ext_headers: Additional headers to be prepended to the default headers dictionary.
-                     Dictionary.
+        Keyword arguments
+        ----
+        access_token : str
+            Token string to use for all requests performed.
+            Mutually exclusive to all other authentication elements.
+        auth_object : object (FalconAuth derivative)
+            Properly authenticated instance of an authentication backend,
+            such as the OAuth2 Service Class.
+        base_url : str
+            CrowdStrike API URL to use for requests. [Default: US-1]
+        ext_headers : dict
+            Additional headers to be prepended to the default headers dictionary.
+        ssl_verify : bool
+            Flag specifying if SSL verification should be used. [Default: True]
+        proxy : dict
+            Dictionary of proxies to be used for requests.
+        timeout : float or tuple
+            Timeouts to use for requests.
+        creds : dict
+            Dictionary containing CrowdStrike API credentials.
+            Mutually exclusive to client_id / client_secret.
+            {
+                "client_id": "CLIENT_ID_HERE",
+                "client_secret": "CLIENT_SECRET_HERE",
+                "member_cid": "CHILD_CID_MSSP_ONLY"
+            }
+        client_id : str
+            Client ID for the CrowdStrike API. Mutually exclusive to creds.
+        client_secret : str
+            Client Secret for the CrowdStrike API. Mutually exclusive to creds.
+        member_cid : str
+            CID of the child account to authenticate to (MSSP only)
+        validate_payload : bool
+            Flag specifying if body payloads should be validated. Defaults to True.
+        user_agent : str
+            User-Agent string to use for all requests made to the CrowdStrike API.
+            Defaults to crowdstrike-falconpy/VERSION.
+        renew_window : int
+            Amount of time (in seconds) between now and the token expiration before
+            a refresh of the token is performed. Default: 120, Max: 1200
+            Values over 1200 will be reset to the maximum.
 
-        # to be removed
-        base_url: CrowdStrike API URL to use for requests. [Default: US-1]
-        ssl_verify: Boolean specifying if SSL verification should be used or string representing
-                    the path to a CA_BUNDLE file or directory of trusted certificates.
-                    Default: True
-        proxy: Dictionary of proxies to be used for requests.
-        timeout: Float or tuple specifying timeouts to use for requests.
-        creds: Dictionary containing CrowdStrike API credentials.
-               Mutually exclusive to client_id / client_secret.
-               {
-                   "client_id": "CLIENT_ID_HERE",
-                   "client_secret": "CLIENT_SECRET_HERE",
-                   "member_cid": "CHILD_CID_MSSP_ONLY"
-               }
-        client_id: Client ID for the CrowdStrike API. Mutually exclusive to creds.
-        client_secret: Client Secret for the CrowdStrike API. Mutually exclusive to creds.
-        member_cid: CID of the child account to authenticate to (MSSP only)
-        validate_payload: Boolean specifying if body payloads should be validated.
-                          Defaults to True.
-        user_agent: User-Agent string to use for all requests made to the CrowdStrike API.
-                    String. Defaults to crowdstrike-falconpy/VERSION.
-        renew_window: Amount of time (in seconds) between now and the token expiration before
-                      a refresh of the token is performed. Default: 120, Max: 1200
-                      Values over 1200 will be reset to the maximum.
-
+        Arguments
+        ----
         This method only accepts keywords to specify arguments.
-        """
-        self.ext_headers = kwargs.get("ext_headers", {})
-        # Currently defaulting to validation enabled
-        self.validate_payloads = kwargs.get("validate_payloads", True)
-        self.auth_object: FalconPyAuth = None
 
-        # Passing an auth_object will automatically ignore the rest of the parameters, as
-        # this can be treated as an atomic collection of all authentication information.
+        Returns
+        ----
+        class
+            Instance of ServiceClass derivative
+        """
+        self.ext_headers: dict = kwargs.get("ext_headers", {})
+        # Currently defaulting to validation enabled
+        self.validate_payloads: bool = kwargs.get("validate_payloads", True)
+        self.auth_object: FalconAuth = None
+
+        # An auth_object is treated as an atomic collection of all necessary authentication detail.
         if auth_object:
-            if issubclass(type(auth_object), FalconPyAuth):
+            if issubclass(type(auth_object), FalconAuth):
                 self.auth_object = auth_object
             else:
                 # Look for an OAuth2 object as an attribute to the object they provided.
-                for attr in [x for x in dir(auth_object) if "__" not in x]:
-                    if attr == "auth_object":
+                if hasattr(auth_object, "auth_object"):
+                    if issubclass(type(auth_object.auth_object), FalconAuth):
                         self.auth_object = auth_object.auth_object
-
-            if self.auth_object is None:
-                raise Exception("Unknown auth_object passed")
-
         else:
-            # Get all the arguments of the authentication class's constructor
-            auth_object_class_sig = inspect.signature(default_auth_object_class)
-            auth_kwargs = {}
-            for param in auth_object_class_sig.parameters:
-                if param in kwargs:
-                    auth_kwargs[param] = kwargs[param]
-
+            # Get all constructor arguments for the authentication class.
+            auth_kwargs = {
+                param: kwargs[param]
+                for param in inspect.signature(default_auth_object_class).parameters
+                if param in kwargs
+            }
+            # Create an instance of the default auth object using the provided keywords.
             self.auth_object = default_auth_object_class(**auth_kwargs)
 
+    def logout(self) -> dict:
+        """Logout from the CrowdStrike API by revoking the current token."""
+        return self.auth_object.logout()
+
+    # Legacy properties
     def authenticated(self) -> bool:
         """Return the current authentication status."""
         return self.auth_object.authenticated
 
     def token_expired(self) -> bool:
         """Return a boolean reflecting token expiration status."""
-        return not self.authenticated
+        return self.auth_object.token_expired
 
-    @property
-    def headers(self) -> Dict[str, str]:
-        """Provide a combination of headers needed for auth and additional supplied headers."""
-        return {
-            ** self.auth_object.auth_headers,
-            ** self.ext_headers,
-        }
-
+    # Mutable properties
     @property
     def base_url(self) -> str:
-        """Provide the base_url to legacy code that reads it straight from the service class."""
+        """Provide the base_url to code that reads it straight from the service class."""
         return self.auth_object.base_url
 
     @base_url.setter
@@ -159,7 +165,7 @@ class ServiceClass:
 
     @ssl_verify.setter
     def ssl_verify(self, value: bool):
-        """Allow legacy code to flip the SSL verify flag in the auth_object via the this class."""
+        """Allow code to flip the underlying SSL verify flag via the this class."""
         self.auth_object.ssl_verify = value
 
     @property
@@ -182,6 +188,15 @@ class ServiceClass:
         """Allow the token_renew_window to be overriden."""
         self.auth_object.token_renew_window = value
 
+    # Read only properties
+    @property
+    def headers(self) -> Dict[str, str]:
+        """Provide a combination of headers needed for auth and additional supplied headers."""
+        return {
+            ** self.auth_object.auth_headers,
+            ** self.ext_headers,
+        }
+
     @property
     def token_status(self) -> int:
         """Provide the token_status from the auth_object."""
@@ -194,5 +209,5 @@ class ServiceClass:
 
     @property
     def refreshable(self) -> bool:
-        """Is the token for this auth_object refreshable?"""
+        """Flag indicating if the token for this auth_object is refreshable."""
         return self.auth_object.refreshable
