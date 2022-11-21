@@ -1,5 +1,8 @@
 """Authentication Object Base Class.
 
+This file contains the definition of the base class that provides the
+necessary functions to authenticate to the CrowdStrike Falcon OAuth2 API.
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -8,40 +11,48 @@
 |::.. . |   CROWDSTRIKE FALCON    |::.. . |    FalconPy
 `-------'                         `-------'
 
-This file contains the definition of the base class that provides the necessary
-functions to authenticate to the API. Out of the box we will provide only one
-authentication object implementation in OAuth2.py, but this structure provides
-both future extensibility, as well as the ability to reason about encapsulation of
-authentication data.
+OAuth2 API - Customer SDK
+
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <https://unlicense.org>
 """
-from abc import (
-    ABC,
-    abstractmethod,
-)
+from abc import ABC, abstractmethod
 from typing import Dict, Optional
 
 
 class FalconAuth(ABC):
-    """Abstract class to provide authentication to Falcon.
+    """Abstract class to provide authentication to the CrowdStrike Falcon OAuth2 API.
 
-    This class is not usable by developers alone. You must work
-    with a derivative of this class, such as an OAuth2 object.
+    This class is not usable by developers alone.
+    You must work with a derivative of this class, such as an OAuth2 object.
     """
 
     @property
     @abstractmethod
     def auth_headers(self) -> Dict[str, str]:
-        """Get a dictionary of headers that can authenticate an HTTP request.
-
-        This function will always return a dictionary (which could be empty), containing
-        all the HTTP headers required to authenticate a request. For example, an OAuth2
-        implementation of this class should return a dictionary containing a
-        key -> value pair of the Authorization header and a Bearer token.
-
-        If the headers need renewed data, such as updated tokens that can expire, the logic
-        required for this should either be implemented or called from this function. Code
-        dependent on this function should not need to check token validity.
-        """
+        """Get a dictionary of headers that can authenticate an HTTP request."""
 
     @property
     @abstractmethod
@@ -63,13 +74,11 @@ class FalconAuth(ABC):
                  ssl_verify: Optional[bool] = True,
                  timeout: Optional[float or tuple] = None,
                  proxy: Optional[Dict[str, str]] = None,
-                 user_agent: Optional[str] = None,
-                 renew_window: Optional[int] = 120
+                 user_agent: Optional[str] = None
                  ):
         """Construct an instance of the base class."""
-        self.base_url = base_url
-        self.ssl_verify = ssl_verify
-        self.timeout = timeout
-        self.proxy = proxy
-        self.user_agent = user_agent
-        self.token_renew_window = max(min(renew_window, 1200), 120)
+        self.base_url: str = base_url
+        self.ssl_verify: bool = ssl_verify
+        self.timeout: float or tuple = timeout
+        self.proxy: Dict[str, str] = proxy
+        self.user_agent: str = user_agent
