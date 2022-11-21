@@ -157,7 +157,7 @@ def force_default(defaults: list, default_types: list = None):
 
 
 # Caller is defined as an object below until our Python minimum version is >= 3.7
-def service_request(caller: object = None, **kwargs) -> object:  # May return dict or object datatypes
+def service_request(caller: object = None, **kwargs) -> object:  # May return dict or binary datatypes
     """Prepare and then perform the request (Service Classes only)."""
     if caller:
         try:
@@ -182,7 +182,7 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
 def perform_request(endpoint: str = "",  # pylint: disable=R0912
                     headers: dict = None,
                     **kwargs
-                    ) -> object:  # May return dict or object data types
+                    ) -> object:  # May return dict or binary data types
     """Leverage the requests library to perform the requested CrowdStrike OAuth2 API operation.
 
     Keyword arguments:
