@@ -182,7 +182,7 @@ class OAuth2(FalconAuth):
         operation_id = "oauth2AccessToken"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
         header_payload = {}
-        if "client_id" in self.creds and "client_secret" in self.creds:
+        if self.cred_format_valid:
             data_payload = {
                 'client_id': self.creds['client_id'],
                 'client_secret': self.creds['client_secret']
@@ -241,7 +241,7 @@ class OAuth2(FalconAuth):
         """
         operation_id = "oauth2RevokeToken"
         target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        if "client_id" in self.creds and "client_secret" in self.creds:
+        if self.cred_format_valid:
             b64cred = generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
             header_payload = {"Authorization": f"basic {b64cred}"}
             data_payload = {"token": f"{token}"}
