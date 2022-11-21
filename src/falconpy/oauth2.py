@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import time
-from typing import Dict, Optional
+from typing import Dict
 
 from ._auth_object import FalconPyAuth
 from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
@@ -90,13 +90,13 @@ class OAuth2(FalconPyAuth):
 
         This method only supports keywords to specify arguments.
         """
-        super().__init__(
-            base_url=confirm_base_url(base_url),
-            ssl_verify=ssl_verify,
-            timeout=timeout,
-            proxy=proxy,
-            user_agent=user_agent,
-        )
+        super().__init__(base_url=confirm_base_url(base_url),
+                         ssl_verify=ssl_verify,
+                         timeout=timeout,
+                         proxy=proxy,
+                         user_agent=user_agent,
+                         renew_window=renew_window
+                         )
         if client_id and client_secret and not creds:
             creds = {
                 "client_id": client_id,
@@ -112,11 +112,11 @@ class OAuth2(FalconPyAuth):
         self.creds: Dict[str, str] = creds
         self.token_expiration: int = 0
         # Maximum renewal window is 20 minutes, Minimum is 2 minutes
-        self.token_renew_window: int = max(min(renew_window, 1200), 120)
+        #self.token_renew_window: int = max(min(renew_window, 1200), 120)
         self.token_time: float = time.time()
-        self.token_value: Optional[str] = None
-        self.token_fail_reason: Optional[str] = None
-        self.token_status: Optional[int] = None
+        self.token_value: str = False
+        self.token_fail_reason: str = None
+        self.token_status: int = None
 
     def token(self: object) -> dict:
         """Generate an authorization token.
@@ -164,8 +164,9 @@ class OAuth2(FalconPyAuth):
 
     @property
     def token_expired(self) -> bool:
-        """Return whether the token is ready to be renewerd."""
+        """Return whether the token is ready to be renewed."""
         return (time.time() - self.token_time) >= (self.token_expiration - self.token_renew_window)
+
 
     def revoke(self: object, token: str) -> dict:
         """Revoke the specified authorization token.
@@ -197,15 +198,14 @@ class OAuth2(FalconPyAuth):
     @property
     def auth_headers(self) -> Dict[str, str]:
         """Return a Bearer token baked into an Authorization header ready for an HTTP request."""
-        self.token()
+        if self.token_expired:
+            self.token()
 
-        return {
-            'Authorization': 'Bearer ' + self.token_value,
-        }
+        return {"Authorization": f"Bearer {self.token_value}"}
 
     @property
     def authenticated(self) -> bool:
-        """Return whether we are authentication (i.e., token is not expired)."""
+        """Return whether we are authenticated (i.e., token is not expired)."""
         return not self.token_expired
 
     def logout(self) -> Dict:
