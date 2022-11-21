@@ -37,7 +37,6 @@ For more information, please refer to <https://unlicense.org>
 """
 import base64
 import functools
-
 try:
     from simplejson import JSONDecodeError
 except ImportError:
@@ -46,13 +45,11 @@ from typing import Dict
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
-
-from ._auth_object import FalconPyAuth
+from ._version import _TITLE, _VERSION
+from ._result import Result, ExpandedResult
 from ._base_url import BaseURL
 from ._container_base_url import ContainerBaseURL
-from ._result import Result, ExpandedResult
 from ._uber_default_preference import PREFER_NONETYPE, MOCK_OPERATIONS
-from ._version import _TITLE, _VERSION
 urllib3.disable_warnings(InsecureRequestWarning)
 
 # Restrict requests to only allowed HTTP methods
@@ -161,7 +158,7 @@ def force_default(defaults: list, default_types: list = None):
 
 # Caller is defined as an object below until our Python minimum version is >= 3.7
 def service_request(caller: object = None, **kwargs) -> object:  # May return dict or object datatypes
-    """Check for token expiration, refresh if possible and then perform the request."""
+    """Prepare and then perform the request (Service Classes only)."""
     if caller:
         try:
             proxy: Dict[str, str] = caller.auth_object.proxy
@@ -177,16 +174,8 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
             user_agent: str = caller.auth_object.user_agent
         except AttributeError:
             user_agent = None
-        
-    returned = perform_request(
-        proxy=proxy,
-        timeout=timeout,
-        user_agent=user_agent,
-        # headers=headers,
-        **kwargs,
-    )
 
-    return returned
+    return perform_request(proxy=proxy, timeout=timeout, user_agent=user_agent, **kwargs)
 
 
 @force_default(defaults=["headers"], default_types=["dict"])
@@ -406,18 +395,11 @@ def process_service_request(calling_object: object,  # pylint: disable=R0914 # (
     expand_result -- Request expanded results output
     """
     target_endpoint = [ep for ep in endpoints if operation_id == ep[0]][0]
-    if issubclass(type(calling_object), type(FalconPyAuth)):
-        auth_object: FalconPyAuth = calling_object
-    elif hasattr(calling_object, 'auth_object'):
-        auth_object: FalconPyAuth = calling_object.auth_object
-    else:
-        raise Exception("Could not locate an auth_object to extract a base_url from")
-
-    base_url = auth_object.base_url
+    base_url = calling_object.base_url
     container = False
     if operation_id in MOCK_OPERATIONS:
         for base in [burl for burl in dir(BaseURL) if "__" not in burl]:
-            if BaseURL[base].value == auth_object.base_url.replace("https://", ""):
+            if BaseURL[base].value == calling_object.base_url.replace("https://", ""):
                 base_url = f"https://{ContainerBaseURL[base].value}"
                 container = True
     target_url = f"{base_url}{target_endpoint[2]}"
@@ -443,7 +425,7 @@ def process_service_request(calling_object: object,  # pylint: disable=R0914 # (
         "caller": calling_object,
         "method": target_method,
         "endpoint": target_url,
-        "verify": calling_object.auth_object.ssl_verify,
+        "verify": calling_object.ssl_verify,
         "headers": passed_headers,
         "params": parameter_payload,
         "body": kwargs.get("body", None),
