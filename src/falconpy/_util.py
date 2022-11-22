@@ -161,17 +161,17 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
     """Prepare and then perform the request (Service Classes only)."""
     if caller:
         try:
-            proxy: Dict[str, str] = caller.auth_object.proxy
+            proxy: Dict[str, str] = caller.proxy
         except AttributeError:
             proxy = None
 
         try:
-            timeout: int = caller.auth_object.timeout
+            timeout: int = caller.timeout
         except AttributeError:
             timeout = None
 
         try:
-            user_agent: str = caller.auth_object.user_agent
+            user_agent: str = caller.user_agent
         except AttributeError:
             user_agent = None
 
