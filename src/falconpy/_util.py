@@ -419,14 +419,18 @@ def process_service_request(calling_object: object,  # pylint: disable=R0914 # (
     parameter_payload = None
     if passed_keywords or passed_params:
         parameter_payload = args_to_params(passed_params, passed_keywords, endpoints, operation_id)
-    passed_headers = kwargs.get("headers", None) if kwargs.get("headers", None) else calling_object.headers
+    passed_headers = kwargs.get("headers", None) if kwargs.get("headers", None) else {}
+    joined_headers = {
+        ** calling_object.headers,
+        ** passed_headers
+    }
     expand_result = passed_keywords.get("expand_result", False) if passed_keywords else kwargs.get("expand_result", False)
     new_keywords = {
         "caller": calling_object,
         "method": target_method,
         "endpoint": target_url,
         "verify": calling_object.ssl_verify,
-        "headers": passed_headers,
+        "headers": joined_headers,
         "params": parameter_payload,
         "body": kwargs.get("body", None),
         "data": kwargs.get("data", None),

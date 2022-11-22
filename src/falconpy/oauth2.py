@@ -36,18 +36,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=R0902,R0913
-import time
 from typing import Dict, Optional
 from ._auth_object import FalconAuth
-from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
-from ._token_fail_reason import TokenFailReason
+#from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
 from ._util import (
-    perform_request,
-    generate_b64cred,
     confirm_base_url,
     generate_error_result,
     generate_ok_result,
-    autodiscover_region,
     )
 
 
@@ -66,14 +61,10 @@ class OAuth2(FalconAuth):
         - a valid access_token
 
     All other class constructor arguments are optional.
-    """
 
-    # Default attributes
-    refreshable: bool = True
-    token_expiration: int = 0
-    token_time: float = time.time()
-    token_fail_reason: str = None
-    token_status: int = None
+    OAuth2 is the only Service Class that inherits directly from the FalconAuth object.
+    This means the OAuth2 class does not maintain an auth_object, as it is one.
+    """
 
     def __init__(self,
                  access_token: Optional[str or bool] = False,
@@ -131,40 +122,17 @@ class OAuth2(FalconAuth):
                          ssl_verify=ssl_verify,
                          timeout=timeout,
                          proxy=proxy,
-                         user_agent=user_agent
+                         user_agent=user_agent,
+                         access_token=access_token,
+                         creds=creds,
+                         client_id=client_id,
+                         client_secret=client_secret,
+                         member_cid=member_cid,
+                         renew_window=renew_window
                          )
-        # Direct Authentication
-        if client_id and client_secret and not creds:
-            creds = {
-                "client_id": client_id,
-                "client_secret": client_secret
-            }
-            # You must pass member_cid the same way you pass client_id / secret.
-            # If you use a creds dictionary, pass the member_cid there instead.
-            if member_cid:
-                creds["member_cid"] = member_cid
-        elif not creds:
-            creds = {}
-        # Credential Authentication (also powers Direct Authentication)
-        self.creds: Dict[str, str] = creds
-        # Legacy (Token) Authentication (fallback)
-        self.token_value: str or bool = access_token
-        if access_token:
-            # We do not have API credentials, disable token refresh.
-            self.refreshable = False
-            # Assume the token was just generated.
-            self.token_expiration = 1799
-        # Set the token renewal window, ignored when using Legacy Authentication.
-        self.token_renew_window: int = max(min(renew_window, 1200), 120)
 
-    def token(self) -> dict:
-        """Generate an authorization token.
-
-        HTTP Method: POST
-
-        Swagger URL
-        ----
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2/oauth2AccessToken
+    def logout(self) -> dict:
+        """Revoke the current token.
 
         Keyword arguments
         ----
@@ -179,40 +147,13 @@ class OAuth2(FalconAuth):
         dict
             Dictionary object containing API response.
         """
-        operation_id = "oauth2AccessToken"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        header_payload = {}
-        if self.cred_format_valid:
-            data_payload = {
-                'client_id': self.creds['client_id'],
-                'client_secret': self.creds['client_secret']
-            }
-            if "member_cid" in self.creds:
-                data_payload["member_cid"] = self.creds["member_cid"]
-            returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
-                                       headers=header_payload, verify=self.ssl_verify,
-                                       proxy=self.proxy, timeout=self.timeout,
-                                       user_agent=self.user_agent)
-            if isinstance(returned, dict):  # Issue #433
-                self.token_status = returned["status_code"]
-                if self.token_status == 201:
-                    self.token_expiration = returned["body"]["expires_in"]
-                    self.token_time = time.time()
-                    self.token_value = returned["body"]["access_token"]
-                    self.token_fail_reason = None
-                    self.base_url = autodiscover_region(self.base_url, returned)
-                else:
-                    if "errors" in returned["body"]:
-                        if returned["body"]["errors"]:
-                            self.token_fail_reason = returned["body"]["errors"][0]["message"]
-            else:
-                returned = generate_error_result("Unexpected API response received", 403)
-                self.token_fail_reason = TokenFailReason["UNEXPECTED"].value
-                self.token_status = 403
+        returned = self._logout_handler()
+        if returned["status_code"] == 200:
+            returned = generate_ok_result(message="Current token successfully revoked.",
+                                          headers=returned["headers"]
+                                          )
         else:
-            returned = generate_error_result("Invalid credentials specified", 403)
-            self.token_fail_reason = TokenFailReason["INVALID"].value
-            self.token_status = 403
+            returned = generate_error_result("Unable to revoke current token.", 500)
 
         return returned
 
@@ -239,25 +180,16 @@ class OAuth2(FalconAuth):
         dict
             Dictionary containing API response.
         """
-        operation_id = "oauth2RevokeToken"
-        target_url = f"{self.base_url}{[ep[2] for ep in Endpoints if operation_id in ep[0]][0]}"
-        if self.cred_format_valid:
-            b64cred = generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
-            header_payload = {"Authorization": f"basic {b64cred}"}
-            data_payload = {"token": f"{token}"}
-            returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
-                                       headers=header_payload, verify=self.ssl_verify,
-                                       proxy=self.proxy, timeout=self.timeout,
-                                       user_agent=self.user_agent)
-            self.token_expiration = 0
-            self.token_value = False
-        else:
-            returned = generate_error_result("Invalid credentials specified", 403)
+        return self._logout_handler(token)
 
-        return returned
+    def token(self) -> dict:
+        """Generate an authorization token.
 
-    def logout(self) -> dict:
-        """Revoke the current token.
+        HTTP Method: POST
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2/oauth2AccessToken
 
         Keyword arguments
         ----
@@ -272,37 +204,12 @@ class OAuth2(FalconAuth):
         dict
             Dictionary object containing API response.
         """
-        returned = self.revoke(self.token_value)
-        if returned["status_code"] == 200:
-            returned = generate_ok_result(message="Current token successfully revoked.",
-                                          headers=returned["headers"]
-                                          )
-        else:
-            returned = generate_error_result("Unable to revoke current token.", 500)
-
-        return returned
-
-    @property
-    def auth_headers(self) -> Dict[str, str]:
-        """Return a Bearer token baked into an Authorization header ready for an HTTP request."""
-        if self.token_expired and self.refreshable:
-            self.token()
-
-        return {"Authorization": f"Bearer {self.token_value}"}
-
-    @property
-    def token_expired(self) -> bool:
-        """Return whether the token is ready to be renewed."""
-        return (time.time() - self.token_time) >= (self.token_expiration - self.token_renew_window)
-
-    @property
-    def authenticated(self) -> bool:
-        """Return if we are authenticated by retrieving the inverse of token_expired."""
-        return not self.token_expired
+        return self._login_handler()
 
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
+    #login = token
     oauth2AccessToken = token
     oAuth2AccessToken = token
     oauth2RevokeToken = revoke
