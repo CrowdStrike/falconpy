@@ -36,20 +36,21 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=R0903  # Using a class so that the data structure is callable
+from typing import Dict, Union, List
 
 
 class Result:
     """Callable subclass to handle parsing of result client output."""
 
-    def __init__(self) -> "Result":
-        """Instantiate the subclass and initializes the result object."""
-        self.result_obj: dict = {}
-
-    def __call__(self, status_code: int, headers, body: dict) -> dict:
+    def __call__(self,
+                 status_code: int,
+                 headers: Dict[str, str],
+                 body: Dict[str, Dict]
+                 ) -> Dict[str, Union[int, Dict[str, str], Dict[str, Union[Dict, List]]]]:
         """Format values into a properly formatted result object."""
-        self.result_obj['status_code'] = status_code
-        # force standard dictionary to prevent json issues
-        self.result_obj['headers'] = dict(headers)
-        self.result_obj['body'] = body
-
-        return self.result_obj
+        return {
+            "status_code" : status_code,
+            # force standard dictionary to prevent json issues
+            "headers" : dict(headers),
+            "body" : body
+        }

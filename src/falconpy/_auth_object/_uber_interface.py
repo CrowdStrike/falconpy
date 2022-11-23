@@ -38,7 +38,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, Optional
+from typing import Dict, Optional, Union
 from ._falcon_auth import FalconAuth
 
 class UberInterface(FalconAuth):
@@ -61,7 +61,7 @@ class UberInterface(FalconAuth):
     # FalconAuth constructor. This results in the Uber Class benefiting from a new
     # authentication style; Legacy / Token authentication.
     def __init__(self,
-                 access_token: Optional[str or bool] = False,
+                 access_token: Optional[Union[str, bool]] = False,
                  base_url: Optional[str] = "https://api.crowdstrike.com",
                  creds: Optional[dict] = None,
                  client_id: Optional[str] = None,
@@ -69,7 +69,7 @@ class UberInterface(FalconAuth):
                  member_cid: Optional[str] = None,
                  ssl_verify: Optional[bool] = True,
                  proxy: Optional[dict] = None,
-                 timeout: Optional[float or tuple] = None,
+                 timeout: Optional[Union[float, tuple]] = None,
                  user_agent: Optional[str] = None,
                  renew_window: Optional[int] = 120
                  ) -> "UberInterface":
