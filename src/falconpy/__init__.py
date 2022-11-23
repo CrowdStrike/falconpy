@@ -22,10 +22,10 @@
 from ._version import _VERSION, _MAINTAINER, _AUTHOR, _AUTHOR_EMAIL
 from ._version import _CREDITS, _DESCRIPTION, _TITLE, _PROJECT_URL
 from ._version import _DOCS_URL, _KEYWORDS
-from ._service_class import ServiceClass
+from ._auth_object import BaseFalconAuth, FalconAuth, UberInterface
+from ._service_class import BaseServiceClass, ServiceClass
 from ._util import confirm_base_region, confirm_base_url
-from ._base_url import BaseURL
-from ._container_base_url import ContainerBaseURL
+from ._enum import BaseURL, ContainerBaseURL, TokenFailReason
 from .alerts import Alerts
 from .api_complete import APIHarness
 from .cloud_connect_aws import CloudConnectAWS
@@ -90,6 +90,7 @@ __docs_url__ = _DOCS_URL
 __keywords__ = _KEYWORDS
 __all__ = [
     "confirm_base_url", "confirm_base_region", "BaseURL", "ServiceClass", "Alerts",
+    "BaseServiceClass", "BaseFalconAuth", "FalconAuth", "UberInterface", "TokenFailReason",
     "APIHarness", "CloudConnectAWS", "CSPMRegistration", "CustomIOA", "D4CRegistration",
     "Detects", "DeviceControlPolicies", "Discover", "EventStreams", "CompleteDashboard",
     "FalconContainer", "FalconXSandbox", "FirewallManagement", "FirewallPolicies", "HostGroup",
