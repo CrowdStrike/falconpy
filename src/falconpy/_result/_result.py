@@ -1,4 +1,4 @@
-"""API Response formatting classes.
+"""API Response formatting class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -41,11 +41,11 @@ For more information, please refer to <https://unlicense.org>
 class Result:
     """Callable subclass to handle parsing of result client output."""
 
-    def __init__(self: object) -> dict:
+    def __init__(self) -> "Result":
         """Instantiate the subclass and initializes the result object."""
-        self.result_obj = {}
+        self.result_obj: dict = {}
 
-    def __call__(self: object, status_code: int, headers, body: dict) -> dict:
+    def __call__(self, status_code: int, headers, body: dict) -> dict:
         """Format values into a properly formatted result object."""
         self.result_obj['status_code'] = status_code
         # force standard dictionary to prevent json issues
@@ -53,21 +53,3 @@ class Result:
         self.result_obj['body'] = body
 
         return self.result_obj
-
-
-class ExpandedResult:
-    """Callable subsclass to handle parsing of expanded result client output."""
-
-    def __init__(self: object) -> tuple:
-        """Instantiate the subclass and intialize the expanded result object."""
-        self.result_tuple = ()
-
-    def __call__(self: object, status_code: int, headers, content) -> tuple:
-        """Format ingested values into a properly formatted expanded result object."""
-        content_result = content
-        if isinstance(content, dict):
-            content_result = content["body"]
-
-        self.result_tuple = (status_code, dict(headers), content_result)
-
-        return self.result_tuple

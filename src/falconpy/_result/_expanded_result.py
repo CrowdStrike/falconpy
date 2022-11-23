@@ -1,4 +1,4 @@
-"""Internal constant library.
+"""API Response formatting class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,13 +35,21 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-PREFER_NONETYPE = [
-    "report_executions_download_get", "report_executions_download.get",
-    "RTR_ListFiles", "RTR_ListFilesV2", "RTR_GetExtractedFileContents"
-]
-PREFER_IDS_IN_BODY = [
-    "GetDeviceDetails", "PostDeviceDetailsV2"
-]
-MOCK_OPERATIONS = [
-    "GetImageAssessmentReport", "DeleteImageDetails", "ImageMatchesPolicy"
-]
+# pylint: disable=R0903  # Using a class so that the data structure is callable
+
+class ExpandedResult:
+    """Callable subsclass to handle parsing of expanded result client output."""
+
+    def __init__(self) -> "ExpandedResult":
+        """Instantiate the subclass and intialize the expanded result object."""
+        self.result_tuple = ()
+
+    def __call__(self, status_code: int, headers, content) -> tuple:
+        """Format ingested values into a properly formatted expanded result object."""
+        content_result = content
+        if isinstance(content, dict):
+            content_result = content["body"]
+
+        self.result_tuple = (status_code, dict(headers), content_result)
+
+        return self.result_tuple
