@@ -45,17 +45,21 @@ from typing import Dict
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
-from ._version import _TITLE, _VERSION
-from ._result import Result, ExpandedResult
-from ._base_url import BaseURL
-from ._container_base_url import ContainerBaseURL
-from ._uber_default_preference import PREFER_NONETYPE, MOCK_OPERATIONS
+from .._enum import BaseURL, ContainerBaseURL
+from .._constant import (
+    PREFER_NONETYPE,
+    MOCK_OPERATIONS,
+    ALLOWED_METHODS as _ALLOWED_METHODS,
+    USER_AGENT as _USER_AGENT
+)
+from .._result import Result, ExpandedResult
+from .._version import _TITLE, _VERSION
 urllib3.disable_warnings(InsecureRequestWarning)
 
-# Restrict requests to only allowed HTTP methods
-_ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
-# Default user-agent string
-_USER_AGENT = f"{_TITLE}/{str(_VERSION)}"
+# # Restrict requests to only allowed HTTP methods
+# _ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
+# # Default user-agent string
+# _USER_AGENT = f"{_TITLE}/{str(_VERSION)}"
 
 
 def validate_payload(validator: dict, params: dict, required: list = None) -> bool:
