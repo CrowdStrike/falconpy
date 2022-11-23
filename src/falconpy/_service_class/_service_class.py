@@ -1,4 +1,4 @@
-"""Service Class generic classes.
+"""Service Class generic class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,175 +35,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-import inspect
-from abc import ABC, abstractmethod
 from typing import Dict, Type, Any, Optional
-from ._auth_object import FalconAuth
-from .oauth2 import OAuth2
-
-
-class BaseServiceClass(ABC):
-    """Base class for all Service Classes."""
-
-    #  _______ _     _ _______ _     _        _____  ______  _____ _______ _______ _______
-    #  |_____| |     |    |    |_____|       |     | |_____]   |   |______ |          |
-    #  |     | |_____|    |    |     |       |_____| |_____] __|   |______ |_____     |
-
-    # All Service Classes contain a FalconAuth derivative as an attribute.
-    # This object can be shared between instances of Service Classes, and
-    # is leveraged for all authentication processing. Unlike the Uber Class,
-    # Service Classes maintain no authentication detail within the class.
-    auth_object: FalconAuth = None
-
-    #  _______  _____  __   _ _______ _______  ______ _     _ _______ _______  _____   ______
-    #  |       |     | | \  | |______    |    |_____/ |     | |          |    |     | |_____/
-    #  |_____  |_____| |  \_| ______|    |    |    \_ |_____| |_____     |    |_____| |    \_
-
-    def __init__(self: "BaseServiceClass",
-                 auth_object: Optional[FalconAuth] = None,
-                 default_auth_object_class: Optional[Type[FalconAuth]] = FalconAuth,
-                 **kwargs
-                 ):
-        """Construct an instance of the base class."""
-        # An auth_object is treated as an atomic collection.
-        if auth_object:
-            if issubclass(type(auth_object), FalconAuth):
-                self.auth_object = auth_object
-            else:
-                # Easy Object Authentication
-                # Look for an auth_object as an attribute to the object they
-                # provided. This attribute must be a FalconAuth derivative.
-                if hasattr(auth_object, "auth_object"):
-                    if issubclass(type(auth_object.auth_object), FalconAuth):
-                        self.auth_object = auth_object.auth_object
-        else:
-            # Get all constructor arguments for the default authentication class.
-            auth_kwargs = {
-                param: kwargs[param]
-                for param in inspect.signature(default_auth_object_class).parameters
-                if param in kwargs
-            }
-            # Create an instance of the default auth_object using the provided keywords.
-            self.auth_object = default_auth_object_class(**auth_kwargs)
-
-    #  ______  _______ _______ _______ _     _        _______
-    #  |     \ |______ |______ |_____| |     | |         |
-    #  |_____/ |______ |       |     | |_____| |_____    |
-
-    #  _______ _______ _______ _     _  _____  ______  _______
-    #  |  |  | |______    |    |_____| |     | |     \ |______
-    #  |  |  | |______    |    |     | |_____| |_____/ ______|
-
-    # The generic login and logout handlers must be individually defined by all
-    # inheriting classes. The default functionality provided by the embedded
-    # auth_object is a perfectly acceptable option for this, and is what is used
-    # by the standard ServiceClass object.
-    @abstractmethod
-    def login(self) -> dict or bool:
-        """Generic login handler interface."""
-
-    @abstractmethod
-    def logout(self) -> dict or bool:
-        """Generic logout handler interface."""
-
-    #   _____   ______  _____   _____  _______  ______ _______ _____ _______ _______
-    #  |_____] |_____/ |     | |_____] |______ |_____/    |      |   |______ |______
-    #  |       |    \_ |_____| |       |______ |    \_    |    __|__ |______ ______|
-    #
-    # These properties are present within all Service Class derivatives. These are
-    # typically maintained within the underlying auth_object, but can be overridden
-    # to implement additional functionality as necessary.
-
-    #  _______ _     _ _______ _______ ______         _______
-    #  |  |  | |     |    |    |_____| |_____] |      |______
-    #  |  |  | |_____|    |    |     | |_____] |_____ |______
-    #
-    # Changes made to these properties will effect the underlying auth_object
-    # and all Service Classes that happen to be sharing the same auth_object.
-    @property
-    def base_url(self) -> str:
-        """Provide the base_url to code that reads it straight from the service class."""
-        return self.auth_object.base_url
-
-    @base_url.setter
-    def base_url(self, value: str):
-        """Set the base_url in the underlying auth_object."""
-        self.auth_object.base_url = value
-
-    @property
-    def ssl_verify(self) -> bool:
-        """Provide the ssl_verify value to legacy code."""
-        return self.auth_object.ssl_verify
-
-    @ssl_verify.setter
-    def ssl_verify(self, value: bool):
-        """Allow code to flip the underlying SSL verify flag via the this class."""
-        self.auth_object.ssl_verify = value
-
-    @property
-    def proxy(self) -> dict:
-        """Provide the proxy from the auth_object."""
-        return self.auth_object.proxy
-
-    @proxy.setter
-    def proxy(self, value: dict):
-        """Allow the proxy to be overriden."""
-        self.auth_object.proxy = value
-
-    @property
-    def timeout(self) -> int:
-        """Provide the timeout from the auth_object."""
-        return self.auth_object.timeout
-
-    @timeout.setter
-    def timeout(self, value: int):
-        """Allow the timeout to be overriden."""
-        self.auth_object.timeout = value
-
-    @property
-    def token_renew_window(self) -> int:
-        """Provide the token_renew_window from the auth_object."""
-        return self.auth_object.token_renew_window
-
-    @token_renew_window.setter
-    def token_renew_window(self, value: int):
-        """Allow the token_renew_window to be changed."""
-        self.auth_object.token_renew_window = value
-
-    @property
-    def user_agent(self) -> int:
-        """Provide the user_agent from the auth_object."""
-        return self.auth_object.user_agent
-
-    @user_agent.setter
-    def user_agent(self, value: int):
-        """Allow the user_agent to be overriden."""
-        self.auth_object.user_agent = value
-
-    #  _____ _______ _______ _     _ _______ _______ ______         _______
-    #    |   |  |  | |  |  | |     |    |    |_____| |_____] |      |______
-    #  __|__ |  |  | |  |  | |_____|    |    |     | |_____] |_____ |______
-    #
-    # These properties cannot be changed in the base implementation of a Service Class.
-    @property
-    def headers(self) -> Dict[str, str]:
-        """Provide a complete set of request headers."""
-        return {**self.auth_object.auth_headers}
-
-    @property
-    def token_status(self) -> int:
-        """Provide the current token_status."""
-        return self.auth_object.token_status
-
-    @property
-    def token_fail_reason(self) -> str:
-        """Error message received on token generation failure."""
-        return self.auth_object.token_fail_reason
-
-    @property
-    def refreshable(self) -> bool:
-        """Flag indicating if the token for this auth_object is refreshable."""
-        return self.auth_object.refreshable
+from ._base_service_class import BaseServiceClass
+from .._auth_object import FalconAuth
+from ..oauth2 import OAuth2
 
 
 class ServiceClass(BaseServiceClass):
@@ -241,7 +76,7 @@ class ServiceClass(BaseServiceClass):
     # These private attributes are used to store instantiated class-specific
     # settings for the proxy, timeout and user_agent properties. This results
     # in our being able to use multiple Service Classes that share the same
-    # auth_object but maintain different values for these properties.
+    # auth_object but maintain different connection handling configurations.
     _override_proxy: Dict[str, str] = None
     _override_timeout: int = None
     _override_user_agent: str = None

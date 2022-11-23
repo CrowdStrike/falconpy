@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from .._version import _TITLE, _VERSION
 PREFER_NONETYPE = [
     "report_executions_download_get", "report_executions_download.get",
     "RTR_ListFiles", "RTR_ListFilesV2", "RTR_GetExtractedFileContents",
@@ -46,3 +47,7 @@ PREFER_IDS_IN_BODY = [
 MOCK_OPERATIONS = [
     "GetImageAssessmentReport", "DeleteImageDetails", "ImageMatchesPolicy"
 ]
+# Restrict requests to only allowed HTTP methods
+ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
+# Default user-agent string
+USER_AGENT = f"{_TITLE}/{str(_VERSION)}"
