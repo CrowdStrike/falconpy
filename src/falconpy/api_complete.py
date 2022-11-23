@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, Optional
+from typing import Dict, Optional, Union
 from ._util import _ALLOWED_METHODS
 from ._util import (
     perform_request,
@@ -85,7 +85,7 @@ class APIHarness(UberInterface):
     #                     \/    .' .-'.-'  .-' .-'
     #                         .-'.' .'  .' .-
     def __init__(self,
-                 access_token: Optional[str or bool] = False,
+                 access_token: Optional[Union[str, bool]] = False,
                  base_url: Optional[str] = "https://api.crowdstrike.com",
                  creds: Optional[Dict[str, str]] = None,
                  client_id: Optional[str] = None,
@@ -93,7 +93,7 @@ class APIHarness(UberInterface):
                  member_cid: Optional[str] = None,
                  ssl_verify: Optional[bool] = True,
                  proxy: Optional[Dict[str, str]] = None,
-                 timeout: Optional[float or tuple] = None,
+                 timeout: Optional[Union[float, tuple]] = None,
                  user_agent: Optional[str] = None,
                  renew_window: Optional[int] = 120
                  ) -> "APIHarness":
@@ -144,10 +144,11 @@ class APIHarness(UberInterface):
         # Complete list of available API operations.
         self.commands = api_endpoints
 
-    def command(self, *args, **kwargs) -> dict or bytes:
+    def command(self, *args, **kwargs) -> Union[dict, bytes]:
         """Uber Class API command method.
 
-        Checks token expiration, renewing when necessary, then performs the request.
+        Performs the specified API operation. The token will be generated
+        if it is not present or expired before the request is made.
 
         HTTP Method: Any
 
@@ -240,16 +241,17 @@ class APIHarness(UberInterface):
                                                         stateful=False
                                                         )
                 else:
+                    # Process the API request normally.
                     returned = perform_request(
                         **uber_request_keywords(self, method, operation, target, kwargs, container)
                         )
             else:
-                # Bad HTTP method
+                # Bad HTTP method.
                 returned = generate_error_result(message="Invalid HTTP method specified.",
                                                  code=405
                                                  )
         else:
-            # That command doesn't exist, have a cup of tea instead
+            # That command doesn't exist, have a cup of tea instead.
             returned = generate_error_result(message="Invalid API operation specified.", code=418)
 
         return returned

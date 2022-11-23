@@ -36,20 +36,20 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=R0903  # Using a class so that the data structure is callable
+from typing import Tuple, Dict, Union
+
 
 class ExpandedResult:
     """Callable subsclass to handle parsing of expanded result client output."""
 
-    def __init__(self) -> "ExpandedResult":
-        """Instantiate the subclass and intialize the expanded result object."""
-        self.result_tuple = ()
-
-    def __call__(self, status_code: int, headers, content) -> tuple:
+    def __call__(self,
+                 status_code: int,
+                 headers: Dict[str, str],
+                 content: Union[str, bytes, Dict[str, Dict]]
+                 ) -> Tuple[str, Dict[str, str], Dict[str, Dict]]:
         """Format ingested values into a properly formatted expanded result object."""
         content_result = content
         if isinstance(content, dict):
             content_result = content["body"]
 
-        self.result_tuple = (status_code, dict(headers), content_result)
-
-        return self.result_tuple
+        return (status_code, dict(headers), content_result)
