@@ -39,10 +39,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import time
-from typing import Dict, Optional
+from typing import Dict, Optional, Union
 from ._base_falcon_auth import BaseFalconAuth
 from .._enum import TokenFailReason
-from .._util import generate_b64cred, autodiscover_region, perform_request, generate_error_result
+from .._util import (
+    autodiscover_region,
+    perform_request,
+    generate_error_result,
+    login_payloads,
+    logout_payloads
+    )
 from .._endpoint._oauth2 import _oauth2_endpoints as AuthEndpoints
 
 
@@ -76,7 +82,7 @@ class FalconAuth(BaseFalconAuth):
     # The default constructor for all authentication objects. Ingests provided credentials
     # and sets the necessary class attributes based upon the authentication detail received.
     def __init__(self,
-                 access_token: Optional[str or bool] = False,
+                 access_token: Optional[Union[str, bool]] = False,
                  base_url: Optional[str] = "https://api.crowdstrike.com",
                  creds: Optional[dict] = None,
                  client_id: Optional[str] = None,
@@ -84,7 +90,7 @@ class FalconAuth(BaseFalconAuth):
                  member_cid: Optional[str] = None,
                  ssl_verify: Optional[bool] = True,
                  proxy: Optional[dict] = None,
-                 timeout: Optional[float or tuple] = None,
+                 timeout: Optional[Union[float, tuple]] = None,
                  user_agent: Optional[str] = None,
                  renew_window: Optional[int] = 120
                  ) -> "FalconAuth":
@@ -140,18 +146,17 @@ class FalconAuth(BaseFalconAuth):
     # The default behavior for both the login and logout handlers is to return
     # the entire dictionary created by the token API response.
     def _login_handler(self, stateful: bool = True) -> dict:
-        op_id = "oauth2AccessToken"
-        target_url = f"{self.base_url}{[ep[2] for ep in AuthEndpoints if op_id in ep[0]][0]}"
-        header_payload = {}
+        """Default login handler."""
+        def _token_failure(fail_reason: str, status: int):
+            """Generic authentication status updater (failure conditions only)."""
+            self.token_expiration = 0
+            self.token_status = status
+            self.token_fail_reason = fail_reason
+            
         if self.cred_format_valid:
-            data_payload = {
-                'client_id': self.creds['client_id'],
-                'client_secret': self.creds['client_secret']
-            }
-            if "member_cid" in self.creds:
-                data_payload["member_cid"] = self.creds["member_cid"]
+            target_url, data_payload = login_payloads(self.creds, self.base_url)
             returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
-                                       headers=header_payload, verify=self.ssl_verify,
+                                       headers={}, verify=self.ssl_verify,
                                        proxy=self.proxy, timeout=self.timeout,
                                        user_agent=self.user_agent)
 
@@ -163,6 +168,7 @@ class FalconAuth(BaseFalconAuth):
                         self.token_time = time.time()
                         self.token_value = returned["body"]["access_token"]
                         self.token_fail_reason = None
+                        # Cloud Region auto discovery
                         self.base_url = autodiscover_region(self.base_url, returned)
                     else:
                         self.token_expiration = 0  # Aligning to Uber class functionality
@@ -172,27 +178,23 @@ class FalconAuth(BaseFalconAuth):
             else:
                 returned = generate_error_result("Unexpected API response received", 403)
                 if stateful:
-                    self.token_expiration = 0
-                    self.token_fail_reason = TokenFailReason["UNEXPECTED"].value
-                    self.token_status = 403
+                    _token_failure(TokenFailReason["UNEXPECTED"], 403)
         else:
             returned = generate_error_result("Invalid credentials specified", 403)
             if stateful:
-                self.token_expiration = 0
-                self.token_fail_reason = TokenFailReason["INVALID"].value
-                self.token_status = 403
+                _token_failure(TokenFailReason["INVALID"], 403)
 
         return returned
 
     def _logout_handler(self, token_value: str = None, stateful: bool = True) -> dict:
-        if not token_value:
-            token_value = self.token_value
-        op_id = "oauth2RevokeToken"
-        target_url = f"{self.base_url}{[ep[2] for ep in AuthEndpoints if op_id in ep[0]][0]}"
+        """Default logout handler."""
         if self.cred_format_valid:
-            b64cred = generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
-            header_payload = {"Authorization": f"basic {b64cred}"}
-            data_payload = {"token": f"{token_value}"}
+            if not token_value:
+                token_value = self.token_value
+            target_url, data_payload, header_payload = logout_payloads(creds=self.creds,
+                                                                       base=self.base_url,
+                                                                       token_val=token_value
+                                                                       )
             returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
                                        headers=header_payload, verify=self.ssl_verify,
                                        proxy=self.proxy, timeout=self.timeout,
