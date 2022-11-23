@@ -36,9 +36,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=R0902,R0913
-from typing import Dict, Optional
+from typing import Dict, Optional, Union
 from ._auth_object import FalconAuth
-#from ._endpoint._oauth2 import _oauth2_endpoints as Endpoints
 from ._util import (
     confirm_base_url,
     generate_error_result,
@@ -67,11 +66,11 @@ class OAuth2(FalconAuth):
     """
 
     def __init__(self,
-                 access_token: Optional[str or bool] = False,
+                 access_token: Optional[Union[str, bool]] = False,
                  base_url: Optional[str] = "https://api.crowdstrike.com",
                  ssl_verify: Optional[bool] = True,
                  proxy: Optional[Dict[str, str]] = None,
-                 timeout: Optional[float or tuple] = None,
+                 timeout: Optional[Union[float, tuple]] = None,
                  creds: Optional[Dict[str, str]] = None,
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
@@ -147,7 +146,7 @@ class OAuth2(FalconAuth):
         dict
             Dictionary object containing API response.
         """
-        returned = self._logout_handler()
+        returned = super().logout()
         if returned["status_code"] == 200:
             returned = generate_ok_result(message="Current token successfully revoked.",
                                           headers=returned["headers"]
@@ -157,7 +156,7 @@ class OAuth2(FalconAuth):
 
         return returned
 
-    def revoke(self, token: str) -> dict:
+    def revoke(self, token: str, alter_state: bool = False) -> dict:
         """Revoke the specified authorization token.
 
         HTTP Method: POST
@@ -170,6 +169,8 @@ class OAuth2(FalconAuth):
         ----
         token : str
             Token string to be revoked.
+        alter_state : bool
+            Flag indicating if the underlying authentication state is changed by this request.
 
         Arguments
         ----
@@ -180,9 +181,9 @@ class OAuth2(FalconAuth):
         dict
             Dictionary containing API response.
         """
-        return self._logout_handler(token)
+        return self._logout_handler(token, not alter_state)
 
-    def token(self, generate_only: bool = False) -> dict:
+    def token(self, alter_state: bool = False) -> dict:
         """Generate an authorization token.
 
         HTTP Method: POST
@@ -193,19 +194,19 @@ class OAuth2(FalconAuth):
 
         Keyword arguments
         ----
-        generate_only : bool
-            Flag indicating if this request should update the stored token value and expiration.
+        alter_state : bool
+            Flag indicating if the underlying authentication state is changed by this request.
 
         Arguments
         ----
-        When not specified as a keyword, generate_only is assumed as the only accepted argument.
+        When not specified as a keyword, alter_state is assumed as the only accepted argument.
 
         Returns
         ----
         dict
             Dictionary object containing API response.
         """
-        return self._login_handler(not generate_only)
+        return self._login_handler(not alter_state)
 
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
