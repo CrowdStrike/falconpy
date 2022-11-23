@@ -53,13 +53,7 @@ from .._constant import (
     USER_AGENT as _USER_AGENT
 )
 from .._result import Result, ExpandedResult
-from .._version import _TITLE, _VERSION
 urllib3.disable_warnings(InsecureRequestWarning)
-
-# # Restrict requests to only allowed HTTP methods
-# _ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
-# # Default user-agent string
-# _USER_AGENT = f"{_TITLE}/{str(_VERSION)}"
 
 
 def validate_payload(validator: dict, params: dict, required: list = None) -> bool:
@@ -70,7 +64,7 @@ def validate_payload(validator: dict, params: dict, required: list = None) -> bo
     #        ( (\
     #         \ =\
     #        __\_ `--\
-    #       (____))(  \----
+    #       (____))(  \-----
     #       (____)) _     Thanks
     #       (____))       James!
     #       (____))____/----

@@ -49,7 +49,8 @@ class ServiceClass(BaseServiceClass):
 
     ┌──────────────────────┐
     │     Encapsulated     ├─── Attributes
-    │      Base Class      ├─── Constructor (__init__)
+    │  Service Base Class  ├─── Constructor (__init__)
+    │                      ├─── Methods (helpers)
     │    ______________    ├─── Properties
     └──/│ Inherited by │\──┘
       /─┴──────────────┴─\
