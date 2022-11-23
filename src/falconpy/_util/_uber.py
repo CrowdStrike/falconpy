@@ -1,9 +1,8 @@
 from typing import Tuple
-from ._uber_default_preference import PREFER_IDS_IN_BODY, MOCK_OPERATIONS
-from ._base_url import BaseURL
-from ._container_base_url import ContainerBaseURL
-from ._util import args_to_params, return_preferred_default
-from ._auth_object import UberInterface
+from ._functions import args_to_params, return_preferred_default
+from .._constant import PREFER_IDS_IN_BODY, MOCK_OPERATIONS
+from .._enum import BaseURL, ContainerBaseURL
+
 
 def create_uber_header_payload(hdrs: dict, passed_arguments: dict) -> dict:
     """Create the HTTP header payload.
@@ -68,7 +67,7 @@ def handle_container_operations(kwa: dict, base_string: str) -> Tuple[dict, str,
             kwa["parameters"]["policy_type"] = "image-prevention-policy"
     return kwa, base_string, do_container
 
-def uber_request_keywords(caller: UberInterface, meth: str, oper: str, tgt: str, kwa: dict, do_cont: bool) -> dict:
+def uber_request_keywords(caller: object, meth: str, oper: str, tgt: str, kwa: dict, do_cont: bool) -> dict:
     """Generate a properly formatted mapping of the keywords for this request."""
     return {
         "method": meth,
