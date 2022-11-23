@@ -139,9 +139,9 @@ class FalconAuth(BaseFalconAuth):
 
     # The default behavior for both the login and logout handlers is to return
     # the entire dictionary created by the token API response.
-    def _login_handler(self) -> dict:
-        operation_id = "oauth2AccessToken"
-        target_url = f"{self.base_url}{[ep[2] for ep in AuthEndpoints if operation_id in ep[0]][0]}"
+    def _login_handler(self, stateful: bool = True) -> dict:
+        op_id = "oauth2AccessToken"
+        target_url = f"{self.base_url}{[ep[2] for ep in AuthEndpoints if op_id in ep[0]][0]}"
         header_payload = {}
         if self.cred_format_valid:
             data_payload = {
@@ -154,37 +154,41 @@ class FalconAuth(BaseFalconAuth):
                                        headers=header_payload, verify=self.ssl_verify,
                                        proxy=self.proxy, timeout=self.timeout,
                                        user_agent=self.user_agent)
-            if isinstance(returned, dict):  # Issue #433
-                self.token_status = returned["status_code"]
-                if self.token_status == 201:
-                    self.token_expiration = returned["body"]["expires_in"]
-                    self.token_time = time.time()
-                    self.token_value = returned["body"]["access_token"]
-                    self.token_fail_reason = None
-                    self.base_url = autodiscover_region(self.base_url, returned)
-                else:
-                    self.token_expiration = 0  # Aligning to Uber class functionality
-                    if "errors" in returned["body"]:
-                        if returned["body"]["errors"]:
-                            self.token_fail_reason = returned["body"]["errors"][0]["message"]
+
+            if isinstance(returned, dict):  # Issue 433
+                if stateful:
+                    self.token_status = returned["status_code"]
+                    if self.token_status == 201:
+                        self.token_expiration = returned["body"]["expires_in"]
+                        self.token_time = time.time()
+                        self.token_value = returned["body"]["access_token"]
+                        self.token_fail_reason = None
+                        self.base_url = autodiscover_region(self.base_url, returned)
+                    else:
+                        self.token_expiration = 0  # Aligning to Uber class functionality
+                        if "errors" in returned["body"]:
+                            if returned["body"]["errors"]:
+                                self.token_fail_reason = returned["body"]["errors"][0]["message"]
             else:
                 returned = generate_error_result("Unexpected API response received", 403)
-                self.token_expiration = 0
-                self.token_fail_reason = TokenFailReason["UNEXPECTED"].value
-                self.token_status = 403
+                if stateful:
+                    self.token_expiration = 0
+                    self.token_fail_reason = TokenFailReason["UNEXPECTED"].value
+                    self.token_status = 403
         else:
             returned = generate_error_result("Invalid credentials specified", 403)
-            self.token_expiration = 0
-            self.token_fail_reason = TokenFailReason["INVALID"].value
-            self.token_status = 403
+            if stateful:
+                self.token_expiration = 0
+                self.token_fail_reason = TokenFailReason["INVALID"].value
+                self.token_status = 403
 
         return returned
 
-    def _logout_handler(self, token_value: str = None) -> dict:
+    def _logout_handler(self, token_value: str = None, stateful: bool = True) -> dict:
         if not token_value:
             token_value = self.token_value
-        operation_id = "oauth2RevokeToken"
-        target_url = f"{self.base_url}{[ep[2] for ep in AuthEndpoints if operation_id in ep[0]][0]}"
+        op_id = "oauth2RevokeToken"
+        target_url = f"{self.base_url}{[ep[2] for ep in AuthEndpoints if op_id in ep[0]][0]}"
         if self.cred_format_valid:
             b64cred = generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
             header_payload = {"Authorization": f"basic {b64cred}"}
@@ -193,8 +197,9 @@ class FalconAuth(BaseFalconAuth):
                                        headers=header_payload, verify=self.ssl_verify,
                                        proxy=self.proxy, timeout=self.timeout,
                                        user_agent=self.user_agent)
-            self.token_expiration = 0
-            self.token_value = False
+            if stateful:
+                self.token_expiration = 0
+                self.token_value = False
         else:
             returned = generate_error_result("Invalid credentials specified", 403)
 

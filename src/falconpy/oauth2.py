@@ -182,7 +182,7 @@ class OAuth2(FalconAuth):
         """
         return self._logout_handler(token)
 
-    def token(self) -> dict:
+    def token(self, generate_only: bool = False) -> dict:
         """Generate an authorization token.
 
         HTTP Method: POST
@@ -193,23 +193,23 @@ class OAuth2(FalconAuth):
 
         Keyword arguments
         ----
-        This method does not accept keyword arguments.
+        generate_only : bool
+            Flag indicating if this request should update the stored token value and expiration.
 
         Arguments
         ----
-        This method does not accept arguments.
+        When not specified as a keyword, generate_only is assumed as the only accepted argument.
 
         Returns
         ----
         dict
             Dictionary object containing API response.
         """
-        return self._login_handler()
+        return self._login_handler(not generate_only)
 
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
-    #login = token
     oauth2AccessToken = token
     oAuth2AccessToken = token
     oauth2RevokeToken = revoke

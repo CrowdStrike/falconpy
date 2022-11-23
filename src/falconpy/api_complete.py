@@ -53,7 +53,7 @@ from ._endpoint import api_endpoints
 
 
 class APIHarness(UberInterface):
-    """This one does it all. It's like the One Ring with significantly fewer orcs.
+    """The FalconPy Uber Class.
 
     The Uber Class inherits from the UberInterface class, which is a stand alone
     class that encapsulates the FalconAuth class. This allows the Uber Class to
@@ -63,6 +63,8 @@ class APIHarness(UberInterface):
     This means the Uber Class does not include an auth_object, as it is one.
     As of FalconPy v1.3.0, Object Authentication is still unssupported for
     Uber Class usage scenarios.
+
+    This one does it all. It's like the One Ring with significantly fewer orcs.
     """
     # pylint: disable=R0913
     #                                 `-.
@@ -70,10 +72,10 @@ class APIHarness(UberInterface):
     #                     _._ `-._`.   .--.  `.
     #                  .-'   '-.  `-|\/    \|   `-.
     #                .'         '-._\   (o)O) `-.
-    #               /         /         _.--.\ '. `-. `-.
+    #               /         /         _.--.) '. `-. `-.
     #              /|    (    |  /  -. ( -._( -._ '. '.
-    #             /  \    \-.__\ \_.-'`.`.__'.   `-, '. .'
-    #             |  /\    |  / \ \     `--')/  .-'.'.'
+    #             /  \    \-.__\ \_.-'`.`.__' .  `-, '. .'
+    #             |  /\    |  / \ \     `--'  /  .-'.'.'
     #          .._/  /  /  /  / / \ \          .' . .' .'
     #         /  ___/  |  /   \ \  \ \__       '.'. . .
     #         \  \___  \ (     \ \  `._ `.     .' . ' .'
@@ -219,14 +221,33 @@ class APIHarness(UberInterface):
             kwargs = handle_body_payload_ids(kwargs)
             # Only accept allowed HTTP methods
             if method in _ALLOWED_METHODS:
-                returned = perform_request(
-                    **uber_request_keywords(self, method, operation, target, kwargs, container)
-                    )
+                if operation == "oauth2AccessToken":
+                    # Calling the token generation operation directly from the
+                    # Uber Class does not change the underlying auth_object state.
+                    returned = self._login_handler(stateful=False)
+                elif operation == "oauth2RevokeToken":
+                    # Calling the token revocation operation directly requires a
+                    # token_value. Doing so in this manner from the Uber Class does
+                    # not change the underlying auth_object state.
+                    token_value = kwargs.get("token_value", None)
+                    if not token_value:
+                        returned = generate_error_result(
+                            message="The token_value keyword is required to use this operation.",
+                            code=400
+                            )
+                    else:
+                        returned = self._logout_handler(token_value=token_value,
+                                                        stateful=False
+                                                        )
+                else:
+                    returned = perform_request(
+                        **uber_request_keywords(self, method, operation, target, kwargs, container)
+                        )
             else:
                 # Bad HTTP method
                 returned = generate_error_result(message="Invalid HTTP method specified.",
-                                                    code=405
-                                                    )
+                                                 code=405
+                                                 )
         else:
             # That command doesn't exist, have a cup of tea instead
             returned = generate_error_result(message="Invalid API operation specified.", code=418)

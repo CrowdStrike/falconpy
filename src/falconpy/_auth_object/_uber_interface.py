@@ -93,15 +93,15 @@ class UberInterface(FalconAuth):
     #
     # Override the default login and logout handlers to
     # provide Uber Class-specific functionality.
-    def _login_handler(self) -> bool:
+    def login(self) -> bool:
         """Generate an authorization token."""
-        super()._login_handler()
+        super().login()
 
         return self.authenticated
 
-    def _logout_handler(self) -> bool:
+    def logout(self) -> bool:
         """Revoke the current authorization token."""
-        result = super()._logout_handler()
+        result = super().logout()
 
         return bool(result["status_code"] == 200)
 
@@ -118,7 +118,7 @@ class UberInterface(FalconAuth):
         ----
         Consider updating your code to leverage the login method.
         """
-        return super().login()
+        return self.login()
 
     def deauthenticate(self) -> bool:
         """Legacy Uber Class functionality handler.
@@ -127,7 +127,7 @@ class UberInterface(FalconAuth):
         ----
         Consider updating your code to leverage the logout method.
         """
-        return super().logout()
+        return self.logout()
 
     def valid_cred_format(self) -> bool:
         """Legacy property to confirm credential dictionary format.
