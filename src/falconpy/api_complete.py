@@ -43,7 +43,7 @@ from ._util import (
     confirm_base_url,
     )
 from ._auth_object import UberInterface
-from ._uber_util import (
+from ._util import (
     handle_body_payload_ids,
     scrub_target,
     handle_container_operations,

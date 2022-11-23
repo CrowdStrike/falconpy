@@ -1,4 +1,4 @@
-"""Internal constant library.
+"""API Response formatting class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,16 +35,21 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-PREFER_NONETYPE = [
-    "report_executions_download_get", "report_executions_download.get",
-    "RTR_ListFiles", "RTR_ListFilesV2", "RTR_GetExtractedFileContents",
-    "RTR_DeleteSession"
-]
-PREFER_IDS_IN_BODY = [
-    "GetDeviceDetails", "PostDeviceDetailsV2", "GetVulnerabilities", "GetIntelIndicatorEntities",
-    "getChildrenV2", "cancel-scans", "GetDetectSummaries", "UpdateQuarantinedDetectsByIds",
-    "GetQuarantineFiles"
-]
-MOCK_OPERATIONS = [
-    "GetImageAssessmentReport", "DeleteImageDetails", "ImageMatchesPolicy"
-]
+# pylint: disable=R0903  # Using a class so that the data structure is callable
+
+
+class Result:
+    """Callable subclass to handle parsing of result client output."""
+
+    def __init__(self) -> "Result":
+        """Instantiate the subclass and initializes the result object."""
+        self.result_obj: dict = {}
+
+    def __call__(self, status_code: int, headers, body: dict) -> dict:
+        """Format values into a properly formatted result object."""
+        self.result_obj['status_code'] = status_code
+        # force standard dictionary to prevent json issues
+        self.result_obj['headers'] = dict(headers)
+        self.result_obj['body'] = body
+
+        return self.result_obj
