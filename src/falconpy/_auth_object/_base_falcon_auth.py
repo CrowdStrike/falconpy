@@ -43,39 +43,33 @@ from typing import Dict
 
 
 class BaseFalconAuth(ABC):
-    """Abstract class to provide an interface to the CrowdStrike Falcon OAuth2 API.
+    """Abstract class that provides a skeleton interface for the CrowdStrike Falcon OAuth2 API.
 
     This class does not implement a generic constructor and is not intended to be used by
-    developers directly. You must work with a derivative of this class, such as a FalconAuth object.
+    developers directly. In order to leverage the functionality provided by the authorization
+    object, you should work with a derivative of this class, such as a FalconAuth class.
     """
+
     #  ______  _______ _______ _______ _     _        _______
     #  |     \ |______ |______ |_____| |     | |         |
     #  |_____/ |______ |       |     | |_____| |_____    |
-
+    #
     #  _______ _______ _______ _     _  _____  ______  _______
     #  |  |  | |______    |    |_____| |     | |     \ |______
     #  |  |  | |______    |    |     | |_____| |_____/ ______|
-
+    #
     # The generic login and logout handlers must be individually defined by all
     # inheriting classes. The private methods defined here are used to allow for
-    # easy overridding of login and logout processing by inheriting classes without
+    # easy overriding of login and logout processing by inheriting classes without
     # altering the parent handler method that may be leveraged by other inheriting
     # class types.
     @abstractmethod
-    def _login_handler(self) -> dict or bool:
-        """Login to the Falcon API by requesting a new token."""
-
-    @abstractmethod
-    def _logout_handler(self) -> dict or bool:
-        """Log out of the Falcon API by revoking the current token."""
-
-    @abstractmethod
     def login(self) -> dict or bool:
-        """Generic login handler interface."""
+        """Generic login handler."""
 
     @abstractmethod
     def logout(self) -> dict or bool:
-        """Generic logout handler interface."""
+        """Generic logout handler."""
 
     #   _____   ______  _____   _____  _______  ______ _______ _____ _______ _______
     #  |_____] |_____/ |     | |_____] |______ |_____/    |      |   |______ |______
@@ -85,7 +79,7 @@ class BaseFalconAuth(ABC):
     @property
     @abstractmethod
     def auth_headers(self) -> Dict[str, str]:
-        """Get a dictionary of headers that can authenticate an HTTP request."""
+        """Get a dictionary of headers that can authenticate a HTTP request."""
 
     @property
     @abstractmethod
@@ -100,4 +94,4 @@ class BaseFalconAuth(ABC):
     @property
     @abstractmethod
     def cred_format_valid(self) -> bool:
-        """Read-only property that returns a boolean if the creds dictionary is valid."""
+        """Read-only property that returns a boolean if the creds dictionary format is valid."""
