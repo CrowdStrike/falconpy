@@ -12,7 +12,7 @@ def login_payloads(creds: dict, base: str):
     if "member_cid" in creds:
         data["member_cid"] = creds["member_cid"]
 
-    return target, data
+    return op_id, target, data
 
 def logout_payloads(creds: dict, base: str, token_val: str):
     op_id = "oauth2RevokeToken"
@@ -21,4 +21,4 @@ def logout_payloads(creds: dict, base: str, token_val: str):
     headers = {"Authorization": f"basic {b64cred}"}
     data = {"token": f"{token_val}"}
 
-    return target, data, headers
+    return op_id, target, data, headers
