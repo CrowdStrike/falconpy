@@ -38,7 +38,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+import sys
 import time
+from logging import Logger, getLogger
 from typing import Dict, Optional, Union
 from ._base_falcon_auth import BaseFalconAuth
 from .._enum import TokenFailReason
@@ -52,18 +54,23 @@ from .._util import (
 from .._endpoint._oauth2 import _oauth2_endpoints as AuthEndpoints
 
 
-class FalconAuth(BaseFalconAuth):
+class FalconInterface(BaseFalconAuth):
     """Standard Falcon API interface used by Service Classes."""
 
     # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
     #
-    # These attributes are present in all FalconAuth objects, regardless if we are referring
+    # These attributes are present in all FalconInterface objects, regardless if we are referring
     # to APIHarness, OAuth2 or custom inheriting classes.
     #
     # The default credential dictionary, where the client_id and client_secret are stored.
     creds: Dict[str, str] = {}
+    # Starting with v1.3.0 minimal python native logging is available. In order
+    # to reduce potential impacts to customer configurations, this facility is
+    # extremely limited and not implemented by default. (Meaning logs are not generated.)
+    # To enable logging, pass the keyword "debug" with a value of True to the constructor.
+    log: Logger = None
     # Flag indicating if we have the necessary information to automatically refresh the token.
     refreshable: bool = True
     # Integer specifying the amount of time remaining before the token expires (in seconds).
@@ -92,15 +99,15 @@ class FalconAuth(BaseFalconAuth):
                  proxy: Optional[dict] = None,
                  timeout: Optional[Union[float, tuple]] = None,
                  user_agent: Optional[str] = None,
-                 renew_window: Optional[int] = 120
-                 ) -> "FalconAuth":
+                 renew_window: Optional[int] = 120,
+                 debug: Optional[bool] = False
+                 ) -> "FalconInterface":
         """Construct an instance of the FalconInterface class."""
         self.base_url: str = base_url
         self.ssl_verify: bool = ssl_verify
         self.timeout: float or tuple = timeout
         self.proxy: Dict[str, str] = proxy
         self.user_agent: str = user_agent
-
         # ____ _  _ ___ _  _ ____ _  _ ___ _ ____ ____ ___ _ ____ _  _
         # |__| |  |  |  |__| |___ |\ |  |  | |    |__|  |  | |  | |\ |
         # |  | |__|  |  |  | |___ | \|  |  | |___ |  |  |  | |__| | \|
@@ -127,6 +134,16 @@ class FalconAuth(BaseFalconAuth):
             self.token_expiration = 1799
         # Set the token renewal window, ignored when using Legacy Authentication.
         self.token_renew_window: int = max(min(renew_window, 1200), 120)
+        # Log the creation of this object if debugging is enabled.
+        if debug:
+            self.log: Logger = getLogger(__name__.split(".")[0])
+            self.log.debug("Instance of the %s interface class created.", self.__class__.__name__)
+            self.log.debug("Base URL set to %s", self.base_url)
+            self.log.debug("SSL verification is set to %s", str(self.ssl_verify))
+            self.log.debug("Timeout set to %s seconds", str(self.timeout))
+            self.log.debug("Proxy dictionary: %s", str(self.proxy))
+            self.log.debug("User-Agent string set to: %s", self.user_agent)
+            self.log.debug("Token renewal window set to %s seconds", str(self.token_renew_window))
 
     # _  _ ____ ___ _  _ ____ ___  ____
     # |\/| |___  |  |__| |  | |  \ [__
@@ -154,11 +171,14 @@ class FalconAuth(BaseFalconAuth):
             self.token_fail_reason = fail_reason
             
         if self.cred_format_valid:
-            target_url, data_payload = login_payloads(self.creds, self.base_url)
+            operation, target_url, data_payload = login_payloads(self.creds, self.base_url)
+            # Log the call to this operation if debugging is enabled.
+            if self.log:
+                self.log.debug("OPERATION: %s", operation)
             returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
                                        headers={}, verify=self.ssl_verify,
                                        proxy=self.proxy, timeout=self.timeout,
-                                       user_agent=self.user_agent)
+                                       user_agent=self.user_agent, log_util=self.log)
 
             if isinstance(returned, dict):  # Issue 433
                 if stateful:
@@ -191,14 +211,18 @@ class FalconAuth(BaseFalconAuth):
         if self.cred_format_valid:
             if not token_value:
                 token_value = self.token_value
-            target_url, data_payload, header_payload = logout_payloads(creds=self.creds,
-                                                                       base=self.base_url,
-                                                                       token_val=token_value
-                                                                       )
+            operation, target_url, data_payload, header_payload = logout_payloads(
+                creds=self.creds,
+                base=self.base_url,
+                token_val=token_value
+                )
+            # Log the call to this operation if debugging is enabled.
+            if self.log:
+                self.log.debug("OPERATION: %s", operation)
             returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
                                        headers=header_payload, verify=self.ssl_verify,
                                        proxy=self.proxy, timeout=self.timeout,
-                                       user_agent=self.user_agent)
+                                       user_agent=self.user_agent, log_util=self.log)
             if stateful:
                 self.token_expiration = 0
                 self.token_value = False
@@ -211,7 +235,7 @@ class FalconAuth(BaseFalconAuth):
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
     # |    |  \ |__| |    |___ |  \  |  | |___ ___]
     #
-    # These properties are present in all FalconAuth derivatives.
+    # These properties are present in all FalconInterface derivatives.
     # All properties defined here are by design IMMUTABLE.
     @property
     def token_expired(self) -> bool:
@@ -228,7 +252,7 @@ class FalconAuth(BaseFalconAuth):
         """Return a boolean creds dictionary is valid."""
         return ("client_id" in self.creds and "client_secret" in self.creds)
 
-    # The default functionality of a FalconAuth object performs a token
+    # The default functionality of a FalconInterface object performs a token
     # refresh whenever a request is made for the auth_headers property.
     @property
     def auth_headers(self) -> Dict[str, str]:

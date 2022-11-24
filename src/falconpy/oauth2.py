@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=R0902,R0913
 from typing import Dict, Optional, Union
-from ._auth_object import FalconAuth
+from ._auth_object import FalconInterface
 from ._util import (
     confirm_base_url,
     generate_error_result,
@@ -45,7 +45,7 @@ from ._util import (
     )
 
 
-class OAuth2(FalconAuth):
+class OAuth2(FalconInterface):
     """OAuth2 Service Class.
 
     To create an instance of this class you must provide either:
@@ -76,7 +76,8 @@ class OAuth2(FalconAuth):
                  client_secret: Optional[str] = None,
                  user_agent: Optional[str] = None,
                  member_cid: Optional[str] = None,
-                 renew_window: Optional[int] = 120
+                 renew_window: Optional[int] = 120,
+                 debug: Optional[bool] = False
                  ) -> "OAuth2":
         """Construct an instance of the class.
 
@@ -127,7 +128,8 @@ class OAuth2(FalconAuth):
                          client_id=client_id,
                          client_secret=client_secret,
                          member_cid=member_cid,
-                         renew_window=renew_window
+                         renew_window=renew_window,
+                         debug=debug
                          )
 
     def logout(self) -> dict:
