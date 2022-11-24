@@ -146,7 +146,7 @@ class APIHarness(UberInterface):
         # Complete list of available API operations.
         self.commands = api_endpoints
 
-    def command(self, *args, **kwargs) -> Union[dict, bytes]:
+    def command(self, *args, **kwargs) -> Union[Dict[str, Union[int, dict]], bytes]:
         """Uber Class API command method.
 
         Performs the specified API operation. The token will be generated
@@ -250,16 +250,8 @@ class APIHarness(UberInterface):
                     # Log our payloads if enabled.
                     if self.log:
                         self.log.debug("OPERATION: %s", operation)
-                        # self.log.debug("(%s) %s", method, target)
-                        # self.log.debug("HEADERS: %s", keyword_payload["headers"])
-                        # self.log.debug("PARAMETERS: %s", keyword_payload["params"])
-                        # self.log.debug("BODY: %s", keyword_payload["body"])
-                        # self.log.debug("DATA: %s", keyword_payload["data"])
                     # Process the API request normally.
                     returned = perform_request(**keyword_payload)
-                    # # Log the API response if enabled.
-                    # if self.log:
-                    #     self.log.debug("RESULT: %s", str(returned))
             else:
                 # Bad HTTP method.
                 returned = generate_error_result(message="Invalid HTTP method specified.",

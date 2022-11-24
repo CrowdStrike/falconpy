@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import process_service_request, force_default, handle_single_argument
 from ._payload import malquery_fuzzy_payload, generic_payload_list
 from ._payload import malquery_exact_search_payload, malquery_hunt_payload
@@ -55,7 +56,7 @@ class MalQuery(ServiceClass):
     - a valid token provided by the authentication service class (OAuth2.token())
     """
 
-    def get_quotas(self: object) -> dict:
+    def get_quotas(self: object) -> Dict[str, Union[int, dict]]:
         """Get information about search and download quotas in your environment.
 
         This method does not accept arguments or keywords.
@@ -74,7 +75,7 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def fuzzy_search(self: object, body: dict = None, **kwargs) -> dict:
+    def fuzzy_search(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search Falcon MalQuery quickly, but with more potential for false positives.
 
         Search for a combination of hex patterns and strings in order to identify
@@ -153,7 +154,7 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_metadata(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_metadata(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve indexed files metadata by their hash.
 
         Keyword arguments:
@@ -179,7 +180,7 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_request(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_request(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Check the status and results of an asynchronous request, such as hunt or exact-search.
 
         Supports a single request id at this time.
@@ -235,7 +236,7 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def samples_multidownload(self: object, *args, body: dict = None, **kwargs) -> dict:
+    def samples_multidownload(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Schedule samples for download.
 
         Use the result id with the /request endpoint to check if the download is ready
@@ -274,7 +275,7 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def exact_search(self: object, body: dict = None, **kwargs) -> dict:
+    def exact_search(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Perform a MalQuery Exact Search.
 
         Search Falcon MalQuery for a combination of hex patterns
@@ -340,7 +341,7 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def hunt(self: object, body: dict = None, **kwargs) -> dict:
+    def hunt(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Schedule a YARA-based search for execution.
 
         Returns a request id which can be used with the /request endpoint.

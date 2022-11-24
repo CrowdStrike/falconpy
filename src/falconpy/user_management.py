@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=R0904,C0302
+from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import generic_payload_list
 from ._service_class import ServiceClass
@@ -58,7 +59,7 @@ class UserManagement(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_user_grants(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_user_grants(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get User Grant(s).
 
         This operation lists both direct as well as flight control grants
@@ -112,7 +113,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_roles_mssp(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_roles_mssp(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get information about a role, supports Flight Control.
 
         HTTP Method: GET
@@ -150,7 +151,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def user_action(self: object, body: dict = None, **kwargs) -> dict:
+    def user_action(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Apply actions to one or more users.
 
         HTTP Method: POST
@@ -208,7 +209,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def user_roles_action(self: object, body: dict = None, **kwargs) -> dict:
+    def user_roles_action(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Grant or Revoke one or more role(s) to a user against a CID.
 
         HTTP Method: POST
@@ -266,7 +267,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def retrieve_users(self: object, *args, body: dict = None, **kwargs) -> dict:
+    def retrieve_users(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get info about users including their name, UID and CID by providing user UUIDs.
 
         HTTP Method: POST
@@ -314,7 +315,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_user_mssp(self: object, body: dict = None, **kwargs) -> dict:
+    def create_user_mssp(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create a new user. Supports Flight Control.
 
         After creating a user, assign one or more roles with `user_roles_action`.
@@ -380,7 +381,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_user_mssp(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_user_mssp(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete a user permanently. Supports Flight Control.
 
         HTTP Method: DELETE
@@ -415,7 +416,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def update_user_mssp(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
+    def update_user_mssp(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Modify an existing user's first or last name. Supports Flight Control.
 
         HTTP Method: PATCH
@@ -467,7 +468,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_roles(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def query_roles(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Show role IDs for all roles available in your customer account. Supports Flight Control.
 
         For more information on each role, provide the role ID to `get_roles_mssp`.
@@ -509,7 +510,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_users(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_users(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """List user IDs for all users in your customer account.
 
         For more information on each user, provide the user ID to `retrieve_users`.
@@ -553,7 +554,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_roles(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_roles(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get information about a role.
 
         DEPRECATED: Please use entitiesRolesV1 instead.
@@ -590,7 +591,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def grant_user_role_ids(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def grant_user_role_ids(self: object, body: dict, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Assign one or more roles to a user.
 
         DEPRECATED: Please use userActionV1 instead.
@@ -645,7 +646,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def revoke_user_role_ids(self: object, parameters: dict = None, **kwargs) -> dict:
+    def revoke_user_role_ids(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Revoke one or more roles from a user.
 
         DEPRECATED: Please use userActionV1 instead.
@@ -682,7 +683,7 @@ class UserManagement(ServiceClass):
             params=parameters
             )
 
-    def get_available_role_ids(self: object) -> dict:
+    def get_available_role_ids(self: object) -> Dict[str, Union[int, dict]]:
         """Show role IDs for all roles available in your customer account.
 
         For more information on each role, provide the role ID to get_roles.
@@ -714,7 +715,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_user_role_ids(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_user_role_ids(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Show role IDs of roles assigned to a user.
 
         For more information on each role, provide the role ID to `get_role`.
@@ -753,7 +754,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def retrieve_user(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def retrieve_user(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get information about a user.
 
         DEPRECATED: Please use retrieveUsersGETV1 instead.
@@ -790,7 +791,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_user(self: object, body: dict = None, **kwargs) -> dict:
+    def create_user(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create a new user.
 
         After creating a user, assign one or more roles with `grant_user_role_ids`.
@@ -852,7 +853,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_user(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_user(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete a user permanently.
 
         DEPRECATED: Please use deleteUserV1 instead.
@@ -889,7 +890,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def update_user(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
+    def update_user(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Modify an existing user.
 
         DEPRECATED: Please use updateUserV1 instead.
@@ -942,7 +943,7 @@ class UserManagement(ServiceClass):
             params=parameters
             )
 
-    def retrieve_emails_by_cid(self: object) -> dict:
+    def retrieve_emails_by_cid(self: object) -> Dict[str, Union[int, dict]]:
         """List the usernames (usually an email address) for all users in your customer account.
 
         DEPRECATED: Please use retrieveUsersGETV1 instead.
@@ -971,7 +972,7 @@ class UserManagement(ServiceClass):
             operation_id="RetrieveEmailsByCID"
             )
 
-    def retrieve_user_uuids_by_cid(self: object) -> dict:
+    def retrieve_user_uuids_by_cid(self: object) -> Dict[str, Union[int, dict]]:
         """List user IDs for all users in your customer account.
 
         For more information on each user, provide the user ID to `retrieve_user`.
@@ -1003,7 +1004,7 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def retrieve_user_uuid(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def retrieve_user_uuid(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get a user's ID by providing a username (usually an email address).
 
         DEPRECATED: Please use queryUserV1 instead.

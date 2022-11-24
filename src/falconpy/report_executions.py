@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import reports_payload
 from ._service_class import ServiceClass
@@ -55,7 +56,7 @@ class ReportExecutions(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_download(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_download(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get report entity download.
 
         Keyword arguments:
@@ -81,7 +82,7 @@ class ReportExecutions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def retry_reports(self: object, *args, body: dict = None, **kwargs) -> dict:
+    def retry_reports(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retries a report execution.
 
         Keyword arguments:
@@ -114,7 +115,7 @@ class ReportExecutions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve report details for the provided report IDs.
 
         Keyword arguments:
@@ -140,7 +141,7 @@ class ReportExecutions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_reports(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_reports(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Find all report execution IDs matching the query with filter.
 
         Keyword arguments:

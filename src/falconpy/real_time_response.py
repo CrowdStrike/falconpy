@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=R0904  # Aligning method count to API service collection operation count
+from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import aggregate_payload, command_payload, generic_payload_list
 from ._service_class import ServiceClass
@@ -56,7 +57,7 @@ class RealTimeResponse(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_sessions(self: object, body: list = None, **kwargs) -> dict:
+    def aggregate_sessions(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get aggregates on session data.
 
         Supported aggregations:
@@ -149,7 +150,7 @@ class RealTimeResponse(ServiceClass):
                                        body: dict = None,
                                        parameters: dict = None,
                                        **kwargs
-                                       ) -> dict:
+                                       ) -> Dict[str, Union[int, dict]]:
         """Batch executes a RTR active-responder command across hosts mapped to a given batch ID.
 
         Keyword arguments:
@@ -204,7 +205,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def batch_command(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
+    def batch_command(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Batch executes a RTR read-only command across the hosts mapped to the given batch ID.
 
         Keyword arguments:
@@ -259,7 +260,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def batch_get_command_status(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def batch_get_command_status(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve the status of the specified batch get command.
 
         Will return successful files when they are finished processing.
@@ -296,7 +297,7 @@ class RealTimeResponse(ServiceClass):
                           body: dict = None,
                           parameters: dict = None,
                           **kwargs
-                          ) -> dict:
+                          ) -> Dict[str, Union[int, dict]]:
         """Batch executes `get` command across hosts to retrieve files.
 
         After this call is made batch_get_command_status is used to query for the results.
@@ -352,7 +353,7 @@ class RealTimeResponse(ServiceClass):
                             body: dict = None,
                             parameters: dict = None,
                             **kwargs
-                            ) -> dict:
+                            ) -> Dict[str, Union[int, dict]]:
         """Batch initialize a RTR session on multiple hosts.
 
         Before any RTR commands can be used, an active session is needed on the host.
@@ -409,7 +410,7 @@ class RealTimeResponse(ServiceClass):
                                body: dict = None,
                                parameters: dict = None,
                                **kwargs
-                               ) -> dict:
+                               ) -> Dict[str, Union[int, dict]]:
         """Batch refresh a RTR session on multiple hosts.
 
         RTR sessions will expire after 10 minutes unless refreshed.
@@ -458,7 +459,7 @@ class RealTimeResponse(ServiceClass):
                                               *args,
                                               parameters: dict = None,
                                               **kwargs
-                                              ) -> dict:
+                                              ) -> Dict[str, Union[int, dict]]:
         """Get status of an executed active-responder command on a single host.
 
         Keyword arguments:
@@ -490,7 +491,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def execute_active_responder_command(self: object, body: dict = None, **kwargs) -> dict:
+    def execute_active_responder_command(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Execute an active responder command on a single host.
 
         Keyword arguments:
@@ -532,7 +533,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def check_command_status(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def check_command_status(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get status of an executed command on a single host.
 
         Keyword arguments:
@@ -563,7 +564,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def execute_command(self: object, body: dict = None, **kwargs) -> dict:
+    def execute_command(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Execute a command on a single host.
 
         Keyword arguments:
@@ -605,7 +606,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_extracted_file_contents(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_extracted_file_contents(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get RTR extracted file contents for specified session and sha256.
 
         Keyword arguments:
@@ -633,7 +634,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def list_files(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def list_files(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get a list of files for the specified RTR session.
 
         Keyword arguments:
@@ -659,7 +660,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def list_files_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def list_files_v2(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get a list of files for the specified RTR session.
 
         Keyword arguments:
@@ -685,7 +686,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_file(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_file(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete a RTR session file.
 
         Keyword arguments:
@@ -711,7 +712,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_file_v2(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_file_v2(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete a RTR session file.
 
         Keyword arguments:
@@ -737,7 +738,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def pulse_session(self: object, body: dict = None, **kwargs) -> dict:
+    def pulse_session(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Refresh a session timeout on a single host.
 
         Keyword arguments:
@@ -772,7 +773,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def list_sessions(self: object, body: dict = None, **kwargs) -> dict:
+    def list_sessions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get session metadata by session id.
 
         Keyword arguments:
@@ -806,7 +807,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def list_queued_sessions(self: object, body: dict = None, **kwargs) -> dict:
+    def list_queued_sessions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get session metadata by session id.
 
         Keyword arguments:
@@ -840,7 +841,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def init_session(self: object, body: dict = None, **kwargs) -> dict:
+    def init_session(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Initialize a new session with the RTR cloud.
 
         Keyword arguments:
@@ -880,7 +881,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_session(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_session(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete a session.
 
         Keyword arguments:
@@ -907,7 +908,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_queued_session(self: object, parameters: dict = None, **kwargs) -> dict:
+    def delete_queued_session(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete a queued session.
 
         Keyword arguments:
@@ -933,7 +934,7 @@ class RealTimeResponse(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def list_all_sessions(self: object, parameters: dict = None, **kwargs) -> dict:
+    def list_all_sessions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get a list of session_ids.
 
         Keyword arguments:

@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import process_service_request, force_default
 from ._service_class import ServiceClass
 from ._endpoint._identity_protection import _identity_protection_endpoints as Endpoints
@@ -54,7 +55,7 @@ class IdentityProtection(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def graphql(self: object, body: dict = None, **kwargs) -> dict:
+    def graphql(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         r"""Identity Protection GraphQL API.
 
         Allows to retrieve entities, timeline activities, identity-based incidents and
