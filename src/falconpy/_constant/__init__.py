@@ -53,3 +53,5 @@ MOCK_OPERATIONS = [
 ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
 # Default user-agent string
 USER_AGENT = f"{_TITLE}/{str(_VERSION)}"
+# Default maximum number of records to write to debug logs (when active)
+MAX_DEBUG_RECORDS = 100

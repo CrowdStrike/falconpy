@@ -96,7 +96,8 @@ class APIHarness(UberInterface):
                  timeout: Optional[Union[float, tuple]] = None,
                  user_agent: Optional[str] = None,
                  renew_window: Optional[int] = 120,
-                 debug: Optional[bool] = False
+                 debug: Optional[bool] = False,
+                 debug_record_count: Optional[int] = 100
                  ) -> "APIHarness":
         """Uber class constructor.
 
@@ -140,12 +141,14 @@ class APIHarness(UberInterface):
                          client_secret=client_secret,
                          member_cid=member_cid,
                          renew_window=renew_window,
-                         debug=debug
+                         debug=debug,
+                         debug_record_count=debug_record_count
                          )
 
         # Complete list of available API operations.
         self.commands = api_endpoints
 
+    # pylint: disable=R0912
     def command(self, *args, **kwargs) -> Union[Dict[str, Union[int, dict]], bytes]:
         """Uber Class API command method.
 
