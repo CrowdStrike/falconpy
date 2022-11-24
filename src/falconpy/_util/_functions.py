@@ -41,7 +41,7 @@ try:
     from simplejson import JSONDecodeError
 except ImportError:
     from json.decoder import JSONDecodeError
-from typing import Dict, Any
+from typing import Dict, Any, Union, Optional
 import requests
 import urllib3
 from copy import deepcopy
@@ -52,7 +52,8 @@ from .._constant import (
     PREFER_NONETYPE,
     MOCK_OPERATIONS,
     ALLOWED_METHODS as _ALLOWED_METHODS,
-    USER_AGENT as _USER_AGENT
+    USER_AGENT as _USER_AGENT,
+    MAX_DEBUG_RECORDS
 )
 from .._result import Result, ExpandedResult
 urllib3.disable_warnings(InsecureRequestWarning)
@@ -95,8 +96,7 @@ def generate_b64cred(client_id: str, client_secret: str) -> str:
 
     return encoded
 
-
-def handle_single_argument(passed_arguments: list, passed_keywords: dict, search_key: str) -> dict:
+def handle_single_argument(passed_arguments: Union[list, tuple], passed_keywords: Optional[dict], search_key: str) -> dict:
     """Handle a single argument that is provided without keywords.
 
     Reviews arguments passed to a method and injects them into the keyword dictionary if they
@@ -180,7 +180,18 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
         except AttributeError:
             log_utility = None
 
-    return perform_request(proxy=proxy, timeout=timeout, user_agent=user_agent, log_util=log_utility, **kwargs)
+        try:
+            debug_count = caller.debug_record_count
+        except AttributeError:
+            debug_count = None
+
+    return perform_request(proxy=proxy,
+                           timeout=timeout,
+                           user_agent=user_agent,
+                           log_util=log_utility,
+                           debug_record_count=debug_count,
+                           **kwargs
+                           )
 
 
 @force_default(defaults=["headers"], default_types=["dict"])
@@ -223,12 +234,15 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
         - Example: True
     container: bool - Is this request being sent to a Falcon Container registry endpoint
         - Example: False
+    log_util: Logger - Logging utility
+    debug_record_count: int - Maximum number of records to log in debug logs.
     """
     method = kwargs.get("method", "GET")
     body = kwargs.get("body", None)
     body_validator = kwargs.get("body_validator", None)
     user_agent = kwargs.get("user_agent", None)
     expand_result = kwargs.get("expand_result", False)
+    log_util: Logger = kwargs.get("log_util", None)
     perform = True
     if method.upper() in _ALLOWED_METHODS:
         # Validate parameters
@@ -275,22 +289,22 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
                 else:
                     returned = content_return
                 # Log our payloads if debugging is enabled
-                log_util: Logger = kwargs.get("log_util", None)
                 if log_util:
-                    log_util.debug("ENDPOINT: %s (%s)", endpoint, method)
-                    # Since we are done with these values, we can go ahead and sanitize them
-                    log_util.debug("HEADERS: %s", sanitize_dictionary(headers))
-                    log_util.debug("PARAMETERS: %s", sanitize_dictionary(param_payload))
-                    log_util.debug("BODY: %s", sanitize_dictionary(body_payload))
-                    log_util.debug("DATA: %s", sanitize_dictionary(data_payload))
-                    if returning_content_type.startswith("application/json"):
-                        # This dictionary hasn't been returned yet,
-                        # so we'll need to sanitize a copy of it instead.
-                        result_copy = deepcopy(content_return)
-                        log_util.debug("RESULT: %s", sanitize_dictionary(result_copy))
-                    else:
-                        log_util.debug("RESULT: binary response received from API")
-
+                    rmax = kwargs.get("debug_record_count", None)
+                    if not rmax:
+                        rmax = MAX_DEBUG_RECORDS
+                    rmax = int(rmax)
+                    log_api_activity(endpoint,
+                                    method,
+                                    headers,
+                                    param_payload,
+                                    body_payload,
+                                    data_payload,
+                                    content_return,
+                                    returning_content_type,
+                                    rmax,
+                                    log_util
+                                    )
             except JSONDecodeError:  # pragma: no cover
                 # No response content, but a successful request was made
                 returned = generate_ok_result(
@@ -300,10 +314,38 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
                     )
             except Exception as err:  # pylint: disable=W0703  # General catch-all for anything coming out of requests
                 returned = generate_error_result(message=f"{str(err)}")
+                if log_util:
+                    log_util.debug("ERROR: %s", returned)
     else:
         returned = generate_error_result(message="Invalid API operation specified.", code=405)
 
     return returned
+
+
+def log_api_activity(endpoint,
+                     method,
+                     headers,
+                     param_payload,
+                     body_payload,
+                     data_payload,
+                     content_return,
+                     content_type,
+                     log_max,
+                     log_facility: Logger,
+                     ):
+    """Log the payloads and API response to the debug log."""
+    log_facility.debug("ENDPOINT: %s (%s)", endpoint, method)
+    # Since we are done with these values, we can go ahead and sanitize them
+    log_facility.debug("HEADERS: %s", sanitize_dictionary(headers))
+    log_facility.debug("PARAMETERS: %s", sanitize_dictionary(param_payload))
+    log_facility.debug("BODY: %s", sanitize_dictionary(body_payload))
+    log_facility.debug("DATA: %s", sanitize_dictionary(data_payload))
+    if content_type.startswith("application/json"):
+        # This dictionary hasn't been returned yet,
+        # so we'll need to sanitize a copy of it instead.
+        log_facility.debug("RESULT: %s", sanitize_dictionary(deepcopy(content_return), log_max))
+    else:
+        log_facility.debug("RESULT: binary response received from API")
 
 
 def generate_error_result(
@@ -540,7 +582,7 @@ def autodiscover_region(provided_base_url: str, auth_result: dict):
 
     return new_base_url
 
-def sanitize_dictionary(dirty: Any) -> dict:
+def sanitize_dictionary(dirty: Any, record_max: int = MAX_DEBUG_RECORDS) -> dict:
     """Strips confidential data from logged dictionaries."""
     if isinstance(dirty, dict):
         redacted = ["access_token", "client_id", "client_secret", "member_cid", "token"]
@@ -550,6 +592,10 @@ def sanitize_dictionary(dirty: Any) -> dict:
             if "body" in dirty:
                 if redact in dirty["body"]:
                     dirty["body"][redact] = "REDACTED"
+                if "resources" in dirty["body"]:
+                    # Log results are limited to MAX_DEBUG_RECORDS
+                    # number of items within the resources list
+                    del dirty["body"]["resources"][max(1, min(record_max, 5000)):]
         if "Authorization" in dirty:
             dirty["Authorization"] = "Bearer REDACTED"
 

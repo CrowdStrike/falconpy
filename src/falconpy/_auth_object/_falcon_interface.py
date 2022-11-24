@@ -38,11 +38,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-import sys
 import time
 from logging import Logger, getLogger
 from typing import Dict, Optional, Union
 from ._base_falcon_auth import BaseFalconAuth
+from .._constant import MAX_DEBUG_RECORDS
 from .._enum import TokenFailReason
 from .._util import (
     autodiscover_region,
@@ -51,7 +51,6 @@ from .._util import (
     login_payloads,
     logout_payloads
     )
-from .._endpoint._oauth2 import _oauth2_endpoints as AuthEndpoints
 
 
 class FalconInterface(BaseFalconAuth):
@@ -70,7 +69,8 @@ class FalconInterface(BaseFalconAuth):
     # to reduce potential impacts to customer configurations, this facility is
     # extremely limited and not implemented by default. (Meaning logs are not generated.)
     # To enable logging, pass the keyword "debug" with a value of True to the constructor.
-    log: Logger = None
+    log: Optional[Logger] = None
+    debug_record_count: int = MAX_DEBUG_RECORDS
     # Flag indicating if we have the necessary information to automatically refresh the token.
     refreshable: bool = True
     # Integer specifying the amount of time remaining before the token expires (in seconds).
@@ -78,9 +78,9 @@ class FalconInterface(BaseFalconAuth):
     # Float indicating the moment in time that the token was generated (timestamp).
     token_time: float = time.time()
     # String containing the error message received from the API when token generation failed.
-    token_fail_reason: str = None
+    token_fail_reason: Optional[str] = None
     # Integer representing the HTTP status code received when generating the token.
-    token_status: int = None
+    token_status: Optional[int] = None
 
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
@@ -100,7 +100,8 @@ class FalconInterface(BaseFalconAuth):
                  timeout: Optional[Union[float, tuple]] = None,
                  user_agent: Optional[str] = None,
                  renew_window: Optional[int] = 120,
-                 debug: Optional[bool] = False
+                 debug: Optional[bool] = False,
+                 debug_record_count: Optional[int] = 100
                  ) -> "FalconInterface":
         """Construct an instance of the FalconInterface class."""
         self.base_url: str = base_url
@@ -134,16 +135,20 @@ class FalconInterface(BaseFalconAuth):
             self.token_expiration = 1799
         # Set the token renewal window, ignored when using Legacy Authentication.
         self.token_renew_window: int = max(min(renew_window, 1200), 120)
+        # Ignored when debugging is disabled
+        self.debug_record_count: int = debug_record_count
         # Log the creation of this object if debugging is enabled.
         if debug:
             self.log: Logger = getLogger(__name__.split(".")[0])
-            self.log.debug("Instance of the %s interface class created.", self.__class__.__name__)
-            self.log.debug("Base URL set to %s", self.base_url)
-            self.log.debug("SSL verification is set to %s", str(self.ssl_verify))
-            self.log.debug("Timeout set to %s seconds", str(self.timeout))
-            self.log.debug("Proxy dictionary: %s", str(self.proxy))
-            self.log.debug("User-Agent string set to: %s", self.user_agent)
-            self.log.debug("Token renewal window set to %s seconds", str(self.token_renew_window))
+            self.log.debug("CREATED: %s interface class", self.__class__.__name__)
+            self.log.debug("CONFIG: Base URL set to %s", self.base_url)
+            self.log.debug("CONFIG: SSL verification is set to %s", str(self.ssl_verify))
+            self.log.debug("CONFIG: Timeout set to %s seconds", str(self.timeout))
+            self.log.debug("CONFIG: Proxy dictionary: %s", str(self.proxy))
+            self.log.debug("CONFIG: User-Agent string set to: %s", self.user_agent)
+            self.log.debug("CONFIG: Token renewal window set to %s seconds", str(self.token_renew_window))
+            self.log.debug("CONFIG: Maximum number of records to log: %s", self.debug_record_count)
+        
 
     # _  _ ____ ___ _  _ ____ ___  ____
     # |\/| |___  |  |__| |  | |  \ [__
