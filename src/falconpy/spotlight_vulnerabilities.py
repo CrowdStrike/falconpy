@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import force_default, process_service_request
 from ._util import handle_single_argument, generate_error_result
 from ._service_class import ServiceClass
@@ -55,7 +56,7 @@ class SpotlightVulnerabilities(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_vulnerabilities_combined(self: object, parameters: dict = None,  **kwargs) -> dict:
+    def query_vulnerabilities_combined(self: object, parameters: dict = None,  **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for Vulnerabilities by providing an FQL filter and paging details.
 
         Returns a set of Vulnerability IDs which match the filter criteria.
@@ -108,7 +109,7 @@ class SpotlightVulnerabilities(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_vulnerabilities(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_vulnerabilities(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get details on vulnerabilities by providing one or more IDs.
 
         Keyword arguments:
@@ -134,7 +135,7 @@ class SpotlightVulnerabilities(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_vulnerabilities(self: object, parameters: dict = None,  **kwargs) -> dict:
+    def query_vulnerabilities(self: object, parameters: dict = None,  **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for Vulnerabilities by providing an FQL filter and paging details.
 
         Returns a set of Vulnerability IDs which match the filter criteria.
@@ -170,7 +171,7 @@ class SpotlightVulnerabilities(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_remediations(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_remediations(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get details on remediations by providing one or more IDs.
 
         Keyword arguments:
@@ -196,7 +197,7 @@ class SpotlightVulnerabilities(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_remediations_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_remediations_v2(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get details on remediations by providing one or more IDs.
 
         Keyword arguments:

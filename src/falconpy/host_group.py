@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import generate_error_result, force_default, args_to_params
 from ._util import handle_single_argument, process_service_request
 from ._payload import host_group_create_payload, host_group_update_payload
@@ -57,7 +58,7 @@ class HostGroup(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_group_members(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_group_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for members of a Host Group in your environment.
 
         Provide a FQL filter and paging details.
@@ -94,7 +95,7 @@ class HostGroup(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_host_groups(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_host_groups(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for Host Groups in your environment by providing an FQL filter and paging details.
 
         Returns a set of Host Groups which match the filter criteria.
@@ -139,7 +140,7 @@ class HostGroup(ServiceClass):
                              body: dict = None,
                              parameters: dict = None,
                              **kwargs
-                             ) -> dict:
+                             ) -> Dict[str, Union[int, dict]]:
         """Perform the specified action on the Host Groups specified in the request.
 
         Keyword arguments:
@@ -203,7 +204,7 @@ class HostGroup(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_host_groups(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_host_groups(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve a set of Host Groups by specifying their IDs.
 
         Keyword arguments:
@@ -229,7 +230,7 @@ class HostGroup(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_host_groups(self: object, body: dict = None, **kwargs) -> dict:
+    def create_host_groups(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create Host Groups by specifying details about the group to create.
 
         Keyword arguments:
@@ -269,7 +270,7 @@ class HostGroup(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_host_groups(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_host_groups(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete a set of Host Groups by specifying their IDs.
 
         Keyword arguments:
@@ -295,7 +296,7 @@ class HostGroup(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_host_groups(self: object, body: dict = None, **kwargs) -> dict:
+    def update_host_groups(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update Host Groups by specifying the ID of the group and details to update.
 
         Keyword arguments:
@@ -335,7 +336,7 @@ class HostGroup(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_group_members(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_group_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for members of a Host Group in your environment.
 
         Provide a FQL filter and paging details.
@@ -371,7 +372,7 @@ class HostGroup(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_host_groups(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_host_groups(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for Host Groups in your environment by providing an FQL filter and paging details.
 
         Returns a set of Host Group IDs which match the filter criteria.

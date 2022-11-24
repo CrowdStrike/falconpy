@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import process_service_request, force_default, handle_single_argument
 from ._payload import generic_payload_list
 from ._service_class import ServiceClass
@@ -55,7 +56,7 @@ class TailoredIntelligence(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_event_body(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_event_body(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get the event body for the provided event ID.
 
         Keyword arguments:
@@ -81,7 +82,7 @@ class TailoredIntelligence(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_event_entities(self: object, *args, body: dict = None, **kwargs) -> dict:
+    def get_event_entities(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get events entities for specified IDs.
 
         Keyword arguments:
@@ -117,7 +118,7 @@ class TailoredIntelligence(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_events(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_events(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Query for event IDs that match the provided filter criteria.
 
         Keyword arguments:
@@ -148,7 +149,7 @@ class TailoredIntelligence(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_rule_entities(self: object, *args, body: dict = None, **kwargs) -> dict:
+    def get_rule_entities(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get rule entities for specified IDs.
 
         Keyword arguments:
@@ -184,7 +185,7 @@ class TailoredIntelligence(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_rules(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_rules(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Query for rule IDs that match the provided filter criteria.
 
         Keyword arguments:

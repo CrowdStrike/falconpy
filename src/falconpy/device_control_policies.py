@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import generate_error_result, force_default, args_to_params
 from ._util import process_service_request, handle_single_argument
 from ._payload import generic_payload_list, device_policy_payload
@@ -56,7 +57,7 @@ class DeviceControlPolicies(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for a Device Control Policy members and return full detail.
 
         Search for members of a Device Control Policy in your environment by
@@ -92,7 +93,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for a Device Control Policies and return full detail.
 
         Search for Device Control Policies in your environment by providing an FQL filter and
@@ -130,7 +131,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def perform_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
+    def perform_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Perform a Device Control Policy action.
 
         Keyword arguments:
@@ -198,7 +199,7 @@ class DeviceControlPolicies(ServiceClass):
         return returned
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def set_precedence(self: object, body: dict = None, **kwargs) -> dict:
+    def set_precedence(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Set Device Control Policy precedence.
 
         Sets the precedence of Device Control Policies based on the order of IDs specified in
@@ -240,7 +241,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve a set of Device Control Policies by specifying their IDs.
 
         Keyword arguments:
@@ -267,7 +268,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_policies(self: object, body: dict = None, **kwargs) -> dict:
+    def create_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create Device Control Policies by specifying details about the policy to create.
 
         Keyword arguments:
@@ -337,7 +338,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete a set of Device Control Policies by specifying their IDs.
 
         Keyword arguments:
@@ -364,7 +365,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policies(self: object, body: dict = None, **kwargs) -> dict:
+    def update_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update Device Control Policies by specifying the ID of the policy and details to update.
 
         Keyword arguments:
@@ -433,7 +434,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for a Device Control Policy members and return their IDs.
 
         Search for members of a Device Control Policy in your environment by providing
@@ -469,7 +470,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for a Device Control Policies and return their IDs.
 
         Search for Device Control Policies in your environment by providing an

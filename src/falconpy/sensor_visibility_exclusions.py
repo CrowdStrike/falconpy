@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import exclusion_payload
 from ._service_class import ServiceClass
@@ -55,7 +56,7 @@ class SensorVisibilityExclusions(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get a set of Sensor Visibility Exclusions by specifying their IDs.
 
         Keyword arguments:
@@ -81,7 +82,7 @@ class SensorVisibilityExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_exclusions(self: object, body: dict = None, **kwargs) -> dict:
+    def create_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create the Sensor Visibility exclusions.
 
         Keyword arguments:
@@ -117,7 +118,7 @@ class SensorVisibilityExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete the Sensor Visibility exclusions by ID.
 
         Keyword arguments:
@@ -144,7 +145,7 @@ class SensorVisibilityExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_exclusions(self: object, body: dict = None, **kwargs) -> dict:
+    def update_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update the Sensor Visibility Exclusions.
 
         Keyword arguments:
@@ -184,7 +185,7 @@ class SensorVisibilityExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_exclusions(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for Sensor Visibility Exclusions.
 
         Keyword arguments:
