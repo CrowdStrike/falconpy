@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import process_service_request, force_default, handle_single_argument
 from ._service_class import ServiceClass
 from ._endpoint._filevantage import _filevantage_endpoints as Endpoints
@@ -54,7 +55,7 @@ class FileVantage(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_changes(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_changes(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve information on changes.
 
         Keyword arguments:
@@ -80,7 +81,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_changes(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_changes(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for changes within your environment. Returns one or more change IDs.
 
         Keyword arguments:
