@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import json
+from typing import Dict, Union
 from ._util import (
     force_default,
     process_service_request,
@@ -403,7 +404,7 @@ class SampleUploads(ServiceClass):
                       body: dict = None,
                       parameters: dict = None,
                       **kwargs
-                      ) -> dict:
+                      ) -> Dict[str, Union[int, dict]]:
         """Upload a file for further cloud analysis.
 
         After uploading, call the specific analysis API endpoint.
@@ -473,7 +474,7 @@ class SampleUploads(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_sample(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_sample(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Remove a sample, including file, meta and submissions from the collection.
 
         Keyword arguments:

@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=C0302,R0904  # Matching API operation counts
+from typing import Dict, Union
 from ._util import force_default, handle_single_argument, process_service_request
 from ._payload import generic_payload_list, mssp_payload
 from ._service_class import ServiceClass
@@ -56,7 +57,7 @@ class FlightControl(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_children(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_children(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get link to child customer by child CID(s).
 
         Keyword arguments:
@@ -178,7 +179,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def add_cid_group_members(self: object, body: dict = None, **kwargs) -> dict:
+    def add_cid_group_members(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Add new CID Group member.
 
         Keyword arguments:
@@ -219,7 +220,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def delete_cid_group_members(self: object, body: dict = None, **kwargs) -> dict:
+    def delete_cid_group_members(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete CID Group members entry.
 
         Keyword arguments:
@@ -320,7 +321,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_cid_groups(self: object, body: dict = None, **kwargs) -> dict:
+    def create_cid_groups(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create new CID Group(s). Maximum 500 CID Group(s) allowed.
 
         Keyword arguments:
@@ -360,7 +361,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_cid_groups(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_cid_groups(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete CID Group(s) by ID(s).
 
         Keyword arguments:
@@ -387,7 +388,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_cid_groups(self: object, body: dict = None, **kwargs) -> dict:
+    def update_cid_groups(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update existing CID Group(s).
 
         CID Group ID is expected for each CID Group definition provided in request body.
@@ -431,7 +432,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_roles_by_id(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_roles_by_id(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get MSSP Role assignment(s).
 
         MSSP Role assignment is of the format <user_group_id>:<cid_group_id>.
@@ -460,7 +461,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def add_role(self: object, body: dict = None, **kwargs) -> dict:
+    def add_role(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Assign new MSSP Role(s) between User Group and CID Group.
 
         It does not revoke existing role(s) between User Group and CID Group.
@@ -505,7 +506,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def delete_roles(self: object, body: dict = None, **kwargs) -> dict:
+    def delete_roles(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete MSSP Role assignment(s) between User Group and CID Group.
 
         User Group ID and CID Group ID have to be specified in request.
@@ -589,7 +590,7 @@ class FlightControl(ServiceClass):
                                      *args,
                                      parameters: dict = None,
                                      **kwargs
-                                     ) -> dict:
+                                     ) -> Dict[str, Union[int, dict]]:
         """Get User Group members by User Group ID(s).
 
         Keyword arguments:
@@ -620,7 +621,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def add_user_group_members(self: object, body: dict = None, **kwargs) -> dict:
+    def add_user_group_members(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Add new User Group member. Maximum 500 members allowed per User Group.
 
         Keyword arguments:
@@ -658,7 +659,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def delete_user_group_members(self: object, body: dict = None, **kwargs) -> dict:
+    def delete_user_group_members(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete User Group members entry.
 
         Keyword arguments:
@@ -756,7 +757,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_user_groups(self: object, body: dict = None, **kwargs) -> dict:
+    def create_user_groups(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create new User Group(s). Maximum 500 User Group(s) allowed per customer.
 
         Keyword arguments:
@@ -796,7 +797,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_user_groups(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_user_groups(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete User Group(s) by ID(s).
 
         Keyword arguments:
@@ -823,7 +824,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_user_groups(self: object, body: dict = None, **kwargs) -> dict:
+    def update_user_groups(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update existing User Group(s).
 
         User Group ID is expected for each User Group definition provided in request body.
@@ -867,7 +868,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_children(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_children(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Query for customers linked as children.
 
         Keyword arguments:
@@ -897,7 +898,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_cid_group_members(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_cid_group_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Query a CID Groups members by associated CID.
 
         Keyword arguments:
@@ -927,7 +928,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_cid_groups(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_cid_groups(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Query a CID Groups.
 
         Keyword arguments:
@@ -957,7 +958,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_roles(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_roles(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Query links between user groups and CID groups.
 
         At least one of CID Group ID or User Group ID should also be provided. Role ID is optional.
@@ -991,7 +992,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_user_group_members(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_user_group_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Query User Group member by User UUID.
 
         Keyword arguments:
@@ -1021,7 +1022,7 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_user_groups(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_user_groups(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Query User Groups.
 
         Keyword arguments:

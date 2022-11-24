@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import force_default, handle_single_argument, process_service_request
 from ._payload import generic_payload_list, prevention_policy_payload
 from ._service_class import ServiceClass
@@ -55,7 +56,7 @@ class PreventionPolicy(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for members of a Prevention Policy by providing an FQL filter and paging details.
 
         Returns a set of host details which match the filter criteria.
@@ -89,7 +90,7 @@ class PreventionPolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for Prevention Policies by providing an FQL filter and paging details.
 
         Returns a set of Prevention Policies which match the filter criteria.
@@ -130,7 +131,7 @@ class PreventionPolicy(ServiceClass):
                                 body: dict = None,
                                 parameters: dict = None,
                                 **kwargs
-                                ) -> dict:
+                                ) -> Dict[str, Union[int, dict]]:
         """Perform the specified action on the Prevention Policies specified in the request.
 
         Keyword arguments:
@@ -189,7 +190,7 @@ class PreventionPolicy(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def set_policies_precedence(self: object, body: dict = None, **kwargs) -> dict:
+    def set_policies_precedence(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Set the precedence of Prevention Policies based on the order of IDs in the request.
 
         The first ID specified will have the highest precedence and the last ID specified will
@@ -230,7 +231,7 @@ class PreventionPolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve a set of Prevention Policies by specifying their IDs.
 
         Keyword arguments:
@@ -256,7 +257,7 @@ class PreventionPolicy(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_policies(self: object, body: dict = None, **kwargs) -> dict:
+    def create_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create Prevention Policies by specifying details about the policy to create.
 
         Keyword arguments:
@@ -308,7 +309,7 @@ class PreventionPolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete a set of Prevention Policies by specifying their IDs.
 
         Keyword arguments:
@@ -334,7 +335,7 @@ class PreventionPolicy(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policies(self: object, body: dict = None, **kwargs) -> dict:
+    def update_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update Prevention Policies by specifying the ID of the policy and details to update.
 
         Keyword arguments:
@@ -383,7 +384,7 @@ class PreventionPolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for members of a Prevention Policy by providing a FQL filter and paging details.
 
         Returns a set of Agent IDs which match the filter criteria.
@@ -417,7 +418,7 @@ class PreventionPolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for Prevention Policies by providing an FQL filter and paging details.
 
         Returns a set of Prevention Policy IDs which match the filter criteria.

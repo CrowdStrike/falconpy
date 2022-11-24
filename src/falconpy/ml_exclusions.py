@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import exclusion_payload
 from ._service_class import ServiceClass
@@ -55,7 +56,7 @@ class MLExclusions(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get a set of ML Exclusions by specifying their IDs.
 
         Keyword arguments:
@@ -81,7 +82,7 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def create_exclusions(self: object, body: dict = None, **kwargs) -> dict:
+    def create_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create the ML exclusions.
 
         Keyword arguments:
@@ -123,7 +124,7 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103 # Matching API
+    def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:  # pylint: disable=C0103 # Matching API
         """Delete the ML Exclusions by ID.
 
         Keyword arguments:
@@ -150,7 +151,7 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def update_exclusions(self: object, body: dict = None, **kwargs) -> dict:
+    def update_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update the ML Exclusions.
 
         Keyword arguments:
@@ -190,7 +191,7 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_exclusions(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for ML Exclusions.
 
         Keyword arguments:

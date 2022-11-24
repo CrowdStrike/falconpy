@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import os
+from typing import Dict, Union
 from ._util import generate_ok_result, force_default
 from ._util import handle_single_argument, process_service_request
 from ._service_class import ServiceClass
@@ -59,7 +60,7 @@ class SensorDownload(ServiceClass):
     def get_combined_sensor_installers_by_query(self: object,
                                                 parameters: dict = None,
                                                 **kwargs
-                                                ) -> dict:
+                                                ) -> Dict[str, Union[int, dict]]:
         """Retrieve all metadata for installers from provided query.
 
         Keyword arguments:
@@ -164,7 +165,7 @@ class SensorDownload(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    def get_sensor_installer_ccid(self: object) -> dict:
+    def get_sensor_installer_ccid(self: object) -> Dict[str, Union[int, dict]]:
         """Retrieve the CID for the current oauth environment.
 
         This method does not accept arguments.
@@ -183,7 +184,7 @@ class SensorDownload(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_sensor_installers_by_query(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_sensor_installers_by_query(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve a list of SHA256 for installers based on the filter.
 
         Keyword arguments:

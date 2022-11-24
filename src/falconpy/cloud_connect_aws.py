@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import aws_registration_payload
 from ._service_class import ServiceClass
@@ -55,7 +56,7 @@ class CloudConnectAWS(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_aws_accounts(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_aws_accounts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for provisioned AWS Accounts by providing an FQL filter and paging details.
 
         Returns a set of AWS accounts which match the filter criteria.
@@ -86,7 +87,7 @@ class CloudConnectAWS(ServiceClass):
             params=parameters
             )
 
-    def get_aws_settings(self: object) -> dict:
+    def get_aws_settings(self: object) -> Dict[str, Union[int, dict]]:
         """Retrieve a set of Global Settings which are applicable to all provisioned AWS accounts.
 
         This method does not accept arguments or keywords.
@@ -105,7 +106,7 @@ class CloudConnectAWS(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_aws_accounts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_aws_accounts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve a set of AWS Accounts by specifying their IDs.
 
         Keyword arguments:
@@ -131,7 +132,7 @@ class CloudConnectAWS(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def provision_aws_accounts(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
+    def provision_aws_accounts(self: object, body: dict, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Provision AWS Accounts by specifying details about the accounts to provision.
 
         Keyword arguments:
@@ -182,7 +183,7 @@ class CloudConnectAWS(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_aws_accounts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_aws_accounts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete a set of AWS Accounts by specifying their IDs.
 
         Keyword arguments:
@@ -208,7 +209,7 @@ class CloudConnectAWS(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_aws_accounts(self: object, body: dict = None, **kwargs) -> dict:
+    def update_aws_accounts(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update AWS Accounts by specifying the ID of the account and details to update.
 
         Keyword arguments:
@@ -254,7 +255,7 @@ class CloudConnectAWS(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_or_update_aws_settings(self: object, body: dict = None, **kwargs) -> dict:
+    def create_or_update_aws_settings(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create or update Global Settings which are applicable to all provisioned AWS accounts.
 
         Keyword arguments:
@@ -295,7 +296,7 @@ class CloudConnectAWS(ServiceClass):
                                   body: dict = None,
                                   parameters: dict = None,
                                   **kwargs
-                                  ) -> dict:
+                                  ) -> Dict[str, Union[int, dict]]:
         """Perform an Access Verification check on the specified AWS Account IDs.
 
         Keyword arguments:
@@ -323,7 +324,7 @@ class CloudConnectAWS(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_aws_accounts_for_ids(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_aws_accounts_for_ids(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for provisioned AWS Accounts by providing an FQL filter and paging details.
 
         Returns a set of AWS account IDs which match the filter criteria.
