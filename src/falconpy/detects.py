@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import force_default, process_service_request
 from ._payload import generic_payload_list, update_detects_payload
 from ._payload import aggregate_payload
@@ -56,7 +57,7 @@ class Detects(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
-    def get_aggregate_detects(self: object, body: list = None, **kwargs) -> dict:
+    def get_aggregate_detects(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get detect aggregates as specified via json in request body.
 
         Keyword arguments:
@@ -127,7 +128,7 @@ class Detects(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_detects_by_ids(self: object, *args, body: dict = None, **kwargs) -> dict:
+    def update_detects_by_ids(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Modify the state, assignee, and visibility of detections.
 
         Keyword arguments:
@@ -193,7 +194,7 @@ class Detects(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_detect_summaries(self: object, *args, body: dict = None, **kwargs) -> dict:
+    def get_detect_summaries(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """View information about detections.
 
         Keyword arguments:
@@ -231,7 +232,7 @@ class Detects(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_detects(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_detects(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for detection IDs that match a given query.
 
         Keyword arguments:

@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import force_default, process_service_request
 from ._payload import (
     aggregate_payload, generic_payload_list, update_alerts_payload
@@ -57,7 +58,7 @@ class Alerts(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
-    def get_aggregate_alerts(self: object, body: list = None, **kwargs) -> dict:
+    def get_aggregate_alerts(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve aggregates for Alerts across all CIDs.
 
         Keyword arguments:
@@ -130,7 +131,7 @@ class Alerts(ServiceClass):
     # PatchEntitiesAlertsV1 has been **DECOMISSIONED**
 
     # @force_default(defaults=["body"], default_types=["dict"])
-    # def update_alerts(self: object, *args, body: dict = None, **kwargs) -> dict:
+    # def update_alerts(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
     #     """Perform actions on alerts identified by detection ID(s) in request.
 
     #     Keyword arguments:
@@ -203,7 +204,7 @@ class Alerts(ServiceClass):
     #         )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_alerts(self: object, *args, body: dict = None, **kwargs) -> dict:
+    def update_alerts(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Perform actions on alerts identified by detection ID(s) in request.
 
         Keyword arguments:
@@ -274,7 +275,7 @@ class Alerts(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_alerts(self: object, *args, body: dict = None, **kwargs) -> dict:
+    def get_alerts(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve all Alerts given their IDs.
 
         Keyword arguments:
@@ -312,7 +313,7 @@ class Alerts(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_alerts(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_alerts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for detection IDs that match a given query.
 
         Keyword arguments:

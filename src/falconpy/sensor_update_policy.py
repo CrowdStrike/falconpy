@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import generate_error_result, args_to_params, force_default
 from ._util import handle_single_argument, process_service_request
 from ._payload import generic_payload_list, sensor_policy_payload
@@ -56,7 +57,7 @@ class SensorUpdatePolicy(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def reveal_uninstall_token(self: object, body: dict = None, **kwargs) -> dict:
+    def reveal_uninstall_token(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Reveals an uninstall token for a specific device.
 
         To retrieve the bulk maintenance token pass the value
@@ -94,7 +95,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_builds(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_builds(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve available builds for use with Sensor Update Policies.
 
         Keyword arguments:
@@ -122,7 +123,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_kernels(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_kernels(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve kernel compatibility info for Sensor Update Builds.
 
         Keyword arguments:
@@ -152,7 +153,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for members of a Sensor Update Policy by providing a FQL filter and paging detail.
 
         Returns a set of host details which match the filter criteria.
@@ -186,7 +187,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for Sensor Update Policies by providing an FQL filter and paging details.
 
         Returns a set of Sensor Update Policies which match the filter criteria.
@@ -223,7 +224,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_policies_v2(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_combined_policies_v2(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for Sensor Update Policies by providing an FQL filter and paging details.
 
         Provides additional support for uninstall protection.
@@ -265,7 +266,7 @@ class SensorUpdatePolicy(ServiceClass):
                                 body: dict = None,
                                 parameters: dict = None,
                                 **kwargs
-                                ) -> dict:
+                                ) -> Dict[str, Union[int, dict]]:
         """Perform the specified action on the Sensor Update Policies specified in the request.
 
         Keyword arguments:
@@ -333,7 +334,7 @@ class SensorUpdatePolicy(ServiceClass):
         return returned
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def set_policies_precedence(self: object, body: dict = None, **kwargs) -> dict:
+    def set_policies_precedence(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Set the precedence of Sensor Update Policies based on the order of IDs in the request.
 
         The first ID specified will have the highest precedence and the last ID specified will have
@@ -374,7 +375,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve a set of Sensor Update Policies by specifying their IDs.
 
         Keyword arguments:
@@ -400,7 +401,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_policies(self: object, body: dict = None, **kwargs) -> dict:
+    def create_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create Sensor Update Policies by specifying details about the policy to create.
 
         Keyword arguments:
@@ -448,7 +449,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete a set of Sensor Update Policies by specifying their IDs.
 
         Keyword arguments:
@@ -475,7 +476,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policies(self: object, body: dict = None, **kwargs) -> dict:
+    def update_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update Sensor Update Policies by specifying the ID of the policy and details to update.
 
         Keyword arguments:
@@ -523,7 +524,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_policies_v2(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_policies_v2(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve a set of Sensor Update Policies by specifying their IDs.
 
         Provides additional support for uninstall protection.
@@ -552,7 +553,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_policies_v2(self: object, body: dict = None, **kwargs) -> dict:
+    def create_policies_v2(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create Sensor Update Policies by specifying details about the policy.
 
         Provides additional support for uninstall protection.
@@ -607,7 +608,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policies_v2(self: object, body: dict = None, **kwargs) -> dict:
+    def update_policies_v2(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update Sensor Update Policies by specifying the ID of the policy and update details.
 
         Provides additional support for uninstall protection.
@@ -660,7 +661,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_kernels(self: object, distinct_field: str = "id", parameters: dict = None, **kwargs) -> dict:
+    def query_kernels(self: object, distinct_field: str = "id", parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve kernel compatibility info for Sensor Update Builds.
 
         Keyword arguments:
@@ -693,7 +694,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for members of a Sensor Update Policy by providing a FQL filter and paging detail.
 
         Returns a set of Agent IDs which match the filter criteria.
@@ -727,7 +728,7 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policies(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for Sensor Update Policies by providing a FQL filter and paging details.
 
         Returns a set of Sensor Update Policy IDs which match the filter criteria.

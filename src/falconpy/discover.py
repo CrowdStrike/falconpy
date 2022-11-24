@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import process_service_request, force_default, handle_single_argument
 from ._service_class import ServiceClass
 from ._endpoint._discover import _discover_endpoints as Endpoints
@@ -54,7 +55,7 @@ class Discover(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_accounts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_accounts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get details on accounts by providing one or more IDs.
 
         Find account IDs with `query_accounts`.
@@ -82,7 +83,7 @@ class Discover(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_hosts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_hosts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get details on assets by providing one or more IDs.
 
         Find asset IDs with `query_hosts`.
@@ -110,7 +111,7 @@ class Discover(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_logins(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_logins(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get details on logins by providing one or more IDs.
 
         Find login IDs with `query_logins`.
@@ -138,7 +139,7 @@ class Discover(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_accounts(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_accounts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for accounts in your environment.
 
         Supports providing a FQL (Falcon Query Language) filter and paging details.
@@ -192,7 +193,7 @@ class Discover(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_hosts(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_hosts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for assets in your environment.
 
         Supports providing a FQL (Falcon Query Language) filter and paging details.
@@ -253,7 +254,7 @@ class Discover(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_logins(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_logins(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for logins in your environment.
 
         Supports providing a FQL (Falcon Query Language) filter and paging details.
