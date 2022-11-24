@@ -39,9 +39,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Optional, Union
-from ._falcon_auth import FalconAuth
+from ._falcon_interface import FalconInterface
 
-class UberInterface(FalconAuth):
+class UberInterface(FalconInterface):
     """Uber Class specific interface."""
 
     # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
@@ -71,7 +71,8 @@ class UberInterface(FalconAuth):
                  proxy: Optional[dict] = None,
                  timeout: Optional[Union[float, tuple]] = None,
                  user_agent: Optional[str] = None,
-                 renew_window: Optional[int] = 120
+                 renew_window: Optional[int] = 120,
+                 debug: Optional[bool] = False
                  ) -> "UberInterface":
         """Construct an instance of the UberInterface class."""
         super().__init__(base_url=base_url,
@@ -84,7 +85,8 @@ class UberInterface(FalconAuth):
                          client_id=client_id,
                          client_secret=client_secret,
                          member_cid=member_cid,
-                         renew_window=renew_window
+                         renew_window=renew_window,
+                         debug=debug
                          )
 
     # _  _ ____ ___ _  _ ____ ___  ____

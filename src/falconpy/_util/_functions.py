@@ -41,9 +41,11 @@ try:
     from simplejson import JSONDecodeError
 except ImportError:
     from json.decoder import JSONDecodeError
-from typing import Dict
+from typing import Dict, Any
 import requests
 import urllib3
+from copy import deepcopy
+from logging import Logger
 from urllib3.exceptions import InsecureRequestWarning
 from .._enum import BaseURL, ContainerBaseURL
 from .._constant import (
@@ -173,7 +175,12 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
         except AttributeError:
             user_agent = None
 
-    return perform_request(proxy=proxy, timeout=timeout, user_agent=user_agent, **kwargs)
+        try:
+            log_utility = caller.log
+        except AttributeError:
+            log_utility = None
+
+    return perform_request(proxy=proxy, timeout=timeout, user_agent=user_agent, log_util=log_utility, **kwargs)
 
 
 @force_default(defaults=["headers"], default_types=["dict"])
@@ -246,8 +253,11 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
                 headers["User-Agent"] = _USER_AGENT  # Force all requests to pass the User-Agent identifier
             headers["CrowdStrike-SDK"] = _USER_AGENT
             try:
-                response = requests.request(method.upper(), endpoint, params=kwargs.get("params", None),
-                                            headers=headers, json=kwargs.get("body", None), data=kwargs.get("data", None),
+                param_payload = kwargs.get("params", None)
+                body_payload = kwargs.get("body", None)
+                data_payload = kwargs.get("data", None)
+                response = requests.request(method.upper(), endpoint, params=param_payload,
+                                            headers=headers, json=body_payload, data=data_payload,
                                             files=kwargs.get("files", []), verify=kwargs.get("verify", True),
                                             proxies=kwargs.get("proxy", None), timeout=kwargs.get("timeout", None)
                                             )
@@ -264,6 +274,22 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
                     returned = ExpandedResult()(response.status_code, response.headers, content_return)
                 else:
                     returned = content_return
+                # Log our payloads if debugging is enabled
+                log_util: Logger = kwargs.get("log_util", None)
+                if log_util:
+                    log_util.debug("ENDPOINT: %s (%s)", endpoint, method)
+                    # Since we are done with these values, we can go ahead and sanitize them
+                    log_util.debug("HEADERS: %s", sanitize_dictionary(headers))
+                    log_util.debug("PARAMETERS: %s", sanitize_dictionary(param_payload))
+                    log_util.debug("BODY: %s", sanitize_dictionary(body_payload))
+                    log_util.debug("DATA: %s", sanitize_dictionary(data_payload))
+                    if returning_content_type.startswith("application/json"):
+                        # This dictionary hasn't been returned yet,
+                        # so we'll need to sanitize a copy of it instead.
+                        result_copy = deepcopy(content_return)
+                        log_util.debug("RESULT: %s", sanitize_dictionary(result_copy))
+                    else:
+                        log_util.debug("RESULT: binary response received from API")
 
             except JSONDecodeError:  # pragma: no cover
                 # No response content, but a successful request was made
@@ -392,6 +418,9 @@ def process_service_request(calling_object: object,  # pylint: disable=R0914 # (
     body_required -- List of required body payload parameters
     expand_result -- Request expanded results output
     """
+    # Log the operation ID if we have logging enabled.
+    if calling_object.log:
+        calling_object.log.debug("OPERATION: %s", operation_id)
     target_endpoint = [ep for ep in endpoints if operation_id == ep[0]][0]
     base_url = calling_object.base_url
     container = False
@@ -510,3 +539,18 @@ def autodiscover_region(provided_base_url: str, auth_result: dict):
             new_base_url = confirm_base_url(token_region.upper())
 
     return new_base_url
+
+def sanitize_dictionary(dirty: Any) -> dict:
+    """Strips confidential data from logged dictionaries."""
+    if isinstance(dirty, dict):
+        redacted = ["access_token", "client_id", "client_secret", "member_cid", "token"]
+        for redact in redacted:
+            if redact in dirty:
+                dirty[redact] = "REDACTED"
+            if "body" in dirty:
+                if redact in dirty["body"]:
+                    dirty["body"][redact] = "REDACTED"
+        if "Authorization" in dirty:
+            dirty["Authorization"] = "Bearer REDACTED"
+
+    return dirty

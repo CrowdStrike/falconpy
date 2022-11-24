@@ -36,8 +36,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Type, Any, Optional
+from logging import Logger
 from ._base_service_class import BaseServiceClass
-from .._auth_object import FalconAuth
+from .._auth_object import FalconInterface
 from ..oauth2 import OAuth2
 
 
@@ -91,8 +92,8 @@ class ServiceClass(BaseServiceClass):
     # provide a solution for maintaining instantiated class specific properties.
     #
     def __init__(self: "ServiceClass",
-                 auth_object: Optional[FalconAuth or OAuth2] = None,
-                 default_auth_object_class: Optional[Type[FalconAuth]] = OAuth2,
+                 auth_object: Optional[FalconInterface or OAuth2] = None,
+                 default_auth_object_class: Optional[Type[FalconInterface]] = OAuth2,
                  **kwargs
                  ):
         """Service Class base constructor.
@@ -104,7 +105,7 @@ class ServiceClass(BaseServiceClass):
         access_token : str
             Token string to use for all requests performed.
             Mutually exclusive to all other authentication elements.
-        auth_object : object (FalconAuth derivative)
+        auth_object : object (FalconInterface derivative)
             Properly authenticated instance of an authentication backend,
             such as the OAuth2 Service Class.
         base_url : str
@@ -162,6 +163,16 @@ class ServiceClass(BaseServiceClass):
         for item in ["proxy", "timeout", "user_agent"]:
             if kwargs.get(item, None) is not None:
                 setattr(self, f"_override_{item}", kwargs.get(item))
+
+        # Log the creation of this Service Class if debugging is enabled.
+        if self.log:
+            self.log.debug("Instance of the %s interface class created.", self.__class__.__name__)
+            self.log.debug("Base URL set to %s", self.base_url)
+            self.log.debug("SSL verification is set to %s", str(self.ssl_verify))
+            self.log.debug("Timeout set to %s seconds", str(self.timeout))
+            self.log.debug("Proxy dictionary: %s", str(self.proxy))
+            self.log.debug("User-Agent string set to: %s", self.user_agent)
+            self.log.debug("Token renewal window set to %s seconds", str(self.token_renew_window))
 
     # _  _ ____ ___ _  _ ____ ___  ____
     # |\/| |___  |  |__| |  | |  \ [__
