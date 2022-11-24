@@ -37,44 +37,52 @@ For more information, please refer to <https://unlicense.org>
 """
 import inspect
 from abc import ABC, abstractmethod
-from typing import Dict, Type, Any, Optional
-from .._auth_object import FalconAuth
+from logging import Logger, getLogger
+from typing import Dict, Type, Union, Optional
+from .._auth_object import FalconInterface
 
 
 class BaseServiceClass(ABC):
     """Base class for all Service Classes."""
-
-    #  _______ _     _ _______ _     _        _____  ______  _____ _______ _______ _______
-    #  |_____| |     |    |    |_____|       |     | |_____]   |   |______ |          |
-    #  |     | |_____|    |    |     |       |_____| |_____] __|   |______ |_____     |
-
-    # All Service Classes excluding OAuth2 contain a FalconAuth derivative
+    #  _______ _______ _______  ______ _____ ______  _     _ _______ _______ _______
+    #  |_____|    |       |    |_____/   |   |_____] |     |    |    |______ |______
+    #  |     |    |       |    |    \_ __|__ |_____] |_____|    |    |______ ______|
+    #
+    # These attributes are available within all derivatives of a Service Class.
+    # ____ _  _ ___ _  _    ____ ___   _ ____ ____ ___
+    # |__| |  |  |  |__|    |  | |__]  | |___ |     |
+    # |  | |__|  |  |  |    |__| |__] _| |___ |___  |
+    #
+    # All Service Classes excluding OAuth2 contain a FalconInterface derivative
     # as an attribute (auth_object). This object can be shared between
     # instances of Service Classes, and is leveraged for all authentication
     # processing. Unlike the OAuth2 and Uber Class, regular Service Classes
     # do not maintain authentication detail outside of the auth_object.
-    auth_object: FalconAuth = None
+    auth_object: FalconInterface = None
+    # Service Classes can enable logging individually, allowing developers to
+    # debug API activity for only that service collection within their code.
+    _log: Union[Logger, bool] = None
 
     #  _______  _____  __   _ _______ _______  ______ _     _ _______ _______  _____   ______
     #  |       |     | | \  | |______    |    |_____/ |     | |          |    |     | |_____/
     #  |_____  |_____| |  \_| ______|    |    |    \_ |_____| |_____     |    |_____| |    \_
 
     def __init__(self: "BaseServiceClass",
-                 auth_object: Optional[FalconAuth] = None,
-                 default_auth_object_class: Optional[Type[FalconAuth]] = FalconAuth,
+                 auth_object: Optional[FalconInterface] = None,
+                 default_auth_object_class: Optional[Type[FalconInterface]] = FalconInterface,
                  **kwargs
                  ):
         """Construct an instance of the base class."""
         # An auth_object is treated as an atomic collection.
         if auth_object:
-            if issubclass(type(auth_object), FalconAuth):
+            if issubclass(type(auth_object), FalconInterface):
                 self.auth_object = auth_object
             else:
                 # Easy Object Authentication
                 # Look for an auth_object as an attribute to the object they
-                # provided. This attribute must be a FalconAuth derivative.
+                # provided. This attribute must be a FalconInterface derivative.
                 if hasattr(auth_object, "auth_object"):
-                    if issubclass(type(auth_object.auth_object), FalconAuth):
+                    if issubclass(type(auth_object.auth_object), FalconInterface):
                         self.auth_object = auth_object.auth_object
         else:
             # Get all constructor arguments for the default authentication class.
@@ -86,14 +94,17 @@ class BaseServiceClass(ABC):
             # Create an instance of the default auth_object using the provided keywords.
             self.auth_object = default_auth_object_class(**auth_kwargs)
 
-    #  ______  _______ _______ _______ _     _        _______
-    #  |     \ |______ |______ |_____| |     | |         |
-    #  |_____/ |______ |       |     | |_____| |_____    |
+        if kwargs.get("debug", False) and not self.log:
+            # Allow a Service Class to enable logging individually.
+            self._log: Logger = getLogger(__name__.split(".")[0])
+        if self.log and kwargs.get("debug", None) == False:
+            # Allow a Service Class to disable logging individually.
+            self._log: bool = False
 
     #  _______ _______ _______ _     _  _____  ______  _______
     #  |  |  | |______    |    |_____| |     | |     \ |______
     #  |  |  | |______    |    |     | |_____| |_____/ ______|
-
+    #
     # The generic login and logout handlers must be individually defined by all
     # inheriting classes. The default functionality provided by the embedded
     # auth_object is a perfectly acceptable option for this, and is what is used
@@ -114,9 +125,9 @@ class BaseServiceClass(ABC):
     # typically maintained within the underlying auth_object, but can be overridden
     # to implement additional functionality as necessary.
 
-    #  _______ _     _ _______ _______ ______         _______
-    #  |  |  | |     |    |    |_____| |_____] |      |______
-    #  |  |  | |_____|    |    |     | |_____] |_____ |______
+    # _  _ _  _ ___ ____ ___  _    ____
+    # |\/| |  |  |  |__| |__] |    |___
+    # |  | |__|  |  |  | |__] |___ |___
     #
     # Changes made to these properties will effect the underlying auth_object
     # and all Service Classes that happen to be sharing the same auth_object.
@@ -180,11 +191,23 @@ class BaseServiceClass(ABC):
         """Allow the user_agent to be overriden."""
         self.auth_object.user_agent = value
 
-    #  _____ _______ _______ _     _ _______ _______ ______         _______
-    #    |   |  |  | |  |  | |     |    |    |_____| |_____] |      |______
-    #  __|__ |  |  | |  |  | |_____|    |    |     | |_____] |_____ |______
+    # _ _  _ _  _ _  _ ___ ____ ___  _    ____
+    # | |\/| |\/| |  |  |  |__| |__] |    |___
+    # | |  | |  | |__|  |  |  | |__] |___ |___
     #
     # These properties cannot be changed in the base implementation of a Service Class.
+    @property
+    def log(self) -> Logger:
+        if self._log:
+            returned = self._log
+        elif self._log == False:
+            # Logging is disabled for this Service Class.
+            returned = None
+        else:
+            returned = self.auth_object.log
+
+        return returned
+
     @property
     def headers(self) -> Dict[str, str]:
         """Provide a complete set of request headers."""

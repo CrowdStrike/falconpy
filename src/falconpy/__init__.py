@@ -22,7 +22,7 @@
 from ._version import _VERSION, _MAINTAINER, _AUTHOR, _AUTHOR_EMAIL
 from ._version import _CREDITS, _DESCRIPTION, _TITLE, _PROJECT_URL
 from ._version import _DOCS_URL, _KEYWORDS
-from ._auth_object import BaseFalconAuth, FalconAuth, UberInterface
+from ._auth_object import BaseFalconAuth, FalconInterface, UberInterface
 from ._service_class import BaseServiceClass, ServiceClass
 from ._util import confirm_base_region, confirm_base_url
 from ._enum import BaseURL, ContainerBaseURL, TokenFailReason
@@ -92,7 +92,7 @@ __docs_url__ = _DOCS_URL
 __keywords__ = _KEYWORDS
 __all__ = [
     "confirm_base_url", "confirm_base_region", "BaseURL", "ServiceClass", "Alerts",
-    "BaseServiceClass", "BaseFalconAuth", "FalconAuth", "UberInterface", "TokenFailReason",
+    "BaseServiceClass", "BaseFalconAuth", "FalconInterface", "UberInterface", "TokenFailReason",
     "APIHarness", "CloudConnectAWS", "CSPMRegistration", "CustomIOA", "D4CRegistration",
     "Detects", "DeviceControlPolicies", "Discover", "EventStreams", "CompleteDashboard",
     "FalconContainer", "FalconXSandbox", "FirewallManagement", "FirewallPolicies", "HostGroup",

@@ -95,7 +95,8 @@ class APIHarness(UberInterface):
                  proxy: Optional[Dict[str, str]] = None,
                  timeout: Optional[Union[float, tuple]] = None,
                  user_agent: Optional[str] = None,
-                 renew_window: Optional[int] = 120
+                 renew_window: Optional[int] = 120,
+                 debug: Optional[bool] = False
                  ) -> "APIHarness":
         """Uber class constructor.
 
@@ -138,7 +139,8 @@ class APIHarness(UberInterface):
                          client_id=client_id,
                          client_secret=client_secret,
                          member_cid=member_cid,
-                         renew_window=renew_window
+                         renew_window=renew_window,
+                         debug=debug
                          )
 
         # Complete list of available API operations.
@@ -241,10 +243,23 @@ class APIHarness(UberInterface):
                                                         stateful=False
                                                         )
                 else:
-                    # Process the API request normally.
-                    returned = perform_request(
-                        **uber_request_keywords(self, method, operation, target, kwargs, container)
+                    # Craft our keyword payload for perform_request.
+                    keyword_payload = uber_request_keywords(
+                        self, method, operation, target, kwargs, container
                         )
+                    # Log our payloads if enabled.
+                    if self.log:
+                        self.log.debug("OPERATION: %s", operation)
+                        # self.log.debug("(%s) %s", method, target)
+                        # self.log.debug("HEADERS: %s", keyword_payload["headers"])
+                        # self.log.debug("PARAMETERS: %s", keyword_payload["params"])
+                        # self.log.debug("BODY: %s", keyword_payload["body"])
+                        # self.log.debug("DATA: %s", keyword_payload["data"])
+                    # Process the API request normally.
+                    returned = perform_request(**keyword_payload)
+                    # # Log the API response if enabled.
+                    # if self.log:
+                    #     self.log.debug("RESULT: %s", str(returned))
             else:
                 # Bad HTTP method.
                 returned = generate_error_result(message="Invalid HTTP method specified.",
