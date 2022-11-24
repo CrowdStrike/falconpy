@@ -72,7 +72,8 @@ class UberInterface(FalconInterface):
                  timeout: Optional[Union[float, tuple]] = None,
                  user_agent: Optional[str] = None,
                  renew_window: Optional[int] = 120,
-                 debug: Optional[bool] = False
+                 debug: Optional[bool] = False,
+                 debug_record_count: Optional[int] = 100
                  ) -> "UberInterface":
         """Construct an instance of the UberInterface class."""
         super().__init__(base_url=base_url,
@@ -86,7 +87,8 @@ class UberInterface(FalconInterface):
                          client_secret=client_secret,
                          member_cid=member_cid,
                          renew_window=renew_window,
-                         debug=debug
+                         debug=debug,
+                         debug_record_count=debug_record_count
                          )
 
     # _  _ ____ ___ _  _ ____ ___  ____
