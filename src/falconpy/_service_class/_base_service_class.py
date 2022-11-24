@@ -39,6 +39,8 @@ import inspect
 from abc import ABC, abstractmethod
 from logging import Logger, getLogger
 from typing import Dict, Type, Union, Optional
+
+from .._constant import MAX_DEBUG_RECORDS
 from .._auth_object import FalconInterface
 
 
@@ -61,12 +63,15 @@ class BaseServiceClass(ABC):
     auth_object: FalconInterface = None
     # Service Classes can enable logging individually, allowing developers to
     # debug API activity for only that service collection within their code.
-    _log: Union[Logger, bool] = None
+    _log: Optional[Union[Logger, bool]] = None
+    # Service Classes can also configure a custom debug_record_count property, this
+    # allows developers to individually set maximum records logged per Service Class.
+    _debug_record_count: Optional[int] = None
 
     #  _______  _____  __   _ _______ _______  ______ _     _ _______ _______  _____   ______
     #  |       |     | | \  | |______    |    |_____/ |     | |          |    |     | |_____/
     #  |_____  |_____| |  \_| ______|    |    |    \_ |_____| |_____     |    |_____| |    \_
-
+    #
     def __init__(self: "BaseServiceClass",
                  auth_object: Optional[FalconInterface] = None,
                  default_auth_object_class: Optional[Type[FalconInterface]] = FalconInterface,
@@ -100,6 +105,9 @@ class BaseServiceClass(ABC):
         if self.log and kwargs.get("debug", None) == False:
             # Allow a Service Class to disable logging individually.
             self._log: bool = False
+        # Allow a Service Class to customize the number of debug records logged.
+        if kwargs.get("debug_record_count", None):
+            self._debug_record_count = kwargs.get("debug_record_count", MAX_DEBUG_RECORDS)
 
     #  _______ _______ _______ _     _  _____  ______  _______
     #  |  |  | |______    |    |_____| |     | |     \ |______
@@ -227,3 +235,13 @@ class BaseServiceClass(ABC):
     def refreshable(self) -> bool:
         """Flag indicating if the token for this auth_object is refreshable."""
         return self.auth_object.refreshable
+
+    @property
+    def debug_record_count(self) -> int:
+        """The maximum number of records to log to a debug log."""
+        if self.auth_object.debug_record_count != self._debug_record_count:
+            returned = self._debug_record_count
+        else:
+            returned = self.auth_object.debug_record_count
+
+        return returned

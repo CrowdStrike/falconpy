@@ -83,5 +83,6 @@ def uber_request_keywords(caller: object, meth: str, oper: str, tgt: str, kwa: d
         "user_agent": caller.user_agent,
         "expand_result": kwa.get("expand_result", False),
         "container": do_cont,
-        "log_util": caller.log
+        "log_util": caller.log,
+        "debug_record_count": caller.debug_record_count
     }
