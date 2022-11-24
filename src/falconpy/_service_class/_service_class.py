@@ -166,13 +166,13 @@ class ServiceClass(BaseServiceClass):
 
         # Log the creation of this Service Class if debugging is enabled.
         if self.log:
-            self.log.debug("Instance of the %s interface class created.", self.__class__.__name__)
-            self.log.debug("Base URL set to %s", self.base_url)
-            self.log.debug("SSL verification is set to %s", str(self.ssl_verify))
-            self.log.debug("Timeout set to %s seconds", str(self.timeout))
-            self.log.debug("Proxy dictionary: %s", str(self.proxy))
-            self.log.debug("User-Agent string set to: %s", self.user_agent)
-            self.log.debug("Token renewal window set to %s seconds", str(self.token_renew_window))
+            self.log.debug("CREATED: %s interface class", self.__class__.__name__)
+            self.log.debug("CONFIG: Base URL set to %s", self.base_url)
+            self.log.debug("CONFIG: SSL verification is set to %s", str(self.ssl_verify))
+            self.log.debug("CONFIG: Timeout set to %s", str(self.timeout))
+            self.log.debug("CONFIG: Proxy dictionary: %s", str(self.proxy))
+            self.log.debug("CONFIG: User-Agent string set to: %s", self.user_agent)
+            self.log.debug("CONFIG: Token renewal window set to %s seconds", str(self.token_renew_window))
 
     # _  _ ____ ___ _  _ ____ ___  ____
     # |\/| |___  |  |__| |  | |  \ [__
