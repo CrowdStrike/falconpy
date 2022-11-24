@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import process_service_request, force_default
 from ._payload import image_payload
 from ._service_class import ServiceClass
@@ -54,7 +55,7 @@ class FalconContainer(ServiceClass):
     - a valid token provided by the authentication service class (oauth2.py)
     """
 
-    def get_credentials(self: object) -> dict:
+    def get_credentials(self: object) -> Dict[str, Union[int, dict]]:
         """Retrieve the registry credentials.
 
         HTTP Method: GET
@@ -83,7 +84,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def read_image_vulnerabilities(self: object, body: dict = None, **kwargs) -> dict:
+    def read_image_vulnerabilities(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve an assessment report for an image by specifying repository and tag.
 
         HTTP Method: POST
@@ -137,7 +138,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_assessment(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_assessment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve an assessment report for an image by specifying repository and tag.
 
         HTTP Method: GET
@@ -170,7 +171,7 @@ class FalconContainer(ServiceClass):
             params=parameters
             )
 
-    def delete_image_details(self: object, *args, image_id: str = None) -> dict:
+    def delete_image_details(self: object, *args, image_id: str = None) -> Dict[str, Union[int, dict]]:
         """Delete image details from the CrowdStrike registry.
 
         HTTP Method: DELETE
@@ -205,7 +206,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def image_matches_policy(self: object, parameters: dict = None, **kwargs) -> dict:
+    def image_matches_policy(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Check if an image matches a policy by specifying repository and tag.
 
         HTTP Method: GET

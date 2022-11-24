@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import process_service_request, force_default
 from ._payload import aggregate_payload
 from ._service_class import ServiceClass
@@ -55,7 +56,7 @@ class CompleteDashboard(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_allow_list(self: object, body: list = None, **kwargs) -> dict:
+    def aggregate_allow_list(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve aggregate allowlist ticket values based on the matched filter.
 
         Keyword arguments:
@@ -131,7 +132,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_block_list(self: object, body: list = None, **kwargs) -> dict:
+    def aggregate_block_list(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve aggregate blocklist ticket values based on the matched filter.
 
         Keyword arguments:
@@ -207,7 +208,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_detections(self: object, body: list = None, **kwargs) -> dict:
+    def aggregate_detections(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve aggregate detection values based on the matched filter.
 
         Keyword arguments:
@@ -283,7 +284,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_device_count_collection(self: object, body: list = None, **kwargs) -> dict:
+    def aggregate_device_count_collection(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve aggregate host/devices count based on the matched filter.
 
         Keyword arguments:
@@ -361,7 +362,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_escalations(self: object, body: list = None, **kwargs) -> dict:
+    def aggregate_escalations(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve aggregate escalation ticket values based on the matched filter.
 
         Keyword arguments:
@@ -437,7 +438,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_fc_incidents(self: object, body: list = None, **kwargs) -> dict:
+    def aggregate_fc_incidents(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve aggregate incident values based on the matched filter.
 
         Keyword arguments:
@@ -513,7 +514,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_remediations(self: object, body: list = None, **kwargs) -> dict:
+    def aggregate_remediations(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve aggregate remediation ticket values based on the matched filter.
 
         Keyword arguments:
@@ -589,7 +590,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_allow_list_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_allow_list_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve allowlist tickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
@@ -619,7 +620,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_block_list_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_block_list_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve block listtickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
@@ -649,7 +650,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_detection_ids_by_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_detection_ids_by_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve DetectionsIds that match the provided FQL filter criteria with scrolling enabled.
 
         Keyword arguments:
@@ -680,7 +681,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_device_count_collection_queries_by_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_device_count_collection_queries_by_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve device count collection Ids that match the provided FQL filter, criteria with scrolling enabled.
 
         Keyword arguments:
@@ -711,7 +712,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_escalations_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_escalations_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve escalation tickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
@@ -742,7 +743,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_incident_ids_by_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_incident_ids_by_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve incidents that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
@@ -773,7 +774,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_remediations_filter(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_remediations_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve remediation tickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:

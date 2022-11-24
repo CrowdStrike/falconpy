@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import process_service_request, force_default
 from ._service_class import ServiceClass
 from ._endpoint._mobile_enrollment import _mobile_enrollment_endpoints as Endpoints
@@ -56,7 +57,7 @@ class MobileEnrollment(ServiceClass):
     """
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def device_enroll(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
+    def device_enroll(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Trigger on-boarding process for a mobile device.
 
         HTTP Method: POST

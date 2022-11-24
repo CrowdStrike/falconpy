@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import json
+from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import generic_payload_list, falconx_payload
 from ._service_class import ServiceClass
@@ -90,7 +91,7 @@ class FalconXSandbox(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_summary_reports(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_summary_reports(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get a short summary version of a sandbox report.
 
         Keyword arguments:
@@ -116,7 +117,7 @@ class FalconXSandbox(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_submissions(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_submissions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Check the status of a sandbox analysis.
 
         Time required for analysis varies but is usually less than 15 minutes.
@@ -146,7 +147,7 @@ class FalconXSandbox(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def submit(self: object, body: dict = None, **kwargs) -> dict:
+    def submit(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Submit an uploaded file or a URL for sandbox analysis.
 
         The sample file must have been previously uploaded through `upload_sample`.
@@ -232,7 +233,7 @@ class FalconXSandbox(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_reports(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_reports(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Find sandbox reports by providing an FQL filter and paging details.
 
         Returns a set of report IDs that match your criteria.
@@ -264,7 +265,7 @@ class FalconXSandbox(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_submissions(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_submissions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Find submission IDs for uploaded files by providing an FQL filter and paging details.
 
         Returns a set of submission IDs that match your criteria.
@@ -301,7 +302,7 @@ class FalconXSandbox(ServiceClass):
                       body: dict = None,
                       parameters: dict = None,
                       **kwargs
-                      ) -> dict:
+                      ) -> Dict[str, Union[int, dict]]:
         """Upload a file for sandbox analysis.
 
         After uploading, use `submit` to start analyzing the file.
@@ -400,7 +401,7 @@ class FalconXSandbox(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_report(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_report(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete a report based on the report ID.
 
         Operation can be checked for success by polling for the report ID on the get_summary_reports endpoint.
@@ -463,7 +464,7 @@ class FalconXSandbox(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_sample(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_sample(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Remove a sample, including file, meta and submissions from the collection.
 
         Keyword arguments:
@@ -491,7 +492,7 @@ class FalconXSandbox(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def query_sample(self: object, body: dict = None, **kwargs) -> dict:
+    def query_sample(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve a list with sha256 of samples that exist and customer has rights to access.
 
         Maximum number of accepted items is 200.

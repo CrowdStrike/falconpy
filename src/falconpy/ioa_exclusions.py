@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import force_default, handle_single_argument, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._ioa_exclusions import _ioa_exclusions_endpoints as Endpoints
@@ -55,7 +56,7 @@ class IOAExclusions(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get a set of IOA Exclusions by specifying their IDs.
 
         Keyword arguments:
@@ -81,7 +82,7 @@ class IOAExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_exclusions(self: object, body: dict = None, **kwargs) -> dict:
+    def create_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create the IOA exclusions.
 
         Keyword arguments:
@@ -129,7 +130,7 @@ class IOAExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
+    def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:  # pylint: disable=C0103
         """Delete the IOA Exclusions by ID.
 
         Keyword arguments:
@@ -156,7 +157,7 @@ class IOAExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_exclusions(self: object, body: dict = None, **kwargs) -> dict:
+    def update_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update the IOA Exclusions.
 
         Keyword arguments:
@@ -209,7 +210,7 @@ class IOAExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_exclusions(self: object, parameters: dict = None, **kwargs) -> dict:  # pylint: disable=C0103
+    def query_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:  # pylint: disable=C0103
         """Search for IOA Exclusions.
 
         Keyword arguments:

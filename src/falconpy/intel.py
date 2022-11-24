@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import generic_payload_list
 from ._service_class import ServiceClass
@@ -55,7 +56,7 @@ class Intel(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_actor_entities(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_actor_entities(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get info about actors that match provided FQL filters.
 
         Keyword arguments:
@@ -107,7 +108,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_indicator_entities(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_indicator_entities(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get info about indicators that match provided FQL filters.
 
         Keyword arguments:
@@ -154,7 +155,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_report_entities(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_report_entities(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get info about reports that match provided FQL filters.
 
         Keyword arguments:
@@ -206,7 +207,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_actor_entities(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_actor_entities(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve specific actors using their actor IDs.
 
         Keyword arguments:
@@ -235,7 +236,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_indicator_entities(self: object, *args, body: dict = None, **kwargs) -> dict:
+    def get_indicator_entities(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve specific indicators using their indicator IDs.
 
         Keyword arguments:
@@ -299,7 +300,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_report_entities(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_report_entities(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve specific reports using their report IDs.
 
         Keyword arguments:
@@ -386,7 +387,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rule_entities(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_rule_entities(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve details for rule sets for the specified ids.
 
         Keyword arguments:
@@ -412,7 +413,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_actor_ids(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_actor_ids(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get actor IDs that match provided FQL filters.
 
         Keyword arguments:
@@ -461,7 +462,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_indicator_ids(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_indicator_ids(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get indicators IDs that match provided FQL filters.
 
         Keyword arguments:
@@ -505,7 +506,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_report_ids(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_report_ids(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get report IDs that match provided FQL filters.
 
         Keyword arguments:
@@ -554,7 +555,7 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_rule_ids(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_rule_ids(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for rule IDs that match provided filter criteria.
 
         Keyword arguments:

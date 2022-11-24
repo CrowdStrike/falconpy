@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 from ._util import force_default, handle_single_argument, process_service_request
 from ._payload import aggregate_payload
 from ._service_class import ServiceClass
@@ -59,7 +60,7 @@ class OverwatchDashboard(ServiceClass):
                                             *args,
                                             parameters: dict = None,
                                             **kwargs
-                                            ) -> dict:
+                                            ) -> Dict[str, Union[int, dict]]:
         """Get the total number of detections pushed across all customers.
 
         Keyword arguments:
@@ -85,7 +86,7 @@ class OverwatchDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregates_events_collections(self: object, body: list = None, **kwargs) -> dict:
+    def aggregates_events_collections(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get OverWatch detection event collection info by providing an aggregate query.
 
         Keyword arguments:
@@ -161,7 +162,7 @@ class OverwatchDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregates_events(self: object, body: list = None, **kwargs) -> dict:
+    def aggregates_events(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get aggregate OverWatch detection event info by providing an aggregate query.
 
         Keyword arguments:
@@ -241,7 +242,7 @@ class OverwatchDashboard(ServiceClass):
                                            *args,
                                            parameters: dict = None,
                                            **kwargs
-                                           ) -> dict:
+                                           ) -> Dict[str, Union[int, dict]]:
         """Get the total number of incidents pushed across all customers.
 
         Keyword arguments:
@@ -271,7 +272,7 @@ class OverwatchDashboard(ServiceClass):
                                         *args,
                                         parameters: dict = None,
                                         **kwargs
-                                        ) -> dict:
+                                        ) -> Dict[str, Union[int, dict]]:
         """Get the total number of incidents pushed across all customers.
 
         Keyword arguments:
