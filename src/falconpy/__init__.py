@@ -25,6 +25,7 @@ from ._version import _DOCS_URL, _KEYWORDS
 from ._auth_object import BaseFalconAuth, FalconInterface, UberInterface
 from ._service_class import BaseServiceClass, ServiceClass
 from ._util import confirm_base_region, confirm_base_url
+from ._constant import MAX_DEBUG_RECORDS
 from ._enum import BaseURL, ContainerBaseURL, TokenFailReason
 from .alerts import Alerts
 from .api_complete import APIHarness
@@ -99,7 +100,7 @@ __all__ = [
     "OverwatchDashboard", "PreventionPolicy", "Quarantine", "QuickScan", "RealTimeResponseAdmin",
     "RealTimeResponse", "Recon", "ReportExecutions", "ResponsePolicies", "SampleUploads",
     "ScheduledReports", "SensorDownload", "SensorUpdatePolicy", "SensorVisibilityExclusions",
-    "SpotlightVulnerabilities", "SpotlightEvaluationLogic", "UserManagement",
+    "SpotlightVulnerabilities", "SpotlightEvaluationLogic", "UserManagement", "MAX_DEBUG_RECORDS",
     "ZeroTrustAssessment", "PreventionPolicies", "SensorUpdatePolicies", "MessageCenter",
     "FileVantage", "MobileEnrollment", "ContainerBaseURL", "TailoredIntelligence"
 ]
