@@ -37,7 +37,8 @@ For more information, please refer to <https://unlicense.org>
 """
 PREFER_NONETYPE = [
     "report_executions_download_get", "report_executions_download.get",
-    "RTR_ListFiles", "RTR_ListFilesV2", "RTR_GetExtractedFileContents"
+    "RTR_ListFiles", "RTR_ListFilesV2", "RTR_GetExtractedFileContents",
+    "RTR_DeleteSession"
 ]
 PREFER_IDS_IN_BODY = [
     "GetDeviceDetails", "PostDeviceDetailsV2"
