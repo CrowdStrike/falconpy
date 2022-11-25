@@ -1,3 +1,10 @@
+# Version 1.2.5
+## Issues resolved
++ Fixed: Invalid `body` payload when leveraging the Uber Class to call the `RTR_DeleteSession` operation. Closes #839.
+    - `_uber_default_preference.py`
+
+---
+
 # Version 1.2.4
 ## Added features and functionality
 + Added: New __TailoredIntelligence__ Service Class.
