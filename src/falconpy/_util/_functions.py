@@ -278,14 +278,31 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
                 # Force binary when content-type is not provided
                 returning_content_type = response.headers.get('content-type', "Binary")
                 if returning_content_type.startswith("application/json"):  # Issue 708
-                    content_return = Result()(response.status_code, response.headers, response.json())
+                    #content_return = Result()(response.status_code, response.headers, response.json())
+                    json_resp: dict = response.json()
+                    if "resources" in json_resp:
+                        if log_util:
+                            log_util.debug("Doing it the right way")
+                        content_return = Result()(status_code=response.status_code,
+                                                headers=response.headers,
+                                                body=dict(json_resp),
+                                                #log=log_util
+                                                )
+                    else:
+                        # Shortcut the data setup if we don't have a resources array for now
+                        if log_util:
+                            log_util.debug("Doing it the WRONG WAY")
+                        content_return = Result()(response.status_code, response.headers, json_resp)
                 elif kwargs.get("container", False):
                     content_return = Result()(response.status_code, response.headers, response.json())
+                    #content_return = Result()(status_code=response.status_code, headers=response.headers, body=response.json())
                 else:
+                    # Binary response
                     content_return = response.content
                 # Expanded results allow for status code and header checks on binary returns
                 if expand_result:
                     returned = ExpandedResult()(response.status_code, response.headers, content_return)
+                    #returned = Result(full=content_return).tupled
                 else:
                     returned = content_return
                 # Log our payloads if debugging is enabled
@@ -305,7 +322,7 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
                                     rmax,
                                     log_util
                                     )
-            except JSONDecodeError:  # pragma: no cover
+            except JSONDecodeError:
                 # No response content, but a successful request was made
                 returned = generate_ok_result(
                     message="No content returned",

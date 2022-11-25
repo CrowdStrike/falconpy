@@ -27,6 +27,7 @@ from ._service_class import BaseServiceClass, ServiceClass
 from ._util import confirm_base_region, confirm_base_url
 from ._constant import MAX_DEBUG_RECORDS
 from ._enum import BaseURL, ContainerBaseURL, TokenFailReason
+from ._result import Result
 from .alerts import Alerts
 from .api_complete import APIHarness
 from .cloud_connect_aws import CloudConnectAWS
@@ -104,7 +105,8 @@ __all__ = [
     "ScheduledReports", "SensorDownload", "SensorUpdatePolicy", "SensorVisibilityExclusions",
     "SpotlightVulnerabilities", "SpotlightEvaluationLogic", "UserManagement", "MAX_DEBUG_RECORDS",
     "ZeroTrustAssessment", "PreventionPolicies", "SensorUpdatePolicies", "MessageCenter",
-    "FileVantage", "MobileEnrollment", "ContainerBaseURL", "TailoredIntelligence", "ODS", "FDR"
+    "FileVantage", "MobileEnrollment", "ContainerBaseURL", "TailoredIntelligence", "ODS", "FDR",
+    "Result"
 ]
 """
 This is free and unencumbered software released into the public domain.
