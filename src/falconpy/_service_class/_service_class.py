@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Type, Any, Optional
-from logging import Logger
+#from logging import Logger
 from ._base_service_class import BaseServiceClass
 from .._auth_object import FalconInterface
 from ..oauth2 import OAuth2
