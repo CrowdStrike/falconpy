@@ -26,6 +26,9 @@ from falconpy import OAuth2
 from falconpy import Hosts
 
 shared_token = None
+_DEBUG = os.getenv("FALCONPY_UNIT_TEST_DEBUG", None)
+if _DEBUG:
+    _DEBUG = True
 
 # The TestAuthorization class tests authentication and deauthentication
 # for both the Uber and Service classes.
@@ -39,7 +42,7 @@ class TestAuthorization():
                 "client_id": self.config["falcon_client_id"],
                 "client_secret": self.config["falcon_client_secret"]
             },
-            base_url = self.config["falcon_base_url"])
+            base_url = self.config["falcon_base_url"], debug=_DEBUG)
         try:
             global shared_token
             if not shared_token:
@@ -68,7 +71,7 @@ class TestAuthorization():
                     "client_id": self.config["falcon_client_id"],
                     "client_secret": self.config["falcon_client_secret"]
                 },
-                base_url = self.config["falcon_base_url"])
+                base_url = self.config["falcon_base_url"], debug=_DEBUG)
             try:
                 self.token = self.authorization.token()['body']['access_token']
                 os.environ["FALCONPY_DEBUG_TOKEN"] = self.token
@@ -110,7 +113,7 @@ class TestAuthorization():
             self.falcon = APIHarness(creds={
                     "client_id": self.config["falcon_client_id"],
                     "client_secret": self.config["falcon_client_secret"],
-                }, base_url=self.config["falcon_base_url"], renew_window=300
+                }, base_url=self.config["falcon_base_url"], renew_window=300, debug=_DEBUG
             )
             self.falcon.authenticate()
             if self.falcon.authenticated:
@@ -128,7 +131,7 @@ class TestAuthorization():
         if status:
             self.falcon = APIHarness(client_id=self.config["falcon_client_id"],
                                      client_secret=self.config["falcon_client_secret"],
-                                     member_cid="1234567890ABCDEFG"
+                                     member_cid="1234567890ABCDEFG", debug=_DEBUG
                                      )
             self.falcon.authenticate()
             if not self.falcon.authenticated:
@@ -148,7 +151,7 @@ class TestAuthorization():
                 'client_id': self.config["falcon_client_id"],
                 'client_secret': self.config["falcon_client_secret"]
                 },
-                base_url=self.config["falcon_base_url"]
+                base_url=self.config["falcon_base_url"], debug=_DEBUG
             )
 
             try:
@@ -174,7 +177,7 @@ class TestAuthorization():
             self.authorization = Hosts(creds={
                 'client_id': self.config["falcon_client_id"],
                 'client_secret': self.config["falcon_client_secret"]
-            }, ssl_verify=False, base_url=self.config["falcon_base_url"])
+            }, ssl_verify=False, base_url=self.config["falcon_base_url"], debug=_DEBUG)
 
             check = self.authorization.auth_object.token()
             if check["status_code"] == 429:
@@ -193,7 +196,7 @@ class TestAuthorization():
         if status:
             authorization = OAuth2(client_id=self.config["falcon_client_id"],
                                    client_secret=self.config["falcon_client_secret"],
-                                   member_cid='1234567890ABCDEFG'
+                                   member_cid='1234567890ABCDEFG', debug=_DEBUG
                                    )
             try:
                 req = authorization.token()
@@ -208,7 +211,7 @@ class TestAuthorization():
         self.authorization = Hosts(client_id="BadClientID",
                                    client_secret="BadClientSecret",
                                    member_cid="123456789ABCDEFG",
-                                   base_url = "us3"
+                                   base_url = "us3", debug=_DEBUG
                                    )
         # self.authorization.auth_object.base_url = "nowhere"
         try:
@@ -277,7 +280,7 @@ class TestAuthorization():
         test_falcon = OAuth2(
             client_id=self.config["falcon_client_id"],
             client_secret=self.config["falcon_client_secret"],
-            base_url="us1"
+            base_url="us1", debug=_DEBUG
         )
         assert bool(
             test_falcon.token()["status_code"] == 201
@@ -288,7 +291,7 @@ class TestAuthorization():
         test_falcon = OAuth2(
             client_id=self.config["falcon_client_id"],
             client_secret=self.config["falcon_client_secret"],
-            base_url="nowhere"
+            base_url="nowhere", debug=_DEBUG
         )
         assert bool(
             test_falcon.token()["status_code"] != 201
