@@ -38,9 +38,9 @@ For more information, please refer to <https://unlicense.org>
 # pylint: disable=R0902,R0913
 from typing import Dict, Optional, Union
 from ._auth_object import FalconInterface
+from ._error import CannotRevokeToken
 from ._util import (
     confirm_base_url,
-    generate_error_result,
     generate_ok_result,
     )
 
@@ -77,7 +77,9 @@ class OAuth2(FalconInterface):
                  user_agent: Optional[str] = None,
                  member_cid: Optional[str] = None,
                  renew_window: Optional[int] = 120,
-                 debug: Optional[bool] = False
+                 debug: Optional[bool] = False,
+                 debug_record_count: Optional[int] = None,
+                 sanitize_log: Optional[bool] = None
                  ) -> "OAuth2":
         """Construct an instance of the class.
 
@@ -129,7 +131,9 @@ class OAuth2(FalconInterface):
                          client_secret=client_secret,
                          member_cid=member_cid,
                          renew_window=renew_window,
-                         debug=debug
+                         debug=debug,
+                         debug_record_count=debug_record_count,
+                         sanitize_log=sanitize_log
                          )
 
     def logout(self) -> Dict[str, Union[int, dict]]:
@@ -148,13 +152,18 @@ class OAuth2(FalconInterface):
         dict
             Dictionary object containing API response.
         """
-        returned = super().logout()
-        if returned["status_code"] == 200:
-            returned = generate_ok_result(message="Current token successfully revoked.",
-                                          headers=returned["headers"]
-                                          )
-        else:
-            returned = generate_error_result("Unable to revoke current token.", 500)
+        try:
+            returned: dict = super().logout()
+            if returned["status_code"] == 200:
+                returned = generate_ok_result(message="Current token successfully revoked.",
+                                              headers=returned["headers"]
+                                              )
+            else:
+                raise CannotRevokeToken(returned["status_code"], returned["body"]["errors"][0]["message"], returned["headers"])
+        except CannotRevokeToken as unable_to_revoke:
+            if self.log:
+                self.log.warning("Token revocation operation failed.")
+            returned = unable_to_revoke.result
 
         return returned
 

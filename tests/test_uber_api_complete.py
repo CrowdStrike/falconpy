@@ -338,3 +338,27 @@ class TestUber:
     @pytest.mark.filterwarnings("ignore:Unverified HTTPS request is being made.*")
     def test_DisableSSLVerify(self):
         assert self.uberCCAWS_DisableSSLVerify() is True
+
+    def test_uber_deprecated_properties(self):
+        assert bool(falcon.valid_cred_format()
+                    and falcon.headers()
+                    and falcon.token
+                    )
+
+    def test_uber_properties(self):
+        # Force a new object so we can flip the debug flag
+        temp_falcon = APIHarness(client_id=config["falcon_client_id"],
+                                 client_secret=config["falcon_client_secret"],
+                                 base_url=config["falcon_base_url"],
+                                 debug=True
+                                 )
+
+        assert bool(temp_falcon.debug)
+
+    def test_uber_revoke_failure(self):
+        assert bool(falcon.command("oauth2RevokeToken")["status_code"] == 400)
+
+    def test_uber_revoke_success(self):
+        assert(bool(
+            falcon.command("oauth2RevokeToken", token_value=falcon.token_value)["status_code"]==200
+            ))

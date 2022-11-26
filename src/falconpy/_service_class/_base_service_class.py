@@ -46,11 +46,23 @@ from .._auth_object import FalconInterface
 
 class BaseServiceClass(ABC):
     """Base class for all Service Classes."""
+
     #  _______ _______ _______  ______ _____ ______  _     _ _______ _______ _______
     #  |_____|    |       |    |_____/   |   |_____] |     |    |    |______ |______
     #  |     |    |       |    |    \_ __|__ |_____] |_____|    |    |______ ______|
     #
     # These attributes are available within all derivatives of a Service Class.
+    #
+    # Service Classes can enable logging individually, allowing developers to
+    # debug API activity for only that service collection within their code.
+    _log: Optional[Union[Logger, bool]] = None
+    # Service Classes can also configure a custom debug_record_count property, this
+    # allows developers to individually set maximum records logged per Service Class.
+    _debug_record_count: Optional[int] = None
+    # Should logs be sanitized - redacts client_id, client_secret, member_cid, and tokens.
+    # Performance impacts when enabled, but defaults to true to prevent unintentional
+    # sensitive data disclosure. Can be disabled with the sanitize_log keyword.
+    _sanitize: bool = None
     # ____ _  _ ___ _  _    ____ ___   _ ____ ____ ___
     # |__| |  |  |  |__|    |  | |__]  | |___ |     |
     # |  | |__|  |  |  |    |__| |__] _| |___ |___  |
@@ -61,12 +73,6 @@ class BaseServiceClass(ABC):
     # processing. Unlike the OAuth2 and Uber Class, regular Service Classes
     # do not maintain authentication detail outside of the auth_object.
     auth_object: FalconInterface = None
-    # Service Classes can enable logging individually, allowing developers to
-    # debug API activity for only that service collection within their code.
-    _log: Optional[Union[Logger, bool]] = None
-    # Service Classes can also configure a custom debug_record_count property, this
-    # allows developers to individually set maximum records logged per Service Class.
-    _debug_record_count: Optional[int] = None
 
     #  _______  _____  __   _ _______ _______  ______ _     _ _______ _______  _____   ______
     #  |       |     | | \  | |______    |    |_____/ |     | |          |    |     | |_____/
@@ -99,15 +105,19 @@ class BaseServiceClass(ABC):
             # Create an instance of the default auth_object using the provided keywords.
             self.auth_object = default_auth_object_class(**auth_kwargs)
 
-        if kwargs.get("debug", False) and not self.log:
+        if kwargs.get("debug", False):
             # Allow a Service Class to enable logging individually.
-            self._log: Logger = getLogger(__name__.split(".")[0])
-        if self.log and kwargs.get("debug", None) == False:
+            self._log: Logger = getLogger(__name__.split(".", maxsplit=1)[0])
+        if kwargs.get("debug", None) is False:
             # Allow a Service Class to disable logging individually.
             self._log: bool = False
         # Allow a Service Class to customize the number of debug records logged.
         if kwargs.get("debug_record_count", None):
             self._debug_record_count = kwargs.get("debug_record_count", MAX_DEBUG_RECORDS)
+        # Set the sanitization flag if they provided it
+        _sanitize_log = kwargs.get("sanitize_log", None)
+        if isinstance(_sanitize_log, bool):
+            self._sanitize = _sanitize_log
 
     #  _______ _______ _______ _     _  _____  ______  _______
     #  |  |  | |______    |    |_____| |     | |     \ |______
@@ -119,11 +129,11 @@ class BaseServiceClass(ABC):
     # by the standard ServiceClass object.
     @abstractmethod
     def login(self) -> dict or bool:
-        """Generic login handler interface."""
+        """Login handler abstract."""
 
     @abstractmethod
     def logout(self) -> dict or bool:
-        """Generic logout handler interface."""
+        """Logout handler abstract."""
 
     #   _____   ______  _____   _____  _______  ______ _______ _____ _______ _______
     #  |_____] |_____/ |     | |_____] |______ |_____/    |      |   |______ |______
@@ -159,46 +169,6 @@ class BaseServiceClass(ABC):
         """Allow code to flip the underlying SSL verify flag via the this class."""
         self.auth_object.ssl_verify = value
 
-    @property
-    def proxy(self) -> dict:
-        """Provide the proxy from the auth_object."""
-        return self.auth_object.proxy
-
-    @proxy.setter
-    def proxy(self, value: dict):
-        """Allow the proxy to be overriden."""
-        self.auth_object.proxy = value
-
-    @property
-    def timeout(self) -> int:
-        """Provide the timeout from the auth_object."""
-        return self.auth_object.timeout
-
-    @timeout.setter
-    def timeout(self, value: int):
-        """Allow the timeout to be overriden."""
-        self.auth_object.timeout = value
-
-    @property
-    def token_renew_window(self) -> int:
-        """Provide the token_renew_window from the auth_object."""
-        return self.auth_object.token_renew_window
-
-    @token_renew_window.setter
-    def token_renew_window(self, value: int):
-        """Allow the token_renew_window to be changed."""
-        self.auth_object.token_renew_window = value
-
-    @property
-    def user_agent(self) -> int:
-        """Provide the user_agent from the auth_object."""
-        return self.auth_object.user_agent
-
-    @user_agent.setter
-    def user_agent(self, value: int):
-        """Allow the user_agent to be overriden."""
-        self.auth_object.user_agent = value
-
     # _ _  _ _  _ _  _ ___ ____ ___  _    ____
     # | |\/| |\/| |  |  |  |__| |__] |    |___
     # | |  | |  | |__|  |  |  | |__] |___ |___
@@ -206,17 +176,21 @@ class BaseServiceClass(ABC):
     # These properties cannot be changed in the base implementation of a Service Class.
     @property
     def log(self) -> Logger:
+        """Property to expose the underlying logger of a Service Class (if enabled)."""
+        _returned = None
         if self._log:
-            returned = self._log
-        elif self._log == False:
-            # Logging is disabled for this Service Class.
-            returned = None
-        else:
-            returned = self.auth_object.log
+            # Logging is unique for this Service Class.
+            _returned = self._log
+        elif self._log is False:
+            # Logging is forcibly disabled for this Service Class.
+            _returned = None
+        elif self.auth_object:
+            _returned = self.auth_object.log
 
-        return returned
+        return _returned
 
     @property
+    # Extended via the inheriting ServiceClass class.
     def headers(self) -> Dict[str, str]:
         """Provide a complete set of request headers."""
         return {**self.auth_object.auth_headers}
@@ -237,11 +211,61 @@ class BaseServiceClass(ABC):
         return self.auth_object.refreshable
 
     @property
+    def debug(self) -> bool:
+        """Return a boolean if this Service Class is in debug mode."""
+        _returned = bool(self.log)
+        if not _returned:
+            _returned = bool(self.auth_object.log)
+
+        return _returned
+
+    # These properties are defined as mutable within the inheriting ServiceClass class.
+
+    @property
+    def proxy(self) -> dict:
+        """Provide the proxy from the auth_object."""
+        return self.auth_object.proxy
+
+    @property
+    def timeout(self) -> int:
+        """Provide the timeout from the auth_object."""
+        return self.auth_object.timeout
+
+    @property
+    def renew_window(self) -> int:
+        """Provide the renew_window from the auth_object."""
+        return self.auth_object.renew_window
+
+    @property
+    def user_agent(self) -> int:
+        """Provide the user_agent from the auth_object."""
+        return self.auth_object.user_agent
+
+    # Mutable
+    @property
     def debug_record_count(self) -> int:
-        """The maximum number of records to log to a debug log."""
+        """Return the maximum number of records to log to a debug log."""
         if self.auth_object.debug_record_count != self._debug_record_count:
             returned = self._debug_record_count
         else:
             returned = self.auth_object.debug_record_count
 
         return returned
+
+    @debug_record_count.setter
+    def debug_record_count(self, value):
+        """Set the custom debug record count value for this Service Class."""
+        self._debug_record_count = value
+
+    @property
+    def sanitize_log(self) -> bool:
+        """Return a flag if log sanitization is enabled."""
+        _returned = self.auth_object.sanitize_log
+        if _returned != self._sanitize and self._sanitize is not None:
+            _returned = self._sanitize
+        return _returned
+
+    @sanitize_log.setter
+    def sanitize_log(self, value) -> bool:
+        """Enable or disable log sanitization."""
+        self._sanitize = value

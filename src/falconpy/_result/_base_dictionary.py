@@ -1,7 +1,4 @@
-"""Authentication Object Base Class.
-
-This file contains the definition of the base class that provides the
-necessary functions to authenticate to the CrowdStrike Falcon OAuth2 API.
+"""FalconPy BaseDictionary object.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,60 +35,60 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from abc import ABC, abstractmethod
-from typing import Dict
+from ._response_component import ResponseComponent
 
 
-class BaseFalconAuth(ABC):
-    """Abstract class that provides a skeleton interface for the CrowdStrike Falcon OAuth2 API.
+class BaseDictionary(ResponseComponent):
+    """This class represents a dictionary component of an API response."""
 
-    This class does not implement a generic constructor and is not intended to be used by
-    developers directly. In order to leverage the functionality provided by the authorization
-    object, you should work with a derivative of this class, such as a FalconAuth class.
-    """
-
-    #  ______  _______ _______ _______ _     _        _______
-    #  |     \ |______ |______ |_____| |     | |         |
-    #  |_____/ |______ |       |     | |_____| |_____    |
+    #  _______ _______ _______  ______ _____ ______  _     _ _______ _______ _______
+    #  |_____|    |       |    |_____/   |   |_____] |     |    |    |______ |______
+    #  |     |    |       |    |    \_ __|__ |_____] |_____|    |    |______ ______|
     #
+    # Override the default datatype for data attribute to be a dictionary.
+    _data: dict = {}
+
     #  _______ _______ _______ _     _  _____  ______  _______
     #  |  |  | |______    |    |_____| |     | |     \ |______
     #  |  |  | |______    |    |     | |_____| |_____/ ______|
     #
-    # The generic login and logout handlers must be individually defined by all
-    # inheriting classes. The private methods defined here are used to allow for
-    # easy overriding of login and logout processing by inheriting classes without
-    # altering the parent handler method that may be leveraged by other inheriting
-    # class types.
-    @abstractmethod
-    def login(self) -> dict or bool:
-        """Login handler generic abstract."""
+    # Convert this object into an iterator by adding iteration 
+    # handling that leverages our underlying _data dictionary.
+    def __iter__(self):
+        """Iterate for the data dictionary."""
+        return self._data.__iter__()
 
-    @abstractmethod
-    def logout(self) -> dict or bool:
-        """Logout handler generic abstract."""
+    def __next__(self):
+        """Get the next item from the data dictionary."""
+        _returned = None
+        if self.data:
+            _returned = next(self.__iter__())
+        else:
+            raise StopIteration
+
+        return _returned
+
+    def __getitem__(self, pos):
+        """Retrieve an item by position from the data dictionary."""
+        return self._data.__getitem__(pos)
+
+    def __reversed__(self):
+        """Reverse the iteration order."""
+        return self._data.__reversed__()
+
+    def __len__(self) -> int:
+        """Retrieve the length of the data dictionary."""
+        return len(self._data)
+
+    def items(self) -> tuple:
+        """Provide expanded dictionary iteration functionality to the class."""
+        return self._data.items()
 
     #   _____   ______  _____   _____  _______  ______ _______ _____ _______ _______
     #  |_____] |_____/ |     | |_____] |______ |_____/    |      |   |______ |______
     #  |       |    \_ |_____| |       |______ |    \_    |    __|__ |______ ______|
     #
-    # These properties are present within all BaseFalconAuth derivatives.
     @property
-    @abstractmethod
-    def auth_headers(self) -> Dict[str, str]:
-        """Get a dictionary of headers that can authenticate a HTTP request."""
-
-    @property
-    @abstractmethod
-    def authenticated(self) -> bool:
-        """Read-only property to return whether authentication is successful."""
-
-    @property
-    @abstractmethod
-    def token_expired(self) -> bool:
-        """Read-only property that returns the current token expiration status."""
-
-    @property
-    @abstractmethod
-    def cred_format_valid(self) -> bool:
-        """Read-only property that returns a boolean if the creds dictionary format is valid."""
+    def data(self) -> dict:
+        """Return the contents of the _data attribute as a dictionary."""
+        return dict(self._data)
