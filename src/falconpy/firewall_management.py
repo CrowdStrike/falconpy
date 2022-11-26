@@ -901,7 +901,11 @@ class FirewallManagement(ServiceClass):
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def create_rule_group_validation(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_rule_group_validation(self: object,
+                                     body: dict = None,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Dict[str, Union[int, dict]]:
         """Validate the request for creating a new rule group on a platform for a customer with a name and description.
 
         Keyword arguments:

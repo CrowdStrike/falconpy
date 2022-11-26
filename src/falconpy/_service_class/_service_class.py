@@ -36,9 +36,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Type, Any, Optional
-#from logging import Logger
 from ._base_service_class import BaseServiceClass
 from .._auth_object import FalconInterface
+from .._util import log_class_startup
 from ..oauth2 import OAuth2
 
 
@@ -61,6 +61,7 @@ class ServiceClass(BaseServiceClass):
     This class is intended to be inherited by a class that represents a
     CrowdStrike API service collection.
     """
+
     # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
@@ -160,19 +161,13 @@ class ServiceClass(BaseServiceClass):
         self.validate_payloads: bool = kwargs.get("validate_payloads", True)
 
         # The following properties can be overridden per Service Class.
-        for item in ["proxy", "timeout", "user_agent"]:
+        for item in ["proxy", "timeout", "user_agent", "debug_record_count"]:
             if kwargs.get(item, None) is not None:
                 setattr(self, f"_override_{item}", kwargs.get(item))
 
         # Log the creation of this Service Class if debugging is enabled.
         if self.log:
-            self.log.debug("CREATED: %s interface class", self.__class__.__name__)
-            self.log.debug("CONFIG: Base URL set to %s", self.base_url)
-            self.log.debug("CONFIG: SSL verification is set to %s", str(self.ssl_verify))
-            self.log.debug("CONFIG: Timeout set to %s", str(self.timeout))
-            self.log.debug("CONFIG: Proxy dictionary: %s", str(self.proxy))
-            self.log.debug("CONFIG: User-Agent string set to: %s", self.user_agent)
-            self.log.debug("CONFIG: Token renewal window set to %s seconds", str(self.token_renew_window))
+            log_class_startup(self, self.log)
 
     # _  _ ____ ___ _  _ ____ ___  ____
     # |\/| |___  |  |__| |  | |  \ [__
@@ -232,18 +227,18 @@ class ServiceClass(BaseServiceClass):
         self._override_timeout = value
 
     @property
-    def token_renew_window(self) -> int:
-        """Provide the token_renew_window from the auth_object."""
-        return self.auth_object.token_renew_window
+    def renew_window(self) -> int:
+        """Provide the renew_window from the auth_object."""
+        return self.auth_object.renew_window
 
-    @token_renew_window.setter
-    def token_renew_window(self, value: int):
-        """Allow the token_renew_window to be changed.
-        
+    @renew_window.setter
+    def renew_window(self, value: int):
+        """Allow the renew_window to be changed.
+
         Changing this value will impact the renew window for all classes
         using this auth_object.
         """
-        self.auth_object.token_renew_window = value
+        self.auth_object.renew_window = value
 
     @property
     def user_agent(self) -> int:

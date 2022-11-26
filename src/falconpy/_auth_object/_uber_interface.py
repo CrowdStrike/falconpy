@@ -40,6 +40,8 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Optional, Union
 from ._falcon_interface import FalconInterface
+from .._constant import MAX_DEBUG_RECORDS
+
 
 class UberInterface(FalconInterface):
     """Uber Class specific interface."""
@@ -60,6 +62,7 @@ class UberInterface(FalconInterface):
     # Starting in v1.3.0, the Uber Class constructs itself leveraging the generic
     # FalconAuth constructor. This results in the Uber Class benefiting from a new
     # authentication style; Legacy / Token authentication.
+    # pylint: disable=R0913
     def __init__(self,
                  access_token: Optional[Union[str, bool]] = False,
                  base_url: Optional[str] = "https://api.crowdstrike.com",
@@ -73,7 +76,8 @@ class UberInterface(FalconInterface):
                  user_agent: Optional[str] = None,
                  renew_window: Optional[int] = 120,
                  debug: Optional[bool] = False,
-                 debug_record_count: Optional[int] = 100
+                 debug_record_count: Optional[int] = MAX_DEBUG_RECORDS,
+                 sanitize_log: Optional[bool] = None
                  ) -> "UberInterface":
         """Construct an instance of the UberInterface class."""
         super().__init__(base_url=base_url,
@@ -88,7 +92,8 @@ class UberInterface(FalconInterface):
                          member_cid=member_cid,
                          renew_window=renew_window,
                          debug=debug,
-                         debug_record_count=debug_record_count
+                         debug_record_count=debug_record_count,
+                         sanitize_log=sanitize_log
                          )
 
     # _  _ ____ ___ _  _ ____ ___  ____
@@ -135,7 +140,7 @@ class UberInterface(FalconInterface):
 
     def valid_cred_format(self) -> bool:
         """Legacy property to confirm credential dictionary format.
-        
+
         DEPRECATED
         ----
         Consider updating your code to leverage the cred_format_valid property.

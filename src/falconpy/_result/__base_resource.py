@@ -1,4 +1,4 @@
-"""FalconPy ResponseComponent object.
+"""FalconPy BaseResource object.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,58 +35,70 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Union
+from ._response_component import ResponseComponent
 
 
-class ResponseComponent:
-    """Base class for all response object derivatives."""
+class BaseResource(ResponseComponent):
+    """The base class for different resource types we can have within an API response."""
 
     #  _______ _______ _______  ______ _____ ______  _     _ _______ _______ _______
     #  |_____|    |       |    |_____/   |   |_____] |     |    |    |______ |______
     #  |     |    |       |    |    \_ __|__ |_____] |_____|    |    |______ ______|
     #
-    # All response components maintain an underlying data attribute.
-    # Due to the dynamic types of responses received from the API,
-    # this base element is defined as generically as possible.
-    _data: Union[dict, bytes, list, str] = None
+    # Override the _data attribute from ResponseComponent to always be a list.
+    _data: list = []
+    _pos: int = 0
 
     #  _______  _____  __   _ _______ _______  ______ _     _ _______ _______  _____   ______
     #  |       |     | | \  | |______    |    |_____/ |     | |          |    |     | |_____/
     #  |_____  |_____| |  \_| ______|    |    |    \_ |_____| |_____     |    |_____| |    \_
     #
-    # Sets the data attribute upon creation.
     def __init__(self, data):
-        """Construct an instance of the class and set the private data attribute."""
-        self._data = data
+        """Construct an instance of the class."""
+        if data is not None:
+            # Resources branch is present but is a NoneType
+            super().__init__(data=data)
 
     #  _______ _______ _______ _     _  _____  ______  _______
     #  |  |  | |______    |    |_____| |     | |     \ |______
     #  |  |  | |______    |    |     | |_____| |_____/ ______|
     #
-    def __repr__(self) -> str:
-        """Return a clean string representation of the underlying data dictionary."""
-        return str(self._data)
+    # Helper dunder methods to expose functionality of the underlying _data list attribute.
+    def __iter__(self):
+        """Return the resource list iterator."""
+        return self._data.__iter__()
 
-    def get_property(self, item, default_return: Union[str, int, dict, float, list] = None):
-        """Property lookup helper. Returns None if the underlying data is binary."""
+    def __next__(self):
+        """Get the next item in the resources list."""
         _returned = None
-        if isinstance(self._data, dict):
-            _returned = self._data.get(item, default_return)
-        elif isinstance(self._data, (list, str)):
-            _returned = self._data[item]
+        if self.data:
+            _returned = next(self.__iter__())
+            self._pos += 1
+            if self._pos >= len(self.data):
+                raise StopIteration
+        else:
+            raise StopIteration
 
         return _returned
+
+    def __getitem__(self, pos):
+        """Retrieve an item by position from the resources list."""
+        return self._data.__getitem__(pos)
+
+    def __reversed__(self):
+        """Reverse the iteration order."""
+        return self._data.__reversed__()
+
+    def __len__(self) -> int:
+        """Return the length of the resource list."""
+        return len(self._data)
 
     #   _____   ______  _____   _____  _______  ______ _______ _____ _______ _______
     #  |_____] |_____/ |     | |_____] |______ |_____/    |      |   |______ |______
     #  |       |    \_ |_____| |       |______ |    \_    |    __|__ |______ ______|
     #
+    # Properties within a resource object are immutable once they are created.
     @property
-    def data(self) -> Union[dict, bytes, list, str]:
-        """Property to reflect the contents of the private _data attribute."""
-        return self._data
-
-    @property
-    def binary(self) -> bool:
-        """Return a boolean indicating if this component represents a binary response."""
-        return isinstance(self._data, bytes)
+    def data(self) -> list:
+        """Return the contents of the underlying _data attribute."""
+        return list(self._data)
