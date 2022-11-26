@@ -1,4 +1,4 @@
-"""Internal constant library.
+"""FalconPy constant module.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,23 +35,26 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import List
 from .._version import _TITLE, _VERSION
-PREFER_NONETYPE = [
+PREFER_NONETYPE: List[str] = [
     "report_executions_download_get", "report_executions_download.get",
     "RTR_ListFiles", "RTR_ListFilesV2", "RTR_GetExtractedFileContents",
     "RTR_DeleteSession"
 ]
-PREFER_IDS_IN_BODY = [
+PREFER_IDS_IN_BODY: List[str] = [
     "GetDeviceDetails", "PostDeviceDetailsV2", "GetVulnerabilities", "GetIntelIndicatorEntities",
     "getChildrenV2", "cancel-scans", "GetDetectSummaries", "UpdateQuarantinedDetectsByIds",
     "GetQuarantineFiles"
 ]
-MOCK_OPERATIONS = [
+MOCK_OPERATIONS: List[str] = [
     "GetImageAssessmentReport", "DeleteImageDetails", "ImageMatchesPolicy"
 ]
 # Restrict requests to only allowed HTTP methods
-ALLOWED_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
+ALLOWED_METHODS: List[str] = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
 # Default user-agent string
-USER_AGENT = f"{_TITLE}/{str(_VERSION)}"
+USER_AGENT: str = f"{_TITLE}/{str(_VERSION)}"
 # Default maximum number of records to write to debug logs (when active)
-MAX_DEBUG_RECORDS = 100
+MAX_DEBUG_RECORDS: int = 100
+# Global maximum number of records returned from any endpoint across all service collections
+GLOBAL_API_MAX_RETURN: int = 5000

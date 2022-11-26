@@ -35,11 +35,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, Optional, Union
-from ._util import _ALLOWED_METHODS
+import functools
+from typing import Dict, Optional, Union, Callable
+from ._constant import ALLOWED_METHODS
 from ._util import (
     perform_request,
-    generate_error_result,
     confirm_base_url,
     )
 from ._auth_object import UberInterface
@@ -50,6 +50,49 @@ from ._util import (
     uber_request_keywords
     )
 from ._endpoint import api_endpoints
+from ._error import (
+    InvalidOperation,
+    InvalidMethod,
+    TokenNotSpecified,
+    SSLDisabledWarning,
+    SDKError
+    )
+
+
+def command_error_handler(func: Callable):
+    """Uber class error handling wrapper.
+
+    This method wraps the Uber Class command method and catches errors
+    during processing of the selected operation. If logging is enabled
+    then the error or warning log will be updated accordingly. Regardless
+    of log settings, this method will craft the error response returned
+    based upon the result property of the SDKError derivative.
+
+    Defined here to prevent weirdness in the wrapper behavior.
+    """
+    @functools.wraps(func)
+    def wrapper(caller, *args, **kwargs):
+        """Inner wrapper."""
+        def log_failure(msg, code: int, res: dict = None, warn: bool = False):
+            if caller.log:
+                if warn:
+                    caller.log.warning(msg)
+                else:
+                    caller.log.error(msg)
+                    # Warnings shouldn't generate result payloads
+                    caller.log.debug("STATUS CODE: %i", code)
+                    caller.log.debug("RESULT: %s", res)
+        try:
+            result = func(caller, *args, **kwargs)
+        except (SDKError, InvalidMethod, InvalidOperation) as bad_sdk:
+            result = bad_sdk.result
+            log_failure(bad_sdk.message, bad_sdk.code, result)
+        except SSLDisabledWarning as no_ssl:
+            # SSL warnings do not override the returned response
+            log_failure(no_ssl.message, no_ssl.code, no_ssl.result, True)
+            result = func(caller, _warned=True, *args, **kwargs)
+        return result
+    return wrapper
 
 
 class APIHarness(UberInterface):
@@ -66,6 +109,7 @@ class APIHarness(UberInterface):
 
     This one does it all. It's like the One Ring with significantly fewer orcs.
     """
+
     # pylint: disable=R0913
     #                                 `-.
     #                     -._ `. `-.`-. `-.
@@ -97,7 +141,8 @@ class APIHarness(UberInterface):
                  user_agent: Optional[str] = None,
                  renew_window: Optional[int] = 120,
                  debug: Optional[bool] = False,
-                 debug_record_count: Optional[int] = 100
+                 debug_record_count: Optional[int] = 100,
+                 sanitize_log: Optional[bool] = None
                  ) -> "APIHarness":
         """Uber class constructor.
 
@@ -142,13 +187,15 @@ class APIHarness(UberInterface):
                          member_cid=member_cid,
                          renew_window=renew_window,
                          debug=debug,
-                         debug_record_count=debug_record_count
+                         debug_record_count=debug_record_count,
+                         sanitize_log=sanitize_log
                          )
 
         # Complete list of available API operations.
         self.commands = api_endpoints
 
     # pylint: disable=R0912
+    @command_error_handler
     def command(self, *args, **kwargs) -> Union[Dict[str, Union[int, dict]], bytes]:
         """Uber Class API command method.
 
@@ -203,6 +250,10 @@ class APIHarness(UberInterface):
         dict or bytes
             Dictionary or binary object containing API response depending on requested operation.
         """
+        # Complain about SSL if it's disabled.
+        if not self.ssl_verify and not kwargs.get("_warned", False):
+            raise SSLDisabledWarning
+
         try:
             if not kwargs.get("action", None):
                 # Assume they're passing it in as the first argument.
@@ -226,42 +277,34 @@ class APIHarness(UberInterface):
             # Handle any IDs that are in the wrong payload
             kwargs = handle_body_payload_ids(kwargs)
             # Only accept allowed HTTP methods
-            if method in _ALLOWED_METHODS:
+            if method in ALLOWED_METHODS:
                 if operation == "oauth2AccessToken":
                     # Calling the token generation operation directly from the
                     # Uber Class does not change the underlying auth_object state.
                     returned = self._login_handler(stateful=False)
                 elif operation == "oauth2RevokeToken":
                     # Calling the token revocation operation directly requires a
-                    # token_value. Doing so in this manner from the Uber Class does
-                    # not change the underlying auth_object state.
+                    # token_value. Doing so in this manner from the Uber Class
+                    # does not change the underlying authentication state.
                     token_value = kwargs.get("token_value", None)
                     if not token_value:
-                        returned = generate_error_result(
-                            message="The token_value keyword is required to use this operation.",
-                            code=400
-                            )
-                    else:
-                        returned = self._logout_handler(token_value=token_value,
-                                                        stateful=False
-                                                        )
+                        raise TokenNotSpecified
+                    returned = self._logout_handler(token_value=token_value, stateful=False)
                 else:
                     # Craft our keyword payload for perform_request.
                     keyword_payload = uber_request_keywords(
                         self, method, operation, target, kwargs, container
                         )
-                    # Log our payloads if enabled.
+                    # Log the operation we're performing if enabled.
                     if self.log:
                         self.log.debug("OPERATION: %s", operation)
                     # Process the API request normally.
                     returned = perform_request(**keyword_payload)
             else:
                 # Bad HTTP method.
-                returned = generate_error_result(message="Invalid HTTP method specified.",
-                                                 code=405
-                                                 )
+                raise InvalidMethod
         else:
             # That command doesn't exist, have a cup of tea instead.
-            returned = generate_error_result(message="Invalid API operation specified.", code=418)
+            raise InvalidOperation
 
         return returned

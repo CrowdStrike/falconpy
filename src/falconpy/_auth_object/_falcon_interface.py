@@ -42,17 +42,18 @@ import time
 from logging import Logger, getLogger
 from typing import Dict, Optional, Union
 from ._base_falcon_auth import BaseFalconAuth
-from .._constant import MAX_DEBUG_RECORDS
 from .._enum import TokenFailReason
 from .._util import (
     autodiscover_region,
     perform_request,
-    generate_error_result,
+    log_class_startup,
     login_payloads,
     logout_payloads
     )
+from .._error import InvalidCredentials
 
 
+# pylint: disable=R0902
 class FalconInterface(BaseFalconAuth):
     """Standard Falcon API interface used by Service Classes."""
 
@@ -70,7 +71,12 @@ class FalconInterface(BaseFalconAuth):
     # extremely limited and not implemented by default. (Meaning logs are not generated.)
     # To enable logging, pass the keyword "debug" with a value of True to the constructor.
     log: Optional[Logger] = None
-    debug_record_count: int = MAX_DEBUG_RECORDS
+    _debug_record_count: int = None
+    _sanitize: bool = True
+    _proxy: dict = None
+    _timeout: int or float = None
+    _renew_window: int = 120
+    _user_agent: str = None
     # Flag indicating if we have the necessary information to automatically refresh the token.
     refreshable: bool = True
     # Integer specifying the amount of time remaining before the token expires (in seconds).
@@ -88,6 +94,7 @@ class FalconInterface(BaseFalconAuth):
     #
     # The default constructor for all authentication objects. Ingests provided credentials
     # and sets the necessary class attributes based upon the authentication detail received.
+    # pylint: disable=R0913
     def __init__(self,
                  access_token: Optional[Union[str, bool]] = False,
                  base_url: Optional[str] = "https://api.crowdstrike.com",
@@ -101,14 +108,15 @@ class FalconInterface(BaseFalconAuth):
                  user_agent: Optional[str] = None,
                  renew_window: Optional[int] = 120,
                  debug: Optional[bool] = False,
-                 debug_record_count: Optional[int] = 100
+                 debug_record_count: Optional[int] = None,
+                 sanitize_log: Optional[bool] = None
                  ) -> "FalconInterface":
         """Construct an instance of the FalconInterface class."""
         self.base_url: str = base_url
         self.ssl_verify: bool = ssl_verify
-        self.timeout: float or tuple = timeout
-        self.proxy: Dict[str, str] = proxy
-        self.user_agent: str = user_agent
+        self._timeout: float or tuple = timeout
+        self._proxy: Dict[str, str] = proxy
+        self._user_agent: str = user_agent
         # ____ _  _ ___ _  _ ____ _  _ ___ _ ____ ____ ___ _ ____ _  _
         # |__| |  |  |  |__| |___ |\ |  |  | |    |__|  |  | |  | |\ |
         # |  | |__|  |  |  | |___ | \|  |  | |___ |  |  |  | |__| | \|
@@ -127,28 +135,26 @@ class FalconInterface(BaseFalconAuth):
         # Credential Authentication (also powers Direct Authentication)
         self.creds: Dict[str, str] = creds
         # Legacy (Token) Authentication (fallback)
-        self.token_value: str or bool = access_token
+        self.token_value: Optional[Union[str, bool]] = access_token
         if access_token:
+            # Store this non-refreshable token
+            self.token_value = access_token
             # We do not have API credentials, disable token refresh.
             self.refreshable = False
             # Assume the token was just generated.
             self.token_expiration = 1799
+
         # Set the token renewal window, ignored when using Legacy Authentication.
-        self.token_renew_window: int = max(min(renew_window, 1200), 120)
+        self._renew_window: int = max(min(renew_window, 1200), 120)
         # Ignored when debugging is disabled
-        self.debug_record_count: int = debug_record_count
+        self._debug_record_count: int = debug_record_count
+        # Allow log sanitization to be overridden
+        if isinstance(sanitize_log, bool):
+            self._sanitize = sanitize_log
         # Log the creation of this object if debugging is enabled.
         if debug:
-            self.log: Logger = getLogger(__name__.split(".")[0])
-            self.log.debug("CREATED: %s interface class", self.__class__.__name__)
-            self.log.debug("CONFIG: Base URL set to %s", self.base_url)
-            self.log.debug("CONFIG: SSL verification is set to %s", str(self.ssl_verify))
-            self.log.debug("CONFIG: Timeout set to %s seconds", str(self.timeout))
-            self.log.debug("CONFIG: Proxy dictionary: %s", str(self.proxy))
-            self.log.debug("CONFIG: User-Agent string set to: %s", self.user_agent)
-            self.log.debug("CONFIG: Token renewal window set to %s seconds", str(self.token_renew_window))
-            self.log.debug("CONFIG: Maximum number of records to log: %s", self.debug_record_count)
-        
+            self.log: Logger = getLogger(__name__.split(".", maxsplit=1)[0])
+            log_class_startup(self, self.log)
 
     # _  _ ____ ___ _  _ ____ ___  ____
     # |\/| |___  |  |__| |  | |  \ [__
@@ -168,24 +174,29 @@ class FalconInterface(BaseFalconAuth):
     # The default behavior for both the login and logout handlers is to return
     # the entire dictionary created by the token API response.
     def _login_handler(self, stateful: bool = True) -> dict:
-        """Default login handler."""
+        """Login by requesting a new token.
+
+        This method can also be leveraged to generate tokens without impacting authorization state.
+        """
         def _token_failure(fail_reason: str, status: int):
-            """Generic authentication status updater (failure conditions only)."""
-            self.token_expiration = 0
+            """Update the authentication status updater (failure conditions only)."""
+            self.token_expiration = 403
             self.token_status = status
             self.token_fail_reason = fail_reason
-            
-        if self.cred_format_valid:
-            operation, target_url, data_payload = login_payloads(self.creds, self.base_url)
-            # Log the call to this operation if debugging is enabled.
-            if self.log:
-                self.log.debug("OPERATION: %s", operation)
-            returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
-                                       headers={}, verify=self.ssl_verify,
-                                       proxy=self.proxy, timeout=self.timeout,
-                                       user_agent=self.user_agent, log_util=self.log)
-
-            if isinstance(returned, dict):  # Issue 433
+        _returned_headers = {}
+        try:  # pylint: disable=R1702
+            if self.cred_format_valid:
+                operation, target_url, data_payload = login_payloads(self.creds, self.base_url)
+                # Log the call to this operation if debugging is enabled.
+                if self.log:
+                    self.log.debug("OPERATION: %s", operation)
+                returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
+                                           headers={}, verify=self.ssl_verify, proxy=self.proxy,
+                                           timeout=self.timeout, user_agent=self.user_agent,
+                                           log_util=self.log, authenticating=True,
+                                           sanitize=self.sanitize_log
+                                           )
+                _returned_headers = returned["headers"]
                 if stateful:
                     self.token_status = returned["status_code"]
                     if self.token_status == 201:
@@ -201,38 +212,49 @@ class FalconInterface(BaseFalconAuth):
                             if returned["body"]["errors"]:
                                 self.token_fail_reason = returned["body"]["errors"][0]["message"]
             else:
-                returned = generate_error_result("Unexpected API response received", 403)
                 if stateful:
-                    _token_failure(TokenFailReason["UNEXPECTED"], 403)
-        else:
-            returned = generate_error_result("Invalid credentials specified", 403)
-            if stateful:
-                _token_failure(TokenFailReason["INVALID"], 403)
+                    _token_failure(TokenFailReason["INVALID"], 403)
+                raise InvalidCredentials(headers=_returned_headers)
+
+        except InvalidCredentials as bad_creds:
+            returned = bad_creds.result
+            if self.log:
+                self.log.error(bad_creds.message)
 
         return returned
 
     def _logout_handler(self, token_value: str = None, stateful: bool = True) -> dict:
-        """Default logout handler."""
-        if self.cred_format_valid:
-            if not token_value:
-                token_value = self.token_value
-            operation, target_url, data_payload, header_payload = logout_payloads(
-                creds=self.creds,
-                base=self.base_url,
-                token_val=token_value
-                )
-            # Log the call to this operation if debugging is enabled.
+        """Log out by revoking the current token.
+
+        This method can also be leveraged to revoke other tokens.
+        """
+        try:
+            if self.cred_format_valid:
+                if not token_value:
+                    token_value = self.token_value
+                operation, target_url, data_payload, header_payload = logout_payloads(
+                    creds=self.creds,
+                    base=self.base_url,
+                    token_val=token_value
+                    )
+                # Log the call to this operation if debugging is enabled.
+                if self.log:
+                    self.log.debug("OPERATION: %s", operation)
+                returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
+                                           headers=header_payload, verify=self.ssl_verify,
+                                           proxy=self.proxy, timeout=self.timeout,
+                                           user_agent=self.user_agent, log_util=self.log,
+                                           sanitize=self.sanitize_log
+                                           )
+                if stateful:
+                    self.token_expiration = 0
+                    self.token_value = False
+            else:
+                raise InvalidCredentials
+        except InvalidCredentials as bad_creds:
+            returned = bad_creds.result
             if self.log:
-                self.log.debug("OPERATION: %s", operation)
-            returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
-                                       headers=header_payload, verify=self.ssl_verify,
-                                       proxy=self.proxy, timeout=self.timeout,
-                                       user_agent=self.user_agent, log_util=self.log)
-            if stateful:
-                self.token_expiration = 0
-                self.token_value = False
-        else:
-            returned = generate_error_result("Invalid credentials specified", 403)
+                self.log.error(bad_creds.message)
 
         return returned
 
@@ -241,11 +263,68 @@ class FalconInterface(BaseFalconAuth):
     # |    |  \ |__| |    |___ |  \  |  | |___ ___]
     #
     # These properties are present in all FalconInterface derivatives.
+    @property
+    def proxy(self) -> dict:
+        """Return the current proxy setting."""
+        return self._proxy
+
+    @proxy.setter
+    def proxy(self, value: dict):
+        self._proxy = value
+
+    @property
+    def user_agent(self) -> str:
+        """Return the current user agent setting."""
+        return self._user_agent
+
+    @user_agent.setter
+    def user_agent(self, value: str):
+        self._user_agent = value
+
+    @property
+    def renew_window(self) -> int:
+        """Return the current token renew window setting."""
+        return self._renew_window
+
+    @renew_window.setter
+    def renew_window(self, value: int):
+        self._renew_window = value
+
+    @property
+    def timeout(self) -> dict:
+        """Return the current timeout setting."""
+        return self._timeout
+
+    @timeout.setter
+    def timeout(self, value: Union[int, float]):
+        self._timeout = value
+
+    @property
+    def debug_record_count(self) -> int:
+        """Return the current debug record count setting."""
+        return self._debug_record_count
+
+    @debug_record_count.setter
+    def debug_record_count(self, value: int):
+        self._debug_record_count = value
+
+    @property
+    def sanitize_log(self) -> bool:
+        """Return the current log sanitization."""
+        _sanitize = True
+        if isinstance(self._sanitize, bool):
+            _sanitize = self._sanitize
+        return _sanitize
+
+    @sanitize_log.setter
+    def sanitize_log(self, value):
+        self._sanitize = value
+
     # All properties defined here are by design IMMUTABLE.
     @property
     def token_expired(self) -> bool:
         """Return whether the token is ready to be renewed."""
-        return (time.time() - self.token_time) >= (self.token_expiration - self.token_renew_window)
+        return (time.time() - self.token_time) >= (self.token_expiration - self.renew_window)
 
     @property
     def authenticated(self) -> bool:
@@ -254,8 +333,8 @@ class FalconInterface(BaseFalconAuth):
 
     @property
     def cred_format_valid(self) -> bool:
-        """Return a boolean creds dictionary is valid."""
-        return ("client_id" in self.creds and "client_secret" in self.creds)
+        """Return a boolean that the creds dictionary is valid."""
+        return bool("client_id" in self.creds and "client_secret" in self.creds)
 
     # The default functionality of a FalconInterface object performs a token
     # refresh whenever a request is made for the auth_headers property.
@@ -266,3 +345,8 @@ class FalconInterface(BaseFalconAuth):
             self.login()
 
         return {"Authorization": f"Bearer {self.token_value}"}
+
+    @property
+    def debug(self) -> bool:
+        """Return a boolean if we are in a debug mode."""
+        return bool(self.log)

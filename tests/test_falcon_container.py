@@ -18,7 +18,7 @@ uber = APIHarness(client_id=falcon.auth_object.creds["client_id"],
                   client_secret=falcon.auth_object.creds["client_secret"],
                   base_url=falcon.auth_object.base_url
                   )
-AllowedResponses = [200, 201, 400, 403, 404, 429, 500, 502]  # Allowing no content returned as code paths are confirmed
+AllowedResponses = [200, 201, 204, 400, 403, 404, 429, 500, 502]  # Allowing no content returned as code paths are confirmed
 
 
 class TestFalconContainer:

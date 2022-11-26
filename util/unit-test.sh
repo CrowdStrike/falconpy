@@ -16,7 +16,13 @@ then
     	TARGET="tests/test_$1.py"	
     fi
 fi
+DO_DEBUG=""
+if [[ ("$FALCONPY_UNIT_TEST_DEBUG" != "" && $(echo $FALCONPY_UNIT_TEST_DEBUG | tr [:lower:] [:upper:]) != "DISABLED") ]]
+then
+  DO_DEBUG="--log-cli-level $FALCONPY_UNIT_TEST_DEBUG"
+fi
 
-coverage run --rcfile=util/coverage.config -m pytest -s -v $TARGET
+
+coverage run --rcfile=util/coverage.config -m pytest -s -v $TARGET $DO_DEBUG
 coverage report
 # pytest -s -v $TARGET
