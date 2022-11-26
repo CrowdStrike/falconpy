@@ -28,14 +28,16 @@ accountPayload = {
     }
 falconWithCreds = None
 falconWithObject = None
-
+_DEBUG = os.getenv("FALCONPY_UNIT_TEST_DEBUG", None)
+if _DEBUG:
+    _DEBUG = True
 
 class TestCloudConnectAWS:
     def serviceCCAWS_AuthWithCreds(self):
         falconWithCreds = CloudConnectAWS(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, base_url=auth.config["falcon_base_url"])
+        }, base_url=auth.config["falcon_base_url"], debug=_DEBUG)
         check = falconWithCreds.auth_object.token()
         if check["status_code"] == 429:
             pytest.skip("Rate limit hit")
@@ -45,7 +47,7 @@ class TestCloudConnectAWS:
         falconWithObject = CloudConnectAWS(auth_object=FalconAuth.OAuth2(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, base_url=auth.config["falcon_base_url"]))
+        }, base_url=auth.config["falcon_base_url"], debug=_DEBUG))
         check = falconWithObject.auth_object.token()
         if check["status_code"] == 429:
             pytest.skip("Rate limit hit")
@@ -55,7 +57,7 @@ class TestCloudConnectAWS:
         falconWithObject = CloudConnectAWS(auth_object=FalconAuth.OAuth2(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, base_url=auth.config["falcon_base_url"]))
+        }, base_url=auth.config["falcon_base_url"], debug=_DEBUG))
         check = falconWithObject.auth_object.token()
         if check["status_code"] == 429:
             pytest.skip("Rate limit hit")
@@ -74,7 +76,7 @@ class TestCloudConnectAWS:
         falconWithObject = CloudConnectAWS(auth_object=FalconAuth.OAuth2(creds={
             'client_id': auth.config["falcon_client_id"],
             'client_secret': auth.config["falcon_client_secret"]
-        }, base_url=auth.config["falcon_base_url"]))
+        }, base_url=auth.config["falcon_base_url"], debug=_DEBUG))
         check = falconWithObject.auth_object.token()
         if check["status_code"] == 429:
             pytest.skip("Rate limit hit")

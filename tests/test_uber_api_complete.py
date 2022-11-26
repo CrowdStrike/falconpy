@@ -18,7 +18,9 @@ from falconpy._util import perform_request, force_default
 
 
 AllowedResponses = [200, 400, 401, 403, 404, 405, 415, 418, 429]
-
+_DEBUG = os.getenv("FALCONPY_UNIT_TEST_DEBUG", None)
+if _DEBUG:
+    _DEBUG = True
 if "DEBUG_API_ID" in os.environ and "DEBUG_API_SECRET" in os.environ:
     config = {}
     config["falcon_client_id"] = os.getenv("DEBUG_API_ID")
@@ -38,7 +40,7 @@ else:
 falcon = APIHarness(
     client_id=config["falcon_client_id"],
     client_secret=config["falcon_client_secret"],
-    base_url=config["falcon_base_url"]
+    base_url=config["falcon_base_url"], debug=_DEBUG
     )
 
 
@@ -212,7 +214,7 @@ class TestUber:
             return False
 
     def uberCCAWS_GenerateInvalidOperationIDError(self):
-        if perform_request(method="FETCH", endpoint="/somewhere/interesting")["status_code"] in AllowedResponses:
+        if perform_request(method="FETCH", endpoint="/somewhere/interesting", debug=_DEBUG, log_util=falcon.log)["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -233,7 +235,7 @@ class TestUber:
         return returned
 
     def uberCCAWS_BadAuthentication(self):
-        falcon = APIHarness()
+        falcon = APIHarness(debug=_DEBUG)
         if falcon.command("QueryAWSAccounts", parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
         else:
@@ -244,7 +246,7 @@ class TestUber:
             creds={
                 "client_id": config["falcon_client_id"],
                 "client_secret": config["falcon_client_secret"]
-            }, ssl_verify=False, base_url=config["falcon_base_url"]
+            }, ssl_verify=False, base_url=config["falcon_base_url"], debug=_DEBUG
         )
         if falcon.command("QueryAWSAccounts", parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True

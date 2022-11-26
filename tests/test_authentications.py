@@ -3,6 +3,16 @@
 import os
 import sys
 import pytest
+# from datetime import datetime
+# from logging import (
+#     getLogger,
+#     basicConfig,
+#     DEBUG,
+#     WARNING,
+#     ERROR,
+#     INFO,
+#     )
+from logging.handlers import RotatingFileHandler
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -15,12 +25,14 @@ from falconpy._version import _TITLE, _VERSION
 auth = Authorization.TestAuthorization()
 auth.serviceAuth()
 AllowedResponses = [200, 401, 403, 429]
-
+_DEBUG = os.getenv("FALCONPY_UNIT_TEST_DEBUG", None)
+if _DEBUG:
+    _DEBUG = True
 
 class TestAuthentications:
 
     def serviceAny_TestCredentialAuthFailure(self):
-        bad_falcon = ZeroTrustAssessment(creds={"client_id": "This", "client_secret": "WontWork"})
+        bad_falcon = ZeroTrustAssessment(creds={"client_id": "This", "client_secret": "WontWork"}, debug=_DEBUG)
         result = bad_falcon.getAssessmentV1(ids='12345678')
 
         if result["status_code"] in AllowedResponses:
@@ -29,7 +41,7 @@ class TestAuthentications:
             return False
 
     def serviceAny_TestBadCredRevoke(self):
-        bad_falcon = OAuth2()
+        bad_falcon = OAuth2(debug=_DEBUG)
         result = bad_falcon.revoke("Will generate a 403")
         if result["status_code"] in AllowedResponses:
             return True
@@ -41,8 +53,8 @@ class TestAuthentications:
         falcon = CloudConnectAWS(auth_object=OAuth2(creds={"client_id": auth.config["falcon_client_id"],
                                                            "client_secret": auth.config["falcon_client_secret"]
                                                            },
-                                                    base_url = "us-1"  # Testing dashed base specifier
-                                                    ))
+                                                    base_url = "us-1",  # Testing dashed base specifier
+                                                    debug=_DEBUG))
         result = falcon.QueryAWSAccounts()
         if result["status_code"] in AllowedResponses:
             return True
@@ -52,13 +64,13 @@ class TestAuthentications:
     def serviceAny_forceCrossCloudResponseFailure(self):
         falcon = OAuth2(client_id=os.environ["CROSS_DEBUG_KEY"],
                         client_secret="will_not_work",
-                        base_url="us1"
+                        base_url="us1", debug=_DEBUG
                         )
         result = falcon.token()
         if result["status_code"] == 403:
             falcon = APIHarness(client_id=os.environ["CROSS_DEBUG_KEY"],
                                 client_secret="will_not_work",
-                                base_url="us1"
+                                base_url="us1", debug=_DEBUG
                                 )
             t_creds = {
                 "client_id": os.environ["CROSS_DEBUG_KEY"],
@@ -75,7 +87,7 @@ class TestAuthentications:
     def serviceAny_forceCrossCloudResponseGovFailure(self):
         falcon = OAuth2(client_id=os.environ["CROSS_DEBUG_KEY"],
                         client_secret=os.environ["CROSS_DEBUG_SECRET"],
-                        base_url="us1"
+                        base_url="us1", debug=_DEBUG
                         )
         result = falcon.token()
         if result["status_code"] == 403:
@@ -86,7 +98,7 @@ class TestAuthentications:
     def serviceAny_checkRegionNameLookups(self):
         falcon = OAuth2(client_id=auth.config["falcon_client_id"],
                         client_secret=auth.config["falcon_client_secret"],
-                        base_url="usgov1"
+                        base_url="usgov1", debug=_DEBUG
                         )
         result = falcon.token()
         if result["status_code"] == 400:
@@ -106,13 +118,14 @@ class TestAuthentications:
     def serviceAny_forceGovCloudAutoSelectFailure(self):
         falcon = OAuth2(client_id=os.environ["CROSS_DEBUG_KEY"],
                         client_secret=os.environ["CROSS_DEBUG_SECRET"],
-                        base_url="usgov1"
+                        base_url="usgov1", debug=_DEBUG
                         )
         result = falcon.token()
         if result["status_code"] == 201:
             falcon = APIHarness(client_id=os.environ["CROSS_DEBUG_KEY"],
                                 client_secret=os.environ["CROSS_DEBUG_SECRET"],
-                                base_url="https://api.laggar.gcw.crowdstrike.com/"  # Testing for issue 558
+                                base_url="https://api.laggar.gcw.crowdstrike.com/",  # Testing for issue 558
+                                debug=_DEBUG
                                 )
             t_creds = {
                 "client_id": os.environ["CROSS_DEBUG_KEY"],
@@ -123,7 +136,8 @@ class TestAuthentications:
                 falcon = CloudConnectAWS(client_id=os.environ["CROSS_DEBUG_KEY"],
                                          client_secret=os.environ["CROSS_DEBUG_SECRET"],
                                          base_url="usgov1",
-                                         renew_window=300
+                                         renew_window=300,
+                                         debug=_DEBUG
                                          )
                 result = falcon.auth_object.token()
                 if result["status_code"] == 429:
@@ -140,11 +154,12 @@ class TestAuthentications:
     def serviceAny_TestObjectAuth(self):
         # Should also test direct auth in the authentication class
         auth_obj = OAuth2(client_id=auth.config["falcon_client_id"],
-                          client_secret=auth.config["falcon_client_secret"]
+                          client_secret=auth.config["falcon_client_secret"],
+                          debug=_DEBUG
                           )
         auth_obj.token()
         # While we're at it, test user_agent override
-        falcon = CloudConnectAWS(auth_object=auth_obj, user_agent=f"{_TITLE}/{str(_VERSION)}")
+        falcon = CloudConnectAWS(auth_object=auth_obj, user_agent=f"{_TITLE}/{str(_VERSION)}", debug=_DEBUG)
         result = falcon.QueryAWSAccounts()
         if result["status_code"] in AllowedResponses:
             return True
@@ -153,7 +168,7 @@ class TestAuthentications:
 
     def serviceAny_TestBadObjectAuth(self):
         # Should also test bad direct auth in the authentication class
-        falcon = CloudConnectAWS(auth_object=OAuth2())
+        falcon = CloudConnectAWS(auth_object=OAuth2(debug=_DEBUG))
         result = falcon.QueryAWSAccounts()
         if result["status_code"] in AllowedResponses:
             return True
@@ -162,7 +177,8 @@ class TestAuthentications:
 
     def serviceAny_TestEasyObjectAuth(self):
         auth_obj = ZeroTrustAssessment(client_id=auth.config["falcon_client_id"],
-                          client_secret=auth.config["falcon_client_secret"]
+                          client_secret=auth.config["falcon_client_secret"],
+                          debug=_DEBUG
                           )
         #auth_obj.token()
         # Test passing just the service class object, not the auth_object attribute
