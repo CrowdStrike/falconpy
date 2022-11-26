@@ -25,9 +25,37 @@ from ._version import _DOCS_URL, _KEYWORDS
 from ._auth_object import BaseFalconAuth, FalconInterface, UberInterface
 from ._service_class import BaseServiceClass, ServiceClass
 from ._util import confirm_base_region, confirm_base_url
-from ._constant import MAX_DEBUG_RECORDS
+from ._constant import MAX_DEBUG_RECORDS, ALLOWED_METHODS, USER_AGENT
 from ._enum import BaseURL, ContainerBaseURL, TokenFailReason
-from ._result import Result
+from ._error import (
+    APIError,
+    SDKError,
+    SDKWarning,
+    NoContentWarning,
+    SSLDisabledWarning,
+    RegionSelectError,
+    InvalidCredentials,
+    InvalidMethod,
+    InvalidOperation,
+    TokenNotSpecified,
+    KeywordsOnly,
+    CannotRevokeToken,
+    FunctionalityNotImplemented
+)
+from ._result import (
+    Result,
+    ExpandedResult,
+    BaseDictionary,
+    BaseResource,
+    Resources,
+    ResponseComponent,
+    Meta,
+    Headers,
+    Errors,
+    RawBody,
+    BinaryFile
+    )
+from ._api_request import APIRequest
 from .alerts import Alerts
 from .api_complete import APIHarness
 from .cloud_connect_aws import CloudConnectAWS
@@ -106,7 +134,12 @@ __all__ = [
     "SpotlightVulnerabilities", "SpotlightEvaluationLogic", "UserManagement", "MAX_DEBUG_RECORDS",
     "ZeroTrustAssessment", "PreventionPolicies", "SensorUpdatePolicies", "MessageCenter",
     "FileVantage", "MobileEnrollment", "ContainerBaseURL", "TailoredIntelligence", "ODS", "FDR",
-    "Result"
+    "Result", "APIError", "SDKError", "SDKWarning", "NoContentWarning", "SSLDisabledWarning",
+    "RegionSelectError", "InvalidCredentials", "InvalidMethod", "InvalidOperation",
+    "TokenNotSpecified", "KeywordsOnly", "ALLOWED_METHODS", "USER_AGENT", "APIRequest",
+    "ExpandedResult", "CannotRevokeToken", "Headers", "Meta", "Resources",
+    "ResponseComponent", "BaseDictionary", "Errors", "BaseResource", "RawBody", "BinaryFile",
+    "FunctionalityNotImplemented"
 ]
 """
 This is free and unencumbered software released into the public domain.

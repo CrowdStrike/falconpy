@@ -130,7 +130,7 @@ class IOAExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:  # pylint: disable=C0103
+    def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete the IOA Exclusions by ID.
 
         Keyword arguments:
@@ -210,7 +210,10 @@ class IOAExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:  # pylint: disable=C0103
+    def query_exclusions(self: object,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Dict[str, Union[int, dict]]:
         """Search for IOA Exclusions.
 
         Keyword arguments:

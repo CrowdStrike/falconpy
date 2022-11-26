@@ -1,4 +1,4 @@
-"""FalconPy utility module.
+"""FalconPy API Request module.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,43 +35,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._auth import login_payloads, logout_payloads
-from ._functions import (
-    validate_payload,
-    generate_b64cred,
-    handle_single_argument,
-    force_default,
-    service_request,
-    perform_request,
-    generate_error_result,
-    generate_ok_result,
-    get_default,
-    args_to_params,
-    process_service_request,
-    confirm_base_url,
-    confirm_base_region,
-    return_preferred_default,
-    base_url_regions,
-    autodiscover_region,
-    sanitize_dictionary,
-    calc_content_return,
-    log_class_startup,
-    _ALLOWED_METHODS
-)
-from ._uber import (
-    create_uber_header_payload,
-    handle_body_payload_ids,
-    scrub_target,
-    handle_container_operations,
-    uber_request_keywords,
-)
+from ._request import APIRequest
 
-__all__ = ["create_uber_header_payload", "handle_body_payload_ids", "scrub_target",
-           "handle_container_operations", "uber_request_keywords", "autodiscover_region",
-           "validate_payload", "generate_b64cred", "handle_single_argument", "force_default",
-           "service_request", "perform_request", "generate_error_result", "generate_ok_result",
-           "get_default", "args_to_params", "process_service_request", "confirm_base_url",
-           "confirm_base_region", "return_preferred_default", "base_url_regions",
-           "_ALLOWED_METHODS", "login_payloads", "logout_payloads", "sanitize_dictionary",
-           "calc_content_return", "log_class_startup"
-           ]
+__all__ = ["APIRequest"]

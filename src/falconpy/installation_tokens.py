@@ -188,7 +188,7 @@ class InstallationTokens(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def tokens_update(self: object, body: dict, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:  # pylint: disable=C0103
+    def tokens_update(self: object, body: dict, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update one or more tokens.
 
         Use this endpoint to edit labels, change expiration, revoke, or restore.

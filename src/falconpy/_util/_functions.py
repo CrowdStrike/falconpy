@@ -42,20 +42,30 @@ try:
 except ImportError:
     from json.decoder import JSONDecodeError
 from typing import Dict, Any, Union, Optional
-import requests
-import urllib3
 from copy import deepcopy
 from logging import Logger
+import requests
+import urllib3
 from urllib3.exceptions import InsecureRequestWarning
+from .._api_request import APIRequest
 from .._enum import BaseURL, ContainerBaseURL
 from .._constant import (
     PREFER_NONETYPE,
     MOCK_OPERATIONS,
     ALLOWED_METHODS as _ALLOWED_METHODS,
     USER_AGENT as _USER_AGENT,
-    MAX_DEBUG_RECORDS
+    MAX_DEBUG_RECORDS,
+    GLOBAL_API_MAX_RETURN
 )
-from .._result import Result, ExpandedResult
+from .._error import (
+    RegionSelectError,
+    SDKError,
+    InvalidMethod,
+    KeywordsOnly,
+    APIError,
+    NoContentWarning
+    )
+from .._result import Result
 urllib3.disable_warnings(InsecureRequestWarning)
 
 
@@ -96,6 +106,7 @@ def generate_b64cred(client_id: str, client_secret: str) -> str:
 
     return encoded
 
+
 def handle_single_argument(passed_arguments: Union[list, tuple], passed_keywords: Optional[dict], search_key: str) -> dict:
     """Handle a single argument that is provided without keywords.
 
@@ -131,6 +142,7 @@ def force_default(defaults: list, default_types: list = None):
             This method is a factory and runs through keywords passed to the called function,
             setting defaults on values within the **kwargs dictionary when necessary
             as specified in our "defaults" list that is passed to the parent wrapper.
+            It also wraps the protected method with an error handler.
             """
             element_count = 0   # Tracker so we can retrieve matching data types
             # Loop through every element specified in our defaults list
@@ -146,11 +158,18 @@ def force_default(defaults: list, default_types: list = None):
                 element_count += 1
 
             try:
-                created = func(*args, **kwargs)
-            except TypeError:
-                # They passed us an argument but did not specify what it was (non-keyword) [Issue #263]
-                created = generate_error_result("Keyword arguments must be used for this method.")
-
+                try:
+                    created = func(*args, **kwargs)
+                except TypeError as keywords_only:
+                    # They passed us an argument but did not specify
+                    # what it was (non-keyword) [Issue #263]
+                    raise KeywordsOnly from keywords_only
+            except KeywordsOnly as bad_keywords:
+                created = bad_keywords.result
+            except NoContentWarning as no_content_received:
+                created = no_content_received.result
+            except (SDKError, InvalidMethod) as bad_sdk_command:
+                created = bad_sdk_command.result
             return created
         return factory
     return wrapper
@@ -184,21 +203,95 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
             debug_count = caller.debug_record_count
         except AttributeError:
             debug_count = None
+        try:
+            do_sanitize = caller.sanitize_log
+        except AttributeError:
+            do_sanitize = None
 
     return perform_request(proxy=proxy,
                            timeout=timeout,
                            user_agent=user_agent,
                            log_util=log_utility,
                            debug_record_count=debug_count,
+                           sanitize=do_sanitize,
                            **kwargs
                            )
+
+
+# pylint: disable=R0912  # I don't disagree, but this will work for now.
+def calc_content_return(resp: requests.Response,
+                        contain: bool,
+                        auth: bool,
+                        log: Logger
+                        ) -> Union[dict, bytes]:
+    """Calculate the returned content based upon the results from the call to requests."""
+    returned = {}
+    returned_content_type = resp.headers.get('content-type', "Binary")
+    if log:
+        log.debug("RECEIVED: Content returned in %s format", returned_content_type)
+    if returned_content_type.startswith("application/json"):  # Issue 708
+        json_resp: dict = {}
+        try:
+            json_resp: dict = resp.json()
+        except JSONDecodeError:
+            # It says JSON but it came back to us as a binary
+            json_resp = resp.content.decode("ascii")
+            # returned = Result()(resp.status_code, resp.headers, resp.json())
+        finally:
+            if "resources" in json_resp and not contain:
+                # Default behavior is to return results as a standardized dictionary
+                returned = Result(status_code=resp.status_code,
+                                  headers=resp.headers,
+                                  body=dict(json_resp)
+                                  ).full_return
+            elif contain:
+                returned = Result(resp.status_code, resp.headers, json_resp)
+            else:
+                # Shortcut the data setup if we don't have a resources array.
+                # This still isn't behaving properly, falling back to the old method for now.
+                returned = Result()(resp.status_code, resp.headers, json_resp)
+                # returned = Result(resp.status_code, resp.headers, json_resp).full_return
+    elif contain:
+        returned = Result(resp.status_code, resp.headers, resp.json())
+    else:
+        # Binary response
+        if not resp.content:
+            if auth:
+                # Issue 433 - GovCloud autodiscovery is not supported
+                raise RegionSelectError(headers=resp.headers)
+
+            # Nothing was returned, so give them back the blank binary object
+            # Emulates < v1.3 functionality
+            returned = resp.content
+        else:
+            # returned = resp.content
+            returned = Result(resp.status_code, resp.headers, resp.content).full_return
+
+    # Catch and log API response errors
+    try:
+        if resp.status_code >= 400:
+            _message = None
+            if isinstance(returned, Result):
+                # We can't log pythonic results, convert to a dictionary
+                returned = returned.full_return
+            _errors = returned.get("body", {}).get("errors", [])
+            if _errors:
+                _message = f"ERROR: {_errors[0]['message']}"
+            raise APIError(code=resp.status_code, message=_message, headers=resp.headers)
+    except APIError as api_error:
+        # We still return a payload on API error, so all we
+        # want to do is generate the exception and log the error.
+        if log:
+            log.error(api_error.message)
+
+    return returned, returned_content_type
 
 
 @force_default(defaults=["headers"], default_types=["dict"])
 def perform_request(endpoint: str = "",  # pylint: disable=R0912
                     headers: dict = None,
-                    **kwargs
-                    ) -> object:  # May return dict or binary data types
+                    **kwargs      # May return dict or binary data types
+                    ) -> Union[Dict[str, Union[int, Dict[str, str], Dict[str, Dict]]], bytes]:
     """Leverage the requests library to perform the requested CrowdStrike OAuth2 API operation.
 
     Keyword arguments:
@@ -235,134 +328,108 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
     container: bool - Is this request being sent to a Falcon Container registry endpoint
         - Example: False
     log_util: Logger - Logging utility
-    debug_record_count: int - Maximum number of records to log in debug logs.
+    debug_record_count: int - Maximum number of records to log in debug logs
+    authenticating: bool - This request is driving a token request
     """
-    method = kwargs.get("method", "GET")
-    body = kwargs.get("body", None)
-    body_validator = kwargs.get("body_validator", None)
-    user_agent = kwargs.get("user_agent", None)
-    expand_result = kwargs.get("expand_result", False)
-    log_util: Logger = kwargs.get("log_util", None)
-    perform = True
-    if method.upper() in _ALLOWED_METHODS:
-        # Validate parameters
-        # 05.21.21/JSH - Param validation is now handled by the updated args_to_params method
-
+    api: APIRequest = APIRequest(endpoint, kwargs)
+    if api.method.upper() in _ALLOWED_METHODS:
         # Validate body payload
-        if body_validator:
+        if api.body_validator:
             try:
-                validate_payload(body_validator, body, kwargs.get("body_required", None))
-            except ValueError as err:
+                validate_payload(api.body_validator, api.body_payload, api.body_required)
+            except (ValueError, TypeError) as err:
                 returned = generate_error_result(message=f"{str(err)}")
-                perform = False
-            except TypeError as err:
-                returned = generate_error_result(message=f"{str(err)}")
-                perform = False
+                api.perform = False
 
         # Perform the request
-        if perform:
-            if user_agent:
-                headers["User-Agent"] = user_agent
+        if api.perform:
+            if api.user_agent:
+                headers["User-Agent"] = api.user_agent
             else:
-                headers["User-Agent"] = _USER_AGENT  # Force all requests to pass the User-Agent identifier
+                # Force all requests to pass the User-Agent identifier
+                headers["User-Agent"] = _USER_AGENT
             headers["CrowdStrike-SDK"] = _USER_AGENT
             try:
-                param_payload = kwargs.get("params", None)
-                body_payload = kwargs.get("body", None)
-                data_payload = kwargs.get("data", None)
-                response = requests.request(method.upper(), endpoint, params=param_payload,
-                                            headers=headers, json=body_payload, data=data_payload,
-                                            files=kwargs.get("files", []), verify=kwargs.get("verify", True),
-                                            proxies=kwargs.get("proxy", None), timeout=kwargs.get("timeout", None)
+                # Log our payloads if debugging is enabled
+                log_api_payloads(api, headers)
+                response = requests.request(api.method.upper(), endpoint, params=api.param_payload,
+                                            headers=headers, json=api.body_payload, data=api.data_payload,
+                                            files=api.files, verify=api.verify,
+                                            proxies=api.proxy, timeout=api.timeout
                                             )
-                # Force binary when content-type is not provided
-                returning_content_type = response.headers.get('content-type', "Binary")
-                if returning_content_type.startswith("application/json"):  # Issue 708
-                    #content_return = Result()(response.status_code, response.headers, response.json())
-                    json_resp: dict = response.json()
-                    if "resources" in json_resp:
-                        if log_util:
-                            log_util.debug("Doing it the right way")
-                        content_return = Result()(status_code=response.status_code,
-                                                headers=response.headers,
-                                                body=dict(json_resp),
-                                                #log=log_util
-                                                )
-                    else:
-                        # Shortcut the data setup if we don't have a resources array for now
-                        if log_util:
-                            log_util.debug("Doing it the WRONG WAY")
-                        content_return = Result()(response.status_code, response.headers, json_resp)
-                elif kwargs.get("container", False):
-                    content_return = Result()(response.status_code, response.headers, response.json())
-                    #content_return = Result()(status_code=response.status_code, headers=response.headers, body=response.json())
-                else:
-                    # Binary response
-                    content_return = response.content
+                api.debug_headers = response.headers
+                content_return, returning_content_type = calc_content_return(response,
+                                                                             api.container,
+                                                                             api.authenticating,
+                                                                             api.log_util
+                                                                             )
                 # Expanded results allow for status code and header checks on binary returns
-                if expand_result:
-                    returned = ExpandedResult()(response.status_code, response.headers, content_return)
-                    #returned = Result(full=content_return).tupled
+                # Maintained for < v1.3 syntax compatibility
+                if api.expand_result:
+                    returned = Result(response.status_code, response.headers, content_return).tupled
                 else:
                     returned = content_return
-                # Log our payloads if debugging is enabled
-                if log_util:
-                    rmax = kwargs.get("debug_record_count", None)
-                    if not rmax:
-                        rmax = MAX_DEBUG_RECORDS
-                    rmax = int(rmax)
-                    log_api_activity(endpoint,
-                                    method,
-                                    headers,
-                                    param_payload,
-                                    body_payload,
-                                    data_payload,
-                                    content_return,
-                                    returning_content_type,
-                                    rmax,
-                                    log_util
-                                    )
-            except JSONDecodeError:
+
+                # Log our response if debugging is enabled
+                log_api_activity(content_return, returning_content_type, api)
+
+            except RegionSelectError as bad_region:
+                # More than likely they tried to autoselect to GovCloud
+                returned = bad_region.result
+                api.log_error(returned.get("status_code"), bad_region.message, returned)
+
+            except JSONDecodeError as json_decode_error:
                 # No response content, but a successful request was made
-                returned = generate_ok_result(
-                    message="No content returned",
-                    code=response.status_code,
-                    headers=response.headers
-                    )
-            except Exception as err:  # pylint: disable=W0703  # General catch-all for anything coming out of requests
-                returned = generate_error_result(message=f"{str(err)}")
-                if log_util:
-                    log_util.debug("ERROR: %s", returned)
+                _log_msg = "WARNING: No content was received for this request."
+                api.log_warning(response.status_code, _log_msg, response.content)
+                raise NoContentWarning(headers=response.headers) from json_decode_error
+
+            except Exception as havoc:  # pylint: disable=W0703
+                # General catch-all for anything coming out of requests or the library itself.
+                # Pass this error up to the parent try/catch block residing within our decorator
+                # (force_default) for handling.
+                # raise
+                raise SDKError(message=f"{str(havoc)}", headers=api.debug_headers) from havoc
     else:
-        returned = generate_error_result(message="Invalid API operation specified.", code=405)
+        raise InvalidMethod
 
     return returned
 
 
-def log_api_activity(endpoint,
-                     method,
-                     headers,
-                     param_payload,
-                     body_payload,
-                     data_payload,
-                     content_return,
-                     content_type,
-                     log_max,
-                     log_facility: Logger,
-                     ):
+def log_api_payloads(api: APIRequest, headers: dict):
     """Log the payloads and API response to the debug log."""
-    log_facility.debug("ENDPOINT: %s (%s)", endpoint, method)
-    # Since we are done with these values, we can go ahead and sanitize them
-    log_facility.debug("HEADERS: %s", sanitize_dictionary(headers))
-    log_facility.debug("PARAMETERS: %s", sanitize_dictionary(param_payload))
-    log_facility.debug("BODY: %s", sanitize_dictionary(body_payload))
-    log_facility.debug("DATA: %s", sanitize_dictionary(data_payload))
-    if content_type.startswith("application/json"):
-        # This dictionary hasn't been returned yet,
-        # so we'll need to sanitize a copy of it instead.
-        log_facility.debug("RESULT: %s", sanitize_dictionary(deepcopy(content_return), log_max))
-    else:
-        log_facility.debug("RESULT: binary response received from API")
+    if api.log_util:
+        _headers = headers
+        _param_payload = api.param_payload
+        _body_payload = api.body_payload
+        _data_payload = api.data_payload
+        if api.sanitize_log:
+            _headers = sanitize_dictionary(deepcopy(headers))
+            _param_payload = sanitize_dictionary(deepcopy(api.param_payload))
+            _body_payload = sanitize_dictionary(deepcopy(api.body_payload))
+            _data_payload = sanitize_dictionary(deepcopy(api.data_payload))
+        api.log_util.debug("ENDPOINT: %s (%s)", api.endpoint, api.method)
+        api.log_util.debug("HEADERS: %s", _headers)
+        api.log_util.debug("PARAMETERS: %s", _param_payload)
+        api.log_util.debug("BODY: %s", _body_payload)
+        api.log_util.debug("DATA: %s", _data_payload)
+
+
+def log_api_activity(content_return: Union[dict, bytes], content_type: str, api: APIRequest):
+    """Log the payloads and API response to the debug log."""
+    if api.log_util:
+        if isinstance(content_return, dict):
+            _status_code = content_return.get("status_code", None)
+            if _status_code:
+                api.log_util.debug("STATUS CODE: %i", _status_code)
+
+        if content_type.startswith("application/json"):
+            if api.sanitize_log:
+                api.log_util.debug("RESULT: %s", sanitize_dictionary(deepcopy(content_return), api.max_debug))
+            else:
+                api.log_util.debug("RESULT: %s", content_return)
+        else:
+            api.log_util.debug("RESULT: binary response received from API")
 
 
 def generate_error_result(
@@ -458,7 +525,7 @@ def process_service_request(calling_object: object,  # pylint: disable=R0914 # (
                             ) -> dict:
     """Perform a request originating from a service class module.
 
-    Calculates the target_url based upon the provided operation ID and endpoint list.
+    Calculate the target_url based upon the provided operation ID and endpoint list.
 
     Keyword arguments:
     endpoints -- list - List of service class endpoints, defined as Endpoints in a service class. [required]
@@ -599,21 +666,63 @@ def autodiscover_region(provided_base_url: str, auth_result: dict):
 
     return new_base_url
 
+
 def sanitize_dictionary(dirty: Any, record_max: int = MAX_DEBUG_RECORDS) -> dict:
-    """Strips confidential data from logged dictionaries."""
+    """Strip confidential data from logged dictionaries."""
+    cleaned = dirty
     if isinstance(dirty, dict):
         redacted = ["access_token", "client_id", "client_secret", "member_cid", "token"]
         for redact in redacted:
-            if redact in dirty:
-                dirty[redact] = "REDACTED"
-            if "body" in dirty:
-                if redact in dirty["body"]:
-                    dirty["body"][redact] = "REDACTED"
-                if "resources" in dirty["body"]:
+            if redact in cleaned:
+                cleaned[redact] = "REDACTED"
+            if "body" in cleaned:
+                if redact in cleaned["body"]:
+                    cleaned["body"][redact] = "REDACTED"
+                if "resources" in cleaned["body"]:
                     # Log results are limited to MAX_DEBUG_RECORDS
                     # number of items within the resources list
-                    del dirty["body"]["resources"][max(1, min(record_max, 5000)):]
-        if "Authorization" in dirty:
-            dirty["Authorization"] = "Bearer REDACTED"
+                    if cleaned["body"]["resources"]:
+                        del cleaned["body"]["resources"][max(1, min(record_max, GLOBAL_API_MAX_RETURN)):]
 
-    return dirty
+        if "Authorization" in cleaned:
+            cleaned["Authorization"] = "Bearer REDACTED"
+
+    return cleaned
+
+
+# Python 3.6 compatibility warning: Cannot properly type the interface.
+def log_class_startup(interface: object, log_device: Logger = None):
+    """Log the startup of one of our interface or Service Classes."""
+    log_device.debug("CREATED: %s interface class", interface.__class__.__name__)
+    log_device.debug("CONFIG: Base URL set to %s", interface.base_url)
+    log_device.debug("CONFIG: SSL verification is set to %s", str(interface.ssl_verify))
+    log_device.debug("CONFIG: Timeout set to %s seconds", str(interface.timeout))
+    log_device.debug("CONFIG: Proxy dictionary: %s", str(interface.proxy))
+    log_device.debug("CONFIG: User-Agent string set to: %s", interface.user_agent)
+    log_device.debug("CONFIG: Token renewal window set to %s seconds",
+                     str(interface.renew_window)
+                     )
+    log_device.debug("CONFIG: Maximum number of records to log: %s",
+                     interface.debug_record_count
+                     )
+    log_device.debug(
+        "CONFIG: Log sanitization is %s", "enabled" if interface.sanitize_log else "disabled"
+        )
+
+
+def log_message(log_device: Logger = None, msg: str = None):
+    """Write a debug log message."""
+    if log_device and msg:
+        log_device.debug(msg)
+
+
+def log_error(log_device: Logger = None, msg: str = None):
+    """Write an error to the log."""
+    if log_device and msg:
+        log_device.error(msg)
+
+
+def log_warning(log_device: Logger = None, msg: str = None):
+    """Write a warning to the log."""
+    if log_device and msg:
+        log_device.warning(msg)
