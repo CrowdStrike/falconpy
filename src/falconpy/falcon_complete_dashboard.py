@@ -681,7 +681,10 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_device_count_collection_queries_by_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_device_count_collection_queries_by_filter(self: object,
+                                                      parameters: dict = None,
+                                                      **kwargs
+                                                      ) -> Dict[str, Union[int, dict]]:
         """Retrieve device count collection Ids that match the provided FQL filter, criteria with scrolling enabled.
 
         Keyword arguments:

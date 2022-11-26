@@ -33,6 +33,8 @@ class TestAuthentications:
 
     def serviceAny_TestCredentialAuthFailure(self):
         bad_falcon = ZeroTrustAssessment(creds={"client_id": "This", "client_secret": "WontWork"}, debug=_DEBUG)
+        # Check the service class login code path at the same time
+        bad_falcon.login()
         result = bad_falcon.getAssessmentV1(ids='12345678')
 
         if result["status_code"] in AllowedResponses:
@@ -49,7 +51,6 @@ class TestAuthentications:
             return False
 
     def serviceAny_TestStaleObjectAuth(self):
-
         falcon = CloudConnectAWS(auth_object=OAuth2(creds={"client_id": auth.config["falcon_client_id"],
                                                            "client_secret": auth.config["falcon_client_secret"]
                                                            },
@@ -152,6 +153,7 @@ class TestAuthentications:
             return False
 
     def serviceAny_TestObjectAuth(self):
+        _returned = True
         # Should also test direct auth in the authentication class
         auth_obj = OAuth2(client_id=auth.config["falcon_client_id"],
                           client_secret=auth.config["falcon_client_secret"],
@@ -161,10 +163,30 @@ class TestAuthentications:
         # While we're at it, test user_agent override
         falcon = CloudConnectAWS(auth_object=auth_obj, user_agent=f"{_TITLE}/{str(_VERSION)}", debug=_DEBUG)
         result = falcon.QueryAWSAccounts()
-        if result["status_code"] in AllowedResponses:
-            return True
-        else:
-            return False
+        if result["status_code"] not in AllowedResponses:
+            _returned = False
+        # And test the new built in logout functionality
+        falcon.logout()
+        # Garf up our creds and do it again to force an error
+        auth_obj.creds = {"client_id" : "Invalid", "client_secret": "Credential"}
+        falcon.logout()
+        # Now test the override property setters
+        falcon.proxy = {"https": "https://notreallyaproxy.com:8888"}
+        falcon.timeout = (5, 5)
+        falcon.token_renew_window = 30
+        falcon.user_agent = "falconpy-unit-testing/1337.1"
+        # Finally test the property getters
+        if not falcon.proxy["https"] == "https://notreallyaproxy.com:8888":
+            _returned = False
+        if not falcon.timeout == (5, 5):
+            _returned = False
+        if not falcon.token_renew_window == 30:
+            _returned = False
+        if not falcon.user_agent == "falconpy-unit-testing/1337.1":
+            _returned = False
+
+        return _returned
+
 
     def serviceAny_TestBadObjectAuth(self):
         # Should also test bad direct auth in the authentication class
@@ -180,7 +202,7 @@ class TestAuthentications:
                           client_secret=auth.config["falcon_client_secret"],
                           debug=_DEBUG
                           )
-        #auth_obj.token()
+        # auth_obj.token()
         # Test passing just the service class object, not the auth_object attribute
         # Service Class base object should detect and handle this.
         falcon = CloudConnectAWS(auth_object=auth_obj)

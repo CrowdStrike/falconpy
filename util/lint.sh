@@ -1,9 +1,22 @@
 #!/bin/bash
+
 if ! [[ -z "$1" ]]
 then
 	TARGET=$1
 else
 	TARGET="src/falconpy"
 fi
-flake8 $TARGET --count --exit-zero --max-complexity=15 --max-line-length=127 --statistics
-pylint $TARGET --exit-zero --max-line-length=127 --disable=R0801
+
+function splat() ( echo "--------------------------------------------------------"; )
+
+echo -e "\nFormatting"
+splat
+flake8 $TARGET --count --statistics
+
+echo -e "\nCode style and syntax"
+splat
+pylint $TARGET
+
+echo "Docstring style and syntax"
+splat
+pydocstyle $TARGET

@@ -661,7 +661,11 @@ class SensorUpdatePolicy(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_kernels(self: object, distinct_field: str = "id", parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_kernels(self: object,
+                      distinct_field: str = "id",
+                      parameters: dict = None,
+                      **kwargs
+                      ) -> Dict[str, Union[int, dict]]:
         """Retrieve kernel compatibility info for Sensor Update Builds.
 
         Keyword arguments:

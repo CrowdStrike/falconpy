@@ -35,12 +35,22 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=R0903  # Using a class so that the data structure is callable
+# pylint: disable=R0903
 from typing import Tuple, Dict, Union
 
 
 class ExpandedResult:
-    """Callable subsclass to handle parsing of expanded result client output."""
+    """Callable subsclass to handle parsing of expanded result client output.
+
+    DEPRECATED
+    ---
+    This class is deprecated and maintained for backwards compatibility purposes only.
+
+    Please move all code over to use Result.tupled.
+
+    Examples: tupled_response: Result = falcon.query_detects(pythonic=True).tupled
+              tupled_response: Result = Result(full=falcon.query_detects()).tupled
+    """
 
     def __call__(self,
                  status_code: int,

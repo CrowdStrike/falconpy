@@ -124,7 +124,7 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:  # pylint: disable=C0103 # Matching API
+    def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete the ML Exclusions by ID.
 
         Keyword arguments:
