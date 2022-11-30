@@ -22,7 +22,14 @@
 from ._version import _VERSION, _MAINTAINER, _AUTHOR, _AUTHOR_EMAIL
 from ._version import _CREDITS, _DESCRIPTION, _TITLE, _PROJECT_URL
 from ._version import _DOCS_URL, _KEYWORDS
-from ._auth_object import BaseFalconAuth, FalconInterface, UberInterface
+from ._auth_object import (
+    BaseFalconAuth,
+    BearerToken,
+    LogFacility,
+    FalconInterface,
+    UberInterface,
+    InterfaceConfiguration
+    )
 from ._service_class import BaseServiceClass, ServiceClass
 from ._util import confirm_base_region, confirm_base_url
 from ._constant import MAX_DEBUG_RECORDS, ALLOWED_METHODS, USER_AGENT
@@ -40,8 +47,9 @@ from ._error import (
     TokenNotSpecified,
     KeywordsOnly,
     CannotRevokeToken,
-    FunctionalityNotImplemented
-)
+    FunctionalityNotImplemented,
+    InvalidBaseURL
+    )
 from ._result import (
     Result,
     ExpandedResult,
@@ -139,8 +147,9 @@ __all__ = [
     "TokenNotSpecified", "KeywordsOnly", "ALLOWED_METHODS", "USER_AGENT", "APIRequest",
     "ExpandedResult", "CannotRevokeToken", "Headers", "Meta", "Resources",
     "ResponseComponent", "BaseDictionary", "Errors", "BaseResource", "RawBody", "BinaryFile",
-    "FunctionalityNotImplemented"
-]
+    "FunctionalityNotImplemented", "BearerToken", "LogFacility", "InvalidBaseURL",
+    "InterfaceConfiguration"
+    ]
 """
 This is free and unencumbered software released into the public domain.
 

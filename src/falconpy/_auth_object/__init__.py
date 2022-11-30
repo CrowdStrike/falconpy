@@ -38,5 +38,10 @@ For more information, please refer to <https://unlicense.org>
 from ._base_falcon_auth import BaseFalconAuth
 from ._falcon_interface import FalconInterface
 from ._uber_interface import UberInterface
+from ._bearer_token import BearerToken
+from ._log_facility import LogFacility
+from ._interface_config import InterfaceConfiguration
 
-__all__ = ["BaseFalconAuth", "FalconInterface", "UberInterface"]
+__all__ = ["BaseFalconAuth", "FalconInterface", "UberInterface",
+           "BearerToken", "LogFacility", "InterfaceConfiguration"
+           ]
