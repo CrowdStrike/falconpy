@@ -42,7 +42,7 @@ from typing import Dict, Type, Union, Optional
 
 from .._constant import MAX_DEBUG_RECORDS
 from .._auth_object import FalconInterface
-
+from .._error import FunctionalityNotImplemented
 
 class BaseServiceClass(ABC):
     """Base class for all Service Classes."""
@@ -208,7 +208,7 @@ class BaseServiceClass(ABC):
     @property
     def refreshable(self) -> bool:
         """Flag indicating if the token for this auth_object is refreshable."""
-        return self.auth_object.refreshable
+        return self.auth_object.cred_format_valid
 
     @property
     def debug(self) -> bool:
@@ -226,6 +226,10 @@ class BaseServiceClass(ABC):
         """Provide the proxy from the auth_object."""
         return self.auth_object.proxy
 
+    @proxy.setter
+    def proxy(self, _):
+        raise FunctionalityNotImplemented
+
     @property
     def timeout(self) -> int:
         """Provide the timeout from the auth_object."""
@@ -241,16 +245,19 @@ class BaseServiceClass(ABC):
         """Provide the user_agent from the auth_object."""
         return self.auth_object.user_agent
 
+    @user_agent.setter
+    def user_agent(self, _):
+        raise FunctionalityNotImplemented
+
     # Mutable
     @property
     def debug_record_count(self) -> int:
         """Return the maximum number of records to log to a debug log."""
-        if self.auth_object.debug_record_count != self._debug_record_count:
-            returned = self._debug_record_count
-        else:
-            returned = self.auth_object.debug_record_count
+        _returned = self.auth_object.debug_record_count
+        if self._debug_record_count is not None:
+            _returned = self._debug_record_count
 
-        return returned
+        return _returned
 
     @debug_record_count.setter
     def debug_record_count(self, value):
@@ -266,6 +273,18 @@ class BaseServiceClass(ABC):
         return _returned
 
     @sanitize_log.setter
-    def sanitize_log(self, value) -> bool:
+    def sanitize_log(self, value):
         """Enable or disable log sanitization."""
-        self._sanitize = value
+        if self._sanitize is not None:
+            self._sanitize = value
+        else:
+            self.auth_object.sanitize_log = value
+
+    # Changing this setting will impact all traffic thru the interface.
+    @property
+    def ssl_verify(self) -> bool:
+        return self.auth_object.ssl_verify
+
+    @ssl_verify.setter
+    def ssl_verify(self, value):
+        self.auth_object.ssl_verify = value
