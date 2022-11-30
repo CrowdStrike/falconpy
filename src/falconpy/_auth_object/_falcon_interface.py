@@ -1,7 +1,7 @@
-"""Authentication Object Base Class.
+"""API Interface base class.
 
-This file contains the definition of the base class that provides the
-necessary functions to authenticate to the CrowdStrike Falcon OAuth2 API.
+This file contains the definition of the standard base class that provides
+necessary functionality to authenticate to the CrowdStrike Falcon OAuth2 API.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -42,6 +42,9 @@ import time
 from logging import Logger, getLogger
 from typing import Dict, Optional, Union
 from ._base_falcon_auth import BaseFalconAuth
+from ._bearer_token import BearerToken
+from ._log_facility import LogFacility
+from ._interface_config import InterfaceConfiguration
 from .._enum import TokenFailReason
 from .._util import (
     autodiscover_region,
@@ -53,7 +56,6 @@ from .._util import (
 from .._error import InvalidCredentials
 
 
-# pylint: disable=R0902
 class FalconInterface(BaseFalconAuth):
     """Standard Falcon API interface used by Service Classes."""
 
@@ -65,28 +67,16 @@ class FalconInterface(BaseFalconAuth):
     # to APIHarness, OAuth2 or custom inheriting classes.
     #
     # The default credential dictionary, where the client_id and client_secret are stored.
-    creds: Dict[str, str] = {}
+    _creds: Dict[str, str] = {}
     # Starting with v1.3.0 minimal python native logging is available. In order
     # to reduce potential impacts to customer configurations, this facility is
     # extremely limited and not implemented by default. (Meaning logs are not generated.)
     # To enable logging, pass the keyword "debug" with a value of True to the constructor.
-    log: Optional[Logger] = None
-    _debug_record_count: int = None
-    _sanitize: bool = True
-    _proxy: dict = None
-    _timeout: int or float = None
-    _renew_window: int = 120
-    _user_agent: str = None
-    # Flag indicating if we have the necessary information to automatically refresh the token.
-    refreshable: bool = True
-    # Integer specifying the amount of time remaining before the token expires (in seconds).
-    token_expiration: int = 0
-    # Float indicating the moment in time that the token was generated (timestamp).
-    token_time: float = time.time()
-    # String containing the error message received from the API when token generation failed.
-    token_fail_reason: Optional[str] = None
-    # Integer representing the HTTP status code received when generating the token.
-    token_status: Optional[int] = None
+    _log: Optional[LogFacility] = LogFacility()
+    # Our token is stored within a BearerToken object.
+    _token: Optional[BearerToken] = BearerToken()
+    # Configuration detail for this interface.
+    _config: InterfaceConfiguration = None
 
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
@@ -98,12 +88,12 @@ class FalconInterface(BaseFalconAuth):
     def __init__(self,
                  access_token: Optional[Union[str, bool]] = False,
                  base_url: Optional[str] = "https://api.crowdstrike.com",
-                 creds: Optional[dict] = None,
+                 creds: Optional[Dict[str, str]] = None,
                  client_id: Optional[str] = None,
                  client_secret: Optional[str] = None,
                  member_cid: Optional[str] = None,
                  ssl_verify: Optional[bool] = True,
-                 proxy: Optional[dict] = None,
+                 proxy: Optional[Dict[str, str]] = None,
                  timeout: Optional[Union[float, tuple]] = None,
                  user_agent: Optional[str] = None,
                  renew_window: Optional[int] = 120,
@@ -112,11 +102,13 @@ class FalconInterface(BaseFalconAuth):
                  sanitize_log: Optional[bool] = None
                  ) -> "FalconInterface":
         """Construct an instance of the FalconInterface class."""
-        self.base_url: str = base_url
-        self.ssl_verify: bool = ssl_verify
-        self._timeout: float or tuple = timeout
-        self._proxy: Dict[str, str] = proxy
-        self._user_agent: str = user_agent
+        # Setup our configuration object using the provided keywords.
+        self._config: InterfaceConfiguration = InterfaceConfiguration(base_url=base_url,
+                                                                      proxy=proxy,
+                                                                      timeout=timeout,
+                                                                      user_agent=user_agent,
+                                                                      ssl_verify=ssl_verify
+                                                                      )
         # ____ _  _ ___ _  _ ____ _  _ ___ _ ____ ____ ___ _ ____ _  _
         # |__| |  |  |  |__| |___ |\ |  |  | |    |__|  |  | |  | |\ |
         # |  | |__|  |  |  | |___ | \|  |  | |___ |  |  |  | |__| | \|
@@ -134,26 +126,24 @@ class FalconInterface(BaseFalconAuth):
             creds = {}
         # Credential Authentication (also powers Direct Authentication)
         self.creds: Dict[str, str] = creds
-        # Legacy (Token) Authentication (fallback)
-        self.token_value: Optional[Union[str, bool]] = access_token
-        if access_token:
-            # Store this non-refreshable token
-            self.token_value = access_token
-            # We do not have API credentials, disable token refresh.
-            self.refreshable = False
-            # Assume the token was just generated.
-            self.token_expiration = 1799
-
         # Set the token renewal window, ignored when using Legacy Authentication.
-        self._renew_window: int = max(min(renew_window, 1200), 120)
-        # Ignored when debugging is disabled
-        self._debug_record_count: int = debug_record_count
-        # Allow log sanitization to be overridden
-        if isinstance(sanitize_log, bool):
-            self._sanitize = sanitize_log
+        self.renew_window: int = max(min(renew_window, 1200), 120)
+        # Legacy (Token) Authentication (fallback)
+        if access_token:
+            # Store this non-refreshable token, assuming it was just generated.
+            self._token: BearerToken = BearerToken(access_token, 1799)
+
         # Log the creation of this object if debugging is enabled.
         if debug:
-            self.log: Logger = getLogger(__name__.split(".", maxsplit=1)[0])
+            # Ignored when debugging is disabled
+            _debug_record_count: int = debug_record_count if debug_record_count else None
+            # Allow log sanitization to be overridden
+            _sanitize = sanitize_log if isinstance(sanitize_log, bool) else None
+
+            self._log: LogFacility = LogFacility(getLogger(__name__.split(".", maxsplit=1)[0]),
+                                                 _debug_record_count,
+                                                 _sanitize
+                                                 )
             log_class_startup(self, self.log)
 
     # _  _ ____ ___ _  _ ____ ___  ____
@@ -178,13 +168,8 @@ class FalconInterface(BaseFalconAuth):
 
         This method can also be leveraged to generate tokens without impacting authorization state.
         """
-        def _token_failure(fail_reason: str, status: int):
-            """Update the authentication status updater (failure conditions only)."""
-            self.token_expiration = 403
-            self.token_status = status
-            self.token_fail_reason = fail_reason
         _returned_headers = {}
-        try:  # pylint: disable=R1702
+        try:
             if self.cred_format_valid:
                 operation, target_url, data_payload = login_payloads(self.creds, self.base_url)
                 # Log the call to this operation if debugging is enabled.
@@ -200,20 +185,25 @@ class FalconInterface(BaseFalconAuth):
                 if stateful:
                     self.token_status = returned["status_code"]
                     if self.token_status == 201:
-                        self.token_expiration = returned["body"]["expires_in"]
-                        self.token_time = time.time()
-                        self.token_value = returned["body"]["access_token"]
-                        self.token_fail_reason = None
-                        # Cloud Region auto discovery
+                        # Token generation was successful.
+                        self._token = BearerToken(token_value=returned["body"]["access_token"],
+                                                  expiration=returned["body"]["expires_in"],
+                                                  status=201
+                                                  )
+                        # Cloud Region auto discovery.
                         self.base_url = autodiscover_region(self.base_url, returned)
                     else:
-                        self.token_expiration = 0  # Aligning to Uber class functionality
-                        if "errors" in returned["body"]:
-                            if returned["body"]["errors"]:
-                                self.token_fail_reason = returned["body"]["errors"][0]["message"]
+                        # Token generation failure, reset the current token and check for an error response.
+                        self._token = BearerToken(status=returned["status_code"])
+                        # Retrieve the list of errors, there should only be one item in the list.
+                        error_list = returned["body"].get("errors", [])
+                        if error_list:
+                            self.bearer_token.fail_token(returned["status_code"],
+                                                         error_list[0]["message"]
+                                                         )
             else:
                 if stateful:
-                    _token_failure(TokenFailReason["INVALID"], 403)
+                    self.bearer_token.fail_token(403, TokenFailReason["INVALID"])
                 raise InvalidCredentials(headers=_returned_headers)
 
         except InvalidCredentials as bad_creds:
@@ -247,8 +237,7 @@ class FalconInterface(BaseFalconAuth):
                                            sanitize=self.sanitize_log
                                            )
                 if stateful:
-                    self.token_expiration = 0
-                    self.token_value = False
+                    self._token: BearerToken = BearerToken()
             else:
                 raise InvalidCredentials
         except InvalidCredentials as bad_creds:
@@ -264,63 +253,154 @@ class FalconInterface(BaseFalconAuth):
     #
     # These properties are present in all FalconInterface derivatives.
     @property
-    def proxy(self) -> dict:
+    def creds(self) -> Dict[str, str]:
+        """Return the current credential dictionary."""
+        return self._creds
+
+    @creds.setter
+    def creds(self, value: Dict[str, str]):
+        self._creds = value
+
+    @property
+    def config(self) -> InterfaceConfiguration:
+        """Return the interface configuration object for this interface."""
+        return self._config
+
+    @config.setter
+    def config(self, value: InterfaceConfiguration):
+        if not isinstance(value, InterfaceConfiguration):
+            raise ValueError
+        self._config = value
+
+    @property
+    def base_url(self) -> str:
+        """Return the base URL for this interface from the configuration object."""
+        return self._config.base_url
+
+    @base_url.setter
+    def base_url(self, value):
+        self._config.base_url = value
+
+    @property
+    def ssl_verify(self) -> bool:
+        """Return the SSL verification setting from the configuration object."""
+        return self._config.ssl_verify
+
+    @ssl_verify.setter
+    def ssl_verify(self, value: bool):
+        self._config.ssl_verify = value
+
+    @property
+    def proxy(self) -> Dict[str, str]:
         """Return the current proxy setting."""
-        return self._proxy
+        return self._config.proxy
 
     @proxy.setter
-    def proxy(self, value: dict):
-        self._proxy = value
+    def proxy(self, value: Dict[str, str]):
+        self._config.proxy = value
 
     @property
     def user_agent(self) -> str:
         """Return the current user agent setting."""
-        return self._user_agent
+        return self._config.user_agent
 
     @user_agent.setter
     def user_agent(self, value: str):
-        self._user_agent = value
+        self._config.user_agent = value
 
     @property
-    def renew_window(self) -> int:
-        """Return the current token renew window setting."""
-        return self._renew_window
-
-    @renew_window.setter
-    def renew_window(self, value: int):
-        self._renew_window = value
-
-    @property
-    def timeout(self) -> dict:
+    def timeout(self) -> Union[int, float]:
         """Return the current timeout setting."""
-        return self._timeout
+        return self._config.timeout
 
     @timeout.setter
     def timeout(self, value: Union[int, float]):
-        self._timeout = value
+        self._config.timeout = value
 
     @property
     def debug_record_count(self) -> int:
         """Return the current debug record count setting."""
-        return self._debug_record_count
+        return self.log_facility.debug_record_count
 
     @debug_record_count.setter
     def debug_record_count(self, value: int):
-        self._debug_record_count = value
+        self.log_facility.debug_record_count = value
 
     @property
     def sanitize_log(self) -> bool:
         """Return the current log sanitization."""
-        _sanitize = True
-        if isinstance(self._sanitize, bool):
-            _sanitize = self._sanitize
-        return _sanitize
+        return self.log_facility.sanitize
 
     @sanitize_log.setter
     def sanitize_log(self, value):
-        self._sanitize = value
+        self.log_facility.sanitize = value
+
+    # These properties provide reflection into the token object
+    @property
+    def bearer_token(self) -> BearerToken:
+        """Return the bearer token object for this configuration."""
+        return self._token
+
+    @property
+    def renew_window(self) -> int:
+        """Return the current token renew window setting."""
+        return self.bearer_token.renew_window
+
+    @renew_window.setter
+    def renew_window(self, value: int):
+        self.bearer_token.renew_window = value
+
+    @property
+    def token_expiration(self) -> int:
+        """Return the current expiration setting."""
+        return self.bearer_token.expiration
+
+    @token_expiration.setter
+    def token_expiration(self, value: int):
+        self.bearer_token.expiration = value
+
+    @property
+    def token_time(self) -> float:
+        """Return the current token_time setting."""
+        return self.bearer_token.token_time
+
+    @token_time.setter
+    def token_time(self, value: float):
+        self.bearer_token.token_time = value
+
+    @property
+    def token_fail_reason(self) -> int:
+        """Return the current fail_reason setting."""
+        return self.bearer_token.fail_reason
+
+    @token_fail_reason.setter
+    def token_fail_reason(self, value: int):
+        self.bearer_token.fail_reason = value
+
+    @property
+    def token_status(self) -> int:
+        """Return the current status setting."""
+        return self.bearer_token.status
+
+    @token_status.setter
+    def token_status(self, value: int):
+        self.bearer_token.status = value
+
+    @property
+    def token_value(self) -> int:
+        """Return the current value setting."""
+        return self.bearer_token.value
+
+    @token_value.setter
+    def token_value(self, value: int):
+        self.bearer_token.value = value
 
     # All properties defined here are by design IMMUTABLE.
+    @property
+    def refreshable(self) -> bool:
+        """Return a boolean if this interface can automatically refresh tokens when they expire."""
+        return self.cred_format_valid
+
     @property
     def token_expired(self) -> bool:
         """Return whether the token is ready to be renewed."""
@@ -336,8 +416,18 @@ class FalconInterface(BaseFalconAuth):
         """Return a boolean that the creds dictionary is valid."""
         return bool("client_id" in self.creds and "client_secret" in self.creds)
 
-    # The default functionality of a FalconInterface object performs a token
-    # refresh whenever a request is made for the auth_headers property.
+    @property
+    def log(self) -> Logger:
+        """Return the logger from our log facility."""
+        return self._log.log
+
+    @property
+    def log_facility(self) -> LogFacility:
+        """Return the entire log facility."""
+        return self._log
+
+    # The default functionality of a FalconInterface object performs a token refresh
+    # whenever a request is made for the auth_headers property and the token is stale.
     @property
     def auth_headers(self) -> Dict[str, str]:
         """Return a Bearer token baked into an Authorization header ready for an HTTP request."""

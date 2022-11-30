@@ -17,6 +17,7 @@ from falconpy import (
     BaseServiceClass,
     FunctionalityNotImplemented,
     FalconInterface,
+    ServiceClass
     )
 
 auth = Authorization.TestAuthorization()
@@ -29,7 +30,7 @@ if _DEBUG:
     _DEBUG = True
 
 
-class SimpleServiceClass(FalconInterface):
+class SimpleServiceClass(BaseServiceClass):
     """I'm just here to test extensibility."""
 
     def init(self, access_token, proxy, timeout, renew_window, user_agent):
@@ -90,8 +91,8 @@ class TestServiceClass:
 
     def test_property_debug_record_count(self):
         global _CLEAN
-        _CLEAN = Hosts(auth=_OBJECT, user_agent="clean/1.0", timeout=120, proxy={})
-        assert bool(not _CLEAN.debug_record_count)
+        _CLEAN = Hosts(creds=config.creds, user_agent="clean/1.0", timeout=120, proxy={})
+        assert bool(_CLEAN.debug_record_count)
 
     def test_property_refreshable(self):
         assert bool(_CLEAN.refreshable)
@@ -100,7 +101,6 @@ class TestServiceClass:
         assert bool(not _CLEAN.token_fail_reason)
 
     def test_property_token_status(self):
-        _CLEAN.login()
         assert bool(_CLEAN.token_status)
     
     def test_property_headers(self):
@@ -117,7 +117,6 @@ class TestServiceClass:
         assert bool(_CLEAN.renew_window)
 
     def test_property_renew_window_setter(self):
-
         _CLEAN.renew_window = 1137
         assert bool(_CLEAN.renew_window == 1137)
 
@@ -148,24 +147,25 @@ class TestServiceClass:
             timeout=(42,99),
             renew_window=777,
             user_agent="crowdstrike-falconpy-base-testing/1.2.3",
+            debug_record_count=43,
             debug=_DEBUG
             )
         _success = False
-        if _SIMPLE.proxy["CrowdStrike"] == "WE STOP BREACHES" \
-                and _SIMPLE.timeout[0] == 42 \
-                and _SIMPLE.renew_window == 777 \
-                and "1.2.3" in _SIMPLE.user_agent:
-                try:
-                    _SIMPLE.user_agent = "this-is-different/3.0"
-                    _SIMPLE.proxy = {"CrowdStrike" : "STILL STOPPING BREACHES"}
-                    _SIMPLE.renew_window = 1234
-                    _SIMPLE.debug_record_count = 42
-                    _SIMPLE.timeout = (100, 101)
-                    _SIMPLE.login()
-                except FunctionalityNotImplemented:
-                    _success = True
+        try:
+            _SIMPLE.user_agent = "this-is-different/3.0"
+            _SIMPLE.proxy = {"CrowdStrike" : "STILL STOPPING BREACHES"}
+            _SIMPLE.renew_window = 1234
+            _SIMPLE.debug_record_count = 42
+            _SIMPLE.timeout = (100, 101)
 
-        assert _success
+        except FunctionalityNotImplemented:
+            # Should crash because we're inheriting the base
+            # he doesn't implement a setter for proxy or user_agent
+            _success = True
+
+        assert bool(_success)
+        #assert _success
+            
 
     def test_auth_object_direct_change(self):
         _DIRECT: ExtremelyThinServiceClass = ExtremelyThinServiceClass(

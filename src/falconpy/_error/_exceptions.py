@@ -99,6 +99,12 @@ class InvalidOperation(SDKError):
     _code = 418
 
 
+class InvalidBaseURL(SDKError):
+    """The base URL specified is invalid or does not exist."""
+    _message = "Invalid base URL address specified."
+    _code = 400
+
+
 class FunctionalityNotImplemented(SDKError):
     """This functionality is not yet implemented."""
 
