@@ -45,7 +45,8 @@ from ._exceptions import (
     InvalidCredentials,
     APIError,
     CannotRevokeToken,
-    FunctionalityNotImplemented
+    FunctionalityNotImplemented,
+    InvalidBaseURL
     )
 from ._warnings import (
     SDKWarning,

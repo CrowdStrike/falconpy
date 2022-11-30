@@ -1,0 +1,156 @@
+"""Bearer Token class.
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |   CROWDSTRIKE FALCON    |::.. . |    FalconPy
+`-------'                         `-------'
+
+OAuth2 API - Customer SDK
+
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+
+For more information, please refer to <https://unlicense.org>
+"""
+import time
+from typing import Optional
+
+
+class BearerToken:
+    """This class represents a bearer token received from the API."""
+
+    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
+    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
+    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
+    #
+    # Integer specifying the amount of time remaining before the token expires (in seconds).
+    _expiration: int = 0
+    # Float indicating the moment in time that the token was generated (timestamp).
+    _token_time: float = 0
+    # String containing the error message received from the API when token generation failed.
+    _fail_reason: Optional[str] = None
+    # Integer representing the HTTP status code received when generating the token.
+    _status: Optional[int] = None
+    # String representation of the token.
+    _value: Optional[str] = None
+    # Number of seconds between token expiration and now before a token is considered stale.
+    _renew_window: int = 120
+
+    # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
+    # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
+    # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
+    #
+    # Tokens can be instantiated without a value (e.g. invalid or expired).
+    def __init__(self, token_value: str = None, expiration: int = None, status: int = None):
+        if token_value:
+            self._value = token_value
+        if expiration:
+            self._expiration = expiration
+        if token_value:
+            self._token_time = time.time()
+        if status:
+            self._status = status
+
+
+    # _  _ ____ ___ _  _ ____ ___  ____
+    # |\/| |___  |  |__| |  | |  \ [__
+    # |  | |___  |  |  | |__| |__/ ___]
+    # 
+    def fail_token(self, status_code: int, reason: str):
+        """Fail the token by clearing the token value and setting the expiration to zero."""
+        self.expiration = 0
+        self.value = None
+        if status_code:
+            self.status = 403
+        if reason:
+            self.fail_reason = reason
+    # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
+    # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
+    # |    |  \ |__| |    |___ |  \  |  | |___ ___]
+    #
+    # These properties are present in all FalconInterface derivatives.
+    # @property
+    # def refreshable(self) -> bool:
+    #     """Return the current refreshable setting."""
+    #     return self._refreshable
+
+    # @refreshable.setter
+    # def refreshable(self, value: bool):
+    #     self._refreshable = value
+
+    @property
+    def expiration(self) -> int:
+        """Return the current expiration setting."""
+        return self._expiration
+
+    @expiration.setter
+    def expiration(self, value: int):
+        self._expiration = value
+
+    @property
+    def token_time(self) -> float:
+        """Return the current token_time setting."""
+        return self._token_time
+
+    @token_time.setter
+    def token_time(self, value: float):
+        self._token_time = value
+
+    @property
+    def fail_reason(self) -> int:
+        """Return the current fail_reason setting."""
+        return self._fail_reason
+
+    @fail_reason.setter
+    def fail_reason(self, value: int):
+        self._fail_reason = value
+
+    @property
+    def status(self) -> int:
+        """Return the current status setting."""
+        return self._status
+
+    @status.setter
+    def status(self, value: int):
+        self._status = value
+
+    @property
+    def value(self) -> int:
+        """Return the current value setting."""
+        return self._value
+
+    @value.setter
+    def value(self, value: int):
+        self._value = value
+
+    @property
+    def renew_window(self) -> int:
+        """Return the current renew_window setting."""
+        return self._renew_window
+
+    @renew_window.setter
+    def renew_window(self, value: int):
+        self._renew_window = value

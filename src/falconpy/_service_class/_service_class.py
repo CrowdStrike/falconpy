@@ -161,7 +161,7 @@ class ServiceClass(BaseServiceClass):
         self.validate_payloads: bool = kwargs.get("validate_payloads", True)
 
         # The following properties can be overridden per Service Class.
-        for item in ["proxy", "timeout", "user_agent", "debug_record_count"]:
+        for item in ["proxy", "timeout", "user_agent"]:
             if kwargs.get(item, None) is not None:
                 setattr(self, f"_override_{item}", kwargs.get(item))
 

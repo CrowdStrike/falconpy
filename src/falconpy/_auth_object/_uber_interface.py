@@ -1,7 +1,4 @@
-"""Authentication Object Base Class.
-
-This file contains the definition of the base class that provides the
-necessary functions to authenticate to the CrowdStrike Falcon OAuth2 API.
+"""Uber Interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
