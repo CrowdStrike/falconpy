@@ -45,7 +45,11 @@ class TestRecon:
                                                                      assigned_to_uuid="1234567",
                                                                      status="new"
                                                                      ),
-            "update_action": falcon.update_action(body={"id": "1234567"}),
+            "update_action": falcon.update_action(body={"id": "1234567",
+                                                        "frequency": "whatever",
+                                                        "recipients": ["definitely bob"],
+                                                        "status": "OhSoVeryUrgent"
+                                                        }),
             "update_action_as_well": falcon.update_action(id="1234567",
                                                           frequency="often",
                                                           status="new",
