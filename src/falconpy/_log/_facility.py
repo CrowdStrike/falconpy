@@ -1,4 +1,4 @@
-"""FalconPy Request Log class.
+"""Logging Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -36,63 +36,67 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from logging import Logger
+from typing import Optional
 from .._constant import MAX_DEBUG_RECORDS
 
 
-class RequestLog:
-    """This class represents the log facility connected to this API request."""
+class LogFacility:
+    """This class encapsulates the log facility and additional configuration."""
 
     # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
     #
-    _max_debug: int = MAX_DEBUG_RECORDS
-    _sanitize_log: bool = True
-    _log: Logger = None
+    _log: Optional[Logger] = None
+    # Maximum number of debug records to log in debug logs.
+    _debug_record_count: int = MAX_DEBUG_RECORDS
+    # Flag representing if debug logs should be sanitized.
+    _sanitize: bool = True
 
-    # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
-    # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
-    # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
-    #
-    def __init__(self, log: Logger = None, max_debug: int = None, sanitize_log: bool = None):
-        """Construct an instance of RequestLog class."""
-        if log is not None:
+    def __init__(self,
+                 log: Optional[Logger] = None,
+                 debug_record_count: Optional[int] = None,
+                 sanitize_log: Optional[bool] = None
+                 ):
+        """Construct an instance of the LogFacility class."""
+        if isinstance(log, Logger):
             self._log = log
-        if max_debug is not None:
-            self._max_debug = int(max_debug)
+        if isinstance(debug_record_count, int):
+            self._debug_record_count = debug_record_count
         if isinstance(sanitize_log, bool):
-            self._sanitize_log = sanitize_log
+            self._sanitize = sanitize_log
 
-    # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
-    # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
-    # |    |  \ |__| |    |___ |  \  |  | |___ ___]
-    #
+    def deactivate_log(self):
+        """Deactivate the log by removing it from the facility."""
+        self._log = None  # Elvis has left the building!
+
     @property
-    def log(self) -> Logger:
-        """Return the connected logger."""
+    def log(self) -> Optional[Logger]:
+        """Return our immutable logger."""
         return self._log
 
-    @log.setter
-    def log(self, value: Logger):
-        """Connect or disconnect a logger."""
-        self._log = value
+    @property
+    def active(self) -> bool:
+        """Return if logging is active within this facility."""
+        return bool(self.log)
 
+    # Mutable
     @property
     def sanitize_log(self) -> bool:
-        """Return the log sanitization setting."""
-        return self._sanitize_log
+        """Return if sanitization is enabled."""
+        return self._sanitize
 
     @sanitize_log.setter
     def sanitize_log(self, value: bool):
-        """Return the log sanitization setting."""
-        self._sanitize_log = value
+        """Set the log sanitization flag."""
+        self._sanitize = value
 
     @property
-    def max_debug(self) -> int:
-        """Return the maximum record per debug log setting."""
-        return self._max_debug
+    def debug_record_count(self) -> int:
+        """Return the current debug record count setting."""
+        return self._debug_record_count
 
-    @max_debug.setter
-    def max_debug(self, value: int):
-        """Return the maximum record per debug log setting."""
-        self._max_debug = value
+    @debug_record_count.setter
+    def debug_record_count(self, value: int):
+        """Set the debug record count."""
+        self._debug_record_count = value

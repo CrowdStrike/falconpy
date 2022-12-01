@@ -52,7 +52,7 @@ class InterfaceConfiguration:
     _proxy: Optional[Dict[str, str]] = None
     # The timeout to use for communication.
     # Either an integer for the entire operation or a float for (connect, read).
-    _timeout: Optional[Union[int, float]] = None
+    _timeout: Optional[Union[int, tuple]] = None
     # The user-agent string to use for requests to the CrowdStrike Falcon API.
     _user_agent: Optional[str] = None
     # SSL Verification boolean, defaults to True.
@@ -65,7 +65,7 @@ class InterfaceConfiguration:
     def __init__(self,
                  base_url: str,
                  proxy: Optional[Dict[str, str]] = None,
-                 timeout: Optional[Union[int, float]] = None,
+                 timeout: Optional[Union[int, tuple]] = None,
                  user_agent: Optional[str] = None,
                  ssl_verify: Optional[bool] = True
                  ):
@@ -73,12 +73,9 @@ class InterfaceConfiguration:
         if not base_url:
             raise InvalidBaseURL
         self._base_url = base_url
-        if proxy:
-            self._proxy = proxy
-        if timeout:
-            self._timeout = timeout
-        if user_agent:
-            self._user_agent = user_agent
+        self._proxy = proxy
+        self._timeout = timeout
+        self._user_agent = user_agent
         if isinstance(ssl_verify, bool):
             self._ssl_verify = ssl_verify
 
@@ -92,27 +89,27 @@ class InterfaceConfiguration:
         return self._base_url
 
     @base_url.setter
-    def base_url(self, value):
+    def base_url(self, value: str):
         """Change the base URL."""
         self._base_url = value
 
     @property
-    def proxy(self) -> dict:
+    def proxy(self) -> Optional[Dict[str, str]]:
         """Return the proxy."""
         return self._proxy
 
     @proxy.setter
-    def proxy(self, value):
+    def proxy(self, value: Optional[Dict[str, str]] = None):
         """Update or replace the proxy dictionary."""
         self._proxy = value
 
     @property
-    def timeout(self) -> Union[int, float]:
+    def timeout(self) -> Union[int, tuple]:
         """Return the timeout."""
         return self._timeout
 
     @timeout.setter
-    def timeout(self, value):
+    def timeout(self, value: Union[int, tuple]):
         """Update or change the timeout."""
         self._timeout = value
 
@@ -122,7 +119,7 @@ class InterfaceConfiguration:
         return self._user_agent
 
     @user_agent.setter
-    def user_agent(self, value):
+    def user_agent(self, value: Optional[str] = None):
         """Alter the user agent string."""
         self._user_agent = value
 
@@ -132,6 +129,6 @@ class InterfaceConfiguration:
         return self._ssl_verify
 
     @ssl_verify.setter
-    def ssl_verify(self, value):
+    def ssl_verify(self, value: bool):
         """Change the SSL verification setting."""
         self._ssl_verify = value

@@ -131,10 +131,14 @@ def import_all():
     """Inspect the package folder and import all available classes from all modules."""
     # Only importing within this method to load the classes for the debugger not-package code.
     # pylint: disable=C0415,E0401,R1702
-    import src.falconpy
+    try:
+        import src.falconpy as sdk
+    except ImportError:
+        # We're running via the package prolly
+        import falconpy as sdk
     import inspect
     loaded = []
-    for name, obj in inspect.getmembers(src.falconpy, inspect.isclass):
+    for name, obj in inspect.getmembers(sdk, inspect.isclass):
         # This is uh... interesting.
         mod_name = f"{obj}".replace("<class", "").replace(">", "").replace("'", "").strip().replace(f".{name}", "")
         if "enum" not in mod_name:
