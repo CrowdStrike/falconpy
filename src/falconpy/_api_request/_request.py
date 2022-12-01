@@ -62,7 +62,7 @@ class APIRequest:
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
     def __init__(self, endpoint: str, initializer: dict = None):
-        """Construct an instance of the class."""
+        """Construct an instance of the APIRequest class."""
         if initializer:
             # Key metadata regarding this API request
             self.meta = RequestMeta(endpoint, initializer.get("method", "GET"))
@@ -109,6 +109,11 @@ class APIRequest:
             self.log_util.debug("STATUS CODE: %s", code)
             self.log_util.debug("RESULT: %s", content)
 
+    def debug(self, msg: str):
+        """Leverage the attached log utility to update the debug log."""
+        if self.log_util:
+            self.log_util.debug(msg)
+
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
     # |    |  \ |__| |    |___ |  \  |  | |___ ___]
@@ -120,10 +125,12 @@ class APIRequest:
     # |  | |___  |  |  |
     @property
     def meta(self) -> RequestMeta:
+        """Return the RequestMeta object."""
         return self._meta
 
     @meta.setter
     def meta(self, value: RequestMeta):
+        """Set the RequestMeta object."""
         self._meta = value
 
     @property
@@ -166,6 +173,7 @@ class APIRequest:
 
     @payloads.setter
     def payloads(self, value: RequestPayloads):
+        """Set the payloads object."""
         self._payloads = value
 
     # Body
@@ -176,6 +184,7 @@ class APIRequest:
 
     @body_payload.setter
     def body_payload(self, value: Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]):
+        """Set the body payload within the payloads object."""
         self.payloads.body = value
 
     # Params
@@ -186,6 +195,7 @@ class APIRequest:
 
     @param_payload.setter
     def param_payload(self, value: Dict[str, str]):
+        """Set the param payload within the payloads object."""
         self.payloads.params = value
 
     # Data
@@ -196,6 +206,7 @@ class APIRequest:
 
     @data_payload.setter
     def data_payload(self, value: Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]):
+        """Set the data payload within the payloads object."""
         self.payloads.data = value
 
     # Files
@@ -206,6 +217,7 @@ class APIRequest:
 
     @files.setter
     def files(self, value: list):
+        """Set the files payload within the payloads object."""
         self.payloads.files = value
 
     # ___  ____ _  _ ____ _  _ _ ____ ____
@@ -213,34 +225,42 @@ class APIRequest:
     # |__] |___ |  | |  |  \/  | |__| |  \
     @property
     def behavior(self) -> RequestBehavior:
+        """Return the RequestBehavior object."""
         return self._behavior
 
     @behavior.setter
     def behavior(self, value: RequestBehavior):
+        """Set the RequestBehavior object."""
         self._behavior = value
 
     @property
     def expand_result(self) -> bool:
+        """Return a boolean indicator if result expansion is requested."""
         return self.behavior.expand_result
 
     @expand_result.setter
     def expand_result(self, value: bool):
+        """Set the result expansion setting."""
         self.behavior.expand_result = value
 
     @property
     def container(self) -> bool:
+        """Return a boolean indicating if this is a container API request."""
         return self.behavior.container
 
     @container.setter
     def container(self, value: bool):
+        """Set the container API request flag."""
         self.behavior.container = value
 
     @property
     def authenticating(self) -> bool:
+        """Return a boolean indicating if this is an authentication request."""
         return self.behavior.authenticating
 
     @authenticating.setter
     def authenticating(self, value: bool):
+        """Set the authenticating boolean."""
         self.behavior.authenticating = value
 
     @property
@@ -255,18 +275,22 @@ class APIRequest:
 
     @property
     def body_validator(self) -> dict:
+        """Return the body payload validator from the behavior object."""
         return self.behavior.body_validator
 
     @body_validator.setter
     def body_validator(self, value: dict):
+        """Set the body payload validator within the behavior object."""
         self.behavior.body_validator = value
 
     @property
     def body_required(self) -> list:
+        """Return the body required list from the behavior object."""
         return self.behavior.body_required
 
-    @body_validator.setter
+    @body_required.setter
     def body_required(self, value: list):
+        """Set the body payload required list within the behavior object."""
         self.behavior.body_required = value
 
     # _    ____ ____
@@ -274,34 +298,47 @@ class APIRequest:
     # |___ |__| |__]
     @property
     def request_log(self) -> RequestLog:
+        """Return the RequestLog object."""
         return self._request_log
 
     @request_log.setter
     def request_log(self, value: RequestLog):
+        """Set the RequestLog object."""
         self._request_log = value
 
     @property
     def log_util(self) -> Logger:
+        """Return the Logger from the request log object."""
         return self.request_log.log
 
     @log_util.setter
     def log_util(self, value: Logger):
+        """Set the Logger within the request log object."""
         self.request_log.log = value
 
     @property
+    def debugging(self) -> bool:
+        """Return the debugging status. This is a helper property to ease the syntax."""
+        return bool(self.log_util)
+
+    @property
     def max_debug(self) -> int:
+        """Return the maximum number of records to log per debug entry setting."""
         return self.request_log.max_debug
 
     @max_debug.setter
     def max_debug(self, value: int):
+        """Set the maximum number of records to log per debug entry setting."""
         self.request_log.max_debug = value
 
     @property
     def sanitize_log(self) -> bool:
+        """Return the sanitize logs setting."""
         return self.request_log.sanitize_log
 
     @sanitize_log.setter
     def sanitize_log(self, value: bool):
+        """Set the sanitize logs setting."""
         self.request_log.sanitize_log = value
 
     # ____ ____ _  _ _  _ ____ ____ ___ _ ____ _  _
@@ -309,40 +346,50 @@ class APIRequest:
     # |___ |__| | \| | \| |___ |___  |  | |__| | \|
     @property
     def connection(self) -> RequestConnection:
+        """Return the RequestConnection object."""
         return self._connection
 
     @connection.setter
     def connection(self, value: RequestConnection):
+        """Set the RequestConnection object."""
         self._connection = value
 
     @property
     def user_agent(self) -> str:
+        """Return the User Agent string."""
         return self.connection.user_agent
 
     @user_agent.setter
     def user_agent(self, value: str):
+        """Set the User Agent string."""
         self.connection.user_agent = value
 
     @property
     def proxy(self) -> Dict[str, str]:
+        """Return the proxy dictionary."""
         return self.connection.proxy
 
     @proxy.setter
     def proxy(self, value: Dict[str, str]):
+        """Set the proxy dictionary."""
         self.connection.proxy = value
 
     @property
     def timeout(self) -> Union[int, tuple]:
+        """Return the timeout from the connection object.."""
         return self.connection.timeout
 
     @timeout.setter
     def timeout(self, value: Union[int, tuple]):
+        """Set an integer or a tuple for the timeout."""
         self.connection.timeout = value
 
     @property
     def verify(self) -> bool:
+        """Return the SSL verification setting."""
         return self.connection.verify
 
     @verify.setter
     def verify(self, value: bool):
+        """Set the SSL verification setting."""
         self.connection.verify = value

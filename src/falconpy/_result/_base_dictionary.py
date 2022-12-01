@@ -52,7 +52,7 @@ class BaseDictionary(ResponseComponent):
     #  |  |  | |______    |    |_____| |     | |     \ |______
     #  |  |  | |______    |    |     | |_____| |_____/ ______|
     #
-    # Convert this object into an iterator by adding iteration 
+    # Convert this object into an iterator by adding iteration
     # handling that leverages our underlying _data dictionary.
     def __iter__(self):
         """Iterate for the data dictionary."""
