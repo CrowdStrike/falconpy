@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict
+from typing import Dict, Union, Optional
 
 
 class RequestMeta:
@@ -46,15 +46,19 @@ class RequestMeta:
     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
     #
     _method: str = "GET"
-    _endpoint: str = None
+    _endpoint: Optional[str] = None
     # These are set during the processing of the request
-    _debug_headers: Dict[str, str] = {}
+    _debug_headers: Optional[Dict[str, Optional[Union[str, int, float]]]] = {}
 
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
-    def __init__(self, endpoint, method, debug_headers: Dict[str, str] = None):
+    def __init__(self,
+                 endpoint,
+                 method,
+                 debug_headers: Optional[Dict[str, Optional[Union[str, int, float]]]] = None
+                 ):
         """Construct an instance of RequestMeta class."""
         self._endpoint = endpoint
         self._method = method
@@ -66,31 +70,31 @@ class RequestMeta:
     # |    |  \ |__| |    |___ |  \  |  | |___ ___]
     #
     @property
-    def endpoint(self) -> bool:
+    def endpoint(self) -> Optional[str]:
         """Return the endpoint attribute."""
         return self._endpoint
 
     @endpoint.setter
-    def endpoint(self, value):
+    def endpoint(self, value: Optional[str]):
         """Set the endpoint attribute."""
         self._endpoint = value
 
     @property
-    def method(self) -> bool:
+    def method(self) -> str:
         """Return the method attribute."""
         return self._method
 
     @method.setter
-    def method(self, value):
+    def method(self, value: str):
         """Set the method attribute."""
         self._method = value
 
     @property
-    def debug_headers(self) -> dict:
+    def debug_headers(self) -> Optional[Dict[str, Optional[Union[str, int, float]]]]:
         """Return the debug headers."""
         return self._debug_headers
 
     @debug_headers.setter
-    def debug_headers(self, value):
+    def debug_headers(self, value: Dict[str, Optional[Union[str, int, float]]]):
         """Set the debug headers."""
         self._debug_headers = value

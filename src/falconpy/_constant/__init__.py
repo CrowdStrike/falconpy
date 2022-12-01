@@ -58,3 +58,7 @@ USER_AGENT: str = f"{_TITLE}/{str(_VERSION)}"
 MAX_DEBUG_RECORDS: int = 100
 # Global maximum number of records returned from any endpoint across all service collections
 GLOBAL_API_MAX_RETURN: int = 5000
+# Largest available token renew window (in seconds).
+MAX_TOKEN_RENEW_WINDOW: int = 1200
+# Minimum available token renew window (in seconds).
+MIN_TOKEN_RENEW_WINDOW: int = 120

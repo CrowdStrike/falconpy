@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Union, Dict
+from typing import Union, Dict, Optional
 from logging import Logger
 from ._request_behavior import RequestBehavior
 from ._request_connection import RequestConnection
@@ -51,17 +51,20 @@ class APIRequest:
     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
     #
-    _meta: RequestMeta = None
-    _payloads: RequestPayloads = None
+    _meta: Optional[RequestMeta] = None
+    _payloads: Optional[RequestPayloads] = None
     _connection: RequestConnection = RequestConnection()
     _behavior = RequestBehavior()
-    _request_log: RequestLog = None
+    _request_log: Optional[RequestLog] = None
 
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
-    def __init__(self, endpoint: str, initializer: dict = None):
+    def __init__(self,
+                 endpoint: str,
+                 initializer: Optional[Dict[str, Optional[Union[str, int, bool, list, dict]]]] = None
+                 ):
         """Construct an instance of the APIRequest class."""
         if initializer:
             # Key metadata regarding this API request

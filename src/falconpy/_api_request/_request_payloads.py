@@ -45,7 +45,7 @@ class RequestPayloads:
     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
     #
-    _params: Optional[Dict[str, str]] = None
+    _params: Optional[Dict[str, Optional[Union[str, int, float, list, dict]]]] = None
     _body: Optional[Dict[str, Union[str, int, dict, list, bytes]]] = None
     _data: Optional[Dict[str, Union[str, int, dict, list, bytes]]] = None
     _files: Optional[List[tuple]] = None
@@ -55,10 +55,10 @@ class RequestPayloads:
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
     def __init__(self,
-                 params: dict = None,
-                 body: dict or bytes = None,
-                 data: dict or bytes = None,
-                 files: list = None
+                 params: Optional[Dict[str, Optional[Union[str, int, float, list, dict]]]] = None,
+                 body: Optional[Dict[str, Union[str, int, dict, list, bytes]]] = None,
+                 data: Optional[Dict[str, Union[str, int, dict, list, bytes]]] = None,
+                 files: Optional[List[tuple]] = None
                  ):
         """Construct an instance of RequestPayloads class."""
         if params is not None:
@@ -75,41 +75,41 @@ class RequestPayloads:
     # |    |  \ |__| |    |___ |  \  |  | |___ ___]
     #
     @property
-    def params(self) -> dict:
+    def params(self) -> Optional[Dict[str, Optional[Union[str, int, float, list, dict]]]]:
         """Return the query string parameter payload."""
         return self._params
 
     @params.setter
-    def params(self, value: dict):
+    def params(self, value: Optional[Dict[str, Optional[Union[str, int, float, list, dict]]]]):
         """Set the query string parameter payload."""
         self._params = value
 
     @property
-    def body(self) -> dict or bytes:
+    def body(self) -> Optional[Dict[str, Union[str, int, dict, list, bytes]]]:
         """Return the body payload."""
         return self._body
 
     @body.setter
-    def body(self, value: dict or bytes):
+    def body(self, value: Optional[Dict[str, Union[str, int, dict, list, bytes]]]):
         """Set the body payload."""
         self._body = value
 
     @property
-    def data(self) -> dict or bytes:
+    def data(self) -> Optional[Dict[str, Union[str, int, dict, list, bytes]]]:
         """Return the data payload."""
         return self._data
 
     @data.setter
-    def data(self, value: dict or bytes):
+    def data(self, value: Optional[Dict[str, Union[str, int, dict, list, bytes]]]):
         """Set the data payload."""
         self._data = value
 
     @property
-    def files(self) -> list:
+    def files(self) -> Optional[List[tuple]]:
         """Return the files payload."""
         return self._files
 
     @files.setter
-    def files(self, value: list):
+    def files(self, value: Optional[List[tuple]]):
         """Set the files payload."""
         self._files = value

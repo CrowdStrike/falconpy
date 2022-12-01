@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 import time
 from typing import Optional
+from .._constant import MIN_TOKEN_RENEW_WINDOW, MAX_TOKEN_RENEW_WINDOW
 
 
 class BearerToken:
@@ -64,7 +65,11 @@ class BearerToken:
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
     # Tokens can be instantiated without a value (e.g. invalid or expired).
-    def __init__(self, token_value: str = None, expiration: int = None, status: int = None):
+    def __init__(self,
+                 token_value: Optional[str] = None,
+                 expiration: Optional[int] = None,
+                 status: Optional[int] = None
+                 ):
         """Create an instance of the BearerToken class."""
         if token_value:
             self._value = token_value
@@ -79,7 +84,7 @@ class BearerToken:
     # |\/| |___  |  |__| |  | |  \ [__
     # |  | |___  |  |  | |__| |__/ ___]
     #
-    def fail_token(self, status_code: int, reason: str):
+    def fail_token(self, status_code: Optional[int] = None, reason: Optional[str] = None):
         """Fail the token by clearing the token value and setting the expiration to zero."""
         self.expiration = 0
         self.value = None
@@ -94,12 +99,13 @@ class BearerToken:
     #
     # These properties are present and mutable within all FalconInterface derivatives.
     @property
-    def expiration(self) -> int:
+    def expiration(self) -> Optional[int]:
         """Return the current expiration setting."""
         return self._expiration
 
     @expiration.setter
     def expiration(self, value: int):
+        """Set the current token expiration."""
         self._expiration = value
 
     @property
@@ -109,33 +115,37 @@ class BearerToken:
 
     @token_time.setter
     def token_time(self, value: float):
+        """Change the token time."""
         self._token_time = value
 
     @property
-    def fail_reason(self) -> int:
+    def fail_reason(self) -> Optional[str]:
         """Return the current fail_reason setting."""
         return self._fail_reason
 
     @fail_reason.setter
-    def fail_reason(self, value: int):
+    def fail_reason(self, value: Optional[str]):
+        """Update the token failure reason."""
         self._fail_reason = value
 
     @property
-    def status(self) -> int:
+    def status(self) -> Optional[int]:
         """Return the current status setting."""
         return self._status
 
     @status.setter
-    def status(self, value: int):
+    def status(self, value: Optional[int]):
+        """Update the token status code."""
         self._status = value
 
     @property
-    def value(self) -> int:
+    def value(self) -> Optional[str]:
         """Return the current value setting."""
         return self._value
 
     @value.setter
-    def value(self, value: int):
+    def value(self, value: str):
+        """Change the token value."""
         self._value = value
 
     @property
@@ -145,4 +155,6 @@ class BearerToken:
 
     @renew_window.setter
     def renew_window(self, value: int):
-        self._renew_window = value
+        """Set the token renew window."""
+        _value = max(min(MAX_TOKEN_RENEW_WINDOW, value), MIN_TOKEN_RENEW_WINDOW)
+        self._renew_window = _value

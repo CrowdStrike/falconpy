@@ -72,12 +72,27 @@ class RequestLog:
         """Return the connected logger."""
         return self._log
 
+    @log.setter
+    def log(self, value: Logger):
+        """Connect or disconnect a logger."""
+        self._log = value
+
     @property
     def sanitize_log(self) -> bool:
         """Return the log sanitization setting."""
         return self._sanitize_log
 
+    @sanitize_log.setter
+    def sanitize_log(self, value: bool):
+        """Return the log sanitization setting."""
+        self._sanitize_log = value
+
     @property
     def max_debug(self) -> int:
         """Return the maximum record per debug log setting."""
         return self._max_debug
+
+    @max_debug.setter
+    def max_debug(self, value: int):
+        """Return the maximum record per debug log setting."""
+        self._max_debug = value
