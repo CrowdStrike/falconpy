@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Union, Dict, Optional
 from ._base_dictionary import BaseDictionary
 
 
@@ -42,41 +43,42 @@ class Meta(BaseDictionary):
     """Class to represent the metadata API response within a result."""
 
     @property
-    def pagination(self) -> dict:
+    def pagination(self) -> Dict[str, Optional[Union[int, str, float]]]:
         """Return the contents of the pagination branch."""
         return self.get_property("pagination", {})
 
     @property
-    def query_time(self) -> float:
+    def query_time(self) -> Optional[float]:
         """Return the the contents of the query_time key."""
         return self.get_property("query_time", None)
 
     @property
-    def offset(self) -> int or str:
+    def offset(self) -> Optional[Union[int, str]]:
         """Return the the contents of the offset key."""
         return self.pagination.get("offset", None)
 
     @property
-    def limit(self) -> int or str:
+    def limit(self) -> Optional[Union[int, str]]:
         """Return the the contents of the limit key."""
         return self.pagination.get("limit", None)
 
     @property
-    def total(self) -> int or str:
+    def total(self) -> Optional[Union[int, str]]:
         """Return the the contents of the total key."""
         return self.pagination.get("total", None)
 
     @property
-    def expires_at(self) -> float:
+    def expires_at(self) -> Optional[float]:
         """Return the the contents of the expires_at key."""
-        return self.pagination.get("expires_at", None)
+        _returned: Optional[float] = self.pagination.get("expires_at", None)
+        return _returned
 
     @property
-    def powered_by(self) -> str:
+    def powered_by(self) -> Optional[str]:
         """Return the the contents of the powered_by key."""
         return self.get_property("powered_by", None)
 
     @property
-    def trace_id(self) -> str:
+    def trace_id(self) -> Optional[str]:
         """Return the the contents of the trace_id key."""
         return self.get_property("trace_id", None)

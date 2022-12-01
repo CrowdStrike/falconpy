@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import ItemsView, Any
 from ._response_component import ResponseComponent
 
 
@@ -80,7 +81,7 @@ class BaseDictionary(ResponseComponent):
         """Retrieve the length of the data dictionary."""
         return len(self._data)
 
-    def items(self) -> tuple:
+    def items(self) -> ItemsView[Any, Any]:
         """Provide expanded dictionary iteration functionality to the class."""
         return self._data.items()
 

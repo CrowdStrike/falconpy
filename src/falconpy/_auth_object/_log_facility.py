@@ -84,6 +84,7 @@ class LogFacility:
 
     @sanitize.setter
     def sanitize(self, value):
+        """Set the log sanitization flag."""
         self._sanitize = value
 
     @property

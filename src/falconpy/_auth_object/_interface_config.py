@@ -79,7 +79,7 @@ class InterfaceConfiguration:
             self._timeout = timeout
         if user_agent:
             self._user_agent = user_agent
-        if ssl_verify:
+        if isinstance(ssl_verify, bool):
             self._ssl_verify = ssl_verify
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
@@ -93,6 +93,7 @@ class InterfaceConfiguration:
 
     @base_url.setter
     def base_url(self, value):
+        """Change the base URL."""
         self._base_url = value
 
     @property
@@ -102,6 +103,7 @@ class InterfaceConfiguration:
 
     @proxy.setter
     def proxy(self, value):
+        """Update or replace the proxy dictionary."""
         self._proxy = value
 
     @property
@@ -111,6 +113,7 @@ class InterfaceConfiguration:
 
     @timeout.setter
     def timeout(self, value):
+        """Update or change the timeout."""
         self._timeout = value
 
     @property
@@ -120,6 +123,7 @@ class InterfaceConfiguration:
 
     @user_agent.setter
     def user_agent(self, value):
+        """Alter the user agent string."""
         self._user_agent = value
 
     @property
@@ -129,4 +133,5 @@ class InterfaceConfiguration:
 
     @ssl_verify.setter
     def ssl_verify(self, value):
+        """Change the SSL verification setting."""
         self._ssl_verify = value

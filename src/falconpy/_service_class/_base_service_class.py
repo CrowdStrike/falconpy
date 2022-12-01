@@ -107,7 +107,7 @@ class BaseServiceClass(ABC):
 
         if kwargs.get("debug", False):
             # Allow a Service Class to enable logging individually.
-            self._log: Logger = getLogger(__name__.split(".", maxsplit=1)[0])
+            self._log: Logger = getLogger(__name__)  # (__name__.split(".", maxsplit=1)[0])
         if kwargs.get("debug", None) is False:
             # Allow a Service Class to disable logging individually.
             self._log: bool = False
