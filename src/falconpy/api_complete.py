@@ -36,11 +36,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import functools
-from typing import Dict, Optional, Union, Callable
+from typing import Dict, Union, Callable
 from ._constant import ALLOWED_METHODS
 from ._util import (
-    perform_request,
-    confirm_base_url,
+    perform_request
     )
 from ._auth_object import UberInterface
 from ._util import (
@@ -49,7 +48,6 @@ from ._util import (
     handle_container_operations,
     uber_request_keywords
     )
-from ._endpoint import api_endpoints
 from ._error import (
     InvalidOperation,
     InvalidMethod,
@@ -110,7 +108,6 @@ class APIHarness(UberInterface):
     This one does it all. It's like the One Ring with significantly fewer orcs.
     """
 
-    # pylint: disable=R0913
     #                                 `-.
     #                     -._ `. `-.`-. `-.
     #                     _._ `-._`.   .--.  `.
@@ -128,72 +125,6 @@ class APIHarness(UberInterface):
     #             `-'    \ -._\ ""_..--''  .-' .'
     #                     \/    .' .-'.-'  .-' .-'
     #                         .-'.' .'  .' .-
-    def __init__(self,
-                 access_token: Optional[Union[str, bool]] = False,
-                 base_url: Optional[str] = "https://api.crowdstrike.com",
-                 creds: Optional[Dict[str, str]] = None,
-                 client_id: Optional[str] = None,
-                 client_secret: Optional[str] = None,
-                 member_cid: Optional[str] = None,
-                 ssl_verify: Optional[bool] = True,
-                 proxy: Optional[Dict[str, str]] = None,
-                 timeout: Optional[Union[float, tuple]] = None,
-                 user_agent: Optional[str] = None,
-                 renew_window: Optional[int] = 120,
-                 debug: Optional[bool] = False,
-                 debug_record_count: Optional[int] = 100,
-                 sanitize_log: Optional[bool] = None
-                 ) -> "APIHarness":
-        """Uber class constructor.
-
-        Instantiates an instance of the class, ingests credentials,
-        the base URL and the SSL verification boolean.
-        Afterwards class attributes are initialized.
-
-        Keyword arguments:
-        base_url: CrowdStrike API URL to use for requests. [Default: US-1]
-        ssl_verify: Boolean specifying if SSL verification should be used or string representing
-                    the path to a CA_BUNDLE file or directory of trusted certificates.
-                    Default: True
-        proxy: Dictionary of proxies to be used for requests.
-        timeout: Float or tuple specifying timeouts to use for requests.
-        creds: Dictionary containing CrowdStrike API credentials.
-               Mutually exclusive to client_id / client_secret.
-               {
-                   "client_id": "CLIENT_ID_HERE",
-                   "client_secret": "CLIENT_SECRET_HERE",
-                   "member_cid": "CHILD_CID_MSSP_ONLY"
-               }
-        client_id: Client ID for the CrowdStrike API. Mutually exclusive to creds.
-        client_secret: Client Secret for the CrowdStrike API. Mutually exclusive to creds.
-        member_cid: Child CID to connect to. (MSSP only) Mutually exclusive to creds.
-        user_agent: User-Agent string to use for all requests made to the CrowdStrike API.
-                    String. Defaults to crowdstrike-falconpy/VERSION.
-        renew_window: Amount of time (in seconds) between now and the token expiration before
-                      a refresh of the token is performed. Default: 120, Max: 1200
-                      Values over 1200 will be reset to the maximum.
-
-        This method only accepts keywords to specify arguments.
-        """
-        super().__init__(base_url=confirm_base_url(base_url),
-                         ssl_verify=ssl_verify,
-                         timeout=timeout,
-                         proxy=proxy,
-                         user_agent=user_agent,
-                         access_token=access_token,
-                         creds=creds,
-                         client_id=client_id,
-                         client_secret=client_secret,
-                         member_cid=member_cid,
-                         renew_window=renew_window,
-                         debug=debug,
-                         debug_record_count=debug_record_count,
-                         sanitize_log=sanitize_log
-                         )
-
-        # Complete list of available API operations.
-        self.commands = api_endpoints
-
     # pylint: disable=R0912
     @command_error_handler
     def command(self, *args, **kwargs) -> Union[Dict[str, Union[int, dict]], bytes]:

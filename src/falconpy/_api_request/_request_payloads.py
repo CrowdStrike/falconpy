@@ -61,14 +61,10 @@ class RequestPayloads:
                  files: Optional[List[tuple]] = None
                  ):
         """Construct an instance of RequestPayloads class."""
-        if params is not None:
-            self._params = params
-        if body is not None:
-            self._body = body
-        if data is not None:
-            self._data = data
-        if files is not None:
-            self._files = files
+        self._params = params
+        self._body = body
+        self._data = data
+        self._files = files
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
@@ -113,3 +109,24 @@ class RequestPayloads:
     def files(self, value: Optional[List[tuple]]):
         """Set the files payload."""
         self._files = value
+
+
+# Python 3.7
+# This code will be updated to the following once Python 3.6 support is dropped.
+#
+# from dataclasses import dataclass
+# from typing import Optional, Dict, List, Union
+
+
+# @dataclass
+# class RequestPayloads:
+#     """This class contains all of the payloads sent as part of the API request."""
+
+#     # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
+#     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
+#     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
+#     #
+#     params: Optional[Dict[str, Optional[Union[str, int, float, list, dict]]]] = None
+#     body: Optional[Dict[str, Union[str, int, dict, list, bytes]]] = None
+#     data: Optional[Dict[str, Union[str, int, dict, list, bytes]]] = None
+#     files: Optional[List[tuple]] = None

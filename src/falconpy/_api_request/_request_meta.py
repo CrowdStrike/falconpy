@@ -62,8 +62,7 @@ class RequestMeta:
         """Construct an instance of RequestMeta class."""
         self._endpoint = endpoint
         self._method = method
-        if debug_headers is not None:
-            self._debug_headers = debug_headers
+        self._debug_headers = debug_headers
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__

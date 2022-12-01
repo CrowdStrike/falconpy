@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Optional, Union
 from .._result import Result
 
 
@@ -43,7 +44,7 @@ class SDKWarning(RuntimeWarning):
 
     _code: int = 100
     _message: str = "An unexpected warning was generated."
-    _headers: dict = {}
+    _headers: Dict[str, Optional[Union[str, int, float]]] = {}
     warning: bool = True
 
     # pylint: disable=W0231   # Not using super for now
@@ -56,12 +57,13 @@ class SDKWarning(RuntimeWarning):
         self.code = self._code
         self.message = self._message
         self.headers = self._headers
-        if code is not None:
+        if isinstance(code, int):
             self.code = code
         if message:
             self.message = message
-        if headers is not None:
+        if isinstance(headers, dict):
             self.headers = headers
+        super().__init__(self.message)
 
     @property
     def result(self) -> dict:
