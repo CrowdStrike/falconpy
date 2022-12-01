@@ -35,6 +35,7 @@ for every single operation available within that service collection.
 | `malquery.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/malquery |
 | `message_center.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center |
 | `ml_exclusions.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions |
+| `mobile_enrollment.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mobile-enrollment |
 | `mssp.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp |
 | `oauth2.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2 |
 | `ods.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods |
@@ -52,7 +53,9 @@ for every single operation available within that service collection.
 | `sensor_download.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-download |
 | `sensor_update_policy.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-update-policies |
 | `sensor_visibility_exclusions.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sensor-visibility-exclusions |
+| `spotlight_evaluation_logic.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-evaluation-logic |
 | `spotlight_vulnerabilities.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerabilities |
+| `tailored_intelligence.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/tailored-intelligence |
 | `user_management.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management |
 | `zero_trust_assessment.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment |
 
