@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import List, Union
 from .__base_resource import BaseResource
 
 
@@ -43,7 +44,7 @@ class Errors(BaseResource):
 
     def __repr__(self) -> str:
         """Return a clean result of all errors received."""
-        _returned = []
+        _returned: Union[List[str], str] = []
         if self._data:
             _returned = ",".join(self.data)
 

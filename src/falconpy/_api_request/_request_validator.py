@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Type, Dict, Optional, List
 
 
 class RequestValidator:
@@ -44,14 +45,17 @@ class RequestValidator:
     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
     #
-    _validator: dict = None
-    _required: list = None
+    _validator: Optional[Dict[str, Type]] = None
+    _required: Optional[List[str]] = None
 
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
-    def __init__(self, validator: dict = None, required: list = None):
+    def __init__(self,
+                 validator: Optional[Dict[str, Type]] = None,
+                 required: Optional[List[str]] = None
+                 ):
         """Construct an instance of RequestValidator class."""
         if validator is not None:
             self._validator = validator
@@ -63,21 +67,21 @@ class RequestValidator:
     # |    |  \ |__| |    |___ |  \  |  | |___ ___]
     #
     @property
-    def validator(self) -> dict:
+    def validator(self) -> Optional[Dict[str, Type]]:
         """Return the validator dictionary."""
         return self._validator
 
     @validator.setter
-    def validator(self, value: dict):
+    def validator(self, value: Optional[Dict[str, Type]]):
         """Set the validator dictionary."""
         self._validator = value
 
     @property
-    def required(self) -> list:
+    def required(self) -> Optional[List[str]]:
         """Return the required list."""
         return self._required
 
     @required.setter
-    def required(self, value: list):
+    def required(self, value: Optional[List[str]]):
         """Set the required list."""
         self._required = value
