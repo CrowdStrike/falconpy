@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, Optional, Union
+from typing import Dict, List, Optional, Union
 from ._falcon_interface import FalconInterface
 from .._constant import MAX_DEBUG_RECORDS
 
@@ -50,7 +50,7 @@ class UberInterface(FalconInterface):
     # Attributes present only within the Uber Class.
     #
     # A dictionary of every available API operation provided by the library.
-    commands: dict = {}
+    commands: List[List[Union[str, bool, int, List[dict]]]] = []
 
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/

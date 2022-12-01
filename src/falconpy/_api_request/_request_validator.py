@@ -1,4 +1,4 @@
-"""FalconPy error module.
+"""FalconPy Request Validator class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,29 +35,42 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._exceptions import (
-    SDKError,
-    RegionSelectError,
-    InvalidMethod,
-    InvalidOperation,
-    TokenNotSpecified,
-    KeywordsOnly,
-    InvalidCredentials,
-    APIError,
-    CannotRevokeToken,
-    FunctionalityNotImplemented,
-    InvalidBaseURL,
-    PayloadValidationError
-    )
-from ._warnings import (
-    SDKWarning,
-    SSLDisabledWarning,
-    NoContentWarning
-)
+class RequestValidator:
+    """This class represents a request payload validator."""
 
+    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
+    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
+    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
+    #
+    _validator: dict = None
+    _required: list = None
 
-__all__ = ["SDKError", "RegionSelectError", "InvalidMethod", "InvalidOperation",
-           "TokenNotSpecified", "KeywordsOnly", "SDKWarning", "SSLDisabledWarning",
-           "InvalidCredentials", "APIError", "NoContentWarning", "CannotRevokeToken",
-           "FunctionalityNotImplemented", "InvalidBaseURL", "PayloadValidationError"
-           ]
+    # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
+    # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
+    # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
+    #
+    def __init__(self, validator: dict = None, required: list = None):
+        if validator is not None:
+            self._validator = validator
+        if required is not None:
+            self._required = required
+
+    # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
+    # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
+    # |    |  \ |__| |    |___ |  \  |  | |___ ___]
+    #
+    @property
+    def validator(self) -> dict:
+        return self._validator
+
+    @validator.setter
+    def validator(self, value: dict):
+        self._validator = value
+
+    @property
+    def required(self) -> list:
+        return self._required
+
+    @required.setter
+    def required(self, value: list):
+        self._required = value

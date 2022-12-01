@@ -63,7 +63,8 @@ from .._error import (
     InvalidMethod,
     KeywordsOnly,
     APIError,
-    NoContentWarning
+    NoContentWarning,
+    PayloadValidationError
     )
 from .._result import Result
 urllib3.disable_warnings(InsecureRequestWarning)
@@ -85,15 +86,17 @@ def validate_payload(validator: dict, params: dict, required: list = None) -> bo
     if required:
         for key in required:
             if key not in params:
-                raise ValueError(f"Argument {key} must be specified.")
+                raise PayloadValidationError(code=400, msg=f"Argument {key} must be specified.")
 
     for key in params:
         if key not in validator:
-            raise ValueError(f"{key} is not a valid argument.")
+            #raise ValueError(f"{key} is not a valid argument.")
+            raise PayloadValidationError(code=400, msg=f"{key} is not a valid argument.")
         if not isinstance(params[key], validator[key]):
             should = validator[key]
             was = type(params[key])
-            raise TypeError(f"{key} is not the valid type. Should be: {should}, was {was}")
+            #raise TypeError(f"{key} is not the valid type. Should be: {should}, was {was}")
+            raise PayloadValidationError(code=400, msg=f"{key} is not the valid type. Should be: {should}, was {was}")
 
     return True
 
@@ -337,8 +340,10 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
         if api.body_validator:
             try:
                 validate_payload(api.body_validator, api.body_payload, api.body_required)
-            except (ValueError, TypeError) as err:
-                returned = generate_error_result(message=f"{str(err)}")
+            except PayloadValidationError as err:
+                #returned = generate_error_result(message=f"{str(err)}")
+                api.log_error(400, err.message, err.result)
+                returned = err.result
                 api.perform = False
 
         # Perform the request
