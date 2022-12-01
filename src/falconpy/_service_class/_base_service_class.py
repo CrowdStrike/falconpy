@@ -39,10 +39,10 @@ import inspect
 from abc import ABC, abstractmethod
 from logging import Logger, getLogger
 from typing import Dict, Type, Union, Optional
-
 from .._constant import MAX_DEBUG_RECORDS
 from .._auth_object import FalconInterface
 from .._error import FunctionalityNotImplemented
+
 
 class BaseServiceClass(ABC):
     """Base class for all Service Classes."""
@@ -164,6 +164,7 @@ class BaseServiceClass(ABC):
         """Provide the ssl_verify value to legacy code."""
         return self.auth_object.ssl_verify
 
+    # Changing this setting will impact all traffic thru the interface.
     @ssl_verify.setter
     def ssl_verify(self, value: bool):
         """Allow code to flip the underlying SSL verify flag via the this class."""
@@ -279,12 +280,3 @@ class BaseServiceClass(ABC):
             self._sanitize = value
         else:
             self.auth_object.sanitize_log = value
-
-    # Changing this setting will impact all traffic thru the interface.
-    @property
-    def ssl_verify(self) -> bool:
-        return self.auth_object.ssl_verify
-
-    @ssl_verify.setter
-    def ssl_verify(self, value):
-        self.auth_object.ssl_verify = value

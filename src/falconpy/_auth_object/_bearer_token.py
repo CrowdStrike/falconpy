@@ -65,6 +65,7 @@ class BearerToken:
     #
     # Tokens can be instantiated without a value (e.g. invalid or expired).
     def __init__(self, token_value: str = None, expiration: int = None, status: int = None):
+        """Create an instance of the BearerToken class."""
         if token_value:
             self._value = token_value
         if expiration:
@@ -74,11 +75,10 @@ class BearerToken:
         if status:
             self._status = status
 
-
     # _  _ ____ ___ _  _ ____ ___  ____
     # |\/| |___  |  |__| |  | |  \ [__
     # |  | |___  |  |  | |__| |__/ ___]
-    # 
+    #
     def fail_token(self, status_code: int, reason: str):
         """Fail the token by clearing the token value and setting the expiration to zero."""
         self.expiration = 0
@@ -87,6 +87,7 @@ class BearerToken:
             self.status = 403
         if reason:
             self.fail_reason = reason
+
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
     # |    |  \ |__| |    |___ |  \  |  | |___ ___]

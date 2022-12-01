@@ -60,6 +60,7 @@ class RequestPayloads:
                  data: dict or bytes = None,
                  files: list = None
                  ):
+        """Construct an instance of RequestPayloads class."""
         if params is not None:
             self._params = params
         if body is not None:
@@ -75,25 +76,40 @@ class RequestPayloads:
     #
     @property
     def params(self) -> dict:
+        """Return the query string parameter payload."""
         return self._params
+
     @params.setter
     def params(self, value: dict):
+        """Set the query string parameter payload."""
         self._params = value
+
     @property
     def body(self) -> dict or bytes:
+        """Return the body payload."""
         return self._body
+
     @body.setter
     def body(self, value: dict or bytes):
+        """Set the body payload."""
         self._body = value
+
     @property
     def data(self) -> dict or bytes:
+        """Return the data payload."""
         return self._data
+
     @data.setter
     def data(self, value: dict or bytes):
+        """Set the data payload."""
         self._data = value
+
     @property
     def files(self) -> list:
+        """Return the files payload."""
         return self._files
+
     @files.setter
     def files(self, value: list):
+        """Set the files payload."""
         self._files = value
