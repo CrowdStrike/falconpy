@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Optional, Dict, List, Type
 from ._request_validator import RequestValidator
 
 
@@ -60,19 +61,19 @@ class RequestBehavior:
                  container: bool = None,
                  authenticating: bool = None,
                  perform: bool = None,
-                 body_validator: dict = None,
-                 body_required: list = None
+                 body_validator: Optional[Dict[str, Type]] = None,
+                 body_required: Optional[List[str]] = None
                  ):
         """Construct an instance of RequestBehavior class."""
-        if expand_result is not None:
+        if isinstance(expand_result, bool):
             self._expand_result = expand_result
-        if container is not None:
+        if isinstance(container, bool):
             self._container = container
-        if authenticating is not None:
+        if isinstance(authenticating, bool):
             self._authenticating = authenticating
-        if perform is not None:
+        if isinstance(perform, bool):
             self._perform = perform
-        if body_validator or body_required:
+        if isinstance(body_validator, dict) or isinstance(body_required, list):
             self._validator = RequestValidator(validator=body_validator,
                                                required=body_required
                                                )
@@ -132,21 +133,21 @@ class RequestBehavior:
         self._validator = value
 
     @property
-    def body_validator(self) -> dict:
+    def body_validator(self) -> Optional[Dict[str, Type]]:
         """Reflection into the validator object for the body payload validator."""
         return self.validator.validator
 
     @body_validator.setter
-    def body_validator(self, value: dict):
+    def body_validator(self, value: Optional[Dict[str, Type]]):
         """Update or overwrite the body payload validator."""
         self.validator.validator = value
 
     @property
-    def body_required(self) -> list:
+    def body_required(self) -> Optional[List[str]]:
         """Reflection into the validator object for the body payload required list."""
         return self.validator.required
 
     @body_required.setter
-    def body_required(self, value: list):
+    def body_required(self, value: Optional[List[str]]):
         """Update or change the body payload required element list."""
         self.validator.required = value

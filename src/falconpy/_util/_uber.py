@@ -108,7 +108,6 @@ def handle_container_operations(kwa: dict, base_string: str) -> Tuple[dict, str,
     return kwa, base_string, do_container
 
 
-# pylint: disable=R0913
 def uber_request_keywords(caller: object,
                           meth: str,
                           oper: str,
