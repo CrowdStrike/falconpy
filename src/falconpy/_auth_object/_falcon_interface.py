@@ -84,7 +84,7 @@ class FalconInterface(BaseFalconAuth):
     #
     # The default constructor for all authentication objects. Ingests provided credentials
     # and sets the necessary class attributes based upon the authentication detail received.
-    # pylint: disable=R0913
+    # pylint: disable=R0913,R0914
     def __init__(self,
                  access_token: Optional[Union[str, bool]] = False,
                  base_url: Optional[str] = "https://api.crowdstrike.com",

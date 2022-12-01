@@ -42,6 +42,7 @@ from .._constant import MAX_DEBUG_RECORDS
 
 class LogFacility:
     """This class encapsulates the log facility and additional configuration."""
+
     # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
@@ -53,13 +54,13 @@ class LogFacility:
     _sanitize: bool = True
 
     def __init__(self, log: Logger = None, debug_record_count: int = None, sanitize_log: bool = None):
+        """Construct an instance of the LogFacility class."""
         if log:
             self._log = log
         if debug_record_count:
             self._debug_record_count = debug_record_count
         if sanitize_log is not None:
             self._sanitize = sanitize_log
-
 
     def deactivate_log(self):
         """Deactivate the log by removing it from the facility."""
@@ -89,9 +90,8 @@ class LogFacility:
     def debug_record_count(self) -> int:
         """Return the current debug record count setting."""
         return self._debug_record_count
-    
+
     @debug_record_count.setter
     def debug_record_count(self, value):
+        """Set the debug record count."""
         self._debug_record_count = value
-
-
