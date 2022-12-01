@@ -41,7 +41,7 @@ try:
     from simplejson import JSONDecodeError
 except ImportError:
     from json.decoder import JSONDecodeError
-from typing import Dict, Any, Union, Optional
+from typing import Dict, Any, Union, Optional, List, Type
 from copy import deepcopy
 from logging import Logger
 import requests
@@ -70,7 +70,10 @@ from .._result import Result
 urllib3.disable_warnings(InsecureRequestWarning)
 
 
-def validate_payload(validator: dict, params: dict, required: list = None) -> bool:
+def validate_payload(validator: Dict[str, Type],
+                     payload: Dict[str, Union[str, int, dict, list, bytes]],
+                     required: Optional[List[str]] = None
+                     ) -> bool:
     """Validate parameters and body payloads sent to the API."""
     # Repurposed with permission from
     # https://github.com/yaleman/crowdstrike_api
@@ -85,15 +88,15 @@ def validate_payload(validator: dict, params: dict, required: list = None) -> bo
     #
     if required:
         for key in required:
-            if key not in params:
+            if key not in payload:
                 raise PayloadValidationError(code=400, msg=f"Argument {key} must be specified.")
 
-    for key in params:
+    for key in payload:
         if key not in validator:
             raise PayloadValidationError(code=400, msg=f"{key} is not a valid argument.")
-        if not isinstance(params[key], validator[key]):
+        if not isinstance(payload[key], validator[key]):
             should = validator[key]
-            was = type(params[key])
+            was = type(payload[key])
             raise PayloadValidationError(code=400, msg=f"{key} is not the valid type. Should be: {should}, was {was}")
 
     return True
@@ -120,7 +123,7 @@ def handle_single_argument(passed_arguments: Union[list, tuple], passed_keywords
     return passed_keywords
 
 
-def force_default(defaults: list, default_types: list = None):
+def force_default(defaults: List[str], default_types: List[str] = None):
     """Force default values.
 
     Intended to decorate other functions.
@@ -129,7 +132,7 @@ def force_default(defaults: list, default_types: list = None):
     defaults = list of values to default
     default_types = list of types to default the values to
 
-    Example: @force_default(defaults=["parameters], default_types=["dict"])
+    Example: @force_default(defaults=["parameters"], default_types=["dict"])
     """
     if not default_types:
         default_types = []
@@ -176,36 +179,40 @@ def force_default(defaults: list, default_types: list = None):
     return wrapper
 
 
-# Caller is defined as an object below until our Python minimum version is >= 3.7
-def service_request(caller: object = None, **kwargs) -> object:  # May return dict or binary datatypes
-    """Prepare and then perform the request (Service Classes only)."""
+# Caller is a derivitive of ServiceClass below, but we cannot type it until after
+# support for Python 3.6 is dropped due to the circular reference it would cause.
+def service_request(caller=None, **kwargs) -> Union[Dict[str, Union[int, dict, list]], bytes]:
+    """Prepare and then perform the request (Service Classes only).
+
+    Inbound caller argument should be a ServiceClass class or derivative.
+    """
     if caller:
         try:
-            proxy: Dict[str, str] = caller.proxy
+            proxy: Optional[Dict[str, str]] = caller.proxy
         except AttributeError:
             proxy = None
 
         try:
-            timeout: int = caller.timeout
+            timeout: Optional[int] = caller.timeout
         except AttributeError:
             timeout = None
 
         try:
-            user_agent: str = caller.user_agent
+            user_agent: Optional[str] = caller.user_agent
         except AttributeError:
             user_agent = None
 
         try:
-            log_utility = caller.log
+            log_utility: Optional[Logger] = caller.log
         except AttributeError:
             log_utility = None
 
         try:
-            debug_count = caller.debug_record_count
+            debug_count: Optional[int] = caller.debug_record_count
         except AttributeError:
             debug_count = None
         try:
-            do_sanitize = caller.sanitize_log
+            do_sanitize: Optional[bool] = caller.sanitize_log
         except AttributeError:
             do_sanitize = None
 

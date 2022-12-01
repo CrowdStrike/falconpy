@@ -43,7 +43,7 @@ from logging import Logger, getLogger
 from typing import Dict, Optional, Union
 from ._base_falcon_auth import BaseFalconAuth
 from ._bearer_token import BearerToken
-from ._log_facility import LogFacility
+from .._log import LogFacility
 from .._constant import MIN_TOKEN_RENEW_WINDOW, MAX_TOKEN_RENEW_WINDOW
 from ._interface_config import InterfaceConfiguration
 from .._enum import TokenFailReason
@@ -69,9 +69,9 @@ class FalconInterface(BaseFalconAuth):
     #
     # The default credential dictionary, where the client_id and client_secret are stored.
     _creds: Dict[str, str] = {}
-    # Starting with v1.3.0 minimal python native logging is available. In order
-    # to reduce potential impacts to customer configurations, this facility is
-    # extremely limited and not implemented by default. (Meaning logs are not generated.)
+    # Starting with v1.3.0 minimal python native logging is available. In order to reduce
+    # potential impacts to developer configurations, this facility is extremely limited
+    # and not implemented by default. (Meaning logs are not generated.)
     # To enable logging, pass the keyword "debug" with a value of True to the constructor.
     _log: Optional[LogFacility] = LogFacility()
     # Our token is stored within a BearerToken object.
@@ -333,11 +333,11 @@ class FalconInterface(BaseFalconAuth):
     @property
     def sanitize_log(self) -> bool:
         """Return the current log sanitization."""
-        return self.log_facility.sanitize
+        return self.log_facility.sanitize_log
 
     @sanitize_log.setter
     def sanitize_log(self, value):
-        self.log_facility.sanitize = value
+        self.log_facility.sanitize_log = value
 
     # These properties provide reflection into the token object
     @property
@@ -373,12 +373,12 @@ class FalconInterface(BaseFalconAuth):
         self.bearer_token.token_time = value
 
     @property
-    def token_fail_reason(self) -> int:
+    def token_fail_reason(self) -> str:
         """Return the current fail_reason setting."""
         return self.bearer_token.fail_reason
 
     @token_fail_reason.setter
-    def token_fail_reason(self, value: int):
+    def token_fail_reason(self, value: str):
         self.bearer_token.fail_reason = value
 
     @property
@@ -391,12 +391,12 @@ class FalconInterface(BaseFalconAuth):
         self.bearer_token.status = value
 
     @property
-    def token_value(self) -> int:
+    def token_value(self) -> str:
         """Return the current value setting."""
         return self.bearer_token.value
 
     @token_value.setter
-    def token_value(self, value: int):
+    def token_value(self, value: str):
         self.bearer_token.value = value
 
     # All properties defined here are by design IMMUTABLE.

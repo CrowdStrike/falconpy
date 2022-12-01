@@ -38,6 +38,8 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, List, Optional, Union
 from ._falcon_interface import FalconInterface
 from .._constant import MAX_DEBUG_RECORDS
+from .._endpoint import api_endpoints
+from .._util import confirm_base_url
 
 
 class UberInterface(FalconInterface):
@@ -76,8 +78,40 @@ class UberInterface(FalconInterface):
                  debug_record_count: Optional[int] = MAX_DEBUG_RECORDS,
                  sanitize_log: Optional[bool] = None
                  ) -> "UberInterface":
-        """Construct an instance of the UberInterface class."""
-        super().__init__(base_url=base_url,
+        """Construct an instance of the UberInterface class.
+
+        Instantiates an instance of the class, ingests credentials,
+        the base URL and the SSL verification boolean.
+        Afterwards class attributes are initialized.
+
+        Keyword arguments:
+        base_url: CrowdStrike API URL to use for requests. [Default: US-1]
+        ssl_verify: Boolean specifying if SSL verification should be used. [Default: True]
+        proxy: Dictionary of proxies to be used for requests.
+        timeout: Float or tuple specifying timeouts to use for requests.
+        creds: Dictionary containing CrowdStrike API credentials.
+               Mutually exclusive to client_id / client_secret.
+               {
+                   "client_id": "CLIENT_ID_HERE",
+                   "client_secret": "CLIENT_SECRET_HERE",
+                   "member_cid": "CHILD_CID_MSSP_ONLY"
+               }
+        client_id: Client ID for the CrowdStrike API. Mutually exclusive to creds.
+        client_secret: Client Secret for the CrowdStrike API. Mutually exclusive to creds.
+        member_cid: Child CID to connect to. (MSSP only) Mutually exclusive to creds.
+        user_agent: User-Agent string to use for all requests made to the CrowdStrike API.
+                    String. Defaults to crowdstrike-falconpy/VERSION.
+        renew_window: Amount of time (in seconds) between now and the token expiration before
+                      a refresh of the token is performed. Default: 120, Max: 1200
+                      Values over 1200 will be reset to the maximum.
+        debug: Enables debugging. Boolean.
+        debug_record_count: Maximum number of returned records to write to log files. Integer
+                            Max: 5000
+        sanitize_log: Enable / Disable log sanitization of client IDs, secrets and tokens.
+                      Boolean. Defaults to enabled.
+        This method only accepts keywords to specify arguments.
+        """
+        super().__init__(base_url=confirm_base_url(base_url),
                          ssl_verify=ssl_verify,
                          timeout=timeout,
                          proxy=proxy,
@@ -92,6 +126,9 @@ class UberInterface(FalconInterface):
                          debug_record_count=debug_record_count,
                          sanitize_log=sanitize_log
                          )
+
+        # Complete list of available API operations.
+        self.commands = api_endpoints
 
     # _  _ ____ ___ _  _ ____ ___  ____
     # |\/| |___  |  |__| |  | |  \ [__

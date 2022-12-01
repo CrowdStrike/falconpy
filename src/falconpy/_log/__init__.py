@@ -1,4 +1,4 @@
-"""FalconPy API Request module.
+"""FalconPy logging module.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,13 +35,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._request import APIRequest
-from ._request_behavior import RequestBehavior
-from ._request_connection import RequestConnection
-from ._request_meta import RequestMeta
-from ._request_payloads import RequestPayloads
-from ._request_validator import RequestValidator
+from ._facility import LogFacility
 
-__all__ = ["APIRequest", "RequestBehavior", "RequestConnection",
-           "RequestMeta", "RequestPayloads", "RequestValidator"
-           ]
+__all__ = ["LogFacility"]

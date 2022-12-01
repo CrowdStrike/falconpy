@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import List, Optional, Union
 from ._response_component import ResponseComponent
 
 
@@ -46,7 +47,7 @@ class BaseResource(ResponseComponent):
     #  |     |    |       |    |    \_ __|__ |_____] |_____|    |    |______ ______|
     #
     # Override the _data attribute from ResponseComponent to always be a list.
-    _data: list = []
+    _data: List[Optional[Union[str, int, float, dict]]] = []
     _pos: int = 0
 
     #  _______  _____  __   _ _______ _______  ______ _     _ _______ _______  _____   ______
@@ -55,9 +56,9 @@ class BaseResource(ResponseComponent):
     #
     def __init__(self, data):
         """Construct an instance of the class."""
-        if data is not None:
-            # Resources branch is present but is a NoneType
+        if isinstance(data, list):
             super().__init__(data=data)
+        # else the Resources branch is present but is a NoneType
 
     #  _______ _______ _______ _     _  _____  ______  _______
     #  |  |  | |______    |    |_____| |     | |     \ |______
@@ -99,6 +100,6 @@ class BaseResource(ResponseComponent):
     #
     # Properties within a resource object are immutable once they are created.
     @property
-    def data(self) -> list:
+    def data(self) -> List[Optional[Union[str, int, float, dict]]]:
         """Return the contents of the underlying _data attribute."""
         return list(self._data)

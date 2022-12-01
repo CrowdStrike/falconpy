@@ -39,9 +39,9 @@ from typing import Union, Dict, Optional
 from logging import Logger
 from ._request_behavior import RequestBehavior
 from ._request_connection import RequestConnection
-from ._request_log import RequestLog
 from ._request_meta import RequestMeta
 from ._request_payloads import RequestPayloads
+from .._log import LogFacility
 
 
 class APIRequest:
@@ -55,7 +55,7 @@ class APIRequest:
     _payloads: Optional[RequestPayloads] = None
     _connection: RequestConnection = RequestConnection()
     _behavior = RequestBehavior()
-    _request_log: Optional[RequestLog] = None
+    _request_log: Optional[LogFacility] = None
 
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
@@ -89,10 +89,10 @@ class APIRequest:
                                             body_required=initializer.get("body_required", None)
                                             )
             # Logging functionality
-            self.request_log = RequestLog(log=initializer.get("log_util", None),
-                                          max_debug=initializer.get("debug_record_count", None),
-                                          sanitize_log=initializer.get("sanitize", None)
-                                          )
+            self.request_log = LogFacility(log=initializer.get("log_util", None),
+                                           debug_record_count=initializer.get("debug_record_count", None),
+                                           sanitize_log=initializer.get("sanitize", None)
+                                           )
 
     # _  _ ____ ___ _  _ ____ ___  ____
     # |\/| |___  |  |__| |  | |  \ [__
@@ -139,32 +139,32 @@ class APIRequest:
     @property
     def endpoint(self) -> bool:
         """Return the endpoint attribute."""
-        return self._meta.endpoint
+        return self.meta.endpoint
 
     @endpoint.setter
     def endpoint(self, value):
         """Set the endpoint attribute."""
-        self._meta.endpoint = value
+        self.meta.endpoint = value
 
     @property
     def method(self) -> bool:
         """Return the method attribute."""
-        return self._meta.method
+        return self.meta.method
 
     @method.setter
     def method(self, value):
         """Set the method attribute."""
-        self._meta.method = value
+        self.meta.method = value
 
     @property
     def debug_headers(self) -> dict:
         """Return the debug headers."""
-        return self._meta.debug_headers
+        return self.meta.debug_headers
 
     @debug_headers.setter
     def debug_headers(self, value):
         """Set the debug headers."""
-        self._meta.debug_headers = value
+        self.meta.debug_headers = value
 
     # ___  ____ _   _ _    ____ ____ ___  ____
     # |__] |__|  \_/  |    |  | |__| |  \ [__
@@ -300,13 +300,13 @@ class APIRequest:
     # |    |  | | __
     # |___ |__| |__]
     @property
-    def request_log(self) -> RequestLog:
-        """Return the RequestLog object."""
+    def request_log(self) -> LogFacility:
+        """Return the LogFacility object."""
         return self._request_log
 
     @request_log.setter
-    def request_log(self, value: RequestLog):
-        """Set the RequestLog object."""
+    def request_log(self, value: LogFacility):
+        """Set the LogFacility object."""
         self._request_log = value
 
     @property
@@ -327,12 +327,12 @@ class APIRequest:
     @property
     def max_debug(self) -> int:
         """Return the maximum number of records to log per debug entry setting."""
-        return self.request_log.max_debug
+        return self.request_log.debug_record_count
 
     @max_debug.setter
     def max_debug(self, value: int):
         """Set the maximum number of records to log per debug entry setting."""
-        self.request_log.max_debug = value
+        self.request_log.debug_record_count = value
 
     @property
     def sanitize_log(self) -> bool:

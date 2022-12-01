@@ -64,7 +64,7 @@ class RequestConnection:
         self._user_agent: Optional[str] = user_agent
         self._proxy: Optional[Dict[str, str]] = proxy
         self._timeout: Optional[Union[int, tuple]] = timeout
-        if verify is not None:
+        if isinstance(verify, bool):
             self._verify: bool = verify
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
@@ -113,3 +113,24 @@ class RequestConnection:
     def verify(self, value: bool):
         """Enable or disable SSL verification for the connection."""
         self._verify = value
+
+
+# Python 3.7+ version
+# This code will be updated to the following once Python 3.6 support is dropped.
+#
+# from dataclasses import dataclass
+# from typing import Optional, Dict, Union
+
+
+# @dataclass
+# class RequestConnection:
+#     """This class represents connection details related to an API request."""
+
+#     # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
+#     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
+#     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
+#     #
+#     user_agent: Optional[str] = None
+#     verify: bool = True
+#     timeout: Optional[Union[int, tuple]] = None
+#     proxy: Optional[Dict[str, str]] = None

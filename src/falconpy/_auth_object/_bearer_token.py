@@ -71,13 +71,13 @@ class BearerToken:
                  status: Optional[int] = None
                  ):
         """Create an instance of the BearerToken class."""
-        if token_value:
-            self._value = token_value
-        if expiration:
+        # if token_value:
+        self._value = token_value
+        if isinstance(expiration, int):
             self._expiration = expiration
         if token_value:
             self._token_time = time.time()
-        if status:
+        if isinstance(status, int):
             self._status = status
 
     # _  _ ____ ___ _  _ ____ ___  ____
