@@ -57,10 +57,8 @@ class RequestValidator:
                  required: Optional[List[str]] = None
                  ):
         """Construct an instance of RequestValidator class."""
-        if validator is not None:
-            self._validator = validator
-        if required is not None:
-            self._required = required
+        self._validator = validator
+        self._required = required
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
@@ -85,3 +83,21 @@ class RequestValidator:
     def required(self, value: Optional[List[str]]):
         """Set the required list."""
         self._required = value
+
+# Python 3.7
+# This code will be updated to the following once Python 3.6 support is dropped.
+#
+# from dataclasses import dataclass
+# from typing import Type, Dict, Optional, List
+
+
+# @dataclass
+# class RequestValidator:
+#     """This class represents a request payload validator."""
+
+#     # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
+#     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
+#     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
+#     #
+#     validator: Optional[Dict[str, Type]] = None
+#     required: Optional[List[str]] = None

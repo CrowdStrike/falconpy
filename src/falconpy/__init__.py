@@ -25,7 +25,6 @@ from ._version import _DOCS_URL, _KEYWORDS
 from ._auth_object import (
     BaseFalconAuth,
     BearerToken,
-    LogFacility,
     FalconInterface,
     UberInterface,
     InterfaceConfiguration
@@ -42,6 +41,7 @@ from ._constant import (
     MOCK_OPERATIONS
     )
 from ._enum import BaseURL, ContainerBaseURL, TokenFailReason
+from ._log import LogFacility
 from ._error import (
     APIError,
     SDKError,
@@ -76,7 +76,6 @@ from ._api_request import (
     APIRequest,
     RequestBehavior,
     RequestConnection,
-    RequestLog,
     RequestMeta,
     RequestPayloads,
     RequestValidator
@@ -163,7 +162,7 @@ __all__ = [
     "ExpandedResult", "CannotRevokeToken", "Headers", "Meta", "Resources",
     "ResponseComponent", "BaseDictionary", "Errors", "BaseResource", "RawBody", "BinaryFile",
     "FunctionalityNotImplemented", "BearerToken", "LogFacility", "InvalidBaseURL",
-    "InterfaceConfiguration", "RequestBehavior", "RequestConnection", "RequestLog", "RequestMeta",
+    "InterfaceConfiguration", "RequestBehavior", "RequestConnection", "RequestMeta",
     "RequestPayloads", "RequestValidator", "PayloadValidationError", "MIN_TOKEN_RENEW_WINDOW",
     "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS"
     ]
