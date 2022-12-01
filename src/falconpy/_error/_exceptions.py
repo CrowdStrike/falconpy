@@ -142,6 +142,19 @@ class CannotRevokeToken(SDKError):
     # Probably an authentication error, but will fall back to a 500 if we don't know.
 
 
+class PayloadValidationError(SDKError):
+    """Payload validation has failed."""
+
+    _message = "Validation failed. Please check your payloads and try this request again."
+    _code = 400
+    def __init__(self, msg: str = None, code: int = None):
+        if msg is not None:
+            self._message = msg
+        if code is not None:
+            self._code = code
+        super().__init__()
+
+
 class APIError(SDKError):
     """Generic error received back from the API."""
 

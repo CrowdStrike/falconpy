@@ -36,5 +36,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._request import APIRequest
+from ._request_behavior import RequestBehavior
+from ._request_connection import RequestConnection
+from ._request_log import RequestLog
+from ._request_meta import RequestMeta
+from ._request_payloads import RequestPayloads
+from ._request_validator import RequestValidator
 
-__all__ = ["APIRequest"]
+__all__ = ["APIRequest", "RequestBehavior", "RequestConnection", "RequestLog",
+           "RequestMeta", "RequestPayloads", "RequestValidator"
+           ]
