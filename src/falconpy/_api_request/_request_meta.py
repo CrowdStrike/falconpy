@@ -55,6 +55,7 @@ class RequestMeta:
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
     def __init__(self, endpoint, method, debug_headers: Dict[str, str] = None):
+        """Construct an instance of RequestMeta class."""
         self._endpoint = endpoint
         self._method = method
         if debug_headers is not None:

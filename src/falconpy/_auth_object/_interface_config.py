@@ -40,11 +40,13 @@ from .._error import InvalidBaseURL
 
 
 class InterfaceConfiguration:
+    """This class represents the configuration of the interface."""
+
     # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
     #
-    # The base URL for this interface.    
+    # The base URL for this interface.
     _base_url: str = None
     # The proxy to use for communication with the CrowdStrike Falcon API.
     _proxy: Optional[Dict[str, str]] = None
@@ -67,6 +69,7 @@ class InterfaceConfiguration:
                  user_agent: Optional[str] = None,
                  ssl_verify: Optional[bool] = True
                  ):
+        """Construct an instance of the InterfaceConfiguration class."""
         if not base_url:
             raise InvalidBaseURL
         self._base_url = base_url
