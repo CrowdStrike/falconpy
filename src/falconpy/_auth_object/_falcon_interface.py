@@ -44,6 +44,7 @@ from typing import Dict, Optional, Union
 from ._base_falcon_auth import BaseFalconAuth
 from ._bearer_token import BearerToken
 from ._log_facility import LogFacility
+from .._constant import MIN_TOKEN_RENEW_WINDOW, MAX_TOKEN_RENEW_WINDOW
 from ._interface_config import InterfaceConfiguration
 from .._enum import TokenFailReason
 from .._util import (
@@ -124,10 +125,12 @@ class FalconInterface(BaseFalconAuth):
                 creds["member_cid"] = member_cid
         elif not creds:
             creds = {}
-        # Credential Authentication (also powers Direct Authentication)
+        # Credential Authentication (also powers Direct Authentication).
         self.creds: Dict[str, str] = creds
         # Set the token renewal window, ignored when using Legacy Authentication.
-        self.renew_window: int = max(min(renew_window, 1200), 120)
+        self.renew_window: int = max(min(renew_window, MAX_TOKEN_RENEW_WINDOW),
+                                     MIN_TOKEN_RENEW_WINDOW
+                                     )
         # Legacy (Token) Authentication (fallback)
         if access_token:
             # Store this non-refreshable token, assuming it was just generated.
@@ -135,15 +138,16 @@ class FalconInterface(BaseFalconAuth):
 
         # Log the creation of this object if debugging is enabled.
         if debug:
-            # Ignored when debugging is disabled
+            # Ignored when debugging is disabled.
             _debug_record_count: int = debug_record_count if debug_record_count else None
-            # Allow log sanitization to be overridden
+            # Allow log sanitization to be overridden.
             _sanitize = sanitize_log if isinstance(sanitize_log, bool) else None
-
-            self._log: LogFacility = LogFacility(getLogger(__name__.split(".", maxsplit=1)[0]),
+            # Logging facility for all classes using this interface, defaults to disabled.
+            self._log: LogFacility = LogFacility(getLogger(__name__),
                                                  _debug_record_count,
                                                  _sanitize
                                                  )
+            # Log the startup of this class.
             log_class_startup(self, self.log)
 
     # _  _ ____ ___ _  _ ____ ___  ____

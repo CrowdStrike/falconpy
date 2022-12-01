@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, Union
+from typing import Dict, Union, Optional, List
 from requests.structures import CaseInsensitiveDict
 from ._meta import Meta
 from ._errors import Errors
@@ -51,11 +51,11 @@ class BaseResult:
     # |     |    |       |    |    \_ __|__ |_____] |_____|    |    |______ ______|
     # The attributes contain response data by category.
     status_code: int = 0
-    headers: Headers = None
-    meta: Meta = None
+    headers: Optional[Headers] = None
+    meta: Optional[Meta] = None
     resources: Resources = Resources([])
-    errors: Errors = []
-    raw: RawBody = None
+    errors: Optional[Union[Errors, List[Dict[str, str]]]] = []
+    raw: Optional[RawBody] = None
 
     # Privates used for iteration
     _pos: int = 0

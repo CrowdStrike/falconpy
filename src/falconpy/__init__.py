@@ -32,7 +32,15 @@ from ._auth_object import (
     )
 from ._service_class import BaseServiceClass, ServiceClass
 from ._util import confirm_base_region, confirm_base_url
-from ._constant import MAX_DEBUG_RECORDS, ALLOWED_METHODS, USER_AGENT
+from ._constant import (
+    MAX_DEBUG_RECORDS,
+    ALLOWED_METHODS,
+    USER_AGENT,
+    MIN_TOKEN_RENEW_WINDOW,
+    MAX_TOKEN_RENEW_WINDOW,
+    GLOBAL_API_MAX_RETURN,
+    MOCK_OPERATIONS
+    )
 from ._enum import BaseURL, ContainerBaseURL, TokenFailReason
 from ._error import (
     APIError,
@@ -158,7 +166,8 @@ __all__ = [
     "ResponseComponent", "BaseDictionary", "Errors", "BaseResource", "RawBody", "BinaryFile",
     "FunctionalityNotImplemented", "BearerToken", "LogFacility", "InvalidBaseURL",
     "InterfaceConfiguration", "RequestBehavior", "RequestConnection", "RequestLog", "RequestMeta",
-    "RequestPayloads", "RequestValidator", "PayloadValidationError"
+    "RequestPayloads", "RequestValidator", "PayloadValidationError", "MIN_TOKEN_RENEW_WINDOW",
+    "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS"
     ]
 """
 This is free and unencumbered software released into the public domain.

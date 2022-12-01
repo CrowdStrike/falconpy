@@ -57,21 +57,22 @@ class RequestConnection:
     def __init__(self,
                  user_agent: str = None,
                  proxy: Dict[str, str] = None,
-                 timeout: Union[int, float] = None,
+                 timeout: Union[int, tuple] = None,
                  verify: bool = None
                  ):
         """Construct an instance of RequestConnection class."""
-        self._user_agent = user_agent
-        self._proxy = proxy
-        self._timeout = timeout
-        self._verify = verify
+        self._user_agent: Optional[str] = user_agent
+        self._proxy: Optional[Dict[str, str]] = proxy
+        self._timeout: Optional[Union[int, tuple]] = timeout
+        if verify is not None:
+            self._verify: bool = verify
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
     # |    |  \ |__| |    |___ |  \  |  | |___ ___]
     #
     @property
-    def user_agent(self) -> str:
+    def user_agent(self) -> Optional[str]:
         """User agent string to be sent along with connection headers."""
         return self._user_agent
 
@@ -81,7 +82,7 @@ class RequestConnection:
         self._user_agent = value
 
     @property
-    def proxy(self) -> Dict[str, str]:
+    def proxy(self) -> Optional[Dict[str, str]]:
         """Return the dictionary containing proxy information that is used for requests."""
         return self._proxy
 
@@ -91,7 +92,7 @@ class RequestConnection:
         self._proxy = value
 
     @property
-    def timeout(self) -> Union[int, tuple]:
+    def timeout(self) -> Optional[Union[int, tuple]]:
         """Timeout in seconds for the connection specified as either an integer or tuple.
 
         Tuple format: (connect, read)

@@ -40,8 +40,8 @@ import sys
 import importlib
 import atexit
 from logging import Logger, basicConfig, getLogger, DEBUG
-from os.path import dirname, join
-import glob
+# from os.path import dirname, join
+# import glob
 from . import oauth2 as FalconAuth
 
 
@@ -58,20 +58,19 @@ def help(item=None):  # pylint: disable=W0622
 
     AVAILABLE VARIABLES
         'DEBUG_TOKEN' - your OAuth2 token.
-        'AUTH_OBJECT' - an instance of the OAuth2 authorization class (authenticated).
+        'AUTH' - an instance of the OAuth2 authorization object (authenticated).
 
-    LISTING AVAILABLE SERVICE CLASSES
-    Use list_modules() to retrieve a list of all available service classes.
+    LISTING AVAILABLE CLASSES
+    Use list_modules() to retrieve a list of all available classes.
 
-    IMPORTING MODULES
-    Use import_module("MODULE_NAME") to import any of the available service classes.
+    ALL CLASSES ARE IMPORTED AND AVAILABLE FOR TESTING.
 
-    Import hosts module and query for a specific host:
-    In [1]: hosts = import_module("hosts")
-    In [2]: hosts.QueryDevicesByFilter(filter="hostname:'whatever'")
+    Create an instance of the Hosts Service Class and query for devices:
+    In [1]: hosts = Hosts(auth_object=AUTH)
+    In [2]: hosts.query_devices_by_filter_scroll(filter="hostname:'whatever'")
 
-    Importing the detects module and querying for all available detections with one command:
-    In [1]: import_module("detects").QueryDetects()
+    Using the Detects Service Class to query for all available detections with one command:
+    In [1]: Detects(auth_object=AUTH).query_detects()
 
     EXIT THE DEBUGGER
     Use exit / quit / CTRL-D to exit the debugger.
@@ -93,24 +92,30 @@ def embed():
 
 
 def setup_logging() -> Logger:
+    """Configure simple logging."""
     log_util = getLogger("log_testing")
-    basicConfig(level=DEBUG, format="%(asctime)s %(levelname)s %(name)s %(message)s")
+    basicConfig(level=DEBUG, format="%(asctime)s %(levelname)-8s %(name)s %(funcName)s %(message)s")
 
     return log_util
 
 
 def list_modules():
     """List all available Service Classes."""
-    modules = glob.glob(join(dirname(__file__), "*.py"))
-    result = []
-    for key in modules:
-        branched = key.split("/")
-        position = len(branched)-1
-        module_name = branched[position].replace(".py", "")
-        if "_" not in module_name[0] and module_name not in ["debug", "api_complete"]:
-            result.append(module_name)
+    # modules = glob.glob(join(dirname(__file__), "*.py"))
+    # Only importing within this method to load the classes for the debugger not-package code.
+    # pylint: disable=C0415,E0401
+    import src.falconpy
+    result = [x for x in dir(src.falconpy) if ("_" not in x and not x.islower())]
+    # result = []
+    # for key in modules:
+    #     branched = key.split("/")
+    #     position = len(branched)-1
+    #     module_name = branched[position].replace(".py", "")
+    #     if "_" not in module_name[0] and module_name not in ["debug", "api_complete"]:
+    #         result.append(module_name)
     result.sort()
-    print("Available modules")
+    print("\nAvailable FalconPy classes")
+    print(f"{'=' * 65}")
     msg = ""
     for idx, val in enumerate(result):
         msg = f"{msg}%-35s" % val
@@ -120,6 +125,32 @@ def list_modules():
             msg = ""
     print(msg)
     print("\nLoad modules with import_module('MODULE_NAME')")
+
+
+def import_all():
+    """Inspect the package folder and import all available classes from all modules."""
+    # Only importing within this method to load the classes for the debugger not-package code.
+    # pylint: disable=C0415,E0401,R1702
+    import src.falconpy
+    import inspect
+    loaded = []
+    for name, obj in inspect.getmembers(src.falconpy, inspect.isclass):
+        # This is uh... interesting.
+        mod_name = f"{obj}".replace("<class", "").replace(">", "").replace("'", "").strip().replace(f".{name}", "")
+        if "enum" not in mod_name:
+            try:
+                module = importlib.import_module(mod_name)
+                for attribute_name in [x for x in dir(module) if "__" not in x]:
+                    attribute = getattr(module, attribute_name)
+                    if inspect.isclass(attribute):
+                        if attribute_name not in loaded:
+                            globals()[attribute_name] = attribute
+                            log.debug("Loaded %s class", attribute_name)
+                            loaded.append(attribute_name)
+
+            except ImportError:
+                # Probably one of the aliases
+                log.debug("Skipped %s alias", name)
 
 
 def import_module(module: str = None):
@@ -146,7 +177,7 @@ def import_module(module: str = None):
             for key in dir(current_module):
                 if isinstance(getattr(current_module, key), type) and not key == "ServiceClass" and "_" not in key:
                     _.append(getattr(_[0], key))
-                    returned_object = _[1](auth_object=AUTH_OBJECT)
+                    returned_object = _[1](auth_object=AUTH)
                     print(f"Service Class {key} imported successfully.")
     else:
         print("No module specified.")
@@ -156,9 +187,9 @@ def import_module(module: str = None):
 
 def exit_handler():
     """Revoke the DEBUG_TOKEN and gracefully quit the debugger. Overrides the built in python function."""
-    if AUTH_OBJECT:
+    if AUTH:
         print("Discarding token")
-        AUTH_OBJECT.revoke(token=DEBUG_TOKEN)
+        AUTH.revoke(token=DEBUG_TOKEN)
     sys.exit(0)
 
 
@@ -188,8 +219,8 @@ def init(dbg_falcon_client_id: str = None, dbg_falcon_client_secret: str = None,
         dbg_falcon_client_id = os.environ["FALCON_CLIENT_ID"]
         dbg_falcon_client_secret = os.environ["FALCON_CLIENT_SECRET"]
 
-    global DEBUG_TOKEN, AUTH_OBJECT  # pylint: disable=W0603
-    DEBUG_TOKEN, AUTH_OBJECT = startup(dbg_falcon_client_id, dbg_falcon_client_secret)
+    global DEBUG_TOKEN, AUTH  # pylint: disable=W0603
+    DEBUG_TOKEN, AUTH = startup(dbg_falcon_client_id, dbg_falcon_client_secret)
     embed()
 
 
@@ -197,7 +228,7 @@ def init(dbg_falcon_client_id: str = None, dbg_falcon_client_secret: str = None,
 python_help = help
 
 # Configure our banner
-BANNER = """
+BANNER = r"""
 ,---.     |                   ,--.      |
 |__. ,---.|    ,---.,---.,---.|   |,---.|---..   .,---.
 |    ,---||    |    |   ||   ||   ||---'|   ||   ||   |
@@ -205,24 +236,25 @@ BANNER = """
                                                   `---'
             CrowdStrike Python 3 Debug Interface
 
-This shell-like interface allows for quick learning,
-demoing, and prototyping of API operations using
-the CrowdStrike FalconPy SDK and Python 3.
+This shell-like interface allows for quick demoing and prototyping
+of API operations using the CrowdStrike FalconPy SDK and Python 3.
 
-Please type help() to learn more.
-                         |
-     _____________   __ -+- _____________
-     \\_____     /   /_ \\ |   \\     _____/
-       \\_____   \\____/  \\____/    _____/
-         \\_____    FalconPy      _____/
-           \\___________  ___________/
-                     /____\\
+                             |
+         _____________   __ -+- _____________
+         \_____     /   /_ \ |   \     _____/
+           \_____   \____/  \____/    _____/
+             \_____    FalconPy      _____/
+               \___________  ___________/
+                         /____\
+
+           Please type help() to learn more.
 """
 
 # Default our debug token and auth object to False
 DEBUG_TOKEN = False
-AUTH_OBJECT = False
+AUTH = False
 
 atexit.register(exit_handler)
 log = setup_logging()
+import_all()
 init()
