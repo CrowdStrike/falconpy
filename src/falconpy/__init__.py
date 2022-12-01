@@ -48,7 +48,8 @@ from ._error import (
     KeywordsOnly,
     CannotRevokeToken,
     FunctionalityNotImplemented,
-    InvalidBaseURL
+    InvalidBaseURL,
+    PayloadValidationError
     )
 from ._result import (
     Result,
@@ -63,7 +64,15 @@ from ._result import (
     RawBody,
     BinaryFile
     )
-from ._api_request import APIRequest
+from ._api_request import (
+    APIRequest,
+    RequestBehavior,
+    RequestConnection,
+    RequestLog,
+    RequestMeta,
+    RequestPayloads,
+    RequestValidator
+    )
 from .alerts import Alerts
 from .api_complete import APIHarness
 from .cloud_connect_aws import CloudConnectAWS
@@ -146,7 +155,8 @@ __all__ = [
     "ExpandedResult", "CannotRevokeToken", "Headers", "Meta", "Resources",
     "ResponseComponent", "BaseDictionary", "Errors", "BaseResource", "RawBody", "BinaryFile",
     "FunctionalityNotImplemented", "BearerToken", "LogFacility", "InvalidBaseURL",
-    "InterfaceConfiguration"
+    "InterfaceConfiguration", "RequestBehavior", "RequestConnection", "RequestLog", "RequestMeta",
+    "RequestPayloads", "RequestValidator", "PayloadValidationError"
     ]
 """
 This is free and unencumbered software released into the public domain.

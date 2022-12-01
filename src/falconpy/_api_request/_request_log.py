@@ -1,4 +1,4 @@
-"""FalconPy error module.
+"""FalconPy Request Log class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,29 +35,47 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._exceptions import (
-    SDKError,
-    RegionSelectError,
-    InvalidMethod,
-    InvalidOperation,
-    TokenNotSpecified,
-    KeywordsOnly,
-    InvalidCredentials,
-    APIError,
-    CannotRevokeToken,
-    FunctionalityNotImplemented,
-    InvalidBaseURL,
-    PayloadValidationError
-    )
-from ._warnings import (
-    SDKWarning,
-    SSLDisabledWarning,
-    NoContentWarning
-)
+from logging import Logger
+from .._constant import MAX_DEBUG_RECORDS
 
+class RequestLog:
+    """This class represents the log facility connected to this API request."""
 
-__all__ = ["SDKError", "RegionSelectError", "InvalidMethod", "InvalidOperation",
-           "TokenNotSpecified", "KeywordsOnly", "SDKWarning", "SSLDisabledWarning",
-           "InvalidCredentials", "APIError", "NoContentWarning", "CannotRevokeToken",
-           "FunctionalityNotImplemented", "InvalidBaseURL", "PayloadValidationError"
-           ]
+    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
+    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
+    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
+    #
+    _max_debug: int = MAX_DEBUG_RECORDS
+    _sanitize_log: bool = True
+    _log: Logger = None
+
+    # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
+    # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
+    # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
+    #
+    def __init__(self, log: Logger = None, max_debug: int = None, sanitize_log: bool = None):
+        if log is not None:
+            self._log = log
+        if max_debug is not None:
+            self._max_debug = int(max_debug)
+        if isinstance(sanitize_log, bool):
+            self._sanitize_log = sanitize_log
+
+    # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
+    # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
+    # |    |  \ |__| |    |___ |  \  |  | |___ ___]
+    #
+    @property
+    def log(self) -> Logger:
+        """Return the connected logger."""
+        return self._log
+
+    @property
+    def sanitize_log(self) -> bool:
+        """Return the log sanitization setting."""
+        return self._sanitize_log
+
+    @property
+    def max_debug(self) -> int:
+        """Return the maximum record per debug log setting."""
+        return self._max_debug

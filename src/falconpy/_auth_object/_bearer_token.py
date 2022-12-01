@@ -91,16 +91,7 @@ class BearerToken:
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
     # |    |  \ |__| |    |___ |  \  |  | |___ ___]
     #
-    # These properties are present in all FalconInterface derivatives.
-    # @property
-    # def refreshable(self) -> bool:
-    #     """Return the current refreshable setting."""
-    #     return self._refreshable
-
-    # @refreshable.setter
-    # def refreshable(self, value: bool):
-    #     self._refreshable = value
-
+    # These properties are present and mutable within all FalconInterface derivatives.
     @property
     def expiration(self) -> int:
         """Return the current expiration setting."""
