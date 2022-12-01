@@ -39,7 +39,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from abc import ABC, abstractmethod
-from typing import Dict
+from typing import Dict, Union
 
 
 class BaseFalconAuth(ABC):
@@ -64,11 +64,11 @@ class BaseFalconAuth(ABC):
     # altering the parent handler method that may be leveraged by other inheriting
     # class types.
     @abstractmethod
-    def login(self) -> dict or bool:
+    def login(self) -> Union[dict, bool]:
         """Login handler generic abstract."""
 
     @abstractmethod
-    def logout(self) -> dict or bool:
+    def logout(self) -> Union[dict, bool]:
         """Logout handler generic abstract."""
 
     #   _____   ______  _____   _____  _______  ______ _______ _____ _______ _______
