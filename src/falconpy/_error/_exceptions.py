@@ -101,6 +101,7 @@ class InvalidOperation(SDKError):
 
 class InvalidBaseURL(SDKError):
     """The base URL specified is invalid or does not exist."""
+
     _message = "Invalid base URL address specified."
     _code = 400
 
@@ -147,7 +148,9 @@ class PayloadValidationError(SDKError):
 
     _message = "Validation failed. Please check your payloads and try this request again."
     _code = 400
+
     def __init__(self, msg: str = None, code: int = None):
+        """Construct an instance of the exception, setting the message and code."""
         if msg is not None:
             self._message = msg
         if code is not None:

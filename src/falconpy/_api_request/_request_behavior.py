@@ -63,6 +63,7 @@ class RequestBehavior:
                  body_validator: dict = None,
                  body_required: list = None
                  ):
+        """Construct an instance of RequestBehavior class."""
         if expand_result is not None:
             self._expand_result = expand_result
         if container is not None:
@@ -73,8 +74,8 @@ class RequestBehavior:
             self._perform = perform
         if body_validator or body_required:
             self._validator = RequestValidator(validator=body_validator,
-                                                    required=body_required
-                                                    )
+                                               required=body_required
+                                               )
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
@@ -112,7 +113,7 @@ class RequestBehavior:
 
     @property
     def perform(self) -> bool:
-        """Should this request be performed. (Set by the payload validation process)."""
+        """Flag indicating if this request should be performed. (Set by the payload validation)."""
         return self._perform
 
     @perform.setter

@@ -35,6 +35,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+
+
 class RequestValidator:
     """This class represents a request payload validator."""
 
@@ -50,6 +52,7 @@ class RequestValidator:
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
     def __init__(self, validator: dict = None, required: list = None):
+        """Construct an instance of RequestValidator class."""
         if validator is not None:
             self._validator = validator
         if required is not None:
@@ -61,16 +64,20 @@ class RequestValidator:
     #
     @property
     def validator(self) -> dict:
+        """Return the validator dictionary."""
         return self._validator
 
     @validator.setter
     def validator(self, value: dict):
+        """Set the validator dictionary."""
         self._validator = value
 
     @property
     def required(self) -> list:
+        """Return the required list."""
         return self._required
 
     @required.setter
     def required(self, value: list):
+        """Set the required list."""
         self._required = value

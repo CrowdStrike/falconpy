@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from logging import Logger
 from .._constant import MAX_DEBUG_RECORDS
 
+
 class RequestLog:
     """This class represents the log facility connected to this API request."""
 
@@ -54,6 +55,7 @@ class RequestLog:
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
     def __init__(self, log: Logger = None, max_debug: int = None, sanitize_log: bool = None):
+        """Construct an instance of RequestLog class."""
         if log is not None:
             self._log = log
         if max_debug is not None:

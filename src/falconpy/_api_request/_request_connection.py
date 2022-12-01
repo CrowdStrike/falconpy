@@ -60,6 +60,7 @@ class RequestConnection:
                  timeout: Union[int, float] = None,
                  verify: bool = None
                  ):
+        """Construct an instance of RequestConnection class."""
         self._user_agent = user_agent
         self._proxy = proxy
         self._timeout = timeout
@@ -81,7 +82,7 @@ class RequestConnection:
 
     @property
     def proxy(self) -> Dict[str, str]:
-        """Dictionary containing proxy information that is forwarded to the requests module."""
+        """Return the dictionary containing proxy information that is used for requests."""
         return self._proxy
 
     @proxy.setter
@@ -91,8 +92,8 @@ class RequestConnection:
 
     @property
     def timeout(self) -> Union[int, tuple]:
-        """The timeout in seconds for the connection specified as either an integer or tuple.
-        
+        """Timeout in seconds for the connection specified as either an integer or tuple.
+
         Tuple format: (connect, read)
         """
         return self._timeout
