@@ -39,6 +39,7 @@ import os
 import sys
 import importlib
 import atexit
+from logging import Logger, basicConfig, getLogger, DEBUG
 from os.path import dirname, join
 import glob
 from . import oauth2 as FalconAuth
@@ -89,6 +90,13 @@ def embed():
     ipshell = _.InteractiveShellEmbed(banner1=BANNER)
     ipshell.confirm_exit = False
     ipshell()
+
+
+def setup_logging() -> Logger:
+    log_util = getLogger("log_testing")
+    basicConfig(level=DEBUG, format="%(asctime)s %(levelname)s %(name)s %(message)s")
+
+    return log_util
 
 
 def list_modules():
@@ -156,10 +164,10 @@ def exit_handler():
 
 def startup(dbg_falcon_client_id: str, dbg_falcon_client_secret: str):
     """Authenticate using the credentials provided and return the token / authentication object."""
-    auth_object = FalconAuth.OAuth2(creds={
-        'client_id': dbg_falcon_client_id,
-        'client_secret': dbg_falcon_client_secret
-    })
+    auth_object = FalconAuth.OAuth2(client_id=dbg_falcon_client_id,
+                                    client_secret=dbg_falcon_client_secret,
+                                    debug=True
+                                    )
 
     try:
         debug_token = auth_object.token()["body"]["access_token"]
@@ -216,5 +224,5 @@ DEBUG_TOKEN = False
 AUTH_OBJECT = False
 
 atexit.register(exit_handler)
-
+log = setup_logging()
 init()
