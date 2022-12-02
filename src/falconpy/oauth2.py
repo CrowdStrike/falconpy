@@ -79,8 +79,9 @@ class OAuth2(FalconInterface):
                  renew_window: Optional[int] = 120,
                  debug: Optional[bool] = False,
                  debug_record_count: Optional[int] = None,
-                 sanitize_log: Optional[bool] = None
-                 ) -> "OAuth2":
+                 sanitize_log: Optional[bool] = None,
+                 pythonic: Optional[bool] = None
+                 ):
         """Construct an instance of the class.
 
         Initializes the base class by ingesting credentials,
@@ -129,11 +130,12 @@ class OAuth2(FalconInterface):
                          creds=creds,
                          client_id=client_id,
                          client_secret=client_secret,
-                         member_cid=member_cid,
-                         renew_window=renew_window,
-                         debug=debug,
+                         member_cid=member_cid,             # |
+                         renew_window=renew_window,         # /\
+                         debug=debug,                      # |o
                          debug_record_count=debug_record_count,
-                         sanitize_log=sanitize_log
+                         sanitize_log=sanitize_log,
+                         pythonic=pythonic
                          )
 
     def logout(self) -> Dict[str, Union[int, dict]]:

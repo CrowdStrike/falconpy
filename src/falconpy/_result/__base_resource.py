@@ -54,10 +54,11 @@ class BaseResource(ResponseComponent):
     #  |       |     | | \  | |______    |    |_____/ |     | |          |    |     | |_____/
     #  |_____  |_____| |  \_| ______|    |    |    \_ |_____| |_____     |    |_____| |    \_
     #
-    def __init__(self, data):
+    def __init__(self, data: Optional[List[Union[str, int, float, dict]]] = None):
         """Construct an instance of the class."""
         if isinstance(data, list):
             super().__init__(data=data)
+
         # else the Resources branch is present but is a NoneType
 
     #  _______ _______ _______ _     _  _____  ______  _______

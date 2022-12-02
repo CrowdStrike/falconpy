@@ -52,7 +52,6 @@ from ._error import (
     InvalidOperation,
     InvalidMethod,
     TokenNotSpecified,
-    SSLDisabledWarning,
     SDKError
     )
 
@@ -71,24 +70,17 @@ def command_error_handler(func: Callable):
     @functools.wraps(func)
     def wrapper(caller, *args, **kwargs):
         """Inner wrapper."""
-        def log_failure(msg, code: int, res: dict = None, warn: bool = False):
+        def log_failure(msg, code: int, res: dict = None):
             if caller.log:
-                if warn:
-                    caller.log.warning(msg)
-                else:
-                    caller.log.error(msg)
-                    # Warnings shouldn't generate result payloads
-                    caller.log.debug("STATUS CODE: %i", code)
-                    caller.log.debug("RESULT: %s", res)
+                caller.log.error(msg)
+                # Warnings shouldn't generate result payloads
+                caller.log.debug("STATUS CODE: %i", code)
+                caller.log.debug("RESULT: %s", res)
         try:
             result = func(caller, *args, **kwargs)
         except (SDKError, InvalidMethod, InvalidOperation) as bad_sdk:
             result = bad_sdk.result
             log_failure(bad_sdk.message, bad_sdk.code, result)
-        except SSLDisabledWarning as no_ssl:
-            # SSL warnings do not override the returned response
-            log_failure(no_ssl.message, no_ssl.code, no_ssl.result, True)
-            result = func(caller, _warned=True, *args, **kwargs)
         return result
     return wrapper
 
@@ -181,10 +173,6 @@ class APIHarness(UberInterface):
         dict or bytes
             Dictionary or binary object containing API response depending on requested operation.
         """
-        # Complain about SSL if it's disabled.
-        if not self.ssl_verify and not kwargs.get("_warned", False):
-            raise SSLDisabledWarning
-
         try:
             if not kwargs.get("action", None):
                 # Assume they're passing it in as the first argument.
@@ -212,11 +200,11 @@ class APIHarness(UberInterface):
                 if operation == "oauth2AccessToken":
                     # Calling the token generation operation directly from the
                     # Uber Class does not change the underlying auth_object state.
-                    returned = self._login_handler(stateful=False)
-                elif operation == "oauth2RevokeToken":
-                    # Calling the token revocation operation directly requires a
-                    # token_value. Doing so in this manner from the Uber Class
-                    # does not change the underlying authentication state.
+                    returned = self._login_handler(stateful=False)  # .             CrowdStrike
+                elif operation == "oauth2RevokeToken":              # .                  O   Rocks
+                    # Calling the token revocation operation directly requires a        <|\
+                    # token_value. Doing so in this manner from the Uber Class          (o-"=
+                    # does not change the underlying authentication state.              / \
                     token_value = kwargs.get("token_value", None)
                     if not token_value:
                         raise TokenNotSpecified

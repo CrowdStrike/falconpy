@@ -39,6 +39,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import time
+import warnings
 from logging import Logger, getLogger
 from typing import Dict, Optional, Union
 from ._base_falcon_auth import BaseFalconAuth
@@ -54,7 +55,7 @@ from .._util import (
     login_payloads,
     logout_payloads
     )
-from .._error import InvalidCredentials
+from .._error import InvalidCredentials, NoAuthenticationMechanism
 
 
 class FalconInterface(BaseFalconAuth):
@@ -73,11 +74,13 @@ class FalconInterface(BaseFalconAuth):
     # potential impacts to developer configurations, this facility is extremely limited
     # and not implemented by default. (Meaning logs are not generated.)
     # To enable logging, pass the keyword "debug" with a value of True to the constructor.
-    _log: Optional[LogFacility] = LogFacility()
+    _log: LogFacility = LogFacility()
     # Our token is stored within a BearerToken object.
-    _token: Optional[BearerToken] = BearerToken()
+    _token: BearerToken = BearerToken()
     # Configuration detail for this interface.
     _config: InterfaceConfiguration = None
+    # Pythonic behavior.
+    _pythonic: bool = False
 
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
@@ -100,18 +103,22 @@ class FalconInterface(BaseFalconAuth):
                  renew_window: Optional[int] = 120,
                  debug: Optional[bool] = False,
                  debug_record_count: Optional[int] = None,
-                 sanitize_log: Optional[bool] = None
+                 sanitize_log: Optional[bool] = None,
+                 pythonic: Optional[bool] = None
                  ) -> "FalconInterface":
         """Construct an instance of the FalconInterface class."""
+        # Set the pythonic behavior mode.
+        if isinstance(pythonic, bool):
+            self._pythonic = pythonic
         # Setup our configuration object using the provided keywords.
-        self._config: InterfaceConfiguration = InterfaceConfiguration(base_url=base_url,
-                                                                      proxy=proxy,
-                                                                      timeout=timeout,
-                                                                      user_agent=user_agent,
-                                                                      ssl_verify=ssl_verify
-                                                                      )
-        # ____ _  _ ___ _  _ ____ _  _ ___ _ ____ ____ ___ _ ____ _  _
-        # |__| |  |  |  |__| |___ |\ |  |  | |    |__|  |  | |  | |\ |
+        self.config: InterfaceConfiguration = InterfaceConfiguration(base_url=base_url,
+                                                                     proxy=proxy,
+                                                                     timeout=timeout,
+                                                                     user_agent=user_agent,
+                                                                     ssl_verify=ssl_verify
+                                                                     )            # \ o /
+        # ____ _  _ ___ _  _ ____ _  _ ___ _ ____ ____ ___ _ ____ _  _                |
+        # |__| |  |  |  |__| |___ |\ |  |  | |    |__|  |  | |  | |\ |               / \
         # |  | |__|  |  |  | |___ | \|  |  | |___ |  |  |  | |__| | \|
         # Direct Authentication
         if client_id and client_secret and not creds:
@@ -149,6 +156,15 @@ class FalconInterface(BaseFalconAuth):
                                                  )
             # Log the startup of this class.
             log_class_startup(self, self.log)
+
+        try:
+            if not self.cred_format_valid and not self.token_value:
+                raise NoAuthenticationMechanism
+        except NoAuthenticationMechanism as no_auth_mechanism:
+            if pythonic:
+                warnings.warn(no_auth_mechanism.message, NoAuthenticationMechanism, stacklevel=2)
+            if self.log:
+                self.log.warning(no_auth_mechanism.message)
 
     # _  _ ____ ___ _  _ ____ ___  ____
     # |\/| |___  |  |__| |  | |  \ [__
@@ -313,12 +329,12 @@ class FalconInterface(BaseFalconAuth):
         self._config.user_agent = value
 
     @property
-    def timeout(self) -> Union[int, float]:
+    def timeout(self) -> Union[int, tuple]:
         """Return the current timeout setting."""
         return self._config.timeout
 
     @timeout.setter
-    def timeout(self, value: Union[int, float]):
+    def timeout(self, value: Union[int, tuple]):
         self._config.timeout = value
 
     @property
@@ -423,7 +439,7 @@ class FalconInterface(BaseFalconAuth):
     @property
     def log(self) -> Logger:
         """Return the logger from our log facility."""
-        return self._log.log
+        return self.log_facility.log
 
     @property
     def log_facility(self) -> LogFacility:
@@ -444,3 +460,13 @@ class FalconInterface(BaseFalconAuth):
     def debug(self) -> bool:
         """Return a boolean if we are in a debug mode."""
         return bool(self.log)
+
+    @property
+    def pythonic(self) -> bool:
+        """Return a boolean if we are in a pythonic mode."""
+        return self._pythonic
+
+    @pythonic.setter
+    def pythonic(self, value: bool):
+        """Enable or disable pythonic mode."""
+        self._pythonic = value

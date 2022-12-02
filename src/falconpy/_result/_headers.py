@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Optional, Union
 from ._base_dictionary import BaseDictionary
 
 
@@ -42,36 +43,36 @@ class Headers(BaseDictionary):
     """This class represents the headers of an API response."""
 
     @property
-    def content_encoding(self) -> str:
+    def content_encoding(self) -> Optional[str]:
         """Return the contents of the Content-Encoding key."""
         return self.get_property("Content-Encoding", None)
 
     @property
-    def content_length(self) -> int:
+    def content_length(self) -> Optional[Union[int, float]]:
         """Return the contents of the Content-Length key."""
         return self.get_property("Content-Length", 0)
 
     @property
-    def content_type(self) -> str:
+    def content_type(self) -> Optional[str]:
         """Return the contents of the Content-Type key."""
         return self.get_property("Content-Type", None)
 
     @property
-    def date(self) -> str:
+    def date(self) -> Optional[str]:
         """Return the contents of the Date key."""
         return self.get_property("Date", None)
 
     @property
-    def region(self) -> str:
+    def region(self) -> Optional[str]:
         """Return the contents of the X-Cs-Region key."""
         return self.get_property("X-Cs-Region", None)
 
     @property
-    def ratelimit_limit(self) -> int:
+    def ratelimit_limit(self) -> Optional[int]:
         """Return the contents of the X-Ratelimit-Limit key."""
         return self.get_property("X-Ratelimit-Limit", None)
 
     @property
-    def ratelimit_remaining(self) -> int:
+    def ratelimit_remaining(self) -> Optional[int]:
         """Return the contents of the X-Ratelimit-Remaining key."""
         return self.get_property("X-Ratelimit-Remaining", None)
