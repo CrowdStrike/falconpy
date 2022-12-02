@@ -28,7 +28,7 @@ class TestFalconPrevent:
 
     def prev_queryPreventionPolicyMembers(self):
         policies = falcon.queryPreventionPolicies(limit=1)
-        if policies["status_code"] != 500 and "resources" in policies["body"]:
+        if policies["status_code"] not in [500, 429] and "resources" in policies["body"]:
             check = falcon.queryPreventionPolicyMembers(
                     parameters={"id": policies["body"]["resources"][0]}
                     )
@@ -38,7 +38,11 @@ class TestFalconPrevent:
                 pytest.skip("API communication failure")
                 # return False
         else:
-            return True  # Can't hit the API for some reason
+            if policies["status_code"] == 420:
+                pytest.skip("Rate limit met")
+            else:
+                # Can't hit the API for some reason
+                return True
 
     def prev_getPreventionPolicies(self):
         policies = falcon.queryPreventionPolicies(parameters={"limit": 1})
@@ -64,7 +68,7 @@ class TestFalconPrevent:
 
     def prev_queryCombinedPreventionPolicyMembers(self):
         policies = falcon.queryCombinedPreventionPolicies(parameters={"limit": 1})
-        if policies["status_code"] != 500 and "resources" in policies["body"]:
+        if policies["status_code"] not in [500, 429] and "resources" in policies["body"]:
             if falcon.queryCombinedPreventionPolicyMembers(
                     parameters={"id": policies["body"]["resources"][0]["id"]}
                     )["status_code"] in AllowedResponses:
@@ -72,7 +76,11 @@ class TestFalconPrevent:
             else:
                 return False
         else:
-            return True  # Can't hit the API
+            # Can't hit the API
+            if policies["status_code"] == 420:
+                pytest.skip("Rate limit met")
+            else:
+                return True
 
     def prev_remaining_paths(self):
         ran_string = ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))

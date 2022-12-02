@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Union
+from typing import Union, Optional
 
 
 class ResponseComponent:
@@ -48,16 +48,17 @@ class ResponseComponent:
     # All response components maintain an underlying data attribute.
     # Due to the dynamic types of responses received from the API,
     # this base element is defined as generically as possible.
-    _data: Union[dict, bytes, list, str] = None
+    _data: Optional[Union[dict, bytes, list, str, int, float]] = None
 
     #  _______  _____  __   _ _______ _______  ______ _     _ _______ _______  _____   ______
     #  |       |     | | \  | |______    |    |_____/ |     | |          |    |     | |_____/
     #  |_____  |_____| |  \_| ______|    |    |    \_ |_____| |_____     |    |_____| |    \_
     #
     # Sets the data attribute upon creation.
-    def __init__(self, data):
+    def __init__(self, data: Optional[Union[dict, bytes, list, str]] = None):
         """Construct an instance of the class and set the private data attribute."""
-        self._data = data
+        if isinstance(data, (dict, bytes, list, str, int, float)):
+            self._data = data
 
     #  _______ _______ _______ _     _  _____  ______  _______
     #  |  |  | |______    |    |_____| |     | |     \ |______
@@ -82,7 +83,7 @@ class ResponseComponent:
     #  |       |    \_ |_____| |       |______ |    \_    |    __|__ |______ ______|
     #
     @property
-    def data(self) -> Union[dict, bytes, list, str]:
+    def data(self) -> Optional[Union[dict, bytes, list, str, int, float]]:
         """Property to reflect the contents of the private _data attribute."""
         return self._data
 

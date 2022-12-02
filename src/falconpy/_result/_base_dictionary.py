@@ -35,8 +35,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import ItemsView, Any
+from typing import ItemsView, Any, Union, Dict, List
+import sys
 from ._response_component import ResponseComponent
+
+
+# I live here for now to prevent a circular reference
+class UnsupportedPythonVersion(Exception):
+    """This feature is not supported by your version of Python."""
+
+    message = "This feature is not supported by your current version of Python."
+    code = 426
 
 
 class BaseDictionary(ResponseComponent):
@@ -47,7 +56,9 @@ class BaseDictionary(ResponseComponent):
     #  |     |    |       |    |    \_ __|__ |_____] |_____|    |    |______ ______|
     #
     # Override the default datatype for data attribute to be a dictionary.
-    _data: dict = {}
+    _data: Dict[str,
+                Union[str, Dict[str, Union[str, dict, list]], List[Union[str, int, dict]]]
+                ] = {}
 
     #  _______ _______ _______ _     _  _____  ______  _______
     #  |  |  | |______    |    |_____| |     | |     \ |______
@@ -75,6 +86,8 @@ class BaseDictionary(ResponseComponent):
 
     def __reversed__(self):
         """Reverse the iteration order."""
+        if sys.version_info.minor <= 7:  # pragma: no cover
+            raise UnsupportedPythonVersion
         return self._data.__reversed__()
 
     def __len__(self) -> int:
@@ -90,6 +103,9 @@ class BaseDictionary(ResponseComponent):
     #  |       |    \_ |_____| |       |______ |    \_    |    __|__ |______ ______|
     #
     @property
-    def data(self) -> dict:
+    def data(self) -> Dict[str, Union[str,
+                                      Dict[str, Union[str, dict, list]],
+                                      List[Union[str, int, dict]]
+                                      ]]:
         """Return the contents of the _data attribute as a dictionary."""
         return dict(self._data)

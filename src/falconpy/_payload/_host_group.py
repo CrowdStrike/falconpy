@@ -35,9 +35,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, List
 
 
-def host_group_create_payload(passed_keywords: dict) -> dict:
+def host_group_create_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, str]]]:
     """Create a properly formatted payload for host group operations.
 
     Create operations are supported. `id` and `group_type`
@@ -47,13 +48,13 @@ def host_group_create_payload(passed_keywords: dict) -> dict:
             {
                 "assignment_rule": "string",
                 "description": "string",
-                "group_type": "static",
+                "group_type": "string",
                 "name": "string"
             }
         ]
     }
     """
-    returned_payload = {}
+    returned_payload: Dict[str, List[Dict[str, str]]] = {}
     returned_payload["resources"] = []
     host_group_item = {}
     if passed_keywords.get("assignment_rule", None):
@@ -70,7 +71,7 @@ def host_group_create_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def host_group_update_payload(passed_keywords: dict) -> dict:
+def host_group_update_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, str]]]:
     """Create a properly formatted payload for host group operations.
 
     Update operations are supported. `id` and `group_type`
@@ -86,7 +87,7 @@ def host_group_update_payload(passed_keywords: dict) -> dict:
         ]
     }
     """
-    returned_payload = {}
+    returned_payload: Dict[str, List[Dict[str, str]]] = {}
     returned_payload["resources"] = []
     host_group_item = {}
     if passed_keywords.get("assignment_rule", None):

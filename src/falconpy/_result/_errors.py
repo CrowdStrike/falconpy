@@ -35,30 +35,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import List, Union
 from .__base_resource import BaseResource
 
 
 class Errors(BaseResource):
     """This class represents the errors list within an API response."""
-
-    def __repr__(self) -> str:
-        """Return a clean result of all errors received."""
-        _returned: Union[List[str], str] = []
-        if self._data:
-            _returned = ",".join(self.data)
-
-        return str(_returned)
-
-    @property
-    def data(self) -> list:
-        """Property to craft and return all errors within the response."""
-        _returned = []
-        if self._data:
-            for error in self._data:
-                if isinstance(error, dict):
-                    err = f"[{error['code']}] {error['message']}"
-                else:
-                    err = error
-                _returned.append(err)
-        return _returned

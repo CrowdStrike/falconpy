@@ -57,7 +57,8 @@ from ._error import (
     CannotRevokeToken,
     FunctionalityNotImplemented,
     InvalidBaseURL,
-    PayloadValidationError
+    PayloadValidationError,
+    NoAuthenticationMechanism
     )
 from ._result import (
     Result,
@@ -164,7 +165,8 @@ __all__ = [
     "FunctionalityNotImplemented", "BearerToken", "LogFacility", "InvalidBaseURL",
     "InterfaceConfiguration", "RequestBehavior", "RequestConnection", "RequestMeta",
     "RequestPayloads", "RequestValidator", "PayloadValidationError", "MIN_TOKEN_RENEW_WINDOW",
-    "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS"
+    "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS",
+    "NoAuthenticationMechanism"
     ]
 """
 This is free and unencumbered software released into the public domain.

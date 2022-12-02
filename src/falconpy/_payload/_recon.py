@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import List, Dict
 
 
 def handle_recon_rule_params(inbound: dict) -> dict:
@@ -56,20 +57,20 @@ def handle_recon_rule_params(inbound: dict) -> dict:
     return returned_dict
 
 
-def recon_rules_payload(passed_keywords: dict) -> dict:
+def recon_rules_payload(passed_keywords: dict) -> List[Dict[str, str]]:
     """Create a properly formatted payload for recon rule handling.
 
     Creates a list of dictionaries.
-            [
-                {
-                    "filter": "string",
-                    "id": "string",
-                    "name": "string",
-                    "permissions": "string",
-                    "priority": "string",
-                    "topic": "string"
-                }
-            ]
+    [
+        {
+            "filter": "string",
+            "id": "string",
+            "name": "string",
+            "permissions": "string",
+            "priority": "string",
+            "topic": "string"
+        }
+    ]
     """
     returned_rules = []
     provided_rules = passed_keywords.get("rules", None)
@@ -88,7 +89,7 @@ def recon_rules_payload(passed_keywords: dict) -> dict:
     return returned_rules
 
 
-def recon_notifications_payload(passed_keywords: dict) -> dict:
+def recon_notifications_payload(passed_keywords: dict) -> List[Dict[str, str]]:
     """Recon notification payload handler.
 
     Creates a properly formatted payload for a recon notification

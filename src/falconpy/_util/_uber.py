@@ -108,13 +108,13 @@ def handle_container_operations(kwa: dict, base_string: str) -> Tuple[dict, str,
     return kwa, base_string, do_container
 
 
-def uber_request_keywords(caller: object,
-                          meth: str,
-                          oper: str,
-                          tgt: str,
-                          kwa: dict,
-                          do_cont: bool
-                          ) -> dict:
+def uber_request_keywords(caller,
+                          meth: str,                            # .        o
+                          oper: str,                            # .           o
+                          tgt: str,                             # .      o
+                          kwa: dict,                            # .         O
+                          do_cont: bool                         # .       \/|\/
+                          ) -> dict:                            # .        / \  o
     """Generate a properly formatted mapping of the keywords for this request."""
     return {
         "method": meth,

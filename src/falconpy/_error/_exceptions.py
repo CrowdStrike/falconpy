@@ -157,6 +157,13 @@ class PayloadValidationError(SDKError):
         super().__init__()
 
 
+class FeatureNotSupportedByPythonVersion(SDKError):
+    """This feature is not supported by your version of Python."""
+
+    _message = "This feature is not supported by your current version of Python."
+    _code = 426
+
+
 class APIError(SDKError):
     """Generic error received back from the API."""
 
