@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, Union
+from typing import Dict, Union, Optional, List
 from ._util import force_default, process_service_request
 from ._payload import (
     aggregate_payload, generic_payload_list, update_alerts_payload
@@ -58,7 +58,7 @@ class Alerts(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
-    def get_aggregate_alerts(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_aggregate_alerts(self, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve aggregates for Alerts across all CIDs.
 
         Keyword arguments:
@@ -131,7 +131,7 @@ class Alerts(ServiceClass):
     # PatchEntitiesAlertsV1 has been **DECOMISSIONED**
 
     # @force_default(defaults=["body"], default_types=["dict"])
-    # def update_alerts(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    # def update_alerts(self, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
     #     """Perform actions on alerts identified by detection ID(s) in request.
 
     #     Keyword arguments:
@@ -204,7 +204,11 @@ class Alerts(ServiceClass):
     #         )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_alerts(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_alerts(self,
+                      *args,
+                      body: Optional[Dict[str, List[Union[str, Dict[str, str]]]]] = None,
+                      **kwargs
+                      ) -> Dict[str, Union[int, dict]]:
         """Perform actions on alerts identified by detection ID(s) in request.
 
         Keyword arguments:
@@ -264,9 +268,12 @@ class Alerts(ServiceClass):
                 )
 
         # Passing action_parameters overrides other keywords
-        if kwargs.get("action_parameters", None):
-            body["action_parameters"] = kwargs.get("action_parameters", None)
-
+        _action_params: Optional[List[Union[str, Dict[str, str]]]] = kwargs.get("action_parameters", None)
+        if _action_params:
+            body["action_parameters"] = _action_params
+        # Getting this from mypy:
+        # src/falconpy/alerts.py:269: error:
+        # Unsupported target for indexed assignment ("Optional[Dict[str, List[Union[str, Dict[str, str]]]]]")
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -275,7 +282,7 @@ class Alerts(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_alerts(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_alerts(self, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve all Alerts given their IDs.
 
         Keyword arguments:
@@ -313,7 +320,7 @@ class Alerts(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_alerts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_alerts(self, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for detection IDs that match a given query.
 
         Keyword arguments:

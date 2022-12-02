@@ -55,8 +55,8 @@ class ScheduledReports(ServiceClass):
     - a valid token provided by the authentication service class (oauth2.py)
     """
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def launch(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    @force_default(defaults=["body"], default_types=["list"])
+    def launch(self: object, *args, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Launch scheduled report executions for the provided ID(s).
 
         Keyword arguments:

@@ -250,3 +250,8 @@ class TestAuthentications:
 
     def test_ObjectAuth(self):
         assert self.serviceAny_TestObjectAuth() is True
+
+    def test_NoSecret(self):
+        thing = OAuth2(client_id="Whatever", debug=_DEBUG)
+        result = thing.login()
+        assert bool(result["status_code"] == 403)

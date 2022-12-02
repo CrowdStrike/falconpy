@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 
 
-def incident_action_parameters(passed_keywords: dict) -> dict:
+def incident_action_parameters(passed_keywords: dict) -> list:
     """Create a properly formatted action_parameters branch for incident action payload operations.
 
     Available keywords

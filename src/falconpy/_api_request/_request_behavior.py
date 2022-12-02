@@ -57,26 +57,26 @@ class RequestBehavior:
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
     def __init__(self,
-                 expand_result: bool = None,
-                 container: bool = None,
-                 authenticating: bool = None,
-                 perform: bool = None,
+                 expand_result: Optional[bool] = None,
+                 container: Optional[bool] = None,
+                 authenticating: Optional[bool] = None,
+                 perform: Optional[bool] = None,
                  body_validator: Optional[Dict[str, Type]] = None,
                  body_required: Optional[List[str]] = None
                  ):
         """Construct an instance of RequestBehavior class."""
         if isinstance(expand_result, bool):
-            self._expand_result = expand_result
+            self.expand_result = expand_result
         if isinstance(container, bool):
-            self._container = container
+            self.container = container
         if isinstance(authenticating, bool):
-            self._authenticating = authenticating
+            self.authenticating = authenticating
         if isinstance(perform, bool):
-            self._perform = perform
+            self.perform = perform
         if isinstance(body_validator, dict) or isinstance(body_required, list):
-            self._validator = RequestValidator(validator=body_validator,
-                                               required=body_required
-                                               )
+            self.validator = RequestValidator(validator=body_validator,
+                                              required=body_required
+                                              )
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
@@ -94,7 +94,7 @@ class RequestBehavior:
 
     @property
     def container(self) -> bool:
-        """Indicate if this request interact with a Falcon Container endpoint."""
+        """Indicate if this request interacts with a Falcon Container endpoint."""
         return self._container
 
     @container.setter
@@ -137,17 +137,7 @@ class RequestBehavior:
         """Reflection into the validator object for the body payload validator."""
         return self.validator.validator
 
-    @body_validator.setter
-    def body_validator(self, value: Optional[Dict[str, Type]]):
-        """Update or overwrite the body payload validator."""
-        self.validator.validator = value
-
     @property
     def body_required(self) -> Optional[List[str]]:
         """Reflection into the validator object for the body payload required list."""
         return self.validator.required
-
-    @body_required.setter
-    def body_required(self, value: Optional[List[str]]):
-        """Update or change the body payload required element list."""
-        self.validator.required = value

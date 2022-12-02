@@ -93,13 +93,13 @@ class BearerToken:
         if reason:
             self.fail_reason = reason
 
-    # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
-    # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
-    # |    |  \ |__| |    |___ |  \  |  | |___ ___]
+    # ___  ____ ____ ___  ____ ____ ___ _ ____ ____    ---     __o
+    # |__] |__/ |  | |__] |___ |__/  |  | |___ [__      ---  _`\<,_
+    # |    |  \ |__| |    |___ |  \  |  | |___ ___]    ---  (*)/ (*)
     #
     # These properties are present and mutable within all FalconInterface derivatives.
     @property
-    def expiration(self) -> Optional[int]:
+    def expiration(self) -> int:
         """Return the current expiration setting."""
         return self._expiration
 

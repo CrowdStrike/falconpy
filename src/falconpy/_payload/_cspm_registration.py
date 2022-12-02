@@ -35,9 +35,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, List, Union
 
 
-def cspm_registration_payload(passed_keywords: dict) -> dict:
+def cspm_registration_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, str]]]:
     """Create a properly formatted CSPM registration payload.
 
     {
@@ -52,7 +53,7 @@ def cspm_registration_payload(passed_keywords: dict) -> dict:
         ]
     }
     """
-    returned_payload = {}
+    returned_payload: Dict[str, List[Dict[str, str]]] = {}
     returned_payload["resources"] = []
     item = {}
     keys = ["account_id", "cloudtrail_region", "organization_id", "tenant_id", "subscription_id"]
@@ -65,7 +66,7 @@ def cspm_registration_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def cspm_policy_payload(passed_keywords: dict) -> dict:
+def cspm_policy_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, bool, List[str]]]]]:
     """Create a properly formatted CSPM policy update payload.
 
     {
@@ -83,7 +84,7 @@ def cspm_policy_payload(passed_keywords: dict) -> dict:
     ]
     }
     """
-    returned_payload = {}
+    returned_payload: Dict[str, List[Dict[str, Union[str, bool, List[str]]]]] = {}
     returned_payload["resources"] = []
     item = {}
     if passed_keywords.get("account_id", None):
@@ -107,7 +108,7 @@ def cspm_policy_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def cspm_scan_payload(passed_keywords: dict) -> dict:
+def cspm_scan_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, str]]]:
     """Create a properly formmatted CSPM scan schedule payload.
 
     {
@@ -120,7 +121,7 @@ def cspm_scan_payload(passed_keywords: dict) -> dict:
         ]
     }
     """
-    returned_payload = {}
+    returned_payload: Dict[str, List[Dict[str, str]]] = {}
     returned_payload["resources"] = []
     item = {}
     for key in ["cloud_platform", "next_scan_timestamp", "scan_schedule"]:

@@ -108,7 +108,7 @@ def handle_container_operations(kwa: dict, base_string: str) -> Tuple[dict, str,
     return kwa, base_string, do_container
 
 
-def uber_request_keywords(caller: object,
+def uber_request_keywords(caller,
                           meth: str,
                           oper: str,
                           tgt: str,

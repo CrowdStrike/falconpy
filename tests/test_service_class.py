@@ -3,8 +3,10 @@ test_results.py -  This class tests Service Class functionality
 """
 import os
 import sys
+import pytest
+from json import loads
 from time import time
-
+import logging
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 
@@ -16,8 +18,12 @@ from falconpy import (
     OAuth2,
     BaseServiceClass,
     FunctionalityNotImplemented,
-    FalconInterface,
-    ServiceClass
+    SSLDisabledWarning,
+    LogFacility,
+    NoAuthenticationMechanism,
+    Result,
+    ExpandedResult,
+    InvalidBaseURL
     )
 
 auth = Authorization.TestAuthorization()
@@ -25,6 +31,7 @@ config = auth.getConfigObject()
 AllowedResponses = [200, 202, 429]  # Adding rate-limiting as an allowed response for now
 _OBJECT: OAuth2 = None
 _CLEAN: Hosts = None
+_HOSTS: Hosts = None
 _DEBUG = os.getenv("FALCONPY_UNIT_TEST_DEBUG", None)
 if _DEBUG:
     _DEBUG = True
@@ -79,14 +86,17 @@ class TestServiceClass:
         # Force it off in a regular Service Class
         debug_off = Hosts(auth=_OBJECT, debug=False)
         # Force it back on with another Service Class (and disable sanitization)
-        debug_back_on = Hosts(auth=debug_off.auth_object, debug=True, debug_record_count=42, sanitize=False)
+        debug_back_on = Hosts(auth=debug_off.auth_object, debug=True, debug_record_count=42, sanitize_log=False)
         # Change the debug record count while we're here
         debug_back_on.debug_record_count = 1
+        debug_off.sanitize_log = True
+        debug_back_on.sanitize_log = True
         assert bool(debug_back_on.debug
                     and debug_back_on.debug_record_count == 1
                     and not debug_off.debug
                     and debug_back_on.log  # Confirm the property
                     and _OBJECT.sanitize_log
+                    and debug_back_on.sanitize_log
                     )
 
     def test_property_debug_record_count(self):
@@ -98,6 +108,7 @@ class TestServiceClass:
         assert bool(_CLEAN.refreshable)
     
     def test_property_token_fail_reason(self):
+        _CLEAN.login()
         assert bool(not _CLEAN.token_fail_reason)
 
     def test_property_token_status(self):
@@ -168,6 +179,7 @@ class TestServiceClass:
             
 
     def test_auth_object_direct_change(self):
+        _right_error = False
         _DIRECT: ExtremelyThinServiceClass = ExtremelyThinServiceClass(
             client_id=os.getenv("DEBUG_API_ID"),
             client_secret=os.getenv("DEBUG_API_SECRET"),
@@ -177,12 +189,94 @@ class TestServiceClass:
             user_agent="crowdstrike-testing/5.4.2",
             debug=_DEBUG
             )
-
+        try:
+            _DIRECT.proxy = {"CrowdStrike": "WE STOP BREACHES"}
+        except FunctionalityNotImplemented:
+            _right_error = True
         assert bool(_DIRECT.headers
                     and _DIRECT.timeout
                     and _DIRECT.renew_window
                     and _DIRECT.user_agent
                     and "WITH PYTHON" in _DIRECT.proxy["CrowdStrike"]
+                    and _right_error
                      )
 
-    
+    def test_auth_object_pythonic_failure(self):
+        with pytest.warns(NoAuthenticationMechanism):
+            _will_fail = OAuth2(debug=_DEBUG, pythonic=True)
+            _will_fail.proxy = {"CrowdStrike": "WE STOP BREACHES"}
+            _will_fail.timeout = (18, 42)
+            _will_fail.user_agent = "crowdstrike-testing/1.2.3"
+            _will_fail.debug_record_count = 142
+            _will_fail.sanitize_log = True
+            _will_fail.token_time = time()
+            _will_fail.token_fail_reason = "Just Because"
+            _will_fail.token_value = "no cash value"
+            _will_fail.pythonic = True
+
+
+        assert (_will_fail.config
+                and _will_fail.proxy["CrowdStrike"] == "WE STOP BREACHES"
+                and _will_fail.timeout[1] == 42
+                and "crowdstrike" in _will_fail.user_agent
+                and _will_fail.debug_record_count == 142
+                and _will_fail.sanitize_log
+                )
+
+    def test_auth_object_invalid_config(self):
+        _success = False
+        _thing = OAuth2(creds=config.creds, debug=_DEBUG)
+        try:
+            _thing.config = {"This really should": "not work"}
+        except ValueError:
+            _thing.log.error("Invalid value specified for Interface Configuration")
+            _success = True
+
+        assert _success
+
+    def test_log_facility_shutdown(self):
+        _thing = OAuth2(creds=config.creds, debug=True)
+        if _thing.log_facility.active:
+            _thing.log_facility.deactivate_log()
+
+        assert not _thing.log
+
+    def test_truly_ridiculous_base_url(self):
+        _exploding_banana: logging.Logger = logging.getLogger(__name__)
+        try:
+            _ = OAuth2(creds=config.creds, debug=_DEBUG, base_url=_exploding_banana)
+        except InvalidBaseURL as bad_base:
+            _OBJECT.log.error(bad_base.message)
+            _success = True
+
+        assert _success
+
+    def test_legacy_result_expansion(self):
+        global _HOSTS
+        _HOSTS = Hosts(creds=config.creds, debug=_DEBUG)
+        _result = _HOSTS.query_devices(limit=1)
+        _expanded_result = ExpandedResult()(status_code=_result["status_code"],
+                                            headers=_result["headers"],
+                                            content={"body": _result["body"]}
+                                            )
+
+        assert bool(_expanded_result[0] == 200 and len(_expanded_result[2]["resources"]) == 1)
+
+    def test_raw_result_repr(self):
+        _raw_face = {"access_token": {"CrowdStrike": "WE STOP BREACHES"}}
+        _raw_result = Result(status_code=200, headers={"Random": "HeaderThing"}, body=_raw_face)
+        # Force it thru the repr method
+        assert loads(str(_raw_result).replace("'", '"'))["body"]["access_token"]["CrowdStrike"] == "WE STOP BREACHES"
+
+    def test_list_response_component_get_property(self):
+        with pytest.warns(SSLDisabledWarning):
+            _no_ssl = Hosts(creds=config.creds, pythonic=True, debug=_DEBUG, ssl_verify=False)
+            _thing: Result = _no_ssl.query_devices(limit=3)
+            # Check log sanitization code path
+            _HOSTS.sanitize_log = False
+            _HOSTS.query_devices(limit=1)
+            _HOSTS.sanitize_log = True
+            # Revoke the dirty token
+            _HOSTS.logout()
+
+        assert bool(_thing.resources.get_property(1) == _thing.resources[1])

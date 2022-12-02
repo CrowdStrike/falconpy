@@ -81,8 +81,8 @@ class ReportExecutions(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def retry_reports(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    @force_default(defaults=["body"], default_types=["list"])
+    def retry_reports(self: object, *args, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retries a report execution.
 
         Keyword arguments:

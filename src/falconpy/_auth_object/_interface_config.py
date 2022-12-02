@@ -36,7 +36,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union, Optional
-from .._error import InvalidBaseURL
 
 
 class InterfaceConfiguration:
@@ -70,14 +69,12 @@ class InterfaceConfiguration:
                  ssl_verify: Optional[bool] = True
                  ):
         """Construct an instance of the InterfaceConfiguration class."""
-        if not base_url:
-            raise InvalidBaseURL
-        self._base_url = base_url
-        self._proxy = proxy
-        self._timeout = timeout
-        self._user_agent = user_agent
+        self.base_url = base_url
+        self.proxy = proxy
+        self.timeout = timeout
+        self.user_agent = user_agent
         if isinstance(ssl_verify, bool):
-            self._ssl_verify = ssl_verify
+            self.ssl_verify = ssl_verify
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__

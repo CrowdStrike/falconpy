@@ -63,6 +63,7 @@ class BaseServiceClass(ABC):
     # Performance impacts when enabled, but defaults to true to prevent unintentional
     # sensitive data disclosure. Can be disabled with the sanitize_log keyword.
     _sanitize: bool = None
+    _pythonic: bool = None
     # ____ _  _ ___ _  _    ____ ___   _ ____ ____ ___
     # |__| |  |  |  |__|    |  | |__]  | |___ |     |
     # |  | |__|  |  |  |    |__| |__] _| |___ |___  |
@@ -107,7 +108,7 @@ class BaseServiceClass(ABC):
 
         if kwargs.get("debug", False):
             # Allow a Service Class to enable logging individually.
-            self._log: Logger = getLogger(__name__)  # (__name__.split(".", maxsplit=1)[0])
+            self._log: Logger = getLogger(__name__)
         if kwargs.get("debug", None) is False:
             # Allow a Service Class to disable logging individually.
             self._log: bool = False
@@ -118,6 +119,7 @@ class BaseServiceClass(ABC):
         _sanitize_log = kwargs.get("sanitize_log", None)
         if isinstance(_sanitize_log, bool):
             self._sanitize = _sanitize_log
+        self._pythonic = kwargs.get("pythonic", None)
 
     #  _______ _______ _______ _     _  _____  ______  _______
     #  |  |  | |______    |    |_____| |     | |     \ |______
@@ -128,11 +130,11 @@ class BaseServiceClass(ABC):
     # auth_object is a perfectly acceptable option for this, and is what is used
     # by the standard ServiceClass object.
     @abstractmethod
-    def login(self) -> dict or bool:
+    def login(self) -> Union[dict, bool]:
         """Login handler abstract."""
 
     @abstractmethod
-    def logout(self) -> dict or bool:
+    def logout(self) -> Union[dict, bool]:
         """Logout handler abstract."""
 
     #   _____   ______  _____   _____  _______  ______ _______ _____ _______ _______
@@ -255,7 +257,7 @@ class BaseServiceClass(ABC):
     def debug_record_count(self) -> int:
         """Return the maximum number of records to log to a debug log."""
         _returned = self.auth_object.debug_record_count
-        if self._debug_record_count is not None:
+        if isinstance(self._debug_record_count, int):
             _returned = self._debug_record_count
 
         return _returned
@@ -269,7 +271,7 @@ class BaseServiceClass(ABC):
     def sanitize_log(self) -> bool:
         """Return a flag if log sanitization is enabled."""
         _returned = self.auth_object.sanitize_log
-        if _returned != self._sanitize and self._sanitize is not None:
+        if _returned != self._sanitize and isinstance(self._sanitize, bool):
             _returned = self._sanitize
         return _returned
 
@@ -280,3 +282,11 @@ class BaseServiceClass(ABC):
             self._sanitize = value
         else:
             self.auth_object.sanitize_log = value
+
+    @property
+    def pythonic(self) -> bool:
+        """Return the current pythonic mode setting."""
+        _returned = self.auth_object.pythonic
+        if _returned != self._pythonic and isinstance(self._pythonic, bool):
+            _returned = self._pythonic
+        return _returned
