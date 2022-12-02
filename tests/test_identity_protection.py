@@ -16,7 +16,7 @@ auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 
 falcon = IdentityProtection(auth_object=config)
-AllowedResponses = [200, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 429]
 
 
 class TestIdentityProtection:
