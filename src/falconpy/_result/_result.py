@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, Union, Optional, List
+from typing import Dict, Union, Optional, List, Tuple
 from requests.structures import CaseInsensitiveDict
 from ._meta import Meta
 from ._errors import Errors
@@ -51,11 +51,11 @@ class BaseResult:
     # |     |    |       |    |    \_ __|__ |_____] |_____|    |    |______ ______|
     # The attributes contain response data by category.
     status_code: int = 0
-    headers: Optional[Headers] = None
-    meta: Optional[Meta] = None
+    headers: Headers = Headers()
+    meta: Meta = Meta()
     resources: Resources = Resources([])
-    errors: Optional[Union[Errors, List[Dict[str, str]]]] = []
-    raw: Optional[RawBody] = None
+    errors: Errors = Errors()
+    raw: RawBody = RawBody()
 
     # Privates used for iteration
     _pos: int = 0
@@ -65,7 +65,11 @@ class BaseResult:
     # |  |  | |______    |    |_____| |     | |     \ |______
     # |  |  | |______    |    |     | |_____| |_____/ ______|
     #
-    def __init__(self, status_code: int = None, headers: dict = None, body: dict = None):
+    def __init__(self,
+                 status_code: Optional[int] = None,
+                 headers: Optional[Dict[str, Union[str, int, float]]] = None,
+                 body: Optional[Dict[str, Union[str, dict, list, int, float, bytes]]] = None
+                 ):
         """Construct an instance of the class."""
         if status_code and headers and body:
             self.status_code = status_code
@@ -74,15 +78,27 @@ class BaseResult:
                 _headers = dict(headers)
             self.headers = Headers(_headers)
             if isinstance(body, bytes):
+                # Binary response
                 self.resources = BinaryFile(body)
+                self.meta = Meta()
+                self.errors = Errors()
             elif isinstance(body, str):
+                # Invalid or raw response
                 if not body.strip():
                     body = {}
                 self.raw = RawBody(body)
+                self.meta = Meta()
+                self.resources = Resources()
+                self.errors = Errors()
             elif body.get("access_token", None):
+                # Authentication response
                 self.raw = RawBody(body)
+                self.meta = Meta()
+                self.resources = Resources()
+                self.errors = Errors()
             else:
-                self.meta = Meta(dict(body.get("meta", {})))
+                # Standard response
+                self.meta = Meta(body.get("meta", {}))
                 self.resources = Resources(body.get("resources", []))
                 self.errors = Errors(body.get("errors", []))
 
@@ -150,9 +166,11 @@ class BaseResult:
     # I'm back and forth on how to best implement this still.
     def __repr__(self) -> str:
         """Return a clean string representation of the result."""
-        body = self.raw
-        if not body:
-            body = {
+        _body = {}
+        if self.raw:
+            _body = self.raw.data
+        if not _body:
+            _body = {
                 "meta": self.meta.data,
                 "resources": self.resources.data,
                 "errors": self.errors.data
@@ -161,12 +179,12 @@ class BaseResult:
         return str({
             "status_code": self.status_code,
             "headers": self.headers.data,
-            "body": body
+            "body": _body
         })
 
     @property
     def data(self) -> list:
-        """Return the contents of the data property from the undlerying Resources object."""
+        """Return the contents of the data property from the underlying Resources object."""
         return self.resources.data
 
 
@@ -174,10 +192,15 @@ class Result(BaseResult):
     """CrowdStrike API response representation class."""
 
     def __init__(self,
-                 status_code: int = None,
-                 headers: Dict[str, str] = None,
-                 body: Dict[str, Union[list, dict]] = None,
-                 full: Dict[str, Union[int, Dict[str, str], Dict[str, Union[list, dict]]]] = None
+                 status_code: Optional[int] = None,
+                 headers: Optional[Dict[str, str]] = None,
+                 body: Optional[Union[bytes,
+                                      Dict[str, Union[str, dict, list, int, float, bytes]]
+                                      ]] = None,
+                 full: Dict[str, Union[int,
+                                       Dict[str, str],
+                                       Dict[str, Union[str, dict, list, int, float, bytes]]
+                                       ]] = None
                  ):
         """Class constructor.
 
@@ -186,11 +209,11 @@ class Result(BaseResult):
         # Default behavior is to create an empty object to emulate previous functionality.
         # Status code, headers and body must all be present, or full must be provided in
         # order to create a fully populated instance of this object.
-        if full:
-            if isinstance(full, dict):
-                status_code = full.get("status_code", None)
-                headers = full.get("headers", None)
-                body = full.get("body", None)
+        # if full:
+        if isinstance(full, dict):
+            status_code = full.get("status_code", None)
+            headers = full.get("headers", None)
+            body = full.get("body", None)
 
         super().__init__(status_code=status_code, headers=headers, body=body)
 
@@ -204,87 +227,87 @@ class Result(BaseResult):
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
     # |    |  \ |__| |    |___ |  \  |  | |___ ___]
     @property
-    def total(self) -> int:
+    def total(self) -> Optional[Union[int, str, float]]:
         """Return the total record count from the underlying Meta object."""
-        _returned = 0
+        _returned: Optional[Union[int, str, float]] = 0
         if self.meta:
             _returned = self.meta.total
         return _returned
 
     @property
-    def offset(self) -> Union[str, int]:
+    def offset(self) -> Optional[Union[int, str, float]]:
         """Return the record offset from the underlying Meta object."""
-        _returned = None
+        _returned: Optional[Union[int, str, float]] = None
         if self.meta:
             _returned = self.meta.offset
         return _returned
 
     @property
-    def limit(self) -> int:
+    def limit(self) -> Optional[Union[int, str, float]]:
         """Return the record limit from the underlying Meta object."""
-        _returned = 0
+        _returned: Optional[Union[int, str, float]] = 0
         if self.meta:
             _returned = self.meta.limit
         return _returned
 
     @property
-    def query_time(self) -> float:
+    def query_time(self) -> Optional[Union[int, float]]:
         """Return the query execution time from the underlying Meta object."""
-        _returned = 0
+        _returned: Optional[Union[int, float]] = 0
         if self.meta:
             _returned = self.meta.query_time
         return _returned
 
     @property
-    def powered_by(self) -> str:
+    def powered_by(self) -> Optional[str]:
         """Return the powered by value from the underlying Meta object."""
-        _returned = None
+        _returned: Optional[str] = None
         if self.meta:
             _returned = self.meta.powered_by
         return _returned
 
     @property
-    def trace_id(self) -> str:
+    def trace_id(self) -> Optional[str]:
         """Return the trace ID from the underlying Meta object."""
-        _returned = None
+        _returned: Optional[str] = None
         if self.meta:
             _returned = self.meta.trace_id
         return _returned
 
     @property
-    def content_encoding(self) -> str:
+    def content_encoding(self) -> Optional[str]:
         """Return the content encoding from the underlying Headers object."""
-        return self.headers.data.get("Content-Encoding", None)
+        return self.headers.content_encoding
 
     @property
-    def content_type(self) -> str:
+    def content_type(self) -> Optional[str]:
         """Return the content type from the underlying Headers object."""
-        return self.headers.data.get("Content-Type", None)
+        return self.headers.content_type
 
     @property
-    def content_length(self) -> int:
+    def content_length(self) -> Optional[Union[int, float]]:
         """Return the content length from the underlying Headers object."""
-        return self.headers.data.get("Content-Length", None)
+        return self.headers.content_length
 
     @property
-    def date(self) -> str:
+    def date(self) -> Optional[str]:
         """Return the date of the request from the underlying Headers object."""
-        return self.headers.data.get("Date", None)
+        return self.headers.date
 
     @property
-    def region(self) -> str:
+    def region(self) -> Optional[str]:
         """Return the CrowdStrike region from the underlying Headers object."""
-        return self.headers.data.get("X-Cs-Region", None)
+        return self.headers.region
 
     @property
-    def ratelimit_limit(self) -> int:
+    def ratelimit_limit(self) -> Optional[int]:
         """Return the rate limit total from the underlying Headers object."""
-        return self.headers.data.get("X-Ratelimit-Limit", None)
+        return self.headers.ratelimit_limit
 
     @property
-    def ratelimit_remaining(self) -> int:
+    def ratelimit_remaining(self) -> Optional[int]:
         """Return the rate limit remaining from the underlying Headers object."""
-        return self.headers.data.get("X-Ratelimit-Remaining", None)
+        return self.headers.ratelimit_remaining
 
     @property
     def headers_object(self) -> bool:
@@ -296,22 +319,30 @@ class Result(BaseResult):
         """Return if the meta data is a dictionary or a Meta object."""
         return isinstance(self.meta.data, Meta)
 
-    @property
-    def tupled(self) -> dict:
+    @property                                       # Doh!
+    def tupled(self) -> Tuple[int,               # \o_
+                              Dict[str, str],  # __/
+                              Union[bytes,      # /
+                                    Dict[str,
+                                         Union[str, Dict[str, Union[str, List[Union[str, dict]]]]]
+                                         ]
+                                    ]
+                              ]:
         """Results expansion.
 
         Emulates legacy Results expansions functionality by returning
         the contents of the Result object as a tuple.
         """
+        _content: Optional[Union[Dict[str, Union[dict, list]], bytes]] = None
         if self.resources.binary:
-            content = bytes(self.resources)
+            _content = bytes(self.resources)
         else:
-            content = {
+            _content = {
                 "meta": self.meta.data,
                 "resources": self.resources.data,
                 "errors": self.errors.data
             }
-        return (self.status_code, self.headers, content)
+        return (self.status_code, self.headers.data, _content)
 
     @property
     def body(self) -> dict:
@@ -324,7 +355,7 @@ class Result(BaseResult):
     @property
     def binary(self) -> bool:
         """Return a flag indicating if the downloaded content is a bianry object."""
-        return self.resources.binary
+        return isinstance(self.resources, BinaryFile)  # self.resources.binary
 
     @property
     def full_return(self) -> dict:
@@ -333,40 +364,45 @@ class Result(BaseResult):
         Used by internal methods for returning contents back to the user.
         """
         if not self.binary:
-            _body = self.raw if self.raw else {}
-            _headers = None
+            _body = self.raw.data if self.raw else {}
+            _headers = {}
             if not _body:
                 _body = {}
                 if self.meta or self.resources or self.errors:
-                    _meta = None
-                    _resources = None
-                    _errors = None
+                    _meta = {}
+                    _resources = []
+                    _errors = []
                     if self.meta:
                         _meta = dict(self.meta.data)
                     if self.resources:
                         _resources = self.resources.data
-                    if self.errors:
-                        _errors = self.errors
+                    if self.errors.data:
+                        _errors = self.errors.data
                     _body["meta"] = _meta
                     _body["resources"] = _resources
                     _body["errors"] = _errors
             if self.headers:
                 _headers = dict(self.headers.data)
-            try:
-                # Content is malformed JSON
-                # No content returned, but a valid response
+            if "meta" in _body:
                 _body = dict(_body)
-            except ValueError:
-                _body = {
-                    "meta": {},
-                    "resources": [],
-                    "errors": [
-                        {
-                            "message": "Invalid JSON response received",
-                            "code": 500
-                        }
-                    ]
-                }
+
+            # try:
+            #     # Content is malformed JSON
+            #     # No content returned, but a valid response
+            #     _body = dict(_body)
+            # except ValueError:
+            #     _body = _body
+            #     _body = {
+            #         "meta": {},
+            #         "resources": [],
+            #         "errors": [
+            #             {
+            #                 "message": "Invalid JSON response received",
+            #                 "code": 500
+            #             }
+            #         ]
+            #     }
+
             _returned = {
                 "status_code": int(self.status_code),
                 "headers": _headers,

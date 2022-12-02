@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Union, Dict, Optional
+from typing import Union, Dict, Optional, List, Type, Any
 from logging import Logger
 from ._request_behavior import RequestBehavior
 from ._request_connection import RequestConnection
@@ -51,8 +51,8 @@ class APIRequest:
     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
     #
-    _meta: Optional[RequestMeta] = None
-    _payloads: Optional[RequestPayloads] = None
+    _meta: RequestMeta = RequestMeta()
+    _payloads: RequestPayloads = RequestPayloads()
     _connection: RequestConnection = RequestConnection()
     _behavior = RequestBehavior()
     _request_log: Optional[LogFacility] = None
@@ -63,36 +63,37 @@ class APIRequest:
     #
     def __init__(self,
                  endpoint: str,
-                 initializer: Optional[Dict[str, Optional[Union[str, int, bool, list, dict]]]] = None
+                 initializer: Optional[Dict[str, Any]] = None
                  ):
         """Construct an instance of the APIRequest class."""
         if initializer:
             # Key metadata regarding this API request
-            self.meta = RequestMeta(endpoint, initializer.get("method", "GET"))
+            self._meta = RequestMeta(endpoint, initializer.get("method", "GET"))
             # Payloads for the request
-            self.payloads = RequestPayloads(params=initializer.get("params", None),
-                                            body=initializer.get("body", None),
-                                            data=initializer.get("data", None),
-                                            files=initializer.get("files", [])
-                                            )
+            self._payloads = RequestPayloads(params=initializer.get("params", None),
+                                             body=initializer.get("body", None),
+                                             data=initializer.get("data", None),
+                                             files=initializer.get("files", [])
+                                             )
             # Connection specific details for creating the request
-            self.connection = RequestConnection(user_agent=initializer.get("user_agent", None),
-                                                proxy=initializer.get("proxy", {}),
-                                                timeout=initializer.get("timeout", None),
-                                                verify=initializer.get("verify", True)
-                                                )
+            self._connection = RequestConnection(user_agent=initializer.get("user_agent", None),
+                                                 proxy=initializer.get("proxy", {}),
+                                                 timeout=initializer.get("timeout", None),
+                                                 verify=initializer.get("verify", True)
+                                                 )
             # Behavioral flags that alter the behavior of request processing
-            self.behavior = RequestBehavior(expand_result=initializer.get("expand_result", False),
-                                            container=initializer.get("container", False),
-                                            authenticating=initializer.get("authenticating", False),
-                                            body_validator=initializer.get("body_validator", None),
-                                            body_required=initializer.get("body_required", None)
-                                            )
+            self._behavior = RequestBehavior(expand_result=initializer.get("expand_result", False),
+                                             container=initializer.get("container", False),
+                                             authenticating=initializer.get("authenticating", False),
+                                             perform=initializer.get("perform", True),
+                                             body_validator=initializer.get("body_validator", None),
+                                             body_required=initializer.get("body_required", None)
+                                             )
             # Logging functionality
-            self.request_log = LogFacility(log=initializer.get("log_util", None),
-                                           debug_record_count=initializer.get("debug_record_count", None),
-                                           sanitize_log=initializer.get("sanitize", None)
-                                           )
+            self._request_log = LogFacility(log=initializer.get("log_util", None),
+                                            debug_record_count=initializer.get("debug_record_count", None),
+                                            sanitize_log=initializer.get("sanitize", None)
+                                            )
 
     # _  _ ____ ___ _  _ ____ ___  ____
     # |\/| |___  |  |__| |  | |  \ [__
@@ -105,59 +106,38 @@ class APIRequest:
             self.log_util.debug("STATUS CODE: %s", code)
             self.log_util.debug("RESULT: %s", content)
 
-    def log_warning(self, code: int = 500, msg: str = None, content: Union[dict, str, bytes] = None):
+    def log_warning(self, msg: str = None):
         """Leverage the attached log utility to log the passed warning detail if logging is enabled."""
         if self.log_util:
             self.log_util.warning(msg)
-            self.log_util.debug("STATUS CODE: %s", code)
-            self.log_util.debug("RESULT: %s", content)
 
-    def debug(self, msg: str):
-        """Leverage the attached log utility to update the debug log."""
-        if self.log_util:
-            self.log_util.debug(msg)
-
-    # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
-    # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
-    # |    |  \ |__| |    |___ |  \  |  | |___ ___]
-    #
-    # All of these properties reflect states for properties of connected attribute objects.
-
-    # _  _ ____ ___ ____
-    # |\/| |___  |  |__|
+    # ___  ____ ____ ___  ____ ____ ___ _ ____ ____                        |
+    # |__] |__/ |  | |__] |___ |__/  |  | |___ [__          \_            /;
+    # |    |  \ |__| |    |___ |  \  |  | |___ ___]         `\~--.._     //'
+    #                                                        `//////\  \\/;'
+    # All of these properties reflect states for               ~/////\~\`)'
+    # properties of connected attribute objects.                   `~'  |
+    #                                                              ;'_\'\
+    # _  _ ____ ___ ____                                          /~/ '" "'
+    # |\/| |___  |  |__|                                         `\/' CROWDSTRIKE
     # |  | |___  |  |  |
     @property
     def meta(self) -> RequestMeta:
         """Return the RequestMeta object."""
         return self._meta
 
-    @meta.setter
-    def meta(self, value: RequestMeta):
-        """Set the RequestMeta object."""
-        self._meta = value
-
     @property
-    def endpoint(self) -> bool:
+    def endpoint(self) -> Optional[str]:
         """Return the endpoint attribute."""
         return self.meta.endpoint
 
-    @endpoint.setter
-    def endpoint(self, value):
-        """Set the endpoint attribute."""
-        self.meta.endpoint = value
-
     @property
-    def method(self) -> bool:
+    def method(self) -> str:
         """Return the method attribute."""
         return self.meta.method
 
-    @method.setter
-    def method(self, value):
-        """Set the method attribute."""
-        self.meta.method = value
-
     @property
-    def debug_headers(self) -> dict:
+    def debug_headers(self) -> Optional[Dict[str, Optional[Union[str, int, float]]]]:
         """Return the debug headers."""
         return self.meta.debug_headers
 
@@ -174,54 +154,29 @@ class APIRequest:
         """Retrieve the payloads object."""
         return self._payloads
 
-    @payloads.setter
-    def payloads(self, value: RequestPayloads):
-        """Set the payloads object."""
-        self._payloads = value
-
     # Body
     @property
-    def body_payload(self) -> Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]:
+    def body_payload(self) -> Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]]:
         """Retrieve the body payload from the payloads object."""
         return self.payloads.body
 
-    @body_payload.setter
-    def body_payload(self, value: Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]):
-        """Set the body payload within the payloads object."""
-        self.payloads.body = value
-
     # Params
     @property
-    def param_payload(self) -> Dict[str, str]:
+    def param_payload(self) -> Optional[Dict[str, Optional[Union[str, int, float, list, dict]]]]:
         """Retrieve the param payload from the payloads object."""
         return self.payloads.params
 
-    @param_payload.setter
-    def param_payload(self, value: Dict[str, str]):
-        """Set the param payload within the payloads object."""
-        self.payloads.params = value
-
     # Data
     @property
-    def data_payload(self) -> Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]:
+    def data_payload(self) -> Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]]:
         """Retrieve the data payload from the data object."""
         return self.payloads.data
 
-    @data_payload.setter
-    def data_payload(self, value: Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]):
-        """Set the data payload within the payloads object."""
-        self.payloads.data = value
-
     # Files
     @property
-    def files(self) -> list:
+    def files(self) -> Optional[List[tuple]]:
         """Retrieve the files payload from the files object."""
         return self.payloads.files
-
-    @files.setter
-    def files(self, value: list):
-        """Set the files payload within the payloads object."""
-        self.payloads.files = value
 
     # ___  ____ _  _ ____ _  _ _ ____ ____
     # |__] |___ |__| |__| |  | | |  | |__/
@@ -231,40 +186,20 @@ class APIRequest:
         """Return the RequestBehavior object."""
         return self._behavior
 
-    @behavior.setter
-    def behavior(self, value: RequestBehavior):
-        """Set the RequestBehavior object."""
-        self._behavior = value
-
     @property
     def expand_result(self) -> bool:
         """Return a boolean indicator if result expansion is requested."""
         return self.behavior.expand_result
-
-    @expand_result.setter
-    def expand_result(self, value: bool):
-        """Set the result expansion setting."""
-        self.behavior.expand_result = value
 
     @property
     def container(self) -> bool:
         """Return a boolean indicating if this is a container API request."""
         return self.behavior.container
 
-    @container.setter
-    def container(self, value: bool):
-        """Set the container API request flag."""
-        self.behavior.container = value
-
     @property
     def authenticating(self) -> bool:
         """Return a boolean indicating if this is an authentication request."""
         return self.behavior.authenticating
-
-    @authenticating.setter
-    def authenticating(self, value: bool):
-        """Set the authenticating boolean."""
-        self.behavior.authenticating = value
 
     @property
     def perform(self) -> bool:
@@ -277,72 +212,37 @@ class APIRequest:
         self.behavior.perform = value
 
     @property
-    def body_validator(self) -> dict:
+    def body_validator(self) -> Optional[Dict[str, Type]]:
         """Return the body payload validator from the behavior object."""
         return self.behavior.body_validator
 
-    @body_validator.setter
-    def body_validator(self, value: dict):
-        """Set the body payload validator within the behavior object."""
-        self.behavior.body_validator = value
-
     @property
-    def body_required(self) -> list:
+    def body_required(self) -> Optional[List[str]]:
         """Return the body required list from the behavior object."""
         return self.behavior.body_required
 
-    @body_required.setter
-    def body_required(self, value: list):
-        """Set the body payload required list within the behavior object."""
-        self.behavior.body_required = value
-
-    # _    ____ ____
-    # |    |  | | __
-    # |___ |__| |__]
+    # _    ____ ____    \ /
+    # |    |  | | __     |
+    # |___ |__| |__]    /o\
     @property
     def request_log(self) -> LogFacility:
         """Return the LogFacility object."""
         return self._request_log
 
-    @request_log.setter
-    def request_log(self, value: LogFacility):
-        """Set the LogFacility object."""
-        self._request_log = value
-
     @property
-    def log_util(self) -> Logger:
+    def log_util(self) -> Optional[Logger]:
         """Return the Logger from the request log object."""
         return self.request_log.log
-
-    @log_util.setter
-    def log_util(self, value: Logger):
-        """Set the Logger within the request log object."""
-        self.request_log.log = value
-
-    @property
-    def debugging(self) -> bool:
-        """Return the debugging status. This is a helper property to ease the syntax."""
-        return bool(self.log_util)
 
     @property
     def max_debug(self) -> int:
         """Return the maximum number of records to log per debug entry setting."""
         return self.request_log.debug_record_count
 
-    @max_debug.setter
-    def max_debug(self, value: int):
-        """Set the maximum number of records to log per debug entry setting."""
-        self.request_log.debug_record_count = value
-
     @property
     def sanitize_log(self) -> bool:
         """Return the sanitize logs setting."""
         return self.request_log.sanitize_log
-
-    @sanitize_log.setter
-    def sanitize_log(self, value: bool):
-        """Set the sanitize logs setting."""
-        self.request_log.sanitize_log = value
 
     # ____ ____ _  _ _  _ ____ ____ ___ _ ____ _  _
     # |    |  | |\ | |\ | |___ |     |  | |  | |\ |
@@ -352,47 +252,22 @@ class APIRequest:
         """Return the RequestConnection object."""
         return self._connection
 
-    @connection.setter
-    def connection(self, value: RequestConnection):
-        """Set the RequestConnection object."""
-        self._connection = value
-
     @property
-    def user_agent(self) -> str:
+    def user_agent(self) -> Optional[str]:
         """Return the User Agent string."""
         return self.connection.user_agent
 
-    @user_agent.setter
-    def user_agent(self, value: str):
-        """Set the User Agent string."""
-        self.connection.user_agent = value
-
     @property
-    def proxy(self) -> Dict[str, str]:
+    def proxy(self) -> Optional[Dict[str, str]]:
         """Return the proxy dictionary."""
         return self.connection.proxy
 
-    @proxy.setter
-    def proxy(self, value: Dict[str, str]):
-        """Set the proxy dictionary."""
-        self.connection.proxy = value
-
     @property
-    def timeout(self) -> Union[int, tuple]:
+    def timeout(self) -> Optional[Union[int, tuple]]:
         """Return the timeout from the connection object.."""
         return self.connection.timeout
-
-    @timeout.setter
-    def timeout(self, value: Union[int, tuple]):
-        """Set an integer or a tuple for the timeout."""
-        self.connection.timeout = value
 
     @property
     def verify(self) -> bool:
         """Return the SSL verification setting."""
         return self.connection.verify
-
-    @verify.setter
-    def verify(self, value: bool):
-        """Set the SSL verification setting."""
-        self.connection.verify = value

@@ -37,10 +37,10 @@ jobs:
         flake8 src/falconpy --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         # Stop the build on all linting errors - 04.02.21 / jshcodes@CrowdStrike
-        flake8 src/falconpy --count --max-complexity=15 --max-line-length=127 --statistics
+        flake8 src/falconpy --count --statistics
     - name: Lint samples with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 samples --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 samples --exit-zero --count --max-complexity=15 --max-line-length=127 --statistics
+        flake8 samples --exit-zero --count --statistics

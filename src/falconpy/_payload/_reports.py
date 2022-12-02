@@ -35,9 +35,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Union, List, Optional
 
 
-def reports_payload(passed_keywords: dict = None, passed_arguments: list = None) -> dict:
+def reports_payload(passed_keywords: dict, passed_arguments: Optional[tuple] = None) -> List[dict]:
     """Create a properly formatted payload for report execution / scheduling.
 
     [
@@ -47,9 +48,9 @@ def reports_payload(passed_keywords: dict = None, passed_arguments: list = None)
     ]
     """
     returned_payload = []
-    submitted = ""
+    submitted: Union[str, list] = ""
     if passed_keywords.get("ids", None):
-        key = passed_keywords.get("ids", None)
+        key: Union[str, list] = passed_keywords.get("ids", None)
         if isinstance(key, list):
             submitted = key
         else:

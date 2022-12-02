@@ -47,7 +47,6 @@ class SDKWarning(RuntimeWarning):
     _headers: Dict[str, Optional[Union[str, int, float]]] = {}
     warning: bool = True
 
-    # pylint: disable=W0231   # Not using super for now
     def __init__(self,
                  code: int = None,
                  message: str = None,
@@ -89,3 +88,10 @@ class NoContentWarning(SDKWarning):
 
     _code = 204
     _message = "No content was received for this request."
+
+
+class NoAuthenticationMechanism(SDKWarning):
+    """No authentication mechanism was specified when creating this class."""
+
+    _code = 400
+    _message = "No authentication mechanism has been specified for this class."

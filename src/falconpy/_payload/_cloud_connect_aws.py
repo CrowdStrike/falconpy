@@ -35,9 +35,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, List, Union
 
 
-def aws_registration_payload(passed_keywords: dict) -> dict:
+def aws_registration_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
     """Create a properly formatted payload for RTR command.
 
     {
@@ -55,7 +56,7 @@ def aws_registration_payload(passed_keywords: dict) -> dict:
         ]
     }
     """
-    returned_payload = {}
+    returned_payload: Dict[str, List[Dict[str, Union[str, int]]]] = {}
     returned_payload["resources"] = []
     item = {}
     if passed_keywords.get("cloudtrail_bucket_owner_id", None):

@@ -55,17 +55,17 @@ class RequestConnection:
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
     def __init__(self,
-                 user_agent: str = None,
-                 proxy: Dict[str, str] = None,
-                 timeout: Union[int, tuple] = None,
-                 verify: bool = None
+                 user_agent: Optional[str] = None,
+                 proxy: Optional[Dict[str, str]] = None,
+                 timeout: Optional[Union[int, tuple]] = None,
+                 verify: Optional[bool] = None
                  ):
         """Construct an instance of RequestConnection class."""
-        self._user_agent: Optional[str] = user_agent
-        self._proxy: Optional[Dict[str, str]] = proxy
-        self._timeout: Optional[Union[int, tuple]] = timeout
+        self.user_agent: Optional[str] = user_agent
+        self.proxy: Optional[Dict[str, str]] = proxy
+        self.timeout: Optional[Union[int, tuple]] = timeout
         if isinstance(verify, bool):
-            self._verify: bool = verify
+            self.verify: bool = verify
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__

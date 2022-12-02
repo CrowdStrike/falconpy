@@ -76,8 +76,9 @@ class UberInterface(FalconInterface):
                  renew_window: Optional[int] = 120,
                  debug: Optional[bool] = False,
                  debug_record_count: Optional[int] = MAX_DEBUG_RECORDS,
-                 sanitize_log: Optional[bool] = None
-                 ) -> "UberInterface":
+                 sanitize_log: Optional[bool] = None,
+                 pythonic: Optional[bool] = None
+                 ):
         """Construct an instance of the UberInterface class.
 
         Instantiates an instance of the class, ingests credentials,
@@ -124,7 +125,8 @@ class UberInterface(FalconInterface):
                          renew_window=renew_window,
                          debug=debug,
                          debug_record_count=debug_record_count,
-                         sanitize_log=sanitize_log
+                         sanitize_log=sanitize_log,
+                         pythonic=pythonic
                          )
 
         # Complete list of available API operations.
