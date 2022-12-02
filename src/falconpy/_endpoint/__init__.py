@@ -19,6 +19,7 @@
                                                         |::.|     CrowdStrike Falcon      |::.|
                                                         `---' OAuth2 API SDK for Python 3 `---'
 """
+from typing import List, Any
 from .deprecated import _custom_ioa_deprecated
 from .deprecated import _d4c_registration_deprecated
 from .deprecated import _discover_deprecated
@@ -88,7 +89,7 @@ from ._tailored_intelligence import _tailored_intelligence_endpoints
 from ._user_management import _user_management_endpoints
 from ._zero_trust_assessment import _zero_trust_assessment_endpoints
 
-api_endpoints = []
+api_endpoints: List[Any] = []
 api_endpoints.extend(_alerts_endpoints)
 api_endpoints.extend(_cloud_connect_aws_endpoints)
 api_endpoints.extend(_cspm_registration_endpoints)

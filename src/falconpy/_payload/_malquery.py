@@ -55,7 +55,7 @@ def malquery_fuzzy_payload(passed_keywords: dict) -> dict:
         ]
     }
     """
-    returned_payload = {}
+    returned_payload: dict = {}
     filters = passed_keywords.get("filter_meta", None)
     limit = passed_keywords.get("limit", 0)
     if filters or limit:
@@ -75,7 +75,7 @@ def malquery_fuzzy_payload(passed_keywords: dict) -> dict:
 
 def handle_malquery_search_params(passed_params: dict) -> dict:
     """Create the base payload used by exact_search and hunt."""
-    returned_base = {}
+    returned_base: dict = {}
     filters = passed_params.get("filter_filetypes", None)
     filter_meta = passed_params.get("filter_meta", None)
     limit = passed_params.get("limit", 0)

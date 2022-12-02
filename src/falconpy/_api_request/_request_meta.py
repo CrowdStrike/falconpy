@@ -55,14 +55,14 @@ class RequestMeta:
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
     def __init__(self,
-                 endpoint,
-                 method,
+                 endpoint: Optional[str] = None,
+                 method: str = "GET",
                  debug_headers: Optional[Dict[str, Optional[Union[str, int, float]]]] = None
                  ):
         """Construct an instance of RequestMeta class."""
-        self._endpoint = endpoint
-        self._method = method
-        self._debug_headers = debug_headers
+        self.endpoint = endpoint
+        self.method = method
+        self.debug_headers = debug_headers
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__

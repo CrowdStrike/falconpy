@@ -61,8 +61,8 @@ class LogFacility:
         """Construct an instance of the LogFacility class."""
         if isinstance(log, Logger):
             self._log = log
-        if isinstance(debug_record_count, int):
-            self._debug_record_count = debug_record_count
+        if isinstance(debug_record_count, (int, str)):
+            self._debug_record_count = int(debug_record_count)
         if isinstance(sanitize_log, bool):
             self._sanitize = sanitize_log
 

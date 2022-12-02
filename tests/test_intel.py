@@ -52,7 +52,9 @@ class TestIntel:
                     if key != "get_mitre_report":
                         error_checks = False
                     # print(key)
-                    # print(tests[key])
+                    # print(tests[key]) 
+
+
             # print(f"{key} operation returned a {tests[key]} status code")
 
         return error_checks

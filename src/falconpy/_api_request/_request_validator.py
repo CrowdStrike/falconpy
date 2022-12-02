@@ -57,8 +57,8 @@ class RequestValidator:
                  required: Optional[List[str]] = None
                  ):
         """Construct an instance of RequestValidator class."""
-        self._validator = validator
-        self._required = required
+        self.validator = validator
+        self.required = required
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__

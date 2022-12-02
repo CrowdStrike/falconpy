@@ -35,9 +35,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, List, Union, Any
 
 
-def aws_d4c_registration_payload(passed_keywords: dict) -> dict:
+def aws_d4c_registration_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, bool]]]]:
     """Create a properly formatted AWS registration payload.
 
     {
@@ -53,22 +54,24 @@ def aws_d4c_registration_payload(passed_keywords: dict) -> dict:
         ]
     }
     """
-    returned_payload = {}
+    returned_payload: Dict[str, List[Dict[str, Union[str, bool]]]] = {}
     returned_payload["resources"] = []
     keys = ["account_id", "account_type", "cloudtrail_region", "iam_role_arn", "organization_id"]
-    item = {}
+    item: Dict[str, Any] = {}
+
     for key in keys:
-        if passed_keywords.get(key, None):
+        if isinstance(passed_keywords.get(key, None), str):
             item[key] = passed_keywords.get(key)
-    if passed_keywords.get("is_master", None) is not None:
+    if isinstance(passed_keywords.get("is_master", None), bool):
         item["is_master"] = passed_keywords.get("is_master")
 
-    returned_payload["resources"].append(item)
+    if item:
+        returned_payload["resources"].append(item)
 
     return returned_payload
 
 
-def azure_registration_payload(passed_keywords: dict) -> dict:
+def azure_registration_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, str]]]:
     """Create a properly formatted Azure registration payload.
 
     {
@@ -115,7 +118,7 @@ def gcp_registration_payload(passed_keywords: dict) -> dict:
         ]
     }
     """
-    returned_payload = {}
+    returned_payload: Dict[str, List[Dict[str, str]]] = {}
     returned_payload["resources"] = []
     keys = ["parent_id", "parent_type"]
     item = {}

@@ -42,7 +42,7 @@ class TestSampleUploads:
             response = falcon.UploadSampleV3(file_name=SOURCE, file_data=PAYLOAD)
         try:
             sha = response["body"]["resources"][0]["sha256"]
-        except KeyError:
+        except (KeyError, IndexError):
             sha = None
         if sha:
             response = falcon.GetSampleV3(ids=sha, expand_result=expanded_result)

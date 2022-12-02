@@ -43,7 +43,7 @@ class Meta(BaseDictionary):
     """Class to represent the metadata API response within a result."""
 
     @property
-    def pagination(self) -> Dict[str, Optional[Union[int, str, float]]]:
+    def pagination(self) -> Dict[str, Union[int, str, float]]:
         """Return the contents of the pagination branch."""
         return self.get_property("pagination", {})
 
@@ -53,25 +53,24 @@ class Meta(BaseDictionary):
         return self.get_property("query_time", None)
 
     @property
-    def offset(self) -> Optional[Union[int, str]]:
+    def offset(self) -> Optional[Union[int, str, float]]:
         """Return the the contents of the offset key."""
         return self.pagination.get("offset", None)
 
     @property
-    def limit(self) -> Optional[Union[int, str]]:
+    def limit(self) -> Optional[Union[int, str, float]]:
         """Return the the contents of the limit key."""
         return self.pagination.get("limit", None)
 
     @property
-    def total(self) -> Optional[Union[int, str]]:
+    def total(self) -> Optional[Union[int, str, float]]:
         """Return the the contents of the total key."""
         return self.pagination.get("total", None)
 
     @property
-    def expires_at(self) -> Optional[float]:
+    def expires_at(self) -> Optional[Union[int, str, float]]:
         """Return the the contents of the expires_at key."""
-        _returned: Optional[float] = self.pagination.get("expires_at", None)
-        return _returned
+        return self.pagination.get("expires_at", None)
 
     @property
     def powered_by(self) -> Optional[str]:

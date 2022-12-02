@@ -37,6 +37,8 @@ For more information, please refer to <https://unlicense.org>
 """
 import base64
 import functools
+from warnings import warn
+from json import loads
 try:
     from simplejson import JSONDecodeError
 except ImportError:
@@ -64,7 +66,9 @@ from .._error import (
     KeywordsOnly,
     APIError,
     NoContentWarning,
-    PayloadValidationError
+    PayloadValidationError,
+    InvalidBaseURL,
+    SSLDisabledWarning
     )
 from .._result import Result
 urllib3.disable_warnings(InsecureRequestWarning)
@@ -111,13 +115,18 @@ def generate_b64cred(client_id: str, client_secret: str) -> str:
     return encoded
 
 
-def handle_single_argument(passed_arguments: Union[list, tuple], passed_keywords: Optional[dict], search_key: str) -> dict:
+def handle_single_argument(passed_arguments: tuple,
+                           passed_keywords: Optional[dict] = None,
+                           search_key: Optional[str] = None
+                           ) -> dict:
     """Handle a single argument that is provided without keywords.
 
     Reviews arguments passed to a method and injects them into the keyword dictionary if they
     match the search string.
     """
-    if len(passed_arguments) > 0:
+    if not passed_keywords:
+        passed_keywords: dict = {}
+    if len(passed_arguments) > 0 and search_key:
         passed_keywords[search_key] = passed_arguments[0]
 
     return passed_keywords
@@ -162,6 +171,7 @@ def force_default(defaults: List[str], default_types: List[str] = None):
                 element_count += 1
 
             try:
+                # created = func(*args, **kwargs)
                 try:
                     created = func(*args, **kwargs)
                 except TypeError as keywords_only:
@@ -172,6 +182,9 @@ def force_default(defaults: List[str], default_types: List[str] = None):
                 created = bad_keywords.result
             except NoContentWarning as no_content_received:
                 created = no_content_received.result
+            except APIError as api_error:
+                # Should only receive this in pythonic mode
+                raise api_error
             except (SDKError, InvalidMethod) as bad_sdk_command:
                 created = bad_sdk_command.result
             return created
@@ -187,6 +200,7 @@ def service_request(caller=None, **kwargs) -> Union[Dict[str, Union[int, dict, l
     Inbound caller argument should be a ServiceClass class or derivative.
     """
     if caller:
+        # EAFP
         try:
             proxy: Optional[Dict[str, str]] = caller.proxy
         except AttributeError:
@@ -215,6 +229,14 @@ def service_request(caller=None, **kwargs) -> Union[Dict[str, Union[int, dict, l
             do_sanitize: Optional[bool] = caller.sanitize_log
         except AttributeError:
             do_sanitize = None
+        try:
+            # Allow pythonic behaviors to be enabled / disabled per request
+            do_pythonic: Optional[bool] = kwargs.get("pythonic", None)
+            if not isinstance(do_pythonic, bool):
+                kwargs["pythonic"] = caller.pythonic
+            # do_pythonic: Optional[bool] = caller.pythonic
+        except AttributeError:
+            kwargs["pythonic"] = None
 
     return perform_request(proxy=proxy,
                            timeout=timeout,
@@ -230,7 +252,8 @@ def service_request(caller=None, **kwargs) -> Union[Dict[str, Union[int, dict, l
 def calc_content_return(resp: requests.Response,
                         contain: bool,
                         auth: bool,
-                        log: Logger
+                        log: Logger,
+                        pythonic_mode: bool,
                         ) -> Union[dict, bytes]:
     """Calculate the returned content based upon the results from the call to requests."""
     returned = {}
@@ -238,29 +261,20 @@ def calc_content_return(resp: requests.Response,
     if log:
         log.debug("RECEIVED: Content returned in %s format", returned_content_type)
     if returned_content_type.startswith("application/json"):  # Issue 708
-        json_resp: dict = {}
+        json_resp: Union[dict, Result] = {}
         try:
-            json_resp: dict = resp.json()
+            json_resp = resp.json()
         except JSONDecodeError:
-            # It says JSON but it came back to us as a binary
-            json_resp = resp.content.decode("ascii")
-            # returned = Result()(resp.status_code, resp.headers, resp.json())
+            # It says JSON in the headers but it came back to us as a binary string.
+            json_resp = loads(resp.content.decode("ascii"))
         finally:
-            if "resources" in json_resp and not contain:
-                # Default behavior is to return results as a standardized dictionary
-                returned = Result(status_code=resp.status_code,
-                                  headers=resp.headers,
-                                  body=dict(json_resp)
-                                  ).full_return
-            elif contain:
-                returned = Result(resp.status_code, resp.headers, json_resp)
-            else:
-                # Shortcut the data setup if we don't have a resources array.
-                # This still isn't behaving properly, falling back to the old method for now.
-                returned = Result()(resp.status_code, resp.headers, json_resp)
-                # returned = Result(resp.status_code, resp.headers, json_resp).full_return
+            # Default behavior is to return results as a standardized dictionary.
+            returned = Result(status_code=resp.status_code,
+                              headers=resp.headers,
+                              body=json_resp
+                              ).full_return
     elif contain:
-        returned = Result(resp.status_code, resp.headers, resp.json())
+        returned = Result(resp.status_code, resp.headers, resp.json()).full_return
     else:
         # Binary response
         if not resp.content:
@@ -279,24 +293,23 @@ def calc_content_return(resp: requests.Response,
     try:
         if resp.status_code >= 400:
             _message = None
-            if isinstance(returned, Result):
-                # We can't log pythonic results, convert to a dictionary
-                returned = returned.full_return
             _errors = returned.get("body", {}).get("errors", [])
             if _errors:
                 _message = f"ERROR: {_errors[0]['message']}"
             raise APIError(code=resp.status_code, message=_message, headers=resp.headers)
     except APIError as api_error:
-        # We still return a payload on API error, so all we
-        # want to do is generate the exception and log the error.
+        # Still return the payload unless we're in pythonic mode
         if log:
             log.error(api_error.message)
+        if pythonic_mode:
+            raise api_error
 
     return returned, returned_content_type
 
 
+# pylint: disable=R0915
 @force_default(defaults=["headers"], default_types=["dict"])
-def perform_request(endpoint: str = "",  # pylint: disable=R0912
+def perform_request(endpoint: str = "",
                     headers: dict = None,
                     **kwargs      # May return dict or binary data types
                     ) -> Union[Dict[str, Union[int, Dict[str, str], Dict[str, Dict]]], bytes]:
@@ -339,7 +352,16 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
     debug_record_count: int - Maximum number of records to log in debug logs
     authenticating: bool - This request is driving a token request
     """
+    # Shortcut for now
+    pythonic = kwargs.get("pythonic", False)
     api: APIRequest = APIRequest(endpoint, kwargs)
+    if not api.verify:
+        ssl_disabled = SSLDisabledWarning()
+        if pythonic:
+            warn(ssl_disabled.message, SSLDisabledWarning, stacklevel=2)
+        else:
+            api.log_warning(msg=ssl_disabled.message)
+
     if api.method.upper() in _ALLOWED_METHODS:
         # Validate body payload
         if api.body_validator:
@@ -370,9 +392,11 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
                 content_return, returning_content_type = calc_content_return(response,
                                                                              api.container,
                                                                              api.authenticating,
-                                                                             api.log_util
+                                                                             api.log_util,
+                                                                             pythonic
                                                                              )
-                # Expanded results allow for status code and header checks on binary returns
+                # Expanded results allow for status code and
+                # header checks on binary returns.
                 # Maintained for < v1.3 syntax compatibility
                 if api.expand_result:
                     returned = Result(response.status_code, response.headers, content_return).tupled
@@ -382,6 +406,14 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
                 # Log our response if debugging is enabled
                 log_api_activity(content_return, returning_content_type, api)
 
+                # !!! EXPERIMENTAL !!!
+                # This functionality is new in v1.3.0 and still experimental, mileage may vary.
+                if pythonic:
+                    if isinstance(returned, bytes):
+                        returned = Result(response.status_code, response.headers, returned)
+                    else:
+                        returned = Result(full=returned)
+
             except RegionSelectError as bad_region:
                 # More than likely they tried to autoselect to GovCloud
                 returned = bad_region.result
@@ -389,15 +421,20 @@ def perform_request(endpoint: str = "",  # pylint: disable=R0912
 
             except JSONDecodeError as json_decode_error:
                 # No response content, but a successful request was made
-                _log_msg = "WARNING: No content was received for this request."
-                api.log_warning(response.status_code, _log_msg, response.content)
+                api.log_warning("WARNING: No content was received for this request.")
                 raise NoContentWarning(headers=response.headers) from json_decode_error
 
             except Exception as havoc:  # pylint: disable=W0703
-                # General catch-all for anything coming out of requests or the library itself.
-                # Pass this error up to the parent try/catch block residing within our decorator
-                # (force_default) for handling.
-                # raise
+                # General catch-all for anything coming          ____ ____ _ _      \\       o   o
+                # out of requests or the library itself.         |___ |--<  Y        ||      |\O/|
+                # Pass this error up to the parent try/catch                          \\      \Y/
+                # block residing within our decorator        _  _ ____ _  _ ____ ____         /W\
+                # (force_default) for handling.              |--| |--|  \/  [__] |___  !!   _|WWW|_
+                if pythonic:
+                    # Oh wait, we're pythonic, lets generate
+                    # a regular python error condition instead.
+                    raise havoc
+
                 raise SDKError(message=f"{str(havoc)}", headers=api.debug_headers) from havoc
     else:
         raise InvalidMethod
@@ -457,7 +494,7 @@ def generate_ok_result(message: str = "Request returned with success", code: int
     return Result()(status_code=code, headers=return_headers, body={"message": message, "resources": []})
 
 
-def get_default(types: list, position: int):
+def get_default(types: list, position: int) -> Union[list, str, int, dict, bool]:
     """I determine the requested default data type and return it."""
     default_value_names = ["list", "str", "int", "dict", "bool"]
     default_value_types = [[], "", 0, {}, False]
@@ -527,7 +564,7 @@ def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epnam
     return returned_payload
 
 
-def process_service_request(calling_object: object,  # pylint: disable=R0914 # (19/15)
+def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
                             endpoints: list,
                             operation_id: str,
                             **kwargs
@@ -552,6 +589,7 @@ def process_service_request(calling_object: object,  # pylint: disable=R0914 # (
     body_validator -- Dictionary containing details regarding body payload validation
     body_required -- List of required body payload parameters
     expand_result -- Request expanded results output
+    pythonic -- Pythonic responses
     """
     # Log the operation ID if we have logging enabled.
     if calling_object.log:
@@ -600,13 +638,15 @@ def process_service_request(calling_object: object,  # pylint: disable=R0914 # (
         "body_validator": kwargs.get("body_validator", None),
         "body_required": kwargs.get("body_required", None),
         "expand_result": expand_result,
-        "container": container
+        "container": container,
+        "pythonic": kwargs.get("pythonic", None),
+        "perform": True
     }
 
     return service_request(**new_keywords)
 
 
-def confirm_base_url(provided_base: str = "https://api.crowdstrike.com") -> str:
+def confirm_base_url(provided_base: Optional[str] = "https://api.crowdstrike.com") -> str:
     """Confirm the passed base_url value matches URL syntax.
 
     If it does not, it is looked up in the BaseURL enum. If the value is not found
@@ -614,19 +654,22 @@ def confirm_base_url(provided_base: str = "https://api.crowdstrike.com") -> str:
     """
     # Assume they passed a full URL
     returned_base = provided_base
-    if "://" not in provided_base:
-        # They're passing the name instead of the URL
-        dashed_bases = ["US-1", "US-2", "EU-1", "US-GOV-1"]
-        if provided_base.upper() in dashed_bases:
-            provided_base = provided_base.replace("-", "")  # Strip the dash
-        try:
-            returned_base = f"https://{BaseURL[provided_base.upper()].value}"
-        except KeyError:
-            # Invalid base URL name, fall back to assuming they didn't give us https
-            returned_base = f"https://{provided_base}"
+    try:
+        if "://" not in provided_base:
+            # They're passing the name instead of the URL
+            dashed_bases = ["US-1", "US-2", "EU-1", "US-GOV-1"]
+            if provided_base.upper() in dashed_bases:
+                provided_base = provided_base.replace("-", "")  # Strip the dash
+            try:
+                returned_base = f"https://{BaseURL[provided_base.upper()].value}"
+            except KeyError:
+                # Invalid base URL name, fall back to assuming they didn't give us https
+                returned_base = f"https://{provided_base}"
 
-    if returned_base[-1] == "/":  # Issue 558
-        returned_base = returned_base[:-1]
+        if returned_base[-1] == "/":  # Issue 558
+            returned_base = returned_base[:-1]
+    except (AttributeError, TypeError) as bad_base_url:
+        raise InvalidBaseURL from bad_base_url
 
     return returned_base
 
@@ -680,6 +723,7 @@ def sanitize_dictionary(dirty: Any, record_max: int = MAX_DEBUG_RECORDS) -> dict
     """Strip confidential data from logged dictionaries."""
     cleaned = dirty
     if isinstance(dirty, dict):
+        # cleaned = deepcopy(dict(dirty))
         redacted = ["access_token", "client_id", "client_secret", "member_cid", "token"]
         for redact in redacted:
             if redact in cleaned:
@@ -691,8 +735,9 @@ def sanitize_dictionary(dirty: Any, record_max: int = MAX_DEBUG_RECORDS) -> dict
                     # Log results are limited to MAX_DEBUG_RECORDS
                     # number of items within the resources list
                     if cleaned["body"]["resources"]:
-                        del cleaned["body"]["resources"][max(1, min(record_max, GLOBAL_API_MAX_RETURN)):]
-
+                        del cleaned["body"]["resources"][max(1, min(record_max,
+                                                                    GLOBAL_API_MAX_RETURN
+                                                                    )):]
         if "Authorization" in cleaned:
             cleaned["Authorization"] = "Bearer REDACTED"
 
@@ -700,7 +745,7 @@ def sanitize_dictionary(dirty: Any, record_max: int = MAX_DEBUG_RECORDS) -> dict
 
 
 # Python 3.6 compatibility warning: Cannot properly type the interface.
-def log_class_startup(interface: object, log_device: Logger = None):
+def log_class_startup(interface, log_device: Logger):
     """Log the startup of one of our interface or Service Classes."""
     log_device.debug("CREATED: %s interface class", interface.__class__.__name__)
     log_device.debug("CONFIG: Base URL set to %s", interface.base_url)
@@ -717,21 +762,6 @@ def log_class_startup(interface: object, log_device: Logger = None):
     log_device.debug(
         "CONFIG: Log sanitization is %s", "enabled" if interface.sanitize_log else "disabled"
         )
-
-
-def log_message(log_device: Logger = None, msg: str = None):
-    """Write a debug log message."""
-    if log_device and msg:
-        log_device.debug(msg)
-
-
-def log_error(log_device: Logger = None, msg: str = None):
-    """Write an error to the log."""
-    if log_device and msg:
-        log_device.error(msg)
-
-
-def log_warning(log_device: Logger = None, msg: str = None):
-    """Write a warning to the log."""
-    if log_device and msg:
-        log_device.warning(msg)
+    log_device.debug(
+        "CONFIG: Pythonic responses are %s", "enabled" if interface.pythonic else "disabled"
+        )
