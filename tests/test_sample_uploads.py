@@ -16,7 +16,7 @@ from falconpy import SampleUploads
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = SampleUploads(auth_object=config)
-AllowedResponses = [200, 201, 400, 403, 404, 429]
+AllowedResponses = [200, 201, 202, 400, 403, 404, 429]
 
 
 class TestSampleUploads:
@@ -94,15 +94,32 @@ class TestSampleUploads:
         """
         Executes every statement in every method of the class, accepts all errors except 500
         """
+        FILENAME = "tests/testfile.zip"
+        with open(FILENAME, 'rb') as test_archive:
+            PAYLOAD = test_archive.read()
+        #files = [("file", ("testfile.zip", open(FILENAME, 'rb').read(), "application/zip"))]
         error_checks = True
         tests = {
             "upload_sample": falcon.UploadSampleV3(body={}),
             "get_sample": falcon.GetSampleV3(ids='DoesNotExist'),
-            "delete_sample": falcon.DeleteSampleV3(ids='12345678')
+            "delete_sample": falcon.DeleteSampleV3(ids='12345678'),
+            "ArchiveListV1": falcon.ArchiveListV1(id="12345678"),
+            "ArchiveGetV1": falcon.ArchiveGetV1(id="123456789"),
+            "ArchiveDeleteV1": falcon.ArchiveDeleteV1(id="123456789"),
+            "ArchiveUploadV2": falcon.ArchiveUploadV2(name="testfile.zip", archive=PAYLOAD, source="workstation", comment="FalconPy testing"),
+            "ArchiveUploadV2": falcon.ArchiveUploadV2(file=PAYLOAD, source="workstation", comment="FalconPy testing"),
+            "ExtractionListV1": falcon.ExtractionListV1(id="12345779"),
+            "ExtractionGetV1": falcon.ExtractionGetV1(ids="12345678"),
+            "ExtractionCreateV1": falcon.ExtractionCreateV1(extract_all=True, files=[{
+                "comment": "Test comment",
+                "is_confidential": True,
+                "name": "falconpy-test-archive.zip"
+            }], sha256="12345678"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
-                # print(tests[key])
+                # print(key)
+                print(tests[key])
                 error_checks = False
 
             # print(f"{key} operation returned a {tests[key]} status code")
