@@ -90,7 +90,7 @@ class SampleUploads(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_archive(self: object, *args, parameters: dict = None, **kwargs) -> object:
-        """Retrieves the archives upload operation statuses.
+        """Retrieve the archive upload operation status.
 
         Status `done` means that archive was processed successfully.
         Status `error` means that archive was not processed successfully.
@@ -152,7 +152,7 @@ class SampleUploads(ServiceClass):
                        parameters: dict = None,
                        **kwargs
                        ) -> dict:
-        """Uploads an archive and extracts files list from it.
+        """Upload an archive and extract the files list from it.
 
         This operation is asynchronous. Use ArchiveGetV1 to check the status.
         After uploading, use ExtractionCreateV1 to copy the file to internal storage
@@ -214,7 +214,7 @@ class SampleUploads(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def list_extraction(self: object, *args, parameters: dict = None, **kwargs) -> object:
-        """Retrieves the files extractions in chunks.
+        """Retrieve the file extractions in chunks.
 
         Status `done` means that all files were processed successfully.
         Status `error` means that at least one of the files could not be processed.
@@ -245,7 +245,7 @@ class SampleUploads(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_extraction(self: object, *args, parameters: dict = None, **kwargs) -> object:
-        """Retrieves the files extraction operation statuses.
+        """Retrieve the files extraction operation statuses.
 
         Status `done` means that all files were processed successfully.
         Status `error` means that at least one of the files could not be processed.
@@ -279,7 +279,7 @@ class SampleUploads(ServiceClass):
                           body: dict = None,
                           **kwargs
                           ) -> dict:
-        """Extracts files from an uploaded archive and copies them to internal storage for analysis.
+        """Extract files from an uploaded archive and copy them to internal storage for analysis.
 
         Keyword arguments:
         body -- Full body payload in JSON format. Not required if using other keywords. Dictionary.

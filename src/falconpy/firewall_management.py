@@ -492,7 +492,6 @@ class FirewallManagement(ServiceClass):
             params=parameters
             )
 
-
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
     def update_network_locations_precedence(self: object,
                                             body: dict = None,
@@ -533,7 +532,6 @@ class FirewallManagement(ServiceClass):
             params=parameters
             )
 
-
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_network_locations(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get network location entities by ID.
@@ -559,7 +557,6 @@ class FirewallManagement(ServiceClass):
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
-
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
     def create_network_locations(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
@@ -653,10 +650,9 @@ class FirewallManagement(ServiceClass):
             params=parameters
             )
 
-
     @force_default(defaults=["body"], default_types=["dict"])
     def upsert_network_locations(self: object, body: dict = None, **kwargs) -> dict:
-        """Updates the network locations provided and returns the ID.
+        """Update the network locations provided and return the ID.
 
         Keyword arguments:
         body -- Full body payload in JSON format. Not required if other keywords are provided.
@@ -746,7 +742,6 @@ class FirewallManagement(ServiceClass):
             keywords=kwargs,
             body=body
             )
-
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
     def update_network_locations(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
@@ -842,13 +837,12 @@ class FirewallManagement(ServiceClass):
             params=parameters
             )
 
-
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_network_locations(self: object,
-                           *args,
-                           parameters: dict = None,
-                           **kwargs
-                           ) -> dict:
+                                 *args,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> dict:
         """Delete network location entities by ID.
 
         Keyword arguments:
@@ -872,7 +866,6 @@ class FirewallManagement(ServiceClass):
             params=handle_single_argument(args, parameters, "ids"),
             keywords=kwargs
             )
-
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_platforms(self: object, *args, parameters: dict = None, **kwargs) -> dict:
@@ -1654,7 +1647,6 @@ class FirewallManagement(ServiceClass):
             params=parameters
             )
 
-
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_network_locations(self: object, parameters: dict = None, **kwargs) -> dict:
         """Find all network location IDs matching the query with filter.
@@ -1687,7 +1679,6 @@ class FirewallManagement(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
-
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_platforms(self: object, parameters: dict = None, **kwargs) -> dict:

@@ -129,7 +129,6 @@ class ODS(ServiceClass):
             body=body
             )
 
-
     @force_default(defaults=["body"], default_types=["list"])
     def aggregate_scheduled_scans(self: object, body: list = None, **kwargs) -> dict:
         """Get aggregates on ODS scheduled-scan data.
@@ -452,7 +451,6 @@ class ODS(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-
     @force_default(defaults=["body"], default_types=["dict"])
     def schedule_scan(self: object, body: dict = None, **kwargs) -> dict:
         """Create ODS scan and start or schedule scan for the given scan request.
@@ -603,7 +601,6 @@ class ODS(ServiceClass):
             params=parameters
             )
 
-
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_scan_hosts(self: object, parameters: dict = None, **kwargs) -> dict:
         """Query for scan hosts.
@@ -647,7 +644,6 @@ class ODS(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
-
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_scans(self: object, parameters: dict = None, **kwargs) -> dict:

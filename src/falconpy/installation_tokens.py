@@ -289,7 +289,6 @@ class InstallationTokens(ServiceClass):
             params=parameters
             )
 
-
     @force_default(defaults=["parameters"], default_types=["dict"])
     def customer_settings_update(self: object, body: dict = None, **kwargs) -> dict:
         """Create a token.
@@ -321,6 +320,7 @@ class InstallationTokens(ServiceClass):
             operation_id="customer_settings_update",
             body=body
             )
+
 
 # The legacy name for this class does not conform to PascalCase / PEP8
 # It is defined here for backwards compatibility purposes only.

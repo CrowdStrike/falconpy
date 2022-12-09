@@ -553,10 +553,10 @@ class FlightControl(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_user_group_members_by_id_v1(self: object,
-                                     *args,
-                                     parameters: dict = None,
-                                     **kwargs
-                                     ) -> dict:
+                                        *args,
+                                        parameters: dict = None,
+                                        **kwargs
+                                        ) -> dict:
         """Get User Group members by User Group ID(s).
 
         ** DEPRECATED **

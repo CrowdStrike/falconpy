@@ -390,7 +390,6 @@ class Recon(ServiceClass):
             body_required=["id"] if self.validate_payloads else None
             )
 
-
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_export_job_file_contents(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Download the file associated with a job ID.
@@ -416,7 +415,6 @@ class Recon(ServiceClass):
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "id")
             )
-
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_export_jobs(self: object, *args, parameters: dict = None, **kwargs) -> dict:
@@ -446,7 +444,6 @@ class Recon(ServiceClass):
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "id")
             )
-
 
     @force_default(defaults=["body"], default_types=["list"])
     def create_export_jobs(self: object, body: list = None, **kwargs) -> dict:

@@ -199,6 +199,7 @@ def installation_token_payload(passed_keywords: dict) -> dict:
 
     return returned_payload
 
+
 def simple_action_parameter(passed_keywords: dict) -> dict:
     """Create a properly formatted action parameter body payload.
 
@@ -225,6 +226,7 @@ def simple_action_parameter(passed_keywords: dict) -> dict:
         returned_payload["action_parameters"] = passed_keywords.get("action_parameters")
 
     return returned_payload
+
 
 def token_settings_payload(passed_keywords: dict) -> dict:
     """Craft a properly formatted installation token settings payload.
