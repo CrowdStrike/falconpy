@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import installation_token_payload
+from ._payload import installation_token_payload, token_settings_payload
 from ._service_class import ServiceClass
 from ._endpoint._installation_tokens import _installation_tokens_endpoints as Endpoints
 
@@ -289,6 +289,38 @@ class InstallationTokens(ServiceClass):
             params=parameters
             )
 
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def customer_settings_update(self: object, body: dict = None, **kwargs) -> dict:
+        """Create a token.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                {
+                    "max_active_tokens": 0,
+                    "tokens_required": true
+                }
+        max_active_tokens -- Maximum number of active tokens within the CID. Integer.
+        tokens_required -- Flag indicating if installation tokens are required. Boolean.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/installation-tokens-settings/customer-settings-update
+        """
+        if not body:
+            body = token_settings_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="customer_settings_update",
+            body=body
+            )
 
 # The legacy name for this class does not conform to PascalCase / PEP8
 # It is defined here for backwards compatibility purposes only.

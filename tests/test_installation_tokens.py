@@ -57,7 +57,8 @@ class TestInstallationTokens:
                                                         label=f"Unit testing {ran_string}",
                                                         revoked=True
                                                         ),
-            "tokens_delete": falcon.tokens_delete(ids="12345678")
+            "tokens_delete": falcon.tokens_delete(ids="12345678"),
+            "token_settings_update": falcon.customer_settings_update(max_active_tokens=9999, tokens_required=False)
         }
         for key in tests:
             # print(f"{key} \n {tests[key]}")
