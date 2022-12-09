@@ -58,6 +58,7 @@ from .ml_exclusions import MLExclusions
 from .mobile_enrollment import MobileEnrollment
 from .mssp import FlightControl
 from .oauth2 import OAuth2
+from .ods import ODS
 from .overwatch_dashboard import OverwatchDashboard
 from .prevention_policy import PreventionPolicy, PreventionPolicies
 from .quarantine import Quarantine
@@ -98,7 +99,7 @@ __all__ = [
     "OverwatchDashboard", "PreventionPolicy", "Quarantine", "QuickScan", "RealTimeResponseAdmin",
     "RealTimeResponse", "Recon", "ReportExecutions", "ResponsePolicies", "SampleUploads",
     "ScheduledReports", "SensorDownload", "SensorUpdatePolicy", "SensorVisibilityExclusions",
-    "SpotlightVulnerabilities", "SpotlightEvaluationLogic", "UserManagement",
+    "SpotlightVulnerabilities", "SpotlightEvaluationLogic", "UserManagement", "ODS",
     "ZeroTrustAssessment", "PreventionPolicies", "SensorUpdatePolicies", "MessageCenter",
     "FileVantage", "MobileEnrollment", "ContainerBaseURL", "TailoredIntelligence"
 ]
