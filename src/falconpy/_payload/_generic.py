@@ -198,3 +198,46 @@ def installation_token_payload(passed_keywords: dict) -> dict:
         returned_payload["label"] = passed_keywords.get("label", None)
 
     return returned_payload
+
+def simple_action_parameter(passed_keywords: dict) -> dict:
+    """Create a properly formatted action parameter body payload.
+
+    {
+        "action_parameters": [
+            {
+                "name": "string",
+                "value": "string"
+            }
+        ]
+    }
+    """
+    returned_payload = {}
+    returned_payload["action_parameters"] = []
+    _single = {}
+    for key in ["name", "value"]:
+        if passed_keywords.get(key, None):
+            _single[key] = passed_keywords.get(key)
+    if "name" in _single and "value" in _single:
+        returned_payload["action_parameters"].append(_single)
+
+    if passed_keywords.get("action_parameters", None):
+        # Overrides provided name / value keywords
+        returned_payload["action_parameters"] = passed_keywords.get("action_parameters")
+
+    return returned_payload
+
+def token_settings_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted installation token settings payload.
+
+    {
+        "max_active_tokens": 0,
+        "tokens_required": true
+    }
+    """
+    returned_payload = {}
+    keys = ["max_active_tokens", "tokens_required"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload

@@ -207,5 +207,19 @@ _installation_tokens_endpoints = [
         "in": "query"
       }
     ]
+  ],
+  [
+    "customer_settings_update",
+    "PATCH",
+    "/installation-tokens/entities/customer-settings/v1",
+    "Update installation token settings.",
+    "installation_tokens_settings",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
   ]
 ]
