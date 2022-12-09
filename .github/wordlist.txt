@@ -784,3 +784,5 @@ TailoredIntelligence
 collectionFormat
 maxLength
 minLength
+ods
+ODS
