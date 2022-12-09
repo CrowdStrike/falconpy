@@ -7,7 +7,7 @@ from tests import test_authorization as Authorization
 sys.path.append(os.path.abspath('src'))
 # flake8: noqa=E401  # Classes to test - manually imported from sibling folder
 from falconpy.intel import Intel
-
+from falconpy import BaseURL
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Intel(auth_object=config)
@@ -35,9 +35,14 @@ class TestIntel:
             "query_intel_indicator_ids": falcon.QueryIntelIndicatorIds(limit=5),
             "query_intel_report_ids": falcon.QueryIntelReportIds(limit=1),
             "query_intel_rule_ids": falcon.QueryIntelRuleIds(parameters={"type": "common-event-format"}),
-            "get_vulnerabilities": falcon.get_vulnerabilities(ids="12345678"),
-            "query_vulnerabilities": falcon.query_vulnerabilities()
+            # "get_vulnerabilities": falcon.get_vulnerabilities(ids="12345678"),
+            # "query_vulnerabilities": falcon.query_vulnerabilities()
         }
+
+        if falcon.base_url.replace("https://", "") == BaseURL["US1"].value:
+            # US-1 only for now.
+            tests["get_vulnerabilities"] = falcon.get_vulnerabilities(ids="12345678")
+            tests["query_vulnerabilities"] = falcon.query_vulnerabilities()
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 # print(tests[key])    
