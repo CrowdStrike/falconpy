@@ -12,7 +12,7 @@ from falconpy import FirewallManagement
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = FirewallManagement(auth_object=config)
-AllowedResponses = [200, 201, 202, 203, 204, 400, 403, 404, 429]
+AllowedResponses = [200, 201, 202, 203, 204, 400, 401, 403, 404, 429]
 fmt = '%Y-%m-%d %H:%M:%S'
 stddate = datetime.datetime.now().strftime(fmt)
 sdtdate = datetime.datetime.strptime(stddate, fmt)
@@ -151,14 +151,91 @@ class TestFirewallManagement:
             "query_platforms": falcon.query_platforms(),
             "query_policy_rules": falcon.query_policy_rules(),
             "query_rule_groups": falcon.query_rule_groups(),
-            "query_rules": falcon.query_rules()
+            "query_rules": falcon.query_rules(),
+            "get_network_locations_details": falcon.get_network_locations_details(ids="12345678"),
+            "update_network_locations_metadata": falcon.update_network_locations_metadata(cid="12345678",
+                                                                                          dns_resolution_targets_polling_interval=10,
+                                                                                          https_reachable_hosts_polling_interval=10,
+                                                                                          icmp_request_targets_polling_interval=10,
+                                                                                          location_precedence=["BobIsFirst"]),
+            "update_network_locations_precedence": falcon.update_network_locations_precedence(cid="1234567", location_precedence=["LarryIsSecond"]),
+            "get_network_locations": falcon.get_network_locations(ids="987654321"),
+            "create_network_locations": falcon.create_network_locations(connection_types={"wired": True},
+                                                                        created_by="12345678",
+                                                                        created_on="Yesterday",
+                                                                        default_gateways=["1.2.3.4"],
+                                                                        description="ThisLocation",
+                                                                        dhcp_servers=["10.10.1.10"],
+                                                                        dns_resolution_targets={"targets": [{
+                                                                            "hostname": "ChucksBox",
+                                                                            "ip_match": "10.12.12.120"
+                                                                        }]},
+                                                                        dns_servers=["5.4.3.2"],
+                                                                        enabled=False,
+                                                                        host_addresses=["9.8.7.7"],
+                                                                        https_reachable_hosts={
+                                                                            "hostnames": ["Daryl", "Charlie"]
+                                                                        },
+                                                                        icmp_request_targets={
+                                                                            "targets": ["Tom", "Sarah"]
+                                                                        },
+                                                                        name="FalconPy Unit Testing"),
+            "update_network_locations": falcon.update_network_locations(connection_types={"wired": True},
+                                                                        created_by="12345678",
+                                                                        created_on="Yesterday",
+                                                                        default_gateways=["1.2.3.4"],
+                                                                        description="ThisLocation",
+                                                                        dhcp_servers=["10.10.1.10"],
+                                                                        dns_resolution_targets={"targets": [{
+                                                                            "hostname": "ChucksBox",
+                                                                            "ip_match": "10.12.12.120"
+                                                                        }]},
+                                                                        dns_servers=["5.4.3.2"],
+                                                                        enabled=False,
+                                                                        host_addresses=["9.8.7.7"],
+                                                                        https_reachable_hosts={
+                                                                            "hostnames": ["Daryl", "Charlie"]
+                                                                        },
+                                                                        icmp_request_targets={
+                                                                            "targets": ["Tom", "Sarah"]
+                                                                        },
+                                                                        name="FalconPy Unit Testing",
+                                                                        id="12345677",
+                                                                        modified_by="Douglas",
+                                                                        modified_on="Last Thursday"
+                                                                        ),
+            "upsert_network_locations": falcon.upsert_network_locations(connection_types={"wired": True},
+                                                                        created_by="12345678",
+                                                                        created_on="Yesterday",
+                                                                        default_gateways=["1.2.3.4"],
+                                                                        description="ThisLocation",
+                                                                        dhcp_servers=["10.10.1.10"],
+                                                                        dns_resolution_targets={"targets": [{
+                                                                            "hostname": "ChucksBox",
+                                                                            "ip_match": "10.12.12.120"
+                                                                        }]},
+                                                                        dns_servers=["5.4.3.2"],
+                                                                        enabled=False,
+                                                                        host_addresses=["9.8.7.7"],
+                                                                        https_reachable_hosts={
+                                                                            "hostnames": ["Daryl", "Charlie"]
+                                                                        },
+                                                                        icmp_request_targets={
+                                                                            "targets": ["Tom", "Sarah"]
+                                                                        },
+                                                                        name="FalconPy Unit Testing",
+                                                                        id="12345677",
+                                                                        modified_by="Douglas",
+                                                                        modified_on="Last Thursday"),
+            "delete_network_locations": falcon.delete_network_locations(ids="3841341345"),
+            "query_network_locations": falcon.query_network_locations()
         }
         for key in tests:
 
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
-#                print(f"Failed on {key} with {tests[key]}")
-#            print(tests[key])
+                print(f"Failed on {key} with {tests[key]}")
+
         return error_checks
 
     def test_all_paths(self):

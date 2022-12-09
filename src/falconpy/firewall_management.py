@@ -43,7 +43,9 @@ from ._payload import (
     firewall_rule_group_validation_payload,
     firewall_rule_group_payload,
     firewall_rule_group_update_payload,
-    firewall_filepattern_payload
+    firewall_filepattern_payload,
+    network_locations_metadata_payload,
+    network_locations_create_payload
     )
 from ._service_class import ServiceClass
 from ._endpoint._firewall_management import _firewall_management_endpoints as Endpoints
@@ -419,6 +421,460 @@ class FirewallManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_network_locations_details(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get network location entities by ID.
+
+        Keyword arguments:
+        ids -- The IDs of the event(s) to retrieve. String or list of strings.
+        parameters - full parameters payload, not required if `ids` keyword is provided.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get_rule_groups
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_network_locations_details",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def update_network_locations_metadata(self: object,
+                                          body: dict = None,
+                                          parameters: dict = None,
+                                          **kwargs
+                                          ) -> dict:
+        """Update the network locations metadata such as polling intervals for the cid.
+
+        Keyword arguments:
+        body -- Full body payload in JSON format. Not required if other keywords are provided.
+                {
+                    "cid": "string",
+                    "dns_resolution_targets_polling_interval": 0,
+                    "https_reachable_hosts_polling_interval": 0,
+                    "icmp_request_targets_polling_interval": 0,
+                    "location_precedence": [
+                        "string"
+                    ]
+                }
+        cid -- CID for the location. String.
+        comment -- Audit log comment for the action performed. String.
+        dns_resolution_targets_polling_interval -- Integer.
+        https_reachable_hsots_polling_interval -- Integer.
+        icmp_request_targets_polling_interval -- Integer
+        location_precedencee -- Reorder precedence of network locations. List of strings.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-network-locations-metadata
+        """
+        if not body:
+            body = network_locations_metadata_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="update_network_locations_metadata",
+            body=body,
+            params=parameters
+            )
+
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def update_network_locations_precedence(self: object,
+                                            body: dict = None,
+                                            parameters: dict = None,
+                                            **kwargs
+                                            ) -> dict:
+        """Update the network locations precedence according to the list of IDs provided.
+
+        Keyword arguments:
+        body -- Full body payload in JSON format. Not required if other keywords are provided.
+                {
+                    "cid": "string",
+                    "location_precedence": [
+                        "string"
+                    ]
+                }
+        cid -- CID for the location. String.
+        comment -- Audit log comment for the action performed. String.
+        location_precedencee -- Reorder precedence of network locations. List of strings.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-network-locations-precedence
+        """
+        if not body:
+            body = network_locations_metadata_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="update_network_locations_precedence",
+            body=body,
+            params=parameters
+            )
+
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_network_locations(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get network location entities by ID.
+
+        Keyword arguments:
+        ids -- The IDs of the location(s) to retrieve. String or list of strings.
+        parameters - full parameters payload, not required if `ids` keyword is provided.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/get-network-locations
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_network_locations",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def create_network_locations(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
+        """Create new network locations provided and return the ID.
+
+        Keyword arguments:
+        add_fw_rules -- Flag to indicate if the cloned locatoin needs to be added to the same
+                        firewall rules that encompass the original location.
+        body -- Full body payload in JSON format. Not required if other keywords are provided.
+                {
+                    "connection_types": {
+                        "wired": true,
+                        "wireless": {
+                        "enabled": true,
+                        "require_encryption": true,
+                        "ssids": [
+                            "string"
+                            ]
+                        }
+                    },
+                    "default_gateways": [
+                        "string"
+                    ],
+                    "description": "string",
+                    "dhcp_servers": [
+                        "string"
+                        ],
+                    "dns_resolution_targets": {
+                        "targets": [
+                            {
+                                "hostname": "string",
+                                "ip_match": [
+                                    "string"
+                                ]
+                            }
+                        ]
+                    },
+                    "dns_servers": [
+                        "string"
+                        ],
+                    "enabled": true,
+                    "host_addresses": [
+                        "string"
+                        ],
+                    "https_reachable_hosts": {
+                        "hostnames": [
+                            "string"
+                        ]
+                    },
+                    "icmp_request_targets": {
+                        "targets": [
+                        "string"
+                        ]
+                    },
+                    "name": "string"
+                }
+        clone_id -- A network location ID from which to copy rules. If this is provided then all
+                    other keywords except `add_fw_rules` and `comment` are ignored. String.
+        comment -- Audit log comment for this action. String.
+        connection_types -- Connections available at the location. Dictionary.
+        default_gateways -- List of available default gateways. List of strings.
+        description -- Description of the location. String.
+        dhcp_servers -- List of available DHCP servers. List of strings.
+        dns_resolution_targets -- Dictionary containing a list of DNS resolution targets.
+        dns_servers -- List of available DNS servers. List of strings.
+        enabled -- Flag indicating if this location is enabled. Boolean.
+        host_addresses -- List of available host addresses. List of strings.
+        https_reachable_hosts -- Dictionary of hosts reachable via HTTPS at this location.
+        icmp_request_targets -- Dictionary of targets for ICMP monitoring requests.
+        name -- Name for this rule. String.
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/create-network-locations
+        """
+        if not body:
+            body = network_locations_create_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="create_network_locations",
+            keywords=kwargs,
+            body=body,
+            params=parameters
+            )
+
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def upsert_network_locations(self: object, body: dict = None, **kwargs) -> dict:
+        """Updates the network locations provided and returns the ID.
+
+        Keyword arguments:
+        body -- Full body payload in JSON format. Not required if other keywords are provided.
+                {
+                    "connection_types": {
+                        "wired": true,
+                        "wireless": {
+                        "enabled": true,
+                        "require_encryption": true,
+                        "ssids": [
+                            "string"
+                            ]
+                        }
+                    },
+                    "default_gateways": [
+                        "string"
+                    ],
+                    "description": "string",
+                    "dhcp_servers": [
+                        "string"
+                        ],
+                    "dns_resolution_targets": {
+                        "targets": [
+                            {
+                                "hostname": "string",
+                                "ip_match": [
+                                    "string"
+                                ]
+                            }
+                        ]
+                    },
+                    "dns_servers": [
+                        "string"
+                        ],
+                    "enabled": true,
+                    "host_addresses": [
+                        "string"
+                        ],
+                    "https_reachable_hosts": {
+                        "hostnames": [
+                            "string"
+                        ]
+                    },
+                    "icmp_request_targets": {
+                        "targets": [
+                        "string"
+                        ]
+                    },
+                    "name": "string",
+                    "id": "string",
+                    "modified_by": "string",
+                    "modified_on": "string"
+                }
+        comment -- Audit log comment for this action. String.
+        connection_types -- Connections available at the location. Dictionary.
+        default_gateways -- List of available default gateways. List of strings.
+        description -- Description of the location. String.
+        dhcp_servers -- List of available DHCP servers. List of strings.
+        dns_resolution_targets -- Dictionary containing a list of DNS resolution targets.
+        dns_servers -- List of available DNS servers. List of strings.
+        enabled -- Flag indicating if this location is enabled. Boolean.
+        host_addresses -- List of available host addresses. List of strings.
+        https_reachable_hosts -- Dictionary of hosts reachable via HTTPS at this location.
+        icmp_request_targets -- Dictionary of targets for ICMP monitoring requests.
+        id -- Network location ID to be updated. String.
+        modified_by -- User UUID that modified this location. String.
+        modified_on -- UTC formatted date string of the update.
+        name -- Name for this rule. String.
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PUT
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/upsert-network-locations
+        """
+        if not body:
+            body = network_locations_create_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="upsert_network_locations",
+            keywords=kwargs,
+            body=body
+            )
+
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def update_network_locations(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
+        """Create new network locations provided and return the ID.
+
+        Keyword arguments:
+        body -- Full body payload in JSON format. Not required if other keywords are provided.
+                {
+                    "connection_types": {
+                        "wired": true,
+                        "wireless": {
+                        "enabled": true,
+                        "require_encryption": true,
+                        "ssids": [
+                            "string"
+                            ]
+                        }
+                    },
+                    "default_gateways": [
+                        "string"
+                    ],
+                    "description": "string",
+                    "dhcp_servers": [
+                        "string"
+                        ],
+                    "dns_resolution_targets": {
+                        "targets": [
+                            {
+                                "hostname": "string",
+                                "ip_match": [
+                                    "string"
+                                ]
+                            }
+                        ]
+                    },
+                    "dns_servers": [
+                        "string"
+                        ],
+                    "enabled": true,
+                    "host_addresses": [
+                        "string"
+                        ],
+                    "https_reachable_hosts": {
+                        "hostnames": [
+                            "string"
+                        ]
+                    },
+                    "icmp_request_targets": {
+                        "targets": [
+                        "string"
+                        ]
+                    },
+                    "name": "string",
+                    "id": "string",
+                    "modified_by": "string",
+                    "modified_on": "string"
+                }
+        comment -- Audit log comment for this action. String.
+        connection_types -- Connections available at the location. Dictionary.
+        default_gateways -- List of available default gateways. List of strings.
+        description -- Description of the location. String.
+        dhcp_servers -- List of available DHCP servers. List of strings.
+        dns_resolution_targets -- Dictionary containing a list of DNS resolution targets.
+        dns_servers -- List of available DNS servers. List of strings.
+        enabled -- Flag indicating if this location is enabled. Boolean.
+        host_addresses -- List of available host addresses. List of strings.
+        https_reachable_hosts -- Dictionary of hosts reachable via HTTPS at this location.
+        icmp_request_targets -- Dictionary of targets for ICMP monitoring requests.
+        id -- Network location ID to be updated. String.
+        modified_by -- User UUID that modified this location. String.
+        modified_on -- UTC formatted date string of the update.
+        name -- Name for this rule. String.
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/update-network-locations
+        """
+        if not body:
+            body = network_locations_create_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="update_network_locations",
+            keywords=kwargs,
+            body=body,
+            params=parameters
+            )
+
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_network_locations(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> dict:
+        """Delete network location entities by ID.
+
+        Keyword arguments:
+        ids -- The IDs of the network location(s) to delete. String or list of strings.
+        parameters - full parameters payload, not required if `ids` keyword is provided.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/delete-network-locations
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="delete_network_locations",
+            params=handle_single_argument(args, parameters, "ids"),
+            keywords=kwargs
+            )
+
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_platforms(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get platforms by ID, e.g., windows or mac or droid.
 
@@ -472,7 +928,7 @@ class FirewallManagement(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_policy_container_v1(self: object,
-                                   body: dict,
+                                   body: dict = None,
                                    cs_username: str = None,  # pylint: disable=W0613  # deprecated
                                    **kwargs
                                    ) -> dict:
@@ -1197,6 +1653,41 @@ class FirewallManagement(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
+
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_network_locations(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Find all network location IDs matching the query with filter.
+
+        Keyword arguments:
+        after -- A pagination token used with the limit parameter to manage pagination
+                 of results. On your first request, don't provide an after token. On
+                 subsequent requests, provide the after token from the previous response
+                 to continue from that place in the results. String.
+        filter -- FQL query specifying the filter parameters. String.
+        limit -- The maximum number of rule IDs to return. Integer.
+        offset -- The integer offset to start retrieving records from. String.
+        parameters - full parameters payload, not required if using other keywords.
+        q -- Perform a generic substring search across all fields. String.
+        sort -- The property to sort by. FQL syntax. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-management/query-network-locations
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="query_network_locations",
+            keywords=kwargs,
+            params=parameters
+            )
+
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_platforms(self: object, parameters: dict = None, **kwargs) -> dict:
