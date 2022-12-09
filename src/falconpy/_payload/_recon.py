@@ -194,3 +194,28 @@ def recon_rule_preview_payload(passed_keywords: dict) -> dict:
         returned_payload["topic"] = passed_keywords.get("topic", None)
 
     return returned_payload
+
+
+def recon_export_job_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted export job creation payload.
+
+    [
+        {
+            "entity": "string",
+            "export_type": "string",
+            "filter": "string",
+            "human_readable": true,
+            "sort": "string"
+        }
+    ]
+    """
+    returned_payload = []
+    keys = ["entity", "export_type", "filter", "human_readable", "sort"]
+    _job = {}
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            _job[key] = passed_keywords.get(key)
+    if _job:
+        returned_payload.append(_job)
+
+    return returned_payload

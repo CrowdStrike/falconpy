@@ -22,6 +22,7 @@ class TestRecon:
         error_checks = True
         tests = {
             "aggregate_notifications": falcon.aggregate_notifications(body={}),
+            "aggregate_notifications_exposed": falcon.aggregate_notifications_exposed_data_records(body={}),
             "preview_rule": falcon.preview_rule(body={}),
             "preview_rule_jr": falcon.preview_rule(filter="something", topic="somethingElse"),
             "get_actions": falcon.get_actions(ids='12345678'),
@@ -52,7 +53,18 @@ class TestRecon:
             "get_notifications_detailed_translated": falcon.get_notifications_detailed_translated(ids="1234567"),
             "get_notfications_detailed": falcon.get_notifications_detailed(ids="1234567"),
             "get_notifications_translated": falcon.get_notifications_translated(ids="1234567"),
+            "get_notifications_exposed": falcon.get_notifications_exposed_data_records(ids="12345678"),
             "get_notifications": falcon.get_notifications(ids="12345678"),
+            "get_export_job_file": falcon.get_export_job_file_contents(ids="12345678"),
+            "get_export_job": falcon.get_export_jobs(ids="123456789"),
+            "delete_export_job": falcon.delete_export_jobs(ids="12345678"),
+            "create_export_job": falcon.create_export_jobs(
+                entity="string",
+                export_type="string",
+                filter="string",
+                human_readable=True,
+                sort="string"
+            ),
             "delete_notifications": falcon.delete_notifications(ids="1234567"),
             "get_rules": falcon.get_rules(ids="12345678"),
             "create_rules": falcon.create_rules(body={}),
@@ -80,12 +92,13 @@ class TestRecon:
                                                      topic="whatevers"
                                                      ),
             "query_actions": falcon.query_actions(),
+            "query_notifications_exposed": falcon.query_notifications_exposed_data_records(),
             "query_notifications": falcon.query_notifications(),
             "query_rules": falcon.query_rules()
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
-                # print(f"{key}: {tests[key]}")
+                print(f"{key}: {tests[key]}")
                 error_checks = False
 
         return error_checks
