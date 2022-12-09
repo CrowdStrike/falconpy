@@ -27,6 +27,7 @@ from .deprecated import _identity_protection_deprecated
 from .deprecated import _installation_tokens_deprecated
 from .deprecated import _ioc_deprecated
 from .deprecated import _iocs_deprecated
+from .deprecated import _ods_deprecated
 from .deprecated import _real_time_response_deprecated
 from .deprecated import _real_time_response_admin_deprecated
 from .deprecated import _report_executions_deprecated
@@ -63,6 +64,7 @@ from ._ml_exclusions import _ml_exclusions_endpoints
 from ._mobile_enrollment import _mobile_enrollment_endpoints
 from ._mssp import _mssp_endpoints
 from ._oauth2 import _oauth2_endpoints
+from ._ods import _ods_endpoints
 from ._overwatch_dashboard import _overwatch_dashboard_endpoints
 from ._prevention_policies import _prevention_policies_endpoints
 from ._quarantine import _quarantine_endpoints
@@ -115,6 +117,7 @@ api_endpoints.extend(_ml_exclusions_endpoints)
 api_endpoints.extend(_mobile_enrollment_endpoints)
 api_endpoints.extend(_mssp_endpoints)
 api_endpoints.extend(_oauth2_endpoints)
+api_endpoints.extend(_ods_endpoints)
 api_endpoints.extend(_overwatch_dashboard_endpoints)
 api_endpoints.extend(_prevention_policies_endpoints)
 api_endpoints.extend(_quarantine_endpoints)
@@ -145,6 +148,7 @@ deprecated_endpoints.extend(_identity_protection_deprecated)
 deprecated_endpoints.extend(_installation_tokens_deprecated)
 deprecated_endpoints.extend(_ioc_deprecated)
 deprecated_endpoints.extend(_iocs_deprecated)
+deprecated_endpoints.extend(_ods_deprecated)
 deprecated_endpoints.extend(_real_time_response_deprecated)
 deprecated_endpoints.extend(_real_time_response_admin_deprecated)
 deprecated_endpoints.extend(_report_executions_deprecated)
