@@ -592,12 +592,82 @@ class Intel(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_vulnerabilities(self: object, *args, body: dict = None, **kwargs) -> dict:
+        """Retrieve specific vulnerabilities using their indicator IDs.
+
+        Keyword arguments:
+        body -- full body payload, not required when ids keyword is provided.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- ID(s) of the indicator entities to retrieve. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetVulnerabilities
+        """
+        if not body:
+            body = generic_payload_list(submitted_arguments=args,
+                                        submitted_keywords=kwargs,
+                                        payload_value="ids"
+                                        )
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetVulnerabilities",
+            body=body,
+            body_validator={"ids": list} if self.validate_payloads else None,
+            body_required=["ids"] if self.validate_payloads else None
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_vulnerabilities(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for rule IDs that match provided filter criteria.
+
+        Keyword arguments:
+        filter -- FQL query specifying the filter parameters. String.
+        limit -- The maximum number of IDs to return. Integer.
+        offset -- The integer offset to start retrieving records from. Defaults to 0.
+        parameters - full parameters payload, not required if using other keywords.
+        q -- Match phrase_prefix query criteria; included fields:
+             _all (all filter string fields indexed).
+        sort -- The property to sort by. FQL syntax.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryVulnerabilities
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryVulnerabilities",
+            keywords=kwargs,
+            params=parameters
+            )
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
     QueryIntelActorEntities = query_actor_entities
     QueryIntelIndicatorEntities = query_indicator_entities
     QueryIntelReportEntities = query_report_entities
+    QueryVulnerabilities = query_vulnerabilities
+    GetVulnerabilities = get_vulnerabilities
     GetIntelActorEntities = get_actor_entities
     GetIntelIndicatorEntities = get_indicator_entities
     GetIntelReportPDF = get_report_pdf

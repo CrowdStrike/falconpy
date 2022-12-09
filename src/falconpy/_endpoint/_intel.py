@@ -380,6 +380,20 @@ _intel_endpoints = [
     ]
   ],
   [
+    "GetVulnerabilities",
+    "POST",
+    "/intel/entities/vulnerabilities/GET/v1",
+    "Get vulnerabilities",
+    "intel",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "QueryIntelActorIds",
     "GET",
     "/intel/queries/actors/v1",
@@ -602,6 +616,45 @@ _intel_endpoints = [
       {
         "type": "string",
         "description": "Perform a generic substring search across all fields.",
+        "name": "q",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "QueryVulnerabilities",
+    "GET",
+    "/intel/queries/vulnerabilities/v1",
+    "Get vulnerabilities IDs",
+    "intel",
+    [
+      {
+        "type": "string",
+        "description": "Starting index of result set from which to return IDs.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Number of IDs to return.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Order by fields.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL query specifying the filter parameters.",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Match phrase_prefix query criteria; included fields: _all (all filter string fields indexed).",
         "name": "q",
         "in": "query"
       }
