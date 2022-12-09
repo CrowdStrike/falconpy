@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=R0904  # Matching API operation counts
+# pylint: disable=C0302,R0904  # Matching API operation counts
 from ._util import force_default, handle_single_argument, process_service_request
 from ._payload import generic_payload_list, mssp_payload
 from ._service_class import ServiceClass
@@ -81,9 +81,47 @@ class FlightControl(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_children_v2(self: object, *args, body: dict = None, **kwargs) -> dict:
+        """Get link to child customer by child CID(s).
+
+        Keyword arguments:
+        body -- full body payload, not required when ids keyword is provided.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- ID(s) of the indicator entities to retrieve. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getChildrenV2
+        """
+        if not body:
+            body = generic_payload_list(submitted_arguments=args,
+                                        submitted_keywords=kwargs,
+                                        payload_value="ids"
+                                        )
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getChildrenV2",
+            body=body
+            )
+
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_cid_group_members_by(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_cid_group_members_by_v1(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get CID Group members by CID Group IDs.
+
+        ** DEPRECATED **
 
         Keyword arguments:
         cid_group_ids -- CID group IDs to search for. String or list of strings.
@@ -106,6 +144,37 @@ class FlightControl(ServiceClass):
             operation_id="getCIDGroupMembersBy",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "cid_group_ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_cid_group_members_by(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get CID Group members by CID Group IDs.
+
+        Keyword arguments:
+        ids -- CID group IDs to search for. String or list of strings.
+               The keyword `cid_group_ids` will also be accepted for this argument.
+        parameters -- full parameters payload, not required if `cid_group_ids` is provided
+                      as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getCIDGroupMembersByV2
+        """
+        if kwargs.get("cid_group_ids", None) and not kwargs.get("ids", None):
+            kwargs["ids"] = kwargs.get("cid_group_ids")
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getCIDGroupMembersByV2",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -191,8 +260,10 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_cid_group_by_id(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_cid_group_by_id_v1(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get CID Group(s) by ID(s).
+
+        ** DEPRECATED **
 
         Keyword arguments:
         cid_group_ids -- CID group IDs to search for. String or list of strings.
@@ -215,6 +286,37 @@ class FlightControl(ServiceClass):
             operation_id="getCIDGroupById",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "cid_group_ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_cid_group_by_id(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get CID Group(s) by ID(s).
+
+        Keyword arguments:
+        ids -- CID group IDs to search for. String or list of strings.
+               The keyword `cid_group_ids` will also be accepted for this argument.
+        parameters -- full parameters payload, not required if `cid_group_ids` is provided
+                      as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'cid_group_ids'. All others are ignored.
+
+        Returns: dict object containing API response
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getCIDGroupByIdV2
+        """
+        if kwargs.get("cid_group_ids", None) and not kwargs.get("ids", None):
+            kwargs["ids"] = kwargs.get("cid_group_ids")
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getCIDGroupByIdV2",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -450,12 +552,14 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_user_group_members_by_id(self: object,
+    def get_user_group_members_by_id_v1(self: object,
                                      *args,
                                      parameters: dict = None,
                                      **kwargs
                                      ) -> dict:
         """Get User Group members by User Group ID(s).
+
+        ** DEPRECATED **
 
         Keyword arguments:
         user_group_ids -- User group IDs to search for. String or list of strings.
@@ -478,6 +582,41 @@ class FlightControl(ServiceClass):
             operation_id="getUserGroupMembersByID",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "user_group_ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_user_group_members_by_id(self: object,
+                                     *args,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> dict:
+        """Get User Group members by User Group ID(s).
+
+        Keyword arguments:
+        ids -- User group IDs to search for. String or list of strings.
+               The keyword `user_group_ids` will also be accepted for this argument.
+        parameters -- full parameters payload, not required if `user_group_ids` is provided
+                      as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'user_group_ids'. All others are ignored.
+
+        Returns: dict object containing API response
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getUserGroupMembersByIDV2
+        """
+        if kwargs.get("user_group_ids", None) and not kwargs.get("ids", None):
+            kwargs["ids"] = kwargs.get("user_group_ids")
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getUserGroupMembersByIDV2",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -557,8 +696,10 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_user_groups_by_id(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_user_groups_by_id_v1(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get User Groups by ID(s).
+
+        ** DEPRECATED **
 
         Keyword arguments:
         user_group_ids -- User group IDs to search for. String or list of strings.
@@ -581,6 +722,37 @@ class FlightControl(ServiceClass):
             operation_id="getUserGroupsByID",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "user_group_ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_user_groups_by_id(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get User Groups by ID(s).
+
+        Keyword arguments:
+        ids -- User group IDs to search for. String or list of strings.
+               The keyword `user_group_ids` will also be accepted for this argument.
+        parameters -- full parameters payload, not required if `user_group_ids` is provided
+                      as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'user_group_ids'. All others are ignored.
+
+        Returns: dict object containing API response
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/getUserGroupsByIDV2
+        """
+        if kwargs.get("user_group_ids", None) and not kwargs.get("ids", None):
+            kwargs["ids"] = kwargs.get("user_group_ids")
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getUserGroupsByIDV2",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -882,9 +1054,13 @@ class FlightControl(ServiceClass):
     # backwards compatibility / ease of use purposes
     getChildren = get_children
     getCIDGroupMembersBy = get_cid_group_members_by
+    getCIDGroupMembersByV1 = get_cid_group_members_by_v1
+    getCIDGroupMembersByV2 = get_cid_group_members_by
     addCIDGroupMembers = add_cid_group_members
     deleteCIDGroupMembers = delete_cid_group_members
     getCIDGroupById = get_cid_group_by_id
+    getCIDGroupByIdV1 = get_cid_group_by_id_v1
+    getCIDGroupByIdV2 = get_cid_group_by_id
     createCIDGroups = create_cid_groups
     deleteCIDGroups = delete_cid_groups
     updateCIDGroups = update_cid_groups
@@ -893,9 +1069,13 @@ class FlightControl(ServiceClass):
     deletedRoles = delete_roles
     deleteRoles = delete_roles  # Typo fix
     getUserGroupMembersByID = get_user_group_members_by_id
+    getUserGroupMembersByIDV1 = get_user_group_members_by_id_v1
+    getUserGroupMembersByIDV2 = get_user_group_members_by_id
     addUserGroupMembers = add_user_group_members
     deleteUserGroupMembers = delete_user_group_members
     getUserGroupsByID = get_user_groups_by_id
+    getUserGroupsByIDV1 = get_user_groups_by_id_v1
+    getUserGroupsByIDV2 = get_user_groups_by_id
     createUserGroup = create_user_groups    # Typo fix
     createUserGroups = create_user_groups
     deleteUserGroups = delete_user_groups
