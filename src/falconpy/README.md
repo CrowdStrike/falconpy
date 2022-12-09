@@ -37,6 +37,7 @@ for every single operation available within that service collection.
 | `ml_exclusions.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions |
 | `mssp.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp |
 | `oauth2.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/oauth2 |
+| `ods.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods |
 | `overwatch_dashboard.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/overwatch-dashboard |
 | `prevention_policy.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/prevention-policies |
 | `quarantine.py` | https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quarantine |
