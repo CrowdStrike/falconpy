@@ -387,3 +387,92 @@ def firewall_filepattern_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key, None)
 
     return returned_payload
+
+
+def network_locations_metadata_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted network location metadata update payload.
+
+    {
+        "cid": "string",
+        "dns_resolution_targets_polling_interval": 0,
+        "https_reachable_hosts_polling_interval": 0,
+        "icmp_request_targets_polling_interval": 0,
+        "location_precedence": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["cid", "dns_resolution_targets_polling_interval", "location_precedence",
+            "https_reachable_hosts_polling_interval", "icmp_request_targets_polling_interval"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
+
+
+def network_locations_create_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted network location creation payload.
+
+    {
+        "connection_types": {
+            "wired": true,
+            "wireless": {
+            "enabled": true,
+            "require_encryption": true,
+            "ssids": [
+                "string"
+                ]
+            }
+        },
+        "default_gateways": [
+            "string"
+        ],
+        "description": "string",
+        "dhcp_servers": [
+            "string"
+            ],
+        "dns_resolution_targets": {
+            "targets": [
+                {
+                    "hostname": "string",
+                    "ip_match": [
+                        "string"
+                    ]
+                }
+            ]
+        },
+        "dns_servers": [
+            "string"
+            ],
+        "enabled": true,
+        "host_addresses": [
+            "string"
+            ],
+        "https_reachable_hosts": {
+            "hostnames": [
+                "string"
+            ]
+        },
+        "icmp_request_targets": {
+            "targets": [
+               "string"
+            ]
+        },
+        "name": "string",
+        "id": "string",
+        "modified_by": "string",
+        "modified_on": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["connection_types", "default_gateways", "description", "dhcp_servers", "id",
+            "dns_resolution_targets", "dns_servers", "enabled", "host_addresses", "modified_on",
+            "https_reachable_hosts", "icmp_request_targets", "name", "modified_by"
+            ]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key)
+
+    return returned_payload
