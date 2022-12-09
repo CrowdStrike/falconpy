@@ -182,6 +182,43 @@ _hosts_endpoints = [
     ]
   ],
   [
+    "entities_perform_action",
+    "POST",
+    "/devices/entities/group-actions/v1",
+    "Performs the specified action on the provided prevention policy IDs.",
+    "hosts",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The group ids to act on",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      },
+      {
+        "enum": [
+          "add_group_member",
+          "remove_all",
+          "remove_group_member"
+        ],
+        "type": "string",
+        "description": "The action to perform.",
+        "name": "action_name",
+        "in": "query",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetOnlineState_V1",
     "GET",
     "/devices/entities/online-state/v1",
