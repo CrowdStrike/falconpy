@@ -1,3 +1,76 @@
+# Version 1.2.6
+## Added features and functionality
++ Added: Nine new operations added to the __FirewallManagement__ Service Class. (`get_network_location_details`, `update_network_locations_metadata`, `update_network_locations_precedence`, `get_network_locations`, `create_network_locations`, `update_network_locations`, `upsert_network_locations`, `delete_network_locations`, `query_network_locations`)
+    - `firewall_management.py`
+    - `_endpoint/_firewall_management.py`
+    > Adds two new payload handlers.
+    - `_payload/_firewall.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_firewall_management.py`
+
++ Added: Five new operations added to the Flight Control (__MSSP__) Service Class. (`getChildrenV2`, `getCIDGroupMembersByV2`, `getCIDGroupByIdV2`, `getUserGroupMembersByIDV2`, `getUserGroupsByIDV2`)
+    - `mssp.py`
+    - `_endpoint/_mssp.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_mssp.py`
+
++ Added: One new operation added to the __Hosts__ Service Class. (`entities_perform_action`)
+    - `hosts.py`
+    - `_endpoint/_hosts.py`
+    > One new payload handler was added.
+    - `_payload/_generic.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_hosts.py`
+
++ Added: One new operation added to the __InstallationTokens__ Service Class. (`customer_settings_update`)
+    - `installation_tokens.py`
+    - `_endpoint/_installation_tokens.py`
+    > One new payload handler was added.
+    - `_payload/_generic.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_installation_tokens.py`
+
++ Added: Two new operations added to the __Intel__ Service Class. (`GetVulnerabilities`, `QueryVulnerabilities`)
+    - `intel.py`
+    - `_endpoint/_intel.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_intel.py`
+
++ Added: New __ODS__ Service Class (On Demand Scan) with fifteen new operations. (`aggregate_scans`, `aggregate_scheduled_scans`, `get_malicious_files_by_id`, `cancel_scans`, `get_scan_host_metadata_by_ids`, `scans_report`, `get_scans_by_scan_ids`, `scans_report`, `get_scheduled_scans_by_scan_ids`, `schedule_scan`, `delete_scheduled_scans`, `query_malicious_files`, `query_scan_host_metadata`, `query_scans`, `query_scheduled_scans`)
+    - `__init__.py`
+    - `ods.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_ods.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_ods.py`
+    > Two new payload handlers were added.
+    - `_payload/_ods.py`
+    > New unit testing implemented to confirm functionality and complete code coverage.
+    - `tests/test_ods.py`
+
++ Added: Seven new operations added to the __Recon__ Service Class. (`AggregateNotificationsExposedDataRecordsV1`, `GetFileContentForExportJobsV1`, `GetExportJobsV1`, `CreateExportJobsV1`, `DeleteExportJobsV1`, `GetNotificationsExposedDataRecordsV1`, `QueryNotificationsExposedDataRecordsV1`)
+    - `recon.py`
+    - `_endpoint/_recon.py`
+    > One new payload handler was added.
+    - `_payload/_recon.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_recon.py`
+
++ Added: Seven new operations added to the __SampleUploads__ Service Class. (`ArchiveListV1`, `ArchiveGetV1`, `ArchiveDeleteV1`, `ArchiveUploadV2`, `ExtractionListV1`, `ExtractionGetV1`, `ExtractionCreateV1`)
+    - `sample_uploads.py`
+    - `_endpoint/_sample_uploads.py`
+    > One new payload handler was added.
+    - `_payload/_sample_uploads.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_sample_uploads.py`
+    - `tests/testfile.zip`
+
+## Other
++ Changed: Due to updates in the latest Ubuntu version used in GitHub actions, unit testing for Python 3.6 has been split off to a stand alone workflow.
++ Added: Python 3.11 support.
+    - `setup.py`
+---
+
 # Version 1.2.5
 ## Issues resolved
 + Fixed: Invalid `body` payload when leveraging the Uber Class to call the `RTR_DeleteSession` operation. Closes #839.
