@@ -382,6 +382,11 @@ def list_elements(perform_dump: bool,
                   max_rows: int
                   ):  # pylint: disable=R0913
     """Look up all elements of the specified type and display their details."""
+    def error_display(err_branch):
+        for err in err_branch:
+            ecode = err["code"]
+            emsg = err["message"]
+            print(f"[{ecode}] {emsg}")
     id_lookup = falcon_detects.query_detects(filter=search_filter, limit=max_rows)
     if id_lookup["status_code"] == 200:
         items = id_lookup["body"]["resources"]
@@ -397,15 +402,14 @@ def list_elements(perform_dump: bool,
                                 reversing=sort_reverse
                                 )
             else:
-                errors = item_details["body"]["errors"]
-                for err in errors:
-                    ecode = err["code"]
-                    emsg = err["message"]
-                    print(f"[{ecode}] {emsg}")
+                error_display(item_details["body"]["errors"])
         else:
             raise SystemExit("No detections available to retrieve.")
     else:
-        raise SystemExit("Unable to retrieve list of detection IDs for the filter specified.")
+        if "errors" in id_lookup["body"]:
+            error_display(id_lookup["body"]["errors"])
+        else:
+            raise SystemExit("Unable to retrieve list of detection IDs for the filter specified.")
 
 
 def display_detail(detection: str):
