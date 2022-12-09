@@ -35,10 +35,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302,R0904
 from ._util import process_service_request, force_default, handle_single_argument
-from ._payload import recon_rules_payload, recon_notifications_payload
-from ._payload import recon_action_payload, recon_action_update_payload
-from ._payload import recon_rule_preview_payload, aggregate_payload
+from ._payload import (
+    recon_rules_payload,
+    recon_notifications_payload,
+    recon_action_payload,
+    recon_action_update_payload,
+    recon_rule_preview_payload,
+    aggregate_payload,
+    recon_export_job_payload
+    )
 from ._service_class import ServiceClass
 from ._endpoint._recon import _recon_endpoints as Endpoints
 
@@ -55,6 +62,77 @@ class Recon(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
+    @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_notifications_exposed_data_records(self: object, body: list = None, **kwargs) -> dict:
+        """Get notification aggregates as specified via JSON in request body.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "field": "string",
+                        "filter": "string",
+                        "interval": "string",
+                        "min_doc_count": 0,
+                        "missing": "string",
+                        "name": "string",
+                        "q": "string",
+                        "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                        ],
+                        "size": 0,
+                        "sort": "string",
+                        "sub_aggregates": [
+                        null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
+        date_ranges -- List of dictionaries.
+        field -- String.
+        filter -- FQL syntax. String.
+        interval -- String.
+        min_doc_count -- Minimum number of documents required to match. Integer.
+        missing -- String.
+        name -- Scan name. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/AggregateNotificationsExposedDataRecordsV1
+        """
+        if not body:
+            # Issue 664: Recon aggregate requires a list.
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="AggregateNotificationsExposedDataRecordsV1",
+            body=body
+            )
 
     @force_default(defaults=["body"], default_types=["list"])
     def aggregate_notifications(self: object, body: list = None, **kwargs) -> dict:
@@ -312,6 +390,132 @@ class Recon(ServiceClass):
             body_required=["id"] if self.validate_payloads else None
             )
 
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_export_job_file_contents(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Download the file associated with a job ID.
+
+        Keyword arguments:
+        ids -- Export job ID to retrieve details for. String.
+        parameters - full parameters payload, not required if id is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: binary object or dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetFileContentForExportJobsV1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetFileContentForExportJobsV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_export_jobs(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get the status of export jobs based on their IDs.
+
+        Export jobs can be launched by calling CreateExportJobsV1.
+        When a job is complete, use the job ID to download the file(s) associated with it using GetFileContentForExportJobsV1.
+
+        Keyword arguments:
+        ids -- Export job IDs. String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetExportJobsV1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetExportJobsV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+
+    @force_default(defaults=["body"], default_types=["list"])
+    def create_export_jobs(self: object, body: list = None, **kwargs) -> dict:
+        """Launch asynchronous export job. Use the job ID to poll the status of the job using GetExportJobsV1.
+
+        Keyword arguments:
+        body -- List of dictionaries.
+                [
+                    {
+                        "entity": "string",
+                        "export_type": "string",
+                        "filter": "string",
+                        "human_readable": true,
+                        "sort": "string"
+                    }
+                ]
+        entity -- String. Only launches a single job when used.
+        export_type -- Type of export. String. Only launches a single job when used.
+        filter -- FQL filter. String. Only launches a single job when used.
+        human_readable -- Should the content be in human readable format. String.
+                          Only launches a single job when used.
+        sort -- FQL formatted sort string. Only launches a single job when used.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateExportJobsV1
+        """
+        if not body:
+            body = recon_export_job_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateExportJobsV1",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_export_jobs(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Delete export jobs based on IDs.
+
+        Keyword arguments:
+        ids -- List of export job IDs to delete. String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/DeleteExportJobsV1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteExportJobsV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_notifications_detailed_translated(self: object,
                                               *args,
@@ -371,6 +575,32 @@ class Recon(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetNotificationsDetailedV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_notifications_exposed_data_records(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get monitoring rules rules by provided IDs.
+
+        Keyword arguments:
+        ids -- List of notification IDs to retrieve details for. String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/GetNotificationsExposedDataRecordsV1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetNotificationsExposedDataRecordsV1",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
@@ -679,6 +909,66 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_notifications_exposed_data_records(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Query notifications exposed data records based on provided criteria.
+
+        Use the IDs from this response to get the notification
+        entities with get_notifications_exposed_data_records.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  Available filters
+                  id                  phone_number
+                  cid                 company
+                  user_uuid           job_position
+                  created_date        file.name
+                  exposure_date       file.complete_data_set
+                  rule.id             file.download_urls
+                  rule.name           location.postal_code
+                  rule.topic          location.city
+                  notification_id     location.state
+                  source_category     location.federal_district
+                  site                location.federal_admin_region
+                  site_id             location.country_code
+                  author              social.twitter_id
+                  author_id           social.facebook_id
+                  user_id             social.vk_id
+                  user_name           social.vk_token
+                  impacted_url        social.aim_id
+                  impacted_domain     social.icq_id
+                  impacted_ip         social.msn_id
+                  email               social.instagram_id
+                  email_domain        social.skype_id
+                  hash_type           financial.credit_card
+                  display_name        financial.bank_account
+                  full_name           financial.crypto_currency_addresses
+                  user_ip             login_id
+                  _all
+        limit -- The maximum number of IDs to return. [integer, 1-500]
+        offset -- The first item to return, where 0 is the latest item. (Integer)
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        q -- Free text search across all indexed fields.
+        sort -- The property to sort by. FQL syntax. (e.g. created_date|asc, updated_date|desc)
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/QueryNotificationsExposedDataRecordsV1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryNotificationsExposedDataRecordsV1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def query_notifications(self: object, parameters: dict = None, **kwargs) -> dict:
         """Query notifications based on provided criteria.
 
@@ -760,14 +1050,20 @@ class Recon(ServiceClass):
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
+    AggregateNotificationsExposedDataRecordsV1 = aggregate_notifications_exposed_data_records
     AggregateNotificationsV1 = aggregate_notifications
     PreviewRuleV1 = preview_rule
     GetActionsV1 = get_actions
     CreateActionsV1 = create_actions
     DeleteActionV1 = delete_action
     UpdateActionV1 = update_action
+    GetFileContentForExportJobsV1 = get_export_job_file_contents
+    GetExportJobsV1 = get_export_jobs
+    CreateExportJobsV1 = create_export_jobs
+    DeleteExportJobsV1 = delete_export_jobs
     GetNotificationsDetailedTranslatedV1 = get_notifications_detailed_translated
     GetNotificationsDetailedV1 = get_notifications_detailed
+    GetNotificationsExposedDataRecordsV1 = get_notifications_exposed_data_records
     GetNotificationsTranslatedV1 = get_notifications_translated
     GetNotificationsV1 = get_notifications
     DeleteNotificationsV1 = delete_notifications
@@ -777,5 +1073,6 @@ class Recon(ServiceClass):
     DeleteRulesV1 = delete_rules
     UpdateRulesV1 = update_rules
     QueryActionsV1 = query_actions
+    QueryNotificationsExposedDataRecordsV1 = query_notifications_exposed_data_records
     QueryNotificationsV1 = query_notifications
     QueryRulesV1 = query_rules
