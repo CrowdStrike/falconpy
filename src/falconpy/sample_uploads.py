@@ -36,7 +36,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import json
-from ._util import force_default, process_service_request, handle_single_argument
+from ._util import (
+    force_default,
+    process_service_request,
+    handle_single_argument,
+    generate_error_result
+    )
+from ._payload import extraction_payload
 from ._service_class import ServiceClass
 from ._endpoint._sample_uploads import _sample_uploads_endpoints as Endpoints
 
@@ -53,6 +59,265 @@ class SampleUploads(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_archive(self: object, *args, parameters: dict = None, **kwargs) -> object:
+        """Retrieve the archive files in chunks.
+
+        Keyword arguments:
+        id -- The SHA256 of the archive. String.
+        limit -- Maximum number of files to retrieve. Integer. Default: 100.
+        offset -- Starting offset from which to retrieve files.
+        parameters -- Full parameters payload, not required if id is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ArchiveListV1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ArchiveListV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_archive(self: object, *args, parameters: dict = None, **kwargs) -> object:
+        """Retrieves the archives upload operation statuses.
+
+        Status `done` means that archive was processed successfully.
+        Status `error` means that archive was not processed successfully.
+
+        Keyword arguments:
+        id -- The SHA256 of the archive. String.
+        include_files -- Flag indicating if processed archives should also be returned. Boolean.
+        parameters -- Full parameters payload, not required if id is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ArchiveGetV1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ArchiveGetV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_archive(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Remove an archive that was uploaded previously.
+
+        Keyword arguments:
+        id -- The archive SHA256. String.
+        parameters -- full parameters payload, not required if id is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ArchiveDeleteV1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ArchiveDeleteV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def upload_archive(self: object,
+                       name: str = None,
+                       file_data: dict = None,
+                       body: dict = None,
+                       parameters: dict = None,
+                       **kwargs
+                       ) -> dict:
+        """Uploads an archive and extracts files list from it.
+
+        This operation is asynchronous. Use ArchiveGetV1 to check the status.
+        After uploading, use ExtractionCreateV1 to copy the file to internal storage
+        making it available for content analysis.
+
+        Keyword arguments:
+        comment -- A descriptive comment to identify the file for other users. String.
+        file_data -- Content of the uploaded archive in binary format.
+                     'archive' and 'file' are also accepted as this parameter.
+        name -- Name of the archive. String. Required.
+        file_type -- Archive file format. String. "zip", "7zip". Defaults to "zip".
+        is_confidential -- Defines the visibility of this file in Falcon MalQuery, either
+                           via the  API or the Falcon console.
+                           True = File is only shown to users within your customer account.
+                           False = File can be seen by other CrowdStrike customers.
+                           Defaults to True.
+        parameters -- full parameters payload, not required if using other keywords.
+        password -- Archive password. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ArchiveUploadV2
+        """
+        # Check for file name
+        if not name:
+            return generate_error_result("You must provide an archive filename.", code=400)
+        # Try to find the binary object they provided us
+        if not file_data:
+            file_data = kwargs.get("file", None)
+            if not file_data:
+                file_data = kwargs.get("archive", None)
+
+        # Determine our content type
+        file_type = str(kwargs.get("file_type", "zip")).lower()
+        content_map = {
+            "zip": "application/zip",
+            "7zip": "application/x-7z-compressed"
+        }
+
+        content_type = content_map.get(file_type, content_map.get("zip"))
+        # Create a multipart form payload for our upload file
+        file_tuple = [("file", (name, file_data, content_type))]
+        file_extended = {"name": name}
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ArchiveUploadV2",
+            body=body,
+            files=file_tuple,
+            data=file_extended,
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_extraction(self: object, *args, parameters: dict = None, **kwargs) -> object:
+        """Retrieves the files extractions in chunks.
+
+        Status `done` means that all files were processed successfully.
+        Status `error` means that at least one of the files could not be processed.
+
+        Keyword arguments:
+        id -- The extraction operation ID. String.
+        limit -- Maximum number of file extractions to retrieve. Integer. Default: 0.
+        offset -- Starting offset from where to retrieve extractions.
+        parameters -- Full parameters payload, not required if id is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ExtractionListV1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExtractionListV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_extraction(self: object, *args, parameters: dict = None, **kwargs) -> object:
+        """Retrieves the files extraction operation statuses.
+
+        Status `done` means that all files were processed successfully.
+        Status `error` means that at least one of the files could not be processed.
+
+        Keyword arguments:
+        id -- The extraction operation ID. String.
+        include_files -- Flag indicating if processed archives should also be returned. Boolean.
+        parameters -- Full parameters payload, not required if id is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ExtractionGetV1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExtractionGetV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_extraction(self: object,
+                          file_data: object = None,
+                          body: dict = None,
+                          **kwargs
+                          ) -> dict:
+        """Extracts files from an uploaded archive and copies them to internal storage for analysis.
+
+        Keyword arguments:
+        body -- Full body payload in JSON format. Not required if using other keywords. Dictionary.
+                {
+                    "extract_all": true,
+                    "files": [
+                        {
+                            "comment": "string",
+                            "is_confidential": true,
+                            "name": "string"
+                        }
+                    ],
+                    "sha256": "string"
+                }
+        extract_all -- Flag indicating if all files should be extracted. Boolean.
+        files -- List of files to be extracted from the archive. List of dictionaries.
+        sha256 -- SHA256 Archive ID of the archive. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ExtractionCreateV1
+        """
+        if not body:
+            body = extraction_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExtractionCreateV1",
+            body=body,
+            data=file_data,
+            keywords=kwargs
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_sample(self: object, *args, parameters: dict = None, **kwargs) -> object:
@@ -186,6 +451,13 @@ class SampleUploads(ServiceClass):
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
+    ArchiveListV1 = list_archive
+    ArchiveGetV1 = get_archive
+    ArchiveDeleteV1 = delete_archive
+    ArchiveUploadV2 = upload_archive
+    ExtractionListV1 = list_extraction
+    ExtractionGetV1 = get_extraction
+    ExtractionCreateV1 = create_extraction
     GetSampleV3 = get_sample
     UploadSampleV3 = upload_sample
     DeleteSampleV3 = delete_sample

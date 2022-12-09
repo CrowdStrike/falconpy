@@ -38,6 +38,196 @@ For more information, please refer to <https://unlicense.org>
 
 _sample_uploads_endpoints = [
   [
+    "ArchiveListV1",
+    "GET",
+    "/archives/entities/archive-files/v1",
+    "Retrieves the archives files in chunks.",
+    "sample_uploads",
+    [
+      {
+        "type": "string",
+        "description": "The archive SHA256.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "Max number of files to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Offset from where to get files.",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ArchiveGetV1",
+    "GET",
+    "/archives/entities/archives/v1",
+    "Retrieves the archives upload operation statuses. Status `done` means that archive was processed successfully. "
+    "Status `error` means that archive was not processed successfully.",
+    "sample_uploads",
+    [
+      {
+        "type": "string",
+        "description": "The archive SHA256.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "If `true` includes processed archive files in response.",
+        "name": "include_files",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ArchiveDeleteV1",
+    "DELETE",
+    "/archives/entities/archives/v1",
+    "Delete an archive that was uploaded previously",
+    "sample_uploads",
+    [
+      {
+        "type": "string",
+        "description": "The archive SHA256.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ArchiveUploadV2",
+    "POST",
+    "/archives/entities/archives/v2",
+    "Uploads an archive and extracts files list from it. Operation is asynchronous use `/archives/entities/archives/v1` "
+    "to check the status. After uploading, use `/archives/entities/extractions/v1` to copy the file to internal storage "
+    "making it available for content analysis.",
+    "sample_uploads",
+    [
+      {
+        "description": "Source of archive.",
+        "name": "source",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "type": "file",
+        "description": "Content of the uploaded archive. For example, use `--form file=@$FILE_PATH` when using cURL.",
+        "name": "file",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Archive password. For example, use `--form password=` when using cURL.",
+        "name": "password",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "Name of the archive. For example, use `--form name=` when using cURL.",
+        "name": "name",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "type": "boolean",
+        "default": True,
+        "description": "Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon console. "
+        "For example, use `--form is_confidential=` when using cURL.\n\n- `true`: File is only shown to users within "
+        "your customer account\n- `false`: File can be seen by other CrowdStrike customers \n\nDefault: `true`.",
+        "name": "is_confidential",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "A descriptive comment to identify the file for other users. "
+        "For example, use `--form comment=` when using cURL.",
+        "name": "comment",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
+    "ExtractionListV1",
+    "GET",
+    "/archives/entities/extraction-files/v1",
+    "Retrieves the files extractions in chunks. Status `done` means that all files were processed successfully. "
+    "Status `error` means that at least one of the file could not be processed.",
+    "sample_uploads",
+    [
+      {
+        "type": "string",
+        "description": "The extraction operation ID.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "integer",
+        "default": 0,
+        "description": "Max number of file extractions to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Offset from where to get file extractions.",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ExtractionGetV1",
+    "GET",
+    "/archives/entities/extractions/v1",
+    "Retrieves the files extraction operation statuses. Status `done` means that all files were processed successfully. "
+    "Status `error` means that at least one of the file could not be processed.",
+    "sample_uploads",
+    [
+      {
+        "type": "string",
+        "description": "The extraction operation ID.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "If `true` includes processed archive files in response.",
+        "name": "include_files",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ExtractionCreateV1",
+    "POST",
+    "/archives/entities/extractions/v1",
+    "Extracts files from an uploaded archive and copies them to internal storage making it available for content analysis.",
+    "sample_uploads",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetSampleV3",
     "GET",
     "/samples/entities/samples/v3",
