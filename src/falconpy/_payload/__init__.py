@@ -23,7 +23,9 @@ from ._generic import (
     generic_payload_list,
     aggregate_payload,
     exclusion_payload,
-    installation_token_payload
+    installation_token_payload,
+    simple_action_parameter,
+    token_settings_payload
     )
 from ._host_group import host_group_create_payload, host_group_update_payload
 from ._recon import (
@@ -31,7 +33,8 @@ from ._recon import (
     recon_action_update_payload,
     recon_rules_payload,
     recon_notifications_payload,
-    recon_rule_preview_payload
+    recon_rule_preview_payload,
+    recon_export_job_payload
     )
 from ._malquery import malquery_exact_search_payload, malquery_hunt_payload, malquery_fuzzy_payload
 from ._container import image_payload
@@ -55,11 +58,15 @@ from ._firewall import (
     firewall_rule_group_validation_payload,
     firewall_rule_group_payload,
     firewall_rule_group_update_payload,
-    firewall_filepattern_payload
+    firewall_filepattern_payload,
+    network_locations_metadata_payload,
+    network_locations_create_payload
     )
 from ._reports import reports_payload
 from ._message_center import activity_payload, case_payload
 from ._alerts import update_alerts_payload
+from ._sample_uploads import extraction_payload
+from ._ods import scheduled_scan_payload, scans_report_payload
 
 
 __all__ = [
@@ -76,5 +83,8 @@ __all__ = [
     "firewall_rule_group_payload", "firewall_rule_group_update_payload", "reports_payload",
     "activity_payload", "case_payload", "incident_action_parameters", "update_alerts_payload",
     "firewall_rule_group_validation_payload", "firewall_filepattern_payload",
-    "aws_d4c_registration_payload", "image_payload", "indicator_report_payload"
+    "aws_d4c_registration_payload", "image_payload", "indicator_report_payload",
+    "extraction_payload", "simple_action_parameter", "network_locations_metadata_payload",
+    "network_locations_create_payload", "scheduled_scan_payload", "scans_report_payload",
+    "token_settings_payload", "recon_export_job_payload"
 ]
