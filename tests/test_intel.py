@@ -34,7 +34,9 @@ class TestIntel:
             "query_intel_actor_ids": falcon.QueryIntelActorIds(),
             "query_intel_indicator_ids": falcon.QueryIntelIndicatorIds(limit=5),
             "query_intel_report_ids": falcon.QueryIntelReportIds(limit=1),
-            "query_intel_rule_ids": falcon.QueryIntelRuleIds(parameters={"type": "common-event-format"})
+            "query_intel_rule_ids": falcon.QueryIntelRuleIds(parameters={"type": "common-event-format"}),
+            "get_vulnerabilities": falcon.get_vulnerabilities(ids="12345678"),
+            "query_vulnerabilities": falcon.query_vulnerabilities()
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
