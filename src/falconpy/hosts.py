@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from ._util import generate_error_result, force_default, args_to_params
 from ._util import process_service_request, handle_single_argument
-from ._payload import generic_payload_list
+from ._payload import generic_payload_list, simple_action_parameter
 from ._service_class import ServiceClass
 from ._endpoint._hosts import _hosts_endpoints as Endpoints
 
@@ -112,6 +112,60 @@ class Hosts(ServiceClass):
                 )
         else:
             returned = generate_error_result("Invalid value specified for action_name parameter.")
+
+        return returned
+
+    @force_default(defaults=["parameters", "body"], default_types=["dict"])
+    def perform_group_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
+        """Take various actions on the provided prevention policy IDs.
+
+        Keyword arguments:
+        action_name -- action to perform, 'add_group_member', 'remove_all',
+                       'remove_group_member'. String.
+        action_parameters -- Action parameter payload. List of dictionaries.
+        body -- full body payload, not required if ids are provided as keyword.
+                You must use body if you are going to specify action_parameters.
+                {
+                    "action_parameters": [
+                        {
+                        "name": "string",
+                        "value": "string"
+                        }
+                    ]
+                }
+        ids -- Group ID(s) to perform actions against. String or list of strings.
+        parameters - full parameters payload, not required if action_name is provide as a keyword.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/PerformActionV2
+        """
+        if not body:
+            body = simple_action_parameter(passed_keywords=kwargs)
+
+        _allowed_actions = ['add_group_member', 'remove_all', 'remove_group_member']
+        operation_id = "entities_perform_action"
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
+        action_name = parameter_payload.get("action_name", "Not Specified")
+        # Only process allowed actions
+        if action_name.lower() in _allowed_actions:
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id=operation_id,
+                body=body,
+                keywords=kwargs,
+                params=parameters
+                )
+        else:
+            returned = generate_error_result("Invalid value specified for action_name parameter.",
+                                             code=400
+                                             )
 
         return returned
 
@@ -549,6 +603,8 @@ class Hosts(ServiceClass):
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
     PerformActionV2 = perform_action
+    entities_perform_action = perform_group_action
+    PerformGroupAction = perform_group_action
     UpdateDeviceTags = update_device_tags
     GetDeviceDetails = get_device_details  # v1.2 - Now redirects to PostDeviceDetailsV2
     GetDeviceDetailsV1 = get_device_details_v1

@@ -146,12 +146,24 @@ class TestHosts:
             "query_hidden_devices": falcon.QueryHiddenDevices()["status_code"],
             "query_devices_by_filter_scroll": falcon.QueryDevicesByFilterScroll()["status_code"],
             "query_devices_by_filter": falcon.QueryDevicesByFilter()["status_code"],
-            "get_online_state": falcon.get_online_state("12345678")["status_code"]
+            "get_online_state": falcon.get_online_state("12345678")["status_code"],
+            "entities_perform_action": falcon.perform_group_action(action_name="add_group_member",
+                                                                   action_parameters={"name": "Whatever", "value": "Thing"},
+                                                                   ids="ID1,ID2,ID3",
+                                                                   name="bob",
+                                                                   value="larry"
+                                                                   )["status_code"],
+            "entities_perform_action_also": falcon.perform_group_action(action_name="add_bob",
+                                                                   action_parameters={"name": "Whatever", "value": "Thing"},
+                                                                   ids="ID1,ID2,ID3",
+                                                                   name="bob",
+                                                                   value="larry"
+                                                                   )["status_code"]
         }
         for key in tests:
-            if tests[key] != 500:
+            if tests[key] not in [400, 500]:
                 error_checks = False
-            # print(f"{key} test returned a {tests[key]} status code")
+                # print(f"{key} test returned a {tests[key]} status code")
         return error_checks
 
     def test_query_hidden_devices(self):
