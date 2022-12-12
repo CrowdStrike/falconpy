@@ -233,14 +233,14 @@ elif CMD in "download":
                 plat_spec = sensor["platform"]
                 if plat_spec:
                     sha_to_retrieve = version_detail[plat_spec][full_name][NMVER]["sha256"]
+                    dl_desc = version_detail[plat_spec][full_name][NMVER]['description']
+                    dl_ver = version_detail[plat_spec][full_name][NMVER]['version']
                     if not FILENAME:
                         fname = version_detail[plat_spec][full_name][NMVER]["name"]
                         if sensor["os"] in ["Windows", "macOS"]:
-                            fname = f"{fname[:-4]}_{sensor['version']}{fname[len(fname)-4:]}"
+                            fname = f"{fname[:-4]}_{dl_ver}{fname[len(fname)-4:]}"
                     else:
                         fname=FILENAME
-                    dl_desc = version_detail[plat_spec][full_name][NMVER]['description']
-                    dl_ver = version_detail[plat_spec][full_name][NMVER]['version']
                     print(f"Downloading {dl_desc} version {dl_ver}")
                     download = falcon.command(
                         action="DownloadSensorInstallerById",
