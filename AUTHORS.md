@@ -80,6 +80,7 @@ This has been a critical element in the development of the FalconPy project.
 + `@kmccb`
 + Carlos Matos, `@carlosmmatos`
 + `@ffalor`
++ `@jmillerca`
 
 
 ## Sponsors
