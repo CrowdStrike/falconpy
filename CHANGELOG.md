@@ -1,3 +1,23 @@
+# Version 1.2.7
+## Added features and functionality
++ Added: One operation added to the __SampleUploads__ Service Class, `ArchiveUploadV1`.
+    - `sample_uploads.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_sample_uploads.py`
++ Added: Four new operations to the __KubernetesProtection__ Service Class, `ListAzureAccounts`, `CreateAzureSubscription`, `DeleteAzureSubscription`, and `PatchAzureServicePrincipal`.
+    - `kubernetes_protection.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_kubernetes_protection.py`
+
+## Issues resolved
++ Fixed: Missing redirection endpoints for legacy operations within the __MSSP__ Service Class. (`getCIDGroupMembersByV1`, `getCIDGroupByIdV1`, `getUserGroupMembersByIDV1` and `getUserGroupsByIDV1`) Calls to the generic operation ID (ex: `getUserGroupsByID`) are redirected to the v2 equivalent. Closes #859.
+    - `mssp.py`
+
++ Fixed: Added missing redirection for `update_policy_container_v2` operation to the __FirewallManagement__ Service Class. Closes #856.
+    - `firewall_management.py`
+
+---
+
 # Version 1.2.6
 ## Added features and functionality
 + Added: Nine new operations added to the __FirewallManagement__ Service Class. (`get_network_location_details`, `update_network_locations_metadata`, `update_network_locations_precedence`, `get_network_locations`, `create_network_locations`, `update_network_locations`, `upsert_network_locations`, `delete_network_locations`, `query_network_locations`)
