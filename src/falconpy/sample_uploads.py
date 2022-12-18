@@ -145,6 +145,56 @@ class SampleUploads(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def upload_archive_v1(self: object,
+                          body: dict = None,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> dict:
+        """Upload an archive and extract the files list from it.
+
+        This operation is asynchronous. Use ArchiveGetV1 to check the status.
+        After uploading, use ExtractionCreateV1 to copy the file to internal storage
+        making it available for content analysis.
+
+        ** DEPRECATED ** - Leverage the ArchiveUploadV2 operation instead.
+
+        Keyword arguments:
+        body -- Content of the uploaded archive in binary format. 7zip / zip only.
+        comment -- A descriptive comment to identify the file for other users. String.
+        name -- Name of the archive. String.
+        file_type -- Archive file format. String. "zip", "7zip". Defaults to "zip".
+        is_confidential -- Defines the visibility of this file in Falcon MalQuery, either
+                           via the  API or the Falcon console.
+                           True = File is only shown to users within your customer account.
+                           False = File can be seen by other CrowdStrike customers.
+                           Defaults to True.
+        parameters -- full parameters payload, not required if using other keywords.
+        password -- Archive password. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ArchiveUploadV1
+        """
+        # Try to find the binary object they provided us
+        if not body:
+            return generate_error_result("You must provide an archive to upload.", code=400)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ArchiveUploadV1",
+            data=body,
+            body=None,
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def upload_archive(self: object,
                        name: str = None,
                        file_data: dict = None,
@@ -454,7 +504,10 @@ class SampleUploads(ServiceClass):
     ArchiveListV1 = list_archive
     ArchiveGetV1 = get_archive
     ArchiveDeleteV1 = delete_archive
+    ArchiveUploadV1 = upload_archive_v1
+    archive_upload_v1 = upload_archive_v1
     ArchiveUploadV2 = upload_archive
+    archive_upload = upload_archive
     ExtractionListV1 = list_extraction
     ExtractionGetV1 = get_extraction
     ExtractionCreateV1 = create_extraction
