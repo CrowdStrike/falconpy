@@ -141,7 +141,7 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="getCIDGroupMembersBy",
+            operation_id="getCIDGroupMembersByV1",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "cid_group_ids")
             )
@@ -172,7 +172,7 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="getCIDGroupMembersByV2",
+            operation_id="getCIDGroupMembersBy",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
@@ -283,7 +283,7 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="getCIDGroupById",
+            operation_id="getCIDGroupByIdV1",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "cid_group_ids")
             )
@@ -314,7 +314,7 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="getCIDGroupByIdV2",
+            operation_id="getCIDGroupById",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
@@ -579,7 +579,7 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="getUserGroupMembersByID",
+            operation_id="getUserGroupMembersByIDV1",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "user_group_ids")
             )
@@ -614,7 +614,7 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="getUserGroupMembersByIDV2",
+            operation_id="getUserGroupMembersByID",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
@@ -719,7 +719,7 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="getUserGroupsByID",
+            operation_id="getUserGroupsByIDV1",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "user_group_ids")
             )
@@ -750,7 +750,7 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="getUserGroupsByIDV2",
+            operation_id="getUserGroupsByID",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )

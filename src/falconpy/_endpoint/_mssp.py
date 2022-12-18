@@ -72,7 +72,7 @@ _mssp_endpoints = [
     ]
   ],
   [
-    "getCIDGroupMembersBy",
+    "getCIDGroupMembersByV1",
     "GET",
     "/mssp/entities/cid-group-members/v1",
     "Get CID group members by CID group ID.",
@@ -120,6 +120,26 @@ _mssp_endpoints = [
     ]
   ],
   [
+    "getCIDGroupMembersBy",
+    "GET",
+    "/mssp/entities/cid-group-members/v2",
+    "Get CID group members by CID Group ID.",
+    "mssp",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "CID group IDs search for",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "getCIDGroupMembersByV2",
     "GET",
     "/mssp/entities/cid-group-members/v2",
@@ -140,7 +160,7 @@ _mssp_endpoints = [
     ]
   ],
   [
-    "getCIDGroupById",
+    "getCIDGroupByIdV1",
     "GET",
     "/mssp/entities/cid-groups/v1",
     "Get CID groups by ID.",
@@ -203,6 +223,26 @@ _mssp_endpoints = [
         "collectionFormat": "multi",
         "description": "CID group ids to delete",
         "name": "cid_group_ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "getCIDGroupById",
+    "GET",
+    "/mssp/entities/cid-groups/v2",
+    "Get CID Groups by ID.",
+    "mssp",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "CID group IDs to search for",
+        "name": "ids",
         "in": "query",
         "required": True
       }
@@ -280,7 +320,7 @@ _mssp_endpoints = [
     ]
   ],
   [
-    "getUserGroupMembersByID",
+    "getUserGroupMembersByIDV1",
     "GET",
     "/mssp/entities/user-group-members/v1",
     "Get user group members by user group ID.",
@@ -328,6 +368,26 @@ _mssp_endpoints = [
     ]
   ],
   [
+    "getUserGroupMembersByID",
+    "GET",
+    "/mssp/entities/user-group-members/v2",
+    "Get user group members by user group ID.",
+    "mssp",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "User group IDs to search for",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "getUserGroupMembersByIDV2",
     "GET",
     "/mssp/entities/user-group-members/v2",
@@ -348,7 +408,7 @@ _mssp_endpoints = [
     ]
   ],
   [
-    "getUserGroupsByID",
+    "getUserGroupsByIDV1",
     "GET",
     "/mssp/entities/user-groups/v1",
     "Get user groups by ID.",
@@ -411,6 +471,26 @@ _mssp_endpoints = [
         "collectionFormat": "multi",
         "description": "User group IDs to delete",
         "name": "user_group_ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "getUserGroupsByID",
+    "GET",
+    "/mssp/entities/user-groups/v2",
+    "Get user groups by ID.",
+    "mssp",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "User group IDs to search for",
+        "name": "ids",
         "in": "query",
         "required": True
       }
