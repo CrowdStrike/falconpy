@@ -1834,6 +1834,8 @@ class FirewallManagement(ServiceClass):
             params=parameters
             )
 
+    update_policy_container_v2 = update_policy_container
+
 
 # The legacy name for this class does not conform to PascalCase / PEP8
 # It is defined here for backwards compatibility purposes only.
