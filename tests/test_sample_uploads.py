@@ -106,8 +106,15 @@ class TestSampleUploads:
             "ArchiveListV1": falcon.ArchiveListV1(id="12345678"),
             "ArchiveGetV1": falcon.ArchiveGetV1(id="123456789"),
             "ArchiveDeleteV1": falcon.ArchiveDeleteV1(id="123456789"),
+            "ArchiveUploadV1": falcon.ArchiveUploadV1(name="testfile.zip",
+                                                      body=PAYLOAD,
+                                                      source="workstation",
+                                                      comment="FalconPy testing",
+                                                      file_type="zip"
+                                                      ),
+            "ArchiveUploadV1b": falcon.ArchiveUploadV1(name="FalconPy testing", body=None),
             "ArchiveUploadV2": falcon.ArchiveUploadV2(name="testfile.zip", archive=PAYLOAD, source="workstation", comment="FalconPy testing"),
-            "ArchiveUploadV2": falcon.ArchiveUploadV2(file=PAYLOAD, source="workstation", comment="FalconPy testing"),
+            "ArchiveUploadV2b": falcon.ArchiveUploadV2(file=PAYLOAD, source="workstation", comment="FalconPy testing"),
             "ExtractionListV1": falcon.ExtractionListV1(id="12345779"),
             "ExtractionGetV1": falcon.ExtractionGetV1(ids="12345678"),
             "ExtractionCreateV1": falcon.ExtractionCreateV1(extract_all=True, files=[{
@@ -119,7 +126,7 @@ class TestSampleUploads:
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 # print(key)
-                print(tests[key])
+                # print(tests[key])
                 error_checks = False
 
             # print(f"{key} operation returned a {tests[key]} status code")

@@ -91,6 +91,53 @@ _sample_uploads_endpoints = [
     ]
   ],
   [
+    "ArchiveUploadV1",
+    "POST",
+    "/archives/entities/archives/v1",
+    "Uploads an archive and extracts files list from it. Operation is asynchronous use the ListArchivesV1 "
+    "operation to check the status. After uploading, use the ExtractionCreateV1 operation to copy the file "
+    "to internal storage making it available for content analysis. "
+    "This method is deprecated in favor of ArchiveUploadV2.",
+    "sample_uploads",
+    [
+      {
+        "description": "Content of the uploaded archive in binary format. "
+        "Max file size: 100 MB.\n\nAccepted file formats:\n\n- Portable executables: `.zip`, `.7z`.",
+        "name": "body",
+        "in": "body",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Name of the archive.",
+        "name": "name",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Archive password.",
+        "name": "password",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": True,
+        "description": "Defines visibility of this file, either via the API or the Falcon console. "
+        "- `true`: File is only shown to users within your customer account "
+        "- `false`: File can be seen by other CrowdStrike customers.  Default: `true`.",
+        "name": "is_confidential",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "A descriptive comment to identify the file for other users.",
+        "name": "comment",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "ArchiveDeleteV1",
     "DELETE",
     "/archives/entities/archives/v1",
