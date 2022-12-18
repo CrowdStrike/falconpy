@@ -177,6 +177,105 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_azure_accounts(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Provide a list of registered Azure subscriptions.
+
+        Keyword arguments:
+        ids -- Azure tenant IDs. String or list of strings.
+        is_horizon_acct -- Filter by whether an account originates from Horizon. Boolean.
+        subscription_id -- Azure subscription IDs. String or list of strings.
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        status -- Filter by account status. (`operational` or `provisional`) String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ListAzureAccounts
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ListAzureAccounts",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_azure_subscription(self: object, body: dict = None, **kwargs) -> dict:
+        """Create a new Azure subscription.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "subscription_id": "string",
+                            "tenant_id": "string"
+                        }
+                    ]
+                }
+        subscription_id -- Azure subscription ID. String.
+        tenant_id -- Tenant ID. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/CreateAzureSubscription
+        """
+        if not body:
+            item = {}
+            if kwargs.get("subscription_id", None):
+                item["subscription_id"] = kwargs.get("subscription_id", None)
+            if kwargs.get("tenant_id", None):
+                item["tenant_id"] = kwargs.get("tenant_id", None)
+
+            body["resources"] = [item]
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateAzureSubscription",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_azure_subscription(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Delete an Azure subscription.
+
+        Keyword arguments:
+        ids -- Azure subscription IDs. String or list of strings.
+        parameters - full parameters payload, not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'ids'. All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/DeleteAzureSubscription
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteAzureSubscription",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_locations(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Provide the cloud locations acknowledged by the Kubernetes Protection service.
 
@@ -318,6 +417,32 @@ class KubernetesProtection(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def update_azure_service_principal(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Add the client ID for a given tenant ID to the subscription.
+
+        Keyword arguments:
+        id -- Azure tentant ID. String. Required.
+        client_id -- Azure client ID. String. Required.
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/PatchAzureServicePrincipal
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="PatchAzureServicePrincipal",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
@@ -325,12 +450,17 @@ class KubernetesProtection(ServiceClass):
     CreateAWSAccount = create_aws_account
     DeleteAWSAccountsMixin0 = delete_aws_accounts
     UpdateAWSAccount = update_aws_account
+    ListAzureAccounts = list_azure_accounts
+    CreateAzureSubscription = create_azure_subscription
+    DeleteAzureSubscription = delete_azure_subscription
     GetLocations = get_locations
     GetHelmValuesYaml = get_helm_values_yaml
     regenerate_api_key = regenerate
     RegenerateAPIKey = regenerate
     GetClusters = get_clusters
     TriggerScan = trigger_scan
+    PatchAzureServicePrincipal = update_azure_service_principal
+    patch_azure_service_principal = update_azure_service_principal
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8

@@ -148,6 +148,105 @@ _kubernetes_protection_endpoints = [
     ]
   ],
   [
+    "ListAzureAccounts",
+    "GET",
+    "/kubernetes-protection/entities/accounts/azure/v1",
+    "Provides the azure subscriptions registered to Kubernetes Protection",
+    "kubernetes_protection",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Azure Tenant IDs",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Azure Subscription IDs",
+        "name": "subscription_id",
+        "in": "query"
+      },
+      {
+        "pattern": "^(provisioned|operational)$",
+        "enum": [
+          "operational",
+          "provisioned"
+        ],
+        "type": "string",
+        "description": "Filter by account status",
+        "name": "status",
+        "in": "query"
+      },
+      {
+        "pattern": "^(true|false)$",
+        "enum": [
+          "false",
+          "true"
+        ],
+        "type": "string",
+        "description": "Filter by whether an account originates from Horizon or not",
+        "name": "is_horizon_acct",
+        "in": "query"
+      },
+      {
+        "maximum": 1000,
+        "minimum": 0,
+        "type": "integer",
+        "description": "Limit returned accounts",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "integer",
+        "description": "Offset returned accounts",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateAzureSubscription",
+    "POST",
+    "/kubernetes-protection/entities/accounts/azure/v1",
+    "Creates a new Azure Subscription in our system",
+    "kubernetes_protection",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeleteAzureSubscription",
+    "DELETE",
+    "/kubernetes-protection/entities/accounts/azure/v1",
+    "Deletes a new Azure Subscription in our system",
+    "kubernetes_protection",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Azure Subscription IDs",
+        "name": "ids",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "GetLocations",
     "GET",
     "/kubernetes-protection/entities/cloud-locations/v1",
@@ -276,6 +375,35 @@ _kubernetes_protection_endpoints = [
         "default": "dry-run",
         "description": "Scan Type to do",
         "name": "scan_type",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "PatchAzureServicePrincipal",
+    "PATCH",
+    "/kubernetes-protection/entities/service-principal/azure/v1",
+    "Adds the client ID for the given tenant ID to our system",
+    "kubernetes_protection",
+    [
+      {
+        "maxLength": 36,
+        "minLength": 36,
+        "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$",
+        "type": "string",
+        "description": "Azure Tenant ID",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "maxLength": 36,
+        "minLength": 36,
+        "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$",
+        "type": "string",
+        "description": "Azure Client ID",
+        "name": "client_id",
         "in": "query",
         "required": True
       }
