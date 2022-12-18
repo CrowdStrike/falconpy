@@ -24,11 +24,19 @@ class TestKubeProtect:
             "CreateAWSAccount": falcon.create_aws_account(account_id="12345678", region="us-east-1"),
             "DeleteAWSAccountsMixin0": falcon.delete_aws_accounts(ids='12345678'),  # 403
             "UpdateAWSAccount": falcon.update_aws_account(ids='12345678'),  # 400
+            "ListAzureAccounts": falcon.list_azure_accounts(ids="12345678"),
+            "CreateAzureSubscription": falcon.create_azure_subscription(subscription_id="whatever",
+                                                                        tenant_id="whatever"
+                                                                        ),
+            "DeleteAzureSubscription": falcon.delete_azure_subscription(ids="12345678"),
             "GetLocations": falcon.get_locations(),
             "GetHelmValuesYaml": falcon.get_helm_values_yaml(cluster_name='Harold'),  # 403
             "RegenerateAPIKey": falcon.regenerate(),  # Occasionally 500
             "GetClusters": falcon.get_clusters(),
             "TriggerScan": falcon.trigger_scan(scan_type='dry-run'),  # 403
+            "PatchAzureSubscription": falcon.patch_azure_service_principal(subscription_id="whatever",
+                                                                           client_id="whatever"
+                                                                           )
         }
 
         for key in tests:
