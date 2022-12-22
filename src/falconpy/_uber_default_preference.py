@@ -41,7 +41,8 @@ PREFER_NONETYPE = [
     "RTR_DeleteSession"
 ]
 PREFER_IDS_IN_BODY = [
-    "GetDeviceDetails", "PostDeviceDetailsV2"
+    "GetDeviceDetails", "PostDeviceDetailsV2", "GetVulnerabilities", "GetIntelIndicatorEntities",
+    "getChildrenV2", "cancel-scans", "GetDetectSummaries"
 ]
 MOCK_OPERATIONS = [
     "GetImageAssessmentReport", "DeleteImageDetails", "ImageMatchesPolicy"
