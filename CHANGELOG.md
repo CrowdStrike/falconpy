@@ -1,3 +1,11 @@
+# Version 1.2.8
+## Issues resolved
++ Fixed: Add missing operation IDs to `PREFER_IDS_IN_BODY` constant to trigger Uber Class body payload abstraction for the `ids` keyword. Closes #864.
+    - `_uber_default_preference.py`
+    - Thanks to @tsullivan06 for identifying this issue!
+
+---
+
 # Version 1.2.7
 ## Added features and functionality
 + Added: One operation added to the __SampleUploads__ Service Class, `ArchiveUploadV1`.
