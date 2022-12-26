@@ -163,6 +163,8 @@ def service_request(caller: object = None, **kwargs) -> object:  # May return di
                         caller.headers['Authorization'] = f"Bearer {auth_response['body']['access_token']}"
                     else:
                         caller.headers['Authorization'] = "Bearer "
+                else:
+                    caller.headers['Authorization'] = f"Bearer {caller.auth_object.token_value}"
         except AttributeError:
             pass
 
