@@ -137,7 +137,7 @@ class TestSampleUploads:
         """Pytest harness hook"""
         assert self.sample_upload_download_delete("file_data") is True
 
-    @pytest.mark.skipif(falcon.base_url contains "laggar" , reason="US-GOV-1 testing disabled")
+    @pytest.mark.skipif("laggar" in falcon.base_url, reason="US-GOV-1 testing disabled")
     def test_all_functionality_expanded_result(self):
         """Pytest harness hook"""
         assert self.sample_upload_download_delete("file_data", expanded_result=True) is True
@@ -150,7 +150,7 @@ class TestSampleUploads:
         """Pytest harness hook"""
         assert self.sample_upload_download_delete("upfile") is True
 
-    @pytest.mark.skipif(falcon.base_url contains "laggar" , reason="US-GOV-1 testing disabled")
+    @pytest.mark.skipif("laggar" in falcon.base_url, reason="US-GOV-1 testing disabled")
     def test_errors(self):
         """Pytest harness hook"""
         assert self.sample_errors() is True
