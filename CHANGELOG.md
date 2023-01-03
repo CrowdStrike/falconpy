@@ -1,3 +1,11 @@
+# Version 1.2.9
+## Issues resolved
++ Fixed: Authentication object synchronization issue for certain scenarios. Relates to #829.
+    - `_util.py`
+    - Thanks go out to @davidt99 for contributing this fix!
+
+---
+
 # Version 1.2.8
 ## Issues resolved
 + Fixed: Add missing operation IDs to `PREFER_IDS_IN_BODY` constant to trigger Uber Class body payload abstraction for the `ids` keyword. Closes #864.
