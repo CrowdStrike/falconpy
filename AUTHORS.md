@@ -81,6 +81,7 @@ This has been a critical element in the development of the FalconPy project.
 + Carlos Matos, `@carlosmmatos`
 + `@ffalor`
 + `@jmillerca`
++ `@davidt99`
 
 
 ## Sponsors
