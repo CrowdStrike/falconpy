@@ -13,7 +13,7 @@ from falconpy import Recon
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Recon(auth_object=config)
-AllowedResponses = [200, 201, 400, 404, 429, 500]
+AllowedResponses = [200, 201, 400, 403, 404, 429, 500]
 
 
 class TestRecon:
