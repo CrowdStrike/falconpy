@@ -284,6 +284,7 @@ class TestUber:
     def test_QueryAWSAccountsForIDs(self):
         assert self.uberCCAWS_QueryAWSAccountsForIDs() is True
 
+    @pytest.mark.skipif("laggar" in falcon.base_url, reason="US-GOV-1 testing disabled")
     def test_UploadDownload(self):
         assert self.uberCCAWS_TestUploadDownload() is True
 
