@@ -3,6 +3,7 @@ test_tailored_intelligence.py - This class tests the TailoredIntelligence servic
 """
 import os
 import sys
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -39,6 +40,9 @@ class TestTailoredIntelligence:
 
         return error_checks
 
+    @pytest.mark.skipif(falcon.base_url.lower() != "https://api.crowdstrike.com",
+                        reason="US-1 unit testing only"
+                        )
     def test_all_code_paths(self):
         """Pytest harness hook"""
         assert self.run_tests() is True
