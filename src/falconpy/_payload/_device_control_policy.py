@@ -82,7 +82,7 @@ def device_policy_payload(passed_keywords: dict) -> dict:
     returned_payload = {}
     resources = []
     item = {}
-    keys = ["clone_id", "description", "name", "platform_name"]
+    keys = ["clone_id", "description", "name", "platform_name", "id"]
     for key in keys:
         if passed_keywords.get(key, None):
             item[key] = passed_keywords.get(key, None)
