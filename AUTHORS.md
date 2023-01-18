@@ -82,6 +82,7 @@ This has been a critical element in the development of the FalconPy project.
 + `@ffalor`
 + `@jmillerca`
 + `@davidt99`
++ `@CommonVulnerability`
 
 
 ## Sponsors
