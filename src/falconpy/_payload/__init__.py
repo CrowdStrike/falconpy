@@ -49,7 +49,7 @@ from ._cloud_connect_aws import aws_registration_payload
 from ._ioc import indicator_payload, indicator_update_payload, indicator_report_payload
 from ._d4c_registration import azure_registration_payload, aws_d4c_registration_payload
 from ._cspm_registration import cspm_registration_payload, cspm_policy_payload, cspm_scan_payload
-from ._device_control_policy import device_policy_payload
+from ._device_control_policy import device_policy_payload, default_device_policy_config_payload
 from ._falconx import falconx_payload
 from ._mssp import mssp_payload
 from ._firewall import (
@@ -86,5 +86,5 @@ __all__ = [
     "aws_d4c_registration_payload", "image_payload", "indicator_report_payload",
     "extraction_payload", "simple_action_parameter", "network_locations_metadata_payload",
     "network_locations_create_payload", "scheduled_scan_payload", "scans_report_payload",
-    "token_settings_payload", "recon_export_job_payload"
+    "token_settings_payload", "recon_export_job_payload", "default_device_policy_config_payload"
 ]
