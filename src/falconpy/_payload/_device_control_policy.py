@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 
 def device_policy_payload(passed_keywords: dict) -> dict:
-    """Create a properly formatted prevention policy payload.
+    """Create a properly formatted device control policy payload.
 
     Supports create and update operations. Single policy only.
     {
@@ -93,5 +93,50 @@ def device_policy_payload(passed_keywords: dict) -> dict:
 
     resources.append(item)
     returned_payload["resources"] = resources
+
+    return returned_payload
+
+
+def default_device_policy_config_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted device control policy default configuration payload.
+
+    {
+        "custom_notifications": {
+            "blocked_notification": {
+                "custom_message": "string",
+                "use_custom": boolean
+            },
+            "restricted_notification": {
+                "custom_message": "string",
+                "use_custom": boolean
+            }
+        }
+    }
+    """
+    returned_payload = {}
+    custom_notifications = {}
+    blocked_notification = {}
+    restricted_notification = {}
+
+    # Blocked notifications
+    if passed_keywords.get("blocked_custom_message", None):
+        blocked_notification["custom_message"] = passed_keywords.get("blocked_custom_message", None)
+        blocked_notification["use_custom"] = True
+        custom_notifications["blocked_notification"] = blocked_notification
+
+    # Restricted notifications
+    if passed_keywords.get("restricted_custom_message", None):
+        restricted_notification["custom_message"] = passed_keywords.get("restricted_custom_message", None)
+        restricted_notification["use_custom"] = True
+        custom_notifications["restricted_notification"] = restricted_notification
+
+    # Passing the entire dictionary for either type will override other provided keywords
+    keys = ["blocked_notification", "restricted_notification"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            custom_notifications[key] = passed_keywords.get(key, None)
+
+    if custom_notifications:
+        returned_payload["custom_notifications"] = custom_notifications
 
     return returned_payload
