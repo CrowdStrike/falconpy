@@ -54,13 +54,23 @@ class TestDeviceControlPolicy:
                                                                                  settings={"classes": []}
                                                                                  ),
             "query_device_control_policy_members": falcon.queryDeviceControlPolicyMembers(),
-            "query_device_control_policies": falcon.queryDeviceControlPolicies()
+            "query_device_control_policies": falcon.queryDeviceControlPolicies(),
+            "get_default_device_control_policies": falcon.get_default_policies(),
+            "update_default_device_control_policies": falcon.update_default_policies(blocked_custom_message="Test blocked notification",
+                                                                                     blocked_notification={"custom_message": "Test blocked",
+                                                                                                           "use_custom": True
+                                                                                                           },
+                                                                                     restricted_custom_message="Test restricted notification",
+                                                                                     restricted_notification={"custom_message": "Test restricted",
+                                                                                                              "use_custom": True
+                                                                                                              }
+                                                                                     )
         }
         for key in tests:
             if tests[key]["status_code"] != 500:
                 error_checks = False
 
-            # print(f"{key} operation returned a {tests[key]} status code")
+           # print(f"{key} operation returned a {tests[key]} status code")
 
         return error_checks
 
