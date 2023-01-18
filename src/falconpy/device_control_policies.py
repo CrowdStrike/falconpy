@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from ._util import generate_error_result, force_default, args_to_params
 from ._util import process_service_request, handle_single_argument
-from ._payload import generic_payload_list, device_policy_payload
+from ._payload import generic_payload_list, device_policy_payload, default_device_policy_config_payload
 from ._service_class import ServiceClass
 from ._endpoint._device_control_policies import _device_control_policies_endpoints as Endpoints
 
@@ -127,6 +127,86 @@ class DeviceControlPolicies(ServiceClass):
             operation_id="queryCombinedDeviceControlPolicies",
             keywords=kwargs,
             params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_default_policies(self: object) -> dict:
+        """Retrieve the configuration for a Default Device Control Policy.
+
+        Keyword arguments:
+        This method does not accept keyword arguments.
+
+        Arguments: This method does not accept arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                    /device-control-policies/getDefaultDeviceControlPolicies
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getDefaultDeviceControlPolicies"
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_default_policies(self: object, body: dict = None, **kwargs) -> dict:
+        """Update Device Control Policies by specifying the ID of the policy and details to update.
+
+        Keyword arguments:
+        blocked_notification -- dictionary containing the custom message and enablement status
+                                for the blocked notification. Dictionary.
+                                {
+                                    "custom_message": "string",
+                                    "use_custom": true
+                                }
+        blocked_custom_message -- Message to use for blocked notifications. Using this keyword will
+                                  automatically generate the necessary blocked_notification dictionary.
+                                  String.
+        body -- full body payload, not required if using other keywords.
+                {
+                    "custom_notifications": {
+                        "blocked_notification": {
+                            "custom_message": "string",
+                            "use_custom": true
+                        },
+                        "restricted_notification": {
+                            "custom_message": "string",
+                            "use_custom": true
+                        }
+                    }
+                }
+        restricted_custom_message -- message to use for restricted notifications. Using this keyword will
+                                  automatically generate the necessary restricted_notification dictionary.
+                                  String.
+        restricted_notification -- dictionary containing the custom message and enablement status
+                                   for the restricted notification. Dictionary.
+                                   {
+                                       "custom_message": "string",
+                                       "use_custom": true
+                                   }
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                    /device-control-policies/updateDefaultDeviceControlPolicies
+        """
+        if not body:
+            body = default_device_policy_config_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateDefaultDeviceControlPolicies",
+            body=body
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
@@ -512,6 +592,8 @@ class DeviceControlPolicies(ServiceClass):
     # backwards compatibility / ease of use purposes
     queryCombinedDeviceControlPolicyMembers = query_combined_policy_members
     queryCombinedDeviceControlPolicies = query_combined_policies
+    getDefaultDeviceControlPolicies = get_default_policies
+    updateDefaultDeviceControlPolicies = update_default_policies
     performDeviceControlPoliciesAction = perform_action
     setDeviceControlPoliciesPrecedence = set_precedence
     getDeviceControlPolicies = get_policies

@@ -136,6 +136,28 @@ _device_control_policies_endpoints = [
     ]
   ],
   [
+    "getDefaultDeviceControlPolicies",
+    "GET",
+    "/policy/entities/default-device-control/v1",
+    "Retrieve the configuration for a Default Device Control Policy",
+    "device_control_policies",
+    []
+  ],
+  [
+    "updateDefaultDeviceControlPolicies",
+    "PATCH",
+    "/policy/entities/default-device-control/v1",
+    "Update the configuration for a Default Device Control Policy",
+    "device_control_policies",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "performDeviceControlPoliciesAction",
     "POST",
     "/policy/entities/device-control-actions/v1",
