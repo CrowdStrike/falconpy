@@ -120,20 +120,6 @@ _ods_endpoints = [
     ]
   ],
   [
-    "scans_report",
-    "POST",
-    "/ods/entities/scans-reports/v1",
-    "Launch a scans report creation job",
-    "ods",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "get_scans_by_scan_ids",
     "GET",
     "/ods/entities/scans/v1",

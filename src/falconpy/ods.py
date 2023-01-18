@@ -282,47 +282,48 @@ class ODS(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def scans_report(self: object, body: dict = None, **kwargs) -> dict:
-        """Launch a scans report creation job.
+    # This operation is no longer available
+    # @force_default(defaults=["body"], default_types=["dict"])
+    # def scans_report(self: object, body: dict = None, **kwargs) -> dict:
+    #     """Launch a scans report creation job.
 
-        Keyword arguments:
-        body -- full body payload, not required if ids is provided as a keyword.
-                {
-                    "is_schedule": true,
-                    "report_format": "string",
-                    "search": {
-                        "filter": "string",
-                        "sort": "string"
-                    }
-                }
-        is_schedule -- Flag indicating if this report is scheduled. Boolean.
-        filter -- FQL filter to filter the report. String. Overrides the value within
-                  the search dictionary if provided. String.
-        report_format -- Format for the report. String.
-        search -- Filter the report results. Dictionary.
-        sort -- FQL sort string to use within the report. Overrides the value within
-                the search dictionary if provided. String.
+    #     Keyword arguments:
+    #     body -- full body payload, not required if ids is provided as a keyword.
+    #             {
+    #                 "is_schedule": true,
+    #                 "report_format": "string",
+    #                 "search": {
+    #                     "filter": "string",
+    #                     "sort": "string"
+    #                 }
+    #             }
+    #     is_schedule -- Flag indicating if this report is scheduled. Boolean.
+    #     filter -- FQL filter to filter the report. String. Overrides the value within
+    #               the search dictionary if provided. String.
+    #     report_format -- Format for the report. String.
+    #     search -- Filter the report results. Dictionary.
+    #     sort -- FQL sort string to use within the report. Overrides the value within
+    #             the search dictionary if provided. String.
 
-        This method only supports keywords for providing arguments.
+    #     This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
+    #     Returns: dict object containing API response.
 
-        HTTP Method: POST
+    #     HTTP Method: POST
 
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/scans-report
-        """
-        if not body:
-            body = scans_report_payload(passed_keywords=kwargs)
+    #     Swagger URL
+    #     https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/scans-report
+    #     """
+    #     if not body:
+    #         body = scans_report_payload(passed_keywords=kwargs)
 
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="scans_report",
-            keywords=kwargs,
-            body=body
-            )
+    #     return process_service_request(
+    #         calling_object=self,
+    #         endpoints=Endpoints,
+    #         operation_id="scans_report",
+    #         keywords=kwargs,
+    #         body=body
+    #         )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_scans(self: object, *args, parameters: dict = None, **kwargs) -> dict:
