@@ -35,6 +35,9 @@ class TestIntel:
             "query_intel_indicator_ids": falcon.QueryIntelIndicatorIds(limit=5),
             "query_intel_report_ids": falcon.QueryIntelReportIds(limit=1),
             "query_intel_rule_ids": falcon.QueryIntelRuleIds(parameters={"type": "common-event-format"}),
+            "query_mitre_attacks": falcon.QueryMitreAttacks("fancy-bear"),
+            "mitre_attacks": falcon.PostMitreAttacks(["fancy-bear", "slippy-spider"]),
+            "get_mitre_report": falcon.GetMitreReport(actor_id="fancy-bear", format="JSON")
             # "get_vulnerabilities": falcon.get_vulnerabilities(ids="12345678"),
             # "query_vulnerabilities": falcon.query_vulnerabilities()
         }
@@ -45,7 +48,8 @@ class TestIntel:
             tests["query_vulnerabilities"] = falcon.query_vulnerabilities()
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
-                # print(tests[key])    
+                print(key)
+                print(tests[key])    
                 error_checks = False
 
             # print(f"{key} operation returned a {tests[key]} status code")
