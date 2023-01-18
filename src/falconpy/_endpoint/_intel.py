@@ -254,6 +254,43 @@ _intel_endpoints = [
     ]
   ],
   [
+    "GetMitreReport",
+    "GET",
+    "/intel/entities/mitre-reports/v1",
+    "Export Mitre ATT&CK information for a given actor.",
+    "intel",
+    [
+      {
+        "type": "string",
+        "description": "Actor ID(derived from the actor's name)",
+        "name": "actor_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Supported report formats: CSV or JSON",
+        "name": "format",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "PostMitreAttacks",
+    "POST",
+    "/intel/entities/mitre/v1",
+    "Retrieves report and observable IDs associated with the given actor and attacks",
+    "intel",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetIntelReportPDF",
     "GET",
     "/intel/entities/report-files/v1",
@@ -489,6 +526,22 @@ _intel_endpoints = [
         "description": "If true, include related indicators in the response. Defaults to true.",
         "name": "include_relations",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "QueryMitreAttacks",
+    "GET",
+    "/intel/queries/mitre/v1",
+    "Gets MITRE tactics and techniques for the given actor",
+    "intel",
+    [
+      {
+        "type": "string",
+        "description": "The actor ID(derived from the actor's name) for which to retrieve a list of attacks.",
+        "name": "id",
+        "in": "query",
+        "required": True
       }
     ]
   ],

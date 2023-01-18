@@ -273,6 +273,70 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_mitre_report(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Export Mitre ATT&CK information for a given actor.
+
+        Keyword arguments:
+        actor_id -- Actor ID, derived from the actor name. String.
+        format -- Report format. Accepted options: 'CSV' or 'JSON'. String
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetMitreReport
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetMitreReport",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def mitre_attacks(self: object, *args, body: dict = None, **kwargs) -> dict:
+        """Retrieve reports and observable IDs associated with the given actor and attacks.
+
+        Keyword arguments:
+        body -- full body payload, not required when ids keyword is provided.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- ID(s) of the indicator entities to retrieve. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/PostMitreAttacks
+        """
+        if not body:
+            body = generic_payload_list(submitted_arguments=args,
+                                        submitted_keywords=kwargs,
+                                        payload_value="ids"
+                                        )
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="PostMitreAttacks",
+            body=body,
+            body_validator={"ids": list} if self.validate_payloads else None,
+            body_required=["ids"] if self.validate_payloads else None
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_report_pdf(self: object, *args, parameters: dict = None, **kwargs) -> object:
         """Return a Report PDF attachment.
 
@@ -505,6 +569,32 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_mitre_attacks(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get MITRE tactics and techniques for the given actor.
+
+        Keyword arguments:
+        id -- Actor ID, derived from the actor name. (Example: fancy-bear) String.
+        parameters - full parameters payload, not required if using `id` keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryMitreAttacks
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryMitreAttacks",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def query_report_ids(self: object, parameters: dict = None, **kwargs) -> dict:
         """Get report IDs that match provided FQL filters.
 
@@ -670,11 +760,14 @@ class Intel(ServiceClass):
     GetVulnerabilities = get_vulnerabilities
     GetIntelActorEntities = get_actor_entities
     GetIntelIndicatorEntities = get_indicator_entities
+    GetMitreReport = get_mitre_report
+    PostMitreAttacks = mitre_attacks
     GetIntelReportPDF = get_report_pdf
     GetIntelReportEntities = get_report_entities
     GetIntelRuleFile = get_rule_file
     GetLatestIntelRuleFile = get_latest_rule_file
     GetIntelRuleEntities = get_rule_entities
+    QueryMitreAttacks = query_mitre_attacks
     QueryIntelActorIds = query_actor_ids
     QueryIntelIndicatorIds = query_indicator_ids
     QueryIntelReportIds = query_report_ids
