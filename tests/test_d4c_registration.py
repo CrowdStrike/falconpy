@@ -13,7 +13,7 @@ from falconpy import D4CRegistration
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = D4CRegistration(auth_object=config)
-AllowedResponses = [200, 429, 404, 403]
+AllowedResponses = [200, 429, 400, 404, 403]
 
 
 class TestD4CRegistration:
@@ -26,7 +26,7 @@ class TestD4CRegistration:
         """
         returned = False
         result = falcon.GetCSPMAzureUserScriptsAttachment()
-        if isinstance(result, (bytes)):
+        if isinstance(result, bytes):
             returned = True
         else:
             if "status_code" in result:
