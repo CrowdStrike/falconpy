@@ -1,3 +1,30 @@
+# Version 1.2.10
+## Added features and functionality
++ Added: Two new operations added to the __DeviceControlPolicies__ Service Class, `getDefaultDeviceControlPolicies` and `updateDefaultDeviceControlPolicies`.
+    - `device_control_policies.py`
+    > Adds one new payload handler.
+    - `_payload/__init__.py`
+    - `_payload/_device_control_policy.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_device_control_policies.py`
++ Added: Three new operations to the __Intel__ Service Class, `GetMitreReport`, `PostMitreAttacks` and `QueryMitreAttacks`.
+    - `intel.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_intel.py`
+
+## Issues resolved
++ Fixed: Error handling `id` argument within the body payload handler for the `updateDeviceControlPolicies` operation.
+    - `_payload/_device_control_policy.py`
+    - Special thanks go out to @CommonVulnerability for reporting this issue and submitting the fix! 🙇
+
+## Other
++ Updated: Removed `scans_report` operation from the new __ODS__ Service Class.
+    - `ods.py`
+    > Unit testing updated.
+    - `tests/test_ods.py`
+
+---
+
 # Version 1.2.9
 ## Issues resolved
 + Fixed: Authentication object synchronization issue for certain scenarios. Relates to #829.
