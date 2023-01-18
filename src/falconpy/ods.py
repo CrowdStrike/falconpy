@@ -40,7 +40,6 @@ from ._payload import (
     generic_payload_list,
     aggregate_payload,
     scheduled_scan_payload,
-    scans_report_payload
     )
 from ._service_class import ServiceClass
 from ._endpoint._ods import _ods_endpoints as Endpoints

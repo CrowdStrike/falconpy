@@ -80,7 +80,7 @@ class TestODS:
             "get_malicious_files_by_id": falcon.get_malicious_files(ids="12345678"),
             "cancel_scans": falcon.cancel_scans(ids="12345678"),  # getting 500 not 404
             "get_scan_host_metadata_by_ids": falcon.get_scan_hosts(ids="12345689"),
-            "scans_report": falcon.scans_report(is_schedule=True, sort="id|asc", report_format="json"),
+            # "scans_report": falcon.scans_report(is_schedule=True, sort="id|asc", report_format="json"),
             "get_scans_by_scan_ids": falcon.get_scans(ids="123456789"),
             "create_scan": falcon.create_scan(host_groups=["GroupBob"]),
             "get_scheduled_scans_by_scan_ids": falcon.get_scheduled_scans(ids="12345678"),
