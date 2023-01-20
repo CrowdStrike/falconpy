@@ -1,4 +1,4 @@
-"""Spotlight results quick report generator.
+r"""Spotlight results quick report generator.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
