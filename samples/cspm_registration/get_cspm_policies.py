@@ -56,7 +56,7 @@ parser.add_argument("-f", "--falcon_client_id",
 parser.add_argument("-s", "--falcon_client_secret",
                     help="Falcon Client Secret", default=None, required=False)
 parser.add_argument("-o", "--output_file",
-                    help="Policy report output file", required=False)
+                    help="Policy report output file (CSV format)", required=False)
 parser.add_argument(
     "-c", "--cloud", help="Cloud provider (aws, azure, gcp)", required=False)
 args = parser.parse_args()
@@ -107,6 +107,7 @@ def format_json_data(json_data):
 
 def chunk_long_description(desc, col_width) -> str:
     """Chunks a long string by delimiting with CR based upon column length."""
+
     desc_chunks = []
     chunk = ""
     for word in desc.split():
@@ -118,6 +119,8 @@ def chunk_long_description(desc, col_width) -> str:
             chunk = new_chunk
 
     delim = "\n"
+    if chunk.strip():
+        desc_chunks.append(chunk.strip())
 
     return delim.join(desc_chunks)
 
@@ -137,6 +140,7 @@ if data_file:
         dict_writer = csv.DictWriter(output_file, keys)
         dict_writer.writeheader()
         dict_writer.writerows(return_data)
+    print(f"CSPM policies exported to '{data_file}'.")
 else:
     results = []
     for row in return_data:
@@ -145,7 +149,9 @@ else:
         row.pop("cloud_asset_type", None)
         row.pop("fql_policy", None)
         row.pop("is_remediable", None)
-        name_val = f"[{row['policy_id']}] {chunk_long_description(row['name'], 40)}"
+        row.pop("created_at", None)
+        row.pop("updated_at", None)
+        name_val = f"[{row['policy_id']}] {chunk_long_description(row['name'], 80).strip()}"
         name_val = f"{name_val}\n{row['policy_type']}"
         if row["cloud_service_subtype"]:
             name_val = f"{name_val} // {row['cloud_service_subtype']}"
@@ -159,6 +165,7 @@ else:
         row.pop("default_severity", None)
         row.pop("policy_timestamp", None)
         row.pop("cloud_service_subtype", None)
+        row.pop("cloud_friendly_service", None)
         benchmarks = ["cis", "pci", "nist", "soc2"]
         benchmark_list = []
         for benchmark_name in benchmarks:
@@ -169,7 +176,7 @@ else:
                                ]
                 benchmark_list.append(" ".join(bench_value))
             row[f"{benchmark_name}_benchmark"] = "\n".join(benchmark_list)
-
+        row.pop("remediation_summary", None)
         results.append(row)
 
     headers = {
