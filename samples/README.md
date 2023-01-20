@@ -50,7 +50,7 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
 | [Recon](#recon) | [Create monitoring rules for an email list](#create-monitoring-rules-for-an-email-list) |
 | [Sensor Download](#sensor-download) | [Download the CrowdStrike sensor](#download-the-crowdstrike-sensor) |
 | [Sensor Update Policies](#sensor-update-policies) | [Policy Wonk](#policy-wonk) |
-| [Spotlight](#spotlight) | [Find vulnerable hosts by CVE ID](#find-vulnerable-hosts-by-cve-id)<BR/>[CISA DHS Known Exploited Vulnerabilities](#cisa-dhs-known-exploited-vulnerabilities) |
+| [Spotlight](#spotlight) | [Find vulnerable hosts by CVE ID](#find-vulnerable-hosts-by-cve-id)<BR/>[CISA DHS Known Exploited Vulnerabilities](#cisa-dhs-known-exploited-vulnerabilities)<BR/>[Spotlight Quick Report](#spotlight-quick-report) |
 | [User Management](#user-management) | [Bulk user administration](#bulk-user-administration) |
 
 
@@ -773,6 +773,7 @@ These samples discuss leveraging the CrowdStrike Spotlight Evaluation Logic and 
 
 - [Find vulnerable hosts by CVE ID](#find-vulnerable-hosts-by-cve-id)
 - [CISA DHS Known Exploited Vulnerabilities](#cisa-dhs-known-exploited-vulnerabilities)
+- [Spotlight Quick Report](#spotlight-quick-report)
 
 ### Find vulnerable hosts by CVE ID
 In this [example](spotlight#identify-hosts-with-vulnerabilities-by-cve) we demonstrate searching Falcon Spotlight for vulnerable hosts based upon CVE ID.
@@ -803,6 +804,20 @@ This sample demonstrates the following CrowdStrike Spotlight Vulnerability API o
 | [queryVulnerabilities](https://falconpy.io/Service-Collections/Spotlight-Vulnerabilities.html#queryvulnerabilities) | Search for Vulnerabilities in your environment by providing a FQL filter and paging details. Returns a set of Vulnerability IDs which match the filter criteria. |
 
 ---
+
+### Spotlight Quick Report
+In this [example](spotlight#spotlight-quick-report) we demonstrate generating a report of CVE matches within a Falcon tenant using the Spotlight and Hosts service collections.
+
+[![Spotlight Vulnerabilities](https://img.shields.io/badge/Service%20Class-Spotlight_Quick_report-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](spotlight#spotlight-quick-report) 
+
+#### Spotlight Vulnerabilities / Hosts API operations discussed
+This sample demonstrates the following CrowdStrike Spotlight Vulnerability API and Hosts API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [combinedQueryVulnerabilities](https://www.falconpy.io/Service-Collections/Spotlight-Vulnerabilities.html#combinedqueryvulnerabilities) | Search for Vulnerabilities in your environment by providing a FQL filter and paging details. Returns a set of Vulnerability entities which match the filter criteria. |
+| [GetDeviceDetails](https://www.falconpy.io/Service-Collections/Hosts.html#getdevicedetails) | Get details on one or more hosts by providing agent IDs (AID). You can get a host's agent IDs (AIDs) from the QueryDevicesByFilterScroll operation, the Falcon console or the Streaming API. |
+| [QueryDevicesByFilterScroll](https://www.falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilterscroll) | Search for hosts in your environment by platform, hostname, IP, and other criteria with continuous pagination capability (based on offset pointer which expires after 2 minutes with no maximum limit). |
 
 ## User Management
 This sample category is focused on examples that leverage CrowdStrike's User Management API service collection.
