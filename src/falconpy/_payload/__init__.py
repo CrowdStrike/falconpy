@@ -66,7 +66,7 @@ from ._reports import reports_payload
 from ._message_center import activity_payload, case_payload
 from ._alerts import update_alerts_payload
 from ._sample_uploads import extraction_payload
-from ._ods import scheduled_scan_payload, scans_report_payload
+from ._ods import scheduled_scan_payload
 
 
 __all__ = [
@@ -85,6 +85,6 @@ __all__ = [
     "firewall_rule_group_validation_payload", "firewall_filepattern_payload",
     "aws_d4c_registration_payload", "image_payload", "indicator_report_payload",
     "extraction_payload", "simple_action_parameter", "network_locations_metadata_payload",
-    "network_locations_create_payload", "scheduled_scan_payload", "scans_report_payload",
-    "token_settings_payload", "recon_export_job_payload", "default_device_policy_config_payload"
+    "network_locations_create_payload", "scheduled_scan_payload", "token_settings_payload",
+    "recon_export_job_payload", "default_device_policy_config_payload"
 ]

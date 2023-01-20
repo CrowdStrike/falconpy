@@ -92,29 +92,30 @@ def scheduled_scan_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def scans_report_payload(passed_keywords: dict) -> dict:
-    """Craft a properly formatted scans report creation payload.
+# This operation is no longer supported
+# def scans_report_payload(passed_keywords: dict) -> dict:
+#     """Craft a properly formatted scans report creation payload.
 
-    {
-        "is_schedule": true,
-        "report_format": "string",
-        "search": {
-            "filter": "string",
-            "sort": "string"
-        }
-    }
-    """
-    returned_payload = {}
-    keys = ["is_schedule", "report_format", "search"]
-    for key in keys:
-        if passed_keywords.get(key, None) is not None:
-            returned_payload[key] = passed_keywords.get(key)
+#     {
+#         "is_schedule": true,
+#         "report_format": "string",
+#         "search": {
+#             "filter": "string",
+#             "sort": "string"
+#         }
+#     }
+#     """
+#     returned_payload = {}
+#     keys = ["is_schedule", "report_format", "search"]
+#     for key in keys:
+#         if passed_keywords.get(key, None) is not None:
+#             returned_payload[key] = passed_keywords.get(key)
 
-    if "search" not in returned_payload:
-        returned_payload["search"] = {}
-    search_keys = ["filter", "sort"]
-    for key in search_keys:
-        if passed_keywords.get(key, None):
-            returned_payload["search"][key] = passed_keywords.get(key)
+#     if "search" not in returned_payload:
+#         returned_payload["search"] = {}
+#     search_keys = ["filter", "sort"]
+#     for key in search_keys:
+#         if passed_keywords.get(key, None):
+#             returned_payload["search"][key] = passed_keywords.get(key)
 
-    return returned_payload
+#     return returned_payload
