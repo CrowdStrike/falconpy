@@ -129,7 +129,6 @@ class DeviceControlPolicies(ServiceClass):
             params=parameters
             )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_default_policies(self: object) -> dict:
         """Retrieve the configuration for a Default Device Control Policy.
 
