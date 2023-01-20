@@ -37,7 +37,7 @@ class TestIntel:
             "query_intel_rule_ids": falcon.QueryIntelRuleIds(parameters={"type": "common-event-format"}),
             "query_mitre_attacks": falcon.QueryMitreAttacks("fancy-bear"),
             "mitre_attacks": falcon.PostMitreAttacks(["fancy-bear", "slippy-spider"]),
-            "get_mitre_report": falcon.GetMitreReport(actor_id="fancy-bear", format="JSON")
+            "get_mitre_report": falcon.GetMitreReport(actor_id="fancy-bear", format="CSV")
             # "get_vulnerabilities": falcon.get_vulnerabilities(ids="12345678"),
             # "query_vulnerabilities": falcon.query_vulnerabilities()
         }
@@ -47,10 +47,8 @@ class TestIntel:
             tests["get_vulnerabilities"] = falcon.get_vulnerabilities(ids="12345678")
             tests["query_vulnerabilities"] = falcon.query_vulnerabilities()
         for key in tests:
-            if tests[key]["status_code"] not in AllowedResponses:
-                # print(key)
-                # print(tests[key])
-                if key != "get_mitre_report":  # Temporary allow 500's from GetMitreReport
+            if isinstance(tests[key], dict):  # Allow for GetMitreReport's binary response
+                if tests[key]["status_code"] not in AllowedResponses:
                     error_checks = False
 
             # print(f"{key} operation returned a {tests[key]} status code")
