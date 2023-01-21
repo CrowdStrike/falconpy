@@ -3,7 +3,6 @@
 [![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)
 
 ![GitHub top language](https://img.shields.io/github/languages/top/crowdstrike/falconpy?logo=python&logoColor=white)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/CrowdStrike/falconpy.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/CrowdStrike/falconpy/context:python)
 ![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/crowdstrike/falconpy?logo=snyk)
 [![Snyk Advisor](https://snyk.io/advisor/python/crowdstrike-falconpy/badge.svg)](https://snyk.io/advisor/python/crowdstrike-falconpy)
 ![GitHub issues](https://img.shields.io/github/issues-raw/crowdstrike/falconpy?logo=github)
