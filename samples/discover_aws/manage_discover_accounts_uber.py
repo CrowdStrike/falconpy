@@ -64,7 +64,7 @@ def check_account():
     for z in account_list:
         id_items.append(z["id"])
 
-    q_max = 10    # VerifyAWSAccountAccess has a ID max count of 10
+    q_max = 1    # VerifyAWSAccountAccess has a ID max count of 1 now
     for index in range(0, len(id_items), q_max):
         sub_acct_list = id_items[index:index + q_max]
         temp_list = ",".join([a for a in sub_acct_list])
@@ -114,12 +114,15 @@ def check_account():
         else:
             try:
                 # An error has occurred
-                print("Got response error code {} message {}".format(access_response["status_code"],
-                                                                     access_response["body"]["errors"][0]["message"]
+                print("Got response error code {} message {} ({})".format(access_response["status_code"],
+                                                                     access_response["body"]["errors"][0]["message"],
+                                                                     access_response["body"]["errors"][0]["id"]
                                                                      ))
             except Exception:
                 # Handle any egregious errors that break our return error payload
-                print("Got response error code {} message {}".format(access_response["status_code"], access_response["body"]))
+                print("Got response error code {} message {}".format(access_response["status_code"],
+                                                                     access_response["body"]["errors"][0]["message"])
+                                                                     )
 
     return
 
