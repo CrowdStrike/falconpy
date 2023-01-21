@@ -85,9 +85,9 @@ pip3 install -r requirements-dev.txt
     - If the code submission is already covered by an existing unit test, additional unit tests are not required.
     - Please include coverage testing results in your Pull Request. (Example: [PR #67](https://github.com/CrowdStrike/falconpy/pull/67))
 + Unit testing is intended to prove out code formatting and functionality, not necessarily API functionality. Unit testing does not need to communicate with the API in order to provide the necessary coverage. 
-+ We use `bandit`, [LGTM](https://lgtm.com/projects/g/CrowdStrike/falconpy), and `pylint` for static code analysis.
++ We use `bandit` and `CodeQL` for static code analysis.
     - Please include bandit analysis results in the section provided in your Pull Request.
-    - Pull Requests that produce alerts in bandit or [LGTM](https://lgtm.com/projects/g/CrowdStrike/falconpy) may be closed without merging.
+    - Pull Requests that produce alerts in `bandit` or `CodeQL` may be closed without merging.
 + All new contributions __must__ pass unit testing before they will be merged.
     - For scenarios where unit testing passes in the PR and fails post-merge, a maintainer will address the issue. If the problem is programmatic and related to code within the pull request, the merge may be reverted.
 + The util folder contains a BASH script, `run-tests.sh`, that contains the parameters used that match unit testing performed as part of our GitHub workflows.
@@ -188,7 +188,7 @@ To read more about _bandit_, you can visit [their documentation website](https:/
 
 All submitted code must meet minimum linting requirements. We use the Flake8 framework for our lint specification.
 + All code that is included within the installation package must pass linting workflows when the Pull Request checks have completed.
-    - We use `flake8`, [LGTM](https://lgtm.com/projects/g/CrowdStrike/falconpy), `pydocstyle` and `pylint` to power our linting workflows. 
+    - We use `flake8`, `CodeQL`, `pydocstyle` and `pylint` to power our linting workflows. 
     - You will be asked to correct linting errors before your Pull Request will be approved.
 + Unit tests do not need to meet this requirement, but try to keep linting errors to a minimum.
 + Samples are checked for linting, but failures will not stop builds at this time.
@@ -202,7 +202,7 @@ More information about _pydocstyle_ can be found [here](http://www.pydocstyle.or
 More information about _Pylint_ can be found [here](https://www.pylint.org/).
 
 ### Breaking changes
-In an effort to maintain backwards compatibility, we thoroughly unit test every Pull Request for all versions of Python we support. These unit tests are intended to catch general programmatic errors, possible vulnerabilities (via `bandit` and [LGTM](https://lgtm.com/projects/g/CrowdStrike/falconpy)) and _potential breaking changes_. 
+In an effort to maintain backwards compatibility, we thoroughly unit test every Pull Request for all versions of Python we support. These unit tests are intended to catch general programmatic errors, possible vulnerabilities (via `bandit` and `CodeQL`) and _potential breaking changes_. 
 
 > If you have to adjust a unit test locally in order to produce passing results, there is a possibility you are working with a potential breaking change.
 
