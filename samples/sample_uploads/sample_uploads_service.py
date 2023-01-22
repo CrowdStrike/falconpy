@@ -1,25 +1,25 @@
-"""Sample Uploads Service Collection example, Service Class version.
+r"""Sample Uploads Service Collection example, Service Class version.
+
+ ____                        _        _   _       _                 _
+/ ___|  __ _ _ __ ___  _ __ | | ___  | | | |_ __ | | ___   __ _  __| |___
+\___ \ / _` | '_ ` _ \| '_ \| |/ _ \ | | | | '_ \| |/ _ \ / _` |/ _` / __|
+ ___) | (_| | | | | | | |_) | |  __/ | |_| | |_) | | (_) | (_| | (_| \__ \
+|____/ \__,_|_| |_| |_| .__/|_|\___|  \___/| .__/|_|\___/ \__,_|\__,_|___/
+                      |_|                  |_|
+ ____                  _             ____ _
+/ ___|  ___ _ ____   _(_) ___ ___   / ___| | __ _ ___ ___
+\___ \ / _ \ '__\ \ / / |/ __/ _ \ | |   | |/ _` / __/ __|
+ ___) |  __/ |   \ V /| | (_|  __/ | |___| | (_| \__ \__ \
+|____/ \___|_|    \_/ |_|\___\___|  \____|_|\__,_|___/___/
 
 The following demonstrates how to interact with the Sample Uploads API using the Service Class.
 This example uses Direct Authentication and supports token refresh / authentication free usage.
 
 This sample requires FalconPy v0.8.6+
 """
-#  ____                        _        _   _       _                 _
-# / ___|  __ _ _ __ ___  _ __ | | ___  | | | |_ __ | | ___   __ _  __| |___
-# \___ \ / _` | '_ ` _ \| '_ \| |/ _ \ | | | | '_ \| |/ _ \ / _` |/ _` / __|
-#  ___) | (_| | | | | | | |_) | |  __/ | |_| | |_) | | (_) | (_| | (_| \__ \
-# |____/ \__,_|_| |_| |_| .__/|_|\___|  \___/| .__/|_|\___/ \__,_|\__,_|___/
-#                       |_|                  |_|
-#
-#  ____                  _             ____ _
-# / ___|  ___ _ ____   _(_) ___ ___   / ___| | __ _ ___ ___
-# \___ \ / _ \ '__\ \ / / |/ __/ _ \ | |   | |/ _` / __/ __|
-#  ___) |  __/ |   \ V /| | (_|  __/ | |___| | (_| \__ \__ \
-# |____/ \___|_|    \_/ |_|\___\___|  \____|_|\__,_|___/___/
-#
 import os
 import json
+from argparse import ArgumentParser, RawTextHelpFormatter
 # Import the Sample Uploads Service Class
 from falconpy import SampleUploads
 #     _       _
@@ -27,18 +27,33 @@ from falconpy import SampleUploads
 #    \_(_)| || |(_|
 #                _|
 #
-# Grab our config parameters from our config file.
-# Review this README here for more detail regarding the sample config file.
-# https://github.com/CrowdStrike/falconpy/tree/main/samples
-with open('../config.json', 'r', encoding="utf-8") as file_config:
-    config = json.loads(file_config.read())
+# Grab our config parameters from our config file or the command line.
+parser = ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
+parser.add_argument("-k", "--falcon_client_id", help="API Client ID (required if not using a configuration file).", required=False, default=None)
+parser.add_argument("-s", "--falcon_client_secret", help="API Client Secret (required if not using a configuration file).", required=False, default=None)
+parser.add_argument("-c", "--config_file", help="Credential configuration file (required if not using command line arguments).", required=False, default="../config.json")
+parser.add_argument("-b", "--base_url", help="CrowdStrike Region (only required for GovCloud users).", required=False, default="auto")
+args = parser.parse_args()
 
+if not args.falcon_client_id or not args.falcon_client_secret:
+    if not os.path.exists(args.config_file):
+        raise SystemExit("Credentials not provided, unable to continue.")
+
+    # Review this README here for more detail regarding the sample config file.
+    # https://github.com/CrowdStrike/falconpy/tree/main/samples
+    with open(args.config_file, 'r', encoding="utf-8") as file_config:
+        config = json.loads(file_config.read())
+else:
+    config = {
+        "falcon_client_id": args.falcon_client_id,
+        "falcon_client_secret": args.falcon_client_secret
+    }
 # Provide our credentials to the SampleUploads Service Class using
 # Direct Authentication. Since we are using version 0.8.6+ we do not
 # need to specify the base_url keyword unless we are on GovCloud.
 falcon = SampleUploads(client_id=config["falcon_client_id"],
-                       client_secret=config["falcon_client_secret"]
-                       # ,base_url="usgov1"     # GovCloud users only
+                       client_secret=config["falcon_client_secret"],
+                       base_url=args.base_url
                        )
 
 # Define our upload and download file names
