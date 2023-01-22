@@ -40,16 +40,16 @@ from falconpy import ReportExecutions
 def consume_arguments():
     """Consume our required command line arguments."""
     parser = ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
-    requir = parser.add_argument_group("required_arguments")
-    requir.add_argument("-k", "--falcon_client_id",
+    required = parser.add_argument_group("required_arguments")
+    required.add_argument("-k", "--falcon_client_id",
                         help="CrowdStrike API Client ID",
                         required=True
                         )
-    requir.add_argument("-s", "--falcon_client_secret",
+    required.add_argument("-s", "--falcon_client_secret",
                         help="CrowdStrike API Client Secret",
                         required=True
                         )
-    requir.add_argument("-r", "--report", help="ID of the report to retrieve", required=True)
+    required.add_argument("-r", "--report", help="ID of the report to retrieve", required=True)
     return parser.parse_args()
 
 
@@ -89,13 +89,18 @@ def process_executions(sdk: ReportExecutions, run_list: list):
         if status.upper() == "DONE":
             report_detail = sdk.get_download(exec_id)
             if report_detail:
-                try:
-                    with open(f"{rpt_id}_{exec_id}.rpt", "w", encoding="utf-8") as json_output:
-                        json.dump(report_detail, json_output)
+                if isinstance(report_detail, dict):
+                    try:
+                        with open(f"{rpt_id}_{exec_id}.rpt", "w", encoding="utf-8") as json_output:
+                            json.dump(report_detail, json_output)
+                        saved += 1
+                        print(f"📥 {exec_id} successfully saved to {rpt_id}_{exec_id}.rpt")
+                    except json.JSONDecodeError:
+                        print(f"❗ Unable to decode results of report run {exec_id} for ")
+                else:
+                    with open(f"{rpt_id}_{exec_id}.rpt", "wb") as csv_output:
+                        csv_output.write(report_detail)
                     saved += 1
-                    print(f"📥 {exec_id} successfully saved to {rpt_id}_{exec_id}.rpt")
-                except json.JSONDecodeError:
-                    print(f"❗ Unable to decode results of report run {exec_id} for ")
             else:
                 print(f"⛔ Unable to retrieve report for execution {exec_id} of {rpt_id}.")
         else:
