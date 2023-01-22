@@ -12,21 +12,77 @@ The examples in this folder focus on leveraging CrowdStrike's Hosts API to perfo
 ## List sensors by hostname
 Loops through all hosts and displays the hostname and sensor version.
 
+There are multiple variations of this sample demonstrating different options for achieving the same goals.
+
+| Sample | Notes |
+| :-- | :-- |
+| [Sensor version by hostname](sensor_versions_by_hostname.py) | Displays all hosts along with their sensor version. Maximum number of results returned: __10,000__ |
+| [Sensor version by hostname (Scrolling)](sensor_versions_by_hostname_scrolling.py) | Displays all hosts along with their sensor version. No maximum on number of hosts returned. |
+| [Sensor version by hostname (Advanced)](sensor_versions_by_hostname_advanced.py) | Displays all hosts along with their sensor version. No maximum on number of hosts returned. Leverages multiple threads to speed up results processing. |
+
 ### Running the program
 In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
 | Service Collection | Scope |
 | :---- | :---- |
 | Hosts | __READ__ |
 
 ### Execution syntax
-This example requires no input parameters.
+These samples leverage simple command-line arguments to implement functionality.
+
+All keywords are available in all three samples.
+
+> Execute the simple example.
 
 ```shell
-python3 sensor_versions_by_hostname.py
+python3 sensor_versions_by_hostname.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> Execute the scrolling example, reversing the sort.
+
+```shell
+python3 sensor_versions_by_hostname_scrolling.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -r
+```
+
+> Execute the advanced example and return results for a child tenant.
+
+```shell
+python3 sensor_versions_by_hostname_advanced.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -m $CHILD_CID
+```
+
+> Execute the advanced example for a GovCloud tenant.
+
+```shell
+python3 sensor_versions_by_hostname_advanced.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -b usgov1
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+python3 sensor_versions_by_hostname.py -h
+usage: sensor_versions_by_hostname.py [-h] -k CLIENT_ID -s CLIENT_SECRET [-m MSSP] [-b BASE_URL] [-r]
+
+List sensors versions by hostname
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key ID
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API key secret
+  -m MSSP, --mssp MSSP  Child CID to access (MSSP only)
+  -b BASE_URL, --base_url BASE_URL
+                        CrowdStrike API region (us1, us2, eu1, usgov1). NOT required unless you are using `usgov1`.
+  -r, --reverse         Reverse sort (defaults to ASC)
 ```
 
 ### Example source code
-The source code for this example can be found [here](sensor_versions_by_hostname.py).
+The source code for these examples can be found here:
+
+- [Sensor versions by hostname](sensor_versions_by_hostname.py)
+- [Sensor versions by hostname (Scrolling)](sensor_versions_by_hostname_scrolling.py)
+- [Sensor versions by hostname (Advanced)](sensor_versions_by_hostname_advanced.py)
 
 ---
 
@@ -35,6 +91,7 @@ Retrieves a list of hosts that have not been seen since the number of days speci
 
 ### Running the program
 In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
 | Service Collection | Scope |
 | :---- | :---- |
 | Hosts | __READ__, __WRITE__ |
@@ -123,6 +180,7 @@ Submitted by `@micgoetz`, this example demonstrates leveraging the [QueryDeviceL
 
 ### Running the program.
 In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
 | Service Collection | Scope |
 | :---- | :---- |
 | Hosts | __READ__, __WRITE__ |
@@ -219,6 +277,7 @@ This routine queries all of the hosts in your environment using the [QueryDevice
 
 ### Running the program.
 In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
 | Service Collection | Scope |
 | :---- | :---- |
 | Hosts | __READ__ |
