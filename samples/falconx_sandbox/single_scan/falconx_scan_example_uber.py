@@ -1,17 +1,26 @@
-"""Falcon X Sandbox - Upload / Scan example, Uber class version.
+r"""Falcon X Sandbox - Upload / Scan example, Uber class version.
+
+ _______       __
+|   _   .---.-|  .----.-----.-----.
+|.  1___|  _  |  |  __|  _  |     |
+|.  __) |___._|__|____|_____|__|__|
+|:  |
+|::.|    ___       __         __ __ __
+`---'   |   .-----|  |_.-----|  |  |__.-----.-----.-----.----.-----.
+        |.  |     |   _|  -__|  |  |  |  _  |  -__|     |  __|  -__|
+        |.  |__|__|____|_____|__|__|__|___  |_____|__|__|____|_____|
+        |:  |                         |_____|
+        |::.|            _______                 __ __
+        `---'           |     __|.---.-.-----.--|  |  |--.-----.--.--.
+                        |__     ||  _  |     |  _  |  _  |  _  |_   _|
+                        |_______||___._|__|__|_____|_____|_____|__.__|
+
+                                    CrowdStrike FalconPy  v0.8.6+
 
 Supports scanning a single file only.
 
 - jshcodes@CrowdStrike 09.01.2021
 """
-#  _______       __                   ___ ___  _______                __ __
-# |   _   .---.-|  .----.-----.-----.(   Y   )|   _   .---.-.-----.--|  |  |--.-----.--.--.
-# |.  1___|  _  |  |  __|  _  |     | \  1  / |   1___|  _  |     |  _  |  _  |  _  |_   _|
-# |.  __) |___._|__|____|_____|__|__| /  _  \ |____   |___._|__|__|_____|_____|_____|__.__|
-# |:  |                              /:  |   \|:  1   |
-# |::.|                             (::. |:.  |::.. . |           FalconPy v0.8.6+
-# `---'                              `--- ---'`-------'
-#
 import os
 import time
 import argparse
@@ -83,7 +92,7 @@ def parse_command_line():
     """Parse and return inbound command line arguments."""
     # Argument parser for our command line
     parser = argparse.ArgumentParser(
-        description="Falcon X Sandbox example",
+        description=__doc__,
         formatter_class=RawTextHelpFormatter
         )
     # File to be analyzed
@@ -146,8 +155,8 @@ def submit_for_analysis(sha_value: str) -> dict:
     """Submit file for analysis.
 
     Submits an uploaded file that matches the provided SHA256
-    to the specified Falcon X Sandbox environment for analysis.
-    Returns the result.
+    to the specified Falcon Intelligence Sandbox environment
+    for analysis. Returns the result.
     """
     # Call the submit method and provide the SHA256
     # of our upload file and our desired environment type.
@@ -208,7 +217,7 @@ if not os.path.isfile(args.file):
 
 # Announce progress
 inform(f"[   Init   ] {running_time(start_time)}")
-# Connec to the API and provide our credentials for authorization
+# Connect to the API and provide our credentials for authorization
 falcon = APIHarness(client_id=args.key,
                     client_secret=args.secret
                     )
@@ -217,8 +226,8 @@ inform(f"[  Upload  ] {running_time(start_time)}")
 
 # Upload our test file
 response = upload_file(args.file,
-                       f"FalconX File Analysis: {time.strftime('%V %r %Z')}",
-                       "Falcon X upload and scan example",
+                       f"Falcon Intelligence File Analysis: {time.strftime('%V %r %Z')}",
+                       "Falcon Intelligence upload and scan example",
                        confidential=False
                        )
 
@@ -297,7 +306,7 @@ else:
 
 # Inform the user of our deletion failure
 if delete_response != 200:
-    print("Unable to remove test file from Falcon X Sandbox")
+    print("Unable to remove test file from Falcon Intelligence Sandbox")
 
 # Display our total execution time
 COMPLETE_TIME = str(timedelta(seconds=(time.time() - start_time)))
