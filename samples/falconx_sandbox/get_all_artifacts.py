@@ -1,19 +1,26 @@
 # pylint: disable=W1401
 """Retrieve all artifacts from all available Falcon X reports.
 
- _______       __                   ___ ___
-|   _   .---.-|  .----.-----.-----.(   Y   )
-|.  1___|  _  |  |  __|  _  |     | \  1  /
-|.  __) |___._|__|____|_____|__|__| /  _  \
-|:  |                              /:  |   \
-|::.|                             (::. |:.  )
-`---'                              `--- ---'
+ _______       __
+|   _   .---.-|  .----.-----.-----.
+|.  1___|  _  |  |  __|  _  |     |
+|.  __) |___._|__|____|_____|__|__|
+|:  |
+|::.|
+`---'
+ ___       __         __ __ __
+|   .-----|  |_.-----|  |  |__.-----.-----.-----.----.-----.
+|.  |     |   _|  -__|  |  |  |  _  |  -__|     |  __|  -__|
+|.  |__|__|____|_____|__|__|__|___  |_____|__|__|____|_____|
+|:  |                         |_____|
+|::.|
+`---'                               CrowdStrike FalconPy
 
 
 Creation date: 01.12.2021 - jshcodes@CrowdStrike
 
 You will need the following scopes on your API keys:
-    Falcon X Sandbox: READ, WRITE
+    Falcon Intelligence Sandbox: READ, WRITE
 """
 import os
 import json
@@ -23,7 +30,7 @@ from falconpy import FalconXSandbox
 
 def parse_command_line() -> object:
     """Parse the command line for inbound configuration parameters."""
-    parser = argparse.ArgumentParser(description="Falcon X Artifact retrieval")
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument(
         '-k',
         '--client_id',
@@ -55,7 +62,7 @@ def get_artifact_list() -> list:
     # Get a list of available reports
     reports = sandbox.query_reports()   # Use the filter parameter to prune this initial list
     if "resources" not in reports["body"]:
-        raise SystemExit("Unable to access Falcon X reports, check permissions.")
+        raise SystemExit("Unable to access Falcon Intelligence reports, check permissions.")
     if not reports["body"]["resources"]:
         raise SystemExit("No reports found.")
 
