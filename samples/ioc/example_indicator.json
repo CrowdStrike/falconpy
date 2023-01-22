@@ -1,0 +1,11 @@
+{
+    "source": "Test",
+    "action": "detect",
+    "expiration": "2023-01-22T15:00:00.000Z",
+    "description": "Testing",
+    "type": "ipv4",
+    "value": "4.1.42.34",
+    "platforms": ["linux"],
+    "severity": "LOW",
+    "applied_globally": true
+}
