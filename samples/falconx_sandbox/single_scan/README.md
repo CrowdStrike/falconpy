@@ -1,9 +1,9 @@
 ![CrowdStrike Falcon](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png)
 ![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)
 
-# Analyze a single file with Falcon X Sandbox
+# Analyze a single file with Falcon Intelligence Sandbox
 These examples upload a single file you specify to the CrowdStrike Sample Uploads API.
-The file is then submitted to the CrowdStrike Falcon X Sandbox for detonation and analysis.
+The file is then submitted to the CrowdStrike Falcon Intelligence Sandbox for detonation and analysis.
 Results for the analysis are displayed upon completion, and then the file is removed from the 
 CrowdStrike sandbox.
 
@@ -12,9 +12,9 @@ CrowdStrike sandbox.
 ## Procedure
 1. Arguments are consumed. The submitted filename and environment are confirmed to be valid.
     - The procedure will halt if either of these are found not to be true.
-2. Provided API credentials are used to connect to the CrowdStrike Falcon X Sandbox and Sample Uploads APIs.
+2. Provided API credentials are used to connect to the CrowdStrike Falcon Intelligence Sandbox and Sample Uploads APIs.
 3. The target file is uploaded to the CrowdStrike Sample Uploads API.
-4. The file is submitted to the CrowdStrike Falcon X Sandbox API for analysis.
+4. The file is submitted to the CrowdStrike Falcon Intelligence Sandbox API for analysis.
     - The procedure starts a progress indicator and will wait for this analysis to complete. Depending on file type and other factors this may take up to 15 minutes.
 5. When results are ready, the analysis is retrieved.
 6. The uploaded file is removed from the CrowdStrike Sample Uploads API.
@@ -26,7 +26,7 @@ CrowdStrike sandbox.
 In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
 | Service Collection | Scope |
 | :---- | :---- |
-| Falcon X Sandbox | __READ__, __WRITE__ |
+| Falcon Intelligence Sandbox | __READ__, __WRITE__ |
 | Sample Uploads | __READ__, __WRITE__ |
 
 ### Execution syntax
@@ -43,7 +43,7 @@ python3 falconx_scan_example_uber.py -k FALCON_CLIENT_ID -s FALCON_CLIENT_SECRET
 ```
 
 ### Selecting the detonation environment
-The Falcon X Sandbox API supports the following environments. If you wish to specify the sandbox environment where your file is detonated, you may do so using the `-e` argument. You must provide one of the identifiers from the list below.  When not provided, this example will default to Windows 10 64-bit.
+The Falcon Intelligence Sandbox API supports the following environments. If you wish to specify the sandbox environment where your file is detonated, you may do so using the `-e` argument. You must provide one of the identifiers from the list below.  When not provided, this example will default to Windows 10 64-bit.
 | Identifier | Environment |
 | :--- | :--- |
 | `win7` | Windows 7, 32-bit |
