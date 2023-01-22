@@ -48,6 +48,7 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
 | [Prevention Policy](#prevention-policy) | [Prevention Policy Hawk](#prevention-policy-hawk) |
 | [Real Time Response](#real-time-response) | [Bulk execute a command](#bulk-execute-a-command)<BR/>[Bulk execute a command (queued)](#bulk-execute-a-command-queued)<BR/>[Dump memory for a running process](#dump-memory-for-a-running-process)<BR/>[My Little RTR](#my-little-rtr)<BR/>[ProxyTool](#proxytool) |
 | [Recon](#recon) | [Create monitoring rules for an email list](#create-monitoring-rules-for-an-email-list) |
+| [Report Executions](#report-executions) | [Retrieve all report results](#retrieve-all-report-results) |
 | [Sensor Download](#sensor-download) | [Download the CrowdStrike sensor](#download-the-crowdstrike-sensor) |
 | [Sensor Update Policies](#sensor-update-policies) | [Policy Wonk](#policy-wonk) |
 | [Spotlight](#spotlight) | [Find vulnerable hosts by CVE ID](#find-vulnerable-hosts-by-cve-id)<BR/>[CISA DHS Known Exploited Vulnerabilities](#cisa-dhs-known-exploited-vulnerabilities)<BR/>[Spotlight Quick Report](#spotlight-quick-report) |
@@ -721,6 +722,27 @@ This sample demonstrates the following CrowdStrike Recon API operations:
 | Operation | Description |
 | :--- | :--- |
 | [CreateRulesV1](https://www.falconpy.io/Service-Collections/Recon.html#createrulesv1) | Create monitoring rules. |
+
+---
+
+## Report Executions
+These samples focus on CrowdStrike's Falcon Report Executions API service collection.
+
+- [Retrieve all report results](#retrieve-all-report-results)
+
+### Retrieve all report results
+This sample will accept a schedule report ID and download all results for every successful execution of the report.
+
+[![Report Executions](https://img.shields.io/badge/Service%20Class-Retrieve_all_report_results-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](report_executions/get_report_results.py)
+
+#### Report Executions API operations discussed
+This sample demonstrates the following CrowdStrike Report Executions API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [report_executions_download_get](https://www.falconpy.io/Service-Collections/Report-Executions.html#report_executions_download_get) | Get report entity download. |
+| [report_executions_get](https://www.falconpy.io/Service-Collections/Report-Executions.html#report_executions_get) | Retrieve report details for the provided report IDs. |
+| [report_executions_query](https://www.falconpy.io/Service-Collections/Report-Executions.html#report_executions_query) | Find all report execution IDs matching the query with filter. |
 
 ---
 
