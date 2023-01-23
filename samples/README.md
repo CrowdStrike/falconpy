@@ -46,7 +46,7 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
 | [IOC](#ioc) | [Create indicators](#create-indicators) |
 | [MalQuery](#malquery) | [Malqueryinator](#malqueryinator) |
 | [Prevention Policy](#prevention-policy) | [Prevention Policy Hawk](#prevention-policy-hawk) |
-| [Real Time Response](#real-time-response) | [Bulk execute a command](#bulk-execute-a-command)<BR/>[Bulk execute a command (queued)](#bulk-execute-a-command-queued)<BR/>[Dump memory for a running process](#dump-memory-for-a-running-process)<BR/>[My Little RTR](#my-little-rtr)<BR/>[ProxyTool](#proxytool) |
+| [Real Time Response](#real-time-response) | [Bulk execute a command](#bulk-execute-a-command)<BR/>[Bulk execute a command (queued)](#bulk-execute-a-command-queued)<BR/>[Get RTR result](#get-rtr-result)<BR/>[Dump memory for a running process](#dump-memory-for-a-running-process)<BR/>[My Little RTR](#my-little-rtr)<BR/>[ProxyTool](#proxytool) |
 | [Recon](#recon) | [Create monitoring rules for an email list](#create-monitoring-rules-for-an-email-list) |
 | [Report Executions](#report-executions) | [Retrieve all report results](#retrieve-all-report-results) |
 | [Sensor Download](#sensor-download) | [Download the CrowdStrike sensor](#download-the-crowdstrike-sensor) |
@@ -244,6 +244,8 @@ This sample demonstrates the following CrowdStrike Flight Control API operations
 | :--- | :--- |
 | [QueryChildren](https://falconpy.io/Service-Collections/MSSP.html#querychildren) | Query for customers linked as children. |
 
+---
+
 ### Host Group Duplicator
 This [example](flight_control/host_group_duplicator.py) uses the Flight Control and Host Group APIs to demonstrate duplicating a Host Group from a Parent to all Children.
 
@@ -257,6 +259,8 @@ This sample demonstrates the following CrowdStrike Flight Control and Host Group
 | [QueryChildren](https://falconpy.io/Service-Collections/MSSP.html#querychildren) | Query for customers linked as children. |
 | [createHostGroups](https://www.falconpy.io/Service-Collections/Host-Group.html#createhostgroups) | Create Host Groups by specifying details about the group to create. |
 | [queryCombinedHostGroups](https://www.falconpy.io/Service-Collections/Host-Group.html#querycombinedhostgroups) | Search for Host Groups in your environment by providing a FQL filter and paging details. Returns a set of Host Groups which match the filter criteria. |
+
+---
 
 ### Execute a command on hosts across multiple children
 Execute a single RTR command across multiple hosts within multiple child tenants. This demonstration leverages operations from the Hosts, Flight Control, Real Time Response and Real Time Response APIs.
@@ -623,6 +627,7 @@ These samples focus on CrowdStrike's Real Time Response and Real Time Response A
 
 - [Bulk execute a command](#bulk-execute-a-command)
 - [Bulk execute a command (queued)](#bulk-execute-a-command-queued)
+- [Get RTR result](#get-rtr-result)
 - [Dump memory for a running process](#dump-memory-for-a-running-process)
 - [My Little RTR](#my-little-rtr)
 - [ProxyTool](#proxytool)
@@ -659,6 +664,20 @@ This sample demonstrates the following CrowdStrike Real Time Response and Real T
 | [RTR_CheckAdminCommandStatus](https://falconpy.io/Service-Collections/Real-Time-Response-Admin.html#rtr_checkadmincommandstatus) | Get status of an executed RTR administrator command on a single host. |
 | [RTR_DeleteSession](https://falconpy.io/Service-Collections/Real-Time-Response.html#rtr_deletesession) | Delete a session. |
 | [RTR_ListQueuedSessions](https://falconpy.io/Service-Collections/Real-Time-Response.html#rtr_listqueuedsessions) | Get queued session metadata by session ID. |
+
+---
+
+### Get RTR result
+Retrieve the results for previously executed RTR commands.
+
+[![Real Time Response](https://img.shields.io/badge/Service%20Class-Get_RTR_Result-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](rtr/get_rtr_result.py)
+
+#### Real Time Response API operations discussed
+This sample demonstrates the following CrowdStrike Real Time Response Admin API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [RTR_CheckAdminCommandStatus](https://falconpy.io/Service-Collections/Real-Time-Response-Admin.html#rtr_checkadmincommandstatus) | Get status of an executed RTR administrator command on a single host. |
 
 ---
 
