@@ -6,6 +6,7 @@ The examples within this folder focus on leveraging CrowdStrike's Real Time Resp
 
 - [Bulk Execute](#bulk-execute-a-command-on-matched-hosts) - Bulk execute a command on multiple hosts that you select by using a search string.
 - [Queued Execute](#bulk-execute-a-command-on-matched-hosts-with-queuing) - Bulk execute a command on multiple hosts that are selected by using a search string or a provided list of host AIDs. Execution is queued for offline hosts with request IDs stored to an external file for later result retrieval.
+- [Get host uptime](#get-host-uptime) - Retrieve the uptime for a host using a RTR session and a script command.
 - [Get RTR result](#get-rtr-result) - Retrieve the results for previously executed RTR batch commands.
 - [Dump Process Memory](pid-dump) - Dumps the memory for a running process on a target system.
 - [My Little RTR](pony) - Retrieve System Information and draws ASCII art.
@@ -172,6 +173,91 @@ python3 queued_execute.py -k CLIENT_ID -s CLIENT_SECRET -f target -c "cat /etc/r
 
 ### Example source code
 The source code for this example can be found [here](queued_execute.py).
+
+
+
+## Get host uptime
+Leverages the `runscript` RTR command to retrieve the uptime for host(s) within your environment.
+
+### Running the program
+In order to run this demonstration, you you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Real Time Response | __WRITE__ |
+| Real Time Response Admin | __WRITE__ |
+
+### Execution syntax
+This sample leverages simple command-line arguments to implement functionality.
+
+#### Basic usage
+Retrieve the total running time for one or more hosts within your environment.
+
+> Retrieve all host uptimes (up to 5,000).
+
+```shell
+python3 get_host_uptime.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> Retrieve the uptime for hosts that match a hostname filter.
+
+```shell
+python3 get_host_uptime.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n HOSTNAME_STRING
+```
+
+> Retrieve the uptime for hosts last seen within a certain number of minutes.
+
+```shell
+python3 get_host_uptime.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -l 15
+```
+
+> GovCloud users can change their CrowdStrike region using the `-b` argument.
+
+```shell
+python3 get_host_uptime.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -b usgov1
+```
+
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+python3 get_host_uptime.py -h
+usage: get_host_uptime.py [-h] [-n HOSTNAME] [-b BASE_URL] [-l LAST_SEEN] -k FALCON_CLIENT_ID -s FALCON_CLIENT_SECRET
+
+Retrieve uptime using CrowdStrike Falcon Real Time Response.
+
+ ___ ___ _______ __   __
+|   Y   |   _   |  |_|__.--------.-----.
+|.  |   |.  1   |   _|  |        |  -__|
+|.  |   |.  ____|____|__|__|__|__|_____|
+|:  1   |:  |
+|::.. . |::.|  CrowdStrike FalconPy v1.2
+`-------`---'
+
+01.23.23 - Creation date, jshcodes@CrowdStrike
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -n HOSTNAME, --hostname HOSTNAME
+                        Hostname to target.
+                        Will handled multiple matches.
+  -b BASE_URL, --base_url BASE_URL
+                        CrowdStrike region.
+                        Only required for GovCloud users.
+  -l LAST_SEEN, --last_seen LAST_SEEN
+                        Amount of time (in minutes) since the host was last seen.
+
+required arguments:
+  -k FALCON_CLIENT_ID, --falcon_client_id FALCON_CLIENT_ID
+                        CrowdStrike Falcon API client ID.
+  -s FALCON_CLIENT_SECRET, --falcon_client_secret FALCON_CLIENT_SECRET
+                        CrowdStrike Falcon API client secret.
+```
+
+### Example source code
+The source code for this example can be found [here](get_host_uptime.py).
+
 
 ## Get RTR result
 Retrieve the results for previously executed RTR commands.
