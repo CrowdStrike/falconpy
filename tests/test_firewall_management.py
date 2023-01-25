@@ -234,7 +234,7 @@ class TestFirewallManagement:
 
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
-                print(f"Failed on {key} with {tests[key]}")
+                # print(f"Failed on {key} with {tests[key]}")
 
         return error_checks
 
