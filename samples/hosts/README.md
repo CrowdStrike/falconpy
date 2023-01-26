@@ -5,6 +5,7 @@
 # Hosts examples
 The examples in this folder focus on leveraging CrowdStrike's Hosts API to perform administrative operations.
 - [List sensor versions by Hostname](#list-sensors-by-hostname)
+- [List (and optionally remove) duplicate sensors](#list-duplicate-sensors)
 - [List (and optionally remove) stale sensors](#list-stale-sensors)
 - [Match usernames to Hosts](#match-usernames-to-hosts)
 - [Offset vs. Offset Tokens](#comparing-querydevicesbyfilter-and-querydevicesbyfilterscroll-offset-vs-token)
@@ -83,6 +84,98 @@ The source code for these examples can be found here:
 - [Sensor versions by hostname](sensor_versions_by_hostname.py)
 - [Sensor versions by hostname (Scrolling)](sensor_versions_by_hostname_scrolling.py)
 - [Sensor versions by hostname (Advanced)](sensor_versions_by_hostname_advanced.py)
+
+---
+
+
+## List duplicate sensors
+Retrieves a list of duplicate sensors across all hosts within your tenant. Can optionally hide (and then restore) duplicate sensors identified.
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__, __WRITE__ |
+
+### Execution syntax
+This application leverages easy to use command line arguments to implement functionality.
+
+> List just duplicate sensors. 
+```shell
+python3 duplicate_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> Perform the same lookup against a tenant within GovCloud.
+
+```shell
+python3 duplicate_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -b usgov1
+```
+
+> List all hosts (including duplicates).
+
+```shell
+python3 duplicate_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -a
+```
+
+> Search a child tenant.
+
+```shell
+python3 duplicate_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -a -m CHILD_CID
+```
+
+> Hide duplicate sensors identified.
+
+```shell
+python3 duplicate_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d
+```
+
+> Restore previously removed duplicates.
+
+```shell
+python3 duplicate_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -r HOST_LIST_FILE
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+% python3 duplicate_sensors.py -h
+usage: duplicate_sensors.py [-h] [-b BASE_URL] [-d] [-r RESTORE_DUPLICATES] [-a] [-m MSSP] -k FALCON_CLIENT_ID -s FALCON_CLIENT_SECRET
+
+Duplicate sensor detection and removal.
+
+ ______               __ __            __           ______         __              __
+|   _  \ .--.--.-----|  |__.----.---.-|  |_.-----. |   _  \ .-----|  |_.-----.----|  |_.-----.----.
+|.  |   \|  |  |  _  |  |  |  __|  _  |   _|  -__| |.  |   \|  -__|   _|  -__|  __|   _|  _  |   _|
+|.  |    |_____|   __|__|__|____|___._|____|_____| |.  |    |_____|____|_____|____|____|_____|__|
+|:  1    /     |__|                                |:  1    /
+|::.. . /                                          |::.. . /            CrowdStrike FalconPy v1.2
+`------'                                           `------'
+
+01.25.23 - jshcodes@CrowdStrike
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -b BASE_URL, --base_url BASE_URL
+                        CrowdStrike Region (us1, us2, eu1, usgov1)
+                        Only required for GovCloud users.
+  -d, --delete_duplicates
+                        Remove duplicate hosts from the CrowdStrike console.
+  -r RESTORE_DUPLICATES, --restore_duplicates RESTORE_DUPLICATES
+                        Restores prevously deleted duplicates using a save file.
+  -a, --all             Display all hosts, not just duplicates.
+  -m MSSP, --mssp MSSP  CID of a child tenant to access.
+
+required arguments:
+  -k FALCON_CLIENT_ID, --falcon_client_id FALCON_CLIENT_ID
+                        CrowdStrike Falcon API client ID.
+  -s FALCON_CLIENT_SECRET, --falcon_client_secret FALCON_CLIENT_SECRET
+                        CrowdStrike Falcon API client secret.
+```
+
+### Example source code
+The source code for this example can be found [here](duplicate_sensors.py).
 
 ---
 
