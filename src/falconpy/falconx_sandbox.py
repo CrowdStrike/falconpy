@@ -297,7 +297,7 @@ class FalconXSandbox(ServiceClass):
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def upload_sample(self: object,
-                      file_data: object,
+                      file_data: object = None,
                       body: dict = None,
                       parameters: dict = None,
                       **kwargs
