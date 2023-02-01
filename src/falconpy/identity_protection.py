@@ -65,7 +65,8 @@ class IdentityProtection(ServiceClass):
                 {
                     "query": "string"
                 }
-        query -- JSON-similar string.
+        query -- JSON-similar string. (GraphQL syntax)
+        variables -- variables to use for interpolation. Dictionary.
 
         This method only supports keywords for providing arguments.
         Currently using a non-standard body payload format.
@@ -85,6 +86,8 @@ class IdentityProtection(ServiceClass):
         if not body:
             body = {}
             body["query"] = kwargs.get("query", "{}")
+            if kwargs.get("variables", None):
+                body["variables"] = kwargs.get("variables")
 
         return process_service_request(
             calling_object=self,
