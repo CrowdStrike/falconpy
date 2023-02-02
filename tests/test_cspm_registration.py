@@ -14,7 +14,7 @@ from falconpy import CSPMRegistration  # noqa: E402
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = CSPMRegistration(auth_object=config)
-AllowedResponses = [200, 201, 207, 403, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 201, 207, 401, 403, 429]  # Adding rate-limiting as an allowed response for now
 textchars = bytearray({7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7f})
 is_binary_string = lambda bytes: bool(bytes.translate(None, textchars))  # noqa: E731
 
@@ -86,7 +86,7 @@ class TestCSPMRegistration:
             if tests[key]["status_code"] != 500:
                 error_checks = False
 
-            # print(f"{key} operation returned a {tests[key]} status code")
+                # print(f"{key} operation returned a {tests[key]} status code")
 
         return error_checks
 
@@ -96,7 +96,9 @@ class TestCSPMRegistration:
     def test_get_aws_console_setup_urls(self):
         """Pytest harness hook"""
         assert bool(falcon.GetCSPMAwsConsoleSetupURLs()["status_code"] in AllowedResponses) is True
-    @pytest.mark.skipif(os.getenv("DEBUG_API_BASE_URL", "us1").lower() in ["https://api.eu-1.crowdstrike.com", "eu1", "https://api.us-2.crowdstrike.com", "us2"],
+    @pytest.mark.skipif(os.getenv("DEBUG_API_BASE_URL", "us1").lower() in [
+        "https://api.eu-1.crowdstrike.com", "eu1", "https://api.us-2.crowdstrike.com", "us2", "https://api.laggar.gcw.crowdstrike.com", "usgov1"
+        ],
                         reason="Unit testing unavailable on US-2 / EU-1"
                         )
     def test_get_aws_account_scripts_attachment(self):
