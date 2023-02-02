@@ -82,6 +82,34 @@ class Discover(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_applications(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get details on applications by providing one or more IDs.
+
+        Find application IDs with `query_applications`.
+
+        Keyword arguments:
+        ids -- One or more application IDs (max: 100). String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/get-applications
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_applications",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_hosts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get details on assets by providing one or more IDs.
 
@@ -187,6 +215,41 @@ class Discover(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="query_accounts",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_applications(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for applications in your environment.
+
+        Supports providing a FQL (Falcon Query Language) filter and paging details.
+        Returns a set of account IDs which match the filter criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The number of account IDs to return in this response. (Max: 100, default: 100)
+                 Use with the offset parameter to manage pagination of results.
+        offset -- An offset used with the limit parameter to manage pagination of results.
+                  On your first request, don’t provide an offset. On subsequent requests,
+                  provide the offset from the previous response to continue from that place
+                  in the results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- Sort assets by their properties. A single sort field is allowed.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/query-applications
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="query_applications",
             keywords=kwargs,
             params=parameters
             )

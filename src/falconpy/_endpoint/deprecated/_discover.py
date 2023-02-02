@@ -58,6 +58,26 @@ _discover_endpoints = [
     ]
   ],
   [
+    "get-applications",
+    "GET",
+    "/discover/entities/applications/v1",
+    "Get details on applications by providing one or more IDs.",
+    "discover",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The IDs of applications to retrieve. (Min: 1, Max: 100)",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "get-hosts",
     "GET",
     "/discover/entities/hosts/v1",
@@ -108,9 +128,50 @@ _discover_endpoints = [
       {
         "minimum": 0,
         "type": "integer",
-        "description": "An offset used with the `limit` parameter to manage pagination of results. "
-        "On your first request, don’t provide an `offset`. On subsequent requests, provide the `offset` "
-        "from the previous response to continue from that place in the results.",
+        "description": "An offset used with the `limit` parameter to manage pagination of results. On your first request, "
+        "don’t provide an `offset`. On subsequent requests, provide the `offset` from the previous response to continue "
+        "from that place in the results.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "maximum": 100,
+        "minimum": 1,
+        "type": "integer",
+        "description": "The number of account IDs to return in this response (min: 1, max: 100, default: 100). "
+        "Use with the `offset` parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort accounts by their properties. A single sort field is allowed. Common sort options include:"
+        "\n\n<ul><li>username|asc</li><li>last_failed_login_timestamp|desc</li></ul>",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter accounts using an FQL query. Common filter options include:\n\n<ul><li>"
+        "account_type:'Local'</li><li>admin_privileges:'Yes'</li><li>first_seen_timestamp:<'now-7d'</li>"
+        "<li>last_successful_login_type:'Terminal server'</li></ul>",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "query-applications",
+    "GET",
+    "/discover/queries/applications/v1",
+    "Search for applications in your environment by providing an FQL filter and paging details. "
+    "returns a set of application IDs which match the filter criteria.",
+    "discover",
+    [
+      {
+        "minimum": 0,
+        "type": "integer",
+        "description": "The index of the starting resource.",
         "name": "offset",
         "in": "query"
       },
