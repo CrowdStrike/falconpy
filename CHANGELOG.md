@@ -1,3 +1,23 @@
+# Version 1.2.11
+## Added features and functionality
++ Added: Two new operations added to the __Discover__ Service Class, `query_applications` and `get_applications`.
+    - `discover.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_discover.py`
+
+## Issues resolved
++ Fixed: Added `variables` keyword to `GraphQL` within __IdentityProtection__ Service Class. Closes #902.
+    - `identity_protection.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_identity_protection.py`
+    - Thanks go out to @cl6227 for identifying and reporting this issue! 🙇
+
++ Fixed: Missing default value for `file_data` keyword argument of the `upload_sample` method of the __SampleUploads__ Service Class. Closes #898.
+    - `falconx_sandbox.py`
+    - Thanks go out to @awhogan for identifying and reporting this issue! 🙇
+
+---
+
 # Version 1.2.10
 ## Added features and functionality
 + Added: Two new operations added to the __DeviceControlPolicies__ Service Class, `getDefaultDeviceControlPolicies` and `updateDefaultDeviceControlPolicies`.
