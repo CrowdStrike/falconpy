@@ -40,7 +40,7 @@ class TestIdentityProtection:
 
     def idp_graphql_keywords(self):
         test_query = "{\n  entities(first: 1)\n  {\n    nodes {\n      entityId    \n    }\n  }\n}"
-        result = falcon.graphql(query=test_query)
+        result = falcon.graphql(query=test_query, variables={"after": "whatever"})
         if not isinstance(result, dict):
             result = json.loads(result.decode())
         else:
