@@ -9,6 +9,7 @@ The examples in this folder focus on leveraging CrowdStrike's Hosts API to perfo
 - [List (and optionally remove) stale sensors](#list-stale-sensors)
 - [Match usernames to Hosts](#match-usernames-to-hosts)
 - [Offset vs. Offset Tokens](#comparing-querydevicesbyfilter-and-querydevicesbyfilterscroll-offset-vs-token)
+- [Prune Hosts by Hostname or AID](#prune-hosts-by-hostname-or-aid)
 
 ## List sensors by hostname
 Loops through all hosts and displays the hostname and sensor version.
@@ -384,3 +385,107 @@ python3 offset_vs_token.py
 
 ### Example source code
 The source code for this example can be found [here](offset_vs_token.py).
+
+---
+
+## Prune Hosts by Hostname or AID
+Search for and optionally remove hosts by hostname or AID. Removed host AIDs are saved to a file which can be leveraged to restore removed hosts.
+
+### Running the program.
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__, __WRITE__ |
+
+### Execution syntax
+
+List hosts by hostname or AID.
+
+```shell
+python3 prune_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f HOSTNAME
+```
+
+Remove identified hosts.
+
+```shell
+python3 prune_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f HOSTNAME -d
+```
+
+Restore previously deleted hosts from the restore file.
+
+```shell
+python3 prune_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -r -a RESTORE_FILENAME
+```
+
+Restore previously deleted hosts by AID.
+
+```shell
+python3 prune_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -r -a AID1,AID2,AID3
+```
+
+Change your BASE_URL to point to GovCloud.
+
+```shell
+python3 prune_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -b usgov1
+```
+
+Search a child tenant for hosts to remove.
+
+```shell
+python3 prune_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f HOSTNAME -m CHILD_CID
+```
+
+### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+python3 prune_hosts.py -h
+usage: prune_hosts.py [-h] [-b BASE_URL] [-f FIND] [-r] [-a AIDS] [-d] [-m MSSP] -k FALCON_CLIENT_ID -s FALCON_CLIENT_SECRET
+
+Remove sensors by name or AID sample.
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |        FalconPy v1.2
+`-------'                         `-------'
+
+ __ __   ___    _____ ______      ____  ____   __ __  ____     ___  ____
+|  T  T /   \  / ___/|      T    |    \|    \ |  T  T|    \   /  _]|    \
+|  l  |Y     Y(   \_ |      |    |  o  )  D  )|  |  ||  _  Y /  [_ |  D  )
+|  _  ||  O  | \__  Tl_j  l_j    |   _/|    / |  |  ||  |  |Y    _]|    /
+|  |  ||     | /  \ |  |  |      |  |  |    \ |  :  ||  |  ||   [_ |    \
+|  |  |l     ! \    |  |  |      |  |  |  .  Yl     ||  |  ||     T|  .  Y
+l__j__j \___/   \___j  l__j      l__j  l__j\_j \__,_jl__j__jl_____jl__j\_j
+
+Removes hosts by hostname or AID. Can restore hosts that have been removed.
+
+02.11.23 - jshcodes@CrowdStrike
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -b BASE_URL, --base_url BASE_URL
+                        CrowdStrike Region (us1, us2, eu1, usgov1)
+                        Only required for GovCloud users.
+  -f FIND, --find FIND  Hostname or AID string to use to identify hosts for removal.
+                        Hostname searches are stemmed, AID searches must be an exact match.
+  -r, --restore         Restores prevously deleted hosts using a save file or list of AIDs.
+                        Specify the AID list or filename using the `-a` command line argument.
+  -a AIDS, --aids AIDS  List of AIDs to restore (comma delimited string or a filename).
+  -d, --delete          Perform the delete, default behavior is to list only.
+  -m MSSP, --mssp MSSP  CID of a child tenant to access (MSSP only).
+
+required arguments:
+  -k FALCON_CLIENT_ID, --falcon_client_id FALCON_CLIENT_ID
+                        CrowdStrike Falcon API client ID.
+  -s FALCON_CLIENT_SECRET, --falcon_client_secret FALCON_CLIENT_SECRET
+                        CrowdStrike Falcon API client secret.
+```
+
+### Example source code
+The source code for this example can be found [here](prune_hosts.py).
+
+---
