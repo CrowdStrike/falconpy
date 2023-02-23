@@ -42,7 +42,8 @@ PREFER_NONETYPE = [
 ]
 PREFER_IDS_IN_BODY = [
     "GetDeviceDetails", "PostDeviceDetailsV2", "GetVulnerabilities", "GetIntelIndicatorEntities",
-    "getChildrenV2", "cancel-scans", "GetDetectSummaries"
+    "getChildrenV2", "cancel-scans", "GetDetectSummaries", "UpdateQuarantinedDetectsByIds",
+    "GetQuarantineFiles"
 ]
 MOCK_OPERATIONS = [
     "GetImageAssessmentReport", "DeleteImageDetails", "ImageMatchesPolicy"
