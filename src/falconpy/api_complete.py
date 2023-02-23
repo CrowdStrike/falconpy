@@ -79,7 +79,9 @@ class APIHarness:
 
         Keyword arguments:
         base_url: CrowdStrike API URL to use for requests. [Default: US-1]
-        ssl_verify: Boolean specifying if SSL verification should be used. [Default: True]
+        ssl_verify: Boolean specifying if SSL verification should be used or string representing
+                    the path to a CA_BUNDLE file or directory of trusted certificates.
+                    Default: True
         proxy: Dictionary of proxies to be used for requests.
         timeout: Float or tuple specifying timeouts to use for requests.
         creds: Dictionary containing CrowdStrike API credentials.
