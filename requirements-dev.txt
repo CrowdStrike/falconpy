@@ -15,6 +15,6 @@ coverage>=5.5       # via -r requirements-dev.in
 flake8>=3.9.0       # via -r requirements-dev.in
 pytest-cov>=2.11.1  # via -r requirements-dev.in
 pytest>=6.2.2       # via -r requirements-dev.in
-ipython>=7.21.0     # via -r requirements-dev.in
+ipython>=8.10.0     # via -r requirements-dev.in, pinned by Snyk to avoid SNYK-PYTHON-IPYTHON-3318382
 pydocstyle>=6.1.0
 setuptools>=65.5.1  # not directly required, pinned by Snyk to avoid SNYK-PYTHON-SETUPTOOLS-3113904
