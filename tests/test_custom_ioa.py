@@ -36,7 +36,11 @@ class TestCustomIOA:
             "get_rule_types": falcon.get_rule_types(ids='12345678'),
             "get_rules_get": falcon.get_rules_get(ids=['12345678', '23456789', '09876544']),
             "get_rules": falcon.get_rulesMixin0(ids='12345678'),
-            "create_rule": falcon.create_rule(field_values={"something": "something-darkside"}, cs_username='falconpy_unit_testing'),
+            "create_rule": falcon.create_rule(field_values={"something": "something-darkside"},
+                                              cs_username='falconpy_unit_testing',
+                                              rule_updates=[{"description": "New description"}]
+                                              ),
+            "create_rule_also": falcon.create_rule(field_values=[{"something": "something-darkside"}], rule_updates={"description": "New description"}),
             "delete_rules": falcon.delete_rules(ids='12345678', cs_username='falconpy_unit_testing'),
             "update_rules": falcon.update_rules(cs_username='falconpy_unit_testing',
                                                 enabled=True,
