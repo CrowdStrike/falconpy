@@ -147,8 +147,16 @@ def ioa_custom_payload(passed_keywords: dict) -> dict:
     if passed_keywords.get("disposition_id", -1) >= 0:
         returned_payload["disposition_id"] = passed_keywords.get("disposition_id", None)
     if passed_keywords.get("field_values", None):
-        returned_payload["field_values"] = [passed_keywords.get("field_values", None)]
+        field_values = passed_keywords.get("field_values")
+        if isinstance(field_values, dict):  # Issue 916
+            returned_payload["field_values"] = [field_values]
+        else:
+            returned_payload["field_values"] = field_values
     if passed_keywords.get("rule_updates", None):
-        returned_payload["rule_updates"] = [passed_keywords.get("rule_updates", None)]
+        rule_updates = passed_keywords.get("rule_updates")
+        if isinstance(rule_updates, dict):  # Issue 916
+            returned_payload["rule_updates"] = [rule_updates]
+        else:
+            returned_payload["rule_updates"] = rule_updates
 
     return returned_payload
