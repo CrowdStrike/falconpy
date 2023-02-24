@@ -792,3 +792,7 @@ multithreaded
 uptime
 uptimes
 awhogan
+GraphQL
+graphql
+primaryDisplayName
+secondaryDisplayName
