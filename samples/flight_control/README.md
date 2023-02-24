@@ -5,6 +5,7 @@
 The examples within this folder focus on leveraging CrowdStrike's Falcon Flight Control to interact with child hosts.
 
 - [Retrieve child CID for a host](#retrieve-child-cid-for-a-host)
+- [Get Child Prevention Policies](#get-child-prevention-policies)
 - [Host Group Duplicator](#host-group-duplicator)
 - [Execute a command on hosts across multiple children](#execute-a-command-on-hosts-across-multiple-children)
 
@@ -58,6 +59,73 @@ optional arguments:
 
 ### Example source code
 The source code for this example can be found [here](find_child_cid.py).
+
+## Get Child Prevention Policies
+Retrieve prevention policies for some or all child tenants.
+
+### Running the program
+In order to run this demonstration, you you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Flight Control | __READ__ |
+| Prevention Policies | __READ__ |
+
+### Execution syntax
+This sample leverages simple command-line arguments to implement functionality.
+
+#### Basic usage
+Retrieve prevention policies for all child tenants.
+
+```shell
+python3 get_child_prevention_policies.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> Retrieve prevention policies for specific child tenants.
+
+```shell
+python3 get_child_prevention_policies.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c CHILD_CID1,CHILD_CID2
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+python3 get_child_prevention_policies.py -h
+usage: get_child_prevention_policies.py [-h] -k FALCON_CLIENT_ID -s FALCON_CLIENT_SECRET [-c CHILDREN]
+
+Retrieve child prevention policies.
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |         FalconPy v1.2
+`-------'                         `-------'
+
+___  ____ ____ _  _ ____ _  _ ___ _ ____ _  _    ___  ____ _    _ ____ _ ____ ____
+|__] |__/ |___ |  | |___ |\ |  |  | |  | |\ |    |__] |  | |    | |    | |___ [__
+|    |  \ |___  \/  |___ | \|  |  | |__| | \|    |    |__| |___ | |___ | |___ ___]
+
+Retrieve the prevention policies for all (or a subset of) child tenants within the parent.
+
+Creation: 02.19.23 - jshcodes@CrowdStrike
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CHILDREN, --children CHILDREN
+                        List of children to retrieve (comma-delimit)
+
+required arguments:
+  -k FALCON_CLIENT_ID, --falcon_client_id FALCON_CLIENT_ID
+                        CrowdStrike Falcon API client ID
+  -s FALCON_CLIENT_SECRET, --falcon_client_secret FALCON_CLIENT_SECRET
+                        CrowdStrike Falcon API client Secret
+```
+
+### Example source code
+The source code for this example can be found [here](get_child_prevention_policies.py).
 
 ## Host Group Duplicator
 Duplicates the specified host group within a parent to all child tenants.
