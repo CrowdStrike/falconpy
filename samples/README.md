@@ -37,10 +37,11 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
 | [Falcon Discover](#falcon-discover) | [List discovered hosts](#list-discovered-hosts) |
 | [Falcon Discover for Cloud and Containers](#falcon-discover-for-cloud-and-containers-aws-accounts) | [Manage Discover accounts (AWS)](#manage-discover-accounts) |
 | [Falcon Horizon](#falcon-horizon) | [Get CSPM policies](#get-cspm-policies) |
-| [Falcon Flight Control](#falcon-flight-control) | [Find child CID](#find-child-cid)<BR/>[Host Group Duplicator](#host-group-duplicator)<BR/>[Execute a command on hosts across multiple children](#execute-a-command-on-hosts-across-multiple-children) |
+| [Falcon Flight Control](#falcon-flight-control) | [Find child CID](#find-child-cid)<BR/>[Get Child Prevention Policies](#get-child-prevention-policies)<BR/>[Host Group Duplicator](#host-group-duplicator)<BR/>[Execute a command on hosts across multiple children](#execute-a-command-on-hosts-across-multiple-children) |
 | [Falcon Intelligence](#falcon-intelligence) | [Manage sandbox uploads](#manage-sandbox-uploads)<BR/>[Falcon Intelligence sandbox scan](#falcon-intelligence-sandbox-scan)<BR/>[Get all artifacts](#get-all-artifacts)<BR/>[Quick Scan a target](#quick-scan-a-target)<BR/>[S3 Bucket Protection](#s3-bucket-protection) |
 | [Firewall Management](#firewall-management) | [Export Firewall events to a file](#export-firewall-events-to-a-file) |
 | [Hosts](#hosts) | [List sensors by hostname](#list-sensors-by-hostname)<BR/>[Manage duplicate sensors](#manage-duplicate-sensors)<BR/>[CUSSED (Manage stale sensors)](#cussed-manage-stale-sensors)<BR/>[Match usernames to hosts](#match-usernames-to-hosts)<BR/>[Offset vs. Token](#offset-vs-token)<BR/>[Prune Hosts by Hostname or AID](#prune-hosts-by-hostname-or-aid)<BR/>[Quarantine a host](#quarantine-a-host)<BR/>[Quarantine a host (updated version)](#quarantine-a-host-updated-version) |
+| [Identity Protection](#identity-protection) | [GraphQL Pagination](#graphql-pagination) |
 | [Incidents](#incidents) | [CrowdScore QuickChart](#crowdscore-quickchart)<BR/>[Incident Triage](#incident-triage) |
 | [Intel](#intel) | [MISP Import](#misp-import) |
 | [IOC](#ioc) | [Create indicators](#create-indicators) |
@@ -243,6 +244,21 @@ This sample demonstrates the following CrowdStrike Flight Control API operations
 | Operation | Description |
 | :--- | :--- |
 | [QueryChildren](https://falconpy.io/Service-Collections/MSSP.html#querychildren) | Query for customers linked as children. |
+
+---
+
+### Get Child Prevention Policies
+This [example](flight_control/get_child_prevention_policies.py) uses the Flight Control and Prevention Policies Host Group APIs to demonstrate retrieving prevention policies for some or all child tenants.
+
+[![Falcon Flight Control](https://img.shields.io/badge/Service%20Class-Get_Child_Prevention_Policies-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](flight_control/get_child_prevention_policies.py) [![MSSP Use supported](https://img.shields.io/badge/-Supports%20MSSP-darkblue?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==&style=for-the-badge)](flight_control/get_child_prevention_policies.py)
+
+#### Flight Control and Prevention Policies API operations discussed
+This sample demonstrates the following CrowdStrike Flight Control and Prevention Policies API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [QueryChildren](https://falconpy.io/Service-Collections/MSSP.html#querychildren) | Query for customers linked as children. |
+| [queryCombinedPreventionPolicies](https://www.falconpy.io/Service-Collections/Prevention-Policy.html#querycombinedpreventionpolicies) | Search for Prevention Policies in your environment by providing a FQL filter and paging details. Returns a set of Prevention Policies which match the filter criteria. |
 
 ---
 
@@ -531,6 +547,25 @@ This sample demonstrates the following CrowdStrike Hosts API operations:
 | :--- | :--- |
 | [PerformActionV2](https://falconpy.io/Service-Collections/Hosts.html#performactionv2) | Take various actions on the hosts in your environment. Contain or lift containment on a host. Delete or restore a host. |
 | [QueryDevicesByFilter](https://falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilter) | Search for hosts in your environment by platform, hostname, IP, and other criteria. |
+
+---
+
+## Identity Protection
+This category is dedicated to demonstrating the functionality provided by the CrowdStrike Identity Protection API service collection.
+
+- [GraphQL Pagination](#graphql-pagination)
+
+### GraphQL Pagination
+This sample demonstrates pagination using GraphQL within the Identity Protection service collection.
+
+[![Identity Protection](https://img.shields.io/badge/Service%20Class-GraphQL_Pagination-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](https://github.com/CrowdStrike/falconpy/tree/main/samples/identity#graphql-pagination)
+
+#### Identity Protection API operations discussed
+This sample demonstrates the following CrowdStrike Identity Protection API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [api_preempt_proxy_post_graphql](https://www.falconpy.io/Service-Collections/Identity-Protection.html#api_preempt_proxy_post_graphql) | Identity Protection GraphQL API. Allows for retrieving entities, timeline activities, identity-based incidents and security assessment. Allows for performing actions on entities and identity-based incidents. |
 
 ---
 
