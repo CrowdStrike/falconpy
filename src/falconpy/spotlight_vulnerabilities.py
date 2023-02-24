@@ -71,7 +71,7 @@ class SpotlightVulnerabilities(ServiceClass):
                  remediation_details    evaluation_logic
         filter -- Filter items using a query in Falcon Query Language (FQL).
                   Wildcards '*' are unsupported.
-        limit -- The number of items to return in this response (default: 100, max: 400).
+        limit -- The number of items to return in this response (default: 100, max: 5000).
                  Use with the after parameter to manage pagination of results. Integer.
         parameters - full parameters payload, not required if using other keywords.
         sort -- The property to sort by.
