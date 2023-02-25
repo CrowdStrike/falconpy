@@ -796,3 +796,9 @@ GraphQL
 graphql
 primaryDisplayName
 secondaryDisplayName
+ATT
+GetMitreReport
+MITRE
+Mitre
+QueryMitreAttacks
+Chollima
