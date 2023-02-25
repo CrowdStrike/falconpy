@@ -14,7 +14,7 @@ In order to run this demonstration, you you will need access to CrowdStrike API 
 
 | Service Collection | Scope |
 | :---- | :---- |
-| IdentityProtection | __READ__ |
+| Identity Protection | __READ__ |
 
 ### Execution syntax
 This sample leverages simple command-line arguments to implement functionality.
