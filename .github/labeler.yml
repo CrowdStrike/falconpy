@@ -28,7 +28,9 @@ code samples:
 - samples/firewall_management/*.py
 - samples/flight_control/*.py
 - samples/hosts/*.py
+- samples/identity/*.py
 - samples/incidents/*.py
+- samples/intel/*.py
 - samples/ioc/*.py
 - samples/malquery/*.py
 - samples/prevention_policy/*.py
