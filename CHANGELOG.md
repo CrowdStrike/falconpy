@@ -1,3 +1,31 @@
+# Version 1.2.12
+## Added features and functionality
++ Added: Enhanced payload handler for `create_rule` operation to allow for passing a list of dictionaries for the `field_values` keyword. Closes #916.
+    - `_payload/_ioa.py`
+    - `tests/test_custom_ioa.py`
++ Added: 5 new operations added to the __KubernetesProtection__ Service Class, `GetAzureInstallScript`, `GetAzureTenantConfig`, `GetAzureTenantIDs`, `GetCombinedCloudClusters`, and `GetStaticScripts`.
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_kubernetes_protection.py`
+
+## Issues resolved
++ Fixed: Updated docstring comments to properly reflect syntax for providing a trusted certificate bundle for API requests. Closes #910.
+    - `_service_class.py`
+    - `api_complete.py`
++ Pinned: IPython version pinned to 8.10.0 to avoid `SNYK-PYTHON-IPYTHON-3318382`.
+    - `requirements-dev.txt`
++ Fixed: Added missing `ids` keyword handlers for Uber Class operation calls. Closes #919.
+    - `_uber_default_preferences.py`
++ Fixed: Updated docstrings for `combinedQueryVulnerabilities` operation to properly list request limit of 5000. Closes #922.
+    - `spotlight_vulnerabilities.py`
+
+## Other
++ Updated: Removed unnecessary `source` parameter from endpoint module for `ArchiveUploadV2` operation.
+    - `_endpoint/_sample_uploads.py`
+
+---
+
 # Version 1.2.11
 ## Added features and functionality
 + Added: Two new operations added to the __Discover__ Service Class, `query_applications` and `get_applications`.
