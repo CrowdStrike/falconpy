@@ -802,3 +802,4 @@ MITRE
 Mitre
 QueryMitreAttacks
 Chollima
+IPython
