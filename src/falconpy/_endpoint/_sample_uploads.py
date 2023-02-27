@@ -163,12 +163,6 @@ _sample_uploads_endpoints = [
     "sample_uploads",
     [
       {
-        "description": "Source of archive.",
-        "name": "source",
-        "in": "formData",
-        "required": True
-      },
-      {
         "type": "file",
         "description": "Content of the uploaded archive. For example, use `--form file=@$FILE_PATH` when using cURL.",
         "name": "file",
