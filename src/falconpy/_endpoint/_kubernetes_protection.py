@@ -271,6 +271,121 @@ _kubernetes_protection_endpoints = [
     ]
   ],
   [
+    "GetCombinedCloudClusters",
+    "GET",
+    "/kubernetes-protection/entities/cloud_cluster/v1",
+    "Returns a combined list of provisioned cloud accounts and known kubernetes clusters",
+    "kubernetes_protection",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Cloud location",
+        "name": "locations",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Cloud Account IDs",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "aks",
+          "eks"
+        ],
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Cluster Service",
+        "name": "cluster_service",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "Not Installed",
+          "Running",
+          "Stopped"
+        ],
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Cluster Status",
+        "name": "cluster_status",
+        "in": "query"
+      },
+      {
+        "maximum": 1000,
+        "minimum": 0,
+        "type": "integer",
+        "description": "Limit returned accounts",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "integer",
+        "description": "Offset returned accounts",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetAzureTenantConfig",
+    "GET",
+    "/kubernetes-protection/entities/config/azure/v1",
+    "Gets the Azure tenant Config",
+    "kubernetes_protection",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Azure Tenant IDs",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "maximum": 1000,
+        "minimum": 0,
+        "type": "integer",
+        "description": "Limit returned accounts",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "integer",
+        "description": "Offset returned accounts",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetStaticScripts",
+    "GET",
+    "/kubernetes-protection/entities/gen/scripts/v1",
+    "Gets static bash scripts that are used during registration",
+    "kubernetes_protection",
+    []
+  ],
+  [
     "GetHelmValuesYaml",
     "GET",
     "/kubernetes-protection/entities/integration/agent/v1",
@@ -406,6 +521,79 @@ _kubernetes_protection_endpoints = [
         "name": "client_id",
         "in": "query",
         "required": True
+      }
+    ]
+  ],
+  [
+    "GetAzureTenantIDs",
+    "GET",
+    "/kubernetes-protection/entities/tenants/azure/v1",
+    "Provides all the azure subscriptions and tenants",
+    "kubernetes_protection",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Azure Tenant IDs",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "Not Installed",
+          "Running",
+          "Stopped"
+        ],
+        "type": "string",
+        "description": "Cluster Status",
+        "name": "status",
+        "in": "query"
+      },
+      {
+        "maximum": 1000,
+        "minimum": 0,
+        "type": "integer",
+        "description": "Limit returned accounts",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "integer",
+        "description": "Offset returned accounts",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetAzureInstallScript",
+    "GET",
+    "/kubernetes-protection/entities/user-script/azure/v1",
+    "Provides the script to run for a given tenant id and subscription IDs",
+    "kubernetes_protection",
+    [
+      {
+        "maxLength": 36,
+        "minLength": 36,
+        "pattern": "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}$",
+        "type": "string",
+        "description": "Azure Tenant ID",
+        "name": "id",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Azure Subscription IDs",
+        "name": "subscription_id",
+        "in": "query"
       }
     ]
   ]

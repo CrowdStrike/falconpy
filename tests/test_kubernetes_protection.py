@@ -36,7 +36,12 @@ class TestKubeProtect:
             "TriggerScan": falcon.trigger_scan(scan_type='dry-run'),  # 403
             "PatchAzureSubscription": falcon.patch_azure_service_principal(subscription_id="whatever",
                                                                            client_id="whatever"
-                                                                           )
+                                                                           ),
+            "GetCombinedCloudClusters": falcon.get_cloud_clusters(ids="123456789"),
+            "GetAzureTenantConfig": falcon.get_azure_tenant_config(ids="whatevers"),
+            "GetStaticScripts": falcon.get_static_scripts(),
+            "GetAzureTenantIDs": falcon.get_azure_tenant_ids(ids="12345678"),
+            "GetAzureInstallScript": falcon.get_azure_install_script(ids="123456789")
         }
 
         for key in tests:
