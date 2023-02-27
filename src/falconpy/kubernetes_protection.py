@@ -302,6 +302,137 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_cloud_clusters(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Return a combined list of provisioned cloud accounts and known kubernetes clusters.
+
+        Keyword arguments:
+        cluser_service -- Cluster Service. String or list of strings.
+        cluster_status -- Cluster Status. String or list of strings.
+        ids -- Cloud Account IDs. String or list of strings.
+        locations -- Cloud location. String or list of strings.
+        limit -- Limit returned results. Integer.
+        offset -- Offset to use for pagination. Integer.
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/GetCombinedCloudClusters
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCombinedCloudClusters",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_azure_tenant_config(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve the Azure tenant config.
+
+        Keyword arguments:
+        ids -- Cloud Account IDs. String or list of strings.
+        limit -- Limit returned results. Integer.
+        offset -- Offset to use for pagination. Integer.
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/GetAzureTenantConfig
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetAzureTenantConfig",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_azure_tenant_ids(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Provide all the azure subscriptions and tenants.
+
+        Keyword arguments:
+        ids -- Cloud Account IDs. String or list of strings.
+        status -- Cluster Status. String. (Not Installed, Running, Stopped)
+        limit -- Limit returned results. Integer.
+        offset -- Offset to use for pagination. Integer.
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/GetAzureTenantIDs
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetAzureTenantIDs",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_azure_install_script(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Provide the script to run for a given tenant id and subscription IDs.
+
+        Keyword arguments:
+        ids -- Azure Tenant ID. String.
+        subscription_id -- Azure Subscription IDs. String or list of strings.
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/GetAzureInstallScript
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetAzureInstallScript",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_static_scripts(self: object, parameters: dict = None) -> dict:
+        """Get static bash scripts that are used during registration.
+
+        This method does not accept arguments or keywords.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/GetStaticScripts
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetStaticScripts",
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_helm_values_yaml(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Provide a sample Helm values.yaml file to install alongside the agent Helm chart.
 
@@ -454,6 +585,11 @@ class KubernetesProtection(ServiceClass):
     CreateAzureSubscription = create_azure_subscription
     DeleteAzureSubscription = delete_azure_subscription
     GetLocations = get_locations
+    GetCombinedCloudClusters = get_cloud_clusters
+    GetAzureTenantConfig = get_azure_tenant_config
+    GetAzureTenantIDs = get_azure_tenant_ids
+    GetAzureInstallScript = get_azure_install_script
+    GetStaticScripts = get_static_scripts
     GetHelmValuesYaml = get_helm_values_yaml
     regenerate_api_key = regenerate
     RegenerateAPIKey = regenerate
