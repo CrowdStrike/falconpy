@@ -95,8 +95,6 @@ def get_version_map(sensor_versions: list):  # pylint: disable=R0914
         if plat and os_name:
             for os_type, os_detail in version_map.get(plat, {}).items():
                 if os_type == f"{os_name} {os_ver}".strip():
-                    #check_ver = ver.split(".")
-                    #vers = os_detail.get("current", {}).get("version", "0.0.0").split(".")
                     if not os_detail.get("current", {}):
                         os_detail["current"] = {}
                         os_detail["current"]["name"] = name
@@ -107,7 +105,6 @@ def get_version_map(sensor_versions: list):  # pylint: disable=R0914
                     else:
                         current = True
                     if current and not os_detail.get("previous", {}):
-                        #pvers = os_detail.get("previous", {}).get("version", "0.0.0").split(".")
                         os_detail["previous"] = {}
                         os_detail["previous"]["name"] = name
                         os_detail["previous"]["version"] = ver
@@ -117,7 +114,6 @@ def get_version_map(sensor_versions: list):  # pylint: disable=R0914
                     elif current and os_detail.get("previous", {}):
                         prev = True
                     if current and prev and not os_detail.get("oldest", {}):
-                        #pvers = os_detail.get("previous", {}).get("version", "0.0.0").split(".")
                         os_detail["oldest"] = {}
                         os_detail["oldest"]["name"] = name
                         os_detail["oldest"]["version"] = ver
@@ -178,7 +174,10 @@ CMD, CLIENTID, CLIENTSECRET, OS_FILTER, FILENAME, FORMAT, SHOW_ALL, \
 
 # Login to the Falcon API and retrieve our list of sensors
 falcon = APIHarness(client_id=CLIENTID, client_secret=CLIENTSECRET)
-sensors = falcon.command(action="GetCombinedSensorInstallersByQuery", filter=OS_FILTER)
+sensors = falcon.command(action="GetCombinedSensorInstallersByQuery",
+                         filter=OS_FILTER,
+                         sort="version.desc"
+                         )
 if CMD in "list":
     # List sensors
     data = []
