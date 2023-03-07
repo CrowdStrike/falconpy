@@ -25,9 +25,9 @@ def get_all_vulnerabilites_from_account(client_id, secret, filter, verbose=False
     iterations = 0
     facet = {"cve", "host_info", "remediation", "evaluation_logic"}
     spotlight_results = spotlight.query_vulnerabilities_combined(filter=filter, facet=facet, limit=400)
-    after_token = 'blah'
+    after = 'blah'
     rows_dict_list = []
-    while after_token != None:
+    while after != None:
         # Retrieve a list of vulns
         # Confirm we received a success response back from the CrowdStrike API
         if spotlight_results["status_code"] == 200:
@@ -47,7 +47,7 @@ def get_all_vulnerabilites_from_account(client_id, secret, filter, verbose=False
         if len(spotlight_results["body"]["resources"]) < 400:
             break
 
-        after_token = None
+        after = None
         if 'after' in spotlight_results['body']['meta']['pagination']:
             after_token = spotlight_results['body']['meta']['pagination']['after']
         
@@ -60,7 +60,7 @@ def get_all_vulnerabilites_from_account(client_id, secret, filter, verbose=False
             print("[+] Total Records Pulled: %d" % len(rows_dict_list))
             print("[+] Elapsed Time (seconds): %d minutes %d seconds" % (elapsed_minutes, elapsed_seconds))
             
-        spotlight_results = spotlight.query_vulnerabilities_combined(filter=filter, limit=400, after=after_token)
+        spotlight_results = spotlight.query_vulnerabilities_combined(filter=filter, limit=400, after=after)
 
     return pd.json_normalize(rows_dict_list)
 
