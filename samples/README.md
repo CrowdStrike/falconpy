@@ -34,7 +34,7 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
 | [Custom IOA](#custom-ioa) | [Custom IOA Cloner](#custom-ioa-cloner) |
 | [Detects](#detects) | [Detects Advisor](#detects-advisor) |
 | [Event Streams](#event-streams) | [Send detections to AWS Security Hub](#send-detections-to-aws-security-hub) |
-| [Falcon Discover](#falcon-discover) | [List discovered hosts](#list-discovered-hosts) |
+| [Falcon Discover](#falcon-discover) | [List discovered hosts](#list-discovered-hosts)<BR/>[Spyglass](#spyglass) |
 | [Falcon Discover for Cloud and Containers](#falcon-discover-for-cloud-and-containers-aws-accounts) | [Manage Discover accounts (AWS)](#manage-discover-accounts) |
 | [Falcon Horizon](#falcon-horizon) | [Get CSPM policies](#get-cspm-policies) |
 | [Falcon Flight Control](#falcon-flight-control) | [Find child CID](#find-child-cid)<BR/>[Get Child Prevention Policies](#get-child-prevention-policies)<BR/>[Host Group Duplicator](#host-group-duplicator)<BR/>[Execute a command on hosts across multiple children](#execute-a-command-on-hosts-across-multiple-children) |
@@ -188,6 +188,28 @@ This sample demonstrates the following CrowdStrike Discover API operations:
 | :--- | :--- |
 | [get_hosts](https://falconpy.io/Service-Collections/Discover.html#get_hosts) | Get details on assets by providing one or more IDs. |
 | [query_hosts](https://falconpy.io/Service-Collections/Discover.html#query_hosts) | Search for assets in your environment by providing a FQL (Falcon Query Language) filter and paging details. Returns a set of asset IDs which match the filter criteria. |
+
+---
+
+### Spyglass
+
+In this [example](discover/spyglass.py), we demonstrate running a full Falcon Discover audit report (accounts, applications, hosts and logins).
+
+[![Falcon Discover](https://img.shields.io/badge/Service%20Class-Spyglass-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](https://github.com/CrowdStrike/falconpy/tree/main/samples/discover#spyglass) 
+
+#### Discover API operations discussed
+This sample demonstrates the following CrowdStrike Discover API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [get_accounts](https://falconpy.io/Service-Collections/Discover.html#get_accounts) | Get details on accounts by providing one or more IDs. |
+| [get_applications](https://falconpy.io/Service-Collections/Discover.html#get_applications) | Get details on applications by providing one or more IDs. |
+| [get_hosts](https://falconpy.io/Service-Collections/Discover.html#get_hosts) | Get details on assets by providing one or more IDs. |
+| [get_logins](https://falconpy.io/Service-Collections/Discover.html#get_logins) | Get details on logins by providing one or more IDs. |
+| [query_accounts](https://falconpy.io/Service-Collections/Discover.html#query_accounts) | Search for accounts in your environment by providing a FQL (Falcon Query Language) filter and paging details. Returns a set of account IDs which match the filter criteria. |
+| [query_applications](https://falconpy.io/Service-Collections/Discover.html#query_applications) | Search for applications in your environment by providing a FQL (Falcon Query Language) filter and paging details. Returns a set of application IDs which match the filter criteria. |
+| [query_hosts](https://falconpy.io/Service-Collections/Discover.html#query_hosts) | Search for assets in your environment by providing a FQL (Falcon Query Language) filter and paging details. Returns a set of asset IDs which match the filter criteria. |
+| [query_logins](https://falconpy.io/Service-Collections/Discover.html#query_logins) | Search for logins in your environment by providing a FQL (Falcon Query Language) filter and paging details. Returns a set of login IDs which match the filter criteria. |
 
 ---
 
