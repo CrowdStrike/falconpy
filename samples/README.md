@@ -38,7 +38,7 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
 | [Falcon Discover for Cloud and Containers](#falcon-discover-for-cloud-and-containers-aws-accounts) | [Manage Discover accounts (AWS)](#manage-discover-accounts) |
 | [Falcon Horizon](#falcon-horizon) | [Get CSPM policies](#get-cspm-policies) |
 | [Falcon Flight Control](#falcon-flight-control) | [Find child CID](#find-child-cid)<BR/>[Get Child Prevention Policies](#get-child-prevention-policies)<BR/>[Host Group Duplicator](#host-group-duplicator)<BR/>[Execute a command on hosts across multiple children](#execute-a-command-on-hosts-across-multiple-children) |
-| [Falcon Intelligence](#falcon-intelligence) | [Manage sandbox uploads](#manage-sandbox-uploads)<BR/>[Falcon Intelligence sandbox scan](#falcon-intelligence-sandbox-scan)<BR/>[Get all artifacts](#get-all-artifacts)<BR/>[Quick Scan a target](#quick-scan-a-target)<BR/>[S3 Bucket Protection](#s3-bucket-protection) |
+| [Falcon Intelligence](#falcon-intelligence) | [Manage sandbox uploads](#manage-sandbox-uploads)<BR/>[Falcon Intelligence sandbox scan](#falcon-intelligence-sandbox-scan)<BR/>[Get all artifacts](#get-all-artifacts)<BR/>[Quick Scan a target](#quick-scan-a-target)<BR/>[Quick Scan quota check](#quick-scan-quota-check)<BR/>[S3 Bucket Protection](#s3-bucket-protection) |
 | [Firewall Management](#firewall-management) | [Export Firewall events to a file](#export-firewall-events-to-a-file) |
 | [Hosts](#hosts) | [List sensors by hostname](#list-sensors-by-hostname)<BR/>[Manage duplicate sensors](#manage-duplicate-sensors)<BR/>[CUSSED (Manage stale sensors)](#cussed-manage-stale-sensors)<BR/>[Match usernames to hosts](#match-usernames-to-hosts)<BR/>[Offset vs. Token](#offset-vs-token)<BR/>[Prune Hosts by Hostname or AID](#prune-hosts-by-hostname-or-aid)<BR/>[Quarantine a host](#quarantine-a-host)<BR/>[Quarantine a host (updated version)](#quarantine-a-host-updated-version) |
 | [Identity Protection](#identity-protection) | [GraphQL Pagination](#graphql-pagination) |
@@ -398,6 +398,21 @@ This sample demonstrates the following CrowdStrike Quick Scan and Sample Uploads
 | [GetScans](https://falconpy.io/Service-Collections/Quick-Scan.html#getscans) | Check the status of a volume scan. Time required for analysis increases with the number of samples in a volume but usually it should take less than 1 minute. |
 | [ScanSamples](https://falconpy.io/Service-Collections/Quick-Scan.html#scansamples) | Submit a volume of files for ml scanning. Time required for analysis increases with the number of samples in a volume but usually it should take less than 1 minute. |
 | [UploadSampleV3](https://falconpy.io/Service-Collections/Sample-Uploads.html#uploadsamplev3) | Upload a file for further cloud analysis. After uploading, call the specific analysis API endpoint. |
+
+---
+
+### Quick Scan quota check
+
+This [demonstration](quick_scan/quota_check.py) will report your current scan quota.
+
+[![Quick Scan](https://img.shields.io/badge/Service%20Class-Quota_Check-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](https://github.com/CrowdStrike/falconpy/tree/main/samples/quick_scan#quota-check)
+
+#### Quick Scan API operations discussed
+This sample demonstrates the following CrowdStrike Quick Scan API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [GetScans](https://falconpy.io/Service-Collections/Quick-Scan.html#getscans) | Check the status of a volume scan. Time required for analysis increases with the number of samples in a volume but usually it should take less than 1 minute. |
 
 ---
 
