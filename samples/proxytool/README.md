@@ -1,7 +1,7 @@
 ![CrowdStrike Falcon](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png)
 ![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)
 
-# ProxyTool v3
+# ProxyTool v3.4
 This example focuses on leveraging CrowdStrike's Hosts, Host Groups, and Real-Time Response API.
 
 It is a script that fetches CID or Host Group hosts, and uses the batch command and offline queuing of Real-Time Response API to centrally 
@@ -28,14 +28,24 @@ This example accepts the following input parameters.
 | :--- | :--- | :--- |
 | `--falcon_client_id` | Falcon API client ID | required |
 | `--falcon_client_secret` | Falcon API client secret | required |
-| `--proxy_hostname` | Falcon sensor proxy hostname or FQDN | required |
-| `--proxy_port` | Falcon sensor proxy port | required |
+| `--proxy_hostname` | Falcon sensor proxy hostname or FQDN | optional |
+| `--proxy_port` | Falcon sensor proxy port | optional |
+| `--proxy_disable` | Delete/disable sensor prox configuration | optional |
 | `--scope` | `cid` or `hostgroup` | required |
 | `--scope_id` | Either the CID or the Host Group ID | required |
 | `--base_url` | CrowdStrike base URL (only required for GovCloud, pass usgov1) | optional |
 
+If you want to set or change proxy configuration:
 
 ```shell
-python3 proxytool_3.3.py --falcon_client_id FALCON_CLIENT_ID --falcon_client_secret FALCON_CLIENT_SECRET 
+python3 proxytool_3.4.py --falcon_client_id FALCON_CLIENT_ID --falcon_client_secret FALCON_CLIENT_SECRET 
                         --proxy_hostname PROXY_HOST --proxy_port PROXY_PORT --scope hostgroup --scope_id HOST_GROUP_ID
 ```
+
+If you want to disable proxy configuration:
+
+```shell
+python3 proxytool_3.4.py --falcon_client_id FALCON_CLIENT_ID --falcon_client_secret FALCON_CLIENT_SECRET 
+                        --proxy_disable --scope hostgroup --scope_id HOST_GROUP_ID
+```
+
