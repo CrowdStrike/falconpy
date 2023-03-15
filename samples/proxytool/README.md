@@ -30,7 +30,7 @@ This example accepts the following input parameters.
 | `--falcon_client_secret` | Falcon API client secret | required |
 | `--proxy_hostname` | Falcon sensor proxy hostname or FQDN | optional |
 | `--proxy_port` | Falcon sensor proxy port | optional |
-| `--proxy_disable` | Delete/disable sensor prox configuration | optional |
+| `--proxy_disable` | Delete/disable sensor proxy configuration | optional |
 | `--scope` | `cid` or `hostgroup` | required |
 | `--scope_id` | Either the CID or the Host Group ID | required |
 | `--base_url` | CrowdStrike base URL (only required for GovCloud, pass usgov1) | optional |
