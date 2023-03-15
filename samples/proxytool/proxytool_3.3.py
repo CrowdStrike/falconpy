@@ -76,7 +76,7 @@ req.add_argument("--scope_id",
                  required=True
                  )
 
-parser.add_argument("-b", "--base_url",
+req.add_argument("-b", "--base_url",
                     help="CrowdStrike base URL (only required for GovCloud, pass usgov1)",
                     required=False,
                     default="auto"
