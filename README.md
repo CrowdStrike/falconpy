@@ -113,7 +113,7 @@ For each CrowdStrike Falcon API service collection, a matching Service Class is 
 | Sensor Visibility Exclusions | [sensor_visibility_exclusions.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_visibility_exclusions.py) | [SensorVisibilityExclusions](https://www.falconpy.io/Service-Collections/Sensor-Visibility-Exclusions.html) |
 | Sensor Update Policy Management | [sensor_update_policy.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sensor_update_policy.py) | [SensorUpdatePolicy](https://www.falconpy.io/Service-Collections/Sensor-Update-Policy.html) |
 | Spotlight | [spotlight_evaluation_logic.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/spotlight_evaluation_logic.py)<BR/>[spotlight_vulnerabilities.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/spotlight_vulnerabilities.py) | [SpotlightEvaluationLogic](https://www.falconpy.io/Service-Collections/Spotlight-Evaluation-Logic.html)<BR/>[SpotlightVulnerabilities](https://www.falconpy.io/Service-Collections/Spotlight-Vulnerabilities.html) |
-| Falcon Intelligence | [falconx_sandbox.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falconx_sandbox.py)<BR/>[intel.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/intel.py)<br/>[ioc.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ioc.py) <BR/> [iocs.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/iocs.py) <small>*Deprecated*</small><BR/>[malquery.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/malquery.py)<BR/>[quick_scan.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quick_scan.py)<BR/>[recon.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/recon.py)<BR/>[sample_uploads.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sample_uploads.py)| [FalconXSandbox](https://www.falconpy.io/Service-Collections/Falconx-Sandbox.html)<BR/>[Intel](https://www.falconpy.io/Service-Collections/Intel.html)<BR/>[IOC](https://www.falconpy.io/Service-Collections/IOC.html)<BR/>[Iocs](https://www.falconpy.io/Service-Collections/IOCs.html)<BR/>[MalQuery](https://www.falconpy.io/Service-Collections/MalQuery.html)<BR/>[QuickScan](https://www.falconpy.io/Service-Collections/Quick-Scan.html)<BR/><a href="https://www.falconpy.io/Service-Collections/Recon.html" target="_blank">Recon</a><BR/>[SampleUploads](https://www.falconpy.io/Service-Collections/Sample-Uploads.html) |
+| __Falcon Intelligence__<BR/>Intel<BR/>IOC<BR/>IOCS<BR/>MalQuery<BR/>ODS (On Demand Scan)<BR/>Quick Scan<BR/>Recon<BR/>Sample Uploads<BR/>Sandbox | <BR/>[intel.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/intel.py)<br/>[ioc.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ioc.py) <BR/> [iocs.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/iocs.py) <small>*Deprecated*</small><BR/>[malquery.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/malquery.py)<BR/>[ods.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/ods.py)<BR/>[quick_scan.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/quick_scan.py)<BR/>[recon.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/recon.py)<BR/>[sample_uploads.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/sample_uploads.py) <BR/> [falconx_sandbox.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falconx_sandbox.py)| <BR/>[Intel](https://www.falconpy.io/Service-Collections/Intel.html)<BR/>[IOC](https://www.falconpy.io/Service-Collections/IOC.html)<BR/>[Iocs](https://www.falconpy.io/Service-Collections/IOCs.html)<BR/>[MalQuery](https://www.falconpy.io/Service-Collections/MalQuery.html)<BR/>[ODS](https://www.falconpy.io/Service-Collections/ODS.html)<BR/>[QuickScan](https://www.falconpy.io/Service-Collections/Quick-Scan.html)<BR/><a href="https://www.falconpy.io/Service-Collections/Recon.html" target="_blank">Recon</a><BR/>[SampleUploads](https://www.falconpy.io/Service-Collections/Sample-Uploads.html)<BR/>[FalconXSandbox](https://www.falconpy.io/Service-Collections/Falconx-Sandbox.html) |
 | User and Roles | [user_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/user_management.py) | [UserManagement](https://www.falconpy.io/Service-Collections/User-Management.html) |
 | Falcon Zero Trust Assessment | [zero_trust_assessment.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/zero_trust_assessment.py) | [ZeroTrustAssessment](https://www.falconpy.io/Service-Collections/Zero-Trust-Assessment.html) |
 
@@ -216,7 +216,7 @@ else:
 If you are interested in reviewing more examples of FalconPy usage, this repository also maintains a collection of [samples](https://github.com/CrowdStrike/falconpy/tree/main/samples) to help get you started with integrating CrowdStrike Falcon into your DevOps processes.
 
 ## Documentation and Support 📖
-FalconPy is a community-driven open source project designed to assist developers with implementing CrowdStrike's APIs within their applications, and is not a formal CrowdStrike product. As such it carries no formal support, expressed or implied.
+FalconPy is a community-driven, open source project designed to assist developers in leveraging the power of CrowdStrike APIs within their solutions. While not a formal CrowdStrike product, FalconPy is maintained by CrowdStrike and supported in partnership with the open source developer community.
 
 ### Official Project Documentation: [falconpy.io](https://falconpy.io)
 
@@ -245,16 +245,7 @@ The discussion board for this repository also provides the community with means 
 
 [![Discussions](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/join-the-discussion.png)](https://github.com/CrowdStrike/falconpy/discussions)
 
-### Additional content
-The following materials have been produced by the maintainers and members of the community regarding FalconPy.
-
-| Content | Description |
-| :--- | :--- |
-| [![API Office Hour 03.23.21](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/api_office_hour_preso_thumbnail.png)](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/falconpy-api-office-hour_customer_presentation.pdf?raw=true) | **API Office Hour 03-23-21**<BR/>Presentation deck used to discuss FalconPy functionality, structure and roadmap for a virtual API office hour event in March 2021. |
-| [![Fal.Con 2021](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/fal.con-2021-presentation.png)](https://www.crowdstrike.com/falcon/video-on-demand-2021/?wchannelid=w0jyzi2b8e&wmediaid=z5jymvzhyu) | **Fal.Con 2021**<BR/>Virtual presentation given by `@jshcodes` at Fal.Con 2021. Focused on basic functionality and usage, existing integrations that leverage FalconPy, available library documentation, and the FalconPy community. |
-
-
-More information regarding FalconPy documentation and support can be found [here](https://github.com/CrowdStrike/falconpy/blob/main/SUPPORT.md).
+> More information regarding FalconPy documentation and support can be found [here](https://github.com/CrowdStrike/falconpy/blob/main/SUPPORT.md).
 
 
 ## Contribute to FalconPy ☕
@@ -262,13 +253,11 @@ Interested in [being acknowledged](https://github.com/CrowdStrike/falconpy/blob/
 
 There are *many* ways you can contribute to the FalconPy project! 
 
-_Providing feedback_ by opening a GitHub ticket. Even a fly-by "hey, this worked..." is appreciated and helps validate approaches. Ideas on improving the project are most welcome.
-
-_Documenting, blogging, or creating videos_, of how you've used FalconPy! This type of content is *invaluable* and helps our community grow. Open a pull request for inclusion in the [Additional content](https://github.com/CrowdStrike/falconpy#additional-content) section of this page.
-
-_Fix a bug or implement a new feature_. Check out our [open issues on GitHub](https://github.com/CrowdStrike/falconpy/issues) or our [discussion board](https://github.com/CrowdStrike/falconpy/discussions) for inspiration.
-
-_Review pull requests_ by going through the queue of [open pull requests on GitHub](https://github.com/CrowdStrike/falconpy/pulls) and giving feedback to the authors.
+- _Providing feedback_ by opening a GitHub ticket. Even a fly-by "hey, this worked..." is appreciated and helps validate approaches. Ideas on improving the project are most welcome.
+- _Documenting, blogging, or creating videos_, of how you've used FalconPy. This type of content is *invaluable* and helps our community grow. Post these in the [Show and Tell](https://github.com/CrowdStrike/falconpy/discussions/categories/show-and-tell) category of our [discussion board](https://github.com/CrowdStrike/falconpy/discussions).
+- _Submit a sample_ demonstrating how you're using FalconPy by opening a pull request for inclusion in the [Samples Library](https://github.com/CrowdStrike/falconpy/tree/main/samples).
+- _Fix a bug or implement a new feature_. Check out our [open issues on GitHub](https://github.com/CrowdStrike/falconpy/issues) or our [discussion board](https://github.com/CrowdStrike/falconpy/discussions) for inspiration.
+- _Review pull requests_ by going through the queue of [open pull requests on GitHub](https://github.com/CrowdStrike/falconpy/pulls) and giving feedback to the authors.
 
 To get started, review the [Code of Conduct](https://github.com/CrowdStrike/falconpy/blob/main/CODE_OF_CONDUCT.md) for community guidelines, and the [contribution guide](https://github.com/CrowdStrike/falconpy/blob/main/CONTRIBUTING.md) for more detail regarding contributing to the CrowdStrike FalconPy project.
 
