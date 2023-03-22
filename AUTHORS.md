@@ -76,7 +76,7 @@ This has been a critical element in the development of the FalconPy project.
 + `@mtobias-getty`
 + `@WDmoose` 
 + Arifur, `@arahman63`
-+ `@areino`
++ Alfredo Reino, `@areino`
 + `@kmccb`
 + Carlos Matos, `@carlosmmatos`
 + `@ffalor`
