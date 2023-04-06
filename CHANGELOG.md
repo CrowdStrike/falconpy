@@ -1,3 +1,22 @@
+# Version 1.2.13
+## Added features and functionality
++ Added: 2 new operations (IoT) added to the __Discover__ Service Class, `get_iot_hosts` and `query_iot_hosts`.
+    - `_endpoint/_discover.py`
+    - `_endpoint/deprecated/_discover.py`
+    - `discover.py`
+    - `tests/test_discover.py`
++ Added: 1 new operation added to the __MessageCenter__ Service Class, `CreateCaseV2`.
+    - `_endpoint/_message_center.py`
+    - `_payload/_message_center.py`
+    - `message_center.py`
+    - `tests/test_message_center.py`
+
+## Issues resolved
++ Fixed: Docstring typo in the `GetAzureInstallScript` operation within the  __KubernetesProtection__ Service Class. Closes #933.
+    - `kubernetes_protection.py`
+
+---
+
 # Version 1.2.12
 ## Added features and functionality
 + Added: Enhanced payload handler for `create_rule` operation to allow for passing a list of dictionaries for the `field_values` keyword. Closes #916.
