@@ -286,5 +286,68 @@ _discover_endpoints = [
         "in": "query"
       }
     ]
+  ],
+  [
+    "get-iot-hosts",
+    "GET",
+    "/discover/entities/iot-hosts/v1",
+    "Get details on IoT assets by providing one or more IDs.",
+    "discover_iot",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "One or more asset IDs (max: 100). Find asset IDs with GET `/discover/queries/iot-hosts/v1`",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "query-iot-hosts",
+    "GET",
+    "/discover/queries/iot-hosts/v1",
+    "Search for IoT assets in your environment by providing an FQL (Falcon Query Language) filter and paging details. "
+    "Returns a set of asset IDs which match the filter criteria.",
+    "discover_iot",
+    [
+      {
+        "minimum": 0,
+        "type": "integer",
+        "description": "An offset used with the `limit` parameter to manage pagination of results. On your first request, "
+        "don’t provide an `offset`. On subsequent requests, provide the `offset` from the previous response to continue "
+        "from that place in the results.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "maximum": 100,
+        "minimum": 1,
+        "type": "integer",
+        "description": "The number of asset IDs to return in this response (min: 1, max: 100, default: 100). "
+        "Use with the `offset` parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort assets by their properties. A single sort field is allowed. Common sort options "
+        "include:\n\n<ul><li>hostname|asc</li><li>product_type_desc|desc</li></ul>",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter assets using an FQL query. Common filter options include:\n\n<ul>"
+        "<li>entity_type:'managed'</li><li>product_type_desc:'Workstation'</li>"
+        "<li>platform_name:'Windows'</li><li>last_seen_timestamp:>'now-7d'</li></ul>",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
   ]
 ]
