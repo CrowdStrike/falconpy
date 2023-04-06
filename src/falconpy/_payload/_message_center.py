@@ -71,6 +71,7 @@ def case_payload(passed_keywords: dict) -> dict:
         "detections": [
             {
                 "id": "string",
+                "product": "string",
                 "url": "string"
             }
         ],

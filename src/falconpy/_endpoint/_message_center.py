@@ -154,6 +154,20 @@ _message_center_endpoints = [
     ]
   ],
   [
+    "CreateCaseV2",
+    "POST",
+    "/message-center/entities/case/v2",
+    "create a new case",
+    "message_center",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetCaseEntitiesByIDs",
     "POST",
     "/message-center/entities/cases/GET/v1",
