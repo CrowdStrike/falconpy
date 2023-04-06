@@ -324,7 +324,7 @@ class Discover(ServiceClass):
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
-                  Common sort options include:
+                  Common filter options include:
                     account_type:'Local'
                     login_type:'Interactive'
                     first_seen_timestamp:<'now-7d'
@@ -367,6 +367,105 @@ class Discover(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="query_logins",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_iot_hosts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get details on IoT assets by providing one or more IDs.
+
+        Find IoT assets with `query_iot_hosts`.
+
+        Keyword arguments:
+        ids -- One or more login IDs (max: 100). String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/get-iot-hosts
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_iot_hosts",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_iot_hosts(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Search for IoT assets in your environment.
+
+        Supports providing a FQL (Falcon Query Language) filter and paging details.
+        Returns a set of asset IDs which match the filter criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  Common filter options include:
+                    entity_type:'managed'
+                    product_type_desc:'Workstation'
+                    platform_name:'Windows'
+                    last_seen_timestamp:>'now-7d'
+                  Available Filters:
+                    agent_version                   last_seen_timestamp
+                    aid                             local_ip_addresses
+                    bios_manufacturer               local_ips_count
+                    bios_version                    mac_addresses
+                    business_criticality            machine_domain
+                    cid                             network_id
+                    city                            network_interfaces
+                    claroty_id                      number_of_disk_drives
+                    confidence                      os_is_eol
+                    country                         os_version
+                    current_local_ip                ou
+                    data_providers                  physical_core_count
+                    data_providers_count            platform_name
+                    device_class                    processor_package_count
+                    device_family                   product_type_desc
+                    device_type                     protocols
+                    discoverer_count                purdue_level
+                    discoverer_product_type_descs   reduced_functionality_mode
+                    entity_type                     site_name
+                    external_ip                     subnet
+                    first_seen_timestamp            system_manufacturer
+                    groups                          system_product_name
+                    hostname                        system_serial_number
+                    ics_id                          tags
+                    id                              virtual_zone
+                    internet_exposure               vlan
+                    kernel_version
+        limit -- The number of asset IDs to return in this response. (Max: 100, default: 100)
+                 Use with the offset parameter to manage pagination of results.
+        offset -- An offset used with the limit parameter to manage pagination of results.
+                  On your first request, don’t provide an offset. On subsequent requests,
+                  provide the offset from the previous response to continue from that place
+                  in the results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- Sort assets by their properties. A single sort field is allowed.
+                Common sort options include:
+                  hostname|asc
+                  product_type_desc|desc
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/query-iot-hosts
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="query_iot_hosts",
             keywords=kwargs,
             params=parameters
             )
