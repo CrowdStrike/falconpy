@@ -391,7 +391,7 @@ class KubernetesProtection(ServiceClass):
         """Provide the script to run for a given tenant id and subscription IDs.
 
         Keyword arguments:
-        ids -- Azure Tenant ID. String.
+        id -- Azure Tenant ID. String.
         subscription_id -- Azure Subscription IDs. String or list of strings.
         parameters - full parameters payload, not required if using other keywords.
 
