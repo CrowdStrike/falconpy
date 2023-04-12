@@ -140,6 +140,9 @@ class FalconContainer(ServiceClass):
     def get_assessment(self: object, parameters: dict = None, **kwargs) -> dict:
         """Retrieve an assessment report for an image by specifying repository and tag.
 
+        If you specify both sets of parameters, the scan report is searched using the image ID
+        and digest first. If that fails, the repository and tag are then searched.
+
         HTTP Method: GET
 
         Swagger URL
@@ -148,11 +151,15 @@ class FalconContainer(ServiceClass):
 
         Keyword arguments
         ----
-        repository : str (required)
+        digest: str (must be paired with image_id)
+            Hash digest for the image.
+        image_id: str (must be paired with digest)
+            Image ID for the image.
+        repository : str (must be paired with tag)
             Repository where the image resides.
         parameters : str (JSON)
             Full parameters payload in JSON string format. Not required if using keywords.
-        tag : str (required)
+        tag : str (must be paired with repository)
             Tag used for the image assessed.
 
         This method only supports keywords for providing arguments.

@@ -68,17 +68,31 @@ _falcon_container_endpoints = [
     [
       {
         "type": "string",
+        "description": "The hash digest for the image.",
+        "name": "digest",
+        "in": "query",
+        "required": False
+      },
+      {
+        "type": "string",
+        "description": "The image ID.",
+        "name": "image_id",
+        "in": "query",
+        "required": False
+      },
+      {
+        "type": "string",
         "description": "The repository the image resides within.",
         "name": "repository",
         "in": "query",
-        "required": True
+        "required": False
       },
       {
         "type": "string",
         "description": "The image tag.",
         "name": "tag",
         "in": "query",
-        "required": True
+        "required": False
       }
     ]
   ],
