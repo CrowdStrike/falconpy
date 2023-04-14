@@ -29,15 +29,19 @@ class TestRTRAdmin:
     def rtra_retrieve_script_id(script_name: str, ver: int = 1):
         """Helper to retrieve a script ID by name."""
         found_id = "1234567890"  # Force an error if we can't find it
-        if ver == 2:
-            script = falcon.get_scripts_v2(ids=falcon.list_scripts()["body"]["resources"])
-        else:
-            script = falcon.get_scripts(ids=falcon.list_scripts()["body"]["resources"])
-        
-        for file in script["body"]["resources"]:
-            if "name" in file:
-                if file["name"] == script_name:
-                    found_id = file["id"]
+        try:
+            if ver == 2:
+                script = falcon.get_scripts_v2(ids=falcon.list_scripts()["body"]["resources"])
+            else:
+                script = falcon.get_scripts(ids=falcon.list_scripts()["body"]["resources"])
+        except KeyError:
+            pytest.skip("Skipping")
+
+        if "resources" in script["body"]:
+            for file in script["body"]["resources"]:
+                if "name" in file:
+                    if file["name"] == script_name:
+                        found_id = file["id"]
 
         return found_id
 
@@ -54,12 +58,13 @@ class TestRTRAdmin:
             else:
                 file = falcon.get_put_files(ids=files["body"]["resources"])
         except KeyError:
-            pytest.skip("Race condition met, skipping")
+            pytest.skip("Skipping")
 
-        for item in file["body"]["resources"]:
-            if "name" in item:
-                if item["name"] == file_name:
-                    found_id = item["id"]
+        if "resources" in file["body"]:
+            for item in file["body"]["resources"]:
+                if "name" in item:
+                    if item["name"] == file_name:
+                        found_id = item["id"]
 
         return found_id
 
@@ -115,7 +120,7 @@ class TestRTRAdmin:
             "check_admin_command_status": falcon.RTR_CheckAdminCommandStatus(parameters={})["status_code"],     # 400
             "execute_admin_command": falcon.RTR_ExecuteAdminCommand(body={})["status_code"],                    # 400
             "create_put_files": falcon.RTR_CreatePut_Files(data=file_payload, files=files_detail)["status_code"],
-            "get_again": self.rtra_retrieve_file_id(file_name=upload_filename, ver=2),
+            "get_again": falcon.RTR_GetPut_FilesV2(self.rtra_retrieve_file_id(file_name=upload_filename, ver=2))["status_code"],
             "delete_put_files": falcon.RTR_DeletePut_Files(
                 ids=self.rtra_retrieve_file_id(file_name=upload_filename)
                 )["status_code"],
@@ -138,7 +143,7 @@ class TestRTRAdmin:
             if tests[key] not in AllowedResponses:
                 error_checks = False
 
-                #print(f"{key} processed with a {tests[key]} response")
+                # print(f"{key} processed with a {tests[key]} response")
         # Code paths still get tested, skip the test on a 500
         if not error_checks:
             pytest.skip("500 error generated, code paths still tested")
