@@ -1,3 +1,19 @@
+# Version 1.2.14
+## Added features and functionality
++ Updated: Added `image_id` and `digest` options to the `GetImageAssessmentReport` operation (__FalconContainer__ Service Class).
+    - `_endpoint/_falcon_container.py`
+    - `falcon_container.py`
+
++ Added: 5 new operations added to the __FalconContainer__ Service Class, `ReadRegistryEntitiesByUUID`, `CreateRegistryEntities`, `DeleteRegistryEntities`, `UpdateRegistryEntities`, `ReadRegistryEntities`.
+    - `_endpoint/_falcon_container.py`
+    - `falcon_container.py`
+    > Adds one new payload handler.
+    - `_payload/_container.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_falcon_container.py`
+
+---
+
 # Version 1.2.13
 ## Added features and functionality
 + Added: 2 new operations (IoT) added to the __Discover__ Service Class, `get_iot_hosts` and `query_iot_hosts`.
