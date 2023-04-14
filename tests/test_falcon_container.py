@@ -32,7 +32,16 @@ class TestFalconContainer:
             "GetAssessmentUber": uber.command("GetImageAssessmentReport", repository="whatever", tag="whatever"),
             "DeleteImageDetailsUber": uber.command("DeleteImageDetails", image_id="12345678"),
             "ImageMatchesPolicyUber": uber.command("ImageMatchesPolicy", repository="whatever", tag="whatever"),
-            "read_image_vulnerabilities": falcon.read_image_vulnerabilities(osversion="Windows", packages={"LayerIndex": 1})
+            "read_image_vulnerabilities": falcon.read_image_vulnerabilities(osversion="Windows", packages={"LayerIndex": 1}),
+            "ReadRegistryEntities": falcon.read_registry_entities(),
+            "ReadRegistryEntitiesByUUID": falcon.read_registry_entities_by_uuid(ids="12345678"),
+            "DeleteRegistryEntities": falcon.delete_registry_entities(ids="12345678"),
+            "UpdateRegistryEntities": falcon.update_registry_entities(credential={}, type="gcr", url="https://whatevs",
+                                                                      url_uniqueness_key="banana", user_defined_alias="BoB",
+                                                                      details={"aws_iam_role":"aws:arn::whatevs", "aws_external_id": "yellow"}
+                                                                      ),
+            "CreateRegistryEntities": falcon.create_registry_entities(type="github", url="https://somewheres", username="larry",
+                                                                      password="top_secret")
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
