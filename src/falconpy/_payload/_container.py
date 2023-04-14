@@ -65,3 +65,70 @@ def image_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key)
 
     return returned_payload
+
+
+def registry_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted Registry Connection payload.
+
+    {
+        "credentials": {
+            "details": {
+                "aws_iam_role": "string",
+                "aws_external_id": "string",
+                "username": "string",
+                "password": "string",
+                "domain_url": "string",
+                "credential_type": "string",
+                "compartment_ids": [
+                    "string"
+                ]
+                "project_id": "string",
+                "scope_name": "string",
+                "service_account_json: {
+                    "type": "string",
+                    "private_key_id": "string",
+                    "client_email": "string",
+                    "client_id": "string",
+                    "project_id": "string"
+                }
+            }
+        },
+        "id": "string",
+        "state": "string",
+        "type": "string",
+        "url": "string",
+        "url_uniqueness_key": "string",
+        "user_defined_alias": "string"
+    }
+    """
+    returned_payload = {}
+    top_keys = [
+        "credentials", "type", "url", "url_uniqueness_key", "user_defined_alias", "details", "id",
+        "state"
+        ]  # id and state are for update payloads only.
+    detail_keys = [
+        "aws_iam_role", "aws_external_id", "username", "password", "domain_url",
+        "credential_type", "compartment_ids", "project_id", "service_account_json"
+    ]
+    for key in top_keys:
+        if passed_keywords.get(key, None):
+            if isinstance(key, str):  # Reserved word collision, force a string comparison
+                returned_payload[key] = passed_keywords.get(key)
+            if key == "details":
+                # details is a child branch of credentials.
+                # Passing credentials AND details may have unusual results
+                # depending on the order of the keys received.
+                returned_payload["credentials"] = {}
+                returned_payload["credentials"]["details"] = passed_keywords.get(key)
+
+    for key in detail_keys:
+        if "credentials" not in returned_payload:
+            returned_payload["credentials"] = {}
+        if "details" not in returned_payload["credentials"]:
+            returned_payload["credentials"]["details"] = {}
+        if passed_keywords.get(key, None):
+            # compartment_ids must be passed as a list.
+            # service_account_json should be provided as a dictionary.
+            returned_payload["credentials"]["details"][key] = passed_keywords.get(key)
+
+    return returned_payload
