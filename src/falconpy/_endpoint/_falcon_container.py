@@ -135,5 +135,99 @@ _falcon_container_endpoints = [
         "required": True
       }
     ]
+  ],
+  [
+    "ReadRegistryEntities",
+    "GET",
+    "/container-security/queries/registries/v1",
+    "Retrieve registry entities identified by the customer ID.",
+    "falcon_container_image",
+    [
+      {
+        "type": "string",
+        "description": "Starting index of result set from which to return IDs.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Number of IDs to return.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Order by fields.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateRegistryEntities",
+    "POST",
+    "/container-security/entities/registries/v1",
+    "Create a registry entity using the provided details.",
+    "falcon_container_image",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeleteRegistryEntities",
+    "DELETE",
+    "/container-security/entities/registries/v1",
+    "Delete the registry entity identified by the entity UUID.",
+    "falcon_container_image",
+    [
+      {
+        "type": "string",
+        "description": "Registry entity UUID.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateRegistryEntities",
+    "PATCH",
+    "/container-security/entities/registries/v1",
+    "Update the registry entity, as identified by the entity UUID, using the provided details.",
+    "falcon_container_image",
+    [
+      {
+        "type": "string",
+        "description": "Registry entity UUID.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ReadRegistryEntitiesByUUID",
+    "GET",
+    "/container-security/entities/registries/v1",
+    "Retrieve the registry entity identified by the entity UUID.",
+    "falcon_container_image",
+    [
+      {
+        "type": "string",
+        "description": "Registry entity UUID.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
   ]
 ]

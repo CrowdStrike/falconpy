@@ -35,8 +35,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._util import process_service_request, force_default
-from ._payload import image_payload
+from ._util import process_service_request, force_default, handle_single_argument
+from ._payload import image_payload, registry_payload
 from ._service_class import ServiceClass
 from ._endpoint._falcon_container import _falcon_container_endpoints as Endpoints
 
@@ -94,8 +94,8 @@ class FalconContainer(ServiceClass):
 
         Keyword arguments
         ----
-        body : str
-            Full body payload in JSON format, not required when using other keywords.
+        body : dict
+            Full body payload, not required when using other keywords.
             {
                 "osversion": "string",
                 "packages": [
@@ -157,8 +157,8 @@ class FalconContainer(ServiceClass):
             Image ID for the image.
         repository : str (must be paired with tag)
             Repository where the image resides.
-        parameters : str (JSON)
-            Full parameters payload in JSON string format. Not required if using keywords.
+        parameters : dict
+            Full parameters payload. Not required if using keywords.
         tag : str (must be paired with repository)
             Tag used for the image assessed.
 
@@ -225,8 +225,8 @@ class FalconContainer(ServiceClass):
         ----
         repository : str (required)
             Repository where the image resides.
-        parameters : str (JSON)
-            Full parameters payload in JSON string format. Not required if using keywords.
+        parameters : dict
+            Full parameters payload. Not required if using keywords.
         tag : str (required)
             Tag used for the image assessed.
 
@@ -246,6 +246,188 @@ class FalconContainer(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_registry_entities(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve registry entities identified by the customer ID.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        This operation does not exist in swagger.
+
+        Keyword arguments
+        ----
+        limit : int
+            The maximum number of records to return in this response. [1-500]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax. Ex: id.asc, id.desc
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadRegistryEntities",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_registry_entities_by_uuid(self: object,
+                                       *args,
+                                       parameters: dict = None,
+                                       **kwargs
+                                       ) -> dict:
+        """Retrieve registry entities identified by the customer UUID.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        This operation does not exist in swagger.
+
+        Keyword arguments
+        ----
+        ids : str
+            Registry entity UUID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ----
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadRegistryEntitiesByUUID",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_registry_entities(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Delete the registry entity identified by the entity UUID.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        ----
+        This operation does not exist in swagger.
+
+        Keyword arguments
+        ----
+        ids : str
+            List of Prevention Policy IDs to delete.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ----
+        When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteRegistryEntities",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_registry_entities(self: object, body: dict = None, **kwargs) -> dict:
+        """Create a registry entity using the provided details.
+
+        HTTP Method: POST
+
+        Swagger URL
+        ----
+        This operation does not exist in swagger.
+
+        Keyword arguments
+        ----
+        body : dict
+            Full body payload, not required if keywords are used.
+                {
+                    Payload here
+                }
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = registry_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateRegistryEntities",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_registry_entities(self: object, body: dict = None, **kwargs) -> dict:
+        """Update the registry entity, as identified by the entity UUID, using the provided details.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        ----
+        This operation does not exist in swagger.
+
+        Keyword arguments
+        ----
+        body : dict
+            Full body payload, not required if keywords are used.
+                {
+                    Payload here
+                }
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = registry_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateRegistryEntities",
+            body=body
+            )
+
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here for
     # backwards compatibility / ease of use purposes
@@ -253,3 +435,9 @@ class FalconContainer(ServiceClass):
     GetImageAssessmentReport = get_assessment
     DeleteImageDetails = delete_image_details
     ImageMatchesPolicy = image_matches_policy
+    ReadImageVulnerabilities = read_image_vulnerabilities
+    ReadRegistryEntities = read_registry_entities
+    ReadRegistryEntitiesByUUID = read_registry_entities_by_uuid
+    DeleteRegistryEntities = delete_registry_entities
+    CreateRegistryEntities = create_registry_entities
+    UpdateRegistryEntities = update_registry_entities
