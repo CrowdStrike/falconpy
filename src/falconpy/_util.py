@@ -37,7 +37,10 @@ For more information, please refer to <https://unlicense.org>
 """
 import base64
 import functools
-from json.decoder import JSONDecodeError
+try:
+    from simplejson import JSONDecodeError
+except ImportError:
+    from json.decoder import JSONDecodeError
 import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
