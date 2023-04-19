@@ -1,3 +1,18 @@
+# Version 1.2.15
+## Added features and functionality
++ Added: 1 new operation added to the __ZeroTrustAssessment__ Service Class, `getAssessmentsByScoreV1`.
+    - `_endpoint/_zero_trust_assessment.py`
+    - `zero_trust_assessment.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_zero_trust_assessment.py`
+
+## Issues resolved
++ Fixed: JSONDecoder error when running within an environment leveraging the `simplejson` 3rd party library versus the standard `json` library.
+    - `_util.py`
+    > Thanks to @khyberspache for identifying and resolving this issue! 🙇
+
+---
+
 # Version 1.2.14
 ## Added features and functionality
 + Updated: Added `image_id` and `digest` options to the `GetImageAssessmentReport` operation (__FalconContainer__ Service Class).
