@@ -35,6 +35,10 @@ class TestZeroTrustAssessment:
         """Pytest harness hook"""
         assert bool(falcon.get_compliance()["status_code"] in AllowedResponses) is True
 
+    def test_get_assessments_by_score(self):
+        """Pytest harness hook"""
+        assert bool(falcon.get_assessments_by_score(filter="score:>1")["status_code"] in AllowedResponses) is True
+
     # This should be the last test executed, log out the token
     @staticmethod
     def test_logout():

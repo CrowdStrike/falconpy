@@ -64,5 +64,44 @@ _zero_trust_assessment_endpoints = [
     "Get the Zero Trust Assessment compliance report for one customer ID (CID).",
     "zero_trust_assessment",
     []
+  ],
+  [
+    "getAssessmentsByScoreV1",
+    "GET",
+    "/zero-trust-assessment/queries/assessments/v1",
+    "Get Zero Trust Assessment data for one or more hosts by providing a customer ID (CID) and a range of scores.",
+    "zero_trust_assessment",
+    [
+      {
+        "type": "string",
+        "description": "FQL query specifying the filter score.",
+        "name": "filter",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "integer",
+        "description": "The number of scores to return in this response (min: 1, max: 1000, default: 100). "
+        "Use with the `after` parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. "
+        "On your first request, don't provide an `after` token. On subsequent requests, provide the `after` "
+        "token from the previous response to continue from that place in the results.",
+        "name": "after",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "score",
+        "description": "Sort accounts by their properties. A single sort field is allowed. "
+        "Defaults to ascending. Supported sort option include:\n\n<ul><li>score|desc</li><li>score|asc</li></ul>",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
   ]
 ]

@@ -98,11 +98,43 @@ class ZeroTrustAssessment(ServiceClass):
             operation_id="getComplianceV1"
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_assessments_by_score(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Get Zero Trust Assessment data for one or more hosts by providing a customer ID (CID) and a range of scores.
+
+        Keyword arguments:
+        after - Pagination token used with the limit parameter to manage pagination of results.
+                On your first request, do not provide an after token. On subsequent requests,
+                provide the after token from the previous response to continue from that place
+                in the resultset. String.
+        filter - FQL formatted query specifying the filter to apply to the search. String.
+        limit - The number of scores to return in this response. Integer.
+                Min: 1, Max: 1,000, Default: 100
+        parameters - Full parameters payload provided as a JSON dictionary.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/zero-trust-assessment/getAssessmentsByScoreV1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getAssessmentsByScoreV1",
+            keywords=kwargs,
+            params=parameters
+            )
+
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here for
     # backwards compatibility / ease of use purposes
     getAssessmentV1 = get_assessment
     getComplianceV1 = get_compliance
+    getAssessmentsByScoreV1 = get_assessments_by_score
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
