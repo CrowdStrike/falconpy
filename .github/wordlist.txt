@@ -814,3 +814,7 @@ Reino
 IoT
 khyberspache
 JSONDecoder
+QueryIntelActorEntites
+subfolder
+GetQuarantineFiles
+QueryQuarantineFiles
