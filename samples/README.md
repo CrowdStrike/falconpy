@@ -43,10 +43,11 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
 | [Hosts](#hosts) | [List sensors by hostname](#list-sensors-by-hostname)<BR/>[Manage duplicate sensors](#manage-duplicate-sensors)<BR/>[CUSSED (Manage stale sensors)](#cussed-manage-stale-sensors)<BR/>[Match usernames to hosts](#match-usernames-to-hosts)<BR/>[Offset vs. Token](#offset-vs-token)<BR/>[Prune Hosts by Hostname or AID](#prune-hosts-by-hostname-or-aid)<BR/>[Quarantine a host](#quarantine-a-host)<BR/>[Quarantine a host (updated version)](#quarantine-a-host-updated-version) |
 | [Identity Protection](#identity-protection) | [GraphQL Pagination](#graphql-pagination) |
 | [Incidents](#incidents) | [CrowdScore QuickChart](#crowdscore-quickchart)<BR/>[Incident Triage](#incident-triage) |
-| [Intel](#intel) | [MISP Import](#misp-import) |
+| [Intel](#intel) | [MISP Import](#misp-import)<BR/>[Intel Search](#intel-search) |
 | [IOC](#ioc) | [Create indicators](#create-indicators) |
 | [MalQuery](#malquery) | [Malqueryinator](#malqueryinator) |
 | [Prevention Policy](#prevention-policy) | [Prevention Policy Hawk](#prevention-policy-hawk) |
+| [Quarantine](#quarantine) | [Get Quarantined Files](#get-quarantined-files)
 | [Real Time Response](#real-time-response) | [Bulk execute a command](#bulk-execute-a-command)<BR/>[Bulk execute a command (queued)](#bulk-execute-a-command-queued)<BR/>[Get host uptime](#get-host-uptime)<BR/>[Get RTR result](#get-rtr-result)<BR/>[Dump memory for a running process](#dump-memory-for-a-running-process)<BR/>[My Little RTR](#my-little-rtr)<BR/>[ProxyTool](#proxytool) |
 | [Recon](#recon) | [Create monitoring rules for an email list](#create-monitoring-rules-for-an-email-list) |
 | [Report Executions](#report-executions) | [Retrieve all report results](#retrieve-all-report-results) |
@@ -659,6 +660,26 @@ This sample demonstrates the following CrowdStrike Intel API operations:
 | [GetMitreReport](https://www.falconpy.io/Service-Collections/Intel.html#getmitrereport) | Export Mitre ATT&CK information for a given actor. |
 | [QueryMitreAttacks](https://www.falconpy.io/Service-Collections/Intel.html#querymitreattacks) | Gets MITRE tactics and techniques for the given actor. |
 
+
+### Intel Search
+Quickly search CrowdStrike Falcon Intelligence data for string matches.
+Displays lists of matches and extended details for individual records when only one result is returned.
+When a value for output prefix (`-o`) is provided, results will also be written to individual files in CSV format.
+
+[![Intel](https://img.shields.io/badge/Service%20Class-Intel_Search-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](https://github.com/CrowdStrike/falconpy/tree/main/samples/intel#intel-search)
+
+#### Intel API operations discussed
+This sample demonstrates the following CrowdStrike Intel API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [QueryIntelActorEntites](https://www.falconpy.io/Service-Collections/Intel.html#queryintelactorentities) | Get info about actors that match provided FQL filters. |
+| [QueryIntelIndicatorEntities](https://www.falconpy.io/Service-Collections/Intel.html#queryintelindicatorentities) | Get info about indicators that match provided FQL filters. |
+| [QueryIntelReportEntities](https://www.falconpy.io/Service-Collections/Intel.html#queryintelreportentities) | Get info about reports that match provided FQL filters. |
+| [GetIntelActorEntities](https://falconpy.io/Service-Collections/Intel.html#getintelactorentities) | Retrieve specific actors using their actor IDs. |
+| [GetIntelIndicatorEntities](https://www.falconpy.io/Service-Collections/Intel.html#getintelindicatorentities) | Retrieve specific indicators using their indicator IDs. |
+| [GetIntelReportEntities](https://www.falconpy.io/Service-Collections/Intel.html#queryintelreportentities) | Retrieve specific reports using their report IDs. |
+
 ---
 
 ### MISP Import
@@ -741,6 +762,28 @@ This sample demonstrates the following CrowdStrike Prevention Policy API operati
 | [updatePreventionPolicies](https://falconpy.io/Service-Collections/Prevention-Policy.html#updatepreventionpolicies) | Update Prevention Policies by specifying the ID of the policy and details to update. |
 
 ---
+
+## Quarantine
+This category provides samples that demonstrate the CrowdStrike Falcon Quarantine API service collection.
+
+### Get Quarantined Files
+Contributed by @tsullivan06, this sample leverages the Quarantine and Sample Upload APIs to retrieve all quarantined files within your environment and then stores them to a subfolder.
+Files can be downloaded raw, or archived with a password (`infected`).
+
+
+[![Quarantine](https://img.shields.io/badge/Service%20Class-Get_Quarantined_Files-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](https://github.com/CrowdStrike/falconpy/tree/main/samples/quarantine#get-quarantined-files)
+
+#### Quarantine and Sample Uploads API operations discussed
+This sample demonstrates the following CrowdStrike Quarantine and Sample Uploads API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [GetQuarantineFiles](https://www.falconpy.io/Service-Collections/Quarantine.html#getquarantinefiles) | Get quarantine file metadata for specified ids. |
+| [QueryQuarantineFiles](https://www.falconpy.io/Service-Collections/Quarantine.html#queryquarantinefiles) | Get quarantine file ids that match the provided filter criteria. |
+| [GetSampleV3](https://www.falconpy.io/Service-Collections/Sample-Uploads.html#getsamplev3) | Retrieves the file associated with the given ID (SHA256). |
+
+---
+
 
 ## Real Time Response
 These samples focus on CrowdStrike's Real Time Response and Real Time Response Admin API service collections.
