@@ -50,7 +50,7 @@ def get_all_vulnerabilites_from_account(client_id, secret, filter, verbose=False
 
         after = None
         if 'after' in spotlight_results['body']['meta']['pagination']:
-            after_token = spotlight_results['body']['meta']['pagination']['after']
+            after = spotlight_results['body']['meta']['pagination']['after']
         
         iterations += 1
         if iterations % 20 == 0 and verbose:
@@ -70,7 +70,12 @@ def main():
     parser.add_argument('--client_id',
                         type=str,
                         required=True,
-                        help="The Client ID of your Falcno API Key"
+                        help="The Client ID of your Falcon API Key"
+                        )
+    parser.add_argument('--client_secret',
+                        type=str,
+                        required=True,
+                        help="The Client secret of your Falcon API Key"
                         )
     parser.add_argument('--output_file',
                         type=str,
@@ -92,9 +97,8 @@ def main():
                         )
     args = parser.parse_args()
 
-    api_secret = getpass("Enter your Falcon API Key: ")
     spotlight_data = get_all_vulnerabilites_from_account(args.client_id,
-                                                         api_secret,
+                                                         args.client_secret,
                                                          args.filter,
                                                          args.verbose
                                                          )
