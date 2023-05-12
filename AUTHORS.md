@@ -86,6 +86,7 @@ This has been a critical element in the development of the FalconPy project.
 + `@Odie71`
 + Chris, `@chrisbvt`
 + Alex, `@khyberspache`
++ Phil Massyn, `@massyn`
 
 
 ## Sponsors
