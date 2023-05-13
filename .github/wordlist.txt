@@ -818,3 +818,4 @@ QueryIntelActorEntites
 subfolder
 GetQuarantineFiles
 QueryQuarantineFiles
+Massyn
