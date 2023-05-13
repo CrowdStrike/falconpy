@@ -12,7 +12,7 @@ from falconpy import MessageCenter
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = MessageCenter(auth_object=config)
-AllowedResponses = [200, 403, 429]
+AllowedResponses = [200, 403, 429, 405]  # pre-1.2.16 - UpdateCase appears to be decomm'd
 
 
 class TestMessageCenter:
@@ -88,7 +88,7 @@ class TestMessageCenter:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
 
-            # print(f"{key} processed with a {tests[key]} response")
+                # print(f"{key} processed with a {tests[key]} response")
 
         return error_checks
 
