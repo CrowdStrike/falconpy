@@ -62,9 +62,11 @@ class CSPMRegistration(ServiceClass):
         Keyword arguments:
         scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts
         ids -- AWS account IDs. String or list of strings.
+        iam_role_arns -- AWS IAM role ARNs. String or list of strings.
         organization_ids -- AWS organization IDs. String or list of strings.
         limit -- The maximum number of records to return in this response. [Integer, 1-1000]
                  Use with the offset parameter to manage pagination of results. Defaults to 100.
+        migrated -- Only return migrated d4c accounts. (true / false) String.
         offset -- The offset to start retrieving records from. Integer.
                   Use with the limit parameter to manage pagination of results.
         parameters - full parameters payload, not required if using other keywords.
@@ -200,13 +202,19 @@ class CSPMRegistration(ServiceClass):
             body=body
             )
 
-    def get_aws_console_setup_urls(self: object) -> dict:
+    def get_aws_console_setup_urls(self: object, parameters: dict = None, **kwargs) -> dict:
         """Retrieve setup URLs for the AWS console.
 
         Returns a URL for customers to visit in their cloud environment
         to grant access to CrowdStrike.
 
-        This method does not accept arguments or keywords.
+        Keyword arguments:
+        ids -- AWS Account IDs to retrieve setup URLs for. String or list of strings.
+        use_existing_cloudtrail -- Use the existing AWS cloudtrail. (true / false) String.
+        parameters -- full parameters payload, not required if using other keywords.
+        region -- AWS Region. String.
+
+        This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
 
@@ -218,16 +226,22 @@ class CSPMRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="GetCSPMAwsConsoleSetupURLs"
+            operation_id="GetCSPMAwsConsoleSetupURLs",
+            keywords=kwargs,
+            params=parameters
             )
 
-    def get_aws_account_scripts_attachment(self: object) -> dict:
+    def get_aws_account_scripts_attachment(self: object, parameters: dict = None, **kwargs) -> dict:
         """Retrieve AWS account scripts.
 
         Return a script for customers to run in their cloud environment
         to grant access to CrowdStrike for their AWS environment.
 
-        This method does not accept arguments or keywords.
+        Keyword arguments:
+        ids -- AWS Account IDs to retrieve script attachments for. String or list of strings.
+        parameters -- full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
 
@@ -239,7 +253,9 @@ class CSPMRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="GetCSPMAwsAccountScriptsAttachment"
+            operation_id="GetCSPMAwsAccountScriptsAttachment",
+            keywords=kwargs,
+            params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -255,6 +271,7 @@ class CSPMRegistration(ServiceClass):
                   Use with the limit parameter to manage pagination of results.
         parameters - full parameters payload, not required if using other keywords.
         status -- Account status to filter results by. String.
+        tenant_ids -- Azure tenant IDs to filter results. String or list of strings.
 
         This method only supports keywords for providing arguments.
 
@@ -322,6 +339,8 @@ class CSPMRegistration(ServiceClass):
         Keyword arguments:
         ids -- List of Azure Subscription IDs to delete. String or list of strings.
         parameters -- full parameters payload, not required if ids is provided as a keyword.
+        retain_tenant -- Should the tenant be retainined. (true / false) String.
+        tenant_ids -- Azure tenant IDs to remove. String or list of strings.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -436,6 +455,7 @@ class CSPMRegistration(ServiceClass):
                      Defaults to the most recently registered tenant.
         parameters -- full parameters payload, not required if tenant-id keyword is used.
         refresh -- Force a refresh of the certificate. Boolean. Defaults to False.
+        years_valid -- Years the certificate should be valid (only used when refresh=true).
 
         Arguments: When not specified, the first argument to this method is assumed to be
                    'tenant_id'. All others are ignored.
@@ -468,9 +488,12 @@ class CSPMRegistration(ServiceClass):
         to grant access to CrowdStrike for their Azure environment.
 
         Keyword arguments:
+        account_type -- Account type. ('commercial' or 'gov') String.
         tenant_id -- Azure Tenant ID to generate script for.
                      Defaults to the most recently registered tenant.
         parameters -- full parameters payload, not required if tenant-id keyword is used.
+        subscription_ids -- Subscription IDs to generate script for. Defaults to all. String or list of strings.
+        template -- Template to be rendered. String.
 
         Arguments: When not specified, the first argument to this method is assumed to be
                    'tenant-id'. All others are ignored.
@@ -508,6 +531,8 @@ class CSPMRegistration(ServiceClass):
         limit -- The maximum number of records to return in this response. [Integer, 1-500]
         next_token -- String to get next page of results, associated with the previous
                       execution. Must include all filters from previous execution. String.
+        resource_id -- Resource ID. String.
+        resource_uuid - Resource UUID. String.
         service -- Cloud Service (Example: `EC2` or `S3`). String.
                    Available options
                    ACM                      Identity
@@ -538,6 +563,7 @@ class CSPMRegistration(ServiceClass):
                    GuardDuty                VirtualNetwork
                    IAM
         severity -- Severity (e.g. `High`, `Medium` or `Informational`). String.
+        since -- Filter events using a duration string (e.g. 24h). String. Default: 24h
         state -- State. (e.g. `open` or `closed`). String.
         parameters - full parameters payload, not required if using other keywords.
 
@@ -618,6 +644,89 @@ class CSPMRegistration(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetConfigurationDetections",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_configuration_detection_entities(self: object,
+                                             *args,
+                                             parameters: dict = None,
+                                             **kwargs
+                                             ) -> dict:
+        """
+        Get misconfigurations based on the ID - including custom policy detections in addition to default policy detections.
+
+        Keyword arguments:
+        ids -- Detection IDs to retrieve. String or List of Strings.
+        parameters -- full parameters payload, not required ids keyword is used.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'. All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetConfigurationDetectionEntities
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetConfigurationDetectionEntities",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_configuration_detection_ids_v2(self: object,
+                                           *args,
+                                           parameters: dict = None,
+                                           **kwargs
+                                           ) -> dict:
+        """
+        Get list of active misconfiguration ids - including custom policy detections in addition to default policy detections.
+
+        Keyword arguments:
+        filter -- FQL formatted string to filter result. String.
+                  Allowed filters
+                  account_name              policy_id
+                  account_id                policy_type
+                  agent_id                  resource_id
+                  attack_types              region
+                  azure_subscription_id     status
+                  cloud_provider            scan_time
+                  cloud_service_keyword     severity
+                  custom_policy_id          severity_string
+                  is_managed                use_current_scan_ids (*)
+                  (*) Use this to retrieve records for the latest scans
+        limit -- Maximum number of detections to return. Integer. (Default: 500)
+        offset -- Starting offset for returned detections. Integer.
+        sort -- FQL formatted sort. String. Default: timestamp|desc
+                Allowed values
+                account_name            policy_id
+                accoud_id               policy_type
+                attack_types            resource_id
+                azure_subscription_id   region
+                cloud_provider          scan_name
+                cloud_service_keyword   severity
+                status                  severity_string
+                is_managed              timestamp
+        parameters -- full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetConfigurationDetectionIDsV2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetConfigurationDetectionIDsV2",
             keywords=kwargs,
             params=parameters
             )
@@ -711,6 +820,32 @@ class CSPMRegistration(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetCSPMPolicy",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_policy_details(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Given an array of policy IDs, returns detailed policies information.
+
+        Keyword arguments:
+        ids -- Policy IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMPoliciesDetails
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMPoliciesDetails",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
@@ -904,9 +1039,12 @@ class CSPMRegistration(ServiceClass):
     AzureDownloadCertificate = azure_download_certificate
     GetBehaviorDetections = get_behavior_detections
     GetConfigurationDetections = get_configuration_detections
+    GetConfigurationDetectionEntities = get_configuration_detection_entities
+    GetConfigurationDetectionIDsV2 = get_configuration_detection_ids_v2
     GetIOAEvents = get_ioa_events
     GetIOAUsers = get_ioa_users
     GetCSPMPolicy = get_policy
+    GetCSPMPoliciesDetails = get_policy_details
     GetCSPMPolicySettings = get_policy_settings
     UpdateCSPMPolicySettings = update_policy_settings
     GetCSPMScanSchedule = get_scan_schedule

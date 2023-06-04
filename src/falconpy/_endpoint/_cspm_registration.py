@@ -56,7 +56,6 @@ _cspm_registration_endpoints = [
       {
         "type": "array",
         "items": {
-          "pattern": "\\d{12}",
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -67,7 +66,16 @@ _cspm_registration_endpoints = [
       {
         "type": "array",
         "items": {
-          "pattern": "^o-[0-9a-z]{10,32}$",
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "AWS IAM role ARNs",
+        "name": "iam_role_arns",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -89,6 +97,17 @@ _cspm_registration_endpoints = [
         "default": 100,
         "description": "The maximum records to return. Defaults to 100.",
         "name": "limit",
+        "in": "query"
+      },
+      {
+        "pattern": "^(true|false)$",
+        "enum": [
+          "false",
+          "true"
+        ],
+        "type": "string",
+        "description": "Only return migrated d4c accounts",
+        "name": "migrated",
         "in": "query"
       },
       {
@@ -175,7 +194,35 @@ _cspm_registration_endpoints = [
     "/cloud-connect-cspm-aws/entities/console-setup-urls/v1",
     "Return a URL for customer to visit in their cloud environment to grant us access to their AWS environment.",
     "cspm_registration",
-    []
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "AWS account IDs",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "pattern": "^(true|false)$",
+        "enum": [
+          "false",
+          "true"
+        ],
+        "type": "string",
+        "name": "use_existing_cloudtrail",
+        "in": "query"
+      },
+      {
+        "pattern": "^[0-9a-z-]{2,}$",
+        "type": "string",
+        "description": "Region",
+        "name": "region",
+        "in": "query"
+      }
+    ]
   ],
   [
     "GetCSPMAwsAccountScriptsAttachment",
@@ -184,7 +231,18 @@ _cspm_registration_endpoints = [
     "Return a script for customer to run in their cloud environment to grant us "
     "access to their AWS environment as a downloadable attachment.",
     "cspm_registration",
-    []
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "AWS account IDs",
+        "name": "ids",
+        "in": "query"
+      }
+    ]
   ],
   [
     "GetCSPMAzureAccount",
@@ -205,6 +263,16 @@ _cspm_registration_endpoints = [
         "description": "SubscriptionIDs of accounts to select for this status operation. "
         "If this is empty then all accounts are returned.",
         "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Tenant ids to filter azure accounts",
+        "name": "tenant_ids",
         "in": "query"
       },
       {
@@ -265,16 +333,30 @@ _cspm_registration_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 36,
-          "minLength": 36,
-          "pattern": "^[0-9a-z-]{36}$",
           "type": "string"
         },
         "collectionFormat": "multi",
         "description": "Azure subscription IDs to remove",
         "name": "ids",
-        "in": "query",
-        "required": True
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Tenant ids to remove",
+        "name": "tenant_ids",
+        "in": "query"
+      },
+      {
+        "maxLength": 5,
+        "minLength": 4,
+        "pattern": "^(true|false)$",
+        "type": "string",
+        "name": "retain_tenant",
+        "in": "query"
       }
     ]
   ],
@@ -304,12 +386,6 @@ _cspm_registration_endpoints = [
         "description": "Tenant ID to update client ID for. Required if multiple tenants are registered.",
         "name": "tenant-id",
         "in": "query"
-      },
-      {
-        "description": "This is a placeholder only. Please ignore this field.",
-        "name": "body",
-        "in": "body",
-        "required": True
       }
     ]
   ],
@@ -351,9 +427,6 @@ _cspm_registration_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 36,
-          "minLength": 36,
-          "pattern": "^[0-9a-z-]{36}$",
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -363,16 +436,19 @@ _cspm_registration_endpoints = [
         "required": True
       },
       {
-        "maxLength": 5,
-        "minLength": 4,
-        "pattern": "^(true|false)$",
-        "enum": [
-          "false",
-          "true"
-        ],
-        "type": "string",
+        "type": "boolean",
         "default": False,
+        "description": "Setting to true will invalidate the current certificate and generate a new certificate",
         "name": "refresh",
+        "in": "query"
+      },
+      {
+        "maxLength": 2,
+        "minLength": 1,
+        "pattern": "^[0-9]{1,2}$",
+        "type": "string",
+        "description": "Years the certificate should be valid (only used when refresh=true)",
+        "name": "years_valid",
         "in": "query"
       }
     ]
@@ -393,6 +469,32 @@ _cspm_registration_endpoints = [
         "description": "Tenant ID to generate script for. Defaults to most recently registered tenant.",
         "name": "tenant-id",
         "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Subscription IDs to generate script for. Defaults to all.",
+        "name": "subscription_ids",
+        "in": "query"
+      },
+      {
+        "pattern": "^(commercial|gov)$",
+        "enum": [
+          "commercial",
+          "gov"
+        ],
+        "type": "string",
+        "name": "account_type",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Template to be rendered",
+        "name": "template",
+        "in": "query"
       }
     ]
   ],
@@ -412,8 +514,7 @@ _cspm_registration_endpoints = [
         "type": "string",
         "description": "Cloud Provider (e.g.: aws|azure)",
         "name": "cloud_provider",
-        "in": "query",
-        "required": True
+        "in": "query"
       },
       {
         "enum": [
@@ -518,13 +619,21 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "default": "24h",
+        "description": "Filter events using a duration string (e.g. 24h)",
+        "name": "since",
+        "in": "query"
+      },
+      {
         "enum": [
+          "Critical",
           "High",
           "Informational",
           "Medium"
         ],
         "type": "string",
-        "description": "Severity (e.g.: High | Medium | Informational)",
+        "description": "Policy Severity",
         "name": "severity",
         "in": "query"
       },
@@ -540,6 +649,26 @@ _cspm_registration_endpoints = [
         "type": "integer",
         "description": "The maximum records to return. [1-500]",
         "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Resource ID",
+        "name": "resource_id",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Resource UUID",
+        "name": "resource_uuid",
         "in": "query"
       }
     ]
@@ -688,6 +817,64 @@ _cspm_registration_endpoints = [
     ]
   ],
   [
+    "GetConfigurationDetectionEntities",
+    "GET",
+    "/detects/entities/iom/v2",
+    "Get misconfigurations based on the ID - including custom policy detections in addition to default policy detections.",
+    "cspm_registration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "detection ids",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetConfigurationDetectionIDsV2",
+    "GET",
+    "/detects/queries/iom/v2",
+    "Get list of active misconfiguration ids - including custom policy detections in addition to default policy detections.",
+    "cspm_registration",
+    [
+      {
+        "type": "string",
+        "description": "use_current_scan_ids - *use this to get records for latest scans*\naccount_name\naccount_id\nagent_id\nattack_types\nazure_subscription_id\ncloud_provider\ncloud_service_keyword\ncustom_policy_id\nis_managed\npolicy_id\npolicy_type\nresource_id\nregion\nstatus\nscan_time\nseverity\nseverity_string\n",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "timestamp|desc",
+        "description": "account_name\naccount_id\nattack_types\nazure_subscription_id\ncloud_provider\ncloud_service_keyword\nstatus\nis_managed\npolicy_id\npolicy_type\nresource_id\nregion\nscan_time\nseverity\nseverity_string\ntimestamp",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "maximum": 1000,
+        "minimum": 0,
+        "type": "integer",
+        "default": 500,
+        "description": "The max number of detections to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "integer",
+        "description": "Offset returned detections",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "GetIOAEvents",
     "GET",
     "/ioa/entities/events/v1",
@@ -830,6 +1017,26 @@ _cspm_registration_endpoints = [
         "pattern": "\\d{*}",
         "type": "string",
         "description": "Policy ID",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetCSPMPoliciesDetails",
+    "GET",
+    "/settings/entities/policy-details/v2",
+    "Given an array of policy IDs, returns detailed policies information.",
+    "cspm_registration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "integer"
+        },
+        "collectionFormat": "multi",
+        "description": "Policy IDs",
         "name": "ids",
         "in": "query",
         "required": True
