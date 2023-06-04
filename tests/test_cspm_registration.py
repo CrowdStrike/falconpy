@@ -80,7 +80,10 @@ class TestCSPMRegistration:
             "get_ioa_events": falcon.GetIOAEvents(),
             "get_ioa_users": falcon.GetIOAUsers(),
             "get_behavior_detections": falcon.get_behavior_detections(limit=1),
-            "get_configuration_detections": falcon.get_configuration_detections(limit=1)
+            "get_configuration_detections": falcon.get_configuration_detections(limit=1),
+            "GetConfigurationDetectionEntities": falcon.get_configuration_detection_entities(),
+            "GetConfigurationDetectionIdsV2": falcon.get_configuration_detection_ids_v2(),
+            "GetCSPMPoliciesDetails": falcon.get_policy_details()
         }
         for key in tests:
             if tests[key]["status_code"] != 500:
