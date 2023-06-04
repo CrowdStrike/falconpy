@@ -479,6 +479,8 @@ class UserManagement(ServiceClass):
 
         Keyword arguments
         ----
+        action : str
+            Actionable purpose of the query. Default: grant
         cid : str
             Customer ID to get available roles for. An empty `cid` keyword will return
             role IDs for the current CID.
