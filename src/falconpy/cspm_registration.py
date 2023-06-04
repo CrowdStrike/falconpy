@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=R0904  # Matching API operation counts
+# pylint: disable=R0904, C0302  # Matching API operation counts and allowing the long file for now
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import cspm_registration_payload, cspm_policy_payload, cspm_scan_payload
 from ._service_class import ServiceClass
@@ -680,7 +680,6 @@ class CSPMRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_configuration_detection_ids_v2(self: object,
-                                           *args,
                                            parameters: dict = None,
                                            **kwargs
                                            ) -> dict:
