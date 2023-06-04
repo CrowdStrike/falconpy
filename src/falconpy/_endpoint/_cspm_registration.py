@@ -845,14 +845,18 @@ _cspm_registration_endpoints = [
     [
       {
         "type": "string",
-        "description": "use_current_scan_ids - *use this to get records for latest scans*\naccount_name\naccount_id\nagent_id\nattack_types\nazure_subscription_id\ncloud_provider\ncloud_service_keyword\ncustom_policy_id\nis_managed\npolicy_id\npolicy_type\nresource_id\nregion\nstatus\nscan_time\nseverity\nseverity_string\n",
+        "description": "use_current_scan_ids - *use this to get records for latest scans*\naccount_name\naccount_id\n"
+        "agent_id\nattack_types\nazure_subscription_id\ncloud_provider\ncloud_service_keyword\ncustom_policy_id\n"
+        "is_managed\npolicy_id\npolicy_type\nresource_id\nregion\nstatus\nscan_time\nseverity\nseverity_string\n",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "string",
         "default": "timestamp|desc",
-        "description": "account_name\naccount_id\nattack_types\nazure_subscription_id\ncloud_provider\ncloud_service_keyword\nstatus\nis_managed\npolicy_id\npolicy_type\nresource_id\nregion\nscan_time\nseverity\nseverity_string\ntimestamp",
+        "description": "account_name\naccount_id\nattack_types\nazure_subscription_id\ncloud_provider\n"
+        "cloud_service_keyword\nstatus\nis_managed\npolicy_id\npolicy_type\nresource_id\nregion\nscan_time\n"
+        "severity\nseverity_string\ntimestamp",
         "name": "sort",
         "in": "query"
       },

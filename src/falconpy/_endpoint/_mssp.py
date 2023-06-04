@@ -201,11 +201,13 @@ _mssp_endpoints = [
     "PATCH",
     "/mssp/entities/cid-groups/v1",
     "Update existing CID Group(s). CID Group ID is expected for each CID Group definition provided in request body. "
-    "Name is a required field but description is an optional field. Empty description will override existing value. CID Group member(s) remain unaffected.",
+    "Name is a required field but description is an optional field. Empty description will override "
+    "existing value. CID Group member(s) remain unaffected.",
     "mssp",
     [
       {
-        "description": "'cid_group_id' field is required to identify the CID group to update along with 'name' and/or 'description' fields to be updated.",
+        "description": "'cid_group_id' field is required to identify the CID group to update along "
+        "with 'name' and/or 'description' fields to be updated.",
         "name": "body",
         "in": "body",
         "required": True
@@ -276,7 +278,8 @@ _mssp_endpoints = [
     "getRolesByID",
     "GET",
     "/mssp/entities/mssp-roles/v1",
-    "Get link between user group and CID group by ID. Link ID is a string consisting of multiple components, but should be treated as opaque. MSSP Role assignment is of the format <user_group_id>:<cid_group_id>.",
+    "Get link between user group and CID group by ID. Link ID is a string consisting of multiple "
+    "components, but should be treated as opaque. MSSP Role assignment is of the format <user_group_id>:<cid_group_id>.",
     "mssp",
     [
       {
@@ -285,7 +288,8 @@ _mssp_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "Link ID is a string consisting of multiple components, but should be treated as opaque. MSSP Role assignment is of the format <user_group_id>:<cid_group_id>",
+        "description": "Link ID is a string consisting of multiple components, but should be "
+        "treated as opaque. MSSP Role assignment is of the format <user_group_id>:<cid_group_id>",
         "name": "ids",
         "in": "query",
         "required": True
@@ -296,11 +300,14 @@ _mssp_endpoints = [
     "addRole",
     "POST",
     "/mssp/entities/mssp-roles/v1",
-    "Create a link between user group and CID group, with zero or more additional roles. The call does not replace any existing link between them. User group ID and CID group ID have to be specified in request. ",
+    "Create a link between user group and CID group, with zero or more additional roles. "
+    "The call does not replace any existing link between them. User group ID and CID group ID "
+    "have to be specified in request. ",
     "mssp",
     [
       {
-        "description": "'user_group_id', 'cid_group_id' and 'role_ids' fields are required. Remaining are populated by system.",
+        "description": "'user_group_id', 'cid_group_id' and 'role_ids' fields are required. "
+        "Remaining are populated by system.",
         "name": "body",
         "in": "body",
         "required": True
@@ -311,11 +318,14 @@ _mssp_endpoints = [
     "deletedRoles",
     "DELETE",
     "/mssp/entities/mssp-roles/v1",
-    "Delete links or additional roles between user groups and CID groups. User group ID and CID group ID have to be specified in request. Only specified roles are removed if specified in request payload, else association between User Group and CID group is dissolved completely (if no roles specified).",
+    "Delete links or additional roles between user groups and CID groups. User group ID and CID "
+    "group ID have to be specified in request. Only specified roles are removed if specified in "
+    "request payload, else association between User Group and CID group is dissolved completely (if no roles specified).",
     "mssp",
     [
       {
-        "description": "'user_group_id' and 'cid_group_id' fields are required. 'role_ids' field is optional. Remaining fields are ignored.",
+        "description": "'user_group_id' and 'cid_group_id' fields are required. 'role_ids' "
+        "field is optional. Remaining fields are ignored.",
         "name": "body",
         "in": "body",
         "required": True
@@ -436,11 +446,13 @@ _mssp_endpoints = [
     "createUserGroups",
     "POST",
     "/mssp/entities/user-groups/v1",
-    "Create new user groups. Name is a required field but description is an optional field. Maximum 500 user groups allowed per customer.",
+    "Create new user groups. Name is a required field but description is an optional field. "
+    "Maximum 500 user groups allowed per customer.",
     "mssp",
     [
       {
-        "description": "Only 'name' and/or 'description' fields are required. Remaining are assigned by the system.",
+        "description": "Only 'name' and/or 'description' fields are required. "
+        "Remaining are assigned by the system.",
         "name": "body",
         "in": "body",
         "required": True
@@ -451,11 +463,14 @@ _mssp_endpoints = [
     "updateUserGroups",
     "PATCH",
     "/mssp/entities/user-groups/v1",
-    "Update existing user group(s). User group ID is expected for each user group definition provided in request body. Name is a required field but description is an optional field. Empty description will override existing value. User group member(s) remain unaffected.",
+    "Update existing user group(s). User group ID is expected for each user group definition "
+    "provided in request body. Name is a required field but description is an optional field. "
+    "Empty description will override existing value. User group member(s) remain unaffected.",
     "mssp",
     [
       {
-        "description": "'user_group_id' field is required to identify the user group to update along with 'name' and/or 'description' fields to be updated.",
+        "description": "'user_group_id' field is required to identify the user group to "
+        "update along with 'name' and/or 'description' fields to be updated.",
         "name": "body",
         "in": "body",
         "required": True
@@ -649,7 +664,8 @@ _mssp_endpoints = [
     "queryRoles",
     "GET",
     "/mssp/queries/mssp-roles/v1",
-    "Query links between user groups and CID groups. At least one of CID group ID or user group ID should also be provided. Role ID is optional.",
+    "Query links between user groups and CID groups. At least one of CID group ID or user "
+    "group ID should also be provided. Role ID is optional.",
     "mssp",
     [
       {

@@ -138,7 +138,8 @@ _user_management_endpoints = [
     "userActionV1",
     "POST",
     "/user-management/entities/user-actions/v1",
-    "Apply actions to one or more User. Available action names: reset_2fa, reset_password. User UUIDs can be provided in `ids` param as part of request payload.",
+    "Apply actions to one or more User. Available action names: reset_2fa, reset_password. "
+    "User UUIDs can be provided in `ids` param as part of request payload.",
     "user_management",
     [
       {
@@ -289,7 +290,8 @@ _user_management_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter using a query in Falcon Query Language (FQL). Supported filters: assigned_cids, cid, first_name, last_name, name, uid",
+        "description": "Filter using a query in Falcon Query Language (FQL). "
+        "Supported filters: assigned_cids, cid, first_name, last_name, name, uid",
         "name": "filter",
         "in": "query"
       },
@@ -409,7 +411,8 @@ _user_management_endpoints = [
     "GetAvailableRoleIds",
     "GET",
     "/user-roles/queries/user-role-ids-by-cid/v1",
-    "Deprecated : Please use queriesRolesV1. Show role IDs for all roles available in your customer account. For more information on each role, provide the role ID to `/customer/entities/roles/v1`.",
+    "Deprecated : Please use queriesRolesV1. Show role IDs for all roles available in your customer account. "
+    "For more information on each role, provide the role ID to `/customer/entities/roles/v1`.",
     "user_management",
     []
   ],
@@ -417,7 +420,8 @@ _user_management_endpoints = [
     "GetUserRoleIds",
     "GET",
     "/user-roles/queries/user-role-ids-by-user-uuid/v1",
-    "Deprecated : Please use combinedUserRolesV1. Show role IDs of roles assigned to a user. For more information on each role, provide the role ID to `/customer/entities/roles/v1`.",
+    "Deprecated : Please use combinedUserRolesV1. Show role IDs of roles assigned to a user. "
+    "For more information on each role, provide the role ID to `/customer/entities/roles/v1`.",
     "user_management",
     [
       {
@@ -453,7 +457,8 @@ _user_management_endpoints = [
     "CreateUser",
     "POST",
     "/users/entities/users/v1",
-    "Deprecated : Please use createUserV1. Create a new user. After creating a user, assign one or more roles with POST /user-roles/entities/user-roles/v1",
+    "Deprecated : Please use createUserV1. Create a new user. After creating a user, assign one or more roles with "
+    "POST /user-roles/entities/user-roles/v1",
     "user_management",
     [
       {
@@ -511,7 +516,8 @@ _user_management_endpoints = [
     "RetrieveEmailsByCID",
     "GET",
     "/users/queries/emails-by-cid/v1",
-    "Deprecated : Please use retrieveUsersGETV1. List the usernames (usually an email address) for all users in your customer account",
+    "Deprecated : Please use retrieveUsersGETV1. List the usernames (usually an email address) "
+    "for all users in your customer account",
     "user_management",
     []
   ],
@@ -519,7 +525,8 @@ _user_management_endpoints = [
     "RetrieveUserUUIDsByCID",
     "GET",
     "/users/queries/user-uuids-by-cid/v1",
-    "Deprecated : Please use queryUserV1. List user IDs for all users in your customer account. For more information on each user, provide the user ID to `/users/entities/user/v1`.",
+    "Deprecated : Please use queryUserV1. List user IDs for all users in your customer account. "
+    "For more information on each user, provide the user ID to `/users/entities/user/v1`.",
     "user_management",
     []
   ],

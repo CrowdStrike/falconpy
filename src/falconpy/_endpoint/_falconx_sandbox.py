@@ -147,7 +147,8 @@ _falconx_sandbox_endpoints = [
       },
       {
         "type": "string",
-        "description": "Format used to compress your downloaded file. Currently, you must provide the value `gzip`, the only valid format.",
+        "description": "Format used to compress your downloaded file. "
+        "Currently, you must provide the value `gzip`, the only valid format.",
         "name": "Accept-Encoding",
         "in": "header"
       }
