@@ -819,3 +819,10 @@ subfolder
 GetQuarantineFiles
 QueryQuarantineFiles
 Massyn
+FDR
+fdr
+notificationsDeletionRequested
+cloudtrail
+arns
+iam
+oss
