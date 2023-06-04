@@ -213,8 +213,8 @@ class DeviceControlPolicies(ServiceClass):
         """Perform a Device Control Policy action.
 
         Keyword arguments:
-        action_name -- action to perform: 'add-host-group', 'disable', 'enable',
-                       or 'remove-host-group'.
+        action_name -- action to perform: 'add-host-group', 'add-rule-group', 'disable', 'enable',
+                       'remove-rule-group' or 'remove-host-group'.
         action_parameters -- Action specific parameter options. List of dictionaries.
                              {
                                  "name": "string",
