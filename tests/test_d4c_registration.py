@@ -25,7 +25,7 @@ class TestD4CRegistration:
         get_azure_user_scripts_attachment
         """
         returned = False
-        result = falcon.GetCSPMAzureUserScriptsAttachment()
+        result = falcon.GetCSPMAzureUserScriptsAttachment(tenant_id="12345678")
         if isinstance(result, bytes):
             returned = True
         else:
@@ -88,7 +88,7 @@ class TestD4CRegistration:
         error_checks = True
         tests = {
             "get_azure_account": falcon.GetCSPMAzureAccount(ids='12345678', scan_type='dry'),
-            "update_azure_account_client_id": falcon.UpdateCSPMAzureAccountClientID(ids='12345678'),
+            "update_azure_account_client_id": falcon.UpdateCSPMAzureAccountClientID(ids='12345678', tenant_id="12345678"),
             "get_cgp_account": falcon.GetCSPMCGPAccount(ids='12345678', parameters={'scan_type': 'dry'}),
             "get_gcp_acocunt": falcon.GetCSPMGCPAccount(ids='12345678'),  # Test the typo fix version
             "create_gcp_account": falcon.CreateCSPMGCPAccount(body={}, parent_id="12345678"),
@@ -104,7 +104,8 @@ class TestD4CRegistration:
             "DeleteD4CAwsAccount": falcon.delete_aws_account("ID_DOES_NOT_EXIST"),
             "GetD4CAwsConsoleSetupURLs": falcon.get_aws_console_setup("us-east-2"),
             "GetD4CAwsAccountScriptsAttachment": falcon.get_aws_account_scripts("123456789"),
-            "GetHorizonD4CScripts": falcon.get_aws_horizon_scripts(organization_id="123456789")
+            "GetHorizonD4CScripts": falcon.get_aws_horizon_scripts(organization_id="123456789"),
+            "GetDiscoverCloudAzureTenantIDs": falcon.get_azure_tenant_ids()
         }
         for key in tests:
             if tests[key]["status_code"] != 500:
