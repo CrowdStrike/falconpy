@@ -9,6 +9,7 @@ The FalconPy project exists to enable developer interactions with the CrowdStrik
 | :--- | :--- |
 | Joshua Hiller, `@jshcodes` | [Lord of the FalconPys](https://xkcd.com/1604/) [:fly:](https://xkcd.com/1856/) |
 | Dixon Styres, `@crowdstrikedcs` | [Author](https://xkcd.com/1646/) |
+| Timothy Sullivan, `@tsullivan06` | [Author](https://xkcd.com/1349/) |
 | Devin Cargill, `@dcargs` | [Author](https://xkcd.com/722/) |
 
 <BR/>
@@ -33,7 +34,6 @@ These coders deserve accolades and laurels as well as cool titles and cartoons. 
 | Brendan Kremian, `@bk-cs` | [Disparate Ringbearer](https://xkcd.com/353/)
 | Christophe Viaud, `@falcon-pioupiou` | [Consequence Substantiator](https://xkcd.com/1678/) |
 | Shane Shellenbarger, `@soggysec` | [Calamity Validator](https://xkcd.com/1700/) |
-| Timothy Sullivan, `@tsullivan06` | [Functionality Determinator](https://xkcd.com/1349/) |
 | Steve Klassen, `@mrxinu` | [Dilemma Responder](https://xkcd.com/85/) |
 
 ## Contributors
