@@ -90,6 +90,105 @@ class FalconXSandbox(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_dump_extracted_strings(self: object, *args, parameters: dict = None, **kwargs) -> object:
+        """Get extracted strings from a memory dump.
+
+        Keyword arguments:
+        id -- Extracted Strings ID. String.
+        name -- The name given to your download file. String.
+        parameters -- full parameters payload, not required if id is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: gzip-compressed binary object on SUCCESS
+                 dict object containing API response on FAILURE
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetMemoryDumpExtractedStrings
+        """
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # gzip is currently the only allowed option
+        header_payload['Accept-Encoding'] = 'gzip'
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetMemoryDumpExtractedStrings",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id"),
+            headers=header_payload
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_hex_dump(self: object, *args, parameters: dict = None, **kwargs) -> object:
+        """Get hex view of a memory dump.
+
+        Keyword arguments:
+        id -- Hex Dump ID. String.
+        name -- The name given to your download file. String.
+        parameters -- full parameters payload, not required if id is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: gzip-compressed binary object on SUCCESS
+                 dict object containing API response on FAILURE
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetMemoryDumpHexDump
+        """
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # gzip is currently the only allowed option
+        header_payload['Accept-Encoding'] = 'gzip'
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetMemoryDumpHexDump",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id"),
+            headers=header_payload
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_memory_dump(self: object, *args, parameters: dict = None, **kwargs) -> object:
+        """Get memory dump content as a binary.
+
+        Keyword arguments:
+        id -- Memory Dump ID. String.
+        name -- The name given to your download file. String.
+        parameters -- full parameters payload, not required if id is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: gzip-compressed binary object on SUCCESS
+                 dict object containing API response on FAILURE
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/GetMemoryDump
+        """
+        # Create a copy of our default header dictionary
+        header_payload = json.loads(json.dumps(self.headers))
+        # gzip is currently the only allowed option
+        header_payload['Accept-Encoding'] = 'gzip'
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetMemoryDump",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id"),
+            headers=header_payload
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_summary_reports(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get a short summary version of a sandbox report.
 
@@ -540,6 +639,9 @@ class FalconXSandbox(ServiceClass):
     GetSampleV2 = get_sample
     DeleteSampleV2 = delete_sample
     QuerySampleV1 = query_sample
+    GetMemoryDumpExtractedStrings = get_dump_extracted_strings
+    GetMemoryDumpHexDump = get_hex_dump
+    GetMemoryDump = get_memory_dump
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
