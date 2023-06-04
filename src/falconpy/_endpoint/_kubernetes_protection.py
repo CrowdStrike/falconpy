@@ -47,8 +47,6 @@ _kubernetes_protection_endpoints = [
       {
         "type": "array",
         "items": {
-          "minLength": 12,
-          "pattern": "^[0-9]{12}$",
           "type": "string"
         },
         "collectionFormat": "csv",
@@ -57,7 +55,22 @@ _kubernetes_protection_endpoints = [
         "in": "query"
       },
       {
+        "pattern": "^(true|false)$",
+        "enum": [
+          "false",
+          "true"
+        ],
+        "type": "string",
+        "description": "Filter by whether an account originates from Horizon or not",
+        "name": "is_horizon_acct",
+        "in": "query"
+      },
+      {
         "pattern": "^(provisioned|operational)$",
+        "enum": [
+          "operational",
+          "provisioned"
+        ],
         "type": "string",
         "description": "Filter by account status",
         "name": "status",
@@ -104,9 +117,6 @@ _kubernetes_protection_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 12,
-          "minLength": 12,
-          "pattern": "^[0-9]{12}$",
           "type": "string"
         },
         "collectionFormat": "csv",
@@ -134,9 +144,6 @@ _kubernetes_protection_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 12,
-          "minLength": 12,
-          "pattern": "^[0-9]{12}$",
           "type": "string"
         },
         "collectionFormat": "csv",
@@ -398,6 +405,12 @@ _kubernetes_protection_endpoints = [
         "name": "cluster_name",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "boolean",
+        "description": "Set to true if the cluster is not managed by a cloud provider, false if it is.",
+        "name": "is_self_managed_cluster",
+        "in": "query"
       }
     ]
   ],
@@ -427,6 +440,21 @@ _kubernetes_protection_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "Not Installed",
+          "Running",
+          "Stopped"
+        ],
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Cluster Status",
+        "name": "status",
+        "in": "query"
+      },
+      {
         "type": "array",
         "items": {
           "type": "string"
@@ -448,6 +476,7 @@ _kubernetes_protection_endpoints = [
       },
       {
         "enum": [
+          "aks",
           "eks"
         ],
         "type": "string",

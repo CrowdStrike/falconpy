@@ -59,6 +59,7 @@ class KubernetesProtection(ServiceClass):
 
         Keyword arguments:
         ids -- AWS Account IDs. String or list of strings.
+        is_horizon_acct -- Filter by whether an account originates from Horizon or not. String.
         limit -- The maximum number of records to return in this response. [Integer, 1-500]
                  Use with the offset parameter to manage pagination of results.
         offset -- The offset to start retrieving records from. String.
@@ -438,6 +439,8 @@ class KubernetesProtection(ServiceClass):
 
         Keyword arguments:
         cluster_name -- Cloud provider. String.
+        is_self_managed_cluster -- Set to true if the cluster is not managed by a cloud provider, false if it is.
+                                   Boolean.
         parameters - full parameters payload, not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be
@@ -493,6 +496,7 @@ class KubernetesProtection(ServiceClass):
         limit -- The maximum number of records to return in this response. [Integer, 1-500]
                  Use with the offset parameter to manage pagination of results.
         locations -- Cloud location. String or list of strings.
+        status -- Cluster status. 'Not Installed', 'Running', or 'Stopped'. String.
         offset -- The offset to start retrieving records from. String.
                   Use with the limit parameter to manage pagination of results.
         parameters - full parameters payload, not required if using other keywords.
