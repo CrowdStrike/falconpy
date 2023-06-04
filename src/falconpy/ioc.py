@@ -529,6 +529,8 @@ class IOC(ServiceClass):
                  in the results. To access more than 10k indicators, use the `after` parameter
                  instead of `offset`.
         filter -- The filter expression that should be used to limit the results. FQL syntax.
+        from_parent -- The filter for returning either only indicators for the request customer
+                       or its MSSP parents. String.
         limit -- The maximum records to return. [1-500]. Defaults to 100.
                  Use with the offset parameter to manage pagination of results.
         offset -- The offset to start retrieving records from.

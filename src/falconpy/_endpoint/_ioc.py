@@ -144,7 +144,7 @@ _ioc_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
+        "collectionFormat": "multi",
         "description": "The ids of the Actions to retrieve",
         "name": "ids",
         "in": "query"
@@ -177,7 +177,7 @@ _ioc_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
+        "collectionFormat": "multi",
         "description": "The ids of the Indicators to retrieve",
         "name": "ids",
         "in": "query",
@@ -258,7 +258,7 @@ _ioc_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
+        "collectionFormat": "multi",
         "description": "The ids of the Indicators to delete. If both 'filter' and 'ids' are provided, "
         "then filter takes precedence and ignores ids",
         "name": "ids",
@@ -358,6 +358,12 @@ _ioc_endpoints = [
         "token from the previous response to continue from that place in the results. To access more than 10k "
         "indicators, use the 'after' parameter instead of 'offset'.",
         "name": "after",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "description": "The filter for returning either only indicators for the request customer or its MSSP parents",
+        "name": "from_parent",
         "in": "query"
       }
     ]
