@@ -46,11 +46,11 @@ _cloud_connect_aws_endpoints = [
     "cloud_connect_aws",
     [
       {
-        "maxLength": 500,
+        "maxLength": 1000,
         "minLength": 1,
         "type": "integer",
         "default": 100,
-        "description": "The maximum records to return. [1-500]. Defaults to 100.",
+        "description": "The maximum records to return. [1-1000]. Defaults to 100.",
         "name": "limit",
         "in": "query"
       },
@@ -93,7 +93,6 @@ _cloud_connect_aws_endpoints = [
         "maxItems": 5000,
         "type": "array",
         "items": {
-          "pattern": "\\d{12}",
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -154,8 +153,6 @@ _cloud_connect_aws_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 12,
-          "minLength": 12,
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -190,8 +187,6 @@ _cloud_connect_aws_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 12,
-          "minLength": 12,
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -211,11 +206,11 @@ _cloud_connect_aws_endpoints = [
     "cloud_connect_aws",
     [
       {
-        "maxLength": 500,
+        "maxLength": 1000,
         "minLength": 1,
         "type": "integer",
         "default": 100,
-        "description": "The maximum records to return. [1-500]. Defaults to 100.",
+        "description": "The maximum records to return. [1-1000]. Defaults to 100.",
         "name": "limit",
         "in": "query"
       },
