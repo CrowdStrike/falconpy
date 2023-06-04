@@ -225,7 +225,7 @@ class TestAuthorization():
 
     def serviceRevoke(self):
         try:
-            result = self.authorization.revoke(token=self.token)["status_code"]
+            result = self.authorization.revoke(token=self.token, client_id=self.config["falcon_client_id"])["status_code"]
             if result > 0:
                 return True
             else:
