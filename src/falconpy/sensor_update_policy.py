@@ -99,8 +99,9 @@ class SensorUpdatePolicy(ServiceClass):
 
         Keyword arguments:
         platform -- The platform to return builds for. String.
-                    Allowed values: "linux", "mac", "windows"
+                    Allowed values: "linux", "linuxarm64", "mac", "windows", "zlinux"
         parameters -- full parameters payload, not required if platform is provided as a keyword.
+        stage -- The stages to return builds for. String or list of strings.
 
         Arguments: When not specified, the first argument to this method is assumed to be
                    'platform'. All others are ignored.
@@ -269,8 +270,8 @@ class SensorUpdatePolicy(ServiceClass):
         """Perform the specified action on the Sensor Update Policies specified in the request.
 
         Keyword arguments:
-        action_name -- action to perform: 'add-host-group', 'disable', 'enable',
-                       or 'remove-host-group'.
+        action_name -- action to perform: 'add-host-group', 'add-rule-group', 'disable', 'enable',
+                       'remove-rule-group' or 'remove-host-group'.
         action_parameters -- Action specific parameter options. List of dictionaries.
                              {
                                  "name": "string",
