@@ -161,11 +161,12 @@ class OAuth2:
 
         return returned
 
-    def revoke(self: object, token: str) -> dict:
+    def revoke(self: object, token: str, client_id: str = None) -> dict:
         """Revoke the specified authorization token.
 
         Keyword arguments:
         token: Token string to be revoked.
+        client_id: The OAuth2 client ID you are revoking the token for.
 
         When not specified as a keyword, token is assumed as the only accepted argument.
 
@@ -177,6 +178,8 @@ class OAuth2:
             b64cred = generate_b64cred(self.creds["client_id"], self.creds["client_secret"])
             header_payload = {"Authorization": f"basic {b64cred}"}
             data_payload = {"token": f"{token}"}
+            if client_id:
+                data_payload["client_id"] = client_id
             returned = perform_request(method="POST", endpoint=target_url, data=data_payload,
                                        headers=header_payload, verify=self.ssl_verify,
                                        proxy=self.proxy, timeout=self.timeout,
