@@ -23,6 +23,33 @@ class TestODS:
     def test_all_code_paths(self):
         error_checks = True
         tests = {
+            "aggregate_scan_hosts": falcon.aggregate_scan_hosts(date_ranges=[
+                                                                    {
+                                                                        "from": "string",
+                                                                        "to": "string"
+                                                                    }
+                                                                ],
+                                                                field="string",
+                                                                filter="string",
+                                                                interval="string",
+                                                                min_doc_count=0,
+                                                                missing="string",
+                                                                name="string",
+                                                                q="string",
+                                                                ranges=[
+                                                                    {
+                                                                        "From": 0,
+                                                                        "To": 0
+                                                                    }
+                                                                ],
+                                                                size=0,
+                                                                sort="string",
+                                                                sub_aggregates=[
+                                                                    "string"
+                                                                ],
+                                                                time_zone="string",
+                                                                type="string"
+                                                                ),
             "aggregate_scans": falcon.aggregate_scans(date_ranges=[
                                                         {
                                                             "from": "string",
