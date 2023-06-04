@@ -44,7 +44,10 @@ class TestFalconXSandbox:
             "get_sample": falcon.GetSampleV2(ids='12345678'),
             "upload_sample": falcon.UploadSampleV2(body={}, parameters={}, file_data=''),
             "delete_sample": falcon.DeleteSampleV2(ids='12345678'),
-            "query_sample": falcon.QuerySampleV1(sha256s='12345678')
+            "query_sample": falcon.QuerySampleV1(sha256s='12345678'),
+            "get_memory_dump": falcon.get_memory_dump("12345678"),
+            "get_hex_dump": falcon.get_hex_dump("12345678"),
+            "get_extracted_strings": falcon.get_dump_extracted_strings("12345678")
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

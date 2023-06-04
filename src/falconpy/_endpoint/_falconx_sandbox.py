@@ -68,6 +68,92 @@ _falconx_sandbox_endpoints = [
     ]
   ],
   [
+    "GetMemoryDumpExtractedStrings",
+    "GET",
+    "/falconx/entities/memory-dump/extracted-strings/v1",
+    "Get extracted strings from a memory dump",
+    "falconx_sandbox",
+    [
+      {
+        "type": "string",
+        "description": "Extracted strings id",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The name given to your downloaded file.",
+        "name": "name",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Format used to compress your downloaded file. "
+        "Currently, you must provide the value `gzip`, the only valid format.",
+        "name": "Accept-Encoding",
+        "in": "header"
+      }
+    ]
+  ],
+  [
+    "GetMemoryDumpHexDump",
+    "GET",
+    "/falconx/entities/memory-dump/hex-dump/v1",
+    "Get hex view of a memory dump",
+    "falconx_sandbox",
+    [
+      {
+        "type": "string",
+        "description": "Hex dump id",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The name given to your downloaded file.",
+        "name": "name",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Format used to compress your downloaded file. "
+        "Currently, you must provide the value `gzip`, the only valid format.",
+        "name": "Accept-Encoding",
+        "in": "header"
+      }
+    ]
+  ],
+  [
+    "GetMemoryDump",
+    "GET",
+    "/falconx/entities/memory-dump/v1",
+    "Get memory dump content, as binary",
+    "falconx_sandbox",
+    [
+      {
+        "type": "string",
+        "description": "Memory dump id",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The name given to your downloaded file.",
+        "name": "name",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Format used to compress your downloaded file. Currently, you must provide the value `gzip`, the only valid format.",
+        "name": "Accept-Encoding",
+        "in": "header"
+      }
+    ]
+  ],
+  [
     "GetSummaryReports",
     "GET",
     "/falconx/entities/report-summaries/v1",
