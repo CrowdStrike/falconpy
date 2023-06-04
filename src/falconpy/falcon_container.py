@@ -254,7 +254,7 @@ class FalconContainer(ServiceClass):
 
         Swagger URL
         ----
-        This operation does not exist in swagger.
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/ReadRegistryEntities
 
         Keyword arguments
         ----
@@ -296,7 +296,7 @@ class FalconContainer(ServiceClass):
 
         Swagger URL
         ----
-        This operation does not exist in swagger.
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/ReadRegistryEntitiesByUUID
 
         Keyword arguments
         ----
@@ -331,7 +331,7 @@ class FalconContainer(ServiceClass):
 
         Swagger URL
         ----
-        This operation does not exist in swagger.
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/DeleteRegistryEntities
 
         Keyword arguments
         ----
@@ -366,7 +366,7 @@ class FalconContainer(ServiceClass):
 
         Swagger URL
         ----
-        This operation does not exist in swagger.
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/CreateRegistryEntities
 
         Keyword arguments
         ----
@@ -401,7 +401,7 @@ class FalconContainer(ServiceClass):
 
         Swagger URL
         ----
-        This operation does not exist in swagger.
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/UpdateRegistryEntities
 
         Keyword arguments
         ----
@@ -428,8 +428,116 @@ class FalconContainer(ServiceClass):
             body=body
             )
 
-    # This method name aligns to the operation ID in the API but
-    # does not conform to snake_case / PEP8 and is defined here for
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_vulnerable_containers(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve container counts for the most vulnerable containers.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-events/GetVulnerableContainerInfo
+
+        Keyword arguments
+        ----
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL) syntax. String.
+            Supported filters: time_since
+        parameters : dict
+            Full parameters payload. Not required if using filter keyword.
+
+        Arguments
+        ----
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetVulnerableContainerInfo",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_pods_with_most_open_ports(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve pods with the most open ports.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-events/GetPodsWithMostOpenPorts
+
+        Keyword arguments
+        ----
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL) syntax. String.
+            Supported filters: time_since
+        parameters : dict
+            Full parameters payload. Not required if using filter keyword.
+
+        Arguments
+        ----
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetPodsWithMostOpenPorts",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_port_info(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve ports based upon the given filter criteria.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/network-events/GetPortInfo
+
+        Keyword arguments
+        ----
+        filter : str
+            Filter images using a query in Falcon Query Language (FQL) syntax. String.
+            Supported filters: time_since, type
+        parameters : dict
+            Full parameters payload. Not required if using filter keyword.
+
+        Arguments
+        ----
+        When not specified, the first argument to this method is assumed to be 'filter'.
+        All others are ignored.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetPortInfo",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    # These method names align to the operation IDs in the API but
+    # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
     GetCredentials = get_credentials
     GetImageAssessmentReport = get_assessment
@@ -441,3 +549,6 @@ class FalconContainer(ServiceClass):
     DeleteRegistryEntities = delete_registry_entities
     CreateRegistryEntities = create_registry_entities
     UpdateRegistryEntities = update_registry_entities
+    GetVulnerableContainerInfo = get_vulnerable_containers
+    GetPodsWithMostOpenPorts = get_pods_with_most_open_ports
+    GetPortInfo = get_port_info

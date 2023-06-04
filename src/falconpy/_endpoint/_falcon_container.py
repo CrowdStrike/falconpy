@@ -229,5 +229,50 @@ _falcon_container_endpoints = [
         "required": True
       }
     ]
+  ],
+  [
+    "GetVulnerableContainerInfo",
+    "GET",
+    "/container-security/aggregates/containers/counts-by-vulnerable/v1",
+    "Retrieve containers counts for the most vulnerable containers",
+    "network_events",
+    [
+      {
+        "type": "string",
+        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  time_since",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetPodsWithMostOpenPorts",
+    "GET",
+    "/container-security/aggregates/pods/counts-by-open-port/v1",
+    "Retrieve pods with the most open ports",
+    "network_events",
+    [
+      {
+        "type": "string",
+        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  time_since",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetPortInfo",
+    "GET",
+    "/container-security/aggregates/ports/counts-by-open-state/v1",
+    "Retrieve ports based on the given filter criteria",
+    "network_events",
+    [
+      {
+        "type": "string",
+        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  time_since,type",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
   ]
 ]
