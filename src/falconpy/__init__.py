@@ -39,6 +39,7 @@ from .event_streams import EventStreams
 from .falcon_complete_dashboard import CompleteDashboard
 from .falcon_container import FalconContainer
 from .falconx_sandbox import FalconXSandbox
+from .fdr import FDR
 from .filevantage import FileVantage
 from .firewall_management import FirewallManagement
 from .firewall_policies import FirewallPolicies
@@ -101,7 +102,7 @@ __all__ = [
     "ScheduledReports", "SensorDownload", "SensorUpdatePolicy", "SensorVisibilityExclusions",
     "SpotlightVulnerabilities", "SpotlightEvaluationLogic", "UserManagement", "ODS",
     "ZeroTrustAssessment", "PreventionPolicies", "SensorUpdatePolicies", "MessageCenter",
-    "FileVantage", "MobileEnrollment", "ContainerBaseURL", "TailoredIntelligence"
+    "FileVantage", "MobileEnrollment", "ContainerBaseURL", "TailoredIntelligence", "FDR"
 ]
 """
 This is free and unencumbered software released into the public domain.
