@@ -62,12 +62,28 @@ _sensor_update_policies_endpoints = [
       {
         "enum": [
           "linux",
+          "linuxarm64",
           "mac",
-          "windows"
+          "windows",
+          "zlinux"
         ],
         "type": "string",
         "description": "The platform to return builds for",
         "name": "platform",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "early_adopter",
+          "prod"
+        ],
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "The stages to return builds for",
+        "name": "stage",
         "in": "query"
       }
     ]
@@ -93,10 +109,10 @@ _sensor_update_policies_endpoints = [
         "in": "query"
       },
       {
-        "maximum": 5000,
+        "maximum": 500,
         "minimum": 1,
         "type": "integer",
-        "description": "The maximum records to return. [1-5000]",
+        "description": "The maximum records to return. [1-500]",
         "name": "limit",
         "in": "query"
       }
@@ -265,9 +281,11 @@ _sensor_update_policies_endpoints = [
       {
         "enum": [
           "add-host-group",
+          "add-rule-group",
           "disable",
           "enable",
-          "remove-host-group"
+          "remove-host-group",
+          "remove-rule-group"
         ],
         "type": "string",
         "description": "The action to perform",
@@ -444,10 +462,10 @@ _sensor_update_policies_endpoints = [
         "in": "query"
       },
       {
-        "maximum": 5000,
+        "maximum": 500,
         "minimum": 1,
         "type": "integer",
-        "description": "The maximum records to return. [1-5000]",
+        "description": "The maximum records to return. [1-500]",
         "name": "limit",
         "in": "query"
       }
