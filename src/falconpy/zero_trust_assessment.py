@@ -148,7 +148,7 @@ class ZeroTrustAssessment(ServiceClass):
         limit - The number of scores to return in this response. Integer.
                 Min: 1, Max: 5,000, Default: 100
         parameters - Full parameters payload provided as a JSON dictionary.
-        sort - Sort assessment by their properties. 
+        sort - Sort assessment by their properties.
                Common sort options include:
                created_timestamp|desc
                updated_timestamp|asc

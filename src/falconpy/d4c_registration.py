@@ -534,7 +534,7 @@ class D4CRegistration(ServiceClass):
         Keyword arguments:
         parent_type -- GCP Hierarchy Parent Type, organization/folder/project. String.
         parameters - full parameters payload, not required if using other keywords.
-        
+
         Arguments: When not specified, the first argument to this method is assumed to be
                    'parent_type'. All others are ignored.
 
