@@ -1,3 +1,151 @@
+# Version 1.2.16
+## Added features and functionality
++ Added: 3 new operations added to the __CSPMRegistration__ Service Class, `GetConfigurationDetectionEntities`, `GetConfigurationDetectionIDsV2`, and `GetCSPMPoliciesDetails`.
+    - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cspm_registration.py`
++ Added: New keywords were added to 8 operations within the __CSPMRegistration__ Service Class.
+    * _iam_role_arns_ and _migrated_ were added to the `GetCSPMAwsAccount` operation.
+    * _ids_, _use_existing_cloudtrail_, and _region_ were added to the `GetCSPMAwsConsoleSetupURLs` operation.
+    * _ids_ was added to the `GetCSPMAwsAccountScriptsAttachment` operation.
+    * _tenant_ids_ was added to the `GetCSPMAzureAccount` operation.
+    * _retain_tenant_ and _tenant_ids_ were added to the `DeleteCSPMAzureAccount` operation.
+    * _years_valid_ was added to the `AzureDownloadCertificate` operation.
+    * _account_type_, _subscription_ids_, and _template_ were added to the `GetCSPMAzureUserScriptsAttachment` operation.
+    * _resource_id_ and _resource_uuid_ were added to the `GetBehaviorDetections` operation.
+    - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
++ Added: 1 new operation added to the __D4CRegistration__ Service Class, `GetDiscoverCloudAzureTenantIDs`.
+    - `_endpoint/_d4c_registration.py`
+    - `d4c_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_d4c_registration.py`
++ Added: New keywords were added to 6 operations within the __D4CRegistration__ Service Class.
+    * _limit_, _offset_, _status_ and _tenant_ids_ were added to the `GetCSPMAzureAccount` operation.
+    * _object_id_ and _tenant_id_ were added to the `UpdateCSPMAzureAccountClientID` operation.
+    * _subscription_ids_, _tenant_id_ and _template_ were added to the `GetCSPMAzureUserScriptsAttachment` operation.
+    * _limit_, _offset_, _parent_type_, _sort_ and _status_ were added to the `GetCSPMCGPAccount` operation.
+    * _years_valid_ was added to the `DiscoverCloudAzureDownloadCertificate` operation.
+    * _parent_type_ was added to the `GetCSPMGCPUserScripts` operation.
+    - `_endpoint/_d4c_registration.py`
+    - `d4c_registration.py`
++ Added: _add-rule-group_ and _remove-rule-group_ added as possible values for the __*action_name*__ keyword within the `performDeviceControlPoliciesAction` operation in the __DeviceControlPolicies__ Service Class.
+    - `_endpoint/_device_control_policy.py`
+    - `device_control_policy.py`
++ Added: 4 new operations added to the __Discover__ Service Class, `query_active_discovery_networks`, `query_active_discovery_rules`, `query_active_discover_scanners`, and `query_active_discover_scans`.
+    - `_endpoint/_discover.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/_discover.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `discover.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_discover.py`
++ Added: 3 new operations added to the __FalconContainer__ Service Class, `GetVulnerableContainerInfo`, `GetPodsWithMostOpenPorts`, and `GetPortInfo`.
+    - `endpoint/_falcon_container.py`
+    - `falcon_container.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_falcon_container.py`
++ Added: 3 new operations added to the __FalconXSandbox__ Service Class, `GetMemoryDumpExtractedStrings`, `GetMemoryDumpHexDump`, and `GetMemoryDump`.
+    - `_endpoint/_falconx_sandbox.py`
+    - `falconx_sandbox.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_falconx_sandbox.py`
++ Added: New __FDR__ Service Class with 5 new operations, `fdrschema_combined_event_get`, `fdrschema_entities_event_get`, `fdrschema_entities_field_get`, `fdrschema_queries_event_get`, and `fdrschema_queries_field_get`.
+    - `_endpoint/_fdr.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/_fdr.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `fdr.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_fdr.py`
++ Added: New keyword was added to 1 operation within the __FlightControl__ Service Class.
+    * _filter_ was added to the `queryChildren` operation.
+    - `_endpoint/_mssp.py`
+    - `mssp.py`
++ Added: New keyword was added to 1 operation within the __Hosts__ Service Class.
+    * _disable_hostname_check_ was added to the `entities_perform_action` operation.
+    - `_endpoint/_hosts.py`
+    - `hosts.py`
++ Added: New keywords were added to 1 operation within the __Incidents__ Service Class.
+    * _overwrite_detects_ and _update_detects_ were added to the `PerformIncidentAction` operation.
+    - `_endpoint/_incidents.py`
+    - `incidents.py`
++ Added: New keyword was added to 1 operation within the __IOC__ Service Class.
+    * _from_parent_ was added to the `indicator_search_v1` operation.
+    - `_endpoint/_ioc.py`
+    - `ioc.py`
++ Added: New keywords were added to 3 operations within the __KubernetesProtection__ Service Class.
+    * _is_horizon_acct_ was added to the `GetAWSAccountsMixin0` operation.
+    * _is_self_managed_cluster_ was added to the `GetHelmValuesYaml` operation.
+    * _status_ was added to the `GetClusters` operation.
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
++ Added: 1 new operation added to the __ODS__ Service Class, `aggregate_query_scan_host_metadata`.
+    - `_endpoint/_ods.py`
+    - `_endpoint/deprecated/_ods.py`
+    - `ods.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ods.py`
++ Added: New keyword was added to 1 operation within the __OAuth2__ Service Class.
+    * _client_id_ was added to the `revoke` operation.
+    - `_endpoint/_oauth2.py`
+    - `oauth2.py`
++ Added: New keyword was added to 1 operation within the __Recon__ Service Class.
+    * _notificationsDeletionRequested_ was added to the `DeleteRulesV1` operation.
+    - `_endpoint/_recon.py`
+    - `recon.py`
++ Added: New keyword was added to 1 operation within the __SensorUpdatePolicy__ Service Class.
+    * _stage_ was added to the `queryCombinedSensorUpdateBuilds` operation.
+    - `_endpoint/_sensor_update_policy.py`
+    - `sensor_update_policy.py`
++ Added: _add-rule-group_ and _remove-rule-group_ added as possible values for the __*action_name*__ keyword within the `performSensorUpdatePoliciesAction` operation in the __SensorUpdatePolicy__ Service Class.
+    - `_endpoint/_sensor_update_policies.py`
+    - `sensor_update_policies.py`
++ Added: New keyword was added to 1 operation within the __UserManagement__ Service Class.
+    * _action_ was added to the `queryiesRolesV1` operation.
+    - `_endpoint/_user_management.py`
+    - `user_management.py`
++ Added: 1 new operation added to the __ZeroTrustAssessment__ Service Class, `getCombinedAssessmentsQuery`.
+    - `_endpoint/_zero_trust_assessment.py`
+    - `zero_trust_assessment.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_zero_trust_assessment.py`
+
+
+## Other
++ Reduced: Limit maximum for `queryCombinedSensorUpdateKernels` operation within the __SensorUpdatePolicy__ Service Class was changed from __*5000*__ to __500__.
+    - `_endpoint/_sensor_update_policies.py`
++ Reduced: Limit maximum for `querySensorUpdateKernelsDistinct` operation within the __SensorUpdatePolicy__ Service Class was changed from __*5000*__ to __500__.
+    - `_endpoint/_sensor_update_policies.py`
++ Increased: Limit maximum for `QueryAWSAccounts` operation within the __CloudConnectAWS__ Service Class was changed from __*500*__ to __1000__.
+    - `_endpoint/_cloud_connect_aws.py`
++ Increased: Limit maximum for `QueryAWSAccountsForIDs` operation within the __CloudConnectAWS__ Service Class was changed from __*500*__ to __1000__.
+    - `_endpoint/_cloud_connect_aws.py`
++ Renamed: 8 operations renamed within the __D4CRegistration__ Service Class. Legacy operation IDs were deprecated, with aliases created to avoid introducing breaking changes.
+    * _GetCSPMAzureAccount_ is now `GetDiscoverCloudAzureAccount`.
+    * _CreateCSPMAzureAccount_ is now `CreateDiscoverCloudAzureAccount`.
+    * _UpdateCSPMAzureAccountClientID_ is now `UpdateDiscoverCloudAzureAccountClientID`.
+    * _GetCSPMAzureUserScriptsAttachment_ is now `GetDiscoverCloudAzureUserScriptsAttachment`.
+    * _GetCSPMAzureUserScripts_ is now `GetDiscoverCloudAzureUserScripts`.
+    * _GetCSPMCGPAccount_ is now `GetD4CCGPAccount`.
+    * _CreateCSPMGCPAccount_ is now `CreateD4CGCPAccount`.
+    * _GetCSPMGCPUserScripts_ is now `GetD4CGCPUserScripts`.
+    - `_endpoint/_d4c_registration.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/_d4c_registration.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `d4c_registration.py`
++ Renamed: 1 operation renamed within the __ZeroTrustAssessment__ Service Class. Legacy operation ID was deprecated, with an alias created to avoid introducing a breaking change.
+    * _getComplianceV1_ is now `getAuditV1`.
+    - `_endpoint/_zero_trust_assessment.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/_zero_trust_assessment.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `zero_trust_assessment.py`
+
+---
+
 # Version 1.2.15
 ## Added features and functionality
 + Added: 1 new operation added to the __ZeroTrustAssessment__ Service Class, `getAssessmentsByScoreV1`.
