@@ -106,19 +106,24 @@ _incidents_endpoints = [
       {
         "type": "boolean",
         "default": False,
-        "description": "If true, update assigned-to-uuid and or status of detections associated with the incident(s). Defaults to false",
+        "description": "If true, update assigned-to-uuid and or status of detections associated with "
+        "the incident(s). Defaults to false",
         "name": "update_detects",
         "in": "query"
       },
       {
         "type": "boolean",
         "default": False,
-        "description": "If true and update-detects is true, the assigned-to-uuid or status for ALL detections associated with the incident(s) will be overwritten. If false, only detects that have default values for assigned-to-uuid and/or status will be updated. Defaults to false. Ignored if 'update-detects' is missing or false.",
+        "description": "If true and update-detects is true, the assigned-to-uuid or status for ALL "
+        "detections associated with the incident(s) will be overwritten. If false, only detects that "
+        "have default values for assigned-to-uuid and/or status will be updated. Defaults to false. "
+        "Ignored if 'update-detects' is missing or false.",
         "name": "overwrite_detects",
         "in": "query"
       },
       {
-        "description": "Incident Update request body containing minimum 1 and maximum 5000 Incident ID(s) and action param(s) to be performed action against.",
+        "description": "Incident Update request body containing minimum 1 and maximum 5000 Incident ID(s) "
+        "and action param(s) to be performed action against.",
         "name": "body",
         "in": "body",
         "required": True
