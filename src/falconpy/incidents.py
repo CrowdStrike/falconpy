@@ -116,8 +116,8 @@ class Incidents(ServiceClass):
             body=body
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def perform_incident_action(self: object, body: dict = None, **kwargs) -> dict:
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def perform_incident_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
         """Perform a set of actions on one or more incidents.
 
         Such as: adding tags or updating the incident name or description.
@@ -132,8 +132,10 @@ class Incidents(ServiceClass):
         delete_tag -- Deletes tags matching the value from all the incidents in the ids list.
                       Overridden if action_parameters is specified. Multiple values may be provided.
                       String, comma delimited string or list.
+        overwrite_detects - Overwrite related detections. Boolean.
         unassign -- Unassigns all users from all of the incidents in the ids list.
                     Overridden if action_parameters is specified. Boolean.
+        update_detects -- Update related detections. Boolean.
         update_name -- Updates the name to the parameter value of all the incidents
                        in the ids list. Overridden if action_parameters is specified. String.
         update_assigned_to_v2 -- Assigns the user matching the UUID in the parameter
@@ -163,6 +165,7 @@ class Incidents(ServiceClass):
                     ]
                 }
         ids -- Incident ID(s) to perform actions against. String or list of strings.
+        parameters -- Full parameters payload, not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
@@ -186,7 +189,9 @@ class Incidents(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="PerformIncidentAction",
-            body=body
+            body=body,
+            params=parameters,
+            keywords=kwargs
             )
 
     @force_default(defaults=["body"], default_types=["dict"])

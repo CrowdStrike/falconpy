@@ -53,7 +53,7 @@ _incidents_endpoints = [
         "in": "query"
       },
       {
-        "type": "string",
+        "type": "integer",
         "description": "Starting index of overall result set from which to return ids.",
         "name": "offset",
         "in": "query"
@@ -66,6 +66,8 @@ _incidents_endpoints = [
       },
       {
         "enum": [
+          "adjusted_score.asc",
+          "adjusted_score.desc",
           "score.asc",
           "score.desc",
           "timestamp.asc",
@@ -102,6 +104,21 @@ _incidents_endpoints = [
     "incidents",
     [
       {
+        "type": "boolean",
+        "default": False,
+        "description": "If true, update assigned-to-uuid and or status of detections associated with the incident(s). Defaults to false",
+        "name": "update_detects",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "If true and update-detects is true, the assigned-to-uuid or status for ALL detections associated with the incident(s) will be overwritten. If false, only detects that have default values for assigned-to-uuid and/or status will be updated. Defaults to false. Ignored if 'update-detects' is missing or false.",
+        "name": "overwrite_detects",
+        "in": "query"
+      },
+      {
+        "description": "Incident Update request body containing minimum 1 and maximum 5000 Incident ID(s) and action param(s) to be performed action against.",
         "name": "body",
         "in": "body",
         "required": True
@@ -138,7 +155,7 @@ _incidents_endpoints = [
         "in": "query"
       },
       {
-        "type": "string",
+        "type": "integer",
         "description": "Starting index of overall result set from which to return ids.",
         "name": "offset",
         "in": "query"
@@ -151,6 +168,16 @@ _incidents_endpoints = [
       },
       {
         "enum": [
+          "cmdline.asc",
+          "cmdline.desc",
+          "detection_ids.asc",
+          "detection_ids.desc",
+          "display_name.asc",
+          "display_name.desc",
+          "domain.asc",
+          "domain.desc",
+          "filepath.asc",
+          "filepath.desc",
           "timestamp.asc",
           "timestamp.desc"
         ],
@@ -205,7 +232,7 @@ _incidents_endpoints = [
         "in": "query"
       },
       {
-        "type": "string",
+        "type": "integer",
         "description": "Starting index of overall result set from which to return ids.",
         "name": "offset",
         "in": "query"
