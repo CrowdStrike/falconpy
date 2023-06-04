@@ -167,9 +167,11 @@ _device_control_policies_endpoints = [
       {
         "enum": [
           "add-host-group",
+          "add-rule-group",
           "disable",
           "enable",
-          "remove-host-group"
+          "remove-host-group",
+          "remove-rule-group"
         ],
         "type": "string",
         "description": "The action to perform",
