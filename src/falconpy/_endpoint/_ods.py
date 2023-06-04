@@ -38,6 +38,20 @@ For more information, please refer to <https://unlicense.org>
 
 _ods_endpoints = [
   [
+    "aggregate_query_scan_host_metadata",
+    "POST",
+    "/ods/aggregates/scan-hosts/v1",
+    "Get aggregates on ODS scan-hosts data.",
+    "ods",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "aggregate_scans",
     "POST",
     "/ods/aggregates/scans/v1",
@@ -465,7 +479,7 @@ _ods_endpoints = [
           "last_updated|desc"
         ],
         "type": "string",
-        "default": "created_on|desc",
+        "default": "schedule.start_timestamp|desc",
         "description": "The property to sort on, followed by a |, followed by the sort direction, "
         "either \"asc\" or \"desc\"",
         "name": "sort",

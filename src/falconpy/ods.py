@@ -59,6 +59,76 @@ class ODS(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_scan_hosts(self: object, body: list = None, **kwargs) -> dict:
+        """Get aggregates on ODS scan-hosts data.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "field": "string",
+                        "filter": "string",
+                        "interval": "string",
+                        "min_doc_count": 0,
+                        "missing": "string",
+                        "name": "string",
+                        "q": "string",
+                        "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                        ],
+                        "size": 0,
+                        "sort": "string",
+                        "sub_aggregates": [
+                            null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
+        date_ranges -- List of dictionaries.
+        field -- String.
+        filter -- FQL syntax. String.
+        interval -- String.
+        min_doc_count -- Minimum number of documents required to match. Integer.
+        missing -- String.
+        name -- Scan name. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/aggregate-query-scan-host-metadata
+        """
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="aggregate_query_scan_host_metadata",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["list"])
     def aggregate_scans(self: object, body: list = None, **kwargs) -> dict:
         """Get aggregates on ODS scan data.
 
@@ -737,3 +807,4 @@ class ODS(ServiceClass):
     get_scans_by_scan_ids = get_scans
     get_scheduled_scans_by_scan_ids = get_scheduled_scans
     query_scan_host_metadata = query_scan_hosts
+    aggregate_query_scan_host_metadata = aggregate_scan_hosts
