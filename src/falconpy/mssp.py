@@ -871,6 +871,7 @@ class FlightControl(ServiceClass):
         """Query for customers linked as children.
 
         Keyword arguments:
+        filter -- FQL formatted string used to limit results. String. Supported filter: cid
         limit -- The maximum number of records to return in this response. [Integer, 1-1000]
                  Use with the offset parameter to manage pagination of results. Default: 10
         offset -- The offset to start retrieving records from. String.
