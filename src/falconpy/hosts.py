@@ -133,6 +133,7 @@ class Hosts(ServiceClass):
                         }
                     ]
                 }
+        disable_hostname_check -- Disable the hostname check. Boolean.
         ids -- Group ID(s) to perform actions against. String or list of strings.
         parameters - full parameters payload, not required if action_name is provide as a keyword.
 
