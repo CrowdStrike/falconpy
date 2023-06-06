@@ -41,11 +41,6 @@
     - `discover.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_discover.py`
-+ Added: 3 new operations added to the __FalconContainer__ Service Class, `GetVulnerableContainerInfo`, `GetPodsWithMostOpenPorts`, and `GetPortInfo`.
-    - `endpoint/_falcon_container.py`
-    - `falcon_container.py`
-    > Unit testing expanded to complete code coverage.
-    - `tests/test_falcon_container.py`
 + Added: 3 new operations added to the __FalconXSandbox__ Service Class, `GetMemoryDumpExtractedStrings`, `GetMemoryDumpHexDump`, and `GetMemoryDump`.
     - `_endpoint/_falconx_sandbox.py`
     - `falconx_sandbox.py`

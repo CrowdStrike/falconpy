@@ -42,9 +42,6 @@ class TestFalconContainer:
                                                                       ),
             "CreateRegistryEntities": falcon.create_registry_entities(type="github", url="https://somewheres", username="larry",
                                                                       password="top_secret"),
-            "GetVulnerableContainerInfo": falcon.get_vulnerable_containers(),
-            "GetPodsWithMostOpenPorts": falcon.get_pods_with_most_open_ports(),
-            "GetPortInfo": falcon.get_port_info()
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
