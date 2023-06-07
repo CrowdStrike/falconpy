@@ -33,14 +33,6 @@
 + Added: _add-rule-group_ and _remove-rule-group_ added as possible values for the __*action_name*__ keyword within the `performDeviceControlPoliciesAction` operation in the __DeviceControlPolicies__ Service Class.
     - `_endpoint/_device_control_policy.py`
     - `device_control_policy.py`
-+ Added: 4 new operations added to the __Discover__ Service Class, `query_active_discovery_networks`, `query_active_discovery_rules`, `query_active_discover_scanners`, and `query_active_discover_scans`.
-    - `_endpoint/_discover.py`
-    - `_endpoint/__init__.py`
-    - `_endpoint/deprecated/_discover.py`
-    - `_endpoint/deprecated/__init__.py`
-    - `discover.py`
-    > Unit testing expanded to complete code coverage.
-    - `tests/test_discover.py`
 + Added: 3 new operations added to the __FalconXSandbox__ Service Class, `GetMemoryDumpExtractedStrings`, `GetMemoryDumpHexDump`, and `GetMemoryDump`.
     - `_endpoint/_falconx_sandbox.py`
     - `falconx_sandbox.py`
