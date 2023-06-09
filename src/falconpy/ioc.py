@@ -66,6 +66,7 @@ class IOC(ServiceClass):
 
         Keyword arguments:
         body -- full body payload, not required when using other keywords.
+                body -- full body payload, not required when using other keywords.
                 {
                     "date_ranges": [
                     {
@@ -73,9 +74,13 @@ class IOC(ServiceClass):
                         "to": "string"
                     }
                     ],
+                    "exclude": "string",
                     "field": "string",
                     "filter": "string",
+                    "from": 0,
+                    "include": "string",
                     "interval": "string",
+                    "max_doc_count": 0,
                     "min_doc_count": 0,
                     "missing": "string",
                     "name": "string",
@@ -94,13 +99,21 @@ class IOC(ServiceClass):
                     "time_zone": "string",
                     "type": "string"
                 }
-        date_ranges -- List of dictionaries.
-        field -- String.
-        filter -- FQL syntax. String.
-        from_parent -- The filter for returning either only indicators for the
-                       requested customer or its MSSP parents. Boolean.
+
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        exclude -- Fields to exclude. String.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        from -- Integer.
+        include -- Fields to include. String.
         interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
         missing -- String.
         name -- Scan name. String.
         q -- FQL syntax. String.
@@ -215,6 +228,7 @@ class IOC(ServiceClass):
         Keyword arguments:
         body -- full parameters payload, not required if using other keywords.
                 {
+                    "from_parent": true,
                     "report_format": "string",
                     "search": {
                         "filter": "string",
@@ -224,6 +238,7 @@ class IOC(ServiceClass):
                 }
         filter -- FQL formatted string specifying the search filter.
                   Overridden if 'search' keyword is provided.
+        from_parent -- Flag indicating if this indicator is defined in the parent. Boolean.
         query -- FQL formatted string specifying the search query.
                  Overridden if 'search' keyword is provided.
         report_format -- Format of the report. String.
@@ -407,6 +422,7 @@ class IOC(ServiceClass):
                         "description": "string",
                         "expiration": "2021-10-22T11:03:16.123Z",
                         "filter": "string",
+                        "from_parent": true,
                         "host_groups": [
                             "string"
                         ],
@@ -451,6 +467,7 @@ class IOC(ServiceClass):
         description -- Description for the IOC. String.
         expiration -- UTC formatted date string. String.
         filename -- Filename to use in the metadata dictionary. String.
+        from_parent -- Flag indicating if this indicator originates from the parent. Boolean.
         host_groups -- List of host groups to apply this IOC to. List of strings.
         id -- ID of the indicator to be updated. At least one ID must be specified using this
               keyword, or as part of the indicators list using the indicators keyword.
