@@ -74,6 +74,7 @@ def firewall_container_payload(passed_keywords: dict) -> dict:
         "default_outbound": "string",
         "enforce": true,
         "is_default_policy": true,
+        "local_logging": true,
         "platform_id": "string",
         "policy_id": "string",
         "rule_group_ids": [
@@ -92,6 +93,8 @@ def firewall_container_payload(passed_keywords: dict) -> dict:
         returned_payload["enforce"] = passed_keywords.get("enforce", None)
     if passed_keywords.get("is_default_policy", None) is not None:
         returned_payload["is_default_policy"] = passed_keywords.get("is_default_policy", None)
+    if passed_keywords.get("local_logging", None) is not None:
+        returned_payload["local_logging"] = passed_keywords.get("local_logging", None)
     if passed_keywords.get("test_mode", None) is not None:
         returned_payload["test_mode"] = passed_keywords.get("test_mode", None)
     rg_list = passed_keywords.get("rule_group_ids", None)
@@ -150,6 +153,7 @@ def firewall_rule_group_payload(passed_keywords: dict) -> dict:
         "description": "string",
         "enabled": boolean,
         "name": "string",
+        "platform": "string",
         "rules": [
             {
                 "action": "string",
@@ -191,9 +195,6 @@ def firewall_rule_group_payload(passed_keywords: dict) -> dict:
                     "period_ms": "string"
                 },
                 "name": "string",
-                "platform_ids": [
-                    "string"
-                ],
                 "protocol": "string",
                 "remote_address": [
                     {
@@ -213,7 +214,7 @@ def firewall_rule_group_payload(passed_keywords: dict) -> dict:
     }
     """
     returned_payload = {}
-    keys = ["description", "name"]
+    keys = ["description", "name", "platform"]
     for key in keys:
         if passed_keywords.get(key, None):
             returned_payload[key] = passed_keywords.get(key, None)
@@ -321,6 +322,8 @@ def firewall_rule_group_validation_payload(passed_keywords: dict) -> dict:
                 ]
                 }
             ],
+            "fqdn": "string",
+            "fqdn_enabled": true,
             "icmp": {
                 "icmp_code": "string",
                 "icmp_type": "string"
@@ -426,6 +429,8 @@ def network_locations_create_payload(passed_keywords: dict) -> dict:
                 ]
             }
         },
+        "created_by": "string",
+        "created_on": "string",
         "default_gateways": [
             "string"
         ],
@@ -469,7 +474,8 @@ def network_locations_create_payload(passed_keywords: dict) -> dict:
     returned_payload = {}
     keys = ["connection_types", "default_gateways", "description", "dhcp_servers", "id",
             "dns_resolution_targets", "dns_servers", "enabled", "host_addresses", "modified_on",
-            "https_reachable_hosts", "icmp_request_targets", "name", "modified_by"
+            "https_reachable_hosts", "icmp_request_targets", "name", "modified_by", "created_by",
+            "created_on"
             ]
     for key in keys:
         if passed_keywords.get(key, None):
