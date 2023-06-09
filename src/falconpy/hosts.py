@@ -70,8 +70,8 @@ class Hosts(ServiceClass):
                 {
                     "action_parameters": [
                         {
-                        "name": "string",
-                        "value": "string"
+                            "name": "string",
+                            "value": "string"
                         }
                     ],
                     "ids": [
@@ -128,8 +128,8 @@ class Hosts(ServiceClass):
                 {
                     "action_parameters": [
                         {
-                        "name": "string",
-                        "value": "string"
+                            "name": "string",
+                            "value": "string"
                         }
                     ]
                 }

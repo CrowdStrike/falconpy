@@ -89,7 +89,7 @@ class MLExclusions(ServiceClass):
                 {
                     "comment": "string",
                     "excluded_from": [
-                        null
+                        "string"
                     ],
                     "groups": [
                         "string"
