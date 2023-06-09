@@ -63,6 +63,9 @@ def scheduled_scan_payload(passed_keywords: dict) -> dict:
         "scan_exclusions": [
             "string"
         ],
+        "scan_inclusions": [
+            "string"
+        ],
         "schedule": {
             "ignored_by_channelfile": true,
             "interval": 0,
@@ -76,7 +79,7 @@ def scheduled_scan_payload(passed_keywords: dict) -> dict:
     keys = ["cloud_ml_level_detection", "cloud_ml_level_prevention", "cpu_priority", "description",
             "endpoint_notification", "file_paths", "host_groups", "initiated_from", "max_duration",
             "max_file_size", "pause_duration", "quarantine", "scan_exclusions", "schedule",
-            "sensor_ml_level_detection", "sensor_ml_level_prevention", "hosts"
+            "sensor_ml_level_detection", "sensor_ml_level_prevention", "hosts", "scan_inclusions"
             ]
     for key in keys:
         if passed_keywords.get(key, None) is not None:
