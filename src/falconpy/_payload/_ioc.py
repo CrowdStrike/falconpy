@@ -145,6 +145,7 @@ def indicator_update_payload(passed_keywords: dict) -> dict:
             "description": "string",
             "expiration": "2021-10-22T11:03:16.123Z",
             "filter": "string",
+            "from_parent": true,
             "host_groups": [
                 "string"
             ],
@@ -202,6 +203,7 @@ def indicator_report_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted indicator report payload.
 
     {
+        "from_parent": true,
         "report_format": "string",
         "search": {
             "filter": "string",
@@ -223,5 +225,7 @@ def indicator_report_payload(passed_keywords: dict) -> dict:
     for key in keys:
         if passed_keywords.get(key, None):
             returned_payload[key] = passed_keywords.get(key)
+    if passed_keywords.get("from_parent", None) is not None:
+        returned_payload["from_parent"] = passed_keywords.get("from_parent", None)
 
     return returned_payload
