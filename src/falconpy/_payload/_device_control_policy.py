@@ -44,36 +44,50 @@ def device_policy_payload(passed_keywords: dict) -> dict:
     {
         "resources": [
             {
-                "clone_id": "string",
                 "description": "string",
+                "id": "string",
+                "clone_id": "string",
                 "name": "string",
-                "platform_name": "Windows",
                 "settings": {
                     "classes": [
-                    {
-                        "action": "FULL_ACCESS",
-                        "exceptions": [
                         {
-                            "action": "string",
-                            "class": "string",
-                            "combined_id": "string",
-                            "id": "string",
-                            "match_method": "string",
-                            "product_id": "string",
-                            "product_id_decimal": "string",
-                            "product_name": "string",
-                            "serial_number": "string",
-                            "vendor_id": "string",
-                            "vendor_id_decimal": "string",
-                            "vendor_name": "string"
+                            "action": "FULL_ACCESS",
+                            "exceptions": [
+                            {
+                                "action": "string",
+                                "combined_id": "string",
+                                "description": "string",
+                                "expiration_time": "2023-06-08T06:10:39.965Z",
+                                "id": "string",
+                                "product_id": "string",
+                                "product_id_decimal": "string",
+                                "product_name": "string",
+                                "serial_number": "string",
+                                "use_wildcard": true,
+                                "vendor_id": "string",
+                                "vendor_id_decimal": "string",
+                                "vendor_name": "string"
+                            }
+                            ],
+                            "id": "string"
                         }
-                        ],
-                        "id": "string"
-                    }
                     ],
-                    "end_user_notification": "TRUE",
-                    "enforcement_mode": "string",
-                    "id": "string"
+                    "custom_notifications": {
+                        "blocked_notification": {
+                            "custom_message": "string",
+                            "use_custom": true
+                        },
+                        "restricted_notification": {
+                            "custom_message": "string",
+                            "use_custom": true
+                        }
+                    },
+                    "delete_exceptions": [
+                        "string"
+                    ],
+                    "end_user_notification": "SILENT",
+                    "enforcement_mode": "MONITOR_ONLY",
+                    "enhanced_file_metadata": true
                 }
             }
         ]
