@@ -352,42 +352,56 @@ class DeviceControlPolicies(ServiceClass):
         Keyword arguments:
         body -- full body payload, not required if keywords are used.
                 {
-                "resources": [
-                    {
-                        "clone_id": "string",
-                        "description": "string",
-                        "name": "string",
-                        "platform_name": "Windows",
-                        "settings": {
-                            "classes": [
-                            {
-                                "action": "FULL_ACCESS",
-                                "exceptions": [
-                                {
-                                    "action": "string",
-                                    "class": "string",
-                                    "combined_id": "string",
-                                    "id": "string",
-                                    "match_method": "string",
-                                    "product_id": "string",
-                                    "product_id_decimal": "string",
-                                    "product_name": "string",
-                                    "serial_number": "string",
-                                    "vendor_id": "string",
-                                    "vendor_id_decimal": "string",
-                                    "vendor_name": "string"
-                                }
+                    "resources": [
+                        {
+                            "clone_id": "string",
+                            "description": "string",
+                            "name": "string",
+                            "platform_name": "Windows",
+                            "settings": {
+                                "classes": [
+                                    {
+                                        "action": "FULL_ACCESS",
+                                        "exceptions": [
+                                            {
+                                                "action": "string",
+                                                "combined_id": "string",
+                                                "description": "string",
+                                                "expiration_time": "2023-06-08T06:04:53.563Z",
+                                                "id": "string",
+                                                "product_id": "string",
+                                                "product_id_decimal": "string",
+                                                "product_name": "string",
+                                                "serial_number": "string",
+                                                "use_wildcard": true,
+                                                "vendor_id": "string",
+                                                "vendor_id_decimal": "string",
+                                                "vendor_name": "string"
+                                            }
+                                        ],
+                                        "id": "string"
+                                    }
                                 ],
-                                "id": "string"
+                                "custom_notifications": {
+                                    "blocked_notification": {
+                                        "custom_message": "string",
+                                        "use_custom": true
+                                    },
+                                    "restricted_notification": {
+                                        "custom_message": "string",
+                                        "use_custom": true
+                                    }
+                                },
+                                "delete_exceptions": [
+                                    "string"
+                                ],
+                                "end_user_notification": "SILENT",
+                                "enforcement_mode": "MONITOR_ONLY",
+                                "enhanced_file_metadata": true
                             }
-                            ],
-                            "end_user_notification": "TRUE",
-                            "enforcement_mode": "string",
-                            "id": "string"
                         }
-                    }
-                ]
-            }
+                    ]
+                }
         clone_id -- ID of the Device Control Policy to clone. String.
         description -- Device Control Policy description. String.
         name -- Device Control Policy name. String.
@@ -449,42 +463,55 @@ class DeviceControlPolicies(ServiceClass):
         Keyword arguments:
         body -- full body payload, not required if keywords are used.
                 {
-                "resources": [
-                    {
-                        "clone_id": "string",
-                        "description": "string",
-                        "name": "string",
-                        "platform_name": "Windows",
-                        "settings": {
-                            "classes": [
-                            {
-                                "action": "FULL_ACCESS",
-                                "exceptions": [
-                                {
-                                    "action": "string",
-                                    "class": "string",
-                                    "combined_id": "string",
-                                    "id": "string",
-                                    "match_method": "string",
-                                    "product_id": "string",
-                                    "product_id_decimal": "string",
-                                    "product_name": "string",
-                                    "serial_number": "string",
-                                    "vendor_id": "string",
-                                    "vendor_id_decimal": "string",
-                                    "vendor_name": "string"
-                                }
+                    "resources": [
+                        {
+                            "description": "string",
+                            "id": "string",
+                            "name": "string",
+                            "settings": {
+                                "classes": [
+                                    {
+                                        "action": "FULL_ACCESS",
+                                        "exceptions": [
+                                            {
+                                                "action": "string",
+                                                "combined_id": "string",
+                                                "description": "string",
+                                                "expiration_time": "2023-06-08T06:10:39.965Z",
+                                                "id": "string",
+                                                "product_id": "string",
+                                                "product_id_decimal": "string",
+                                                "product_name": "string",
+                                                "serial_number": "string",
+                                                "use_wildcard": true,
+                                                "vendor_id": "string",
+                                                "vendor_id_decimal": "string",
+                                                "vendor_name": "string"
+                                            }
+                                        ],
+                                        "id": "string"
+                                    }
                                 ],
-                                "id": "string"
+                                "custom_notifications": {
+                                    "blocked_notification": {
+                                        "custom_message": "string",
+                                        "use_custom": true
+                                    },
+                                    "restricted_notification": {
+                                        "custom_message": "string",
+                                        "use_custom": true
+                                    }
+                                },
+                                "delete_exceptions": [
+                                    "string"
+                                ],
+                                "end_user_notification": "SILENT",
+                                "enforcement_mode": "MONITOR_ONLY",
+                                "enhanced_file_metadata": true
                             }
-                            ],
-                            "end_user_notification": "TRUE",
-                            "enforcement_mode": "string",
-                            "id": "string"
                         }
-                    }
-                ]
-            }
+                    ]
+                }
         id -- ID of the Device Control Policy to update. String.
         description -- Device Control Policy description. String.
         name -- Device Control Policy name. String.
