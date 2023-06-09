@@ -556,6 +556,8 @@ class UserManagement(ServiceClass):
     def get_roles(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get information about a role.
 
+        DEPRECATED: Please use entitiesRolesV1 instead.
+
         HTTP Method: GET
 
         Swagger URL
@@ -590,6 +592,8 @@ class UserManagement(ServiceClass):
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def grant_user_role_ids(self: object, body: dict, parameters: dict = None, **kwargs) -> dict:
         """Assign one or more roles to a user.
+
+        DEPRECATED: Please use userActionV1 instead.
 
         HTTP Method: POST
 
@@ -644,6 +648,8 @@ class UserManagement(ServiceClass):
     def revoke_user_role_ids(self: object, parameters: dict = None, **kwargs) -> dict:
         """Revoke one or more roles from a user.
 
+        DEPRECATED: Please use userActionV1 instead.
+
         HTTP Method: DELETE
 
         Swagger URL
@@ -681,6 +687,8 @@ class UserManagement(ServiceClass):
 
         For more information on each role, provide the role ID to get_roles.
 
+        DEPRECATED: Please use queriesRolesV1 instead.
+
         HTTP Method: GET
 
         Swagger URL
@@ -710,6 +718,8 @@ class UserManagement(ServiceClass):
         """Show role IDs of roles assigned to a user.
 
         For more information on each role, provide the role ID to `get_role`.
+
+        DEPRECATED: Please use combinedUserRolesV1 instead.
 
         HTTP Method: GET
 
@@ -745,6 +755,8 @@ class UserManagement(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def retrieve_user(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get information about a user.
+
+        DEPRECATED: Please use retrieveUsersGETV1 instead.
 
         HTTP Method: GET
 
@@ -783,6 +795,8 @@ class UserManagement(ServiceClass):
 
         After creating a user, assign one or more roles with `grant_user_role_ids`.
 
+        DEPRECATED: Please use createUserV1 instead.
+        
         HTTP Method: POST
 
         Swagger URL
@@ -841,6 +855,8 @@ class UserManagement(ServiceClass):
     def delete_user(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Delete a user permanently.
 
+        DEPRECATED: Please use deleteUserV1 instead.
+
         HTTP Method: DELETE
 
         Swagger URL
@@ -875,6 +891,8 @@ class UserManagement(ServiceClass):
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def update_user(self: object, body: dict = None, parameters: dict = None, **kwargs) -> dict:
         """Modify an existing user.
+
+        DEPRECATED: Please use updateUserV1 instead.
 
         HTTP Method: PATCH
 
@@ -927,6 +945,8 @@ class UserManagement(ServiceClass):
     def retrieve_emails_by_cid(self: object) -> dict:
         """List the usernames (usually an email address) for all users in your customer account.
 
+        DEPRECATED: Please use retrieveUsersGETV1 instead.
+
         HTTP Method: GET
 
         Swagger URL
@@ -956,6 +976,8 @@ class UserManagement(ServiceClass):
 
         For more information on each user, provide the user ID to `retrieve_user`.
 
+        DEPRECATED: Please use queryUserV1 instead.
+
         HTTP Method: GET
 
         Swagger URL
@@ -984,6 +1006,8 @@ class UserManagement(ServiceClass):
     def retrieve_user_uuid(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get a user's ID by providing a username (usually an email address).
 
+        DEPRECATED: Please use queryUserV1 instead.
+        
         HTTP Method: GET
 
         Swagger URL
