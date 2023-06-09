@@ -109,14 +109,26 @@ class CSPMRegistration(ServiceClass):
                     "resources": [
                         {
                             "account_id": "string",
+                            "account_type": "string",
+                            "behavior_assessment_enabled": true,
                             "cloudtrail_region": "string",
-                            "organization_id": "string"
+                            "iam_role_arn": "string",
+                            "is_master": true,
+                            "organization_id": "string",
+                            "sensor_management_enabled": true,
+                            "use_existing_cloudtrail": true
                         }
                     ]
                 }
         account_id -- AWS Account ID. String.
+        account_type -- AWS account type. String.
+        behavior_assessment_enabled -- Indicate if behavior assessment should be enabled. Boolean.
         cloudtrail_region -- AWS Cloudtrail Region. String.
+        iam_role_arn -- IAM role ARN to use. String.
+        is_master -- Indicate if this is the primary account. Boolean.
         organization_id -- AWS Organization ID. String.
+        sensor_management_enabled -- Indicate if sensor management should be enabled. Boolean.
+        use_existing_cloudtrail -- Indicate if the existing CloudTrail should be used. Boolean.
 
         This method only supports keywords for providing arguments.
 
@@ -176,11 +188,21 @@ class CSPMRegistration(ServiceClass):
                     "resources": [
                         {
                             "account_id": "string",
-                            "cloudtrail_region": "string"
+                            "behavior_assessment_enabled": true,
+                            "cloudtrail_region": "string",
+                            "iam_role_arn": "string",
+                            "remediation_region": "string",
+                            "remediation_tou_accepted": "2023-06-07T18:28:36.303Z",
+                            "sensor_management_enabled": true
                         }
                     ]
                 }
         account_id -- AWS Account ID. String.
+        behavior_assessment_enabled -- Indicate if behavior assessment should be enabled. Boolean.
+        cloudtrail_region -- AWS Cloudtrail Region. String.
+        iam_role_arn -- IAM role ARN to use. String.
+        remediation_region -- AWS region to remediation. String.
+        remediation_tou_accepted -- Timestamp formatted string.
         cloudtrail_region -- AWS Cloudtrail Region. String.
 
         This method only supports keywords for providing arguments.
@@ -305,13 +327,21 @@ class CSPMRegistration(ServiceClass):
                 {
                     "resources": [
                         {
-                            "tenant_id": "string",
+                            "account_type": "string",
+                            "client_id": "string",
+                            "default_subscription": true,
                             "subscription_id": "string"
+                            "tenant_id": "string",
+                            "years_valid": integer
                         }
                     ]
                 }
-        tenant_id -- Azure Tenant ID. String.
+        account_type -- Azure account type. String.
+        client_id -- Azure Client ID. String.
+        default_subscription -- Indicate if this is the default subscription. Boolean.
         subscription_id -- Azure Subscription ID. String.
+        tenant_id -- Azure Tenant ID. String.
+        years_valid -- Number of years this account is valid. Integer.        
 
         This method only supports keywords for providing arguments.
 
@@ -917,6 +947,9 @@ class CSPMRegistration(ServiceClass):
                     "resources": [
                         {
                             "account_id": "string",
+                            "account_ids": [
+                                "string"
+                            ],
                             "enabled": boolean,
                             "policy_id": integer,
                             "regions": [
@@ -928,6 +961,7 @@ class CSPMRegistration(ServiceClass):
                     ]
                 }
         account_id -- Account ID to update. String.
+        account_ids -- Account IDs to update. List of strings.
         enabled -- Enabled / Disable flag. Boolean.
         policy_id -- Policy ID to be updated. Integer.
         region -- List of regions. String or list of strings.
@@ -993,12 +1027,14 @@ class CSPMRegistration(ServiceClass):
                         {
                             "cloud_platform": "string",
                             "next_scan_timestamp": "2021-10-25T05:22:27.365Z",
+                            "scan_interval": "string",
                             "scan_schedule": "string"
                         }
                     ]
                 }
         cloud_platform -- Cloud platform. String.
         next_scan_timestamp -- Time to schedule scan. UTC date formatted string.
+        scan_interval -- Scan interval. String.
         scan_schedule -- Scan schedule type. String.
 
         This method only supports keywords for providing arguments.
