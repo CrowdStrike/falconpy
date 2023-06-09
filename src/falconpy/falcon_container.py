@@ -94,9 +94,27 @@ class FalconContainer(ServiceClass):
 
         Keyword arguments
         ----
+        applicationPackages : list[dict]
+            List of application packages.
         body : dict
             Full body payload, not required when using other keywords.
             {
+                "applicationPackages": [
+                    {
+                        "libraries": [
+                            {
+                                "Hash": "string",
+                                "LayerHash": "string",
+                                "LayerIndex": 0,
+                                "License": "string",
+                                "Name": "string",
+                                "Path": "string",
+                                "Version": "string"
+                            }
+                        ],
+                        "type": "string"
+                    }
+                ],
                 "osversion": "string",
                 "packages": [
                     {
@@ -373,7 +391,13 @@ class FalconContainer(ServiceClass):
         body : dict
             Full body payload, not required if keywords are used.
                 {
-                    Payload here
+                    "credential": {
+                        "details": {}
+                    },
+                    "type": "string",
+                    "url": "string",
+                    "url_uniqueness_key": "string",
+                    "user_defined_alias": "string"
                 }
 
         This method only supports keywords for providing arguments.

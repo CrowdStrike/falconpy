@@ -41,6 +41,22 @@ def image_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted image vulnerability request payload.
 
     {
+        "applicationPackages": [
+            {
+                "libraries": [
+                    {
+                        "Hash": "string",
+                        "LayerHash": "string",
+                        "LayerIndex": 0,
+                        "License": "string",
+                        "Name": "string",
+                        "Path": "string",
+                        "Version": "string"
+                    }
+                ],
+                "type": "string"
+            }
+        ],
         "osversion": "string",
         "packages": [
             {
@@ -59,7 +75,7 @@ def image_payload(passed_keywords: dict) -> dict:
     }
     """
     returned_payload = {}
-    keys = ["osversion", "packages"]
+    keys = ["osversion", "packages", "applicationPackages"]
     for key in keys:
         if passed_keywords.get(key, None):
             returned_payload[key] = passed_keywords.get(key)
@@ -71,7 +87,7 @@ def registry_payload(passed_keywords: dict) -> dict:
     """Craft a properly formatted Registry Connection payload.
 
     {
-        "credentials": {
+        "credential": {
             "details": {
                 "aws_iam_role": "string",
                 "aws_external_id": "string",
@@ -104,7 +120,7 @@ def registry_payload(passed_keywords: dict) -> dict:
     returned_payload = {}
     top_keys = [
         "credentials", "type", "url", "url_uniqueness_key", "user_defined_alias", "details", "id",
-        "state"
+        "state", "credential"
         ]  # id and state are for update payloads only.
     detail_keys = [
         "aws_iam_role", "aws_external_id", "username", "password", "domain_url",
@@ -112,23 +128,25 @@ def registry_payload(passed_keywords: dict) -> dict:
     ]
     for key in top_keys:
         if passed_keywords.get(key, None):
+            # Fix for credentials -> credential parameter name change
+            key = "credential" if key == "credentials" else key
             if isinstance(key, str):  # Reserved word collision, force a string comparison
                 returned_payload[key] = passed_keywords.get(key)
             if key == "details":
                 # details is a child branch of credentials.
-                # Passing credentials AND details may have unusual results
+                # Passing credential AND details may have unusual results
                 # depending on the order of the keys received.
-                returned_payload["credentials"] = {}
-                returned_payload["credentials"]["details"] = passed_keywords.get(key)
+                returned_payload["credential"] = {}
+                returned_payload["credential"]["details"] = passed_keywords.get(key)
 
     for key in detail_keys:
-        if "credentials" not in returned_payload:
-            returned_payload["credentials"] = {}
-        if "details" not in returned_payload["credentials"]:
-            returned_payload["credentials"]["details"] = {}
+        if "credential" not in returned_payload:
+            returned_payload["credential"] = {}
+        if "details" not in returned_payload["credential"]:
+            returned_payload["credential"]["details"] = {}
         if passed_keywords.get(key, None):
             # compartment_ids must be passed as a list.
             # service_account_json should be provided as a dictionary.
-            returned_payload["credentials"]["details"][key] = passed_keywords.get(key)
+            returned_payload["credential"]["details"][key] = passed_keywords.get(key)
 
     return returned_payload
