@@ -77,9 +77,13 @@ class Recon(ServiceClass):
                             "to": "string"
                         }
                         ],
+                        "exclude": "string",
                         "field": "string",
                         "filter": "string",
+                        "from": 0,
+                        "include": "string",
                         "interval": "string",
+                        "max_doc_count": 0,
                         "min_doc_count": 0,
                         "missing": "string",
                         "name": "string",
@@ -93,17 +97,26 @@ class Recon(ServiceClass):
                         "size": 0,
                         "sort": "string",
                         "sub_aggregates": [
-                        null
+                            null
                         ],
                         "time_zone": "string",
                         "type": "string"
                     }
                 ]
-        date_ranges -- List of dictionaries.
-        field -- String.
-        filter -- FQL syntax. String.
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        exclude -- Fields to exclude. String.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        from -- Integer.
+        include -- Fields to include. String.
         interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
         missing -- String.
         name -- Scan name. String.
         q -- FQL syntax. String.
@@ -148,9 +161,13 @@ class Recon(ServiceClass):
                             "to": "string"
                         }
                         ],
+                        "exclude": "string",
                         "field": "string",
                         "filter": "string",
+                        "from": 0,
+                        "include": "string",
                         "interval": "string",
+                        "max_doc_count": 0,
                         "min_doc_count": 0,
                         "missing": "string",
                         "name": "string",
@@ -164,17 +181,26 @@ class Recon(ServiceClass):
                         "size": 0,
                         "sort": "string",
                         "sub_aggregates": [
-                        null
+                            null
                         ],
                         "time_zone": "string",
                         "type": "string"
                     }
                 ]
-        date_ranges -- List of dictionaries.
-        field -- String.
-        filter -- FQL syntax. String.
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        exclude -- Fields to exclude. String.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        from -- Integer.
+        include -- Fields to include. String.
         interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
         missing -- String.
         name -- Scan name. String.
         q -- FQL syntax. String.
@@ -280,14 +306,17 @@ class Recon(ServiceClass):
                        ],
                        "type": "string"
                    }
+        content_format -- Content format. String.
         body -- full body payload, not required when using other keywords.
                 {
                     "actions": [
                         {
+                            "content_format": "string",
                             "frequency": "string",
                             "recipients": [
                                 "string"
                             ],
+                            "trigger_matchless": true,
                             "type": "string"
                         }
                     ],
@@ -298,6 +327,7 @@ class Recon(ServiceClass):
         recipients -- UUIDs of the recipients. List of strings. Used when
                       only one action is being handled.
         rule_id -- Rule ID to attach the action to. Always required.
+        trigger_matchless -- Trigger on no matches. Boolean.
         type -- Action type, used when only one action is being handled.
 
         This method only supports keywords for providing arguments.
@@ -352,17 +382,21 @@ class Recon(ServiceClass):
         Keyword arguments:
         body -- full body payload, not required when using other keywords.
                 {
+                    "content_format": "string",
                     "frequency": "string",
                     "id": "string",
                     "recipients": [
                         "string"
                     ],
-                    "status": "string"
+                    "status": "string",
+                    "trigger_matchless": "string"
                 }
+        content_format -- Content format. String.
         frequency - Frequency of the action. String.
         id -- Action ID. String.
         recipients -- UUIDs of the recipients. List of strings.
         status -- Action status. String.
+        trigger_matchless -- Trigger on no match. Boolean.
 
         This method only supports keywords for providing arguments.
 
@@ -764,17 +798,21 @@ class Recon(ServiceClass):
         body -- full body payload, not required when using other keywords.
                 [
                     {
+                        "breach_monitoring_enabled": true,
                         "filter": "string",
                         "name": "string",
                         "permissions": "string",
                         "priority": "string",
+                        "substring_matching_enabled": true,
                         "topic": "string"
                     }
                 ]
+        breach_monitoring_enabled -- Enable breach monitoring. Boolean.
         filter -- Rule filter. String.
         name -- Rule name. String.
         permissions -- String. (private / public)
         priority -- String. (high / medium / low)
+        substring_matching_enabled -- Enable substring matching. Boolean.
         topic -- Rule topic. String.
 
         This method only supports keywords for providing arguments.
@@ -833,18 +871,22 @@ class Recon(ServiceClass):
         body -- full body payload, not required when using other keywords.
                 [
                     {
+                        "breach_monitoring_enabled": true,
                         "filter": "string",
                         "id": "string",
                         "name": "string",
                         "permissions": "string",
-                        "priority": "string"
+                        "priority": "string",
+                        "substring_matching_enabled": true
                     }
                 ]
+        breach_monitoring_enabled -- Enable breach monitoring. Boolean.
         filter -- Rule filter. String.
         name -- Rule name. String.
         permissions -- String. (private / public)
         priority -- String. (high / medium / low)
         id -- Rule ID. String.
+        substring_matching_enabled -- Enable substring matching. Boolean.
 
         This method only supports keywords for providing arguments.
 

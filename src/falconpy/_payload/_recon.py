@@ -40,18 +40,14 @@ For more information, please refer to <https://unlicense.org>
 def handle_recon_rule_params(inbound: dict) -> dict:
     """Handle the payload formatting for a single rule object."""
     returned_dict = {}
-    if inbound.get("filter", None):
-        returned_dict["filter"] = inbound.get("filter", None)
-    if inbound.get("id", None):
-        returned_dict["id"] = inbound.get("id", None)
-    if inbound.get("name", None):
-        returned_dict["name"] = inbound.get("name", None)
-    if inbound.get("permissions", None):
-        returned_dict["permissions"] = inbound.get("permissions", None)
-    if inbound.get("priority", None):
-        returned_dict["priority"] = inbound.get("priority", None)
-    if inbound.get("topic", None):
-        returned_dict["topic"] = inbound.get("topic", None)
+    keys = ["filter", "id", "name", "permissions", "priority", "topic"]
+    bool_keys = ["breach_monitoring_enabled", "substring_matching_enabled"]
+    for key in keys:
+        if inbound.get(key, None):
+            returned_dict[key] = inbound.get(key, None)
+    for key in bool_keys:
+        if inbound.get(key, None) is not None:
+            returned_dict[key] = inbound.get(key, None)
 
     return returned_dict
 
@@ -62,11 +58,13 @@ def recon_rules_payload(passed_keywords: dict) -> dict:
     Creates a list of dictionaries.
             [
                 {
+                    "breach_monitoring_enabled": true,
                     "filter": "string",
                     "id": "string",
                     "name": "string",
                     "permissions": "string",
                     "priority": "string",
+                    "substring_matching_enabled": true,
                     "topic": "string"
                 }
             ]
@@ -121,26 +119,30 @@ def recon_action_update_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted payload for handling recon actions.
 
     {
+        "content_format": "string",
         "frequency": "string",
         "id": "string",
         "recipients": [
             "string"
         ],
+        "trigger_matchless": true,
         "status": "string"
     }
     """
     returned_payload = {}
-    if passed_keywords.get("frequency", None):
-        returned_payload["frequency"] = passed_keywords.get("frequency", None)
-    if passed_keywords.get("id", None):
-        returned_payload["id"] = passed_keywords.get("id", None)
+    keys = ["content_format", "frequency", "id", "status"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key, None)
+
     recip_list = passed_keywords.get("recipients", None)
     if recip_list:
         if isinstance(recip_list, str):
             recip_list = recip_list.split(",")
         returned_payload["recipients"] = recip_list
-    if passed_keywords.get("status", None):
-        returned_payload["status"] = passed_keywords.get("status", None)
+
+    if passed_keywords.get("trigger_matchless", None) is not None:
+        returned_payload["trigger_matchless"] = passed_keywords.get("trigger_matchless", None)
 
     return returned_payload
 
@@ -151,10 +153,12 @@ def recon_action_payload(passed_keywords: dict) -> dict:
     {
         "actions": [
             {
+                "content_format": "string",
                 "frequency": "string",
                 "recipients": [
                     "string"
                 ],
+                "trigger_matchless": true,
                 "type": "string"
             }
         ],
@@ -166,13 +170,19 @@ def recon_action_payload(passed_keywords: dict) -> dict:
     if passed_keywords.get("actions", None):
         returned_payload["actions"] = passed_keywords.get("actions", None)
     else:
+        keys = ["content_format", "frequency", "type"]
         action = {}
-        if passed_keywords.get("frequency", None):
-            action["frequency"] = passed_keywords.get("frequency", None)
-        if passed_keywords.get("recipients", None):
-            action["recipients"] = passed_keywords.get("recipients", None)
-        if passed_keywords.get("type", None):
-            action["type"] = passed_keywords.get("type", None)
+        for key in keys:
+            if passed_keywords.get(key, None):
+                action[key] = passed_keywords.get(key, None)
+        recip_list = passed_keywords.get("recipients", None)
+        if recip_list:
+            if isinstance(recip_list, str):
+                recip_list = recip_list.split(",")
+            action["recipients"] = recip_list
+
+        if passed_keywords.get("trigger_matchless", None) is not None:
+            action["trigger_matchless"] = passed_keywords.get("trigger_matchless", None)
         returned_payload["actions"] = []
         returned_payload["actions"].append(action)
 
