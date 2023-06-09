@@ -69,9 +69,13 @@ class Detects(ServiceClass):
                             "to": "string"
                         }
                         ],
+                        "exclude": "string",
                         "field": "string",
                         "filter": "string",
+                        "from": 0,
+                        "include": "string",
                         "interval": "string",
+                        "max_doc_count": 0,
                         "min_doc_count": 0,
                         "missing": "string",
                         "name": "string",
@@ -91,11 +95,20 @@ class Detects(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- List of dictionaries.
-        field -- String.
-        filter -- FQL syntax. String.
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        exclude -- Fields to exclude. String.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        from -- Integer.
+        include -- Fields to include. String.
         interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
         missing -- String.
         name -- Scan name. String.
         q -- FQL syntax. String.
@@ -139,6 +152,9 @@ class Detects(ServiceClass):
                     "ids": [
                         "string"
                     ],
+                    "new_behaviors_processed": [
+                        "string"
+                    ],
                     "show_in_ui": true,
                     "status": "string"
                 }
@@ -147,6 +163,7 @@ class Detects(ServiceClass):
                    notes for other Falcon users. A detection can have multiple comments
                    over time.
         ids -- ID(s) of the detection to update. String or list of strings.
+        new_behaviors_processed -- String or list of strings.
         show_in_ui -- Boolean determining if this detection is displayed in the Falcon
                       console.
         status -- Current status of the detection. Allowed values:
