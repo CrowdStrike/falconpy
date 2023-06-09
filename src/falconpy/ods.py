@@ -72,9 +72,13 @@ class ODS(ServiceClass):
                             "to": "string"
                         }
                         ],
+                        "exclude": "string",
                         "field": "string",
                         "filter": "string",
+                        "from": 0,
+                        "include": "string",
                         "interval": "string",
+                        "max_doc_count": 0,
                         "min_doc_count": 0,
                         "missing": "string",
                         "name": "string",
@@ -94,11 +98,20 @@ class ODS(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- List of dictionaries.
-        field -- String.
-        filter -- FQL syntax. String.
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        exclude -- Fields to exclude. String.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        from -- Integer.
+        include -- Fields to include. String.
         interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
         missing -- String.
         name -- Scan name. String.
         q -- FQL syntax. String.
@@ -142,9 +155,13 @@ class ODS(ServiceClass):
                             "to": "string"
                         }
                         ],
+                        "exclude": "string",
                         "field": "string",
                         "filter": "string",
+                        "from": 0,
+                        "include": "string",
                         "interval": "string",
+                        "max_doc_count": 0,
                         "min_doc_count": 0,
                         "missing": "string",
                         "name": "string",
@@ -164,11 +181,20 @@ class ODS(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- List of dictionaries.
-        field -- String.
-        filter -- FQL syntax. String.
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        exclude -- Fields to exclude. String.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        from -- Integer.
+        include -- Fields to include. String.
         interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
         missing -- String.
         name -- Scan name. String.
         q -- FQL syntax. String.
@@ -212,9 +238,13 @@ class ODS(ServiceClass):
                             "to": "string"
                         }
                         ],
+                        "exclude": "string",
                         "field": "string",
                         "filter": "string",
+                        "from": 0,
+                        "include": "string",
                         "interval": "string",
+                        "max_doc_count": 0,
                         "min_doc_count": 0,
                         "missing": "string",
                         "name": "string",
@@ -234,11 +264,20 @@ class ODS(ServiceClass):
                         "type": "string"
                     }
                 ]
-        date_ranges -- List of dictionaries.
-        field -- String.
-        filter -- FQL syntax. String.
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        exclude -- Fields to exclude. String.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        from -- Integer.
+        include -- Fields to include. String.
         interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
         missing -- String.
         name -- Scan name. String.
         q -- FQL syntax. String.
@@ -300,6 +339,11 @@ class ODS(ServiceClass):
 
         Keyword arguments:
         body -- full body payload, not required if ids is provided as a keyword.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
         ids -- ID(s) of the scans to cancel. String or list of strings.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
@@ -547,6 +591,9 @@ class ODS(ServiceClass):
                     "scan_exclusions": [
                         "string"
                     ],
+                    "scan_inclusions": [
+                        "string"
+                    ],
                     "schedule": {
                         "ignored_by_channelfile": true,
                         "interval": 0,
@@ -572,6 +619,7 @@ class ODS(ServiceClass):
         pause_duration -- Time in seconds to pause during the scan. Integer.
         quarantine -- Quarantine malicious files identified by the scan. Boolean.
         scan_exclusions -- List of file path globs to exclude from the scan. List of strings.
+        scan_inclusions -- List of file path globs to include the scan. List of strings.
         schedule -- Details related to the scan schedule. Dictionary.
                     {
                         "ignored_by_channelfile": true,
