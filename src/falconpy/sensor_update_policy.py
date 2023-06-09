@@ -567,8 +567,28 @@ class SensorUpdatePolicy(ServiceClass):
                             "name": "string",
                             "platform_name": "Windows",
                             "settings": {
-                                    "build": "string",
-                                    "uninstall_protection": "ENABLED"
+                                "build": "string",
+                                "scheduler": {
+                                    "enabled": true,
+                                    "schedules": [
+                                        {
+                                            "days": [
+                                                0
+                                            ],
+                                            "end": "string",
+                                            "start": "string"
+                                        }
+                                    ],
+                                    "timezone": "string"
+                                },
+                                "show_early_adopter_builds": true,
+                                "uninstall_protection": "ENABLED",
+                                "variants": [
+                                    {
+                                        "build": "string",
+                                        "platform": "string"
+                                    }
+                                ]
                             }
                         }
                     ]
@@ -577,15 +597,38 @@ class SensorUpdatePolicy(ServiceClass):
         description -- Sensor Update Policy description. String.
         name -- Sensor Update Policy name. String.
         platform_name -- Name of the operating system platform. String.
+        scheduler -- Scheduler settings. Dictionary.
         settings -- Sensor update policy specific settings. Dictionary.
                     OVERRIDES the value of the "build" and "uninstall_protection"
                     keywords if provided.
                     {
                         "build": "string",
-                        "uninstall_protection": "ENABLED"
+                        "scheduler": {
+                            "enabled": true,
+                            "schedules": [
+                                {
+                                    "days": [
+                                        0
+                                    ],
+                                    "end": "string",
+                                    "start": "string"
+                                }
+                            ],
+                            "timezone": "string"
+                        },
+                        "show_early_adopter_builds": true,
+                        "uninstall_protection": "ENABLED",
+                        "variants": [
+                            {
+                                "build": "string",
+                                "platform": "string"
+                            }
+                        ]
                     }
+        show_early_adopter_builds -- Enable early adopter builds. Boolean.
         uninstall_protection -- Boolean indicating if uninstall protection should be enabled.
                                 String. Allowed values: "ENABLED", "DISABLED"
+        variants -- List of variants. List of dictionaries.
 
         This method only supports keywords for providing arguments.
 
@@ -621,8 +664,28 @@ class SensorUpdatePolicy(ServiceClass):
                             "id": "string",
                             "name": "string",
                             "settings": {
-                                    "build": "string",
-                                    "uninstall_protection": "ENABLED"
+                                "build": "string",
+                                "scheduler": {
+                                    "enabled": true,
+                                    "schedules": [
+                                        {
+                                            "days": [
+                                                0
+                                            ],
+                                            "end": "string",
+                                            "start": "string"
+                                        }
+                                    ],
+                                    "timezone": "string"
+                                },
+                                "show_early_adopter_builds": true,
+                                "uninstall_protection": "ENABLED",
+                                "variants": [
+                                    {
+                                        "build": "string",
+                                        "platform": "string"
+                                    }
+                                ]
                             }
                         }
                     ]
@@ -631,14 +694,17 @@ class SensorUpdatePolicy(ServiceClass):
         description -- Sensor Update Policy description. String.
         id -- Sensor Update Policy ID to update. String.
         name -- Sensor Update Policy name. String.
+        scheduler -- Schedule settings. Dictionary.
         settings -- Sensor Update policy specific settings. Dictionary.
                     OVERRIDES the value of the "build" keyword if provided.
                     {
                         "build": "string",
                         "uninstall_protection": "ENABLED"
                     }
+        show_early_adopter_builds -- Display early adopter builds. Boolean.
         uninstall_protection -- Boolean indicating if uninstall protection should be enabled.
                                 String. Allowed values: "ENABLED", "DISABLED"
+        variants -- Allowed variants list. List of dictionaries.
 
         This method only supports keywords for providing arguments.
 

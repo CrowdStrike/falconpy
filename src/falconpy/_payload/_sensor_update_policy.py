@@ -47,11 +47,30 @@ def sensor_policy_payload(passed_keywords: dict) -> dict:
                 "description": "string",
                 "name": "string",
                 "platform_name": "Windows",
-                "settings":
-                    {
-                        "build": "string",
-                        "uninstall_protection": "ENABLED"
-                    }
+                "settings": {
+                    "build": "string",
+                    "scheduler": {
+                        "enabled": true,
+                        "schedules": [
+                            {
+                                "days": [
+                                    0
+                                ],
+                                "end": "string",
+                                "start": "string"
+                            }
+                        ],
+                        "timezone": "string"
+                    },
+                    "show_early_adopter_builds": true,
+                    "uninstall_protection": "ENABLED",
+                    "variants": [
+                        {
+                            "build": "string",
+                            "platform": "string"
+                        }
+                    ]
+                }
             }
         ]
     }
@@ -70,8 +89,14 @@ def sensor_policy_payload(passed_keywords: dict) -> dict:
     settings = {}
     if passed_keywords.get("build", None):
         settings["build"] = passed_keywords.get("build", None)
+    if passed_keywords.get("scheduler", None):
+        settings["scheduler"] = passed_keywords.get("scheduler", None)
+    if passed_keywords.get("show_early_adopter_builds", None):
+        settings["show_early_adopter_builds"] = passed_keywords.get("show_early_adopter_builds", None)
     if passed_keywords.get("uninstall_protection", None):
         settings["uninstall_protection"] = passed_keywords.get("uninstall_protection", "DISABLED")
+    if passed_keywords.get("variants", None):
+        settings["variants"] = passed_keywords.get("variants", None)
     if settings:
         item["settings"] = settings
     # Passing settings overrides the passed build / uninstall_protection values
