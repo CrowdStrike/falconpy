@@ -65,50 +65,59 @@ class RealTimeResponse(ServiceClass):
 
         Keyword arguments:
         body -- full body payload, not required when using other keywords.
-                List of dictionaries.
-                [{
-                    "date_ranges": [
+                [
+                    {
+                        "date_ranges": [
                         {
                             "from": "string",
                             "to": "string"
                         }
-                    ],
-                    "field": "string",
-                    "filter": "string",
-                    "interval": "string",
-                    "min_doc_count": 0,
-                    "missing": "string",
-                    "name": "string",
-                    "q": "string",
-                    "ranges": [
+                        ],
+                        "exclude": "string",
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "include": "string",
+                        "interval": "string",
+                        "max_doc_count": 0,
+                        "min_doc_count": 0,
+                        "missing": "string",
+                        "name": "string",
+                        "q": "string",
+                        "ranges": [
                         {
                             "From": 0,
                             "To": 0
                         }
-                    ],
-                    "size": 0,
-                    "sort": "string",
-                    "sub_aggregates": [
-                        null
-                    ],
-                    "time_zone": "string",
-                    "type": "string"
-                }]
+                        ],
+                        "size": 0,
+                        "sort": "string",
+                        "sub_aggregates": [
+                            null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
         date_ranges -- If peforming a date range query specify the from and to date ranges.
                        These can be in common date formats like 2019-07-18 or now.
                        List of dictionaries.
+        exclude -- Fields to exclude. String.
         field -- Term you want to aggregate on. If doing a date_range query,
                  this is the date field you want to apply the date ranges to. String.
         filter -- Optional filter criteria in the form of an FQL query.
                   For more information about FQL queries, see our FQL documentation in Falcon.
                   String.
+        from -- Integer.
+        include -- Fields to include. String.
         interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
         missing -- String.
-        name -- Name of the aggregation. String.
+        name -- Scan name. String.
         q -- FQL syntax. String.
         ranges -- List of dictionaries.
-        size -- Size limit to apply to the queries. Integer.
+        size -- Integer.
         sort -- FQL syntax. String.
         sub_aggregates -- List of strings.
         time_zone -- String.
