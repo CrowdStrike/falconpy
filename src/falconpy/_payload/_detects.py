@@ -46,6 +46,9 @@ def update_detects_payload(current_payload: dict, passed_keywords: dict) -> dict
         "ids": [
             "string"
         ],
+        "new_behaviors_processed": [
+            "string"
+        ]
         "show_in_ui": true,
         "status": "string"
     }
@@ -58,10 +61,12 @@ def update_detects_payload(current_payload: dict, passed_keywords: dict) -> dict
     if passed_keywords.get("show_in_ui", None) is not None:
         current_payload["show_in_ui"] = passed_keywords.get("show_in_ui", None)
 
-    passed_list = passed_keywords.get("ids", None)
-    if passed_list:
-        if isinstance(passed_list, str):
-            passed_list = passed_list.split(",")
-        current_payload["ids"] = passed_list
+    list_keys = ["ids", "new_behaviors_processed"]
+    for key in list_keys:
+        if passed_keywords.get(key, None):
+            provided = passed_keywords.get(key, None)
+            if isinstance(provided, str):
+                provided = provided.split(",")
+            current_payload[key] = provided
 
     return current_payload
