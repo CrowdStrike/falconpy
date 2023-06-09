@@ -341,7 +341,7 @@ class CSPMRegistration(ServiceClass):
         default_subscription -- Indicate if this is the default subscription. Boolean.
         subscription_id -- Azure Subscription ID. String.
         tenant_id -- Azure Tenant ID. String.
-        years_valid -- Number of years this account is valid. Integer.        
+        years_valid -- Number of years this account is valid. Integer.
 
         This method only supports keywords for providing arguments.
 

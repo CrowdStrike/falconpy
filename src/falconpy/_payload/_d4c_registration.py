@@ -87,20 +87,21 @@ def azure_registration_payload(passed_keywords: dict) -> dict:
     returned_payload = {}
     returned_payload["resources"] = []
     keys = ["account_type", "client_id", "subscription_id", "tenant_id"]
-    item = {}    
+    item = {}
     for key in keys:
         if passed_keywords.get(key, None):
             item[key] = passed_keywords.get(key, None)
-    
-    if passed_keywords.get("default_subscription", None) is  not None:
+
+    if passed_keywords.get("default_subscription", None) is not None:
         item["default_subscription"] = passed_keywords.get("default_subscription", None)
-    
+
     if passed_keywords.get("years_valid", -1) >= 0:
         item["years_valid"] = passed_keywords.get("years_valid", -1)
 
     returned_payload["resources"].append(item)
 
     return returned_payload
+
 
 def gcp_registration_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted Azure registration payload.
@@ -117,11 +118,11 @@ def gcp_registration_payload(passed_keywords: dict) -> dict:
     returned_payload = {}
     returned_payload["resources"] = []
     keys = ["parent_id", "parent_type"]
-    item = {}    
+    item = {}
     for key in keys:
         if passed_keywords.get(key, None):
             item[key] = passed_keywords.get(key, None)
-    
+
     returned_payload["resources"].append(item)
 
     return returned_payload
