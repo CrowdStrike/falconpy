@@ -36,7 +36,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import azure_registration_payload, aws_d4c_registration_payload
+from ._payload import (
+    azure_registration_payload,
+    aws_d4c_registration_payload,
+    gcp_registration_payload
+    )
 from ._service_class import ServiceClass
 from ._endpoint._d4c_registration import _d4c_registration_endpoints as Endpoints
 
@@ -106,12 +110,14 @@ class D4CRegistration(ServiceClass):
                             "account_id": "string",
                             "account_type": "string",
                             "cloudtrail_region": "string",
+                            "iam_role_arn": "string",
                             "is_master": true,
                             "organization_id": "string"
                         }
                     ]
                 }
-        cloudtrail_region -- AWS region for CloudTrail log access.
+        cloudtrail_region -- AWS region for CloudTrail log access. String.
+        iam_role_arn -- AWS IAM role ARN. String.
         is_master -- Flag indicating if this is the master account. Boolean.
         organization_id -- AWS organization ID. String.
 
@@ -256,17 +262,25 @@ class D4CRegistration(ServiceClass):
         script for them to run in their cloud environment to grant us access.
 
         Keyword arguments:
+        account_type -- Azure Account type. String.
         body -- full body payload, not required if using other keywords.
                 {
                     "resources": [
                         {
+                            "account_type": "string",
+                            "client_id": "string",
+                            "default_subscription": true,
                             "subscription_id": "string",
-                            "tenant_id": "string"
+                            "tenant_id": "string",
+                            "years_valid": integer
                         }
                     ]
                 }
+        client_id -- Azure Client ID. String.
+        default_subscription -- Is this the default subscription? Boolean.
         subscription_id -- Azure subscription ID. String.
         tenant_id -- Azure tenant ID. String.
+        years_valid -- Years valid. Integer.
 
         This method only supports keywords for providing arguments.
 
@@ -427,11 +441,13 @@ class D4CRegistration(ServiceClass):
                 {
                     "resources": [
                         {
-                            "parent_id": "string"
+                            "parent_id": "string",
+                            "parent_type": "string"
                         }
                     ]
                 }
         parent_id -- GCP parent ID. String.
+        parent_type -- GCP parent type. String.
 
         This method only supports keywords for providing arguments.
 
@@ -443,9 +459,7 @@ class D4CRegistration(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/CreateD4CGCPAccount
         """
         if not body:
-            body = {}
-            body["resources"] = []
-            body["resources"].append({"parent_id": kwargs.get("parent_id", None)})
+            body = gcp_registration_payload(passed_keywords=kwargs)
 
         return process_service_request(
             calling_object=self,
