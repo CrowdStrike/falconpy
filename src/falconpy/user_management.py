@@ -796,7 +796,7 @@ class UserManagement(ServiceClass):
         After creating a user, assign one or more roles with `grant_user_role_ids`.
 
         DEPRECATED: Please use createUserV1 instead.
-        
+
         HTTP Method: POST
 
         Swagger URL
@@ -1007,7 +1007,7 @@ class UserManagement(ServiceClass):
         """Get a user's ID by providing a username (usually an email address).
 
         DEPRECATED: Please use queryUserV1 instead.
-        
+
         HTTP Method: GET
 
         Swagger URL
