@@ -70,50 +70,59 @@ class FirewallManagement(ServiceClass):
 
         Keyword arguments:
         body -- full body payload, not required when using other keywords.
-                List of dictionaries.
-                [{
-                    "date_ranges": [
+                [
+                    {
+                        "date_ranges": [
                         {
                             "from": "string",
                             "to": "string"
                         }
-                    ],
-                    "field": "string",
-                    "filter": "string",
-                    "interval": "string",
-                    "min_doc_count": 0,
-                    "missing": "string",
-                    "name": "string",
-                    "q": "string",
-                    "ranges": [
+                        ],
+                        "exclude": "string",
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "include": "string",
+                        "interval": "string",
+                        "max_doc_count": 0,
+                        "min_doc_count": 0,
+                        "missing": "string",
+                        "name": "string",
+                        "q": "string",
+                        "ranges": [
                         {
                             "From": 0,
                             "To": 0
                         }
-                    ],
-                    "size": 0,
-                    "sort": "string",
-                    "sub_aggregates": [
-                        null
-                    ],
-                    "time_zone": "string",
-                    "type": "string"
-                }]
+                        ],
+                        "size": 0,
+                        "sort": "string",
+                        "sub_aggregates": [
+                            null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
         date_ranges -- If peforming a date range query specify the from and to date ranges.
                        These can be in common date formats like 2019-07-18 or now.
                        List of dictionaries.
+        exclude -- Fields to exclude. String.
         field -- Term you want to aggregate on. If doing a date_range query,
                  this is the date field you want to apply the date ranges to. String.
         filter -- Optional filter criteria in the form of an FQL query.
                   For more information about FQL queries, see our FQL documentation in Falcon.
                   String.
+        from -- Integer.
+        include -- Fields to include. String.
         interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
         missing -- String.
-        name -- Name of the aggregation. String.
+        name -- Scan name. String.
         q -- FQL syntax. String.
         ranges -- List of dictionaries.
-        size -- Size limit to apply to the queries. Integer.
+        size -- Integer.
         sort -- FQL syntax. String.
         sub_aggregates -- List of strings.
         time_zone -- String.
@@ -146,50 +155,59 @@ class FirewallManagement(ServiceClass):
 
         Keyword arguments:
         body -- full body payload, not required when using other keywords.
-                List of dictionaries.
-                [{
-                    "date_ranges": [
+                [
+                    {
+                        "date_ranges": [
                         {
                             "from": "string",
                             "to": "string"
                         }
-                    ],
-                    "field": "string",
-                    "filter": "string",
-                    "interval": "string",
-                    "min_doc_count": 0,
-                    "missing": "string",
-                    "name": "string",
-                    "q": "string",
-                    "ranges": [
+                        ],
+                        "exclude": "string",
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "include": "string",
+                        "interval": "string",
+                        "max_doc_count": 0,
+                        "min_doc_count": 0,
+                        "missing": "string",
+                        "name": "string",
+                        "q": "string",
+                        "ranges": [
                         {
                             "From": 0,
                             "To": 0
                         }
-                    ],
-                    "size": 0,
-                    "sort": "string",
-                    "sub_aggregates": [
-                        null
-                    ],
-                    "time_zone": "string",
-                    "type": "string"
-                }]
+                        ],
+                        "size": 0,
+                        "sort": "string",
+                        "sub_aggregates": [
+                            null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
         date_ranges -- If peforming a date range query specify the from and to date ranges.
                        These can be in common date formats like 2019-07-18 or now.
                        List of dictionaries.
+        exclude -- Fields to exclude. String.
         field -- Term you want to aggregate on. If doing a date_range query,
                  this is the date field you want to apply the date ranges to. String.
         filter -- Optional filter criteria in the form of an FQL query.
                   For more information about FQL queries, see our FQL documentation in Falcon.
                   String.
+        from -- Integer.
+        include -- Fields to include. String.
         interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
         missing -- String.
-        name -- Name of the aggregation. String.
+        name -- Scan name. String.
         q -- FQL syntax. String.
         ranges -- List of dictionaries.
-        size -- Size limit to apply to the queries. Integer.
+        size -- Integer.
         sort -- FQL syntax. String.
         sub_aggregates -- List of strings.
         time_zone -- String.
@@ -222,50 +240,59 @@ class FirewallManagement(ServiceClass):
 
         Keyword arguments:
         body -- full body payload, not required when using other keywords.
-                List of dictionaries.
-                [{
-                    "date_ranges": [
+                [
+                    {
+                        "date_ranges": [
                         {
                             "from": "string",
                             "to": "string"
                         }
-                    ],
-                    "field": "string",
-                    "filter": "string",
-                    "interval": "string",
-                    "min_doc_count": 0,
-                    "missing": "string",
-                    "name": "string",
-                    "q": "string",
-                    "ranges": [
+                        ],
+                        "exclude": "string",
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "include": "string",
+                        "interval": "string",
+                        "max_doc_count": 0,
+                        "min_doc_count": 0,
+                        "missing": "string",
+                        "name": "string",
+                        "q": "string",
+                        "ranges": [
                         {
                             "From": 0,
                             "To": 0
                         }
-                    ],
-                    "size": 0,
-                    "sort": "string",
-                    "sub_aggregates": [
-                        null
-                    ],
-                    "time_zone": "string",
-                    "type": "string"
-                }]
+                        ],
+                        "size": 0,
+                        "sort": "string",
+                        "sub_aggregates": [
+                            null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
         date_ranges -- If peforming a date range query specify the from and to date ranges.
                        These can be in common date formats like 2019-07-18 or now.
                        List of dictionaries.
+        exclude -- Fields to exclude. String.
         field -- Term you want to aggregate on. If doing a date_range query,
                  this is the date field you want to apply the date ranges to. String.
         filter -- Optional filter criteria in the form of an FQL query.
                   For more information about FQL queries, see our FQL documentation in Falcon.
                   String.
+        from -- Integer.
+        include -- Fields to include. String.
         interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
         missing -- String.
-        name -- Name of the aggregation. String.
+        name -- Scan name. String.
         q -- FQL syntax. String.
         ranges -- List of dictionaries.
-        size -- Size limit to apply to the queries. Integer.
+        size -- Integer.
         sort -- FQL syntax. String.
         sub_aggregates -- List of strings.
         time_zone -- String.
@@ -298,50 +325,59 @@ class FirewallManagement(ServiceClass):
 
         Keyword arguments:
         body -- full body payload, not required when using other keywords.
-                List of dictionaries.
-                [{
-                    "date_ranges": [
+                [
+                    {
+                        "date_ranges": [
                         {
                             "from": "string",
                             "to": "string"
                         }
-                    ],
-                    "field": "string",
-                    "filter": "string",
-                    "interval": "string",
-                    "min_doc_count": 0,
-                    "missing": "string",
-                    "name": "string",
-                    "q": "string",
-                    "ranges": [
+                        ],
+                        "exclude": "string",
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "include": "string",
+                        "interval": "string",
+                        "max_doc_count": 0,
+                        "min_doc_count": 0,
+                        "missing": "string",
+                        "name": "string",
+                        "q": "string",
+                        "ranges": [
                         {
                             "From": 0,
                             "To": 0
                         }
-                    ],
-                    "size": 0,
-                    "sort": "string",
-                    "sub_aggregates": [
-                        null
-                    ],
-                    "time_zone": "string",
-                    "type": "string"
-                }]
+                        ],
+                        "size": 0,
+                        "sort": "string",
+                        "sub_aggregates": [
+                            null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
         date_ranges -- If peforming a date range query specify the from and to date ranges.
                        These can be in common date formats like 2019-07-18 or now.
                        List of dictionaries.
+        exclude -- Fields to exclude. String.
         field -- Term you want to aggregate on. If doing a date_range query,
                  this is the date field you want to apply the date ranges to. String.
         filter -- Optional filter criteria in the form of an FQL query.
                   For more information about FQL queries, see our FQL documentation in Falcon.
                   String.
+        from -- Integer.
+        include -- Fields to include. String.
         interval -- String.
-        min_doc_count -- Minimum number of documents required to match. Integer.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
         missing -- String.
-        name -- Name of the aggregation. String.
+        name -- Scan name. String.
         q -- FQL syntax. String.
         ranges -- List of dictionaries.
-        size -- Size limit to apply to the queries. Integer.
+        size -- Integer.
         sort -- FQL syntax. String.
         sub_aggregates -- List of strings.
         time_zone -- String.
@@ -573,7 +609,7 @@ class FirewallManagement(ServiceClass):
                         "enabled": true,
                         "require_encryption": true,
                         "ssids": [
-                            "string"
+                                "string"
                             ]
                         }
                     },
@@ -582,7 +618,7 @@ class FirewallManagement(ServiceClass):
                     ],
                     "description": "string",
                     "dhcp_servers": [
-                        "string"
+                            "string"
                         ],
                     "dns_resolution_targets": {
                         "targets": [
@@ -595,11 +631,11 @@ class FirewallManagement(ServiceClass):
                         ]
                     },
                     "dns_servers": [
-                        "string"
+                            "string"
                         ],
                     "enabled": true,
                     "host_addresses": [
-                        "string"
+                            "string"
                         ],
                     "https_reachable_hosts": {
                         "hostnames": [
@@ -608,7 +644,7 @@ class FirewallManagement(ServiceClass):
                     },
                     "icmp_request_targets": {
                         "targets": [
-                        "string"
+                            "string"
                         ]
                     },
                     "name": "string"
@@ -667,6 +703,8 @@ class FirewallManagement(ServiceClass):
                             ]
                         }
                     },
+                    "created_by": "string",
+                    "created_on": "string",
                     "default_gateways": [
                         "string"
                     ],
@@ -708,6 +746,8 @@ class FirewallManagement(ServiceClass):
                 }
         comment -- Audit log comment for this action. String.
         connection_types -- Connections available at the location. Dictionary.
+        created_on -- Timestamp string.
+        created_by -- String.
         default_gateways -- List of available default gateways. List of strings.
         description -- Description of the location. String.
         dhcp_servers -- List of available DHCP servers. List of strings.
@@ -760,6 +800,8 @@ class FirewallManagement(ServiceClass):
                             ]
                         }
                     },
+                    "created_by": "string",
+                    "created_on": "string",
                     "default_gateways": [
                         "string"
                     ],
@@ -801,6 +843,8 @@ class FirewallManagement(ServiceClass):
                 }
         comment -- Audit log comment for this action. String.
         connection_types -- Connections available at the location. Dictionary.
+        created_on -- Timestamp string.
+        created_by -- String.
         default_gateways -- List of available default gateways. List of strings.
         description -- Description of the location. String.
         dhcp_servers -- List of available DHCP servers. List of strings.
@@ -936,6 +980,7 @@ class FirewallManagement(ServiceClass):
                     "default_outbound": "string",
                     "enforce": true,
                     "is_default_policy": true,
+                    "local_logging": true,
                     "platform_id": "string",
                     "policy_id": "string",
                     "rule_group_ids": [
@@ -948,6 +993,7 @@ class FirewallManagement(ServiceClass):
         default_outbound -- Default outbound. String.
         enforce -- Flag indicating if the policy is enforced. Boolean.
         is_default_policy -- Flag indicating if the policy is the default. Boolean.
+        local_logging -- Flag indicating if local logging should be enabled. Boolean.
         platform_id -- Platform ID. (`windows`, `mac`, `linux`) String.
         policy_id -- ID of the policy to be updated. String.
         rule_group_ids -- Rule group IDs this policy applies to. String or list of strings.
@@ -1075,6 +1121,7 @@ class FirewallManagement(ServiceClass):
                     "description": "string",
                     "enabled": true,
                     "name": "string",
+                    "platform": "string",
                     "rules": [
                         {
                             "action": "string",
@@ -1116,9 +1163,6 @@ class FirewallManagement(ServiceClass):
                                 "period_ms": "string"
                             },
                             "name": "string",
-                            "platform_ids": [
-                                "string"
-                            ],
                             "protocol": "string",
                             "remote_address": [
                                 {
@@ -1156,8 +1200,7 @@ class FirewallManagement(ServiceClass):
         name -- Rule group name. String.
         monitor -- Monitor count / period. Dictionary. Overridden if 'rules' keyword is provided.
         parameters - full parameters payload, not required if using other keywords.
-        platform_ids -- OS platform(s) covered by rule. Comma-delimited string or list of strings.
-                        Overridden if 'rules' keyword is provided.
+        platform -- OS platform covered by rule. String.
         protocol -- Integer protocol specified. Integer. Overridden if 'rules' keyword is provided.
                     (TCP = 6, UDP = 17)
         remote_address -- Remote address and netmask detail. Dictionary or list of dictionaries.
@@ -1210,9 +1253,6 @@ class FirewallManagement(ServiceClass):
                         "period_ms": "string"
                     },
                     "name": "string",
-                    "platform_ids": [
-                        "string"
-                    ],
                     "protocol": "string",
                     "remote_address": [
                         {
@@ -1378,6 +1418,8 @@ class FirewallManagement(ServiceClass):
                             ]
                             }
                         ],
+                        "fqdn": "string",
+                        "fqdn_enabled": true,
                         "icmp": {
                             "icmp_code": "string",
                             "icmp_type": "string"
