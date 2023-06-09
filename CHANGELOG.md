@@ -1,15 +1,31 @@
 # Version 1.2.16
 ## Added features and functionality
++ Added: New keywords were added to 1 operations within the __Alerts__ Service Class.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `PostAggregatesAlertsV1` operation.
+    - `_payload/_generic.py`
+    - `alerts.py`
++ Added: New keywords were added to 6 operations within the __CompleteDashboard__ Service Class.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `AggregateBlockList` operation.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `AggregateDetections` operation.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `AggregateDeviceCountCollection` operation.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `AggregateEscalations` operation.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `AggregateFCIncidents` operation.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `AggregateRemediations` operation.
+    - `falcon_complete_dashboard.py`
 + Added: 3 new operations added to the __CSPMRegistration__ Service Class, `GetConfigurationDetectionEntities`, `GetConfigurationDetectionIDsV2`, and `GetCSPMPoliciesDetails`.
     - `_endpoint/_cspm_registration.py`
+    - `_payload/_cspm_registration.py`
     - `cspm_registration.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_cspm_registration.py`
-+ Added: New keywords were added to 8 operations within the __CSPMRegistration__ Service Class.
++ Added: New keywords were added to 11 operations within the __CSPMRegistration__ Service Class.
     * _iam_role_arns_ and _migrated_ were added to the `GetCSPMAwsAccount` operation.
+    * _account_type_, _behavior_assessment_enabled_, _iam_role_arn_, _is_master_, _sensor_management_enabled_ and _use_existing_cloudtrail_ were added to the `CreateCSPMAwsAccount` operation.
+    * _behavior_assessment_enabled_, _iam_role_arn_, _remediation_region_, _remediation_tou_accepted_ and _sensor_management_enabled_ were added to the `UpdateCSPMAwsAccount` operation.
     * _ids_, _use_existing_cloudtrail_, and _region_ were added to the `GetCSPMAwsConsoleSetupURLs` operation.
     * _ids_ was added to the `GetCSPMAwsAccountScriptsAttachment` operation.
     * _tenant_ids_ was added to the `GetCSPMAzureAccount` operation.
+    * _account_type_, _client_id_, _default_subscription_, _tenant_id_ and _years_valid_ were added to the `CreateCSPMAzureAccount` operation.
     * _retain_tenant_ and _tenant_ids_ were added to the `DeleteCSPMAzureAccount` operation.
     * _years_valid_ was added to the `AzureDownloadCertificate` operation.
     * _account_type_, _subscription_ids_, and _template_ were added to the `GetCSPMAzureUserScriptsAttachment` operation.
@@ -21,15 +37,24 @@
     - `d4c_registration.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_d4c_registration.py`
-+ Added: New keywords were added to 6 operations within the __D4CRegistration__ Service Class.
++ Added: New keywords were added to 11 operations within the __D4CRegistration__ Service Class.
+    * _iam_role_arn_ was added to the `CreateD4CAwsAccount` operation.
     * _limit_, _offset_, _status_ and _tenant_ids_ were added to the `GetCSPMAzureAccount` operation.
+    * _account_type_, _client_id_, _default_subscription_ and _years_valid_ were added to the `CreateCSPMAzureAccount` operation.
     * _object_id_ and _tenant_id_ were added to the `UpdateCSPMAzureAccountClientID` operation.
     * _subscription_ids_, _tenant_id_ and _template_ were added to the `GetCSPMAzureUserScriptsAttachment` operation.
     * _limit_, _offset_, _parent_type_, _sort_ and _status_ were added to the `GetCSPMCGPAccount` operation.
     * _years_valid_ was added to the `DiscoverCloudAzureDownloadCertificate` operation.
     * _parent_type_ was added to the `GetCSPMGCPUserScripts` operation.
+    * _parent_type_ was added to the `CreateD4CGCPAccount` operation.
     - `_endpoint/_d4c_registration.py`
+    - `_payload/_d4c_registration.py`
     - `d4c_registration.py`
++ Added: New keywords were added to 2 operations within the __Detects__ Service Class.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `GetAggregateDetects` operation.
+    * _new_behaviors_processed_ was added to the `UpdateDetectsByIdsV2` operation.
+    - `_payload/_detects.py`
+    - `detects.py`
 + Added: _add-rule-group_ and _remove-rule-group_ added as possible values for the __*action_name*__ keyword within the `performDeviceControlPoliciesAction` operation in the __DeviceControlPolicies__ Service Class.
     - `_endpoint/_device_control_policy.py`
     - `device_control_policy.py`
@@ -46,6 +71,23 @@
     - `fdr.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_fdr.py`
++ Added: New keyword was added to 1 operation within the __FalconContainer__ Service Class.
+    * _applicationPackages_ was added to the `ReadImageVulnerabilities` operation.
+    - `_payload/_container.py`
+    - `falcon_container.py`
++ Added: New keywords were added to 9 operations within the __FirewallManagement__ Service Class.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `aggregate_events` operation.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `aggregate_policy_rules` operation.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `aggregate_rule_groups` operation.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `aggregate_rules` operation.
+    * _created_by_ and _created_on_ were added to the `upsert_network_locations` operation.
+    * _created_by_ and _created_on_ were added to the `update_network_locations` operation.
+    * _local_logging_ was added to the `update_policy_container_v1` operation.
+    * _platform_ was added to the `create_rule_group` operation.
+        > _platform_ids_ was removed from the `create_rule_group` operation
+    * _fqdn_ and `fqdn_enabled` were added to the `create_rule_group_validation` operation.
+    - `_payload/_firewall.py`
+    - `firewall_management.py`
 + Added: New keyword was added to 1 operation within the __FlightControl__ Service Class.
     * _filter_ was added to the `queryChildren` operation.
     - `_endpoint/_mssp.py`
@@ -58,9 +100,13 @@
     * _overwrite_detects_ and _update_detects_ were added to the `PerformIncidentAction` operation.
     - `_endpoint/_incidents.py`
     - `incidents.py`
-+ Added: New keyword was added to 1 operation within the __IOC__ Service Class.
++ Added: New keywords were added to 3 operations within the __IOC__ Service Class.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `indicator_aggregate_v1` operation.
+    * _from_parent_ was added to the `GetIndicatorsReport` operation.
     * _from_parent_ was added to the `indicator_search_v1` operation.
+    * _from_parent_ was added to the `indicator_update_v1` operation.
     - `_endpoint/_ioc.py`
+    - `_payload/_ioc.py`
     - `ioc.py`
 + Added: New keywords were added to 3 operations within the __KubernetesProtection__ Service Class.
     * _is_horizon_acct_ was added to the `GetAWSAccountsMixin0` operation.
@@ -74,15 +120,40 @@
     - `ods.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_ods.py`
++ Added: New keywords were added to 3 operations within the __ODS__ Service Class.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `aggregate_scans` operation.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `aggregate_scheduled_scans` operation.
+    * _scan_inclusions_ was added to the `schedule_scan` operation.
+    - `_payload/_ods.py`
+    - `ods.py`
 + Added: New keyword was added to 1 operation within the __OAuth2__ Service Class.
     * _client_id_ was added to the `revoke` operation.
     - `_endpoint/_oauth2.py`
     - `oauth2.py`
-+ Added: New keyword was added to 1 operation within the __Recon__ Service Class.
++ Added: New keywords were added to 2 operations within the __OverwatchDashboard__ Service Class.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `AggregatesEventsCollections` operation.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `AggregatesEvents` operation.
+    - `overwatch_dashboard.py`
++ Added: New keyword was added to 1 operation within the __Quarantine__ Service Class.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `GetAggregateFiles` operation.
+    - `quarantine.py`
++ Added: New keyword was added to 1 operation within the __RealTimeResponse__ Service Class.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `RTR_AggregateSessions` operation.
+    - `real_time_response.py`
++ Added: New keywords were added to 7 operations within the __Recon__ Service Class.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `AggregateNotificationsExposedDataRecordsV1` operation.
+    * _exclude_, _from_, _include_ and _max_doc_count_ were added to the `AggregateNotificationsV1` operation.
+    * _content_format_ and _trigger_matchless_ were added to the `CreateActionsV1` operation.
+    * _content_format_ and _trigger_matchless_ were added to the `UpdateActionsV1` operation.
+    * _breach_monitoring_enabled_ and _substring_matching_enabled_ were added to the `CreateRulesV1` operation.
+    * _breach_monitoring_enabled_ and _substring_matching_enabled_ were added to the `UpdateRulesV1` operation.
     * _notificationsDeletionRequested_ was added to the `DeleteRulesV1` operation.
     - `_endpoint/_recon.py`
+    - `_payload/_recon.py`
     - `recon.py`
-+ Added: New keyword was added to 1 operation within the __SensorUpdatePolicy__ Service Class.
++ Added: New keywords were added to 3 operations within the __SensorUpdatePolicy__ Service Class.
+    * _scheduler_, _show_early_adopter_builds_ and _variants_ were added to the `createSensorUpdatePoliciesV2` operation.
+    * _scheduler_, _show_early_adopter_builds_ and _variants_ were added to the `updateSensorUpdatePoliciesV2` operation.
     * _stage_ was added to the `queryCombinedSensorUpdateBuilds` operation.
     - `_endpoint/_sensor_update_policy.py`
     - `sensor_update_policy.py`
@@ -99,8 +170,14 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_zero_trust_assessment.py`
 
-
 ## Other
++ Expanded: Additional parameters were added to the settings dictionary/keyword within the `createDeviceControlPolicies` and `updateDeviceControlPolicies` operations.
+    - `_payload/_device_control_policies.py`
+    - `device_control_policies.py`
++ Renamed: 1 keyword was renamed within the __FalconContainer__ Service Class.
+    * _credentials_ was renamed to _credential_ within the `CreateRegistryEntities` operation.
+    - `_payload/_container.py`
+    - `falcon_container.py`
 + Reduced: Limit maximum for `queryCombinedSensorUpdateKernels` operation within the __SensorUpdatePolicy__ Service Class was changed from __*5000*__ to __500__.
     - `_endpoint/_sensor_update_policies.py`
 + Reduced: Limit maximum for `querySensorUpdateKernelsDistinct` operation within the __SensorUpdatePolicy__ Service Class was changed from __*5000*__ to __500__.
