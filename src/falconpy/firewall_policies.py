@@ -335,10 +335,9 @@ class FirewallPolicies(ServiceClass):
                 {
                 "resources": [
                     {
-                        "clone_id": "string",
+                        "id": "string",
                         "description": "string",
-                        "name": "string",
-                        "platform_name": "Windows"
+                        "name": "string"
                     }
                 ]
             }
