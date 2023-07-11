@@ -7,6 +7,7 @@ import pytest
 from json import loads
 from time import time
 import logging
+from random import randrange
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 
@@ -342,4 +343,5 @@ class TestServiceClass:
             # Revoke the dirty token
             _HOSTS.logout()
 
-        assert bool(_thing.resources.get_property(1) == _thing.resources[1])
+        position = randrange(0, len(_thing.resources), 1)
+        assert bool(_thing.resources.get_property(position) == _thing.resources[position])
