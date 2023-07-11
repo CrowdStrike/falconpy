@@ -74,7 +74,12 @@ class ResponseComponent:
         if isinstance(self._data, dict):
             _returned = self._data.get(item, default_return)
         elif isinstance(self._data, (list, str)):
-            _returned = self._data[item]
+            try:
+                _returned = self._data[item]
+            except IndexError as bad_pos:
+                raise IndexError(
+                    "Invalid position specified. Please check your index and try again."
+                    ) from bad_pos
 
         return _returned
 
