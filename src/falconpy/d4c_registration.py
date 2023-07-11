@@ -541,7 +541,6 @@ class D4CRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_gcp_user_scripts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-
         """Retrieve GCP user script.
 
         Return a script for customer to run in their cloud

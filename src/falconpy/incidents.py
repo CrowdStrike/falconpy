@@ -118,8 +118,11 @@ class Incidents(ServiceClass):
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def perform_incident_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-
+    def perform_incident_action(self: object,
+                                body: dict = None,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Dict[str, Union[int, dict]]:
         """Perform a set of actions on one or more incidents.
 
         Such as: adding tags or updating the incident name or description.
