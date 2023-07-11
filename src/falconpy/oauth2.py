@@ -169,7 +169,7 @@ class OAuth2(FalconInterface):
 
         return returned
 
-    def revoke(self, token: str, alter_state: bool = False) -> Dict[str, Union[int, dict]]:
+    def revoke(self, token: str, alter_state: bool = False, client_id: str = None) -> Dict[str, Union[int, dict]]:
         """Revoke the specified authorization token.
 
         HTTP Method: POST
@@ -180,6 +180,8 @@ class OAuth2(FalconInterface):
 
         Keyword arguments
         ----
+        client_id : str
+            Client ID of the token to be revoked.
         token : str
             Token string to be revoked.
         alter_state : bool
@@ -194,7 +196,7 @@ class OAuth2(FalconInterface):
         dict
             Dictionary containing API response.
         """
-        return self._logout_handler(token, not alter_state)
+        return self._logout_handler(token, not alter_state, client_id)
 
     def token(self, alter_state: bool = False) -> Dict[str, Union[int, dict]]:
         """Generate an authorization token.
