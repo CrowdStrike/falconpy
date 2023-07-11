@@ -58,6 +58,7 @@ from .._util import (
 from .._error import InvalidCredentials, NoAuthenticationMechanism
 
 
+# pylint: disable=R0902
 class FalconInterface(BaseFalconAuth):
     """Standard Falcon API interface used by Service Classes."""
 
