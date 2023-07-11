@@ -57,7 +57,7 @@ def login_payloads(creds: dict, base: str):
     return op_id, target, data
 
 
-def logout_payloads(creds: dict, base: str, token_val: str):
+def logout_payloads(creds: dict, base: str, token_val: str, client_id: str = None):
     """Craft the necessary payloads to revoke a token.
 
     This method is intentionally generic and does not necessarily need to
@@ -68,5 +68,7 @@ def logout_payloads(creds: dict, base: str, token_val: str):
     b64cred = generate_b64cred(creds["client_id"], creds["client_secret"])
     headers = {"Authorization": f"basic {b64cred}"}
     data = {"token": f"{token_val}"}
+    if client_id:
+        data["client_id"] = client_id
 
     return op_id, target, data, headers

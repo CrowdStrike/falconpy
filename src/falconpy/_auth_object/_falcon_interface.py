@@ -206,15 +206,15 @@ class FalconInterface(BaseFalconAuth):
                     self.token_status = returned["status_code"]
                     if self.token_status == 201:
                         # Token generation was successful.
-                        self._token = BearerToken(token_value=returned["body"]["access_token"],
-                                                  expiration=returned["body"]["expires_in"],
-                                                  status=201
-                                                  )
+                        self.bearer_token = BearerToken(token_value=returned["body"]["access_token"],
+                                                        expiration=returned["body"]["expires_in"],
+                                                        status=201
+                                                        )
                         # Cloud Region auto discovery.
                         self.base_url = autodiscover_region(self.base_url, returned)
                     else:
                         # Token generation failure, reset the current token and check for an error response.
-                        self._token = BearerToken(status=returned["status_code"])
+                        self.bearer_token = BearerToken(status=returned["status_code"])
                         # Retrieve the list of errors, there should only be one item in the list.
                         error_list = returned["body"].get("errors", [])
                         if error_list:
@@ -233,7 +233,7 @@ class FalconInterface(BaseFalconAuth):
 
         return returned
 
-    def _logout_handler(self, token_value: str = None, stateful: bool = True) -> dict:
+    def _logout_handler(self, token_value: str = None, stateful: bool = True, client_id: str = None) -> dict:
         """Log out by revoking the current token.
 
         This method can also be leveraged to revoke other tokens.
@@ -245,7 +245,8 @@ class FalconInterface(BaseFalconAuth):
                 operation, target_url, data_payload, header_payload = logout_payloads(
                     creds=self.creds,
                     base=self.base_url,
-                    token_val=token_value
+                    token_val=token_value,
+                    client_id=client_id
                     )
                 # Log the call to this operation if debugging is enabled.
                 if self.log:
@@ -257,7 +258,7 @@ class FalconInterface(BaseFalconAuth):
                                            sanitize=self.sanitize_log
                                            )
                 if stateful:
-                    self._token: BearerToken = BearerToken()
+                    self.bearer_token: BearerToken = BearerToken()
             else:
                 raise InvalidCredentials
         except InvalidCredentials as bad_creds:
@@ -360,6 +361,11 @@ class FalconInterface(BaseFalconAuth):
     def bearer_token(self) -> BearerToken:
         """Return the bearer token object for this configuration."""
         return self._token
+
+    @bearer_token.setter
+    def bearer_token(self, value: BearerToken):
+        """Set the bearer token."""
+        self._token = value
 
     @property
     def renew_window(self) -> int:
