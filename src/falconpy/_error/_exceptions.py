@@ -168,3 +168,8 @@ class APIError(SDKError):
     """Generic error received back from the API."""
 
     _message = "An unexpected error has occurred. Please check your payloads and try again."
+
+class InvalidIndex(SDKError):
+    """Item ID was not found in the list or string."""
+
+    _message = "Item not found. Check your index and try again."
