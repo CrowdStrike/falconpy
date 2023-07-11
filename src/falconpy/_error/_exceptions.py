@@ -169,6 +169,7 @@ class APIError(SDKError):
 
     _message = "An unexpected error has occurred. Please check your payloads and try again."
 
+
 class InvalidIndex(SDKError):
     """Item ID was not found in the list or string."""
 
