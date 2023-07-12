@@ -97,10 +97,21 @@ class BaseResult:
                 self.resources = Resources()
                 self.errors = Errors()
             else:
-                # Standard response
+                # Standard responses and RTR
                 self.meta = Meta(body.get("meta", {}))
-                self.resources = Resources(body.get("resources", []))
                 self.errors = Errors(body.get("errors", []))
+                # RTR Batch responses
+                if body.get("batch_id", {}):
+                    # Batch session init
+                    self.raw = RawBody(body)
+                    self.resources = Resources(body.get("resources", []))
+                elif body.get("combined", {}):
+                    # Batch session results have to be handled as RawBody
+                    # due to the combined response format.
+                    self.raw = RawBody(body)
+                else:
+                    # Standard API responses
+                    self.resources = Resources(body.get("resources", []))
 
     # Iteration handlers
     def __iter__(self):
