@@ -264,3 +264,11 @@ class ServiceClass(BaseServiceClass):
             ** self.auth_object.auth_headers,
             ** self.ext_headers
         }
+
+    @property
+    def token(self) -> str:
+        """Return the underlying token value from the auth_object.
+
+        This recreates pre-1.3.0 functionality.
+        """
+        return self.auth_object.token_value
