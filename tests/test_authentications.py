@@ -18,7 +18,7 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import ZeroTrustAssessment, CloudConnectAWS, OAuth2, APIHarness, version
+from falconpy import ZeroTrustAssessment, CloudConnectAWS, OAuth2, APIHarness, version, InvalidCredentialFormat, Hosts
 from falconpy._util import confirm_base_region
 from falconpy._version import _TITLE, _VERSION
 
@@ -267,5 +267,29 @@ class TestAuthentications:
         assert bool(version(version()))  # Should be a while before we hit that...
 
     def test_legacy_token_lookup(self):
-        test_object = ZeroTrustAssessment(auth_object=auth.authorization)
+        test_object = Hosts(auth_object=auth.authorization)
         assert bool(test_object.token)
+
+    @pytest.mark.skipif(auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com",
+                        reason="Test unsupported in GovCloud"
+                        )
+    def test_string_credentials_dictionary(self):
+        key = auth.config["falcon_client_id"]
+        the_other_bit = auth.config["falcon_client_secret"]
+        test_string = "{" + f"'client_id': '{key}', 'client_secret': '{the_other_bit}'" + "}"
+        test_object = Hosts(creds=test_string)
+        test_object.login()
+        assert bool(test_object.authenticated())
+
+    def test_bad_credentials_dictionary(self):
+        _success = False
+        test = "Bob"
+        try:
+            test_object = Hosts(creds=test)
+        except InvalidCredentialFormat:
+            test = 2
+            try:
+                test_object = Hosts(creds=test)
+            except InvalidCredentialFormat:
+                _success = True
+        assert _success

@@ -49,7 +49,8 @@ from ._exceptions import (
     InvalidBaseURL,
     PayloadValidationError,
     FeatureNotSupportedByPythonVersion,
-    InvalidIndex
+    InvalidIndex,
+    InvalidCredentialFormat
     )
 from ._warnings import (
     SDKWarning,
@@ -64,5 +65,5 @@ __all__ = ["SDKError", "RegionSelectError", "InvalidMethod", "InvalidOperation",
            "InvalidCredentials", "APIError", "NoContentWarning", "CannotRevokeToken",
            "FunctionalityNotImplemented", "InvalidBaseURL", "PayloadValidationError",
            "NoAuthenticationMechanism", "FeatureNotSupportedByPythonVersion",
-           "InvalidIndex"
+           "InvalidIndex", "InvalidCredentialFormat"
            ]
