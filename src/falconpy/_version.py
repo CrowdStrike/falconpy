@@ -45,3 +45,48 @@ _TITLE = "crowdstrike-falconpy"
 _PROJECT_URL = "https://github.com/CrowdStrike/falconpy"
 _DOCS_URL = "https://www.falconpy.io"
 _KEYWORDS = ["crowdstrike", "falcon", "api", "sdk", "oauth2", "devsecops", "crowdstrike-falcon"]
+
+
+def version(compare: str = None, agent_string: bool = None):
+    """Provide a callable method for checking and comparing the current FalconPy version.
+
+    Keyword arguments
+    ----
+    agent_string: bool
+        Boolean flag indicating that the default User-Agent string should
+        be returned instead.
+    compare: str
+        String representation of the version to compare against.
+        Returns True when the current version is greater or equal to the comparison value.
+        Examples: "1", "1.3" or "1.3.0"
+
+    Returns
+    ----
+    str or bool
+        A string containing the requested version detail or a boolean indicating the status
+        of the requested version comparison.
+    """
+    returned = _VERSION
+    if agent_string:
+        returned = f"{_TITLE}/{str(_VERSION)}"
+
+    if compare:
+        returned = False
+        ver = _VERSION.split(".")
+        chk = compare.split(".")
+        chk_minor = 0
+        chk_patch = 0
+        if chk:
+            chk_major = chk[0]
+        if len(chk) > 1:
+            chk_minor = chk[1]
+        if len(chk) > 2:
+            chk_patch = int(chk[2])
+        major_minor = float(f"{ver[0]}.{ver[1]}")
+        chk_major_minor = float(f"{chk_major}.{chk_minor}")
+        if major_minor > chk_major_minor:
+            returned = True
+        elif major_minor == chk_major_minor and int(ver[2]) >= chk_patch:
+            returned = True
+
+    return returned

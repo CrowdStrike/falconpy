@@ -21,7 +21,7 @@
 """
 from ._version import _VERSION, _MAINTAINER, _AUTHOR, _AUTHOR_EMAIL
 from ._version import _CREDITS, _DESCRIPTION, _TITLE, _PROJECT_URL
-from ._version import _DOCS_URL, _KEYWORDS
+from ._version import _DOCS_URL, _KEYWORDS, version
 from ._auth_object import (
     BaseFalconAuth,
     BearerToken,
@@ -169,7 +169,7 @@ __all__ = [
     "InterfaceConfiguration", "RequestBehavior", "RequestConnection", "RequestMeta",
     "RequestPayloads", "RequestValidator", "PayloadValidationError", "MIN_TOKEN_RENEW_WINDOW",
     "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS",
-    "NoAuthenticationMechanism", "InvalidIndex"
+    "NoAuthenticationMechanism", "InvalidIndex", "version"
     ]
 """
 This is free and unencumbered software released into the public domain.
