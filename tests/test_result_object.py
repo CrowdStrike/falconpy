@@ -710,4 +710,10 @@ class TestResults:
             _success = True
 
         assert bool(_success)
-    
+
+    @not_supported
+    def test_batch_init_id_without_a_session(self):
+        if _RATE_LIMITED:
+            pytest.skip("Rate limited")
+        test_object: Result = Result(status_code=200, headers={"someheader": "somevalue"}, body={"batch_id": "123456"})
+        assert bool(test_object.full_return.get("body", {}).get("batch_id")=="123456")

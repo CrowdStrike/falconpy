@@ -92,7 +92,7 @@ class TestD4CRegistration:
             "get_cgp_account": falcon.GetCSPMCGPAccount(ids='12345678', parameters={'scan_type': 'dry'}),
             "get_gcp_acocunt": falcon.GetCSPMGCPAccount(ids='12345678'),  # Test the typo fix version
             "create_gcp_account": falcon.CreateCSPMGCPAccount(body={}, parent_id="12345678"),
-            "create_azure_account": falcon.CreateCSPMAzureAccount(body={}, subscription_id="12345678", tenant_id="12345678"),
+            "create_azure_account": falcon.CreateCSPMAzureAccount(body={}, subscription_id="12345678", tenant_id="12345678", years_valid=3, default_subscription=False),
             "azure_download_certificate": falcon.DiscoverCloudAzureDownloadCertificate("12345678"),  # Also testing arg handling
             "GetD4CAwsAccount": falcon.get_aws_account("123456789", scan_type="dry"),
             "CreateD4CAwsAccount": falcon.create_aws_account(account_id="123456789",

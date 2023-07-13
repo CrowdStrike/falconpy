@@ -129,7 +129,10 @@ class TestFalconSensorUpdate:
                                                             name="Unit test",
                                                             platform_name="Windowz",
                                                             build="1309",
-                                                            uninstall_protection="DISABLED"
+                                                            uninstall_protection="DISABLED",
+                                                            scheduler={"enabled": False},
+                                                            show_early_adopter_builds=True,
+                                                            variants=[{"build": "1309", "platform": "Windows"}]
                                                             ),
             "perform_action": falcon.perform_policies_action(action_name="disable",
                                                              ids="12345678",

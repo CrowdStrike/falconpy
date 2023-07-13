@@ -64,7 +64,8 @@ class TestFirewallManagement:
                                                                       enforce=False,
                                                                       is_default_policy=False,
                                                                       test_mode=True,
-                                                                      rule_group_ids="12345,67890"
+                                                                      rule_group_ids="12345,67890",
+                                                                      local_logging=False
                                                                       ),
             "update_policy_container_v1": falcon.update_policy_container_v1(default_inbound="something",
                                                                             default_outbound="something_else",
