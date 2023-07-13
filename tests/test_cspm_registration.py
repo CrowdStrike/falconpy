@@ -53,7 +53,9 @@ class TestCSPMRegistration:
             "delete_aws_account_org": falcon.DeleteCSPMAwsAccount(organization_ids='12345678'),
             "get_azure_account": falcon.GetCSPMAzureAccount(ids='12345678', scan_type="dry"),
             "create_azure_account": falcon.CreateCSPMAzureAccount(tenant_id="12345678",
-                                                                  subscription_id="12345678"
+                                                                  subscription_id="12345678",
+                                                                  behavior_assessment_enabled=True,
+                                                                  years_valid=3
                                                                   ),
             "delete_azure_account": falcon.DeleteCSPMAzureAccount(ids='12345678'),
             "update_azure_account_client_id": falcon.UpdateCSPMAzureAccountClientID(tenant_id="12345678", id="12345678"),
