@@ -40,6 +40,11 @@ For more information, please refer to <https://unlicense.org>
 """
 import time
 import warnings
+from json import loads
+try:
+    from simplejson import JSONDecodeError
+except ImportError:
+    from json.decoder import JSONDecodeError
 from logging import Logger, getLogger
 from typing import Dict, Optional, Union
 from ._base_falcon_auth import BaseFalconAuth
@@ -55,7 +60,7 @@ from .._util import (
     login_payloads,
     logout_payloads
     )
-from .._error import InvalidCredentials, NoAuthenticationMechanism
+from .._error import InvalidCredentials, NoAuthenticationMechanism, InvalidCredentialFormat
 
 
 # pylint: disable=R0902
@@ -89,7 +94,7 @@ class FalconInterface(BaseFalconAuth):
     #
     # The default constructor for all authentication objects. Ingests provided credentials
     # and sets the necessary class attributes based upon the authentication detail received.
-    # pylint: disable=R0913,R0914
+    # pylint: disable=R0912,R0913,R0914
     def __init__(self,
                  access_token: Optional[Union[str, bool]] = False,
                  base_url: Optional[str] = "https://api.crowdstrike.com",
@@ -134,7 +139,16 @@ class FalconInterface(BaseFalconAuth):
         elif not creds:
             creds = {}
         # Credential Authentication (also powers Direct Authentication).
-        self.creds: Dict[str, str] = creds
+        if isinstance(creds, str):
+            try:
+                # Try and clean up any attempts to provide the dictionary as a string
+                self.creds: Dict[str, str] = loads(creds.replace("'", "\""))
+            except (TypeError, JSONDecodeError) as bad_cred_format:
+                raise InvalidCredentialFormat from bad_cred_format
+        elif isinstance(creds, dict):
+            self.creds: Dict[str, str] = creds
+        else:
+            raise InvalidCredentialFormat
         # Set the token renewal window, ignored when using Legacy Authentication.
         self.renew_window: int = max(min(renew_window, MAX_TOKEN_RENEW_WINDOW),
                                      MIN_TOKEN_RENEW_WINDOW

@@ -59,7 +59,8 @@ from ._error import (
     InvalidBaseURL,
     PayloadValidationError,
     NoAuthenticationMechanism,
-    InvalidIndex
+    InvalidIndex,
+    InvalidCredentialFormat
     )
 from ._result import (
     Result,
@@ -169,7 +170,7 @@ __all__ = [
     "InterfaceConfiguration", "RequestBehavior", "RequestConnection", "RequestMeta",
     "RequestPayloads", "RequestValidator", "PayloadValidationError", "MIN_TOKEN_RENEW_WINDOW",
     "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS",
-    "NoAuthenticationMechanism", "InvalidIndex", "version"
+    "NoAuthenticationMechanism", "InvalidIndex", "version", "InvalidCredentialFormat"
     ]
 """
 This is free and unencumbered software released into the public domain.
