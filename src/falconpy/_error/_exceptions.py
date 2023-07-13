@@ -174,3 +174,9 @@ class InvalidIndex(SDKError):
     """Item ID was not found in the list or string."""
 
     _message = "Item not found. Check your index and try again."
+
+
+class InvalidCredentialFormat(SDKError):
+    """Credentials dictionary was provided as a datatype that will not convert to a dictionary."""
+
+    _message = "Invalid credential format. This keyword must be provided as a dictionary."
