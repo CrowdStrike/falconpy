@@ -63,7 +63,7 @@ class TestIOC:
             "entities_processes": falcon.entities_processes(ids=['12345678']),
             "indicator_aggregate": falcon.indicator_aggregate(),
             "action_get": falcon.action_get("123456789"),
-            "GetIndicatorsReport": falcon.get_indicators_report(filter="FQL something", search={"filter": "FQL"}),
+            "GetIndicatorsReport": falcon.get_indicators_report(filter="FQL something", search={"filter": "FQL"}, from_parent=False),
             "action_query": falcon.action_query(),
             "ioc_type_query": falcon.ioc_type_query(),
             "platform_query": falcon.platform_query(),

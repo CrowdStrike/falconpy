@@ -18,7 +18,7 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import ZeroTrustAssessment, CloudConnectAWS, OAuth2, APIHarness
+from falconpy import ZeroTrustAssessment, CloudConnectAWS, OAuth2, APIHarness, version
 from falconpy._util import confirm_base_region
 from falconpy._version import _TITLE, _VERSION
 
@@ -255,3 +255,17 @@ class TestAuthentications:
         thing = OAuth2(client_id="Whatever", debug=_DEBUG)
         result = thing.login()
         assert bool(result["status_code"] == 403)
+
+    def test_version_check(self):
+        vers = version()
+        assert bool(len(vers) > 3)
+
+    def test_version_compare(self):
+        assert bool(version("1.2.16"))  # Will be true as this method is released in 1.3+
+
+    def test_version_compare_exact_match(self):
+        assert bool(version(version()))  # Should be a while before we hit that...
+
+    def test_legacy_token_lookup(self):
+        test_object = ZeroTrustAssessment(auth_object=auth.authorization)
+        assert bool(test_object.token)

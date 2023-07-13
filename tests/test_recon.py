@@ -27,7 +27,7 @@ class TestRecon:
             "preview_rule": falcon.preview_rule(body={}),
             "preview_rule_jr": falcon.preview_rule(filter="something", topic="somethingElse"),
             "get_actions": falcon.get_actions(ids='12345678'),
-            "create_actions": falcon.create_actions(body={}),
+            "create_actions": falcon.create_actions(body={}, recipients="12345,67890", trigger_matchless=False),
             "create_actions_alternatively": falcon.create_actions(frequency="whenevers",
                                                                   recipients=["123456"],
                                                                   type="TheGoodKind"
@@ -53,7 +53,8 @@ class TestRecon:
             "update_action_as_well": falcon.update_action(id="1234567",
                                                           frequency="often",
                                                           status="new",
-                                                          recipients="123456,654321"
+                                                          recipients="123456,654321",
+                                                          trigger_matchless=False
                                                           ),
             "get_notifications_detailed_translated": falcon.get_notifications_detailed_translated(ids="1234567"),
             "get_notfications_detailed": falcon.get_notifications_detailed(ids="1234567"),
@@ -94,7 +95,8 @@ class TestRecon:
                                                      permissions="private",
                                                      priority="moderate",
                                                      name="MelloYellow",
-                                                     topic="whatevers"
+                                                     topic="whatevers",
+                                                     breach_monitoring_enabled=False
                                                      ),
             "query_actions": falcon.query_actions(),
             "query_notifications_exposed": falcon.query_notifications_exposed_data_records(),

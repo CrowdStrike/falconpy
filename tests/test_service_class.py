@@ -345,3 +345,23 @@ class TestServiceClass:
 
         position = randrange(0, len(_thing.resources), 1)
         assert bool(_thing.resources.get_property(position) == _thing.resources[position])
+
+
+    @rate_limited
+    @not_supported
+    def test_list_response_component_get_property_fail(self):
+        with pytest.warns(SSLDisabledWarning):
+            _no_ssl = Hosts(creds=config.creds, pythonic=True, debug=_DEBUG, ssl_verify=False)
+            try:
+                _thing: Result = _no_ssl.query_devices(limit=3)
+            except APIError:
+                pytest.skip("SSL required for GovCloud testing.")
+
+        position = 5
+        _success = False
+        try:
+            _success = bool(_thing.resources.get_property(position))
+        except IndexError:
+            _success = True
+
+        assert(_success)
