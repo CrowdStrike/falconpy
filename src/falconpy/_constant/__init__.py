@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import List
-from .._version import _TITLE, _VERSION
+from .._version import version
 PREFER_NONETYPE: List[str] = [
     "report_executions_download_get", "report_executions_download.get",
     "RTR_ListFiles", "RTR_ListFilesV2", "RTR_GetExtractedFileContents",
@@ -53,7 +53,7 @@ MOCK_OPERATIONS: List[str] = [
 # Restrict requests to only allowed HTTP methods
 ALLOWED_METHODS: List[str] = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
 # Default user-agent string
-USER_AGENT: str = f"{_TITLE}/{str(_VERSION)}"
+USER_AGENT: str = version(agent_string=True)
 # Default maximum number of records to write to debug logs (when active)
 MAX_DEBUG_RECORDS: int = 100
 # Global maximum number of records returned from any endpoint across all service collections
