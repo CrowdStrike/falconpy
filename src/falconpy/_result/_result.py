@@ -97,7 +97,7 @@ class BaseResult:
                 self.resources = Resources()
                 self.errors = Errors()
             else:
-                # Standard responses and RTR
+                # Standard responses, GraphQL and RTR
                 self.meta = Meta(body.get("meta", {}))
                 self.errors = Errors(body.get("errors", []))
                 # RTR Batch responses
@@ -108,6 +108,11 @@ class BaseResult:
                 elif body.get("combined", {}):
                     # Batch session results have to be handled as RawBody
                     # due to the combined response format.
+                    self.raw = RawBody(body)
+                elif body.get("data", {}):  # pragma: no cover
+                    # GraphQL uses a custom response payload, we will
+                    # use RawBody for this return for now. Due to
+                    # environment constraints, this is manually tested.
                     self.raw = RawBody(body)
                 else:
                     # Standard API responses
