@@ -165,6 +165,11 @@ class ServiceClass(BaseServiceClass):
             if kwargs.get(item, None) is not None:
                 setattr(self, f"_override_{item}", kwargs.get(item))
 
+        # Service Classes automatically log themselves in upon instantiation
+        # if no authentication status is present.
+        if not self.token_status:
+            self.login()
+
         # Log the creation of this Service Class if debugging is enabled.
         if self.log:
             log_class_startup(self, self.log)
