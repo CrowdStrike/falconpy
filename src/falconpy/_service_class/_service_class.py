@@ -246,6 +246,24 @@ class ServiceClass(BaseServiceClass):
         self.auth_object.renew_window = value
 
     @property
+    def token_renew_window(self) -> int:
+        """Return the current renew window from the auth_object.
+
+        DEPRECATED: This property recreates a legacy attribute.
+        Developers should update code to make use of the `renew_window` property.
+        """
+        return self.auth_object.renew_window
+
+    @token_renew_window.setter
+    def token_renew_window(self, value: int):
+        """Allow the renew_window to be changed.
+
+        DEPRECATED: This property recreates a legacy attribute.
+        Developers should update code to make use of the `renew_window` property.
+        """
+        self.auth_object.renew_window = value
+
+    @property
     def user_agent(self) -> int:
         """Provide the user_agent from the auth_object if it's not been set."""
         if self._override_user_agent:
