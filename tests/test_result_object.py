@@ -23,7 +23,8 @@ from falconpy import (
     ResponseComponent,
     BaseResource,
     Errors,
-    SampleUploads
+    SampleUploads,
+    CSPMRegistration
     )
 from falconpy._result._base_dictionary import UnsupportedPythonVersion
 
@@ -717,3 +718,11 @@ class TestResults:
             pytest.skip("Rate limited")
         test_object: Result = Result(status_code=200, headers={"someheader": "somevalue"}, body={"batch_id": "123456"})
         assert bool(test_object.full_return.get("body", {}).get("batch_id")=="123456")
+
+    def test_unusual_response_formatting(self):
+        _returned = False
+        cspm = CSPMRegistration(auth_object=config)
+        result = cspm.get_configuration_detections(limit=1)["body"]["resources"]
+        if isinstance(result, dict):
+            _returned = True
+        assert _returned

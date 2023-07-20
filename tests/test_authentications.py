@@ -43,8 +43,8 @@ class TestAuthentications:
             return False
 
     def serviceAny_TestBadCredRevoke(self):
-        bad_falcon = OAuth2(debug=_DEBUG)
-        result = bad_falcon.revoke("Will generate a 403")
+        bad_falcon = OAuth2(client_id="this_is", client_secret=["garbage"], debug=_DEBUG, sanitize_log=False)  # Generate a hard error
+        result = bad_falcon.revoke(token="whatevers")
         if result["status_code"] in AllowedResponses:
             return True
         else:
@@ -173,14 +173,18 @@ class TestAuthentications:
         # Now test the override property setters
         falcon.proxy = {"https": "https://notreallyaproxy.com:8888"}
         falcon.timeout = (5, 5)
-        falcon.token_renew_window = 30
+        # The BearerToken object now maintains a minimum of 120 seconds
+        # for a token renewal window across all objects. This is true
+        # regardless of whether the property `renew_window` or the
+        # deprecated property `token_renew_window` is used.
+        falcon.token_renew_window = 340
         falcon.user_agent = "falconpy-unit-testing/1337.1"
         # Finally test the property getters
         if not falcon.proxy["https"] == "https://notreallyaproxy.com:8888":
             _returned = False
         if not falcon.timeout == (5, 5):
             _returned = False
-        if not falcon.token_renew_window == 30:
+        if not falcon.token_renew_window == 340:
             _returned = False
         if not falcon.user_agent == "falconpy-unit-testing/1337.1":
             _returned = False
@@ -252,8 +256,17 @@ class TestAuthentications:
         assert self.serviceAny_TestObjectAuth() is True
 
     def test_NoSecret(self):
+        # Disable any environment keys that could trigger environment authentication
+        save_id = os.getenv("FALCON_CLIENT_ID")
+        save_key = os.getenv("FALCON_CLIENT_SECRET")
+        if save_id or save_key:
+            os.environ["FALCON_CLIENT_ID"] = ""
+            os.environ["FALCON_CLIENT_SECRET"] = ""
         thing = OAuth2(client_id="Whatever", debug=_DEBUG)
         result = thing.login()
+        if save_id or save_key:
+            os.environ["FALCON_CLIENT_ID"] = save_id
+            os.environ["FALCON_CLIENT_SECRET"] = save_key
         assert bool(result["status_code"] == 403)
 
     def test_version_check(self):
@@ -269,6 +282,19 @@ class TestAuthentications:
     def test_legacy_token_lookup(self):
         test_object = Hosts(auth_object=auth.authorization)
         assert bool(test_object.token)
+
+    def test_EnvironmentAuthentication(self):
+        _returned = False
+        save_id = os.getenv("FALCON_CLIENT_ID")
+        save_key = os.getenv("FALCON_CLIENT_SECRET")
+        if save_id or save_key:
+            thing = Hosts(debug=_DEBUG)
+            result = thing.login()
+            if thing.token_status == 201:
+                _returned = True
+            assert _returned
+        else:
+            pytest.skip("Required environment credentials not present")
 
     @pytest.mark.skipif(auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com",
                         reason="Test unsupported in GovCloud"
