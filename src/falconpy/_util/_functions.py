@@ -725,7 +725,7 @@ def autodiscover_region(provided_base_url: str, auth_result: dict):
 def sanitize_dictionary(dirty: Any, record_max: int = MAX_DEBUG_RECORDS) -> dict:
     """Strip confidential data from logged dictionaries."""
     cleaned = dirty
-    if isinstance(dirty, dict):
+    if isinstance(dirty, dict):  # pylint: disable=R1702
         # cleaned = deepcopy(dict(dirty))
         redacted = ["access_token", "client_id", "client_secret", "member_cid", "token"]
         for redact in redacted:
@@ -738,9 +738,10 @@ def sanitize_dictionary(dirty: Any, record_max: int = MAX_DEBUG_RECORDS) -> dict
                     # Log results are limited to MAX_DEBUG_RECORDS
                     # number of items within the resources list
                     if cleaned["body"]["resources"]:
-                        del cleaned["body"]["resources"][max(1, min(record_max,
-                                                                    GLOBAL_API_MAX_RETURN
-                                                                    )):]
+                        if isinstance(cleaned["body"]["resources"], list):
+                            del cleaned["body"]["resources"][max(1, min(record_max,
+                                                                        GLOBAL_API_MAX_RETURN
+                                                                        )):]
         if "Authorization" in cleaned:
             cleaned["Authorization"] = "Bearer REDACTED"
 
