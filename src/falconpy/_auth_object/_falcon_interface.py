@@ -39,6 +39,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 import time
+import os
 import warnings
 from json import loads
 try:
@@ -157,6 +158,20 @@ class FalconInterface(BaseFalconAuth):
         if access_token:
             # Store this non-refreshable token, assuming it was just generated.
             self._token: BearerToken = BearerToken(access_token, 1799)
+
+        # Environment Authentication
+        # When credentials are not provided, attempt to retrieve them from the environment.
+        if not self.cred_format_valid and not self.token_value:
+            if os.getenv("FALCON_CLIENT_ID") and os.getenv("FALCON_CLIENT_SECRET"):
+                api_id = os.getenv("FALCON_CLIENT_ID") if "client_id" not in self.creds else self.creds["client_id"]
+                if "client_secret" not in self.creds:
+                    api_sec = os.getenv("FALCON_CLIENT_SECRET")
+                else:
+                    api_sec = self.creds["client_secret"]
+                self.creds = {
+                    "client_id": api_id,
+                    "client_secret": api_sec
+                }
 
         # Log the creation of this object if debugging is enabled.
         if debug:
@@ -455,7 +470,11 @@ class FalconInterface(BaseFalconAuth):
     @property
     def cred_format_valid(self) -> bool:
         """Return a boolean that the creds dictionary is valid."""
-        return bool("client_id" in self.creds and "client_secret" in self.creds)
+        _returned = False
+        if "client_id" in self.creds and "client_secret" in self.creds:
+            if isinstance(self.creds["client_id"], str) and isinstance(self.creds["client_secret"], str):
+                _returned = True
+        return _returned
 
     @property
     def log(self) -> Logger:
