@@ -114,6 +114,9 @@ class BaseResult:
                     # use RawBody for this return for now. Due to
                     # environment constraints, this is manually tested.
                     self.raw = RawBody(body)
+                elif isinstance(body.get("resources", []), dict):
+                    # Catch unusual response payloads not explicitly handled
+                    self.raw = RawBody(body)
                 else:
                     # Standard API responses
                     self.resources = Resources(body.get("resources", []))
