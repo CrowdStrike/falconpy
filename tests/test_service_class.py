@@ -250,6 +250,13 @@ class TestServiceClass:
     @rate_limited
     @not_supported
     def test_auth_object_pythonic_failure(self):
+        # Disable any environment keys that could trigger environment authentication
+        save_id = os.getenv("FALCON_CLIENT_ID")
+        save_key = os.getenv("FALCON_CLIENT_SECRET")
+        if save_id or save_key:
+            os.environ["FALCON_CLIENT_ID"] = ""
+            os.environ["FALCON_CLIENT_SECRET"] = ""
+
         with pytest.warns(NoAuthenticationMechanism):
             _will_fail = OAuth2(debug=_DEBUG, pythonic=True)
             _will_fail.proxy = {"CrowdStrike": "WE STOP BREACHES"}
@@ -261,6 +268,10 @@ class TestServiceClass:
             _will_fail.token_fail_reason = "Just Because"
             _will_fail.token_value = "no cash value"
             _will_fail.pythonic = True
+
+        if save_id or save_key:
+            os.environ["FALCON_CLIENT_ID"] = save_id
+            os.environ["FALCON_CLIENT_SECRET"] = save_key
 
 
         assert (_will_fail.config
