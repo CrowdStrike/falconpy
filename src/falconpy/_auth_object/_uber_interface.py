@@ -193,6 +193,24 @@ class UberInterface(FalconInterface):
         return self.auth_headers
 
     @property
+    def token_renew_window(self) -> int:
+        """Return the current renew window from the auth_object.
+
+        DEPRECATED: This property recreates a legacy attribute.
+        Developers should update code to make use of the `renew_window` property.
+        """
+        return self.renew_window
+
+    @token_renew_window.setter
+    def token_renew_window(self, value: int):
+        """Allow the renew_window to be changed.
+
+        DEPRECATED: This property recreates a legacy attribute.
+        Developers should update code to make use of the `renew_window` property.
+        """
+        self.renew_window = value
+
+    @property
     def token(self) -> str:
         """Legacy attribute handler to return the token string.
 
