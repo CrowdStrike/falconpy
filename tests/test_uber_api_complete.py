@@ -339,11 +339,18 @@ class TestUber:
     def test_DisableSSLVerify(self):
         assert self.uberCCAWS_DisableSSLVerify() is True
 
-    def test_uber_deprecated_properties(self):
+    def test_uber_deprecated_methods(self):
         assert bool(falcon.valid_cred_format()
                     and falcon.headers()
                     and falcon.token
                     )
+
+    def test_uber_deprecated_attributes(self):
+        _success = False
+        falcon.token_renew_window = 180
+        if falcon.token_renew_window == 180:
+            _success = True
+        assert _success
 
     def test_uber_properties(self):
         # Force a new object so we can flip the debug flag
