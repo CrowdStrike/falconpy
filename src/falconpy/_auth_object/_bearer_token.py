@@ -88,8 +88,10 @@ class BearerToken:
         """Fail the token by clearing the token value and setting the expiration to zero."""
         self.expiration = 0
         self.value = None
+        self.status = 403
         if status_code:
-            self.status = 403
+            if isinstance(status_code, int):
+                self.status = status_code
         if reason:
             self.fail_reason = reason
 
