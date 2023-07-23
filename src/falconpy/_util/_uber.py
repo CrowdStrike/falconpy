@@ -132,5 +132,6 @@ def uber_request_keywords(caller,
         "container": do_cont,
         "log_util": caller.log,
         "debug_record_count": caller.debug_record_count,
-        "sanitize": caller.sanitize_log
+        "sanitize": caller.sanitize_log,
+        "pythonic": caller.pythonic
     }
