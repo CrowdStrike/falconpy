@@ -114,6 +114,10 @@ class BaseResult:
                     # use RawBody for this return for now. Due to
                     # environment constraints, this is manually tested.
                     self.raw = RawBody(body)
+                elif body.get("resources", None) is None:
+                    # No resources, this must be a raw dictionary
+                    # Probably came from the container API
+                    self.raw = RawBody(body)
                 elif isinstance(body.get("resources", []), dict):
                     # Catch unusual response payloads not explicitly handled
                     self.raw = RawBody(body)
