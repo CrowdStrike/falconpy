@@ -257,7 +257,9 @@ def calc_content_return(resp: requests.Response,
                         ) -> Union[dict, bytes]:
     """Calculate the returned content based upon the results from the call to requests."""
     returned = {}
-    returned_content_type = resp.headers.get('content-type', "Binary")
+    returned_content_type = resp.headers.get('content-type', None)
+    if not returned_content_type:
+        returned_content_type = resp.headers.get("Content-Type", "Binary")
     if log:
         log.debug("RECEIVED: Content returned in %s format", returned_content_type)
     if returned_content_type.startswith("application/json"):  # Issue 708
@@ -273,6 +275,12 @@ def calc_content_return(resp: requests.Response,
                               headers=resp.headers,
                               body=json_resp
                               ).full_return
+    elif returned_content_type.startswith("text/plain"):
+        # Assuming UTF-8 for now
+        returned = Result(resp.status_code,
+                          resp.headers,
+                          loads(resp.content.decode("utf-8"))
+                          ).full_return
     elif contain:
         returned = Result(resp.status_code, resp.headers, resp.json()).full_return
     else:
@@ -422,7 +430,9 @@ def perform_request(endpoint: str = "",
             except JSONDecodeError as json_decode_error:
                 # No response content, but a successful request was made
                 api.log_warning("WARNING: No content was received for this request.")
-                raise NoContentWarning(headers=response.headers) from json_decode_error
+                raise NoContentWarning(headers=response.headers,
+                                       code=response.status_code
+                                       ) from json_decode_error
 
             except Exception as havoc:  # pylint: disable=W0703
                 # General catch-all for anything coming          ____ ____ _ _      \\       o   o
@@ -474,6 +484,8 @@ def log_api_activity(content_return: Union[dict, bytes], content_type: str, api:
                 api.log_util.debug("RESULT: %s", sanitize_dictionary(deepcopy(content_return), api.max_debug))
             else:
                 api.log_util.debug("RESULT: %s", content_return)
+        elif content_type.startswith("text/plain"):
+            api.log_util.debug("RESULT: %s", content_return)
         else:
             api.log_util.debug("RESULT: binary response received from API")
 
