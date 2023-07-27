@@ -26,10 +26,10 @@ class TestFalconContainer:
         error_checks = True
 
         tests = {
-            "GetAssessment": falcon.get_assessment(repository="whatever", tag="whatever"),
+            "GetAssessment": falcon.get_assessment(repository="misp", tag="latest"),
             "DeleteImageDetails": falcon.delete_image_details("whatever"),
             "ImageMatchesPolicy": falcon.image_matches_policy(repository="whatever", tag="whatever", body={}),
-            "GetAssessmentUber": uber.command("GetImageAssessmentReport", repository="whatever", tag="whatever"),
+            "GetAssessmentUber": uber.command("GetImageAssessmentReport", repository="misp", tag="latest"),
             "DeleteImageDetailsUber": uber.command("DeleteImageDetails", image_id="12345678"),
             "ImageMatchesPolicyUber": uber.command("ImageMatchesPolicy", repository="whatever", tag="whatever"),
             "read_image_vulnerabilities": falcon.read_image_vulnerabilities(osversion="Windows", packages={"LayerIndex": 1}),
