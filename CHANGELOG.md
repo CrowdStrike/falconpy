@@ -1,3 +1,133 @@
+# Version 1.3.0
+> Developer Enhancements Release 🎉
+## Added features and functionality
++ Added: **Developer Extensibility features** - Enhanced existing programmatic architecture with new objects and submodules to address technical debt and provide developers with the necessary structures to easily extend core library functionality.
+  + **_APIHarness_** - Derivative and an interface class commonly referred to as the _Uber Class_, APIHarness has been refactored to inherit common functionality provided by the **_FalconInterface_** class, remove technical debt, add typing, and expand available operations and extensibility features.
+    + `api_complete.py`
+  + **_APIRequest_** - Simple interface class comprised of multiple data classes that is leveraged for managing the components of a request sent to the CrowdStrike API. This is a new object.
+    + `_api_request/__init__.py`
+    + `_api_request/_request.py`
+    + `_api_request/_request_behavior.py`
+    + `_api_request/_request_connection.py`
+    + `_api_request/_request_meta.py`
+    + `_api_request/_request_payloads.py`
+    + `_api_request/_request_validator.py`
+  + **_Constant submodule_** - Stores global constants used throughout the library. This is a new module implemented to store new and pre-existing constants.
+    + `_constant/__init__.py`
+  + **_Enum submodule_** - Stores enumerators available within the library. This is a new module implemented to store pre-existing enumerators.
+    + `_enum/__init__.py`
+    + `_enum/_base_url.py`
+    + `_enum/_container_base_url.py`
+    + `_enum/_token_fail_reason.py`
+  + **_Error submodule_** - Provides python native errors and warnings. This is a new module.
+    + `_error/__init__.py`
+    + `_error/_exceptions.py`
+    + `_error/_warnings.py`
+  + **_FalconInterface_** - Interface class that handles authentication and state management, also referred to as the authentication object or the `auth_object`. Refactored to address technical debt and add new functionality.
+    + `_auth_object/__init__.py`
+    + `_auth_object/_base_falcon_auth.py`
+    + `_auth_object/_bearer_token.py`
+    + `_auth_object/_falcon_interface.py`
+    + `_auth_object/_interface_config.py`
+    + `_auth_object/_uber_interface.py`
+  + **_Log submodule_** - Provides debug logging functionality. This is a new module.
+    + `_log/__init__.py`
+    + `_log/_facility.py`
+  + **_Result_** - Complex interface class that is leveraged to parse and return results received from the CrowdStrike API. This class has been refactored to address technical debt and provide new developer functionality and extensibility. Default behavior for requests received from the CrowdStrike API remains unchanged (results are returned as a Python dictionary). Expanded functionality provides developers the ability to handle received responses as python structures, allowing for easy iteration and processing without having to handle a dictionary.
+    + `_result/__init__.py`
+    + `_result/_base_resource.py`
+    + `_result/_base_dictionary.py`
+    + `_result/_errors.py`
+    + `_result/_expanded_result.py`
+    + `_result/_headers.py`
+    + `_result/_meta.py`
+    + `_result/_resources.py`
+    + `_result/_response_component.py`
+    + `_result/_result.py`
+  + **_ServiceClass_** - Interface class leveraged by Service Classes to provide common functionality. This class has also been refactored to expand on functionality provided by the **_FalconInterface_** class, remove technical debt, add typing and expand extensibility features.
+    + `_service_class/_init__.py`
+    + `_service_class/_base_service_class.py`
+    + `_service_class/_service_class.py`
+  + **_Util submodule_** - Functions and utilities library containing both private and public methods. This is a new module implemented to store new and pre-existing functions.
+    + `_util/__init__.py`
+    + `_util/_auth.py`
+    + `_util/_functions.py`
+    + `_util/_uber.py`
++ Added: **Debug logging** - Native debug logging can now be activated per class upon construction. Logs are sanitized by default.
+  ```python
+  import logging
+  from falconpy import Hosts
+
+  logging.basicConfig(level=logging.DEBUG)
+  hosts = Hosts(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, debug=True)
+  result = hosts.query_devices_by_filter_scroll()
+  ```
+  Log sanitization can also be disabled when instantiating the class.
+  ```python
+  hosts = Hosts(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, debug=True, sanitize_log=False)
+  ``` 
+  Local unit testing has been expanded to take advantage of this functionality. To activate, set the environment variable `FALCONPY_UNIT_TEST_DEBUG` to __`DEBUG`__.
+  + `_log/__init__.py`
+  + `_log/_facility.py`
++ Added: **Environment Authentication** - New authentication mechanism that retrieves CrowdStrike API credentials that are pre-defined as variables within the runtime environment. These environment variables must be named `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` and both must be present in order for this mechanism to be used. Environment Authentication is the last mechanism attempted, meaning all other authentication mechanisms will take precedence.
+  ```python
+  from falconpy import Hosts
+
+  hosts = Hosts()
+  result = hosts.query_devices_by_filter_scroll()
+  ```
+  + `_auth_object/_falcon_interface.py`
++ Added: **Pythonic response handling** - Allows for the handling of responses received from the CrowdStrike API as pythonic structures as opposed to dictionaries.
+  ```python
+  from falconpy import Hosts
+
+  hosts = Hosts(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, pythonic=True)
+  host_list = hosts.query_devices_by_filter_scroll()
+  for device in hosts_list:
+      print(device)
+  ```
+  + `_result/__init__.py`
+  + `_result/_base_resource.py`
+  + `_result/_base_dictionary.py`
+  + `_result/_errors.py`
+  + `_result/_expanded_result.py`
+  + `_result/_headers.py`
+  + `_result/_meta.py`
+  + `_result/_resources.py`
+  + `_result/_response_component.py`
+  + `_result/_result.py`
++ Added: **Pythonic errors and warnings** - Leverages native Python exceptions to implement error and warning handling.
+  ```python
+  from falconpy import Hosts, APIError
+
+  hosts = Hosts(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, pythonic=True)
+  try:
+      device_detail = hosts.get_device_details("not-a-real-id")
+  except APIError as not_found:
+      print(not_found)
+  ```
+  + `_error/__init__.py`
+  + `_error/_exceptions.py`
+  + `_error/_warnings.py`
++ Added: **Typing** - Type hints have been added throughout the library. This is an ongoing initiative. 
+
+## Issues resolved
++ Fixed: Unusual responses from operations within the Falcon Container service collection.
+  + `_result/_result.py`
+  + `_util/_functions.py`
++ Fixed: Uber Class functionality using operations within the OAuth2 service collection. Closes #835.
+  + `api_complete.py`
+  + `_auth_object/_falcon_interface.py`
+  + `_auth_object/_uber_interface.py`
++ Fixed: Inbound strings provided to the `creds` and `proxy` keywords are not automatically converted to dictionaries. Closes #909.
+  + `_auth_object/_falcon_interface.py`
+
+## Other
++ Expanded: Unit testing expanded to complete code coverage.
++ __PLEASE NOTE__: Python 3.6 support will be discontinued in __January 2024__.
+
+---
+
 # Version 1.2.16
 ## Added features and functionality
 + Added: New keywords were added to 1 operations within the __Alerts__ Service Class.
