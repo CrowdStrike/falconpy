@@ -188,6 +188,9 @@ class APIHarness(UberInterface):
             operation = uber_command[0][0]
             # Which HTTP method to execute
             method = uber_command[0][1].upper()
+            # Check the headers. If we've not logged in yet, this will force our base_url
+            # to point to the correct cloud region.
+            _ = self.auth_headers
             # Retrieve our base URL and alter keywords if we are performing a container operation.
             kwargs, url_base, container = handle_container_operations(kwargs, self.base_url)
             # Retrieve the endpoint from the command list and append to our base URL and
