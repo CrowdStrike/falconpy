@@ -61,35 +61,39 @@ def get_all_vulnerabilites_from_account(client_id, secret, filter, verbose=False
             print("[+] Total Records Pulled: %d" % len(rows_dict_list))
             print("[+] Elapsed Time (seconds): %d minutes %d seconds" % (elapsed_minutes, elapsed_seconds))
             
-        spotlight_results = spotlight.query_vulnerabilities_combined(filter=filter, limit=400, after=after)
+        spotlight_results = spotlight.query_vulnerabilities_combined(filter=filter,
+                                                                     limit=400,
+                                                                     after=after,
+                                                                     facet=facet
+                                                                     )
 
     return pd.json_normalize(rows_dict_list)
 
 def main():
     parser = ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
-    parser.add_argument('--client_id',
+    parser.add_argument('-k', '--client_id',
                         type=str,
                         required=True,
                         help="The Client ID of your Falcon API Key"
                         )
-    parser.add_argument('--client_secret',
+    parser.add_argument('-s', '--client_secret',
                         type=str,
                         required=True,
                         help="The Client secret of your Falcon API Key"
                         )
-    parser.add_argument('--output_file',
+    parser.add_argument('-o', '--output_file',
                         type=str,
                         required=False,
                         help="The output file for the associated vulnerabilities",
                         default="spotlight_vulnerabilities.txt"
                         )
-    parser.add_argument('--filter',
+    parser.add_argument('-f', '--filter',
                         type=str,
                         required=False,
                         help="Filter for Vulnerabilities created via FQL: https://falconpy.io/Service-Collections/Spotlight-Vulnerabilities.html",
                         default="status:!'closed'+last_seen_within:'3'+cve.exprt_rating:['CRITICAL']"
                         )
-    parser.add_argument('--verbose',
+    parser.add_argument('-v', '--verbose',
                         action="store_true",
                         required=False,
                         help="Give Verbose Information On Data Pull",
