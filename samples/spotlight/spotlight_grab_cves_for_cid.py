@@ -93,6 +93,11 @@ def main():
                         help="Filter for Vulnerabilities created via FQL: https://falconpy.io/Service-Collections/Spotlight-Vulnerabilities.html",
                         default="status:!'closed'+last_seen_within:'3'+cve.exprt_rating:['CRITICAL']"
                         )
+    parser.add_argument('-p', '--prune',
+                        help="Comma delimited list of columns to prune",
+                        required=False,
+                        default=None
+                        )
     parser.add_argument('-v', '--verbose',
                         action="store_true",
                         required=False,
@@ -100,12 +105,16 @@ def main():
                         default=False
                         )
     args = parser.parse_args()
-
     spotlight_data = get_all_vulnerabilites_from_account(args.client_id,
                                                          args.client_secret,
                                                          args.filter,
                                                          args.verbose
                                                          )
+    if args.prune:
+        # Remove any columns they asked us to prune
+        for pruned in args.prune.split(","):
+            spotlight_data.pop(pruned)
+    # Output the result to CSV
     spotlight_data.to_csv(args.output_file)
 
 if __name__ == "__main__":
