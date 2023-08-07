@@ -121,9 +121,13 @@
   + `_auth_object/_uber_interface.py`
 + Fixed: Inbound strings provided to the `creds` and `proxy` keywords are not automatically converted to dictionaries. Closes #909.
   + `_auth_object/_falcon_interface.py`
++ Fixed: Fixed missing facet keyword in follow request for vulnerabilities - Grab CVEs for CID sample. Closes #1004.
+  + `samples/spotlight/spotlight_grab_cves_for_cid.py`
 
 ## Other
 + Expanded: Unit testing expanded to complete code coverage.
++ Updated: Added column prune keyword to Grabe CVEs by CID sample. Closes #1005.
+  +  `samples/spotlight/spotlight_grab_cves_for_cid.py`
 + __PLEASE NOTE__: Python 3.6 support will be discontinued in __January 2024__.
 
 ---
