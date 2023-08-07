@@ -831,3 +831,11 @@ tou
 applicationPackages
 CompleteDashboard
 fqdn
+APIError
+init
+pythonic
+basicConfig
+ServiceClass
+FalconInterface
+UberInterface
+APIRequest
