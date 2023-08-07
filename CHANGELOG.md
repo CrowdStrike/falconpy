@@ -126,7 +126,7 @@
 
 ## Other
 + Expanded: Unit testing expanded to complete code coverage.
-+ Updated: Added column prune keyword to Grabe CVEs by CID sample. Closes #1005.
++ Updated: Added column prune keyword to Grab CVEs by CID sample. Closes #1005.
   +  `samples/spotlight/spotlight_grab_cves_for_cid.py`
 + __PLEASE NOTE__: Python 3.6 support will be discontinued in __January 2024__.
 
