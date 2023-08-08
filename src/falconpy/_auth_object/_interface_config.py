@@ -41,40 +41,26 @@ from typing import Dict, Union, Optional
 class InterfaceConfiguration:
     """This class represents the configuration of the interface."""
 
-    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-    #
-    # The base URL for this interface.
-    _base_url: str = None
-    # The proxy to use for communication with the CrowdStrike Falcon API.
-    _proxy: Optional[Dict[str, str]] = None
-    # The timeout to use for communication.
-    # Either an integer for the entire operation or a float for (connect, read).
-    _timeout: Optional[Union[int, tuple]] = None
-    # The user-agent string to use for requests to the CrowdStrike Falcon API.
-    _user_agent: Optional[str] = None
-    # SSL Verification boolean, defaults to True.
-    _ssl_verify: bool = True
-
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
     def __init__(self,
-                 base_url: str,
+                 base_url: Optional[str] = None,
                  proxy: Optional[Dict[str, str]] = None,
                  timeout: Optional[Union[int, tuple]] = None,
                  user_agent: Optional[str] = None,
                  ssl_verify: Optional[bool] = True
                  ):
         """Construct an instance of the InterfaceConfiguration class."""
-        self.base_url = base_url
-        self.proxy = proxy
-        self.timeout = timeout
-        self.user_agent = user_agent
+        self._base_url: Optional[str] = base_url
+        self._proxy: Optional[Dict[str, str]] = proxy
+        self._timeout: Optional[Union[int, tuple]] = timeout
+        self._user_agent: Optional[str] = user_agent
+
+        self._ssl_verify: bool = True
         if isinstance(ssl_verify, bool):
-            self.ssl_verify = ssl_verify
+            self._ssl_verify = ssl_verify
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__

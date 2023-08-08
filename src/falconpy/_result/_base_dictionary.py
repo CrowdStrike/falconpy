@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import ItemsView, Any, Union, Dict, List
+from typing import ItemsView, Any, Union, Dict, List, Optional
 import sys
 from ._response_component import ResponseComponent
 
@@ -50,22 +50,23 @@ class UnsupportedPythonVersion(Exception):
 
 class BaseDictionary(ResponseComponent):
     """This class represents a dictionary component of an API response."""
-
-    #  _______ _______ _______  ______ _____ ______  _     _ _______ _______ _______
-    #  |_____|    |       |    |_____/   |   |_____] |     |    |    |______ |______
-    #  |     |    |       |    |    \_ __|__ |_____] |_____|    |    |______ ______|
-    #
-    # Override the default datatype for data attribute to be a dictionary.
-    _data: Dict[str,
-                Union[str, Dict[str, Union[str, dict, list]], List[Union[str, int, dict]]]
-                ] = {}
-
     #  _______ _______ _______ _     _  _____  ______  _______
     #  |  |  | |______    |    |_____| |     | |     \ |______
     #  |  |  | |______    |    |     | |_____| |_____/ ______|
     #
     # Convert this object into an iterator by adding iteration
     # handling that leverages our underlying _data dictionary.
+    def __init__(self, data: Optional[
+                                      Dict[str,
+                                           Union[str, Dict[str, Union[str, dict, list]], List[Union[str, int, dict]]]
+                                           ]
+                                      ] = None):
+        super().__init__()
+        if data:
+            self._data = data
+        else:
+            self._data = {}
+
     def __iter__(self):
         """Iterate for the data dictionary."""
         return self._data.__iter__()

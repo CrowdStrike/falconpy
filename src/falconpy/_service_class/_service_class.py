@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, Type, Any, Optional
+from typing import Dict, Type, Optional
 from ._base_service_class import BaseServiceClass
 from .._auth_object import FalconInterface
 from .._util import log_class_startup
@@ -61,29 +61,6 @@ class ServiceClass(BaseServiceClass):
     This class is intended to be inherited by a class that represents a
     CrowdStrike API service collection.
     """
-
-    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-    #
-    # Extended headers that can be set on a Service Class and provided
-    # with every request to the CrowdStrike API. These do not override
-    # authorization headers.
-    ext_headers: Dict[str, Any] = {}
-    # Minimal payload validation is included in a few Service Classes.
-    # This defaults to True but is not heavily used as ingested keywords
-    # are reviewed by the parameter and body payload abstraction handlers.
-    # Currently retained as we may leverage the functionality to provide
-    # expanded required value validation in future versions.
-    validate_payloads: bool = True
-    # These private attributes are used to store instantiated class-specific
-    # settings for the proxy, timeout and user_agent properties. This results
-    # in our being able to use multiple Service Classes that share the same
-    # auth_object but maintain different connection handling configurations.
-    _override_proxy: Dict[str, str] = None
-    _override_timeout: int = None
-    _override_user_agent: str = None
-
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
@@ -156,9 +133,26 @@ class ServiceClass(BaseServiceClass):
                          default_auth_object_class=default_auth_object_class,
                          **kwargs
                          )
+
+        # Extended headers that can be set on a Service Class and provided
+        # with every request to the CrowdStrike API. These do not override
+        # authorization headers.
         self.ext_headers: dict = kwargs.get("ext_headers", {})
-        # Currently defaulting to validation enabled
+
+        # Minimal payload validation is included in a few Service Classes.
+        # This defaults to True but is not heavily used as ingested keywords
+        # are reviewed by the parameter and body payload abstraction handlers.
+        # Currently retained as we may leverage the functionality to provide
+        # expanded required value validation in future versions.
         self.validate_payloads: bool = kwargs.get("validate_payloads", True)
+
+        # These private attributes are used to store instantiated class-specific
+        # settings for the proxy, timeout and user_agent properties. This results
+        # in our being able to use multiple Service Classes that share the same
+        # auth_object but maintain different connection handling configurations.
+        self._override_proxy: Dict[str, str] = None
+        self._override_timeout: int = None
+        self._override_user_agent: str = None
 
         # The following properties can be overridden per Service Class.
         for item in ["proxy", "timeout", "user_agent"]:

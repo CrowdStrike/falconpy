@@ -35,42 +35,35 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Type, Dict, Optional, List
+from typing import Any, Dict, Optional, List
 
 
 class RequestValidator:
     """This class represents a request payload validator."""
-
-    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-    #
-    _validator: Optional[Dict[str, Type]] = None
-    _required: Optional[List[str]] = None
 
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
     def __init__(self,
-                 validator: Optional[Dict[str, Type]] = None,
+                 validator: Optional[Dict[str, Any]] = None,
                  required: Optional[List[str]] = None
                  ):
         """Construct an instance of RequestValidator class."""
-        self.validator = validator
-        self.required = required
+        self._validator: Optional[Dict[str, Any]] = validator
+        self._required: Optional[List[str]] = required
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
     # |    |  \ |__| |    |___ |  \  |  | |___ ___]
     #
     @property
-    def validator(self) -> Optional[Dict[str, Type]]:
+    def validator(self) -> Optional[Dict[str, Any]]:
         """Return the validator dictionary."""
         return self._validator
 
     @validator.setter
-    def validator(self, value: Optional[Dict[str, Type]]):
+    def validator(self, value: Optional[Dict[str, Any]]):
         """Set the validator dictionary."""
         self._validator = value
 
@@ -88,7 +81,7 @@ class RequestValidator:
 # This code will be updated to the following once Python 3.6 support is dropped.
 #
 # from dataclasses import dataclass
-# from typing import Type, Dict, Optional, List
+# from typing import Any, Dict, Optional, List
 
 
 # @dataclass
@@ -99,5 +92,5 @@ class RequestValidator:
 #     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
 #     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
 #     #
-#     validator: Optional[Dict[str, Type]] = None
+#     validator: Optional[Dict[str, Any]] = None
 #     required: Optional[List[str]] = None
