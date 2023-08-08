@@ -61,6 +61,7 @@ class ServiceClass(BaseServiceClass):
     This class is intended to be inherited by a class that represents a
     CrowdStrike API service collection.
     """
+
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
