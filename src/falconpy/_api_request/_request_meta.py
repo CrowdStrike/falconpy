@@ -41,15 +41,6 @@ from typing import Dict, Union, Optional
 class RequestMeta:
     """This class contains the relevant metadata for the API request being performed."""
 
-    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-    #
-    _method: str = "GET"
-    _endpoint: Optional[str] = None
-    # These are set during the processing of the request
-    _debug_headers: Optional[Dict[str, Optional[Union[str, int, float]]]] = {}
-
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
@@ -60,9 +51,12 @@ class RequestMeta:
                  debug_headers: Optional[Dict[str, Optional[Union[str, int, float]]]] = None
                  ):
         """Construct an instance of RequestMeta class."""
-        self.endpoint = endpoint
-        self.method = method
-        self.debug_headers = debug_headers
+        self._endpoint: Optional[str] = endpoint
+        self._method: str = method
+
+        self._debug_headers: Optional[Dict[str, Optional[Union[str, int, float]]]] = debug_headers
+        if debug_headers is None:
+            self._debug_headers = {}
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__

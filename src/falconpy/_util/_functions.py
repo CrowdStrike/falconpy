@@ -43,7 +43,7 @@ try:
     from simplejson import JSONDecodeError
 except ImportError:
     from json.decoder import JSONDecodeError
-from typing import Dict, Any, Union, Optional, List, Type
+from typing import Dict, Any, Union, Optional, List
 from copy import deepcopy
 from logging import Logger
 import requests
@@ -74,7 +74,7 @@ from .._result import Result
 urllib3.disable_warnings(InsecureRequestWarning)
 
 
-def validate_payload(validator: Dict[str, Type],
+def validate_payload(validator: Dict[str, Any],
                      payload: Dict[str, Union[str, int, dict, list, bytes]],
                      required: Optional[List[str]] = None
                      ) -> bool:

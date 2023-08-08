@@ -41,15 +41,6 @@ from typing import Union, Optional
 class ResponseComponent:
     """Base class for all response object derivatives."""
 
-    #  _______ _______ _______  ______ _____ ______  _     _ _______ _______ _______
-    #  |_____|    |       |    |_____/   |   |_____] |     |    |    |______ |______
-    #  |     |    |       |    |    \_ __|__ |_____] |_____|    |    |______ ______|
-    #
-    # All response components maintain an underlying data attribute.
-    # Due to the dynamic types of responses received from the API,
-    # this base element is defined as generically as possible.
-    _data: Optional[Union[dict, bytes, list, str, int, float]] = None
-
     #  _______  _____  __   _ _______ _______  ______ _     _ _______ _______  _____   ______
     #  |       |     | | \  | |______    |    |_____/ |     | |          |    |     | |_____/
     #  |_____  |_____| |  \_| ______|    |    |    \_ |_____| |_____     |    |_____| |    \_
@@ -57,6 +48,10 @@ class ResponseComponent:
     # Sets the data attribute upon creation.
     def __init__(self, data: Optional[Union[dict, bytes, list, str]] = None):
         """Construct an instance of the class and set the private data attribute."""
+        # All response components maintain an underlying data attribute.
+        # Due to the dynamic types of responses received from the API,
+        # this base element is defined as generically as possible.
+        self._data: Optional[Union[dict, bytes, list, str, int, float]] = None
         if isinstance(data, (dict, bytes, list, str, int, float)):
             self._data = data
 

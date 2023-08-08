@@ -42,24 +42,6 @@ from .._constant import MIN_TOKEN_RENEW_WINDOW, MAX_TOKEN_RENEW_WINDOW
 
 class BearerToken:
     """This class represents a bearer token received from the API."""
-
-    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-    #
-    # Integer specifying the amount of time remaining before the token expires (in seconds).
-    _expiration: int = 0
-    # Float indicating the moment in time that the token was generated (timestamp).
-    _token_time: float = 0
-    # String containing the error message received from the API when token generation failed.
-    _fail_reason: Optional[str] = None
-    # Integer representing the HTTP status code received when generating the token.
-    _status: Optional[int] = None
-    # String representation of the token.
-    _value: Optional[str] = None
-    # Number of seconds between token expiration and now before a token is considered stale.
-    _renew_window: int = 120
-
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
@@ -67,18 +49,31 @@ class BearerToken:
     # Tokens can be instantiated without a value (e.g. invalid or expired).
     def __init__(self,
                  token_value: Optional[str] = None,
-                 expiration: Optional[int] = None,
+                 expiration: Optional[int] = 0,
                  status: Optional[int] = None
                  ):
         """Create an instance of the BearerToken class."""
-        # if token_value:
         self._value = token_value
+
+        # String containing the error message received from the API when token generation failed.
+        self._fail_reason: Optional[str] = None
+        # Number of seconds between token expiration and now before a token is considered stale.
+        self._renew_window: int = 120
+
+        # Integer specifying the amount of time remaining before the token expires (in seconds).
+        self._expiration: int = 0
         if isinstance(expiration, int):
             self._expiration = expiration
-        if token_value:
-            self._token_time = time.time()
+
+        # Integer representing the HTTP status code received when generating the token.
+        self._status: Optional[int] = None
         if isinstance(status, int):
             self._status = status
+
+        # Float indicating the moment in time that the token was generated (timestamp).
+        self._token_time: float = 0
+        if token_value:
+            self._token_time = time.time()
 
     # _  _ ____ ___ _  _ ____ ___  ____
     # |\/| |___  |  |__| |  | |  \ [__

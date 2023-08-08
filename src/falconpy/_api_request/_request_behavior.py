@@ -35,48 +35,48 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Optional, Dict, List, Type
+from typing import Optional, Any, Dict, List
 from ._request_validator import RequestValidator
 
 
 class RequestBehavior:
     """This class represents specified behaviors for an API request."""
 
-    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-    #
-    _expand_result: bool = False
-    _container: bool = False
-    _authenticating: bool = False
-    _perform: bool = True
-    _validator = RequestValidator()
-
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
     #
     def __init__(self,
-                 expand_result: Optional[bool] = None,
-                 container: Optional[bool] = None,
-                 authenticating: Optional[bool] = None,
-                 perform: Optional[bool] = None,
-                 body_validator: Optional[Dict[str, Type]] = None,
+                 expand_result: Optional[bool] = False,
+                 container: Optional[bool] = False,
+                 authenticating: Optional[bool] = False,
+                 perform: Optional[bool] = True,
+                 body_validator: Optional[Dict[str, Any]] = None,
                  body_required: Optional[List[str]] = None
                  ):
         """Construct an instance of RequestBehavior class."""
+        self._expand_result = False
         if isinstance(expand_result, bool):
-            self.expand_result = expand_result
+            self._expand_result = expand_result
+
+        self._container = False
         if isinstance(container, bool):
-            self.container = container
+            self._container = container
+
+        self._authenticating = False
         if isinstance(authenticating, bool):
-            self.authenticating = authenticating
+            self._authenticating = authenticating
+
+        self._perform = True
         if isinstance(perform, bool):
-            self.perform = perform
+            self._perform = perform
+
         if isinstance(body_validator, dict) or isinstance(body_required, list):
-            self.validator = RequestValidator(validator=body_validator,
-                                              required=body_required
-                                              )
+            self._validator = RequestValidator(validator=body_validator,
+                                               required=body_required
+                                               )
+        else:
+            self._validator = RequestValidator()
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
@@ -133,7 +133,7 @@ class RequestBehavior:
         self._validator = value
 
     @property
-    def body_validator(self) -> Optional[Dict[str, Type]]:
+    def body_validator(self) -> Optional[Dict[str, Any]]:
         """Reflection into the validator object for the body payload validator."""
         return self.validator.validator
 

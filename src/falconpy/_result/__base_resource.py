@@ -41,21 +41,16 @@ from ._response_component import ResponseComponent
 
 class BaseResource(ResponseComponent):
     """The base class for different resource types we can have within an API response."""
-
-    #  _______ _______ _______  ______ _____ ______  _     _ _______ _______ _______
-    #  |_____|    |       |    |_____/   |   |_____] |     |    |    |______ |______
-    #  |     |    |       |    |    \_ __|__ |_____] |_____|    |    |______ ______|
-    #
-    # Override the _data attribute from ResponseComponent to always be a list.
-    _data: List[Optional[Union[str, int, float, dict]]] = []
-    _pos: int = 0
-
     #  _______  _____  __   _ _______ _______  ______ _     _ _______ _______  _____   ______
     #  |       |     | | \  | |______    |    |_____/ |     | |          |    |     | |_____/
     #  |_____  |_____| |  \_| ______|    |    |    \_ |_____| |_____     |    |_____| |    \_
     #
     def __init__(self, data: Optional[List[Union[str, int, float, dict]]] = None):
         """Construct an instance of the class."""
+        # Override the _data attribute from ResponseComponent to always be a list.
+        self._data: Optional[List[Union[str, int, float, dict]]] = []
+        self._pos: int = 0
+
         if isinstance(data, list):
             super().__init__(data=data)
 
