@@ -67,6 +67,7 @@ from .._error import InvalidCredentials, NoAuthenticationMechanism, InvalidCrede
 # pylint: disable=R0902
 class FalconInterface(BaseFalconAuth):
     """Standard Falcon API interface used by Service Classes."""
+
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
@@ -93,7 +94,7 @@ class FalconInterface(BaseFalconAuth):
                  ) -> "FalconInterface":
         """Construct an instance of the FalconInterface class."""
         # Set the pythonic behavior mode.
-        self.pythonic: bool = False
+        self._pythonic: bool = False
         if isinstance(pythonic, bool):
             self._pythonic = pythonic
 
@@ -104,14 +105,14 @@ class FalconInterface(BaseFalconAuth):
         self._token: BearerToken = BearerToken()
 
         # Setup our configuration object using the provided keywords.
-        self.config: InterfaceConfiguration = InterfaceConfiguration(base_url=base_url,
-                                                                     proxy=proxy,
-                                                                     timeout=timeout,
-                                                                     user_agent=user_agent,
-                                                                     ssl_verify=ssl_verify
-                                                                     )            # \ o /
-        # ____ _  _ ___ _  _ ____ _  _ ___ _ ____ ____ ___ _ ____ _  _                |
-        # |__| |  |  |  |__| |___ |\ |  |  | |    |__|  |  | |  | |\ |               / \
+        self._config: InterfaceConfiguration = InterfaceConfiguration(base_url=base_url,
+                                                                      proxy=proxy,
+                                                                      timeout=timeout,
+                                                                      user_agent=user_agent,
+                                                                      ssl_verify=ssl_verify
+                                                                      )            # \ o /
+        # ____ _  _ ___ _  _ ____ _  _ ___ _ ____ ____ ___ _ ____ _  _                 |
+        # |__| |  |  |  |__| |___ |\ |  |  | |    |__|  |  | |  | |\ |                / \
         # |  | |__|  |  |  | |___ | \|  |  | |___ |  |  |  | |__| | \|
         # Direct Authentication
         if client_id and client_secret and not creds:
@@ -129,11 +130,11 @@ class FalconInterface(BaseFalconAuth):
         if isinstance(creds, str):
             try:
                 # Try and clean up any attempts to provide the dictionary as a string
-                self.creds: Dict[str, str] = loads(creds.replace("'", "\""))
+                self._creds: Dict[str, str] = loads(creds.replace("'", "\""))
             except (TypeError, JSONDecodeError) as bad_cred_format:
                 raise InvalidCredentialFormat from bad_cred_format
         elif isinstance(creds, dict):
-            self.creds: Dict[str, str] = creds
+            self._creds: Dict[str, str] = creds
         else:
             raise InvalidCredentialFormat
 
@@ -150,13 +151,15 @@ class FalconInterface(BaseFalconAuth):
         # Environment Authentication
         # When credentials are not provided, attempt to retrieve them from the environment.
         if not self.cred_format_valid and not self.token_value:
+            # Both variables must be present within the running environment.
             if os.getenv("FALCON_CLIENT_ID") and os.getenv("FALCON_CLIENT_SECRET"):
                 api_id = os.getenv("FALCON_CLIENT_ID") if "client_id" not in self.creds else self.creds["client_id"]
                 if "client_secret" not in self.creds:
                     api_sec = os.getenv("FALCON_CLIENT_SECRET")
                 else:
                     api_sec = self.creds["client_secret"]
-                self.creds = {
+                # Environment Authentication will not override values that preexist in the creds dictionary.
+                self._creds = {
                     "client_id": api_id,
                     "client_secret": api_sec
                 }
