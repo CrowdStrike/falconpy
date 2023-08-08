@@ -40,7 +40,7 @@ from abc import ABC, abstractmethod
 from logging import Logger, getLogger
 from typing import Dict, Type, Union, Optional
 from .._constant import MAX_DEBUG_RECORDS
-from .._auth_object import FalconInterface
+from .._auth_object import FalconInterface, UberInterface
 from .._error import FunctionalityNotImplemented
 
 
@@ -53,7 +53,7 @@ class BaseServiceClass(ABC):
     #
     def __init__(self: "BaseServiceClass",
                  auth_object: Optional[FalconInterface] = None,
-                 default_auth_object_class: Optional[Type[FalconInterface]] = FalconInterface,
+                 default_auth_object_class: Optional[Union[Type[FalconInterface], Type[UberInterface]]] = FalconInterface,
                  **kwargs
                  ):
         """Construct an instance of the base class."""
@@ -65,14 +65,14 @@ class BaseServiceClass(ABC):
         # An auth_object is treated as an atomic collection.
         if auth_object:
             if issubclass(type(auth_object), FalconInterface):
-                self.auth_object: FalconInterface = auth_object
+                self.auth_object: Union[FalconInterface, UberInterface] = auth_object
             else:
                 # Easy Object Authentication
                 # Look for an auth_object as an attribute to the object they
                 # provided. This attribute must be a FalconInterface derivative.
                 if hasattr(auth_object, "auth_object"):
                     if issubclass(type(auth_object.auth_object), FalconInterface):
-                        self.auth_object: FalconInterface = auth_object.auth_object
+                        self.auth_object: Union[FalconInterface, UberInterface] = auth_object.auth_object
         else:
             # Get all constructor arguments for the default authentication class.
             auth_kwargs = {
@@ -81,7 +81,7 @@ class BaseServiceClass(ABC):
                 if param in kwargs
             }
             # Create an instance of the default auth_object using the provided keywords.
-            self.auth_object: FalconInterface = default_auth_object_class(**auth_kwargs)
+            self.auth_object: Union[FalconInterface, UberInterface] = default_auth_object_class(**auth_kwargs)
 
         # Service Classes can enable logging individually, allowing developers to
         # debug API activity for only that service collection within their code.
