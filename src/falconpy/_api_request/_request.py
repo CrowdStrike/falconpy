@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Union, Dict, Optional, List, Type, Any
+from typing import Union, Dict, Optional, List, Any
 from logging import Logger
 from ._request_behavior import RequestBehavior
 from ._request_connection import RequestConnection
@@ -46,16 +46,6 @@ from .._log import LogFacility
 
 class APIRequest:
     """This class represents a request made to the CrowdStrike API."""
-
-    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-    #
-    _meta: RequestMeta = RequestMeta()
-    _payloads: RequestPayloads = RequestPayloads()
-    _connection: RequestConnection = RequestConnection()
-    _behavior = RequestBehavior()
-    _request_log: Optional[LogFacility] = None
 
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
@@ -94,6 +84,13 @@ class APIRequest:
                                             debug_record_count=initializer.get("debug_record_count", None),
                                             sanitize_log=initializer.get("sanitize", None)
                                             )
+
+        else:
+            self._meta = RequestMeta()
+            self._payloads = RequestPayloads()
+            self._connection = RequestConnection()
+            self._behavior = RequestBehavior()
+            self._request_log: Optional[LogFacility] = None
 
     # _  _ ____ ___ _  _ ____ ___  ____
     # |\/| |___  |  |__| |  | |  \ [__
@@ -212,7 +209,7 @@ class APIRequest:
         self.behavior.perform = value
 
     @property
-    def body_validator(self) -> Optional[Dict[str, Type]]:
+    def body_validator(self) -> Optional[Dict[str, Any]]:
         """Return the body payload validator from the behavior object."""
         return self.behavior.body_validator
 

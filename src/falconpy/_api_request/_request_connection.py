@@ -41,15 +41,6 @@ from typing import Optional, Dict, Union
 class RequestConnection:
     """This class represents connection details related to an API request."""
 
-    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-    #
-    _user_agent: Optional[str] = None
-    _verify: bool = True
-    _timeout: Optional[Union[int, tuple]] = None
-    _proxy: Optional[Dict[str, str]] = None
-
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
@@ -58,12 +49,14 @@ class RequestConnection:
                  user_agent: Optional[str] = None,
                  proxy: Optional[Dict[str, str]] = None,
                  timeout: Optional[Union[int, tuple]] = None,
-                 verify: Optional[bool] = None
+                 verify: Optional[bool] = True
                  ):
         """Construct an instance of RequestConnection class."""
-        self.user_agent: Optional[str] = user_agent
-        self.proxy: Optional[Dict[str, str]] = proxy
-        self.timeout: Optional[Union[int, tuple]] = timeout
+        self._user_agent: Optional[str] = user_agent
+        self._proxy: Optional[Dict[str, str]] = proxy
+        self._timeout: Optional[Union[int, tuple]] = timeout
+
+        self._verify = True
         if isinstance(verify, bool):
             self.verify: bool = verify
 
