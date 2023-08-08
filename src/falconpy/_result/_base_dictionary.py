@@ -50,17 +50,17 @@ class UnsupportedPythonVersion(Exception):
 
 class BaseDictionary(ResponseComponent):
     """This class represents a dictionary component of an API response."""
+
     #  _______ _______ _______ _     _  _____  ______  _______
     #  |  |  | |______    |    |_____| |     | |     \ |______
     #  |  |  | |______    |    |     | |_____| |_____/ ______|
     #
     # Convert this object into an iterator by adding iteration
     # handling that leverages our underlying _data dictionary.
-    def __init__(self, data: Optional[
-                                      Dict[str,
-                                           Union[str, Dict[str, Union[str, dict, list]], List[Union[str, int, dict]]]
-                                           ]
-                                      ] = None):
+    def __init__(self,
+                 data: Optional[Dict[str, Union[str, Dict[str, Union[str, dict, list]], List[Union[str, int, dict]]]]] = None
+                 ):
+        """Construct an instance of the BaseDictionary."""
         super().__init__()
         if data:
             self._data = data

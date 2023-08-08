@@ -46,6 +46,7 @@ from .._error import FunctionalityNotImplemented
 
 class BaseServiceClass(ABC):
     """Base class for all Service Classes."""
+
     #  _______  _____  __   _ _______ _______  ______ _     _ _______ _______  _____   ______
     #  |       |     | | \  | |______    |    |_____/ |     | |          |    |     | |_____/
     #  |_____  |_____| |  \_| ______|    |    |    \_ |_____| |_____     |    |_____| |    \_
