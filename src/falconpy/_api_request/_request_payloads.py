@@ -41,15 +41,6 @@ from typing import Optional, Dict, List, Union
 class RequestPayloads:
     """This class contains all of the payloads sent as part of the API request."""
 
-    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-    #
-    _params: Optional[Dict[str, Optional[Union[str, int, float, list, dict]]]] = None
-    _body: Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]] = None
-    _data: Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]] = None
-    _files: Optional[List[tuple]] = None
-
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
@@ -61,10 +52,10 @@ class RequestPayloads:
                  files: Optional[List[tuple]] = None
                  ):
         """Construct an instance of RequestPayloads class."""
-        self.params = params
-        self.body = body
-        self.data = data
-        self.files = files
+        self._params = params
+        self._body = body
+        self._data = data
+        self._files = files
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__

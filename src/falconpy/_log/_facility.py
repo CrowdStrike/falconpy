@@ -43,26 +43,21 @@ from .._constant import MAX_DEBUG_RECORDS
 class LogFacility:
     """This class encapsulates the log facility and additional configuration."""
 
-    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-    #
-    _log: Optional[Logger] = None
-    # Maximum number of debug records to log in debug logs.
-    _debug_record_count: int = MAX_DEBUG_RECORDS
-    # Flag representing if debug logs should be sanitized.
-    _sanitize: bool = True
-
     def __init__(self,
                  log: Optional[Logger] = None,
                  debug_record_count: Optional[int] = None,
                  sanitize_log: Optional[bool] = None
                  ):
         """Construct an instance of the LogFacility class."""
+        self._log: Optional[Logger] = None
         if isinstance(log, Logger):
             self._log = log
+
+        self._debug_record_count: int = MAX_DEBUG_RECORDS
         if isinstance(debug_record_count, (int, str)):
             self._debug_record_count = int(debug_record_count)
+
+        self._sanitize: bool = True
         if isinstance(sanitize_log, bool):
             self._sanitize = sanitize_log
 

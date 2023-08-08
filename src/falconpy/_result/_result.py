@@ -46,31 +46,27 @@ from ._resources import Resources, BinaryFile, RawBody
 class BaseResult:
     """Base class for all result objects."""
 
-    # _______ _______ _______  ______ _____ ______  _     _ _______ _______ _______
-    # |_____|    |       |    |_____/   |   |_____] |     |    |    |______ |______
-    # |     |    |       |    |    \_ __|__ |_____] |_____|    |    |______ ______|
-    # The attributes contain response data by category.
-    status_code: int = 0
-    headers: Headers = Headers()
-    meta: Meta = Meta()
-    resources: Resources = Resources([])
-    errors: Errors = Errors()
-    raw: RawBody = RawBody()
-
-    # Privates used for iteration
-    _pos: int = 0
-    _reversed: bool = False
-
     # _______ _______ _______ _     _  _____  ______  _______
     # |  |  | |______    |    |_____| |     | |     \ |______
     # |  |  | |______    |    |     | |_____| |_____/ ______|
     #
     def __init__(self,
-                 status_code: Optional[int] = None,
+                 status_code: Optional[int] = 0,
                  headers: Optional[Dict[str, Union[str, int, float]]] = None,
                  body: Optional[Dict[str, Union[str, dict, list, int, float, bytes]]] = None
                  ):
         """Construct an instance of the class."""
+        self._pos: int = 0
+        # self._reversed: bool = False
+
+        # Configure defaults
+        self.status_code = status_code  # Will default to 0
+        self.headers = Headers()
+        self.meta = Meta()
+        self.resources = Resources([])
+        self.errors = Errors()
+        self.raw = RawBody()
+
         if status_code and headers and body:
             self.status_code = status_code
             _headers = headers

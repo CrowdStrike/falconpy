@@ -67,28 +67,6 @@ from .._error import InvalidCredentials, NoAuthenticationMechanism, InvalidCrede
 # pylint: disable=R0902
 class FalconInterface(BaseFalconAuth):
     """Standard Falcon API interface used by Service Classes."""
-
-    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-    #
-    # These attributes are present in all FalconInterface objects, regardless if we are referring
-    # to APIHarness, OAuth2 or custom inheriting classes.
-    #
-    # The default credential dictionary, where the client_id and client_secret are stored.
-    _creds: Dict[str, str] = {}
-    # Starting with v1.3.0 minimal python native logging is available. In order to reduce
-    # potential impacts to developer configurations, this facility is extremely limited
-    # and not implemented by default. (Meaning logs are not generated.)
-    # To enable logging, pass the keyword "debug" with a value of True to the constructor.
-    _log: LogFacility = LogFacility()
-    # Our token is stored within a BearerToken object.
-    _token: BearerToken = BearerToken()
-    # Configuration detail for this interface.
-    _config: InterfaceConfiguration = None
-    # Pythonic behavior.
-    _pythonic: bool = False
-
     # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
     # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
     # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
@@ -111,12 +89,20 @@ class FalconInterface(BaseFalconAuth):
                  debug: Optional[bool] = False,
                  debug_record_count: Optional[int] = None,
                  sanitize_log: Optional[bool] = None,
-                 pythonic: Optional[bool] = None
+                 pythonic: Optional[bool] = False
                  ) -> "FalconInterface":
         """Construct an instance of the FalconInterface class."""
         # Set the pythonic behavior mode.
+        self.pythonic: bool = False
         if isinstance(pythonic, bool):
             self._pythonic = pythonic
+
+        # The default credential dictionary, where the client_id and client_secret are stored.
+        self._creds = {}
+
+        # Set up an empty Bearer Token container
+        self._token: BearerToken = BearerToken()
+
         # Setup our configuration object using the provided keywords.
         self.config: InterfaceConfiguration = InterfaceConfiguration(base_url=base_url,
                                                                      proxy=proxy,
@@ -150,14 +136,16 @@ class FalconInterface(BaseFalconAuth):
             self.creds: Dict[str, str] = creds
         else:
             raise InvalidCredentialFormat
+
+        # Legacy (Token) Authentication (fallback)
+        if access_token:
+            # Store this non-refreshable token, assuming it was just generated.
+            self._token: BearerToken = BearerToken(access_token, 1799, 201)
+
         # Set the token renewal window, ignored when using Legacy Authentication.
         self.renew_window: int = max(min(renew_window, MAX_TOKEN_RENEW_WINDOW),
                                      MIN_TOKEN_RENEW_WINDOW
                                      )
-        # Legacy (Token) Authentication (fallback)
-        if access_token:
-            # Store this non-refreshable token, assuming it was just generated.
-            self._token: BearerToken = BearerToken(access_token, 1799)
 
         # Environment Authentication
         # When credentials are not provided, attempt to retrieve them from the environment.
@@ -174,6 +162,10 @@ class FalconInterface(BaseFalconAuth):
                 }
 
         # Log the creation of this object if debugging is enabled.
+        # Starting with v1.3.0 minimal Python native logging is available. In order to reduce
+        # potential impacts to developer configurations, this facility is extremely limited
+        # and not implemented by default. (Meaning logs are not generated.)
+        # To enable logging, pass the keyword "debug" with a value of True to the constructor.
         if debug:
             # Ignored when debugging is disabled.
             _debug_record_count: int = debug_record_count if debug_record_count else None
@@ -186,6 +178,9 @@ class FalconInterface(BaseFalconAuth):
                                                  )
             # Log the startup of this class.
             log_class_startup(self, self.log)
+        else:
+            # Set up an empty log facility
+            self._log: LogFacility = LogFacility()
 
         try:
             if not self.cred_format_valid and not self.token_value:

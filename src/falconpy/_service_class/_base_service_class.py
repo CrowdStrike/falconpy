@@ -46,35 +46,6 @@ from .._error import FunctionalityNotImplemented
 
 class BaseServiceClass(ABC):
     """Base class for all Service Classes."""
-
-    #  _______ _______ _______  ______ _____ ______  _     _ _______ _______ _______
-    #  |_____|    |       |    |_____/   |   |_____] |     |    |    |______ |______
-    #  |     |    |       |    |    \_ __|__ |_____] |_____|    |    |______ ______|
-    #
-    # These attributes are available within all derivatives of a Service Class.
-    #
-    # Service Classes can enable logging individually, allowing developers to
-    # debug API activity for only that service collection within their code.
-    _log: Optional[Union[Logger, bool]] = None
-    # Service Classes can also configure a custom debug_record_count property, this
-    # allows developers to individually set maximum records logged per Service Class.
-    _debug_record_count: Optional[int] = None
-    # Should logs be sanitized - redacts client_id, client_secret, member_cid, and tokens.
-    # Performance impacts when enabled, but defaults to true to prevent unintentional
-    # sensitive data disclosure. Can be disabled with the sanitize_log keyword.
-    _sanitize: bool = None
-    _pythonic: bool = None
-    # ____ _  _ ___ _  _    ____ ___   _ ____ ____ ___
-    # |__| |  |  |  |__|    |  | |__]  | |___ |     |
-    # |  | |__|  |  |  |    |__| |__] _| |___ |___  |
-    #
-    # All Service Classes excluding OAuth2 contain a FalconInterface derivative
-    # as an attribute (auth_object). This object can be shared between
-    # instances of Service Classes, and is leveraged for all authentication
-    # processing. Unlike the OAuth2 and Uber Class, regular Service Classes
-    # do not maintain authentication detail outside of the auth_object.
-    auth_object: FalconInterface = None
-
     #  _______  _____  __   _ _______ _______  ______ _     _ _______ _______  _____   ______
     #  |       |     | | \  | |______    |    |_____/ |     | |          |    |     | |_____/
     #  |_____  |_____| |  \_| ______|    |    |    \_ |_____| |_____     |    |_____| |    \_
@@ -85,17 +56,22 @@ class BaseServiceClass(ABC):
                  **kwargs
                  ):
         """Construct an instance of the base class."""
+        # All Service Classes excluding OAuth2 contain a FalconInterface derivative
+        # as an attribute (auth_object). This object can be shared between
+        # instances of Service Classes, and is leveraged for all authentication
+        # processing. Unlike the OAuth2 and Uber Class, regular Service Classes
+        # do not maintain authentication detail outside of the auth_object.
         # An auth_object is treated as an atomic collection.
         if auth_object:
             if issubclass(type(auth_object), FalconInterface):
-                self.auth_object = auth_object
+                self.auth_object: FalconInterface = auth_object
             else:
                 # Easy Object Authentication
                 # Look for an auth_object as an attribute to the object they
                 # provided. This attribute must be a FalconInterface derivative.
                 if hasattr(auth_object, "auth_object"):
                     if issubclass(type(auth_object.auth_object), FalconInterface):
-                        self.auth_object = auth_object.auth_object
+                        self.auth_object: FalconInterface = auth_object.auth_object
         else:
             # Get all constructor arguments for the default authentication class.
             auth_kwargs = {
@@ -104,8 +80,11 @@ class BaseServiceClass(ABC):
                 if param in kwargs
             }
             # Create an instance of the default auth_object using the provided keywords.
-            self.auth_object = default_auth_object_class(**auth_kwargs)
+            self.auth_object: FalconInterface = default_auth_object_class(**auth_kwargs)
 
+        # Service Classes can enable logging individually, allowing developers to
+        # debug API activity for only that service collection within their code.
+        self._log: Optional[Union[Logger, bool]] = None
         if kwargs.get("debug", False):
             # Allow a Service Class to enable logging individually.
             self._log: Logger = getLogger(__name__)
@@ -113,12 +92,21 @@ class BaseServiceClass(ABC):
             # Allow a Service Class to disable logging individually.
             self._log: bool = False
         # Allow a Service Class to customize the number of debug records logged.
+        # This allows developers to individually set maximum records logged per Service Class.
+        self._debug_record_count: Optional[int] = None
         if kwargs.get("debug_record_count", None):
             self._debug_record_count = kwargs.get("debug_record_count", MAX_DEBUG_RECORDS)
+
+        # Should logs be sanitized - redacts client_id, client_secret, member_cid, and tokens.
+        # Performance impacts when enabled, but defaults to true to prevent unintentional
+        # sensitive data disclosure. Can be disabled with the sanitize_log keyword.
         # Set the sanitization flag if they provided it
         _sanitize_log = kwargs.get("sanitize_log", None)
         if isinstance(_sanitize_log, bool):
-            self._sanitize = _sanitize_log
+            self._sanitize: Optional[bool] = _sanitize_log
+        else:
+            self._sanitize: Optional[bool] = None
+
         self._pythonic = kwargs.get("pythonic", None)
 
     #  _______ _______ _______ _     _  _____  ______  _______
