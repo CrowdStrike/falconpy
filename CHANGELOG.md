@@ -83,7 +83,7 @@
 
   hosts = Hosts(client_id=CLIENT_ID, client_secret=CLIENT_SECRET, pythonic=True)
   host_list = hosts.query_devices_by_filter_scroll()
-  for device in hosts_list:
+  for device in host_list:
       print(device)
   ```
   + `_result/__init__.py`
@@ -123,6 +123,9 @@
   + `_auth_object/_falcon_interface.py`
 + Fixed: Fixed missing facet keyword in follow request for vulnerabilities - Grab CVEs for CID sample. Closes #1004.
   + `samples/spotlight/spotlight_grab_cves_for_cid.py`
++ Fixed: IDs are not being migrated to the body payload when calling the `PostEntitiesAlertsV1` operation. Closes #1016.
+  + `_constant/__init__.py`
+  + Thanks to @tsullivan06 for identifying this issue! 🙇 
 
 ## Other
 + Expanded: Unit testing expanded to complete code coverage.
