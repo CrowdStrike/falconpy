@@ -33,8 +33,6 @@ The CrowdStrike Falcon SDK for Python completely abstracts token management, whi
 #### Supported versions of Python
 The CrowdStrike Falcon SDK for Python was developed for Python 3, and does not support versions of Python below 3.6. Every commit to the FalconPy code base is unit tested for functionality using all versions of Python the library currently supports.
 
-> While Python 3.5 should not have problems running FalconPy, as of February 2021 this version is no longer analyzed as part of our unit testing.
-
 [![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy)](https://pypi.org/project/crowdstrike-falconpy/#files)
 [![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy)](https://pypi.org/project/crowdstrike-falconpy/#files)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/crowdstrike-falconpy?label=supported%20versions)](https://github.com/CrowdStrike/falconpy/actions/workflows/unit_testing_ubuntu.yml)
@@ -91,6 +89,7 @@ For each CrowdStrike Falcon API service collection, a matching Service Class is 
 | Firewall Management | [firewall_management.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_management.py) | [FirewallManagement](https://www.falconpy.io/Service-Collections/Firewall-Management.html) |
 | Firewall Policy Management | [firewall_policies.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/firewall_policies.py) | [FirewallPolicies](https://www.falconpy.io/Service-Collections/Firewall-Policies.html) |
 | Falcon Complete Dashboard | [falcon_complete_dashboard.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/falcon_complete_dashboard.py) | [FalconCompleteDashboard](https://www.falconpy.io/Service-Collections/Falcon-Complete-Dashboard.html) |
+| Falcon Data Replicator | [fdr.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/fdr.py) | [FDR](https://www.falconpy.io/Service-Collections/FDR.html) |
 | Falcon Flight Control | [mssp.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/mssp.py) | [FlightControl](https://www.falconpy.io/Service-Collections/MSSP.html) |
 | Host Groups | [host_group.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/host_group.py) | [HostGroup](https://www.falconpy.io/Service-Collections/Host-Group.html) |
 | Hosts | [hosts.py](https://github.com/CrowdStrike/falconpy/blob/main/src/falconpy/hosts.py) | [Hosts](https://www.falconpy.io/Service-Collections/Hosts.html) |
