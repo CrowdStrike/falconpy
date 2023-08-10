@@ -719,6 +719,8 @@ class TestResults:
         test_object: Result = Result(status_code=200, headers={"someheader": "somevalue"}, body={"batch_id": "123456"})
         assert bool(test_object.full_return.get("body", {}).get("batch_id")=="123456")
 
+    @not_supported
+    @pytest.mark.skipif("us-2" in config.base_url, reason="This unit test is not supported in US-2.")
     def test_unusual_response_formatting(self):
         _returned = False
         cspm = CSPMRegistration(auth_object=config)
