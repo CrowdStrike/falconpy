@@ -12,6 +12,7 @@ r"""ProxyTool - Update Falcon Sensor proxy configurations remotely.
 
  CHANGE LOG
 
+ 14/08/2023   v3.5    Changes to scope handling
  28/02/2023   v3.4    Add ability to disable/delete proxy config
  27/10/2022   v3.3    Use command line arguments instead of external file for config
  26/10/2022   v3.2    Add support for Host Group or CID selection
@@ -33,7 +34,8 @@ try:
         Hosts,
         OAuth2,
         RealTimeResponse,
-        HostGroup
+        HostGroup,
+        SensorDownload
     )
 except ImportError as err:
     log(err)
@@ -98,6 +100,8 @@ if args.scope.lower() not in ["cid", "hostgroup"]:
     raise SystemExit("The scope needs to be 'cid' or 'hostgroup'")
 
 
+
+
 # Main routine
 def main():  # pylint: disable=R0912,R0915,C0116
     log("Starting execution of ProxyTool v3.4")
@@ -107,6 +111,15 @@ def main():  # pylint: disable=R0912,R0915,C0116
                   client_secret=args.falcon_client_secret,
                   base_url=args.base_url
                   )
+
+    # Check which CID the API client is operating in, as sanity check. Exit if operating CID does not match provided scope_id.
+    # Fixes https://github.com/CrowdStrike/falconpy/issues/1018
+    falcon = SensorDownload(auth_object=auth, base_url=args.base_url)
+    current_cid = falcon.get_sensor_installer_ccid()["body"]["resources"][0][:-3]
+    if (args.scope.lower() == "cid" and (args.scope_id.lower() != current_cid.lower())):
+        log(f"The entered CID [{args.scope_id.upper()}] does not match the API client CID [{current_cid.upper()}].")
+        raise SystemExit(f"The entered CID [{args.scope_id.upper()}] does not match the API client CID [{current_cid.upper()}].")
+
 
     # Fetch list of hosts
     if args.scope.lower() == "cid":
@@ -129,6 +142,7 @@ def main():  # pylint: disable=R0912,R0915,C0116
                                                              limit=batch_size,
                                                              filter="platform_name:'Windows'"
                                                              )
+
         else:
             # Fetch all Windows host group ID hosts
             if offset == "":
