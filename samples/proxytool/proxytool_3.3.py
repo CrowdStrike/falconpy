@@ -10,6 +10,12 @@ r"""ProxyTool - Update Falcon Sensor proxy configurations remotely.
  Use RTR API to change Falcon sensor proxy configuration across CID or host group
  FalconPy v1.0
 
+ ----------------------------------------------------------------
+ WARNING
+ THIS VERSION OF THE SCRIPT IS OBSOLETE AND NO LONGER MAINTAINED. 
+ PLEASE USE THE LATEST VERSION AVAILABLE.
+----------------------------------------------------------------
+
  CHANGE LOG
 
  27/10/2022   v3.3    Use command line arguments instead of external file for config
