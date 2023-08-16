@@ -909,7 +909,7 @@ This sample demonstrates the following CrowdStrike Real Time Response and Real T
 ---
 
 ### ProxyTool
-This [demonstration](proxytool) leverages the Hosts, Host Groups, and Real-Time Response API to fetch CID or Host Group hosts, and uses the batch command and offline queuing of Real-Time Response API to centrally and conveniently issue Falcon sensor proxy configuration changes.
+This [demonstration](proxytool) leverages the Hosts, Host Groups, Sensor Download, and Real-Time Response API to fetch CID or Host Group hosts, and uses the batch command and offline queuing of Real-Time Response API to centrally and conveniently issue Falcon sensor proxy configuration changes.
 
 [![Real Time Response](https://img.shields.io/badge/Service%20Class-ProxyTool-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](proxytool)
 
@@ -920,13 +920,19 @@ This sample demonstrates the following CrowdStrike Hosts API operations:
 | :--- | :--- |
 | [QueryDevicesByFilterScroll](https://www.falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilterscroll) | Search for hosts in your environment by platform, hostname, IP, and other criteria with continuous pagination capability (based on offset pointer which expires after 2 minutes with no maximum limit). |
 
-#### Host Group Response API operations discussed
+#### Host Group API operations discussed
 This sample demonstrates the following CrowdStrike Host Group API operations:
 
 | Operation | Description |
 | :--- | :--- |
 | [queryGroupMembers](https://www.falconpy.io/Service-Collections/Host-Group.html#querygroupmembers) | Search for members of a Host Group in your environment by providing a FQL filter and paging details. Returns a set of Agent IDs which match the filter criteria. |
 
+#### Sensor Download API operations discussed
+This sample demonstrates the following CrowdStrike Sensor Download API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [GetSensorInstallersCCIDByQuery](https://falconpy.io/Service-Collections/Sensor-Download.html#getsensorinstallersccidbyquery) | Get CCID to use with sensor installers. |
 
 #### Real Time Response API operations discussed
 This sample demonstrates the following CrowdStrike Real Time Response API operations:
