@@ -12,7 +12,7 @@ r"""ProxyTool - Update Falcon Sensor proxy configurations remotely.
 
  CHANGE LOG
 
- 14/08/2023   v3.5    Changes to scope handling
+ 14/08/2023   v3.5    Added sanity check. Entered CID must match CID used by API client
  28/02/2023   v3.4    Add ability to disable/delete proxy config
  27/10/2022   v3.3    Use command line arguments instead of external file for config
  26/10/2022   v3.2    Add support for Host Group or CID selection
