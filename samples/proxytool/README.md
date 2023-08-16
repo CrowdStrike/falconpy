@@ -40,14 +40,14 @@ This example accepts the following input parameters.
 If you want to set or change proxy configuration:
 
 ```shell
-python3 proxytool_3.5.py --falcon_client_id FALCON_CLIENT_ID --falcon_client_secret FALCON_CLIENT_SECRET 
+python3 proxytool.py --falcon_client_id FALCON_CLIENT_ID --falcon_client_secret FALCON_CLIENT_SECRET 
                         --proxy_hostname PROXY_HOST --proxy_port PROXY_PORT --scope hostgroup --scope_id HOST_GROUP_ID
 ```
 
 If you want to disable proxy configuration:
 
 ```shell
-python3 proxytool_3.5.py --falcon_client_id FALCON_CLIENT_ID --falcon_client_secret FALCON_CLIENT_SECRET 
+python3 proxytool.py --falcon_client_id FALCON_CLIENT_ID --falcon_client_secret FALCON_CLIENT_SECRET 
                         --proxy_disable --scope hostgroup --scope_id HOST_GROUP_ID
 ```
 
