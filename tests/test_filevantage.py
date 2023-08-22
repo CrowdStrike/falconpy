@@ -32,6 +32,13 @@ class TestFileVantage:
     @pytest.mark.skipif(config.base_url == "https://api.laggar.gcw.crowdstrike.com",
                         reason="Unit testing unavailable on US-GOV-1"
                         )
+    def test_query_changes_scroll(self):
+        """Pytest harness hook"""
+        assert bool(falcon.query_changes_scroll(limit=1)["status_code"] in AllowedResponses) is True
+
+    @pytest.mark.skipif(config.base_url == "https://api.laggar.gcw.crowdstrike.com",
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     def test_get_changes(self):
         """Pytest harness hook"""
         # Also testing lazy loading of the ids parameter

@@ -45,12 +45,15 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
+        "maxItems": 500,
+        "minItems": 1,
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "Comma separated values of change ids",
+        "description": "One or more change ids in the form of `ids=ID1&ids=ID2`. "
+        "The maximum number of ids that can be requested at once is `500`.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -74,6 +77,7 @@ _filevantage_endpoints = [
         "in": "query"
       },
       {
+        "maximum": 500,
         "type": "integer",
         "description": "The maximum number of changes to return in the response "
         "(default: 100; max: 500). "
@@ -96,6 +100,51 @@ _filevantage_endpoints = [
         "description": "Filter changes using a query in Falcon Query Language (FQL). \n\n"
         "Common filter options include:\n\n - `host.host_name`\n - `action_timestamp`\n\n "
         "The full list of allowed filter parameters can be reviewed in our API documentation.",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "highVolumeQueryChanges",
+    "GET",
+    "/filevantage/queries/changes/v3",
+    "Returns 1 or more change ids",
+    "filevantage",
+    [
+      {
+        "type": "string",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. "
+        "On your first request don't provide a value for the `after` token. On subsequent requests provide "
+        "the `after` token value from the previous response to continue pagination from where you left. "
+        "If the response returns an empty `after` token it means there are no more results to return.",
+        "name": "after",
+        "in": "query"
+      },
+      {
+        "maximum": 5000,
+        "type": "integer",
+        "default": 100,
+        "description": "The maximum number of ids to return. Defaults to `100` if not specified. "
+        "The maximum number of results that can be returned in a single call is `5000`.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "action_timestamp|desc",
+        "description": "Sort results using options like:\n\n- `action_timestamp` (timestamp of the change "
+        "occurrence) \n\nSort either `asc` (ascending) or `desc` (descending). For example: "
+        "`action_timestamp|asc`. Defaults to `action_timestamp|desc` no value is specified.\nThe full list "
+        "of allowed sorting options can be reviewed in our API documentation.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter changes using a query in Falcon Query Language (FQL). \n\nCommon filter "
+        "options include:\n\n - `host.name`\n - `action_timestamp`\n\n The full list of allowed filter "
+        "parameters can be reviewed in our API documentation.",
         "name": "filter",
         "in": "query"
       }
