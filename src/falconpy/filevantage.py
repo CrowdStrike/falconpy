@@ -114,11 +114,50 @@ class FileVantage(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_changes_scroll(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search for changes within your environment. Returns one or more change IDs.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  Available filters
+                  action_timestamp      ingestion_timestamp
+                  host.name
+        limit -- The maximum number of records to return. [Integer, 1-5000, Default: 100]
+        after -- A pagination token used with the `limit` parameter to manage pagination of results.
+                 On your first request don't provide a value for the `after` token. On subsequent
+                 requests provide the `after` token value from the previous response to continue
+                 pagination from where you left. If the response returns an empty `after` token
+                 it means there are no more results to return.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
+                Available sort fields
+                action_timestamp        ingestion_timestamp
+
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/highVolumeQueryChanges
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="highVolumeQueryChanges",
+            keywords=kwargs,
+            params=parameters
+            )
+
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here
     # for backwards compatibility / ease of use purposes
     getChanges = get_changes
     queryChanges = query_changes
+    highVolumeQueryChanges = query_changes_scroll
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
