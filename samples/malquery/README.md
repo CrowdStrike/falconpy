@@ -13,7 +13,7 @@ Results will be stored in _zip_ archive format with the password of `infected`.
 In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
 | Service Collection | Scope |
 | :---- | :---- |
-| MalQuery | __READ__ |
+| MalQuery | __READ__, __WRITE__ |
 
 ### Execution syntax
 This example accepts the following input parameters.
