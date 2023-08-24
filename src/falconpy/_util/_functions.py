@@ -68,7 +68,8 @@ from .._error import (
     NoContentWarning,
     PayloadValidationError,
     InvalidBaseURL,
-    SSLDisabledWarning
+    SSLDisabledWarning,
+    UnnecessaryEncodingUsed
     )
 from .._result import Result
 urllib3.disable_warnings(InsecureRequestWarning)
@@ -524,7 +525,13 @@ def get_default(types: list, position: int) -> Union[list, str, int, dict, bool]
     return retval
 
 
-def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epname: str) -> dict:
+def args_to_params(payload: dict,
+                   passed_arguments: dict,
+                   endpoints: list,
+                   epname: str,
+                   log_utl: Logger = None,
+                   pyth: bool = None
+                   ) -> dict:
     """Query String parameter abstraction handler.
 
     This function reviews arguments passed to the function against arguments accepted by the
@@ -544,6 +551,8 @@ def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epnam
     passed_arguments -- Keywords provided to the calling method.
     endpoints -- List of API endpoints available to the calling method.
     epname -- Operation ID to be retrieved from the endpoints list.
+    log_utl -- Logger used when warnings are issued.
+    pyth -- Boolean indicating if pythonic responses are enabled.
 
     Returns: dictionary representing QueryString parameters.
     """
@@ -559,6 +568,17 @@ def args_to_params(payload: dict, passed_arguments: dict, endpoints: list, epnam
                         if argument["type"] == "array":
                             if isinstance(passed_arguments[arg_name], (str)):
                                 passed_arguments[arg_name] = passed_arguments[arg_name].split(",")
+                        # Check for unnecessarily URLEncoded strings by finding an encoded ":", Issue #850
+                        if isinstance(passed_arguments[arg_name], str):
+                            if "%3A" in passed_arguments[arg_name]:
+                                msg = " ".join([arg_name,
+                                                "argument contains potentially urlencoded string of",
+                                                f"'{passed_arguments[arg_name]}'."
+                                                ])
+                                if pyth:
+                                    warn(msg, UnnecessaryEncodingUsed, stacklevel=5)
+                                else:
+                                    log_utl.warning(msg)
                         # More data type validation can go here
                         payload[arg_name] = passed_arguments[arg_name]
             except IndexError:
@@ -638,7 +658,13 @@ def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
     passed_params = kwargs.get("params", None)
     parameter_payload = None
     if passed_keywords or passed_params:
-        parameter_payload = args_to_params(passed_params, passed_keywords, endpoints, operation_id)
+        parameter_payload = args_to_params(passed_params,
+                                           passed_keywords,
+                                           endpoints,
+                                           operation_id,
+                                           calling_object.log,
+                                           kwargs.get("pythonic", None)
+                                           )
     expand_result = passed_keywords.get("expand_result", False) if passed_keywords else kwargs.get("expand_result", False)
     new_keywords = {
         "caller": calling_object,
