@@ -73,6 +73,7 @@ class TestIncidents:
             ["PerformIncidentAction", falcon.perform_incident_action(action_parameters=[
                 {"name": "whatever", "value": "something"}
                 ],
+                add_comment="Something",
                 add_tag="Something",
                 delete_tag="something",
                 update_name="something",

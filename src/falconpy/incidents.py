@@ -131,6 +131,7 @@ class Incidents(ServiceClass):
 
         Keyword arguments:
         action_parameters -- Action specific parameters. List of dictionaries.
+        add_comment -- Adds the provided value as a new comment on all the incidents in the ids list. String.
         add_tag -- Adds the associated value as a new tag on all the incidents of the ids list.
                    Overridden if action_parameters is specified. Multiple values may be provided.
                    String, comma delimited string, or list.
