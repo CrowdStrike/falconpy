@@ -52,7 +52,8 @@ from ._error import (
     InvalidOperation,
     InvalidMethod,
     TokenNotSpecified,
-    SDKError
+    SDKError,
+    APIError
     )
 
 
@@ -78,6 +79,9 @@ def command_error_handler(func: Callable):
                 caller.log.debug("RESULT: %s", res)
         try:
             result = func(caller, *args, **kwargs)
+        except APIError as api_error:
+            # Should only receive this in pythonic mode
+            raise api_error
         except (SDKError, InvalidMethod, InvalidOperation) as bad_sdk:
             result = bad_sdk.result
             log_failure(bad_sdk.message, bad_sdk.code, result)
