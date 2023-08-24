@@ -1,9 +1,8 @@
 ![CrowdStrike Falcon](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png)
 
-[![Twitter URL](https://img.shields.io/twitter/url?label=Follow%20%40CrowdStrike&style=social&url=https%3A%2F%2Ftwitter.com%2FCrowdStrike)](https://twitter.com/CrowdStrike)
+[![CrowdStrike Subreddit](https://img.shields.io/badge/-r%2Fcrowdstrike-white?logo=reddit&labelColor=gray&link=https%3A%2F%2Freddit.com%2Fr%2Fcrowdstrike)](https://reddit.com/r/crowdstrike)
 
 ![GitHub top language](https://img.shields.io/github/languages/top/crowdstrike/falconpy?logo=python&logoColor=white)
-![Snyk Vulnerabilities for GitHub Repo](https://img.shields.io/snyk/vulnerabilities/github/crowdstrike/falconpy?logo=snyk)
 [![Snyk Advisor](https://snyk.io/advisor/python/crowdstrike-falconpy/badge.svg)](https://snyk.io/advisor/python/crowdstrike-falconpy)
 ![GitHub issues](https://img.shields.io/github/issues-raw/crowdstrike/falconpy?logo=github)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/crowdstrike/falconpy?color=green&logo=github)
@@ -24,6 +23,7 @@ FalconPy functionality is unit tested to run under the following versions of Pyt
 
 | Version | Supported |
 | :------- | :--------: |
+| 3.11.x  | ![Yes](https://img.shields.io/badge/-YES-green) |
 | 3.10.x  | ![Yes](https://img.shields.io/badge/-YES-green) |
 | 3.9.x   | ![Yes](https://img.shields.io/badge/-YES-green) |
 | 3.8.x   | ![Yes](https://img.shields.io/badge/-YES-green) |
