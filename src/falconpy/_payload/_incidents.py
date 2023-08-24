@@ -41,6 +41,7 @@ def incident_action_parameters(passed_keywords: dict) -> list:
     """Create a properly formatted action_parameters branch for incident action payload operations.
 
     Available keywords
+    add_comment - Adds the associated value as a new comment on all the incidents in the ids list.
     add_tag - Adds the associated value as a new tag on all the incidents of the ids list.
               Multiple tags may be provided as a list or comma delimited string.
     delete_tag - Deletes tags matching the value from all the incidents in the ids list.
@@ -79,7 +80,7 @@ def incident_action_parameters(passed_keywords: dict) -> list:
     returned_payload = []
     valid_keywords = [
         "add_tag", "delete_tag", "unassign", "update_name", "update_assigned_to_v2",
-        "update_description", "update_status"
+        "update_description", "update_status", "add_comment"
         ]
     for key, val in passed_keywords.items():
         if key in valid_keywords and key != "unassign":
