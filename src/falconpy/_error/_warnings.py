@@ -95,3 +95,10 @@ class NoAuthenticationMechanism(SDKWarning):
 
     _code = 400
     _message = "No authentication mechanism has been specified for this class."
+
+
+class UnnecessaryEncodingUsed(SDKWarning):
+    """An argument was urlencoded when it should not be."""
+
+    _code = 400
+    _message = "A provided argument utilizes unnecessary encoding."
