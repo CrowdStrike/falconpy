@@ -35,11 +35,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, Type, Optional
+from typing import Dict, Type, Optional, Union
 from ._base_service_class import BaseServiceClass
 from .._auth_object import FalconInterface
-from .._util import log_class_startup
+from .._util import log_class_startup, perform_request, service_override_payload
 from ..oauth2 import OAuth2
+from .._result import Result
 
 
 class ServiceClass(BaseServiceClass):
@@ -190,6 +191,35 @@ class ServiceClass(BaseServiceClass):
     def token_expired(self) -> bool:
         """Return a boolean reflecting token expiration status."""
         return self.auth_object.token_expired
+
+    # Manual operation override
+    def override(self,
+                 method: str,
+                 route: str,
+                 parameters: dict = None,
+                 body: dict = None,
+                 data: Union[dict, bytes] = None,
+                 files: list = None,
+                 expand_result: bool = False
+                 ) -> Union[dict, Result]:
+        """Allow any Service Class to make requests to manually specified routes.
+
+        This helper is primarily intended for testing. The override method
+        does not support body payload abstraction or parameter abstraction.
+        """
+        if self.log:
+            # Log the operation we're performing if enabled.
+            self.log.debug("OPERATION: %s", "Manual")
+        # Process the API request.
+        return perform_request(**service_override_payload(caller=self,
+                                                          meth=method,
+                                                          rte=route,
+                                                          body_p=body,
+                                                          param_p=parameters,
+                                                          file_p=files,
+                                                          data_p=data,
+                                                          exp=expand_result
+                                                          ))
 
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__

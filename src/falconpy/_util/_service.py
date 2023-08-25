@@ -1,4 +1,4 @@
-"""FalconPy utility module.
+"""FalconPy Service Class helper methods.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,44 +35,35 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._auth import login_payloads, logout_payloads
-from ._functions import (
-    validate_payload,
-    generate_b64cred,
-    handle_single_argument,
-    force_default,
-    service_request,
-    perform_request,
-    generate_error_result,
-    generate_ok_result,
-    get_default,
-    args_to_params,
-    process_service_request,
-    confirm_base_url,
-    confirm_base_region,
-    return_preferred_default,
-    base_url_regions,
-    autodiscover_region,
-    sanitize_dictionary,
-    calc_content_return,
-    log_class_startup,
-    _ALLOWED_METHODS
-)
-from ._service import service_override_payload
-from ._uber import (
-    create_uber_header_payload,
-    handle_body_payload_ids,
-    scrub_target,
-    handle_container_operations,
-    uber_request_keywords,
-)
+from typing import Union
 
-__all__ = ["create_uber_header_payload", "handle_body_payload_ids", "scrub_target",
-           "handle_container_operations", "uber_request_keywords", "autodiscover_region",
-           "validate_payload", "generate_b64cred", "handle_single_argument", "force_default",
-           "service_request", "perform_request", "generate_error_result", "generate_ok_result",
-           "get_default", "args_to_params", "process_service_request", "confirm_base_url",
-           "confirm_base_region", "return_preferred_default", "base_url_regions",
-           "_ALLOWED_METHODS", "login_payloads", "logout_payloads", "sanitize_dictionary",
-           "calc_content_return", "log_class_startup", "service_override_payload"
-           ]
+
+def service_override_payload(caller: object,
+                             meth: str,
+                             rte: str,
+                             body_p: dict,
+                             param_p: dict,
+                             file_p: list,
+                             data_p: Union[dict, bytes],
+                             exp: bool
+                             ) -> dict:
+    """Create the necessary arguments for a direct call to process_request."""
+    return {
+        "method": meth,
+        "endpoint": f"{caller.base_url}{rte}",
+        "body": body_p,
+        "data": data_p,
+        "params": param_p,
+        "headers": caller.headers,
+        "files": file_p,
+        "verify": caller.ssl_verify,
+        "proxy": caller.proxy,
+        "timeout": caller.timeout,
+        "user_agent": caller.user_agent,
+        "expand_result": exp,
+        "container": False,     # Does not currently support container operations
+        "log_util": caller.log,
+        "debug_record_count": caller.debug_record_count,
+        "sanitize": caller.sanitize_log,
+        "pythonic": caller.pythonic
+    }
