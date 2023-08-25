@@ -38,6 +38,20 @@ For more information, please refer to <https://unlicense.org>
 
 _falcon_complete_dashboard_endpoints = [
   [
+    "AggregateAlerts",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/alerts/GET/v1",
+    "Retrieve aggregate alerts values based on the matched filter",
+    "falcon_complete_dashboard",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "AggregateAllowList",
     "POST",
     "/falcon-complete-dashboards/aggregates/allowlist/GET/v1",
@@ -132,6 +146,42 @@ _falcon_complete_dashboard_endpoints = [
         "name": "body",
         "in": "body",
         "required": True
+      }
+    ]
+  ],
+  [
+    "QueryAlertIdsByFilter",
+    "GET",
+    "/falcon-complete-dashboards/queries/alerts/v1",
+    "Retrieve Alerts Ids that match the provided FQL filter criteria with scrolling enabled",
+    "falcon_complete_dashboard",
+    [
+      {
+        "type": "integer",
+        "description": "The maximum records to return. [1-500]",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The property to sort on, followed by a dot (.), "
+        "followed by the sort direction, either \"asc\" or \"desc\".",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Optional filter and sort criteria in the form of an FQL query. "
+        "For more information about FQL queries, see "
+        "[our FQL documentation](https://falconpy.io/Usage/Falcon-Query-Language).",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Starting index of overall result set from which to return ids.",
+        "name": "offset",
+        "in": "query"
       }
     ]
   ],
