@@ -29,7 +29,7 @@ class TestIntel:
             "get_intel_report_pdf": falcon.GetIntelReportPDF(parameters={}),
             "get_intel_report_entities": falcon.GetIntelReportEntities(ids='12345678'),
             "get_intel_rule_file": falcon.GetIntelRuleFile(parameters={}),
-            "get_latest_intel_rule_file": falcon.GetLatestIntelRuleFile(parameters={}),
+            "get_latest_intel_rule_file": falcon.GetLatestIntelRuleFile(parameters={}, if_none_match="whatevs", if_modified_since="01/01/2020"),
             "get_intel_rule_entities": falcon.GetIntelRuleEntities(ids='12345678'),
             "query_intel_actor_ids": falcon.QueryIntelActorIds(),
             "query_intel_indicator_ids": falcon.QueryIntelIndicatorIds(limit=5),
