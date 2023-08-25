@@ -173,6 +173,8 @@ _incidents_endpoints = [
       },
       {
         "enum": [
+          "alert_ids.asc",
+          "alert_ids.desc",
           "cmdline.asc",
           "cmdline.desc",
           "detection_ids.asc",
