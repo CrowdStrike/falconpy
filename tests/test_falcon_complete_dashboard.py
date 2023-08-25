@@ -17,6 +17,13 @@ AllowedResponses = [200, 403, 429]
 
 
 class TestFalconCompleteDashboard:
+    def ServiceFCD_QueryAlertIdsByFilter(self):
+        returned = False
+        if falcon.QueryAlertIdsByFilter()["status_code"] in AllowedResponses:
+            returned = True
+
+        return returned
+
     def ServiceFCD_QueryAllowListFilter(self):
         returned = False
         if falcon.QueryAllowListFilter()["status_code"] in AllowedResponses:
@@ -70,6 +77,7 @@ class TestFalconCompleteDashboard:
         falcon.base_url = "nowhere"
         error_checks = True
         tests = {
+            "AggregateAlerts": falcon.aggregate_alerts(),
             "AggregateAllowList": falcon.aggregate_allow_list(),
             "AggregateBlockList": falcon.aggregate_block_list(),
             "AggregateDetections": falcon.aggregate_detections(),
@@ -84,6 +92,9 @@ class TestFalconCompleteDashboard:
                 error_checks = False
 
         return error_checks
+
+    def test_QueryAlertIdsByFilter(self):
+        assert self.ServiceFCD_QueryAlertIdsByFilter() is True
 
     def test_QueryAllowListFilter(self):
         assert self.ServiceFCD_QueryAllowListFilter() is True
