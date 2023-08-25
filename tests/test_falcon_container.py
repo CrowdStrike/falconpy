@@ -27,6 +27,7 @@ class TestFalconContainer:
 
         tests = {
             "GetAssessment": falcon.get_assessment(repository="misp", tag="latest"),
+            "GetCombinedImages": falcon.get_combined_images(),
             "DeleteImageDetails": falcon.delete_image_details("whatever"),
             "ImageMatchesPolicy": falcon.image_matches_policy(repository="whatever", tag="whatever", body={}),
             "GetAssessmentUber": uber.command("GetImageAssessmentReport", repository="misp", tag="latest"),
