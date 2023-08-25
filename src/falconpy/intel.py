@@ -343,9 +343,11 @@ class Intel(ServiceClass):
 
         Keyword arguments:
         id -- One or more actor IDs. String or list of strings.
+        ids -- The ID of the report you want to download as a PDF.
+               This parameter is used only if no id parameter given. String.
         parameters - full parameters payload, not required if id is provided as a keyword.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
 
         Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
@@ -360,7 +362,7 @@ class Intel(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetIntelReportPDF",
             keywords=kwargs,
-            params=handle_single_argument(args, parameters, "id")
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -424,6 +426,10 @@ class Intel(ServiceClass):
         """Download the latest rule set.
 
         Keyword arguments:
+        if_none_match -- Download the latest rule set only if it doesn't have an ETag
+                             matching the given ones. String.
+        if_modified_since -- Download the latest rule set only if the rule was modified after this date.
+                             http, ANSIC and RFC850 formats accepted. String.
         format -- Choose the format you want the rule set in. Either zip or gzip. Defaults to zip.
         parameters - full parameters payload, not required if other keywords are used.
         type -- The rule news report type. The following values are accepted:
@@ -442,11 +448,18 @@ class Intel(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetLatestIntelRuleFile
         """
+        headers = {}
+        if kwargs.get("if_none_match", None):
+            headers["If-None-Match"] = kwargs.get("if_none_match")
+        if kwargs.get("if_modified_since", None):
+            headers["If-Modified-Since"] = kwargs.get("if_modified_since")
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetLatestIntelRuleFile",
             keywords=kwargs,
+            headers=headers,
             params=handle_single_argument(args, parameters, "type")
             )
 
@@ -575,9 +588,11 @@ class Intel(ServiceClass):
 
         Keyword arguments:
         id -- Actor ID, derived from the actor name. (Example: fancy-bear) String.
+        ids -- The actor ID(derived from the actor's name) for which to retrieve a list of attacks.
+               Example: fancy-bear. Multiple values are allowed. List of strings.
         parameters - full parameters payload, not required if using `id` keyword.
 
-        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
 
         Returns: dict object containing API response.
@@ -592,7 +607,7 @@ class Intel(ServiceClass):
             endpoints=Endpoints,
             operation_id="QueryMitreAttacks",
             keywords=kwargs,
-            params=handle_single_argument(args, parameters, "id")
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])

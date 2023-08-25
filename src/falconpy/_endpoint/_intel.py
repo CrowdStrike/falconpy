@@ -301,8 +301,14 @@ _intel_endpoints = [
         "type": "string",
         "description": "The ID of the report you want to download as a PDF.",
         "name": "id",
-        "in": "query",
-        "required": True
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The ID of the report you want to download as a PDF. "
+        "This parameter is used only if no id parameter given.",
+        "name": "ids",
+        "in": "query"
       }
     ]
   ],
@@ -377,6 +383,19 @@ _intel_endpoints = [
         "type": "string",
         "description": "Choose the format you want the rule set in.",
         "name": "Accept",
+        "in": "header"
+      },
+      {
+        "type": "string",
+        "description": "Download the latest rule set only if it doesn't have an ETag matching the given ones.",
+        "name": "If-None-Match",
+        "in": "header"
+      },
+      {
+        "type": "string",
+        "description": "Download the latest rule set only if the rule was modified after this date. "
+        "http, ANSIC and RFC850 formats accepted",
+        "name": "If-Modified-Since",
         "in": "header"
       },
       {
@@ -538,10 +557,21 @@ _intel_endpoints = [
     [
       {
         "type": "string",
-        "description": "The actor ID(derived from the actor's name) for which to retrieve a list of attacks.",
+        "description": "The actor ID(derived from the actor's name) for which to retrieve a list of attacks, "
+        "for example: fancy-bear. Only one value is allowed",
         "name": "id",
-        "in": "query",
-        "required": True
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The actor ID(derived from the actor's name) for which to retrieve a list of attacks, "
+        "for example: fancy-bear. Multiple values are allowed",
+        "name": "ids",
+        "in": "query"
       }
     ]
   ],
