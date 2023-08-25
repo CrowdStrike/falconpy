@@ -46,6 +46,41 @@ _falcon_container_endpoints = [
     []
   ],
   [
+    "GetCombinedImages",
+    "GET",
+    "/container-security/combined/image-assessment/images/v1",
+    "Get image assessment results by providing an FQL filter and paging details",
+    "falcon_container_image",
+    [
+      {
+        "type": "string",
+        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  "
+        "container_running_status, cve_id, first_seen, registry, repository, tag, vulnerability_severity",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve [1-100]",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The fields to sort the records on. Supported columns:  "
+        "[first_seen registry repository tag vulnerability_severity]",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "ReadImageVulnerabilities",
     "POST",
     "/image-assessment/combined/vulnerability-lookups/v1",

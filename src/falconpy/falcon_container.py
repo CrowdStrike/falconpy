@@ -83,6 +83,49 @@ class FalconContainer(ServiceClass):
             operation_id="GetCredentials"
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_combined_images(self: object, parameters: dict = None, **kwargs) -> dict:
+        """Retrieve registry entities identified by the customer ID.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/GetCombinedImages
+
+        Keyword arguments
+        ----
+        filter : string
+            Filter images using a query in Falcon Query Language (FQL).
+            Supported filters: container_running_status, cve_id, first_seen,
+                               registry, repository, tag, vulnerability_severity
+        limit : int
+            The maximum number of records to return in this response. [1-100]
+            Use with the offset parameter to manage pagination of results.
+        offset : int
+            The offset to start retrieving records from.
+            Use with the limit parameter to manage pagination of results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : str
+            The property to sort by. FQL syntax.
+            Supports: first_seen, registry, repository, tag, vulnerability_severity
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCombinedImages",
+            keywords=kwargs,
+            params=parameters
+            )
+
     @force_default(defaults=["body"], default_types=["dict"])
     def read_image_vulnerabilities(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve an assessment report for an image by specifying repository and tag.
@@ -457,6 +500,7 @@ class FalconContainer(ServiceClass):
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
     GetCredentials = get_credentials
+    GetCombinedImages = get_combined_images
     GetImageAssessmentReport = get_assessment
     DeleteImageDetails = delete_image_details
     ImageMatchesPolicy = image_matches_policy
