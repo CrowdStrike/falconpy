@@ -131,8 +131,8 @@ class FirewallPolicies(ServiceClass):
         """Perform the specified action on the Firewall Policies specified in the request.
 
         Keyword arguments:
-        action_name -- action to perform: 'add-host-group', 'disable', 'enable',
-                       or 'remove-host-group'.
+        action_name -- action to perform: 'add-host-group', 'add-rule-group', 'disable', 'enable',
+                       'remove-rule-group' or 'remove-host-group'.
         action_parameters -- Action specific parameter options. List of dictionaries.
                              {
                                  "name": "string",
