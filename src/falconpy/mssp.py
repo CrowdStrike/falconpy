@@ -220,6 +220,50 @@ class FlightControl(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
+    def delete_cid_group_members_v1(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Delete CID Group members entry.
+
+        *DEPRECATED*
+        Please use delete_cid_group_members.
+
+        Keyword arguments:
+        body -- full body payload, not required if sha256 is provided as a keyword.
+                {
+                    "resources": [
+                        {
+                            "cid_group_id": "string",
+                            "cids": [
+                                "string"
+                            ]
+                        }
+                    ]
+                }
+        cid_group_id -- ID of the CID group to update. String.
+        cids -- CIDs to remove from the group. String or list of strings.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mssp/deleteCIDGroupMembers
+        """
+        if not body:
+            item = generic_payload_list(submitted_keywords=kwargs, payload_value="cids")
+            if kwargs.get("cid_group_id", None):
+                item["cid_group_id"] = kwargs.get("cid_group_id", None)
+            body["resources"] = [item]
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="deleteCIDGroupMembers",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
     def delete_cid_group_members(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete CID Group members entry.
 
@@ -256,7 +300,7 @@ class FlightControl(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="deleteCIDGroupMembers",
+            operation_id="deleteCIDGroupMembersV2",
             body=body
             )
 
@@ -1060,6 +1104,8 @@ class FlightControl(ServiceClass):
     getCIDGroupMembersByV2 = get_cid_group_members_by
     addCIDGroupMembers = add_cid_group_members
     deleteCIDGroupMembers = delete_cid_group_members
+    deleteCIDGroupMembersV1 = delete_cid_group_members_v1
+    deleteCIDGroupMembersV2 = delete_cid_group_members
     getCIDGroupById = get_cid_group_by_id
     getCIDGroupByIdV1 = get_cid_group_by_id_v1
     getCIDGroupByIdV2 = get_cid_group_by_id

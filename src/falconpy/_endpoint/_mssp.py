@@ -107,10 +107,10 @@ _mssp_endpoints = [
     ]
   ],
   [
-    "deleteCIDGroupMembers",
+    "deleteCIDGroupMembersV1",
     "DELETE",
     "/mssp/entities/cid-group-members/v1",
-    "Delete CID group members.",
+    "Deprecated: Please use deleteCIDGroupMembersV2.",
     "mssp",
     [
       {
@@ -157,6 +157,36 @@ _mssp_endpoints = [
         "description": "CID group IDs search for",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "deleteCIDGroupMembers",
+    "DELETE",
+    "/mssp/entities/cid-group-members/v2",
+    "Delete CID group members. Prevents removal of a cid group a cid group if it is only part of one cid group.",
+    "mssp",
+    [
+      {
+        "description": "Both 'cid_group_id' and 'cids' fields are required.",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "deleteCIDGroupMembersV2",
+    "DELETE",
+    "/mssp/entities/cid-group-members/v2",
+    "Delete CID group members. Prevents removal of a cid group a cid group if it is only part of one cid group.",
+    "mssp",
+    [
+      {
+        "description": "Both 'cid_group_id' and 'cids' fields are required.",
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
