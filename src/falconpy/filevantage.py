@@ -35,7 +35,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302
 from typing import Dict, Union
+from ._payload import (
+    filevantage_rule_group_payload,
+    filevantage_rule_payload,
+    filevantage_policy_payload,
+    filevantage_scheduled_exclusion_payload
+    )
 from ._util import process_service_request, force_default, handle_single_argument
 from ._service_class import ServiceClass
 from ._endpoint._filevantage import _filevantage_endpoints as Endpoints
@@ -80,6 +87,861 @@ class FileVantage(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def update_policy_host_groups(self: object,
+                                  parameters: dict = None,
+                                  body: dict = None,
+                                  **kwargs
+                                  ) -> Dict[str, Union[int, dict]]:
+        """Manage host groups assigned to a policy.
+
+        Keyword arguments:
+        action -- The action to perform on the provided IDs. (String)
+                  Allowed values: assign or unassign.
+        policy_id -- The ID of the policy to perform the action on. (String)
+        ids -- One or more host groups IDs. (String or List of strings)
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/updatePolicyHostGroups
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updatePolicyHostGroups",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def update_policy_precedence(self: object,
+                                 parameters: dict = None,
+                                 body: dict = None,
+                                 **kwargs
+                                 ) -> Dict[str, Union[int, dict]]:
+        """Update the policy precedence for all policies of a specific type.
+
+        Requests that do no represent all IDs of the provided policy type will not be processed.
+
+        Keyword arguments:
+        type -- The policy type to set the precedence order for. (String)
+                Allowed values: Windows, Linux, or Mac
+        ids -- Procedence of the policies for the provided type. (String or List of strings)
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/updatePolicyPrecedence
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updatePolicyPrecedence",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def update_policy_rule_groups(self: object,
+                                  parameters: dict = None,
+                                  body: dict = None,
+                                  **kwargs
+                                  ) -> Dict[str, Union[int, dict]]:
+        """Manage the rule groups assigned to the policy or set the rule group precedence.
+
+        Rule groups must be of the same type as the policy they are being added to:
+        WindowsRegistry and WindowsFiles groups can be added to a Windows policy.
+        LinuxFiles groups can be added to a Linux policy.
+        MacFiles groups can be added to a Max policy.
+        When setting rule group precedence, the prcedence for ALL rule group IDs within the
+        policy must be provided.
+
+        Keyword arguments:
+        action -- The action to perform with the provided IDs. (String)
+                  Allowed values: assign, unassign, precedence
+        policy_id -- The ID of teh policy for which to perform the action. (String)
+        ids -- One or more rule group IDs. (String or List of strings)
+               For the precedence action, precedence is controlled by the order of the IDs
+               in the list provided.
+        parameters - full parameters payload, not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/updatePolicyRuleGroups
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updatePolicyRuleGroups",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve the configuration for one or more policies.
+
+        Keyword arguments:
+        ids -- List of policy IDs to retrieve. String or list of strings. (Max: 500)
+        parameters -- full parameters payload, not required if ids keyword is provided.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/getPolicies
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getPolicies",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_policy(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Create a new policy of the specified type.
+
+        New policies are always added at the end of the precedence list for the provided policy type.
+
+        Keyword arguments:
+        body - full body payload in JSON format, not required if using other keywords.
+               {
+                   "description": "string",
+                   "name": "string",
+                   "platform": "string",
+               }
+        description -- The policy description. (String, 0-500 characters.)
+        platform -- Policy platform. (String)
+                    Allowed values: Windows, Linux or Mac
+        name -- Name of the policy. (String, 1-100 characters.)
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/createPolicies
+        """
+        if not body:
+            body = filevantage_policy_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="createPolicies",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Delete one or more policies. Only disabled policies can be deleted.
+
+        Keyword arguments:
+        ids -- List of policy IDs to delete. String or list of strings. (Max: 500)
+        parameters -- full parameters payload, not required if other keywords are provided.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/deletePolicies
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="deletePolicies",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Update the general information of the provided policy.
+
+        Only name, description, and enabled status of the policy is allowed to be update.
+        Rule and host group assignment is performed via their respective update end points.
+
+        Keyword arguments:
+        body - full body payload in JSON format, not required if using other keywords.
+               {
+                   "description": "string",
+                   "id": "string",
+                   "name": "string",
+                   "enabled": boolean,
+               }
+        description -- The policy description. (String, 0-500 characters.)
+        id -- ID of the policy to be updated. (String)
+        name -- Name of the policy. (String, 1-100 characters.)
+        enabled -- Enablement status of the policy. Boolean.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/updatePolicies
+        """
+        if not body:
+            body = filevantage_policy_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updatePolicies",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_scheduled_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve the configuration for one or more scheduled exclusions within the provided policy.
+
+        Scheduled exclusions within the provided policy that match a provided ID will be returned.
+
+        Keyword arguments:
+        ids -- List of rule IDs to retrieve. String or list of strings. (Max: 500)
+        parameters -- full parameters payload, not required if ids keyword is provided.
+        policy_id -- Rule group from which to retrieve the rule configuration. (String)
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/getScheduledExclusions
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getScheduledExclusions",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_scheduled_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        r"""Create a new scheduled exclusion within the provided policy.
+
+        Keyword arguments:
+        body - full body payload in JSON format, not required if using other keywords.
+               {
+                   "description": "string",
+                   "name": "string",
+                   "policy_id": "string",
+                   "processes": "string",
+                   "schedule_end": "string",
+                   "schedule_start": "string",
+                   "users": "string"
+               }
+        description -- The scheduled exclusion description. (String, 0-500 characters.)
+        name -- Name of the scheduled exclusion. (String, 1-100 characters.)
+        policy_id -- ID of the policy the scheduled exclusion is assigned. (String)
+        users -- Comma delimited list of users to NOT monitor changes. (String, 1-500 characters)
+                 `admin*` excludes changes made by all usernames that begin with admin.
+                 Falcon GLOB syntax is supported.
+        processes - Comma delimited list of processes to NOT monitor changes. (String, 1-500 characters)
+                    `**\RunMe.exe` or `**/RunMe.sh` excludes changes made by RunMe.exe
+                    or RunMe.sh in any location.
+        schedule_start - Indicates the start of the schedule. (String, RFC3339 format, Required)
+        schedule_end - Indicates the end of the schedule. (String, RFC3339 format)
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/createScheduledExclusions
+        """
+        if not body:
+            body = filevantage_scheduled_exclusion_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="createScheduledExclusions",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_scheduled_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Delete one or more scheduled exclusions from the specified policy.
+
+        Scheduled exclusions that match the provided ID will be deleted form the provided policy.
+
+        Keyword arguments:
+        ids -- List of rule group IDs to delete. String or list of strings. (Max: 500 characters)
+        parameters -- full parameters payload, not required if other keywords are provided.
+        policy_id -- The ID of the rule group from which the scheduled exclusions will be deleted.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/deleteScheduledExclusions
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="deleteScheduledExclusions",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_scheduled_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        r"""Update the provided scheduled exclusion configuration within the provided policy.
+
+        Keyword arguments:
+        body - full body payload in JSON format, not required if using other keywords.
+               {
+                   "description": "string",
+                   "id": "string",
+                   "name": "string",
+                   "policy_id": "string",
+                   "processes": "string",
+                   "schedule_end": "string",
+                   "schedule_start": "string",
+                   "users": "string"
+               }
+        description -- The scheduled exclusion description. (String, 0-500 characters.)
+        id -- ID of the scheduled exclusion to be updated. (String)
+        name -- Name of the scheduled exclusion. (String, 1-100 characters.)
+        policy_id -- ID of the policy the scheduled exclusion is assigned. (String)
+        users -- Comma delimited list of users to NOT monitor changes. (String, 1-500 characters)
+                 `admin*` excludes changes made by all usernames that begin with admin.
+                 Falcon GLOB syntax is supported.
+        processes - Comma delimited list of processes to NOT monitor changes. (String, 1-500 characters)
+                    `**\RunMe.exe` or `**/RunMe.sh` excludes changes made by RunMe.exe
+                    or RunMe.sh in any location.
+        schedule_start - Indicates the start of the schedule. (String, RFC3339 format, Required)
+        schedule_end - Indicates the end of the schedule. (String, RFC3339 format)
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/updateScheduledExclusions
+        """
+        if not body:
+            body = filevantage_scheduled_exclusion_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateScheduledExclusions",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def update_rule_group_precedence(self: object,
+                                     parameters: dict = None,
+                                     body: dict = None,
+                                     **kwargs
+                                     ) -> Dict[str, Union[int, dict]]:
+        """Update the rule precedence for all rules in the identified rule group.
+
+        The IDs for ALL rules contained within the rule group msut be specified in the desired
+        precedence order. Requests that do not represent all IDs will not be processed.
+
+        Keyword arguments:
+        ids -- List of rule IDs to retrieve. String or list of strings. (Max: 500)
+        parameters -- full parameters payload, not required if ids keyword is provided.
+        rule_group_id -- Rule group from which to retrieve the rule configuration. (String)
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/updateRuleGroupPrecedence
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateRuleGroupPrecedence",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_rules(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve the configuration for one or more rules.
+
+        Rules within the provided rule group ID that match a provided ID will be returned.
+
+        Keyword arguments:
+        ids -- List of rule IDs to retrieve. String or list of strings. (Max: 500)
+        parameters -- full parameters payload, not required if ids keyword is provided.
+        rule_group_id -- Rule group from which to retrieve the rule configuration. (String)
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/getRules
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getRules",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_rule(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        r"""Create a new rule configuration within the specified group.
+
+        Keyword arguments:
+        body - full body payload in JSON format, not required if using other keywords.
+               {
+                   "created_timestamp": "string",
+                   "depth": "string",
+                   "description": "string",
+                   "exclude": "string",
+                   "exclude_processes": "string",
+                   "exclude_users": "string",
+                   "id": "string",
+                   "include": "string",
+                   "include_processes": "string",
+                   "include_users": "string",
+                   "modified_timestamp": "string",
+                   "path": "string",
+                   "precedence": 0,
+                   "rule_group_id": "string",
+                   "severity": "string",
+                   "type": "string",
+                   "watch_attributes_directory_changes": true,
+                   "watch_attributes_file_changes": true,
+                   "watch_create_directory_changes": true,
+                   "watch_create_file_changes": true,
+                   "watch_create_key_changes": true,
+                   "watch_delete_directory_changes": true,
+                   "watch_delete_file_changes": true,
+                   "watch_delete_key_changes": true,
+                   "watch_delete_value_changes": true,
+                   "watch_permissions_directory_changes": true,
+                   "watch_permissions_file_changes": true,
+                   "watch_rename_directory_changes": true,
+                   "watch_rename_file_changes": true,
+                   "watch_rename_key_changes": true,
+                   "watch_set_value_changes": true,
+                   "watch_write_file_changes": true
+               }
+        description -- The rule description. (String, 0-500 characters.)
+        rule_group_id -- Group ID containing the group configuration. (String)
+        path -- the file system or registry path to monitor. (String, 1-250 characters)
+                All paths must end with the path separator, e.g. c:\windows\ /usr/bin/
+        severity -- to categorize change events produced by this rule. (String)
+                    Allowed values: Low, Medium, High or Critical
+        depth -- recursion levels below the base path to monitor. (String)
+                 Allowed values: 1, 2, 3, 4, 5 or ANY
+        precedence -- the order in which rules will be evaluated starting with 1.
+                      Specifying a precedence value that is already set for another rule
+                      in the group will result this rule being placed before that existing rule.
+        include -- the files, directories, registry keys, or registry values that will be monitored. (String).
+                   Falcon GLOB syntax is supported.
+                   Allowed rule group configuration is based on the type of rule
+                   the rule group is added to.
+        exclude -- the files, directories, registry keys, or registry values that will NOT be monitored. (String).
+                   Falcon GLOB syntax is supported.
+                   Allowed rule group configuration is based on the type of rule
+                   the rule group is added to.
+        include_users -- the changes performed by specific users that will be monitored. (String).
+                   Falcon GLOB syntax is supported.
+                   macOS is not supported at this time.
+                   Allowed rule group configuration is based on the type of rule
+                   the rule group is added to.
+        exclude_users -- the changes performed by specific users that will NOT be monitored. (String).
+                   Falcon GLOB syntax is supported.
+                   macOS is not supported at this time.
+                   Allowed rule group configuration is based on the type of rule
+                   the rule group is added to.
+        include_processes -- the changes performed by specific processes that will be monitored. (String).
+                   Falcon GLOB syntax is supported.
+                   macOS is not supported at this time.
+                   Allowed rule group configuration is based on the type of rule
+                   the rule group is added to.
+        exclude_users -- the changes performed by specific processes that will be NOT monitored. (String).
+                         Falcon GLOB syntax is supported.
+                         macOS is not supported at this time.
+                         Allowed rule group configuration is based on the type of rule
+                         the rule group is added to.
+        watch_delete_directory_changes -- File system directory monitoring. Boolean.
+        watch_create_directory_changes -- File system directory monitoring. Boolean.
+        watch_rename_directory_changes -- File system directory monitoring. Boolean.
+        watch_attributes_directory_changes -- File system directory monitoring. Boolean.
+                                              macOS is not supported at this time.
+        watch_permissions_directory_changes -- File system directory monitoring. Boolean.
+                                               macOS is not supported at this time.
+        watch_rename_file_changes -- File system file monitoring. Boolean.
+        watch_write_file_changes -- File system file monitoring. Boolean.
+        watch_create_file_changes -- File system file monitoring. Boolean.
+        watch_delete_file_changes -- File system file monitoring. Boolean.
+        watch_attributes_file_changes -- File system file monitoring. Boolean.
+                                         macOS is not supported at this time.
+        watch_permissions_file_changes -- File system file monitoring. Boolean.
+                                          macOS is not supported at this time.
+        watch_create_key_changes -- Windows registry key and value monitoring. Boolean.
+        watch_delete_key_changes -- Windows registry key and value monitoring. Boolean.
+        watch_rename_key_changes -- Windows registry key and value monitoring. Boolean.
+        watch_set_value_changes -- Windows registry key and value monitoring. Boolean.
+        watch_delete_value_changes -- Windows registry key and value monitoring. Boolean.
+        watch_create_file_changes -- Windows registry key and value monitoring. Boolean.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/createRules
+        """
+        if not body:
+            body = filevantage_rule_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="createRules",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_rules(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Delete one or more rules from the specified rule group.
+
+        Rules that match a provided ID will be deleted form the provided rule group ID.
+
+        Keyword arguments:
+        ids -- List of rule group IDs to delete. String or list of strings.
+        parameters -- full parameters payload, not required if other keywords are provided.
+        rule_group_id -- The ID of the rule group from which the rules will be deleted.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/deleteRules
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="deleteRules",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict", "dict"])
+    def update_rule(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        r"""Update the provided rule configuration within the specified rule group.
+
+        The rule must exist within the specified rule group.
+
+        Keyword arguments:
+        body - full body payload in JSON format, not required if using other keywords.
+               {
+                   "created_timestamp": "string",
+                   "depth": "string",
+                   "description": "string",
+                   "exclude": "string",
+                   "exclude_processes": "string",
+                   "exclude_users": "string",
+                   "id": "string",
+                   "include": "string",
+                   "include_processes": "string",
+                   "include_users": "string",
+                   "modified_timestamp": "string",
+                   "path": "string",
+                   "precedence": 0,
+                   "rule_group_id": "string",
+                   "severity": "string",
+                   "type": "string",
+                   "watch_attributes_directory_changes": true,
+                   "watch_attributes_file_changes": true,
+                   "watch_create_directory_changes": true,
+                   "watch_create_file_changes": true,
+                   "watch_create_key_changes": true,
+                   "watch_delete_directory_changes": true,
+                   "watch_delete_file_changes": true,
+                   "watch_delete_key_changes": true,
+                   "watch_delete_value_changes": true,
+                   "watch_permissions_directory_changes": true,
+                   "watch_permissions_file_changes": true,
+                   "watch_rename_directory_changes": true,
+                   "watch_rename_file_changes": true,
+                   "watch_rename_key_changes": true,
+                   "watch_set_value_changes": true,
+                   "watch_write_file_changes": true
+               }
+        description -- The rule description. (String, 0-500 characters.)
+        id -- ID of the rule to be updated. (String)
+        rule_group_id -- Group ID containing the group configuration. (String)
+        path -- the file system or registry path to monitor. (String, 1-250 characters)
+                All paths must end with the path separator, e.g. c:\windows\ /usr/bin/
+        severity -- to categorize change events produced by this rule. (String)
+                    Allowed values: Low, Medium, High or Critical
+        depth -- recursion levels below the base path to monitor. (String)
+                 Allowed values: 1, 2, 3, 4, 5 or ANY
+        precedence -- the order in which rules will be evaluated starting with 1.
+                      Specifying a precedence value that is already set for another rule
+                      in the group will result this rule being placed before that existing rule.
+        include -- the files, directories, registry keys, or registry values that will be monitored. (String).
+                   Falcon GLOB syntax is supported.
+                   Allowed rule group configuration is based on the type of rule
+                   the rule group is added to.
+        exclude -- the files, directories, registry keys, or registry values that will NOT be monitored. (String).
+                   Falcon GLOB syntax is supported.
+                   Allowed rule group configuration is based on the type of rule
+                   the rule group is added to.
+        include_users -- the changes performed by specific users that will be monitored. (String).
+                   Falcon GLOB syntax is supported.
+                   macOS is not supported at this time.
+                   Allowed rule group configuration is based on the type of rule
+                   the rule group is added to.
+        exclude_users -- the changes performed by specific users that will NOT be monitored. (String).
+                   Falcon GLOB syntax is supported.
+                   macOS is not supported at this time.
+                   Allowed rule group configuration is based on the type of rule
+                   the rule group is added to.
+        include_processes -- the changes performed by specific processes that will be monitored. (String).
+                   Falcon GLOB syntax is supported.
+                   macOS is not supported at this time.
+                   Allowed rule group configuration is based on the type of rule
+                   the rule group is added to.
+        exclude_users -- the changes performed by specific processes that will be NOT monitored. (String).
+                         Falcon GLOB syntax is supported.
+                         macOS is not supported at this time.
+                         Allowed rule group configuration is based on the type of rule
+                         the rule group is added to.
+        watch_delete_directory_changes -- File system directory monitoring. Boolean.
+        watch_create_directory_changes -- File system directory monitoring. Boolean.
+        watch_rename_directory_changes -- File system directory monitoring. Boolean.
+        watch_attributes_directory_changes -- File system directory monitoring. Boolean.
+                                              macOS is not supported at this time.
+        watch_permissions_directory_changes -- File system directory monitoring. Boolean.
+                                               macOS is not supported at this time.
+        watch_rename_file_changes -- File system file monitoring. Boolean.
+        watch_write_file_changes -- File system file monitoring. Boolean.
+        watch_create_file_changes -- File system file monitoring. Boolean.
+        watch_delete_file_changes -- File system file monitoring. Boolean.
+        watch_attributes_file_changes -- File system file monitoring. Boolean.
+                                         macOS is not supported at this time.
+        watch_permissions_file_changes -- File system file monitoring. Boolean.
+                                          macOS is not supported at this time.
+        watch_create_key_changes -- Windows registry key and value monitoring. Boolean.
+        watch_delete_key_changes -- Windows registry key and value monitoring. Boolean.
+        watch_rename_key_changes -- Windows registry key and value monitoring. Boolean.
+        watch_set_value_changes -- Windows registry key and value monitoring. Boolean.
+        watch_delete_value_changes -- Windows registry key and value monitoring. Boolean.
+        watch_create_file_changes -- Windows registry key and value monitoring. Boolean.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/updateRules
+        """
+        if not body:
+            body = filevantage_rule_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateRules",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_rule_groups(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve the rule group details for one or more rule groups.
+
+        Full details of each rule group that matches a provided ID will be returned.
+
+        Keyword arguments:
+        ids -- List of rule group IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids keyword is provided.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/getRuleGroups
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getRuleGroups",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict", "dict"])
+    def create_rule_group(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Create a new rule group of the specified type.
+
+        Individual rules can be assigned to a rule group after it has been created.
+
+        Keyword arguments:
+        body - full body payload in JSON format, not required if using other keywords.
+               {
+                   "description": "string",
+                   "type": "string",
+                   "name": "string"
+               }
+        description -- The rule group description. (String, 0-500 characters.)
+        type -- The type of rule group. (String)
+                Allowed values: WindowsFiles, WindowsRegistry, LinuxFiles or MacFiles.
+        name -- Name of the rule group. (String, 1-100 characters.)
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/createRuleGroups
+        """
+        if not body:
+            body = filevantage_rule_group_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="createRuleGroups",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_rule_groups(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Delete a set of rule groups by specifying their IDs.
+
+        Keyword arguments:
+        ids -- List of rule group IDs to delete. String or list of strings.
+        parameters -- full parameters payload, not required if ids keyword is provided.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/deleteRuleGroups
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="deleteRuleGroups",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_rule_group(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Update the provided rule group.
+
+        Provides the ability to update the name and description of a rule group.
+
+        Keyword arguments:
+        body - full body payload in JSON format, not required if using other keywords.
+               {
+                   "description": "string",
+                   "id": "string",
+                   "name": "string"
+               }
+        description -- The rule group description. (String, 0-500 characters.)
+        id -- ID of the rule group to be updated. (String)
+        name -- Name of the rule group. (String, 1-100 characters.)
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/updateRuleGroups
+        """
+        if not body:
+            body = filevantage_rule_group_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateRuleGroups",
+            keywords=kwargs,
+            body=body
+            )
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_changes(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for changes within your environment. Returns one or more change IDs.
@@ -118,6 +980,9 @@ class FileVantage(ServiceClass):
     def query_changes_scroll(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for changes within your environment. Returns one or more change IDs.
 
+        Returns a list of Falcon FileVantage change IDs filtered, sorted and limited by the query
+        parameters provided. An unlimited number of results can be retrieved using multiple requests.
+
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
                   Available filters
@@ -152,12 +1017,134 @@ class FileVantage(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve the IDs of all rule groups that are of the provided rule group type.
+
+        Rule group ids will be returned sorted by created_timestamp order if a sort parameter
+        is not provided.
+
+        Keyword arguments:
+        limit -- The maximum number of ids to return. Defaults to 100 if not specified.
+                 (Integer, 1-500)
+        offset -- The first item to return, where 0 is the latest item. (Integer)
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax. (String)
+                Supported options: precedence, created_timestamp or modified_timestamp.
+                (e.g. created_timestamp|asc, modified_timestamp|desc, etc.)
+        type -- The type of policies to retrieve. (String)
+                Allowed values: Windows, Linux, or Mac.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/queryPolicies
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryPolicies",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_scheduled_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve the IDs of all scheduled exclusions contained within the provided policy ID.
+
+        Use the IDs from this response to fetch the rules with get_rules.
+
+        Keyword arguments:
+        policy_id -- The ID of the policy to retrieve the scheduled exclusion IDs for. (String)
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'policy_ids'. All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/queryScheduledExclusions
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryScheduledExclusions",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "policy_ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_rule_groups(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve the IDs of all rule groups that are of the provided rule group type.
+
+        Rule group ids will be returned sorted by created_timestamp order if a sort parameter
+        is not provided.
+
+        Keyword arguments:
+        limit -- The maximum number of ids to return. Defaults to 100 if not specified.
+                 (Integer, 1-500)
+        offset -- The first item to return, where 0 is the latest item. (Integer)
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax. (String)
+                Supported options: created_timestamp or modified_timestamp.
+                (e.g. created_timestamp|asc, modified_timestamp|desc, etc.)
+        type -- The rule group type to retrieve the IDs for. (String)
+                Allowed values: WindowsFiles, WindowsRegistry, LinuxFiles, or MacFiles.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/queryRuleGroups
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryRuleGroups",
+            keywords=kwargs,
+            params=parameters
+            )
+
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here
     # for backwards compatibility / ease of use purposes
+    updatePolicyHostGroups = update_policy_host_groups
+    updatePolicyPrecedence = update_policy_precedence
+    updatePolicyRuleGroups = update_policy_rule_groups
+    getPolicies = get_policies
+    createPolicies = create_policy
+    deletePolicies = delete_policies
+    updatePolicies = update_policies
+    getScheduledExclusions = get_scheduled_exclusions
+    createScheduledExclusions = create_scheduled_exclusions
+    deleteScheduledExclusions = delete_scheduled_exclusions
+    updateScheduledExclusions = update_scheduled_exclusions
+    updateRuleGroupPrecedence = update_rule_group_precedence
+    getRules = get_rules
+    createRules = create_rule
+    deleteRules = delete_rules
+    updateRules = update_rule
+    getRuleGroups = get_rule_groups
+    createRuleGroups = create_rule_group
+    deleteRuleGroups = delete_rule_groups
+    updateRuleGroups = update_rule_group
     getChanges = get_changes
     queryChanges = query_changes
     highVolumeQueryChanges = query_changes_scroll
+    queryRuleGroups = query_rule_groups
+    queryScheduledExclusions = query_scheduled_exclusions
+    queryPolicies = query_policies
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
