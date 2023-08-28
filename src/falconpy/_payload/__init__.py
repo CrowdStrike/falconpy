@@ -55,6 +55,12 @@ from ._d4c_registration import (
 from ._cspm_registration import cspm_registration_payload, cspm_policy_payload, cspm_scan_payload
 from ._device_control_policy import device_policy_payload, default_device_policy_config_payload
 from ._falconx import falconx_payload
+from ._filevantage import (
+    filevantage_rule_group_payload,
+    filevantage_rule_payload,
+    filevantage_policy_payload,
+    filevantage_scheduled_exclusion_payload
+    )
 from ._mssp import mssp_payload
 from ._firewall import (
     firewall_policy_payload,
@@ -91,5 +97,6 @@ __all__ = [
     "extraction_payload", "simple_action_parameter", "network_locations_metadata_payload",
     "network_locations_create_payload", "scheduled_scan_payload", "token_settings_payload",
     "recon_export_job_payload", "default_device_policy_config_payload", "registry_payload",
-    "gcp_registration_payload"
+    "gcp_registration_payload", "filevantage_rule_group_payload", "filevantage_rule_payload",
+    "filevantage_policy_payload", "filevantage_scheduled_exclusion_payload"
 ]
