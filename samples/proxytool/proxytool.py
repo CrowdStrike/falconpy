@@ -104,7 +104,7 @@ if args.scope.lower() not in ["cid", "hostgroup"]:
 
 # Main routine
 def main():  # pylint: disable=R0912,R0915,C0116
-    log("Starting execution of ProxyTool v3.4")
+    log("Starting execution of ProxyTool")
 
     log("Authenticating to API")
     auth = OAuth2(client_id=args.falcon_client_id,
