@@ -37,6 +37,11 @@ This example accepts the following input parameters.
 | `--scope_id` | Either the CID or the Host Group ID | required |
 | `--base_url` | CrowdStrike base URL (only required for GovCloud, pass usgov1) | optional |
 
+‼️WARNING‼️
+This script can target either a HOST GROUP (passing ´hostgroup´ as scope, and the group ID as scope_id) or the complete CID (passing ´cid´ as scope, and the CID as scope_id).
+This script cannot target a single HOST.
+
+
 If you want to set or change proxy configuration:
 
 ```shell
