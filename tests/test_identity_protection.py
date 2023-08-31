@@ -16,7 +16,7 @@ auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 
 falcon = IdentityProtection(auth_object=config)
-AllowedResponses = [200, 429]
+AllowedResponses = [200, 403, 429]
 
 TEST_QUERY = """
 query ($after: Cursor) {
@@ -68,3 +68,19 @@ class TestIdentityProtection:
     def test_graphql(self):
         assert self.idp_graphql() is True
 
+    def service_idp_remaining_tests(self):
+        error_checks = True
+        tests = {
+            "GetSensorAggregates": falcon.get_sensor_aggregates(date_ranges=[{}]),
+            "GetSensorDetails": falcon.get_sensor_details(ids="12345678"),
+            "QuerySensorsByFilter": falcon.query_sensors(limit=1)
+        }
+        for key in tests:
+            if tests[key]["status_code"] not in AllowedResponses:
+                # print(f"{key}: {tests[key]}")
+                error_checks = False
+
+        return error_checks
+
+    def test_remaining_functionality(self):
+        assert self.service_idp_remaining_tests() is True

@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import process_service_request, force_default
+from ._payload import aggregate_payload, generic_payload_list
 from ._service_class import ServiceClass
 from ._endpoint._identity_protection import _identity_protection_endpoints as Endpoints
 
@@ -97,11 +98,161 @@ class IdentityProtection(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["body"], default_types=["list"])
+    def get_sensor_aggregates(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get sensor aggregates as specified via json in request body.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "exclude": "string",
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "include": "string",
+                        "interval": "string",
+                        "max_doc_count": 0,
+                        "min_doc_count": 0,
+                        "missing": "string",
+                        "name": "string",
+                        "q": "string",
+                        "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                        ],
+                        "size": 0,
+                        "sort": "string",
+                        "sub_aggregates": [
+                            null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        exclude -- Fields to exclude. String.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        from -- Integer.
+        include -- Fields to include. String.
+        interval -- String.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
+        missing -- String.
+        name -- Scan name. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protection/GetSensorAggregates
+        """
+        if not body:
+            # Similar to 664: Detects aggregates expects a list
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetSensorAggregates",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_sensor_details(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get details on one or more sensors by providing device IDs.
+
+        Keyword arguments:
+        body -- full body payload, not required if ids are provided as keyword.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- Sensor ID(s) to retrieve. String or list of strings.  (Max: 5,000)
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protection/GetSensorDetails
+        """
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetSensorDetails",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_sensors(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search for sensors in your environment by providing hostname, IP, and other criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of records to return in this response. [Integer, 1-200]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax. Ex: hostanme.desc or status.asc
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protections/QuerySensorsByFilter
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QuerySensorsByFilter",
+            keywords=kwargs,
+            params=parameters
+            )
+
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here
     # for backwards compatibility / ease of use purposes
     GraphQL = graphql
     api_preempt_proxy_post_graphql = graphql
+    GetSensorAggregates = get_sensor_aggregates
+    GetSensorDetails = get_sensor_details
+    QuerySensorsByFilter = query_sensors
+    query_sensors_by_filter = query_sensors
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
