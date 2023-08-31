@@ -86,6 +86,7 @@ from ._api_request import (
     )
 from .alerts import Alerts
 from .api_complete import APIHarness
+from .cloud_snapshots import CloudSnapshots
 from .cloud_connect_aws import CloudConnectAWS
 from .cspm_registration import CSPMRegistration
 from .custom_ioa import CustomIOA
@@ -170,7 +171,7 @@ __all__ = [
     "FunctionalityNotImplemented", "BearerToken", "LogFacility", "InvalidBaseURL",
     "InterfaceConfiguration", "RequestBehavior", "RequestConnection", "RequestMeta",
     "RequestPayloads", "RequestValidator", "PayloadValidationError", "MIN_TOKEN_RENEW_WINDOW",
-    "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS",
+    "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS", "CloudSnapshots",
     "NoAuthenticationMechanism", "InvalidIndex", "version", "InvalidCredentialFormat",
     "UnnecessaryEncodingUsed"
     ]
