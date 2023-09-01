@@ -16,7 +16,7 @@ auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 
 falcon = IdentityProtection(auth_object=config)
-AllowedResponses = [200, 403, 429]
+AllowedResponses = [200, 400, 429]
 
 TEST_QUERY = """
 query ($after: Cursor) {
@@ -68,7 +68,10 @@ class TestIdentityProtection:
     def test_graphql(self):
         assert self.idp_graphql() is True
 
+
     def service_idp_remaining_tests(self):
+        if falcon.base_url.lower() != "https://api.crowdstrike.com":
+            pytest.skip("Identity protection testing is not supported in this region")
         error_checks = True
         tests = {
             "GetSensorAggregates": falcon.get_sensor_aggregates(date_ranges=[{}]),
