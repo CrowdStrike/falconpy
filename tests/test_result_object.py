@@ -5,6 +5,7 @@ import os
 import sys
 import pytest
 import hashlib
+import warnings
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 
@@ -24,7 +25,8 @@ from falconpy import (
     BaseResource,
     Errors,
     SampleUploads,
-    CSPMRegistration
+    CSPMRegistration,
+    UnnecessaryEncodingUsed
     )
 from falconpy._result._base_dictionary import UnsupportedPythonVersion
 
@@ -728,3 +730,17 @@ class TestResults:
         if isinstance(result, dict):
             _returned = True
         assert _returned
+
+    @not_supported
+    def test_unnecessary_encoding_used_warning(self):
+        with pytest.warns(UnnecessaryEncodingUsed):
+            # warnings.warn("Debug", UnnecessaryEncodingUsed)
+            _success = True
+            try:
+                hosts = Hosts(auth_object=config, pythonic=True)
+                hosts.query_devices_by_filter_scroll(filter="hostname%3A%27falconpy%27")
+            except APIError:
+                _success = True
+            hosts = Hosts(auth_object=hosts, pythonic=False)
+            hosts.query_devices_by_filter_scroll(filter="hostname%3A%27falconpy%27")
+            assert _success
