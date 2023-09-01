@@ -578,7 +578,9 @@ def args_to_params(payload: dict,
                                 if pyth:
                                     warn(msg, UnnecessaryEncodingUsed, stacklevel=5)
                                 else:
-                                    log_utl.warning(msg)
+                                    if log_utl:
+                                        log_utl.warning(msg)
+
                         # More data type validation can go here
                         payload[arg_name] = passed_arguments[arg_name]
             except IndexError:
@@ -663,7 +665,7 @@ def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
                                            endpoints,
                                            operation_id,
                                            calling_object.log,
-                                           kwargs.get("pythonic", None)
+                                           calling_object.pythonic
                                            )
     expand_result = passed_keywords.get("expand_result", False) if passed_keywords else kwargs.get("expand_result", False)
     new_keywords = {
@@ -680,7 +682,7 @@ def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
         "body_required": kwargs.get("body_required", None),
         "expand_result": expand_result,
         "container": container,
-        "pythonic": kwargs.get("pythonic", None),
+        "pythonic": calling_object.pythonic,
         "perform": True
     }
 
