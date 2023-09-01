@@ -839,3 +839,4 @@ ServiceClass
 FalconInterface
 UberInterface
 APIRequest
+hostgroup
