@@ -73,7 +73,12 @@ class BaseResult:
             if isinstance(_headers, CaseInsensitiveDict):
                 _headers = dict(headers)
             self.headers = Headers(_headers)
-            if isinstance(body, bytes):
+            if isinstance(body, list):
+                # Specific to report_executions_download_get returning raw
+                # JSON payloads as a list. There will be no Meta or Errors
+                # branch in this response.
+                self.resources = Resources(body)  # pragma: no cover
+            elif isinstance(body, bytes):
                 # Binary response
                 self.resources = BinaryFile(body)
                 self.meta = Meta()
