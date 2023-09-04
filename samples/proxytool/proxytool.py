@@ -116,13 +116,15 @@ def main():  # pylint: disable=R0912,R0915,C0116
 
     # Check which CID the API client is operating in, as sanity check. Exit if operating CID does not match provided scope_id.
     falcon = SensorDownload(auth_object=auth, base_url=args.base_url)
-    response = falcon.get_sensor_installer_ccid()
 
-    if response["status_code"] < 300:
-        log(f"-- Authentication correct.")
+    if falcon.token_status < 204:
+        log(f"Authentication correct.")
     else:
-        log(f"-- Authentication error: {response['status_code']} - {response['body']['errors'][0]['message']}")
-        raise SystemExit(f"-- Authentication error: {response['status_code']} - {response['body']['errors'][0]['message']}")
+        log(f"Authentication error: {falcon.token_status} - {falcon.token_fail_reason}")
+        raise SystemExit(f"Authentication error: {falcon.token_status} - {falcon.token_fail_reason}")
+
+
+    response = falcon.get_sensor_installer_ccid()
 
     current_cid = response["body"]["resources"][0][:-3]
     if (args.scope.lower() == "cid" and (args.scope_id.lower() != current_cid.lower())):
