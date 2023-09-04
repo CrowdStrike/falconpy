@@ -12,6 +12,7 @@ r"""ProxyTool - Update Falcon Sensor proxy configurations remotely.
 
  CHANGE LOG
 
+ 04/09/2023   v3.6    Handle API authentication errors
  16/08/2023   v3.5    Add sanity check when using CID as scope
  28/02/2023   v3.4    Add ability to disable/delete proxy config
  27/10/2022   v3.3    Use command line arguments instead of external file for config
@@ -19,6 +20,7 @@ r"""ProxyTool - Update Falcon Sensor proxy configurations remotely.
  25/10/2022   v3.1    Ported to falconpy SDK instead of reinventing the wheel
  23/10/2022   v3.0    Rewrote 2.0 for error handling, logging and fetching host IDs from API
 """
+
 # Import dependencies
 import datetime
 from argparse import ArgumentParser, RawTextHelpFormatter
@@ -113,12 +115,19 @@ def main():  # pylint: disable=R0912,R0915,C0116
                   )
 
     # Check which CID the API client is operating in, as sanity check. Exit if operating CID does not match provided scope_id.
-    # Fixes https://github.com/CrowdStrike/falconpy/issues/1018
     falcon = SensorDownload(auth_object=auth, base_url=args.base_url)
-    current_cid = falcon.get_sensor_installer_ccid()["body"]["resources"][0][:-3]
+    response = falcon.get_sensor_installer_ccid()
+
+    if response["status_code"] < 300:
+        log(f"-- Authentication correct.")
+    else:
+        log(f"-- Authentication error: {response['status_code']} - {response['body']['errors'][0]['message']}")
+        raise SystemExit(f"-- Authentication error: {response['status_code']} - {response['body']['errors'][0]['message']}")
+
+    current_cid = response["body"]["resources"][0][:-3]
     if (args.scope.lower() == "cid" and (args.scope_id.lower() != current_cid.lower())):
         log(f"The entered CID [{args.scope_id.upper()}] does not match the API client CID [{current_cid.upper()}].")
-        raise SystemExit(f"The entered CID [{args.scope_id.upper()}] does not match the API client CID [{current_cid.upper()}].")
+        raise SystemExit(f"The entered CID [{args.scope_id.upper()}] does not match the API client CID [{current_cid.upper()}].")   
 
 
     # Fetch list of hosts
