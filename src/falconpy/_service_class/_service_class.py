@@ -325,3 +325,8 @@ class ServiceClass(BaseServiceClass):
     def token_valid(self) -> bool:
         """Return the current status of the token."""
         return self.auth_object.token_valid
+
+    @property
+    def token_stale(self) -> bool:
+        """Return the current expiration status of the token."""
+        return self.auth_object.token_stale

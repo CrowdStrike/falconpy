@@ -89,7 +89,7 @@ def command_error_handler(func: Callable):
     return wrapper
 
 
-class APIAdvanced(UberInterface):
+class APIHarnessV2(UberInterface):
     """The FalconPy Uber Class, enhanced version.
 
     The Uber Class inherits from the UberInterface class, which is a stand alone
