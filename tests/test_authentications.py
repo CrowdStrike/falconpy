@@ -86,15 +86,21 @@ class TestAuthentications:
             return False
 
     def serviceAny_forceCrossCloudResponseGovFailure(self):
+        _success = False
         falcon = OAuth2(client_id=os.environ["CROSS_DEBUG_KEY"],
                         client_secret=os.environ["CROSS_DEBUG_SECRET"],
                         base_url="us1", debug=_DEBUG
                         )
         result = falcon.token()
         if result["status_code"] == 403:
-            return True
-        else:
-            return False
+            falcon = APIHarness(client_id=os.environ["CROSS_DEBUG_KEY"],
+                                client_secret=os.environ["CROSS_DEBUG_SECRET"],
+                                base_url="us1", debug=_DEBUG
+                                )
+            result = falcon.authenticate()
+            if falcon.token_status == 403:
+                _success = True
+        return _success
 
     def serviceAny_checkRegionNameLookups(self):
         falcon = OAuth2(client_id=auth.config["falcon_client_id"],
