@@ -37,18 +37,18 @@ For more information, please refer to <https://unlicense.org>
 """
 import functools
 from typing import Dict, Union, Callable
-from ._constant import ALLOWED_METHODS
-from ._util import (
+from .._constant import ALLOWED_METHODS
+from .._util import (
     perform_request
     )
-from ._auth_object import UberInterface
-from ._util import (
+from .._auth_object import UberInterface
+from .._util import (
     handle_body_payload_ids,
     scrub_target,
     handle_container_operations,
     uber_request_keywords
     )
-from ._error import (
+from .._error import (
     InvalidOperation,
     InvalidMethod,
     TokenNotSpecified,
@@ -89,8 +89,8 @@ def command_error_handler(func: Callable):
     return wrapper
 
 
-class APIHarness(UberInterface):
-    """The FalconPy Uber Class.
+class APIAdvanced(UberInterface):
+    """The FalconPy Uber Class, enhanced version.
 
     The Uber Class inherits from the UberInterface class, which is a stand alone
     class that encapsulates the FalconAuth class. This allows the Uber Class to

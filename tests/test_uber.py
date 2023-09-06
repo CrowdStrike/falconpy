@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath('src'))
 # flake8: noqa=E402
 # pylint: disable=C0103
 # Classes to test - manually imported from our sibling folder
-from falconpy import APIHarness, APIError
+from falconpy import APIAdvanced, APIError
 # Import perform_request from _util so we can test generating 405's directly
 from falconpy._util import perform_request, force_default
 
@@ -37,7 +37,7 @@ else:
     else:
         sys.exit(1)
 
-falcon = APIHarness(
+falcon = APIAdvanced(
     client_id=config["falcon_client_id"],
     client_secret=config["falcon_client_secret"],
     base_url=config["falcon_base_url"], debug=_DEBUG
@@ -235,14 +235,14 @@ class TestUber:
         return returned
 
     def uberCCAWS_BadAuthentication(self):
-        falcon = APIHarness(debug=_DEBUG)
+        falcon = APIAdvanced(debug=_DEBUG)
         if falcon.command("QueryAWSAccounts", parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
 
     def uberCCAWS_DisableSSLVerify(self):
-        falcon = APIHarness(
+        falcon = APIAdvanced(
             creds={
                 "client_id": config["falcon_client_id"],
                 "client_secret": config["falcon_client_secret"]
@@ -339,45 +339,45 @@ class TestUber:
     def test_DisableSSLVerify(self):
         assert self.uberCCAWS_DisableSSLVerify() is True
 
-    # def test_uber_deprecated_methods(self):
-    #     assert bool(falcon.valid_cred_format()
-    #                 and falcon.headers()
-    #                 and falcon.token
-    #                 )
+    def test_uber_deprecated_methods(self):
+        assert bool(falcon.valid_cred_format()
+                    and falcon.headers()
+                    and falcon.token
+                    )
 
-    # def test_uber_deprecated_attributes(self):
-    #     _success = False
-    #     falcon.token_renew_window = 180
-    #     if falcon.token_renew_window == 180:
-    #         _success = True
-    #     assert _success
+    def test_uber_deprecated_attributes(self):
+        _success = False
+        falcon.token_renew_window = 180
+        if falcon.token_renew_window == 180:
+            _success = True
+        assert _success
 
-    # def test_uber_properties(self):
-    #     # Force a new object so we can flip the debug flag
-    #     temp_falcon = APIHarness(access_token=falcon.token_value,
-    #                              base_url=config["falcon_base_url"],
-    #                              debug=True
-    #                              )
+    def test_uber_properties(self):
+        # Force a new object so we can flip the debug flag
+        temp_falcon = APIAdvanced(access_token=falcon.token_value,
+                                 base_url=config["falcon_base_url"],
+                                 debug=True
+                                 )
 
-    #     assert bool(temp_falcon.debug)
+        assert bool(temp_falcon.debug)
 
-    # def test_uber_revoke_failure(self):
-    #     assert bool(falcon.command("oauth2RevokeToken")["status_code"] == 400)
+    def test_uber_revoke_failure(self):
+        assert bool(falcon.command("oauth2RevokeToken")["status_code"] == 400)
 
-    # def test_uber_revoke_success(self):
-    #     assert(bool(
-    #         falcon.command("oauth2RevokeToken", token_value=falcon.token_value)["status_code"]==200
-    #         ))
+    def test_uber_revoke_success(self):
+        assert(bool(
+            falcon.command("oauth2RevokeToken", token_value=falcon.token_value)["status_code"]==200
+            ))
 
-    # def test_pythonic_failure(self):
-    #     _success = False
-    #     new_falcon = APIHarness(access_token=falcon.token_value,
-    #                         base_url=config["falcon_base_url"],
-    #                         debug=_DEBUG,
-    #                         pythonic=True
-    #                         )
-    #     try:
-    #         new_falcon.command("GetDeviceDetails", ids="12345678")
-    #     except APIError:
-    #         _success = True
-    #     assert _success
+    def test_pythonic_failure(self):
+        _success = False
+        new_falcon = APIAdvanced(access_token=falcon.token_value,
+                            base_url=config["falcon_base_url"],
+                            debug=_DEBUG,
+                            pythonic=True
+                            )
+        try:
+            new_falcon.command("GetDeviceDetails", ids="12345678")
+        except APIError:
+            _success = True
+        assert _success
