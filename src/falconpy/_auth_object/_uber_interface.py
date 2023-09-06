@@ -142,13 +142,22 @@ class UberInterface(FalconInterface):
         """Generate an authorization token."""
         super().login()
 
-        return self.authenticated
+        return self.token_valid
 
     def logout(self) -> bool:
         """Revoke the current authorization token."""
         result = super().logout()
 
         return bool(result["status_code"] == 200)
+
+    # Legacy property getters maintained for backwards functionality.
+    def authenticated(self) -> bool:
+        """Return the current authentication status."""
+        return self.token_valid
+
+    def token_expired(self) -> bool:
+        """Return the current token expiration status."""
+        return self.token_stale
 
     # _    ____ ____ ____ ____ _   _    _  _ ____ _  _ ___  _    ____ ____ ____
     # |    |___ | __ |__| |     \_/     |__| |__| |\ | |  \ |    |___ |__/ [__
