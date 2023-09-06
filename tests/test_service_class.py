@@ -300,7 +300,9 @@ class TestServiceClass:
     @not_supported
     def test_log_facility_shutdown(self):
         _thing = OAuth2(creds=config.creds, debug=True)
-        if _thing.log_facility.active:
+        _thing.login()
+        if (_thing.authenticated() and not _thing.token_expired()) or _thing.log_facility.active:  # Duplicative, testing methods
+            #if _thing.log_facility.active:
             _thing.log_facility.deactivate_log()
 
         assert not _thing.log
@@ -343,6 +345,8 @@ class TestServiceClass:
     def test_list_response_component_get_property(self):
         with pytest.warns(SSLDisabledWarning):
             _no_ssl = Hosts(creds=config.creds, pythonic=True, debug=_DEBUG, ssl_verify=False)
+            # if _no_ssl.base_url == "https://api.laggar.gcw.crowdstrike.com":
+            #     pytest.skip("SSL required for GovCloud testing.")
             try:
                 _thing: Result = _no_ssl.query_devices(limit=3)
             except APIError:
@@ -363,8 +367,11 @@ class TestServiceClass:
     def test_list_response_component_get_property_fail(self):
         with pytest.warns(SSLDisabledWarning):
             _no_ssl = Hosts(creds=config.creds, pythonic=True, debug=_DEBUG, ssl_verify=False)
+            if _no_ssl.token_status == 403:
+                pytest.skip("SSL required for GovCloud testing.")
             try:
-                _thing: Result = _no_ssl.query_devices(limit=3)
+                if _no_ssl.token_valid and not _no_ssl.token_stale:  # Duplicative, just testing the properties
+                    _thing: Result = _no_ssl.query_devices(limit=3)
             except APIError:
                 pytest.skip("SSL required for GovCloud testing.")
 

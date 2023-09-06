@@ -166,8 +166,9 @@ class TestUber:
 
     def uberContainer_TestBodyIDsPayload(self):
         successful = False
-        if falcon.command("GetDeviceDetails", ids="12345678")["status_code"] in AllowedResponses:
-            successful = True
+        if falcon.authenticated and not falcon.token_expired():
+            if falcon.command("GetDeviceDetails", ids="12345678")["status_code"] in AllowedResponses:
+                successful = True
 
         return successful
 
@@ -338,6 +339,21 @@ class TestUber:
     @pytest.mark.filterwarnings("ignore:Unverified HTTPS request is being made.*")
     def test_DisableSSLVerify(self):
         assert self.uberCCAWS_DisableSSLVerify() is True
+
+    def test_crossover_properties(self):
+        _success = True
+        try:
+            _ = falcon.token_value
+            debug_setting = falcon.debug
+            pythonic_setting = falcon.pythonic
+            falcon.pythonic = False
+            debug_rec_count = falcon.debug_record_count
+            falcon.debug_record_count = 101
+            sanitize = falcon.sanitize_log
+            falcon.sanitize_log = True
+        except:
+            _success = False
+        assert _success
 
     # def test_uber_deprecated_methods(self):
     #     assert bool(falcon.valid_cred_format()
