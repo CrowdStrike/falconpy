@@ -6,7 +6,7 @@
  !!:  !!! !!:      !!:      !!: :!!  !!:      :!!      !!:  !!!   !!:   !!:      !!:  !!!
  :: :  :  : :: :::  :        :   : : : :: :::  :: :: :  :   : :    :    : :: ::: :: :  :
 
-This class is deprecated! Developers should import APIAdvanced instead.
+This class is deprecated! Developers should import APIHarnessV2 instead.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -45,7 +45,6 @@ For more information, please refer to <https://unlicense.org>
 """
 import time
 from logging import Logger, getLogger
-from typing import Dict
 from .._util import (
     _ALLOWED_METHODS,
     perform_request,
@@ -63,7 +62,11 @@ from .._log import LogFacility
 
 
 class APIHarness:
-    """This one does it all. It's like the One Ring with significantly fewer orcs."""
+    """This one does it all. It's like the One Ring with significantly fewer orcs.
+
+    This is the LEGACY version of the UBER CLASS and is DEPRECATED as of v1.3.0.
+    Developers should make use of the new Uber Class solution: APIHarnessV2.
+    """
 
     # pylint: disable=too-many-instance-attributes
     _token_fail_headers = {}  # Issue #578
@@ -80,7 +83,7 @@ class APIHarness:
                  user_agent: str = None,
                  renew_window: int = 120,
                  debug: bool = False,  # New functionality
-                 access_token: str = None,  # Not supported
+                 access_token: str = None,  # pylint: disable=W0613  # Not supported
                  pythonic: bool = False,  # New functionality
                  sanitize_log: bool = True,  # New functionality
                  debug_record_count: int = None  # New functionality
@@ -159,7 +162,6 @@ class APIHarness:
                                                  sanitize_log
                                                  )
 
-
     def valid_cred_format(self: object) -> bool:
         """Confirm credential dictionary format.
 
@@ -219,7 +221,7 @@ class APIHarness:
                 if "errors" in result["body"]:
                     if result["body"]["errors"]:
                         self.token_fail_reason = result["body"]["errors"][0]["message"]
-        else:
+        else:  # pragma: no cover
             self.authenticated = False
             self.token_fail_reason = TokenFailReason["UNEXPECTED"].value
             self.token_status = 403
@@ -447,17 +449,25 @@ class APIHarness:
     @property
     def debug_record_count(self) -> int:
         """Return the current debug record count setting."""
-        return self.log_facility.debug_record_count
+        returned = 100
+        if self.log_facility:
+            returned = self.log_facility.debug_record_count
+        return returned
 
     @debug_record_count.setter
     def debug_record_count(self, value: int):
-        self.log_facility.debug_record_count = value
+        if self.log_facility:
+            self.log_facility.debug_record_count = value
 
     @property
     def sanitize_log(self) -> bool:
         """Return the current log sanitization."""
-        return self.log_facility.sanitize_log
+        returned = True
+        if self.log_facility:
+            returned = self.log_facility.sanitize_log
+        return returned
 
     @sanitize_log.setter
     def sanitize_log(self, value):
-        self.log_facility.sanitize_log = value
+        if self.log_facility:
+            self.log_facility.sanitize_log = value

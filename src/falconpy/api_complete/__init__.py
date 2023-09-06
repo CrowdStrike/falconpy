@@ -45,6 +45,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from ._legacy import APIHarness
-from ._advanced import APIAdvanced
+from ._advanced import APIHarnessV2
 
-__all__ = ["APIHarness", "APIAdvanced"]
+__all__ = ["APIHarness", "APIHarnessV2"]
