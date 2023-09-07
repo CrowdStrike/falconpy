@@ -12,7 +12,8 @@ and conveniently issue Falcon sensor proxy configuration changes.
 - The script uses the queuing feature of RTR, so hosts don't need to be online at the time the script is executed, they will receive the commands if they connect to our cloud within the next 7 days.
 - The script checks that the CID provided as a scope_id argument is the same the API client is working with.
 - Handles API authentication errors gracefully.
-
+- It can be used in both Windows and Linux sensors.
+  
 ‼️WARNING‼️
 This script has the potential to disrupt communications between the Falcon sensor and the cloud. It is recommended users test with a limited Host Group first to troubleshoot any issues.
 
