@@ -12,7 +12,7 @@ r"""ProxyTool - Update Falcon Sensor proxy configurations remotely.
 
  CHANGE LOG
 
- 04/09/2023   v3.6    Handle API authentication errors
+ 07/08/2023   v3.6    Add Linux support and handle API authentication errors
  16/08/2023   v3.5    Add sanity check when using CID as scope
  28/02/2023   v3.4    Add ability to disable/delete proxy config
  27/10/2022   v3.3    Use command line arguments instead of external file for config
@@ -21,9 +21,12 @@ r"""ProxyTool - Update Falcon Sensor proxy configurations remotely.
  23/10/2022   v3.0    Rewrote 2.0 for error handling, logging and fetching host IDs from API
 """
 
+
 # Import dependencies
 import datetime
 from argparse import ArgumentParser, RawTextHelpFormatter
+
+version = "3.6"
 
 # Define logging function
 def log(msg):
@@ -36,6 +39,7 @@ try:
         Hosts,
         OAuth2,
         RealTimeResponse,
+        RealTimeResponseAdmin,
         HostGroup,
         SensorDownload
     )
@@ -104,45 +108,19 @@ if args.scope.lower() not in ["cid", "hostgroup"]:
 
 
 
-# Main routine
-def main():  # pylint: disable=R0912,R0915,C0116
-    log("Starting execution of ProxyTool")
+# Fetch list of hosts, platform_name is Windows or Linux
+def fetch_hosts(platform_name):
+    global auth
 
-    log("Authenticating to API")
-    auth = OAuth2(client_id=args.falcon_client_id,
-                  client_secret=args.falcon_client_secret,
-                  base_url=args.base_url
-                  )
-
-    # Check which CID the API client is operating in, as sanity check. Exit if operating CID does not match provided scope_id.
-    falcon = SensorDownload(auth_object=auth, base_url=args.base_url)
-
-    if falcon.token_status < 204:
-        log(f"Authentication correct.")
-    else:
-        log(f"Authentication error: {falcon.token_status} - {falcon.token_fail_reason}")
-        raise SystemExit(f"Authentication error: {falcon.token_status} - {falcon.token_fail_reason}")
-
-
-    response = falcon.get_sensor_installer_ccid()
-
-    current_cid = response["body"]["resources"][0][:-3]
-    if (args.scope.lower() == "cid" and (args.scope_id.lower() != current_cid.lower())):
-        log(f"The entered CID [{args.scope_id.upper()}] does not match the API client CID [{current_cid.upper()}].")
-        raise SystemExit(f"The entered CID [{args.scope_id.upper()}] does not match the API client CID [{current_cid.upper()}].")   
-
-
-    # Fetch list of hosts
     if args.scope.lower() == "cid":
-        log(f"Getting all hosts from CID [{args.scope_id}]")
+        log(f"Getting all {platform_name} hosts from CID [{args.scope_id}]")
         falcon = Hosts(auth_object=auth, base_url=args.base_url)
     else:
-        log(f"Getting all hosts from host group ID [{args.scope_id}]")
+        log(f"Getting all {platform_name} hosts from host group ID [{args.scope_id}]")
         falcon = HostGroup(auth_object=auth, base_url=args.base_url)
 
-
-    offset = ""
     hosts_all = []
+    offset = ""
 
     while True:
         batch_size = 5000 # 5000 is max supported by API
@@ -151,20 +129,20 @@ def main():  # pylint: disable=R0912,R0915,C0116
             # Fetch all Windows CID hosts
             response = falcon.query_devices_by_filter_scroll(offset=offset,
                                                              limit=batch_size,
-                                                             filter="platform_name:'Windows'"
+                                                             filter=f"platform_name:'{platform_name}'"
                                                              )
 
         else:
             # Fetch all Windows host group ID hosts
             if offset == "":
                 response = falcon.query_group_members(limit=batch_size,
-                                                      filter="platform_name:'Windows'",
+                                                      filter=f"platform_name:'{platform_name}'",
                                                       id=args.scope_id
                                                       )
             else:
                 response = falcon.query_group_members(offset=offset,
                                                       limit=batch_size,
-                                                      filter="platform_name:'Windows'",
+                                                      filter=f"platform_name:'{platform_name}'",
                                                       id=args.scope_id
                                                       )
 
@@ -180,26 +158,87 @@ def main():  # pylint: disable=R0912,R0915,C0116
         if len(hosts_all) >= int(response['body']['meta']['pagination']['total']):
             break
 
-    log(f"-- Retrieved a total of {str(len(hosts_all))} hosts")
+    log(f"-- Retrieved a total of {str(len(hosts_all))} {platform_name} hosts")
+    return(hosts_all)
 
 
+
+
+def rtr_linux(hosts_all):
     # Now that we have the host IDs, we create a batch RTR list of commands to execute it in all hosts
+    falcon = RealTimeResponse(auth_object=auth, base_url=args.base_url)
+    falcon_admin = RealTimeResponseAdmin(auth_object=auth, base_url=args.base_url)
 
+    # Get batch id
+    response = falcon.batch_init_sessions(host_ids=hosts_all, queue_offline=True)
+
+    batch_id = response['body']['batch_id']
+
+
+    if batch_id:
+        log(f"Initiated RTR batch with id {batch_id} for LINUX hosts")
+    else:
+        raise SystemExit("Unable to initiate RTR session with hosts.")
+
+    if not args.proxy_disable:
+        # Enable proxy
+        # Configure proxy: sudo /opt/CrowdStrike/falconctl -s --aph=<proxy host> --app=<proxy port>
+        command = f"/opt/CrowdStrike/falconctl -s --aph={args.proxy_hostname} --app={args.proxy_port}"
+        response = falcon_admin.batch_admin_command(batch_id=batch_id,
+                                                        base_command="runscript",
+                                                        command_string=f"runscript -Raw=```{command}```"
+                                                        )
+        if response["status_code"] == 201:
+            log(f"-- Command: {command}")
+        else:
+            raise SystemExit(f"Error, Response: {response['status_code']} - {response.text}")
+        
+        # Enable proxy: sudo /opt/CrowdStrike/falconctl -s --apd=FALSE
+        command = f"/opt/CrowdStrike/falconctl -s --apd=FALSE"
+        response = falcon_admin.batch_admin_command(batch_id=batch_id,
+                                                        base_command="runscript",
+                                                        command_string=f"runscript -Raw=```{command}```"
+                                                        )
+        if response["status_code"] == 201:
+            log(f"-- Command: {command}")
+        else:
+            raise SystemExit(f"Error, Response: {response['status_code']} - {response.text}")
+
+    else:
+        # Disable proxy
+        # Disable proxy: sudo /opt/CrowdStrike/falconctl -s --apd=TRUE
+        command = f"/opt/CrowdStrike/falconctl -s --apd=TRUE"
+        response = falcon_admin.batch_admin_command(batch_id=batch_id,
+                                                        base_command="runscript",
+                                                        command_string=f"runscript -Raw=```{command}```"
+                                                        )
+        if response["status_code"] == 201:
+            log(f"-- Command: {command}")
+        else:
+            raise SystemExit(f"Error, Response: {response['status_code']} - {response.text}")
+        
+
+    log("-- Finished launching RTR commands, please check progress in the RTR audit logs")
+
+
+
+
+
+def rtr_windows(hosts_all):
+    # Now that we have the host IDs, we create a batch RTR list of commands to execute it in all hosts
     falcon = RealTimeResponse(auth_object=auth, base_url=args.base_url)
 
     # Get batch id
-
     response = falcon.batch_init_sessions(host_ids=hosts_all, queue_offline=True)
     batch_id = response['body']['batch_id']
 
     if batch_id:
-        log(f"Initiated RTR batch with id {batch_id}")
+        log(f"Initiated RTR batch with id {batch_id} for WINDOWS hosts")
     else:
         raise SystemExit("Unable to initiate RTR session with hosts.")
 
 
     # Commands to change proxy config
-
     registry_stores = [
         r"HKLM:\SYSTEM\Crowdstrike\{9b03c1d9-3138-44ed-9fae-d9f4c034b88d}\{16e0423f-7058-48c9-a204-725362b67639}\Default",
         r"HKLM:\SYSTEM\CurrentControlSet\Services\CSAgent\Sim"
@@ -267,6 +306,54 @@ def main():  # pylint: disable=R0912,R0915,C0116
                 raise SystemExit(f"Error, Response: {response['status_code']} - {response.text}")
 
     log("-- Finished launching RTR commands, please check progress in the RTR audit logs")
+
+
+
+
+
+
+# Main routine
+def main():  # pylint: disable=R0912,R0915,C0116
+
+    global auth
+
+    log(f"Starting execution of ProxyTool (version {version})")
+
+    log("Authenticating to API")
+    auth = OAuth2(client_id=args.falcon_client_id,
+                  client_secret=args.falcon_client_secret,
+                  base_url=args.base_url
+                  )
+
+    # Check which CID the API client is operating in, as sanity check. Exit if operating CID does not match provided scope_id.
+    falcon = SensorDownload(auth_object=auth, base_url=args.base_url)
+    current_cid = falcon.get_sensor_installer_ccid()["body"]["resources"][0][:-3]
+
+    if falcon.token_status < 204:
+        log(f"Authentication correct.")
+    else:
+        log(f"Authentication error: {falcon.token_status} - {falcon.token_fail_reason}")
+        raise SystemExit(f"Authentication error: {falcon.token_status} - {falcon.token_fail_reason}")
+
+
+    response = falcon.get_sensor_installer_ccid()
+    current_cid = response["body"]["resources"][0][:-3]
+
+    if (args.scope.lower() == "cid" and (args.scope_id.lower() != current_cid.lower())):
+        log(f"The entered CID [{args.scope_id.upper()}] does not match the API client CID [{current_cid.upper()}].")
+        raise SystemExit(f"The entered CID [{args.scope_id.upper()}] does not match the API client CID [{current_cid.upper()}].")   
+
+
+    hosts_windows = fetch_hosts("Windows")
+    hosts_linux = fetch_hosts("Linux")
+
+    if len(hosts_windows) > 0:
+        rtr_windows(hosts_windows)
+    
+    if len(hosts_linux) > 0:
+        rtr_linux(hosts_linux)
+
+
     log("End")
 
 if __name__ == "__main__":
