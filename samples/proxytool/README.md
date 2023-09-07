@@ -24,7 +24,11 @@ In order to run this demonstration, you will need access to CrowdStrike API keys
 | Hosts | __READ__ |
 | Host Group | __READ__ |
 | Real-Time Response | __WRITE, READ__ |
+| Real-Time Response (admin) | __WRITE__ |
 | Sensor Download | __READ__ |
+
+In addition to this you will need the endpoints to be asigned to a "[Response Policy](https://falcon.crowdstrike.com/configuration/real-time-response/policies)" that allows "Real Time Response". The Linux response policty will need to have the "custom scripts" setting enabled. 
+
 
 ### Execution syntax
 This example accepts the following input parameters.
