@@ -301,7 +301,8 @@ class TestServiceClass:
     def test_log_facility_shutdown(self):
         _thing = OAuth2(creds=config.creds, debug=True)
         _thing.login()
-        if (_thing.authenticated() and not _thing.token_expired()) or _thing.log_facility.active:  # Duplicative, testing methods
+        _active = _thing.log_facility.active
+        if (_thing.authenticated() and not _thing.token_expired()) or _active:  # Duplicative, testing methods
             #if _thing.log_facility.active:
             _thing.log_facility.deactivate_log()
 
