@@ -64,14 +64,14 @@ class BaseServiceClass(ABC):
         # do not maintain authentication detail outside of the auth_object.
         # An auth_object is treated as an atomic collection.
         if auth_object:
-            if issubclass(type(auth_object), FalconInterface):
+            if isinstance(auth_object, FalconInterface):  # Issue 1043
                 self.auth_object: Union[FalconInterface, UberInterface] = auth_object
             else:
                 # Easy Object Authentication
                 # Look for an auth_object as an attribute to the object they
                 # provided. This attribute must be a FalconInterface derivative.
                 if hasattr(auth_object, "auth_object"):
-                    if issubclass(type(auth_object.auth_object), FalconInterface):
+                    if isinstance(auth_object.auth_object, FalconInterface):
                         self.auth_object: Union[FalconInterface, UberInterface] = auth_object.auth_object
         else:
             # Get all constructor arguments for the default authentication class.
