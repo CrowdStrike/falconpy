@@ -55,7 +55,7 @@ class TestIOC:
                                                            comment="Unit testing",
                                                            applied_globally=True
                                                            ),
-            "indicator_update_too": falcon.indicator_update_v1(bulk_update={"filter": "*"}, indicators=[{"type": "ipv4"}]),
+            "indicator_update_too": falcon.indicator_update_v1(bulk_update={"filter": "banana"}, indicators=[{"type": "ipv4"}]),
             "indicator_search": falcon.indicator_search_v1(parameters={'limit': 1}),
             "devices_count": falcon.devices_count(type='domain', value='hax0r.ru'),
             "devices_ran_on": falcon.devices_ran_on(type='domain', value='hax0r.ru'),
