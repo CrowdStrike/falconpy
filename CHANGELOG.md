@@ -24,6 +24,11 @@
     - `oauth2.py`
     > Expanded unit testing to complete code coverage.
     - `tests/test_service_class.py`
+    - Thanks go out to @morcef for identifying and reporting this issue. 🙇
++ Fixed: Type check failure when creating a mock of the `OAuth2` Service Class. Relates to #1043.
+    - `_service_class/_base_service_class.py`
+    - Thanks go out to @davidt99 for identifying / reporting this issue and providing the fix. 🙇
+
 ---
 
 # Version 1.3.1
