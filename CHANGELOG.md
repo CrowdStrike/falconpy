@@ -1,3 +1,36 @@
+# Version 1.3.2
+> This release resolves a breaking change introduced in Version 1.3.0. This issue presents itself when developers attempt to call the `authenticated` method directly from the `OAuth2` Service Class. Review issue #1043 for more detail.
+
+## Added features and functionality
++ Added: Expanded the Uber Class into a submodule, and restored the 1.2.16 version of this class as `APIHarness`. This class is now __DEPRECATED__. The 1.3.0 version of this class is now named `APIHarnessV2` (The advanced Uber Class) .
+    - `_auth_object/_base_falcon_auth.py`
+    - `_auth_object/_falcon_interface.py`
+    - `_auth_object/_uber_interface.py`
+    - `api_complete/__init__.py`
+    - `api_complete/_advanced.py`
+    - `api_complete/_legacy.py`
+    - `__init__.py`
+    > Expanded unit testing to complete code coverage.
+    - `tests/test_authorizations.py`
+    - `tests/test_falcon_container.py`
+    - `tests/test_uber_api_complete.py`
+    - `tests/test_uber.py`
+
+## Issues resolved
++ Fixed: Error generated when trying leverage the legacy `authenticated` lambda method handler within the `OAuth2` Service Class. Closes #1043.
+    - `_auth_object/_base_falcon_auth.py`
+    - `_auth_object/_falcon_interface.py`
+    - `_service_class/_service_class.py`
+    - `oauth2.py`
+    > Expanded unit testing to complete code coverage.
+    - `tests/test_service_class.py`
+    - Thanks go out to @morcef for identifying and reporting this issue. 🙇
++ Fixed: Type check failure when creating a mock of the `OAuth2` Service Class. Relates to #1043.
+    - `_service_class/_base_service_class.py`
+    - Thanks go out to @davidt99 for identifying / reporting this issue and providing the fix. 🙇
+
+---
+
 # Version 1.3.1
 ## Added features and functionality
 + Added: 1 new operation added (`highVolumeQueryChanges`) from the _FileVantage_ service collection.

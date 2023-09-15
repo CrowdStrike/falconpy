@@ -9,7 +9,7 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import FalconContainer, APIHarness
+from falconpy import FalconContainer, APIHarness, APIHarnessV2
 
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
@@ -18,6 +18,10 @@ uber = APIHarness(client_id=falcon.auth_object.creds["client_id"],
                   client_secret=falcon.auth_object.creds["client_secret"],
                   base_url=falcon.auth_object.base_url
                   )
+uber2 = APIHarnessV2(client_id=falcon.auth_object.creds["client_id"],
+                     client_secret=falcon.auth_object.creds["client_secret"],
+                     base_url=falcon.auth_object.base_url
+                     )
 AllowedResponses = [200, 201, 204, 400, 403, 404, 429, 500, 502]  # Allowing no content returned as code paths are confirmed
 
 
@@ -33,6 +37,9 @@ class TestFalconContainer:
             "GetAssessmentUber": uber.command("GetImageAssessmentReport", repository="misp", tag="latest"),
             "DeleteImageDetailsUber": uber.command("DeleteImageDetails", image_id="12345678"),
             "ImageMatchesPolicyUber": uber.command("ImageMatchesPolicy", repository="whatever", tag="whatever"),
+            "GetAssessmentUber2": uber2.command("GetImageAssessmentReport", repository="misp", tag="latest"),
+            "DeleteImageDetailsUber2": uber2.command("DeleteImageDetails", image_id="12345678"),
+            "ImageMatchesPolicyUber2": uber2.command("ImageMatchesPolicy", repository="whatever", tag="whatever"),
             "read_image_vulnerabilities": falcon.read_image_vulnerabilities(osversion="Windows", packages={"LayerIndex": 1}),
             "ReadRegistryEntities": falcon.read_registry_entities(),
             "ReadRegistryEntitiesByUUID": falcon.read_registry_entities_by_uuid(ids="12345678"),

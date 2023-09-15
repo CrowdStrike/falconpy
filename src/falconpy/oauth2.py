@@ -223,6 +223,15 @@ class OAuth2(FalconInterface):
         """
         return self._login_handler(not alter_state)
 
+    # Legacy method handlers that recreates pre-1.3 functionality.
+    def authenticated(self) -> bool:
+        """Return the current authentication status."""
+        return self.token_valid
+
+    def token_expired(self) -> bool:
+        """Return the current token expiration status."""
+        return self.token_stale
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes

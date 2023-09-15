@@ -85,7 +85,7 @@ from ._api_request import (
     RequestValidator
     )
 from .alerts import Alerts
-from .api_complete import APIHarness
+from .api_complete import APIHarness, APIHarnessV2
 from .cloud_snapshots import CloudSnapshots
 from .cloud_connect_aws import CloudConnectAWS
 from .cspm_registration import CSPMRegistration
@@ -173,7 +173,7 @@ __all__ = [
     "RequestPayloads", "RequestValidator", "PayloadValidationError", "MIN_TOKEN_RENEW_WINDOW",
     "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS", "CloudSnapshots",
     "NoAuthenticationMechanism", "InvalidIndex", "version", "InvalidCredentialFormat",
-    "UnnecessaryEncodingUsed"
+    "UnnecessaryEncodingUsed", "APIHarnessV2"
     ]
 """
 This is free and unencumbered software released into the public domain.

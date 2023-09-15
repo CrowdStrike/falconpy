@@ -186,11 +186,11 @@ class ServiceClass(BaseServiceClass):
     # Legacy property getters maintained for backwards functionality.
     def authenticated(self) -> bool:
         """Return the current authentication status."""
-        return self.auth_object.authenticated
+        return self.auth_object.token_valid
 
     def token_expired(self) -> bool:
         """Return a boolean reflecting token expiration status."""
-        return self.auth_object.token_expired
+        return self.auth_object.token_stale
 
     # Manual operation override
     def override(self,
@@ -320,3 +320,13 @@ class ServiceClass(BaseServiceClass):
         This recreates pre-1.3.0 functionality.
         """
         return self.auth_object.token_value
+
+    @property
+    def token_valid(self) -> bool:
+        """Return the current status of the token."""
+        return self.auth_object.token_valid
+
+    @property
+    def token_stale(self) -> bool:
+        """Return the current expiration status of the token."""
+        return self.auth_object.token_stale

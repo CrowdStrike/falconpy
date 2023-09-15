@@ -15,7 +15,7 @@ from falconpy import ScheduledReports
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = ScheduledReports(auth_object=config)
-AllowedResponses = [200, 201, 403, 404, 429]  # Getting 403's atm
+AllowedResponses = [200, 201, 400, 404, 429]
 
 
 class TestScheduledReports:

@@ -83,15 +83,5 @@ class BaseFalconAuth(ABC):
 
     @property
     @abstractmethod
-    def authenticated(self) -> bool:
-        """Read-only property to return whether authentication is successful."""
-
-    @property
-    @abstractmethod
-    def token_expired(self) -> bool:
-        """Read-only property that returns the current token expiration status."""
-
-    @property
-    @abstractmethod
     def cred_format_valid(self) -> bool:
         """Read-only property that returns a boolean if the creds dictionary format is valid."""

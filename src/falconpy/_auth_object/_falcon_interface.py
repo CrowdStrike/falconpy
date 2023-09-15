@@ -456,14 +456,14 @@ class FalconInterface(BaseFalconAuth):
         return self.cred_format_valid
 
     @property
-    def token_expired(self) -> bool:
+    def token_stale(self) -> bool:
         """Return whether the token is ready to be renewed."""
         return (time.time() - self.token_time) >= (self.token_expiration - self.renew_window)
 
     @property
-    def authenticated(self) -> bool:
+    def token_valid(self) -> bool:
         """Return if we are authenticated by retrieving the inverse of token_expired."""
-        return not self.token_expired
+        return not self.token_stale
 
     @property
     def cred_format_valid(self) -> bool:
@@ -489,7 +489,7 @@ class FalconInterface(BaseFalconAuth):
     @property
     def auth_headers(self) -> Dict[str, str]:
         """Return a Bearer token baked into an Authorization header ready for an HTTP request."""
-        if self.token_expired and self.refreshable:
+        if self.token_stale and self.refreshable:
             self.login()
 
         return {"Authorization": f"Bearer {self.token_value}"}
