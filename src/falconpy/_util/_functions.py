@@ -41,7 +41,7 @@ from warnings import warn
 from json import loads
 try:
     from simplejson import JSONDecodeError
-except ImportError:
+except (ImportError, ModuleNotFoundError):  # Support import as a module
     from json.decoder import JSONDecodeError
 from typing import Dict, Any, Union, Optional, List
 from copy import deepcopy
