@@ -84,7 +84,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_combined_images(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_combined_images(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve registry entities identified by the customer ID.
 
         HTTP Method: GET
@@ -309,7 +309,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_registry_entities(self: object, parameters: dict = None, **kwargs) -> dict:
+    def read_registry_entities(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve registry entities identified by the customer ID.
 
         HTTP Method: GET
@@ -351,7 +351,7 @@ class FalconContainer(ServiceClass):
                                        *args,
                                        parameters: dict = None,
                                        **kwargs
-                                       ) -> dict:
+                                       ) -> Dict[str, Union[int, dict]]:
         """Retrieve registry entities identified by the customer UUID.
 
         HTTP Method: GET
@@ -386,7 +386,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_registry_entities(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_registry_entities(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete the registry entity identified by the entity UUID.
 
         HTTP Method: DELETE
@@ -421,7 +421,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_registry_entities(self: object, body: dict = None, **kwargs) -> dict:
+    def create_registry_entities(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create a registry entity using the provided details.
 
         HTTP Method: POST
@@ -462,7 +462,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_registry_entities(self: object, body: dict = None, **kwargs) -> dict:
+    def update_registry_entities(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update the registry entity, as identified by the entity UUID, using the provided details.
 
         HTTP Method: PATCH
