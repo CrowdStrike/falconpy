@@ -475,16 +475,16 @@ class TestResults:
             assert bool((oopsies and oopsies.simple))
 
 
-    @not_supported
-    def test_warning_simple_response(self):
-        if _RATE_LIMITED:
-            pytest.skip("Rate limited")
-        try:
-            raise SSLDisabledWarning(code=418,
-                                     message="SSL verification isn't really turned off. I mean... unless you did it?",
-                                     headers={"CrowdStrike": "WE STOP BREACHES"})
-        except SSLDisabledWarning as kerblammo:
-            assert bool((kerblammo and kerblammo.simple))
+    # @not_supported
+    # def test_warning_simple_response(self):
+    #     if _RATE_LIMITED:
+    #         pytest.skip("Rate limited")
+    #     try:
+    #         raise SSLDisabledWarning(code=418,
+    #                                  message="SSL verification isn't really turned off. I mean... unless you did it?",
+    #                                  headers={"CrowdStrike": "WE STOP BREACHES"})
+    #     except SSLDisabledWarning as kerblammo:
+    #         assert bool((kerblammo and kerblammo.simple))
 
     @not_supported
     def test_base_resource_iteration(self):

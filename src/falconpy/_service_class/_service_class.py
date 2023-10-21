@@ -38,9 +38,10 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Type, Optional, Union
 from ._base_service_class import BaseServiceClass
 from .._auth_object import FalconInterface
-from .._util import log_class_startup, perform_request, service_override_payload
+from .._util import log_class_startup, perform_request, service_override_payload, deprecated_class
 from ..oauth2 import OAuth2
 from .._result import Result
+from .._endpoint import class_deprecation_mapping
 
 
 class ServiceClass(BaseServiceClass):
@@ -135,6 +136,14 @@ class ServiceClass(BaseServiceClass):
                          default_auth_object_class=default_auth_object_class,
                          **kwargs
                          )
+
+        # Issue a warning if the developer is using a deprecated class.
+        if self.__class__.__name__ in class_deprecation_mapping:
+            deprecated_class(self.pythonic,
+                             self.log,
+                             self.__class__.__name__,
+                             class_deprecation_mapping[self.__class__.__name__]
+                             )
 
         # Extended headers that can be set on a Service Class and provided
         # with every request to the CrowdStrike API. These do not override

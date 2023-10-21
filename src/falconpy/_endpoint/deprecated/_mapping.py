@@ -1,4 +1,4 @@
-"""FalconPy error module.
+"""Internal API endpoint constant library.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,40 +35,35 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._exceptions import (
-    SDKError,
-    RegionSelectError,
-    InvalidMethod,
-    InvalidOperation,
-    TokenNotSpecified,
-    KeywordsOnly,
-    InvalidCredentials,
-    APIError,
-    CannotRevokeToken,
-    FunctionalityNotImplemented,
-    InvalidBaseURL,
-    PayloadValidationError,
-    FeatureNotSupportedByPythonVersion,
-    InvalidIndex,
-    InvalidCredentialFormat
-    )
-from ._warnings import (
-    SDKWarning,
-    SSLDisabledWarning,
-    NoContentWarning,
-    NoAuthenticationMechanism,
-    UnnecessaryEncodingUsed,
-    SDKDeprecationWarning,
-    DeprecatedOperation,
-    DeprecatedClass
-)
 
+_deprecated_op_mapping = {
+    "QueryAWSAccounts": "GetCSPMAwsAccount",
+    "GetAWSSettings": "",
+    "GetAWSAccounts": "GetCSPMAwsAccount",
+    "ProvisionAWSAccounts": "CreateCSPMAwsAccount",
+    "DeleteAWSAccounts": "DeleteCSPMAwsAccount",
+    "UpdateAWSAccounts": "PatchCSPMAwsAccount",
+    "CreateOrUpdateAWSSettings": "",
+    "VerifyAWSAccountAccess": "",
+    "GetD4CAwsAccount": "GetCSPMAwsAccount",
+    "CreateD4CAwsAccount": "CreateCSPMAwsAccount",
+    "DeleteD4CAwsAccount": "DeleteCSPMAwsAccount",
+    "GetD4CAwsConsoleSetupURLs": "GetCSPMAwsConsoleSetupURLs",
+    "GetD4CAWSAccountScriptsAttachment": "GetCSPMAwsAccountScriptsAttachment",
+    "GetDiscoverCloudAzureAccount": "GetCSPMAzureAccount",
+    "CreateDiscoverCloudAzureAccount": "CreateCSPMAzureAccount",
+    "UpdateDiscoverCloudAzureAccountClientID": "UpdateCSPMAzureAccountClientID",
+    "GetDiscoverCloudAzureUserScriptsAttachment": "GetCSPMAzureUserScriptsAttachment",
+    "GetDiscoverCloudCGPAccount": "",
+    "CreateDiscoverCloudGCPAccount": "",
+    "DiscoverCloudAzureDownloadCertificate": "AzureDownloadCertificate",
+    "GetDiscoverCloudAzureTenantIDs": "",
+    "GetDiscoverCloudGCPUserScripts": "",
+    "GetHorizonD4CScripts": ""
+}
 
-__all__ = ["SDKError", "RegionSelectError", "InvalidMethod", "InvalidOperation",
-           "TokenNotSpecified", "KeywordsOnly", "SDKWarning", "SSLDisabledWarning",
-           "InvalidCredentials", "APIError", "NoContentWarning", "CannotRevokeToken",
-           "FunctionalityNotImplemented", "InvalidBaseURL", "PayloadValidationError",
-           "NoAuthenticationMechanism", "FeatureNotSupportedByPythonVersion",
-           "InvalidIndex", "InvalidCredentialFormat", "UnnecessaryEncodingUsed",
-           "SDKDeprecationWarning", "DeprecatedOperation", "DeprecatedClass"
-           ]
+_deprecated_cls_mapping = {
+    "CloudConnectAWS": "CSPMRegistration",
+    "D4CRegistration": "CSPMRegistration",
+    "Iocs": "IOC"
+}
