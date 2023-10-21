@@ -372,6 +372,9 @@ class APIHarness:
                 # Which HTTP method to execute
                 selected_method = uber_command[0][1].upper()
                 selected_operation = uber_command[0][0]
+                # Log the operation we're performing if enabled.
+                if self.log:
+                    self.log.debug("OPERATION: %s", selected_operation)
                 # Only accept allowed HTTP methods
                 if selected_method in _ALLOWED_METHODS:
                     returned = perform_request(method=selected_method,
@@ -381,7 +384,9 @@ class APIHarness:
                                                params=args_to_params(kwargs.get("parameters", {}),
                                                                      kwargs,
                                                                      self.commands,
-                                                                     selected_operation
+                                                                     selected_operation,
+                                                                     self.log,
+                                                                     self.pythonic
                                                                      ),
                                                headers=self._create_header_payload(kwargs),
                                                files=kwargs.get("files",
