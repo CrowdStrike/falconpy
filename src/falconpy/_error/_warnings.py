@@ -102,3 +102,72 @@ class UnnecessaryEncodingUsed(SDKWarning):
 
     _code = 400
     _message = "A provided argument utilizes unnecessary encoding."
+
+
+class SDKDeprecationWarning(FutureWarning):
+    """SDK specific deprecation warning."""
+
+    _code = 299
+    _message = "This method has been deprecated."
+    warning: bool = True
+
+    def __init__(self,
+                 code: int = None,
+                 message: str = None
+                 ):
+        """Construct an instance of the class."""
+        self.code = self._code
+        self.message = self._message
+
+        if isinstance(code, int):
+            self.code = code
+        if message:
+            self.message = message
+
+        super().__init__(self.message)
+
+
+class DeprecatedOperation(SDKDeprecationWarning):
+    """This API operation has been deprecated."""
+
+    _message = "This operation has been deprecated."
+
+    def __init__(self,
+                 code: int = None,
+                 operation: str = None,
+                 new_operation: str = None
+                 ):
+        """Construct an instance of the class."""
+        if code:
+            self._code = code
+        self.code = self._code
+        if operation:
+            self._message = f"The {operation} operation has been deprecated."
+        if new_operation:
+            self._message = f"{self._message} " \
+                            f"Update code to leverage the {new_operation} operation instead."
+        self.message = self._message
+        super().__init__(self.message)
+
+
+class DeprecatedClass(SDKDeprecationWarning):
+    """This Service Class has been deprecated."""
+
+    _message = "This service class has been deprecated."
+
+    def __init__(self,
+                 code: int = None,
+                 class_name: str = None,
+                 new_class_name: str = None
+                 ):
+        """Construct an instance of the class."""
+        if code:
+            self._code = code
+        self.code = self._code
+        if class_name:
+            self._message = f"The {class_name} service class has been deprecated."
+        if new_class_name:
+            self._message = f"{self._message} " \
+                            f"Update code to leverage the {new_class_name} service class instead."
+        self.message = self._message
+        super().__init__(self.message)

@@ -50,6 +50,7 @@ import requests
 import urllib3
 from urllib3.exceptions import InsecureRequestWarning
 from .._api_request import APIRequest
+from .._endpoint import operation_deprecation_mapping
 from .._enum import BaseURL, ContainerBaseURL
 from .._constant import (
     PREFER_NONETYPE,
@@ -69,7 +70,9 @@ from .._error import (
     PayloadValidationError,
     InvalidBaseURL,
     SSLDisabledWarning,
-    UnnecessaryEncodingUsed
+    UnnecessaryEncodingUsed,
+    DeprecatedOperation,
+    DeprecatedClass
     )
 from .._result import Result
 urllib3.disable_warnings(InsecureRequestWarning)
@@ -558,6 +561,8 @@ def args_to_params(payload: dict,
     """
     returned_payload = {}
     if epname != "Manual":  # pylint: disable=R1702
+        if epname in operation_deprecation_mapping:
+            deprecated_operation(pyth, log_utl, epname, operation_deprecation_mapping[epname])
         for arg in passed_arguments:
             eps = [ep[5] for ep in endpoints if epname == ep[0]][0]
             try:
@@ -809,3 +814,21 @@ def log_class_startup(interface, log_device: Logger):
     log_device.debug(
         "CONFIG: Pythonic responses are %s", "enabled" if interface.pythonic else "disabled"
         )
+
+
+def deprecated_operation(pythonic: bool, log: Logger, old: str, new: str):
+    """Provide a warning that the requested operation has been deprecated."""
+    if pythonic:
+        warn(DeprecatedOperation(operation=old, new_operation=new), FutureWarning)
+    else:
+        if log:
+            log.warning(DeprecatedOperation(operation=old, new_operation=new))
+
+
+def deprecated_class(pythonic: bool, log: Logger, old: str, new: str):
+    """Provide a warning that the constructed class has been deprecated."""
+    if pythonic:
+        warn(DeprecatedClass(class_name=old, new_class_name=new), FutureWarning)
+    else:
+        if log:
+            log.warning(DeprecatedClass(class_name=old, new_class_name=new))

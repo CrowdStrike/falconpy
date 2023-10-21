@@ -36,6 +36,8 @@ from .deprecated import _real_time_response_admin_deprecated
 from .deprecated import _report_executions_deprecated
 from .deprecated import _scheduled_reports_deprecated
 from .deprecated import _zero_trust_assessment_deprecated
+from .deprecated import _deprecated_operation_mapping
+from .deprecated import _deprecated_class_mapping
 
 from ._alerts import _alerts_endpoints
 from ._cloud_connect_aws import _cloud_connect_aws_endpoints
@@ -162,6 +164,10 @@ deprecated_endpoints.extend(_real_time_response_admin_deprecated)
 deprecated_endpoints.extend(_report_executions_deprecated)
 deprecated_endpoints.extend(_scheduled_reports_deprecated)
 deprecated_endpoints.extend(_zero_trust_assessment_deprecated)
+
+# Mapping of manually deprecated endpoints
+operation_deprecation_mapping = _deprecated_operation_mapping
+class_deprecation_mapping = _deprecated_class_mapping
 
 # api_endpoints contains all endpoints, production and deprecated
 api_endpoints.extend(deprecated_endpoints)
