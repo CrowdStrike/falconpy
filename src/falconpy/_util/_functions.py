@@ -629,6 +629,8 @@ def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
     body_required -- List of required body payload parameters
     expand_result -- Request expanded results output
     pythonic -- Pythonic responses
+    collection_name -- Repository collection name (Custom Objects API)
+    object_key -- Object Key (Custom Objects API)
     """
     # Log the operation ID if we have logging enabled.
     if calling_object.log:
@@ -651,6 +653,7 @@ def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
                 container = True
     target_url = f"{base_url}{target_endpoint[2]}"
     target_method = target_endpoint[1]
+    # Handle any provided PATH variables
     passed_partition = kwargs.get("partition", None)
     if passed_partition or isinstance(passed_partition, int):
         target_url = target_url.format(str(passed_partition))
@@ -660,6 +663,13 @@ def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
     passed_image_id = kwargs.get("image_id", None)
     if passed_image_id:
         target_url = target_url.format(str(passed_image_id))
+    passed_collection_name = kwargs.get("collection_name", None)
+    if passed_collection_name:
+        collect_args = {"collection_name": str(passed_collection_name)}
+        passed_object_key = kwargs.get("object_key", None)
+        if passed_object_key:
+            collect_args["object_key"] = str(passed_object_key)
+        target_url = target_url.format(**collect_args)
     # Retrieve our keyword arguments
     passed_keywords = kwargs.get("keywords", None)
     passed_params = kwargs.get("params", None)
