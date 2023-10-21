@@ -671,17 +671,17 @@ def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
             collect_args["object_key"] = str(passed_object_key)
         target_url = target_url.format(**collect_args)
     # Retrieve our keyword arguments
-    passed_keywords = kwargs.get("keywords", None)
+    passed_keywords = kwargs.get("keywords", {})  # Changed from None in v1.3.3
     passed_params = kwargs.get("params", None)
-    parameter_payload = None
-    if passed_keywords or passed_params:
-        parameter_payload = args_to_params(passed_params,
-                                           passed_keywords,
-                                           endpoints,
-                                           operation_id,
-                                           calling_object.log,
-                                           calling_object.pythonic
-                                           )
+    # Starting in v1.3.3, Service Classes will pass an empty parameters dictionary
+    # instead of a NoneType when no query string arguments are specified.
+    parameter_payload = args_to_params(passed_params,
+                                       passed_keywords,
+                                       endpoints,
+                                       operation_id,
+                                       calling_object.log,
+                                       calling_object.pythonic
+                                       )
     expand_result = passed_keywords.get("expand_result", False) if passed_keywords else kwargs.get("expand_result", False)
     new_keywords = {
         "caller": calling_object,
