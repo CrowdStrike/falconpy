@@ -44,6 +44,7 @@ from ._cloud_connect_aws import _cloud_connect_aws_endpoints
 from ._cloud_snapshots import _cloud_snapshot_endpoints
 from ._cspm_registration import _cspm_registration_endpoints
 from ._custom_ioa import _custom_ioa_endpoints
+from ._custom_storage import _custom_storage_endpoints
 from ._d4c_registration import _d4c_registration_endpoints
 from ._detects import _detects_endpoints
 from ._device_control_policies import _device_control_policies_endpoints
@@ -98,6 +99,7 @@ api_endpoints.extend(_cloud_connect_aws_endpoints)
 api_endpoints.extend(_cloud_snapshot_endpoints)
 api_endpoints.extend(_cspm_registration_endpoints)
 api_endpoints.extend(_custom_ioa_endpoints)
+api_endpoints.extend(_custom_storage_endpoints)
 api_endpoints.extend(_d4c_registration_endpoints)
 api_endpoints.extend(_detects_endpoints)
 api_endpoints.extend(_device_control_policies_endpoints)

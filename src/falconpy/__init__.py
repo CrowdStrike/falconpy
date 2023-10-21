@@ -90,6 +90,7 @@ from .cloud_snapshots import CloudSnapshots
 from .cloud_connect_aws import CloudConnectAWS
 from .cspm_registration import CSPMRegistration
 from .custom_ioa import CustomIOA
+from .custom_storage import CustomStorage
 from .d4c_registration import D4CRegistration
 from .detects import Detects
 from .device_control_policies import DeviceControlPolicies
@@ -173,7 +174,7 @@ __all__ = [
     "RequestPayloads", "RequestValidator", "PayloadValidationError", "MIN_TOKEN_RENEW_WINDOW",
     "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS", "CloudSnapshots",
     "NoAuthenticationMechanism", "InvalidIndex", "version", "InvalidCredentialFormat",
-    "UnnecessaryEncodingUsed", "APIHarnessV2"
+    "UnnecessaryEncodingUsed", "APIHarnessV2", "CustomStorage"
     ]
 """
 This is free and unencumbered software released into the public domain.
