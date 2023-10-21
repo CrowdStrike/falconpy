@@ -44,7 +44,7 @@ import warnings
 from json import loads
 try:
     from simplejson import JSONDecodeError
-except ImportError:
+except (ImportError, ModuleNotFoundError):  # Support import as a module
     from json.decoder import JSONDecodeError
 from logging import Logger, getLogger
 from typing import Dict, Optional, Union
