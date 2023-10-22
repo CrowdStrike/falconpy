@@ -79,6 +79,7 @@ from ._quarantine import _quarantine_endpoints
 from ._quick_scan import _quick_scan_endpoints
 from ._real_time_response import _real_time_response_endpoints
 from ._real_time_response_admin import _real_time_response_admin_endpoints
+from ._real_time_response_audit import _real_time_response_audit_endpoints
 from ._recon import _recon_endpoints
 from ._report_executions import _report_executions_endpoints
 from ._response_policies import _response_policies_endpoints
@@ -135,6 +136,7 @@ api_endpoints.extend(_quarantine_endpoints)
 api_endpoints.extend(_quick_scan_endpoints)
 api_endpoints.extend(_real_time_response_endpoints)
 api_endpoints.extend(_real_time_response_admin_endpoints)
+api_endpoints.extend(_real_time_response_audit_endpoints)
 api_endpoints.extend(_recon_endpoints)
 api_endpoints.extend(_report_executions_endpoints)
 api_endpoints.extend(_response_policies_endpoints)

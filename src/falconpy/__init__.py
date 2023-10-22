@@ -125,6 +125,7 @@ from .prevention_policy import PreventionPolicy, PreventionPolicies
 from .quarantine import Quarantine
 from .quick_scan import QuickScan
 from .real_time_response_admin import RealTimeResponseAdmin
+from .real_time_response_audit import RealTimeResponseAudit
 from .real_time_response import RealTimeResponse
 from .recon import Recon
 from .report_executions import ReportExecutions
@@ -175,7 +176,8 @@ __all__ = [
     "RequestPayloads", "RequestValidator", "PayloadValidationError", "MIN_TOKEN_RENEW_WINDOW",
     "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS", "CloudSnapshots",
     "NoAuthenticationMechanism", "InvalidIndex", "version", "InvalidCredentialFormat",
-    "UnnecessaryEncodingUsed", "APIHarnessV2", "CustomStorage", "Workflows"
+    "UnnecessaryEncodingUsed", "APIHarnessV2", "CustomStorage",
+    "RealTimeResponseAudit", "Workflows"
     ]
 """
 This is free and unencumbered software released into the public domain.
