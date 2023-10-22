@@ -176,7 +176,7 @@ def installation_token_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def simple_action_parameter(passed_keywords: dict) -> dict:
+def simple_action_parameter(passed_keywords: dict, existing_payload: dict = None) -> dict:
     """Create a properly formatted action parameter body payload.
 
     {
@@ -189,6 +189,8 @@ def simple_action_parameter(passed_keywords: dict) -> dict:
     }
     """
     returned_payload = {}
+    if existing_payload:
+        returned_payload = existing_payload
     returned_payload["action_parameters"] = []
     _single = {}
     for key in ["name", "value"]:

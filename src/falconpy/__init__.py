@@ -138,6 +138,7 @@ from .spotlight_vulnerabilities import SpotlightVulnerabilities
 from .spotlight_evaluation_logic import SpotlightEvaluationLogic
 from .tailored_intelligence import TailoredIntelligence
 from .user_management import UserManagement
+from .workflows import Workflows
 from .zero_trust_assessment import ZeroTrustAssessment
 
 __version__ = _VERSION
@@ -174,7 +175,7 @@ __all__ = [
     "RequestPayloads", "RequestValidator", "PayloadValidationError", "MIN_TOKEN_RENEW_WINDOW",
     "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS", "CloudSnapshots",
     "NoAuthenticationMechanism", "InvalidIndex", "version", "InvalidCredentialFormat",
-    "UnnecessaryEncodingUsed", "APIHarnessV2", "CustomStorage"
+    "UnnecessaryEncodingUsed", "APIHarnessV2", "CustomStorage", "Workflows"
     ]
 """
 This is free and unencumbered software released into the public domain.
