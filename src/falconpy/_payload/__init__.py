@@ -78,6 +78,7 @@ from ._alerts import update_alerts_payload
 from ._sample_uploads import extraction_payload
 from ._ods import scheduled_scan_payload
 from ._cloud_snapshots import snapshot_inventory_payload, snapshot_registration_payload
+from ._workflows import workflow_deprovision_payload, workflow_template_payload
 
 
 __all__ = [
@@ -100,5 +101,6 @@ __all__ = [
     "recon_export_job_payload", "default_device_policy_config_payload", "registry_payload",
     "gcp_registration_payload", "filevantage_rule_group_payload", "filevantage_rule_payload",
     "filevantage_policy_payload", "filevantage_scheduled_exclusion_payload",
-    "snapshot_inventory_payload", "snapshot_registration_payload"
+    "snapshot_inventory_payload", "snapshot_registration_payload", "workflow_deprovision_payload",
+    "workflow_template_payload"
 ]
