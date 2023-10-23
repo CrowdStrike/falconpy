@@ -1,3 +1,85 @@
+# Version 1.3.3
+## Added features and functionality
++ Added: Deprecation warnings for deprecated classes and operations. Closes #1055.
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_mapping.py`
+    - `_error/__init__.py`
+    - `_error/_warnings.py`
+    - `_service_class/_service_class.py`
+    - `_util/__init__.py`
+    - `_util/_functions.py`
++ Added: New Custom Storage service collection.
+    - `__init__.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_custom_storage.py`
+    - `_util/_functions.py`
+    - `custom_storage.py`
+    > Expanded unit testing to complete code coverage.
+    - `tests/test_custom_storage.py`
+    > The following new operations are provided by this service collection:
+    + _ListObjects_
+    + _SearchObjects_
+    + _GetObject_
+    + _PutObject_
+    + _DeleteObject_
+    + _GetObjectMetadata_
++ Added: New Workflows service collection.
+    - `__init__.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_workflows.py`
+    - `_endpoint/_workflows.py`
+    - `_payload/__init__.py`
+    - `_payload/_generic.py`
+    - `_payload/_workflows.py`
+    - `workflows.py`
+    > Expanded unit testing to complete code coverage.
+    - `tests/test_workflows.py`
+    > The following new operations are provided by this service collection:
+    + _WorkflowExecute_
+    + _WorkflowExecutionsAction_
+    + _WorkflowExecutionResults_
+    + _WorkflowSystemsDefinitionsDeProvision_
+    + _WorkflowSystemsDefinitionsPromote_
+    + _WorkflowSystemsDefinitionsProvision_
++ Added: New Real Time Response Audit service collection.
+    - `__init__.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_real_time_response_audit.py`
+    - `real_time_response_audit.py`
+    > Expanded unit testing to complete code coverage.
+    - `tests/test_real_time_response_audit.py`
+    > The following new operations are provided by this service collection:
+    + _RTRAuditSessions_
++ Added: New Foundry LogScale service collection.
+    - `__init__.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_foundry_logscale.py`
+    - `_payload/__init__.py`
+    - `_payload/_foundry.py`
+    - `foundry_logscale.py`
+    > Expanded unit testing to complete code coverage.
+    - `tests/test_foundry_logscale.py`
+    > The following new operations are provided by this service collection:
+    + _ListReposV1_
+    + _ListViewV1_
+    + _IngestDataV1_
+    + _CreateSavedSearchesDynamicExecuteV1_
+    + _GetSavedSearchesExecuteV1_
+    + _CreateSavedSearchesExecuteV1_
+    + _CreateSavedSearchesIngestV1_
+    + _GetSavedSearchesJobResultsDownloadV1_
+
+## Issues resolved
++ Fixed: Error when trying to directly import falconpy module (no package installation). Closes #1056.
+    - `_auth_object/_falcon_interface.py`
+    - `_util/_functions.py`
+    - Thanks to @tsullivan06 for identifying and reporting this issue. 🙇
++ Fixed: Legacy Uber Class is not logging Operation ID in debug logs. Closes #1057.
+    - `api_complete/_legacy.py`
+
+---
+
 # Version 1.3.2
 > This release resolves a breaking change introduced in Version 1.3.0. This issue presents itself when developers attempt to call the `authenticated` method directly from the `OAuth2` Service Class. Review issue #1043 for more detail.
 
