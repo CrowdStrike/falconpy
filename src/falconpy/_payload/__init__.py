@@ -79,7 +79,7 @@ from ._sample_uploads import extraction_payload
 from ._ods import scheduled_scan_payload
 from ._cloud_snapshots import snapshot_inventory_payload, snapshot_registration_payload
 from ._workflows import workflow_deprovision_payload, workflow_template_payload
-
+from ._foundry import foundry_dynamic_search_payload, foundry_execute_search_payload
 
 __all__ = [
     "generic_payload_list", "aggregate_payload", "recon_action_payload", "recon_rules_payload",
@@ -102,5 +102,5 @@ __all__ = [
     "gcp_registration_payload", "filevantage_rule_group_payload", "filevantage_rule_payload",
     "filevantage_policy_payload", "filevantage_scheduled_exclusion_payload",
     "snapshot_inventory_payload", "snapshot_registration_payload", "workflow_deprovision_payload",
-    "workflow_template_payload"
+    "workflow_template_payload", "foundry_execute_search_payload", "foundry_dynamic_search_payload"
 ]

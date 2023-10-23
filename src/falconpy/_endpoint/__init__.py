@@ -56,6 +56,7 @@ from ._falconx_sandbox import _falconx_sandbox_endpoints
 from ._filevantage import _filevantage_endpoints
 from ._firewall_management import _firewall_management_endpoints
 from ._firewall_policies import _firewall_policies_endpoints
+from ._foundry_logscale import _foundry_logscale_endpoints
 from ._host_group import _host_group_endpoints
 from ._hosts import _hosts_endpoints
 from ._identity_protection import _identity_protection_endpoints
@@ -113,6 +114,7 @@ api_endpoints.extend(_falconx_sandbox_endpoints)
 api_endpoints.extend(_filevantage_endpoints)
 api_endpoints.extend(_firewall_management_endpoints)
 api_endpoints.extend(_firewall_policies_endpoints)
+api_endpoints.extend(_foundry_logscale_endpoints)
 api_endpoints.extend(_host_group_endpoints)
 api_endpoints.extend(_hosts_endpoints)
 api_endpoints.extend(_identity_protection_endpoints)

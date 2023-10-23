@@ -103,6 +103,7 @@ from .fdr import FDR
 from .filevantage import FileVantage
 from .firewall_management import FirewallManagement
 from .firewall_policies import FirewallPolicies
+from .foundry_logscale import FoundryLogScale
 from .host_group import HostGroup
 from .hosts import Hosts
 from .identity_protection import IdentityProtection
@@ -176,7 +177,7 @@ __all__ = [
     "RequestPayloads", "RequestValidator", "PayloadValidationError", "MIN_TOKEN_RENEW_WINDOW",
     "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS", "CloudSnapshots",
     "NoAuthenticationMechanism", "InvalidIndex", "version", "InvalidCredentialFormat",
-    "UnnecessaryEncodingUsed", "APIHarnessV2", "CustomStorage",
+    "UnnecessaryEncodingUsed", "APIHarnessV2", "CustomStorage", "FoundryLogScale",
     "RealTimeResponseAudit", "Workflows"
     ]
 """
