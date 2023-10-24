@@ -622,15 +622,15 @@ def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
     body -- Dictionary representing the body payload passed to the service class function.
     data -- Dictionary representing the data payload passed to the service class function.
     files -- List of files to be uploaded.
-    partition -- ID of the partition to open (Event Streams API)
-    distinct_field -- Field name to retrieve distinct values for (Sensor Update Policies API)
-    image_id -- Image ID to be deleted (Falcon Container API)
+    partition -- ID of the partition to open [PATH] (Event Streams API)
+    distinct_field -- Field name to retrieve distinct values for [PATH] (Sensor Update Policies API)
+    image_id -- Image ID to be deleted [PATH] (Falcon Container API)
     body_validator -- Dictionary containing details regarding body payload validation
     body_required -- List of required body payload parameters
     expand_result -- Request expanded results output
     pythonic -- Pythonic responses
-    collection_name -- Repository collection name (Custom Objects API)
-    object_key -- Object Key (Custom Objects API)
+    collection_name -- Repository collection name [PATH] (Custom Objects API)
+    object_key -- Object Key [PATH] (Custom Objects API)
     """
     # Log the operation ID if we have logging enabled.
     if calling_object.log:
@@ -646,30 +646,14 @@ def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
     target_endpoint = [ep for ep in endpoints if operation_id == ep[0]][0]
     base_url = calling_object.base_url
     container = False
+    # Check if this operation requires the custom container base URL.
     if operation_id in MOCK_OPERATIONS:
         for base in [burl for burl in dir(BaseURL) if "__" not in burl]:
             if BaseURL[base].value == calling_object.base_url.replace("https://", ""):
                 base_url = f"https://{ContainerBaseURL[base].value}"
                 container = True
-    target_url = f"{base_url}{target_endpoint[2]}"
-    target_method = target_endpoint[1]
-    # Handle any provided PATH variables
-    passed_partition = kwargs.get("partition", None)
-    if passed_partition or isinstance(passed_partition, int):
-        target_url = target_url.format(str(passed_partition))
-    passed_distinct_field = kwargs.get("distinct_field", None)
-    if passed_distinct_field:
-        target_url = target_url.format(str(passed_distinct_field))
-    passed_image_id = kwargs.get("image_id", None)
-    if passed_image_id:
-        target_url = target_url.format(str(passed_image_id))
-    passed_collection_name = kwargs.get("collection_name", None)
-    if passed_collection_name:
-        collect_args = {"collection_name": str(passed_collection_name)}
-        passed_object_key = kwargs.get("object_key", None)
-        if passed_object_key:
-            collect_args["object_key"] = str(passed_object_key)
-        target_url = target_url.format(**collect_args)
+    # Handle any provided PATH variables, should happen before query string argument abstraction.
+    target_url = handle_path_variables(passed=kwargs, route_url=f"{base_url}{target_endpoint[2]}")
     # Retrieve our keyword arguments
     passed_keywords = kwargs.get("keywords", {})  # Changed from None in v1.3.3
     passed_params = kwargs.get("params", None)
@@ -685,7 +669,7 @@ def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
     expand_result = passed_keywords.get("expand_result", False) if passed_keywords else kwargs.get("expand_result", False)
     new_keywords = {
         "caller": calling_object,
-        "method": target_method,
+        "method": target_endpoint[1],
         "endpoint": target_url,
         "verify": calling_object.ssl_verify,
         "headers": joined_headers,
@@ -702,6 +686,28 @@ def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
     }
 
     return service_request(**new_keywords)
+
+
+def handle_path_variables(passed: dict, route_url: str):
+    """Review passed arguments and perform any necessary replacements to our operation route."""
+    passed_partition = passed.get("partition", None)
+    if passed_partition or isinstance(passed_partition, int):
+        route_url = route_url.format(str(passed_partition))
+    passed_distinct_field = passed.get("distinct_field", None)
+    if passed_distinct_field:
+        route_url = route_url.format(str(passed_distinct_field))
+    passed_image_id = passed.get("image_id", None)
+    if passed_image_id:
+        route_url = route_url.format(str(passed_image_id))
+    passed_collection_name = passed.get("collection_name", None)
+    if passed_collection_name:
+        collect_args = {"collection_name": str(passed_collection_name)}
+        passed_object_key = passed.get("object_key", None)
+        if passed_object_key:
+            collect_args["object_key"] = str(passed_object_key)
+        route_url = route_url.format(**collect_args)
+
+    return route_url
 
 
 def confirm_base_url(provided_base: Optional[str] = "https://api.crowdstrike.com") -> str:
