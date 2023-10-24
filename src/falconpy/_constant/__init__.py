@@ -45,7 +45,8 @@ PREFER_NONETYPE: List[str] = [
 PREFER_IDS_IN_BODY: List[str] = [
     "GetDeviceDetails", "PostDeviceDetailsV2", "GetVulnerabilities", "GetIntelIndicatorEntities",
     "getChildrenV2", "cancel-scans", "GetDetectSummaries", "UpdateQuarantinedDetectsByIds",
-    "GetQuarantineFiles", "PostEntitiesAlertsV1", "CreateSavedSearchesDeployV1", 
+    "GetQuarantineFiles", "PostEntitiesAlertsV1", "CreateSavedSearchesDeployV1",
+    "WorkflowExecutionsAction"
 ]
 MOCK_OPERATIONS: List[str] = [
     "GetImageAssessmentReport", "DeleteImageDetails", "ImageMatchesPolicy"
