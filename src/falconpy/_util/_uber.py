@@ -81,13 +81,33 @@ def handle_body_payload_ids(kwa: dict) -> dict:
 def scrub_target(oper: str, scrubbed: str, kwas: dict) -> str:
     """Scrubs the endpoint target by performing any outstanding string replacements."""
     field_mapping = {
-        "image_id": "DeleteImageDetails",
-        "partition": "refreshActiveStreamSession",
-        "distinct_field": "querySensorUpdateKernelsDistinct"
+        "DeleteImageDetails": "image_id",
+        "refreshActiveStreamSession": "partition",
+        "querySensorUpdateKernelsDistinct": "distinct_field",
+        "ListObjects": "collection_name",
+        "SearchObjects": "collection_name",
+        "GetObject": "collection_name~object_key",
+        "PutObject": "collection_name~object_key",
+        "DeleteObject": "collection_name~object_key",
+        "GetObjectMetadata": "collection_name~object_key"
     }
-    for field_name, field_value in field_mapping.items():
+    for field_value, field_name in field_mapping.items():
         if oper == field_value:  # Only perform replacements on mapped operation IDs.
-            scrubbed = handle_field(scrubbed, kwas, field_name)
+            field_names = field_name.split("~")
+            if len(field_names) == 1:
+                scrubbed = handle_field(scrubbed, kwas, field_names[0])
+            else:
+                # Handle replacements for multiple PATH variables.
+                fnames = {
+                    fna: kwas[fna]
+                    for fna in field_names
+                }
+                scrubbed = scrubbed.format(**fnames)
+
+            for fna in field_names:
+                # Remove these arguments from the list of
+                # potential query string parameters.
+                kwas.pop(fna)
 
     return scrubbed
 
