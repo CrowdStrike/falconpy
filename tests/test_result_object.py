@@ -15,6 +15,7 @@ sys.path.append(os.path.abspath('src'))
 # We'll use Hosts to retrieve data to test results with
 from falconpy import (
     Hosts,
+    CloudConnectAWS,
     Result,
     APIError,
     RegionSelectError,
@@ -26,7 +27,10 @@ from falconpy import (
     Errors,
     SampleUploads,
     CSPMRegistration,
-    UnnecessaryEncodingUsed
+    UnnecessaryEncodingUsed,
+    DeprecatedOperation,
+    DeprecatedClass,
+    SDKDeprecationWarning
     )
 from falconpy._result._base_dictionary import UnsupportedPythonVersion
 
@@ -475,16 +479,16 @@ class TestResults:
             assert bool((oopsies and oopsies.simple))
 
 
-    # @not_supported
-    # def test_warning_simple_response(self):
-    #     if _RATE_LIMITED:
-    #         pytest.skip("Rate limited")
-    #     try:
-    #         raise SSLDisabledWarning(code=418,
-    #                                  message="SSL verification isn't really turned off. I mean... unless you did it?",
-    #                                  headers={"CrowdStrike": "WE STOP BREACHES"})
-    #     except SSLDisabledWarning as kerblammo:
-    #         assert bool((kerblammo and kerblammo.simple))
+    @not_supported
+    def test_warning_simple_response(self):
+        if _RATE_LIMITED:
+            pytest.skip("Rate limited")
+        try:
+            raise SSLDisabledWarning(code=418,
+                                     message="SSL verification isn't really turned off. I mean... unless you did it?",
+                                     headers={"CrowdStrike": "WE STOP BREACHES"})
+        except SSLDisabledWarning as kerblammo:
+            assert bool((kerblammo and kerblammo.simple))
 
     @not_supported
     def test_base_resource_iteration(self):
@@ -744,3 +748,26 @@ class TestResults:
             hosts = Hosts(auth_object=hosts, pythonic=False)
             hosts.query_devices_by_filter_scroll(filter="hostname%3A%27falconpy%27")
             assert _success
+
+    @not_supported
+    def test_pythonic_deprecation_warnings(self):
+        _success = False
+        with pytest.warns(SDKDeprecationWarning):
+            warnings.warn(SDKDeprecationWarning(message="This is a generic deprecation warning", code=187))
+        with pytest.warns(DeprecatedClass):
+            warnings.warn(DeprecatedClass(code=187))
+        with pytest.warns(DeprecatedOperation):
+            warnings.warn(DeprecatedOperation(code=187))
+        with pytest.warns(DeprecatedClass):
+            try:
+                old_discover = CloudConnectAWS(auth_object=config, pythonic=True)
+            except APIError:
+                pass
+
+        with pytest.warns(DeprecatedOperation):
+            try:
+                old_discover.get_aws_settings()
+                _success = True
+            except:
+                pass
+        assert _success
