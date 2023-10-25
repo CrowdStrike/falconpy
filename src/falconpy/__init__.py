@@ -61,7 +61,10 @@ from ._error import (
     NoAuthenticationMechanism,
     InvalidIndex,
     InvalidCredentialFormat,
-    UnnecessaryEncodingUsed
+    UnnecessaryEncodingUsed,
+    DeprecatedClass,
+    DeprecatedOperation,
+    SDKDeprecationWarning
     )
 from ._result import (
     Result,
@@ -178,7 +181,8 @@ __all__ = [
     "MAX_TOKEN_RENEW_WINDOW", "GLOBAL_API_MAX_RETURN", "MOCK_OPERATIONS", "CloudSnapshots",
     "NoAuthenticationMechanism", "InvalidIndex", "version", "InvalidCredentialFormat",
     "UnnecessaryEncodingUsed", "APIHarnessV2", "CustomStorage", "FoundryLogScale",
-    "RealTimeResponseAudit", "Workflows"
+    "RealTimeResponseAudit", "Workflows", "DeprecatedClass", "DeprecatedOperation",
+    "SDKDeprecationWarning"
     ]
 """
 This is free and unencumbered software released into the public domain.
