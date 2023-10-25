@@ -10,10 +10,11 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import CustomStorage
+from falconpy import CustomStorage, APIHarnessV2
 
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
+uber = APIHarnessV2(creds=config.creds)
 falcon = CustomStorage(auth_object=config)
 AllowedResponses = [200, 201, 400, 403, 404, 429]  # Temp allow 403
 
@@ -27,7 +28,10 @@ class TestCustomStorage:
             "GetObject" : falcon.get(collection_name="whatever", object_key="whatever_else"),
             "PutObject" : falcon.upload(collection_name="whatever", object_key="whatever_else"),
             "DeleteObject" : falcon.delete(collection_name="whatever", object_key="whatever_else"),
+            "FailBecauseMissingCollectionNameListObjects" : falcon.list(),
+            "FailBecauseMissingCollectionNameSearchObjects" : falcon.search(),
             "GetObjectMetadata" : falcon.metadata(collection_name="whatever", object_key="whatever_else"),
+            "UberStyleGetObjectMetadata" : uber.command("GetObjectMetadata", collection_name="whatever", object_key="whatever_else"),
             "FailBecauseMissingObjectKeyMetadata" : falcon.metadata(collection_name="no_object_key"),
             "FailBecauseMissingObjectKeyDeleteObject" : falcon.delete(collection_name="no_object_key"),
             "FailBecauseMissingObjectKeyPutObject" : falcon.upload(collection_name="no_object_key"),
@@ -36,7 +40,7 @@ class TestCustomStorage:
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
-                if "FailBecauseMissingObjectKey" in key and tests[key]["status_code"] == 500:
+                if "FailBecauseMissing" in key and tests[key]["status_code"] == 500:
                     error_checks = True
                 # if not error_checks:
                 #     print(tests[key])
