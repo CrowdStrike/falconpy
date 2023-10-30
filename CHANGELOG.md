@@ -74,9 +74,12 @@
 + Fixed: Error when trying to directly import falconpy module (no package installation). Closes #1056.
     - `_auth_object/_falcon_interface.py`
     - `_util/_functions.py`
-    - Thanks to @tsullivan06 for identifying and reporting this issue. 🙇
+    - Thanks go out to @tsullivan06 for identifying and reporting this issue. 🙇
 + Fixed: Legacy Uber Class is not logging Operation ID in debug logs. Closes #1057.
     - `api_complete/_legacy.py`
++ Fixed: Can not use `add-rule-group` and `remove-rule-group` actions with the __`performFirewallPoliciesAction`__ operation. Closes #1059.
+    - `firewall_policies.py`
+    - Thanks go out to @api-clobberer for identifying and reporting this issue. 🙇
 
 ---
 
