@@ -749,6 +749,9 @@ class TestResults:
             hosts.query_devices_by_filter_scroll(filter="hostname%3A%27falconpy%27")
             assert _success
 
+    @pytest.mark.skipif(config.base_url == "https://api.laggar.gcw.crowdstrike.com",
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     @not_supported
     def test_pythonic_deprecation_warnings(self):
         _success = False
