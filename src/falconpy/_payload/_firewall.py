@@ -85,18 +85,12 @@ def firewall_container_payload(passed_keywords: dict) -> dict:
     }
     """
     returned_payload = {}
-    keys = ["default_inbound", "default_outbound", "platform_id", "tracking"]
+    keys = ["default_inbound", "default_outbound", "platform_id", "policy_id", "tracking",
+            "enforce", "is_default_policy", "local_logging", "test_mode"
+            ]
     for key in keys:
-        if passed_keywords.get(key, None):
+        if passed_keywords.get(key, None) is not None:
             returned_payload[key] = passed_keywords.get(key, None)
-    if passed_keywords.get("enforce", None) is not None:
-        returned_payload["enforce"] = passed_keywords.get("enforce", None)
-    if passed_keywords.get("is_default_policy", None) is not None:
-        returned_payload["is_default_policy"] = passed_keywords.get("is_default_policy", None)
-    if passed_keywords.get("local_logging", None) is not None:
-        returned_payload["local_logging"] = passed_keywords.get("local_logging", None)
-    if passed_keywords.get("test_mode", None) is not None:
-        returned_payload["test_mode"] = passed_keywords.get("test_mode", None)
     rg_list = passed_keywords.get("rule_group_ids", None)
     if rg_list:
         if isinstance(rg_list, str):
