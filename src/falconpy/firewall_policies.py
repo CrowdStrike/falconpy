@@ -131,8 +131,8 @@ class FirewallPolicies(ServiceClass):
         """Perform the specified action on the Firewall Policies specified in the request.
 
         Keyword arguments:
-        action_name -- action to perform: 'add-host-group', 'add-rule-group', 'disable', 'enable',
-                       'remove-rule-group' or 'remove-host-group'.
+        action_name -- action to perform: 'add-host-group', 'disable', 'enable',
+                       or 'remove-host-group'.
         action_parameters -- Action specific parameter options. List of dictionaries.
                              {
                                  "name": "string",
@@ -164,8 +164,8 @@ class FirewallPolicies(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/firewall-policies/performFirewallPoliciesAction
         """
-        _allowed_actions = ['add-host-group', 'disable', 'enable',
-                            'remove-host-group', 'add-rule-group', 'remove-rule-group'
+        _allowed_actions = ['add-host-group', 'disable', 'enable', 'remove-host-group',
+                            # 'add-rule-group', 'remove-rule-group'  # Currently unsupported
                             ]
         operation_id = "performFirewallPoliciesAction"
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
