@@ -53,6 +53,11 @@ class Meta(BaseDictionary):
         return self.get_property("query_time", None)
 
     @property
+    def after(self) -> Optional[Union[int, str, float]]:
+        """Return the the contents of the after key."""
+        return self.pagination.get("after", None)
+
+    @property
     def offset(self) -> Optional[Union[int, str, float]]:
         """Return the the contents of the offset key."""
         return self.pagination.get("offset", None)

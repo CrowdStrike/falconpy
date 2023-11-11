@@ -259,6 +259,14 @@ class Result(BaseResult):
         return _returned
 
     @property
+    def after(self) -> Optional[Union[int, str, float]]:
+        """Return the record after from the underlying Meta object."""
+        _returned: Optional[Union[int, str, float]] = None
+        if self.meta:
+            _returned = self.meta.after
+        return _returned
+
+    @property
     def offset(self) -> Optional[Union[int, str, float]]:
         """Return the record offset from the underlying Meta object."""
         _returned: Optional[Union[int, str, float]] = None
