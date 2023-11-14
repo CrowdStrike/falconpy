@@ -5,6 +5,7 @@
 # User Management examples
 The examples in this folder focus on leveraging CrowdStrike's User Management API to perform administrative operations.
 - [Bulk import, update and remove users](#bulk-import-update-and-remove-users)
+- [Get user grants](#get-user-grants)
 
 ## Bulk import, update, and remove users
 Consumes a provided user list (JSON format) and creates the user accounts as specified in your Falcon tenant.
@@ -176,3 +177,106 @@ optional arguments:
 
 ### Example source code
 The source code for this example can be found [here](bulk_user.py).
+
+## Get user grants
+Asynchronously retrieve a list of all users within the tenant, along with their grants and then
+write the results to a comma-delimited text file. This solution is automatically Flight Control
+aware and supports API debugging.
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scope:
+| Service Collection | Scope |
+| :---- | :---- |
+| User Management | __READ__ |
+
+### Execution syntax
+The following arguments are accepted at run time.
+
+| Argument | Long Argument | Description |
+| :-- | :-- | :-- |
+| `-h` | `--help` | show this help message and exit |
+| `-d` | `--debug` | Enable API debugging |
+| `-o` OUTPUT | `--output` OUTPUT | CSV output file name |
+| `-k` FALCON_CLIENT_ID | `--falcon_client_id` FALCON_CLIENT_ID | Falcon Client ID |
+| `-s` FALCON_CLIENT_SECRET | `--falcon_client_secret` FALCON_CLIENT_SECRET | Falcon Client Secret |
+
+```shell
+python3 get_user_grants.py [-h] [-d] [-o OUTPUT] [-k CLIENT_ID] [-s CLIENT_SECRET]
+```
+
+#### Authentication
+For users that have the environment variables `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined, you
+do not need to provide authentication detail on the command line.
+
+```shell
+python3 get_user_grants.py
+```
+
+If you do not have these values defined, you may provide them at runtime via the command line using the `-k` and `-s` arguments.
+
+```shell
+python3 get_user_grants.py -k CLIENT_ID -s CLIENT_SECRET
+```
+
+#### Outputting results to a different location
+You may define the name and location of the resulting output CSV file using the `-o` command line argument.
+> Please note: You must provide the trailing slash to specify a directory. (`/` = Mac / Linux, `\` = Windows)
+
+##### Output to a file
+```shell
+python3 get_user_grants.py -o /path/to/output/file.csv
+```
+
+##### Output to a directory
+```shell
+python3 get_user_grants.py -o /path/to/directory/
+```
+
+#### Enabling API debugging.
+API debugging may be enabled with the `-d` command line argument.
+
+```shell
+python3 get_user_grants.py -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: get_user_grants.py [-h] [-d] [-o OUTPUT] [-k CLIENT_ID] [-s CLIENT_SECRET]
+
+Threaded user grant lookup sample.
+
+ ______                         __ _______ __         __ __
+|      |.----.-----.--.--.--.--|  |     __|  |_.----.|__|  |--.-----.
+|   ---||   _|  _  |  |  |  |  _  |__     |   _|   _||  |    <|  -__|
+|______||__| |_____|________|_____|_______|____|__|  |__|__|__|_____|
+      ___ ___                   ___ ___                                                    __
+     |   Y   .-----.-----.----.|   Y   .---.-.-----.---.-.-----.-----.--------.-----.-----|  |_
+     |.  |   |__ --|  -__|   _||.      |  _  |     |  _  |  _  |  -__|        |  -__|     |   _|
+     |.  |   |_____|_____|__|  |. \_/  |___._|__|__|___._|___  |_____|__|__|__|_____|__|__|____|
+     |:  1   |                 |:  |   |                 |_____|
+     |::.. . |                 |::.|:. |                               with Flight Control!
+     `-------'                 `--- ---'                                (FalconPy v1.3.0+)
+
+Asynchronously retrieve all user grants for every user defined within the tenant and output
+the results to a comma-delimited text file. When not specified, this file is named user_grants.csv.
+
+Creation date: 11.13.2023 - jshcodes@CrowdStrike
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable debug.
+  -o OUTPUT, --output OUTPUT
+                        CSV output filename.
+
+authentication arguments (not required if using environment authentication):
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        Falcon API client ID
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        Falcon API client secret
+```
+
+
+### Example source code
+The source code for this example can be found [here](get_user_grants.py).
