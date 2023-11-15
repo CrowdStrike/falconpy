@@ -9,6 +9,10 @@ The examples in this folder focus on leveraging CrowdStrike's MalQuery API to pe
 Downloads a specified number of examples from MalQuery that match the search term and type you specify.
 Results will be stored in _zip_ archive format with the password of `infected`.
 
+> [!WARNING]
+> Samples downloaded from MalQuery have been confirmed as __malware__. 
+> __*Handle with extreme caution*__.
+
 ### Running the program
 In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
 | Service Collection | Scope |
