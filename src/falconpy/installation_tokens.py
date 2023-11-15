@@ -216,7 +216,7 @@ class InstallationTokens(ServiceClass):
         """
         if not body:
             body = installation_token_payload(passed_keywords=kwargs)
-            if kwargs.get("revoked", None):
+            if kwargs.get("revoked", None) is not None:
                 body["revoked"] = kwargs.get("revoked", None)
 
         return process_service_request(
