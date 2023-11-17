@@ -368,6 +368,8 @@ class Result(BaseResult):
         _content: Optional[Union[Dict[str, Union[dict, list]], bytes]] = None
         if self.resources.binary:
             _content = bytes(self.resources)
+        elif self.raw:
+            _content = self.raw
         else:
             _content = {
                 "meta": self.meta.data,
