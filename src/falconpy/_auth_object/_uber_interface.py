@@ -150,6 +150,15 @@ class UberInterface(FalconInterface):
 
         return bool(result["status_code"] == 200)
 
+    def __enter__(self):
+        """Allow for entry as a context manager."""
+        return self
+
+    def __exit__(self, *args):
+        """Discard our token when we exit the context."""
+        self.logout()
+        return args
+
     # Legacy property getters maintained for backwards functionality.
     def authenticated(self) -> bool:
         """Return the current authentication status."""

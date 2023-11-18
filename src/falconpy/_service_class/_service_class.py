@@ -230,6 +230,15 @@ class ServiceClass(BaseServiceClass):
                                                           exp=expand_result
                                                           ))
 
+    def __enter__(self):
+        """Allow for entry as a context manager."""
+        return self
+
+    def __exit__(self, *args):
+        """Discard our token when we exit the context."""
+        self.logout()
+        return args
+
     # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
     # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
     # |    |  \ |__| |    |___ |  \  |  | |___ ___]
