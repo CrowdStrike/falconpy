@@ -43,6 +43,7 @@ The following samples are categorized by CrowdStrike Falcon API service collecti
 | [Hosts](#hosts) | [List sensors by hostname](#list-sensors-by-hostname)<BR/>[Manage duplicate sensors](#manage-duplicate-sensors)<BR/>[CUSSED (Manage stale sensors)](#cussed-manage-stale-sensors)<BR/>[Match usernames to hosts](#match-usernames-to-hosts)<BR/>[Offset vs. Token](#offset-vs-token)<BR/>[Prune Hosts by Hostname or AID](#prune-hosts-by-hostname-or-aid)<BR/>[Quarantine a host](#quarantine-a-host)<BR/>[Quarantine a host (updated version)](#quarantine-a-host-updated-version) |
 | [Identity Protection](#identity-protection) | [GraphQL Pagination](#graphql-pagination) |
 | [Incidents](#incidents) | [CrowdScore QuickChart](#crowdscore-quickchart)<BR/>[Incident Triage](#incident-triage) |
+| [Installation Tokens](#installation-tokens) | [Token Dispenser](#token-dispenser) |
 | [Intel](#intel) | [MISP Import](#misp-import)<BR/>[Intel Search](#intel-search) |
 | [IOC](#ioc) | [Create indicators](#create-indicators) |
 | [MalQuery](#malquery) | [Malqueryinator](#malqueryinator) |
@@ -640,6 +641,41 @@ This sample demonstrates the following CrowdStrike Incidents API operations:
 | [PerformIncidentAction](https://falconpy.io/Service-Collections/Incidents.html#performincidentaction) | Perform a set of actions on one or more incidents, such as adding tags or comments or updating the incident name or description. |
 | [GetIncidents](https://falconpy.io/Service-Collections/Incidents.html#getincidents) | Get details on incidents by providing incident IDs. |
 | [QueryIncidents](https://falconpy.io/Service-Collections/Incidents.html#queryincidents) | Search for incidents by providing a FQL filter, sorting, and paging details. |
+
+---
+
+## Installation Tokens
+This category is dedicated to demonstrating the functionality provided by the CrowdStrike Installation Tokens API service collection.
+
+- [Token Dispenser](#token-dispenser)
+
+### Token Dispenser
+Easily manage installation tokens within your tenant or across child tenants with the [Token Dispenser](installation_tokens#token-dispenser).
+
+[![Installation Tokens](https://img.shields.io/badge/Service%20Class-Token_Dispenser-silver?style=for-the-badge&labelColor=red&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](installation_tokens#token-dispenser)
+[![MSSP Use supported](https://img.shields.io/badge/-Supports%20MSSP-darkblue?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==&style=for-the-badge)](installation_tokens#token-dispenser)
+
+#### Installation Tokens API operations discussed
+This sample demonstrates the following CrowdStrike Installation Tokens API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [tokens_create](https://www.falconpy.io/Service-Collections/Installation-Tokens.html#tokens_create) | Creates a token. |
+| [tokens_delete](https://www.falconpy.io/Service-Collections/Installation-Tokens.html#tokens_delete) | Deletes a token immediately. To revoke a token, use `token_update` instead. |
+| [tokens_read](https://www.falconpy.io/Service-Collections/Installation-Tokens.html#tokens_read) | Get the details of one or more tokens by ID. |
+| [tokens_update](https://www.falconpy.io/Service-Collections/Installation-Tokens.html#tokens_update) | Updates one or more tokens. Use this endpoint to edit labels, change expiration, revoke, or restore. |
+
+#### Flight Control API operations discussed
+This sample demonstrates the following CrowdStrike Flight Control API operations:
+| Operation | Description |
+| :--- | :--- |
+| [queryChildren](https://www.falconpy.io/Service-Collections/MSSP.html#querychildren) | Query for customers linked as children. |
+
+#### Sensor Download API operations discussed
+This sample demonstrates the following CrowdStrike Sensor Download API operations:
+| Operation | Description |
+| :--- | :--- |
+| [GetSensorInstallersCCIDByQuery](https://www.falconpy.io/Service-Collections/Sensor-Download.html#getsensorinstallersccidbyquery) | Get CCID to use with sensor installers. |
 
 ---
 
