@@ -1,3 +1,37 @@
+# Version 1.3.4
+## Added features and functionality
++ Added: Use a Service Class or the Uber Class as a context manager.
+    > Leveraging this functionality will automatically revoke your bearer token on context manager exit.
+    ```python
+    from falconpy import Hosts
+    with Hosts(pythonic=True) as hosts:
+        for device in hosts.query_devices().data:
+            print(device)
+    ```
+    - `_auth_object/_uber_interface.py`
+    - `_service_class/_service_class.py`
+
+## Issues resolved
++ Fixed: _update_policy_container_ operation payload handler is missing the `policy_id`` key. Closes #1068.
+    - `_payload/_firewall.py`
+    > Expanded unit testing to complete code coverage.
+    - `tests/test_firewall_management.py`
++ Fixed: `after` property is missing from the __Meta__ object. Closes #1069.
+    - `_result/_meta.py`
+    - `_result/_result.py`
++ Fixed: Payload handler for _tokens_update_ operation is not properly passing the `revoked` key. Closes #1074.
+    - `installation_tokens.py`
++ Fixed: API operations generating leveraging the raw attribute are not properly displaying results when leveraging result object expansion. Closes #1076.
+    - `_result/_result.py`
+
+# Other
++ Changed: Updated field mapping for Uber Class path variables to a cleaner solution.
+    - `_util/_uber.py`
++ Removed: The unsupported actions `add-rule-group` and `remove-rule-group` are removed from the _performFirewallPoliciesAction_ operation. Relates to #1059.
+    - `firewall_policies.py`
+
+---
+
 # Version 1.3.3
 ## Added features and functionality
 + Added: Deprecation warnings for deprecated classes and operations. Closes #1055.
