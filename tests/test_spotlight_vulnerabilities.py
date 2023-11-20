@@ -20,11 +20,13 @@ AllowedResponses = [200, 400, 403, 429]
 
 class TestSpotlight:
     def spotlight_queryVulnerabilities(self):
-        if falcon.queryVulnerabilities(
-                                       parameters={"limit": 1,
-                                                   "filter": "created_timestamp:>'2021-01-01T00:00:01Z'"
-                                                   }
-                                       )["status_code"] in AllowedResponses:
+        result = falcon.queryVulnerabilities(parameters={"limit": 1,
+                                                         "filter": "created_timestamp:>'2021-01-01T00:00:01Z'"
+                                                         },
+                                             pythonic=True
+                                             )
+        if result.status_code in AllowedResponses:
+            _ = result.after
             return True
         else:
             return False
@@ -69,6 +71,9 @@ class TestSpotlight:
             errorChecks = False
         return errorChecks
 
+    @pytest.mark.skipif(config.base_url == "https://api.laggar.gcw.crowdstrike.com",
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     def test_queryVulnerabilities(self):
         assert self.spotlight_queryVulnerabilities() is True
 

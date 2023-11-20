@@ -45,6 +45,13 @@ falcon = APIHarnessV2(
 
 
 class TestUber:
+    def test_uber_context_manager(self):
+        _success = False
+        with falcon as sdk:
+            if sdk.command("QueryDevicesByFilterScroll")["status_code"] == 200:
+                _success = True
+        assert _success
+
     def uberCCAWS_GetAWSSettings(self):
         returned = False
         authenticated = falcon.authenticated()
@@ -388,3 +395,4 @@ class TestUber:
         except APIError:
             _success = True
         assert _success
+

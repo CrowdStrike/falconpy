@@ -114,12 +114,21 @@ class TestServiceClass:
     @not_supported
     def test_property_debug_record_count(self):
         global _CLEAN
-        _CLEAN = Hosts(creds=config.creds, user_agent="clean/1.0", timeout=120, proxy={})
+        _CLEAN = Hosts(creds=config.creds, user_agent="clean/1.0", timeout=120, proxy={}, base_url=config.base_url)
         if _CLEAN.token_status == 429:
             global _RATE_LIMITED
             _RATE_LIMITED = True
 
         assert bool(_CLEAN.debug_record_count)
+
+    @rate_limited
+    @not_supported
+    def test_service_class_context_manager(self):
+        _success = False
+        with _CLEAN as sdk:
+            if sdk.query_devices()["status_code"] == 200:
+                _success = True
+        assert _success
 
     @rate_limited
     @not_supported
@@ -192,6 +201,7 @@ class TestServiceClass:
     def test_disable_ssl_verify_dynamic(self):
         _CLEAN.ssl_verify = False
         assert bool(not _CLEAN.ssl_verify)
+
 
     @rate_limited
     @not_supported
