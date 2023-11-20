@@ -10,9 +10,13 @@
     ```
     - `_auth_object/_uber_interface.py`
     - `_service_class/_service_class.py`
++ Added: `app_id` keyword added to _CreateSavedSearchesIngestV1_ operation.
+    - `foundry_logscale.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_foundry_logscale.py`
 
 ## Issues resolved
-+ Fixed: _update_policy_container_ operation payload handler is missing the `policy_id`` key. Closes #1068.
++ Fixed: _update_policy_container_ operation payload handler is missing the `policy_id` key. Closes #1068.
     - `_payload/_firewall.py`
     > Expanded unit testing to complete code coverage.
     - `tests/test_firewall_management.py`

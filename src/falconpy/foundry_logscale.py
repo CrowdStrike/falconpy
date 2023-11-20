@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import foundry_execute_search_payload, foundry_dynamic_search_payload
 from ._service_class import ServiceClass
 from ._endpoint._foundry_logscale import _foundry_logscale_endpoints as Endpoints
@@ -282,13 +282,15 @@ class FoundryLogScale(ServiceClass):
             params=parameters
             )
 
-    def populate(self: object) -> Dict[str, Union[int, dict]]:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def populate(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Populate a saved search.
 
         Keyword arguments:
-        This method does not accept keyword arguments.
+        app_id -- Application ID. String.
 
-        This method does not accept arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'app_id'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -300,7 +302,9 @@ class FoundryLogScale(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="CreateSavedSearchesIngestV1"
+            operation_id="CreateSavedSearchesIngestV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "app_id")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
