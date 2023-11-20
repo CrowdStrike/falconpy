@@ -667,6 +667,9 @@ def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
                                        calling_object.pythonic
                                        )
     expand_result = passed_keywords.get("expand_result", False) if passed_keywords else kwargs.get("expand_result", False)
+    do_pythonic = calling_object.pythonic
+    if passed_keywords.get("pythonic", None) is not None:
+        do_pythonic = passed_keywords.get("pythonic")
     new_keywords = {
         "caller": calling_object,
         "method": target_endpoint[1],
@@ -681,7 +684,7 @@ def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
         "body_required": kwargs.get("body_required", None),
         "expand_result": expand_result,
         "container": container,
-        "pythonic": calling_object.pythonic,
+        "pythonic": do_pythonic,
         "perform": True
     }
 

@@ -27,6 +27,8 @@
     - `installation_tokens.py`
 + Fixed: API operations generating leveraging the raw attribute are not properly displaying results when leveraging result object expansion. Closes #1076.
     - `_result/_result.py`
++ Fixed: Per-operation pythonic override is not working as expected. Closes #1078.
+    - `_util/_functions.py`
 
 # Other
 + Changed: Updated field mapping for Uber Class path variables to a cleaner solution.
