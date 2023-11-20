@@ -29,7 +29,7 @@ class TestFoundryLogScale:
             "CreateSavedSearchesDynamicExecuteV1" : falcon.execute_dynamic(end="10", start="1"),
             "GetSavedSearchesExecuteV1" : falcon.get_search_results(job_id="12345"),
             "CreateSavedSearchesExecuteV1" : falcon.execute(search_parameters={"something": "somethingElse"}, end="10", start="1"),
-            "CreateSavedSearchesIngestV1" : falcon.populate(),
+            "CreateSavedSearchesIngestV1" : falcon.populate(app_id="pommegranate"),
             "GetSavedSearchesJobResultsDownloadV1" : falcon.download_results(job_id="12345", result_format="json"),
         }
         for key in tests:
