@@ -76,3 +76,8 @@ class Headers(BaseDictionary):
     def ratelimit_remaining(self) -> Optional[int]:
         """Return the contents of the X-Ratelimit-Remaining key."""
         return self.get_property("X-Ratelimit-Remaining", None)
+
+    @property
+    def trace_id(self) -> Optional[str]:
+        """Return the contents of the X-Cs-Traceid key."""
+        return self.get_property("X-Cs-Traceid", None)
