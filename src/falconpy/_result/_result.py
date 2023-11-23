@@ -40,7 +40,7 @@ from requests.structures import CaseInsensitiveDict
 from ._meta import Meta
 from ._errors import Errors
 from ._headers import Headers
-from ._resources import Resources, BinaryFile, RawBody
+from ._resources import Resources, BinaryFile, RawBody, ResponseComponent
 
 
 class BaseResult:
@@ -66,6 +66,9 @@ class BaseResult:
         self.resources = Resources([])
         self.errors = Errors()
         self.raw = RawBody()
+        # RTR Batch session init and batch responses only
+        self.batch_id = None
+        self.batch_get_cmd_req_id = None
 
         if status_code and headers and body:
             self.status_code = status_code
@@ -103,18 +106,20 @@ class BaseResult:
                 self.errors = Errors(body.get("errors", []))
                 # RTR Batch responses
                 if body.get("batch_id", {}):
-                    # Batch session init
+                    # Batch session init returns as a dictionary
                     self.raw = RawBody(body)
-                    self.resources = Resources(body.get("resources", []))
+                    self.batch_id = body.get("batch_id")
+                    self.resources = ResponseComponent(body.get("resources"))
                 elif body.get("combined", {}):
-                    # Batch session results have to be handled as RawBody
-                    # due to the combined response format.
+                    # Batch session results return as a dictionary.
+                    self.batch_get_cmd_req_id = body.get("batch_get_cmd_req_id", None)
                     self.raw = RawBody(body)
+                    self.resources = ResponseComponent(body.get("combined"))
                 elif body.get("data", {}):  # pragma: no cover
-                    # GraphQL uses a custom response payload, we will
-                    # use RawBody for this return for now. Due to
+                    # GraphQL uses a custom response payload. Due to
                     # environment constraints, this is manually tested.
                     self.raw = RawBody(body)
+                    self.resources = ResponseComponent(body)
                 elif body.get("resources", None) is None:
                     # No resources, this must be a raw dictionary
                     # Probably came from the container API
@@ -122,6 +127,7 @@ class BaseResult:
                 elif isinstance(body.get("resources", []), dict):
                     # Catch unusual response payloads not explicitly handled
                     self.raw = RawBody(body)
+                    self.resources = ResponseComponent(body.get("resources"))
                 else:
                     # Standard API responses
                     self.resources = Resources(body.get("resources", []))
@@ -300,10 +306,12 @@ class Result(BaseResult):
 
     @property
     def trace_id(self) -> Optional[str]:
-        """Return the trace ID from the underlying Meta object."""
+        """Return the trace ID from the underlying Meta or Headers object."""
         _returned: Optional[str] = None
         if self.meta:
             _returned = self.meta.trace_id
+        elif self.headers:
+            _returned = self.headers.trace_id
         return _returned
 
     @property
@@ -419,23 +427,6 @@ class Result(BaseResult):
                 _headers = dict(self.headers.data)
             if "meta" in _body:
                 _body = dict(_body)
-
-            # try:
-            #     # Content is malformed JSON
-            #     # No content returned, but a valid response
-            #     _body = dict(_body)
-            # except ValueError:
-            #     _body = _body
-            #     _body = {
-            #         "meta": {},
-            #         "resources": [],
-            #         "errors": [
-            #             {
-            #                 "message": "Invalid JSON response received",
-            #                 "code": 500
-            #             }
-            #         ]
-            #     }
 
             _returned = {
                 "status_code": int(self.status_code),
