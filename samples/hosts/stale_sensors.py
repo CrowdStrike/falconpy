@@ -122,6 +122,14 @@ def parse_command_line() -> object:
         default=False,
         action="store_true"
         )
+    parser.add_argument(
+        "-f", "--filter-by-os",
+        help="OS filter (windows, macos, linux)",
+        default=None,
+        choices=["windows", "mac", "linux", "k8s"],
+        required=False,
+        dest="osfilter"
+    )
     return parser.parse_args()
 
 
@@ -138,12 +146,16 @@ def get_host_details(id_list: list) -> list:
     return returned
 
 
-def get_hosts(date_filter: str, tag_filter: str) -> list:
+def get_hosts(date_filter: str, tag_filter: str, os_filter: str) -> list:
     """Retrieve a list of hosts IDs that match the last_seen date filter."""
     filter_string = f"last_seen:<='{date_filter}Z'"
     if tag_filter:
         filter_string = f"{filter_string} + tags:*'*{tag_filter}*'"
-
+    if os_filter:
+        os_filter = os_filter.title()
+        if os_filter == "K8s":
+            os_filter = "K8S"
+        filter_string = f"{filter_string} + platform_name:'{os_filter}'"
     return falcon.query_devices_by_filter_scroll(
         limit=5000,
         filter=filter_string
@@ -161,7 +173,7 @@ def parse_host_detail(detail: dict, found: list):
     now = datetime.now(timezone.utc)
     then = dparser.parse(detail["last_seen"])
     distance = (now - then).days
-    tagname = detail.get("tags", "Not Found")
+    tagname = detail.get("tags", "")
     newtag = "\n".join(tagname)
     found.append([
         detail.get("hostname", "Unknown"),
@@ -201,7 +213,7 @@ falcon = connect_api(args.client_id, args.client_secret, args.govcloud, args.mss
 stale = []
 # For each stale host identified
 try:
-    for host in get_host_details(get_hosts(STALE_DATE, args.tag)):
+    for host in get_host_details(get_hosts(STALE_DATE, args.tag, args.osfilter)):
         # Retrieve host detail
         stale = parse_host_detail(host, stale)
 except KeyError as api_error:
