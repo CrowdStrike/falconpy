@@ -319,7 +319,7 @@ class Detects(ServiceClass):
         https://falcon.crowdstrike.com/documentation/86/detections-monitoring-apis#find-detections
 
         limit -- The maximum number of detections to return in this response.
-                 [Integer, default: 9999; max: 9999]
+                 [Integer, default: 100; max: 9999]
                  Use with the offset parameter to manage pagination of results.
         offset -- The first detection to return, where 0 is the latest detection.
                   Use with the limit parameter to manage pagination of results.
