@@ -138,6 +138,180 @@ _firewall_management_endpoints = [
     ]
   ],
   [
+    "get-network-locations-details",
+    "GET",
+    "/fwmgr/entities/network-locations-details/v1",
+    "Get network locations entities by ID",
+    "firewall_management",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The events to retrieve, identified by ID",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "update-network-locations-metadata",
+    "POST",
+    "/fwmgr/entities/network-locations-metadata/v1",
+    "Updates the network locations metadata such as polling_intervals for the cid",
+    "firewall_management",
+    [
+      {
+        "type": "string",
+        "description": "Audit log comment for this action",
+        "name": "comment",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "update-network-locations-precedence",
+    "POST",
+    "/fwmgr/entities/network-locations-precedence/v1",
+    "Updates the network locations precedence according to the list of ids provided.",
+    "firewall_management",
+    [
+      {
+        "type": "string",
+        "description": "Audit log comment for this action",
+        "name": "comment",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "get-network-locations",
+    "GET",
+    "/fwmgr/entities/network-locations/v1",
+    "Get a summary of network locations entities by ID",
+    "firewall_management",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The events to retrieve, identified by ID",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "upsert-network-locations",
+    "PUT",
+    "/fwmgr/entities/network-locations/v1",
+    "Updates the network locations provided, and return the ID.",
+    "firewall_management",
+    [
+      {
+        "type": "string",
+        "description": "Audit log comment for this action",
+        "name": "comment",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "create-network-locations",
+    "POST",
+    "/fwmgr/entities/network-locations/v1",
+    "Create new network locations provided, and return the ID.",
+    "firewall_management",
+    [
+      {
+        "type": "string",
+        "description": "A network location ID from which to copy location. If this is provided then the body "
+        "of the request is ignored.",
+        "name": "clone_id",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "description": "A boolean to determine whether the cloned location needs to be added to the same "
+        "firewall rules that original location is added to.",
+        "name": "add_fw_rules",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Audit log comment for this action",
+        "name": "comment",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "update-network-locations",
+    "PATCH",
+    "/fwmgr/entities/network-locations/v1",
+    "Updates the network locations provided, and return the ID.",
+    "firewall_management",
+    [
+      {
+        "type": "string",
+        "description": "Audit log comment for this action",
+        "name": "comment",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "delete-network-locations",
+    "DELETE",
+    "/fwmgr/entities/network-locations/v1",
+    "Delete network location entities by ID.",
+    "firewall_management",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The IDs of the network locations to be deleted",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "get-platforms",
     "GET",
     "/fwmgr/entities/platforms/v1",
@@ -461,6 +635,53 @@ _firewall_management_endpoints = [
         "type": "string",
         "description": "Starting index of overall result set from which to return ids.",
         "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Number of ids to return.",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "query-network-locations",
+    "GET",
+    "/fwmgr/queries/network-locations/v1",
+    "Get a list of network location IDs",
+    "firewall_management",
+    [
+      {
+        "type": "string",
+        "description": "Possible order by fields: ",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL query specifying the filter parameters. Filter term criteria: name",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Match query criteria, which includes all the filter string fields",
+        "name": "q",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Starting index of overall result set from which to return ids.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
+        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
+        "the previous response to continue from that place in the results.",
+        "name": "after",
         "in": "query"
       },
       {
