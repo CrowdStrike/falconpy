@@ -190,6 +190,32 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_falcon_scripts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get Falcon scripts with metadata and content of script.
+
+        Keyword arguments:
+        ids -- List of Falcon Script IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_GetFalconScripts
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_GetFalconScripts",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_put_files(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get put-files based on the ID's given. These are used for the RTR `put` command.
 
@@ -485,6 +511,36 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_falcon_scripts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get a list of Falcon script IDs available to the user to run.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of IDs to return in this response. [Integer, 1-5000]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving IDs from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax. Ex: `created_at|asc`
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR_ListFalconScripts
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_ListFalconScripts",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def list_put_files(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get a list of put-file ID's that are available to the user for the `put` command.
 
@@ -552,6 +608,7 @@ class RealTimeResponseAdmin(ServiceClass):
     BatchAdminCmd = batch_admin_command
     RTR_CheckAdminCommandStatus = check_admin_command_status
     RTR_ExecuteAdminCommand = execute_admin_command
+    RTR_GetFalconScripts = get_falcon_scripts
     RTR_GetPut_Files = get_put_files
     RTR_GetPut_FilesV2 = get_put_files_v2
     RTR_CreatePut_Files = create_put_files
@@ -561,6 +618,7 @@ class RealTimeResponseAdmin(ServiceClass):
     RTR_CreateScripts = create_scripts
     RTR_DeleteScripts = delete_scripts
     RTR_UpdateScripts = update_scripts
+    RTR_ListFalconScripts = list_falcon_scripts
     RTR_ListPut_Files = list_put_files
     RTR_ListScripts = list_scripts
 
