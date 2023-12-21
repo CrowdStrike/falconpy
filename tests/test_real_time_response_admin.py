@@ -119,6 +119,7 @@ class TestRTRAdmin:
             "batch_admin_cmd": falcon.BatchAdminCmd(body={})["status_code"],                                    # 400
             "check_admin_command_status": falcon.RTR_CheckAdminCommandStatus(parameters={})["status_code"],     # 400
             "execute_admin_command": falcon.RTR_ExecuteAdminCommand(body={})["status_code"],                    # 400
+            "get_falcon_script": falcon.RTR_GetFalconScripts(ids="12345678")["status_code"],
             "create_put_files": falcon.RTR_CreatePut_Files(data=file_payload, files=files_detail)["status_code"],
             "get_again": falcon.RTR_GetPut_FilesV2(self.rtra_retrieve_file_id(file_name=upload_filename, ver=2))["status_code"],
             "delete_put_files": falcon.RTR_DeletePut_Files(
@@ -136,6 +137,7 @@ class TestRTRAdmin:
                 content="#!/bin/bash"
                 )["status_code"],
             "delete_scripts": falcon.RTR_DeleteScripts(ids=self.rtra_retrieve_script_id(script_filename))["status_code"],
+            "list_falcon_scripts": falcon.RTR_ListFalconScripts()["status_code"],
             "list_put_files": falcon.RTR_ListPut_Files()["status_code"],
             "list_scripts": falcon.RTR_ListScripts()["status_code"]
         }

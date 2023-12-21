@@ -137,6 +137,26 @@ _real_time_response_admin_endpoints = [
     ]
   ],
   [
+    "RTR_GetFalconScripts",
+    "GET",
+    "/real-time-response/entities/falcon-scripts/v1",
+    "Get Falcon scripts with metadata and content of script",
+    "real_time_response_admin",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "IDs of the Falcon scripts you want to retrieve",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "RTR_GetPut_Files",
     "GET",
     "/real-time-response/entities/put-files/v1",
@@ -412,6 +432,47 @@ _real_time_response_admin_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      }
+    ]
+  ],
+  [
+    "RTR_ListFalconScripts",
+    "GET",
+    "/real-time-response/queries/falcon-scripts/v1",
+    "Get a list of Falcon script IDs available to the user to run",
+    "real_time_response_admin",
+    [
+      {
+        "type": "string",
+        "description": "Optional filter criteria in the form of an FQL query. For more information about FQL "
+        "queries, see our [FQL documentation in Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-"
+        "query-language-feature-guide).",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Starting index of overall result set from which to return ids.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "maximum": 100,
+        "type": "integer",
+        "description": "Number of ids to return.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "created_timestamp",
+          "modified_timestamp",
+          "name"
+        ],
+        "type": "string",
+        "description": "Sort by spec. Ex: 'created_at|asc'.",
+        "name": "sort",
+        "in": "query"
       }
     ]
   ],
