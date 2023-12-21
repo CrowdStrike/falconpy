@@ -872,6 +872,12 @@ _cspm_registration_endpoints = [
         "description": "Offset returned detections. Cannot be combined with next_token filter",
         "name": "offset",
         "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "String to get next page of results. Cannot be combined with any filter except limit.",
+        "name": "next_token",
+        "in": "query"
       }
     ]
   ],

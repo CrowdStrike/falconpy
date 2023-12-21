@@ -731,6 +731,8 @@ class CSPMRegistration(ServiceClass):
                   is_managed                use_current_scan_ids (*)
                   (*) Use this to retrieve records for the latest scans
         limit -- Maximum number of detections to return. Integer. (Default: 500)
+        next_token -- Token to use to retrieve the next page of results.
+                      Cannot be combined with any filter except limit. String.
         offset -- Starting offset for returned detections. Integer.
         sort -- FQL formatted sort. String. Default: timestamp|desc
                 Allowed values
