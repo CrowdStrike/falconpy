@@ -144,7 +144,7 @@ def find_nth(haystack: str, needle: str, nth: int):
 def convert_windows_time(incoming: str):
     """Convert Windows time stamps to human readable format."""
     cur_time = datetime.now()
-    incoming = datetime.strptime(incoming[:incoming.find("+")], "%Y%m%d%H%M%S.%f")
+    incoming = datetime.strptime(incoming[:incoming.find("+")][:incoming.find(".")], "%Y%m%d%H%M%S")
     delta: timedelta = cur_time - incoming
     hour_min = ':'.join(str(timedelta(seconds=delta.seconds)).split(':')[0:2])
     return f"up {delta.days} days, {hour_min}"
