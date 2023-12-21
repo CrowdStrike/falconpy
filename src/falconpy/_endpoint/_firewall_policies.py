@@ -41,8 +41,8 @@ _firewall_policies_endpoints = [
     "queryCombinedFirewallPolicyMembers",
     "GET",
     "/policy/combined/firewall-members/v1",
-    "Search for members of a Firewall Policy in your environment by providing an FQL "
-    "filter and paging details. Returns a set of host details which match the filter criteria",
+    "Search for members of a Firewall Policy in your environment by providing an FQL filter and paging "
+    "details. Returns a set of host details which match the filter criteria",
     "firewall_policies",
     [
       {
@@ -84,8 +84,8 @@ _firewall_policies_endpoints = [
     "queryCombinedFirewallPolicies",
     "GET",
     "/policy/combined/firewall/v1",
-    "Search for Firewall Policies in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Firewall Policies which match the filter criteria",
+    "Search for Firewall Policies in your environment by providing an FQL filter and paging details. Returns a "
+    "set of Firewall Policies which match the filter criteria",
     "firewall_policies",
     [
       {
@@ -168,9 +168,9 @@ _firewall_policies_endpoints = [
     "setFirewallPoliciesPrecedence",
     "POST",
     "/policy/entities/firewall-precedence/v1",
-    "Sets the precedence of Firewall Policies based on the order of IDs specified in the request. "
-    "The first ID specified will have the highest precedence and the last ID specified will have the lowest. "
-    "You must specify all non-Default Policies for a platform when updating precedence",
+    "Sets the precedence of Firewall Policies based on the order of IDs specified in the request. The first ID "
+    " specified will have the highest precedence and the last ID specified will have the lowest. You must specify "
+    "all non-Default Policies for a platform when updating precedence",
     "firewall_policies",
     [
       {
@@ -260,8 +260,8 @@ _firewall_policies_endpoints = [
     "queryFirewallPolicyMembers",
     "GET",
     "/policy/queries/firewall-members/v1",
-    "Search for members of a Firewall Policy in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Agent IDs which match the filter criteria",
+    "Search for members of a Firewall Policy in your environment by providing an FQL filter and paging "
+    "details. Returns a set of Agent IDs which match the filter criteria",
     "firewall_policies",
     [
       {
@@ -303,8 +303,8 @@ _firewall_policies_endpoints = [
     "queryFirewallPolicies",
     "GET",
     "/policy/queries/firewall/v1",
-    "Search for Firewall Policies in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Firewall Policy IDs which match the filter criteria",
+    "Search for Firewall Policies in your environment by providing an FQL filter and paging details. Returns a "
+    "set of Firewall Policy IDs which match the filter criteria",
     "firewall_policies",
     [
       {

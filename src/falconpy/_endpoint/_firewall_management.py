@@ -218,6 +218,26 @@ _firewall_management_endpoints = [
     ]
   ],
   [
+    "upsert_network_locations",
+    "PUT",
+    "/fwmgr/entities/network-locations/v1",
+    "Updates the network locations provided, and return the ID.",
+    "firewall_management",
+    [
+      {
+        "type": "string",
+        "description": "Audit log comment for this action",
+        "name": "comment",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "create_network_locations",
     "POST",
     "/fwmgr/entities/network-locations/v1",
@@ -226,15 +246,15 @@ _firewall_management_endpoints = [
     [
       {
         "type": "string",
-        "description": "A network location ID from which to copy location. "
-        "If this is provided then the body of the request is ignored.",
+        "description": "A network location ID from which to copy location. If this is provided then the body "
+        "of the request is ignored.",
         "name": "clone_id",
         "in": "query"
       },
       {
         "type": "boolean",
-        "description": "A boolean to determine whether the cloned location needs "
-        "to be added to the same firewall rules that original location is added to.",
+        "description": "A boolean to determine whether the cloned location needs to be added to the same "
+        "firewall rules that original location is added to.",
         "name": "add_fw_rules",
         "in": "query"
       },
@@ -254,26 +274,6 @@ _firewall_management_endpoints = [
   [
     "update_network_locations",
     "PATCH",
-    "/fwmgr/entities/network-locations/v1",
-    "Updates the network locations provided, and return the ID.",
-    "firewall_management",
-    [
-      {
-        "type": "string",
-        "description": "Audit log comment for this action",
-        "name": "comment",
-        "in": "query"
-      },
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "upsert_network_locations",
-    "PUT",
     "/fwmgr/entities/network-locations/v1",
     "Updates the network locations provided, and return the ID.",
     "firewall_management",
@@ -355,8 +355,8 @@ _firewall_management_endpoints = [
     "update_policy_container_v1",
     "PUT",
     "/fwmgr/entities/policies/v1",
-    "Update an identified policy container. WARNING: This endpoint is deprecated in favor "
-    "of v2, using this endpoint could disable your local logging setting.",
+    "Update an identified policy container. WARNING: This endpoint is deprecated in favor of v2, using this "
+    "endpoint could disable your local logging setting.",
     "firewall_management",
     [
       {
@@ -409,15 +409,15 @@ _firewall_management_endpoints = [
     [
       {
         "type": "string",
-        "description": "A rule group ID from which to copy rules. "
-        "If this is provided then the 'rules' property of the body is ignored.",
+        "description": "A rule group ID from which to copy rules. If this is provided then the 'rules' "
+        "property of the body is ignored.",
         "name": "clone_id",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "If this flag is set to true then the rules will be "
-        "cloned from the clone_id from the CrowdStrike Firewall Rule Groups Library.",
+        "description": "If this flag is set to true then the rules will be cloned from the clone_id from the "
+        "CrowdStrike Firewal Rule Groups Library.",
         "name": "library",
         "in": "query"
       },
@@ -489,15 +489,15 @@ _firewall_management_endpoints = [
     [
       {
         "type": "string",
-        "description": "A rule group ID from which to copy rules. "
-        "If this is provided then the 'rules' property of the body is ignored.",
+        "description": "A rule group ID from which to copy rules. If this is provided then the 'rules' "
+        "property of the body is ignored.",
         "name": "clone_id",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "If this flag is set to true then the rules will be cloned "
-        "from the clone_id from the CrowdStrike Firewall Rule Groups Library.",
+        "description": "If this flag is set to true then the rules will be cloned from the clone_id from the "
+        "CrowdStrike Firewall Rule Groups Library.",
         "name": "library",
         "in": "query"
       },
@@ -518,8 +518,8 @@ _firewall_management_endpoints = [
     "update_rule_group_validation",
     "PATCH",
     "/fwmgr/entities/rule-groups/validation/v1",
-    "Validates the request of updating name, description, or enabled status of "
-    "a rule group, or create, edit, delete, or reorder rules",
+    "Validates the request of updating name, description, or enabled status of a rule group, or create, edit, "
+    "delete, or reorder rules",
     "firewall_management",
     [
       {
@@ -584,10 +584,9 @@ _firewall_management_endpoints = [
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters. "
-        "Filter term criteria: enabled, platform, name, description, etc TODO. "
-        "Filter range criteria: created_on, modified_on; use any common date format, "
-        "such as '2010-05-15T14:55:21.892315096Z'.",
+        "description": "FQL query specifying the filter parameters. Filter term criteria: enabled, platform, "
+        "name, description, etc TODO. Filter range criteria: created_on, modified_on; use any common date format, such "
+        "as '2010-05-15T14:55:21.892315096Z'.",
         "name": "filter",
         "in": "query"
       },
@@ -605,9 +604,9 @@ _firewall_management_endpoints = [
       },
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination "
-        "of results. On your first request, don't provide an `after` token. On subsequent requests, "
-        "provide the `after` token from the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
+        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
+        "the previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
@@ -679,9 +678,9 @@ _firewall_management_endpoints = [
       },
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. "
-        "On your first request, don't provide an `after` token. On subsequent requests, provide the `after` "
-        "token from the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
+        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
+        "the previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
@@ -735,9 +734,9 @@ _firewall_management_endpoints = [
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters. Filter term criteria: enabled, "
-        "platform, name, description, etc TODO. Filter range criteria: created_on, modified_on; use "
-        "any common date format, such as '2010-05-15T14:55:21.892315096Z'.",
+        "description": "FQL query specifying the filter parameters. Filter term criteria: enabled, platform, "
+        "name, description, etc TODO. Filter range criteria: created_on, modified_on; use any common date format, such "
+        "as '2010-05-15T14:55:21.892315096Z'.",
         "name": "filter",
         "in": "query"
       },
@@ -776,9 +775,9 @@ _firewall_management_endpoints = [
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters. Filter term criteria: enabled, "
-        "platform, name, description, etc TODO. Filter range criteria: created_on, modified_on; use "
-        "any common date format, such as '2010-05-15T14:55:21.892315096Z'.",
+        "description": "FQL query specifying the filter parameters. Filter term criteria: enabled, platform, "
+        "name, description, etc TODO. Filter range criteria: created_on, modified_on; use any common date format, such "
+        "as '2010-05-15T14:55:21.892315096Z'.",
         "name": "filter",
         "in": "query"
       },
@@ -796,9 +795,9 @@ _firewall_management_endpoints = [
       },
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of "
-        "results. On your first request, don't provide an `after` token. On subsequent requests, provide "
-        "the `after` token from the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
+        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
+        "the previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
@@ -826,8 +825,8 @@ _firewall_management_endpoints = [
       {
         "type": "string",
         "description": "FQL query specifying the filter parameters. Filter term criteria: enabled, platform, "
-        "name, description, etc TODO. Filter range criteria: created_on, modified_on; use any common date "
-        "format, such as '2010-05-15T14:55:21.892315096Z'.",
+        "name, description, etc TODO. Filter range criteria: created_on, modified_on; use any common date format, such "
+        "as '2010-05-15T14:55:21.892315096Z'.",
         "name": "filter",
         "in": "query"
       },
@@ -845,9 +844,9 @@ _firewall_management_endpoints = [
       },
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. "
-        "On your first request, don't provide an `after` token. On subsequent requests, provide the `after` "
-        "token from the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
+        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
+        "the previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },

@@ -197,19 +197,18 @@ _message_center_endpoints = [
       {
         "enum": [
           "activity.created_time.asc",
-          "activity.created_time.desc",
-          "activity.type.asc",
-          "activity.type.desc"
+          "activity.created_time.desc"
         ],
         "type": "string",
-        "description": "The property to sort on, followed by a dot (.), "
-        "followed by the sort direction, either \"asc\" or \"desc\".",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query.",
+        "description": "Optional filter and sort criteria in the form of an FQL query. Allowed filters are: "
+        "activity.created_time\nactivity.type",
         "name": "filter",
         "in": "query"
       },
@@ -243,26 +242,21 @@ _message_center_endpoints = [
       },
       {
         "enum": [
-          "case.created_time.asc",
-          "case.created_time.desc",
           "case.id.asc",
-          "case.id.desc",
-          "case.last_modified_time.asc",
-          "case.last_modified_time.desc",
-          "case.status.asc",
-          "case.status.desc",
-          "case.type.asc",
-          "case.type.desc"
+          "case.id.desc"
         ],
         "type": "string",
-        "description": "The property to sort on, followed by a dot (.), "
-        "followed by the sort direction, either \"asc\" or \"desc\".",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query.",
+        "description": "Optional filter and sort criteria in the form of an FQL query. Allowed filters are: _a "
+        "ll\nactivity.body\ncase.aids\ncase.assigner.display_name\ncase.assigner.first_name\ncase.assigner.last_name\nc "
+        "ase.assigner.uid\ncase.assigner.uuid\ncase.body\ncase.created_time\ncase.detections.id\ncase.hosts\ncase.id\nc "
+        "ase.incidents.id\ncase.ip_addresses\ncase.key\ncase.last_modified_time\ncase.status\ncase.title\ncase.type",
         "name": "filter",
         "in": "query"
       },

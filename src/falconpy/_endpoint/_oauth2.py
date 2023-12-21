@@ -52,9 +52,8 @@ _oauth2_endpoints = [
       },
       {
         "type": "string",
-        "description": "The OAuth2 access token you want to revoke.\n\nInclude your API "
-        "client ID and secret in basic auth format (`Authorization: basic <encoded API client "
-        "ID and secret>`) in your request header.",
+        "description": "The OAuth2 access token you want to revoke.\n\nInclude your API client ID and secret "
+        "in basic auth format (`Authorization: basic <encoded API client ID and secret>`) in your request header.",
         "name": "token",
         "in": "formData",
         "required": True
@@ -70,18 +69,18 @@ _oauth2_endpoints = [
     [
       {
         "type": "string",
-        "description": "The API client ID to authenticate your API requests. "
-        "For information on generating API clients, see [API documentation inside Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/1/crowdstrike-api-introduction-for-developers).",
+        "description": "The API client ID to authenticate your API requests. For information on generating API "
+        " clients, see [API documentation inside "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/1/crowdstrike-api-introduction-for-developers).",
         "name": "client_id",
         "in": "formData",
         "required": True
       },
       {
         "type": "string",
-        "description": "The API client secret to authenticate your API requests. "
-        "For information on generating API clients, see [API documentation inside Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/1/crowdstrike-api-introduction-for-developers).",
+        "description": "The API client secret to authenticate your API requests. For information on generating "
+        " API clients, see [API documentation inside "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/1/crowdstrike-api-introduction-for-developers).",
         "name": "client_secret",
         "in": "formData",
         "required": True

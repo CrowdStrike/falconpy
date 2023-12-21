@@ -186,10 +186,10 @@ _iocs_endpoints = [
     [
       {
         "type": "string",
-        "description": "\nThe type of the indicator. Valid types include:\n\nsha256: A hex-encoded sha256 hash string. "
-        "Length - min: 64, max: 64.\n\nmd5: A hex-encoded md5 hash string. Length - min 32, max: 32.\n\ndomain: A domain "
-        "name. Length - min: 1, max: 200.\n\nipv4: An IPv4 address. Must be a valid IP address.\n\nipv6: An IPv6 address. "
-        "Must be a valid IP address.\n",
+        "description": "\nThe type of the indicator. Valid types include:\n\nsha256: A hex-encoded sha256 hash "
+        " string. Length - min: 64, max: 64.\n\nmd5: A hex-encoded md5 hash string. Length - min 32, max: "
+        "32.\n\ndomain: A domain name. Length - min: 1, max: 200.\n\nipv4: An IPv4 address. Must be a valid IP "
+        "address.\n\nipv6: An IPv6 address. Must be a valid IP address.\n",
         "name": "type",
         "in": "query",
         "required": True
@@ -203,15 +203,15 @@ _iocs_endpoints = [
       },
       {
         "type": "string",
-        "description": "The first process to return, where 0 is the latest offset. Use with the offset parameter "
-        "to manage pagination of results.",
+        "description": "The first process to return, where 0 is the latest offset. Use with the offset "
+        "parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "The first process to return, where 0 is the latest offset. Use with the limit parameter "
-        "to manage pagination of results.",
+        "description": "The first process to return, where 0 is the latest offset. Use with the limit "
+        "parameter to manage pagination of results.",
         "name": "offset",
         "in": "query"
       }
@@ -302,10 +302,10 @@ _iocs_endpoints = [
     [
       {
         "type": "string",
-        "description": "\nThe type of the indicator. Valid types include:\n\nsha256: A hex-encoded sha256 hash string. "
-        "Length - min: 64, max: 64.\n\nmd5: A hex-encoded md5 hash string. Length - min 32, max: 32.\n\ndomain: A domain "
-        "name. Length - min: 1, max: 200.\n\nipv4: An IPv4 address. Must be a valid IP address.\n\nipv6: An IPv6 address. "
-        "Must be a valid IP address.\n",
+        "description": "\nThe type of the indicator. Valid types include:\n\nsha256: A hex-encoded sha256 hash "
+        " string. Length - min: 64, max: 64.\n\nmd5: A hex-encoded md5 hash string. Length - min 32, max: "
+        "32.\n\ndomain: A domain name. Length - min: 1, max: 200.\n\nipv4: An IPv4 address. Must be a valid IP "
+        "address.\n\nipv6: An IPv6 address. Must be a valid IP address.\n",
         "name": "type",
         "in": "query",
         "required": True
@@ -327,15 +327,15 @@ _iocs_endpoints = [
       },
       {
         "type": "string",
-        "description": "The first process to return, where 0 is the latest offset. "
-        "Use with the offset parameter to manage pagination of results.",
+        "description": "The first process to return, where 0 is the latest offset. Use with the offset "
+        "parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "The first process to return, where 0 is the latest offset. "
-        "Use with the limit parameter to manage pagination of results.",
+        "description": "The first process to return, where 0 is the latest offset. Use with the limit "
+        "parameter to manage pagination of results.",
         "name": "offset",
         "in": "query"
       }

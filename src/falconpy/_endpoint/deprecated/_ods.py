@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library.
+"""Internal API endpoint constant library (deprecated operations).
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -250,8 +250,8 @@ _ods_endpoints = [
     [
       {
         "type": "string",
-        "description": "A FQL compatible query string. Terms: [id cid scan_id host_id "
-        "host_scan_id filepath filename hash pattern_id severity quarantined last_updated]",
+        "description": "A FQL compatible query string. Terms: [id scan_id host_id host_scan_id filepath "
+        "filename hash pattern_id severity quarantined last_updated]",
         "name": "filter",
         "in": "query",
         "allowEmptyValue": True
@@ -293,8 +293,7 @@ _ods_endpoints = [
         ],
         "type": "string",
         "default": "last_updated|desc",
-        "description": "The property to sort on, followed by a |, followed by the sort direction, "
-        "either \"asc\" or \"desc\"",
+        "description": "The property to sort on, followed by a |, followed by the sort direction, either \"asc\" or \"desc\"",
         "name": "sort",
         "in": "query",
         "allowEmptyValue": True
@@ -310,10 +309,9 @@ _ods_endpoints = [
     [
       {
         "type": "string",
-        "description": "A FQL compatible query string. Terms: [id cid profile_id host_id scan_id "
-        "host_scan_id filecount.scanned filecount.malicious filecount.quarantined "
-        "filecount.skipped affected_hosts_count status severity completed_on started_on "
-        "last_updated]",
+        "description": "A FQL compatible query string. Terms: [id profile_id host_id scan_id host_scan_id "
+        "filecount.scanned filecount.malicious filecount.quarantined filecount.skipped affected_hosts_count status "
+        "severity completed_on started_on last_updated scan_control_reason]",
         "name": "filter",
         "in": "query",
         "allowEmptyValue": True
@@ -357,12 +355,13 @@ _ods_endpoints = [
           "completed_on|asc",
           "completed_on|desc",
           "last_updated|asc",
-          "last_updated|desc"
+          "last_updated|desc",
+          "scan_control_reason.keyword|asc",
+          "scan_control_reason.keyword|desc"
         ],
         "type": "string",
         "default": "last_updated|desc",
-        "description": "The property to sort on, followed by a |, followed by the sort direction, "
-        "either \"asc\" or \"desc\"",
+        "description": "The property to sort on, followed by a |, followed by the sort direction, either \"asc\" or \"desc\"",
         "name": "sort",
         "in": "query",
         "allowEmptyValue": True
@@ -378,10 +377,10 @@ _ods_endpoints = [
     [
       {
         "type": "string",
-        "description": "A FQL compatible query string. Terms: [id cid profile_id "
-        "description.keyword initiated_from filecount.scanned filecount.malicious "
-        "filecount.quarantined filecount.skipped affected_hosts_count status severity "
-        "scan_started_on scan_completed_on created_on created_by last_updated]",
+        "description": "A FQL compatible query string. Terms: [id profile_id description.keyword "
+        "initiated_from filecount.scanned filecount.malicious filecount.quarantined filecount.skipped "
+        "affected_hosts_count status severity scan_started_on scan_completed_on created_on created_by last_updated "
+        "targeted_host_count missing_host_count]",
         "name": "filter",
         "in": "query",
         "allowEmptyValue": True
@@ -431,12 +430,15 @@ _ods_endpoints = [
           "created_by|asc",
           "created_by|desc",
           "last_updated|asc",
-          "last_updated|desc"
+          "last_updated|desc",
+          "targeted_host_count|asc",
+          "targeted_host_count|desc",
+          "missing_host_count|asc",
+          "missing_host_count|desc"
         ],
         "type": "string",
         "default": "created_on|desc",
-        "description": "The property to sort on, followed by a |, followed by the sort direction, "
-        "either \"asc\" or \"desc\"",
+        "description": "The property to sort on, followed by a |, followed by the sort direction, either \"asc\" or \"desc\"",
         "name": "sort",
         "in": "query",
         "allowEmptyValue": True
@@ -452,9 +454,8 @@ _ods_endpoints = [
     [
       {
         "type": "string",
-        "description": "A FQL compatible query string. Terms: [id cid description initiated_from "
-        "status schedule.start_timestamp schedule.Interval created_on created_by last_updated "
-        "deleted]",
+        "description": "A FQL compatible query string. Terms: [id description initiated_from status "
+        "schedule.start_timestamp schedule.Interval created_on created_by last_updated deleted]",
         "name": "filter",
         "in": "query",
         "allowEmptyValue": True
@@ -494,8 +495,7 @@ _ods_endpoints = [
         ],
         "type": "string",
         "default": "schedule.start_timestamp|desc",
-        "description": "The property to sort on, followed by a |, followed by the sort direction, "
-        "either \"asc\" or \"desc\"",
+        "description": "The property to sort on, followed by a |, followed by the sort direction, either \"asc\" or \"desc\"",
         "name": "sort",
         "in": "query",
         "allowEmptyValue": True

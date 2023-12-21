@@ -42,7 +42,7 @@ _fdr_endpoints = [
     "GET",
     "/fdr/combined/schema-members/v1",
     "Fetch combined schema",
-    "event_schema",
+    "fdr",
     []
   ],
   [
@@ -50,7 +50,26 @@ _fdr_endpoints = [
     "GET",
     "/fdr/entities/schema-events/v1",
     "Fetch event schema by ID",
-    "event_schema",
+    "fdr",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Specify feed IDs to fetch",
+        "name": "ids",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "fdrschema_entities_field_get",
+    "GET",
+    "/fdr/entities/schema-fields/v1",
+    "Fetch field schema by ID",
+    "fdr",
     [
       {
         "type": "array",
@@ -69,7 +88,7 @@ _fdr_endpoints = [
     "GET",
     "/fdr/queries/schema-events/v1",
     "Get list of event IDs given a particular query.",
-    "event_schema",
+    "fdr",
     [
       {
         "type": "integer",
@@ -98,30 +117,11 @@ _fdr_endpoints = [
     ]
   ],
   [
-    "fdrschema_entities_field_get",
-    "GET",
-    "/fdr/entities/schema-fields/v1",
-    "Fetch field schema by ID",
-    "field_schema",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "Specify feed IDs to fetch",
-        "name": "ids",
-        "in": "query"
-      }
-    ]
-  ],
-  [
     "fdrschema_queries_field_get",
     "GET",
     "/fdr/queries/schema-fields/v1",
     "Get list of field IDs given a particular query.",
-    "field_schema",
+    "fdr",
     [
       {
         "type": "integer",

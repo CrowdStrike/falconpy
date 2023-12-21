@@ -46,6 +46,114 @@ _falcon_container_endpoints = [
     []
   ],
   [
+    "ReadRegistryEntitiesByUUID",
+    "GET",
+    "/container-security/entities/registries/v1",
+    "Retrieve the registry entity identified by the entity UUID",
+    "falcon_container",
+    [
+      {
+        "type": "string",
+        "description": "Registry entity UUID",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "CreateRegistryEntities",
+    "POST",
+    "/container-security/entities/registries/v1",
+    "Create a registry entity using the provided details",
+    "falcon_container",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateRegistryEntities",
+    "PATCH",
+    "/container-security/entities/registries/v1",
+    "Update the registry entity, as identified by the entity UUID, using the provided details",
+    "falcon_container",
+    [
+      {
+        "type": "string",
+        "description": "Registry entity UUID",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeleteRegistryEntities",
+    "DELETE",
+    "/container-security/entities/registries/v1",
+    "Delete the registry entity identified by the entity UUID",
+    "falcon_container",
+    [
+      {
+        "type": "string",
+        "description": "Registry entity UUID",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ReadRegistryEntities",
+    "GET",
+    "/container-security/queries/registries/v1",
+    "Retrieve registry entities identified by the customer id",
+    "falcon_container",
+    [
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The field to sort on, e.g. id.desc or id.asc.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadImageVulnerabilities",
+    "POST",
+    "/image-assessment/combined/vulnerability-lookups/v1",
+    "Retrieve known vulnerabilities for the provided image",
+    "falcon_container",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetCombinedImages",
     "GET",
     "/container-security/combined/image-assessment/images/v1",
@@ -73,24 +181,10 @@ _falcon_container_endpoints = [
       },
       {
         "type": "string",
-        "description": "The fields to sort the records on. Supported columns:  "
-        "[first_seen registry repository tag vulnerability_severity]",
+        "description": "The fields to sort the records on. Supported columns:  [first_seen registry repository "
+        "tag vulnerability_severity]",
         "name": "sort",
         "in": "query"
-      }
-    ]
-  ],
-  [
-    "ReadImageVulnerabilities",
-    "POST",
-    "/image-assessment/combined/vulnerability-lookups/v1",
-    "Retrieve known vulnerabilities for the provided image",
-    "falcon_container_cli",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
       }
     ]
   ],
@@ -151,8 +245,8 @@ _falcon_container_endpoints = [
     "ImageMatchesPolicy",
     "GET",
     "/policy-checks",
-    "After an image scan, use this operation to see if any images match a policy. If deny is true,"
-    " the policy suggestion is that you do not deploy the image in your environment.",
+    "After an image scan, use this operation to see if any images match a policy. If deny is true, the policy "
+    "suggestion is that you do not deploy the image in your environment.",
     "falcon_container",
     [
       {
@@ -166,100 +260,6 @@ _falcon_container_endpoints = [
         "type": "string",
         "description": "The image tag.",
         "name": "tag",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "ReadRegistryEntities",
-    "GET",
-    "/container-security/queries/registries/v1",
-    "Retrieve registry entities identified by the customer ID.",
-    "falcon_container_image",
-    [
-      {
-        "type": "string",
-        "description": "Starting index of result set from which to return IDs.",
-        "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "integer",
-        "description": "Number of IDs to return.",
-        "name": "limit",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Order by fields.",
-        "name": "sort",
-        "in": "query"
-      }
-    ]
-  ],
-  [
-    "CreateRegistryEntities",
-    "POST",
-    "/container-security/entities/registries/v1",
-    "Create a registry entity using the provided details.",
-    "falcon_container_image",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "DeleteRegistryEntities",
-    "DELETE",
-    "/container-security/entities/registries/v1",
-    "Delete the registry entity identified by the entity UUID.",
-    "falcon_container_image",
-    [
-      {
-        "type": "string",
-        "description": "Registry entity UUID.",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "UpdateRegistryEntities",
-    "PATCH",
-    "/container-security/entities/registries/v1",
-    "Update the registry entity, as identified by the entity UUID, using the provided details.",
-    "falcon_container_image",
-    [
-      {
-        "type": "string",
-        "description": "Registry entity UUID.",
-        "name": "id",
-        "in": "query",
-        "required": True
-      },
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "ReadRegistryEntitiesByUUID",
-    "GET",
-    "/container-security/entities/registries/v1",
-    "Retrieve the registry entity identified by the entity UUID.",
-    "falcon_container_image",
-    [
-      {
-        "type": "string",
-        "description": "Registry entity UUID.",
-        "name": "ids",
         "in": "query",
         "required": True
       }

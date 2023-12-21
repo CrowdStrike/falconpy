@@ -41,15 +41,15 @@ _spotlight_vulnerabilities_endpoints = [
     "combinedQueryVulnerabilities",
     "GET",
     "/spotlight/combined/vulnerabilities/v1",
-    "Search for Vulnerabilities in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Vulnerability entities which match the filter criteria",
+    "Search for Vulnerabilities in your environment by providing an FQL filter and paging details. Returns a "
+    "set of Vulnerability entities which match the filter criteria",
     "spotlight_vulnerabilities",
     [
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. "
-        "On your first request, don't provide an `after` token. On subsequent requests, provide the `after` "
-        "token from the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
+        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
+        "the previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
@@ -57,24 +57,29 @@ _spotlight_vulnerabilities_endpoints = [
         "maximum": 5000,
         "minimum": 1,
         "type": "integer",
-        "description": "The number of items to return in this response (default: 100, max: 5000). "
-        "Use with the after parameter to manage pagination of results.",
+        "description": "The number of items to return in this response (default: 100, max: 5000). Use with the "
+        "after parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "string",
         "description": "Sort vulnerabilities by their properties. Common sort options "
-        "include:\n\n<ul><li>created_timestamp|desc</li><li>closed_timestamp|asc</li></ul>",
+        "include:\n\n<ul><li>updated_timestamp|asc</li><li>closed_timestamp|asc</li></ul>",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Filter items using a query in Falcon Query Language (FQL). "
-        "Wildcards * are unsupported. \n\nCommon filter options include:\n\n<ul>"
-        "<li>created_timestamp:>'2019-11-25T22:36:12Z'</li><li>closed_timestamp:>'2019-11-25T22:36:12Z'</li>"
-        "<li>aid:'8e7656b27d8c49a34a1af416424d6231'</li></ul>",
+        "description": "Filter items using a query in Falcon Query Language (FQL). Wildcards * and empty "
+        "filter values are unsupported.\n\t\t\tAvailable filter fields that supports match (~): N/A\n\t\t\tAvailable "
+        "filter fields that supports exact match: aid, cid, last_seen_within, status, cve.id, cve.is_cisa_kev, "
+        "cve.remediation_level, cve.cps_rating, cve.exprt_rating, cve.exploit_status_to_include, cve.severity, "
+        "cve.types, host_info.asset_criticality, host_info.asset_roles, host_info.internet_exposure, host_info.tags, "
+        "host_info.groups, host_info.product_type_desc, host_info.platform_name, suppression_info.is_suppressed, "
+        "suppression_info.reason\n\t\t\tAvailable filter fields that supports wildcard (*): N/A\n\t\t\tAvailable filter "
+        " fields that supports range comparisons (>, <, >=, <=): created_timestamp, closed_timestamp, "
+        "updated_timestamp\n\t\t\t",
         "name": "filter",
         "in": "query",
         "required": True
@@ -85,9 +90,8 @@ _spotlight_vulnerabilities_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "Select various details blocks to be returned for each vulnerability entity. "
-        "Supported values:\n\n<ul><li>host_info</li><li>remediation</li><li>cve</li>"
-        "<li>evaluation_logic</li></ul>",
+        "description": "Select various details blocks to be returned for each vulnerability entity. Supported "
+        "values:\n\n<ul><li>host_info</li><li>remediation</li><li>cve</li><li>evaluation_logic</li></ul>",
         "name": "facet",
         "in": "query"
       }
@@ -126,8 +130,8 @@ _spotlight_vulnerabilities_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more vulnerability IDs (max: 400). "
-        "Find vulnerability IDs with GET /spotlight/queries/vulnerabilities/v1",
+        "description": "One or more vulnerability IDs (max: 400). Find vulnerability IDs with GET "
+        "/spotlight/queries/vulnerabilities/v1",
         "name": "ids",
         "in": "query",
         "required": True
@@ -138,15 +142,15 @@ _spotlight_vulnerabilities_endpoints = [
     "queryVulnerabilities",
     "GET",
     "/spotlight/queries/vulnerabilities/v1",
-    "Search for Vulnerabilities in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Vulnerability IDs which match the filter criteria",
+    "Search for Vulnerabilities in your environment by providing an FQL filter and paging details. Returns a "
+    "set of Vulnerability IDs which match the filter criteria",
     "spotlight_vulnerabilities",
     [
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. "
-        "On your first request, don't provide an `after` token. On subsequent requests, provide the `after` "
-        "token from the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
+        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
+        "the previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
@@ -154,23 +158,30 @@ _spotlight_vulnerabilities_endpoints = [
         "maximum": 400,
         "minimum": 1,
         "type": "integer",
-        "description": "The number of items to return in this response (default: 100, max: 400). "
-        "Use with the after parameter to manage pagination of results.",
+        "description": "The number of items to return in this response (default: 100, max: 400). Use with the "
+        "after parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Sort vulnerabilities by their properties. Common sort options include:\n\n"
-        "<ul><li>created_timestamp|desc</li><li>closed_timestamp|asc</li></ul>",
+        "description": "Sort vulnerabilities by their properties. Available sort options: "
+        "<ul><li>updated_timestamp|asc/desc</li><li>closed_timestamp|asc</li><li>updated_timestamp|asc/desc</li></ul>. "
+        "Can be used in a format <field>|asc for ascending order or <field>|desc for descending order.",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Filter items using a query in Falcon Query Language (FQL). Wildcards * are unsupported. "
-        "\n\nCommon filter options include:\n\n<ul><li>created_timestamp:>'2019-11-25T22:36:12Z'</li>"
-        "<li>closed_timestamp:>'2019-11-25T22:36:12Z'</li><li>aid:'8e7656b27d8c49a34a1af416424d6231'</li></ul>",
+        "description": "Filter items using a query in Falcon Query Language (FQL). Wildcards * and empty "
+        "filter values are unsupported.\n\t\t\tAvailable filter fields that supports match (~): N/A\n\t\t\tAvailable "
+        "filter fields that supports exact match: aid, cid, last_seen_within, status, cve.id, cve.is_cisa_kev, "
+        "cve.remediation_level, cve.cps_rating, cve.exprt_rating, cve.exploit_status_to_include, cve.severity, "
+        "cve.types, host_info.asset_criticality, host_info.asset_roles, host_info.internet_exposure, host_info.tags, "
+        "host_info.groups, host_info.product_type_desc, host_info.platform_name, suppression_info.is_suppressed, "
+        "suppression_info.reason\n\t\t\tAvailable filter fields that supports wildcard (*): N/A\n\t\t\tAvailable filter "
+        " fields that supports range comparisons (>, <, >=, <=): created_timestamp, closed_timestamp, "
+        "updated_timestamp\n\t\t\t",
         "name": "filter",
         "in": "query",
         "required": True

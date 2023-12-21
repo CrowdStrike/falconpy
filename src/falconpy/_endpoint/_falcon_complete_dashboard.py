@@ -164,16 +164,16 @@ _falcon_complete_dashboard_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort on, followed by a dot (.), "
-        "followed by the sort direction, either \"asc\" or \"desc\".",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query. "
-        "For more information about FQL queries, see "
-        "[our FQL documentation](https://falconpy.io/Usage/Falcon-Query-Language).",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },
@@ -200,16 +200,16 @@ _falcon_complete_dashboard_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort on, followed by a dot (.), "
-        "followed by the sort direction, either \"asc\" or \"desc\".",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query. "
-        "For more information about FQL queries, see [our FQL documentation in Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },
@@ -236,16 +236,16 @@ _falcon_complete_dashboard_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort on, followed by a dot (.), "
-        "followed by the sort direction, either \"asc\" or \"desc\".",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query. "
-        "For more information about FQL queries, see [our FQL documentation in Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },
@@ -272,16 +272,16 @@ _falcon_complete_dashboard_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort on, followed by a dot (.), "
-        "followed by the sort direction, either \"asc\" or \"desc\".",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query. "
-        "For more information about FQL queries, see [our FQL documentation in Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },
@@ -297,8 +297,7 @@ _falcon_complete_dashboard_endpoints = [
     "GetDeviceCountCollectionQueriesByFilter",
     "GET",
     "/falcon-complete-dashboards/queries/devicecount-collections/v1",
-    "Retrieve device count collection Ids that match the provided FQL filter, "
-    "criteria with scrolling enabled",
+    "Retrieve device count collection Ids that match the provided FQL filter, criteria with scrolling enabled",
     "falcon_complete_dashboard",
     [
       {
@@ -309,16 +308,16 @@ _falcon_complete_dashboard_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort on, followed by a dot (.), "
-        "followed by the sort direction, either \"asc\" or \"desc\".",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query. "
-        "For more information about FQL queries, see [our FQL documentation in Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },
@@ -345,16 +344,16 @@ _falcon_complete_dashboard_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort on, followed by a dot (.), followed by the sort "
-        "direction, either \"asc\" or \"desc\".",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query. "
-        "For more information about FQL queries, see [our FQL documentation in Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },
@@ -381,16 +380,16 @@ _falcon_complete_dashboard_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort on, followed by a dot (.), "
-        "followed by the sort direction, either \"asc\" or \"desc\".",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query. "
-        "For more information about FQL queries, see [our FQL documentation in Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },
@@ -417,16 +416,16 @@ _falcon_complete_dashboard_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort on, followed by a dot (.), followed by "
-        "the sort direction, either \"asc\" or \"desc\".",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query. "
-        "For more information about FQL queries, see [our FQL documentation in Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },

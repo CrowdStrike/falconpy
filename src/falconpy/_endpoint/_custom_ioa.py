@@ -175,7 +175,7 @@ _custom_ioa_endpoints = [
     "get_rules_get",
     "POST",
     "/ioarules/entities/rules/GET/v1",
-    "Get rules by ID and optionally version in the following format: `ID[:version]`.",
+    "Get rules by ID and optionally with cid and/or version in the following format: `[cid:]ID[:version]`.",
     "custom_ioa",
     [
       {
@@ -190,8 +190,8 @@ _custom_ioa_endpoints = [
     "get_rulesMixin0",
     "GET",
     "/ioarules/entities/rules/v1",
-    "Get rules by ID and optionally version in the following format: `ID[:version]`. "
-    "The max number of IDs is constrained by URL size.",
+    "Get rules by ID and optionally with cid and/or version in the following format: `[cid:]ID[:version]`. The "
+    "max number of IDs is constrained by URL size.",
     "custom_ioa",
     [
       {
@@ -341,17 +341,16 @@ _custom_ioa_endpoints = [
           "name"
         ],
         "type": "string",
-        "description": "Possible order by fields: {created_by, created_on, modified_by, "
-        "modified_on, enabled, name}",
+        "description": "Possible order by fields: {name, created_by, created_on, modified_by, modified_on, enabled}",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters. Filter term criteria: "
-        "[enabled platform name description rules.action_label rules.name rules.description "
-        "rules.pattern_severity rules.ruletype_name rules.enabled]. Filter range criteria: created_on, "
-        "modified_on; use any common date format, such as '2010-05-15T14:55:21.892315096Z'.",
+        "description": "FQL query specifying the filter parameters. Filter term criteria: [enabled platform "
+        "name description rules.action_label rules.name rules.description rules.pattern_severity rules.ruletype_name "
+        "rules.enabled]. Filter range criteria: created_on, modified_on; use any common date format, such as "
+        "'2010-05-15T14:55:21.892315096Z'.",
         "name": "filter",
         "in": "query"
       },
@@ -392,17 +391,16 @@ _custom_ioa_endpoints = [
           "name"
         ],
         "type": "string",
-        "description": "Possible order by fields: {created_by, created_on, modified_by, "
-        "modified_on, enabled, name}",
+        "description": "Possible order by fields: {name, created_by, created_on, modified_by, modified_on, enabled}",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters. Filter term criteria: "
-        "[enabled platform name description rules.action_label rules.name rules.description "
-        "rules.pattern_severity rules.ruletype_name rules.enabled]. Filter range criteria: "
-        "created_on, modified_on; use any common date format, such as '2010-05-15T14:55:21.892315096Z'.",
+        "description": "FQL query specifying the filter parameters. Filter term criteria: [enabled platform "
+        "name description rules.action_label rules.name rules.description rules.pattern_severity rules.ruletype_name "
+        "rules.enabled]. Filter range criteria: created_on, modified_on; use any common date format, such as "
+        "'2010-05-15T14:55:21.892315096Z'.",
         "name": "filter",
         "in": "query"
       },
@@ -468,19 +466,19 @@ _custom_ioa_endpoints = [
           "rules.ruletype_name"
         ],
         "type": "string",
-        "description": "Possible order by fields: {rules.ruletype_name, rules.enabled, "
-        "rules.created_by, rules.current_version.name, rules.current_version.modified_by, "
-        "rules.created_on, rules.current_version.description, rules.current_version.pattern_severity, "
-        "rules.current_version.action_label, rules.current_version.modified_on}",
+        "description": "Possible order by fields: {rules.created_on, rules.current_version.action_label, "
+        "rules.current_version.modified_by, rules.current_version.modified_on, rules.ruletype_name, rules.enabled, "
+        "rules.current_version.description, rules.current_version.pattern_severity, rules.created_by, "
+        "rules.current_version.name}",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters. Filter term criteria: "
-        "[enabled platform name description rules.action_label rules.name rules.description "
-        "rules.pattern_severity rules.ruletype_name rules.enabled]. Filter range criteria: "
-        "created_on, modified_on; use any common date format, such as '2010-05-15T14:55:21.892315096Z'.",
+        "description": "FQL query specifying the filter parameters. Filter term criteria: [enabled platform "
+        "name description rules.action_label rules.name rules.description rules.pattern_severity rules.ruletype_name "
+        "rules.enabled]. Filter range criteria: created_on, modified_on; use any common date format, such as "
+        "'2010-05-15T14:55:21.892315096Z'.",
         "name": "filter",
         "in": "query"
       },

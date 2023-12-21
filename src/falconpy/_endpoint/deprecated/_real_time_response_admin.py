@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library.
+"""Internal API endpoint constant library (deprecated operations).
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -69,17 +69,16 @@ _real_time_response_admin_endpoints = [
     "real_time_response_admin",
     [
       {
-        "description": "Use this endpoint to run these [real time response commands]"
-        "(https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands):"
-        "\n- `cat`\n- `cd`\n- `clear`\n- `cp`\n- `encrypt`\n- `env`\n- `eventlog`\n- `filehash`\n- `get`"
-        "\n- `getsid`\n- `help`\n- `history`\n- `ipconfig`\n- `kill`\n- `ls`\n- `map`\n- `memdump`\n- `mkdir`"
-        "\n- `mount`\n- `mv`\n- `netstat`\n- `ps`\n- `put`\n- `reg query`\n- `reg set`\n- `reg delete`\n- `reg load`"
-        "\n- `reg unload`\n- `restart`\n- `rm`\n- `run`\n- `runscript`\n- `shutdown`\n- `unmap`\n- `update history`"
-        "\n- `update install`\n- `update list`\n- `update query`\n- `xmemdump`\n- `zip`\n\nRequired values.  "
-        "The rest of the fields are unused.\n**`base_command`** Active-Responder command type we are going to execute, "
-        "for example: `get` or `cp`.  Refer to the RTR documentation for the full list of commands.\n**`command_string`"
-        "** Full command string for the command. For example  `get some_file.txt`\n**`session_id`** RTR session ID to "
-        "run the command on",
+        "description": "Use this endpoint to run these [real time response "
+        "commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands):\n- "
+        "`cat`\n- `cd`\n- `clear`\n- `cp`\n- `encrypt`\n- `env`\n- `eventlog`\n- `filehash`\n- `get`\n- `getsid`\n- "
+        "`help`\n- `history`\n- `ipconfig`\n- `kill`\n- `ls`\n- `map`\n- `memdump`\n- `mkdir`\n- `mount`\n- `mv`\n- "
+        "`netstat`\n- `ps`\n- `put`\n- `reg query`\n- `reg set`\n- `reg delete`\n- `reg load`\n- `reg unload`\n- "
+        "`restart`\n- `rm`\n- `run`\n- `runscript`\n- `shutdown`\n- `unmap`\n- `update history`\n- `update install`\n- "
+        "`update list`\n- `update query`\n- `xmemdump`\n- `zip`\n\nRequired values.  The rest of the fields are "
+        "unused.\n**`base_command`** Active-Responder command type we are going to execute, for example: `get` or `cp`. "
+        "  Refer to the RTR documentation for the full list of commands.\n**`command_string`** Full command string for "
+        "the command. For example  `get some_file.txt`\n**`session_id`** RTR session ID to run the command on",
         "name": "body",
         "in": "body",
         "required": True
@@ -128,6 +127,7 @@ _real_time_response_admin_endpoints = [
         "required": True
       },
       {
+        "maxLength": 32766,
         "type": "string",
         "description": "File name (if different than actual file name)",
         "name": "name",
@@ -219,6 +219,7 @@ _real_time_response_admin_endpoints = [
         "required": True
       },
       {
+        "maxLength": 32766,
         "type": "string",
         "description": "File name (if different than actual file name)",
         "name": "name",
@@ -234,9 +235,9 @@ _real_time_response_admin_endpoints = [
       {
         "type": "string",
         "default": "none",
-        "description": "Permission for the custom-script. Valid permission values: \n - `private`, usable by only the user "
-        "who uploaded it \n - `group`, usable by all RTR Admins \n - `public`, usable by all active-responders and RTR "
-        "admins",
+        "description": "Permission for the custom-script. Valid permission values: \n - `private`, usable by "
+        "only the user who uploaded it \n - `group`, usable by all RTR Admins \n - `public`, usable by all active-"
+        "responders and RTR admins",
         "name": "permission_type",
         "in": "formData",
         "required": True
@@ -253,11 +254,8 @@ _real_time_response_admin_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "x-cs-exposures": [
-          "public"
-        ],
-        "description": "Platforms for the file. Currently supports: windows, mac, linux, . "
-        "If no platform is provided, it will default to 'windows'",
+        "description": "Platforms for the file. Currently supports: windows, mac, linux, . If no platform is "
+        "provided, it will default to 'windows'",
         "name": "platform",
         "in": "formData"
       }
@@ -290,6 +288,7 @@ _real_time_response_admin_endpoints = [
         "in": "formData"
       },
       {
+        "maxLength": 32766,
         "type": "string",
         "description": "File name (if different than actual file name)",
         "name": "name",
@@ -305,9 +304,9 @@ _real_time_response_admin_endpoints = [
       {
         "type": "string",
         "default": "none",
-        "description": "Permission for the custom-script. Valid permission values: \n - `private`, "
-        "usable by only the user who uploaded it \n - `group`, usable by all RTR Admins \n - `public`, "
-        "usable by all active-responders and RTR admins",
+        "description": "Permission for the custom-script. Valid permission values: \n - `private`, usable by "
+        "only the user who uploaded it \n - `group`, usable by all RTR Admins \n - `public`, usable by all active-"
+        "responders and RTR admins",
         "name": "permission_type",
         "in": "formData"
       },
@@ -323,10 +322,7 @@ _real_time_response_admin_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "x-cs-exposures": [
-          "public"
-        ],
-        "description": "Platforms for the file. Currently supports: windows, mac, ",
+        "description": "Platforms for the file. Currently supports: windows, mac, linux, ",
         "name": "platform",
         "in": "formData"
       }
@@ -377,9 +373,9 @@ _real_time_response_admin_endpoints = [
     [
       {
         "type": "string",
-        "description": "Optional filter criteria in the form of an FQL query. For more information about FQL queries, "
-        "see our [FQL documentation in Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "description": "Optional filter criteria in the form of an FQL query. For more information about FQL "
+        "queries, see our [FQL documentation in Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-"
+        "query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },
@@ -412,9 +408,9 @@ _real_time_response_admin_endpoints = [
     [
       {
         "type": "string",
-        "description": "Optional filter criteria in the form of an FQL query. For more information about "
-        "FQL queries, see our [FQL documentation in Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "description": "Optional filter criteria in the form of an FQL query. For more information about FQL "
+        "queries, see our [FQL documentation in Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-"
+        "query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },

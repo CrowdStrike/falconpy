@@ -45,15 +45,6 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
-        "maxLength": 32,
-        "minLength": 32,
-        "type": "string",
-        "description": "The id of the app the collection belongs to. "
-        "This will map to the namespace of the collection",
-        "name": "X-CS-APP-ID",
-        "in": "header"
-      },
-      {
         "maxLength": 255,
         "minLength": 1,
         "type": "string",
@@ -79,15 +70,6 @@ _custom_storage_endpoints = [
         "allowEmptyValue": True
       },
       {
-        "maxLength": 255,
-        "minLength": 1,
-        "type": "string",
-        "description": "The name of the namespace the collection belongs to",
-        "name": "X-CS-ADB-NAMESPACE",
-        "in": "header",
-        "required": True
-      },
-      {
         "maxLength": 1000,
         "minLength": 1,
         "type": "string",
@@ -105,14 +87,6 @@ _custom_storage_endpoints = [
     "Search for objects that match the specified filter criteria (returns metadata, not actual objects)",
     "custom_storage",
     [
-      {
-        "maxLength": 32,
-        "minLength": 32,
-        "type": "string",
-        "description": "The id of the app the collection belongs to. This will map to the namespace of the collection",
-        "name": "X-CS-APP-ID",
-        "in": "header"
-      },
       {
         "maxLength": 255,
         "minLength": 1,
@@ -139,15 +113,6 @@ _custom_storage_endpoints = [
         "allowEmptyValue": True
       },
       {
-        "maxLength": 255,
-        "minLength": 1,
-        "type": "string",
-        "description": "The name of the namespace the collection belongs to",
-        "name": "X-CS-ADB-NAMESPACE",
-        "in": "header",
-        "required": True
-      },
-      {
         "type": "integer",
         "description": "The offset of results to return",
         "name": "offset",
@@ -172,29 +137,12 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
-        "maxLength": 32,
-        "minLength": 32,
-        "type": "string",
-        "description": "The id of the app the collection belongs to. This will map to the namespace of the collection",
-        "name": "X-CS-APP-ID",
-        "in": "header"
-      },
-      {
         "maxLength": 255,
         "minLength": 1,
         "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
-        "required": True
-      },
-      {
-        "maxLength": 255,
-        "minLength": 1,
-        "type": "string",
-        "description": "The name of the namespace the collection belongs to",
-        "name": "X-CS-ADB-NAMESPACE",
-        "in": "header",
         "required": True
       },
       {
@@ -221,14 +169,6 @@ _custom_storage_endpoints = [
         "required": True
       },
       {
-        "maxLength": 32,
-        "minLength": 32,
-        "type": "string",
-        "description": "The id of the app the collection belongs to. This will map to the namespace of the collection",
-        "name": "X-CS-APP-ID",
-        "in": "header"
-      },
-      {
         "maxLength": 255,
         "minLength": 1,
         "type": "string",
@@ -239,20 +179,11 @@ _custom_storage_endpoints = [
       },
       {
         "type": "boolean",
-        "description": "If false, run the operation as normal.  "
-        "If true, validate that the request *would* succeed, but don't execute it.",
+        "description": "If false, run the operation as normal.  If true, validate that the request *would* "
+        "succeed, but don't execute it.",
         "name": "dry_run",
         "in": "query",
         "allowEmptyValue": True
-      },
-      {
-        "maxLength": 255,
-        "minLength": 1,
-        "type": "string",
-        "description": "The name of the namespace the collection belongs to",
-        "name": "X-CS-ADB-NAMESPACE",
-        "in": "header",
-        "required": True
       },
       {
         "maxLength": 1000,
@@ -268,8 +199,7 @@ _custom_storage_endpoints = [
         "type": "string",
         "description": "The version of the collection schema",
         "name": "schema_version",
-        "in": "query",
-        "required": True
+        "in": "query"
       }
     ]
   ],
@@ -281,15 +211,6 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
-        "maxLength": 32,
-        "minLength": 32,
-        "type": "string",
-        "description": "The id of the app the collection belongs to. "
-        "This will map to the namespace of the collection",
-        "name": "X-CS-APP-ID",
-        "in": "header"
-      },
-      {
         "maxLength": 255,
         "minLength": 1,
         "type": "string",
@@ -300,20 +221,11 @@ _custom_storage_endpoints = [
       },
       {
         "type": "boolean",
-        "description": "If false, run the operation as normal.  "
-        "If true, validate that the request *would* succeed, but don't execute it.",
+        "description": "If false, run the operation as normal.  If true, validate that the request *would* "
+        "succeed, but don't execute it.",
         "name": "dry_run",
         "in": "query",
         "allowEmptyValue": True
-      },
-      {
-        "maxLength": 255,
-        "minLength": 1,
-        "type": "string",
-        "description": "The name of the namespace the collection belongs to",
-        "name": "X-CS-ADB-NAMESPACE",
-        "in": "header",
-        "required": True
       },
       {
         "maxLength": 1000,
@@ -334,30 +246,12 @@ _custom_storage_endpoints = [
     "custom_storage",
     [
       {
-        "maxLength": 32,
-        "minLength": 32,
-        "type": "string",
-        "description": "The id of the app the collection belongs to. "
-        "This will map to the namespace of the collection",
-        "name": "X-CS-APP-ID",
-        "in": "header"
-      },
-      {
         "maxLength": 255,
         "minLength": 1,
         "type": "string",
         "description": "The name of the collection",
         "name": "collection_name",
         "in": "path",
-        "required": True
-      },
-      {
-        "maxLength": 255,
-        "minLength": 1,
-        "type": "string",
-        "description": "The name of the namespace the collection belongs to",
-        "name": "X-CS-ADB-NAMESPACE",
-        "in": "header",
         "required": True
       },
       {

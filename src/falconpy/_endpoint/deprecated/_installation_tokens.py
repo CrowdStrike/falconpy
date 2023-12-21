@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library.
+"""Internal API endpoint constant library (deprecated operations).
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -63,6 +63,20 @@ _installation_tokens_endpoints = [
     "Check current installation token settings.",
     "installation_tokens",
     []
+  ],
+  [
+    "customer-settings-update",
+    "PATCH",
+    "/installation-tokens/entities/customer-settings/v1",
+    "Update installation token settings.",
+    "installation_tokens",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
   ],
   [
     "tokens-read",

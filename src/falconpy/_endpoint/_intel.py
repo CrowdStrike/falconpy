@@ -64,14 +64,20 @@ _intel_endpoints = [
       },
       {
         "type": "string",
-        "description": "Filter your query by specifying FQL filter parameters. "
-        "Filter parameters include:\n\nactors, actors.id, actors.name, actors.slug, "
-        "actors.url, created_date, description, id, last_modified_date, motivations, "
-        "motivations.id, motivations.slug, motivations.value, name, name.raw, short_description, "
-        "slug, sub_type, sub_type.id, sub_type.name, sub_type.slug, tags, tags.id, tags.slug, "
-        "tags.value, target_countries, target_countries.id, target_countries.slug, target_countries.value, "
-        "target_industries, target_industries.id, target_industries.slug, target_industries.value, "
-        "type, type.id, type.name, type.slug, url.",
+        "description": "Filter your query by specifying FQL filter parameters. Filter parameters "
+        "include:\n\nactor_type, capabilities, capability, capability.id, capability.slug, capability.value, "
+        "created_date, description, ecrime_kill_chain.attribution, ecrime_kill_chain.crimes, "
+        "ecrime_kill_chain.customers, ecrime_kill_chain.marketing, ecrime_kill_chain.monetization, "
+        "ecrime_kill_chain.services_offered, ecrime_kill_chain.services_used, ecrime_kill_chain.technical_tradecraft, "
+        "ecrime_kill_chain.victims, first_activity_date, group, group.id, group.slug, group.value, id, "
+        "kill_chain.actions_and_objectives, kill_chain.actions_on_objectives, kill_chain.command_and_control, "
+        "kill_chain.delivery, kill_chain.exploitation, kill_chain.installation, kill_chain.objectives, "
+        "kill_chain.reconnaissance, kill_chain.weaponization, known_as, last_activity_date, last_modified_date, "
+        "motivations, motivations.id, motivations.slug, motivations.value, name, objectives, origins, origins.id, "
+        "origins.slug, origins.value, region, region.id, region.slug, region.value, short_description, slug, status, "
+        "target_countries, target_countries.id, target_countries.slug, target_countries.value, target_industries, "
+        "target_industries.id, target_industries.slug, target_industries.value, target_regions, target_regions.id, "
+        "target_regions.slug, target_regions.value.",
         "name": "filter",
         "in": "query"
       },
@@ -87,9 +93,9 @@ _intel_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "The fields to return, or a predefined set of fields in the form of the collection "
-        "name surrounded by two underscores like:\n\n\\_\\_\\<collection\\>\\_\\_.\n\n"
-        "Ex: slug \\_\\_full\\_\\_.\n\nDefaults to \\_\\_basic\\_\\_.",
+        "description": "The fields to return, or a predefined set of fields in the form of the collection name "
+        " surrounded by two underscores like:\n\n\\_\\_\\<collection\\>\\_\\_.\n\nEx: slug "
+        "\\_\\_full\\_\\_.\n\nDefaults to \\_\\_basic\\_\\_.",
         "name": "fields",
         "in": "query"
       }
@@ -110,7 +116,7 @@ _intel_endpoints = [
       },
       {
         "type": "integer",
-        "description": "Set the number of indicators to return. The number must be between 1 and 50000",
+        "description": "Set the number of indicators to return. The number must be between 1 and 10000",
         "name": "limit",
         "in": "query"
       },
@@ -122,11 +128,10 @@ _intel_endpoints = [
       },
       {
         "type": "string",
-        "description": "Filter your query by specifying FQL filter parameters. "
-        "Filter parameters include:\n\n_marker, actors, deleted, domain_types, id, indicator, "
-        "ip_address_types, kill_chains, labels, labels.created_on, labels.last_valid_on, labels.name, "
-        "last_updated, malicious_confidence, malware_families, published_date, reports, targets, "
-        "threat_types, type, vulnerabilities.",
+        "description": "Filter your query by specifying FQL filter parameters. Filter parameters "
+        "include:\n\n_marker, actors, deleted, domain_types, id, indicator, ip_address_types, kill_chains, labels, "
+        "labels.created_on, labels.last_valid_on, labels.name, last_updated, malicious_confidence, malware_families, "
+        "published_date, reports, scope, targets, threat_types, type, vulnerabilities.",
         "name": "filter",
         "in": "query"
       },
@@ -177,12 +182,12 @@ _intel_endpoints = [
       },
       {
         "type": "string",
-        "description": "Filter your query by specifying FQL filter parameters. "
-        "Filter parameters include:\n\nactors, actors.id, actors.name, actors.slug, actors.url, "
-        "created_date, description, id, last_modified_date, motivations, motivations.id, motivations.slug, "
-        "motivations.value, name, name.raw, short_description, slug, sub_type, sub_type.id, sub_type.name, "
-        "sub_type.slug, tags, tags.id, tags.slug, tags.value, target_countries, target_countries.id, "
-        "target_countries.slug, target_countries.value, target_industries, target_industries.id, "
+        "description": "Filter your query by specifying FQL filter parameters. Filter parameters "
+        "include:\n\nactors, actors.id, actors.name, actors.slug, actors.url, created_date, description, id, "
+        "last_modified_date, malware, malware.community_identifiers, malware.family_name, malware.slug, motivations, "
+        "motivations.id, motivations.slug, motivations.value, name, name.raw, short_description, slug, sub_type, "
+        "sub_type.id, sub_type.name, sub_type.slug, tags, tags.id, tags.slug, tags.value, target_countries, "
+        "target_countries.id, target_countries.slug, target_countries.value, target_industries, target_industries.id, "
         "target_industries.slug, target_industries.value, type, type.id, type.name, type.slug, url.",
         "name": "filter",
         "in": "query"
@@ -199,9 +204,9 @@ _intel_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "The fields to return, or a predefined set of fields in the form of the collection "
-        "name surrounded by two underscores like:\n\n\\_\\_\\<collection\\>\\_\\_.\n\n"
-        "Ex: slug \\_\\_full\\_\\_.\n\nDefaults to \\_\\_basic\\_\\_.",
+        "description": "The fields to return, or a predefined set of fields in the form of the collection name "
+        " surrounded by two underscores like:\n\n\\_\\_\\<collection\\>\\_\\_.\n\nEx: slug "
+        "\\_\\_full\\_\\_.\n\nDefaults to \\_\\_basic\\_\\_.",
         "name": "fields",
         "in": "query"
       }
@@ -231,9 +236,9 @@ _intel_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "The fields to return, or a predefined set of fields in the form of the "
-        "collection name surrounded by two underscores like:\n\n\\_\\_\\<collection\\>\\_\\_.\n\n"
-        "Ex: slug \\_\\_full\\_\\_.\n\nDefaults to \\_\\_basic\\_\\_.",
+        "description": "The fields to return, or a predefined set of fields in the form of the collection name "
+        " surrounded by two underscores like:\n\n\\_\\_\\<collection\\>\\_\\_.\n\nEx: slug "
+        "\\_\\_full\\_\\_.\n\nDefaults to \\_\\_basic\\_\\_.",
         "name": "fields",
         "in": "query"
       }
@@ -305,8 +310,8 @@ _intel_endpoints = [
       },
       {
         "type": "string",
-        "description": "The ID of the report you want to download as a PDF. "
-        "This parameter is used only if no id parameter given.",
+        "description": "The ID of the report you want to download as a PDF. This parameter is used only if no "
+        "id parameter given.",
         "name": "ids",
         "in": "query"
       }
@@ -336,9 +341,9 @@ _intel_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "The fields to return, or a predefined set of fields in the form of the "
-        "collection name surrounded by two underscores like:\n\n\\_\\_\\<collection\\>\\_\\_.\n\n"
-        "Ex: slug \\_\\_full\\_\\_.\n\nDefaults to \\_\\_basic\\_\\_.",
+        "description": "The fields to return, or a predefined set of fields in the form of the collection name "
+        " surrounded by two underscores like:\n\n\\_\\_\\<collection\\>\\_\\_.\n\nEx: slug "
+        "\\_\\_full\\_\\_.\n\nDefaults to \\_\\_basic\\_\\_.",
         "name": "fields",
         "in": "query"
       }
@@ -393,16 +398,16 @@ _intel_endpoints = [
       },
       {
         "type": "string",
-        "description": "Download the latest rule set only if the rule was modified after this date. "
-        "http, ANSIC and RFC850 formats accepted",
+        "description": "Download the latest rule set only if the rule was modified after this date. http, "
+        "ANSIC and RFC850 formats accepted",
         "name": "If-Modified-Since",
         "in": "header"
       },
       {
         "type": "string",
-        "description": "The rule news report type. Accepted values:\n\nsnort-suricata-master\n\n"
-        "snort-suricata-update\n\nsnort-suricata-changelog\n\nyara-master\n\nyara-update\n\n"
-        "yara-changelog\n\ncommon-event-format\n\nnetwitness",
+        "description": "The rule news report type. Accepted values:\n\nsnort-suricata-master\n\nsnort-"
+        "suricata-update\n\nsnort-suricata-changelog\n\nyara-master\n\nyara-update\n\nyara-changelog\n\ncommon-event-"
+        "format\n\nnetwitness",
         "name": "type",
         "in": "query",
         "required": True
@@ -476,13 +481,20 @@ _intel_endpoints = [
       },
       {
         "type": "string",
-        "description": "Filter your query by specifying FQL filter parameters. "
-        "Filter parameters include:\n\nactors, actors.id, actors.name, actors.slug, actors.url, "
-        "created_date, description, id, last_modified_date, motivations, motivations.id, motivations.slug, "
-        "motivations.value, name, name.raw, short_description, slug, sub_type, sub_type.id, sub_type.name, "
-        "sub_type.slug, tags, tags.id, tags.slug, tags.value, target_countries, target_countries.id, "
-        "target_countries.slug, target_countries.value, target_industries, target_industries.id, "
-        "target_industries.slug, target_industries.value, type, type.id, type.name, type.slug, url.",
+        "description": "Filter your query by specifying FQL filter parameters. Filter parameters "
+        "include:\n\nactor_type, capabilities, capability, capability.id, capability.slug, capability.value, "
+        "created_date, description, ecrime_kill_chain.attribution, ecrime_kill_chain.crimes, "
+        "ecrime_kill_chain.customers, ecrime_kill_chain.marketing, ecrime_kill_chain.monetization, "
+        "ecrime_kill_chain.services_offered, ecrime_kill_chain.services_used, ecrime_kill_chain.technical_tradecraft, "
+        "ecrime_kill_chain.victims, first_activity_date, group, group.id, group.slug, group.value, id, "
+        "kill_chain.actions_and_objectives, kill_chain.actions_on_objectives, kill_chain.command_and_control, "
+        "kill_chain.delivery, kill_chain.exploitation, kill_chain.installation, kill_chain.objectives, "
+        "kill_chain.reconnaissance, kill_chain.weaponization, known_as, last_activity_date, last_modified_date, "
+        "motivations, motivations.id, motivations.slug, motivations.value, name, objectives, origins, origins.id, "
+        "origins.slug, origins.value, region, region.id, region.slug, region.value, short_description, slug, status, "
+        "target_countries, target_countries.id, target_countries.slug, target_countries.value, target_industries, "
+        "target_industries.id, target_industries.slug, target_industries.value, target_regions, target_regions.id, "
+        "target_regions.slug, target_regions.value.",
         "name": "filter",
         "in": "query"
       },
@@ -509,7 +521,7 @@ _intel_endpoints = [
       },
       {
         "type": "integer",
-        "description": "Set the number of indicator IDs to return. The number must be between 1 and 50000",
+        "description": "Set the number of indicator IDs to return. The number must be between 1 and 10000",
         "name": "limit",
         "in": "query"
       },
@@ -521,10 +533,10 @@ _intel_endpoints = [
       },
       {
         "type": "string",
-        "description": "Filter your query by specifying FQL filter parameters. "
-        "Filter parameters include:\n\n_marker, actors, deleted, domain_types, id, indicator, ip_address_types, "
-        "kill_chains, labels, labels.created_on, labels.last_valid_on, labels.name, last_updated, malicious_confidence, "
-        "malware_families, published_date, reports, targets, threat_types, type, vulnerabilities.",
+        "description": "Filter your query by specifying FQL filter parameters. Filter parameters "
+        "include:\n\n_marker, actors, deleted, domain_types, id, indicator, ip_address_types, kill_chains, labels, "
+        "labels.created_on, labels.last_valid_on, labels.name, last_updated, malicious_confidence, malware_families, "
+        "published_date, reports, scope, targets, threat_types, type, vulnerabilities.",
         "name": "filter",
         "in": "query"
       },
@@ -552,7 +564,8 @@ _intel_endpoints = [
     "QueryMitreAttacks",
     "GET",
     "/intel/queries/mitre/v1",
-    "Gets MITRE tactics and techniques for the given actor",
+    "Gets MITRE tactics and techniques for the given actor, returning concatenation of id and tactic and "
+    "technique ids, example: fancy-bear_TA0011_T1071",
     "intel",
     [
       {
@@ -602,13 +615,13 @@ _intel_endpoints = [
       },
       {
         "type": "string",
-        "description": "Filter your query by specifying FQL filter parameters. "
-        "Filter parameters include:\n\nactors, actors.id, actors.name, actors.slug, actors.url, "
-        "created_date, description, id, last_modified_date, motivations, motivations.id, motivations.slug, "
-        "motivations.value, name, name.raw, short_description, slug, sub_type, sub_type.id, sub_type.name, "
-        "sub_type.slug, tags, tags.id, tags.slug, tags.value, target_countries, target_countries.id, "
-        "target_countries.slug, target_countries.value, target_industries, target_industries.id, "
-        "arget_industries.slug, target_industries.value, type, type.id, type.name, type.slug, url.",
+        "description": "Filter your query by specifying FQL filter parameters. Filter parameters "
+        "include:\n\nactors, actors.id, actors.name, actors.slug, actors.url, created_date, description, id, "
+        "last_modified_date, malware, malware.community_identifiers, malware.family_name, malware.slug, motivations, "
+        "motivations.id, motivations.slug, motivations.value, name, name.raw, short_description, slug, sub_type, "
+        "sub_type.id, sub_type.name, sub_type.slug, tags, tags.id, tags.slug, tags.value, target_countries, "
+        "target_countries.id, target_countries.slug, target_countries.value, target_industries, target_industries.id, "
+        "target_industries.slug, target_industries.value, type, type.id, type.name, type.slug, url.",
         "name": "filter",
         "in": "query"
       },
@@ -657,9 +670,9 @@ _intel_endpoints = [
       },
       {
         "type": "string",
-        "description": "The rule news report type. Accepted values:\n\nsnort-suricata-master\n\n"
-        "snort-suricata-update\n\nsnort-suricata-changelog\n\nyara-master\n\nyara-update\n\n"
-        "yara-changelog\n\ncommon-event-format\n\nnetwitness",
+        "description": "The rule news report type. Accepted values:\n\nsnort-suricata-master\n\nsnort-"
+        "suricata-update\n\nsnort-suricata-changelog\n\nyara-master\n\nyara-update\n\nyara-changelog\n\ncommon-event-"
+        "format\n\nnetwitness",
         "name": "type",
         "in": "query",
         "required": True

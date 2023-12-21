@@ -41,8 +41,8 @@ _device_control_policies_endpoints = [
     "queryCombinedDeviceControlPolicyMembers",
     "GET",
     "/policy/combined/device-control-members/v1",
-    "Search for members of a Device Control Policy in your environment by providing an FQL "
-    "filter and paging details. Returns a set of host details which match the filter criteria",
+    "Search for members of a Device Control Policy in your environment by providing an FQL filter and paging "
+    "details. Returns a set of host details which match the filter criteria",
     "device_control_policies",
     [
       {
@@ -190,9 +190,9 @@ _device_control_policies_endpoints = [
     "setDeviceControlPoliciesPrecedence",
     "POST",
     "/policy/entities/device-control-precedence/v1",
-    "Sets the precedence of Device Control Policies based on the order of IDs specified in the request. "
-    "The first ID specified will have the highest precedence and the last ID specified will have the lowest. "
-    "You must specify all non-Default Policies for a platform when updating precedence",
+    "Sets the precedence of Device Control Policies based on the order of IDs specified in the request. The "
+    "first ID specified will have the highest precedence and the last ID specified will have the lowest. You must "
+    "specify all non-Default Policies for a platform when updating precedence",
     "device_control_policies",
     [
       {
@@ -274,8 +274,8 @@ _device_control_policies_endpoints = [
     "queryDeviceControlPolicyMembers",
     "GET",
     "/policy/queries/device-control-members/v1",
-    "Search for members of a Device Control Policy in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Agent IDs which match the filter criteria",
+    "Search for members of a Device Control Policy in your environment by providing an FQL filter and paging "
+    "details. Returns a set of Agent IDs which match the filter criteria",
     "device_control_policies",
     [
       {

@@ -116,15 +116,15 @@ _quarantine_endpoints = [
       },
       {
         "type": "string",
-        "description": "Possible order by fields: hostname, username, date_updated, date_created, paths.path, state, "
-        "paths.state. Ex: 'date_created|asc'.",
+        "description": "Possible order by fields: hostname, username, date_updated, date_created, paths.path, "
+        "state, paths.state. Ex: 'date_created|asc'.",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters. Special value '*' means to not filter on anything. "
-        "Filter term criteria: status, adversary_id, device.device_id, device.country, device.hostname, "
+        "description": "FQL query specifying the filter parameters. Special value '*' means to not filter on "
+        "anything. Filter term criteria: status, adversary_id, device.device_id, device.country, device.hostname, "
         "behaviors.behavior_id, behaviors.ioc_type, behaviors.ioc_value, behaviors.username, behaviors.tree_root_hash. "
         "Filter range criteria:, max_severity, max_confidence, first_behavior, last_behavior.",
         "name": "filter",
@@ -132,8 +132,8 @@ _quarantine_endpoints = [
       },
       {
         "type": "string",
-        "description": "Match phrase_prefix query criteria; included fields: _all (all filter string fields), sha256, state, "
-        "paths.path, paths.state, hostname, username, date_updated, date_created.",
+        "description": "Match phrase_prefix query criteria; included fields: _all (all filter string fields), "
+        "sha256, state, paths.path, paths.state, hostname, username, date_updated, date_created.",
         "name": "q",
         "in": "query"
       }

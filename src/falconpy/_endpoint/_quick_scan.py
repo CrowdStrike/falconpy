@@ -55,8 +55,8 @@ _quick_scan_endpoints = [
     "GetScans",
     "GET",
     "/scanner/entities/scans/v1",
-    "Check the status of a volume scan. Time required for analysis increases with "
-    "the number of samples in a volume but usually it should take less than 1 minute",
+    "Check the status of a volume scan. Time required for analysis increases with the number of samples in a "
+    "volume but usually it should take less than 1 minute",
     "quick_scan",
     [
       {
@@ -76,13 +76,13 @@ _quick_scan_endpoints = [
     "ScanSamples",
     "POST",
     "/scanner/entities/scans/v1",
-    "Submit a volume of files for ml scanning. Time required for analysis increases with the "
-    "number of samples in a volume but usually it should take less than 1 minute",
+    "Submit a volume of files for ml scanning. Time required for analysis increases with the number of samples "
+    "in a volume but usually it should take less than 1 minute",
     "quick_scan",
     [
       {
-        "description": "Submit a batch of SHA256s for ml scanning. The samples must have been "
-        "previously uploaded through `/samples/entities/samples/v3`",
+        "description": "Submit a batch of SHA256s for ml scanning. The samples must have been previously "
+        "uploaded through `/samples/entities/samples/v3`",
         "name": "body",
         "in": "body",
         "required": True
@@ -93,15 +93,15 @@ _quick_scan_endpoints = [
     "QuerySubmissionsMixin0",
     "GET",
     "/scanner/queries/scans/v1",
-    "Find IDs for submitted scans by providing an FQL filter and paging details. "
-    "Returns a set of volume IDs that match your criteria.",
+    "Find IDs for submitted scans by providing an FQL filter and paging details. Returns a set of volume IDs "
+    "that match your criteria.",
     "quick_scan",
     [
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query. "
-        "For more information about FQL queries, see [our FQL documentation in Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },

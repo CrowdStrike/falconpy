@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library.
+"""Internal API endpoint constant library (deprecated operations).
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -41,7 +41,7 @@ _hosts_endpoints = [
     "entities.perform_action",
     "POST",
     "/devices/entities/group-actions/v1",
-    "Performs the specified action on the provided prevention policy IDs.",
+    "Performs the specified action on the provided group IDs.",
     "hosts",
     [
       {
@@ -68,6 +68,13 @@ _hosts_endpoints = [
         "required": True
       },
       {
+        "type": "boolean",
+        "default": False,
+        "description": "Bool to disable hostname check on add-member",
+        "name": "disable_hostname_check",
+        "in": "query"
+      },
+      {
         "name": "body",
         "in": "body",
         "required": True
@@ -78,10 +85,10 @@ _hosts_endpoints = [
     "GetOnlineState.V1",
     "GET",
     "/devices/entities/online-state/v1",
-    "Get the online status for one or more hosts by specifying each host’s unique ID. "
-    "Successful requests return an HTTP 200 response and the status for each host identified "
-    "by a `state` of `online`, `offline`, or `unknown` for each host, identified by host `id`."
-    "\n\nMake a `GET` request to `/devices/queries/devices/v1` to get a list of host IDs.",
+    "Get the online status for one or more hosts by specifying each host’s unique ID. Successful requests "
+    "return an HTTP 200 response and the status for each host identified by a `state` of `online`, `offline`, or "
+    "`unknown` for each host, identified by host `id`.\n\nUse QueryDevicesByFilterScroll to get a list of host "
+    "IDs.",
     "hosts",
     [
       {

@@ -46,9 +46,9 @@ _incidents_endpoints = [
     [
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query. "
-        "For more information about FQL queries, see [our FQL documentation in Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },
@@ -74,8 +74,8 @@ _incidents_endpoints = [
           "timestamp.desc"
         ],
         "type": "string",
-        "description": "The property to sort on, followed by a dot (.), "
-        "followed by the sort direction, either \"asc\" or \"desc\".",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
         "name": "sort",
         "in": "query"
       }
@@ -99,31 +99,31 @@ _incidents_endpoints = [
     "PerformIncidentAction",
     "POST",
     "/incidents/entities/incident-actions/v1",
-    "Perform a set of actions on one or more incidents, such as adding tags or comments "
-    "or updating the incident name or description",
+    "Perform a set of actions on one or more incidents, such as adding tags or comments or updating the "
+    "incident name or description",
     "incidents",
     [
       {
         "type": "boolean",
         "default": False,
-        "description": "If true, update assigned-to-uuid and or status of detections associated with "
-        "the incident(s). Defaults to false",
+        "description": "If true, update assigned-to-uuid and or status of detections associated with the "
+        "incident(s). Defaults to false",
         "name": "update_detects",
         "in": "query"
       },
       {
         "type": "boolean",
         "default": False,
-        "description": "If true and update-detects is true, the assigned-to-uuid or status for ALL "
-        "detections associated with the incident(s) will be overwritten. If false, only detects that "
-        "have default values for assigned-to-uuid and/or status will be updated. Defaults to false. "
-        "Ignored if 'update-detects' is missing or false.",
+        "description": "If true and update-detects is true, the assigned-to-uuid or status for ALL detections "
+        "associated with the incident(s) will be overwritten. If false, only detects that have default values for "
+        "assigned-to-uuid and/or status will be updated. Defaults to false. Ignored if 'update-detects' is missing or "
+        "false.",
         "name": "overwrite_detects",
         "in": "query"
       },
       {
-        "description": "Incident Update request body containing minimum 1 and maximum 5000 Incident ID(s) "
-        "and action param(s) to be performed action against.",
+        "description": "Incident Update request body containing minimum 1 and maximum 5000 Incident ID(s) and "
+        "action param(s) to be performed action against.",
         "name": "body",
         "in": "body",
         "required": True
@@ -153,9 +153,9 @@ _incidents_endpoints = [
     [
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query. "
-        "For more information about FQL queries, see [our FQL documentation in Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },
@@ -189,8 +189,8 @@ _incidents_endpoints = [
           "timestamp.desc"
         ],
         "type": "string",
-        "description": "The property to sort on, followed by a dot (.), "
-        "followed by the sort direction, either \"asc\" or \"desc\".",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
         "name": "sort",
         "in": "query"
       }
@@ -225,16 +225,16 @@ _incidents_endpoints = [
           "status.desc"
         ],
         "type": "string",
-        "description": "The property to sort on, followed by a dot (.), "
-        "followed by the sort direction, either \"asc\" or \"desc\".",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Optional filter and sort criteria in the form of an FQL query. "
-        "For more information about FQL queries, see [our FQL documentation in Falcon]"
-        "(https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
         "name": "filter",
         "in": "query"
       },
