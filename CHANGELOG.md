@@ -1,3 +1,258 @@
+# Version 1.3.5
+## Added features and functionality
++ Added: 4 new operations added to the __*Alerts*__ service collection.
+    - *PostAggregateAlertsV2*
+    - *PostEntitiesAlertsV2*
+    - *PatchEntitiesAlertsV3*
+    - *GetQueriesAlertsV2*
+    - `_endpoint/_alerts.py`
+    - `alerts.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_alerts.py`
++ Added: `source_event_url` argument added to the _WorkflowExecute_ operation definition within the endpoint module.
+    - `_endpoint/_workflows.py`
++ Added: New Configuration Assessment service collection providing 2 new operations.
+    - *getCombinedAssessmentsQuery*
+    - *getRuleDetails*
+    - `_endpoint/__init__.py`
+    - `_endpoint/_configuration_assessment.py`
+    - `__init__.py`
+    - `configuration_assessment.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_configuration_assessment.py`
++ Added: New Configuration Assessment Evaluation Logic service collection providing 1 new operation.
+    - *getEvaluationLogicMixin0*
+    - `_endpoint/__init__.py`
+    - `_endpoint/_configuration_assessment_evaluation_logic.py`
+    - `__init__.py`
+    - `configuration_assessment_evaluation_logic.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_configuration_assessment_evaluation_logic.py`
++ Added: New Container Alerts service collection providing 2 new operations.
+    - *ReadContainerAlertsCount*
+    - *SearchAndReadContainerAlerts*
+    - `_endpoint/__init__.py`
+    - `_endpoint/_container_alerts.py`
+    - `__init__.py`
+    - `container_alerts.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_container_alerts.py`
++ Added: New Container Detections service collection providing 6 new operations.
+    - *ReadDetectionsCountBySeverity*
+    - *ReadDetectionsCountByType*
+    - *ReadDetectionsCount*
+    - *ReadCombinedDetections*
+    - *ReadDetections*
+    - *SearchDetections*
+    - `_endpoint/__init__.py`
+    - `_endpoint/_container_detections.py`
+    - `__init__.py`
+    - `container_detections.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_container_detections.py`
++ Added: New Container Images service collection providing 10 new operations.
+    - *AggregateImageAssessmentHistory*
+    - *AggregateImageCountByBaseOS*
+    - *AggregateImageCountByState*
+    - *AggregateImageCount*
+    - *GetCombinedImages*
+    - *CombinedImageByVulnerabilityCount*
+    - *CombinedImageDetail*
+    - *ReadCombinedImagesExport*
+    - *CombinedImageIssuesSummary*
+    - *CombinedImageVulnerabilitySummary*
+    - `_endpoint/__init__.py`
+    - `_endpoint/_container_images.py`
+    - `__init__.py`
+    - `container_images.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_container_images.py`
++ Added: New Container Packages service collection providing 5 new operations.
+    - *ReadPackagesCountByZeroDay*
+    - *ReadPackagesByFixableVulnCount*
+    - *ReadPackagesByVulnCount*
+    - *ReadPackagesCombinedExport*
+    - *ReadPackagesCombined*
+    - `_endpoint/__init__.py`
+    - `_endpoint/_container_packages.py`
+    - `__init__.py`
+    - `container_packages.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_container_packages.py`
++ Added: New Container Vulnerabilities service collection providing 10 new operations.
+    - *ReadCombinedVulnerabilities*
+    - *ReadCombinedVulnerabilitiesInfo*
+    - *ReadCombinedVulnerabilitiesDetails*
+    - *ReadVulnerabilitiesPublicationDate*
+    - *ReadVulnerabilitiesByImageCount*
+    - *ReadVulnerabilityCount*
+    - *ReadVulnerabilityCountBySeverity*
+    - *ReadVulnerabilityCountByCPSRating*
+    - *ReadVulnerabilityCountByCVSSScore*
+    - *ReadVulnerabilityCountByActivelyExploited*
+    - `_endpoint/__init__.py`
+    - `_endpoint/_container_vulnerabilities.py`
+    - `__init__.py`
+    - `container_vulnerabilities.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_container_vulnerabilities.py`
++ Added: `next_token` argument added to the _GetConfigurationDetectionIDsV2_ operation within the __*CSPM Registration*__ service collection.
+    - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
++ Added: New Drift Indicators service collection providing 5 new operations.
+    - *GetDriftIndicatorsValuesByDate*
+    - *ReadDriftIndicatorsCount*
+    - *SearchAndReadDriftIndicatorEntities*
+    - *ReadDriftIndicatorEntities*
+    - *SearchDriftIndicators*
+    - `_endpoint/__init__.py`
+    - `_endpoint/_drift_indicators.py`
+    - `__init__.py`
+    - `drift_indicators.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_drift_indicators.py`
++ Added: 3 new operations added to the __*Falcon Complete Dashboard*__ service collection.
+    - *AggregatePreventionPolicy*
+    - *AggregateSensorUpdatePolicy*
+    - *AggregateTotalDeviceCounts*
+    - `_endpoint/_falcon_complete_dashboard.py`
+    - `falcon_complete_dashboard.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_falcon_complete_dashboard.py`
++ Added: New arguments added to 5 operations within the __*Foundry LogScale*__ service collection. 2 arguments are removed from 1 operation.
+    - `check_test_data` is added to _ListReposV1_.
+    - `app_id` is added to _CreateSavedSearchesDynamicExecuteV1_.
+    - `app_id` is added to _GetSavedSearchesExecuteV1_.
+    - `app_id` is added to _CreateSavedSearchesExecuteV1_.
+    - `check_test_data` is added to _ListViewV1_.
+    - The duplicative query string parameter arguments `mode` and `version` have been removed from _CreateSavedSearchesExecuteV1_.
+    - `_endpoint/_foundry_logscale.py`
+    - `foundry_logscale.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_foundry_logscale.py`
++ Added: 1 new operation added to the __*Hosts*__ service collection.
+    - *QueryDeviceLoginHistoryV2*
+    - `_endpoint/_hosts.py`
+    - `hosts.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_hosts.py`
++ Added: 3 new operations added to the __*IOC*__ service collection. These operations replace legacy operations from the deprecated __*IOCS*__ service collection.
+    - *indicator_get_device_count_v1* replaces _DevicesCount_.
+    - *indicator_get_devices_ran_on_v1* replaces _DevicesRanOn_.
+    - *indicator_get_processes_ran_on_v1* replaces _ProcessRanOn_.
+    - `_endpoint/_ioc.py`
+    - `_endpoint/deprecated/_ioc.py`
+    - `ioc.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ioc.py`
++ Added: 41 new operations added to the __*Kubernetes Protection*__ service collection.
+    - *ReadClustersByDateRangeCount*
+    - *ReadClustersByKubernetesVersionCount*
+    - *ReadClustersByStatusCount*
+    - *ReadClusterCount*
+    - *ReadContainersByDateRangeCount*
+    - *ReadContainerCountByRegistry*
+    - *FindContainersCountAffectedByZeroDayVulnerabilities*
+    - *ReadVulnerableContainerImageCount*
+    - *ReadContainerCount*
+    - *FindContainersByContainerRunTimeVersion*
+    - *GroupContainersByManaged*
+    - *ReadContainerImageDetectionsCountByDate*
+    - *ReadContainerImagesByState*
+    - *ReadContainersSensorCoverage*
+    - *ReadContainerVulnerabilitiesBySeverityCount*
+    - *ReadDeploymentsByDateRangeCount*
+    - *ReadDeploymentCount*
+    - *ReadClusterEnrichment*
+    - *ReadContainerEnrichment*
+    - *ReadDeploymentEnrichment*
+    - *ReadNodeEnrichment*
+    - *ReadPodEnrichment*
+    - *ReadDistinctContainerImageCount*
+    - *ReadContainerImagesByMostUsed*
+    - *ReadKubernetesIomByDateRange*
+    - *ReadKubernetesIomCount*
+    - *ReadNodesByCloudCount*
+    - *ReadNodesByContainerEngineVersionCount*
+    - *ReadNodesByDateRangeCount*
+    - *ReadNodeCount*
+    - *ReadPodsByDateRangeCount*
+    - *ReadPodCount*
+    - *ReadClusterCombined*
+    - *ReadRunningContainerImages*
+    - *ReadContainerCombined*
+    - *ReadDeploymentCombined*
+    - *SearchAndReadKubernetesIomEntities*
+    - *ReadNodeCombined*
+    - *ReadPodCombined*
+    - *ReadKubernetesIomEntities*
+    - *SearchKubernetesIoms*
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_kubernetes_protection.py`
++ Added: 1 new operation added to the __*ODS*__ service collection.
+    - *get_scans_by_scan_ids_v2*
+    > *get_scans_by_scan_ids_v1* has been deprecated. The PEP8 method `get_scans` has been redirected to the new operation. Developers wanting to leverage the legacy operation should call `get_scans_v1` or `get_scans_by_scan_ids_v1`.
+    - `_endpoint/_ods.py`
+    - `_endpoint/deprecated/_ods.py`
+    - `ods.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ods.py`
++ Added: 2 new operations added to the __*Real Time Response Admin*__ service collection.
+    - *RTR_GetFalconScripts*
+    - *RTR_ListFalconScripts*
+    - `_endpoint/_real_time_response_admin.py`
+    - `_endpoint/deprecated/_real_time_response_admin.py`
+    - `real_time_response_admin.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_real_time_response_admin.py`
++ Added: New Unidentified Containers service collection providing 3 new operations.
+    - *ReadUnidentifiedContainersByDateRangeCount*
+    - *ReadUnidentifiedContainersCount*
+    - *SearchAndReadUnidentifiedContainers*
+    - `_endpoint/__init__.py`
+    - `_endpoint/_unidentified_containers.py`
+    - `__init__.py`
+    - `unidentified_containers.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_unidentified_containers.py`
+
+## Issues resolved
++ Fixed: `batch_id` and `batch_get_cmd_req_id` not available on pythonic Result object.
+    - `_result/_result.py`
++ Fixed: Pythonic responses not properly populating Result object resources attribute when a dictionary is returned for the resources branch.
+    - `_result/_result.py`
++ Fixed: `trace_id` property is not available on Result objects that do not contain a Meta attribute.
+    - `_result/_headers.py`
+    - `_result/_result.py`
++ Fixed: Changes the datatype for the `ids` argument within the _GetCSPMPolicy_ operation from __`string`__ to __`integer`__.
+    - `_endpoint/_cspm_registration.py`
+
+## Other
++ Fixed: A typo that incorrectly listed the default value for the `limit` keyword was resolved in the QueryDetects operation docstring. Closes #1089.
+    - `detects.py`
++ Refactored: Reduced complexity within the Result object constructor method by abstracting construction logic to a new method.
+    - `_result/_result.py`
++ Regenerated: Updated endpoint module to align to new library automation, resulting in cosmetic changes to description fields.
+    - `_endpoint/*`
++ Renamed: _RetrieveUser_ operation has been renamed to _retrieveUser_ within the __*User Management*__ service collection.
+    - `_endpoint/_user_management.py`
++ Deprecated: Adds additional deprecated operation IDs to the __*Firewall Management*__ service collection.
+    - `_endpoint/_firewall_management.py`
++ Fixed: Resolves a constant naming typo within the endpoint module for the __*Cloud Snapshots*__ service collection.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_cloud_snapshots.py`
+    - `cloud_snapshots.py`
++ Fixed: Endpoint definition mismatch in _UploadSampleV3_ operation within the __*Sample Uploads*__ service collection.
+    - `_endpoint/_sample_uploads.py`
++ Fixed: Endpoint definition mismatch in _UploadSampleV2_ operation within the __*Falcon Intelligence Sandbox*__ service collection.
+    - `_endpoint/_falconx_sandbox.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_falconx_sandbox.py`
+
+---
+
 # Version 1.3.4
 ## Added features and functionality
 + Added: Use a Service Class or the Uber Class as a context manager.
