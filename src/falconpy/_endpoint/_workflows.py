@@ -74,6 +74,12 @@ _workflows_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "Used to record a URL to the source that led to triggering this workflow",
+        "name": "source_event_url",
+        "in": "query"
+      },
+      {
         "name": "body",
         "in": "body",
         "required": True
