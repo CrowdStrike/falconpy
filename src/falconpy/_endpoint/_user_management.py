@@ -450,6 +450,26 @@ _user_management_endpoints = [
     ]
   ],
   [
+    "retrieveUser",
+    "GET",
+    "/users/entities/users/v1",
+    "Deprecated : Please use retrieveUsersGETV1. Get info about a user",
+    "user_management",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "ID of a user. Find a user's ID from queryUserV1.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "CreateUser",
     "POST",
     "/users/entities/users/v1",

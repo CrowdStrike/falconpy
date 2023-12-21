@@ -785,7 +785,7 @@ class UserManagement(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="RetrieveUser",
+            operation_id="retrieveUser",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
@@ -1062,6 +1062,7 @@ class UserManagement(ServiceClass):
     GetAvailableRoleIds = get_available_role_ids
     GetUserRoleIds = get_user_role_ids
     RetrieveUser = retrieve_user
+    retrieveUser = retrieve_user
     CreateUser = create_user
     DeleteUser = delete_user
     UpdateUser = update_user
