@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 
-_cloud_snapshot_endpoints = [
+_cloud_snapshots_endpoints = [
   [
     "RegisterCspmSnapshotAccount",
     "POST",
