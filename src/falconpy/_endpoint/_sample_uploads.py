@@ -302,23 +302,16 @@ _sample_uploads_endpoints = [
     "sample_uploads",
     [
       {
-        "description": "Content of the uploaded sample in binary format. For example, use `--data-binary "
-        "@$FILE_PATH` when using cURL. Max file size: 100 MB.\n\nAccepted file formats:\n\n- Portable "
-        "executables: `.exe`, `.scr`, `.pif`, `.dll`, `.com`, `.cpl`, etc.\n- Office documents: `.doc`, "
-        "`.docx`, `.ppt`, `.pps`, `.pptx`, `.ppsx`, `.xls`, `.xlsx`, `.rtf`, `.pub`\n- PDF\n- APK\n- "
-        "Executable JAR\n- Windows script component: `.sct`\n- Windows shortcut: `.lnk`\n- Windows help: "
-        "`.chm`\n- HTML application: `.hta`\n- Windows script file: `.wsf`\n- Javascript: `.js`\n- Visual "
-        "Basic: `.vbs`,  `.vbe`\n- Shockwave Flash: `.swf`\n- Perl: `.pl`\n- Powershell: `.ps1`, `.psd1`, "
-        "`.psm1`\n- Scalable vector graphics: `.svg`\n- Python: `.py`\n- Linux ELF executables\n- Email "
-        "files: MIME RFC 822 `.eml`, Outlook `.msg`.",
-        "name": "body",
-        "in": "body",
-        "required": True
-      },
-      {
         "type": "file",
-        "description": "The binary file.",
-        "name": "upfile",
+        "description": "Content of the uploaded sample in binary format. For example, use `--data-binary "
+        "@$FILE_PATH` when using cURL. Max file size: 256 MB.\n\nAccepted file formats:\n\n- Portable executables: "
+        "`.exe`, `.scr`, `.pif`, `.dll`, `.com`, `.cpl`, etc.\n- Office documents: `.doc`, `.docx`, `.ppt`, `.pps`, "
+        "`.pptx`, `.ppsx`, `.xls`, `.xlsx`, `.rtf`, `.pub`\n- PDF\n- APK\n- Executable JAR\n- Windows script component: "
+        " `.sct`\n- Windows shortcut: `.lnk`\n- Windows help: `.chm`\n- HTML application: `.hta`\n- Windows script "
+        "file: `.wsf`\n- Javascript: `.js`\n- Visual Basic: `.vbs`,  `.vbe`\n- Shockwave Flash: `.swf`\n- Perl: "
+        "`.pl`\n- Powershell: `.ps1`, `.psd1`, `.psm1`\n- Scalable vector graphics: `.svg`\n- Python: `.py`\n- Linux "
+        "ELF executables\n- Email files: MIME RFC 822 `.eml`, Outlook `.msg`.",
+        "name": "sample",
         "in": "formData",
         "required": True
       },
