@@ -52,6 +52,21 @@ _hosts_endpoints = [
     ]
   ],
   [
+    "QueryDeviceLoginHistoryV2",
+    "POST",
+    "/devices/combined/devices/login-history/v2",
+    "Retrieve details about recent interactive login sessions for a set of devices powered by the Host "
+    "Timeline. A max of 10 device ids can be specified",
+    "hosts",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "QueryGetNetworkAddressHistoryV1",
     "POST",
     "/devices/combined/devices/network-address-history/v1",

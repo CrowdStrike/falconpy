@@ -526,7 +526,7 @@ class Hosts(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def query_device_login_history(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_device_login_history_v1(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve details about recent login sessions for a set of devices.
 
         Keyword arguments:
@@ -536,7 +536,7 @@ class Hosts(ServiceClass):
                         "string"
                     ]
                 }
-        ids -- AID(s) of the hosts to retrieve. String or list of strings.
+        ids -- AID(s) of the hosts to retrieve. String or list of strings. Supports a maximum of 500 IDs.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -558,6 +558,46 @@ class Hosts(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="QueryDeviceLoginHistory",
+            body=body,
+            body_validator={"ids": list} if self.validate_payloads else None,
+            body_required=["ids"] if self.validate_payloads else None
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def query_device_login_history_v2(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve details about recent interactive login sessions for a set of devices powered by the Host Timeline.
+
+        A max of 10 device ids can be specified
+
+        Keyword arguments:
+        body -- full body payload, not required when ids keyword is provided.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- AID(s) of the hosts to retrieve. String or list of strings. Supports a maximum of 10 IDs.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/QueryDeviceLoginHistoryV2
+        """
+        if not body:
+            body = generic_payload_list(submitted_arguments=args,
+                                        submitted_keywords=kwargs,
+                                        payload_value="ids"
+                                        )
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryDeviceLoginHistoryV2",
             body=body,
             body_validator={"ids": list} if self.validate_payloads else None,
             body_required=["ids"] if self.validate_payloads else None
@@ -620,5 +660,7 @@ class Hosts(ServiceClass):
     QueryDevicesByFilter = query_devices_by_filter
     QueryDevices = query_devices_by_filter_scroll
     query_devices = query_devices_by_filter_scroll
-    QueryDeviceLoginHistory = query_device_login_history
+    QueryDeviceLoginHistory = query_device_login_history_v1
+    query_device_login_history = query_device_login_history_v1  # To be changed to v2 when fully deprecated
+    QueryDeviceLoginHistoryV2 = query_device_login_history_v2
     QueryGetNetworkAddressHistoryV1 = query_network_address_history
