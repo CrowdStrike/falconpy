@@ -1015,8 +1015,8 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
-        "pattern": "\\d{*}",
-        "type": "string",
+        "pattern": "^\\d+$",
+        "type": "integer",
         "description": "Policy ID",
         "name": "ids",
         "in": "query",
