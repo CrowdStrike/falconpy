@@ -57,7 +57,6 @@ class BaseResult:
                  ):
         """Construct an instance of the class."""
         self._pos: int = 0
-        # self._reversed: bool = False
 
         # Configure defaults
         self.status_code = status_code  # Will default to 0
@@ -76,61 +75,64 @@ class BaseResult:
             if isinstance(_headers, CaseInsensitiveDict):
                 _headers = dict(headers)
             self.headers = Headers(_headers)
-            if isinstance(body, list):
-                # Specific to report_executions_download_get returning raw
-                # JSON payloads as a list. There will be no Meta or Errors
-                # branch in this response.
-                self.resources = Resources(body)  # pragma: no cover
-            elif isinstance(body, bytes):
-                # Binary response
-                self.resources = BinaryFile(body)
-                self.meta = Meta()
-                self.errors = Errors()
-            elif isinstance(body, str):
-                # Invalid or raw response
-                if not body.strip():
-                    body = {}
-                self.raw = RawBody(body)
-                self.meta = Meta()
-                self.resources = Resources()
-                self.errors = Errors()
-            elif body.get("access_token", None):
-                # Authentication response
-                self.raw = RawBody(body)
-                self.meta = Meta()
-                self.resources = Resources()
-                self.errors = Errors()
+            self._parse_body(body_rcv=body)
+
+    def _parse_body(self, body_rcv: Dict[str, Union[str, dict, list, int, float, bytes]]):
+        if isinstance(body_rcv, list):
+            # Specific to report_executions_download_get returning raw
+            # JSON payloads as a list. There will be no Meta or Errors
+            # branch in this response.
+            self.resources = Resources(body_rcv)  # pragma: no cover
+        elif isinstance(body_rcv, bytes):
+            # Binary response
+            self.resources = BinaryFile(body_rcv)
+            self.meta = Meta()
+            self.errors = Errors()
+        elif isinstance(body_rcv, str):
+            # Invalid or raw response
+            if not body_rcv.strip():
+                body_rcv = {}
+            self.raw = RawBody(body_rcv)
+            self.meta = Meta()
+            self.resources = Resources()
+            self.errors = Errors()
+        elif body_rcv.get("access_token", None):
+            # Authentication response
+            self.raw = RawBody(body_rcv)
+            self.meta = Meta()
+            self.resources = Resources()
+            self.errors = Errors()
+        else:
+            # Standard responses, GraphQL and RTR
+            self.meta = Meta(body_rcv.get("meta", {}))
+            self.errors = Errors(body_rcv.get("errors", []))
+            # RTR Batch responses
+            if body_rcv.get("batch_id", {}):
+                # Batch session init returns as a dictionary
+                self.raw = RawBody(body_rcv)
+                self.batch_id = body_rcv.get("batch_id")
+                self.resources = ResponseComponent(body_rcv.get("resources"))
+            elif body_rcv.get("combined", {}):
+                # Batch session results return as a dictionary.
+                self.batch_get_cmd_req_id = body_rcv.get("batch_get_cmd_req_id", None)
+                self.raw = RawBody(body_rcv)
+                self.resources = ResponseComponent(body_rcv.get("combined"))
+            elif body_rcv.get("data", {}):  # pragma: no cover
+                # GraphQL uses a custom response payload. Due to
+                # environment constraints, this is manually tested.
+                self.raw = RawBody(body_rcv)
+                self.resources = ResponseComponent(body_rcv)
+            elif body_rcv.get("resources", None) is None:
+                # No resources, this must be a raw dictionary
+                # Probably came from the container API
+                self.raw = RawBody(body_rcv)
+            elif isinstance(body_rcv.get("resources", []), dict):
+                # Catch unusual response payloads not explicitly handled
+                self.raw = RawBody(body_rcv)
+                self.resources = ResponseComponent(body_rcv.get("resources"))
             else:
-                # Standard responses, GraphQL and RTR
-                self.meta = Meta(body.get("meta", {}))
-                self.errors = Errors(body.get("errors", []))
-                # RTR Batch responses
-                if body.get("batch_id", {}):
-                    # Batch session init returns as a dictionary
-                    self.raw = RawBody(body)
-                    self.batch_id = body.get("batch_id")
-                    self.resources = ResponseComponent(body.get("resources"))
-                elif body.get("combined", {}):
-                    # Batch session results return as a dictionary.
-                    self.batch_get_cmd_req_id = body.get("batch_get_cmd_req_id", None)
-                    self.raw = RawBody(body)
-                    self.resources = ResponseComponent(body.get("combined"))
-                elif body.get("data", {}):  # pragma: no cover
-                    # GraphQL uses a custom response payload. Due to
-                    # environment constraints, this is manually tested.
-                    self.raw = RawBody(body)
-                    self.resources = ResponseComponent(body)
-                elif body.get("resources", None) is None:
-                    # No resources, this must be a raw dictionary
-                    # Probably came from the container API
-                    self.raw = RawBody(body)
-                elif isinstance(body.get("resources", []), dict):
-                    # Catch unusual response payloads not explicitly handled
-                    self.raw = RawBody(body)
-                    self.resources = ResponseComponent(body.get("resources"))
-                else:
-                    # Standard API responses
-                    self.resources = Resources(body.get("resources", []))
+                # Standard API responses
+                self.resources = Resources(body_rcv.get("resources", []))
 
     # Iteration handlers
     def __iter__(self):
