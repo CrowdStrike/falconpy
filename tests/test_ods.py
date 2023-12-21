@@ -109,6 +109,7 @@ class TestODS:
             "get_scan_host_metadata_by_ids": falcon.get_scan_hosts(ids="12345689"),
             # "scans_report": falcon.scans_report(is_schedule=True, sort="id|asc", report_format="json"),
             "get_scans_by_scan_ids": falcon.get_scans(ids="123456789"),
+            "get_scans_by_scan_ids_v1": falcon.get_scans_v1(ids="123456789"),
             "create_scan": falcon.create_scan(host_groups=["GroupBob"]),
             "get_scheduled_scans_by_scan_ids": falcon.get_scheduled_scans(ids="12345678"),
             "schedule_scan": falcon.schedule_scan(host_groups=["GroupBob"], interval=400),  # getting 500 not 404

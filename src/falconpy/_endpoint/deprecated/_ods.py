@@ -182,6 +182,26 @@ _ods_endpoints = [
     ]
   ],
   [
+    "get-scans-by-scan-ids-v2",
+    "GET",
+    "/ods/entities/scans/v2",
+    "Get Scans by IDs.",
+    "ods",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The scan IDs to retrieve the scan entities",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "get-scheduled-scans-by-scan-ids",
     "GET",
     "/ods/entities/scheduled-scans/v1",
