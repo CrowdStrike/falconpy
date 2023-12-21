@@ -439,7 +439,7 @@ class ODS(ServiceClass):
     #         )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scans(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_scans_v1(self: object, *args, parameters: dict = None, **kwargs) -> dict:
         """Get scans by IDs.
 
         Keyword arguments:
@@ -460,6 +460,32 @@ class ODS(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="get_scans_by_scan_ids",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_scans(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+        """Get scans by IDs.
+
+        Keyword arguments:
+        ids -- The scan IDs to retrieve. String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ods/get-scans-by-scan-ids-v2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_scans_by_scan_ids_v2",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
@@ -853,6 +879,8 @@ class ODS(ServiceClass):
     get_malicious_files_by_ids = get_malicious_files
     get_scan_host_metadata_by_ids = get_scan_hosts
     get_scans_by_scan_ids = get_scans
+    get_scans_by_scan_ids_v1 = get_scans_v1
+    get_scans_by_scan_ids_v2 = get_scans
     get_scheduled_scans_by_scan_ids = get_scheduled_scans
     query_scan_host_metadata = query_scan_hosts
     aggregate_query_scan_host_metadata = aggregate_scan_hosts
