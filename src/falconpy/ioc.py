@@ -664,9 +664,8 @@ class IOC(ServiceClass):
             params=parameters
             )
 
-    # These methods are ported from the legacy IOCS Service Class, as they have not been deprecated
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def devices_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def devices_count_legacy(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Return the number of hosts in your customer account that have observed a given custom IOC.
 
         Keyword arguments:
@@ -698,7 +697,39 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def devices_ran_on(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def devices_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Return the number of hosts in your customer account that have observed a given custom IOC.
+
+        Keyword arguments:
+        type -- The type of indicator. String. Required.
+                Valid types include:
+                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+                `domain`: A domain name. Length - min: 1, max: 200.
+                `ipv4`: An IPv4 address. Must be a valid IP address.
+                `ipv6`: An IPv6 address. Must be a valid IP address.
+        parameters -- full parameters payload, not required if using other keywords.
+        value -- The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.device.count.v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="indicator_get_device_count_v1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def devices_ran_on_legacy(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Find hosts that have observed a given custom IOC.
 
         For details about those hosts, use the hosts API interface.
@@ -736,7 +767,45 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def processes_ran_on(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def devices_ran_on(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Find hosts that have observed a given custom IOC.
+
+        For details about those hosts, use the hosts API interface.
+
+        Keyword arguments:
+        type -- The type of indicator. String. Required.
+                Valid types include:
+                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+                `domain`: A domain name. Length - min: 1, max: 200.
+                `ipv4`: An IPv4 address. Must be a valid IP address.
+                `ipv6`: An IPv6 address. Must be a valid IP address.
+        limit -- The first process to return, where 0 is the latest offset.
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The first process to return, where 0 is the latest offset.
+                  Use with the limit parameter to manage pagination of results.
+        parameters -- full parameters payload, not required if using other keywords.
+        value -- The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.devices.ran.on.v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="indicator_get_devices_ran_on_v1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def processes_ran_on_legacy(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for processes associated with a custom IOC.
 
         Keyword arguments:
@@ -770,6 +839,45 @@ class IOC(ServiceClass):
             calling_object=self,
             endpoints=LegacyEndpoints,
             operation_id="ProcessesRanOn",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def processes_ran_on(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search for processes associated with a custom IOC.
+
+        Keyword arguments:
+        type -- The type of indicator. String. Required.
+                Valid types include:
+                `sha256`: A hex-encoded sha256 hash string. Length - min: 64, max: 64.
+                `md5`: A hex-encoded md5 hash string. Length - min 32, max: 32.
+                `domain`: A domain name. Length - min: 1, max: 200.
+                `ipv4`: An IPv4 address. Must be a valid IP address.
+                `ipv6`: An IPv6 address. Must be a valid IP address.
+        limit -- The first process to return, where 0 is the latest offset.
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The first process to return, where 0 is the latest offset.
+                  Use with the limit parameter to manage pagination of results.
+        device_id -- Specify a host's ID to return only processes from that host.
+                     Get a host's ID from get_device_details, the Falcon console,
+                     or the Streaming API.
+        parameters -- full parameters payload, not required if using other keywords.
+        value -- The string representation of the indicator.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.processes.ran.on.v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="indicator_get_processes_ran_on_v1",
             keywords=kwargs,
             params=parameters
             )
@@ -816,10 +924,11 @@ class IOC(ServiceClass):
     ioc_type_query_v1 = ioc_type_query
     platform_query_v1 = platform_query
     severity_query_v1 = severity_query
-    # Legacy operation IDs, these are not acceptable PEP8 syntax
-    # and are defined here for backwards compatibility / ease of
-    # use purposes. These endpoints were ported from IOCS.py
+    # Legacy operation IDs are ported from IOCS.py
     #                - jshcodes@CrowdStrike, see Discussion #319
-    DevicesCount = devices_count
-    DevicesRanOn = devices_ran_on
-    ProcessesRanOn = processes_ran_on
+    DevicesCount = devices_count_legacy
+    indicator_get_device_count_v1 = devices_count
+    DevicesRanOn = devices_ran_on_legacy
+    indicator_get_devices_ran_on_v1 = devices_ran_on
+    ProcessesRanOn = processes_ran_on_legacy
+    indicator_get_processes_ran_on_v1 = processes_ran_on

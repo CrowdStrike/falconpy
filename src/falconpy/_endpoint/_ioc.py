@@ -38,6 +38,32 @@ For more information, please refer to <https://unlicense.org>
 
 _ioc_endpoints = [
   [
+    "indicator_get_device_count_v1",
+    "GET",
+    "/iocs/aggregates/indicators/device-count/v1",
+    "Get the number of devices the indicator has run on",
+    "ioc",
+    [
+      {
+        "type": "string",
+        "description": "\nThe type of the indicator. Valid types include:\n\nsha256: A hex-encoded sha256 hash "
+        " string. Length - min: 64, max: 64.\n\nmd5: A hex-encoded md5 hash string. Length - min 32, max: "
+        "32.\n\ndomain: A domain name. Length - min: 1, max: 200.\n\nipv4: An IPv4 address. Must be a valid IP "
+        "address.\n\nipv6: An IPv6 address. Must be a valid IP address.\n",
+        "name": "type",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The string representation of the indicator",
+        "name": "value",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "indicator_aggregate_v1",
     "POST",
     "/iocs/aggregates/indicators/v1",
@@ -296,6 +322,94 @@ _ioc_endpoints = [
         "type": "integer",
         "description": "Number of ids to return.",
         "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "indicator_get_devices_ran_on_v1",
+    "GET",
+    "/iocs/queries/indicators/devices/v1",
+    "Get the IDs of devices the indicator has run on",
+    "ioc",
+    [
+      {
+        "type": "string",
+        "description": "\nThe type of the indicator. Valid types include:\n\nsha256: A hex-encoded sha256 hash "
+        " string. Length - min: 64, max: 64.\n\nmd5: A hex-encoded md5 hash string. Length - min 32, max: "
+        "32.\n\ndomain: A domain name. Length - min: 1, max: 200.\n\nipv4: An IPv4 address. Must be a valid IP "
+        "address.\n\nipv6: An IPv6 address. Must be a valid IP address.\n",
+        "name": "type",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The string representation of the indicator",
+        "name": "value",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The maximum number of results to return. Use with the offset parameter to manage "
+        "pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The first process to return, where 0 is the latest offset. Use with the limit "
+        "parameter to manage pagination of results.",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "indicator_get_processes_ran_on_v1",
+    "GET",
+    "/iocs/queries/indicators/processes/v1",
+    "Get the number of processes the indicator has run on",
+    "ioc",
+    [
+      {
+        "type": "string",
+        "description": "\nThe type of the indicator. Valid types include:\n\nsha256: A hex-encoded sha256 hash "
+        " string. Length - min: 64, max: 64.\n\nmd5: A hex-encoded md5 hash string. Length - min 32, max: "
+        "32.\n\ndomain: A domain name. Length - min: 1, max: 200.\n\nipv4: An IPv4 address. Must be a valid IP "
+        "address.\n\nipv6: An IPv6 address. Must be a valid IP address.\n",
+        "name": "type",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The string representation of the indicator",
+        "name": "value",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Specify a host's ID to return only processes from that host. Get a host's ID from GET "
+        "/devices/queries/devices/v1, the Falcon console, or the Streaming API.",
+        "name": "device_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The maximum number of results to return. Use with the offset parameter to manage "
+        "pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The first process to return, where 0 is the latest offset. Use with the limit "
+        "parameter to manage pagination of results.",
+        "name": "offset",
         "in": "query"
       }
     ]

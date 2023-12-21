@@ -57,6 +57,9 @@ class TestIOC:
                                                            ),
             "indicator_update_too": falcon.indicator_update_v1(bulk_update={"filter": "banana"}, indicators=[{"type": "ipv4"}]),
             "indicator_search": falcon.indicator_search_v1(parameters={'limit': 1}),
+            "devices_count_legacy": falcon.devices_count_legacy(type='domain', value='hax0r.ru'),
+            "devices_ran_on_legacy": falcon.devices_ran_on_legacy(type='domain', value='hax0r.ru'),
+            "processes_ran_on_legacy": falcon.processes_ran_on_legacy(type='domain', value='hax0r.ru', device_id=bogey),
             "devices_count": falcon.devices_count(type='domain', value='hax0r.ru'),
             "devices_ran_on": falcon.devices_ran_on(type='domain', value='hax0r.ru'),
             "processes_ran_on": falcon.processes_ran_on(type='domain', value='hax0r.ru', device_id=bogey),
@@ -68,7 +71,6 @@ class TestIOC:
             "ioc_type_query": falcon.ioc_type_query(),
             "platform_query": falcon.platform_query(),
             "severity_query": falcon.severity_query()
-
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
