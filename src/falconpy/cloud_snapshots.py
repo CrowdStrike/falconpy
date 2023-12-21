@@ -39,7 +39,7 @@ from typing import Dict, Union
 from ._util import process_service_request, force_default
 from ._payload import snapshot_registration_payload, snapshot_inventory_payload
 from ._service_class import ServiceClass
-from ._endpoint._cloud_snapshots import _cloud_snapshot_endpoints as Endpoints
+from ._endpoint._cloud_snapshots import _cloud_snapshots_endpoints as Endpoints
 
 
 class CloudSnapshots(ServiceClass):
