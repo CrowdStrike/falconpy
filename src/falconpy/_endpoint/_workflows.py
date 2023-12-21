@@ -68,8 +68,8 @@ _workflows_endpoints = [
       },
       {
         "type": "integer",
-        "description": "Used to record the execution depth to help limit execution "
-        "loops when a workflow triggers another. The maximum depth is 4.",
+        "description": "Used to record the execution depth to help limit execution loops when a workflow "
+        "triggers another. The maximum depth is 4.",
         "name": "depth",
         "in": "query"
       },
@@ -144,11 +144,10 @@ _workflows_endpoints = [
     "WorkflowSystemDefinitionsPromote",
     "POST",
     "/workflows/system-definitions/promote/v1",
-    "Promotes a version of a system definition on a customer. "
-    "The customer must already have been provisioned. This allows the callerto apply an "
-    "updated template version to a specific cid and expects all parameters to be supplied. "
-    "If the template supports multi-instancethe customer scope definition ID must be supplied "
-    "to determine which customer workflow should be updated.",
+    "Promotes a version of a system definition for a customer. The customer must already have been "
+    "provisioned. This allows the caller to apply an updated template version to a specific cid and expects all "
+    "parameters to be supplied. If the template supports multi-instance the customer scope definition ID must be "
+    "supplied to determine which customer workflow should be updated.",
     "workflows",
     [
       {

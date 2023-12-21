@@ -132,8 +132,8 @@ _cspm_registration_endpoints = [
     "CreateCSPMAwsAccount",
     "POST",
     "/cloud-connect-cspm-aws/entities/account/v1",
-    "Creates a new account in our system for a customer and generates a script for "
-    "them to run in their AWS cloud environment to grant us access.",
+    "Creates a new account in our system for a customer and generates a script for them to run in their AWS "
+    "cloud environment to grant us access.",
     "cspm_registration",
     [
       {
@@ -167,8 +167,6 @@ _cspm_registration_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 12,
-          "minLength": 12,
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -179,7 +177,6 @@ _cspm_registration_endpoints = [
       {
         "type": "array",
         "items": {
-          "pattern": "^o-[0-9a-z]{10,32}$",
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -229,8 +226,8 @@ _cspm_registration_endpoints = [
     "GetCSPMAwsAccountScriptsAttachment",
     "GET",
     "/cloud-connect-cspm-aws/entities/user-scripts-download/v1",
-    "Return a script for customer to run in their cloud environment to grant us "
-    "access to their AWS environment as a downloadable attachment.",
+    "Return a script for customer to run in their cloud environment to grant us access to their AWS "
+    "environment as a downloadable attachment.",
     "cspm_registration",
     [
       {
@@ -255,14 +252,11 @@ _cspm_registration_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 36,
-          "minLength": 36,
-          "pattern": "^[0-9a-z-]{36}$",
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "SubscriptionIDs of accounts to select for this status operation. "
-        "If this is empty then all accounts are returned.",
+        "description": "SubscriptionIDs of accounts to select for this status operation. If this is empty then "
+        "all accounts are returned.",
         "name": "ids",
         "in": "query"
       },
@@ -313,8 +307,8 @@ _cspm_registration_endpoints = [
     "CreateCSPMAzureAccount",
     "POST",
     "/cloud-connect-cspm-azure/entities/account/v1",
-    "Creates a new account in our system for a customer and generates a script for them "
-    "to run in their cloud environment to grant us access.",
+    "Creates a new account in our system for a customer and generates a script for them to run in their cloud "
+    "environment to grant us access.",
     "cspm_registration",
     [
       {
@@ -365,8 +359,8 @@ _cspm_registration_endpoints = [
     "UpdateCSPMAzureAccountClientID",
     "PATCH",
     "/cloud-connect-cspm-azure/entities/client-id/v1",
-    "Update an Azure service account in our system by with the user-created client_id "
-    "created with the public key we've provided",
+    "Update an Azure service account in our system by with the user-created client_id created with the public "
+    "key we've provided",
     "cspm_registration",
     [
       {
@@ -458,8 +452,8 @@ _cspm_registration_endpoints = [
     "GetCSPMAzureUserScriptsAttachment",
     "GET",
     "/cloud-connect-cspm-azure/entities/user-scripts-download/v1",
-    "Return a script for customer to run in their cloud environment to grant us access to "
-    "their Azure environment as a downloadable attachment",
+    "Return a script for customer to run in their cloud environment to grant us access to their Azure "
+    "environment as a downloadable attachment",
     "cspm_registration",
     [
       {
@@ -640,8 +634,8 @@ _cspm_registration_endpoints = [
       },
       {
         "type": "string",
-        "description": "String to get next page of results, is associated with a previous execution "
-        "of GetBehaviorDetections. Must include all filters from previous execution.",
+        "description": "String to get next page of results, is associated with a previous execution of "
+        "GetBehaviorDetections. Must include all filters from previous execution.",
         "name": "next_token",
         "in": "query"
       },
@@ -722,7 +716,7 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^[0-9a-z-]{2,}$",
+        "pattern": "^[0-9a-z-_]{2,}$",
         "type": "string",
         "description": "Cloud Provider Region",
         "name": "region",
@@ -730,12 +724,13 @@ _cspm_registration_endpoints = [
       },
       {
         "enum": [
+          "Critical",
           "High",
           "Informational",
           "Medium"
         ],
         "type": "string",
-        "description": "Severity (e.g.: High | Medium | Informational)",
+        "description": "Policy Severity",
         "name": "severity",
         "in": "query"
       },
@@ -846,18 +841,19 @@ _cspm_registration_endpoints = [
     [
       {
         "type": "string",
-        "description": "use_current_scan_ids - *use this to get records for latest scans*\naccount_name\naccount_id\n"
-        "agent_id\nattack_types\nazure_subscription_id\ncloud_provider\ncloud_service_keyword\ncustom_policy_id\n"
-        "is_managed\npolicy_id\npolicy_type\nresource_id\nregion\nstatus\nscan_time\nseverity\nseverity_string\n",
+        "description": "Available filters: use_current_scan_ids - *use this to get records for latest scans*\n "
+        "account_name\naccount_id\nagent_id\nattack_types\nazure_subscription_id\ncloud_provider\ncloud_service_keyword "
+        "\ncustom_policy_id\nis_managed\npolicy_id\npolicy_type\nresource_id\nregion\nstatus\nscan_time\nseverity\nseve "
+        "rity_string\n",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "string",
         "default": "timestamp|desc",
-        "description": "account_name\naccount_id\nattack_types\nazure_subscription_id\ncloud_provider\n"
-        "cloud_service_keyword\nstatus\nis_managed\npolicy_id\npolicy_type\nresource_id\nregion\nscan_time\n"
-        "severity\nseverity_string\ntimestamp",
+        "description": "account_name\naccount_id\nattack_types\nazure_subscription_id\ncloud_provider\ncloud_s "
+        "ervice_keyword\nstatus\nis_managed\npolicy_id\npolicy_type\nresource_id\nregion\nscan_time\nseverity\nseverity "
+        "_string\ntimestamp",
         "name": "sort",
         "in": "query"
       },
@@ -873,7 +869,7 @@ _cspm_registration_endpoints = [
       {
         "minimum": 0,
         "type": "integer",
-        "description": "Offset returned detections",
+        "description": "Offset returned detections. Cannot be combined with next_token filter",
         "name": "offset",
         "in": "query"
       }
@@ -1059,11 +1055,19 @@ _cspm_registration_endpoints = [
         "enum": [
           "ACM",
           "ACR",
+          "Any",
+          "App Engine",
           "AppService",
+          "BigQuery",
+          "Cloud Load Balancing",
+          "Cloud Logging",
+          "Cloud SQL",
+          "Cloud Storage",
           "CloudFormation",
           "CloudTrail",
           "CloudWatch Logs",
           "Cloudfront",
+          "Compute Engine",
           "Config",
           "Disk",
           "DynamoDB",
@@ -1100,6 +1104,7 @@ _cspm_registration_endpoints = [
           "Serverless Application Repository",
           "StorageAccount",
           "Subscriptions",
+          "VPC",
           "VirtualMachine",
           "VirtualNetwork"
         ],
@@ -1153,9 +1158,6 @@ _cspm_registration_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 5,
-          "minLength": 3,
-          "pattern": "^(aws|azure|gcp)$",
           "type": "string"
         },
         "collectionFormat": "multi",

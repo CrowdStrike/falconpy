@@ -70,8 +70,8 @@ _sample_uploads_endpoints = [
     "ArchiveGetV1",
     "GET",
     "/archives/entities/archives/v1",
-    "Retrieves the archives upload operation statuses. Status `done` means that archive was processed successfully. "
-    "Status `error` means that archive was not processed successfully.",
+    "Retrieves the archives upload operation statuses. Status `done` means that archive was processed "
+    "successfully. Status `error` means that archive was not processed successfully.",
     "sample_uploads",
     [
       {
@@ -94,15 +94,16 @@ _sample_uploads_endpoints = [
     "ArchiveUploadV1",
     "POST",
     "/archives/entities/archives/v1",
-    "Uploads an archive and extracts files list from it. Operation is asynchronous use the ListArchivesV1 "
-    "operation to check the status. After uploading, use the ExtractionCreateV1 operation to copy the file "
-    "to internal storage making it available for content analysis. "
-    "This method is deprecated in favor of ArchiveUploadV2.",
+    "Uploads an archive and extracts files list from it. Operation is asynchronous use "
+    "`/archives/entities/archives/v1` to check the status. After uploading, use `/archives/entities/extractions/v1` "
+    " to copy the file to internal storage making it available for content analysis.\nThis method is deprecated in "
+    "favor of `/archives/entities/archives/v2`",
     "sample_uploads",
     [
       {
-        "description": "Content of the uploaded archive in binary format. "
-        "Max file size: 100 MB.\n\nAccepted file formats:\n\n- Portable executables: `.zip`, `.7z`.",
+        "description": "Content of the uploaded archive in binary format. For example, use `--data-binary "
+        "@$FILE_PATH` when using cURL. Max file size: 100 MB.\n\nAccepted file formats:\n\n- Portable executables: "
+        "`.zip`, `.7z`.",
         "name": "body",
         "in": "body",
         "required": True
@@ -123,9 +124,9 @@ _sample_uploads_endpoints = [
       {
         "type": "boolean",
         "default": True,
-        "description": "Defines visibility of this file, either via the API or the Falcon console. "
-        "- `true`: File is only shown to users within your customer account "
-        "- `false`: File can be seen by other CrowdStrike customers.  Default: `true`.",
+        "description": "Defines visibility of this file, either via the API or the Falcon console.\n\n- "
+        "`true`: File is only shown to users within your customer account\n- `false`: File can be seen by other "
+        "CrowdStrike customers \n\nDefault: `true`.",
         "name": "is_confidential",
         "in": "query"
       },
@@ -157,14 +158,15 @@ _sample_uploads_endpoints = [
     "ArchiveUploadV2",
     "POST",
     "/archives/entities/archives/v2",
-    "Uploads an archive and extracts files list from it. Operation is asynchronous use `/archives/entities/archives/v1` "
-    "to check the status. After uploading, use `/archives/entities/extractions/v1` to copy the file to internal storage "
-    "making it available for content analysis.",
+    "Uploads an archive and extracts files list from it. Operation is asynchronous use "
+    "`/archives/entities/archives/v1` to check the status. After uploading, use `/archives/entities/extractions/v1` "
+    "to copy the file to internal storage making it available for content analysis.",
     "sample_uploads",
     [
       {
         "type": "file",
-        "description": "Content of the uploaded archive. For example, use `--form file=@$FILE_PATH` when using cURL.",
+        "description": "Content of the uploaded archive. For example, use `--form file=@$FILE_PATH;type=` when "
+        "using cURL. Supported file types are `application/zip` and `application/x-7z-compressed`.",
         "name": "file",
         "in": "formData",
         "required": True
@@ -185,16 +187,17 @@ _sample_uploads_endpoints = [
       {
         "type": "boolean",
         "default": True,
-        "description": "Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon console. "
-        "For example, use `--form is_confidential=` when using cURL.\n\n- `true`: File is only shown to users within "
-        "your customer account\n- `false`: File can be seen by other CrowdStrike customers \n\nDefault: `true`.",
+        "description": "Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon "
+        "console. For example, use `--form is_confidential=` when using cURL.\n\n- `true`: File is only shown to users "
+        "within your customer account\n- `false`: File can be seen by other CrowdStrike customers \n\nDefault: "
+        "`true`.",
         "name": "is_confidential",
         "in": "formData"
       },
       {
         "type": "string",
-        "description": "A descriptive comment to identify the file for other users. "
-        "For example, use `--form comment=` when using cURL.",
+        "description": "A descriptive comment to identify the file for other users. For example, use `--form "
+        "comment=` when using cURL.",
         "name": "comment",
         "in": "formData"
       }
@@ -204,8 +207,8 @@ _sample_uploads_endpoints = [
     "ExtractionListV1",
     "GET",
     "/archives/entities/extraction-files/v1",
-    "Retrieves the files extractions in chunks. Status `done` means that all files were processed successfully. "
-    "Status `error` means that at least one of the file could not be processed.",
+    "Retrieves the files extractions in chunks. Status `done` means that all files were processed "
+    "successfully. Status `error` means that at least one of the file could not be processed.",
     "sample_uploads",
     [
       {
@@ -234,8 +237,8 @@ _sample_uploads_endpoints = [
     "ExtractionGetV1",
     "GET",
     "/archives/entities/extractions/v1",
-    "Retrieves the files extraction operation statuses. Status `done` means that all files were processed successfully. "
-    "Status `error` means that at least one of the file could not be processed.",
+    "Retrieves the files extraction operation statuses. Status `done` means that all files were processed "
+    "successfully. Status `error` means that at least one of the file could not be processed.",
     "sample_uploads",
     [
       {
@@ -335,9 +338,9 @@ _sample_uploads_endpoints = [
       {
         "type": "boolean",
         "default": True,
-        "description": "Defines visibility of this file in Falcon MalQuery, either via the API or the "
-        "Falcon console.\n\n- `true`: File is only shown to users within your customer account\n- `false`: "
-        "File can be seen by other CrowdStrike customers \n\nDefault: `true`.",
+        "description": "Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon "
+        "console.\n\n- `true`: File is only shown to users within your customer account\n- `false`: File can be seen by "
+        "other CrowdStrike customers \n\nDefault: `true`.",
         "name": "is_confidential",
         "in": "formData"
       }

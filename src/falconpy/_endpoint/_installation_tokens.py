@@ -65,6 +65,20 @@ _installation_tokens_endpoints = [
     []
   ],
   [
+    "customer_settings_update",
+    "PATCH",
+    "/installation-tokens/entities/customer-settings/v1",
+    "Update installation token settings.",
+    "installation_tokens",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "tokens_read",
     "GET",
     "/installation-tokens/entities/tokens/v1",
@@ -205,20 +219,6 @@ _installation_tokens_endpoints = [
         "description": "The filter expression that should be used to limit the results (e.g., `status:'valid'`).",
         "name": "filter",
         "in": "query"
-      }
-    ]
-  ],
-  [
-    "customer_settings_update",
-    "PATCH",
-    "/installation-tokens/entities/customer-settings/v1",
-    "Update installation token settings.",
-    "installation_tokens_settings",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
       }
     ]
   ]

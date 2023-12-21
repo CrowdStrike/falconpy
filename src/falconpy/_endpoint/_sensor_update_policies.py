@@ -41,8 +41,8 @@ _sensor_update_policies_endpoints = [
     "revealUninstallToken",
     "POST",
     "/policy/combined/reveal-uninstall-token/v1",
-    "Reveals an uninstall token for a specific device. "
-    "To retrieve the bulk maintenance token pass the value 'MAINTENANCE' as the value for 'device_id'",
+    "Reveals an uninstall token for a specific device. To retrieve the bulk maintenance token pass the value "
+    "'MAINTENANCE' as the value for 'device_id'",
     "sensor_update_policies",
     [
       {
@@ -122,8 +122,8 @@ _sensor_update_policies_endpoints = [
     "queryCombinedSensorUpdatePolicyMembers",
     "GET",
     "/policy/combined/sensor-update-members/v1",
-    "Search for members of a Sensor Update Policy in your environment by providing an FQL filter and paging details. "
-    "Returns a set of host details which match the filter criteria",
+    "Search for members of a Sensor Update Policy in your environment by providing an FQL filter and paging "
+    "details. Returns a set of host details which match the filter criteria",
     "sensor_update_policies",
     [
       {
@@ -220,8 +220,9 @@ _sensor_update_policies_endpoints = [
     "queryCombinedSensorUpdatePoliciesV2",
     "GET",
     "/policy/combined/sensor-update/v2",
-    "Search for Sensor Update Policies with additional support for uninstall protection in your environment "
-    "by providing an FQL filter and paging details. Returns a set of Sensor Update Policies which match the filter criteria",
+    "Search for Sensor Update Policies with additional support for uninstall protection in your environment by "
+    " providing an FQL filter and paging details. Returns a set of Sensor Update Policies which match the filter "
+    "criteria",
     "sensor_update_policies",
     [
       {
@@ -304,9 +305,9 @@ _sensor_update_policies_endpoints = [
     "setSensorUpdatePoliciesPrecedence",
     "POST",
     "/policy/entities/sensor-update-precedence/v1",
-    "Sets the precedence of Sensor Update Policies based on the order of IDs specified in the request. "
-    "The first ID specified will have the highest precedence and the last ID specified will have the lowest. "
-    "You must specify all non-Default Policies for a platform when updating precedence",
+    "Sets the precedence of Sensor Update Policies based on the order of IDs specified in the request. The "
+    "first ID specified will have the highest precedence and the last ID specified will have the lowest. You must "
+    "specify all non-Default Policies for a platform when updating precedence",
     "sensor_update_policies",
     [
       {
@@ -408,8 +409,8 @@ _sensor_update_policies_endpoints = [
     "createSensorUpdatePoliciesV2",
     "POST",
     "/policy/entities/sensor-update/v2",
-    "Create Sensor Update Policies by specifying details about the policy to "
-    "create with additional support for uninstall protection",
+    "Create Sensor Update Policies by specifying details about the policy to create with additional support "
+    "for uninstall protection",
     "sensor_update_policies",
     [
       {
@@ -423,8 +424,8 @@ _sensor_update_policies_endpoints = [
     "updateSensorUpdatePoliciesV2",
     "PATCH",
     "/policy/entities/sensor-update/v2",
-    "Update Sensor Update Policies by specifying the ID of the policy and details "
-    "to update with additional support for uninstall protection",
+    "Update Sensor Update Policies by specifying the ID of the policy and details to update with additional "
+    "support for uninstall protection",
     "sensor_update_policies",
     [
       {
@@ -475,8 +476,8 @@ _sensor_update_policies_endpoints = [
     "querySensorUpdatePolicyMembers",
     "GET",
     "/policy/queries/sensor-update-members/v1",
-    "Search for members of a Sensor Update Policy in your environment by providing an "
-    "FQL filter and paging details. Returns a set of Agent IDs which match the filter criteria",
+    "Search for members of a Sensor Update Policy in your environment by providing an FQL filter and paging "
+    "details. Returns a set of Agent IDs which match the filter criteria",
     "sensor_update_policies",
     [
       {

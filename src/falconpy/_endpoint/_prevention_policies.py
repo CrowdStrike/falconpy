@@ -41,8 +41,8 @@ _prevention_policies_endpoints = [
     "queryCombinedPreventionPolicyMembers",
     "GET",
     "/policy/combined/prevention-members/v1",
-    "Search for members of a Prevention Policy in your environment by providing an "
-    "FQL filter and paging details. Returns a set of host details which match the filter criteria",
+    "Search for members of a Prevention Policy in your environment by providing an FQL filter and paging "
+    "details. Returns a set of host details which match the filter criteria",
     "prevention_policies",
     [
       {
@@ -84,8 +84,8 @@ _prevention_policies_endpoints = [
     "queryCombinedPreventionPolicies",
     "GET",
     "/policy/combined/prevention/v1",
-    "Search for Prevention Policies in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Prevention Policies which match the filter criteria",
+    "Search for Prevention Policies in your environment by providing an FQL filter and paging details. Returns "
+    "a set of Prevention Policies which match the filter criteria",
     "prevention_policies",
     [
       {
@@ -168,9 +168,9 @@ _prevention_policies_endpoints = [
     "setPreventionPoliciesPrecedence",
     "POST",
     "/policy/entities/prevention-precedence/v1",
-    "Sets the precedence of Prevention Policies based on the order of IDs specified in the request. "
-    "The first ID specified will have the highest precedence and the last ID specified will have the lowest. "
-    "You must specify all non-Default Policies for a platform when updating precedence",
+    "Sets the precedence of Prevention Policies based on the order of IDs specified in the request. The first "
+    "ID specified will have the highest precedence and the last ID specified will have the lowest. You must specify "
+    "all non-Default Policies for a platform when updating precedence",
     "prevention_policies",
     [
       {
@@ -252,8 +252,8 @@ _prevention_policies_endpoints = [
     "queryPreventionPolicyMembers",
     "GET",
     "/policy/queries/prevention-members/v1",
-    "Search for members of a Prevention Policy in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Agent IDs which match the filter criteria",
+    "Search for members of a Prevention Policy in your environment by providing an FQL filter and paging "
+    "details. Returns a set of Agent IDs which match the filter criteria",
     "prevention_policies",
     [
       {
@@ -295,8 +295,8 @@ _prevention_policies_endpoints = [
     "queryPreventionPolicies",
     "GET",
     "/policy/queries/prevention/v1",
-    "Search for Prevention Policies in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Prevention Policy IDs which match the filter criteria",
+    "Search for Prevention Policies in your environment by providing an FQL filter and paging details. Returns "
+    "a set of Prevention Policy IDs which match the filter criteria",
     "prevention_policies",
     [
       {

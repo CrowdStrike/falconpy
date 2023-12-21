@@ -38,12 +38,25 @@ For more information, please refer to <https://unlicense.org>
 
 _identity_protection_endpoints = [
   [
+    "GetSensorAggregates",
+    "POST",
+    "/identity-protection/aggregates/devices/GET/v1",
+    "Get sensor aggregates as specified via json in request body.",
+    "identity_protection",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "api_preempt_proxy_post_graphql",
     "POST",
     "/identity-protection/combined/graphql/v1",
-    "Identity Protection GraphQL API. Allows to retrieve entities, timeline activities, "
-    "identity-based incidents and security assessment. Allows to perform actions on entities "
-    "and identity-based incidents.",
+    "Identity Protection GraphQL API. Allows to retrieve entities, timeline activities, identity-based "
+    "incidents and security assessment. Allows to perform actions on entities and identity-based incidents.",
     "identity_protection",
     [
       {
@@ -56,25 +69,11 @@ _identity_protection_endpoints = [
     ]
   ],
   [
-    "GetSensorAggregates",
-    "POST",
-    "/identity-protection/aggregates/devices/GET/v1",
-    "Get sensor aggregates as specified via json in request body.",
-    "identity_entities",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "GetSensorDetails",
     "POST",
     "/identity-protection/entities/devices/GET/v1",
     "Get details on one or more sensors by providing device IDs in a POST body. Supports up to a maximum of 5000 IDs.",
-    "identity_entities",
+    "identity_protection",
     [
       {
         "name": "body",
@@ -88,7 +87,7 @@ _identity_protection_endpoints = [
     "GET",
     "/identity-protection/queries/devices/v1",
     "Search for sensors in your environment by hostname, IP, and other criteria.",
-    "identity_entities",
+    "identity_protection",
     [
       {
         "type": "integer",

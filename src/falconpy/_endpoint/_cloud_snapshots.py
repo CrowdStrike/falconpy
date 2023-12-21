@@ -38,11 +38,11 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_snapshot_endpoints = [
   [
-    "CreateInventory",
+    "RegisterCspmSnapshotAccount",
     "POST",
-    "/snapshots/entities/inventories/v1",
-    "Create inventory from data received from snapshot",
-    "inventories",
+    "/snapshots/entities/accounts/v1",
+    "Register customer cloud account for snapshot scanning",
+    "cloud_snapshots",
     [
       {
         "name": "body",
@@ -56,15 +56,15 @@ _cloud_snapshot_endpoints = [
     "GET",
     "/snapshots/entities/image-registry-credentials/v1",
     "Gets the registry credentials",
-    "provision",
+    "cloud_snapshots",
     []
   ],
   [
-    "RegisterCspmSnapshotAccount",
+    "CreateInventory",
     "POST",
-    "/snapshots/entities/accounts/v1",
-    "Register customer cloud account for snapshot scanning",
-    "registration",
+    "/snapshots/entities/inventories/v1",
+    "Create inventory from data received from snapshot",
+    "cloud_snapshots",
     [
       {
         "name": "body",

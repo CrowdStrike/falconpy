@@ -112,8 +112,8 @@ _d4c_registration_endpoints = [
     "CreateD4CAwsAccount",
     "POST",
     "/cloud-connect-aws/entities/account/v2",
-    "Creates a new account in our system for a customer and generates a script "
-    "for them to run in their AWS cloud environment to grant us access.",
+    "Creates a new account in our system for a customer and generates a script for them to run in their AWS "
+    "cloud environment to grant us access.",
     "d4c_registration",
     [
       {
@@ -156,8 +156,7 @@ _d4c_registration_endpoints = [
     "GetD4CAwsConsoleSetupURLs",
     "GET",
     "/cloud-connect-aws/entities/console-setup-urls/v1",
-    "Return a URL for customer to visit in their cloud environment to grant "
-    "us access to their AWS environment.",
+    "Return a URL for customer to visit in their cloud environment to grant us access to their AWS environment.",
     "d4c_registration",
     [
       {
@@ -173,8 +172,8 @@ _d4c_registration_endpoints = [
     "GetD4CAWSAccountScriptsAttachment",
     "GET",
     "/cloud-connect-aws/entities/user-scripts-download/v1",
-    "Return a script for customer to run in their cloud environment to grant "
-    "us access to their AWS environment as a downloadable attachment.",
+    "Return a script for customer to run in their cloud environment to grant us access to their AWS "
+    "environment as a downloadable attachment.",
     "d4c_registration",
     [
       {
@@ -202,8 +201,8 @@ _d4c_registration_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "SubscriptionIDs of accounts to select for this status operation. "
-        "If this is empty then all accounts are returned.",
+        "description": "SubscriptionIDs of accounts to select for this status operation. If this is empty then "
+        "all accounts are returned.",
         "name": "ids",
         "in": "query"
       },
@@ -254,8 +253,8 @@ _d4c_registration_endpoints = [
     "CreateDiscoverCloudAzureAccount",
     "POST",
     "/cloud-connect-azure/entities/account/v1",
-    "Creates a new account in our system for a customer and generates a script for them to run "
-    "in their cloud environment to grant us access.",
+    "Creates a new account in our system for a customer and generates a script for them to run in their cloud "
+    "environment to grant us access.",
     "d4c_registration",
     [
       {
@@ -269,8 +268,8 @@ _d4c_registration_endpoints = [
     "UpdateDiscoverCloudAzureAccountClientID",
     "PATCH",
     "/cloud-connect-azure/entities/client-id/v1",
-    "Update an Azure service account in our system by with the user-created client_id "
-    "created with the public key we've provided",
+    "Update an Azure service account in our system by with the user-created client_id created with the public "
+    "key we've provided",
     "d4c_registration",
     [
       {
@@ -313,9 +312,6 @@ _d4c_registration_endpoints = [
       {
         "type": "array",
         "items": {
-          "maxLength": 36,
-          "minLength": 36,
-          "pattern": "^[0-9a-z-]{36}$",
           "type": "string"
         },
         "collectionFormat": "multi",
@@ -354,8 +350,8 @@ _d4c_registration_endpoints = [
     "GetDiscoverCloudAzureUserScriptsAttachment",
     "GET",
     "/cloud-connect-azure/entities/user-scripts-download/v1",
-    "Return a script for customer to run in their cloud environment to grant us access to their "
-    "Azure environment as a downloadable attachment",
+    "Return a script for customer to run in their cloud environment to grant us access to their Azure "
+    "environment as a downloadable attachment",
     "d4c_registration",
     [
       {
@@ -391,8 +387,7 @@ _d4c_registration_endpoints = [
     "GetDiscoverCloudAzureUserScripts",
     "GET",
     "/cloud-connect-azure/entities/user-scripts/v1",
-    "Return a script for customer to run in their cloud environment to grant us access to their "
-    "Azure environment",
+    "Return a script for customer to run in their cloud environment to grant us access to their Azure environment",
     "d4c_registration",
     []
   ],
@@ -471,8 +466,8 @@ _d4c_registration_endpoints = [
     "CreateD4CGCPAccount",
     "POST",
     "/cloud-connect-gcp/entities/account/v1",
-    "Creates a new account in our system for a customer and generates a new service account for them "
-    "to add access to in their GCP environment to grant us access.",
+    "Creates a new account in our system for a customer and generates a new service account for them to add "
+    "access to in their GCP environment to grant us access.",
     "d4c_registration",
     [
       {
@@ -486,8 +481,8 @@ _d4c_registration_endpoints = [
     "GetCSPMGCPUserScriptsAttachment",
     "GET",
     "/cloud-connect-gcp/entities/user-scripts-download/v1",
-    "Return a script for customer to run in their cloud environment to grant us access to their "
-    "GCP environment as a downloadable attachment",
+    "Return a script for customer to run in their cloud environment to grant us access to their GCP "
+    "environment as a downloadable attachment",
     "d4c_registration",
     []
   ],
@@ -495,8 +490,7 @@ _d4c_registration_endpoints = [
     "GetD4CGCPUserScripts",
     "GET",
     "/cloud-connect-gcp/entities/user-scripts/v1",
-    "Return a script for customer to run in their cloud environment to grant us access to their "
-    "GCP environment",
+    "Return a script for customer to run in their cloud environment to grant us access to their GCP environment",
     "d4c_registration",
     [
       {
@@ -554,8 +548,8 @@ _d4c_registration_endpoints = [
           "gov"
         ],
         "type": "string",
-        "description": "Account type (e.g.: commercial,gov) Only applicable when "
-        "registering AWS commercial account in a Gov environment",
+        "description": "Account type (e.g.: commercial,gov) Only applicable when registering AWS commercial "
+        "account in a Gov environment",
         "name": "account_type",
         "in": "query"
       }

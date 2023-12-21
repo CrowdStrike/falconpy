@@ -78,8 +78,9 @@ _ioc_endpoints = [
       },
       {
         "type": "integer",
-        "description": "The offset to start retrieving records from. Offset and After params are mutually exclusive. "
-        "If none provided then scrolling will be used by default.",
+        "description": "The offset to start retrieving records from. Offset and After params are mutually "
+        "exclusive. If none provided then scrolling will be used by default. To access more than 10k iocs, use the "
+        "'after' parameter instead of 'offset'.",
         "name": "offset",
         "in": "query"
       },
@@ -117,10 +118,10 @@ _ioc_endpoints = [
       },
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. "
-        "On your first request, don't provide an 'after' token. On subsequent requests, provide the 'after' "
-        "token from the previous response to continue from that place in the results. "
-        "To access more than 10k indicators, use the 'after' parameter instead of 'offset'.",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
+        " your first request, don't provide an 'after' token. On subsequent requests, provide the 'after' token from "
+        "the previous response to continue from that place in the results. To access more than 10k indicators, use the "
+        "'after' parameter instead of 'offset'.",
         "name": "after",
         "in": "query"
       },
@@ -144,7 +145,7 @@ _ioc_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
+        "collectionFormat": "multi",
         "description": "The ids of the Actions to retrieve",
         "name": "ids",
         "in": "query"
@@ -163,7 +164,7 @@ _ioc_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
+        "collectionFormat": "multi",
         "description": "The ids of the Indicators to retrieve",
         "name": "ids",
         "in": "query",
@@ -234,8 +235,8 @@ _ioc_endpoints = [
     [
       {
         "type": "string",
-        "description": "The FQL expression to delete Indicators in bulk. If both 'filter' and 'ids' are provided, "
-        "then filter takes precedence and ignores ids.",
+        "description": "The FQL expression to delete Indicators in bulk. If both 'filter' and 'ids' are "
+        "provided, then filter takes precedence and ignores ids.",
         "name": "filter",
         "in": "query"
       },
@@ -244,9 +245,9 @@ _ioc_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
-        "description": "The ids of the Indicators to delete. If both 'filter' and 'ids' are provided, "
-        "then filter takes precedence and ignores ids",
+        "collectionFormat": "multi",
+        "description": "The ids of the Indicators to delete. If both 'filter' and 'ids' are provided, then "
+        "filter takes precedence and ignores ids",
         "name": "ids",
         "in": "query"
       },
@@ -300,8 +301,9 @@ _ioc_endpoints = [
       },
       {
         "type": "integer",
-        "description": "The offset to start retrieving records from. Offset and After params are mutually exclusive. "
-        "If none provided then scrolling will be used by default.",
+        "description": "The offset to start retrieving records from. Offset and After params are mutually "
+        "exclusive. If none provided then scrolling will be used by default. To access more than 10k iocs, use the "
+        "'after' parameter instead of 'offset'.",
         "name": "offset",
         "in": "query"
       },
@@ -339,10 +341,10 @@ _ioc_endpoints = [
       },
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. "
-        "On your first request, don't provide an 'after' token. On subsequent requests, provide the 'after' "
-        "token from the previous response to continue from that place in the results. "
-        "To access more than 10k indicators, use the 'after' parameter instead of 'offset'.",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
+        " your first request, don't provide an 'after' token. On subsequent requests, provide the 'after' token from "
+        "the previous response to continue from that place in the results. To access more than 10k indicators, use the "
+        "'after' parameter instead of 'offset'.",
         "name": "after",
         "in": "query"
       }

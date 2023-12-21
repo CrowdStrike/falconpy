@@ -41,8 +41,8 @@ _cloud_connect_aws_endpoints = [
     "QueryAWSAccounts",
     "GET",
     "/cloud-connect-aws/combined/accounts/v1",
-    "Search for provisioned AWS Accounts by providing an FQL filter and paging details. "
-    "Returns a set of AWS accounts which match the filter criteria",
+    "Search for provisioned AWS Accounts by providing an FQL filter and paging details. Returns a set of AWS "
+    "accounts which match the filter criteria",
     "cloud_connect_aws",
     [
       {
@@ -117,8 +117,8 @@ _cloud_connect_aws_endpoints = [
         ],
         "type": "string",
         "default": "manual",
-        "description": "Mode for provisioning. Allowed values are `manual` or `cloudformation`. "
-        "Defaults to manual if not defined.",
+        "description": "Mode for provisioning. Allowed values are `manual` or `cloudformation`. Defaults to "
+        "manual if not defined.",
         "name": "mode",
         "in": "query"
       },
@@ -201,8 +201,8 @@ _cloud_connect_aws_endpoints = [
     "QueryAWSAccountsForIDs",
     "GET",
     "/cloud-connect-aws/queries/accounts/v1",
-    "Search for provisioned AWS Accounts by providing an FQL filter and paging details. "
-    "Returns a set of AWS account IDs which match the filter criteria",
+    "Search for provisioned AWS Accounts by providing an FQL filter and paging details. Returns a set of AWS "
+    "account IDs which match the filter criteria",
     "cloud_connect_aws",
     [
       {

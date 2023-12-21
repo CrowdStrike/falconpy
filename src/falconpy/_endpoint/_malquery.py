@@ -49,9 +49,8 @@ _malquery_endpoints = [
     "PostMalQueryFuzzySearchV1",
     "POST",
     "/malquery/combined/fuzzy-search/v1",
-    "Search Falcon MalQuery quickly, but with more potential for false positives. "
-    "Search for a combination of hex patterns and strings in order to identify samples based upon "
-    "file content at byte level granularity.",
+    "Search Falcon MalQuery quickly, but with more potential for false positives. Search for a combination of "
+    "hex patterns and strings in order to identify samples based upon file content at byte level granularity.",
     "malquery",
     [
       {
@@ -106,8 +105,8 @@ _malquery_endpoints = [
     "GetMalQueryRequestV1",
     "GET",
     "/malquery/entities/requests/v1",
-    "Check the status and results of an asynchronous request, such as hunt or exact-search. "
-    "Supports a single request id at this time.",
+    "Check the status and results of an asynchronous request, such as hunt or exact-search. Supports a single "
+    "request id at this time.",
     "malquery",
     [
       {
@@ -127,8 +126,8 @@ _malquery_endpoints = [
     "GetMalQueryEntitiesSamplesFetchV1",
     "GET",
     "/malquery/entities/samples-fetch/v1",
-    "Fetch a zip archive with password 'infected' containing the samples. "
-    "Call this once the /entities/samples-multidownload request has finished processing",
+    "Fetch a zip archive with password 'infected' containing the samples. Call this once the "
+    "/entities/samples-multidownload request has finished processing",
     "malquery",
     [
       {
@@ -144,8 +143,8 @@ _malquery_endpoints = [
     "PostMalQueryEntitiesSamplesMultidownloadV1",
     "POST",
     "/malquery/entities/samples-multidownload/v1",
-    "Schedule samples for download. Use the result id with the /request endpoint to check if "
-    "the download is ready after which you can call the /entities/samples-fetch to get the zip",
+    "Schedule samples for download. Use the result id with the /request endpoint to check if the download is "
+    "ready after which you can call the /entities/samples-fetch to get the zip",
     "malquery",
     [
       {
@@ -160,9 +159,9 @@ _malquery_endpoints = [
     "PostMalQueryExactSearchV1",
     "POST",
     "/malquery/queries/exact-search/v1",
-    "Search Falcon MalQuery for a combination of hex patterns and strings in order to identify "
-    "samples based upon file content at byte level granularity. You can filter results on criteria "
-    "such as file type, file size and first seen date. Returns a request id which can be used with the /request endpoint",
+    "Search Falcon MalQuery for a combination of hex patterns and strings in order to identify samples based "
+    "upon file content at byte level granularity. You can filter results on criteria such as file type, file size "
+    "and first seen date. Returns a request id which can be used with the /request endpoint",
     "malquery",
     [
       {

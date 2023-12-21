@@ -41,8 +41,8 @@ _host_group_endpoints = [
     "queryCombinedGroupMembers",
     "GET",
     "/devices/combined/host-group-members/v1",
-    "Search for members of a Host Group in your environment by providing an FQL filter "
-    "and paging details. Returns a set of host details which match the filter criteria",
+    "Search for members of a Host Group in your environment by providing an FQL filter and paging details. "
+    "Returns a set of host details which match the filter criteria",
     "host_group",
     [
       {
@@ -84,8 +84,8 @@ _host_group_endpoints = [
     "queryCombinedHostGroups",
     "GET",
     "/devices/combined/host-groups/v1",
-    "Search for Host Groups in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Host Groups which match the filter criteria",
+    "Search for Host Groups in your environment by providing an FQL filter and paging details. Returns a set "
+    "of Host Groups which match the filter criteria",
     "host_group",
     [
       {
@@ -278,8 +278,8 @@ _host_group_endpoints = [
     "queryHostGroups",
     "GET",
     "/devices/queries/host-groups/v1",
-    "Search for Host Groups in your environment by providing an FQL filter and paging details. "
-    "Returns a set of Host Group IDs which match the filter criteria",
+    "Search for Host Groups in your environment by providing an FQL filter and paging details. Returns a set "
+    "of Host Group IDs which match the filter criteria",
     "host_group",
     [
       {
