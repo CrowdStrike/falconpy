@@ -312,7 +312,7 @@ class Result(BaseResult):
         _returned: Optional[str] = None
         if self.meta:
             _returned = self.meta.trace_id
-        elif self.headers:
+        elif self.headers:  # pragma: no cover
             _returned = self.headers.trace_id
         return _returned
 

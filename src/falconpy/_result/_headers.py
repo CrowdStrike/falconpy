@@ -78,6 +78,6 @@ class Headers(BaseDictionary):
         return self.get_property("X-Ratelimit-Remaining", None)
 
     @property
-    def trace_id(self) -> Optional[str]:
+    def trace_id(self) -> Optional[str]:  # pragma: no cover
         """Return the contents of the X-Cs-Traceid key."""
         return self.get_property("X-Cs-Traceid", None)
