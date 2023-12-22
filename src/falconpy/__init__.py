@@ -105,6 +105,7 @@ from .d4c_registration import D4CRegistration
 from .detects import Detects
 from .device_control_policies import DeviceControlPolicies
 from .discover import Discover
+from .drift_indicators import DriftIndicators
 from .event_streams import EventStreams
 from .falcon_complete_dashboard import CompleteDashboard
 from .falcon_container import FalconContainer
@@ -192,7 +193,7 @@ __all__ = [
     "RealTimeResponseAudit", "Workflows", "DeprecatedClass", "DeprecatedOperation",
     "SDKDeprecationWarning", "ConfigurationAssessmentEvaluationLogic", "ConfigurationAssessment",
     "ContainerAlerts", "ContainerDetections", "ContainerImages", "ContainerPackages", 
-    "ContainerVulnerabilities", "UnidentifiedContainers"
+    "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers"
     ]
 """
 This is free and unencumbered software released into the public domain.
