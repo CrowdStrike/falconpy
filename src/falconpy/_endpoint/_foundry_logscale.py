@@ -43,7 +43,15 @@ _foundry_logscale_endpoints = [
     "/loggingapi/combined/repos/v1",
     "Lists available repositories and views",
     "foundry_logscale",
-    []
+    [
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "Include whether test data is present in the application repository",
+        "name": "check_test_data",
+        "in": "query"
+      }
+    ]
   ],
   [
     "IngestDataV1",
@@ -90,6 +98,12 @@ _foundry_logscale_endpoints = [
     "Execute a dynamic saved search",
     "foundry_logscale",
     [
+      {
+        "type": "string",
+        "description": "Application ID.",
+        "name": "app_id",
+        "in": "query"
+      },
       {
         "type": "boolean",
         "default": False,
@@ -143,6 +157,12 @@ _foundry_logscale_endpoints = [
         "required": True
       },
       {
+        "type": "string",
+        "description": "Application ID.",
+        "name": "app_id",
+        "in": "query"
+      },
+      {
         "minimum": 0,
         "type": "string",
         "description": "Maximum number of records to return.",
@@ -162,14 +182,6 @@ _foundry_logscale_endpoints = [
         "description": "Starting pagination offset of records to return.",
         "name": "offset",
         "in": "query"
-      },
-      {
-        "pattern": "v?([0-9]+)(\\.[0-9]+)?(\\.[0-9]+)?(-([0-9A-Za-z\\-]+"
-        "(\\.[0-9A-Za-z\\-]+)*))?(\\+([0-9A-Za-z\\-]+(\\.[0-9A-Za-z\\-]+)*))?",
-        "type": "string",
-        "description": "Version of resource being created",
-        "name": "version",
-        "in": "query"
       }
     ]
   ],
@@ -180,6 +192,12 @@ _foundry_logscale_endpoints = [
     "Execute a saved search",
     "foundry_logscale",
     [
+      {
+        "type": "string",
+        "description": "Application ID.",
+        "name": "app_id",
+        "in": "query"
+      },
       {
         "type": "boolean",
         "default": False,
@@ -202,26 +220,6 @@ _foundry_logscale_endpoints = [
         "in": "query"
       },
       {
-        "enum": [
-          "sync",
-          "async",
-          "async_offload"
-        ],
-        "type": "string",
-        "description": "Mode to execute the query under.  "
-        "If provided, takes precedence over the mode provided in the body.",
-        "name": "mode",
-        "in": "query"
-      },
-      {
-        "pattern": "v?([0-9]+)(\\.[0-9]+)?(\\.[0-9]+)?(-([0-9A-Za-z\\-]+"
-        "(\\.[0-9A-Za-z\\-]+)*))?(\\+([0-9A-Za-z\\-]+(\\.[0-9A-Za-z\\-]+)*))?",
-        "type": "string",
-        "description": "Version of resource being created",
-        "name": "version",
-        "in": "query"
-      },
-      {
         "name": "body",
         "in": "body",
         "required": True
@@ -234,7 +232,14 @@ _foundry_logscale_endpoints = [
     "/loggingapi/entities/saved-searches/ingest/v1",
     "Populate a saved search",
     "foundry_logscale",
-    []
+    [
+      {
+        "type": "string",
+        "description": "Application ID.",
+        "name": "app_id",
+        "in": "query"
+      }
+    ]
   ],
   [
     "GetSavedSearchesJobResultsDownloadV1",
@@ -268,6 +273,14 @@ _foundry_logscale_endpoints = [
     "/loggingapi/entities/views/v1",
     "List views",
     "foundry_logscale",
-    []
+    [
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "Include whether test data is present in the application repository",
+        "name": "check_test_data",
+        "in": "query"
+      }
+    ]
   ]
 ]
