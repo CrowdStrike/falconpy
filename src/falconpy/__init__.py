@@ -94,6 +94,7 @@ from .configuration_assessment_evaluation_logic import ConfigurationAssessmentEv
 from .configuration_assessment import ConfigurationAssessment
 from .container_alerts import ContainerAlerts
 from .container_detections import ContainerDetections
+from .container_images import ContainerImages
 from .cloud_connect_aws import CloudConnectAWS
 from .cspm_registration import CSPMRegistration
 from .custom_ioa import CustomIOA
@@ -188,7 +189,7 @@ __all__ = [
     "UnnecessaryEncodingUsed", "APIHarnessV2", "CustomStorage", "FoundryLogScale",
     "RealTimeResponseAudit", "Workflows", "DeprecatedClass", "DeprecatedOperation",
     "SDKDeprecationWarning", "ConfigurationAssessmentEvaluationLogic", "ConfigurationAssessment",
-    "ContainerAlerts", "ContainerDetections", "UnidentifiedContainers"
+    "ContainerAlerts", "ContainerDetections", "ContainerImages", "UnidentifiedContainers"
     ]
 """
 This is free and unencumbered software released into the public domain.
