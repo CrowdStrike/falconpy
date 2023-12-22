@@ -136,10 +136,52 @@ _falcon_complete_dashboard_endpoints = [
     ]
   ],
   [
+    "AggregatePreventionPolicy",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/prevention-policies/v1",
+    "Retrieve prevention policies aggregate values based on the matched filter",
+    "falcon_complete_dashboard",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "AggregateRemediations",
     "POST",
     "/falcon-complete-dashboards/aggregates/remediations/GET/v1",
     "Retrieve aggregate remediation ticket values based on the matched filter",
+    "falcon_complete_dashboard",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "AggregateSensorUpdatePolicy",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/sensor-update-policies/v1",
+    "Retrieve sensor update policies aggregate values",
+    "falcon_complete_dashboard",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "AggregateTotalDeviceCounts",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/total-device-counts/v1",
+    "Retrieve aggregate total host/devices based on the matched filter",
     "falcon_complete_dashboard",
     [
       {
