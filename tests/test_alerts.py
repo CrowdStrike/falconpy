@@ -48,14 +48,50 @@ class TestAlerts:
                 time_zone="string",
                 type="string"
             ),
-            "update_alerts": falcon.update_alerts(ids="12345678",
-                                                  show_in_ui=False,
-                                                  action_parameters=[{
-                                                      "show_in_ui": False
-                                                      }]
-                                                  ),
-            "get_alerts": falcon.get_alerts(ids="12345678"),
-            "query_alerts": falcon.query_alerts()
+            "aggregate_alerts_v2": falcon.get_aggregate_alerts_v2(
+                date_ranges=[
+                    {
+                        "from": "string",
+                        "to": "string"
+                    }
+                ],
+                field="string",
+                filter="string",
+                interval="string",
+                min_doc_count=0,
+                missing="string",
+                name="string",
+                q="string",
+                ranges=[
+                    {
+                        "From": 0,
+                        "To": 0
+                    }
+                ],
+                size=0,
+                sort="string",
+                sub_aggregates=[
+                    "string"
+                ],
+                time_zone="string",
+                type="string"
+            ),
+            "update_alerts_v1": falcon.update_alerts_v2(ids="12345678",
+                                                     show_in_ui=False,
+                                                     action_parameters=[{
+                                                         "show_in_ui": False
+                                                         }]
+                                                     ),
+            "update_alerts_v2": falcon.update_alerts_v3(ids="12345678",
+                                                     show_in_ui=False,
+                                                     action_parameters=[{
+                                                            "show_in_ui": False
+                                                         }]
+                                                     ),  
+            "get_alerts_v1": falcon.get_alerts_v1(ids="12345678"),
+            "get_alerts_v2": falcon.get_alerts_v2(ids="12345678"),
+            "query_alerts_v1": falcon.query_alerts_v1(),
+            "query_alerts_v2": falcon.query_alerts_v2()
 
         }
         for key in tests:
