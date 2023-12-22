@@ -41,11 +41,26 @@ _alerts_endpoints = [
     "PostAggregatesAlertsV1",
     "POST",
     "/alerts/aggregates/alerts/v1",
-    "retrieves aggregates for Alerts across all CIDs",
+    "retrieves aggregate values for Alerts across all CIDs",
     "alerts",
     [
       {
-        "description": "request body takes a list of aggregation query requests",
+        "description": "request body takes a list of aggregate-alert query requests",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "PostAggregatesAlertsV2",
+    "POST",
+    "/alerts/aggregates/alerts/v2",
+    "retrieves aggregate values for Alerts across all CIDs",
+    "alerts",
+    [
+      {
+        "description": "request body takes a list of aggregate-alert query requests",
         "name": "body",
         "in": "body",
         "required": True
@@ -70,26 +85,36 @@ _alerts_endpoints = [
     "PatchEntitiesAlertsV1",
     "PATCH",
     "/alerts/entities/alerts/v1",
-    "Perform actions on detections identified by detection ID(s) in request.\n"
-    "Each action has a name and a description which describes what the action does.\n\n"
-    "remove_tag - remove a tag from 1 or more detection(s)\n"
-    "assign_to_user_id - assign 1 or more detection(s) to a user identified by user id "
-    "(eg: user1@example.com)\nunassign - unassign an previously assigned user from 1 or "
-    "more detection(s). The value passed to this action is ignored.\nnew_behavior_processed "
-    "- adds a newly processed behavior to 1 or more detection(s)\nupdate_status - update "
-    "status for 1 or more detection(s)\nassign_to_uuid - assign 1 or more detection(s) to "
-    "a user identified by UUID\nadd_tag - add a tag to 1 or more detection(s)\n"
-    "remove_tags_by_prefix - remove tags with given prefix from 1 or more detection(s)\n"
-    "append_comment - appends new comment to existing comments\n"
-    "assign_to_name - assign 1 or more detection(s) to a user identified by user name\n"
-    "show_in_ui - shows 1 or more detection(s) on UI if set to true, hides otherwise. "
-    "an empty/nil value is also valid\nskip_side_effects - internal only command to skip "
+    "Perform actions on detections identified by detection ID(s) in request.\nEach action has a name and a "
+    "description which describes what the action does.\n\nremove_tag - remove a tag from 1 or more "
+    "detection(s)\nassign_to_user_id - assign 1 or more detection(s) to a user identified by user id (eg: "
+    "user1@example.com)\nunassign - unassign an previously assigned user from 1 or more detection(s). The value "
+    "passed to this action is ignored.\nnew_behavior_processed - adds a newly processed behavior to 1 or more "
+    "detection(s)\nupdate_status - update status for 1 or more detection(s)\nassign_to_uuid - assign 1 or more "
+    "detection(s) to a user identified by UUID\nadd_tag - add a tag to 1 or more "
+    "detection(s)\nremove_tags_by_prefix - remove tags with given prefix from 1 or more "
+    "detection(s)\nappend_comment - appends new comment to existing comments\nassign_to_name - assign 1 or more "
+    "detection(s) to a user identified by user name\nshow_in_ui - shows 1 or more detection(s) on UI if set to "
+    "true, hides otherwise. an empty/nil value is also valid\nskip_side_effects - internal only command to skip "
     "side effects during Beta phase\n",
     "alerts",
     [
       {
-        "description": "request body takes a list of action parameter request that is applied "
-        "against all \"ids\" provided",
+        "description": "request body takes a list of action parameter request that is applied against all \"ids\" provided",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "PostEntitiesAlertsV2",
+    "POST",
+    "/alerts/entities/alerts/v2",
+    "retrieves all Alerts given their composite ids",
+    "alerts",
+    [
+      {
         "name": "body",
         "in": "body",
         "required": True
@@ -100,26 +125,30 @@ _alerts_endpoints = [
     "PatchEntitiesAlertsV2",
     "PATCH",
     "/alerts/entities/alerts/v2",
-    "Perform actions on detections identified by detection ID(s) in request.\n"
-    "Each action has a name and a description which describes what the action does.\n\n"
-    "remove_tag - remove a tag from 1 or more detection(s)\n"
-    "assign_to_user_id - assign 1 or more detection(s) to a user identified by user id "
-    "(eg: user1@example.com)\nunassign - unassign an previously assigned user from 1 or "
-    "more detection(s). The value passed to this action is ignored.\nnew_behavior_processed "
-    "- adds a newly processed behavior to 1 or more detection(s)\nupdate_status - update "
-    "status for 1 or more detection(s)\nassign_to_uuid - assign 1 or more detection(s) to "
-    "a user identified by UUID\nadd_tag - add a tag to 1 or more detection(s)\n"
-    "remove_tags_by_prefix - remove tags with given prefix from 1 or more detection(s)\n"
-    "append_comment - appends new comment to existing comments\n"
-    "assign_to_name - assign 1 or more detection(s) to a user identified by user name\n"
-    "show_in_ui - shows 1 or more detection(s) on UI if set to true, hides otherwise. "
-    "an empty/nil value is also valid\nskip_side_effects - internal only command to skip "
-    "side effects during Beta phase\n",
+    "Perform actions on detections identified by detection ID(s) in request.\nEach action has a name and a "
+    "description which describes what the action does.\nIf a request adds and removes tag in a single request, the "
+    "order of processing would be to remove tags before adding new ones in.\n\n",
     "alerts",
     [
       {
-        "description": "request body takes a list of action parameter request that is applied "
-        "against all \"ids\" provided",
+        "description": "request body takes a list of action parameter request that is applied against all \"ids\" provided",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "PatchEntitiesAlertsV3",
+    "PATCH",
+    "/alerts/entities/alerts/v3",
+    "Perform actions on detections identified by detection ID(s) in request.\nEach action has a name and a "
+    "description which describes what the action does.\nIf a request adds and removes tag in a single request, the "
+    "order of processing would be to remove tags before adding new ones in.\n\n",
+    "alerts",
+    [
+      {
+        "description": "request body takes a list of action parameter request that is applied against all \"ids\" provided",
         "name": "body",
         "in": "body",
         "required": True
@@ -135,8 +164,8 @@ _alerts_endpoints = [
     [
       {
         "type": "integer",
-        "description": "The first detection to return, where `0` is the latest detection. "
-        "Use with the `offset` parameter to manage pagination of results.",
+        "description": "The first detection to return, where `0` is the latest detection. Use with the "
+        "`offset` parameter to manage pagination of results.",
         "name": "offset",
         "in": "query"
       },
@@ -144,24 +173,91 @@ _alerts_endpoints = [
         "maximum": 10000,
         "minimum": 0,
         "type": "integer",
-        "description": "The maximum number of detections to return in this response (default: 100; "
-        "max: 10000). Use with the `offset` parameter to manage pagination of results.",
+        "description": "The maximum number of detections to return in this response (default: 100; max: "
+        "10000). Use with the `offset` parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Sort detections in either `asc` (ascending) or `desc` (descending) order. "
-        "For example: `status|asc` or `status|desc`.",
+        "description": "Sort parameter takes the form <field|direction>. Direction can be either `asc` "
+        "(ascending) or `desc` (descending) order. For example: `status|asc` or `status|desc`.\n\nThe sorting fields "
+        "can be any keyword field that is part of #domain.Alert except for the text based fields. Most commonly used "
+        "fields are status, cid, aggregate_id, timestamp, created_timestamp, updated_timestamp, assigned_to_name, "
+        "assigned_to_uid, assigned_to_uuid, show_in_ui, tactic_id, tactic, technique, technique_id, pattern_id, "
+        "product, comment, tags\nIf the fields are missing from the Alerts, the service will fallback to its default "
+        "ordering ",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Filter detections using a query in Falcon Query Language (FQL). "
-        "An asterisk wildcard `*` includes all results. \n\nThe full list of valid filter options "
-        "is extensive. Review it in our [documentation inside the Falcon console]"
-        "(https://falcon.crowdstrike.com/documentation/45/falcon-query-language-fql).",
+        "description": "Filter Alerts using a query in Falcon Query Language (FQL).Filter fields can be any "
+        "keyword field that is part of #domain.Alert \nAn asterisk wildcard `*` includes all results.  \nEmpty value "
+        "means to not filter on anything.\nMost commonly used filter fields that supports exact match: cid, id, "
+        "aggregate_id, product, type, pattern_id, platform ...\nMost commonly used filter fields that supports wildcard "
+        " (*): assigned_to_name, assigned_to_uuid, tactic_id, technique ...\nMost commonly filter fields that supports "
+        "range comparisons (>, <, >=, <=): severity, created_timestamp, timestamp, updated_timestamp...\nAll filter "
+        "fields and operations support negation (!).\n\n\nThe full list of valid filter options is extensive. Review it "
+        " in our [documentation inside the Falcon console](https://falcon.crowdstrike.com/documentation/45/falcon-"
+        "query-language-fql).",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Search all detection metadata for the provided string",
+        "name": "q",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetQueriesAlertsV2",
+    "GET",
+    "/alerts/queries/alerts/v2",
+    "retrieves all Alerts ids that match a given query",
+    "alerts",
+    [
+      {
+        "type": "integer",
+        "description": "The first detection to return, where `0` is the latest detection. Use with the "
+        "`offset` parameter to manage pagination of results.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "maximum": 10000,
+        "minimum": 0,
+        "type": "integer",
+        "description": "The maximum number of detections to return in this response (default: 100; max: "
+        "10000). Use with the `offset` parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort parameter takes the form <field|direction>. Direction can be either `asc` "
+        "(ascending) or `desc` (descending) order. For example: `status|asc` or `status|desc`.\n\nThe sorting fields "
+        "can be any keyword field that is part of #domain.Alert except for the text based fields. Most commonly used "
+        "fields are status, cid, aggregate_id, timestamp, created_timestamp, updated_timestamp, assigned_to_name, "
+        "assigned_to_uid, assigned_to_uuid, show_in_ui, tactic_id, tactic, technique, technique_id, pattern_id, "
+        "product, comment, tags\nIf the fields are missing from the Alerts, the service will fallback to its default "
+        "ordering ",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter Alerts using a query in Falcon Query Language (FQL).Filter fields can be any "
+        "keyword field that is part of #domain.Alert \nAn asterisk wildcard `*` includes all results.  \nEmpty value "
+        "means to not filter on anything.\nMost commonly used filter fields that supports exact match: cid, id, "
+        "aggregate_id, product, type, pattern_id, platform ...\nMost commonly used filter fields that supports wildcard "
+        " (*): assigned_to_name, assigned_to_uuid, tactic_id, technique ...\nMost commonly filter fields that supports "
+        "range comparisons (>, <, >=, <=): severity, created_timestamp, timestamp, updated_timestamp...\nAll filter "
+        "fields and operations support negation (!).\n\n\nThe full list of valid filter options is extensive. Review it "
+        " in our [documentation inside the Falcon console](https://falcon.crowdstrike.com/documentation/45/falcon-"
+        "query-language-fql).",
         "name": "filter",
         "in": "query"
       },
