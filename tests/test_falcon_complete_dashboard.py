@@ -85,6 +85,9 @@ class TestFalconCompleteDashboard:
             "AggregateEscalations": falcon.aggregate_escalations(),
             "AggregateFCIncidents": falcon.aggregate_fc_incidents(),
             "AggregateRemediations": falcon.aggregate_remediations(),
+            "AggregatePreventionPolicy": falcon.aggregate_prevention_policy(),
+            "AggregateSensorUpdatePolicy": falcon.aggregate_sensor_update_policy(),
+            "AggregateTotalDeviceCounts": falcon.aggregate_total_device_counts()
 
         }
         for key in tests:
