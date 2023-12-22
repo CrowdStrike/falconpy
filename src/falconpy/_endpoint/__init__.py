@@ -47,6 +47,7 @@ from ._configuration_assessment import _configuration_assessment_endpoints
 from ._container_alerts import _container_alerts_endpoints
 from ._container_detections import _container_detections_endpoints
 from ._container_images import _container_images_endpoints
+from ._container_packages import _container_packages_endpoints
 from ._cspm_registration import _cspm_registration_endpoints
 from ._custom_ioa import _custom_ioa_endpoints
 from ._custom_storage import _custom_storage_endpoints
@@ -111,6 +112,7 @@ api_endpoints.extend(_configuration_assessment_endpoints)
 api_endpoints.extend(_container_alerts_endpoints)
 api_endpoints.extend(_container_detections_endpoints)
 api_endpoints.extend(_container_images_endpoints)
+api_endpoints.extend(_container_packages_endpoints)
 api_endpoints.extend(_cspm_registration_endpoints)
 api_endpoints.extend(_custom_ioa_endpoints)
 api_endpoints.extend(_custom_storage_endpoints)
