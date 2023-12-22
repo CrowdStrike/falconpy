@@ -192,7 +192,7 @@ __all__ = [
     "UnnecessaryEncodingUsed", "APIHarnessV2", "CustomStorage", "FoundryLogScale",
     "RealTimeResponseAudit", "Workflows", "DeprecatedClass", "DeprecatedOperation",
     "SDKDeprecationWarning", "ConfigurationAssessmentEvaluationLogic", "ConfigurationAssessment",
-    "ContainerAlerts", "ContainerDetections", "ContainerImages", "ContainerPackages", 
+    "ContainerAlerts", "ContainerDetections", "ContainerImages", "ContainerPackages",
     "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers"
     ]
 """
