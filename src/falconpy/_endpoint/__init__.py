@@ -42,6 +42,7 @@ from .deprecated import _deprecated_class_mapping
 from ._alerts import _alerts_endpoints
 from ._cloud_connect_aws import _cloud_connect_aws_endpoints
 from ._cloud_snapshots import _cloud_snapshots_endpoints
+from ._configuration_assessment_evaluation_logic import _configuration_assessment_evaluation_logic_endpoints
 from ._cspm_registration import _cspm_registration_endpoints
 from ._custom_ioa import _custom_ioa_endpoints
 from ._custom_storage import _custom_storage_endpoints
@@ -100,6 +101,7 @@ api_endpoints: List[Any] = []
 api_endpoints.extend(_alerts_endpoints)
 api_endpoints.extend(_cloud_connect_aws_endpoints)
 api_endpoints.extend(_cloud_snapshots_endpoints)
+api_endpoints.extend(_configuration_assessment_evaluation_logic_endpoints)
 api_endpoints.extend(_cspm_registration_endpoints)
 api_endpoints.extend(_custom_ioa_endpoints)
 api_endpoints.extend(_custom_storage_endpoints)
