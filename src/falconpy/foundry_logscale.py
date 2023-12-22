@@ -55,13 +55,16 @@ class FoundryLogScale(ServiceClass):
     - a valid token provided by the authentication service class (oauth2.py)
     """
 
-    def list_repos(self: object) -> Dict[str, Union[int, dict]]:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_repos(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """List available repositories and views.
 
         Keyword arguments:
-        This method does not accept keyword arguments.
+        check_test_data -- Include whether test data is present in the application repository. Boolean.
+        parameters - full parameters payload, not required if using other keywords.
 
-        This method does not accept arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'check_test_data'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -73,7 +76,9 @@ class FoundryLogScale(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="ListReposV1"
+            operation_id="ListReposV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "check_test_data")
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
@@ -127,6 +132,7 @@ class FoundryLogScale(ServiceClass):
         """Deploy a saved search.
 
         Keyword arguments:
+        app_id -- Application ID. String.
         body -- full body payload, not required if using other keywords.
                 {
                     "end": "string",
@@ -171,6 +177,7 @@ class FoundryLogScale(ServiceClass):
         """Get the results of a saved search.
 
         Keyword arguments:
+        app_id -- Application ID. String.
         job_id -- Job ID for a previously executed asynchronous query. String.
         limit -- The maximum number of records to return in this response. Integer.
                  Use with the offset parameter to manage pagination of results.
@@ -178,7 +185,6 @@ class FoundryLogScale(ServiceClass):
         offset -- The offset to start retrieving records from. String.
                   Use with the limit parameter to manage pagination of results.
         parameters - full parameters payload, not required if using other keywords.
-        version -- Version of the resource. String.
 
         This method only supports keywords for providing arguments.
 
@@ -206,6 +212,7 @@ class FoundryLogScale(ServiceClass):
         """Deploy a saved search.
 
         Keyword arguments:
+        app_id -- Application ID. String.
         body -- full body payload, not required if using other keywords.
                 {
                     "end": "string",
@@ -233,15 +240,15 @@ class FoundryLogScale(ServiceClass):
                     ],
                     "with_sort": {
                         "fields": [
-                        "string"
+                            "string"
                         ],
                         "limit": 0,
                         "order": [
-                        "string"
+                            "string"
                         ],
                         "reverse": true,
                         "type": [
-                        "string"
+                            "string"
                         ]
                     }
                 }
@@ -250,12 +257,10 @@ class FoundryLogScale(ServiceClass):
         id -- Saved search ID. String.
         include_test_data -- Include test data when executing searches. Boolean.
         metadata -- Include metadata in the response. Boolean.
-        mode -- Mode to execute the query under (async, async_offload or sync). String.
         name -- Saved search name. String.
         search_parameters -- Search specific parameters. Dictionary.
                              NOT to be confused with the default parameters dictionary.
         start -- Starting position. String.
-        version -- Version of the search. String.
         with_in -- With in. Dictionary.
         with_limit -- With limit. Dictionary.
         with_renames -- With renames. Dictionary.
@@ -333,12 +338,16 @@ class FoundryLogScale(ServiceClass):
             params=parameters
             )
 
-    def list_views(self: object) -> Dict[str, Union[int, dict]]:
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_views(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """List views.
 
-        Keyword arguments: This method does not accept keyword arguments.
+        Keyword arguments:
+        check_test_data -- Include whether test data is present in the application repository. Boolean.
+        parameters - full parameters payload, not required if using other keywords.
 
-        Arguments: This method does not accept arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'check_test_data'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -350,7 +359,9 @@ class FoundryLogScale(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="ListViewV1"
+            operation_id="ListViewV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "check_test_data")
             )
 
     # These method names align to the operation IDs in the API but
