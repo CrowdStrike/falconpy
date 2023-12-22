@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302, R0904
 from typing import Dict, Union
 from ._util import process_service_request, force_default, handle_single_argument
 from ._service_class import ServiceClass
@@ -53,6 +54,1487 @@ class KubernetesProtection(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
+    def read_clusters_by_date_range(self: object) -> Dict[str, Union[int, dict]]:
+        """Retrieve clusters by date range counts.
+
+        Keyword arguments:
+        This method does not accept keyword arguments.
+
+        This method does not accept arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadClustersByDateRangeCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadClustersByDateRangeCount"
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_clusters_by_version(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Bucket clusters by kubernetes version.
+
+        Keyword arguments:
+        filter -- Retrieve count of Kubernetes clusters that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    access                  cluster_status
+                    agent_status            container_count
+                    cid                     kubernetes_version
+                    cloud_account_id        last_seen
+                    cloud_name              management_status
+                    cloud_region            node_count
+                    cluster_id              pod_count
+                    cluster_name            tags
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                /kubernetes-protection/ReadClustersByKubernetesVersionCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadClustersByKubernetesVersionCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_clusters_by_status(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Bucket clusters by status.
+
+        Keyword arguments:
+        filter -- Retrieve count of Kubernetes clusters that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    access                  cluster_status
+                    agent_status            container_count
+                    cid                     kubernetes_version
+                    cloud_account_id        last_seen
+                    cloud_name              management_status
+                    cloud_region            node_count
+                    cluster_id              pod_count
+                    cluster_name            tags
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadClustersByStatusCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadClustersByStatusCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_cluster_count(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve cluster counts.
+
+        Keyword arguments:
+        filter -- Retrieve count of Kubernetes clusters that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    access                  cluster_status
+                    agent_status            container_count
+                    cid                     kubernetes_version
+                    cloud_account_id        last_seen
+                    cloud_name              management_status
+                    cloud_region            node_count
+                    cluster_id              pod_count
+                    cluster_name            tags
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadClusterCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadClusterCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_containers_by_date_range(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve containers by date range counts.
+
+        Keyword arguments:
+        filter -- Get container counts using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    agent_id                    image_vulnerability_count
+                    agent_type                  insecure_mount_source
+                    allow_privilege_escalation  insecure_mount_type
+                    cid                         insecure_propagation_mode
+                    cloud_account_id            interactive_mode
+                    cloud_name                  ipv4
+                    cloud_region                ipv6
+                    cluster_id                  labels
+                    cluster_name                last_seen
+                    container_id                namespace
+                    container_name              node_name
+                    cve_id                      node_uid
+                    detection_name              package_name_version
+                    first_seen                  pod_id
+                    image_detection_count       pod_name
+                    image_digest                port
+                    image_has_been_assessed     privileged
+                    image_id                    root_write_access
+                    image_registry              run_as_root_group
+                    image_repository            run_as_root_user
+                    image_tag                   running_status
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadContainersByDateRangeCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadContainersByDateRangeCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_containers_by_registry(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve top container image registries.
+
+        Keyword arguments:
+        under_assessment -- Flag indicating whether to return registries under assessment or not under assessment.
+                            If not provided all registries are considered. Boolean. Defaults to False.
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadContainerCountByRegistry
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadContainerCountByRegistry",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    def read_zero_day_affected_counts(self: object) -> Dict[str, Union[int, dict]]:
+        """Retrieve containers count affected by zero day vulnerabilities.
+
+        Keyword arguments:
+        This method does not accept keyword arguments.
+
+        This method does not accept arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                /kubernetes-protection/FindContainersCountAffectedByZeroDayVulnerabilities
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="FindContainersCountAffectedByZeroDayVulnerabilities"
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_vulnerable_container_count(self: object,
+                                        *args,
+                                        parameters: dict = None,
+                                        **kwargs
+                                        ) -> Dict[str, Union[int, dict]]:
+        """Retrieve count of vulnerable images running on containers.
+
+        Keyword arguments:
+        filter -- Retrieve count of Kubernetes containers that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    agent_id                    image_vulnerability_count
+                    agent_type                  insecure_mount_source
+                    allow_privilege_escalation  insecure_mount_type
+                    cid                         insecure_propagation_mode
+                    cloud_account_id            interactive_mode
+                    cloud_name                  ipv4
+                    cloud_region                ipv6
+                    cluster_id                  labels
+                    cluster_name                last_seen
+                    container_id                namespace
+                    container_name              node_name
+                    cve_id                      node_uid
+                    detection_name              package_name_version
+                    first_seen                  pod_id
+                    image_detection_count       pod_name
+                    image_digest                port
+                    image_has_been_assessed     privileged
+                    image_id                    root_write_access
+                    image_registry              run_as_root_group
+                    image_repository            run_as_root_user
+                    image_tag                   running_status
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                /kubernetes-protection/ReadVulnerableContainerImageCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadVulnerableContainerImageCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_container_counts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve container counts.
+
+        Keyword arguments:
+        filter -- Retrieve count of Kubernetes containers that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    agent_id                    image_vulnerability_count
+                    agent_type                  insecure_mount_source
+                    allow_privilege_escalation  insecure_mount_type
+                    cid                         insecure_propagation_mode
+                    cloud_account_id            interactive_mode
+                    cloud_name                  ipv4
+                    cloud_region                ipv6
+                    cluster_id                  labels
+                    cluster_name                last_seen
+                    container_id                namespace
+                    container_name              node_name
+                    cve_id                      node_uid
+                    detection_name              package_name_version
+                    first_seen                  pod_id
+                    image_detection_count       pod_name
+                    image_digest                port
+                    image_has_been_assessed     privileged
+                    image_id                    root_write_access
+                    image_registry              run_as_root_group
+                    image_repository            run_as_root_user
+                    image_tag                   running_status
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadContainerCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadContainerCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def find_containers_by_runtime_version(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve containers by container_runtime_version.
+
+        Keyword arguments:
+        limit -- The upper-bound on the number of container records to retrieve.
+        offset -- It is used to get the offset
+        sort -- Field to sort results by
+        filter -- Retrieve count of Kubernetes containers that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    agent_id                    image_vulnerability_count
+                    agent_type                  insecure_mount_source
+                    allow_privilege_escalation  insecure_mount_type
+                    cid                         insecure_propagation_mode
+                    cloud_account_id            interactive_mode
+                    cloud_name                  ipv4
+                    cloud_region                ipv6
+                    cluster_id                  labels
+                    cluster_name                last_seen
+                    container_id                namespace
+                    container_name              node_name
+                    cve_id                      node_uid
+                    detection_name              package_name_version
+                    first_seen                  pod_id
+                    image_detection_count       pod_name
+                    image_digest                port
+                    image_has_been_assessed     privileged
+                    image_id                    root_write_access
+                    image_registry              run_as_root_group
+                    image_repository            run_as_root_user
+                    image_tag                   running_status
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/FindContainersByContainerRunTimeVersion
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="FindContainersByContainerRunTimeVersion",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def group_managed_containers(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Group the containers by Managed.
+
+        Keyword arguments:
+        filter -- Retrieve count of Kubernetes containers that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    agent_id                    image_vulnerability_count
+                    agent_type                  insecure_mount_source
+                    allow_privilege_escalation  insecure_mount_type
+                    cid                         insecure_propagation_mode
+                    cloud_account_id            interactive_mode
+                    cloud_name                  ipv4
+                    cloud_region                ipv6
+                    cluster_id                  labels
+                    cluster_name                last_seen
+                    container_id                namespace
+                    container_name              node_name
+                    cve_id                      node_uid
+                    detection_name              package_name_version
+                    first_seen                  pod_id
+                    image_detection_count       pod_name
+                    image_digest                port
+                    image_has_been_assessed     privileged
+                    image_id                    root_write_access
+                    image_registry              run_as_root_group
+                    image_repository            run_as_root_user
+                    image_tag                   running_status
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/GroupContainersByManaged
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GroupContainersByManaged",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_detections_count_by_date(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve count of image assessment detections on running containers over a period of time.
+
+        Keyword arguments:
+        filter -- Retrieve count of Kubernetes containers that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    agent_id                    image_vulnerability_count
+                    agent_type                  insecure_mount_source
+                    allow_privilege_escalation  insecure_mount_type
+                    cid                         insecure_propagation_mode
+                    cloud_account_id            interactive_mode
+                    cloud_name                  ipv4
+                    cloud_region                ipv6
+                    cluster_id                  labels
+                    cluster_name                last_seen
+                    container_id                namespace
+                    container_name              node_name
+                    cve_id                      node_uid
+                    detection_name              package_name_version
+                    first_seen                  pod_id
+                    image_detection_count       pod_name
+                    image_digest                port
+                    image_has_been_assessed     privileged
+                    image_id                    root_write_access
+                    image_registry              run_as_root_group
+                    image_repository            run_as_root_user
+                    image_tag                   running_status
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                /kubernetes-protection/ReadContainerImageDetectionsCountByDate
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadContainerImageDetectionsCountByDate",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_images_by_state(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve count of image states running on containers.
+
+        Keyword arguments:
+        filter -- Filter using a query in Falcon Query Language (FQL). String.
+                  Supported filters: cid
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadContainerImagesByState
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadContainerImagesByState",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_sensor_coverage(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Bucket containers by agent type and calculate sensor coverage.
+
+        Keyword arguments:
+        filter -- Retrieve count of Kubernetes containers that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    agent_id                    image_vulnerability_count
+                    agent_type                  insecure_mount_source
+                    allow_privilege_escalation  insecure_mount_type
+                    cid                         insecure_propagation_mode
+                    cloud_account_id            interactive_mode
+                    cloud_name                  ipv4
+                    cloud_region                ipv6
+                    cluster_id                  labels
+                    cluster_name                last_seen
+                    container_id                namespace
+                    container_name              node_name
+                    cve_id                      node_uid
+                    detection_name              package_name_version
+                    first_seen                  pod_id
+                    image_detection_count       pod_name
+                    image_digest                port
+                    image_has_been_assessed     privileged
+                    image_id                    root_write_access
+                    image_registry              run_as_root_group
+                    image_repository            run_as_root_user
+                    image_tag                   running_status
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadContainersSensorCoverage
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadContainersSensorCoverage",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_vulnerability_counts_by_severity(self: object,
+                                              *args,
+                                              parameters: dict = None,
+                                              **kwargs
+                                              ) -> Dict[str, Union[int, dict]]:
+        """Retrieve container vulnerabilities by severity counts.
+
+        Keyword arguments:
+        filter -- Get vulnerabilities count by severity for container using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    agent_id                    image_vulnerability_count
+                    agent_type                  insecure_mount_source
+                    allow_privilege_escalation  insecure_mount_type
+                    cid                         insecure_propagation_mode
+                    cloud_account_id            interactive_mode
+                    cloud_name                  ipv4
+                    cloud_region                ipv6
+                    cluster_id                  labels
+                    cluster_name                last_seen
+                    container_id                namespace
+                    container_name              node_name
+                    cve_id                      node_uid
+                    detection_name              package_name_version
+                    first_seen                  pod_id
+                    image_detection_count       pod_name
+                    image_digest                port
+                    image_has_been_assessed     privileged
+                    image_id                    root_write_access
+                    image_registry              run_as_root_group
+                    image_repository            run_as_root_user
+                    image_tag                   running_status
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                /kubernetes-protection/ReadContainerVulnerabilitiesBySeverityCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadContainerVulnerabilitiesBySeverityCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    def read_deployment_counts_by_date_range(self: object) -> Dict[str, Union[int, dict]]:
+        """Retrieve deployments by date range counts.
+
+        Keyword arguments:
+        This method does not accept keyword arguments.
+
+        This method does not accept arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadDeploymentsByDateRangeCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadDeploymentsByDateRangeCount"
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_deployment_count(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve deployment counts.
+
+        Keyword arguments:
+        filter -- Retrieve count of Kubernetes deployments that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    annotations_list    deployment_id
+                    cid                 deployment_name
+                    cloud_account_id    first_seen
+                    cloud_name          last_seen
+                    cloud_region        namespace
+                    cluster_id          pod_count
+                    cluster_name
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadDeploymentCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadDeploymentCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_cluster_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve cluster enrichment data.
+
+        Keyword arguments:
+        cluster_id -- One or more cluster ids for which to retrieve enrichment info
+        filter -- Supported filters:  last_seen
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadClusterEnrichment
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadClusterEnrichment",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_container_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve container enrichment data.
+
+        Keyword arguments:
+        container_id -- One or more container ids for which to retrieve enrichment info
+        filter -- Supported filters:  last_seen
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadContainerEnrichment
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadContainerEnrichment",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_deployment_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve deployment enrichment data.
+
+        Keyword arguments:
+        deployment_id -- One or more deployment ids for which to retrieve enrichment info
+        filter -- Supported filters:  last_seen
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadDeploymentEnrichment
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadDeploymentEnrichment",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_node_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve node enrichment data.
+
+        Keyword arguments:
+        node_name -- One or more node names for which to retrieve enrichment info
+        filter -- Supported filters:  last_seen
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadNodeEnrichment
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadNodeEnrichment",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_pod_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve pod enrichment data.
+
+        Keyword arguments:
+        pod_id -- One or more pod ids for which to retrieve enrichment info
+        filter -- Supported filters:  last_seen
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadPodEnrichment
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadPodEnrichment",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_distinct_image_count(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve count of distinct images running on containers.
+
+        Keyword arguments:
+        filter -- Search Kubernetes containers using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    agent_id                    image_vulnerability_count
+                    agent_type                  insecure_mount_source
+                    allow_privilege_escalation  insecure_mount_type
+                    cid                         insecure_propagation_mode
+                    cloud_account_id            interactive_mode
+                    cloud_name                  ipv4
+                    cloud_region                ipv6
+                    cluster_id                  labels
+                    cluster_name                last_seen
+                    container_id                namespace
+                    container_name              node_name
+                    cve_id                      node_uid
+                    detection_name              package_name_version
+                    first_seen                  pod_id
+                    image_detection_count       pod_name
+                    image_digest                port
+                    image_has_been_assessed     privileged
+                    image_id                    root_write_access
+                    image_registry              run_as_root_group
+                    image_repository            run_as_root_user
+                    image_tag                   running_status
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadDistinctContainerImageCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadDistinctContainerImageCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_images_by_most_used(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Bucket container by image-digest.
+
+        Keyword arguments:
+        filter -- Retrieve count of Kubernetes containers that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    agent_id                    image_vulnerability_count
+                    agent_type                  insecure_mount_source
+                    allow_privilege_escalation  insecure_mount_type
+                    cid                         insecure_propagation_mode
+                    cloud_account_id            interactive_mode
+                    cloud_name                  ipv4
+                    cloud_region                ipv6
+                    cluster_id                  labels
+                    cluster_name                last_seen
+                    container_id                namespace
+                    container_name              node_name
+                    cve_id                      node_uid
+                    detection_name              package_name_version
+                    first_seen                  pod_id
+                    image_detection_count       pod_name
+                    image_digest                port
+                    image_has_been_assessed     privileged
+                    image_id                    root_write_access
+                    image_registry              run_as_root_group
+                    image_repository            run_as_root_user
+                    image_tag                   running_status
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadContainerImagesByMostUsed
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadContainerImagesByMostUsed",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_iom_count_by_date_range(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Return the count of Kubernetes IOMs by the date. by default it's for 7 days.
+
+        Keyword arguments:
+        filter -- Filter images using a query in Falcon Query Language (FQL). String.
+                  Supported filters: cid, created_timestamp, detect_timestamp, severity
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadKubernetesIomByDateRange
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadKubernetesIomByDateRange",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_iom_count(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Return the total count of Kubernetes IOMs over the past seven days.
+
+        Keyword arguments:
+        filter -- Filter images using a query in Falcon Query Language (FQL). String.
+                  Supported filters: cid, created_timestamp, detect_timestamp, severity
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadKubernetesIomCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadKubernetesIomCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_node_counts_by_cloud(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Bucket nodes by cloud providers.
+
+        Keyword arguments:
+        filter -- Search Kubernetes nodes using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    aid                 container_count
+                    annotations_list    container_runtime_version
+                    cid                 first_seen
+                    cloud_account_id    image_digest
+                    cloud_name          ipv4
+                    cloud_region        last_seen
+                    cluster_id          node_name
+                    cluster_name        pod_count
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadNodesByCloudCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadNodesByCloudCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_nodes_by_container_engine_version(self: object,
+                                               *args,
+                                               parameters: dict = None,
+                                               **kwargs
+                                               ) -> Dict[str, Union[int, dict]]:
+        """Bucket nodes by their container engine version.
+
+        Keyword arguments:
+        filter -- Search Kubernetes nodes using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    aid                 container_count
+                    annotations_list    container_runtime_version
+                    cid                 first_seen
+                    cloud_account_id    image_digest
+                    cloud_name          ipv4
+                    cloud_region        last_seen
+                    cluster_id          node_name
+                    cluster_name        pod_count
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                /kubernetes-protection/ReadNodesByContainerEngineVersionCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadNodesByContainerEngineVersionCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_node_counts_by_date_range(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve nodes by date range counts.
+
+        Keyword arguments:
+        filter -- Search Kubernetes nodes using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    aid                 container_count
+                    annotations_list    container_runtime_version
+                    cid                 first_seen
+                    cloud_account_id    image_digest
+                    cloud_name          ipv4
+                    cloud_region        last_seen
+                    cluster_id          node_name
+                    cluster_name        pod_count
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadNodesByDateRangeCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadNodesByDateRangeCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_node_counts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve node counts.
+
+        Keyword arguments:
+        filter -- Retrieve count of Kubernetes nodes that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    aid                 container_count
+                    annotations_list    container_runtime_version
+                    cid                 first_seen
+                    cloud_account_id    image_digest
+                    cloud_name          ipv4
+                    cloud_region        last_seen
+                    cluster_id          node_name
+                    cluster_name        pod_count
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadNodeCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadNodeCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    def read_pod_counts_by_date_range(self: object) -> Dict[str, Union[int, dict]]:
+        """Retrieve pods by date range counts.
+
+        Keyword arguments:
+        This method does not accept keyword arguments.
+
+        This method does not accept arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadPodsByDateRangeCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadPodsByDateRangeCount"
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_pod_counts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve pod counts.
+
+        Keyword arguments:
+        filter -- Retrieve count of Kubernetes pods that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    agent_id                    last_seen
+                    agent_type                  namespace
+                    allow_privilege_escalation  node_name
+                    annotations_list            node_uid
+                    cid                         owner_id
+                    cloud_account_id            owner_type
+                    cloud_name                  pod_id
+                    cloud_region                pod_name
+                    cluster_id                  port
+                    cluster_name                privileged
+                    container_count             root_write_access
+                    ipv4                        run_as_root_group
+                    ipv6                        run_as_root_user
+                    labels
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadPodCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadPodCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_clusters_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve kubernetes clusters identified by the provided filter criteria.
+
+        Keyword arguments:
+        filter -- Search Kubernetes clusters using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    access              cluster_status
+                    agent_status        container_count
+                    cid                 kubernetes_version
+                    cloud_account_id    last_seen
+                    cloud_name          management_status
+                    cloud_region        node_count
+                    cluster_id          pod_count
+                    cluster_name        tags
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        offset -- The offset from where to begin. Integer.
+        sort -- Field to sort results by. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadClusterCombined
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadClusterCombined",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_running_images(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve images on running containers.
+
+        Keyword arguments:
+        filter -- Retrieve list of images on running containers using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    cid                         image_registry
+                    hosts                       image_repository
+                    image_digest                image_tag
+                    image_has_been_assessed     last_seen
+                    image_id                    running_status
+                    image_name
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        offset -- The offset from where to begin. Integer.
+        sort -- Field to sort results by. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadRunningContainerImages
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadRunningContainerImages",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_containers_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve containers identified by the provided filter criteria.
+
+        Keyword arguments:
+        filter -- Search Kubernetes containers using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    agent_id                    image_vulnerability_count
+                    agent_type                  insecure_mount_source
+                    allow_privilege_escalation  insecure_mount_type
+                    cid                         insecure_propagation_mode
+                    cloud_account_id            interactive_mode
+                    cloud_name                  ipv4
+                    cloud_region                ipv6
+                    cluster_id                  labels
+                    cluster_name                last_seen
+                    container_id                namespace
+                    container_name              node_name
+                    cve_id                      node_uid
+                    detection_name              package_name_version
+                    first_seen                  pod_id
+                    image_detection_count       pod_name
+                    image_digest                port
+                    image_has_been_assessed     privileged
+                    image_id                    root_write_access
+                    image_registry              run_as_root_group
+                    image_repository            run_as_root_user
+                    image_tag                   running_status
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        offset -- The offset from where to begin. Integer.
+        sort -- Field to sort results by. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadContainerCombined
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadContainerCombined",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_deployments_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve kubernetes deployments identified by the provided filter criteria.
+
+        Keyword arguments:
+        filter -- Search Kubernetes deployments using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    annotations_list    deployment_id
+                    cid                 deployment_name
+                    cloud_account_id    first_seen
+                    cloud_name          last_seen
+                    cloud_region        namespace
+                    cluster_id          pod_count
+                    cluster_name
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        offset -- The offset from where to begin. Integer.
+        sort -- Field to sort results by. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadDeploymentCombined
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadDeploymentCombined",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_and_read_ioms(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search Kubernetes IOM by the provided search criteria.
+
+        Keyword arguments:
+        filter -- Search Kubernetes IOMs using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    cid                         name
+                    cis_id                      namespace
+                    cluster_id                  resource_id
+                    cluster_name                resource_name
+                    containers_impacted_count   resource_type
+                    containers_impacted_ids     severity
+                    detection_type
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        offset -- The offset from where to begin. Integer.
+        sort -- The fields to sort the records on. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                /kubernetes-protection/SearchAndReadKubernetesIomEntities
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="SearchAndReadKubernetesIomEntities",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_nodes_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve kubernetes nodes identified by the provided filter criteria.
+
+        Keyword arguments:
+        filter -- Search Kubernetes nodes using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    aid                 container_count
+                    annotations_list    container_runtime_version
+                    cid                 first_seen
+                    cloud_account_id    image_digest
+                    cloud_name          ipv4
+                    cloud_region        last_seen
+                    cluster_id          node_name
+                    cluster_name        pod_count
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        offset -- The offset from where to begin. Integer.
+        sort -- Field to sort results by. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadNodeCombined
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadNodeCombined",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_pods_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve kubernetes pods identified by the provided filter criteria.
+
+        Keyword arguments:
+        filter -- Search Kubernetes pods using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    agent_id                    last_seen
+                    agent_type                  namespace
+                    allow_privilege_escalation  node_name
+                    annotations_list            node_uid
+                    cid                         owner_id
+                    cloud_account_id            owner_type
+                    cloud_name                  pod_id
+                    cloud_region                pod_name
+                    cluster_id                  port
+                    cluster_name                privileged
+                    container_count             root_write_access
+                    ipv4                        run_as_root_group
+                    ipv6                        run_as_root_user
+                    labels
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        offset -- The offset from where to begin. Integer.
+        sort -- Field to sort results by. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadPodCombined
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadPodCombined",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_iom_entities(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve Kubernetes IOM entities identified by the provided IDs.
+
+        Keyword arguments:
+        ids -- Kubernetes IOMs ID or list of IDs. String or list of strings. [Max: 100]
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadKubernetesIomEntities
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadKubernetesIomEntities",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_ioms(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search Kubernetes IOMs by the provided search criteria.
+
+        This endpoint returns a list of Kubernetes IOM UUIDs matching the query.
+
+        Keyword arguments:
+        filter -- Search Kubernetes IOMs using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    cid                         name
+                    cis_id                      namespace
+                    cluster_id                  resource_id
+                    cluster_name                resource_name
+                    containers_impacted_count   resource_type
+                    containers_impacted_ids     severity
+                    detection_type
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        offset -- The offset from where to begin. Integer.
+        sort -- The fields to sort the records on. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/SearchKubernetesIoms
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="SearchKubernetesIoms",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_aws_accounts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
@@ -582,6 +2064,47 @@ class KubernetesProtection(ServiceClass):
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
+    ReadClustersByDateRangeCount = read_clusters_by_date_range
+    ReadClustersByKubernetesVersionCount = read_clusters_by_version
+    ReadClustersByStatusCount = read_clusters_by_status
+    ReadClusterCount = read_cluster_count
+    ReadContainersByDateRangeCount = read_containers_by_date_range
+    ReadContainerCountByRegistry = read_containers_by_registry
+    FindContainersCountAffectedByZeroDayVulnerabilities = read_zero_day_affected_counts
+    ReadVulnerableContainerImageCount = read_vulnerable_container_count
+    ReadContainerCount = read_container_counts
+    FindContainersByContainerRunTimeVersion = find_containers_by_runtime_version
+    GroupContainersByManaged = group_managed_containers
+    ReadContainerImageDetectionsCountByDate = read_detections_count_by_date
+    ReadContainerImagesByState = read_images_by_state
+    ReadContainersSensorCoverage = read_sensor_coverage
+    ReadContainerVulnerabilitiesBySeverityCount = read_vulnerability_counts_by_severity
+    ReadDeploymentsByDateRangeCount = read_deployment_counts_by_date_range
+    ReadDeploymentCount = read_deployment_count
+    ReadClusterEnrichment = read_cluster_enrichment
+    ReadContainerEnrichment = read_container_enrichment
+    ReadDeploymentEnrichment = read_deployment_enrichment
+    ReadNodeEnrichment = read_node_enrichment
+    ReadPodEnrichment = read_pod_enrichment
+    ReadDistinctContainerImageCount = read_distinct_image_count
+    ReadContainerImagesByMostUsed = read_images_by_most_used
+    ReadKubernetesIomByDateRange = read_iom_count_by_date_range
+    ReadKubernetesIomCount = read_iom_count
+    ReadNodesByCloudCount = read_node_counts_by_cloud
+    ReadNodesByContainerEngineVersionCount = read_nodes_by_container_engine_version
+    ReadNodesByDateRangeCount = read_node_counts_by_date_range
+    ReadNodeCount = read_node_counts
+    ReadPodsByDateRangeCount = read_pod_counts_by_date_range
+    ReadPodCount = read_pod_counts
+    ReadClusterCombined = read_clusters_combined
+    ReadRunningContainerImages = read_running_images
+    ReadContainerCombined = read_containers_combined
+    ReadDeploymentCombined = read_deployments_combined
+    SearchAndReadKubernetesIomEntities = search_and_read_ioms
+    ReadNodeCombined = read_nodes_combined
+    ReadPodCombined = read_pods_combined
+    ReadKubernetesIomEntities = read_iom_entities
+    SearchKubernetesIoms = search_ioms
     GetAWSAccountsMixin0 = get_aws_accounts
     CreateAWSAccount = create_aws_account
     DeleteAWSAccountsMixin0 = delete_aws_accounts

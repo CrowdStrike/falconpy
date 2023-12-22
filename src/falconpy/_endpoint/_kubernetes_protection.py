@@ -35,8 +35,931 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302
 
 _kubernetes_protection_endpoints = [
+  [
+    "ReadClustersByDateRangeCount",
+    "GET",
+    "/container-security/aggregates/clusters/count-by-date/v1",
+    "Retrieve clusters by date range counts",
+    "kubernetes_protection",
+    []
+  ],
+  [
+    "ReadClustersByKubernetesVersionCount",
+    "GET",
+    "/container-security/aggregates/clusters/count-by-kubernetes-version/v1",
+    "Bucket clusters by kubernetes version",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes clusters that match a query in Falcon Query Language "
+        "(FQL). Supported filters:  access,agent_status,cid,cloud_account_id,cloud_name,cloud_region,cluster_id,cluster "
+        "_name,cluster_status,container_count,kubernetes_version,last_seen, management_status, node_count, pod_count, "
+        "tags",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadClustersByStatusCount",
+    "GET",
+    "/container-security/aggregates/clusters/count-by-status/v1",
+    "Bucket clusters by status",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes clusters that match a query in Falcon Query Language "
+        "(FQL). Supported filters:  access,agent_status,cid,cloud_account_id,cloud_name,cloud_region,cluster_id,cluster "
+        "_name,cluster_status,container_count,kubernetes_version,last_seen, management_status, node_count, pod_count, "
+        "tags",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadClusterCount",
+    "GET",
+    "/container-security/aggregates/clusters/count/v1",
+    "Retrieve cluster counts",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes clusters that match a query in Falcon Query Language "
+        "(FQL). Supported filters:  access,agent_status,cid,cloud_account_id,cloud_name,cloud_region,cluster_id,cluster "
+        "_name,cluster_status,container_count,kubernetes_version,last_seen, management_status, node_count, pod_count, "
+        "tags",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadContainersByDateRangeCount",
+    "GET",
+    "/container-security/aggregates/containers/count-by-date/v1",
+    "Retrieve containers by date range counts",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Get container counts using a query in Falcon Query Language (FQL). Supported filters: "
+        "  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,cloud_region,cluster_id,clust "
+        "er_name,container_id,container_name,cve_id,detection_name,first_seen,image_detection_count,image_digest,image_"
+        "has_been_assessed,image_id,image_registry,image_repository,image_tag,image_vulnerability_count,insecure_mount_"
+        "source,insecure_mount_type,insecure_propagation_mode,interactive_mode,ipv4,ipv6,labels,last_seen,namespace,nod "
+        "e_name,node_uid,package_name_version,pod_id,pod_name,port,privileged,root_write_access,run_as_root_group,run_a "
+        "s_root_user,running_status",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadContainerCountByRegistry",
+    "GET",
+    "/container-security/aggregates/containers/count-by-registry/v1",
+    "Retrieve top container image registries",
+    "kubernetes_protection",
+    [
+      {
+        "type": "boolean",
+        "description": "(true/false) whether to return registries under assessment or not under assessment. If "
+        "not provided all registries are considered",
+        "name": "under_assessment",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "FindContainersCountAffectedByZeroDayVulnerabilities",
+    "GET",
+    "/container-security/aggregates/containers/count-by-zero-day/v1",
+    "Retrieve containers count affected by zero day vulnerabilities",
+    "kubernetes_protection",
+    []
+  ],
+  [
+    "ReadVulnerableContainerImageCount",
+    "GET",
+    "/container-security/aggregates/containers/count-vulnerable-images/v1",
+    "Retrieve count of vulnerable images running on containers",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
+        "(FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,clou "
+        "d_region,cluster_id,cluster_name,container_id,container_name,cve_id,detection_name,first_seen,image_detection_"
+        "count,image_digest,image_has_been_assessed,image_id,image_registry,image_repository,image_tag,image_vulnerabil "
+        "ity_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode,interactive_mode,ipv4,ipv6,label "
+        "s,last_seen,namespace,node_name,node_uid,package_name_version,pod_id,pod_name,port,privileged,root_write_acces "
+        "s,run_as_root_group,run_as_root_user,running_status",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadContainerCount",
+    "GET",
+    "/container-security/aggregates/containers/count/v1",
+    "Retrieve container counts",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
+        "(FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,clou "
+        "d_region,cluster_id,cluster_name,container_id,container_name,cve_id,detection_name,first_seen,image_detection_"
+        "count,image_digest,image_has_been_assessed,image_id,image_registry,image_repository,image_tag,image_vulnerabil "
+        "ity_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode,interactive_mode,ipv4,ipv6,label "
+        "s,last_seen,namespace,node_name,node_uid,package_name_version,pod_id,pod_name,port,privileged,root_write_acces "
+        "s,run_as_root_group,run_as_root_user,running_status",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "FindContainersByContainerRunTimeVersion",
+    "GET",
+    "/container-security/aggregates/containers/find-by-runtimeversion/v1",
+    "Retrieve containers by container_runtime_version",
+    "kubernetes_protection",
+    [
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of container records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "It is used to get the offset",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Field to sort results by",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
+        "(FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,clou "
+        "d_region,cluster_id,cluster_name,container_id,container_name,cve_id,detection_name,first_seen,image_detection_"
+        "count,image_digest,image_has_been_assessed,image_id,image_registry,image_repository,image_tag,image_vulnerabil "
+        "ity_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode,interactive_mode,ipv4,ipv6,label "
+        "s,last_seen,namespace,node_name,node_uid,package_name_version,pod_id,pod_name,port,privileged,root_write_acces "
+        "s,run_as_root_group,run_as_root_user,running_status",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GroupContainersByManaged",
+    "GET",
+    "/container-security/aggregates/containers/group-by-managed/v1",
+    "Group the containers by Managed",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
+        "(FQL). Supported filters:  agent_id,allow_privilege_escalation,cid,cloud_account_id,cloud_name,cloud_region,cl "
+        "uster_id,cluster_name,container_id,container_name,cve_id,detection_name,first_seen,image_detection_count,image "
+        "_digest,image_has_been_assessed,image_id,image_registry,image_repository,image_tag,image_vulnerability_count,i "
+        "nsecure_mount_source,insecure_mount_type,insecure_propagation_mode,interactive_mode,ipv4,ipv6,labels,last_seen "
+        ",namespace,node_name,node_uid,pod_id,pod_name,port,privileged,root_write_access,run_as_root_group,run_as_root_"
+        "user,running_status",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadContainerImageDetectionsCountByDate",
+    "GET",
+    "/container-security/aggregates/containers/image-detections-count-by-date/v1",
+    "Retrieve count of image assessment detections on running containers over a period of time",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
+        "(FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,clou "
+        "d_region,cluster_id,cluster_name,container_id,container_name,cve_id,detection_name,first_seen,image_detection_"
+        "count,image_digest,image_has_been_assessed,image_id,image_registry,image_repository,image_tag,image_vulnerabil "
+        "ity_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode,interactive_mode,ipv4,ipv6,label "
+        "s,last_seen,namespace,node_name,node_uid,package_name_version,pod_id,pod_name,port,privileged,root_write_acces "
+        "s,run_as_root_group,run_as_root_user,running_status",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadContainerImagesByState",
+    "GET",
+    "/container-security/aggregates/containers/images-by-state/v1",
+    "Retrieve count of image states running on containers",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Filter using a query in Falcon Query Language (FQL). Supported filters: cid",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadContainersSensorCoverage",
+    "GET",
+    "/container-security/aggregates/containers/sensor-coverage/v1",
+    "Bucket containers by agent type and calculate sensor coverage",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
+        "(FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,clou "
+        "d_region,cluster_id,cluster_name,container_id,container_name,cve_id,detection_name,first_seen,image_detection_"
+        "count,image_digest,image_has_been_assessed,image_id,image_registry,image_repository,image_tag,image_vulnerabil "
+        "ity_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode,interactive_mode,ipv4,ipv6,label "
+        "s,last_seen,namespace,node_name,node_uid,package_name_version,pod_id,pod_name,port,privileged,root_write_acces "
+        "s,run_as_root_group,run_as_root_user,running_status",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadContainerVulnerabilitiesBySeverityCount",
+    "GET",
+    "/container-security/aggregates/containers/vulnerability-count-by-severity/v1",
+    "Retrieve container vulnerabilities by severity counts",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Get vulnerabilities count by severity for container using a query in Falcon Query "
+        "Language (FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_"
+        "name,cloud_region,cluster_id,cluster_name,container_id,container_name,cve_id,detection_name,first_seen,image_d "
+        "etection_count,image_digest,image_has_been_assessed,image_id,image_registry,image_repository,image_tag,image_v "
+        "ulnerability_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode,interactive_mode,ipv4,i "
+        "pv6,labels,last_seen,namespace,node_name,node_uid,package_name_version,pod_id,pod_name,port,privileged,root_wr "
+        "ite_access,run_as_root_group,run_as_root_user,running_status",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadDeploymentsByDateRangeCount",
+    "GET",
+    "/container-security/aggregates/deployments/count-by-date/v1",
+    "Retrieve deployments by date range counts",
+    "kubernetes_protection",
+    []
+  ],
+  [
+    "ReadDeploymentCount",
+    "GET",
+    "/container-security/aggregates/deployments/count/v1",
+    "Retrieve deployment counts",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes deployments that match a query in Falcon Query Language "
+        "(FQL). Supported filters:  annotations_list,cid,cloud_account_id,cloud_name,cloud_region,cluster_id,cluster_na "
+        "me,deployment_id,deployment_name,first_seen,last_seen,namespace,pod_count",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadClusterEnrichment",
+    "GET",
+    "/container-security/aggregates/enrichment/clusters/entities/v1",
+    "Retrieve cluster enrichment data",
+    "kubernetes_protection",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "One or more cluster ids for which to retrieve enrichment info",
+        "name": "cluster_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Supported filters:  last_seen",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadContainerEnrichment",
+    "GET",
+    "/container-security/aggregates/enrichment/containers/entities/v1",
+    "Retrieve container enrichment data",
+    "kubernetes_protection",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "One or more container ids for which to retrieve enrichment info",
+        "name": "container_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Supported filters:  last_seen",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadDeploymentEnrichment",
+    "GET",
+    "/container-security/aggregates/enrichment/deployments/entities/v1",
+    "Retrieve deployment enrichment data",
+    "kubernetes_protection",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "One or more deployment ids for which to retrieve enrichment info",
+        "name": "deployment_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Supported filters:  last_seen",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadNodeEnrichment",
+    "GET",
+    "/container-security/aggregates/enrichment/nodes/entities/v1",
+    "Retrieve node enrichment data",
+    "kubernetes_protection",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "One or more node names for which to retrieve enrichment info",
+        "name": "node_name",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Supported filters:  last_seen",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadPodEnrichment",
+    "GET",
+    "/container-security/aggregates/enrichment/pods/entities/v1",
+    "Retrieve pod enrichment data",
+    "kubernetes_protection",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "One or more pod ids for which to retrieve enrichment info",
+        "name": "pod_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Supported filters:  last_seen",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadDistinctContainerImageCount",
+    "GET",
+    "/container-security/aggregates/images/count-by-distinct/v1",
+    "Retrieve count of distinct images running on containers",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Search Kubernetes containers using a query in Falcon Query Language (FQL). Supported "
+        "filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,cloud_region,cluster_"
+        "id,cluster_name,container_id,container_name,cve_id,detection_name,first_seen,image_detection_count,image_diges "
+        "t,image_has_been_assessed,image_id,image_registry,image_repository,image_tag,image_vulnerability_count,insecur "
+        "e_mount_source,insecure_mount_type,insecure_propagation_mode,interactive_mode,ipv4,ipv6,labels,last_seen,names "
+        "pace,node_name,node_uid,package_name_version,pod_id,pod_name,port,privileged,root_write_access,run_as_root_gro "
+        "up,run_as_root_user,running_status",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadContainerImagesByMostUsed",
+    "GET",
+    "/container-security/aggregates/images/most-used/v1",
+    "Bucket container by image-digest",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
+        "(FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,clou "
+        "d_region,cluster_id,cluster_name,container_id,container_name,cve_id,detection_name,first_seen,image_detection_"
+        "count,image_digest,image_has_been_assessed,image_id,image_registry,image_repository,image_tag,image_vulnerabil "
+        "ity_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode,interactive_mode,ipv4,ipv6,label "
+        "s,last_seen,namespace,node_name,node_uid,package_name_version,pod_id,pod_name,port,privileged,root_write_acces "
+        "s,run_as_root_group,run_as_root_user,running_status",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadKubernetesIomByDateRange",
+    "GET",
+    "/container-security/aggregates/kubernetes-ioms/count-by-date/v1",
+    "Returns the count of Kubernetes IOMs by the date. by default it's for 7 days.",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters: "
+        "cid,created_timestamp,detect_timestamp,severity",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadKubernetesIomCount",
+    "GET",
+    "/container-security/aggregates/kubernetes-ioms/count/v1",
+    "Returns the total count of Kubernetes IOMs over the past seven days",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters: "
+        "cid,created_timestamp,detect_timestamp,severity",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadNodesByCloudCount",
+    "GET",
+    "/container-security/aggregates/nodes/count-by-cloud/v1",
+    "Bucket nodes by cloud providers",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported "
+        "filters:  aid,annotations_list,cid,cloud_account_id,cloud_name,cloud_region,cluster_id,cluster_name,container_"
+        "count,container_runtime_version,first_seen,image_digest,ipv4,last_seen,node_name,pod_count",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadNodesByContainerEngineVersionCount",
+    "GET",
+    "/container-security/aggregates/nodes/count-by-container-engine-version/v1",
+    "Bucket nodes by their container engine version",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported "
+        "filters:  aid,annotations_list,cid,cloud_account_id,cloud_name,cloud_region,cluster_id,cluster_name,container_"
+        "count,container_runtime_version,first_seen,image_digest,ipv4,last_seen,node_name,pod_count",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadNodesByDateRangeCount",
+    "GET",
+    "/container-security/aggregates/nodes/count-by-date/v1",
+    "Retrieve nodes by date range counts",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported "
+        "filters:  aid,annotations_list,cid,cloud_account_id,cloud_name,cloud_region,cluster_id,cluster_name,container_"
+        "count,container_runtime_version,first_seen,image_digest,ipv4,last_seen,node_name,pod_count",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadNodeCount",
+    "GET",
+    "/container-security/aggregates/nodes/count/v1",
+    "Retrieve node counts",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes nodes that match a query in Falcon Query Language (FQL). "
+        "Supported filters:  aid,annotations_list,cid,cloud_account_id,cloud_name,cloud_region,cluster_id,cluster_name, "
+        "container_count,container_runtime_version,first_seen,image_digest,ipv4,last_seen,node_name,pod_count",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadPodsByDateRangeCount",
+    "GET",
+    "/container-security/aggregates/pods/count-by-date/v1",
+    "Retrieve pods by date range counts",
+    "kubernetes_protection",
+    []
+  ],
+  [
+    "ReadPodCount",
+    "GET",
+    "/container-security/aggregates/pods/count/v1",
+    "Retrieve pod counts",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes pods that match a query in Falcon Query Language (FQL). "
+        "Supported filters:  agent_id,agent_type,allow_privilege_escalation,annotations_list,cid,cloud_account_id,cloud "
+        "_name,cloud_region,cluster_id,cluster_name,container_count,ipv4,ipv6,labels,last_seen,namespace,node_name,node "
+        "_uid,owner_id,owner_type,pod_id,pod_name,port,privileged,root_write_access, run_as_root_group, "
+        "run_as_root_user",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadClusterCombined",
+    "GET",
+    "/container-security/combined/clusters/v1",
+    "Retrieve kubernetes clusters identified by the provided filter criteria",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Search Kubernetes clusters using a query in Falcon Query Language (FQL). Supported "
+        "filters:  access,agent_status,cid,cloud_account_id,cloud_name,cloud_region,cluster_id,cluster_name,cluster_sta "
+        "tus,container_count,kubernetes_version,last_seen, management_status, node_count, pod_count, tags",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Field to sort results by",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadRunningContainerImages",
+    "GET",
+    "/container-security/combined/container-images/v1",
+    "Retrieve images on running containers",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Retrieve list of images on running containers using a query in Falcon Query Language "
+        "(FQL). Supported filters:  cid,hosts,image_digest,image_has_been_assessed,image_id,image_name,image_registry,i "
+        "mage_repository,image_tag,last_seen,running_status",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Field to sort results by",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadContainerCombined",
+    "GET",
+    "/container-security/combined/containers/v1",
+    "Retrieve containers identified by the provided filter criteria",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Search Kubernetes containers using a query in Falcon Query Language (FQL). Supported "
+        "filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,cloud_region,cluster_"
+        "id,cluster_name,container_id,container_name,cve_id,detection_name,first_seen,image_detection_count,image_diges "
+        "t,image_has_been_assessed,image_id,image_registry,image_repository,image_tag,image_vulnerability_count,insecur "
+        "e_mount_source,insecure_mount_type,insecure_propagation_mode,interactive_mode,ipv4,ipv6,labels,last_seen,names "
+        "pace,node_name,node_uid,package_name_version,pod_id,pod_name,port,privileged,root_write_access,run_as_root_gro "
+        "up,run_as_root_user,running_status",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Field to sort results by",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadDeploymentCombined",
+    "GET",
+    "/container-security/combined/deployments/v1",
+    "Retrieve kubernetes deployments identified by the provided filter criteria",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Search Kubernetes deployments using a query in Falcon Query Language (FQL). Supported "
+        "filters:  annotations_list,cid,cloud_account_id,cloud_name,cloud_region,cluster_id,cluster_name,deployment_id, "
+        "deployment_name,first_seen,last_seen,namespace,pod_count",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Field to sort results by",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "SearchAndReadKubernetesIomEntities",
+    "GET",
+    "/container-security/combined/kubernetes-ioms/v1",
+    "Search Kubernetes IOM by the provided search criteria",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported "
+        "filters:  cid,cis_id,cluster_id,cluster_name,containers_impacted_count,containers_impacted_ids,detection_type, "
+        "name,namespace,resource_id,resource_name,resource_type,severity",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadNodeCombined",
+    "GET",
+    "/container-security/combined/nodes/v1",
+    "Retrieve kubernetes nodes identified by the provided filter criteria",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported "
+        "filters:  aid,annotations_list,cid,cloud_account_id,cloud_name,cloud_region,cluster_id,cluster_name,container_"
+        "count,container_runtime_version,first_seen,image_digest,ipv4,last_seen,node_name,pod_count",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Field to sort results by",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadPodCombined",
+    "GET",
+    "/container-security/combined/pods/v1",
+    "Retrieve kubernetes pods identified by the provided filter criteria",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Search Kubernetes pods using a query in Falcon Query Language (FQL). Supported "
+        "filters:  agent_id,agent_type,allow_privilege_escalation,annotations_list,cid,cloud_account_id,cloud_name,clou "
+        "d_region,cluster_id,cluster_name,container_count,ipv4,ipv6,labels,last_seen,namespace,node_name,node_uid,owner "
+        "_id,owner_type,pod_id,pod_name,port,privileged,root_write_access, run_as_root_group, run_as_root_user",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Field to sort results by",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadKubernetesIomEntities",
+    "GET",
+    "/container-security/entities/kubernetes-ioms/v1",
+    "Retrieve Kubernetes IOM entities identified by the provided IDs",
+    "kubernetes_protection",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Search Kubernetes IOMs by ids - The maximum amount is 100 IDs",
+        "name": "ids",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "SearchKubernetesIoms",
+    "GET",
+    "/container-security/queries/kubernetes-ioms/v1",
+    "Search Kubernetes IOMs by the provided search criteria. this endpoint returns a list of Kubernetes IOM "
+    "UUIDs matching the query",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported "
+        "filters:  cid,cis_id,cluster_id,cluster_name,containers_impacted_count,containers_impacted_ids,detection_type, "
+        "name,namespace,resource_id,resource_name,resource_type,severity",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
   [
     "GetAWSAccountsMixin0",
     "GET",
