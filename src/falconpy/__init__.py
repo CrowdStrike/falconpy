@@ -92,6 +92,7 @@ from .api_complete import APIHarness, APIHarnessV2
 from .cloud_snapshots import CloudSnapshots
 from .configuration_assessment_evaluation_logic import ConfigurationAssessmentEvaluationLogic
 from .configuration_assessment import ConfigurationAssessment
+from .container_alerts import ContainerAlerts
 from .cloud_connect_aws import CloudConnectAWS
 from .cspm_registration import CSPMRegistration
 from .custom_ioa import CustomIOA
@@ -185,6 +186,7 @@ __all__ = [
     "UnnecessaryEncodingUsed", "APIHarnessV2", "CustomStorage", "FoundryLogScale",
     "RealTimeResponseAudit", "Workflows", "DeprecatedClass", "DeprecatedOperation",
     "SDKDeprecationWarning", "ConfigurationAssessmentEvaluationLogic", "ConfigurationAssessment",
+    "ContainerAlerts"
     ]
 """
 This is free and unencumbered software released into the public domain.
