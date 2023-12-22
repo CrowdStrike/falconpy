@@ -96,6 +96,7 @@ from .container_alerts import ContainerAlerts
 from .container_detections import ContainerDetections
 from .container_images import ContainerImages
 from .container_packages import ContainerPackages
+from .container_vulnerabilities import ContainerVulnerabilities
 from .cloud_connect_aws import CloudConnectAWS
 from .cspm_registration import CSPMRegistration
 from .custom_ioa import CustomIOA
@@ -191,7 +192,7 @@ __all__ = [
     "RealTimeResponseAudit", "Workflows", "DeprecatedClass", "DeprecatedOperation",
     "SDKDeprecationWarning", "ConfigurationAssessmentEvaluationLogic", "ConfigurationAssessment",
     "ContainerAlerts", "ContainerDetections", "ContainerImages", "ContainerPackages", 
-    "UnidentifiedContainers"
+    "ContainerVulnerabilities", "UnidentifiedContainers"
     ]
 """
 This is free and unencumbered software released into the public domain.
