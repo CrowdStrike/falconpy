@@ -146,6 +146,7 @@ from .sensor_visibility_exclusions import SensorVisibilityExclusions
 from .spotlight_vulnerabilities import SpotlightVulnerabilities
 from .spotlight_evaluation_logic import SpotlightEvaluationLogic
 from .tailored_intelligence import TailoredIntelligence
+from .unidentified_containers import UnidentifiedContainers
 from .user_management import UserManagement
 from .workflows import Workflows
 from .zero_trust_assessment import ZeroTrustAssessment
@@ -187,7 +188,7 @@ __all__ = [
     "UnnecessaryEncodingUsed", "APIHarnessV2", "CustomStorage", "FoundryLogScale",
     "RealTimeResponseAudit", "Workflows", "DeprecatedClass", "DeprecatedOperation",
     "SDKDeprecationWarning", "ConfigurationAssessmentEvaluationLogic", "ConfigurationAssessment",
-    "ContainerAlerts", "ContainerDetections"
+    "ContainerAlerts", "ContainerDetections", "UnidentifiedContainers"
     ]
 """
 This is free and unencumbered software released into the public domain.
