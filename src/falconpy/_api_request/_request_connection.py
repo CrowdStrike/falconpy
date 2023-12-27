@@ -35,95 +35,19 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from dataclasses import dataclass
 from typing import Optional, Dict, Union
 
 
+@dataclass
 class RequestConnection:
     """This class represents connection details related to an API request."""
 
-    # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
-    # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
-    # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
+    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
+    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
+    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
     #
-    def __init__(self,
-                 user_agent: Optional[str] = None,
-                 proxy: Optional[Dict[str, str]] = None,
-                 timeout: Optional[Union[int, tuple]] = None,
-                 verify: Optional[bool] = True
-                 ):
-        """Construct an instance of RequestConnection class."""
-        self._user_agent: Optional[str] = user_agent
-        self._proxy: Optional[Dict[str, str]] = proxy
-        self._timeout: Optional[Union[int, tuple]] = timeout
-
-        self._verify = True
-        if isinstance(verify, bool):
-            self.verify: bool = verify
-
-    # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
-    # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
-    # |    |  \ |__| |    |___ |  \  |  | |___ ___]
-    #
-    @property
-    def user_agent(self) -> Optional[str]:
-        """User agent string to be sent along with connection headers."""
-        return self._user_agent
-
-    @user_agent.setter
-    def user_agent(self, value: str):
-        """Set the user agent string."""
-        self._user_agent = value
-
-    @property
-    def proxy(self) -> Optional[Dict[str, str]]:
-        """Return the dictionary containing proxy information that is used for requests."""
-        return self._proxy
-
-    @proxy.setter
-    def proxy(self, value: Dict[str, str]):
-        """Specify a new proxy dictionary."""
-        self._proxy = value
-
-    @property
-    def timeout(self) -> Optional[Union[int, tuple]]:
-        """Timeout in seconds for the connection specified as either an integer or tuple.
-
-        Tuple format: (connect, read)
-        """
-        return self._timeout
-
-    @timeout.setter
-    def timeout(self, value: Union[int, tuple]):
-        """Specify a new timeout setting for the connection."""
-        self._timeout = value
-
-    @property
-    def verify(self) -> bool:
-        """Flag indicating if SSL verification is enabled for the connection."""
-        return self._verify
-
-    @verify.setter
-    def verify(self, value: bool):
-        """Enable or disable SSL verification for the connection."""
-        self._verify = value
-
-
-# Python 3.7+ version
-# This code will be updated to the following once Python 3.6 support is dropped.
-#
-# from dataclasses import dataclass
-# from typing import Optional, Dict, Union
-
-
-# @dataclass
-# class RequestConnection:
-#     """This class represents connection details related to an API request."""
-
-#     # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-#     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-#     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-#     #
-#     user_agent: Optional[str] = None
-#     verify: bool = True
-#     timeout: Optional[Union[int, tuple]] = None
-#     proxy: Optional[Dict[str, str]] = None
+    user_agent: Optional[str] = None
+    verify: bool = True
+    timeout: Optional[Union[int, tuple]] = None
+    proxy: Optional[Dict[str, str]] = None

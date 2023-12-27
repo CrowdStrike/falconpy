@@ -35,62 +35,17 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from dataclasses import dataclass
 from typing import Any, Dict, Optional, List
 
 
+@dataclass
 class RequestValidator:
     """This class represents a request payload validator."""
 
-    # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
-    # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
-    # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
+    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
+    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
+    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
     #
-    def __init__(self,
-                 validator: Optional[Dict[str, Any]] = None,
-                 required: Optional[List[str]] = None
-                 ):
-        """Construct an instance of RequestValidator class."""
-        self._validator: Optional[Dict[str, Any]] = validator
-        self._required: Optional[List[str]] = required
-
-    # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
-    # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
-    # |    |  \ |__| |    |___ |  \  |  | |___ ___]
-    #
-    @property
-    def validator(self) -> Optional[Dict[str, Any]]:
-        """Return the validator dictionary."""
-        return self._validator
-
-    @validator.setter
-    def validator(self, value: Optional[Dict[str, Any]]):
-        """Set the validator dictionary."""
-        self._validator = value
-
-    @property
-    def required(self) -> Optional[List[str]]:
-        """Return the required list."""
-        return self._required
-
-    @required.setter
-    def required(self, value: Optional[List[str]]):
-        """Set the required list."""
-        self._required = value
-
-# Python 3.7
-# This code will be updated to the following once Python 3.6 support is dropped.
-#
-# from dataclasses import dataclass
-# from typing import Any, Dict, Optional, List
-
-
-# @dataclass
-# class RequestValidator:
-#     """This class represents a request payload validator."""
-
-#     # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-#     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-#     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-#     #
-#     validator: Optional[Dict[str, Any]] = None
-#     required: Optional[List[str]] = None
+    validator: Optional[Dict[str, Any]] = None
+    required: Optional[List[str]] = None
