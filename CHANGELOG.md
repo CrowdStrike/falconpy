@@ -1,3 +1,18 @@
+# Version 1.4.0
+## Other
++ Dropped: Python 3.6 support.
+    > Unit testing adjusted to reflect supported versions.
+    - `README.md`
+    - `SECURITY.md`
+    - `setup.py`
+
++ Refactored: Simple private child objects within the [__APIRequest__](https://www.falconpy.io/Usage/Extensibility.html#apirequest) object updated to leverage data classes.
+    - `_api_request/_request_connection.py`
+    - `_api_request/_request_payloads.py`
+    - `_api_request/_request_validator.py`
+
+---
+
 # Version 1.3.5
 ## Added features and functionality
 + Added: 4 new operations added to the __*Alerts*__ service collection.
