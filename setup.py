@@ -1,13 +1,12 @@
 r"""
 
-                .---.        .-----------
-               /     \  __  /    ------
-              / /     \(..)/    -----
-             //////   ' \/ `   ---
-            //// / // :    : ---     CrowdStrike
-           // /   /  /`    '--              FalconPy
-          //          //..\\
-                   _.UU8888UU8lkoz.,_
+                       __     __
+                      /'(  _  )`\
+                     / . \/^\/ . \    CrowdStrike
+                    /  _)_`-'_(_  \        FalconPy
+                   /.-~   ).(   ~-.\
+                  /'     /\_/\     `\
+                   _.888888888lkoz.,_
                 d888888888888888888888b,
                j88P""V8888888888888888888
                888    8888888888888888888
@@ -106,12 +105,12 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Framework :: Flake8",
         "License :: OSI Approved :: The Unlicense (Unlicense)",
         "Topic :: Security",
@@ -119,5 +118,5 @@ setup(
         "Topic :: System :: Systems Administration",
         "Topic :: Utilities"
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.7',
 )
