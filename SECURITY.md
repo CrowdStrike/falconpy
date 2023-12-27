@@ -3,9 +3,9 @@
 [![CrowdStrike Subreddit](https://img.shields.io/badge/-r%2Fcrowdstrike-white?logo=reddit&labelColor=gray&link=https%3A%2F%2Freddit.com%2Fr%2Fcrowdstrike)](https://reddit.com/r/crowdstrike)
 
 ![GitHub top language](https://img.shields.io/github/languages/top/crowdstrike/falconpy?logo=python&logoColor=white)
-[![Snyk Advisor](https://snyk.io/advisor/python/crowdstrike-falconpy/badge.svg)](https://snyk.io/advisor/python/crowdstrike-falconpy)
 ![GitHub issues](https://img.shields.io/github/issues-raw/crowdstrike/falconpy?logo=github)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/crowdstrike/falconpy?color=green&logo=github)
+
 
 # Security Policy
 This document outlines security policy and procedures for the CrowdStrike `falconpy` project.
@@ -23,12 +23,13 @@ FalconPy functionality is unit tested to run under the following versions of Pyt
 
 | Version | Supported |
 | :------- | :--------: |
+| 3.12.x  | ![Yes](https://img.shields.io/badge/-YES-green) |
 | 3.11.x  | ![Yes](https://img.shields.io/badge/-YES-green) |
 | 3.10.x  | ![Yes](https://img.shields.io/badge/-YES-green) |
 | 3.9.x   | ![Yes](https://img.shields.io/badge/-YES-green) |
 | 3.8.x   | ![Yes](https://img.shields.io/badge/-YES-green) |
 | 3.7.x   | ![Yes](https://img.shields.io/badge/-YES-green) |
-| 3.6.x   | ![Yes](https://img.shields.io/badge/-YES-green) |
+| 3.6.x   | ![Partial](https://img.shields.io/badge/-FalconPy_<=_v1.3.x-darkgreen) |
 | <= 3.5  | ![No](https://img.shields.io/badge/-NO-red) |
 | <= 2.x.x | ![No](https://img.shields.io/badge/-NO-red) |
 
