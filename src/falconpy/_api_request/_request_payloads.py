@@ -35,89 +35,19 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from dataclasses import dataclass
 from typing import Optional, Dict, List, Union
 
 
+@dataclass
 class RequestPayloads:
     """This class contains all of the payloads sent as part of the API request."""
 
-    # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
-    # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
-    # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
+    # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
+    # |__|  |   |  |__/ | |__] |  |  |  |___ [__
+    # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
     #
-    def __init__(self,
-                 params: Optional[Dict[str, Optional[Union[str, int, float, list, dict]]]] = None,
-                 body: Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]] = None,
-                 data: Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]] = None,
-                 files: Optional[List[tuple]] = None
-                 ):
-        """Construct an instance of RequestPayloads class."""
-        self._params = params
-        self._body = body
-        self._data = data
-        self._files = files
-
-    # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
-    # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
-    # |    |  \ |__| |    |___ |  \  |  | |___ ___]
-    #
-    @property
-    def params(self) -> Optional[Dict[str, Optional[Union[str, int, float, list, dict]]]]:
-        """Return the query string parameter payload."""
-        return self._params
-
-    @params.setter
-    def params(self, value: Optional[Dict[str, Optional[Union[str, int, float, list, dict]]]]):
-        """Set the query string parameter payload."""
-        self._params = value
-
-    @property
-    def body(self) -> Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]]:
-        """Return the body payload."""
-        return self._body
-
-    @body.setter
-    def body(self, value: Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]]):
-        """Set the body payload."""
-        self._body = value
-
-    @property
-    def data(self) -> Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]]:
-        """Return the data payload."""
-        return self._data
-
-    @data.setter
-    def data(self, value: Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]]):
-        """Set the data payload."""
-        self._data = value
-
-    @property
-    def files(self) -> Optional[List[tuple]]:
-        """Return the files payload."""
-        return self._files
-
-    @files.setter
-    def files(self, value: Optional[List[tuple]]):
-        """Set the files payload."""
-        self._files = value
-
-
-# Python 3.7
-# This code will be updated to leverage dataclasses once Python 3.6 support is dropped.
-#
-# from dataclasses import dataclass
-# from typing import Optional, Dict, List, Union
-
-
-# @dataclass
-# class RequestPayloads:
-#     """This class contains all of the payloads sent as part of the API request."""
-#
-#     # ____ ___ ___ ____ _ ___  _  _ ___ ____ ____
-#     # |__|  |   |  |__/ | |__] |  |  |  |___ [__
-#     # |  |  |   |  |  \ | |__] |__|  |  |___ ___]
-#     #
-#     params: Optional[Dict[str, Optional[Union[str, int, float, list, dict]]]] = None
-#     body: Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]] = None
-#     data: Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]] = None
-#     files: Optional[List[tuple]] = None
+    params: Optional[Dict[str, Optional[Union[str, int, float, list, dict]]]] = None
+    body: Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]] = None
+    data: Optional[Union[bytes, Dict[str, Union[str, int, dict, list, bytes]]]] = None
+    files: Optional[List[tuple]] = None
