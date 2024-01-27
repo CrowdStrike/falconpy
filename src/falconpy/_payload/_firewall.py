@@ -259,7 +259,7 @@ def firewall_rule_group_update_payload(passed_keywords: dict) -> dict:
     returned_payload["diff_type"] = passed_keywords.get("diff_type", "application/json-patch+json")
     # Grab the rule_ids keyword and check for list formatting
     id_list = passed_keywords.get("rule_ids", None)
-    if id_list:
+    if id_list is not None:  # Allow empty lists so all rules can be removed. Issue #1107.
         if isinstance(id_list, str):
             id_list = id_list.split(",")
         returned_payload["rule_ids"] = id_list
