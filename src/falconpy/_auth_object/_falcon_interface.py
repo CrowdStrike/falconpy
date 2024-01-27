@@ -163,6 +163,9 @@ class FalconInterface(BaseFalconAuth):
                     "client_id": api_id,
                     "client_secret": api_sec
                 }
+                # Provide member_cid for MSSP environment authentication scenarios. Issue #1105.
+                if member_cid:
+                    self._creds["member_cid"] = member_cid
 
         # Log the creation of this object if debugging is enabled.
         # Starting with v1.3.0 minimal Python native logging is available. In order to reduce
