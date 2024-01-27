@@ -302,6 +302,19 @@ class TestAuthentications:
         else:
             pytest.skip("Required environment credentials not present")
 
+    def test_EnvironmentAuthFail(self):
+        _returned = False
+        save_id = os.getenv("FALCON_CLIENT_ID")
+        save_key = os.getenv("FALCON_CLIENT_SECRET")
+        if save_id or save_key:
+            thing = Hosts(debug=_DEBUG, member_cid="12345678")
+            result = thing.login()
+            if thing.token_status != 201:
+                _returned = True
+            assert _returned
+        else:
+            pytest.skip("Required environment credentials not present")
+
     @pytest.mark.skipif(auth.authorization.base_url == "https://api.laggar.gcw.crowdstrike.com",
                         reason="Test unsupported in GovCloud"
                         )
