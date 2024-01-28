@@ -96,10 +96,9 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^(true|false)$",
         "enum": [
-          "false",
-          "true"
+          "true",
+          "false"
         ],
         "type": "string",
         "description": "Only return migrated d4c accounts",
@@ -380,6 +379,12 @@ _d4c_registration_endpoints = [
         "description": "Template to be rendered",
         "name": "template",
         "in": "query"
+      },
+      {
+        "type": "boolean",
+        "description": "Use Azure Management Group",
+        "name": "azure_management_group",
+        "in": "query"
       }
     ]
   ],
@@ -485,6 +490,97 @@ _d4c_registration_endpoints = [
     "environment as a downloadable attachment",
     "d4c_registration",
     []
+  ],
+  [
+    "DeleteD4CGCPAccount",
+    "DELETE",
+    "/cloud-connect-gcp/entities/account/v1",
+    "Deletes a GCP account from the system.",
+    "d4c_registration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Hierarchical Resource IDs of accounts",
+        "name": "ids",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ConnectD4CGCPAccount",
+    "POST",
+    "/cloud-connect-gcp/entities/account/v2",
+    "Creates a new GCP account with newly-uploaded service account or connects with existing service account "
+    "with only the following fields: parent_id, parent_type and service_account_id",
+    "d4c_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetD4CGCPServiceAccountsExt",
+    "GET",
+    "/cloud-connect-gcp/entities/service-accounts/v1",
+    "Returns the service account id and client email for external clients.",
+    "d4c_registration",
+    [
+      {
+        "pattern": "^\\d+$",
+        "type": "string",
+        "description": "Service Account ID",
+        "name": "id",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetD4CGCPUserScriptsAttachment",
+    "GET",
+    "/cloud-connect-gcp/entities/user-scripts-download/v1",
+    "Return a script for customer to run in their cloud environment to grant us access to their GCP "
+    "environment as a downloadable attachment",
+    "d4c_registration",
+    [
+      {
+        "enum": [
+          "Folder",
+          "Organization",
+          "Project"
+        ],
+        "type": "string",
+        "description": "GCP Hierarchy Parent Type, organization/folder/project",
+        "name": "parent_type",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Hierarchical Resource IDs of accounts",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "operational",
+          "provisioned"
+        ],
+        "type": "string",
+        "description": "Account status to filter results by.",
+        "name": "status",
+        "in": "query"
+      }
+    ]
   ],
   [
     "GetD4CGCPUserScripts",
