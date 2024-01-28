@@ -38,7 +38,12 @@ For more information, please refer to <https://unlicense.org>
 # pylint: disable=R0904, C0302  # Matching API operation counts and allowing the long file for now
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import cspm_registration_payload, cspm_policy_payload, cspm_scan_payload
+from ._payload import (
+    cspm_registration_payload,
+    cspm_policy_payload,
+    cspm_scan_payload,
+    gcp_registration_payload
+    )
 from ._service_class import ServiceClass
 from ._endpoint._cspm_registration import _cspm_registration_endpoints as Endpoints
 
@@ -62,6 +67,7 @@ class CSPMRegistration(ServiceClass):
 
         Keyword arguments:
         scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts
+        cspm_lite -- Only return CSPM lite accounts. Boolean.
         ids -- AWS account IDs. String or list of strings.
         iam_role_arns -- AWS IAM role ARNs. String or list of strings.
         organization_ids -- AWS organization IDs. String or list of strings.
@@ -287,6 +293,7 @@ class CSPMRegistration(ServiceClass):
 
         Keyword arguments:
         scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts
+        cspm_lite -- Only return CSPM lite accounts. Boolean.
         ids -- Azure account IDs. String or list of strings.
         limit -- The maximum number of records to return in this response. [Integer, 1-1000]
                  Use with the offset parameter to manage pagination of results. Defaults to 100.
@@ -360,6 +367,46 @@ class CSPMRegistration(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="CreateCSPMAzureAccount",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_azure_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Update Azure account.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                {
+                    "resources": [
+                        {
+                            "environment": "string",
+                            "subscription_id": "string"
+                        }
+                    ]
+                }
+        account_type -- Azure account type. String.
+        client_id -- Azure Client ID. String.
+        default_subscription -- Indicate if this is the default subscription. Boolean.
+        subscription_id -- Azure Subscription ID. String.
+        tenant_id -- Azure Tenant ID. String.
+        years_valid -- Number of years this account is valid. Integer.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMAzureAccount
+        """
+        if not body:
+            body = cspm_registration_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateCSPMAzureAccount",
             body=body
             )
 
@@ -484,7 +531,7 @@ class CSPMRegistration(ServiceClass):
         Keyword arguments:
         tenant_id -- Azure Tenant ID to generate script for.
                      Defaults to the most recently registered tenant.
-        parameters -- full parameters payload, not required if tenant-id keyword is used.
+        parameters -- full parameters payload, not required if tenant_id keyword is used.
         refresh -- Force a refresh of the certificate. Boolean. Defaults to False.
         years_valid -- Years the certificate should be valid (only used when refresh=true).
 
@@ -507,6 +554,78 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_azure_management_group(self: object,
+                                   *args,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Dict[str, Union[int, dict]]:
+        """
+        Return information about Azure management group registration.
+
+        Keyword arguments:
+        limit -- The maximum number of records to return. Defaults to 100. Integer.
+        offset -- The offset to start retrieving records from. Integer.
+        parameters -- full parameters payload, not required if tenant_id keyword is used.
+        tenant_ids -- Azure Tenant ID to filter by. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'tenant_ids'. All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMAzureManagementGroup
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMAzureManagementGroup",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "tenant_ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_azure_management_group(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Register new Azure account.
+
+        Creates a new account in our system for a customer and generates a script
+        to run in their cloud environment to grant CrowdStrike Horizon access.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                {
+                    "resources": [
+                        {
+                            "default_subscription_id": "string"
+                            "tenant_id": "string",
+                        }
+                    ]
+                }
+        default_subscription_id -- ID of the default azure subscription. String.
+        tenant_id -- Azure Tenant ID. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMAzureManagementGroup
+        """
+        if not body:
+            body = cspm_registration_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateCSPMAzureManagementGroup",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_azure_user_scripts_attachment(self: object,
                                           *args,
                                           parameters: dict = None,
@@ -520,14 +639,15 @@ class CSPMRegistration(ServiceClass):
 
         Keyword arguments:
         account_type -- Account type. ('commercial' or 'gov') String.
+        azure_management_group -- Use Azure Management Group. Boolean.
         tenant_id -- Azure Tenant ID to generate script for.
                      Defaults to the most recently registered tenant.
-        parameters -- full parameters payload, not required if tenant-id keyword is used.
+        parameters -- full parameters payload, not required if tenant_id keyword is used.
         subscription_ids -- Subscription IDs to generate script for. Defaults to all. String or list of strings.
         template -- Template to be rendered. String.
 
         Arguments: When not specified, the first argument to this method is assumed to be
-                   'tenant-id'. All others are ignored.
+                   'tenant_id'. All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -544,7 +664,258 @@ class CSPMRegistration(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetCSPMAzureUserScriptsAttachment",
             keywords=kwargs,
-            params=handle_single_argument(args, parameters, "tenant-id")
+            params=handle_single_argument(args, parameters, "tenant_id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_gcp_account(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Return information about the current status of an GCP account.
+
+        Keyword arguments:
+        ids -- Hierarchical Resource IDs of accounts. String or list of strings.
+        limit -- The maximum records to return. Defaults to 100. Integer.
+        offset -- The offset to start retrieving records from. Integer.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+        parent_type -- GCP Hierarchy Parent Type, organization/folder/project. String.
+        scan_type -- Type of scan, `dry` or `full`, to perform on selected accounts.
+        sort -- Order fields in ascending or descending order. Ex: parent_type|asc.
+        status -- Account status to filter results by, 'operational' or 'provisioned'. String.
+
+        This method does not accept arguments or keywords.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMCGPAccount
+        """
+        if kwargs.get("scan_type", None):
+            kwargs["scan-type"] = kwargs.get("scan_type", None)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMCGPAccount",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_gcp_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Register new GCP account.
+
+        Creates a new account in our system for a customer and generates a new service
+        account for them to add access to in their GCP environment to grant us access.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "parent_id": "string",
+                            "parent_type": "string"
+                        }
+                    ]
+                }
+        parent_id -- GCP parent ID. String.
+        parent_type -- GCP parent type. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/CreateCSPMGCPAccount
+        """
+        if not body:
+            body = gcp_registration_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateCSPMGCPAccount",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_gcp_account(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Delete a GCP account from the system.
+
+        Keyword arguments:
+        ids -- Hierarchical Resource IDs of accounts. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/DeleteCSPMGCPAccount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteCSPMGCPAccount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_gcp_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Update a GCP account.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "environment": "string",
+                            "parent_id": "string"
+                        }
+                    ]
+                }
+        environment -- GCP environment. String.
+        parent_id -- GCP parent ID. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/UpdateCSPMGCPAccount
+        """
+        if not body:
+            body = gcp_registration_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateCSPMGCPAccount",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def connect_gcp_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Register new GCP account.
+
+        Creates a new account in our system for a customer and generates a new service
+        account for them to add access to in their GCP environment to grant us access.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "client_email": "string",
+                            "client_id": "string",
+                            "parent_id": "string",
+                            "parent_type": "string",
+                            "private_key": "string",
+                            "private_key_id": "string",
+                            "project_id": "string",
+                            "service_account_id": 0
+                        }
+                    ]
+                }
+        client_email -- GCP account email. String.
+        client_id -- GCP account client ID. String.
+        parent_id -- GCP parent ID. String.
+        parent_type -- GCP parent type. String.
+        private_key -- GCP private key. String.
+        private_key_id -- GCP private key ID. String.
+        project_id -- GCP project ID. String.
+        service_account_id -- GCP service account ID. Integer.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/ConnectCSPMGCPAccount
+        """
+        if not body:
+            body = gcp_registration_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ConnectCSPMGCPAccount",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_gcp_service_account(self: object,
+                                *args,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Dict[str, Union[int, dict]]:
+        """Return the service account id and client email for external clients.
+
+        Keyword arguments:
+        id -- Service Account ID. String.
+        parameters -- full parameters payload, not required if id is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMGCPServiceAccountsExt
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMGCPServiceAccountsExt",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_gcp_user_scripts_attachment(self: object,
+                                        *args,
+                                        parameters: dict = None,
+                                        **kwargs
+                                        ) -> Dict[str, Union[int, dict]]:
+        """Retrieve GCP user script attachment.
+
+        Return a script for customer to run in their cloud environment to
+        grants access to the GCP environment as a downloadable attachment.
+
+        Keyword arguments:
+        ids -- Hierarchical Resource IDs of accounts. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+        parent_type -- GCP Hierarchy Parent Type. String.
+                       Allowed values: organization, folder, project
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMGCPUserScriptsAttachment
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMGCPUserScriptsAttachment",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -1070,11 +1441,22 @@ class CSPMRegistration(ServiceClass):
     GetCSPMAwsAccountScriptsAttachment = get_aws_account_scripts_attachment
     GetCSPMAzureAccount = get_azure_account
     CreateCSPMAzureAccount = create_azure_account
+    UpdateCSPMAzureAccount = update_azure_account
     DeleteCSPMAzureAccount = delete_azure_account
     UpdateCSPMAzureAccountClientID = update_azure_account_client_id
     UpdateCSPMAzureTenantDefaultSubscriptionID = update_azure_tenant_default_subscription_id
     GetCSPMAzureUserScriptsAttachment = get_azure_user_scripts_attachment
     AzureDownloadCertificate = azure_download_certificate
+    GetCSPMAzureManagementGroup = get_azure_management_group
+    CreateCSPMAzureManagementGroup = create_azure_management_group
+    GetCSPMCGPAccount = get_gcp_account
+    GetCSPMGCPAccount = get_gcp_account  # Typo fix
+    CreateCSPMGCPAccount = create_gcp_account
+    DeleteCSPMGCPAccount = delete_gcp_account
+    UpdateCSPMGCPAccount = update_gcp_account
+    ConnectCSPMGCPAccount = connect_gcp_account
+    GetCSPMGCPServiceAccountsExt = get_gcp_service_account
+    GetCSPMGCPUserScriptsAttachment = get_gcp_user_scripts_attachment
     GetBehaviorDetections = get_behavior_detections
     GetConfigurationDetections = get_configuration_detections
     GetConfigurationDetectionEntities = get_configuration_detection_entities

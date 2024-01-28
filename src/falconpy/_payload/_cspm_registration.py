@@ -50,6 +50,8 @@ def cspm_registration_payload(passed_keywords: dict) -> Dict[str, List[Dict[str,
                 "client_id": "string",
                 "cloudtrail_region": "string",
                 "default_subscription": true,
+                "default_subscription_id": "string",
+                "environment": "string",
                 "iam_role_arn": "string",
                 "is_master": true,
                 "organization_id": "string",
@@ -69,7 +71,7 @@ def cspm_registration_payload(passed_keywords: dict) -> Dict[str, List[Dict[str,
     item = {}
     keys = ["account_id", "account_type", "cloudtrail_region", "iam_role_arn",
             "organization_id", "tenant_id", "subscription_id", "remediation_region",
-            "remediation_tou_accepted", "client_id"
+            "remediation_tou_accepted", "client_id", "environment", "default_subscription_id"
             ]
     bool_keys = ["behavior_assessment_enabled", "is_master", "sensor_management_enabled",
                  "use_existing_cloudtrail", "default_subscription"
