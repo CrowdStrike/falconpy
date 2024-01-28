@@ -60,6 +60,13 @@ _alerts_endpoints = [
     "alerts",
     [
       {
+        "type": "boolean",
+        "default": True,
+        "description": "allows previously hidden alerts to be retrieved",
+        "name": "include_hidden",
+        "in": "query"
+      },
+      {
         "description": "request body takes a list of aggregate-alert query requests",
         "name": "body",
         "in": "body",
@@ -115,6 +122,13 @@ _alerts_endpoints = [
     "alerts",
     [
       {
+        "type": "boolean",
+        "default": True,
+        "description": "allows previously hidden alerts to be retrieved",
+        "name": "include_hidden",
+        "in": "query"
+      },
+      {
         "name": "body",
         "in": "body",
         "required": True
@@ -125,7 +139,7 @@ _alerts_endpoints = [
     "PatchEntitiesAlertsV2",
     "PATCH",
     "/alerts/entities/alerts/v2",
-    "Perform actions on detections identified by detection ID(s) in request.\nEach action has a name and a "
+    "Perform actions on Alerts identified by composite ID(s) in request.\nEach action has a name and a "
     "description which describes what the action does.\nIf a request adds and removes tag in a single request, the "
     "order of processing would be to remove tags before adding new ones in.\n\n",
     "alerts",
@@ -142,11 +156,18 @@ _alerts_endpoints = [
     "PatchEntitiesAlertsV3",
     "PATCH",
     "/alerts/entities/alerts/v3",
-    "Perform actions on detections identified by detection ID(s) in request.\nEach action has a name and a "
+    "Perform actions on Alerts identified by composite ID(s) in request.\nEach action has a name and a "
     "description which describes what the action does.\nIf a request adds and removes tag in a single request, the "
     "order of processing would be to remove tags before adding new ones in.\n\n",
     "alerts",
     [
+      {
+        "type": "boolean",
+        "default": True,
+        "description": "allows previously hidden alerts to be retrieved",
+        "name": "include_hidden",
+        "in": "query"
+      },
       {
         "description": "request body takes a list of action parameter request that is applied against all \"ids\" provided",
         "name": "body",
@@ -219,6 +240,13 @@ _alerts_endpoints = [
     "retrieves all Alerts ids that match a given query",
     "alerts",
     [
+      {
+        "type": "boolean",
+        "default": True,
+        "description": "allows previously hidden alerts to be retrieved",
+        "name": "include_hidden",
+        "in": "query"
+      },
       {
         "type": "integer",
         "description": "The first detection to return, where `0` is the latest detection. Use with the "
