@@ -46,9 +46,10 @@ _cspm_registration_endpoints = [
     "cspm_registration",
     [
       {
-        "maxLength": 4,
-        "minLength": 3,
-        "pattern": "^(full|dry)$",
+        "enum": [
+          "dry",
+          "full"
+        ],
         "type": "string",
         "description": "Type of scan, dry or full, to perform on selected accounts",
         "name": "scan-type",
@@ -85,7 +86,10 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^(provisioned|operational)$",
+        "enum": [
+          "provisioned",
+          "operational"
+        ],
         "type": "string",
         "description": "Account status to filter results by.",
         "name": "status",
@@ -101,10 +105,19 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^(true|false)$",
         "enum": [
-          "false",
-          "true"
+          "true",
+          "false"
+        ],
+        "type": "string",
+        "description": "Only return CSPM Lite accounts",
+        "name": "cspm_lite",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "true",
+          "false"
         ],
         "type": "string",
         "description": "Only return migrated d4c accounts",
@@ -204,10 +217,9 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
-        "pattern": "^(true|false)$",
         "enum": [
-          "false",
-          "true"
+          "true",
+          "false"
         ],
         "type": "string",
         "name": "use_existing_cloudtrail",
@@ -287,6 +299,17 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "pattern": "^(true|false)$",
+        "enum": [
+          "false",
+          "true"
+        ],
+        "type": "string",
+        "description": "Only return CSPM Lite accounts",
+        "name": "cspm_lite",
+        "in": "query"
+      },
+      {
         "maxLength": 3,
         "minLength": 1,
         "type": "integer",
@@ -309,6 +332,20 @@ _cspm_registration_endpoints = [
     "/cloud-connect-cspm-azure/entities/account/v1",
     "Creates a new account in our system for a customer and generates a script for them to run in their cloud "
     "environment to grant us access.",
+    "cspm_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateCSPMAzureAccount",
+    "PATCH",
+    "/cloud-connect-cspm-azure/entities/account/v1",
+    "Patches a existing account in our system for a customer.",
     "cspm_registration",
     [
       {
@@ -449,6 +486,54 @@ _cspm_registration_endpoints = [
     ]
   ],
   [
+    "GetCSPMAzureManagementGroup",
+    "GET",
+    "/cloud-connect-cspm-azure/entities/management-group/v1",
+    "Return information about Azure management group registration",
+    "cspm_registration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Tenant ids to filter azure accounts",
+        "name": "tenant_ids",
+        "in": "query"
+      },
+      {
+        "maxLength": 3,
+        "minLength": 1,
+        "type": "integer",
+        "default": 100,
+        "description": "The maximum records to return. Defaults to 100.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateCSPMAzureManagementGroup",
+    "POST",
+    "/cloud-connect-cspm-azure/entities/management-group/v1",
+    "Creates a new management group in our system for a customer.",
+    "cspm_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetCSPMAzureUserScriptsAttachment",
     "GET",
     "/cloud-connect-cspm-azure/entities/user-scripts-download/v1",
@@ -489,6 +574,193 @@ _cspm_registration_endpoints = [
         "type": "string",
         "description": "Template to be rendered",
         "name": "template",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "description": "Use Azure Management Group",
+        "name": "azure_management_group",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetCSPMCGPAccount",
+    "GET",
+    "/cloud-connect-cspm-gcp/entities/account/v1",
+    "Returns information about the current status of an GCP account.",
+    "cspm_registration",
+    [
+      {
+        "enum": [
+          "Folder",
+          "Organization",
+          "Project"
+        ],
+        "type": "string",
+        "description": "GCP Hierarchy Parent Type, organization/folder/project",
+        "name": "parent_type",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Hierarchical Resource IDs of accounts",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "dry",
+          "full"
+        ],
+        "type": "string",
+        "description": "Type of scan, dry or full, to perform on selected accounts",
+        "name": "scan-type",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "operational",
+          "provisioned"
+        ],
+        "type": "string",
+        "description": "Account status to filter results by.",
+        "name": "status",
+        "in": "query"
+      },
+      {
+        "maxLength": 3,
+        "minLength": 1,
+        "type": "integer",
+        "default": 100,
+        "description": "The maximum records to return. Defaults to 100.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Order fields in ascending or descending order. Ex: parent_type|asc.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateCSPMGCPAccount",
+    "POST",
+    "/cloud-connect-cspm-gcp/entities/account/v1",
+    "Creates a new account in our system for a customer and generates a new service account for them to add "
+    "access to in their GCP environment to grant us access.",
+    "cspm_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateCSPMGCPAccount",
+    "PATCH",
+    "/cloud-connect-cspm-gcp/entities/account/v1",
+    "Patches a existing account in our system for a customer.",
+    "cspm_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeleteCSPMGCPAccount",
+    "DELETE",
+    "/cloud-connect-cspm-gcp/entities/account/v1",
+    "Deletes a GCP account from the system.",
+    "cspm_registration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Hierarchical Resource IDs of accounts",
+        "name": "ids",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ConnectCSPMGCPAccount",
+    "POST",
+    "/cloud-connect-cspm-gcp/entities/account/v2",
+    "Creates a new GCP account with newly-uploaded service account or connects with existing service account "
+    "with only the following fields: parent_id, parent_type and service_account_id",
+    "cspm_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetCSPMGCPServiceAccountsExt",
+    "GET",
+    "/cloud-connect-cspm-gcp/entities/service-accounts/v1",
+    "Returns the service account id and client email for external clients.",
+    "cspm_registration",
+    [
+      {
+        "pattern": "^\\d+$",
+        "type": "string",
+        "description": "Service Account ID",
+        "name": "id",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetCSPMGCPUserScriptsAttachment",
+    "GET",
+    "/cloud-connect-cspm-gcp/entities/user-scripts-download/v1",
+    "Return a script for customer to run in their cloud environment to grant us access to their GCP "
+    "environment as a downloadable attachment",
+    "cspm_registration",
+    [
+      {
+        "enum": [
+          "Folder",
+          "Organization",
+          "Project"
+        ],
+        "type": "string",
+        "description": "GCP Hierarchy Parent Type, organization/folder/project",
+        "name": "parent_type",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Hierarchical Resource IDs of accounts",
+        "name": "ids",
         "in": "query"
       }
     ]
@@ -672,7 +944,8 @@ _cspm_registration_endpoints = [
     "GetConfigurationDetections",
     "GET",
     "/detects/entities/iom/v1",
-    "Get list of active misconfigurations",
+    "Get list of active misconfigurations. This endpoint is deprecated, please use GetConfigurationDetectionIDsV2 and "
+    "GetConfigurationDetectionEntities instead",
     "cspm_registration",
     [
       {

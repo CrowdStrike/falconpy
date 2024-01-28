@@ -85,7 +85,17 @@ class TestCSPMRegistration:
             "get_configuration_detections": falcon.get_configuration_detections(limit=1),
             "GetConfigurationDetectionEntities": falcon.get_configuration_detection_entities(),
             "GetConfigurationDetectionIdsV2": falcon.get_configuration_detection_ids_v2(),
-            "GetCSPMPoliciesDetails": falcon.get_policy_details()
+            "GetCSPMPoliciesDetails": falcon.get_policy_details(),
+            "GetGCPAccount": falcon.get_gcp_account(ids="12345678", scan_type="dry"),
+            "CreateGCPAccount": falcon.create_gcp_account(parent_id="whatever", parent_type="shiny"),
+            "DeleteD4CGCPAccount": falcon.delete_gcp_account("1234567"),
+            "ConnectD4CGCPAccount": falcon.connect_gcp_account(client_id="123456", parent_id="123456"),
+            "GetD4CGCPServiceAccoutnExt": falcon.get_gcp_service_account(id="12345678"),
+            "GetD4CGCPUserScriptsAttachmentV2": falcon.get_gcp_user_scripts_attachment(ids="12345678"),
+            "UpdateGCP": falcon.update_gcp_account(environment="temperate", parent_id="1234567"),
+            "GetMgmt": falcon.get_azure_management_group(tenant_id="1234567"),
+            "CreateMgmt": falcon.create_azure_management_group(default_subscription_id="bob", tenant_id="1234567"),
+            "UpdateAzure": falcon.update_azure_account(environment="chilly", subscription_id="banana")
         }
         for key in tests:
             if tests[key]["status_code"] != 500:
