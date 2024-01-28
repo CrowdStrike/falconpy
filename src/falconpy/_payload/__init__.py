@@ -37,7 +37,13 @@ from ._recon import (
     recon_export_job_payload
     )
 from ._malquery import malquery_exact_search_payload, malquery_hunt_payload, malquery_fuzzy_payload
-from ._container import image_payload, registry_payload
+from ._container import (
+    image_payload,
+    registry_payload,
+    image_policy_payload,
+    image_exclusions_payload,
+    image_group_payload
+    )
 from ._detects import update_detects_payload
 from ._incidents import incident_action_parameters
 from ._ioa import ioa_exclusion_payload, ioa_custom_payload
@@ -102,5 +108,6 @@ __all__ = [
     "gcp_registration_payload", "filevantage_rule_group_payload", "filevantage_rule_payload",
     "filevantage_policy_payload", "filevantage_scheduled_exclusion_payload",
     "snapshot_inventory_payload", "snapshot_registration_payload", "workflow_deprovision_payload",
-    "workflow_template_payload", "foundry_execute_search_payload", "foundry_dynamic_search_payload"
+    "workflow_template_payload", "foundry_execute_search_payload", "foundry_dynamic_search_payload",
+    "image_policy_payload", "image_exclusions_payload", "image_group_payload"
 ]

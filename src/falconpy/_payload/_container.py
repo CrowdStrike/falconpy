@@ -150,3 +150,104 @@ def registry_payload(passed_keywords: dict) -> dict:
             returned_payload["credential"]["details"][key] = passed_keywords.get(key)
 
     return returned_payload
+
+
+def image_policy_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted image assessment policy payload.
+
+    {
+        "description": "string",
+        "is_enabled": boolean,
+        "name": "string",
+        "policy_data": {
+            "rules": [
+                {
+                    "action": "string",
+                    "policy_rules_data": {
+                        "conditions": [
+                            {}
+                        ]
+                    }
+                }
+            ]
+        }
+    }
+    """
+    returned_payload = {}
+    keys = ["description", "name", "is_enabled"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    if passed_keywords.get("policy_data", None) is not None:
+        returned_payload["policy_data"] = passed_keywords.get("policy_data", None)
+    if passed_keywords.get("rules", None) is not None:
+        if not returned_payload["policy_data"]:
+            rules = passed_keywords.get("rules", None)
+            if isinstance(rules, dict):
+                rules = [rules]
+            returned_payload["policy_data"] = {
+                "rules": rules
+            }
+
+    return returned_payload
+
+
+def image_exclusions_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted image policy exclusion payload.
+
+    {
+        "conditions": [
+            {
+                "description": "string",
+                "prop": "string",
+                "ttl": 0,
+                "value": [
+                    "string"
+                ]
+            }
+        ]
+    }
+    """
+    returned_payload = {}
+    if passed_keywords.get("conditions", None) is not None:
+        returned_payload["conditions"] = passed_keywords.get("conditions", None)
+    keys = ["description", "prop", "ttl", "value"]
+    if not returned_payload.get("conditions", None) and passed_keywords:
+        condition = {}
+        for key in keys:
+            if passed_keywords.get(key, None) is not None:
+                condition[key] = passed_keywords.get(key, None)
+        returned_payload["conditions"] = [condition]
+
+    return returned_payload
+
+
+def image_group_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted image policy group payload.
+
+    {
+        "description": "string",
+        "name": "string",
+        "policy_group_data": {
+            "conditions": [
+                {}
+            ]
+        },
+        "policy_id": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["description", "name", "policy_group_data", "policy_id"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key, None)
+    if not returned_payload.get("policy_group_data", None) and passed_keywords.get("conditions"):
+        conditions = passed_keywords.get("conditions", None)
+        if isinstance(conditions, dict):
+            conditions = [conditions]
+        returned_payload["policy_group_data"] = {
+            "conditions": conditions
+        }
+
+    return returned_payload
