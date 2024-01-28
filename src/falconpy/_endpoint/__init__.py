@@ -68,6 +68,7 @@ from ._foundry_logscale import _foundry_logscale_endpoints
 from ._host_group import _host_group_endpoints
 from ._hosts import _hosts_endpoints
 from ._identity_protection import _identity_protection_endpoints
+from ._image_assessment_policies import _image_assessment_policies_endpoints
 from ._incidents import _incidents_endpoints
 from ._installation_tokens import _installation_tokens_endpoints
 from ._intel import _intel_endpoints
@@ -135,6 +136,7 @@ api_endpoints.extend(_foundry_logscale_endpoints)
 api_endpoints.extend(_host_group_endpoints)
 api_endpoints.extend(_hosts_endpoints)
 api_endpoints.extend(_identity_protection_endpoints)
+api_endpoints.extend(_image_assessment_policies_endpoints)
 api_endpoints.extend(_incidents_endpoints)
 api_endpoints.extend(_installation_tokens_endpoints)
 api_endpoints.extend(_intel_endpoints)

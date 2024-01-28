@@ -118,6 +118,7 @@ from .foundry_logscale import FoundryLogScale
 from .host_group import HostGroup
 from .hosts import Hosts
 from .identity_protection import IdentityProtection
+from .image_assessment_policies import ImageAssessmentPolicies
 from .incidents import Incidents
 from .installation_tokens import InstallationTokens
 from .intel import Intel
@@ -193,7 +194,8 @@ __all__ = [
     "RealTimeResponseAudit", "Workflows", "DeprecatedClass", "DeprecatedOperation",
     "SDKDeprecationWarning", "ConfigurationAssessmentEvaluationLogic", "ConfigurationAssessment",
     "ContainerAlerts", "ContainerDetections", "ContainerImages", "ContainerPackages",
-    "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers"
+    "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers",
+    "ImageAssessmentPolicies"
     ]
 """
 This is free and unencumbered software released into the public domain.
