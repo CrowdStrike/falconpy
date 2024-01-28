@@ -1,3 +1,129 @@
+# Version 1.4.1
+## Added features and functionality
++ Added: `include_hidden` argument added to the _PostAggregatesAlertsV2_, _PostEntitiesAlertsV2_, _PatchEntitiesAlertsV3_ and _GetQueriesAlertsV2_ operations.
+    - `_endpoint/_alerts.py`
+
++ Added: _ReadContainerAlertsCountBySeverity_ operation added to the __Container Alerts__ service collection.
+    - `_endpoint/_container_alerts.py`
+    - `container_alerts.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_container_alerts.py`
+
++ Added: `cspm_lite` argument added to the _GetCSPMAwsAccount_ and _GetCSPMAzureAccount_ operations within the __CSPM Registration__ service collection.
+    - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
+
++ Added: `azure_management_group` argument added to the _GetCSPMAzureUserScriptsAttachment_ operation within the __CSPM Registration__ service collection.
+    - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
+
++ Added: 9 new operations added to the __CSPM Registration__ service collection.
+    * _GetCSPMAzureManagementGroup_
+    * _CreateCSPMAzureManagementGroup_
+    * _GetCSPMCGPAccount_
+    * _CreateCSPMGCPAccount_
+    * _DeleteCSPMGCPAccount_
+    * _UpdateCSPMGCPAccount_
+    * _ConnectCSPMGCPAccount_
+    * _GetCSPMGCPServiceAccountsExt_
+    * _GetCSPMGCPUserScriptsAttachment_
+    - `_endpoint/_cspm_registration.py`
+    - `_payload/_cspm_registration.py`
+    - `cspm_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cspm_registration.py`
+
++ Added: `azure_management_group` argument added to the _GetDiscoverCloudAzureUserScriptsAttachment_ operation within the __D4C Registration__ service collection.
+    - `_endpoint/_d4c_registration.py`
+    - `d4c_registration.py`
+
++ Added: 4 new operations added to the __D4C Registration__ service collection.
+    * _DeleteD4CGCPAccount_
+    * _ConnectD4CGCPAccount_
+    * _GetD4CGCPServiceAccountsExt_
+    * _GetD4CGCPUserScriptsAttachment_
+    - `_endpoint/_d4c_registration.py`
+    - `_payload/_d4c_registration.py`
+    - `d4c_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_d4c_registration.py`
+
++ Added: `execution_cid` argument added to the _WorkflowExecute_ operation within the __Workflows__ service collection.
+    - `_endpoint/_workflows.py`
+    - `workflows.py`
+
++ Added: New service collection __Image Assessment Policies__ containing 11 new operations.
+    * _ReadPolicies_
+    * _CreatePolicies_
+    * _UpdatePolicies_
+    * _DeletePolicy_
+    * _ReadPolicyExclusions_
+    * _UpdatePolicyExclusions_
+    * _ReadPolicyGroups_
+    * _CreatePolicyGroups_
+    * _UpdatePolicyGroups_
+    * _DeletePolicyGroup_
+    * _UpdatePolicyPrecedence_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_image_assessment_policies.py`
+    > 3 new payload handlers are added.
+    - `_payload/__init__.py`
+    - `_payload/_container.py`
+    - `__init__.py`
+    - `image_assessment_policies.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_image_assessment_policies.py`
+
++ Added: 8 new operations added to the __Workflows__ service collection.
+    * _WorkflowDefinitionsCombined_
+    * _WorkflowExecutionsCombined_
+    * _WorkflowDefinitionsExport_
+    * _WorkflowDefinitionsImport_
+    * _WorkflowDefinitionsUpdate_
+    * _WorkflowDefinitionsCreate_
+    * _WorkflowGetHumanInputV1_
+    * _WorkflowUpdateHumanInputV1_
+    - `_endpoint/_workflows.py`
+    - `workflows.py`
+    > 2 new payload handlers are added.
+    - `_payload/__init__.py`
+    - `_payload/_workflows.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_workflows.py`
+
+## Issue resolved
++ Fixed: `member_cid` argument is not being passed to the authentication event when leveraging Environment Authentication. Closes #1105.
+    - `_auth_object/_falcon_interface.py`
+
++ Fixed: `rule_ids` is not included in body payloads when the list is empty for the _update_rule_groups_ operation within the __Firewall Management__ Service Class. Closes #1107.
+    - `_payload/_firewall.py`
+
++ Fixed: Added missing actions to _allowed_actions validator within `PerformActionV2` method of the __Hosts__ service collection. Closes #1108.
+    - `hosts.py`
+    - Thanks go out to @i-shubham01 for identifying and resolving this issue! 🙇
+
+## Other
++ Updated: Enums added to _GetCSPMAwsAccount_ and _GetCSPMAwsConsoleSetupURLs_ operations within the __CSPM Registration__ endpoint module.
+    - `_endpoint/_cspm_registration.py`
+
++ Updated: Several parameter descriptions within the __Custom IOA__ endpoint module updated.
+    - `_endpoint/_custom_ioa.py`
+    - `_endpoint/deprecated/_custom_ioa.py`
+
++ Updated: Enum updated within the _GetD4CAwsAccount_ operation of the __D4C Registration__ endpoint module.
+    - `_endpoint/_d4c_registration.py`
+
++ Updated: Parameter description for the _Submit_ operation within the __Falcon Intelligence Sandbox__ endpoint module updated.
+    - `_endpoint/_falconx_sandbox.py`
+
++ Updated: Multiple parameter descriptions within the __Kubernetes Protection__ endpoint module updated.
+    - `_endpoint/_kubernetes_protection_.py`
+
++ Updated: Enum updated within the _QueryActivityByCaseID_ operation of the __Message Center__ endpoint module.
+    - `_endpoint/_message_center.py`
+
+---
+
 # Version 1.4.0
 ## Other
 + Dropped: Python 3.6 support.
