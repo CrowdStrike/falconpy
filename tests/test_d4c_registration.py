@@ -105,7 +105,11 @@ class TestD4CRegistration:
             "GetD4CAwsConsoleSetupURLs": falcon.get_aws_console_setup("us-east-2"),
             "GetD4CAwsAccountScriptsAttachment": falcon.get_aws_account_scripts("123456789"),
             "GetHorizonD4CScripts": falcon.get_aws_horizon_scripts(organization_id="123456789"),
-            "GetDiscoverCloudAzureTenantIDs": falcon.get_azure_tenant_ids()
+            "GetDiscoverCloudAzureTenantIDs": falcon.get_azure_tenant_ids(),
+            "DeleteD4CGCPAccount": falcon.delete_gcp_account("1234567"),
+            "ConnectD4CGCPAccount": falcon.connect_gcp_account(client_id="123456", parent_id="123456"),
+            "GetD4CGCPServiceAccoutnExt": falcon.get_gcp_service_account(id="12345678"),
+            "GetD4CGCPUserScriptsAttachmentV2": falcon.get_gcp_user_scripts_attachment_v2(ids="12345678")
         }
         for key in tests:
             if tests[key]["status_code"] != 500:

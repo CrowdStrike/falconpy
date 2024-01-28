@@ -112,15 +112,23 @@ def gcp_registration_payload(passed_keywords: dict) -> dict:
     {
         "resources": [
             {
+                "client_email": "string",
+                "client_id": "string",
                 "parent_id": "string",
-                "parent_type": "string"
+                "parent_type": "string",
+                "private_key": "string",
+                "private_key_id": "string",
+                "project_id": "string",
+                "service_account_id": 0
             }
         ]
     }
     """
     returned_payload: Dict[str, List[Dict[str, str]]] = {}
     returned_payload["resources"] = []
-    keys = ["parent_id", "parent_type"]
+    keys = ["client_email", "client_id", "parent_id", "parent_type",
+            "private_key", "private_key_id", "project_id", "service_account_id"
+            ]
     item = {}
     for key in keys:
         if passed_keywords.get(key, None):

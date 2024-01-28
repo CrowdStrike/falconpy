@@ -353,6 +353,7 @@ class D4CRegistration(ServiceClass):
 
         Keyword arguments:
         parameters -- full parameters payload, not required if using other keywords.
+        azure_management_group - Use Azure Management Group. Boolean.
         subscription_ids -- Azure subscription IDs. String or list of strings.
         template -- Template to be rendered. String.
         tenant_id -- Azure tenant ID. String.
@@ -467,6 +468,149 @@ class D4CRegistration(ServiceClass):
             endpoints=Endpoints,
             operation_id="CreateD4CGCPAccount",
             body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_gcp_account(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Delete a GCP account from the system.
+
+        Keyword arguments:
+        ids -- Hierarchical Resource IDs of accounts. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/DeleteD4CGCPAccount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteD4CGCPAccount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def connect_gcp_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Register new GCP account.
+
+        Creates a new account in our system for a customer and generates a new service
+        account for them to add access to in their GCP environment to grant us access.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "client_email": "string",
+                            "client_id": "string",
+                            "parent_id": "string",
+                            "parent_type": "string",
+                            "private_key": "string",
+                            "private_key_id": "string",
+                            "project_id": "string",
+                            "service_account_id": 0
+                        }
+                    ]
+                }
+        client_email -- GCP account email. String.
+        client_id -- GCP account client ID. String.
+        parent_id -- GCP parent ID. String.
+        parent_type -- GCP parent type. String.
+        private_key -- GCP private key. String.
+        private_key_id -- GCP private key ID. String.
+        project_id -- GCP project ID. String.
+        service_account_id -- GCP service account ID. Integer.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/ConnectD4CGCPAccount
+        """
+        if not body:
+            body = gcp_registration_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ConnectD4CGCPAccount",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_gcp_service_account(self: object,
+                                *args,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Dict[str, Union[int, dict]]:
+        """Return the service account id and client email for external clients.
+
+        Keyword arguments:
+        id -- Service Account ID. String.
+        parameters -- full parameters payload, not required if id is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetD4CGCPServiceAccountsExt
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetD4CGCPServiceAccountsExt",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_gcp_user_scripts_attachment_v2(self: object,
+                                           *args,
+                                           parameters: dict = None,
+                                           **kwargs
+                                           ) -> Dict[str, Union[int, dict]]:
+        """Retrieve GCP user script attachment.
+
+        Return a script for customer to run in their cloud environment to
+        grant us access to their GCP environment as a downloadable attachment.
+
+        Keyword arguments:
+        ids -- Hierarchical Resource IDs of accounts. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+        parent_type -- GCP Hierarchy Parent Type. String.
+                       Allowed values: organization, folder, project
+        status -- Account status to filter results by. String.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetD4CGCPUserScriptsAttachment
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetD4CGCPUserScriptsAttachment",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -623,6 +767,10 @@ class D4CRegistration(ServiceClass):
     GetD4CCGPAccount = get_gcp_account
     CreateCSPMGCPAccount = create_gcp_account
     CreateD4CGCPAccount = create_gcp_account
+    DeleteD4CGCPAccount = delete_gcp_account
+    ConnectD4CGCPAccount = connect_gcp_account
+    GetD4CGCPUserScriptsAttachment = get_gcp_user_scripts_attachment_v2
+    GetD4CGCPServiceAccountsExt = get_gcp_service_account
     GetCSPMGCPUserScriptsAttachment = get_gcp_user_scripts_attachment
     GetCSPMGCPUserScripts = get_gcp_user_scripts
     GetD4CGCPUserScripts = get_gcp_user_scripts
