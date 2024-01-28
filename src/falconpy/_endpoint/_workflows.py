@@ -38,12 +38,185 @@ For more information, please refer to <https://unlicense.org>
 
 _workflows_endpoints = [
   [
+    "WorkflowDefinitionsCombined",
+    "GET",
+    "/workflows/combined/definitions/v1",
+    "Search workflow definitions based on the provided filter",
+    "workflows",
+    [
+      {
+        "type": "string",
+        "description": "FQL query specifying filter parameters.",
+        "name": "filter",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "type": "string",
+        "description": "Starting pagination offset of records to return.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Maximum number of records to return.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
+        "type": "string",
+        "description": "Sort items by providing a comma separated list of property and direction (eg "
+        "name.desc,time.asc). If direction is omitted, defaults to descending.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "WorkflowExecutionsCombined",
+    "GET",
+    "/workflows/combined/executions/v1",
+    "Search workflow executions based on the provided filter",
+    "workflows",
+    [
+      {
+        "type": "string",
+        "description": "FQL query specifying filter parameters.",
+        "name": "filter",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "type": "string",
+        "description": "Starting pagination offset of records to return.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Maximum number of records to return.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
+        "type": "string",
+        "description": "Sort items by providing a comma separated list of property and direction (eg "
+        "name.desc,time.asc). If direction is omitted, defaults to descending.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "WorkflowDefinitionsExport",
+    "GET",
+    "/workflows/entities/definitions/export/v1",
+    "Exports a workflow definition for the given definition ID",
+    "workflows",
+    [
+      {
+        "maxLength": 40,
+        "minLength": 32,
+        "type": "string",
+        "description": "ID of workflow definitions to return details for",
+        "name": "id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "WorkflowDefinitionsImport",
+    "POST",
+    "/workflows/entities/definitions/import/v1",
+    "Imports a workflow definition based on the provided model",
+    "workflows",
+    [
+      {
+        "type": "file",
+        "x-mimetype": "application/yaml",
+        "description": "A workflow definition in YAML format to import",
+        "name": "data_file",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Workflow name to override",
+        "name": "name",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "When enabled, prevents saving workflow after validating",
+        "name": "validate_only",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "WorkflowDefinitionsUpdate",
+    "PUT",
+    "/workflows/entities/definitions/v1",
+    "Updates a workflow definition based on the provided model",
+    "workflows",
+    [
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "When enabled, prevents saving workflow after validating",
+        "name": "validate_only",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "WorkflowDefinitionsCreate",
+    "POST",
+    "/workflows/entities/definitions/v1",
+    "Creates a workflow definition based on the provided model",
+    "workflows",
+    [
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "When enabled, prevents saving workflow after validating",
+        "name": "validate_only",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "WorkflowExecute",
     "POST",
     "/workflows/entities/execute/v1",
     "Executes an on-demand Workflow, the body is JSON used to trigger the execution, the response the execution ID(s)",
     "workflows",
     [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "CID(s) to execute on. This can be a child if this is a flight control enabled "
+        "definition. If unset the definition CID is used.",
+        "name": "execution_cid",
+        "in": "query"
+      },
       {
         "type": "array",
         "items": {
@@ -128,6 +301,50 @@ _workflows_endpoints = [
         "description": "workflow execution id to return results for.",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "WorkflowGetHumanInputV1",
+    "GET",
+    "/workflows/entities/human-inputs/v1",
+    "Gets one or more specific human inputs by their IDs.",
+    "workflows",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "IDs of human inputs to read",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "WorkflowUpdateHumanInputV1",
+    "PATCH",
+    "/workflows/entities/human-inputs/v1",
+    "Provides an input in response to a human input action. Depending on action configuration, one or more of "
+    "Approve, Decline, and/or Escalate are permitted.",
+    "workflows",
+    [
+      {
+        "maxLength": 32,
+        "minLength": 32,
+        "type": "string",
+        "description": "ID of human input to provide an input to",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]

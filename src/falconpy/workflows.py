@@ -36,12 +36,19 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-from ._util import force_default, process_service_request, handle_single_argument
+from ._util import (
+    force_default,
+    process_service_request,
+    handle_single_argument,
+    generate_error_result
+    )
 from ._payload import (
     simple_action_parameter,
     generic_payload_list,
     workflow_deprovision_payload,
-    workflow_template_payload
+    workflow_template_payload,
+    workflow_definition_payload,
+    workflow_human_input
     )
 from ._service_class import ServiceClass
 from ._endpoint._workflows import _workflows_endpoints as Endpoints
@@ -60,6 +67,201 @@ class Workflows(ServiceClass):
     - a valid token provided by the authentication service class (oauth2.py)
     """
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_definitions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search workflow definitions based on the provided filter.
+
+        Keyword arguments:
+        filter -- FQL query specifying filter parameters. String.
+        offset -- Starting pagination offset of records to return. String.
+        limit -- Maximum number of records to return. Integer.
+        sort -- FQL formatted sort (ex: name.desc,time.asc). String.
+                If direction is omitted, defaults to descending.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsCombined
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowDefinitionsCombined",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_executions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search workflow executions based on the provided filter.
+
+        Keyword arguments:
+        filter -- FQL query specifying filter parameters. String.
+        offset -- Starting pagination offset of records to return. String.
+        limit -- Maximum number of records to return. Integer.
+        sort -- FQL formatted sort (ex: name.desc,time.asc). String.
+                If direction is omitted, defaults to descending.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowExecutionsCombined
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowExecutionsCombined",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def export_definition(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Export a workflow definition for the given definition ID.
+
+        Keyword arguments:
+        id -- ID of workflow definitions to return details for. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsExport
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowDefinitionsExport",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def import_definition(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Import a workflow definition based on the provided model.
+
+        Keyword arguments:
+        data_file -- A workflow definition in YAML format to import. Binary data.
+        name -- Workflow name to override. String.
+        validate_only -- When enabled, prevents saving workflow after validating. Boolean.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsImport
+        """
+        data_file = kwargs.get("data_file", None)
+        if data_file:
+            returned = process_service_request(
+                        calling_object=self,
+                        endpoints=Endpoints,
+                        operation_id="WorkflowDefinitionsImport",
+                        keywords=kwargs,
+                        params=parameters,
+                        data=data_file
+                        )
+        else:
+            returned = generate_error_result("You must provide a workflow file in YAML format to import.")
+
+        return returned
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def update_definition(self: object,
+                          body: dict = None,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Dict[str, Union[int, dict]]:
+        """Update a workflow definition based on the provided model.
+
+        Keyword arguments:
+        validate_only -- When enabled, prevents saving workflow after validating. Boolean.
+        body -- Full body payload in JSON format, not required when using other keywords.
+        definition -- Full workflow definition. Dictionary.
+        change_log -- Optional description to outline changes made during the update. String.
+        enabled -- Specifies if the new definition should be enabled upon creation.
+        flight_control -- Flight control parameters. Dictionary.
+        id -- Used to identify documents across versions. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PUT
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsUpdate
+        """
+        if not body:
+            body = workflow_definition_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowDefinitionsUpdate",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def create_definition(self: object,
+                          body: dict = None,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Dict[str, Union[int, dict]]:
+        """Create a workflow definition based on the provided model.
+
+        Keyword arguments:
+        validate_only -- When enabled, prevents saving workflow after validating. Boolean.
+        body -- Full body payload in JSON format, not required when using other keywords.
+        definition -- Full workflow definition. Dictionary.
+        change_log -- Optional description to outline changes made during the update. String.
+        enabled -- Specifies if the new definition should be enabled upon creation.
+        flight_control -- Flight control parameters. Dictionary.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsCreate
+        """
+        if not body:
+            body = workflow_definition_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowDefinitionsCreate",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
     def execute(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Execute an on-demand workflow. Response will contain the execution ID.
@@ -71,6 +273,8 @@ class Workflows(ServiceClass):
                 }
         definition_id -- Definition ID to execute. Either a name or ID can be specified.
                          String or List of Strings.
+        execution_cid -- CID(s) to execute on. This can be a child for Flight Control scenarios.
+                         If unset, the definition CID is used. String or List of strings.
         name -- Workflow name to execute. Either a name or ID can be specified. String.
         parameters -- Full parameters payload in dictionary (JSON) format. Not required
                       if you are using other keywords. Dictionary.
@@ -171,6 +375,75 @@ class Workflows(ServiceClass):
             operation_id="WorkflowExecutionResults",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_human_input(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get one or more specific human inputs by their IDs.
+
+        Keyword arguments:
+        ids -- IDs of human inputs to read. String or List of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowGetHumanInputV1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowGetHumanInputV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def update_human_input(self: object,
+                           body: dict = None,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Dict[str, Union[int, dict]]:
+        """Update a human input.
+
+        Provides an input in response to a human input action.
+        Depending on action configuration, one or more of Approve, Decline, and/or Escalate are permitted.
+
+        Keyword arguments:
+        body -- Full body payload in JSON format, not required when using other keywords.
+                {
+                    "input": "string",
+                    "note": "string"
+                }
+        id -- ID of human input to provide an input to. String.
+        input -- Input to insert. String.
+        note -- Optional note to append. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowUpdateHumanInputV1
+        """
+        if not body:
+            body = workflow_human_input(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowUpdateHumanInputV1",
+            keywords=kwargs,
+            params=parameters,
+            body=body
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -373,9 +646,17 @@ class Workflows(ServiceClass):
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
+    WorkflowDefinitionsCombined = search_definitions
+    WorkflowExecutionsCombined = search_executions
+    WorkflowDefinitionsExport = export_definition
+    WorkflowDefinitionsImport = import_definition
+    WorkflowDefinitionsUpdate = update_definition
+    WorkflowDefinitionsCreate = create_definition
     WorkflowExecute = execute
     WorkflowExecutionsAction = execution_action
     WorkflowExecutionResults = execution_results
+    WorkflowGetHumanInputV1 = get_human_input
+    WorkflowUpdateHumanInputV1 = update_human_input
     WorkflowSystemDefinitionsDeProvision = deprovision
     WorkflowSystemDefinitionsPromote = promote
     WorkflowSystemDefinitionsProvision = provision
