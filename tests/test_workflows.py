@@ -15,7 +15,7 @@ from falconpy import Workflows
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Workflows(auth_object=config)
-AllowedResponses = [200, 201, 400, 403, 404, 429]  # Temp allow 403
+AllowedResponses = [200, 201, 400, 403, 404, 415, 500]  # Allowing 415 due to workflow import
 
 
 class TestWorkflows:
@@ -28,12 +28,21 @@ class TestWorkflows:
             "WorkflowSystemDefinitionsDeProvision" : falcon.deprovision(definition_id="12345", deprovision_all=True),
             "WorkflowSystemDefinitionsPromote" : falcon.promote(customer_definition_id="12345", activities={}),
             "WorkflowSystemDefinitionsProvision" : falcon.provision(name="FalconPyTesting", configuration=[{}]),
-
+            "WorkflowDefinitionsCombined": falcon.search_definitions(),
+            "WorkflowExecutionsCombined": falcon.search_executions(),
+            "WorkflowDefinitionsExport": falcon.export_definition(),
+            "WorkflowDefinitionsImport": falcon.import_definition(validate_only=True, data_file="this_will_415"),
+            "WorkflowDefinitionsImport": falcon.import_definition(validate_only=True, file_data="this_will_500"),
+            "WorkflowDefinitionsUpdate": falcon.update_definition(change_log="testing"),
+            "WorkflowDefinitionsCreate": falcon.create_definition(change_log="testing"),
+            "WorkflowGetHumanInputV1": falcon.get_human_input(ids="1234567"),
+            "WorkflowUpdateHumanInputV1": falcon.update_human_input(input="whatever", note="whatever"),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
-            #     print(tests[key])
+                # print(key)
+                # print(tests[key])
 
         return error_checks
 

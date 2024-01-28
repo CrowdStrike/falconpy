@@ -131,3 +131,49 @@ def workflow_template_payload(passed_keywords: dict):
             returned_payload["parameters"] = param_branch
 
     return returned_payload
+
+
+def workflow_definition_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted workflow definition payload.
+
+    {
+        "Definition": {},
+        "change_log": "string",
+        "enabled": true,
+        "flight_control": {
+            "all_cids": true,
+            "excluded_cids": [
+                "string"
+            ],
+            "include_parent_cid": true,
+            "selected_cids": [
+                "string"
+            ]
+        },
+        "id": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["definition", "change_log", "enabled", "flight_control", "id"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    return returned_payload
+
+
+def workflow_human_input(passed_keywords: dict) -> dict:
+    """Craft a properly formatted human input payload.
+
+    {
+        "input": "string",
+        "note": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["input", "note"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    return returned_payload
