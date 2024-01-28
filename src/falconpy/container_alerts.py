@@ -55,12 +55,39 @@ class ContainerAlerts(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_counts_by_severity(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get container alert counts by severity.
+
+        Keyword arguments:
+        filter -- Search Container Alerts using a query in Falcon Query Language (FQL). String.
+                  Supported filters:  cid, container_id, last_seen
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-alerts/ReadContainerAlertsCountBySeverity
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadContainerAlertsCountBySeverity",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def read_counts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search Container Alerts by the provided search criteria.
 
         Keyword arguments:
         filter -- Search Container Alerts using a query in Falcon Query Language (FQL). String.
-                  Supported filters:  cid, last_seen
+                  Supported filters:  cid, container_id, last_seen
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -113,5 +140,6 @@ class ContainerAlerts(ServiceClass):
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here for
     # backwards compatibility / ease of use purposes
+    ReadContainerAlertsCountBySeverity = read_counts_by_severity
     ReadContainerAlertsCount = read_counts
     SearchAndReadContainerAlerts = search_and_read

@@ -38,6 +38,22 @@ For more information, please refer to <https://unlicense.org>
 
 _container_alerts_endpoints = [
   [
+    "ReadContainerAlertsCountBySeverity",
+    "GET",
+    "/container-security/aggregates/container-alerts/count-by-severity/v1",
+    "Get Container Alerts counts by severity",
+    "container_alerts",
+    [
+      {
+        "type": "string",
+        "description": "Search Container Alerts using a query in Falcon Query Language (FQL). Supported "
+        "filters: cid,container_id,last_seen",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "ReadContainerAlertsCount",
     "GET",
     "/container-security/aggregates/container-alerts/count/v1",
@@ -47,7 +63,7 @@ _container_alerts_endpoints = [
       {
         "type": "string",
         "description": "Search Container Alerts using a query in Falcon Query Language (FQL). Supported "
-        "filters:  cid,last_seen",
+        "filters:  cid,container_id,last_seen",
         "name": "filter",
         "in": "query"
       }

@@ -23,6 +23,7 @@ class TestContainerAlerts:
     def test_all_code_paths(self):
         error_checks = True
         tests = {
+            "read_counts_by_severity": falcon.read_counts_by_severity(filter="cid:'12345678901234567890123456789012"),
             "read_counts": falcon.read_counts(filter="cid:'12345678901234567890123456789012"),
             "search_and_read": falcon.search_and_read(limit=1)
         }
