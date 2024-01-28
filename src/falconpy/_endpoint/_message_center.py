@@ -196,8 +196,8 @@ _message_center_endpoints = [
       },
       {
         "enum": [
-          "activity.created_time.asc",
-          "activity.created_time.desc"
+          "activity.type.asc",
+          "activity.type.desc"
         ],
         "type": "string",
         "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
