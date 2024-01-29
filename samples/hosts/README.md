@@ -59,7 +59,7 @@ python3 bulk_add_falcon_tag.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f 
 > API debugging can be enabled using the `-d` argument.
 
 ```shell
-python3 rfm_report.py -d
+python3 bulk_add_falcon_tag.py -d
 ```
 
 #### Command-line help
@@ -103,6 +103,92 @@ Required arguments:
 
 ### Example source code
 The source code for these examples can be found [here](bulk_add_falcon_tag.py).
+
+---
+
+## Hosts Report
+This script replaces the manual daily export of hosts from the Falcon Console that was required to audit host compliance. It was developed to be run as a recurring job and will output a CSV with all hosts in the CID along with other required info that can then be imported into a compliance dashboard or tool.
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+
+### Execution syntax
+This samples leverages simple command-line arguments to implement functionality.
+
+> Execute the default example. This will output results to a CSV file named `Hosts_output.csv`.
+
+```shell
+python3 hosts_report.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown below without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 hosts_report.py
+```
+
+> Change the output file with the `-o` argument.
+
+```shell
+python3 hosts_report.py -o host_details.csv
+```
+
+> API debugging can be enabled using the `-d` argument.
+
+```shell
+python3 hosts_report.py -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: hosts_report.py [-h] [-d] [-o OUTPUT_PATH] [-k CLIENT_ID] [-s CLIENT_SECRET]
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |             FalconPy
+`-------'                         `-------'
+
+ _    _   ______   ______  _______  ______
+| |  | | / |  | \ / |        | |   / |
+| |--| | | |  | | '------.   | |   '------.
+|_|  |_| \_|__|_/  ____|_/   |_|    ____|_/
+
+ ______   ______  ______   ______   ______  _______
+| |  | \ | |     | |  | \ / |  | \ | |  | \   | |
+| |__| | | |---- | |__|_/ | |  | | | |__| |   | |
+|_|  \_\ |_|____ |_|      \_|__|_/ |_|  \_\   |_|
+
+This script was developed by @Don-Swanson-Adobe and is intended to
+replace the manual daily export of hosts from the Falcon Console that
+was required to audit host compliance. It was developed to be run as
+a recurring job and will output a CSV with all hosts in the CID along
+with other required info that can then be imported into a compliance
+dashboard or tool.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -o OUTPUT_PATH, --output_path OUTPUT_PATH
+                        Location to store CSV output
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+```
+
+### Example source code
+The source code for these examples can be found [here](hosts_report.py).
 
 ---
 
