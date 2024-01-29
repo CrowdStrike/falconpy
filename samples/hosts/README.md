@@ -4,12 +4,101 @@
 
 # Hosts examples
 The examples in this folder focus on leveraging CrowdStrike's Hosts API to perform administrative operations.
+- [Add Falcon Tags in bulk](#add-falcon-tags-in-bulk)
+- [Default Groups](#default-groups)
+- [Get Host Groups](#get-host-groups)
+- [Host Report](#host-report)
+- [Host Search](#host-search)
 - [List sensor versions by Hostname](#list-sensors-by-hostname)
 - [List (and optionally remove) duplicate sensors](#list-duplicate-sensors)
 - [List (and optionally remove) stale sensors](#list-stale-sensors)
+- [Mass assignment check](#mass-assignment-check)
 - [Match usernames to Hosts](#match-usernames-to-hosts)
 - [Offset vs. Offset Tokens](#comparing-querydevicesbyfilter-and-querydevicesbyfilterscroll-offset-vs-token)
 - [Prune Hosts by Hostname or AID](#prune-hosts-by-hostname-or-aid)
+- [RFM Report](#rfm-report)
+- [Serial Search](#serial-search)
+
+## Add Falcon Tags in bulk
+Bulk assign a Falcon Grouping Tag to a list of hosts based on their serial number. This solution updates the tags of hosts in batches of 20.
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+
+### Execution syntax
+This samples leverages simple command-line arguments to implement functionality.
+
+> Execute the default example. This will assume the file containing serial numbers is called "serials.txt" and is stored in the same folder. That tag that will be added will have a value of "TEST_TAG".
+
+```shell
+python3 bulk_add_falcon_tag.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown below without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 bulk_add_falcon_tag.py
+```
+
+> Read the file "new_serials.txt" and apply the tag "NEW_TAG" to all devices identified.
+
+```shell
+python3 bulk_add_falcon_tag.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f new_serials.txt -t NEW_TAG
+```
+
+> Remove the tag "NEW_TAG" from all hosts identified in the file "new_serials.txt".
+
+```shell
+python3 bulk_add_falcon_tag.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f new_serials.txt -t NEW_TAG -r
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: bulk_add_falcon_tag.py [-h] [-d] [-f SERIAL_FILE] [-t TAG] [-r] [-k CLIENT_ID] [-s CLIENT_SECRET]
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |             FalconPy
+`-------'                         `-------'
+ __ __   ___    _____ ______  _____     ______   ____   ____   ____    ___  ____
+|  T  T /   \  / ___/|      T/ ___/    |      T /    T /    T /    T  /  _]|    \
+|  l  |Y     Y(   \_ |      (   \_     |      |Y  o  |Y   __jY   __j /  [_ |  D  )
+|  _  ||  O  | \__  Tl_j  l_j\__  T    l_j  l_j|     ||  T  ||  T  |Y    _]|    /
+|  |  ||     | /  \ |  |  |  /  \ |      |  |  |  _  ||  l_ ||  l_ ||   [_ |    \
+|  |  |l     ! \    |  |  |  \    |      |  |  |  |  ||     ||     ||     T|  .  Y
+l__j__j \___/   \___j  l__j   \___j      l__j  l__j__jl___,_jl___,_jl_____jl__j\_j
+
+This script was developed by @Don-Swanson-Adobe to bulk assign or remove a Falcon
+Grouping Tag against a list of hosts based on their serial number.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -f SERIAL_FILE, --serial_file SERIAL_FILE
+                        Text file contain serial numbers of hosts to tag
+  -t TAG, --tag TAG     String to use for the Falcon Tag
+  -r, --remove          Remove tag instead of applying it
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+```
+
+### Example source code
+The source code for these examples can be found [here](bulk_add_falcon_tag.py).
+
+---
 
 ## List sensors by hostname
 Loops through all hosts and displays the hostname and sensor version.
