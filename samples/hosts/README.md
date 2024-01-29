@@ -56,6 +56,12 @@ python3 bulk_add_falcon_tag.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f 
 python3 bulk_add_falcon_tag.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f new_serials.txt -t NEW_TAG -r
 ```
 
+> API debugging can be enabled using the `-d` argument.
+
+```shell
+python3 rfm_report.py -d
+```
+
 #### Command-line help
 Command-line help is available via the `-h` argument.
 
@@ -576,5 +582,92 @@ required arguments:
 
 ### Example source code
 The source code for this example can be found [here](prune_hosts.py).
+
+---
+
+## RFM Report
+This script determines the number of hosts in RFM (Up for more than 24 hours and seen within the last 24 hours) in your tenant or every child tenant attached to your parent.
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+| Flight Control | __READ__ (MSSP usage only) |
+
+### Execution syntax
+This samples leverages simple command-line arguments to implement functionality.
+
+> Execute the default example. This will output results for your tenant (only) to a CSV file called `RFM_Report.csv`.
+
+```shell
+python3 rfm_report.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown below without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 rfm_report.py
+```
+
+> The output file name can be changed using the `-o` argument.
+
+```shell
+python3 rfm_report.py -o my_rfm_report.csv
+```
+
+> For MSSP scenarios, provide your parent credentials and activate MSSP mode with the `-m` argument.
+
+```shell
+python3 rfm_report.py -k $FALCON_CLIENT_ID_PARENT -s $FALCON_CLIENT_SECRET_PARENT -m
+```
+
+> API debugging can be enabled using the `-d` argument.
+
+```shell
+python3 rfm_report.py -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: rfm_report.py [-h] [-d] [-m] [-o OUTPUT_PATH] [-k CLIENT_ID] [-s CLIENT_SECRET]
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |             FalconPy
+`-------'                         `-------'
+
+██████  ███████ ███    ███     ██████  ███████ ██████   ██████  ██████  ████████
+██   ██ ██      ████  ████     ██   ██ ██      ██   ██ ██    ██ ██   ██    ██
+██████  █████   ██ ████ ██     ██████  █████   ██████  ██    ██ ██████     ██
+██   ██ ██      ██  ██  ██     ██   ██ ██      ██      ██    ██ ██   ██    ██
+██   ██ ██      ██      ██     ██   ██ ███████ ██       ██████  ██   ██    ██
+
+This script was developed by @Developed by Don-Swanson-Adobe to determine the
+number of hosts in RFM (Up for more than 24 hours and seen within the last 24
+hours) in your tenant or every child tenant attached to your parent.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -m, --mssp            Return RFM details for child CIDs (MSSP parents only).
+  -o OUTPUT_PATH, --output_path OUTPUT_PATH
+                        Location to store CSV output
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+```
+
+### Example source code
+The source code for these examples can be found [here](rfm_report.py).
 
 ---
