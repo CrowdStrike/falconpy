@@ -49,10 +49,12 @@ class TestRTR:
             # pytest.skip("Race condition met, skipping.")
 
         if aid_to_check:
-            result = falcon.RTR_InitSession(body={"device_id": aid_to_check})
+            result = falcon.batch_init_sessions(host_ids=aid_to_check)
             if "resources" in result["body"]:
                 if result["body"]["resources"]:
-                    session_id = result["body"]["resources"][0]["session_id"]
+                    session_id = result["body"]["resources"][aid_to_check]["session_id"]
+                    batch_id = result["body"].get("combined")
+                    falcon.batch_get_command(batch_id=batch_id, file_path="/tmp/testfile.txt")
                     if falcon.RTR_DeleteSession(session_id=session_id)["status_code"] in AllowedResponses:
                         returned = True
                     else:
