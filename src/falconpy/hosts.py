@@ -95,7 +95,7 @@ class Hosts(ServiceClass):
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
 
-        _allowed_actions = ['contain', 'lift_containment', 'hide_host', 'unhide_host', 
+        _allowed_actions = ['contain', 'lift_containment', 'hide_host', 'unhide_host',
                             'detection_suppress', 'detection_unsuppress']
         operation_id = "PerformActionV2"
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
