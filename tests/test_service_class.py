@@ -376,18 +376,21 @@ class TestServiceClass:
     @rate_limited
     @not_supported
     def test_list_response_component_get_property_fail(self):
-        with pytest.warns(SSLDisabledWarning):
-            _no_ssl = Hosts(creds=config.creds, pythonic=True, debug=_DEBUG, ssl_verify=False)
-            if _no_ssl.token_status == 403:
-                pytest.skip("SSL required for GovCloud testing.")
-            try:
-                if _no_ssl.token_valid and not _no_ssl.token_stale:  # Duplicative, just testing the properties
-                    _thing: Result = _no_ssl.query_devices(limit=3)
-            except APIError:
-                pytest.skip("SSL required for GovCloud testing.")
-
         position = 5
         _success = False
+        if config.base_url != "https://api.laggar.gcw.crowdstrike.com":
+            with pytest.warns(SSLDisabledWarning):
+                _no_ssl = Hosts(creds=config.creds, pythonic=True, debug=_DEBUG, ssl_verify=False)
+                if _no_ssl.token_status == 403:
+                    pytest.skip("SSL required for GovCloud testing.")
+                try:
+                    if _no_ssl.token_valid and not _no_ssl.token_stale:  # Duplicative, just testing the properties
+                        _thing: Result = _no_ssl.query_devices(limit=3)
+                except APIError:
+                    pytest.skip("SSL required for GovCloud testing.")
+        else:
+            pytest.skip("This test is unsupported in this region.")
+
         try:
             _success = bool(_thing.resources.get_property(position))
         except IndexError:
