@@ -757,3 +757,95 @@ Required arguments:
 The source code for these examples can be found [here](rfm_report.py).
 
 ---
+
+## Serial Search
+This script takes a file listing Serial Numbers and outputs a CSV with the Serial Number, Hostname, CID, RFM, Last Seen, Local IP, and Tags for each host in the list. This list can be used to compare a list of serial numbers to the list of hosts in the Falcon Console to determine which serial numbers are not currently reporting to the console.
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+
+### Execution syntax
+This samples leverages simple command-line arguments to implement functionality.
+
+> Execute the default example. This will output results to a CSV file named `output.csv`.
+
+```shell
+python3 serial_search.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown below without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 serial_search.py
+```
+
+> Change the output file with the `-o` argument.
+
+```shell
+python3 serial_search.py -o search_results.csv
+```
+
+> Change the input file containing the serials to search for using the `-f` argument.
+
+```shell
+python3 serial_search.py -f serials_to_find.txt
+```
+
+> API debugging can be enabled using the `-d` argument.
+
+```shell
+python3 serial_search.py -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: serial_search.py [-h] [-d] [-f SERIAL_FILE] [-o OUTPUT_PATH] [-k CLIENT_ID] [-s CLIENT_SECRET]
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
+
+8¯¯¯¯8                               8¯¯¯¯8
+8      eeee eeeee  e  eeeee e        8      eeee eeeee eeeee  eeee e   e
+8eeeee 8    8   8  8  8   8 8        8eeeee 8    8   8 8   8  8  8 8   8
+    88 8eee 8eee8e 8e 8eee8 8e           88 8eee 8eee8 8eee8e 8e   8eee8
+e   88 88   88   8 88 88  8 88       e   88 88   88  8 88   8 88   88  8
+8eee88 88ee 88   8 88 88  8 88eee    8eee88 88ee 88  8 88   8 88e8 88  8
+
+This script takes a file listing Serial Numbers and outputs a CSV with the
+Serial Number, Hostname, CID, RFM, Last Seen, Local IP, and Tags for each
+host in the list. This list can be used to compare a list of serial numbers
+to the list of hosts in the Falcon Console to determine which serial numbers
+are not currently reporting to the console.
+
+Developed by @Don-Swanson-Adobe
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -f SERIAL_FILE, --serial_file SERIAL_FILE
+                        Text file contain serial numbers of hosts to tag
+  -o OUTPUT_PATH, --output_path OUTPUT_PATH
+                        Location to store CSV output
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+```
+
+### Example source code
+The source code for these examples can be found [here](serial_search.py).
+
+---
