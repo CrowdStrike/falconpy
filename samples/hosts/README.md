@@ -12,9 +12,9 @@ The examples in this folder focus on leveraging CrowdStrike's Hosts API to perfo
 - [List sensor versions by Hostname](#list-sensors-by-hostname)
 - [List (and optionally remove) duplicate sensors](#list-duplicate-sensors)
 - [List (and optionally remove) stale sensors](#list-stale-sensors)
-- [Mass assignment check](#mass-assignment-check)
 - [Match usernames to Hosts](#match-usernames-to-hosts)
 - [Offset vs. Offset Tokens](#comparing-querydevicesbyfilter-and-querydevicesbyfilterscroll-offset-vs-token)
+- [Policy Check](#policy-check)
 - [Prune Hosts by Hostname or AID](#prune-hosts-by-hostname-or-aid)
 - [RFM Report](#rfm-report)
 - [Serial Search](#serial-search)
@@ -803,6 +803,107 @@ optional arguments:
 
 ### Example source code
 The source code for this example can be found [here](stale_sensors.py).
+
+---
+
+## Policy Check
+This program will check if a specific host group is properly assigned to a list of Prevention Policies.
+
+> Note: This sample also demonstrates [pythonic response handling](https://www.falconpy.io/Usage/Response-Handling.html#pythonic-responses) using the Advanced Uber Class (APIHarnessV2).
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+
+### Execution syntax
+This samples leverages simple command-line arguments to implement functionality.
+
+> Execute the default example. This will check within the local tenant that the group has the policies assigned listed in the `-p` argument.
+
+```shell
+python3 policy_check.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -g GROUP_NAME -p POLICY_ID_1,POLICY_ID_2
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown below without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 policy_check.py -g GROUP_NAME -p POLICY_ID_1,POLICY_ID_2
+```
+
+> Enable MSSP mode and create the groups within all child CIDs.
+
+```shell
+python3 policy_check.py -k $FALCON_CLIENT_ID_PARENT -s $FALCON_CLIENT_SECRET_PARENT  -g GROUP_NAME -p POLICY_ID_1,POLICY_ID_2 -m
+```
+
+> Enable MSSP mode and create the groups within a specific child CID.
+
+```shell
+python3 policy_check.py -k $FALCON_CLIENT_ID_PARENT -s $FALCON_CLIENT_SECRET_PARENT  -g GROUP_NAME -p POLICY_ID_1,POLICY_ID_2 -c CHILD_CID
+```
+
+> API debugging can be enabled using the `-d` argument.
+
+```shell
+python3 policy_check.py -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: policy_check.py [-h] [-d] [-m] [-c CHILD] [-k CLIENT_ID] [-s CLIENT_SECRET] -g GROUP_NAME -p POLICY_IDS
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
+
+       __                                       ___  ___   ___
+  .'|=|  |    .'|=|`.     .'|        .'|   .'|=|_.' |   | |   |
+.'  | |  |  .'  | |  `. .'  |      .'  | .'  |      `.  |_|  .'
+|   |=|.'   |   | |   | |   |      |   | |   |        `.   .'
+|   |       `.  | |  .' |   |  ___ |   | `.  |  ___    |   |
+|___|         `.|=|.'   |___|=|_.' |___|   `.|=|_.'    |___|
+
+       ___                    ___        ___
+  .'|=|_.'   .'| |`.     .'|=|_.'   .'|=|_.'   .'|   .'|
+.'  |      .'  | |  `. .'  |  ___ .'  |      .'  | .' .'
+|   |      |   |=|   | |   |=|_.' |   |      |   |=|.:
+`.  |  ___ |   | |   | |   |  ___ `.  |  ___ |   |   |'.
+  `.|=|_.' |___| |___| |___|=|_.'   `.|=|_.' |___|   |_|
+
+This program will check if a specific host group is properly
+assigned to a list of Prevention Policies.
+
+Created by: @Don-Swanson-Adobe
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -m, --mssp            List groups in all child CIDs (MSSP parents only)
+  -c CHILD, --child CHILD
+                        List groups in a specific child CID (MSSP parents only)
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+  -g GROUP_NAME, --group_name GROUP_NAME
+                        Group name to check
+  -p POLICY_IDS, --policy_ids POLICY_IDS
+                        Policy IDs to confirm (comma delimit)
+```
+
+### Example source code
+The source code for these examples can be found [here](policy_check.py).
 
 ---
 
