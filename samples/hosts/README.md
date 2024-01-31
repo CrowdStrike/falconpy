@@ -106,6 +106,115 @@ The source code for these examples can be found [here](bulk_add_falcon_tag.py).
 
 ---
 
+## Default groups
+This script was developed to setup the default groups in a new CID. It should be run once to create the necessary groups and populate them with the appropriate assignment rules.
+
+> Note: This sample also demonstrates [pythonic response handling](https://www.falconpy.io/Usage/Response-Handling.html#pythonic-responses) using the Advanced Uber Class (APIHarnessV2).
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+
+> [!IMPORTANT]
+> This script should be reviewed and updated to match your environment needs. 
+> Review the `groups` dictionary to identify group names and assignment rules that will be created. (lines 89 - 102, shown below)
+
+```python
+#### UPDATE THE FOLLOWING DICTIONARY TO MATCH YOUR ENVIRONMENT ##########
+# One group will be created for each dictionary item.
+# Groups are defined as "Group Name": "Assignment Rule"
+groups = {
+    "Sensor Uninstall Group": "staticByID",
+    "Phase 0": "none",
+    "Phase 1": "hostname:*'*'",
+    "Active Policy": "none",
+    "Windows Servers": "platform_name:'Windows'+product_type_desc:'Server'",
+    "DEV Updates": "tags:'SensorGroupingTags/DEV'",
+    "Golden Images": "tags:'FalconGroupingTags/GoldenImage'",
+    "Windows 7 and Server 2008 R2 Hosts": "(os_version:'Windows Server 2008 R2',os_version:'Windows 7')"
+}
+#########################################################################
+```
+
+### Execution syntax
+This samples leverages simple command-line arguments to implement functionality.
+
+> Execute the default example. This will create the groups as defined by the `groups` dictionary within the current tenant (non-MSSP).
+
+```shell
+python3 default_groups.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown below without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 default_groups.py
+```
+
+> Enable MSSP mode and create the groups within all child CIDs.
+
+```shell
+python3 default_groups.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -m
+```
+
+> Enable MSSP mode and create the groups within a specific child CID.
+
+```shell
+python3 default_groups.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c CHILD_CID
+```
+
+> API debugging can be enabled using the `-d` argument.
+
+```shell
+python3 default_groups.py -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: default_groups.py [-h] [-d] [-o OUTPUT_PATH] [-m] [-k CLIENT_ID] [-s CLIENT_SECRET]
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
+
+·▄▄▄▄  ▄▄▄ .·▄▄▄ ▄▄▄· ▄• ▄▌▄▄▌  ▄▄▄▄▄     ▄▄ • ▄▄▄        ▄• ▄▌ ▄▄▄·.▄▄ ·
+██▪ ██ ▀▄.▀·▐▄▄·▐█ ▀█ █▪██▌██•  •██      ▐█ ▀ ▪▀▄ █·▪     █▪██▌▐█ ▄█▐█ ▀.
+▐█· ▐█▌▐▀▀▪▄██▪ ▄█▀▀█ █▌▐█▌██▪   ▐█.▪    ▄█ ▀█▄▐▀▀▄  ▄█▀▄ █▌▐█▌ ██▀·▄▀▀▀█▄
+██. ██ ▐█▄▄▌██▌.▐█ ▪▐▌▐█▄█▌▐█▌▐▌ ▐█▌·    ▐█▄▪▐█▐█•█▌▐█▌.▐▌▐█▄█▌▐█▪·•▐█▄▪▐█
+▀▀▀▀▀•  ▀▀▀ ▀▀▀  ▀  ▀  ▀▀▀ .▀▀▀  ▀▀▀     ·▀▀▀▀ .▀  ▀ ▀█▄▀▪ ▀▀▀ .▀    ▀▀▀▀
+
+This script was developed to setup the default groups in a new CID.
+It should be run once to create the necessary groups and populate
+them with the appropriate assignment rules.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -o OUTPUT_PATH, --output_path OUTPUT_PATH
+                        Location to store CSV output
+  -m, --mssp            Return RFM details for child CIDs (MSSP parents only).
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+```
+
+### Example source code
+The source code for these examples can be found [here](default_groups.py).
+
+---
+
 ## Hosts Report
 This script replaces the manual daily export of hosts from the Falcon Console that was required to audit host compliance. It was developed to be run as a recurring job and will output a CSV with all hosts in the CID along with other required info that can then be imported into a compliance dashboard or tool.
 
