@@ -106,7 +106,7 @@ The source code for these examples can be found [here](bulk_add_falcon_tag.py).
 
 ---
 
-## Default groups
+## Default Groups
 This script was developed to setup the default groups in a new CID. It should be run once to create the necessary groups and populate them with the appropriate assignment rules.
 
 > Note: This sample also demonstrates [pythonic response handling](https://www.falconpy.io/Usage/Response-Handling.html#pythonic-responses) using the Advanced Uber Class (APIHarnessV2).
@@ -212,6 +212,149 @@ Required arguments:
 
 ### Example source code
 The source code for these examples can be found [here](default_groups.py).
+
+---
+
+## Get Host Groups
+This script will output a list of all Host Groups, for Flight Control scenarios it will display all the host groups in all child CIDs.
+
+> Note: This sample also demonstrates [pythonic response handling](https://www.falconpy.io/Usage/Response-Handling.html#pythonic-responses) using the Advanced Uber Class (APIHarnessV2).
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+
+### Execution syntax
+This samples leverages simple command-line arguments to implement functionality.
+
+> Execute the default example. This will list all groups within the current tenant.
+
+```shell
+python3 get_host_groups.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown below without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 get_host_groups.py
+```
+
+> Enable MSSP mode and list the groups within all child CIDs.
+
+```shell
+python3 get_host_groups.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -m
+```
+
+> Enable MSSP mode and list the groups within a specific child CID.
+
+```shell
+python3 get_host_groups.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c CHILD_CID
+```
+
+> Change the format of the output tabular display with the `-t` argument.
+
+```shell
+python3 get_host_groups.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -t fancy_grid
+```
+
+##### Accepted formats
+The following table formats are supported:
+- `plain`
+- `simple`
+- `github`
+- `grid`
+- `simple_grid`
+- `rounded_grid`
+- `heavy_grid`
+- `mixed_grid`
+- `double_grid`
+- `fancy_grid`
+- `outline`
+- `simple_outline`
+- `rounded_outline`
+- `heavy_outline`
+- `mixed_outline`
+- `double_outline`
+- `fancy_outline`
+- `pipe`
+- `orgtbl`
+- `asciidoc`
+- `jira`
+- `presto`
+- `pretty`
+- `psql`
+- `rst`
+- `mediawiki`
+- `moinmoin`
+- `youtrack`
+- `html`
+- `unsafehtml`
+- `latex`
+- `latex_raw`
+- `latex_booktabs`
+- `latex_longtable`
+- `textile`
+- `tsv`
+
+> API debugging can be enabled using the `-d` argument.
+
+```shell
+python3 get_host_groups.py -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: get_host_groups.py [-h] [-d] [-m] [-c CHILD] [-t TABLE_FORMAT] [-k CLIENT_ID] [-s CLIENT_SECRET]
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
+
+ __   __  _______  _______  _______
+|  | |  ||       ||       ||       |
+|  |_|  ||   _   ||  _____||_     _|
+|       ||  | |  || |_____   |   |
+|       ||  |_|  ||_____  |  |   |
+|   _   ||       | _____| |  |   |
+|__| |__||_______||_______|  |___|
+         _______  ______    _______  __   __  _______  _______
+        |       ||    _ |  |       ||  | |  ||       ||       |
+        |    ___||   | ||  |   _   ||  | |  ||    _  ||  _____|
+        |   | __ |   |_||_ |  | |  ||  |_|  ||   |_| || |_____
+        |   ||  ||    __  ||  |_|  ||       ||    ___||_____  |
+        |   |_| ||   |  | ||       ||       ||   |     _____| |
+        |_______||___|  |_||_______||_______||___|    |_______|
+
+This script will output a list of all Host Groups, for Flight Control
+scenarios it will display all the host groups in all child CIDs.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -m, --mssp            List groups in all child CIDs (MSSP parents only)
+  -c CHILD, --child CHILD
+                        List groups in a specific child CID (MSSP parents only)
+  -t TABLE_FORMAT, --table_format TABLE_FORMAT
+                        Table format to use for tabular display
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+```
+
+### Example source code
+The source code for these examples can be found [here](get_host_groups.py).
 
 ---
 
