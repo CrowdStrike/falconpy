@@ -196,6 +196,8 @@ This script was developed to setup the default groups in a new CID.
 It should be run once to create the necessary groups and populate
 them with the appropriate assignment rules.
 
+Developed by @Don-Swanson-Adobe
+
 optional arguments:
   -h, --help            show this help message and exit
   -d, --debug           Enable API debugging
@@ -337,6 +339,8 @@ usage: get_host_groups.py [-h] [-d] [-m] [-c CHILD] [-t TABLE_FORMAT] [-k CLIENT
 This script will output a list of all Host Groups, for Flight Control
 scenarios it will display all the host groups in all child CIDs.
 
+Developed by @Don-Swanson-Adobe
+
 optional arguments:
   -h, --help            show this help message and exit
   -d, --debug           Enable API debugging
@@ -441,6 +445,106 @@ Required arguments:
 
 ### Example source code
 The source code for these examples can be found [here](hosts_report.py).
+
+---
+
+## Host Search
+This script will take a file listing of hostnames (one host per line) or a single hostname provided at runtime to produce a CSV containing the details for hosts that are found. This solution can be used to compare a list of hostnames to the list of hosts in the Falcon Console to determine which hostnames are not currently reporting in to the console.
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+
+### Execution syntax
+This samples leverages simple command-line arguments to implement functionality.
+
+> Execute the default example. This will assume the file containing serial numbers is called "serials.txt" and is stored in the same folder. That tag that will be added will have a value of "TEST_TAG".
+
+```shell
+python3 host_search.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown below without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 host_search.py
+```
+
+> Read the file "new_hosts.txt" and search for matches.
+
+```shell
+python3 host_search.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f new_hosts.txt
+```
+
+> Search for the hostname `example-host`.
+
+```shell
+python3 host_search.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n example-host
+```
+
+> Output results to a different CSV file.
+
+```shell
+python3 host_search.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -o new_hosts.csv
+```
+
+> API debugging can be enabled using the `-d` argument.
+
+```shell
+python3 host_search.py -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: host_search.py [-h] [-d] [-f HOSTNAME_FILE] [-n HOSTNAME] [-o OUTPUT_PATH] [-k CLIENT_ID] [-s CLIENT_SECRET]
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
+
+ _   _           _       _____                     _
+| | | |         | |     /  ___|                   | |
+| |_| | ___  ___| |_    \ `--.  ___  __ _ _ __ ___| |__
+|  _  |/ _ \/ __| __|    `--. \/ _ \/ _` | '__/ __| '_ \
+| | | | (_) \__ \ |_    /\__/ /  __/ (_| | | | (__| | | |
+\_| |_/\___/|___/\__|   \____/ \___|\__,_|_|  \___|_| |_|
+
+This script will take a file listing of hostnames (one host per line) or
+a single hostname provided at runtime to produce a CSV containing the
+details for hosts that are found. This solution can be used to compare a
+list of hostnames to the list of hosts in the Falcon Console to determine
+which hostnames are not currently reporting in to the console.
+
+Developed by @Don-Swanson-Adobe
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -f HOSTNAME_FILE, --hostname_file HOSTNAME_FILE
+                        Text file containing hostnames to search for
+  -n HOSTNAME, --hostname HOSTNAME
+                        Hostname to search for
+  -o OUTPUT_PATH, --output_path OUTPUT_PATH
+                        Location to store CSV output
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+```
+
+### Example source code
+The source code for these examples can be found [here](host_search.py).
 
 ---
 
@@ -990,6 +1094,8 @@ usage: rfm_report.py [-h] [-d] [-m] [-o OUTPUT_PATH] [-k CLIENT_ID] [-s CLIENT_S
 This script was developed by @Developed by Don-Swanson-Adobe to determine the
 number of hosts in RFM (Up for more than 24 hours and seen within the last 24
 hours) in your tenant or every child tenant attached to your parent.
+
+Developed by @Don-Swanson-Adobe
 
 optional arguments:
   -h, --help            show this help message and exit
