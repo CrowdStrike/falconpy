@@ -4,6 +4,7 @@
 The examples within this folder focus on leveraging CrowdStrike's Falcon IOC API.
 
 - [Create Indicator of Compromise](#create-indicator-of-compromise)
+- [IOC Audit](#ioc-audit)
 
 ## Create Indicator of Compromise
 Demonstrates the creation of a single IOC using either the Service or Uber Class. 
@@ -84,3 +85,115 @@ optional arguments:
 
 ### Example source code
 The source code for this example can be found [here](create_ioc.py).
+
+---
+
+## IOC Audit
+This program will output a list of IOCs and their details for either the current CID or in each Child CID (Flight Control scenarios).
+This can be used for regular audits of IOCs across multiple CIDs.
+
+### Running the program
+In order to run this demonstration, you you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| IOC | __READ__ |
+| Flight Control | __READ__ |
+| Sensor Download | __READ__ |
+
+> [!NOTE]
+> This program can be executed using an API key that is not scoped for the Flight Control (MSSP) and Sensor Download service collections, but will be unable to lookup the current CID (Sensor Download) or access child CIDs (Flight Control).
+
+### Execution syntax
+This sample leverages simple command-line arguments to implement functionality.
+
+#### Basic usage
+Execute the default example. This will output results to a CSV file named `iocs.txt`.
+
+```shell
+python3 ioc_audit.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown below without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 ioc_audit.py
+```
+
+Change the output destination with the `-o` argument.
+
+```shell
+python3 ioc_audit.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -o new_iocs.txt
+```
+
+Enable MSSP mode and audit all Flight Control children with the `-m` argument.
+
+```shell
+python3 ioc_audit.py -k $FALCON_CLIENT_ID_PARENT -s $FALCON_CLIENT_SECRET_PARENT -m
+```
+
+Enable MSSP mode and audit a specific Flight Control child with the `-c` argument.
+
+```shell
+python3 ioc_audit.py -k $FALCON_CLIENT_ID_PARENT -s $FALCON_CLIENT_SECRET_PARENT -c CHILD_CID
+```
+
+> API debugging can be enabled using the `-d` argument.
+
+```shell
+python3 ioc_audit.py -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: ioc_audit.py [-h] [-d] [-m] [-c CHILD] [-o OUTPUT_FILE] [-k CLIENT_ID] [-s CLIENT_SECRET]
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
+
+ ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄
+▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+ ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀▀▀
+     ▐░▌     ▐░▌       ▐░▌▐░▌
+     ▐░▌     ▐░▌       ▐░▌▐░▌
+     ▐░▌     ▐░▌       ▐░▌▐░▌
+     ▐░▌     ▐░▌       ▐░▌▐░▌
+     ▐░▌     ▐░▌       ▐░▌▐░▌
+ ▄▄▄▄█░█▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄▄▄
+▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌
+ ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀
+▄▄▄          █           ▀
+█▄▄ ▀▄▀ █▀▀  █  █ █ █▀▀  █  █▀█ █▀█ █▀▀
+█▄▄ ▄▀▄ █▄▄  █▄ █▄█ ▄▄█  █  █▄█ █ █ ▄▄█
+
+This program will output a list of IOCs and their details for either the
+current CID or in each Child CID (Flight Control scenarios). This can be
+used for regular audits of indicators of compromise across multiple CIDs.
+
+Developed by @Don-Swanson-Adobe
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -m, --mssp            List exclusions in all child CIDs (MSSP parents only)
+  -c CHILD, --child CHILD
+                        List exclusions in a specific child CID (MSSP parents only)
+  -o OUTPUT_FILE, --output_file OUTPUT_FILE
+                        File to output results to
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+```
+
+### Example source code
+The source code for this example can be found [here](ioc_audit.py).
