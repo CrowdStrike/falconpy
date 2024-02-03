@@ -8,6 +8,7 @@ The examples within this folder focus on leveraging CrowdStrike's Real Time Resp
 - [Queued Execute](#bulk-execute-a-command-on-matched-hosts-with-queuing) - Bulk execute a command on multiple hosts that are selected by using a search string or a provided list of host AIDs. Execution is queued for offline hosts with request IDs stored to an external file for later result retrieval.
 - [Get host uptime](#get-host-uptime) - Retrieve the uptime for a host using a RTR session and a script command.
 - [Get RTR result](#get-rtr-result) - Retrieve the results for previously executed RTR batch commands.
+- [Restart Sensor](#restart-sensor) - Restarts the sensor while taking a TCP dump.
 - [Dump Process Memory](pid-dump) - Dumps the memory for a running process on a target system.
 - [My Little RTR](pony) - Retrieve System Information and draws ASCII art.
 
@@ -174,7 +175,7 @@ python3 queued_execute.py -k CLIENT_ID -s CLIENT_SECRET -f target -c "cat /etc/r
 ### Example source code
 The source code for this example can be found [here](queued_execute.py).
 
-
+---
 
 ## Get host uptime
 Leverages the `runscript` RTR command to retrieve the uptime for host(s) within your environment.
@@ -258,6 +259,7 @@ required arguments:
 ### Example source code
 The source code for this example can be found [here](get_host_uptime.py).
 
+---
 
 ## Get RTR result
 Retrieve the results for previously executed RTR commands.
@@ -353,3 +355,107 @@ optional arguments:
 
 ### Example source code
 The source code for this example can be found [here](get_rtr_result.py).
+
+---
+
+## Restart Sensor
+This program creates a RTR Session, drops a script on the host, runs the script, and then finally retrieves the output. The script will start TCPdump and perform a capture while the Falcon Sensor is restarted.
+
+> [!WARNING]
+> This example only supports endpoints running Linux operating systems.
+
+### Running the program
+In order to run this demonstration, you you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| ML Exclusions | __READ__ |
+| Flight Control | __READ__ |
+| Sensor Download | __READ__ |
+
+> [!NOTE]
+> This program can be executed using an API key that is not scoped for the Flight Control (MSSP) service collection, but will be unable to access hosts within child CIDs.
+
+### Execution syntax
+This sample leverages simple command-line arguments to implement functionality.
+
+#### Basic usage
+Execute the example against a specific hostname.
+
+```shell
+python3 restart_sensor.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n HOSTNAME
+```
+
+Execute the example against a specific AID.
+
+```shell
+python3 restart_sensor.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -a AID
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 restart_sensor.py
+```
+
+> [!TIP]
+> This example will automatically identify and restart sensors on hosts within child tenants when provided valid parent API keys.
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: restart_sensor.py [-h] [-d] [-k CLIENT_ID] [-s CLIENT_SECRET] (-a AID | -n HOSTNAME)
+
+Sensor restart utility.
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
+
+  )\.--.   )\.---.   )\  )\    )\.--.     .-./(     /`-.
+ (   ._.' (   ,-._( (  \, /   (   ._.'  ,'     )  ,' _  \
+  `-.`.    \  '-,    ) \ (     `-.`.   (  .-, (  (  '-' (
+ ,_ (  \    ) ,-`   ( ( \ \   ,_ (  \   ) '._\ )  ) ,_ .'
+(  '.)  )  (  ``-.   `.)/  ) (  '.)  ) (  ,   (  (  ' ) \
+ '._,_.'    )..-.(      '.(   '._,_.'   )/ ._.'   )/   )/
+
+   /`-.   )\.---.    )\.--.  .-,.-.,-.    /`-.      /`-.  .-,.-.,-.
+ ,' _  \ (   ,-._(  (   ._.' ) ,, ,. (  ,' _  \   ,' _  \ ) ,, ,. (
+(  '-' (  \  '-,     `-.`.   \( |(  )/ (  '-' (  (  '-' ( \( |(  )/
+ ) ,_ .'   ) ,-`    ,_ (  \     ) \     )   _  )  ) ,_ .'    ) \
+(  ' ) \  (  ``-.  (  '.)  )    \ (    (  ,' ) \ (  ' ) \    \ (
+ )/   )/   )..-.(   '._,_.'      )/     )/    )/  )/   )/     )/
+
+This program creates a RTR Session, drops a script on the host, runs
+the script, and then finally retrieves the output. The script will start
+TCPdump and perform a capture while the Falcon Sensor is restarted.
+
+Developed by @Don-Swanson-Adobe, modified by jshcodes@CrowdStrike
+
+Requirements:
+    crowdstrike-falconpy >= 1.3.0
+    py7zr
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+  -a AID, --aid AID     Endpoint AID
+  -n HOSTNAME, --hostname HOSTNAME
+                        Endpoint Hostname
+```
+
+### Example source code
+The source code for this example can be found [here](restart_sensor.py).
+
+---
