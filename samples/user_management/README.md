@@ -5,6 +5,7 @@
 # User Management examples
 The examples in this folder focus on leveraging CrowdStrike's User Management API to perform administrative operations.
 - [Bulk import, update and remove users](#bulk-import-update-and-remove-users)
+- [Find Users](#find-users)
 - [Get user grants](#get-user-grants)
 
 ## Bulk import, update, and remove users
@@ -178,6 +179,108 @@ optional arguments:
 ### Example source code
 The source code for this example can be found [here](bulk_user.py).
 
+---
+
+## Find Users
+This program will output a list of sensor visibility exclusions and their details for either the current CID or in a specific / each Child CID (Flight Control scenarios).
+This can be used for regular audits of sensor visibility exclusions across multiple CIDs.
+
+### Running the program
+In order to run this demonstration, you you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| ML Exclusions | __READ__ |
+| Flight Control | __READ__ |
+| Sensor Download | __READ__ |
+
+> [!NOTE]
+> This program can be executed using an API key that is not scoped for the Flight Control (MSSP) and Sensor Download service collections, but will be unable to lookup the current CID (Sensor Download) or access child CIDs (Flight Control).
+
+### Execution syntax
+This sample leverages simple command-line arguments to implement functionality.
+
+#### Basic usage
+Execute the default example. This will output results in a tabular format for the local tenant only.
+
+```shell
+python3 find_users.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown below without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 find_users.py
+```
+
+Enable MSSP mode and audit all Flight Control children with the `-m` argument.
+
+```shell
+python3 find_users.py -k $FALCON_CLIENT_ID_PARENT -s $FALCON_CLIENT_SECRET_PARENT -m
+```
+
+Enable MSSP mode and audit a specific Flight Control child with the `-c` argument.
+
+```shell
+python3 find_users.py -k $FALCON_CLIENT_ID_PARENT -s $FALCON_CLIENT_SECRET_PARENT -c CHILD_CID
+```
+
+> API debugging can be enabled using the `-d` argument.
+
+```shell
+python3 find_users.py -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: find_users.py [-h] [-d] [-m] [-c CHILD] [-t TABLE_FORMAT] [-k CLIENT_ID] [-s CLIENT_SECRET]
+
+User lookup utility.
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
+
+            (`-').->(`-')  _   (`-')  (`-').->
+     .->    ( OO)_  ( OO).-/<-.(OO )  ( OO)_
+,--.(,--.  (_)--\_)(,------.,------,)(_)--\_)
+|  | |(`-')/    _ / |  .---'|   /`. '/    _ /
+|  | |(OO )\_..`--.(|  '--. |  |_.' |\_..`--.
+|  | | |  \.-._)   \|  .--' |  .   .'.-._)   \
+\  '-'(_ .'\       /|  `---.|  |\  \ \       /
+ `-----'    `-----' `------'`--' '--' `-----'
+
+This script will list all users in a CID, or child CID(s).
+
+Developed by @Don-Swanson-Adobe
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -m, --mssp            List users in all child CIDs (MSSP parents only)
+  -c CHILD, --child CHILD
+                        List users in a specific child CID (MSSP parents only)
+  -t TABLE_FORMAT, --table_format TABLE_FORMAT
+                        Output table format
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+```
+
+### Example source code
+The source code for this example can be found [here](find_users.py).
+
+---
+
 ## Get user grants
 Asynchronously retrieve a list of all users within the tenant, along with their grants and then
 write the results to a comma-delimited text file. This solution is automatically Flight Control
@@ -280,3 +383,5 @@ authentication arguments (not required if using environment authentication):
 
 ### Example source code
 The source code for this example can be found [here](get_user_grants.py).
+
+---
