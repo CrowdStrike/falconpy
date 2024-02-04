@@ -9,6 +9,7 @@ The examples within this folder focus on leveraging CrowdStrike's Real Time Resp
 - [Get host uptime](#get-host-uptime) - Retrieve the uptime for a host using a RTR session and a script command.
 - [Get RTR result](#get-rtr-result) - Retrieve the results for previously executed RTR batch commands.
 - [Restart Sensor](#restart-sensor) - Restarts the sensor while taking a TCP dump.
+- [Script Manager](#script-manager) - Upload and delete RTR scripts for use on endpoints.
 - [Dump Process Memory](pid-dump) - Dumps the memory for a running process on a target system.
 - [My Little RTR](pony) - Retrieve System Information and draws ASCII art.
 
@@ -401,6 +402,12 @@ python3 restart_sensor.py
 > [!TIP]
 > This example will automatically identify and restart sensors on hosts within child tenants when provided valid parent API keys.
 
+Activate debugging with the `-d` argument.
+
+```shell
+python3 restart_sensor.py -d
+```
+
 #### Command-line help
 Command-line help is available via the `-h` argument.
 
@@ -457,5 +464,200 @@ Required arguments:
 
 ### Example source code
 The source code for this example can be found [here](restart_sensor.py).
+
+---
+
+## Script Manager
+This program creates a RTR Session, drops a script on the host, runs the script, and then finally retrieves the output. The script will start TCPdump and perform a capture while the Falcon Sensor is restarted.
+
+### Running the program
+In order to run this demonstration, you you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| ML Exclusions | __READ__ |
+| Flight Control | __READ__ |
+
+> [!NOTE]
+> This program can be executed using an API key that is not scoped for the Flight Control (MSSP) service collection, but will be unable to upload scripts to child CIDs.
+
+### Execution syntax
+This sample leverages simple command-line arguments to implement functionality.
+
+#### Basic usage
+Upload a script to your tenant.
+
+```shell
+python3 script_manager.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -p FILEPATH
+```
+
+> [!NOTE]
+> `c` will also be accepted for "create".  Create is the default action, and does not need to be specified.
+
+Set script specific parameters.
+
+```shell
+python3 script_manager.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -p FILEPATH -n SCRIPT_NAME -x SCRIPT_DESCRIPTION -o PLATFORM -y COMMENTS -z PERMISSIONS
+```
+
+> [!TIP]
+> The only required argument is `filepath` (`-p` or `--filepath`) when uploading a script.
+
+Delete a script from your tenant.
+
+```shell
+python3 script_manager.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n SCRIPT_NAME -a remove
+```
+
+> [!NOTE]
+> `r` will also be accepted for "remove".
+
+List all scripts within your tenant.
+
+```shell
+python3 script_manager.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -a list
+```
+
+> [!NOTE]
+> `l` will also be accepted for "list".
+
+> Change the format of the output tabular display with the `-t` argument.
+
+```shell
+python3 script_manager.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -t fancy_grid
+```
+
+##### Accepted formats
+The following table formats are supported:
+- `plain`
+- `simple`
+- `github`
+- `grid`
+- `simple_grid`
+- `rounded_grid`
+- `heavy_grid`
+- `mixed_grid`
+- `double_grid`
+- `fancy_grid`
+- `outline`
+- `simple_outline`
+- `rounded_outline`
+- `heavy_outline`
+- `mixed_outline`
+- `double_outline`
+- `fancy_outline`
+- `pipe`
+- `orgtbl`
+- `asciidoc`
+- `jira`
+- `presto`
+- `pretty`
+- `psql`
+- `rst`
+- `mediawiki`
+- `moinmoin`
+- `youtrack`
+- `html`
+- `unsafehtml`
+- `latex`
+- `latex_raw`
+- `latex_booktabs`
+- `latex_longtable`
+- `textile`
+- `tsv`
+
+
+Activate MSSP mode with the `-m` argument. This will upload or delete the script within all child CIDs.
+
+```shell
+python3 script_manager.py -k $FALCON_CLIENT_ID_PARENT -s $FALCON_CLIENT_SECRET_PARENT -p FILEPATH -m
+```
+
+Perform an upload, delete or list operation within a specific child CID using the `-c` argument.
+
+```shell
+python3 script_manager.py -k $FALCON_CLIENT_ID_PARENT -s $FALCON_CLIENT_SECRET_PARENT -p FILEPATH -m -c CHILD_CID
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 script_manager.py
+```
+
+> Activate debugging with the `-d` argument.
+
+```shell
+python3 script_manager.py -d
+```
+
+> [!TIP]
+> This example will automatically identify and restart sensors on hosts within child tenants when provided valid parent API keys.
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: script_manager.py [-h] [-a {create,c,remove,r,list,l}] [-d] [-m] [-c CHILD] [-t TABLE_FORMAT] -p FILEPATH
+                         [-n FILENAME] [-x DESCRIPTION] [-o {windows,linux,mac}] [-y COMMENT] [-z {public,private,group}]
+                         [-k CLIENT_ID] [-s CLIENT_SECRET]
+
+RTR Script manager.
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
+
+      ()                      _ _ _
+      /\                _/_  ' ) ) )
+     /  )  _. __  o _   /     / / / __.  ____  __.  _,  _  __
+    /__/__(__/ (_<_/_)_<__   / ' (_(_/|_/ / <_(_/|_(_)_</_/ (_
+                  /                                 /|
+                 '                                 |/
+
+This program can upload and delete RTR scripts from your CrowdStrike tenant.
+For MSSP scenarios, scripts can be uploaded and removed from all tenants,
+or a specific child.
+
+Developed by @Don-Swanson-Adobe, modified by jshcodes@CrowdStrike
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -a {create,c,remove,r,list,l}, --action {create,c,remove,r,list,l}
+                        Action to perform (default is 'create')
+  -d, --debug           Enable API debugging
+  -m, --mssp            Handle script within all child CIDs (MSSP parents only)
+  -c CHILD, --child CHILD
+                        Handle scripts within in a specific child CID (MSSP parents only)
+  -t TABLE_FORMAT, --table_format TABLE_FORMAT
+                        Output table format
+
+File arguments:
+  -p FILEPATH, --filepath FILEPATH
+                        Path to the script to be uploaded
+  -n FILENAME, --filename FILENAME
+                        Name for the uploaded script (defaults to script filename)
+  -x DESCRIPTION, --description DESCRIPTION
+                        Script description
+  -o {windows,linux,mac}, --platform {windows,linux,mac}
+                        Script platform (defaults to Windows)
+  -y COMMENT, --comment COMMENT
+                        Script upload comment
+  -z {public,private,group}, --permission {public,private,group}
+                        Script permissions (public, private, group, defaults to private)
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+```
+
+### Example source code
+The source code for this example can be found [here](script_manager.py).
 
 ---
