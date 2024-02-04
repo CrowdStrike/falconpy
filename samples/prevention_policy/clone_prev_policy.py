@@ -1,25 +1,118 @@
 #!/usr/bin/env python3
-#Please establish an "auth.py" file in the same directory as this script with the "clientid" and "clientsec" variables defined.
-#This script was developed to clone the prevention policies from one CID to another. It was developed to be run once and will create the policies and populate them with the appropriate settings.
-#Developed by Don-Swanson-Adobe
+r"""Prevention Policy cloner.
 
-#Import API Harness and Auth Filefrom auth import *
-from falconpy import APIHarness
-from auth import *
-falcon_source = APIHarness(client_id=clientid, client_secret=clientsec) #Source CID API Harness with all the policies you wish to clone
-falcon_dest = APIHarness(client_id=clientid_2, client_secret=clientsec_2) #Destination CID API Harness with no policies
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
 
-policydetails = falcon_source.command("queryCombinedPreventionPolicies")["body"]["resources"]
-print(policydetails)
+╔═╗┬─┐┌─┐┬  ┬┌─┐┌┐┌┌┬┐┬┌─┐┌┐┌  ╔═╗┌─┐┬  ┬┌─┐┬ ┬
+╠═╝├┬┘├┤ └┐┌┘├┤ │││ │ ││ ││││  ╠═╝│ ││  ││  └┬┘
+╩  ┴└─└─┘ └┘ └─┘┘└┘ ┴ ┴└─┘┘└┘  ╩  └─┘┴─┘┴└─┘ ┴
 
-for policy in policydetails:
-    config = []    
-    for prev_settings in policy["prevention_settings"]:
-        for settings in prev_settings["settings"]:
-            setting_dict = {"id": settings["id"], "value": settings["value"]}
-            config.append(setting_dict)
-    BODY = {"resources": [{"description": policy["description"],"name": policy["name"],"platform_name": policy["platform_name"],"settings": config}]}
-    print(BODY)
-    response = falcon_dest.command("createPreventionPolicies", body=BODY)
-    print(response)
-    print("wait")
+       _..._             .-'''-.
+    .-'_..._''. .---.   '   _    \
+  .' .'      '.\|   | /   /` '.   \    _..._         __.....__
+ / .'           |   |.   |     \  '  .'     '.   .-''         '.
+. '             |   ||   '      |  '.   .-.   . /     .-''"'-.  `. .-,.--.
+| |             |   |\    \     / / |  '   '  |/     /________\   \|  .-. |
+| |             |   | `.   ` ..' /  |  |   |  ||                  || |  | |
+. '             |   |    '-...-'`   |  |   |  |\    .-------------'| |  | |
+ \ '.          .|   |               |  |   |  | \    '-.____...---.| |  '-
+  '. `._____.-'/|   |               |  |   |  |  `.             .' | |
+    `-.______ / '---'               |  |   |  |    `''-...... -'   | |
+             `                      |  |   |  |                    |_|
+                                    '--'   '--'
+
+This script will clone one or all prevention policies from one CID to another.
+
+Developed by @Don-Swanson-Adobe
+"""
+import os
+import logging
+from argparse import ArgumentParser, RawTextHelpFormatter, Namespace
+from falconpy import APIHarnessV2, APIError
+
+
+def consume_arguments() -> Namespace:
+    """Consume any provided command line arguments."""
+    parser = ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
+    parser.add_argument("-d", "--debug",
+                        help="Enable API debugging",
+                        action="store_true",
+                        default=False
+                        )
+    parser.add_argument("-n", "--policy_name", help="Limit cloning to a specific policy")
+    req = parser.add_argument_group("Required arguments")
+    req.add_argument("--source_id",
+                     help="CrowdStrike Falcon API key (Source CID)",
+                     default=os.getenv("FALCON_CLIENT_ID")
+                     )
+    req.add_argument("--source_secret",
+                     help="CrowdStrike Falcon API secret (Source CID)",
+                     default=os.getenv("FALCON_CLIENT_SECRET")
+                     )
+    req.add_argument("--dest_id",
+                     help="CrowdStrike Falcon API key (Destination CID)",
+                     required=True
+                     )
+    req.add_argument("--dest_secret",
+                     help="CrowdStrike Falcon API secret (Destination CID)",
+                     required=True
+                     )
+    parsed = parser.parse_args()
+    if not parsed.source_id or not parsed.source_secret:
+        parser.error("You must provide CrowdStrike API credentials for the source CID.")
+
+    return parsed
+
+
+# Consume any command line arguments
+cmd_line = consume_arguments()
+
+# Activate debugging if requested
+if cmd_line.debug:
+    logging.basicConfig(level=logging.DEBUG)
+
+# Source CID API Harness with the policies you wish to clone
+with APIHarnessV2(client_id=cmd_line.source_id,
+                  client_secret=cmd_line.source_secret,
+                  debug=cmd_line.debug,
+                  pythonic=True
+                  ) as source:
+    # Destination CID API Harness where policies will be cloned to
+    with APIHarnessV2(client_id=cmd_line.dest_id,
+                      client_secret=cmd_line.dest_secret,
+                      debug=cmd_line.debug,
+                      pythonic=True
+                      ) as destination:
+        filter_string = None
+        if cmd_line.policy_name:
+            filter_string = f"name:*'{cmd_line.policy_name}'"  # I know, it's a little strange
+        try:
+            policies = source.command("queryCombinedPreventionPolicies", filter=filter_string).data
+        except APIError as api_error:
+            raise SystemExit(api_error.message)
+
+        for policy in policies:
+            config = []    
+            for prev_settings in policy["prevention_settings"]:
+                for settings in prev_settings["settings"]:
+                    config.append({"id": settings["id"], "value": settings["value"]})
+            body_payload = {
+                "resources": [{
+                        "description": policy["description"],
+                        "name": policy["name"],
+                        "platform_name": policy["platform_name"],
+                        "settings": config
+                        }]
+                }
+            try:
+                response = destination.command("createPreventionPolicies", body=body_payload)
+                if response.status_code == 201:
+                    print(f"Created {policy['name']} policy successfully.")
+            except APIError as api_error:
+                print(f"Unable to create {policy['name']} policy on destination tenant.")
