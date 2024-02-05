@@ -4,25 +4,18 @@
 # Prevention Policy examples
 The examples in this folder focus on leveraging CrowdStrike's Prevention Policy API.
 - [Clone Prevention Policy](#clone-prevention-policy)
+- [Create Host Group and add to policy](#create-host-group-and-attach-to-prevention-policy)
 - [Prevention Policy Hawk](#manage-prevention-policies-with-prevention-policy-hawk)
 
 ## Clone Prevention Policy
-
-## IOA Audit
-This program will output a list of IOA exclusions and their details for either the current CID or in each Child CID (Flight Control scenarios).
-This can be used for regular audits of IOA exclusions across multiple CIDs.
+This script will clone one or all prevention policies from one CID to another.
 
 ### Running the program
 In order to run this demonstration, you you will need access to CrowdStrike API keys with the following scopes:
 
 | Service Collection | Scope |
 | :---- | :---- |
-| IOA Exclusions | __READ__ |
-| Flight Control | __READ__ |
-| Sensor Download | __READ__ |
-
-> [!NOTE]
-> This program can be executed using an API key that is not scoped for the Flight Control (MSSP) and Sensor Download service collections, but will be unable to lookup the current CID (Sensor Download) or access child CIDs (Flight Control).
+| Prevention Policy | __READ__, __WRITE__ |
 
 ### Execution syntax
 This sample leverages simple command-line arguments to implement functionality.
@@ -49,7 +42,7 @@ python3 clone_prev_policy.py --source_id $FALCON_CLIENT_ID_SOURCE --source_secre
 > API debugging can be enabled using the `-d` argument.
 
 ```shell
-python3 get_host_groups.py -d
+python3 clone_prev_policy.py -d
 ```
 
 #### Command-line help
@@ -109,6 +102,154 @@ Required arguments:
 
 ### Example source code
 The source code for this example can be found [here](clone_prev_policy.py).
+
+---
+
+## Create Host Group and attach to prevention policy
+This script will create a host group. If a list of prevention policy IDs are provided, the newly created host group is added to each policy in the list. This can assist with complex group creation that may be difficult to perform in the console.
+
+> [!NOTE]
+> If you set custom and/or criteria using the API, editing the group in the Falcon console will remove this criteria upon save.
+
+### Running the program
+In order to run this demonstration, you you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Host Group | __READ__, __WRITE__ |
+| Prevention Policy | __READ__, __WRITE__ |
+
+### Execution syntax
+This sample leverages simple command-line arguments to implement functionality.
+
+#### Basic usage
+Create a simple host group with no settings.
+
+```shell
+python3 create_attached_group.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n GROUP_NAME
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute this program without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 create_attached_group.py -n GROUP_NAME
+```
+
+Attach the newly created group to two prevention policies.
+
+```shell
+python3 create_attached_group.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n GROUP_NAME -p POLICY_ID_1,POLICY_ID_2
+```
+
+Create a host group, setting all available parameters.
+
+```shell
+python3 create_attached_group.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n GROUP_NAME -p POLICY_ID_1,POLICY_ID_2 -e GROUP_DESCRIPTION -t GROUP_TYPE -a ASSIGNMENT_RULE
+```
+
+> API debugging can be enabled using the `-d` argument.
+
+```shell
+python3 create_attached_group.py -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: create_attached_group.py [-h] [-d] [-c CHILD] -n GROUP_NAME [-e GROUP_DESCRIPTION] [-t {dynamic,static}]
+                                [-a ASSIGNMENT_RULE] [-p POLICIES] [-k CLIENT_ID] [-s CLIENT_SECRET]
+
+Create Host Groups (and add them to Prevention Policies).
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
+
+ __  __                .           ___
+ |   |    __.    ____ _/_        .'   \  .___    __.  ,   . \,___,
+ |___|  .'   \  (      |         |       /   \ .'   \ |   | |    \
+ |   |  |    |  `--.   |         |    _  |   ' |    | |   | |    |
+ /   /   `._.' \___.'  \__/       `.___| /      `._.' `._/| |`---'
+                                                            \
+                     .----------------.
+                    | .--------------. |
+                    | |      _       | |
+                    | |     | |      | |
+                    | |  ___| |___   | |
+                    | | |___   ___|  | |
+                    | |     | |      | |
+                    | |     |_|      | |
+                    | |              | |
+                    | '--------------' |
+                     '----------------'
+ .___                                     .
+ /   \ .___    ___  _   __   ___  , __   _/_   `   __.  , __
+ |,_-' /   \ .'   ` |   /  .'   ` |'  `.  |    | .'   \ |'  `.
+ |     |   ' |----' `  /   |----' |    |  |    | |    | |    |
+ /     /     `.___,  \/    `.___, /    |  \__/ /  `._.' /    |
+
+                .___          .
+                /   \   __.   |   `   ___  `   ___    ____
+                |,_-' .'   \  |   | .'   ` | .'   `  (
+                |     |    |  |   | |      | |----'  `--.
+                /      `._.' /\__ /  `._.' / `.___, \___.'
+
+This script will create a host group. If a list of prevention policy IDs
+are provided, the newly created host group is added to each policy in the
+list. This can assist with complex group creation that may be difficult
+to perform in the console.
+
+Please note: If you use custom and/or criteria here, editing the group in
+the Falcon console will remove this criteria upon save.
+
+Developed by Don-Swanson-Adobe
+
+Dynamic Host group examples with custom and/or criteria
+
+AND Example (Product is Windows AND Type is Server):
+    "platform_name:'Windows'+product_type_desc:'Server'"
+
+OR Example (OS is Win Server 2008 R2 OR OS is Windows 7):
+"os_version:'Windows Server 2008 R2',os_version:'Windows 7'"
+OR Example (OS is Win Server 2008 R2 OR OS is Windows 7)
+"(os_version:'Windows Server 2008 R2',os_version:'Windows 7')"
+
+Mixed Use Example (Must Have a DEV Sensor Tag and a T1 or T2 Sensor Tag)
+"(tags:'SensorGroupingTags/DEV'+tags:'SensorGroupingTags/T1),(tags:'SensorGroupingTags/DEV'+tags:'SensorGroupingTags/T2')"
+"tags:'SensorGroupingTags/DEV'+(tags:'SensorGroupingTags/T1',tags:'SensorGroupingTags/T2')"
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -c CHILD, --child CHILD
+                        List exclusions in a specific child CID (MSSP parents only)
+
+Group arguments:
+  -n GROUP_NAME, --group_name GROUP_NAME
+                        Name to use for newly created Host Group
+  -e GROUP_DESCRIPTION, --group_description GROUP_DESCRIPTION
+                        Description to use for newly created Host Group
+  -t {dynamic,static}, --group_type {dynamic,static}
+                        Type of Host Group to create (dynamic or static, defaults to dynamic)
+  -a ASSIGNMENT_RULE, --assignment_rule ASSIGNMENT_RULE
+                        Assignment rule for the newly created Host Group (enclose in double quotes)
+  -p POLICIES, --policies POLICIES
+                        Prevention Policies IDs to assign this Host Group to (comma delimit)
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+```
+
+### Example source code
+The source code for this example can be found [here](create_attached_group.py).
 
 ---
 
