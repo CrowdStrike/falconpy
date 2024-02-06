@@ -141,8 +141,12 @@ class Alerts(ServiceClass):
             body=body
             )
 
-    @force_default(defaults=["body"], default_types=["list"])
-    def get_aggregate_alerts_v2(self, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    @force_default(defaults=["body", "parameters"], default_types=["list", "dict"])
+    def get_aggregate_alerts_v2(self,
+                                body: list = None,
+                                parameters: Optional[Dict[str, List[Union[str, Dict[str, str]]]]] = None,
+                                **kwargs
+                                ) -> Dict[str, Union[int, dict]]:
         """Retrieve aggregates for Alerts across all CIDs.
 
         Keyword arguments:
@@ -192,11 +196,13 @@ class Alerts(ServiceClass):
                   String.
         from -- Integer.
         include -- Fields to include. String.
+        include_hidden -- Allows previously hidden alerts to be retrieved.
         interval -- String.
         max_doc_count -- Maximum number of documents. Integer.
         min_doc_count -- Minimum number of documents. Integer.
         missing -- String.
         name -- Scan name. String.
+        parameters - full parameters payload, not required if using other keywords.
         q -- FQL syntax. String.
         ranges -- List of dictionaries.
         size -- Integer.
@@ -222,7 +228,8 @@ class Alerts(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="PostAggregatesAlertsV2",
-            body=body
+            body=body,
+            params=parameters
             )
 
     # PatchEntitiesAlertsV1 has been **DECOMISSIONED**
@@ -375,10 +382,11 @@ class Alerts(ServiceClass):
             body=body
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
     def update_alerts_v3(self,
                          *args,
                          body: Optional[Dict[str, List[Union[str, Dict[str, str]]]]] = None,
+                         parameters: Optional[Dict[str, List[Union[str, Dict[str, str]]]]] = None,
                          **kwargs
                          ) -> Dict[str, Union[int, dict]]:
         """Perform actions on alerts identified by detection ID(s) in request.
@@ -407,8 +415,10 @@ class Alerts(ServiceClass):
                     ]
                 }
         composite_ids -- ID(s) of the alert to update. String or list of strings.
+        include_hidden -- Allows previously hidden alerts to be retrieved.
         new_behavior_processed -- adds a newly processed behavior to 1 or more alert(s). String.
                                   Overridden by action_parameters.
+        parameters - full parameters payload, not required if using other keywords.
         remove_tag -- remove a tag from 1 or more alert(s). String.
                       Overridden by action_parameters.
         remove_tags_by_prefix -- remove tags with given prefix from 1 or more alert(s). String.
@@ -447,7 +457,8 @@ class Alerts(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="PatchEntitiesAlertsV3",
-            body=body
+            body=body,
+            params=parameters
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -488,8 +499,13 @@ class Alerts(ServiceClass):
             body_required=["ids"] if self.validate_payloads else None
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def get_alerts_v2(self, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def get_alerts_v2(self,
+                      *args,
+                      body: Optional[Dict[str, List[Union[str, Dict[str, str]]]]] = None,
+                      parameters: Optional[Dict[str, List[Union[str, Dict[str, str]]]]] = None,
+                      **kwargs
+                      ) -> Dict[str, Union[int, dict]]:
         """Retrieve all Alerts given their IDs.
 
         Keyword arguments:
@@ -500,6 +516,8 @@ class Alerts(ServiceClass):
                     ]
                 }
         composite_ids -- ID(s) of the detections to retrieve. String or list of strings.
+        include_hidden -- Allows previously hidden alerts to be retrieved.
+        parameters - full parameters payload, not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'composite_ids'.
                    All others are ignored.
@@ -523,7 +541,8 @@ class Alerts(ServiceClass):
             operation_id="PostEntitiesAlertsV2",
             body=body,
             body_validator={"composite_ids": list} if self.validate_payloads else None,
-            body_required=["composite_ids"] if self.validate_payloads else None
+            body_required=["composite_ids"] if self.validate_payloads else None,
+            params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -572,6 +591,7 @@ class Alerts(ServiceClass):
         For more detail regarding filtering options, please review:
         https://falcon.crowdstrike.com/documentation/86/detections-monitoring-apis#find-detections
 
+        include_hidden -- Allows previously hidden alerts to be retrieved.
         limit -- The maximum number of detections to return in this response.
                  [Integer, default: 10000; max: 10000]
                  Use with the offset parameter to manage pagination of results.
