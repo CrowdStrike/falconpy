@@ -340,8 +340,16 @@ python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -h
 [See output example](#command-line-help).
 
 ##### List all sensor update policies.
+
 ```shell
 python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+##### Change your base URL
+You can change your base URL using the `-t` argument. This is only required for GovCloud users.
+
+```shell
+python3 policy_wonk.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -t usgov1
 ```
 
 ###### Result
