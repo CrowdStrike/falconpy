@@ -3,7 +3,110 @@
 
 # Sensor Update Policies examples
 The examples in this folder focus on leveraging CrowdStrike's Sensor Update Policies API to adjust sensor update policy settings.
+- [Sensor Update Policy Cloner](#sensor-update-policy-cloner)
 - [Policy Wonk](#manage-sensor-update-policies-with-policy-wonk)
+
+
+## Sensor Update Policy Cloner
+This script will clone one or all sensor update policies from one CID to another.
+
+### Running the program
+In order to run this demonstration, you you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Sensor Update Policy | __READ__, __WRITE__ |
+
+> [!NOTE]
+> You will need __READ__  permissions on the _source_ CID and __WRITE__ permissions on the _destination_ CID.
+
+### Execution syntax
+This sample leverages simple command-line arguments to implement functionality.
+
+#### Basic usage
+Clone all policies from one CID to another CID.
+
+```shell
+python3 clone_update_policy.py --source_id $FALCON_CLIENT_ID_SOURCE --source_secret $FALCON_CLIENT_SECRET_SOURCE --dest_id $FALCON_CLIENT_ID_DESTINATION --dest_secret $FALCON_CLIENT_SECRET_DESTINATION
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute this program without providing credentials for the source CID if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 clone_update_policy.py --dest_id $FALCON_CLIENT_ID_DESTINATION --dest_secret $FALCON_CLIENT_SECRET_DESTINATION
+```
+
+Only clone a specific policy.
+
+```shell
+python3 clone_update_policy.py --source_id $FALCON_CLIENT_ID_SOURCE --source_secret $FALCON_CLIENT_SECRET_SOURCE --dest_id $FALCON_CLIENT_ID_DESTINATION --dest_secret $FALCON_CLIENT_SECRET_DESTINATION -n POLICY_NAME
+```
+
+> API debugging can be enabled using the `-d` argument.
+
+```shell
+python3 clone_update_policy.py -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: clone_update_policy.py [-h] [-d] [-n POLICY_NAME] [--source_id SOURCE_ID] [--source_secret SOURCE_SECRET] --dest_id DEST_ID --dest_secret
+                              DEST_SECRET
+
+Sensor Update Policy cloner.
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
+
+╔═╗┌─┐┌┐┌┌─┐┌─┐┬─┐  ╦ ╦┌─┐┌┬┐┌─┐┌┬┐┌─┐  ╔═╗┌─┐┬  ┬┌─┐┬ ┬
+╚═╗├┤ │││└─┐│ │├┬┘  ║ ║├─┘ ││├─┤ │ ├┤   ╠═╝│ ││  ││  └┬┘
+╚═╝└─┘┘└┘└─┘└─┘┴└─  ╚═╝┴  ─┴┘┴ ┴ ┴ └─┘  ╩  └─┘┴─┘┴└─┘ ┴
+
+       _..._             .-'''-.
+    .-'_..._''. .---.   '   _    \
+  .' .'      '.\|   | /   /` '.   \    _..._         __.....__
+ / .'           |   |.   |     \  '  .'     '.   .-''         '.
+. '             |   ||   '      |  '.   .-.   . /     .-''"'-.  `. .-,.--.
+| |             |   |\    \     / / |  '   '  |/     /________\   \|  .-. |
+| |             |   | `.   ` ..' /  |  |   |  ||                  || |  | |
+. '             |   |    '-...-'`   |  |   |  |\    .-------------'| |  | |
+ \ '.          .|   |               |  |   |  | \    '-.____...---.| |  '-
+  '. `._____.-'/|   |               |  |   |  |  `.             .' | |
+    `-.______ / '---'               |  |   |  |    `''-...... -'   | |
+             `                      |  |   |  |                    |_|
+                                    '--'   '--'
+
+This script will clone one or all sensor update policies from one CID to another.
+
+Developed by @Don-Swanson-Adobe
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -n POLICY_NAME, --policy_name POLICY_NAME
+                        Limit cloning to a specific policy
+
+Required arguments:
+  --source_id SOURCE_ID
+                        CrowdStrike Falcon API key (Source CID)
+  --source_secret SOURCE_SECRET
+                        CrowdStrike Falcon API secret (Source CID)
+  --dest_id DEST_ID     CrowdStrike Falcon API key (Destination CID)
+  --dest_secret DEST_SECRET
+                        CrowdStrike Falcon API secret (Destination CID)
+```
+
+### Example source code
+The source code for this example can be found [here](clone_update_policy.py).
+
+---
 
 ## Manage sensor update policies with Policy Wonk
 Manages CrowdStrike Falcon sensor update policy. Using this tool you can enable and disable policies, and their uninstall protection.
