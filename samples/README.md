@@ -68,7 +68,7 @@ The following samples are categorized by CrowdStrike product, and further catego
 | [ML Exclusions](#ml-exclusions-samples) | ML Exclusion Audit |
 | [Prevention Policies](#prevention-policies-samples) | Clone Prevention Policy<BR/>Create Host Group and attach Prevention Policies<BR/>Prevention Policy Hawk |
 | [Incidents](#incidents-samples) | CrowdScore QuickChart<BR/>Incident Triage |
-| [Real Time Response](#real-time-response-samples) | Bulk execute a command<BR/>Bulk execute a command (queued)<BR/>Get host uptime<BR/>Get RTR result<BR/>Dump memory for a running process<BR/>My Little RTR<BR/>ProxyTool<BR/>Remotely restart a sensor while taking a capture<BR/>RTR Script Manager | 
+| [Real Time Response](#real-time-response-samples) | Bulk execute a command<BR/>Bulk execute a command (queued)<BR/>Get file from multiple hosts<BR/>Get host uptime<BR/>Get RTR result<BR/>Dump memory for a running process<BR/>My Little RTR<BR/>ProxyTool<BR/>Remotely restart a sensor while taking a capture<BR/>RTR Script Manager | 
 | [Sensor Visibility Exclusions](#sensor-visibility-exclusions-samples) | Sensor Visibility Exclusion Audit |
 | [Firewall Management](#firewall-management-samples) | Export Firewall events to a file |
 
@@ -1213,6 +1213,7 @@ These samples focus on CrowdStrike's Real Time Response and Real Time Response A
 
 - [Bulk execute a command](#bulk-execute-a-command)
 - [Bulk execute a command (queued)](#bulk-execute-a-command-queued)
+- [Get file from multiple hosts](#get-file-from-multiple-hosts)
 - [Get RTR result](#get-rtr-result)
 - [Dump memory for a running process](#dump-memory-for-a-running-process)
 - [My Little RTR](#my-little-rtr)
@@ -1271,6 +1272,32 @@ This sample demonstrates the following CrowdStrike Hosts, Real Time Response and
 | [RTR_DeleteSession](https://www.falconpy.io/Service-Collections/Real-Time-Response.html#rtr_deletesession) | Delete a session. |
 | [RTR_ExecuteAdminCommand](https://www.falconpy.io/Service-Collections/Real-Time-Response-Admin.html#rtr_executeadmincommand) | Execute a RTR administrator command on a single host. |
 | [RTR_InitSession](https://www.falconpy.io/Service-Collections/Real-Time-Response.html#rtr_initsession) | Initialize a new session with the RTR cloud. |
+
+---
+
+#### Get file from multiple hosts
+This [sample](rtr#get-file-from-multiple-hosts) will retrieve a file of the same name from multiple hosts.
+
+[![Real Time Response](https://img.shields.io/badge/Service%20Class-Get_file_from_multiple_hosts-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](rtr#get-file-from-multiple-hosts)
+
+##### Real Time Response API operations discussed
+This sample demonstrates the following CrowdStrike Real Time Response and Real Time Response Admin API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [RTR_GetExtractedFileContents](https://falconpy.io/Service-Collections/Real-Time-Response.html#rtr_getextractedfilecontents) | Get RTR extracted file contents for specified session and sha256. |
+| [RTR_DeleteSession](https://falconpy.io/Service-Collections/Real-Time-Response.html#rtr_deletesession) | Delete a session. |
+| [RTR_ListFilesV2](https://falconpy.io/Service-Collections/Real-Time-Response.html#rtr_listfilesv2) | Get a list of files for the specified RTR session. |
+| [RTR_DeleteFileV2](https://falconpy.io/Service-Collections/Real-Time-Response.html#rtr_deletefilev2) | Delete a RTR session file. |
+| [BatchInitSessions](https://falconpy.io/Service-Collections/Real-Time-Response.html#batchinitsessions) | Batch initialize a RTR session on multiple hosts. Before any RTR commands can be used, an active session is needed on the host. |
+| [BatchGetCmd](https://falconpy.io/Service-Collections/Real-Time-Response.html#batchgetcmd) | Batch execute a `GET` command across hosts to retrieve files. After this call is made, [BatchGetCmdStatus](https://falconpy.io/Service-Collections/Real-Time-Response.html#batchgetcmdstatus) can be used to query for the results. |
+
+##### Hosts API operations discussed
+This sample demonstrates the following CrowdStrike Hosts API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [QueryDevicesByFilterScroll](https://www.falconpy.io/Service-Collections/Hosts.html#querydevicesbyfilterscroll) | Search for hosts in your environment by platform, hostname, IP, and other criteria with continuous pagination capability (based on offset pointer which expires after 2 minutes with no maximum limit). |
 
 ---
 
