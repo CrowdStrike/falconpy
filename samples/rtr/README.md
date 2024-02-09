@@ -6,6 +6,7 @@ The examples within this folder focus on leveraging CrowdStrike's Real Time Resp
 
 - [Bulk Execute](#bulk-execute-a-command-on-matched-hosts) - Bulk execute a command on multiple hosts that you select by using a search string.
 - [Queued Execute](#bulk-execute-a-command-on-matched-hosts-with-queuing) - Bulk execute a command on multiple hosts that are selected by using a search string or a provided list of host AIDs. Execution is queued for offline hosts with request IDs stored to an external file for later result retrieval.
+- [Get file from multiple hosts](#get-file-from-multiple-hosts) - Retrieve a file of the same name from multiple hosts.
 - [Get host uptime](#get-host-uptime) - Retrieve the uptime for a host using a RTR session and a script command.
 - [Get RTR result](#get-rtr-result) - Retrieve the results for previously executed RTR batch commands.
 - [Restart Sensor](#restart-sensor) - Restarts the sensor while taking a TCP dump.
@@ -175,6 +176,105 @@ python3 queued_execute.py -k CLIENT_ID -s CLIENT_SECRET -f target -c "cat /etc/r
 
 ### Example source code
 The source code for this example can be found [here](queued_execute.py).
+
+---
+
+## Get file from multiple hosts
+This sample demonstrates retrieving a file of the same name from multiple hosts.
+
+### Running the program
+In order to run this demonstration, you you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+| Real Time Response | __READ__, __WRITE__ |
+
+### Execution syntax
+This sample leverages simple command-line arguments to implement functionality.
+
+#### Basic usage
+Retrieve a file from multiple hosts.
+
+```shell
+python3 get_file_from_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n HOSTNAME_SEARCH -f FILENAME
+```
+
+> [!TIP]
+> Hostname is a stemmed search.
+
+GovCloud users can change their CrowdStrike region using the `-b` argument.
+
+```shell
+python3 get_file_from_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n HOSTNAME_SEARCH -f FILENAME -b usgov1
+```
+
+Environment authentication is supported, so this solution can be executed without providing credentials if the environment variables `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` are defined.
+
+```shell
+python3 get_file_from_hosts.py -n HOSTNAME_SEARCH -f FILENAME
+```
+
+Activate API debug logging with the `-d` argument.
+
+```shell
+python3 get_file_from_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n HOSTNAME_SEARCH -f FILENAME -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: get_file_from_hosts.py [-h] [-d] [-n HOSTNAME] [-b BASE_URL] [-k CLIENT_ID] [-s CLIENT_SECRET] -f FILEPATH
+
+Retrieve a file from multiple hosts.
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |        FalconPy v1.3
+`-------'                         `-------'
+        ____             __   _______
+       / __ \___  ____ _/ /  /_  __(_)___ ___  ___
+      / /_/ / _ \/ __ `/ /    / / / / __ `__ \/ _ \
+     / _, _/  __/ /_/ / /    / / / / / / / / /  __/
+    /_/ |_|\___/\__,_/_/    /_/ /_/_/ /_/ /_/\___/
+            ____
+           / __ \___  _________  ____  ____  ________
+          / /_/ / _ \/ ___/ __ \/ __ \/ __ \/ ___/ _ \
+         / _, _/  __(__  ) /_/ / /_/ / / / (__  )  __/
+        /_/ |_|\___/____/ .___/\____/_/ /_/____/\___/
+                       /_/
+
+This program will retrieve a single file of the same name
+from multiple hosts. Files will be saved as 7zip archives
+named after the host's AID.
+
+Creation date: 11.30.23 - jshcodes@CrowdStrike
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -n HOSTNAME, --hostname HOSTNAME
+                        Hostname to target (stemmed search)
+  -b BASE_URL, --base_url BASE_URL
+                        CrowdStrike API base URL
+
+authentication arguments:
+  -k CLIENT_ID, --client-id CLIENT_ID
+                        Falcon API client ID
+  -s CLIENT_SECRET, --client-secret CLIENT_SECRET
+                        Falcon API client ID
+
+required arguments:
+  -f FILEPATH, --filepath FILEPATH
+                        Filename and path of the file to be downloaded
+```
+
+### Example source code
+The source code for this example can be found [here](get_file_from_hosts.py).
 
 ---
 
