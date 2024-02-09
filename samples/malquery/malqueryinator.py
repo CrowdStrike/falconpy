@@ -1,35 +1,34 @@
-"""
-MalQueryinator - MalQuery sample download utility.
+"""MalQueryinator - MalQuery sample download utility.
+
+ ___ ___       __ _______
+|   Y   .---.-|  |   _   .--.--.-----.----.--.--.
+|.      |  _  |  |.  |   |  |  |  -__|   _|  |  |
+|. \_/  |___._|__|.  |   |_____|_____|__| |___  |
+|:  |   |        |:  1   |                |_____|
+|::.|:. |        |::..   |
+`--- ---'        `----|:.|    FalconPy v1.3.0+
+                      `--'
 
 Searches MalQuery (fuzzy) for a particular string,
 downloading a specified number of examples if found.
 
 09.02.21 - jlangdev@CrowdStrike, jshcodes@CrowdStrike
+02.09.23 - jshcodes@Crowdstrike
 """
-#  ___ ___       __ _______
-# |   Y   .---.-|  |   _   .--.--.-----.----.--.--.
-# |.      |  _  |  |.  |   |  |  |  -__|   _|  |  |
-# |. \_/  |___._|__|.  |   |_____|_____|__| |___  |
-# |:  |   |        |:  1   |                |_____|
-# |::.|:. |        |::..   |
-# `--- ---'        `----|:.|    FalconPy v0.7.0+
-#                       `--'
-
-import argparse
+import os
+import logging
+from argparse import ArgumentParser, RawTextHelpFormatter
 try:
-    from falconpy import APIHarness
+    from falconpy import APIHarnessV2, version
 except ImportError as no_falconpy:
     raise SystemExit(
-        "CrowdStrike FalconPy must be installed in order to use this application.\n"
+        "CrowdStrike FalconPy 1.3 or greater must be installed in order to use this application.\n"
         "Please execute `python3 -m pip install crowdstrike-falconpy` and try again."
         ) from no_falconpy
 
 
 def malware_search(type_, value, limit):
-    """
-    Performs a fuzzy MalQuery search based
-    upon the type and value provided.
-    """
+    """Perform a fuzzy MalQuery search based upon the type and value provided."""
     stub = ""
     if int(limit) > 1:
         stub = "s"
@@ -51,10 +50,9 @@ def malware_search(type_, value, limit):
 
 
 def id_search(malware):
-    """
-    Requests the download for the ID returned from
-    the fuzzy malware_search. Displays the details
-    for the malware sample that is to be retrieved.
+    """Request the download for the ID returned from the fuzzy malware_search.
+    
+    Displays the details for the malware sample that is to be retrieved.
     """
     id_to_retrieve = []
     for found in malware:
@@ -77,10 +75,7 @@ def id_search(malware):
 
 
 def get_malquery_request(search_request_id):
-    """
-    Checks the status of our download request,
-    waiting until the status is set to "done".
-    """
+    """Check the status of our download request, waiting until the status is set to "done"."""
     print("Getting malquery request")
     running = True
     while running:
@@ -94,10 +89,7 @@ def get_malquery_request(search_request_id):
 
 
 def get_sample(search_request_id: str, save_file: str):
-    """
-    Retrieves the sample from MalQuery,
-    downloading to the file specified.
-    """
+    """Retrieve the sample from MalQuery, downloading to the file specified."""
     print(
         f"Downloading samples {search_request_id} to ./{save_file}"
         )
@@ -114,64 +106,52 @@ def get_sample(search_request_id: str, save_file: str):
             saving.write(archive_result)
 
 
-def connect_api(key: str, secret: str):
-    """
-    Connects and returns an instance of the Uber class.
-    """
-    return APIHarness(client_id=key, client_secret=secret)
+def connect_api(key: str, secret: str, debug: bool):
+    """Connects and returns an instance of the Uber class."""
+    if debug:
+        logging.basicConfig(level=logging.DEBUG)
+    return APIHarnessV2(client_id=key, client_secret=secret, debug=debug)
 
 
 def parse_command_line():
-    """
-    Parses the passed command line and
-    returns the created args object.
-    """
-    parser = argparse.ArgumentParser(
-        description="Malquerinator"
-    )
+    """Parses the passed command line and returns the created args object."""
+    parser = ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
     # Type defaults to "ascii" when not provided
-    parser.add_argument(
-        '-t', '--type',
-        help="Type of pattern for the malware query: ascii, hex, or wide",
-        required=False
-    )
+    parser.add_argument("-t", "--type",
+                        help="Type of pattern for the malware query: ascii, hex, or wide"
+                        )
+    parser.add_argument("-d", "--debug",
+                        help="Enable API debugging",
+                        action="store_true",
+                        default=False
+                        )
+    parser.add_argument("-v", "--value",
+                        help="Value for malware query of type determined by --t/--type arg",
+                        required=True
+                        )
+    parser.add_argument("-f", "--file", help="Name of file to write to", required=True)
+    parser.add_argument("-e", "--examples", help="Number of examples to download")
 
-    parser.add_argument(
-        '-v', '--value',
-        help="Value for malware query of type determined by --t/--type arg",
-        required=True
-    )
+    parser.add_argument("-k", "--key",
+                        help="Falcon API Client ID",
+                        default=os.getenv("FALCON_CLIENT_ID")
+                        )
+    parser.add_argument("-s", "--secret",
+                        help="Falcon API Client secret",
+                        default=os.getenv("FALCON_CLIENT_SECRET")
+                        )
 
-    parser.add_argument(
-        '-f', '--file',
-        help="Name of file to write to",
-        required=True
-    )
+    parsed = parser.parse_args()
+    if not parsed.key or not parsed.secret:
+        parser.error(
+            "You must provide valid API credentials ('-k' and '-s') in order to use this program."
+            )
 
-    parser.add_argument(
-        '-e', '--examples',
-        help="Number of examples to download",
-        required=False
-    )
-
-    parser.add_argument(
-        '-k', '--key',
-        help='Falcon API Client ID',
-        required=True
-    )
-    parser.add_argument(
-        '-s', '--secret',
-        help='Falcon API Client secret',
-        required=True
-    )
-
-    return parser.parse_args()
+    return parsed
 
 
 def main():
-    """
-    Main routine
-    """
+    """Execute main routine."""
     malware = malware_search(QUERY_TYPE, query_value, EXAMPLES)
     search_request_id = id_search(malware)
     get_malquery_request(search_request_id)
@@ -195,55 +175,7 @@ else:
 
 query_value = args.value
 file = args.file
-falcon = connect_api(key=args.key, secret=args.secret)
+falcon = connect_api(key=args.key, secret=args.secret, debug=args.debug)
 
 if __name__ == "__main__":
     main()
-
-
-#
-#                                   WNNW
-#                                 WKdcclx0XN
-#                                  N0xl,',;cxX
-#                                     W0l,..'cON
-#                               WWW     Nx:,..,dX
-#                         NKOxdolllodk0NWNXd,..,xW
-#                      NOoc;''.......',:lxkd;..'lX
-#                     WOc:;;;;;;,,''......'''...:kOkkkkk0N
-#                      WNNNXXKOxoc;'............'''',:okKW
-#                          NOl;,'..................',:clo0W
-#                         Xo,',;:lodddollllc;'....'''...'dW
-#                        W0dxOKXNWWWNK000000d,....'cdl,.,xW
-#                         WW      WX0OkdodkOkc'....,xXOc;k
-#                     W0xd0N    WN00Oo:,...,do'.....:KWX0X
-#                    WOlcclkN  WK0000OOOkoc,;ol;;;;,;OW
-#                    WNNNNXXNWX000000O00000Odk0O0XXKKN
-#                   WNKkOXNXXKOxddOKXKK0O0000000X              This Inator has been Doof-approved!
-#                  W0c:lkNWWWXd'';dXWNWNXOkO000KN
-#                  N0xxOXWWWNKkl:oKNWWWWWX0OO00XW               /
-#                  WXXWWWWWWNKKNNNWWWWWWWNX0O00N
-#                   WNNNWWWNXOOXWWWWWWWWWKOO00KN
-#                    WXOkkkOOOO0XNWWWWNX0kkO00KWWNNXXXNW
-#           WWNNNNNXXXKkxxkO000OOOOOOOxxxO000O0K00O0000X
-#       WNXKK00000000000000000000OkxxxkO00000OO00OO0000X
-#    WNKK000000000000000000000000000000000000000OOO000XW
-#  WXK000000000KKKK0OO000000000000000000000000KKKKXXNW
-# NKO000KKXXXNWWWWK00000000000000000000000000KW
-# WXXNNWW     WWNKO00000000000000000000000000N
-#            NK00OOOOOOOOOOOOOOOOO0000000000KN
-#            WK00000000000OO0000000000000000KN
-#            NK000000000000000000000000000000XW
-#           NK00000000000000000000000000000000XNW WXKNW
-#          NK00000000000000000000000000000000000KKx;.'dXNWW
-#         WK00000000000000000000000000000000000000k:  ,0WNNNW
-#         X000000000000000000000000000000000000000Oc  .lXWWNXNWW
-#        WX000000000000000KKKKXXNNNNNNNNNNNNNXX0d:,.   .lX WWNXNNW
-#         NK0000000KKXXNNWWW                  WXl.      .xW WWWNNNNW
-#          WNXXXNNWW                          NNKc       ;KWW  WNNNNWW
-#                                            WNNWx.      .oN W WWNNNWWW
-#                                            NNW 0'       'OW  W WNNWWWNW
-#                                           WNN  X:        cXW WWNNWW WWNW
-#                                           WNW  No        .OWNNNWWWW  WWNNW
-#                                           WXNNWWk.       .oXXNWWWW WWW WNNW
-#                                            NXXNW0,        :KWNNNNNW WWWWWNNW
-#                                           WXXNW X:        ,0  WWWNNWW  W WNN
