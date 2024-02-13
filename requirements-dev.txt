@@ -10,7 +10,7 @@
 # These packages are only required if you are a contributor,
 # or wish to use FalconDebug.
 #
-bandit>=1.7.0       # via -r requirements-dev.in
+bandit>=1.7.7       # via -r requirements-dev.in
 coverage>=5.5       # via -r requirements-dev.in
 flake8>=3.9.0       # via -r requirements-dev.in
 pytest-cov>=2.11.1  # via -r requirements-dev.in
