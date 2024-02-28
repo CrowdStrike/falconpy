@@ -113,8 +113,8 @@ class TestSampleUploads:
                                                       file_type="zip"
                                                       ),
             "ArchiveUploadV1b": falcon.ArchiveUploadV1(name="FalconPy testing", body=None),
-            "ArchiveUploadV2": falcon.ArchiveUploadV2(name="testfile.zip", archive=PAYLOAD, source="workstation", comment="FalconPy testing"),
-            "ArchiveUploadV2b": falcon.ArchiveUploadV2(file=PAYLOAD, source="workstation", comment="FalconPy testing"),
+            "ArchiveUploadV2": falcon.ArchiveUploadV2(name="testfile.zip", archive=PAYLOAD, source="workstation", comment="FalconPy testing", password="whatever", is_confidential=True),
+            "ArchiveUploadV2": falcon.upload_archive(file=PAYLOAD, source="workstation", comment="FalconPy testing"),
             "ExtractionListV1": falcon.ExtractionListV1(id="12345779"),
             "ExtractionGetV1": falcon.ExtractionGetV1(ids="12345678"),
             "ExtractionCreateV1": falcon.ExtractionCreateV1(extract_all=True, files=[{

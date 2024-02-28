@@ -252,6 +252,11 @@ class SampleUploads(ServiceClass):
         # Create a multipart form payload for our upload file
         file_tuple = [("file", (name, file_data, content_type))]
         file_extended = {"name": name}
+        if kwargs.get("password", None):
+            file_extended["password"] = kwargs.get("password")
+        if kwargs.get("is_confidential", None):
+            file_extended["is_confidential"] = kwargs.get("is_confidential")
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
