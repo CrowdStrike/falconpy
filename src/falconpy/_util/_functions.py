@@ -392,6 +392,11 @@ def perform_request(endpoint: str = "",
                 # Force all requests to pass the User-Agent identifier
                 headers["User-Agent"] = _USER_AGENT
             headers["CrowdStrike-SDK"] = _USER_AGENT
+            # Clean up query string booleans - Issue #1129
+            if api.param_payload:
+                for param, param_value in api.param_payload.items():
+                    if isinstance(param_value, bool):
+                        api.param_payload[param] = str(param_value).lower()
             try:
                 # Log our payloads if debugging is enabled
                 log_api_payloads(api, headers)
