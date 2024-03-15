@@ -70,15 +70,16 @@ _real_time_response_admin_endpoints = [
     [
       {
         "description": "Use this endpoint to run these [real time response "
-        "commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands):\n- "
-        "`cat`\n- `cd`\n- `clear`\n- `cp`\n- `encrypt`\n- `env`\n- `eventlog`\n- `filehash`\n- `get`\n- `getsid`\n- "
-        "`help`\n- `history`\n- `ipconfig`\n- `kill`\n- `ls`\n- `map`\n- `memdump`\n- `mkdir`\n- `mount`\n- `mv`\n- "
-        "`netstat`\n- `ps`\n- `put`\n- `reg query`\n- `reg set`\n- `reg delete`\n- `reg load`\n- `reg unload`\n- "
-        "`restart`\n- `rm`\n- `run`\n- `runscript`\n- `shutdown`\n- `unmap`\n- `update history`\n- `update install`\n- "
-        "`update list`\n- `update query`\n- `xmemdump`\n- `zip`\n\nRequired values.  The rest of the fields are "
-        "unused.\n**`base_command`** Active-Responder command type we are going to execute, for example: `get` or `cp`. "
-        "  Refer to the RTR documentation for the full list of commands.\n**`command_string`** Full command string for "
-        "the command. For example  `get some_file.txt`\n**`session_id`** RTR session ID to run the command on",
+        "commands](https://falcon.crowdstrike.com/documentation/page/b8c1738c/real-time-response-and-network-"
+        "containment#k893b7c0):\n- `cat`\n- `cd`\n- `clear`\n- `cp`\n- `encrypt`\n- `env`\n- `eventlog`\n- "
+        "`filehash`\n- `get`\n- `getsid`\n- `help`\n- `history`\n- `ipconfig`\n- `kill`\n- `ls`\n- `map`\n- "
+        "`memdump`\n- `mkdir`\n- `mount`\n- `mv`\n- `netstat`\n- `ps`\n- `put`\n- `reg query`\n- `reg set`\n- `reg "
+        "delete`\n- `reg load`\n- `reg unload`\n- `restart`\n- `rm`\n- `run`\n- `runscript`\n- `shutdown`\n- `unmap`\n-"
+        " `update history`\n- `update install`\n- `update list`\n- `update query`\n- `xmemdump`\n- `zip`\n\nRequired "
+        "values.  The rest of the fields are unused.\n**`base_command`** Active-Responder command type we are going to "
+        "execute, for example: `get` or `cp`.  Refer to the RTR documentation for the full list of "
+        "commands.\n**`command_string`** Full command string for the command. For example  `get "
+        "some_file.txt`\n**`session_id`** RTR session ID to run the command on",
         "name": "body",
         "in": "body",
         "required": True

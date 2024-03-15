@@ -92,14 +92,14 @@ _real_time_response_endpoints = [
       },
       {
         "description": "Use this endpoint to run these [real time response "
-        "commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands):\n- "
-        "`cat`\n- `cd`\n- `clear`\n- `cp`\n- `encrypt`\n- `env`\n- `eventlog`\n- `filehash`\n- `get`\n- `getsid`\n- "
-        "`help`\n- `history`\n- `ipconfig`\n- `kill`\n- `ls`\n- `map`\n- `memdump`\n- `mkdir`\n- `mount`\n- `mv`\n- "
-        "`netstat`\n- `ps`\n- `reg query`\n- `reg set`\n- `reg delete`\n- `reg load`\n- `reg unload`\n- `restart`\n- "
-        "`rm`\n- `runscript`\n- `shutdown`\n- `unmap`\n- `update history`\n- `update install`\n- `update list`\n- "
-        "`update query`\n- `xmemdump`\n- `zip`\n\n**`base_command`** Active-Responder command type we are going to "
-        "execute, for example: `get` or `cp`.  Refer to the RTR documentation for the full list of "
-        "commands.\n**`batch_id`** Batch ID to execute the command on.  Received from `/real-time-"
+        "commands](https://falcon.crowdstrike.com/documentation/page/b8c1738c/real-time-response-and-network-"
+        "containment#k893b7c0):\n- `cat`\n- `cd`\n- `clear`\n- `cp`\n- `encrypt`\n- `env`\n- `eventlog`\n- "
+        "`filehash`\n- `get`\n- `getsid`\n- `help`\n- `history`\n- `ipconfig`\n- `kill`\n- `ls`\n- `map`\n- "
+        "`memdump`\n- `mkdir`\n- `mount`\n- `mv`\n- `netstat`\n- `ps`\n- `reg query`\n- `reg set`\n- `reg delete`\n- "
+        "`reg load`\n- `reg unload`\n- `restart`\n- `rm`\n- `runscript`\n- `shutdown`\n- `unmap`\n- `update history`\n-"
+        " `update install`\n- `update list`\n- `update query`\n- `xmemdump`\n- `zip`\n\n**`base_command`** Active-"
+        "Responder command type we are going to execute, for example: `get` or `cp`.  Refer to the RTR documentation "
+        "for the full list of commands.\n**`batch_id`** Batch ID to execute the command on.  Received from `/real-time-"
         "response/combined/batch-init-session/v1`.\n**`command_string`** Full command string for the command. For "
         "example  `get some_file.txt`\n**`optional_hosts`** List of a subset of hosts we want to run the command on.  "
         "If this list is supplied, only these hosts will receive the command.",
@@ -143,11 +143,11 @@ _real_time_response_endpoints = [
       },
       {
         "description": "Use this endpoint to run these [real time response "
-        "commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands):\n- "
-        "`cat`\n- `cd`\n- `clear`\n- `env`\n- `eventlog`\n- `filehash`\n- `getsid`\n- `help`\n- `history`\n- "
-        "`ipconfig`\n- `ls`\n- `mount`\n- `netstat`\n- `ps`\n- `reg query`\n\n**`base_command`** read-only command type "
-        " we are going to execute, for example: `ls` or `cd`.  Refer to the RTR documentation for the full list of "
-        "commands.\n**`batch_id`** Batch ID to execute the command on.  Received from `/real-time-"
+        "commands](https://falcon.crowdstrike.com/documentation/page/b8c1738c/real-time-response-and-network-"
+        "containment#k893b7c0):\n- `cat`\n- `cd`\n- `clear`\n- `env`\n- `eventlog`\n- `filehash`\n- `getsid`\n- "
+        "`help`\n- `history`\n- `ipconfig`\n- `ls`\n- `mount`\n- `netstat`\n- `ps`\n- `reg query`\n\n**`base_command`** "
+        " read-only command type we are going to execute, for example: `ls` or `cd`.  Refer to the RTR documentation "
+        "for the full list of commands.\n**`batch_id`** Batch ID to execute the command on.  Received from `/real-time-"
         "response/combined/batch-init-session/v1`.\n**`command_string`** Full command string for the command. For "
         "example  `cd C:\\some_directory`\n**`optional_hosts`** List of a subset of hosts we want to run the command "
         "on.  If this list is supplied, only these hosts will receive the command.",
@@ -345,15 +345,16 @@ _real_time_response_endpoints = [
     [
       {
         "description": "Use this endpoint to run these [real time response "
-        "commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands):\n- "
-        "`cat`\n- `cd`\n- `clear`\n- `cp`\n- `encrypt`\n- `env`\n- `eventlog`\n- `filehash`\n- `get`\n- `getsid`\n- "
-        "`help`\n- `history`\n- `ipconfig`\n- `kill`\n- `ls`\n- `map`\n- `memdump`\n- `mkdir`\n- `mount`\n- `mv`\n- "
-        "`netstat`\n- `ps`\n- `reg query`\n- `reg set`\n- `reg delete`\n- `reg load`\n- `reg unload`\n- `restart`\n- "
-        "`rm`\n- `runscript`\n- `shutdown`\n- `unmap`\n- `update history`\n- `update install`\n- `update list`\n- "
-        "`update query`\n- `xmemdump`\n- `zip`\n\nRequired values.  The rest of the fields are "
-        "unused.\n**`base_command`** Active-Responder command type we are going to execute, for example: `get` or `cp`. "
-        "  Refer to the RTR documentation for the full list of commands.\n**`command_string`** Full command string for "
-        "the command. For example  `get some_file.txt`\n**`session_id`** RTR session ID to run the command on",
+        "commands](https://falcon.crowdstrike.com/documentation/page/b8c1738c/real-time-response-and-network-"
+        "containment#k893b7c0):\n- `cat`\n- `cd`\n- `clear`\n- `cp`\n- `encrypt`\n- `env`\n- `eventlog`\n- "
+        "`filehash`\n- `get`\n- `getsid`\n- `help`\n- `history`\n- `ipconfig`\n- `kill`\n- `ls`\n- `map`\n- "
+        "`memdump`\n- `mkdir`\n- `mount`\n- `mv`\n- `netstat`\n- `ps`\n- `reg query`\n- `reg set`\n- `reg delete`\n- "
+        "`reg load`\n- `reg unload`\n- `restart`\n- `rm`\n- `runscript`\n- `shutdown`\n- `unmap`\n- `update history`\n-"
+        " `update install`\n- `update list`\n- `update query`\n- `xmemdump`\n- `zip`\n\nRequired values.  The rest of "
+        "the fields are unused.\n**`base_command`** Active-Responder command type we are going to execute, for example: "
+        " `get` or `cp`.  Refer to the RTR documentation for the full list of commands.\n**`command_string`** Full "
+        "command string for the command. For example  `get some_file.txt`\n**`session_id`** RTR session ID to run the "
+        "command on",
         "name": "body",
         "in": "body",
         "required": True
@@ -393,12 +394,13 @@ _real_time_response_endpoints = [
     [
       {
         "description": "Use this endpoint to run these [real time response "
-        "commands](https://falcon.crowdstrike.com/support/documentation/11/getting-started-guide#rtr_commands):\n- "
-        "`cat`\n- `cd`\n- `clear`\n- `env`\n- `eventlog`\n- `filehash`\n- `getsid`\n- `help`\n- `history`\n- "
-        "`ipconfig`\n- `ls`\n- `mount`\n- `netstat`\n- `ps`\n- `reg query`\n\nRequired values.  The rest of the fields "
-        "are unused.\n**`base_command`** read-only command type we are going to execute, for example: `ls` or `cd`.  "
-        "Refer to the RTR documentation for the full list of commands.\n**`command_string`** Full command string for "
-        "the command. For example  `cd C:\\some_directory`\n**`session_id`** RTR session ID to run the command on",
+        "commands](https://falcon.crowdstrike.com/documentation/page/b8c1738c/real-time-response-and-network-"
+        "containment#k893b7c0):\n- `cat`\n- `cd`\n- `clear`\n- `env`\n- `eventlog`\n- `filehash`\n- `getsid`\n- "
+        "`help`\n- `history`\n- `ipconfig`\n- `ls`\n- `mount`\n- `netstat`\n- `ps`\n- `reg query`\n\nRequired values.  "
+        "The rest of the fields are unused.\n**`base_command`** read-only command type we are going to execute, for "
+        "example: `ls` or `cd`.  Refer to the RTR documentation for the full list of commands.\n**`command_string`** "
+        "Full command string for the command. For example  `cd C:\\some_directory`\n**`session_id`** RTR session ID to "
+        "run the command on",
         "name": "body",
         "in": "body",
         "required": True
