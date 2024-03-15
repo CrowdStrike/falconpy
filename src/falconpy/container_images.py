@@ -308,7 +308,7 @@ class ContainerImages(ServiceClass):
                 first_seen                          repository
                 highest_detection_severity          tag
                 highest_vulnerability_severity      vulnerabilities
-                image_digest
+                image_digest                        highest_cps_current_rating
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
