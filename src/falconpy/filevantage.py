@@ -636,6 +636,7 @@ class FileVantage(ServiceClass):
                                           macOS is not supported at this time.
         watch_create_key_changes -- Windows registry key and value monitoring. Boolean.
         watch_delete_key_changes -- Windows registry key and value monitoring. Boolean.
+        watch_permissions_key_changes -- Windows registry key permissions monitoring. Boolean.
         watch_rename_key_changes -- Windows registry key and value monitoring. Boolean.
         watch_set_value_changes -- Windows registry key and value monitoring. Boolean.
         watch_delete_value_changes -- Windows registry key and value monitoring. Boolean.

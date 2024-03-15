@@ -454,7 +454,7 @@ _filevantage_endpoints = [
         "is not supported at this time)\n\n * `watch_permissions_file_changes` (`macOS` is not supported at this "
         "time)\n\nWindows registry key and value monitoring: \n\n * `watch_create_key_changes`\n\n * "
         "`watch_delete_key_changes`\n\n * `watch_rename_key_changes`\n\n * `watch_set_value_changes`\n\n * "
-        "`watch_delete_value_changes`\n\n * `watch_create_file_changes`",
+        "`watch_permissions_key_changes`\n\n * `watch_delete_value_changes`\n\n * `watch_create_file_changes`",
         "name": "body",
         "in": "body",
         "required": True
