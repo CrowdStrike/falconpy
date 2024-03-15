@@ -942,7 +942,7 @@ class KubernetesProtection(ServiceClass):
 
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters: cid, created_timestamp, detect_timestamp, severity
+                  Supported filters: cid, created_timestamp, detect_timestamp, prevented, severity
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -969,7 +969,7 @@ class KubernetesProtection(ServiceClass):
 
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters: cid, created_timestamp, detect_timestamp, severity
+                  Supported filters: cid, created_timestamp, detect_timestamp, prevented, severity
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -1368,7 +1368,7 @@ class KubernetesProtection(ServiceClass):
                     cluster_name                resource_name
                     containers_impacted_count   resource_type
                     containers_impacted_ids     severity
-                    detection_type
+                    detection_type              prevented
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- The fields to sort the records on. String.
@@ -1513,7 +1513,7 @@ class KubernetesProtection(ServiceClass):
                     cluster_name                resource_name
                     containers_impacted_count   resource_type
                     containers_impacted_ids     severity
-                    detection_type
+                    detection_type              prevented
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- The fields to sort the records on. String.

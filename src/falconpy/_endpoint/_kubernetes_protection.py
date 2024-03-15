@@ -130,7 +130,7 @@ _kubernetes_protection_endpoints = [
     [
       {
         "type": "boolean",
-        "description": "(true/false) whether to return registries under assessment or not under assessment. If "
+        "description": "(true/false) whether to return registries under assessment or not under assessment. If"
         "not provided all registries are considered",
         "name": "under_assessment",
         "in": "query"
@@ -538,7 +538,7 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters: "
-        "cid,created_timestamp,detect_timestamp,severity",
+        "cid,created_timestamp,detect_timestamp,prevented,severity",
         "name": "filter",
         "in": "query"
       }
@@ -554,7 +554,7 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters: "
-        "cid,created_timestamp,detect_timestamp,severity",
+        "cid,created_timestamp,detect_timestamp,prevented,severity",
         "name": "filter",
         "in": "query"
       }
@@ -814,7 +814,7 @@ _kubernetes_protection_endpoints = [
         "type": "string",
         "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported "
         "filters:  cid,cis_id,cluster_id,cluster_name,containers_impacted_count,containers_impacted_ids,detection_type,"
-        "name,namespace,resource_id,resource_name,resource_type,severity",
+        "name,namespace,prevented,resource_id,resource_name,resource_type,severity",
         "name": "filter",
         "in": "query"
       },
@@ -942,7 +942,7 @@ _kubernetes_protection_endpoints = [
         "type": "string",
         "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported "
         "filters:  cid,cis_id,cluster_id,cluster_name,containers_impacted_count,containers_impacted_ids,detection_type,"
-        "name,namespace,resource_id,resource_name,resource_type,severity",
+        "name,namespace,prevented,resource_id,resource_name,resource_type,severity",
         "name": "filter",
         "in": "query"
       },
