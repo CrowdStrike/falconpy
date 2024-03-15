@@ -169,7 +169,8 @@ _alerts_endpoints = [
         "in": "query"
       },
       {
-        "description": "request body takes a list of action parameter request that is applied against all \"ids\" provided",
+        "description": "request body takes a list of action parameter request that is applied against all "
+        "\"composite_ids\" provided",
         "name": "body",
         "in": "body",
         "required": True
