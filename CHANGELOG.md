@@ -1,3 +1,164 @@
+# Version 1.4.2
+## Added features and functionality
++ Expanded: Environment Authentication functionality has been expanded to allow developers to customize the names of the environment keys used to store API credentials.
+    - `_auth_object/_falcon_interface.py`
+    - `_auth_object/_uber_interface.py`
+    - `oauth2.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_authentications.py`
+    ```python
+    from falconpy import Hosts
+    # We can now define the prefix and the names of the
+    # environment values used for API key lookups
+    environment_keys = {
+        "prefix": "CROWDSTRIKE_",
+        "id_name": "API_ID",
+        "secret_name": "API_SECRET"
+    }
+    # These values are provided as a dictionary to the class
+    hosts = Hosts(environment=environment_keys)
+    # Usage of the class is the same
+    results = hosts.query_devices_by_filter_scroll()
+    ```
+
++ Added: `include_hidden` argument added to the _PostAggregatesAlertsV2_, _PatchEntitiesAlertsV3_, _PostEntitiesAlertsV2_ and _GetQueriesAlertsV2_ operations within the __Alerts__ Service Class.
+    - `alerts.py`
+
++ Added: Added 4 new operations to the __Cloud Snapshots__ service collection.
+    - _ReadDeploymentsCombined_
+    - _ReadDeploymentsEntities_
+    - _CreateDeploymentEntity_
+    - _GetScanReport_
+    - `_endpoint/_cloud_snapshots.py`
+    - `_payload/__init__.py`
+    - `_payload/_cloud_snapshots.py`
+    - `cloud_snapshots.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_snapshots.py`
+
++ Added: Added _GetRuntimeDetectionsCombinedV2_ to the __Container Detections__ service collection.
+    - `_endpoint/_container_detections.py`
+    - `container_detections.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_container_detections.py`
+
++ Added: Added 3 new operations to the __CSPM Registration__ service collection.
+    - _DeleteCSPMAzureManagementGroup_
+    - _GetCSPMGCPValidateAccountsExt_
+    - _ValidateCSPMGCPServiceAccountExt_
+    - `_endpoint/_cspm_registration.py`
+    - `_payload/__init__.py`
+    - `_payload/_cspm_registration.py`
+    - `cspm_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cspm_registration.py`
+
++ Added: Added _query_iot_hostsV2_ operation to the __Discover__ service collection.
+    - `_endpoint/_discover.py`
+    - `_endpoint/deprecated/_discover.py`
+    - `discover.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_discover.py`
+
++ Added: Added _AggregateSupportIssues_ operation to the __Falcon Complete Dashboard__ service collection.
+    - `_endpoint/_falcon_complete_dashboard.py`
+    - `falcon_complete_dashboard.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_falcon_complete_dashboard.py`
+
++ Added: Added _IngestDataAsyncV1_ operation to the __Foundry LogScale__ service collection.
+    - `_endpoint/_foundry_logscale.py`
+    - `foundry_logscale.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_foundry_logscale.py`
+
++ Added: Added `infer_json_types` and `match_response_schema` arguments to the _CreateSavedSearchesDynamicExecuteV1_, _GetSavedSearchesExecuteV1_ and _CreateSavedSearchesExecuteV1_ operations within the __Foundry LogScale__ service collection.
+    - `_endpoint/_foundry_logscale.py`
+    - `foundry_logscale.py`
+
++ Added: Added `infer_json_types` argument to the _GetSavedSearchesJobResultsDownloadV1_ operation within the __Foundry LogScale__ service collection.
+    - `_endpoint/_foundry_logscale.py`
+    - `foundry_logscale.py`
+
++ Added: Added 3 new operations to the __Intel__ service collection.
+    - _GetMalwareEntities_
+    - _QueryMalware_
+    - _QueryMitreAttacksForMalware_
+    - `_endpoint/_intel.py`
+    - `intel.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_intel.py`
+
++ Added: Added 4 new operations to the __Sensor Download__ service collection.
+    - _GetCombinedSensorInstallersByQueryV2_
+    - _DownloadSensorInstallerByIdV2_
+    - _GetSensorInstallersEntitiesV2_
+    - _GetSensorInstallersByQueryV2_
+    - `_endpoint/_sensor_download.py`
+    - `sensor_download.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_sensor_download.py`
+
++ Added: Added `sanitize` argument to the _WorkflowDefinitionsExport_ operation within the __Workflows__ service collection.
+    - `_endpoint/_workflows.py`
+    - `workflows.py`
+
++ Added: Added 2 new operations to the __Workflows__ service collection.
+    - _WorkflowExecuteInternal_
+    - _WorkflowMockExecute_
+    - `_endpoint/workflows.py`
+    - `_payload/__init__.py`
+    - `_payload/_workflows.py`
+    - `workflows.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_workflows.py`
+
+## Issue resolved
++ Fixed: Resolved parsing issue with formData arguments provided to the _ArchiveUploadV2_ operation within the __SampleUploads__ Service Class. Closes #1122.
+    - `sample_uploads.py`
+
++ Fixed: Resolved conversion issue with query string boolean parameters not being properly converted to lowercase before API submission. Closes #1129.
+    - `_util/_functions.py`
+
+## Other
++ Updated: Updated `body` argument description for the _PatchEntitiesAlertsV3_ operation within the endpoint module.
+    - `_endpoint/_alerts.py`
+
++ Updated: Added `highest_cps_current_rating` as an allowed sort parameter to the _ReadCombinedImagesExport_ operation within the __Container Images__ service collection.
+    - `_endpoint/_container_images.py`
+
++ Updated: Added `watch_permissions_key_changes` option to the _createRules_ operation within the __FileVantage__ service collection.
+    - `_endpoint/_filevantage.py`
+
++ Updated: Updated operation and argument descriptions in the deprecated __IOCS__ service collection.
+    - `_endpoint/_iocs.py`
+
++ Updated: Added `prevented` as an allowed filter to the _ReadKubernetesIomByDateRange_, _ReadKubernetesIomCount_, _SearchAndReadKubernetesIomEntities_ and _SearchKubernetesIoms_ operations within the __Kubernetes Protection__ service collection.
+    - `_endpoint/_kubernetes_protection.py`
+
++ Updated: Updated the `body` argument description for the _BatchAdminCmd_ and _RTR_ExecuteAdminCommand_ operations within the __Real Time Response Admin__ service collection.
+    - `_endpoint/_real_time_response_admin.py`
+    - `_endpoint/deprecated/_real_time_response_admin.py`
+
++ Updated: Updated the `body` argument description for the _BatchActiveResponderCmd_, _BatchCmd_, _RTR_ExecuteActiveResponderCommand_, and _RTR_ExecuteCommand_ operations within the __Real Time Response__ service collection.
+    - `_endpoint/_real_time_response.py`
+    - `_endpoint/deprecated/_real_time_response.py`
+
++ Removed: The _CreateInventory_ operation is removed from the __Cloud Snapshots__ Service Class.
+    - `_payload/__init__.py`
+    - `_payload/_cloud_snapshots.py`
+    - `cloud_snapshots.py`
+    > Unit testing updated to reflect current functionality.
+    - `tests/test_cloud_snapshots.py`
+
++ Removed: The _WorkflowDefinitionsCreate_ operation is removed from the __Workflows__ service collection.
+    - `_endpoint/_workflows.py`
+    - `workflows.py`
+    > Unit testing updated to reflect current functionality.
+    - `tests/test_workflows.py`
+
+---
+
 # Version 1.4.1
 ## Added features and functionality
 + Added: `include_hidden` argument added to the _PostAggregatesAlertsV2_, _PostEntitiesAlertsV2_, _PatchEntitiesAlertsV3_ and _GetQueriesAlertsV2_ operations.
