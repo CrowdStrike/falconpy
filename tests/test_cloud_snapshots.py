@@ -25,10 +25,10 @@ class TestCloudSnapshots:
         tests = {
             "RegisterAccount": falcon.register_account(aws_accounts=[{"account_number": "1"}]),
             "RegisterAccountToo": falcon.register_account(account_number="12345678"),
-            "CreateInventory": falcon.create_inventory(job_metadata={"cloud_provider": "aws"}, result=[{"major_version": "1"}]),
-            "CreateInventoryAlso": falcon.create_inventory(cloud_provider="aws", major_version="1", os_version="12"),
-            "CreateInventoryAsWell": falcon.create_inventory(results={"applications":[]}),
-            "CreateInventoryTheFourth": falcon.create_inventory(applications=[{"major_version": "42"}])
+            "ReadDeploymentsCombined": falcon.search_scan_jobs(),
+            "ReadDeploymentEntities": falcon.get_scan_jobs(ids="ABCDEF12-1234-ABCD-5678-ABCDEF123456"),
+            "GetScanReport": falcon.get_scan_reports(ids="12345678"),
+            "CreateDeploymentEntity": falcon.launch_scan_job(account_id="12345", asset_identifier="123456", cloud_provider="aws", region="us-east-2")
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

@@ -38,10 +38,78 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_snapshots_endpoints = [
   [
+    "ReadDeploymentsCombined",
+    "GET",
+    "/snapshots/combined/deployments/v1",
+    "Retrieve snapshot jobs identified by the provided IDs",
+    "cloud_snapshots",
+    [
+      {
+        "type": "string",
+        "description": "Search snapshot jobs using a query in Falcon Query Language (FQL). Supported filters: "
+        "account_id,asset_identifier,cloud_provider,region,status",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The fields to sort the records on. Supported columns:  [account_id asset_identifier "
+        "cloud_provider instance_type last_updated_timestamp region status]",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "RegisterCspmSnapshotAccount",
     "POST",
     "/snapshots/entities/accounts/v1",
     "Register customer cloud account for snapshot scanning",
+    "cloud_snapshots",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ReadDeploymentsEntities",
+    "GET",
+    "/snapshots/entities/deployments/v1",
+    "Retrieve snapshot jobs identified by the provided IDs",
+    "cloud_snapshots",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Search snapshot jobs by ids - The maximum amount is 100 IDs",
+        "name": "ids",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateDeploymentEntity",
+    "POST",
+    "/snapshots/entities/deployments/v1",
+    "Launch a snapshot scan for a given cloud asset",
     "cloud_snapshots",
     [
       {
@@ -69,6 +137,26 @@ _cloud_snapshots_endpoints = [
       {
         "name": "body",
         "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetScanReport",
+    "GET",
+    "/snapshots/entities/scanreports/v1",
+    "retrieve the scan report for an instance",
+    "cloud_snapshots",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "the instance identifiers to fetch the report for",
+        "name": "ids",
+        "in": "query",
         "required": True
       }
     ]
