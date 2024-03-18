@@ -36,8 +36,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-from ._util import process_service_request, force_default
-from ._payload import snapshot_registration_payload, snapshot_inventory_payload
+from ._util import process_service_request, force_default, handle_single_argument
+from ._payload import (
+    snapshot_registration_payload,
+    snapshot_launch_payload
+    )
 from ._service_class import ServiceClass
 from ._endpoint._cloud_snapshots import _cloud_snapshots_endpoints as Endpoints
 
@@ -54,6 +57,138 @@ class CloudSnapshots(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_scan_jobs(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search for snapshot jobs identified by the provided filter.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  Available sort fields:
+                    account_id          region
+                    asset_identifier    status
+                    cloud_provider
+        limit -- The upper-bound on the number of records to retrieve.
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset from where to begin.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax (e.g. last_behavior|asc).
+                Available sort fields:
+                account_id          last_updated_timestamp
+                asset_identifier    region
+                cloud_provider      status
+                instance_type
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/ReadDeploymentsCombined
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadDeploymentsCombined",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_scan_jobs(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve snapshot jobs identified by the provided IDs.
+
+        Keyword arguments:
+        parameters -- full parameters payload, not required if using other keywords.
+        ids -- ID(s) of the snapshots to retrieve. String or list of strings. Max: 100
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/ReadDeploymentsEntities
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadDeploymentsEntities",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def launch_scan_job(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Launch a snapshot scan for a given cloud asset.
+
+        Keyword arguments:
+        account_id -- Cloud provider account ID. String.
+        asset_identifier -- Cloud asset identifier. String.
+        body - full body payload in JSON format, not required if using other keywords.
+               {
+                   "resources": [
+                       {
+                           "account_id": "string",
+                           "asset_identifier": "string",
+                           "cloud_provider": "string",
+                           "region": "string"
+                       }
+                   ]
+               }
+        cloud_provider -- Cloud provider ID. String.
+        region -- Cloud provider region ID. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/CreateDeploymentEntity
+        """
+        if not body:
+            body = snapshot_launch_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateDeploymentEntity",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_scan_reports(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve the scan report for an instance.
+
+        Keyword arguments:
+        parameters -- full parameters payload, not required if using other keywords.
+        ids -- The instance identifiers to fetch reports for. String or list of strings. Max: 100
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/GetScanReport
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetScanReport",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
 
     def get_credentials(self: object) -> Dict[str, Union[int, dict]]:
         """Retrieve the registry credentials.
@@ -81,81 +216,6 @@ class CloudSnapshots(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetCredentialsMixin0"
-            )
-
-    @force_default(defaults=["body"], default_types=["dict"])
-    def create_inventory(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-        """Create inventory from data received from a snapshot.
-
-        Keyword arguments:
-        body - full body payload in JSON format, not required if using other keywords.
-               {
-                   "job_metadata": {
-                       "cloud_provider": "string",
-                       "instance_id": "string",
-                       "job_end_time": "2023-08-31T02:45:34.131Z",
-                       "job_id": "string",
-                       "job_start_time": "2023-08-31T02:45:34.131Z",
-                       "message": "string",
-                       "scanner_version": "string",
-                       "status": "string"
-                   },
-                   "results": {
-                       "applications": [
-                           {
-                               "major_version": "string",
-                               "package_hash": "string",
-                               "package_provider": "string",
-                               "package_source": "string",
-                               "path": "string",
-                               "product": "string",
-                               "software_architecture": "string",
-                               "type": "string",
-                               "vendor": "string"
-                           }
-                       ],
-                       "os_version": "string"
-                   }
-               }
-        cloud_provider -- Name of the cloud provider. String.
-        instance_id -- ID of the instance. String.
-        job_end_time -- Completion time for the job. UTC date string.
-        job_id -- ID of the job. String.
-        job_start_time -- Start time for the job. UTC date string.
-        message -- Message received upon job completion. String.
-        scanner_version -- Version identifier for the scanner used. String.
-        status -- Job completion status. String.
-        results -- Full results payload. Dictionary. Overrides values below.
-        os_version -- Operating system version. String.
-        applications -- Complete application list. List of dictionaries. Overrides values below.
-        major_version -- Application major version. String.
-        package_hash -- Hash for the package. String.
-        package_provider -- Package provider. String.
-        path -- File path for the application. String.
-        product - Product name for the application. String.
-        software_architecture -- Running architecture for the application. String.
-        type -- Type of application. String.
-        vendor -- Application vendor. String.
-        job_metadata -- Complete job metadata. Dictionary.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/CreateInventory
-        """
-        if not body:
-            body = snapshot_inventory_payload(passed_keywords=kwargs)
-
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="CreateInventory",
-            keywords=kwargs,
-            body=body
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -214,6 +274,9 @@ class CloudSnapshots(ServiceClass):
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here
     # for backwards compatibility / ease of use purposes
+    ReadDeploymentsCombined = search_scan_jobs
+    ReadDeploymentsEntities = get_scan_jobs
+    CreateDeploymentEntity = launch_scan_job
+    GetScanReport = get_scan_reports
     GetCredentialsMixin0 = get_credentials
-    CreateInventory = create_inventory
     RegisterCspmSnapshotAccount = register_account

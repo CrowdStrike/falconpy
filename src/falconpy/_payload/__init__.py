@@ -83,7 +83,10 @@ from ._message_center import activity_payload, case_payload
 from ._alerts import update_alerts_payload
 from ._sample_uploads import extraction_payload
 from ._ods import scheduled_scan_payload
-from ._cloud_snapshots import snapshot_inventory_payload, snapshot_registration_payload
+from ._cloud_snapshots import (
+    snapshot_registration_payload,
+    snapshot_launch_payload
+    )
 from ._workflows import (
     workflow_deprovision_payload,
     workflow_template_payload,
@@ -112,7 +115,7 @@ __all__ = [
     "recon_export_job_payload", "default_device_policy_config_payload", "registry_payload",
     "gcp_registration_payload", "filevantage_rule_group_payload", "filevantage_rule_payload",
     "filevantage_policy_payload", "filevantage_scheduled_exclusion_payload",
-    "snapshot_inventory_payload", "snapshot_registration_payload", "workflow_deprovision_payload",
+    "snapshot_registration_payload", "snapshot_launch_payload", "workflow_deprovision_payload",
     "workflow_template_payload", "foundry_execute_search_payload", "foundry_dynamic_search_payload",
     "image_policy_payload", "image_exclusions_payload", "image_group_payload",
     "workflow_definition_payload", "workflow_human_input"
