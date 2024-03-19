@@ -88,7 +88,7 @@ class FoundryLogScale(ServiceClass):
                     parameters: dict = None,
                     **kwargs
                     ) -> dict:
-        """Ingest data into the application repository.
+        """Ingest data into the application repository synchronously.
 
         Keyword arguments:
         data_file -- Content of the uploaded archive in binary format.
@@ -110,6 +110,11 @@ class FoundryLogScale(ServiceClass):
         # Try to find the binary object they provided us
         if not data_file:
             data_file = kwargs.get("file", None)
+        data_keys = ["tag", "tag_source", "test_data"]
+        form_data = {}
+        for key in data_keys:
+            if kwargs.get(key, None):
+                form_data[key] = kwargs.get(key)
 
         # Create a multipart form payload for our upload file
         file_tuple = [("file", ("data-upload", data_file, "application/json"))]
@@ -117,7 +122,56 @@ class FoundryLogScale(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="IngestDataV1",
+            body=body,
+            data=form_data,
+            files=file_tuple,
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def ingest_data_async(self: object,
+                          data_file: dict = None,
+                          body: dict = None,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> dict:
+        """Ingest data into the application repository asynchronously.
+
+        Keyword arguments:
+        data_file -- Content of the uploaded archive in binary format.
+                     'file' is also accepted as this parameter.
+        parameters -- full parameters payload, not required if using other keywords.
+        tag -- Custom tag for ingested data in the form 'tag:value'. String.
+        tag_source -- Tag the data with the specified source. String.
+        test_data -- Tag the data with 'test-ingest'. Defaults to False. Boolean.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/foundry-logscale/IngestDataAsyncV1
+        """
+        # Try to find the binary object they provided us
+        if not data_file:
+            data_file = kwargs.get("file", None)
+        data_keys = ["tag", "tag_source", "test_data"]
+        form_data = {}
+        for key in data_keys:
+            if kwargs.get(key, None):
+                form_data[key] = kwargs.get(key)
+
+        # Create a multipart form payload for our upload file
+        file_tuple = [("file", ("data-upload", data_file, "application/json"))]
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="IngestDataAsyncV1",
             body=body,  # Not sure we need to provide a body
+            data=form_data,
             files=file_tuple,
             keywords=kwargs,
             params=parameters
@@ -144,6 +198,9 @@ class FoundryLogScale(ServiceClass):
         end -- Ending position. String.
         include_schema_generation -- Include generated schemas in the response. Boolean.
         incude_test_data -- Include test data when executing searches. Boolean.
+        infer_json_types -- Whether to try to infer data types in json event response
+                            instead of returning map[string]string. Boolean.
+        match_response_schema -- Whether to validate search results against their schema. Boolean.
         metadata -- Include metadata in the response. Boolean.
         mode -- Mode to execute the query under (async or sync). String.
         repo_or_view -- Name of the repo or view to perform the search. String.
@@ -181,6 +238,9 @@ class FoundryLogScale(ServiceClass):
         job_id -- Job ID for a previously executed asynchronous query. String.
         limit -- The maximum number of records to return in this response. Integer.
                  Use with the offset parameter to manage pagination of results.
+        infer_json_types -- Whether to try to infer data types in json event response
+                            instead of returning map[string]string. Boolean.
+        match_response_schema -- Whether to validate search results against their schema. Boolean.
         metadata -- Flag indicating if metadata should be included in the results. Boolean.
         offset -- The offset to start retrieving records from. String.
                   Use with the limit parameter to manage pagination of results.
@@ -256,6 +316,9 @@ class FoundryLogScale(ServiceClass):
         end -- Ending position. String.
         id -- Saved search ID. String.
         include_test_data -- Include test data when executing searches. Boolean.
+        infer_json_types -- Whether to try to infer data types in json event response
+                            instead of returning map[string]string. Boolean.
+        match_response_schema -- Whether to validate search results against their schema. Boolean.
         metadata -- Include metadata in the response. Boolean.
         name -- Saved search name. String.
         search_parameters -- Search specific parameters. Dictionary.
@@ -318,6 +381,8 @@ class FoundryLogScale(ServiceClass):
 
         Keyword arguments:
         job_id -- Job ID for a previously executed asynchronous query. String.
+        infer_json_types -- Whether to try to infer data types in json event response
+                            instead of returning map[string]string. Boolean.
         parameters - full parameters payload, not required if using other keywords.
         result_format -- Result file format. Allowed values: 'json' or 'csv'. String.
 
@@ -370,6 +435,7 @@ class FoundryLogScale(ServiceClass):
     ListReposV1 = list_repos
     ListViewV1 = list_views
     IngestDataV1 = ingest_data
+    IngestDataAsyncV1 = ingest_data_async
     CreateSavedSearchesDynamicExecuteV1 = execute_dynamic
     GetSavedSearchesExecuteV1 = get_search_results
     CreateSavedSearchesExecuteV1 = execute
