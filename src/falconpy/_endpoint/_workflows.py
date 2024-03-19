@@ -124,6 +124,13 @@ _workflows_endpoints = [
         "name": "id",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "boolean",
+        "default": True,
+        "description": "whether or not to sanitize PII from workflow before it's exported",
+        "name": "sanitize",
+        "in": "query"
       }
     ]
   ],
@@ -169,6 +176,73 @@ _workflows_endpoints = [
         "default": False,
         "description": "When enabled, prevents saving workflow after validating",
         "name": "validate_only",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "WorkflowExecuteInternal",
+    "POST",
+    "/workflows/entities/execute/internal/v1",
+    "Executes an on-demand Workflow - internal workflows permitted, the body is JSON used to trigger the "
+    "execution, the response the execution ID(s)",
+    "workflows",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "CID(s) to execute on. This can be a child if this is a flight control enabled "
+        "definition. If unset the definition CID is used.",
+        "name": "execution_cid",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Definition ID to execute, either a name or an ID can be specified.",
+        "name": "definition_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Workflow name to execute, either a name or an ID can be specified.",
+        "name": "name",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Key used to help deduplicate executions, if unset a new UUID is used",
+        "name": "key",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Used to record the execution depth to help limit execution loops when a workflow "
+        "triggers another. The maximum depth is 4.",
+        "name": "depth",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Used to set the batchSize, if unset the default batchSize is used",
+        "name": "batch_size",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Used to record a URL to the source that led to triggering this workflow",
+        "name": "source_event_url",
         "in": "query"
       },
       {
@@ -320,6 +394,71 @@ _workflows_endpoints = [
         "name": "id",
         "in": "query",
         "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "WorkflowMockExecute",
+    "POST",
+    "/workflows/entities/mock-executions/v1",
+    "Executes a workflow definition with mocks",
+    "workflows",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "CID(s) to execute on. This can be a child if this is a flight control enabled "
+        "definition. If unset the definition CID is used.",
+        "name": "execution_cid",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Definition ID to execute, either a name or an ID, or the definition itself in the "
+        "request body, can be specified.",
+        "name": "definition_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Workflow name to execute, either a name or an ID, or the definition itself in the "
+        "request body, can be specified.",
+        "name": "name",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Key used to help deduplicate executions, if unset a new UUID is used",
+        "name": "key",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Used to record the execution depth to help limit execution loops when a workflow "
+        "triggers another. The maximum depth is 4.",
+        "name": "depth",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Used to record a URL to the source that led to triggering this workflow",
+        "name": "source_event_url",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "When enabled, prevents execution after validating mocks against definition",
+        "name": "validate_only",
+        "in": "query"
       },
       {
         "name": "body",

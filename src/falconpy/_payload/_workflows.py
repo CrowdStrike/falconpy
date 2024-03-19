@@ -177,3 +177,23 @@ def workflow_human_input(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key, None)
 
     return returned_payload
+
+
+def workflow_mock_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted mock execution payload.
+
+    {
+        "definition" {
+            Workflow schema
+        },
+        "mocks": "string",
+        "on_demand_trigger": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["definition", "mocks", "on_demand_trigger"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    return returned_payload

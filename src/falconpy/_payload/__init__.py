@@ -91,7 +91,8 @@ from ._workflows import (
     workflow_deprovision_payload,
     workflow_template_payload,
     workflow_definition_payload,
-    workflow_human_input
+    workflow_human_input,
+    workflow_mock_payload
     )
 from ._foundry import foundry_dynamic_search_payload, foundry_execute_search_payload
 
@@ -118,5 +119,5 @@ __all__ = [
     "snapshot_registration_payload", "snapshot_launch_payload", "workflow_deprovision_payload",
     "workflow_template_payload", "foundry_execute_search_payload", "foundry_dynamic_search_payload",
     "image_policy_payload", "image_exclusions_payload", "image_group_payload",
-    "workflow_definition_payload", "workflow_human_input"
+    "workflow_definition_payload", "workflow_human_input", "workflow_mock_payload"
 ]

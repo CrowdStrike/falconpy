@@ -23,6 +23,8 @@ class TestWorkflows:
         error_checks = True
         tests = {
             "WorkflowExecute" : falcon.execute(body={}),
+            "WorkflowExecuteInternal" : falcon.execute_internal(body={}),
+            "WorkflowMockExecute" : falcon.mock_execute(body={}, mocks="whatever"),
             "WorkflowExecutionsAction" : falcon.execution_action(action_name="resume", ids="12345678"),
             "WorkflowExecutionResults" : falcon.execution_results(ids="12345678"),
             "WorkflowSystemDefinitionsDeProvision" : falcon.deprovision(definition_id="12345", deprovision_all=True),
