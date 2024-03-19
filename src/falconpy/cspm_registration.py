@@ -42,7 +42,9 @@ from ._payload import (
     cspm_registration_payload,
     cspm_policy_payload,
     cspm_scan_payload,
-    gcp_registration_payload
+    gcp_registration_payload,
+    generic_payload_list,
+    cspm_service_account_validate_payload
     )
 from ._service_class import ServiceClass
 from ._endpoint._cspm_registration import _cspm_registration_endpoints as Endpoints
@@ -626,6 +628,32 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_azure_management_group(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Delete an existing Azure Managment Group by specifying their IDs.
+
+        Keyword arguments:
+        tenant_ids -- AWS Organization IDs to be removed. String or list of strings.
+        parameters -- full parameters payload, not required if tenant_ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'tenant_ids'. All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/DeleteCSPMAzureManagementGroup
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteCSPMAzureManagementGroup",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "tenant_ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_azure_user_scripts_attachment(self: object,
                                           *args,
                                           parameters: dict = None,
@@ -850,6 +878,98 @@ class CSPMRegistration(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="ConnectCSPMGCPAccount",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def validate_gcp_account(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Run a synchronous health check.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                        "string"
+                    ]
+                }
+        resources -- GCP Account IDs to validate. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'resources'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMGCPValidateAccountsExt
+        """
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs,
+                                        submitted_arguments=args,
+                                        payload_value="resources"
+                                        )
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMGCPValidateAccountsExt",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def validate_gcp_service_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Validate credentials for a GCP service account.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "client_email": "string",
+                            "client_id": "string",
+                            "private_key": "string",
+                            "private_key_id": "string",
+                            "project_id": "string",
+                            "service_account_conditions": [
+                                {
+                                    "last_transition": "2024-03-19T22:48:28.987Z",
+                                    "message": "string",
+                                    "reason": "string",
+                                    "status": "string",
+                                    "type": "string"
+                                }
+                            ],
+                            "service_account_id": 0
+                        }
+                    ]
+                }
+        client_email -- Client email associated with the service account. String.
+        client_id -- GCP Client ID. String.
+        private_key -- GCP private key. String.
+        private_key_id -- GCP private key ID. String.
+        project_id -- GCP project ID. String.
+        resources -- List of GCP service accounts to validate. List of dictionaries.
+                     Overrides other keywords except for body.
+        service_account_conditions -- GCP service account conditions. List of dictionaries.
+        service_account_id -- GCP service account ID. Integer.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/ValidateCSPMGCPServiceAccountExt
+        """
+        if not body:
+            body = cspm_service_account_validate_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ValidateCSPMGCPServiceAccountExt",
             body=body
             )
 
@@ -1448,6 +1568,7 @@ class CSPMRegistration(ServiceClass):
     GetCSPMAzureUserScriptsAttachment = get_azure_user_scripts_attachment
     AzureDownloadCertificate = azure_download_certificate
     GetCSPMAzureManagementGroup = get_azure_management_group
+    DeleteCSPMAzureManagementGroup = delete_azure_management_group
     CreateCSPMAzureManagementGroup = create_azure_management_group
     GetCSPMCGPAccount = get_gcp_account
     GetCSPMGCPAccount = get_gcp_account  # Typo fix
@@ -1455,6 +1576,8 @@ class CSPMRegistration(ServiceClass):
     DeleteCSPMGCPAccount = delete_gcp_account
     UpdateCSPMGCPAccount = update_gcp_account
     ConnectCSPMGCPAccount = connect_gcp_account
+    GetCSPMGCPValidateAccountsExt = validate_gcp_account
+    ValidateCSPMGCPServiceAccountExt = validate_gcp_service_account
     GetCSPMGCPServiceAccountsExt = get_gcp_service_account
     GetCSPMGCPUserScriptsAttachment = get_gcp_user_scripts_attachment
     GetBehaviorDetections = get_behavior_detections

@@ -58,7 +58,12 @@ from ._d4c_registration import (
     aws_d4c_registration_payload,
     gcp_registration_payload
     )
-from ._cspm_registration import cspm_registration_payload, cspm_policy_payload, cspm_scan_payload
+from ._cspm_registration import (
+    cspm_registration_payload,
+    cspm_policy_payload,
+    cspm_scan_payload,
+    cspm_service_account_validate_payload
+    )
 from ._device_control_policy import device_policy_payload, default_device_policy_config_payload
 from ._falconx import falconx_payload
 from ._filevantage import (
@@ -119,5 +124,6 @@ __all__ = [
     "snapshot_registration_payload", "snapshot_launch_payload", "workflow_deprovision_payload",
     "workflow_template_payload", "foundry_execute_search_payload", "foundry_dynamic_search_payload",
     "image_policy_payload", "image_exclusions_payload", "image_group_payload",
-    "workflow_definition_payload", "workflow_human_input", "workflow_mock_payload"
+    "workflow_definition_payload", "workflow_human_input", "workflow_mock_payload",
+    "cspm_service_account_validate_payload"
 ]

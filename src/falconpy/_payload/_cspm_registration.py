@@ -170,3 +170,47 @@ def cspm_scan_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, str]]]:
     returned_payload["resources"].append(item)
 
     return returned_payload
+
+
+def cspm_service_account_validate_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted service account validation payload.
+
+    {
+        "resources": [
+            {
+                "client_email": "string",
+                "client_id": "string",
+                "private_key": "string",
+                "private_key_id": "string",
+                "project_id": "string",
+                "service_account_conditions": [
+                    {
+                        "last_transition": "2024-03-19T22:48:28.987Z",
+                        "message": "string",
+                        "reason": "string",
+                        "status": "string",
+                        "type": "string"
+                    }
+                ],
+                "service_account_id": 0
+            }
+        ]
+    }
+    """
+    returned_payload = {
+        "resources": []
+    }
+    keys = ["client_email", "client_id", "private_key", "private_key_id", "project_id"
+            "service_account_conditions", "service_account_id"
+            ]
+    if passed_keywords.get("resources", None):
+        # Providing the resources list of dictionaries overrides other keywords
+        returned_payload["resources"] = passed_keywords.get("resources", None)
+    else:
+        item = {}
+        for key in keys:
+            if passed_keywords.get(key, None):
+                item[key] = passed_keywords.get(key, None)
+        returned_payload["resources"].append(item)
+
+    return returned_payload
