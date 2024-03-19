@@ -48,7 +48,8 @@ from ._payload import (
     workflow_deprovision_payload,
     workflow_template_payload,
     workflow_definition_payload,
-    workflow_human_input
+    workflow_human_input,
+    workflow_mock_payload
     )
 from ._service_class import ServiceClass
 from ._endpoint._workflows import _workflows_endpoints as Endpoints
@@ -260,6 +261,95 @@ class Workflows(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="WorkflowExecute",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def execute_internal(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Execute an on-demand workflow. Response will contain the execution ID.
+
+        Keyword arguments:
+        batch_size -- Used to set the size of the batch. Integer.
+        body -- full body payload, not required if using other keywords.
+                {
+                    Workflow schema
+                }
+        definition_id -- Definition ID to execute. Either a name or ID can be specified.
+                         String or List of Strings.
+        execution_cid -- CID(s) to execute on. This can be a child for Flight Control scenarios.
+                         If unset, the definition CID is used. String or List of strings.
+        name -- Workflow name to execute. Either a name or ID can be specified. String.
+        parameters -- Full parameters payload in dictionary (JSON) format. Not required
+                      if you are using other keywords. Dictionary.
+        key -- Key used to help deduplicate executions. If unset a new UUID is used. String.
+        depth -- Used to record the execution depth to help limit execution loops when a workflow
+                 triggers another. The maximum depth is 4. Integer.
+        source_event_url -- Used to record a URL to the source that led to trigger the workflow.
+                            String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowExecuteInternal
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowExecuteInternal",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def mock_execute(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Execute a workflow definition with mocks.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "definition" {
+                        Workflow schema
+                    },
+                    "mocks": "string",
+                    "on_demand_trigger": "string"
+                }
+        definition_id -- Definition ID to execute. Either a name or ID can be specified.
+                         String or List of Strings.
+        execution_cid -- CID(s) to execute on. This can be a child for Flight Control scenarios.
+                         If unset, the definition CID is used. String or List of strings.
+        name -- Workflow name to execute. Either a name or ID can be specified. String.
+        parameters -- Full parameters payload in dictionary (JSON) format. Not required
+                      if you are using other keywords. Dictionary.
+        key -- Key used to help deduplicate executions. If unset a new UUID is used. String.
+        depth -- Used to record the execution depth to help limit execution loops when a workflow
+                 triggers another. The maximum depth is 4. Integer.
+        source_event_url -- Used to record a URL to the source that led to trigger the workflow.
+                            String.
+        validate_only -- PRevent execution after validating mocks against definition. Boolean.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowMockExecute
+        """
+        if not body:
+            body = workflow_mock_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowMockExecute",
             keywords=kwargs,
             params=parameters,
             body=body
@@ -615,6 +705,8 @@ class Workflows(ServiceClass):
     WorkflowDefinitionsImport = import_definition
     WorkflowDefinitionsUpdate = update_definition
     WorkflowExecute = execute
+    WorkflowExecuteInternal = execute_internal
+    WorkflowMockExecute = mock_execute
     WorkflowExecutionsAction = execution_action
     WorkflowExecutionResults = execution_results
     WorkflowGetHumanInputV1 = get_human_input
