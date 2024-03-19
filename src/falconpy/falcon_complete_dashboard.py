@@ -899,6 +899,92 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
+    def aggregate_support_issues(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve aggregate device count values based on the matched filter.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                List of dictionaries.
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "exclude": "string",
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "include": "string",
+                        "interval": "string",
+                        "max_doc_count": 0,
+                        "min_doc_count": 0,
+                        "missing": "string",
+                        "name": "string",
+                        "q": "string",
+                        "ranges": [
+                        {
+                            "From": 0,
+                            "To": 0
+                        }
+                        ],
+                        "size": 0,
+                        "sort": "string",
+                        "sub_aggregates": [
+                            null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        exclude -- Fields to exclude. String.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        from -- Integer.
+        include -- Fields to include. String.
+        interval -- String.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
+        missing -- String.
+        name -- Scan name. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        This method does not support body payload validation.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateSupportIssues
+        """
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="AggregateSupportIssues",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["list"])
     def aggregate_total_device_counts(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve aggregate device count values based on the matched filter.
 
@@ -1245,6 +1331,7 @@ class CompleteDashboard(ServiceClass):
     AggregatePreventionPolicy = aggregate_prevention_policy
     AggregateRemediations = aggregate_remediations
     AggregateSensorUpdatePolicy = aggregate_sensor_update_policy
+    AggregateSupportIssues = aggregate_support_issues
     AggregateTotalDeviceCounts = aggregate_total_device_counts
     QueryAlertIdsByFilter = query_alert_ids_by_filter
     QueryAllowListFilter = query_allow_list_filter

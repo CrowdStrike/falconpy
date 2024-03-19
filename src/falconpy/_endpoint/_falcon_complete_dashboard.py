@@ -178,6 +178,20 @@ _falcon_complete_dashboard_endpoints = [
     ]
   ],
   [
+    "AggregateSupportIssues",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/support-issues/v1",
+    "Retrieve aggregate support issue ticket values based on the matched filter",
+    "falcon_complete_dashboard",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "AggregateTotalDeviceCounts",
     "POST",
     "/falcon-complete-dashboards/aggregates/total-device-counts/v1",

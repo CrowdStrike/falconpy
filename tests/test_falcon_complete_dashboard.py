@@ -87,6 +87,7 @@ class TestFalconCompleteDashboard:
             "AggregateRemediations": falcon.aggregate_remediations(),
             "AggregatePreventionPolicy": falcon.aggregate_prevention_policy(),
             "AggregateSensorUpdatePolicy": falcon.aggregate_sensor_update_policy(),
+            "AggregateSupportIssues": falcon.aggregate_support_issues(),
             "AggregateTotalDeviceCounts": falcon.aggregate_total_device_counts()
 
         }
