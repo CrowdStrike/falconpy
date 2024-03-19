@@ -121,6 +121,42 @@ _container_detections_endpoints = [
     ]
   ],
   [
+    "GetRuntimeDetectionsCombinedV2",
+    "GET",
+    "/container-security/combined/runtime-detections/v2",
+    "Retrieve container runtime detections by the provided search criteria",
+    "container_detections",
+    [
+      {
+        "type": "string",
+        "description": "Filter Container Runtime Detections using a query in Falcon Query Language (FQL). "
+        "Supported filters:  action_taken,aid,cid,cloud,cluster_name,command_line,computer_name,container_id,detect_tim"
+        "estamp,detection_description,detection_id,file_name,file_path,host_id,host_type,image_id,name,namespace,pod_na"
+        "me,severity,tactic",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The field to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "ReadDetections",
     "GET",
     "/container-security/entities/detections/v1",
