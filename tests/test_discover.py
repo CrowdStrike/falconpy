@@ -50,6 +50,7 @@ class TestDiscover:
             if check["body"]["resources"]:
                 logins_id_list = check["body"]["resources"]
         check = falcon.query_iot_hosts(limit=1)
+        check = falcon.query_iot_hosts_v2(limit=1)
         assets_id_list = "1234567890"
         if check["status_code"] == 429:
             pytest.skip("Rate limit hit")
