@@ -259,6 +259,26 @@ _intel_endpoints = [
     ]
   ],
   [
+    "GetMalwareEntities",
+    "GET",
+    "/intel/entities/malware/v1",
+    "Get malware entities for specified ids.",
+    "intel",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Malware family name in lower case with spaces, dots and slashes replaced with dashes",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetMitreReport",
     "GET",
     "/intel/entities/mitre-reports/v1",
@@ -557,6 +577,65 @@ _intel_endpoints = [
         "description": "If true, include related indicators in the response. Defaults to true.",
         "name": "include_relations",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "QueryMalware",
+    "GET",
+    "/intel/queries/malware/v1",
+    "Get malware family names that match provided FQL filters.",
+    "intel",
+    [
+      {
+        "type": "integer",
+        "description": "Set the starting row number to return malware IDs from. Defaults to 0.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Set the number of malware IDs to return. The value must be between 1 and 5000.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Order fields in ascending or descending order.\n\nEx: created_date|asc.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter your query by specifying FQL filter parameters.",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Perform a generic substring search across all fields.",
+        "name": "q",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "QueryMitreAttacksForMalware",
+    "GET",
+    "/intel/queries/mitre-malware/v1",
+    "Gets MITRE tactics and techniques for the given malware",
+    "intel",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Malware family name in lower case with spaces replaced with dashes",
+        "name": "ids",
+        "in": "query",
+        "required": True
       }
     ]
   ],
