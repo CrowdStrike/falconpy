@@ -132,6 +132,7 @@ class Workflows(ServiceClass):
         Keyword arguments:
         id -- ID of workflow definitions to return details for. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        sanitize -- Sanitize PII from workflow before it's exported. Boolean.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'id'.
                    All others are ignored.
@@ -219,44 +220,6 @@ class Workflows(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="WorkflowDefinitionsUpdate",
-            keywords=kwargs,
-            params=parameters,
-            body=body
-            )
-
-    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def create_definition(self: object,
-                          body: dict = None,
-                          parameters: dict = None,
-                          **kwargs
-                          ) -> Dict[str, Union[int, dict]]:
-        """Create a workflow definition based on the provided model.
-
-        Keyword arguments:
-        validate_only -- When enabled, prevents saving workflow after validating. Boolean.
-        body -- Full body payload in JSON format, not required when using other keywords.
-        definition -- Full workflow definition. Dictionary.
-        change_log -- Optional description to outline changes made during the update. String.
-        enabled -- Specifies if the new definition should be enabled upon creation.
-        flight_control -- Flight control parameters. Dictionary.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsCreate
-        """
-        if not body:
-            body = workflow_definition_payload(passed_keywords=kwargs)
-
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="WorkflowDefinitionsCreate",
             keywords=kwargs,
             params=parameters,
             body=body
@@ -651,7 +614,6 @@ class Workflows(ServiceClass):
     WorkflowDefinitionsExport = export_definition
     WorkflowDefinitionsImport = import_definition
     WorkflowDefinitionsUpdate = update_definition
-    WorkflowDefinitionsCreate = create_definition
     WorkflowExecute = execute
     WorkflowExecutionsAction = execution_action
     WorkflowExecutionResults = execution_results

@@ -34,7 +34,6 @@ class TestWorkflows:
             "WorkflowDefinitionsImport": falcon.import_definition(validate_only=True, data_file="this_will_415"),
             "WorkflowDefinitionsImport": falcon.import_definition(validate_only=True, file_data="this_will_500"),
             "WorkflowDefinitionsUpdate": falcon.update_definition(change_log="testing"),
-            "WorkflowDefinitionsCreate": falcon.create_definition(change_log="testing"),
             "WorkflowGetHumanInputV1": falcon.get_human_input(ids="1234567"),
             "WorkflowUpdateHumanInputV1": falcon.update_human_input(input="whatever", note="whatever"),
         }

@@ -179,27 +179,6 @@ _workflows_endpoints = [
     ]
   ],
   [
-    "WorkflowDefinitionsCreate",
-    "POST",
-    "/workflows/entities/definitions/v1",
-    "Creates a workflow definition based on the provided model",
-    "workflows",
-    [
-      {
-        "type": "boolean",
-        "default": False,
-        "description": "When enabled, prevents saving workflow after validating",
-        "name": "validate_only",
-        "in": "query"
-      },
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "WorkflowExecute",
     "POST",
     "/workflows/entities/execute/v1",
