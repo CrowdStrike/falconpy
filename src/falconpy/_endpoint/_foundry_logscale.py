@@ -54,10 +54,54 @@ _foundry_logscale_endpoints = [
     ]
   ],
   [
+    "IngestDataAsyncV1",
+    "POST",
+    "/loggingapi/entities/data-ingestion/ingest-async/v1",
+    "Asynchronously ingest data into the application repository",
+    "foundry_logscale",
+    [
+      {
+        "type": "file",
+        "description": "Data file to ingest",
+        "name": "data_file",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Repository name if not part of a foundry app",
+        "name": "repo",
+        "in": "formData"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Custom tag for ingested data in the form tag:value",
+        "name": "tag",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "Tag the data with the specified source",
+        "name": "tag_source",
+        "in": "formData"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "Tag the data with test-ingest",
+        "name": "test_data",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
     "IngestDataV1",
     "POST",
     "/loggingapi/entities/data-ingestion/ingest/v1",
-    "Ingest data into the application repository",
+    "Synchronously ingest data into the application repository",
     "foundry_logscale",
     [
       {
@@ -121,6 +165,20 @@ _foundry_logscale_endpoints = [
       {
         "type": "boolean",
         "default": False,
+        "description": "Whether to try to infer data types in json event response instead of returning map[string]string",
+        "name": "infer_json_types",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "Whether to validate search results against their schema",
+        "name": "match_response_schema",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
         "description": "Whether to include metadata in the response",
         "name": "metadata",
         "in": "query"
@@ -163,10 +221,24 @@ _foundry_logscale_endpoints = [
         "in": "query"
       },
       {
+        "type": "boolean",
+        "default": False,
+        "description": "Whether to try to infer data types in json event response instead of returning map[string]string",
+        "name": "infer_json_types",
+        "in": "query"
+      },
+      {
         "minimum": 0,
         "type": "string",
         "description": "Maximum number of records to return.",
         "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "Whether to validate search results against their schema",
+        "name": "match_response_schema",
         "in": "query"
       },
       {
@@ -215,6 +287,20 @@ _foundry_logscale_endpoints = [
       {
         "type": "boolean",
         "default": False,
+        "description": "Whether to try to infer data types in json event response instead of returning map[string]string",
+        "name": "infer_json_types",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "Whether to validate search results against their schema",
+        "name": "match_response_schema",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
         "description": "Whether to include metadata in the response",
         "name": "metadata",
         "in": "query"
@@ -254,6 +340,13 @@ _foundry_logscale_endpoints = [
         "name": "job_id",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "Whether to try to infer data types in json event response instead of returning map[string]string",
+        "name": "infer_json_types",
+        "in": "query"
       },
       {
         "enum": [

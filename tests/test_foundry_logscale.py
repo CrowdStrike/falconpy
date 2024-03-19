@@ -31,6 +31,8 @@ class TestFoundryLogScale:
             "CreateSavedSearchesExecuteV1" : falcon.execute(search_parameters={"something": "somethingElse"}, end="10", start="1"),
             "CreateSavedSearchesIngestV1" : falcon.populate(app_id="pommegranate"),
             "GetSavedSearchesJobResultsDownloadV1" : falcon.download_results(job_id="12345", result_format="json"),
+            "IngestDataAsyncV1": falcon.ingest_data_async(data_file="testfile.png", tag="file_tag"),
+            "IngestDataAsyncV1variant": falcon.ingest_data_async(file="testfile.png", tag="file_tag")
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
