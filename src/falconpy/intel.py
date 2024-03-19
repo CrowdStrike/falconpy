@@ -338,6 +338,37 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_malware_entities(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs) -> Union[Dict[str, Union[int, dict]], bytes]:
+        """Get malware entities for specified ids.
+
+        Keyword arguments:
+        ids -- Malware family entities to retrieve. String or list of strings.
+               Malware family names should be in lower case with spaces, dots and
+               slashes replaced with dashes.
+        parameters - full parameters payload, not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetMalwareEntities
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetMalwareEntities",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_report_pdf(self: object, *args, parameters: dict = None, **kwargs) -> object:
         """Return a Report PDF attachment.
 
@@ -611,6 +642,37 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_mitre_attacks_for_malware(self: object,
+                                        *args,
+                                        parameters: dict = None,
+                                        **kwargs) -> Union[Dict[str, Union[int, dict]], bytes]:
+        """Get MITRE tactics and techniques for the given malware.
+
+        Keyword arguments:
+        ids -- Malware family entities to retrieve. String or list of strings.
+               Malware family names should be in lower case with spaces, dots and
+               slashes replaced with dashes.
+        parameters - full parameters payload, not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryMitreAttacksForMalware
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryMitreAttacksForMalware",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def query_report_ids(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get report IDs that match provided FQL filters.
 
@@ -698,6 +760,35 @@ class Intel(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_malware(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get malware family names that match provided FQL filters.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The maximum number of actors to return. [integer, 1-5000]
+        offset -- The integer offset to start retrieving records from.
+        parameters - full parameters payload, not required if using other keywords.
+        q -- Perform a generic substring search across all fields.
+        sort -- The property to sort by. FQL syntax (e.g. created_date|asc).
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryMalware
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryMalware",
+            keywords=kwargs,
+            params=parameters
+            )
+
     @force_default(defaults=["body"], default_types=["dict"])
     def get_vulnerabilities(self: object, *args, body: dict = None, **kwargs) -> dict:
         """Retrieve specific vulnerabilities using their indicator IDs.
@@ -778,13 +869,16 @@ class Intel(ServiceClass):
     GetIntelIndicatorEntities = get_indicator_entities
     GetMitreReport = get_mitre_report
     PostMitreAttacks = mitre_attacks
+    GetMalwareEntities = get_malware_entities
     GetIntelReportPDF = get_report_pdf
     GetIntelReportEntities = get_report_entities
     GetIntelRuleFile = get_rule_file
     GetLatestIntelRuleFile = get_latest_rule_file
     GetIntelRuleEntities = get_rule_entities
     QueryMitreAttacks = query_mitre_attacks
+    QueryMitreAttacksForMalware = query_mitre_attacks_for_malware
     QueryIntelActorIds = query_actor_ids
+    QueryMalware = query_malware
     QueryIntelIndicatorIds = query_indicator_ids
     QueryIntelReportIds = query_report_ids
     QueryIntelRuleIds = query_rule_ids
