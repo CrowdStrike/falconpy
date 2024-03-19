@@ -95,7 +95,11 @@ class TestCSPMRegistration:
             "UpdateGCP": falcon.update_gcp_account(environment="temperate", parent_id="1234567"),
             "GetMgmt": falcon.get_azure_management_group(tenant_id="1234567"),
             "CreateMgmt": falcon.create_azure_management_group(default_subscription_id="bob", tenant_id="1234567"),
-            "UpdateAzure": falcon.update_azure_account(environment="chilly", subscription_id="banana")
+            "DeleteAzureManagementGroup": falcon.delete_azure_management_group("whatever_tenant_ID"),
+            "UpdateAzure": falcon.update_azure_account(environment="chilly", subscription_id="banana"),
+            "ValidateGCPAccount": falcon.validate_gcp_account("whatever_account_id"),
+            "ValidateGCPServiceAccount": falcon.validate_gcp_service_account(resources=[{"service_account_id": 1}]),
+            "ValidateGCPServiceAccountToo": falcon.validate_gcp_service_account(service_account_id=1)
         }
         for key in tests:
             if tests[key]["status_code"] != 500:

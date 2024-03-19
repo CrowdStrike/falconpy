@@ -534,6 +534,25 @@ _cspm_registration_endpoints = [
     ]
   ],
   [
+    "DeleteCSPMAzureManagementGroup",
+    "DELETE",
+    "/cloud-connect-cspm-azure/entities/management-group/v1",
+    "Deletes Azure management groups from the system.",
+    "cspm_registration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Tenant ids to remove",
+        "name": "tenant_ids",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "GetCSPMAzureUserScriptsAttachment",
     "GET",
     "/cloud-connect-cspm-azure/entities/user-scripts-download/v1",
@@ -719,6 +738,20 @@ _cspm_registration_endpoints = [
     ]
   ],
   [
+    "GetCSPMGCPValidateAccountsExt",
+    "POST",
+    "/cloud-connect-cspm-gcp/entities/account/validate/v1",
+    "Run a synchronous health check.",
+    "cspm_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetCSPMGCPServiceAccountsExt",
     "GET",
     "/cloud-connect-cspm-gcp/entities/service-accounts/v1",
@@ -731,6 +764,20 @@ _cspm_registration_endpoints = [
         "description": "Service Account ID",
         "name": "id",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "ValidateCSPMGCPServiceAccountExt",
+    "POST",
+    "/cloud-connect-cspm-gcp/entities/service-accounts/validate/v1",
+    "Validates credentials for a service account",
+    "cspm_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
@@ -944,8 +991,8 @@ _cspm_registration_endpoints = [
     "GetConfigurationDetections",
     "GET",
     "/detects/entities/iom/v1",
-    "Get list of active misconfigurations. This endpoint is deprecated, please use GetConfigurationDetectionIDsV2 and "
-    "GetConfigurationDetectionEntities instead",
+    "Get list of active misconfigurations. This endpoint is deprecated, please use "
+    "GetConfigurationDetectionIDsV2 and GetConfigurationDetectionEntities instead",
     "cspm_registration",
     [
       {
