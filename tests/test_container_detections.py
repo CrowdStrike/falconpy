@@ -27,6 +27,7 @@ class TestContainerDetections:
             "ReadDetectionsCountByType": falcon.read_detections_count_by_type(filter="cid:'1234567890'"),
             "ReadDetectionsCount": falcon.read_detections_count(filter="cid:'1234567890'"),
             "ReadCombinedDetections": falcon.read_combined_detections(filter="cid:'1234567890'", limit=1),
+            "GetRuntimeDetectionsCombinedV2": falcon.search_runtime_detections(limit=1, filter="cid:'1234567'"),
             "ReadDetections": falcon.read_detections(limit=1, filter="cid:'1234567890'"),
             "SearchDetections": falcon.search_detections(filter="cid:'1234567890'", limit=1)
         }

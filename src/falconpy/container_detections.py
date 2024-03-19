@@ -197,6 +197,51 @@ class ContainerDetections(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_runtime_detections(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve image assessment detections identified by the provided filter criteria.
+
+        Keyword arguments:
+        filter -- Filter Container Runtime Detections using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    action_taken            file_name
+                    aid                     file_path
+                    cid                     host_id
+                    cloud                   host_type
+                    cluster_name            image_id
+                    command_line            name
+                    computer_name           namespace
+                    container_id            pod_name
+                    detect_timestamp        severity
+                    detection_description   tactic
+                    detection_id
+
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        offset -- The offset from where to begin. Integer.
+        sort -- The fields to sort the records on. String.
+                Supported columns:
+                  containers_impacted   detection_type
+                  detection_name        images_impacted
+                  detection_severity    last_detected
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-detections/GetRuntimeDetectionsCombinedV2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetRuntimeDetectionsCombinedV2",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def read_detections(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve image assessment detection entities identified by the provided filter criteria.
 
@@ -262,5 +307,6 @@ class ContainerDetections(ServiceClass):
     ReadDetectionsCountByType = read_detections_count_by_type
     ReadDetectionsCount = read_detections_count
     ReadCombinedDetections = read_combined_detections
+    GetRuntimeDetectionsCombinedV2 = search_runtime_detections
     ReadDetections = read_detections
     SearchDetections = search_detections
