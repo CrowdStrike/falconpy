@@ -385,6 +385,54 @@ _discover_endpoints = [
     ]
   ],
   [
+    "query-iot-hostsV2",
+    "GET",
+    "/discover/queries/iot-hosts/v2",
+    "Search for IoT assets in your environment by providing an FQL (Falcon Query Language) filter and paging "
+    "details. Returns a set of asset IDs which match the filter criteria.",
+    "discover",
+    [
+      {
+        "type": "string",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
+        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
+        "the previous response to continue from that place in the results.",
+        "name": "after",
+        "in": "query"
+      },
+      {
+        "maximum": 100,
+        "minimum": 1,
+        "type": "integer",
+        "description": "The number of asset IDs to return in this response (min: 1, max: 100, default: 100). "
+        "Use with the `after` parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort assets by their properties. A single sort field is allowed. Common sort options "
+        "include:\n\n<ul><li>hostname|asc</li><li>product_type_desc|desc</li></ul>",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter assets using an FQL query. Common filter options include:<ul><li>entity_type:'m "
+        "anaged'</li><li>product_type_desc:'Workstation'</li><li>platform_name:'Windows'</li><li>last_seen_timestamp:>' "
+        "now-7d'</li></ul>\n\t\t\tAvailable filter fields that support exact match: device_family, device_class, "
+        "device_type, device_mode, business_criticality, line_of_business, virtual_zone, subnet, purdue_level, vlan, "
+        "local_ip_addresses, mac_addresses, physical_connections_count, data_providers\n\t\t\tAvailable filter fields "
+        "that supports wildcard (*): device_family, device_class, device_type, device_mode, business_criticality, "
+        "line_of_business, virtual_zone, subnet, purdue_level, vlan, local_ip_addresses, mac_addresses, "
+        "data_providers\n\t\t\tAvailable filter fields that supports range comparisons (>, <, >=, <=): "
+        "physical_connections_count\n\t\t\tAll filter fields and operations supports negation (!).",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "query-logins",
     "GET",
     "/discover/queries/logins/v1",
