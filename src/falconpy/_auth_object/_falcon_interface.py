@@ -90,7 +90,8 @@ class FalconInterface(BaseFalconAuth):
                  debug: Optional[bool] = False,
                  debug_record_count: Optional[int] = None,
                  sanitize_log: Optional[bool] = None,
-                 pythonic: Optional[bool] = False
+                 pythonic: Optional[bool] = False,
+                 environment: Optional[Dict[str, str]] = None
                  ) -> "FalconInterface":
         """Construct an instance of the FalconInterface class."""
         # Set the pythonic behavior mode.
@@ -149,15 +150,16 @@ class FalconInterface(BaseFalconAuth):
                                      )
 
         # Environment Authentication
+        # User configuration environment keys
+        self._environment = environment if environment else {}
         # When credentials are not provided, attempt to retrieve them from the environment.
         if not self.cred_format_valid and not self.token_value:
             # Both variables must be present within the running environment.
-            if os.getenv("FALCON_CLIENT_ID") and os.getenv("FALCON_CLIENT_SECRET"):
-                api_id = os.getenv("FALCON_CLIENT_ID") if "client_id" not in self.creds else self.creds["client_id"]
-                if "client_secret" not in self.creds:
-                    api_sec = os.getenv("FALCON_CLIENT_SECRET")
-                else:
-                    api_sec = self.creds["client_secret"]
+            if os.getenv(f"{self.env_prefix}{self.env_key}") and os.getenv(f"{self.env_prefix}{self.env_secret}"):
+                api_id = os.getenv(f"{self.env_prefix}{self.env_key}") \
+                    if "client_id" not in self.creds else self.creds["client_id"]
+                api_sec = os.getenv(f"{self.env_prefix}{self.env_secret}") \
+                    if "client_secret" not in self.creds else self.creds["client_secret"]
                 # Environment Authentication will not override values that preexist in the creds dictionary.
                 self._creds = {
                     "client_id": api_id,
@@ -511,3 +513,18 @@ class FalconInterface(BaseFalconAuth):
     def pythonic(self, value: bool):
         """Enable or disable pythonic mode."""
         self._pythonic = value
+
+    @property
+    def env_prefix(self) -> str:
+        """Return the environment prefix."""
+        return self._environment.get("prefix", "FALCON_")
+
+    @property
+    def env_key(self) -> str:
+        """Return the environment API key name."""
+        return self._environment.get("id_name", "CLIENT_ID")
+
+    @property
+    def env_secret(self) -> str:
+        """Return the environment API key secret."""
+        return self._environment.get("secret_name", "CLIENT_SECRET")

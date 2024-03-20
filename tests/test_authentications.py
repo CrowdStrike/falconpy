@@ -18,7 +18,16 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import ZeroTrustAssessment, CloudConnectAWS, OAuth2, APIHarness, version, InvalidCredentialFormat, Hosts
+from falconpy import (
+    ZeroTrustAssessment,
+    CloudConnectAWS,
+    OAuth2,
+    APIHarness,
+    version,
+    InvalidCredentialFormat,
+    Hosts,
+    Detects
+    )
 from falconpy._util import confirm_base_region
 from falconpy._version import _TITLE, _VERSION
 
@@ -51,12 +60,12 @@ class TestAuthentications:
             return False
 
     def serviceAny_TestStaleObjectAuth(self):
-        falcon = CloudConnectAWS(auth_object=OAuth2(creds={"client_id": auth.config["falcon_client_id"],
+        falcon = Detects(auth_object=OAuth2(creds={"client_id": auth.config["falcon_client_id"],
                                                            "client_secret": auth.config["falcon_client_secret"]
                                                            },
                                                     base_url = "us-1",  # Testing dashed base specifier
                                                     debug=_DEBUG))
-        result = falcon.QueryAWSAccounts()
+        result = falcon.QueryDetects()
         if result["status_code"] in AllowedResponses:
             return True
         else:
@@ -140,12 +149,12 @@ class TestAuthentications:
             }
             result = falcon.command("oauth2AccessToken", data=t_creds, base_url="usgov1")
             if result["status_code"] == 201:
-                falcon = CloudConnectAWS(client_id=os.environ["CROSS_DEBUG_KEY"],
-                                         client_secret=os.environ["CROSS_DEBUG_SECRET"],
-                                         base_url="usgov1",
-                                         renew_window=300,
-                                         debug=_DEBUG
-                                         )
+                falcon = Detects(client_id=os.environ["CROSS_DEBUG_KEY"],
+                                 client_secret=os.environ["CROSS_DEBUG_SECRET"],
+                                 base_url="usgov1",
+                                 renew_window=300,
+                                 debug=_DEBUG
+                                 )
                 result = falcon.auth_object.token()
                 if result["status_code"] == 429:
                     pytest.skip("Rate limit hit")
@@ -167,8 +176,8 @@ class TestAuthentications:
                           )
         auth_obj.token()
         # While we're at it, test user_agent override
-        falcon = CloudConnectAWS(auth_object=auth_obj, user_agent=f"{_TITLE}/{str(_VERSION)}", debug=_DEBUG)
-        result = falcon.QueryAWSAccounts()
+        falcon = Detects(auth_object=auth_obj, user_agent=f"{_TITLE}/{str(_VERSION)}", debug=_DEBUG)
+        result = falcon.QueryDetects()
         if result["status_code"] not in AllowedResponses:
             _returned = False
         # And test the new built in logout functionality
@@ -200,8 +209,8 @@ class TestAuthentications:
 
     def serviceAny_TestBadObjectAuth(self):
         # Should also test bad direct auth in the authentication class
-        falcon = CloudConnectAWS(auth_object=OAuth2(debug=_DEBUG))
-        result = falcon.QueryAWSAccounts()
+        falcon = Detects(auth_object=OAuth2(debug=_DEBUG))
+        result = falcon.QueryDetects()
         if result["status_code"] in AllowedResponses:
             return True
         else:
@@ -215,8 +224,8 @@ class TestAuthentications:
         # auth_obj.token()
         # Test passing just the service class object, not the auth_object attribute
         # Service Class base object should detect and handle this.
-        falcon = CloudConnectAWS(auth_object=auth_obj)
-        result = falcon.QueryAWSAccounts()
+        falcon = Detects(auth_object=auth_obj)
+        result = falcon.QueryDetects()
         if result["status_code"] in AllowedResponses:
             return True
         else:
@@ -294,7 +303,12 @@ class TestAuthentications:
         save_id = os.getenv("FALCON_CLIENT_ID")
         save_key = os.getenv("FALCON_CLIENT_SECRET")
         if save_id or save_key:
-            thing = Hosts(debug=_DEBUG)
+            env_keys = {
+                "id_name": "DEBUG_API_ID",
+                "secret_name": "DEBUG_API_SECRET",
+                "prefix": ""
+                }
+            thing = Hosts(debug=_DEBUG, environment=env_keys)
             result = thing.login()
             if thing.token_status == 201:
                 _returned = True

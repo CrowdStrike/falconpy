@@ -80,7 +80,8 @@ class OAuth2(FalconInterface):
                  debug: Optional[bool] = False,
                  debug_record_count: Optional[int] = None,
                  sanitize_log: Optional[bool] = None,
-                 pythonic: Optional[bool] = None
+                 pythonic: Optional[bool] = None,
+                 environment: Optional[Dict[str, str]] = None
                  ):
         """Construct an instance of the class.
 
@@ -135,7 +136,8 @@ class OAuth2(FalconInterface):
                          debug=debug,                      # |o
                          debug_record_count=debug_record_count,
                          sanitize_log=sanitize_log,
-                         pythonic=pythonic
+                         pythonic=pythonic,
+                         environment=environment
                          )
 
     def logout(self) -> Dict[str, Union[int, dict]]:
