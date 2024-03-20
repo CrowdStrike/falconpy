@@ -102,11 +102,11 @@ Without the support of these executives, the FalconPy project would not have hap
 | Name | Role |
 | :-- | :-- |
 | Chris Kachigian, `@ckachigian` | Herder of Cats |
-| Rekha Das | Gatekeeper |
 | Robbie Coleman, `@erraggy` | Keymaster |
 | Mike Cryer | Colonel-in-Chief |
 
 #### Honorable mentions
++ Rekha Das
 + Jaime Franklin, `@franklinjff`
 + Shawn Wells, `@shawndwells`
 
