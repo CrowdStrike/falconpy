@@ -9,7 +9,7 @@
 [![Release date](https://img.shields.io/github/release-date/CrowdStrike/falconpy)](https://github.com/CrowdStrike/falconpy/releases)
 [![Repo status](https://img.shields.io/osslifecycle/crowdstrike/falconpy?label=repo%20status)](https://github.com/CrowdStrike/falconpy/graphs/code-frequency)
 [![Commit activity](https://img.shields.io/github/commits-since/CrowdStrike/falconpy/latest)](https://github.com/CrowdStrike/falconpy/commits/main)
-![GitHub forks](https://img.shields.io/github/forks/crowdstrike/falconpy)
+![GitHub forks](https://img.shields.io/github/forks/crowdstrike/falconpy?style=flat)
 
 The FalconPy SDK contains a collection of Python classes that abstract CrowdStrike Falcon OAuth2 API interaction, removing duplicative code and allowing developers to focus on just the logic of their solution requirements.
 
@@ -83,6 +83,7 @@ For each CrowdStrike Falcon API service collection, a matching Service Class is 
 
 - Closely follows Python and OpenAPI best practice for code style and syntax. PEP-8 compliant.
 - Completely abstracts token management, automatically refreshing your token when it expires.
+- Interact with newly released API operations not yet available in the library via the `override` method.
 - Provides simple programmatic patterns for interacting with CrowdStrike Falcon APIs.
 - Supports [cloud region autodiscovery](https://www.falconpy.io/Usage/Environment-Configuration.html#cloud-region-autodiscovery) for the CrowdStrike `US-1`, `US-2` and `EU-1` regions.
 - Supports dynamic [configuration](https://www.falconpy.io/Usage/Environment-Configuration.html) based upon the needs of your environment.
