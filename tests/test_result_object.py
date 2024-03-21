@@ -756,6 +756,7 @@ class TestResults:
                         reason="Unit testing unavailable on US-GOV-1"
                         )
     @not_supported
+    @pytest.mark.skipif("us-1" not in config.base_url, reason="This unit test is only supported in US-1.")
     def test_pythonic_deprecation_warnings(self):
         _success = False
         with pytest.warns(SDKDeprecationWarning):

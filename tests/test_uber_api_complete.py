@@ -145,7 +145,7 @@ class TestUber:
             return True
 
     def uberCCAWS_GenerateError(self):
-        if falcon.command("QueryAWSAccounts", partition=0)["status_code"] in AllowedResponses:
+        if falcon.command("QueryDetects", partition=0)["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -158,7 +158,7 @@ class TestUber:
             return False
 
     def uberCCAWS_OverrideAndHeader(self):
-        if falcon.command(override="GET,/cloud-connect-aws/combined/accounts/v1",
+        if falcon.command(override="GET,/detects/queries/detects/v1",
                           headers={"Nothing": "Special"})["status_code"] in AllowedResponses:
             return True
         else:
@@ -185,7 +185,7 @@ class TestUber:
         return returned
 
     def uberCCAWS_BadMethod(self):
-        if falcon.command(action="", override="BANANA,/cloud-connect-aws/combined/accounts/v1",
+        if falcon.command(action="", override="BANANA,/detects/queries/detects/v1",
                           headers={"Nothing": "Special"})["status_code"] in AllowedResponses:
             return True
         else:
@@ -198,7 +198,7 @@ class TestUber:
             return False
 
     def uberCCAWS_GenerateServerError(self):
-        if falcon.command("GetAWSAccounts", ids="123", data=['Kerash!'])["status_code"] == 500:
+        if falcon.command("GetDetectSummaries", ids="123", data=['Kerash!'])["status_code"] == 500:
             return True
         else:
             return False
@@ -237,7 +237,7 @@ class TestUber:
 
     def uberCCAWS_BadAuthentication(self):
         falcon = APIHarness(debug=_DEBUG)
-        if falcon.command("QueryAWSAccounts", parameters={"limit": 1})["status_code"] in AllowedResponses:
+        if falcon.command("QueryDetects", parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -249,7 +249,7 @@ class TestUber:
                 "client_secret": config["falcon_client_secret"]
             }, ssl_verify=False, base_url=config["falcon_base_url"], debug=_DEBUG
         )
-        if falcon.command("QueryAWSAccounts", parameters={"limit": 1})["status_code"] in AllowedResponses:
+        if falcon.command("QueryDetects", parameters={"limit": 1})["status_code"] in AllowedResponses:
             return True
         else:
             return False
@@ -269,8 +269,8 @@ class TestUber:
         else:
             return False
 
-    def test_GetAWSSettings(self):
-        assert self.uberCCAWS_GetAWSSettings() is True
+    # def test_GetAWSSettings(self):
+    #     assert self.uberCCAWS_GetAWSSettings() is True
 
     def test_reserved_words(self):
         assert self.uber_test_invalid_reserved_word_payload() is True
@@ -278,16 +278,16 @@ class TestUber:
     def test_distinct_field(self):
         assert self.uber_test_distinct_field() is True
 
-    def test_QueryAWSAccounts(self):
-        assert self.uberCCAWS_QueryAWSAccounts() is True
+    # def test_QueryAWSAccounts(self):
+    #     assert self.uberCCAWS_QueryAWSAccounts() is True
 
-    @pytest.mark.skipif(falcon.command("QueryAWSAccounts",
-                        parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
-    def test_GetAWSAccounts(self):
-        assert self.uberCCAWS_GetAWSAccounts() is True
+    # @pytest.mark.skipif(falcon.command("QueryAWSAccounts",
+    #                     parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
+    # def test_GetAWSAccounts(self):
+    #     assert self.uberCCAWS_GetAWSAccounts() is True
 
-    def test_QueryAWSAccountsForIDs(self):
-        assert self.uberCCAWS_QueryAWSAccountsForIDs() is True
+    # def test_QueryAWSAccountsForIDs(self):
+    #     assert self.uberCCAWS_QueryAWSAccountsForIDs() is True
 
     @pytest.mark.skipif("laggar" in falcon.base_url, reason="US-GOV-1 testing disabled")
     def test_UploadDownload(self):

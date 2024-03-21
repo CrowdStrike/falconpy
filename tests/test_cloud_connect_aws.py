@@ -32,6 +32,10 @@ _DEBUG = os.getenv("FALCONPY_UNIT_TEST_DEBUG", None)
 if _DEBUG:
     _DEBUG = True
 
+usone_only = pytest.mark.skipif(falcon.base_url.lower() != "https://api.crowdstrike.com",
+                        reason="US-1 unit testing only",
+                        )
+
 class TestCloudConnectAWS:
     def serviceCCAWS_AuthWithCreds(self):
         falconWithCreds = CloudConnectAWS(creds={
@@ -169,12 +173,15 @@ class TestCloudConnectAWS:
 
         return errorChecks
 
+    @usone_only
     def test_GetAWSSettings(self):
         assert bool(falcon.GetAWSSettings()["status_code"] in AllowedResponses) is True
 
+    @usone_only
     def test_QueryAWSAccounts(self):
         assert bool(falcon.QueryAWSAccounts(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
+    @usone_only
     @pytest.mark.skipif(falcon.QueryAWSAccounts(
         parameters={"limit": 1}
         )["status_code"] == 429, reason="API rate limit reached")
@@ -186,32 +193,41 @@ class TestCloudConnectAWS:
             test_id = "123456789012"
         assert bool(falcon.GetAWSAccounts(ids=test_id)["status_code"] in AllowedResponses) is True
 
+    @usone_only
     @pytest.mark.skipif(falcon.QueryAWSAccounts(
         parameters={"limit": 1}
         )["status_code"] == 429, reason="API rate limit reached")
     def test_GetAWSAccountsUsingList(self):
         assert self.serviceCCAWS_GetAWSAccountsUsingList() is True
 
+    @usone_only
     def test_QueryAWSAccountsForIDs(self):
         assert bool(falcon.QueryAWSAccountsForIDs(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
+    @usone_only
     def test_AuthWithCreds(self):
         assert self.serviceCCAWS_AuthWithCreds() is True
 
+    @usone_only
     def test_AuthWithObject(self):
         assert self.serviceCCAWS_AuthWithObject() is True
 
+    @usone_only
     def test_RefreshToken(self):
         assert self.serviceCCAWS_RefreshToken() is True
 
+    @usone_only
     def test_InvalidPayloads(self):
         assert self.serviceCCAWS_InvalidPayloads() is True
 
+    @usone_only
     def test_ForceAttributeError(self):
         assert self.serviceCCAWS_ForceAttributeError() is True
 
+    @usone_only
     def test_argument_vs_keyword(self):
         assert bool(falcon.get_aws_accounts("123456789012")["status_code"] in AllowedResponses) is True
 
+    @usone_only
     def test_Errors(self):
         assert self.serviceCCAWS_GenerateErrors() is True
