@@ -35,8 +35,15 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Optional
+from json import loads
+try:
+    from simplejson import JSONDecodeError
+except (ImportError, ModuleNotFoundError):  # Support import as a module
+    from json.decoder import JSONDecodeError
 from ._functions import generate_b64cred
 from .._endpoint._oauth2 import _oauth2_endpoints as AuthEndpoints
+from .._error import InvalidCredentialFormat
 
 
 def login_payloads(creds: dict, base: str):
@@ -72,3 +79,41 @@ def logout_payloads(creds: dict, base: str, token_val: str, client_id: str = Non
         data["client_id"] = client_id
 
     return op_id, target, data, headers
+
+
+def review_provided_credentials(cid: Optional[str] = None,
+                                csec: Optional[str] = None,
+                                cdict: Optional[Dict[str, str]] = None,
+                                mcid: Optional[str] = None
+                                ):
+    """Review the provided credential values and create a valid credential dictionary."""
+    returned = {}
+    returned_style = None
+    if cid and csec and not cdict:
+        cdict = {
+            "client_id": cid,
+            "client_secret": csec
+        }
+        # You must pass member_cid the same way you pass client_id / secret.
+        # If you use a creds dictionary, pass the member_cid there instead.
+        if mcid:
+            cdict["member_cid"] = mcid
+        returned_style = "DIRECT"
+    elif not cdict:
+        cdict = {}
+    # Credential Authentication (also powers Direct Authentication).
+    if isinstance(cdict, str):
+        try:
+            # Try and clean up any attempts to provide the dictionary as a string
+            returned: Dict[str, str] = loads(cdict.replace("'", "\""))
+            returned_style = "CREDENTIAL"
+        except (TypeError, JSONDecodeError) as bad_cred_format:
+            raise InvalidCredentialFormat from bad_cred_format
+    elif isinstance(cdict, dict):
+        returned: Dict[str, str] = cdict
+        if not returned_style:
+            returned_style = "CREDENTIAL"
+    else:
+        raise InvalidCredentialFormat
+
+    return returned, returned_style
