@@ -73,7 +73,7 @@ class ServiceClass(BaseServiceClass):
     # provide a solution for maintaining instantiated class specific properties.
     #
     def __init__(self: "ServiceClass",
-                 auth_object: Optional[FalconInterface or OAuth2] = None,
+                 auth_object: Optional[Union[FalconInterface, OAuth2]] = None,
                  default_auth_object_class: Optional[Type[FalconInterface]] = OAuth2,
                  **kwargs
                  ):
@@ -174,6 +174,11 @@ class ServiceClass(BaseServiceClass):
         # if no authentication status is present.
         if not self.token_status:
             self.login()
+
+        # Detect if object authentication is being used to instantiate this class.
+        self._override_auth_style: str = None
+        if isinstance(auth_object, FalconInterface):
+            self.auth_style = "OBJECT"
 
         # Log the creation of this Service Class if debugging is enabled.
         if self.log:
@@ -320,6 +325,21 @@ class ServiceClass(BaseServiceClass):
     def user_agent(self, value: int):
         """Allow the user_agent to be changed for this instance of the class."""
         self._override_user_agent = value
+
+    @property
+    def auth_style(self) -> str:
+        """Return the authentication mechanism used for instantiating this class."""
+        if self._override_auth_style:
+            returned = self._override_auth_style
+        else:
+            returned = self.auth_object.auth_style
+
+        return returned
+
+    @auth_style.setter
+    def auth_style(self, value: str):
+        """Allow the authentication mechanism to be specified per instance of the class."""
+        self._override_auth_style = value
 
     # Override the headers read only property to inject our ext_headers.
     # The Uber Class accomplishes this functionality differently.
