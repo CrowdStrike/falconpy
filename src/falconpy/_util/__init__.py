@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._auth import login_payloads, logout_payloads
+from ._auth import login_payloads, logout_payloads, review_provided_credentials
 from ._functions import (
     validate_payload,
     generate_b64cred,
@@ -77,5 +77,5 @@ __all__ = ["create_uber_header_payload", "handle_body_payload_ids", "scrub_targe
            "confirm_base_region", "return_preferred_default", "base_url_regions",
            "_ALLOWED_METHODS", "login_payloads", "logout_payloads", "sanitize_dictionary",
            "calc_content_return", "log_class_startup", "service_override_payload",
-           "deprecated_operation", "deprecated_class"
+           "deprecated_operation", "deprecated_class", "review_provided_credentials"
            ]
