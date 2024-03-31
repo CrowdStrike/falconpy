@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from __future__ import annotations
 import base64
 import functools
 from warnings import warn
@@ -43,7 +44,7 @@ try:
     from simplejson import JSONDecodeError
 except (ImportError, ModuleNotFoundError):  # Support import as a module
     from json.decoder import JSONDecodeError
-from typing import Dict, Any, Union, Optional, List
+from typing import Dict, Any, Union, Optional, List, TYPE_CHECKING
 from copy import deepcopy
 from logging import Logger
 import requests
@@ -75,6 +76,12 @@ from .._error import (
     DeprecatedClass
     )
 from .._result import Result
+if TYPE_CHECKING:  # pragma: no cover
+    from .._auth_object import FalconInterface
+    from .._service_class import ServiceClass
+    from ..api_complete import APIHarness, APIHarnessV2
+    from ..oauth2 import OAuth2
+
 urllib3.disable_warnings(InsecureRequestWarning)
 
 
@@ -196,9 +203,7 @@ def force_default(defaults: List[str], default_types: List[str] = None):
     return wrapper
 
 
-# Caller is a derivitive of ServiceClass below, but we cannot type it until after
-# support for Python 3.6 is dropped due to the circular reference it would cause.
-def service_request(caller=None, **kwargs) -> Union[Dict[str, Union[int, dict, list]], bytes]:
+def service_request(caller: ServiceClass = None, **kwargs) -> Union[Dict[str, Union[int, dict, list]], bytes]:
     """Prepare and then perform the request (Service Classes only).
 
     Inbound caller argument should be a ServiceClass class or derivative.
@@ -608,8 +613,8 @@ def args_to_params(payload: dict,
     return returned_payload
 
 
-def process_service_request(calling_object,  # pylint: disable=R0914 # (19/15)
-                            endpoints: list,
+def process_service_request(calling_object: ServiceClass,  # pylint: disable=R0914 # (19/15)
+                            endpoints: List[List[Union[str, List[Dict[str, Any]]]]],
                             operation_id: str,
                             **kwargs
                             ) -> dict:
@@ -817,10 +822,12 @@ def sanitize_dictionary(dirty: Any, record_max: int = MAX_DEBUG_RECORDS) -> dict
     return cleaned
 
 
-# Python 3.6 compatibility warning: Cannot properly type the interface.
-def log_class_startup(interface, log_device: Logger):
+def log_class_startup(interface: Union[FalconInterface, ServiceClass, APIHarness, APIHarnessV2, OAuth2],
+                      log_device: Logger
+                      ):
     """Log the startup of one of our interface or Service Classes."""
     log_device.debug("CREATED: %s interface class", interface.__class__.__name__)
+    log_device.debug("AUTH: Configured for %s Authentication", interface.auth_style.title())
     log_device.debug("CONFIG: Base URL set to %s", interface.base_url)
     log_device.debug("CONFIG: SSL verification is set to %s", str(interface.ssl_verify))
     log_device.debug("CONFIG: Timeout set to %s seconds", str(interface.timeout))
