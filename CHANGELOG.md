@@ -1,3 +1,73 @@
+# Version 1.4.3
+## Added features and functionality
++ Added: Context Authentication (supports Foundry execution environments).
+    > FalconInterface object refactored to support new authentication mechanism, track mechanism used, add additional comments, and reduce overall complexity.
+    - `_auth_object/_falcon_interface.py`
+    > ServiceClass object updated to detect Object Authentication and track mechanism used.
+    - `_service_class/_service_class.py`
+    > New helper method defined to abstract Direct and Credential authentication creation of the _creds dictionary attribute.
+    - `_util/__init__.py`
+    - `_util/_auth.py`
+    > Class instantiation logging updated to detail authentication mechanism used. Linting and cleanup.
+    - `_util/_functions.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_authentications.py`
+    - `tests/test_result_object.py`
+    - `tests/test_zero_trust_assessment.py`
+
++ Added: Added _UpdateCSPMGCPServiceAccountsExt_ operation to the __CSPM Registration__ service collection.
+    - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cspm_registration.py`
+
++ Added: Added _UpdateD4CGCPServiceAccountsExt_ operation to the __D4C Registration__ service collection.
+    - `_endpoint/_d4c_registration.py`
+    - `d4c_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_d4c_registration.py`
+
++ Added: Added `content_files`, `content_registry_values`, `enable_content_capture` and `enable_hash_capture` arguments to the _createRules_ and _updateRules_ operations within the __FileVantage__ service collection.
+    - `_endpoint/_filevantage.py`
+    - `_payload/_filevantage.py`
+    - `filevantage.py`
+
++ Added: Added `iar_coverage` as an allowed filter argument to the _ReadClustersByKubernetesVersionCount_, _ReadClustersByStatusCount_, _ReadClusterCount_, and _ReadClusterCombined_ operations within the __Kubernetes Protection__ service collection.
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+
+
+## Issues resolved
++ Fixed: 406 error when uploading Fusion workflows via the _WorkflowDefinitionsImport_ operation. Closes #1145.
+    - `workflows.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_workflows.py`
+    - `tests/test.yml`
+    > Thanks go out to @RoemIko for identifying and reporting this issue! 🙇 
+
++ Fixed: Added missing `force_default` decorator to the _GetCSPMAwsConsoleSetupURLs_ and _GetCSPMAwsAccountScriptsAttachment_ operations within the __CSPM Registration__ Service Class.
+    - `cspm_registration.py`
+
+
+## Other
++ Updated: Updated `sort` argument description for the _ReadCombinedImagesExport_ operation (__Container Images__ service collection) within the endpoint module.
+    - `_endpoint/_container_images.py`
+
++ Updated: Updated `filter` argument description for the _GetConfigurationDetectionIDsV2_ operation (__CSPM Registration__ service collection) within the endpoint module.
+    - `_endpoint/_cspm_registration.py`
+
++ Updated: Updated enum for the _QueryActivityByCaseID_ operation (__Message Center__ service collection) within the endpoint module.
+    - `_endpoint/_message_center.py`
+
++ Updated: Minor unit testing adjustments to handle updated API responses.
+    - `tests/test_container_detections.py`
+    - `tests/test_container_packages.py`
+    - `tests/test_container_vulnerabilities.py`
+    - `tests/test_drift_indicators.py`
+    - `tests/test_unidentified_containers.py`
+
+---
+
 # Version 1.4.2
 ## Added features and functionality
 + Expanded: Environment Authentication functionality has been expanded to allow developers to customize the names of the environment keys used to store API credentials.
@@ -113,7 +183,7 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_workflows.py`
 
-## Issue resolved
+## Issues resolved
 + Fixed: Resolved parsing issue with formData arguments provided to the _ArchiveUploadV2_ operation within the __SampleUploads__ Service Class. Closes #1122.
     - `sample_uploads.py`
 
@@ -252,7 +322,7 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_workflows.py`
 
-## Issue resolved
+## Issues resolved
 + Fixed: `member_cid` argument is not being passed to the authentication event when leveraging Environment Authentication. Closes #1105.
     - `_auth_object/_falcon_interface.py`
 
