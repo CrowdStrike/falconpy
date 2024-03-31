@@ -41,11 +41,7 @@ For more information, please refer to <https://unlicense.org>
 import time
 import os
 import warnings
-from json import loads
-try:
-    from simplejson import JSONDecodeError
-except (ImportError, ModuleNotFoundError):  # Support import as a module
-    from json.decoder import JSONDecodeError
+from contextvars import copy_context
 from logging import Logger, getLogger
 from typing import Dict, Optional, Union
 from ._base_falcon_auth import BaseFalconAuth
@@ -56,21 +52,23 @@ from ._interface_config import InterfaceConfiguration
 from .._enum import TokenFailReason
 from .._util import (
     autodiscover_region,
+    confirm_base_url,
     perform_request,
     log_class_startup,
     login_payloads,
-    logout_payloads
+    logout_payloads,
+    review_provided_credentials
     )
-from .._error import InvalidCredentials, NoAuthenticationMechanism, InvalidCredentialFormat
+from .._error import InvalidCredentials, NoAuthenticationMechanism
 
 
-# pylint: disable=R0902
+# pylint: disable=R0902,R0904
 class FalconInterface(BaseFalconAuth):
     """Standard Falcon API interface used by Service Classes."""
 
-    # ____ ____ _  _ ____ ___ ____ _  _ ____ ___ ____ ____
-    # |    |  | |\ | [__   |  |__/ |  | |     |  |  | |__/
-    # |___ |__| | \| ___]  |  |  \ |__| |___  |  |__| |  \
+    # _______  _____  __   _ _______ _______  ______ _     _ _______ _______  _____   ______
+    # |       |     | | \  | |______    |    |_____/ |     | |          |    |     | |_____/
+    # |_____  |_____| |  \_| ______|    |    |    \_ |_____| |_____     |    |_____| |    \_
     #
     # The default constructor for all authentication objects. Ingests provided credentials
     # and sets the necessary class attributes based upon the authentication detail received.
@@ -99,12 +97,6 @@ class FalconInterface(BaseFalconAuth):
         if isinstance(pythonic, bool):
             self._pythonic = pythonic
 
-        # The default credential dictionary, where the client_id and client_secret are stored.
-        self._creds = {}
-
-        # Set up an empty Bearer Token container
-        self._token: BearerToken = BearerToken()
-
         # Setup our configuration object using the provided keywords.
         self._config: InterfaceConfiguration = InterfaceConfiguration(base_url=base_url,
                                                                       proxy=proxy,
@@ -115,44 +107,80 @@ class FalconInterface(BaseFalconAuth):
         # ____ _  _ ___ _  _ ____ _  _ ___ _ ____ ____ ___ _ ____ _  _                 |
         # |__| |  |  |  |__| |___ |\ |  |  | |    |__|  |  | |  | |\ |                / \
         # |  | |__|  |  |  | |___ | \|  |  | |___ |  |  |  | |__| | \|
-        # Direct Authentication
-        if client_id and client_secret and not creds:
-            creds = {
-                "client_id": client_id,
-                "client_secret": client_secret
-            }
-            # You must pass member_cid the same way you pass client_id / secret.
-            # If you use a creds dictionary, pass the member_cid there instead.
-            if member_cid:
-                creds["member_cid"] = member_cid
-        elif not creds:
-            creds = {}
-        # Credential Authentication (also powers Direct Authentication).
-        if isinstance(creds, str):
-            try:
-                # Try and clean up any attempts to provide the dictionary as a string
-                self._creds: Dict[str, str] = loads(creds.replace("'", "\""))
-            except (TypeError, JSONDecodeError) as bad_cred_format:
-                raise InvalidCredentialFormat from bad_cred_format
-        elif isinstance(creds, dict):
-            self._creds: Dict[str, str] = creds
-        else:
-            raise InvalidCredentialFormat
+        #
+        # Assume no credentials or tokens are provided.
+        # A NoAuthenticationMechanism warning will be generated if a
+        # valid authentication mechanism is not specified or detected.
+        #
+        # Then try to authenticate in the following order:
+        #    1. Direct
+        #    2. Credential
+        #    3. Token (Legacy)
+        #    4. Context (Foundry)
+        #    5. Environment
+        #
+        # Remaining authentication checks are skipped once a successful mechanism has been determined.
+        #
+        # Object Authentication is handled within the ServiceClass object and leverages the existing
+        # authentication used for the underlying authentication object attribute.
 
-        # Legacy (Token) Authentication (fallback)
-        if access_token:
-            # Store this non-refreshable token, assuming it was just generated.
-            self._token: BearerToken = BearerToken(access_token, 1799, 201)
+        # Set up an empty Bearer Token container.
+        self._token: BearerToken = BearerToken()
 
-        # Set the token renewal window, ignored when using Legacy Authentication.
-        self.renew_window: int = max(min(renew_window, MAX_TOKEN_RENEW_WINDOW),
-                                     MIN_TOKEN_RENEW_WINDOW
-                                     )
+        # ___  _ ____ ____ ____ ___    ____ _  _ ___     ____ ____ ____ ___  ____ _  _ ___ _ ____ _
+        # |  \ | |__/ |___ |     |     |__| |\ | |  \    |    |__/ |___ |  \ |___ |\ |  |  | |__| |
+        # |__/ | |  \ |___ |___  |     |  | | \| |__/    |___ |  \ |___ |__/ |___ | \|  |  | |  | |___
+        #
+        # Direct Authentication checks provided values and return a creds dictionary based upon the contents.
+        # Authorization is derived from the bearer token generated using the provided credentials.
+        self._creds, self._auth_style = review_provided_credentials(client_id, client_secret, creds, member_cid)
 
-        # Environment Authentication
-        # User configuration environment keys
+        # ___ ____ _  _ ____ _  _
+        #  |  |  | |_/  |___ |\ |
+        #  |  |__| | \_ |___ | \|
+        #
+        # Token (Legacy) Authentication
+        # Authorization is derived from the provided bearer token.
+        # A login event is unnecessary when using this authentication mechanism.
+        if not self.cred_format_valid:
+            if access_token:
+                # Store this non-refreshable token, assuming it was just generated.
+                self._token: BearerToken = BearerToken(access_token, 1799, 201)
+                self._auth_style = "TOKEN"
+
+        # ____ ____ _  _ ___ ____ _  _ ___
+        # |    |  | |\ |  |  |___  \/   |
+        # |___ |__| | \|  |  |___ _/\_  |
+        #
+        # Context Authentication searches the current running context for
+        # an object containing a bearer token as an attribute or property.
+        # Authorization is derived from the discovered bearer token.
+        # A login event is unnecessary when using this authentication mechanism.
+        if not self.cred_format_valid and not self.token_value:
+            for cvar in copy_context().values():
+                try:
+                    # Any object is acceptable as long as it has an attribute or property named "access_token".
+                    self._token: BearerToken = BearerToken(cvar.access_token, 1799, 201)
+                    # Attempt to retrieve the cloud region from the same object.
+                    # Fall back to our previously set default on failure.
+                    try:
+                        if cvar.cs_cloud:
+                            self._config.base_url = confirm_base_url(cvar.cs_cloud)
+                    except AttributeError:
+                        pass
+                    self._auth_style = "CONTEXT"
+                    break
+                except AttributeError:
+                    pass
+
+        # ____ _  _ _  _ _ ____ ____ _  _ _  _ ____ _  _ ___
+        # |___ |\ | |  | | |__/ |  | |\ | |\/| |___ |\ |  |
+        # |___ | \|  \/  | |  \ |__| | \| |  | |___ | \|  |
+        #
+        # Environment Authentication searches the current environment for variables containing credentials.
+        # Authorization is derived from the bearer token generated using the discovered credentials.
+        # Developers may customize which variable names are searched by leveraging the environment keyword (dictionary).
         self._environment = environment if environment else {}
-        # When credentials are not provided, attempt to retrieve them from the environment.
         if not self.cred_format_valid and not self.token_value:
             # Both variables must be present within the running environment.
             if os.getenv(f"{self.env_prefix}{self.env_key}") and os.getenv(f"{self.env_prefix}{self.env_secret}"):
@@ -168,7 +196,17 @@ class FalconInterface(BaseFalconAuth):
                 # Provide member_cid for MSSP environment authentication scenarios. Issue #1105.
                 if member_cid:
                     self._creds["member_cid"] = member_cid
+                self._auth_style = "ENVIRONMENT"
 
+        # Set the token renewal window, ignored when using Legacy or Context Authentication.
+        self.renew_window: int = max(min(renew_window, MAX_TOKEN_RENEW_WINDOW),
+                                     MIN_TOKEN_RENEW_WINDOW
+                                     )
+
+        # _    ____ ____ ____ _ _  _ ____
+        # |    |  | | __ | __ | |\ | | __
+        # |___ |__| |__] |__] | | \| |__]
+        #
         # Log the creation of this object if debugging is enabled.
         # Starting with v1.3.0 minimal Python native logging is available. In order to reduce
         # potential impacts to developer configurations, this facility is extremely limited
@@ -190,27 +228,34 @@ class FalconInterface(BaseFalconAuth):
             # Set up an empty log facility
             self._log: LogFacility = LogFacility()
 
+        # _  _ ____ _    _ ___  ____ ___ ____
+        # |  | |__| |    | |  \ |__|  |  |___
+        #  \/  |  | |___ | |__/ |  |  |  |___
+        #
+        # Validation occurs after the logging object is created.
         try:
+            # Check to see if we have a valid authentication mechanism configured.
             if not self.cred_format_valid and not self.token_value:
                 raise NoAuthenticationMechanism
         except NoAuthenticationMechanism as no_auth_mechanism:
+            # Warn appropriately if we do not.
             if pythonic:
                 warnings.warn(no_auth_mechanism.message, NoAuthenticationMechanism, stacklevel=2)
             if self.log:
                 self.log.warning(no_auth_mechanism.message)
 
-    # _  _ ____ ___ _  _ ____ ___  ____
-    # |\/| |___  |  |__| |  | |  \ [__
-    # |  | |___  |  |  | |__| |__/ ___]
+    #  _______ _______ _______ _     _  _____  ______  _______
+    #  |  |  | |______    |    |_____| |     | |     \ |______
+    #  |  |  | |______    |    |     | |_____| |_____/ ______|
     #
     # The generic login and logout handlers are provided here and leverage private methods
     # to perform the operation. These private methods can be overridden to provide individual
     # login and logout functionality to different inheriting class types.
-    def login(self) -> dict or bool:
+    def login(self) -> Union[dict, bool]:
         """Login to the Falcon API by requesting a new token."""
         return self._login_handler()
 
-    def logout(self) -> dict or bool:
+    def logout(self) -> Union[dict, bool]:
         """Log out of the Falcon API by revoking the current token."""
         return self._logout_handler()
 
@@ -301,9 +346,9 @@ class FalconInterface(BaseFalconAuth):
 
         return returned
 
-    # ___  ____ ____ ___  ____ ____ ___ _ ____ ____
-    # |__] |__/ |  | |__] |___ |__/  |  | |___ [__
-    # |    |  \ |__| |    |___ |  \  |  | |___ ___]
+    #  _____   ______  _____   _____  _______  ______ _______ _____ _______ _______
+    # |_____] |_____/ |     | |_____] |______ |_____/    |      |   |______ |______
+    # |       |    \_ |_____| |       |______ |    \_    |    __|__ |______ ______|
     #
     # These properties are present in all FalconInterface derivatives.
     @property
@@ -329,47 +374,47 @@ class FalconInterface(BaseFalconAuth):
     @property
     def base_url(self) -> str:
         """Return the base URL for this interface from the configuration object."""
-        return self._config.base_url
+        return self.config.base_url
 
     @base_url.setter
     def base_url(self, value):
-        self._config.base_url = value
+        self.config.base_url = value
 
     @property
     def ssl_verify(self) -> bool:
         """Return the SSL verification setting from the configuration object."""
-        return self._config.ssl_verify
+        return self.config.ssl_verify
 
     @ssl_verify.setter
     def ssl_verify(self, value: bool):
-        self._config.ssl_verify = value
+        self.config.ssl_verify = value
 
     @property
     def proxy(self) -> Dict[str, str]:
         """Return the current proxy setting."""
-        return self._config.proxy
+        return self.config.proxy
 
     @proxy.setter
     def proxy(self, value: Dict[str, str]):
-        self._config.proxy = value
+        self.config.proxy = value
 
     @property
     def user_agent(self) -> str:
         """Return the current user agent setting."""
-        return self._config.user_agent
+        return self.config.user_agent
 
     @user_agent.setter
     def user_agent(self, value: str):
-        self._config.user_agent = value
+        self.config.user_agent = value
 
     @property
     def timeout(self) -> Union[int, tuple]:
         """Return the current timeout setting."""
-        return self._config.timeout
+        return self.config.timeout
 
     @timeout.setter
     def timeout(self, value: Union[int, tuple]):
-        self._config.timeout = value
+        self.config.timeout = value
 
     @property
     def debug_record_count(self) -> int:
@@ -454,6 +499,16 @@ class FalconInterface(BaseFalconAuth):
     def token_value(self, value: str):
         self.bearer_token.value = value
 
+    @property
+    def pythonic(self) -> bool:
+        """Return a boolean if we are in a pythonic mode."""
+        return self._pythonic
+
+    @pythonic.setter
+    def pythonic(self, value: bool):
+        """Enable or disable pythonic mode."""
+        self._pythonic = value
+
     # All properties defined here are by design IMMUTABLE.
     @property
     def refreshable(self) -> bool:
@@ -505,16 +560,6 @@ class FalconInterface(BaseFalconAuth):
         return bool(self.log)
 
     @property
-    def pythonic(self) -> bool:
-        """Return a boolean if we are in a pythonic mode."""
-        return self._pythonic
-
-    @pythonic.setter
-    def pythonic(self, value: bool):
-        """Enable or disable pythonic mode."""
-        self._pythonic = value
-
-    @property
     def env_prefix(self) -> str:
         """Return the environment prefix."""
         return self._environment.get("prefix", "FALCON_")
@@ -528,3 +573,8 @@ class FalconInterface(BaseFalconAuth):
     def env_secret(self) -> str:
         """Return the environment API key secret."""
         return self._environment.get("secret_name", "CLIENT_SECRET")
+
+    @property
+    def auth_style(self) -> str:
+        """Return the authentication mechanism used to instantiate this object."""
+        return self._auth_style
