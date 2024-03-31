@@ -359,8 +359,9 @@ class TestUber:
     def test_uber_deprecated_attributes(self):
         _success = False
         falcon.token_renew_window = 180
-        if falcon.token_renew_window == 180:
-            _success = True
+        if falcon.authenticated() and not falcon.token_expired():
+            if falcon.token_renew_window == 180:
+                _success = True
         assert _success
 
     def test_uber_properties(self):
