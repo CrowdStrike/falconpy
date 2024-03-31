@@ -3,16 +3,6 @@
 import os
 import sys
 import pytest
-# from datetime import datetime
-# from logging import (
-#     getLogger,
-#     basicConfig,
-#     DEBUG,
-#     WARNING,
-#     ERROR,
-#     INFO,
-#     )
-from logging.handlers import RotatingFileHandler
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -20,7 +10,6 @@ sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
 from falconpy import (
     ZeroTrustAssessment,
-    CloudConnectAWS,
     OAuth2,
     APIHarness,
     version,
@@ -37,6 +26,7 @@ AllowedResponses = [200, 401, 403, 429]
 _DEBUG = os.getenv("FALCONPY_UNIT_TEST_DEBUG", None)
 if _DEBUG:
     _DEBUG = True
+
 
 class TestAuthentications:
 
@@ -336,7 +326,7 @@ class TestAuthentications:
         key = auth.config["falcon_client_id"]
         the_other_bit = auth.config["falcon_client_secret"]
         test_string = "{" + f"'client_id': '{key}', 'client_secret': '{the_other_bit}'" + "}"
-        test_object = Hosts(creds=test_string)
+        test_object = Hosts(creds=test_string, debug=_DEBUG)
         test_object.login()
         assert bool(test_object.authenticated())
 
@@ -348,7 +338,7 @@ class TestAuthentications:
         except InvalidCredentialFormat:
             test = 2
             try:
-                test_object = Hosts(creds=test)
+                test_object = Hosts(creds=test, debug=_DEBUG)
             except InvalidCredentialFormat:
                 _success = True
         assert _success
