@@ -173,14 +173,23 @@ class Workflows(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsImport
         """
         data_file = kwargs.get("data_file", None)
-        if data_file:
+        content_type = "application/x-yaml"
+        # Create a multipart form payload for our upload file
+        try:
+            with open(data_file, "r", encoding="utf-8") as yaml_file:
+                file_data = yaml_file.read()
+                file_extended = {"name": "yaml_upload", "data_file": file_data, "type": content_type}
+        except FileNotFoundError:
+            data_file = None
+
+        if data_file and file_data:
             returned = process_service_request(
                         calling_object=self,
                         endpoints=Endpoints,
                         operation_id="WorkflowDefinitionsImport",
                         keywords=kwargs,
                         params=parameters,
-                        data=data_file
+                        files=file_extended
                         )
         else:
             returned = generate_error_result("You must provide a workflow file in YAML format to import.")
