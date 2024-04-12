@@ -91,6 +91,7 @@ class TestCSPMRegistration:
             "DeleteD4CGCPAccount": falcon.delete_gcp_account("1234567"),
             "ConnectD4CGCPAccount": falcon.connect_gcp_account(client_id="123456", parent_id="123456"),
             "GetD4CGCPServiceAccoutnExt": falcon.get_gcp_service_account(id="12345678"),
+            "UpdateCSPMGCPServiceAccountsExt": falcon.update_gcp_service_account(service_account_id=2),
             "GetD4CGCPUserScriptsAttachmentV2": falcon.get_gcp_user_scripts_attachment(ids="12345678"),
             "UpdateGCP": falcon.update_gcp_account(environment="temperate", parent_id="1234567"),
             "GetMgmt": falcon.get_azure_management_group(tenant_id="1234567"),

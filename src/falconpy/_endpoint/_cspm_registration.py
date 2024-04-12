@@ -768,6 +768,20 @@ _cspm_registration_endpoints = [
     ]
   ],
   [
+    "UpdateCSPMGCPServiceAccountsExt",
+    "PATCH",
+    "/cloud-connect-cspm-gcp/entities/service-accounts/v1",
+    "Patches the service account key for external clients.",
+    "cspm_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ValidateCSPMGCPServiceAccountExt",
     "POST",
     "/cloud-connect-cspm-gcp/entities/service-accounts/validate/v1",
@@ -1161,10 +1175,10 @@ _cspm_registration_endpoints = [
     [
       {
         "type": "string",
-        "description": "Available filters: use_current_scan_ids - *use this to get records for latest scans*\n "
-        "account_name\naccount_id\nagent_id\nattack_types\nazure_subscription_id\ncloud_provider\ncloud_service_keyword "
-        "\ncustom_policy_id\nis_managed\npolicy_id\npolicy_type\nresource_id\nregion\nstatus\nscan_time\nseverity\nseve "
-        "rity_string\n",
+        "description": "use_current_scan_ids - *use this to get records for latest scans (ignored when "
+        "next_token is set)*\naccount_name\naccount_id\nagent_id\nattack_types\nazure_subscription_id\ncloud_provider\n "
+        "cloud_service_keyword\ncustom_policy_id\nis_managed\npolicy_id\npolicy_type\nresource_id\nregion\nstatus\nscan "
+        "_time\nseverity\nseverity_string\n",
         "name": "filter",
         "in": "query"
       },
