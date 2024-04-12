@@ -1361,3 +1361,7 @@ GetScanReport
 CreateDeploymentEntity
 ReadDeploymentsEntities
 ReadDeploymentsCombined
+instantiation
+UpdateCSPMGCPServiceAccountsExt
+UpdateD
+RoemIko
