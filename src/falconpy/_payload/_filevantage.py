@@ -118,6 +118,10 @@ def filevantage_rule_payload(passed_keywords: dict) -> dict:
         "include": "string",
         "include_processes": "string",
         "include_users": "string",
+        "content_files": "string",
+        "content_registry_values": "string",
+        "enable_content_capture": boolean,
+        "enable_hash_capture": boolean,
         "modified_timestamp": "string",
         "path": "string",
         "precedence": integer,
@@ -146,6 +150,7 @@ def filevantage_rule_payload(passed_keywords: dict) -> dict:
     keys = ["created_timestamp", "depth", "description", "exclude", "exclude_processes",
             "exclude_users", "id", "include", "include_processes", "include_users",
             "modified_timestamp", "path", "rule_group_id", "severity", "type",
+            "content_files", "content_registry_values"
             ]
     bool_int_keys = ["watch_attributes_directory_changes", "watch_attributes_file_changes",
                      "watch_create_directory_changes", "watch_create_file_changes",
@@ -154,7 +159,8 @@ def filevantage_rule_payload(passed_keywords: dict) -> dict:
                      "watch_delete_value_changes", "watch_permissions_directory_changes",
                      "watch_permissions_file_changes", "watch_rename_directory_changes",
                      "watch_rename_file_changes", "watch_rename_key_changes",
-                     "watch_set_value_changes", "watch_write_file_changes", "precedence"
+                     "watch_set_value_changes", "watch_write_file_changes", "precedence",
+                     "enable_content_capture", "enable_hash_capture"
                      ]
     for key in keys:
         if passed_keywords.get(key, None):

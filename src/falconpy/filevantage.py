@@ -557,28 +557,32 @@ class FileVantage(ServiceClass):
                    "include": "string",
                    "include_processes": "string",
                    "include_users": "string",
+                   "content_files": "string",
+                   "content_registry_values": "string",
+                   "enable_content_capture": boolean,
+                   "enable_hash_capture": boolean,
                    "modified_timestamp": "string",
                    "path": "string",
                    "precedence": 0,
                    "rule_group_id": "string",
                    "severity": "string",
                    "type": "string",
-                   "watch_attributes_directory_changes": true,
-                   "watch_attributes_file_changes": true,
-                   "watch_create_directory_changes": true,
-                   "watch_create_file_changes": true,
-                   "watch_create_key_changes": true,
-                   "watch_delete_directory_changes": true,
-                   "watch_delete_file_changes": true,
-                   "watch_delete_key_changes": true,
-                   "watch_delete_value_changes": true,
-                   "watch_permissions_directory_changes": true,
-                   "watch_permissions_file_changes": true,
-                   "watch_rename_directory_changes": true,
-                   "watch_rename_file_changes": true,
-                   "watch_rename_key_changes": true,
-                   "watch_set_value_changes": true,
-                   "watch_write_file_changes": true
+                   "watch_attributes_directory_changes": boolean,
+                   "watch_attributes_file_changes": boolean,
+                   "watch_create_directory_changes": boolean,
+                   "watch_create_file_changes": boolean,
+                   "watch_create_key_changes": boolean,
+                   "watch_delete_directory_changes": boolean,
+                   "watch_delete_file_changes": boolean,
+                   "watch_delete_key_changes": boolean,
+                   "watch_delete_value_changes": boolean,
+                   "watch_permissions_directory_changes": boolean,
+                   "watch_permissions_file_changes": boolean,
+                   "watch_rename_directory_changes": boolean,
+                   "watch_rename_file_changes": boolean,
+                   "watch_rename_key_changes": boolean,
+                   "watch_set_value_changes": boolean,
+                   "watch_write_file_changes": boolean
                }
         description -- The rule description. (String, 0-500 characters.)
         rule_group_id -- Group ID containing the group configuration. (String)
@@ -600,25 +604,38 @@ class FileVantage(ServiceClass):
                    Allowed rule group configuration is based on the type of rule
                    the rule group is added to.
         include_users -- the changes performed by specific users that will be monitored. (String).
-                   Falcon GLOB syntax is supported.
-                   macOS is not supported at this time.
-                   Allowed rule group configuration is based on the type of rule
-                   the rule group is added to.
+                         Falcon GLOB syntax is supported.
+                         macOS is not supported at this time.
+                         Allowed rule group configuration is based on the type of rule
+                         the rule group is added to.
         exclude_users -- the changes performed by specific users that will NOT be monitored. (String).
-                   Falcon GLOB syntax is supported.
-                   macOS is not supported at this time.
-                   Allowed rule group configuration is based on the type of rule
-                   the rule group is added to.
+                         Falcon GLOB syntax is supported.
+                         macOS is not supported at this time.
+                         Allowed rule group configuration is based on the type of rule
+                         the rule group is added to.
         include_processes -- the changes performed by specific processes that will be monitored. (String).
-                   Falcon GLOB syntax is supported.
-                   macOS is not supported at this time.
-                   Allowed rule group configuration is based on the type of rule
-                   the rule group is added to.
+                             Falcon GLOB syntax is supported.
+                             macOS is not supported at this time.
+                             Allowed rule group configuration is based on the type of rule
+                             the rule group is added to.
         exclude_users -- the changes performed by specific processes that will be NOT monitored. (String).
                          Falcon GLOB syntax is supported.
                          macOS is not supported at this time.
                          Allowed rule group configuration is based on the type of rule
                          the rule group is added to.
+        exclude_processes -- the changes performed by the specific processes that will NOT be monitored. (String).
+                             Falcon GLOB syntax is supported.
+                             macOS is not supported at this time.
+                             Allowed rule group configuration is based on the type of rule
+                             the rule group is added to.
+        content_files -- the files whose content will be monitored. (String).
+                         Listed files must match the file include pattern
+                         and not match the file exclude pattern.
+        content_registry_values -- the registry values whose content will be monitored. (String).
+                                   Listed registry values must match the registry include pattern
+                                   and not match the registry exclude pattern.
+        enable_content_capture -- Enable content capturing. Boolean.
+        enable_hash_capture -- Enable hash capturing. Boolean.
         watch_delete_directory_changes -- File system directory monitoring. Boolean.
         watch_create_directory_changes -- File system directory monitoring. Boolean.
         watch_rename_directory_changes -- File system directory monitoring. Boolean.
@@ -709,28 +726,32 @@ class FileVantage(ServiceClass):
                    "include": "string",
                    "include_processes": "string",
                    "include_users": "string",
+                   "content_files": "string",
+                   "content_registry_values": "string",
+                   "enable_content_capture": boolean,
+                   "enable_hash_capture": boolean,
                    "modified_timestamp": "string",
                    "path": "string",
                    "precedence": 0,
                    "rule_group_id": "string",
                    "severity": "string",
                    "type": "string",
-                   "watch_attributes_directory_changes": true,
-                   "watch_attributes_file_changes": true,
-                   "watch_create_directory_changes": true,
-                   "watch_create_file_changes": true,
-                   "watch_create_key_changes": true,
-                   "watch_delete_directory_changes": true,
-                   "watch_delete_file_changes": true,
-                   "watch_delete_key_changes": true,
-                   "watch_delete_value_changes": true,
-                   "watch_permissions_directory_changes": true,
-                   "watch_permissions_file_changes": true,
-                   "watch_rename_directory_changes": true,
-                   "watch_rename_file_changes": true,
-                   "watch_rename_key_changes": true,
-                   "watch_set_value_changes": true,
-                   "watch_write_file_changes": true
+                   "watch_attributes_directory_changes": boolean,
+                   "watch_attributes_file_changes": boolean,
+                   "watch_create_directory_changes": boolean,
+                   "watch_create_file_changes": boolean,
+                   "watch_create_key_changes": boolean,
+                   "watch_delete_directory_changes": boolean,
+                   "watch_delete_file_changes": boolean,
+                   "watch_delete_key_changes": boolean,
+                   "watch_delete_value_changes": boolean,
+                   "watch_permissions_directory_changes": boolean,
+                   "watch_permissions_file_changes": boolean,
+                   "watch_rename_directory_changes": boolean,
+                   "watch_rename_file_changes": boolean,
+                   "watch_rename_key_changes": boolean,
+                   "watch_set_value_changes": boolean,
+                   "watch_write_file_changes": boolean
                }
         description -- The rule description. (String, 0-500 characters.)
         id -- ID of the rule to be updated. (String)
@@ -772,6 +793,19 @@ class FileVantage(ServiceClass):
                          macOS is not supported at this time.
                          Allowed rule group configuration is based on the type of rule
                          the rule group is added to.
+        exclude_processes -- the changes performed by the specific processes that will NOT be monitored. (String).
+                             Falcon GLOB syntax is supported.
+                             macOS is not supported at this time.
+                             Allowed rule group configuration is based on the type of rule
+                             the rule group is added to.
+        content_files -- the files whose content will be monitored. (String).
+                         Listed files must match the file include pattern
+                         and not match the file exclude pattern.
+        content_registry_values -- the registry values whose content will be monitored. (String).
+                                   Listed registry values must match the registry include pattern
+                                   and not match the registry exclude pattern.
+        enable_content_capture -- Enable content capturing. Boolean.
+        enable_hash_capture -- Enable hash capturing. Boolean.
         watch_delete_directory_changes -- File system directory monitoring. Boolean.
         watch_create_directory_changes -- File system directory monitoring. Boolean.
         watch_rename_directory_changes -- File system directory monitoring. Boolean.
