@@ -16,7 +16,7 @@ from falconpy import ContainerVulnerabilities
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = ContainerVulnerabilities(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 404, 429]
+AllowedResponses = [200, 201, 207, 400, 403, 404, 429]
 
 
 class TestContainerVulnerabilities:
