@@ -40,7 +40,8 @@ from ._util import force_default, process_service_request, handle_single_argumen
 from ._payload import (
     azure_registration_payload,
     aws_d4c_registration_payload,
-    gcp_registration_payload
+    gcp_registration_payload,
+    cspm_service_account_validate_payload
     )
 from ._service_class import ServiceClass
 from ._endpoint._d4c_registration import _d4c_registration_endpoints as Endpoints
@@ -577,6 +578,64 @@ class D4CRegistration(ServiceClass):
             params=handle_single_argument(args, parameters, "id")
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_gcp_service_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Update a GCP service account.
+
+        Keyword arguments:
+        body -- full body payload, not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "client_email": "string",
+                            "client_id": "string",
+                            "private_key": "string",
+                            "private_key_id": "string",
+                            "project_id": "string",
+                            "service_account_conditions": [
+                                {
+                                    "feature": "string",
+                                    "is_visible": boolean,
+                                    "last_transition": "UTC date string",
+                                    "message": "string",
+                                    "reason": "string",
+                                    "status": "string",
+                                    "type": "string"
+                                }
+                            ],
+                            "service_account_id": 0
+                        }
+                    ]
+                }
+        client_email -- Client email associated with the service account. String.
+        client_id -- GCP Client ID. String.
+        private_key -- GCP private key. String.
+        private_key_id -- GCP private key ID. String.
+        project_id -- GCP project ID. String.
+        resources -- List of GCP service accounts to validate. List of dictionaries.
+                     Overrides other keywords except for body.
+        service_account_conditions -- GCP service account conditions. List of dictionaries.
+        service_account_id -- GCP service account ID. Integer.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/UpdateD4CGCPServiceAccountsExt
+        """
+        if not body:
+            body = cspm_service_account_validate_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateD4CGCPServiceAccountsExt",
+            body=body
+            )
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_gcp_user_scripts_attachment_v2(self: object,
                                            *args,
@@ -771,6 +830,7 @@ class D4CRegistration(ServiceClass):
     ConnectD4CGCPAccount = connect_gcp_account
     GetD4CGCPUserScriptsAttachment = get_gcp_user_scripts_attachment_v2
     GetD4CGCPServiceAccountsExt = get_gcp_service_account
+    UpdateD4CGCPServiceAccountsExt = update_gcp_service_account
     GetCSPMGCPUserScriptsAttachment = get_gcp_user_scripts_attachment
     GetCSPMGCPUserScripts = get_gcp_user_scripts
     GetD4CGCPUserScripts = get_gcp_user_scripts
