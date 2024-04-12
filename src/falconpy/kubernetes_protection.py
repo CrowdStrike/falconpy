@@ -91,6 +91,7 @@ class KubernetesProtection(ServiceClass):
                     cloud_region            node_count
                     cluster_id              pod_count
                     cluster_name            tags
+                    iar_coverage
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -127,6 +128,7 @@ class KubernetesProtection(ServiceClass):
                     cloud_region            node_count
                     cluster_id              pod_count
                     cluster_name            tags
+                    iar_coverage
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -162,6 +164,7 @@ class KubernetesProtection(ServiceClass):
                     cloud_region            node_count
                     cluster_id              pod_count
                     cluster_name            tags
+                    iar_coverage
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -1212,6 +1215,7 @@ class KubernetesProtection(ServiceClass):
                     cloud_region        node_count
                     cluster_id          pod_count
                     cluster_name        tags
+                    iar_coverage
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- Field to sort results by. String.
