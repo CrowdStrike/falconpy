@@ -109,7 +109,8 @@ class TestD4CRegistration:
             "DeleteD4CGCPAccount": falcon.delete_gcp_account("1234567"),
             "ConnectD4CGCPAccount": falcon.connect_gcp_account(client_id="123456", parent_id="123456"),
             "GetD4CGCPServiceAccoutnExt": falcon.get_gcp_service_account(id="12345678"),
-            "GetD4CGCPUserScriptsAttachmentV2": falcon.get_gcp_user_scripts_attachment_v2(ids="12345678")
+            "GetD4CGCPUserScriptsAttachmentV2": falcon.get_gcp_user_scripts_attachment_v2(ids="12345678"),
+            "UpdateD4CGCPServiceAccountsExt": falcon.update_gcp_service_account(service_account_id=2),
         }
         for key in tests:
             if tests[key]["status_code"] != 500:

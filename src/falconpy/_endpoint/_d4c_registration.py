@@ -542,6 +542,20 @@ _d4c_registration_endpoints = [
     ]
   ],
   [
+    "UpdateD4CGCPServiceAccountsExt",
+    "PATCH",
+    "/cloud-connect-gcp/entities/service-accounts/v1",
+    "Patches the service account key for external clients.",
+    "d4c_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetD4CGCPUserScriptsAttachment",
     "GET",
     "/cloud-connect-gcp/entities/user-scripts-download/v1",
