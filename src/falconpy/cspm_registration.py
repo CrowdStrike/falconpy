@@ -233,6 +233,7 @@ class CSPMRegistration(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_aws_console_setup_urls(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve setup URLs for the AWS console.
 
@@ -262,6 +263,7 @@ class CSPMRegistration(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_aws_account_scripts_attachment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve AWS account scripts.
 
