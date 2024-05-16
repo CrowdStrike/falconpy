@@ -15,7 +15,7 @@ from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import ZeroTrustAssessment
+from falconpy import ZeroTrustAssessment, APIHarnessV2
 
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
@@ -62,6 +62,20 @@ class TestZeroTrustAssessment:
         zta = ZeroTrustAssessment(pythonic=True, debug=config.debug)
         request_context.reset(tok)
         assert bool(zta.get_audit().status_code == 200)
+
+    @pytest.mark.skipif(config.base_url != "https://api.crowdstrike.com",
+                    reason="Unit testing unavailable in this region"
+                    )
+    def test_uber_context_authentication_no_base(self):
+        request_context = ContextVar("request", default=BaselessContextRequest())
+        req: BaselessContextRequest = request_context.get()
+        req.access_token = auth.authorization.token()["body"]["access_token"]
+        tok = request_context.set(req)
+        uber = APIHarnessV2(pythonic=True, debug=config.debug)
+        request_context.reset(tok)
+        assert min(bool(uber.command("QueryDevicesByFilterScroll").status_code == 200),
+                   bool(uber.auth_style == "CONTEXT")
+                   )
 
     @pytest.mark.skipif(config.base_url != "https://api.crowdstrike.com",
                     reason="Unit testing unavailable in this region"
