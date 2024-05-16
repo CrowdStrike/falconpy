@@ -35,13 +35,13 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-import json
 from typing import Dict, Union
 from ._util import (
     force_default,
     process_service_request,
     handle_single_argument,
-    generate_error_result
+    generate_error_result,
+    params_to_keywords
     )
 from ._payload import extraction_payload
 from ._service_class import ServiceClass
@@ -232,6 +232,11 @@ class SampleUploads(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/ArchiveUploadV2
         """
+        method_args = ["name", "archive", "file", "file_data", "is_confidential", "comment", "password"]
+        kwargs = params_to_keywords(method_args,
+                                    parameters,
+                                    kwargs
+                                    )
         # Check for file name
         if not name:
             return generate_error_result("You must provide an archive filename.", code=400)
@@ -254,6 +259,8 @@ class SampleUploads(ServiceClass):
         file_extended = {"name": name}
         if kwargs.get("password", None):
             file_extended["password"] = kwargs.get("password")
+        if kwargs.get("comment", None):
+            file_extended["comment"] = kwargs.get("comment")
         if kwargs.get("is_confidential", None):
             file_extended["is_confidential"] = kwargs.get("is_confidential")
 
@@ -263,9 +270,7 @@ class SampleUploads(ServiceClass):
             operation_id="ArchiveUploadV2",
             body=body,
             files=file_tuple,
-            data=file_extended,
-            keywords=kwargs,
-            params=parameters
+            data=file_extended
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -458,24 +463,40 @@ class SampleUploads(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/sample-uploads/UploadSampleV3
         """
+        # Check for raw parameters dictionary and convert it's contents to keywords
+        method_args = ["file_name", "sample", "upfile", "file_data", "is_confidential", "comment"]
+        kwargs = params_to_keywords(method_args,
+                                    parameters,
+                                    kwargs
+                                    )
+
+        # Check for file name
+        file_name = kwargs.get("file_name", None)
+        if not file_name:
+            return generate_error_result("'file_name' must be specified", code=400)
+
         # Try to find the binary object they provided us
         if not file_data:
             file_data = kwargs.get("sample", None)
             if not file_data:
                 file_data = kwargs.get("upfile", None)
-        # Create a copy of our default header dictionary
-        header_payload = json.loads(json.dumps(self.headers))
-        # Set our content-type header
-        header_payload["Content-Type"] = "application/octet-stream"
+        if not file_data:
+            return generate_error_result("You must provide a file to upload.", code=400)
+
+        # Create the form data dictionary
+        file_extended = {"file_name": file_name}
+        if kwargs.get("comment", None):
+            file_extended["comment"] = kwargs.get("comment")
+        if kwargs.get("is_confidential", None):
+            file_extended["is_confidential"] = kwargs.get("is_confidential")
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="UploadSampleV3",
-            headers=header_payload,  # Pass our custom headers
-            body=body,
-            data=file_data,
-            keywords=kwargs,
-            params=parameters
+            files=[("sample", (file_name, file_data))],  # Passed as a list of tuples
+            data=file_extended,
+            body=body  # Not used but maintained for backwards compatibility with method signature
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
