@@ -34,12 +34,13 @@ class TestSampleUploads:
         SOURCE = "%s_source.png" % jdate
         TARGET = "tests/%s_target.png" % jdate
         PAYLOAD = open(FILENAME, 'rb').read()
+        params_payload = {"file_name": SOURCE}
         if style.lower() == "sample":
-            response = falcon.UploadSampleV3(file_name=SOURCE, sample=PAYLOAD)
+            response = falcon.upload_sample(file_name=SOURCE, sample=PAYLOAD)
         elif style.lower() == "upfile":
-            response = falcon.UploadSampleV3(file_name=SOURCE, upfile=PAYLOAD)
+            response = falcon.upload_sample(file_name=SOURCE, upfile=PAYLOAD, comment="Whatever")
         else:
-            response = falcon.UploadSampleV3(file_name=SOURCE, file_data=PAYLOAD)
+            response = falcon.upload_sample(parameters=params_payload, file_data=PAYLOAD, is_confidential=True)
         try:
             sha = response["body"]["resources"][0]["sha256"]
         except (KeyError, IndexError):
@@ -101,6 +102,7 @@ class TestSampleUploads:
         error_checks = True
         tests = {
             "upload_sample": falcon.UploadSampleV3(body={}),
+            "upload_sample_as_well": falcon.upload_sample(file_name="NotHere.jpg"),
             "get_sample": falcon.GetSampleV3(ids='DoesNotExist'),
             "delete_sample": falcon.DeleteSampleV3(ids='12345678'),
             "ArchiveListV1": falcon.ArchiveListV1(id="12345678"),
