@@ -27,13 +27,13 @@ class TestFalconXSandbox:
         Executes every statement in every method of the class, accepts all errors except 500
         """
         error_checks = True
-        # filename = "testfile.png"
+        filename = "tests/testfile.png"
         # FILENAME = f"tests/{filename}"
         # fmt = '%Y-%m-%d %H:%M:%S'
-        # with open(FILENAME, 'rb') as testfile:
-        #     PAYLOAD = testfile.read()
-        filename = None
-        PAYLOAD = None
+        with open(filename, 'rb') as testfile:
+            PAYLOAD = testfile.read()
+        #filename = None
+        #PAYLOAD = None
         tests = {
             "get_artifacts": falcon.GetArtifacts(parameters={}),
             "get_summary_reports": falcon.GetSummaryReports(ids='12345678'),
@@ -49,7 +49,9 @@ class TestFalconXSandbox:
             "query_reports": falcon.QueryReports(),
             "query_submissions": falcon.QuerySubmissions(),
             "get_sample": falcon.GetSampleV2(ids='12345678'),
-            "upload_sample": falcon.UploadSampleV2(file_name=filename, file_data=PAYLOAD),
+            "upload_sample": falcon.UploadSampleV2(file_name=filename, upfile=PAYLOAD, comment="testing", is_confidential=True),
+            "upload_sample": falcon.UploadSampleV2(file_data=PAYLOAD),
+            "upload_sample": falcon.UploadSampleV2(file_data=None, file_name="whatever.png"),
             "delete_sample": falcon.DeleteSampleV2(ids='12345678'),
             "query_sample": falcon.QuerySampleV1(sha256s='12345678'),
             "get_memory_dump": falcon.get_memory_dump("12345678"),

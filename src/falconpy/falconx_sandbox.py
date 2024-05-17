@@ -37,7 +37,13 @@ For more information, please refer to <https://unlicense.org>
 """
 import json
 from typing import Dict, Union
-from ._util import force_default, process_service_request, handle_single_argument
+from ._util import (
+    force_default,
+    process_service_request,
+    handle_single_argument,
+    params_to_keywords,
+    generate_error_result
+    )
 from ._payload import generic_payload_list, falconx_payload
 from ._service_class import ServiceClass
 from ._endpoint._falconx_sandbox import _falconx_sandbox_endpoints as Endpoints
@@ -450,25 +456,39 @@ class FalconXSandbox(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/UploadSampleV2
         """
+        method_args = ["file_name", "sample", "upfile", "file_data", "is_confidential", "comment"]
+        kwargs = params_to_keywords(method_args,
+                                    parameters,
+                                    kwargs
+                                    )
+
+        # Check for file name
+        file_name = kwargs.get("file_name", None)
+        if not file_name:
+            return generate_error_result("'file_name' must be specified", code=400)
+
         # Try to find the binary object they provided us
         if not file_data:
             file_data = kwargs.get("sample", None)
             if not file_data:
                 file_data = kwargs.get("upfile", None)
+        if not file_data:
+            return generate_error_result("You must provide a file to upload.", code=400)
 
-        # Create a copy of our default header dictionary
-        header_payload = json.loads(json.dumps(self.headers))
-        # Set our content-type header
-        header_payload["Content-Type"] = "application/octet-stream"
+        # Create the form data dictionary
+        file_extended = {"file_name": file_name}
+        if kwargs.get("comment", None):
+            file_extended["comment"] = kwargs.get("comment")
+        if kwargs.get("is_confidential", None):
+            file_extended["is_confidential"] = kwargs.get("is_confidential")
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="UploadSampleV2",
-            body=body,
-            data=file_data,
-            params=parameters,
-            keywords=kwargs,
-            headers=header_payload
+            files=[("sample", (file_name, file_data))],  # Passed as a list of tuples
+            data=file_extended,
+            body=body  # Not used but maintained for backwards compatibility with method signature
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
