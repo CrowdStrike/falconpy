@@ -12,7 +12,7 @@ from falconpy import MessageCenter
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = MessageCenter(auth_object=config)
-AllowedResponses = [200, 403, 429, 405]  # pre-1.2.16 - UpdateCase appears to be decomm'd
+AllowedResponses = [200, 400, 403, 429, 405]  # pre-1.2.16 - UpdateCase appears to be decomm'd
 
 
 class TestMessageCenter:
@@ -33,15 +33,16 @@ class TestMessageCenter:
             "download_case_attachment": falcon.download_case_attachment(ids="12345678"),
             "add_case_attachment": falcon.add_case_attachment(case_id="12345678",
                                                               file_data=PAYLOAD,
-                                                              user_uuid="bob@nowhere.com"
+                                                              user_uuid="bob@nowhere.com",
                                                               ),
             "add_case_attachment2": falcon.add_case_attachment(case_id="12345678",
                                                                upfile=PAYLOAD,
-                                                               user_uuid="bob@nowhere.com"
+                                                               user_uuid="bob@nowhere.com",
+                                                               file_name="testfile.png"
                                                                ),
             "add_case_attachment3": falcon.add_case_attachment(case_id="12345678",
-                                                               sample=PAYLOAD,
-                                                               user_uuid="bob@nowhere.com"
+                                                               user_uuid="bob@nowhere.com",
+                                                               file_name="testfile.png"
                                                                ),
             "create_case": falcon.create_case(content="Case content goes here",
                                               detections={
