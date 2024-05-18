@@ -115,6 +115,7 @@ class FoundryLogScale(ServiceClass):
         for key in data_keys:
             if kwargs.get(key, None):
                 form_data[key] = kwargs.get(key)
+                kwargs.pop(key)  # Prevent it from converting to a query string param
 
         # Create a multipart form payload for our upload file
         file_tuple = [("file", ("data-upload", data_file, "application/json"))]
@@ -163,6 +164,7 @@ class FoundryLogScale(ServiceClass):
         for key in data_keys:
             if kwargs.get(key, None):
                 form_data[key] = kwargs.get(key)
+                kwargs.pop(key)  # Prevent it from converting to a query string param
 
         # Create a multipart form payload for our upload file
         file_tuple = [("file", ("data-upload", data_file, "application/json"))]
