@@ -178,10 +178,11 @@ class Workflows(ServiceClass):
         try:
             with open(data_file, "r", encoding="utf-8") as yaml_file:
                 file_data = yaml_file.read()
-                file_extended = {"name": "yaml_upload", "data_file": file_data, "type": content_type}
+                file_extended = [("data_file", ("yaml_upload", file_data, content_type))]
         except FileNotFoundError:
             data_file = None
-
+        # Remove the data file from the keywords dictionary before args_to_params
+        kwargs.pop("data_file")
         if data_file and file_data:
             returned = process_service_request(
                         calling_object=self,
