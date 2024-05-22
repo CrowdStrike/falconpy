@@ -178,7 +178,12 @@ sensors = falcon.command(action="GetCombinedSensorInstallersByQuery",
                          filter=OS_FILTER,
                          sort="version.desc"
                          )
-if CMD in "list":
+
+if sensors["status_code"] == 401:
+    print("authentification failed, status_code={}".format(
+        sensors["status_code"]))
+    print("sensors:{}".format(sensors))
+elif CMD in "list":
     # List sensors
     data = []
     headers = {
