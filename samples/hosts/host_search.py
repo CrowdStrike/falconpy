@@ -66,12 +66,16 @@ def consume_arguments() -> Namespace:
 
 
 def get_hostnames(target_file: str):
-    """Open CSV and import serials."""
+    """Open file and import hostnames, ignoring comments."""
     try:
-        with open(target_file, newline='') as host_file:
+        with open(target_file, 'r') as host_file:
             print("Opening hostname file")
-            return host_file.read().splitlines()
-
+            hostnames = []
+            for line in host_file:
+                line = line.split('#')[0].strip()  # Remove comments and strip whitespace
+                if line:  # Ignore empty lines
+                    hostnames.append(line)
+            return hostnames
     except FileNotFoundError:
         raise SystemExit(
             "You must provide a valid hostname file with the '-f' argument, "
