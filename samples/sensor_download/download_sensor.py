@@ -180,9 +180,9 @@ sensors = falcon.command(action="GetCombinedSensorInstallersByQuery",
                          )
 
 if sensors["status_code"] == 401:
-    print("authentification failed, status_code={}".format(
-        sensors["status_code"]))
-    print("sensors:{}".format(sensors))
+    raise SystemExit("Authentication failure (STATUS CODE {})".format(sensors["status_code"]))
+
+
 elif CMD in "list":
     # List sensors
     data = []
