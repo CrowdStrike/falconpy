@@ -22,6 +22,7 @@ list of hostnames to the list of hosts in the Falcon Console to determine
 which hostnames are not currently reporting in to the console.
 
 Developed by @Don-Swanson-Adobe
+Modification: 05.28.24 - David M. Berry - Updated get_hostnames function to ignore comments.
 """
 import os
 import logging
@@ -79,7 +80,7 @@ def get_hostnames(target_file: str):
     except FileNotFoundError:
         raise SystemExit(
             "You must provide a valid hostname file with the '-f' argument, "
-            "or a host with the '-h' argument in order to run this program."
+            "or a host with the '-n' argument in order to run this program."
             )
 
 
