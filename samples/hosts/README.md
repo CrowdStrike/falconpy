@@ -746,6 +746,12 @@ This variation will retrieve a list of hosts that haven't checked in to CrowdStr
 python3 stale_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d 30 -t testtag
 ```
 
+This variation leverages a regular expression to match the host "SDKDEMO3".
+
+```shell
+python3 stale_sensors.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d 30 -p "^SDK.*3$"
+```
+
 You can reverse the list sort with the `-r` or `--reverse` argument.
 
 ```shell
@@ -762,7 +768,8 @@ Command-line help is available via the `-h` argument.
 
 ```shell
 % python3 stale_sensors.py -h
-usage: stale_sensors.py [-h] -k CLIENT_ID -s CLIENT_SECRET [-m MSSP] [-g] [-d DAYS] [-r] [-x] [-t TAG]
+usage: stale_sensors.py [-h] -k CLIENT_ID -s CLIENT_SECRET [-m MSSP] [-g] [-d DAYS] [-r] [-x] [-t TAG] [-c] [-o OUTPUT_FILE] [-q]
+                        [-f {windows,mac,linux,k8s}] [-p HOSTFILTER]
 
 CrowdStrike Unattended Stale Sensor Environment Detector.
 
@@ -786,6 +793,10 @@ results for the US-GOV-1 region, pass the '-g' argument.
 - ray.heffer@crowdstrike.com; 03.29.22 - Added new argument for Grouping Tags (--grouping, -g)
 - @morcef, jshcodes@CrowdStrike; 06.05.22 - More reasonable date calcs, Linting, Easier arg parsing
                                             Easier base_url handling, renamed grouping_tag to tag
+- jshcodes@Crowdstrike; 11.02.22 - Added CSV output options and cleaner date outputs.
+- nmills@forbarr; 22.05.24 - Fixed deprecation warning on date function,
+                                            Added new arg to accept hostname pattern
+                                            Batch the call to hide_hosts to avoid API error
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -799,6 +810,14 @@ optional arguments:
   -r, --reverse         Reverse sort (defaults to ASC)
   -x, --remove          Remove hosts identified as stale
   -t TAG, --tag TAG     Falcon Grouping Tag name for the hosts
+  -c, --csv             Export results to CSV
+  -o OUTPUT_FILE, --output_file OUTPUT_FILE
+                        File to output CSV results to. Ignored when "-c" is not specified.
+  -q, --quotes          Quote non-numeric fields in CSV output.
+  -f {windows,mac,linux,k8s}, --filter-by-os {windows,mac,linux,k8s}
+                        OS filter (windows, macos, linux)
+  -p HOSTFILTER, --host-pattern HOSTFILTER
+                        filter hostnames by regex
 ```
 
 ### Example source code
