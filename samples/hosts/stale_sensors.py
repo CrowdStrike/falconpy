@@ -26,7 +26,6 @@ results for the US-GOV-1 region, pass the '-g' argument.
                                             Batch the call to hide_hosts to avoid API error
 """
 import csv
-import os
 import re
 from argparse import ArgumentParser, RawTextHelpFormatter
 from datetime import datetime, timedelta, timezone
@@ -39,10 +38,6 @@ except ImportError as no_falconpy:
         "CrowdStrike FalconPy must be installed in order to use this application.\n"
         "Please execute `python3 -m pip install crowdstrike-falconpy` and try again."
         ) from no_falconpy
-# from dotenv import load_dotenv
-# load_dotenv()
-# clientId = os.getenv('clientid')
-# clientSecret = os.getenv('secret')
 
 def parse_command_line() -> object:
     """Parse command-line arguments and return them back as an ArgumentParser object."""
@@ -54,15 +49,13 @@ def parse_command_line() -> object:
         '-k',
         '--client_id',
         help='CrowdStrike Falcon API key ID',
-        required=True,
-        # default=clientId
+        required=True
         )
     parser.add_argument(
         '-s',
         '--client_secret',
         help='CrowdStrike Falcon API key secret',
-        required=True,
-        # default=clientSecret
+        required=True
         )
     parser.add_argument(
         '-m',
@@ -233,16 +226,14 @@ falcon = connect_api(args.client_id, args.client_secret, args.govcloud, args.mss
 # List to hold our identified hosts
 stale = []
 # For each stale host identified
-if args.hostfilter == r".*":
-    pattern = args.hostfilter
-else:
-    pattern = re.escape(args.hostfilter)
-    print(f"Pattern is: {pattern}")
+pattern = args.hostfilter
+if args.hostfilter != r".*":
+    print(f"Pattern is: {re.escape(pattern)}")
+
 for host in get_host_details(get_hosts(STALE_DATE, args.tag, args.osfilter)):
     # Retrieve host detail
     if 'hostname' in host:
         if re.findall(pattern, host['hostname']):
-            print(f"{host['hostname']} matches expected pattern...")
             stale = parse_host_detail(host, stale)
 
 # If we produced stale host results
