@@ -34,6 +34,7 @@
 from ._custom_ioa import _custom_ioa_endpoints
 from ._d4c_registration import _d4c_registration_endpoints
 from ._discover import _discover_endpoints
+from ._exposure_management import _exposure_management_endpoints
 from ._fdr import _fdr_endpoints
 from ._firewall_management import _firewall_management_endpoints
 from ._hosts import _hosts_endpoints
@@ -52,6 +53,7 @@ from ._mapping import _deprecated_op_mapping, _deprecated_cls_mapping
 _custom_ioa_deprecated = _custom_ioa_endpoints
 _d4c_registration_deprecated = _d4c_registration_endpoints
 _discover_deprecated = _discover_endpoints
+_exposure_management_deprecated = _exposure_management_endpoints
 _fdr_deprecated = _fdr_endpoints
 _firewall_management_deprecated = _firewall_management_endpoints
 _hosts_deprecated = _hosts_endpoints

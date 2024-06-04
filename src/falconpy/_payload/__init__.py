@@ -67,6 +67,7 @@ from ._cspm_registration import (
     cspm_service_account_validate_payload
     )
 from ._device_control_policy import device_policy_payload, default_device_policy_config_payload
+from ._exposure_management import fem_asset_payload
 from ._falconx import falconx_payload
 from ._filevantage import (
     filevantage_rule_group_payload,
@@ -129,5 +130,5 @@ __all__ = [
     "image_policy_payload", "image_exclusions_payload", "image_group_payload",
     "workflow_definition_payload", "workflow_human_input", "workflow_mock_payload",
     "cspm_service_account_validate_payload", "api_plugin_command_payload", "mobile_enrollment_payload",
-    "filevantage_start_payload"
+    "filevantage_start_payload", "fem_asset_payload"
 ]

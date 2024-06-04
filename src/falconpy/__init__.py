@@ -108,6 +108,7 @@ from .device_control_policies import DeviceControlPolicies
 from .discover import Discover
 from .drift_indicators import DriftIndicators
 from .event_streams import EventStreams
+from .exposure_management import ExposureManagement
 from .falcon_complete_dashboard import CompleteDashboard
 from .falcon_container import FalconContainer
 from .falconx_sandbox import FalconXSandbox
@@ -197,7 +198,7 @@ __all__ = [
     "SDKDeprecationWarning", "ConfigurationAssessmentEvaluationLogic", "ConfigurationAssessment",
     "ContainerAlerts", "ContainerDetections", "ContainerImages", "ContainerPackages",
     "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers",
-    "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph"
+    "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement"
     ]
 """
 This is free and unencumbered software released into the public domain.
