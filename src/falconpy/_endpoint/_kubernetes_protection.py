@@ -627,8 +627,8 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve list of images on running containers using a query in Falcon Query Language "
-        "(FQL). Supported filters:  cid,hosts,image_digest,image_has_been_assessed,image_id,image_name,image_registry,i"
-        "mage_repository,image_tag,last_seen,running_status",
+        "(FQL). Supported filters:  cid,cluster_id,cluster_name,hosts,image_digest,image_has_been_assessed,image_id,ima"
+        "ge_name,image_registry,image_repository,image_tag,last_seen,running_status",
         "name": "filter",
         "in": "query"
       },
