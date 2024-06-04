@@ -69,6 +69,35 @@ class Workflows(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_activities(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search workflow activities based on the provided filter.
+
+        Keyword arguments:
+        filter -- FQL query specifying filter parameters. String.
+        offset -- Starting pagination offset of records to return. String.
+        limit -- Maximum number of records to return. Integer.
+        sort -- FQL formatted sort (ex: name.desc,time.asc). String.
+                If direction is omitted, defaults to descending.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowActivitiesCombined
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowActivitiesCombined",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def search_definitions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search workflow definitions based on the provided filter.
 
@@ -122,6 +151,31 @@ class Workflows(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="WorkflowExecutionsCombined",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_triggers(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search workflow triggers based on the provided filter.
+
+        Keyword arguments:
+        filter -- FQL query specifying filter parameters. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowTriggersCombined
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowTriggersCombined",
             keywords=kwargs,
             params=parameters
             )
@@ -709,8 +763,10 @@ class Workflows(ServiceClass):
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
+    WorkflowActivitiesCombined = search_activities
     WorkflowDefinitionsCombined = search_definitions
     WorkflowExecutionsCombined = search_executions
+    WorkflowTriggersCombined = search_triggers
     WorkflowDefinitionsExport = export_definition
     WorkflowDefinitionsImport = import_definition
     WorkflowDefinitionsUpdate = update_definition

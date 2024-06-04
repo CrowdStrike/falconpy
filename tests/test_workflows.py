@@ -31,6 +31,8 @@ class TestWorkflows:
             "WorkflowSystemDefinitionsPromote" : falcon.promote(customer_definition_id="12345", activities={}),
             "WorkflowSystemDefinitionsProvision" : falcon.provision(name="FalconPyTesting", configuration=[{}]),
             "WorkflowDefinitionsCombined": falcon.search_definitions(),
+            "WorkflowActivitesCombined": falcon.search_activities(),
+            "WorkflowTriggersCombined": falcon.search_triggers(),
             "WorkflowExecutionsCombined": falcon.search_executions(),
             "WorkflowDefinitionsExport": falcon.export_definition(),
             "WorkflowDefinitionsImport": falcon.import_definition(validate_only=True, data_file="this_will_415"),
