@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-from ._util import force_default, process_service_request, handle_single_argument
+from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
 from ._endpoint._drift_indicators import _drift_indicators_endpoints as Endpoints
 
@@ -161,32 +161,6 @@ class DriftIndicators(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_drift_indicators(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-        """Retrieve Drift Indicator entities identified by the provided IDs.
-
-        Keyword arguments:
-        ids -- Search Drift Indicators by IDs. String or list of strings. [Max: 100]
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
-                   All others are ignored.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: GET
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/drift-indicators/ReadDriftIndicatorEntities
-        """
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="ReadDriftIndicatorEntities",
-            keywords=kwargs,
-            params=handle_single_argument(args, parameters, "ids")
-            )
-
-    @force_default(defaults=["parameters"], default_types=["dict"])
     def search_drift_indicators(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve all drift indicators that match the given query.
 
@@ -226,5 +200,4 @@ class DriftIndicators(ServiceClass):
     GetDriftIndicatorsValuesByDate = get_drift_indicators_by_date
     ReadDriftIndicatorsCount = read_drift_indicator_counts
     SearchAndReadDriftIndicatorEntities = search_and_read_drift_indicators
-    ReadDriftIndicatorEntities = read_drift_indicators
     SearchDriftIndicators = search_drift_indicators
