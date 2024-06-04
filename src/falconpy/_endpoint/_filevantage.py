@@ -38,6 +38,66 @@ For more information, please refer to <https://unlicense.org>
 
 _filevantage_endpoints = [
   [
+    "getActionsMixin0",
+    "GET",
+    "/filevantage/entities/actions/v1",
+    "Retrieves the processing results for 1 or more actions.",
+    "filevantage",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "One or more actions ids in the form of `ids=ID1&ids=ID2`",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "startActions",
+    "POST",
+    "/filevantage/entities/actions/v1",
+    "Initiates the specified action on the provided change ids",
+    "filevantage",
+    [
+      {
+        "description": "Create a new action.\n\n * `operation` must be one of the `suppress`, `unsuppress`, or "
+        " `purge`\n\n * `change_ids` represent the ids of the changes the operation will perform; limited to 100 ids "
+        "per action\n\n * `comment` optional comment to describe the reason for the action",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "getContents",
+    "GET",
+    "/filevantage/entities/change-content/v1",
+    "Retrieves the content captured for the provided change id",
+    "filevantage",
+    [
+      {
+        "type": "string",
+        "description": "ID of the change in the form of id=ID1",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Providing the value of `gzip` compresses the response, otherwise the content is "
+        "returned uncompressed.",
+        "name": "Accept-Encoding",
+        "in": "header"
+      }
+    ]
+  ],
+  [
     "getChanges",
     "GET",
     "/filevantage/entities/changes/v2",
@@ -604,6 +664,59 @@ _filevantage_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      }
+    ]
+  ],
+  [
+    "signalChangesExternal",
+    "POST",
+    "/filevantage/entities/workflow/v1",
+    "Initiates workflows for the provided change ids",
+    "filevantage",
+    [
+      {
+        "description": "Change ids to initiate the workflows; limited to 100 per request.",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "queryActionsMixin0",
+    "GET",
+    "/filevantage/queries/actions/v1",
+    "Returns one or more action ids",
+    "filevantage",
+    [
+      {
+        "minimum": 0,
+        "type": "integer",
+        "description": "The first action index to return in the response. If not provided it will default to "
+        "'0'. Use with the `limit` parameter to manage pagination of results.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The maximum number of actions to return in the response (default: 100; max: 500). Use "
+        "with the `offset` parameter to manage pagination of results",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The sort expression that should be used to sort the results (e.g. created_date|desc)",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter changes using a query in Falcon Query Language (FQL). \n\nCommon filter options "
+        " include:\n\n - `status`\n - `operation_type`\n\n The full list of allowed filter parameters can be reviewed "
+        "in our API documentation.",
+        "name": "filter",
+        "in": "query"
       }
     ]
   ],

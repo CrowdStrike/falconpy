@@ -72,7 +72,8 @@ from ._filevantage import (
     filevantage_rule_group_payload,
     filevantage_rule_payload,
     filevantage_policy_payload,
-    filevantage_scheduled_exclusion_payload
+    filevantage_scheduled_exclusion_payload,
+    filevantage_start_payload
     )
 from ._mssp import mssp_payload
 from ._firewall import (
@@ -127,5 +128,6 @@ __all__ = [
     "workflow_template_payload", "foundry_execute_search_payload", "foundry_dynamic_search_payload",
     "image_policy_payload", "image_exclusions_payload", "image_group_payload",
     "workflow_definition_payload", "workflow_human_input", "workflow_mock_payload",
-    "cspm_service_account_validate_payload", "api_plugin_command_payload", "mobile_enrollment_payload"
+    "cspm_service_account_validate_payload", "api_plugin_command_payload", "mobile_enrollment_payload",
+    "filevantage_start_payload"
 ]

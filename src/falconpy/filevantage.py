@@ -36,18 +36,22 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=C0302
+import json
 from typing import Dict, Union
 from ._payload import (
     filevantage_rule_group_payload,
     filevantage_rule_payload,
     filevantage_policy_payload,
-    filevantage_scheduled_exclusion_payload
+    filevantage_scheduled_exclusion_payload,
+    filevantage_start_payload,
+    generic_payload_list
     )
 from ._util import process_service_request, force_default, handle_single_argument
 from ._service_class import ServiceClass
 from ._endpoint._filevantage import _filevantage_endpoints as Endpoints
 
 
+# pylint: disable=R0904  # Aligning to the number of operations within this API
 class FileVantage(ServiceClass):
     """The only requirement to instantiate an instance of this class is one of the following.
 
@@ -60,6 +64,102 @@ class FileVantage(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_actions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve the processing result for one or more actions.
+
+        Keyword arguments:
+        ids -- Action IDs to retrieve. String or list of strings.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/getActionsMixin0
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getActionsMixin0",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def start_actions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Initiate the specified action on the provided change IDs.
+
+        Keyword arguments:
+        body - full body payload in JSON format, not required if using other keywords.
+               {
+                    "change_ids": [
+                        "string"
+                    ],
+                    "comment": "string",
+                    "operation": "string"
+                }
+        change_ids -- Represents the IDs of the changes the operation will perform.
+                      String or list of strings. Limited to 100 IDs per action.
+        comment -- OPtional comment to describe the reason for the action. String.
+        operation -- Operation to perform. String. Allowed values: suppress, unsuppress, or purge.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/startActions
+        """
+        if not body:
+            body = filevantage_start_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="startActions",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_contents(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve the content captured for the provided change ID.
+
+        Keyword arguments:
+        id -- Change IDs to retrieve. String.
+        compress -- Compress the response using gzip. Boolean. Defaults to False.
+        parameters - full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/getChanges
+        """
+        header_payload = json.loads(json.dumps(self.headers))
+        if kwargs.get("compress", None):
+            header_payload["Accept-Encoding"] = "gzip"
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getContents",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id"),
+            headers=header_payload
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_changes(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
@@ -977,6 +1077,77 @@ class FileVantage(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def signal_changes(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Initiate a workflow for the provided change IDs.
+
+        Keyword arguments:
+        body - full body payload, not required if ids is provided as a keyword.
+               {
+                    "ids": [
+                        "string"
+                    ]
+               }
+        ids -- Action IDs to retrieve. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/signalChangesExternal
+        """
+        parameters = handle_single_argument(args, kwargs, "ids")
+
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+            # Try to gracefully catch IDs passed incorrectly as a query string parameter
+            if parameters:
+                if "ids" in parameters and "ids" not in body:
+                    body["ids"] = parameters["ids"]
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="signalChangesExternal",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_actions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search for actions within your environment. Returns one or more action IDs.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax. String.
+        limit -- The maximum number of records to return. [Integer, 1-500, Default: 100]
+        offset -- The integer offset to start retrieving records from. Integer.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc). String.
+                Available sort fields
+                action_timestamp        ingestion_timestamp
+
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/filevantage/queryActionsMixin0
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryActionsMixin0",
+            keywords=kwargs,
+            params=parameters
+            )
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_changes(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for changes within your environment. Returns one or more change IDs.
@@ -1154,6 +1325,9 @@ class FileVantage(ServiceClass):
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here
     # for backwards compatibility / ease of use purposes
+    getActionsMixin0 = get_actions
+    startActions = start_actions
+    getContents = get_contents
     updatePolicyHostGroups = update_policy_host_groups
     updatePolicyPrecedence = update_policy_precedence
     updatePolicyRuleGroups = update_policy_rule_groups
@@ -1175,6 +1349,8 @@ class FileVantage(ServiceClass):
     deleteRuleGroups = delete_rule_groups
     updateRuleGroups = update_rule_group
     getChanges = get_changes
+    signalChangesExternal = signal_changes
+    queryActionsMixin0 = query_actions
     queryChanges = query_changes
     highVolumeQueryChanges = query_changes_scroll
     queryRuleGroups = query_rule_groups
