@@ -59,6 +59,7 @@ from ._device_control_policies import _device_control_policies_endpoints
 from ._discover import _discover_endpoints
 from ._drift_indicators import _drift_indicators_endpoints
 from ._event_streams import _event_streams_endpoints
+from ._exposure_management import _exposure_management_endpoints
 from ._falcon_complete_dashboard import _falcon_complete_dashboard_endpoints
 from ._falcon_container import _falcon_container_endpoints
 from ._falconx_sandbox import _falconx_sandbox_endpoints
@@ -129,6 +130,7 @@ api_endpoints.extend(_device_control_policies_endpoints)
 api_endpoints.extend(_discover_endpoints)
 api_endpoints.extend(_drift_indicators_endpoints)
 api_endpoints.extend(_event_streams_endpoints)
+api_endpoints.extend(_exposure_management_endpoints)
 api_endpoints.extend(_falcon_complete_dashboard_endpoints)
 api_endpoints.extend(_falcon_container_endpoints)
 api_endpoints.extend(_falconx_sandbox_endpoints)
