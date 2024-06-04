@@ -427,7 +427,7 @@ _intel_endpoints = [
         "type": "string",
         "description": "The rule news report type. Accepted values:\n\nsnort-suricata-master\n\nsnort-"
         "suricata-update\n\nsnort-suricata-changelog\n\nyara-master\n\nyara-update\n\nyara-changelog\n\ncommon-event-"
-        "format\n\nnetwitness",
+        "format\n\nnetwitness\n\ncql-master\n\ncql-update\n\ncql-changelog",
         "name": "type",
         "in": "query",
         "required": True
@@ -751,7 +751,7 @@ _intel_endpoints = [
         "type": "string",
         "description": "The rule news report type. Accepted values:\n\nsnort-suricata-master\n\nsnort-"
         "suricata-update\n\nsnort-suricata-changelog\n\nyara-master\n\nyara-update\n\nyara-changelog\n\ncommon-event-"
-        "format\n\nnetwitness",
+        "format\n\nnetwitness\n\ncql-master\n\ncql-update\n\ncql-changelog",
         "name": "type",
         "in": "query",
         "required": True
