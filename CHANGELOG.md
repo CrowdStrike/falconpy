@@ -1,3 +1,156 @@
+# Version 1.4.4
+## Added features and functionality
++ Added: Added new __API Integrations__ service collection with two new operations, __GetCombinedPluginConfigs__ and __ExecuteCommand__.
+    - `__init__.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_api_integrations.py`
+    - `_payload/__init__.py`
+    - `_payload/_api_integrations.py`
+    - `api_integrations.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_api_integrations.py`
+    - `tests/test_uber.py`
+
++ Added: Added new allowed parameters for the _GetCSPMAwsAccountScriptsAttachment_ operation within the __CSPM Registration__ service collection.
+    - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
+
++ Added: Added one new operation (_update_rules_v2_) to the __Custom IOA__ service collection.
+    - `_endpoint/_custom_ioa.py`
+    - `_endpoint/deprecated/_custom_ioa.py`
+    - `custom_ioa.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_custom_ioa.py`
+
++ Added: Added new allowed parameters for the _GetD4CAWSAccountScriptsAttachment_ operation within the __D4C Registration__ service collection.
+    - `_endpoint/_d4c_registration.py`
+    - `d4c_registration.py`
+
++ Added: Added new __Exposure Management__ service collection with 6 new operations.
+    - _aggregate_external_assets_
+    - _blob_download_external_assets_
+    - _blob_preview_external_assets_
+    - _get_external_assets_
+    - _patch_external_assets_
+    - _query_external_assets_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_exposure_management.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_exposure_management.py`
+    - `_payload/__init__.py`
+    - `_payload/_exposure_management.py`
+    - `__init__.py`
+    - `exposure_management.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_exposure_management.py`
+
++ Added: Added five new operations to the __FileVantage__ service collection.
+    - _getActionsMixin0_
+    - _startActions_
+    - _getContents_
+    - _signalChangesExternal_
+    - _queryActionsMixin0_
+    - `_constant/__init__.py`
+    - `_endpoint/_filevantage.py`
+    - `_payload/__init__.py`
+    - `_payload/_filevantage.py`
+    - `filevantage.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_filevantage.py`
+
++ Added: Added `cql-master`, `cql-update`, and `cql-changelog` as allowed options for the `type` keyword within the _GetLatestIntelRuleFile_ and _QueryIntelRuleIds_ operations (__Intel__ service collection).
+    - `_endpoint/_intel.py`
+    - `intel.py`
+
++ Added: Added one new operation (_RequestDeviceEnrollmentV4_) to the __Mobile Enrollment__ service collection.
+    - `_endpoint/_mobile_enrollment.py`
+    - `_payload/__init__.py`
+    - `_payload/_mobile_enrollment.py`
+    - `mobile_enrollment.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_mobile_enrollment.py`
+
++ Added: Added new __ThreatGraph__ service collection with 5 new operations.
+    - `__init__.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_threatgraph.py`
+    - `_util/_functions.py`
+    - `_util/uber.py`
+    - `threatgraph.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_threatgraph.py`
+
++ Added: Added two new operations (_WorkflowActivitiesCombined_ and _WorkflowTriggersCombined_) to the __Workflows__ service collection.
+    - `_endpoint/_workflows.py`
+    - `workflows.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_workflows.py`
+
+## Issues resolved
++ Fixed: Resolved parameter abstraction issue when leveraging form data payloads with certain API operations. Closes #1160.
+    - `_util/__init__.py`
+    - `_util/_functions.py`
+    - `falconx_sandbox.py`
+    - `foundry_logscale.py`
+    - `message_center.py`
+    - `sample_uploads.py`
+    - `workflows.py`
+    > Unit testing expanding to complete code coverage.
+    - `test_falconx_sandbox.py`
+    - `test_message_center.py`
+    - `test_sample_uploads.py`
+    - `test_workflows.py`
+    - Thanks go out to @Destom for reporting this issue! 🙇
+
++ Fixed: Resolved collision with the `action` keyword argument within the Uber Class and API operations using this string as a key. Closes #1161.
+    - `_util/_uber.py`
+    - `api_complete/_advanced.py`
+    - Thanks go out to @Don-Swanson-Adobe for identifying and reporting this issue! 🙇
+
++ Fixed: Resolved potential ValueError when providing invalid values to version comparison method.
+    - `_version.py`
+    > Unit testing expanded to complete code coverage.
+    - `test_timeout.py`
+
+## Other
++ Adjusted: Unit testing adjusted to allow 204 responses from _DeletePolicy_ operation testing.
+    - `test_image_assessment_policies.py`
+
++ Expanded: Unit testing expanded to test context authentication when `base_url` is not specified.
+    - `test_zero_trust_assessment.py`
+
++ Updated: Updated enumerator for the `sort` parameter definition for the _QueryCasesIdsByFilter_ operation (__Message Center__ service collection).
+    - `_endpoint/_message_center.py`
+
++ Updated: Updated `filter` parameter description for the _query_iot_hosts_ operation within the __Discover__ service collection.
+    - `_endpoint/_discover.py`
+    - `_endpoint/deprecated/_discover.py`
+
++ Removed: Removed one operation from the __Drift Indicators__ service collection.
+    - _ReadDriftIndicatorEntities_
+    - `_endpoint/_drift_indicators.py`
+    - `drift_indicators.py`
+    > Unit testing revised to complete code coverage.
+    - `tests/test_drift_indicators.py`
+
++ Updated: Updated `sort` parameter description for the _query_rulesMixin0_ operation within the __Custom IOA__ service collection.
+    - `_endpoint/_custom_ioa.py`
+    - `_endpoint/deprecated/_custom_ioa.py`
+
++ Removed: Removed three operations from the __Kubernetes Protection__ service collection.
+    - _ReadContainerEnrichment_
+    - _ReadDeploymentEnrichment_
+    - _ReadPodEnrichment_
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+    > Unit testing revised to complete code coverage.
+    - `tests/test_kubernetes_protection.py`
+
++ Updated: Updated `filter` parameter description for the _ReadRunningContainerImages_ operation within the __Kubernetes Protection__ service collection.
+    - `_endpoint/_kubernetes_protection.py`
+
+---
+
 # Version 1.4.3
 ## Added features and functionality
 + Added: Context Authentication (supports Foundry execution environments).
