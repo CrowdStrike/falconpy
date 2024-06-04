@@ -271,8 +271,16 @@ class CSPMRegistration(ServiceClass):
         to grant access to CrowdStrike for their AWS environment.
 
         Keyword arguments:
-        ids -- AWS Account IDs to retrieve script attachments for. String or list of strings.
-        parameters -- full parameters payload, not required if using other keywords.
+        accounts -- List of accounts to register. String or list of strings.
+        aws_profile -- The AWS profile to be used during registration. String.
+        behavior_assessment_enabled -- Enable behavior assessment. String. Allowed values: true, false
+        custom_role_name -- The custom IAM role to be used during registration. String.
+        ids -- List of AWS Account IDs to retrieve the script for. String or list of strings.
+        organization_id -- The AWS organization ID to be registered. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+        sensor_management_enabled -- Enable sensor management. String. Allowed values: true, false
+        template -- Template to be rendered. String. Allowed values: aws-bash, aws-terraform
+        use_existing_cloudtrail -- Use the existing cloudtrail log. String. Allowed values: true, false
 
         This method only supports keywords for providing arguments.
 
