@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import process_service_request, force_default
+from ._payload import mobile_enrollment_payload
 from ._service_class import ServiceClass
 from ._endpoint._mobile_enrollment import _mobile_enrollment_endpoints as Endpoints
 
@@ -68,8 +69,8 @@ class MobileEnrollment(ServiceClass):
         Keyword arguments
         ----
         action_name : str
-            Action to perform. String. Allowed values: enroll, re-enroll.
-        body : str
+            Action to perform. Allowed values: enroll, re-enroll.
+        body : dict
             Full body payload, not required if using `email_addresses` and `expires_at` keywords.
                 {
                     "email_addresses": [
@@ -78,12 +79,12 @@ class MobileEnrollment(ServiceClass):
                     "expires_at": "2022-08-07T02:37:16.797Z"
                 }
         email_addresses : str or list[str] (required)
-            Email addresses to use for enrollment. String or list of strings.
+            Email addresses to use for enrollment.
         expires_at : str (required)
             Date enrollment expires. UTC date format.
         filter : str
             FQL filter.
-        parameters : str
+        parameters : dict
             Full parameters payload, not required if using `action_name` keyword.
 
         Arguments
@@ -96,13 +97,7 @@ class MobileEnrollment(ServiceClass):
             Dictionary containing API response.
         """
         if not body:
-            provided = kwargs.get("email_addresses", None)
-            if provided:
-                if isinstance(provided, str):
-                    provided = provided.split(",")
-                body["email_addresses"] = provided
-            if kwargs.get("expires_at", None):
-                body["expires_at"] = kwargs.get("expires_at", None)
+            body = mobile_enrollment_payload(kwargs)
 
         return process_service_request(
             calling_object=self,
@@ -113,10 +108,65 @@ class MobileEnrollment(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def device_enroll_v4(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Trigger on-boarding process for a mobile device.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/mobile-enrollment/RequestDeviceEnrollmentV4
+
+        Keyword arguments
+        ----
+        action_name : str
+            Action to perform. Allowed values: enroll, re-enroll.
+        body : dict
+            Full body payload, not required if using `email_addresses` and `expires_at` keywords.
+                {
+                    "email_addresses": [
+                        "string"
+                    ],
+                    "enrollment_type": "string",
+                    "expires_at": "2022-08-07T02:37:16.797Z"
+                }
+        email_addresses : str or list[str] (required)
+            Email addresses to use for enrollment.
+        enrollment_type : str
+            Mobile enrollment type.
+        expires_at : str (required)
+            Date enrollment expires. UTC date format.
+        filter : str
+            FQL filter.
+        parameters : dict
+            Full parameters payload, not required if using `action_name` keyword.
+
+        Arguments
+        ----
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary containing API response.
+        """
+        if not body:
+            body = mobile_enrollment_payload(kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RequestDeviceEnrollmentV4",
+            body=body,
+            keywords=kwargs,
+            params=parameters
+            )
+
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here for
     # backwards compatibility / ease of use purposes
     RequestDeviceEnrollmentV3 = device_enroll
+    RequestDeviceEnrollmentV4 = device_enroll_v4
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
