@@ -88,6 +88,7 @@ from ._api_request import (
     RequestValidator
     )
 from .alerts import Alerts
+from .api_integrations import APIIntegrations
 from .api_complete import APIHarness, APIHarnessV2
 from .cloud_snapshots import CloudSnapshots
 from .configuration_assessment_evaluation_logic import ConfigurationAssessmentEvaluationLogic
@@ -195,7 +196,7 @@ __all__ = [
     "SDKDeprecationWarning", "ConfigurationAssessmentEvaluationLogic", "ConfigurationAssessment",
     "ContainerAlerts", "ContainerDetections", "ContainerImages", "ContainerPackages",
     "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers",
-    "ImageAssessmentPolicies"
+    "ImageAssessmentPolicies", "APIIntegrations"
     ]
 """
 This is free and unencumbered software released into the public domain.
