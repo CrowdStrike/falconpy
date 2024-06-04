@@ -269,6 +269,23 @@ _custom_ioa_endpoints = [
     ]
   ],
   [
+    "update-rules-v2",
+    "PATCH",
+    "/ioarules/entities/rules/v2",
+    "Update name, description, enabled or field_values for individual rules within a rule group. The v1 flavor "
+    " of this call requires the caller to specify the complete state for all the rules in the rule group, instead "
+    "the v2 flavor will accept the subset of rules in the rule group and apply the attribute updates to the subset "
+    "of rules in the rule group.Return the updated rules.",
+    "custom_ioa",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "query-patterns",
     "GET",
     "/ioarules/queries/pattern-severities/v1",

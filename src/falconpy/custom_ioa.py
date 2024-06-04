@@ -527,6 +527,96 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
+    def update_rules_v2(self: object,
+                        body: dict = None,
+                        **kwargs
+                        ) -> Dict[str, Union[int, dict]]:
+        """Update rules within a rule group. Return the updated rules.
+
+        Keyword arguments:
+        body -- full body payload in JSON format, not required if using other keywords.
+                {
+                    "comment": "string",
+                    "rule_updates": [
+                        {
+                            "description": "string",
+                            "disposition_id": 0,
+                            "enabled": true,
+                            "field_values": [
+                                {
+                                    "final_value": "string",
+                                    "label": "string",
+                                    "name": "string",
+                                    "type": "string",
+                                    "value": "string",
+                                    "values": [
+                                        {
+                                            "label": "string",
+                                            "value": "string"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "instance_id": "string",
+                            "name": "string",
+                            "pattern_severity": "string",
+                            "rulegroup_version": 0
+                        }
+                    ],
+                    "rulegroup_id": "string",
+                    "rulegroup_version": 0
+                }
+        comment -- Comment related to this update. String.
+        rulegroup_id -- ID of the rule group. String.
+        rule_updates -- JSON dictionary representing the rule updates to
+                        be performed. Only one rule update can be done
+                        in this manner. Dictionary.
+                        {
+                            "description": "string",
+                            "disposition_id": 0,
+                            "enabled": true,
+                            "field_values": [
+                                {
+                                    "final_value": "string",
+                                    "label": "string",
+                                    "name": "string",
+                                    "type": "string",
+                                    "value": "string",
+                                    "values": [
+                                        {
+                                            "label": "string",
+                                            "value": "string"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "instance_id": "string",
+                            "name": "string",
+                            "pattern_severity": "string",
+                            "rulegroup_version": 0
+                        }
+        rulegroup_version -- Version of the rule group. Integer.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-ioa/update-rules-v2
+        """
+        if not body:
+            body = ioa_custom_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="update_rules_v2",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
     def validate(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Validate field values and check for matches if a test string is provided.
 
