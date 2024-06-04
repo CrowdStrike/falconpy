@@ -383,58 +383,6 @@ _kubernetes_protection_endpoints = [
     ]
   ],
   [
-    "ReadContainerEnrichment",
-    "GET",
-    "/container-security/aggregates/enrichment/containers/entities/v1",
-    "Retrieve container enrichment data",
-    "kubernetes_protection",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "csv",
-        "description": "One or more container ids for which to retrieve enrichment info",
-        "name": "container_id",
-        "in": "query",
-        "required": True
-      },
-      {
-        "type": "string",
-        "description": "Supported filters:  last_seen",
-        "name": "filter",
-        "in": "query"
-      }
-    ]
-  ],
-  [
-    "ReadDeploymentEnrichment",
-    "GET",
-    "/container-security/aggregates/enrichment/deployments/entities/v1",
-    "Retrieve deployment enrichment data",
-    "kubernetes_protection",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "csv",
-        "description": "One or more deployment ids for which to retrieve enrichment info",
-        "name": "deployment_id",
-        "in": "query",
-        "required": True
-      },
-      {
-        "type": "string",
-        "description": "Supported filters:  last_seen",
-        "name": "filter",
-        "in": "query"
-      }
-    ]
-  ],
-  [
     "ReadNodeEnrichment",
     "GET",
     "/container-security/aggregates/enrichment/nodes/entities/v1",
@@ -449,32 +397,6 @@ _kubernetes_protection_endpoints = [
         "collectionFormat": "csv",
         "description": "One or more node names for which to retrieve enrichment info",
         "name": "node_name",
-        "in": "query",
-        "required": True
-      },
-      {
-        "type": "string",
-        "description": "Supported filters:  last_seen",
-        "name": "filter",
-        "in": "query"
-      }
-    ]
-  ],
-  [
-    "ReadPodEnrichment",
-    "GET",
-    "/container-security/aggregates/enrichment/pods/entities/v1",
-    "Retrieve pod enrichment data",
-    "kubernetes_protection",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "csv",
-        "description": "One or more pod ids for which to retrieve enrichment info",
-        "name": "pod_id",
         "in": "query",
         "required": True
       },
