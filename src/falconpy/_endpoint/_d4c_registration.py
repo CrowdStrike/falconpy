@@ -184,6 +184,74 @@ _d4c_registration_endpoints = [
         "description": "AWS account IDs",
         "name": "ids",
         "in": "query"
+      },
+      {
+        "enum": [
+          "aws-bash",
+          "aws-terraform"
+        ],
+        "type": "string",
+        "description": "Template to be rendered",
+        "name": "template",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The list of accounts to register",
+        "name": "accounts",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "true",
+          "false"
+        ],
+        "type": "string",
+        "name": "behavior_assessment_enabled",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "true",
+          "false"
+        ],
+        "type": "string",
+        "name": "sensor_management_enabled",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "true",
+          "false"
+        ],
+        "type": "string",
+        "name": "use_existing_cloudtrail",
+        "in": "query"
+      },
+      {
+        "pattern": ".*",
+        "type": "string",
+        "description": "The AWS organization ID to be registered",
+        "name": "organization_id",
+        "in": "query"
+      },
+      {
+        "pattern": ".*",
+        "type": "string",
+        "description": "The AWS profile to be used during registration",
+        "name": "aws_profile",
+        "in": "query"
+      },
+      {
+        "pattern": ".*",
+        "type": "string",
+        "description": "The custom IAM role to be used during registration",
+        "name": "custom_role_name",
+        "in": "query"
       }
     ]
   ],
