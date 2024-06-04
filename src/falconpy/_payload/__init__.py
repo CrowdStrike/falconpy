@@ -27,6 +27,7 @@ from ._generic import (
     simple_action_parameter,
     token_settings_payload
     )
+from ._api_integrations import api_plugin_command_payload
 from ._host_group import host_group_create_payload, host_group_update_payload
 from ._recon import (
     recon_action_payload,
@@ -125,5 +126,5 @@ __all__ = [
     "workflow_template_payload", "foundry_execute_search_payload", "foundry_dynamic_search_payload",
     "image_policy_payload", "image_exclusions_payload", "image_group_payload",
     "workflow_definition_payload", "workflow_human_input", "workflow_mock_payload",
-    "cspm_service_account_validate_payload"
+    "cspm_service_account_validate_payload", "api_plugin_command_payload"
 ]
