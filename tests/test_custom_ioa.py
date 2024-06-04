@@ -49,6 +49,12 @@ class TestCustomIOA:
                                                 disposition_id=1,
                                                 ruletype_id="12345678"
                                                 ),
+            "update_rules_v2": falcon.update_rules_v2(enabled=True,
+                                                      rulegroup_version=1,
+                                                      rule_updates={"something": "something-darkside"},
+                                                      disposition_id=1,
+                                                      ruletype_id="12345678"
+                                                      ),    
             "validate": falcon.validate(),
             "query_patterns": falcon.query_patterns(),
             "query_platforms": falcon.query_platformsMixin0(),
