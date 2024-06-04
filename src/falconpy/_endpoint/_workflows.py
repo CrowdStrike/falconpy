@@ -38,6 +38,42 @@ For more information, please refer to <https://unlicense.org>
 
 _workflows_endpoints = [
   [
+    "WorkflowActivitiesCombined",
+    "GET",
+    "/workflows/combined/activities/v1",
+    "Search for activities by name. Returns all supported activities if no filter specified",
+    "workflows",
+    [
+      {
+        "type": "string",
+        "description": "FQL query specifying filter parameters.",
+        "name": "filter",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "type": "string",
+        "description": "Starting pagination offset of records to return.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Maximum number of records to return.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
+        "type": "string",
+        "description": "Sort items by providing a comma separated list of property and direction (eg "
+        "name.desc,time.asc). If direction is omitted, defaults to descending.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "WorkflowDefinitionsCombined",
     "GET",
     "/workflows/combined/definitions/v1",
@@ -106,6 +142,23 @@ _workflows_endpoints = [
         "name.desc,time.asc). If direction is omitted, defaults to descending.",
         "name": "sort",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "WorkflowTriggersCombined",
+    "GET",
+    "/workflows/combined/triggers/v1",
+    "Search for triggers by namespaced identifier, i.e. FalconAudit, Detection, or "
+    "FalconAudit/Detection/Status. Returns all triggers if no filter specified",
+    "workflows",
+    [
+      {
+        "type": "string",
+        "description": "FQL query specifying filter parameters.",
+        "name": "filter",
+        "in": "query",
+        "allowEmptyValue": True
       }
     ]
   ],
