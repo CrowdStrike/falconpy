@@ -468,6 +468,8 @@ class Intel(ServiceClass):
                 netwitness                  yara-changelog
                 snort-suricata-changelog    yara-master
                 snort-suricata-master       yara-update
+                cql-master                  cql-changelog
+                cql-update
 
         Arguments: When not specified, the first argument to this method is assumed to be 'type'.
                    All others are ignored.
@@ -742,6 +744,8 @@ class Intel(ServiceClass):
                 netwitness                  yara-changelog
                 snort-suricata-changelog    yara-master
                 snort-suricata-master       yara-update
+                cql-master                  cql-changelog
+                cql-update
 
         This method only supports keywords for providing arguments.
 
