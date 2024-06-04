@@ -65,7 +65,7 @@ def handle_field(tgt: str, kwa: dict, fld: str) -> str:
 
 def handle_body_payload_ids(kwa: dict) -> dict:
     """Migrates the IDs parameter list over to the body payload."""
-    if kwa.get("action", None) in PREFER_IDS_IN_BODY:
+    if kwa.get("api_operation", None) in PREFER_IDS_IN_BODY:
         if kwa.get("ids", None):
             # Handle the GET to POST method redirection for passed IDs
             if not kwa.get("body", {}).get("ids", None):
@@ -115,12 +115,12 @@ def handle_container_operations(kwa: dict, base_string: str) -> Tuple[dict, str,
     """Handle Base URLs and keyword arguments for container registry operations."""
     # Default to non-container registry operations
     do_container = False
-    if kwa.get("action", None) in MOCK_OPERATIONS:
+    if kwa.get("api_operation", None) in MOCK_OPERATIONS:
         for base in [burl for burl in dir(BaseURL) if "__" not in burl]:
             if BaseURL[base].value == base_string.replace("https://", ""):
                 base_string = f"https://{ContainerBaseURL[base].value}"
                 do_container = True
-        if kwa.get("action", None) == "ImageMatchesPolicy":
+        if kwa.get("api_operation", None) == "ImageMatchesPolicy":
             if "parameters" not in kwa:
                 kwa["parameters"] = {}
             kwa["parameters"]["policy_type"] = "image-prevention-policy"
