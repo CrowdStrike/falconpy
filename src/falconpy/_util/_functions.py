@@ -246,7 +246,7 @@ def service_request(caller: ServiceClass = None, **kwargs) -> Union[Dict[str, Un
             # do_pythonic: Optional[bool] = caller.pythonic
         except AttributeError:
             kwargs["pythonic"] = None
-
+    # pylint: disable=E0606
     return perform_request(proxy=proxy,
                            timeout=timeout,
                            user_agent=user_agent,
@@ -719,6 +719,9 @@ def handle_path_variables(passed: dict, route_url: str):
         if passed_object_key:
             collect_args["object_key"] = str(passed_object_key)
         route_url = route_url.format(**collect_args)
+    passed_vertex_type = passed.get("vertex_type", None)
+    if passed_vertex_type:
+        route_url = route_url.format(str(passed_vertex_type))
 
     return route_url
 

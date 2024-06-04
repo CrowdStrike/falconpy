@@ -89,7 +89,10 @@ def scrub_target(oper: str, scrubbed: str, kwas: dict) -> str:
         "GetObject": ["collection_name", "object_key"],
         "PutObject": ["collection_name", "object_key"],
         "DeleteObject": ["collection_name", "object_key"],
-        "GetObjectMetadata": ["collection_name", "object_key"]
+        "GetObjectMetadata": ["collection_name", "object_key"],
+        "combined_summary_get": ["vertex_type"],
+        "entities_vertices_get": ["vertex_type"],
+        "entities_vertices_getv2": ["vertex_type"]
     }
     for field_value, field_names in field_mapping.items():
         if oper == field_value:  # Only perform replacements on mapped operation IDs.
