@@ -137,8 +137,10 @@ class APIHarnessV2(UberInterface):
 
         Keyword arguments
         ----
-        action : str (Default: None)
+        api_operation : str (Default: None)
             API Operation ID to perform
+            Please note: The keyword "action" will also be accepted but
+            may collide with operation parameters and is not recommended.
         parameters : dict (Default: {})
             Parameter payload (Query string)
         body : dict (Default: {})
@@ -170,21 +172,23 @@ class APIHarnessV2(UberInterface):
 
         Arguments
         ----
-        The first argument passed to this method is assumed to be 'action'. All others are ignored.
+        The first argument passed to this method is assumed to be 'api_operation'. All others are ignored.
 
         Returns
         ----
         dict or bytes
             Dictionary or binary object containing API response depending on requested operation.
         """
+        # Issue #1161 - operation is specified using the action keyword
+        if kwargs.get("action", None) and not kwargs.get("api_operation", None):
+            kwargs["api_operation"] = kwargs.get("action")
         try:
-            if not kwargs.get("action", None):
+            if not kwargs.get("api_operation", None):
                 # Assume they're passing it in as the first argument.
-                kwargs["action"] = args[0]
+                kwargs["api_operation"] = args[0]
         except IndexError:
             pass  # They didn't specify an action, try for an override instead.
-
-        uber_command = [a for a in self.commands if a[0] == kwargs.get("action", None)]
+        uber_command = [a for a in self.commands if a[0] == kwargs.get("api_operation", None)]
         if kwargs.get("override", None):
             uber_command = [["Manual"] + kwargs["override"].split(",")]
         if uber_command:
