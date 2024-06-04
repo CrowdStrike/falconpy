@@ -740,58 +740,6 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_container_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-        """Retrieve container enrichment data.
-
-        Keyword arguments:
-        container_id -- One or more container ids for which to retrieve enrichment info
-        filter -- Supported filters:  last_seen
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: GET
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadContainerEnrichment
-        """
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="ReadContainerEnrichment",
-            keywords=kwargs,
-            params=parameters
-            )
-
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_deployment_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-        """Retrieve deployment enrichment data.
-
-        Keyword arguments:
-        deployment_id -- One or more deployment ids for which to retrieve enrichment info
-        filter -- Supported filters:  last_seen
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: GET
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadDeploymentEnrichment
-        """
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="ReadDeploymentEnrichment",
-            keywords=kwargs,
-            params=parameters
-            )
-
-    @force_default(defaults=["parameters"], default_types=["dict"])
     def read_node_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve node enrichment data.
 
@@ -813,32 +761,6 @@ class KubernetesProtection(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="ReadNodeEnrichment",
-            keywords=kwargs,
-            params=parameters
-            )
-
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_pod_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-        """Retrieve pod enrichment data.
-
-        Keyword arguments:
-        pod_id -- One or more pod ids for which to retrieve enrichment info
-        filter -- Supported filters:  last_seen
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: GET
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadPodEnrichment
-        """
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="ReadPodEnrichment",
             keywords=kwargs,
             params=parameters
             )
@@ -2086,10 +2008,7 @@ class KubernetesProtection(ServiceClass):
     ReadDeploymentsByDateRangeCount = read_deployment_counts_by_date_range
     ReadDeploymentCount = read_deployment_count
     ReadClusterEnrichment = read_cluster_enrichment
-    ReadContainerEnrichment = read_container_enrichment
-    ReadDeploymentEnrichment = read_deployment_enrichment
     ReadNodeEnrichment = read_node_enrichment
-    ReadPodEnrichment = read_pod_enrichment
     ReadDistinctContainerImageCount = read_distinct_image_count
     ReadContainerImagesByMostUsed = read_images_by_most_used
     ReadKubernetesIomByDateRange = read_iom_count_by_date_range
