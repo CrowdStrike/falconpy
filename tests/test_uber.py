@@ -356,6 +356,10 @@ class TestUber:
                     and falcon.token
                     )
 
+    @pytest.mark.skipif("laggar" in falcon.base_url, reason="US-GOV-1 testing disabled")
+    def test_vertex_type_path_variable(self):
+        assert(falcon.command("entities_vertices_getv2", vertex_type="incident", ids="whatever")["status_code"]==400)
+
     def test_uber_deprecated_attributes(self):
         _success = False
         falcon.token_renew_window = 180
