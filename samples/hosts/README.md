@@ -553,7 +553,7 @@ This script retains the original functionality of host_search.py above, but adds
 
 This script will also ignore comments in a hostname file, thus keeping the output.csv cleaner.
 
-To read an input file of hostnames, the -f option (used in the original host_search.py) has been changed to -i. This made more sense considering the more "insensitive" nature of the search, and makes a visual idendification of the full command easier if you use both the original host_search.py, and the host_search_advanced.py. A potential use case could be to discover hosts using the 'advanced' search, in order to reconcile with hostname files for use with the original host search.
+To read an input file of hostnames, the -f option (used in the original host_search.py) has been changed to -i. This made more sense considering the more "insensitive" nature of the search, and makes a visual identification of the full command easier if you use both the original host_search.py, and the host_search_advanced.py. A potential use case could be to discover hosts using the 'advanced' search, in order to reconcile with hostname files for use with the original host search.
 
 #### Command-line help
 Command-line help is available via the `-h` argument.
