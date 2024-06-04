@@ -1365,3 +1365,17 @@ instantiation
 UpdateCSPMGCPServiceAccountsExt
 UpdateD
 RoemIko
+GetCombinedPluginConfigs
+CAWSAccountScriptsAttachment
+getActionsMixin
+startActions
+getContents
+signalChangesExternal
+queryActionsMixin
+RequestDeviceEnrollmentV
+ThreatGraph
+WorkflowActivitiesCombined
+WorkflowTriggersCombined
+Destom
+ValueError
+QueryCasesIdsByFilter
