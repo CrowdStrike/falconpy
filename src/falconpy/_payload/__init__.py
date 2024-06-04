@@ -48,6 +48,7 @@ from ._container import (
 from ._detects import update_detects_payload
 from ._incidents import incident_action_parameters
 from ._ioa import ioa_exclusion_payload, ioa_custom_payload
+from ._mobile_enrollment import mobile_enrollment_payload
 from ._prevention_policy import prevention_policy_payload
 from ._sensor_update_policy import sensor_policy_payload
 from ._response_policy import response_policy_payload
@@ -126,5 +127,5 @@ __all__ = [
     "workflow_template_payload", "foundry_execute_search_payload", "foundry_dynamic_search_payload",
     "image_policy_payload", "image_exclusions_payload", "image_group_payload",
     "workflow_definition_payload", "workflow_human_input", "workflow_mock_payload",
-    "cspm_service_account_validate_payload", "api_plugin_command_payload"
+    "cspm_service_account_validate_payload", "api_plugin_command_payload", "mobile_enrollment_payload"
 ]

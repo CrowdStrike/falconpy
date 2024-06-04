@@ -20,9 +20,18 @@ AllowedResponses = [200, 201, 403, 404, 429]
 class TestMobileEnrollment:
     """Class to test the Mobile Enrollment Service Class."""
 
-    def test_get_credentials(self):
+    def test_device_enroll(self):
         """Pytest harness hook"""
         result = falcon.device_enroll(
+            action_name="re-enroll",
+            email_addresses="no_reply@crowdstrike.com",
+            expires_at=(datetime.utcnow() + timedelta(minutes=5)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        )
+        assert bool(result["status_code"] in AllowedResponses) is True
+
+    def test_device_enroll_v4(self):
+        """Pytest harness hook"""
+        result = falcon.device_enroll_v4(
             action_name="re-enroll",
             email_addresses="no_reply@crowdstrike.com",
             expires_at=(datetime.utcnow() + timedelta(minutes=5)).strftime("%Y-%m-%dT%H:%M:%SZ")

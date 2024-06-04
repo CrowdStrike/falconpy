@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library.
+"""Internal payload handling library - Mobile Enrollment Payloads.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -36,67 +36,28 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 
-_mobile_enrollment_endpoints = [
-  [
-    "RequestDeviceEnrollmentV3",
-    "POST",
-    "/enrollments/entities/details/v3",
-    "Trigger on-boarding process for a mobile device",
-    "mobile_enrollment",
-    [
-      {
-        "enum": [
-          "enroll",
-          "re-enroll"
+
+def mobile_enrollment_payload(passed_keywords: dict):
+    """Craft a properly formatted mobile enrollment payload.
+
+    {
+        "email_addresses": [
+            "string"
         ],
-        "type": "string",
-        "description": "Action to perform",
-        "name": "action_name",
-        "in": "query",
-        "allowEmptyValue": True
-      },
-      {
-        "type": "string",
-        "description": "FQL filter",
-        "name": "filter",
-        "in": "query"
-      },
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "RequestDeviceEnrollmentV4",
-    "POST",
-    "/enrollments/entities/details/v4",
-    "Trigger on-boarding process for a mobile device",
-    "mobile_enrollment",
-    [
-      {
-        "enum": [
-          "enroll",
-          "re-enroll"
-        ],
-        "type": "string",
-        "description": "Action to perform",
-        "name": "action_name",
-        "in": "query",
-        "allowEmptyValue": True
-      },
-      {
-        "type": "string",
-        "description": "FQL filter",
-        "name": "filter",
-        "in": "query"
-      },
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ]
-]
+        "enrollment_type": "string",
+        "expires_at": "UTC date string"
+    }
+    """
+    returned = {}
+    keys = ["email_addresses", "enrollment_type", "expires_at"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            if key == "email_addresses":
+                provided = passed_keywords.get(key, None)
+                if isinstance(provided, str):
+                    provided = provided.split(",")
+                returned["email_addresses"] = provided
+            else:
+                returned[key] = passed_keywords.get(key, None)
+
+    return returned
