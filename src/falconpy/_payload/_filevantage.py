@@ -79,6 +79,32 @@ def filevantage_policy_payload(passed_keywords: dict) -> dict:
     return returned
 
 
+def filevantage_start_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted FileVantage policy body payload.
+
+    {
+        "change_ids": [
+            "string"
+        ],
+        "comment": "string",
+        "operation": "string"
+    }
+    """
+    returned = {}
+    keys = ["change_ids", "comment", "operation"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            if key == "change_ids":
+                changes = passed_keywords.get(key, None)
+                if isinstance(changes, str):
+                    changes = changes.split(",")
+                returned[key] = changes
+            else:
+                returned[key] = passed_keywords.get(key, None)
+
+    return returned
+
+
 def filevantage_scheduled_exclusion_payload(passed_keywords: dict) -> dict:
     """Craft a properly formatted FileVantage scheduled exclusion body payload.
 

@@ -72,7 +72,12 @@ class TestFileVantage:
             "update_rule_group" : falcon.update_rule_group(),
             "query_policies": falcon.query_policies(),
             "query_scheduled_exclusions": falcon.query_scheduled_exclusions(),
-            "query_rule_groups": falcon.query_rule_groups(type="WindowsFiles")
+            "query_rule_groups": falcon.query_rule_groups(type="WindowsFiles"),
+            "getActionsMixin0": falcon.get_actions(ids="123456"),
+            "startActions": falcon.start_actions(change_ids="123456", comment="whatever", operation="whatever"),
+            "getContents": falcon.get_contents(id="123456", compress=True),
+            "signalChangesExternal": falcon.signal_changes("123456"),
+            "queryActionsMixin0": falcon.query_actions()
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
