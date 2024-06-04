@@ -113,25 +113,6 @@ _drift_indicators_endpoints = [
     ]
   ],
   [
-    "ReadDriftIndicatorEntities",
-    "GET",
-    "/container-security/entities/drift-indicators/v1",
-    "Retrieve Drift Indicator entities identified by the provided IDs",
-    "drift_indicators",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "csv",
-        "description": "Search Drift Indicators by ids - The maximum amount is 100 IDs",
-        "name": "ids",
-        "in": "query"
-      }
-    ]
-  ],
-  [
     "SearchDriftIndicators",
     "GET",
     "/container-security/queries/drift-indicators/v1",
