@@ -69,24 +69,32 @@ def version(compare: str = None, agent_string: bool = None):
     returned = _VERSION
     if agent_string:
         returned = f"{_TITLE}/{str(_VERSION)}"
-
-    if compare:
-        returned = False
+    else:
         ver = _VERSION.split(".")
-        chk = compare.split(".")
-        chk_minor = 0
-        chk_patch = 0
-        if chk:
-            chk_major = chk[0]
-        if len(chk) > 1:
-            chk_minor = chk[1]
-        if len(chk) > 2:
-            chk_patch = int(chk[2])
         major_minor = float(f"{ver[0]}.{ver[1]}")
-        chk_major_minor = float(f"{chk_major}.{chk_minor}")
-        if major_minor > chk_major_minor:
-            returned = True
-        elif major_minor == chk_major_minor and int(ver[2]) >= chk_patch:
-            returned = True
+        if isinstance(compare, str):
+            compare = compare.strip()
+        elif isinstance(compare, (int, float)):
+            compare = str(compare)
+        if compare:
+            returned = False
+            chk = compare.split(".")
+            chk_major = 0
+            chk_minor = 0
+            chk_patch = 0
+            if chk:
+                chk_major = chk[0]
+            if len(chk) > 1:
+                chk_minor = chk[1]
+            if len(chk) > 2:
+                chk_patch = int(chk[2])
+            try:
+                chk_major_minor = float(f"{chk_major}.{chk_minor}")
+            except ValueError as bad_value:
+                raise ValueError("Invalid version comparison value specified") from bad_value
+            if major_minor > chk_major_minor:
+                returned = True
+            elif major_minor == chk_major_minor and int(ver[2]) >= chk_patch:
+                returned = True
 
     return returned

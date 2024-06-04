@@ -9,7 +9,7 @@ from tests import test_authorization as Authorization
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
 from falconpy import CloudConnectAWS
-from falconpy import OAuth2
+from falconpy import OAuth2, version
 
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
@@ -122,3 +122,14 @@ class TestTimeouts:
 
     def test_LegacyTimeout(self):
         assert self.timeout_legacy_auth() is True
+
+    def test_version_compare(self):
+        assert version(compare=1.4)
+
+    def test_bad_version_compare(self):
+        _success = False
+        try:
+            version(compare="$")
+        except ValueError:
+            _success = True
+        assert _success
