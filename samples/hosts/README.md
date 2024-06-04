@@ -9,6 +9,7 @@ The examples in this folder focus on leveraging CrowdStrike's Hosts API to perfo
 - [Get Host Groups](#get-host-groups)
 - [Host Report](#host-report)
 - [Host Search](#host-search)
+- [Host Search Advanced](#host-search-advanced)
 - [List sensor versions by Hostname](#list-sensors-by-hostname)
 - [List (and optionally remove) duplicate sensors](#list-duplicate-sensors)
 - [List (and optionally remove) stale sensors](#list-stale-sensors)
@@ -362,7 +363,7 @@ The source code for these examples can be found [here](get_host_groups.py).
 
 ---
 
-## Hosts Report
+## Host Report
 This script replaces the manual daily export of hosts from the Falcon Console that was required to audit host compliance. It was developed to be run as a recurring job and will output a CSV with all hosts in the CID along with other required info that can then be imported into a compliance dashboard or tool.
 
 ### Running the program
@@ -545,6 +546,67 @@ Required arguments:
 
 ### Example source code
 The source code for these examples can be found [here](host_search.py).
+---
+## Host Search Advanced
+
+This script retains the original functionality of host_search.py above, but adds in functionality for partial matches of hostnames. This will help with endpoint discovery where the domain is known, or a pattern of host naming is known, but not all endpoints have been discovered. 
+
+This script will also ignore comments in a hostname file, thus keeping the output.csv cleaner.
+
+To read an input file of hostnames, the -f option (used in the original host_search.py) has been changed to -i. This made more sense considering the more "insensitive" nature of the search, and makes a visual idendification of the full command easier if you use both the original host_search.py, and the host_search_advanced.py. A potential use case could be to discover hosts using the 'advanced' search, in order to reconcile with hostname files for use with the original host search.
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: host_search_advanced.py [-h] [-d] [-n HOSTNAME] [-i INPUT_FILE] [-o OUTPUT_PATH]
+                               [-k CLIENT_ID] [-s CLIENT_SECRET]
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |                         |::.. . |           FalconPy
+`-------'                         `-------'
+
+  _   _           _     ____                      _      
+ | | | | ___  ___| |_  / ___|  ___  __ _ _ __ ___| |__   
+ | |_| |/ _ \/ __| __| \___ \ / _ \/ _` | '__/ __| '_ \  
+ |  _  | (_) \__ \ |_   ___) |  __/ (_| | | | (__| | | | 
+ |_| |_|\___/|___/\__| |____/ \___|\__,_|_|  \___|_| |_| 
+     _       _                               _           
+    / \   __| |_   ____ _ _ __   ___ ___  __| |          
+   / _ \ / _` \ \ / / _` | '_ \ / __/ _ \/ _` |          
+  / ___ \ (_| |\ V / (_| | | | | (_|  __/ (_| |          
+ /_/   \_\__,_| \_/ \__,_|_| |_|\___\___|\__,_|          
+                                                         
+
+This script will take a file listing of hostnames (one host per line) or
+a single hostname provided at runtime to produce a CSV containing the 
+details for hosts that are found. This solution can be used to compare a
+list of hostnames to the list of hosts in the Falcon Console to determine
+which hostnames are not currently reporting in to the console, or to discover hosts based on a partial match of the hostname. Comments in input files are also ommitted from lookup, thus keeping the output.csv clean, and allowing you to work with more useful host name files/inventory.
+
+Developed by @Don-Swanson-Adobe, additional functionality by @David-M-Berry
+
+options:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -n HOSTNAME, --hostname HOSTNAME
+                        Hostname to search for
+  -i INPUT_FILE, --input_file INPUT_FILE
+                        Text file containing hostnames to search for
+  -o OUTPUT_PATH, --output_path OUTPUT_PATH
+                        Location to store CSV output
+
+Required arguments:
+  -k CLIENT_ID, --client_id CLIENT_ID
+                        CrowdStrike Falcon API key
+  -s CLIENT_SECRET, --client_secret CLIENT_SECRET
+                        CrowdStrike Falcon API secret
+```
+
 
 ---
 
