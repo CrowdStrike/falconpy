@@ -242,8 +242,8 @@ _message_center_endpoints = [
       },
       {
         "enum": [
-          "case.id.asc",
-          "case.id.desc"
+          "case.type.asc",
+          "case.type.desc"
         ],
         "type": "string",
         "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
