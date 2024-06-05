@@ -94,6 +94,9 @@ This has been a critical element in the development of the FalconPy project.
 + `@PeroSoy`
 + Shubham, `@i-shubham01`
 + Don "Swanson" I., `@Don-Swanson-Adobe`
++ Nick, `nickforsythbarr`
++ `nesies`
++ `David-M-Berry`
 
 
 ## Sponsors
