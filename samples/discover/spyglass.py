@@ -29,6 +29,7 @@ Created: 03.06.2023 - jshcodes@CrowdStrike
 # pylint: disable=R0902,R0904,R0912,R0914,R0915
 import os
 import json
+import logging
 from datetime import datetime
 from argparse import ArgumentParser, RawTextHelpFormatter
 from concurrent.futures import ThreadPoolExecutor
@@ -66,6 +67,8 @@ except ImportError as no_falconpy:
 class Application:
     """Class to store configuration and performance detail."""
 
+    _debug = False
+
     _timing = {
         "start_time": datetime.now().timestamp(),
         "end_time": 0,
@@ -88,6 +91,7 @@ class Application:
     _status = {"running": True, "cancelled": False}
 
     def __init__(self):
+        """Construct an instance of the application."""
         self.configure_application()
         if not self.show_updates:
             print("Depending on the size of your environment, "
@@ -214,6 +218,11 @@ class Application:
                             default=None,
                             required=False
                             )
+        parser.add_argument("--debug",
+                            help="Enable API debugging",
+                            action="store_true",
+                            default=False
+                            )
         parsed = parser.parse_args()
         cats = parsed.categories.split(",")
         if "all" in cats:
@@ -243,11 +252,16 @@ class Application:
             self.applications_filter = parsed.applications_filter
         if parsed.applications_sort:
             self.applications_sort = parsed.applications_sort
+        if parsed.debug:
+            self.debug = True
+            self.show_updates = False
+            logging.basicConfig(level=logging.DEBUG)
 
         # Everything before this moment happens within milliseconds
         self.sdk = Discover(client_id=parsed.falcon_client_id,
                             client_secret=parsed.falcon_client_secret,
-                            base_url=parsed.region
+                            base_url=parsed.region,
+                            debug=self.debug
                             )
         self.hosts = Hosts(auth_object=self.sdk)
 
@@ -288,6 +302,16 @@ class Application:
         return self._configuration["extra"]
 
     # Mutable
+    @property
+    def debug(self) -> bool:
+        """Retrieve the end time property."""
+        return self._debug
+
+    @debug.setter
+    def debug(self, val: bool):
+        """Set the end time property."""
+        self._debug = val
+
     @property
     def end_time(self) -> int:
         """Retrieve the end time property."""
@@ -463,7 +487,7 @@ def batch_get_details(sdk, cat):
     def get_detail(ids):
         """Retrieve detail information for the ID list provided."""
         returned = False
-        if APP.running:
+        if APP.running:  # pylint: disable=E0606
             APP.api_calls += 1
             returned = cmd(ids=ids)["body"]["resources"]
         return returned
@@ -492,9 +516,9 @@ def batch_get_details(sdk, cat):
             details.extend(get_detail(returned))
             if APP.show_updates:
                 print(f"  Details for {len(details)} {cat} retrieved.",
-                        end=f"{' '*40}\r",
-                        flush=True
-                        )
+                      end=f"{' '*40}\r",
+                      flush=True
+                      )
             if running_total >= total or not APP.running:
                 running = False
         else:
@@ -670,7 +694,7 @@ def display_accounts(account_list: list):
         row_break()
 
 
-def display_hosts(hosts_list: list):
+def display_hosts(hosts_list: list):  # noqa
     """Display the hosts results."""
     print(category_header("Hosts"), end="\r")
     row_break(23)
@@ -697,6 +721,7 @@ def display_hosts(hosts_list: list):
     for host in hosts_list:
         first_seen = ''
         last_seen = ''
+        managed = ''
         if host.get("first_seen_timestamp", None):
             first_seen = datetime.strptime(host["first_seen_timestamp"], "%Y-%m-%dT%H:%M:%SZ")
             first_seen = bold(first_seen.strftime("%m-%d-%Y %H:%M:%S"))
