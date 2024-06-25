@@ -18,8 +18,15 @@ for the record are displayed.
 A maximum of 50,000 results per category will be returned.
 
 Creation date: 03.30.23 - jshcodes@CrowdStrike
+
+This application requires:
+    pyfiglet
+    termcolor
+    tabulate
+    crowdstrike-falconpy v1.3.0+
 """
 
+import logging
 from argparse import ArgumentParser, RawTextHelpFormatter, Namespace
 from concurrent.futures import ThreadPoolExecutor
 from csv import writer, QUOTE_ALL
@@ -109,10 +116,18 @@ def parse_command_line():
                         help="Output filename prefix for storing results (CSV format).",
                         default=None
                         )
+    parser.add_argument("-d", "--debug",
+                        help="Enable API debugging",
+                        action="store_true",
+                        default=False
+                        )
 
     parsed = parser.parse_args()
     allow = ["indicator", "report", "actor"]
     parsed.types = [t for t in parsed.types.split(",") if t in allow] if parsed.types else allow
+
+    if parsed.debug:
+        logging.basicConfig(level=logging.DEBUG)
 
     return parsed
 
@@ -122,6 +137,7 @@ def bold(val: str):
     return colored(val, attrs=["bold"])
 
 
+# pylint: disable=E0606
 def batch_get(func: object, filt: str, catg: str):
     """Asynchronously retrieve Falcon Intelligence API results."""
     offset = 0
@@ -167,7 +183,7 @@ def chunk_long_description(desc: str, col_width: int = 120) -> str:
 
 
 def simple_list_display(keyval: str, record: dict, title: str, no_val: bool = False):
-    """Generic handler for displaying information provided as simple lists."""
+    """Dynamic handler for displaying information provided as simple lists."""
     if keyval in record:
         if len(record[keyval]):
             if no_val:
@@ -178,12 +194,12 @@ def simple_list_display(keyval: str, record: dict, title: str, no_val: bool = Fa
 
 
 def large_list_display(keyval: str, record: dict, title: str):
-    """Generic handler for displaying list information with an underlined header."""
+    """Dynamic handler for displaying list information with an underlined header."""
     if keyval in record:
         if len(record[keyval]):
             res = ", ".join(t["value"].title() for t in record[keyval])
             res = f"{chunk_long_description(res)}"
-            res = f"{colored(title, attrs=['bold','underline'])}\n{res}"
+            res = f"{colored(title, attrs=['bold', 'underline'])}\n{res}"
             print(f"{res}\n")
 
 
@@ -565,7 +581,7 @@ def show_result_totals(act_cnt: int, ind_cnt: int, rep_cnt: int, typ_list: list)
 def main(args: Namespace):
     """Search for a specified string and identify if it matches an indicator, report, or actor."""
     # Perform the search using an authenticated instance of the Intel Service Class
-    ret = perform_search(Intel(client_id=args.client_id, client_secret=args.client_secret),
+    ret = perform_search(Intel(client_id=args.client_id, client_secret=args.client_secret, debug=args.debug),
                          args.find,               # Search string
                          args.types,              # Types to display
                          args.table_format,       # Table format
