@@ -416,12 +416,42 @@ Total indicators: 1
 Execution time: 2.86 seconds
 ```
 
+Show the debug output.
+```shell
+python3 intel_search.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f "FROZEN SPIDER" -d 
+```
+##### Result
+```shell
+DEBUG:falconpy._auth_object._falcon_interface:CREATED: OAuth2 interface class
+DEBUG:falconpy._auth_object._falcon_interface:AUTH: Configured for Direct Authentication
+DEBUG:falconpy._auth_object._falcon_interface:CONFIG: Base URL set to https://api.crowdstrike.com
+DEBUG:falconpy._auth_object._falcon_interface:CONFIG: SSL verification is set to True
+DEBUG:falconpy._auth_object._falcon_interface:CONFIG: Timeout set to None seconds
+DEBUG:falconpy._auth_object._falcon_interface:CONFIG: Proxy dictionary: None
+DEBUG:falconpy._auth_object._falcon_interface:CONFIG: User-Agent string set to: None
+DEBUG:falconpy._auth_object._falcon_interface:CONFIG: Token renewal window set to 120 seconds
+DEBUG:falconpy._auth_object._falcon_interface:CONFIG: Maximum number of records to log: 100
+DEBUG:falconpy._auth_object._falcon_interface:CONFIG: Log sanitization is enabled
+DEBUG:falconpy._auth_object._falcon_interface:CONFIG: Pythonic responses are disabled
+DEBUG:falconpy._auth_object._falcon_interface:OPERATION: oauth2AccessToken
+DEBUG:falconpy._auth_object._falcon_interface:ENDPOINT: https://api.crowdstrike.com/oauth2/token (POST)
+DEBUG:falconpy._auth_object._falcon_interface:HEADERS: {'User-Agent': 'crowdstrike-falconpy/1.4.4', 'CrowdStrike-SDK': 'crowdstrike-falconpy/1.4.4'}
+DEBUG:falconpy._auth_object._falcon_interface:PARAMETERS: None
+DEBUG:falconpy._auth_object._falcon_interface:BODY: None
+DEBUG:falconpy._auth_object._falcon_interface:DATA: {'client_id': 'REDACTED', 'client_secret': 'REDACTED'}
+DEBUG:urllib3.connectionpool:Starting new HTTPS connection (1): api.crowdstrike.com:443
+```
+
 #### Command-line help
 Command-line help is available via the `-h` argument.
 
 ```shell
 python3 intel_search.py -h
-usage: intel_search.py [-h] -f FIND -k CLIENT_ID -s CLIENT_SECRET [-r] [-t TYPES] [-tf TABLE_FORMAT] [-o OUTPUT_PREFIX]
+
+CrowdStrike Falcon Intel API search example using the FalconPy library.
+
+usage: intel_search.py [-h] -f FIND -k CLIENT_ID -s CLIENT_SECRET [-r] [-t TYPES] [-tf TABLE_FORMAT]
+                       [-o OUTPUT_PREFIX] [-d]
 
 CrowdStrike Falcon Intel API search example using the FalconPy library.
 
@@ -443,7 +473,13 @@ A maximum of 50,000 results per category will be returned.
 
 Creation date: 03.30.23 - jshcodes@CrowdStrike
 
-optional arguments:
+This application requires:
+    pyfiglet
+    termcolor
+    tabulate
+    crowdstrike-falconpy v1.3.0+
+
+options:
   -h, --help            show this help message and exit
   -r, --reverse         Reverse the sort.
   -t TYPES, --types TYPES
@@ -452,6 +488,7 @@ optional arguments:
                         Set the table format.
   -o OUTPUT_PREFIX, --output_prefix OUTPUT_PREFIX
                         Output filename prefix for storing results (CSV format).
+  -d, --debug           Enable API debugging
 
 required arguments:
   -f FIND, --find FIND  Search string to identify
