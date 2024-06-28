@@ -25,36 +25,36 @@ r"""CrowdStrike Falcon Discover simple example.
 Creation date: 02.08.2022 - jshcodes@CrowdStrike
 """
 import os
+import logging
 from argparse import ArgumentParser, RawTextHelpFormatter
 from tabulate import tabulate
 try:
-    from falconpy import Discover
+    from falconpy import Discover, Hosts
 except ImportError as no_falconpy:
     raise SystemExit("The crowdstrike-falconpy package must be installed "
-                     "in order to run this progrem.\n\nInstall with the command: "
+                     "in order to run this program.\n\nInstall with the command: "
                      "python3 -m pip install crowdstrike-falconpy") from no_falconpy
-
 
 def parse_command_line() -> object:
     """Parse any received inbound command line parameters."""
     parser = ArgumentParser(
         description=__doc__,
         formatter_class=RawTextHelpFormatter
-        )
+    )
     parser.add_argument(
         '-k',
         '--client_id',
         help='CrowdStrike Falcon API key ID.\n'
         'You can also use the `FALCON_CLIENT_ID` environment variable to specify this value.',
         required=False
-        )
+    )
     parser.add_argument(
         '-s',
         '--client_secret',
         help='CrowdStrike Falcon API key secret.\n'
         'You can also use the `FALCON_CLIENT_SECRET` environment variable to specify this value.',
         required=False
-        )
+    )
     parser.add_argument(
         '-b',
         '--base_url',
@@ -68,7 +68,15 @@ def parse_command_line() -> object:
         help='Reverse sort (defaults to ASC)',
         required=False,
         action="store_true"
-        )
+    )
+    parser.add_argument(
+        '-d',
+        '--debug',
+        help='Enable API debugging',
+        required=False,
+        default=False,
+        action="store_true"
+    )
     parser.add_argument(
         '-f',
         '--format',
@@ -77,19 +85,13 @@ def parse_command_line() -> object:
         'pretty, psql, rst, mediawiki, moinmoin, youtrack, html, unsafehtml, \n'
         'latext, latex_raw, latex_booktabs, latex_longtable, textile, tsv)',
         required=False
-        )
-
+    )
     return parser.parse_args()
-
-
 def get_sort_key(sorting) -> list:
-    """Return the sort colum value for sorting operations."""
+    """Return the sort column value for sorting operations."""
     return sorting["hostname"]
-
-
-# Retrieve all inbound command line parameters
+# Retrieve all inbound command line parameters if args debug is present
 args = parse_command_line()
-
 # Set constants based upon received inputs
 BASE_URL = "auto"
 if args.base_url:
@@ -106,6 +108,10 @@ if not args.reverse:
     SORT = False
 else:
     SORT = bool(args.reverse)
+# add debug with logging put after parser 
+if args.debug:
+    logging.basicConfig(level=logging.DEBUG)
+
 TABLE_FORMATS = [
     "plain", "simple", "github", "grid", "fancy_grid", "pipe", "orgtbl", "jira", "presto",
     "pretty", "psql", "rst", "mediawiki", "moinmoin", "youtrack", "html", "unsafehtml",
@@ -116,7 +122,6 @@ if args.format:
     table_format = args.format.strip().lower()
     if table_format in TABLE_FORMATS:
         TABLE_FORMAT = table_format
-
 # Headers used in our result display table
 HEADERS = {
     "hostname": "Hostname",
@@ -125,18 +130,18 @@ HEADERS = {
     "plat": "Platform",
     "osver": "Version"
 }
-
+hosts = Hosts(
+    client_id=CLIENT_ID,
+    client_secret=CLIENT_SECRET,
+    debug=args.debug
+)
 # Connect to the Discover API
-discover = Discover(client_id=CLIENT_ID,
-                    client_secret=CLIENT_SECRET,
-                    base_url=BASE_URL
-                    )
-
+discover = Discover(auth_object=hosts)
 # Empty list to hold our results
 identified = []
 # Query for a complete list of discovered hosts. Maxes out at 100.
 host_lookup = discover.query_hosts()
-if host_lookup["status_code"] == 200:
+if host_lookup.get("status_code") == 200:
     identified_hosts = host_lookup["body"]["resources"]
     if not identified_hosts:
         # No hosts returned for this search
@@ -144,14 +149,15 @@ if host_lookup["status_code"] == 200:
     else:
         # Retrieve all details for all discovered hosts
         host_detail = discover.get_hosts(ids=identified_hosts)["body"]["resources"]
-        # Add each hosts relevant detail to our `identified` list so we can display it
+        # Add each host's relevant detail to our `identified` list so we can display it
         for host in host_detail:
-            found = {}
-            found["hostname"] = host.get("hostname", "Not identified")
-            found["current_local"] = host.get("current_local_ip", "Unknown")
-            found["current_external"] = host.get("external_ip", "Unknown")
-            found["plat"] = host.get("platform_name", "Unknown")
-            found["osver"] = host.get("os_version", "Unknown")
+            found = {
+                "hostname": host.get("hostname", "Not identified"),
+                "current_local": host.get("current_local_ip", "Unknown"),
+                "current_external": host.get("external_ip", "Unknown"),
+                "plat": host.get("platform_name", "Unknown"),
+                "osver": host.get("os_version", "Unknown")
+            }
             # Append this result to our display list
             identified.append(found)
         # All findings have been tabulated, show the results
