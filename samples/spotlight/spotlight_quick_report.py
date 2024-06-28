@@ -19,10 +19,11 @@ r"""Spotlight results quick report generator.
         \___\_\_,_/_/\__/_/\_\ /_/|_|\__/ .__/\___/_/  \__/
                                        /_/
 
-This example requires crowdstrike-falconpy v1.2.2 or greater.
+This example requires crowdstrike-falconpy v1.3.0 or greater.
 
 Easy Object Authentication is also demonstrated in this sample.
 """
+import logging
 import json
 import time
 from datetime import datetime
@@ -64,6 +65,11 @@ def consume_arguments() -> Namespace:
                      help="CrowdStrike Falcon API Client Secret.",
                      required=True
                      )
+    parser.add_argument("--debug",
+                        help="Enable API debugging",
+                        action="store_true",
+                        default=False
+                        )
     parser.add_argument("-d", "--days",
                         help="Include days from X days backwards (3-45).",
                         default=0
@@ -83,8 +89,14 @@ def consume_arguments() -> Namespace:
                         default=False,
                         action="store_true"
                         )
+    
+    
+    parsed = parser.parse_args()
+    if parsed.debug:
+        logging.basicConfig(level=logging.DEBUG)
+    
 
-    return parser.parse_args()
+    return parsed
 
 
 def query_spotlight(key: str, secret: str, days: str, aft: str = None):
@@ -274,7 +286,7 @@ if __name__ == "__main__":
     start_time = datetime.now().timestamp()
     args = consume_arguments()
     if args.file:
-        HOST_AUTH = Hosts(client_id=args.client_id, client_secret=args.client_secret)
+        HOST_AUTH = Hosts(client_id=args.client_id, client_secret=args.client_secret, debug=args.debug)
     process_results(args.output, *process_matches(args))
     total_run_time = datetime.now().timestamp() - start_time
     print(f"\nReport generated in {total_run_time:,.2f} seconds.")
