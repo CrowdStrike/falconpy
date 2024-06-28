@@ -46,7 +46,7 @@ except ImportError as no_tabulate:
                      "Install it with `python3 -m pip install tabulate`."
                      ) from no_tabulate
 try:
-    from falconpy import KubernetesProtection, APIError, RealTimeResponseAdmin, Hosts
+    from falconpy import KubernetesProtection, APIError
 except ImportError as no_falconpy:
     raise SystemExit("The CrowdStrike FalconPy library must be installed.\n"
                      "Install it with `python3 -m pip install crowdstrike-falconpy`."
@@ -72,8 +72,23 @@ def parse_command_line() -> Namespace:
                         action="store_true",
                         default=False
                         )
-    parser.add_argument("-c", "--cluster_id",
-                        help="Display cluster and it's nodes/pods"
+    parser.add_argument("-c", "--cluster",
+                        help="Display clusters and it's nodes",
+                        action="store_true",
+                        default=False
+                        )
+    parser.add_argument("-n", "--node",
+                        help="Display nodes and it's pods",
+                        action="store_true",
+                        default=False
+                        )
+    parser.add_argument("-p", "--pod_id",
+                        help="Display specific pod information"
+                        )
+    parser.add_argument("-t", "--thread",
+                        help="Enables asynchronous API calls for faster returns",
+                        action="store_true",
+                        default=False
                         )
 
     parsed = parser.parse_args()
@@ -99,7 +114,7 @@ class Node:
     """Kubernetes nodes dataclass"""
     node_id: str
     node_name: str
-    parent_cluster_id: str
+    parent_cluster_name: str
     ip: str
     architecture: str
     operating_system: str
@@ -139,72 +154,61 @@ class KubernetesEnvironment:
         self.pods = pod
 
 
-def generate_clusters(falcon: KubernetesProtection) -> list:
+def generate_clusters(falcon: KubernetesProtection, thread: bool) -> list:
     """Retrieves and returns a list of clusters"""
-    limit = 100
-    total = 1
-    offset = 0
-    all_resp = []
+    print("Locating Clusters...")
+    if thread:
+        total = falcon.ReadClusterCombined()['body']['meta']['pagination']['total']
+        all_resp = concurent_response(falcon, 'ReadClusterCombined', total)
+    else:
+        all_resp = normal_response(falcon, "ReadClusterCombined")
     clusters = []
-    while len(all_resp) < total:
-        resp = falcon.ReadClusterCombined(limit=limit, offset=offset)['body']['resources']
-        if resp['status_code'] == 200:
-            page = resp['body']['meta']['pagination']
-            total = page['total']
-            offset += 100
-            all_resp.extend(resp['body']['resources'])
-            print(resp['body']['meta'])
-            print(len(all_resp))
-        else:
-            total = 0
-            errors = resp['body']['resources']
-            for err in errors:
-                ecode = err['code']
-                emsg = err['message']
-                print(f"[{ecode}] {emsg}")
-    
     for batch in all_resp:
         new_cluster = Cluster(
-            cluster_id=batch.get('cluster_id'),
-            cluster_name=batch.get('cluster_name'),
-            version=batch.get('kubernetes_version'),
-            cloud_type=batch.get('cloud_name'),
-            node_count=batch.get('node_count')
+            cluster_id=batch['cluster_id'],
+            cluster_name=batch['cluster_name'],
+            version=batch['kubernetes_version'],
+            cloud_type=batch['cloud_name'],
+            node_count=batch['node_count']
         )
         clusters.append(new_cluster)
     return clusters
 
 
-def generate_nodes(falcon: KubernetesProtection) -> list:
+def generate_nodes(falcon: KubernetesProtection, thread: bool) -> list:
     """Retrieves and returns a list of nodes"""
-    total = falcon.ReadNodeCombined()['body']['meta']['pagination']['total']
-    all_resp = concurent_response(falcon, 'ReadNodeCombined', total)
+    print("Discovering Nodes...")
+    if thread:
+        total = falcon.ReadNodeCombined()['body']['meta']['pagination']['total']
+        all_resp = concurent_response(falcon, 'ReadNodeCombined', total)
+    else:
+        all_resp = normal_response(falcon, "ReadNodeCombined")
     nodes = []
-    print(total)
-    print(len(all_resp))
     for batch in all_resp:
         new_node = Node(
-            node_id=batch.get('node_id'),
-            node_name=batch.get('node_name'),
-            parent_cluster_id=batch.get('cluster_id'),
-            ip=batch.get('ipv4'),
-            architecture=batch.get('architecture'),
-            operating_system=batch.get('operating_system'),
-            cpu=batch.get('cpu'),
-            storage=batch.get('storage'),
-            pod_count=int(batch.get('pod_count'))
+            node_id=batch['node_id'],
+            node_name=batch['node_name'],
+            parent_cluster_name=batch['cluster_name'],
+            ip=batch['ipv4'],
+            architecture=batch['architecture'],
+            operating_system=batch['os'],
+            cpu=batch['cpu'],
+            storage=batch['storage'],
+            pod_count=int(batch['pod_count'])
         )
         nodes.append(new_node)
     return nodes
 
 
-def generate_pods(falcon: KubernetesProtection) -> list:
+def generate_pods(falcon: KubernetesProtection, thread: bool) -> list:
     """Retrieves and returns a list of pods"""
+    print("Finding Pods...")
+    if thread:
+        total = falcon.ReadPodCombined()['body']['meta']['pagination']['total']
+        all_resp = concurent_response(falcon, 'ReadPodCombined', total)
+    else:
+        all_resp = normal_response(falcon, "ReadPodCombined")
     pods = []
-    total = falcon.ReadPodCombined()['body']['meta']['pagination']['total']
-    all_resp = concurent_response(falcon, 'ReadPodCombined', total)
-    print(total)
-    print(len(all_resp))
     for batch in all_resp:
         new_pod = Pod(
             pod_id=batch.get('pod_id'),
@@ -226,7 +230,6 @@ def generate_pods(falcon: KubernetesProtection) -> list:
 def response_processing(falcon: KubernetesProtection, endpoint: str, filt: str, limit: int, offset: int) -> list:
     """Dynamic API caller for multi-proccessing"""
     method = getattr(falcon, endpoint, None)
-    print("worker generated")
     if method is None:
         raise AttributeError(f"API object has no method named '{endpoint}'")
     if filt:
@@ -236,30 +239,64 @@ def response_processing(falcon: KubernetesProtection, endpoint: str, filt: str, 
     return resp
 
 
-def concurent_response(falcon: KubernetesProtection, endpoint: str, total: str, filt=None) -> list:
-    """Utilizes current futures to asynchronously handle paginated API calls at once"""
-    chunk_size = 200
-    workers = int(total / chunk_size) + 1
-    offsets = [i * chunk_size for i in range(workers)]
-    print(offsets)
+def normal_response(falcon: KubernetesProtection, endpoint: str, filt=None):
+    """Normal API caller"""
+    limit = 200
     all_resp = []
-    with ThreadPoolExecutor(max_workers=workers) as e:
-        future = {
-            e.submit(response_processing, falcon, endpoint, filt, chunk_size, offset)
-            for offset in offsets
-        }
-    for f in future:
-        all_resp.extend(f.result())
+    total = 1
+    offset = 0
+    method = getattr(falcon, endpoint, None)
+    if method is None:
+        raise AttributeError(f"API object has no method named '{endpoint}'")
+
+    while len(all_resp) < total:
+        resp = method(limit=limit, offset=offset, filt=(filt if filt else None))
+        if resp['status_code'] == 200:
+            total = resp['body']['meta']['pagination']['total']
+            offset += 200
+            all_resp.extend(resp['body']['resources'])
+
     return all_resp
 
 
-def generate_containers(falcon: KubernetesProtection) -> list:
+def concurent_response(falcon: KubernetesProtection, endpoint: str, total: str, filt=None) -> list:
+    """Utilizes concurrent futures to asynchronously handle paginated API calls at once"""
+    chunk_size = 200
+    workers = int(total / chunk_size) + 1
+    offsets = [i * chunk_size for i in range(workers)]
+    all_resp = []
+    if workers > 10:
+        batches = [offsets[x: x + 10] for x in range(0, len(offsets), 10)]
+        for batch in batches:
+            with ThreadPoolExecutor(max_workers=workers) as e:
+                future = {
+                    e.submit(response_processing, falcon, endpoint, filt, chunk_size, offset)
+                    for offset in batch
+                }
+            for f in future:
+                all_resp.extend(f.result())
+    else:
+        with ThreadPoolExecutor(max_workers=workers) as e:
+            future = {
+                e.submit(response_processing, falcon, endpoint, filt, chunk_size, offset)
+                for offset in offsets
+            }
+        for f in future:
+            all_resp.extend(f.result())
+
+    return all_resp
+
+
+def generate_containers(falcon: KubernetesProtection, thread: bool) -> list:
     """Retrieves and returns a list of RUNNING containers"""
+    print("Generating Containers...")
     running_containers = {}
     filt = "running_status:'true'"
-    total = falcon.ReadContainerCombined()['body']['meta']['pagination']['total']
-
-    all_resp = concurent_response(falcon, "ReadContainerCombined", filt, total)
+    if thread:
+        total = falcon.ReadContainerCombined()['body']['meta']['pagination']['total']
+        all_resp = concurent_response(falcon, "ReadContainerCombined", filt, total)
+    else:
+        all_resp = normal_response(falcon, "ReadContainerCombined", filt)
     for container in all_resp:
         container_id = container.get('container_id')
         container_name = container.get('container_name')
@@ -267,12 +304,13 @@ def generate_containers(falcon: KubernetesProtection) -> list:
     return running_containers.keys()
 
 
-def aggregate_kube(clusters: list, nodes: list, pods: list) -> KubernetesEnvironment:
+def aggregate_kube(clusters: list, nodes: list, pods=None) -> KubernetesEnvironment:
     """Organizes clusters, nodes, and pods into a data structure"""
     kube = KubernetesEnvironment()
     kube.add_clusters(clusters)
     kube.add_nodes(nodes)
-    kube.add_pods(pods)
+    if pods:
+        kube.add_pods(pods)
 
     return kube
 
@@ -288,16 +326,80 @@ def connect_api(key: str, secret: str, debug: bool) -> KubernetesProtection:
         return e
 
 
+def form_relations(kube: KubernetesEnvironment, args: Namespace) -> None:
+    """Prints out the kubernetes environment"""
+    cluster_groups = {}
+    node_groups = {}
+    if args.cluster:
+        for cluster in kube.clusters:
+            cluster_groups[cluster.cluster_name] = {
+                'cluster id': cluster.cluster_id,
+                'cluster name': cluster.cluster_name,
+                'version': cluster.version,
+                'cloud type': cluster.cloud_type,
+                'connected nodes': cluster.node_count
+            }
+            if cluster.node_count > 0:
+                cluster_groups[cluster.cluster_name]['nodes'] = []
+                for node in kube.nodes:
+                    if node.parent_cluster_name == cluster.cluster_name:
+                        cluster_groups[cluster.cluster_name]['nodes'].append(node.node_id)
+        return cluster_groups
+    if args.node:
+        for node in kube.nodes:
+            node_groups[node.node_name] = {
+                'node id': node.node_id,
+                'node name': node.node_name,
+                'ip': node.ip,
+                'architecture': node.architecture,
+                'operating system': node.operating_system,
+                'cpu': node.cpu,
+                'storage': node.storage,
+                'pod count': node.pod_count
+            }
+            if node.pod_count > 0:
+                node_groups[node.node_name]['pods'] = []
+                for pod in kube.pods:
+                    if pod.pod_name == node.node_name:
+                        node_groups[node.node_name]['pods'].append(pod.pod_id)
+        return node_groups
+
+
+def find_asset_count(falcon: KubernetesProtection) -> dict:
+    """Find and output the initial count of all assets"""
+    env = {}
+    containers = falcon.ReadContainerCount()['body']['resources'][0]['count']
+    pods = falcon.ReadPodCount()['body']['resources'][0]['count']
+    nodes = falcon.ReadNodeCount()['body']['resources'][0]['count']
+    clusters = falcon.ReadClusterCount()['body']['resources'][0]['count']
+    env = {
+        'containers': containers,
+        'pods': pods,
+        'nodes': nodes,
+        'clusters': clusters
+    }
+    headers = ['containers', 'pods', 'nodes', 'clusters']
+    print(tabulate(env, headers="keys"))
+
+    return env
+
+
 def main():
     """Start Main Execution Routine"""
     args = parse_command_line()
     falcon = connect_api(key=args.client_id, secret=args.client_secret, debug=args.debug)
-    #clusters = generate_clusters(falcon)
-    #nodes = generate_nodes(falcon)
-    #pods = generate_pods(falcon)
-    #kube = aggregate_kube(clusters, nodes, pods)
-    generate_nodes(falcon)
-
+    if args.cluster or args.node:
+        clusters = generate_clusters(falcon, args.thread)
+        nodes = generate_nodes(falcon, args.thread)
+        if args.node:
+            pods = generate_pods(falcon, args.thread)
+            kube = aggregate_kube(clusters, nodes, pods)
+        kube = aggregate_kube(clusters, nodes)
+        kube_dictionary = form_relations(kube, args)
+        print(kube_dictionary)
+    else:
+        env = find_asset_count(falcon)
+        print(env)
 
 if __name__ == "__main__":
     main()
