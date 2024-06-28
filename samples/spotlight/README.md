@@ -227,6 +227,12 @@ If you wish to allow duplicate matches to be present within your report, pass th
 ```shell
 python3 spotlight_quick_report.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -a
 ```
+#### Debugging
+If you want to debug code and quickly find errors within code `--debug` argument.
+
+```shell
+python3 spotlight_quick_report.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET --debug
+```
 
 #### Command-line help
 Command-line help is available via the `-h` argument.
@@ -275,6 +281,7 @@ required arguments:
                         CrowdStrike Falcon API Client ID.
   -s CLIENT_SECRET, --client_secret CLIENT_SECRET
                         CrowdStrike Falcon API Client Secret.
+  --debug               Enables code debugging 
 ```
 
 ### Example source code
