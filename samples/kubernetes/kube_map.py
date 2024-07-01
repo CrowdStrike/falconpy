@@ -31,6 +31,7 @@ import logging
 from argparse import ArgumentParser, RawTextHelpFormatter, Namespace
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
+from operator import itemgetter
 try:
     from termcolor import colored  # type: ignore
 except ImportError as no_termcolor:
@@ -49,6 +50,57 @@ except ImportError as no_falconpy:
     raise SystemExit("The CrowdStrike FalconPy library must be installed.\n"
                      "Install it with `python3 -m pip install crowdstrike-falconpy`."
                      ) from no_falconpy
+
+KUBE = r"""
+                                                                                          
+                                           ....                                           
+                                       .-========-.                                       
+                                   .-================-.                                   
+                              .:-========================-:.                              
+                          .:-================================-:.                          
+                      .:-===================+====================-:.                      
+                  .:-======================: .-======================-:.                  
+              .-===========================    ===========================-.              
+           :==============================+:  :+==============================:           
+          =================================:  :=================================          
+         -============================+==--    --==+============================-         
+         ==========================-:.              .:-==========================         
+        :==========:  .-========:.                      .:========-.  :==========:        
+        ============.   .-=+=-       .::--:    :--:..      .-=+=-.   .============        
+       :==============-:          :-======:    :====+=-.          :-==============:       
+       ==================       :=========:    :=========:       =================-       
+      .=================-        .:======+.    .+======:.        -=================.      
+      =================-     :      .-=+==.    .==+=-.      :     -=================      
+     :=================     ===:       .:.      .:.       :===     =================:     
+     ================+:    -=====-                      -=====:    :+================     
+    .=================     ========-        ..       .-========     =================.    
+    -=================    .=========:     :====:     :=+=======.    =================-    
+    ==================    :===-::..       ======        .::-==+:    ==================    
+   -==================                    .-==-.                    ==================-   
+   =============----:               .               ..               ::---=============   
+  :==========-              ::--===+++-            -+=+===---:              -==========:  
+  ============:::-==+==.    :+========      ..      ========+:    .==+==-:::============  
+  -=====================     :=======      ====      =======:     =====================-  
+   -=====================.    .=====.     ======     .=====.    .=====================-   
+    .====================+-     .:=:     ========     :=-.     -+====================.    
+      :=====================:          .==========.          :=====================:      
+        -=====================:         .:::--:::.         :=====================-        
+         :=======================                        -======================:         
+           -===================+-   --:..        ..:--   -+===================-           
+            .=================+:   ======++====++======   :==================.            
+              :===============.   -====================-   .===============:              
+                -=============.  :+=====================:  .=============-                
+                 :============+=+========================+=+============:                 
+                  .-==================================================-.                  
+                    .================================================.                    
+                      :============================================:                      
+                       .==========================================.                       
+                          .::::::::::::::::::::::::::::::::::::.                          
+                                                                                          
+
+
+"""
+
 
 
 def parse_command_line() -> Namespace:
@@ -80,8 +132,8 @@ def parse_command_line() -> Namespace:
                         action="store_true",
                         default=False
                         )
-    parser.add_argument("-p", "--pod_id",
-                        help="Display specific pod information"
+    parser.add_argument("-nn", "--node_name",
+                        help="Display pods connected to a specific node"
                         )
     parser.add_argument("-t", "--thread",
                         help="Enables asynchronous API calls for faster returns",
@@ -203,26 +255,58 @@ def generate_pods(falcon: KubernetesProtection, thread: bool) -> list:
     print("Finding Pods...")
     if thread:
         total = falcon.ReadPodCombined()['body']['meta']['pagination']['total']
-        all_resp = concurent_response(falcon, 'ReadPodCombined', total)
+        print("Threading....")
+        all_resp = concurent_response(falcon, 'ReadPodCombined', total, filt="container_count:>'0'")
     else:
         all_resp = normal_response(falcon, "ReadPodCombined")
     pods = []
     for batch in all_resp:
         new_pod = Pod(
-            pod_id=batch.get('pod_id'),
-            pod_name=batch.get('pod_name'),
-            parent_node_name=batch.get('node_name'),
+            pod_id=batch['pod_id'],
+            pod_name=batch['pod_name'],
+            parent_node_name=batch['node_name'],
             containers=[],
-            namespace=batch.get('namespace'),
-            container_count=batch.get('countainer_count')
+            namespace=batch['namespace'],
+            container_count=batch['container_count']
         )
-        container_list = batch.get('containers')
+        container_list = batch['containers']
         if container_list:
             for container in container_list:
-                new_pod.containers.append(container.get('name'))
+                new_pod.containers.append(container['id'])
         pods.append(new_pod)
 
     return pods
+
+
+def find_active_pods(pods: list[Pod], containers: dict) -> list:
+    """Cross-references running containers to find active pods"""
+    active_pods = []
+    for pod in pods:
+        has_match = False
+        for container in pod.containers:
+            if container in containers:
+                has_match = True
+                break
+        if has_match:
+            active_pods.append(pod)
+    return active_pods
+
+
+def generate_containers(falcon: KubernetesProtection, thread: bool) -> dict:
+    """Retrieves and returns a list of RUNNING containers"""
+    print("Tracking Down Containers...")
+    running_containers = {}
+    filt = "running_status:'true'"
+    if thread:
+        total = falcon.ReadContainerCombined(filter=filt)['body']['meta']['pagination']['total']
+        all_resp = concurent_response(falcon, "ReadContainerCombined", total, filt)
+    else:
+        all_resp = normal_response(falcon, "ReadContainerCombined", filt)
+    for container in all_resp:
+        container_id = container.get('container_id')
+        container_name = container.get('container_name')
+        running_containers[container_id] = container_name
+    return running_containers
 
 
 def response_processing(falcon: KubernetesProtection, endpoint: str, filt: str, limit: int, offset: int) -> list:
@@ -231,7 +315,7 @@ def response_processing(falcon: KubernetesProtection, endpoint: str, filt: str, 
     if method is None:
         raise AttributeError(f"API object has no method named '{endpoint}'")
     if filt:
-        resp = method(filter=filt, limit=limit, offset=offset)['body']['resources']
+        resp = method(filter=filt if filt else None, limit=limit, offset=offset)['body']['resources']
     else:
         resp = method(limit=limit, offset=offset)['body']['resources']
     return resp
@@ -248,9 +332,10 @@ def normal_response(falcon: KubernetesProtection, endpoint: str, filt=None):
         raise AttributeError(f"API object has no method named '{endpoint}'")
 
     while len(all_resp) < total:
-        resp = method(limit=limit, offset=offset, filt=(filt if filt else None))
+        resp = method(limit=limit, offset=offset, filter=filt)
         if resp['status_code'] == 200:
             total = resp['body']['meta']['pagination']['total']
+            print(f"\n\n\n\n{total}\n\n\n\n")
             offset += 200
             all_resp.extend(resp['body']['resources'])
 
@@ -261,9 +346,12 @@ def concurent_response(falcon: KubernetesProtection, endpoint: str, total: str, 
     """Utilizes concurrent futures to asynchronously handle paginated API calls at once"""
     chunk_size = 200
     workers = int(total / chunk_size) + 1
+
     offsets = [i * chunk_size for i in range(workers)]
+
     all_resp = []
     if workers > 10:
+        # Splits the list into batches of 10 to distribute load
         batches = [offsets[x: x + 10] for x in range(0, len(offsets), 10)]
         for batch in batches:
             with ThreadPoolExecutor(max_workers=workers) as e:
@@ -283,23 +371,6 @@ def concurent_response(falcon: KubernetesProtection, endpoint: str, total: str, 
             all_resp.extend(f.result())
 
     return all_resp
-
-
-def generate_containers(falcon: KubernetesProtection, thread: bool) -> list:
-    """Retrieves and returns a list of RUNNING containers"""
-    print("Generating Containers...")
-    running_containers = {}
-    filt = "running_status:'true'"
-    if thread:
-        total = falcon.ReadContainerCombined()['body']['meta']['pagination']['total']
-        all_resp = concurent_response(falcon, "ReadContainerCombined", filt, total)
-    else:
-        all_resp = normal_response(falcon, "ReadContainerCombined", filt)
-    for container in all_resp:
-        container_id = container.get('container_id')
-        container_name = container.get('container_name')
-        running_containers[container_id] = container_name
-    return running_containers.keys()
 
 
 def aggregate_kube(clusters: list, nodes: list, pods=None) -> KubernetesEnvironment:
@@ -325,47 +396,54 @@ def connect_api(key: str, secret: str, debug: bool) -> KubernetesProtection:
 
 
 def form_relations(kube: KubernetesEnvironment, args: Namespace) -> dict:
-    """Prints out the kubernetes environment"""
-    cluster_groups = {}
-    node_groups = {}
-    node_list = []
+    """Returns a tabulated kubernetes environment"""
     if args.cluster:
+        cluster_data = []
         for cluster in kube.clusters:
-            cluster_groups[cluster.cluster_name] = {
-                'cluster id': cluster.cluster_id,
-                'cluster name': cluster.cluster_name,
-                'version': cluster.version,
-                'cloud type': cluster.cloud_type,
-                'connected nodes': cluster.node_count
-            }
-            if cluster.node_count > 0:
-                cluster_groups[cluster.cluster_name]['nodes'] = []
-                for node in kube.nodes:
-                    if node.parent_cluster_name == cluster.cluster_name:
-                        cluster_groups[cluster.cluster_name]['nodes'].append(node.node_id)
-        return cluster_groups
-    if args.node:
-        for node in kube.nodes:
-            node_groups[node.node_name] = {
-                'node id': node.node_id,
-                'node name': node.node_name,
-                'ip': node.ip,
-                'architecture': node.architecture,
-                'operating system': node.operating_system,
-                'cpu': node.cpu,
-                'storage': node.storage,
-                'pod count': node.pod_count
-            }
-            node_groups[node.node_name]['pods'] = []
-            node_list.append(node_groups[node.node_name])
-            #for pod in kube.pods:
-            #    if pod.parent_node_name == node.node_name:
-            #        node_groups[node.node_name]['pods'].append(pod.pod_id)
-        for node in node_list:
-            print(node['node name'])
+            cluster_data.append([
+                cluster.cluster_id,
+                cluster.cluster_name,
+                cluster.version,
+                cluster.cloud_type,
+                cluster.node_count
+            ])
+        headers = ['Cluster ID', 'Cluster Name', 'Version', 'Cloud Type', 'Node Count']
+        return tabulate(cluster_data, headers, tablefmt='grid')
 
-        # print(tabulate([[node_groups[node.node_name]['node id']]], headers=['node id']))
-        return node_groups
+    if args.node:
+        node_data = []
+        for node in kube.nodes:
+            for pod in kube.pods:
+                if pod.parent_node_name == node.node_name:
+                    node.pod_count += 1
+            node_data.append([
+                node.node_id,
+                node.node_name,
+                node.ip,
+                node.architecture,
+                node.operating_system,
+                node.cpu,
+                node.storage,
+                node.pod_count
+            ])
+        headers = ['Node ID', 'Node Name', 'IP', 'Arch', 'OS', 'CPU', 'Storage', 'Active\nPod Count']
+        node_data.sort(key=itemgetter(7))
+        return tabulate(node_data, headers, tablefmt='grid')
+
+    pod_data = []
+    for pod in kube.pods:
+        if pod.parent_node_name == args.node_name:
+            pod_data.append([
+                pod.pod_id,
+                pod.pod_name,
+                pod.namespace,
+                pod.container_count
+            ])
+    headers = ['Pod ID', 'Pod Name', 'Namespace', 'Container Count']
+    if len(pod_data) < 1:
+        return f"Found 0 pods related to {args.node_name}"
+    
+    return tabulate(pod_data, headers, tablefmt='grid')
 
 
 def find_asset_count(falcon: KubernetesProtection) -> dict:
@@ -384,27 +462,38 @@ def find_asset_count(falcon: KubernetesProtection) -> dict:
     return (tabulate(env, headers="keys", tablefmt='heavy_grid', colalign=("left", "left")))
 
 
-def main():
-    """Start Main Execution Routine"""
-    args = parse_command_line()
-    falcon = connect_api(key=args.client_id, secret=args.client_secret, debug=args.debug)
-    if args.cluster or args.node:
+def print_kube(args: Namespace, falcon: KubernetesProtection) -> None:
+    """Prints the kubernetes environment to the terminal"""
+    if args.cluster or args.node or args.node_name:
         clusters = generate_clusters(falcon, args.thread)
         nodes = generate_nodes(falcon, args.thread)
-        if args.node:
+        if args.node or args.node_name:
             pods = generate_pods(falcon, args.thread)
-            kube = aggregate_kube(clusters, nodes, pods)
+            containers = generate_containers(falcon, args.thread)
+            active_pods = find_active_pods(pods, containers)
+            kube = aggregate_kube(clusters, nodes, active_pods)
             kube_dictionary = form_relations(kube, args)
+            print(kube_dictionary)
+
         else:
             kube = aggregate_kube(clusters, nodes)
             kube_dictionary = form_relations(kube, args)
             print(kube_dictionary)
-        print("DONE")
+
     else:
         print(find_asset_count(falcon))
         cluster_info = f"Use {colored("-c", "yellow")} to print cluster information"
         node_info = f"Use {colored("-n", "blue")} to print node information"
         print(tabulate([[cluster_info], [node_info]], tablefmt="mixed_grid"))
+
+
+def main():
+    """Start Main Execution Routine"""
+    args = parse_command_line()
+    falcon = connect_api(key=args.client_id, secret=args.client_secret, debug=args.debug)
+    print(KUBE)
+    print_kube(args, falcon)
+    
 
 
 if __name__ == "__main__":
