@@ -479,6 +479,7 @@ def print_kube(args: Namespace, falcon: KubernetesProtection) -> None:
             print(kube_dictionary)
 
     else:
+        print(KUBE)
         print(find_asset_count(falcon))
         cluster_info = f"Use {colored("-c", "yellow")} to print cluster information"
         node_info = f"Use {colored("-n", "blue")} to print node information"
@@ -489,7 +490,6 @@ def main():
     """Start Main Execution Routine"""
     args = parse_command_line()
     falcon = connect_api(key=args.client_id, secret=args.client_secret, debug=args.debug)
-    print(KUBE)
     print_kube(args, falcon)
 
 
