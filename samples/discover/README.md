@@ -55,6 +55,12 @@ python3 list_discovered_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -
 python3 list_discovered_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f simple
 ```
 
+> Activate API debugging with the `-d` argument.
+
+```shell
+python3 list_discovered_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d
+```
+
 ##### Available table formats
 Tabular results may be formatted using any of the format options listed below.
 
@@ -87,7 +93,7 @@ Command-line help is available via the `-h` argument.
 
 ```shell
 python3 list_discovered_hosts.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -h
-usage: list_discovered_hosts.py [-h] [-k CLIENT_ID] [-s CLIENT_SECRET] [-b BASE_URL] [-r] [-f FORMAT]
+usage: list_discovered_hosts.py [-h] [-k CLIENT_ID] [-s CLIENT_SECRET] [-b BASE_URL] [-r] [-d] [-f FORMAT]
 
 CrowdStrike Falcon Discover simple example.
 
@@ -115,7 +121,7 @@ CrowdStrike Falcon Discover simple example.
 
 Creation date: 02.08.2022 - jshcodes@CrowdStrike
 
-optional arguments:
+options:
   -h, --help            show this help message and exit
   -k CLIENT_ID, --client_id CLIENT_ID
                         CrowdStrike Falcon API key ID.
@@ -126,6 +132,7 @@ optional arguments:
   -b BASE_URL, --base_url BASE_URL
                         CrowdStrike API region (us1, us2, eu1, usgov1) NOT required unless you are using `usgov1`.
   -r, --reverse         Reverse sort (defaults to ASC)
+  -d, --debug           Enable API debugging
   -f FORMAT, --format FORMAT
                         Table format to use for display.
                         (plain, simple, github, grid, fancy_grid, pipe, orgtbl, jira, presto,
