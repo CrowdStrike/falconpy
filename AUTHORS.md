@@ -97,6 +97,9 @@ This has been a critical element in the development of the FalconPy project.
 + Nick, `nickforsythbarr`
 + `nesies`
 + `David-M-Berry`
++ Oke Okumo, `@okewoma`
++ Alexander Moomaw, `@alhumaw`
++ Esha Kumar, `@exk200006` 
 
 
 ## Sponsors
