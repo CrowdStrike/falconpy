@@ -1,5 +1,4 @@
-"""Retrieve hosts by CVE vulnerability.
-
+"""
  ______                         __ _______ __         __ __
 |      |.----.-----.--.--.--.--|  |     __|  |_.----.|__|  |--.-----.
 |   ---||   _|  _  |  |  |  |  _  |__     |   _|   _||  |    <|  -__|
@@ -23,6 +22,7 @@ Required API scopes
 """
 from argparse import ArgumentParser, RawTextHelpFormatter
 import json
+import sys
 try:
     from tabulate import tabulate
 except ImportError as no_tabulate:
@@ -182,6 +182,15 @@ def parse_command_line() -> object:
         required=False
         )
     parser.add_argument(
+        '-i',
+        '--include',
+        help='List of columns to include in the display, comma-separated.\n'
+        'If specified, only these columns will be displayed.\n'
+        '(cve, score, severity, cve_description, created_on, updated_on,\n'
+        'hostname, local_ip, os_version, service_provider, remediation)',
+        required=False
+        )
+    parser.add_argument(
         '-f',
         '--format',
         help='Table format to use for display.\n'
@@ -212,6 +221,13 @@ def parse_command_line() -> object:
         action="store_false",
         required=False
         )
+    parser.add_argument(
+        '-d',
+        '--deduplicate',
+        help='Remove duplicate entries based on hostname and local_ip.',
+        action="store_true",
+        required=False
+        )
 
     return parser.parse_args()
 
@@ -219,7 +235,7 @@ def parse_command_line() -> object:
 def inform(msg: str):
     """Provide informational updates to the user as the program progresses."""
     if PROGRESS:
-        print("  %-80s" % msg, end="\r", flush=True)  # pylint: disable=C0209
+        print(f"\r{' ' * 80}\r{msg}", end='', flush=True)
 
 
 def get_spotlight_matches(cves: list) -> list:
@@ -237,6 +253,9 @@ def get_spotlight_matches(cves: list) -> list:
 
 def remove_exclusions(resultset: dict) -> dict:
     """Remove requested columns from the table display."""
+    if INCLUDE:
+        return [{key: result[key] for key in INCLUDE} for result in resultset]
+
     for result in resultset:
         for exclusion in EXCLUDE:
             del result[exclusion]
@@ -247,6 +266,7 @@ def remove_exclusions(resultset: dict) -> dict:
 def get_match_details(match_list: list) -> list:
     """Retrieve details for individual matches to the specified CVEs."""
     returned = []
+    seen = set()
     inform("[ Retrieve matches ]")
     match_results = spotlight.get_vulnerabilities(ids=match_list)
     if match_results["status_code"] >= 400:
@@ -254,8 +274,15 @@ def get_match_details(match_list: list) -> list:
 
     for result in match_results["body"]["resources"]:
         row = SpotlightCVEMatch(result).to_object()
-        inform(f"[ {row['cve']} ] Found {row['hostname']}/{row['local_ip']}")
-        returned.append(row)
+        if args.deduplicate:
+            unique_id = (row['hostname'], row['local_ip'])
+            if unique_id not in seen:
+                seen.add(unique_id)
+                inform(f"[ {row['cve']} ] Found {row['hostname']}/{row['local_ip']}")
+                returned.append(row)
+        else:
+            inform(f"[ {row['cve']} ] Found {row['hostname']}/{row['local_ip']}")
+            returned.append(row)
 
     reversing = False
     if SORT_REVERSE:
@@ -291,6 +318,10 @@ if args.cve:
 EXCLUDE = []
 if args.exclude:
     EXCLUDE = args.exclude.split(",")
+
+INCLUDE = []
+if args.include:
+    INCLUDE = args.include.split(",")
 
 TABLE_FORMAT = "fancy_grid"
 if args.format:
@@ -338,8 +369,10 @@ HEADERS = {
 inform("[ Process startup ]")
 details = get_match_details(get_spotlight_matches(CVE_LIST))
 
+# Clear the progress message
+print("\r" + " " * 80 + "\r", end='', flush=True)
+
 # Display results
-inform("[ Results display ]")
 print(
     tabulate(
         tabular_data=remove_exclusions(details),
