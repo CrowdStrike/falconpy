@@ -1,8 +1,8 @@
 ![CrowdStrike Falcon](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png)
 [![CrowdStrike Subreddit](https://img.shields.io/badge/-r%2Fcrowdstrike-white?logo=reddit&labelColor=gray&link=https%3A%2F%2Freddit.com%2Fr%2Fcrowdstrike)](https://reddit.com/r/crowdstrike)
 
-# Kubernetes Protection examples
-The examples in this folder focus on leveraging CrowdStrike's Kubernetes Protection API to discover and manage your Kubernetes assets.
+# Container examples
+The examples in this folder focus on leveraging CrowdStrike's Container APIs to discover and manage your container assets.
 - [kube_map - Discover your Kubernetes Attack Surface](#Discover-your-Kubernetes-Attack-Surface)
 
 ## Discover your Kubernetes Attack Surface
@@ -76,8 +76,8 @@ usage: kube_map.py [-h] -k CLIENT_ID -s CLIENT_SECRET [-d] [-c] [-n] [-nn NODE_N
  | |  | |/ ___ \|  __/|  __/| |___|  _ <
  |_|  |_/_/   \_\_|   |_|   |_____|_| \_\
 
-This sample utilizes the KubernetesProtection sample to map out
-your kubenetes assets. Kubernetes assets are found via the Falcon Sensor.
+This sample utilizes the Kubernetes Protection service collection to map out
+your kubernetes assets. Kubernetes assets are found via the Falcon Sensor.
 
 Creation date: 06.26.23 - alhumaw
 
