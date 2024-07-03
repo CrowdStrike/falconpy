@@ -220,7 +220,7 @@ def generate_clusters(falcon: KubernetesProtection, thread: bool) -> list:
             node_count=batch['node_count']
         )
         clusters.append(new_cluster)
-    
+
     return clusters
 
 
@@ -247,7 +247,7 @@ def generate_nodes(falcon: KubernetesProtection, thread: bool) -> list:
             pod_count=(batch['pod_count'])
         )
         nodes.append(new_node)
-    
+
     return nodes
 
 
@@ -290,7 +290,7 @@ def find_active_pods(pods: list[Pod], containers: dict) -> list:
                 break
         if has_match:
             active_pods.append(pod)
-    
+
     return active_pods
 
 
@@ -348,7 +348,10 @@ def normal_response(falcon: KubernetesProtection, endpoint: str, filt=None) -> l
 def concurent_response(falcon: KubernetesProtection, endpoint: str, total: str, filt=None) -> list:
     """Utilizes concurrent futures to asynchronously handle paginated API calls at once"""
     chunk_size = 200
+    # Determine how many workers are needed to handle all chunks at once
     workers = int(total / chunk_size) + 1
+    # Create a list of chunks of the total, incremented by the max limit (chunk_size)
+    # (range(0,total), each list index is incremented by 200)
     offsets = [i * chunk_size for i in range(workers)]
     all_resp = []
     if workers > 10:
@@ -411,6 +414,7 @@ def form_relations(kube: KubernetesEnvironment, args: Namespace) -> dict:
                 cluster.node_count
             ])
         headers = ['Cluster Name || ID', 'Version', 'Cloud Type', 'Node Count']
+        # Sort by node count
         cluster_data.sort(key=itemgetter(3))
 
         return tabulate(cluster_data, headers, tablefmt='grid')
@@ -430,6 +434,7 @@ def form_relations(kube: KubernetesEnvironment, args: Namespace) -> dict:
                 node.pod_count
             ])
         headers = ['Node Name', 'IP', 'Arch', 'CPU', 'Storage', 'Active\nPod Count']
+        # Sort by pod count
         node_data.sort(key=itemgetter(5))
 
         return tabulate(node_data, headers, tablefmt='grid')
@@ -458,7 +463,10 @@ def find_asset_count(falcon: KubernetesProtection) -> dict:
     nodes = colored(falcon.ReadNodeCount()['body']['resources'][0]['count'], 'red')
     clusters = colored(falcon.ReadClusterCount()['body']['resources'][0]['count'], 'red')
     env = {
-        'Asset': [colored('Clusters', "yellow"), colored('Nodes', "blue"), colored('Pods', 'green'), 'Containers'],
+        'Asset': [colored('Clusters', "yellow"),
+                  colored('Nodes', "blue"),
+                  colored('Pods', 'green'),
+                  'Containers'],
         'Count': [clusters, nodes, pods, containers]
 
     }
@@ -471,6 +479,7 @@ def print_kube(args: Namespace, falcon: KubernetesProtection) -> None:
     if args.cluster or args.node or args.node_name:
         clusters = generate_clusters(falcon, args.thread)
         nodes = generate_nodes(falcon, args.thread)
+
         if args.node or args.node_name:
             # Compare all pods against active containers to find active pods
             pods = generate_pods(falcon, args.thread)
@@ -478,13 +487,13 @@ def print_kube(args: Namespace, falcon: KubernetesProtection) -> None:
             active_pods = find_active_pods(pods, containers)
             # Creates kube instance, prints out table
             kube = aggregate_kube(clusters, nodes, active_pods)
-            kube_dictionary = form_relations(kube, args)
-            print(kube_dictionary)
+            kube_table = form_relations(kube, args)
+            print(kube_table)
 
         else:
             kube = aggregate_kube(clusters, nodes)
-            kube_dictionary = form_relations(kube, args)
-            print(kube_dictionary)
+            kube_table = form_relations(kube, args)
+            print(kube_table)
 
     else:
         print(KUBE)
