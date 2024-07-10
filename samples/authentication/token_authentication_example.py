@@ -34,9 +34,11 @@ Please note: Token Authentication creates an instance of a FalconPy Service Clas
 
 This sample should run using any version of FalconPy and requires the colorama and click libraries.
 """
+import logging
 import os
 import click
 import colorama
+from argparse import ArgumentParser, RawTextHelpFormatter, Namespace 
 from falconpy import (
     CloudConnectAWS,
     Detects,
@@ -54,6 +56,20 @@ YELLOW = colorama.Fore.LIGHTYELLOW_EX
 BOLD = colorama.Style.BRIGHT
 ENDMARK = colorama.Style.RESET_ALL
 
+def consume_arguments() -> Namespace:
+    parser = ArgumentParser(description=__doc__, fromatter_class=RawTextHelpFormatter)
+    parser.add_argument("-d", "--debug",
+                        help="Enable API debugging",
+                        action="store_true",
+                        default=False
+                        )
+    parser.add_argument("-b", "--base-url",
+                        dest="base_url",
+                        help="CrowdStrike cloud region. (auto or usgov1, Default: auto)",
+                        required=False,
+                        default="auto"
+                        )
+    return parser.parse_args
 
 # ### BEGIN token simulation
 def get_token():
