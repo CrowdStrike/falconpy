@@ -8,6 +8,10 @@ The examples in this folder focus on leveraging CrowdStrike's Container APIs to 
 ## Discover your Kubernetes Attack Surface
 Discovers Kubernetes assets that are monitored by the Falcon Sensor (clusters, nodes, pods, and containers).
 
+> [!IMPORTANT]
+> Installing the __Kubernetes Protection Agent (KPA)__ on your clusters will result in the most accurate information. 
+
+
 ### Running the program
 In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
 | Service Collection | Scope |
@@ -28,27 +32,27 @@ This example accepts the following input parameters.
 
 Displays the number of clusters, nodes, pods, and containers detected by the Falcon Sensor.
 ```shell
-python3 kube_map.py -k $CLIENT_ID -s $CLIENT_SECRET
+python3 kube_map.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
 ```
 
 Displays a table of cluster information.
 ```shell
-python3 kube_map.py -k $CLIENT_ID -s $CLIENT_SECRET -c
+python3 kube_map.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c
 ```
 
 Displays a table of node information.
 ```shell
-python3 kube_map.py -k $CLIENT_ID -s $CLIENT_SECRET -n
+python3 kube_map.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n
 ```
 
 Displays a table of pods based on it's parent node name using the optional threading feature.
 ```shell
-python3 kube_map.py -k $CLIENT_ID -s $CLIENT_SECRET -nn "node_name" -t
+python3 kube_map.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -nn "node_name" -t
 ```
 
 Displays API debug logging.
 ```shell
-python3 kube_map.py -k $CLIENT_ID -s $CLIENT_SECRET -d
+python3 kube_map.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d
 ```
 
 #### Command-line help
