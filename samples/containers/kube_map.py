@@ -1,4 +1,5 @@
 r"""
+
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
 |.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
@@ -148,23 +149,23 @@ def parse_command_line() -> Namespace:
 
 @dataclass
 class Cluster:
-    """Kubernetes cluster dataclass"""
+    """Kubernetes cluster dataclass."""
+
     cluster_id: str
     cluster_name: str
-    version: str
+    agent: str
     cloud_type: str
     node_count: int
 
 
 @dataclass
 class Node:
-    """Kubernetes nodes dataclass"""
-    node_id: str
+    """Kubernetes nodes dataclass."""
+
     node_name: str
     parent_cluster_name: str
     ip: str
     architecture: str
-    operating_system: str
     cpu: str
     storage: str
     pod_count: int
@@ -172,7 +173,8 @@ class Node:
 
 @dataclass
 class Pod:
-    """Kubernetes pods dataclass"""
+    """Kubernetes pods dataclass."""
+
     pod_id: str
     pod_name: str
     parent_node_name: str
@@ -182,27 +184,28 @@ class Pod:
 
 
 class KubernetesEnvironment:
-    """Kubernetes comprehensive environment"""
+    """Kubernetes comprehensive environment."""
+
     def __init__(self):
         self.clusters: list[Cluster] = []
         self.nodes: list[Node] = []
         self.pods: list[Pod] = []
 
     def add_clusters(self, cluster: Cluster) -> None:
-        """Appends cluster to list of clusters"""
+        """Append cluster to list of clusters."""
         self.clusters = cluster
 
     def add_nodes(self, node: Node) -> None:
-        """Appends node to list of nodes"""
+        """Append node to list of nodes."""
         self.nodes = node
 
     def add_pods(self, pod: Pod) -> None:
-        """Appends pod to list of pods"""
+        """Append pod to list of pods."""
         self.pods = pod
 
 
 def generate_clusters(falcon: KubernetesProtection, thread: bool) -> list:
-    """Retrieves and returns a list of clusters"""
+    """Retrieve and return a list of clusters."""
     print("Locating Clusters...")
     if thread:
         print("Threading....")
@@ -215,7 +218,7 @@ def generate_clusters(falcon: KubernetesProtection, thread: bool) -> list:
         new_cluster = Cluster(
             cluster_id=batch['cluster_id'],
             cluster_name=batch['cluster_name'],
-            version=batch['kubernetes_version'],
+            agent=batch['agent_status'],
             cloud_type=batch['cloud_name'],
             node_count=batch['node_count']
         )
@@ -225,7 +228,7 @@ def generate_clusters(falcon: KubernetesProtection, thread: bool) -> list:
 
 
 def generate_nodes(falcon: KubernetesProtection, thread: bool) -> list:
-    """Retrieves and returns a list of nodes"""
+    """Retrieve and return a list of nodes."""
     print("Discovering Nodes...")
     if thread:
         print("Threading....")
@@ -234,25 +237,28 @@ def generate_nodes(falcon: KubernetesProtection, thread: bool) -> list:
     else:
         all_resp = normal_response(falcon, "ReadNodeCombined")
     nodes = []
+    real_cpu = ""
     for batch in all_resp:
         new_node = Node(
-            node_id=batch['node_id'],
             node_name=batch['node_name'],
             parent_cluster_name=batch['cluster_name'],
             ip=batch['ipv4'],
             architecture=batch['architecture'],
-            operating_system=batch['os'],
             cpu=batch['cpu'],
             storage=batch['storage'],
             pod_count=(batch['pod_count'])
         )
+        if len(new_node.cpu) > 0:
+            cpu_set = new_node.cpu.split("/")
+            real_cpu = f"{cpu_set[1]}/{cpu_set[0]}"
+            new_node.cpu = real_cpu
         nodes.append(new_node)
 
     return nodes
 
 
 def generate_pods(falcon: KubernetesProtection, thread: bool) -> list:
-    """Retrieves and returns a list of pods"""
+    """Retrieve and return a list of pods."""
     print("Finding Pods...")
     if thread:
         total = falcon.ReadPodCombined()['body']['meta']['pagination']['total']
@@ -280,7 +286,7 @@ def generate_pods(falcon: KubernetesProtection, thread: bool) -> list:
 
 
 def find_active_pods(pods: list[Pod], containers: dict) -> list:
-    """Cross-references running containers to find active pods"""
+    """Cross-references running containers to find active pods."""
     active_pods = []
     for pod in pods:
         has_match = False
@@ -295,7 +301,7 @@ def find_active_pods(pods: list[Pod], containers: dict) -> list:
 
 
 def generate_containers(falcon: KubernetesProtection, thread: bool) -> dict:
-    """Retrieves and returns a list of RUNNING containers"""
+    """Retrieve and return a list of RUNNING containers."""
     print("Tracking Down Containers...")
     running_containers = {}
     filt = "running_status:'true'"
@@ -312,13 +318,17 @@ def generate_containers(falcon: KubernetesProtection, thread: bool) -> dict:
     return running_containers
 
 
-def response_processing(falcon: KubernetesProtection, endpoint: str, filt: str, limit: int, offset: int) -> list:
-    """Dynamic API caller for multi-proccessing"""
+def response_processing(falcon: KubernetesProtection,
+                        endpoint: str, filt: str,
+                        limit: int, offset: int) -> list:
+    """Dynamic API caller for multi-proccessing."""
     method = getattr(falcon, endpoint, None)
     if method is None:
         raise AttributeError(f"API object has no method named '{endpoint}'")
     if filt:
-        resp = method(filter=filt if filt else None, limit=limit, offset=offset)['body']['resources']
+        resp = method(filter=filt if filt else None,
+                      limit=limit,
+                      offset=offset)['body']['resources']
     else:
         resp = method(limit=limit, offset=offset)['body']['resources']
 
@@ -326,7 +336,7 @@ def response_processing(falcon: KubernetesProtection, endpoint: str, filt: str, 
 
 
 def normal_response(falcon: KubernetesProtection, endpoint: str, filt=None) -> list:
-    """Normal API caller"""
+    """Caller to handle pagination."""
     limit = 200
     all_resp = []
     total = 1
@@ -346,7 +356,7 @@ def normal_response(falcon: KubernetesProtection, endpoint: str, filt=None) -> l
 
 
 def concurent_response(falcon: KubernetesProtection, endpoint: str, total: str, filt=None) -> list:
-    """Utilizes concurrent futures to asynchronously handle paginated API calls at once"""
+    """Utilizes concurrent futures to asynchronously handle paginated API calls at once."""
     chunk_size = 200
     # Determine how many workers are needed to handle all chunks at once
     workers = int(total / chunk_size) + 1
@@ -378,7 +388,7 @@ def concurent_response(falcon: KubernetesProtection, endpoint: str, total: str, 
 
 
 def aggregate_kube(clusters: list, nodes: list, pods=None) -> KubernetesEnvironment:
-    """Organizes clusters, nodes, and pods into a data structure"""
+    """Organizes clusters, nodes, and pods into a data structure."""
     kube = KubernetesEnvironment()
     kube.add_clusters(clusters)
     kube.add_nodes(nodes)
@@ -389,7 +399,7 @@ def aggregate_kube(clusters: list, nodes: list, pods=None) -> KubernetesEnvironm
 
 
 def connect_api(key: str, secret: str, debug: bool) -> KubernetesProtection:
-    """Connects and returns an instance of the Uber class."""
+    """Connect and return an instance of the Uber class."""
     try:
         if debug:
             logging.basicConfig(level=logging.DEBUG)
@@ -400,7 +410,7 @@ def connect_api(key: str, secret: str, debug: bool) -> KubernetesProtection:
 
 
 def form_relations(kube: KubernetesEnvironment, args: Namespace) -> dict:
-    """Returns a tabulated kubernetes environment"""
+    """Return a tabulated kubernetes environment."""
     if args.cluster:
         cluster_data = []
         for cluster in kube.clusters:
@@ -409,11 +419,11 @@ def form_relations(kube: KubernetesEnvironment, args: Namespace) -> dict:
                     cluster.node_count += 1
             cluster_data.append([
                 cluster.cluster_name if cluster.cluster_name else cluster.cluster_id,
-                cluster.version,
+                cluster.agent,
                 cluster.cloud_type,
                 cluster.node_count
             ])
-        headers = ['Cluster Name || ID', 'Version', 'Cloud Type', 'Node Count']
+        headers = ['Cluster Name || ID', 'KPA Status', 'Cloud Type', 'Node Count']
         # Sort by node count
         cluster_data.sort(key=itemgetter(3))
 
@@ -456,9 +466,11 @@ def form_relations(kube: KubernetesEnvironment, args: Namespace) -> dict:
 
 
 def find_asset_count(falcon: KubernetesProtection) -> dict:
-    """Find and output the initial count of all assets"""
+    """Find and output the initial count of all assets."""
     env = {}
-    containers = colored(falcon.ReadContainerCount(filter="running_status: 'true'")['body']['resources'][0]['count'], 'red')
+    containers = colored(falcon.ReadContainerCount(
+        filter="running_status: 'true'")['body']['resources'][0]['count'], 'red')
+
     pods = colored(falcon.ReadPodCount()['body']['resources'][0]['count'], 'red')
     nodes = colored(falcon.ReadNodeCount()['body']['resources'][0]['count'], 'red')
     clusters = colored(falcon.ReadClusterCount()['body']['resources'][0]['count'], 'red')
@@ -468,14 +480,13 @@ def find_asset_count(falcon: KubernetesProtection) -> dict:
                   colored('Pods', 'green'),
                   'Containers'],
         'Count': [clusters, nodes, pods, containers]
-
     }
 
     return (tabulate(env, headers="keys", tablefmt='heavy_grid', colalign=("left", "left")))
 
 
 def print_kube(args: Namespace, falcon: KubernetesProtection) -> None:
-    """Prints the kubernetes environment to the terminal"""
+    """Print the kubernetes environment to the terminal."""
     if args.cluster or args.node or args.node_name:
         clusters = generate_clusters(falcon, args.thread)
         nodes = generate_nodes(falcon, args.thread)
@@ -498,15 +509,17 @@ def print_kube(args: Namespace, falcon: KubernetesProtection) -> None:
     else:
         print(KUBE)
         print(find_asset_count(falcon))
-        cluster_info = f"Use {colored("-c", "yellow")} to print cluster information"
-        node_info = f"Use {colored("-n", "blue")} to print node information"
-        pod_info = f"Use {colored("-nn", "green")} with a node name to print\nactive pods linked to that node"
-        hint = f"HINT: use {colored("-t", "magenta")} along with any command to\nimprove speed using asynchronous processes"
+        cluster_info = f"Use {colored('-c', 'yellow')} to print cluster information"
+        node_info = f"Use {colored('-n', 'blue')} to print node information"
+        pod_info = (f"Use {colored('-nn', 'green')}"
+                    " with a node name to print\nactive pods linked to that node")
+        hint = (f"HINT: use {colored('-t', 'magenta')}"
+                " along with any command to\nimprove speed using asynchronous processing")
         print(tabulate([[cluster_info], [node_info], [pod_info], [hint]], tablefmt="mixed_grid"))
 
 
 def main():
-    """Start Main Execution Routine"""
+    """Start Main Execution Routine."""
     args = parse_command_line()
     falcon = connect_api(key=args.client_id, secret=args.client_secret, debug=args.debug)
     print_kube(args, falcon)
