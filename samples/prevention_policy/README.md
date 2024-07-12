@@ -270,7 +270,7 @@ In order to run this demonstration, you will need access to CrowdStrike API keys
 This example accepts the following input parameters.
 | Parameter | Purpose | Category |
 | :--- | :--- | :--- |
-|  `-h`, `--help` | Show help message and exit | optional |
+|  `-h`, `--help` | Show help message and exit | optional | 
 | `-r`, `--show_settings` | Display policy settings | display |
 | `-z`, `--verbose` | Show all settings, including disabled | display |
 | `-e`, `--enable` | Enable the policy | administration |
@@ -517,6 +517,7 @@ optional management arguments:
   -e, --enable          Enable the policy
   -d, --disable         Disable the policy
   -x, --delete          Delete the policy
+  -debug, --debug       Enable API debugging
 
 optional update arguments:
   -i POLICY_ID, --policy_id POLICY_ID
