@@ -48,6 +48,10 @@ python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -o fi
 python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -c aws
 ```
 
+```shell
+python3 get_cspm_policies.py -f $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d
+```
+> To activate debugging, use the `-d` argument.
 #### Command-line help
 Command-line help is available via the `-h` argument.
 
@@ -98,6 +102,7 @@ optional arguments:
                         Policy report output file (CSV format)
   -c CLOUD, --cloud CLOUD
                         Cloud provider (aws, azure, gcp)
+  -d, --debug,          Activates debugging 
 ```
 
 ### Example source code
