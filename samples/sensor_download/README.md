@@ -41,7 +41,9 @@ This program accepts the following command-line arguments.
 | `-o` _OS_ | `--os` _OS_ | Sensor operating system |
 | `-v` _OSVER_ | `--osver` _OSVER_ | Sensor operating system version |
 | `-f` _FILENAME_ | `--filename` _FILENAME_ | Name to use for downloaded file |
-| `-t` _TABLE_FORMAT_ | `--table_format` _TABLE_FORMAT_ | Table format to use for display.<ul><li>plain</li><li>simple</li><li>github</li><li>grid</li><li>fancy_grid</li><li>pipe</li><li>orgtbl</li><li>jira</li><li>presto</li><li>pretty</li><li>psql</li><li>rst</li><li>mediawiki</li><li>moinmoin</li><li>youtrack</li><li>html</li><li>unsafehtml</li><li>latext</li><li>latex_raw</li><li>latex_booktabs</li><li>latex_longtable</li><li>textile</li><li>tsv</li></ul> |
+| `-t` _TABLE_FORMAT_ | `--table_format` _TABLE_FORMAT_ | Table format to use for display.
+|`-debug`|`--debug`|`Enable API debugging`|
+|`-b`|`--base-url`|`GovCloud access to Crowdstrike API`|<ul><li>plain</li><li>simple</li><li>github</li><li>grid</li><li>fancy_grid</li><li>pipe</li><li>orgtbl</li><li>jira</li><li>presto</li><li>pretty</li><li>psql</li><li>rst</li><li>mediawiki</li><li>moinmoin</li><li>youtrack</li><li>html</li><li>unsafehtml</li><li>latext</li><li>latex_raw</li><li>latex_booktabs</li><li>latex_longtable</li><li>textile</li><li>tsv</li></ul> |
 
 #### Basic usage
 The only required command line arguments are `-k` (CrowdStrike Falcon API Client ID) and `-s` (CrowdStrike Falcon API Client Secret).
@@ -89,7 +91,18 @@ Filters described above are applied to select the appropriate version to downloa
 ```shell
 python3 download_sensor.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -o centos -v 7 -d
 ```
+##### Activating Debugging 
+This exmaple shows how you can activate debugging functionality when you run download_senor.py.
 
+```shell
+python3 download_sensor.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -debug 
+```
+##### Allowing Access to GovCloud Users 
+This exmaple shows how you GovCloud user can access sensor_download.py.
+
+```shell
+python3 download_sensor.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -b 
+```
 ##### Specifying `N-1` or `N-2` versions.
 You can specify the previous, or 2nd previous version to download by leveraging the `-n` argument.
 
@@ -138,11 +151,13 @@ optional arguments:
                         CrowdStrike API Secret
   -a, --all             Show all columns / Download all versions
   -d, --download        Shortcut for '--command download'
+  -b, --base-url        Allows access to usgov1
   -n NMINUS, --nminus NMINUS
                         Download previous version (n-1, n-2, 0 = current, 2 = n-2)
   -c COMMAND, --command COMMAND
                         Command to perform. (list or download, defaults to list)
   -o OS, --os OS        Sensor operating system
+  -debug, --debug       Command to activate debugging 
   -v OSVER, --osver OSVER
                         Sensor operating system version
   -f FILENAME, --filename FILENAME
@@ -152,6 +167,7 @@ optional arguments:
                         (plain, simple, github, grid, fancy_grid, pipe, orgtbl, jira, presto,
                         pretty, psql, rst, mediawiki, moinmoin, youtrack, html, unsafehtml,
                         latext, latex_raw, latex_booktabs, latex_longtable, textile, tsv)
+            
 ```
 
 ### Example source code
