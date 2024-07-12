@@ -20,7 +20,7 @@ CrowdStrike's
                            |   |   |   | |   |   |   |    \              /    |   |\   \
                            |___|   |___| |___|   |___|     \____/\/\____/     |___| \___\
                                                                |0\/0|
-                                                                \/\/          FalconPy v1.0
+                                                                \/\/          FalconPy v1.4.4
                                                                  \/
 
 Creation date: 2022.02.11           Modification: 2022.05.11
@@ -33,6 +33,7 @@ Leverages the FalconPy API SDK to update prevention policies within CrowdStrike 
 This solution requires the FalconPy SDK. This project
 can be accessed here: https://github.com/CrowdStrike/falconpy
 """
+import logging
 from argparse import ArgumentParser, RawTextHelpFormatter
 from enum import Enum
 from tabulate import tabulate
@@ -352,6 +353,11 @@ def consume_command_line():
     parser = ArgumentParser(description=shiny_description(__doc__),
                             formatter_class=RawTextHelpFormatter
                             )
+    parser.add_argument("-d", "--debug",
+                        help="Enable API debugging",
+                        action="store_true",
+                        default=False
+                        )
     # Display
     view = parser.add_argument_group("optional display arguments")
     view.add_argument("-r", "--show_settings",
@@ -414,11 +420,19 @@ def consume_command_line():
                      )
     # Always required
     req = parser.add_argument_group("required arguments")
-    req.add_argument("-f", "--falcon_client_id", help="Falcon Client ID", required=True)
-    req.add_argument("-s", "--falcon_client_secret", help="Falcon Client Secret", required=True)
+    req.add_argument("-f", "--falcon_client_id", 
+                     help="Falcon Client ID", 
+                     required=True)
+    req.add_argument("-s", "--falcon_client_secret", 
+                     help="Falcon Client Secret", 
+                     required=True)
 
-    return parser.parse_args()
+    parsed = parser.parse_args()
+    if parsed.debug:
+        logging.basicConfig(level=logging.DEBUG)
+    
 
+    return parsed
 
 def do_policy_delete(pol_id: str = None):
     """Delete the policy using the provided ID."""
@@ -603,10 +617,11 @@ if __name__ == "__main__":
     # Retrieve any provided command line arguments
     args = consume_command_line()
 
-    # Authenticate using our provided falcon client_id and client_secret
+    # Authenticate using our provided falcon client_id and client_secret and debugging if activated
     falcon_policy = PreventionPolicy(client_id=args.falcon_client_id,
-                                     client_secret=args.falcon_client_secret
-                                     )
+                                     client_secret=args.falcon_client_secret, 
+                                     debug=args.debug
+                                    )
 
     # Review the provided arguments and then perform the request
     process_arguments(*determine_arguments(args))

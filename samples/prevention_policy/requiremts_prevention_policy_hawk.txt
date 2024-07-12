@@ -1,0 +1,4 @@
+argparse
+enum34
+crowdstrike-falconpy
+tabulate
