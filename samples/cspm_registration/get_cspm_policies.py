@@ -39,7 +39,7 @@ import csv
 import os
 import sys
 import logging
-from argparse import ArgumentParser, RawTextHelpFormatter
+from argparse import ArgumentParser, RawTextHelpFormatter, Namespace
 from tabulate import tabulate
 try:
     from falconpy import CSPMRegistration
@@ -49,17 +49,42 @@ except ImportError as no_falconpy:
         ) from no_falconpy
 
 
+def consume_arguments() -> Namespace:
 # Capture command line arguments
-parser = ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
-parser.add_argument("-f", "--falcon_client_id",
-                    help="Falcon Client ID", default=None, required=False)
-parser.add_argument("-s", "--falcon_client_secret",
-                    help="Falcon Client Secret", default=None, required=False)
-parser.add_argument("-o", "--output_file",
-                    help="Policy report output file (CSV format)", required=False)
-parser.add_argument(
-    "-c", "--cloud", help="Cloud provider (aws, azure, gcp)", required=False)
-args = parser.parse_args()
+    parser = ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
+    parser.add_argument("-f", "--falcon_client_id",
+                        help="Falcon Client ID", 
+                        default=None,
+                        required=False)
+    parser.add_argument("-s", "--falcon_client_secret",
+                        help="Falcon Client Secret",
+                        default=None, 
+                        required=False)
+    parser.add_argument("-o", "--output_file",
+                        help="Policy report output file (CSV format)", 
+                        required=False)
+    parser.add_argument("-c", "--cloud", 
+                        help="Cloud provider (aws, azure, gcp)", 
+                        required=False)
+    parser.add_argument("-d", "--debug",
+                        help="Enable API debugging",
+                        action="store_true",
+                        default=False
+                        )
+
+    parsed = parser.parse_args()
+    return parsed
+
+
+cmd_line = consume_arguments()
+
+# Activate debugging if requested
+if cmd_line.debug:
+    logging.basicConfig(level=logging.DEBUG)
+
+
+
+# pylint: disable=E0606
 
 # Grab our client_id and client_secret or exit
 CONFIG_FILE = '../config.json'
@@ -68,20 +93,22 @@ if os.path.isfile(CONFIG_FILE):
         config = json.loads(file_config.read())
         falcon_client_id = config['falcon_client_id']
         falcon_client_secret = config['falcon_client_secret']
-elif args.falcon_client_id is not None and args.falcon_client_secret is not None:
-    falcon_client_id = args.falcon_client_id
-    falcon_client_secret = args.falcon_client_secret
+elif cmd_line.falcon_client_id is not None and cmd_line.falcon_client_secret is not None:
+    falcon_client_id = cmd_line.falcon_client_id
+    falcon_client_secret = cmd_line.falcon_client_secret
+    debug = cmd_line.debug if cmd_line.debug else False  # Set debug mode based on argument
 else:
     logging.error(
         " Please specify Falcon API Credentials with config.json or script arguments")
     sys.exit()
 
-data_file = args.output_file
-cloud = args.cloud
+data_file = cmd_line.output_file
+cloud = cmd_line.cloud
 
 # Instantiate CSPM_Registration service class
 falcon = CSPMRegistration(client_id=falcon_client_id,
-                          client_secret=falcon_client_secret
+                          client_secret=falcon_client_secret,
+                          debug=debug
                           )
 
 
