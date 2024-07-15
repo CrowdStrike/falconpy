@@ -167,7 +167,8 @@ class FalconInterface(BaseFalconAuth):
                         if cvar.cs_cloud:
                             self._config.base_url = confirm_base_url(cvar.cs_cloud)
                     except AttributeError:
-                        pass
+                        if self.token_value:
+                            self._config.base_url = confirm_base_url(os.getenv("CS_CLOUD", "auto"))
                     self._auth_style = "CONTEXT"
                     break
                 except AttributeError:
