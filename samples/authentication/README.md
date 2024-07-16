@@ -7,7 +7,8 @@ The examples in this folder focus on authentication to CrowdStrike's APIs.
 
 - [Azure Key Vault Authentication](#azure-key-vault-authentication) - CrowdStrike API authentication leveraging Azure Key Vault for credential storage.
 - [AES Authentication](#aes-authentication) - Leverage AES/CBC to encrypt credentials for use with authentication to the CrowdStrike API.
-- [AES File Crypt](#aes-file-crypt) - Encrypt arbitrary files with AES/CBC.
+- [AES File Crypt](#aes-file-crypt) - Encrypt arbitrary files with AES/CBC
+- [AWS Parameter Store](#aws-parameter-store) - CrowdStrike API authentication leveraging AWS Parameter Store for credential storage
 - [Token Authentication](#token-authentication) - Token Authentication is the original solution for authenticating to a Service Class, and is still fully supported. This example demonstrates how to use Token Authentication to interact with multiple Service Classes.
 
 ## Azure Key Vault Authentication
@@ -458,6 +459,64 @@ file arguments:
 Source code for this example can be found [here](aes_file_crypt.py).
 
 ---
+## AWS Parameter store
+This application demonstrates storing CrowdStrike API credentials within the AWS Parameter Store service, and retrieving them to access the CrowdStrike API.
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys. You will also need to set your specific AWS location
+
+#### Command line arguments
+This program accepts the following command line arguments.
+
+| Argument | Long Argument | Description |
+| :-- | :-- | :-- |
+| `-h` | `--help` | Display command line help and exit |
+|  `-k` _CLIENT_ID_PARAMETER_ | `--client_id_parameter` _CLIENT_ID_PARAMETER_ | Name of the Key Vault Secrets parameter storing your API client ID |
+|  `-s` _CLIENT_SECRET_PARAMETER_ | `--client_secret_parameter` _CLIENT_SECRET_PARAMETER_ | Name of the Key Vault Secrets parameter storing your API client secret |
+|  `-d`  | `--debug`| Enables debugging functionality |
+
+#### Basic usage
+
+##### Use this command to test out the sample.
+
+```shell
+python3 aws_parameter_store.py -k FALCON_CLIENT_ID -s FALCON_CLIENT_SECRET
+```
+##### Use this command to activate debugging.
+
+```shell
+python3 aws_parameter_store.py -k FALCON_CLIENT_ID -s FALCON_CLIENT_SECRET -d
+```
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: aws_parameter_store.py [-h] [-k] CLIENT_ID [-s] CLIENT_SECRET [-d] DEGUG
+
+
+  ___   ____    __    ____   _______.
+    /   \  \   \  /  \  /   /  /       |
+   /  ^  \  \   \/    \/   /  |   (----`
+  /  /_\  \  \            /    \   \
+ /  _____  \  \    /\    / .----)   |
+/__/     \__\  \__/  \__/  |_______/
+
+        ____                                  __               _____ __
+       / __ \____ __________ _____ ___  ___  / /____  _____   / ___// /_____  ________
+      / /_/ / __ `/ ___/ __ `/ __ `__ \/ _ \/ __/ _ \/ ___/   \__ \/ __/ __ \/ ___/ _ \
+     / ____/ /_/ / /  / /_/ / / / / / /  __/ /_/  __/ /      ___/ / /_/ /_/ / /  /  __/
+    /_/    \__,_/_/   \__,_/_/ /_/ /_/\___/\__/\___/_/      /____/\__/\____/_/   \___/
+
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d, --debug           enables degugging 
+
+required arguments:
+  -k CLIENT_ID, --client_id_parameter CLIENT_ID    
+  -s CLIENT_SECRET, --client_secret_parameter CLIENT_SECRET
+```
+
 
 ## Token Authentication
 [Token authentication](https://www.falconpy.io/Usage/Authenticating-to-the-API.html#legacy-authentication) (also referred to as _legacy authentication_) is the process of authenticating to a FalconPy Service Class by providing a previously assigned bearer token directly to the [`auth_token`](https://www.falconpy.io/Usage/Basic-Service-Class-usage.html#legacy-authentication) keyword when instantiating the Service Class. This is the original method of authentication provided by Service Classes, and while it is frequently eschewed in preference to [Direct](https://www.falconpy.io/Usage/Authenticating-to-the-API.html#direct-authentication) and [Object](https://www.falconpy.io/Usage/Authenticating-to-the-API.html#object-authentication) [Authentication](https://www.falconpy.io/Usage/Authenticating-to-the-API.html), there are multiple scenarios where it is still the best option for the situation.
