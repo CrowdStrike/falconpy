@@ -9,7 +9,7 @@ ______     _ _               _    _             _
                      __/ |
                     |___/    for Sensor Update Policies
 
-                                   FalconPy v1.0
+                                   FalconPy v1.4.4
 
 Creation date: 05.06.2022 - jshcodes@CrowdStrike
 
@@ -20,6 +20,7 @@ Required packages
 Multiple simultaneous actions may be performed against
 multiple Sensor Update Policy records using this utility.
 """
+import logging
 from argparse import ArgumentParser, RawTextHelpFormatter
 from tabulate import tabulate
 try:
@@ -107,18 +108,39 @@ def consume_arguments():
     """Consume arguments from the command line."""
     desc = shiny_help_text(__doc__)
     parser = ArgumentParser(description=desc, formatter_class=RawTextHelpFormatter)
+    # Debug
+    parser.add_argument("-debug", "--debug",
+                        help="Enable API debugging",
+                        action="store_true",
+                        default=False
+                        )
     # List
     disp = parser.add_argument_group("list arguments")
-    disp.add_argument("-l", "--list_all", help="Show all policies (Default action)", required=False, action="store_true")
-    disp.add_argument("-k", "--kernels", help="Show kernel build compatibility details", required=False, action="store_true")
-    disp.add_argument("-b", "--builds", help="Show available builds", required=False, action="store_true")
-    disp.add_argument("-o", "--host_groups", help="Show available host groups", required=False, action="store_true")
+    disp.add_argument("-l", "--list_all", 
+                      help="Show all policies (Default action)", 
+                      required=False, 
+                      action="store_true")
+    disp.add_argument("-k", "--kernels", 
+                      help="Show kernel build compatibility details", 
+                      required=False, 
+                      action="store_true")
+    disp.add_argument("-b", "--builds", 
+                      help="Show available builds", 
+                      required=False, 
+                      action="store_true")
+    disp.add_argument("-o", "--host_groups", 
+                      help="Show available host groups", 
+                      required=False, 
+                      action="store_true")
     disp.add_argument("-m", "--maintenance",
                       help="Show maintenance or a specific uninstall token",
                       required=False,
                       action="store_true"
                       )
-    disp.add_argument("-v", "--show_members", help="Show policy members in results", required=False, action="store_true")
+    disp.add_argument("-v", "--show_members", 
+                      help="Show policy members in results", 
+                      required=False, 
+                      action="store_true")
     disp.add_argument("-z", "--show_groups",
                       help="Show host groups assigned to policies in results",
                       required=False,
@@ -126,14 +148,24 @@ def consume_arguments():
                       )
     # Search
     srch = parser.add_argument_group("search arguments")
-    srch.add_argument("-q", "--search_string", help="String to match against policy or host group name", required=False)
+    srch.add_argument("-q", "--search_string", 
+                      help="String to match against policy or host group name", 
+                      required=False)
     # Create
     crt = parser.add_argument_group("create arguments")
-    crt.add_argument("-c", "--create", help="Create a new policy", required=False, action="store_true")
+    crt.add_argument("-c", "--create", 
+                     help="Create a new policy", 
+                     required=False, action="store_true")
     # Update
     upd = parser.add_argument_group("update and delete arguments")
-    upd.add_argument("-d", "--disable", help="Disable the policy", required=False, action="store_true")
-    upd.add_argument("-e", "--enable", help="Enable the policy", required=False, action="store_true")
+    upd.add_argument("-d", "--disable", 
+                     help="Disable the policy", 
+                     required=False, 
+                     action="store_true")
+    upd.add_argument("-e", "--enable", 
+                     help="Enable the policy", 
+                     required=False, 
+                     action="store_true")
     upd.add_argument("-x", "--disable_uninstall_protection",
                      help="Disable uninstall protection for the policy",
                      required=False,
@@ -150,28 +182,44 @@ def consume_arguments():
                      required=False,
                      action="store_true"
                      )
-    upd.add_argument("-r", "--remove", help="Remove the policy", required=False, action="store_true")
-    upd.add_argument("-g", "--add_host_group", help="Add host group to the specified policy\n(comma delimit)", required=False)
+    upd.add_argument("-r", "--remove", 
+                     help="Remove the policy", 
+                     required=False, 
+                     action="store_true")
+    upd.add_argument("-g", "--add_host_group", 
+                     help="Add host group to the specified policy\n(comma delimit)", 
+                     required=False)
     upd.add_argument("-y", "--yank_host_group",
                      help="Remove host group from the specified policy\n(comma delimit)",
                      required=False
                      )
     # IDs and platform names for updates
     idg = parser.add_argument_group("required arguments for updating or removing policies")
-    idg.add_argument("-i", "--policy_id", help="ID(s) of the policy to update or remove (comma delimit)", required=False)
-    idg.add_argument("-n", "--platform_name", help="Platform name for policy precedence configurations", required=False)
+    idg.add_argument("-i", "--policy_id", 
+                     help="ID(s) of the policy to update or remove (comma delimit)", 
+                     required=False)
+    idg.add_argument("-n", "--platform_name", 
+                     help="Platform name for policy precedence configurations", 
+                     required=False)
     # MSSP
     msp = parser.add_argument_group("MSSP arguments")
-    msp.add_argument("-w", "--member_cid", help="Child CID (MSSP access)", required=False)
+    msp.add_argument("-w", "--member_cid", 
+                     help="Child CID (MSSP access)", 
+                     required=False)
     # Other
     oth = parser.add_argument_group("other arguments")
-    oth.add_argument("-t", "--base_url", help="Specify the API base URL", required=False)
+    oth.add_argument("-t", "--base_url", 
+                     help="Specify the API base URL",
+                     required=False)
     # Always required
     req = parser.add_argument_group("always required arguments")
-    req.add_argument("-f", "--falcon_client_id", help="Falcon Client ID", required=True)
-    req.add_argument("-s", "--falcon_client_secret", help="Falcon Client Secret", required=True)
+    req.add_argument("-f", "--falcon_client_id",
+                     help="Falcon Client ID", 
+                     required=True)
+    req.add_argument("-s", "--falcon_client_secret", 
+                     help="Falcon Client Secret", 
+                     required=True)
 
-    return parser.parse_args()
 
 
 def process_command_line():  # pylint: disable=R0912,R0915
@@ -252,10 +300,13 @@ def process_command_line():  # pylint: disable=R0912,R0915
     base_url = "auto"
     if args.base_url:
         base_url = args.base_url
+    
+    if args.debug:
+        logging.basicConfig(level=logging.DEBUG)
 
     return command_to_perform, args.falcon_client_id, args.falcon_client_secret, args.search_string,\
         args.policy_id, update_type, flag_type, hide_members, args.platform_name, group_id,\
-        hide_groups, mssp_access, base_url
+        hide_groups, mssp_access, base_url, args.debug 
 
 
 def hide_members_column():
@@ -407,7 +458,7 @@ def update_policies(id_to_update: str, update_style: str = "", flag_style: str =
         if update_result["status_code"] != 200:
             raise SystemExit(generate_api_error_list(update_result["body"]["errors"]))
 
-
+# pylint: disable=E0606
 def list_kernel_compatibility():
     """List all available kernels."""
     kernel_list_lookup = falcon.query_combined_kernels()
@@ -663,16 +714,16 @@ This application requires CrowdStrike FalconPy v{Color.BOLD}1.0+{Color.END}
 Install it with: {Color.BOLD}python3 -m pip install crowdstrike-falconpy{Color.END}
 """
 
-if int(FALCONPY_VERSION.split(".")[0]) < 1:
+if int(FALCONPY_VERSION.split(".", maxsplit=1)[0]) < 1:
     raise SystemExit(INVALID_VERSION)
 
 INDICATOR = ["|", "/", "-", "\\"]
 INDICATOR_POSITION = 0
 
 command, client_id, client_secret, API_SEARCH, policy_id, which_update, \
-    enable_disable, HIDE, platform_name, hg_id, GROUP_HIDE, member_cid, base_url = process_command_line()
-falcon = connect_sensor_update_api(client_id, client_secret, member_cid, base_url)
-falcon_groups = connect_host_group_api(client_id, client_secret, member_cid, base_url)
+    enable_disable, HIDE, platform_name, hg_id, GROUP_HIDE, member_cid, base_url, debug = process_command_line()
+falcon = connect_sensor_update_api(client_id, client_secret, member_cid, base_url, debug)
+falcon_groups = connect_host_group_api(client_id, client_secret, member_cid, base_url, debug)
 
 if "kernel" in command:
     list_kernel_compatibility()

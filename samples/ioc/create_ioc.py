@@ -24,6 +24,7 @@ INDICATOR FILE FORMAT EXAMPLE (JSON)
     "applied_globally": true
 }
 """
+import logging
 import json
 import os
 from argparse import ArgumentParser, RawTextHelpFormatter
@@ -36,6 +37,20 @@ def consume_command_line():
     parser.add_argument("-s", "--falcon_client_secret", help="Falcon API Client Secret", required=True)
     parser.add_argument("-m", "--method", help="SDK method to use ('service' or 'uber').", required=False, default="service")
     parser.add_argument("-i", "--indicator", help="Path to the file representing the indicator (JSON format).", default="example_indicator.json", required=False)
+    parser.add_argument("-d", "--debug",
+                        help="Enable API debugging",
+                        action="store_true",
+                        default=False
+                        )
+    
+    
+    parsed = parser.parse_args()
+    allow = ["indicator", "report", "actor"]
+    parsed.types = [t for t in parsed.types.split(",") if t in allow] if parsed.types else allow
+
+    if parsed.debug:
+        logging.basicConfig(level=logging.DEBUG)
+    
 
     return parser.parse_args()
 
