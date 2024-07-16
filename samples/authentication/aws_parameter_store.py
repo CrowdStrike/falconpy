@@ -34,6 +34,7 @@ Creation date: 11.01.22 - jshcodes@CrowdStrike
 This application demonstrates storing CrowdStrike API credentials within the
 AWS Parameter Store service, and retrieving them to access the CrowdStrike API.
 """
+import logging
 from argparse import ArgumentParser, RawTextHelpFormatter, Namespace
 try:
     import boto3
@@ -64,8 +65,19 @@ def consume_arguments() -> Namespace:
                         default="FALCON_CLIENT_SECRET",
                         dest="client_secret_parameter"
                         )
+    parser.add_argument("-d", "--debug",
+                        help="Enable API debugging",
+                        action="store_true",
+                        default=False
+                        )
 
-    return parser.parse_args()
+    parsed = parser.parse_args()
+    if parsed.debug:
+        logging.basicConfig(level=logging.DEBUG)
+    
+
+    return parsed
+
 
 
 def get_parameter_store_params(cmd_line: Namespace):
@@ -101,9 +113,9 @@ def get_parameter_store_params(cmd_line: Namespace):
     return returned_client_id, returned_client_secret
 
 
-def perform_simple_demonstration(client_id: str, client_secret: str):
+def perform_simple_demonstration(client_id: str, client_secret: str, debug: bool):
     """Perform a simple API demonstration using the credentials retrieved."""
-    falcon = Hosts(client_id=client_id, client_secret=client_secret)
+    falcon = Hosts(client_id=client_id, client_secret=client_secret, debug=debug)
     # Retrieve 500 hosts and sort ascending by hostname
     aid_lookup = falcon.query_devices_by_filter_scroll(sort="hostname.asc", limit=500)
     if not aid_lookup["status_code"] == 200:
@@ -120,6 +132,9 @@ def perform_simple_demonstration(client_id: str, client_secret: str):
 
 
 if __name__ == "__main__":
-    # Consume our command line, retrieve our credentials from AWS parameter store
+    # Consume our command line arguments 
+    args = consume_arguments()
+    # retrieve our credentials from AWS parameter store
+    client_id, client_secret = get_parameter_store_params(args)
     # and then execute a simple API demonstration to prove functionality.
-    perform_simple_demonstration(*get_parameter_store_params(consume_arguments()))
+    perform_simple_demonstration(client_id, client_secret)
