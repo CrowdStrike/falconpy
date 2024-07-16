@@ -41,7 +41,7 @@ EMAIL_FILE = args.file
 
 falcon = Recon(client_id=args.falcon_client_id,
                client_secret=args.falcon_client_secret,
-               base_url=args.base_url
+               base_url=args.base_url, debug=args.debug 
                )
 
 QUERY = "("
