@@ -353,7 +353,7 @@ def consume_command_line():
     parser = ArgumentParser(description=shiny_description(__doc__),
                             formatter_class=RawTextHelpFormatter
                             )
-    parser.add_argument("-d", "--debug",
+    parser.add_argument("-debug", "--debug",
                         help="Enable API debugging",
                         action="store_true",
                         default=False
@@ -621,7 +621,7 @@ if __name__ == "__main__":
     falcon_policy = PreventionPolicy(client_id=args.falcon_client_id,
                                      client_secret=args.falcon_client_secret, 
                                      debug=args.debug
-                                    )
+                                     )
 
     # Review the provided arguments and then perform the request
     process_arguments(*determine_arguments(args))
