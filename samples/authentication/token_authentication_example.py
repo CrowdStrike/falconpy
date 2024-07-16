@@ -67,12 +67,16 @@ def consume_arguments() -> Namespace:
                         dest="base_url",
                         help="CrowdStrike cloud region. (auto or usgov1, Default: auto)",
                         required=False,
-                        default="auto"
+                        default="usgov1"
                         )
-    return parser.parse_args
+    parsed = parser.parse_args()
+    if parsed.debug:
+        logging.basicConfig(level=logging.DEBUG)
+    
 
+    return parsed
 # ### BEGIN token simulation
-def get_token():
+def get_token(debug=False):
     """
     Generate a token to use for authentication.
 
@@ -111,7 +115,8 @@ def get_token():
                                             )
     auth = OAuth2(
         client_id=falcon_client_id,
-        client_secret=falcon_client_secret
+        client_secret=falcon_client_secret,
+        debug=debug 
         )
     # Generate a token
     auth.token()
@@ -192,6 +197,10 @@ def passed(svc_class: str):
 
 
 if __name__ == "__main__":
+    # Parse command-line arguments and retrieve debug mode setting
+    args = consume_arguments()
+    # Authenticate using Falcon API OAuth2 with debug mode enabled if specified
+    get_token(debug=args.debug)
     # Test each of these classes to confirm cross collection authentication for Service Classes
     classes_to_test = [CloudConnectAWS, Detects, Hosts, IOC, Incidents, Intel]
     # Grab a simulated token and execute the test series
