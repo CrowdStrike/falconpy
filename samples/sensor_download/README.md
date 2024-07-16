@@ -92,13 +92,13 @@ Filters described above are applied to select the appropriate version to downloa
 python3 download_sensor.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -o centos -v 7 -d
 ```
 ##### Activating Debugging 
-This exmaple shows how you can activate debugging functionality when you run download_senor.py.
+This example shows how you can activate debugging functionality when you run download_senor.py.
 
 ```shell
 python3 download_sensor.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -debug 
 ```
 ##### Allowing Access to GovCloud Users 
-This exmaple shows how you GovCloud user can access sensor_download.py.
+This example shows how you GovCloud user can access sensor_download.py.
 
 ```shell
 python3 download_sensor.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -b 
