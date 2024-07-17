@@ -33,10 +33,20 @@ from falconpy import APIHarness, IOC
 
 def consume_command_line():
     parser = ArgumentParser(description=__doc__, formatter_class=RawTextHelpFormatter)
-    parser.add_argument("-k", "--falcon_client_id", help="Falcon API Client ID", required=True)
-    parser.add_argument("-s", "--falcon_client_secret", help="Falcon API Client Secret", required=True)
-    parser.add_argument("-m", "--method", help="SDK method to use ('service' or 'uber').", required=False, default="service")
-    parser.add_argument("-i", "--indicator", help="Path to the file representing the indicator (JSON format).", default="example_indicator.json", required=False)
+    parser.add_argument("-k", "--falcon_client_id", 
+                        help="Falcon API Client ID", 
+                        required=True)
+    parser.add_argument("-s", "--falcon_client_secret", 
+                        help="Falcon API Client Secret", 
+                        required=True)
+    parser.add_argument("-m", "--method", 
+                        help="SDK method to use ('service' or 'uber').", 
+                        required=False, 
+                        default="service")
+    parser.add_argument("-i", "--indicator", 
+                        help="Path to the file representing the indicator (JSON format).", 
+                        default="example_indicator.json", 
+                        required=False)
     parser.add_argument("-d", "--debug",
                         help="Enable API debugging",
                         action="store_true",
@@ -45,14 +55,12 @@ def consume_command_line():
     
     
     parsed = parser.parse_args()
-    allow = ["indicator", "report", "actor"]
-    parsed.types = [t for t in parsed.types.split(",") if t in allow] if parsed.types else allow
 
     if parsed.debug:
         logging.basicConfig(level=logging.DEBUG)
     
 
-    return parser.parse_args()
+    return parsed
 
 
 def connect_api(class_type: str = "service", creds: dict = None):
@@ -73,7 +81,7 @@ credentials = {
 if args.method not in ["service", "uber"]:
     args.method = "service"
 
-falcon = connect_api(args.method, credentials)
+falcon = connect_api(args.method, credentials, args.debug)
 
 if not os.path.exists(args.indicator):
     raise SystemExit("Unable to load indicator file.")
