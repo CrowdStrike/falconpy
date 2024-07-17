@@ -8,6 +8,7 @@ r"""Add monitoring rules for email addresses provided in a csv file (1 email add
 
 Creation: 06.21.2022, wozboz@CrowdStrike
 """
+import logging
 from csv import reader
 from argparse import ArgumentParser, RawTextHelpFormatter
 from falconpy import Recon
@@ -33,8 +34,14 @@ parser.add_argument("-f", "--file",
                     help="File with email-addresses to use as input",
                     required=True,
                     )
-
+parser.add_argument("-d", "--debug",
+                        help="Enable API debugging",
+                        action="store_true",
+                        default=False
+                    )
 args = parser.parse_args()
+if args.debug:
+        logging.basicConfig(level=logging.DEBUG)
 
 
 EMAIL_FILE = args.file
