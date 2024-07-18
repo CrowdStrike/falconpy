@@ -14,6 +14,7 @@ This example requires the crowdstrike-falconpy (0.6.2+) and tabulate packages.
 Required API Scope - Sensor Download: READ
 """
 from argparse import ArgumentParser, RawTextHelpFormatter
+import logging
 from tabulate import tabulate
 try:
     from falconpy import APIHarness
@@ -69,6 +70,17 @@ def consume_arguments():
                         'pretty, psql, rst, mediawiki, moinmoin, youtrack, html, unsafehtml, \n'
                         'latext, latex_raw, latex_booktabs, latex_longtable, textile, tsv)',
                         required=False, default="fancy_grid"
+                        )
+    parser.add_argument('-b', '--base_url',
+                        help="CrowdStrike region (only required for usgov1)",
+                        required=False,
+                        default="auto"
+                        )
+    parser.add_argument('--debug',
+                        help="Enable API debugging",
+                        required=False,
+                        default=False,
+                        action="store_true"
                         )
     return parser.parse_args()
 
@@ -166,17 +178,25 @@ def create_constants():
         os_filter = f"os:'{str(os_name)}'"
 
     return cmd, args.key, args.secret, os_filter, args.filename, args.table_format, args.all, \
-        args.osver, args.nminus
+        args.osver, args.nminus, args.debug, args.base_url
 
 
 CMD, CLIENTID, CLIENTSECRET, OS_FILTER, FILENAME, FORMAT, SHOW_ALL, \
-    OSVER, NMINUS = create_constants()
+    OSVER, NMINUS, ENABLE_DEBUG, BASE_URL = create_constants()
+
+if ENABLE_DEBUG:
+    # Activate debugging if requested
+    logging.basicConfig(level=logging.DEBUG)
 
 # Login to the Falcon API and retrieve our list of sensors
-falcon = APIHarness(client_id=CLIENTID, client_secret=CLIENTSECRET)
+falcon = APIHarness(client_id=CLIENTID,
+                    client_secret=CLIENTSECRET,
+                    debug=ENABLE_DEBUG,
+                    base_url=BASE_URL
+                    )
 sensors = falcon.command(action="GetCombinedSensorInstallersByQuery",
                          filter=OS_FILTER,
-                         sort="version.desc"
+                         sort="version.desc"                         
                          )
 
 if sensors["status_code"] == 401:
