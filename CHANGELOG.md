@@ -1,3 +1,34 @@
+# Version 1.4.5
+## Added features and functionality
++ Added: Added new __Certificate Based Exclusions__ service collection with six new operations.
+    - `__init__.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_certificate_based_exclusions.py`
+    - `_endpoint/deprecated/_certificate_based_exclusions.py`
+    - `_payload/__init__.py`
+    - `_payload/_certificate_based_exclusions.py`
+    - `certificate_based_exclusions.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_certificate_based_exclusions.py`
+
++ Added: Added new __Data Scanner__ service collection with 3 new operations.
+    - `__init__.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_datascanner.py`
+    - `_endpoint/deprecated/_datascanner.py`
+    - `datascanner.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_datascanner.py`
+
+
++ Added: Added new __Compliance Assessments__ service collection with 11 new operations.
+    - `__init__.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_compliance_assessments.py`
+    - `compliance_assessments.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_compliance_assessments.py`
+
 # Version 1.4.4
 ## Added features and functionality
 + Added: Added new __API Integrations__ service collection with two new operations, __GetCombinedPluginConfigs__ and __ExecuteCommand__.

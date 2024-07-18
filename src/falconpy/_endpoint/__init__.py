@@ -36,13 +36,17 @@ from .deprecated import _real_time_response_admin_deprecated
 from .deprecated import _report_executions_deprecated
 from .deprecated import _scheduled_reports_deprecated
 from .deprecated import _zero_trust_assessment_deprecated
+from .deprecated import _certificate_based_exclusions_deprecated
+from .deprecated import _datascanner_deprecated
 from .deprecated import _deprecated_operation_mapping
 from .deprecated import _deprecated_class_mapping
 
 from ._alerts import _alerts_endpoints
 from ._api_integrations import _api_integrations_endpoints
+from ._certificate_based_exclusions import _certificate_based_exclusions_endpoints
 from ._cloud_connect_aws import _cloud_connect_aws_endpoints
 from ._cloud_snapshots import _cloud_snapshots_endpoints
+from ._compliance_assessments import _complianceassessments_endpoints
 from ._configuration_assessment_evaluation_logic import _configuration_assessment_evaluation_logic_endpoints
 from ._configuration_assessment import _configuration_assessment_endpoints
 from ._container_alerts import _container_alerts_endpoints
@@ -104,6 +108,7 @@ from ._spotlight_evaluation_logic import _spotlight_evaluation_logic_endpoints
 from ._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints
 from ._tailored_intelligence import _tailored_intelligence_endpoints
 from ._threatgraph import _threatgraph_endpoints
+from ._datascanner import _datascanner_endpoints
 from ._unidentified_containers import _unidentified_containers_endpoints
 from ._user_management import _user_management_endpoints
 from ._workflows import _workflows_endpoints
@@ -112,8 +117,10 @@ from ._zero_trust_assessment import _zero_trust_assessment_endpoints
 api_endpoints: List[Any] = []
 api_endpoints.extend(_alerts_endpoints)
 api_endpoints.extend(_api_integrations_endpoints)
+api_endpoints.extend(_certificate_based_exclusions_endpoints)
 api_endpoints.extend(_cloud_connect_aws_endpoints)
 api_endpoints.extend(_cloud_snapshots_endpoints)
+api_endpoints.extend(_complianceassessments_endpoints)
 api_endpoints.extend(_configuration_assessment_evaluation_logic_endpoints)
 api_endpoints.extend(_configuration_assessment_endpoints)
 api_endpoints.extend(_container_alerts_endpoints)
@@ -124,6 +131,7 @@ api_endpoints.extend(_container_vulnerabilities_endpoints)
 api_endpoints.extend(_cspm_registration_endpoints)
 api_endpoints.extend(_custom_ioa_endpoints)
 api_endpoints.extend(_custom_storage_endpoints)
+api_endpoints.extend(_datascanner_endpoints)
 api_endpoints.extend(_d4c_registration_endpoints)
 api_endpoints.extend(_detects_endpoints)
 api_endpoints.extend(_device_control_policies_endpoints)
@@ -182,7 +190,9 @@ api_endpoints.extend(_zero_trust_assessment_endpoints)
 
 # Deprecated endpoints
 deprecated_endpoints = []
+deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)
+deprecated_endpoints.extend(_datascanner_deprecated)
 deprecated_endpoints.extend(_d4c_registration_deprecated)
 deprecated_endpoints.extend(_discover_deprecated)
 deprecated_endpoints.extend(_fdr_deprecated)
