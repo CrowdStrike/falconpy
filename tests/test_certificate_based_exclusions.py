@@ -1,0 +1,38 @@
+# test_certificate_based_exclusions.py
+# This class tests the CertificateBasedExclusions service class
+
+# import json
+import os
+import sys
+
+# Authentication via the test_authorization.py
+from tests import test_authorization as Authorization
+
+# Classes to test - manually imported from sibling folder
+from falconpy import CertificateBasedExclusions
+# Import our sibling src folder into the path
+sys.path.append(os.path.abspath('src'))
+
+auth = Authorization.TestAuthorization()
+config = auth.getConfigObject()
+falcon = CertificateBasedExclusions(auth_object=config)
+AllowedResponses = [200, 201, 207, 400, 404, 429, 500]
+
+
+class TestCertificateBasedExclusions:
+    def test_all_code_paths(self):
+        error_checks = True
+        tests = {
+            "get_exclusions": falcon.get_exclusions(ids="1234567"),
+            "create_exclusions": falcon.create_exclusions("12345678"),
+            "delete_exclusions": falcon.delete_exclusions(ids="1234567"),
+            "update_exclusions": falcon.update_exclusions("exclusion_here"),
+            "get_certificates": falcon.get_certificates(ids="1234567"),
+            "query_certificates": falcon.query_certificates()
+        }
+        for key in tests:
+            if tests[key]["status_code"] not in AllowedResponses:
+                error_checks = False
+                # print(key)
+                # print(tests[key])
+        assert error_checks

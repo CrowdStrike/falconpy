@@ -90,7 +90,9 @@ from ._api_request import (
 from .alerts import Alerts
 from .api_integrations import APIIntegrations
 from .api_complete import APIHarness, APIHarnessV2
+from .certificate_based_exclusions import CertificateBasedExclusions
 from .cloud_snapshots import CloudSnapshots
+from .compliance_assessments import ComplianceAssessments
 from .configuration_assessment_evaluation_logic import ConfigurationAssessmentEvaluationLogic
 from .configuration_assessment import ConfigurationAssessment
 from .container_alerts import ContainerAlerts
@@ -102,6 +104,7 @@ from .cloud_connect_aws import CloudConnectAWS
 from .cspm_registration import CSPMRegistration
 from .custom_ioa import CustomIOA
 from .custom_storage import CustomStorage
+from .datascanner import DataScanner
 from .d4c_registration import D4CRegistration
 from .detects import Detects
 from .device_control_policies import DeviceControlPolicies
@@ -198,7 +201,8 @@ __all__ = [
     "SDKDeprecationWarning", "ConfigurationAssessmentEvaluationLogic", "ConfigurationAssessment",
     "ContainerAlerts", "ContainerDetections", "ContainerImages", "ContainerPackages",
     "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers",
-    "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement"
+    "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement",
+    "DataScanner", "CertificateBasedExclusions", "ComplianceAssessments"
     ]
 """
 This is free and unencumbered software released into the public domain.

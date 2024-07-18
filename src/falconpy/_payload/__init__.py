@@ -53,6 +53,7 @@ from ._prevention_policy import prevention_policy_payload
 from ._sensor_update_policy import sensor_policy_payload
 from ._response_policy import response_policy_payload
 from ._real_time_response import command_payload, data_payload
+from ._certificate_based_exclusions import certificate_based_exclusions_payload
 from ._cloud_connect_aws import aws_registration_payload
 from ._ioc import indicator_payload, indicator_update_payload, indicator_report_payload
 from ._d4c_registration import (
@@ -130,5 +131,5 @@ __all__ = [
     "image_policy_payload", "image_exclusions_payload", "image_group_payload",
     "workflow_definition_payload", "workflow_human_input", "workflow_mock_payload",
     "cspm_service_account_validate_payload", "api_plugin_command_payload", "mobile_enrollment_payload",
-    "filevantage_start_payload", "fem_asset_payload"
+    "filevantage_start_payload", "fem_asset_payload", "certificate_based_exclusions_payload"
 ]
