@@ -131,5 +131,5 @@ __all__ = [
     "image_policy_payload", "image_exclusions_payload", "image_group_payload",
     "workflow_definition_payload", "workflow_human_input", "workflow_mock_payload",
     "cspm_service_account_validate_payload", "api_plugin_command_payload", "mobile_enrollment_payload",
-    "filevantage_start_payload", "fem_asset_payload", "certificate_based_exclusions_payload"
+    "filevantage_start_payload", "fem_asset_payload", "certificate_based_exclusions_payload",
 ]

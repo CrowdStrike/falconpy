@@ -122,6 +122,7 @@ from .firewall_policies import FirewallPolicies
 from .foundry_logscale import FoundryLogScale
 from .host_group import HostGroup
 from .hosts import Hosts
+from .host_migration import HostMigration
 from .identity_protection import IdentityProtection
 from .image_assessment_policies import ImageAssessmentPolicies
 from .incidents import Incidents
@@ -202,7 +203,7 @@ __all__ = [
     "ContainerAlerts", "ContainerDetections", "ContainerImages", "ContainerPackages",
     "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers",
     "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement",
-    "DataScanner", "CertificateBasedExclusions", "ComplianceAssessments"
+    "DataScanner", "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration"
     ]
 """
 This is free and unencumbered software released into the public domain.
