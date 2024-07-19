@@ -6,4 +6,4 @@
 #
 requests		   # via -r requirements.in
 urllib3                    # via -r requirements.in, requests
-
+setuptools~=70.3.0
