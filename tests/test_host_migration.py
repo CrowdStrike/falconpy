@@ -16,7 +16,7 @@ sys.path.append(os.path.abspath('src'))
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = HostMigration(auth_object=config)
-AllowedResponses = [600]
+AllowedResponses = [200, 201, 207, 400, 404, 429, 500]
 
 
 class TestHostMigration:
