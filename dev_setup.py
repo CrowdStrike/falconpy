@@ -134,6 +134,7 @@ setup(
             "pytest-cov",
             "pytest",
             "bandit",
+            "setuptools~=70.3.0"
         ],
     },
     classifiers=[
