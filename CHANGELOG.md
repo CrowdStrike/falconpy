@@ -1,5 +1,13 @@
 # Version 1.4.5
 ## Added features and functionality
++ Added: Added new __Host Migration__ service collection with 10 new operations.
+    - `__init__.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_host_migration.py`
+    - `host_migration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_host_migration.py`
+
 + Added: Added new __Certificate Based Exclusions__ service collection with six new operations.
     - `__init__.py`
     - `_endpoint/__init__.py`

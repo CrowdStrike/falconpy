@@ -24,7 +24,9 @@ class TestCertificateBasedExclusions:
         error_checks = True
         tests = {
             "get_exclusions": falcon.get_exclusions(ids="1234567"),
-            "create_exclusions": falcon.create_exclusions("12345678"),
+            "create_exclusions": falcon.create_exclusions(body={}),
+            "create_exclusions": falcon.create_exclusions(certificate="something", subject="science_fiction"),
+            "create_exclusions": falcon.create_exclusions(comment="something", host_groups="12345678,87654321"),
             "delete_exclusions": falcon.delete_exclusions(ids="1234567"),
             "update_exclusions": falcon.update_exclusions("exclusion_here"),
             "get_certificates": falcon.get_certificates(ids="1234567"),
