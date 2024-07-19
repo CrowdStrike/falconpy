@@ -104,7 +104,6 @@ from .cloud_connect_aws import CloudConnectAWS
 from .cspm_registration import CSPMRegistration
 from .custom_ioa import CustomIOA
 from .custom_storage import CustomStorage
-from .datascanner import DataScanner
 from .d4c_registration import D4CRegistration
 from .detects import Detects
 from .device_control_policies import DeviceControlPolicies
@@ -203,7 +202,7 @@ __all__ = [
     "ContainerAlerts", "ContainerDetections", "ContainerImages", "ContainerPackages",
     "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers",
     "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement",
-    "DataScanner", "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration"
+    "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration"
     ]
 """
 This is free and unencumbered software released into the public domain.

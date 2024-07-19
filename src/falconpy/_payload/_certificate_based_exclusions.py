@@ -35,40 +35,42 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+
 from typing import Dict, List, Union
 
 
 def certificate_based_exclusions_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
-    """Create a properly formatted payload for exclusion creatio
-        {
-            "resources": [
-                {
-                    "applied_globally": true,
-                    "certificate": {
-                        "issuer": "string",
-                        "serial": "string",
-                        "subject": "string",
-                        "thumbprint": "string",
-                        "valid_from": "2024-07-17T16:55:01.502Z",
-                        "valid_to": "2024-07-17T16:55:01.502Z"
-                    },
-                    "children_cids": [
-                        "string"
-                    ],
-                    "comment": "string",
-                    "created_by": "string",
-                    "created_on": "2024-07-17T16:55:01.502Z",
-                    "description": "string",
-                    "host_groups": [
-                        "string"
-                    ],
-                    "modified_by": "string",
-                    "modified_on": "2024-07-17T16:55:01.502Z",
-                    "name": "string",
-                    "status": "string"
-                }
-            ]
-        }
+    """Create a properly formatted payload for exclusion creation.
+
+    {
+        "resources": [
+            {
+                "applied_globally": true,
+                "certificate": {
+                    "issuer": "string",
+                    "serial": "string",
+                    "subject": "string",
+                    "thumbprint": "string",
+                    "valid_from": "2024-07-17T16:55:01.502Z",
+                    "valid_to": "2024-07-17T16:55:01.502Z"
+                },
+                "children_cids": [
+                    "string"
+                ],
+                "comment": "string",
+                "created_by": "string",
+                "created_on": "2024-07-17T16:55:01.502Z",
+                "description": "string",
+                "host_groups": [
+                    "string"
+                ],
+                "modified_by": "string",
+                "modified_on": "2024-07-17T16:55:01.502Z",
+                "name": "string",
+                "status": "string"
+            }
+        ]
+    }
     """
     returned = {
         "resources": []
