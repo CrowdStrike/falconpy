@@ -54,6 +54,6 @@ class TestHostMigration:
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
-                print(key)
-                print(tests[key])
+                # print(key)
+                # print(tests[key])
         assert error_checks
