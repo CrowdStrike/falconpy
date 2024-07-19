@@ -75,20 +75,28 @@ def certificate_based_exclusions_payload(passed_keywords: dict) -> Dict[str, Lis
     }
     item = {}
     keys = [
-            "applied_globally", "certificate", "children_cids", "comment", "created_by", "created_on",
-            "description", "host_groups", "modified_by", "modified_on", "name", "status",
+            "applied_globally", "certificate", "comment", "created_by", "created_on",
+            "description", "modified_by", "modified_on", "name", "status",
             ]
     certificate_keys = [
         "issuer", "serial", "subject", "thumbprint", "valid_from", "valid_to"
     ]
+    list_keys = ["children_cids", "host_groups"]
     for key in keys:
         if passed_keywords.get(key, None):
-            if key in certificate_keys:
-                if "certificate" not in item:
-                    item["certificate"] = {}
-                item["certificate"][key] = passed_keywords.get(key, None)
+            if key == "certificate":
+                item["certificate"] = {}
+                for cert_key in certificate_keys:
+                    item["certificate"][cert_key] = passed_keywords.get(cert_key, None)
             else:
                 item[key] = passed_keywords.get(key, None)
-        returned["resources"].append(item)
+    for key in list_keys:
+        if passed_keywords.get(key, None):
+            provided = passed_keywords.get(key, None)
+            if isinstance(provided, str):
+                provided = provided.split(",")
+            item[key] = provided
+
+    returned["resources"].append(item)
 
     return returned
