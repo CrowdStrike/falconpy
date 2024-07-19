@@ -5,5 +5,4 @@
 #    pip-compile requirements.in
 #
 requests		   # via -r requirements.in
-urllib3                    # via -r requirements.in, requests
-
+urllib3            # via -r requirements.in, requests
