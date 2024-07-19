@@ -123,7 +123,8 @@ setup(
     include_package_data=True,
     install_requires=[
         "requests",
-        "urllib3"
+        "urllib3",
+        "setuptools~=70.3.0"
     ],
     extras_require={
         "dev": [
