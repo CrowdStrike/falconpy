@@ -37,7 +37,6 @@ from .deprecated import _report_executions_deprecated
 from .deprecated import _scheduled_reports_deprecated
 from .deprecated import _zero_trust_assessment_deprecated
 from .deprecated import _certificate_based_exclusions_deprecated
-from .deprecated import _datascanner_deprecated
 from .deprecated import _deprecated_operation_mapping
 from .deprecated import _deprecated_class_mapping
 
@@ -109,7 +108,6 @@ from ._spotlight_evaluation_logic import _spotlight_evaluation_logic_endpoints
 from ._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints
 from ._tailored_intelligence import _tailored_intelligence_endpoints
 from ._threatgraph import _threatgraph_endpoints
-from ._datascanner import _datascanner_endpoints
 from ._unidentified_containers import _unidentified_containers_endpoints
 from ._user_management import _user_management_endpoints
 from ._workflows import _workflows_endpoints
@@ -132,7 +130,6 @@ api_endpoints.extend(_container_vulnerabilities_endpoints)
 api_endpoints.extend(_cspm_registration_endpoints)
 api_endpoints.extend(_custom_ioa_endpoints)
 api_endpoints.extend(_custom_storage_endpoints)
-api_endpoints.extend(_datascanner_endpoints)
 api_endpoints.extend(_d4c_registration_endpoints)
 api_endpoints.extend(_detects_endpoints)
 api_endpoints.extend(_device_control_policies_endpoints)
@@ -194,7 +191,6 @@ api_endpoints.extend(_zero_trust_assessment_endpoints)
 deprecated_endpoints = []
 deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)
-deprecated_endpoints.extend(_datascanner_deprecated)
 deprecated_endpoints.extend(_d4c_registration_deprecated)
 deprecated_endpoints.extend(_discover_deprecated)
 deprecated_endpoints.extend(_fdr_deprecated)

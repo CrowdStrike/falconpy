@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._service_class import ServiceClass
@@ -54,9 +55,10 @@ class CertificateBasedExclusions(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-        """Find all exclusion IDs matching the query with filter
+        """Find all exclusion IDs matching the query with filter.
 
         Keyword arguments:
         ids -- One or more exclusion IDs . String or list of strings.
@@ -130,7 +132,8 @@ class CertificateBasedExclusions(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="cb_exclusions_create_v1",
-            body=body
+            body=body,
+            keywords=kwargs
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -159,7 +162,7 @@ class CertificateBasedExclusions(ServiceClass):
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
-    
+
     @force_default(defaults=["body"], default_types=["dict"])
     def update_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update Certificate Based Exclusions.
@@ -267,7 +270,7 @@ class CertificateBasedExclusions(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
-   
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes

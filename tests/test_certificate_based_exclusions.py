@@ -28,13 +28,13 @@ class TestCertificateBasedExclusions:
             "create_exclusions": falcon.create_exclusions(certificate="something", subject="science_fiction"),
             "create_exclusions": falcon.create_exclusions(comment="something", host_groups="12345678,87654321"),
             "delete_exclusions": falcon.delete_exclusions(ids="1234567"),
-            "update_exclusions": falcon.update_exclusions("exclusion_here"),
+            "update_exclusions": falcon.update_exclusions(body={}),
             "get_certificates": falcon.get_certificates(ids="1234567"),
             "query_certificates": falcon.query_certificates()
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
-                # print(key)
-                # print(tests[key])
+            #   print(key)
+            #   print(tests[key])
         assert error_checks

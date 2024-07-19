@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+
 from typing import Dict, Union
 from ._util import force_default, process_service_request, generate_error_result, handle_single_argument
 from ._service_class import ServiceClass
@@ -128,9 +129,8 @@ class HostMigration(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/HostMigrationAggregatesV1        
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/HostMigrationAggregatesV1
         """
-
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
 
@@ -198,7 +198,7 @@ class HostMigration(ServiceClass):
             Type 1 - Terms
                 "type": "terms"
                 Supported field values: name, id, migration_id, target_cid, status, migration_status, created_by.
-                sort on terms type must be done on the same value as field and include a direction (asc or desc). 
+                sort on terms type must be done on the same value as field and include a direction (asc or desc).
                 Supports all supported FQL fields.
                 Examples sort value: status|asc or created_by|desc.
 
@@ -214,7 +214,6 @@ class HostMigration(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/MigrationAggregatesV1
         """
-
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
 
@@ -230,10 +229,9 @@ class HostMigration(ServiceClass):
                                       body: dict = None,
                                       parameters: dict = None,
                                       **kwargs) -> Dict[str, Union[int, dict]]:
-        """Perform an action on host migrations
+        """Perform an action on host migrations.
 
         Keyword arguments:
-
         id -- The migration job to perform actions on. String.
 
         action_name -- The action to perform
@@ -344,7 +342,6 @@ class HostMigration(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/GetHostMigrationsV1
         """
-
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs,
                                         payload_value="ids"
@@ -359,7 +356,7 @@ class HostMigration(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def get_migration_destination(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-        """Gets destinations for a migration
+        """Get destinations for a migration.
 
         Keyword arguments:
         body -- full body payload, not required if using other keywords.
@@ -381,7 +378,6 @@ class HostMigration(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/host-migration/GetMigrationDestinationsV1
         """
-
         if not body:
             if kwargs.get("device_ids", None):
                 body = generic_payload_list(submitted_keywords=kwargs,
@@ -401,7 +397,7 @@ class HostMigration(ServiceClass):
                                      body: dict = None,
                                      parameters: dict = None,
                                      **kwargs) -> Dict[str, Union[int, dict]]:
-        """Perform an action on host migrations
+        """Perform an action on host migrations.
 
         Keyword arguments:
         action_name -- The action to perform
@@ -478,7 +474,7 @@ class HostMigration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_migration_job_details(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-        """Get migration job details
+        """Get migration job details.
 
         Keyword arguments:
         ids -- The migration jobs of interest.
@@ -552,7 +548,7 @@ class HostMigration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_host_migration_ids(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-        """Query host migration IDs
+        """Query host migration IDs.
 
         Provide a FQL filter and paging details.
 

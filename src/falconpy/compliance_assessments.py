@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+
 from typing import Dict, Union
 from ._util import force_default, process_service_request
 from ._service_class import ServiceClass
@@ -53,6 +54,7 @@ class ComplianceAssessments(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def aggregate_cluster_assessments(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get the assessments for each cluster.
@@ -99,7 +101,8 @@ class ComplianceAssessments(ServiceClass):
                   image_id: Image ID
                   cloud_info.cloud_provider: Cloud provider
                   asset_type: asset type (container image)
-                  compliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
+                  compliance_finding.severity: Compliance finding severity;
+                    available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
                   compliance_finding.framework: Compliance finding framework (available values: CIS)
                   image_repository: Image repository
                   cloud_info.cloud_account_id: Cloud account ID
@@ -141,7 +144,8 @@ class ComplianceAssessments(ServiceClass):
                    cloud_info.cloud_account_id: Cloud account ID
                    cloud_info.cloud_provider: Cloud provider
                    compliance_finding.id: Compliance finding ID
-                   compliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
+                   compliance_finding.severity: Compliance finding severity;
+                    available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
                    cloud_info.cluster_name: Kubernetes cluster name
                    image_id: Image ID
                    image_tag: Image tag
@@ -168,7 +172,7 @@ class ComplianceAssessments(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def aggregate_failed_containers_by_rules(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-        """get the containers grouped into rules on which they failed
+        """Get the containers grouped into rules on which they failed.
 
         Keyword arguments:
         filter -- "Filter results using a query in Falcon Query Language (FQL). Supported Filters:
@@ -181,7 +185,8 @@ class ComplianceAssessments(ServiceClass):
                    compliance_finding.framework: Compliance finding framework (available values: CIS)
                    cloud_info.cloud_provider: Cloud provider
                    compliance_finding.id: Compliance finding ID
-                   compliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
+                   compliance_finding.severity: Compliance finding severity;
+                    available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
                    cid: Customer ID
                    image_id: Image ID
                    image_digest: Image digest (sha256 digest)
@@ -206,8 +211,9 @@ class ComplianceAssessments(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_failed_containers_count_by_severity(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-        """Get the failed containers count grouped into severity levels
+    def aggregate_failed_containers_count_by_severity(self: object,
+                                                      parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get the failed containers count grouped into severity levels.
 
         Keyword arguments:
         filter -- "Filter results using a query in Falcon Query Language (FQL). Supported Filters:
@@ -216,7 +222,8 @@ class ComplianceAssessments(ServiceClass):
                    compliance_finding.id: Compliance finding ID
                    image_registry: Image registry
                    compliance_finding.name: Compliance finding Name
-                   compliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
+                   compliance_finding.severity: Compliance finding severity;
+                    available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
                    cloud_info.cluster_name: Kubernetes cluster name
                    cloud_info.cloud_account_id: Cloud account ID
                    image_id: Image ID
@@ -246,7 +253,7 @@ class ComplianceAssessments(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def aggregate_failed_images_by_rules(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-        """get the images grouped into rules on which they failed
+        """Get the images grouped into rules on which they failed.
 
         Keyword arguments:
         filter -- "Filter results using a query in Falcon Query Language (FQL). Supported Filters:
@@ -260,7 +267,8 @@ class ComplianceAssessments(ServiceClass):
                    compliance_finding.framework: Compliance finding framework (available values: CIS)
                    cloud_info.namespace: Kubernetes namespace
                    cid: Customer ID
-                   compliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
+                   compliance_finding.severity: Compliance finding severity;
+                    available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
                    cloud_info.cloud_provider: Cloud provider
                    compliance_finding.id: Compliance finding ID
                    image_id: Image ID
@@ -284,14 +292,16 @@ class ComplianceAssessments(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_failed_images_count_by_severity(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
-        """Get the failed images count grouped into severity levels
+    def aggregate_failed_images_count_by_severity(self: object,
+                                                  parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get the failed images count grouped into severity levels.
 
         Keyword arguments:
         filter -- "Filter results using a query in Falcon Query Language (FQL). Supported Filters:
                    image_tag: Image tag
                    compliance_finding.name: Compliance finding Name
-                   compliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
+                   compliance_finding.severity: Compliance finding severity;
+                    available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
                    cloud_info.cloud_account_id: Cloud account ID
                    image_digest: Image digest (sha256 digest)
                    image_registry: Image registry
@@ -336,7 +346,8 @@ class ComplianceAssessments(ServiceClass):
                    image_registry: Image registry
                    cloud_info.cloud_region: Cloud region
                    asset_type: asset type (container, image)
-                   compliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
+                   compliance_finding.severity: Compliance finding severity;
+                    available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
                    cid: Customer ID
                    compliance_finding.id: Compliance finding ID
                    compliance_finding.framework: Compliance finding framework (available values: CIS)
@@ -377,7 +388,8 @@ class ComplianceAssessments(ServiceClass):
                    cloud_info.cloud_region: Cloud region
                    cloud_info.cloud_account_id: Cloud account ID
                    asset_type: asset type (container, image)
-                   compliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
+                   compliance_finding.severity: Compliance finding severity;
+                    available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
                    image_id: Image ID
                    image_digest: Image digest (sha256 digest)
                    compliance_finding.framework: Compliance finding framework (available values: CIS)
@@ -402,7 +414,8 @@ class ComplianceAssessments(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_failed_rules_count_by_severity(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_failed_rules_count_by_severity(self: object,
+                                                 parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get the failed rules count grouped into severity levels.
 
         Keyword arguments:
@@ -416,7 +429,8 @@ class ComplianceAssessments(ServiceClass):
                    compliance_finding.framework: Compliance finding framework (available values: CIS)
                    image_repository: Image repository
                    cloud_info.cloud_account_id: Cloud account ID
-                   compliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
+                   compliance_finding.severity: Compliance finding severity;
+                    available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
                    asset_type: asset type (container, image)
                    cloud_info.cluster_name: Kubernetes cluster name
                    cloud_info.cloud_provider: Cloud provider
@@ -450,7 +464,8 @@ class ComplianceAssessments(ServiceClass):
                    image_tag: Image tag
                    compliance_finding.name: Compliance finding Name
                    asset_type: asset type (container, image)
-                   compliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
+                   compliance_finding.severity: Compliance finding severity;
+                    available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)
                    cid: Customer ID
                    container_name: Container name
                    cloud_info.cluster_name: Kubernetes cluster name
