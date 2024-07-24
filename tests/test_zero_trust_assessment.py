@@ -61,7 +61,7 @@ class TestZeroTrustAssessment:
         tok = request_context.set(req)
         zta = ZeroTrustAssessment(pythonic=True, debug=config.debug)
         request_context.reset(tok)
-        assert bool(zta.get_audit().status_code == 200)
+        assert bool(zta.get_assessments_by_score(filter="score:>30").status_code == 200)
 
     @pytest.mark.skipif(config.base_url != "https://api.crowdstrike.com",
                     reason="Unit testing unavailable in this region"
@@ -87,7 +87,7 @@ class TestZeroTrustAssessment:
         req.cs_cloud = config.base_url
         another_request_context.set(req)
         zta = ZeroTrustAssessment(pythonic=True, debug=config.debug)
-        assert bool(zta.get_audit().status_code == 200)
+        assert bool(zta.get_assessments_by_score(filter="score:>30").status_code == 200)
 
     # This should be the last test executed, log out the token
     @staticmethod
