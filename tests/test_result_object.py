@@ -772,6 +772,8 @@ class TestResults:
             try:
                 old_discover.get_aws_settings()
                 _success = True
-            except:
-                pass
+            except APIError as bad_class:
+                if bad_class.code == 500:
+                    _success = True  # This op is fully deprecated
+
         assert _success
