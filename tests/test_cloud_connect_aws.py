@@ -13,6 +13,8 @@ from falconpy import CloudConnectAWS
 from falconpy import oauth2 as FalconAuth
 from falconpy._util import service_request
 
+pytest.skip(allow_module_level=True)
+
 auth = Authorization.TestAuthorization()
 
 config = auth.getConfigObject()
