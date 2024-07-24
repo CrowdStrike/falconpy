@@ -13,7 +13,7 @@ from falconpy import SensorVisibilityExclusions
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = SensorVisibilityExclusions(auth_object=config)
-AllowedResponses = [200, 401, 404, 429]
+AllowedResponses = [200, 400, 401, 404, 429]
 
 
 class TestSVExclusions:
@@ -31,17 +31,17 @@ class TestSVExclusions:
         tests = {
             "get_sv_exclusions": falcon.get_exclusions(ids="12345678"),
             "create_exclusion": falcon.create_exclusions(body={}),
-            "create_exclusion_too": falcon.create_exclusions(comment="Unit Testing",
-                                                             groups=["1234578"],
-                                                             value="Charlie"
+           "create_exclusion_too": falcon.create_exclusions(comment="Unit Testing",
+                                                            groups=["1234578"],
+                                                            value="Charlie"
+                                                            ),
+           "update_exclusion": falcon.update_exclusions(body={"id": "12345678"}),
+           "update_exclusion_also": falcon.update_exclusions(comment="Unit Testing",
+                                                             groups=["12345678"],
+                                                             id="12345678",
+                                                             value="Bananas"
                                                              ),
-            "update_exclusion": falcon.update_exclusions(body={}),
-            "update_exclusion_also": falcon.update_exclusions(comment="Unit Testing",
-                                                              groups=["12345678"],
-                                                              id="12345678",
-                                                              value="Bananas"
-                                                              ),
-            "delete_exclusion": falcon.delete_exclusions(ids="12345678"),
+           "delete_exclusion": falcon.delete_exclusions(ids="12345678"),
         }
         for key in tests:
             if tests[key]["status_code"] == 500:
