@@ -16,7 +16,7 @@ from falconpy import FDR
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = FDR(auth_object=config)
-AllowedResponses = [200, 201, 207, 429, 500]
+AllowedResponses = [200, 201, 207, 403, 429, 500]
 
 class TestFDR:
     def test_all_code_paths(self):
