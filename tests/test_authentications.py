@@ -281,6 +281,9 @@ class TestAuthentications:
     def test_version_compare(self):
         assert bool(version("1.2.16"))  # Will be true as this method is released in 1.3+
 
+    def test_version_compare_quick(self):
+        assert bool(version("0.9"))  # Will be true as this method is released in 1.3+
+
     def test_version_compare_exact_match(self):
         assert bool(version(version()))  # Should be a while before we hit that...
 
