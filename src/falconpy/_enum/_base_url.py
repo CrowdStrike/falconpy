@@ -50,4 +50,5 @@ class BaseURL(Enum):
     US2 = "api.us-2.crowdstrike.com"
     EU1 = "api.eu-1.crowdstrike.com"
     USGOV1 = "api.laggar.gcw.crowdstrike.com"
+    USGOV2 = "api.us-gov-2.crowdstrike.mil"
     AUTO = "api.crowdstrike.com"
