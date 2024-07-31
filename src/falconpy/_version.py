@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-_VERSION = '1.4.4'
+_VERSION = '1.4.5'
 _MAINTAINER = 'Joshua Hiller'
 _AUTHOR = 'CrowdStrike'
 _AUTHOR_EMAIL = 'falconpy@crowdstrike.com'
@@ -71,7 +71,6 @@ def version(compare: str = None, agent_string: bool = None):
         returned = f"{_TITLE}/{str(_VERSION)}"
     else:
         ver = _VERSION.split(".")
-        major_minor = float(f"{ver[0]}.{ver[1]}")
         if isinstance(compare, str):
             compare = compare.strip()
         elif isinstance(compare, (int, float)):
@@ -79,22 +78,19 @@ def version(compare: str = None, agent_string: bool = None):
         if compare:
             returned = False
             chk = compare.split(".")
-            chk_major = 0
-            chk_minor = 0
-            chk_patch = 0
-            if chk:
-                chk_major = chk[0]
-            if len(chk) > 1:
-                chk_minor = chk[1]
-            if len(chk) > 2:
-                chk_patch = int(chk[2])
             try:
-                chk_major_minor = float(f"{chk_major}.{chk_minor}")
+                chk_major = int(chk[0]) if chk else 0
+                chk_minor = int(chk[1]) if len(chk) > 1 else 0
+                chk_patch = int(chk[2]) if len(chk) > 2 else 0
             except ValueError as bad_value:
                 raise ValueError("Invalid version comparison value specified") from bad_value
-            if major_minor > chk_major_minor:
+            if int(ver[0]) > chk_major:
                 returned = True
-            elif major_minor == chk_major_minor and int(ver[2]) >= chk_patch:
-                returned = True
+            elif int(ver[0]) == chk_major:
+                if int(ver[1]) > chk_minor:
+                    returned = True
+                elif int(ver[1]) == chk_minor:
+                    if int(ver[2]) >= chk_patch:
+                        returned = True
 
     return returned
