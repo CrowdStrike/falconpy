@@ -19,16 +19,6 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_certificate_based_exclusions.py`
 
-+ Added: Added new __Data Scanner__ service collection with 3 new operations.
-    - `__init__.py`
-    - `_endpoint/__init__.py`
-    - `_endpoint/_datascanner.py`
-    - `_endpoint/deprecated/_datascanner.py`
-    - `datascanner.py`
-    > Unit testing expanded to complete code coverage.
-    - `tests/test_datascanner.py`
-
-
 + Added: Added new __Compliance Assessments__ service collection with 11 new operations.
     - `__init__.py`
     - `_endpoint/__init__.py`
@@ -36,6 +26,29 @@
     - `compliance_assessments.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_compliance_assessments.py`
+
+## Issues resolved
++ Fixed: Resolved comparison issue with version check helper method.
+    - `_version.py`
+
+## Other
++ Added: USGOV2 cloud region added to Base URL enumerator.
+    - `_enum/_base_url.py`
+
++ Added: Automatic base URL detection from context objects when available.
+    - `_auth_object/_falcon_interface.py`
+
++ Pinned: `setuptools` package pinned to version __70.3.0__ to avoid failures with new iterations of setuptools in Azure environments.
+    - `requirements.txt`
+    - `requirements-dev.txt`
+    - `setup.py`
+    - `dev-setup.py`
+    - Thanks go out to @gansel51 for identifying this issue and contributing a fix! 🙇
+
++ Pinned: `zipp` package pinned to version __3.19.1__ to avoid a potential vulnerability.
+    - `requirements-dev.txt`
+
+---
 
 # Version 1.4.4
 ## Added features and functionality
