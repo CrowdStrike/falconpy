@@ -99,7 +99,8 @@ This has been a critical element in the development of the FalconPy project.
 + `David-M-Berry`
 + Oke Okumo, `@okewoma`
 + Alexander Moomaw, `@alhumaw`
-+ Esha Kumar, `@exk200006` 
++ Esha Kumar, `@exk200006`
++ Griffin Ansel, `@gansel51`
 
 
 ## Sponsors
