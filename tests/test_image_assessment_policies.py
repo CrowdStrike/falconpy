@@ -4,6 +4,7 @@
 # import json
 import os
 import sys
+import pytest
 
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
@@ -20,6 +21,9 @@ AllowedResponses = [200, 201, 204, 207, 400, 502]  # Allowing 502 from CreatePol
 
 
 class TestImageAssessmentPolicies:
+    @pytest.mark.skipif(config.base_url == "https://api.us-2.crowdstrike.com",
+                        reason="Unit testing unavailable on US-2"
+                        )
     def test_all_code_paths(self):
         error_checks = True
         tests = {

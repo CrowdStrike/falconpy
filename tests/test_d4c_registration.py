@@ -3,6 +3,7 @@ test_d4c_registration.py - This class tests the Discover for Cloud registration 
 """
 import os
 import sys
+import pytest
 # Authentication via test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -120,6 +121,9 @@ class TestD4CRegistration:
 
         return error_checks
 
+    @pytest.mark.skipif(config.base_url == "https://api.eu-1.crowdstrike.com",
+                        reason="Unit testing unavailable on EU-1"
+                        )
     def test_GetCSPMAzureUserScriptsAttachment(self):
         """
         Pytest harness hook
