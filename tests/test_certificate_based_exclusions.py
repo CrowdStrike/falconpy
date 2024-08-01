@@ -4,6 +4,7 @@
 # import json
 import os
 import sys
+import pytest
 
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
@@ -20,6 +21,9 @@ AllowedResponses = [200, 201, 207, 400, 404, 429, 500]
 
 
 class TestCertificateBasedExclusions:
+    @pytest.mark.skipif(config.base_url == "https://api.laggar.gcw.crowdstrike.com",
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     def test_all_code_paths(self):
         error_checks = True
         tests = {
