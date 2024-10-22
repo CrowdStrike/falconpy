@@ -142,6 +142,7 @@ from .overwatch_dashboard import OverwatchDashboard
 from .prevention_policy import PreventionPolicy, PreventionPolicies
 from .quarantine import Quarantine
 from .quick_scan import QuickScan
+from .quick_scan_pro import QuickScanPro
 from .real_time_response_admin import RealTimeResponseAdmin
 from .real_time_response_audit import RealTimeResponseAudit
 from .real_time_response import RealTimeResponse
@@ -202,7 +203,7 @@ __all__ = [
     "ContainerAlerts", "ContainerDetections", "ContainerImages", "ContainerPackages",
     "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers",
     "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement",
-    "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration"
+    "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration", "QuickScanPro"
     ]
 """
 This is free and unencumbered software released into the public domain.
