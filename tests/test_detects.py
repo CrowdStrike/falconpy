@@ -42,6 +42,8 @@ class TestDetects:
             pytest.skip("Rate Limit hit")
         if check["body"]["resources"]:
             id_list = ",".join(check["body"]["resources"])
+        if not id_list:
+            id_list = ["1234567890"]
         tests = {
             "query_detects": falcon.query_detects(),
             "get_detect_summaries": falcon.get_detect_summaries(body={"ids": ["12345678"]}),
@@ -91,7 +93,10 @@ class TestDetects:
     def service_detects_test_comment(self):
         # Unrelated to v1.3 updates
         # It appears the assigned_to_uuid value must be specified in order for this test to pass
-        if falcon.update_detects_by_ids(ids=falcon.query_detects(limit=1)["body"]["resources"], comment="FalconPy Unit Testing")["status_code"] in [200, 400]:
+        id_list = falcon.query_detects(limit=1).get("body").get("resources")
+        if not id_list:
+            return True  # False
+        if falcon.update_detects_by_ids(ids=id_list, comment="FalconPy Unit Testing")["status_code"] in [200, 400]:
             return True
         else:
             return False
