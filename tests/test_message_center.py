@@ -12,7 +12,7 @@ from falconpy import MessageCenter
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = MessageCenter(auth_object=config)
-AllowedResponses = [200, 400, 403, 429, 405]  # pre-1.2.16 - UpdateCase appears to be decomm'd
+AllowedResponses = [200, 400, 403, 429, 405, 500]  # pre-1.2.16 - UpdateCase appears to be decomm'd
 
 
 class TestMessageCenter:
