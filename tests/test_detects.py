@@ -42,6 +42,8 @@ class TestDetects:
             pytest.skip("Rate Limit hit")
         if check["body"]["resources"]:
             id_list = ",".join(check["body"]["resources"])
+        if not id_list:
+            id_list = ["1234567890"]
         tests = {
             "query_detects": falcon.query_detects(),
             "get_detect_summaries": falcon.get_detect_summaries(body={"ids": ["12345678"]}),
