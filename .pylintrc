@@ -347,6 +347,8 @@ single-line-class-stmt=no
 # else.
 single-line-if-stmt=no
 
+# Number of positional arguments to a method
+max-positional-arguments=20
 
 [IMPORTS]
 
