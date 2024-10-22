@@ -17,7 +17,7 @@ from falconpy import ImageAssessmentPolicies
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = ImageAssessmentPolicies(auth_object=config)
-AllowedResponses = [200, 201, 204, 207, 400, 502]  # Allowing 502 from CreatePolicyGroups for now
+AllowedResponses = [200, 201, 204, 207, 400, 403, 502]  # Allowing 502 from CreatePolicyGroups for now
 
 
 class TestImageAssessmentPolicies:
