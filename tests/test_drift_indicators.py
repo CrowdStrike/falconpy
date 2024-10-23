@@ -25,6 +25,7 @@ class TestDriftIndicators:
         tests = {
             "GetDriftIndicatorsValuesByDate": falcon.get_drift_indicators_by_date(filter="cid:'12345678901234567890123456789012'"),
             "ReadDriftIndicatorsCount": falcon.read_drift_indicator_counts(filter="cid:'12345678901234567890123456789012'"),
+            "ReadDriftIndicatorEntities": falcon.read_drift_indicator_entities(ids="1234567890"),
             "SearchAndReadDriftIndicatorEntities": falcon.search_and_read_drift_indicators(filter="cid:'12345678901234567890123456789012'"),
             "SearchDriftIndicators": falcon.search_drift_indicators(filter="cid:'12345678901234567890123456789012'"),
         }
