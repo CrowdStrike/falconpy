@@ -36,21 +36,21 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 
-_complianceassessments_endpoints = [
+_compliance_assessments_endpoints = [
   [
     "extAggregateClusterAssessments",
     "GET",
     "/container-compliance/aggregates/compliance-by-clusters/v2",
     "get the assessments for each cluster",
-    "complianceassessments",
+    "compliance_assessments",
     [
       {
         "type": "string",
         "description": "Filter results using a query in Falcon Query Language (FQL). Supported "
-        "Filters:\ncloud_info.cluster_name: Kubernetes cluster name\ncloud_info.cloud_region: Cloud "
-        "region\ncompliance_finding.framework: Compliance finding framework (available values: "
-        "CIS)\ncloud_info.cloud_account_id: Cloud account ID\ncloud_info.namespace: Kubernetes namespace\ncid: Customer "
-        "ID\ncloud_info.cloud_provider: Cloud provider\n",
+        "Filters:\ncloud_info.cloud_region: Cloud region\ncompliance_finding.framework: Compliance finding framework "
+        "(available values: CIS)\ncloud_info.cluster_name: Kubernetes cluster name\ncloud_info.cloud_account_id: Cloud "
+        "account ID\ncloud_info.namespace: Kubernetes namespace\ncloud_info.cloud_provider: Cloud provider\ncid: "
+        "Customer ID\n",
         "name": "filter",
         "in": "query"
       }
@@ -61,19 +61,19 @@ _complianceassessments_endpoints = [
     "GET",
     "/container-compliance/aggregates/compliance-by-images/v2",
     "get the assessments for each image",
-    "complianceassessments",
+    "compliance_assessments",
     [
       {
         "type": "string",
         "description": "Filter results using a query in Falcon Query Language (FQL). Supported "
-        "Filters:\ncloud_info.cluster_name: Kubernetes cluster name\ncompliance_finding.id: Compliance finding "
-        "ID\nimage_digest: Image digest (sha256 digest)\nimage_registry: Image registry\nimage_tag: Image "
-        "tag\nimage_id: Image ID\ncloud_info.cloud_provider: Cloud provider\nasset_type: asset type (container, "
-        "image)\ncompliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, "
-        "3: high, 2: medium, 1:low)\ncompliance_finding.framework: Compliance finding framework (available values: "
-        "CIS)\nimage_repository: Image repository\ncloud_info.cloud_account_id: Cloud account ID\ncloud_info.namespace: "
-        " Kubernetes namespace\ncloud_info.cloud_region: Cloud region\ncompliance_finding.name: Compliance finding "
-        "Name\ncid: Customer ID\n",
+        "Filters:\nimage_id: Image ID\nimage_repository: Image repository\ncloud_info.cloud_region: Cloud region\ncid: "
+        "Customer ID\ncompliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: "
+        "critical, 3: high, 2: medium, 1:low)\ncloud_info.cloud_account_id: Cloud account ID\ncloud_info.namespace: "
+        "Kubernetes namespace\ncompliance_finding.name: Compliance finding Name\ncompliance_finding.framework: "
+        "Compliance finding framework (available values: CIS)\ncloud_info.cluster_name: Kubernetes cluster "
+        "name\nimage_tag: Image tag\ncloud_info.cloud_provider: Cloud provider\nasset_type: asset type (container, "
+        "image)\nimage_registry: Image registry\nimage_digest: Image digest (sha256 digest)\ncompliance_finding.id: "
+        "Compliance finding ID\n",
         "name": "filter",
         "in": "query"
       },
@@ -97,18 +97,18 @@ _complianceassessments_endpoints = [
     "GET",
     "/container-compliance/aggregates/compliance-by-rules/v2",
     "get the assessments for each rule",
-    "complianceassessments",
+    "compliance_assessments",
     [
       {
         "type": "string",
         "description": "Filter results using a query in Falcon Query Language (FQL). Supported "
-        "Filters:\nimage_registry: Image registry\nimage_repository: Image repository\ncompliance_finding.framework: "
-        "Compliance finding framework (available values: CIS)\ncloud_info.cloud_region: Cloud "
-        "region\ncloud_info.cloud_account_id: Cloud account ID\ncloud_info.cloud_provider: Cloud "
-        "provider\ncompliance_finding.id: Compliance finding ID\ncompliance_finding.severity: Compliance finding "
-        "severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)\ncloud_info.cluster_name: "
-        "Kubernetes cluster name\nimage_id: Image ID\nimage_tag: Image tag\ncompliance_finding.name: Compliance finding "
-        "Name\nimage_digest: Image digest (sha256 digest)\ncid: Customer ID\n",
+        "Filters:\ncloud_info.cloud_provider: Cloud provider\nimage_repository: Image "
+        "repository\ncloud_info.cloud_region: Cloud region\ncloud_info.cloud_account_id: Cloud account "
+        "ID\ncompliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, 3: "
+        "high, 2: medium, 1:low)\nimage_tag: Image tag\ncloud_info.cluster_name: Kubernetes cluster name\nimage_id: "
+        "Image ID\nimage_registry: Image registry\ncompliance_finding.name: Compliance finding "
+        "Name\ncompliance_finding.framework: Compliance finding framework (available values: CIS)\ncid: Customer "
+        "ID\ncompliance_finding.id: Compliance finding ID\nimage_digest: Image digest (sha256 digest)\n",
         "name": "filter",
         "in": "query"
       }
@@ -119,18 +119,18 @@ _complianceassessments_endpoints = [
     "GET",
     "/container-compliance/aggregates/failed-containers-by-rules/v2",
     "get the containers grouped into rules on which they failed",
-    "complianceassessments",
+    "compliance_assessments",
     [
       {
         "type": "string",
         "description": "Filter results using a query in Falcon Query Language (FQL). Supported "
-        "Filters:\ncloud_info.cloud_region: Cloud region\nimage_registry: Image registry\ncloud_info.cloud_account_id: "
-        "Cloud account ID\ncompliance_finding.name: Compliance finding Name\nimage_tag: Image "
-        "tag\ncloud_info.cluster_name: Kubernetes cluster name\ncompliance_finding.framework: Compliance finding "
-        "framework (available values: CIS)\ncloud_info.cloud_provider: Cloud provider\ncompliance_finding.id: "
-        "Compliance finding ID\ncompliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 "
-        "(4: critical, 3: high, 2: medium, 1:low)\ncid: Customer ID\nimage_id: Image ID\nimage_digest: Image digest "
-        "(sha256 digest)\ncloud_info.namespace: Kubernetes namespace\nimage_repository: Image repository\n",
+        "Filters:\ncloud_info.cluster_name: Kubernetes cluster name\ncloud_info.cloud_account_id: Cloud account "
+        "ID\ncloud_info.cloud_region: Cloud region\ncompliance_finding.id: Compliance finding "
+        "ID\ncompliance_finding.name: Compliance finding Name\nimage_registry: Image registry\ncloud_info.namespace: "
+        "Kubernetes namespace\nimage_tag: Image tag\nimage_id: Image ID\nimage_repository: Image repository\ncid: "
+        "Customer ID\ncompliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: "
+        "critical, 3: high, 2: medium, 1:low)\nimage_digest: Image digest (sha256 digest)\ncloud_info.cloud_provider: "
+        "Cloud provider\ncompliance_finding.framework: Compliance finding framework (available values: CIS)\n",
         "name": "filter",
         "in": "query"
       }
@@ -141,19 +141,18 @@ _complianceassessments_endpoints = [
     "GET",
     "/container-compliance/aggregates/failed-containers-count-by-severity/v2",
     "get the failed containers count grouped into severity levels",
-    "complianceassessments",
+    "compliance_assessments",
     [
       {
         "type": "string",
         "description": "Filter results using a query in Falcon Query Language (FQL). Supported "
-        "Filters:\ncloud_info.namespace: Kubernetes namespace\ncloud_info.cloud_provider: Cloud "
-        "provider\ncompliance_finding.id: Compliance finding ID\nimage_registry: Image "
-        "registry\ncompliance_finding.name: Compliance finding Name\ncompliance_finding.severity: Compliance finding "
-        "severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)\ncloud_info.cluster_name: "
-        "Kubernetes cluster name\ncloud_info.cloud_account_id: Cloud account ID\nimage_id: Image ID\nimage_digest: "
-        "Image digest (sha256 digest)\nimage_repository: Image repository\nimage_tag: Image "
-        "tag\ncompliance_finding.framework: Compliance finding framework (available values: CIS)\ncid: Customer "
-        "ID\ncloud_info.cloud_region: Cloud region\n",
+        "Filters:\ncompliance_finding.name: Compliance finding Name\ncompliance_finding.severity: Compliance finding "
+        "severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)\ncloud_info.cloud_account_id: "
+        "Cloud account ID\nimage_tag: Image tag\ncid: Customer ID\ncompliance_finding.id: Compliance finding "
+        "ID\nimage_digest: Image digest (sha256 digest)\ncloud_info.cluster_name: Kubernetes cluster "
+        "name\ncloud_info.cloud_provider: Cloud provider\nimage_repository: Image repository\ncloud_info.cloud_region: "
+        "Cloud region\nimage_registry: Image registry\nimage_id: Image ID\ncloud_info.namespace: Kubernetes "
+        "namespace\ncompliance_finding.framework: Compliance finding framework (available values: CIS)\n",
         "name": "filter",
         "in": "query"
       }
@@ -164,19 +163,19 @@ _complianceassessments_endpoints = [
     "GET",
     "/container-compliance/aggregates/failed-images-by-rules/v2",
     "get the images grouped into rules on which they failed",
-    "complianceassessments",
+    "compliance_assessments",
     [
       {
         "type": "string",
         "description": "Filter results using a query in Falcon Query Language (FQL). Supported "
-        "Filters:\nimage_repository: Image repository\nimage_tag: Image tag\ncloud_info.cluster_name: Kubernetes "
-        "cluster name\ncloud_info.cloud_region: Cloud region\ncloud_info.cloud_account_id: Cloud account "
-        "ID\nimage_registry: Image registry\ncompliance_finding.name: Compliance finding "
-        "Name\ncompliance_finding.framework: Compliance finding framework (available values: "
-        "CIS)\ncloud_info.namespace: Kubernetes namespace\ncid: Customer ID\ncompliance_finding.severity: Compliance "
-        "finding severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, "
-        "1:low)\ncloud_info.cloud_provider: Cloud provider\ncompliance_finding.id: Compliance finding ID\nimage_id: "
-        "Image ID\nimage_digest: Image digest (sha256 digest)\n",
+        "Filters:\ncloud_info.cluster_name: Kubernetes cluster name\nimage_digest: Image digest (sha256 "
+        "digest)\nimage_tag: Image tag\ncid: Customer ID\ncompliance_finding.id: Compliance finding "
+        "ID\ncompliance_finding.name: Compliance finding Name\ncloud_info.cloud_provider: Cloud "
+        "provider\ncloud_info.cloud_region: Cloud region\ncloud_info.namespace: Kubernetes namespace\nimage_registry: "
+        "Image registry\ncompliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: "
+        "critical, 3: high, 2: medium, 1:low)\nimage_id: Image ID\ncloud_info.cloud_account_id: Cloud account "
+        "ID\ncompliance_finding.framework: Compliance finding framework (available values: CIS)\nimage_repository: "
+        "Image repository\n",
         "name": "filter",
         "in": "query"
       }
@@ -187,19 +186,18 @@ _complianceassessments_endpoints = [
     "GET",
     "/container-compliance/aggregates/failed-images-count-by-severity/v2",
     "get the failed images count grouped into severity levels",
-    "complianceassessments",
+    "compliance_assessments",
     [
       {
         "type": "string",
         "description": "Filter results using a query in Falcon Query Language (FQL). Supported "
-        "Filters:\nimage_tag: Image tag\ncompliance_finding.name: Compliance finding Name\ncompliance_finding.severity: "
-        " Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, "
-        "1:low)\ncloud_info.cloud_account_id: Cloud account ID\nimage_digest: Image digest (sha256 "
-        "digest)\nimage_registry: Image registry\nimage_id: Image ID\ncloud_info.namespace: Kubernetes "
-        "namespace\ncompliance_finding.framework: Compliance finding framework (available values: "
-        "CIS)\nimage_repository: Image repository\ncloud_info.cloud_provider: Cloud provider\ncid: Customer "
-        "ID\ncloud_info.cloud_region: Cloud region\ncloud_info.cluster_name: Kubernetes cluster "
-        "name\ncompliance_finding.id: Compliance finding ID\n",
+        "Filters:\ncompliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, "
+        " 3: high, 2: medium, 1:low)\ncloud_info.cloud_account_id: Cloud account ID\ncloud_info.cloud_region: Cloud "
+        "region\ncompliance_finding.id: Compliance finding ID\ncompliance_finding.framework: Compliance finding "
+        "framework (available values: CIS)\nimage_registry: Image registry\ncloud_info.cluster_name: Kubernetes cluster "
+        " name\nimage_id: Image ID\ncloud_info.cloud_provider: Cloud provider\ncid: Customer ID\ncloud_info.namespace: "
+        "Kubernetes namespace\nimage_digest: Image digest (sha256 digest)\nimage_tag: Image tag\nimage_repository: "
+        "Image repository\ncompliance_finding.name: Compliance finding Name\n",
         "name": "filter",
         "in": "query"
       }
@@ -210,19 +208,19 @@ _complianceassessments_endpoints = [
     "GET",
     "/container-compliance/aggregates/failed-rules-by-clusters/v2",
     "get the failed rules for each cluster grouped into severity levels",
-    "complianceassessments",
+    "compliance_assessments",
     [
       {
         "type": "string",
         "description": "Filter results using a query in Falcon Query Language (FQL). Supported "
-        "Filters:\ncompliance_finding.name: Compliance finding Name\nimage_digest: Image digest (sha256 "
-        "digest)\nimage_tag: Image tag\ncloud_info.cloud_account_id: Cloud account ID\nimage_id: Image "
-        "ID\nimage_registry: Image registry\ncloud_info.cloud_region: Cloud region\nasset_type: asset type (container, "
-        "image)\ncompliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, "
-        "3: high, 2: medium, 1:low)\ncid: Customer ID\ncompliance_finding.id: Compliance finding "
-        "ID\ncompliance_finding.framework: Compliance finding framework (available values: "
-        "CIS)\ncloud_info.cluster_name: Kubernetes cluster name\nimage_repository: Image "
-        "repository\ncloud_info.cloud_provider: Cloud provider\n",
+        "Filters:\ncloud_info.cloud_account_id: Cloud account ID\nimage_digest: Image digest (sha256 "
+        "digest)\ncloud_info.cloud_region: Cloud region\ncid: Customer ID\nimage_registry: Image "
+        "registry\ncloud_info.cloud_provider: Cloud provider\ncompliance_finding.id: Compliance finding "
+        "ID\ncompliance_finding.framework: Compliance finding framework (available values: CIS)\nasset_type: asset type "
+        " (container, image)\ncompliance_finding.name: Compliance finding Name\ncloud_info.cluster_name: Kubernetes "
+        "cluster name\nimage_tag: Image tag\nimage_id: Image ID\nimage_repository: Image "
+        "repository\ncompliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: "
+        "critical, 3: high, 2: medium, 1:low)\n",
         "name": "filter",
         "in": "query"
       }
@@ -233,19 +231,19 @@ _complianceassessments_endpoints = [
     "GET",
     "/container-compliance/aggregates/failed-rules-by-images/v2",
     "get images with failed rules, rule count grouped by severity for each image",
-    "complianceassessments",
+    "compliance_assessments",
     [
       {
         "type": "string",
         "description": "Filter results using a query in Falcon Query Language (FQL). Supported "
-        "Filters:\ncompliance_finding.id: Compliance finding ID\nimage_tag: Image tag\ncloud_info.cluster_name: "
-        "Kubernetes cluster name\nimage_registry: Image registry\ncloud_info.cloud_provider: Cloud "
-        "provider\ncompliance_finding.name: Compliance finding Name\ncid: Customer ID\ncloud_info.cloud_region: Cloud "
-        "region\ncloud_info.cloud_account_id: Cloud account ID\nasset_type: asset type (container, "
-        "image)\ncompliance_finding.severity: Compliance finding severity; available values: 4, 3, 2, 1 (4: critical, "
-        "3: high, 2: medium, 1:low)\nimage_id: Image ID\nimage_digest: Image digest (sha256 "
-        "digest)\ncompliance_finding.framework: Compliance finding framework (available values: CIS)\nimage_repository: "
-        "Image repository\ncloud_info.namespace: Kubernetes namespace\n",
+        "Filters:\ncompliance_finding.id: Compliance finding ID\nimage_registry: Image registry\nimage_digest: Image "
+        "digest (sha256 digest)\nasset_type: asset type (container, image)\ncloud_info.cloud_region: Cloud "
+        "region\ncompliance_finding.name: Compliance finding Name\ncompliance_finding.severity: Compliance finding "
+        "severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)\nimage_tag: Image "
+        "tag\nimage_repository: Image repository\ncid: Customer ID\nimage_id: Image ID\ncloud_info.namespace: "
+        "Kubernetes namespace\ncloud_info.cloud_account_id: Cloud account ID\ncloud_info.cloud_provider: Cloud "
+        "provider\ncompliance_finding.framework: Compliance finding framework (available values: "
+        "CIS)\ncloud_info.cluster_name: Kubernetes cluster name\n",
         "name": "filter",
         "in": "query"
       }
@@ -256,18 +254,19 @@ _complianceassessments_endpoints = [
     "GET",
     "/container-compliance/aggregates/failed-rules-count-by-severity/v2",
     "get the failed rules count grouped into severity levels",
-    "complianceassessments",
+    "compliance_assessments",
     [
       {
         "type": "string",
-        "description": "Filter results using a query in Falcon Query Language (FQL). Supported Filters:\ncid: "
-        "Customer ID\ncloud_info.cloud_region: Cloud region\ncompliance_finding.id: Compliance finding ID\nimage_id: "
-        "Image ID\nimage_tag: Image tag\nimage_digest: Image digest (sha256 digest)\ncompliance_finding.framework: "
-        "Compliance finding framework (available values: CIS)\nimage_repository: Image "
-        "repository\ncloud_info.cloud_account_id: Cloud account ID\ncompliance_finding.severity: Compliance finding "
-        "severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)\nasset_type: asset type "
-        "(container, image)\ncloud_info.cluster_name: Kubernetes cluster name\ncloud_info.cloud_provider: Cloud "
-        "provider\nimage_registry: Image registry\ncompliance_finding.name: Compliance finding Name\n",
+        "description": "Filter results using a query in Falcon Query Language (FQL). Supported "
+        "Filters:\ncompliance_finding.framework: Compliance finding framework (available values: CIS)\nimage_id: Image "
+        "ID\ncompliance_finding.name: Compliance finding Name\nimage_digest: Image digest (sha256 "
+        "digest)\ncloud_info.cloud_account_id: Cloud account ID\nimage_repository: Image "
+        "repository\ncompliance_finding.id: Compliance finding ID\ncompliance_finding.severity: Compliance finding "
+        "severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)\ncloud_info.cloud_provider: "
+        "Cloud provider\ncid: Customer ID\nasset_type: asset type (container, image)\ncloud_info.cloud_region: Cloud "
+        "region\nimage_registry: Image registry\nimage_tag: Image tag\ncloud_info.cluster_name: Kubernetes cluster "
+        "name\n",
         "name": "filter",
         "in": "query"
       }
@@ -278,19 +277,19 @@ _complianceassessments_endpoints = [
     "GET",
     "/container-compliance/aggregates/rules-by-status/v2",
     "get the rules grouped by their statuses",
-    "complianceassessments",
+    "compliance_assessments",
     [
       {
         "type": "string",
         "description": "Filter results using a query in Falcon Query Language (FQL). Supported "
-        "Filters:\ncompliance_finding.id: Compliance finding ID\nimage_tag: Image tag\ncompliance_finding.name: "
-        "Compliance finding Name\nasset_type: asset type (container, image)\ncompliance_finding.severity: Compliance "
-        "finding severity; available values: 4, 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)\ncid: Customer "
-        "ID\ncontainer_name: Container name\ncloud_info.cluster_name: Kubernetes cluster name\nimage_repository: Image "
-        "repository\ncloud_info.cloud_provider: Cloud provider\nimage_registry: Image "
-        "registry\ncompliance_finding.framework: Compliance finding framework (available values: "
-        "CIS)\ncloud_info.cloud_region: Cloud region\ncloud_info.cloud_account_id: Cloud account ID\nimage_id: Image "
-        "ID\nimage_digest: Image digest (sha256 digest)\ncontainer_id: Container ID\n",
+        "Filters:\ncompliance_finding.name: Compliance finding Name\ncompliance_finding.framework: Compliance finding "
+        "framework (available values: CIS)\nimage_registry: Image registry\ncontainer_id: Container "
+        "ID\ncloud_info.cloud_region: Cloud region\ncid: Customer ID\ncloud_info.cloud_account_id: Cloud account "
+        "ID\ncontainer_name: Container name\ncloud_info.cloud_provider: Cloud provider\nimage_repository: Image "
+        "repository\nimage_id: Image ID\ncompliance_finding.severity: Compliance finding severity; available values: 4, "
+        " 3, 2, 1 (4: critical, 3: high, 2: medium, 1:low)\ncloud_info.cluster_name: Kubernetes cluster "
+        "name\nasset_type: asset type (container, image)\nimage_tag: Image tag\ncompliance_finding.id: Compliance "
+        "finding ID\nimage_digest: Image digest (sha256 digest)\n",
         "name": "filter",
         "in": "query"
       }
