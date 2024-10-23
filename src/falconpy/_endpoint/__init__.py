@@ -45,7 +45,7 @@ from ._api_integrations import _api_integrations_endpoints
 from ._certificate_based_exclusions import _certificate_based_exclusions_endpoints
 from ._cloud_connect_aws import _cloud_connect_aws_endpoints
 from ._cloud_snapshots import _cloud_snapshots_endpoints
-from ._compliance_assessments import _complianceassessments_endpoints
+from ._compliance_assessments import _compliance_assessments_endpoints
 from ._configuration_assessment_evaluation_logic import _configuration_assessment_evaluation_logic_endpoints
 from ._configuration_assessment import _configuration_assessment_endpoints
 from ._container_alerts import _container_alerts_endpoints
@@ -120,7 +120,7 @@ api_endpoints.extend(_api_integrations_endpoints)
 api_endpoints.extend(_certificate_based_exclusions_endpoints)
 api_endpoints.extend(_cloud_connect_aws_endpoints)
 api_endpoints.extend(_cloud_snapshots_endpoints)
-api_endpoints.extend(_complianceassessments_endpoints)
+api_endpoints.extend(_compliance_assessments_endpoints)
 api_endpoints.extend(_configuration_assessment_evaluation_logic_endpoints)
 api_endpoints.extend(_configuration_assessment_endpoints)
 api_endpoints.extend(_container_alerts_endpoints)
