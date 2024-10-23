@@ -63,6 +63,9 @@ class TestDiscover:
             "query_and_get_logins": falcon.get_logins(ids=logins_id_list),
             "query_and_get_applications": falcon.get_applications(ids=applications_id_list),
             "query_iot_hosts": falcon.get_iot_hosts(ids=assets_id_list),
+            "combined_applications": falcon.query_combined_applications(limit=1),
+            "combined_hosts": falcon.query_combined_hosts(limit=1)
+
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
