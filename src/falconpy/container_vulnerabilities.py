@@ -74,6 +74,7 @@ class ContainerVulnerabilities(ServiceClass):
                     cvss_score                  repository
                     description                 severity
                     exploited_status            tag
+                    include_base_image_vuln
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -116,6 +117,7 @@ class ContainerVulnerabilities(ServiceClass):
                     cvss_score                  repository
                     description                 severity
                     exploited_status            tag
+                    include_base_image_vuln
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -158,6 +160,7 @@ class ContainerVulnerabilities(ServiceClass):
                     cvss_score                  repository
                     description                 severity
                     exploited_status            tag
+                    include_base_image_vuln
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -197,6 +200,7 @@ class ContainerVulnerabilities(ServiceClass):
                     cvss_score                  repository
                     description                 severity
                     exploited_status            tag
+                    include_base_image_vuln
         limit -- The upper-bound on the number of records to retrieve. String.
         offset -- The offset from where to begin. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -236,6 +240,7 @@ class ContainerVulnerabilities(ServiceClass):
                     cvss_score                  repository
                     description                 severity
                     exploited_status            tag
+                    include_base_image_vuln
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -327,7 +332,7 @@ class ContainerVulnerabilities(ServiceClass):
                     cps_rating          is_zero_day
                     cve_id              remediation_available
                     cvss_score          severity
-                    exploited_status
+                    exploited_status    include_base_image_vuln
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -395,6 +400,7 @@ class ContainerVulnerabilities(ServiceClass):
                     cvss_score                  repository
                     description                 severity
                     exploited_status            tag
+                    include_base_image_vuln
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- The fields to sort the records on. String.
@@ -432,3 +438,4 @@ class ContainerVulnerabilities(ServiceClass):
     ReadVulnerabilityCountByCPSRating = read_vulnerability_counts_by_cps_rating
     ReadVulnerabilityCountByCVSSScore = read_vulnerability_counts_by_cvss_score
     ReadVulnerabilityCountByActivelyExploited = read_vulnerability_counts_by_active_exploited
+    read_vulnerability_counts_by_actively_exploited = read_vulnerability_counts_by_active_exploited

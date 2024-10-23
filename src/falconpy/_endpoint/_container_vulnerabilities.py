@@ -49,7 +49,7 @@ _container_vulnerabilities_endpoints = [
         "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
         "filters: base_os,cid,container_id,container_running_status,containers_impacted_range,cps_rating,cve_id,cvss_sc"
         "ore,description,exploited_status,exploited_status_name,fix_status,image_digest,image_id,images_impacted_range,"
-        "package_name_version,registry,repository,severity,tag",
+        "include_base_image_vuln,package_name_version,registry,repository,severity,tag",
         "name": "filter",
         "in": "query"
       },
@@ -79,7 +79,7 @@ _container_vulnerabilities_endpoints = [
         "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
         "filters: base_os,cid,container_id,container_running_status,containers_impacted_range,cps_rating,cve_id,cvss_sc"
         "ore,description,exploited_status,exploited_status_name,fix_status,image_digest,image_id,images_impacted_range,"
-        "package_name_version,registry,repository,severity,tag",
+        "include_base_image_vuln,package_name_version,registry,repository,severity,tag",
         "name": "filter",
         "in": "query"
       },
@@ -109,7 +109,7 @@ _container_vulnerabilities_endpoints = [
         "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
         "filters: base_os,cid,container_id,container_running_status,containers_impacted_range,cps_rating,cve_id,cvss_sc"
         "ore,description,exploited_status,exploited_status_name,fix_status,image_digest,image_id,images_impacted_range,"
-        "package_name_version,registry,repository,severity,tag",
+        "include_base_image_vuln,package_name_version,registry,repository,severity,tag",
         "name": "filter",
         "in": "query"
       },
@@ -139,7 +139,7 @@ _container_vulnerabilities_endpoints = [
         "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
         "filters: base_os,cid,container_id,container_running_status,containers_impacted_range,cps_rating,cve_id,cvss_sc"
         "ore,description,exploited_status,exploited_status_name,fix_status,image_digest,image_id,images_impacted_range,"
-        "package_name_version,registry,repository,severity,tag",
+        "include_base_image_vuln,package_name_version,registry,repository,severity,tag",
         "name": "filter",
         "in": "query"
       },
@@ -169,7 +169,7 @@ _container_vulnerabilities_endpoints = [
         "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
         "filters: base_os,cid,container_id,container_running_status,containers_impacted_range,cps_rating,cve_id,cvss_sc"
         "ore,description,exploited_status,exploited_status_name,fix_status,image_digest,image_id,images_impacted_range,"
-        "package_name_version,registry,repository,severity,tag",
+        "include_base_image_vuln,package_name_version,registry,repository,severity,tag",
         "name": "filter",
         "in": "query"
       },
@@ -260,8 +260,8 @@ _container_vulnerabilities_endpoints = [
       {
         "type": "string",
         "description": "Filter the vulnerabilities using a query in Falcon Query Language (FQL). Supported "
-        "vulnerability filters: cid,cps_rating,cve_id,cvss_score,exploited_status,exploited_status_name,is_zero_day,rem"
-        "ediation_available,severity",
+        "vulnerability filters: cid,cps_rating,cve_id,cvss_score,exploited_status,exploited_status_name,include_base_im"
+        "age_vuln,is_zero_day,remediation_available,severity",
         "name": "filter",
         "in": "query"
       },
@@ -319,7 +319,7 @@ _container_vulnerabilities_endpoints = [
         "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
         "filters: base_os,cid,container_id,container_running_status,containers_impacted_range,cps_rating,cve_id,cvss_sc"
         "ore,description,exploited_status,exploited_status_name,fix_status,image_digest,image_id,images_impacted_range,"
-        "package_name_version,registry,repository,severity,tag",
+        "include_base_image_vuln,package_name_version,registry,repository,severity,tag",
         "name": "filter",
         "in": "query"
       },
