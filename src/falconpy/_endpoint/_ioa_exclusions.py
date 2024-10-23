@@ -120,8 +120,23 @@ _ioa_exclusions_endpoints = [
     [
       {
         "type": "string",
-        "description": "The filter expression that should be used to limit the results.",
+        "description": "The filter expression that should be used to limit the results. Filtered queries "
+        "involving regex fields should specify their expressions in the `ifn_regex` and `cl_regex` parameters.",
         "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The `ifn_regex` expression to filter exclusions by, used alongside expressions "
+        "specified in the filter query parameter.",
+        "name": "ifn_regex",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The `cl_regex` expression to filter exclusions by, used alongside expressions "
+        "specified in the filter query parameter.",
+        "name": "cl_regex",
         "in": "query"
       },
       {
