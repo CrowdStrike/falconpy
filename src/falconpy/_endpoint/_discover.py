@@ -38,6 +38,173 @@ For more information, please refer to <https://unlicense.org>
 
 _discover_endpoints = [
   [
+    "combined_applications",
+    "GET",
+    "/discover/combined/applications/v1",
+    "Search for applications in your environment by providing an FQL filter and paging details. Returns "
+    "details on applications which match the filter criteria.",
+    "discover",
+    [
+      {
+        "type": "string",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
+        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
+        "the previous response to continue from that place in the results.",
+        "name": "after",
+        "in": "query"
+      },
+      {
+        "maximum": 1000,
+        "minimum": 1,
+        "type": "integer",
+        "description": "The number of application ids to return in this response (Min: 1, Max: 1000, Default: "
+        "100). Use with the `after` parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort applications by their properties. A single sort field is allowed.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Search for applications in your environment by providing an FQL "
+        "filter.\n\t\t\t\tAvailable filter fields that support exact match: name, version, vendor, name_vendor, "
+        "name_vendor_version, first_seen_timestamp, installation_timestamp, architectures, installation_paths, "
+        "versioning_scheme, groups, is_normalized, last_used_user_sid, last_used_user_name, last_used_file_name, "
+        "last_used_file_hash, last_used_timestamp, last_updated_timestamp, is_suspicious, host.id, host.platform_name, "
+        "host.hostname, cid, host.os_version, host.machine_domain, host.ou, host.site_name, host.country, "
+        "host.current_mac_address, host.current_network_prefix, host.tags, host.groups, host.product_type_desc, "
+        "host.kernel_version, host.system_manufacturer, host.internet_exposure, host.agent_version, host.external_ip, "
+        "host.aid\n\t\t\t\tAvailable filter fields that supports wildcard (*): name, version, vendor, name_vendor, "
+        "name_vendor_version, architectures, installation_paths, groups, last_used_user_sid, last_used_user_name, "
+        "last_used_file_name, last_used_file_hash, host.platform_name, host.hostname, cid, host.os_version, "
+        "host.machine_domain, host.ou, host.site_name, host.country, host.current_mac_address, "
+        "host.current_network_prefix, host.tags, host.groups, host.product_type_desc, host.kernel_version, "
+        "host.system_manufacturer, host.internet_exposure, host.agent_version, host.external_ip, "
+        "host.aid\n\t\t\t\tAvailable filter fields that supports range comparisons (>, <, >=, <=): "
+        "first_seen_timestamp, installation_timestamp, last_used_timestamp, last_updated_timestamp\n\t\t\t\tAll filter "
+        "fields and operations supports negation (!).",
+        "name": "filter",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Select various details blocks to be returned for each application entity. Supported "
+        "values:\n\n<ul><li>browser_extension</li><li>host_info</li><li>install_usage</li></ul>",
+        "name": "facet",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "combined_hosts",
+    "GET",
+    "/discover/combined/hosts/v1",
+    "Search for assets in your environment by providing an FQL (Falcon Query Language) filter and paging "
+    "details. Returns details on assets which match the filter criteria.",
+    "discover",
+    [
+      {
+        "type": "string",
+        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
+        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
+        "the previous response to continue from that place in the results.",
+        "name": "after",
+        "in": "query"
+      },
+      {
+        "maximum": 1000,
+        "minimum": 1,
+        "type": "integer",
+        "description": "The number of asset IDs to return in this response (min: 1, max: 1000, default: 100). "
+        "Use with the `after` parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort assets by their properties. A single sort field is allowed. Common sort options "
+        "include:\n\n<ul><li>hostname|asc</li><li>product_type_desc|desc</li></ul>",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter assets using an FQL query. Common filter options include:<ul><li>entity_type:'m "
+        "anaged'</li><li>product_type_desc:'Workstation'</li><li>platform_name:'Windows'</li><li>last_seen_timestamp:>' "
+        "now-7d'</li></ul>\n\t\t\tAvailable filter fields that support exact match: id, aid, entity_type, country, "
+        "city, platform_name, os_version, kernel_version, product_type_desc, tags, groups, agent_version, "
+        "system_product_name, system_manufacturer, system_serial_number, bios_manufacturer, bios_version, ou, "
+        "machine_domain, site_name, external_ip, hostname, local_ips_count, network_interfaces.local_ip, "
+        "network_interfaces.mac_address, network_interfaces.interface_alias, network_interfaces.interface_description, "
+        "network_interfaces.network_prefix, last_discoverer_aid, discoverer_count, discoverer_aids, discoverer_tags, "
+        "discoverer_platform_names, discoverer_product_type_descs, confidence, internet_exposure,  os_is_eol, "
+        "data_providers, data_providers_count, mac_addresses, local_ip_addresses, reduced_functionality_mode, "
+        "number_of_disk_drives, processor_package_count, physical_core_count, logical_core_count, total_disk_space, "
+        "disk_sizes.disk_name, disk_sizes.disk_space, cpu_processor_name, total_memory, encryption_status, "
+        "encrypted_drives, encrypted_drives_count, unencrypted_drives, unencrypted_drives_count, "
+        "os_security.secure_boot_requested_status, os_security.device_guard_status, os_security.device_guard_status, "
+        "os_security.device_guard_status, os_security.system_guard_status, os_security.credential_guard_status, "
+        "os_security.iommu_protection_status, os_security.secure_boot_enabled_status, "
+        "os_security.uefi_memory_protection_status, os_security.virtualization_based_security_status, "
+        "os_security.kernel_dma_protection_status, total_bios_files, bios_hashes_data.sha256_hash, "
+        "bios_hashes_data.measurement_type, bios_id, average_processor_usage, average_memory_usage, "
+        "average_memory_usage_pct, max_processor_usage, max_memory_usage, max_memory_usage_pct, used_disk_space, "
+        "used_disk_space_pct, available_disk_space, available_disk_space_pct, mount_storage_info.mount_path, "
+        "mount_storage_info.used_space, mount_storage_info.available_space, form_factor, servicenow_id, owned_by, "
+        "managed_by, assigned_to, department, fqdn, used_for, object_guid, object_sid, ad_user_account_control, "
+        "account_enabled, creation_timestamp, email, os_service_pack, location, state, cpu_manufacturer, "
+        "discovering_by\n\t\t\tAvailable filter fields that supports wildcard (*): id, aid, entity_type, country, city, "
+        " platform_name, os_version, kernel_version, product_type_desc, tags, groups, agent_version, "
+        "system_product_name, system_manufacturer, system_serial_number, bios_manufacturer, bios_version, ou, "
+        "machine_domain, site_name, external_ip, hostname, network_interfaces.local_ip, network_interfaces.mac_address, "
+        " network_interfaces.interface_alias, network_interfaces.interface_description, "
+        "network_interfaces.network_prefix, last_discoverer_aid, discoverer_aids, discoverer_tags, "
+        "discoverer_platform_names, discoverer_product_type_descs, confidence, internet_exposure,  os_is_eol, "
+        "data_providers, mac_addresses, local_ip_addresses, reduced_functionality_mode, disk_sizes.disk_name, "
+        "cpu_processor_name, encryption_status, encrypted_drives, unencrypted_drives, "
+        "os_security.secure_boot_requested_status, os_security.device_guard_status, os_security.device_guard_status, "
+        "os_security.device_guard_status, os_security.system_guard_status, os_security.credential_guard_status, "
+        "os_security.iommu_protection_status, os_security.secure_boot_enabled_status, "
+        "os_security.uefi_memory_protection_status, os_security.virtualization_based_security_status, "
+        "os_security.kernel_dma_protection_status, bios_hashes_data.sha256_hash, bios_hashes_data.measurement_type, "
+        "bios_id, mount_storage_info.mount_path, form_factor, servicenow_id, owned_by, managed_by, assigned_to, "
+        "department, fqdn, used_for, object_guid, object_sid, account_enabled, email, os_service_pack, location, state, "
+        " cpu_manufacturer, discovering_by\n\t\t\tAvailable filter fields that supports range comparisons (>, <, >=, "
+        "<=): first_seen_timestamp, last_seen_timestamp, local_ips_count, discoverer_count, confidence, "
+        "number_of_disk_drives, processor_package_count, physical_core_count, data_providers_count, logical_core_count, "
+        " total_disk_space, disk_sizes.disk_space, total_memory, encrypted_drives_count, unencrypted_drives_count, "
+        "total_bios_files, average_processor_usage, average_memory_usage, average_memory_usage_pct, "
+        "max_processor_usage, max_memory_usage, max_memory_usage_pct, used_disk_space, used_disk_space_pct, "
+        "available_disk_space, available_disk_space_pct, mount_storage_info.used_space, "
+        "mount_storage_info.available_space, ad_user_account_control, creation_timestamp\n\t\t\tAll filter fields and "
+        "operations supports negation (!).",
+        "name": "filter",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Select various details blocks to be returned for each host entity. Supported "
+        "values:\n\n<ul><li>system_insights</li><li>third_party</li><li>risk_factors</li></ul>",
+        "name": "facet",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "get_accounts",
     "GET",
     "/discover/entities/accounts/v1",

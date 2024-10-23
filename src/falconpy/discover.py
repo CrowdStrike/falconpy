@@ -55,6 +55,100 @@ class Discover(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_combined_applications(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search for applications by providing an FQL filter and paging details.
+
+        Returns details on applications which match the filter criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+        limit -- The number of account IDs to return in this response. (Max: 100, default: 100)
+                 Use with the offset parameter to manage pagination of results.
+        offset -- An offset used with the limit parameter to manage pagination of results.
+                  On your first request, don't provide an offset. On subsequent requests,
+                  provide the offset from the previous response to continue from that place
+                  in the results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- Sort assets by their properties. A single sort field is allowed.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/combined-applications
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="combined_applications",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_combined_hosts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search for assets by providing an FQL (Falcon Query Language) filter and paging details.
+
+        Returns details on assets which match the filter criteria.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  Available Filters:
+                    agent_version                   kernel_version
+                    aid                             last_discoverer_aid
+                    bios_manufacturer               last_seen_timestamp
+                    bios_version                    local_ips_count
+                    cid                             machine_domain
+                    city                            network_interfaces
+                    confidence                      network_interfaces.interface_alias
+                    country                         network_interfaces.interface_description
+                    current_local_ip                network_interfaces.local_ip
+                    discoverer_aids                 network_interfaces.mac_address
+                    discoverer_count                network_interfaces.network_prefix
+                    discoverer_platform_names       os_version
+                    discoverer_product_type_descs   ou
+                    discoverer_tags                 platform_name
+                    entity_type                     product_type
+                    external_ip                     product_type_desc
+                    first_discoverer_aid            site_name
+                    first_discoverer_ip             system_manufacturer
+                    first_seen_timestamp            system_product_name
+                    groups                          system_serial_number
+                    hostname                        tags
+                    id
+        limit -- The number of asset IDs to return in this response. (Max: 100, default: 100)
+                 Use with the offset parameter to manage pagination of results.
+        offset -- An offset used with the limit parameter to manage pagination of results.
+                  On your first request, don't provide an offset. On subsequent requests,
+                  provide the offset from the previous response to continue from that place
+                  in the results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- Sort assets by their properties. A single sort field is allowed.
+                Common sort options include:
+                  hostname|asc
+                  product_type|desc
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/discover/combined-hosts
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="combined_hosts",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_accounts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get details on accounts by providing one or more IDs.
 
@@ -194,7 +288,7 @@ class Discover(ServiceClass):
         limit -- The number of account IDs to return in this response. (Max: 100, default: 100)
                  Use with the offset parameter to manage pagination of results.
         offset -- An offset used with the limit parameter to manage pagination of results.
-                  On your first request, don’t provide an offset. On subsequent requests,
+                  On your first request, don't provide an offset. On subsequent requests,
                   provide the offset from the previous response to continue from that place
                   in the results.
         parameters - full parameters payload, not required if using other keywords.
@@ -232,7 +326,7 @@ class Discover(ServiceClass):
         limit -- The number of account IDs to return in this response. (Max: 100, default: 100)
                  Use with the offset parameter to manage pagination of results.
         offset -- An offset used with the limit parameter to manage pagination of results.
-                  On your first request, don’t provide an offset. On subsequent requests,
+                  On your first request, don't provide an offset. On subsequent requests,
                   provide the offset from the previous response to continue from that place
                   in the results.
         parameters - full parameters payload, not required if using other keywords.
@@ -290,7 +384,7 @@ class Discover(ServiceClass):
         limit -- The number of asset IDs to return in this response. (Max: 100, default: 100)
                  Use with the offset parameter to manage pagination of results.
         offset -- An offset used with the limit parameter to manage pagination of results.
-                  On your first request, don’t provide an offset. On subsequent requests,
+                  On your first request, don't provide an offset. On subsequent requests,
                   provide the offset from the previous response to continue from that place
                   in the results.
         parameters - full parameters payload, not required if using other keywords.
@@ -346,7 +440,7 @@ class Discover(ServiceClass):
         limit -- The number of login IDs to return in this response. (Max: 100, default: 100)
                  Use with the offset parameter to manage pagination of results.
         offset -- An offset used with the limit parameter to manage pagination of results.
-                  On your first request, don’t provide an offset. On subsequent requests,
+                  On your first request, don't provide an offset. On subsequent requests,
                   provide the offset from the previous response to continue from that place
                   in the results.
         parameters - full parameters payload, not required if using other keywords.
@@ -445,7 +539,7 @@ class Discover(ServiceClass):
         limit -- The number of asset IDs to return in this response. (Max: 100, default: 100)
                  Use with the offset parameter to manage pagination of results.
         offset -- An offset used with the limit parameter to manage pagination of results.
-                  On your first request, don’t provide an offset. On subsequent requests,
+                  On your first request, don't provide an offset. On subsequent requests,
                   provide the offset from the previous response to continue from that place
                   in the results.
         parameters - full parameters payload, not required if using other keywords.
@@ -516,7 +610,7 @@ class Discover(ServiceClass):
         limit -- The number of asset IDs to return in this response. (Max: 100, default: 100)
                  Use with the offset parameter to manage pagination of results.
         offset -- An offset used with the limit parameter to manage pagination of results.
-                  On your first request, don’t provide an offset. On subsequent requests,
+                  On your first request, don't provide an offset. On subsequent requests,
                   provide the offset from the previous response to continue from that place
                   in the results.
         parameters - full parameters payload, not required if using other keywords.
@@ -541,3 +635,7 @@ class Discover(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
+
+    combined_applications = query_combined_applications
+    combined_hosts = query_combined_hosts
+    query_iot_hostsV2 = query_iot_hosts_v2
