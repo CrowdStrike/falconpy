@@ -140,19 +140,21 @@ def exclusion_payload(passed_keywords: dict) -> dict:
         "groups": [
             "string"
         ],
+        "id": "string",
+        "is_descendent_process": boolean,
         "value": "string"
     }
     """
     returned_payload = {}
-    if passed_keywords.get("comment", None):
-        returned_payload["comment"] = passed_keywords.get("comment", None)
+    keys = ["comment", "id", "is_descendent_process", "value"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key, None)
     group_list = passed_keywords.get("groups", None)
     if group_list:
         if isinstance(group_list, str):
             group_list = group_list.split(",")
         returned_payload["groups"] = group_list
-    if passed_keywords.get("value", None):
-        returned_payload["value"] = passed_keywords.get("value", None)
 
     return returned_payload
 
