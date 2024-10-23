@@ -358,7 +358,7 @@ _custom_ioa_endpoints = [
           "name"
         ],
         "type": "string",
-        "description": "Possible order by fields: {enabled, name, created_by, created_on, modified_by, modified_on}",
+        "description": "Possible order by fields: {created_by, created_on, enabled, modified_by, modified_on, name}",
         "name": "sort",
         "in": "query"
       },
@@ -408,7 +408,7 @@ _custom_ioa_endpoints = [
           "name"
         ],
         "type": "string",
-        "description": "Possible order by fields: {enabled, name, created_by, created_on, modified_by, modified_on}",
+        "description": "Possible order by fields: {created_by, created_on, enabled, modified_by, modified_on, name}",
         "name": "sort",
         "in": "query"
       },
@@ -483,10 +483,10 @@ _custom_ioa_endpoints = [
           "rules.ruletype_name"
         ],
         "type": "string",
-        "description": "Possible order by fields: {rules.current_version.name, "
-        "rules.current_version.description, rules.current_version.pattern_severity, rules.current_version.modified_by, "
-        "rules.current_version.modified_on, rules.ruletype_name, rules.enabled, rules.current_version.action_label, "
-        "rules.created_by, rules.created_on}",
+        "description": "Possible order by fields: {rules.created_by, rules.created_on, "
+        "rules.current_version.action_label, rules.current_version.description, rules.current_version.modified_by, "
+        "rules.current_version.modified_on, rules.current_version.name, rules.current_version.pattern_severity, "
+        "rules.enabled, rules.ruletype_name}",
         "name": "sort",
         "in": "query"
       },
