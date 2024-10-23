@@ -217,13 +217,20 @@ class IOAExclusions(ServiceClass):
         """Search for IOA Exclusions.
 
         Keyword arguments:
+        cl_regex -- The cl_regex expression to filter exclusions by, used alongside expressions
+                    specified in the filter query parameter.
         filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  The filter expression that should be used to limit the results.
+                  Filtered queries involving regex fields should specify their expressions in the
+                  'ifn_regex' and 'cl_regex' parameters.
                   An asterisk wildcard '*' includes all results.
                   AVAILABLE FILTERS
                   applied_globally            last_modified
                   created_by                  modified_by
                   created_on                  value
                   name                        pattern
+        ifn_regex -- The ifn_regex expression to filter exclusions by, used alongside expressions
+                     specified in the filter query parameter. String.
         limit -- The maximum number of exclusions to return in this response.
                  [Integer, default: 100; max: 500]
                  Use with the offset parameter to manage pagination of results.
