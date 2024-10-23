@@ -221,9 +221,8 @@ _recon_endpoints = [
     "GetNotificationsDetailedTranslatedV1",
     "GET",
     "/recon/entities/notifications-detailed-translated/v1",
-    "Get detailed notifications based on their IDs. These include the raw intelligence content that generated "
-    "the match.This endpoint will return translated notification content. The only target language available is "
-    "English. A single notification can be translated per request",
+    "Get detailed notifications based on their IDs. These include the translated raw intelligence content that "
+    "generated the match or part of it. ",
     "recon",
     [
       {
@@ -243,7 +242,8 @@ _recon_endpoints = [
     "GetNotificationsDetailedV1",
     "GET",
     "/recon/entities/notifications-detailed/v1",
-    "Get detailed notifications based on their IDs. These include the raw intelligence content that generated the match.",
+    "Get detailed notifications based on their IDs. These include the raw intelligence content that generated "
+    "the match or part of it. ",
     "recon",
     [
       {
@@ -618,6 +618,13 @@ _recon_endpoints = [
         "type": "string",
         "description": "Free text search across all indexed fields.",
         "name": "q",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Possible order by fields: created_timestamp, last_updated_timestamp. Ex: "
+        "`last_updated_timestamp|desc`.",
+        "name": "secondarySort",
         "in": "query"
       }
     ]
