@@ -202,6 +202,7 @@ class ThreatGraph(ServiceClass):
                      failed_to_authenticate_ad_user           wmicreated_process
                      failed_to_authenticate_to_ad_computer    written_by_process
                      failed_to_authenticate_to_adfs_app       wrote_module
+                     protected_by_shield                      shield_activated_on_host
         ids -- Vertex ID to get details for.  Only one value is supported. String.
         limit -- How many edges to return in a single request [1-100]. Integer.
         nano -- Return nano-precision entity timestamps. Boolean.
@@ -324,7 +325,8 @@ class ThreatGraph(ServiceClass):
                        hunting_lead             wifi-access-points
                        idp-indicators           wifi_access_point
                        idp-sessions             xdr
-                       idp_indicator
+                       idp_indicator            shield
+                       shields
 
         This method only supports keywords for providing arguments.
 
@@ -351,6 +353,10 @@ class ThreatGraph(ServiceClass):
                         **kwargs
                         ) -> Dict[str, Union[int, dict]]:
         """Retrieve metadata for a given vertex ID.
+
+        Note: This is a legacy operation used by CrowdStrike Store partners prior
+        to release of the ThreatGraph OAuth 2.0 APIs. If you’re not currently using
+        this endpoint, use the get_vertices method instead.
 
         Keyword arguments:
         ids -- Vertex ID to get details for.  String or list of strings.
@@ -409,8 +415,8 @@ class ThreatGraph(ServiceClass):
                        hunting_lead             wifi-access-points
                        idp-indicators           wifi_access_point
                        idp-sessions             xdr
-                       idp_indicator
-
+                       idp_indicator            shield
+                       shields
 
         This method only supports keywords for providing arguments.
 
@@ -495,7 +501,8 @@ class ThreatGraph(ServiceClass):
                        hunting_lead             wifi-access-points
                        idp-indicators           wifi_access_point
                        idp-sessions             xdr
-                       idp_indicator
+                       idp_indicator            shield
+                       shields
 
         This method only supports keywords for providing arguments.
 
