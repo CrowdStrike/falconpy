@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, Union
+from typing import Dict, List, Union
 from ._util import generate_error_result, force_default, args_to_params
 from ._util import process_service_request, handle_single_argument
 from ._payload import generic_payload_list, simple_action_parameter
@@ -174,8 +174,8 @@ class Hosts(ServiceClass):
 
     def update_device_tags(self: object,
                            action_name: str,
-                           ids: list or str,
-                           tags: list or str
+                           ids: Union[List[str], str],
+                           tags: Union[List[str], str]
                            ) -> Dict[str, Union[int, dict]]:
         """Append or remove one or more Falcon Grouping Tags on one or more hosts.
 
@@ -439,10 +439,12 @@ class Hosts(ServiceClass):
         2 minutes with no maximum limit)
 
         Keyword arguments:
-        filter -- The filter expression that should be used to limit the results. FQL syntax.
-        limit -- The maximum number of records to return. [integer, 1-5000]
-        offset -- The string offset to page from, for the next result set.
-        parameters - full parameters payload, not required if using other keywords.
+        filter -- The filter expression that should be used to limit the results.
+                  FQL syntax. [string]
+        limit -- The maximum number of records to return. [integer, 1-10000]
+        offset -- The offset to page from, provided from the previous scroll call, for the next
+                  result set. For the first call, do not supply an offset. [string]
+        parameters - full parameters payload, not required if using other keywords. [dictionary]
         sort -- The property to sort by. FQL syntax (e.g. status.desc or hostname.asc).
                 Available sort fields
                 device_id               machine_domain
