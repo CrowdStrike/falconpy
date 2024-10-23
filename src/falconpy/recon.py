@@ -556,10 +556,8 @@ class Recon(ServiceClass):
                                               ) -> Dict[str, Union[int, dict]]:
         """Get detailed notifications based on their IDs.
 
-        These include the raw intelligence content that generated the match.
-        This endpoint will return translated notification content.
-        The only target language available is English.
-        A single notification can be translated per request
+        Get detailed notifications based on their IDs. These include the translated raw
+        intelligence content that generated the match or part of it.
 
         Keyword arguments:
         ids -- List of notification IDs to retrieve details for. String or list of strings.
@@ -587,7 +585,8 @@ class Recon(ServiceClass):
     def get_notifications_detailed(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get detailed notifications based on their IDs.
 
-        These include the raw intelligence content that generated the match.
+        Get detailed notifications based on their IDs. These include the raw intelligence
+        content that generated the match or part of it.
 
         Keyword arguments:
         ids -- List of notification IDs to retrieve details for. String or list of strings.
@@ -1068,6 +1067,9 @@ class Recon(ServiceClass):
                   Use with the limit parameter to manage pagination of results.
         parameters - full parameters payload, not required if using other keywords.
         q -- Free text search across all indexed fields.
+        secondary_sort -- Possible order by fields: created_timestamp, last_updated_timestamp.
+                          Ex: last_updated_timestamp|desc
+                          The keyword "secondarySort" will also be accepted for this value.
         sort -- The property to sort by. FQL syntax.
                 (e.g. created_timestamp|asc, last_updated_timestamp|desc)
 
@@ -1080,6 +1082,7 @@ class Recon(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/QueryRulesV1
         """
+        kwargs["secondarySort"] = kwargs.get("secondarySort", kwargs.get("secondary-sort", None))
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
