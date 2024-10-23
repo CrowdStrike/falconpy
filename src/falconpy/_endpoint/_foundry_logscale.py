@@ -61,11 +61,16 @@ _foundry_logscale_endpoints = [
     "foundry_logscale",
     [
       {
+        "type": "string",
+        "description": "JSON data to ingest",
+        "name": "data_content",
+        "in": "formData"
+      },
+      {
         "type": "file",
         "description": "Data file to ingest",
         "name": "data_file",
-        "in": "formData",
-        "required": True
+        "in": "formData"
       },
       {
         "type": "string",
@@ -105,11 +110,16 @@ _foundry_logscale_endpoints = [
     "foundry_logscale",
     [
       {
+        "type": "string",
+        "description": "JSON data to ingest",
+        "name": "data_content",
+        "in": "formData"
+      },
+      {
         "type": "file",
         "description": "Data file to ingest",
         "name": "data_file",
-        "in": "formData",
-        "required": True
+        "in": "formData"
       },
       {
         "type": "array",
@@ -225,6 +235,13 @@ _foundry_logscale_endpoints = [
         "default": False,
         "description": "Whether to try to infer data types in json event response instead of returning map[string]string",
         "name": "infer_json_types",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "If set to true, result rows are dropped from the response and only the job status is returned",
+        "name": "job_status_only",
         "in": "query"
       },
       {

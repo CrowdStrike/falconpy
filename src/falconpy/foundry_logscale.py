@@ -91,6 +91,7 @@ class FoundryLogScale(ServiceClass):
         """Ingest data into the application repository synchronously.
 
         Keyword arguments:
+        data_content -- JSON formatted data to ingest. String.
         data_file -- Content of the uploaded archive in binary format.
                      'file' is also accepted as this parameter.
         parameters -- full parameters payload, not required if using other keywords.
@@ -110,7 +111,7 @@ class FoundryLogScale(ServiceClass):
         # Try to find the binary object they provided us
         if not data_file:
             data_file = kwargs.get("file", None)
-        data_keys = ["tag", "tag_source", "test_data"]
+        data_keys = ["tag", "tag_source", "test_data", "data_content"]
         form_data = {}
         for key in data_keys:
             if kwargs.get(key, None):
@@ -118,7 +119,9 @@ class FoundryLogScale(ServiceClass):
                 kwargs.pop(key)  # Prevent it from converting to a query string param
 
         # Create a multipart form payload for our upload file
-        file_tuple = [("file", ("data-upload", data_file, "application/json"))]
+        file_tuple = None
+        if data_file:
+            file_tuple = [("file", ("data-upload", data_file, "application/json"))]
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -140,6 +143,7 @@ class FoundryLogScale(ServiceClass):
         """Ingest data into the application repository asynchronously.
 
         Keyword arguments:
+        data_content -- JSON formatted data to ingest. String.
         data_file -- Content of the uploaded archive in binary format.
                      'file' is also accepted as this parameter.
         parameters -- full parameters payload, not required if using other keywords.
@@ -159,7 +163,7 @@ class FoundryLogScale(ServiceClass):
         # Try to find the binary object they provided us
         if not data_file:
             data_file = kwargs.get("file", None)
-        data_keys = ["tag", "tag_source", "test_data"]
+        data_keys = ["tag", "tag_source", "test_data", "data_content"]
         form_data = {}
         for key in data_keys:
             if kwargs.get(key, None):
@@ -167,7 +171,9 @@ class FoundryLogScale(ServiceClass):
                 kwargs.pop(key)  # Prevent it from converting to a query string param
 
         # Create a multipart form payload for our upload file
-        file_tuple = [("file", ("data-upload", data_file, "application/json"))]
+        file_tuple = None
+        if data_file:
+            file_tuple = [("file", ("data-upload", data_file, "application/json"))]
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -238,6 +244,8 @@ class FoundryLogScale(ServiceClass):
         Keyword arguments:
         app_id -- Application ID. String.
         job_id -- Job ID for a previously executed asynchronous query. String.
+        job_status_only -- If set to true, result rows are dropped from the response
+                           and only the job status is returned. Boolean.
         limit -- The maximum number of records to return in this response. Integer.
                  Use with the offset parameter to manage pagination of results.
         infer_json_types -- Whether to try to infer data types in json event response
