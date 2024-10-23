@@ -216,6 +216,45 @@ class ExposureManagement(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def delete_assets(self: object,
+                      *args,
+                      body: dict = None,
+                      parameters: dict = None,
+                      **kwargs
+                      ) -> Dict[str, Union[int, dict]]:
+        """Delete external assets by providing one or more IDs.
+
+        Keyword arguments:
+        body -- Full body payload as a dictionary. Not required if using other keywords.
+        description -- Delete operation description. String.
+        ids -- One or more asset IDs (max: 100). Find asset IDs with query_external_assets.
+               String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/delete-external-assets
+        """
+        if not body:
+            if kwargs.get("description", None):
+                body["description"] = kwargs.get("description")
+                kwargs.pop("description")
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="delete_external_assets",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids"),
+            body=body
+            )
+
     @force_default(defaults=["body"], default_types=["dict"])
     def update_assets(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update the details of external assets.
@@ -286,5 +325,6 @@ class ExposureManagement(ServiceClass):
     blob_download_external_assets = download_assets
     blob_preview_external_assets = preview_assets
     get_external_assets = get_assets
+    delete_external_assets = delete_assets
     patch_external_assets = update_assets
     query_external_assets = query_assets

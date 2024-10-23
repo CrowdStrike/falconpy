@@ -135,6 +135,31 @@ _exposure_management_endpoints = [
     ]
   ],
   [
+    "delete_external_assets",
+    "DELETE",
+    "/fem/entities/external-assets/v1",
+    "Delete multiple external assets.",
+    "exposure_management",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "One or more asset IDs (max: 100).",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "query_external_assets",
     "GET",
     "/fem/queries/external-assets/v1",
@@ -173,13 +198,13 @@ _exposure_management_endpoints = [
         "dns_domain.services.hosting_provider, dns_domain.services.last_seen, dns_domain.services.platform_name, "
         "dns_domain.services.port, dns_domain.services.protocol, dns_domain.services.protocol_port, "
         "dns_domain.services.status, dns_domain.services.status_code, dns_domain.services.transport, dns_domain.type, "
-        "first_seen, id, internet_exposure, ip.asn, ip.cloud_vm.description, ip.cloud_vm.instance_id, "
-        "ip.cloud_vm.lifecycle, ip.cloud_vm.mac_address, ip.cloud_vm.owner_id, ip.cloud_vm.platform, "
-        "ip.cloud_vm.private_ip, ip.cloud_vm.public_ip, ip.cloud_vm.region, ip.cloud_vm.security_groups, "
-        "ip.cloud_vm.source, ip.cloud_vm.status, ip.fqdns, ip.ip_address, ip.isp, ip.location.area_code, "
-        "ip.location.city, ip.location.country_code, ip.location.country_name, ip.location.postal_code, "
-        "ip.location.region_code, ip.location.region_name, ip.location.timezone, ip.ptr, ip.aid, "
-        "ip.services.applications.category, ip.services.applications.cpe, ip.services.applications.name, "
+        "first_seen, id, internet_exposure, ip.asn, ip.cloud_provider, ip.cloud_vm.description, "
+        "ip.cloud_vm.instance_id, ip.cloud_vm.lifecycle, ip.cloud_vm.mac_address, ip.cloud_vm.owner_id, "
+        "ip.cloud_vm.platform, ip.cloud_vm.private_ip, ip.cloud_vm.public_ip, ip.cloud_vm.region, "
+        "ip.cloud_vm.security_groups, ip.cloud_vm.source, ip.cloud_vm.status, ip.fqdns, ip.ip_address, ip.isp, "
+        "ip.location.area_code, ip.location.city, ip.location.country_code, ip.location.country_name, "
+        "ip.location.postal_code, ip.location.region_code, ip.location.region_name, ip.location.timezone, ip.ptr, "
+        "ip.aid, ip.services.applications.category, ip.services.applications.cpe, ip.services.applications.name, "
         "ip.services.applications.vendor, ip.services.applications.version, ip.services.cloud_provider, "
         "ip.services.cpes, ip.services.first_seen, ip.services.last_seen, ip.services.platform_name, ip.services.port, "
         "ip.services.protocol, ip.services.protocol_port, ip.services.status, ip.services.status_code, "
