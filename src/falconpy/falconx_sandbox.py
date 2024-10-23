@@ -251,8 +251,8 @@ class FalconXSandbox(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def submit(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def submit(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Submit an uploaded file or a URL for sandbox analysis.
 
         The sample file must have been previously uploaded through `upload_sample`.
@@ -264,6 +264,7 @@ class FalconXSandbox(ServiceClass):
                          default                    default_randomtheme
                          default_maxantievasion     default_openie
                          default_randomfiles
+        aid -- Agent ID. String.
         body -- full body payload, not required if keywords are used.
                 {
                     "sandbox": [
@@ -294,10 +295,12 @@ class FalconXSandbox(ServiceClass):
                       If true, sandbox analysis routes network traffic via TOR.
         environment_id -- Specifies the sandbox environment used for analysis.
                           Accepted values:
+                          410 - MacOS Sonoma ARM 64
                           400 - macOS Catalina 10.15
                           300 - Linux Ubuntu 16.04, 64-bit
                           200 - Android (static analysis)
                           160 - Windows 10, 64-bit
+                          140 - Windows 11, 64-bit
                           110 - Windows 7, 64-bit
                           100 - Windows 7, 32-bit
         network_settings -- Specifies the sandbox network_settings used for analysis.
@@ -334,7 +337,8 @@ class FalconXSandbox(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="Submit",
-            body=body
+            body=body,
+            params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
