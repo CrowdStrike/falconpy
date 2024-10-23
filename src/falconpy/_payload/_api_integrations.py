@@ -49,7 +49,15 @@ def api_plugin_command_payload(passed_keywords: dict) -> dict:
             "id": "string",
             "operation_id": "string",
             "request": {
-                "description": "string"
+                "data": "string",
+                "description": "string",
+                "params": {
+                    "cookie": {},
+                    "header": {},
+                    "path": {},
+                    "query": {}
+                },
+                "x-www-form-urlencoded": {}
             },
             "version": integer
             }
@@ -68,6 +76,24 @@ def api_plugin_command_payload(passed_keywords: dict) -> dict:
                 item["request"] = {"description": passed_keywords.get(key)}
             else:
                 item[key] = passed_keywords.get(key)
+
+    # Request
+    rkeys = ["data", "description", "params"]
+    ritem = {}
+    for key in rkeys:
+        if passed_keywords.get(key, None):
+            ritem[key] = passed_keywords.get(key)
+
+    # Request params
+    rpkeys = ["cookie", "header", "path", "query"]
+    for key in rpkeys:
+        if passed_keywords.get(key, None):
+            if "param" not in ritem:
+                ritem["params"] = {}
+            ritem["params"][key] = passed_keywords.get(key)
+    if ritem:
+        item["request"] = ritem
+
     returned["resources"].append(item)
 
     return returned

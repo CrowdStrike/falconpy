@@ -24,6 +24,16 @@ class TestAPIIntegrations:
         error_checks = True
         tests = {
             "GetCombinedPluginConfigs": falcon.get_plugin_configs(),
+            "ExecuteCommandProxy": falcon.execute_command_proxy(config_auth_type="string",
+                        config_id="string",
+                        definition_id="string",
+                        id="string",
+                        operation_id="string",
+                        description="string",
+                        version=123,
+                        cookie={"Yes": "Please"},
+                        header={"NotThe": "Footer"}
+            ),
             "ExecuteCommand": falcon.execute_command(config_auth_type="string",
                         config_id="string",
                         definition_id="string",

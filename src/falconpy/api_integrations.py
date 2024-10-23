@@ -86,6 +86,71 @@ class APIIntegrations(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
+    def execute_command_proxy(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Execute a command and proxy the response directly.
+
+        Keyword arguments:
+        body -- Full body payload as a dictionary. Not required if other keywords are provided.
+                {
+                    "resources": [
+                        {
+                        "config_auth_type": "string",
+                        "config_id": "string",
+                        "definition_id": "string",
+                        "id": "string",
+                        "operation_id": "string",
+                        "request": {
+                            "data": "string",
+                            "params": {
+                                "cookie": {},
+                                "header": {},
+                                "path": {},
+                                "query": {}
+                            },
+                            "x-www-form-urlencoded": {}
+                        },
+                        "version": integer
+                        }
+                    ]
+                }
+        config_auth_type -- Configuration authorization type for plugin to execute.
+                            Only application for security scheme plugins. If not
+                            provided, execution will use the default authorization type. String.
+        config_id -- Configuration ID. If omitted, the oldest configuration ID will be used. String.
+        cookie -- Request cookies. Part of the request parameters dictionary. Dictionary.
+        data -- Request data. String.
+        definition_id -- ID of the definition containing the operation to execute. String.
+        header -- Request headers. Part of the request parameters dictionary. Dictionary.
+        id -- ID of the specific plugin to execute provided in "definition_name.operation_name"
+              format. String.
+        operation_id -- The specific operation to execute. String.
+        path -- Request path. Part of the request parameters dictionary. Dictionary.
+        params -- Request parameters. Not required if using other request parameter keywords.
+                  Can be overridden by values specified using individual keywords. Dictionary.
+        query -- Request query. Part of the request parameters dictionary. Dictionary.
+        version -- The version of the definition to execute. Integer.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/api-integrations/ExecuteCommandProxy
+        """
+        if not body:
+            body = api_plugin_command_payload(kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExecuteCommandProxy",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
     def execute_command(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Execute a command.
 
@@ -116,7 +181,6 @@ class APIIntegrations(ServiceClass):
         operation_id -- The specific operation to execute. String.
         description -- Command description. String.
         version -- The version of the definition to execute. Integer.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
 
@@ -142,4 +206,5 @@ class APIIntegrations(ServiceClass):
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes.
     GetCombinedPluginConfigs = get_plugin_configs
+    ExecuteCommandProxy = execute_command_proxy
     ExecuteCommand = execute_command
