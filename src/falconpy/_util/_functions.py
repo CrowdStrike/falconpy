@@ -719,9 +719,9 @@ def handle_path_variables(passed: dict, route_url: str):
         if passed_object_key:
             collect_args["object_key"] = str(passed_object_key)
         route_url = route_url.format(**collect_args)
-    passed_vertex_type = passed.get("vertex_type", None)
+    passed_vertex_type = str(passed.get("vertex_type", None))
     if passed_vertex_type:
-        route_url = route_url.format(str(passed_vertex_type))
+        route_url = route_url.format(passed_vertex_type)
 
     return route_url
 
