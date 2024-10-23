@@ -301,6 +301,7 @@ _threatgraph_endpoints = [
           "presented_by_cloud",
           "primary_module",
           "primary_module_of_process",
+          "protected_by_shield",
           "quarantined_file",
           "queried_by_process",
           "queried_by_sensor",
@@ -323,6 +324,7 @@ _threatgraph_endpoints = [
           "set_firewall_rule",
           "set_rule",
           "shell_io_redirect",
+          "shield_activated_on_host",
           "suspicious_dns_request",
           "trigger_process",
           "triggered_by_control_graph",
@@ -535,6 +537,8 @@ _threatgraph_endpoints = [
           "sensor",
           "sensor-self-diagnostics",
           "sensor_self_diagnostic",
+          "shield",
+          "shields",
           "tag",
           "tags",
           "user-sessions",
@@ -547,7 +551,7 @@ _threatgraph_endpoints = [
         ],
         "type": "string",
         "description": "Type of vertex to get properties for",
-        "name": "vertex-type",
+        "name": "vertex_type",
         "in": "path",
         "required": True
       },
@@ -590,7 +594,9 @@ _threatgraph_endpoints = [
     "entities_vertices_get",
     "GET",
     "/threatgraph/entities/{}/v1",
-    "Retrieve metadata for a given vertex ID",
+    "Retrieve metadata for a given vertex ID. Note: This is a legacy endpoint used by CrowdStrike Store "
+    "partners prior to release of the ThreatGraph OAuth 2.0 APIs. If you’re not currently using this endpoint, use "
+    "the /v2 endpoint instead.",
     "threatgraph",
     [
       {
@@ -685,6 +691,8 @@ _threatgraph_endpoints = [
           "sensor",
           "sensor-self-diagnostics",
           "sensor_self_diagnostic",
+          "shield",
+          "shields",
           "tag",
           "tags",
           "user-sessions",
@@ -697,7 +705,7 @@ _threatgraph_endpoints = [
         ],
         "type": "string",
         "description": "Type of vertex to get properties for",
-        "name": "vertex-type",
+        "name": "vertex_type",
         "in": "path",
         "required": True
       },
@@ -835,6 +843,8 @@ _threatgraph_endpoints = [
           "sensor",
           "sensor-self-diagnostics",
           "sensor_self_diagnostic",
+          "shield",
+          "shields",
           "tag",
           "tags",
           "user-sessions",
@@ -847,7 +857,7 @@ _threatgraph_endpoints = [
         ],
         "type": "string",
         "description": "Type of vertex to get properties for",
-        "name": "vertex-type",
+        "name": "vertex_type",
         "in": "path",
         "required": True
       },
