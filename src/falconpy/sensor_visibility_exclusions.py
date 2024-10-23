@@ -156,11 +156,14 @@ class SensorVisibilityExclusions(ServiceClass):
                         "string"
                     ],
                     "id": "string",
+                    "is_descendent_process": boolean,
                     "value": "string"
                 }
         comment -- String comment describing why the exclusion is entered.
         groups -- Group IDs to exclude. List of strings.
         id -- Exclusion ID to update. String.
+        is_descendent_process -- Flag to determine if an exclusion should
+                                 apply to all descendant processes. Boolean.
         value -- Value to exclude. String
 
         This method only supports keywords for providing arguments.
@@ -174,8 +177,6 @@ class SensorVisibilityExclusions(ServiceClass):
         """
         if not body:
             body = exclusion_payload(passed_keywords=kwargs)
-        if kwargs.get("id", None):
-            body["id"] = kwargs.get("id", None)
 
         return process_service_request(
             calling_object=self,
