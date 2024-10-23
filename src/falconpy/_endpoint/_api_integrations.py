@@ -74,6 +74,20 @@ _api_integrations_endpoints = [
     ]
   ],
   [
+    "ExecuteCommandProxy",
+    "POST",
+    "/plugins/entities/execute-proxy/v1",
+    "Execute a command and proxy the response directly.",
+    "api_integrations",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ExecuteCommand",
     "POST",
     "/plugins/entities/execute/v1",
