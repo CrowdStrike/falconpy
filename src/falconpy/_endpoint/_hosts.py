@@ -304,13 +304,14 @@ _hosts_endpoints = [
     [
       {
         "type": "string",
-        "description": "The offset to page from, for the next result set",
+        "description": "The offset to page from, provided from the previous scroll call, for the next result "
+        "set. For the first call, do not supply an offset.",
         "name": "offset",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The maximum records to return. [1-5000]",
+        "description": "The maximum records to return. [1-10000]",
         "name": "limit",
         "in": "query"
       },
