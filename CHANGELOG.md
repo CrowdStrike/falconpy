@@ -1,3 +1,268 @@
+# Version 1.4.6
+## Added features and functionality
++ Added: Added _ExecuteCommandProxy_ operation to the __API Integrations__ service collection.
+    - `_endpoint/_api_integrations.py`
+    - `_payload/_api_integrations.py`
+    - `api_integrations.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_api_integrations.py`
+
++ Added: Added new __ASPM__ service collection with 23 operations.
+    - _UpsertBusinessApplications_
+    - _GetExecutorNodes_
+    - _UpdateExecutorNode_
+    - _CreateExecutorNode_
+    - _DeleteExecutorNode_
+    - _GetIntegrationTasks_
+    - _CreateIntegrationTask_
+    - _UpdateIntegrationTask_
+    - _DeleteIntegrationTask_
+    - _RunIntegrationTask_
+    - _GetIntegrationTypes_
+    - _GetIntegrations_
+    - _CreateIntegration_
+    - _UpdateIntegration_
+    - _DeleteIntegration_
+    - _ExecuteQuery_
+    - _ServiceNowGetDeployments_
+    - _ServiceNowGetServices_
+    - _GetServicesCount_
+    - _GetServiceViolationTypes_
+    - _GetTags_
+    - _UpsertTags_
+    - _DeleteTags_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_aspm.py`
+    - `_payload/__init__.py`
+    - `_payload/_aspm.py`
+    - `_util/_functions.py`
+    - `_util/_uber.py`
+    - `__init__.py`
+    - `aspm.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_aspm.py`
+
++ Added: Added 1 new operation (_GetCredentialsIAC_) to the __Cloud Snapshots__ service collection.
+    - `_endpoint/_cloud_snapshots.py`
+    - `cloud_snapshots.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_snapshots.py`
+
++ Added: Added new operations, parameters and parameter options to the __Container Images__ service collection.
+    - Added new _CombinedBaseImages_ operation.
+    - Added new _CreateBaseImageEntities_ operation.
+    - Added new _DeleteBaseImages_ operation.
+    - Added `include_base_image_vuln` as a filter option to the _AggregateImageCount_ operation.
+    - Added `source` as a sort option to the _GetCombinedImages_ operation.
+    - Added `include_base_image_vuln` as a filter option to the _ReadCombinedImagesExport_ operation.
+    - Added `source` as a sort option to the _ReadCombinedImagesExport_ operation.
+    - Added `include_base_image_vuln` parameter to the _CombinedImageIssuesSummary_ operation.
+    - Added `include_base_image_vuln` parameter to the _CombinedImageVulnerabilitySummary_ operation.
+    - `_endpoint/_container_images.py`
+    - `_payload/__init__.py`
+    - `_payload/_container.py`
+    - `container_images.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_container_images.py`
+
++ Added: Added parameters to multiple operations within the __CSPM Registration__ service collection.
+    - Added `template` parameter to the _GetCSPMAwsConsoleSetupURLs_ operation.
+    - Added `account_type`, `dspm_enabled`, `dspm_regions`, and `dspm_role` parameters to the _GetCSPMAwsAccountScriptsAttachment_ operation.
+    - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
+
++ Added: Added six new operations to the __Custom Storage__ service collection.
+    - _ListObjectsByVersion_
+    - _SearchObjectsByVersion_
+    - _GetVersionedObject_
+    - _PutObjectByVersion_
+    - _DeleteVersionedObject_
+    - _GetVersionedObjectMetadata_
+    - `_endpoint/_custom_storage.py`
+    - `_util/_functions.py`
+    - `_util/_uber.py`
+    - `custom_storage.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_custom_storage.py`
+
++ Added: Added `dspm_enabled`, `dspm_regions`, and `dspm_role` to the _GetD4CAWSAccountScriptsAttachment_ operation within the __D4C Registration__ service collection.
+    - `_endpoint/_d4c_registration.py`
+    - `d4c_registration.py`
+
++ Updated: Added new filter options to all operations within the __Compliance Assessment__ service collection.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_compliance_assessments.py`
+    - `compliance_assessments.py`
+
++ Added: Added `include_base_image_vuln` as an allowed filter option to multiple operations within the __Container Vulnerabilities__ service collection.
+    - `_endpoint/_container_vulnerabilities.py`
+    - `container_vulnerabilities.py`
+
++ Added: Added new __DataScanner__ service collection with 4 new operations.
+    - _get_image_registry_credentials_
+    - _get_data_scanner_tasks_
+    - _update_data_scanner_tasks_
+    - _handle_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_datascanner.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_datascanner.py`
+    - `__init__.py`
+    - `datascanner.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_datascanner.py`
+
++ Added: Added new __DeliverySettings__ service collection with 2 new operations.
+    - _GetDeliverySettings_
+    - _PostDeliverySettings_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_delivery_settings.py`
+    - `_payload/__init__.py`
+    - `_payload/_delivery_settings.py`
+    - `__init__.py`
+    - `delivery_settings.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_delivery_settings.py`
+
++ Added: Added _combined_applications_ and _combined_hosts_ operations to the __Discover__ service collection.
+    - `_endpoint/_discover.py`
+    - `_endpoint/deprecated/_discover.py`
+    - `discover.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_discover.py`
+
++ Added: Added new _ReadDriftIndicatorEntities_ operation to the __Drift Indicators__ service collection.
+    - `_endpoint/_drift_indicators.py`
+    - `drift_indicators.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_drift_indicators.py`
+
++ Added: Added new __Downloads__ service collection with 2 new operations.
+    - _DownloadFile_
+    - _EnumerateFile_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_downloads.py`
+    - `__init__.py`
+    - `downloads.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_downloads.py`
+
++ Added: Added new _delete_external_assets_ operation to the __Exposure Management__ service collection.
+    - `_endpoint/_exposure_management.py`
+    - `_endpoint/deprecated/_exposure_management.py`
+    - `exposure_management.py`
+
++ Added: Added `aid` parameter and two new values for `environment_id` to the _Submit_ operation within the __Falcon Intelligence Sandbox__ service collection.
+    - `_endpoint/_falconx_sandbox.py`
+    - `falconx_sandbox.py`
+
++ Added: Added `data_content` parameter to _IngestDataAsyncV1_ and _IngestData_ operations and added `job_status_only` parameter to the _GetSavedSearchesExecuteV1_ operation within the __Foundry LogScale__ service collection.
+    - `_endpoint/_foundry_logscale.py`
+    - `foundry_logscale.py`
+
++ Updated: Increased resultset max return for the _QueryDevicesByFilterScroll_ operation to align with new API maximums. (__Hosts__ Service Class)
+    - `_endpoint/_hosts.py`
+    - `hosts.py`
+
++ Added: Added 4 new operations to the __Identity Protection__ service collection. Deprecated `api_preempt_proxy_` prefix from all operation IDs.
+    - _get_policy_rules_
+    - _post_policy_rules_
+    - _delete_policy_rules_
+    - _get_policy_rules_query_
+    - `_endpoint/_identity_protection.py`
+    - `_endpoint/deprecated/_identity_protection.py`
+    - `_payload/__init__.py`
+    - `_payload/_identity_protection.py`
+    - `identity_protection.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_identity_protection.py`
+
++ Added: Added `cl_regex` and `ifn_regex` parameters to the _queryIOAExclusionsV1_ operation within the __IOA Exclusions__ service collection.
+    - `_endpoint/_ioa_exclusions.py`
+    - `ioa_exclusions.py`
+
++ Added: Added 5 new operations to the __Kubernetes Protection__ service collection.
+    - _ReadContainerEnrichment_
+    - _ReadPodEnrichment_
+    - _ReadDeploymentEnrichment_
+    - _ReadNamespacesByDateRangeCount_
+    - _ReadNamespaceCount_
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_kubernetes_protection.py`
+
++ Added: Added new __QuickScan Pro__ service collection with 6 new operations.
+    - _UploadFileMixin0Mixin94_
+    - _DeleteFile_
+    - _GetScanResult_
+    - _LaunchScan_
+    - _DeleteScanResult_
+    - _QueryScanResults_
+    - `__init__.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_quick_scan_pro.py`
+    - `quick_scan_pro.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_quick_scan_pro.py`
+
++ Added: Added `secondary_sort` (Also accepted: `secondarySort`) parameter to the _QueryRulesV1_ operation within the __Recon__ service collection.
+    - `_endpoint/_recon.py`
+    - `_recon.py`
+
++ Added: Added new __Sensor Usage__ service collection with one operation (_GetSensorUsageWeekly_).
+    - `_endpoint/__init__.py`
+    - `_endpoint/_sensor_usage.py`
+    - `__init__.py`
+    - `sensor_usage.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_sensor_usage.py`
+
++ Added: Added `is_descendent_process` parameter to the _updateSensorVisibilityExclusionsV1_ operation within the __Sensor Visibility Exclusions__ service collection.
+    - `_payload/_generic.py`
+    - `sensor_visibility_exclusions.py`
+
++ Added: Added additional vertices types as possible values to the `combined_summary_get`, `entities_vertices_get`, and `entities_vertices_getv2` operations within the __ThreatGraph__ service collection.
+    - `_endpoint/_threatgraph.py`
+    - `_util/_functions.py`
+    - `threatgraph.py`
+
+## Issues resolved
++ Fixed: Resolve issue causing headers to not be passed to the _PutObject_ operation within the __Custom Storage__ service collection.
+    - `custom_storage.py`
+
++ Updated: Fixed typing syntax on `update_device_tags` method. (__Hosts__ Service Class) 
+    - `hosts.py`
+
++ Fixed: Added "all" as the default for the `groups` parameter if it is not present when calling the _createMLExclusionsV1_ operation. Closes #1233.
+    - `ml_exclusions.py`
+    - Thanks go out to @59e5aaf4 for identifying and reporting this issue! 🙇
+
+## Other
++ Added: Added US-GOV-2 region to CrowdStrike container region (Container Base URL) enumerator.
+    - `_enum/_container_base_url.py`
+    - Thanks go out to @redhatrises for contributing this update! 🙇
+
++ Deprecated: Moved the _GetQueriesAlertsV1_, _PostEntitiesAlertsV1_, _PatchEntitiesAlertsV2_, and _PostAggregatesAlertsV1_ operations within the __Alerts__ service collection to a deprecated status.
+    - `_endpoint/_alerts.py`
+    - `alerts.py`
+
++ Updated: Cosmetic updates to multiple operation descriptions within the __Custom IOA__ service collection.
+    - `_endpoint/_custom_ioa.py`
+    - `_endpoint/deprecated/_custom_ioa.py`
+
++ Updated: Cosmetic updates to multiple operation descriptions and enumerators within the __Host Migration__ service collection.
+    - `_endpoint/_host_migration.py`
+
++ Updated: Enumerator updated for the _QueryCasesIdsByFilter_ operation within the __Message Center__ service collection.
+    - `_endpoint/_message_center.py`
+
++ Updated: Updated descriptions for _GetNotificationsDetailedTranslatedV1_ and _GetNotificationsDetailedV1_ operations within the __Recon__ service collection.
+    - `_endpoint/_recon.py`
+    - `_recon.py`
+
+---
+
 # Version 1.4.5
 ## Added features and functionality
 + Added: Added new __Host Migration__ service collection with 10 new operations.
