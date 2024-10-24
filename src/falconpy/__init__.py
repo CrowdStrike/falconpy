@@ -106,6 +106,7 @@ from .custom_ioa import CustomIOA
 from .custom_storage import CustomStorage
 from .d4c_registration import D4CRegistration
 from .datascanner import DataScanner
+from .delivery_settings import DeliverySettings
 from .detects import Detects
 from .device_control_policies import DeviceControlPolicies
 from .discover import Discover
@@ -207,7 +208,7 @@ __all__ = [
     "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers",
     "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement",
     "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration", "QuickScanPro",
-    "DataScanner", "SensorUsage", "Downloads"
+    "DataScanner", "SensorUsage", "Downloads", "DeliverySettings"
     ]
 """
 This is free and unencumbered software released into the public domain.
