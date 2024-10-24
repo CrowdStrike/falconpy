@@ -62,6 +62,7 @@ from ._datascanner import _datascanner_endpoints
 from ._detects import _detects_endpoints
 from ._device_control_policies import _device_control_policies_endpoints
 from ._discover import _discover_endpoints
+from ._downloads import _downloads_endpoints
 from ._drift_indicators import _drift_indicators_endpoints
 from ._event_streams import _event_streams_endpoints
 from ._exposure_management import _exposure_management_endpoints
@@ -139,6 +140,7 @@ api_endpoints.extend(_datascanner_endpoints)
 api_endpoints.extend(_detects_endpoints)
 api_endpoints.extend(_device_control_policies_endpoints)
 api_endpoints.extend(_discover_endpoints)
+api_endpoints.extend(_downloads_endpoints)
 api_endpoints.extend(_drift_indicators_endpoints)
 api_endpoints.extend(_event_streams_endpoints)
 api_endpoints.extend(_exposure_management_endpoints)

@@ -109,6 +109,7 @@ from .datascanner import DataScanner
 from .detects import Detects
 from .device_control_policies import DeviceControlPolicies
 from .discover import Discover
+from .downloads import Downloads
 from .drift_indicators import DriftIndicators
 from .event_streams import EventStreams
 from .exposure_management import ExposureManagement
@@ -206,7 +207,7 @@ __all__ = [
     "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers",
     "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement",
     "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration", "QuickScanPro",
-    "DataScanner", "SensorUsage"
+    "DataScanner", "SensorUsage", "Downloads"
     ]
 """
 This is free and unencumbered software released into the public domain.
