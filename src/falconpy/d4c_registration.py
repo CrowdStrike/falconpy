@@ -204,6 +204,9 @@ class D4CRegistration(ServiceClass):
         aws_profile -- The AWS profile to be used during registration. String.
         behavior_assessment_enabled -- Enable behavior assessment. String. Allowed values: true, false
         custom_role_name -- The custom IAM role to be used during registration. String.
+        dspm_enabled -- Flag indicating if DSPM is enabled. String. Allowed values: true, false
+        dspm_regions -- List of DSPM regions. Comma delimited string.
+        dspm_role -- DSPM role. String.
         ids -- List of AWS Account IDs to retrieve the script for. String or list of strings.
         organization_id -- The AWS organization ID to be registered. String or list of strings.
         parameters -- full parameters payload, not required if ids is provided as a keyword.
