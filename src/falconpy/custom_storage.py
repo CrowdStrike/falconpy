@@ -249,7 +249,8 @@ class CustomStorage(ServiceClass):
                                                body=body,
                                                params=parameters,
                                                collection_name=collection_name,
-                                               object_key=object_key
+                                               object_key=object_key,
+                                               headers=header_payload
                                                )
         else:
             returned = generate_error_result("You must provide a collection_name and an "
