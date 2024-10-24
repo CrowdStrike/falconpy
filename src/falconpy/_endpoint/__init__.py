@@ -22,6 +22,7 @@
 from typing import List, Any
 from .deprecated import _custom_ioa_deprecated
 from .deprecated import _d4c_registration_deprecated
+from .deprecated import _datascanner_deprecated
 from .deprecated import _discover_deprecated
 from .deprecated import _fdr_deprecated
 from .deprecated import _firewall_management_deprecated
@@ -57,6 +58,7 @@ from ._cspm_registration import _cspm_registration_endpoints
 from ._custom_ioa import _custom_ioa_endpoints
 from ._custom_storage import _custom_storage_endpoints
 from ._d4c_registration import _d4c_registration_endpoints
+from ._datascanner import _datascanner_endpoints
 from ._detects import _detects_endpoints
 from ._device_control_policies import _device_control_policies_endpoints
 from ._discover import _discover_endpoints
@@ -132,6 +134,7 @@ api_endpoints.extend(_cspm_registration_endpoints)
 api_endpoints.extend(_custom_ioa_endpoints)
 api_endpoints.extend(_custom_storage_endpoints)
 api_endpoints.extend(_d4c_registration_endpoints)
+api_endpoints.extend(_datascanner_endpoints)
 api_endpoints.extend(_detects_endpoints)
 api_endpoints.extend(_device_control_policies_endpoints)
 api_endpoints.extend(_discover_endpoints)
@@ -194,6 +197,7 @@ deprecated_endpoints = []
 deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)
 deprecated_endpoints.extend(_d4c_registration_deprecated)
+deprecated_endpoints.extend(_datascanner_deprecated)
 deprecated_endpoints.extend(_discover_deprecated)
 deprecated_endpoints.extend(_fdr_deprecated)
 deprecated_endpoints.extend(_firewall_management_deprecated)
