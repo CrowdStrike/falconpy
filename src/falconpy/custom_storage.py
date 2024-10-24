@@ -351,6 +351,338 @@ class CustomStorage(ServiceClass):
                                              )
         return returned
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_by_version(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """List the object keys in the specified collection in alphabetical order.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-storage/ListObjectsByVersion
+
+        Keyword arguments
+        ----
+        collection_name : string (required)
+            The name of the collection to list objects for.
+        collection_version : string(required)
+            The version of the collection to list objects for.
+        end : string
+            The ending key to use for the end of the listing.
+        limit : integer
+            The maximum number of results to return.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        start : string
+            The starting key to begin listing from.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        collection_name = kwargs.get("collection_name", False)
+        collection_version = kwargs.get("collection_version", False)
+        if min(bool(collection_name), bool(collection_version)):
+            # Pop the path variables from the keywords dictionary
+            # before processing query string arguments.
+            kwargs.pop("collection_name")
+            kwargs.pop("collection_version")
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="ListObjectsByVersion",
+                keywords=kwargs,
+                params=parameters,
+                collection_name=collection_name,
+                collection_version=collection_version
+                )
+        else:
+            returned = generate_error_result("You must provide a collection_name, collection_version "
+                                             "and object_key argument in order to use this operation."
+                                             )
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_by_version(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search for objects that match the specified filter criteria.
+
+        Object metadata is returned, not actual objects.
+
+        HTTP Method: POST
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-storage/SearchObjectsByVersion
+
+        Keyword arguments
+        ----
+        collection_name : string (required)
+            The name of the collection to search.
+        collection_version: string (required)
+            The version of the collection to search.
+        filter : string (required)
+            The FQL formatted filter to use to limit returned results.
+        limit : integer
+            The maximum number of results to return.
+        offset : integer
+            The pagination offset to use for returned results.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        sort : string
+            Sort order for returned results in FQL format.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        collection_name = kwargs.get("collection_name", False)
+        collection_version = kwargs.get("collection_version", False)
+        if min(bool(collection_name), bool(collection_version)):
+            # Pop the path variables from the keywords dictionary
+            # before processing query string arguments.
+            kwargs.pop("collection_name")
+            kwargs.pop("collection_version")
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="SearchObjectsByVersion",
+                keywords=kwargs,
+                params=parameters,
+                collection_name=collection_name,
+                collection_version=collection_version
+                )
+        else:
+            returned = generate_error_result("You must provide a collection_name, collection_version "
+                                             "and object_key argument in order to use this operation."
+                                             )
+        return returned
+
+    def get_version(self: object, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get the bytes for the specified object.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-storage/GetVersionedObject
+
+        Keyword arguments
+        ----
+        collection_name : string (required)
+            The name of the collection where the object resides.
+        collection_version : string (required)
+            The version of the collection where the object resides.
+        object_key : string (required)
+            The key of the object to be retrieved.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        bytes or dict
+            Binary (success) or Dictionary (failure) object containing API response.
+        """
+        collection_name = kwargs.get("collection_name", False)
+        collection_version = kwargs.get("collection_version", False)
+        object_key = kwargs.get("object_key", False)
+        if min(bool(collection_name), bool(collection_version), bool(object_key)):
+            # Pop the path variables from the keywords dictionary
+            # before processing query string arguments.
+            kwargs.pop("collection_name")
+            kwargs.pop("collection_version")
+            kwargs.pop("object_key")
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="GetVersionedObject",
+                keywords=kwargs,
+                collection_name=collection_name,
+                collection_version=collection_version,
+                object_key=object_key
+                )
+        else:
+            returned = generate_error_result("You must provide a collection_name, collection_version "
+                                             "and object_key argument in order to use this operation."
+                                             )
+        return returned
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def upload_version(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Put the specified new object at the given key or overwrite an existing object at the given key.
+
+        HTTP Method: PUT
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-storage/PutObjectByVersion
+
+        Keyword arguments
+        ----
+        body : binary [application/octet-stream] (required)
+            The object to be uploaded.
+        collection_name : string (required)
+            The name of the collection to upload to.
+        collection_version : string (required)
+            The version of the collection to upload to.
+        dry_run : boolean
+            Boolean flag indicating if this is a dry run. If set to True, the
+            request is validated if it would succeed, but not actually executed.
+        object_key : string (required)
+            The key of the object to be uploaded.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+        schema_version : string
+            The version of the collection schema.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        collection_name = kwargs.get("collection_name", False)
+        collection_version = kwargs.get("collection_version", False)
+        object_key = kwargs.get("object_key", False)
+        if min(bool(collection_name), bool(collection_version), bool(object_key)):
+            # Pop the path variables from the keywords dictionary
+            # before processing query string arguments.
+            kwargs.pop("collection_name")
+            kwargs.pop("collection_version")
+            kwargs.pop("object_key")
+            # Create a copy of our default header dictionary
+            header_payload = json.loads(json.dumps(self.headers))
+            # Set our content-type header
+            header_payload["Content-Type"] = "application/octet-stream"
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="PutObjectByVersion",
+                keywords=kwargs,
+                body=body,
+                headers=header_payload,
+                collection_name=collection_name,
+                collection_version=collection_version,
+                object_key=object_key
+                )
+        else:
+            returned = generate_error_result("You must provide a collection_name, collection_version "
+                                             "and object_key argument in order to use this operation."
+                                             )
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_version(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Delete the specified versioned object.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-storage/DeleteVersionedObject
+
+        Keyword arguments
+        ----
+        collection_name : string (required)
+            The name of the collection to delete from.
+        collection_name : string (required)
+            The version of the collection to delete from.
+        dry_run : boolean
+            Boolean flag indicating if this is a dry run. If set to True, the
+            request is validated if it would succeed, but not actually executed.
+        object_key : string (required)
+            The key of the object to be removed.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        collection_name = kwargs.get("collection_name", False)
+        collection_version = kwargs.get("collection_version", False)
+        object_key = kwargs.get("object_key", False)
+        if min(bool(collection_name), bool(collection_version), bool(object_key)):
+            # Pop the path variables from the keywords dictionary
+            # before processing query string arguments.
+            kwargs.pop("collection_name")
+            kwargs.pop("collection_version")
+            kwargs.pop("object_key")
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="DeleteVersionedObject",
+                keywords=kwargs,
+                params=parameters,
+                collection_name=collection_name,
+                collection_version=collection_version,
+                object_key=object_key
+                )
+        else:
+            returned = generate_error_result("You must provide a collection_name, collection_version "
+                                             "and object_key argument in order to use this operation."
+                                             )
+        return returned
+
+    def version_metadata(self: object, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get the metadata for the specified object.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-storage/GetVersionedObjectMetadata
+
+        Keyword arguments
+        ----
+        collection_name : string (required)
+            The name of the collection where the object resides.
+        collection_version : string (required)
+            The version of the collection where the object resides.
+        object_key : string (required)
+            The key of the object to be retrieved.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        collection_name = kwargs.get("collection_name", False)
+        collection_version = kwargs.get("collection_version", False)
+        object_key = kwargs.get("object_key", False)
+        if min(bool(collection_name), bool(collection_version), bool(object_key)):
+            # Pop the path variables from the keywords dictionary
+            # before processing query string arguments.
+            kwargs.pop("collection_name")
+            kwargs.pop("collection_version")
+            kwargs.pop("object_key")
+
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="GetVersionedObjectMetadata",
+                keywords=kwargs,
+                collection_name=collection_name,
+                collection_version=collection_version,
+                object_key=object_key
+                )
+        else:
+            returned = generate_error_result("You must provide a collection_name, collection_version "
+                                             "and object_key argument in order to use this operation."
+                                             )
+        return returned
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes.
@@ -360,3 +692,9 @@ class CustomStorage(ServiceClass):
     PutObject = upload
     DeleteObject = delete
     GetObjectMetadata = metadata
+    ListObjectsByVersion = list_by_version
+    SearchObjectsByVersion = search_by_version
+    GetVersionedObject = get_version
+    PutObjectByVersion = upload_version
+    DeleteVersionedObject = delete_version
+    GetVersionedObjectMetadata = version_metadata
