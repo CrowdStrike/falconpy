@@ -115,6 +115,9 @@ class MLExclusions(ServiceClass):
             body = exclusion_payload(passed_keywords=kwargs)
         if kwargs.get("excluded_from", None):
             body["excluded_from"] = kwargs.get("excluded_from", None)
+        # Issue 1233
+        if not body.get("groups"):
+            body["groups"] = ["all"]
 
         return process_service_request(
             calling_object=self,
