@@ -95,8 +95,24 @@ _container_images_endpoints = [
         "type": "string",
         "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  arch,b"
         "ase_os,cid,container_id,container_running_status,cps_rating,crowdstrike_user,cve_id,detection_count,detection_"
-        "name,detection_severity,first_seen,image_digest,image_id,layer_digest,package_name_version,registry,repository"
-        ",tag,vulnerability_count,vulnerability_severity",
+        "name,detection_severity,first_seen,image_digest,image_id,include_base_image_vuln,layer_digest,package_name_ver"
+        "sion,registry,repository,source,tag,vulnerability_count,vulnerability_severity",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CombinedBaseImages",
+    "GET",
+    "/container-security/combined/base-images/v1",
+    "Retrieve base images for provided filter",
+    "container_images",
+    [
+      {
+        "type": "string",
+        "description": "Search base images using a query in Falcon Query Language (FQL). Supported filters:  "
+        "image_digest,image_id,registry,repository,tag",
         "name": "filter",
         "in": "query"
       }
@@ -132,7 +148,8 @@ _container_images_endpoints = [
       {
         "type": "string",
         "description": "The fields to sort the records on. Supported columns:  [first_seen "
-        "highest_detection_severity highest_vulnerability_severity image_digest image_id registry repository tag]",
+        "highest_detection_severity highest_vulnerability_severity image_digest image_id registry repository source "
+        "tag]",
         "name": "sort",
         "in": "query"
       }
@@ -218,8 +235,8 @@ _container_images_endpoints = [
         "type": "string",
         "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  arch,b"
         "ase_os,cid,container_id,container_running_status,cps_rating,crowdstrike_user,cve_id,detection_count,detection_"
-        "name,detection_severity,first_seen,image_digest,image_id,layer_digest,package_name_version,registry,repository"
-        ",tag,vulnerability_count,vulnerability_severity",
+        "name,detection_severity,first_seen,image_digest,image_id,include_base_image_vuln,layer_digest,package_name_ver"
+        "sion,registry,repository,source,tag,vulnerability_count,vulnerability_severity",
         "name": "filter",
         "in": "query"
       },
@@ -251,7 +268,7 @@ _container_images_endpoints = [
         "type": "string",
         "description": "The fields to sort the records on. Supported columns:  [base_os cid detections "
         "firstScanned first_seen highest_cps_current_rating highest_detection_severity highest_vulnerability_severity "
-        "image_digest image_id last_seen layers_with_vulnerabilities packages registry repository tag "
+        "image_digest image_id last_seen layers_with_vulnerabilities packages registry repository source tag "
         "vulnerabilities]",
         "name": "sort",
         "in": "query"
@@ -292,6 +309,12 @@ _container_images_endpoints = [
         "name": "tag",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "boolean",
+        "description": "include base image vulnerabilities",
+        "name": "include_base_image_vuln",
+        "in": "query"
       }
     ]
   ],
@@ -327,6 +350,46 @@ _container_images_endpoints = [
         "type": "string",
         "description": "tag name",
         "name": "tag",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "boolean",
+        "description": "include base image vulnerabilities",
+        "name": "include_base_image_vuln",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateBaseImagesEntities",
+    "POST",
+    "/container-security/entities/base-images/v1",
+    "Creates base images using the provided details",
+    "container_images",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeleteBaseImages",
+    "DELETE",
+    "/container-security/entities/base-images/v1",
+    "Delete base images by base image uuid",
+    "container_images",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "BaseImageIDs",
+        "name": "ids",
         "in": "query",
         "required": True
       }

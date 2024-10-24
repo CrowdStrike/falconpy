@@ -251,3 +251,30 @@ def image_group_payload(passed_keywords: dict) -> dict:
         }
 
     return returned_payload
+
+
+def base_image_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted base image payload.
+
+    {
+        "base_images": [
+            {
+                "image_digest": "string",
+                "image_id": "string",
+                "registry": "string",
+                "repository": "string",
+                "tag": "string"
+            }
+        ]
+    }
+    """
+    returned = {}
+    returned["base_images"] = []
+    keys = ["image_digest", "image_id", "registry", "repository", "tag"]
+    item = {}
+    for key in keys:
+        if passed_keywords.get(key, None):
+            item[key] = passed_keywords.get(key)
+    returned["base_images"].append(item)
+
+    return returned

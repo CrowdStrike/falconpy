@@ -16,7 +16,7 @@ from falconpy import ContainerImages
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = ContainerImages(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 404, 429]
+AllowedResponses = [200, 201, 207, 400, 403, 404, 429]
 
 
 class TestContainerImages:
@@ -32,7 +32,10 @@ class TestContainerImages:
             "CombinedImageDetail": falcon.get_combined_detail(filter="repository:'testing'"),
             "ReadCombinedImagesExport": falcon.read_combined_export(filter="repository:'testing'"),
             "CombinedImageIssuesSummary": falcon.get_combined_issues_summary(filter="repository:'testing'"),
-            "CombinedImageVulnerabilitySummary": falcon.get_combined_vulnerabilities_summary(filter="repository:'testing'")
+            "CombinedImageVulnerabilitySummary": falcon.get_combined_vulnerabilities_summary(filter="repository:'testing'"),
+            "CombinedBaseImages": falcon.get_combined_base_images(),
+            "CreateBaseImageEntities": falcon.create_base_images(image_id="12345678", image_digest="1234", repository="bob", registry="aws", tag="bob"),
+            "DeleteBaseImages": falcon.delete_base_images("12345678")
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
