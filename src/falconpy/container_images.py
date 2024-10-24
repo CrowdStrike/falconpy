@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import base_image_payload
 from ._service_class import ServiceClass
 from ._endpoint._container_images import _container_images_endpoints as Endpoints
 
@@ -153,7 +154,7 @@ class ContainerImages(ServiceClass):
                     cve_id                      tag
                     detection_count             vulnerability_count
                     detection_name              vulnerability_severity
-                    detection_severity
+                    detection_severity          include_base_image_vuln
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -172,6 +173,32 @@ class ContainerImages(ServiceClass):
             operation_id="AggregateImageCount",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "filter")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_combined_base_images(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve base images for provided filter.
+
+        Keyword arguments:
+        filter -- Filter images using a query in Falcon Query Language (FQL). String.
+                  Supported filters: image_digest, image_id, registry, repository, tag
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/CombinedBaseImages
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CombinedBaseImages",
+            keywords=kwargs,
+            params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -195,6 +222,7 @@ class ContainerImages(ServiceClass):
                   highest_detection_severity        registry
                   highest_vulnerability_severity    repository
                   image_digest                      tag
+                  source
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -293,7 +321,7 @@ class ContainerImages(ServiceClass):
                     cve_id                      tag
                     detection_count             vulnerability_count
                     detection_name              vulnerability_severity
-                    detection_severity
+                    detection_severity          include_base_image_vuln
         expand_vulnerabilities -- Expand vulnerabilities. Boolean.
         expand_detections -- Expand detections. Boolean.
         limit -- The upper-bound on the number of records to retrieve. Integer.
@@ -309,6 +337,7 @@ class ContainerImages(ServiceClass):
                 highest_detection_severity          tag
                 highest_vulnerability_severity      vulnerabilities
                 image_digest                        highest_cps_current_rating
+                source
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -337,6 +366,7 @@ class ContainerImages(ServiceClass):
         registry -- Registry name. String.
         repository -- Repository name. String.
         tag -- Tag name. String.
+        include_base_image_vuln -- Include the base image vulnerability within the summary. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -365,6 +395,7 @@ class ContainerImages(ServiceClass):
         registry -- Registry name. String.
         repository -- Repository name. String.
         tag -- Tag name. String.
+        include_base_image_vuln -- Include the base image vulnerability within the summary. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -384,13 +415,84 @@ class ContainerImages(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_base_images(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Delete base images by base image UUID.
+
+        Keyword arguments:
+        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+                {
+                    "base_images": [
+                        {
+                            "image_digest": "string",
+                            "image_id": "string",
+                            "registry": "string",
+                            "repository": "string",
+                            "tag": "string"
+                        }
+                    ]
+                }
+        image_digest -- Image digest. String.
+        image_id -- UUID for the image. String.
+        registry -- Image registry. String.
+        repository -- Image repository. String.
+        tag -- Image tag. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/CreateBaseImagesEntities
+        """
+        if not body:
+            body = base_image_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateBaseImagesEntities",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_base_images(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Delete base images by base image UUID.
+
+        Keyword arguments:
+        ids -- UUID of images to delete. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/DeleteBaseImages
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteBaseImages",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
     AggregateImageAssessmentHistory = aggregate_assessment_history
     AggregateImageCountByBaseOS = aggregate_count_by_base_os
     AggregateImageCountByState = aggregate_count_by_state
     AggregateImageCount = aggregate_count
     GetCombinedImages = get_combined_images
+    CombinedBaseImages = get_combined_base_images
     CombinedImageByVulnerabilityCount = get_combined_images_by_vulnerability_count
     CombinedImageDetail = get_combined_detail
     ReadCombinedImagesExport = read_combined_export
     CombinedImageIssuesSummary = get_combined_issues_summary
     CombinedImageVulnerabilitySummary = get_combined_vulnerabilities_summary
+    DeleteBaseImages = delete_base_images
