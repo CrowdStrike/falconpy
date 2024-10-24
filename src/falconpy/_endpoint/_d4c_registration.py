@@ -187,10 +187,10 @@ _d4c_registration_endpoints = [
       },
       {
         "enum": [
-          "aws-bash",
-          "aws-terraform"
+          "aws-bash"
         ],
         "type": "string",
+        "default": "aws-bash",
         "description": "Template to be rendered",
         "name": "template",
         "in": "query"
@@ -221,6 +221,29 @@ _d4c_registration_endpoints = [
         ],
         "type": "string",
         "name": "sensor_management_enabled",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "true",
+          "false"
+        ],
+        "type": "string",
+        "name": "dspm_enabled",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "name": "dspm_regions",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "name": "dspm_role",
         "in": "query"
       },
       {
