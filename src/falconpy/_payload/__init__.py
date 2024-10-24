@@ -46,6 +46,7 @@ from ._container import (
     image_group_payload
     )
 from ._detects import update_detects_payload
+from ._identity_protection import idp_policy_payload
 from ._incidents import incident_action_parameters
 from ._ioa import ioa_exclusion_payload, ioa_custom_payload
 from ._mobile_enrollment import mobile_enrollment_payload
@@ -132,4 +133,5 @@ __all__ = [
     "workflow_definition_payload", "workflow_human_input", "workflow_mock_payload",
     "cspm_service_account_validate_payload", "api_plugin_command_payload", "mobile_enrollment_payload",
     "filevantage_start_payload", "fem_asset_payload", "certificate_based_exclusions_payload",
+    "idp_policy_payload"
 ]

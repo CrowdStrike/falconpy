@@ -76,7 +76,11 @@ class TestIdentityProtection:
         tests = {
             "GetSensorAggregates": falcon.get_sensor_aggregates(date_ranges=[{}]),
             "GetSensorDetails": falcon.get_sensor_details(ids="12345678"),
-            "QuerySensorsByFilter": falcon.query_sensors(limit=1)
+            "QuerySensorsByFilter": falcon.query_sensors(limit=1),
+            "get_policy_rules": falcon.get_policy_rules(ids="12345678"),
+            "post_policy_rules": falcon.create_policy_rule(simulation_mode=True),
+            "delete_policy_rules": falcon.delete_policy_rules("12345678"),
+            "get_policy_rules_query": falcon.query_policy_rules(),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
