@@ -53,5 +53,252 @@ _identity_protection_endpoints = [
         "required": True
       }
     ]
+  ],
+  [
+    "api.preempt.proxy.get.policy-rules",
+    "GET",
+    "/identity-protection/entities/policy-rules/v1",
+    "Get policy rules",
+    "identity_protection",
+    [
+      {
+        "type": "string",
+        "description": "Authorization Header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      },
+      {
+        "maxItems": 100,
+        "minItems": 1,
+        "uniqueItems": True,
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Rule IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "api.preempt.proxy.post.policy-rules",
+    "POST",
+    "/identity-protection/entities/policy-rules/v1",
+    "Create policy rule",
+    "identity_protection",
+    [
+      {
+        "type": "string",
+        "description": "Authorization Header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "api.preempt.proxy.delete.policy-rules",
+    "DELETE",
+    "/identity-protection/entities/policy-rules/v1",
+    "Delete policy rules",
+    "identity_protection",
+    [
+      {
+        "type": "string",
+        "description": "Authorization Header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      },
+      {
+        "maxItems": 100,
+        "minItems": 1,
+        "uniqueItems": True,
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Rule IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "api.preempt.proxy.get.policy-rules.query",
+    "GET",
+    "/identity-protection/queries/policy-rules/v1",
+    "Query policy rule IDs",
+    "identity_protection",
+    [
+      {
+        "type": "string",
+        "description": "Authorization Header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      },
+      {
+        "type": "boolean",
+        "description": "Whether the rule is enabled",
+        "name": "enabled",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "description": "Whether the rule is in simulation mode",
+        "name": "simulation_mode",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Rule name",
+        "name": "name",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "api_preempt_proxy_post_graphql",
+    "POST",
+    "/identity-protection/combined/graphql/v1",
+    "Identity Protection GraphQL API. Allows to retrieve entities, timeline activities, identity-based "
+    "incidents and security assessment. Allows to perform actions on entities and identity-based incidents.",
+    "identity_protection",
+    [
+      {
+        "type": "string",
+        "description": "Authorization Header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "api_preempt_proxy_get_policy_rules",
+    "GET",
+    "/identity-protection/entities/policy-rules/v1",
+    "Get policy rules",
+    "identity_protection",
+    [
+      {
+        "type": "string",
+        "description": "Authorization Header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      },
+      {
+        "maxItems": 100,
+        "minItems": 1,
+        "uniqueItems": True,
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Rule IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "api_preempt_proxy_post_policy_rules",
+    "POST",
+    "/identity-protection/entities/policy-rules/v1",
+    "Create policy rule",
+    "identity_protection",
+    [
+      {
+        "type": "string",
+        "description": "Authorization Header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "api_preempt_proxy_delete_policy_rules",
+    "DELETE",
+    "/identity-protection/entities/policy-rules/v1",
+    "Delete policy rules",
+    "identity_protection",
+    [
+      {
+        "type": "string",
+        "description": "Authorization Header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      },
+      {
+        "maxItems": 100,
+        "minItems": 1,
+        "uniqueItems": True,
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Rule IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "api_preempt_proxy_get_policy_rules_query",
+    "GET",
+    "/identity-protection/queries/policy-rules/v1",
+    "Query policy rule IDs",
+    "identity_protection",
+    [
+      {
+        "type": "string",
+        "description": "Authorization Header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      },
+      {
+        "type": "boolean",
+        "description": "Whether the rule is enabled",
+        "name": "enabled",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "description": "Whether the rule is in simulation mode",
+        "name": "simulation_mode",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Rule name",
+        "name": "name",
+        "in": "query"
+      }
+    ]
   ]
 ]
