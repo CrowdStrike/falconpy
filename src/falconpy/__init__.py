@@ -154,6 +154,7 @@ from .sample_uploads import SampleUploads
 from .scheduled_reports import ScheduledReports
 from .sensor_download import SensorDownload
 from .sensor_update_policy import SensorUpdatePolicy, SensorUpdatePolicies
+from .sensor_usage import SensorUsage
 from .sensor_visibility_exclusions import SensorVisibilityExclusions
 from .spotlight_vulnerabilities import SpotlightVulnerabilities
 from .spotlight_evaluation_logic import SpotlightEvaluationLogic
@@ -205,7 +206,7 @@ __all__ = [
     "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers",
     "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement",
     "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration", "QuickScanPro",
-    "DataScanner"
+    "DataScanner", "SensorUsage"
     ]
 """
 This is free and unencumbered software released into the public domain.

@@ -106,6 +106,7 @@ from ._sample_uploads import _sample_uploads_endpoints
 from ._scheduled_reports import _scheduled_reports_endpoints
 from ._sensor_download import _sensor_download_endpoints
 from ._sensor_update_policies import _sensor_update_policies_endpoints
+from ._sensor_usage import _sensor_usage_endpoints
 from ._sensor_visibility_exclusions import _sensor_visibility_exclusions_endpoints
 from ._spotlight_evaluation_logic import _spotlight_evaluation_logic_endpoints
 from ._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints
@@ -182,6 +183,7 @@ api_endpoints.extend(_sample_uploads_endpoints)
 api_endpoints.extend(_scheduled_reports_endpoints)
 api_endpoints.extend(_sensor_download_endpoints)
 api_endpoints.extend(_sensor_update_policies_endpoints)
+api_endpoints.extend(_sensor_usage_endpoints)
 api_endpoints.extend(_sensor_visibility_exclusions_endpoints)
 api_endpoints.extend(_spotlight_evaluation_logic_endpoints)
 api_endpoints.extend(_spotlight_vulnerabilities_endpoints)
