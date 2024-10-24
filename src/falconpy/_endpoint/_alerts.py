@@ -41,7 +41,7 @@ _alerts_endpoints = [
     "PostAggregatesAlertsV1",
     "POST",
     "/alerts/aggregates/alerts/v1",
-    "retrieves aggregate values for Alerts across all CIDs",
+    "Deprecated: Please use version v2 of this endpoint. Retrieves aggregate values for Alerts across all CIDs.",
     "alerts",
     [
       {
@@ -56,7 +56,7 @@ _alerts_endpoints = [
     "PostAggregatesAlertsV2",
     "POST",
     "/alerts/aggregates/alerts/v2",
-    "retrieves aggregate values for Alerts across all CIDs",
+    "Retrieves aggregate values for Alerts across all CIDs.",
     "alerts",
     [
       {
@@ -78,7 +78,7 @@ _alerts_endpoints = [
     "PostEntitiesAlertsV1",
     "POST",
     "/alerts/entities/alerts/v1",
-    "retrieves all Alerts given their ids",
+    "Deprecated: please use version v2 of this endpoint. Retrieves all Alerts given their ids.",
     "alerts",
     [
       {
@@ -118,7 +118,7 @@ _alerts_endpoints = [
     "PostEntitiesAlertsV2",
     "POST",
     "/alerts/entities/alerts/v2",
-    "retrieves all Alerts given their composite ids",
+    "Retrieves all Alerts given their composite ids.",
     "alerts",
     [
       {
@@ -139,13 +139,23 @@ _alerts_endpoints = [
     "PatchEntitiesAlertsV2",
     "PATCH",
     "/alerts/entities/alerts/v2",
-    "Perform actions on Alerts identified by composite ID(s) in request.\nEach action has a name and a "
-    "description which describes what the action does.\nIf a request adds and removes tag in a single request, the "
-    "order of processing would be to remove tags before adding new ones in.\n\n",
+    "Deprecated: Please use version v3 of this endpoint.\nPerform actions on Alerts identified by composite "
+    "ID(s) in request.\nEach action has a name and a description which describes what the action does.\nIf a "
+    "request adds and removes tag in a single request, the order of processing would be to remove tags before "
+    "adding new ones in.\n\n",
     "alerts",
     [
       {
-        "description": "request body takes a list of action parameter request that is applied against all \"ids\" provided",
+        "description": "`ids`\n- IDs of Alerts to modify.\n\n`action_parameters` values\n- "
+        "`assign_to_uuid`\n\t- Assign Alert to user UUID, such as `00000000-0000-0000-0000-000000000000`\n- "
+        "`assign_to_user_id`\n\t- Assign Alert to user ID, such as `user@example.com`\n- `assign_to_name`\n\t- Assign "
+        "Alert to username, such as `John Doe`\n- `unassign`\n\t- Unassign Alert clears out the assigned user UUID, "
+        "user ID, and username.\n- `add_tag`\n \t- Add a tag to the Alert.\n- `remove_tag`\n\t- Remove a tag from the "
+        "Alert.\n- `remove_tags_by_prefix`\n\t- Remove tags from the Alert based on the prefix.\n- "
+        "`append_comment`\n\t- Comments are displayed with the Alert in Falcon and are usually used to provide context "
+        "or notes for other Falcon users. An Alert can have multiple comments over time.\n- `update_status` values\n\t-"
+        " `new`\n\t- `in_progress`\n\t- `reopened`\n\t- `closed`\n- `show_in_ui` values\n\t- `true`: This alert is "
+        "displayed in Falcon\n\t- `false`: This alert is not displayed in Falcon.\n",
         "name": "body",
         "in": "body",
         "required": True
@@ -169,8 +179,16 @@ _alerts_endpoints = [
         "in": "query"
       },
       {
-        "description": "request body takes a list of action parameter request that is applied against all "
-        "\"composite_ids\" provided",
+        "description": "`composite_ids`\n- CompositeIDs of Alerts to modify.\n\n`action_parameters` values\n- "
+        "`assign_to_uuid`\n\t- Assign Alert to user UUID, such as `00000000-0000-0000-0000-000000000000`\n- "
+        "`assign_to_user_id`\n\t- Assign Alert to user ID, such as `user@example.com`\n- `assign_to_name`\n\t- Assign "
+        "Alert to username, such as `John Doe`\n- `unassign`\n\t- Unassign Alert clears out the assigned user UUID, "
+        "user ID, and username.\n- `add_tag`\n \t- Add a tag to the Alert.\n- `remove_tag`\n\t- Remove a tag from the "
+        "Alert.\n- `remove_tags_by_prefix`\n\t- Remove tags from the Alert based on the prefix.\n- "
+        "`append_comment`\n\t- Comments are displayed with the Alert in Falcon and are usually used to provide context "
+        "or notes for other Falcon users. An Alert can have multiple comments over time.\n- `update_status` values\n\t-"
+        " `new`\n\t- `in_progress`\n\t- `reopened`\n\t- `closed`\n- `show_in_ui` values\n\t- `true`: This alert is "
+        "displayed in Falcon\n\t- `false`: This alert is not displayed in Falcon.\n",
         "name": "body",
         "in": "body",
         "required": True
@@ -181,7 +199,7 @@ _alerts_endpoints = [
     "GetQueriesAlertsV1",
     "GET",
     "/alerts/queries/alerts/v1",
-    "retrieves all Alerts ids that match a given query",
+    "Deprecated: please use version v2 of this endpoint. Retrieves all Alerts ids that match a given query.",
     "alerts",
     [
       {
@@ -228,7 +246,7 @@ _alerts_endpoints = [
       },
       {
         "type": "string",
-        "description": "Search all detection metadata for the provided string",
+        "description": "Search all alert metadata for the provided string",
         "name": "q",
         "in": "query"
       }
@@ -238,7 +256,7 @@ _alerts_endpoints = [
     "GetQueriesAlertsV2",
     "GET",
     "/alerts/queries/alerts/v2",
-    "retrieves all Alerts ids that match a given query",
+    "Retrieves all Alerts ids that match a given query.",
     "alerts",
     [
       {
@@ -292,7 +310,7 @@ _alerts_endpoints = [
       },
       {
         "type": "string",
-        "description": "Search all detection metadata for the provided string",
+        "description": "Search all alert metadata for the provided string",
         "name": "q",
         "in": "query"
       }

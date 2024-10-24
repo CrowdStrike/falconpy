@@ -61,6 +61,9 @@ class Alerts(ServiceClass):
     def get_aggregate_alerts_v1(self, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve aggregates for Alerts across all CIDs.
 
+        DEPRECATED: Please use the get_aggregate_alerts_v2 method
+                    (PostAggregatesAlertsV2 operation) instead.
+
         Keyword arguments:
         body -- full body payload, not required when using other keywords.
                 [
@@ -315,6 +318,8 @@ class Alerts(ServiceClass):
                          ) -> Dict[str, Union[int, dict]]:
         """Perform actions on alerts identified by detection ID(s) in request.
 
+        DEPRECATED: Please use the update_alerts_v3 (PatchEntitiesAlertsV3 operation) instead.
+
         Keyword arguments:
         action_parameters -- List of dictionaries containing action specific parameter settings.
         add_tag -- add a tag to 1 or more alert(s). String. Overridden by action_parameters.
@@ -394,13 +399,17 @@ class Alerts(ServiceClass):
         Keyword arguments:
         action_parameters -- List of dictionaries containing action specific parameter settings.
         add_tag -- add a tag to 1 or more alert(s). String. Overridden by action_parameters.
-        append_comment -- appends new comment to existing comments. String.
+        append_comment -- Appends new comment to existing comments. String.
+                          Comments are displayed with the Alert in Falcon and are usually used to
+                          provide context or notes for other Falcon users. An Alert can have multiple
+                          comments over time.
                           Overridden by action_parameters.
         assign_to_name -- assign 1 or more alert(s) to a user identified by user name. String.
                           Overridden by action_parameters.
         assign_to_user_id -- assign 1 or more alert(s) to a user identified by user id
                              (eg: user1@example.com). String. Overridden by action_parameters.
         assign_to_uuid -- assign 1 or more alert(s) to a user identified by UUID. String.
+                          Example: '00000000-0000-0000-0000-000000000000'
                           Overridden by action_parameters.
         body -- full body payload, not required when using other keywords.
                 {
@@ -414,7 +423,7 @@ class Alerts(ServiceClass):
                         }
                     ]
                 }
-        composite_ids -- ID(s) of the alert to update. String or list of strings.
+        composite_ids -- CompositeID(s) of the alert to update. String or list of strings.
         include_hidden -- Allows previously hidden alerts to be retrieved.
         new_behavior_processed -- adds a newly processed behavior to 1 or more alert(s). String.
                                   Overridden by action_parameters.
@@ -426,8 +435,10 @@ class Alerts(ServiceClass):
         show_in_ui -- shows 1 or more alert(s) on UI if set to true, hides otherwise.
                       An empty/nil value is also valid. Overridden by action_parameters.
         unassign -- unassign an previously assigned user from 1 or more alert(s).
+                    Unassign Alert clears out the assigned user UUID, user ID, and username.
                     The value passed to this action is ignored. Overridden by action_parameters.
         update_status -- update status for 1 or more alert(s). String.
+                         Allowed values: (new, in_progress, reopened, closed)
                          Overridden by action_parameters.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
@@ -464,6 +475,8 @@ class Alerts(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def get_alerts_v1(self, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve all Alerts given their IDs.
+
+        DEPRECATED: Please use the get_alerts_v2 method (PostEntitiesAlertsV1 operation) instead.
 
         Keyword arguments:
         body -- full body payload, not required when ids keyword is provided.
@@ -548,6 +561,8 @@ class Alerts(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_alerts_v1(self, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for detection IDs that match a given query.
+
+        DEPRECATED: Please use the query_alerts_v2 method (GetQueriesAlertsV2 operation) intead.
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
