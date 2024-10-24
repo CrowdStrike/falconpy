@@ -90,6 +90,12 @@ def scrub_target(oper: str, scrubbed: str, kwas: dict) -> str:
         "PutObject": ["collection_name", "object_key"],
         "DeleteObject": ["collection_name", "object_key"],
         "GetObjectMetadata": ["collection_name", "object_key"],
+        "ListObjectsByVersion": ["collection_name", "collection_version"],
+        "SearchObjectsByVersion": ["collection_name", "collection_version"],
+        "GetVersionedObject": ["collection_name", "object_key", "collection_version"],
+        "PutVersionedObject": ["collection_name", "object_key", "collection_version"],
+        "DeleteVersionedObject": ["collection_name", "object_key", "collection_version"],
+        "GetVersionedObjectMetadata": ["collection_name", "object_key", "collection_version"],
         "combined_summary_get": ["vertex_type"],
         "entities_vertices_get": ["vertex_type"],
         "entities_vertices_getv2": ["vertex_type"]

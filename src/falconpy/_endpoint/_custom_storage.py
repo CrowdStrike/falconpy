@@ -264,5 +264,280 @@ _custom_storage_endpoints = [
         "required": True
       }
     ]
+  ],
+  [
+    "ListObjectsByVersion",
+    "GET",
+    "/customobjects/v1/collections/{collection_name}/{collection_version}/objects",
+    "List the object keys in the specified collection in alphabetical order",
+    "custom_storage",
+    [
+      {
+        "maxLength": 255,
+        "minLength": 1,
+        "type": "string",
+        "description": "The name of the collection",
+        "name": "collection_name",
+        "in": "path",
+        "required": True
+      },
+      {
+        "maxLength": 20,
+        "minLength": 1,
+        "type": "string",
+        "description": "The version of the collection",
+        "name": "collection_version",
+        "in": "path",
+        "required": True
+      },
+      {
+        "maxLength": 1000,
+        "minLength": 1,
+        "type": "string",
+        "description": "The end key to end listing to",
+        "name": "end",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "type": "integer",
+        "description": "The limit of results to return",
+        "name": "limit",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "maxLength": 1000,
+        "minLength": 1,
+        "type": "string",
+        "description": "The start key to start listing from",
+        "name": "start",
+        "in": "query",
+        "allowEmptyValue": True
+      }
+    ]
+  ],
+  [
+    "SearchObjectsByVersion",
+    "POST",
+    "/customobjects/v1/collections/{collection_name}/{collection_version}/objects",
+    "Search for objects that match the specified filter criteria (returns metadata, not actual objects)",
+    "custom_storage",
+    [
+      {
+        "maxLength": 255,
+        "minLength": 1,
+        "type": "string",
+        "description": "The name of the collection",
+        "name": "collection_name",
+        "in": "path",
+        "required": True
+      },
+      {
+        "maxLength": 20,
+        "minLength": 1,
+        "type": "string",
+        "description": "The version of the collection",
+        "name": "collection_version",
+        "in": "path",
+        "required": True
+      },
+      {
+        "maxLength": 255,
+        "minLength": 1,
+        "type": "string",
+        "description": "The filter to limit the returned results.",
+        "name": "filter",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "integer",
+        "description": "The limit of results to return",
+        "name": "limit",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "type": "integer",
+        "description": "The offset of results to return",
+        "name": "offset",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "maxLength": 255,
+        "minLength": 1,
+        "type": "string",
+        "description": "The sort order for the returned results.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetVersionedObject",
+    "GET",
+    "/customobjects/v1/collections/{collection_name}/{collection_version}/objects/{object_key}",
+    "Get the bytes for the specified object",
+    "custom_storage",
+    [
+      {
+        "maxLength": 255,
+        "minLength": 1,
+        "type": "string",
+        "description": "The name of the collection",
+        "name": "collection_name",
+        "in": "path",
+        "required": True
+      },
+      {
+        "maxLength": 20,
+        "minLength": 1,
+        "type": "string",
+        "description": "The version of the collection",
+        "name": "collection_version",
+        "in": "path",
+        "required": True
+      },
+      {
+        "maxLength": 1000,
+        "minLength": 1,
+        "type": "string",
+        "description": "The object key",
+        "name": "object_key",
+        "in": "path",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "PutObjectByVersion",
+    "PUT",
+    "/customobjects/v1/collections/{collection_name}/{collection_version}/objects/{object_key}",
+    "Put the specified new object at the given key or overwrite an existing object at the given key",
+    "custom_storage",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      },
+      {
+        "maxLength": 255,
+        "minLength": 1,
+        "type": "string",
+        "description": "The name of the collection",
+        "name": "collection_name",
+        "in": "path",
+        "required": True
+      },
+      {
+        "maxLength": 20,
+        "minLength": 1,
+        "type": "string",
+        "description": "The version of the collection",
+        "name": "collection_version",
+        "in": "path",
+        "required": True
+      },
+      {
+        "type": "boolean",
+        "description": "If false, run the operation as normal.  If true, validate that the request *would* "
+        "succeed, but don't execute it.",
+        "name": "dry_run",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "maxLength": 1000,
+        "minLength": 1,
+        "type": "string",
+        "description": "The object key",
+        "name": "object_key",
+        "in": "path",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeleteVersionedObject",
+    "DELETE",
+    "/customobjects/v1/collections/{collection_name}/{collection_version}/objects/{object_key}",
+    "Delete the specified versioned object",
+    "custom_storage",
+    [
+      {
+        "maxLength": 255,
+        "minLength": 1,
+        "type": "string",
+        "description": "The name of the collection",
+        "name": "collection_name",
+        "in": "path",
+        "required": True
+      },
+      {
+        "maxLength": 20,
+        "minLength": 1,
+        "type": "string",
+        "description": "The version of the collection",
+        "name": "collection_version",
+        "in": "path",
+        "required": True
+      },
+      {
+        "type": "boolean",
+        "description": "If false, run the operation as normal.  If true, validate that the request *would* "
+        "succeed, but don't execute it.",
+        "name": "dry_run",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "maxLength": 1000,
+        "minLength": 1,
+        "type": "string",
+        "description": "The object key",
+        "name": "object_key",
+        "in": "path",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetVersionedObjectMetadata",
+    "GET",
+    "/customobjects/v1/collections/{collection_name}/{collection_version}/objects/{object_key}/metadata",
+    "Get the metadata for the specified object",
+    "custom_storage",
+    [
+      {
+        "maxLength": 255,
+        "minLength": 1,
+        "type": "string",
+        "description": "The name of the collection",
+        "name": "collection_name",
+        "in": "path",
+        "required": True
+      },
+      {
+        "maxLength": 20,
+        "minLength": 1,
+        "type": "string",
+        "description": "The version of the collection",
+        "name": "collection_version",
+        "in": "path",
+        "required": True
+      },
+      {
+        "maxLength": 1000,
+        "minLength": 1,
+        "type": "string",
+        "description": "The object key",
+        "name": "object_key",
+        "in": "path",
+        "required": True
+      }
+    ]
   ]
 ]

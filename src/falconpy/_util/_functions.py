@@ -640,6 +640,7 @@ def process_service_request(calling_object: ServiceClass,  # pylint: disable=R09
     expand_result -- Request expanded results output
     pythonic -- Pythonic responses
     collection_name -- Repository collection name [PATH] (Custom Objects API)
+    collection_version -- Repository version [PATH] (Custom Objects API)
     object_key -- Object Key [PATH] (Custom Objects API)
     """
     # Log the operation ID if we have logging enabled.
@@ -718,6 +719,9 @@ def handle_path_variables(passed: dict, route_url: str):
         passed_object_key = passed.get("object_key", None)
         if passed_object_key:
             collect_args["object_key"] = str(passed_object_key)
+        passed_collection_version = passed.get("collection_version", None)
+        if passed_collection_version:
+            collect_args["collection_version"] = str(passed_collection_version)
         route_url = route_url.format(**collect_args)
     passed_vertex_type = str(passed.get("vertex_type", None))
     if passed_vertex_type:
