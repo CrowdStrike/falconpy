@@ -36,8 +36,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-from ._util import process_service_request, force_default
-from ._payload import aggregate_payload, generic_payload_list
+from ._util import process_service_request, force_default, handle_single_argument
+from ._payload import aggregate_payload, generic_payload_list, idp_policy_payload
 from ._service_class import ServiceClass
 from ._endpoint._identity_protection import _identity_protection_endpoints as Endpoints
 
@@ -94,7 +94,7 @@ class IdentityProtection(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="api_preempt_proxy_post_graphql",
+            operation_id="post_graphql",
             body=body
             )
 
@@ -215,6 +215,177 @@ class IdentityProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_policy_rules(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get policy rules.
+
+        Keyword arguments:
+        ids -- Rule IDs. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protection/api.preempt.proxy.get.policy-rules
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_policy_rules",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_policy_rule(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Create policy rule.
+
+        Keyword arguments:
+        action -- Action to perform. String.
+        activity -- Activities that trigger the policy. Dictionary.
+        body -- Full body payload as a dictionary. Not required if using other keywords.
+                {
+                    "action": "string",
+                    "activity": {
+                        "accessType": {
+                            "exclude": [
+                                "string"
+                            ],
+                            "include": [
+                                "string"
+                            ]
+                        },
+                        "accessTypeCustom": {
+                            "exclude": [
+                                "string"
+                            ],
+                            "include": [
+                                "string"
+                            ]
+                        }
+                    },
+                    "destination": {
+                        "entityId": {
+                            "exclude": [
+                                "string"
+                            ],
+                            "include": [
+                                "string"
+                            ]
+                        },
+                        "groupMembership": {
+                            "exclude": [
+                                "string"
+                            ],
+                            "include": [
+                                "string"
+                            ]
+                        }
+                    },
+                    "enabled": boolean,
+                    "name": "string",
+                    "simulationMode": boolean,
+                    "sourceEndpoint": {
+                        "entityId": {
+                            "exclude": [
+                                "string"
+                            ],
+                            "include": [
+                                "string"
+                            ]
+                        },
+                        "groupMembership": {
+                            "exclude": [
+                                "string"
+                            ],
+                            "include": [
+                                "string"
+                            ]
+                        }
+                    },
+                    "sourceUser": {
+                        "entityId": {
+                            "exclude": [
+                                "string"
+                            ],
+                            "include": [
+                                "string"
+                            ]
+                        },
+                        "groupMembership": {
+                            "exclude": [
+                                "string"
+                            ],
+                            "include": [
+                                "string"
+                            ]
+                        }
+                    },
+                    "trigger": "string"
+                }
+        destination -- Activity destination. Dictionary.
+        enabled -- Flag indicating if the policy rule should be enabled. Boolean.
+        name -- Policy rule name.
+        simulation_mode -- Simulate the policy action instead of actually taking action. Boolean.
+                           simulationMode will also be accepted for this argument.
+        source_endpoint -- Source endpoint details. Dictionary.
+                           sourceEndpoint will also be accepted for this argument.
+        source_user -- Source user details. Dictionary.
+                       sourceUser will also be accepted for this argument.
+        trigger -- Policy rule trigger. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/identity-protection/api.preempt.proxy.post.policy-rules
+        """
+        if not body:
+            body = idp_policy_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="post_policy_rules",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_policy_rules(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Delete policy rules.
+
+        Keyword arguments:
+        ids -- Rule IDs to delete. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html
+            #/identity-protection/api.preempt.proxy.delete.policy-rules
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="delete_policy_rules",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def query_sensors(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search for sensors in your environment by providing hostname, IP, and other criteria.
 
@@ -244,11 +415,43 @@ class IdentityProtection(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_policy_rules(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Query policy rule IDs.
+
+        Keyword arguments:
+        enabled -- Whether the rule is enabled. Boolean.
+        simulation_mode -- Whether the rule is in simulation mode. Boolean.
+        name -- Rule name. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html
+            #/identity-protection/api.preempt.proxy.get.policy-rules.query
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_policy_rules_query",
+            keywords=kwargs,
+            params=parameters
+            )
+
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here
     # for backwards compatibility / ease of use purposes
     GraphQL = graphql
+    # This operation ID has been deprecated
     api_preempt_proxy_post_graphql = graphql
+    post_graphql = graphql
+    post_policy_rules = create_policy_rule
+    get_policy_rules_query = query_policy_rules
     GetSensorAggregates = get_sensor_aggregates
     GetSensorDetails = get_sensor_details
     QuerySensorsByFilter = query_sensors
