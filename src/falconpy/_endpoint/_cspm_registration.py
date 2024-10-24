@@ -231,6 +231,20 @@ _cspm_registration_endpoints = [
         "description": "Region",
         "name": "region",
         "in": "query"
+      },
+      {
+        "enum": [
+          "aws-url",
+          "aws-iom-url",
+          "aws-ioa-url",
+          "aws-sensor-management-url",
+          "aws-dspm-url",
+          "aws-idp-url"
+        ],
+        "type": "string",
+        "description": "Template to be rendered",
+        "name": "template",
+        "in": "query"
       }
     ]
   ],
@@ -263,12 +277,22 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "commercial",
+          "gov"
+        ],
+        "type": "string",
+        "description": "Type of account, it can be commercial or gov",
+        "name": "account_type",
+        "in": "query"
+      },
+      {
         "type": "array",
         "items": {
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "The list of accounts to register",
+        "description": "The list of accounts to register, values should be in the form: account,profile",
         "name": "accounts",
         "in": "query"
       },
@@ -288,6 +312,29 @@ _cspm_registration_endpoints = [
         ],
         "type": "string",
         "name": "sensor_management_enabled",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "true",
+          "false"
+        ],
+        "type": "string",
+        "name": "dspm_enabled",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "name": "dspm_regions",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "name": "dspm_role",
         "in": "query"
       },
       {
