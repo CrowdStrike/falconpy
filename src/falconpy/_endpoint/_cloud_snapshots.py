@@ -38,6 +38,14 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_snapshots_endpoints = [
   [
+    "GetCredentialsIAC",
+    "GET",
+    "/iac/entities/image-registry-credentials/v1",
+    "Gets the registry credentials (external endpoint)",
+    "cloud_snapshots",
+    []
+  ],
+  [
     "ReadDeploymentsCombined",
     "GET",
     "/snapshots/combined/deployments/v1",

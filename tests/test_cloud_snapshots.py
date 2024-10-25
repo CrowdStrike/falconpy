@@ -45,6 +45,10 @@ class TestCloudSnapshots:
         """Pytest harness hook"""
         assert bool(falcon.get_credentials()["status_code"] in [*AllowedResponses, 500]) is True
 
+    def test_get_credentials_iac(self):
+        """Pytest harness hook"""
+        assert bool(falcon.get_iac_credentials()["status_code"] in [*AllowedResponses, 500]) is True
+
     @pytest.mark.skipif(config.base_url == "https://api.laggar.gcw.crowdstrike.com",
                         reason="Unit testing unavailable on US-GOV-1"
                         )

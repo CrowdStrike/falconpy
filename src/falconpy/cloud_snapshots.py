@@ -218,6 +218,34 @@ class CloudSnapshots(ServiceClass):
             operation_id="GetCredentialsMixin0"
             )
 
+    def get_iac_credentials(self: object) -> Dict[str, Union[int, dict]]:
+        """Retrieve the registry credentials.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspg-iacapi/GetCredentialsMixin0
+
+        Keyword arguments
+        ----
+        This method does not accept keyword arguments.
+
+        Arguments
+        ----
+        This method does not accept arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCredentialsIAC"
+            )
+
     @force_default(defaults=["body"], default_types=["dict"])
     def register_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create inventory from data received from a snapshot.
