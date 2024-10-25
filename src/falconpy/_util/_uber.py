@@ -98,7 +98,13 @@ def scrub_target(oper: str, scrubbed: str, kwas: dict) -> str:
         "GetVersionedObjectMetadata": ["collection_name", "object_key", "collection_version"],
         "combined_summary_get": ["vertex_type"],
         "entities_vertices_get": ["vertex_type"],
-        "entities_vertices_getv2": ["vertex_type"]
+        "entities_vertices_getv2": ["vertex_type"],
+        "DeleteIntegration": ["id"],
+        "UpdateIntegration": ["id"],
+        "RunIntegrationTask": ["id"],
+        "DeleteIntegrationTask": ["id"],
+        "UpdateIntegrationTask": ["id"],
+        "DeleteExecutorNode": ["id"]
     }
     for field_value, field_names in field_mapping.items():
         if oper == field_value:  # Only perform replacements on mapped operation IDs.

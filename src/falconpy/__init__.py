@@ -90,6 +90,7 @@ from ._api_request import (
 from .alerts import Alerts
 from .api_integrations import APIIntegrations
 from .api_complete import APIHarness, APIHarnessV2
+from .aspm import ASPM
 from .certificate_based_exclusions import CertificateBasedExclusions
 from .cloud_snapshots import CloudSnapshots
 from .compliance_assessments import ComplianceAssessments
@@ -208,7 +209,7 @@ __all__ = [
     "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers",
     "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement",
     "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration", "QuickScanPro",
-    "DataScanner", "SensorUsage", "Downloads", "DeliverySettings"
+    "DataScanner", "SensorUsage", "Downloads", "DeliverySettings", "ASPM"
     ]
 """
 This is free and unencumbered software released into the public domain.

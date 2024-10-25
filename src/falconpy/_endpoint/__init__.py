@@ -43,6 +43,7 @@ from .deprecated import _deprecated_class_mapping
 
 from ._alerts import _alerts_endpoints
 from ._api_integrations import _api_integrations_endpoints
+from ._aspm import _aspm_endpoints
 from ._certificate_based_exclusions import _certificate_based_exclusions_endpoints
 from ._cloud_connect_aws import _cloud_connect_aws_endpoints
 from ._cloud_snapshots import _cloud_snapshots_endpoints
@@ -122,6 +123,7 @@ from ._zero_trust_assessment import _zero_trust_assessment_endpoints
 api_endpoints: List[Any] = []
 api_endpoints.extend(_alerts_endpoints)
 api_endpoints.extend(_api_integrations_endpoints)
+api_endpoints.extend(_aspm_endpoints)
 api_endpoints.extend(_certificate_based_exclusions_endpoints)
 api_endpoints.extend(_cloud_connect_aws_endpoints)
 api_endpoints.extend(_cloud_snapshots_endpoints)

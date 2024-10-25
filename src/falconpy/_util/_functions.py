@@ -642,6 +642,7 @@ def process_service_request(calling_object: ServiceClass,  # pylint: disable=R09
     collection_name -- Repository collection name [PATH] (Custom Objects API)
     collection_version -- Repository version [PATH] (Custom Objects API)
     object_key -- Object Key [PATH] (Custom Objects API)
+    path_id -- ASPM ID path variable [PATH] (ASPM API)
     """
     # Log the operation ID if we have logging enabled.
     if calling_object.log:
@@ -723,9 +724,12 @@ def handle_path_variables(passed: dict, route_url: str):
         if passed_collection_version:
             collect_args["collection_version"] = str(passed_collection_version)
         route_url = route_url.format(**collect_args)
-    passed_vertex_type = str(passed.get("vertex_type", None))
+    passed_vertex_type = passed.get("vertex_type", None)
     if passed_vertex_type:
-        route_url = route_url.format(passed_vertex_type)
+        route_url = route_url.format(str(passed_vertex_type))
+    passed_id = passed.get("path_id", None)
+    if "aspm-api-gateway" in route_url and passed_id:
+        route_url = route_url.format(passed.get("path_id"))
 
     return route_url
 
