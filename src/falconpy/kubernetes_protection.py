@@ -83,15 +83,17 @@ class KubernetesProtection(ServiceClass):
         Keyword arguments:
         filter -- Retrieve count of Kubernetes clusters that match a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    access                  cluster_status
-                    agent_status            container_count
-                    cid                     kubernetes_version
-                    cloud_account_id        last_seen
-                    cloud_name              management_status
-                    cloud_region            node_count
-                    cluster_id              pod_count
-                    cluster_name            tags
-                    iar_coverage
+                    access              cluster_status
+                    agent_id            container_count
+                    agent_status        iar_coverage
+                    agent_type          kac_agent_id
+                    cid                 kubernetes_version
+                    cloud_account_id    last_seen
+                    cloud_name          management_status
+                    cloud_region        node_count
+                    cloud_service       pod_count
+                    cluster_id          tags
+                    cluster_name
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -120,15 +122,17 @@ class KubernetesProtection(ServiceClass):
         Keyword arguments:
         filter -- Retrieve count of Kubernetes clusters that match a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    access                  cluster_status
-                    agent_status            container_count
-                    cid                     kubernetes_version
-                    cloud_account_id        last_seen
-                    cloud_name              management_status
-                    cloud_region            node_count
-                    cluster_id              pod_count
-                    cluster_name            tags
-                    iar_coverage
+                    access              cluster_status
+                    agent_id            container_count
+                    agent_status        iar_coverage
+                    agent_type          kac_agent_id
+                    cid                 kubernetes_version
+                    cloud_account_id    last_seen
+                    cloud_name          management_status
+                    cloud_region        node_count
+                    cloud_service       pod_count
+                    cluster_id          tags
+                    cluster_name
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -156,15 +160,17 @@ class KubernetesProtection(ServiceClass):
         Keyword arguments:
         filter -- Retrieve count of Kubernetes clusters that match a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    access                  cluster_status
-                    agent_status            container_count
-                    cid                     kubernetes_version
-                    cloud_account_id        last_seen
-                    cloud_name              management_status
-                    cloud_region            node_count
-                    cluster_id              pod_count
-                    cluster_name            tags
-                    iar_coverage
+                    access              cluster_status
+                    agent_id            container_count
+                    agent_status        iar_coverage
+                    agent_type          kac_agent_id
+                    cid                 kubernetes_version
+                    cloud_account_id    last_seen
+                    cloud_name          management_status
+                    cloud_region        node_count
+                    cloud_service       pod_count
+                    cluster_id          tags
+                    cluster_name
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -606,6 +612,62 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_namespace_count(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Bucket containers by agent type and calculate sensor coverage.
+
+        Keyword arguments:
+        filter -- Retrieve count of Kubernetes containers that match a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                  agent_id              cluster_id
+                  agent_type            cluster_name
+                  annotations_list      first_seen
+                  cid                   kac_agent_id
+                  cloud_account_id      last_seen
+                  cloud_name            namespace_id
+                  cloud_region          namespace_name
+                  cloud_service         resource_status
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadNamespaceCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadNamespaceCount",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
+    def read_namespaces_by_date_range_count(self: object) -> Dict[str, Union[int, dict]]:
+        """Retrieve namespaces by date range count.
+
+        Keyword arguments:
+        This method does not accept keyword arguments.
+
+        This method does not accept arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadNamespacesByDateRangeCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadNamespacesByDateRangeCount"
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def read_vulnerability_counts_by_severity(self: object,
                                               *args,
                                               parameters: dict = None,
@@ -735,6 +797,84 @@ class KubernetesProtection(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="ReadClusterEnrichment",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_container_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve container enrichment data.
+
+        Keyword arguments:
+        container_id -- One or more container ids for which to retrieve enrichment info
+        filter -- Supported filters:  last_seen
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadContainerEnrichment
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadContainerEnrichment",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_pod_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve pod enrichment data.
+
+        Keyword arguments:
+        pod_id -- One or more pod ids for which to retrieve enrichment info
+        filter -- Supported filters:  last_seen
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadPodEnrichment
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadPodEnrichment",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_deployment_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve container enrichment data.
+
+        Keyword arguments:
+        deployment_id -- One or more deployment ids for which to retrieve enrichment info
+        filter -- Supported filters:  last_seen
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadDeploymentEnrichment
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadDeploymentEnrichment",
             keywords=kwargs,
             params=parameters
             )
@@ -1999,6 +2139,8 @@ class KubernetesProtection(ServiceClass):
     FindContainersCountAffectedByZeroDayVulnerabilities = read_zero_day_affected_counts
     ReadVulnerableContainerImageCount = read_vulnerable_container_count
     ReadContainerCount = read_container_counts
+    ReadNamespacesByDateRangeCount = read_namespaces_by_date_range_count
+    ReadNamespaceCount = read_namespace_count
     FindContainersByContainerRunTimeVersion = find_containers_by_runtime_version
     GroupContainersByManaged = group_managed_containers
     ReadContainerImageDetectionsCountByDate = read_detections_count_by_date
@@ -2008,6 +2150,9 @@ class KubernetesProtection(ServiceClass):
     ReadDeploymentsByDateRangeCount = read_deployment_counts_by_date_range
     ReadDeploymentCount = read_deployment_count
     ReadClusterEnrichment = read_cluster_enrichment
+    ReadContainerEnrichment = read_container_enrichment
+    ReadPodEnrichment = read_pod_enrichment
+    ReadDeploymentEnrichment = read_deployment_enrichment
     ReadNodeEnrichment = read_node_enrichment
     ReadDistinctContainerImageCount = read_distinct_image_count
     ReadContainerImagesByMostUsed = read_images_by_most_used
