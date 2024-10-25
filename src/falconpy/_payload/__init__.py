@@ -28,6 +28,17 @@ from ._generic import (
     token_settings_payload
     )
 from ._api_integrations import api_plugin_command_payload
+from ._aspm import (
+    aspm_delete_tag_payload,
+    aspm_update_tag_payload,
+    aspm_violations_search_payload,
+    aspm_get_services_count_payload,
+    aspm_query_payload,
+    aspm_integration_payload,
+    aspm_integration_task_payload,
+    aspm_node_payload,
+    aspm_application_payload
+)
 from ._host_group import host_group_create_payload, host_group_update_payload
 from ._recon import (
     recon_action_payload,
@@ -135,5 +146,8 @@ __all__ = [
     "workflow_definition_payload", "workflow_human_input", "workflow_mock_payload",
     "cspm_service_account_validate_payload", "api_plugin_command_payload", "mobile_enrollment_payload",
     "filevantage_start_payload", "fem_asset_payload", "certificate_based_exclusions_payload",
-    "idp_policy_payload", "delivery_settings_payload", "base_image_payload"
+    "idp_policy_payload", "delivery_settings_payload", "base_image_payload", "aspm_delete_tag_payload",
+    "aspm_update_tag_payload", "aspm_violations_search_payload", "aspm_get_services_count_payload",
+    "aspm_query_payload", "aspm_integration_payload", "aspm_integration_task_payload", "aspm_node_payload",
+    "aspm_application_payload"
 ]
