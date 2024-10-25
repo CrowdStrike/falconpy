@@ -79,7 +79,12 @@ class TestKubeProtect:
             "ReadNodeCombined": falcon.read_nodes_combined(filter="whatever"),
             "ReadPodCombined": falcon.read_pods_combined(filter="whatever"),
             "ReadKubernetesIomEntities": falcon.read_iom_entities(filter="whatever"),
-            "SearchKubernetesIoms": falcon.search_ioms(filter="whatever")
+            "SearchKubernetesIoms": falcon.search_ioms(filter="whatever"),
+            "ReadContainerEnrichment": falcon.read_container_enrichment(filter="whatevers"),
+            "ReadPodEnrichment": falcon.read_pod_enrichment(filter="something_something_something_darkside"),
+            "ReadDeploymentEnrichment": falcon.read_deployment_enrichment(filter="something_else"),
+            "ReadNamespacesByDateRangeCount": falcon.read_namespaces_by_date_range_count(),
+            "ReadNamespaceCount": falcon.read_namespace_count(filter="something"),
         }
 
         for key in tests:
