@@ -56,6 +56,7 @@ class TestExposureManagement:
             "get_external_assets": falcon.get_assets("123456"),
             "patch_external_assets": falcon.update_assets(cid="whatever", action="whatever"),
             "query_external_assets": falcon.query_assets(),
+            "delete_assets": falcon.delete_assets(ids="12345678", description="unit_testing")
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
