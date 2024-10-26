@@ -13,14 +13,16 @@ from falconpy import FalconContainer, APIHarness, APIHarnessV2
 
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
-falcon = FalconContainer(auth_object=config)
+falcon = FalconContainer(auth_object=config, timeout=3)
 uber = APIHarness(client_id=falcon.auth_object.creds["client_id"],
                   client_secret=falcon.auth_object.creds["client_secret"],
-                  base_url=falcon.auth_object.base_url
+                  base_url=falcon.auth_object.base_url,
+                  timeout=3
                   )
 uber2 = APIHarnessV2(client_id=falcon.auth_object.creds["client_id"],
                      client_secret=falcon.auth_object.creds["client_secret"],
-                     base_url=falcon.auth_object.base_url
+                     base_url=falcon.auth_object.base_url,
+                     timeout=3
                      )
 AllowedResponses = [200, 201, 204, 400, 403, 404, 429, 500, 502]  # Allowing no content returned as code paths are confirmed
 
