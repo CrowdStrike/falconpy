@@ -5,6 +5,7 @@ test_event_streams.py - This class tests the event_streams service class
 import os
 import sys
 import datetime
+from datetime import datetime, timezone
 import platform
 import requests
 import pytest
@@ -38,7 +39,7 @@ class TestEventStreams:
     def stream_refresh():
         """refresh_active_stream"""
         avail = falcon.listAvailableStreamsOAuth2(parameters={"appId": f"{APP_ID}"})
-        current_time = datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S +0000')
+        current_time = datetime.now(timezone.utc).strftime('%a, %d %b %Y %H:%M:%S +0000')
         headers = {
             'Authorization': 'Token %s' % (
                 avail["body"]["resources"][0]["sessionToken"]["token"]
@@ -56,7 +57,7 @@ class TestEventStreams:
     def stream_refresh_default_action():
         """refresh_active_stream"""
         avail = falcon.listAvailableStreamsOAuth2(parameters={"appId": f"{APP_ID}"})
-        current_time = datetime.datetime.utcnow().strftime('%a, %d %b %Y %H:%M:%S +0000')
+        current_time = datetime.now(timezone.utc).strftime('%a, %d %b %Y %H:%M:%S +0000')
         headers = {
             'Authorization': 'Token %s' % (
                 avail["body"]["resources"][0]["sessionToken"]["token"]

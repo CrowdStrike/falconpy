@@ -3,7 +3,7 @@ test_mobile_enrollment.py - This class tests the mobile enrollment service class
 """
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -25,7 +25,7 @@ class TestMobileEnrollment:
         result = falcon.device_enroll(
             action_name="re-enroll",
             email_addresses="no_reply@crowdstrike.com",
-            expires_at=(datetime.utcnow() + timedelta(minutes=5)).strftime("%Y-%m-%dT%H:%M:%SZ")
+            expires_at=(datetime.now(timezone.utc) + timedelta(minutes=5)).strftime("%Y-%m-%dT%H:%M:%SZ")
         )
         assert bool(result["status_code"] in AllowedResponses) is True
 
@@ -34,6 +34,6 @@ class TestMobileEnrollment:
         result = falcon.device_enroll_v4(
             action_name="re-enroll",
             email_addresses="no_reply@crowdstrike.com",
-            expires_at=(datetime.utcnow() + timedelta(minutes=5)).strftime("%Y-%m-%dT%H:%M:%SZ")
+            expires_at=(datetime.now(timezone.utc) + timedelta(minutes=5)).strftime("%Y-%m-%dT%H:%M:%SZ")
         )
         assert bool(result["status_code"] in AllowedResponses) is True
