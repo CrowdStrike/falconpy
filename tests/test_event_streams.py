@@ -45,13 +45,16 @@ class TestEventStreams:
                 avail["body"]["resources"][0]["sessionToken"]["token"]
                 ), 'Date': current_time, 'Connection': 'Keep-Alive'
             }
-        stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True)
-        with stream:
-            result = falcon.refreshActiveStreamSession(app_id=f"{APP_ID}",
-                                                       action_name="refresh_active_stream_session",
-                                                       partition=0
-                                                       )
-            return bool(result["status_code"] in AllowedResponses)
+        if avail["body"]["resources"]:
+            stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True)
+            with stream:
+                result = falcon.refreshActiveStreamSession(app_id=f"{APP_ID}",
+                                                        action_name="refresh_active_stream_session",
+                                                        partition=0
+                                                        )
+                return bool(result["status_code"] in AllowedResponses)
+        else:
+            pytest.skip("Rate limited")
 
     @staticmethod
     def stream_refresh_default_action():
@@ -63,13 +66,15 @@ class TestEventStreams:
                 avail["body"]["resources"][0]["sessionToken"]["token"]
                 ), 'Date': current_time, 'Connection': 'Keep-Alive'
             }
-        stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True)
-        with stream:
-            result = falcon.refreshActiveStreamSession(appId=f"{APP_ID}",
-                                                       partition="0"
-                                                       )
-            return bool(result["status_code"] in AllowedResponses)
-
+        if avail["body"]["resources"]:
+            stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True)
+            with stream:
+                result = falcon.refreshActiveStreamSession(appId=f"{APP_ID}",
+                                                        partition="0"
+                                                        )
+                return bool(result["status_code"] in AllowedResponses)
+        else:
+            pytest.skip("Rate limited")
 
     @staticmethod
     def stream_errors():
