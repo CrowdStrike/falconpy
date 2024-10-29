@@ -1,0 +1,99 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "crowdstrike-falconpy"
+dynamic = ["version"]
+description = "The CrowdStrike Falcon SDK for Python"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.7"
+authors = [
+    { name = "CrowdStrike", email = "falconpy@crowdstrike.com" },
+]
+maintainers = [
+    { name = "Joshua Hiller", email = "falconpy@crowdstrike.com" },
+]
+keywords = [
+    "api",
+    "crowdstrike",
+    "crowdstrike-falcon",
+    "devsecops",
+    "falcon",
+    "oauth2",
+    "sdk"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Framework :: Flake8",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: The Unlicense (Unlicense)",
+    "Natural Language :: English",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: OS Independent",
+    "Operating System :: POSIX",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Unix",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "requests",
+    "urllib3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "bandit",
+    "coverage",
+    "flake8",
+    "pydocstyle",
+    "pylint",
+    "pytest",
+    "pytest-cov"
+]
+
+[project.urls]
+Documentation = "https://www.falconpy.io"
+Homepage = "https://github.com/CrowdStrike/falconpy"
+Source = "https://github.com/CrowdStrike/falconpy/tree/main/src/falconpy"
+Tracker = "https://github.com/CrowdStrike/falconpy/issues"
+
+[tool.hatch.version]
+source = "code"
+path = "src/falconpy/_version.py"
+expression = "_VERSION"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    "/.github",
+    "/build",
+    "/cut",
+    "/docs",
+    "/htmlcov",
+    "/samples",
+    "/util",
+    "/.gitignore",
+    "/requirements.txt",
+    "/requirements-dev.txt"
+]
+
+[tool.hatch.build.targets.wheel]
+package = [
+    "src/falconpy"
+]
+include = ["src/falconpy"]
+sources = ["src"]
