@@ -40,12 +40,12 @@ class TestEventStreams:
         """refresh_active_stream"""
         avail = falcon.listAvailableStreamsOAuth2(parameters={"appId": f"{APP_ID}"})
         current_time = datetime.now(timezone.utc).strftime('%a, %d %b %Y %H:%M:%S +0000')
-        headers = {
-            'Authorization': 'Token %s' % (
-                avail["body"]["resources"][0]["sessionToken"]["token"]
-                ), 'Date': current_time, 'Connection': 'Keep-Alive'
-            }
         if avail["body"]["resources"]:
+            headers = {
+                'Authorization': 'Token %s' % (
+                    avail["body"]["resources"][0]["sessionToken"]["token"]
+                    ), 'Date': current_time, 'Connection': 'Keep-Alive'
+                }
             stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True)
             with stream:
                 result = falcon.refreshActiveStreamSession(app_id=f"{APP_ID}",
@@ -61,12 +61,13 @@ class TestEventStreams:
         """refresh_active_stream"""
         avail = falcon.listAvailableStreamsOAuth2(parameters={"appId": f"{APP_ID}"})
         current_time = datetime.now(timezone.utc).strftime('%a, %d %b %Y %H:%M:%S +0000')
-        headers = {
-            'Authorization': 'Token %s' % (
-                avail["body"]["resources"][0]["sessionToken"]["token"]
-                ), 'Date': current_time, 'Connection': 'Keep-Alive'
-            }
         if avail["body"]["resources"]:
+            headers = {
+                'Authorization': 'Token %s' % (
+                    avail["body"]["resources"][0]["sessionToken"]["token"]
+                    ), 'Date': current_time, 'Connection': 'Keep-Alive'
+                }
+
             stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True)
             with stream:
                 result = falcon.refreshActiveStreamSession(appId=f"{APP_ID}",
