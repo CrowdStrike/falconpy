@@ -5,6 +5,7 @@ The examples within this folder focus on leveraging CrowdStrike's Falcon IOC API
 
 - [Create Indicator of Compromise](#create-indicator-of-compromise)
 - [IOC Audit](#ioc-audit)
+- [IOC Restore](#ioc-restore)
 
 ## Create Indicator of Compromise
 Demonstrates the creation of a single IOC using either the Service or Uber Class. 
@@ -197,3 +198,147 @@ Required arguments:
 
 ### Example source code
 The source code for this example can be found [here](ioc_audit.py).
+
+---
+
+## IOC Restore
+This program will restore deleted IOCs based upon specified filter criteria.
+
+### Running the program
+In order to run this demonstration, you you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| IOC | __READ__, __WRITE__ |
+
+#### Required packages
+In order to run this sample, you will need to have the [`tabulate`](https://pypi.org/project/tabulate/) package installed.
+
+### Execution syntax
+This sample leverages simple command-line arguments to implement functionality.
+
+#### Basic usage
+Execute the default example. This will default to looking for IOCs that were applied globally and deleted as of today's date.
+
+> [!NOTE]
+> Times are in UTC.
+
+```shell
+python3 ioc_restore.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET
+```
+
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown below without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 ioc_restore.py
+```
+
+Change the CrowdStrike region with the `-b` argument.
+
+```shell
+python3 ioc_restore.py -b usgov1
+```
+
+Search for deleted IOCs modified by a specific user with the `-m` argument.
+
+```shell
+python3 ioc_restore.py -m username@domain.com
+```
+
+Search for deleted IOCs on a specific day using the `-dt` argument.
+
+> [!TIP]
+> This argument should be in YYYY-mm-dd format.
+
+```shell
+python3 ioc_restore.py -dt 2024-10-27
+```
+
+Search for deleted IOCs targeting a specific Host Group (by ID) using the `-hg` argument.
+
+```shell
+python3 ioc_restore.py -hg $HOST_GROUP_ID
+```
+
+Search for deleted IOCs targeting a specific Host Group (by Host Group name) using the `-g` argument.
+
+```shell
+python3 ioc_restore.py -g $HOST_GROUP_NAME
+```
+
+List all deleted IOCs discovered but take no action with the `-l` argument.
+
+```shell
+python3 ioc_restore.py -l
+```
+
+> [!TIP]
+> Multiple command line parameters may be provided to refine search results.
+
+API debugging can be enabled using the `-d` argument.
+
+```shell
+python3 ioc_restore.py -d
+```
+
+Adjust the output table format using the `-t` argument.
+
+```shell
+python3 ioc_restore.py -l -t fancy_grid
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: ioc_restore.py [-h] [-d] [-c CLIENT_ID] [-k CLIENT_SECRET] [-b BASE_URL] [-dt DATE]
+                      [-m MODIFIED_BY] [-hg HOSTGROUP] [-g GROUPNAME] [-l] [-t TABLE_FORMAT]
+
+Restore deleted IOCs.
+
+ _______                        __ _______ __        __ __
+|   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
+|.  1___|   _|  _  |  |  |  |  _  |   1___|   _|   _|  |    <|  -__|
+|.  |___|__| |_____|________|_____|____   |____|__| |__|__|__|_____|
+|:  1   |                         |:  1   |
+|::.. . |   CROWDSTRIKE FALCON    |::.. . |    FalconPy
+`-------'                         `-------'
+
+╦╔═╗╔═╗  ╦═╗┌─┐┌─┐┌┬┐┌─┐┬─┐┌─┐
+║║ ║║    ╠╦╝├┤ └─┐ │ │ │├┬┘├┤
+╩╚═╝╚═╝  ╩╚═└─┘└─┘ ┴ └─┘┴└─└─┘
+
+This sample demonstrates restoring previously deleted IOCs.
+
+~~~ API Scope Requirements ~~~
+IOC Management - Read / Write
+IOCs (Indicators of Compromise) - Read / Write
+
+Creation date: 11.06.2024 - am-cs-se@CrowdStrike
+Modification: 11.07.2024 - jshcodes@CrowdStrike
+
+options:
+  -h, --help            show this help message and exit
+  -d, --debug           Enable API debugging
+  -c, --client_id CLIENT_ID
+                        CrowdStrike API client ID
+  -k, --client_secret CLIENT_SECRET
+                        CrowdStrike API client secret
+  -b, --base_url BASE_URL
+                        CrowdStrike Region (US1, US2, EU1, USGOV1, USGOV2) Full URL is also supported.
+  -dt, --date DATE      Date to target (YYYY-MM-DD)
+  -m, --modified_by MODIFIED_BY
+                        User who modified the deleted IOCs
+  -hg, --hostgroup HOSTGROUP
+                        ID of the Host Group associated with the IOC Not required when --groupname is
+                        specified.
+  -g, --groupname GROUPNAME
+                        Name of the Host Group associated with the IOC Not required when --hostgroup is
+                        specified.
+  -l, --list            List deleted IOCs but take no action
+  -t, --table-format TABLE_FORMAT
+                        Tabular display format
+```
+
+### Example source code
+The source code for this example can be found [here](ioc_restore.py).

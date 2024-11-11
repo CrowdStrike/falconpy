@@ -64,7 +64,7 @@ The following samples are categorized by CrowdStrike product, and further catego
 | [Custom IOA](#custom-ioa-samples) | Custom IOA Cloner |
 | [IOA Exclusions](#ioa-exclusions-samples) | IOA Exclusion Audit |
 | [Detects](#detects-samples) | Detects Advisor |
-| [IOC](#ioc-samples) | Create indicators<BR/>IOC Audit |
+| [IOC](#ioc-samples) | Create indicators<BR/>IOC Audit<BR/>IOC Restore |
 | [ML Exclusions](#ml-exclusions-samples) | ML Exclusion Audit |
 | [Prevention Policies](#prevention-policies-samples) | Clone Prevention Policy<BR/>Create Host Group and attach Prevention Policies<BR/>Prevention Policy Hawk |
 | [Incidents](#incidents-samples) | CrowdScore QuickChart<BR/>Incident Triage |
@@ -1014,6 +1014,7 @@ The samples in this section focus on the CrowdStrike IOC API service collection.
 
 - [Create Indicators](#create-indicators)
 - [IOC Audit](#ioc-audit)
+- [IOC Restore](#ioc-restore)
 
 #### Create indicators
 Use this example to [create an Indicator of Compromise](ioc/create_ioc.py) (IOC). This example demonstrates the same operation using both the Service Class and the Uber Class. The Uber Class solution does not make use of [Body Payload Abstraction](https://falconpy.io/Usage/Payload-Handling.html#body-payload-abstraction).
@@ -1058,6 +1059,31 @@ This sample demonstrates the following CrowdStrike Sensor Download API operation
 | Operation | Description |
 | :--- | :--- |
 | [GetSensorInstallersCCIDByQuery](https://falconpy.io/Service-Collections/Sensor-Download.html#getsensorinstallersccidbyquery) | Get CCID to use with sensor installers. |
+
+---
+
+#### IOC Restore
+The [IOC Restore](ioc#ioc-restore) sample demonstrates how to restore deleted IOCs within your tenant.
+
+[![IOC](https://img.shields.io/badge/Service%20Class-IOC_Restore-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](ioc#ioc-restore)
+
+##### IOC API operations discussed
+This sample demonstrates the following CrowdStrike IOC API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [indicator_combined_v1](https://falconpy.io/Service-Collections/IOC.html#indicator_combined_v1) | Get combined details for Indicators. |
+| [indicator_create_v1](https://falconpy.io/Service-Collections/IOC.html#indicator_create_v1) | Create Indicators. |
+| [indicator_get_v1](https://falconpy.io/Service-Collections/IOC.html#indicator_get_v1) | Get Indicators by IDs. |
+| [indicator_search_v1](https://falconpy.io/Service-Collections/IOC.html#indicator_search_v1) | Search for Indicators. |
+| [indicator_update_v1](https://falconpy.io/Service-Collections/IOC.html#indicator_update_v1) | Update Indicators. |
+
+##### Host Group API operations discussed
+This sample demonstrates the following CrowdStrike Host Group API operations:
+| Operation | Description |
+| :--- | :--- |
+| [getHostGroups](https://www.falconpy.io/Service-Collections/Host-Group.html#gethostgroups) | Retrieve a set of Host Groups by specifying their IDs. |
+| [queryHostGroups](https://www.falconpy.io/Service-Collections/Host-Group.html#queryhostgroups) | Search for Host Groups in your environment by providing a FQL filter and paging details. Returns a set of Host Group IDs which match the filter criteria. |
 
 </details>
 
