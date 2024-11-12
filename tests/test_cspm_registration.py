@@ -14,7 +14,7 @@ from falconpy import CSPMRegistration  # noqa: E402
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = CSPMRegistration(auth_object=config)
-AllowedResponses = [200, 201, 207, 401, 403, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 201, 207, 400, 401, 403, 429]  # Allowing 400 for no configured accounts
 textchars = bytearray({7, 8, 9, 10, 12, 13, 27} | set(range(0x20, 0x100)) - {0x7f})
 is_binary_string = lambda bytes: bool(bytes.translate(None, textchars))  # noqa: E731
 
