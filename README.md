@@ -31,7 +31,7 @@ The CrowdStrike Falcon SDK for Python completely abstracts token management, whi
 [![Development Installs](https://static.pepy.tech/personalized-badge/crowdstrike-falconpy-dev?left_text=development%20package%20installs/month&left_color=grey&right_color=blue&period=month)](https://pepy.tech/project/crowdstrike-falconpy-dev)
 
 #### Supported versions of Python
-The CrowdStrike Falcon SDK for Python was developed for Python 3. Current versions of FalconPy provide support for Python versions `3.7` - `3.12`. Every commit to the FalconPy code base is unit tested for functionality using all versions of Python the library currently supports.
+The CrowdStrike Falcon SDK for Python was developed for Python 3. Current versions of FalconPy provide support for Python versions `3.7` - `3.13`. Every commit to the FalconPy code base is unit tested for functionality using all versions of Python the library currently supports.
 
 > [!NOTE]
 > Developers working with Python version `3.6` will need to leverage versions of FalconPy less than `1.4.0`.
@@ -135,12 +135,16 @@ from falconpy import Hosts
 # CrowdStrike does not recommend you hardcode credentials within source code.
 # Instead, provide these values as variables that are retrieved from the environment,
 # read from an encrypted file or secrets store, provided at runtime, etc.
-# This example retrieves credentials from the environment as the variables
-# "FALCON_CLIENT_ID" and "FALCON_CLIENT_SECRET".
 
 hosts = Hosts(client_id=os.getenv("FALCON_CLIENT_ID"),
               client_secret=os.getenv("FALCON_CLIENT_SECRET")
               )
+
+# While this example retrieves credentials from the environment as the variables
+# "FALCON_CLIENT_ID" and "FALCON_CLIENT_SECRET". Developers leveraging environment
+# authentication do not need to specify the client_id or client_secret keywords.
+#
+# hosts = Hosts()
 
 SEARCH_FILTER = "hostname-search-string"
 
