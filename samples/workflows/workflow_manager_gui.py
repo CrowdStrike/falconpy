@@ -793,6 +793,6 @@ LOGIN_FAIL = r"""
 
 if __name__ == "__main__":
     gui_image("program_icon.png", "program_icon.png")
-    gui_image("csfalcon.png", "running_icon.png")
-    gui_image("cs-logo.png", "config_icon.png")
+    gui_image("running_icon.png", "running_icon.png")
+    gui_image("config_icon.png", "config_icon.png")
     main()
