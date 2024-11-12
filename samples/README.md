@@ -95,6 +95,13 @@ The following samples are categorized by CrowdStrike product, and further catego
 | [Asset Management (Discover)](#asset-management-samples) | List discovered hosts<BR/>Spyglass |
 | [Vulnerability Management (Spotlight)](#vulnerability-management-samples) | Find vulnerable hosts by CVE ID<BR/>CISA DHS Known Exploited Vulnerabilities<BR/>Spotlight Quick Report |
 
+<a id="fusion-and-foundry-toc"></a>
+
+### [Fusion and Foundry](#fusion-and-foundry-apis)
+| Topic | Samples |
+| :-- | :-- |
+| [Workflows](#workflows-samples) | Workflow Manager (terminal)<BR/>Workflows Manager (GUI) |
+
 <a id="threat-intelligence-toc"></a>
 
 ### [Threat Intelligence](#threat-intelligence-apis)
@@ -1752,6 +1759,87 @@ This sample demonstrates the following CrowdStrike Spotlight Vulnerability API a
 </details>
 
 [Back to top](#falconpy-sample-library) | [How to authenticate](#authentication-for-these-examples) | [Table of Contents](#exposure-management-toc)
+
+---
+
+</details>
+
+<!--Exposure Management-->
+
+<a id="fusion-and-foundry-apis"></a>
+<details open>
+<summary><h2>Fusion and Foundry</h2></summary>
+
+<a id="workflows-samples"></a>
+<details>
+<summary><h3>Workflows</h3> <small>(click to expand)</small><br/>
+The samples in this section focus on the CrowdStrike Falcon Workflows API service collection.
+</summary>
+
+- [Workflow Manager (terminal version)](#workflow-manager-terminal-version)
+- [Workflow Manager (gui version)](#workflow-manager-gui-version)
+
+#### Workflow Manager (terminal version)
+
+This sample demonstrates how to leverage the Workflows API to provide the following functionality:
+
+- List all workflows
+- Execute a workflow
+- List all executions for a workflow
+- Print the results of a workflow execution
+- Import a workflow
+- Export a workflow
+
+[![Falcon Fusion Workflows](https://img.shields.io/badge/Service%20Class-Falcon_Fusion_SOAR_Workflows_Manager_[terminal_version]-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](workflows#workflow-manager-terminal-version)
+
+##### Workflows API operations discussed
+This sample demonstrates the following CrowdStrike Workflows API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [WorkflowDefinitionsCombined](https://falconpy.io/Service-Collections/Workflows.html#workflowdefinitionscombined) | Search workflow definitions based on the provided filter. |
+| [WorkflowDefinitionsExport](https://falconpy.io/Service-Collections/Workflows.html#workflowdefinitionsexport) | Export a workflow definition for the given definition ID. |
+| [WorkflowDefinitionsImport](https://falconpy.io/Service-Collections/Workflows.html#workflowdefinitionsimport) | Import a workflow definition from a file. |
+| [WorkflowExecute](https://falconpy.io/Service-Collections/Workflows.html#workflowexecute) | Execute an on-demand workflow. The response will contain the execution ID. |
+| [WorkflowExecutionsCombined](https://falconpy.io/Service-Collections/Workflows.html#workflowexecutionscombined) | Search workflow executions based on the provided filter. |
+| [WorkflowExecutionsResults](https://falconpy.io/Service-Collections/Workflows.html#workflowexecutionsresults) | Get execution result of a given execution. |
+
+---
+
+#### Workflow Manager (GUI version)
+
+Like the sample above, this sample demonstrates how to leverage the Workflows API to provide the following functionality:
+
+- List all workflows
+- Execute a workflow
+- List all executions for a workflow
+- Print the results of a workflow execution
+- Import a workflow
+- Export a workflow
+
+Additional functionality provided by this sample include:
+
+- Full GUI interface
+- Activity logging (to a local file)
+- Exporting list results to CSV
+
+[![Falcon Fusion Workflows](https://img.shields.io/badge/Service%20Class-Falcon_Fusion_SOAR_Workflows_Manager_[GUI_version]-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](workflows#workflow-manager-gui-version)
+
+##### Workflows API operations discussed
+This sample demonstrates the following CrowdStrike Workflows API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [WorkflowDefinitionsCombined](https://falconpy.io/Service-Collections/Workflows.html#workflowdefinitionscombined) | Search workflow definitions based on the provided filter. |
+| [WorkflowDefinitionsExport](https://falconpy.io/Service-Collections/Workflows.html#workflowdefinitionsexport) | Export a workflow definition for the given definition ID. |
+| [WorkflowDefinitionsImport](https://falconpy.io/Service-Collections/Workflows.html#workflowdefinitionsimport) | Import a workflow definition from a file. |
+| [WorkflowExecute](https://falconpy.io/Service-Collections/Workflows.html#workflowexecute) | Execute an on-demand workflow. The response will contain the execution ID. |
+| [WorkflowExecutionsCombined](https://falconpy.io/Service-Collections/Workflows.html#workflowexecutionscombined) | Search workflow executions based on the provided filter. |
+| [WorkflowExecutionsResults](https://falconpy.io/Service-Collections/Workflows.html#workflowexecutionsresults) | Get execution result of a given execution. |
+
+</details>
+
+[Back to top](#falconpy-sample-library) | [How to authenticate](#authentication-for-these-examples) | [Table of Contents](#fusion-and-foundry-toc)
 
 ---
 
