@@ -101,6 +101,7 @@ This has been a critical element in the development of the FalconPy project.
 + Alexander Moomaw, `@alhumaw`
 + Esha Kumar, `@exk200006`
 + Griffin Ansel, `@gansel51`
++ `@am-cs-se`
 
 
 ## Sponsors
