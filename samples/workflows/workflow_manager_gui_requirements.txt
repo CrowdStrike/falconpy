@@ -1,0 +1,4 @@
+crowdstrike-falconpy
+gooey
+requests
+tabulate
