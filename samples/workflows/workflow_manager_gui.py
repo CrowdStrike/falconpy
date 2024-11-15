@@ -46,6 +46,7 @@ Modification date: 11.10.2024 - Add graphical interface, jshcodes@CrowdStrike
 
 This sample requires the following packages:
 - crowdstrike-falconpy >= 1.4.1
+- darkdetect
 - gooey
 - requests
 - tabulate
@@ -59,6 +60,7 @@ from json import dumps, dump, loads
 from os import getenv
 from typing import List, Union
 import requests
+import darkdetect
 from tabulate import tabulate
 from gooey import Gooey, GooeyParser
 from falconpy import Workflows, Result, APIError
@@ -92,6 +94,7 @@ MENU = [
         "url": "https://github.com/crowdstrike/falconpy/tree/main/samples#falconpy-sample-library"
     }
 ]
+DARK_MODE = darkdetect.isDark()
 
 
 def get_font_size() -> int:
@@ -239,9 +242,22 @@ def check_for_json_format() -> int:
     return returned
 
 
-def return_true() -> bool:
-    """Return true."""
-    return True
+def mode_label() -> str:
+    """Return the appropriate label HEX code for our current color mode."""
+    returned = "#000000"
+    if DARK_MODE:
+        returned = "#aaaaaa"
+
+    return returned
+
+
+def mode_background() -> str:
+    """Return the appropriate background HEX code for our current color mode."""
+    returned = "#ffffff"
+    if DARK_MODE:
+        returned = "#141414"
+
+    return returned
 
 
 @Gooey(advanced=True,
@@ -257,7 +273,13 @@ def return_true() -> bool:
        use_cmd_args=True,
        tabbed_groups=True,
        image_dir=get_image_dir(),
-       menu=[{"name": "Help", "items": MENU}]
+       menu=[{"name": "Help", "items": MENU}],
+       header_bg_color=mode_background(),
+       body_bg_color=mode_background(),
+       footer_bg_color=mode_background(),
+       terminal_font_color=mode_label(),
+       sidebar_bg_color=mode_background(),
+       terminal_panel_color=mode_background()
        )
 def consume_arguments() -> Namespace:  # pylint: disable=R0915
     """Consume the provided command line."""
@@ -265,63 +287,89 @@ def consume_arguments() -> Namespace:  # pylint: disable=R0915
                          formatter_class=RawTextHelpFormatter,
                          exit_on_error=False
                          )
-    cmds = parser.add_argument_group("Command", description="Workflow command to perform")
+    cmds = parser.add_argument_group("Command",
+                                     description="Workflow command to perform",
+                                     gooey_options={"label_color": mode_label(),
+                                                    "help_color": mode_label()
+                                                    }
+                                     )
     excl = cmds.add_mutually_exclusive_group("Action",
-                                             gooey_options={"initial_selection": check_action()}
+                                             gooey_options={"initial_selection": check_action(),
+                                                            "label_color": mode_label(),
+                                                            "help_color": mode_label()
+                                                            }
                                              )
     excl.add_argument("-l", "--list_workflows",
                       help="List all workflows",
                       required=False,
-                      action="store_true"
+                      action="store_true",
+                      gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                       )
     excl.add_argument("-e", "--execute",
                       help="Execute the workflow specified on the Workflow tab",
                       required=False,
-                      action="store_true"
+                      action="store_true",
+                      gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                       )
     excl.add_argument("-le", "--list_executions",
                       help="List the executions for the workflow specified",
                       required=False,
-                      action="store_true"
+                      action="store_true",
+                      gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                       )
     excl.add_argument("-g", "--get_result",
                       help="Retrieve a workflow execution result",
                       required=False,
-                      action="store_true"
+                      action="store_true",
+                      gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                       )
     excl.add_argument("-ex", "--workflow_export",
                       help="Export a workflow",
                       required=False,
-                      action="store_true"
+                      action="store_true",
+                      gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                       )
     excl.add_argument("-im", "--workflow_import",
                       help="Import a workflow",
                       required=False,
-                      action="store_true"
+                      action="store_true",
+                      gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                       )
     wflow = parser.add_argument_group("Workflow",
                                       description="Workflow or execution ID and workflow payload",
-                                      gooey_options={"columns": 1}
+                                      gooey_options={"columns": 1,
+                                                     "label_color": mode_label(),
+                                                     "help_color": mode_label()
+                                                     }
                                       )
     wflow.add_argument("-i", "--id",
                        help="Workflow definition ID",
                        required=False,
-                       choices=attempt_to_prefill_workflow_ids()
+                       choices=attempt_to_prefill_workflow_ids(),
+                       gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                        )
     wflow.add_argument("-ei", "--execution_id",
                        help="Workflow execution ID",
-                       required=False
+                       required=False,
+                       gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                        )
     wflow.add_argument("-p", "--payload",
                        help="Workflow execution payload",
                        required=False,
                        default='{\n    "key": "value"\n}',
-                       widget="Textarea"
+                       widget="Textarea",
+                       gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                        )
-    imp = parser.add_argument_group("Import", description="Import a workflow from a file")
+    imp = parser.add_argument_group("Import",
+                                    description="Import a workflow from a file",
+                                    gooey_options={"label_color": mode_label(),
+                                                   "help_color": mode_label()
+                                                   }
+                                    )
     imp.add_argument("-n", "--workflow_name",
                      help="Name for the imported workflow",
-                     required=False
+                     required=False,
+                     gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                      )
     imp.add_argument("-v", "--validate_only",
                      dest="validate",
@@ -330,7 +378,10 @@ def consume_arguments() -> Namespace:  # pylint: disable=R0915
                      default=False,
                      widget="BlockCheckbox",
                      action="store_true",
-                     gooey_options={"checkbox_label": " Validate only"}
+                     gooey_options={"checkbox_label": " Validate only",
+                                    "label_color": mode_label(),
+                                    "help_color": mode_label()
+                                    }
                      )
     imp.add_argument("-iw", "--import_workflow",
                      help="Location of the YAML workflow file to import",
@@ -338,40 +389,53 @@ def consume_arguments() -> Namespace:  # pylint: disable=R0915
                      widget="FileChooser",
                      gooey_options={"default_dir": os.path.dirname(os.path.abspath(__file__)),
                                     "wildcard": "YAML files (*.yml)|*.yml",
-                                    "message": "Select YAML file"
+                                    "message": "Select YAML file",
+                                    "label_color": mode_label(), "help_color": mode_label()
                                     }
                      )
-    exp = parser.add_argument_group("Export", description="Export a workflow to a file")
+    exp = parser.add_argument_group("Export",
+                                    description="Export a workflow to a file",
+                                    gooey_options={"label_color": mode_label(),
+                                                   "help_color": mode_label()
+                                                   }
+                                    )
     exp.add_argument("-ew", "--export_workflow",
                      help="Location to save the exported workflow (YAML format)\n"
                           "Use the Workflow tab to specify the desired workflow ID",
                      required=False,
                      widget="FileSaver",
                      gooey_options={"default_dir": os.path.dirname(os.path.abspath(__file__)),
-                                    "default_file": "exported.yml", "message": "Specify YAML file"
+                                    "default_file": "exported.yml", "message": "Specify YAML file",
+                                    "label_color": mode_label(), "help_color": mode_label()
                                     }
                      )
     auth = parser.add_argument_group("Environment",
                                      description="Authentication and program execution options",
-                                     gooey_options={"columns": 3}
+                                     gooey_options={"columns": 3,
+                                                    "label_color": mode_label(),
+                                                    "help_color": mode_label()
+                                                    }
                                      )
     auth.add_argument("-k", "--client_id",
                       help=prefill_check(),
                       required=False,
                       default=getenv("FALCON_CLIENT_ID"),
-                      widget="PasswordField"
+                      widget="PasswordField",
+                      gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                       )
     auth.add_argument("-s", "--client_secret",
                       help=prefill_check("secret"),
                       required=False,
                       default=getenv("FALCON_CLIENT_SECRET"),
-                      widget="PasswordField"
+                      widget="PasswordField",
+                      gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                       )
     auth.add_argument("-b", "--base_url",
                       help="CrowdStrike Region\n('auto' not implemented for usgov1 or usgov2)",
                       required=False,
                       default="auto",
-                      choices=["auto", "us1", "us2", "eu1", "usgov1", "usgov2"]
+                      choices=["auto", "us1", "us2", "eu1", "usgov1", "usgov2"],
+                      gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                       )
     auth.add_argument("-lf", "--logfile",
                       help="Log output results to a local file as well as the console",
@@ -380,18 +444,21 @@ def consume_arguments() -> Namespace:  # pylint: disable=R0915
                       gooey_options={"default_dir": os.path.dirname(os.path.abspath(__file__)),
                                      "default_file": "workflow-manager.log",
                                      "message": "Specify log file",
+                                     "label_color": mode_label(), "help_color": mode_label()
                                      }
                       )
     auth.add_argument("-d", "--debug",
                       help=" Activate API debugging",
                       action="store_true",
-                      required=False
+                      required=False,
+                      gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                       )
 
     auth.add_argument("-o", "--compress_output",
                       help=" Compress display output",
                       action="store_true",
-                      default=False
+                      default=False,
+                      gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                       )
     auth.add_argument("-sk", "--skip_preflight",
                       help=" Skip preflight API lookups",
@@ -403,13 +470,16 @@ def consume_arguments() -> Namespace:  # pylint: disable=R0915
                                              gooey_options={
                                                  "initial_selection": check_for_json_format(),
                                                  "show_border": False,
-                                                 "show_underline": True
+                                                 "show_underline": True,
+                                                 "label_color": mode_label(),
+                                                 "help_color": mode_label()
                                                  }
                                              )
     frmt.add_argument("-j", "--json",
                       help="Display execution results in JSON format",
                       required=False,
-                      action="store_true"
+                      action="store_true",
+                      gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                       )
     frmt.add_argument("-t", "--table_format",
                       help="Tabular display format\n"
@@ -424,7 +494,8 @@ def consume_arguments() -> Namespace:  # pylint: disable=R0915
                                "orgtbl", "asciidoc", "jira", "presto", "pretty", "psql", "rst",
                                "mediawiki", "moinmoin", "youtrack", "html", "unsafehtml", "latex",
                                "latex_raw", "latex_booktabs", "latex_longtable", "textile", "tsv"
-                               ]
+                               ],
+                      gooey_options={"label_color": mode_label(), "help_color": mode_label()}
                       )
 
     arglist = sys.argv
