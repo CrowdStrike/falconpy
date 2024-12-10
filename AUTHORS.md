@@ -1,4 +1,5 @@
-![CrowdStrike FalconPy](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png)
+![CrowdStrike FalconPy](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png#gh-light-mode-only)
+![CrowdStrike FalconPy](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-red.png#gh-dark-mode-only)
 
 [![CrowdStrike Subreddit](https://img.shields.io/badge/-r%2Fcrowdstrike-white?logo=reddit&labelColor=gray&link=https%3A%2F%2Freddit.com%2Fr%2Fcrowdstrike)](https://reddit.com/r/crowdstrike)
 
@@ -102,6 +103,8 @@ This has been a critical element in the development of the FalconPy project.
 + Esha Kumar, `@exk200006`
 + Griffin Ansel, `@gansel51`
 + `@am-cs-se`
++ Jesko, `@jhhcs`
++ Evan Stoner, `@evanstoner`
 
 
 ## Sponsors
