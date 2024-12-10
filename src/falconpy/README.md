@@ -1,6 +1,8 @@
-![CrowdStrike Falcon](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png)
-# FalconPy - The CrowdStrike Falcon SDK for Python 3
-This folder contains the FalconPy project, a Python 3 interface handler for the CrowdStrike Falcon OAuth2 API.
+![CrowdStrike FalconPy](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo.png#gh-light-mode-only)
+![CrowdStrike FalconPy](https://raw.githubusercontent.com/CrowdStrike/falconpy/main/docs/asset/cs-logo-red.png#gh-dark-mode-only)
+
+# FalconPy - The CrowdStrike Falcon SDK for Python
+This folder contains the FalconPy project, a Python interface handler for the CrowdStrike Falcon OAuth2 API.
 
 ## Service Classes
 ### Currently implemented
