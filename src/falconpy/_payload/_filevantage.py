@@ -110,18 +110,31 @@ def filevantage_scheduled_exclusion_payload(passed_keywords: dict) -> dict:
 
     {
         "description": "string",
-        "id": "string",
         "name": "string",
         "policy_id": "string",
         "processes": "string",
+        "repeated": {
+            "all_day": boolean,
+            "end_time": "string",
+            "frequency": "string",
+            "monthly_days": [
+                integer
+            ],
+            "occurrence": "string",
+            "start_time": "string",
+            "weekly_days": [
+                "string"
+            ]
+        },
         "schedule_end": "string",
         "schedule_start": "string",
+        "timezone": "string",
         "users": "string"
     }
     """
     returned = {}
     keys = ["description", "id", "name", "policy_id", "processes",
-            "schedule_end", "schedule_start", "users"
+            "schedule_end", "schedule_start", "users", "timezone", "repeated"
             ]
     for key in keys:
         if passed_keywords.get(key, None):
