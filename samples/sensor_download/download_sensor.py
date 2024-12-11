@@ -17,7 +17,7 @@ from argparse import ArgumentParser, RawTextHelpFormatter
 import logging
 from tabulate import tabulate
 try:
-    from falconpy import APIHarness
+    from falconpy import APIHarnessV2
 except ImportError as no_falconpy:
     raise SystemExit(
         "The CrowdStrike SDK must be installed in order to use this utility.\n"
@@ -176,7 +176,14 @@ def create_constants():
     os_filter = ""
     if os_name:
         os_filter = f"os:'{str(os_name)}'"
-
+    else:
+        if args.os:
+            allowed = ["rhel", "centos", "oracle", "rhel/centos/oracle", "mac", "macos", "apple",
+                       "amzn", "az", "amazon", "amazon linux", "ubuntu", "kali", "deb", "debian",
+                       "sles", "suse", "win", "windows", "microsoft", "container", "docker",
+                       "kubernetes", "idp", "identity", "identity protection"
+                       ]
+            raise SystemExit(f"Invalid operating system specified.\nAllowed values: {', '.join(allowed)}")
     return cmd, args.key, args.secret, os_filter, args.filename, args.table_format, args.all, \
         args.osver, args.nminus, args.debug, args.base_url
 
@@ -189,11 +196,11 @@ if ENABLE_DEBUG:
     logging.basicConfig(level=logging.DEBUG)
 
 # Login to the Falcon API and retrieve our list of sensors
-falcon = APIHarness(client_id=CLIENTID,
-                    client_secret=CLIENTSECRET,
-                    debug=ENABLE_DEBUG,
-                    base_url=BASE_URL
-                    )
+falcon = APIHarnessV2(client_id=CLIENTID,
+                      client_secret=CLIENTSECRET,
+                      debug=ENABLE_DEBUG,
+                      base_url=BASE_URL
+                      )
 sensors = falcon.command(action="GetCombinedSensorInstallersByQuery",
                          filter=OS_FILTER,
                          sort="version.desc"                         
