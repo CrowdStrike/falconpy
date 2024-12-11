@@ -84,14 +84,16 @@ def certificate_based_exclusions_payload(passed_keywords: dict) -> Dict[str, Lis
         "issuer", "serial", "subject", "thumbprint", "valid_from", "valid_to"
     ]
     list_keys = ["children_cids", "host_groups"]
+    certkey = {}
+    for key in certificate_keys:
+        # Certificate keywords overridden if certificate keyword is passed
+        if passed_keywords.get(key, None):
+            certkey[key] = passed_keywords.get(key, None)
+    if certkey:
+        item["certificate"] = certkey
     for key in keys:
         if passed_keywords.get(key, None):
-            if key == "certificate":
-                item["certificate"] = {}
-                for cert_key in certificate_keys:
-                    item["certificate"][cert_key] = passed_keywords.get(cert_key, None)
-            else:
-                item[key] = passed_keywords.get(key, None)
+            item[key] = passed_keywords.get(key, None)
     for key in list_keys:
         if passed_keywords.get(key, None):
             provided = passed_keywords.get(key, None)
