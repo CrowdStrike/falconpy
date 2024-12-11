@@ -461,13 +461,27 @@ class FileVantage(ServiceClass):
         Keyword arguments:
         body - full body payload in JSON format, not required if using other keywords.
                {
-                   "description": "string",
-                   "name": "string",
-                   "policy_id": "string",
-                   "processes": "string",
-                   "schedule_end": "string",
-                   "schedule_start": "string",
-                   "users": "string"
+                    "description": "string",
+                    "name": "string",
+                    "policy_id": "string",
+                    "processes": "string",
+                    "repeated": {
+                        "all_day": boolean,
+                        "end_time": "string",
+                        "frequency": "string",
+                        "monthly_days": [
+                            integer
+                        ],
+                        "occurrence": "string",
+                        "start_time": "string",
+                        "weekly_days": [
+                            "string"
+                        ]
+                    },
+                    "schedule_end": "string",
+                    "schedule_start": "string",
+                    "timezone": "string",
+                    "users": "string"
                }
         description -- The scheduled exclusion description. (String, 0-500 characters.)
         name -- Name of the scheduled exclusion. (String, 1-100 characters.)
@@ -475,11 +489,16 @@ class FileVantage(ServiceClass):
         users -- Comma delimited list of users to NOT monitor changes. (String, 1-500 characters)
                  `admin*` excludes changes made by all usernames that begin with admin.
                  Falcon GLOB syntax is supported.
-        processes - Comma delimited list of processes to NOT monitor changes. (String, 1-500 characters)
+        processes -- Comma delimited list of processes to NOT monitor changes. (String, 1-500 characters)
                     `**\RunMe.exe` or `**/RunMe.sh` excludes changes made by RunMe.exe
                     or RunMe.sh in any location.
-        schedule_start - Indicates the start of the schedule. (String, RFC3339 format, Required)
-        schedule_end - Indicates the end of the schedule. (String, RFC3339 format)
+        repeated -- Optionally provide to indicate the exclusion is applied repeatedly within the
+                    scheduled_start and scheduled_end time. (Dictionary)
+        schedule_start -- Indicates the start of the schedule. (String, RFC3339 format, Required)
+        schedule_end -- Indicates the end of the schedule. (String, RFC3339 format)
+        timezone -- Must be provided to indicate the TimeZone name set for the provided scheduled_start and
+                    scheduled_end values. (String)
+                    See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for values.
 
         This method only supports keywords for providing arguments.
 
