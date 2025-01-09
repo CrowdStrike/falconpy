@@ -156,7 +156,7 @@ def create_constants():
     os_name = ""
     if args.os:
         check_os = args.os.lower()
-        if check_os in ["rhel", "centos", "oracle", "rhel/centos/oracle"]:
+        if check_os == "rhel/centos/oracle":
             os_name = "RHEL/CentOS/Oracle"
         if check_os in ["amzn", "az", "amazon", "amazon linux"]:
             os_name = "Amazon Linux"
@@ -172,6 +172,14 @@ def create_constants():
             os_name = "Container"
         if check_os in ["idp", "identity", "identity protection"]:
             os_name = "Identity*"
+        if check_os in ["rhel/centos stream/oracle", "stream", "centos stream"]:
+            os_name = "RHEL/CentOS Stream/Oracle"
+        if check_os in ["rhel/centos", "centos"]:
+            os_name = "RHEL/CentOS"
+        if check_os == "rhel":
+            os_name = "RHEL"
+        if check_os == "oracle":
+            os_name = "Oracle"
 
     os_filter = ""
     if os_name:
@@ -181,7 +189,8 @@ def create_constants():
             allowed = ["rhel", "centos", "oracle", "rhel/centos/oracle", "mac", "macos", "apple",
                        "amzn", "az", "amazon", "amazon linux", "ubuntu", "kali", "deb", "debian",
                        "sles", "suse", "win", "windows", "microsoft", "container", "docker",
-                       "kubernetes", "idp", "identity", "identity protection"
+                       "kubernetes", "idp", "identity", "identity protection", "stream",
+                       "rhel/centos stream/oracle", "rhel/centos"
                        ]
             raise SystemExit(f"Invalid operating system specified.\nAllowed values: {', '.join(allowed)}")
     return cmd, args.key, args.secret, os_filter, args.filename, args.table_format, args.all, \
