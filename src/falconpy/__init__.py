@@ -131,6 +131,7 @@ from .image_assessment_policies import ImageAssessmentPolicies
 from .incidents import Incidents
 from .installation_tokens import InstallationTokens
 from .intel import Intel
+from .intelligence_feeds import IntelligenceFeeds
 from .ioa_exclusions import IOAExclusions
 from .ioc import IOC
 from .iocs import Iocs
@@ -209,7 +210,7 @@ __all__ = [
     "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers",
     "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement",
     "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration", "QuickScanPro",
-    "DataScanner", "SensorUsage", "Downloads", "DeliverySettings", "ASPM"
+    "DataScanner", "SensorUsage", "Downloads", "DeliverySettings", "ASPM", "IntelligenceFeeds"
     ]
 """
 This is free and unencumbered software released into the public domain.
