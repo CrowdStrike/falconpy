@@ -1,4 +1,14 @@
 # Version 1.4.7
+## Added features and functionality
++ Added: Added new _IntelligenceFeeds_ service collection with 3 operations.
+    - _DownloadFeedArchive_
+    - _ListFeedTypes_
+    - _QueryFeedArchives_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_intelligence_feeds.py`
+    - `intelligence_feeds.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_intelligence_feeds.py`
 
 ## Issues resolved
 + Resolved: `timezone` argument is not available for the _createScheduledExclusions_ operation within the __FileVantage__ Service Class. Closes #1231.

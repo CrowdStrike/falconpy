@@ -81,6 +81,7 @@ from ._host_migration import _host_migration_endpoints
 from ._identity_protection import _identity_protection_endpoints
 from ._image_assessment_policies import _image_assessment_policies_endpoints
 from ._incidents import _incidents_endpoints
+from ._intelligence_feeds import _intelligence_feeds_endpoints
 from ._installation_tokens import _installation_tokens_endpoints
 from ._intel import _intel_endpoints
 from ._ioa_exclusions import _ioa_exclusions_endpoints
@@ -162,6 +163,7 @@ api_endpoints.extend(_identity_protection_endpoints)
 api_endpoints.extend(_image_assessment_policies_endpoints)
 api_endpoints.extend(_incidents_endpoints)
 api_endpoints.extend(_installation_tokens_endpoints)
+api_endpoints.extend(_intelligence_feeds_endpoints)
 api_endpoints.extend(_intel_endpoints)
 api_endpoints.extend(_ioa_exclusions_endpoints)
 api_endpoints.extend(_ioc_endpoints)
