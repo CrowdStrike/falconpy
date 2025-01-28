@@ -1,3 +1,16 @@
+# Version 1.4.7
+
+## Issues resolved
++ Resolved: `timezone` argument is not available for the _createScheduledExclusions_ operation within the __FileVantage__ Service Class. Closes #1231.
+    - `_payload/_filevantage.py`
+    - `filevantage.py`
+    - Thanks go out to @security-roberts for identifying and reporting this issue! 🙇
+
++ Resolved: Fixed payload handler issue when providing certificate keys via keywords as opposed to providing the `certificate` keyword when using the _cb_exclusions_create_v1_ operation within the __Certificate Based Exclusions__ service class.
+    - `_payload/_certificate_based_exclusions.py`
+
+---
+
 # Version 1.4.6
 ## Added features and functionality
 + Added: Added _ExecuteCommandProxy_ operation to the __API Integrations__ service collection.
