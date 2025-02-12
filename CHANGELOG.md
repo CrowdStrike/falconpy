@@ -1,6 +1,6 @@
 # Version 1.4.7
 ## Added features and functionality
-+ Added: Added new __IntelligenceFeeds__ service collection with 3 operations.
++ Added: Added new __Intelligence Feeds__ service collection with 3 operations.
     - _DownloadFeedArchive_
     - _ListFeedTypes_
     - _QueryFeedArchives_
@@ -29,7 +29,7 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_ngsiem.py`
 
-+ Added: Added new __CorrelationRules__ service collection with 6 operations.
++ Added: Added new __Correlation Rules__ service collection with 6 operations.
     - _combined_rules_get_v1_
     - _entities_rules_get_v1_
     - _entities_rules_post_v1_
@@ -53,11 +53,14 @@
     - `filevantage.py`
     - Thanks go out to @security-roberts for identifying and reporting this issue! 🙇
 
-+ Resolved: Fixed payload handler issue when providing certificate keys via keywords as opposed to providing the `certificate` keyword when using the _cb_exclusions_create_v1_ operation within the __Certificate Based Exclusions__ service class.
++ Resolved: Fixed payload handler issue when providing certificate keys via keywords as opposed to providing the `certificate` keyword when using the _cb_exclusions_create_v1_ operation within the __CertificateBasedExclusions__ service class.
     - `_payload/_certificate_based_exclusions.py`
 
-+ Resolved: Added error handling for when invalid API responses are received from the GraphQL operation within the __IdentityProtection__ service collection.
++ Resolved: Added error handling for when invalid API responses are received from the GraphQL operation within the __Identity Protection__ service collection.
     - `_util/_functions.py`
+
++ Resolved: Fixed invalid default body payload for _createMLExclusionsV1_ operation in __MLExclusions__ Service Class.
+    - `ml_exclusions.py`
 
 ---
 

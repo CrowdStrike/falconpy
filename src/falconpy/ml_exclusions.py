@@ -81,7 +81,7 @@ class MLExclusions(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
+    @force_default(defaults=["body"], default_types=["dict"])
     def create_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create the ML exclusions.
 
