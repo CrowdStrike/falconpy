@@ -63,7 +63,7 @@ class IntelligenceFeeds(ServiceClass):
         """Download feed file contents as a zip archive.
 
         Keyword arguments:
-        id -- Feed object reference ID.
+        feed_item_id -- Feed object reference ID.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.

@@ -22,7 +22,7 @@ class TestIntelligenceFeeds:
         """Test every code path, accepts all errors except 500"""
         error_checks = True
         tests = {
-            "DownloadFeedArchive": falcon.download_feed(id="IPv4-Test"),
+            "DownloadFeedArchive": falcon.download_feed(feed_item_id="IPv4-Test"),
             "ListFeedTypes": falcon.list_feeds(),
             "QueryFeedArchives": falcon.query_feeds(feed_interval="daily", feed_name="IPv4-Test")
         }
