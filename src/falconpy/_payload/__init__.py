@@ -39,6 +39,7 @@ from ._aspm import (
     aspm_node_payload,
     aspm_application_payload
 )
+from ._correlation_rules import correlation_rules_payload
 from ._host_group import host_group_create_payload, host_group_update_payload
 from ._recon import (
     recon_action_payload,
@@ -149,5 +150,5 @@ __all__ = [
     "idp_policy_payload", "delivery_settings_payload", "base_image_payload", "aspm_delete_tag_payload",
     "aspm_update_tag_payload", "aspm_violations_search_payload", "aspm_get_services_count_payload",
     "aspm_query_payload", "aspm_integration_payload", "aspm_integration_task_payload", "aspm_node_payload",
-    "aspm_application_payload"
+    "aspm_application_payload", "correlation_rules_payload"
 ]

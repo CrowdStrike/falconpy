@@ -29,6 +29,24 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_ngsiem.py`
 
++ Added: Added new __CorrelationRules__ service collection with 6 operations.
+    - _combined_rules_get_v1_
+    - _entities_rules_get_v1_
+    - _entities_rules_post_v1_
+    - _entities_rules_delete_v1_
+    - _entities_rules_patch_v1_
+    - _queries_rules_get_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_correlation_rules.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_correlation_rules.py`
+    - `_payload/__init__.py`
+    - `_payload/_correlation_rules.py`
+    - `__init__.py`
+    - `correlation_rules.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_correlation_rules.py`
+
 ## Issues resolved
 + Resolved: `timezone` argument is not available for the _createScheduledExclusions_ operation within the __FileVantage__ Service Class. Closes #1231.
     - `_payload/_filevantage.py`

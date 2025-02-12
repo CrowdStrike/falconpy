@@ -101,6 +101,7 @@ from .container_detections import ContainerDetections
 from .container_images import ContainerImages
 from .container_packages import ContainerPackages
 from .container_vulnerabilities import ContainerVulnerabilities
+from .correlation_rules import CorrelationRules
 from .cloud_connect_aws import CloudConnectAWS
 from .cspm_registration import CSPMRegistration
 from .custom_ioa import CustomIOA
@@ -212,7 +213,7 @@ __all__ = [
     "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement",
     "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration", "QuickScanPro",
     "DataScanner", "SensorUsage", "Downloads", "DeliverySettings", "ASPM", "IntelligenceFeeds",
-    "NGSIEM"
+    "NGSIEM", "CorrelationRules"
     ]
 """
 This is free and unencumbered software released into the public domain.
