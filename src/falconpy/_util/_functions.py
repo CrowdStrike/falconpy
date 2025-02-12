@@ -326,7 +326,7 @@ def calc_content_return(resp: requests.Response,
 
 # pylint: disable=R0915
 @force_default(defaults=["headers"], default_types=["dict"])
-def perform_request(endpoint: str = "",
+def perform_request(endpoint: str = "",  # noqa: C901
                     headers: dict = None,
                     **kwargs      # May return dict or binary data types
                     ) -> Union[Dict[str, Union[int, Dict[str, str], Dict[str, Dict]]], bytes]:
@@ -443,6 +443,11 @@ def perform_request(endpoint: str = "",
 
             except JSONDecodeError as json_decode_error:
                 # No response content, but a successful request was made
+                if "/identity-protection/combined/graphql/v1" in api.endpoint:
+                    raise SDKError(message=f"{str(json_decode_error)}",
+                                   headers=api.debug_headers
+                                   ) from json_decode_error
+
                 api.log_warning("WARNING: No content was received for this request.")
                 raise NoContentWarning(headers=response.headers,
                                        code=response.status_code
