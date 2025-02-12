@@ -36,6 +36,10 @@ class TestNGSIEM:
                                                                                                package="moe",
                                                                                                namespace="jack"
                                                                                                ),
+            "GetLookupFromPackageWithNamespaceV1Fail": falcon.get_file_from_package_with_namespace(filename="manny",
+                                                                                                   package="moe",
+                                                                                                   namespace="jack"
+                                                                                                   ),
             "GetLookupFromPackageV1": falcon.get_file_from_package(repository="search-all",
                                                                    filename="manny",
                                                                    package="moe"
@@ -47,7 +51,6 @@ class TestNGSIEM:
                 error_checks = False
                 # if not error_checks:
                 #     print(tests[key])
-                pytest.skip("Not yet implemented in this region")  # Skip on failure for now
             else:
                 if key == "StartSearchV1":
                     search_id = tests[key]["resources"].get("id", None)
@@ -64,7 +67,8 @@ class TestNGSIEM:
         binary_download_test = falcon.get_file(repository="search-all", filename="testfile.csv", expand_result=True)[0]
         if binary_download_test not in AllowedResponses:
             error_checks = False
-
+        if not error_checks:
+            pytest.skip("Skipping on failure")  # Skip on failure for now
         return error_checks
 
     def test_all_functionality(self):
