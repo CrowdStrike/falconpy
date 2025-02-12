@@ -40,14 +40,14 @@ _intelligence_feeds_endpoints = [
   [
     "DownloadFeedArchive",
     "GET",
-    "/indicator-feed/entities/feed/download/v1",
+    "/indicator-feed/entities/feed-download/v1",
     "Downloads feed file contents as a zip archive",
     "intelligence_feeds",
     [
       {
         "type": "string",
-        "description": "Object reference",
-        "name": "id",
+        "description": "Feed ID",
+        "name": "feed_item_id",
         "in": "query",
         "required": True
       }
@@ -65,7 +65,7 @@ _intelligence_feeds_endpoints = [
     "QueryFeedArchives",
     "GET",
     "/indicator-feed/queries/feed/v1",
-    "Queries the accessible feeds for a customer.",
+    "Queries the accessible feeds for a customer. Returns a list of feed IDs which can be later downloaded",
     "intelligence_feeds",
     [
       {
