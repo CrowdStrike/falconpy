@@ -38,6 +38,29 @@ For more information, please refer to <https://unlicense.org>
 
 _quick_scan_pro_endpoints = [
   [
+    "UploadFileQuickScanPro",
+    "POST",
+    "/quickscanpro/entities/files/v1",
+    "Uploads a file to be further analyzed with QuickScan Pro. The samples expire after 90 days.",
+    "quick_scan_pro",
+    [
+      {
+        "type": "file",
+        "description": "Binary file to be uploaded. Max file size: 256 MB.",
+        "name": "file",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "If true, after upload, it starts scanning immediately. Default scan mode is 'false'",
+        "name": "scan",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
     "UploadFileMixin0Mixin94",
     "POST",
     "/quickscanpro/entities/files/v1",
@@ -138,12 +161,21 @@ _quick_scan_pro_endpoints = [
     "QueryScanResults",
     "GET",
     "/quickscanpro/queries/scans/v1",
-    "Gets QuickScan Pro scan jobs for a given FQL filter.",
+    "FQL query specifying the filter parameters",
     "quick_scan_pro",
     [
       {
         "type": "string",
-        "description": "FQL query which mentions the SHA256 field",
+        "description": "Empty value means to not filter on anything\nAvailable filter fields that supports "
+        "match (~): _all, mitre_attacks.description\nAvailable filter fields that supports exact match: cid,sha256,id,s "
+        "tatus,type,entity,executor,verdict,verdict_reason,verdict_source,artifacts.file_artifacts.sha256,artifacts.fil "
+        "e_artifacts.filename,artifacts.file_artifacts.verdict,artifacts.file_artifacts.verdict_reasons,artifacts.url_a "
+        "rtifacts.url,artifacts.url_artifacts.verdict,artifacts.url_artifacts.verdict_reasons,mitre_attacks.attack_id,m "
+        "itre_attacks.attack_id_wiki,mitre_attacks.tactic,mitre_attacks.technique,mitre_attacks.capec_id,mitre_attacks. "
+        "parent.attack_id,mitre_attacks.parent.attack_id_wiki,mitre_attacks.parent.technique\nAvailable filter fields "
+        "that supports wildcard (*): mitre_attacks.description\nAvailable filter fields that supports range comparisons "
+        " (>, <, >=, <=): created_timestamp, updated_timestamp\nAll filter fields and operations supports negation "
+        "(!).\n_all field is used to search between all fields.",
         "name": "filter",
         "in": "query",
         "required": True
@@ -163,7 +195,7 @@ _quick_scan_pro_endpoints = [
       },
       {
         "type": "string",
-        "description": "Sort order: `asc` or `desc`. Sort supported fields `created_timestamp`",
+        "description": "Sort order: asc or desc. Sort supported fields created_timestamp",
         "name": "sort",
         "in": "query"
       }

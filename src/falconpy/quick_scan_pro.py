@@ -93,7 +93,7 @@ class QuickScanPro(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="UploadFileMixin0Mixin94",
+            operation_id="UploadFileQuickScanPro",
             data=file_extended,
             files=[("file", ("UploadedFile", file_data))],  # Passed as a list of tuples
             keywords=kwargs,
@@ -252,6 +252,7 @@ class QuickScanPro(ServiceClass):
     # backwards compatibility / ease of use purposes
     UploadFileMixin0Mixin93 = upload_file
     UploadFileMixin0Mixin94 = upload_file
+    UploadFileQuickScanPro = upload_file
     DeleteFile = delete_file
     GetScanResult = get_scan_result
     LaunchScan = launch_scan
