@@ -38,6 +38,9 @@
 + Resolved: Fixed payload handler issue when providing certificate keys via keywords as opposed to providing the `certificate` keyword when using the _cb_exclusions_create_v1_ operation within the __Certificate Based Exclusions__ service class.
     - `_payload/_certificate_based_exclusions.py`
 
++ Resolved: Added error handling for when invalid API responses are received from the GraphQL operation within the __IdentityProtection__ service collection.
+    - `_util/_functions.py`
+
 ---
 
 # Version 1.4.6
