@@ -4,6 +4,7 @@
 # import json
 import os
 import sys
+import pytest
 
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
@@ -20,6 +21,9 @@ AllowedResponses = [200, 201, 207, 400, 401, 404, 429]  # 400, 403, 404,
 
 
 class TestCorrelationRules:
+    @pytest.mark.skipif(auth.authorization.base_url != "https://api.crowdstrike.com",
+                        reason="Unit testing currently only available on US-1"
+                        )
     def test_all_code_paths(self):
         error_checks = True
         tests = {
