@@ -66,6 +66,7 @@ class QuickScanPro(ServiceClass):
         Keyword arguments:
         file -- Binary file to be uploaded. Max file size: 256 MB.
         scan -- If true, after upload, it starts scanning immediately. Default scan mode is 'false'
+        file_name -- Name of the file uploaded. Defaults to "UploadedFile".
 
         This method only supports keywords for providing arguments.
 
@@ -77,6 +78,7 @@ class QuickScanPro(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan-pro/UploadFileMixin0Mixin93
         """
         method_args = ["file", "scan"]
+        file_name = kwargs.get("file_name", "UploadedFile")
         kwargs = params_to_keywords(method_args,
                                     parameters,
                                     kwargs
@@ -95,7 +97,7 @@ class QuickScanPro(ServiceClass):
             endpoints=Endpoints,
             operation_id="UploadFileQuickScanPro",
             data=file_extended,
-            files=[("file", ("UploadedFile", file_data))],  # Passed as a list of tuples
+            files=[("file", (file_name, file_data))],  # Passed as a list of tuples
             keywords=kwargs,
             params=parameters
             )
