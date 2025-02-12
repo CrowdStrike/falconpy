@@ -20,6 +20,7 @@
                                                         `---' OAuth2 API SDK for Python 3 `---'
 """
 from typing import List, Any
+from .deprecated import _correlation_rules_deprecated
 from .deprecated import _custom_ioa_deprecated
 from .deprecated import _d4c_registration_deprecated
 from .deprecated import _datascanner_deprecated
@@ -55,6 +56,7 @@ from ._container_detections import _container_detections_endpoints
 from ._container_images import _container_images_endpoints
 from ._container_packages import _container_packages_endpoints
 from ._container_vulnerabilities import _container_vulnerabilities_endpoints
+from ._correlation_rules import _correlation_rules_endpoints
 from ._cspm_registration import _cspm_registration_endpoints
 from ._custom_ioa import _custom_ioa_endpoints
 from ._custom_storage import _custom_storage_endpoints
@@ -137,6 +139,7 @@ api_endpoints.extend(_container_detections_endpoints)
 api_endpoints.extend(_container_images_endpoints)
 api_endpoints.extend(_container_packages_endpoints)
 api_endpoints.extend(_container_vulnerabilities_endpoints)
+api_endpoints.extend(_correlation_rules_endpoints)
 api_endpoints.extend(_cspm_registration_endpoints)
 api_endpoints.extend(_custom_ioa_endpoints)
 api_endpoints.extend(_custom_storage_endpoints)
@@ -206,6 +209,7 @@ api_endpoints.extend(_zero_trust_assessment_endpoints)
 
 # Deprecated endpoints
 deprecated_endpoints = []
+deprecated_endpoints.extend(_correlation_rules_deprecated)
 deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)
 deprecated_endpoints.extend(_d4c_registration_deprecated)

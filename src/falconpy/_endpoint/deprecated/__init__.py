@@ -32,6 +32,7 @@
 # references to use the new operations IDs defined above that align with the IDs defined in
 # the service classes.
 from ._custom_ioa import _custom_ioa_endpoints
+from ._correlation_rules import _correlation_rules_endpoints
 from ._d4c_registration import _d4c_registration_endpoints
 from ._datascanner import _datascanner_endpoints
 from ._discover import _discover_endpoints
@@ -52,6 +53,7 @@ from ._zero_trust_assessment import _zero_trust_assessment_endpoints
 from ._mapping import _deprecated_op_mapping, _deprecated_cls_mapping
 from ._certificate_based_exclusions import _certificate_based_exclusions_endpoints
 
+_correlation_rules_deprecated = _correlation_rules_endpoints
 _custom_ioa_deprecated = _custom_ioa_endpoints
 _d4c_registration_deprecated = _d4c_registration_endpoints
 _datascanner_deprecated = _datascanner_endpoints
