@@ -1,14 +1,33 @@
 # Version 1.4.7
 ## Added features and functionality
-+ Added: Added new _IntelligenceFeeds_ service collection with 3 operations.
++ Added: Added new __IntelligenceFeeds__ service collection with 3 operations.
     - _DownloadFeedArchive_
     - _ListFeedTypes_
     - _QueryFeedArchives_
     - `_endpoint/__init__.py`
     - `_endpoint/_intelligence_feeds.py`
+    - `__init__.py`
     - `intelligence_feeds.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_intelligence_feeds.py`
+
++ Added: Added new __NGSIEM__ service collection with 9 operations.
+    - _UploadLookupV1_
+    - _GetLookupV1_
+    - _GetLookupFromPackageWithNamespaceV1_
+    - _GetLookupFromPackageV1_
+    - _StartSearchV1_
+    - _GetSearchStatusV1_
+    - _StopSearchV1_
+    - _CreateFileV1_
+    - _UpdateFileV1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_ngsiem.py`
+    - `_util/_functions.py`
+    - `__init__.py`
+    - `ngsiem.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ngsiem.py`
 
 ## Issues resolved
 + Resolved: `timezone` argument is not available for the _createScheduledExclusions_ operation within the __FileVantage__ Service Class. Closes #1231.

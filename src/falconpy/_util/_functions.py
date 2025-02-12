@@ -730,6 +730,23 @@ def handle_path_variables(passed: dict, route_url: str):
     passed_id = passed.get("path_id", None)
     if "aspm-api-gateway" in route_url and passed_id:
         route_url = route_url.format(passed.get("path_id"))
+    # NGSIEM
+    passed_repository = passed.get("repository", None)
+    if passed_repository:
+        repo_args = {"repository": str(passed_repository)}
+        passed_filename = passed.get("filename", None)
+        if passed_filename:
+            repo_args["filename"] = str(passed_filename)
+        passed_package = passed.get("package", None)
+        if passed_package:
+            repo_args["package"] = passed_package
+        passed_namespace = passed.get("namespace", None)
+        if passed_namespace:
+            repo_args["namespace"] = passed_namespace
+        passed_id = passed.get("search_id", None)
+        if passed_id:
+            repo_args["id"] = passed_id
+        route_url = route_url.format(**repo_args)
 
     return route_url
 

@@ -141,6 +141,7 @@ from .message_center import MessageCenter
 from .ml_exclusions import MLExclusions
 from .mobile_enrollment import MobileEnrollment
 from .mssp import FlightControl
+from .ngsiem import NGSIEM
 from .oauth2 import OAuth2
 from .ods import ODS
 from .overwatch_dashboard import OverwatchDashboard
@@ -210,7 +211,8 @@ __all__ = [
     "ContainerVulnerabilities", "DriftIndicators", "UnidentifiedContainers",
     "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement",
     "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration", "QuickScanPro",
-    "DataScanner", "SensorUsage", "Downloads", "DeliverySettings", "ASPM", "IntelligenceFeeds"
+    "DataScanner", "SensorUsage", "Downloads", "DeliverySettings", "ASPM", "IntelligenceFeeds",
+    "NGSIEM"
     ]
 """
 This is free and unencumbered software released into the public domain.
