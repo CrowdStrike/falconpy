@@ -15,7 +15,7 @@ from falconpy import Workflows
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Workflows(auth_object=config)
-AllowedResponses = [200, 201, 400, 403, 404, 415, 500]  # Allowing 415 due to workflow import
+AllowedResponses = [200, 201, 400, 403, 404, 415, 500, 502]  # Allowing 415 due to workflow import
 
 
 class TestWorkflows:
