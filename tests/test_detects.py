@@ -42,6 +42,8 @@ class TestDetects:
             pytest.skip("Rate Limit hit")
         if check["body"]["resources"]:
             id_list = ",".join(check["body"]["resources"])
+        else:
+            pytest.skip("Detections API is deprecated")
         if not id_list:
             id_list = ["1234567890"]
         tests = {
