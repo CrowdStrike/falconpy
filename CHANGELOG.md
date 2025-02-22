@@ -4,6 +4,9 @@
 + Fixed: Unexpected redirect issue caused by underlying requests library handler. Closes #1283.
     - `_util/_functions.py`
 
++ Fixed: Uber Class path variable interpolation issue related to formatting differences within the endpoint module.
+    - `_util/_uber.py`
+
 ---
 
 # Version 1.4.7

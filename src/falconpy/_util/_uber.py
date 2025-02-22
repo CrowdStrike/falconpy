@@ -59,8 +59,13 @@ def create_uber_header_payload(hdrs: dict, passed_arguments: dict) -> dict:
 
 def handle_field(tgt: str, kwa: dict, fld: str) -> str:
     """Embed the distinct_field value (SensorUpdatePolicy) within the endpoint URL."""
-    # Could potentially be zero
-    return tgt.format(str(kwa.get(fld, None))) if kwa.get(fld, None) is not None else tgt
+    # Could potentially be zero, handle multiple path variable endpoint module variations
+    try:
+        returned = tgt.format(str(kwa.get(fld, None))) if kwa.get(fld, None) is not None else tgt
+    except KeyError:
+        targ = {fld: str(kwa.get(fld, None))}
+        returned = tgt.format(**targ)
+    return returned
 
 
 def handle_body_payload_ids(kwa: dict) -> dict:
