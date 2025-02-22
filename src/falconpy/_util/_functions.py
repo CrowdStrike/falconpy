@@ -407,7 +407,7 @@ def perform_request(endpoint: str = "",  # noqa: C901
                 log_api_payloads(api, headers)
                 response = requests.request(api.method.upper(), endpoint, params=api.param_payload,
                                             headers=headers, json=api.body_payload, data=api.data_payload,
-                                            files=api.files, verify=api.verify,
+                                            files=api.files, verify=api.verify, allow_redirects=False,
                                             proxies=api.proxy, timeout=api.timeout
                                             )
                 api.debug_headers = response.headers
