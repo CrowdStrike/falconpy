@@ -1,3 +1,11 @@
+# Version 1.4.8
+
+## Issues resolved
++ Fixed: Unexpected redirect issue caused by underlying requests library handler. Closes #1283.
+    - `_util/_functions.py`
+
+---
+
 # Version 1.4.7
 ## Added features and functionality
 + Added: Added new __Intelligence Feeds__ service collection with 3 operations.
