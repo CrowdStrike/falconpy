@@ -157,7 +157,8 @@ def workflow_definition_payload(passed_keywords: dict) -> dict:
     keys = ["definition", "change_log", "enabled", "flight_control", "id"]
     for key in keys:
         if passed_keywords.get(key, None) is not None:
-            returned_payload[key] = passed_keywords.get(key, None)
+            keystr = "Definition" if key == "definition" else key
+            returned_payload[keystr] = passed_keywords.get(key, None)
 
     return returned_payload
 
