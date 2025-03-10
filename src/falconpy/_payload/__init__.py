@@ -64,6 +64,7 @@ from ._identity_protection import idp_policy_payload
 from ._incidents import incident_action_parameters
 from ._ioa import ioa_exclusion_payload, ioa_custom_payload
 from ._mobile_enrollment import mobile_enrollment_payload
+from ._ngsiem import ngsiem_search_payload
 from ._prevention_policy import prevention_policy_payload
 from ._sensor_update_policy import sensor_policy_payload
 from ._response_policy import response_policy_payload
@@ -150,5 +151,5 @@ __all__ = [
     "idp_policy_payload", "delivery_settings_payload", "base_image_payload", "aspm_delete_tag_payload",
     "aspm_update_tag_payload", "aspm_violations_search_payload", "aspm_get_services_count_payload",
     "aspm_query_payload", "aspm_integration_payload", "aspm_integration_task_payload", "aspm_node_payload",
-    "aspm_application_payload", "correlation_rules_payload"
+    "aspm_application_payload", "correlation_rules_payload", "ngsiem_search_payload"
 ]
