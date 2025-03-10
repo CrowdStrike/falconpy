@@ -7,6 +7,15 @@
 + Fixed: Uber Class path variable interpolation issue related to formatting differences within the endpoint module.
     - `_util/_uber.py`
 
++ Fixed: Payload handling issue with __StartSearchV1__ operation. New payload handler implemented.
+         Keyword argument handling issue using the `id` keyword with __GetSearchStatusV1__ operation.
+         Related to #1291. Thanks go out to @JCKelley-CYBR for reporting this issue. 🙇
+         - `_payload\__init__.py`
+         - `_payload\_ngsiem.py`
+         - `ngsiem.py`
+         > Unit testing expanded to complete code coverage.
+         - `tests/test_ngsiem.py`
+
 ---
 
 # Version 1.4.7

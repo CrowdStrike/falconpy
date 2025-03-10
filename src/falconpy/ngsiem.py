@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 from typing import Dict, Union
 from ._util import force_default, process_service_request, generate_error_result
+from ._payload import ngsiem_search_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._ngsiem import _ngsiem_endpoints as Endpoints
@@ -168,11 +169,11 @@ class NGSIEM(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
             /humio-auth-proxy/GetLookupFromPackageWithNamespaceV1
         """
-        repository = kwargs.get("repository", None)
-        filename = kwargs.get("filename", None)
-        namespace = kwargs.get("namespace", None)
-        package = kwargs.get("package", None)
-        if min([repository, filename, namespace, package]):
+        repository = kwargs.get("repository", False)
+        filename = kwargs.get("filename", False)
+        namespace = kwargs.get("namespace", False)
+        package = kwargs.get("package", False)
+        if min(repository, filename, namespace, package):
             # Pop the path variables from the keywords dictionary
             # before processing query string arguments.
             kwargs.pop("repository")
@@ -220,7 +221,7 @@ class NGSIEM(ServiceClass):
         repository = kwargs.get("repository", None)
         filename = kwargs.get("filename", None)
         package = kwargs.get("package", None)
-        if min([repository, filename, package]):
+        if repository and filename and package:
             # Pop the path variables from the keywords dictionary
             # before processing query string arguments.
             kwargs.pop("repository")
@@ -269,16 +270,72 @@ class NGSIEM(ServiceClass):
     #         params=parameters
     #         )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def start_search(self: object,
+                     body: dict = None,
                      parameters: dict = None,
                      **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Initiate search.
 
         Keyword arguments:
-        repository -- Name of repository. String.
-        search -- Search to perform. JSON formatted string.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        allow_event_skipping -- Flag indicating if event skipping is allowed. Boolean.
+        arguments -- Search arguments in JSON format. Dictionary.
+        around -- Search proximity arguments. Dictionary.
+        autobucket_count -- Number of events per bucket. Integer.
+        body -- Full body payload as a JSON dictionary.
+                Not required if using the search argument or other keywords.
+                {
+                    "allowEventSkipping": boolean,
+                    "arguments": {},
+                    "around": {
+                        "eventId": "string",
+                        "numberOfEventsAfter": integer,
+                        "numberOfEventsBefore": integer,
+                        "timestamp": integer
+                    },
+                    "autobucketCount": integer,
+                    "end": "string",
+                    "ingestEnd": "string",
+                    "ingestStart": "string",
+                    "isLive": boolean,
+                    "queryString": "string",
+                    "start": "string",
+                    "timeZone": "string",
+                    "timeZoneOffsetMinutes": integer,
+                    "useIngestTime": boolean
+                }
+        end -- Last event limit. String.
+        ingest_end -- Ingest maximum. Integer.
+        ingest_start -- Ingest start. Integer.
+        is_live -- Flag indicating if this is a live search. Boolean.
+        parameters -- Full parameters payload dictionary. Not required if using repository keyword.
+        query_string -- Search query string. String.
+        repository -- Name of repository. Required. String.
+        search -- Search to perform. JSON formatted string. Can be used instead of body.
+                  Not required if using other keywords.
+                  {
+                    "allowEventSkipping": boolean,
+                    "arguments": {},
+                    "around": {
+                        "eventId": "string",
+                        "numberOfEventsAfter": integer,
+                        "numberOfEventsBefore": integer,
+                        "timestamp": integer
+                    },
+                    "autobucketCount": integer,
+                    "end": "string",
+                    "ingestEnd": "string",
+                    "ingestStart": "string",
+                    "isLive": boolean,
+                    "queryString": "string",
+                    "start": "string",
+                    "timeZone": "string",
+                    "timeZoneOffsetMinutes": integer,
+                    "useIngestTime": boolean
+                  }
+        start -- Search starting time range. Start.
+        timezone -- Timezone applied to the search. String.
+        timezone_offset_minutes -- Timezone offset. Integer.
 
         This method only supports keywords for providing arguments.
 
@@ -291,6 +348,10 @@ class NGSIEM(ServiceClass):
         """
         repository = kwargs.get("repository", None)
         search = kwargs.get("search", None)
+
+        if not body and not search:
+            search = ngsiem_search_payload(kwargs)
+
         if repository and search:
             # Pop the path variables from the keywords dictionary
             # before processing query string arguments.
@@ -309,7 +370,7 @@ class NGSIEM(ServiceClass):
                 returned.pop("body")
         else:
             returned = generate_error_result("You must provide a repository and search "
-                                             "argument in order to use this operation."
+                                             "arguments in order to use this operation."
                                              )
         return returned
 
@@ -321,7 +382,8 @@ class NGSIEM(ServiceClass):
 
         Keyword arguments:
         repository -- Name of repository. String.
-        search_id -- ID of query. String.
+        id -- ID of the query. String. Can be used instead of search_id keyword.
+        search_id -- ID of the query. String. Can be used instead of id keyword.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -334,12 +396,15 @@ class NGSIEM(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/humio-auth-proxy/GetSearchStatusV1
         """
         repository = kwargs.get("repository", None)
-        search_id = kwargs.get("search_id", None)
+        search_id = kwargs.get("id", kwargs.get("search_id", None))
         if repository and search_id:
             # Pop the path variables from the keywords dictionary
             # before processing query string arguments.
             kwargs.pop("repository")
-            kwargs.pop("search_id")
+            if "id" in kwargs:
+                kwargs.pop("id")
+            if "search_id" in kwargs:
+                kwargs.pop("search_id")
             returned = process_service_request(
                 calling_object=self,
                 endpoints=Endpoints,
@@ -350,7 +415,7 @@ class NGSIEM(ServiceClass):
                 search_id=search_id
                 )
         else:
-            returned = generate_error_result("You must provide a repository and search_id "
+            returned = generate_error_result("You must provide a repository and id "
                                              "argument in order to use this operation."
                                              )
 
@@ -479,65 +544,65 @@ class NGSIEM(ServiceClass):
     #         params=parameters
     #         )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def create_file(self: object,
-                    parameters: dict = None,
-                    **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Create a lookup file.
+    # @force_default(defaults=["parameters"], default_types=["dict"])
+    # def create_file(self: object,
+    #                 parameters: dict = None,
+    #                 **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    #     """Create a lookup file.
 
-        Keyword arguments:
-        file -- File to be uploaded
-        name -- Name used to identify the file
-        description -- File description
-        id -- Unique identifier of the file being updated.
-        repo -- Name of repository or view to save the file
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+    #     Keyword arguments:
+    #     file -- File to be uploaded
+    #     name -- Name used to identify the file
+    #     description -- File description
+    #     id -- Unique identifier of the file being updated.
+    #     repo -- Name of repository or view to save the file
+    #     parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+    #     This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
+    #     Returns: dict object containing API response.
 
-        HTTP Method: POST
+    #     HTTP Method: POST
 
-        Swagger URL
+    #     Swagger URL
 
-        """
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="CreateFileV1",
-            keywords=kwargs,
-            params=parameters
-            )
+    #     """
+    #     return process_service_request(
+    #         calling_object=self,
+    #         endpoints=Endpoints,
+    #         operation_id="CreateFileV1",
+    #         keywords=kwargs,
+    #         params=parameters
+    #         )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def update_file(self: object,
-                    parameters: dict = None,
-                    **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Update a lookup file.
+    # @force_default(defaults=["parameters"], default_types=["dict"])
+    # def update_file(self: object,
+    #                 parameters: dict = None,
+    #                 **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    #     """Update a lookup file.
 
-        Keyword arguments:
-        id -- Unique identifier of the file being updated.
-        description -- File description
-        file -- File to be uploaded
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+    #     Keyword arguments:
+    #     id -- Unique identifier of the file being updated.
+    #     description -- File description
+    #     file -- File to be uploaded
+    #     parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+    #     This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
+    #     Returns: dict object containing API response.
 
-        HTTP Method: PATCH
+    #     HTTP Method: PATCH
 
-        Swagger URL
+    #     Swagger URL
 
-        """
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="UpdateFileV1",
-            keywords=kwargs,
-            params=parameters
-            )
+    #     """
+    #     return process_service_request(
+    #         calling_object=self,
+    #         endpoints=Endpoints,
+    #         operation_id="UpdateFileV1",
+    #         keywords=kwargs,
+    #         params=parameters
+    #         )
 
     UploadLookupV1 = upload_file
     GetLookupV1 = get_file
@@ -547,5 +612,5 @@ class NGSIEM(ServiceClass):
     StartSearchV1 = start_search
     GetSearchStatusV1 = get_search_status
     StopSearchV1 = stop_search
-    CreateFileV1 = create_file
-    UpdateFileV1 = update_file
+    # CreateFileV1 = create_file
+    # UpdateFileV1 = update_file
