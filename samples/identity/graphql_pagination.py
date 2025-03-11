@@ -50,7 +50,9 @@ def version_check():
     valid_version = False
     vers = _VERSION.split(".")
     major_minor = float(f"{vers[0]}.{vers[1]}")
-    if major_minor >= 1.2 and int(vers[2]) >= 11:
+    if major_minor > 1.2:
+        valid_version = True
+    elif major_minor == 1.2 and int(vers[2]) >= 11:
         valid_version = True
 
     if not valid_version:
