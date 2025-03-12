@@ -20,6 +20,9 @@
 + Updated: Cosmetic update to the `mode` parameter description in the _ProvisionAWSAccounts_ operation within the __Cloud Connect AWS__ service collection.
     - `_endpoint/_cloud_connect_aws.py` 
 
++ Updated: Cosmetic update to the `after` parameter description in the _getCombinedAssessmentsQuery_ operation within the __Configuration Assessment__ service collection.
+    - `_endpoint/_configuration_assessment.py`
+
 ---
 
 # Version 1.4.7
