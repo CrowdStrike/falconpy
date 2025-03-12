@@ -46,8 +46,8 @@ _container_alerts_endpoints = [
     [
       {
         "type": "string",
-        "description": "Search Container Alerts using a query in Falcon Query Language (FQL). Supported "
-        "filters: cid,container_id,last_seen",
+        "description": "Search Container Alerts using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  cid  container_id  last_seen",
         "name": "filter",
         "in": "query"
       }
@@ -62,8 +62,8 @@ _container_alerts_endpoints = [
     [
       {
         "type": "string",
-        "description": "Search Container Alerts using a query in Falcon Query Language (FQL). Supported "
-        "filters:  cid,container_id,last_seen",
+        "description": "Search Container Alerts using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  cid  container_id  last_seen",
         "name": "filter",
         "in": "query"
       }
@@ -78,8 +78,8 @@ _container_alerts_endpoints = [
     [
       {
         "type": "string",
-        "description": "Search Container Alerts using a query in Falcon Query Language (FQL). Supported "
-        "filters:  cid,container_id,last_seen,name,severity",
+        "description": "Search Container Alerts using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  cid  container_id  last_seen  name  severity",
         "name": "filter",
         "in": "query"
       },
