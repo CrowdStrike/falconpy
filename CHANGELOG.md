@@ -26,6 +26,9 @@
 + Updated: Cosmetic update to the `filter` parameter description in the _ReadContainerAlertsCountBySeverity_, _ReadContainerAlertsCount_, and _SearchAndReadContainerAlerts_ operations within the __Container Alerts__ service collection.
     - `_endpoint/_container_alerts.py`
 
++ Updated: Added default (100) to the `limit` parameter in the _SearchAndReadContainerAlerts_ operation within the __Container Alerts__ service collection.
+    - `_endpoint/_container_alerts.py`
+
 ---
 
 # Version 1.4.7

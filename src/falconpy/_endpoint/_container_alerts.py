@@ -85,6 +85,7 @@ _container_alerts_endpoints = [
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
