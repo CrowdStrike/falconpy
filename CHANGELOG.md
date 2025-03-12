@@ -23,6 +23,9 @@
 + Updated: Cosmetic update to the `after` parameter description in the _getCombinedAssessmentsQuery_ operation within the __Configuration Assessment__ service collection.
     - `_endpoint/_configuration_assessment.py`
 
++ Updated: Cosmetic update to the `filter` parameter description in the _ReadContainerAlertsCountBySeverity_, _ReadContainerAlertsCount_, and _SearchAndReadContainerAlerts_ operations within the __Container Alerts__ service collection.
+    - `_endpoint/_container_alerts.py`
+
 ---
 
 # Version 1.4.7
