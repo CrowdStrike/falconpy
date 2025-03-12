@@ -117,8 +117,8 @@ _cloud_connect_aws_endpoints = [
         ],
         "type": "string",
         "default": "manual",
-        "description": "Mode for provisioning. Allowed values are `manual` or `cloudformation`. Defaults to "
-        "manual if not defined.",
+        "description": "Mode for provisioning. Allowed values are manual or cloudformation. Defaults to manual "
+        "if not defined.",
         "name": "mode",
         "in": "query"
       },
