@@ -237,7 +237,7 @@ class CorrelationRules(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a JSON format dictionary.
-                {
+                [{
                     "comment": "string",
                     "customer_id": "string",
                     "description": "string",
@@ -279,7 +279,7 @@ class CorrelationRules(ServiceClass):
                     "status": "string",
                     "tactic": "string",
                     "technique": "string"
-                }
+                }]
         comment -- Correlation rule comment. String.
         customer_id -- CID for the tenant. String.
         description -- Correlation rule description. String.
@@ -303,7 +303,8 @@ class CorrelationRules(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities_rules.patch.v1
         """
         if not body:
-            body = correlation_rules_payload(passed_keywords=kwargs)
+            # Issue 1294, expected body payload is a list of dictionaries
+            body = [correlation_rules_payload(passed_keywords=kwargs)]
 
         return process_service_request(
             calling_object=self,
