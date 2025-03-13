@@ -16,6 +16,9 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_ngsiem.py`
 
++ Fixed: Payload handler / docstring issue with _entities_rules_patch_v1_ operation within the __CorrelationRules__ Service Class.  Closes #1294.
+    - `correlation_rules.py`
+
 ## Other
 + Updated: Cosmetic update to the `mode` parameter description in the _ProvisionAWSAccounts_ operation within the __Cloud Connect AWS__ service collection.
     - `_endpoint/_cloud_connect_aws.py` 
