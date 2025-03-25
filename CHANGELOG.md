@@ -32,6 +32,12 @@
 + Updated: Added default (100) to the `limit` parameter in the _SearchAndReadContainerAlerts_ operation within the __Container Alerts__ service collection.
     - `_endpoint/_container_alerts.py`
 
++ Updated: Adds missing `file` formData parameter to the _UploadLookupV1_ operation within the __NGSIEM__ service collection.
+    - `_endpoint/_ngsiem.py`
+
++ Updated: Adds missing `body` payload to the _StartSearchV1_ operation within the __NGSIEM__ service collection.
+    - `_endpoint/_ngsiem.py`
+
 ---
 
 # Version 1.4.7
