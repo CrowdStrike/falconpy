@@ -50,6 +50,13 @@ _ngsiem_endpoints = [
         "name": "repository",
         "in": "path",
         "required": True
+      },
+      {
+        "type": "file",
+        "description": "file to upload",
+        "name": "file",
+        "in": "formData",
+        "required": True
       }
     ]
   ],
@@ -171,6 +178,12 @@ _ngsiem_endpoints = [
         "description": "name of repository",
         "name": "repository",
         "in": "path",
+        "required": True
+      },
+      {
+        "description": "Query Job JSON request body",
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
