@@ -113,6 +113,7 @@ from .custom_storage import CustomStorage
 from .d4c_registration import D4CRegistration
 from .datascanner import DataScanner
 from .delivery_settings import DeliverySettings
+from .deployments import Deployments
 from .detects import Detects
 from .device_control_policies import DeviceControlPolicies
 from .discover import Discover
@@ -218,7 +219,7 @@ __all__ = [
     "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration", "QuickScanPro",
     "DataScanner", "SensorUsage", "Downloads", "DeliverySettings", "ASPM", "IntelligenceFeeds",
     "NGSIEM", "CorrelationRules", "CloudAWSRegistration", "CloudAzureRegistration",
-    "CloudOCIRegistration", "CloudSecurityAssets"
+    "CloudOCIRegistration", "CloudSecurityAssets", "Deployments"
     ]
 """
 This is free and unencumbered software released into the public domain.

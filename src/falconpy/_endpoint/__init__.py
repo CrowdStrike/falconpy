@@ -71,6 +71,7 @@ from ._custom_storage import _custom_storage_endpoints
 from ._d4c_registration import _d4c_registration_endpoints
 from ._datascanner import _datascanner_endpoints
 from ._delivery_settings import _delivery_settings_endpoints
+from ._deployments import _deployments_endpoints
 from ._detects import _detects_endpoints
 from ._device_control_policies import _device_control_policies_endpoints
 from ._discover import _discover_endpoints
@@ -161,6 +162,7 @@ api_endpoints.extend(_delivery_settings_endpoints)
 api_endpoints.extend(_detects_endpoints)
 api_endpoints.extend(_device_control_policies_endpoints)
 api_endpoints.extend(_discover_endpoints)
+api_endpoints.extend(_deployments_endpoints)
 api_endpoints.extend(_downloads_endpoints)
 api_endpoints.extend(_drift_indicators_endpoints)
 api_endpoints.extend(_event_streams_endpoints)
