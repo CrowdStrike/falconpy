@@ -1,4 +1,22 @@
 # Version 1.4.8
+## Added features and functionality
++ Added: Added new __Cloud AWS Registration__ service collection with 6 new operations.
+    - _cloud_registration_aws_get_accounts_
+    - _cloud_registration_aws_create_account_
+    - _cloud_registration_aws_update_account_
+    - _cloud_registration_aws_delete_account_
+    - _cloud_registration_aws_validate_accounts_
+    - _cloud_registration_aws_query_accounts_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_cloud_aws_registration.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_cloud_aws_registration.py`
+    - `_payload/__init__.py`
+    - `_payload/_cloud_aws_registration.py`
+    - `__init__.py`
+    - `cloud_aws_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_aws_registration.py`
 
 ## Issues resolved
 + Fixed: Unexpected redirect issue caused by underlying requests library handler. Closes #1283.
