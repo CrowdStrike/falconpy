@@ -50,6 +50,19 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_oci_registration.py`
 
++ Added: Added new __Cloud Security Assets__ service collection with 3 new operations.
+    - _cloud_security_assets_entities_artifacts_get_
+    - _cloud_security_assets_entities_get_
+    - _cloud_security_assets_queries_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_cloud_security_assets.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_cloud_security_assets.py`
+    - `__init__.py`
+    - `cloud_security_assets.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_security_assets.py`
+
 ## Issues resolved
 + Fixed: Unexpected redirect issue caused by underlying requests library handler. Closes #1283.
     - `_util/_functions.py`

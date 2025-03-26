@@ -34,6 +34,7 @@
 from ._cloud_aws_registration import _cloud_aws_registration_endpoints
 from ._cloud_azure_registration import _cloud_azure_registration_endpoints
 from ._cloud_oci_registration import _cloud_oci_registration_endpoints
+from ._cloud_security_assets import _cloud_security_assets_endpoints
 from ._custom_ioa import _custom_ioa_endpoints
 from ._correlation_rules import _correlation_rules_endpoints
 from ._d4c_registration import _d4c_registration_endpoints
@@ -59,6 +60,7 @@ from ._certificate_based_exclusions import _certificate_based_exclusions_endpoin
 _cloud_aws_registration_deprecated = _cloud_aws_registration_endpoints
 _cloud_azure_registration_deprecated = _cloud_azure_registration_endpoints
 _cloud_oci_registration_deprecated = _cloud_oci_registration_endpoints
+_cloud_security_assets_deprecated = _cloud_security_assets_endpoints
 _correlation_rules_deprecated = _correlation_rules_endpoints
 _custom_ioa_deprecated = _custom_ioa_endpoints
 _d4c_registration_deprecated = _d4c_registration_endpoints

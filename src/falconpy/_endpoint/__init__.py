@@ -23,6 +23,7 @@ from typing import List, Any
 from .deprecated import _cloud_aws_registration_deprecated
 from .deprecated import _cloud_azure_registration_deprecated
 from .deprecated import _cloud_oci_registration_deprecated
+from .deprecated import _cloud_security_assets_deprecated
 from .deprecated import _correlation_rules_deprecated
 from .deprecated import _custom_ioa_deprecated
 from .deprecated import _d4c_registration_deprecated
@@ -52,6 +53,7 @@ from ._certificate_based_exclusions import _certificate_based_exclusions_endpoin
 from ._cloud_aws_registration import _cloud_aws_registration_endpoints
 from ._cloud_azure_registration import _cloud_azure_registration_endpoints
 from ._cloud_oci_registration import _cloud_oci_registration_endpoints
+from ._cloud_security_assets import _cloud_security_assets_endpoints
 from ._cloud_connect_aws import _cloud_connect_aws_endpoints
 from ._cloud_snapshots import _cloud_snapshots_endpoints
 from ._compliance_assessments import _compliance_assessments_endpoints
@@ -139,6 +141,7 @@ api_endpoints.extend(_cloud_connect_aws_endpoints)
 api_endpoints.extend(_cloud_aws_registration_endpoints)
 api_endpoints.extend(_cloud_azure_registration_endpoints)
 api_endpoints.extend(_cloud_oci_registration_endpoints)
+api_endpoints.extend(_cloud_security_assets_endpoints)
 api_endpoints.extend(_cloud_snapshots_endpoints)
 api_endpoints.extend(_compliance_assessments_endpoints)
 api_endpoints.extend(_configuration_assessment_evaluation_logic_endpoints)
@@ -221,6 +224,7 @@ deprecated_endpoints = []
 deprecated_endpoints.extend(_cloud_aws_registration_deprecated)
 deprecated_endpoints.extend(_cloud_azure_registration_deprecated)
 deprecated_endpoints.extend(_cloud_oci_registration_deprecated)
+deprecated_endpoints.extend(_cloud_security_assets_deprecated)
 deprecated_endpoints.extend(_correlation_rules_deprecated)
 deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)
