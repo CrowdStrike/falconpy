@@ -151,22 +151,6 @@ _ngsiem_endpoints = [
     ]
   ],
   [
-    "StartSearchStreamingV1",
-    "POST",
-    "/humio/api/v1/repositories/{repository}/query",
-    "Initiate streaming (synchronous) search",
-    "ngsiem",
-    [
-      {
-        "type": "string",
-        "description": "name of repository",
-        "name": "repository",
-        "in": "path",
-        "required": True
-      }
-    ]
-  ],
-  [
     "StartSearchV1",
     "POST",
     "/humio/api/v1/repositories/{repository}/queryjobs",
@@ -229,57 +213,6 @@ _ngsiem_endpoints = [
         "type": "string",
         "description": "id of query",
         "name": "id",
-        "in": "path",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "proxy_http_get",
-    "GET",
-    "/humio/{path}",
-    "Routes a request to Humio",
-    "ngsiem",
-    [
-      {
-        "pattern": ".*",
-        "type": "string",
-        "description": "LogScale path",
-        "name": "path",
-        "in": "path",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "proxy_http_post",
-    "POST",
-    "/humio/{path}",
-    "Routes a request to Humio",
-    "ngsiem",
-    [
-      {
-        "pattern": ".*",
-        "type": "string",
-        "description": "LogScale path",
-        "name": "path",
-        "in": "path",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "proxy_http_delete",
-    "DELETE",
-    "/humio/{path}",
-    "Routes a request to Humio",
-    "ngsiem",
-    [
-      {
-        "pattern": ".*",
-        "type": "string",
-        "description": "LogScale path",
-        "name": "path",
         "in": "path",
         "required": True
       }
