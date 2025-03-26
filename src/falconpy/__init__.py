@@ -115,6 +115,7 @@ from .datascanner import DataScanner
 from .delivery_settings import DeliverySettings
 from .deployments import Deployments
 from .detects import Detects
+from .device_content import DeviceContent
 from .device_control_policies import DeviceControlPolicies
 from .discover import Discover
 from .downloads import Downloads
@@ -220,7 +221,8 @@ __all__ = [
     "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration", "QuickScanPro",
     "DataScanner", "SensorUsage", "Downloads", "DeliverySettings", "ASPM", "IntelligenceFeeds",
     "NGSIEM", "CorrelationRules", "CloudAWSRegistration", "CloudAzureRegistration",
-    "CloudOCIRegistration", "CloudSecurityAssets", "Deployments", "ServerlessVulnerabilities"
+    "CloudOCIRegistration", "CloudSecurityAssets", "Deployments", "ServerlessVulnerabilities",
+    "DeviceContent"
     ]
 """
 This is free and unencumbered software released into the public domain.

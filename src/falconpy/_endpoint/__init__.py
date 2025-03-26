@@ -28,6 +28,7 @@ from .deprecated import _correlation_rules_deprecated
 from .deprecated import _custom_ioa_deprecated
 from .deprecated import _d4c_registration_deprecated
 from .deprecated import _datascanner_deprecated
+from .deprecated import _device_content_deprecated
 from .deprecated import _discover_deprecated
 from .deprecated import _fdr_deprecated
 from .deprecated import _firewall_management_deprecated
@@ -73,6 +74,7 @@ from ._datascanner import _datascanner_endpoints
 from ._delivery_settings import _delivery_settings_endpoints
 from ._deployments import _deployments_endpoints
 from ._detects import _detects_endpoints
+from ._device_content import _device_content_endpoints
 from ._device_control_policies import _device_control_policies_endpoints
 from ._discover import _discover_endpoints
 from ._downloads import _downloads_endpoints
@@ -161,6 +163,7 @@ api_endpoints.extend(_d4c_registration_endpoints)
 api_endpoints.extend(_datascanner_endpoints)
 api_endpoints.extend(_delivery_settings_endpoints)
 api_endpoints.extend(_detects_endpoints)
+api_endpoints.extend(_device_content_endpoints)
 api_endpoints.extend(_device_control_policies_endpoints)
 api_endpoints.extend(_discover_endpoints)
 api_endpoints.extend(_deployments_endpoints)
@@ -234,6 +237,7 @@ deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)
 deprecated_endpoints.extend(_d4c_registration_deprecated)
 deprecated_endpoints.extend(_datascanner_deprecated)
+deprecated_endpoints.extend(_device_content_deprecated)
 deprecated_endpoints.extend(_discover_deprecated)
 deprecated_endpoints.extend(_fdr_deprecated)
 deprecated_endpoints.extend(_firewall_management_deprecated)
