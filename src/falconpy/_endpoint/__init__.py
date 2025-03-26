@@ -20,6 +20,7 @@
                                                         `---' OAuth2 API SDK for Python 3 `---'
 """
 from typing import List, Any
+from .deprecated import _cloud_aws_registration_deprecated
 from .deprecated import _correlation_rules_deprecated
 from .deprecated import _custom_ioa_deprecated
 from .deprecated import _d4c_registration_deprecated
@@ -46,6 +47,7 @@ from ._alerts import _alerts_endpoints
 from ._api_integrations import _api_integrations_endpoints
 from ._aspm import _aspm_endpoints
 from ._certificate_based_exclusions import _certificate_based_exclusions_endpoints
+from ._cloud_aws_registration import _cloud_aws_registration_endpoints
 from ._cloud_connect_aws import _cloud_connect_aws_endpoints
 from ._cloud_snapshots import _cloud_snapshots_endpoints
 from ._compliance_assessments import _compliance_assessments_endpoints
@@ -130,6 +132,7 @@ api_endpoints.extend(_api_integrations_endpoints)
 api_endpoints.extend(_aspm_endpoints)
 api_endpoints.extend(_certificate_based_exclusions_endpoints)
 api_endpoints.extend(_cloud_connect_aws_endpoints)
+api_endpoints.extend(_cloud_aws_registration_endpoints)
 api_endpoints.extend(_cloud_snapshots_endpoints)
 api_endpoints.extend(_compliance_assessments_endpoints)
 api_endpoints.extend(_configuration_assessment_evaluation_logic_endpoints)
@@ -209,6 +212,7 @@ api_endpoints.extend(_zero_trust_assessment_endpoints)
 
 # Deprecated endpoints
 deprecated_endpoints = []
+deprecated_endpoints.extend(_cloud_aws_registration_deprecated)
 deprecated_endpoints.extend(_correlation_rules_deprecated)
 deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)
