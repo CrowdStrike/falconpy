@@ -18,6 +18,19 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_aws_registration.py`
 
++ Added: Added new __Cloud Azure Registration__ service collection with 1 new operation.
+    - _cloud_registration_azure_download_script_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_cloud_azure_registration.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_cloud_azure_registration.py`
+    - `_payload/__init__.py`
+    - `_payload/_cloud_azure_registration.py`
+    - `__init__.py`
+    - `cloud_azure_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_azure_registration.py`
+
 ## Issues resolved
 + Fixed: Unexpected redirect issue caused by underlying requests library handler. Closes #1283.
     - `_util/_functions.py`

@@ -93,6 +93,7 @@ from .api_complete import APIHarness, APIHarnessV2
 from .aspm import ASPM
 from .certificate_based_exclusions import CertificateBasedExclusions
 from .cloud_aws_registration import CloudAWSRegistration
+from .cloud_azure_registration import CloudAzureRegistration
 from .cloud_snapshots import CloudSnapshots
 from .compliance_assessments import ComplianceAssessments
 from .configuration_assessment_evaluation_logic import ConfigurationAssessmentEvaluationLogic
@@ -214,7 +215,7 @@ __all__ = [
     "ImageAssessmentPolicies", "APIIntegrations", "ThreatGraph", "ExposureManagement",
     "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration", "QuickScanPro",
     "DataScanner", "SensorUsage", "Downloads", "DeliverySettings", "ASPM", "IntelligenceFeeds",
-    "NGSIEM", "CorrelationRules", "CloudAWSRegistration"
+    "NGSIEM", "CorrelationRules", "CloudAWSRegistration", "CloudAzureRegistration"
     ]
 """
 This is free and unencumbered software released into the public domain.
