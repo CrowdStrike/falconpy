@@ -73,6 +73,15 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_deployments.py`
 
++ Added: Added new __Serverless Vulnerabilities__ service collection with 1 new operation.
+    - _GetCombinedVulnerabilitiesSARIF_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_serverless_vulnerabilities.py`
+    - `__init__.py`
+    - `serverless_vulnerabilities.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_serverless_vulnerabilities.py`
+
 ## Issues resolved
 + Fixed: Unexpected redirect issue caused by underlying requests library handler. Closes #1283.
     - `_util/_functions.py`
