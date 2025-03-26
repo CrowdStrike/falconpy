@@ -63,7 +63,7 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_security_assets.py`
 
-+ Added: Added new __Deployments__ service collection with 2 new operation.
++ Added: Added new __Deployments__ service collection with 2 new operations.
     - _GetDeploymentsExternalV1_
     - _CombinedReleasesV1Mixin0_
     - `_endpoint/__init__.py`
@@ -72,6 +72,18 @@
     - `deployments.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_deployments.py`
+
++ Added: Added new __Device Content__ service collection with 2 new operations.
+    - _entities_states_v1_
+    - _queries_states_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_device_content.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_device_content.py`
+    - `__init__.py`
+    - `device_content.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_device_content.py`
 
 + Added: Added new __Serverless Vulnerabilities__ service collection with 1 new operation.
     - _GetCombinedVulnerabilitiesSARIF_
