@@ -31,6 +31,25 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_azure_registration.py`
 
++ Added: Added new __Cloud OCI Registration__ service collection with 7 new operations.
+    - _cloud_security_registration_oci_get_account_
+    - _cloud_security_registration_oci_rotate_key_
+    - _cloud_security_registration_oci_validate_tenancy_
+    - _cloud_security_registration_oci_create_account_
+    - _cloud_security_registration_oci_update_account_
+    - _cloud_security_registration_oci_delete_account_
+    - _cloud_security_registration_oci_download_script_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_cloud_oci_registration.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_cloud_oci_registration.py`
+    - `_payload/__init__.py`
+    - `_payload/_cloud_oci_registration.py`
+    - `__init__.py`
+    - `cloud_oci_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_oci_registration.py`
+
 ## Issues resolved
 + Fixed: Unexpected redirect issue caused by underlying requests library handler. Closes #1283.
     - `_util/_functions.py`
