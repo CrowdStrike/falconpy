@@ -63,6 +63,16 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_security_assets.py`
 
++ Added: Added new __Deployments__ service collection with 2 new operation.
+    - _GetDeploymentsExternalV1_
+    - _CombinedReleasesV1Mixin0_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_deployments.py`
+    - `__init__.py`
+    - `deployments.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_deployments.py`
+
 ## Issues resolved
 + Fixed: Unexpected redirect issue caused by underlying requests library handler. Closes #1283.
     - `_util/_functions.py`
