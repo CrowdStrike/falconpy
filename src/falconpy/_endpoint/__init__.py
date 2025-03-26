@@ -65,6 +65,7 @@ from ._container_detections import _container_detections_endpoints
 from ._container_images import _container_images_endpoints
 from ._container_packages import _container_packages_endpoints
 from ._container_vulnerabilities import _container_vulnerabilities_endpoints
+from ._content_update_policies import _content_update_policies_endpoints
 from ._correlation_rules import _correlation_rules_endpoints
 from ._cspm_registration import _cspm_registration_endpoints
 from ._custom_ioa import _custom_ioa_endpoints
@@ -156,6 +157,7 @@ api_endpoints.extend(_container_detections_endpoints)
 api_endpoints.extend(_container_images_endpoints)
 api_endpoints.extend(_container_packages_endpoints)
 api_endpoints.extend(_container_vulnerabilities_endpoints)
+api_endpoints.extend(_content_update_policies_endpoints)
 api_endpoints.extend(_correlation_rules_endpoints)
 api_endpoints.extend(_cspm_registration_endpoints)
 api_endpoints.extend(_custom_ioa_endpoints)

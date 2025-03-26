@@ -63,6 +63,26 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_security_assets.py`
 
++ Added: Added new __Content Update Policies__ service collection with 10 new operations.
+    - _queryCombinedContentUpdatePolicyMembers_
+    - _queryCombinedContentUpdatePolicies_
+    - _performContentUpdatePoliciesAction_
+    - _setContentUpdatePoliciesPrecedence_
+    - _getContentUpdatePolicies_
+    - _createContentUpdatePolicies_
+    - _updateContentUpdatePolicies_
+    - _deleteContentUpdatePolicies_
+    - _queryContentUpdatePolicyMembers_
+    - _queryContentUpdatePolicies_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_content_update_policies.py`
+    - `_payload/__init__.py`
+    - `_payload/_content_update_policy.py`
+    - `__init__.py`
+    - `content_update_policies.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_content_update_policies.py`
+
 + Added: Added new __Deployments__ service collection with 2 new operations.
     - _GetDeploymentsExternalV1_
     - _CombinedReleasesV1Mixin0_
