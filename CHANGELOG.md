@@ -85,6 +85,17 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_device_content.py`
 
++ Added: Added new __Intelligence Indicator Graph__ service collection with 1 new operation.
+    - _SearchIndicators_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_intelligence_indicator_graph.py`
+    - `_payload/__init__.py`
+    - `_payload/_intelligence_indicator_graph.py`
+    - `__init__.py`
+    - `intelligence_indicator_graph.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_intelligence_indicator_graph.py`
+
 + Added: Added new __Serverless Vulnerabilities__ service collection with 1 new operation.
     - _GetCombinedVulnerabilitiesSARIF_
     - `_endpoint/__init__.py`
