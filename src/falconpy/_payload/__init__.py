@@ -52,6 +52,11 @@ from ._recon import (
 from ._malquery import malquery_exact_search_payload, malquery_hunt_payload, malquery_fuzzy_payload
 from ._cloud_aws_registration import cloud_aws_registration_payload
 from ._cloud_azure_registration import cloud_azure_registration_payload
+from ._cloud_oci_registration import (
+    cloud_oci_refresh_payload,
+    cloud_oci_validate_payload,
+    cloud_oci_create_payload
+    )
 from ._container import (
     image_payload,
     registry_payload,
@@ -154,5 +159,6 @@ __all__ = [
     "aspm_update_tag_payload", "aspm_violations_search_payload", "aspm_get_services_count_payload",
     "aspm_query_payload", "aspm_integration_payload", "aspm_integration_task_payload", "aspm_node_payload",
     "aspm_application_payload", "correlation_rules_payload", "ngsiem_search_payload",
-    "cloud_aws_registration_payload", "cloud_azure_registration_payload"
+    "cloud_aws_registration_payload", "cloud_azure_registration_payload", "cloud_oci_refresh_payload",
+    "cloud_oci_validate_payload", "cloud_oci_create_payload"
 ]
