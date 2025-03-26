@@ -56,6 +56,10 @@
 + Updated: Adds missing `body` payload to the _StartSearchV1_ operation within the __NGSIEM__ service collection.
     - `_endpoint/_ngsiem.py`
 
++ Removed: Removed unused operations from the __NGSIEM__ service collection.
+    - `_endpoint/_ngsiem.py`
+    - `ngsiem.py`
+
 ---
 
 # Version 1.4.7
