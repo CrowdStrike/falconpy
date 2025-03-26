@@ -69,6 +69,7 @@ from ._delivery_settings import delivery_settings_payload
 from ._detects import update_detects_payload
 from ._identity_protection import idp_policy_payload
 from ._incidents import incident_action_parameters
+from ._intelligence_indicator_graph import indicator_graph_payload
 from ._ioa import ioa_exclusion_payload, ioa_custom_payload
 from ._mobile_enrollment import mobile_enrollment_payload
 from ._ngsiem import ngsiem_search_payload
@@ -160,5 +161,5 @@ __all__ = [
     "aspm_query_payload", "aspm_integration_payload", "aspm_integration_task_payload", "aspm_node_payload",
     "aspm_application_payload", "correlation_rules_payload", "ngsiem_search_payload",
     "cloud_aws_registration_payload", "cloud_azure_registration_payload", "cloud_oci_refresh_payload",
-    "cloud_oci_validate_payload", "cloud_oci_create_payload"
+    "cloud_oci_validate_payload", "cloud_oci_create_payload", "indicator_graph_payload"
 ]

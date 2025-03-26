@@ -136,6 +136,7 @@ from .host_migration import HostMigration
 from .identity_protection import IdentityProtection
 from .image_assessment_policies import ImageAssessmentPolicies
 from .incidents import Incidents
+from .intelligence_indicator_graph import IntelligenceIndicatorGraph
 from .installation_tokens import InstallationTokens
 from .intel import Intel
 from .intelligence_feeds import IntelligenceFeeds
@@ -222,7 +223,7 @@ __all__ = [
     "DataScanner", "SensorUsage", "Downloads", "DeliverySettings", "ASPM", "IntelligenceFeeds",
     "NGSIEM", "CorrelationRules", "CloudAWSRegistration", "CloudAzureRegistration",
     "CloudOCIRegistration", "CloudSecurityAssets", "Deployments", "ServerlessVulnerabilities",
-    "DeviceContent"
+    "DeviceContent", "IntelligenceIndicatorGraph"
     ]
 """
 This is free and unencumbered software released into the public domain.
