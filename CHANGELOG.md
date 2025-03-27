@@ -83,9 +83,12 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_content_update_policies.py`
 
-+ Added: Added new __Deployments__ service collection with 2 new operations.
++ Added: Added new __Deployments__ service collection with 5 new operations.
     - _GetDeploymentsExternalV1_
     - _CombinedReleasesV1Mixin0_
+    - _CombinedReleaseNotesV1_
+    - _GetEntityIDsByQueryPOST_
+    - _QueryReleaseNotesV1_
     - `_endpoint/__init__.py`
     - `_endpoint/_deployments.py`
     - `__init__.py`

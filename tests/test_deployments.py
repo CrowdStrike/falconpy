@@ -16,7 +16,7 @@ from falconpy import Deployments
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Deployments(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 403, 404, 429]
+AllowedResponses = [200, 201, 207, 403, 404, 429]
 
 
 class TestDeployments:
@@ -24,7 +24,10 @@ class TestDeployments:
         error_checks = True
         tests = {
             "GetDeploymentsExternalV1": falcon.get_deployments(ids="12345678"),
-            "CombinedReleasesV1Mixin0": falcon.query_releases(limit=1)
+            "CombinedReleasesV1Mixin0": falcon.query_releases(limit=1),
+            "CombinedReleaseNotesV1": falcon.query_release_notes(limit=1),
+            "GetEntityIDsByQueryPOST": falcon.get_release_notes(ids="12345678"),
+            "QueryReleaseNotesV1": falcon.query_release_note_ids(limit=1),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

@@ -38,6 +38,51 @@ For more information, please refer to <https://unlicense.org>
 
 _deployments_endpoints = [
   [
+    "CombinedReleaseNotesV1",
+    "GET",
+    "/deployment-coordinator/combined/release-notes/v1",
+    "Queries for release-notes resources and returns details",
+    "deployments",
+    [
+      {
+        "type": "string",
+        "description": "authorization header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "FQL query specifying filter parameters.",
+        "name": "filter",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "maximum": 500,
+        "type": "integer",
+        "description": "Maximum number of records to return.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "string",
+        "description": "Starting pagination offset of records to return.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
+        "type": "string",
+        "description": "Sort items by providing a comma separated list of property and direction (eg "
+        "name.desc,time.asc). If direction is omitted, defaults to descending.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "CombinedReleasesV1Mixin0",
     "GET",
     "/deployment-coordinator/combined/releases/v1",
@@ -107,6 +152,72 @@ _deployments_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      }
+    ]
+  ],
+  [
+    "GetEntityIDsByQueryPOST",
+    "POST",
+    "/deployment-coordinator/entities/release-notes/GET/v1",
+    "returns the release notes for the IDs in the request",
+    "deployments",
+    [
+      {
+        "type": "string",
+        "description": "authorization header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "QueryReleaseNotesV1",
+    "GET",
+    "/deployment-coordinator/queries/release-notes/v1",
+    "Queries for release-notes resources and returns ids",
+    "deployments",
+    [
+      {
+        "type": "string",
+        "description": "authorization header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "FQL query specifying filter parameters.",
+        "name": "filter",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "maximum": 500,
+        "type": "integer",
+        "description": "Maximum number of records to return.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "string",
+        "description": "Starting pagination offset of records to return.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
+        "type": "string",
+        "description": "Sort items by providing a comma separated list of property and direction (eg "
+        "name.desc,time.asc). If direction is omitted, defaults to descending.",
+        "name": "sort",
+        "in": "query"
       }
     ]
   ]
