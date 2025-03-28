@@ -89,21 +89,21 @@ _hosts_endpoints = [
     [
       {
         "type": "string",
-        "description": "Specify one of these actions:\n\n- `contain` - This action contains the host, which "
-        "stops any network communications to locations other than the CrowdStrike cloud and IPs specified in your "
+        "description": "Specify one of these actions:\n  contain - This action contains the host, which stops "
+        "any network communications to locations other than the CrowdStrike cloud and IPs specified in your "
         "[containment policy](https://falcon.crowdstrike.com/support/documentation/11/getting-started-"
-        "guide#containmentpolicy)\n- `lift_containment`: This action lifts containment on the host, which returns its "
-        "network communications to normal\n- `hide_host`: This action will delete a host. After the host is deleted, no "
-        " new detections for that host will be reported via UI or APIs\n- `unhide_host`: This action will restore a "
-        "host. Detection reporting will resume after the host is restored",
+        "guide#containmentpolicy)  lift_containment: This action lifts containment on the host, which returns its "
+        "network communications to normal  hide_host: This action will delete a host. After the host is deleted, no new "
+        " detections for that host will be reported via UI or APIs  unhide_host: This action will restore a host. "
+        "Detection reporting will resume after the host is restored",
         "name": "action_name",
         "in": "query",
         "required": True
       },
       {
         "description": "The host agent ID (AID) of the host you want to contain. Get an agent ID from a "
-        "detection, the Falcon console, or the Streaming API.\n\nProvide the ID in JSON format with the key `ids` and "
-        "the value in square brackets, such as: \n\n`\"ids\": [\"123456789\"]`",
+        "detection, the Falcon console, or the Streaming API.\n\nProvide the ID in JSON format with the key ids and the "
+        "value in square brackets, such as: \n\n\"ids\": [\"123456789\"]",
         "name": "body",
         "in": "body",
         "required": True

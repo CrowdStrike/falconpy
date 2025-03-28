@@ -311,6 +311,9 @@
     - _GetMigrationIDsV1_
     - `_endpoint/_host_migration.py`
 
++ Updated: Cosmetic updates to the `action_name` and `body` parameter descriptions within the _PerformActionV2_ operation of the __Hosts__ service collection.
+    - `_endpoint/_hosts.py`
+
 + Changed: Changed field used for sort enum in 1 operation from `created_time` to `id` within the __Message Center__ service collection.
     - _QueryCasesIdsByFilter_
     - `_endpoint/_message_center.py`
