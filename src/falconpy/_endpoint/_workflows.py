@@ -377,7 +377,7 @@ _workflows_endpoints = [
           "resume"
         ],
         "type": "string",
-        "description": "Specify one of these actions:\n\n- `resume`: resume/retry the workflow execution(s) specified in ids",
+        "description": "Specify one of these actions:\n  resume: resume/retry the workflow execution(s) specified in ids",
         "name": "action_name",
         "in": "query",
         "required": True
