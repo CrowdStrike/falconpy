@@ -386,6 +386,13 @@
     - _queryVulnerabilities_
     - `_endpoint/_spotlight_vulnerabilities.py_`
 
++ Updated: Updated `edge_type`, `scope` and `vertex_type` enums in 4 operations within the __ThreatGraph__ service collection.
+    - _combined_edges_get_
+    - _combined_summary_get_
+    - _entities_vertices_get_
+    - _entities_vertices_getv2_
+    - `_endpoint/_threatgraph.py`
+
 ---
 
 # Version 1.4.7
