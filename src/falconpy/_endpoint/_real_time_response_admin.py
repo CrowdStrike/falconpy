@@ -56,7 +56,7 @@ _real_time_response_admin_endpoints = [
         "type": "string",
         "default": "30s",
         "description": "Timeout duration for how long to wait for the request in duration syntax. Example, "
-        "`10s`. Valid units: `ns, us, ms, s, m, h`. Maximum is 5 minutes.",
+        "10s. Valid units: ns, us, ms, s, m, h. Maximum is 5 minutes.",
         "name": "timeout_duration",
         "in": "query"
       },
@@ -65,22 +65,20 @@ _real_time_response_admin_endpoints = [
         "default": "tiny bit less than overall request timeout",
         "description": "Timeout duration for how long a host has time to complete processing. Default value is "
         " a bit less than the overall timeout value. It cannot be greater than the overall request timeout. Maximum is "
-        "< 5 minutes. Example, `10s`. Valid units: `ns, us, ms, s, m, h`. ",
+        "< 5 minutes. Example, 10s. Valid units: ns, us, ms, s, m, h. ",
         "name": "host_timeout_duration",
         "in": "query"
       },
       {
         "description": "Use this endpoint to run these [real time response "
         "commands](https://falcon.crowdstrike.com/documentation/page/b8c1738c/real-time-response-and-network-"
-        "containment#k893b7c0):\n- `cat`\n- `cd`\n- `clear`\n- `cp`\n- `encrypt`\n- `env`\n- `eventlog`\n- "
-        "`filehash`\n- `get`\n- `getsid`\n- `help`\n- `history`\n- `ipconfig`\n- `kill`\n- `ls`\n- `map`\n- "
-        "`memdump`\n- `mkdir`\n- `mount`\n- `mv`\n- `netstat`\n- `ps`\n- `put`\n- `reg query`\n- `reg set`\n- `reg "
-        "delete`\n- `reg load`\n- `reg unload`\n- `restart`\n- `rm`\n- `run`\n- `runscript`\n- `shutdown`\n- `unmap`\n-"
-        " `update history`\n- `update install`\n- `update list`\n- `update query`\n- `xmemdump`\n- "
-        "`zip`\n\n**`base_command`** Active-Responder command type we are going to execute, for example: `get` or `cp`. "
-        "  Refer to the RTR documentation for the full list of commands.\n**`batch_id`** Batch ID to execute the "
-        "command on.  Received from `/real-time-response/combined/batch-init-session/v1`.\n**`command_string`** Full "
-        "command string for the command. For example  `get some_file.txt`\n**`optional_hosts`** List of a subset of "
+        "containment#k893b7c0):  cat  cd  clear  cp  encrypt  env  eventlog  filehash  get  getsid  help  history  "
+        "ipconfig  kill  ls  map  memdump  mkdir  mount  mv  netstat  ps  put  reg query  reg set  reg delete  reg load "
+        "  reg unload  restart  rm  run  runscript  shutdown  unmap  update history  update install  update list  "
+        "update query  xmemdump  zip\n\n**base_command** Active-Responder command type we are going to execute, for "
+        "example: get or cp.  Refer to the RTR documentation for the full list of commands.\n**batch_id** Batch ID to "
+        "execute the command on.  Received from /real-time-response/combined/batch-init-session/v1.\n**command_string** "
+        " Full command string for the command. For example  get some_file.txt\n**optional_hosts** List of a subset of "
         "hosts we want to run the command on.  If this list is supplied, only these hosts will receive the command.",
         "name": "body",
         "in": "body",
@@ -122,15 +120,13 @@ _real_time_response_admin_endpoints = [
       {
         "description": "Use this endpoint to run these [real time response "
         "commands](https://falcon.crowdstrike.com/documentation/page/b8c1738c/real-time-response-and-network-"
-        "containment#k893b7c0):\n- `cat`\n- `cd`\n- `clear`\n- `cp`\n- `encrypt`\n- `env`\n- `eventlog`\n- "
-        "`filehash`\n- `get`\n- `getsid`\n- `help`\n- `history`\n- `ipconfig`\n- `kill`\n- `ls`\n- `map`\n- "
-        "`memdump`\n- `mkdir`\n- `mount`\n- `mv`\n- `netstat`\n- `ps`\n- `put`\n- `reg query`\n- `reg set`\n- `reg "
-        "delete`\n- `reg load`\n- `reg unload`\n- `restart`\n- `rm`\n- `run`\n- `runscript`\n- `shutdown`\n- `unmap`\n-"
-        " `update history`\n- `update install`\n- `update list`\n- `update query`\n- `xmemdump`\n- `zip`\n\nRequired "
-        "values.  The rest of the fields are unused.\n**`base_command`** Active-Responder command type we are going to "
-        "execute, for example: `get` or `cp`.  Refer to the RTR documentation for the full list of "
-        "commands.\n**`command_string`** Full command string for the command. For example  `get "
-        "some_file.txt`\n**`session_id`** RTR session ID to run the command on",
+        "containment#k893b7c0):  cat  cd  clear  cp  encrypt  env  eventlog  filehash  get  getsid  help  history  "
+        "ipconfig  kill  ls  map  memdump  mkdir  mount  mv  netstat  ps  put  reg query  reg set  reg delete  reg load "
+        "  reg unload  restart  rm  run  runscript  shutdown  unmap  update history  update install  update list  "
+        "update query  xmemdump  zip\n\nRequired values.  The rest of the fields are unused.\n**base_command** Active-"
+        "Responder command type we are going to execute, for example: get or cp.  Refer to the RTR documentation for "
+        "the full list of commands.\n**command_string** Full command string for the command. For example  get "
+        "some_file.txt\n**session_id** RTR session ID to run the command on",
         "name": "body",
         "in": "body",
         "required": True
@@ -307,8 +303,8 @@ _real_time_response_admin_endpoints = [
       {
         "type": "string",
         "default": "none",
-        "description": "Permission for the custom-script. Valid permission values: \n - `private`, usable by "
-        "only the user who uploaded it \n - `group`, usable by all RTR Admins \n - `public`, usable by all active-"
+        "description": "Permission for the custom-script. Valid permission values: \n - private, usable by "
+        "only the user who uploaded it \n - group, usable by all RTR Admins \n - public, usable by all active-"
         "responders and RTR admins",
         "name": "permission_type",
         "in": "formData",
@@ -376,8 +372,8 @@ _real_time_response_admin_endpoints = [
       {
         "type": "string",
         "default": "none",
-        "description": "Permission for the custom-script. Valid permission values: \n - `private`, usable by "
-        "only the user who uploaded it \n - `group`, usable by all RTR Admins \n - `public`, usable by all active-"
+        "description": "Permission for the custom-script. Valid permission values: \n - private, usable by "
+        "only the user who uploaded it \n - group, usable by all RTR Admins \n - public, usable by all active-"
         "responders and RTR admins",
         "name": "permission_type",
         "in": "formData"

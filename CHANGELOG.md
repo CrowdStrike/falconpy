@@ -357,6 +357,14 @@
     - `_endpoint/_real_time_response.py`
     - `_endpoint/deprecated/_real_time_response.py`
 
++ Updated: Cosmetic updates to parameter description in 4 operations within the __Real Time Response Admin__ service collection.
+    - _BatchAdminCmd_
+    - _RTR_ExecuteAdminCommand_
+    - _RTR_CreateScripts_
+    - _RTR_UpdateScripts_
+    - `_endpoint/_real_time_response_admin.py`
+    - `_endpoint/deprecated/_real_time_response_admin.py`
+
 + Updated: Cosmetic updates to parameter descriptions in 5 operations within the __Sample Uploads__ service collection.
     - _ArchiveGetV1_
     - _ArchiveUploadV1_
