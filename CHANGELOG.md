@@ -365,6 +365,9 @@
     - `_endpoint/_real_time_response_admin.py`
     - `_endpoint/deprecated/_real_time_response_admin.py`
 
++ Updated: Cosmetic updates to the `sort` and `secondarySort` parameter descriptions in the _QueryRulesV1_ and _QueryNotificationsV1_ operations within the __Recon__ service collection.
+    - `_endpoint/_recon.py`
+
 + Updated: Cosmetic updates to parameter descriptions in 5 operations within the __Sample Uploads__ service collection.
     - _ArchiveGetV1_
     - _ArchiveUploadV1_
