@@ -47,9 +47,9 @@ _discover_endpoints = [
     [
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
-        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
-        "the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
@@ -58,7 +58,7 @@ _discover_endpoints = [
         "minimum": 1,
         "type": "integer",
         "description": "The number of application ids to return in this response (Min: 1, Max: 1000, Default: "
-        "100). Use with the `after` parameter to manage pagination of results.",
+        "100). Use with the after parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
@@ -114,9 +114,9 @@ _discover_endpoints = [
     [
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
-        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
-        "the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
@@ -125,7 +125,7 @@ _discover_endpoints = [
         "minimum": 1,
         "type": "integer",
         "description": "The number of asset IDs to return in this response (min: 1, max: 1000, default: 100). "
-        "Use with the `after` parameter to manage pagination of results.",
+        "Use with the after parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
@@ -217,7 +217,7 @@ _discover_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more account IDs (max: 100). Find account IDs with GET `/discover/queries/accounts/v1`",
+        "description": "One or more account IDs (max: 100). Find account IDs with GET /discover/queries/accounts/v1",
         "name": "ids",
         "in": "query",
         "required": True
@@ -257,7 +257,7 @@ _discover_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more asset IDs (max: 100). Find asset IDs with GET `/discover/queries/hosts/v1`",
+        "description": "One or more asset IDs (max: 100). Find asset IDs with GET /discover/queries/hosts/v1",
         "name": "ids",
         "in": "query",
         "required": True
@@ -277,7 +277,7 @@ _discover_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more asset IDs (max: 100). Find asset IDs with GET `/discover/queries/iot-hosts/v1`",
+        "description": "One or more asset IDs (max: 100). Find asset IDs with GET /discover/queries/iot-hosts/v1",
         "name": "ids",
         "in": "query",
         "required": True
@@ -297,7 +297,7 @@ _discover_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more login IDs (max: 100). Find login IDs with GET `/discover/queries/logins/v1`",
+        "description": "One or more login IDs (max: 100). Find login IDs with GET /discover/queries/logins/v1",
         "name": "ids",
         "in": "query",
         "required": True
@@ -315,9 +315,9 @@ _discover_endpoints = [
       {
         "minimum": 0,
         "type": "integer",
-        "description": "An offset used with the `limit` parameter to manage pagination of results. On your "
-        "first request, don’t provide an `offset`. On subsequent requests, add previous `offset` with the previous "
-        "`limit` to continue from that place in the results.",
+        "description": "An offset used with the limit parameter to manage pagination of results. On your first "
+        " request, don’t provide an offset. On subsequent requests, add previous offset with the previous limit to "
+        "continue from that place in the results.",
         "name": "offset",
         "in": "query"
       },
@@ -326,7 +326,7 @@ _discover_endpoints = [
         "minimum": 1,
         "type": "integer",
         "description": "The number of account IDs to return in this response (min: 1, max: 100, default: 100). "
-        "Use with the `offset` parameter to manage pagination of results.",
+        "Use with the offset parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
@@ -369,9 +369,9 @@ _discover_endpoints = [
       {
         "minimum": 0,
         "type": "integer",
-        "description": "An offset used with the `limit` parameter to manage pagination of results. On your "
-        "first request, don’t provide an `offset`. On subsequent requests, add previous `offset` with the previous "
-        "`limit` to continue from that place in the results.",
+        "description": "An offset used with the limit parameter to manage pagination of results. On your first "
+        " request, don’t provide an offset. On subsequent requests, add previous offset with the previous limit to "
+        "continue from that place in the results.",
         "name": "offset",
         "in": "query"
       },
@@ -424,9 +424,9 @@ _discover_endpoints = [
       {
         "minimum": 0,
         "type": "integer",
-        "description": "An offset used with the `limit` parameter to manage pagination of results. On your "
-        "first request, don’t provide an `offset`. On subsequent requests, add previous `offset` with the previous "
-        "`limit` to continue from that place in the results.",
+        "description": "An offset used with the limit parameter to manage pagination of results. On your first "
+        " request, don’t provide an offset. On subsequent requests, add previous offset with the previous limit to "
+        "continue from that place in the results.",
         "name": "offset",
         "in": "query"
       },
@@ -435,7 +435,7 @@ _discover_endpoints = [
         "minimum": 1,
         "type": "integer",
         "description": "The number of asset IDs to return in this response (min: 1, max: 100, default: 100). "
-        "Use with the `offset` parameter to manage pagination of results.",
+        "Use with the offset parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
@@ -513,9 +513,9 @@ _discover_endpoints = [
       {
         "minimum": 0,
         "type": "integer",
-        "description": "An offset used with the `limit` parameter to manage pagination of results. On your "
-        "first request, don’t provide an `offset`. On subsequent requests, add previous `offset` with the previous "
-        "`limit` to continue from that place in the results.",
+        "description": "An offset used with the limit parameter to manage pagination of results. On your first "
+        " request, don’t provide an offset. On subsequent requests, add previous offset with the previous limit to "
+        "continue from that place in the results.",
         "name": "offset",
         "in": "query"
       },
@@ -524,7 +524,7 @@ _discover_endpoints = [
         "minimum": 1,
         "type": "integer",
         "description": "The number of asset IDs to return in this response (min: 1, max: 100, default: 100). "
-        "Use with the `offset` parameter to manage pagination of results.",
+        "Use with the offset parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
@@ -562,9 +562,9 @@ _discover_endpoints = [
     [
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
-        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
-        "the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
@@ -573,7 +573,7 @@ _discover_endpoints = [
         "minimum": 1,
         "type": "integer",
         "description": "The number of asset IDs to return in this response (min: 1, max: 100, default: 100). "
-        "Use with the `after` parameter to manage pagination of results.",
+        "Use with the after parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
@@ -611,9 +611,9 @@ _discover_endpoints = [
       {
         "minimum": 0,
         "type": "integer",
-        "description": "An offset used with the `limit` parameter to manage pagination of results. On your "
-        "first request, don’t provide an `offset`. On subsequent requests, add previous `offset` with the previous "
-        "`limit` to continue from that place in the results.",
+        "description": "An offset used with the limit parameter to manage pagination of results. On your first "
+        " request, don’t provide an offset. On subsequent requests, add previous offset with the previous limit to "
+        "continue from that place in the results.",
         "name": "offset",
         "in": "query"
       },
@@ -622,7 +622,7 @@ _discover_endpoints = [
         "minimum": 1,
         "type": "integer",
         "description": "The number of login IDs to return in this response (min: 1, max: 100, default: 100). "
-        "Use with the `offset` parameter to manage pagination of results.",
+        "Use with the offset parameter to manage pagination of results.",
         "name": "limit",
         "in": "query"
       },
