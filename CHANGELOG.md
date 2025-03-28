@@ -246,6 +246,20 @@
     - _QueryFeedArchives_
     - `_endpoint/_intelligence_feeds.py`
 
++ Updated: Cosmetic updates to parameter and header descriptions in 11 operations within the __FalconX Sandbox__ service collection.
+    - _GetArtifacts_
+    - _GetMemoryDumpExtractedStrings_
+    - _GetMemoryDumpHexDump_
+    - _GetMemoryDump_
+    - _GetSummaryReports_
+    - _GetReports_
+    - _GetSubmissions_
+    - _Submit_
+    - _QueryReports_
+    - _QuerySubmissions_
+    - _UploadSampleV2_
+    - `_endpoint/_falconx_sandbox.py`
+
 + Changed: Changed field used for sort enum in 1 operation from `created_time` to `id` within the __Message Center__ service collection.
     - _QueryCasesIdsByFilter_
     - `_endpoint/_message_center.py`
