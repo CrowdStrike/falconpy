@@ -162,6 +162,13 @@
     - `correlation_rules.py`
 
 ## Other
++ Updated: Cosmetic updates to operation and parameter descriptions within the __Alerts__ service collection.
+    - _PatchEntitiesAlertsV2_ - `body`
+    - _PatchEntitiesAlertsV3_ - `body`
+    - _GetQueriesAlertsV1_ - `offset`, `limit`, `sort` and `filter`
+    - _GetQueriesAlertsV2_ - `offset`, `limit`, `sort` and `filter`
+    - `_endpoint/_alerts.py`
+
 + Updated: Cosmetic update to the `mode` parameter description in the _ProvisionAWSAccounts_ operation within the __Cloud Connect AWS__ service collection.
     - `_endpoint/_cloud_connect_aws.py` 
 
