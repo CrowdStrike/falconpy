@@ -229,6 +229,10 @@
     - _QuerySubmissionsMixin0_
     - `_endpoint/_quick_scan.py`
 
++ Updated: Update to the operation description for 1 operation within the __Quick Scan Pro__ service collection.
+    - _UploadFileQuickScanPro_
+    - `_endpoint/_quick_scan_pro.py`
+
 ---
 
 # Version 1.4.7

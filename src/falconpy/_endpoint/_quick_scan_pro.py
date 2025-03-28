@@ -41,7 +41,7 @@ _quick_scan_pro_endpoints = [
     "UploadFileQuickScanPro",
     "POST",
     "/quickscanpro/entities/files/v1",
-    "Uploads a file to be further analyzed with QuickScan Pro. The samples expire after 90 days.",
+    "Uploads a file to be further analyzed with QuickScan Pro. The samples expire according to the Retention Policies set.",
     "quick_scan_pro",
     [
       {
