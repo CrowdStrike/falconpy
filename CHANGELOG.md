@@ -224,6 +224,11 @@
     - `_endpoint/_ngsiem.py`
     - `ngsiem.py`
 
++ Updated: Cosmetic updates to parameter descriptions in 2 operations within the __Quick Scan__ service collection.
+    - _ScanSamples_
+    - _QuerySubmissionsMixin0_
+    - `_endpoint/_quick_scan.py`
+
 ---
 
 # Version 1.4.7
