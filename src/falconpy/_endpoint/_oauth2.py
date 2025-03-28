@@ -53,7 +53,7 @@ _oauth2_endpoints = [
       {
         "type": "string",
         "description": "The OAuth2 access token you want to revoke.\n\nInclude your API client ID and secret "
-        "in basic auth format (`Authorization: basic <encoded API client ID and secret>`) in your request header.",
+        "in basic auth format (Authorization: basic <encoded API client ID and secret>) in your request header.",
         "name": "token",
         "in": "formData",
         "required": True

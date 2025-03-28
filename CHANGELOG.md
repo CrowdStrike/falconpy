@@ -328,6 +328,9 @@
     - `_endpoint/_ngsiem.py`
     - `ngsiem.py`
 
++ Updated: Cosmetic update to the `token` parameter description in the _oauth2RevokeToken_ of the __OAuth2__ service collection.
+    - `_endpoint/_oauth2.py`
+
 + Updated: Cosmetic updates to parameter descriptions in 2 operations within the __Quick Scan__ service collection.
     - _ScanSamples_
     - _QuerySubmissionsMixin0_
