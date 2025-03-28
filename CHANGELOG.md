@@ -246,6 +246,11 @@
     - _queryEvaluationLogic_
     - `_endpoint/_spotlight_evaluation_logic.py`
 
++ Updated: Cosmetic updates to the `after` and `filter` parameter descriptions in 2 operations within the __Spotlight Vulnerabilities__ service collection. Adds `cve.base_score` as a filter option.
+    - _combinedQueryVulnerabilities_
+    - _queryVulnerabilities_
+    - `_endpoint/_spotlight_vulnerabilities.py_`
+
 ---
 
 # Version 1.4.7
