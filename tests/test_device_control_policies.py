@@ -41,18 +41,30 @@ class TestDeviceControlPolicy:
                                                                                   ),
             "set_device_control_policies_precedence": falcon.setDeviceControlPoliciesPrecedence(ids="12345678", platform_name="Windows"),
             "get_device_control_policies": falcon.getDeviceControlPolicies(ids='12345678'),
+            "get_device_control_policies_v2": falcon.get_policies_v2(ids='12345678'),
             "create_device_control_policies": falcon.createDeviceControlPolicies(clone_id="12345678",
                                                                                  description="whatever",
                                                                                  name="UnitTesting",
                                                                                  platform_name="Linux",
                                                                                  settings={"classes": []}
                                                                                  ),
+            "create_device_control_policies_v2": falcon.create_policies_v2(clone_id="12345678",
+                                                                           description="whatever",
+                                                                           name="UnitTesting",
+                                                                           platform_name="Linux",
+                                                                           settings={"classes": []}
+                                                                           ),
             "delete_device_control_policies": falcon.deleteDeviceControlPolicies(ids='12345678'),
             "update_device_control_policies": falcon.updateDeviceControlPolicies(id="12345678",
                                                                                  description="More unit testing",
                                                                                  name="UnitTesting",
                                                                                  settings={"classes": []}
                                                                                  ),
+            "update_device_control_policies_v2": falcon.update_policies_v2(id="12345678",
+                                                                           description="More unit testing",
+                                                                           name="UnitTesting",
+                                                                           settings={"classes": []}
+                                                                           ),
             "query_device_control_policy_members": falcon.queryDeviceControlPolicyMembers(),
             "query_device_control_policies": falcon.queryDeviceControlPolicies(),
             "get_default_device_control_policies": falcon.get_default_policies(),
@@ -64,7 +76,12 @@ class TestDeviceControlPolicy:
                                                                                      restricted_notification={"custom_message": "Test restricted",
                                                                                                               "use_custom": True
                                                                                                               }
-                                                                                     )
+                                                                                     ),
+            "get_default_settings": falcon.get_default_settings(),
+            "update_policy_classes": falcon.update_policy_classes(bluetooth_classes={}, usb_classes={}, id="12345678"),
+            "update_default_settings": falcon.update_default_settings(bluetooth_custom_notifications={"blocked_notifications": {"custom_message": "bob"}},
+                                                                      usb_exceptions={"delete_exception": ["bob"]}
+                                                                      )
         }
         for key in tests:
             if tests[key]["status_code"] != 500:

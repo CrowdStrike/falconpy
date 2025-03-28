@@ -187,6 +187,42 @@ _device_control_policies_endpoints = [
     ]
   ],
   [
+    "patchDeviceControlPoliciesClassesV1",
+    "PATCH",
+    "/policy/entities/device-control-classes/v1",
+    "Update device control policy's classes (USB and Bluetooth)",
+    "device_control_policies",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "getDefaultDeviceControlSettings",
+    "GET",
+    "/policy/entities/device-control-default-settings/v1",
+    "Get default device control settings (USB and Bluetooth)",
+    "device_control_policies",
+    []
+  ],
+  [
+    "updateDefaultDeviceControlSettings",
+    "PATCH",
+    "/policy/entities/device-control-default-settings/v1",
+    "Update the configuration for Default Device Control Settings",
+    "device_control_policies",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "setDeviceControlPoliciesPrecedence",
     "POST",
     "/policy/entities/device-control-precedence/v1",
@@ -266,6 +302,54 @@ _device_control_policies_endpoints = [
         "description": "The IDs of the Device Control Policies to delete",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "getDeviceControlPoliciesV2",
+    "GET",
+    "/policy/entities/device-control/v2",
+    "Get device control policies for the given filter criteria. (USB and Bluetooth)",
+    "device_control_policies",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The IDs of the policies to get",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "postDeviceControlPoliciesV2",
+    "POST",
+    "/policy/entities/device-control/v2",
+    "Create/clone a device control policy (USB and Bluetooth)",
+    "device_control_policies",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "patchDeviceControlPoliciesV2",
+    "PATCH",
+    "/policy/entities/device-control/v2",
+    "Update device control policy base (USB and Bluetooth)",
+    "device_control_policies",
+    [
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
