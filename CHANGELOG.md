@@ -399,6 +399,9 @@
     - _CreateUser_
     - `_endpoint/_user_management.py`
 
++ Updated: Cosmetic update to the `action_name` parameter in the _WorkflowExecutionsAction_ operation within the __Workflows__ service collection.
+    - `_endpoint/_workflows.py`
+
 ---
 
 # Version 1.4.7
