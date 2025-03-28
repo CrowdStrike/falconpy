@@ -241,6 +241,11 @@
     - _UploadSampleV3_
     - `_endpoint/_sample_uploads.py`
 
++ Updated: Cosmetic updates to the `after` parameter description in 2 operations within the __Spotlight Evaluation Logic__ service collection.
+    - _combinedQueryEvaluationLogic_
+    - _queryEvaluationLogic_
+    - `_endpoint/_spotlight_evaluation_logic.py`
+
 ---
 
 # Version 1.4.7
