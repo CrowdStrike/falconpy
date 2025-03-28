@@ -125,7 +125,7 @@ _user_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "ID of a role. Find a role ID from `/user-management/queries/roles/v1`.",
+        "description": "ID of a role. Find a role ID from /user-management/queries/roles/v1.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -196,13 +196,12 @@ _user_management_endpoints = [
         "in": "query"
       },
       {
-        "description": "Attributes for this user. `uid` (required) is the user's email address, which is their "
-        " username in Falcon.\n\nOptional "
-        "attributes:\n\n<ul><li>`firstName`</li><li>`lastName`</li><li>`password`</li></ul>\n\nAs a best practice, we "
-        "recommend omitting `password`. If single sign-on is enabled for your customer account, the `password` "
-        "attribute is ignored. If single sign-on is not enabled, we send a user activation request to their email "
-        "address when you create the user with no `password`. The user should use the activation email to set their own "
-        "password.",
+        "description": "Attributes for this user. uid (required) is the user's email address, which is their "
+        "username in Falcon.\n\nOptional "
+        "attributes:\n\n<ul><li>firstName</li><li>lastName</li><li>password</li></ul>\n\nAs a best practice, we "
+        "recommend omitting password. If single sign-on is enabled for your customer account, the password attribute is "
+        " ignored. If single sign-on is not enabled, we send a user activation request to their email address when you "
+        "create the user with no password. The user should use the activation email to set their own password.",
         "name": "body",
         "in": "body",
         "required": True
@@ -288,7 +287,7 @@ _user_management_endpoints = [
       {
         "type": "string",
         "description": "Filter using a query in Falcon Query Language (FQL). Supported filters: assigned_cids, "
-        "cid, first_name, last_name, name, uid",
+        "cid, factors, first_name, last_name, name, uid",
         "name": "filter",
         "in": "query"
       },
@@ -323,6 +322,8 @@ _user_management_endpoints = [
           "last_name|desc",
           "name|asc",
           "name|desc",
+          "status|asc",
+          "status|desc",
           "uid|asc",
           "uid|desc"
         ],
@@ -478,13 +479,12 @@ _user_management_endpoints = [
     "user_management",
     [
       {
-        "description": "Attributes for this user. `uid` (required) is the user's email address, which is their "
-        " username in Falcon.\n\nOptional "
-        "attributes:\n\n<ul><li>`firstName`</li><li>`lastName`</li><li>`password`</li></ul>\n\nAs a best practice, we "
-        "recommend omitting `password`. If single sign-on is enabled for your customer account, the `password` "
-        "attribute is ignored. If single sign-on is not enabled, we send a user activation request to their email "
-        "address when you create the user with no `password`. The user should use the activation email to set their own "
-        "password.",
+        "description": "Attributes for this user. uid (required) is the user's email address, which is their "
+        "username in Falcon.\n\nOptional "
+        "attributes:\n\n<ul><li>firstName</li><li>lastName</li><li>password</li></ul>\n\nAs a best practice, we "
+        "recommend omitting password. If single sign-on is enabled for your customer account, the password attribute is "
+        " ignored. If single sign-on is not enabled, we send a user activation request to their email address when you "
+        "create the user with no password. The user should use the activation email to set their own password.",
         "name": "body",
         "in": "body",
         "required": True
