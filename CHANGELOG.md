@@ -233,6 +233,14 @@
     - _UploadFileQuickScanPro_
     - `_endpoint/_quick_scan_pro.py`
 
++ Updated: Cosmetic updates to parameter descriptions in 5 operations within the __Sample Uploads__ service collection.
+    - _ArchiveGetV1_
+    - _ArchiveUploadV1_
+    - _ArchiveUploadV2_
+    - _ExtractionGetV1_
+    - _UploadSampleV3_
+    - `_endpoint/_sample_uploads.py`
+
 ---
 
 # Version 1.4.7
