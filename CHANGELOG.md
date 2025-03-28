@@ -190,6 +190,10 @@
 + Updated: Added default (100) to the `limit` parameter in the _SearchAndReadContainerAlerts_ operation within the __Container Alerts__ service collection.
     - `_endpoint/_container_alerts.py`
 
++ Updated: Cosmetic updates to the `filter`, `ifn_regex`, and `cl_regex` parameter descriptions in 1 operation within the __IOA Exclusions__ service collection.
+    - _queryIOAExclusionsV1_
+    - `_endpoint/_ioa_exclusions.py`
+
 + Updated: Cosmetic updates to `filter` parameter descriptions in 2 operations within the __Installation Tokens__ service collection.
     - _audit_events_query_
     - _tokens_query_
