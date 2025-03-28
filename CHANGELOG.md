@@ -260,6 +260,38 @@
     - _UploadSampleV2_
     - `_endpoint/_falconx_sandbox.py`
 
++ Updated: Updated parameter descriptions in 29 operations within the __FileVantage__ service collection.
+    - _getActionsMixin0_
+    - _startActions_
+    - _getContents_
+    - _getChanges_
+    - _updatePolicyHostGroups_
+    - _updatePolicyPrecedence_
+    - _updatePolicyRuleGroups_
+    - _getPolicies_
+    - _createPolicies_
+    - _updatePolicies_
+    - _deletePolicies_
+    - _getScheduledExclusions_
+    - _createScheduledExclusions_
+    - _updateScheduledExclusions_
+    - _deleteScheduledExclusions_
+    - _updateRuleGroupPrecedence_
+    - _getRules_
+    - _createRules_
+    - _updateRules_
+    - _deleteRules_
+    - _getRuleGroups_
+    - _createRuleGroups_
+    - _updateRuleGroups_
+    - _deleteRuleGroups_
+    - _queryActionsMixin0_
+    - _queryChanges_
+    - _highVolumeQueryChanges_
+    - _queryPolicies_
+    - _queryRuleGroups_
+    - `_endpoint/_filevantage.py`
+
 + Changed: Changed field used for sort enum in 1 operation from `created_time` to `id` within the __Message Center__ service collection.
     - _QueryCasesIdsByFilter_
     - `_endpoint/_message_center.py`
