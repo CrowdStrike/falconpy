@@ -550,7 +550,7 @@ _recon_endpoints = [
       },
       {
         "type": "string",
-        "description": "Possible order by fields: `created_date`, `updated_date`. Ex: `updated_date|desc`.",
+        "description": "Possible order by fields: created_date, updated_date. Ex: updated_date|desc.",
         "name": "sort",
         "in": "query"
       },
@@ -602,7 +602,7 @@ _recon_endpoints = [
       {
         "type": "string",
         "description": "Possible order by fields: created_timestamp, last_updated_timestamp. Ex: "
-        "`last_updated_timestamp|desc`.",
+        "last_updated_timestamp|desc.",
         "name": "sort",
         "in": "query"
       },
@@ -623,7 +623,7 @@ _recon_endpoints = [
       {
         "type": "string",
         "description": "Possible order by fields: created_timestamp, last_updated_timestamp. Ex: "
-        "`last_updated_timestamp|desc`.",
+        "last_updated_timestamp|desc.",
         "name": "secondarySort",
         "in": "query"
       }
