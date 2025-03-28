@@ -194,6 +194,11 @@
     - _queryIOAExclusionsV1_
     - `_endpoint/_ioa_exclusions.py`
 
++ Updated: Cosmetic updates to the `after` parameter description in 2 operations within the __IOC__ service collection.
+    - _indicator_combined_v1_
+    - _indicator_search_v1_
+    - `_endpoint/_ioc.py`
+
 + Updated: Cosmetic updates to `filter` parameter descriptions in 2 operations within the __Installation Tokens__ service collection.
     - _audit_events_query_
     - _tokens_query_
