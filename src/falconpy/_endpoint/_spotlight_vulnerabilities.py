@@ -47,9 +47,9 @@ _spotlight_vulnerabilities_endpoints = [
     [
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
-        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
-        "the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
@@ -75,11 +75,11 @@ _spotlight_vulnerabilities_endpoints = [
         "filter values are unsupported.\n\t\t\tAvailable filter fields that supports match (~): N/A\n\t\t\tAvailable "
         "filter fields that supports exact match: aid, cid, last_seen_within, status, cve.id, cve.is_cisa_kev, "
         "cve.remediation_level, cve.cps_rating, cve.exprt_rating, cve.exploit_status_to_include, cve.severity, "
-        "cve.types, host_info.asset_criticality, host_info.asset_roles, host_info.internet_exposure, host_info.tags, "
-        "host_info.groups, host_info.product_type_desc, host_info.platform_name, suppression_info.is_suppressed, "
-        "suppression_info.reason\n\t\t\tAvailable filter fields that supports wildcard (*): N/A\n\t\t\tAvailable filter "
-        " fields that supports range comparisons (>, <, >=, <=): created_timestamp, closed_timestamp, "
-        "updated_timestamp\n\t\t\t",
+        "cve.base_score, cve.types, host_info.asset_criticality, host_info.asset_roles, host_info.internet_exposure, "
+        "host_info.tags, host_info.groups, host_info.product_type_desc, host_info.platform_name, "
+        "suppression_info.is_suppressed, suppression_info.reason\n\t\t\tAvailable filter fields that supports wildcard "
+        "(*): N/A\n\t\t\tAvailable filter fields that supports range comparisons (>, <, >=, <=): created_timestamp, "
+        "closed_timestamp, updated_timestamp, cve.base_score\n\t\t\t",
         "name": "filter",
         "in": "query",
         "required": True
@@ -148,9 +148,9 @@ _spotlight_vulnerabilities_endpoints = [
     [
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
-        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
-        "the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
@@ -177,11 +177,11 @@ _spotlight_vulnerabilities_endpoints = [
         "filter values are unsupported.\n\t\t\tAvailable filter fields that supports match (~): N/A\n\t\t\tAvailable "
         "filter fields that supports exact match: aid, cid, last_seen_within, status, cve.id, cve.is_cisa_kev, "
         "cve.remediation_level, cve.cps_rating, cve.exprt_rating, cve.exploit_status_to_include, cve.severity, "
-        "cve.types, host_info.asset_criticality, host_info.asset_roles, host_info.internet_exposure, host_info.tags, "
-        "host_info.groups, host_info.product_type_desc, host_info.platform_name, suppression_info.is_suppressed, "
-        "suppression_info.reason\n\t\t\tAvailable filter fields that supports wildcard (*): N/A\n\t\t\tAvailable filter "
-        " fields that supports range comparisons (>, <, >=, <=): created_timestamp, closed_timestamp, "
-        "updated_timestamp\n\t\t\t",
+        "cve.base_score, cve.types, host_info.asset_criticality, host_info.asset_roles, host_info.internet_exposure, "
+        "host_info.tags, host_info.groups, host_info.product_type_desc, host_info.platform_name, "
+        "suppression_info.is_suppressed, suppression_info.reason\n\t\t\tAvailable filter fields that supports wildcard "
+        "(*): N/A\n\t\t\tAvailable filter fields that supports range comparisons (>, <, >=, <=): created_timestamp, "
+        "closed_timestamp, updated_timestamp, cve.base_score\n\t\t\t",
         "name": "filter",
         "in": "query",
         "required": True
