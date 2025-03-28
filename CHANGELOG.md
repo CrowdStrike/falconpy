@@ -210,6 +210,10 @@
     - _QueryFeedArchives_
     - `_endpoint/_intelligence_feeds.py`
 
++ Changed: Changed field used for sort enum in 1 operation from `created_time` to `id` within the __Message Center__ service collection.
+    - _QueryCasesIdsByFilter_
+    - `_endpoint/_message_center.py`
+
 + Updated: Adds missing `file` formData parameter to the _UploadLookupV1_ operation within the __NGSIEM__ service collection.
     - `_endpoint/_ngsiem.py`
 
