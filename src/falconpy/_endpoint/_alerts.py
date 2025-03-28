@@ -146,16 +146,15 @@ _alerts_endpoints = [
     "alerts",
     [
       {
-        "description": "`ids`\n- IDs of Alerts to modify.\n\n`action_parameters` values\n- "
-        "`assign_to_uuid`\n\t- Assign Alert to user UUID, such as `00000000-0000-0000-0000-000000000000`\n- "
-        "`assign_to_user_id`\n\t- Assign Alert to user ID, such as `user@example.com`\n- `assign_to_name`\n\t- Assign "
-        "Alert to username, such as `John Doe`\n- `unassign`\n\t- Unassign Alert clears out the assigned user UUID, "
-        "user ID, and username.\n- `add_tag`\n \t- Add a tag to the Alert.\n- `remove_tag`\n\t- Remove a tag from the "
-        "Alert.\n- `remove_tags_by_prefix`\n\t- Remove tags from the Alert based on the prefix.\n- "
-        "`append_comment`\n\t- Comments are displayed with the Alert in Falcon and are usually used to provide context "
-        "or notes for other Falcon users. An Alert can have multiple comments over time.\n- `update_status` values\n\t-"
-        " `new`\n\t- `in_progress`\n\t- `reopened`\n\t- `closed`\n- `show_in_ui` values\n\t- `true`: This alert is "
-        "displayed in Falcon\n\t- `false`: This alert is not displayed in Falcon.\n",
+        "description": "ids  IDs of Alerts to modify.\n\naction_parameters values  assign_to_uuid\n\t- Assign "
+        "Alert to user UUID, such as 00000000-0000-0000-0000-000000000000  assign_to_user_id\n\t- Assign Alert to user "
+        "ID, such as user@example.com  assign_to_name\n\t- Assign Alert to username, such as John Doe  unassign\n\t- "
+        "Unassign Alert clears out the assigned user UUID, user ID, and username.  add_tag\n \t- Add a tag to the "
+        "Alert.  remove_tag\n\t- Remove a tag from the Alert.  remove_tags_by_prefix\n\t- Remove tags from the Alert "
+        "based on the prefix.  append_comment\n\t- Comments are displayed with the Alert in Falcon and are usually used "
+        " to provide context or notes for other Falcon users. An Alert can have multiple comments over time.  "
+        "update_status values\n\t- new\n\t- in_progress\n\t- reopened\n\t- closed  show_in_ui values\n\t- true: This "
+        "alert is displayed in Falcon\n\t- false: This alert is not displayed in Falcon.\n",
         "name": "body",
         "in": "body",
         "required": True
@@ -179,16 +178,16 @@ _alerts_endpoints = [
         "in": "query"
       },
       {
-        "description": "`composite_ids`\n- CompositeIDs of Alerts to modify.\n\n`action_parameters` values\n- "
-        "`assign_to_uuid`\n\t- Assign Alert to user UUID, such as `00000000-0000-0000-0000-000000000000`\n- "
-        "`assign_to_user_id`\n\t- Assign Alert to user ID, such as `user@example.com`\n- `assign_to_name`\n\t- Assign "
-        "Alert to username, such as `John Doe`\n- `unassign`\n\t- Unassign Alert clears out the assigned user UUID, "
-        "user ID, and username.\n- `add_tag`\n \t- Add a tag to the Alert.\n- `remove_tag`\n\t- Remove a tag from the "
-        "Alert.\n- `remove_tags_by_prefix`\n\t- Remove tags from the Alert based on the prefix.\n- "
-        "`append_comment`\n\t- Comments are displayed with the Alert in Falcon and are usually used to provide context "
-        "or notes for other Falcon users. An Alert can have multiple comments over time.\n- `update_status` values\n\t-"
-        " `new`\n\t- `in_progress`\n\t- `reopened`\n\t- `closed`\n- `show_in_ui` values\n\t- `true`: This alert is "
-        "displayed in Falcon\n\t- `false`: This alert is not displayed in Falcon.\n",
+        "description": "composite_ids  CompositeIDs of Alerts to modify.\n\naction_parameters values  "
+        "assign_to_uuid\n\t- Assign Alert to user UUID, such as 00000000-0000-0000-0000-000000000000  "
+        "assign_to_user_id\n\t- Assign Alert to user ID, such as user@example.com  assign_to_name\n\t- Assign Alert to "
+        "username, such as John Doe  unassign\n\t- Unassign Alert clears out the assigned user UUID, user ID, and "
+        "username.  add_tag\n \t- Add a tag to the Alert.  remove_tag\n\t- Remove a tag from the Alert.  "
+        "remove_tags_by_prefix\n\t- Remove tags from the Alert based on the prefix.  append_comment\n\t- Comments are "
+        "displayed with the Alert in Falcon and are usually used to provide context or notes for other Falcon users. An "
+        " Alert can have multiple comments over time.  update_status values\n\t- new\n\t- in_progress\n\t- "
+        "reopened\n\t- closed  show_in_ui values\n\t- true: This alert is displayed in Falcon\n\t- false: This alert is "
+        "not displayed in Falcon.\n",
         "name": "body",
         "in": "body",
         "required": True
@@ -204,8 +203,8 @@ _alerts_endpoints = [
     [
       {
         "type": "integer",
-        "description": "The first detection to return, where `0` is the latest detection. Use with the "
-        "`offset` parameter to manage pagination of results.",
+        "description": "The first detection to return, where 0 is the latest detection. Use with the offset "
+        "parameter to manage pagination of results.",
         "name": "offset",
         "in": "query"
       },
@@ -214,16 +213,16 @@ _alerts_endpoints = [
         "minimum": 0,
         "type": "integer",
         "description": "The maximum number of detections to return in this response (default: 100; max: "
-        "10000). Use with the `offset` parameter to manage pagination of results.",
+        "10000). Use this parameter together with the offset parameter to manage pagination of the results.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Sort parameter takes the form <field|direction>. Direction can be either `asc` "
-        "(ascending) or `desc` (descending) order. For example: `status|asc` or `status|desc`.\n\nThe sorting fields "
-        "can be any keyword field that is part of #domain.Alert except for the text based fields. Most commonly used "
-        "fields are status, cid, aggregate_id, timestamp, created_timestamp, updated_timestamp, assigned_to_name, "
+        "description": "Sort parameter takes the form <field|direction>. Direction can be either asc "
+        "(ascending) or desc (descending) order. For example: status|asc or status|desc.\n\nThe sorting fields can be "
+        "any keyword field that is part of #domain.Alert except for the text based fields. Most commonly used fields "
+        "are status, cid, aggregate_id, timestamp, created_timestamp, updated_timestamp, assigned_to_name, "
         "assigned_to_uid, assigned_to_uuid, show_in_ui, tactic_id, tactic, technique, technique_id, pattern_id, "
         "product, comment, tags\nIf the fields are missing from the Alerts, the service will fallback to its default "
         "ordering ",
@@ -233,7 +232,7 @@ _alerts_endpoints = [
       {
         "type": "string",
         "description": "Filter Alerts using a query in Falcon Query Language (FQL).Filter fields can be any "
-        "keyword field that is part of #domain.Alert \nAn asterisk wildcard `*` includes all results.  \nEmpty value "
+        "keyword field that is part of #domain.Alert \nAn asterisk wildcard * includes all results.  \nEmpty value "
         "means to not filter on anything.\nMost commonly used filter fields that supports exact match: cid, id, "
         "aggregate_id, product, type, pattern_id, platform ...\nMost commonly used filter fields that supports wildcard "
         " (*): assigned_to_name, assigned_to_uuid, tactic_id, technique ...\nMost commonly filter fields that supports "
@@ -268,8 +267,8 @@ _alerts_endpoints = [
       },
       {
         "type": "integer",
-        "description": "The first detection to return, where `0` is the latest detection. Use with the "
-        "`offset` parameter to manage pagination of results.",
+        "description": "The first detection to return, where 0 is the latest detection. Use with the offset "
+        "parameter to manage pagination of results.",
         "name": "offset",
         "in": "query"
       },
@@ -278,16 +277,16 @@ _alerts_endpoints = [
         "minimum": 0,
         "type": "integer",
         "description": "The maximum number of detections to return in this response (default: 100; max: "
-        "10000). Use with the `offset` parameter to manage pagination of results.",
+        "10000). Use this parameter together with the offset parameter to manage pagination of the results.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Sort parameter takes the form <field|direction>. Direction can be either `asc` "
-        "(ascending) or `desc` (descending) order. For example: `status|asc` or `status|desc`.\n\nThe sorting fields "
-        "can be any keyword field that is part of #domain.Alert except for the text based fields. Most commonly used "
-        "fields are status, cid, aggregate_id, timestamp, created_timestamp, updated_timestamp, assigned_to_name, "
+        "description": "Sort parameter takes the form <field|direction>. Direction can be either asc "
+        "(ascending) or desc (descending) order. For example: status|asc or status|desc.\n\nThe sorting fields can be "
+        "any keyword field that is part of #domain.Alert except for the text based fields. Most commonly used fields "
+        "are status, cid, aggregate_id, timestamp, created_timestamp, updated_timestamp, assigned_to_name, "
         "assigned_to_uid, assigned_to_uuid, show_in_ui, tactic_id, tactic, technique, technique_id, pattern_id, "
         "product, comment, tags\nIf the fields are missing from the Alerts, the service will fallback to its default "
         "ordering ",
@@ -297,7 +296,7 @@ _alerts_endpoints = [
       {
         "type": "string",
         "description": "Filter Alerts using a query in Falcon Query Language (FQL).Filter fields can be any "
-        "keyword field that is part of #domain.Alert \nAn asterisk wildcard `*` includes all results.  \nEmpty value "
+        "keyword field that is part of #domain.Alert \nAn asterisk wildcard * includes all results.  \nEmpty value "
         "means to not filter on anything.\nMost commonly used filter fields that supports exact match: cid, id, "
         "aggregate_id, product, type, pattern_id, platform ...\nMost commonly used filter fields that supports wildcard "
         " (*): assigned_to_name, assigned_to_uuid, tactic_id, technique ...\nMost commonly filter fields that supports "
