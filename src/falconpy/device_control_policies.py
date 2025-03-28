@@ -35,10 +35,18 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302
 from typing import Dict, Union
 from ._util import generate_error_result, force_default, args_to_params
 from ._util import process_service_request, handle_single_argument
-from ._payload import generic_payload_list, device_policy_payload, default_device_policy_config_payload
+from ._payload import (
+    generic_payload_list,
+    device_policy_payload,
+    default_device_policy_config_payload,
+    device_classes_policy_payload,
+    device_policy_bluetooth_config_payload,
+    device_control_policy_payload_v2
+    )
 from ._service_class import ServiceClass
 from ._endpoint._device_control_policies import _device_control_policies_endpoints as Endpoints
 
@@ -278,6 +286,197 @@ class DeviceControlPolicies(ServiceClass):
         return returned
 
     @force_default(defaults=["body"], default_types=["dict"])
+    def update_policy_classes(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Update device control policy's classes (USB and Bluetooth).
+
+        Keyword arguments:
+        body -- full body payload, not required if keywords are used.
+                {
+                    "policies": [
+                        {
+                            "bluetooth_classes": {
+                                "classes": [
+                                    {
+                                        "action": "string",
+                                        "class": "string",
+                                        "minor_classes": [
+                                            {
+                                                "action": "string",
+                                                "minor_class": "string"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "delete_exceptions": [
+                                    "string"
+                                ],
+                                "upsert_exceptions": [
+                                    {
+                                        "action": "string",
+                                        "class": "string",
+                                        "description": "string",
+                                        "expiration_time": "UTC date string",
+                                        "id": "string",
+                                        "minor_classes": [
+                                            "string"
+                                        ],
+                                        "product_id": "string",
+                                        "product_name": "string",
+                                        "vendor_id": "string",
+                                        "vendor_id_source": "string",
+                                        "vendor_name": "string"
+                                    }
+                                ]
+                            },
+                            "id": "string",
+                            "usb_classes": {
+                                "classes": [
+                                    {
+                                        "action": "string",
+                                        "class": "string"
+                                    }
+                                ],
+                                "delete_exceptions": [
+                                    "string"
+                                ],
+                                "upsert_exceptions": [
+                                    {
+                                        "action": "string",
+                                        "class": "string",
+                                        "combined_id": "string",
+                                        "description": "string",
+                                        "expiration_time": "UTC date string",
+                                        "id": "string",
+                                        "product_id": "string",
+                                        "product_name": "string",
+                                        "serial_number": "string",
+                                        "use_wildcard": boolean,
+                                        "vendor_id": "string",
+                                        "vendor_name": "string"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+        bluetooth_classes -- Bluetooth device control policy. Dictionary.
+        id -- Device control policy ID. String.
+        usb_classes -- USB device control policy. Dictionary.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /device-control-with-bluetooth/patchDeviceControlPoliciesClassesV1
+        """
+        if not body:
+            body = device_classes_policy_payload(kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="patchDeviceControlPoliciesClassesV1",
+            body=body
+            )
+
+    def get_default_settings(self: object) -> Dict[str, Union[int, dict]]:
+        """Get default device control settings (USB and Bluetooth).
+
+        Keyword arguments:
+        This method does not accept keyword arguments.
+
+        Arguments:
+        This method does not accept arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /device-control-with-bluetooth/getDefaultDeviceControlSettings
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getDefaultDeviceControlSettings"
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_default_settings(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Update the configuration for Default Device Control Settings.
+
+        Keyword arguments:
+        body -- full body payload, not required if keywords are used.
+                {
+                    "bluetooth_custom_notifications": {
+                        "blocked_notification": {
+                            "custom_message": "string",
+                            "use_custom": boolean
+                        }
+                    },
+                    "usb_custom_notifications": {
+                        "blocked_notification": {
+                            "custom_message": "string",
+                            "use_custom": boolean
+                        },
+                        "restricted_notification": {
+                            "custom_message": "string",
+                            "use_custom": boolean
+                        }
+                    },
+                    "usb_exceptions": [
+                        {
+                            "delete_exceptions": [
+                                "string"
+                            ],
+                            "platform_name": "string",
+                            "upsert_exceptions": [
+                                {
+                                    "action": "string",
+                                    "class": "string",
+                                    "combined_id": "string",
+                                    "description": "string",
+                                    "id": "string",
+                                    "product_id": "string",
+                                    "product_name": "string",
+                                    "serial_number": "string",
+                                    "vendor_id": "string",
+                                    "vendor_name": "string"
+                                }
+                            ]
+                        }
+                    ]
+                }
+        bluetooth_custom_notifications -- Custom bluetooth notifications. Dictionary.
+        usb_custom_notifications -- Custom USB notifications. Dictionary.
+        usb_exceptions -- USB exceptions. Dictionary or list of dictionaries.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /device-control-with-bluetooth/patchDeviceControlPoliciesClassesV1
+        """
+        if not body:
+            body = device_policy_bluetooth_config_payload(kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="updateDefaultDeviceControlSettings",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
     def set_precedence(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Set Device Control Policy precedence.
 
@@ -457,6 +656,175 @@ class DeviceControlPolicies(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_policies_v2(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get device control policies for the given filter criteria. Supports USB and Bluetooth.
+
+        Keyword arguments:
+        ids -- List of Device Control Policy IDs to retrieve. String or list of strings.
+        parameters -- full parameters payload, not required if ids is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /device-control-with-bluetooth/getDeviceControlPoliciesV2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getDeviceControlPoliciesV2",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_policies_v2(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Create Device Control Policies by specifying details about the policy to create.
+
+        Keyword arguments:
+        body -- full body payload, not required if keywords are used.
+                {
+                    "policies": [
+                        {
+                            "bluetooth_settings": {
+                                "custom_end_user_notifications": {
+                                    "blocked_notification": {
+                                        "custom_message": "string",
+                                        "use_custom": boolean
+                                    }
+                                },
+                                "end_user_notification": "string",
+                                "enforcement_mode": "string"
+                            },
+                            "clone_id": "string",
+                            "description": "string",
+                            "name": "string",
+                            "platform_name": "string",
+                            "usb_settings": {
+                                "custom_notifications": {
+                                    "blocked_notification": {
+                                        "custom_message": "string",
+                                        "use_custom": boolean
+                                    },
+                                    "restricted_notification": {
+                                        "custom_message": "string",
+                                        "use_custom": boolean
+                                    }
+                                },
+                                "end_user_notification": "string",
+                                "enforcement_mode": "string",
+                                "enhanced_file_metadata": boolean,
+                                "whitelist_mode": "string"
+                            }
+                        }
+                    ]
+                }
+        bluetooth_settings -- Device Control policy USB specific settings. Dictionary.
+                              See above for JSON dictionary format example.
+        clone_id -- ID of the Device Control Policy to clone. String.
+        description -- Device Control Policy description. String.
+        name -- Device Control Policy name. String.
+        platform_name -- Name of the operating system platform. String.
+        usb_settings -- Device Control policy USB specific settings. Dictionary.
+                        See above for JSON dictionary format example.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+                    /device-control-policies/createDeviceControlPolicies
+        """
+        if not body:
+            body = device_control_policy_payload_v2(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="postDeviceControlPoliciesV2",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_policies_v2(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Create Device Control Policies by specifying details about the policy to create.
+
+        Keyword arguments:
+        body -- full body payload, not required if keywords are used.
+                {
+                    "policies": [
+                        {
+                            "bluetooth_settings": {
+                                "custom_end_user_notifications": {
+                                    "blocked_notification": {
+                                        "custom_message": "string",
+                                        "use_custom": boolean
+                                    }
+                                },
+                                "end_user_notification": "string",
+                                "enforcement_mode": "string"
+                            },
+                            "description": "string",
+                            "id": "string",
+                            "name": "string",
+                            "platform_name": "string",
+                            "usb_settings": {
+                                "custom_notifications": {
+                                    "blocked_notification": {
+                                        "custom_message": "string",
+                                        "use_custom": boolean
+                                    },
+                                    "restricted_notification": {
+                                        "custom_message": "string",
+                                        "use_custom": boolean
+                                    }
+                                },
+                                "end_user_notification": "string",
+                                "enforcement_mode": "string",
+                                "enhanced_file_metadata": boolean,
+                                "whitelist_mode": "string"
+                            }
+                        }
+                    ]
+                }
+        bluetooth_settings -- Device Control policy USB specific settings. Dictionary.
+                              See above for JSON dictionary format example.
+        description -- Device Control Policy description. String.
+        id -- ID of the Device Control Policy to update. String.
+        name -- Device Control Policy name. String.
+        platform_name -- Name of the operating system platform. String.
+        usb_settings -- Device Control policy USB specific settings. Dictionary.
+                        See above for JSON dictionary format example.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /device-control-with-bluetooth/patchDeviceControlPoliciesV2
+        """
+        if not body:
+            body = device_control_policy_payload_v2(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="patchDeviceControlPoliciesV2",
+            body=body
+            )
+
     @force_default(defaults=["body"], default_types=["dict"])
     def update_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update Device Control Policies by specifying the ID of the policy and details to update.
@@ -622,10 +990,16 @@ class DeviceControlPolicies(ServiceClass):
     getDefaultDeviceControlPolicies = get_default_policies
     updateDefaultDeviceControlPolicies = update_default_policies
     performDeviceControlPoliciesAction = perform_action
+    patchDeviceControlPoliciesClassesV1 = update_policy_classes
+    getDefaultDeviceControlSettings = get_default_settings
+    updateDefaultDeviceControlSettings = update_default_settings
     setDeviceControlPoliciesPrecedence = set_precedence
     getDeviceControlPolicies = get_policies
     createDeviceControlPolicies = create_policies
     deleteDeviceControlPolicies = delete_policies
+    getDeviceControlPoliciesV2 = get_policies_v2
+    postDeviceControlPoliciesV2 = create_policies_v2
+    patchDeviceControlPoliciesV2 = update_policies_v2
     updateDeviceControlPolicies = update_policies
     queryDeviceControlPolicyMembers = query_policy_members
     queryDeviceControlPolicies = query_policies

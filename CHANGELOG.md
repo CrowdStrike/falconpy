@@ -108,6 +108,20 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_device_content.py`
 
++ Added: Added 6 new operations to the __Device Control Policies__ service collection.
+    - _patchDeviceControlPoliciesClassesV1_
+    - _getDefaultDeviceControlSettings_
+    - _updateDefaultDeviceControlSettings_
+    - _getDeviceControlPoliciesV2_
+    - _postDeviceControlPoliciesV2_
+    - _patchDeviceControlPoliciesV2_
+    - `_endpoint/_device_control_policies.py`
+    - `_payload/__init__.py`
+    - `_payload/_device_control_policy.py`
+    - `device_control_policies.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_device_control_policies.py`
+
 + Added: Added new __Intelligence Indicator Graph__ service collection with 1 new operation.
     - _SearchIndicators_
     - `_endpoint/__init__.py`

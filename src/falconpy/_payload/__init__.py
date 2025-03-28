@@ -92,7 +92,13 @@ from ._cspm_registration import (
     cspm_scan_payload,
     cspm_service_account_validate_payload
     )
-from ._device_control_policy import device_policy_payload, default_device_policy_config_payload
+from ._device_control_policy import (
+    device_policy_payload,
+    default_device_policy_config_payload,
+    device_classes_policy_payload,
+    device_policy_bluetooth_config_payload,
+    device_control_policy_payload_v2
+    )
 from ._exposure_management import fem_asset_payload
 from ._falconx import falconx_payload
 from ._filevantage import (
@@ -163,5 +169,6 @@ __all__ = [
     "aspm_application_payload", "correlation_rules_payload", "ngsiem_search_payload",
     "cloud_aws_registration_payload", "cloud_azure_registration_payload", "cloud_oci_refresh_payload",
     "cloud_oci_validate_payload", "cloud_oci_create_payload", "indicator_graph_payload",
-    "content_update_policy_action_payload", "content_update_policy_payload"
+    "content_update_policy_action_payload", "content_update_policy_payload", "device_classes_policy_payload",
+    "device_policy_bluetooth_config_payload", "device_control_policy_payload_v2"
 ]

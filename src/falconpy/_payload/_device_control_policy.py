@@ -35,9 +35,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, List, Union
 
 
-def device_policy_payload(passed_keywords: dict) -> dict:
+def device_policy_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int, bool]]]]:
     """Create a properly formatted device control policy payload.
 
     Supports create and update operations. Single policy only.
@@ -111,7 +112,7 @@ def device_policy_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def default_device_policy_config_payload(passed_keywords: dict) -> dict:
+def default_device_policy_config_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int, bool]]]]:
     """Create a properly formatted device control policy default configuration payload.
 
     {
@@ -154,3 +155,198 @@ def default_device_policy_config_payload(passed_keywords: dict) -> dict:
         returned_payload["custom_notifications"] = custom_notifications
 
     return returned_payload
+
+
+def device_classes_policy_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int, bool]]]]:
+    """Craft a properly formatted device classes policy payload that supports bluetooth and USB.
+
+    {
+        "policies": [
+            {
+                "bluetooth_classes": {
+                    "classes": [
+                        {
+                            "action": "string",
+                            "class": "string",
+                            "minor_classes": [
+                                {
+                                    "action": "string",
+                                    "minor_class": "string"
+                                }
+                            ]
+                        }
+                    ],
+                    "delete_exceptions": [
+                        "string"
+                    ],
+                    "upsert_exceptions": [
+                        {
+                            "action": "string",
+                            "class": "string",
+                            "description": "string",
+                            "expiration_time": "UTC date string",
+                            "id": "string",
+                            "minor_classes": [
+                                "string"
+                            ],
+                            "product_id": "string",
+                            "product_name": "string",
+                            "vendor_id": "string",
+                            "vendor_id_source": "string",
+                            "vendor_name": "string"
+                        }
+                    ]
+                },
+                "id": "string",
+                "usb_classes": {
+                    "classes": [
+                        {
+                            "action": "string",
+                            "class": "string"
+                        }
+                    ],
+                    "delete_exceptions": [
+                        "string"
+                    ],
+                    "upsert_exceptions": [
+                        {
+                            "action": "string",
+                            "class": "string",
+                            "combined_id": "string",
+                            "description": "string",
+                            "expiration_time": "UTC date string",
+                            "id": "string",
+                            "product_id": "string",
+                            "product_name": "string",
+                            "serial_number": "string",
+                            "use_wildcard": boolean,
+                            "vendor_id": "string",
+                            "vendor_name": "string"
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+    """
+    returned = {}
+    returned["policies"] = []
+    item = {}
+    keys = ["bluetooth_classes", "id", "usb_classes"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            item[key] = passed_keywords.get(key, None)
+    returned["policies"].append(item)
+
+    return returned
+
+
+def device_policy_bluetooth_config_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int, bool]]]]:
+    """Craft a properly formatted device control configuration payload that supports bluetooth and USB.
+
+    {
+        "bluetooth_custom_notifications": {
+            "blocked_notification": {
+                "custom_message": "string",
+                "use_custom": boolean
+            }
+        },
+        "usb_custom_notifications": {
+            "blocked_notification": {
+                "custom_message": "string",
+                "use_custom": boolean
+            },
+            "restricted_notification": {
+                "custom_message": "string",
+                "use_custom": boolean
+            }
+        },
+        "usb_exceptions": [
+            {
+                "delete_exceptions": [
+                    "string"
+                ],
+                "platform_name": "string",
+                "upsert_exceptions": [
+                    {
+                        "action": "string",
+                        "class": "string",
+                        "combined_id": "string",
+                        "description": "string",
+                        "id": "string",
+                        "product_id": "string",
+                        "product_name": "string",
+                        "serial_number": "string",
+                        "vendor_id": "string",
+                        "vendor_name": "string"
+                    }
+                ]
+            }
+        ]
+    }
+    """
+    returned = {}
+    keys = ["bluetooth_custom_notifications", "usb_custom_notifications", "usb_exceptions"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            provided = passed_keywords.get(key, None)
+            if key == "usb_exceptions" and isinstance(provided, dict):
+                provided = [provided]
+            returned[key] = provided
+
+    return returned
+
+
+def device_control_policy_payload_v2(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int, bool]]]]:
+    """Craft a properly formatted device control policy v2 payload.
+
+    {
+        "policies": [
+            {
+                "bluetooth_settings": {
+                    "custom_end_user_notifications": {
+                        "blocked_notification": {
+                            "custom_message": "string",
+                            "use_custom": boolean
+                        }
+                    },
+                    "end_user_notification": "string",
+                    "enforcement_mode": "string"
+                },
+                "clone_id": "string",
+                "id": "string",
+                "description": "string",
+                "name": "string",
+                "platform_name": "string",
+                "usb_settings": {
+                    "custom_notifications": {
+                        "blocked_notification": {
+                            "custom_message": "string",
+                            "use_custom": boolean
+                        },
+                        "restricted_notification": {
+                            "custom_message": "string",
+                            "use_custom": boolean
+                        }
+                    },
+                    "end_user_notification": "string",
+                    "enforcement_mode": "string",
+                    "enhanced_file_metadata": boolean,
+                    "whitelist_mode": "string"
+                }
+            }
+        ]
+    }
+    """
+    returned = {}
+    returned["policies"] = []
+    item = {}
+    keys = ["bluetooth_settings", "clone_id", "id", "description",
+            "name", "platform_name", "usb_settings"
+            ]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            item[key] = passed_keywords.get(key, None)
+    returned["policies"].append(item)
+
+    return returned
