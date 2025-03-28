@@ -340,6 +340,23 @@
     - _UploadFileQuickScanPro_
     - `_endpoint/_quick_scan_pro.py`
 
++ Updated: Cosmetic updates to parameter descriptions in 13 operations within the __Real Time Response__ service collection.
+    - _RTR_AggregateSessions_
+    - _BatchActiveResponderCmd_
+    - _BatchCmd_
+    - _BatchGetCmdStatus_
+    - _BatchGetCmd_
+    - _BatchInitSessions_
+    - _BatchRefreshSessions_
+    - _RTR_ExecuteActiveResponderCommand_
+    - _RTR_ExecuteCommand_
+    - _RTR_ListQueuedSessions_
+    - _RTR_PulseSession_
+    - _RTR_ListSessions_
+    - _RTR_InitSession_
+    - `_endpoint/_real_time_response.py`
+    - `_endpoint/deprecated/_real_time_response.py`
+
 + Updated: Cosmetic updates to parameter descriptions in 5 operations within the __Sample Uploads__ service collection.
     - _ArchiveGetV1_
     - _ArchiveUploadV1_
