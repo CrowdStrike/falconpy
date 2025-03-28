@@ -144,9 +144,9 @@ _ioc_endpoints = [
       },
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
-        " your first request, don't provide an 'after' token. On subsequent requests, provide the 'after' token from "
-        "the previous response to continue from that place in the results. To access more than 10k indicators, use the "
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an 'after' token. On subsequent requests, provide the 'after' token from the "
+        " previous response to continue from that place in the results. To access more than 10k indicators, use the "
         "'after' parameter instead of 'offset'.",
         "name": "after",
         "in": "query"
@@ -469,9 +469,9 @@ _ioc_endpoints = [
       },
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
-        " your first request, don't provide an 'after' token. On subsequent requests, provide the 'after' token from "
-        "the previous response to continue from that place in the results. To access more than 10k indicators, use the "
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an 'after' token. On subsequent requests, provide the 'after' token from the "
+        " previous response to continue from that place in the results. To access more than 10k indicators, use the "
         "'after' parameter instead of 'offset'.",
         "name": "after",
         "in": "query"
