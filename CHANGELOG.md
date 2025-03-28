@@ -210,6 +210,22 @@
     - _QueryDetects_
     - `_endpoint/_detects.py`
 
++ Updated: Cosmetic updates to parameter descriptions in 12 operations within the __Discover__ service collection.
+    - _combined_applications_
+    - _combined_hosts_
+    - _get_accounts_
+    - _get_hosts_
+    - _get_iot_hosts_
+    - _get_logins_
+    - _query_accounts_
+    - _query_applications_
+    - _query_hosts_
+    - _query_iot_hosts_
+    - _query_iot_hostsV2_
+    - _query_logins_
+    - `_endpoint/_discover.py`
+    - `_endpoint/deprecated/_discover.py`
+
 + Updated: Cosmetic updates to the `filter`, `ifn_regex`, and `cl_regex` parameter descriptions in 1 operation within the __IOA Exclusions__ service collection.
     - _queryIOAExclusionsV1_
     - `_endpoint/_ioa_exclusions.py`
