@@ -303,6 +303,9 @@
 + Updated: Removed default value from `include_test_data` boolean parameter, added `async_offload` to `mode` enum in the _CreateSavedSearchesDynamicExecuteV1_ operation within the __Foundry LogScale__ service collection.
     - `_endpoint/_foundry_logscale.py`
 
++ Updated: Removed default value from `include_test_data` boolean parameter in the _CreateSavedSearchesExecuteV1_ operation within the __Foundry LogScale__ service collection.
+    - `_endpoint/_foundry_logscale.py`
+
 + Changed: Changed field used for sort enum in 1 operation from `created_time` to `id` within the __Message Center__ service collection.
     - _QueryCasesIdsByFilter_
     - `_endpoint/_message_center.py`

@@ -296,7 +296,6 @@ _foundry_logscale_endpoints = [
       },
       {
         "type": "boolean",
-        "default": False,
         "description": "Include test data when executing searches",
         "name": "include_test_data",
         "in": "query"
