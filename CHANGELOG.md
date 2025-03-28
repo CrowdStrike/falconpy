@@ -402,6 +402,10 @@
 + Updated: Cosmetic update to the `action_name` parameter in the _WorkflowExecutionsAction_ operation within the __Workflows__ service collection.
     - `_endpoint/_workflows.py`
 
++ Updated: Cosmetic updates to `after` and `limit` parameter descriptions in the _getAssessmentsByScoreV1_ operation within the __Zero Trust Assessment__ service collection.
+    - `_endpoint/_zero_trust_assessment.py`
+
+
 ---
 
 # Version 1.4.7
