@@ -190,6 +190,12 @@
 + Updated: Added default (100) to the `limit` parameter in the _SearchAndReadContainerAlerts_ operation within the __Container Alerts__ service collection.
     - `_endpoint/_container_alerts.py`
 
++ Updated: Cosmetic updates to multiple operations within the __Intelligence Feeds__ service collection.
+    - _DownloadFeedArchive_
+    - _ListFeedTypes_
+    - _QueryFeedArchives_
+    - `_endpoint/_intelligence_feeds.py`
+
 + Updated: Adds missing `file` formData parameter to the _UploadLookupV1_ operation within the __NGSIEM__ service collection.
     - `_endpoint/_ngsiem.py`
 
