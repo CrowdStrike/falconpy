@@ -84,7 +84,7 @@ _sample_uploads_endpoints = [
       {
         "type": "boolean",
         "default": False,
-        "description": "If `true` includes processed archive files in response.",
+        "description": "If true includes processed archive files in response.",
         "name": "include_files",
         "in": "query"
       }
@@ -101,9 +101,9 @@ _sample_uploads_endpoints = [
     "sample_uploads",
     [
       {
-        "description": "Content of the uploaded archive in binary format. For example, use `--data-binary "
-        "@$FILE_PATH` when using cURL. Max file size: 100 MB.\n\nAccepted file formats:\n\n- Portable executables: "
-        "`.zip`, `.7z`.",
+        "description": "Content of the uploaded archive in binary format. For example, use --data-binary "
+        "@$FILE_PATH when using cURL. Max file size: 100 MB.\n\nAccepted file formats:\n  Portable executables: .zip, "
+        ".7z.",
         "name": "body",
         "in": "body",
         "required": True
@@ -124,9 +124,9 @@ _sample_uploads_endpoints = [
       {
         "type": "boolean",
         "default": True,
-        "description": "Defines visibility of this file, either via the API or the Falcon console.\n\n- "
-        "`true`: File is only shown to users within your customer account\n- `false`: File can be seen by other "
-        "CrowdStrike customers \n\nDefault: `true`.",
+        "description": "Defines visibility of this file, either via the API or the Falcon console.\n  true: "
+        "File is only shown to users within your customer account  false: File can be seen by other CrowdStrike "
+        "customers \n\nDefault: True.",
         "name": "is_confidential",
         "in": "query"
       },
@@ -165,21 +165,21 @@ _sample_uploads_endpoints = [
     [
       {
         "type": "file",
-        "description": "Content of the uploaded archive. For example, use `--form file=@$FILE_PATH;type=` when "
-        "using cURL. Supported file types are `application/zip` and `application/x-7z-compressed`.",
+        "description": "Content of the uploaded archive. For example, use --form file=@$FILE_PATH;type= when "
+        "using cURL. Supported file types are application/zip and application/x-7z-compressed.",
         "name": "file",
         "in": "formData",
         "required": True
       },
       {
         "type": "string",
-        "description": "Archive password. For example, use `--form password=` when using cURL.",
+        "description": "Archive password. For example, use --form password= when using cURL.",
         "name": "password",
         "in": "formData"
       },
       {
         "type": "string",
-        "description": "Name of the archive. For example, use `--form name=` when using cURL.",
+        "description": "Name of the archive. For example, use --form name= when using cURL.",
         "name": "name",
         "in": "formData",
         "required": True
@@ -188,16 +188,15 @@ _sample_uploads_endpoints = [
         "type": "boolean",
         "default": True,
         "description": "Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon "
-        "console. For example, use `--form is_confidential=` when using cURL.\n\n- `true`: File is only shown to users "
-        "within your customer account\n- `false`: File can be seen by other CrowdStrike customers \n\nDefault: "
-        "`true`.",
+        "console. For example, use --form is_confidential= when using cURL.\n  true: File is only shown to users within "
+        "your customer account  false: File can be seen by other CrowdStrike customers \n\nDefault: True.",
         "name": "is_confidential",
         "in": "formData"
       },
       {
         "type": "string",
-        "description": "A descriptive comment to identify the file for other users. For example, use `--form "
-        "comment=` when using cURL.",
+        "description": "A descriptive comment to identify the file for other users. For example, use --form "
+        "comment= when using cURL.",
         "name": "comment",
         "in": "formData"
       }
@@ -251,7 +250,7 @@ _sample_uploads_endpoints = [
       {
         "type": "boolean",
         "default": False,
-        "description": "If `true` includes processed archive files in response.",
+        "description": "If true includes processed archive files in response.",
         "name": "include_files",
         "in": "query"
       }
@@ -303,14 +302,13 @@ _sample_uploads_endpoints = [
     [
       {
         "type": "file",
-        "description": "Content of the uploaded sample in binary format. For example, use `--data-binary "
-        "@$FILE_PATH` when using cURL. Max file size: 256 MB.\n\nAccepted file formats:\n\n- Portable executables: "
-        "`.exe`, `.scr`, `.pif`, `.dll`, `.com`, `.cpl`, etc.\n- Office documents: `.doc`, `.docx`, `.ppt`, `.pps`, "
-        "`.pptx`, `.ppsx`, `.xls`, `.xlsx`, `.rtf`, `.pub`\n- PDF\n- APK\n- Executable JAR\n- Windows script component: "
-        " `.sct`\n- Windows shortcut: `.lnk`\n- Windows help: `.chm`\n- HTML application: `.hta`\n- Windows script "
-        "file: `.wsf`\n- Javascript: `.js`\n- Visual Basic: `.vbs`,  `.vbe`\n- Shockwave Flash: `.swf`\n- Perl: "
-        "`.pl`\n- Powershell: `.ps1`, `.psd1`, `.psm1`\n- Scalable vector graphics: `.svg`\n- Python: `.py`\n- Linux "
-        "ELF executables\n- Email files: MIME RFC 822 `.eml`, Outlook `.msg`.",
+        "description": "Content of the uploaded sample in binary format. For example, use --data-binary "
+        "@$FILE_PATH when using cURL. Max file size: 256 MB.\n\nAccepted file formats:\n  Portable executables: .exe, "
+        ".scr, .pif, .dll, .com, .cpl, etc.  Office documents: .doc, .docx, .ppt, .pps, .pptx, .ppsx, .xls, .xlsx, "
+        ".rtf, .pub  PDF  APK  Executable JAR  Windows script component: .sct  Windows shortcut: .lnk  Windows help: "
+        ".chm  HTML application: .hta  Windows script file: .wsf  Javascript: .js  Visual Basic: .vbs,  .vbe  Shockwave "
+        " Flash: .swf  Perl: .pl  Powershell: .ps1, .psd1, .psm1  Scalable vector graphics: .svg  Python: .py  Linux "
+        "ELF executables  Email files: MIME RFC 822 .eml, Outlook .msg.",
         "name": "sample",
         "in": "formData",
         "required": True
@@ -332,8 +330,8 @@ _sample_uploads_endpoints = [
         "type": "boolean",
         "default": True,
         "description": "Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon "
-        "console.\n\n- `true`: File is only shown to users within your customer account\n- `false`: File can be seen by "
-        "other CrowdStrike customers \n\nDefault: `true`.",
+        "console.\n  true: File is only shown to users within your customer account  false: File can be seen by other "
+        "CrowdStrike customers \n\nDefault: True.",
         "name": "is_confidential",
         "in": "formData"
       }
