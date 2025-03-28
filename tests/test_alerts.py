@@ -93,7 +93,8 @@ class TestAlerts:
             "get_alerts_v1": falcon.get_alerts_v1(ids="12345678"),
             "get_alerts_v2": falcon.get_alerts_v2(ids="12345678"),
             "query_alerts_v1": falcon.query_alerts_v1(),
-            "query_alerts_v2": falcon.query_alerts_v2()
+            "query_alerts_v2": falcon.query_alerts_v2(),
+            "get_alerts_combined": falcon.get_alerts_combined(limit=1)
 
         }
         for key in tests:

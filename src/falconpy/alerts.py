@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union, Optional, List
 from ._util import force_default, process_service_request
 from ._payload import (
-    aggregate_payload, generic_payload_list, update_alerts_payload
+    aggregate_payload, generic_payload_list, update_alerts_payload, combined_alerts_payload
     )
 from ._service_class import ServiceClass
 from ._endpoint._alerts import _alerts_endpoints as Endpoints
@@ -473,6 +473,84 @@ class Alerts(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
+    def get_alerts_combined(self, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve all Alerts that match a particular FQL filter.
+
+        This API is intended for retrieval of large amounts of Alerts(>10k) using a pagination based on a `after` token.
+
+        Keyword arguments:
+        after -- The after token is used for pagination of results. String.
+                 The after token is present when more results are available on the next page.
+                 To retrieve all Alerts:
+                    Use the after token in subsequent requests to fetch the next page.
+                    Continue this process until you reach a page without an after token, indicating the last page.
+                    This value is highly dependant on the sort parameter, so if you plan to change the sort order,
+                    you will have to re-start your search from the first page (without after parameter).
+        body -- Full body payload as a JSON formatted dictionary, not required when ids keyword is provided.
+                {
+                    "after": "string",
+                    "filter": "string",
+                    "limit": integer,
+                    "sort": "string"
+                }
+        filter -- Filter Alerts using a query in Falcon Query Language (FQL). String.
+                  Filter fields can be any keyword field that is part of #domain.Alert
+                  An asterisk wildcard * includes all results.
+                  Empty value means to not filter on anything.
+                  Most commonly used filter fields that supports exact match:
+                    cid             type
+                    id              pattern_id
+                    aggregate_id    platform
+                    product
+                  Most commonly used filter fields that supports wildcard (*):
+                    assigned_to_name    tactic_id
+                    assigned_to_uuid    technique
+                  Most commonly filter fields that supports range comparisons (>, <, >=, <=):
+                    severity            timestamp
+                    created_timestamp   updated_timestamp
+                  All filter fields and operations support negation (!).
+                  The full list of valid filter options is extensive.
+                  Review it in our documentation inside the Falcon console.
+        limit -- The maximum number of detections to return in this response. Integer.
+                 Default: 100, Max: 1000
+                 Use this parameter together with the after parameter to manage pagination of the results.
+        sort -- Sort parameter takes the form of <field|direction>. String.
+                The sorting fields can be any keyword field that is part of #domain.Alert except for the text based fields.
+                Most commonly used fields for sorting are:
+                    timestamp               assigned_to_uuid
+                    created_timestamp       tactic_id
+                    updated_timestamp       tactic
+                    status                  technique
+                    aggregate_id            technique_id
+                    assigned_to_name        pattern_id
+                    assigned_to_uid         product
+                By default all the results are sorted by the created_timestamp field in descending order.
+                Important:
+                    The pagination is done on live data in the order defined by the sort field parameter,
+                    so if you want to avoid inconsistent results where the same record might appear on multiple
+                    pages (or none), sort only on the fields that do not change over time.
+                    (Examples: created_timestamp, composite_id, etc.)
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Alerts/PostCombinedAlertsV1
+        """
+        if not body:
+            body = combined_alerts_payload(kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="PostCombinedAlertsV1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
     def get_alerts_v1(self, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve all Alerts given their IDs.
 
@@ -644,6 +722,7 @@ class Alerts(ServiceClass):
     PatchEntitiesAlertsV3 = update_alerts_v3
     PostEntitiesAlertsV1 = get_alerts_v1
     PostEntitiesAlertsV2 = get_alerts_v2
+    PostCombinedAlertsV1 = get_alerts_combined
     get_alerts = get_alerts_v1
     GetQueriesAlertsV1 = query_alerts_v1
     GetQueriesAlertsV2 = query_alerts_v2

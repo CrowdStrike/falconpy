@@ -35,9 +35,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, List, Union
 
 
-def update_alerts_payload(current_payload: dict, passed_keywords: dict) -> dict:
+def update_alerts_payload(current_payload: dict,
+                          passed_keywords: dict
+                          ) -> Dict[str, List[Dict[str, Union[str, int, bool, Dict]]]]:
     """Update the provided payload with any viable parameters provided as keywords.
 
     {
@@ -68,3 +71,22 @@ def update_alerts_payload(current_payload: dict, passed_keywords: dict) -> dict:
     current_payload["action_parameters"] = act_params
 
     return current_payload
+
+
+def combined_alerts_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int, bool, Dict]]]]:
+    """Craft a properly formatted alerts combined search payload.
+
+    {
+        "after": "string",
+        "filter": "string",
+        "limit": integer,
+        "sort": "string"
+    }
+    """
+    returned = {}
+    keys = ["after", "filter", "limit", "sort"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned[key] = passed_keywords.get(key, None)
+
+    return returned
