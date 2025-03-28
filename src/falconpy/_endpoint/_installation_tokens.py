@@ -183,7 +183,7 @@ _installation_tokens_endpoints = [
       },
       {
         "type": "string",
-        "description": "The filter expression that should be used to limit the results (e.g., `action:'token_create'`).",
+        "description": "The filter expression that should be used to limit the results (e.g., action:'token_create').",
         "name": "filter",
         "in": "query"
       }
@@ -216,7 +216,7 @@ _installation_tokens_endpoints = [
       },
       {
         "type": "string",
-        "description": "The filter expression that should be used to limit the results (e.g., `status:'valid'`).",
+        "description": "The filter expression that should be used to limit the results (e.g., status:'valid').",
         "name": "filter",
         "in": "query"
       }
