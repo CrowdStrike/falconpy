@@ -61,7 +61,7 @@ _falconx_sandbox_endpoints = [
       {
         "type": "string",
         "description": "Format used to compress your downloaded file. Currently, you must provide the value "
-        "`gzip`, the only valid format.",
+        "gzip, the only valid format.",
         "name": "Accept-Encoding",
         "in": "header"
       }
@@ -90,7 +90,7 @@ _falconx_sandbox_endpoints = [
       {
         "type": "string",
         "description": "Format used to compress your downloaded file. Currently, you must provide the value "
-        "`gzip`, the only valid format.",
+        "gzip, the only valid format.",
         "name": "Accept-Encoding",
         "in": "header"
       }
@@ -119,7 +119,7 @@ _falconx_sandbox_endpoints = [
       {
         "type": "string",
         "description": "Format used to compress your downloaded file. Currently, you must provide the value "
-        "`gzip`, the only valid format.",
+        "gzip, the only valid format.",
         "name": "Accept-Encoding",
         "in": "header"
       }
@@ -148,7 +148,7 @@ _falconx_sandbox_endpoints = [
       {
         "type": "string",
         "description": "Format used to compress your downloaded file. Currently, you must provide the value "
-        "`gzip`, the only valid format.",
+        "gzip, the only valid format.",
         "name": "Accept-Encoding",
         "in": "header"
       }
@@ -168,7 +168,7 @@ _falconx_sandbox_endpoints = [
         },
         "collectionFormat": "csv",
         "description": "ID of a summary. Find a summary ID from the response when submitting a malware sample "
-        "or search with `/falconx/queries/reports/v1`.",
+        "or search with /falconx/queries/reports/v1.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -189,7 +189,7 @@ _falconx_sandbox_endpoints = [
         },
         "collectionFormat": "csv",
         "description": "ID of a report. Find a report ID from the response when submitting a malware sample or "
-        "search with `/falconx/queries/reports/v1`.",
+        "search with /falconx/queries/reports/v1.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -227,7 +227,7 @@ _falconx_sandbox_endpoints = [
         },
         "collectionFormat": "csv",
         "description": "ID of a submitted malware sample. Find a submission ID from the response when "
-        "submitting a malware sample or search with `/falconx/queries/submissions/v1`.",
+        "submitting a malware sample or search with /falconx/queries/submissions/v1.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -250,26 +250,25 @@ _falconx_sandbox_endpoints = [
       },
       {
         "description": "Submit either a URL or a sample SHA256 for sandbox analysis. The sample file must have "
-        " been previously uploaded through `/samples/entities/samples/v2`. You must specify a JSON object that includes "
-        " the `falconx.SubmissionParametersV1` key/value pairs shown below.\n\n**`environment_id`**: Specifies the "
-        "sandbox environment used for analysis. Values:\n\n- `400`: MacOS Catalina 10.15\n- `410`: MacOS Sonoma ARM 64 "
-        "bit\n- `300`: Linux Ubuntu 16.04, 64-bit\n- `200`: Android (static analysis)\n- `160`: Windows 10, 64-bit\n- "
-        "`140`: Windows 11, 64-bit\n- `110`: Windows 7, 64-bit\n- `100`: Windows 7, 32-bit\n\n**`sha256`** ID of the "
-        "sample, which is a SHA256 hash value. Find a sample ID from the response when uploading a malware sample or "
-        "search with `/falconx/queries/submissions/v1`.The `url` parameter must be unset if `sha256` is "
-        "used.\n\n**`url`** A web page or file URL. It can be HTTP(S) or FTP. The `sha256` parameter must be unset if "
-        "`url` is used.\n\n**`action_script`** (optional): Runtime script for sandbox analysis. Values:\n\n- "
-        "`default`\n- `default_maxantievasion`\n- `default_randomfiles`\n- `default_randomtheme`\n- "
-        "`default_openie`\n\n**`command_line`** (optional): Command line script passed to the submitted file at "
-        "runtime. Max length: 2048 characters\n\n**`document_password`** (optional): Auto-filled for Adobe or Office "
-        "files that prompt for a password. Max length: 32 characters\n\n**`enable_tor`** (optional): Deprecated, please "
-        " use `network_settings` instead. If `true`, sandbox analysis routes network traffic via TOR. Default: "
-        "`false`.\n\n**`network_settings`** (optional): Specifies the sandbox network_settings used for analysis. "
-        "Values:\n\n- `default`: Fully operating network\n- `tor`: Route network traffic via TOR\n- `simulated`: "
-        "Simulate network traffic\n- `offline`: No network traffic\n\n**`submit_name`** (optional): Name of the malware "
-        " sample that's used for file type detection and analysis\n\n**`system_date`** (optional): Set a custom date in "
-        " the format `yyyy-MM-dd` for the sandbox environment\n\n**`system_time`** (optional): Set a custom time in the "
-        "format `HH:mm` for the sandbox environment.",
+        " been previously uploaded through /samples/entities/samples/v2. You must specify a JSON object that includes "
+        "the falconx.SubmissionParametersV1 key/value pairs shown below.\n\n**environment_id**: Specifies the sandbox "
+        "environment used for analysis. Values:\n  400: MacOS Catalina 10.15  300: Linux Ubuntu 16.04, 64-bit - "
+        "deprecated  310: Linux Ubuntu 20, 64-bit  200: Android (static analysis)  160: Windows 10, 64-bit  140: "
+        "Windows 11, 64-bit  110: Windows 7, 64-bit  100: Windows 7, 32-bit\n\n**sha256** ID of the sample, which is a "
+        "SHA256 hash value. Find a sample ID from the response when uploading a malware sample or search with "
+        "/falconx/queries/submissions/v1.The url parameter must be unset if sha256 is used.\n\n**url** A web page or "
+        "file URL. It can be HTTP(S) or FTP. The sha256 parameter must be unset if url is used.\n\n**action_script** "
+        "(optional): Runtime script for sandbox analysis. Values:\n  default  default_maxantievasion  "
+        "default_randomfiles  default_randomtheme  default_openie\n\n**command_line** (optional): Command line script "
+        "passed to the submitted file at runtime. Max length: 2048 characters\n\n**document_password** (optional): "
+        "Auto-filled for Adobe or Office files that prompt for a password. Max length: 32 characters\n\n**enable_tor** "
+        "(optional): Deprecated, please use network_settings instead. If true, sandbox analysis routes network traffic "
+        "via TOR. Default: False.\n\n**network_settings** (optional): Specifies the sandbox network_settings used for "
+        "analysis. Values:\n  default: Fully operating network  tor: Route network traffic via TOR  simulated: Simulate "
+        " network traffic  offline: No network traffic\n\n**submit_name** (optional): Name of the malware sample that's "
+        " used for file type detection and analysis\n\n**system_date** (optional): Set a custom date in the format "
+        "yyyy-MM-dd for the sandbox environment\n\n**system_time** (optional): Set a custom time in the format HH:mm "
+        "for the sandbox environment.",
         "name": "body",
         "in": "body",
         "required": True
@@ -306,7 +305,7 @@ _falconx_sandbox_endpoints = [
       },
       {
         "type": "string",
-        "description": "Sort order: `asc` or `desc`.",
+        "description": "Sort order: asc or desc.",
         "name": "sort",
         "in": "query"
       }
@@ -342,7 +341,7 @@ _falconx_sandbox_endpoints = [
       },
       {
         "type": "string",
-        "description": "Sort order: `asc` or `desc`.",
+        "description": "Sort order: asc or desc.",
         "name": "sort",
         "in": "query"
       }
@@ -381,14 +380,13 @@ _falconx_sandbox_endpoints = [
     [
       {
         "type": "file",
-        "description": "Content of the uploaded sample in binary format. For example, use `--data-binary "
-        "@$FILE_PATH` when using cURL. Max file size: 256 MB.\n\nAccepted file formats:\n\n- Portable executables: "
-        "`.exe`, `.scr`, `.pif`, `.dll`, `.com`, `.cpl`, etc.\n- Office documents: `.doc`, `.docx`, `.ppt`, `.pps`, "
-        "`.pptx`, `.ppsx`, `.xls`, `.xlsx`, `.rtf`, `.pub`\n- PDF\n- APK\n- Executable JAR\n- Windows script component: "
-        " `.sct`\n- Windows shortcut: `.lnk`\n- Windows help: `.chm`\n- HTML application: `.hta`\n- Windows script "
-        "file: `.wsf`\n- Javascript: `.js`\n- Visual Basic: `.vbs`,  `.vbe`\n- Shockwave Flash: `.swf`\n- Perl: "
-        "`.pl`\n- Powershell: `.ps1`, `.psd1`, `.psm1`\n- Scalable vector graphics: `.svg`\n- Python: `.py`\n- Linux "
-        "ELF executables\n- Email files: MIME RFC 822 `.eml`, Outlook `.msg`.",
+        "description": "Content of the uploaded sample in binary format. For example, use --data-binary "
+        "@$FILE_PATH when using cURL. Max file size: 256 MB.\n\nAccepted file formats:\n  Portable executables: .exe, "
+        ".scr, .pif, .dll, .com, .cpl, etc.  Office documents: .doc, .docx, .ppt, .pps, .pptx, .ppsx, .xls, .xlsx, "
+        ".rtf, .pub  PDF  APK  Executable JAR  Windows script component: .sct  Windows shortcut: .lnk  Windows help: "
+        ".chm  HTML application: .hta  Windows script file: .wsf  Javascript: .js  Visual Basic: .vbs,  .vbe  Shockwave "
+        " Flash: .swf  Perl: .pl  Powershell: .ps1, .psd1, .psm1  Scalable vector graphics: .svg  Python: .py  Linux "
+        "ELF executables  Email files: MIME RFC 822 .eml, Outlook .msg.",
         "name": "sample",
         "in": "formData",
         "required": True
@@ -410,8 +408,8 @@ _falconx_sandbox_endpoints = [
         "type": "boolean",
         "default": True,
         "description": "Defines visibility of this file in Falcon MalQuery, either via the API or the Falcon "
-        "console.\n\n- `true`: File is only shown to users within your customer account\n- `false`: File can be seen by "
-        "other CrowdStrike customers \n\nDefault: `true`.",
+        "console.\n  true: File is only shown to users within your customer account  false: File can be seen by other "
+        "CrowdStrike customers \n\nDefault: True.",
         "name": "is_confidential",
         "in": "formData"
       }
