@@ -75,6 +75,45 @@ _alerts_endpoints = [
     ]
   ],
   [
+    "PostCombinedAlertsV1",
+    "POST",
+    "/alerts/combined/alerts/v1",
+    "Retrieves all Alerts that match a particular FQL filter.\nThis API is intended for retrieval of large "
+    "amounts of Alerts(>10k) using a pagination based on a `after` token.\nIf you need to use `offset` pagination, "
+    "consider using GET /alerts/queries/alerts/* and POST /alerts/entities/alerts/* APIs.\n\n",
+    "alerts",
+    [
+      {
+        "description": "after  The after token is used for pagination of results.\nThe after token is present "
+        "when more results are available on the next page.\nTo retrieve all Alerts: \n  - Use the after token in "
+        "subsequent requests to fetch the next page.\n  - Continue this process until you reach a page without an after "
+        " token, indicating the last page.\n\nThis value is highly dependant on the sort parameter, so if you plan to "
+        "change the sort order, you will have to re-start your search from the first page (without after "
+        "parameter).\n\nfilter  Filter Alerts using a query in Falcon Query Language (FQL).Filter fields can be any "
+        "keyword field that is part of #domain.Alert \nAn asterisk wildcard * includes all results.  \nEmpty value "
+        "means to not filter on anything.\nMost commonly used filter fields that supports exact match: cid, id, "
+        "aggregate_id, product, type, pattern_id, platform ...\nMost commonly used filter fields that supports wildcard "
+        " (*): assigned_to_name, assigned_to_uuid, tactic_id, technique ...\nMost commonly filter fields that supports "
+        "range comparisons (>, <, >=, <=): severity, created_timestamp, timestamp, updated_timestamp...\nAll filter "
+        "fields and operations support negation (!).\n\n\nThe full list of valid filter options is extensive. Review it "
+        " in our [documentation inside the Falcon console](https://falcon.crowdstrike.com/documentation/45/falcon-"
+        "query-language-fql).\n\nlimit  The maximum number of detections to return in this response (default: 100; max: "
+        " 1000). Use this parameter together with the after parameter to manage pagination of the results.\n\nsort  "
+        "Sort parameter takes the form of <field|direction>. \n\nThe sorting fields can be any keyword field that is "
+        "part of #domain.Alert except for the text based fields. Most commonly used fields for sorting are: timestamp, "
+        "created_timestamp, updated_timestamp, status, aggregate_id, assigned_to_name, assigned_to_uid, "
+        "assigned_to_uuid, tactic_id, tactic, technique, technique_id, pattern_id or product.\n\nBy default all the "
+        "results are sorted by the created_timestamp field in the descending order.\n\n**Important:** The pagination is "
+        " done on live data in the order defined by the sort field parameter (default: created_timestamp|desc), so if "
+        "you want to avoid inconsistent results where the same record might appear on multiple pages (or none), sort "
+        "only on the fields that do not change over time (e.g. created_timestamp, composite_id, ...).\n\n",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "PostEntitiesAlertsV1",
     "POST",
     "/alerts/entities/alerts/v1",

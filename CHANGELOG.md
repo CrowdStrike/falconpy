@@ -1,5 +1,14 @@
 # Version 1.4.8
 ## Added features and functionality
++ Added: Added 1 new operation to the __Alerts_ service collection.
+    - _PostCombinedAlertsV1_
+    - `_endpoint/_alerts.py`
+    - `_payload/__init__.py`
+    - `_payload/_alerts.py`
+    - `alerts.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_alerts.py`
+
 + Added: Added new __Cloud AWS Registration__ service collection with 6 new operations.
     - _cloud_registration_aws_get_accounts_
     - _cloud_registration_aws_create_account_

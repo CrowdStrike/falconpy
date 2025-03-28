@@ -121,7 +121,7 @@ from ._firewall import (
     )
 from ._reports import reports_payload
 from ._message_center import activity_payload, case_payload
-from ._alerts import update_alerts_payload
+from ._alerts import update_alerts_payload, combined_alerts_payload
 from ._sample_uploads import extraction_payload
 from ._ods import scheduled_scan_payload
 from ._cloud_snapshots import (
@@ -170,5 +170,5 @@ __all__ = [
     "cloud_aws_registration_payload", "cloud_azure_registration_payload", "cloud_oci_refresh_payload",
     "cloud_oci_validate_payload", "cloud_oci_create_payload", "indicator_graph_payload",
     "content_update_policy_action_payload", "content_update_policy_payload", "device_classes_policy_payload",
-    "device_policy_bluetooth_config_payload", "device_control_policy_payload_v2"
+    "device_policy_bluetooth_config_payload", "device_control_policy_payload_v2", "combined_alerts_payload"
 ]
