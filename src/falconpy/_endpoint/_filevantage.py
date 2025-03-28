@@ -50,7 +50,7 @@ _filevantage_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more actions ids in the form of `ids=ID1&ids=ID2`",
+        "description": "One or more actions ids in the form of ids=ID1&ids=ID2",
         "name": "ids",
         "in": "query",
         "required": True
@@ -65,9 +65,9 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
-        "description": "Create a new action.\n\n * `operation` must be one of the `suppress`, `unsuppress`, or "
-        " `purge`\n\n * `change_ids` represent the ids of the changes the operation will perform; limited to 100 ids "
-        "per action\n\n * `comment` optional comment to describe the reason for the action",
+        "description": "Create a new action.\n\n * operation must be one of the suppress, unsuppress, or "
+        "purge\n\n * change_ids represent the ids of the changes the operation will perform; limited to 100 ids per "
+        "action\n\n * comment optional comment to describe the reason for the action",
         "name": "body",
         "in": "body",
         "required": True
@@ -90,8 +90,7 @@ _filevantage_endpoints = [
       },
       {
         "type": "string",
-        "description": "Providing the value of `gzip` compresses the response, otherwise the content is "
-        "returned uncompressed.",
+        "description": "Providing the value of gzip compresses the response, otherwise the content is returned uncompressed.",
         "name": "Accept-Encoding",
         "in": "header"
       }
@@ -112,8 +111,8 @@ _filevantage_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more change ids in the form of `ids=ID1&ids=ID2`. The maximum number of ids "
-        "that can be requested at once is `500`.",
+        "description": "One or more change ids in the form of ids=ID1&ids=ID2. The maximum number of ids that "
+        "can be requested at once is 500.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -136,7 +135,7 @@ _filevantage_endpoints = [
       },
       {
         "type": "string",
-        "description": "The action to perform with the provided ids, must be one of: `assign` or `unassign`.",
+        "description": "The action to perform with the provided ids, must be one of: assign or unassign.",
         "name": "action",
         "in": "query",
         "required": True
@@ -147,7 +146,7 @@ _filevantage_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more host group ids in the form of `ids=ID1&ids=ID2`",
+        "description": "One or more host group ids in the form of ids=ID1&ids=ID2",
         "name": "ids",
         "in": "query",
         "required": True
@@ -167,14 +166,14 @@ _filevantage_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "Precedence of the policies for the provided type in the form of `ids=ID1&ids=ID2`",
+        "description": "Precedence of the policies for the provided type in the form of ids=ID1&ids=ID2",
         "name": "ids",
         "in": "query",
         "required": True
       },
       {
         "type": "string",
-        "description": "The policy type for which to set the precedence order, must be one of `Windows`, `Linux` or `Mac`.",
+        "description": "The policy type for which to set the precedence order, must be one of Windows, Linux or Mac.",
         "name": "type",
         "in": "query",
         "required": True
@@ -197,7 +196,7 @@ _filevantage_endpoints = [
       },
       {
         "type": "string",
-        "description": "The action to perform with the provided ids, must be one of: `assign`, `unassign`, or `precedence`.",
+        "description": "The action to perform with the provided ids, must be one of: assign, unassign, or precedence.",
         "name": "action",
         "in": "query",
         "required": True
@@ -229,7 +228,7 @@ _filevantage_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more (up to 500) policy ids in the form of `ids=ID1&ids=ID2`",
+        "description": "One or more (up to 500) policy ids in the form of ids=ID1&ids=ID2",
         "name": "ids",
         "in": "query",
         "required": True
@@ -245,10 +244,9 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
-        "description": "Create a new policy.\n\n * `name` must be between 1 and 100 characters.\n\n * "
-        "`description` can be between 0 and 500 characters.\n\n * `platform` must be one of `Windows`, `Linux`, or "
-        "`Mac`\n\n Rule and host group assignment and policy precedence setting is performed via their respective patch "
-        "end-points.",
+        "description": "Create a new policy.\n\n * name must be between 1 and 100 characters.\n\n * "
+        "description can be between 0 and 500 characters.\n\n * platform must be one of Windows, Linux, or Mac\n\n Rule "
+        "and host group assignment and policy precedence setting is performed via their respective patch end-points.",
         "name": "body",
         "in": "body",
         "required": True
@@ -263,11 +261,11 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
-        "description": "Enables updates to the following fields for an existing policy. \n\n * `id` of the "
-        "policy to update.\n\n * `name` must be between 1 and 100 characters.\n\n * `description` can be between 0 and "
-        "500 characters.\n\n * `platform` may not be modified after the policy is created.\n\n * `enabled` must be one "
-        "of `true` or `false`.\n\n Rule and host group assignment and policy precedence setting is performed via their "
-        "respective patch end-points.",
+        "description": "Enables updates to the following fields for an existing policy. \n\n * id of the "
+        "policy to update.\n\n * name must be between 1 and 100 characters.\n\n * description can be between 0 and 500 "
+        "characters.\n\n * platform may not be modified after the policy is created.\n\n * enabled must be one of true "
+        "or false.\n\n Rule and host group assignment and policy precedence setting is performed via their respective "
+        "patch end-points.",
         "name": "body",
         "in": "body",
         "required": True
@@ -287,7 +285,7 @@ _filevantage_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more (up to 500) policy ids in the form of `ids=ID1&ids=ID2`",
+        "description": "One or more (up to 500) policy ids in the form of ids=ID1&ids=ID2",
         "name": "ids",
         "in": "query",
         "required": True
@@ -314,7 +312,7 @@ _filevantage_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more (up to 500) scheduled exclusion ids in the form of `ids=ID1&ids=ID2`.",
+        "description": "One or more (up to 500) scheduled exclusion ids in the form of ids=ID1&ids=ID2.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -330,29 +328,28 @@ _filevantage_endpoints = [
     [
       {
         "description": "Create a new scheduled exclusion configuration for the specified policy.\n\n \n\n * "
-        "`policy_id` to add the scheduled exclusion to.\n\n * `name` must be between 1 and 100 characters.\n\n * "
-        "`description` can be between 0 and 500 characters.\n\n * `users` can be between 0 and 500 characters "
-        "representing a comma separated list of user to exclude their changes.\n\n    *  admin* excludes changes made "
-        "by all usernames that begin with admin. Falon GLOB syntax is supported.\n\n * `processes` can be between 0 and "
-        " 500 characters representing a comma separated list of processes to exclude their changes.\n\n    * "
-        "**\\RunMe.exe or **/RunMe.sh excludes changes made by RunMe.exe or RunMe.sh in any location.\n\n * "
-        "`schedule_start` must be provided to indicate the start of the schedule. This date/time must be an rfc3339 "
-        "formatted string  https://datatracker.ietf.org/doc/html/rfc3339.\n\n * `schedule_end` optionally provided to "
-        "indicate the end of the schedule. This date/time must be an rfc3339 formatted string  "
-        "https://datatracker.ietf.org/doc/html/rfc3339.\n\n * `timezone`  must be provided to indicate the TimeZone "
-        "Name set for the provided `scheduled_start` and `scheduled_end` values. See "
-        "https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.\n\n * `repeated` optionally provided to indicate "
-        " that the exclusion is applied repeatedly within the `scheduled_start` and `scheduled_end` time.\n\n    * "
-        "`start_time` must be the hour(00-23) and minute(00-59) of the day formatted as `HH:MM`. Required if `all_day` "
-        "is not set to `true`\n\n    * `end_time` must be the hour(00-23) and minute(00-59) of the day formatted as "
-        "`HH:MM`. Required if `all_day` is not set to `true`\n\n    * `all_day` must be `true` or `false` to indicate "
-        "the exclusion is applied all day. \n\n    * `frequency` must be one of `daily`, `weekly` or `monthly`. \n\n "
-        "    * `occurrence` must be one of the following when `frequency` is set to `monthly`:\n\n      * `1st`, `2nd`, "
-        " `3rd`, `4th` or `Last` represents the week.\n\n      * `Days` represents specific calendar days.\n\n    * "
-        "`weekly_days` must be one or more of `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` or "
-        "`Sunday` when `frequency` is set to `weekly` or `frequency` is set to `monthly` and `occurrence` is NOT set to "
-        " `Days`. \n\n    * `monthly_days` must be set to one or more calendar days, between 1 and 31  when `frequency` "
-        "is set to `monthly` and `occurrence` is set to `Days`. ",
+        "policy_id to add the scheduled exclusion to.\n\n * name must be between 1 and 100 characters.\n\n * "
+        "description can be between 0 and 500 characters.\n\n * users can be between 0 and 500 characters representing "
+        "a comma separated list of user to exclude their changes.\n\n    *  admin* excludes changes made by all "
+        "usernames that begin with admin. Falon GLOB syntax is supported.\n\n * processes can be between 0 and 500 "
+        "characters representing a comma separated list of processes to exclude their changes.\n\n    * **\\RunMe.exe "
+        "or **/RunMe.sh excludes changes made by RunMe.exe or RunMe.sh in any location.\n\n * schedule_start must be "
+        "provided to indicate the start of the schedule. This date/time must be an rfc3339 formatted string  "
+        "https://datatracker.ietf.org/doc/html/rfc3339.\n\n * schedule_end optionally provided to indicate the end of "
+        "the schedule. This date/time must be an rfc3339 formatted string  "
+        "https://datatracker.ietf.org/doc/html/rfc3339.\n\n * timezone  must be provided to indicate the TimeZone Name "
+        "set for the provided scheduled_start and scheduled_end values. See "
+        "https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.\n\n * repeated optionally provided to indicate "
+        "that the exclusion is applied repeatedly within the scheduled_start and scheduled_end time.\n\n    * "
+        "start_time must be the hour(00-23) and minute(00-59) of the day formatted as HH:MM. Required if all_day is not "
+        " set to true\n\n    * end_time must be the hour(00-23) and minute(00-59) of the day formatted as HH:MM. "
+        "Required if all_day is not set to true\n\n    * all_day must be true or false to indicate the exclusion is "
+        "applied all day. \n\n    * frequency must be one of daily, weekly or monthly. \n\n    * occurrence must be one "
+        " of the following when frequency is set to monthly:\n\n      * 1st, 2nd, 3rd, 4th or Last represents the "
+        "week.\n\n      * Days represents specific calendar days.\n\n    * weekly_days must be one or more of Monday, "
+        "Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday when frequency is set to weekly or frequency is set "
+        "to monthly and occurrence is NOT set to Days. \n\n    * monthly_days must be set to one or more calendar days, "
+        "between 1 and 31  when frequency is set to monthly and occurrence is set to Days. ",
         "name": "body",
         "in": "body",
         "required": True
@@ -367,30 +364,29 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
-        "description": "Update an existing scheduled exclusion for the specified policy.\n\n \n\n * "
-        "`policy_id` to add the scheduled exclusion to.\n\n * `name` must be between 1 and 100 characters.\n\n * "
-        "`description` can be between 0 and 500 characters.\n\n * `users` can be between 0 and 500 characters "
-        "representing a comma separated list of user to exclude their changes.\n\n    *  admin* excludes changes made "
-        "by all usernames that begin with admin. Falon GLOB syntax is supported.\n\n * `processes` can be between 0 and "
-        " 500 characters representing a comma separated list of processes to exclude their changes.\n\n    * "
-        "**\\RunMe.exe or **/RunMe.sh excludes changes made by RunMe.exe or RunMe.sh in any location.\n\n * "
-        "`schedule_start` must be provided to indicate the start of the schedule. This date/time must be an rfc3339 "
-        "formatted string  https://datatracker.ietf.org/doc/html/rfc3339.\n\n * `schedule_end` optionally provided to "
-        "indicate the end of the schedule. This date/time must be an rfc3339 formatted string  "
-        "https://datatracker.ietf.org/doc/html/rfc3339.\n\n * `timezone`  must be provided to indicate the TimeZone "
-        "Name set for the provided `scheduled_start` and `scheduled_end` values. See "
-        "https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.\n\n * `repeated` optionally provided to indicate "
-        " that the exclusion is applied repeatedly within the `scheduled_start` and `scheduled_end` time.\n\n    * "
-        "`start_time` must be the hour(00-23) and minute(00-59) of the day formatted as `HH:MM`. Required if `all_day` "
-        "is not set to `true`\n\n    * `end_time` must be the hour(00-23) and minute(00-59) of the day formatted as "
-        "`HH:MM`. Required if `all_day` is not set to `true`\n\n    * `all_day` must be `true` or `false` to indicate "
-        "the exclusion is applied all day. \n\n    * `frequency` must be one of `daily`, `weekly` or `monthly`. \n\n "
-        "    * `occurrence` must be one of the following when `frequency` is set to `monthly`:\n\n      * `1st`, `2nd`, "
-        " `3rd`, `4th` or `Last` represents the week.\n\n      * `Days` represents specific calendar days.\n\n    * "
-        "`weekly_days` must be one or more of `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday` or "
-        "`Sunday` when `frequency` is set to `weekly` or `frequency` is set to `monthly` and `occurrence` is NOT set to "
-        " `Days`. \n\n    * `monthly_days` must be set to one or more calendar days, between 1 and 31  when `frequency` "
-        "is set to `monthly` and `occurrence` is set to `Days`. ",
+        "description": "Update an existing scheduled exclusion for the specified policy.\n\n \n\n * policy_id "
+        "to add the scheduled exclusion to.\n\n * name must be between 1 and 100 characters.\n\n * description can be "
+        "between 0 and 500 characters.\n\n * users can be between 0 and 500 characters representing a comma separated "
+        "list of user to exclude their changes.\n\n    *  admin* excludes changes made by all usernames that begin with "
+        " admin. Falon GLOB syntax is supported.\n\n * processes can be between 0 and 500 characters representing a "
+        "comma separated list of processes to exclude their changes.\n\n    * **\\RunMe.exe or **/RunMe.sh excludes "
+        "changes made by RunMe.exe or RunMe.sh in any location.\n\n * schedule_start must be provided to indicate the "
+        "start of the schedule. This date/time must be an rfc3339 formatted string  "
+        "https://datatracker.ietf.org/doc/html/rfc3339.\n\n * schedule_end optionally provided to indicate the end of "
+        "the schedule. This date/time must be an rfc3339 formatted string  "
+        "https://datatracker.ietf.org/doc/html/rfc3339.\n\n * timezone  must be provided to indicate the TimeZone Name "
+        "set for the provided scheduled_start and scheduled_end values. See "
+        "https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.\n\n * repeated optionally provided to indicate "
+        "that the exclusion is applied repeatedly within the scheduled_start and scheduled_end time.\n\n    * "
+        "start_time must be the hour(00-23) and minute(00-59) of the day formatted as HH:MM. Required if all_day is not "
+        " set to true\n\n    * end_time must be the hour(00-23) and minute(00-59) of the day formatted as HH:MM. "
+        "Required if all_day is not set to true\n\n    * all_day must be true or false to indicate the exclusion is "
+        "applied all day. \n\n    * frequency must be one of daily, weekly or monthly. \n\n    * occurrence must be one "
+        " of the following when frequency is set to monthly:\n\n      * 1st, 2nd, 3rd, 4th or Last represents the "
+        "week.\n\n      * Days represents specific calendar days.\n\n    * weekly_days must be one or more of Monday, "
+        "Tuesday, Wednesday, Thursday, Friday, Saturday or Sunday when frequency is set to weekly or frequency is set "
+        "to monthly and occurrence is NOT set to Days. \n\n    * monthly_days must be set to one or more calendar days, "
+        "between 1 and 31  when frequency is set to monthly and occurrence is set to Days. ",
         "name": "body",
         "in": "body",
         "required": True
@@ -417,7 +413,7 @@ _filevantage_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more (up to 500) scheduled exclusion ids in the form of `ids=ID1&ids=ID2`.",
+        "description": "One or more (up to 500) scheduled exclusion ids in the form of ids=ID1&ids=ID2.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -444,7 +440,7 @@ _filevantage_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more (up to 500) rule group ids in the form of `ids=ID1&ids=ID2`.",
+        "description": "One or more (up to 500) rule group ids in the form of ids=ID1&ids=ID2.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -471,7 +467,7 @@ _filevantage_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more (up to 500) rule ids in the form of `ids=ID1&ids=ID2`.",
+        "description": "One or more (up to 500) rule ids in the form of ids=ID1&ids=ID2.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -486,35 +482,34 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
-        "description": "Create a new rule configuration for the specified rule group.\n\n * `id` is not "
+        "description": "Create a new rule configuration for the specified rule group.\n\n * id is not "
         "supported for creation of a rule, the new id of the created rule will be included in the response.\n\n * "
-        "`rule_group_id` to add the new rule configuration.\n\n * `description` can be between 0 and 500 "
-        "characters.\n\n * `path` representing the file system or registry path to monitor.\n\n   * must be between 1 "
-        "and 250 characters. \n\n   * All paths must end with the path separator, e.g. c:\\windows\\ /usr/bin/ \n\n * "
-        "`severity` to categorize change events produced by this rule; must be one of: `Low`, `Medium`, `High` or "
-        "`Critical`\n\n * `depth` below the base path to monitor; must be one of: `1`, `2`, `3`, `4`, `5` or `ANY`\n\n "
-        "* `precedence` - is not supported for creation of a rule, new rules will be added last in precedence "
-        "order.\n\nFalcon GLOB syntax is supported for the following 6 properties. Allowed rule group configuration is "
-        "based on the type of rule group the rule group is added to.\n\n * `include` represents the files, directories, "
-        " registry keys, or registry values that will be monitored. \n\n * `exclude` represents the files, directories, "
-        " registry keys, or registry values that will `NOT` be monitored. \n\n * `include_users` represents the changes "
-        " performed by specific users that will be monitored.\n\n * `exclude_users` represents the changes performed by "
-        " specific users that will `NOT` be monitored.\n\n * `include_processes` represents the changes performed by "
-        "specific processes that will be monitored.\n\n * `exclude_processes` represents the changes performed by "
-        "specific processes that will be `NOT` monitored.\n\n * `content_files` represents the files whose content will "
-        " be monitored. Listed files must match the file include pattern and not match the file exclude pattern\n\n * "
-        "`content_registry_values` represents the registry values whose content will be monitored. Listed registry "
-        "values must match the registry include pattern and not match the registry exclude pattern\n\n * "
-        "`enable_content_capture`\n\n * `enable_hash_capture`\n\nFile system directory monitoring:\n\n * "
-        "`watch_delete_directory_changes`\n\n * `watch_create_directory_changes`\n\n * "
-        "`watch_rename_directory_changes`\n\n * `watch_attributes_directory_changes` (`macOS` is not supported at this "
-        "time)\n\n * `watch_permissions_directory_changes` (`macOS` is not supported at this time)\n\nFile system file "
-        "monitoring:\n\n * `watch_rename_file_changes`\n\n * `watch_write_file_changes`\n\n * "
-        "`watch_create_file_changes`\n\n * `watch_delete_file_changes`\n\n * `watch_attributes_file_changes` (`macOS` "
-        "is not supported at this time)\n\n * `watch_permissions_file_changes` (`macOS` is not supported at this "
-        "time)\n\nWindows registry key and value monitoring: \n\n * `watch_create_key_changes`\n\n * "
-        "`watch_delete_key_changes`\n\n * `watch_rename_key_changes`\n\n * `watch_set_value_changes`\n\n * "
-        "`watch_permissions_key_changes`\n\n * `watch_delete_value_changes`\n\n * `watch_create_file_changes`",
+        "rule_group_id to add the new rule configuration.\n\n * description can be between 0 and 500 characters.\n\n * "
+        "path representing the file system or registry path to monitor.\n\n   * must be between 1 and 250 characters. "
+        "\n\n   * All paths must end with the path separator, e.g. c:\\windows\\ /usr/bin/ \n\n * severity to "
+        "categorize change events produced by this rule; must be one of: Low, Medium, High or Critical\n\n * depth "
+        "below the base path to monitor; must be one of: 1, 2, 3, 4, 5 or ANY\n\n * precedence - is not supported for "
+        "creation of a rule, new rules will be added last in precedence order.\n\nFalcon GLOB syntax is supported for "
+        "the following 6 properties. Allowed rule group configuration is based on the type of rule group the rule group "
+        " is added to.\n\n * include represents the files, directories, registry keys, or registry values that will be "
+        "monitored. \n\n * exclude represents the files, directories, registry keys, or registry values that will NOT "
+        "be monitored. \n\n * include_users represents the changes performed by specific users that will be "
+        "monitored.\n\n * exclude_users represents the changes performed by specific users that will NOT be "
+        "monitored.\n\n * include_processes represents the changes performed by specific processes that will be "
+        "monitored.\n\n * exclude_processes represents the changes performed by specific processes that will be NOT "
+        "monitored.\n\n * content_files represents the files whose content will be monitored. Listed files must match "
+        "the file include pattern and not match the file exclude pattern\n\n * content_registry_values represents the "
+        "registry values whose content will be monitored. Listed registry values must match the registry include "
+        "pattern and not match the registry exclude pattern\n\n * enable_content_capture\n\n * "
+        "enable_hash_capture\n\nFile system directory monitoring:\n\n * watch_delete_directory_changes\n\n * "
+        "watch_create_directory_changes\n\n * watch_rename_directory_changes\n\n * watch_attributes_directory_changes "
+        "(macOS is not supported at this time)\n\n * watch_permissions_directory_changes (macOS is not supported at "
+        "this time)\n\nFile system file monitoring:\n\n * watch_rename_file_changes\n\n * watch_write_file_changes\n\n "
+        "* watch_create_file_changes\n\n * watch_delete_file_changes\n\n * watch_attributes_file_changes (macOS is not "
+        "supported at this time)\n\n * watch_permissions_file_changes (macOS is not supported at this time)\n\nWindows "
+        "registry key and value monitoring: \n\n * watch_create_key_changes\n\n * watch_delete_key_changes\n\n * "
+        "watch_rename_key_changes\n\n * watch_set_value_changes\n\n * watch_permissions_key_changes\n\n * "
+        "watch_delete_value_changes\n\n * watch_create_file_changes",
         "name": "body",
         "in": "body",
         "required": True
@@ -529,35 +524,33 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
-        "description": "Update the rule configuration for the specified rule ID and group.\n\n * `id` of the "
-        "rule to update.\n\n * `rule_group_id` that contains the rule configuration.\n\n * `description` can be between "
-        " 0 and 500 characters.\n\n * `path` representing the file system or registry path to monitor.\n\n   * must be "
+        "description": "Update the rule configuration for the specified rule ID and group.\n\n * id of the "
+        "rule to update.\n\n * rule_group_id that contains the rule configuration.\n\n * description can be between 0 "
+        "and 500 characters.\n\n * path representing the file system or registry path to monitor.\n\n   * must be "
         "between 1 and 250 characters. \n\n   * All paths must end with the path separator, e.g. c:\\windows\\ "
-        "/usr/bin/ \n\n * `severity` to categorize change events produced by this rule; must be one of: `Low`, "
-        "`Medium`, `High` or `Critical`\n\n * `depth` below the base path to monitor; must be one of: `1`, `2`, `3`, "
-        "`4`, `5` or `ANY`\n\n * `precedence` is the order in which rules will be evaluated starting with 1. Specifying "
-        " a precedence value that is already set for another rule in the group will result this rule being placed "
-        "before that existing rule.\n\nFalcon GLOB syntax is supported for the following 6 properties. Allowed rule "
-        "group configuration is based on the type of rule group the rule group is added to.\n\n * `include` represents "
-        "the files, directories, registry keys, or registry values that will be monitored. \n\n * `exclude` represents "
-        "the files, directories, registry keys, or registry values that will `NOT` be monitored. \n\n * `include_users` "
-        " represents the changes performed by specific users that will be monitored.\n\n * `exclude_users` represents "
-        "the changes performed by specific users that will `NOT` be monitored.\n\n * `include_processes` represents the "
-        " changes performed by specific processes that will be monitored.\n\n * `exclude_processes` represents the "
-        "changes performed by specific processes that will be `NOT` monitored.\n\n * `content_files` represents the "
-        "files that will be monitored. Listed files must match the file include pattern and not match the file exclude "
-        "pattern\n\n * `content_registry_values` represents the registry values whose content will be monitored. Listed "
-        " registry values must match the registry include pattern and not match the registry exclude pattern\n\n * "
-        "`enable_content_capture`\n\n * `enable_hash_capture`\n\nFile system directory monitoring:\n\n * "
-        "`watch_delete_directory_changes`\n\n * `watch_create_directory_changes`\n\n * "
-        "`watch_rename_directory_changes`\n\n * `watch_attributes_directory_changes` (`macOS` is not supported at this "
-        "time)\n\n * `watch_permissions_directory_changes` (`macOS` is not supported at this time)\n\nFile system file "
-        "monitoring:\n\n * `watch_rename_file_changes`\n\n * `watch_write_file_changes`\n\n * "
-        "`watch_create_file_changes`\n\n * `watch_delete_file_changes`\n\n * `watch_attributes_file_changes` (`macOS` "
-        "is not supported at this time)\n\n * `watch_permissions_file_changes` (`macOS` is not supported at this "
-        "time)\n\nWindows registry key and value monitoring: \n\n * `watch_create_key_changes`\n\n * "
-        "`watch_delete_key_changes`\n\n * `watch_rename_key_changes`\n\n * `watch_set_value_changes`\n\n * "
-        "`watch_delete_value_changes`\n\n * `watch_create_file_changes`",
+        "/usr/bin/ \n\n * severity to categorize change events produced by this rule; must be one of: Low, Medium, High "
+        " or Critical\n\n * depth below the base path to monitor; must be one of: 1, 2, 3, 4, 5 or ANY\n\n * precedence "
+        " is the order in which rules will be evaluated starting with 1. Specifying a precedence value that is already "
+        "set for another rule in the group will result this rule being placed before that existing rule.\n\nFalcon GLOB "
+        " syntax is supported for the following 6 properties. Allowed rule group configuration is based on the type of "
+        "rule group the rule group is added to.\n\n * include represents the files, directories, registry keys, or "
+        "registry values that will be monitored. \n\n * exclude represents the files, directories, registry keys, or "
+        "registry values that will NOT be monitored. \n\n * include_users represents the changes performed by specific "
+        "users that will be monitored.\n\n * exclude_users represents the changes performed by specific users that will "
+        " NOT be monitored.\n\n * include_processes represents the changes performed by specific processes that will be "
+        " monitored.\n\n * exclude_processes represents the changes performed by specific processes that will be NOT "
+        "monitored.\n\n * content_files represents the files that will be monitored. Listed files must match the file "
+        "include pattern and not match the file exclude pattern\n\n * content_registry_values represents the registry "
+        "values whose content will be monitored. Listed registry values must match the registry include pattern and not "
+        " match the registry exclude pattern\n\n * enable_content_capture\n\n * enable_hash_capture\n\nFile system "
+        "directory monitoring:\n\n * watch_delete_directory_changes\n\n * watch_create_directory_changes\n\n * "
+        "watch_rename_directory_changes\n\n * watch_attributes_directory_changes (macOS is not supported at this "
+        "time)\n\n * watch_permissions_directory_changes (macOS is not supported at this time)\n\nFile system file "
+        "monitoring:\n\n * watch_rename_file_changes\n\n * watch_write_file_changes\n\n * watch_create_file_changes\n\n "
+        " * watch_delete_file_changes\n\n * watch_attributes_file_changes (macOS is not supported at this time)\n\n * "
+        "watch_permissions_file_changes (macOS is not supported at this time)\n\nWindows registry key and value "
+        "monitoring: \n\n * watch_create_key_changes\n\n * watch_delete_key_changes\n\n * watch_rename_key_changes\n\n "
+        "* watch_set_value_changes\n\n * watch_delete_value_changes\n\n * watch_create_file_changes",
         "name": "body",
         "in": "body",
         "required": True
@@ -584,7 +577,7 @@ _filevantage_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more (up to 500) rule ids in the form of `ids=ID1&ids=ID2`",
+        "description": "One or more (up to 500) rule ids in the form of ids=ID1&ids=ID2",
         "name": "ids",
         "in": "query",
         "required": True
@@ -604,7 +597,7 @@ _filevantage_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more (up to 500) rule group ids in the form of `ids=ID1&ids=ID2`",
+        "description": "One or more (up to 500) rule group ids in the form of ids=ID1&ids=ID2",
         "name": "ids",
         "in": "query",
         "required": True
@@ -619,10 +612,10 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
-        "description": "Create a new rule group of a specific type.\n\n * `name` must be between 1 and 100 "
-        "characters.\n\n * `type` must be one of `WindowsFiles`, `WindowsRegistry`, `LinuxFiles` or `MacFiles`.\n\n * "
-        "`description` can be between 0 and 500 characters.\n\n Note: rules are added/removed from rule groups using "
-        "their dedicated end-points.",
+        "description": "Create a new rule group of a specific type.\n\n * name must be between 1 and 100 "
+        "characters.\n\n * type must be one of WindowsFiles, WindowsRegistry, LinuxFiles or MacFiles.\n\n * description "
+        " can be between 0 and 500 characters.\n\n Note: rules are added/removed from rule groups using their dedicated "
+        "end-points.",
         "name": "body",
         "in": "body",
         "required": True
@@ -637,9 +630,9 @@ _filevantage_endpoints = [
     "filevantage",
     [
       {
-        "description": "Enables updates to the following fields for an existing rule group. \n\n * `id` of the "
-        " rule group to update.\n\n * `name` must be between 1 and 100 characters.\n\n * `description` can be between 0 "
-        " and 500 characters.\n\n * `type` may not be modified after the rule group is created.\n\n Note: rules are "
+        "description": "Enables updates to the following fields for an existing rule group. \n\n * id of the "
+        "rule group to update.\n\n * name must be between 1 and 100 characters.\n\n * description can be between 0 and "
+        "500 characters.\n\n * type may not be modified after the rule group is created.\n\n Note: rules are "
         "added/removed from rule groups using their dedicated end-points.",
         "name": "body",
         "in": "body",
@@ -660,7 +653,7 @@ _filevantage_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more (up to 500) rule group ids in the form of `ids=ID1&ids=ID2`",
+        "description": "One or more (up to 500) rule group ids in the form of ids=ID1&ids=ID2",
         "name": "ids",
         "in": "query",
         "required": True
@@ -693,14 +686,14 @@ _filevantage_endpoints = [
         "minimum": 0,
         "type": "integer",
         "description": "The first action index to return in the response. If not provided it will default to "
-        "'0'. Use with the `limit` parameter to manage pagination of results.",
+        "'0'. Use with the limit parameter to manage pagination of results.",
         "name": "offset",
         "in": "query"
       },
       {
         "type": "integer",
         "description": "The maximum number of actions to return in the response (default: 100; max: 500). Use "
-        "with the `offset` parameter to manage pagination of results",
+        "with the offset parameter to manage pagination of results",
         "name": "limit",
         "in": "query"
       },
@@ -713,8 +706,8 @@ _filevantage_endpoints = [
       {
         "type": "string",
         "description": "Filter changes using a query in Falcon Query Language (FQL). \n\nCommon filter options "
-        " include:\n\n - `status`\n - `operation_type`\n\n The full list of allowed filter parameters can be reviewed "
-        "in our API documentation.",
+        " include:\n\n - status\n - operation_type\n\n The full list of allowed filter parameters can be reviewed in "
+        "our API documentation.",
         "name": "filter",
         "in": "query"
       }
@@ -731,7 +724,7 @@ _filevantage_endpoints = [
         "minimum": 0,
         "type": "integer",
         "default": 0,
-        "description": "The offset to start retrieving records from. Defaults to `0` if not specified.",
+        "description": "The offset to start retrieving records from. Defaults to 0 if not specified.",
         "name": "offset",
         "in": "query"
       },
@@ -739,24 +732,24 @@ _filevantage_endpoints = [
         "maximum": 500,
         "type": "integer",
         "default": 100,
-        "description": "The maximum number of ids to return. Defaults to `100` if not specified. The maximum "
-        "number of results that can be returned in a single call is `500`.",
+        "description": "The maximum number of ids to return. Defaults to 100 if not specified. The maximum "
+        "number of results that can be returned in a single call is 500.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Sort results using options like:\n\n- `action_timestamp` (timestamp of the change "
-        "occurrence) \n\nSort either `asc` (ascending) or `desc` (descending). For example: "
-        "`action_timestamp|asc`.\nThe full list of allowed sorting options can be reviewed in our API documentation.",
+        "description": "Sort results using options like:\n  action_timestamp (timestamp of the change "
+        "occurrence) \n\nSort either asc (ascending) or desc (descending). For example: action_timestamp|asc.\nThe full "
+        "list of allowed sorting options can be reviewed in our API documentation.",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
         "description": "Filter changes using a query in Falcon Query Language (FQL). \n\nCommon filter options "
-        " include:\n\n - `host.name`\n - `action_timestamp`\n\n The full list of allowed filter parameters can be "
-        "reviewed in our API documentation.",
+        " include:\n\n - host.name\n - action_timestamp\n\n The full list of allowed filter parameters can be reviewed "
+        "in our API documentation.",
         "name": "filter",
         "in": "query"
       }
@@ -771,10 +764,10 @@ _filevantage_endpoints = [
     [
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
-        " your first request don't provide a value for the `after` token. On subsequent requests provide the `after` "
-        "token value from the previous response to continue pagination from where you left. If the response returns an "
-        "empty `after` token it means there are no more results to return.",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request don't provide a value for the after token. On subsequent requests provide the after token "
+        "value from the previous response to continue pagination from where you left. If the response returns an empty "
+        "after token it means there are no more results to return.",
         "name": "after",
         "in": "query"
       },
@@ -782,26 +775,26 @@ _filevantage_endpoints = [
         "maximum": 5000,
         "type": "integer",
         "default": 100,
-        "description": "The maximum number of ids to return. Defaults to `100` if not specified. The maximum "
-        "number of results that can be returned in a single call is `5000`.",
+        "description": "The maximum number of ids to return. Defaults to 100 if not specified. The maximum "
+        "number of results that can be returned in a single call is 5000.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "string",
         "default": "action_timestamp|desc",
-        "description": "Sort results using options like:\n\n- `action_timestamp` (timestamp of the change "
-        "occurrence) \n\nSort either `asc` (ascending) or `desc` (descending). For example: `action_timestamp|asc`. "
-        "Defaults to `action_timestamp|desc` no value is specified.\nThe full list of allowed sorting options can be "
-        "reviewed in our API documentation.",
+        "description": "Sort results using options like:\n  action_timestamp (timestamp of the change "
+        "occurrence) \n\nSort either asc (ascending) or desc (descending). For example: action_timestamp|asc. Defaults "
+        "to action_timestamp|desc no value is specified.\nThe full list of allowed sorting options can be reviewed in "
+        "our API documentation.",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
         "description": "Filter changes using a query in Falcon Query Language (FQL). \n\nCommon filter options "
-        " include:\n\n - `host.name`\n - `action_timestamp`\n\n The full list of allowed filter parameters can be "
-        "reviewed in our API documentation.",
+        " include:\n\n - host.name\n - action_timestamp\n\n The full list of allowed filter parameters can be reviewed "
+        "in our API documentation.",
         "name": "filter",
         "in": "query"
       }
@@ -830,15 +823,15 @@ _filevantage_endpoints = [
       },
       {
         "type": "string",
-        "description": "Sort the returned ids based on one of the following properties:\n\n`precedence`, "
-        "`created_timestamp` or `modified_timestamp`\n\n Sort either `asc` (ascending) or `desc` (descending);  for "
-        "example: `precedence|asc`.",
+        "description": "Sort the returned ids based on one of the following properties:\n\nprecedence, "
+        "created_timestamp or modified_timestamp\n\n Sort either asc (ascending) or desc (descending);  for example: "
+        "precedence|asc.",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "The types of policies to retrieve.\n\n Allowed values are: `Windows`, `Linux` or `Mac`.",
+        "description": "The types of policies to retrieve.\n\n Allowed values are: Windows, Linux or Mac.",
         "name": "type",
         "in": "query",
         "required": True
@@ -884,16 +877,16 @@ _filevantage_endpoints = [
       },
       {
         "type": "string",
-        "description": "Sort the returned ids based on one of the following properties:\n\n "
-        "`created_timestamp` or `modified_timestamp`\n\n Sort either `asc` (ascending) or `desc` (descending);  for "
-        "example: `created_timestamp|asc`.",
+        "description": "Sort the returned ids based on one of the following properties:\n\n created_timestamp "
+        "or modified_timestamp\n\n Sort either asc (ascending) or desc (descending);  for example: "
+        "created_timestamp|asc.",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "The rule group type to retrieve the ids of.\n\n Allowed values are: `WindowsFiles`, "
-        "`WindowsRegistry`, `LinuxFiles` or `MacFiles`.",
+        "description": "The rule group type to retrieve the ids of.\n\n Allowed values are: WindowsFiles, "
+        "WindowsRegistry, LinuxFiles or MacFiles.",
         "name": "type",
         "in": "query",
         "required": True
