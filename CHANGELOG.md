@@ -292,6 +292,14 @@
     - _queryRuleGroups_
     - `_endpoint/_filevantage.py`
 
++ Updated: Cosmetic updates to the `after` parameter in 4 operations within the __Firewall Management__ service collection.
+    - _query_events_
+    - _query_network_locations_
+    - _query_rule_groups_
+    - _query_rules_
+    - `_endpoint/_firewall_management.py`
+    - `_endpoint/deprecated/_firewall_management.py`
+
 + Changed: Changed field used for sort enum in 1 operation from `created_time` to `id` within the __Message Center__ service collection.
     - _QueryCasesIdsByFilter_
     - `_endpoint/_message_center.py`

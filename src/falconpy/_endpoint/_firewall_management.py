@@ -604,9 +604,9 @@ _firewall_management_endpoints = [
       },
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
-        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
-        "the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
@@ -678,9 +678,9 @@ _firewall_management_endpoints = [
       },
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
-        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
-        "the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
@@ -795,9 +795,9 @@ _firewall_management_endpoints = [
       },
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
-        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
-        "the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
@@ -844,9 +844,9 @@ _firewall_management_endpoints = [
       },
       {
         "type": "string",
-        "description": "A pagination token used with the `limit` parameter to manage pagination of results. On "
-        " your first request, don't provide an `after` token. On subsequent requests, provide the `after` token from "
-        "the previous response to continue from that place in the results.",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
         "name": "after",
         "in": "query"
       },
