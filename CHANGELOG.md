@@ -181,6 +181,20 @@
 + Updated: Cosmetic update to the `mode` parameter description in the _ProvisionAWSAccounts_ operation within the __Cloud Connect AWS__ service collection.
     - `_endpoint/_cloud_connect_aws.py` 
 
++ Updated: Cosmetic updates to the `filter` parameter description in 11 operations within the __Compliance Assessments__ service collection.
+    - _extAggregateClusterAssessments_
+    - _extAggregateImageAssessments_
+    - _extAggregateRulesAssessments_
+    - _extAggregateFailedContainersByRulesPath_
+    - _extAggregateFailedContainersCountBySeverity_
+    - _extAggregateFailedImagesByRulesPath_
+    - _extAggregateFailedImagesCountBySeverity_
+    - _extAggregateFailedRulesByClusters_
+    - _extAggregateFailedRulesByImages_
+    - _extAggregateFailedRulesCountBySeverity_
+    - _extAggregateRulesByStatus_
+    - `_endpoint/_compliance_assessments.py`
+
 + Updated: Cosmetic update to the `after` parameter description in the _getCombinedAssessmentsQuery_ operation within the __Configuration Assessment__ service collection.
     - `_endpoint/_configuration_assessment.py`
 
