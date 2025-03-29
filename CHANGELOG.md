@@ -92,6 +92,24 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_content_update_policies.py`
 
++ Added: Added 9 new operations to the __Correlation Rules__ service collection.
+    - _aggregates_rule_versions_post_v1_
+    - _combined_rules_get_v2_
+    - _entities_latest_rules_get_v1_
+    - _entities_rule_versions_export_post_v1_
+    - _entities_rule_versions_import_post_v1_
+    - _entities_rule_versions_publish_patch_v1_
+    - _entities_rule_versions_delete_v1_
+    - _entities_rules_get_v2_
+    - _queries_rules_get_v2_
+    - `_endpoint/_correlation_rules.py`
+    - `_endpoint/deprecated/_correlation_rules.py`
+    - `_payload/__init__.py`
+    - `_payload/_correlation_rules.py`
+    - `correlation_rules.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_correlation_rules.py`
+
 + Added: Added new __Deployments__ service collection with 5 new operations.
     - _GetDeploymentsExternalV1_
     - _CombinedReleasesV1Mixin0_

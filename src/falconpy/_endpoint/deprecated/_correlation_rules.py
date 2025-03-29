@@ -38,7 +38,38 @@ For more information, please refer to <https://unlicense.org>
 
 _correlation_rules_endpoints = [
   [
-    "combined_rules.get.v1",
+    "aggregates.rule-versions.post.v1",
+    "POST",
+    "/correlation-rules/aggregates/rule-versions/v1",
+    "Get rules aggregates as specified via json in the request body.",
+    "correlation_rules",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "FQL query specifying the filter parameters",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "combined.rules.get.v1",
     "GET",
     "/correlation-rules/combined/rules/v1",
     "Find all rules matching the query and filter.\nSupported filters: "
@@ -88,7 +119,133 @@ _correlation_rules_endpoints = [
     ]
   ],
   [
-    "entities_rules.get.v1",
+    "combined.rules.get.v2",
+    "GET",
+    "/correlation-rules/combined/rules/v2",
+    "Find all rules matching the query and filter.\nSupported filters: "
+    "customer_id,user_id,user_uuid,status,name,created_on,last_updated_on\nSupported range filters: "
+    "created_on,last_updated_on",
+    "correlation_rules",
+    [
+      {
+        "type": "string",
+        "description": "FQL query specifying the filter parameters",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Match query criteria, which includes all the filter string fields",
+        "name": "q",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "created_on",
+          "created_on|desc",
+          "last_updated_on",
+          "last_updated_on|desc"
+        ],
+        "type": "string",
+        "default": "created_on",
+        "description": "Rule property to sort on",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 0,
+        "description": "Starting index of overall result set from which to return IDs",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "Number of IDs to return",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "entities.latest-rules.get.v1",
+    "GET",
+    "/correlation-rules/entities/latest-rules/v1",
+    "Retrieve latest rule versions by rule IDs",
+    "correlation_rules",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The rule IDs",
+        "name": "rule_ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.rule-versions_export.post.v1",
+    "POST",
+    "/correlation-rules/entities/rule-versions/export/v1",
+    "Export rule versions",
+    "correlation_rules",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.rule-versions_import.post.v1",
+    "POST",
+    "/correlation-rules/entities/rule-versions/import/v1",
+    "Import rule versions",
+    "correlation_rules",
+    []
+  ],
+  [
+    "entities.rule-versions_publish.patch.v1",
+    "PATCH",
+    "/correlation-rules/entities/rule-versions/publish/v1",
+    "Publish existing rule version",
+    "correlation_rules",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.rule-versions.delete.v1",
+    "DELETE",
+    "/correlation-rules/entities/rule-versions/v1",
+    "Delete versions by IDs",
+    "correlation_rules",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.rules.get.v1",
     "GET",
     "/correlation-rules/entities/rules/v1",
     "Retrieve rules by IDs",
@@ -108,7 +265,7 @@ _correlation_rules_endpoints = [
     ]
   ],
   [
-    "entities_rules.post.v1",
+    "entities.rules.post.v1",
     "POST",
     "/correlation-rules/entities/rules/v1",
     "Create rule",
@@ -122,7 +279,7 @@ _correlation_rules_endpoints = [
     ]
   ],
   [
-    "entities_rules.patch.v1",
+    "entities.rules.patch.v1",
     "PATCH",
     "/correlation-rules/entities/rules/v1",
     "Update rules",
@@ -136,7 +293,7 @@ _correlation_rules_endpoints = [
     ]
   ],
   [
-    "entities_rules.delete.v1",
+    "entities.rules.delete.v1",
     "DELETE",
     "/correlation-rules/entities/rules/v1",
     "Delete rules by IDs",
@@ -156,12 +313,82 @@ _correlation_rules_endpoints = [
     ]
   ],
   [
-    "queries_rules.get.v1",
+    "entities.rules.get.v2",
+    "GET",
+    "/correlation-rules/entities/rules/v2",
+    "Retrieve rule versions by IDs",
+    "correlation_rules",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "queries.rules.get.v1",
     "GET",
     "/correlation-rules/queries/rules/v1",
     "Find all rule IDs matching the query and filter.\nSupported filters: "
     "customer_id,user_id,user_uuid,status,name,created_on,last_updated_on\nSupported range filters: "
     "created_on,last_updated_on",
+    "correlation_rules",
+    [
+      {
+        "type": "string",
+        "description": "FQL query specifying the filter parameters",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Match query criteria, which includes all the filter string fields",
+        "name": "q",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "created_on",
+          "created_on|desc",
+          "last_updated_on",
+          "last_updated_on|desc"
+        ],
+        "type": "string",
+        "default": "created_on",
+        "description": "Rule property to sort on",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 0,
+        "description": "Starting index of overall result set from which to return IDs",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "Number of IDs to return",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "queries.rules.get.v2",
+    "GET",
+    "/correlation-rules/queries/rules/v2",
+    "Find all rule version IDs matching the query and filter.\nSupported filters: "
+    "customer_id,user_id,user_uuid,status,name,created_on,last_updated_on,state,version,rule_id\nSupported range "
+    "filters: created_on,last_updated_on",
     "correlation_rules",
     [
       {

@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, List, Union
 
 
-def correlation_rules_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
+def correlation_rules_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int, bool]]]]:
     """Craft a properly formatted correlation rules payload.
 
     {
@@ -94,5 +94,34 @@ def correlation_rules_payload(passed_keywords: dict) -> Dict[str, List[Dict[str,
             returned[key] = passed_keywords.get(key, None)
     if passed_keywords.get("trigger_on_create", None) is not None:
         returned["trigger_on_create"] = passed_keywords.get("trigger_on_create", None)
+
+    return returned
+
+
+def correlation_rules_export_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int, bool]]]]:
+    """Craft a properly formatted correlation rule export payload.
+
+    {
+        "get_latest": boolean,
+        "report_format": "string",
+        "search": {
+            "filter": "string",
+            "sort": "string"
+        }
+    }
+    """
+    returned = {}
+    search = {}
+    keys = ["get_latest", "report_format", "search"]
+    search_keys = ["filter", "sort"]
+    for search_key in search_keys:
+        if passed_keywords.get(search_key, None):
+            search[search_key] = passed_keywords.get(search_key, None)
+    if search:
+        returned["search"] = search
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            # Search overrides provided filter and sort
+            returned[key] = passed_keywords.get(key, None)
 
     return returned

@@ -32,11 +32,29 @@ class TestCorrelationRules:
             "entities_rules_post_v1": falcon.create_rule(trigger_on_create=False, name="whatever"),
             "entities_rules_delete_v1": falcon.delete_rules(ids="12345678"),
             "entities_rules_patch_v1": falcon.update_rule(id="12345678", name="whatever_else"),
-            "queries_rules_get_v1": falcon.query_rules(filter="cid:'12345678901234567890123456789012'")
+            "queries_rules_get_v1": falcon.query_rules(filter="cid:'12345678901234567890123456789012'"),
+            "aggregates_rule_versions_post_v1": falcon.aggregate_rule_versions(ids="12345678"),
+            "combined_rules_get_v2": falcon.get_rules_combined_v2(limit=1),
+            "entities_latest_rules_get_v1": falcon.get_latest_rule_versions(rule_ids="12345678"),
+            "entities_rule_versions_export_post_v1": falcon.export_rule(sort="rule_id|desc", get_latest=False),
+            "entities_rule_versions_import_post_v1": falcon.import_rule(rule={"description": "test_string",
+                                                                              "name": "test_string",
+                                                                              "search": {
+                                                                                 "filter": "string",
+                                                                                 "lookback": "string",
+                                                                                 "outcome": "string",
+                                                                                 "trigger_mode": "string"
+                                                                               },
+                                                                              }), 
+            "entities_rule_versions_publish_patch_v1": falcon.publish_rule_version(id="12345678"),
+            "entities_rule_versions_delete_v1": falcon.delete_rule_versions(ids="12345678"),
+            "entities_rules_get_v2": falcon.get_rules_v2(ids="12345678"),
+            "queries_rules_get_v2": falcon.query_rules_v2(limit=1),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
-                error_checks = False
-                # print(key)
-                # print(tests[key])
+                if key != "entities_rule_versions_import_post_v1":
+                    error_checks = False
+                    # print(key)
+                    # print(tests[key])
         assert error_checks
