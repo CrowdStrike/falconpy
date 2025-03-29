@@ -85,7 +85,10 @@ class Downloads(ServiceClass):
         """Enumerate a list of files available for CID.
 
         Keyword arguments:
+        arch -- Apply filtering on system architecture. String.
         file_name -- Apply filtering on file name. String.
+        file_version -- Apply filtering on file version. String.
+        os -- Apply filtering on operating system. String.
         platform -- Apply filtering on file platform. String.
         category -- Apply filtering on file category. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.

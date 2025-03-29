@@ -75,8 +75,26 @@ _downloads_endpoints = [
       },
       {
         "type": "string",
+        "description": "Apply filtering on file version",
+        "name": "file_version",
+        "in": "query"
+      },
+      {
+        "type": "string",
         "description": "Apply filtering on file platform",
         "name": "platform",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Apply filtering on operating system",
+        "name": "os",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Apply filtering on architecture",
+        "name": "arch",
         "in": "query"
       },
       {
