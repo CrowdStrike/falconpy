@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import correlation_rules_payload
+from ._payload import correlation_rules_payload, correlation_rules_export_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._correlation_rules import _correlation_rules_endpoints as Endpoints
@@ -55,6 +55,38 @@ class CorrelationRules(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def aggregate_rule_versions(self: object,
+                                body: dict = None,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get rules aggregates as specified via json in the request body.
+
+        Keyword arguments:
+        body -- Full body payload as JSON formatted dictionary.
+        filter -- Filter results using FQL format. String.
+        ids -- The IDs to retrieve. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/aggregates.rule-versions.post.v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="aggregates_rule_versions_post_v1",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_rules_combined(self: object,
@@ -92,6 +124,203 @@ class CorrelationRules(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_rules_combined_v2(self: object,
+                              parameters: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Find all rules matching the query and filter.
+
+        Keyword arguments:
+        filter -- FQL query specifying the filter parameters. FQL formatted string.
+                  Supported filters: customer_id, user_id, user_uuid, status, name, created_on,
+                                     last_updated_on
+                  Supported range filters: created_on, last_updated_on
+        q -- Match query criteria, which includes all the filter string fields. String.
+        sort -- Rule property to sort on. FQL formatted string.
+        offset -- Starting index of overall result set from which to return IDs. Integer.
+        limit -- Number of IDs to return. Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/combined.rules.get.v2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="combined_rules_get_v2",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_latest_rule_versions(self: object,
+                                 *args,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve latest rule versions by rule IDs.
+
+        Keyword arguments:
+        rule_ids -- The rule IDs to retrieve. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'rule_ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.latest-rules.get.v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_latest_rules_get_v1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "rule_ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def export_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Export rule versions.
+
+        Keyword arguments:
+        body -- Full body payload provided as a JSON format dictionary.
+                {
+                    "get_latest": boolean,
+                    "report_format": "string",
+                    "search": {
+                        "filter": "string",
+                        "sort": "string"
+                    }
+                }
+        filter -- Filter to use to filter rules. String.
+        get_latest -- Flag indicating if the latest rule version should be exported. Boolean.
+        report_format -- Format to use for rule export. String.
+        search -- Rule search to perform. Overrides filter and sort keywords. Dictionary.
+        sort -- Sort to use for rule export. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /correlation-rules/entities.rule-versions_export.post.v1
+        """
+        if not body:
+            body = correlation_rules_export_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_rule_versions_export_post_v1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def import_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Import rule.
+
+        Keyword arguments:
+        body -- Rule to be imported. Not required if rule is provided. JSON formatted dictionary.
+        rule -- Rule to be imported. JSON formatted dictionary.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /correlation-rules/entities.rule-versions_import.post.v1
+        """
+        if not body:
+            body = kwargs.get("rule", None)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_rule_versions_import_post_v1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def publish_rule_version(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Publish existing rule version.
+
+        Keyword arguments:
+        body -- Full body payload provided as a JSON format dictionary. Not required if using other keywords.
+                {
+                  "id": "string"
+                }
+        id -- Correlation rule version ID to be published. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /correlation-rules/entities.rule-versions_publish.patch.v1
+        """
+        if not body:
+            body = {
+                "id": kwargs.get("id", None)
+            }
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_rule_versions_publish_patch_v1",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_rule_versions(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete rule versions by IDs.
+
+        Keyword arguments:
+        ids -- The rule version IDs to delete. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /correlation-rules/entities.rule-versions.delete.v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_rule_versions_delete_v1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_rules(self: object,
                   *args,
                   parameters: dict = None,
@@ -117,6 +346,36 @@ class CorrelationRules(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="entities_rules_get_v1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_rules_v2(self: object,
+                     *args,
+                     parameters: dict = None,
+                     **kwargs
+                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve rule versions by IDs.
+
+        Keyword arguments:
+        ids -- The rule IDs to retrieve. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.rules.get.v2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_rules_get_v2",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
@@ -345,9 +604,50 @@ class CorrelationRules(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_rules_v2(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Find all rule version IDs matching the query and filter.
+
+        Keyword arguments:
+        filter -- FQL query specifying the filter parameters. FQL formatted string.
+                  Supported filters: customer_id, user_id, user_uuid, status, name, created_on,
+                                     last_updated_on
+                  Supported range filters: created_on, last_updated_on
+        q -- Match query criteria, which includes all the filter string fields. String.
+        sort -- Rule property to sort on. FQL formatted string.
+        offset -- Starting index of overall result set from which to return IDs. Integer.
+        limit -- Number of IDs to return. Integer. Default: 100
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/queries.rules.get.v2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queries_rules_get_v2",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    aggregates_rule_versions_post_v1 = aggregate_rule_versions
     combined_rules_get_v1 = get_rules_combined
+    combined_rules_get_v2 = get_rules_combined_v2
+    entities_latest_rules_get_v1 = get_latest_rule_versions
+    entities_rule_versions_export_post_v1 = export_rule
+    entities_rule_versions_import_post_v1 = import_rule
+    entities_rule_versions_publish_patch_v1 = publish_rule_version
+    entities_rule_versions_delete_v1 = delete_rule_versions
     entities_rules_get_v1 = get_rules
+    entities_rules_get_v2 = get_rules_v2
     entities_rules_post_v1 = create_rule
     entities_rules_delete_v1 = delete_rules
     entities_rules_patch_v1 = update_rule
     queries_rules_get_v1 = query_rules
+    queries_rules_get_v2 = query_rules_v2

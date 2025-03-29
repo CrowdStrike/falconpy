@@ -39,7 +39,7 @@ from ._aspm import (
     aspm_node_payload,
     aspm_application_payload
 )
-from ._correlation_rules import correlation_rules_payload
+from ._correlation_rules import correlation_rules_payload, correlation_rules_export_payload
 from ._host_group import host_group_create_payload, host_group_update_payload
 from ._recon import (
     recon_action_payload,
@@ -170,5 +170,6 @@ __all__ = [
     "cloud_aws_registration_payload", "cloud_azure_registration_payload", "cloud_oci_refresh_payload",
     "cloud_oci_validate_payload", "cloud_oci_create_payload", "indicator_graph_payload",
     "content_update_policy_action_payload", "content_update_policy_payload", "device_classes_policy_payload",
-    "device_policy_bluetooth_config_payload", "device_control_policy_payload_v2", "combined_alerts_payload"
+    "device_policy_bluetooth_config_payload", "device_control_policy_payload_v2", "combined_alerts_payload",
+    "correlation_rules_export_payload"
 ]
