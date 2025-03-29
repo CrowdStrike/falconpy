@@ -149,6 +149,10 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_device_control_policies.py`
 
++ Added: Add `arch`, `file_version` and `os` parameters to the _EnumerateFile_ operation within the __Downloads__ service collection.
+    - `_endpoint/_downloads.py`
+    - `downloads.py`
+
 + Added: Added new __Intelligence Indicator Graph__ service collection with 1 new operation.
     - _SearchIndicators_
     - `_endpoint/__init__.py`
