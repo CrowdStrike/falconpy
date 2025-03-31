@@ -253,7 +253,7 @@
     - _SearchDetections_
     - `_endpoint/_container_detections.py`
 
-+ Updated: Added new filters and cosmetic updates to parameter and operation descriptions in operations within the __Container Images__ service collection.
++ Updated: Added new filters and cosmetic updates to parameter and operation descriptions in 11 operations within the __Container Images__ service collection.
     - _AggregateImageAssessmentHistory_
     - _AggregateImageCountByBaseOS_
     - _AggregateImageCountByState_
@@ -266,6 +266,18 @@
     - _CombinedImageIssuesSummary_
     - _CombinedImageVulnerabilitySummary_
     - `_endpoint/_container_images.py`
+
++ Updated: Cosmetic updates to parameter descriptions in 9 operations within the __Container Vulnerabilities__ service collection.
+    - _ReadVulnerabilityCountByActivelyExploited_
+    - _ReadVulnerabilityCountByCPSRating_
+    - _ReadVulnerabilityCountByCVSSScore_
+    - _ReadVulnerabilityCountBySeverity_
+    - _ReadVulnerabilityCount_
+    - _ReadVulnerabilitiesByImageCount_
+    - _ReadVulnerabilitiesPublicationDate_
+    - _ReadCombinedVulnerabilitiesDetails_
+    - _ReadCombinedVulnerabilities_
+    - `_endpoint/_container_vulnerabilities.py`
 
 + Updated: Cosmetic updates to parameter descriptions in 3 operations within the __Detects__ service collection.
     - _UpdateDetectsByIdsV2_
