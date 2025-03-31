@@ -53,6 +53,52 @@ _exposure_management_endpoints = [
     ]
   ],
   [
+    "combined_ecosystem_subsidiaries",
+    "GET",
+    "/fem/combined/ecosystem-subsidiaries/v1",
+    "Retrieves a list of ecosystem subsidiaries with their detailed information.",
+    "exposure_management",
+    [
+      {
+        "type": "integer",
+        "default": 0,
+        "description": "Starting index of result set from which to return subsidiaries",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "The maximum number of subsidiaries to return in the response.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter ecosystem subsidiaries",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The field by which to sort the list of subsidiaries. Possible "
+        "values:<ul><li>name</li><li>primary_domain</li></ul></br>Sort order can be specified by appending \"asc\" or "
+        "\"desc\" to the field name (e.g. \"name|asc\" or \"primary_domain|desc\").",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The version ID of the ecosystem subsidiaries data, represented as a hash string. This "
+        "parameter is required to ensure data consistency and prevent stale data. If a new version of the ecosystem "
+        "subsidiaries data is written, the version ID will be updated. By including this parameter in the request, the "
+        "client can ensure that the response will be invalidated if a new version is written.",
+        "name": "version_id",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "blob_download_external_assets",
     "GET",
     "/fem/entities/blobs-download/v1",
@@ -101,6 +147,51 @@ _exposure_management_endpoints = [
     ]
   ],
   [
+    "get_ecosystem_subsidiaries",
+    "GET",
+    "/fem/entities/ecosystem-subsidiaries/v1",
+    "Retrieves detailed information about ecosystem subsidiaries by ID.",
+    "exposure_management",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "One or more asset IDs (max: 100). Find ecosystem subsidiary IDs with GET "
+        "/fem/entities/ecosystem-subsidiaries/v1",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The version ID of the ecosystem subsidiaries data, represented as a hash string. This "
+        "parameter is required to ensure data consistency and prevent stale data. If a new version of the ecosystem "
+        "subsidiaries data is written, the version ID will be updated. By including this parameter in the request, the "
+        "client can ensure that the response will be invalidated if a new version is written.",
+        "name": "version_id",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "post_external_assets_inventory_v1",
+    "POST",
+    "/fem/entities/external-asset-inventory/v1",
+    "Add external assets for external asset scanning.",
+    "exposure_management",
+    [
+      {
+        "description": "Asset addition specification.",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "get_external_assets",
     "GET",
     "/fem/entities/external-assets/v1",
@@ -113,7 +204,7 @@ _exposure_management_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "One or more asset IDs (max: 100). Find asset IDs with GET `/fem/queries/external-assets/v1`",
+        "description": "One or more asset IDs (max: 100). Find asset IDs with GET /fem/queries/external-assets/v1",
         "name": "ids",
         "in": "query",
         "required": True
@@ -156,6 +247,53 @@ _exposure_management_endpoints = [
         "name": "body",
         "in": "body",
         "required": True
+      }
+    ]
+  ],
+  [
+    "query_ecosystem_subsidiaries",
+    "GET",
+    "/fem/queries/ecosystem-subsidiaries/v1",
+    "Retrieves a list of IDs for ecosystem subsidiaries. Use these IDs with the /entities/ecosystem-"
+    "subsidiaries/v1 endpoints.",
+    "exposure_management",
+    [
+      {
+        "type": "integer",
+        "default": 0,
+        "description": "Starting index of result set from which to return subsidiaries",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "The maximum number of IDs to return in the response.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter ecosystem subsidiaries",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The field by which to sort the list of IDs. Possible "
+        "values:<ul><li>name</li><li>primary_domain</li></ul></br>Sort order can be specified by appending \"asc\" or "
+        "\"desc\" to the field name (e.g. \"name|asc\" or \"primary_domain|desc\").",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The version ID of the ecosystem subsidiaries data, represented as a hash string. This "
+        "parameter is required to ensure data consistency and prevent stale data. If a new version of the ecosystem "
+        "subsidiaries data is written, the version ID will be updated. By including this parameter in the request, the "
+        "client can ensure that the response will be invalidated if a new version is written.",
+        "name": "version_id",
+        "in": "query"
       }
     ]
   ],

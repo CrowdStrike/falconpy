@@ -76,3 +76,40 @@ def fem_asset_payload(passed_keywords: dict) -> dict:
     returned["assets"].append(item)
 
     return returned
+
+
+def fem_add_asset_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted add asset payload.
+
+    {
+        "data": [
+            {
+                "assets": [
+                    {
+                        "id": "string",
+                        "value": "string"
+                    }
+                ],
+                "subsidiary_id": "string"
+            }
+        ]
+    }
+    """
+    returned = {}
+    returned["data"] = []
+    item = {}
+    item["assets"] = []
+    asset_item = {}
+    keys = ["assets", "id", "value", "subsidiary_id"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            if key in ["id", "value"]:
+                asset_item[key] = passed_keywords.get(key, None)
+            else:
+                item[key] = passed_keywords.get(key, None)
+    if asset_item:
+        item["assets"].append(asset_item)
+    if item:
+        returned["data"].append(item)
+
+    return returned

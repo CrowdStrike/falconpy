@@ -153,6 +153,19 @@
     - `_endpoint/_downloads.py`
     - `downloads.py`
 
++ Added: Added 4 new operations to the __Exposure Management__ service collection.
+    - _combined_ecosystem_subsidiaries_
+    - _get_ecosystem_subsidiaries_
+    - _post_external_assets_inventory_v1_
+    - _query_ecosystem_subsidiaries_
+    - `_endpoint/_exposure_management.py`
+    - `_endpoint/deprecated/_exposure_management.py`
+    - `_payload/__init__.py`
+    - `_payload/_exposure_management.py`
+    - `exposure_management.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_exposure_management.py`
+
 + Added: Added new __Intelligence Indicator Graph__ service collection with 1 new operation.
     - _SearchIndicators_
     - `_endpoint/__init__.py`
@@ -247,6 +260,10 @@
     - _query_logins_
     - `_endpoint/_discover.py`
     - `_endpoint/deprecated/_discover.py`
+
++ Updated: Cosmetic update to the `ids` parameter in the _get_external_assets_ operation within the __Exposure Management__ service collection.
+    - `_endpoint/_exposure_management.py`
+    - `_endpoint/deprecated/_exposure_management.py`
 
 + Updated: Cosmetic updates to the `filter`, `ifn_regex`, and `cl_regex` parameter descriptions in 1 operation within the __IOA Exclusions__ service collection.
     - _queryIOAExclusionsV1_
