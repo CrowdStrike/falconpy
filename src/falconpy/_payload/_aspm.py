@@ -757,3 +757,52 @@ def aspm_application_payload(passed_keywords: dict) -> dict:
             returned[keyset] = passed_keywords.get(key)
 
     return returned
+
+
+def retrieve_relay_node_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted executor node relay retrieval payload.
+
+    {
+        "additional_header": "string",
+        "current_aws_arn": "string",
+        "dashboard_url": "string",
+        "id": integer,
+        "last_health_check": integer,
+        "name": "string",
+        "node_type": "string",
+        "password": "string",
+        "pod_settings": {
+            "imageAddress": "string",
+            "imagePullSecrets": [
+                "string"
+            ],
+            "podLabels": [
+                {
+                    "key": "string",
+                    "value": "string"
+                }
+            ]
+        },
+        "proxy_address": "string",
+        "status": {
+            "State": integer,
+            "StateLastUpdated": integer,
+            "StateReason": integer
+        },
+        "type": "string",
+        "useJobs": boolean,
+        "username": "string"
+    }
+    """
+    returned = {}
+    keys = ["additional_headers", "current_aws_arn", "dashboard_url", "id", "last_health_check",
+            "name", "node_type", "password", "pod_settings", "proxy_address", "status", "type"
+            "username"
+            ]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned[key] = passed_keywords.get(key, None)
+    if passed_keywords.get("use_jobs", None) is not None:
+        returned["useJobs"] = passed_keywords.get("use_jobs", None)
+
+    return returned

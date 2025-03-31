@@ -1,6 +1,6 @@
 # Version 1.4.8
 ## Added features and functionality
-+ Added: Added 1 new operation to the __Alerts_ service collection.
++ Added: Added 1 new operation to the __Alerts__ service collection.
     - _PostCombinedAlertsV1_
     - `_endpoint/_alerts.py`
     - `_payload/__init__.py`
@@ -8,6 +8,44 @@
     - `alerts.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_alerts.py`
+
++ Added: Added new operations to the __ASPM__ service collection.
+    - _ExecuteFunctionDataCount_
+    - _ExecuteFunctionsCount_
+    - _ExecuteFunctionDataQueryCount_
+    - _ExecuteFunctionsQueryCount_
+    - _ExecuteFunctionData_
+    - _ExecuteFunctionsOvertime_
+    - _ExecuteFunctions_
+    - _ExecuteFunctionDataQuery_
+    - _ExecuteFunctionsQueryOvertime_
+    - _ExecuteFunctionsQuery_
+    - _getServiceArtifacts_
+    - _GetIntegrationTasksMetadata_
+    - _GetIntegrationTasksV2_
+    - _GetIntegrationsV2_
+    - _GetExecutorNodesMetadata_
+    - _RetrieveRelayInstances_
+    - _GetCloudSecurityIntegrationState_
+    - _SetCloudSecurityIntegrationState_
+    - `_endpoint/_aspm.py`
+    - `_payload/__init__.py`
+    - `_payload/_aspm.py`
+    - `aspm.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_aspm.py`
+
++ Added: Added `exclude_artifacts` keyword argument to the _ServiceNowGetServices_ operation within the __ASPM__ service collection.
+    - `_endpoint/_aspm.py`
+    - `aspm.py`
+
++ Added: Added `offset`, `limit`, `order_by`, `direction`, `integration_task_types`, `ids` and `names` keyword arguments to the _GetIntegrationTasks_ operation within the __ASPM__ service collection.
+    - `_endpoint/_aspm.py`
+    - `aspm.py`
+
++ Added: Added `direction`, `limit`, `offset`, `order_by`, `executor_node_ids`, `executor_node_names`, `executor_node_states` and `executor_node_types` keyword arguments to the _GetExecutorNodes_ operation within the __ASPM__ service collection.
+    - `_endpoint/_aspm.py`
+    - `aspm.py`
 
 + Added: Added new __Cloud AWS Registration__ service collection with 6 new operations.
     - _cloud_registration_aws_get_accounts_
@@ -266,6 +304,9 @@
     - _GetQueriesAlertsV1_ - `offset`, `limit`, `sort` and `filter`
     - _GetQueriesAlertsV2_ - `offset`, `limit`, `sort` and `filter`
     - `_endpoint/_alerts.py`
+
++ Updated: Cosmetic update to the `body` parameter description in the _ExecuteQuery_ operation within the __ASPM__ service collection.
+    - `_endpoint/_aspm.py`
 
 + Updated: Cosmetic update to the `mode` parameter description in the _ProvisionAWSAccounts_ operation within the __Cloud Connect AWS__ service collection.
     - `_endpoint/_cloud_connect_aws.py` 
