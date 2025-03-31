@@ -98,6 +98,35 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_activities_content(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search for activities by name. Returns all supported activities if no filter specified.
+
+        Keyword arguments:
+        filter -- FQL query specifying filter parameters. String.
+        offset -- Starting pagination offset of records to return. String.
+        limit -- Maximum number of records to return. Integer.
+        sort -- FQL formatted sort (ex: name.desc,time.asc). String.
+                If direction is omitted, defaults to descending.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowActivitiesContentCombined
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowActivitiesContentCombined",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def search_definitions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Search workflow definitions based on the provided filter.
 
@@ -765,6 +794,7 @@ class Workflows(ServiceClass):
     # backwards compatibility / ease of use purposes
     WorkflowActivitiesCombined = search_activities
     WorkflowDefinitionsCombined = search_definitions
+    WorkflowActivitiesContentCombined = search_activities_content
     WorkflowExecutionsCombined = search_executions
     WorkflowTriggersCombined = search_triggers
     WorkflowDefinitionsExport = export_definition

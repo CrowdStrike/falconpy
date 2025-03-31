@@ -42,6 +42,7 @@ class TestWorkflows:
             "WorkflowDefinitionsUpdate": falcon.update_definition(change_log="testing"),
             "WorkflowGetHumanInputV1": falcon.get_human_input(ids="1234567"),
             "WorkflowUpdateHumanInputV1": falcon.update_human_input(input="whatever", note="whatever"),
+            "WorkflowActivitiesContentCombined": falcon.search_activities_content(limit=1)
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

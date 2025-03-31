@@ -74,6 +74,42 @@ _workflows_endpoints = [
     ]
   ],
   [
+    "WorkflowActivitiesContentCombined",
+    "GET",
+    "/workflows/combined/activity-content/v1",
+    "Search for activities by name. Returns all supported activities if no filter specified",
+    "workflows",
+    [
+      {
+        "type": "string",
+        "description": "FQL query specifying filter parameters.",
+        "name": "filter",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "type": "string",
+        "description": "Starting pagination offset of records to return.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Maximum number of records to return.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
+        "type": "string",
+        "description": "Sort items by providing a comma separated list of property and direction (eg "
+        "name.desc,time.asc). If direction is omitted, defaults to descending.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "WorkflowDefinitionsCombined",
     "GET",
     "/workflows/combined/definitions/v1",
