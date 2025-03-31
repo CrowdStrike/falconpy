@@ -42,6 +42,7 @@ from ._util import (
     generate_error_result,
     params_to_keywords
     )
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._quick_scan_pro import _quick_scan_pro_endpoints as Endpoints
 
@@ -60,7 +61,7 @@ class QuickScanPro(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def upload_file(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def upload_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a file to be further analyzed with QuickScan Pro. The samples expire after 90 days.
 
         Keyword arguments:
@@ -103,7 +104,7 @@ class QuickScanPro(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_file(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_file(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete file by its sha256 identifier.
 
         Keyword arguments:
@@ -129,7 +130,7 @@ class QuickScanPro(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scan_result(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_scan_result(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the result of an QuickScan Pro scan.
 
         Keyword arguments:
@@ -155,7 +156,7 @@ class QuickScanPro(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def launch_scan(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def launch_scan(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Start scanning a file uploaded through '/quickscanpro/entities/files/v1'.
 
         Keyword arguments:
@@ -195,7 +196,11 @@ class QuickScanPro(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_scan_result(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_scan_result(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete the result of an QuickScan Pro scan.
 
         Keyword arguments:
@@ -221,7 +226,7 @@ class QuickScanPro(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_scan_results(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_scan_results(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get QuickScan Pro scan jobs for a given FQL filter.
 
         Keyword arguments:

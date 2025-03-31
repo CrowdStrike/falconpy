@@ -41,6 +41,7 @@ from ._payload import (
     snapshot_registration_payload,
     snapshot_launch_payload
     )
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._cloud_snapshots import _cloud_snapshots_endpoints as Endpoints
 
@@ -59,7 +60,7 @@ class CloudSnapshots(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_scan_jobs(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_scan_jobs(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for snapshot jobs identified by the provided filter.
 
         Keyword arguments:
@@ -98,7 +99,7 @@ class CloudSnapshots(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scan_jobs(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_scan_jobs(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve snapshot jobs identified by the provided IDs.
 
         Keyword arguments:
@@ -124,7 +125,7 @@ class CloudSnapshots(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def launch_scan_job(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def launch_scan_job(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Launch a snapshot scan for a given cloud asset.
 
         Keyword arguments:
@@ -165,7 +166,7 @@ class CloudSnapshots(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scan_reports(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_scan_reports(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the scan report for an instance.
 
         Keyword arguments:
@@ -190,7 +191,7 @@ class CloudSnapshots(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    def get_credentials(self: object) -> Dict[str, Union[int, dict]]:
+    def get_credentials(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the registry credentials.
 
         HTTP Method: GET
@@ -218,7 +219,7 @@ class CloudSnapshots(ServiceClass):
             operation_id="GetCredentialsMixin0"
             )
 
-    def get_iac_credentials(self: object) -> Dict[str, Union[int, dict]]:
+    def get_iac_credentials(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the registry credentials.
 
         HTTP Method: GET
@@ -247,7 +248,7 @@ class CloudSnapshots(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def register_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def register_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create inventory from data received from a snapshot.
 
         Keyword arguments:

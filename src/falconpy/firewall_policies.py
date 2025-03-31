@@ -39,6 +39,7 @@ from typing import Dict, Union
 from ._util import process_service_request, generate_error_result, force_default
 from ._util import args_to_params, handle_single_argument
 from ._payload import generic_payload_list, firewall_policy_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._firewall_policies import _firewall_policies_endpoints as Endpoints
 
@@ -57,7 +58,10 @@ class FirewallPolicies(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_combined_policy_members(self: object,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for members of a Firewall Policy in your environment by providing an FQL filter and paging details.
 
         Returns a set of host details which match the filter criteria.
@@ -90,7 +94,10 @@ class FirewallPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_combined_policies(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for Firewall Policies in your environment by providing an FQL filter and paging details.
 
         Returns a set of Firewall Policies which match the filter criteria.
@@ -127,7 +134,11 @@ class FirewallPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def perform_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def perform_action(self: object,
+                       body: dict = None,
+                       parameters: dict = None,
+                       **kwargs
+                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform the specified action on the Firewall Policies specified in the request.
 
         Keyword arguments:
@@ -196,7 +207,7 @@ class FirewallPolicies(ServiceClass):
         return returned
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def set_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def set_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Set the precedence of Firewall Policies based on the order of IDs specified in the request.
 
         The first ID specified will have the highest precedence and the last ID specified
@@ -236,7 +247,7 @@ class FirewallPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a set of Firewall Policies by specifying their IDs.
 
         Keyword arguments:
@@ -262,7 +273,11 @@ class FirewallPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def create_policies(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_policies(self: object,
+                        body: dict = None,
+                        parameters: dict = None,
+                        **kwargs
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Firewall Policies by specifying details about the policy to create.
 
         Keyword arguments:
@@ -304,7 +319,7 @@ class FirewallPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a set of Firewall Policies by specifying their IDs.
 
         Keyword arguments:
@@ -330,7 +345,7 @@ class FirewallPolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Firewall Policies by specifying the ID of the policy and details to update.
 
         Keyword arguments:
@@ -368,7 +383,7 @@ class FirewallPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for members of a Firewall Policy in your environment by providing an FQL filter and paging details.
 
         Returns a set of Agent IDs which match the filter criteria.
@@ -401,7 +416,7 @@ class FirewallPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for Firewall Policies in your environment by providing an FQL filter and paging details.
 
         Returns a set of Firewall Policy IDs which match the filter criteria.

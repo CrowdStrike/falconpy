@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request
 from ._util import handle_single_argument, generate_error_result
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._spotlight_evaluation_logic import _spotlight_evaluation_logic_endpoints as Endpoints
 
@@ -56,7 +57,10 @@ class SpotlightEvaluationLogic(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_evaluation_logic_combined(self: object, parameters: dict = None,  **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_evaluation_logic_combined(self: object,
+                                        parameters: dict = None,
+                                        **kwargs
+                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for evaluation logic in your environment by providing a FQL filter and paging details.
 
         Returns a set of evaluation logic entities which match the filter criteria.
@@ -105,7 +109,11 @@ class SpotlightEvaluationLogic(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_evaluation_logic(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_evaluation_logic(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on evaluation logic items by providing one or more IDs.
 
         Keyword arguments:
@@ -131,7 +139,10 @@ class SpotlightEvaluationLogic(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_evaluation_logic(self: object, parameters: dict = None,  **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_evaluation_logic(self: object,
+                               parameters: dict = None,
+                               **kwargs
+                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for evaluation logic in your environment by providing a FQL filter and paging details.
 
         Returns a set of evaluation logic IDs which match the filter criteria.

@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._threatgraph import _threatgraph_endpoints as Endpoints
 
@@ -55,7 +56,7 @@ class ThreatGraph(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_edges(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_edges(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve edges for a given vertex id.  One edge type must be specified.
 
         Keyword arguments:
@@ -229,7 +230,7 @@ class ThreatGraph(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_ran_on(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_ran_on(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Look up instances of indicators.
 
         (Such as hashes, domain names, and ip addresses that have been seen on devices in your environment.)
@@ -265,7 +266,7 @@ class ThreatGraph(ServiceClass):
                     parameters: dict = None,
                     vertex_type: str = "any-vertext",
                     **kwargs
-                    ) -> Dict[str, Union[int, dict]]:
+                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve summary for a given vertex ID.
 
         Keyword arguments:
@@ -351,7 +352,7 @@ class ThreatGraph(ServiceClass):
                         parameters: dict = None,
                         vertex_type: str = "any-vertex",
                         **kwargs
-                        ) -> Dict[str, Union[int, dict]]:
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve metadata for a given vertex ID.
 
         Note: This is a legacy operation used by CrowdStrike Store partners prior
@@ -441,7 +442,7 @@ class ThreatGraph(ServiceClass):
                      parameters: dict = None,
                      vertex_type: str = "any-vertex",
                      **kwargs
-                     ) -> Dict[str, Union[int, dict]]:
+                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve metadata for a given vertex ID.
 
         Keyword arguments:
@@ -522,7 +523,7 @@ class ThreatGraph(ServiceClass):
             vertex_type=vertex_type
             )
 
-    def get_edge_types(self: object) -> Dict[str, Union[int, dict]]:
+    def get_edge_types(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Show all available edge types.
 
         This method does not accept arguments.

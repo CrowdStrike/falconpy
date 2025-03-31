@@ -43,6 +43,7 @@ from ._payload import (
     gcp_registration_payload,
     cspm_service_account_validate_payload
     )
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._d4c_registration import _d4c_registration_endpoints as Endpoints
 
@@ -61,7 +62,7 @@ class D4CRegistration(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_aws_account(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_aws_account(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about the current status of an AWS account.
 
         Keyword arguments:
@@ -96,7 +97,7 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_aws_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_aws_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Register a new AWS account.
 
         Creates a new account in our system for a customer and generates a
@@ -143,7 +144,11 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_aws_account(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_aws_account(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing AWS account or organization from the tenant.
 
         Keyword arguments:
@@ -170,7 +175,11 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_aws_console_setup(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_aws_console_setup(self: object,
+                              *args,
+                              parameters: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return a URL for customer to visit in their cloud environment to grant CrowdStrike access.
 
         Keyword arguments:
@@ -196,7 +205,11 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_aws_account_scripts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_aws_account_scripts(self: object,
+                                *args,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return a script for customer to run in their cloud environment to grant CrowdStrike access.
 
         Keyword arguments:
@@ -237,7 +250,11 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_azure_account(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_azure_account(self: object,
+                          *args,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about Azure account registration.
 
         Keyword arguments:
@@ -272,7 +289,7 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_azure_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_azure_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Register a new Azure account.
 
         Creates a new account in our system for a customer and generates a
@@ -323,7 +340,7 @@ class D4CRegistration(ServiceClass):
                                        *args,
                                        parameters: dict = None,
                                        **kwargs
-                                       ) -> Dict[str, Union[int, dict]]:
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Azure account client ID.
 
         Update an Azure service account in our system by with the
@@ -361,7 +378,10 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_azure_user_scripts_attachment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_azure_user_scripts_attachment(self: object,
+                                          parameters: dict = None,
+                                          **kwargs
+                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Azure user script attachment.
 
         Return a script for customer to run in their cloud environment to
@@ -395,7 +415,7 @@ class D4CRegistration(ServiceClass):
             params=parameters
             )
 
-    def get_azure_user_scripts(self: object) -> Dict[str, Union[int, dict]]:
+    def get_azure_user_scripts(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Azure user script.
 
         Return a script for customer to run in their cloud
@@ -417,7 +437,7 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_gcp_account(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_gcp_account(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about the current status of an GCP account.
 
         Keyword arguments:
@@ -448,7 +468,7 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_gcp_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_gcp_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Register new GCP account.
 
         Creates a new account in our system for a customer and generates a new service
@@ -487,7 +507,11 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_gcp_account(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_gcp_account(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a GCP account from the system.
 
         Keyword arguments:
@@ -513,7 +537,7 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def connect_gcp_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def connect_gcp_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Register new GCP account.
 
         Creates a new account in our system for a customer and generates a new service
@@ -568,7 +592,7 @@ class D4CRegistration(ServiceClass):
                                 *args,
                                 parameters: dict = None,
                                 **kwargs
-                                ) -> Dict[str, Union[int, dict]]:
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the service account id and client email for external clients.
 
         Keyword arguments:
@@ -594,7 +618,7 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_gcp_service_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_gcp_service_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a GCP service account.
 
         Keyword arguments:
@@ -656,7 +680,7 @@ class D4CRegistration(ServiceClass):
                                            *args,
                                            parameters: dict = None,
                                            **kwargs
-                                           ) -> Dict[str, Union[int, dict]]:
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve GCP user script attachment.
 
         Return a script for customer to run in their cloud environment to
@@ -688,7 +712,11 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def azure_download_certificate(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def azure_download_certificate(self: object,
+                                   *args,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download Azure Certificate.
 
         Returns JSON object(s) that contain the base64 encoded certificate for a service principal.
@@ -736,7 +764,7 @@ class D4CRegistration(ServiceClass):
             operation_id="GetDiscoverCloudAzureTenantIDs"
             )
 
-    def get_gcp_user_scripts_attachment(self: object) -> Dict[str, Union[int, dict]]:
+    def get_gcp_user_scripts_attachment(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve GCP user script attachment.
 
         Return a script for customer to run in their cloud environment to
@@ -758,7 +786,11 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_gcp_user_scripts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_gcp_user_scripts(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve GCP user script.
 
         Return a script for customer to run in their cloud
@@ -787,7 +819,10 @@ class D4CRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_aws_horizon_scripts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_aws_horizon_scripts(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return a script for customer to run in their cloud environment to grant CrowdStrike access.
 
         Keyword arguments:

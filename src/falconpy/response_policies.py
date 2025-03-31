@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import process_service_request, force_default, handle_single_argument
 from ._payload import generic_payload_list, response_policy_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._response_policies import _response_policies_endpoints as Endpoints
 
@@ -56,7 +57,10 @@ class ResponsePolicies(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_combined_policy_members(self: object,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for members of a Response policy by providing an FQL filter and paging details.
 
         Returns a set of host details which match the filter criteria.
@@ -89,7 +93,10 @@ class ResponsePolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_combined_policies(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for Response Policies by providing an FQL filter and paging details.
 
         Returns a set of Response Policies which match the filter criteria.
@@ -125,7 +132,7 @@ class ResponsePolicies(ServiceClass):
                                 body: dict = None,
                                 parameters: dict = None,
                                 **kwargs
-                                ) -> Dict[str, Union[int, dict]]:
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform the specified action on the Response Policies specified in the request.
 
         Keyword arguments:
@@ -183,7 +190,7 @@ class ResponsePolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def set_policies_precedence(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def set_policies_precedence(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Set the precedence of Response Policies based on the order of IDs in the request.
 
         The first ID specified will have the highest precedence and the last ID specified will
@@ -223,7 +230,7 @@ class ResponsePolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a set of Response Policies by specifying their IDs.
 
         Keyword arguments:
@@ -249,7 +256,7 @@ class ResponsePolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Response Policies by specifying details about the policy to create.
 
         Keyword arguments:
@@ -300,7 +307,7 @@ class ResponsePolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a set of Response Policies by specifying their IDs.
 
         Keyword arguments:
@@ -326,7 +333,7 @@ class ResponsePolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Response Policies by specifying the ID of the policy and details to update.
 
         Keyword arguments:
@@ -375,7 +382,7 @@ class ResponsePolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for members of a Response policy by providing an FQL filter and paging details.
 
         Returns a set of Agent IDs which match the filter criteria.
@@ -408,7 +415,7 @@ class ResponsePolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for Response Policies by providing an FQL filter with sort and/or paging details.
 
         This returns a set of Response Policy IDs that match the given criteria.

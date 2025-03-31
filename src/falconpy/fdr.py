@@ -35,7 +35,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Union, Dict
 from ._util import force_default, process_service_request, handle_single_argument
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._fdr import _fdr_endpoints as Endpoints
 
@@ -53,7 +55,7 @@ class FDR(ServiceClass):
     - a valid token provided by the authentication service class (oauth2.py)
     """
 
-    def get_event_combined(self: object) -> dict:
+    def get_event_combined(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Fetch combined schema.
 
         HTTP Method: GET
@@ -82,7 +84,11 @@ class FDR(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_event_entities(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_event_entities(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Fetch event schema by ID.
 
         HTTP Method: GET
@@ -117,7 +123,10 @@ class FDR(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_event_entities(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_event_entities(self: object,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of event IDs given a particular query.
 
         HTTP Method: GET
@@ -157,7 +166,11 @@ class FDR(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_field_entities(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_field_entities(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Fetch event schema by ID.
 
         HTTP Method: GET
@@ -192,7 +205,7 @@ class FDR(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_field_entities(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_field_entities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of event IDs given a particular query.
 
         HTTP Method: GET

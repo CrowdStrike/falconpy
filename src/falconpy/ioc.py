@@ -43,6 +43,7 @@ from ._payload import (
     indicator_update_payload,
     indicator_report_payload
     )
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._ioc import _ioc_endpoints as Endpoints
 from ._endpoint._iocs import _iocs_endpoints as LegacyEndpoints
@@ -62,7 +63,11 @@ class IOC(ServiceClass):
     """
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def indicator_aggregate(self: object, parameters: dict = None, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def indicator_aggregate(self: object,
+                            parameters: dict = None,
+                            body: dict = None,
+                            **kwargs
+                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get indicator aggregates as specified via json in request body.
 
         Keyword arguments:
@@ -147,7 +152,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def indicator_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def indicator_combined(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Combined for Indicators.
 
         Keyword arguments:
@@ -197,7 +202,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def action_get(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def action_get(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Actions by IDs.
 
         Keyword arguments:
@@ -223,7 +228,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_indicators_report(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_indicators_report(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Launch an indicators report creation job.
 
         Keyword arguments:
@@ -273,7 +278,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def indicator_get(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def indicator_get(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Indicators by IDs.
 
         Keyword arguments:
@@ -303,7 +308,7 @@ class IOC(ServiceClass):
                          body: dict = None,
                          parameters: dict = None,
                          **kwargs
-                         ) -> Dict[str, Union[int, dict]]:
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Indicators.
 
         Keyword arguments:
@@ -382,7 +387,11 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def indicator_delete(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def indicator_delete(self: object,
+                         *args,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete Indicators by IDs.
 
         Keyword arguments:
@@ -409,7 +418,11 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def indicator_update(self: object, body: dict, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def indicator_update(self: object,
+                         body: dict,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Indicators.
 
         Keyword arguments:
@@ -511,7 +524,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def action_query(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def action_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query Actions.
 
         Keyword arguments:
@@ -537,7 +550,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def indicator_search(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def indicator_search(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for Indicators.
 
         Keyword arguments:
@@ -587,7 +600,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def ioc_type_query(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def ioc_type_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query IOC types.
 
         Keyword arguments:
@@ -613,7 +626,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def platform_query(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def platform_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query platforms.
 
         Keyword arguments:
@@ -639,7 +652,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def severity_query(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def severity_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query severities.
 
         Keyword arguments:
@@ -665,7 +678,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def devices_count_legacy(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def devices_count_legacy(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the number of hosts in your customer account that have observed a given custom IOC.
 
         Keyword arguments:
@@ -697,7 +710,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def devices_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def devices_count(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the number of hosts in your customer account that have observed a given custom IOC.
 
         Keyword arguments:
@@ -729,7 +742,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def devices_ran_on_legacy(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def devices_ran_on_legacy(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find hosts that have observed a given custom IOC.
 
         For details about those hosts, use the hosts API interface.
@@ -767,7 +780,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def devices_ran_on(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def devices_ran_on(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find hosts that have observed a given custom IOC.
 
         For details about those hosts, use the hosts API interface.
@@ -805,7 +818,10 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def processes_ran_on_legacy(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def processes_ran_on_legacy(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for processes associated with a custom IOC.
 
         Keyword arguments:
@@ -844,7 +860,7 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def processes_ran_on(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def processes_ran_on(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for processes associated with a custom IOC.
 
         Keyword arguments:
@@ -883,7 +899,11 @@ class IOC(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def entities_processes(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def entities_processes(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """For the provided ProcessID retrieve the process details.
 
         Keyword arguments:

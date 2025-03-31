@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._event_streams import _event_streams_endpoints as Endpoints
 
@@ -60,7 +61,7 @@ class EventStreams(ServiceClass):
                               parameters: dict = None,
                               body: dict = None,
                               **kwargs
-                              ) -> Dict[str, Union[int, dict]]:
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Refresh an active event stream.
 
         Use the URL shown in a listAvailableStreamsOAuth2 response.
@@ -98,7 +99,7 @@ class EventStreams(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def list_available_streams(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def list_available_streams(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Discover all event streams in your environment.
 
         Keyword arguments:

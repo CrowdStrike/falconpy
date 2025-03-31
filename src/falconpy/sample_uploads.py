@@ -44,6 +44,7 @@ from ._util import (
     params_to_keywords
     )
 from ._payload import extraction_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._sample_uploads import _sample_uploads_endpoints as Endpoints
 
@@ -414,7 +415,7 @@ class SampleUploads(ServiceClass):
                       body: dict = None,
                       parameters: dict = None,
                       **kwargs
-                      ) -> Dict[str, Union[int, dict]]:
+                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a file for further cloud analysis.
 
         After uploading, call the specific analysis API endpoint.
@@ -500,7 +501,7 @@ class SampleUploads(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_sample(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_sample(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Remove a sample, including file, meta and submissions from the collection.
 
         Keyword arguments:

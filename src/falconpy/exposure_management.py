@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import aggregate_payload, fem_asset_payload, fem_add_asset_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._exposure_management import _exposure_management_endpoints as Endpoints
 
@@ -56,7 +57,7 @@ class ExposureManagement(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_assets(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_assets(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get detect aggregates as specified via json in request body.
 
         Keyword arguments:
@@ -139,7 +140,10 @@ class ExposureManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_ecosystem_subsidiaries(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_combined_ecosystem_subsidiaries(self: object,
+                                              parameters: dict = None,
+                                              **kwargs
+                                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a list of ecosystem subsidiaries with their detailed information.
 
         Keyword arguments:
@@ -173,7 +177,7 @@ class ExposureManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def download_assets(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def download_assets(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download the entire contents of the blob. The relative link to this endpoint is returned from query_external_assets.
 
         Keyword arguments:
@@ -199,7 +203,7 @@ class ExposureManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def preview_assets(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def preview_assets(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download a preview of the blob. The relative link to this endpoint is returned from query_external_assets.
 
         Keyword arguments:
@@ -225,7 +229,10 @@ class ExposureManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_ecosystem_subsidiaries(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_ecosystem_subsidiaries(self: object,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve detailed information about ecosystem subsidiaries by ID.
 
         Keyword arguments:
@@ -255,7 +262,7 @@ class ExposureManagement(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def add_assets(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def add_assets(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the details of external assets.
 
         Keyword arguments:
@@ -299,7 +306,7 @@ class ExposureManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_assets(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_assets(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on external assets by providing one or more IDs.
 
         Keyword arguments:
@@ -331,7 +338,7 @@ class ExposureManagement(ServiceClass):
                       body: dict = None,
                       parameters: dict = None,
                       **kwargs
-                      ) -> Dict[str, Union[int, dict]]:
+                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete external assets by providing one or more IDs.
 
         Keyword arguments:
@@ -365,7 +372,7 @@ class ExposureManagement(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_assets(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_assets(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the details of external assets.
 
         Keyword arguments:
@@ -400,7 +407,10 @@ class ExposureManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_ecosystem_subsidiaries(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_ecosystem_subsidiaries(self: object,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a list of IDs for ecosystem subsidiaries that match the provided filter conditions.
 
         Keyword arguments:
@@ -434,7 +444,7 @@ class ExposureManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_assets(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_assets(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of external asset IDs that match the provided filter conditions.
 
         Keyword arguments:

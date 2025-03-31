@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import exclusion_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._sensor_visibility_exclusions import _sensor_visibility_exclusions_endpoints as EPS
 
@@ -56,7 +57,7 @@ class SensorVisibilityExclusions(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a set of Sensor Visibility Exclusions by specifying their IDs.
 
         Keyword arguments:
@@ -82,7 +83,7 @@ class SensorVisibilityExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create the Sensor Visibility exclusions.
 
         Keyword arguments:
@@ -118,7 +119,11 @@ class SensorVisibilityExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_exclusions(self: object,
+                          *args,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete the Sensor Visibility exclusions by ID.
 
         Keyword arguments:
@@ -145,7 +150,7 @@ class SensorVisibilityExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the Sensor Visibility Exclusions.
 
         Keyword arguments:
@@ -186,7 +191,7 @@ class SensorVisibilityExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_exclusions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for Sensor Visibility Exclusions.
 
         Keyword arguments:

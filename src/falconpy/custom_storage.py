@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 import json
 from typing import Dict, Union
 from ._util import process_service_request, force_default, generate_error_result
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._custom_storage import _custom_storage_endpoints as Endpoints
 
@@ -56,7 +57,7 @@ class CustomStorage(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def list(self, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def list(self, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """List the object keys in the specified collection in alphabetical order.
 
         HTTP Method: GET
@@ -104,7 +105,7 @@ class CustomStorage(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search(self, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search(self, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for objects that match the specified filter creteria.
 
         Object metadata is returned, not actual objects.
@@ -199,7 +200,7 @@ class CustomStorage(ServiceClass):
         return returned
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def upload(self, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def upload(self, body: dict = None, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a new or overwrite an existing object at the given key.
 
         HTTP Method: PUT
@@ -259,7 +260,7 @@ class CustomStorage(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete(self, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete(self, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing object at the given key.
 
         HTTP Method: DELETE
@@ -308,7 +309,7 @@ class CustomStorage(ServiceClass):
                                              )
         return returned
 
-    def metadata(self, **kwargs) -> Dict[str, Union[int, dict]]:
+    def metadata(self, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the metadata for a specified object.
 
         HTTP Method: GET
@@ -352,7 +353,7 @@ class CustomStorage(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def list_by_version(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def list_by_version(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """List the object keys in the specified collection in alphabetical order.
 
         HTTP Method: GET
@@ -406,7 +407,7 @@ class CustomStorage(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_by_version(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_by_version(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for objects that match the specified filter criteria.
 
         Object metadata is returned, not actual objects.
@@ -463,7 +464,7 @@ class CustomStorage(ServiceClass):
                                              )
         return returned
 
-    def get_version(self: object, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_version(self: object, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the bytes for the specified object.
 
         HTTP Method: GET
@@ -513,7 +514,7 @@ class CustomStorage(ServiceClass):
         return returned
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def upload_version(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def upload_version(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Put the specified new object at the given key or overwrite an existing object at the given key.
 
         HTTP Method: PUT
@@ -578,7 +579,7 @@ class CustomStorage(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_version(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_version(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete the specified versioned object.
 
         HTTP Method: DELETE
@@ -633,7 +634,7 @@ class CustomStorage(ServiceClass):
                                              )
         return returned
 
-    def version_metadata(self: object, **kwargs) -> Dict[str, Union[int, dict]]:
+    def version_metadata(self: object, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the metadata for the specified object.
 
         HTTP Method: GET

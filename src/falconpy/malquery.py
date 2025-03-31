@@ -39,6 +39,7 @@ from typing import Dict, Union
 from ._util import process_service_request, force_default, handle_single_argument
 from ._payload import malquery_fuzzy_payload, generic_payload_list
 from ._payload import malquery_exact_search_payload, malquery_hunt_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._malquery import _malquery_endpoints as Endpoints
 
@@ -56,7 +57,7 @@ class MalQuery(ServiceClass):
     - a valid token provided by the authentication service class (OAuth2.token())
     """
 
-    def get_quotas(self: object) -> Dict[str, Union[int, dict]]:
+    def get_quotas(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get information about search and download quotas in your environment.
 
         This method does not accept arguments or keywords.
@@ -75,7 +76,7 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def fuzzy_search(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def fuzzy_search(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search Falcon MalQuery quickly, but with more potential for false positives.
 
         Search for a combination of hex patterns and strings in order to identify
@@ -154,7 +155,7 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_metadata(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_metadata(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve indexed files metadata by their hash.
 
         Keyword arguments:
@@ -180,7 +181,7 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_request(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_request(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Check the status and results of an asynchronous request, such as hunt or exact-search.
 
         Supports a single request id at this time.
@@ -236,7 +237,7 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def samples_multidownload(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def samples_multidownload(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Schedule samples for download.
 
         Use the result id with the /request endpoint to check if the download is ready
@@ -275,7 +276,7 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def exact_search(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def exact_search(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform a MalQuery Exact Search.
 
         Search Falcon MalQuery for a combination of hex patterns
@@ -341,7 +342,7 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def hunt(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def hunt(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Schedule a YARA-based search for execution.
 
         Returns a request id which can be used with the /request endpoint.

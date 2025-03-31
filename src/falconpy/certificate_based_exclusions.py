@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
+from ._result import Result
 from ._service_class import ServiceClass
 from ._payload import certificate_based_exclusions_payload
 from ._endpoint._certificate_based_exclusions import _certificate_based_exclusions_endpoints as Endpoints
@@ -57,7 +58,7 @@ class CertificateBasedExclusions(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all exclusion IDs matching the query with filter.
 
         Keyword arguments:
@@ -83,7 +84,7 @@ class CertificateBasedExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create new Certificate Based Exclusions.
 
         Keyword arguments:
@@ -137,7 +138,11 @@ class CertificateBasedExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_exclusions(self: object,
+                          *args,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a set of exclusions by specifying their IDs.
 
         Keyword arguments:
@@ -164,7 +169,7 @@ class CertificateBasedExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Certificate Based Exclusions.
 
         Keyword arguments:
@@ -217,7 +222,7 @@ class CertificateBasedExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_certificates(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_certificates(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve vulnerability and package related info for this customer.
 
         Keyword arguments:
@@ -242,7 +247,7 @@ class CertificateBasedExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_certificates(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_certificates(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for cert-based exclusions.
 
         Keyword arguments:

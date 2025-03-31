@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._sensor_usage import _sensor_usage_endpoints as Endpoints
 
@@ -55,7 +56,7 @@ class SensorUsage(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_weekly_usage(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_weekly_usage(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Fetch weekly sensor usage average.
 
         Each data point represents the average of how many unique AIDs were seen per week for the previous 28 days.

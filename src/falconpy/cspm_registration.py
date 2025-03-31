@@ -46,6 +46,7 @@ from ._payload import (
     generic_payload_list,
     cspm_service_account_validate_payload
     )
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._cspm_registration import _cspm_registration_endpoints as Endpoints
 
@@ -64,7 +65,7 @@ class CSPMRegistration(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_aws_account(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_aws_account(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about the current status of an AWS account.
 
         Keyword arguments:
@@ -106,7 +107,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_aws_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_aws_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Register a new AWS account.
 
         Creates a new account in our system for a customer and generates a script
@@ -159,7 +160,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_aws_account(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_aws_account(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing AWS Account or Organization by specifying their IDs.
 
         Keyword arguments:
@@ -188,7 +189,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_aws_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_aws_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Patches a existing account in our system for a customer.
 
         Keyword arguments:
@@ -234,7 +235,10 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_aws_console_setup_urls(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_aws_console_setup_urls(self: object,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve setup URLs for the AWS console.
 
         Returns a URL for customers to visit in their cloud environment
@@ -271,7 +275,10 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_aws_account_scripts_attachment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_aws_account_scripts_attachment(self: object,
+                                           parameters: dict = None,
+                                           **kwargs
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve AWS account scripts.
 
         Return a script for customers to run in their cloud environment
@@ -311,7 +318,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_azure_account(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_azure_account(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about Azure account registration.
 
         Keyword arguments:
@@ -347,7 +354,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_azure_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_azure_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Register new Azure account.
 
         Creates a new account in our system for a customer and generates a script
@@ -394,7 +401,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_azure_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_azure_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Azure account.
 
         Keyword arguments:
@@ -434,7 +441,11 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_azure_account(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_azure_account(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing Azure Subscription by specifying their IDs.
 
         Keyword arguments:
@@ -466,7 +477,7 @@ class CSPMRegistration(ServiceClass):
                                        body: dict = None,
                                        parameters: dict = None,
                                        **kwargs
-                                       ) -> Dict[str, Union[int, dict]]:
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Azure account Client ID.
 
         Update an Azure service account in our system with the
@@ -505,7 +516,7 @@ class CSPMRegistration(ServiceClass):
                                                     body: dict = None,
                                                     parameters: dict = None,
                                                     **kwargs
-                                                    ) -> Dict[str, Union[int, dict]]:
+                                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update default subscription ID.
 
         Update an Azure service account in our system with the
@@ -546,7 +557,7 @@ class CSPMRegistration(ServiceClass):
                                    *args,
                                    parameters: dict = None,
                                    **kwargs
-                                   ) -> Dict[str, Union[int, dict]]:
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Azure certificate.
 
         Returns JSON object(s) that contain the base64 encoded certificate for a service principal.
@@ -579,7 +590,7 @@ class CSPMRegistration(ServiceClass):
                                    *args,
                                    parameters: dict = None,
                                    **kwargs
-                                   ) -> Dict[str, Union[int, dict]]:
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """
         Return information about Azure management group registration.
 
@@ -608,7 +619,10 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_azure_management_group(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_azure_management_group(self: object,
+                                      body: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Register new Azure account.
 
         Creates a new account in our system for a customer and generates a script
@@ -647,7 +661,11 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_azure_management_group(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_azure_management_group(self: object,
+                                      *args,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing Azure Managment Group by specifying their IDs.
 
         Keyword arguments:
@@ -677,7 +695,7 @@ class CSPMRegistration(ServiceClass):
                                   *args,
                                   parameters: dict = None,
                                   **kwargs
-                                  ) -> Dict[str, Union[int, dict]]:
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Refresh Azure certificate.
 
         Returns JSON object(s) that contain the base64 encoded certificate for a service principal.
@@ -710,7 +728,7 @@ class CSPMRegistration(ServiceClass):
                                           *args,
                                           parameters: dict = None,
                                           **kwargs
-                                          ) -> Dict[str, Union[int, dict]]:
+                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """
         Retrieve Azure user script.
 
@@ -748,7 +766,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_gcp_account(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_gcp_account(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about the current status of an GCP account.
 
         Keyword arguments:
@@ -782,7 +800,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_gcp_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_gcp_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Register new GCP account.
 
         Creates a new account in our system for a customer and generates a new service
@@ -821,7 +839,11 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_gcp_account(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_gcp_account(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a GCP account from the system.
 
         Keyword arguments:
@@ -847,7 +869,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_gcp_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_gcp_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a GCP account.
 
         Keyword arguments:
@@ -883,7 +905,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def connect_gcp_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def connect_gcp_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Register new GCP account.
 
         Creates a new account in our system for a customer and generates a new service
@@ -934,7 +956,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def validate_gcp_account(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def validate_gcp_account(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Run a synchronous health check.
 
         Keyword arguments:
@@ -970,7 +992,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def validate_gcp_service_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def validate_gcp_service_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Validate credentials for a GCP service account.
 
         Keyword arguments:
@@ -1030,7 +1052,7 @@ class CSPMRegistration(ServiceClass):
                                 *args,
                                 parameters: dict = None,
                                 **kwargs
-                                ) -> Dict[str, Union[int, dict]]:
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the service account id and client email for external clients.
 
         Keyword arguments:
@@ -1056,7 +1078,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_gcp_service_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_gcp_service_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a GCP service account.
 
         Keyword arguments:
@@ -1118,7 +1140,7 @@ class CSPMRegistration(ServiceClass):
                                         *args,
                                         parameters: dict = None,
                                         **kwargs
-                                        ) -> Dict[str, Union[int, dict]]:
+                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve GCP user script attachment.
 
         Return a script for customer to run in their cloud environment to
@@ -1149,7 +1171,10 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_behavior_detections(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_behavior_detections(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve list of detected behaviors.
 
         Keyword arguments:
@@ -1217,7 +1242,10 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_configuration_detections(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_configuration_detections(self: object,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve list of active misconfigurations.
 
         Keyword arguments:
@@ -1365,7 +1393,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_ioa_events(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_ioa_events(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """For CSPM IOA events, gets list of IOA events.
 
         Keyword arguments:
@@ -1401,7 +1429,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_ioa_users(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_ioa_users(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """For CSPM IOA users, gets list of IOA users.
 
         Keyword arguments:
@@ -1432,7 +1460,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_policy(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_policy(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Given a policy ID, returns detailed policy information.
 
         Keyword arguments:
@@ -1484,7 +1512,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_policy_settings(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_policy_settings(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return information about current policy settings.
 
         Keyword arguments:
@@ -1540,7 +1568,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policy_settings(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_policy_settings(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a policy setting.
 
         Can be used to override policy severity or to disable a policy entirely.
@@ -1592,7 +1620,11 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scan_schedule(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_scan_schedule(self: object,
+                          *args,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return scan schedule configuration for one or more cloud platforms.
 
         Keyword arguments:
@@ -1621,7 +1653,7 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_scan_schedule(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_scan_schedule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update scan schedule configuration for one or more cloud platforms.
 
         Keyword arguments:

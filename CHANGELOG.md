@@ -297,6 +297,87 @@
 + Fixed: Payload handler / docstring issue with _entities_rules_patch_v1_ operation within the __CorrelationRules__ Service Class.  Closes #1294.
     - `correlation_rules.py`
 
++ Fixed: Pylance issue with type hints for Service Class methods when pythonic mode is being used. Closes #1274.
+    - `alerts.py`
+    - `api_integrations.py`
+    - `aspm.py`
+    - `certificate_based_exclusions.py`
+    - `cloud_connect_aws.py`
+    - `cloud_snapshots.py`
+    - `compliance_assessments.py`
+    - `configuration_assessment_evaluation_logic.py`
+    - `configuration_assessment.py`
+    - `container_alerts.py`
+    - `container_detections.py`
+    - `container_images.py`
+    - `container_packages.py`
+    - `container_vulnerabilities.py`
+    - `cspm_registration.py`
+    - `custom_ioa.py`
+    - `custom_storage.py`
+    - `d4c_registration.py`
+    - `datascanner.py`
+    - `delivery_settings.py`
+    - `detects.py`
+    - `device_control_policies.py`
+    - `discover.py`
+    - `downloads.py`
+    - `drift_indicators.py`
+    - `event_streams.py`
+    - `exposure_management.py`
+    - `falcon_complete_dashboard.py`
+    - `falcon_container.py`
+    - `falconx_sandbox.py`
+    - `fdr.py`
+    - `filevantage.py`
+    - `firewall_management.py`
+    - `firewall_policies.py`
+    - `foundry_logscale.py`
+    - `host_group.py`
+    - `host_migration.py`
+    - `hosts.py`
+    - `identity_protection.py`
+    - `image_assessment_policies.py`
+    - `incidents.py`
+    - `installation_tokens.py`
+    - `intel.py`
+    - `ioa_exclusions.py`
+    - `ioc.py`
+    - `iocs.py`
+    - `kubernetes_protection.py`
+    - `malquery.py`
+    - `message_center.py`
+    - `ml_exclusions.py`
+    - `mobile_enrollment.py`
+    - `mssp.py`
+    - `oauth2.py`
+    - `ods.py`
+    - `overwatch_dashboard.py`
+    - `prevention_policy.py`
+    - `quarantine.py`
+    - `quick_scan_pro.py`
+    - `quick_scan.py`
+    - `real_time_response_admin.py`
+    - `real_time_response_audit.py`
+    - `real_time_response.py`
+    - `recon.py`
+    - `report_executions.py`
+    - `response_policies.py`
+    - `sample_uploads.py`
+    - `scheduled_reports.py`
+    - `sensor_download.py`
+    - `sensor_update_policy.py`
+    - `sensor_usage.py`
+    - `sensor_visibility_exclusions.py`
+    - `spotlight_evaluation_logic.py`
+    - `spotlight_vulnerabilities.py`
+    - `tailored_intelligence.py`
+    - `threatgraph.py`
+    - `unidentified_containers.py`
+    - `user_management.py`
+    - `workflows.py`
+    - `zero_trust_assessment.py`
+
 ## Other
 + Updated: Cosmetic updates to operation and parameter descriptions within the __Alerts__ service collection.
     - _PatchEntitiesAlertsV2_ - `body`

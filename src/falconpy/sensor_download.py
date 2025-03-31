@@ -39,6 +39,7 @@ import os
 from typing import Dict, Union
 from ._util import generate_ok_result, force_default
 from ._util import handle_single_argument, process_service_request
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._sensor_download import _sensor_download_endpoints as Endpoints
 
@@ -60,7 +61,7 @@ class SensorDownload(ServiceClass):
     def get_combined_sensor_installers_by_query(self: object,
                                                 parameters: dict = None,
                                                 **kwargs
-                                                ) -> Dict[str, Union[int, dict]]:
+                                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve all metadata for installers from provided query.
 
         Keyword arguments:
@@ -92,7 +93,7 @@ class SensorDownload(ServiceClass):
     def get_combined_sensor_installers_by_query_v2(self: object,
                                                    parameters: dict = None,
                                                    **kwargs
-                                                   ) -> Dict[str, Union[int, dict]]:
+                                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve all metadata for installers from provided query.
 
         Also provides architectural details.
@@ -276,7 +277,7 @@ class SensorDownload(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    def get_sensor_installer_ccid(self: object) -> Dict[str, Union[int, dict]]:
+    def get_sensor_installer_ccid(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the CID for the current oauth environment.
 
         This method does not accept arguments.
@@ -295,7 +296,10 @@ class SensorDownload(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_sensor_installers_by_query(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_sensor_installers_by_query(self: object,
+                                       parameters: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a list of SHA256 for installers based on the filter.
 
         Keyword arguments:
@@ -324,7 +328,10 @@ class SensorDownload(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_sensor_installers_by_query_v2(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_sensor_installers_by_query_v2(self: object,
+                                          parameters: dict = None,
+                                          **kwargs
+                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a list of SHA256 for installers based on the filter.
 
         Keyword arguments:

@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request
 from ._payload import delivery_settings_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._delivery_settings import _delivery_settings_endpoints as Endpoints
 
@@ -55,7 +56,7 @@ class DeliverySettings(ServiceClass):
     - a valid token provided by the authentication service class (oauth2.py)
     """
 
-    def get_delivery_settings(self: object) -> Dict[str, Union[int, dict]]:
+    def get_delivery_settings(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Delivery Settings.
 
         Keyword arguments: This method does not accept keyword arguments.
@@ -76,7 +77,7 @@ class DeliverySettings(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_delivery_settings(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_delivery_settings(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Delivery Settings.
 
         Keyword arguments:

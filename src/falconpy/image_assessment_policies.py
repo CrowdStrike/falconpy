@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import image_policy_payload, image_exclusions_payload, image_group_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._image_assessment_policies import _image_assessment_policies_endpoints as Endpoints
 
@@ -55,7 +56,7 @@ class ImageAssessmentPolicies(ServiceClass):
     - a valid token provided by the authentication service class (oauth2.py)
     """
 
-    def read_policies(self: object) -> Dict[str, Union[int, dict]]:
+    def read_policies(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all Image Assessment policies.
 
         This method does not accept keyword arguments.
@@ -76,7 +77,7 @@ class ImageAssessmentPolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Image Assessment policies.
 
         Keyword arguments:
@@ -112,7 +113,7 @@ class ImageAssessmentPolicies(ServiceClass):
                         body: dict = None,
                         parameters: dict = None,
                         **kwargs
-                        ) -> Dict[str, Union[int, dict]]:
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Image Assessment Policy entities.
 
         Keyword arguments:
@@ -164,7 +165,7 @@ class ImageAssessmentPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_policy(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_policy(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete Image Assessment Policy by policy UUID.
 
         Keyword arguments:
@@ -189,7 +190,7 @@ class ImageAssessmentPolicies(ServiceClass):
             params=handle_single_argument(args, parameters, "id")
             )
 
-    def read_policy_exclusions(self: object) -> Dict[str, Union[int, dict]]:
+    def read_policy_exclusions(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Image Assessment Policy Exclusion entities.
 
         This method does not accept keyword arguments.
@@ -210,7 +211,7 @@ class ImageAssessmentPolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policy_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_policy_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Image Assessment Policy Exclusion entities.
 
         Keyword arguments:
@@ -252,7 +253,7 @@ class ImageAssessmentPolicies(ServiceClass):
             body=body
             )
 
-    def read_policy_groups(self: object) -> Dict[str, Union[int, dict]]:
+    def read_policy_groups(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Image Assessment Policy Group entities.
 
         This method does not accept keyword arguments.
@@ -273,7 +274,7 @@ class ImageAssessmentPolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_policy_groups(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_policy_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Image Assessment Policy Group entities.
 
         Keyword arguments:
@@ -319,7 +320,7 @@ class ImageAssessmentPolicies(ServiceClass):
                              body: dict = None,
                              parameters: dict = None,
                              **kwargs
-                             ) -> Dict[str, Union[int, dict]]:
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Image Assessment Policy Group entities.
 
         Keyword arguments:
@@ -363,7 +364,11 @@ class ImageAssessmentPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_policy_group(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_policy_group(self: object,
+                            *args,
+                            parameters: dict = None,
+                            **kwargs
+                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete Image Assessment Policy Group entities.
 
         Keyword arguments:
@@ -389,7 +394,7 @@ class ImageAssessmentPolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policy_precedence(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_policy_precedence(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Image Assessment Policy precedence.
 
         Keyword arguments:

@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import base_image_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._container_images import _container_images_endpoints as Endpoints
 
@@ -56,7 +57,11 @@ class ContainerImages(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_assessment_history(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_assessment_history(self: object,
+                                     *args,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Image assessment history.
 
         Keyword arguments:
@@ -83,7 +88,11 @@ class ContainerImages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_count_by_base_os(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_count_by_base_os(self: object,
+                                   *args,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of images grouped by Base OS distribution.
 
         Keyword arguments:
@@ -110,7 +119,11 @@ class ContainerImages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_count_by_state(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_count_by_state(self: object,
+                                 *args,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of images grouped by state.
 
         Keyword arguments:
@@ -138,7 +151,11 @@ class ContainerImages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_count(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_count(self: object,
+                        *args,
+                        parameters: dict = None,
+                        **kwargs
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of images.
 
         Keyword arguments:
@@ -176,7 +193,10 @@ class ContainerImages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_combined_base_images(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_combined_base_images(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve base images for provided filter.
 
         Keyword arguments:
@@ -202,7 +222,7 @@ class ContainerImages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_combined_images(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_combined_images(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get image assessment results by providing an FQL filter and paging details.
 
         Keyword arguments:
@@ -246,7 +266,7 @@ class ContainerImages(ServiceClass):
     def get_combined_images_by_vulnerability_count(self: object,
                                                    parameters: dict = None,
                                                    **kwargs
-                                                   ) -> Dict[str, Union[int, dict]]:
+                                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve top x images with the most vulnerabilities.
 
         Keyword arguments:
@@ -275,7 +295,7 @@ class ContainerImages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_combined_detail(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_combined_detail(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve image entities identified by the provided filter criteria.
 
         Keyword arguments:
@@ -305,7 +325,7 @@ class ContainerImages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_combined_export(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_combined_export(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve images with an option to expand aggregated vulnerabilities/detections.
 
         Keyword arguments:
@@ -358,7 +378,10 @@ class ContainerImages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_combined_issues_summary(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_combined_issues_summary(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve image issues summary such as Image detections, Runtime detections, Policies, Vulnerabilities.
 
         Keyword arguments:
@@ -388,7 +411,10 @@ class ContainerImages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_combined_vulnerabilities_summary(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_combined_vulnerabilities_summary(self: object,
+                                             parameters: dict = None,
+                                             **kwargs
+                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate information about vulnerabilities for an image.
 
         Keyword arguments:
@@ -418,7 +444,7 @@ class ContainerImages(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_base_images(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_base_images(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete base images by base image UUID.
 
         Keyword arguments:
@@ -461,7 +487,11 @@ class ContainerImages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_base_images(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_base_images(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete base images by base image UUID.
 
         Keyword arguments:

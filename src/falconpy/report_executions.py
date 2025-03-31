@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import reports_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._report_executions import _report_executions_endpoints as Endpoints
 
@@ -56,7 +57,7 @@ class ReportExecutions(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_download(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_download(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get report entity download.
 
         Keyword arguments:
@@ -82,7 +83,7 @@ class ReportExecutions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def retry_reports(self: object, *args, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def retry_reports(self: object, *args, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retries a report execution.
 
         Keyword arguments:
@@ -115,7 +116,7 @@ class ReportExecutions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve report details for the provided report IDs.
 
         Keyword arguments:
@@ -141,7 +142,7 @@ class ReportExecutions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_reports(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_reports(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all report execution IDs matching the query with filter.
 
         Keyword arguments:

@@ -47,6 +47,7 @@ from ._payload import (
     aggregate_payload,
     recon_export_job_payload
     )
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._recon import _recon_endpoints as Endpoints
 
@@ -65,7 +66,10 @@ class Recon(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_notifications_exposed_data_records(self: object, body: list = None, **kwargs) -> dict:
+    def aggregate_notifications_exposed_data_records(self: object,
+                                                     body: list = None,
+                                                     **kwargs
+                                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notification aggregates as specified via JSON in request body.
 
         Keyword arguments:
@@ -149,7 +153,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_notifications(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_notifications(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notification aggregates as specified via JSON in request body.
 
         Keyword arguments:
@@ -233,7 +237,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def preview_rule(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def preview_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notification aggregates as specified via JSON in request body.
 
         Keyword arguments:
@@ -265,7 +269,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_actions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_actions(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get actions based on their IDs. IDs can be retrieved using the GET query_actions.
 
         Keyword arguments:
@@ -291,7 +295,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_actions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_actions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create actions for a monitoring rule.
 
         Accepts a list of actions that will be attached to the monitoring rule.
@@ -351,7 +355,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_action(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_action(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an action from a monitoring rule based on the action ID.
 
         Keyword arguments:
@@ -377,7 +381,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_action(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_action(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an action for a monitoring rule.
 
         Keyword arguments:
@@ -426,7 +430,11 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_export_job_file_contents(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_export_job_file_contents(self: object,
+                                     *args,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download the file associated with a job ID.
 
         Keyword arguments:
@@ -452,7 +460,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_export_jobs(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_export_jobs(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the status of export jobs based on their IDs.
 
         Export jobs can be launched by calling CreateExportJobsV1.
@@ -481,7 +489,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def create_export_jobs(self: object, body: list = None, **kwargs) -> dict:
+    def create_export_jobs(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Launch asynchronous export job. Use the job ID to poll the status of the job using GetExportJobsV1.
 
         Keyword arguments:
@@ -523,7 +531,11 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_export_jobs(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_export_jobs(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete export jobs based on IDs.
 
         Keyword arguments:
@@ -553,7 +565,7 @@ class Recon(ServiceClass):
                                               *args,
                                               parameters: dict = None,
                                               **kwargs
-                                              ) -> Dict[str, Union[int, dict]]:
+                                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get detailed notifications based on their IDs.
 
         Get detailed notifications based on their IDs. These include the translated raw
@@ -582,7 +594,11 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_notifications_detailed(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_notifications_detailed(self: object,
+                                   *args,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get detailed notifications based on their IDs.
 
         Get detailed notifications based on their IDs. These include the raw intelligence
@@ -611,7 +627,11 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_notifications_exposed_data_records(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_notifications_exposed_data_records(self: object,
+                                               *args,
+                                               parameters: dict = None,
+                                               **kwargs
+                                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get monitoring rules rules by provided IDs.
 
         Keyword arguments:
@@ -641,7 +661,7 @@ class Recon(ServiceClass):
                                      *args,
                                      parameters: dict = None,
                                      **kwargs
-                                     ) -> Dict[str, Union[int, dict]]:
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notifications based on their IDs.
 
         IDs can be retrieved using query_notifications.
@@ -671,7 +691,11 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_notifications(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_notifications(self: object,
+                          *args,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notifications based on their IDs.
 
         IDs can be retrieved using get_notifications.
@@ -699,7 +723,11 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_notifications(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_notifications(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete notifications based on IDs.
 
         Notifications cannot be recovered after they are deleted.
@@ -727,7 +755,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def update_notifications(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_notifications(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update notification status or assignee. Accepts bulk requests.
 
         Keyword arguments:
@@ -765,7 +793,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rules(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_rules(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get monitoring rules rules by provided IDs.
 
         Keyword arguments:
@@ -791,7 +819,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def create_rules(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_rules(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create monitoring rules.
 
         Keyword arguments:
@@ -837,7 +865,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_rules(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_rules(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete monitoring rules.
 
         Keyword arguments:
@@ -864,7 +892,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_rules(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_rules(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update monitoring rules.
 
         Keyword arguments:
@@ -910,7 +938,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_actions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_actions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query actions based on provided criteria.
 
         Use the IDs from this response to get the action entities with get_actions.
@@ -949,7 +977,10 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_notifications_exposed_data_records(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_notifications_exposed_data_records(self: object,
+                                                 parameters: dict = None,
+                                                 **kwargs
+                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query notifications exposed data records based on provided criteria.
 
         Use the IDs from this response to get the notification
@@ -1009,7 +1040,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_notifications(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_notifications(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query notifications based on provided criteria.
 
         Use the IDs from this response to get the notification
@@ -1049,7 +1080,7 @@ class Recon(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_rules(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_rules(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query monitoring rules based on provided criteria.
 
         Use the IDs from this response to fetch the rules with get_rules.

@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import reports_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._scheduled_reports import _scheduled_reports_endpoints as Endpoints
 
@@ -56,7 +57,7 @@ class ScheduledReports(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
-    def launch(self: object, *args, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def launch(self: object, *args, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Launch scheduled report executions for the provided ID(s).
 
         Keyword arguments:
@@ -89,7 +90,7 @@ class ScheduledReports(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_reports(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve scheduled reports for the provided report IDs.
 
         Keyword arguments:
@@ -115,7 +116,7 @@ class ScheduledReports(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_reports(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_reports(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all report IDs matching the query with filter.
 
         Keyword arguments:

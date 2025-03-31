@@ -51,6 +51,7 @@ from ._payload import (
     workflow_human_input,
     workflow_mock_payload
     )
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._workflows import _workflows_endpoints as Endpoints
 
@@ -69,7 +70,7 @@ class Workflows(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_activities(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_activities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search workflow activities based on the provided filter.
 
         Keyword arguments:
@@ -98,7 +99,10 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_activities_content(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_activities_content(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for activities by name. Returns all supported activities if no filter specified.
 
         Keyword arguments:
@@ -127,7 +131,7 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_definitions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_definitions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search workflow definitions based on the provided filter.
 
         Keyword arguments:
@@ -156,7 +160,7 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_executions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_executions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search workflow executions based on the provided filter.
 
         Keyword arguments:
@@ -185,7 +189,7 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_triggers(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_triggers(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search workflow triggers based on the provided filter.
 
         Keyword arguments:
@@ -210,7 +214,11 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def export_definition(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def export_definition(self: object,
+                          *args,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Export a workflow definition for the given definition ID.
 
         Keyword arguments:
@@ -237,7 +245,7 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def import_definition(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def import_definition(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Import a workflow definition based on the provided model.
 
         Keyword arguments:
@@ -285,7 +293,7 @@ class Workflows(ServiceClass):
                           body: dict = None,
                           parameters: dict = None,
                           **kwargs
-                          ) -> Dict[str, Union[int, dict]]:
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a workflow definition based on the provided model.
 
         Keyword arguments:
@@ -320,7 +328,11 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def execute(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute(self: object,
+                body: dict = None,
+                parameters: dict = None,
+                **kwargs
+                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute an on-demand workflow. Response will contain the execution ID.
 
         Keyword arguments:
@@ -360,7 +372,11 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def execute_internal(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_internal(self: object,
+                         body: dict = None,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute an on-demand workflow. Response will contain the execution ID.
 
         Keyword arguments:
@@ -401,7 +417,11 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def mock_execute(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def mock_execute(self: object,
+                     body: dict = None,
+                     parameters: dict = None,
+                     **kwargs
+                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute a workflow definition with mocks.
 
         Keyword arguments:
@@ -449,7 +469,11 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def execution_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execution_action(self: object,
+                         body: dict = None,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Allow a user to resume/retry a failed workflow execution.
 
         Keyword arguments:
@@ -498,7 +522,11 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def execution_results(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execution_results(self: object,
+                          *args,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve results for a specified execution.
 
         Keyword arguments:
@@ -524,7 +552,11 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_human_input(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_human_input(self: object,
+                        *args,
+                        parameters: dict = None,
+                        **kwargs
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get one or more specific human inputs by their IDs.
 
         Keyword arguments:
@@ -554,7 +586,7 @@ class Workflows(ServiceClass):
                            body: dict = None,
                            parameters: dict = None,
                            **kwargs
-                           ) -> Dict[str, Union[int, dict]]:
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a human input.
 
         Provides an input in response to a human input action.
@@ -593,7 +625,7 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def deprovision(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def deprovision(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Deprovision a system definition that was previously provisioned on a target CID.
 
         Keyword arguments:
@@ -630,7 +662,7 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def promote(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def promote(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Promote a version of a system definition.
 
         Tenant must be already provisioned. This allows the caller to apply an updated template
@@ -710,7 +742,7 @@ class Workflows(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def provision(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def provision(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Promote a version of a system definition.
 
         Tenant must be already provisioned. This allows the caller to apply an updated template

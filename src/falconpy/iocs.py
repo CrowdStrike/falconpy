@@ -44,6 +44,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, handle_single_argument
 from ._util import process_service_request, generate_error_result
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._iocs import _iocs_endpoints as Endpoints
 
@@ -62,7 +63,7 @@ class Iocs(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def devices_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def devices_count(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the number of hosts in your customer account that have observed a given custom IOC.
 
         Keyword arguments:
@@ -94,7 +95,7 @@ class Iocs(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_ioc(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_ioc(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get an IOC by providing a type and value.
 
         * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
@@ -113,7 +114,7 @@ class Iocs(ServiceClass):
             "IOC.indicator_get to perform this operation."
             )
 
-    def create_ioc(self: object, body: dict) -> Dict[str, Union[int, dict]]:
+    def create_ioc(self: object, body: dict) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new IOC.
 
         * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
@@ -133,7 +134,7 @@ class Iocs(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_ioc(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_ioc(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an IOC by providing a type and value.
 
         * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
@@ -153,7 +154,7 @@ class Iocs(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def update_ioc(self: object, body: dict, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_ioc(self: object, body: dict, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an IOC by providing a type and value.
 
         * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
@@ -173,7 +174,7 @@ class Iocs(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def devices_ran_on(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def devices_ran_on(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find hosts that have observed a given custom IOC.
 
         For details about those hosts, use the hosts API interface.
@@ -211,7 +212,7 @@ class Iocs(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_iocs(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_iocs(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search the custom IOCs in your customer account.
 
         * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * * DEPRECATED METHOD * * *
@@ -231,7 +232,7 @@ class Iocs(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def processes_ran_on(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def processes_ran_on(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for processes associated with a custom IOC.
 
         Keyword arguments:
@@ -270,7 +271,11 @@ class Iocs(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def entities_processes(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def entities_processes(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """For the provided ProcessID retrieve the process details.
 
         Keyword arguments:

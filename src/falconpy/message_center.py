@@ -44,6 +44,7 @@ from ._util import (
     generate_error_result
     )
 from ._payload import generic_payload_list, aggregate_payload, activity_payload, case_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._message_center import _message_center_endpoints as Endpoints
 
@@ -62,7 +63,7 @@ class MessageCenter(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_cases(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_cases(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate case values based on the matched filter.
 
         Keyword arguments:
@@ -133,7 +134,7 @@ class MessageCenter(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_case_activity(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_case_activity(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve activities for given case IDs.
 
         Keyword arguments:
@@ -169,7 +170,7 @@ class MessageCenter(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def add_case_activity(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def add_case_activity(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Add an activity to case. Only activities of type comment are allowed via API.
 
         Keyword arguments:
@@ -242,7 +243,7 @@ class MessageCenter(ServiceClass):
                             body: dict = None,
                             parameters: dict = None,
                             **kwargs
-                            ) -> Dict[str, Union[int, dict]]:
+                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload an attachment for the case.
 
         Keyword arguments:
@@ -306,7 +307,7 @@ class MessageCenter(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_case(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_case(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new case.
 
         Keyword arguments:
@@ -361,7 +362,7 @@ class MessageCenter(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_case(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_case(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing case.
 
         Keyword arguments:
@@ -412,7 +413,7 @@ class MessageCenter(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_case_v2(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_case_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new case.
 
         Keyword arguments:
@@ -468,7 +469,7 @@ class MessageCenter(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_cases(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_cases(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve message center cases.
 
         Keyword arguments:
@@ -505,7 +506,7 @@ class MessageCenter(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_activities(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_activities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve activities IDs for a case.
 
         Keyword arguments:
@@ -538,7 +539,7 @@ class MessageCenter(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_cases(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_cases(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve case IDs that match the provided filter criteria.
 
         Keyword arguments:

@@ -51,6 +51,7 @@ from ._payload import (
     aspm_update_tag_payload,
     retrieve_relay_node_payload
     )
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._aspm import _aspm_endpoints as Endpoints
 
@@ -69,7 +70,10 @@ class ASPM(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def execute_function_data_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_function_data_count(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a selected list of query language count queries.
 
         Request and response are in MSA format.
@@ -107,7 +111,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def execute_functions_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_functions_count(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a selected list of query language count queries.
 
         Request and response are in MSA format.
@@ -143,7 +150,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def execute_function_data_query_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_function_data_query_count(self: object,
+                                          parameters: dict = None,
+                                          **kwargs
+                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a selected list of query language count queries.
 
         Request and response are in MSA format.
@@ -170,7 +180,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def execute_functions_query_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_functions_query_count(self: object,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a selected list of query language count queries.
 
         Request and response are in MSA format.
@@ -197,7 +210,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def execute_function_data(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_function_data(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a selected list of query language count queries.
 
         Request and response are in MSA format.
@@ -224,7 +237,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def execute_functions_over_time(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_functions_over_time(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a selected list of query language count queries.
 
         Request and response are in MSA format.
@@ -251,7 +267,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def execute_functions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_functions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a selected list of query language count queries.
 
         Request and response are in MSA format.
@@ -278,7 +294,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def execute_function_data_query(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_function_data_query(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a selected list of query language count queries.
 
         Request and response are in MSA format.
@@ -305,7 +324,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def execute_functions_query_over_time(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_functions_query_over_time(self: object,
+                                          parameters: dict = None,
+                                          **kwargs
+                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a selected list of query language count queries.
 
         Request and response are in MSA format.
@@ -332,7 +354,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def execute_functions_query(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_functions_query(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a selected list of query language count queries.
 
         Request and response are in MSA format.
@@ -359,7 +384,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_service_artifacts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_service_artifacts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve service artifacts.
 
         Keyword arguments:
@@ -408,7 +433,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_business_applications(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_business_applications(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create or Update Business Applications.
 
         Keyword arguments:
@@ -443,7 +468,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_cloud_security_integration_state(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_cloud_security_integration_state(self: object,
+                                             parameters: dict = None,
+                                             **kwargs
+                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Cloud Security integration state.
 
         Keyword arguments:
@@ -467,7 +495,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def set_cloud_security_integration_state(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def set_cloud_security_integration_state(self: object,
+                                             body: dict = None,
+                                             **kwargs
+                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Set Cloud Security integration state.
 
         Keyword arguments:
@@ -499,7 +530,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_executor_nodes(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_executor_nodes(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all the relay nodes.
 
         Keyword arguments:
@@ -533,7 +564,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_executor_node(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_executor_node(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing relay node.
 
         Keyword arguments:
@@ -598,7 +629,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_executor_node(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_executor_node(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new relay node.
 
         Keyword arguments:
@@ -664,7 +695,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_executor_nodes_metadata(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_executor_nodes_metadata(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get metadata about all executor nodes.
 
         Keyword arguments:
@@ -692,7 +726,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_node(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_node(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a relay node.
 
         Keyword arguments:
@@ -723,7 +757,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def retrieve_relay_instances(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def retrieve_relay_instances(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the relay instance in CSV format.
 
         Keyword arguments:
@@ -800,7 +834,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_integration_tasks(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_integration_tasks(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all integration tasks.
 
         Keyword arguments:
@@ -839,7 +873,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_integration_task(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_integration_task(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create new integration task.
 
         Keyword arguments:
@@ -1212,7 +1246,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_integration_tasks_metadata(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_integration_tasks_metadata(self: object,
+                                       parameters: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get metadata about all integration tasks.
 
         Keyword arguments:
@@ -1240,7 +1277,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_integration_tasks_v2(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_integration_tasks_v2(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all the integration tasks.
 
         Keyword arguments:
@@ -1283,7 +1323,7 @@ class ASPM(ServiceClass):
                                 body: dict = None,
                                 parameters: dict = None,
                                 **kwargs
-                                ) -> Dict[str, Union[int, dict]]:
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing integration task by its ID.
 
         Keyword arguments:
@@ -1667,7 +1707,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_integration_task(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_integration_task(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing integration task by its ID.
 
         Keyword arguments:
@@ -1702,7 +1745,7 @@ class ASPM(ServiceClass):
                              body: dict = None,
                              parameters: dict = None,
                              **kwargs
-                             ) -> Dict[str, Union[int, dict]]:
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Run an integration task by its ID.
 
         Keyword arguments:
@@ -1753,7 +1796,7 @@ class ASPM(ServiceClass):
             path_id=target_id
             )
 
-    def get_integration_types(self: object) -> Dict[str, Union[int, dict]]:
+    def get_integration_types(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all the integration types.
 
         Keyword arguments:
@@ -1776,7 +1819,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_integrations(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_integrations(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of all the integrations.
 
         Keyword arguments:
@@ -1802,7 +1845,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_integration(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_integration(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new integration.
 
         Keyword arguments:
@@ -1879,7 +1922,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_integrations_v2(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_integrations_v2(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of all the integrations.
 
         Keyword arguments:
@@ -1905,7 +1948,11 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def update_integration(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_integration(self: object,
+                           body: dict = None,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update an existing integration by its ID.
 
         Keyword arguments:
@@ -1995,7 +2042,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_integration(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_integration(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an existing integration by its ID.
 
         Keyword arguments:
@@ -2026,7 +2073,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def execute_query(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_query(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute a query. The syntax used is identical to that of the query page.
 
         Keyword arguments:
@@ -2086,7 +2133,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_servicenow_deployments(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_servicenow_deployments(self: object,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve ServiceNow deployments.
 
         Keyword arguments:
@@ -2115,7 +2165,10 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_servicenow_services(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_servicenow_services(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve ServiceNow services.
 
         Keyword arguments:
@@ -2148,7 +2201,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_services_count(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_services_count(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the total amount of existing services.
 
         Keyword arguments:
@@ -2236,7 +2289,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_service_violation_types(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_service_violation_types(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the different types of violation.
 
         Keyword arguments:
@@ -2284,7 +2337,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_tags(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_tags(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all the tags.
 
         Keyword arguments:
@@ -2318,7 +2371,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_tags(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_tags(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create new or update existing tag. You can update unique tags table or regular tags table.
 
         Keyword arguments:
@@ -2361,7 +2414,7 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def delete_tags(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_tags(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Remove existing tags.
 
         Keyword arguments:

@@ -47,6 +47,7 @@ from ._payload import (
     generic_payload_list
     )
 from ._util import process_service_request, force_default, handle_single_argument
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._filevantage import _filevantage_endpoints as Endpoints
 
@@ -66,7 +67,7 @@ class FileVantage(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_actions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_actions(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the processing result for one or more actions.
 
         Keyword arguments:
@@ -92,7 +93,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def start_actions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def start_actions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Initiate the specified action on the provided change IDs.
 
         Keyword arguments:
@@ -130,7 +131,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_contents(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_contents(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the content captured for the provided change ID.
 
         Keyword arguments:
@@ -162,7 +163,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_changes(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_changes(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve information on changes.
 
         Keyword arguments:
@@ -192,7 +193,7 @@ class FileVantage(ServiceClass):
                                   parameters: dict = None,
                                   body: dict = None,
                                   **kwargs
-                                  ) -> Dict[str, Union[int, dict]]:
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Manage host groups assigned to a policy.
 
         Keyword arguments:
@@ -225,7 +226,7 @@ class FileVantage(ServiceClass):
                                  parameters: dict = None,
                                  body: dict = None,
                                  **kwargs
-                                 ) -> Dict[str, Union[int, dict]]:
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the policy precedence for all policies of a specific type.
 
         Requests that do no represent all IDs of the provided policy type will not be processed.
@@ -259,7 +260,7 @@ class FileVantage(ServiceClass):
                                   parameters: dict = None,
                                   body: dict = None,
                                   **kwargs
-                                  ) -> Dict[str, Union[int, dict]]:
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Manage the rule groups assigned to the policy or set the rule group precedence.
 
         Rule groups must be of the same type as the policy they are being added to:
@@ -297,7 +298,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the configuration for one or more policies.
 
         Keyword arguments:
@@ -323,7 +324,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_policy(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_policy(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new policy of the specified type.
 
         New policies are always added at the end of the precedence list for the provided policy type.
@@ -361,7 +362,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete one or more policies. Only disabled policies can be deleted.
 
         Keyword arguments:
@@ -387,7 +388,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the general information of the provided policy.
 
         Only name, description, and enabled status of the policy is allowed to be update.
@@ -427,7 +428,10 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scheduled_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_scheduled_exclusions(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the configuration for one or more scheduled exclusions within the provided policy.
 
         Scheduled exclusions within the provided policy that match a provided ID will be returned.
@@ -455,7 +459,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_scheduled_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_scheduled_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         r"""Create a new scheduled exclusion within the provided policy.
 
         Keyword arguments:
@@ -521,7 +525,10 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_scheduled_exclusions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_scheduled_exclusions(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete one or more scheduled exclusions from the specified policy.
 
         Scheduled exclusions that match the provided ID will be deleted form the provided policy.
@@ -549,7 +556,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_scheduled_exclusions(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_scheduled_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         r"""Update the provided scheduled exclusion configuration within the provided policy.
 
         Keyword arguments:
@@ -602,7 +609,7 @@ class FileVantage(ServiceClass):
                                      parameters: dict = None,
                                      body: dict = None,
                                      **kwargs
-                                     ) -> Dict[str, Union[int, dict]]:
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the rule precedence for all rules in the identified rule group.
 
         The IDs for ALL rules contained within the rule group msut be specified in the desired
@@ -632,7 +639,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rules(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_rules(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the configuration for one or more rules.
 
         Rules within the provided rule group ID that match a provided ID will be returned.
@@ -660,7 +667,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_rule(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         r"""Create a new rule configuration within the specified group.
 
         Keyword arguments:
@@ -799,7 +806,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_rules(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_rules(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete one or more rules from the specified rule group.
 
         Rules that match a provided ID will be deleted form the provided rule group ID.
@@ -827,7 +834,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict", "dict"])
-    def update_rule(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         r"""Update the provided rule configuration within the specified rule group.
 
         The rule must exist within the specified rule group.
@@ -968,7 +975,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rule_groups(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_rule_groups(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the rule group details for one or more rule groups.
 
         Full details of each rule group that matches a provided ID will be returned.
@@ -996,7 +1003,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict", "dict"])
-    def create_rule_group(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_rule_group(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new rule group of the specified type.
 
         Individual rules can be assigned to a rule group after it has been created.
@@ -1034,7 +1041,11 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_rule_groups(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_rule_groups(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a set of rule groups by specifying their IDs.
 
         Keyword arguments:
@@ -1060,7 +1071,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_rule_group(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_rule_group(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the provided rule group.
 
         Provides the ability to update the name and description of a rule group.
@@ -1097,7 +1108,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def signal_changes(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def signal_changes(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Initiate a workflow for the provided change IDs.
 
         Keyword arguments:
@@ -1137,7 +1148,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_actions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_actions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for actions within your environment. Returns one or more action IDs.
 
         Keyword arguments:
@@ -1168,7 +1179,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_changes(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_changes(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for changes within your environment. Returns one or more change IDs.
 
         Keyword arguments:
@@ -1202,7 +1213,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_changes_scroll(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_changes_scroll(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for changes within your environment. Returns one or more change IDs.
 
         Returns a list of Falcon FileVantage change IDs filtered, sorted and limited by the query
@@ -1243,7 +1254,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the IDs of all rule groups that are of the provided rule group type.
 
         Rule group ids will be returned sorted by created_timestamp order if a sort parameter
@@ -1279,7 +1290,11 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_scheduled_exclusions(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_scheduled_exclusions(self: object,
+                                   *args,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the IDs of all scheduled exclusions contained within the provided policy ID.
 
         Use the IDs from this response to fetch the rules with get_rules.
@@ -1306,7 +1321,7 @@ class FileVantage(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_rule_groups(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_rule_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the IDs of all rule groups that are of the provided rule group type.
 
         Rule group ids will be returned sorted by created_timestamp order if a sort parameter

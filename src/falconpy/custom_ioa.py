@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import ioa_custom_payload, generic_payload_list
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._custom_ioa import _custom_ioa_endpoints as Endpoints
 
@@ -56,7 +57,7 @@ class CustomIOA(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_patterns(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_patterns(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get pattern severities by ID.
 
         Keyword arguments:
@@ -82,7 +83,7 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_platforms(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_platforms(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get platforms by ID.
 
         Keyword arguments:
@@ -108,7 +109,7 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rule_groups(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_rule_groups(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get rule groups by ID.
 
         Keyword arguments:
@@ -138,7 +139,7 @@ class CustomIOA(ServiceClass):
                           body: dict = None,
                           cs_username: str = None,  # pylint: disable=W0613  # deprecated
                           **kwargs
-                          ) -> Dict[str, Union[int, dict]]:
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a rule group for a platform with a name and an optional description.
 
         Returns the rule group.
@@ -175,7 +176,7 @@ class CustomIOA(ServiceClass):
                            cs_username: str = None,  # pylint: disable=W0613  # cs_username is deprecated
                            parameters: dict = None,
                            **kwargs
-                           ) -> Dict[str, Union[int, dict]]:
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete rule groups by ID.
 
         Keyword arguments:
@@ -206,7 +207,7 @@ class CustomIOA(ServiceClass):
                           body: dict = None,
                           cs_username: str = None,  # pylint: disable=W0613  # deprecated
                           **kwargs
-                          ) -> Dict[str, Union[int, dict]]:
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update a rule group.
 
         The following properties can be modified: `name`, `description`, `enabled`.
@@ -248,7 +249,7 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rule_types(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_rule_types(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get rule types by ID.
 
         Keyword arguments:
@@ -274,7 +275,7 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_rules_get(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_rules_get(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get rules by ID and optionally version in the following format: ID[:version].
 
         Keyword arguments:
@@ -302,7 +303,7 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rules(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_rules(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get rules by ID and optionally version in the following format: ID[:version].
 
         The max number of IDs is constrained by URL size.
@@ -334,7 +335,7 @@ class CustomIOA(ServiceClass):
                     body: dict = None,
                     cs_username: str = None,  # pylint: disable=W0613  # deprecated
                     **kwargs
-                    ) -> Dict[str, Union[int, dict]]:
+                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a rule within a rule group. Returns the rule.
 
         Keyword arguments:
@@ -409,7 +410,7 @@ class CustomIOA(ServiceClass):
                      cs_username: str = None,  # pylint: disable=W0613  # deprecated
                      parameters: dict = None,
                      **kwargs
-                     ) -> Dict[str, Union[int, dict]]:
+                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete rules from a rule group by ID.
 
         Keyword arguments:
@@ -440,7 +441,7 @@ class CustomIOA(ServiceClass):
                      body: dict = None,
                      cs_username: str = None,  # pylint: disable=W0613  # deprecated
                      **kwargs
-                     ) -> Dict[str, Union[int, dict]]:
+                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update rules within a rule group. Return the updated rules.
 
         Keyword arguments:
@@ -530,7 +531,7 @@ class CustomIOA(ServiceClass):
     def update_rules_v2(self: object,
                         body: dict = None,
                         **kwargs
-                        ) -> Dict[str, Union[int, dict]]:
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update rules within a rule group. Return the updated rules.
 
         Keyword arguments:
@@ -617,7 +618,7 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def validate(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def validate(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Validate field values and check for matches if a test string is provided.
 
         Keyword arguments:
@@ -671,7 +672,7 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_patterns(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_patterns(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all pattern severity IDs.
 
         Keyword arguments:
@@ -699,7 +700,7 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_platforms(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_platforms(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all platform IDs.
 
         Keyword arguments:
@@ -727,7 +728,7 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_rule_groups_full(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_rule_groups_full(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all rule groups matching the query with optional filter.
 
         Keyword arguments:
@@ -773,7 +774,7 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_rule_groups(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_rule_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all rule group IDs matching the query with optional filter.
 
         Keyword arguments:
@@ -819,7 +820,7 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_rule_types(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_rule_types(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all rule type IDs.
 
         Keyword arguments:
@@ -847,7 +848,7 @@ class CustomIOA(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_rules(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_rules(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find all rule IDs matching the query with optional filter.
 
         Keyword arguments:

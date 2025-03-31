@@ -39,6 +39,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import process_service_request, force_default
 from ._payload import aggregate_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._falcon_complete_dashboard import _falcon_complete_dashboard_endpoints as Endpoints
 
@@ -57,7 +58,7 @@ class CompleteDashboard(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_alerts(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_alerts(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate allowlist ticket values based on the matched filter.
 
         Keyword arguments:
@@ -133,7 +134,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_allow_list(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_allow_list(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate allowlist ticket values based on the matched filter.
 
         Keyword arguments:
@@ -209,7 +210,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_block_list(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_block_list(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate blocklist ticket values based on the matched filter.
 
         Keyword arguments:
@@ -295,7 +296,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_detections(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_detections(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate detection values based on the matched filter.
 
         Keyword arguments:
@@ -381,7 +382,10 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_device_count_collection(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_device_count_collection(self: object,
+                                          body: list = None,
+                                          **kwargs
+                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate host/devices count based on the matched filter.
 
         Keyword arguments:
@@ -469,7 +473,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_escalations(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_escalations(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate escalation ticket values based on the matched filter.
 
         Keyword arguments:
@@ -555,7 +559,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_fc_incidents(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_fc_incidents(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate incident values based on the matched filter.
 
         Keyword arguments:
@@ -641,7 +645,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_prevention_policy(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_prevention_policy(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate prevention policy values based on the matched filter.
 
         Keyword arguments:
@@ -727,7 +731,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_remediations(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_remediations(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate remediation ticket values based on the matched filter.
 
         Keyword arguments:
@@ -813,7 +817,10 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_sensor_update_policy(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_sensor_update_policy(self: object,
+                                       body: list = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate sensor update policy values based on the matched filter.
 
         Keyword arguments:
@@ -899,7 +906,7 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_support_issues(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_support_issues(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate device count values based on the matched filter.
 
         Keyword arguments:
@@ -985,7 +992,10 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_total_device_counts(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_total_device_counts(self: object,
+                                      body: list = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregate device count values based on the matched filter.
 
         Keyword arguments:
@@ -1058,7 +1068,8 @@ class CompleteDashboard(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/AggregateTotalDeviceCounts
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /Falcon%20Complete%20Dashboard/AggregateTotalDeviceCounts
         """
         if not body:
             body = [aggregate_payload(submitted_keywords=kwargs)]
@@ -1071,7 +1082,10 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_alert_ids_by_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_alert_ids_by_filter(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve allowlist tickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
@@ -1101,7 +1115,10 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_allow_list_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_allow_list_filter(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve allowlist tickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
@@ -1131,7 +1148,10 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_block_list_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_block_list_filter(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve block listtickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
@@ -1161,7 +1181,10 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_detection_ids_by_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_detection_ids_by_filter(self: object,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve DetectionsIds that match the provided FQL filter criteria with scrolling enabled.
 
         Keyword arguments:
@@ -1195,7 +1218,7 @@ class CompleteDashboard(ServiceClass):
     def get_device_count_collection_queries_by_filter(self: object,
                                                       parameters: dict = None,
                                                       **kwargs
-                                                      ) -> Dict[str, Union[int, dict]]:
+                                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve device count collection Ids that match the provided FQL filter, criteria with scrolling enabled.
 
         Keyword arguments:
@@ -1226,7 +1249,10 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_escalations_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_escalations_filter(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve escalation tickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
@@ -1257,7 +1283,10 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_incident_ids_by_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_incident_ids_by_filter(self: object,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve incidents that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
@@ -1288,7 +1317,10 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_remediations_filter(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_remediations_filter(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve remediation tickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:

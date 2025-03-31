@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request
 from ._payload import generic_payload_list, incident_action_parameters
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._incidents import _incidents_endpoints as Endpoints
 
@@ -56,7 +57,7 @@ class Incidents(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def crowdscore(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def crowdscore(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query environment wide CrowdScore and return the entity data.
 
         Keyword arguments:
@@ -86,7 +87,7 @@ class Incidents(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_behaviors(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_behaviors(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on behaviors by providing behavior IDs.
 
         Keyword arguments:
@@ -122,7 +123,7 @@ class Incidents(ServiceClass):
                                 body: dict = None,
                                 parameters: dict = None,
                                 **kwargs
-                                ) -> Dict[str, Union[int, dict]]:
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform a set of actions on one or more incidents.
 
         Such as: adding tags or updating the incident name or description.
@@ -201,7 +202,7 @@ class Incidents(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_incidents(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_incidents(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on incidents by providing incident IDs.
 
         Keyword arguments:
@@ -233,7 +234,7 @@ class Incidents(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_behaviors(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_behaviors(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for behaviors by providing an FQL filter, sorting, and paging details.
 
         Keyword arguments:
@@ -263,7 +264,7 @@ class Incidents(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_incidents(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_incidents(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for incidents by providing an FQL filter, sorting, and paging details.
 
         Keyword arguments:
