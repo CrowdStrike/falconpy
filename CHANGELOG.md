@@ -170,6 +170,12 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_exposure_management.py`
 
++ Added: Added _CombinedHiddenDevicesByFilter_ and _CombinedDevicesByFilter_ operations to the __Hosts__ service collection.
+    - `_endpoint/_hosts.py`
+    - `hosts.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_hosts.py`
+
 + Added: Added _GetMalwareMitreReport_ operation to the __Intel__ service collection.
     - `_endpoint/_intel.py`
     - `intel.py`

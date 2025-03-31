@@ -56,6 +56,128 @@ class Hosts(ServiceClass):
     - a valid token provided by the authentication service class (oauth2.py)
     """
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_hidden_devices_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search for hidden hosts in your environment by platform, hostname, IP, and other criteria.
+
+        Returns full device records.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. String. FQL syntax.
+                  This should be supplied for each consecutive call.
+        fields -- The fields to return, comma delimited if specifying more than one field. String.
+                  For example: fields=hostname,device_id would return device records only containing
+                  the hostname and device_id.
+        limit -- The maximum number of records to return. [integer, 1-10000]
+        offset -- The offset to page from, provided from the previous call as the next value, for
+                  the next result set. For the first call, do not supply an offset. String.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort by (e.g. status.desc or hostname.asc). String. If not specified, the
+                default sort will be device_id.asc. This should be supplied for each consecutive call.
+                Available sort fields:
+                external_ip                                             device_policies.fim.policy_id
+                release_group                                           serial_number
+                device_policies.sca.policy_type                         pod_hostname
+                kernel_version                                          device_policies.browser-extension.policy_type
+                k8s_cluster_id                                          policies.applied
+                cid                                                     policies.policy_type
+                device_policies.sensor_update.policy_type               instance_id
+                groups                                                  system_product_name
+                device_policies.prevention.policy_id                    device_policies.identity-protection.policy_type
+                device_policies.mobile.policy_type                      managed_apps.aws-verified-access.version
+                deployment_type                                         tags
+                device_policies.content-update.applied                  policies.policy_id
+                first_login_timestamp                                   device_policies.host-retention.applied
+                device_policies.vulnerability-management.applied        device_policies.mobile.policy_id
+                license_activation_state                                last_login_timestamp
+                filesystem_containment_status                           device_policies.device_control.policy_type
+                device_policies.network-scan-content.applied            device_policies.airlock.policy_type
+                config_id_base                                          group_hash
+                product_type_desc                                       linux_sensor_mode
+                device_policies.fim.policy_type                         device_policies.network-scan-content.policy_id
+                device_policies.remote_response.policy_type             device_policies.prevention.policy_type
+                internet_exposure                                       device_policies.vulnerability-management.policy_type
+                k8s_cluster_git_version                                 device_policies.aws-verified-access.applied
+                device_id                                               device_policies.mobile.applied
+                device_policies.identity-protection.policy_id           rtr_state
+                email                                                   chassis_type
+                pod_host_ip6                                            device_policies.ztl.policy_type
+                pod_id                                                  managed_apps.identity-protection.version
+                host_utc_offset                                         pod_namespace
+                device_policies.sensor_update.policy_id                 pod_service_account_name
+                migration_completed_time                                k8s_cluster_version
+                device_policies.browser-extension.policy_id             minor_version
+                device_policies.firewall.rule_set_id                    policy_id
+                platform_id                                             device_policies.system-tray.applied
+                device_policies.data-protection.policy_type             device_policies.host-retention.policy_id
+                device_policies.aws-verified-access.policy_type         zone_group
+                pod_ip4                                                 machine_domain
+                first_login_user                                        device_policies.device_control.policy_id
+                device_policies.sensor_update.applied                   device_policies.kubernetes-admission-control.applied
+                device_policies.system-tray.policy_id                   device_policies.data-protection.applied
+                device_policies.it-automation.policy_type               detection_suppression_status
+                device_policies.it-automation.policy_id                 hostname
+                device_policies.it-automation.applied                   first_seen
+                last_reboot                                             last_login_uid
+                system_manufacturer                                     ou
+                device_policies.kubernetes-admission-control.policy_id  device_policies.system-tray.policy_type
+                device_policies.vulnerability-management.policy_id      device_policies.fim.applied
+                managed_apps.jumpcloud.version                          local_ip.raw
+                device_policies.identity-protection.applied             managed_apps.netskope.version
+                device_policies.device_control.applied                  config_id_platform
+                device_policies.automox.applied                         cpu_signature
+                device_policies.kubernetes-admission-control.policy_type
+                device_policies.content-update.policy_id                device_policies.automox.policy_id
+                service_provider_account_id                             device_policies.jumpcloud.applied
+                managed_apps.airlock.version                            device_policies.aws-verified-access.policy_id
+                cpu_vendor                                              mac_address
+                major_version                                           device_policies.network-scan-content.policy_type
+                device_policies.sca.policy_id                           agent_load_flags
+                pod_name                                                platform_name
+                connection_mac_address                                  device_policies.netskope.applied
+                device_policies.consumer-subscription.policy_id         device_policies.ztl.policy_id
+                local_ip                                                chassis_type_desc
+                site_name                                               bios_manufacturer
+                status                                                  modified_timestamp
+                device_policies.airlock.policy_id                       device_policies.host-retention.policy_type
+                device_policies.netskope.policy_type                    _all
+                service_provider                                        device_policies.firewall.policy_type
+                pod_host_ip4                                            reduced_functionality_mode
+                config_id_build                                         os_build
+                managed_apps.automox.version                            last_seen
+                device_policies.remote_response.applied                 device_policies.consumer-subscription.policy_type
+                device_policies.airlock.applied                         device_policies.sca.applied
+                device_policies.automox.policy_type                     device_policies.data-protection.policy_id
+                device_policies.consumer-subscription.applied           pod_ip6
+                device_policies.content-update.policy_type              connection_ip
+                device_policies.firewall.policy_id                      agent_version
+                pod_labels                                              device_policies.netskope.policy_id
+                os_product_name                                         device_policies.firewall.applied
+                device_policies.browser-extension.applied               device_policies.remote_response.policy_id
+                last_login_user                                         device_policies.sensor_update.uninstall_protection
+                product_type                                            device_policies.jumpcloud.policy_id
+                pod_annotations                                         device_policies.ztl.applied
+                os_version                                              default_gateway_ip
+                device_policies.prevention.applied                      last_login_user_sid
+                device_policies.jumpcloud.policy_type                   bios_version
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/CombinedHiddenDevicesByFilter
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CombinedHiddenDevicesByFilter",
+            keywords=kwargs,
+            params=parameters
+            )
+
     @force_default(defaults=["parameters", "body"], default_types=["dict"])
     def perform_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Take various actions on the hosts in your environment.
@@ -528,6 +650,125 @@ class Hosts(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_devices_by_filter_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Search for hosts in your environment by platform, hostname, IP, and other criteria.
+
+        Returns full device records.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results. String. FQL syntax.
+        limit -- The maximum number of records to return. Integer. [1-10000]
+        offset -- The offset to page from, provided from the previous call as the "next" value,
+                  for the next result set. For the first call, do not supply an offset. String.
+        parameters - Full parameters payload, not required if using other keywords.
+        sort -- The property to sort by (e.g. status.desc or hostname.asc). String.
+                If not specified, the default sort will be device_id.asc.
+                This should be supplied for each consecutive call.
+                Available sort fields:
+                external_ip                                             device_policies.fim.policy_id
+                release_group                                           serial_number
+                device_policies.sca.policy_type                         pod_hostname
+                kernel_version                                          device_policies.browser-extension.policy_type
+                k8s_cluster_id                                          policies.applied
+                cid                                                     policies.policy_type
+                device_policies.sensor_update.policy_type               instance_id
+                groups                                                  system_product_name
+                device_policies.prevention.policy_id                    device_policies.identity-protection.policy_type
+                device_policies.mobile.policy_type                      managed_apps.aws-verified-access.version
+                deployment_type                                         tags
+                device_policies.content-update.applied                  policies.policy_id
+                first_login_timestamp                                   device_policies.host-retention.applied
+                device_policies.vulnerability-management.applied        device_policies.mobile.policy_id
+                license_activation_state                                last_login_timestamp
+                filesystem_containment_status                           device_policies.device_control.policy_type
+                device_policies.network-scan-content.applied            device_policies.airlock.policy_type
+                config_id_base                                          group_hash
+                product_type_desc                                       linux_sensor_mode
+                device_policies.fim.policy_type                         device_policies.network-scan-content.policy_id
+                device_policies.remote_response.policy_type             device_policies.prevention.policy_type
+                internet_exposure                                       device_policies.vulnerability-management.policy_type
+                k8s_cluster_git_version                                 device_policies.aws-verified-access.applied
+                device_id                                               device_policies.mobile.applied
+                device_policies.identity-protection.policy_id           rtr_state
+                email                                                   chassis_type
+                pod_host_ip6                                            device_policies.ztl.policy_type
+                pod_id                                                  managed_apps.identity-protection.version
+                host_utc_offset                                         pod_namespace
+                device_policies.sensor_update.policy_id                 pod_service_account_name
+                migration_completed_time                                k8s_cluster_version
+                device_policies.browser-extension.policy_id             minor_version
+                device_policies.firewall.rule_set_id                    policy_id
+                platform_id                                             device_policies.system-tray.applied
+                device_policies.data-protection.policy_type             device_policies.host-retention.policy_id
+                device_policies.aws-verified-access.policy_type         zone_group
+                pod_ip4                                                 machine_domain
+                first_login_user                                        device_policies.device_control.policy_id
+                device_policies.sensor_update.applied                   device_policies.kubernetes-admission-control.applied
+                device_policies.system-tray.policy_id                   device_policies.data-protection.applied
+                device_policies.it-automation.policy_type               detection_suppression_status
+                device_policies.it-automation.policy_id                 hostname
+                device_policies.it-automation.applied                   first_seen
+                last_reboot                                             last_login_uid
+                system_manufacturer                                     ou
+                device_policies.kubernetes-admission-control.policy_id  device_policies.system-tray.policy_type
+                device_policies.vulnerability-management.policy_id      device_policies.fim.applied
+                managed_apps.jumpcloud.version                          local_ip.raw
+                device_policies.identity-protection.applied             managed_apps.netskope.version
+                device_policies.device_control.applied                  config_id_platform
+                device_policies.automox.applied                         cpu_signature
+                device_policies.kubernetes-admission-control.policy_type
+                device_policies.content-update.policy_id                device_policies.automox.policy_id
+                service_provider_account_id                             device_policies.jumpcloud.applied
+                managed_apps.airlock.version                            device_policies.aws-verified-access.policy_id
+                cpu_vendor                                              mac_address
+                major_version                                           device_policies.network-scan-content.policy_type
+                device_policies.sca.policy_id                           agent_load_flags
+                pod_name                                                platform_name
+                connection_mac_address                                  device_policies.netskope.applied
+                device_policies.consumer-subscription.policy_id         device_policies.ztl.policy_id
+                local_ip                                                chassis_type_desc
+                site_name                                               bios_manufacturer
+                status                                                  modified_timestamp
+                device_policies.airlock.policy_id                       device_policies.host-retention.policy_type
+                device_policies.netskope.policy_type                    _all
+                service_provider                                        device_policies.firewall.policy_type
+                pod_host_ip4                                            reduced_functionality_mode
+                config_id_build                                         os_build
+                managed_apps.automox.version                            last_seen
+                device_policies.remote_response.applied                 device_policies.consumer-subscription.policy_type
+                device_policies.airlock.applied                         device_policies.sca.applied
+                device_policies.automox.policy_type                     device_policies.data-protection.policy_id
+                device_policies.consumer-subscription.applied           pod_ip6
+                device_policies.content-update.policy_type              connection_ip
+                device_policies.firewall.policy_id                      agent_version
+                pod_labels                                              device_policies.netskope.policy_id
+                os_product_name                                         device_policies.firewall.applied
+                device_policies.browser-extension.applied               device_policies.remote_response.policy_id
+                last_login_user                                         device_policies.sensor_update.uninstall_protection
+                product_type                                            device_policies.jumpcloud.policy_id
+                pod_annotations                                         device_policies.ztl.applied
+                os_version                                              default_gateway_ip
+                device_policies.prevention.applied                      last_login_user_sid
+                device_policies.jumpcloud.policy_type                   bios_version
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/hosts/CombinedDevicesByFilter
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CombinedDevicesByFilter",
+            keywords=kwargs,
+            params=parameters
+            )
+
     @force_default(defaults=["body"], default_types=["dict"])
     def query_device_login_history_v1(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve details about recent login sessions for a set of devices.
@@ -647,6 +888,7 @@ class Hosts(ServiceClass):
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
+    CombinedHiddenDevicesByFilter = query_hidden_devices_combined
     PerformActionV2 = perform_action
     entities_perform_action = perform_group_action
     PerformGroupAction = perform_group_action
@@ -664,6 +906,7 @@ class Hosts(ServiceClass):
     QueryDevices = query_devices_by_filter_scroll
     query_devices = query_devices_by_filter_scroll
     QueryDeviceLoginHistory = query_device_login_history_v1
+    CombinedDevicesByFilter = query_devices_by_filter_combined
     query_device_login_history = query_device_login_history_v1  # To be changed to v2 when fully deprecated
     QueryDeviceLoginHistoryV2 = query_device_login_history_v2
     QueryGetNetworkAddressHistoryV1 = query_network_address_history
