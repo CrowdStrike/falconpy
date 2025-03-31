@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import aggregate_payload, fem_asset_payload
+from ._payload import aggregate_payload, fem_asset_payload, fem_add_asset_payload
 from ._service_class import ServiceClass
 from ._endpoint._exposure_management import _exposure_management_endpoints as Endpoints
 
@@ -139,6 +139,40 @@ class ExposureManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_combined_ecosystem_subsidiaries(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve a list of ecosystem subsidiaries with their detailed information.
+
+        Keyword arguments:
+        offset -- Starting index of result set from which to return IDs. Integer.
+        limit -- Number of IDs to return. Integer.
+        sort -- Order by fields. String.
+        filter -- Filter ecosystem subsidiaries using an FQL query. String.
+        version_id -- The version ID of the ecosystem subsidiaries data, represented as a hash string.
+                      This parameter is required to ensure data consistency and prevent stale data.
+                      If a new version of the ecosystem subsidiaries data is written, the version ID
+                      will be updated. By including this parameter in the request, the client can ensure
+                      that the response will be invalidated if a new version is written.
+                      This is a required field.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/combined-ecosystem-subsidiaries
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="combined_ecosystem_subsidiaries",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def download_assets(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Download the entire contents of the blob. The relative link to this endpoint is returned from query_external_assets.
 
@@ -191,6 +225,80 @@ class ExposureManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_ecosystem_subsidiaries(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve detailed information about ecosystem subsidiaries by ID.
+
+        Keyword arguments:
+        ids -- One or more ecosystem subsidiary IDs (max: 100). String or list of strings.
+        version_id -- The version ID of the ecosystem subsidiaries data, represented as a hash string.
+                      This parameter is required to ensure data consistency and prevent stale data.
+                      If a new version of the ecosystem subsidiaries data is written, the version ID will
+                      be updated. By including this parameter in the request, the client can ensure that
+                      the response will be invalidated if a new version is written.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/get-ecosystem-subsidiaries
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_ecosystem_subsidiaries",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def add_assets(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Update the details of external assets.
+
+        Keyword arguments:
+        assets -- List of assets to be added. List of dictionaries.
+        body -- Full body payload as a dictionary. Not required when using other keywords.
+                {
+                    "data": [
+                        {
+                            "assets": [
+                                {
+                                    "id": "string",
+                                    "value": "string"
+                                }
+                            ],
+                            "subsidiary_id": "string"
+                        }
+                    ]
+                }
+        id -- Asset ID to be added. String.
+        subsidiary_id -- Subsidiary ID of the asset to be added. String.
+        value -- Asset value. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/post-external-assets-inventory-v1
+        """
+        if not body:
+            body = fem_add_asset_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="post_external_assets_inventory_v1",
+            keywords=kwargs,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_assets(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get details on external assets by providing one or more IDs.
 
@@ -199,7 +307,8 @@ class ExposureManagement(ServiceClass):
                String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -291,6 +400,40 @@ class ExposureManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_ecosystem_subsidiaries(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve a list of IDs for ecosystem subsidiaries that match the provided filter conditions.
+
+        Keyword arguments:
+        offset -- Starting index of result set from which to return IDs. Integer.
+        limit -- Number of IDs to return. Integer.
+        sort -- Order by fields. String.
+        filter -- Filter ecosystem subsidiaries using an FQL query. String.
+        version_id -- The version ID of the ecosystem subsidiaries data, represented as a hash string.
+                      This parameter is required to ensure data consistency and prevent stale data.
+                      If a new version of the ecosystem subsidiaries data is written, the version ID
+                      will be updated. By including this parameter in the request, the client can ensure
+                      that the response will be invalidated if a new version is written.
+                      This is a required field.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/query-ecosystem-subsidiaries
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="query_ecosystem_subsidiaries",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def query_assets(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get a list of external asset IDs that match the provided filter conditions.
 
@@ -322,8 +465,10 @@ class ExposureManagement(ServiceClass):
     # does not conform to snake_case / PEP8 and are defined here
     # for backwards compatibility / ease of use purposes
     aggregate_external_assets = aggregate_assets
+    combined_ecosystem_subsidiaries = query_combined_ecosystem_subsidiaries
     blob_download_external_assets = download_assets
     blob_preview_external_assets = preview_assets
+    post_external_assets_inventory_v1 = add_assets
     get_external_assets = get_assets
     delete_external_assets = delete_assets
     patch_external_assets = update_assets

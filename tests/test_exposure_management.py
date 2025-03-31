@@ -56,7 +56,11 @@ class TestExposureManagement:
             "get_external_assets": falcon.get_assets("123456"),
             "patch_external_assets": falcon.update_assets(cid="whatever", action="whatever"),
             "query_external_assets": falcon.query_assets(),
-            "delete_assets": falcon.delete_assets(ids="12345678", description="unit_testing")
+            "delete_assets": falcon.delete_assets(ids="12345678", description="unit_testing"),
+            "combined_ecosystem_subsidiaries": falcon.query_combined_ecosystem_subsidiaries(limit=1, version_id="1"),
+            "get_ecosystem_subsidiaries": falcon.get_ecosystem_subsidiaries(id="12345678"),
+            "post_external_assets_inventory_v1": falcon.add_assets(id="12345678", value="bob", subsidiary_id="12345678"),
+            "query_ecosystem_subsidiaries": falcon.query_ecosystem_subsidiaries(limit=1, version_id="1")
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
