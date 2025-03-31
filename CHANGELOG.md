@@ -338,11 +338,13 @@
     - _indicator_combined_v1_
     - _indicator_search_v1_
     - `_endpoint/_ioc.py`
+    - `_endpoint/deprecated/_ioc.py`
 
 + Updated: Cosmetic updates to `filter` parameter descriptions in 2 operations within the __Installation Tokens__ service collection.
     - _audit_events_query_
     - _tokens_query_
     - `_endpoint/_installation_tokens.py`
+    - `_endpoint/deprecated/_installation_tokens.py`
 
 + Updated: Cosmetic updates to multiple operations within the __Intelligence Feeds__ service collection.
     - _DownloadFeedArchive_
