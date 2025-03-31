@@ -202,13 +202,17 @@ class D4CRegistration(ServiceClass):
         Keyword arguments:
         accounts -- List of accounts to register. String or list of strings.
         aws_profile -- The AWS profile to be used during registration. String.
+        aws_region -- The AWS region to be used during registration. String.
         behavior_assessment_enabled -- Enable behavior assessment. String. Allowed values: true, false
         custom_role_name -- The custom IAM role to be used during registration. String.
         dspm_enabled -- Flag indicating if DSPM is enabled. String. Allowed values: true, false
         dspm_regions -- List of DSPM regions. Comma delimited string.
         dspm_role -- DSPM role. String.
+        idp_enabled -- Flag indicating if IDP protection is enabled. String. Allowed values: true, false
         ids -- List of AWS Account IDs to retrieve the script for. String or list of strings.
-        organization_id -- The AWS organization ID to be registered. String or list of strings.
+        falcon_client_id -- The Falcon client ID used during registration. String.
+        organization_id -- The AWS organization ID to be registered. String.
+        organization_unit_ids -- The AWS Organizational unit IDs to be registered. String or list of strings.
         parameters -- full parameters payload, not required if ids is provided as a keyword.
         sensor_management_enabled -- Enable sensor management. String. Allowed values: true, false
         template -- Template to be rendered. String. Allowed values: aws-bash, aws-terraform

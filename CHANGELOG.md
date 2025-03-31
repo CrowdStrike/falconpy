@@ -120,6 +120,10 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_container_packages.py`
 
++ Added: Added 4 new parameters to the _GetD4CAWSAccountScriptsAttachment_ operation within the __D4C Registration__ service collection.
+    - `_endpoint/_d4c_registration.py`
+    - `d4c_registration.py`
+
 + Added: Added new __Deployments__ service collection with 5 new operations.
     - _GetDeploymentsExternalV1_
     - _CombinedReleasesV1Mixin0_
