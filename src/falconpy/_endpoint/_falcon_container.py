@@ -105,7 +105,7 @@ _falcon_container_endpoints = [
     "ReadRegistryEntitiesByUUID",
     "GET",
     "/container-security/entities/registries/v1",
-    "Retrieve the registry entity identified by the entity UUID",
+    "Retrieves a list of registry entities by the provided UUIDs. Maximum page size: 100",
     "falcon_container",
     [
       {
@@ -188,7 +188,7 @@ _falcon_container_endpoints = [
     "ReadRegistryEntities",
     "GET",
     "/container-security/queries/registries/v1",
-    "Retrieve registry entities identified by the customer id",
+    "Retrieves a list of registry entities identified by the customer id. Maximum page size: 5,000",
     "falcon_container",
     [
       {
@@ -205,7 +205,7 @@ _falcon_container_endpoints = [
       },
       {
         "type": "string",
-        "description": "The field to sort on, e.g. id.desc or id.asc.",
+        "description": "The fields to sort the records on.",
         "name": "sort",
         "in": "query"
       }
