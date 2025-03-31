@@ -46,9 +46,10 @@ _unidentified_containers_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter Unidentified Containers using a query in Falcon Query Language (FQL). Supported"
-        " filters:  assessed_images_count,cid,cluster_name,containers_impacted_count,detections_count,image_assessment_"
-        "detections_count,last_seen,namespace,node_name,severity,unassessed_images_count,visible_to_k8s",
+        "description": "Search Unidentified Containers using a query in Falcon Query Language (FQL). Supported"
+        " filter fields:  assessed_images_count  cid  cluster_name  containers_impacted_count  detections_count  "
+        "image_assessment_detections_count  last_seen  namespace  node_name  severity  unassessed_images_count  "
+        "visible_to_k8s",
         "name": "filter",
         "in": "query"
       }
@@ -63,9 +64,10 @@ _unidentified_containers_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter Unidentified Containers using a query in Falcon Query Language (FQL). Supported"
-        " filters:  assessed_images_count,cid,cluster_name,containers_impacted_count,detections_count,image_assessment_"
-        "detections_count,last_seen,namespace,node_name,severity,unassessed_images_count,visible_to_k8s",
+        "description": "Search Unidentified Containers using a query in Falcon Query Language (FQL). Supported"
+        " filter fields:  assessed_images_count  cid  cluster_name  containers_impacted_count  detections_count  "
+        "image_assessment_detections_count  last_seen  namespace  node_name  severity  unassessed_images_count  "
+        "visible_to_k8s",
         "name": "filter",
         "in": "query"
       }
@@ -81,13 +83,21 @@ _unidentified_containers_endpoints = [
       {
         "type": "string",
         "description": "Search Unidentified Containers using a query in Falcon Query Language (FQL). Supported"
-        " filters:  assessed_images_count,cid,cluster_name,containers_impacted_count,detections_count,image_assessment_"
-        "detections_count,last_seen,namespace,node_name,severity,unassessed_images_count,visible_to_k8s",
+        " filter fields:  assessed_images_count  cid  cluster_name  containers_impacted_count  detections_count  "
+        "image_assessment_detections_count  last_seen  namespace  node_name  severity  unassessed_images_count  "
+        "visible_to_k8s",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -96,12 +106,6 @@ _unidentified_containers_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "The fields to sort the records on.",
-        "name": "sort",
         "in": "query"
       }
     ]

@@ -439,6 +439,12 @@
     - _entities_vertices_getv2_
     - `_endpoint/_threatgraph.py`
 
++ Updated: Cosmetic updates to parameter descriptions in 3 operations within the __Unidentified Containers__ service collection.
+    - _ReadUnidentifiedContainersByDateRangeCount_
+    - _ReadUnidentifiedContainersCount_
+    - _SearchAndReadUnidentifiedContainers_
+    - `_endpoint/_unidentified_containers.py`
+
 + Updated: Cosmetic updates to parameter descriptions in 3 operations. Adds filters and updates `sort` enum in _queryUserV1_ operation within the __User Management__ service collection.
     - _entitiesRolesV1_
     - _createUserV1_
