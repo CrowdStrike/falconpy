@@ -37,7 +37,8 @@ from ._aspm import (
     aspm_integration_payload,
     aspm_integration_task_payload,
     aspm_node_payload,
-    aspm_application_payload
+    aspm_application_payload,
+    retrieve_relay_node_payload
 )
 from ._correlation_rules import correlation_rules_payload, correlation_rules_export_payload
 from ._host_group import host_group_create_payload, host_group_update_payload
@@ -172,5 +173,6 @@ __all__ = [
     "cloud_oci_validate_payload", "cloud_oci_create_payload", "indicator_graph_payload",
     "content_update_policy_action_payload", "content_update_policy_payload", "device_classes_policy_payload",
     "device_policy_bluetooth_config_payload", "device_control_policy_payload_v2", "combined_alerts_payload",
-    "correlation_rules_export_payload", "fem_add_asset_payload", "export_job_payload"
+    "correlation_rules_export_payload", "fem_add_asset_payload", "export_job_payload",
+    "retrieve_relay_node_payload"
 ]

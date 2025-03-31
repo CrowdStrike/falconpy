@@ -35,8 +35,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0302
+# pylint: disable=C0302,R0904
 from typing import Dict, Union
+from json import loads, dumps
 from ._util import force_default, process_service_request, generate_error_result
 from ._payload import (
     aspm_delete_tag_payload,
@@ -47,7 +48,8 @@ from ._payload import (
     aspm_integration_task_payload,
     aspm_node_payload,
     aspm_application_payload,
-    aspm_update_tag_payload
+    aspm_update_tag_payload,
+    retrieve_relay_node_payload
     )
 from ._service_class import ServiceClass
 from ._endpoint._aspm import _aspm_endpoints as Endpoints
@@ -65,6 +67,345 @@ class ASPM(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def execute_function_data_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve a selected list of query language count queries.
+
+        Request and response are in MSA format.
+
+        Keyword arguments:
+        aws_lambda_arn -- ARN for the lambda. Required when using the aws cloud provider. String.
+        azure_function_app_name -- Azure function name. Required when using the azure cloud provider. String.
+        azure_site_resource_group -- Azure resource group ID. Required when using the azure cloud provider. String.
+        azure_site_subscription_id -- Azure site ID. Required when using the azure cloud provider. String.
+        cloud_provider -- Cloud provider name. String. Available values: aws, azure, gcp
+        gcp_cloud_function_url -- GCP cloud function URL. Required when using the gcp cloud provider. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        query_name -- Query name. String.
+                      Available values:
+                        sensitive_data          vulnerable_libraries
+                        reachable               risk_severity
+                        sensitive_datasources   sensitive_data_tags
+                        dependencies
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionDataCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExecuteFunctionDataCount",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def execute_functions_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve a selected list of query language count queries.
+
+        Request and response are in MSA format.
+
+        Keyword arguments:
+        cid -- Customer ID. String or list of strings. Required when using the azure cloud provider.
+        cloud_account_id -- AWS cloud account ID. String or list of strings.
+                            Required when using the aws cloud provider.
+        cloud_provider -- Cloud provider name. String or list of strings. Available values: aws, azure, gcp
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        query_name -- Query name. String.
+                      Available values:
+                        sensitive_data          dependencies
+                        reachable               vulnerable_libraries
+                        sensitive_datasources
+        region -- GCP region. String or list of string. Required when using the gcp cloud provider.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionsCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExecuteFunctionsCount",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def execute_function_data_query_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve a selected list of query language count queries.
+
+        Request and response are in MSA format.
+
+        Keyword arguments:
+        field -- Field to retrieve. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionDataQueryCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExecuteFunctionDataQueryCount",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def execute_functions_query_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve a selected list of query language count queries.
+
+        Request and response are in MSA format.
+
+        Keyword arguments:
+        field -- Field to retrieve. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionsQueryCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExecuteFunctionsQueryCount",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def execute_function_data(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve a selected list of query language count queries.
+
+        Request and response are in MSA format.
+
+        Keyword arguments:
+        field -- Field to retrieve. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionData
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExecuteFunctionData",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def execute_functions_over_time(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve a selected list of query language count queries.
+
+        Request and response are in MSA format.
+
+        Keyword arguments:
+        field -- Field to retrieve. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionsOvertime
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExecuteFunctionsOvertime",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def execute_functions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve a selected list of query language count queries.
+
+        Request and response are in MSA format.
+
+        Keyword arguments:
+        field -- Field to retrieve. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctions
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExecuteFunctions",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def execute_function_data_query(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve a selected list of query language count queries.
+
+        Request and response are in MSA format.
+
+        Keyword arguments:
+        field -- Field to retrieve. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionDataQuery
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExecuteFunctionDataQuery",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def execute_functions_query_over_time(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve a selected list of query language count queries.
+
+        Request and response are in MSA format.
+
+        Keyword arguments:
+        field -- Field to retrieve. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionsQueryOvertime
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExecuteFunctionsQueryOvertime",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def execute_functions_query(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve a selected list of query language count queries.
+
+        Request and response are in MSA format.
+
+        Keyword arguments:
+        field -- Field to retrieve. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/ExecuteFunctionsQuery
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExecuteFunctionsQuery",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_service_artifacts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve service artifacts.
+
+        Keyword arguments:
+        persistent_signature -- Persistent signature. String.
+        optional_time -- Optional time. String.
+        revision_id -- Revision ID. String.
+        limit -- Upper bound for records returned. Integer.
+        offset -- Starting position for records returned. Integer.
+        order_by -- Sort order field. String or list of strings.
+        direction -- Sort order direction. String. Available values: asc, desc
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/getServiceArtifacts
+        """
+        if kwargs.get("persistent_signature", None):
+            kwargs["persistentSignature"] = kwargs.get("persistent_signature", None)
+        if kwargs.get("optional_time", None):
+            kwargs["optionalTime"] = kwargs.get("optional_time", None)
+        if kwargs.get("revision_id", None):
+            kwargs["revisionId"] = kwargs.get("revision_id", None)
+        if kwargs.get("order_by", None):
+            kwargs["orderBy"] = kwargs.get("order_by", None)
+        param_list = loads(dumps(parameters))
+        for key, value in param_list.items():
+            if key == "persistent_signature":
+                parameters["persistentSignature"] = value
+            if key == "optional_time":
+                parameters["optionalTime"] = value
+            if key == "revision_id":
+                parameters["revisionId"] = value
+            if key == "order_by":
+                parameters["orderBy"] = value
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getServiceArtifacts",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_business_applications(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
@@ -102,12 +443,76 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_cloud_security_integration_state(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get Cloud Security integration state.
+
+        Keyword arguments:
+        This method does not support keyword arguments.
+
+        This method does not support positional arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetCloudSecurityIntegrationState
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCloudSecurityIntegrationState",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def set_cloud_security_integration_state(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Set Cloud Security integration state.
+
+        Keyword arguments:
+        body -- Full body payload in JSON format. Not required if using other keywords.
+        is_enabled -- Flag indicating if the state should be enabled. Boolean
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/SetCloudSecurityIntegrationState
+        """
+        if kwargs.get("is_enabled", None) is not None:
+            body["isEnabled"] = kwargs.get("is_enabled", None)
+
+        body_list = loads(dumps(body))
+        for key, value in body_list.items():
+            if key == "is_enabled":
+                body["isEnabled"] = value
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="SetCloudSecurityIntegrationState",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_executor_nodes(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get all the relay nodes.
 
         Keyword arguments:
+        direction -- Sort order direction. String. Allowed values: asc, desc
+        executor_node_ids -- Executor node IDs. String or list of strings.
+        executor_node_names -- Executor node names. String or list of strings.
+        executor_node_states -- Executor node states. String or list of strings.
+        executor_node_types -- Executor node types. String or list of strings.
         node_type -- Node type. String.
         integration_type -- Integration type. String.
+        limit -- Maximum number of records to return. Integer.
+        offset -- Starting position for records returned. Integer.
+        order_by -- Field to use for sorting results. String. Allowed values: name, id, state, type
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -259,11 +664,39 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_executor_nodes_metadata(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get metadata about all executor nodes.
+
+        Keyword arguments:
+        executor_node_ids -- Executor node ids. String or list of strings.
+        executor_node_names -- Executor node names. String or list of strings.
+        executor_node_states -- Executor node states. Integer or list of integers.
+        executor_node_types -- Executor node types. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetExecutorNodesMetadata
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetExecutorNodesMetadata",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_node(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Delete a relay node.
 
         Keyword arguments:
-        ID -- ID of the node to remove. Integer.
+        id -- ID of the node to remove. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -289,6 +722,83 @@ class ASPM(ServiceClass):
             path_id=target_id
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def retrieve_relay_instances(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve the relay instance in CSV format.
+
+        Keyword arguments:
+        additional_header -- Additional header to provide. String.
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "additional_header": "string",
+                    "current_aws_arn": "string",
+                    "dashboard_url": "string",
+                    "id": integer,
+                    "last_health_check": integer,
+                    "name": "string",
+                    "node_type": "string",
+                    "password": "string",
+                    "pod_settings": {
+                        "imageAddress": "string",
+                        "imagePullSecrets": [
+                        "string"
+                        ],
+                        "podLabels": [
+                        {
+                            "key": "string",
+                            "value": "string"
+                        }
+                        ]
+                    },
+                    "proxy_address": "string",
+                    "status": {
+                        "State": integer,
+                        "StateLastUpdated": integer,
+                        "StateReason": integer
+                    },
+                    "type": "string",
+                    "useJobs": true,
+                    "username": "string"
+                }
+        current_aws_arn -- Current AWS ARN. String.
+        dashboard_url -- URL for the related dashboard. String.
+        id -- ID of the node to remove. Integer.
+        last_health_check -- Last health check. Integer.
+        name -- Name. String.
+        node_type -- Node type. String.
+        pod_settings -- Related pod settings. Dictionary.
+        proxy_address -- Address of the proxy. String.
+        status -- Current status. Dictionary.
+        type -- Relay type. String.
+        use_jobs -- Flag indicating if jobs should be used. Boolean.
+        username -- Account username. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        Swagger unavailable
+        """
+        if not body:
+            body = retrieve_relay_node_payload(kwargs)
+        target_id = kwargs.get("id", body.get("id", None))
+        if not target_id:
+            return generate_error_result(
+                message="You must provide the id keyword or parameter in order to use this operation.",
+                code=400
+                )
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RetrieveRelayInstances",
+            path_id=target_id,
+            body=body
+            )
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_integration_tasks(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Get all integration tasks.
@@ -296,6 +806,13 @@ class ASPM(ServiceClass):
         Keyword arguments:
         integration_task_type -- Integration task type. Integer.
         category -- Integration category. String.
+        offset -- Starting position to returned records. Integer.
+        limit -- Total number of records to return. Integer.
+        order_by -- Field to use for sort order. String. Available values: name, id, integrationTask
+        direction -- Sort direction. String. Allowed values: asc, desc
+        integration_task_types -- Integration task types. Integer.
+        ids -- Integration IDs. Integer.
+        names -- Integration names. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -307,6 +824,12 @@ class ASPM(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetIntegrationTasks
         """
+        if kwargs.get("order_by", None):
+            kwargs["orderBy"] = kwargs.get("order_by", None)
+        param_list = loads(dumps(parameters))
+        for key, value in param_list.items():
+            if key == "order_by":
+                parameters["orderBy"] = value
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -686,6 +1209,73 @@ class ASPM(ServiceClass):
             operation_id="CreateIntegrationTask",
             keywords=kwargs,
             body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_integration_tasks_metadata(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get metadata about all integration tasks.
+
+        Keyword arguments:
+        category -- Integration category. String. Allowed values: collection, exporting
+        integration_task_types -- Integration task types. Integer.
+        ids -- Integration IDs. Integer.
+        names -- Integration names. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetIntegrationTasksMetadata
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIntegrationTasksMetadata",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_integration_tasks_v2(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get all the integration tasks.
+
+        Keyword arguments:
+        integration_task_type -- Integration task type. Integer.
+        category -- Integration category. String.
+        offset -- Starting position to returned records. Integer.
+        limit -- Total number of records to return. Integer.
+        order_by -- Field to use for sort order. String. Available values: name, id, integrationTask
+        direction -- Sort direction. String. Allowed values: asc, desc
+        integration_task_types -- Integration task types. Integer.
+        ids -- Integration IDs. Integer.
+        names -- Integration names. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetIntegrationTasksV2
+        """
+        if kwargs.get("order_by", None):
+            kwargs["orderBy"] = kwargs.get("order_by", None)
+        param_list = loads(dumps(parameters))
+        for key, value in param_list.items():
+            if key == "order_by":
+                parameters["orderBy"] = value
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIntegrationTasksV2",
+            keywords=kwargs,
+            params=parameters
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
@@ -1288,6 +1878,32 @@ class ASPM(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_integrations_v2(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Get a list of all the integrations.
+
+        Keyword arguments:
+        integration_type -- Integration type. Integer.
+        category -- Integration category. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetIntegrationsV2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIntegrationsV2",
+            keywords=kwargs,
+            params=parameters
+            )
+
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
     def update_integration(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Update an existing integration by its ID.
@@ -1503,6 +2119,7 @@ class ASPM(ServiceClass):
         """Retrieve ServiceNow services.
 
         Keyword arguments:
+        exclude_artifacts -- Flag indicating if artifacts should be excluded. Boolean.
         ql_filters -- Query filter. String.
         limit -- Maximum number of records to return. Integer.
         offset -- Starting position of return records. Integer.
@@ -1786,19 +2403,37 @@ class ASPM(ServiceClass):
             body=body
             )
 
+    ExecuteFunctionDataCount = execute_function_data_count
+    ExecuteFunctionsCount = execute_functions_count
+    ExecuteFunctionDataQueryCount = execute_function_data_query_count
+    ExecuteFunctionsQueryCount = execute_functions_query_count
+    ExecuteFunctionData = execute_function_data
+    ExecuteFunctionsOvertime = execute_functions_over_time
+    ExecuteFunctions = execute_functions
+    ExecuteFunctionDataQuery = execute_function_data_query
+    ExecuteFunctionsQueryOvertime = execute_functions_query_over_time
+    ExecuteFunctionsQuery = execute_functions_query
+    getServiceArtifacts = get_service_artifacts
     UpsertBusinessApplications = update_business_applications
+    GetCloudSecurityIntegrationState = get_cloud_security_integration_state
+    SetCloudSecurityIntegrationState = set_cloud_security_integration_state
     GetExecutorNodes = get_executor_nodes
     UpdateExecutorNode = update_executor_node
     CreateExecutorNode = create_executor_node
+    GetExecutorNodesMetadata = get_executor_nodes_metadata
+    RetrieveRelayInstances = retrieve_relay_instances
     DeleteExecutorNode = delete_node
     GetIntegrationTasks = get_integration_tasks
     CreateIntegrationTask = create_integration_task
+    GetIntegrationTasksMetadata = get_integration_tasks_metadata
+    GetIntegrationTasksV2 = get_integration_tasks_v2
     UpdateIntegrationTask = update_integration_task
     DeleteIntegrationTask = delete_integration_task
     RunIntegrationTask = run_integration_task
     GetIntegrationTypes = get_integration_types
     GetIntegrations = get_integrations
     CreateIntegration = create_integration
+    GetIntegrationsV2 = get_integrations_v2
     UpdateIntegration = update_integration
     DeleteIntegration = delete_integration
     ExecuteQuery = execute_query
