@@ -27,7 +27,9 @@ class TestContainerPackages:
             "ReadPackagesByFixableVulnCount": falcon.read_fixable_vuln_count(filter="cid:'12345678901234567890123456789012'"),
             "ReadPackagesByVulnCount": falcon.read_vuln_count(filter="cid:'12345678901234567890123456789012'"),
             "ReadPackagesCombinedExport": falcon.read_combined_export(filter="cid:'12345678901234567890123456789012'"),
-            "ReadPackagesCombined": falcon.read_combined(filter="cid:'12345678901234567890123456789012'")
+            "ReadPackagesCombined": falcon.read_combined(filter="cid:'12345678901234567890123456789012'"),
+            "ReadPackagesCombinedV2": falcon.read_packages(limit=1),
+            "ReadPackagesByImageCount": falcon.read_packages_by_image_count(limit=1)
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

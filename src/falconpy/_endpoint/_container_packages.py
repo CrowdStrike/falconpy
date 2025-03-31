@@ -38,6 +38,31 @@ For more information, please refer to <https://unlicense.org>
 
 _container_packages_endpoints = [
   [
+    "ReadPackagesByImageCount",
+    "GET",
+    "/container-security/aggregates/packages/by-image-count/v1",
+    "Retrieves the N most frequently used packages across images",
+    "container_packages",
+    [
+      {
+        "type": "string",
+        "description": "Filter packages using a query in Falcon Query Language (FQL). Supported filter fields:"
+        "ai_related  cveid  running_images  severity  type  vulnerability_count",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "maximum": 100,
+        "minimum": 1,
+        "type": "integer",
+        "default": 5,
+        "description": "Maximum number of package results to return",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "ReadPackagesCountByZeroDay",
     "GET",
     "/container-security/aggregates/packages/count-by-zero-day/v1",
@@ -179,11 +204,49 @@ _container_packages_endpoints = [
         "description": "The offset from where to begin.",
         "name": "offset",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "ReadPackagesCombinedV2",
+    "GET",
+    "/container-security/combined/packages/v2",
+    "Retrieve packages identified by the provided filter criteria.",
+    "container_packages",
+    [
+      {
+        "type": "string",
+        "description": "Filter packages using a query in Falcon Query Language (FQL). Supported filter fields:"
+        "  ai_related  cid  container_id  cveid  fix_status  image_digest  license  package_name_version  severity  "
+        "type  vulnerability_count",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "(true/false) load zero day affected packages",
+        "name": "only_zero_day_affected",
+        "in": "query"
       },
       {
         "type": "string",
-        "description": "The fields to sort the records on. Supported columns:  [license package_name_version type]",
+        "description": "The fields to sort the records on. Supported columns:  license  package_name_version  "
+        "type  vulnerability_count",
         "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
         "in": "query"
       }
     ]
