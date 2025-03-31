@@ -158,12 +158,16 @@ class TestHosts:
                                                                    ids="ID1,ID2,ID3",
                                                                    name="bob",
                                                                    value="larry"
-                                                                   )["status_code"]
+                                                                   )["status_code"],
+            "CombinedDevicesByFilter": falcon.query_devices_by_filter_combined(limit=1)["status_code"],
+            "CombinedHiddenDevicesByFilter": falcon.query_hidden_devices_combined(limit=1)["status_code"]
         }
         for key in tests:
             if tests[key] not in [400, 500]:
                 error_checks = False
                 # print(f"{key} test returned a {tests[key]} status code")
+                # print(key)
+                # print(tests[key]) 
         return error_checks
 
     def test_query_hidden_devices(self):
