@@ -654,6 +654,36 @@ _cspm_registration_endpoints = [
     ]
   ],
   [
+    "AzureRefreshCertificate",
+    "POST",
+    "/cloud-connect-cspm-azure/entities/refresh-certificate/v1",
+    "Refresh certificate and returns JSON object(s) that contain the base64 encoded certificate for a service principal.",
+    "cspm_registration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Azure Tenant ID",
+        "name": "tenant_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "maxLength": 2,
+        "minLength": 1,
+        "pattern": "^[0-9]{1,2}$",
+        "type": "string",
+        "default": "1",
+        "description": "Years the certificate should be valid. Max 2",
+        "name": "years_valid",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "GetCSPMAzureUserScriptsAttachment",
     "GET",
     "/cloud-connect-cspm-azure/entities/user-scripts-download/v1",

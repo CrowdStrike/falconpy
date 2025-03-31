@@ -673,6 +673,39 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def azure_refresh_certificate(self: object,
+                                  *args,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Dict[str, Union[int, dict]]:
+        """Refresh Azure certificate.
+
+        Returns JSON object(s) that contain the base64 encoded certificate for a service principal.
+
+        Keyword arguments:
+        tenant_id -- Azure Tenant ID to refresh. String.
+        parameters -- full parameters payload, not required if tenant_id keyword is used.
+        years_valid -- Years the certificate should be valid. Integer. Max: 2
+
+        Arguments: When not specified, the first argument to this method is assumed to be
+                   'tenant_id'. All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/AzureRefreshCertificate
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="AzureRefreshCertificate",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "tenant_id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_azure_user_scripts_attachment(self: object,
                                           *args,
                                           parameters: dict = None,
@@ -1646,6 +1679,7 @@ class CSPMRegistration(ServiceClass):
     AzureDownloadCertificate = azure_download_certificate
     GetCSPMAzureManagementGroup = get_azure_management_group
     DeleteCSPMAzureManagementGroup = delete_azure_management_group
+    AzureRefreshCertificate = azure_refresh_certificate
     CreateCSPMAzureManagementGroup = create_azure_management_group
     GetCSPMCGPAccount = get_gcp_account
     GetCSPMGCPAccount = get_gcp_account  # Typo fix
