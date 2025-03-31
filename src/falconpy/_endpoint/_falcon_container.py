@@ -38,6 +38,62 @@ For more information, please refer to <https://unlicense.org>
 
 _falcon_container_endpoints = [
   [
+    "DownloadExportFile",
+    "GET",
+    "/container-security/entities/exports/files/v1",
+    "Download an export file",
+    "falcon_container",
+    [
+      {
+        "type": "string",
+        "description": "Export job ID.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ReadExportJobs",
+    "GET",
+    "/container-security/entities/exports/v1",
+    "Read export jobs entities",
+    "falcon_container",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Export Job IDs to read. Allowed up to 100 IDs per request.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "LaunchExportJob",
+    "POST",
+    "/container-security/entities/exports/v1",
+    "Launch an export job of a Container Security resource. Maximum of 1 job in progress per resource",
+    "falcon_container",
+    [
+      {
+        "description": "Supported resources:  assets.clusters  assets.containers  assets.deployments  "
+        "assets.images  assets.namespaces  assets.nodes  assets.pods  images.images-assessment-detections-expanded  "
+        "images.images-assessment-expanded  images.images-assessment-vulnerabilities-expanded  images.images-assessment "
+        "  images.images-detections  images.packages  images.vulnerabilities  investigate.container-alerts  "
+        "investigate.drift-indicators  investigate.kubernetes-ioms  investigate.runtime-detections  "
+        "investigate.unidentified-containers  network.events  policies.exclusions",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetCredentials",
     "GET",
     "/container-security/entities/image-registry-credentials/v1",
@@ -109,6 +165,22 @@ _falcon_container_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      }
+    ]
+  ],
+  [
+    "QueryExportJobs",
+    "GET",
+    "/container-security/queries/exports/v1",
+    "Query export jobs entities",
+    "falcon_container",
+    [
+      {
+        "type": "string",
+        "description": "Filter exports using a query in Falcon Query Language (FQL). Only the last 100 jobs "
+        "are returned. Supported filter fields:  resource  status",
+        "name": "filter",
+        "in": "query"
       }
     ]
   ],

@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import process_service_request, force_default, handle_single_argument
-from ._payload import image_payload, registry_payload
+from ._payload import image_payload, registry_payload, export_job_payload
 from ._service_class import ServiceClass
 from ._endpoint._falcon_container import _falcon_container_endpoints as Endpoints
 
@@ -54,6 +54,136 @@ class FalconContainer(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def download_export_file(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Download an export file.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/DownloadExportFile
+
+        Keyword arguments
+        ----
+        id : str (required)
+            Export job ID.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ----
+        When not specified, the first argument to this method is assumed
+        to be 'id'. All others are ignored.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DownloadExportFile",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_export_jobs(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Read export job entities.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/ReadExportJobs
+
+        Keyword arguments
+        ----
+        ids : str or List of str (required)
+            Export Job IDs to read. Allowed up to 100 IDs per request.
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ----
+        When not specified, the first argument to this method is assumed
+        to be 'ids'. All others are ignored.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadExportJobs",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def launch_export_job(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Launch an export job of a Container Security resource.
+
+        Maximum of 1 job in progress per resource.
+
+        HTTP Method: POST
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/LaunchExportJob
+
+        Keyword arguments
+        ----
+        body : dict
+            Full body payload, not required when using other keywords.
+            {
+                "format": "string",
+                "fql": "string",
+                "resource": "string",
+                "sort": "string"
+            }
+        format : str
+            Export job format.
+        fql : str
+            Falcon Query Language string defining the export job.
+        resource : str
+            Resource to run the export job against.
+            Supported resources:
+            assets.clusters                                         images.images-assessment
+            assets.containers                                       images.images-detections
+            assets.deployments                                      images.packages
+            assets.images                                           images.vulnerabilities
+            assets.namespaces                                       investigate.container-alerts
+            assets.nodes                                            investigate.drift-indicators
+            assets.pods                                             investigate.kubernetes-ioms
+            images.images-assessment-detections-expanded            investigate.runtime-detections
+            images.images-assessment-expanded                       investigate.unidentified-containers
+            images.images-assessment-vulnerabilities-expanded       network.events
+            policies.exclusions
+        sort : str
+            Falcon Query Language sort string defining the export sort.
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = export_job_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="LaunchExportJob",
+            body=body
+            )
 
     def get_credentials(self: object) -> Dict[str, Union[int, dict]]:
         """Retrieve the registry credentials.
@@ -420,6 +550,42 @@ class FalconContainer(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_export_jobs(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Query export job entities.
+
+        HTTP Method: GET
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/QueryExportJobs
+
+        Keyword arguments
+        ----
+        filter : str (required)
+            Filter exports using a query in Falcon Query Language (FQL). Only the last 100 jobs are returned.
+            Supported filter fields:  resource, status
+        parameters : dict
+            Full parameters payload. Not required if using other keywords.
+
+        Arguments
+        ----
+        When not specified, the first argument to this method is assumed
+        to be 'filter'. All others are ignored.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryExportJobs",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "filter")
+            )
+
     @force_default(defaults=["body"], default_types=["dict"])
     def create_registry_entities(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Create a registry entity using the provided details.
@@ -499,6 +665,9 @@ class FalconContainer(ServiceClass):
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
+    DownloadExportFile = download_export_file
+    ReadExportJobs = read_export_jobs
+    LaunchExportJob = launch_export_job
     GetCredentials = get_credentials
     GetCombinedImages = get_combined_images
     GetImageAssessmentReport = get_assessment
@@ -508,5 +677,6 @@ class FalconContainer(ServiceClass):
     ReadRegistryEntities = read_registry_entities
     ReadRegistryEntitiesByUUID = read_registry_entities_by_uuid
     DeleteRegistryEntities = delete_registry_entities
+    QueryExportJobs = query_export_jobs
     CreateRegistryEntities = create_registry_entities
     UpdateRegistryEntities = update_registry_entities

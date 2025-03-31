@@ -170,6 +170,18 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_exposure_management.py`
 
++ Added: Added 4 new operations to the __Falcon Container__ service collection.
+    - _DownloadExportFile_
+    - _ReadExportJobs_
+    - _LaunchExportJob_
+    - _QueryExportJobs_
+    - `_endpoint/_falcon_container.py`
+    - `_payload/__init__.py`
+    - `_payload/_container.py`
+    - `falcon_container.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_falcon_container.py`
+
 + Added: Added _CombinedHiddenDevicesByFilter_ and _CombinedDevicesByFilter_ operations to the __Hosts__ service collection.
     - `_endpoint/_hosts.py`
     - `hosts.py`

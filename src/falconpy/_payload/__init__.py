@@ -63,7 +63,8 @@ from ._container import (
     image_policy_payload,
     image_exclusions_payload,
     image_group_payload,
-    base_image_payload
+    base_image_payload,
+    export_job_payload
     )
 from ._content_update_policy import content_update_policy_action_payload, content_update_policy_payload
 from ._delivery_settings import delivery_settings_payload
@@ -171,5 +172,5 @@ __all__ = [
     "cloud_oci_validate_payload", "cloud_oci_create_payload", "indicator_graph_payload",
     "content_update_policy_action_payload", "content_update_policy_payload", "device_classes_policy_payload",
     "device_policy_bluetooth_config_payload", "device_control_policy_payload_v2", "combined_alerts_payload",
-    "correlation_rules_export_payload", "fem_add_asset_payload"
+    "correlation_rules_export_payload", "fem_add_asset_payload", "export_job_payload"
 ]
