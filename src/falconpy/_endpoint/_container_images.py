@@ -46,7 +46,8 @@ _container_images_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter using a query in Falcon Query Language (FQL). Supported filters:  cid,registry,repository",
+        "description": "Filter using a query in Falcon Query Language (FQL). Supported filter fields:  cid  "
+        "registry  repository",
         "name": "filter",
         "in": "query"
       }
@@ -61,8 +62,8 @@ _container_images_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  "
-        "arch,base_os,cid,registry,repository,tag",
+        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filter fields:  "
+        "arch  base_os  cid  first_seen  image_digest  image_id  registry  repository  source  tag",
         "name": "filter",
         "in": "query"
       }
@@ -77,8 +78,8 @@ _container_images_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  "
-        "cid,last_seen,registry,repository",
+        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filter fields:  "
+        "arch  base_os  cid  first_seen  image_digest  image_id  registry  repository  source  tag",
         "name": "filter",
         "in": "query"
       }
@@ -93,10 +94,11 @@ _container_images_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  arch,b"
-        "ase_os,cid,container_id,container_running_status,cps_rating,crowdstrike_user,cve_id,detection_count,detection_"
-        "name,detection_severity,first_seen,image_digest,image_id,include_base_image_vuln,layer_digest,package_name_ver"
-        "sion,registry,repository,source,tag,vulnerability_count,vulnerability_severity",
+        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filter fields:  "
+        "ai_related  ai_vulnerability_count  arch  base_os  cid  container_id  container_running_status  cps_rating  "
+        "crowdstrike_user  cve_id  detection_count  detection_name  detection_severity  first_seen  image_digest  "
+        "image_id  include_base_image_vuln  layer_digest  package_name_version  registry  repository  source  tag  "
+        "vulnerability_count  vulnerability_severity",
         "name": "filter",
         "in": "query"
       }
@@ -106,13 +108,13 @@ _container_images_endpoints = [
     "CombinedBaseImages",
     "GET",
     "/container-security/combined/base-images/v1",
-    "Retrieve base images for provided filter",
+    "Retrieves a list of base images for the provided filter. Maximum page size: 100",
     "container_images",
     [
       {
         "type": "string",
-        "description": "Search base images using a query in Falcon Query Language (FQL). Supported filters:  "
-        "image_digest,image_id,registry,repository,tag",
+        "description": "Search base images using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  image_digest  image_id  registry  repository  tag",
         "name": "filter",
         "in": "query"
       }
@@ -127,15 +129,24 @@ _container_images_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  "
-        "container_id, container_running_status, cve_id, detection_name, detection_severity, first_seen, image_digest, "
-        "image_id, registry, repository, tag, vulnerability_severity",
+        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filter fields:  "
+        "ai_related  container_id  container_running_status  cve_id  detection_name  detection_severity  first_seen  "
+        "image_digest  image_id  registry  repository  tag  vulnerability_severity",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on. Supported columns:  first_seen  "
+        "highest_detection_severity  highest_vulnerability_severity  image_digest  image_id  registry  repository  "
+        "source  tag",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
-        "description": "The upper-bound on the number of records to retrieve [1-100]",
+        "default": 100,
+        "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
       },
@@ -143,14 +154,6 @@ _container_images_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "The fields to sort the records on. Supported columns:  [first_seen "
-        "highest_detection_severity highest_vulnerability_severity image_digest image_id registry repository source "
-        "tag]",
-        "name": "sort",
         "in": "query"
       }
     ]
@@ -164,8 +167,8 @@ _container_images_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  "
-        "arch,base_os,cid,registry,repository,tag",
+        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filter fields:  "
+        "arch  base_os  cid  first_seen  image_digest  image_id  registry  repository  source  tag",
         "name": "filter",
         "in": "query"
       },
@@ -193,8 +196,8 @@ _container_images_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  "
-        "registry,repository,tag",
+        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filter fields:  "
+        "arch  base_os  cid  first_seen  image_digest  image_id  registry  repository  source  tag",
         "name": "filter",
         "in": "query"
       },
@@ -205,7 +208,14 @@ _container_images_endpoints = [
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -214,12 +224,6 @@ _container_images_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "The fields to sort the records on.",
-        "name": "sort",
         "in": "query"
       }
     ]
@@ -233,27 +237,31 @@ _container_images_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  arch,b"
-        "ase_os,cid,container_id,container_running_status,cps_rating,crowdstrike_user,cve_id,detection_count,detection_"
-        "name,detection_severity,first_seen,image_digest,image_id,include_base_image_vuln,layer_digest,package_name_ver"
-        "sion,registry,repository,source,tag,vulnerability_count,vulnerability_severity",
+        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filter fields:  "
+        "ai_related  ai_vulnerability_count  arch  base_os  cid  container_id  container_running_status  cps_rating  "
+        "crowdstrike_user  cve_id  detection_count  detection_name  detection_severity  first_seen  image_digest  "
+        "image_id  include_base_image_vuln  layer_digest  package_name_version  registry  repository  source  tag  "
+        "vulnerability_count  vulnerability_severity",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "boolean",
-        "description": "expand vulnerabilities",
+        "default": False,
+        "description": "Expand vulnerabilities details",
         "name": "expand_vulnerabilities",
         "in": "query"
       },
       {
         "type": "boolean",
-        "description": "expand detections",
+        "default": False,
+        "description": "Expand detections details",
         "name": "expand_detections",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -266,10 +274,10 @@ _container_images_endpoints = [
       },
       {
         "type": "string",
-        "description": "The fields to sort the records on. Supported columns:  [base_os cid detections "
-        "firstScanned first_seen highest_cps_current_rating highest_detection_severity highest_vulnerability_severity "
-        "image_digest image_id last_seen layers_with_vulnerabilities packages registry repository source tag "
-        "vulnerabilities]",
+        "description": "The fields to sort the records on. Supported columns:  ai_vulnerabilities  base_os  "
+        "cid  detections  firstScanned  first_seen  highest_cps_current_rating  highest_detection_severity  "
+        "highest_vulnerability_severity  image_digest  image_id  last_seen  layers_with_vulnerabilities  packages  "
+        "registry  repository  source  tag  vulnerabilities",
         "name": "sort",
         "in": "query"
       }
@@ -284,35 +292,36 @@ _container_images_endpoints = [
     [
       {
         "type": "string",
-        "description": "CID",
+        "description": "CS Customer ID",
         "name": "cid",
         "in": "query",
         "required": True
       },
       {
         "type": "string",
-        "description": "registry name",
+        "description": "Registry",
         "name": "registry",
         "in": "query",
         "required": True
       },
       {
         "type": "string",
-        "description": "repository name",
+        "description": "Repository name",
         "name": "repository",
         "in": "query",
         "required": True
       },
       {
         "type": "string",
-        "description": "tag name",
+        "description": "Tag name",
         "name": "tag",
         "in": "query",
         "required": True
       },
       {
         "type": "boolean",
-        "description": "include base image vulnerabilities",
+        "default": False,
+        "description": "Include base image vulnerabilities.",
         "name": "include_base_image_vuln",
         "in": "query"
       }
@@ -327,35 +336,36 @@ _container_images_endpoints = [
     [
       {
         "type": "string",
-        "description": "CID",
+        "description": "CS Customer ID",
         "name": "cid",
         "in": "query",
         "required": True
       },
       {
         "type": "string",
-        "description": "registry name",
+        "description": "Registry",
         "name": "registry",
         "in": "query",
         "required": True
       },
       {
         "type": "string",
-        "description": "repository name",
+        "description": "Repository name",
         "name": "repository",
         "in": "query",
         "required": True
       },
       {
         "type": "string",
-        "description": "tag name",
+        "description": "Tag name",
         "name": "tag",
         "in": "query",
         "required": True
       },
       {
         "type": "boolean",
-        "description": "include base image vulnerabilities",
+        "default": False,
+        "description": "Include base image vulnerabilities.",
         "name": "include_base_image_vuln",
         "in": "query"
       }

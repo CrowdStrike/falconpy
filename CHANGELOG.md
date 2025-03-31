@@ -249,6 +249,20 @@
     - _SearchDetections_
     - `_endpoint/_container_detections.py`
 
++ Updated: Added new filters and cosmetic updates to parameter and operation descriptions in operations within the __Container Images__ service collection.
+    - _AggregateImageAssessmentHistory_
+    - _AggregateImageCountByBaseOS_
+    - _AggregateImageCountByState_
+    - _AggregateImageCount_
+    - _CombinedBaseImages_
+    - _GetCombinedImages_
+    - _CombinedImageByVulnerabilityCount_
+    - _CombinedImageDetail_
+    - _ReadCombinedImagesExport_
+    - _CombinedImageIssuesSummary_
+    - _CombinedImageVulnerabilitySummary_
+    - `_endpoint/_container_images.py`
+
 + Updated: Cosmetic updates to parameter descriptions in 3 operations within the __Detects__ service collection.
     - _UpdateDetectsByIdsV2_
     - _GetDetectSummaries_
