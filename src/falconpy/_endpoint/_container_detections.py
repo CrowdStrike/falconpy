@@ -46,8 +46,8 @@ _container_detections_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  cid,co"
-        "ntainer_id,detection_type,id,image_digest,image_id,image_registry,image_repository,image_tag,name,severity",
+        "description": "Filter images detections using a query in Falcon Query Language (FQL). Supported "
+        "filter fields:  cid  detection_type  image_registry  image_repository  image_tag",
         "name": "filter",
         "in": "query"
       }
@@ -62,8 +62,8 @@ _container_detections_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  cid,co"
-        "ntainer_id,detection_type,id,image_digest,image_id,image_registry,image_repository,image_tag,name,severity",
+        "description": "Filter images detections using a query in Falcon Query Language (FQL). Supported "
+        "filter fields:  cid  detection_type  image_registry  image_repository  image_tag",
         "name": "filter",
         "in": "query"
       }
@@ -78,8 +78,8 @@ _container_detections_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  cid,co"
-        "ntainer_id,detection_type,id,image_digest,image_id,image_registry,image_repository,image_tag,name,severity",
+        "description": "Filter images detections using a query in Falcon Query Language (FQL). Supported "
+        "filter fields:  cid  detection_type  image_registry  image_repository  image_tag",
         "name": "filter",
         "in": "query"
       }
@@ -94,13 +94,21 @@ _container_detections_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  cid,co"
-        "ntainer_id,detection_type,id,image_digest,image_id,image_registry,image_repository,image_tag,name,severity",
+        "description": "Filter images detections using a query in Falcon Query Language (FQL). Supported "
+        "filter fields:  cid  detection_type  image_registry  image_repository  image_tag",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on. Supported columns:  containers_impacted  "
+        "detection_name  detection_severity  detection_type  images_impacted  last_detected",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -109,13 +117,6 @@ _container_detections_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "The fields to sort the records on. Supported columns:  [containers_impacted "
-        "detection_name detection_severity detection_type images_impacted last_detected]",
-        "name": "sort",
         "in": "query"
       }
     ]
@@ -130,14 +131,20 @@ _container_detections_endpoints = [
       {
         "type": "string",
         "description": "Filter Container Runtime Detections using a query in Falcon Query Language (FQL). "
-        "Supported filters:  action_taken,aid,cid,cloud,cluster_name,command_line,computer_name,container_id,detect_tim"
-        "estamp,detection_description,detection_id,file_name,file_path,host_id,host_type,image_id,name,namespace,pod_na"
-        "me,severity,tactic",
+        "Supported filter fields:  agent_type  aid  cid  cloud_name  cloud  cluster_name  computer_name  container_id  "
+        "detect_timestamp  host_id  host_type  image_id  name  namespace  pod_name  severity",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -146,12 +153,6 @@ _container_detections_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "The field to sort the records on.",
-        "name": "sort",
         "in": "query"
       }
     ]
@@ -165,13 +166,14 @@ _container_detections_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  "
-        "cid,detection_type,image_registry,image_repository,image_tag",
+        "description": "Filter images detections using a query in Falcon Query Language (FQL). Supported "
+        "filter fields:  cid  detection_type  image_registry  image_repository  image_tag",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -193,13 +195,14 @@ _container_detections_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  cid,co"
-        "ntainer_id,detection_type,id,image_digest,image_id,image_registry,image_repository,image_tag,name,severity",
+        "description": "Filter images detections using a query in Falcon Query Language (FQL). Supported "
+        "filter fields:  cid  detection_type  image_registry  image_repository  image_tag",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"

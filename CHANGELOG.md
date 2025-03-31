@@ -239,6 +239,16 @@
 + Updated: Added default (100) to the `limit` parameter in the _SearchAndReadContainerAlerts_ operation within the __Container Alerts__ service collection.
     - `_endpoint/_container_alerts.py`
 
++ Updated: Cosmetic updates to parameter descriptions in 7 operations within the __Container Detections__ service collection.
+    - _ReadDetectionsCountBySeverity_
+    - _ReadDetectionsCountByType_
+    - _ReadDetectionsCount_
+    - _ReadCombinedDetections_
+    - _GetRuntimeDetectionsCombinedV2_
+    - _ReadDetections_
+    - _SearchDetections_
+    - `_endpoint/_container_detections.py`
+
 + Updated: Cosmetic updates to parameter descriptions in 3 operations within the __Detects__ service collection.
     - _UpdateDetectsByIdsV2_
     - _GetDetectSummaries_
