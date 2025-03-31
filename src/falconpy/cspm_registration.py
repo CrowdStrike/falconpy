@@ -250,6 +250,8 @@ class CSPMRegistration(ServiceClass):
                     aws-url         aws-sensor-management-url
                     aws-iom-url     aws-dspm-url
                     aws-ioa-url     aws-idp-ur
+                    aws-modular-cft-url
+                    aws-modular-cft-gov-commercial-url
 
         This method only supports keywords for providing arguments.
 

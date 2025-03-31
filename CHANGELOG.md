@@ -120,6 +120,10 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_container_packages.py`
 
++ Added: Added 2 new template formats to the _GetCSPMAwsConsoleSetupURLs_ operation within the __CSPM Registration__ service collection.
+    - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
+
 + Added: Added 4 new parameters to the _GetD4CAWSAccountScriptsAttachment_ operation within the __D4C Registration__ service collection.
     - `_endpoint/_d4c_registration.py`
     - `d4c_registration.py`
