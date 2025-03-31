@@ -338,6 +338,42 @@ class Intel(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_malware_report(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs) -> Union[Dict[str, Union[int, dict]], bytes]:
+        """Export Mitre ATT&CK information for a given malware family.
+
+        Keyword arguments:
+        id -- Malware family name. String.
+              Malware family names should be in lower case with spaces, dots and
+              slashes replaced with dashes.
+        format -- Report format. String.  Supported values: CSV, JSON or JSON_NAVIGATOR.
+        parameters - full parameters payload, not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/GetMalwareMitreReport
+        """
+        # If not specified, default to JSON.
+        if not kwargs.get("format", None):
+            parameters["format"] = "JSON"
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetMalwareMitreReport",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_malware_entities(self: object,
                              *args,
                              parameters: dict = None,
@@ -872,6 +908,7 @@ class Intel(ServiceClass):
     GetIntelActorEntities = get_actor_entities
     GetIntelIndicatorEntities = get_indicator_entities
     GetMitreReport = get_mitre_report
+    GetMalwareMitreReport = get_malware_report
     PostMitreAttacks = mitre_attacks
     GetMalwareEntities = get_malware_entities
     GetIntelReportPDF = get_report_pdf

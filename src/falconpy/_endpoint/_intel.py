@@ -259,6 +259,29 @@ _intel_endpoints = [
     ]
   ],
   [
+    "GetMalwareMitreReport",
+    "GET",
+    "/intel/entities/malware-mitre-reports/v1",
+    "Export Mitre ATT&CK information for a given malware family.",
+    "intel",
+    [
+      {
+        "type": "string",
+        "description": "Malware family name in lower case with spaces replaced with dashes",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Supported report formats: CSV, JSON or JSON_NAVIGATOR",
+        "name": "format",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetMalwareEntities",
     "GET",
     "/intel/entities/malware/v1",
