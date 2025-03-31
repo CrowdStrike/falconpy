@@ -228,7 +228,7 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_exposure_management.py`
 
-+ Added: Added 4 new operations to the __Falcon Container__ service collection.
++ Added: Added 4 new operations to the __Falcon Container__ service collection. Closes #1293.
     - _DownloadExportFile_
     - _ReadExportJobs_
     - _LaunchExportJob_
