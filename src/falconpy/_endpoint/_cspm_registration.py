@@ -239,7 +239,9 @@ _cspm_registration_endpoints = [
           "aws-ioa-url",
           "aws-sensor-management-url",
           "aws-dspm-url",
-          "aws-idp-url"
+          "aws-idp-url",
+          "aws-modular-cft-url",
+          "aws-modular-cft-gov-commercial-url"
         ],
         "type": "string",
         "description": "Template to be rendered",
