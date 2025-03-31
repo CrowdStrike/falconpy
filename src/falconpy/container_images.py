@@ -363,6 +363,7 @@ class ContainerImages(ServiceClass):
 
         Keyword arguments:
         cid -- CID. String.
+        image_digest -- Image digest. String.
         registry -- Registry name. String.
         repository -- Repository name. String.
         tag -- Tag name. String.
@@ -392,6 +393,7 @@ class ContainerImages(ServiceClass):
 
         Keyword arguments:
         cid -- CID. String.
+        image_digest -- Image digest. String.
         registry -- Registry name. String.
         repository -- Repository name. String.
         tag -- Tag name. String.
