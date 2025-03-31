@@ -62,7 +62,7 @@ def handle_field(tgt: str, kwa: dict, fld: str) -> str:
     # Could potentially be zero, handle multiple path variable endpoint module variations
     try:
         returned = tgt.format(str(kwa.get(fld, None))) if kwa.get(fld, None) is not None else tgt
-    except KeyError:
+    except KeyError:  # pragma: no cover
         targ = {fld: str(kwa.get(fld, None))}
         returned = tgt.format(**targ)
     return returned
