@@ -261,6 +261,13 @@
     - `_endpoint/_discover.py`
     - `_endpoint/deprecated/_discover.py`
 
++ Updated: Cosmetic updates to parameter descriptions in 4 operations within the __Drift Indicators__ service collection.
+    - _GetDriftIndicatorsValuesByDate_
+    - _ReadDriftIndicatorsCount_
+    - _SearchAndReadDriftIndicatorEntities_
+    - _SearchDriftIndicators_
+    - `_endpoint/_drift_indicators.py`
+
 + Updated: Cosmetic update to the `ids` parameter in the _get_external_assets_ operation within the __Exposure Management__ service collection.
     - `_endpoint/_exposure_management.py`
     - `_endpoint/deprecated/_exposure_management.py`

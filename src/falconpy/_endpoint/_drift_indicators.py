@@ -46,9 +46,9 @@ _drift_indicators_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter drift indicators using a query in Falcon Query Language (FQL). Supported "
-        "filters: cid,cloud_name,command_line,container_id,file_name,file_sha256,host_id,indicator_process_id,namespace"
-        ",occurred_at,parent_process_id,pod_name,prevented,scheduler_name,severity,worker_node_name",
+        "description": "Filter Drift Indicators using a query in Falcon Query Language (FQL). Supported filter"
+        " fields:  cid  cloud_name  command_line  container_id  file_name  file_sha256  host_id  indicator_process_id  "
+        "namespace  occurred_at  parent_process_id  pod_name  prevented  scheduler_name  severity  worker_node_name",
         "name": "filter",
         "in": "query"
       },
@@ -69,9 +69,9 @@ _drift_indicators_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters:  cid,cl"
-        "oud_name,command_line,container_id,file_name,file_sha256,host_id,indicator_process_id,namespace,occurred_at,pa"
-        "rent_process_id,pod_name,prevented,scheduler_name,severity,worker_node_name",
+        "description": "Filter Drift Indicators using a query in Falcon Query Language (FQL). Supported filter"
+        " fields:  cid  cloud_name  command_line  container_id  file_name  file_sha256  host_id  indicator_process_id  "
+        "namespace  occurred_at  parent_process_id  pod_name  prevented  scheduler_name  severity  worker_node_name",
         "name": "filter",
         "in": "query"
       }
@@ -86,14 +86,21 @@ _drift_indicators_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter Drift Indicators using a query in Falcon Query Language (FQL). Supported "
-        "filters:  cid, cloud_name, command_line, container_id, file_name, file_sha256, host_id, indicator_process_id, "
-        "namespace, occurred_at, parent_process_id, pod_name, prevented, scheduler_name, severity, worker_node_name",
+        "description": "Filter Drift Indicators using a query in Falcon Query Language (FQL). Supported filter"
+        " fields:  cid  cloud_name  command_line  container_id  file_name  file_sha256  host_id  indicator_process_id  "
+        "namespace  occurred_at  parent_process_id  pod_name  prevented  scheduler_name  severity  worker_node_name",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -102,12 +109,6 @@ _drift_indicators_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "The fields to sort the records on.",
-        "name": "sort",
         "in": "query"
       }
     ]
@@ -140,14 +141,21 @@ _drift_indicators_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter Drift Indicators using a query in Falcon Query Language (FQL). Supported "
-        "filters:  cid, cloud_name, command_line, container_id, file_name, file_sha256, host_id, indicator_process_id, "
-        "namespace, occurred_at, parent_process_id, pod_name, prevented, scheduler_name, severity, worker_node_name",
+        "description": "Filter Drift Indicators using a query in Falcon Query Language (FQL). Supported filter"
+        " fields:  cid  cloud_name  command_line  container_id  file_name  file_sha256  host_id  indicator_process_id  "
+        "namespace  occurred_at  parent_process_id  pod_name  prevented  scheduler_name  severity  worker_node_name",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -156,12 +164,6 @@ _drift_indicators_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "The fields to sort the records on.",
-        "name": "sort",
         "in": "query"
       }
     ]
