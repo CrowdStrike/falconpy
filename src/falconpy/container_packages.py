@@ -55,6 +55,36 @@ class ContainerPackages(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_packages_by_image_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve the N most frequently used packages across images.
+
+        Keyword arguments:
+        filter -- Filter packages using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    ai_related              severity
+                    cveid                   type
+                    running_images          vulnerability_count
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-packages/ReadPackagesByImageCount
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadPackagesByImageCount",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def read_zero_day_counts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
         """Retrieve packages count affected by zero day vulnerabilities.
 
@@ -218,8 +248,46 @@ class ContainerPackages(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_packages(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+        """Retrieve packages identified by the provided filter criteria.
+
+        Keyword arguments:
+        filter -- Filter packages using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    cid             license
+                    container_id    package_name_version
+                    cveid           severity
+                    fix_status      type
+                    image_digest    vulnerability_count
+        only_zero_day_affected -- Load zero day affected packages. Boolean. Default is False.
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        offset -- The offset from where to begin. Integer.
+        sort -- The fields to sort the records on. String.
+                Supported columns:  license, package_name_version, type
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-packages/ReadPackagesCombinedV2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadPackagesCombinedV2",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    ReadPackagesByImageCount = read_packages_by_image_count
     ReadPackagesCountByZeroDay = read_zero_day_counts
     ReadPackagesByFixableVulnCount = read_fixable_vuln_count
     ReadPackagesByVulnCount = read_vuln_count
     ReadPackagesCombinedExport = read_combined_export
     ReadPackagesCombined = read_combined
+    ReadPackagesCombinedV2 = read_packages

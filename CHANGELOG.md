@@ -114,6 +114,12 @@
     - `_endpoint/_container_images.py`
     - `container_images.py`
 
++ Added: Added the _ReadPackagesByImageCount_ and _ReadPackagesCombinedV2_ operations to the __Container Packages__ service collection.
+    - `_endpoint/_container_packages.py`
+    - `container_packages.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_container_packages.py`
+
 + Added: Added new __Deployments__ service collection with 5 new operations.
     - _GetDeploymentsExternalV1_
     - _CombinedReleasesV1Mixin0_
