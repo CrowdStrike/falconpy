@@ -202,6 +202,12 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_serverless_vulnerabilities.py`
 
++ Added: Added _WorkflowActivitiesContentCombined_ operation to the __Workflows__ service collection.
+    - `_endpoint/_workflows.py`
+    - `workflows.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_workflows.py`
+
 ## Issues resolved
 + Fixed: Unexpected redirect issue caused by underlying requests library handler. Closes #1283.
     - `_util/_functions.py`
