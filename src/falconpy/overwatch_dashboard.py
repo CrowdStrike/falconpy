@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, handle_single_argument, process_service_request
 from ._payload import aggregate_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._overwatch_dashboard import _overwatch_dashboard_endpoints as Endpoints
 
@@ -60,7 +61,7 @@ class OverwatchDashboard(ServiceClass):
                                             *args,
                                             parameters: dict = None,
                                             **kwargs
-                                            ) -> Dict[str, Union[int, dict]]:
+                                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the total number of detections pushed across all customers.
 
         Keyword arguments:
@@ -86,7 +87,7 @@ class OverwatchDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregates_events_collections(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregates_events_collections(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get OverWatch detection event collection info by providing an aggregate query.
 
         Keyword arguments:
@@ -171,7 +172,7 @@ class OverwatchDashboard(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregates_events(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregates_events(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get aggregate OverWatch detection event info by providing an aggregate query.
 
         Keyword arguments:
@@ -260,7 +261,7 @@ class OverwatchDashboard(ServiceClass):
                                            *args,
                                            parameters: dict = None,
                                            **kwargs
-                                           ) -> Dict[str, Union[int, dict]]:
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the total number of incidents pushed across all customers.
 
         Keyword arguments:
@@ -290,7 +291,7 @@ class OverwatchDashboard(ServiceClass):
                                         *args,
                                         parameters: dict = None,
                                         **kwargs
-                                        ) -> Dict[str, Union[int, dict]]:
+                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the total number of incidents pushed across all customers.
 
         Keyword arguments:

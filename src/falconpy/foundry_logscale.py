@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import foundry_execute_search_payload, foundry_dynamic_search_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._foundry_logscale import _foundry_logscale_endpoints as Endpoints
 
@@ -56,7 +57,7 @@ class FoundryLogScale(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def list_repos(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def list_repos(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """List available repositories and views.
 
         Keyword arguments:
@@ -190,7 +191,7 @@ class FoundryLogScale(ServiceClass):
                         body: dict = None,
                         parameters: dict = None,
                         **kwargs
-                        ) -> Dict[str, Union[int, dict]]:
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Deploy a saved search.
 
         Keyword arguments:
@@ -238,7 +239,7 @@ class FoundryLogScale(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_search_results(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_search_results(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the results of a saved search.
 
         Keyword arguments:
@@ -278,7 +279,7 @@ class FoundryLogScale(ServiceClass):
                 body: dict = None,
                 parameters: dict = None,
                 **kwargs
-                ) -> Dict[str, Union[int, dict]]:
+                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Deploy a saved search.
 
         Keyword arguments:
@@ -361,7 +362,7 @@ class FoundryLogScale(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def populate(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def populate(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Populate a saved search.
 
         Keyword arguments:
@@ -386,7 +387,7 @@ class FoundryLogScale(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def download_results(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def download_results(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the results of a saved search as a file.
 
         Keyword arguments:
@@ -414,7 +415,7 @@ class FoundryLogScale(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def list_views(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def list_views(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """List views.
 
         Keyword arguments:

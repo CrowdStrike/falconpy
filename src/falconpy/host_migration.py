@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 from typing import Dict, Union
 from ._util import force_default, process_service_request, generate_error_result, handle_single_argument
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._host_migration import _host_migration_endpoints as Endpoints
 from ._payload import generic_payload_list, aggregate_payload
@@ -57,7 +58,7 @@ class HostMigration(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_host_migration(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_host_migration(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get host migration aggregates as specified via json in request body.
 
         Keyword arguments:
@@ -142,7 +143,7 @@ class HostMigration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_migration(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_migration(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get migration aggregates as specified via json in request body.
 
         Keyword arguments:
@@ -228,7 +229,7 @@ class HostMigration(ServiceClass):
     def perform_host_migration_action(self: object,
                                       body: dict = None,
                                       parameters: dict = None,
-                                      **kwargs) -> Dict[str, Union[int, dict]]:
+                                      **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform an action on host migrations.
 
         Keyword arguments:
@@ -308,7 +309,7 @@ class HostMigration(ServiceClass):
         return returned
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_host_migration_details(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_host_migration_details(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get migration aggregates as specified via json in request body.
 
         Keyword arguments:
@@ -355,7 +356,7 @@ class HostMigration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_migration_destination(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_migration_destination(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get destinations for a migration.
 
         Keyword arguments:
@@ -396,7 +397,7 @@ class HostMigration(ServiceClass):
     def perform_migration_job_action(self: object,
                                      body: dict = None,
                                      parameters: dict = None,
-                                     **kwargs) -> Dict[str, Union[int, dict]]:
+                                     **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform an action on host migrations.
 
         Keyword arguments:
@@ -473,7 +474,11 @@ class HostMigration(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_migration_job_details(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_migration_job_details(self: object,
+                                  *args,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get migration job details.
 
         Keyword arguments:
@@ -499,7 +504,7 @@ class HostMigration(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_migration(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_migration(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a device migration job.
 
         Keyword arguments:
@@ -547,7 +552,10 @@ class HostMigration(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_host_migration_ids(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_host_migration_ids(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query host migration IDs.
 
         Provide a FQL filter and paging details.
@@ -592,7 +600,7 @@ class HostMigration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_migration_jobs(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_migration_jobs(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query host migration jobs.
 
         Provide a FQL filter and paging details.

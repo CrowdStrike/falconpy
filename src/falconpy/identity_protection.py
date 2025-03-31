@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import process_service_request, force_default, handle_single_argument
 from ._payload import aggregate_payload, generic_payload_list, idp_policy_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._identity_protection import _identity_protection_endpoints as Endpoints
 
@@ -56,7 +57,7 @@ class IdentityProtection(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def graphql(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def graphql(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         r"""Identity Protection GraphQL API.
 
         Allows to retrieve entities, timeline activities, identity-based incidents and
@@ -99,7 +100,7 @@ class IdentityProtection(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def get_sensor_aggregates(self: object, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_sensor_aggregates(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get sensor aggregates as specified via json in request body.
 
         Keyword arguments:
@@ -183,7 +184,7 @@ class IdentityProtection(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_sensor_details(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_sensor_details(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on one or more sensors by providing device IDs.
 
         Keyword arguments:
@@ -215,7 +216,11 @@ class IdentityProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_policy_rules(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_policy_rules(self: object,
+                         *args,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get policy rules.
 
         Keyword arguments:
@@ -241,7 +246,7 @@ class IdentityProtection(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_policy_rule(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_policy_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create policy rule.
 
         Keyword arguments:
@@ -359,7 +364,11 @@ class IdentityProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_policy_rules(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_policy_rules(self: object,
+                            *args,
+                            parameters: dict = None,
+                            **kwargs
+                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete policy rules.
 
         Keyword arguments:
@@ -386,7 +395,7 @@ class IdentityProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_sensors(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_sensors(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for sensors in your environment by providing hostname, IP, and other criteria.
 
         Keyword arguments:
@@ -416,7 +425,7 @@ class IdentityProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policy_rules(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_policy_rules(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query policy rule IDs.
 
         Keyword arguments:

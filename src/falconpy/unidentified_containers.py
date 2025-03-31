@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._unidentified_containers import _unidentified_containers_endpoints as Endpoints
 
@@ -55,7 +56,11 @@ class UnidentifiedContainers(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_count_by_date_range(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_count_by_date_range(self: object,
+                                 *args,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the count of Unidentified Containers over the last 7 days.
 
         Keyword arguments:
@@ -89,7 +94,7 @@ class UnidentifiedContainers(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_count(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_count(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the total count of Unidentified Containers over a time period.
 
         Keyword arguments:
@@ -123,7 +128,7 @@ class UnidentifiedContainers(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_and_read(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_and_read(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search Unidentified Containers by the provided search criteria.
 
         Keyword arguments:

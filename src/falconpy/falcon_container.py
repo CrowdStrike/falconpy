@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import process_service_request, force_default, handle_single_argument
 from ._payload import image_payload, registry_payload, export_job_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._falcon_container import _falcon_container_endpoints as Endpoints
 
@@ -56,7 +57,11 @@ class FalconContainer(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def download_export_file(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def download_export_file(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download an export file.
 
         HTTP Method: GET
@@ -91,7 +96,11 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_export_jobs(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_export_jobs(self: object,
+                         *args,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Read export job entities.
 
         HTTP Method: GET
@@ -126,7 +135,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def launch_export_job(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def launch_export_job(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Launch an export job of a Container Security resource.
 
         Maximum of 1 job in progress per resource.
@@ -185,7 +194,7 @@ class FalconContainer(ServiceClass):
             body=body
             )
 
-    def get_credentials(self: object) -> Dict[str, Union[int, dict]]:
+    def get_credentials(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the registry credentials.
 
         HTTP Method: GET
@@ -214,7 +223,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_combined_images(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_combined_images(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve registry entities identified by the customer ID.
 
         HTTP Method: GET
@@ -257,7 +266,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def read_image_vulnerabilities(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_image_vulnerabilities(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve an assessment report for an image by specifying repository and tag.
 
         HTTP Method: POST
@@ -329,7 +338,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_assessment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_assessment(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve an assessment report for an image by specifying repository and tag.
 
         If you specify both sets of parameters, the scan report is searched using the image ID
@@ -369,7 +378,7 @@ class FalconContainer(ServiceClass):
             params=parameters
             )
 
-    def delete_image_details(self: object, *args, image_id: str = None) -> Dict[str, Union[int, dict]]:
+    def delete_image_details(self: object, *args, image_id: str = None) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete image details from the CrowdStrike registry.
 
         HTTP Method: DELETE
@@ -404,7 +413,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def image_matches_policy(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def image_matches_policy(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Check if an image matches a policy by specifying repository and tag.
 
         HTTP Method: GET
@@ -439,7 +448,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_registry_entities(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_registry_entities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve registry entities identified by the customer ID.
 
         HTTP Method: GET
@@ -481,7 +490,7 @@ class FalconContainer(ServiceClass):
                                        *args,
                                        parameters: dict = None,
                                        **kwargs
-                                       ) -> Dict[str, Union[int, dict]]:
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve registry entities identified by the customer UUID.
 
         HTTP Method: GET
@@ -516,7 +525,11 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_registry_entities(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_registry_entities(self: object,
+                                 *args,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete the registry entity identified by the entity UUID.
 
         HTTP Method: DELETE
@@ -551,7 +564,11 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_export_jobs(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_export_jobs(self: object,
+                          *args,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query export job entities.
 
         HTTP Method: GET
@@ -587,7 +604,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_registry_entities(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_registry_entities(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a registry entity using the provided details.
 
         HTTP Method: POST
@@ -628,7 +645,7 @@ class FalconContainer(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_registry_entities(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_registry_entities(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the registry entity, as identified by the entity UUID, using the provided details.
 
         HTTP Method: PATCH

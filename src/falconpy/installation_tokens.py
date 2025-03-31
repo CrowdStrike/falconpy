@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import installation_token_payload, token_settings_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._installation_tokens import _installation_tokens_endpoints as Endpoints
 
@@ -56,7 +57,11 @@ class InstallationTokens(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def audit_events_read(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def audit_events_read(self: object,
+                          *args,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the details of one or more audit events by id.
 
         Keyword arguments:
@@ -81,7 +86,7 @@ class InstallationTokens(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    def customer_settings_read(self: object) -> Dict[str, Union[int, dict]]:
+    def customer_settings_read(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Check current installation token settings.
 
         This method does not accept arguments or keywords.
@@ -100,7 +105,7 @@ class InstallationTokens(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def tokens_read(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def tokens_read(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the details of one or more tokens by id.
 
         Keyword arguments:
@@ -126,7 +131,7 @@ class InstallationTokens(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def tokens_create(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def tokens_create(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a token.
 
         Keyword arguments:
@@ -162,7 +167,7 @@ class InstallationTokens(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def tokens_delete(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def tokens_delete(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a token immediately. To revoke a token, use PATCH tokens_update instead.
 
         Keyword arguments:
@@ -188,7 +193,11 @@ class InstallationTokens(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def tokens_update(self: object, body: dict, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def tokens_update(self: object,
+                      body: dict,
+                      parameters: dict = None,
+                      **kwargs
+                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update one or more tokens.
 
         Use this endpoint to edit labels, change expiration, revoke, or restore.
@@ -229,7 +238,7 @@ class InstallationTokens(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def audit_events_query(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def audit_events_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for audit events by providing an FQL filter and paging details.
 
         Keyword arguments:
@@ -260,7 +269,7 @@ class InstallationTokens(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def tokens_query(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def tokens_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for tokens by providing an FQL filter and paging details.
 
         Keyword arguments:

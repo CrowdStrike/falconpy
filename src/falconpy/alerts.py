@@ -41,6 +41,7 @@ from ._payload import (
     aggregate_payload, generic_payload_list, update_alerts_payload, combined_alerts_payload
     )
 from ._service_class import ServiceClass
+from ._result import Result
 from ._endpoint._alerts import _alerts_endpoints as Endpoints
 
 
@@ -58,7 +59,7 @@ class Alerts(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
-    def get_aggregate_alerts_v1(self, body: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_aggregate_alerts_v1(self, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregates for Alerts across all CIDs.
 
         DEPRECATED: Please use the get_aggregate_alerts_v2 method
@@ -149,7 +150,7 @@ class Alerts(ServiceClass):
                                 body: list = None,
                                 parameters: Optional[Dict[str, List[Union[str, Dict[str, str]]]]] = None,
                                 **kwargs
-                                ) -> Dict[str, Union[int, dict]]:
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve aggregates for Alerts across all CIDs.
 
         Keyword arguments:
@@ -238,7 +239,7 @@ class Alerts(ServiceClass):
     # PatchEntitiesAlertsV1 has been **DECOMISSIONED**
 
     # @force_default(defaults=["body"], default_types=["dict"])
-    # def update_alerts(self, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    # def update_alerts(self, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
     #     """Perform actions on alerts identified by detection ID(s) in request.
 
     #     Keyword arguments:
@@ -315,7 +316,7 @@ class Alerts(ServiceClass):
                          *args,
                          body: Optional[Dict[str, List[Union[str, Dict[str, str]]]]] = None,
                          **kwargs
-                         ) -> Dict[str, Union[int, dict]]:
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform actions on alerts identified by detection ID(s) in request.
 
         DEPRECATED: Please use the update_alerts_v3 (PatchEntitiesAlertsV3 operation) instead.
@@ -393,7 +394,7 @@ class Alerts(ServiceClass):
                          body: Optional[Dict[str, List[Union[str, Dict[str, str]]]]] = None,
                          parameters: Optional[Dict[str, List[Union[str, Dict[str, str]]]]] = None,
                          **kwargs
-                         ) -> Dict[str, Union[int, dict]]:
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform actions on alerts identified by detection ID(s) in request.
 
         Keyword arguments:
@@ -473,7 +474,7 @@ class Alerts(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_alerts_combined(self, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_alerts_combined(self, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve all Alerts that match a particular FQL filter.
 
         This API is intended for retrieval of large amounts of Alerts(>10k) using a pagination based on a `after` token.
@@ -551,7 +552,7 @@ class Alerts(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_alerts_v1(self, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_alerts_v1(self, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve all Alerts given their IDs.
 
         DEPRECATED: Please use the get_alerts_v2 method (PostEntitiesAlertsV1 operation) instead.
@@ -596,7 +597,7 @@ class Alerts(ServiceClass):
                       body: Optional[Dict[str, List[Union[str, Dict[str, str]]]]] = None,
                       parameters: Optional[Dict[str, List[Union[str, Dict[str, str]]]]] = None,
                       **kwargs
-                      ) -> Dict[str, Union[int, dict]]:
+                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve all Alerts given their IDs.
 
         Keyword arguments:
@@ -637,7 +638,7 @@ class Alerts(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_alerts_v1(self, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_alerts_v1(self, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for detection IDs that match a given query.
 
         DEPRECATED: Please use the query_alerts_v2 method (GetQueriesAlertsV2 operation) intead.
@@ -675,7 +676,7 @@ class Alerts(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_alerts_v2(self, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_alerts_v2(self, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for detection IDs that match a given query.
 
         Keyword arguments:

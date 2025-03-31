@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._container_detections import _container_detections_endpoints as Endpoints
 
@@ -59,7 +60,7 @@ class ContainerDetections(ServiceClass):
                                           *args,
                                           parameters: dict = None,
                                           **kwargs
-                                          ) -> Dict[str, Union[int, dict]]:
+                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate counts of detections by severity.
 
         Keyword arguments:
@@ -92,7 +93,11 @@ class ContainerDetections(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_detections_count_by_type(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_detections_count_by_type(self: object,
+                                      *args,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate counts of detections by detection type.
 
         Keyword arguments:
@@ -125,7 +130,11 @@ class ContainerDetections(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_detections_count(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_detections_count(self: object,
+                              *args,
+                              parameters: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of detections.
 
         Keyword arguments:
@@ -158,7 +167,10 @@ class ContainerDetections(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_combined_detections(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_combined_detections(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve image assessment detections identified by the provided filter criteria.
 
         Keyword arguments:
@@ -197,7 +209,10 @@ class ContainerDetections(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_runtime_detections(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_runtime_detections(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve image assessment detections identified by the provided filter criteria.
 
         Keyword arguments:
@@ -242,7 +257,7 @@ class ContainerDetections(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_detections(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_detections(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve image assessment detection entities identified by the provided filter criteria.
 
         Keyword arguments:
@@ -270,7 +285,7 @@ class ContainerDetections(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_detections(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_detections(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve image assessment detection entities identified by the provided filter criteria.
 
         Keyword arguments:

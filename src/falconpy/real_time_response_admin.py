@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import command_payload, data_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._real_time_response_admin import _real_time_response_admin_endpoints as Endpoints
 
@@ -60,7 +61,7 @@ class RealTimeResponseAdmin(ServiceClass):
                             body: dict = None,
                             parameters: dict = None,
                             **kwargs
-                            ) -> Dict[str, Union[int, dict]]:
+                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Batch executes a RTR administrator command across the hosts mapped to a given batch ID.
 
         Keyword arguments:
@@ -115,7 +116,11 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def check_admin_command_status(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def check_admin_command_status(self: object,
+                                   *args,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get status of an executed RTR administrator command on a single host.
 
         Keyword arguments:
@@ -147,7 +152,7 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def execute_admin_command(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_admin_command(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute a RTR administrator command on a single host.
 
         Keyword arguments:
@@ -190,7 +195,11 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_falcon_scripts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_falcon_scripts(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Falcon scripts with metadata and content of script.
 
         Keyword arguments:
@@ -216,7 +225,7 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_put_files(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_put_files(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get put-files based on the ID's given. These are used for the RTR `put` command.
 
         Keyword arguments:
@@ -242,7 +251,11 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_put_files_v2(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_put_files_v2(self: object,
+                         *args,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get put-files based on the ID's given. These are used for the RTR `put` command.
 
         Keyword arguments:
@@ -268,7 +281,11 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["data"], default_types=["dict"])
-    def create_put_files(self: object, files: list, data: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_put_files(self: object,
+                         files: list,
+                         data: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a new put-file to use for the RTR `put` command.
 
         Keyword arguments:
@@ -305,7 +322,11 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_put_files(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_put_files(self: object,
+                         *args,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a put-file based on the ID given. Can only delete one file at a time.
 
         Keyword arguments:
@@ -331,7 +352,7 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scripts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_scripts(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get custom-scripts based on the ID's given.
 
         These are used for the RTR `runscript` command.
@@ -359,7 +380,7 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scripts_v2(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_scripts_v2(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get custom-scripts based on the ID's given.
 
         These are used for the RTR `runscript` command.
@@ -387,7 +408,11 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["data", "files"], default_types=["dict", "list"])
-    def create_scripts(self: object, data: dict = None, files: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_scripts(self: object,
+                       data: dict = None,
+                       files: list = None,
+                       **kwargs
+                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a new custom-script to use for the RTR `runscript` command.
 
         Keyword arguments:
@@ -435,7 +460,7 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_scripts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_scripts(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a custom-script based on the ID given. Can only delete one script at a time.
 
         Keyword arguments:
@@ -461,7 +486,11 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["data", "files"], default_types=["dict", "list"])
-    def update_scripts(self: object, data: dict = None, files: list = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_scripts(self: object,
+                       data: dict = None,
+                       files: list = None,
+                       **kwargs
+                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload a new scripts to replace an existing one.
 
         Keyword arguments:
@@ -511,7 +540,7 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def list_falcon_scripts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def list_falcon_scripts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of Falcon script IDs available to the user to run.
 
         Keyword arguments:
@@ -541,7 +570,7 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def list_put_files(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def list_put_files(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of put-file ID's that are available to the user for the `put` command.
 
         Keyword arguments:
@@ -571,7 +600,7 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def list_scripts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def list_scripts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of custom-script ID's that are available for the `runscript` command.
 
         Only displays scripts the user has permissions to access.

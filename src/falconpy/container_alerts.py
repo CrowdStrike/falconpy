@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._container_alerts import _container_alerts_endpoints as Endpoints
 
@@ -55,7 +56,11 @@ class ContainerAlerts(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_counts_by_severity(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_counts_by_severity(self: object,
+                                *args,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get container alert counts by severity.
 
         Keyword arguments:
@@ -82,7 +87,7 @@ class ContainerAlerts(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_counts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_counts(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search Container Alerts by the provided search criteria.
 
         Keyword arguments:
@@ -109,7 +114,7 @@ class ContainerAlerts(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_and_read(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_and_read(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search Container Alerts by the provided search criteria.
 
         Keyword arguments:

@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._real_time_response_audit import _real_time_response_audit_endpoints as Endpoints
 
@@ -55,7 +56,7 @@ class RealTimeResponseAudit(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def audit_sessions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def audit_sessions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all the RTR sessions created for a customer during a specified time period.
 
         Keyword arguments:

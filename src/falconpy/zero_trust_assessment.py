@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._zero_trust_assessment import _zero_trust_assessment_endpoints as Endpoints
 
@@ -55,7 +56,7 @@ class ZeroTrustAssessment(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_assessment(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_assessment(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Zero Trust Assessment data for one or more hosts by providing agent IDs (AID).
 
         Keyword arguments:
@@ -81,7 +82,7 @@ class ZeroTrustAssessment(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-    def get_audit(self: object) -> Dict[str, Union[int, dict]]:
+    def get_audit(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the Zero Trust Assessment audit report for one customer ID (CID).
 
         This method does not accept arguments.

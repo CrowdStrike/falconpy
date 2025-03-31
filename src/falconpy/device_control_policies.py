@@ -47,6 +47,7 @@ from ._payload import (
     device_policy_bluetooth_config_payload,
     device_control_policy_payload_v2
     )
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._device_control_policies import _device_control_policies_endpoints as Endpoints
 
@@ -65,7 +66,10 @@ class DeviceControlPolicies(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_policy_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_combined_policy_members(self: object,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for a Device Control Policy members and return full detail.
 
         Search for members of a Device Control Policy in your environment by
@@ -101,7 +105,10 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_combined_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_combined_policies(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for a Device Control Policies and return full detail.
 
         Search for Device Control Policies in your environment by providing an FQL filter and
@@ -218,7 +225,11 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
-    def perform_action(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def perform_action(self: object,
+                       body: dict = None,
+                       parameters: dict = None,
+                       **kwargs
+                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform a Device Control Policy action.
 
         Keyword arguments:
@@ -286,7 +297,7 @@ class DeviceControlPolicies(ServiceClass):
         return returned
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policy_classes(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_policy_classes(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update device control policy's classes (USB and Bluetooth).
 
         Keyword arguments:
@@ -383,7 +394,7 @@ class DeviceControlPolicies(ServiceClass):
             body=body
             )
 
-    def get_default_settings(self: object) -> Dict[str, Union[int, dict]]:
+    def get_default_settings(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get default device control settings (USB and Bluetooth).
 
         Keyword arguments:
@@ -407,7 +418,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_default_settings(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_default_settings(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the configuration for Default Device Control Settings.
 
         Keyword arguments:
@@ -477,7 +488,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def set_precedence(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def set_precedence(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Set Device Control Policy precedence.
 
         Sets the precedence of Device Control Policies based on the order of IDs specified in
@@ -519,7 +530,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a set of Device Control Policies by specifying their IDs.
 
         Keyword arguments:
@@ -546,7 +557,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Device Control Policies by specifying details about the policy to create.
 
         Keyword arguments:
@@ -630,7 +641,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a set of Device Control Policies by specifying their IDs.
 
         Keyword arguments:
@@ -657,7 +668,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_policies_v2(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_policies_v2(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get device control policies for the given filter criteria. Supports USB and Bluetooth.
 
         Keyword arguments:
@@ -684,7 +695,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_policies_v2(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_policies_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Device Control Policies by specifying details about the policy to create.
 
         Keyword arguments:
@@ -755,7 +766,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policies_v2(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_policies_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create Device Control Policies by specifying details about the policy to create.
 
         Keyword arguments:
@@ -826,7 +837,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_policies(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_policies(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update Device Control Policies by specifying the ID of the policy and details to update.
 
         Keyword arguments:
@@ -908,7 +919,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_policy_members(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for a Device Control Policy members and return their IDs.
 
         Search for members of a Device Control Policy in your environment by providing
@@ -944,7 +955,7 @@ class DeviceControlPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_policies(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for a Device Control Policies and return their IDs.
 
         Search for Device Control Policies in your environment by providing an

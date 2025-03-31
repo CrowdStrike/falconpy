@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._configuration_assessment_evaluation_logic import (
     _configuration_assessment_evaluation_logic_endpoints as Endpoints
@@ -57,7 +58,11 @@ class ConfigurationAssessmentEvaluationLogic(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_evaluation_logic(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_evaluation_logic(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on evaluation logic items by providing one or more finding IDs.
 
         Keyword arguments:

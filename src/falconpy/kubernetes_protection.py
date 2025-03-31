@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 # pylint: disable=C0302, R0904
 from typing import Dict, Union
 from ._util import process_service_request, force_default, handle_single_argument
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._kubernetes_protection import _kubernetes_protection_endpoints as Endpoints
 
@@ -55,7 +56,7 @@ class KubernetesProtection(ServiceClass):
     - a valid token provided by the authentication service class (OAuth2.token())
     """
 
-    def read_clusters_by_date_range(self: object) -> Dict[str, Union[int, dict]]:
+    def read_clusters_by_date_range(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve clusters by date range counts.
 
         Keyword arguments:
@@ -77,7 +78,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_clusters_by_version(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_clusters_by_version(self: object,
+                                 *args,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Bucket clusters by kubernetes version.
 
         Keyword arguments:
@@ -116,7 +121,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_clusters_by_status(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_clusters_by_status(self: object,
+                                *args,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Bucket clusters by status.
 
         Keyword arguments:
@@ -154,7 +163,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_cluster_count(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_cluster_count(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve cluster counts.
 
         Keyword arguments:
@@ -192,7 +205,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_containers_by_date_range(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_containers_by_date_range(self: object,
+                                      *args,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve containers by date range counts.
 
         Keyword arguments:
@@ -240,7 +257,10 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_containers_by_registry(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_containers_by_registry(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve top container image registries.
 
         Keyword arguments:
@@ -266,7 +286,7 @@ class KubernetesProtection(ServiceClass):
             params=parameters
             )
 
-    def read_zero_day_affected_counts(self: object) -> Dict[str, Union[int, dict]]:
+    def read_zero_day_affected_counts(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve containers count affected by zero day vulnerabilities.
 
         Keyword arguments:
@@ -293,7 +313,7 @@ class KubernetesProtection(ServiceClass):
                                         *args,
                                         parameters: dict = None,
                                         **kwargs
-                                        ) -> Dict[str, Union[int, dict]]:
+                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve count of vulnerable images running on containers.
 
         Keyword arguments:
@@ -342,7 +362,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_container_counts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_container_counts(self: object,
+                              *args,
+                              parameters: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve container counts.
 
         Keyword arguments:
@@ -390,7 +414,10 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def find_containers_by_runtime_version(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def find_containers_by_runtime_version(self: object,
+                                           parameters: dict = None,
+                                           **kwargs
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve containers by container_runtime_version.
 
         Keyword arguments:
@@ -429,7 +456,8 @@ class KubernetesProtection(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/FindContainersByContainerRunTimeVersion
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /kubernetes-protection/FindContainersByContainerRunTimeVersion
         """
         return process_service_request(
             calling_object=self,
@@ -440,7 +468,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def group_managed_containers(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def group_managed_containers(self: object,
+                                 *args,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Group the containers by Managed.
 
         Keyword arguments:
@@ -488,7 +520,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_detections_count_by_date(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_detections_count_by_date(self: object,
+                                      *args,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve count of image assessment detections on running containers over a period of time.
 
         Keyword arguments:
@@ -537,7 +573,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_images_by_state(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_images_by_state(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve count of image states running on containers.
 
         Keyword arguments:
@@ -564,7 +604,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_sensor_coverage(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_sensor_coverage(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Bucket containers by agent type and calculate sensor coverage.
 
         Keyword arguments:
@@ -612,7 +656,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_namespace_count(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_namespace_count(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Bucket containers by agent type and calculate sensor coverage.
 
         Keyword arguments:
@@ -646,7 +694,7 @@ class KubernetesProtection(ServiceClass):
             params=handle_single_argument(args, parameters, "filter")
             )
 
-    def read_namespaces_by_date_range_count(self: object) -> Dict[str, Union[int, dict]]:
+    def read_namespaces_by_date_range_count(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve namespaces by date range count.
 
         Keyword arguments:
@@ -672,7 +720,7 @@ class KubernetesProtection(ServiceClass):
                                               *args,
                                               parameters: dict = None,
                                               **kwargs
-                                              ) -> Dict[str, Union[int, dict]]:
+                                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve container vulnerabilities by severity counts.
 
         Keyword arguments:
@@ -720,7 +768,7 @@ class KubernetesProtection(ServiceClass):
             params=handle_single_argument(args, parameters, "filter")
             )
 
-    def read_deployment_counts_by_date_range(self: object) -> Dict[str, Union[int, dict]]:
+    def read_deployment_counts_by_date_range(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve deployments by date range counts.
 
         Keyword arguments:
@@ -742,7 +790,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_deployment_count(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_deployment_count(self: object,
+                              *args,
+                              parameters: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve deployment counts.
 
         Keyword arguments:
@@ -776,7 +828,10 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_cluster_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_cluster_enrichment(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve cluster enrichment data.
 
         Keyword arguments:
@@ -802,7 +857,10 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_container_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_container_enrichment(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve container enrichment data.
 
         Keyword arguments:
@@ -828,7 +886,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_pod_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_pod_enrichment(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve pod enrichment data.
 
         Keyword arguments:
@@ -854,7 +912,10 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_deployment_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_deployment_enrichment(self: object,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve container enrichment data.
 
         Keyword arguments:
@@ -880,7 +941,10 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_node_enrichment(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_node_enrichment(self: object,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve node enrichment data.
 
         Keyword arguments:
@@ -906,7 +970,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_distinct_image_count(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_distinct_image_count(self: object,
+                                  *args,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve count of distinct images running on containers.
 
         Keyword arguments:
@@ -954,7 +1022,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_images_by_most_used(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_images_by_most_used(self: object,
+                                 *args,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Bucket container by image-digest.
 
         Keyword arguments:
@@ -1002,7 +1074,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_iom_count_by_date_range(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_iom_count_by_date_range(self: object,
+                                     *args,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the count of Kubernetes IOMs by the date. by default it's for 7 days.
 
         Keyword arguments:
@@ -1029,7 +1105,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_iom_count(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_iom_count(self: object,
+                       *args,
+                       parameters: dict = None,
+                       **kwargs
+                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the total count of Kubernetes IOMs over the past seven days.
 
         Keyword arguments:
@@ -1056,7 +1136,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_node_counts_by_cloud(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_node_counts_by_cloud(self: object,
+                                  *args,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Bucket nodes by cloud providers.
 
         Keyword arguments:
@@ -1095,7 +1179,7 @@ class KubernetesProtection(ServiceClass):
                                                *args,
                                                parameters: dict = None,
                                                **kwargs
-                                               ) -> Dict[str, Union[int, dict]]:
+                                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Bucket nodes by their container engine version.
 
         Keyword arguments:
@@ -1131,7 +1215,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_node_counts_by_date_range(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_node_counts_by_date_range(self: object,
+                                       *args,
+                                       parameters: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve nodes by date range counts.
 
         Keyword arguments:
@@ -1166,7 +1254,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_node_counts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_node_counts(self: object,
+                         *args,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve node counts.
 
         Keyword arguments:
@@ -1200,7 +1292,7 @@ class KubernetesProtection(ServiceClass):
             params=handle_single_argument(args, parameters, "filter")
             )
 
-    def read_pod_counts_by_date_range(self: object) -> Dict[str, Union[int, dict]]:
+    def read_pod_counts_by_date_range(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve pods by date range counts.
 
         Keyword arguments:
@@ -1222,7 +1314,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_pod_counts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_pod_counts(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve pod counts.
 
         Keyword arguments:
@@ -1263,7 +1355,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_clusters_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_clusters_combined(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve kubernetes clusters identified by the provided filter criteria.
 
         Keyword arguments:
@@ -1301,7 +1393,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_running_images(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_running_images(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve images on running containers.
 
         Keyword arguments:
@@ -1336,7 +1428,10 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_containers_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_containers_combined(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve containers identified by the provided filter criteria.
 
         Keyword arguments:
@@ -1386,7 +1481,10 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_deployments_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_deployments_combined(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve kubernetes deployments identified by the provided filter criteria.
 
         Keyword arguments:
@@ -1422,7 +1520,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_and_read_ioms(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_and_read_ioms(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search Kubernetes IOM by the provided search criteria.
 
         Keyword arguments:
@@ -1459,7 +1557,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_nodes_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_nodes_combined(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve kubernetes nodes identified by the provided filter criteria.
 
         Keyword arguments:
@@ -1496,7 +1594,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_pods_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_pods_combined(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve kubernetes pods identified by the provided filter criteria.
 
         Keyword arguments:
@@ -1539,7 +1637,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_iom_entities(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_iom_entities(self: object,
+                          *args,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Kubernetes IOM entities identified by the provided IDs.
 
         Keyword arguments:
@@ -1565,7 +1667,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_ioms(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_ioms(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search Kubernetes IOMs by the provided search criteria.
 
         This endpoint returns a list of Kubernetes IOM UUIDs matching the query.
@@ -1603,7 +1705,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_aws_accounts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_aws_accounts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Provide a list of AWS accounts.
 
         Keyword arguments:
@@ -1634,7 +1736,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_aws_account(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_aws_account(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new AWS customer account in our system and generates the installation script.
 
         Keyword arguments:
@@ -1675,7 +1777,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_aws_accounts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_aws_accounts(self: object,
+                            *args,
+                            parameters: dict = None,
+                            **kwargs
+                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete AWS accounts.
 
         Keyword arguments:
@@ -1701,7 +1807,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def update_aws_account(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_aws_account(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the AWS account per the query parameters provided.
 
         Keyword arguments:
@@ -1727,7 +1833,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def list_azure_accounts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def list_azure_accounts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Provide a list of registered Azure subscriptions.
 
         Keyword arguments:
@@ -1759,7 +1865,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_azure_subscription(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def create_azure_subscription(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new Azure subscription.
 
         Keyword arguments:
@@ -1800,7 +1906,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_azure_subscription(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def delete_azure_subscription(self: object,
+                                  *args,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete an Azure subscription.
 
         Keyword arguments:
@@ -1826,7 +1936,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_locations(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_locations(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Provide the cloud locations acknowledged by the Kubernetes Protection service.
 
         Keyword arguments:
@@ -1852,7 +1962,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_cloud_clusters(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_cloud_clusters(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return a combined list of provisioned cloud accounts and known kubernetes clusters.
 
         Keyword arguments:
@@ -1882,7 +1992,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_azure_tenant_config(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_azure_tenant_config(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the Azure tenant config.
 
         Keyword arguments:
@@ -1909,7 +2019,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_azure_tenant_ids(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_azure_tenant_ids(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Provide all the azure subscriptions and tenants.
 
         Keyword arguments:
@@ -1937,7 +2047,10 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_azure_install_script(self: object, parameters: dict = None, **kwargs) -> dict:
+    def get_azure_install_script(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Provide the script to run for a given tenant id and subscription IDs.
 
         Keyword arguments:
@@ -1963,7 +2076,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_static_scripts(self: object, parameters: dict = None) -> dict:
+    def get_static_scripts(self: object, parameters: dict = None) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get static bash scripts that are used during registration.
 
         This method does not accept arguments or keywords.
@@ -1983,7 +2096,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_helm_values_yaml(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_helm_values_yaml(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Provide a sample Helm values.yaml file to install alongside the agent Helm chart.
 
         Keyword arguments:
@@ -2011,7 +2128,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def regenerate(self: object, body: dict = None) -> Dict[str, Union[int, dict]]:
+    def regenerate(self: object, body: dict = None) -> Union[Dict[str, Union[int, dict]], Result]:
         """Regenerate API key for docker registry integrations.
 
         Keyword arguments:
@@ -2034,7 +2151,7 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_clusters(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_clusters(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Provide the clusters acknowledged by the Kubernetes Protection service.
 
         Keyword arguments:
@@ -2073,7 +2190,7 @@ class KubernetesProtection(ServiceClass):
                      body: dict = None,
                      parameters: dict = None,
                      **kwargs
-                     ) -> Dict[str, Union[int, dict]]:
+                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Trigger a dry run or a full scan of a customer's kubernetes footprint.
 
         Keyword arguments:
@@ -2102,7 +2219,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def update_azure_service_principal(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_azure_service_principal(self: object,
+                                       *args,
+                                       parameters: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Add the client ID for a given tenant ID to the subscription.
 
         Keyword arguments:

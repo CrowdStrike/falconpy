@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request
 from ._payload import api_plugin_command_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._api_integrations import _api_integrations_endpoints as Endpoints
 
@@ -56,7 +57,7 @@ class APIIntegrations(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_plugin_configs(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_plugin_configs(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for config resources and returns details.
 
         Keyword arguments:
@@ -86,7 +87,7 @@ class APIIntegrations(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def execute_command_proxy(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_command_proxy(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute a command and proxy the response directly.
 
         Keyword arguments:
@@ -151,7 +152,7 @@ class APIIntegrations(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def execute_command(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def execute_command(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Execute a command.
 
         Keyword arguments:

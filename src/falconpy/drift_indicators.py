@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._drift_indicators import _drift_indicators_endpoints as Endpoints
 
@@ -55,7 +56,10 @@ class DriftIndicators(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_drift_indicators_by_date(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_drift_indicators_by_date(self: object,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the count of Drift Indicators by the date. by default it's for 7 days.
 
         Keyword arguments:
@@ -90,7 +94,10 @@ class DriftIndicators(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_drift_indicator_counts(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_drift_indicator_counts(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the total count of Drift indicators over a time period.
 
         Keyword arguments:
@@ -124,7 +131,10 @@ class DriftIndicators(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_and_read_drift_indicators(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_and_read_drift_indicators(self: object,
+                                         parameters: dict = None,
+                                         **kwargs
+                                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Drift Indicators by the provided search criteria.
 
         Keyword arguments:
@@ -165,7 +175,7 @@ class DriftIndicators(ServiceClass):
                                       *args,
                                       parameters: dict = None,
                                       **kwargs
-                                      ) -> Dict[str, Union[int, dict]]:
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve Drift Indicator entities identified by the provided IDs.
 
         Keyword arguments:
@@ -191,7 +201,10 @@ class DriftIndicators(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_drift_indicators(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def search_drift_indicators(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve all drift indicators that match the given query.
 
         Keyword arguments:

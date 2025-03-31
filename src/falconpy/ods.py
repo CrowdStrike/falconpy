@@ -35,12 +35,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Union, Dict
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import (
     generic_payload_list,
     aggregate_payload,
     scheduled_scan_payload,
     )
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._ods import _ods_endpoints as Endpoints
 
@@ -59,7 +61,7 @@ class ODS(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_scan_hosts(self: object, body: list = None, **kwargs) -> dict:
+    def aggregate_scan_hosts(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get aggregates on ODS scan-hosts data.
 
         Keyword arguments:
@@ -142,7 +144,7 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_scans(self: object, body: list = None, **kwargs) -> dict:
+    def aggregate_scans(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get aggregates on ODS scan data.
 
         Keyword arguments:
@@ -225,7 +227,7 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["list"])
-    def aggregate_scheduled_scans(self: object, body: list = None, **kwargs) -> dict:
+    def aggregate_scheduled_scans(self: object, body: list = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get aggregates on ODS scheduled-scan data.
 
         Keyword arguments:
@@ -308,7 +310,11 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_malicious_files(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_malicious_files(self: object,
+                            *args,
+                            parameters: dict = None,
+                            **kwargs
+                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve malicious files by IDs.
 
         Keyword arguments:
@@ -334,7 +340,7 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def cancel_scans(self: object, *args, body: dict = None, **kwargs) -> dict:
+    def cancel_scans(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Cancel ODS scans for the given scan IDs.
 
         Keyword arguments:
@@ -370,7 +376,7 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scan_hosts(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_scan_hosts(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scan hosts by IDs.
 
         Keyword arguments:
@@ -397,7 +403,7 @@ class ODS(ServiceClass):
 
     # This operation is no longer available
     # @force_default(defaults=["body"], default_types=["dict"])
-    # def scans_report(self: object, body: dict = None, **kwargs) -> dict:
+    # def scans_report(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
     #     """Launch a scans report creation job.
 
     #     Keyword arguments:
@@ -439,7 +445,7 @@ class ODS(ServiceClass):
     #         )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scans_v1(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_scans_v1(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scans by IDs.
 
         Keyword arguments:
@@ -465,7 +471,7 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scans(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_scans(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scans by IDs.
 
         Keyword arguments:
@@ -491,7 +497,7 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_scan(self: object, body: dict = None, **kwargs) -> dict:
+    def create_scan(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create ODS scan and start it.
 
         Keyword arguments:
@@ -566,7 +572,11 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scheduled_scans(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def get_scheduled_scans(self: object,
+                            *args,
+                            parameters: dict = None,
+                            **kwargs
+                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scheduled scans by IDs.
 
         Keyword arguments:
@@ -592,7 +602,7 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def schedule_scan(self: object, body: dict = None, **kwargs) -> dict:
+    def schedule_scan(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create ODS scan and start or schedule scan for the given scan request.
 
         Keyword arguments:
@@ -678,7 +688,11 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_scheduled_scans(self: object, *args, parameters: dict = None, **kwargs) -> dict:
+    def delete_scheduled_scans(self: object,
+                               *args,
+                               parameters: dict = None,
+                               **kwargs
+                               ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete ODS scheduled scans for the given IDs.
 
         Keyword arguments:
@@ -705,7 +719,7 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_malicious_files(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_malicious_files(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for malicious files.
 
         Keyword arguments:
@@ -746,7 +760,7 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_scan_hosts(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_scan_hosts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for scan hosts.
 
         Keyword arguments:
@@ -790,7 +804,7 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_scans(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_scans(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for scans.
 
         Keyword arguments:
@@ -837,7 +851,7 @@ class ODS(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_scheduled_scans(self: object, parameters: dict = None, **kwargs) -> dict:
+    def query_scheduled_scans(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query for scheduled scans.
 
         Keyword arguments:

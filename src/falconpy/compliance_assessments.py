@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 from typing import Dict, Union
 from ._util import force_default, process_service_request
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._compliance_assessments import _compliance_assessments_endpoints as Endpoints
 
@@ -56,7 +57,10 @@ class ComplianceAssessments(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_cluster_assessments(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_cluster_assessments(self: object,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the assessments for each cluster.
 
         Keyword arguments:
@@ -88,7 +92,10 @@ class ComplianceAssessments(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_image_assessments(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_image_assessments(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the assessments for each cluster.
 
         Keyword arguments:
@@ -133,7 +140,10 @@ class ComplianceAssessments(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_rules_assessments(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_rules_assessments(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the assessments for each rule.
 
         Keyword arguments:
@@ -173,7 +183,10 @@ class ComplianceAssessments(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_failed_containers_by_rules(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_failed_containers_by_rules(self: object,
+                                             parameters: dict = None,
+                                             **kwargs
+                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the containers grouped into rules on which they failed.
 
         Keyword arguments:
@@ -215,7 +228,9 @@ class ComplianceAssessments(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def aggregate_failed_containers_count_by_severity(self: object,
-                                                      parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+                                                      parameters: dict = None,
+                                                      **kwargs
+                                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the failed containers count grouped into severity levels.
 
         Keyword arguments:
@@ -256,7 +271,10 @@ class ComplianceAssessments(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_failed_images_by_rules(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_failed_images_by_rules(self: object,
+                                         parameters: dict = None,
+                                         **kwargs
+                                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the images grouped into rules on which they failed.
 
         Keyword arguments:
@@ -298,7 +316,9 @@ class ComplianceAssessments(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def aggregate_failed_images_count_by_severity(self: object,
-                                                  parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+                                                  parameters: dict = None,
+                                                  **kwargs
+                                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the failed images count grouped into severity levels.
 
         Keyword arguments:
@@ -339,7 +359,10 @@ class ComplianceAssessments(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_failed_rules_by_clusters(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_failed_rules_by_clusters(self: object,
+                                           parameters: dict = None,
+                                           **kwargs
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the failed rules for each cluster grouped into severity levels.
 
         Keyword arguments:
@@ -380,7 +403,10 @@ class ComplianceAssessments(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_failed_rules_by_image(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_failed_rules_by_image(self: object,
+                                        parameters: dict = None,
+                                        **kwargs
+                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get images with failed rules, rule count grouped by severity for each image.
 
         Keyword arguments:
@@ -423,7 +449,9 @@ class ComplianceAssessments(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def aggregate_failed_rules_count_by_severity(self: object,
-                                                 parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+                                                 parameters: dict = None,
+                                                 **kwargs
+                                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the failed rules count grouped into severity levels.
 
         Keyword arguments:
@@ -464,7 +492,10 @@ class ComplianceAssessments(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def aggregate_rules_by_status(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def aggregate_rules_by_status(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the rules grouped by their statuses.
 
         Keyword arguments:

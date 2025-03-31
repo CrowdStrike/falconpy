@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._container_packages import _container_packages_endpoints as Endpoints
 
@@ -55,7 +56,10 @@ class ContainerPackages(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_packages_by_image_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_packages_by_image_count(self: object,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve the N most frequently used packages across images.
 
         Keyword arguments:
@@ -85,7 +89,11 @@ class ContainerPackages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_zero_day_counts(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_zero_day_counts(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve packages count affected by zero day vulnerabilities.
 
         Keyword arguments:
@@ -111,7 +119,10 @@ class ContainerPackages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_fixable_vuln_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_fixable_vuln_count(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve top x app packages with the most fixable vulnerabilities.
 
         Keyword arguments:
@@ -144,7 +155,7 @@ class ContainerPackages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_vuln_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_vuln_count(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve top x packages with the most vulnerabilities.
 
         Keyword arguments:
@@ -177,7 +188,7 @@ class ContainerPackages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_combined_export(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_combined_export(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve packages identified by the provided filter criteria for the purpose of export.
 
         Keyword arguments:
@@ -213,7 +224,7 @@ class ContainerPackages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_combined(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_combined(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve packages identified by the provided filter criteria.
 
         Keyword arguments:
@@ -249,7 +260,7 @@ class ContainerPackages(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_packages(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_packages(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve packages identified by the provided filter criteria.
 
         Keyword arguments:

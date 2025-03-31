@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import generic_payload_list, aggregate_payload
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._quick_scan import _quick_scan_endpoints as Endpoints
 
@@ -56,7 +57,7 @@ class QuickScan(ServiceClass):
     """
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_scans_aggregates(self: object, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_scans_aggregates(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scans aggregations as specified via json in request body.
 
         Keyword arguments:
@@ -126,7 +127,7 @@ class QuickScan(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_scans(self: object, *args, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_scans(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Check the status of a volume scan.
 
         Time required for analysis increases with the number of samples in a volume
@@ -155,7 +156,7 @@ class QuickScan(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def scan_samples(self: object, *args, body: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def scan_samples(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get scans aggregations as specified via json in request body.
 
         Keyword arguments:
@@ -194,7 +195,7 @@ class QuickScan(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_submissions(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def query_submissions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Find IDs for submitted scans by providing an FQL filter and paging details.
 
         Returns a set of volume IDs that match your criteria.

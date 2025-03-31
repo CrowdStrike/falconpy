@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._container_vulnerabilities import _container_vulnerabilities_endpoints as Endpoints
 
@@ -58,7 +59,7 @@ class ContainerVulnerabilities(ServiceClass):
     def read_vulnerability_counts_by_active_exploited(self: object,
                                                       parameters: dict = None,
                                                       **kwargs
-                                                      ) -> Dict[str, Union[int, dict]]:
+                                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of vulnerabilities grouped by actively exploited.
 
         Keyword arguments:
@@ -101,7 +102,7 @@ class ContainerVulnerabilities(ServiceClass):
     def read_vulnerability_counts_by_cps_rating(self: object,
                                                 parameters: dict = None,
                                                 **kwargs
-                                                ) -> Dict[str, Union[int, dict]]:
+                                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of vulnerabilities grouped by csp_rating.
 
         Keyword arguments:
@@ -144,7 +145,7 @@ class ContainerVulnerabilities(ServiceClass):
     def read_vulnerability_counts_by_cvss_score(self: object,
                                                 parameters: dict = None,
                                                 **kwargs
-                                                ) -> Dict[str, Union[int, dict]]:
+                                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of vulnerabilities grouped by cvss score.
 
         Keyword arguments:
@@ -184,7 +185,10 @@ class ContainerVulnerabilities(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_vulnerability_counts_by_severity(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_vulnerability_counts_by_severity(self: object,
+                                              parameters: dict = None,
+                                              **kwargs
+                                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of vulnerabilities grouped by severity.
 
         Keyword arguments:
@@ -224,7 +228,10 @@ class ContainerVulnerabilities(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_vulnerability_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_vulnerability_count(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Aggregate count of vulnerabilities.
 
         Keyword arguments:
@@ -263,7 +270,10 @@ class ContainerVulnerabilities(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_vulnerabilities_by_count(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_vulnerabilities_by_count(self: object,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve top x vulnerabilities with the most impacted images.
 
         Keyword arguments:
@@ -292,7 +302,10 @@ class ContainerVulnerabilities(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_vulnerabilities_by_pub_date(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_vulnerabilities_by_pub_date(self: object,
+                                         parameters: dict = None,
+                                         **kwargs
+                                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve top x vulnerabilities with the most recent publication date.
 
         Keyword arguments:
@@ -321,7 +334,10 @@ class ContainerVulnerabilities(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_combined_vulnerability_detail(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_combined_vulnerability_detail(self: object,
+                                           parameters: dict = None,
+                                           **kwargs
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve vulnerability details related to an image.
 
         Keyword arguments:
@@ -356,7 +372,10 @@ class ContainerVulnerabilities(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_combined_vulnerabilities_info(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_combined_vulnerabilities_info(self: object,
+                                           parameters: dict = None,
+                                           **kwargs
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve vulnerability and package related info for this customer.
 
         Keyword arguments:
@@ -384,7 +403,10 @@ class ContainerVulnerabilities(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_combined_vulnerabilities(self: object, parameters: dict = None, **kwargs) -> Dict[str, Union[int, dict]]:
+    def read_combined_vulnerabilities(self: object,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve vulnerability and aggregate data filtered by the provided FQL.
 
         Keyword arguments:

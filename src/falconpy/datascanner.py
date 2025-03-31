@@ -38,6 +38,7 @@ For more information, please refer to <https://unlicense.org>
 import json
 from typing import Dict, Union
 from ._util import process_service_request, generate_error_result
+from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._datascanner import _datascanner_endpoints as Endpoints
 
@@ -55,7 +56,7 @@ class DataScanner(ServiceClass):
     - a valid token provided by the authentication service class (oauth2.py)
     """
 
-    def get_image_registry_credentials(self: object) -> Dict[str, Union[int, dict]]:
+    def get_image_registry_credentials(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve credentials in order to fetch a data scanner image.
 
         Keyword arguments:
@@ -77,7 +78,7 @@ class DataScanner(ServiceClass):
             operation_id="get_image_registry_credentials"
             )
 
-    def get_data_scanner_tasks(self: object, **kwargs) -> Dict[str, Union[int, dict]]:
+    def get_data_scanner_tasks(self: object, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve pending data scanner tasks.
 
         Keyword arguments:
@@ -105,7 +106,7 @@ class DataScanner(ServiceClass):
             headers=header_payload
             )
 
-    def update_data_scanner_tasks(self: object, **kwargs) -> Dict[str, Union[int, dict]]:
+    def update_data_scanner_tasks(self: object, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve task status from the data scanner.
 
         Keyword arguments:
@@ -138,7 +139,7 @@ class DataScanner(ServiceClass):
             headers=header_payload
             )
 
-    def handle(self: object) -> Dict[str, Union[int, dict]]:
+    def handle(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
         """Produce input messages for the corresponding Kafka topic.
 
         Keyword arguments:
