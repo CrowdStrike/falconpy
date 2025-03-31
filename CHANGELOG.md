@@ -361,6 +361,46 @@
     - _ReadRegistryEntities_
     - `_endpoint/_falcon_container.py`
 
++ Updated: Cosmetic update to parameter and operation descriptions in 37 operations within the __Kubernetes Protection__ service collection.
+    - _ReadClustersByKubernetesVersionCount_
+    - _ReadClustersByStatusCount_
+    - _ReadClusterCount_
+    - _ReadContainersByDateRangeCount_
+    - _ReadContainerCountByRegistry_
+    - _ReadVulnerableContainerImageCount_
+    - _ReadContainerCount_
+    - _FindContainersByContainerRunTimeVersion_
+    - _GroupContainersByManaged_
+    - _ReadContainerImageDetectionsCountByDate_
+    - _ReadContainerImagesByState_
+    - _ReadContainersSensorCoverage_
+    - _ReadContainerVulnerabilitiesBySeverityCount_
+    - _ReadDeploymentCount_
+    - _ReadClusterEnrichment_
+    - _ReadContainerEnrichment_
+    - _ReadDeploymentEnrichment_
+    - _ReadNodeEnrichment_
+    - _ReadPodEnrichment_
+    - _ReadDistinctContainerImageCount_
+    - _ReadContainerImagesByMostUsed_
+    - _ReadKubernetesIomByDateRange_
+    - _ReadKubernetesIomCount_
+    - _ReadNamespaceCount_
+    - _ReadNodesByCloudCount_
+    - _ReadNodesByContainerEngineVersionCount_
+    - _ReadNodesByDateRangeCount_
+    - _ReadNodeCount_
+    - _ReadPodCount_
+    - _ReadClusterCombined_
+    - _ReadRunningContainerImages_
+    - _ReadContainerCombined_
+    - _ReadDeploymentCombined_
+    - _SearchAndReadKubernetesIomEntities_
+    - _ReadNodeCombined_
+    - _ReadPodCombined_
+    - _SearchKubernetesIoms_
+    - `_endpoint/_kubernetes_protection.py`
+
 + Updated: Cosmetic updates to the `filter`, `ifn_regex`, and `cl_regex` parameter descriptions in 1 operation within the __IOA Exclusions__ service collection.
     - _queryIOAExclusionsV1_
     - `_endpoint/_ioa_exclusions.py`

@@ -56,9 +56,9 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes clusters that match a query in Falcon Query Language "
-        "(FQL). Supported filters:  access,agent_id,agent_status,agent_type,cid,cloud_account_id,cloud_name,cloud_regio"
-        "n,cloud_service,cluster_id,cluster_name,cluster_status,container_count,iar_coverage,kac_agent_id,kubernetes_ve"
-        "rsion,last_seen, management_status, node_count, pod_count, tags",
+        "(FQL). Supported filter fields:  access  agent_id  agent_status  agent_type  cid  cloud_account_id  cloud_name"
+        "  cloud_region  cloud_service  cluster_id  cluster_name  cluster_status  container_count  iar_coverage  "
+        "kac_agent_id  kubernetes_version  last_seen  management_status  node_count  pod_count  tags",
         "name": "filter",
         "in": "query"
       }
@@ -74,9 +74,9 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes clusters that match a query in Falcon Query Language "
-        "(FQL). Supported filters:  access,agent_id,agent_status,agent_type,cid,cloud_account_id,cloud_name,cloud_regio"
-        "n,cloud_service,cluster_id,cluster_name,cluster_status,container_count,iar_coverage,kac_agent_id,kubernetes_ve"
-        "rsion,last_seen, management_status, node_count, pod_count, tags",
+        "(FQL). Supported filter fields:  access  agent_id  agent_status  agent_type  cid  cloud_account_id  cloud_name"
+        "  cloud_region  cloud_service  cluster_id  cluster_name  cluster_status  container_count  iar_coverage  "
+        "kac_agent_id  kubernetes_version  last_seen  management_status  node_count  pod_count  tags",
         "name": "filter",
         "in": "query"
       }
@@ -92,9 +92,9 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes clusters that match a query in Falcon Query Language "
-        "(FQL). Supported filters:  access,agent_id,agent_status,agent_type,cid,cloud_account_id,cloud_name,cloud_regio"
-        "n,cloud_service,cluster_id,cluster_name,cluster_status,container_count,iar_coverage,kac_agent_id,kubernetes_ve"
-        "rsion,last_seen, management_status, node_count, pod_count, tags",
+        "(FQL). Supported filter fields:  access  agent_id  agent_status  agent_type  cid  cloud_account_id  cloud_name"
+        "  cloud_region  cloud_service  cluster_id  cluster_name  cluster_status  container_count  iar_coverage  "
+        "kac_agent_id  kubernetes_version  last_seen  management_status  node_count  pod_count  tags",
         "name": "filter",
         "in": "query"
       }
@@ -109,13 +109,14 @@ _kubernetes_protection_endpoints = [
     [
       {
         "type": "string",
-        "description": "Get container counts using a query in Falcon Query Language (FQL). Supported filters:"
-        "  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,cloud_region,cloud_service,cl"
-        "uster_id,cluster_name,container_id,container_image_id,container_name,cve_id,detection_name,first_seen,image_de"
-        "tection_count,image_digest,image_has_been_assessed,image_id,image_registry,image_repository,image_tag,image_vu"
-        "lnerability_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode,interactive_mode,ipv4,ip"
-        "v6,kac_agent_id,labels,last_seen,namespace,node_name,node_uid,package_name_version,pod_id,pod_name,port,privil"
-        "eged,root_write_access,run_as_root_group,run_as_root_user,running_status",
+        "description": "Get container counts using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  agent_id  agent_type  allow_privilege_escalation  app_name  cid  cloud_account_id  cloud_instance_id"
+        "  cloud_name  cloud_region  cloud_service  cluster_id  cluster_name  container_id  container_image_id  "
+        "container_name  cve_id  detection_name  first_seen  image_detection_count  image_digest  "
+        "image_has_been_assessed  image_id  image_registry  image_repository  image_tag  image_vulnerability_count  "
+        "insecure_mount_source  insecure_mount_type  insecure_propagation_mode  interactive_mode  ipv4  ipv6  "
+        "kac_agent_id  labels  last_seen  namespace  node_name  node_uid  package_name_version  pod_id  pod_name  port"
+        "privileged  root_write_access  run_as_root_group  run_as_root_user  running_status",
         "name": "filter",
         "in": "query"
       }
@@ -125,11 +126,12 @@ _kubernetes_protection_endpoints = [
     "ReadContainerCountByRegistry",
     "GET",
     "/container-security/aggregates/containers/count-by-registry/v1",
-    "Retrieve top container image registries",
+    "Retrieves a list with the top container image registries. Maximum page size: 200",
     "kubernetes_protection",
     [
       {
         "type": "boolean",
+        "default": False,
         "description": "(true/false) whether to return registries under assessment or not under assessment. If"
         "not provided all registries are considered",
         "name": "under_assessment",
@@ -161,12 +163,14 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
-        "(FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,clou"
-        "d_region,cloud_service,cluster_id,cluster_name,container_id,container_image_id,container_name,cve_id,detection"
-        "_name,first_seen,image_detection_count,image_digest,image_has_been_assessed,image_id,image_registry,image_repo"
-        "sitory,image_tag,image_vulnerability_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode"
-        ",interactive_mode,ipv4,ipv6,kac_agent_id,labels,last_seen,namespace,node_name,node_uid,package_name_version,po"
-        "d_id,pod_name,port,privileged,root_write_access,run_as_root_group,run_as_root_user,running_status",
+        "(FQL). Supported filter fields:  agent_id  agent_type  allow_privilege_escalation  app_name  cid  "
+        "cloud_account_id  cloud_instance_id  cloud_name  cloud_region  cloud_service  cluster_id  cluster_name  "
+        "container_id  container_image_id  container_name  cve_id  detection_name  first_seen  image_detection_count  "
+        "image_digest  image_has_been_assessed  image_id  image_registry  image_repository  image_tag  "
+        "image_vulnerability_count  insecure_mount_source  insecure_mount_type  insecure_propagation_mode  "
+        "interactive_mode  ipv4  ipv6  kac_agent_id  labels  last_seen  namespace  node_name  node_uid  "
+        "package_name_version  pod_id  pod_name  port  privileged  root_write_access  run_as_root_group  "
+        "run_as_root_user  running_status",
         "name": "filter",
         "in": "query"
       }
@@ -182,12 +186,14 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
-        "(FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,clou"
-        "d_region,cloud_service,cluster_id,cluster_name,container_id,container_image_id,container_name,cve_id,detection"
-        "_name,first_seen,image_detection_count,image_digest,image_has_been_assessed,image_id,image_registry,image_repo"
-        "sitory,image_tag,image_vulnerability_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode"
-        ",interactive_mode,ipv4,ipv6,kac_agent_id,labels,last_seen,namespace,node_name,node_uid,package_name_version,po"
-        "d_id,pod_name,port,privileged,root_write_access,run_as_root_group,run_as_root_user,running_status",
+        "(FQL). Supported filter fields:  agent_id  agent_type  allow_privilege_escalation  app_name  cid  "
+        "cloud_account_id  cloud_instance_id  cloud_name  cloud_region  cloud_service  cluster_id  cluster_name  "
+        "container_id  container_image_id  container_name  cve_id  detection_name  first_seen  image_detection_count  "
+        "image_digest  image_has_been_assessed  image_id  image_registry  image_repository  image_tag  "
+        "image_vulnerability_count  insecure_mount_source  insecure_mount_type  insecure_propagation_mode  "
+        "interactive_mode  ipv4  ipv6  kac_agent_id  labels  last_seen  namespace  node_name  node_uid  "
+        "package_name_version  pod_id  pod_name  port  privileged  root_write_access  run_as_root_group  "
+        "run_as_root_user  running_status",
         "name": "filter",
         "in": "query"
       }
@@ -202,31 +208,34 @@ _kubernetes_protection_endpoints = [
     [
       {
         "type": "integer",
-        "description": "The upper-bound on the number of container records to retrieve.",
+        "default": 200,
+        "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "It is used to get the offset",
+        "description": "The offset from where to begin.",
         "name": "offset",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Field to sort results by",
+        "description": "The fields to sort the records on.",
         "name": "sort",
         "in": "query"
       },
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
-        "(FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,clou"
-        "d_region,cloud_service,cluster_id,cluster_name,container_id,container_image_id,container_name,cve_id,detection"
-        "_name,first_seen,image_detection_count,image_digest,image_has_been_assessed,image_id,image_registry,image_repo"
-        "sitory,image_tag,image_vulnerability_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode"
-        ",interactive_mode,ipv4,ipv6,kac_agent_id,labels,last_seen,namespace,node_name,node_uid,package_name_version,po"
-        "d_id,pod_name,port,privileged,root_write_access,run_as_root_group,run_as_root_user,running_status",
+        "(FQL). Supported filter fields:  agent_id  agent_type  allow_privilege_escalation  app_name  cid  "
+        "cloud_account_id  cloud_instance_id  cloud_name  cloud_region  cloud_service  cluster_id  cluster_name  "
+        "container_id  container_image_id  container_name  cve_id  detection_name  first_seen  image_detection_count  "
+        "image_digest  image_has_been_assessed  image_id  image_registry  image_repository  image_tag  "
+        "image_vulnerability_count  insecure_mount_source  insecure_mount_type  insecure_propagation_mode  "
+        "interactive_mode  ipv4  ipv6  kac_agent_id  labels  last_seen  namespace  node_name  node_uid  "
+        "package_name_version  pod_id  pod_name  port  privileged  root_write_access  run_as_root_group  "
+        "run_as_root_user  running_status",
         "name": "filter",
         "in": "query"
       }
@@ -242,12 +251,13 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
-        "(FQL). Supported filters:  agent_id,allow_privilege_escalation,cid,cloud_account_id,cloud_name,cloud_region,cl"
-        "oud_service,cluster_id,cluster_name,container_id,container_image_id,container_name,cve_id,detection_name,first"
-        "_seen,image_detection_count,image_digest,image_has_been_assessed,image_id,image_registry,image_repository,imag"
-        "e_tag,image_vulnerability_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode,interactiv"
-        "e_mode,ipv4,ipv6,kac_agent_id,labels,last_seen,namespace,node_name,node_uid,pod_id,pod_name,port,privileged,ro"
-        "ot_write_access,run_as_root_group,run_as_root_user,running_status",
+        "(FQL). Supported filter fields:  agent_id  allow_privilege_escalation  app_name  cid  cloud_account_id  "
+        "cloud_instance_id  cloud_name  cloud_region  cloud_service  cluster_id  cluster_name  container_id  "
+        "container_image_id  container_name  cve_id  detection_name  first_seen  image_detection_count  image_digest  "
+        "image_has_been_assessed  image_id  image_registry  image_repository  image_tag  image_vulnerability_count  "
+        "insecure_mount_source  insecure_mount_type  insecure_propagation_mode  interactive_mode  ipv4  ipv6  "
+        "kac_agent_id  labels  last_seen  namespace  node_name  node_uid  pod_id  pod_name  port  privileged  "
+        "root_write_access  run_as_root_group  run_as_root_user  running_status",
         "name": "filter",
         "in": "query"
       }
@@ -263,12 +273,14 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
-        "(FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,clou"
-        "d_region,cloud_service,cluster_id,cluster_name,container_id,container_image_id,container_name,cve_id,detection"
-        "_name,first_seen,image_detection_count,image_digest,image_has_been_assessed,image_id,image_registry,image_repo"
-        "sitory,image_tag,image_vulnerability_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode"
-        ",interactive_mode,ipv4,ipv6,kac_agent_id,labels,last_seen,namespace,node_name,node_uid,package_name_version,po"
-        "d_id,pod_name,port,privileged,root_write_access,run_as_root_group,run_as_root_user,running_status",
+        "(FQL). Supported filter fields:  agent_id  agent_type  allow_privilege_escalation  app_name  cid  "
+        "cloud_account_id  cloud_instance_id  cloud_name  cloud_region  cloud_service  cluster_id  cluster_name  "
+        "container_id  container_image_id  container_name  cve_id  detection_name  first_seen  image_detection_count  "
+        "image_digest  image_has_been_assessed  image_id  image_registry  image_repository  image_tag  "
+        "image_vulnerability_count  insecure_mount_source  insecure_mount_type  insecure_propagation_mode  "
+        "interactive_mode  ipv4  ipv6  kac_agent_id  labels  last_seen  namespace  node_name  node_uid  "
+        "package_name_version  pod_id  pod_name  port  privileged  root_write_access  run_as_root_group  "
+        "run_as_root_user  running_status",
         "name": "filter",
         "in": "query"
       }
@@ -283,7 +295,7 @@ _kubernetes_protection_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter using a query in Falcon Query Language (FQL). Supported filters: cid",
+        "description": "Filter using a query in Falcon Query Language (FQL). Supported filter fields:  cid",
         "name": "filter",
         "in": "query"
       }
@@ -299,12 +311,14 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
-        "(FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,clou"
-        "d_region,cloud_service,cluster_id,cluster_name,container_id,container_image_id,container_name,cve_id,detection"
-        "_name,first_seen,image_detection_count,image_digest,image_has_been_assessed,image_id,image_registry,image_repo"
-        "sitory,image_tag,image_vulnerability_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode"
-        ",interactive_mode,ipv4,ipv6,kac_agent_id,labels,last_seen,namespace,node_name,node_uid,package_name_version,po"
-        "d_id,pod_name,port,privileged,root_write_access,run_as_root_group,run_as_root_user,running_status",
+        "(FQL). Supported filter fields:  agent_id  agent_type  allow_privilege_escalation  app_name  cid  "
+        "cloud_account_id  cloud_instance_id  cloud_name  cloud_region  cloud_service  cluster_id  cluster_name  "
+        "container_id  container_image_id  container_name  cve_id  detection_name  first_seen  image_detection_count  "
+        "image_digest  image_has_been_assessed  image_id  image_registry  image_repository  image_tag  "
+        "image_vulnerability_count  insecure_mount_source  insecure_mount_type  insecure_propagation_mode  "
+        "interactive_mode  ipv4  ipv6  kac_agent_id  labels  last_seen  namespace  node_name  node_uid  "
+        "package_name_version  pod_id  pod_name  port  privileged  root_write_access  run_as_root_group  "
+        "run_as_root_user  running_status",
         "name": "filter",
         "in": "query"
       }
@@ -320,12 +334,14 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Get vulnerabilities count by severity for container using a query in Falcon Query "
-        "Language (FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_"
-        "name,cloud_region,cloud_service,cluster_id,cluster_name,container_id,container_image_id,container_name,cve_id,"
-        "detection_name,first_seen,image_detection_count,image_digest,image_has_been_assessed,image_id,image_registry,i"
-        "mage_repository,image_tag,image_vulnerability_count,insecure_mount_source,insecure_mount_type,insecure_propaga"
-        "tion_mode,interactive_mode,ipv4,ipv6,kac_agent_id,labels,last_seen,namespace,node_name,node_uid,package_name_v"
-        "ersion,pod_id,pod_name,port,privileged,root_write_access,run_as_root_group,run_as_root_user,running_status",
+        "Language (FQL). Supported filter fields:  agent_id  agent_type  allow_privilege_escalation  app_name  cid  "
+        "cloud_account_id  cloud_instance_id  cloud_name  cloud_region  cloud_service  cluster_id  cluster_name  "
+        "container_id  container_image_id  container_name  cve_id  detection_name  first_seen  image_detection_count  "
+        "image_digest  image_has_been_assessed  image_id  image_registry  image_repository  image_tag  "
+        "image_vulnerability_count  insecure_mount_source  insecure_mount_type  insecure_propagation_mode  "
+        "interactive_mode  ipv4  ipv6  kac_agent_id  labels  last_seen  namespace  node_name  node_uid  "
+        "package_name_version  pod_id  pod_name  port  privileged  root_write_access  run_as_root_group  "
+        "run_as_root_user  running_status",
         "name": "filter",
         "in": "query"
       }
@@ -349,9 +365,9 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes deployments that match a query in Falcon Query Language "
-        "(FQL). Supported filters:  agent_id,agent_type,annotations_list,cid,cloud_account_id,cloud_name,cloud_region,c"
-        "loud_service,cluster_id,cluster_name,deployment_id,deployment_name,deployment_status,first_seen,kac_agent_id,l"
-        "ast_seen,namespace,pod_count,resource_status",
+        "(FQL). Supported filter fields:  agent_id  agent_type  annotations_list  cid  cloud_account_id  cloud_name  "
+        "cloud_region  cloud_service  cluster_id  cluster_name  deployment_id  deployment_name  deployment_status  "
+        "first_seen  kac_agent_id  last_seen  namespace  pod_count  resource_status",
         "name": "filter",
         "in": "query"
       }
@@ -377,7 +393,7 @@ _kubernetes_protection_endpoints = [
       },
       {
         "type": "string",
-        "description": "Supported filters:  last_seen",
+        "description": "Supported filter fields:  last_seen",
         "name": "filter",
         "in": "query"
       }
@@ -403,7 +419,7 @@ _kubernetes_protection_endpoints = [
       },
       {
         "type": "string",
-        "description": "Supported filters:  last_seen",
+        "description": "Supported filter fields:  last_seen",
         "name": "filter",
         "in": "query"
       }
@@ -429,7 +445,7 @@ _kubernetes_protection_endpoints = [
       },
       {
         "type": "string",
-        "description": "Supported filters:  last_seen",
+        "description": "Supported filter fields:  last_seen",
         "name": "filter",
         "in": "query"
       }
@@ -455,7 +471,7 @@ _kubernetes_protection_endpoints = [
       },
       {
         "type": "string",
-        "description": "Supported filters:  last_seen",
+        "description": "Supported filter fields:  last_seen",
         "name": "filter",
         "in": "query"
       }
@@ -481,7 +497,7 @@ _kubernetes_protection_endpoints = [
       },
       {
         "type": "string",
-        "description": "Supported filters:  last_seen",
+        "description": "Supported filter fields:  last_seen",
         "name": "filter",
         "in": "query"
       }
@@ -497,12 +513,13 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Search Kubernetes containers using a query in Falcon Query Language (FQL). Supported "
-        "filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,cloud_region,cloud_se"
-        "rvice,cluster_id,cluster_name,container_id,container_image_id,container_name,cve_id,detection_name,first_seen,"
-        "image_detection_count,image_digest,image_has_been_assessed,image_id,image_registry,image_repository,image_tag,"
-        "image_vulnerability_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode,interactive_mode"
-        ",ipv4,ipv6,kac_agent_id,labels,last_seen,namespace,node_name,node_uid,package_name_version,pod_id,pod_name,por"
-        "t,privileged,root_write_access,run_as_root_group,run_as_root_user,running_status",
+        "filter fields:  agent_id  agent_type  allow_privilege_escalation  app_name  cid  cloud_account_id  "
+        "cloud_instance_id  cloud_name  cloud_region  cloud_service  cluster_id  cluster_name  container_id  "
+        "container_image_id  container_name  cve_id  detection_name  first_seen  image_detection_count  image_digest  "
+        "image_has_been_assessed  image_id  image_registry  image_repository  image_tag  image_vulnerability_count  "
+        "insecure_mount_source  insecure_mount_type  insecure_propagation_mode  interactive_mode  ipv4  ipv6  "
+        "kac_agent_id  labels  last_seen  namespace  node_name  node_uid  package_name_version  pod_id  pod_name  port"
+        "privileged  root_write_access  run_as_root_group  run_as_root_user  running_status",
         "name": "filter",
         "in": "query"
       }
@@ -518,12 +535,14 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes containers that match a query in Falcon Query Language "
-        "(FQL). Supported filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,clou"
-        "d_region,cloud_service,cluster_id,cluster_name,container_id,container_image_id,container_name,cve_id,detection"
-        "_name,first_seen,image_detection_count,image_digest,image_has_been_assessed,image_id,image_registry,image_repo"
-        "sitory,image_tag,image_vulnerability_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode"
-        ",interactive_mode,ipv4,ipv6,kac_agent_id,labels,last_seen,namespace,node_name,node_uid,package_name_version,po"
-        "d_id,pod_name,port,privileged,root_write_access,run_as_root_group,run_as_root_user,running_status",
+        "(FQL). Supported filter fields:  agent_id  agent_type  allow_privilege_escalation  app_name  cid  "
+        "cloud_account_id  cloud_instance_id  cloud_name  cloud_region  cloud_service  cluster_id  cluster_name  "
+        "container_id  container_image_id  container_name  cve_id  detection_name  first_seen  image_detection_count  "
+        "image_digest  image_has_been_assessed  image_id  image_registry  image_repository  image_tag  "
+        "image_vulnerability_count  insecure_mount_source  insecure_mount_type  insecure_propagation_mode  "
+        "interactive_mode  ipv4  ipv6  kac_agent_id  labels  last_seen  namespace  node_name  node_uid  "
+        "package_name_version  pod_id  pod_name  port  privileged  root_write_access  run_as_root_group  "
+        "run_as_root_user  running_status",
         "name": "filter",
         "in": "query"
       }
@@ -538,8 +557,8 @@ _kubernetes_protection_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters: "
-        "cid,created_timestamp,detect_timestamp,prevented,severity",
+        "description": "Filter Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  cid  created_timestamp  detect_timestamp  prevented  severity",
         "name": "filter",
         "in": "query"
       }
@@ -554,8 +573,8 @@ _kubernetes_protection_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter images using a query in Falcon Query Language (FQL). Supported filters: "
-        "cid,created_timestamp,detect_timestamp,prevented,severity",
+        "description": "Filter Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  cid  created_timestamp  detect_timestamp  prevented  severity",
         "name": "filter",
         "in": "query"
       }
@@ -579,9 +598,9 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes namespaces that match a query in Falcon Query Language "
-        "(FQL). Supported filters:  agent_id,agent_type,annotations_list,cid,cloud_account_id,cloud_name,cloud_region,c"
-        "loud_service,cluster_id,cluster_name,first_seen,kac_agent_id,last_seen,namespace_id,namespace_name,resource_st"
-        "atus",
+        "(FQL). Supported filter fields:  agent_id  agent_type  annotations_list  cid  cloud_account_id  cloud_name  "
+        "cloud_region  cloud_service  cluster_id  cluster_name  first_seen  kac_agent_id  last_seen  namespace_id  "
+        "namespace_name  resource_status",
         "name": "filter",
         "in": "query"
       }
@@ -596,10 +615,10 @@ _kubernetes_protection_endpoints = [
     [
       {
         "type": "string",
-        "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported "
-        "filters:  agent_id,agent_type,annotations_list,cid,cloud_account_id,cloud_name,cloud_region,cloud_service,clus"
-        "ter_id,cluster_name,container_count,container_runtime_version,first_seen,image_digest,ipv4,kac_agent_id,last_s"
-        "een,linux_sensor_coverage,node_name,pod_count,resource_status",
+        "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported filter"
+        " fields:  agent_id  agent_type  annotations_list  cid  cloud_account_id  cloud_name  cloud_region  "
+        "cloud_service  cluster_id  cluster_name  container_count  container_runtime_version  first_seen  image_digest"
+        "ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  pod_count  resource_status",
         "name": "filter",
         "in": "query"
       }
@@ -614,10 +633,10 @@ _kubernetes_protection_endpoints = [
     [
       {
         "type": "string",
-        "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported "
-        "filters:  agent_id,agent_type,annotations_list,cid,cloud_account_id,cloud_name,cloud_region,cloud_service,clus"
-        "ter_id,cluster_name,container_count,container_runtime_version,first_seen,image_digest,ipv4,kac_agent_id,last_s"
-        "een,linux_sensor_coverage,node_name,pod_count,resource_status",
+        "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported filter"
+        " fields:  agent_id  agent_type  annotations_list  cid  cloud_account_id  cloud_name  cloud_region  "
+        "cloud_service  cluster_id  cluster_name  container_count  container_runtime_version  first_seen  image_digest"
+        "ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  pod_count  resource_status",
         "name": "filter",
         "in": "query"
       }
@@ -632,10 +651,10 @@ _kubernetes_protection_endpoints = [
     [
       {
         "type": "string",
-        "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported "
-        "filters:  agent_id,agent_type,annotations_list,cid,cloud_account_id,cloud_name,cloud_region,cloud_service,clus"
-        "ter_id,cluster_name,container_count,container_runtime_version,first_seen,image_digest,ipv4,kac_agent_id,last_s"
-        "een,linux_sensor_coverage,node_name,pod_count,resource_status",
+        "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported filter"
+        " fields:  agent_id  agent_type  annotations_list  cid  cloud_account_id  cloud_name  cloud_region  "
+        "cloud_service  cluster_id  cluster_name  container_count  container_runtime_version  first_seen  image_digest"
+        "ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  pod_count  resource_status",
         "name": "filter",
         "in": "query"
       }
@@ -651,9 +670,9 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes nodes that match a query in Falcon Query Language (FQL). "
-        "Supported filters:  agent_id,agent_type,annotations_list,cid,cloud_account_id,cloud_name,cloud_region,cloud_se"
-        "rvice,cluster_id,cluster_name,container_count,container_runtime_version,first_seen,image_digest,ipv4,kac_agent"
-        "_id,last_seen,linux_sensor_coverage,node_name,pod_count,resource_status",
+        "Supported filter fields:  agent_id  agent_type  annotations_list  cid  cloud_account_id  cloud_name  "
+        "cloud_region  cloud_service  cluster_id  cluster_name  container_count  container_runtime_version  first_seen"
+        "image_digest  ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  pod_count  resource_status",
         "name": "filter",
         "in": "query"
       }
@@ -677,10 +696,11 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve count of Kubernetes pods that match a query in Falcon Query Language (FQL). "
-        "Supported filters:  agent_id,agent_type,allow_privilege_escalation,annotations_list,cid,cloud_account_id,cloud"
-        "_name,cloud_region,cloud_service,cluster_id,cluster_name,container_count,first_seen,ipv4,ipv6,kac_agent_id,lab"
-        "els,last_seen,namespace,node_name,node_uid,owner_id,owner_type,pod_external_id,pod_id,pod_name,port,privileged"
-        ",resource_status,root_write_access,run_as_root_group,run_as_root_user",
+        "Supported filter fields:  agent_id  agent_type  allow_privilege_escalation  annotations_list  app_name  cid  "
+        "cloud_account_id  cloud_name  cloud_region  cloud_service  cluster_id  cluster_name  container_count  "
+        "first_seen  ipv4  ipv6  kac_agent_id  labels  last_seen  namespace  node_name  node_uid  owner_id  owner_type"
+        "  pod_external_id  pod_id  pod_name  port  privileged  resource_status  root_write_access  run_as_root_group  "
+        "run_as_root_user",
         "name": "filter",
         "in": "query"
       }
@@ -696,14 +716,21 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Search Kubernetes clusters using a query in Falcon Query Language (FQL). Supported "
-        "filters:  access,agent_id,agent_status,agent_type,cid,cloud_account_id,cloud_name,cloud_region,cloud_service,c"
-        "luster_id,cluster_name,cluster_status,container_count,iar_coverage,kac_agent_id,kubernetes_version,last_seen, "
-        "management_status, node_count, pod_count, tags",
+        "filter fields:  access  agent_id  agent_status  agent_type  cid  cloud_account_id  cloud_name  cloud_region  "
+        "cloud_service  cluster_id  cluster_name  cluster_status  container_count  iar_coverage  kac_agent_id  "
+        "kubernetes_version  last_seen  management_status  node_count  pod_count  tags",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 200,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -712,12 +739,6 @@ _kubernetes_protection_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Field to sort results by",
-        "name": "sort",
         "in": "query"
       }
     ]
@@ -732,13 +753,20 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve list of images on running containers using a query in Falcon Query Language "
-        "(FQL). Supported filters:  cid,cluster_id,cluster_name,hosts,image_digest,image_has_been_assessed,image_id,ima"
-        "ge_name,image_registry,image_repository,image_tag,last_seen,running_status",
+        "(FQL). Supported filter fields:  cid  cluster_id  cluster_name  hosts  image_digest  image_has_been_assessed  "
+        "image_id  image_name  image_registry  image_repository  image_tag  last_seen  running_status",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 200,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -747,12 +775,6 @@ _kubernetes_protection_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Field to sort results by",
-        "name": "sort",
         "in": "query"
       }
     ]
@@ -767,17 +789,25 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Search Kubernetes containers using a query in Falcon Query Language (FQL). Supported "
-        "filters:  agent_id,agent_type,allow_privilege_escalation,cid,cloud_account_id,cloud_name,cloud_region,cloud_se"
-        "rvice,cluster_id,cluster_name,container_id,container_image_id,container_name,cve_id,detection_name,first_seen,"
-        "image_detection_count,image_digest,image_has_been_assessed,image_id,image_registry,image_repository,image_tag,"
-        "image_vulnerability_count,insecure_mount_source,insecure_mount_type,insecure_propagation_mode,interactive_mode"
-        ",ipv4,ipv6,kac_agent_id,labels,last_seen,namespace,node_name,node_uid,package_name_version,pod_id,pod_name,por"
-        "t,privileged,root_write_access,run_as_root_group,run_as_root_user,running_status",
+        "filter fields:  agent_id  agent_type  allow_privilege_escalation  app_name  cid  cloud_account_id  "
+        "cloud_instance_id  cloud_name  cloud_region  cloud_service  cluster_id  cluster_name  container_id  "
+        "container_image_id  container_name  cve_id  detection_name  first_seen  image_detection_count  image_digest  "
+        "image_has_been_assessed  image_id  image_registry  image_repository  image_tag  image_vulnerability_count  "
+        "insecure_mount_source  insecure_mount_type  insecure_propagation_mode  interactive_mode  ipv4  ipv6  "
+        "kac_agent_id  labels  last_seen  namespace  node_name  node_uid  package_name_version  pod_id  pod_name  port"
+        "privileged  root_write_access  run_as_root_group  run_as_root_user  running_status",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 200,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -786,12 +816,6 @@ _kubernetes_protection_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Field to sort results by",
-        "name": "sort",
         "in": "query"
       }
     ]
@@ -806,14 +830,21 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Search Kubernetes deployments using a query in Falcon Query Language (FQL). Supported "
-        "filters:  agent_id,agent_type,annotations_list,cid,cloud_account_id,cloud_name,cloud_region,cloud_service,clus"
-        "ter_id,cluster_name,deployment_id,deployment_name,deployment_status,first_seen,kac_agent_id,last_seen,namespac"
-        "e,pod_count,resource_status",
+        "filter fields:  agent_id  agent_type  annotations_list  cid  cloud_account_id  cloud_name  cloud_region  "
+        "cloud_service  cluster_id  cluster_name  deployment_id  deployment_name  deployment_status  first_seen  "
+        "kac_agent_id  last_seen  namespace  pod_count  resource_status",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 200,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -822,12 +853,6 @@ _kubernetes_protection_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Field to sort results by",
-        "name": "sort",
         "in": "query"
       }
     ]
@@ -841,14 +866,21 @@ _kubernetes_protection_endpoints = [
     [
       {
         "type": "string",
-        "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported "
-        "filters:  cid,cis_id,cluster_id,cluster_name,containers_impacted_count,containers_impacted_ids,detection_type,"
-        "name,namespace,prevented,resource_id,resource_name,resource_type,severity",
+        "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  cid  cis_id  cluster_id  cluster_name  containers_impacted_count  containers_impacted_ids  "
+        "detection_type  name  namespace  prevented  resource_id  resource_name  resource_type  severity",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -857,12 +889,6 @@ _kubernetes_protection_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "The fields to sort the records on.",
-        "name": "sort",
         "in": "query"
       }
     ]
@@ -876,15 +902,22 @@ _kubernetes_protection_endpoints = [
     [
       {
         "type": "string",
-        "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported "
-        "filters:  agent_id,agent_type,annotations_list,cid,cloud_account_id,cloud_name,cloud_region,cloud_service,clus"
-        "ter_id,cluster_name,container_count,container_runtime_version,first_seen,image_digest,ipv4,kac_agent_id,last_s"
-        "een,linux_sensor_coverage,node_name,pod_count,resource_status",
+        "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported filter"
+        " fields:  agent_id  agent_type  annotations_list  cid  cloud_account_id  cloud_name  cloud_region  "
+        "cloud_service  cluster_id  cluster_name  container_count  container_runtime_version  first_seen  image_digest"
+        "ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  pod_count  resource_status",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 200,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -893,12 +926,6 @@ _kubernetes_protection_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Field to sort results by",
-        "name": "sort",
         "in": "query"
       }
     ]
@@ -912,16 +939,23 @@ _kubernetes_protection_endpoints = [
     [
       {
         "type": "string",
-        "description": "Search Kubernetes pods using a query in Falcon Query Language (FQL). Supported "
-        "filters:  agent_id,agent_type,allow_privilege_escalation,annotations_list,cid,cloud_account_id,cloud_name,clou"
-        "d_region,cloud_service,cluster_id,cluster_name,container_count,first_seen,ipv4,ipv6,kac_agent_id,labels,last_s"
-        "een,namespace,node_name,node_uid,owner_id,owner_type,pod_external_id,pod_id,pod_name,port,privileged,resource_"
-        "status,root_write_access,run_as_root_group,run_as_root_user",
+        "description": "Search Kubernetes pods using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  agent_id  agent_type  allow_privilege_escalation  annotations_list  app_name  cid  cloud_account_id  "
+        "cloud_name  cloud_region  cloud_service  cluster_id  cluster_name  container_count  first_seen  ipv4  ipv6  "
+        "kac_agent_id  labels  last_seen  namespace  node_name  node_uid  owner_id  owner_type  pod_external_id  pod_id"
+        "pod_name  port  privileged  resource_status  root_write_access  run_as_root_group  run_as_root_user",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 200,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -930,12 +964,6 @@ _kubernetes_protection_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "Field to sort results by",
-        "name": "sort",
         "in": "query"
       }
     ]
@@ -969,14 +997,21 @@ _kubernetes_protection_endpoints = [
     [
       {
         "type": "string",
-        "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported "
-        "filters:  cid,cis_id,cluster_id,cluster_name,containers_impacted_count,containers_impacted_ids,detection_type,"
-        "name,namespace,prevented,resource_id,resource_name,resource_type,severity",
+        "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  cid  cis_id  cluster_id  cluster_name  containers_impacted_count  containers_impacted_ids  "
+        "detection_type  name  namespace  prevented  resource_id  resource_name  resource_type  severity",
         "name": "filter",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -985,12 +1020,6 @@ _kubernetes_protection_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "The fields to sort the records on.",
-        "name": "sort",
         "in": "query"
       }
     ]
