@@ -46,15 +46,17 @@ _container_vulnerabilities_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
-        "filters: base_os,cid,container_id,container_running_status,containers_impacted_range,cps_rating,cve_id,cvss_sc"
-        "ore,description,exploited_status,exploited_status_name,fix_status,image_digest,image_id,images_impacted_range,"
-        "include_base_image_vuln,package_name_version,registry,repository,severity,tag",
+        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  ai_related  base_os  cid  container_id  container_running_status  containers_impacted_range  "
+        "cps_rating  cve_id  cvss_score  description  exploited_status_name  exploited_status  fix_status  image_digest"
+        "  image_id  images_impacted_range  include_base_image_vuln  package_name_version  registry  repository  "
+        "severity  tag",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -76,15 +78,17 @@ _container_vulnerabilities_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
-        "filters: base_os,cid,container_id,container_running_status,containers_impacted_range,cps_rating,cve_id,cvss_sc"
-        "ore,description,exploited_status,exploited_status_name,fix_status,image_digest,image_id,images_impacted_range,"
-        "include_base_image_vuln,package_name_version,registry,repository,severity,tag",
+        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  ai_related  base_os  cid  container_id  container_running_status  containers_impacted_range  "
+        "cps_rating  cve_id  cvss_score  description  exploited_status_name  exploited_status  fix_status  image_digest"
+        "  image_id  images_impacted_range  include_base_image_vuln  package_name_version  registry  repository  "
+        "severity  tag",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -106,15 +110,17 @@ _container_vulnerabilities_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
-        "filters: base_os,cid,container_id,container_running_status,containers_impacted_range,cps_rating,cve_id,cvss_sc"
-        "ore,description,exploited_status,exploited_status_name,fix_status,image_digest,image_id,images_impacted_range,"
-        "include_base_image_vuln,package_name_version,registry,repository,severity,tag",
+        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  ai_related  base_os  cid  container_id  container_running_status  containers_impacted_range  "
+        "cps_rating  cve_id  cvss_score  description  exploited_status_name  exploited_status  fix_status  image_digest"
+        "  image_id  images_impacted_range  include_base_image_vuln  package_name_version  registry  repository  "
+        "severity  tag",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -136,15 +142,17 @@ _container_vulnerabilities_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
-        "filters: base_os,cid,container_id,container_running_status,containers_impacted_range,cps_rating,cve_id,cvss_sc"
-        "ore,description,exploited_status,exploited_status_name,fix_status,image_digest,image_id,images_impacted_range,"
-        "include_base_image_vuln,package_name_version,registry,repository,severity,tag",
+        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  ai_related  base_os  cid  container_id  container_running_status  containers_impacted_range  "
+        "cps_rating  cve_id  cvss_score  description  exploited_status_name  exploited_status  fix_status  image_digest"
+        "  image_id  images_impacted_range  include_base_image_vuln  package_name_version  registry  repository  "
+        "severity  tag",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -166,15 +174,17 @@ _container_vulnerabilities_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
-        "filters: base_os,cid,container_id,container_running_status,containers_impacted_range,cps_rating,cve_id,cvss_sc"
-        "ore,description,exploited_status,exploited_status_name,fix_status,image_digest,image_id,images_impacted_range,"
-        "include_base_image_vuln,package_name_version,registry,repository,severity,tag",
+        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  ai_related  base_os  cid  container_id  container_running_status  containers_impacted_range  "
+        "cps_rating  cve_id  cvss_score  description  exploited_status_name  exploited_status  fix_status  image_digest"
+        "  image_id  images_impacted_range  include_base_image_vuln  package_name_version  registry  repository  "
+        "severity  tag",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -196,13 +206,14 @@ _container_vulnerabilities_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
-        "filters: cid,cve_id,registry,repository,tag",
+        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  cid  cve_id  registry  repository  tag",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -224,13 +235,14 @@ _container_vulnerabilities_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
-        "filters: cid,cve_id,registry,repository,tag",
+        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  cid  cve_id  registry  repository  tag",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -260,13 +272,14 @@ _container_vulnerabilities_endpoints = [
       {
         "type": "string",
         "description": "Filter the vulnerabilities using a query in Falcon Query Language (FQL). Supported "
-        "vulnerability filters: cid,cps_rating,cve_id,cvss_score,exploited_status,exploited_status_name,include_base_im"
-        "age_vuln,is_zero_day,remediation_available,severity",
+        "vulnerability filter fields:  cid  cps_rating  cve_id  cvss_score  exploited_status_name  exploited_status  "
+        "include_base_image_vuln  is_zero_day  remediation_available  severity",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -295,6 +308,7 @@ _container_vulnerabilities_endpoints = [
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -316,15 +330,17 @@ _container_vulnerabilities_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported "
-        "filters: base_os,cid,container_id,container_running_status,containers_impacted_range,cps_rating,cve_id,cvss_sc"
-        "ore,description,exploited_status,exploited_status_name,fix_status,image_digest,image_id,images_impacted_range,"
-        "include_base_image_vuln,package_name_version,registry,repository,severity,tag",
+        "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  ai_related  base_os  cid  container_id  container_running_status  containers_impacted_range  "
+        "cps_rating  cve_id  cvss_score  description  exploited_status_name  exploited_status  fix_status  image_digest"
+        "  image_id  images_impacted_range  include_base_image_vuln  package_name_version  registry  repository  "
+        "severity  tag",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -337,8 +353,8 @@ _container_vulnerabilities_endpoints = [
       },
       {
         "type": "string",
-        "description": "The fields to sort the records on. Supported columns:  [cps_current_rating cve_id "
-        "cvss_score description images_impacted packages_impacted severity]",
+        "description": "The fields to sort the records on. Supported columns:  cps_current_rating  cve_id  "
+        "cvss_score  description  images_impacted  packages_impacted  severity",
         "name": "sort",
         "in": "query"
       }
