@@ -553,8 +553,6 @@ class CSPMRegistration(ServiceClass):
         tenant_id -- Azure Tenant ID to generate script for.
                      Defaults to the most recently registered tenant.
         parameters -- full parameters payload, not required if tenant_id keyword is used.
-        refresh -- Force a refresh of the certificate. Boolean. Defaults to False.
-        years_valid -- Years the certificate should be valid (only used when refresh=true).
 
         Arguments: When not specified, the first argument to this method is assumed to be
                    'tenant_id'. All others are ignored.

@@ -327,6 +327,10 @@
     - _ReadCombinedVulnerabilities_
     - `_endpoint/_container_vulnerabilities.py`
 
++ Removed: Removed the `refresh` and `years_valid` keyword arguments from the _AzureDownloadCertificate_ operation within the __CSPM Registration__ service collection.
+    - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
+
 + Updated: Cosmetic updates to parameter descriptions in 3 operations within the __Detects__ service collection.
     - _UpdateDetectsByIdsV2_
     - _GetDetectSummaries_
