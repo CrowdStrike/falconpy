@@ -342,6 +342,11 @@
     - `_endpoint/_exposure_management.py`
     - `_endpoint/deprecated/_exposure_management.py`
 
++ Updated: Cosmetic update to parameter descriptions in 2 operations within the __Falcon Container__ service collection.
+    - _ReadRegistryEntitiesByUUID_
+    - _ReadRegistryEntities_
+    - `_endpoint/_falcon_container.py`
+
 + Updated: Cosmetic updates to the `filter`, `ifn_regex`, and `cl_regex` parameter descriptions in 1 operation within the __IOA Exclusions__ service collection.
     - _queryIOAExclusionsV1_
     - `_endpoint/_ioa_exclusions.py`
