@@ -403,11 +403,16 @@ def perform_request(endpoint: str = "",  # noqa: C901
                     if isinstance(param_value, bool):
                         api.param_payload[param] = str(param_value).lower()
             try:
+                allow_redirects = False
+                # Allow redirections during token authentication and revocation
+                for check_point in ["/oauth2/revoke", "/oauth2/token"]:
+                    if check_point in api.endpoint:
+                        allow_redirects = True
                 # Log our payloads if debugging is enabled
                 log_api_payloads(api, headers)
                 response = requests.request(api.method.upper(), endpoint, params=api.param_payload,
                                             headers=headers, json=api.body_payload, data=api.data_payload,
-                                            files=api.files, verify=api.verify, allow_redirects=False,
+                                            files=api.files, verify=api.verify, allow_redirects=allow_redirects,
                                             proxies=api.proxy, timeout=api.timeout
                                             )
                 api.debug_headers = response.headers
