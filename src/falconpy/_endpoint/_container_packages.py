@@ -71,7 +71,7 @@ _container_packages_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter packages using a query in Falcon Query Language (FQL). Supported filters: cid",
+        "description": "Filter packages using a query in Falcon Query Language (FQL). Supported filter fields:  cid",
         "name": "filter",
         "in": "query"
       }
@@ -86,13 +86,15 @@ _container_packages_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter packages using a query in Falcon Query Language (FQL). Supported filters: cid,c"
-        "ontainer_id,cveid,fix_status,image_digest,license,package_name_version,severity,type,vulnerability_count",
+        "description": "Filter packages using a query in Falcon Query Language (FQL). Supported filter fields:"
+        "  ai_related  cid  container_id  cveid  fix_status  image_digest  license  package_name_version  severity  "
+        "type  vulnerability_count",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -114,13 +116,15 @@ _container_packages_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter packages using a query in Falcon Query Language (FQL). Supported filters: cid,c"
-        "ontainer_id,cveid,fix_status,image_digest,license,package_name_version,severity,type,vulnerability_count",
+        "description": "Filter packages using a query in Falcon Query Language (FQL). Supported filter fields:"
+        "  ai_related  cid  container_id  cveid  fix_status  image_digest  license  package_name_version  severity  "
+        "type  vulnerability_count",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -142,19 +146,29 @@ _container_packages_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter packages using a query in Falcon Query Language (FQL). Supported filters:  cid,"
-        "container_id,cveid,fix_status,image_digest,license,package_name_version,severity,type,vulnerability_count",
+        "description": "Filter packages using a query in Falcon Query Language (FQL). Supported filter fields:"
+        "  ai_related  cid  container_id  cveid  fix_status  image_digest  license  package_name_version  severity  "
+        "type  vulnerability_count",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "boolean",
-        "description": "(true/false) load zero day affected packages, default is false",
+        "default": False,
+        "description": "(true/false) load zero day affected packages",
         "name": "only_zero_day_affected",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on. Supported columns:  license  package_name_version  "
+        "type  vulnerability_count",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
@@ -163,12 +177,6 @@ _container_packages_endpoints = [
         "type": "integer",
         "description": "The offset from where to begin.",
         "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "The fields to sort the records on. Supported columns:  [license package_name_version type]",
-        "name": "sort",
         "in": "query"
       }
     ]
@@ -182,19 +190,29 @@ _container_packages_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter packages using a query in Falcon Query Language (FQL). Supported filters:  cid,"
-        "container_id,cveid,fix_status,image_digest,license,package_name_version,severity,type,vulnerability_count",
+        "description": "Filter packages using a query in Falcon Query Language (FQL). Supported filter fields:"
+        "  ai_related  cid  container_id  cveid  fix_status  image_digest  license  package_name_version  severity  "
+        "type  vulnerability_count",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "boolean",
-        "description": "(true/false) load zero day affected packages, default is false",
+        "default": False,
+        "description": "(true/false) load zero day affected packages",
         "name": "only_zero_day_affected",
         "in": "query"
       },
       {
+        "type": "string",
+        "description": "The fields to sort the records on. Supported columns:  license  package_name_version  "
+        "type  vulnerability_count",
+        "name": "sort",
+        "in": "query"
+      },
+      {
         "type": "integer",
+        "default": 100,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"

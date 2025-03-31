@@ -303,6 +303,14 @@
     - _CombinedImageVulnerabilitySummary_
     - `_endpoint/_container_images.py`
 
++ Updated: Cosmetic updates to parameter descriptions in 5 operations within the __Container Packages__ service collection.
+    - _ReadPackagesCountByZeroDay_
+    - _ReadPackagesByFixableVulnCount_
+    - _ReadPackagesByVulnCount_
+    - _ReadPackagesCombinedExport_
+    - _ReadPackagesCombined_
+    - `_endpoint/_container_packages.py`
+
 + Updated: Cosmetic updates to parameter descriptions in 9 operations within the __Container Vulnerabilities__ service collection.
     - _ReadVulnerabilityCountByActivelyExploited_
     - _ReadVulnerabilityCountByCPSRating_
