@@ -170,6 +170,12 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_exposure_management.py`
 
++ Added: Added _GetMalwareMitreReport_ operation to the __Intel__ service collection.
+    - `_endpoint/_intel.py`
+    - `intel.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_intel.py`
+
 + Added: Added new __Intelligence Indicator Graph__ service collection with 1 new operation.
     - _SearchIndicators_
     - `_endpoint/__init__.py`
