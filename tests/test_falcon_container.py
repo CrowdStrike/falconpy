@@ -52,6 +52,10 @@ class TestFalconContainer:
                                                                       ),
             "CreateRegistryEntities": falcon.create_registry_entities(type="github", url="https://somewheres", username="larry",
                                                                       password="top_secret"),
+            "QueryExportJobs": falcon.query_export_jobs(filter="whatever"),
+            "DownloadExportFile": falcon.download_export_file(id="12345678"),
+            "ReadExportJobs": falcon.read_export_jobs(ids="12345678"),
+            "LaunchExportJob": falcon.launch_export_job(format="json", resource="assets.clusters")
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

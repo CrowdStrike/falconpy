@@ -278,3 +278,22 @@ def base_image_payload(passed_keywords: dict) -> dict:
     returned["base_images"].append(item)
 
     return returned
+
+
+def export_job_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted export job launch payload.
+
+    {
+        "format": "string",
+        "fql": "string",
+        "resource": "string",
+        "sort": "string"
+    }
+    """
+    returned = {}
+    keys = ["format", "fql", "resource", "sort"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned[key] = passed_keywords.get(key, None)
+
+    return returned
