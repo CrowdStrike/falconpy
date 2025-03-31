@@ -23,7 +23,7 @@ class TestIntelligenceIndicatorGraph:
     def test_all_code_paths(self):
         error_checks = True
         tests = {
-            "SearchIndicators": falcon.search(filter="indicator:'malware.ru'", limit=1)
+            "SearchIndicators": falcon.search(filter="indicator:'malware.ru'", limit=1, sort={"order": "desc"})
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

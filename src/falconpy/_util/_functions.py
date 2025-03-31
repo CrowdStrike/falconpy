@@ -443,7 +443,7 @@ def perform_request(endpoint: str = "",  # noqa: C901
 
             except JSONDecodeError as json_decode_error:
                 # No response content, but a successful request was made
-                if "/identity-protection/combined/graphql/v1" in api.endpoint:
+                if "/identity-protection/combined/graphql/v1" in api.endpoint:  # pragma: no cover
                     raise SDKError(message=f"{str(json_decode_error)}",
                                    headers=api.debug_headers
                                    ) from json_decode_error

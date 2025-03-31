@@ -17,7 +17,7 @@ from falconpy import (
     Hosts,
     Detects
     )
-from falconpy._util import confirm_base_region
+from falconpy._util import confirm_base_region, confirm_base_url
 from falconpy._version import _TITLE, _VERSION
 
 auth = Authorization.TestAuthorization()
@@ -115,7 +115,9 @@ class TestAuthentications:
             return False
 
     def serviceAny_reallyBadBaseURL(self):
-        result = confirm_base_region("https://this-url-does-not-exist")
+        bad_url = "https://this-url-does-not-exist/"
+        test = confirm_base_url(bad_url)
+        result = confirm_base_region(bad_url)
         if result == "US1":
             return True
         else:
