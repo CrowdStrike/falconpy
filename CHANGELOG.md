@@ -9,7 +9,7 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_alerts.py`
 
-+ Added: Added new operations to the __ASPM__ service collection.
++ Added: Added new 18 operations to the __ASPM__ service collection.
     - _ExecuteFunctionDataCount_
     - _ExecuteFunctionsCount_
     - _ExecuteFunctionDataQueryCount_
