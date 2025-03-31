@@ -263,6 +263,16 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "The AWS Organizational Unit IDs to be registered",
+        "name": "organizational_unit_ids",
+        "in": "query"
+      },
+      {
         "pattern": ".*",
         "type": "string",
         "description": "The AWS profile to be used during registration",
@@ -272,8 +282,29 @@ _d4c_registration_endpoints = [
       {
         "pattern": ".*",
         "type": "string",
+        "description": "The AWS region to be used during registration",
+        "name": "aws_region",
+        "in": "query"
+      },
+      {
+        "pattern": ".*",
+        "type": "string",
         "description": "The custom IAM role to be used during registration",
         "name": "custom_role_name",
+        "in": "query"
+      },
+      {
+        "pattern": ".*",
+        "type": "string",
+        "description": "The Falcon client ID used during registration",
+        "name": "falcon_client_id",
+        "in": "query"
+      },
+      {
+        "pattern": ".*",
+        "type": "string",
+        "description": "Set to true to enable Identity Protection feature",
+        "name": "idp_enabled",
         "in": "query"
       }
     ]
