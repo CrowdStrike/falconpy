@@ -319,6 +319,12 @@ _container_images_endpoints = [
         "required": True
       },
       {
+        "type": "string",
+        "description": "Digest ID",
+        "name": "image_digest",
+        "in": "query"
+      },
+      {
         "type": "boolean",
         "default": False,
         "description": "Include base image vulnerabilities.",
@@ -361,6 +367,12 @@ _container_images_endpoints = [
         "name": "tag",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "Digest ID",
+        "name": "image_digest",
+        "in": "query"
       },
       {
         "type": "boolean",

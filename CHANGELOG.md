@@ -110,6 +110,10 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_correlation_rules.py`
 
++ Added: Added the `image_digest` parameter to the _CombinedImageIssuesSummary_ and _CombinedImageVulnerabilitySummary_ operations within the __Container Images__ service collection.
+    - `_endpoint/_container_images.py`
+    - `container_images.py`
+
 + Added: Added new __Deployments__ service collection with 5 new operations.
     - _GetDeploymentsExternalV1_
     - _CombinedReleasesV1Mixin0_
