@@ -581,22 +581,6 @@ _cspm_registration_endpoints = [
         "name": "tenant_id",
         "in": "query",
         "required": True
-      },
-      {
-        "type": "boolean",
-        "default": False,
-        "description": "Setting to true will invalidate the current certificate and generate a new certificate",
-        "name": "refresh",
-        "in": "query"
-      },
-      {
-        "maxLength": 2,
-        "minLength": 1,
-        "pattern": "^[0-9]{1,2}$",
-        "type": "string",
-        "description": "Years the certificate should be valid (only used when refresh=true)",
-        "name": "years_valid",
-        "in": "query"
       }
     ]
   ],
