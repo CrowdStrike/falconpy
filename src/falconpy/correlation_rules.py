@@ -562,8 +562,11 @@ class CorrelationRules(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities_rules.patch.v1
         """
         if not body:
-            # Issue 1294, expected body payload is a list of dictionaries
-            body = [correlation_rules_payload(passed_keywords=kwargs)]
+            body = correlation_rules_payload(passed_keywords=kwargs)
+
+        # Issue 1294, expected body payload is a list of dictionaries
+        if not isinstance(body, list):
+            body = [body]
 
         return process_service_request(
             calling_object=self,
