@@ -297,6 +297,12 @@
 + Fixed: Payload handler / docstring issue with _entities_rules_patch_v1_ operation within the __CorrelationRules__ Service Class.  Closes #1294.
     - `correlation_rules.py`
 
++ Fixed: Added missing keyword arguments for updated body payloads in the __CSPM Registration__ Service Class. Closes #1273.
+    - `_payload/_cspm_registration.py`
+    - `cspm_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cspm_registration.py`
+
 + Fixed: Pylance issue with type hints for Service Class methods when pythonic mode is being used. Closes #1274.
     - `alerts.py`
     - `api_integrations.py`
