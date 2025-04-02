@@ -52,8 +52,15 @@ class TestCSPMRegistration:
             "get_aws_account": falcon.GetCSPMAwsAccount(ids='12345678', organization_ids='12345678', scan_type="dry"),
             "create_aws_account": falcon.CreateCSPMAwsAccount(account_id="12345678",
                                                               cloudtrail_region="us-east-1",
-                                                              organization_id="12345678"
+                                                              organization_id="12345678",
+                                                              target_ous="1234567"
                                                               ),
+            "create_aws_account2": falcon.CreateCSPMAwsAccount(account_id="12345678",
+                                                               cloudtrail_region="us-east-1",
+                                                               organization_id="12345678",
+                                                               dspm_enabled=False,
+                                                               target_ous="1234567,8901234"
+                                                               ),
             "delete_aws_account": falcon.DeleteCSPMAwsAccount(ids='12345678', organization_ids='12345678'),
             "delete_aws_account_org": falcon.DeleteCSPMAwsAccount(organization_ids='12345678'),
             "get_azure_account": falcon.GetCSPMAzureAccount(ids='12345678', scan_type="dry"),

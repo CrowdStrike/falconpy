@@ -120,13 +120,21 @@ class CSPMRegistration(ServiceClass):
                         {
                             "account_id": "string",
                             "account_type": "string",
-                            "behavior_assessment_enabled": true,
+                            "behavior_assessment_enabled": boolean,
                             "cloudtrail_region": "string",
+                            "deployment_method": "string",
+                            "dspm_enabled": boolean,
+                            "dspm_role": "string",
+                            "falcon_client_id": "string",
                             "iam_role_arn": "string",
-                            "is_master": true,
+                            "is_master": boolean,
                             "organization_id": "string",
-                            "sensor_management_enabled": true,
-                            "use_existing_cloudtrail": true
+                            "root_stack_id": "string",
+                            "sensor_management_enabled": boolean,
+                            "target_ous": [
+                                "string"
+                            ],
+                            "use_existing_cloudtrail": boolean
                         }
                     ]
                 }
@@ -134,10 +142,16 @@ class CSPMRegistration(ServiceClass):
         account_type -- AWS account type. String.
         behavior_assessment_enabled -- Indicate if behavior assessment should be enabled. Boolean.
         cloudtrail_region -- AWS Cloudtrail Region. String.
+        deployment_method -- Deployment method. String.
+        dspm_enabled -- Flag indicating if DSPM should be enabled. Boolean.
+        dspm_role -- DSPM role. String.
+        falcon_client_id -- Falcon Client ID. String.
         iam_role_arn -- IAM role ARN to use. String.
         is_master -- Indicate if this is the primary account. Boolean.
         organization_id -- AWS Organization ID. String.
+        root_stack_id -- Root stack ID. String.
         sensor_management_enabled -- Indicate if sensor management should be enabled. Boolean.
+        target_ous -- List of target OUs. String or list of strings.
         use_existing_cloudtrail -- Indicate if the existing CloudTrail should be used. Boolean.
 
         This method only supports keywords for providing arguments.
