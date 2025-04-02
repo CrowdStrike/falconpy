@@ -1,0 +1,45 @@
+name: Update Correlation Rules
+
+on:
+  push:
+    paths:
+      - 'rules/rules.json'  # Triggers when rules.json is modified
+  workflow_dispatch:   # Keeps manual trigger option
+
+jobs:
+  update-rules:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Update rules
+      env:
+        FALCON_CLIENT_ID: ${{ secrets.FALCON_CLIENT_ID }}
+        FALCON_CLIENT_SECRET: ${{ secrets.FALCON_CLIENT_SECRET }}
+        FALCON_BASE_URL: ${{ secrets.FALCON_BASE_URL }}
+        LOG_LEVEL: ${{ vars.LOG_LEVEL || 'INFO' }}
+      run: python scripts/sync_detections.py
+    
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add rules/rules.json
+        git diff --quiet && git diff --staged --quiet || git commit -m "Update correlation rules"
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}
