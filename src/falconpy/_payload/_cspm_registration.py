@@ -46,21 +46,29 @@ def cspm_registration_payload(passed_keywords: dict) -> Dict[str, List[Dict[str,
             {
                 "account_id": "string",
                 "account_type": "string",
-                "behavior_assessment_enabled": true,
+                "behavior_assessment_enabled": boolean,
                 "client_id": "string",
                 "cloudtrail_region": "string",
-                "default_subscription": true,
+                "default_subscription": boolean,
                 "default_subscription_id": "string",
+                "deployment_method": "string",
+                "dspm_enabled": boolean,
+                "dspm_role": "string",
                 "environment": "string",
+                "falcon_client_id": "string",
                 "iam_role_arn": "string",
-                "is_master": true,
+                "is_master": boolean,
                 "organization_id": "string",
                 "remediation_region": "string",
                 "remediation_tou_accepted": "timestamp",
-                "sensor_management_enabled": true,
+                "root_stack_id": "string",
+                "sensor_management_enabled": boolean,
                 "subscription_id": "string"
+                "target_ous": [
+                    "string"
+                ],
                 "tenant_id": "string",
-                "use_existing_cloudtrail": true
+                "use_existing_cloudtrail": boolean
                 "years_valid": integer
             }
         ]
@@ -71,12 +79,14 @@ def cspm_registration_payload(passed_keywords: dict) -> Dict[str, List[Dict[str,
     item = {}
     keys = ["account_id", "account_type", "cloudtrail_region", "iam_role_arn",
             "organization_id", "tenant_id", "subscription_id", "remediation_region",
-            "remediation_tou_accepted", "client_id", "environment", "default_subscription_id"
+            "remediation_tou_accepted", "client_id", "environment", "default_subscription_id",
+            "deployment_method", "dspm_role", "falcon_client_id", "root_stack_id"
             ]
     bool_keys = ["behavior_assessment_enabled", "is_master", "sensor_management_enabled",
-                 "use_existing_cloudtrail", "default_subscription"
+                 "use_existing_cloudtrail", "default_subscription", "dspm_enabled"
                  ]
     int_keys = ["years_valid"]
+    list_keys = ["target_ous"]
     for key in keys:
         if passed_keywords.get(key, None):
             item[key] = passed_keywords.get(key, None)
@@ -88,6 +98,13 @@ def cspm_registration_payload(passed_keywords: dict) -> Dict[str, List[Dict[str,
     for key in int_keys:
         if passed_keywords.get(key, -1) >= 0:
             item[key] = passed_keywords.get(key, -1)
+
+    for key in list_keys:
+        provided = passed_keywords.get(key, None)
+        if provided:
+            if isinstance(provided, str):
+                provided = provided.split(",")
+            item[key] = provided
 
     returned_payload["resources"].append(item)
 
