@@ -624,7 +624,7 @@ class UserManagement(ServiceClass):
         ----
         filter : str
             The filter expression that should be used to limit the results. FQL format.
-            Allowed values: assigned_cids, cid, first_name, last_name, name, uid
+            Allowed values: assigned_cids, cid, first_name, last_name, name, uid, has_temporary_roles
         limit : int (range 1-500, default 0)
             The maximum number of records to return.
         offset : int (default 0)
@@ -634,7 +634,7 @@ class UserManagement(ServiceClass):
         sort : str
             The property to sort by. FQL syntax.
             Allowed values: first_name|asc, first_name|desc, last_name|asc, last_name_desc,
-            name|asc, name|desc, uid|asc, uid|desc
+            name|asc, name|desc, uid|asc, uid|desc, has_temporary_roles|asc, has_temporary_roles|desc
 
         Arguments
         ----
