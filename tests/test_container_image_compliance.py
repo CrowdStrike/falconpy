@@ -1,5 +1,5 @@
-# test_certificate_based_exclusions.py
-# This class tests the CertificateBasedExclusions service class
+# test_container_image_compliance.py
+# This class tests the ContainerImageCompliance service class
 
 # import json
 import os
@@ -9,17 +9,17 @@ import sys
 from tests import test_authorization as Authorization
 
 # Classes to test - manually imported from sibling folder
-from falconpy import ComplianceAssessments
+from falconpy import ContainerImageCompliance
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
-falcon = ComplianceAssessments(auth_object=config)
+falcon = ContainerImageCompliance(auth_object=config)
 AllowedResponses = [200, 201, 207, 400, 404, 429, 500]
 
 
-class TestCertificateBasedExclusions:
+class TestContainerImageCompliance:
     def test_all_code_paths(self):
         error_checks = True
         tests = {

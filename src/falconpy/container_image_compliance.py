@@ -1,4 +1,4 @@
-"""CrowdStrike Falcon Certificate Based Exclusions API interface class.
+"""CrowdStrike Falcon Container Image Compliance API interface class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -40,10 +40,10 @@ from typing import Dict, Union
 from ._util import force_default, process_service_request
 from ._result import Result
 from ._service_class import ServiceClass
-from ._endpoint._compliance_assessments import _compliance_assessments_endpoints as Endpoints
+from ._endpoint._container_image_compliance import _container_image_compliance_endpoints as Endpoints
 
 
-class ComplianceAssessments(ServiceClass):
+class ContainerImageCompliance(ServiceClass):
     """The only requirement to instantiate an instance of this class is one of the following.
 
     - a valid client_id and client_secret provided as keywords.
@@ -550,3 +550,7 @@ class ComplianceAssessments(ServiceClass):
     extAggregateFailedRulesByImages = aggregate_failed_rules_by_image
     extAggregateFailedRulesCountBySeverity = aggregate_failed_rules_count_by_severity
     extAggregateRulesByStatus = aggregate_rules_by_status
+
+
+# Service collection has been renamed. Alias for legacy usage patterns.
+ComplianceAssessments = ContainerImageCompliance
