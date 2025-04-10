@@ -1,3 +1,128 @@
+# Version 1.4.9
+## Added features and functionality
++ Added: Added new __CAO Hunting__ service collection with 4 new operations.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_cao_hunting.py`
+    - `_payload/_generic.py`
+    - `__init__.py`
+    - `cao_hunting.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cao_hunting.py`
+
++ Added: Added new _cloud_security_assets_combined_compliance_by_account_ operation to the __Cloud Security Assets__ service collection.
+    - `_endpoint/_cloud_security_assets.py`
+    - `_endpoint/deprecated/_cloud_security_assets.py`
+    - `cloud_security_assets.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_security_assets.py`
+
++ Added: Added 6 new operations to the __Custom Storage__ service collection.
+    - _ListCollections_
+    - _DescribeCollections_
+    - _DescribeCollection_
+    - _ListSchemas_
+    - _GetSchema_
+    - _GetSchemaMetadata_
+    - `_endpoint/_custom_storage.py`
+    - `_util/_functions.py`
+    - `custom_storage.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_custom_storage.py`
+
++ Added: Added new __FaaS Execution__ service collection with 1 new operation.
+    - _ReadRequestBody_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_faas_execution.py`
+    - `__init__.py`
+    - `faas_execution.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_faas_execution.py`
+
++ Added: Added new _ReadClusterCombinedV2_ operation to the __Kubernetes Protection__ service collection.
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_kubernetes_protection.py`
+
++ Added: Added _aggregateUsersV1_ operation to the __User Management__ service collection.
+    - `_endpoint/_user_management.py`
+    - `user_management.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_user_management.py`
+
+## Other
++ Updated: Cosmetic update to `filter` and `sort` parameter descriptions in the _cloud_security_registration_oci_get_account_ operation of the __Cloud OCI Registration__ service collection.
+    - `_endpoint/_cloud_oci_registration.py`
+    - `_endpoint/deprecated/_cloud_oci_registration.py`
+
++ Removed: Removed the _cloud_security_assets_entities_artifacts_get_ operation from the __Cloud Security Assets__ service collection.
+    - `_endpoint/_cloud_security_assets.py`
+    - `_endpoint/deprecated/_cloud_security_assets.py`
+    - `cloud_security_assets.py`
+    > Unit testing updated to reflect currently available operations.
+    - `tests/test_cloud_security_assets.py`
+
++ Added: Added `service_category` as an allowed value for the `sort` parameter in the __cloud_security_assets_queries__ operation within the __Cloud Security Assets__ service collection.
+    - `_endpoint/_cloud_security_assets.py`
+    - `cloud_security_assets.py`
+
++ Renamed: Renamed to the __Compliance Assessments__ service collection to __Container Image Compliance__. Legacy service collection name maintained as an alias within the Service Class.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_compliance_assessments.py` (Removed)
+    - `_endpoint/_container_image_compliance.py`
+    - `__init__.py`
+    - `compliance_assessments.py` -> `container_image_compliance.py`
+    > Unit testing updated to reflect new code pattern.
+    - `tests/test_compliance_assessments.py` -> `tests/test_container_compliance.py`
+
++ Updated: Cosmetic update to the `offset` parameter description in the _CombinedImageByVulnerabilityCount_ operation within the __Container Images__ service collection.
+    - `_endpoint/_container_images.py`
+
++ Added: Added `ai_related` as an allowed value for the `filter` parameter in 10 operations within the __Kubernetes Protection__ service collection.
+    - _FindContainersByContainerRunTimeVersion_
+    - _GroupContainersByManaged_
+    - _ReadContainersByDateRangeCount_
+    - _ReadContainerImageDetectionsCountByDate_
+    - _ReadVulnerableContainerImageCount_
+    - _ReadContainerCount_
+    - _ReadContainersSensorCoverage_
+    - _ReadContainerVulnerabilitiesBySeverityCount_
+    - _ReadDistinctContainerImageCount_
+    - _ReadContainerImagesByMostUsed_
+    - _ReadContainerCombined_
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+
++ Added: Added multiple new allowed values for the `filter` parameter in the _ReadClusterCombined_ operation within the __Kubernetes Protection__ service collection.
+    - `kubernetes_protection.py`
+
++ Added: Added `containers_impacted_ai_related` as an allowed value for the `filter` parameter in 2 operations within the __Kubernetes Protection__ service collection.
+    - _SearchAndReadKubernetesIomEntities_
+    - _SearchKubernetesIoms_
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+
++ Updated: Added `host_info.instance_state` as an allowed value for the `filter` parameter in the _combinedQueryVulnerabilities_ and _queryVulnerabilities_ operations within the __Spotlight Vulnerabilities__ service collection.
+    - `_endpoint/_spotlight_vulnerabilities.py`
+
++ Updated: Added `accessed_by_process` as an allowed value to the `edge_type` parameter in the _combined_edges_get_ operation within the __ThreatGraph__ service collection.
+    - `_endpoint/_threatgraph.py`
+    - `threatgraph.py`
+
++ Updated: Added `expires_at` as an allowed value for the `filter` and `sort` parameters in the _combinedUserRolesV1_ operation within the __User Management__ service collection.
+    - `_endpoint/_user_management.py`
+    - `user_management.py`
+
++ Updated: Added `has_temporary_roles` as an allowed value for the `filter` and `sort` parameters in the _queryUserV1_ operation within the __User Management__ service collection.
+    - `_endpoint/_user_management.py`
+    - `user_management.py`
+
++ Updated: Added `direct_assigned_cids` and `status` as allowed values for the `filter` parameter in the _queryUserV1_ operation within the __User Management__ service collection.
+    - `_endpoint/_user_management.py`
+    - `user_management.py`
+
+---
+
 # Version 1.4.8
 ## Added features and functionality
 + Added: Added 1 new operation to the __Alerts__ service collection.
