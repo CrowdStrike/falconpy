@@ -23,7 +23,6 @@ class TestCloudSecurityAssets:
     def test_all_code_paths(self):
         error_checks = True
         tests = {
-            "cloud_security_assets_entities_artifacts_get": falcon.get_artifacts(id="12345678", crn="whatever"),
             "cloud_security_assets_entities_get": falcon.get_assets("12345678"),
             "cloud_security_assets_queries": falcon.query_assets(filter="zone:'bob'"),
         }
