@@ -304,7 +304,7 @@ _user_management_endpoints = [
       {
         "type": "string",
         "description": "Filter using a query in Falcon Query Language (FQL). Supported filters: assigned_cids, "
-        "cid, factors, first_name, last_name, name, uid",
+        "cid, factors, first_name, has_temporary_roles, last_name, name, uid",
         "name": "filter",
         "in": "query"
       },
@@ -333,6 +333,8 @@ _user_management_endpoints = [
           "created_at|desc",
           "first_name|asc",
           "first_name|desc",
+          "has_temporary_roles|asc",
+          "has_temporary_roles|desc",
           "last_login_at|asc",
           "last_login_at|desc",
           "last_name|asc",
