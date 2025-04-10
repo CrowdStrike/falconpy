@@ -103,6 +103,13 @@ The following samples are categorized by CrowdStrike product, and further catego
 | :-- | :-- |
 | [Workflows](#workflows-samples) | Workflow Manager (terminal)<BR/>Workflows Manager (GUI) |
 
+<a id="ngsiem-toc"></a>
+
+### [Next-Gen SIEM](#next-gen-siem-apis)
+| Topic | Samples |
+| :-- | :-- |
+| [Correlation Rules](#correlation-rules-samples) | Detection as Code |
+
 <a id="threat-intelligence-toc"></a>
 
 ### [Threat Intelligence](#threat-intelligence-apis)
@@ -1846,6 +1853,37 @@ This sample demonstrates the following CrowdStrike Workflows API operations:
 
 </details>
 
+<!--NG SIEM-->
+
+<a id="next-gen-siem-apis"></a>
+<details open>
+<summary><h2>Next-Gen SIEM</h2></summary>
+<a id="correlation-rules-samples"></a>
+<details>
+<summary><h3>Correlation Rules</h3> <small>(click to expand)</small><br/>
+This category is dedicated to Correlation Rules, and discusses the Correlation Rules API service collection.
+</summary>
+
+#### Detection Rules as Code
+Manage CrowdStrike Correlation Rules as code, enabling version control and automated deployment of detection rules.
+
+[![Correlation Rules](https://img.shields.io/badge/Service%20Class-Detection_as_Code-silver?style=for-the-badge&labelColor=C30A16&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAYAAAAi2ky3AAABhWlDQ1BJQ0MgcHJvZmlsZQAAKJF9kT1Iw1AUhU9TpaIVBzuIOGSoDmJBVEQ3rUIRKoRaoVUHk5f+CE0akhQXR8G14ODPYtXBxVlXB1dBEPwBcXNzUnSREu9LCi1ifPB4H+e9c7jvXkColZhmtY0Cmm6bqURczGRXxNAruhAEMI1hmVnGrCQl4bu+7hHg512MZ/m/+3N1qzmLAQGReIYZpk28Tjy5aRuc94kjrCirxOfEIyYVSPzIdcXjN84FlwWeGTHTqTniCLFYaGGlhVnR1IgniKOqplO+kPFY5bzFWStVWKNO/sNwTl9e4jrtASSwgEVIEKGggg2UYCNGp06KhRTdx338/a5fIpdCrg0wcsyjDA2y6wefwe/eWvnxMS8pHAfaXxznYxAI7QL1quN8HztO/QQIPgNXetNfrgFTn6RXm1r0COjZBi6um5qyB1zuAH1PhmzKrsTnL+TzwPsZjSkL9N4Cnate3xr3OH0A0tSr5A1wcAgMFSh7zeffHa19+/dNo38/hq9yr+iELI0AAAAGYktHRAAAAAAAAPlDu38AAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQflDAsTByz7Va2cAAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAAYBJREFUKM+lkjFIlVEYht/zn3sFkYYUyUnIRcemhCtCU6JQOLiIU+QeJEQg6BBIm0s4RBCBLjq5OEvgJC1uOniJhivesLx17/97/vO9b4NK4g25157hfHCGB773/cA0HZIEAKiMj+LWiOxljG/i96pnCFP58XHnrWX2+9cj0dYl9Yu2FE9/9rXrcAAgs2eSyiBfOe/XRD503h/CuffOubQVUXL+Jh9BllzBbyJJBgDclVkO4Kukd8zzkXJbeUljIldFTstsmSHM6S81ma2KfPKlFdkGAMY4wzx/bbXapMy21My+YizdKNq5mDzLkrxafSxySFKjSWX2oTmjKzz4vN0r2lOFcL/Q3V0/mX95ILMXTTGYVfaut/aP2+oCMAvnZgCcsF5fcR0dg65YHAdwB+QApADvu0AuOe/ftlJAD7Nsgmm6yBjDtfWORJZlNtFyo/lR5Z7MyheKA5ktSur7sTAHazSG27pehjAiaVfkN8b4XFIJ/wOzbOx07VNRUuHy7w98CzCcGPyWywAAAABJRU5ErkJggg==)](https://github.com/CrowdStrike/falconpy/tree/main/samples/correlation_rules/detection_as_code)
+
+##### Correlation Rules API operations discussed
+This sample demonstrates the following CrowdStrike Correlation Rules API operations:
+
+| Operation | Description |
+| :--- | :--- |
+| [combined_rules_get_v1](https://falconpy.io/Service-Collections/Correlation-Rules.html#combined_rules_get_v1) | Find all rules matching the query and filter. |
+| [entities_rules_delete_v1](https://falconpy.io/Service-Collections/Correlation-Rules.html#entities_rules_delete_v1) | Delete rules by ID. |
+| [entities_rules_patch_v1](https://falconpy.io/Service-Collections/Correlation-Rules.html#entities_rules_patch_v1) | Update a correlation rule. |
+| [entities_rules_post_v1](https://falconpy.io/Service-Collections/Correlation-Rules.html#entities_rules_post_v1) | Create a correlation rule. |
+
+</details>
+
+[Back to top](#falconpy-sample-library) | [How to authenticate](#authentication-for-these-examples) | [Table of Contents](#fusion-and-foundry-toc)
+
+---
 
 <!--Threat Intelligence-->
 
