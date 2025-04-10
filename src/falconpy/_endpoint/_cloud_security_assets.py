@@ -38,27 +38,6 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_security_assets_endpoints = [
   [
-    "cloud_security_assets_entities_artifacts_get",
-    "GET",
-    "/cloud-security-assets/entities/resource-artifacts/v1",
-    "TODO",
-    "cloud_security_assets",
-    [
-      {
-        "type": "string",
-        "description": "ID",
-        "name": "id",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "CRN",
-        "name": "crn",
-        "in": "query"
-      }
-    ]
-  ],
-  [
     "cloud_security_assets_entities_get",
     "GET",
     "/cloud-security-assets/entities/resources/v1",

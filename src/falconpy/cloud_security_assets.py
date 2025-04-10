@@ -56,33 +56,6 @@ class CloudSecurityAssets(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_artifacts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Retrieve resources by ID and CRN.
-
-        Keyword arguments:
-        id -- Cloud Security Asset ID. String.
-        crn -- Cloud Security Asset CRN. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: GET
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-security-assets/cloud-security-assets-entities-artifacts-get
-        """
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="cloud_security_assets_entities_artifacts_get",
-            keywords=kwargs,
-            params=parameters
-            )
-
-    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_assets(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get raw resources based on the provided IDs.
 
@@ -204,6 +177,5 @@ class CloudSecurityAssets(ServiceClass):
             params=parameters
             )
 
-    cloud_security_assets_entities_artifacts_get = get_artifacts
     cloud_security_assets_entities_get = get_assets
     cloud_security_assets_queries = query_assets
