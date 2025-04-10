@@ -77,9 +77,9 @@ _spotlight_vulnerabilities_endpoints = [
         "cve.remediation_level, cve.cps_rating, cve.exprt_rating, cve.exploit_status_to_include, cve.severity, "
         "cve.base_score, cve.types, host_info.asset_criticality, host_info.asset_roles, host_info.internet_exposure, "
         "host_info.tags, host_info.groups, host_info.product_type_desc, host_info.platform_name, "
-        "suppression_info.is_suppressed, suppression_info.reason\n\t\t\tAvailable filter fields that supports wildcard "
-        "(*): N/A\n\t\t\tAvailable filter fields that supports range comparisons (>, <, >=, <=): created_timestamp, "
-        "closed_timestamp, updated_timestamp, cve.base_score\n\t\t\t",
+        "suppression_info.is_suppressed, suppression_info.reason, host_info.instance_state\n\t\t\tAvailable filter "
+        "fields that supports wildcard (*): N/A\n\t\t\tAvailable filter fields that supports range comparisons (>, <, "
+        ">=, <=): created_timestamp, closed_timestamp, updated_timestamp, cve.base_score\n\t\t\t",
         "name": "filter",
         "in": "query",
         "required": True
@@ -179,9 +179,9 @@ _spotlight_vulnerabilities_endpoints = [
         "cve.remediation_level, cve.cps_rating, cve.exprt_rating, cve.exploit_status_to_include, cve.severity, "
         "cve.base_score, cve.types, host_info.asset_criticality, host_info.asset_roles, host_info.internet_exposure, "
         "host_info.tags, host_info.groups, host_info.product_type_desc, host_info.platform_name, "
-        "suppression_info.is_suppressed, suppression_info.reason\n\t\t\tAvailable filter fields that supports wildcard "
-        "(*): N/A\n\t\t\tAvailable filter fields that supports range comparisons (>, <, >=, <=): created_timestamp, "
-        "closed_timestamp, updated_timestamp, cve.base_score\n\t\t\t",
+        "suppression_info.is_suppressed, suppression_info.reason, host_info.instance_state\n\t\t\tAvailable filter "
+        "fields that supports wildcard (*): N/A\n\t\t\tAvailable filter fields that supports range comparisons (>, <, "
+        ">=, <=): created_timestamp, closed_timestamp, updated_timestamp, cve.base_score\n\t\t\t",
         "name": "filter",
         "in": "query",
         "required": True
