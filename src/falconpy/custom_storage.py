@@ -57,6 +57,98 @@ class CustomStorage(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_collections(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """List available collection names in alphabetical order.
+
+        Keyword arguments:
+        end -- The end key to end listing to. String.
+        limit -- The limit of results to return. Integer.
+        start -- The start key to start listing from. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-storage/ListCollections
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ListCollections",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def describe_collections(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Fetch metadata about one or more existing collections.
+
+        Keyword arguments:
+        names -- A set of collection names to describe. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PUT
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-storage/DescribeCollections
+        """
+        names = kwargs.get("names", None)
+        if isinstance(names, str):
+            kwargs["names"] = names.split(",")
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DescribeCollections",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def describe_collection(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Fetch metadata about an existing collection.
+
+        Keyword arguments:
+        collection_name -- The name of the collection. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-storage/DescribeCollection
+        """
+        collection_name = kwargs.get("collection_name", None)
+        if collection_name:
+            # Pop the path variable from the keywords dictionary
+            # before processing query string arguments.
+            kwargs.pop("collection_name")
+            returned = process_service_request(calling_object=self,
+                                               endpoints=Endpoints,
+                                               operation_id="DescribeCollection",
+                                               keywords=kwargs,
+                                               params=parameters,
+                                               collection_name=collection_name
+                                               )
+        else:
+            returned = generate_error_result("You must provide a collection_name "
+                                             "argument in order to use this operation."
+                                             )
+
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def list(self, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """List the object keys in the specified collection in alphabetical order.
 
@@ -350,6 +442,109 @@ class CustomStorage(ServiceClass):
             returned = generate_error_result("You must provide a collection_name and an "
                                              "object_key argument in order to use this operation."
                                              )
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_schemas(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get the list of schemas for the requested collection in reverse version order (latest first).
+
+        Keyword arguments:
+        collection_name -- The name of the collection. String.
+        end -- The end key to end listing to. String.
+        limit -- The limit of results to return. Integer.
+        start -- The start key to start listing from. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-storage/ListSchemas
+        """
+        collection_name = kwargs.get("collection_name", None)
+        if collection_name:
+            kwargs.pop("collection_name")
+            returned = process_service_request(calling_object=self,
+                                               endpoints=Endpoints,
+                                               operation_id="ListSchemas",
+                                               keywords=kwargs,
+                                               params=parameters,
+                                               collection_name=collection_name
+                                               )
+        else:
+            returned = generate_error_result("You must provide a collection_name argument in order to use this operation.")
+
+        return returned
+
+    def get_schema(self: object, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get the bytes of the specified schema of the requested collection.
+
+        Keyword arguments:
+        collection_name -- The name of the collection. String.
+        schema_version -- The version of the collection schema or "latest" for the latest version. String.
+                          Defaults to "latest".
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-storage/GetSchema
+        """
+        collection_name = kwargs.get("collection_name", None)
+        schema_version = kwargs.get("schema_version", "latest")
+        if collection_name:
+            kwargs.pop("collection_name")
+            if kwargs.get("schema_version", None):
+                kwargs.pop("schema_version")
+            returned = process_service_request(calling_object=self,
+                                               endpoints=Endpoints,
+                                               operation_id="GetSchema",
+                                               collection_name=collection_name,
+                                               schema_version=schema_version
+                                               )
+        else:
+            returned = generate_error_result("You must provide a collection_name argument in order to use this operation.")
+
+        return returned
+
+    def schema_metadata(self: object, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get the metadata for the specified schema of the requested collection.
+
+        Keyword arguments:
+        collection_name -- The name of the collection. String.
+        schema_version -- The version of the collection schema or "latest" for the latest version. String.
+                          Defaults to "latest".
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/custom-storage/GetSchemaMetadata
+        """
+        collection_name = kwargs.get("collection_name", None)
+        schema_version = kwargs.get("schema_version", "latest")
+        if collection_name:
+            kwargs.pop("collection_name")
+            if kwargs.get("schema_version", None):
+                kwargs.pop("schema_version")
+            returned = process_service_request(calling_object=self,
+                                               endpoints=Endpoints,
+                                               operation_id="GetSchemaMetadata",
+                                               collection_name=collection_name,
+                                               schema_version=schema_version
+                                               )
+        else:
+            returned = generate_error_result("You must provide a collection_name argument in order to use this operation.")
+
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -687,12 +882,18 @@ class CustomStorage(ServiceClass):
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes.
+    ListCollections = list_collections
+    DescribeCollections = describe_collections
+    DescribeCollection = describe_collection
     ListObjects = list
     SearchObjects = search
     GetObject = get
     PutObject = upload
     DeleteObject = delete
     GetObjectMetadata = metadata
+    ListSchemas = list_schemas
+    GetSchema = get_schema
+    GetSchemaMetadata = schema_metadata
     ListObjectsByVersion = list_by_version
     SearchObjectsByVersion = search_by_version
     GetVersionedObject = get_version

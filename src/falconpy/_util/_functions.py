@@ -733,6 +733,9 @@ def handle_path_variables(passed: dict, route_url: str):
         passed_collection_version = passed.get("collection_version", None)
         if passed_collection_version:
             collect_args["collection_version"] = str(passed_collection_version)
+        passed_schema_version = passed.get("schema_version", None)
+        if passed_schema_version:
+            collect_args["schema_version"] = str(passed_schema_version)
         route_url = route_url.format(**collect_args)
     passed_vertex_type = passed.get("vertex_type", None)
     if passed_vertex_type:

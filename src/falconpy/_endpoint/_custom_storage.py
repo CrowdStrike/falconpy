@@ -38,6 +38,78 @@ For more information, please refer to <https://unlicense.org>
 
 _custom_storage_endpoints = [
   [
+    "ListCollections",
+    "GET",
+    "/customobjects/v1/collections",
+    "List available collection names in alphabetical order",
+    "custom_storage",
+    [
+      {
+        "maxLength": 1000,
+        "minLength": 1,
+        "type": "string",
+        "description": "The end key to end listing to",
+        "name": "end",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "type": "integer",
+        "description": "The limit of results to return",
+        "name": "limit",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "maxLength": 1000,
+        "minLength": 1,
+        "type": "string",
+        "description": "The start key to start listing from",
+        "name": "start",
+        "in": "query",
+        "allowEmptyValue": True
+      }
+    ]
+  ],
+  [
+    "DescribeCollections",
+    "PUT",
+    "/customobjects/v1/collections",
+    "Fetch metadata about one or more existing collections",
+    "custom_storage",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "A set of collection names",
+        "name": "names",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DescribeCollection",
+    "GET",
+    "/customobjects/v1/collections/{collection_name}",
+    "Fetch metadata about an existing collection",
+    "custom_storage",
+    [
+      {
+        "maxLength": 255,
+        "minLength": 1,
+        "type": "string",
+        "description": "The name of the collection",
+        "name": "collection_name",
+        "in": "path",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ListObjects",
     "GET",
     "/customobjects/v1/collections/{collection_name}/objects",
@@ -260,6 +332,101 @@ _custom_storage_endpoints = [
         "type": "string",
         "description": "The object key",
         "name": "object_key",
+        "in": "path",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ListSchemas",
+    "GET",
+    "/customobjects/v1/collections/{collection_name}/schemas",
+    "Get the list of schemas for the requested collection in reverse version order (latest first)",
+    "custom_storage",
+    [
+      {
+        "maxLength": 255,
+        "minLength": 1,
+        "type": "string",
+        "description": "The name of the collection",
+        "name": "collection_name",
+        "in": "path",
+        "required": True
+      },
+      {
+        "maxLength": 1000,
+        "minLength": 1,
+        "type": "string",
+        "description": "The end key to end listing to",
+        "name": "end",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "type": "integer",
+        "description": "The limit of results to return",
+        "name": "limit",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "maxLength": 1000,
+        "minLength": 1,
+        "type": "string",
+        "description": "The start key to start listing from",
+        "name": "start",
+        "in": "query",
+        "allowEmptyValue": True
+      }
+    ]
+  ],
+  [
+    "GetSchema",
+    "GET",
+    "/customobjects/v1/collections/{collection_name}/schemas/{schema_version}",
+    "Get the bytes of the specified schema of the requested collection",
+    "custom_storage",
+    [
+      {
+        "maxLength": 255,
+        "minLength": 1,
+        "type": "string",
+        "description": "The name of the collection",
+        "name": "collection_name",
+        "in": "path",
+        "required": True
+      },
+      {
+        "minLength": 1,
+        "type": "string",
+        "description": "The version of the collection schema or 'latest' for the latest version",
+        "name": "schema_version",
+        "in": "path",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetSchemaMetadata",
+    "GET",
+    "/customobjects/v1/collections/{collection_name}/schemas/{schema_version}/metadata",
+    "Get the metadata for the specified schema of the requested collection",
+    "custom_storage",
+    [
+      {
+        "maxLength": 255,
+        "minLength": 1,
+        "type": "string",
+        "description": "The name of the collection",
+        "name": "collection_name",
+        "in": "path",
+        "required": True
+      },
+      {
+        "minLength": 1,
+        "type": "string",
+        "description": "The version of the collection schema or 'latest' for the latest version",
+        "name": "schema_version",
         "in": "path",
         "required": True
       }
