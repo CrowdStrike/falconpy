@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 # pylint: disable=R0904,C0302
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import generic_payload_list
+from ._payload import generic_payload_list, aggregate_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._user_management import _user_management_endpoints as Endpoints
@@ -58,6 +58,97 @@ class UserManagement(ServiceClass):
     - an `auth_object` containing a valid instance of the authentication service class (OAuth2)
     - a valid token provided by the token method of the authentication service class (OAuth2.token)
     """
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def aggregate_users(self: object,
+                        body: dict = None,
+                        **kwargs
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get user aggregates.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "exclude": "string",
+                        "extended_bounds": {
+                            "max": "string",
+                            "min": "string"
+                        }
+                        "field": "string",
+                        "filter": "string",
+                        "from": integer,
+                        "include": "string",
+                        "interval": "string",
+                        "max_doc_count": integer,
+                        "min_doc_count": integer,
+                        "missing": "string",
+                        "name": "string",
+                        "q": "string",
+                        "ranges": [
+                        {
+                            "From": integer,
+                            "To": integer
+                        }
+                        ],
+                        "size": integer,
+                        "sort": "string",
+                        "sub_aggregates": [
+                            null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        exclude -- Fields to exclude. String.
+        extended_bounds -- Extended bounds. Dictionary containing "min" and "max" as strings.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        from -- Integer.
+        include -- Fields to include. String.
+        interval -- String.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
+        missing -- String.
+        name -- Scan name. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/aggregateUsersV1
+        """
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="aggregateUsersV1",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_user_grants(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
@@ -1068,6 +1159,7 @@ class UserManagement(ServiceClass):
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
+    aggregateUsersV1 = aggregate_users
     combinedUserRolesV1 = get_user_grants
     get_user_roles = get_user_grants  # Helper alias
     get_user_roles_combined = get_user_grants  # Helper alias

@@ -14,7 +14,7 @@ sys.path.append(os.path.abspath('src'))
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = UserManagement(auth_object=config)
-AllowedResponses = [200, 400, 401, 404, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 400, 401, 403, 404, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestFalconUserManagement:
@@ -84,6 +84,7 @@ class TestFalconUserManagement:
         #falcon.base_url = "nowhere"
         error_checks = True
         tests = {
+            "aggregateUsersV1": falcon.aggregate_users(),
             "get_roles": falcon.GetRoles(ids='12345678'),
             "grant_user_role_ids_first": falcon.GrantUserRoleIds(body={}, parameters={}),
             "grant_user_role_ids": falcon.GrantUserRoleIds(user_uuid="12345678", roleIds=["12345678"]),

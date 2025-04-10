@@ -38,6 +38,20 @@ For more information, please refer to <https://unlicense.org>
 
 _user_management_endpoints = [
   [
+    "aggregateUsersV1",
+    "POST",
+    "/user-management/aggregates/users/v1",
+    "Get host aggregates as specified via json in request body.",
+    "user_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "combinedUserRolesV1",
     "GET",
     "/user-management/combined/user-roles/v1",
