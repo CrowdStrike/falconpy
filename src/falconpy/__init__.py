@@ -98,7 +98,7 @@ from .cloud_azure_registration import CloudAzureRegistration
 from .cloud_oci_registration import CloudOCIRegistration
 from .cloud_security_assets import CloudSecurityAssets
 from .cloud_snapshots import CloudSnapshots
-from .compliance_assessments import ComplianceAssessments
+from .container_image_compliance import ContainerImageCompliance, ComplianceAssessments
 from .configuration_assessment_evaluation_logic import ConfigurationAssessmentEvaluationLogic
 from .configuration_assessment import ConfigurationAssessment
 from .container_alerts import ContainerAlerts
@@ -225,7 +225,8 @@ __all__ = [
     "DataScanner", "SensorUsage", "Downloads", "DeliverySettings", "ASPM", "IntelligenceFeeds",
     "NGSIEM", "CorrelationRules", "CloudAWSRegistration", "CloudAzureRegistration",
     "CloudOCIRegistration", "CloudSecurityAssets", "Deployments", "ServerlessVulnerabilities",
-    "DeviceContent", "IntelligenceIndicatorGraph", "ContentUpdatePolicies", "CAOHunting"
+    "DeviceContent", "IntelligenceIndicatorGraph", "ContentUpdatePolicies", "CAOHunting",
+    "ContainerImageCompliance"
     ]
 """
 This is free and unencumbered software released into the public domain.
