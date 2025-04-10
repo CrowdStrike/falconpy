@@ -82,7 +82,8 @@ _user_management_endpoints = [
       },
       {
         "type": "string",
-        "description": "Filter using a query in Falcon Query Language (FQL). Supported filters: role_id, role_name",
+        "description": "Filter using a query in Falcon Query Language (FQL). Supported filters: expires_at, "
+        "role_id, role_name",
         "name": "filter",
         "in": "query"
       },
@@ -107,6 +108,8 @@ _user_management_endpoints = [
         "enum": [
           "cid|asc",
           "cid|desc",
+          "expires_at|asc",
+          "expires_at|desc",
           "role_name|asc",
           "role_name|desc",
           "type|asc",
