@@ -91,6 +91,7 @@ from .alerts import Alerts
 from .api_integrations import APIIntegrations
 from .api_complete import APIHarness, APIHarnessV2
 from .aspm import ASPM
+from .cao_hunting import CAOHunting
 from .certificate_based_exclusions import CertificateBasedExclusions
 from .cloud_aws_registration import CloudAWSRegistration
 from .cloud_azure_registration import CloudAzureRegistration
@@ -224,7 +225,7 @@ __all__ = [
     "DataScanner", "SensorUsage", "Downloads", "DeliverySettings", "ASPM", "IntelligenceFeeds",
     "NGSIEM", "CorrelationRules", "CloudAWSRegistration", "CloudAzureRegistration",
     "CloudOCIRegistration", "CloudSecurityAssets", "Deployments", "ServerlessVulnerabilities",
-    "DeviceContent", "IntelligenceIndicatorGraph", "ContentUpdatePolicies"
+    "DeviceContent", "IntelligenceIndicatorGraph", "ContentUpdatePolicies", "CAOHunting"
     ]
 """
 This is free and unencumbered software released into the public domain.

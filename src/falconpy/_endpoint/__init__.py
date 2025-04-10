@@ -50,6 +50,7 @@ from .deprecated import _deprecated_class_mapping
 from ._alerts import _alerts_endpoints
 from ._api_integrations import _api_integrations_endpoints
 from ._aspm import _aspm_endpoints
+from ._cao_hunting import _cao_hunting_endpoints
 from ._certificate_based_exclusions import _certificate_based_exclusions_endpoints
 from ._cloud_aws_registration import _cloud_aws_registration_endpoints
 from ._cloud_azure_registration import _cloud_azure_registration_endpoints
@@ -142,6 +143,7 @@ api_endpoints: List[Any] = []
 api_endpoints.extend(_alerts_endpoints)
 api_endpoints.extend(_api_integrations_endpoints)
 api_endpoints.extend(_aspm_endpoints)
+api_endpoints.extend(_cao_hunting_endpoints)
 api_endpoints.extend(_certificate_based_exclusions_endpoints)
 api_endpoints.extend(_cloud_connect_aws_endpoints)
 api_endpoints.extend(_cloud_aws_registration_endpoints)

@@ -88,23 +88,27 @@ def aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R091
             }
         ],
         "exclude": "string",
+        "extended_bounds": {
+            "max": "string",
+            "min": "string"
+        },
         "field": "string",
         "filter": "string",
-        "from": 0,
+        "from": integer,
         "include": "string",
         "interval": "string",
-        "max_doc_count": 0,
-        "min_doc_count": 0,
+        "max_doc_count": integer,
+        "min_doc_count": integer,
         "missing": "string",
         "name": "string",
         "q": "string",
         "ranges": [
             {
-                "From": 0,
-                "To": 0
+                "From": integer,
+                "To": integer
             }
         ],
-        "size": 0,
+        "size": integer,
         "sort": "string",
         "sub_aggregates": [
             null
@@ -116,7 +120,7 @@ def aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R091
     returned_payload = {}
 
     keys = ["date_ranges", "exclude", "include", "field", "filter", "interval", "missing",
-            "name", "q", "ranges", "sort", "sub_aggregates", "time_zone", "type"
+            "name", "q", "ranges", "sort", "sub_aggregates", "time_zone", "type", "extended_bounds"
             ]
 
     int_keys = ["from", "max_doc_count", "min_doc_count", "size"]
