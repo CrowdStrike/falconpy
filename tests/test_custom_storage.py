@@ -23,11 +23,21 @@ class TestCustomStorage:
     def run_all_tests(self):
         error_checks = True
         tests = {
+            "ListCollections": falcon.list_collections(limit=1),
+            "DescribeCollections": falcon.describe_collections(names="whatever,name"),
+            "DescribeCollection": falcon.describe_collection(collection_name="whatever"),
+            "DescribeCollectionFail": falcon.describe_collection(),
             "ListObjects" : falcon.list(collection_name="Whatever"),
             "SearchObjects" : falcon.search(collection_name="whatever"),
             "GetObject" : falcon.get(collection_name="whatever", object_key="whatever_else"),
             "PutObject" : falcon.upload(collection_name="whatever", object_key="whatever_else"),
             "DeleteObject" : falcon.delete(collection_name="whatever", object_key="whatever_else"),
+            "ListSchemas": falcon.list_schemas(collection_name="whatever"),
+            "GetSchema": falcon.get_schema(collection_name="whatever", schema_version="latest"),
+            "GetSchemaMetadata": falcon.schema_metadata(collection_name="whatever", schema_version="latest"),
+            "ListSchemasFail": falcon.list_schemas(),
+            "GetSchemaFail": falcon.get_schema(),
+            "GetSchemaMetadataFail": falcon.schema_metadata(),
             "ListObjectsByVersion" : falcon.list_by_version(collection_name="Whatever"),
             "SearchObjectsByVersion" : falcon.search_by_version(collection_name="whatever"),
             "GetVersionedObject" : falcon.get_version(collection_name="whatever", object_key="whatever_else"),
