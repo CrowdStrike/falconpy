@@ -172,7 +172,7 @@ class UserManagement(ServiceClass):
             between user and CID (specified using `cid` keyword).
         filter : str
             The filter expression that should be used to limit the results. FQL format.
-            Available values: role_id, role_name
+            Available values: role_id, role_name, expires_at
         limit : int (range 1 - 500, default 100)
             The maximum number of records to return.
         offset : int (default 0)
@@ -181,7 +181,7 @@ class UserManagement(ServiceClass):
             Full parameters payload, not required if using other keywords. JSON format.
         sort : str
             The property to sort by. FQL syntax (e.g. cid|asc, type|desc).
-            Available sort values: cid, role_name, type
+            Available sort values: cid, role_name, type, expires_at
         user_uuid : str (required)
             User UUID to get available roles for.
             Must be provided as a keyword, argument or part of the `parameters` payload.
