@@ -236,6 +236,7 @@ class KubernetesProtection(ServiceClass):
                     image_registry              run_as_root_group
                     image_repository            run_as_root_user
                     image_tag                   running_status
+                    ai_related
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -340,6 +341,7 @@ class KubernetesProtection(ServiceClass):
                     image_registry              run_as_root_group
                     image_repository            run_as_root_user
                     image_tag                   running_status
+                    ai_related
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -393,6 +395,7 @@ class KubernetesProtection(ServiceClass):
                     image_registry              run_as_root_group
                     image_repository            run_as_root_user
                     image_tag                   running_status
+                    ai_related
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -447,6 +450,7 @@ class KubernetesProtection(ServiceClass):
                     image_registry              run_as_root_group
                     image_repository            run_as_root_user
                     image_tag                   running_status
+                    ai_related
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -499,6 +503,7 @@ class KubernetesProtection(ServiceClass):
                     image_registry              run_as_root_group
                     image_repository            run_as_root_user
                     image_tag                   running_status
+                    ai_related
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -551,6 +556,7 @@ class KubernetesProtection(ServiceClass):
                     image_registry              run_as_root_group
                     image_repository            run_as_root_user
                     image_tag                   running_status
+                    ai_related
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -635,6 +641,7 @@ class KubernetesProtection(ServiceClass):
                     image_registry              run_as_root_group
                     image_repository            run_as_root_user
                     image_tag                   running_status
+                    ai_related
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -747,6 +754,7 @@ class KubernetesProtection(ServiceClass):
                     image_registry              run_as_root_group
                     image_repository            run_as_root_user
                     image_tag                   running_status
+                    ai_related
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -1001,6 +1009,7 @@ class KubernetesProtection(ServiceClass):
                     image_registry              run_as_root_group
                     image_repository            run_as_root_user
                     image_tag                   running_status
+                    ai_related
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -1053,6 +1062,7 @@ class KubernetesProtection(ServiceClass):
                     image_registry              run_as_root_group
                     image_repository            run_as_root_user
                     image_tag                   running_status
+                    ai_related
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -1458,6 +1468,7 @@ class KubernetesProtection(ServiceClass):
                     image_registry              run_as_root_group
                     image_repository            run_as_root_user
                     image_tag                   running_status
+                    ai_related
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- Field to sort results by. String.
