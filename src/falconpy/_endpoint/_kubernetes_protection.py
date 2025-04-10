@@ -867,8 +867,9 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported filter "
-        "fields:  cid  cis_id  cluster_id  cluster_name  containers_impacted_count  containers_impacted_ids  "
-        "detection_type  name  namespace  prevented  resource_id  resource_name  resource_type  severity",
+        "fields:  cid  cis_id  cluster_id  cluster_name  containers_impacted_ai_related  containers_impacted_count  "
+        "containers_impacted_ids  detection_type  name  namespace  prevented  resource_id  resource_name  resource_type"
+        "severity",
         "name": "filter",
         "in": "query"
       },
@@ -998,8 +999,9 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported filter "
-        "fields:  cid  cis_id  cluster_id  cluster_name  containers_impacted_count  containers_impacted_ids  "
-        "detection_type  name  namespace  prevented  resource_id  resource_name  resource_type  severity",
+        "fields:  cid  cis_id  cluster_id  cluster_name  containers_impacted_ai_related  containers_impacted_count  "
+        "containers_impacted_ids  detection_type  name  namespace  prevented  resource_id  resource_name  resource_type"
+        "severity",
         "name": "filter",
         "in": "query"
       },

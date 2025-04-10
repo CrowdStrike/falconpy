@@ -1544,6 +1544,7 @@ class KubernetesProtection(ServiceClass):
                     containers_impacted_count   resource_type
                     containers_impacted_ids     severity
                     detection_type              prevented
+                    containers_impacted_ai_related
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- The fields to sort the records on. String.
@@ -1693,6 +1694,7 @@ class KubernetesProtection(ServiceClass):
                     containers_impacted_count   resource_type
                     containers_impacted_ids     severity
                     detection_type              prevented
+                    containers_impacted_ai_related
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- The fields to sort the records on. String.
