@@ -105,6 +105,7 @@ This has been a critical element in the development of the FalconPy project.
 + `@am-cs-se`
 + Jesko, `@jhhcs`
 + Evan Stoner, `@evanstoner`
++ Gage Schaffer, `@Gage-BCCA`
 
 
 ## Sponsors
