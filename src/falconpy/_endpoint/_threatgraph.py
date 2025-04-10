@@ -71,6 +71,7 @@ _threatgraph_endpoints = [
           "accessed_adfs_application",
           "accessed_azure_application",
           "accessed_by_kerberos_ticket",
+          "accessed_by_process",
           "accessed_by_session",
           "accessed_okta_application",
           "accessed_ping_fed_application",

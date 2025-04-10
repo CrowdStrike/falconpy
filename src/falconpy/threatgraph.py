@@ -204,6 +204,7 @@ class ThreatGraph(ServiceClass):
                      failed_to_authenticate_to_ad_computer    written_by_process
                      failed_to_authenticate_to_adfs_app       wrote_module
                      protected_by_shield                      shield_activated_on_host
+                     accessed_by_process
         ids -- Vertex ID to get details for.  Only one value is supported. String.
         limit -- How many edges to return in a single request [1-100]. Integer.
         nano -- Return nano-precision entity timestamps. Boolean.
