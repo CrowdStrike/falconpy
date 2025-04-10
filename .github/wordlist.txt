@@ -1567,3 +1567,6 @@ getChanges
 queryChanges
 GetHostMigrationIDsV
 GetMigrationIDsV
+NG
+SIEM
+siem
