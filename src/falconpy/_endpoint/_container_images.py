@@ -180,8 +180,7 @@ _container_images_endpoints = [
       },
       {
         "type": "integer",
-        "description": "This is not used in the backend but is added here for compatibility purposes as some "
-        "clients expects this i.e UI widgets.",
+        "description": "The fields to sort the records on. **Not supported.**",
         "name": "offset",
         "in": "query"
       }
