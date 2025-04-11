@@ -15,6 +15,9 @@ on:
       - 'ver_*'
       - dev
 
+permissions:
+  contents: read
+
 jobs:
   build:
     strategy:
