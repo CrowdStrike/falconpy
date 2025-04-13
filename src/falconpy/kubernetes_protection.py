@@ -1372,14 +1372,16 @@ class KubernetesProtection(ServiceClass):
         filter -- Search Kubernetes clusters using a query in Falcon Query Language (FQL). String.
                   Supported filters:
                     access              cluster_status
-                    agent_status        container_count
+                    agent_id            container_count
+                    agent_status        iar_coverage
+                    agent_type          kac_agent_id
                     cid                 kubernetes_version
                     cloud_account_id    last_seen
                     cloud_name          management_status
                     cloud_region        node_count
-                    cluster_id          pod_count
-                    cluster_name        tags
-                    iar_coverage
+                    cloud_service       pod_count
+                    cluster_id          tags
+                    cluster_name
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- Field to sort results by. String.
