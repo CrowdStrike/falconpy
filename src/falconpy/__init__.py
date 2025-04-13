@@ -124,6 +124,7 @@ from .downloads import Downloads
 from .drift_indicators import DriftIndicators
 from .event_streams import EventStreams
 from .exposure_management import ExposureManagement
+from .faas_execution import FaaSExecution
 from .falcon_complete_dashboard import CompleteDashboard
 from .falcon_container import FalconContainer
 from .falconx_sandbox import FalconXSandbox
@@ -226,7 +227,7 @@ __all__ = [
     "NGSIEM", "CorrelationRules", "CloudAWSRegistration", "CloudAzureRegistration",
     "CloudOCIRegistration", "CloudSecurityAssets", "Deployments", "ServerlessVulnerabilities",
     "DeviceContent", "IntelligenceIndicatorGraph", "ContentUpdatePolicies", "CAOHunting",
-    "ContainerImageCompliance"
+    "ContainerImageCompliance", "FaaSExecution"
     ]
 """
 This is free and unencumbered software released into the public domain.
