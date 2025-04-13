@@ -98,9 +98,9 @@ _cloud_security_assets_endpoints = [
         "cloud_provider  cluster_id  cluster_name  creation_time  data_classifications.found  "
         "data_classifications.scanned  first_seen  id  instance_id  instance_state  ioa_count  iom_count  managed_by  "
         "organization_Id  os_version  platform_name  publicly_exposed  region  resource_id  resource_name  "
-        "resource_type  resource_type_name  service  ssm_managed  status  tenant_id  updated_at  vmware.guest_os_id  "
-        "vmware.guest_os_version  vmware.host_system_name  vmware.host_type  vmware.instance_uuid  vmware.vm_host_name "
-        "vmware.vm_tools_status  zone\n\nUse |asc or |desc suffix to specify sort direction.",
+        "resource_type  resource_type_name  service  service_category  ssm_managed  status  tenant_id  updated_at  "
+        "vmware.guest_os_id  vmware.guest_os_version  vmware.host_system_name  vmware.host_type  vmware.instance_uuid  "
+        "vmware.vm_host_name  vmware.vm_tools_status  zone\n\nUse |asc or |desc suffix to specify sort direction.",
         "name": "sort",
         "in": "query"
       },
