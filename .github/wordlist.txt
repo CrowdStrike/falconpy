@@ -1571,3 +1571,16 @@ NG
 SIEM
 siem
 Schaffer
+faas
+FaaS
+FAAS
+CAO
+ListCollections
+DescribeCollections
+DescribeCollection
+ListSchemas
+GetSchema
+GetSchemaMetadata
+ReadRequestBody
+ReadClusterCombinedV
+aggregateUsersV
