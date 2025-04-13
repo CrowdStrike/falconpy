@@ -153,6 +153,7 @@ class CloudSecurityAssets(ServiceClass):
                     organization_Id                 vmware.vm_host_name
                     os_version                      vmware.vm_tools_status
                     platform_name                   zone
+                    service_category
         limit -- The maximum number of items to return. Integer.
                  When not specified or 0, 500 is used. When larger than 1000, 1000 is used.
         offset -- Offset returned assets. Use only one of 'offset' and 'after' parameter for paginating. Integer.
