@@ -1403,6 +1403,49 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def read_clusters_combined_v2(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve kubernetes clusters identified by the provided filter criteria.
+
+        Keyword arguments:
+        filter -- Search Kubernetes clusters using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    access              cluster_status
+                    agent_id            container_count
+                    agent_status        iar_coverage
+                    agent_type          kac_agent_id
+                    cid                 kubernetes_version
+                    cloud_account_id    last_seen
+                    cloud_name          management_status
+                    cloud_region        node_count
+                    cloud_service       pod_count
+                    cluster_id          tags
+                    cluster_name
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        offset -- The offset from where to begin. Integer.
+        sort -- Field to sort results by. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/ReadClusterCombinedV2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ReadClusterCombinedV2",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def read_running_images(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve images on running containers.
 
@@ -2299,6 +2342,7 @@ class KubernetesProtection(ServiceClass):
     ReadPodsByDateRangeCount = read_pod_counts_by_date_range
     ReadPodCount = read_pod_counts
     ReadClusterCombined = read_clusters_combined
+    ReadClusterCombinedV2 = read_clusters_combined_v2
     ReadRunningContainerImages = read_running_images
     ReadContainerCombined = read_containers_combined
     ReadDeploymentCombined = read_deployments_combined
