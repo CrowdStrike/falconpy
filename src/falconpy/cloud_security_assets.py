@@ -56,6 +56,74 @@ class CloudSecurityAssets(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_combined_compliance_by_account(self: object,
+                                           parameters: dict = None,
+                                           **kwargs
+                                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get combined compliance data aggregated by account and region.
+
+        Results can be filtered and sorted.
+
+        Keyword arguments:
+        filter -- FQL string to filter on asset contents. String.
+                  Filterable fields include:
+                    account_id                      control.name
+                    account_name                    control.type
+                    assessment_id                   control.version
+                    business_impact                 environment
+                    cloud_group                     last_evaluated
+                    cloud_label                     region
+                    cloud_label_id                  resource_provider
+                    cloud_provider                  resource_type
+                    cloud_scope                     resource_type_name
+                    compliant                       service
+                    control.benchmark.name          service_category
+                    control.benchmark.version       severities
+                    control.framework
+        sort -- FQL formatted sort expression. String.
+                    Sort expression in format: field|direction (e.g., last_evaluated|desc).
+                    Allowed sort fields:
+                        account_id                      last_evaluated
+                        account_name                    region
+                        assessment_id                   resource_counts.compliant
+                        cloud_provider                  resource_counts.non_compliant
+                        control.benchmark.name          resource_counts.total
+                        control.benchmark.version       resource_provider
+                        control.framework               resource_type
+                        control.name                    resource_type_name
+                        control.type                    service
+                        control.version                 service_category
+        limit -- The maximum number of items to return. Integer.
+                 When not specified or 0, 20 is used. When larger than 10000, 10000 is used.
+        offset -- Offset returned controls. Integer.
+                  Use only one of 'offset' and 'after' parameter for paginating.
+                  'offset' can only be used on offsets < 10,000.
+                  For paginating through the entire result set, use 'after' parameter.
+        after -- Token-based pagination position. String.
+                 Use for paginating through an entire result set.
+                 Use only one of 'offset' and 'after' parameters for paginating.
+        include_failing_iom_severity_counts -- Include counts of failing IOMs by severity level. Boolean.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /cloud-security-assets/cloud-security-assets-combined-compliance-by-account-region-and-resource-type-get
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_security_assets_combined_compliance_by_account",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_assets(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get raw resources based on the provided IDs.
 
@@ -178,5 +246,6 @@ class CloudSecurityAssets(ServiceClass):
             params=parameters
             )
 
+    cloud_security_assets_combined_compliance_by_account = get_combined_compliance_by_account
     cloud_security_assets_entities_get = get_assets
     cloud_security_assets_queries = query_assets

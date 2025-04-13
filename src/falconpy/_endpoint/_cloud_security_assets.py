@@ -38,6 +38,69 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_security_assets_endpoints = [
   [
+    "cloud_security_assets_combined_compliance_by_account",
+    "GET",
+    "/cloud-security-assets/combined/compliance-controls/by-account-region-and-resource-type/v1",
+    "Gets combined compliance data aggregated by account and region. Results can be filtered and sorted.",
+    "cloud_security_assets",
+    [
+      {
+        "type": "string",
+        "description": "FQL string to filter on asset contents. Filterable fields include:  account_id  "
+        "account_name  assessment_id  business_impact  cloud_group  cloud_label  cloud_label_id  cloud_provider  "
+        "cloud_scope  compliant  control.benchmark.name  control.benchmark.version  control.framework  control.name  "
+        "control.type  control.version  environment  last_evaluated  region  resource_provider  resource_type  "
+        "resource_type_name  service  service_category  severities",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort expression in format: field|direction (e.g., last_evaluated|desc). Allowed sort "
+        "fields:   account_id  account_name  assessment_id  cloud_provider  control.benchmark.name  "
+        "control.benchmark.version  control.framework  control.name  control.type  control.version  last_evaluated  "
+        "region  resource_counts.compliant  resource_counts.non_compliant  resource_counts.total  resource_provider  "
+        "resource_type  resource_type_name  service  service_category",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "maximum": 10000,
+        "minimum": 0,
+        "type": "integer",
+        "default": 20,
+        "description": "The maximum number of items to return. When not specified or 0, 20 is used. When "
+        "larger than 10000, 10000 is used.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "maximum": 9999,
+        "minimum": 0,
+        "type": "integer",
+        "description": "Offset returned controls. Use only one of 'offset' and 'after' parameter for "
+        "paginating. 'offset' can only be used on offsets < 10,000. For paginating through the entire result set, use "
+        "'after' parameter",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "token-based pagination. use for paginating through an entire result set. Use only one "
+        "of 'offset' and 'after' parameters for paginating",
+        "name": "after",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "Include counts of failing IOMs by severity level",
+        "name": "include_failing_iom_severity_counts",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "cloud_security_assets_entities_get",
     "GET",
     "/cloud-security-assets/entities/resources/v1",
