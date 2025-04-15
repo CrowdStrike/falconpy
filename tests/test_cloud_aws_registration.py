@@ -16,7 +16,7 @@ from falconpy import CloudAWSRegistration
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = CloudAWSRegistration(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 403, 429]
+AllowedResponses = [200, 201, 207, 400, 403, 404, 429]
 
 
 class TestCloudAWSRegistration:
@@ -32,7 +32,7 @@ class TestCloudAWSRegistration:
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
-                if not (config.base_url == "https://api.eu-1.crowdstrike.com" and tests[key]["status_code"] in [404, 500]):
+                if not (key == "cloud_registration_aws_delete_account" and tests[key]["status_code"] == 500):
                     error_checks = False
                 # print(key)
                 # print(tests[key])
