@@ -99,7 +99,7 @@ def consume_arguments() -> Namespace:
     return parsed
 
 
-def query_spotlight(key: str, secret: str, days: str, aft: str = None):
+def query_spotlight(key: str, secret: str, days: str, aft: str = None, dbg: bool = False):
     """Retrieve a batch of Spotlight Vulnerability matches."""
 
     def do_query(qfilter: str):
@@ -113,7 +113,7 @@ def query_spotlight(key: str, secret: str, days: str, aft: str = None):
 
         return returned["status_code"], returned
 
-    spotlight = SpotlightVulnerabilities(client_id=key, client_secret=secret)
+    spotlight = SpotlightVulnerabilities(client_id=key, client_secret=secret, debug=dbg)
 
     global HOST_AUTH  # pylint: disable=W0603
     HOST_AUTH = spotlight  # Save this here so we can use it to auth to hosts
@@ -185,7 +185,8 @@ def process_matches(arg: Namespace):
             total, after, returned, result = query_spotlight(key=arg.client_id,
                                                              secret=arg.client_secret,
                                                              days=arg.days,
-                                                             aft=after
+                                                             aft=after,
+                                                             dbg=arg.debug
                                                              )
             retrieved += returned
             for match in result:
