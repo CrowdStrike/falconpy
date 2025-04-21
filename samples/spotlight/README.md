@@ -217,7 +217,7 @@ python3 spotlight_quick_report.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET 
 ```
 
 #### Adjusting the date range
-Specify the number of days backwards in time to check using the `-d` argument.
+Specify the number of days backwards in time for hosts last seen using the `-d` argument.
 
 ```shell
 python3 spotlight_quick_report.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -d 5
