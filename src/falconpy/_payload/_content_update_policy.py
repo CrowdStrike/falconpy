@@ -63,7 +63,7 @@ def content_update_policy_payload(passed_keywords: dict) -> dict:
     returned_payload = {}
     resources = []
     item = {}
-    keys = ["description", "name", "settings"]
+    keys = ["description", "name", "settings", "id"]
     for key in keys:
         if passed_keywords.get(key, None):
             item[key] = passed_keywords.get(key, None)
