@@ -256,7 +256,9 @@ class ContentUpdatePolicies(ServiceClass):
                         }
                     ]
                 }
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        description -- Content update policy description. String.
+        name -- Content update policy name. String.
+        settings -- Content update policy settings. Dictionary.
 
         This method only supports keywords for providing arguments.
 
