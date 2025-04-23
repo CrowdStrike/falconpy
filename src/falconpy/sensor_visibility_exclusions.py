@@ -161,13 +161,13 @@ class SensorVisibilityExclusions(ServiceClass):
                         "string"
                     ],
                     "id": "string",
-                    "is_descendent_process": boolean,
+                    "is_descendant_process": boolean,
                     "value": "string"
                 }
         comment -- String comment describing why the exclusion is entered.
         groups -- Group IDs to exclude. List of strings.
         id -- Exclusion ID to update. String.
-        is_descendent_process -- Flag to determine if an exclusion should
+        is_descendant_process -- Flag to determine if an exclusion should
                                  apply to all descendant processes. Boolean.
         value -- Value to exclude. String
 
