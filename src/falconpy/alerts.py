@@ -233,6 +233,7 @@ class Alerts(ServiceClass):
             endpoints=Endpoints,
             operation_id="PostAggregatesAlertsV2",
             body=body,
+            keywords=kwargs,
             params=parameters
             )
 
@@ -470,6 +471,7 @@ class Alerts(ServiceClass):
             endpoints=Endpoints,
             operation_id="PatchEntitiesAlertsV3",
             body=body,
+            keywords=kwargs,
             params=parameters
             )
 
@@ -634,6 +636,7 @@ class Alerts(ServiceClass):
             body=body,
             body_validator={"composite_ids": list} if self.validate_payloads else None,
             body_required=["composite_ids"] if self.validate_payloads else None,
+            keywords=kwargs,
             params=parameters
             )
 
