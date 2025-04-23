@@ -145,12 +145,12 @@ def exclusion_payload(passed_keywords: dict) -> dict:
             "string"
         ],
         "id": "string",
-        "is_descendent_process": boolean,
+        "is_descendant_process": boolean,
         "value": "string"
     }
     """
     returned_payload = {}
-    keys = ["comment", "id", "is_descendent_process", "value"]
+    keys = ["comment", "id", "is_descendant_process", "value"]
     for key in keys:
         if passed_keywords.get(key, None):
             returned_payload[key] = passed_keywords.get(key, None)
