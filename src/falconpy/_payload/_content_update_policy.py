@@ -93,6 +93,8 @@ def content_update_policy_action_payload(passed_keywords: dict) -> Dict[str, Lis
     for key in ["action_parameters", "ids"]:
         if passed_keywords.get(key, None):
             provided = passed_keywords.get(key, None)
+            if key == "ids" and isinstance(provided, str):
+                provided = provided.split(",")
             if key == "action_parameters" and isinstance(provided, dict):
                 provided = [provided]
             returned[key] = provided
