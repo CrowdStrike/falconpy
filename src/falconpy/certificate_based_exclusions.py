@@ -90,7 +90,7 @@ class CertificateBasedExclusions(ServiceClass):
         Keyword arguments:
         body -- full body payload, not required if using other keywords.
                 {
-                    "resources": [
+                    "exclusions": [
                         {
                             "applied_globally": true,
                             "certificate": {
@@ -175,7 +175,7 @@ class CertificateBasedExclusions(ServiceClass):
         Keyword arguments:
         body -- full body payload, not required if using other keywords.
                 {
-                    "resources": [
+                    "exclusions": [
                         {
                             "applied_globally": true,
                             "certificate": {
