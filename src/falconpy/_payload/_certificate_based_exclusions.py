@@ -43,7 +43,7 @@ def certificate_based_exclusions_payload(passed_keywords: dict) -> Dict[str, Lis
     """Create a properly formatted payload for exclusion creation.
 
     {
-        "resources": [
+        "exclusions": [
             {
                 "applied_globally": true,
                 "certificate": {
@@ -73,7 +73,7 @@ def certificate_based_exclusions_payload(passed_keywords: dict) -> Dict[str, Lis
     }
     """
     returned = {
-        "resources": []
+        "exclusions": []
     }
     item = {}
     keys = [
@@ -101,6 +101,6 @@ def certificate_based_exclusions_payload(passed_keywords: dict) -> Dict[str, Lis
                 provided = provided.split(",")
             item[key] = provided
 
-    returned["resources"].append(item)
+    returned["exclusions"].append(item)
 
     return returned
