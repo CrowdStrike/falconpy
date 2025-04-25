@@ -666,6 +666,69 @@ _aspm_endpoints = [
     ]
   ],
   [
+    "GetIntegrationTasksAdmin",
+    "GET",
+    "/aspm-api-gateway/api/v1/integration_tasks/admin",
+    "Get all the integration tasks, requires admin scope",
+    "aspm",
+    [
+      {
+        "type": "integer",
+        "name": "integration_task_type",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "name": "category",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "name",
+          "id",
+          "integrationTask"
+        ],
+        "type": "string",
+        "name": "orderBy",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "asc",
+          "desc"
+        ],
+        "type": "string",
+        "name": "direction",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "name": "integration_task_types",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "name": "names",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "GetIntegrationTasksMetadata",
     "GET",
     "/aspm-api-gateway/api/v1/integration_tasks/metadata",
@@ -802,6 +865,58 @@ _aspm_endpoints = [
     "RunIntegrationTask",
     "POST",
     "/aspm-api-gateway/api/v1/integration_tasks/{}/run",
+    "Run an integration task by its ID",
+    "aspm",
+    [
+      {
+        "pattern": "[0-9]+",
+        "type": "integer",
+        "name": "ID",
+        "in": "path",
+        "required": True
+      },
+      {
+        "type": "string",
+        "name": "category",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "RunIntegrationTaskAdmin",
+    "POST",
+    "/aspm-api-gateway/api/v1/integration_tasks/{}/run/admin",
+    "Run an integration task by its ID - for admin scope",
+    "aspm",
+    [
+      {
+        "pattern": "[0-9]+",
+        "type": "integer",
+        "name": "ID",
+        "in": "path",
+        "required": True
+      },
+      {
+        "type": "string",
+        "name": "category",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "RunIntegrationTaskV2",
+    "POST",
+    "/aspm-api-gateway/api/v1/integration_tasks/{}/run/v2",
     "Run an integration task by its ID",
     "aspm",
     [
