@@ -135,6 +135,12 @@ class ContentUpdatePolicies(ServiceClass):
 
         Keyword arguments:
         action_name -- The action to perform. String.
+                       Allowed actions:
+                        add-host-group      override-revert
+                        disable             remove-host-group
+                        enable              remove-pinned-content-version
+                        override-allow      set-pinned-content-version
+                        override-pause
         action_parameters -- Action specific parameter options. Dictionary or list of dictionaries.
                              {
                                  "name": "string",

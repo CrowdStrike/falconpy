@@ -150,7 +150,9 @@ _content_update_policies_endpoints = [
           "override-allow",
           "override-pause",
           "override-revert",
-          "remove-host-group"
+          "remove-host-group",
+          "remove-pinned-content-version",
+          "set-pinned-content-version"
         ],
         "type": "string",
         "description": "The action to perform",
