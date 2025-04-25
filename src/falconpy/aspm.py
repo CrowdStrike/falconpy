@@ -1246,6 +1246,48 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_integration_tasks_admin(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get all the integration tasks, requires admin scope.
+
+        Keyword arguments:
+        integration_task_type -- Integration task type. Integer.
+        category -- Integration task category. String.
+        offset -- Offset from which to start returning records. Integer.
+        limit -- Maximum number of records to return. Integer.
+        order_by -- Fields to use for sort order. String.
+        direction -- Sort order direction. String. Allowed values: asc or desc
+        integration_task_types -- Integration task types. Integer.
+        ids -- Integration task ID. Integer.
+        names -- Integration task name. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetIntegrationTasksAdmin
+        """
+        if kwargs.get("order_by", None):
+            kwargs["orderBy"] = kwargs.get("order_by", None)
+        param_list = loads(dumps(parameters))
+        for key, value in param_list.items():
+            if key == "order_by":
+                parameters["orderBy"] = value
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIntegrationTasksAdmin",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_integration_tasks_metadata(self: object,
                                        parameters: dict = None,
                                        **kwargs
@@ -1794,6 +1836,91 @@ class ASPM(ServiceClass):
             body=body,
             params=parameters,
             path_id=target_id
+            )
+
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def run_integration_task_admin(self: object,
+                                   body: dict = None,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Run an integration task by its ID - for admin scope.
+
+        Keyword arguments:
+        ID -- Integration task ID. Integer.
+        category -- Integration task category. String.
+        body -- Full body payload in JSON format. Not required when using other keywords.
+                {
+                    "access_token": "string",
+                    "category": "string",
+                    "data": "string",
+                    "override": boolean,
+                    "scheduled": boolean,
+                    "task_id": integer
+                }
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/RunIntegrationTaskAdmin
+        """
+        if not body:
+            body = aspm_integration_task_payload(kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RunIntegrationTaskAdmin",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def run_integration_task_v2(self: object,
+                                body: dict = None,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Run an integration task by its ID.
+
+        Keyword arguments:
+        ID -- Integration task ID. Integer.
+        category -- Integration task category. String.
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "access_token": "string",
+                    "category": "string",
+                    "data": "string",
+                    "override": boolean,
+                    "scheduled": bolean,
+                    "task_id": integer
+                }
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/RunIntegrationTaskV2
+        """
+        if not body:
+            body = aspm_integration_task_payload(kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RunIntegrationTaskV2",
+            keywords=kwargs,
+            params=parameters
             )
 
     def get_integration_types(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
@@ -2478,11 +2605,14 @@ class ASPM(ServiceClass):
     DeleteExecutorNode = delete_node
     GetIntegrationTasks = get_integration_tasks
     CreateIntegrationTask = create_integration_task
+    GetIntegrationTasksAdmin = get_integration_tasks_admin
     GetIntegrationTasksMetadata = get_integration_tasks_metadata
     GetIntegrationTasksV2 = get_integration_tasks_v2
     UpdateIntegrationTask = update_integration_task
     DeleteIntegrationTask = delete_integration_task
     RunIntegrationTask = run_integration_task
+    RunIntegrationTaskV2 = run_integration_task_v2
+    RunIntegrationTaskAdmin = run_integration_task_admin
     GetIntegrationTypes = get_integration_types
     GetIntegrations = get_integrations
     CreateIntegration = create_integration
