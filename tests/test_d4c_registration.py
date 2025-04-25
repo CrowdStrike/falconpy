@@ -104,7 +104,7 @@ class TestD4CRegistration:
                                                              ),
             "DeleteD4CAwsAccount": falcon.delete_aws_account("ID_DOES_NOT_EXIST"),
             "GetD4CAwsConsoleSetupURLs": falcon.get_aws_console_setup("us-east-2"),
-            "GetD4CAwsAccountScriptsAttachment": falcon.get_aws_account_scripts("123456789"),
+            "GetD4CAwsAccountScriptsAttachment": falcon.get_aws_account_scripts("123456789", custom_role_name="Bob"),
             "GetHorizonD4CScripts": falcon.get_aws_horizon_scripts(organization_id="123456789"),
             "GetDiscoverCloudAzureTenantIDs": falcon.get_azure_tenant_ids(),
             "DeleteD4CGCPAccount": falcon.delete_gcp_account("1234567"),
