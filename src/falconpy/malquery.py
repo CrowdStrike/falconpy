@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
+from requests import Response
 from ._util import process_service_request, force_default, handle_single_argument
 from ._payload import malquery_fuzzy_payload, generic_payload_list
 from ._payload import malquery_exact_search_payload, malquery_hunt_payload
@@ -126,7 +127,11 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_download(self: object, *args, parameters: dict = None, **kwargs) -> object:
+    def get_download(self: object,
+                     *args,
+                     parameters: dict = None,
+                     **kwargs
+                     ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Download a file indexed by MalQuery.
 
         Specify the file using its SHA256.
@@ -134,7 +139,8 @@ class MalQuery(ServiceClass):
 
         Keyword arguments:
         ids -- List of SHA256s to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
+        parameters -- Full parameters payload, not required if ids is provided as a keyword.
+        stream -- Enable streaming download of the returned file. Boolean.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -151,7 +157,8 @@ class MalQuery(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetMalQueryDownloadV1",
             keywords=kwargs,
-            params=handle_single_argument(args, parameters, "ids")
+            params=handle_single_argument(args, parameters, "ids"),
+            stream=kwargs.get("stream", False)
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -209,7 +216,11 @@ class MalQuery(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_samples(self: object, *args, parameters: dict = None, **kwargs) -> object:
+    def get_samples(self: object,
+                    *args,
+                    parameters: dict = None,
+                    **kwargs
+                    ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Fetch a zip archive with password 'infected' containing the samples.
 
         Call this once the samples-multidownload request has finished processing
@@ -217,6 +228,7 @@ class MalQuery(ServiceClass):
         Keyword arguments:
         ids -- Multi-download job ID. String.
         parameters -- full parameters payload, not required if ids is provided as a keyword.
+        stream -- Enable streaming download of the returned file. Boolean.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -233,7 +245,8 @@ class MalQuery(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetMalQueryEntitiesSamplesFetchV1",
             keywords=kwargs,
-            params=handle_single_argument(args, parameters, "ids")
+            params=handle_single_argument(args, parameters, "ids"),
+            stream=kwargs.get("stream", False)
             )
 
     @force_default(defaults=["body"], default_types=["dict"])

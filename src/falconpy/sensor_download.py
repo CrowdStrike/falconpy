@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 import os
 from typing import Dict, Union
+from requests import Response
 from ._util import generate_ok_result, force_default
 from ._util import handle_single_argument, process_service_request
 from ._result import Result
@@ -129,17 +130,18 @@ class SensorDownload(ServiceClass):
                                   parameters: dict = None,
                                   file_name: str = None,
                                   download_path: str = None,
-                                  **kwargs) -> object:
+                                  **kwargs) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Download the sensor by the sha256 id, into the specified directory.
 
         The path will be created for the user if it does not already exist.
 
         Keyword arguments:
-        download_path -- path to the folder to save installer file.
+        download_path -- Path to the folder to save installer file.
                          Must be present to cause a file download.
         id -- SHA256 of the installer to download.
-        file_name -- name to use for saved file. Must be present to cause a file download.
-        parameters - full parameters payload, not required if id is provided as a keyword.
+        file_name -- Name to use for saved file. Must be present to cause a file download.
+        parameters - Full parameters payload, not required if id is provided as a keyword.
+        stream -- Enable streaming download of the file. Boolean.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -156,7 +158,8 @@ class SensorDownload(ServiceClass):
                         endpoints=Endpoints,
                         operation_id="DownloadSensorInstallerById",
                         keywords=kwargs,
-                        params=handle_single_argument(args, parameters, "ids")
+                        params=handle_single_argument(args, parameters, "ids"),
+                        stream=kwargs.get("stream", False)
                         )
         if file_name and download_path and isinstance(returned, bytes):
             os.makedirs(download_path, exist_ok=True)
@@ -174,17 +177,18 @@ class SensorDownload(ServiceClass):
                                      parameters: dict = None,
                                      file_name: str = None,
                                      download_path: str = None,
-                                     **kwargs) -> object:
+                                     **kwargs) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Download the sensor by the sha256 id, into the specified directory.
 
         The path will be created for the user if it does not already exist.
 
         Keyword arguments:
-        download_path -- path to the folder to save installer file.
+        download_path -- Path to the folder to save installer file.
                          Must be present to cause a file download.
         id -- SHA256 of the installer to download.
-        file_name -- name to use for saved file. Must be present to cause a file download.
-        parameters - full parameters payload, not required if id is provided as a keyword.
+        file_name -- Name to use for saved file. Must be present to cause a file download.
+        parameters -- Full parameters payload, not required if id is provided as a keyword.
+        stream -- Enable streaming download of the file. Boolean.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -201,7 +205,8 @@ class SensorDownload(ServiceClass):
                         endpoints=Endpoints,
                         operation_id="DownloadSensorInstallerByIdV2",
                         keywords=kwargs,
-                        params=handle_single_argument(args, parameters, "ids")
+                        params=handle_single_argument(args, parameters, "ids"),
+                        stream=kwargs.get("stream", False)
                         )
         if file_name and download_path and isinstance(returned, bytes):
             os.makedirs(download_path, exist_ok=True)
