@@ -263,6 +263,7 @@ class CSPMRegistration(ServiceClass):
         use_existing_cloudtrail -- Use the existing AWS cloudtrail. (true / false) String.
         parameters -- full parameters payload, not required if using other keywords.
         region -- AWS Region. String.
+        tags -- Base64 encoded JSON string to be used as AWS tags. String.
         template -- Template to be rendered. String.
                     Allowed values:
                     aws-url         aws-sensor-management-url

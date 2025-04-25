@@ -233,6 +233,13 @@ _cspm_registration_endpoints = [
         "in": "query"
       },
       {
+        "pattern": ".*",
+        "type": "string",
+        "description": "Base64 encoded JSON string to be used as AWS tags",
+        "name": "tags",
+        "in": "query"
+      },
+      {
         "enum": [
           "aws-url",
           "aws-iom-url",
