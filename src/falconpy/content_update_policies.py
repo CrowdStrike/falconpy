@@ -388,6 +388,37 @@ class ContentUpdatePolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_pinnable_content_versions(self: object,
+                                        parameters: dict = None,
+                                        **kwargs
+                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Search for content versions available for pinning given the category.
+
+        Keyword arguments:
+        category -- Content category. String.
+                    Allowed values:
+                        rapid_response_al_bl_listing    system_critical
+                        sensor_operations               vulnerability_management
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/content-update-policies/queryPinnableContentVersions
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queryPinnableContentVersions",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for Content Update Policies in your environment by providing an FQL filter and paging details.
 
@@ -426,4 +457,5 @@ class ContentUpdatePolicies(ServiceClass):
     updateContentUpdatePolicies = update_policies
     deleteContentUpdatePolicies = delete_policies
     queryContentUpdatePolicyMembers = query_policy_members
+    queryPinnableContentVersions = query_pinnable_content_versions
     queryContentUpdatePolicies = query_policies

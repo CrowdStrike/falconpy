@@ -295,6 +295,28 @@ _content_update_policies_endpoints = [
     ]
   ],
   [
+    "queryPinnableContentVersions",
+    "GET",
+    "/policy/queries/content-update-pin-versions/v1",
+    "Search for content versions available for pinning given the category.",
+    "content_update_policies",
+    [
+      {
+        "enum": [
+          "rapid_response_al_bl_listing",
+          "sensor_operations",
+          "system_critical",
+          "vulnerability_management"
+        ],
+        "type": "string",
+        "description": "Content category",
+        "name": "category",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "queryContentUpdatePolicies",
     "GET",
     "/policy/queries/content-update/v1",
