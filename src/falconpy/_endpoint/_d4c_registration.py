@@ -290,7 +290,7 @@ _d4c_registration_endpoints = [
         "pattern": ".*",
         "type": "string",
         "description": "The custom IAM role to be used during registration",
-        "name": "custom_role_name",
+        "name": "iam_role_arn",
         "in": "query"
       },
       {
