@@ -35,6 +35,7 @@ class TestContentUpdatePolicies:
             "updateContentUpdatePolicies": falcon.update_policies(description="whatever", name="whatever", id="12345678"),
             "deleteContentUpdatePolicies": falcon.delete_policies(ids="12345678"),
             "queryContentUpdatePolicyMembers": falcon.query_policy_members(limit=1),
+            "queryPinnableContentVersions": falcon.query_pinnable_content_versions(category="system_critical"),
             "queryContentUpdatePolicies": falcon.query_policies(limit=1),
         }
         for key in tests:
