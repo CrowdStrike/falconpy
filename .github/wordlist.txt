@@ -1584,3 +1584,7 @@ GetSchemaMetadata
 ReadRequestBody
 ReadClusterCombinedV
 aggregateUsersV
+RunIntegrationTaskAdmin
+RunIntegrationTaskV
+queryPinnableContentVersions
+ContentUpdatePolicies
