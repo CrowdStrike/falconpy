@@ -306,6 +306,13 @@ _d4c_registration_endpoints = [
         "description": "Set to true to enable Identity Protection feature",
         "name": "idp_enabled",
         "in": "query"
+      },
+      {
+        "pattern": ".*",
+        "type": "string",
+        "description": "Base64 encoded JSON string to be used as AWS tags",
+        "name": "tags",
+        "in": "query"
       }
     ]
   ],

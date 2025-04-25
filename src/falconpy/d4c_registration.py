@@ -229,6 +229,7 @@ class D4CRegistration(ServiceClass):
         organization_unit_ids -- The AWS Organizational unit IDs to be registered. String or list of strings.
         parameters -- full parameters payload, not required if ids is provided as a keyword.
         sensor_management_enabled -- Enable sensor management. String. Allowed values: true, false
+        tags -- Base64 encoded JSON string to be used as AWS tags. String.
         template -- Template to be rendered. String. Allowed values: aws-bash, aws-terraform
         use_existing_cloudtrail -- Use the existing cloudtrail log. String. Allowed values: true, false
 
