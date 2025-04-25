@@ -226,35 +226,36 @@ class CloudAWSRegistration(ServiceClass):
             params=parameters
             )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def validate_accounts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Validate the AWS account for a provided CID. For internal clients only.
+    # @force_default(defaults=["parameters"], default_types=["dict"])
+    # def validate_accounts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    #     """Validate the AWS account for a provided CID. For internal clients only.
 
-        Keyword arguments:
-        products -- Product registered for an account. String.
-        feature -- Features registered for an account. String or list of strings.
-        account_id -- AWS Account ID.
-        iam_role_arn -- IAM Role ARN.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+    #     Keyword arguments:
+    #     products -- Product registered for an account. String.
+    #     feature -- Features registered for an account. String or list of strings.
+    #     account_id -- AWS Account ID.
+    #     iam_role_arn -- IAM Role ARN.
+    #     parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+    #     This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
+    #     Returns: dict object containing API response.
 
-        HTTP Method: POST
+    #     HTTP Method: POST
 
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-aws-registration/cloud-registration-aws-validate-accounts
-        """
-        kwargs["account-id"] = kwargs.get("account_id", None)
-        kwargs["iam-role-arn"] = kwargs.get("iam_role_arn", None)
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="cloud_registration_aws_validate_accounts",
-            keywords=kwargs,
-            params=parameters
-            )
+    #     Swagger URL
+    #     https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+    #       /cloud-aws-registration/cloud-registration-aws-validate-accounts
+    #     """
+    #     kwargs["account-id"] = kwargs.get("account_id", None)
+    #     kwargs["iam-role-arn"] = kwargs.get("iam_role_arn", None)
+    #     return process_service_request(
+    #         calling_object=self,
+    #         endpoints=Endpoints,
+    #         operation_id="cloud_registration_aws_validate_accounts",
+    #         keywords=kwargs,
+    #         params=parameters
+    #         )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_accounts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
@@ -294,5 +295,5 @@ class CloudAWSRegistration(ServiceClass):
     cloud_registration_aws_create_account = create_account
     cloud_registration_aws_update_account = update_account
     cloud_registration_aws_delete_account = delete_account
-    cloud_registration_aws_validate_accounts = validate_accounts
+    # cloud_registration_aws_validate_accounts = validate_accounts
     cloud_registration_aws_query_accounts = query_accounts

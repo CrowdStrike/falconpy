@@ -114,47 +114,6 @@ _cloud_aws_registration_endpoints = [
     ]
   ],
   [
-    "cloud-registration-aws-validate-accounts",
-    "POST",
-    "/cloud-security-registration-aws/entities/account/validate/v1",
-    "Validates the AWS account in our system for a provided CID. For internal clients only.",
-    "cloud_aws_registration",
-    [
-      {
-        "type": "string",
-        "description": "Product registered for an account",
-        "name": "products",
-        "in": "query",
-        "required": True
-      },
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "csv",
-        "description": "Features registered for an account",
-        "name": "feature",
-        "in": "query",
-        "required": True
-      },
-      {
-        "pattern": "^\\d{12}$",
-        "type": "string",
-        "description": "AWS Account ID",
-        "name": "account-id",
-        "in": "query"
-      },
-      {
-        "pattern": "^arn:aws:iam::\\d{12}:role/.+",
-        "type": "string",
-        "description": "IAM Role ARN",
-        "name": "iam-role-arn",
-        "in": "query"
-      }
-    ]
-  ],
-  [
     "cloud-registration-aws-query-accounts",
     "GET",
     "/cloud-security-registration-aws/queries/account/v1",

@@ -27,7 +27,7 @@ class TestCloudAWSRegistration:
             "cloud_registration_aws_create_account": falcon.create_account(account_type="whatever", csp_events=False, products={"product": "whatever"}),
             "cloud_registration_aws_update_account": falcon.update_account(account_type="whatever", csp_events=True),
             "cloud_registration_aws_delete_account": falcon.delete_account(organization_ids="12345678"),
-            "cloud_registration_aws_validate_accounts": falcon.validate_accounts(products="whatever", account_id="whatever", iam_role_arn="whatever"),
+            # "cloud_registration_aws_validate_accounts": falcon.validate_accounts(products="whatever", account_id="whatever", iam_role_arn="whatever"),
             "cloud_registration_aws_query_accounts": falcon.query_accounts(products="whatever", features="whatever"),
         }
         for key in tests:
