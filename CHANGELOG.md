@@ -1,3 +1,108 @@
+# Version 1.5.0
+## Added features and functionality
++ Added: Streaming download functionality. Closes #965.
+    - `_api_request/_request_behavior.py`
+    - `_api_request/_request.py`
+    - `_util/_functions.py`
+    - `_util/_uber.py`
+    - `api_complete/_advanced.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_api_request.py`
+    - `tests/test_ngsiem.py`
+
++ Added: Streaming download support for the _GetArtifacts_, _GetMemoryDumpExtractedStrings_, _GetMemoryDumpHexDump_, _GetMemoryDump_, and _GetSampleV2_ operations within the __Falcon Intelligence Sandbox__ service collection. Related to #965.
+    - `falconx_sandbox.py`
+
++ Added: Streaming download support for the _DownloadFeedArchive_ operation within the __Intelligence Feeds__ service collection. Related to #965.
+    - `intelligence_feeds.py`
+
++ Added: Streaming download support for the _GetMalQueryDownloadV1_ and _GetMalQueryEntitiesSamplesFetchV1_ operations within the __MalQuery__ service collection. Related to #965.
+    - `malquery.py`
+
++ Added: Streaming download support for the _GetLookupV1_, _GetLookupFromPackageWithNamespaceV1_, and _GetLookupFromPackageV1_ operations within the __NGSIEM__ service collection. Related to #965.
+    - `ngsiem.py`
+
++ Added: Streaming download support for the _RTR_GetExtractedFileContents_ operation within the __Real Time Response__ service collection. Related to #965.
+    - `real_time_response.py`
+
++ Added: Streaming download support for the _GetSampleV3_ operation within the __Sample Uploads__ service collection. Related to #965.
+    - `sample_uploads.py`
+
++ Added: Streaming download support for the _DownloadSensorInstallerById_ and _DownloadSensorInstallerByIdV2_ operations within the __Sensor Download__ service collection. Related to #965.
+    - `sensor_download.py`
+
++ Added: Added new _RunIntegrationTaskAdmin_ and _RunIntegrationTaskV2_ operations to the __ASPM__ service collection.
+    - `_endpoint/_aspm.py`
+    - `aspm.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_aspm.py`
+
++ Added: Added `remove-pinned-content-version` and `set-pinned-content-version` as allowed values for the `action_name` parameter in the _performContentUpdatePoliciesAction_ operation within the __Content Update Policies__ service collection.
+    - `_endpoint/_content_update_policies.py`
+    - `content_update_policies.py`
+
++ Added: Added new _queryPinnableContentVersions_ operation to the __Content Update Policies__ service collection.
+    - `_endpoint/_content_update_policies.py`
+    - `content_update_policies.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_content_update_policies.py`
+
++ Added: Added new `tags` query string parameter to the _GetCSPMAwsConsoleSetupURLs_ operation within the __CSPM Registration__ service collection.
+    - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
+
++ Added: Added new `tags` query string parameter to the _GetD4CAWSAccountScriptsAttachment_ operation within the __D4C Registration__ service collection.
+    - `_endpoint/_d4c_registration.py`
+    - `d4c_registration.py`
+
+## Issues resolved
++ Fixed: Path variable handling issue with Uber class usage of __NGSIEM__ service collection operations. Closes #1324.
+    - `_util/_uber.py`
+    - Thanks go out to @tsullivan06 for identifying and reporting this issue. 🙇
+
++ Fixed: Resolved typo for `is_descendant_process` parameter within the _exclusion_payload_ payload handler used by the __SensorVisibilityExclusions__ Service Class. Closes #1325.
+    - `_payload/_generic.py`
+    - `sensor_visibility_exclusions.py`
+
++ Fixed: Query string parameter keyword argument handling issue in the _PostAggregatesAlertsV2_, _PatchEntitiesAlertsV3_, and _PostEntitiesAlertsV2_ operations within the __Alerts__ Service Class. Closes #1326.
+    - `alerts.py`
+
++ Fixed: Resolved issue with not checking for a provided `id` parameter within the _content_update_policy_payload_ payload handler used by the __ContentUpdatePolicies__ Service Class. Closes #1323.
+    - `_payload/_content_update_policy.py`
+
++ Fixed: Resolved issue with not parsing the `ids` parameter when provided a comma-delimited list within the _content_update_policy_action_payload_ payload handler used by the __ContentUpdatePolicies__ Service Class. Closes #1321.
+    - `_payload/_content_update_policy.py`
+
++ Updated: Updated docstring for the `create_policies` method (_createContentUpdatePolicies_ operation) within the __ContentUpdatePolicies__ Service Class. Closes #1322.
+    - `content_update_policies.py`
+
++ Fixed: Updated payload handler to create an `exclusions` instead of `resources` list for the _cb_exclusions_create_v1_ and _cb_exclusions_update_v1_ operations within the __CertificateBasedExclusions__ Service Class.
+    - `_payload/_certificate_based_exclusions.py`
+    - `certificate_based_exclusions.py`
+
+## Other
++ Removed: Removed decommissioned _cloud_registration_aws_validate_accounts_ from the __Cloud AWS Registration__ service collection.
+    - `_endpoint/_cloud_aws_registration.py`
+    - `_endpoint/deprecated/_cloud_aws_registration.py`
+    - `cloud_aws_registration.py`
+    > Unit testing adjusted to reflect new code coverage requirements.
+    - `tests/test_cloud_aws_registration.py`
+
++ Updated: Cosmetic update to the `filter` parameter description in the _cloud_security_registration_oci_get_account_ operation within the __Cloud OCI Registration__ service collection.
+    - `_endpoint/_cloud_oci_registration.py`
+    - `_endpoint/deprecated/_cloud_oci_registration.py`
+
++ Updated: Cosmetic update to the allowed values enum for the `sort` parameter within the _CombinedHiddenDevicesByFilter_ and _CombinedDevicesByFilter_ operations within the __Hosts__ service collection.
+    - `_endpoint/_hosts.py`
+
++ Renamed: Renamed `custom_role_name` parameter to `iam_role_arn` in the _GetD4CAWSAccountScriptsAttachment_ operation within the __D4C Registration__ service collection.
+    - `_endpoint/_d4c_registration.py`
+    - `d4c_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_d4c_registration.py`
+
+---
+
 # Version 1.4.9
 ## Added features and functionality
 + Added: Added new __CAO Hunting__ service collection with 4 new operations.
