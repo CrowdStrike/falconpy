@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=R0904,C0302  # Aligning method count to API service collection operation count
 from typing import Dict, Union
+from requests import Response
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import aggregate_payload, command_payload, generic_payload_list
 from ._result import Result
@@ -625,13 +626,14 @@ class RealTimeResponse(ServiceClass):
     def get_extracted_file_contents(self: object,
                                     parameters: dict = None,
                                     **kwargs
-                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+                                    ) -> Union[Dict[str, Union[str, int, dict]], Result, Response]:
         """Get RTR extracted file contents for specified session and sha256.
 
         Keyword arguments:
         session_id -- RTR Session ID. String.
         sha256 -- Extracted SHA256 value. String.
         filename -- Filename to use for the archive name and the file within the archive. String.
+        stream -- Enabling streaming download for the requested file. Boolean.
         parameters -- full parameters payload, not required if ids is provided as a keyword.
 
         This method only supports keywords for providing arguments.
@@ -649,7 +651,8 @@ class RealTimeResponse(ServiceClass):
             endpoints=Endpoints,
             operation_id="RTR_GetExtractedFileContents",
             keywords=kwargs,
-            params=parameters
+            params=parameters,
+            stream=kwargs.get("stream", False)
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])

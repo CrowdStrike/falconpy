@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 import json
 from typing import Dict, Union
+from requests import Response
 from ._util import (
     force_default,
     process_service_request,
@@ -64,14 +65,19 @@ class FalconXSandbox(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_artifacts(self: object, *args, parameters: dict = None, **kwargs) -> object:
+    def get_artifacts(self: object,
+                      *args,
+                      parameters: dict = None,
+                      **kwargs
+                      ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Download IOC packs, PCAP files, and other analysis artifacts.
 
         Keyword arguments:
         id -- ID of an artifact, such as an IOC pack, PCAP file, or actor image.
               Find an artifact ID in a report or summary. String.
         name -- The name given to your download file. String.
-        parameters -- full parameters payload, not required if id is provided as a keyword.
+        parameters -- Full parameters payload, not required if id is provided as a keyword.
+        stream -- Enable streaming download of the returned file. Boolean.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'id'.
                    All others are ignored.
@@ -94,17 +100,23 @@ class FalconXSandbox(ServiceClass):
             operation_id="GetArtifacts",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "id"),
-            headers=header_payload
+            headers=header_payload,
+            stream=kwargs.get("stream", False)
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_dump_extracted_strings(self: object, *args, parameters: dict = None, **kwargs) -> object:
+    def get_dump_extracted_strings(self: object,
+                                   *args,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Get extracted strings from a memory dump.
 
         Keyword arguments:
         id -- Extracted Strings ID. String.
         name -- The name given to your download file. String.
-        parameters -- full parameters payload, not required if id is provided as a keyword.
+        parameters -- Full parameters payload, not required if id is provided as a keyword.
+        stream -- Enable streaming download of the returned file. Boolean.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'id'.
                    All others are ignored.
@@ -127,17 +139,23 @@ class FalconXSandbox(ServiceClass):
             operation_id="GetMemoryDumpExtractedStrings",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "id"),
-            headers=header_payload
+            headers=header_payload,
+            stream=kwargs.get("stream", False)
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_hex_dump(self: object, *args, parameters: dict = None, **kwargs) -> object:
+    def get_hex_dump(self: object,
+                     *args,
+                     parameters: dict = None,
+                     **kwargs
+                     ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Get hex view of a memory dump.
 
         Keyword arguments:
         id -- Hex Dump ID. String.
         name -- The name given to your download file. String.
-        parameters -- full parameters payload, not required if id is provided as a keyword.
+        parameters -- Full parameters payload, not required if id is provided as a keyword.
+        stream -- Enable streaming download of the returned file. Boolean.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'id'.
                    All others are ignored.
@@ -160,17 +178,23 @@ class FalconXSandbox(ServiceClass):
             operation_id="GetMemoryDumpHexDump",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "id"),
-            headers=header_payload
+            headers=header_payload,
+            stream=kwargs.get("stream", False)
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_memory_dump(self: object, *args, parameters: dict = None, **kwargs) -> object:
+    def get_memory_dump(self: object,
+                        *args,
+                        parameters: dict = None,
+                        **kwargs
+                        ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Get memory dump content as a binary.
 
         Keyword arguments:
         id -- Memory Dump ID. String.
         name -- The name given to your download file. String.
         parameters -- full parameters payload, not required if id is provided as a keyword.
+        stream -- Enable streaming download of the returned file. Boolean.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'id'.
                    All others are ignored.
@@ -193,7 +217,8 @@ class FalconXSandbox(ServiceClass):
             operation_id="GetMemoryDump",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "id"),
-            headers=header_payload
+            headers=header_payload,
+            stream=kwargs.get("stream", False)
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -563,7 +588,11 @@ class FalconXSandbox(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_sample(self: object, *args, parameters: dict = None, **kwargs) -> object:
+    def get_sample(self: object,
+                   *args,
+                   parameters: dict = None,
+                   **kwargs
+                   ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Retrieve the file associated with the given ID (SHA256).
 
         Use the password_protected boolean to specify if you want your zip to be password
@@ -573,9 +602,10 @@ class FalconXSandbox(ServiceClass):
         ids -- SHA256 of the sample to retrieve. Find a report ID from the response when
                submitting a malware sample or search with `query_sample`.
                String.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
+        parameters -- Full parameters payload, not required if ids is provided as a keyword.
         password_protected -- Flag whether the sample should be zipped and password protected
                               with a value of "infected". Default value is "false".
+        stream -- Enable streaming download of the returned file. Boolean.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -592,7 +622,8 @@ class FalconXSandbox(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetSampleV2",
             keywords=kwargs,
-            params=handle_single_argument(args, parameters, "ids")
+            params=handle_single_argument(args, parameters, "ids"),
+            stream=kwargs.get("stream", False)
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])

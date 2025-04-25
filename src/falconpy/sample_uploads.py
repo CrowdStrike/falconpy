@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
+from requests import Response
 from ._util import (
     force_default,
     process_service_request,
@@ -382,14 +383,19 @@ class SampleUploads(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_sample(self: object, *args, parameters: dict = None, **kwargs) -> object:
+    def get_sample(self: object,
+                   *args,
+                   parameters: dict = None,
+                   **kwargs
+                   ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Retrieve the file associated with the given ID (SHA256).
 
         Keyword arguments:
         ids -- List of SHA256s to retrieve. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
+        parameters -- Full parameters payload, not required if ids is provided as a keyword.
         password_protected -- Flag whether the sample should be zipped and password protected
                               with the pass of 'infected'. Defaults to False.
+        stream -- Enable streaming download of the file. Boolean.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -406,7 +412,8 @@ class SampleUploads(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetSampleV3",
             keywords=kwargs,
-            params=handle_single_argument(args, parameters, "ids")
+            params=handle_single_argument(args, parameters, "ids"),
+            stream=kwargs.get("stream", False)
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])

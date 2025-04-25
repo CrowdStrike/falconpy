@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 
 from typing import Dict, Union
+from requests import Response
 from ._util import force_default, process_service_request, generate_error_result
 from ._payload import ngsiem_search_payload
 from ._result import Result
@@ -106,17 +107,18 @@ class NGSIEM(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_file(self: object,
                  parameters: dict = None,
-                 **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+                 **kwargs) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Download lookup file from NGSIEM.
 
         Keyword arguments:
         repository -- Name of the repository. String.
         filename -- Name of the lookup file. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        stream -- Enable streaming download of the returned file. Boolean.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
+        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
 
         HTTP Method: GET
 
@@ -137,7 +139,8 @@ class NGSIEM(ServiceClass):
                 keywords=kwargs,
                 params=parameters,
                 repository=repository,
-                filename=filename
+                filename=filename,
+                stream=kwargs.get("stream", False)
                 )
         else:
             returned = generate_error_result("You must provide a repository and filename "
@@ -149,7 +152,7 @@ class NGSIEM(ServiceClass):
     def get_file_from_package_with_namespace(self: object,
                                              parameters: dict = None,
                                              **kwargs
-                                             ) -> Union[Dict[str, Union[int, dict]], Result]:
+                                             ) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Download lookup file in namespaced package from NGSIEM.
 
         Keyword arguments:
@@ -158,10 +161,11 @@ class NGSIEM(ServiceClass):
         package -- Name of package. String.
         filename -- Name of lookup file. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        stream -- Enable streaming download of the returned file. Boolean.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
+        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
 
         HTTP Method: GET
 
@@ -189,7 +193,8 @@ class NGSIEM(ServiceClass):
                 repository=repository,
                 filename=filename,
                 namespace=namespace,
-                package=package
+                package=package,
+                stream=kwargs.get("stream", False)
                 )
         else:
             returned = generate_error_result("You must provide a repository, namespace, package and"
@@ -200,7 +205,7 @@ class NGSIEM(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_file_from_package(self: object,
                               parameters: dict = None,
-                              **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+                              **kwargs) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Download lookup file in package from NGSIEM.
 
         Keyword arguments:
@@ -208,10 +213,11 @@ class NGSIEM(ServiceClass):
         package -- Name of package. String.
         filename -- Name of lookup file. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        stream -- Enable streaming download of the returned response. Boolean.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
+        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
 
         HTTP Method: GET
 
@@ -235,7 +241,8 @@ class NGSIEM(ServiceClass):
                 params=parameters,
                 repository=repository,
                 filename=filename,
-                package=package
+                package=package,
+                stream=kwargs.get("stream", False)
                 )
         else:
             returned = generate_error_result("You must provide a repository, package and"

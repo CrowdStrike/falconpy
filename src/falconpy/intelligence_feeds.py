@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 
 from typing import Dict, Union
+from requests import Response
 from ._util import force_default, process_service_request
 from ._result import Result
 from ._service_class import ServiceClass
@@ -59,16 +60,17 @@ class IntelligenceFeeds(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def download_feed(self: object,
                       parameters: dict = None,
-                      **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+                      **kwargs) -> Union[Dict[str, Union[int, dict]], Result, Response]:
         """Download feed file contents as a zip archive.
 
         Keyword arguments:
         feed_item_id -- Feed object reference ID.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        stream -- Enable streaming download of the returned file. Boolean.
 
         This method only supports keywords for providing arguments.
 
-        Returns: dict object containing API response.
+        Returns: binary object on SUCCESS, dict object containing API response on FAILURE.
 
         HTTP Method: GET
 
@@ -80,7 +82,8 @@ class IntelligenceFeeds(ServiceClass):
             endpoints=Endpoints,
             operation_id="DownloadFeedArchive",
             keywords=kwargs,
-            params=parameters
+            params=parameters,
+            stream=kwargs.get("stream", False)
             )
 
     def list_feeds(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
