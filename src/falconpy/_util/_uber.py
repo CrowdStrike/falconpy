@@ -155,11 +155,12 @@ def handle_container_operations(kwa: dict, base_string: str) -> Tuple[dict, str,
 
 
 def uber_request_keywords(caller,
-                          meth: str,                            # .        o
-                          oper: str,                            # .           o
-                          tgt: str,                             # .      o
-                          kwa: dict,                            # .         O
-                          do_cont: bool                         # .       \/|\/
+                          meth: str,
+                          oper: str,                            # .        o
+                          tgt: str,                             # .           o
+                          kwa: dict,                            # .      o
+                          do_cont: bool,                        # .         O
+                          do_stream: bool                       # .       \/|\/
                           ) -> dict:                            # .        / \  o
     """Generate a properly formatted mapping of the keywords for this request."""
     return {
@@ -185,5 +186,6 @@ def uber_request_keywords(caller,
         "log_util": caller.log,
         "debug_record_count": caller.debug_record_count,
         "sanitize": caller.sanitize_log,
-        "pythonic": caller.pythonic
+        "pythonic": caller.pythonic,
+        "stream": do_stream
     }

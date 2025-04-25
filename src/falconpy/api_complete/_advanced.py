@@ -37,11 +37,13 @@ For more information, please refer to <https://unlicense.org>
 """
 import functools
 from typing import Dict, Union, Callable
+from requests import Response
 from .._constant import ALLOWED_METHODS
 from .._util import (
     perform_request
     )
 from .._auth_object import UberInterface
+from .._result import Result
 from .._util import (
     handle_body_payload_ids,
     scrub_target,
@@ -69,7 +71,7 @@ def command_error_handler(func: Callable):
     Defined here to prevent weirdness in the wrapper behavior.
     """
     @functools.wraps(func)
-    def wrapper(caller, *args, **kwargs):
+    def wrapper(caller, *args, **kwargs) -> Union[Dict[str, Union[str, int, dict]], bytes, Result, Response]:
         """Inner wrapper."""
         def log_failure(msg, code: int, res: dict = None):
             if caller.log:
@@ -123,7 +125,7 @@ class APIHarnessV2(UberInterface):
     #                         .-'.' .'  .' .-
     # pylint: disable=R0912
     @command_error_handler
-    def command(self, *args, **kwargs) -> Union[Dict[str, Union[int, dict]], bytes]:
+    def command(self, *args, **kwargs) -> Union[Dict[str, Union[str, int, dict]], bytes, Result, Response]:
         """Uber Class API command method.
 
         Performs the specified API operation. The token will be generated
@@ -169,6 +171,8 @@ class APIHarnessV2(UberInterface):
             Request expanded results (returns a tuple)
         image_id : str (Default: None)
             Container image ID (Falcon Container only)
+        stream : bool (Default: False)
+            Enable streaming download
 
         Arguments
         ----
@@ -206,6 +210,8 @@ class APIHarnessV2(UberInterface):
             target = scrub_target(operation, f"{url_base}{uber_command[0][2]}", kwargs)
             # Handle any IDs that are in the wrong payload
             kwargs = handle_body_payload_ids(kwargs)
+            # Enable streaming if requested
+            stream = kwargs.get("stream", False)
             # Only accept allowed HTTP methods
             if method in ALLOWED_METHODS:
                 if operation == "oauth2AccessToken":
@@ -223,7 +229,7 @@ class APIHarnessV2(UberInterface):
                 else:
                     # Craft our keyword payload for perform_request.
                     keyword_payload = uber_request_keywords(
-                        self, method, operation, target, kwargs, container
+                        self, method, operation, target, kwargs, container, stream
                         )
                     # Log the operation we're performing if enabled.
                     if self.log:

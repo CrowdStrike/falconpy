@@ -74,6 +74,7 @@ class APIRequest:
             # Behavioral flags that alter the behavior of request processing
             self._behavior = RequestBehavior(expand_result=initializer.get("expand_result", False),
                                              container=initializer.get("container", False),
+                                             stream=initializer.get("stream", False),
                                              authenticating=initializer.get("authenticating", False),
                                              perform=initializer.get("perform", True),
                                              body_validator=initializer.get("body_validator", None),
@@ -192,6 +193,11 @@ class APIRequest:
     def container(self) -> bool:
         """Return a boolean indicating if this is a container API request."""
         return self.behavior.container
+
+    @property
+    def stream(self) -> bool:
+        """Return a boolean indicating if this is a streaming download request."""
+        return self.behavior.stream
 
     @property
     def authenticating(self) -> bool:

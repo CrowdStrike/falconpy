@@ -49,6 +49,7 @@ class RequestBehavior:
     def __init__(self,
                  expand_result: Optional[bool] = False,
                  container: Optional[bool] = False,
+                 stream: Optional[bool] = False,
                  authenticating: Optional[bool] = False,
                  perform: Optional[bool] = True,
                  body_validator: Optional[Dict[str, Any]] = None,
@@ -62,6 +63,10 @@ class RequestBehavior:
         self._container = False
         if isinstance(container, bool):
             self._container = container
+
+        self._stream = False
+        if isinstance(stream, bool):
+            self._stream = stream
 
         self._authenticating = False
         if isinstance(authenticating, bool):
@@ -101,6 +106,16 @@ class RequestBehavior:
     def container(self, value: bool):
         """Change the container value."""
         self._container = value
+
+    @property
+    def stream(self) -> bool:
+        """Indicate if this request is for a streaming download."""
+        return self._stream
+
+    @stream.setter
+    def stream(self, value: bool):
+        """Change the stream value."""
+        self._stream = value
 
     @property
     def authenticating(self) -> bool:
