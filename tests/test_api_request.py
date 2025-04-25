@@ -89,6 +89,7 @@ class TestAPIRequest:
             _OBJECT.behavior.perform = True
             _OBJECT.request_log.debug_record_count = 200
             _OBJECT.request_log.sanitize_log = False
+            _OBJECT.behavior.stream = True
             if _OBJECT.behavior.body_required[0] != "Something":
                 _success = False
             if _OBJECT.behavior.body_validator["Something"] != str:
@@ -136,6 +137,8 @@ class TestAPIRequest:
             if _OBJECT.request_log.debug_record_count != 200:
                 _success = False
             if _OBJECT.request_log.sanitize_log:
+                _success = False
+            if not _OBJECT.behavior.stream:
                 _success = False
         except APIError as api_error:
             if api_error.code == 429:

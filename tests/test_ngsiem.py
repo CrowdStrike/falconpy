@@ -3,7 +3,7 @@ test_ngsiem.py - This class tests the NGSIEM service class
 """
 import os
 import sys
-import pytest
+from requests import Response
 
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
@@ -84,6 +84,16 @@ class TestNGSIEM:
             error_checks = False
         # if not error_checks:
         #     pytest.skip("Skipping on failure")  # Skip on failure for now
+        # Stream test
+        result = falcon.get_file_from_package_with_namespace(repository="search-all",
+                                                             filename="manny",
+                                                             package="moe",
+                                                             namespace="jack",
+                                                             stream=True
+                                                             )
+        if not isinstance(result, Response):
+            if result.status_code not in AllowedResponses:
+                error_checks = False
         return error_checks
 
     def test_all_functionality(self):

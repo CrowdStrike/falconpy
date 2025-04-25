@@ -368,6 +368,7 @@ def perform_request(endpoint: str = "",  # noqa: C901
     log_util: Logger - Logging utility
     debug_record_count: int - Maximum number of records to log in debug logs
     authenticating: bool - This request is driving a token request
+    stream: bool - Enabling streaming download.
     """
     # Shortcut for now
     pythonic = kwargs.get("pythonic", False)
@@ -413,9 +414,18 @@ def perform_request(endpoint: str = "",  # noqa: C901
                 response = requests.request(api.method.upper(), endpoint, params=api.param_payload,
                                             headers=headers, json=api.body_payload, data=api.data_payload,
                                             files=api.files, verify=api.verify, allow_redirects=allow_redirects,
-                                            proxies=api.proxy, timeout=api.timeout
+                                            proxies=api.proxy, timeout=api.timeout, stream=api.stream
                                             )
+
                 api.debug_headers = response.headers
+
+                if api.stream:
+                    if api.log_util:
+                        api.log_util.debug("STREAM: Download requested")
+                        api.log_util.debug(f"STREAM: {api.debug_headers}")
+                    # Return the requests.Response object instead of a FalconPy Result object
+                    return response
+
                 content_return, returning_content_type = calc_content_return(response,
                                                                              api.container,
                                                                              api.authenticating,
@@ -493,6 +503,8 @@ def log_api_payloads(api: APIRequest, headers: dict):
         api.log_util.debug("PARAMETERS: %s", _param_payload)
         api.log_util.debug("BODY: %s", _body_payload)
         api.log_util.debug("DATA: %s", _data_payload)
+        if api.stream:
+            api.log_util.debug("STREAM: %s", api.stream)
 
 
 def log_api_activity(content_return: Union[dict, bytes], content_type: str, api: APIRequest):
@@ -653,6 +665,7 @@ def process_service_request(calling_object: ServiceClass,  # pylint: disable=R09
     collection_version -- Repository version [PATH] (Custom Objects API)
     object_key -- Object Key [PATH] (Custom Objects API)
     path_id -- ASPM ID path variable [PATH] (ASPM API)
+    stream -- Enabling streaming download.
     """
     # Log the operation ID if we have logging enabled.
     if calling_object.log:
@@ -707,7 +720,8 @@ def process_service_request(calling_object: ServiceClass,  # pylint: disable=R09
         "expand_result": expand_result,
         "container": container,
         "pythonic": do_pythonic,
-        "perform": True
+        "perform": True,
+        "stream": kwargs.get("stream", False)
     }
 
     return service_request(**new_keywords)
