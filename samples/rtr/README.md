@@ -14,6 +14,7 @@ The examples within this folder focus on leveraging CrowdStrike's Real Time Resp
 - [Script Manager](#script-manager) - Upload and delete RTR scripts for use on endpoints.
 - [Dump Process Memory](pid-dump) - Dumps the memory for a running process on a target system.
 - [My Little RTR](pony) - Retrieve System Information and draws ASCII art.
+- [Streaming File Download](#streaming-file-download) - Stream download a file from a target host.
 
 
 ## Bulk execute a command on matched hosts
@@ -760,5 +761,149 @@ Required arguments:
 
 ### Example source code
 The source code for this example can be found [here](script_manager.py).
+
+---
+
+## Streaming File Download
+This sample creates an RTR session with a target host, and stream downloads the specified file.
+
+### Running the program
+In order to run this demonstration, you you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Hosts | __READ__ |
+| Real Time Response | __READ__, __WRITE__ |
+
+> [!NOTE]
+> This program can be executed using an API key that is not scoped for the Hosts service collection. Users will need to provide an AID value for the target host instead of a hostname.
+
+### Execution syntax
+This sample leverages simple command-line arguments to implement functionality.
+
+#### Basic usage
+Streaming download a specified file from a host by hostname.
+
+```shell
+python3 streaming_download_service.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n TARGET_HOSTNAME -f TARGET_FILENAME
+```
+
+Streaming download a specified file from a host by host AID.
+
+```shell
+python3 streaming_download_service.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -a TARGET_HOST_AID -f TARGET_FILENAME
+```
+
+> [!TIP]
+> This sample supports [Environment Authentication](https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication), meaning you can execute any of the command lines shown without providing credentials if you have the values `FALCON_CLIENT_ID` and `FALCON_CLIENT_SECRET` defined in your environment.
+
+```shell
+python3 streaming_download_service.py -n TARGET_HOSTNAME -f TARGET_FILENAME
+```
+
+Specify the name of the save file used to store the resulting download.
+
+```shell
+python3 streaming_download_service.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n TARGET_HOSTNAME -f TARGET_FILENAME -sf SAVE_FILENAME
+```
+
+Disable the pre-existence check for the save file. 
+
+> [!NOTE]
+> This will overwrite the existing save file with the newly downloaded file.
+
+```shell
+python3 streaming_download_service.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n TARGET_HOSTNAME -f TARGET_FILENAME -o
+```
+
+Adjust the chunk size used for streaming the download.
+
+```shell
+python3 streaming_download_service.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n TARGET_HOSTNAME -f TARGET_FILENAME -c CHUNK_SIZE
+```
+
+> Activate debugging with the `-d` argument.
+
+```shell
+python3 streaming_download_service.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -n TARGET_HOSTNAME -f TARGET_FILENAME -d
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+usage: streaming_download_service.py [-h] [-c CHUNK_SIZE] [-o] [-d] -f FILENAME [-sf SAVE_FILE]
+                                     (-n HOSTNAME | -a AID) [-k FALCON_CLIENT_ID]
+                                     [-s FALCON_CLIENT_SECRET]
+
+Real Time Response API streaming download sample.
+
+._____________._.______  ._______.______  ._____.___ .___ .______  ._____
+|    ___/\__ _:|: __   \ : .____/:      \ :         |: __|:      \ :_ ___\
+|___    \  |  :||  \____|| : _/\ |   .   ||   \  /  || : ||       ||   |___
+|       /  |   ||   :  \ |   /  \|   :   ||   |\/   ||   ||   |   ||   /  |
+|__:___/   |   ||   |___\|_.: __/|___|   ||___| |   ||   ||___|   ||. __  |
+   :       |___||___|       :/       |___|      |___||___|    |___| :/ |. |
+                                                                    :   :/
+                                                                        :
+.______  ._______           ___ .______  .___    ._______  .______  .______  .________
+:_ _   \ : .___  \ .___    |   |:      \ |   |   : .___  \ :      \ :_ _   \ |    ___/
+|   |   || :   |  |:   | /\|   ||       ||   |   | :   |  ||   .   ||   |   ||___    \
+| . |   ||     :  ||   |/  :   ||   |   ||   |/\ |     :  ||   :   || . |   ||       /
+|. ____/  \_. ___/ |   /       ||___|   ||   /  \ \_. ___/ |___|   ||. ____/ |__:___/
+ :/         :/     |______/|___|    |___||______/   :/         |___| :/         :
+ :          :              :                        :                :
+                           :
+                                                                FalconPy v1.5.0
+
+This sample demonstrates how to perform a streaming download from the
+CrowdStrike Real Time Response API. Files are saved as 7-zip archives.
+
+Requirements:
+    crowdstrike-falconpy v1.5.0+
+
+Creation: 04.23.2025 - jshcodes@CrowdStrike
+
+options:
+  -h, --help            show this help message and exit
+
+behavior:
+  Download and API behavior arguments.
+
+  -c, --chunk_size CHUNK_SIZE
+                        Streaming download chunk size
+  -o, --overwrite       Force overwritting of a pre-existing save file
+  -d, --debug           Enable API debugging
+
+filename:
+  You must specify a filename to download.
+  If you do not specify a save filename, it will be saved as "result.7z".
+
+  -f, --filename FILENAME
+                        Target filename
+  -sf, --save_file SAVE_FILE
+                        Name of the saved file
+
+host:
+  One of the two following arguments must be specified.
+
+  -n, --hostname HOSTNAME
+                        Target hostname (use instead of AID)
+  -a, --aid AID         Target host AID (use instead of hostname)
+
+authentication:
+  If these arguments are not specified, Environment Authentication will be attempted.
+  Environment Authentication: https://falconpy.io/Usage/Authenticating-to-the-API.html#environment-authentication
+
+  -k, --falcon_client_id FALCON_CLIENT_ID
+                        CrowdStrike Falcon API Client ID
+  -s, --falcon_client_secret FALCON_CLIENT_SECRET
+                        CrowdStrike Falcon API Client Secret
+```
+
+### Example source code
+The source code for this example can be found [here](streaming_download_service.py).
+
+The source code for the Uber Class version of this example can be found [here](streaming_download_uber.py).
 
 ---
