@@ -76,7 +76,7 @@ def ngsiem_search_payload(passed_keywords: dict) -> dict:
     bool_int_keys = ["allow_event_skipping", "is_live", "use_ingest_time", "autobucket_count",
                      "timezone_offset_minutes"
                      ]
-    keys = ["arguments", "around", "end", "ingest_end", "ingest_start", "query_string", "start"
+    keys = ["arguments", "around", "end", "ingest_end", "ingest_start", "query_string", "start",
             "timezone"
             ]
     for key in keys:
