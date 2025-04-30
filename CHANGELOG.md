@@ -80,6 +80,10 @@
     - `_payload/_certificate_based_exclusions.py`
     - `certificate_based_exclusions.py`
 
++ Fixed: Resolved payload handling issue with the `start` and `timezone` parameters in the _StartSearchV1_ operation within the __NGSIEM__ Service Class. Closes #1331.
+    - `_payload/_ngsiem.py`
+    - Thanks go out to @jimmyruann for reporting this issue and identifying the fix. 🙇
+
 ## Other
 + Removed: Removed decommissioned _cloud_registration_aws_validate_accounts_ from the __Cloud AWS Registration__ service collection.
     - `_endpoint/_cloud_aws_registration.py`
