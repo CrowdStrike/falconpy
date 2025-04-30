@@ -1589,3 +1589,5 @@ RunIntegrationTaskV
 queryPinnableContentVersions
 ContentUpdatePolicies
 jimmyruann
+executeactiverespondercommand
+combineddevicesbyfilter
