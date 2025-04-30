@@ -1588,3 +1588,4 @@ RunIntegrationTaskAdmin
 RunIntegrationTaskV
 queryPinnableContentVersions
 ContentUpdatePolicies
+jimmyruann
