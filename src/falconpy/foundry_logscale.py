@@ -122,7 +122,7 @@ class FoundryLogScale(ServiceClass):
         # Create a multipart form payload for our upload file
         file_tuple = None
         if data_file:
-            file_tuple = [("file", ("data-upload", data_file, "application/json"))]
+            file_tuple = [("data_file", ("data_file", data_file, "application/json"))]
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -174,7 +174,7 @@ class FoundryLogScale(ServiceClass):
         # Create a multipart form payload for our upload file
         file_tuple = None
         if data_file:
-            file_tuple = [("file", ("data-upload", data_file, "application/json"))]
+            file_tuple = [("data_file", ("data_file", data_file, "application/json"))]
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
