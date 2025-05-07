@@ -40,7 +40,14 @@ from ._constant import (
     GLOBAL_API_MAX_RETURN,
     MOCK_OPERATIONS
     )
-from ._enum import BaseURL, ContainerBaseURL, TokenFailReason
+from ._enum import (
+    BaseURL,
+    ContainerBaseURL,
+    TokenFailReason,
+    IngestBaseURL,
+    IngestFormat,
+    TimeUnit
+    )
 from ._log import LogFacility
 from ._error import (
     APIError,
@@ -87,6 +94,13 @@ from ._api_request import (
     RequestPayloads,
     RequestValidator
     )
+from ._ngsiem import (
+    HTTPEventCollector,
+    HEC,
+    IngestPayload,
+    IngestConfig,
+    SessionManager
+)
 from .alerts import Alerts
 from .api_integrations import APIIntegrations
 from .api_complete import APIHarness, APIHarnessV2
@@ -227,7 +241,8 @@ __all__ = [
     "NGSIEM", "CorrelationRules", "CloudAWSRegistration", "CloudAzureRegistration",
     "CloudOCIRegistration", "CloudSecurityAssets", "Deployments", "ServerlessVulnerabilities",
     "DeviceContent", "IntelligenceIndicatorGraph", "ContentUpdatePolicies", "CAOHunting",
-    "ContainerImageCompliance", "FaaSExecution"
+    "ContainerImageCompliance", "FaaSExecution", "HEC", "IngestBaseURL", "IngestFormat",
+    "IngestPayload", "HTTPEventCollector", "IngestConfig", "SessionManager", "TimeUnit"
     ]
 """
 This is free and unencumbered software released into the public domain.

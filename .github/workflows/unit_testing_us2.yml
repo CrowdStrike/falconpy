@@ -37,6 +37,8 @@ jobs:
         DEBUG_API_BASE_URL: us2
         CROSS_DEBUG_KEY: ${{ secrets.CROSS_DEBUG_KEY }}
         CROSS_DEBUG_SECRET: ${{ secrets.CROSS_DEBUG_SECRET }}
+        DEBUG_NGSIEM_API_KEY: ${{ secrets.DEBUG_NGSIEM_API_KEY_US2 }}
+        DEBUG_NGSIEM_URL_KEY: ${{ secrets.DEBUG_NGSIEM_URL_KEY_US2 }}
       run: |
         coverage run --source=src --omit=src/falconpy/debug.py -m pytest -s --ignore-glob=**/manual/*
         coverage report

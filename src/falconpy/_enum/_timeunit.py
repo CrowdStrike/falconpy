@@ -1,4 +1,4 @@
-"""FalconPy enum module.
+"""CrowdStrike Time Units Enumerator.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,14 +35,12 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._base_url import BaseURL
-from ._container_base_url import ContainerBaseURL
-from ._ingest_base_url import IngestBaseURL
-from ._ingest_format import IngestFormat
-from ._timeunit import TimeUnit
-from ._token_fail_reason import TokenFailReason
+from enum import Enum
 
 
-__all__ = ["BaseURL", "ContainerBaseURL", "IngestBaseURL", "IngestFormat", "TimeUnit",
-           "TokenFailReason"
-           ]
+class TimeUnit(Enum):
+    """Time unit types."""
+
+    SECONDS = 1
+    MILLISECONDS = 1_000
+    NANOSECONDS = 1_000_000_000
