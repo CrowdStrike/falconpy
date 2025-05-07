@@ -15,7 +15,7 @@ from falconpy import FoundryLogScale
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = FoundryLogScale(auth_object=config)
-AllowedResponses = [200, 201, 400, 404, 429, 406, 500, 501, 502, 503]
+AllowedResponses = [200, 201, 400, 403, 404, 429, 406, 500, 501, 502, 503]
 
 
 class TestFoundryLogScale:
@@ -32,7 +32,9 @@ class TestFoundryLogScale:
             "CreateSavedSearchesIngestV1" : falcon.populate(app_id="pommegranate"),
             "GetSavedSearchesJobResultsDownloadV1" : falcon.download_results(job_id="12345", result_format="json"),
             "IngestDataAsyncV1": falcon.ingest_data_async(data_file="testfile.png", tag="file_tag"),
-            "IngestDataAsyncV1variant": falcon.ingest_data_async(file="testfile.png", tag="file_tag")
+            "IngestDataAsyncV1variant": falcon.ingest_data_async(file="testfile.png", tag="file_tag"),
+            "CreateFileV1": falcon.create_file(file="tests/testfile.json", repo="whatever"),
+            "UpdateFileV1": falcon.update_file(file="tests/testfile.json", description="whatever")
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
