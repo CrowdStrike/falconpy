@@ -55,6 +55,79 @@ _user_management_endpoints = [
     "combinedUserRolesV1",
     "GET",
     "/user-management/combined/user-roles/v1",
+    "Deprecated : Please use GET /user-management/combined/user-roles/v2. Get User Grant(s). This endpoint "
+    "lists both direct as well as flight control grants between a User and a Customer.",
+    "user_management",
+    [
+      {
+        "type": "string",
+        "description": "User UUID to get available roles for.",
+        "name": "user_uuid",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Customer ID to get grants for. Empty CID would result in Role IDs for user against "
+        "current CID in view.",
+        "name": "cid",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "Specifies if to request direct Only role grants or all role grants between user and "
+        "CID (specified in query params)",
+        "name": "direct_only",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter using a query in Falcon Query Language (FQL). Supported filters: expires_at, "
+        "role_id, role_name",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "integer",
+        "default": 0,
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "maximum": 500,
+        "minimum": 1,
+        "type": "integer",
+        "default": 100,
+        "description": "The maximum records to return. [1-500]",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "cid|asc",
+          "cid|desc",
+          "expires_at|asc",
+          "expires_at|desc",
+          "role_name|asc",
+          "role_name|desc",
+          "type|asc",
+          "type|desc"
+        ],
+        "type": "string",
+        "default": "role_name|asc",
+        "description": "The property to sort by",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CombinedUserRolesV2",
+    "GET",
+    "/user-management/combined/user-roles/v2",
     "Get User Grant(s). This endpoint lists both direct as well as flight control grants between a User and a Customer.",
     "user_management",
     [

@@ -114,6 +114,7 @@ class TestFalconUserManagement:
             "retrieve_emails_by_cid": falcon.RetrieveEmailsByCID(),
             "retrieve_user_uuids_by_cid": falcon.RetrieveUserUUIDsByCID(),
             "retrieve_user_uuid": falcon.RetrieveUserUUID(parameters={}),
+            "get_user_grants_v1": falcon.get_user_grants_v1(user_uuid="12345678"),
             "get_user_grants": falcon.get_user_grants(user_uuid="12345678"),
             "get_roles_mssp": falcon.get_roles_mssp(ids="1234567890", cid="1234567890"),
             "user_action": falcon.user_action(action_name="reset_password",

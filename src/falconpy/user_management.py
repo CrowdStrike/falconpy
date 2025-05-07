@@ -151,7 +151,11 @@ class UserManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_user_grants(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_user_grants_v1(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get User Grant(s).
 
         This operation lists both direct as well as flight control grants
@@ -200,6 +204,60 @@ class UserManagement(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="combinedUserRolesV1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "user_uuid")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_user_grants(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get User Grant(s).
+
+        This operation lists both direct as well as flight control grants
+        between a User and a Customer.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/CombinedUserRolesV2
+
+        Keyword arguments
+        ----
+        cid : str
+            Customer ID to get grants for. An empty CID value returns Role IDs for
+            the user against the current CID in view.
+        direct_only : bool
+            Specifies if to request direct only role grants or all role grants
+            between user and CID (specified using `cid` keyword).
+        filter : str
+            The filter expression that should be used to limit the results. FQL format.
+            Available values: role_id, role_name, expires_at
+        limit : int (range 1 - 500, default 100)
+            The maximum number of records to return.
+        offset : int (default 0)
+            The integer offset to start retrieving records from.
+        parameters : str
+            Full parameters payload, not required if using other keywords. JSON format.
+        sort : str
+            The property to sort by. FQL syntax (e.g. cid|asc, type|desc).
+            Available sort values: cid, role_name, type, expires_at
+        user_uuid : str (required)
+            User UUID to get available roles for.
+            Must be provided as a keyword, argument or part of the `parameters` payload.
+
+        Arguments
+        ----
+        When not specified, the first argument to this method is assumed to be `user_uuid`.
+        All others are ignored.
+
+        Returns
+        ----
+        dict
+            Dictionary containing API response.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CombinedUserRolesV2",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "user_uuid")
             )
@@ -1165,7 +1223,8 @@ class UserManagement(ServiceClass):
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
     aggregateUsersV1 = aggregate_users
-    combinedUserRolesV1 = get_user_grants
+    combinedUserRolesV1 = get_user_grants_v1
+    CombinedUserRolesV2 = get_user_grants
     get_user_roles = get_user_grants  # Helper alias
     get_user_roles_combined = get_user_grants  # Helper alias
     entitiesRolesV1 = get_roles_mssp
