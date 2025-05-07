@@ -1,3 +1,56 @@
+# Version 1.5.1
+## Added features and functionality
++ Added: Added the _CreateFileV1_ and _UpdateFileV1_ operations to the __Foundry LogScale__ service collection.
+    - `_endpoint/_foundry_logscale.py`
+    - `_endpoint/_ngsiem.py`
+    - `foundry_logscale.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_foundry_logscale.py`
+
++ Added: Added new _CombinedUserRolesV2_ operation to the __User Management__ service collection. Deprecated the _combinedUserRolesV1_ operation.
+    - `_endpoint/_user_management.py`
+    - `user_management.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_user_management.py`
+
++ Added: Added new HTTP Event Collector module.
+    - `_enum/__init__py`
+    - `_enum/_ingest_base_url.py`
+    - `_enum/_ingest_format.py`
+    - `_enum/_timeunit.py`
+    - `_ngsiem/__init__.py`
+    - `_ngsiem/_hec.py`
+    - `_ngsiem/_ingest_config.py`
+    - `_ngsiem/_ingest_payload.py`
+    - `_ngsiem/_session_manager.py`
+    - `__init__.py`
+    - `_version.py`
+    > Unit testing expanded to complete code coverage.
+    - `.github/workflows/unit_testing_ubuntu.yml`
+    - `tests/5records.raw`
+    - `tests/100thousand.raw.gz`
+    - `tests/test_hec.py`
+
++ Added: Added new helper module containing a text color helper class, progress / wait indicator, and a random string generator.
+    - `_helper/__init__.py`
+    - `_helper/_indicator.py`
+    - `_helper/_text_colors.py`
+    - `__init__.py`
+    > Unit testing expanded to complete coverage.
+
+## Issues resolved
++ Updated: Changed form data files tuple name for `file_data` to match the keyword in the _IngestDataV1_ and _IngestDataAsyncV1_ operations within the __Foundry LogScale__ Service Class.
+    - `foundry_logscale.py`
+
++ Resolved: Updated `search_id` to `id` in the Uber Class _scrub_target_ method to properly handle path variables required for the _GetSearchStatusV1_ operation within the __NGSIEM__ service collection. Closes #1329.
+    - `_util/_uber.py`
+    - Thanks go out to @Gage-BCCA for submitting this fix! 🙇
+
+## Other
++ Updated: Cosmetic updates to enum and parameter descriptions in the _GetMigrationIDsV1_ and _GetHostMigrationIDsV1_ operations within the __Host Migration__ service collection.
+    - `_endpoint/_host_migration.py`
+---
+
 # Version 1.5.0
 ## Added features and functionality
 + Added: Streaming download functionality. Closes #965.
