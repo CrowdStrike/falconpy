@@ -146,6 +146,102 @@ _foundry_logscale_endpoints = [
     ]
   ],
   [
+    "CreateFileV1",
+    "POST",
+    "/loggingapi/entities/lookup-files/v1",
+    "Creates a lookup file",
+    "foundry_logscale",
+    [
+      {
+        "maxLength": 36,
+        "minLength": 36,
+        "type": "string",
+        "description": "Requester UUID.",
+        "name": "X-CS-USERUUID",
+        "in": "header"
+      },
+      {
+        "type": "file",
+        "description": "File to be uploaded",
+        "name": "file",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "maxLength": 50,
+        "minLength": 5,
+        "type": "string",
+        "description": "Name used to identify the file",
+        "name": "name",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "maxLength": 255,
+        "minLength": 5,
+        "type": "string",
+        "description": "File description",
+        "name": "description",
+        "in": "formData"
+      },
+      {
+        "maxLength": 32,
+        "minLength": 32,
+        "type": "string",
+        "description": "Unique identifier of the file being updated.",
+        "name": "id",
+        "in": "formData"
+      },
+      {
+        "maxLength": 255,
+        "minLength": 5,
+        "type": "string",
+        "description": "Name of repository or view to save the file",
+        "name": "repo",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
+    "UpdateFileV1",
+    "PATCH",
+    "/loggingapi/entities/lookup-files/v1",
+    "Updates a lookup file",
+    "foundry_logscale",
+    [
+      {
+        "maxLength": 36,
+        "minLength": 36,
+        "type": "string",
+        "description": "Requester UUID.",
+        "name": "X-CS-USERUUID",
+        "in": "header"
+      },
+      {
+        "minLength": 32,
+        "type": "string",
+        "description": "Unique identifier of the file being updated.",
+        "name": "id",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "maxLength": 255,
+        "minLength": 5,
+        "type": "string",
+        "description": "File description",
+        "name": "description",
+        "in": "formData"
+      },
+      {
+        "type": "file",
+        "description": "File to be uploaded",
+        "name": "file",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
     "CreateSavedSearchesDynamicExecuteV1",
     "POST",
     "/loggingapi/entities/saved-searches/execute-dynamic/v1",

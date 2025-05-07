@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, Union
+from typing import Dict, Union, Any
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import foundry_execute_search_payload, foundry_dynamic_search_payload
 from ._result import Result
@@ -112,6 +112,7 @@ class FoundryLogScale(ServiceClass):
         # Try to find the binary object they provided us
         if not data_file:
             data_file = kwargs.get("file", None)
+            kwargs.pop("file")
         data_keys = ["tag", "tag_source", "test_data", "data_content"]
         form_data = {}
         for key in data_keys:
@@ -145,7 +146,7 @@ class FoundryLogScale(ServiceClass):
 
         Keyword arguments:
         data_content -- JSON formatted data to ingest. String.
-        data_file -- Content of the uploaded archive in binary format.
+        data_file -- Content of the uploaded file in binary format.
                      'file' is also accepted as this parameter.
         parameters -- full parameters payload, not required if using other keywords.
         tag -- Custom tag for ingested data in the form 'tag:value'. String.
@@ -164,6 +165,7 @@ class FoundryLogScale(ServiceClass):
         # Try to find the binary object they provided us
         if not data_file:
             data_file = kwargs.get("file", None)
+            kwargs.pop("file")
         data_keys = ["tag", "tag_source", "test_data", "data_content"]
         form_data = {}
         for key in data_keys:
@@ -182,6 +184,102 @@ class FoundryLogScale(ServiceClass):
             body=body,  # Not sure we need to provide a body
             data=form_data,
             files=file_tuple,
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def create_file(self: object,
+                    data_file: dict = None,
+                    parameters: dict = None,
+                    **kwargs
+                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create a lookup file.
+
+        Keyword arguments:
+        data_file -- Content of the uploaded file in binary format.
+                     'file' is also accepted as this parameter.
+        name -- Name used to identify the file
+        description -- File description
+        id -- Unique identifier of the file being updated.
+        repo -- Name of repository or view to save the file
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/lookup-files/CreateFileV1
+        """
+        if not data_file:
+            data_file = kwargs.get("file", None)
+            kwargs.pop("file")
+        data_keys = ["name", "description", "id", "repo"]
+        form_data = {}
+        for key in data_keys:
+            if kwargs.get(key, None):
+                form_data[key] = kwargs.get(key)
+                kwargs.pop(key)  # Prevent it from converting to a query string param
+        file_tuple = None
+        if data_file:
+            with open(data_file, "r", encoding="utf-8") as inbound:
+                file_tuple = [("data_file", ("data_file", inbound.read(), "application/json"))]
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateFileV1",
+            files=file_tuple,
+            data=form_data,
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
+    def update_file(self: object,
+                    data_file: Any = None,
+                    parameters: dict = None,
+                    **kwargs
+                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update a lookup file.
+
+        Keyword arguments:
+        data_file -- Content of the uploaded file in binary format.
+                     'file' is also accepted as this parameter.
+        description -- File description. String.
+        id -- Unique identifier of the file being updated. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/lookup-files/UpdateFileV1
+        """
+        if not data_file:
+            data_file = kwargs.get("file", None)
+            kwargs.pop("file")
+        data_keys = ["name", "description", "id"]
+        form_data = {}
+        for key in data_keys:
+            if kwargs.get(key, None):
+                form_data[key] = kwargs.get(key)
+                kwargs.pop(key)  # Prevent it from converting to a query string param
+        file_tuple = None
+        with open(data_file, "r", encoding="utf-8") as inbound:
+            if data_file:
+                file_tuple = [("data_file", ("data_file", inbound.read(), "application/json"))]
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateFileV1",
+            files=file_tuple,
+            data=form_data,
             keywords=kwargs,
             params=parameters
             )
@@ -447,6 +545,8 @@ class FoundryLogScale(ServiceClass):
     ListViewV1 = list_views
     IngestDataV1 = ingest_data
     IngestDataAsyncV1 = ingest_data_async
+    CreateFileV1 = create_file
+    UpdateFileV1 = update_file
     CreateSavedSearchesDynamicExecuteV1 = execute_dynamic
     GetSavedSearchesExecuteV1 = get_search_results
     CreateSavedSearchesExecuteV1 = execute
