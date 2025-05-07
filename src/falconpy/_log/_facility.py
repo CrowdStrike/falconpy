@@ -43,6 +43,8 @@ from .._constant import MAX_DEBUG_RECORDS
 class LogFacility:
     """This class encapsulates the log facility and additional configuration."""
 
+    _file_log: int = 0
+
     def __init__(self,
                  log: Optional[Logger] = None,
                  debug_record_count: Optional[int] = None,
@@ -95,3 +97,13 @@ class LogFacility:
     def debug_record_count(self, value: int):
         """Set the debug record count."""
         self._debug_record_count = value
+
+    @property
+    def file_log(self) -> int:
+        """Integer flag indicating if the log is writing to a file."""
+        return self._file_log
+
+    @file_log.setter
+    def file_log(self, value: int):
+        """Set the file_log flag."""
+        self._file_log = value
