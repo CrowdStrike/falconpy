@@ -101,6 +101,7 @@ from ._ngsiem import (
     IngestConfig,
     SessionManager
 )
+from ._helper import random_string, Indicator, Color
 from .alerts import Alerts
 from .api_integrations import APIIntegrations
 from .api_complete import APIHarness, APIHarnessV2
@@ -242,7 +243,8 @@ __all__ = [
     "CloudOCIRegistration", "CloudSecurityAssets", "Deployments", "ServerlessVulnerabilities",
     "DeviceContent", "IntelligenceIndicatorGraph", "ContentUpdatePolicies", "CAOHunting",
     "ContainerImageCompliance", "FaaSExecution", "HEC", "IngestBaseURL", "IngestFormat",
-    "IngestPayload", "HTTPEventCollector", "IngestConfig", "SessionManager", "TimeUnit"
+    "IngestPayload", "HTTPEventCollector", "IngestConfig", "SessionManager", "TimeUnit",
+    "Color", "Indicator", "random_string"
     ]
 """
 This is free and unencumbered software released into the public domain.
