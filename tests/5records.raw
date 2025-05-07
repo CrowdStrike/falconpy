@@ -1,0 +1,5 @@
+{"host":"FWZBDPHR","type":["info"],"message":"WgYjFP98M12kS5HtIwDQ","category": ["host"],"timestamp": 1746590796712050944,"module":"crowdstrike-falconpy-hec","kind":"event"}
+{"host":"I0FTULAL","type":["info"],"message":"nTVeEpphiKQNE8vvdm2o","category": ["host"],"timestamp": 1746590796712086016,"module":"crowdstrike-falconpy-hec","kind":"event"}
+{"host":"WYUDKOT1","type":["info"],"message":"NiWFOpZLf6vospS6H1xg","category": ["host"],"timestamp": 1746590796712118016,"module":"crowdstrike-falconpy-hec","kind":"event"}
+{"host":"Z5VAN5VE","type":["info"],"message":"0eWRTegAS6l9caX30Frh","category": ["host"],"timestamp": 1746590796712157952,"module":"crowdstrike-falconpy-hec","kind":"event"}
+{"host":"HSBYBPJT","type":["info"],"message":"IkLuzgY2x1HnVVLCXFvF","category": ["host"],"timestamp": 1746590796712198912,"module":"crowdstrike-falconpy-hec","kind":"event"}

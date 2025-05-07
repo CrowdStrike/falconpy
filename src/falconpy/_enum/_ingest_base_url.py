@@ -1,4 +1,4 @@
-"""FalconPy enum module.
+"""CrowdStrike API Ingest Base URL Enumerator.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,14 +35,16 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from ._base_url import BaseURL
-from ._container_base_url import ContainerBaseURL
-from ._ingest_base_url import IngestBaseURL
-from ._ingest_format import IngestFormat
-from ._timeunit import TimeUnit
-from ._token_fail_reason import TokenFailReason
+from enum import Enum
 
 
-__all__ = ["BaseURL", "ContainerBaseURL", "IngestBaseURL", "IngestFormat", "TimeUnit",
-           "TokenFailReason"
-           ]
+class IngestBaseURL(Enum):
+    """Ingest Base URL.
+
+    Used to retrieve the ingest base URL.
+    """
+
+    US1 = "ingest.us-1.crowdstrike.com"
+    US2 = "ingest.us-2.crowdstrike.com"
+    EU1 = "ingest.eu-1.crowdstrike.com"
+    USGOV1 = "ingest.laggar.gcw.crowdstrike.com"
