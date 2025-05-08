@@ -115,7 +115,7 @@ def scrub_target(oper: str, scrubbed: str, kwas: dict) -> str:
         "GetLookupFromPackageWithNamespaceV1": ["repository", "namespace", "package", "filename"],
         "GetLookupFromPackageV1": ["repository", "package", "filename"],
         "StartSearchV1": ["repository"],
-        "GetSearchStatusV1": ["repository", "search_id"],
+        "GetSearchStatusV1": ["repository", "id"],
         "StopSearchV1": ["repository", "id"]
     }
     for field_value, field_names in field_mapping.items():
