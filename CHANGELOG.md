@@ -38,6 +38,18 @@
     - `__init__.py`
     > Unit testing expanded to complete coverage.
 
++ Added: Added the `sort` parameter to the _queryPinnableContentVersions_ operation within the __Content Update Policies__ service collection.
+    - `_endpoint/_content_update_policies.py`
+    - `content_update_policies.py`
+
++ Added: Added `actors.animal_classifier`, `malware`, `malware.community_identifiers`, `malware.family_name`, and `malware.slug` as an allowed filter parameter values in the _QueryIntelReportIds_ and _QueryIntelReportEntities_ operations within the __Intel__ service collection.
+    - `_endpoint/_intel.py`
+    - `intel.py`
+
++ Added: Added `animal_classifier` as an allowed filter parameter value in the _QueryIntelActorEntities_ and _QueryIntelActorIds_ operations within the __Intel__ service collection.
+    - `_endpoint/_intel.py`
+    - `intel.py`
+
 ## Issues resolved
 + Updated: Changed form data files tuple name for `file_data` to match the keyword in the _IngestDataV1_ and _IngestDataAsyncV1_ operations within the __Foundry LogScale__ Service Class.
     - `foundry_logscale.py`
@@ -49,6 +61,14 @@
 ## Other
 + Updated: Cosmetic updates to enum and parameter descriptions in the _GetMigrationIDsV1_ and _GetHostMigrationIDsV1_ operations within the __Host Migration__ service collection.
     - `_endpoint/_host_migration.py`
+
++ Removed: Removed the MacOS Sonoma ARM 64 option for the `environment_id` parameter within the __Submit__ operation in the __Falcon Intelligence Sandbox__ Service Class.
+    - `falconx_sandbox.py`
+
++ Updated: Cosmetic updates to the `filter` and `sort` parameter descriptions in the _cloud-security-registration-oci-get-account_ operation within the __Cloud OCI Registration__ service collection.
+    - `_endpoint/_cloud_oci_registration.py`
+    - `_endpoint/deprecated/_cloud_oci_registration.py`
+
 ---
 
 # Version 1.5.0
