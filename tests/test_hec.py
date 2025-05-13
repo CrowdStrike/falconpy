@@ -140,8 +140,12 @@ class TestHTTPEventCollector:
         payload.type = "black"
         payload.category = "white"
         payload.fields = {"another_color": "indigo"}
+        json_output = payload.to_json(raw=True, nowrap=True)
         json_output = payload.to_json()
-        another_payload = IngestPayload(category=["green"], timeunit=None, event_type=["yellow"])
+        another_payload = IngestPayload(category=["green"], timeunit=None, event_type=["yellow"], message = "whatever", fields={"#falconpy": "HEC Testing"})
+        xml_version = another_payload.to_xml(raw=True, nowrap=True)
+        xml_version = another_payload.to_xml()
+        cxv_version = another_payload.to_csv()
         quick_hec = HTTPEventCollector(api_key=random_string(8), api_url_key=random_string(8), raw_ingest=True, thread_count=5)
         json_string = quick_hec.format_event(another_payload)
         quick_sm = SessionManager()

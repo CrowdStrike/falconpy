@@ -35,7 +35,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+import re
+from csv import DictWriter
 from datetime import datetime, timezone
+from io import StringIO
 from inspect import getmembers
 from json import dumps
 from typing import Dict, List, Union
@@ -104,7 +107,7 @@ class IngestPayload:  # pylint: disable=R0902
             if provided_key not in [key[0] for key in getmembers(self) if "_" not in key[0]]:
                 self.custom[provided_key] = provided_value
 
-    def to_json(self, raw: bool = False) -> Dict[str, Union[str, int, dict, list]]:
+    def to_json(self, raw: bool = False, nowrap: bool = False) -> Union[Dict[str, Union[str, int, dict, list]], str]:
         """Convert the class to a JSON compliant dictionary or JSON string."""
         returned = {}
         items = [key[0] for key in getmembers(self) if "_" not in key[0]]
@@ -120,14 +123,74 @@ class IngestPayload:  # pylint: disable=R0902
 
         returned["event"] = event
         if not raw:
-            # Raw payloads cannot specify the fields array
+            # Raw payloads cannot specify the fields dictionary
             if getattr(self, "fields"):
                 returned["fields"] = self.fields
-        else:
+
+        if nowrap:
+            returned = returned["event"]
+
+        if raw:
             # Convert to a JSON string for raw payloads
             returned = dumps(returned)
 
         return returned
+
+    def to_xml(self, raw: bool = False, nowrap: bool = False) -> str:
+        """Convert the class to XML."""
+        returned = ""
+        fields = ""
+        start_items = [key[0] for key in getmembers(self) if "_" not in key[0]]
+        items = []
+        for item in start_items:
+            if item not in ["timeunit", "fields", "custom"]:
+                items.append(item)
+        for item in items:
+            text = re.sub(r"['\[\]]", "", str(getattr(self, item)))
+            returned = f"{returned}<{item}>{text}</{item}>"
+        for unit in TimeUnit:
+            if unit.value == self.timeunit:
+                returned = f"{returned}<timeunit>{unit.name.lower()}</timeunit>"
+        for key, value in self.custom.items():
+            text = re.sub(r"['\[\]]", "", str(value))
+            returned = f"{returned}<{key}>{text}</{key}>"
+        if not raw:
+            for key, value in self.fields.items():
+                text = re.sub(r"['\[\]]", "", str(value))
+                fields = f"<fields><{key}>{text}</{key}></field>"
+        if not nowrap:
+            returned = f"<event>{returned}</event>"
+            returned = f"{returned}{fields}"
+
+        return returned
+
+    def to_csv(self) -> str:
+        """Convert the class to CSV."""
+        # CSV only provides raw content, and does not support event wrapping or additional fields.
+        start_items = [key[0] for key in getmembers(self) if "_" not in key[0]]
+        items = []
+        for item in start_items:
+            if item not in ["fields", "custom"]:
+                items.append(item)
+        returned = StringIO()
+        writer = DictWriter(returned, fieldnames=items)
+        row = {item: getattr(self, item) for item in items}
+        for key, value in row.items():
+            if isinstance(value, list):
+                new_value = re.sub(r"['\[\]]", "", str(value)).replace(",", "~")
+                row[key] = new_value
+        for unit in TimeUnit:
+            if unit.value == self.timeunit:
+                row["timeunit"] = unit.name.lower()
+        for key, value in self.custom.items():
+            new_value = re.sub(r"['\[\]]", "", str(value)).replace(",", "~")
+            row[key] = new_value
+            items.append(key)
+
+        writer.writeheader()
+        writer.writerow(row)
+
+        return returned.getvalue()
 
     @property
     def host(self) -> str:
