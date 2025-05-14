@@ -399,6 +399,9 @@ class ContentUpdatePolicies(ServiceClass):
                     Allowed values:
                         rapid_response_al_bl_listing    system_critical
                         sensor_operations               vulnerability_management
+        sort -- Value to sort returned content versions by.
+                Allowed values: deployed_timestamp
+                Default: deployed_timestamp.desc
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
