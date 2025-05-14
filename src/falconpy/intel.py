@@ -168,25 +168,28 @@ class Intel(ServiceClass):
                   Defaults to __basic__.
         filter -- The filter expression that should be used to limit the results. FQL syntax.
                   Available filter parameters:
-                  actors                sub_type.name
-                  actors.id             sub_type.slug
-                  actors.name           tags
-                  actors.slug           tags.id
-                  actors.url            tags.slug
-                  created_date          tags.value
-                  description           target_countries
-                  id                    target_countries.id
-                  last_modified_date    target_countries.slug
-                  motivations           target_countries.value
-                  motivations.id        target_industries
-                  motivations.slug      target_industries.id
-                  motivations.value     target_industries.slug
-                  name                  target_industries.value
-                  name.raw              type
-                  short_description     type.id
-                  slug                  type.name
-                  sub_type              type.slug
-                  sub_type.id           url
+                  actors                              sub_type
+                  actors.animal_classifier            sub_type.id
+                  actors.id                           sub_type.name
+                  actors.name                         sub_type.slug
+                  actors.slug                         tags
+                  actors.url                          tags.id
+                  created_date                        tags.slug
+                  description                         tags.value
+                  id                                  target_countries
+                  last_modified_date                  target_countries.id
+                  malware                             target_countries.slug
+                  malware.community_identifiers       target_countries.value
+                  malware.family_name                 target_industries
+                  malware.slug                        target_industries.id
+                  motivations                         target_industries.slug
+                  motivations.id                      target_industries.value
+                  motivations.slug                    type
+                  motivations.value                   type.id
+                  name                                type.name
+                  name.raw                            type.slug
+                  short_description                   url
+                  slug
         limit -- The maximum number of reports to return. [integer, 1-5000]
         offset -- The integer offset to start retrieving records from.
         parameters - full parameters payload, not required if using other keywords.
@@ -744,25 +747,28 @@ class Intel(ServiceClass):
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
                   Available filter parameters:
-                  actors                sub_type.name
-                  actors.id             sub_type.slug
-                  actors.name           tags
-                  actors.slug           tags.id
-                  actors.url            tags.slug
-                  created_date          tags.value
-                  description           target_countries
-                  id                    target_countries.id
-                  last_modified_date    target_countries.slug
-                  motivations           target_countries.value
-                  motivations.id        target_industries
-                  motivations.slug      target_industries.id
-                  motivations.value     target_industries.slug
-                  name                  target_industries.value
-                  name.raw              type
-                  short_description     type.id
-                  slug                  type.name
-                  sub_type              type.slug
-                  sub_type.id           url
+                  actors                              sub_type
+                  actors.animal_classifier            sub_type.id
+                  actors.id                           sub_type.name
+                  actors.name                         sub_type.slug
+                  actors.slug                         tags
+                  actors.url                          tags.id
+                  created_date                        tags.slug
+                  description                         tags.value
+                  id                                  target_countries
+                  last_modified_date                  target_countries.id
+                  malware                             target_countries.slug
+                  malware.community_identifiers       target_countries.value
+                  malware.family_name                 target_industries
+                  malware.slug                        target_industries.id
+                  motivations                         target_industries.slug
+                  motivations.id                      target_industries.value
+                  motivations.slug                    type
+                  motivations.value                   type.id
+                  name                                type.name
+                  name.raw                            type.slug
+                  short_description                   url
+                  slug
         limit -- The maximum number of reports to return. [integer, 1-5000]
         offset -- The integer offset to start retrieving records from.
         parameters - full parameters payload, not required if using other keywords.
