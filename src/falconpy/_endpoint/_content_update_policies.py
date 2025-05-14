@@ -313,6 +313,18 @@ _content_update_policies_endpoints = [
         "name": "category",
         "in": "query",
         "required": True
+      },
+      {
+        "enum": [
+          "deployed_timestamp.asc",
+          "deployed_timestamp.desc"
+        ],
+        "type": "string",
+        "default": "deployed_timestamp.desc",
+        "description": "value to sort returned content versions by. Allowed sort values are "
+        "deployed_timestamp.(asc|desc) defaulting to deployed_timestamp.desc",
+        "name": "sort",
+        "in": "query"
       }
     ]
   ],
