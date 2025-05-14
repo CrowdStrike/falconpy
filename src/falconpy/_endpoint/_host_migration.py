@@ -215,39 +215,39 @@ _host_migration_endpoints = [
       },
       {
         "enum": [
-          "groups|asc",
-          "groups|desc",
-          "groups",
-          "static_host_groups|asc",
-          "static_host_groups|desc",
-          "static_host_groups",
-          "host_migration_id|asc",
-          "host_migration_id|desc",
-          "host_migration_id",
-          "created_time|asc",
-          "created_time|desc",
-          "created_time",
-          "hostgroups|asc",
-          "hostgroups|desc",
-          "hostgroups",
-          "hostname|asc",
-          "hostname|desc",
-          "hostname",
-          "status|asc",
-          "status|desc",
-          "status",
           "target_cid|asc",
           "target_cid|desc",
           "target_cid",
           "source_cid|asc",
           "source_cid|desc",
           "source_cid",
+          "host_migration_id|asc",
+          "host_migration_id|desc",
+          "host_migration_id",
+          "groups|asc",
+          "groups|desc",
+          "groups",
+          "static_host_groups|asc",
+          "static_host_groups|desc",
+          "static_host_groups",
+          "hostname|asc",
+          "hostname|desc",
+          "hostname",
+          "status|asc",
+          "status|desc",
+          "status",
           "migration_id|asc",
           "migration_id|desc",
           "migration_id",
           "id|asc",
           "id|desc",
-          "id"
+          "id",
+          "created_time|asc",
+          "created_time|desc",
+          "created_time",
+          "hostgroups|asc",
+          "hostgroups|desc",
+          "hostgroups"
         ],
         "type": "string",
         "description": "The property to sort by.",
@@ -257,8 +257,8 @@ _host_migration_endpoints = [
       {
         "type": "string",
         "description": "The filter expression that should be used to limit the results. Valid fields: "
-        "hostgroups, hostname, status, target_cid, source_cid, migration_id, id, created_time, groups, "
-        "static_host_groups, host_migration_id",
+        "migration_id, id, created_time, hostgroups, static_host_groups, hostname, status, groups, target_cid, "
+        "source_cid, host_migration_id",
         "name": "filter",
         "in": "query"
       }
@@ -285,9 +285,6 @@ _host_migration_endpoints = [
       },
       {
         "enum": [
-          "target_cid|asc",
-          "target_cid|desc",
-          "target_cid",
           "status|asc",
           "status|desc",
           "status",
@@ -308,7 +305,10 @@ _host_migration_endpoints = [
           "id",
           "migration_id|asc",
           "migration_id|desc",
-          "migration_id"
+          "migration_id",
+          "target_cid|asc",
+          "target_cid|desc",
+          "target_cid"
         ],
         "type": "string",
         "description": "The property to sort by.",
@@ -318,7 +318,7 @@ _host_migration_endpoints = [
       {
         "type": "string",
         "description": "The filter expression that should be used to limit the results. Valid fields: "
-        "created_time, name, id, migration_id, target_cid, status, migration_status, created_by",
+        "migration_status, created_by, created_time, name, id, migration_id, target_cid, status",
         "name": "filter",
         "in": "query"
       }
