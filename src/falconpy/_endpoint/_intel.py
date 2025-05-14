@@ -65,8 +65,8 @@ _intel_endpoints = [
       {
         "type": "string",
         "description": "Filter your query by specifying FQL filter parameters. Filter parameters "
-        "include:\n\nactor_type, capabilities, capability, capability.id, capability.slug, capability.value, "
-        "created_date, description, ecrime_kill_chain.attribution, ecrime_kill_chain.crimes, "
+        "include:\n\nactor_type, animal_classifier, capabilities, capability, capability.id, capability.slug, "
+        "capability.value, created_date, description, ecrime_kill_chain.attribution, ecrime_kill_chain.crimes, "
         "ecrime_kill_chain.customers, ecrime_kill_chain.marketing, ecrime_kill_chain.monetization, "
         "ecrime_kill_chain.services_offered, ecrime_kill_chain.services_used, ecrime_kill_chain.technical_tradecraft, "
         "ecrime_kill_chain.victims, first_activity_date, group, group.id, group.slug, group.value, id, "
@@ -526,8 +526,8 @@ _intel_endpoints = [
       {
         "type": "string",
         "description": "Filter your query by specifying FQL filter parameters. Filter parameters "
-        "include:\n\nactor_type, capabilities, capability, capability.id, capability.slug, capability.value, "
-        "created_date, description, ecrime_kill_chain.attribution, ecrime_kill_chain.crimes, "
+        "include:\n\nactor_type, animal_classifier, capabilities, capability, capability.id, capability.slug, "
+        "capability.value, created_date, description, ecrime_kill_chain.attribution, ecrime_kill_chain.crimes, "
         "ecrime_kill_chain.customers, ecrime_kill_chain.marketing, ecrime_kill_chain.monetization, "
         "ecrime_kill_chain.services_offered, ecrime_kill_chain.services_used, ecrime_kill_chain.technical_tradecraft, "
         "ecrime_kill_chain.victims, first_activity_date, group, group.id, group.slug, group.value, id, "
