@@ -85,6 +85,7 @@ class Intel(ServiceClass):
                   slug                  type.name
                   sub_type              type.slug
                   sub_type.id           url
+                  animal_classifier
         limit -- The maximum number of actors to return. [integer, 1-5000]
         offset -- The integer offset to start retrieving records from.
         parameters - full parameters payload, not required if using other keywords.
@@ -610,6 +611,7 @@ class Intel(ServiceClass):
                   slug                  type.name
                   sub_type              type.slug
                   sub_type.id           url
+                  animal_classifier
         limit -- The maximum number of actors to return. [integer, 1-5000]
         offset -- The integer offset to start retrieving records from.
         parameters - full parameters payload, not required if using other keywords.
