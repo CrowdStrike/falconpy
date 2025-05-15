@@ -76,6 +76,7 @@ from .._error import (
     DeprecatedClass
     )
 from .._result import Result
+from .._version import version
 if TYPE_CHECKING:  # pragma: no cover
     from .._auth_object import FalconInterface
     from .._service_class import ServiceClass
@@ -900,6 +901,7 @@ def log_class_startup(interface: Union[FalconInterface, ServiceClass, APIHarness
     log_device.debug(
         "CONFIG: Pythonic responses are %s", "enabled" if interface.pythonic else "disabled"
         )
+    log_device.debug("VERSION: Currently running FalconPy v%s", version())
 
 
 def deprecated_operation(pythonic: bool, log: Logger, old: str, new: str):
