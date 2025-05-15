@@ -1592,3 +1592,4 @@ jimmyruann
 executeactiverespondercommand
 combineddevicesbyfilter
 BCCA
+Sonoma
