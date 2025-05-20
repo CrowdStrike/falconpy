@@ -114,7 +114,7 @@ def data_payload(passed_keywords: dict) -> dict:
         "content", "platform", "permission_type"
         ]
     for key in keys:
-        if passed_keywords.get(key, None):
+        if passed_keywords.get(key, None) is not None:
             returned_payload[key] = passed_keywords.get(key, None)
 
     return returned_payload
