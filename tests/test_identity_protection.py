@@ -18,34 +18,57 @@ config = auth.getConfigObject()
 falcon = IdentityProtection(auth_object=config)
 AllowedResponses = [200, 400, 429]
 
+# TEST_QUERY = r"""query ($after: Cursor) {
+#   entities(types: [USER], archived: false, learned: false, first: 5, after: $after) {
+#     nodes {
+#       primaryDisplayName
+#       secondaryDisplayName
+#       accounts {
+#         ... on ActiveDirectoryAccountDescriptor {
+#           domain
+#         }
+#       }
+#     }
+#     pageInfo {
+#       hasNextPage
+#       endCursor
+#     }
+#   }
+# }"""
+
 TEST_QUERY = """
-query ($after: Cursor) {
-  entities(types: [USER], archived: false, learned: false, first: 5, after: $after) {
+{
+  entities (   
+    roles: [BuiltinAdministratorRole]
+    sortKey: PRIMARY_DISPLAY_NAME
+    sortOrder: ASCENDING
+    # Limit the response to two records:
+    first: 2
+  )
+  {
+    # Include pageInfo properties for pagination:  
+    pageInfo {
+      # Are there more results to obtain?  
+      hasNextPage
+      # Identify the last records in the results:
+      endCursor
+    }
     nodes {
       primaryDisplayName
       secondaryDisplayName
-      accounts {
-        ... on ActiveDirectoryAccountDescriptor {
-          domain
-        }
-      }
-    }
-    pageInfo {
-      hasNextPage
-      endCursor
     }
   }
 }
 """
-
 class TestIdentityProtection:
     def idp_graphql(self):
         payload = {"query":"{\n  entities(first: 1)\n  {\n    nodes {\n      entityId    \n    }\n  }\n}"}
-        result = falcon.GraphQL(query=TEST_QUERY, variables={"after", ""})
+        result = falcon.GraphQL(query=TEST_QUERY, variables={"after": "$after"})
         if not isinstance(result, dict):
             result = json.loads(result.decode())
         else:
             result = result["body"]
+
         if result.get("data", {}).get("entities", {}).get("pageInfo", {}).get("hasNextPage", None):
             next_page = result["data"].get("entities", {}).get("pageInfo", {}).get("endCursor", None)
             result = falcon.graphql(query=TEST_QUERY, variables={"after": next_page})["body"]
