@@ -43,10 +43,20 @@ PREFER_NONETYPE: List[str] = [
     "RTR_DeleteSession"
 ]
 PREFER_IDS_IN_BODY: List[str] = [
-    "GetDeviceDetails", "PostDeviceDetailsV2", "GetVulnerabilities", "GetIntelIndicatorEntities",
-    "getChildrenV2", "cancel-scans", "GetDetectSummaries", "UpdateQuarantinedDetectsByIds",
-    "GetQuarantineFiles", "PostEntitiesAlertsV1", "CreateSavedSearchesDeployV1",
-    "WorkflowExecutionsAction", "signalChangesExternal"
+    "GetBehaviors", "GetCaseActivityByIds", "GetCaseEntitiesByIDs", "GetDetectSummaries",
+    "GetEventsEntities", "GetHostMigrationsV1", "GetIncidents", "GetIntelIndicatorEntities",
+    "GetQuarantineFiles", "GetRulesEntities", "GetSensorDetails", "GetVulnerabilities",
+    "HostMigrationsActionsV1", "MigrationsActionsV1", "PatchEntitiesAlertsV2", "PerformActionV2",
+    "PerformIncidentAction", "PostDeviceDetailsV2", "PostEntitiesAlertsV1", "PostMitreAttacks",
+    "QueryDeviceLoginHistory", "QueryDeviceLoginHistoryV2", "QueryGetNetworkAddressHistoryV1",
+    "RTR_ListQueuedSessions", "RTR_ListSessions", "UpdateDetectsByIdsV2", "cancel_scans",
+    "UpdateQuarantinedDetectsByIds", "WorkflowExecutionsAction", "get_rules_get", "getChildrenV2",
+    "performContentUpdatePoliciesAction", "performDeviceControlPoliciesAction", "userActionV1",
+    "performFirewallPoliciesAction", "performGroupAction", "performPreventionPoliciesAction",
+    "performRTResponsePoliciesAction", "performSensorUpdatePoliciesAction", "retrieveUsersGETV1",
+    "setContentUpdatePoliciesPrecedence", "setDeviceControlPoliciesPrecedence",
+    "setFirewallPoliciesPrecedence", "setPreventionPoliciesPrecedence", "signalChangesExternal",
+    "setRTResponsePoliciesPrecedence", "setSensorUpdatePoliciesPrecedence"
 ]
 MOCK_OPERATIONS: List[str] = [
     "GetImageAssessmentReport", "DeleteImageDetails", "ImageMatchesPolicy"
