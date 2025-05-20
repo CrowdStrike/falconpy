@@ -58,6 +58,13 @@
     - `_util/_uber.py`
     - Thanks go out to @Gage-BCCA for submitting this fix! 🙇
 
++ Updated: Expanded the operations covered by the PREFER_IDS_IN_BODY constant.
+    - `_constant/__init__.py`
+
++ Updated: Updated the `data_payload` payload handler for operations within __Real Time Response__ service collections to allow for blank parameter values. Closes #1339.
+    - `_payload/_real_time_response.py`
+    - Thanks go out to @jbfuzier for reporting this issue! 🙇
+
 ## Other
 + Updated: Cosmetic updates to enum and parameter descriptions in the _GetMigrationIDsV1_ and _GetHostMigrationIDsV1_ operations within the __Host Migration__ service collection.
     - `_endpoint/_host_migration.py`
