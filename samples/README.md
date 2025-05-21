@@ -1917,6 +1917,8 @@ This sample demonstrates the following CrowdStrike Correlation Rules API operati
 
 ---
 
+</details>
+
 <!--Threat Intelligence-->
 
 
