@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request
-from ._payload import indicator_graph_payload
+from ._payload import indicator_graph_payload, aggregate_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._intelligence_indicator_graph import _intelligence_indicator_graph_endpoints as Endpoints
@@ -55,6 +55,99 @@ class IntelligenceIndicatorGraph(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def aggregate_indicators(self: object,
+                             body: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get indicator aggregates.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                {
+                    "requests": [
+                        {
+                            "date_ranges": [
+                            {
+                                "from": "string",
+                                "to": "string"
+                            }
+                            ],
+                            "exclude": "string",
+                            "extended_bounds": {
+                                "max": "string",
+                                "min": "string"
+                            }
+                            "field": "string",
+                            "filter": "string",
+                            "from": integer,
+                            "include": "string",
+                            "interval": "string",
+                            "max_doc_count": integer,
+                            "min_doc_count": integer,
+                            "missing": "string",
+                            "name": "string",
+                            "q": "string",
+                            "ranges": [
+                            {
+                                "From": integer,
+                                "To": integer
+                            }
+                            ],
+                            "size": integer,
+                            "sort": "string",
+                            "sub_aggregates": [
+                                null
+                            ],
+                            "time_zone": "string",
+                            "type": "string"
+                        }
+                    ]
+                }
+        date_ranges -- If peforming a date range query specify the from and to date ranges.
+                       These can be in common date formats like 2019-07-18 or now.
+                       List of dictionaries.
+        exclude -- Fields to exclude. String.
+        extended_bounds -- Extended bounds. Dictionary containing "min" and "max" as strings.
+        field -- Term you want to aggregate on. If doing a date_range query,
+                 this is the date field you want to apply the date ranges to. String.
+        filter -- Optional filter criteria in the form of an FQL query.
+                  For more information about FQL queries, see our FQL documentation in Falcon.
+                  String.
+        from -- Integer.
+        include -- Fields to include. String.
+        interval -- String.
+        max_doc_count -- Maximum number of documents. Integer.
+        min_doc_count -- Minimum number of documents. Integer.
+        missing -- String.
+        name -- Scan name. String.
+        q -- FQL syntax. String.
+        ranges -- List of dictionaries.
+        size -- Integer.
+        sort -- FQL syntax. String.
+        sub_aggregates -- List of strings.
+        time_zone -- String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/aggregateUsersV1
+        """
+        if not body:
+            body = {"requests": [aggregate_payload(submitted_keywords=kwargs)]}
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetIndicatorAggregates",
+            body=body
+            )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
     def search(self: object,
@@ -103,4 +196,5 @@ class IntelligenceIndicatorGraph(ServiceClass):
             body=body
             )
 
+    GetIndicatorAggregates = aggregate_indicators
     SearchIndicators = search

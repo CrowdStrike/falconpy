@@ -38,6 +38,20 @@ For more information, please refer to <https://unlicense.org>
 
 _intelligence_indicator_graph_endpoints = [
   [
+    "GetIndicatorAggregates",
+    "POST",
+    "/intelligence/aggregates/indicators/v1",
+    "Get aggregates for indicators based on requests",
+    "intelligence_indicator_graph",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "SearchIndicators",
     "POST",
     "/intelligence/combined/indicators/v1",
