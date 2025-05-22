@@ -279,7 +279,7 @@ _container_vulnerabilities_endpoints = [
       },
       {
         "type": "integer",
-        "default": 100,
+        "default": 5000,
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
