@@ -687,7 +687,7 @@ class UserManagement(ServiceClass):
                 cid                     name
                 direct_assigned_cids    status
                 first_name              uid
-                has_temporary_roles
+                has_temporary_roles     temporarily_assigned_cids
         limit : int (range 1-500, default 0)
             The maximum number of records to return.
         offset : int (default 0)
