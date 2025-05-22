@@ -5,6 +5,7 @@
 import os
 import sys
 import pytest
+from urllib.parse import urlparse
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 
@@ -16,7 +17,7 @@ from falconpy import IntelligenceIndicatorGraph
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = IntelligenceIndicatorGraph(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 403, 429]
+AllowedResponses = [200, 201, 207, 400, 401, 403, 429]
 
 
 class TestIntelligenceIndicatorGraph:
@@ -28,6 +29,11 @@ class TestIntelligenceIndicatorGraph:
         tests = {
             "SearchIndicators": falcon.search(filter="indicator:'malware.ru'", limit=1, sort={"order": "desc"})
         }
+        if urlparse(config.base_url).hostname == "api.crowdstrike.com":
+            tests["GetIndicatorAggregates"] = falcon.aggregate_indicators(field="string",
+                                                                          filter="string",
+                                                                          interval="string"
+                                                                          )
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
