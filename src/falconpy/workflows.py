@@ -35,6 +35,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+import re
+from os.path import exists
 from typing import Dict, Union
 from ._util import (
     force_default,
@@ -249,7 +251,8 @@ class Workflows(ServiceClass):
         """Import a workflow definition based on the provided model.
 
         Keyword arguments:
-        data_file -- A workflow definition in YAML format to import. Binary data.
+        data_file -- A workflow definition in YAML format to import. Can be the file location or file contents.
+                     Supports string or binary data.
         name -- Workflow name to override. String.
         validate_only -- When enabled, prevents saving workflow after validating. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -265,16 +268,29 @@ class Workflows(ServiceClass):
         """
         data_file = kwargs.get("data_file", None)
         content_type = "application/x-yaml"
-        # Create a multipart form payload for our upload file
-        try:
+        # Retrieve data file contents from the specified location
+        valid_format = False
+        if exists(data_file):
             with open(data_file, "r", encoding="utf-8") as yaml_file:
                 file_data = yaml_file.read()
-                file_extended = [("data_file", ("yaml_upload", file_data, content_type))]
-        except FileNotFoundError:
-            data_file = None
-        # Remove the data file from the keywords dictionary before args_to_params
-        kwargs.pop("data_file")
-        if data_file and file_data:
+        else:
+            # Assume file contents are provided instead, can handle string or binary data
+            file_data = data_file
+            if isinstance(data_file, bytes):
+                file_data = data_file.decode()
+        if file_data:
+            # Check yaml formatting
+            # Look for key: value pairs
+            if re.search(r'\s*:\s*[^:\n]+', file_data):
+                valid_format = True
+            # Look for list items
+            if re.search(r'-\s+.*', file_data):
+                valid_format = True
+        if valid_format:
+            # Create a multipart form payload for our upload file
+            file_extended = [("data_file", ("yaml_upload", file_data, content_type))]
+            # Remove the data file from the keywords dictionary before args_to_params processing
+            kwargs.pop("data_file")
             returned = process_service_request(
                         calling_object=self,
                         endpoints=Endpoints,
@@ -284,7 +300,10 @@ class Workflows(ServiceClass):
                         files=file_extended
                         )
         else:
-            returned = generate_error_result("You must provide a workflow file in YAML format to import.")
+            returned = generate_error_result(
+                "You must provide a workflow file in YAML format or a workfile location to import.",
+                caller=self
+                )
 
         return returned
 
