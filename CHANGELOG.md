@@ -1,3 +1,46 @@
+# Version 1.5.2
+## Added features and functionality
++ Updated: Updated `import_definition` (_WorkflowDefinitionsImport_ operation) method to allow for raw YAML file data to be passed to the `data_file` keyword within the __Workflows__ Service Class. Closes #1341.
+    - `workflows.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_workflows.py`
+    - Thanks go out to @jbfuzier for suggesting this update. 🙇
+
++ Updated: Expanded error handling for context manager usage scenarios.
+    - `_auth_object/_uber_interface.py`
+    - `_service_class/_service_class.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_service_class.py`
+    - `tests/test_uber.py`
+
++ Updated: Updated default `limit` for the _ReadCombinedVulnerabilitiesDetails_ operation from 100 to 5000 within the __Container Vulnerabilities__ service collection.
+    - `_endpoint/_container_vulnerabilities.py`
+
++ Added: Added `temporarily_assigned_cids` as an allowed value for the `filter` parameter in the _queryUserV1_ operation within the __User Management__ service collection.
+    - `_endpoint/_user_management.py`
+    - `user_management.py`
+
++ Added: Added new _GetIndicatorAggregates_ operation to the __Intelligence Indicator Graph__ service collection.
+    - `_endpoint/_intelligence_indicator_graph.py`
+    - `intelligence_indicator_graph.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_intelligence_indicator_graph.py`
+
+## Issues resolved
++ Fixed: Restored incorrectly removed values from the __PREFER_IDS_IN_BODY__ constant. Closes #1344.
+    - `_constant/__init__.py`
+    - Thanks go out to @agburch for identifying this issue! 🙇
+
+## Other
++ Updated: Updated `generate_error_result` method to handle context manager and pythonic scenarios.
+    - `_util/_functions.py`
+
++ Updated: Cosmetic updates to the `filter` parameter for the _cloud_security_registration_oci_get_account_ operation within the __Cloud OCI Registration__ service collection.
+    - `_endpoint/_cloud_oci_registration.py`
+    - `_endpoint/deprecated/_cloud_oci_registration.py`
+
+---
+
 # Version 1.5.1
 ## Added features and functionality
 + Added: Added the _CreateFileV1_ and _UpdateFileV1_ operations to the __Foundry LogScale__ service collection.
