@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from traceback import extract_tb
 from typing import Dict, List, Optional, Union
 from ._falcon_interface import FalconInterface
 from .._constant import MAX_DEBUG_RECORDS
@@ -156,10 +157,19 @@ class UberInterface(FalconInterface):
         """Allow for entry as a context manager."""
         return self
 
-    def __exit__(self, *args):
-        """Discard our token when we exit the context."""
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Discard our token when we exit the context and handle any errors."""
+        if exc_type is not None:
+            if self.log:
+                # Log the error and traceback detail
+                self.log.error("ERROR: [%s] %s", exc_type.__name__, exc_val)
+                frame_list = extract_tb(exc_tb)
+                frame = frame_list[len(frame_list)-1]
+                lineno = frame.lineno
+                func = frame.name
+                fname = frame.filename
+                self.log.error("LOCATION: %s, Line #%i in Function '%s'", fname, lineno, func)
         self.logout()
-        return args
 
     # Legacy property getters maintained for backwards functionality.
     def authenticated(self) -> bool:

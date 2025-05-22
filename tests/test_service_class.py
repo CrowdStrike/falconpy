@@ -21,10 +21,12 @@ from falconpy import (
     FunctionalityNotImplemented,
     SSLDisabledWarning,
     APIError,
+    SDKError,
     NoAuthenticationMechanism,
     Result,
     ExpandedResult,
-    InvalidBaseURL
+    InvalidBaseURL,
+    Workflows
     )
 
 auth = Authorization.TestAuthorization()
@@ -128,6 +130,19 @@ class TestServiceClass:
         with _CLEAN as sdk:
             if sdk.query_devices()["status_code"] == 200:
                 _success = True
+        assert _success
+
+    @rate_limited
+    @not_supported
+    def test_service_class_context_manager_with_pythonic_error(self):
+        _success = False
+        new_sdk = Workflows(creds=config.creds, base_url=config.base_url, pythonic=True, debug=True)
+        try:
+            with new_sdk as sdk:
+                result = sdk.import_definition(data_file="InvalidDataFile")
+                raise SDKError(code=500, message="Unit testing")
+        except SDKError:
+            _success = True
         assert _success
 
     @rate_limited

@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath('src'))
 # flake8: noqa=E402
 # pylint: disable=C0103
 # Classes to test - manually imported from our sibling folder
-from falconpy import APIHarnessV2, APIError
+from falconpy import APIHarnessV2, APIError, SDKError
 # Import perform_request from _util so we can test generating 405's directly
 from falconpy._util import perform_request, force_default
 
@@ -50,6 +50,22 @@ class TestUber:
         with falcon as sdk:
             if sdk.command("QueryDevicesByFilterScroll")["status_code"] == 200:
                 _success = True
+        assert _success
+
+    def test_uber_context_with_pythonic_error(self):
+        _success = False
+        test_uber = APIHarnessV2(client_id=config["falcon_client_id"],
+                                 client_secret=config["falcon_client_secret"],
+                                 base_url=config["falcon_base_url"],
+                                 pythonic=True,
+                                 debug=True
+                                 )
+        try:
+            with test_uber as sdk:
+                raise SDKError(code=500, message="Unit testing")
+        except (SDKError, APIError):
+            _success = True
+
         assert _success
 
     def uberCCAWS_GetAWSSettings(self):
