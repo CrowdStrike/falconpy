@@ -17,6 +17,8 @@ config = auth.getConfigObject()
 falcon = Workflows(auth_object=config)
 AllowedResponses = [200, 201, 400, 403, 404, 415, 500, 502]  # Allowing 415 due to workflow import
 
+with open("tests/test.yml", "rb") as file_data:
+    binary_example = file_data.read()
 
 class TestWorkflows:
     def run_all_tests(self):
@@ -39,6 +41,7 @@ class TestWorkflows:
             "WorkflowDefinitionsImport2": falcon.import_definition(validate_only=True, file_data="this_will_500"),
             "WorkflowDefinitionsImport3": falcon.import_definition(validate_only=True, data_file="not_here.yml"),
             "WorkflowDefinitionsImport4": falcon.import_definition(validate_only=True, data_file="tests/test.yml", name="workflow_name"),
+            "WorkflowDefinitionsImport4": falcon.import_definition(validate_only=True, data_file=binary_example, name="workflow_name"),
             "WorkflowDefinitionsUpdate": falcon.update_definition(change_log="testing"),
             "WorkflowGetHumanInputV1": falcon.get_human_input(ids="1234567"),
             "WorkflowUpdateHumanInputV1": falcon.update_human_input(input="whatever", note="whatever"),
