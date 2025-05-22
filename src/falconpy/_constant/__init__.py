@@ -56,7 +56,8 @@ PREFER_IDS_IN_BODY: List[str] = [
     "performRTResponsePoliciesAction", "performSensorUpdatePoliciesAction", "retrieveUsersGETV1",
     "setContentUpdatePoliciesPrecedence", "setDeviceControlPoliciesPrecedence",
     "setFirewallPoliciesPrecedence", "setPreventionPoliciesPrecedence", "signalChangesExternal",
-    "setRTResponsePoliciesPrecedence", "setSensorUpdatePoliciesPrecedence"
+    "setRTResponsePoliciesPrecedence", "setSensorUpdatePoliciesPrecedence", "GetDeviceDetails",
+    "CreateSavedSearchesDeployV1", "cancel-scans", "get-rules-get"
 ]
 MOCK_OPERATIONS: List[str] = [
     "GetImageAssessmentReport", "DeleteImageDetails", "ImageMatchesPolicy"
