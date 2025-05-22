@@ -534,6 +534,15 @@ def generate_error_result(
         ) -> dict:
     """Normalize error messages."""
     return_headers = kwargs.get("headers", {})
+    caller: ServiceClass = kwargs.get("caller", None)
+    if caller:
+        pythonic_handling = caller.pythonic
+        log_handler: Logger = caller.log
+        if log_handler:
+            log_handler.error("ERROR: [%i] %s", code, message)
+        if pythonic_handling:
+            raise SDKError(code=code, message=message, headers=return_headers)
+
     return Result()(status_code=code, headers=return_headers, body={"errors": [{"message": f"{message}"}], "resources": []})
 
 
