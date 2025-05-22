@@ -1594,3 +1594,5 @@ combineddevicesbyfilter
 BCCA
 Sonoma
 jbfuzier
+agburch
+GetIndicatorAggregates
