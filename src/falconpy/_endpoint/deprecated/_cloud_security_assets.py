@@ -138,18 +138,19 @@ _cloud_security_assets_endpoints = [
       {
         "type": "string",
         "description": "FQL string to filter on asset contents. Filterable fields include:  account_id  "
-        "account_name  active  azure.vm_id  business_impact  cloud_group  cloud_label  cloud_label_id  cloud_provider  "
-        "cloud_scope  cluster_id  cluster_name  compartment_ocid  compliant.benchmark_name  compliant.benchmark_version "
-        "  compliant.framework  compliant.policy_id  compliant.requirement  compliant.rule  compliant.section  "
-        "configuration.id  creation_time  cve_ids  data_classifications.found  data_classifications.label  "
-        "data_classifications.label_id  data_classifications.scanned  data_classifications.tag  "
-        "data_classifications.tag_id  environment  exprt_ratings  first_seen  highest_severity  id  "
-        "insights.boolean_value  insights.id  instance_id  instance_state  ioa_count  iom_count  legacy_resource_id  "
-        "legacy_uuid  managed_by  non_compliant.benchmark_name  non_compliant.benchmark_version  "
+        "account_name  active  application_security.business_applications  application_security.business_criticality  "
+        "application_security.service_names  azure.vm_id  business_impact  cloud_group  cloud_label  cloud_label_id  "
+        "cloud_provider  cloud_scope  cluster_id  cluster_name  compartment_ocid  compliant.benchmark_name  "
+        "compliant.benchmark_version  compliant.framework  compliant.policy_id  compliant.requirement  compliant.rule  "
+        "compliant.section  configuration.id  creation_time  cve_ids  data_classifications.found  "
+        "data_classifications.label  data_classifications.label_id  data_classifications.scanned  "
+        "data_classifications.tag  data_classifications.tag_id  environment  exprt_ratings  first_seen  "
+        "highest_severity  id  insights.boolean_value  insights.id  instance_id  instance_state  ioa_count  iom_count  "
+        "legacy_resource_id  legacy_uuid  managed_by  non_compliant.benchmark_name  non_compliant.benchmark_version  "
         "non_compliant.framework  non_compliant.policy_id  non_compliant.requirement  non_compliant.rule  "
         "non_compliant.section  non_compliant.severity  organization_Id  os_version  platform_name  publicly_exposed  "
         "region  resource_id  resource_name  resource_type  resource_type_name  sensor_priority  service  "
-        "service_category  severity  snapshot_detections  ssm_managed  status  tag_key  tag_value  tenant_id  "
+        "service_category  severity  snapshot_detections  ssm_managed  status  tag_key  tag_value  tags  tenant_id  "
         "updated_at  vmware.guest_os_id  vmware.guest_os_version  vmware.host_system_name  vmware.host_type  "
         "vmware.instance_uuid  vmware.vm_host_name  vmware.vm_tools_status  zone",
         "name": "filter",
@@ -158,12 +159,13 @@ _cloud_security_assets_endpoints = [
       {
         "type": "string",
         "description": "The field to sort on.  Sortable fields include:  account_id  account_name  active  "
-        "cloud_provider  cluster_id  cluster_name  creation_time  data_classifications.found  "
-        "data_classifications.scanned  first_seen  id  instance_id  instance_state  ioa_count  iom_count  managed_by  "
-        "organization_Id  os_version  platform_name  publicly_exposed  region  resource_id  resource_name  "
-        "resource_type  resource_type_name  service  service_category  ssm_managed  status  tenant_id  updated_at  "
-        "vmware.guest_os_id  vmware.guest_os_version  vmware.host_system_name  vmware.host_type  vmware.instance_uuid  "
-        "vmware.vm_host_name  vmware.vm_tools_status  zone\n\nUse |asc or |desc suffix to specify sort direction.",
+        "cloud_provider  cluster_id  cluster_name  compartment_name  compartment_ocid  compartment_path  creation_time "
+        "  data_classifications.found  data_classifications.scanned  first_seen  id  instance_id  instance_state  "
+        "ioa_count  iom_count  managed_by  organization_Id  os_version  platform_name  publicly_exposed  region  "
+        "resource_id  resource_name  resource_type  resource_type_name  service  service_category  ssm_managed  status "
+        "  tenancy_name  tenancy_ocid  tenancy_type  tenant_id  updated_at  vmware.guest_os_id  vmware.guest_os_version "
+        "  vmware.host_system_name  vmware.host_type  vmware.instance_uuid  vmware.vm_host_name  vmware.vm_tools_status "
+        "zone\n\nUse |asc or |desc suffix to specify sort direction.",
         "name": "sort",
         "in": "query"
       },

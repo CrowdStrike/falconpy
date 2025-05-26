@@ -159,46 +159,48 @@ class CloudSecurityAssets(ServiceClass):
                  Use only one of 'offset' and 'after' parameters for paginating.
         filter -- FQL string to filter on asset contents. String.
                   Filterable fields include:
-                    account_id                        legacy_resource_id
-                    account_name                      legacy_uuid
-                    active                            managed_by
-                    azure.vm_id                       non_compliant.benchmark_name
-                    business_impact                   non_compliant.benchmark_version
-                    cloud_group                       non_compliant.framework
-                    cloud_label                       non_compliant.policy_id
-                    cloud_label_id                    non_compliant.requirement
-                    cloud_provider                    non_compliant.rule
-                    cloud_scope                       non_compliant.section
-                    cluster_id                        non_compliant.severity
-                    cluster_name                      organization_Id
-                    compartment_ocid                  os_version
-                    compliant.benchmark_name          platform_name
-                    compliant.benchmark_version       publicly_exposed
-                    compliant.framework               region
-                    compliant.policy_id               resource_id
-                    compliant.requirement             resource_name
-                    compliant.rule                    resource_type
-                    compliant.section                 resource_type_name
-                    configuration.id                  sensor_priority
-                    creation_time                     service
-                    cve_ids                           service_category
-                    data_classifications.found        severity
-                    data_classifications.label        snapshot_detections
-                    data_classifications.label_id     ssm_managed
-                    data_classifications.scanned      status
-                    data_classifications.tag          tag_key
-                    data_classifications.tag_id       tag_value
-                    environment                       tenant_id
-                    exprt_ratings                     updated_at
-                    first_seen                        vmware.guest_os_id
-                    highest_severity                  vmware.guest_os_version
-                    id                                vmware.host_system_name
-                    insights.boolean_value            vmware.host_type
-                    insights.id                       vmware.instance_uuid
-                    instance_id                       vmware.vm_host_name
-                    instance_state                    vmware.vm_tools_status
-                    ioa_count                         zone
-                    iom_count
+                    account_id                         legacy_resource_id
+                    account_name                       legacy_uuid
+                    active                             managed_by
+                    azure.vm_id                        non_compliant.benchmark_name
+                    business_impact                    non_compliant.benchmark_version
+                    cloud_group                        non_compliant.framework
+                    cloud_label                        non_compliant.policy_id
+                    cloud_label_id                     non_compliant.requirement
+                    cloud_provider                     non_compliant.rule
+                    cloud_scope                        non_compliant.section
+                    cluster_id                         non_compliant.severity
+                    cluster_name                       organization_Id
+                    compartment_ocid                   os_version
+                    compliant.benchmark_name           platform_name
+                    compliant.benchmark_version        publicly_exposed
+                    compliant.framework                region
+                    compliant.policy_id                resource_id
+                    compliant.requirement              resource_name
+                    compliant.rule                     resource_type
+                    compliant.section                  resource_type_name
+                    configuration.id                   sensor_priority
+                    creation_time                      service
+                    cve_ids                            service_category
+                    data_classifications.found         severity
+                    data_classifications.label         snapshot_detections
+                    data_classifications.label_id      ssm_managed
+                    data_classifications.scanned       status
+                    data_classifications.tag           tag_key
+                    data_classifications.tag_id        tag_value
+                    environment                        tenant_id
+                    exprt_ratings                      updated_at
+                    first_seen                         vmware.guest_os_id
+                    highest_severity                   vmware.guest_os_version
+                    id                                 vmware.host_system_name
+                    insights.boolean_value             vmware.host_type
+                    insights.id                        vmware.instance_uuid
+                    instance_id                        vmware.vm_host_name
+                    instance_state                     vmware.vm_tools_status
+                    ioa_count                          zone
+                    iom_count                          application_security.business_applications
+                    tags                               application_security.business_criticality
+                    application_security.service_names
         sort -- The field to sort on. String.
                 Use `|asc` or `|desc` suffix to specify sort direction.
                 Sortable fields include:
@@ -221,7 +223,10 @@ class CloudSecurityAssets(ServiceClass):
                     organization_Id                 vmware.vm_host_name
                     os_version                      vmware.vm_tools_status
                     platform_name                   zone
-                    service_category
+                    service_category                tenancy_name
+                    compartment_name                tenancy_ocid
+                    compartment_ocid                tenancy_type
+                    compartment_path
         limit -- The maximum number of items to return. Integer.
                  When not specified or 0, 500 is used. When larger than 1000, 1000 is used.
         offset -- Offset returned assets. Use only one of 'offset' and 'after' parameter for paginating. Integer.
