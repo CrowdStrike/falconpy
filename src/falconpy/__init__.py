@@ -161,6 +161,7 @@ from .intelligence_feeds import IntelligenceFeeds
 from .ioa_exclusions import IOAExclusions
 from .ioc import IOC
 from .iocs import Iocs
+from .kubernetes_container_compliance import KubernetesContainerCompliance
 from .kubernetes_protection import KubernetesProtection
 from .malquery import MalQuery
 from .message_center import MessageCenter
@@ -244,7 +245,7 @@ __all__ = [
     "DeviceContent", "IntelligenceIndicatorGraph", "ContentUpdatePolicies", "CAOHunting",
     "ContainerImageCompliance", "FaaSExecution", "HEC", "IngestBaseURL", "IngestFormat",
     "IngestPayload", "HTTPEventCollector", "IngestConfig", "SessionManager", "TimeUnit",
-    "Color", "Indicator", "random_string"
+    "Color", "Indicator", "random_string", "KubernetesContainerCompliance"
     ]
 """
 This is free and unencumbered software released into the public domain.
