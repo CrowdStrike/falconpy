@@ -39,6 +39,7 @@ from secrets import choice
 from string import ascii_letters, digits
 from ._text_colors import Color
 from ._indicator import Indicator
+from ._find_operation import find_operation
 
 
 def random_string(length: int = 10,
@@ -58,4 +59,4 @@ def random_string(length: int = 10,
     return returned
 
 
-__all__ = ["Color", "Indicator", "random_string"]
+__all__ = ["Color", "Indicator", "random_string", "find_operation"]
