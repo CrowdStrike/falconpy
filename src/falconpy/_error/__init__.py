@@ -50,7 +50,10 @@ from ._exceptions import (
     PayloadValidationError,
     FeatureNotSupportedByPythonVersion,
     InvalidIndex,
-    InvalidCredentialFormat
+    InvalidCredentialFormat,
+    InvalidRoute,
+    InvalidServiceCollection,
+    InvalidOperationSearch
     )
 from ._warnings import (
     SDKWarning,
@@ -70,5 +73,6 @@ __all__ = ["SDKError", "RegionSelectError", "InvalidMethod", "InvalidOperation",
            "FunctionalityNotImplemented", "InvalidBaseURL", "PayloadValidationError",
            "NoAuthenticationMechanism", "FeatureNotSupportedByPythonVersion",
            "InvalidIndex", "InvalidCredentialFormat", "UnnecessaryEncodingUsed",
-           "SDKDeprecationWarning", "DeprecatedOperation", "DeprecatedClass"
+           "SDKDeprecationWarning", "DeprecatedOperation", "DeprecatedClass",
+           "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch"
            ]

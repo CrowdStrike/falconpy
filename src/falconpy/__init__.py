@@ -71,7 +71,10 @@ from ._error import (
     UnnecessaryEncodingUsed,
     DeprecatedClass,
     DeprecatedOperation,
-    SDKDeprecationWarning
+    SDKDeprecationWarning,
+    InvalidRoute,
+    InvalidServiceCollection,
+    InvalidOperationSearch
     )
 from ._result import (
     Result,
@@ -245,7 +248,8 @@ __all__ = [
     "DeviceContent", "IntelligenceIndicatorGraph", "ContentUpdatePolicies", "CAOHunting",
     "ContainerImageCompliance", "FaaSExecution", "HEC", "IngestBaseURL", "IngestFormat",
     "IngestPayload", "HTTPEventCollector", "IngestConfig", "SessionManager", "TimeUnit",
-    "Color", "Indicator", "random_string", "KubernetesContainerCompliance"
+    "Color", "Indicator", "random_string", "KubernetesContainerCompliance",
+    "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch"
     ]
 """
 This is free and unencumbered software released into the public domain.
