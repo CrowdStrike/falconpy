@@ -1,3 +1,82 @@
+# Version 1.5.3
+## Added features and functionality
++ Added: Added new __Kubernetes Container Compliance__ service collection containing 11 new operations.
+    - _AggregateAssessmentsGroupedByClustersV2_
+    - _AggregateComplianceByAssetType_
+    - _AggregateComplianceByClusterType_
+    - _AggregateComplianceByFramework_
+    - _AggregateFailedRulesByClustersV3_
+    - _AggregateFailedRulesByClustersV3_
+    - _AggregateAssessmentsGroupedByRulesV2_
+    - _AggregateTopFailedImages_
+    - _CombinedImagesFindings_
+    - _CombinedNodesFindings_
+    - _getRulesMetadataByID_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_kubernetes_container_compliance.py`
+    - `__init__.py`
+    - `kubernetes_container_compliance.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_kubernetes_container_compliance.py`
+
++ Added: New `filter` and `sort` parameter options added to the _cloud_security_assets_queries_ operation within the __Cloud Security Assets__ service collection.
+    - filter: `application_security.business_applications`
+    - filter: `application_security.business_criticality`
+    - filter: `application_security.service_names`
+    - filter: `tags`
+    - sort: `compartment_name`
+    - sort: `compartment_ocid`
+    - sort: `compartment_path`
+    - sort: `tenancy_name`
+    - sort: `tenancy_ocid`
+    - sort: `tenancy_type`
+    - `_endpoint/_cloud_security_assets.py`
+    - `_endpoint/deprecated/_cloud_security_assets.py`
+    - `cloud_security_assets.py`
+
++ Added: Added new `find_operation` helper.
+    - `_helper/__init__.py`
+    - `_helper/_find_operation.py`
+    - `__init__.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_helper.py`
+
++ Added: Added `filter` parameter to the _ReadContainerCountByRegistry_ operation within the __Kubernetes Protection__ service collection.
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+
+## Issues resolved
++ Fixed: Resolved issue with `file` parameter name in file tuples used for the _CreateFileV1_ and _UpdateFileV1_ operations within the __FoundryLogScale__ Service Class.
+    - `foundry_logscale.py`
+
++ Adjusted: Removed default values from HEC ingestion payload class that should be defined within the NGSIEM parser and not the event.
+    - `_ngsiem/_ingest_payload.py`
+
++ Fixed: Added `excluded_from` to the payload handler for exclusion payloads. Updated _createMLExclusionsV1_ docstring to reflect new functionality.
+    - `_payload/_generic.py`
+    - `ml_exclusions.py`
+
++ Fixed: Added `is_descendant_process` to the _updateMLExclusionsV1_ operation within the __ML Exclusions__ Service Class.
+    - `_payload/_generic.py`
+    - `ml_exclusions.py`
+
+## Other
++ Updated: Cosmetic updates to `filter` parameter descriptions in 11 operations within the __Container Image Compliance__ service collection.
+    - `_endpoint/_container_image_compliance.py`
+
++ Revised: Updated HTTP Event Collector (HEC) default ingestion payload handling to remove fields that should be handled by parsing.
+    - `_ngsiem/_ingest_payload.py`
+
++ Updated: Updated `filter` parameter description and docstring for the _QueryVulnerabilities_ operation within the __Intel__ service collection.
+    - `_endpoint/_intel.py`
+    - `intel.py`
+
++ Updated: Cosmetic updates to `filter` parameter description in the _cloud_security_registration_oci_get_account_ operation within the __Cloud OCI Registration__ service collection.
+    - `_endpoint/_cloud_oci_registration.py`
+    - `_endpoint/deprecated/_cloud_oci_registration.py`
+
+---
+
 # Version 1.5.2
 ## Added features and functionality
 + Updated: Updated `import_definition` (_WorkflowDefinitionsImport_ operation) method to allow for raw YAML file data to be passed to the `data_file` keyword within the __Workflows__ Service Class. Closes #1341.
