@@ -1,3 +1,52 @@
+# Version 1.5.3
+## Added features and functionality
++ Added: Added new __Kubernetes Container Compliance__ service collection containing 10 new operations.
+    - _AggregateAssessmentsGroupedByClustersV2_
+    - _AggregateComplianceByAssetType_
+    - _AggregateComplianceByClusterType_
+    - _AggregateComplianceByFramework_
+    - _AggregateFailedRulesByClustersV3_
+    - _AggregateFailedRulesByClustersV3_
+    - _AggregateAssessmentsGroupedByRulesV2_
+    - _AggregateTopFailedImages_
+    - _CombinedImagesFindings_
+    - _CombinedNodesFindings_
+    - _getRulesMetadataByID_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_kubernetes_container_compliance.py`
+    - `__init__.py`
+    - `kubernetes_container_compliance.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_kubernetes_container_compliance.py`
+
++ Added: New `filter` and `sort` parameter options added to the _cloud_security_assets_queries_ operation within the __Cloud Security Assets__ service collection.
+    - filter: `application_security.business_applications`
+    - filter: `application_security.business_criticality`
+    - filter: `application_security.service_names`
+    - filter: `tags`
+    - sort: `compartment_name`
+    - sort: `compartment_ocid`
+    - sort: `compartment_path`
+    - sort: `tenancy_name`
+    - sort: `tenancy_ocid`
+    - sort: `tenancy_type`
+    - `_endpoint/_cloud_security_assets.py`
+    - `_endpoint/deprecated/_cloud_security_assets.py`
+    - `cloud_security_assets.py`
+
++ Added: Added new `find_operation` helper.
+    - `_helper/__init__.py`
+    - `_helper/_find_operation.py`
+    - `__init__.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_helper.py`
+
+## Other
++ Updated: Cosmetic updates to `filter` parameter descriptions in 11 operations within the __Container Image Compliance__ service collection.
+    - `_endpoint/_container_image_compliance.py`
+
+---
+
 # Version 1.5.2
 ## Added features and functionality
 + Updated: Updated `import_definition` (_WorkflowDefinitionsImport_ operation) method to allow for raw YAML file data to be passed to the `data_file` keyword within the __Workflows__ Service Class. Closes #1341.
