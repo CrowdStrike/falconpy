@@ -98,6 +98,27 @@ class InvalidOperation(SDKError):
     _code = 418
 
 
+class InvalidServiceCollection(SDKError):
+    """An invalid service collection was specified."""
+
+    _code = 418
+    _message = "Invalid API Service Collection specified"
+
+
+class InvalidOperationSearch(SDKError):
+    """Invalid operation search parameters specified."""
+
+    _code = 400
+    _message = "Invalid operation search specified"
+
+
+class InvalidRoute(SDKError):
+    """An invalid API route was specified."""
+
+    _code = 501
+    _message = "This API route does not exist"
+
+
 class InvalidBaseURL(SDKError):
     """The base URL specified is invalid or does not exist."""
 
