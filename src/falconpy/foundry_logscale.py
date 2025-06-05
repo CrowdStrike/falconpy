@@ -226,7 +226,7 @@ class FoundryLogScale(ServiceClass):
         file_tuple = None
         if data_file:
             with open(data_file, "r", encoding="utf-8") as inbound:
-                file_tuple = [("data_file", ("data_file", inbound.read(), "application/json"))]
+                file_tuple = [("file", ("file", inbound.read(), "application/json"))]
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -273,7 +273,7 @@ class FoundryLogScale(ServiceClass):
         file_tuple = None
         with open(data_file, "r", encoding="utf-8") as inbound:
             if data_file:
-                file_tuple = [("data_file", ("data_file", inbound.read(), "application/json"))]
+                file_tuple = [("file", ("file", inbound.read(), "application/json"))]
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
