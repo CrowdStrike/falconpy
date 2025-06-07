@@ -41,33 +41,21 @@ from datetime import datetime, timezone
 from io import StringIO
 from inspect import getmembers
 from json import dumps
-from typing import Dict, List, Union
+from typing import Dict, Union
 from .._enum import TimeUnit
-from .._version import version
 
 
-class IngestPayload:  # pylint: disable=R0902
+class IngestPayload:
     """Class to represent a JSON formatted ingest payload."""
 
-    _host: str = "UNKNOWN"
-    _source: str = version(agent_string=True)
-    _sourcetype: str = "json-hec"
-    _kind: str = "event"
-    _module: str = "crowdstrike-falconpy-hec"
-    _type: List[str] = ["info"]
-    _category: List[str] = ["host"]
+    _host: str = None
     _timestamp: int = None
     _timeunit: str = None
     _custom: Dict[str, Union[str, int, dict, list]] = {}
     _fields: Dict[str, Union[str, int, dict, list]] = {}
 
-    # pylint: disable=R0912,R0913
     def __init__(self,
                  host: str = None,
-                 kind: str = None,
-                 module: str = None,
-                 event_type: List[str] = None,
-                 category: List[str] = None,
                  timestamp: int = None,
                  timeunit: str = None,
                  custom: Dict[str, Union[str, int, dict, list]] = None,
@@ -77,22 +65,6 @@ class IngestPayload:  # pylint: disable=R0902
         """Create an instance of the class."""
         if host:
             self.host = host
-        if kind:
-            self.kind = kind
-        if module:
-            self.module = module
-        if event_type:
-            if isinstance(event_type, list):
-                self.type = event_type
-            else:
-                self.type.clear()
-                self.type.append(event_type)
-        if category:
-            if isinstance(category, list):
-                self.category = category
-            else:
-                self.category.clear()
-                self.category.append(category)
         if timestamp:
             self.timestamp = timestamp
         if timeunit:
@@ -144,7 +116,8 @@ class IngestPayload:  # pylint: disable=R0902
         items = []
         for item in start_items:
             if item not in ["timeunit", "fields", "custom"]:
-                items.append(item)
+                if item:
+                    items.append(item)
         for item in items:
             text = re.sub(r"['\[\]]", "", str(getattr(self, item)))
             returned = f"{returned}<{item}>{text}</{item}>"
@@ -171,14 +144,15 @@ class IngestPayload:  # pylint: disable=R0902
         items = []
         for item in start_items:
             if item not in ["fields", "custom"]:
-                items.append(item)
+                if item:
+                    items.append(item)
         returned = StringIO()
         writer = DictWriter(returned, fieldnames=items)
         row = {item: getattr(self, item) for item in items}
-        for key, value in row.items():
-            if isinstance(value, list):
-                new_value = re.sub(r"['\[\]]", "", str(value)).replace(",", "~")
-                row[key] = new_value
+        # for key, value in row.items():
+        #     if isinstance(value, list):
+        #         new_value = re.sub(r"['\[\]]", "", str(value)).replace(",", "~")
+        #         row[key] = new_value
         for unit in TimeUnit:
             if unit.value == self.timeunit:
                 row["timeunit"] = unit.name.lower()
@@ -201,46 +175,6 @@ class IngestPayload:  # pylint: disable=R0902
     def host(self, value: str):
         """Set the host property."""
         self._host = value
-
-    @property
-    def kind(self) -> str:
-        """Return the kind property."""
-        return self._kind
-
-    @kind.setter
-    def kind(self, value: str):
-        """Set the kind property."""
-        self._kind = value
-
-    @property
-    def module(self) -> str:
-        """Return the module property."""
-        return self._module
-
-    @module.setter
-    def module(self, value: str):
-        """Set the module property."""
-        self._module = value
-
-    @property
-    def type(self) -> List[str]:
-        """Return the type property."""
-        return self._type
-
-    @type.setter
-    def type(self, value: List[str]):
-        """Set the type property."""
-        self._type = value
-
-    @property
-    def category(self) -> List[str]:
-        """Return the category property."""
-        return self._category
-
-    @category.setter
-    def category(self, value: List[str]):
-        """Set the category property."""
-        self._category = value
 
     @property
     def timeunit(self) -> int:
