@@ -141,6 +141,9 @@ def exclusion_payload(passed_keywords: dict) -> dict:
 
     {
         "comment": "string",
+        "excluded_from": [
+            "string"
+        ],
         "groups": [
             "string"
         ],
@@ -152,13 +155,18 @@ def exclusion_payload(passed_keywords: dict) -> dict:
     returned_payload = {}
     keys = ["comment", "id", "is_descendant_process", "value"]
     for key in keys:
-        if passed_keywords.get(key, None):
+        if passed_keywords.get(key, None) is not None:
             returned_payload[key] = passed_keywords.get(key, None)
     group_list = passed_keywords.get("groups", None)
     if group_list:
         if isinstance(group_list, str):
             group_list = group_list.split(",")
         returned_payload["groups"] = group_list
+    exclude_list = passed_keywords.get("excluded_from", None)
+    if exclude_list:
+        if isinstance(exclude_list, str):
+            exclude_list = exclude_list.split(",")
+        returned_payload["excluded_from"] = exclude_list
 
     return returned_payload
 

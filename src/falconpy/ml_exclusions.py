@@ -114,8 +114,6 @@ class MLExclusions(ServiceClass):
         """
         if not body:
             body = exclusion_payload(passed_keywords=kwargs)
-        if kwargs.get("excluded_from", None):
-            body["excluded_from"] = kwargs.get("excluded_from", None)
         # Issue 1233
         if not body.get("groups"):
             body["groups"] = ["all"]
@@ -166,11 +164,13 @@ class MLExclusions(ServiceClass):
                         "string"
                     ],
                     "id": "string",
+                    "is_descendant_process": boolean,
                     "value": "string"
                 }
         comment -- String comment describing why the exclusion is entered.
         groups -- Group IDs to exclude. List of strings.
         id -- Exclusion ID to update. String.
+        is_descendant_process -- Flag indicating if this is a descendant process. Boolean.
         value -- Value to exclude. String
 
         This method only supports keywords for providing arguments.

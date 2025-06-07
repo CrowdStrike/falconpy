@@ -41,7 +41,8 @@ class TestMLExclusions:
             "update_exclusion_also": falcon.update_exclusions(comment="Unit Testing",
                                                               groups="12345,67890",
                                                               id="12345678",
-                                                              value="Bananas"
+                                                              value="Bananas",
+                                                              excluded_from="banana,apples"
                                                               ),
             "delete_exclusion": falcon.delete_exclusions(ids="12345678"),
         }
