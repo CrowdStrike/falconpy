@@ -142,6 +142,20 @@ _kubernetes_protection_endpoints = [
         "description": "The upper-bound on the number of records to retrieve.",
         "name": "limit",
         "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Retrieve count of Kubernetes container image registries that match a query in Falcon "
+        "Query Language (FQL). Supported filter fields:  agent_id  agent_type  ai_related  allow_privilege_escalation  "
+        "app_name  cid  cloud_account_id  cloud_instance_id  cloud_name  cloud_region  cloud_service  cluster_id  "
+        "cluster_name  container_id  container_image_id  container_name  cve_id  detection_name  first_seen  "
+        "image_detection_count  image_digest  image_has_been_assessed  image_id  image_registry  image_repository  "
+        "image_tag  image_vulnerability_count  insecure_mount_source  insecure_mount_type  insecure_propagation_mode  "
+        "interactive_mode  ipv4  ipv6  kac_agent_id  labels  last_seen  namespace  node_name  node_uid  "
+        "package_name_version  pod_id  pod_name  port  privileged  root_write_access  run_as_root_group  "
+        "run_as_root_user  running_status",
+        "name": "filter",
+        "in": "query"
       }
     ]
   ],
