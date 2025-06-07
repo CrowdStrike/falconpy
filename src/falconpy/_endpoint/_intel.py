@@ -848,7 +848,11 @@ _intel_endpoints = [
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters.",
+        "description": "FQL query specifying the filter parameters. Filter parameters include:\n\n_all, "
+        "affected_products.product, affected_products.vendor, community_identifiers, cve, cvss_v3_base, "
+        "cvss_v3_base.score, cvss_v3_base.severity, exploit_status, publish_date, related_actors, "
+        "related_actors.animal_classifier, related_actors.name, related_reports.serial_id, related_reports.title, "
+        "related_threats, related_threats.name, severity, updated_timestamp.",
         "name": "filter",
         "in": "query"
       },
