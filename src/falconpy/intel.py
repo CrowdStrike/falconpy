@@ -908,6 +908,17 @@ class Intel(ServiceClass):
 
         Keyword arguments:
         filter -- FQL query specifying the filter parameters. String.
+                  Filter parameters include:
+                    _all                            related_actors
+                    affected_products.product       related_actors.animal_classifier
+                    affected_products.vendor        related_actors.name
+                    community_identifiers           related_reports.serial_id
+                    cve                             related_reports.title
+                    cvss_v3_base                    related_threats
+                    cvss_v3_base.score              related_threats.name
+                    cvss_v3_base.severity           severity
+                    exploit_status                  updated_timestamp
+                    publish_date
         limit -- The maximum number of IDs to return. Integer.
         offset -- The integer offset to start retrieving records from. Defaults to 0.
         parameters - full parameters payload, not required if using other keywords.
