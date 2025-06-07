@@ -265,6 +265,33 @@ class KubernetesProtection(ServiceClass):
         """Retrieve top container image registries.
 
         Keyword arguments:
+        filter -- Retrieve count of Kubernetes container image registries that match a query in
+                  Falcon Query Language (FQL). String.
+                  Supported filter fields:
+                    agent_id                        image_repository
+                    agent_type                      image_tag
+                    ai_related                      image_vulnerability_count
+                    allow_privilege_escalation      insecure_mount_source
+                    app_name                        insecure_mount_type
+                    cid                             insecure_propagation_mode
+                    cloud_account_id                interactive_mode
+                    cloud_instance_id               ipv4
+                    cloud_name                      ipv6
+                    cloud_region                    kac_agent_id
+                    cloud_service                   labels
+                    cluster_id                      last_seen
+                    cluster_name                    namespace
+                    container_id                    node_name
+                    container_image_id              node_uid
+                    container_name                  package_name_version
+                    cve_id                          pod_id
+                    detection_name                  pod_name
+                    first_seen                      port
+                    image_detection_count           privileged
+                    image_digest                    root_write_access
+                    image_has_been_assessed         run_as_root_group
+                    image_id                        run_as_root_user
+                    image_registry                  running_status
         under_assessment -- Flag indicating whether to return registries under assessment or not under assessment.
                             If not provided all registries are considered. Boolean. Defaults to False.
         limit -- The upper-bound on the number of records to retrieve. Integer.
