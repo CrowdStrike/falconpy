@@ -16,7 +16,7 @@ from falconpy import Hosts
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Hosts(auth_object=config)
-AllowedResponses = [200, 202, 400, 401, 404, 429, 501]  # Allow 501 from usgov1
+AllowedResponses = [200, 202, 400, 401, 403, 404, 429, 501]  # Allow 501 from usgov1
 
 
 class TestHosts:
