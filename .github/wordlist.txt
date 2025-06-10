@@ -1596,3 +1596,15 @@ Sonoma
 jbfuzier
 agburch
 GetIndicatorAggregates
+AggregateAssessmentsGroupedByClustersV
+AggregateComplianceByAssetType
+AggregateComplianceByClusterType
+AggregateComplianceByFramework
+AggregateFailedRulesByClustersV
+AggregateAssessmentsGroupedByRulesV
+AggregateTopFailedImages
+CombinedImagesFindings
+CombinedNodesFindings
+getRulesMetadataByID
+FoundryLogScale
+HEC
