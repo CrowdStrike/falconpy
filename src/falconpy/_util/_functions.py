@@ -799,7 +799,7 @@ def confirm_base_url(provided_base: Optional[str] = "https://api.crowdstrike.com
     try:
         if "://" not in provided_base:
             # They're passing the name instead of the URL
-            dashed_bases = ["US-1", "US-2", "EU-1", "US-GOV-1"]
+            dashed_bases = ["US-1", "US-2", "EU-1", "US-GOV-1", "US-GOV-2"]
             if provided_base.upper() in dashed_bases:
                 provided_base = provided_base.replace("-", "")  # Strip the dash
             try:
