@@ -44,19 +44,6 @@ class TestMessageCenter:
                                                                user_uuid="bob@nowhere.com",
                                                                file_name="testfile.png"
                                                                ),
-            "create_case": falcon.create_case(content="Case content goes here",
-                                              detections={
-                                                  "id": "123456",
-                                                  "url": "https://somewhere.com"
-                                              },
-                                              incidents={
-                                                  "id": "12345",
-                                                  "url": "https://somewhereelse.com"
-                                              },
-                                              title="This is the case title",
-                                              case_type="Case type",
-                                              user_uuid="larry@somewhere.com"
-                                              ),
             "create_case_v2": falcon.create_case_v2(content="Case content goes here",
                                               detections={
                                                   "id": "123456",
@@ -69,17 +56,6 @@ class TestMessageCenter:
                                               title="This is the case title",
                                               case_type="Case type",
                                               user_uuid="larry@somewhere.com"
-                                              ),
-            "update_case": falcon.update_case(content="Case content goes here",
-                                              detections={
-                                                  "id": "123456",
-                                                  "url": "https://somewhere.com"
-                                              },
-                                              id="1234567890",
-                                              incidents={
-                                                  "id": "12345",
-                                                  "url": "https://somewhereelse.com"
-                                              }
                                               ),
             "get_cases": falcon.get_cases(ids="12345678,9876543"),
             "query_activities": falcon.query_activities(limit=1),
