@@ -252,8 +252,8 @@ _user_management_endpoints = [
     "user_management",
     [
       {
-        "description": "All fields including CID, RoleID(s), User UUID and Action are required. Allowed values "
-        "for Action param include 'grant' and 'revoke'.",
+        "description": "CID, RoleID(s), User UUID and Action are required. Allowed values for Action param "
+        "include 'grant' and 'revoke'.",
         "name": "body",
         "in": "body",
         "required": True
