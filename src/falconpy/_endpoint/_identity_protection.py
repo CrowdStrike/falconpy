@@ -104,7 +104,7 @@ _identity_protection_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
+        "collectionFormat": "multi",
         "description": "Rule IDs",
         "name": "ids",
         "in": "query",
@@ -155,7 +155,7 @@ _identity_protection_endpoints = [
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
+        "collectionFormat": "multi",
         "description": "Rule IDs",
         "name": "ids",
         "in": "query",
