@@ -154,6 +154,22 @@ _real_time_response_admin_endpoints = [
     ]
   ],
   [
+    "RTR_GetPutFileContents",
+    "GET",
+    "/real-time-response/entities/put-file-contents/v1",
+    "Get RTR put file contents for a given file ID",
+    "real_time_response_admin",
+    [
+      {
+        "type": "string",
+        "description": "put file ID",
+        "name": "id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "RTR_GetPut_Files",
     "GET",
     "/real-time-response/entities/put-files/v1",

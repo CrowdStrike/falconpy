@@ -225,6 +225,36 @@ class RealTimeResponseAdmin(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_put_file_contents(self: object,
+                              *args,
+                              parameters: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get put-file contents for a given put file ID.
+
+        Keyword arguments:
+        id -- Put file ID to retrieve. String.
+        parameters -- full parameters payload, not required if id is provided as a keyword.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-GetPutFileContents
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_GetPutFileContents",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "id")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_put_files(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get put-files based on the ID's given. These are used for the RTR `put` command.
 
@@ -638,6 +668,7 @@ class RealTimeResponseAdmin(ServiceClass):
     RTR_CheckAdminCommandStatus = check_admin_command_status
     RTR_ExecuteAdminCommand = execute_admin_command
     RTR_GetFalconScripts = get_falcon_scripts
+    RTR_GetPutFileContents = get_put_file_contents
     RTR_GetPut_Files = get_put_files
     RTR_GetPut_FilesV2 = get_put_files_v2
     RTR_CreatePut_Files = create_put_files
