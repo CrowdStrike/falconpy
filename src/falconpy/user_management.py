@@ -185,7 +185,7 @@ class UserManagement(ServiceClass):
             Full parameters payload, not required if using other keywords. JSON format.
         sort : str
             The property to sort by. FQL syntax (e.g. cid|asc, type|desc).
-            Available sort values: cid, role_name, type, expires_at
+            Available sort values: cid, role_name, type, expires_at, user_uuid
         user_uuid : str (required)
             User UUID to get available roles for.
             Must be provided as a keyword, argument or part of the `parameters` payload.
@@ -239,7 +239,7 @@ class UserManagement(ServiceClass):
             Full parameters payload, not required if using other keywords. JSON format.
         sort : str
             The property to sort by. FQL syntax (e.g. cid|asc, type|desc).
-            Available sort values: cid, role_name, type, expires_at
+            Available sort values: cid, role_name, type, expires_at, user_uuid
         user_uuid : str (required)
             User UUID to get available roles for.
             Must be provided as a keyword, argument or part of the `parameters` payload.

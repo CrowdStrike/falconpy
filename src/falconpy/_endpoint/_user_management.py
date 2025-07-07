@@ -114,7 +114,9 @@ _user_management_endpoints = [
           "role_name|asc",
           "role_name|desc",
           "type|asc",
-          "type|desc"
+          "type|desc",
+          "user_uuid|asc",
+          "user_uuid|desc"
         ],
         "type": "string",
         "default": "role_name|asc",
@@ -186,7 +188,9 @@ _user_management_endpoints = [
           "role_name|asc",
           "role_name|desc",
           "type|asc",
-          "type|desc"
+          "type|desc",
+          "user_uuid|asc",
+          "user_uuid|desc"
         ],
         "type": "string",
         "default": "role_name|asc",
