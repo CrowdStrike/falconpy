@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request
-from ._payload import indicator_graph_payload
+from ._payload import indicator_graph_payload, generic_payload_list
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._intelligence_indicator_graph import _intelligence_indicator_graph_endpoints as Endpoints
@@ -103,4 +103,54 @@ class IntelligenceIndicatorGraph(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def lookup(self: object,
+               *args,
+               body: dict = None,
+               **kwargs
+               ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Search indicators based on FQL filter.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "values": [
+                        "example.com",
+                        "1.2.3.4",
+                        "7391279b68dd9ae643125aef4af41b87a17fc8cea669a6ffa709c8470236e25a",
+                        "94e8020ce8836b9cae654af56eba25396e8ba9f0",
+                        "86464cd07e4f924e33a5a1d1dcebdae6"
+                    ]
+                }
+        values -- Values to look up. String or list of strings.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'values'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intelligence-indicator-graph/LookupIndicators
+        """
+        if not kwargs and args:
+            kwargs["values"] = args[0]
+
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="values")
+
+        # Convert comma-delimited strings to a properly formatted list
+        if "values" in body:
+            if isinstance(body["values"], str):
+                body["values"] = body["values"].split(",")
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="LookupIndicators",
+            body=body
+            )
+
     SearchIndicators = search
+    LookupIndicators = lookup
