@@ -62,5 +62,19 @@ _intelligence_indicator_graph_endpoints = [
         "required": True
       }
     ]
+  ],
+  [
+    "LookupIndicators",
+    "POST",
+    "/intelligence/combined/lookup-indicators/v1",
+    "Get indicators based on their value.",
+    "intelligence_indicator_graph",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
   ]
 ]
