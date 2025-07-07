@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-_VERSION = '1.5.3'
+_VERSION = '1.5.4'
 _HEC_VERSION = '1.0.0'
 _MAINTAINER = 'Joshua Hiller'
 _AUTHOR = 'CrowdStrike'
