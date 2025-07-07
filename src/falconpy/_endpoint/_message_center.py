@@ -126,34 +126,6 @@ _message_center_endpoints = [
     ]
   ],
   [
-    "CreateCase",
-    "POST",
-    "/message-center/entities/case/v1",
-    "create a new case",
-    "message_center",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "UpdateCase",
-    "PATCH",
-    "/message-center/entities/case/v1",
-    "update an existing case",
-    "message_center",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "CreateCaseV2",
     "POST",
     "/message-center/entities/case/v2",

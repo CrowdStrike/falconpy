@@ -307,112 +307,6 @@ class MessageCenter(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_case(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Create a new case.
-
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
-                NOTICE: This particular body payload contains a field named `body`, which
-                        impacts body payload abstraction functionality. This field can be
-                        set using the keyword `content` if you do not wish to specify a
-                        full body payload using the `body` keyword.
-                {
-                    "body": "string",
-                    "detections": [
-                        {
-                            "id": "string",
-                            "url": "string"
-                        }
-                    ],
-                    "incidents": [
-                        {
-                            "id": "string",
-                            "url": "string"
-                        }
-                    ],
-                    "title": "string",
-                    "type": "string",
-                    "user_uuid": "string"
-                }
-        content -- Case content. Used for the `body` field within the body payload. String.
-        detections -- List of detections to attach to the case. List of dictionaries.
-        incidents -- List of incidents to attach to the case. List of dictionaries.
-        title -- Case title. String.
-        type -- Case type. String. The keyword `case_type` can also be used to specify this value.
-        user_uuid -- UUID of the user related to the case. String.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/CreateCase
-        """
-        if not body:
-            body = case_payload(passed_keywords=kwargs)
-
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="CreateCase",
-            keywords=kwargs,
-            body=body
-            )
-
-    @force_default(defaults=["body"], default_types=["dict"])
-    def update_case(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Update an existing case.
-
-        Keyword arguments:
-        body -- full body payload, not required when using other keywords.
-                NOTICE: This particular body payload contains a field named `body`, which
-                        impacts body payload abstraction functionality. This field can be
-                        set using the keyword `content` if you do not wish to specify a
-                        full body payload using the `body` keyword.
-                {
-                    "body": "string",
-                    "detections": [
-                        {
-                            "id": "string",
-                            "url": "string"
-                        }
-                    ],
-                    "id": "string",
-                    "incidents": [
-                        {
-                            "id": "string",
-                            "url": "string"
-                        }
-                    ]
-                }
-        content -- Case content. Used for the `body` field within the body payload. String.
-        detections -- List of detections to attach to the case. List of dictionaries.
-        id -- Case ID to update. String.
-        incidents -- List of incidents to attach to the case. List of dictionaries.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: PATCH
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/message-center/UpdateCase
-        """
-        if not body:
-            body = case_payload(passed_keywords=kwargs)
-
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="UpdateCase",
-            keywords=kwargs,
-            body=body
-            )
-
-    @force_default(defaults=["body"], default_types=["dict"])
     def create_case_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new case.
 
@@ -585,9 +479,7 @@ class MessageCenter(ServiceClass):
     case_download_attachment = download_case_attachment
     CaseAddAttachment = add_case_attachment
     case_add_attachment = add_case_attachment
-    CreateCase = create_case
     CreateCaseV2 = create_case_v2
-    UpdateCase = update_case
     GetCaseEntitiesByIDs = get_cases
     get_case_entities_by_ids = get_cases
     QueryActivityByCaseID = query_activities
