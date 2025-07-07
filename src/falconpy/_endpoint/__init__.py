@@ -72,7 +72,6 @@ from ._cspm_registration import _cspm_registration_endpoints
 from ._custom_ioa import _custom_ioa_endpoints
 from ._custom_storage import _custom_storage_endpoints
 from ._d4c_registration import _d4c_registration_endpoints
-from ._datascanner import _datascanner_endpoints
 from ._delivery_settings import _delivery_settings_endpoints
 from ._deployments import _deployments_endpoints
 from ._detects import _detects_endpoints
@@ -167,7 +166,6 @@ api_endpoints.extend(_cspm_registration_endpoints)
 api_endpoints.extend(_custom_ioa_endpoints)
 api_endpoints.extend(_custom_storage_endpoints)
 api_endpoints.extend(_d4c_registration_endpoints)
-api_endpoints.extend(_datascanner_endpoints)
 api_endpoints.extend(_delivery_settings_endpoints)
 api_endpoints.extend(_detects_endpoints)
 api_endpoints.extend(_device_content_endpoints)
