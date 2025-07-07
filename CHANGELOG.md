@@ -1,3 +1,206 @@
+# Version 1.5.4
+## Added features and functionality
++ Added: Added _tag_key_ and _tag_value_ as allowed values for the `filter` parameter in the _cloud_security_assets_combined_compliance_by_account_ operation within the __Cloud Security Assets__ service collection.
+    - `_endpoint/_cloud_security_assets.py`
+    - `_endpoint/deprecated/_cloud_security_assets.py`
+
++ Added: Added 5 new operations to the __Cloud Azure Registration__ service collection.
+    - _cloud_registration_azure_get_registration_
+    - _cloud_registration_azure_create_registration_
+    - _cloud_registration_azure_update_registration_
+    - _cloud_registration_azure_delete_registration_
+    - _download_azure_script_
+    - `_endpoint/_cloud_azure_registration.py`
+    - `_endpoint/deprecated/_cloud_azure_registration.py`
+    - `_payload/__init__.py`
+    - `_payload/_cloud_azure_registration.py`
+    - `cloud_azure_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_azure_registration.py`
+
++ Added: Added _insights.date_value_, _insights.integer_value_, _insights.string_list_value_, and _insights.string_value_ as allowed values for the `filter` parameter in the _cloud_security_assets_queries_ operation within the __Cloud Security Assets__ service collection.
+    - `_endpoint/_cloud_security_assets.py`
+    - `_endpoint/deprecated/_cloud_security_assets.py`
+
++ Added: Added new _getCloudEventIDs_ operation to the __CSPM Registration__ service collection.
+    - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cspm_registration.py`
+
++ Added: Added new _GetEntityIDsByQueryPOSTV2_ operation to the __Deployments__ service collection. This operation is now the default operation used when calling the PEP 8 compliant `get_release_notes` method within the service class. The legacy operation is still available using the `get_release_notes_v1` method.
+    - `_endpoint/_deployments.py`
+    - `deployments.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_deployments.py`
+
++ Added: Added new _query_external_assets_v2_ operation to the __Exposure Management__ service collection. This operation is now the default operation used when calling the PEP 8 compliant `query_assets` method within the service class. The legacy operation is still available using the `query_assets_v1` method.
+    - `_endpoint/_exposure_management.py`
+    - `_endpoint/deprecated/_exposure_management.py`
+    - `exposure_management.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_exposure_management.py`
+
++ Added: Added 2 new operations to the __Falcon Container__ service collection.
+    - _PostImageScanInventory_
+    - _HeadImageScanInventory_
+    - `_endpoint/_falcon_container.py`
+    - `_payload/__init__.py`
+    - `_payload/_container.py`
+    - `falcon_container.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_falcon_container.py`
+
++ Added: Added new _QueryAlertIdsByFilterV2_ operation to the __Falcon Complete Dashboard__ service collection. This operation is now the default operation used when calling the PEP 8 compliant `query_alert_ids_by_filter` method within the service class. The legacy operation is still available using the `query_alert_ids_by_filter_v1` method.
+    - `_endpoint/_falcon_complete_dashboard.py`
+    - `falcon_complete_dashboard.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_falcon_complete_dashboard.py`
+
++ Added: Added new _QueryMalwareEntities_ operation to the __Intel__ service collection.
+    - `_endpoint/_intel.py`
+    - `intel.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_intel.py`
+
++ Added: Added new _LookupIndicators_ operation to the __Intelligence Indicator Graph__ service collection.
+    - `_endpoint/_intelligence_indicator_graph.py`
+    - `intelligence_indicator_graph.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_intelligence_indicator_graph.py`
+
++ Added: Added _node_uid_ as an allowed `filter` value to the _ReadNodesByCloudCount_, _ReadNodesByContainerEngineVersionCount_, _ReadNodesByDateRangeCount_, _ReadNodeCount_ and _ReadNodeCombined_ operations within the __Kubernetes Protection__ service collection. Added a new PEP 8 alias for the _ReadNodeCount_ operation.
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+
++ Added: Added the new __IT Automation__ service collection with 37 operations.
+    - _ITAutomationGetAssociatedTasks_
+    - _ITAutomationCombinedScheduledTasks_
+    - _ITAutomationGetTaskExecutionsByQuery_
+    - _ITAutomationGetTaskGroupsByQuery_
+    - _ITAutomationGetTasksByQuery_
+    - _ITAutomationRunLiveQuery_
+    - _ITAutomationUpdatePolicyHostGroups_
+    - _ITAutomationUpdatePoliciesPrecedence_
+    - _ITAutomationGetPolicies_
+    - _ITAutomationCreatePolicy_
+    - _ITAutomationUpdatePolicies_
+    - _ITAutomationDeletePolicy_
+    - _ITAutomationGetScheduledTasks_
+    - _ITAutomationCreateScheduledTask_
+    - _ITAutomationUpdateScheduledTask_
+    - _ITAutomationDeleteScheduledTasks_
+    - _ITAutomationCancelTaskExecution_
+    - _ITAutomationGetTaskExecutionHostStatus_
+    - _ITAutomationRerunTaskExecution_
+    - _ITAutomationGetExecutionResultsSearchStatus_
+    - _ITAutomationStartExecutionResultsSearch_
+    - _ITAutomationGetExecutionResults_
+    - _ITAutomationGetTaskExecution_
+    - _ITAutomationStartTaskExecution_
+    - _ITAutomationGetTaskGroups_
+    - _ITAutomationCreateTaskGroup_
+    - _ITAutomationUpdateTaskGroup_
+    - _ITAutomationDeleteTaskGroups_
+    - _ITAutomationGetTasks_
+    - _ITAutomationCreateTask_
+    - _ITAutomationUpdateTask_
+    - _ITAutomationDeleteTask_
+    - _ITAutomationQueryPolicies_
+    - _ITAutomationSearchScheduledTasks_
+    - _ITAutomationSearchTaskExecutions_
+    - _ITAutomationSearchTaskGroups_
+    - _ITAutomationSearchTasks_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_it_automation.py`
+    - `_payload/__init__.py`
+    - `_payload/_it_automation.py`
+    - `__init__.py`
+    - `it_automation.py`
+    > Unit testing expanded to complete code coverage.
+    - `test_it_automation.py`
+
++ Added: Added new _RTR-GetPutFileContents_ operation to the __Real Time Response Admin__ service collection.
+    - `_endpoint/_real_time_response_admin.py`
+    - `_endpoint/deprecated/_real_time_response_admin.py`
+    - `real_time_response_admin.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_real_time_response_admin.py`
+
++ Added: Added _user_uuid_ as an allowed value for the `sort` parameter in the _combinedUserRolesV1_ and _CombinedUserRolesV2_ operations within the __User Management__ service collection.
+    - `_endpoint/_user_management.py`
+    - `user_management.py`
+
++ Added: Added _HEAD_ as an allowed HTTP request method.
+    - `_constant/__init__.py`
+    - `_error/_warnings.py`
+    - `_result/_result.py`
+    - `_util/_functions.py`
+
++ Added: Added named debug logger targeting functionality. Developers may specify a _Logger_ object for the `debug` parameter instead of a boolean to force the SDK to generate log messages to that specific log. This functionality can be configured to target different loggers per class instantiated, regardless if the developer is using Service Classes or the Uber Class.
+    - `_auth_object/_falcon_interface.py`
+    - `_service_class/_base_service_class.py`
+    - `oauth2.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_authentications.py`
+    - Thanks go out to @JamesLochheadCRWD for suggesting this addition! 🙇
+
+## Issues resolved
++ Fixed: Added missing endpoint definition _GetCSPMGCPAccount_ to resolve the typo with the _GetCSPMCGPAccount_ operation within the __CSPM Registration__ service collection when called from the Uber Class.
+    - `_endpoint/_cspm_registration.py`
+
++ Fixed: Added `filename` to Uber Class path variable handler for the _GetLookupV1_ operation within the __NGSIEM__ service collection. Closes #1359.
+    - `_util/_uber.py`
+    - Thanks go out to @59e5aaf4 for identifying and reporting this issue! 🙇
+
+## Other
++ Updated: Cosmetic updates to `filter` and `sort` parameter descriptions in the _cloud_security_registration_oci_get_account_ operation within the __Cloud OCI Registration__ service collection.
+    - `_endpoint/_cloud_oci_registration.py`
+    - `_endpoint/deprecated/_cloud_oci_registration.py`
+
++ Removed: Decommissioned the deprecated __Data Scanner__ service collection.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_data_scanner.py`
+    - `__init__.py`
+    - `datascanner.py`
+    > Unit testing updated to reflect new code coverage requirements.
+    - `tests/test_datascanner.py`
+
++ Updated: Cosmetic update to the operation description for the _AggregateAlerts_ operation within the __Falcon Complete Dashboard__ service collection.
+    - `_endpoint/_falcon_complete_dashboard.py`
+
++ Changed: Changed collection format from _csv_ to _multi_ for the `ids` parameter in the _get_policy_rules_ and _delete_policy_rules operations within the __Identity Protection__ service collection.
+    - `_endpoint/_identity_protection.py`
+    - `_endpoint/deprecated/_identity_protection.py`
+
++ Removed: Removed the decommissioned operation _GetIndicatorAggregates_ from the __Intelligence Indicator Graph__ service collection.
+    - `_endpoint/_intelligence_indicator_graph.py`
+    - `intelligence_indicator_graph.py`
+    > Unit testing updated to reflect new code coverage requirements.
+    - `tests/test_intelligence_indicator_graph.py`
+
++ Removed: Removed deprecated `body` payload functionality and added the `filter` and `sort` query string parameters in the _SearchIndicators_ operation within the __Intelligence Indicator Graph__ service collection.
+    - `_payload/__init__.py`
+    - `_payload/_intelligence_indicator_graph.py`
+    - `intelligence_indicator_graph.py`
+
++ Removed: Removed the decommissioned operations _CreateCase_ and _UpdateCase_ from the __Message Center__ service collection.
+    - `_endpoint/_message_center.py`
+    - `message_center.py`
+    > Unit testing updated to reflect new code coverage requirements.
+    - `tests/test_message_center.py`
+
++ Updated: Updated `sort` enum to list all available parameter values in the _QueryActivityByCaseID_ and _QueryCasesIdsByFilter_ operations and added _case.status_ as an allowed `filter` value to the _QueryCasesIdsByFilter_ operation within the __Message Center__ service collection.
+    - `_endpoint/_message_center.py`
+
++ Updated: Cosmetic updates to enums and changed the collection format from _csv_ to _multi_ for the `stage` parameter in the _queryCombinedSensorUpdateBuilds_ operation within the __Sensor Update Policy__ service collection.
+    - `_endpoint/_sensor_update_policies.py`
+
++ Updated: Cosmetic update to the body payload description in the _userRolesActionV1_ operation within the __User Management__ service collection.
+    - `_endpoint/_user_management.py`
+
+---
+
 # Version 1.5.3
 ## Added features and functionality
 + Added: Added new __Kubernetes Container Compliance__ service collection containing 11 new operations.
