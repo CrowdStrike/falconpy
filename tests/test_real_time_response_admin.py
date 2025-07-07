@@ -121,6 +121,8 @@ class TestRTRAdmin:
             "execute_admin_command": falcon.RTR_ExecuteAdminCommand(body={})["status_code"],                    # 400
             "get_falcon_script": falcon.RTR_GetFalconScripts(ids="12345678")["status_code"],
             "create_put_files": falcon.RTR_CreatePut_Files(data=file_payload, files=files_detail)["status_code"],
+            # Expanding the result to retrieve the status code
+            "get_contents": falcon.RTR_GetPutFileContents(self.rtra_retrieve_file_id(file_name=upload_filename), expand_result=True)[0],
             "get_again": falcon.RTR_GetPut_FilesV2(self.rtra_retrieve_file_id(file_name=upload_filename, ver=2))["status_code"],
             "delete_put_files": falcon.RTR_DeletePut_Files(
                 ids=self.rtra_retrieve_file_id(file_name=upload_filename)
