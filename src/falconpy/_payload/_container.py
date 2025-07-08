@@ -152,6 +152,52 @@ def registry_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
+def inventory_scan_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted image inventory scan payload.
+
+    {
+        "agent_uuid": "string",
+        "agent_version": "string",
+        "agent_version_hash": "string",
+        "cluster_id": "string",
+        "cluster_name": "string",
+        "container_id": "string",
+        "ephemeral_scan": boolean,
+        "helm_version": "string",
+        "high_entropy_strings": [
+            {
+                high entropy string dictionary
+            }
+        ],
+        "host_ip": "string",
+        "host_name": "string",
+        "inventory": {
+            inventory dictionary
+        },
+        "original_image_name": "string",
+        "pod_id": "string",
+        "pod_name": "string",
+        "pod_namespace": "string",
+        "runmode": "string",
+        "runtime_type": "string",
+        "scan_request": {
+            scan request dictionary
+        }
+    }
+    """
+    returned_payload = {}
+    keys = ["agent_uuid", "agent_version", "agent_version_hash", "cluster_id", "cluster_name",
+            "container_id", "ephemeral_scan", "helm_version", "high_entropy_strings", "host_ip",
+            "host_name", "inventory", "original_image_name", "pod_id", "pod_name", "pod_namespace",
+            "runmode", "runtime_type", "scan_request"
+            ]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    return returned_payload
+
+
 def image_policy_payload(passed_keywords: dict) -> dict:
     """Craft a properly formatted image assessment policy payload.
 

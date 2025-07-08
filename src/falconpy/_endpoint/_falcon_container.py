@@ -336,5 +336,27 @@ _falcon_container_endpoints = [
         "required": True
       }
     ]
+  ],
+  [
+    "PostImageScanInventory",
+    "POST",
+    "/image-assessment/entities/image-inventory/v1",
+    "Post image scan inventory",
+    "falcon_container",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "HeadImageScanInventory",
+    "HEAD",
+    "/image-assessment/entities/image-inventory/v1",
+    "Get headers for POST request for image scan inventory",
+    "falcon_container",
+    []
   ]
 ]
