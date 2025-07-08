@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import process_service_request, force_default, handle_single_argument
-from ._payload import image_payload, registry_payload, export_job_payload
+from ._payload import image_payload, registry_payload, export_job_payload, inventory_scan_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._falcon_container import _falcon_container_endpoints as Endpoints
@@ -679,6 +679,133 @@ class FalconContainer(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def scan_inventory(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update the registry entity, as identified by the entity UUID, using the provided details.
+
+        HTTP Method: POST
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/UpdateRegistryEntities
+
+        Keyword arguments
+        ----
+        agent_uuid : str
+            Agent UUID
+        agent_version : str
+            Agent version
+        agent_version_hash : str
+            Agent version hash
+        body : dict
+            Full body payload, not required if keywords are used.
+            {
+                "agent_uuid": "string",
+                "agent_version": "string",
+                "agent_version_hash": "string",
+                "cluster_id": "string",
+                "cluster_name": "string",
+                "container_id": "string",
+                "ephemeral_scan": boolean,
+                "helm_version": "string",
+                "high_entropy_strings": [
+                    {
+                        high entropy string dictionary
+                    }
+                ],
+                "host_ip": "string",
+                "host_name": "string",
+                "inventory": {
+                    inventory dictionary
+                },
+                "original_image_name": "string",
+                "pod_id": "string",
+                "pod_name": "string",
+                "pod_namespace": "string",
+                "runmode": "string",
+                "runtime_type": "string",
+                "scan_request": {
+                    scan request dictionary
+                }
+            }
+        cluster_id : str
+            Cluster ID
+        cluster_name : str
+            Cluster Name
+        container_id : str
+            Container ID
+        ephemeral_scan : bool
+            Flag indicating if this is an ephemeral scan.
+        helm_version : str
+            Helm version used
+        high_entropy_strings : list of dictionaries
+            List of high entropy string dictionaries
+        host_ip : str
+            Host IP address
+        host_name : str
+            Host name
+        inventory : dict
+            Complete inventory detail as a dictionary
+        original_image_name : str
+            Name of the original image
+        pod_id : str
+            Pod ID
+        pod_name : str
+            Pod name
+        pod_namespace : str
+            Pod namespace
+        runmode : str
+            Run mode
+        runtime_type : str
+            Type of runtime used
+        scan_request : dict
+            Requested scan in dictionary format
+
+        This method only supports keywords for providing arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response.
+        """
+        if not body:
+            body = inventory_scan_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="PostImageScanInventory",
+            body=body
+            )
+
+    def get_scan_headers(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get the headers for a POST request for the PostImageScanInventory operation.
+
+        HTTP Method: HEAD
+
+        Swagger URL
+        ----
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/HeadImageScanInventory
+
+        Keyword arguments
+        ----
+        This method does not accept keyword arguments.
+
+        Arguments
+        ----
+        This method does not accept arguments.
+
+        Returns
+        ----
+        dict
+            Dictionary object containing API response. Body payload will be empty.
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="HeadImageScanInventory"
+            )
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
@@ -697,3 +824,5 @@ class FalconContainer(ServiceClass):
     QueryExportJobs = query_export_jobs
     CreateRegistryEntities = create_registry_entities
     UpdateRegistryEntities = update_registry_entities
+    PostImageScanInventory = scan_inventory
+    HeadImageScanInventory = get_scan_headers
