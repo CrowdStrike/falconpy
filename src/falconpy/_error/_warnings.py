@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Optional, Union
+from requests.structures import CaseInsensitiveDict
 from .._result import Result
 
 
@@ -60,8 +61,12 @@ class SDKWarning(RuntimeWarning):
             self.code = code
         if message:
             self.message = message
-        if isinstance(headers, dict):
+        # Allow CaseInsensitiveDict from requests
+        if headers:
+            if isinstance(headers, CaseInsensitiveDict):
+                headers = dict(headers)
             self.headers = headers
+
         super().__init__(self.message)
 
     @property
