@@ -63,7 +63,7 @@ MOCK_OPERATIONS: List[str] = [
     "GetImageAssessmentReport", "DeleteImageDetails", "ImageMatchesPolicy"
 ]
 # Restrict requests to only allowed HTTP methods
-ALLOWED_METHODS: List[str] = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'UPDATE']
+ALLOWED_METHODS: List[str] = ["GET", "POST", "PUT", "PATCH", "DELETE", "UPDATE", "HEAD"]
 # Default user-agent string
 USER_AGENT: str = version(agent_string=True)
 # Default maximum number of records to write to debug logs (when active)

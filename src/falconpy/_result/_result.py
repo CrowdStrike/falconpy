@@ -53,7 +53,8 @@ class BaseResult:
     def __init__(self,
                  status_code: Optional[int] = 0,
                  headers: Optional[Dict[str, Union[str, int, float]]] = None,
-                 body: Optional[Dict[str, Union[str, dict, list, int, float, bytes]]] = None
+                 body: Optional[Dict[str, Union[str, dict, list, int, float, bytes]]] = None,
+                 head_request: bool = False
                  ):
         """Construct an instance of the class."""
         self._pos: int = 0
@@ -69,7 +70,7 @@ class BaseResult:
         self.batch_id = None
         self.batch_get_cmd_req_id = None
 
-        if status_code and headers and body:
+        if (status_code and headers and body) or head_request:
             self.status_code = status_code
             _headers = headers
             if isinstance(_headers, CaseInsensitiveDict):
@@ -232,7 +233,8 @@ class Result(BaseResult):
                  full: Dict[str, Union[int,
                                        Dict[str, str],
                                        Dict[str, Union[str, dict, list, int, float, bytes]]
-                                       ]] = None
+                                       ]] = None,
+                 head_request: bool = False
                  ):
         """Class constructor.
 
@@ -247,7 +249,11 @@ class Result(BaseResult):
             headers = full.get("headers", None)
             body = full.get("body", None)
 
-        super().__init__(status_code=status_code, headers=headers, body=body)
+        super().__init__(status_code=status_code,
+                         headers=headers,
+                         body=body,
+                         head_request=head_request
+                         )
 
     # Easy filter method
     def prune(self, substr) -> list:

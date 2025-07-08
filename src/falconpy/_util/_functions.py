@@ -264,6 +264,7 @@ def calc_content_return(resp: requests.Response,
                         auth: bool,
                         log: Logger,
                         pythonic_mode: bool,
+                        api_method: str
                         ) -> Union[dict, bytes]:
     """Calculate the returned content based upon the results from the call to requests."""
     returned = {}
@@ -277,13 +278,15 @@ def calc_content_return(resp: requests.Response,
         try:
             json_resp = resp.json()
         except JSONDecodeError:
-            # It says JSON in the headers but it came back to us as a binary string.
-            json_resp = loads(resp.content.decode("ascii"))
+            if api_method != "HEAD":
+                # It says JSON in the headers but it came back to us as a binary string.
+                json_resp = loads(resp.content.decode("ascii"))
         finally:
             # Default behavior is to return results as a standardized dictionary.
             returned = Result(status_code=resp.status_code,
                               headers=resp.headers,
-                              body=json_resp
+                              body=json_resp,
+                              head_request=bool(api_method == "HEAD")
                               ).full_return
     elif returned_content_type.startswith("text/plain"):
         # Assuming UTF-8 for now
@@ -431,7 +434,8 @@ def perform_request(endpoint: str = "",  # noqa: C901
                                                                              api.container,
                                                                              api.authenticating,
                                                                              api.log_util,
-                                                                             pythonic
+                                                                             pythonic,
+                                                                             api.method
                                                                              )
                 # Expanded results allow for status code and
                 # header checks on binary returns.
@@ -450,7 +454,7 @@ def perform_request(endpoint: str = "",  # noqa: C901
                     if isinstance(returned, bytes):
                         returned = Result(response.status_code, response.headers, returned)
                     else:
-                        returned = Result(full=returned)
+                        returned = Result(full=returned, head_request=bool(api.method == "HEAD"))
 
             except RegionSelectError as bad_region:
                 # More than likely they tried to autoselect to GovCloud
