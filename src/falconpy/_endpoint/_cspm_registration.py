@@ -1305,6 +1305,22 @@ _cspm_registration_endpoints = [
     ]
   ],
   [
+    "getCloudEventIDs",
+    "GET",
+    "/detects/queries/cloud-events/v1",
+    "Get list of related cloud event LogScale IDs for a given IOA",
+    "cspm_registration",
+    [
+      {
+        "type": "string",
+        "description": "IOA Aggregate Event ID",
+        "name": "id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetConfigurationDetectionIDsV2",
     "GET",
     "/detects/queries/iom/v2",

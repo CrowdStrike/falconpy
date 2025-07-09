@@ -1354,6 +1354,31 @@ class CSPMRegistration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_cloud_event_ids(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get list of related cloud event LogScale IDs for a given IOA.
+
+        Keyword arguments:
+        id -- IOA Aggregate Event ID. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/getCloudEventIDs
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="getCloudEventIDs",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_configuration_detection_ids_v2(self: object,
                                            parameters: dict = None,
                                            **kwargs
@@ -1742,6 +1767,7 @@ class CSPMRegistration(ServiceClass):
     GetBehaviorDetections = get_behavior_detections
     GetConfigurationDetections = get_configuration_detections
     GetConfigurationDetectionEntities = get_configuration_detection_entities
+    getCloudEventIDs = get_cloud_event_ids
     GetConfigurationDetectionIDsV2 = get_configuration_detection_ids_v2
     GetIOAEvents = get_ioa_events
     GetIOAUsers = get_ioa_users

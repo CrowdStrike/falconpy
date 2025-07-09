@@ -113,7 +113,8 @@ class TestCSPMRegistration:
             "UpdateAzure": falcon.update_azure_account(environment="chilly", subscription_id="banana"),
             "ValidateGCPAccount": falcon.validate_gcp_account("whatever_account_id"),
             "ValidateGCPServiceAccount": falcon.validate_gcp_service_account(resources=[{"service_account_id": 1}]),
-            "ValidateGCPServiceAccountToo": falcon.validate_gcp_service_account(service_account_id=1)
+            "ValidateGCPServiceAccountToo": falcon.validate_gcp_service_account(service_account_id=1),
+            "getCloudEventIDs": falcon.get_cloud_event_ids(id="12345678")
         }
         for key in tests:
             if tests[key]["status_code"] != 500:
