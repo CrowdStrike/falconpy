@@ -39,6 +39,7 @@ class TestIntel:
             "mitre_attacks": falcon.PostMitreAttacks(["fancy-bear", "slippy-spider"]),
             "get_mitre_report": falcon.GetMitreReport(actor_id="fancy-bear", format="CSV"),
             "GetMalwareMitreReport": falcon.get_malware_report(id="fancy-bear"),
+            "query_malware_entities": falcon.query_malware_entities(limit=5),
             # "get_vulnerabilities": falcon.get_vulnerabilities(ids="12345678"),
             # "query_vulnerabilities": falcon.query_vulnerabilities()
         }
