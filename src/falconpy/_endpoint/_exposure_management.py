@@ -395,5 +395,106 @@ _exposure_management_endpoints = [
         "in": "query"
       }
     ]
+  ],
+  [
+    "query_external_assets_v2",
+    "GET",
+    "/fem/queries/external-assets/v2",
+    "Get a list of external asset IDs that match the provided filter conditions. Use these IDs with the "
+    "/entities/external-assets/v1 endpoint",
+    "exposure_management",
+    [
+      {
+        "type": "string",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
+        "name": "after",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "number of IDs to return.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Order by fields.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter assets using an FQL query. Common filter options "
+        "include:<ul><li>asset_type:'ip'</li><li>last_seen_timestamp:>'now-7d'</li></ul>\n\t\t\t</br>Available filter "
+        "fields that support exact match: asset_id, asset_type, confidence, connectivity_status, criticality, "
+        "criticality_description, criticality_timestamp, criticality_username, data_providers, discovered_by, "
+        "dns_domain.fqdn, dns_domain.isps, dns_domain.parent_domain, dns_domain.resolved_ips, "
+        "dns_domain.services.applications.category, dns_domain.services.applications.cpe, "
+        "dns_domain.services.applications.name, dns_domain.services.applications.vendor, "
+        "dns_domain.services.applications.version, dns_domain.services.cloud_provider, dns_domain.services.cpes, "
+        "dns_domain.services.hosting_provider, dns_domain.services.last_seen, dns_domain.services.platform_name, "
+        "dns_domain.services.port, dns_domain.services.protocol, dns_domain.services.protocol_port, "
+        "dns_domain.services.status, dns_domain.services.status_code, dns_domain.services.transport, dns_domain.type, "
+        "first_seen, id, internet_exposure, ip.asn, ip.cloud_provider, ip.cloud_vm.description, "
+        "ip.cloud_vm.instance_id, ip.cloud_vm.lifecycle, ip.cloud_vm.mac_address, ip.cloud_vm.owner_id, "
+        "ip.cloud_vm.platform, ip.cloud_vm.private_ip, ip.cloud_vm.public_ip, ip.cloud_vm.region, "
+        "ip.cloud_vm.security_groups, ip.cloud_vm.source, ip.cloud_vm.status, ip.fqdns, ip.ip_address, ip.isp, "
+        "ip.location.area_code, ip.location.city, ip.location.country_code, ip.location.country_name, "
+        "ip.location.postal_code, ip.location.region_code, ip.location.region_name, ip.location.timezone, ip.ptr, "
+        "ip.aid, ip.services.applications.category, ip.services.applications.cpe, ip.services.applications.name, "
+        "ip.services.applications.vendor, ip.services.applications.version, ip.services.cloud_provider, "
+        "ip.services.cpes, ip.services.first_seen, ip.services.last_seen, ip.services.platform_name, ip.services.port, "
+        "ip.services.protocol, ip.services.protocol_port, ip.services.status, ip.services.status_code, "
+        "ip.services.transport, last_seen, manual, perimeter, subsidiaries.id, subsidiaries.name, triage.action, "
+        "triage.assigned_to, triage.status, triage.updated_by, triage.updated_timestamp\n\t\t\t</br>Available filter "
+        "fields that supports wildcard (*): asset_id, asset_type, confidence, connectivity_status, criticality, "
+        "criticality_username, data_providers, discovered_by, dns_domain.fqdn, dns_domain.isps, "
+        "dns_domain.parent_domain, dns_domain.resolved_ips, dns_domain.services.applications.category, "
+        "dns_domain.services.applications.cpe, dns_domain.services.applications.name, "
+        "dns_domain.services.applications.vendor, dns_domain.services.applications.version, "
+        "dns_domain.services.cloud_provider, dns_domain.services.cpes, dns_domain.services.hosting_provider, "
+        "dns_domain.services.id, dns_domain.services.platform_name, dns_domain.services.port, "
+        "dns_domain.services.protocol, dns_domain.services.protocol_port, dns_domain.services.status, "
+        "dns_domain.services.status_code, dns_domain.services.transport, dns_domain.type, id, internet_exposure, "
+        "ip.asn, ip.cloud_vm.instance_id, ip.cloud_vm.lifecycle, ip.cloud_vm.mac_address, ip.cloud_vm.owner_id, "
+        "ip.cloud_vm.platform, ip.cloud_vm.private_ip, ip.cloud_vm.public_ip, ip.cloud_vm.region, "
+        "ip.cloud_vm.security_groups, ip.cloud_vm.source, ip.cloud_vm.status, ip.fqdns, ip.ip_address, ip.isp, "
+        "ip.location.area_code, ip.location.city, ip.location.country_code, ip.location.country_name, "
+        "ip.location.postal_code, ip.location.region_code, ip.location.region_name, ip.location.timezone, ip.ptr, "
+        "ip.aid, ip.services.applications.category, ip.services.applications.cpe, ip.services.applications.name, "
+        "ip.services.applications.vendor, ip.services.applications.version, ip.services.cloud_provider, "
+        "ip.services.cpes, ip.services.platform_name, ip.services.port, ip.services.protocol, "
+        "ip.services.protocol_port, ip.services.status, ip.services.status_code, ip.services.transport, manual, "
+        "perimeter, subsidiaries.id, subsidiaries.name, triage.action, triage.assigned_to, triage.status, "
+        "triage.updated_by\n\t\t\t</br>Available filter fields that supports in ([v1, v2]): asset_id, asset_type, "
+        "confidence, connectivity_status, criticality, criticality_username, data_providers, discovered_by, "
+        "dns_domain.fqdn, dns_domain.isps, dns_domain.parent_domain, dns_domain.services.applications.category, "
+        "dns_domain.services.applications.cpe, dns_domain.services.applications.name, "
+        "dns_domain.services.applications.vendor, dns_domain.services.applications.version, "
+        "dns_domain.services.cloud_provider, dns_domain.services.cpes, dns_domain.services.id, "
+        "dns_domain.services.platform_name, dns_domain.services.port, dns_domain.services.protocol, "
+        "dns_domain.services.protocol_port, dns_domain.services.status, dns_domain.services.status_code, "
+        "dns_domain.services.transport, dns_domain.type, id, internet_exposure, ip.asn, ip.cloud_vm.instance_id, "
+        "ip.cloud_vm.lifecycle, ip.cloud_vm.mac_address, ip.cloud_vm.owner_id, ip.cloud_vm.platform, "
+        "ip.cloud_vm.region, ip.cloud_vm.security_groups, ip.cloud_vm.source, ip.cloud_vm.status, ip.fqdns, ip.isp, "
+        "ip.location.area_code, ip.location.city, ip.location.country_code, ip.location.country_name, "
+        "ip.location.postal_code, ip.location.region_code, ip.location.region_name, ip.location.timezone, ip.ptr, "
+        "ip.aid, ip.services.applications.category, ip.services.applications.cpe, ip.services.applications.name, "
+        "ip.services.applications.vendor, ip.services.applications.version, ip.services.cloud_provider, "
+        "ip.services.cpes, ip.services.platform_name, ip.services.port, ip.services.protocol, "
+        "ip.services.protocol_port, ip.services.status, ip.services.status_code, ip.services.transport, manual, "
+        "perimeter, subsidiaries.id, subsidiaries.name, triage.action, triage.assigned_to, triage.status, "
+        "triage.updated_by\n\t\t\t</br>Available filter fields that supports range comparisons (>, <, >=, <=): "
+        "criticality_timestamp, dns_domain.resolved_ips, dns_domain.services.first_seen, dns_domain.services.last_seen, "
+        " dns_domain.services.port, dns_domain.services.status_code, first_seen, ip.cloud_vm.private_ip, "
+        "ip.cloud_vm.public_ip, ip.ip_address, ip.services.first_seen, ip.services.last_seen, ip.services.port, "
+        "ip.services.status_code, last_seen, triage.updated_timestamp\n\t\t\t</br>All filter fields and operations "
+        "supports negation (!).",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
   ]
 ]

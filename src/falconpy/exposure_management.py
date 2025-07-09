@@ -444,7 +444,7 @@ class ExposureManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_assets(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def query_assets_v1(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a list of external asset IDs that match the provided filter conditions.
 
         Keyword arguments:
@@ -471,6 +471,166 @@ class ExposureManagement(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_assets(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get a list of external asset IDs that match the provided filter conditions.
+
+        Keyword arguments:
+        offset -- Starting index of result set from which to return IDs. Integer.
+        limit -- Number of IDs to return. Integer.
+        sort -- Order by fields. String.
+        filter -- Filter assets using an FQL query. String.
+                  Available filter fields that support exact match:
+                    asset_id                                        ip.cloud_vm.region
+                    asset_type                                      ip.cloud_vm.security_groups
+                    confidence                                      ip.cloud_vm.source
+                    connectivity_status                             ip.cloud_vm.status
+                    criticality                                     ip.fqdns
+                    criticality_description                         ip.ip_address
+                    criticality_timestamp                           ip.isp
+                    criticality_username                            ip.location.area_code
+                    data_providers                                  ip.location.city
+                    discovered_by                                   ip.location.country_code
+                    dns_domain.fqdn                                 ip.location.country_name
+                    dns_domain.isps                                 ip.location.postal_code
+                    dns_domain.parent_domain                        ip.location.region_code
+                    dns_domain.resolved_ips                         ip.location.region_name
+                    dns_domain.services.applications.category       ip.location.timezone
+                    dns_domain.services.applications.cpe            ip.ptr
+                    dns_domain.services.applications.name           ip.aid
+                    dns_domain.services.applications.vendor         ip.services.applications.category
+                    dns_domain.services.applications.version        ip.services.applications.cpe
+                    dns_domain.services.cloud_provider              ip.services.applications.name
+                    dns_domain.services.cpes                        ip.services.applications.vendor
+                    dns_domain.services.hosting_provider            ip.services.applications.version
+                    dns_domain.services.last_seen                   ip.services.cloud_provider
+                    dns_domain.services.platform_name               ip.services.cpes
+                    dns_domain.services.port                        ip.services.first_seen
+                    dns_domain.services.protocol                    ip.services.last_seen
+                    dns_domain.services.protocol_port               ip.services.platform_name
+                    dns_domain.services.status                      ip.services.port
+                    dns_domain.services.status_code                 ip.services.protocol
+                    dns_domain.services.transport                   ip.services.protocol_port
+                    dns_domain.type                                 ip.services.status
+                    first_seen                                      ip.services.status_code
+                    id                                              ip.services.transport
+                    internet_exposure                               last_seen
+                    ip.asn                                          manual
+                    ip.cloud_provider                               perimeter
+                    ip.cloud_vm.description                         subsidiaries.id
+                    ip.cloud_vm.instance_id                         subsidiaries.name
+                    ip.cloud_vm.lifecycle                           triage.action
+                    ip.cloud_vm.mac_address                         triage.assigned_to
+                    ip.cloud_vm.owner_id                            triage.status
+                    ip.cloud_vm.platform                            triage.updated_by
+                    ip.cloud_vm.private_ip                          triage.updated_timestamp
+                    ip.cloud_vm.public_ip
+                  Available filter fields that supports wildcard (*):
+                    asset_id                                        ip.cloud_vm.security_groups
+                    asset_type                                      ip.cloud_vm.source
+                    confidence                                      ip.cloud_vm.status
+                    connectivity_status                             ip.fqdns
+                    criticality                                     ip.ip_address
+                    criticality_username                            ip.isp
+                    data_providers                                  ip.location.area_code
+                    discovered_by                                   ip.location.city
+                    dns_domain.fqdn                                 ip.location.country_code
+                    dns_domain.isps                                 ip.location.country_name
+                    dns_domain.parent_domain                        ip.location.postal_code
+                    dns_domain.resolved_ips                         ip.location.region_code
+                    dns_domain.services.applications.category       ip.location.region_name
+                    dns_domain.services.applications.cpe            ip.location.timezone
+                    dns_domain.services.applications.name           ip.ptr
+                    dns_domain.services.applications.vendor         ip.aid
+                    dns_domain.services.applications.version        ip.services.applications.category
+                    dns_domain.services.cloud_provider              ip.services.applications.cpe
+                    dns_domain.services.cpes                        ip.services.applications.name
+                    dns_domain.services.hosting_provider            ip.services.applications.vendor
+                    dns_domain.services.id                          ip.services.applications.version
+                    dns_domain.services.platform_name               ip.services.cloud_provider
+                    dns_domain.services.port                        ip.services.cpes
+                    dns_domain.services.protocol                    ip.services.platform_name
+                    dns_domain.services.protocol_port               ip.services.port
+                    dns_domain.services.status                      ip.services.protocol
+                    dns_domain.services.status_code                 ip.services.protocol_port
+                    dns_domain.services.transport                   ip.services.status
+                    dns_domain.type                                 ip.services.status_code
+                    id                                              ip.services.transport
+                    internet_exposure                               manual
+                    ip.asn                                          perimeter
+                    ip.cloud_vm.instance_id                         subsidiaries.id
+                    ip.cloud_vm.lifecycle                           subsidiaries.name
+                    ip.cloud_vm.mac_address                         triage.action
+                    ip.cloud_vm.owner_id                            triage.assigned_to
+                    ip.cloud_vm.platform                            triage.status
+                    ip.cloud_vm.private_ip                          triage.updated_by
+                    ip.cloud_vm.public_ip                           ip.cloud_vm.region
+                  Available filter fields that supports in ([v1, v2]):
+                    asset_id                                        ip.cloud_vm.source
+                    asset_type                                      ip.cloud_vm.status
+                    confidence                                      ip.fqdns
+                    connectivity_status                             ip.isp
+                    criticality                                     ip.location.area_code
+                    criticality_username                            ip.location.city
+                    data_providers                                  ip.location.country_code
+                    discovered_by                                   ip.location.country_name
+                    dns_domain.fqdn                                 ip.location.postal_code
+                    dns_domain.isps                                 ip.location.region_code
+                    dns_domain.parent_domain                        ip.location.region_name
+                    dns_domain.services.applications.category       ip.location.timezone
+                    dns_domain.services.applications.cpe            ip.ptr
+                    dns_domain.services.applications.name           ip.aid
+                    dns_domain.services.applications.vendor         ip.services.applications.category
+                    dns_domain.services.applications.version        ip.services.applications.cpe
+                    dns_domain.services.cloud_provider              ip.services.applications.name
+                    dns_domain.services.cpes                        ip.services.applications.vendor
+                    dns_domain.services.id                          ip.services.applications.version
+                    dns_domain.services.platform_name               ip.services.cloud_provider
+                    dns_domain.services.port                        ip.services.cpes
+                    dns_domain.services.protocol                    ip.services.platform_name
+                    dns_domain.services.protocol_port               ip.services.port
+                    dns_domain.services.status                      ip.services.protocol
+                    dns_domain.services.status_code                 ip.services.protocol_port
+                    dns_domain.services.transport                   ip.services.status
+                    dns_domain.type                                 ip.services.status_code
+                    id                                              ip.services.transport
+                    internet_exposure                               manual
+                    ip.asn                                          perimeter
+                    ip.cloud_vm.instance_id                         subsidiaries.id
+                    ip.cloud_vm.lifecycle                           subsidiaries.name
+                    ip.cloud_vm.mac_address                         triage.action
+                    ip.cloud_vm.owner_id                            triage.assigned_to
+                    ip.cloud_vm.platform                            triage.status
+                    ip.cloud_vm.region                              triage.updated_by
+                    ip.cloud_vm.security_groups
+                  Available filter fields that supports range comparisons (>, <, >=, <=):
+                    criticality_timestamp                           ip.cloud_vm.public_ip
+                    dns_domain.resolved_ips                         ip.ip_address
+                    dns_domain.services.first_seen                  ip.services.first_seen
+                    dns_domain.services.last_seen                   ip.services.last_seen
+                    dns_domain.services.port                        ip.services.port
+                    dns_domain.services.status_code                 ip.services.status_code
+                    first_seen                                      last_seen
+                    ip.cloud_vm.private_ip                          triage.updated_timestamp
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/exposure-management/query-external-assets-v2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="query_external_assets_v2",
+            keywords=kwargs,
+            params=parameters
+            )
+
     # These method names align to the operation IDs in the API but
     # does not conform to snake_case / PEP8 and are defined here
     # for backwards compatibility / ease of use purposes
@@ -482,4 +642,6 @@ class ExposureManagement(ServiceClass):
     get_external_assets = get_assets
     delete_external_assets = delete_assets
     patch_external_assets = update_assets
+    query_external_assets_v1 = query_assets_v1
     query_external_assets = query_assets
+    query_external_assets_v2 = query_assets

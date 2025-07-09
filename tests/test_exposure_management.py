@@ -55,6 +55,7 @@ class TestExposureManagement:
             "blob_preview_external_assets": falcon.preview_assets(assetId="whatever", hash="whatever"),
             "get_external_assets": falcon.get_assets("123456"),
             "patch_external_assets": falcon.update_assets(cid="whatever", action="whatever"),
+            "query_external_assets_v1": falcon.query_assets_v1(),
             "query_external_assets": falcon.query_assets(),
             "delete_assets": falcon.delete_assets(ids="12345678", description="unit_testing"),
             "combined_ecosystem_subsidiaries": falcon.query_combined_ecosystem_subsidiaries(limit=1, version_id="1"),
