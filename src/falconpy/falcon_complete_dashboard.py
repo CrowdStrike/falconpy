@@ -1082,11 +1082,11 @@ class CompleteDashboard(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def query_alert_ids_by_filter(self: object,
-                                  parameters: dict = None,
-                                  **kwargs
-                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Retrieve allowlist tickets that match the provided filter criteria with scrolling enabled.
+    def query_alert_ids_by_filter_v1(self: object,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve Alerts Ids for epp that match the provided FQL filter criteria with scrolling enabled.
 
         Keyword arguments:
         filter -- Optional filter and sort criteria in the form of an FQL query. String.
@@ -1110,6 +1110,39 @@ class CompleteDashboard(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="QueryAlertIdsByFilter",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_alert_ids_by_filter(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve Alerts Ids for epp, idp and ngsiem that match the provided FQL filter criteria with scrolling enabled.
+
+        Keyword arguments:
+        filter -- Optional filter and sort criteria in the form of an FQL query. String.
+        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. String.
+                  Use with the limit parameter to manage pagination of results.
+        parameters - full parameters payload, not required if using other keywords.
+        sort -- The property to sort on, followed by a dot `.`, followed by the sort direction.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/Falcon%20Complete%20Dashboard/QueryAlertIdsByFilterV2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryAlertIdsByFilterV2",
             keywords=kwargs,
             params=parameters
             )
@@ -1152,7 +1185,7 @@ class CompleteDashboard(ServiceClass):
                                 parameters: dict = None,
                                 **kwargs
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Retrieve block listtickets that match the provided filter criteria with scrolling enabled.
+        """Retrieve block list tickets that match the provided filter criteria with scrolling enabled.
 
         Keyword arguments:
         filter -- Optional filter and sort criteria in the form of an FQL query. String.
@@ -1365,7 +1398,9 @@ class CompleteDashboard(ServiceClass):
     AggregateSensorUpdatePolicy = aggregate_sensor_update_policy
     AggregateSupportIssues = aggregate_support_issues
     AggregateTotalDeviceCounts = aggregate_total_device_counts
-    QueryAlertIdsByFilter = query_alert_ids_by_filter
+    QueryAlertIdsByFilterV1 = query_alert_ids_by_filter_v1
+    QueryAlertIdsByFilter = query_alert_ids_by_filter_v1
+    QueryAlertIdsByFilterV2 = query_alert_ids_by_filter
     QueryAllowListFilter = query_allow_list_filter
     QueryBlockListFilter = query_block_list_filter
     QueryDetectionIdsByFilter = query_detection_ids_by_filter
