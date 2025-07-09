@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import generic_payload_list
@@ -449,6 +450,37 @@ class Intel(ServiceClass):
             operation_id="GetIntelReportPDF",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_malware_entities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get malware entities that match provided FQL filters.
+
+        Keyword arguments:
+        offset -- Set the starting row number to return malware IDs from. Defaults to 0. Integer.
+        limit -- Set the number of malware IDs to return. The value must be between 1 and 5000. Integer.
+        sort -- Order fields in ascending or descending order. String.
+                Ex: created_date|asc.
+        filter -- Filter your query by specifying FQL filter parameters. String.
+        q -- Perform a generic substring search across all fields. String.
+        fields -- The fields to return. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intel/QueryMalwareEntities
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QueryMalwareEntities",
+            keywords=kwargs,
+            params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -958,6 +990,7 @@ class Intel(ServiceClass):
     PostMitreAttacks = mitre_attacks
     GetMalwareEntities = get_malware_entities
     GetIntelReportPDF = get_report_pdf
+    QueryMalwareEntities = query_malware_entities
     GetIntelReportEntities = get_report_entities
     GetIntelRuleFile = get_rule_file
     GetLatestIntelRuleFile = get_latest_rule_file

@@ -156,6 +156,55 @@ _intel_endpoints = [
     ]
   ],
   [
+    "QueryMalwareEntities",
+    "GET",
+    "/intel/combined/malware/v1",
+    "Get malware entities that match provided FQL filters.",
+    "intel",
+    [
+      {
+        "type": "integer",
+        "description": "Set the starting row number to return malware IDs from. Defaults to 0.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Set the number of malware IDs to return. The value must be between 1 and 5000.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Order fields in ascending or descending order.\n\nEx: created_date|asc.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter your query by specifying FQL filter parameters.",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Perform a generic substring search across all fields.",
+        "name": "q",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The fields to return",
+        "name": "fields",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "QueryIntelReportEntities",
     "GET",
     "/intel/combined/reports/v1",
