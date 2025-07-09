@@ -41,7 +41,7 @@ _falcon_complete_dashboard_endpoints = [
     "AggregateAlerts",
     "POST",
     "/falcon-complete-dashboards/aggregates/alerts/GET/v1",
-    "Retrieve aggregate alerts values based on the matched filter",
+    "Retrieve aggregate epp alerts values based on the matched filter",
     "falcon_complete_dashboard",
     [
       {
