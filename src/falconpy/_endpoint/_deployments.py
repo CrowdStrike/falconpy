@@ -177,6 +177,27 @@ _deployments_endpoints = [
     ]
   ],
   [
+    "GetEntityIDsByQueryPOSTV2",
+    "POST",
+    "/deployment-coordinator/entities/release-notes/GET/v2",
+    "returns the release notes for the IDs in the request with EA and GA dates in ISO 8601 format",
+    "deployments",
+    [
+      {
+        "type": "string",
+        "description": "authorization header",
+        "name": "Authorization",
+        "in": "header",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "QueryReleaseNotesV1",
     "GET",
     "/deployment-coordinator/queries/release-notes/v1",

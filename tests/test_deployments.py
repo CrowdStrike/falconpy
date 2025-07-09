@@ -26,7 +26,8 @@ class TestDeployments:
             "GetDeploymentsExternalV1": falcon.get_deployments(ids="12345678"),
             "CombinedReleasesV1Mixin0": falcon.query_releases(limit=1),
             "CombinedReleaseNotesV1": falcon.query_release_notes(limit=1),
-            "GetEntityIDsByQueryPOST": falcon.get_release_notes(ids="12345678"),
+            "GetEntityIDsByQueryPOST": falcon.get_release_notes_v1(ids="12345678"),
+            "GetEntityIDsByQueryPOSTV2": falcon.get_release_notes(ids="12345678"),
             "QueryReleaseNotesV1": falcon.query_release_note_ids(limit=1),
         }
         for key in tests:
