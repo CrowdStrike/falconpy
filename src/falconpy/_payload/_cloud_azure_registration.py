@@ -39,6 +39,95 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, List, Union
 
 
+def cloud_azure_registration_create_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
+    """Craft a properly formatted payload to create an Azure tenant registration.
+
+    {
+        "resource": {
+            "account_type": "string",
+            "additional_features": [
+                {
+                    "feature": "string",
+                    "product": "string",
+                    "subscription_ids": [
+                        "string"
+                    ]
+                }
+            ],
+            "additional_properties": {},
+            "api_client_key_id": "string",
+            "api_client_key_type": "string",
+            "cs_infra_region": "string",
+            "cs_infra_subscription_id": "string",
+            "deployment_method": "string",
+            "deployment_stack_host_id": "string",
+            "deployment_stack_name": "string",
+            "dspm_regions": [
+                "string"
+            ],
+            "environment": "string",
+            "event_hub_settings": [
+                {
+                    "cid": "string",
+                    "consumer_group": "string",
+                    "event_hub_id": "string",
+                    "purpose": "string",
+                    "tenant_id": "string"
+                }
+            ],
+            "management_group_ids": [
+                "string"
+            ],
+            "microsoft_graph_permission_ids": [
+                "string"
+            ],
+            "microsoft_graph_permission_ids_readonly": true,
+            "products": [
+                {
+                    "features": [
+                        "string"
+                    ],
+                    "product": "string"
+                }
+            ],
+            "resource_name_prefix": "string",
+            "resource_name_suffix": "string",
+            "status": "string",
+            "subscription_ids": [
+                "string"
+            ],
+            "tags": {
+                "additionalProp1": "string",
+                "additionalProp2": "string",
+                "additionalProp3": "string"
+            },
+            "template_version": "string",
+            "tenant_id": "string"
+        }
+    }
+    """
+    returned_payload = {}
+    returned_payload["resource"] = {}
+    keys = ["account_type", "additional_features", "additional_properties", "api_client_key_id",
+            "api_client_key_type", "cs_infra_region", "cs_infra_subscription_id", "deployment_method",
+            "deployment_stack_host_id", "deployment_stack_name", "dspm_regions", "environment",
+            "event_hub_settings", "management_group_ids", "microsoft_graph_permission_ids",
+            "microsoft_graph_permissions_ids_readonly", "products", "resource_name_prefix",
+            "resource_name_suffix", "status", "subscription_ids", "tags", "template_version", "tenant_id"
+            ]
+    simple_list_keys = ["dspm_regions", "management_group_ids", "microsoft_graph_permission_ids",
+                        "subscription_ids"
+                        ]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            value = passed_keywords.get(key, None)
+            if isinstance(value, str) and key in simple_list_keys:
+                value = value.split(",")
+            returned_payload["resource"][key] = value
+
+    return returned_payload
+
+
 def cloud_azure_registration_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
     """Create a properly formatted payload for Azure registration script download.
 

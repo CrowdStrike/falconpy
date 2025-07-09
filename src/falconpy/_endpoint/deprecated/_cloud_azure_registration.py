@@ -38,6 +38,70 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_azure_registration_endpoints = [
   [
+    "cloud-registration-azure-get-registration",
+    "GET",
+    "/cloud-security-registration-azure/entities/registrations/v1",
+    "Retrieve existing Azure registration for a tenant.",
+    "cloud_azure_registration",
+    [
+      {
+        "type": "string",
+        "description": "Tenant ID",
+        "name": "tenant_id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "cloud-registration-azure-create-registration",
+    "POST",
+    "/cloud-security-registration-azure/entities/registrations/v1",
+    "Create an Azure registration for a tenant.",
+    "cloud_azure_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "cloud-registration-azure-update-registration",
+    "PATCH",
+    "/cloud-security-registration-azure/entities/registrations/v1",
+    "Update an existing Azure registration for a tenant.",
+    "cloud_azure_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "cloud-registration-azure-delete-registration",
+    "DELETE",
+    "/cloud-security-registration-azure/entities/registrations/v1",
+    "Deletes existing Azure registrations.",
+    "cloud_azure_registration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Azure tenant IDs",
+        "name": "tenant_ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "cloud-registration-azure-download-script",
     "POST",
     "/cloud-security-registration-azure/entities/scripts/v1",
