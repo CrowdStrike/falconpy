@@ -144,7 +144,7 @@ class Deployments(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_release_notes(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_release_notes_v1(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the release notes for the IDs in the request.
 
         Keyword arguments:
@@ -173,6 +173,39 @@ class Deployments(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetEntityIDsByQueryPOST",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_release_notes(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Return the release notes for the IDs in the request.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required when using other keywords.
+                {
+                    "IDs": [
+                        "string"
+                    ]
+                }
+        ids -- Release note IDs to be retrieve. String or list of strings.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/release-notes/GetEntityIDsByQueryPOSTV2
+        """
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+            body["IDs"] = body["ids"]
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetEntityIDsByQueryPOSTV2",
             body=body
             )
 
@@ -208,5 +241,7 @@ class Deployments(ServiceClass):
     CombinedReleaseNotesV1 = query_release_notes
     GetDeploymentsExternalV1 = get_deployments
     CombinedReleasesV1Mixin0 = query_releases
-    GetEntityIDsByQueryPOST = get_release_notes
+    GetEntityIDsByQueryPOST = get_release_notes_v1
+    GetEntityIDsByQueryPOSTV1 = get_release_notes_v1
+    GetEntityIDsByQueryPOSTV2 = get_release_notes
     QueryReleaseNotesV1 = query_release_note_ids
