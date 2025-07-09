@@ -38,6 +38,86 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_azure_registration_endpoints = [
   [
+    "cloud_registration_azure_get_registration",
+    "GET",
+    "/cloud-security-registration-azure/entities/registrations/v1",
+    "Retrieve existing Azure registration for a tenant.",
+    "cloud_azure_registration",
+    [
+      {
+        "type": "string",
+        "description": "Tenant ID",
+        "name": "tenant_id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "cloud_registration_azure_create_registration",
+    "POST",
+    "/cloud-security-registration-azure/entities/registrations/v1",
+    "Create an Azure registration for a tenant.",
+    "cloud_azure_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "cloud_registration_azure_update_registration",
+    "PATCH",
+    "/cloud-security-registration-azure/entities/registrations/v1",
+    "Update an existing Azure registration for a tenant.",
+    "cloud_azure_registration",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "cloud_registration_azure_delete_registration",
+    "DELETE",
+    "/cloud-security-registration-azure/entities/registrations/v1",
+    "Deletes existing Azure registrations.",
+    "cloud_azure_registration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Azure tenant IDs",
+        "name": "tenant_ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "download_azure_script",
+    "GET",
+    "/cloud-security-registration-azure/entities/scripts/v1",
+    "Download Azure deployment script (Terraform or Bicep)",
+    "cloud_azure_registration",
+    [
+      {
+        "type": "string",
+        "description": "Azure tenant ID",
+        "name": "tenant_id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "cloud_registration_azure_download_script",
     "POST",
     "/cloud-security-registration-azure/entities/scripts/v1",

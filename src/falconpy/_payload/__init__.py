@@ -52,7 +52,10 @@ from ._recon import (
     )
 from ._malquery import malquery_exact_search_payload, malquery_hunt_payload, malquery_fuzzy_payload
 from ._cloud_aws_registration import cloud_aws_registration_payload
-from ._cloud_azure_registration import cloud_azure_registration_payload
+from ._cloud_azure_registration import (
+    cloud_azure_registration_payload,
+    cloud_azure_registration_create_payload
+    )
 from ._cloud_oci_registration import (
     cloud_oci_refresh_payload,
     cloud_oci_validate_payload,
@@ -175,5 +178,5 @@ __all__ = [
     "content_update_policy_action_payload", "content_update_policy_payload", "device_classes_policy_payload",
     "device_policy_bluetooth_config_payload", "device_control_policy_payload_v2", "combined_alerts_payload",
     "correlation_rules_export_payload", "fem_add_asset_payload", "export_job_payload",
-    "retrieve_relay_node_payload", "inventory_scan_payload"
+    "retrieve_relay_node_payload", "inventory_scan_payload", "cloud_azure_registration_create_payload"
 ]

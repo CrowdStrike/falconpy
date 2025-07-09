@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request
-from ._payload import cloud_azure_registration_payload
+from ._payload import cloud_azure_registration_payload, cloud_azure_registration_create_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._cloud_azure_registration import _cloud_azure_registration_endpoints as Endpoints
@@ -55,6 +55,316 @@ class CloudAzureRegistration(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_registration(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve existing Azure registration for a tenant.
+
+        Keyword arguments:
+        tenant_id -- Tenant ID to retrieve. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /cloud-azure-registration/cloud-registration-azure-get-registration
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_get_registration",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_registration(self: object,
+                            body: dict = None,
+                            **kwargs
+                            ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create an Azure registration for a tenant.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON dictionary. Not required if using other keywords.
+                {
+                    "resource": {
+                        "account_type": "string",
+                        "additional_features": [
+                            {
+                                "feature": "string",
+                                "product": "string",
+                                "subscription_ids": [
+                                    "string"
+                                ]
+                            }
+                        ],
+                        "additional_properties": {},
+                        "api_client_key_id": "string",
+                        "api_client_key_type": "string",
+                        "cs_infra_region": "string",
+                        "cs_infra_subscription_id": "string",
+                        "deployment_method": "string",
+                        "deployment_stack_host_id": "string",
+                        "deployment_stack_name": "string",
+                        "dspm_regions": [
+                            "string"
+                        ],
+                        "environment": "string",
+                        "event_hub_settings": [
+                            {
+                                "cid": "string",
+                                "consumer_group": "string",
+                                "event_hub_id": "string",
+                                "purpose": "string",
+                                "tenant_id": "string"
+                            }
+                        ],
+                        "management_group_ids": [
+                            "string"
+                        ],
+                        "microsoft_graph_permission_ids": [
+                            "string"
+                        ],
+                        "microsoft_graph_permission_ids_readonly": true,
+                        "products": [
+                        {
+                            "features": [
+                                "string"
+                            ],
+                            "product": "string"
+                        }
+                        ],
+                        "resource_name_prefix": "string",
+                        "resource_name_suffix": "string",
+                        "status": "string",
+                        "subscription_ids": [
+                            "string"
+                        ],
+                        "tags": {
+                            "additionalProp1": "string",
+                            "additionalProp2": "string",
+                            "additionalProp3": "string"
+                        },
+                        "template_version": "string",
+                        "tenant_id": "string"
+                    }
+                }
+            account_type -- Azure account type. String.
+            additional_features -- Additional features. List of dictionaries.
+            additional_properties -- Additional properties. Dictionary.
+            api_client_key_id -- Azure API client key ID. String.
+            api_client_key_type -- Azure API client key type. String.
+            cs_infra_region -- CrowdStrike infrastructure region. String.
+            cs_infra_subscription_id -- CrowdStrike infrastructure subscription ID. String.
+            deployment_method -- Deployment method. String.
+            deployment_stack_host_id -- Azure deployment stack host ID. String.
+            deployment_stack_name -- Azure deployment stack name. String.
+            dspm_regions -- DSPM regions. String or list of strings.
+            environment -- Azure environment. String.
+            event_hub_settings -- Azure Event Hub settings. List of dictionaries.
+            management_group_ids -- Azure management group IDs. String or list of strings.
+            microsoft_graph_permission_ids -- Microsoft Graph permission IDs. String or list of strings.
+            microsoft_graph_permissions_ids_readonly -- Flag indicating if Microsoft Graph permission IDs
+                                                        are read-only. Boolean.
+            products -- Products. List of dictionaries.
+            resource_name_prefix -- Resource naming prefix. String.
+            resource_name_suffix -- Resource naming suffix. String.
+            status -- Registration status. String.
+            subscription_ids -- Azure subscription IDs. String or list of strings.
+            tags -- Additional tags. Dictionary.
+            template_version -- Deployment template version. String.
+            tenant_id -- Azure tenant ID. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /cloud-azure-registration/cloud-registration-azure-create-registration
+        """
+        if not body:
+            body = cloud_azure_registration_create_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_create_registration",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_registration(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update an existing Azure registration for a tenant.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON dictionary. Not required if using other keywords.
+                {
+                    "resource": {
+                        "account_type": "string",
+                        "additional_features": [
+                            {
+                                "feature": "string",
+                                "product": "string",
+                                "subscription_ids": [
+                                    "string"
+                                ]
+                            }
+                        ],
+                        "additional_properties": {},
+                        "api_client_key_id": "string",
+                        "api_client_key_type": "string",
+                        "cs_infra_region": "string",
+                        "cs_infra_subscription_id": "string",
+                        "deployment_method": "string",
+                        "deployment_stack_host_id": "string",
+                        "deployment_stack_name": "string",
+                        "dspm_regions": [
+                            "string"
+                        ],
+                        "environment": "string",
+                        "event_hub_settings": [
+                            {
+                                "cid": "string",
+                                "consumer_group": "string",
+                                "event_hub_id": "string",
+                                "purpose": "string",
+                                "tenant_id": "string"
+                            }
+                        ],
+                        "management_group_ids": [
+                            "string"
+                        ],
+                        "microsoft_graph_permission_ids": [
+                            "string"
+                        ],
+                        "microsoft_graph_permission_ids_readonly": true,
+                        "products": [
+                            {
+                                "features": [
+                                    "string"
+                                ],
+                                "product": "string"
+                            }
+                        ],
+                        "resource_name_prefix": "string",
+                        "resource_name_suffix": "string",
+                        "status": "string",
+                        "subscription_ids": [
+                            "string"
+                        ],
+                        "tags": {
+                            "additionalProp1": "string",
+                            "additionalProp2": "string",
+                            "additionalProp3": "string"
+                        },
+                        "template_version": "string",
+                        "tenant_id": "string"
+                    }
+                }
+            account_type -- Azure account type. String.
+            additional_features -- Additional features. List of dictionaries.
+            additional_properties -- Additional properties. Dictionary.
+            api_client_key_id -- Azure API client key ID. String.
+            api_client_key_type -- Azure API client key type. String.
+            cs_infra_region -- CrowdStrike infrastructure region. String.
+            cs_infra_subscription_id -- CrowdStrike infrastructure subscription ID. String.
+            deployment_method -- Deployment method. String.
+            deployment_stack_host_id -- Azure deployment stack host ID. String.
+            deployment_stack_name -- Azure deployment stack name. String.
+            dspm_regions -- DSPM regions. String or list of strings.
+            environment -- Azure environment. String.
+            event_hub_settings -- Azure Event Hub settings. List of dictionaries.
+            management_group_ids -- Azure management group IDs. String or list of strings.
+            microsoft_graph_permission_ids -- Microsoft Graph permission IDs. String or list of strings.
+            microsoft_graph_permissions_ids_readonly -- Flag indicating if Microsoft Graph permission IDs
+                                                        are read-only. Boolean.
+            products -- Products. List of dictionaries.
+            resource_name_prefix -- Resource naming prefix. String.
+            resource_name_suffix -- Resource naming suffix. String.
+            status -- Registration status. String.
+            subscription_ids -- Azure subscription IDs. String or list of strings.
+            tags -- Additional tags. Dictionary.
+            template_version -- Deployment template version. String.
+            tenant_id -- Azure tenant ID. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /cloud-azure-registration/cloud-registration-azure-delete-registration
+        """
+        if not body:
+            body = cloud_azure_registration_create_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_update_registration",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_registration(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete existing Azure registrations.
+
+        Keyword arguments:
+        tenant_ids -- Azure tenant IDs to be removed. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /cloud-azure-registration/cloud-registration-azure-delete-registration
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_delete_registration",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def deployment_script(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Download Azure deployment script (Terraform or Bicep).
+
+        Keyword arguments:
+        tenant_id -- Azure tenant ID to retrieve deployment scripts for. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/download_azure_script
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="download_azure_script",
+            keywords=kwargs,
+            params=parameters
+            )
 
     @force_default(defaults=["body"], default_types=["dict"])
     def download_script(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
@@ -91,4 +401,9 @@ class CloudAzureRegistration(ServiceClass):
             body=body
             )
 
+    cloud_registration_azure_get_registration = get_registration
+    cloud_registration_azure_create_registration = create_registration
+    cloud_registration_azure_update_registration = update_registration
+    cloud_registration_azure_delete_registration = delete_registration
+    download_azure_script = deployment_script
     cloud_registration_azure_download_script = download_script
