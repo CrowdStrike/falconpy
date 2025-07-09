@@ -17,10 +17,14 @@ AllowedResponses = [200, 403, 429]
 
 
 class TestFalconCompleteDashboard:
-    def ServiceFCD_QueryAlertIdsByFilter(self):
+    def ServiceFCD_QueryAlertIdsByFilter(self, ver: int = 1):
         returned = False
-        if falcon.QueryAlertIdsByFilter()["status_code"] in AllowedResponses:
-            returned = True
+        if ver == 1:
+            if falcon.QueryAlertIdsByFilterV1()["status_code"] in AllowedResponses:
+                returned = True
+        else:
+            if falcon.QueryAlertIdsByFilterV2()["status_code"] in AllowedResponses:
+                returned = True
 
         return returned
 
@@ -99,6 +103,9 @@ class TestFalconCompleteDashboard:
 
     def test_QueryAlertIdsByFilter(self):
         assert self.ServiceFCD_QueryAlertIdsByFilter() is True
+
+    def test_QueryAlertIdsByFilterV2(self):
+        assert self.ServiceFCD_QueryAlertIdsByFilter(2) is True
 
     def test_QueryAllowListFilter(self):
         assert self.ServiceFCD_QueryAllowListFilter() is True

@@ -209,7 +209,43 @@ _falcon_complete_dashboard_endpoints = [
     "QueryAlertIdsByFilter",
     "GET",
     "/falcon-complete-dashboards/queries/alerts/v1",
-    "Retrieve Alerts Ids that match the provided FQL filter criteria with scrolling enabled",
+    "Retrieve Alerts Ids for epp that match the provided FQL filter criteria with scrolling enabled",
+    "falcon_complete_dashboard",
+    [
+      {
+        "type": "integer",
+        "description": "The maximum records to return. [1-500]",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Starting index of overall result set from which to return ids.",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "QueryAlertIdsByFilterV2",
+    "GET",
+    "/falcon-complete-dashboards/queries/alerts/v2",
+    "Retrieve Alerts Ids for epp, idp and ngsiem that match the provided FQL filter criteria with scrolling enabled",
     "falcon_complete_dashboard",
     [
       {
