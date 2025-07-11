@@ -813,6 +813,77 @@ _cspm_registration_endpoints = [
     ]
   ],
   [
+    "GetCSPMGCPAccount",
+    "GET",
+    "/cloud-connect-cspm-gcp/entities/account/v1",
+    "Returns information about the current status of an GCP account.",
+    "cspm_registration",
+    [
+      {
+        "enum": [
+          "Folder",
+          "Organization",
+          "Project"
+        ],
+        "type": "string",
+        "description": "GCP Hierarchy Parent Type, organization/folder/project",
+        "name": "parent_type",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Hierarchical Resource IDs of accounts",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "dry",
+          "full"
+        ],
+        "type": "string",
+        "description": "Type of scan, dry or full, to perform on selected accounts",
+        "name": "scan-type",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "operational",
+          "provisioned"
+        ],
+        "type": "string",
+        "description": "Account status to filter results by.",
+        "name": "status",
+        "in": "query"
+      },
+      {
+        "maxLength": 3,
+        "minLength": 1,
+        "type": "integer",
+        "default": 100,
+        "description": "The maximum records to return. Defaults to 100.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Order fields in ascending or descending order. Ex: parent_type|asc.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "CreateCSPMGCPAccount",
     "POST",
     "/cloud-connect-cspm-gcp/entities/account/v1",
