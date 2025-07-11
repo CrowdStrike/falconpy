@@ -88,7 +88,8 @@ class BaseServiceClass(ABC):
         self._log: Optional[Union[Logger, bool]] = None
         if kwargs.get("debug", False):
             # Allow a Service Class to enable logging individually.
-            self._log: Logger = getLogger(__name__)
+            _log_target = kwargs.get("debug", False)
+            self._log: Logger = _log_target if isinstance(_log_target, Logger) else getLogger(__name__)
         if kwargs.get("debug", None) is False:
             # Allow a Service Class to disable logging individually.
             self._log: bool = False

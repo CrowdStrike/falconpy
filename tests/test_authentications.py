@@ -1,5 +1,6 @@
 # test_authentications.py
 # Tests different service class authentication styles
+import logging
 import os
 import sys
 import pytest
@@ -348,3 +349,8 @@ class TestAuthentications:
             except InvalidCredentialFormat:
                 _success = True
         assert _success
+
+    def test_named_log_target(self):
+        named_log = logging.getLogger("named_target")
+        test_object = Hosts(debug=named_log, pythonic=True, access_token=auth.authorization.token_value, base_url=auth.authorization.base_url)
+        assert bool(test_object.query_devices_by_filter_scroll(limit=1).status_code == 200)
