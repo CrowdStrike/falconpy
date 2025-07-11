@@ -85,7 +85,7 @@ class FalconInterface(BaseFalconAuth):
                  timeout: Optional[Union[float, tuple]] = None,
                  user_agent: Optional[str] = None,
                  renew_window: Optional[int] = 120,
-                 debug: Optional[bool] = False,
+                 debug: Optional[Union[bool, Logger]] = False,
                  debug_record_count: Optional[int] = None,
                  sanitize_log: Optional[bool] = None,
                  pythonic: Optional[bool] = False,
@@ -219,7 +219,7 @@ class FalconInterface(BaseFalconAuth):
             # Allow log sanitization to be overridden.
             _sanitize = sanitize_log if isinstance(sanitize_log, bool) else None
             # Logging facility for all classes using this interface, defaults to disabled.
-            self._log: LogFacility = LogFacility(getLogger(__name__),
+            self._log: LogFacility = LogFacility(debug if isinstance(debug, Logger) else getLogger(__name__),
                                                  _debug_record_count,
                                                  _sanitize
                                                  )

@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 # pylint: disable=R0902,R0913
+from logging import Logger
 from typing import Dict, Optional, Union
 from ._auth_object import FalconInterface
 from ._error import CannotRevokeToken
@@ -78,7 +79,7 @@ class OAuth2(FalconInterface):
                  user_agent: Optional[str] = None,
                  member_cid: Optional[str] = None,
                  renew_window: Optional[int] = 120,
-                 debug: Optional[bool] = False,
+                 debug: Optional[Union[Logger, bool]] = False,
                  debug_record_count: Optional[int] = None,
                  sanitize_log: Optional[bool] = None,
                  pythonic: Optional[bool] = None,
