@@ -632,7 +632,7 @@ _kubernetes_protection_endpoints = [
         "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported filter"
         " fields:  agent_id  agent_type  annotations_list  cid  cloud_account_id  cloud_name  cloud_region  "
         "cloud_service  cluster_id  cluster_name  container_count  container_runtime_version  first_seen  image_digest"
-        "ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  pod_count  resource_status",
+        "ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  node_uid  pod_count  resource_status",
         "name": "filter",
         "in": "query"
       }
@@ -650,7 +650,7 @@ _kubernetes_protection_endpoints = [
         "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported filter"
         " fields:  agent_id  agent_type  annotations_list  cid  cloud_account_id  cloud_name  cloud_region  "
         "cloud_service  cluster_id  cluster_name  container_count  container_runtime_version  first_seen  image_digest"
-        "ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  pod_count  resource_status",
+        "ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  node_uid  pod_count  resource_status",
         "name": "filter",
         "in": "query"
       }
@@ -668,7 +668,7 @@ _kubernetes_protection_endpoints = [
         "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported filter"
         " fields:  agent_id  agent_type  annotations_list  cid  cloud_account_id  cloud_name  cloud_region  "
         "cloud_service  cluster_id  cluster_name  container_count  container_runtime_version  first_seen  image_digest"
-        "ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  pod_count  resource_status",
+        "ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  node_uid  pod_count  resource_status",
         "name": "filter",
         "in": "query"
       }
@@ -686,7 +686,8 @@ _kubernetes_protection_endpoints = [
         "description": "Retrieve count of Kubernetes nodes that match a query in Falcon Query Language (FQL). "
         "Supported filter fields:  agent_id  agent_type  annotations_list  cid  cloud_account_id  cloud_name  "
         "cloud_region  cloud_service  cluster_id  cluster_name  container_count  container_runtime_version  first_seen"
-        "image_digest  ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  pod_count  resource_status",
+        "  image_digest  ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  node_uid  pod_count  "
+        "resource_status",
         "name": "filter",
         "in": "query"
       }
@@ -963,7 +964,7 @@ _kubernetes_protection_endpoints = [
         "description": "Search Kubernetes nodes using a query in Falcon Query Language (FQL). Supported filter"
         " fields:  agent_id  agent_type  annotations_list  cid  cloud_account_id  cloud_name  cloud_region  "
         "cloud_service  cluster_id  cluster_name  container_count  container_runtime_version  first_seen  image_digest"
-        "ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  pod_count  resource_status",
+        "ipv4  kac_agent_id  last_seen  linux_sensor_coverage  node_name  node_uid  pod_count  resource_status",
         "name": "filter",
         "in": "query"
       },
