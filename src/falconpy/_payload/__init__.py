@@ -78,6 +78,16 @@ from ._identity_protection import idp_policy_payload
 from ._incidents import incident_action_parameters
 from ._intelligence_indicator_graph import indicator_graph_payload
 from ._ioa import ioa_exclusion_payload, ioa_custom_payload
+from ._it_automation import (
+    task_payload,
+    task_execution_payload,
+    execution_results_search_payload,
+    rerun_payload,
+    scheduled_task_payload,
+    automation_policy_payload,
+    policy_host_group_payload,
+    automation_live_query_payload
+    )
 from ._mobile_enrollment import mobile_enrollment_payload
 from ._ngsiem import ngsiem_search_payload
 from ._prevention_policy import prevention_policy_payload
@@ -178,5 +188,8 @@ __all__ = [
     "content_update_policy_action_payload", "content_update_policy_payload", "device_classes_policy_payload",
     "device_policy_bluetooth_config_payload", "device_control_policy_payload_v2", "combined_alerts_payload",
     "correlation_rules_export_payload", "fem_add_asset_payload", "export_job_payload",
-    "retrieve_relay_node_payload", "inventory_scan_payload", "cloud_azure_registration_create_payload"
+    "retrieve_relay_node_payload", "inventory_scan_payload", "cloud_azure_registration_create_payload",
+    "task_payload", "task_execution_payload", "execution_results_search_payload", "rerun_payload",
+    "scheduled_task_payload", "automation_policy_payload", "policy_host_group_payload",
+    "automation_live_query_payload"
 ]

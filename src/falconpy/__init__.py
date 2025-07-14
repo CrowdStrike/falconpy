@@ -163,6 +163,7 @@ from .intelligence_feeds import IntelligenceFeeds
 from .ioa_exclusions import IOAExclusions
 from .ioc import IOC
 from .iocs import Iocs
+from .it_automation import ITAutomation, F4IT
 from .kubernetes_container_compliance import KubernetesContainerCompliance
 from .kubernetes_protection import KubernetesProtection
 from .malquery import MalQuery
@@ -248,7 +249,7 @@ __all__ = [
     "ContainerImageCompliance", "FaaSExecution", "HEC", "IngestBaseURL", "IngestFormat",
     "IngestPayload", "HTTPEventCollector", "IngestConfig", "SessionManager", "TimeUnit",
     "Color", "Indicator", "random_string", "KubernetesContainerCompliance", "find_operation",
-    "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch"
+    "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch", "ITAutomation", "F4IT"
     ]
 """
 This is free and unencumbered software released into the public domain.

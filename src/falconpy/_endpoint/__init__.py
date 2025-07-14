@@ -103,6 +103,7 @@ from ._intel import _intel_endpoints
 from ._ioa_exclusions import _ioa_exclusions_endpoints
 from ._ioc import _ioc_endpoints
 from ._iocs import _iocs_endpoints
+from ._it_automation import _it_automation_endpoints
 from ._kubernetes_container_compliance import _kubernetes_container_compliance_endpoints
 from ._kubernetes_protection import _kubernetes_protection_endpoints
 from ._malquery import _malquery_endpoints
@@ -197,6 +198,7 @@ api_endpoints.extend(_intel_endpoints)
 api_endpoints.extend(_ioa_exclusions_endpoints)
 api_endpoints.extend(_ioc_endpoints)
 api_endpoints.extend(_iocs_endpoints)
+api_endpoints.extend(_it_automation_endpoints)
 api_endpoints.extend(_kubernetes_container_compliance_endpoints)
 api_endpoints.extend(_kubernetes_protection_endpoints)
 api_endpoints.extend(_malquery_endpoints)
