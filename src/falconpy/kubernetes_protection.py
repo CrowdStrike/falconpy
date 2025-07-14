@@ -1191,6 +1191,7 @@ class KubernetesProtection(ServiceClass):
                     cloud_region        last_seen
                     cluster_id          node_name
                     cluster_name        pod_count
+                    node_uid
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -1230,6 +1231,7 @@ class KubernetesProtection(ServiceClass):
                     cloud_region        last_seen
                     cluster_id          node_name
                     cluster_name        pod_count
+                    node_uid
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -1270,6 +1272,7 @@ class KubernetesProtection(ServiceClass):
                     cloud_region        last_seen
                     cluster_id          node_name
                     cluster_name        pod_count
+                    node_uid
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -1291,11 +1294,11 @@ class KubernetesProtection(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def read_node_counts(self: object,
-                         *args,
-                         parameters: dict = None,
-                         **kwargs
-                         ) -> Union[Dict[str, Union[int, dict]], Result]:
+    def read_node_count(self: object,
+                        *args,
+                        parameters: dict = None,
+                        **kwargs
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve node counts.
 
         Keyword arguments:
@@ -1309,6 +1312,7 @@ class KubernetesProtection(ServiceClass):
                     cloud_region        last_seen
                     cluster_id          node_name
                     cluster_name        pod_count
+                    node_uid
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -1655,6 +1659,7 @@ class KubernetesProtection(ServiceClass):
                     cloud_region        last_seen
                     cluster_id          node_name
                     cluster_name        pod_count
+                    node_uid
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- Field to sort results by. String.
@@ -2367,7 +2372,8 @@ class KubernetesProtection(ServiceClass):
     ReadNodesByCloudCount = read_node_counts_by_cloud
     ReadNodesByContainerEngineVersionCount = read_nodes_by_container_engine_version
     ReadNodesByDateRangeCount = read_node_counts_by_date_range
-    ReadNodeCount = read_node_counts
+    ReadNodeCount = read_node_count
+    read_node_counts = read_node_count
     ReadPodsByDateRangeCount = read_pod_counts_by_date_range
     ReadPodCount = read_pod_counts
     ReadClusterCombined = read_clusters_combined
