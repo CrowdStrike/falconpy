@@ -61,10 +61,10 @@ _sensor_update_policies_endpoints = [
     [
       {
         "enum": [
+          "windows",
+          "mac",
           "linux",
           "linuxarm64",
-          "mac",
-          "windows",
           "zlinux"
         ],
         "type": "string",
@@ -74,14 +74,14 @@ _sensor_update_policies_endpoints = [
       },
       {
         "enum": [
-          "early_adopter",
-          "prod"
+          "prod",
+          "early_adopter"
         ],
         "type": "array",
         "items": {
           "type": "string"
         },
-        "collectionFormat": "csv",
+        "collectionFormat": "multi",
         "description": "The stages to return builds for",
         "name": "stage",
         "in": "query"
