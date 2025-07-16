@@ -36,30 +36,30 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 
-from typing import Dict, List, Union
+# from typing import Dict, List, Union
 
+# PAYLOAD DEPRECATED
+# def indicator_graph_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
+#     """Create a properly formatted indicator graph payload.
 
-def indicator_graph_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
-    """Create a properly formatted indicator graph payload.
+#     {
+#         "filter": "string",
+#         "sort": [
+#             {
+#                 "field": "string",
+#                 "order": "string"
+#             }
+#         ]
+#     }
+#     """
+#     returned = {}
+#     keys = ["filter", "sort"]
+#     for key in keys:
+#         provided = passed_keywords.get(key, None)
+#         if provided:
+#             if key == "sort" and isinstance(provided, dict):
+#                 # Sort is always a list of dictionaries
+#                 provided = [provided]
+#             returned[key] = passed_keywords.get(key, None)
 
-    {
-        "filter": "string",
-        "sort": [
-            {
-                "field": "string",
-                "order": "string"
-            }
-        ]
-    }
-    """
-    returned = {}
-    keys = ["filter", "sort"]
-    for key in keys:
-        provided = passed_keywords.get(key, None)
-        if provided:
-            if key == "sort" and isinstance(provided, dict):
-                # Sort is always a list of dictionaries
-                provided = [provided]
-            returned[key] = passed_keywords.get(key, None)
-
-    return returned
+#     return returned
