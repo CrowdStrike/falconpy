@@ -111,7 +111,7 @@ def scrub_target(oper: str, scrubbed: str, kwas: dict) -> str:
         "UpdateIntegrationTask": ["id"],
         "DeleteExecutorNode": ["id"],
         "UploadLookupV1": ["repository"],
-        "GetLookupV1": ["repository"],
+        "GetLookupV1": ["repository", "filename"],
         "GetLookupFromPackageWithNamespaceV1": ["repository", "namespace", "package", "filename"],
         "GetLookupFromPackageV1": ["repository", "package", "filename"],
         "StartSearchV1": ["repository"],
