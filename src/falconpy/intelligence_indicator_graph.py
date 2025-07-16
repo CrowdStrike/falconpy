@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request
-from ._payload import indicator_graph_payload, generic_payload_list
+from ._payload import generic_payload_list
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._intelligence_indicator_graph import _intelligence_indicator_graph_endpoints as Endpoints
@@ -66,6 +66,7 @@ class IntelligenceIndicatorGraph(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                DEPRECATED: Please use query string parameters instead of the body payload for these arguments.
                 {
                     "filter": "string",
                     "sort": [
@@ -78,7 +79,7 @@ class IntelligenceIndicatorGraph(ServiceClass):
         filter -- FQL formatted filter. String.
         limit -- Returned record limit. Integer.
         offset -- Offset to start returning results. Integer.
-        sort -- List of sort operations to perform on the returnset. List of dictionaries.
+        sort -- List of sort operations to perform on the returnset. String.
 
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
@@ -91,9 +92,11 @@ class IntelligenceIndicatorGraph(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/intelligence-indicator-graph/SearchIndicators
         """
+        # Body payload parameters have been deprecated as of version 1.5.4
+        # if not body:
+        #     body = indicator_graph_payload(kwargs)
         if not body:
-            body = indicator_graph_payload(kwargs)
-
+            body = {}
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,

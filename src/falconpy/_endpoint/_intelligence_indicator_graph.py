@@ -45,6 +45,19 @@ _intelligence_indicator_graph_endpoints = [
     "intelligence_indicator_graph",
     [
       {
+        "type": "string",
+        "description": "Parameter to specify the order(field examples: FileDetails.SHA256, URLDetails.URL, "
+        "PublishDate, MaliciousConfidence) Ex: 'PublishDate|asc'.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL query specifying the filter parameters.",
+        "name": "filter",
+        "in": "query"
+      },
+      {
         "type": "integer",
         "description": "Limit",
         "name": "limit",
