@@ -344,12 +344,10 @@ class UserManagement(ServiceClass):
             body = generic_payload_list(submitted_keywords=kwargs,
                                         payload_value="ids"
                                         )
-            action = {
+            body["action"] = {
                 "action_name": kwargs.get("action_name", "reset_password"),
                 "action_value": kwargs.get("action_value", "")
             }
-            body["action"] = []
-            body["action"].append(action)
 
         return process_service_request(
             calling_object=self,
