@@ -115,11 +115,13 @@ def scrub_target(oper: str, scrubbed: str, kwas: dict) -> str:
         "GetLookupFromPackageWithNamespaceV1": ["repository", "namespace", "package", "filename"],
         "GetLookupFromPackageV1": ["repository", "package", "filename"],
         "StartSearchV1": ["repository"],
-        "GetSearchStatusV1": ["repository", "id"],
+        "GetSearchStatusV1": ["repository", "id", "search_id"],
         "StopSearchV1": ["repository", "id"]
     }
     for field_value, field_names in field_mapping.items():
         if oper == field_value:  # Only perform replacements on mapped operation IDs.
+            if oper == "GetSearchStatusV1" and (not kwas.get("id") and kwas.get("search_id")):
+                kwas["id"] = kwas["search_id"]
             if len(field_names) == 1:
                 scrubbed = handle_field(scrubbed, kwas, field_names[0])
             else:
