@@ -115,6 +115,7 @@ from .cloud_aws_registration import CloudAWSRegistration
 from .cloud_azure_registration import CloudAzureRegistration
 from .cloud_oci_registration import CloudOCIRegistration
 from .cloud_security_assets import CloudSecurityAssets
+from .cloud_security_compliance import CloudSecurityCompliance
 from .cloud_snapshots import CloudSnapshots
 from .container_image_compliance import ContainerImageCompliance, ComplianceAssessments
 from .configuration_assessment_evaluation_logic import ConfigurationAssessmentEvaluationLogic
@@ -249,7 +250,8 @@ __all__ = [
     "ContainerImageCompliance", "FaaSExecution", "HEC", "IngestBaseURL", "IngestFormat",
     "IngestPayload", "HTTPEventCollector", "IngestConfig", "SessionManager", "TimeUnit",
     "Color", "Indicator", "random_string", "KubernetesContainerCompliance", "find_operation",
-    "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch", "ITAutomation", "F4IT"
+    "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch", "ITAutomation", "F4IT",
+    "CloudSecurityCompliance"
     ]
 """
 This is free and unencumbered software released into the public domain.
