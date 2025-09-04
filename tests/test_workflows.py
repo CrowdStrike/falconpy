@@ -43,7 +43,8 @@ class TestWorkflows:
             "WorkflowDefinitionsImport4": falcon.import_definition(validate_only=True, data_file="tests/test.yml", name="workflow_name"),
             "WorkflowDefinitionsImport4": falcon.import_definition(validate_only=True, data_file=binary_example, name="workflow_name"),
             "WorkflowDefinitionsUpdate": falcon.update_definition(change_log="testing"),
-            "WorkflowDefinitionsStatus": falcon.set_workflow_definition_status(ids="1234567", action_name="enable"),
+            "WorkflowDefinitionsStatus1": falcon.set_workflow_definition_status(ids="1234567", action_name="enable"),
+            "WorkflowDefinitionsStatus2": falcon.set_workflow_definition_status(ids="1234567", action_name="whatever"),
             "WorkflowGetHumanInputV1": falcon.get_human_input(ids="1234567"),
             "WorkflowUpdateHumanInputV1": falcon.update_human_input(input="whatever", note="whatever"),
             "WorkflowActivitiesContentCombined": falcon.search_activities_content(limit=1)
