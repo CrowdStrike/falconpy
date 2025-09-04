@@ -199,6 +199,31 @@ _workflows_endpoints = [
     ]
   ],
   [
+    "WorkflowDefinitionsAction",
+    "POST",
+    "/workflows/entities/definition-actions/v1",
+    "Enable or disable a workflow definition, or stop all executions for a definition."
+    "When a definition is disabled it will not execute against any new trigger events.",
+    "workflows",
+    [
+      {
+        "type": "string",
+        "description": "Specify one of these actions:\n  enable - enable the workflow(s) specified in ids\n  "
+        "disable - disable the workflow(s) specified in ids.\n cancle - cancel all in-flight executions for "
+        "the workflow specified in ids",
+        "name": "action_name",
+        "in": "query",
+        "required": True
+      },
+      {
+        "description": "IDs of workflow definitions",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "WorkflowDefinitionsExport",
     "GET",
     "/workflows/entities/definitions/export/v1",

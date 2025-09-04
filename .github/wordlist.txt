@@ -1283,6 +1283,8 @@ shubham
 WorkflowUpdateHumanInputV
 WorkflowGetHumanInputV
 WorkflowDefinitionsCreate
+WorkflowDefinitionsStatus
+WorkflowDefinitionsAction
 WorkflowDefinitionsUpdate
 WorkflowDefinitionsImport
 WorkflowDefinitionsExport
