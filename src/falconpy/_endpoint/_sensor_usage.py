@@ -58,5 +58,27 @@ _sensor_usage_endpoints = [
         "in": "query"
       }
     ]
+  ],
+  [
+    "GetSensorUsageHourly",
+    "GET",
+    "/billing-dashboards-usage/aggregates/hourly-average/v1",
+    "Fetches hourly average. Each data point represents the average of how many unique AIDs were seen per week "
+    "for the previous 28 days.",
+    "sensor_usage",
+    [
+      {
+        "type": "string",
+        "description": "The FQL search filter. Allowed fields:\n\"event_date\" : A specified date that will be "
+        " final date of the results returned. Specified date cannot be after the default.\n\tFormat: "
+        "'2024-06-11'\n\tDefault: the current date, minus 2 days, in UTC\n\"period\" : An integer surrounded by single "
+        "quotes representing the number of days to return.\n\tFormat: '30'\n\tDefault: '28'\n\tMinimum: '1'\n\tMaximum: "
+        " '395'\n\"selected_cids\" : A comma separated list of CIDs to return data for. Caller must be a parent CID or "
+        "have special access enabled.\n\tFormat: 'cid_1,cid_2,cid_3'\n\tDefault: for parent CIDs the default is the "
+        "parent and all children, otherwise the current CID",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
   ]
 ]
