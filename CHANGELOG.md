@@ -1,3 +1,39 @@
+# Version 1.5.5
+## Added features and functionality
++ Added: Added new __Cloud Security Compliance__ service collection with 2 new operations.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_cloud_security_compliance.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_cloud_security_compliance.py`
+    - `__init__.py`
+    - `cloud_security_compliance.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_security_compliance.py`
+
+- Added: Added new _WorkflowDefinitionsStatus_ operation to the __Workflows__ service class.
+    - `_constant/__init__.py`
+    - `_endpoint/_workflows.py`
+    - `workflows.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_workflows.py`
+    - Special thanks go out to @dweissbacher for contributing this update and related unit tests! 🙇
+
+## Issues resolved
++ Fixed: Resolved path interpolation issue for the `search_id` keyword when using the Uber Class to call the _GetSearchStatusV1_ operation. Closes #1365.
+    - `_util/_uber.py`
+    - Thanks go out to @yakeeliuliu for reporting this issue! 🙇
+
++ Fixed: Resolved body payload generation issue with the _userActionV1_ operation within the __UserManagement__ service class.
+    - `user_management.py`
+
++ Fixed: Resolved availability issue with FDR service collection endpoints within the endpoint module. Closes #1371.
+    - `_endpoint/__init__.py`
+    > Thanks go out to @Don-Swanson-Adobe for reporting this issue! 🙇
+
+## Other
+
+---
+
 # Version 1.5.4
 ## Added features and functionality
 + Added: Added _tag_key_ and _tag_value_ as allowed values for the `filter` parameter in the _cloud_security_assets_combined_compliance_by_account_ operation within the __Cloud Security Assets__ service collection.
