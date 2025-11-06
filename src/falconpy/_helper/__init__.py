@@ -37,6 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from secrets import choice
 from string import ascii_letters, digits
+from .._constant import MAX_RANDOM_STRING_LENGTH
 from ._text_colors import Color
 from ._indicator import Indicator
 from ._find_operation import find_operation
@@ -53,8 +54,9 @@ def random_string(length: int = 10,
     character_set = character_set + (ascii_letters if include_letters else "")
     character_set = character_set + (digits if include_digits else "")
     character_set = character_set + ("!@#$%?&*_." if include_specials else "")
+    gen_length = max(1, min(length, MAX_RANDOM_STRING_LENGTH))
     if character_set:
-        returned = "".join(choice(character_set) for _ in range(length))
+        returned = "".join(choice(character_set) for _ in range(gen_length))
 
     return returned
 
