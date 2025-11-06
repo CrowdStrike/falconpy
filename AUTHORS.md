@@ -107,7 +107,10 @@ This has been a critical element in the development of the FalconPy project.
 + Evan Stoner, `@evanstoner`
 + Gage Schaffer, `@Gage-BCCA`
 + `@JamesLochheadCRWD`
-
++ Matthew, `@Matth3wW`
++ `@dweissbacher`
++ `@atav928`
++ `@subbu-cs`
 
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
