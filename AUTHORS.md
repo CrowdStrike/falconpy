@@ -29,16 +29,17 @@ These coders deserve accolades and laurels as well as cool titles and cartoons. 
 
 | Name | Role |
 | :--- | :--- |
-| Josh Lang, `@jlangdev` | [Lint Purveyor](https://xkcd.com/1833/) |
+| Alexander Moomaw, `@alhumaw` | [Framework Facilitator](https://xkcd.com/565/) |
 | Christopher Hammond, `@ChristopherHammond13` | [Technical Debt Collector](https://xkcd.com/2138/) |
 | Gabe Alford, `@redhatrises` | [Git Whisperer](https://xkcd.com/1597/) |
 | Brendan Kremian, `@bk-cs` | [Disparate Ringbearer](https://xkcd.com/353/)
 | Christophe Viaud, `@falcon-pioupiou` | [Consequence Substantiator](https://xkcd.com/1678/) |
 | Shane Shellenbarger, `@soggysec` | [Calamity Validator](https://xkcd.com/1700/) |
-| Steve Klassen, `@mrxinu` | [Dilemma Responder](https://xkcd.com/85/) |
 
 #### Honorable mentions
 + Šimon L., `@isimluk` ([Sanity Checker](https://xkcd.com/1926/))
++ Steve Klassen, `@mrxinu` ([Dilemma Responder](https://xkcd.com/85/))
++ Josh Lang, `@jlangdev` ([Lint Purveyor](https://xkcd.com/1833/))
 
 ## Contributors
 The following members of the community have made requests, suggestions, code contributions or provided feedback and reported bugs.
@@ -99,7 +100,6 @@ This has been a critical element in the development of the FalconPy project.
 + `nesies`
 + `David-M-Berry`
 + Oke Okumo, `@okewoma`
-+ Alexander Moomaw, `@alhumaw`
 + Esha Kumar, `@exk200006`
 + Griffin Ansel, `@gansel51`
 + `@am-cs-se`
@@ -107,7 +107,10 @@ This has been a critical element in the development of the FalconPy project.
 + Evan Stoner, `@evanstoner`
 + Gage Schaffer, `@Gage-BCCA`
 + `@JamesLochheadCRWD`
-
++ Matthew, `@Matth3wW`
++ `@dweissbacher`
++ `@atav928`
++ `@subbu-cs`
 
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
