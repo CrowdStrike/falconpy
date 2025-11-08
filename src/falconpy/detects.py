@@ -42,6 +42,14 @@ from ._payload import aggregate_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._detects import _detects_endpoints as Endpoints
+#  _____                                     __            __
+# |     \.-----.-----.----.-----.----.---.-.|  |_.-----.--|  |
+# |  --  |  -__|  _  |   _|  -__|  __|  _  ||   _|  -__|  _  |
+# |_____/|_____|   __|__| |_____|____|___._||____|_____|_____|
+#              |__|
+#
+# This service collection is deprecated.
+# Developers should leverage operations from the Alerts service collection.
 
 
 class Detects(ServiceClass):
