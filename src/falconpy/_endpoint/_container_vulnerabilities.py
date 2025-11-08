@@ -57,13 +57,13 @@ _container_vulnerabilities_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -89,13 +89,13 @@ _container_vulnerabilities_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -105,7 +105,7 @@ _container_vulnerabilities_endpoints = [
     "ReadVulnerabilityCountByCVSSScore",
     "GET",
     "/container-security/aggregates/vulnerabilities/count-by-cvss-score/v1",
-    "Aggregate count of vulnerabilities grouped by cvss score",
+    "Aggregate count of vulnerabilities grouped by CVSS score",
     "container_vulnerabilities",
     [
       {
@@ -121,13 +121,13 @@ _container_vulnerabilities_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -153,13 +153,13 @@ _container_vulnerabilities_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -185,13 +185,13 @@ _container_vulnerabilities_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -214,13 +214,13 @@ _container_vulnerabilities_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -243,13 +243,13 @@ _container_vulnerabilities_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -280,13 +280,13 @@ _container_vulnerabilities_endpoints = [
       {
         "type": "integer",
         "default": 5000,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 5000.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -309,13 +309,13 @@ _container_vulnerabilities_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -325,7 +325,8 @@ _container_vulnerabilities_endpoints = [
     "ReadCombinedVulnerabilities",
     "GET",
     "/container-security/combined/vulnerabilities/v1",
-    "Retrieve vulnerability and aggregate data filtered by the provided FQL",
+    "Retrieves a paginated list of vulnerabilities filtered by the provided FQL. Maximum page size: 100. "
+    "Maximum available vulnerabilities: 10,000",
     "container_vulnerabilities",
     [
       {
@@ -341,13 +342,13 @@ _container_vulnerabilities_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       },
