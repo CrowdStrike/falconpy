@@ -59,11 +59,16 @@ _deprecated_op_mapping = {
     "DiscoverCloudAzureDownloadCertificate": "AzureDownloadCertificate",
     "GetDiscoverCloudAzureTenantIDs": "",
     "GetDiscoverCloudGCPUserScripts": "",
-    "GetHorizonD4CScripts": ""
+    "GetHorizonD4CScripts": "",
+    "GetAggregateDetects": "",
+    "UpdateDetectsByIdsV2": "",
+    "GetDetectSummaries": "",
+    "QueryDetects": ""
 }
 
 _deprecated_cls_mapping = {
     "CloudConnectAWS": "CSPMRegistration",
     "D4CRegistration": "CSPMRegistration",
-    "Iocs": "IOC"
+    "Iocs": "IOC",
+    "Detects": "Alerts"
 }
