@@ -146,13 +146,13 @@ _container_images_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -215,13 +215,13 @@ _container_images_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -231,7 +231,8 @@ _container_images_endpoints = [
     "ReadCombinedImagesExport",
     "GET",
     "/container-security/combined/images/export/v1",
-    "Retrieve images with an option to expand aggregated vulnerabilities/detections",
+    "Retrieves a paginated list of images, with an option to expand aggregated vulnerabilities/detections. "
+    "Maximum page size: 100. Maximum available images: 10,000",
     "container_images",
     [
       {
@@ -261,13 +262,13 @@ _container_images_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       },
