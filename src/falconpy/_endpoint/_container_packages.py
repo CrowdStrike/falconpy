@@ -95,13 +95,13 @@ _container_packages_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -125,13 +125,13 @@ _container_packages_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -141,7 +141,8 @@ _container_packages_endpoints = [
     "ReadPackagesCombinedExport",
     "GET",
     "/container-security/combined/packages/export/v1",
-    "Retrieve packages identified by the provided filter criteria for the purpose of export",
+    "Retrieves a paginated list of packages identified by the provided filter criteria,used for export.Maximum"
+    "page size: 100. Maximum available packages: 10,000",
     "container_packages",
     [
       {
@@ -169,13 +170,13 @@ _container_packages_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -213,13 +214,13 @@ _container_packages_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -229,7 +230,7 @@ _container_packages_endpoints = [
     "ReadPackagesCombinedV2",
     "GET",
     "/container-security/combined/packages/v2",
-    "Retrieve packages identified by the provided filter criteria.",
+    "Retrieve packages identified by the provided filter criteria",
     "container_packages",
     [
       {
@@ -257,13 +258,13 @@ _container_packages_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
