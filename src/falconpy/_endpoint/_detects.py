@@ -41,7 +41,8 @@ _detects_endpoints = [
     "GetAggregateDetects",
     "POST",
     "/detects/aggregates/detects/GET/v1",
-    "Get detect aggregates as specified via json in request body.",
+    "Deprecated: This endpoint will be decommissioned on September 30, 2025. Please check the Notes section "
+    "below for migration guidance.",
     "detects",
     [
       {
@@ -56,7 +57,8 @@ _detects_endpoints = [
     "UpdateDetectsByIdsV2",
     "PATCH",
     "/detects/entities/detects/v2",
-    "Modify the state, assignee, and visibility of detections",
+    "Deprecated: This endpoint will be decommissioned on September 30, 2025. Please check the Notes section "
+    "below for migration guidance.",
     "detects",
     [
       {
@@ -80,7 +82,8 @@ _detects_endpoints = [
     "GetDetectSummaries",
     "POST",
     "/detects/entities/summaries/GET/v1",
-    "View information about detections",
+    "Deprecated: This endpoint will be decommissioned on September 30, 2025. Please check the Notes section "
+    "below for migration guidance.",
     "detects",
     [
       {
@@ -99,7 +102,8 @@ _detects_endpoints = [
     "QueryDetects",
     "GET",
     "/detects/queries/detects/v1",
-    "Search for detection IDs that match a given query",
+    "Deprecated: This endpoint will be decommissioned on September 30, 2025. Please check the Notes section "
+    "below for migration guidance.",
     "detects",
     [
       {
