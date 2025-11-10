@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Top 10 Noisy Hosts – CrowdStrike Falcon
-PhD Research Lab | Manjula Wickramasuriya
-US PhD 2027 – Endpoint Security
+Enterprise Security Lab | Manjula Wickramasuriya
+Endpoint Behavior Analytics
 """
 from falconpy import Hosts
 
