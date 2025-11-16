@@ -97,8 +97,9 @@ _discover_endpoints = [
           "type": "string"
         },
         "collectionFormat": "multi",
-        "description": "Select various details blocks to be returned for each application entity. Supported "
-        "values:\n\n<ul><li>browser_extension</li><li>host_info</li><li>install_usage</li></ul>",
+        "description": "Select various details blocks to be returned for each application entity. Supported va "
+        "lues:\n\n<ul><li>browser_extension</li><li>host_info</li><li>install_usage</li><li>package</li><li>ide_extensi "
+        "on</li></ul>",
         "name": "facet",
         "in": "query"
       }
