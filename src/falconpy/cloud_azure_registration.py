@@ -36,8 +36,8 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-from ._util import force_default, process_service_request
-from ._payload import cloud_azure_registration_payload, cloud_azure_registration_create_payload
+from ._util import force_default, process_service_request, handle_single_argument
+from ._payload import cloud_azure_registration_payload, cloud_azure_registration_create_payload, generic_payload_list
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._cloud_azure_registration import _cloud_azure_registration_endpoints as Endpoints
@@ -55,6 +55,36 @@ class CloudAzureRegistration(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def health_check(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Trigger health check scan for Azure registrations.
+
+        Keyword arguments:
+        tenant_ids -- Azure tenant IDs. String or list of string.
+        body -- Full body payload as a dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'tenant_ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /cloud-azure-registration/cloud-registration-azure-trigger-health-check
+        """
+        kwargs = handle_single_argument(args, kwargs, "tenant_ids")
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="tenant_ids")
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_trigger_health_check",
+            body=body
+            )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_registration(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
@@ -401,6 +431,7 @@ class CloudAzureRegistration(ServiceClass):
             body=body
             )
 
+    cloud_registration_azure_trigger_health_check = health_check
     cloud_registration_azure_get_registration = get_registration
     cloud_registration_azure_create_registration = create_registration
     cloud_registration_azure_update_registration = update_registration
