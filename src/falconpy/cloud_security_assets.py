@@ -79,7 +79,7 @@ class CloudSecurityAssets(ServiceClass):
                     compliant                       service
                     control.benchmark.name          service_category
                     control.benchmark.version       severities
-                    control.framework
+                    control.framework               control.extension.status
         sort -- FQL formatted sort expression. String.
                     Sort expression in format: field|direction (e.g., last_evaluated|desc).
                     Allowed sort fields:
