@@ -38,6 +38,43 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_snapshots_endpoints = [
   [
+    "CombinedDetections",
+    "GET",
+    "/iac/combined/detections/v1",
+    "Search IaC Detections using a query in Falcon Query Language",
+    "cloud_snapshots",
+    [
+      {
+        "type": "string",
+        "description": "Search IaC detections using a query in Falcon Query Language (FQL). Supported filters: "
+        " detection_uuid,file_name,last_detected,platform,project_name,project_owner,project_ref,provider,resource_name "
+        ",rule_category,rule_name,rule_type,rule_uuid,service,severity",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "the upper-bound on the number of records to retrieve",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "fields to sort the records on. Supported columns:  [detection_uuid file_name "
+        "last_detected platform project_name project_owner project_ref provider resource_name rule_category rule_name "
+        "rule_type rule_uuid service severity]",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "GetCredentialsIAC",
     "GET",
     "/iac/entities/image-registry-credentials/v1",

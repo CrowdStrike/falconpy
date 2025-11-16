@@ -23,6 +23,7 @@ class TestCloudSnapshots:
         error_checks = True
 
         tests = {
+            "CombinedDetections": falcon.search_detections(),
             "RegisterAccount": falcon.register_account(aws_accounts=[{"account_number": "1"}]),
             "RegisterAccountToo": falcon.register_account(account_number="12345678"),
             "ReadDeploymentsCombined": falcon.search_scan_jobs(),
