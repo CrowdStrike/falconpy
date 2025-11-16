@@ -117,6 +117,7 @@ class TestFalconUserManagement:
             "get_user_grants_v1": falcon.get_user_grants_v1(user_uuid="12345678"),
             "get_user_grants": falcon.get_user_grants(user_uuid="12345678"),
             "get_roles_mssp": falcon.get_roles_mssp(ids="1234567890", cid="1234567890"),
+            "get_roles_mssp_v1": falcon.get_roles_mssp_v1(ids="1234567890", cid="1234567890"),
             "user_action": falcon.user_action(action_name="reset_password",
                                               ids="1ab2c345-67d8-90e1-2345-6789f0a12bc3"
                                               ),
