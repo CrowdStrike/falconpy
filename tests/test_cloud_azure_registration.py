@@ -84,6 +84,7 @@ class TestCloudAzureRegistration:
     def test_all_code_paths(self):
         error_checks = True
         tests = {
+            "cloud_registration_azure_trigger_health_check": falcon.health_check(tenant_id="12345678"),
             "cloud_registration_azure_get_registration": falcon.get_registration(tenant_id="12345678"),
             "cloud_registration_azure_create_registration": falcon.create_registration(**AZURE_PAYLOAD["resource"]),
             "cloud_registration_azure_update_registration": falcon.update_registration(**AZURE_PAYLOAD["resource"]),
