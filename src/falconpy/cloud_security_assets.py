@@ -198,9 +198,11 @@ class CloudSecurityAssets(ServiceClass):
                     instance_id                        vmware.vm_host_name
                     instance_state                     vmware.vm_tools_status
                     ioa_count                          zone
-                    iom_count                          application_security.business_applications
-                    tags                               application_security.business_criticality
-                    application_security.service_names
+                    iom_count                          control.benchmark.version
+                    tags                               control.framework
+                    control.benchmark.name             control.requirement
+                    control.type                       control.version
+                    non_compliant.rule_name
         sort -- The field to sort on. String.
                 Use `|asc` or `|desc` suffix to specify sort direction.
                 Sortable fields include:
