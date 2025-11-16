@@ -66,7 +66,7 @@ class Discover(ServiceClass):
 
         Keyword arguments:
         after -- A pagination token used with the limit parameter to manage pagination of results.
-                 On your first request, do not provide an after token. On subsequent requests, 
+                 On your first request, do not provide an after token. On subsequent requests,
                  provide the after token from the previous response to continue from that place in
                  the results. String.
         facet -- Select various details blocks to be returned for each application entity. String.
@@ -127,7 +127,9 @@ class Discover(ServiceClass):
                     first_seen_timestamp            system_product_name
                     groups                          system_serial_number
                     hostname                        tags
-                    id
+                    id                              scan_details.scan_id
+                    scan_details.schedule_id        scan_details.scan_date
+                    vulnerability_assessment_date
         limit -- The number of asset IDs to return in this response. (Max: 100, default: 100)
                  Use with the offset parameter to manage pagination of results.
         offset -- An offset used with the limit parameter to manage pagination of results.
@@ -389,7 +391,9 @@ class Discover(ServiceClass):
                     first_seen_timestamp            system_product_name
                     groups                          system_serial_number
                     hostname                        tags
-                    id
+                    id                              scan_details.scan_id
+                    scan_details.schedule_id        scan_details.scan_date
+                    vulnerability_assessment_date
         limit -- The number of asset IDs to return in this response. (Max: 100, default: 100)
                  Use with the offset parameter to manage pagination of results.
         offset -- An offset used with the limit parameter to manage pagination of results.
@@ -647,4 +651,4 @@ class Discover(ServiceClass):
 
     combined_applications = query_combined_applications
     combined_hosts = query_combined_hosts
-    query_iot_hostsV2 = query_iot_hosts_v2  
+    query_iot_hostsV2 = query_iot_hosts_v2
