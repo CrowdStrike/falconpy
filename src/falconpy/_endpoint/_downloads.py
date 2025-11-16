@@ -38,6 +38,28 @@ For more information, please refer to <https://unlicense.org>
 
 _downloads_endpoints = [
   [
+    "FetchFilesDownloadInfo",
+    "GET",
+    "/csdownloads/combined/files-download/v1",
+    "Get files info and pre-signed download URLs",
+    "downloads",
+    [
+      {
+        "type": "string",
+        "description": "Search files using various filters using query in Falcon Query Language (FQL). "
+        "Supported filters: arch,category,file_name,file_version,os",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The fields to sort records on. Supported columns:   arch  category  file_name  file_version  os",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "DownloadFile",
     "GET",
     "/csdownloads/entities/files/download/v1",
