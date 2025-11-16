@@ -48,9 +48,10 @@ _cloud_security_assets_endpoints = [
         "type": "string",
         "description": "FQL string to filter on asset contents. Filterable fields include:  account_id  "
         "account_name  assessment_id  business_impact  cloud_group  cloud_label  cloud_label_id  cloud_provider  "
-        "cloud_scope  compliant  control.benchmark.name  control.benchmark.version  control.framework  control.name  "
-        "control.type  control.version  environment  last_evaluated  region  resource_provider  resource_type  "
-        "resource_type_name  service  service_category  severities  tag_key  tag_value",
+        "cloud_scope  compliant  control.benchmark.name  control.benchmark.version  control.extension.status  "
+        "control.framework  control.name  control.type  control.version  environment  last_evaluated  region  "
+        "resource_provider  resource_type  resource_type_name  service  service_category  severities  tag_key  "
+        "tag_value",
         "name": "filter",
         "in": "query"
       },
