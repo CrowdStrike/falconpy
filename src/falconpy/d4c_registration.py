@@ -220,6 +220,9 @@ class D4CRegistration(ServiceClass):
         custom_role_name -- The custom IAM role to be used during registration. Same as iam_role_arn. String.
         dspm_enabled -- Flag indicating if DSPM is enabled. String. Allowed values: true, false
         dspm_regions -- List of DSPM regions. Comma delimited string.
+        dspm_host_account_id -- DSPM host account ID. String.
+        dspm_host_integration_role_name -- DSPM host integration role name. String.
+        dspm_host_scanner_role_name -- DSPM host scanner role name. String.
         dspm_role -- DSPM role. String.
         iam_role_arn -- The custom IAM role to be used during registration. Same as custom_role_name. String.
         idp_enabled -- Flag indicating if IDP protection is enabled. String. Allowed values: true, false

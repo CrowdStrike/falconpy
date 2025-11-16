@@ -242,6 +242,24 @@ _d4c_registration_endpoints = [
         "in": "query"
       },
       {
+        "pattern": "\\d{12}",
+        "type": "string",
+        "name": "dspm_host_account_id",
+        "in": "query"
+      },
+      {
+        "pattern": "^[a-zA-Z0-9+=,.@_-]{1,64}$",
+        "type": "string",
+        "name": "dspm_host_integration_role_name",
+        "in": "query"
+      },
+      {
+        "pattern": "^[a-zA-Z0-9+=,.@_-]{1,64}$",
+        "type": "string",
+        "name": "dspm_host_scanner_role_name",
+        "in": "query"
+      },
+      {
         "type": "string",
         "name": "dspm_role",
         "in": "query"
