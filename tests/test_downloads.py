@@ -22,6 +22,7 @@ class TestDownloads:
     def test_all_code_paths(self):
         error_checks = True
         tests = {
+            "FetchFilesDownloadInfo": falcon.fetch_download_info(),
             "DownloadFile": falcon.download(file_name="the_file_named_jeff.txt", file_version="1"),
             "EnumerateFile": falcon.enumerate()
         }
