@@ -47,7 +47,7 @@ _container_detections_endpoints = [
       {
         "type": "string",
         "description": "Filter images detections using a query in Falcon Query Language (FQL). Supported "
-        "filter fields:  cid  detection_type  image_registry  image_repository  image_tag",
+        "filter fields:  cid  detection_type  image_digest  image_registry  image_repository  image_tag  severity",
         "name": "filter",
         "in": "query"
       }
@@ -63,7 +63,7 @@ _container_detections_endpoints = [
       {
         "type": "string",
         "description": "Filter images detections using a query in Falcon Query Language (FQL). Supported "
-        "filter fields:  cid  detection_type  image_registry  image_repository  image_tag",
+        "filter fields:  cid  detection_type  image_digest  image_registry  image_repository  image_tag  severity",
         "name": "filter",
         "in": "query"
       }
@@ -79,7 +79,7 @@ _container_detections_endpoints = [
       {
         "type": "string",
         "description": "Filter images detections using a query in Falcon Query Language (FQL). Supported "
-        "filter fields:  cid  detection_type  image_registry  image_repository  image_tag",
+        "filter fields:  cid  detection_type  image_digest  image_registry  image_repository  image_tag  severity",
         "name": "filter",
         "in": "query"
       }
@@ -95,7 +95,7 @@ _container_detections_endpoints = [
       {
         "type": "string",
         "description": "Filter images detections using a query in Falcon Query Language (FQL). Supported "
-        "filter fields:  cid  detection_type  image_registry  image_repository  image_tag",
+        "filter fields:  cid  detection_type  image_digest  image_registry  image_repository  image_tag  severity",
         "name": "filter",
         "in": "query"
       },
@@ -167,7 +167,7 @@ _container_detections_endpoints = [
       {
         "type": "string",
         "description": "Filter images detections using a query in Falcon Query Language (FQL). Supported "
-        "filter fields:  cid  detection_type  image_registry  image_repository  image_tag",
+        "filter fields:  cid  detection_type  image_digest  image_registry  image_repository  image_tag  severity",
         "name": "filter",
         "in": "query"
       },
@@ -196,7 +196,7 @@ _container_detections_endpoints = [
       {
         "type": "string",
         "description": "Filter images detections using a query in Falcon Query Language (FQL). Supported "
-        "filter fields:  cid  detection_type  image_registry  image_repository  image_tag",
+        "filter fields:  cid  detection_type  image_digest  image_registry  image_repository  image_tag  severity",
         "name": "filter",
         "in": "query"
       },
