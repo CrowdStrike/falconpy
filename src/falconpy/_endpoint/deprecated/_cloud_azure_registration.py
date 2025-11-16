@@ -38,6 +38,25 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_azure_registration_endpoints = [
   [
+    "cloud-registration-azure-trigger-health-check",
+    "POST",
+    "/cloud-security-registration-azure/entities/registrations/healthcheck/v1",
+    "Trigger health check scan for Azure registrations",
+    "cloud_azure_registration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Azure tenant IDs",
+        "name": "tenant_ids",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "cloud-registration-azure-get-registration",
     "GET",
     "/cloud-security-registration-azure/entities/registrations/v1",
