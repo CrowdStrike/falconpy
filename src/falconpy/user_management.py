@@ -262,9 +262,74 @@ class UserManagement(ServiceClass):
             params=handle_single_argument(args, parameters, "user_uuid")
             )
 
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def get_roles_mssp(self: object,
+                       *args,
+                       body: dict = None,
+                       parameters: dict = None,
+                       **kwargs
+                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get info about a role, supports Flight Control.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/user-management/entitiesRolesGETV2
+
+        Keyword arguments
+        ----
+        cid : str
+            Customer ID to get available roles for.
+            Providing no value for `cid` returns results for the current CID.
+        ids : str or list[str] (required)
+            List of role IDs to retrieve. Comma-delimited strings accepted.
+            Must be provided as a keyword, argument or part of the `body` payload.
+        parameters : str
+            Full parameters payload in JSON format, not required if `ids` is provided as a keyword.
+
+        Arguments
+        ----
+        When not specified, the first argument to this method is assumed to be `ids`.
+        All others are ignored.
+
+        Returns
+        ----
+        dict
+            Dictionary containing API response.
+        """
+        parameters = handle_single_argument(args, parameters, "ids")
+
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+            # Try to gracefully catch IDs passed incorrectly as a query string parameter
+            if parameters:
+                if "ids" in parameters and "ids" not in body:
+                    body["ids"] = parameters["ids"]
+                    parameters.pop("ids")
+
+        if "ids" in body:
+            # Make sure the provided ids are a properly formatted list
+            if isinstance(body["ids"], str):
+                body["ids"] = body["ids"].split(",")
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entitiesRolesGETV2",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_roles_mssp(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_roles_mssp_v1(self: object,
+                          *args,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get information about a role, supports Flight Control.
+
+        * DEPRECATED*
 
         HTTP Method: GET
 
@@ -1227,7 +1292,8 @@ class UserManagement(ServiceClass):
     CombinedUserRolesV2 = get_user_grants
     get_user_roles = get_user_grants  # Helper alias
     get_user_roles_combined = get_user_grants  # Helper alias
-    entitiesRolesV1 = get_roles_mssp
+    entitiesRolesGETV2 = get_roles_mssp
+    entitiesRolesV1 = get_roles_mssp_v1
     userActionV1 = user_action
     userRolesActionV1 = user_roles_action
     retrieveUsersGETV1 = retrieve_users
