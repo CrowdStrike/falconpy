@@ -101,13 +101,13 @@ _drift_indicators_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
@@ -156,13 +156,13 @@ _drift_indicators_endpoints = [
       {
         "type": "integer",
         "default": 100,
-        "description": "The upper-bound on the number of records to retrieve.",
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
         "name": "limit",
         "in": "query"
       },
       {
         "type": "integer",
-        "description": "The offset from where to begin.",
+        "description": "The offset from where to begin. Maximum offset = 10000 - limit.",
         "name": "offset",
         "in": "query"
       }
