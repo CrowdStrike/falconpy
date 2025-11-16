@@ -60,10 +60,8 @@ _identity_protection_endpoints = [
     "identity_protection",
     [
       {
-        "type": "string",
-        "description": "Authorization Header",
-        "name": "Authorization",
-        "in": "header",
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]
@@ -90,13 +88,6 @@ _identity_protection_endpoints = [
     "identity_protection",
     [
       {
-        "type": "string",
-        "description": "Authorization Header",
-        "name": "Authorization",
-        "in": "header",
-        "required": True
-      },
-      {
         "maxItems": 100,
         "minItems": 1,
         "uniqueItems": True,
@@ -120,13 +111,6 @@ _identity_protection_endpoints = [
     "identity_protection",
     [
       {
-        "type": "string",
-        "description": "Authorization Header",
-        "name": "Authorization",
-        "in": "header",
-        "required": True
-      },
-      {
         "name": "body",
         "in": "body",
         "required": True
@@ -140,13 +124,6 @@ _identity_protection_endpoints = [
     "Delete policy rules",
     "identity_protection",
     [
-      {
-        "type": "string",
-        "description": "Authorization Header",
-        "name": "Authorization",
-        "in": "header",
-        "required": True
-      },
       {
         "maxItems": 100,
         "minItems": 1,
@@ -203,13 +180,6 @@ _identity_protection_endpoints = [
     "Query policy rule IDs",
     "identity_protection",
     [
-      {
-        "type": "string",
-        "description": "Authorization Header",
-        "name": "Authorization",
-        "in": "header",
-        "required": True
-      },
       {
         "type": "boolean",
         "description": "Whether the rule is enabled",
