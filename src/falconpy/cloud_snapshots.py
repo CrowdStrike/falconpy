@@ -60,6 +60,52 @@ class CloudSnapshots(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_detections(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Search IaC Detections using a query in Falcon Query Language.
+
+        Keyword arguments:
+        filter -- Search IaC detections using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    detection_uuid          file_name
+                    last_detected           platform
+                    project_name            project_owner
+                    project_ref             provider
+                    resource_name           rule_category
+                    rule_name               rule_type
+                    rule_uuid               service
+                    severity
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        offset -- The offset from where to begin. Integer.
+        sort -- Fields to sort the records on. String
+                Supported columns:
+                    detection_uuid          file_name
+                    last_detected           platform
+                    project_name            project_owner
+                    project_ref             provider
+                    resource_name           rule_category
+                    rule_name               rule_type
+                    rule_uuid               service
+                    severity
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspg-iacapi/CombinedDetections
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CombinedDetections",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def search_scan_jobs(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for snapshot jobs identified by the provided filter.
 
@@ -303,9 +349,11 @@ class CloudSnapshots(ServiceClass):
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here
     # for backwards compatibility / ease of use purposes
+    CombinedDetections = search_detections
     ReadDeploymentsCombined = search_scan_jobs
     ReadDeploymentsEntities = get_scan_jobs
     CreateDeploymentEntity = launch_scan_job
     GetScanReport = get_scan_reports
     GetCredentialsMixin0 = get_credentials
+    GetCredentialsIAC = get_iac_credentials
     RegisterCspmSnapshotAccount = register_account
