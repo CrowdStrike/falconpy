@@ -131,7 +131,7 @@ _intel_endpoints = [
         "description": "Filter your query by specifying FQL filter parameters. Filter parameters "
         "include:\n\n_marker, actors, deleted, domain_types, id, indicator, ip_address_types, kill_chains, labels, "
         "labels.created_on, labels.last_valid_on, labels.name, last_updated, malicious_confidence, malware_families, "
-        "published_date, reports, scope, targets, threat_types, type, vulnerabilities.",
+        "published_date, reports, reports.slug, scope, targets, threat_types, type, vulnerabilities.",
         "name": "filter",
         "in": "query"
       },
@@ -629,7 +629,7 @@ _intel_endpoints = [
         "description": "Filter your query by specifying FQL filter parameters. Filter parameters "
         "include:\n\n_marker, actors, deleted, domain_types, id, indicator, ip_address_types, kill_chains, labels, "
         "labels.created_on, labels.last_valid_on, labels.name, last_updated, malicious_confidence, malware_families, "
-        "published_date, reports, scope, targets, threat_types, type, vulnerabilities.",
+        "published_date, reports, reports.slug, scope, targets, threat_types, type, vulnerabilities.",
         "name": "filter",
         "in": "query"
       },
