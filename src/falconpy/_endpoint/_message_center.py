@@ -187,7 +187,7 @@ _message_center_endpoints = [
         "in": "query"
       },
       {
-        "type": "string",
+        "type": "integer",
         "description": "Starting index of overall result set from which to return ids.",
         "name": "offset",
         "in": "query"
@@ -244,7 +244,7 @@ _message_center_endpoints = [
         "in": "query"
       },
       {
-        "type": "string",
+        "type": "integer",
         "description": "Starting index of overall result set from which to return ids.",
         "name": "offset",
         "in": "query"
