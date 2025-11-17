@@ -164,6 +164,11 @@ class Hosts(ServiceClass):
                 os_version                                              default_gateway_ip
                 device_policies.prevention.applied                      last_login_user_sid
                 device_policies.jumpcloud.policy_type                   bios_version
+                device_policies.exposure-management.applied             device_policies.exposure-management.policy_type
+                device_policies.exposure-management.policy_id           device_policies.logscale-collector.policy_id
+                device_policies.logscale-collector.policy_type          device_policies.logscale-collector.applied
+                device_policies.cloud-ml.policy_id                      device_policies.cloud-ml.policy_type
+                device_policies.cloud-ml.applied
 
         This method only supports keywords for providing arguments.
 
@@ -780,6 +785,11 @@ class Hosts(ServiceClass):
                 os_version                                              default_gateway_ip
                 device_policies.prevention.applied                      last_login_user_sid
                 device_policies.jumpcloud.policy_type                   bios_version
+                device_policies.exposure-management.applied             device_policies.exposure-management.policy_type
+                device_policies.exposure-management.policy_id           device_policies.logscale-collector.policy_id
+                device_policies.logscale-collector.policy_type          device_policies.logscale-collector.applied
+                device_policies.cloud-ml.policy_id                      device_policies.cloud-ml.policy_type
+                device_policies.cloud-ml.applied
 
         This method only supports keywords for providing arguments.
 
