@@ -200,6 +200,50 @@ _aspm_endpoints = [
     ]
   ],
   [
+    "GetCSPMInventoryBAServices",
+    "GET",
+    "/application-security/combined/cspm-inventory-ba-services/v1",
+    "Gets services ordered by risk score for given BA",
+    "aspm",
+    [
+      {
+        "type": "string",
+        "description": "Business application name",
+        "name": "business_application_name",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "integer",
+        "description": "Pagination offset",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Pagination limit",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetCSPMInventoryServiceDetails",
+    "GET",
+    "/application-security/combined/cspm-inventory-service-data/v1",
+    "Gets all service details for CSPM Inventory.",
+    "aspm",
+    [
+      {
+        "type": "string",
+        "description": "Service signature",
+        "name": "persistent_signature",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ExecuteFunctionData",
     "GET",
     "/application-security/combined/function-data/v1",
