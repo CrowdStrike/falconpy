@@ -60,7 +60,9 @@ _cao_hunting_endpoints = [
     [
       {
         "type": "string",
-        "description": "The Query Language. Accepted Values:\n\n<li>cql</li><li>snort</li><li>suricata</li><li>yara</li>",
+        "description": "The Query Language. Accepted "
+        "Values:\n\n<li>cql</li><li>snort</li><li>suricata</li><li>yara</li><li>SPL <i>AI translated "
+        "(Beta)</i></li><li>__all__ <i>returns a single archive with queries in all the languages</i></li> ",
         "name": "language",
         "in": "query",
         "required": True
@@ -73,7 +75,8 @@ _cao_hunting_endpoints = [
       },
       {
         "type": "string",
-        "description": "The Archive Type can be one of 'zip' and 'gzip'. Defaults to 'zip'.",
+        "default": "zip",
+        "description": "The Archive Type can be one of 'zip' and 'gzip'",
         "name": "archive_type",
         "in": "query"
       }
