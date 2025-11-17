@@ -492,7 +492,10 @@ class TestFalconContainer:
             "ReadExportJobs": falcon.read_export_jobs(ids="12345678"),
             "LaunchExportJob": falcon.launch_export_job(format="json", resource="assets.clusters"),
             "HeadImageScanInventory": falcon.get_scan_headers(),
-            "PostImageScanInventory": falcon.scan_inventory(**SCAN_INVENTORY_SAMPLE_PAYLOAD)
+            "PostImageScanInventory": falcon.scan_inventory(**SCAN_INVENTORY_SAMPLE_PAYLOAD),
+            "PolicyChecks": falcon.check_prevention_policies(),
+            "GetReportByReference": falcon.get_report_by_reference(),
+            "GetReportByScanID": falcon.get_report_by_id()
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

@@ -116,7 +116,8 @@ def scrub_target(oper: str, scrubbed: str, kwas: dict) -> str:
         "GetLookupFromPackageV1": ["repository", "package", "filename"],
         "StartSearchV1": ["repository"],
         "GetSearchStatusV1": ["repository", "id", "search_id"],
-        "StopSearchV1": ["repository", "id"]
+        "StopSearchV1": ["repository", "id"],
+        "GetReportByScanID": ["uuid"]
     }
     for field_value, field_names in field_mapping.items():
         if oper == field_value:  # Only perform replacements on mapped operation IDs.
