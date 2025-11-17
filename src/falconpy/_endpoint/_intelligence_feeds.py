@@ -77,10 +77,12 @@ _intelligence_feeds_endpoints = [
       },
       {
         "type": "string",
-        "description": "Feed interval must be one of: dump|daily|hourly|minutely",
+        "description": "Feed interval must be one of:  dump: Complete historical data snapshot  daily: Daily "
+        "aggregated updates  hourly: Hourly incremental updates  minutely: Minute-by-minute updates  any: Automatically "
+        " combines the appropriate intervals to provide complete, up-to-date data with minimal overlap\n\nDefaults to "
+        "'any' if not specified.",
         "name": "feed_interval",
-        "in": "query",
-        "required": True
+        "in": "query"
       },
       {
         "type": "string",
