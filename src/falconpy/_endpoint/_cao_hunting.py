@@ -99,6 +99,17 @@ _cao_hunting_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The AI translated language that should be returned if it exists<br>Accepted values "
+        "are: <li>SPL</li><li>\\_\\_all\\_\\_</li>",
+        "name": "include_translated_content",
+        "in": "query"
       }
     ]
   ],
