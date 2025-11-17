@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 # pylint: disable=C0302,R0904
 from typing import Dict, Union
 from json import loads, dumps
-from ._util import force_default, process_service_request, generate_error_result
+from ._util import force_default, process_service_request, generate_error_result, handle_single_argument
 from ._payload import (
     aspm_delete_tag_payload,
     aspm_violations_search_payload,
@@ -207,6 +207,63 @@ class ASPM(ServiceClass):
             operation_id="ExecuteFunctionsQueryCount",
             keywords=kwargs,
             params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_ba_services(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get services ordered by risk score for given BA.
+
+        Keyword arguments:
+        business_application_name -- Business application name. String.
+        offset -- Pagination offset. Integer.
+        limit -- Pagination limit. Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetCSPMInventoryBAServices
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMInventoryBAServices",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_inventory_details(self: object,
+                              *args,
+                              parameters: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get all service details for CSPM Inventory.
+
+        Keyword arguments:
+        persistent_signature -- Service signature. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'persistent_signature'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/GetCSPMInventoryServiceDetails
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCSPMInventoryServiceDetails",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "persistent_signature")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -2589,6 +2646,8 @@ class ASPM(ServiceClass):
     ExecuteFunctionsQueryCount = execute_functions_query_count
     ExecuteFunctionData = execute_function_data
     ExecuteFunctionsOvertime = execute_functions_over_time
+    GetCSPMInventoryBAServices = get_ba_services
+    GetCSPMInventoryServiceDetails = get_inventory_details
     ExecuteFunctions = execute_functions
     ExecuteFunctionDataQuery = execute_function_data_query
     ExecuteFunctionsQueryOvertime = execute_functions_query_over_time
