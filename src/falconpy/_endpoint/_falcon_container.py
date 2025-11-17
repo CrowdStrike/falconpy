@@ -358,5 +358,103 @@ _falcon_container_endpoints = [
     "Get headers for POST request for image scan inventory",
     "falcon_container",
     []
+  ],
+  [
+    "PolicyChecks",
+    "GET",
+    "/image-assessment/entities/policy-checks/v2",
+    "Check image prevention policies",
+    "falcon_container",
+    [
+      {
+        "type": "string",
+        "description": "Registry",
+        "name": "registry",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Repository",
+        "name": "repository",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Tag",
+        "name": "tag",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetReportByReference",
+    "GET",
+    "/image-assessment/entities/reports/v2",
+    "Get image assessment scan report by image reference (v2)",
+    "falcon_container",
+    [
+      {
+        "type": "string",
+        "description": "Registry",
+        "name": "registry",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Repository",
+        "name": "repository",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Tag",
+        "name": "tag",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Image ID",
+        "name": "image_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Digest",
+        "name": "digest",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "json",
+        "description": "Specify image-assessment scan report format. Supported formats:   cyclonedx-json  json  sarif",
+        "name": "report_format",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetReportByScanID",
+    "GET",
+    "/image-assessment/entities/reports/v2/{uuid}",
+    "Get image assessment scan report by scan UUID (v2)",
+    "falcon_container",
+    [
+      {
+        "type": "string",
+        "description": "Scan UUID",
+        "name": "uuid",
+        "in": "path",
+        "required": True
+      },
+      {
+        "type": "string",
+        "default": "json",
+        "description": "Specify image-assessment scan report format. Supported formats:   cyclonedx-json  json  sarif",
+        "name": "report_format",
+        "in": "query"
+      }
+    ]
   ]
 ]
