@@ -39,6 +39,8 @@ class TestASPM:
             "RunIntegrationTask": falcon.run_integration_task(id=42, task_id=42),
             "RunIntegrationTaskV2": falcon.run_integration_task_v2(id=42, task_id=42),
             "RunIntegrationTaskAdmin": falcon.run_integration_task_admin(id=42, task_id=42),
+            "GetCSPMInventoryBAServices": falcon.get_ba_services(business_application_name="charlie"),
+            "GetCSPMInventoryServiceDetails": falcon.get_inventory_details(persistent_signature="yellow"),
             "UpdateIntegrationTaskFail": falcon.update_integration_task(),
             "DeleteIntegrationTaskFail": falcon.delete_integration_task(),
             "RunIntegrationTaskFail": falcon.run_integration_task(),
