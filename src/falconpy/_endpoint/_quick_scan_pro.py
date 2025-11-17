@@ -41,15 +41,24 @@ _quick_scan_pro_endpoints = [
     "UploadFileQuickScanPro",
     "POST",
     "/quickscanpro/entities/files/v1",
-    "Uploads a file to be further analyzed with QuickScan Pro. The samples expire according to the Retention Policies set.",
+    "Uploads a file to be further analyzed with QuickScan Pro. Supports both multipart/form-data and "
+    "application/octet-stream uploads. The samples expire according to the Retention Policies set. See parameter "
+    "descriptions for usage per content type.",
     "quick_scan_pro",
     [
       {
         "type": "file",
-        "description": "Binary file to be uploaded. Max file size: 256 MB.",
+        "description": "Binary file to be uploaded. Max file size: 256 MB. Use --data-binary @$FILE_PATH for "
+        "octet-stream/cURL uploads",
         "name": "file",
         "in": "formData",
         "required": True
+      },
+      {
+        "type": "string",
+        "description": "OCTET-STREAM ONLY - Name of the file (required for octet-stream uploads).",
+        "name": "file_name",
+        "in": "query"
       },
       {
         "type": "boolean",
