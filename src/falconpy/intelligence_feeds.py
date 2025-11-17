@@ -114,10 +114,11 @@ class IntelligenceFeeds(ServiceClass):
         feed_name -- Feed Name.
         feed_interval -- Feed interval must be one of: 'dump', 'daily', 'hourly' or 'minutely'.
         since -- Since is a valid timestamp in RFC3399 format.
-                 Restrictions: minutely: now()-2h,
-                               hourly: now()-2d,
-                               daily: now()-5d;
+                 Restrictions: minutely: now()-2h
+                               hourly: now()-2d
+                               daily: now()-5d
                                dump: now()-7d
+                               any: Automatically combines the appropriate intervals
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
