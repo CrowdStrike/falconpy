@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-from ._util import process_service_request, force_default, handle_single_argument
+from ._util import process_service_request, force_default, handle_single_argument, generate_error_result
 from ._payload import image_payload, registry_payload, export_job_payload, inventory_scan_payload
 from ._result import Result
 from ._service_class import ServiceClass
@@ -806,6 +806,111 @@ class FalconContainer(ServiceClass):
             operation_id="HeadImageScanInventory"
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def check_prevention_policies(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Check image prevention policies.
+
+        Keyword arguments:
+        registry -- Image registry. String.
+        repository -- Image repository. String.
+        tag -- Image tag. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/PolicyChecks
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="PolicyChecks",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_report_by_reference(self: object,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get image assessment scan report by image reference (v2).
+
+        Keyword arguments:
+        registry -- Image registry. String.
+        repository -- Image repository. String.
+        tag -- Image tag. String.
+        image_id -- Image ID. String.
+        digest -- Image digest. String.
+        report_format -- Specify image-assessment scan report format.
+                         Supported formats:
+                           cyclonedx-json
+                           json
+                           sarif
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/GetReportByReference
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetReportByReference",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_report_by_id(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get image assessment scan report by scan UUID (v2).
+
+        Keyword arguments:
+        uuid -- Scan UUID. String.
+        report_format -- Specify image-assessment scan report format. String.
+                         Supported formats:
+                           cyclonedx-json
+                           json
+                           sarif
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falcon-container-image/GetReportByScanID
+        """
+        uuid = kwargs.get("uuid", None)
+        if uuid:
+            kwargs.pop("uuid")
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="GetReportByScanID",
+                keywords=kwargs,
+                params=parameters,
+                uuid=uuid
+                )
+        else:
+            returned = generate_error_result("You must provide the uuid argument in order to use this operation.")
+
+        return returned
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
@@ -826,3 +931,6 @@ class FalconContainer(ServiceClass):
     UpdateRegistryEntities = update_registry_entities
     PostImageScanInventory = scan_inventory
     HeadImageScanInventory = get_scan_headers
+    PolicyChecks = check_prevention_policies
+    GetReportByReference = get_report_by_reference
+    GetReportByScanID = get_report_by_id
