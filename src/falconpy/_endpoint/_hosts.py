@@ -284,6 +284,27 @@ _hosts_endpoints = [
     "hosts",
     [
       {
+        "type": "integer",
+        "default": 10,
+        "description": "The maximum number of results to return [1-100].",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "now-7d",
+        "description": "The inclusive beginning of the time window to search.",
+        "name": "from",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "now",
+        "description": "The inclusive end of the time window to search.",
+        "name": "to",
+        "in": "query"
+      },
+      {
         "name": "body",
         "in": "body",
         "required": True
