@@ -771,6 +771,10 @@ def handle_path_variables(passed: dict, route_url: str):
     passed_id = passed.get("path_id", None)
     if "aspm-api-gateway" in route_url and passed_id:
         route_url = route_url.format(passed.get("path_id"))
+    # Falcon Container
+    passed_uuid = passed.get("uuid", None)
+    if passed_uuid:
+        route_url = route_url.format(str(passed_uuid))
     # NGSIEM
     passed_repository = passed.get("repository", None)
     if passed_repository:
