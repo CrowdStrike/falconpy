@@ -157,7 +157,12 @@ class CAOHunting(ServiceClass):
         Keyword arguments:
         archive_type -- The Archive Type. String. Can be one of 'zip' and 'gzip'. Defaults to 'zip'.
         filter -- The FQL Filter used to limit results. String.
-        language -- The Query Language used. String. Accepted Values: cql, snort, suricata, or yara
+        language -- The Query Language used. String.
+                    Accepted Values:
+                      cql           SPL
+                      snort         AI translated
+                      suricata      __all__
+                      yara
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
