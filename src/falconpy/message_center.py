@@ -408,7 +408,7 @@ class MessageCenter(ServiceClass):
         filter -- The filter expression that should be used to limit the results. FQL syntax.
                   String.
         limit -- The maximum number of records to return. [integer, 1-500]
-        offset -- The integer offset to start retrieving records from. String.
+        offset -- The integer offset to start retrieving records from. Integer.
         parameters - full parameters payload, not required if using other keywords. Dictionary.
         sort -- The property to sort on. FQL syntax. String.
                 Available properties
@@ -440,7 +440,7 @@ class MessageCenter(ServiceClass):
         filter -- The filter expression that should be used to limit the results. FQL syntax.
                   String.
         limit -- The maximum number of records to return. [integer, 1-500]
-        offset -- The integer offset to start retrieving records from. String.
+        offset -- The integer offset to start retrieving records from. Integer.
         parameters - full parameters payload, not required if using other keywords. Dictionary.
         sort -- The property to sort on. FQL syntax. String.
                 Available properties
