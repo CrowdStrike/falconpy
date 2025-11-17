@@ -86,7 +86,7 @@ _cao_hunting_endpoints = [
     "GetIntelligenceQueries",
     "GET",
     "/hunting/entities/intelligence-queries/v1",
-    "Retrieves a list of Intelligence queries",
+    "Retrieves the details of a list of Intelligence queries IDs",
     "cao_hunting",
     [
       {
@@ -106,7 +106,7 @@ _cao_hunting_endpoints = [
     "SearchIntelligenceQueries",
     "GET",
     "/hunting/queries/intelligence-queries/v1",
-    "Search intelligence queries that match the provided conditions",
+    "Search for a list of intelligence queries IDs that match the provided conditions",
     "cao_hunting",
     [
       {
