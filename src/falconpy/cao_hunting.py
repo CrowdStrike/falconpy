@@ -191,6 +191,8 @@ class CAOHunting(ServiceClass):
 
         Keyword arguments:
         ids -- Intelligence queries IDs. String or list of strings.
+        include_translated_content -- The AI translated language that should be returned if it exists.
+                                      Allowed values: SPL, __all__
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
