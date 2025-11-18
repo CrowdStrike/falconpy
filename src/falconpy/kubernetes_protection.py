@@ -98,7 +98,8 @@ class KubernetesProtection(ServiceClass):
                     cloud_region        node_count
                     cloud_service       pod_count
                     cluster_id          tags
-                    cluster_name
+                    cluster_name        pod_name
+                    namespace
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -141,7 +142,8 @@ class KubernetesProtection(ServiceClass):
                     cloud_region        node_count
                     cloud_service       pod_count
                     cluster_id          tags
-                    cluster_name
+                    cluster_name        pod_name
+                    namespace
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -183,7 +185,8 @@ class KubernetesProtection(ServiceClass):
                     cloud_region        node_count
                     cloud_service       pod_count
                     cluster_id          tags
-                    cluster_name
+                    cluster_name        pod_name
+                    namespace
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -1412,7 +1415,8 @@ class KubernetesProtection(ServiceClass):
                     cloud_region        node_count
                     cloud_service       pod_count
                     cluster_id          tags
-                    cluster_name
+                    cluster_name        pod_name
+                    namespace
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- Field to sort results by. String.
@@ -1455,7 +1459,8 @@ class KubernetesProtection(ServiceClass):
                     cloud_region        node_count
                     cloud_service       pod_count
                     cluster_id          tags
-                    cluster_name
+                    cluster_name        pod_name
+                    namespace
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- Field to sort results by. String.
