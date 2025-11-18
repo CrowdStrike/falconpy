@@ -441,7 +441,7 @@ def automation_policy_payload(passed_keywords: dict) -> dict:
 
 
 def policy_host_group_payload(passed_keywords: dict) -> dict:
-    """Craft a properly formatting policy host group payload.
+    """Craft a properly formatted policy host group payload.
 
     {
         "action": "string",
@@ -457,6 +457,33 @@ def policy_host_group_payload(passed_keywords: dict) -> dict:
         if passed_keywords.get(key, None) is not None:
             key_value = passed_keywords.get(key, None)
             if key == "host_group_ids" and isinstance(key_value, str):
+                key_value = key_value.split(",")
+            returned_payload[key] = key_value
+
+    return returned_payload
+
+
+def automation_user_group_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted user group payload.
+
+    {
+        "add_user_ids": [
+            "string"
+        ],
+        "description": "string",
+        "name": "string",
+        "remove_user_ids": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+    keys = ["add_user_ids", "description", "name", "remove_user_ids"]
+    list_keys = ["add_user_ids", "remove_user_ids"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            key_value = passed_keywords.get(key, None)
+            if key in list_keys and isinstance(key_value, str):
                 key_value = key_value.split(",")
             returned_payload[key] = key_value
 
