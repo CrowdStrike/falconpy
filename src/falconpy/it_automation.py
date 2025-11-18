@@ -47,7 +47,8 @@ from ._payload import (
     scheduled_task_payload,
     automation_policy_payload,
     policy_host_group_payload,
-    automation_live_query_payload
+    automation_live_query_payload,
+    automation_user_group_payload
     )
 from ._result import Result
 from ._service_class import ServiceClass
@@ -306,6 +307,144 @@ class ITAutomation(ServiceClass):
             operation_id="ITAutomationGetTasksByQuery",
             keywords=kwargs,
             params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_user_group(self: object,
+                       *args,
+                       parameters: dict = None,
+                       **kwargs
+                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Return user groups for each provided ID.
+
+        Keyword arguments:
+        ids -- List of user group IDs to fetch. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationGetUserGroup
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ITAutomationGetUserGroup",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_user_group(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create a user group from the given request.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "description": "string",
+                    "name": "string"
+                }
+        description -- Description of the user group. String.
+        name -- Name of the user group. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationCreateUserGroup
+        """
+        if not body:
+            body = automation_user_group_payload(passed_keywords=kwargs)
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ITAutomationCreateUserGroup",
+            body=body
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def update_user_group(self: object,
+                          body: dict = None,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update a user group for a given ID.
+
+        Keyword arguments:
+        add_user_ids -- List of user IDs to add. String or list of strings.
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "add_user_ids": [
+                        "string"
+                    ],
+                    "description": "string",
+                    "name": "string",
+                    "remove_user_ids": [
+                        "string"
+                    ]
+                }
+        description -- The updated user group description. String.
+        name -- The updated user group name. String.
+        id -- The ID of the user groups to update. String.
+        remove_user_ids -- List of user IDs to remove. String or list of strings.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationUpdateUserGroup
+        """
+        if not body:
+            body = automation_user_group_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ITAutomationUpdateUserGroup",
+            keywords=kwargs,
+            body=body,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_user_groups(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete user groups for each provided IDs.
+
+        Keyword arguments:
+        ids -- List of user group IDs to delete. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+        All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationDeleteUserGroup
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ITAutomationDeleteUserGroup",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -1821,6 +1960,50 @@ class ITAutomation(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_user_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Return the list of user group IDs matching the filter query parameter.
+
+        This operation can be used together with the ITAutomationGetUserGroup operation
+        to retrieve full information on user groups.
+
+        Keyword arguments:
+        filter -- The filter expression that should be used to limit the results.
+                  Allowed filter fields:
+                    created_by          created_time
+                    description         modified_by
+                    modified_time       name
+                  Example:
+                    example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'
+        sort -- The sort expression that should be used to sort the results.
+                Sort either `asc` (ascending) or `desc` (descending).
+                Allowed sort fields:
+                  created_by            created_time
+                  modified_by           modified_time
+                  name
+                Example:
+                    example_field|asc
+        offset -- Starting index for record retrieval. Integer. Example: 100
+        limit -- The maximum records to return. Integer. Example: 50
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/it-automation/ITAutomationSearchUserGroup
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ITAutomationSearchUserGroup",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return the list of policy ids matching the filter query parameter.
 
@@ -2054,6 +2237,10 @@ class ITAutomation(ServiceClass):
     ITAutomationGetTaskExecutionsByQuery = get_executions_by_query
     ITAutomationGetTaskGroupsByQuery = get_task_groups_by_query
     ITAutomationGetTasksByQuery = get_tasks_by_query
+    ITAutomationGetUserGroup = get_user_group
+    ITAutomationCreateUserGroup = create_user_group
+    ITAutomationUpdateUserGroup = update_user_group
+    ITAutomationDeleteUserGroup = delete_user_groups
     ITAutomationRunLiveQuery = run_live_query
     ITAutomationUpdatePolicyHostGroups = update_policy_host_groups
     ITAutomationUpdatePoliciesPrecedence = update_policies_precedence
@@ -2081,6 +2268,7 @@ class ITAutomation(ServiceClass):
     ITAutomationCreateTask = create_task
     ITAutomationUpdateTask = update_task
     ITAutomationDeleteTask = delete_task
+    ITAutomationSearchUserGroup = search_user_groups
     ITAutomationQueryPolicies = query_policies
     ITAutomationSearchScheduledTasks = search_scheduled_tasks
     ITAutomationSearchTaskExecutions = search_task_executions

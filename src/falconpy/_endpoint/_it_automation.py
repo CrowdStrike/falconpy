@@ -258,6 +258,81 @@ _it_automation_endpoints = [
     ]
   ],
   [
+    "ITAutomationGetUserGroup",
+    "GET",
+    "/it-automation/entities/it-user-groups/v1",
+    "Returns user groups for each provided id",
+    "it_automation",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Comma separated values of user group ids to fetch",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ITAutomationCreateUserGroup",
+    "POST",
+    "/it-automation/entities/it-user-groups/v1",
+    "Creates a user group from the given request",
+    "it_automation",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ITAutomationUpdateUserGroup",
+    "PATCH",
+    "/it-automation/entities/it-user-groups/v1",
+    "Update a user group for a given id",
+    "it_automation",
+    [
+      {
+        "type": "string",
+        "description": "The id of the user groups to update",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ITAutomationDeleteUserGroup",
+    "DELETE",
+    "/it-automation/entities/it-user-groups/v1",
+    "Deletes user groups for each provided ids",
+    "it_automation",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Comma separated values of user group ids to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ITAutomationRunLiveQuery",
     "POST",
     "/it-automation/entities/live-query-execution/v1",
@@ -817,6 +892,49 @@ _it_automation_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      }
+    ]
+  ],
+  [
+    "ITAutomationSearchUserGroup",
+    "GET",
+    "/it-automation/queries/it-user-groups/v1",
+    "Returns the list of user group ids matching the filter query parameter. It can be used together with the "
+    "entities endpoint to retrieve full information on user groups",
+    "it_automation",
+    [
+      {
+        "type": "string",
+        "description": "The filter expression that should be used to limit the results. Allowed filter fields: "
+        " [created_by, created_time, description, modified_by, modified_time, name] Example: "
+        "example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The sort expression that should be used to sort the results. Allowed sort fields: "
+        "[created_by, created_time, modified_by, modified_time, name]. Sort either asc (ascending) or desc "
+        "(descending). Example: example_field|asc",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "integer",
+        "default": 0,
+        "description": "Starting index for record retrieval. Example: 100",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "maximum": 1000,
+        "minimum": 1,
+        "type": "integer",
+        "default": 100,
+        "description": "The maximum records to return. Example: 50",
+        "name": "limit",
+        "in": "query"
       }
     ]
   ],
