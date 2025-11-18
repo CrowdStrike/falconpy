@@ -765,7 +765,7 @@ _kubernetes_protection_endpoints = [
     "ReadClusterCombinedV2",
     "GET",
     "/container-security/combined/clusters/v2",
-    "Retrieve kubernetes clusters identified by the provided filter criteria",
+    "Retrieve Kubernetes cluster data",
     "kubernetes_protection",
     [
       {
@@ -844,7 +844,8 @@ _kubernetes_protection_endpoints = [
     "ReadContainerCombined",
     "GET",
     "/container-security/combined/containers/v1",
-    "Retrieve containers identified by the provided filter criteria",
+    "Retrieves a paginated list of containers identified by the provided filter criteria. Maximum page size: "
+    "200. Maximum available containers: 10,000",
     "kubernetes_protection",
     [
       {
@@ -922,7 +923,8 @@ _kubernetes_protection_endpoints = [
     "SearchAndReadKubernetesIomEntities",
     "GET",
     "/container-security/combined/kubernetes-ioms/v1",
-    "Search Kubernetes IOM by the provided search criteria",
+    "Retrieves a list of Kubernetes IOMs identified by the provided search criteria. Maximum page size: 100. "
+    "Maximum available Kubernetes IOMs: 10,000",
     "kubernetes_protection",
     [
       {
