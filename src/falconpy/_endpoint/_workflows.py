@@ -579,6 +579,22 @@ _workflows_endpoints = [
         "in": "query"
       },
       {
+        "type": "boolean",
+        "default": False,
+        "description": "When enabled, skips validating mocks from the request body against the mocked entity's "
+        "output schema. Mocks provided in the definition by reference are not validated in any case.",
+        "name": "skip_validation",
+        "in": "query"
+      },
+      {
+        "type": "boolean",
+        "default": False,
+        "description": "When enabled, treats all activity mocks in the definition as disabled for this mock "
+        "execution. Mocks provided in the request body are treated normally.",
+        "name": "ignore_activity_mock_references",
+        "in": "query"
+      },
+      {
         "name": "body",
         "in": "body",
         "required": True
