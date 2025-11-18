@@ -58,7 +58,8 @@ _kubernetes_protection_endpoints = [
         "description": "Retrieve count of Kubernetes clusters that match a query in Falcon Query Language "
         "(FQL). Supported filter fields:  access  agent_id  agent_status  agent_type  cid  cloud_account_id  cloud_name"
         "  cloud_region  cloud_service  cluster_id  cluster_name  cluster_status  container_count  iar_coverage  "
-        "kac_agent_id  kubernetes_version  last_seen  management_status  node_count  pod_count  tags",
+        "kac_agent_id  kubernetes_version  last_seen  management_status  namespace  node_count  pod_count  pod_name  "
+        "tags",
         "name": "filter",
         "in": "query"
       }
@@ -76,7 +77,8 @@ _kubernetes_protection_endpoints = [
         "description": "Retrieve count of Kubernetes clusters that match a query in Falcon Query Language "
         "(FQL). Supported filter fields:  access  agent_id  agent_status  agent_type  cid  cloud_account_id  cloud_name"
         "  cloud_region  cloud_service  cluster_id  cluster_name  cluster_status  container_count  iar_coverage  "
-        "kac_agent_id  kubernetes_version  last_seen  management_status  node_count  pod_count  tags",
+        "kac_agent_id  kubernetes_version  last_seen  management_status  namespace  node_count  pod_count  pod_name  "
+        "tags",
         "name": "filter",
         "in": "query"
       }
@@ -94,7 +96,8 @@ _kubernetes_protection_endpoints = [
         "description": "Retrieve count of Kubernetes clusters that match a query in Falcon Query Language "
         "(FQL). Supported filter fields:  access  agent_id  agent_status  agent_type  cid  cloud_account_id  cloud_name"
         "  cloud_region  cloud_service  cluster_id  cluster_name  cluster_status  container_count  iar_coverage  "
-        "kac_agent_id  kubernetes_version  last_seen  management_status  node_count  pod_count  tags",
+        "kac_agent_id  kubernetes_version  last_seen  management_status  namespace  node_count  pod_count  pod_name  "
+        "tags",
         "name": "filter",
         "in": "query"
       }
@@ -733,7 +736,7 @@ _kubernetes_protection_endpoints = [
         "description": "Search Kubernetes clusters using a query in Falcon Query Language (FQL). Supported "
         "filter fields:  access  agent_id  agent_status  agent_type  cid  cloud_account_id  cloud_name  cloud_region  "
         "cloud_service  cluster_id  cluster_name  cluster_status  container_count  iar_coverage  kac_agent_id  "
-        "kubernetes_version  last_seen  management_status  node_count  pod_count  tags",
+        "kubernetes_version  last_seen  management_status  namespace  node_count  pod_count  pod_name  tags",
         "name": "filter",
         "in": "query"
       },
@@ -770,7 +773,7 @@ _kubernetes_protection_endpoints = [
         "description": "Search Kubernetes clusters using a query in Falcon Query Language (FQL). Supported "
         "filter fields:  access  agent_id  agent_status  agent_type  cid  cloud_account_id  cloud_name  cloud_region  "
         "cloud_service  cluster_id  cluster_name  cluster_status  container_count  iar_coverage  kac_agent_id  "
-        "kubernetes_version  last_seen  management_status  node_count  pod_count  tags",
+        "kubernetes_version  last_seen  management_status  namespace  node_count  pod_count  pod_name  tags",
         "name": "filter",
         "in": "query"
       },
