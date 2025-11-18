@@ -457,12 +457,17 @@ class Workflows(ServiceClass):
                          String or List of Strings.
         execution_cid -- CID(s) to execute on. This can be a child for Flight Control scenarios.
                          If unset, the definition CID is used. String or List of strings.
+        ignore_activity_mock_references -- When enabled, treats all activity mocks in the definition as disabled for this mock
+                                           execution. Mocks provided in the request body are treated normally. Boolean.
         name -- Workflow name to execute. Either a name or ID can be specified. String.
         parameters -- Full parameters payload in dictionary (JSON) format. Not required
                       if you are using other keywords. Dictionary.
         key -- Key used to help deduplicate executions. If unset a new UUID is used. String.
         depth -- Used to record the execution depth to help limit execution loops when a workflow
                  triggers another. The maximum depth is 4. Integer.
+        skip_validation -- When enabled, skips validating mocks from the request body against the mocked entity's
+                           output schema. Mocks provided in the definition by reference are not validated in any case.
+                           Boolean.
         source_event_url -- Used to record a URL to the source that led to trigger the workflow.
                             String.
         validate_only -- PRevent execution after validating mocks against definition. Boolean.
