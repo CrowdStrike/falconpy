@@ -920,6 +920,43 @@ _kubernetes_protection_endpoints = [
     ]
   ],
   [
+    "PostSearchKubernetesIOMEntities",
+    "POST",
+    "/container-security/combined/kubernetes-ioms/search/v1",
+    "Search for Kubernetes IOMs with filtering options.Pagination is supported via Elasticsearch's "
+    "search_after search param and point in time. Assets are sorted by unique ID in ascending direction.",
+    "kubernetes_protection",
+    [
+      {
+        "type": "string",
+        "description": "Search Kubernetes IOMs using a query in Falcon Query Language (FQL). Supported filter "
+        "fields:  cid  cis_id  cluster_id  cluster_name  containers_impacted_ai_related  containers_impacted_count  "
+        "containers_impacted_ids  detection_type  name  namespace  prevented  resource_id  resource_name  resource_type"
+        "severity",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The fields to sort the records on.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "Maximum number of records to return (default: 100, max: 500)",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "SearchAndReadKubernetesIomEntities",
     "GET",
     "/container-security/combined/kubernetes-ioms/v1",
