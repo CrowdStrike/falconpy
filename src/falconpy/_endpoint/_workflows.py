@@ -435,7 +435,8 @@ _workflows_endpoints = [
     [
       {
         "enum": [
-          "resume"
+          "resume",
+          "cancel"
         ],
         "type": "string",
         "description": "Specify one of these actions:\n  resume: resume/retry the workflow execution(s) "
