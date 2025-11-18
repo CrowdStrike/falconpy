@@ -60,6 +60,11 @@ class TestITAutomation:
             "ITAutomationSearchTaskExecutions": falcon.search_task_executions(),
             "ITAutomationSearchTaskGroups": falcon.search_task_groups(),
             "ITAutomationSearchTasks": falcon.search_tasks(),
+            "ITAutomationGetUserGroup": falcon.get_user_group(ids="12345678"),
+            "ITAutomationCreateUserGroup": falcon.create_user_group(name="whatever"),
+            "ITAutomationUpdateUserGroup": falcon.update_user_group(id="12345678"),
+            "ITAutomationDeleteUserGroup": falcon.delete_user_groups(ids="12345678"),
+            "ITAutomationSearchUserGroups": falcon.search_user_groups(limit=1)
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
