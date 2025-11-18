@@ -584,8 +584,9 @@ _it_automation_endpoints = [
     "ITAutomationStartExecutionResultsSearch",
     "POST",
     "/it-automation/entities/task-execution-results-search/v1",
-    "Starts an async task execution results search. Poll `ITAutomationGetExecutionResultsSearchStatus` to "
-    "determine when the search is complete.",
+    "Starts an async task execution results search. Poll ITAutomationGetExecutionResultsSearchStatus to check "
+    "if the search is complete. You must retrieve the results using ITAutomationGetExecutionResults within 30 "
+    "seconds of completion, or the job will be deleted.",
     "it_automation",
     [
       {
@@ -599,8 +600,9 @@ _it_automation_endpoints = [
     "ITAutomationGetExecutionResults",
     "GET",
     "/it-automation/entities/task-execution-results/v1",
-    "Get the task execution results from an async search.  \n\nUse `ITAutomationStartExecutionResultsSearch` "
-    "to begin the async search.",
+    "Get the task execution results from an async search.  \n\nUse the ITAutomationStartExecutionResultsSearch "
+    " command to start the async search. You can retrieve the results again for up to 24 hours, after which they "
+    "will be deleted.",
     "it_automation",
     [
       {
