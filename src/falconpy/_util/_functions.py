@@ -41,9 +41,10 @@ import functools
 from warnings import warn
 from json import loads
 try:
-    from simplejson import JSONDecodeError
-except (ImportError, ModuleNotFoundError):  # Support import as a module
-    from json.decoder import JSONDecodeError
+    from simplejson import JSONDecodeError as SimplejsonJSONDecodeError
+except (ImportError, ModuleNotFoundError):
+    SimplejsonJSONDecodeError = None  # Support import as a module
+from json.decoder import JSONDecodeError as StdJSONDecodeError
 from typing import Dict, Any, Union, Optional, List, TYPE_CHECKING
 from copy import deepcopy
 from logging import Logger
@@ -84,6 +85,9 @@ if TYPE_CHECKING:  # pragma: no cover
     from ..oauth2 import OAuth2
 
 urllib3.disable_warnings(InsecureRequestWarning)
+
+# create a tuple of all possible JSONDecodeError types for exception handling
+# JSONDecodeError = (SimplejsonJSONDecodeError, StdJSONDecodeError) if SimplejsonJSONDecodeError else (StdJSONDecodeError,)
 
 
 def validate_payload(validator: Dict[str, Any],
@@ -277,7 +281,7 @@ def calc_content_return(resp: requests.Response,
         json_resp: Union[dict, Result] = {}
         try:
             json_resp = resp.json()
-        except JSONDecodeError:
+        except (StdJSONDecodeError, SimplejsonJSONDecodeError):
             if api_method != "HEAD":
                 # It says JSON in the headers but it came back to us as a binary string.
                 json_resp = loads(resp.content.decode("ascii"))
@@ -461,7 +465,7 @@ def perform_request(endpoint: str = "",  # noqa: C901
                 returned = bad_region.result
                 api.log_error(returned.get("status_code"), bad_region.message, returned)
 
-            except JSONDecodeError as json_decode_error:
+            except (StdJSONDecodeError, SimplejsonJSONDecodeError) as json_decode_error:
                 # No response content, but a successful request was made
                 if "/identity-protection/combined/graphql/v1" in api.endpoint:  # pragma: no cover
                     raise SDKError(message=f"{str(json_decode_error)}",
