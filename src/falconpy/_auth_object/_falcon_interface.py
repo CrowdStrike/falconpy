@@ -273,6 +273,23 @@ class FalconInterface(BaseFalconAuth):
                     returned = True
         return returned
 
+    def child_logout(self, login_as_parent: bool = True) -> bool:
+        """Perform a logout of the child, and potentially relog in as the parent."""
+        returned = False
+        if self.creds["member_cid"]:
+            self.creds.pop("member_cid", None)
+        if login_as_parent:
+            do_loginout = self.login()
+        else:
+            do_loginout = self.logout()
+        if isinstance(do_loginout, bool):
+            returned = do_loginout
+        else:
+            if do_loginout["status_code"] == 201:
+                returned = True
+
+        return returned
+
     # The default behavior for both the login and logout handlers is to return
     # the entire dictionary created by the token API response.
     def _login_handler(self, stateful: bool = True) -> dict:

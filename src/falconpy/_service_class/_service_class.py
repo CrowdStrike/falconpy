@@ -202,6 +202,10 @@ class ServiceClass(BaseServiceClass):
         """Login to a child tenant by providing a member CID."""
         return self.auth_object.child_login(member_cid=member_cid)
 
+    def child_logout(self, login_as_parent: bool) -> bool:
+        """Logout of a child tenant."""
+        return self.auth_object.child_logout(login_as_parent=login_as_parent)
+
     # Legacy property getters maintained for backwards functionality.
     def authenticated(self) -> bool:
         """Return the current authentication status."""
