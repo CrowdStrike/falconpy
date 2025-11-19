@@ -354,3 +354,13 @@ class TestAuthentications:
         named_log = logging.getLogger("named_target")
         test_object = Hosts(debug=named_log, pythonic=True, access_token=auth.authorization.token_value, base_url=auth.authorization.base_url)
         assert bool(test_object.query_devices_by_filter_scroll(limit=1).status_code == 200)
+
+    def test_child_login_logout(self):
+        _success = False
+        test_object = Hosts(client_id="whatever", client_secret="whatever", debug=_DEBUG)
+        failed_child_login = test_object.child_login(member_cid="12345678")
+        if not failed_child_login:
+            failed_child_login = test_object.child_logout(login_as_parent=False)
+            if not failed_child_login:
+                _success = True
+        assert _success
