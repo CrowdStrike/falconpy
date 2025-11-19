@@ -115,6 +115,7 @@ from .certificate_based_exclusions import CertificateBasedExclusions
 from .cloud_aws_registration import CloudAWSRegistration
 from .cloud_azure_registration import CloudAzureRegistration
 from .cloud_oci_registration import CloudOCIRegistration
+from .cloud_policies import CloudPolicies
 from .cloud_security_assets import CloudSecurityAssets
 from .cloud_security_compliance import CloudSecurityCompliance
 from .cloud_security_detections import CloudSecurityDetections
@@ -258,7 +259,8 @@ __all__ = [
     "Color", "Indicator", "random_string", "KubernetesContainerCompliance", "find_operation",
     "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch", "ITAutomation", "F4IT",
     "CloudSecurityCompliance", "CaseManagement", "SaasSecurity", "SpotlightVulnerabilityMetadata",
-    "DataProtectionConfiguration", "CorrelationRulesAdmin", "CloudSecurityDetections"
+    "DataProtectionConfiguration", "CorrelationRulesAdmin", "CloudSecurityDetections",
+    "CloudPolicies"
     ]
 """
 This is free and unencumbered software released into the public domain.

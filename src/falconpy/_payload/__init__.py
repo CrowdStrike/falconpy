@@ -67,6 +67,14 @@ from ._cloud_oci_registration import (
     cloud_oci_validate_payload,
     cloud_oci_create_payload
     )
+from ._cloud_policies import(
+    cloud_policies_rule_assign_payload,
+    cloud_policies_compliance_control_payload,
+    cloud_policies_evaluation_payload,
+    cloud_policies_rule_override_payload,
+    cloud_policies_rule_create_payload,
+    cloud_policies_rule_update_payload
+    )
 from ._container import (
     image_payload,
     registry_payload,
@@ -214,5 +222,8 @@ __all__ = [
     "case_management_sla_payload", "case_management_template_payload", "data_protection_classification_payload",
     "data_protection_cloud_app_payload", "data_protection_content_pattern_payload",
     "data_protection_enterprise_account_payload", "data_protection_sensitivity_label_payload",
-    "data_protection_policy_payload", "data_protection_web_locations_payload", "correlation_rules_admin_payload"
+    "data_protection_policy_payload", "data_protection_web_locations_payload", "correlation_rules_admin_payload",
+    "cloud_policies_rule_assign_payload", "cloud_policies_compliance_control_payload",
+    "cloud_policies_evaluation_payload", "cloud_policies_rule_override_payload",
+    "cloud_policies_rule_create_payload", "cloud_policies_rule_update_payload"
 ]

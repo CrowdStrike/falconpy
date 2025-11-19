@@ -61,6 +61,7 @@ from ._certificate_based_exclusions import _certificate_based_exclusions_endpoin
 from ._cloud_aws_registration import _cloud_aws_registration_endpoints
 from ._cloud_azure_registration import _cloud_azure_registration_endpoints
 from ._cloud_oci_registration import _cloud_oci_registration_endpoints
+from ._cloud_policies import _cloud_policies_endpoints
 from ._cloud_security_assets import _cloud_security_assets_endpoints
 from ._cloud_security_compliance import _cloud_security_compliance_endpoints
 from ._cloud_security_detections import _cloud_security_detections_endpoints
@@ -165,6 +166,7 @@ api_endpoints.extend(_cloud_connect_aws_endpoints)
 api_endpoints.extend(_cloud_aws_registration_endpoints)
 api_endpoints.extend(_cloud_azure_registration_endpoints)
 api_endpoints.extend(_cloud_oci_registration_endpoints)
+api_endpoints.extend(_cloud_policies_endpoints)
 api_endpoints.extend(_cloud_security_assets_endpoints)
 api_endpoints.extend(_cloud_security_compliance_endpoints)
 api_endpoints.extend(_cloud_security_detections_endpoints)
