@@ -35,11 +35,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-
+# pylint: disable=C0302
 from typing import Dict, Union
 from requests import Response
 from ._util import force_default, process_service_request, generate_error_result
-from ._payload import ngsiem_search_payload
+from ._payload import ngsiem_search_payload, ngsiem_parser_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._ngsiem import _ngsiem_endpoints as Endpoints
@@ -443,6 +443,845 @@ class NGSIEM(ServiceClass):
                                              )
         return returned
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_dashboard_template(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve Dashboard in NGSIEM as LogScale YAML Template.
+
+        Keyword arguments:
+        ids -- Dashboard ID value. String.
+        search_domain -- Name of search domain (view or repo). String.
+                         Allowed options:
+                           all              falcon
+                           third-party      dashboards
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetDashboardTemplate
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetDashboardTemplate",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def create_dashboard_from_template(self: object,
+                                       parameters: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create Dashboard from LogScale YAML Template in NGSIEM.
+
+        Keyword arguments:
+        search_domain -- Name of search domain (view or repo). String.
+                         Allowed options:
+                           all
+                           falcon
+                           third-party
+        name -- Name of the dashboard. String.
+        yaml_template -- LogScale dashboard YAML template content, see schema at https://schemas.humio.com/. Binary data.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateDashboardFromTemplate
+        """
+        yaml_data = kwargs.get("yaml_template", None)
+        file_extended = {}
+        if kwargs.get("search_domain", None):
+            file_extended["search_domain"] = kwargs.get("search_domain")
+        if kwargs.get("name", None):
+            file_extended["name"] = kwargs.get("name")
+        if yaml_data:
+            kwargs.pop("yaml_template", None)
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="CreateDashboardFromTemplate",
+                data=file_extended,
+                files=[("yaml_template", (file_extended["name"], yaml_data))],
+                params=parameters,
+                keywords=kwargs
+                )
+        else:
+            returned = generate_error_result("You must provide a YAML template to upload", code=400)
+
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def update_dashboard_from_template(self: object,
+                                       parameters: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update Dashboard from LogScale YAML Template in NGSIEM.
+
+        Please note a successful update will result in a new ID value being returned.
+
+        Keyword arguments:
+        search_domain -- Name of search domain (view or repo). String.
+                         Allowed options:
+                           all
+                           falcon
+                           third-party
+        name -- Name of the dashboard. String.
+        yaml_template -- LogScale dashboard YAML template content, see schema at https://schemas.humio.com/. Binary data.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateDashboardFromTemplate
+        """
+        yaml_data = kwargs.get("yaml_template", None)
+        file_extended = {}
+        if kwargs.get("search_domain", None):
+            file_extended["search_domain"] = kwargs.get("search_domain")
+        if kwargs.get("name", None):
+            file_extended["name"] = kwargs.get("name")
+        if yaml_data:
+            kwargs.pop("yaml_template", None)
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="UpdateDashboardFromTemplate",
+                data=file_extended,
+                files=[("yaml_template", (None, yaml_data))],
+                params=parameters,
+                keywords=kwargs
+                )
+        else:
+            returned = generate_error_result("You must provide the dashboard template to update", code=400)
+
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_dashboard(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete Dashboard in NGSIEM.
+
+        Keyword arguments:
+        ids -- Dashboard ID to be removed. String.
+        search_domain -- name of search domain (view or repo). String.
+                         Allowed options:
+                           all
+                           falcon
+                           third-party
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/DeleteDashboard
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteDashboard",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_lookup_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve Lookup File in NGSIEM.
+
+        Keyword arguments:
+        filename -- Lookup file filename. String.
+        search_domain -- Name of search domain (view or repo). String.
+                         Allowed options:
+                           all                  falcon
+                           third-party          dashboards
+                           parsers-repository
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetLookupFile
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetLookupFile",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def create_lookup_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create Lookup File in NGSIEM.
+
+        Keyword arguments:
+        search_domain -- Name of search domain (view or repo). String.
+                         Allowed options:
+                           all              falcon
+                           third-party      parsers-repository
+        filename -- Filename of the lookup file to create. String.
+        file -- File content to upload. Binary data.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateLookupFile
+        """
+        file_name = kwargs.get("filename", None)
+        file_data = kwargs.get("file", None)
+        file_extended = {"search_domain": kwargs.get("search_domain", "all")}
+        if file_name and file_data:
+            kwargs.pop("file", None)
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="CreateLookupFile",
+                keywords=kwargs,
+                params=parameters,
+                data=file_extended,
+                files=[("file", (file_name, file_data))]
+                )
+        else:
+            returned = generate_error_result("You must provide the filename and file in order to use this method.", code=400)
+
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def update_lookup_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update Lookup File in NGSIEM.
+
+        Keyword arguments:
+        search_domain -- Name of search domain (view or repo). String.
+                         Allowed options:
+                           all              falcon
+                           third-party      parsers-repository
+        filename -- Filename of the lookup file to create. String.
+        file -- File content to upload. Binary data.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateLookupFile
+        """
+        file_name = kwargs.get("filename", None)
+        file_data = kwargs.get("file", None)
+        file_extended = {"search_domain": kwargs.get("search_domain", "all")}
+        if file_name and file_data:
+            kwargs.pop("file", None)
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="UpdateLookupFile",
+                keywords=kwargs,
+                params=parameters,
+                data=file_extended,
+                files=[("file", (file_name, file_data))]
+                )
+        else:
+            returned = generate_error_result("You must provide the filename and file in order to use this method.", code=400)
+
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_lookup_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete Lookup File in NGSIEM.
+
+        Keyword arguments:
+        filename -- Lookup file filename. String.
+        search_domain -- Name of search domain (view or repo). String.
+                         Allowed options:
+                           all                  falcon
+                           third-party          dashboards
+                           parsers-repository
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/DeleteLookupFile
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteLookupFile",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_parser_template(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve Parser in NGSIEM as LogScale YAML Template.
+
+        Keyword arguments:
+        ids -- Parser ID to retrieve. String.
+        repository -- Name of repository. String.
+                      Allowed options: parsers-repository
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetParserTemplate
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetParserTemplate",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def create_parser_from_template(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create Parser from LogScale YAML Template in NGSIEM.
+
+        Keyword arguments:
+        repository -- Name of repository. String.
+                      Allowed options: parsers-repository
+        name -- Name of the parser. String.
+        yaml_template -- LogScale dashboard YAML template content, see schema at https://schemas.humio.com/. Binary data.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateParserFromTemplate
+        """
+        yaml_data = kwargs.get("yaml_template", None)
+        file_extended = {}
+        if kwargs.get("repository", None):
+            file_extended["repository"] = kwargs.get("repository")
+        if kwargs.get("name", None):
+            file_extended["name"] = kwargs.get("name")
+        if yaml_data:
+            kwargs.pop("yaml_data", None)
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="CreateParserFromTemplate",
+                keywords=kwargs,
+                params=parameters,
+                data=file_extended,
+                files=[("yaml_template", (file_extended["name"], yaml_data))]
+                )
+        else:
+            returned = generate_error_result("You must provide a YAML template for the parser to upload", code=400)
+
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_parser(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve Parser in NGSIEM.
+
+        Keyword arguments:
+        ids -- Parser ID to retrieve. String.
+        repository -- Name of repository. String.
+                      Allowed options: parsers-repository
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetParser
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetParser",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_parser(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create Parser in NGSIEM.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "fields_to_be_removed_before_parsing": [
+                        "string"
+                    ],
+                    "fields_to_tag": [
+                        "string"
+                    ],
+                    "name": "string",
+                    "repository": "string",
+                    "script": "string",
+                    "test_cases": [
+                        {
+                            "event": {
+                                "raw_string": "string"
+                            },
+                            "output_assertions": [
+                                {
+                                    "assertions": {
+                                        "fields_have_values": [
+                                            {
+                                                "expected_value": "string",
+                                                "field_name": "string"
+                                            }
+                                        ],
+                                        "fields_not_present": [
+                                            "string"
+                                        ]
+                                    },
+                                    "output_event_index": 0
+                                }
+                            ]
+                        }
+                    ]
+                }
+        fields_to_be_removed_before_parsing -- List of fields to remove before parsing. String or list of strings.
+        fields_to_tag -- List of fields to tag. String or list of strings.
+        name -- Parser name. String.
+        repository -- Parser repository. String.
+        script -- Parser script. String.
+        test_cases -- List of test cases to apply to the parser. List of dictionaries.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateParser
+        """
+        if not body:
+            body = ngsiem_parser_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateParser",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_parser(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update Parser in NGSIEM.
+
+        Please note that name changes are not supported, but rather should be created as a new parser.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "fields_to_be_removed_before_parsing": [
+                        "string"
+                    ],
+                    "fields_to_tag": [
+                        "string"
+                    ],
+                    "name": "string",
+                    "repository": "string",
+                    "script": "string",
+                    "test_cases": [
+                        {
+                            "event": {
+                                "raw_string": "string"
+                            },
+                            "output_assertions": [
+                                {
+                                    "assertions": {
+                                        "fields_have_values": [
+                                            {
+                                                "expected_value": "string",
+                                                "field_name": "string"
+                                            }
+                                        ],
+                                        "fields_not_present": [
+                                            "string"
+                                        ]
+                                    },
+                                    "output_event_index": 0
+                                }
+                            ]
+                        }
+                    ]
+                }
+        fields_to_be_removed_before_parsing -- List of fields to remove before parsing. String or list of strings.
+        fields_to_tag -- List of fields to tag. String or list of strings.
+        id -- ID of the parser to be updated. String.
+        name -- Parser name. String.
+        repository -- Parser repository. String.
+        script -- Parser script. String.
+        test_cases -- List of test cases to apply to the parser. List of dictionaries.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateParser
+        """
+        if not body:
+            body = ngsiem_parser_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateParser",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_parser(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete Parser in NGSIEM.
+
+        Keyword arguments:
+        ids -- Parser ID to be removed. String.
+        repository -- Name of repository.
+                      Allowed options: parsers-repository
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/DeleteParser
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteParser",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_saved_query_template(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve Saved Query in NGSIEM as LogScale YAML Template.
+
+        Keyword arguments:
+        ids -- Saved query ID to retrieve. String.
+        search_domain -- Name of search domain (view or repo).
+                         Allowed options:
+                           all              falcon
+                           third-party      dashboards
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/GetSavedQueryTemplate
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetSavedQueryTemplate",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def create_saved_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create a Saved Query from LogScale YAML Template in NGSIEM.
+
+        Keyword arguments:
+        search_domain -- Name of search domain (view or repo). String.
+                         Allowed options:
+                           all
+                           falcon
+                           third-party
+        yaml_template -- LogScale saved query YAML template content, see schema at https://schemas.humio.com/. Binary data.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CreateSavedQuery
+        """
+        yaml_data = kwargs.get("yaml_template", None)
+        file_extended = {}
+        if kwargs.get("search_domain", None):
+            file_extended["search_domain"] = kwargs.get("search_domain")
+        if yaml_data:
+            kwargs.pop("yaml_template", None)
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="CreateSavedQuery",
+                data=file_extended,
+                files=[("yaml_template", (None, yaml_data))],
+                params=parameters,
+                keywords=kwargs
+                )
+        else:
+            returned = generate_error_result("You must provide the YAML template in order to create a saved query.", code=400)
+
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def update_saved_query_from_template(self: object,
+                                         parameters: dict = None,
+                                         **kwargs
+                                         ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update Saved Query from LogScale YAML Template in NGSIEM.
+
+        Please note a successful update will result in a new ID value being returned.
+
+        Keyword arguments:
+        ids -- ID of the saved query to update. String.
+        search_domain -- Name of search domain (view or repo). String.
+                         Allowed options:
+                           all
+                           falcon
+                           third-party
+        yaml_template -- LogScale saved query YAML template content, see schema at https://schemas.humio.com/. Binary data.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateSavedQueryFromTemplate
+        """
+        yaml_data = kwargs.get("yaml_template", None)
+        file_extended = {}
+        if kwargs.get("search_domain", None):
+            file_extended["search_domain"] = kwargs.get("search_domain")
+        if yaml_data:
+            kwargs.pop("yaml_template", None)
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="UpdateSavedQueryFromTemplate",
+                data=file_extended,
+                files=[("yaml_template", (None, yaml_data))],
+                params=parameters,
+                keywords=kwargs
+                )
+        else:
+            returned = generate_error_result("You must provide the YAML template in order to update a saved query.", code=400)
+
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_saved_query(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete Saved Query in NGSIEM.
+
+        Keyword arguments:
+        ids -- Saved query ID to retrieve. String.
+        search_domain -- Name of search domain (view or repo).
+                         Allowed options:
+                           all
+                           falcon
+                           third-party
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/DeleteSavedQuery
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteSavedQuery",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_dashboards(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """List Dashboards in NGSIEM.
+
+        Keyword arguments:
+        limit -- Maximum number of results to return. Integer string. Default value: 50
+        offset -- Number of results to offset the returned results by. Integer string. Default value: 0
+        filter -- FQL filter to apply to the name of the content. String.
+                  Only currently support text match on name field: name:~'value'
+        search_domain -- Name of search domain (view or repo).
+                         Allowed options:
+                           all              falcon
+                           third-party      dashboards
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ListDashboards
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ListDashboards",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_lookup_files(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """List Lookup Files in NGSIEM.
+
+        Keyword arguments:
+        limit -- Maximum number of results to return. Integer string. Default value: 50
+        offset -- Number of results to offset the returned results by. Integer string. Default value: 0
+        filter -- FQL filter to apply to the name of the content. String.
+                  Only currently support text match on name field: name:~'value'
+        search_domain -- Name of search domain (view or repo).
+                         Allowed options:
+                           all              falcon
+                           third-party      dashboards
+                           parsers-repository
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ListLookupFiles
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ListLookupFiles",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_parsers(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """List Parsers in NGSIEM.
+
+        Keyword arguments:
+        limit -- Maximum number of results to return. Integer string. Default value: 50
+        offset -- Number of results to offset the returned results by. Integer string. Default value: 0
+        filter -- FQL filter to apply to the name of the content. String.
+                  Only currently support text match on name field: name:~'value'
+        repository -- Name of repository.
+                      Allowed options: parsers-repository
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ListParsers
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ListParsers",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_saved_queries(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get Saved Queries in NGSIEM.
+
+        Keyword arguments:
+        limit -- Maximum number of results to return. Integer string. Default value: 50
+        offset -- Number of results to offset the returned results by. Integer string. Default value: 0
+        filter -- FQL filter to apply to the name of the content. String.
+                  Only currently support text match on name field: name:~'value'
+        search_domain -- name of search domain (view or repo).
+                         Allowed options:
+                           all              falcon
+                           third-party      dashboards
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ListSavedQueries
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ListSavedQueries",
+            keywords=kwargs,
+            params=parameters
+            )
+
     UploadLookupV1 = upload_file
     GetLookupV1 = get_file
     GetLookupFromPackageWithNamespaceV1 = get_file_from_package_with_namespace
@@ -450,3 +1289,25 @@ class NGSIEM(ServiceClass):
     StartSearchV1 = start_search
     GetSearchStatusV1 = get_search_status
     StopSearchV1 = stop_search
+    GetDashboardTemplate = get_dashboard_template
+    CreateDashboardFromTemplate = create_dashboard_from_template
+    UpdateDashboardFromTemplate = update_dashboard_from_template
+    DeleteDashboard = delete_dashboard
+    GetLookupFile = get_lookup_file
+    CreateLookupFile = create_lookup_file
+    UpdateLookupFile = update_lookup_file
+    DeleteLookupFile = delete_lookup_file
+    GetParserTemplate = get_parser_template
+    CreateParserFromTemplate = create_parser_from_template
+    GetParser = get_parser
+    CreateParser = create_parser
+    UpdateParser = update_parser
+    DeleteParser = delete_parser
+    GetSavedQueryTemplate = get_saved_query_template
+    CreateSavedQuery = create_saved_query
+    UpdateSavedQueryFromTemplate = update_saved_query_from_template
+    DeleteSavedQuery = delete_saved_query
+    ListDashboards = list_dashboards
+    ListLookupFiles = list_lookup_files
+    ListParsers = list_parsers
+    ListSavedQueries = list_saved_queries
