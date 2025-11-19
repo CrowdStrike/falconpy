@@ -1,0 +1,7 @@
+# This is an incomplete dashboard.
+
+name: Test-Dashboard
+description: Generic test dashboard
+stuff:
+  - Thing1
+  - Thing2
