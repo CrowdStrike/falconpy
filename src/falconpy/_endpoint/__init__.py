@@ -26,6 +26,7 @@ from .deprecated import _cloud_azure_registration_deprecated
 from .deprecated import _cloud_oci_registration_deprecated
 from .deprecated import _cloud_security_assets_deprecated
 from .deprecated import _cloud_security_compliance_deprecated
+from .deprecated import _correlation_rules_admin_deprecated
 from .deprecated import _correlation_rules_deprecated
 from .deprecated import _custom_ioa_deprecated
 from .deprecated import _d4c_registration_deprecated
@@ -73,6 +74,7 @@ from ._container_packages import _container_packages_endpoints
 from ._container_vulnerabilities import _container_vulnerabilities_endpoints
 from ._content_update_policies import _content_update_policies_endpoints
 from ._correlation_rules import _correlation_rules_endpoints
+from ._correlation_rules_admin import _correlation_rules_admin_endpoints
 from ._cspm_registration import _cspm_registration_endpoints
 from ._custom_ioa import _custom_ioa_endpoints
 from ._custom_storage import _custom_storage_endpoints
@@ -173,6 +175,7 @@ api_endpoints.extend(_container_images_endpoints)
 api_endpoints.extend(_container_packages_endpoints)
 api_endpoints.extend(_container_vulnerabilities_endpoints)
 api_endpoints.extend(_content_update_policies_endpoints)
+api_endpoints.extend(_correlation_rules_admin_endpoints)
 api_endpoints.extend(_correlation_rules_endpoints)
 api_endpoints.extend(_cspm_registration_endpoints)
 api_endpoints.extend(_custom_ioa_endpoints)
@@ -259,6 +262,7 @@ deprecated_endpoints.extend(_cloud_azure_registration_deprecated)
 deprecated_endpoints.extend(_cloud_oci_registration_deprecated)
 deprecated_endpoints.extend(_cloud_security_assets_deprecated)
 deprecated_endpoints.extend(_cloud_security_compliance_deprecated)
+deprecated_endpoints.extend(_correlation_rules_admin_deprecated)
 deprecated_endpoints.extend(_correlation_rules_deprecated)
 deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)
