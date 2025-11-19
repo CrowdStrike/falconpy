@@ -214,5 +214,5 @@ __all__ = [
     "case_management_sla_payload", "case_management_template_payload", "data_protection_classification_payload",
     "data_protection_cloud_app_payload", "data_protection_content_pattern_payload",
     "data_protection_enterprise_account_payload", "data_protection_sensitivity_label_payload",
-    "data_protection_policy_payload", "data_protection_web_locations_payload"
+    "data_protection_policy_payload", "data_protection_web_locations_payload", "correlation_rules_admin_payload"
 ]
