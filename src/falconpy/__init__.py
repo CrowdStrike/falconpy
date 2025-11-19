@@ -127,6 +127,7 @@ from .container_images import ContainerImages
 from .container_packages import ContainerPackages
 from .container_vulnerabilities import ContainerVulnerabilities
 from .correlation_rules import CorrelationRules
+from .correlation_rules_admin import CorrelationRulesAdmin
 from .cloud_connect_aws import CloudConnectAWS
 from .content_update_policies import ContentUpdatePolicies
 from .cspm_registration import CSPMRegistration
@@ -256,7 +257,7 @@ __all__ = [
     "Color", "Indicator", "random_string", "KubernetesContainerCompliance", "find_operation",
     "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch", "ITAutomation", "F4IT",
     "CloudSecurityCompliance", "CaseManagement", "SaasSecurity", "SpotlightVulnerabilityMetadata",
-    "DataProtectionConfiguration"
+    "DataProtectionConfiguration", "CorrelationRulesAdmin"
     ]
 """
 This is free and unencumbered software released into the public domain.
