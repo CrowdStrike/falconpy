@@ -117,6 +117,7 @@ from .cloud_azure_registration import CloudAzureRegistration
 from .cloud_oci_registration import CloudOCIRegistration
 from .cloud_security_assets import CloudSecurityAssets
 from .cloud_security_compliance import CloudSecurityCompliance
+from .cloud_security_detections import CloudSecurityDetections
 from .cloud_snapshots import CloudSnapshots
 from .container_image_compliance import ContainerImageCompliance, ComplianceAssessments
 from .configuration_assessment_evaluation_logic import ConfigurationAssessmentEvaluationLogic
@@ -257,7 +258,7 @@ __all__ = [
     "Color", "Indicator", "random_string", "KubernetesContainerCompliance", "find_operation",
     "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch", "ITAutomation", "F4IT",
     "CloudSecurityCompliance", "CaseManagement", "SaasSecurity", "SpotlightVulnerabilityMetadata",
-    "DataProtectionConfiguration", "CorrelationRulesAdmin"
+    "DataProtectionConfiguration", "CorrelationRulesAdmin", "CloudSecurityDetections"
     ]
 """
 This is free and unencumbered software released into the public domain.
