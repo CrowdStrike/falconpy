@@ -187,6 +187,7 @@ from .real_time_response import RealTimeResponse
 from .recon import Recon
 from .report_executions import ReportExecutions
 from .response_policies import ResponsePolicies
+from .saas_security import SaasSecurity
 from .sample_uploads import SampleUploads
 from .scheduled_reports import ScheduledReports
 from .sensor_download import SensorDownload
@@ -252,7 +253,7 @@ __all__ = [
     "IngestPayload", "HTTPEventCollector", "IngestConfig", "SessionManager", "TimeUnit",
     "Color", "Indicator", "random_string", "KubernetesContainerCompliance", "find_operation",
     "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch", "ITAutomation", "F4IT",
-    "CloudSecurityCompliance", "CaseManagement"
+    "CloudSecurityCompliance", "CaseManagement", "SaasSecurity"
     ]
 """
 This is free and unencumbered software released into the public domain.
