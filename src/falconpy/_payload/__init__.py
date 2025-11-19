@@ -41,6 +41,12 @@ from ._aspm import (
     retrieve_relay_node_payload
 )
 from ._correlation_rules import correlation_rules_payload, correlation_rules_export_payload
+from ._case_management import(
+    case_management_notification_groups_payload,
+    case_management_create_notification_payload,
+    case_management_sla_payload,
+    case_management_template_payload
+    )
 from ._host_group import host_group_create_payload, host_group_update_payload
 from ._recon import (
     recon_action_payload,
@@ -192,5 +198,7 @@ __all__ = [
     "retrieve_relay_node_payload", "inventory_scan_payload", "cloud_azure_registration_create_payload",
     "task_payload", "task_execution_payload", "execution_results_search_payload", "rerun_payload",
     "scheduled_task_payload", "automation_policy_payload", "policy_host_group_payload",
-    "automation_live_query_payload", "automation_user_group_payload", "ngsiem_parser_payload"
+    "automation_live_query_payload", "automation_user_group_payload", "ngsiem_parser_payload",
+    "case_management_notification_groups_payload", "case_management_create_notification_payload",
+    "case_management_sla_payload", "case_management_template_payload"
 ]
