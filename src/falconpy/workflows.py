@@ -457,12 +457,17 @@ class Workflows(ServiceClass):
                          String or List of Strings.
         execution_cid -- CID(s) to execute on. This can be a child for Flight Control scenarios.
                          If unset, the definition CID is used. String or List of strings.
+        ignore_activity_mock_references -- When enabled, treats all activity mocks in the definition as disabled for this mock
+                                           execution. Mocks provided in the request body are treated normally. Boolean.
         name -- Workflow name to execute. Either a name or ID can be specified. String.
         parameters -- Full parameters payload in dictionary (JSON) format. Not required
                       if you are using other keywords. Dictionary.
         key -- Key used to help deduplicate executions. If unset a new UUID is used. String.
         depth -- Used to record the execution depth to help limit execution loops when a workflow
                  triggers another. The maximum depth is 4. Integer.
+        skip_validation -- When enabled, skips validating mocks from the request body against the mocked entity's
+                           output schema. Mocks provided in the definition by reference are not validated in any case.
+                           Boolean.
         source_event_url -- Used to record a URL to the source that led to trigger the workflow.
                             String.
         validate_only -- PRevent execution after validating mocks against definition. Boolean.
@@ -841,6 +846,61 @@ class Workflows(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["parameters", "body"], default_types=["dict"])
+    def workflow_definition_action(self: object,
+                                   body: dict = None,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Enable or disable a workflow definition, or stop all executions for a definition.
+
+        When a definition is disabled it will not execute against any new trigger events.
+
+        Keyword arguments:
+        action_name -- action to perform, 'enable', 'disable', or 'cancel'.
+        body -- full body payload, not required if ids are provided as keyword.
+                You must use body if you are going to specify action_parameters.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- IDs of workflow definitions to perform the action against. String or list of strings.
+        parameters - full parameters payload, not required if action_name is provide as a keyword.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowDefinitionsAction
+        """
+        if not body:
+            body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
+
+        _allowed_actions = ['enable', 'disable', 'cancel']
+        operation_id = "WorkflowDefinitionsAction"
+        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
+        action_name = parameter_payload.get("action_name", "Not Specified")
+        # Only process allowed actions
+        if action_name.lower() in _allowed_actions:
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id=operation_id,
+                body=body,
+                keywords=kwargs,
+                params=parameters,
+                body_validator={"ids": list} if self.validate_payloads else None,
+                body_required=["ids"] if self.validate_payloads else None
+            )
+        else:
+            returned = generate_error_result("Invalid value specified for action_name parameter.")
+
+        return returned
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
@@ -852,6 +912,8 @@ class Workflows(ServiceClass):
     WorkflowDefinitionsExport = export_definition
     WorkflowDefinitionsImport = import_definition
     WorkflowDefinitionsUpdate = update_definition
+    WorkflowDefinitionsStatus = workflow_definition_action
+    WorkflowDefinitionsAction = workflow_definition_action
     WorkflowExecute = execute
     WorkflowExecuteInternal = execute_internal
     WorkflowMockExecute = mock_execute
