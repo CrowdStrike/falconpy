@@ -30,6 +30,7 @@ from .deprecated import _correlation_rules_deprecated
 from .deprecated import _custom_ioa_deprecated
 from .deprecated import _d4c_registration_deprecated
 from .deprecated import _datascanner_deprecated
+from .deprecated import _data_protection_configuration_deprecated
 from .deprecated import _device_content_deprecated
 from .deprecated import _discover_deprecated
 from .deprecated import _fdr_deprecated
@@ -76,6 +77,7 @@ from ._cspm_registration import _cspm_registration_endpoints
 from ._custom_ioa import _custom_ioa_endpoints
 from ._custom_storage import _custom_storage_endpoints
 from ._d4c_registration import _d4c_registration_endpoints
+from ._data_protection_configuration import _data_protection_configuration_endpoints
 from ._delivery_settings import _delivery_settings_endpoints
 from ._deployments import _deployments_endpoints
 from ._detects import _detects_endpoints
@@ -176,6 +178,7 @@ api_endpoints.extend(_cspm_registration_endpoints)
 api_endpoints.extend(_custom_ioa_endpoints)
 api_endpoints.extend(_custom_storage_endpoints)
 api_endpoints.extend(_d4c_registration_endpoints)
+api_endpoints.extend(_data_protection_configuration_endpoints)
 api_endpoints.extend(_delivery_settings_endpoints)
 api_endpoints.extend(_detects_endpoints)
 api_endpoints.extend(_device_content_endpoints)
@@ -261,6 +264,7 @@ deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)
 deprecated_endpoints.extend(_d4c_registration_deprecated)
 deprecated_endpoints.extend(_datascanner_deprecated)
+deprecated_endpoints.extend(_data_protection_configuration_deprecated)
 deprecated_endpoints.extend(_device_content_deprecated)
 deprecated_endpoints.extend(_discover_deprecated)
 deprecated_endpoints.extend(_fdr_deprecated)
