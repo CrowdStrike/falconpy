@@ -41,9 +41,10 @@ import functools
 from warnings import warn
 from json import loads
 try:
-    from simplejson import JSONDecodeError
-except (ImportError, ModuleNotFoundError):  # Support import as a module
-    from json.decoder import JSONDecodeError
+    from simplejson import JSONDecodeError as SimplejsonJSONDecodeError
+except (ImportError, ModuleNotFoundError):
+    SimplejsonJSONDecodeError = None  # Support import as a module
+from json.decoder import JSONDecodeError as StdJSONDecodeError
 from typing import Dict, Any, Union, Optional, List, TYPE_CHECKING
 from copy import deepcopy
 from logging import Logger
@@ -84,6 +85,9 @@ if TYPE_CHECKING:  # pragma: no cover
     from ..oauth2 import OAuth2
 
 urllib3.disable_warnings(InsecureRequestWarning)
+
+# create a tuple of all possible JSONDecodeError types for exception handling
+JSONDecodeError = (SimplejsonJSONDecodeError, StdJSONDecodeError) if SimplejsonJSONDecodeError else (StdJSONDecodeError,)
 
 
 def validate_payload(validator: Dict[str, Any],
