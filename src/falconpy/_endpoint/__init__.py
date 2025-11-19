@@ -130,6 +130,7 @@ from ._real_time_response_audit import _real_time_response_audit_endpoints
 from ._recon import _recon_endpoints
 from ._report_executions import _report_executions_endpoints
 from ._response_policies import _response_policies_endpoints
+from ._saas_security import _saas_security_endpoints
 from ._sample_uploads import _sample_uploads_endpoints
 from ._scheduled_reports import _scheduled_reports_endpoints
 from ._sensor_download import _sensor_download_endpoints
@@ -228,6 +229,7 @@ api_endpoints.extend(_real_time_response_audit_endpoints)
 api_endpoints.extend(_recon_endpoints)
 api_endpoints.extend(_report_executions_endpoints)
 api_endpoints.extend(_response_policies_endpoints)
+api_endpoints.extend(_saas_security_endpoints)
 api_endpoints.extend(_sample_uploads_endpoints)
 api_endpoints.extend(_scheduled_reports_endpoints)
 api_endpoints.extend(_sensor_download_endpoints)
