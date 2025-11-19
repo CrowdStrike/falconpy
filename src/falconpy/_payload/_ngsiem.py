@@ -89,3 +89,57 @@ def ngsiem_search_payload(passed_keywords: dict) -> dict:
             returned[keystr] = passed_keywords.get(key, None)
 
     return returned
+
+
+def ngsiem_parser_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted parser payload.
+
+    {
+        "fields_to_be_removed_before_parsing": [
+            "string"
+        ],
+        "fields_to_tag": [
+            "string"
+        ],
+        "name": "string",
+        "id": "string",
+        "repository": "string",
+        "script": "string",
+        "test_cases": [
+            {
+                "event": {
+                    "raw_string": "string"
+                },
+                "output_assertions": [
+                    {
+                        "assertions": {
+                            "fields_have_values": [
+                                {
+                                    "expected_value": "string",
+                                    "field_name": "string"
+                                }
+                            ],
+                            "fields_not_present": [
+                                "string"
+                            ]
+                        },
+                        "output_event_index": 0
+                    }
+                ]
+            }
+        ]
+    }
+    """
+    returned: dict = {}
+    keys = ["fields_to_be_removed_before_parsing", "fields_to_tag", "name", "repository", "script",
+            "test_cases", "id"
+            ]
+    list_keys = ["fields_to_be_removed_before_parsing", "fields_to_tag"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            keyval = passed_keywords.get(key, None)
+            if key in list_keys and isinstance(keyval, str):
+                keyval = keyval.split(",")
+            returned[key] = keyval
+
+    return returned
