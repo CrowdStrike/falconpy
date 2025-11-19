@@ -20,6 +20,7 @@
                                                         `---' OAuth2 API SDK for Python 3 `---'
 """
 from typing import List, Any
+from .deprecated import _case_management_deprecated
 from .deprecated import _cloud_aws_registration_deprecated
 from .deprecated import _cloud_azure_registration_deprecated
 from .deprecated import _cloud_oci_registration_deprecated
@@ -52,6 +53,7 @@ from ._alerts import _alerts_endpoints
 from ._api_integrations import _api_integrations_endpoints
 from ._aspm import _aspm_endpoints
 from ._cao_hunting import _cao_hunting_endpoints
+from ._case_management import _case_management_endpoints
 from ._certificate_based_exclusions import _certificate_based_exclusions_endpoints
 from ._cloud_aws_registration import _cloud_aws_registration_endpoints
 from ._cloud_azure_registration import _cloud_azure_registration_endpoints
@@ -149,6 +151,7 @@ api_endpoints.extend(_alerts_endpoints)
 api_endpoints.extend(_api_integrations_endpoints)
 api_endpoints.extend(_aspm_endpoints)
 api_endpoints.extend(_cao_hunting_endpoints)
+api_endpoints.extend(_case_management_endpoints)
 api_endpoints.extend(_certificate_based_exclusions_endpoints)
 api_endpoints.extend(_cloud_connect_aws_endpoints)
 api_endpoints.extend(_cloud_aws_registration_endpoints)
@@ -243,6 +246,7 @@ api_endpoints.extend(_zero_trust_assessment_endpoints)
 
 # Deprecated endpoints
 deprecated_endpoints = []
+deprecated_endpoints.extend(_case_management_deprecated)
 deprecated_endpoints.extend(_cloud_aws_registration_deprecated)
 deprecated_endpoints.extend(_cloud_azure_registration_deprecated)
 deprecated_endpoints.extend(_cloud_oci_registration_deprecated)
