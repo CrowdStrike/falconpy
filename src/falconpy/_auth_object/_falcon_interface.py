@@ -260,6 +260,19 @@ class FalconInterface(BaseFalconAuth):
         """Log out of the Falcon API by revoking the current token."""
         return self._logout_handler()
 
+    def child_login(self, member_cid: str = None) -> bool:
+        """Perform a login leveraging the provided member_cid."""
+        returned = False
+        if member_cid:
+            self.creds["member_cid"] = member_cid
+            do_login = self.login()
+            if isinstance(do_login, bool):
+                returned = do_login
+            else:
+                if do_login["status_code"] == 201:
+                    returned = True
+        return returned
+
     # The default behavior for both the login and logout handlers is to return
     # the entire dictionary created by the token API response.
     def _login_handler(self, stateful: bool = True) -> dict:

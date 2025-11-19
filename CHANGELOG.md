@@ -420,6 +420,12 @@
     - `_endpoint/_workflows.py`
     - `workflows.py`
 
++ Added: Added the _child_login_ helper method to the authentication object and implemented an alias for Service Classes. This method allows login using existing parent credentials to a child tenant by providing the `member_cid` argument only.
+    - `_auth_object/_falcon_interface.py`
+    - `_service_class/_service_class.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_authentications.py`
+
 ## Issues resolved
 + Fixed: Resolved path interpolation issue for the `search_id` keyword when using the Uber Class to call the _GetSearchStatusV1_ operation. Closes #1365.
     - `_util/_uber.py`

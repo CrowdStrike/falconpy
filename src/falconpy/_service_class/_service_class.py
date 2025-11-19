@@ -198,6 +198,10 @@ class ServiceClass(BaseServiceClass):
         """Logout from the CrowdStrike API by revoking the current token."""
         return self.auth_object.logout()
 
+    def child_login(self, member_cid: str) -> bool:
+        """Login to a child tenant by providing a member CID."""
+        return self.auth_object.child_login(member_cid=member_cid)
+
     # Legacy property getters maintained for backwards functionality.
     def authenticated(self) -> bool:
         """Return the current authentication status."""
