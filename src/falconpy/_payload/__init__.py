@@ -90,7 +90,7 @@ from ._it_automation import (
     automation_user_group_payload
     )
 from ._mobile_enrollment import mobile_enrollment_payload
-from ._ngsiem import ngsiem_search_payload
+from ._ngsiem import ngsiem_search_payload, ngsiem_parser_payload
 from ._prevention_policy import prevention_policy_payload
 from ._sensor_update_policy import sensor_policy_payload
 from ._response_policy import response_policy_payload
@@ -192,5 +192,5 @@ __all__ = [
     "retrieve_relay_node_payload", "inventory_scan_payload", "cloud_azure_registration_create_payload",
     "task_payload", "task_execution_payload", "execution_results_search_payload", "rerun_payload",
     "scheduled_task_payload", "automation_policy_payload", "policy_host_group_payload",
-    "automation_live_query_payload", "automation_user_group_payload"
+    "automation_live_query_payload", "automation_user_group_payload", "ngsiem_parser_payload"
 ]

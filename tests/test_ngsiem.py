@@ -94,6 +94,42 @@ class TestNGSIEM:
         if not isinstance(result, Response):
             if result.status_code not in AllowedResponses:
                 error_checks = False
+        test_db = open("tests/test_dashboard.yml", "r", encoding="utf-8").read()
+        more_tests = {
+            "GetDashboardTemplate": falcon.get_dashboard_template(ids="12345678"),
+            "CreateDashboardFromTemplate": falcon.create_dashboard_from_template(search_domain="all", name="whatever", yaml_template=test_db),
+            "CreateDashboardFromTemplateFail": falcon.create_dashboard_from_template(search_domain="all", name="whatever"),
+            "UpdateDashboardFromTemplate": falcon.update_dashboard_from_template(search_domain="all", name="whatever", yaml_template=test_db),
+            "UpdateDashboardFromTemplateFail": falcon.update_dashboard_from_template(search_domain="all", name="whatever"),
+            "DeleteDashboard": falcon.delete_dashboard(ids="12345678"),
+            "GetLookupFile": falcon.get_lookup_file(ids="12345678"),
+            "CreateLookupFile": falcon.create_lookup_file(search_domain="all", filename="testfile.yml", file=test_db),
+            "CreateLookupFileFail": falcon.create_lookup_file(search_domain="all", filename="testfile.yml"),
+            "UpdateLookupFile": falcon.update_lookup_file(search_domain="all", filename="testfile.yml", file=test_db),
+            "UpdateLookupFileFail": falcon.update_lookup_file(search_domain="all", filename="testfile.yml"),
+            "DeleteLookupFile": falcon.delete_lookup_file(ids="12345678"),
+            "GetParserTemplate": falcon.get_parser_template(ids="12345678"),
+            "CreateParserFromTemplate": falcon.create_parser_from_template(repository="whatever", name="whatever", yaml_template=test_db),
+            "CreateParserFromTemplateFail": falcon.create_parser_from_template(repository="whatever", name="whatever"),
+            "GetParser": falcon.get_parser(ids="12345678"),
+            "CreateParser": falcon.create_parser(script=test_db, repository="whatever", fields_to_tag="bob,larry"),
+            "UpdateParser": falcon.update_parser(script=test_db, repository="whatever", fields_to_tag="bob,larry", id="12345678"),
+            "DeleteParser": falcon.delete_parser(ids="12345678"),
+            "GetSavedQueryTemplate": falcon.get_saved_query_template(ids="12345678"),
+            "CreateSavedQuery": falcon.create_saved_query(search_domain="all", yaml_template=test_db),
+            "CreateSavedQueryFail": falcon.create_saved_query(search_domain="all"),
+            "UpdateSavedQueryFromTemplate": falcon.update_saved_query_from_template(ids="12345678", search_domain="all", yaml_template=test_db),
+            "UpdateSavedQueryFromTemplateFail": falcon.update_saved_query_from_template(ids="12345678", search_domain="all"),
+            "DeleteSavedQuery": falcon.delete_saved_query(ids="12345678"),
+            "ListDashboards": falcon.list_dashboards(limit="1"),
+            "ListLookupFiles": falcon.list_lookup_files(limit="1"),
+            "ListParsers": falcon.list_parsers(limit="1"),
+            "ListSavedQueries": falcon.list_saved_queries(limit="1"),
+        }
+
+        for test in more_tests:
+            if more_tests[test]["status_code"] not in AllowedResponses:
+                error_checks = False
         return error_checks
 
     def test_all_functionality(self):

@@ -217,5 +217,563 @@ _ngsiem_endpoints = [
         "required": True
       }
     ]
+  ],
+  [
+    "GetDashboardTemplate",
+    "GET",
+    "/ngsiem-content/entities/dashboards-template/v1",
+    "Retrieve Dashboard in NGSIEM as LogScale YAML Template",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "dashboard ID value",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party, dashboards",
+        "name": "search_domain",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateDashboardFromTemplate",
+    "POST",
+    "/ngsiem-content/entities/dashboards-template/v1",
+    "Create Dashboard from LogScale YAML Template in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party",
+        "name": "search_domain",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "name of the dashboard",
+        "name": "name",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "LogScale dashboard YAML template content, see schema at https://schemas.humio.com/",
+        "name": "yaml_template",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
+    "UpdateDashboardFromTemplate",
+    "PATCH",
+    "/ngsiem-content/entities/dashboards-template/v1",
+    "Update Dashboard from LogScale YAML Template in NGSIEM. Please note a successful update will result in a "
+    "new ID value being returned.",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party",
+        "name": "search_domain",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "id of the dashboard",
+        "name": "ids",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "LogScale dashboard YAML template content, see schema at https://schemas.humio.com/",
+        "name": "yaml_template",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
+    "DeleteDashboard",
+    "DELETE",
+    "/ngsiem-content/entities/dashboards/v1",
+    "Delete Dashboard in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "dashboard ID value",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party",
+        "name": "search_domain",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetLookupFile",
+    "GET",
+    "/ngsiem-content/entities/lookupfiles/v1",
+    "Retrieve Lookup File in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "lookup file filename",
+        "name": "filename",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party, dashboards, "
+        "parsers-repository",
+        "name": "search_domain",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateLookupFile",
+    "POST",
+    "/ngsiem-content/entities/lookupfiles/v1",
+    "Create Lookup File in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party, parsers-repository",
+        "name": "search_domain",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "Filename of the lookup file to create",
+        "name": "filename",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "file content to upload",
+        "name": "file",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
+    "UpdateLookupFile",
+    "PATCH",
+    "/ngsiem-content/entities/lookupfiles/v1",
+    "Update Lookup File in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party, parsers-repository",
+        "name": "search_domain",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "Filename of the lookup file to update",
+        "name": "filename",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "file content to upload",
+        "name": "file",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
+    "DeleteLookupFile",
+    "DELETE",
+    "/ngsiem-content/entities/lookupfiles/v1",
+    "Delete Lookup File in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "lookup file filename",
+        "name": "filename",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party, parsers-repository",
+        "name": "search_domain",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetParserTemplate",
+    "GET",
+    "/ngsiem-content/entities/parsers-template/v1",
+    "Retrieve Parser in NGSIEM as LogScale YAML Template",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "parser ID value",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of repository, options; parsers-repository",
+        "name": "repository",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateParserFromTemplate",
+    "POST",
+    "/ngsiem-content/entities/parsers-template/v1",
+    "Create Parser from LogScale YAML Template in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "name of repository, options; parsers-repository",
+        "name": "repository",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "name of the parser",
+        "name": "name",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "LogScale Parser YAML template content, see schema at https://schemas.humio.com/",
+        "name": "yaml_template",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
+    "GetParser",
+    "GET",
+    "/ngsiem-content/entities/parsers/v1",
+    "Retrieve Parser in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "parser ID value",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of repository, options; parsers-repository",
+        "name": "repository",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateParser",
+    "POST",
+    "/ngsiem-content/entities/parsers/v1",
+    "Create Parser in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "description": "create parser request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateParser",
+    "PATCH",
+    "/ngsiem-content/entities/parsers/v1",
+    "Update Parser in NGSIEM. Please note that name changes are not supported, but rather should be created as a new parser.",
+    "ngsiem",
+    [
+      {
+        "description": "update parser request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeleteParser",
+    "DELETE",
+    "/ngsiem-content/entities/parsers/v1",
+    "Delete Parser in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "parser ID value",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of repository, options; parsers-repository",
+        "name": "repository",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetSavedQueryTemplate",
+    "GET",
+    "/ngsiem-content/entities/savedqueries-template/v1",
+    "Retrieve Saved Query in NGSIEM as LogScale YAML Template",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "saved query ID value",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party, dashboards",
+        "name": "search_domain",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "CreateSavedQuery",
+    "POST",
+    "/ngsiem-content/entities/savedqueries-template/v1",
+    "Create Saved Query from LogScale YAML Template in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party",
+        "name": "search_domain",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "LogScale Saved Query YAML template content, see schema at https://schemas.humio.com/",
+        "name": "yaml_template",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
+    "UpdateSavedQueryFromTemplate",
+    "PATCH",
+    "/ngsiem-content/entities/savedqueries-template/v1",
+    "Update Saved Query from LogScale YAML Template in NGSIEM. Please note a successful update will result in "
+    "a new ID value being returned.",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party",
+        "name": "search_domain",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "id of the dashboard",
+        "name": "ids",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "LogScale Saved Query YAML template content, see schema at https://schemas.humio.com/",
+        "name": "yaml_template",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
+    "DeleteSavedQuery",
+    "DELETE",
+    "/ngsiem-content/entities/savedqueries/v1",
+    "Delete Saved Query in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "saved query ID value",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party",
+        "name": "search_domain",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ListDashboards",
+    "GET",
+    "/ngsiem-content/queries/dashboards/v1",
+    "List Dashboards in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "pattern": "^\\d{1,4}$",
+        "type": "string",
+        "default": "50",
+        "description": "maximum number of results to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "pattern": "^\\d{1,4}$",
+        "type": "string",
+        "default": "0",
+        "description": "number of results to offset the returned results by",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL filter to apply to the name of the content, only currently support text match on "
+        "name field: name:~'value'",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party, dashboards",
+        "name": "search_domain",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ListLookupFiles",
+    "GET",
+    "/ngsiem-content/queries/lookupfiles/v1",
+    "List Lookup Files in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "pattern": "^\\d{1,4}$",
+        "type": "string",
+        "default": "50",
+        "description": "maximum number of results to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "pattern": "^\\d{1,4}$",
+        "type": "string",
+        "default": "0",
+        "description": "number of results to offset the returned results by",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL filter to apply to the name of the content, only currently support text match on "
+        "name field: name:~'value'",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party, dashboards, "
+        "parsers-repository",
+        "name": "search_domain",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ListParsers",
+    "GET",
+    "/ngsiem-content/queries/parsers/v1",
+    "List Parsers in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "pattern": "^\\d{1,4}$",
+        "type": "string",
+        "default": "50",
+        "description": "maximum number of results to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "pattern": "^\\d{1,4}$",
+        "type": "string",
+        "default": "0",
+        "description": "number of results to offset the returned results by",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL filter to apply to the name of the content, only currently support text match on "
+        "name field: name:~'value'",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of repository, options; parsers-repository",
+        "name": "repository",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ListSavedQueries",
+    "GET",
+    "/ngsiem-content/queries/savedqueries/v1",
+    "Get Saved Queries in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "pattern": "^\\d{1,4}$",
+        "type": "string",
+        "default": "50",
+        "description": "maximum number of results to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "pattern": "^\\d{1,4}$",
+        "type": "string",
+        "default": "0",
+        "description": "number of results to offset the returned results by",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL filter to apply to the name of the content, only currently support text match on "
+        "name field: name:~'value'",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "name of search domain (view or repo), options; all, falcon, third-party, dashboards",
+        "name": "search_domain",
+        "in": "query"
+      }
+    ]
   ]
 ]
