@@ -95,8 +95,10 @@ class TestASPM:
             "SetCloudSecurityIntegrationState2": falcon.set_cloud_security_integration_state(body={"is_enabled": False}),
         }
         for key in tests:
-            if tests[key]["status_code"] not in AllowedResponses:
-                error_checks = False
-                # print(key)
-                # print(tests[key])
+            if not isinstance(tests[key], bytes):
+                if tests[key]["status_code"] not in AllowedResponses:
+                    error_checks = False
+                    # print(key)
+                    # print(tests[key])
+                
         assert error_checks

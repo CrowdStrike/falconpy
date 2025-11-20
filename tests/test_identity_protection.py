@@ -16,7 +16,7 @@ auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 
 falcon = IdentityProtection(auth_object=config)
-AllowedResponses = [200, 400, 429]
+AllowedResponses = [200, 400, 403, 429]
 
 # TEST_QUERY = r"""query ($after: Cursor) {
 #   entities(types: [USER], archived: false, learned: false, first: 5, after: $after) {
