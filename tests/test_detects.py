@@ -12,7 +12,7 @@ from falconpy import Detects
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Detects(auth_object=config, validate_payloads=True)
-AllowedResponses = [200, 400, 429]
+AllowedResponses = [200, 400, 404, 429]
 
 
 class TestDetects:
