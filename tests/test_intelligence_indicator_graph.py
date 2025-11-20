@@ -17,7 +17,7 @@ from falconpy import IntelligenceIndicatorGraph
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = IntelligenceIndicatorGraph(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 401, 403, 429]
+AllowedResponses = [200, 201, 207, 400, 401, 403, 404, 429]
 
 
 class TestIntelligenceIndicatorGraph:

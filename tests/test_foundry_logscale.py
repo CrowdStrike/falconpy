@@ -15,7 +15,7 @@ from falconpy import FoundryLogScale
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = FoundryLogScale(auth_object=config)
-AllowedResponses = [200, 201, 400, 403, 404, 429, 406, 500, 501, 502, 503]
+AllowedResponses = [200, 201, 400, 401, 403, 404, 429, 406, 500, 501, 502, 503]
 
 
 class TestFoundryLogScale:

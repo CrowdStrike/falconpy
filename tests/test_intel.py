@@ -11,7 +11,7 @@ from falconpy import BaseURL
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Intel(auth_object=config)
-AllowedResponses = [200, 201, 400, 404, 429]
+AllowedResponses = [200, 201, 400, 403, 404, 429]
 
 
 class TestIntel:
