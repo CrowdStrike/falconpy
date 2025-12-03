@@ -1,4 +1,8 @@
 name: Check Spelling
+
+permissions:
+  contents: read
+
 on:
   pull_request:
     paths:
@@ -8,10 +12,15 @@ on:
       - main
       - 'ver_*'
       - dev
+
 jobs:
   spelling:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+    
     - name: Check Spelling
-      uses: SFLScientific/spellcheck-github-actions@master
+      uses: SFLScientific/spellcheck-github-actions@84072e1621c56777f2da246b5eddfcb18012720d # master

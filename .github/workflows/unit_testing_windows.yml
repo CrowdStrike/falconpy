@@ -1,4 +1,8 @@
 name: Unit testing (Windows)
+
+permissions:
+  contents: read
+
 on:
   push:
     paths:
@@ -13,29 +17,33 @@ on:
       - main
       - 'ver_*'
 
-permissions:
-  contents: read
-
 jobs:
   build:
+    if: github.event.pull_request.head.repo.full_name == github.repository
     strategy:
       matrix:
-        # os: [macos-latest, windows-latest, ubuntu-latest]
-        # python-version: ['3.6', '3.7', '3.8', '3.9', '3.10']
         python-version: ['3.11']
-    # runs-on: ${{ matrix.os }}
     runs-on: windows-latest
+    timeout-minutes: 45
+    environment: testing
+    permissions:
+      contents: read
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0
+      with:
+        persist-credentials: false
+    
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
       with:
         python-version: ${{ matrix.python-version }}
+    
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        python -m pip install pytest coverage
+        python -m pip install --upgrade pip==24.0
+        python -m pip install pytest==8.1.1 coverage==7.4.4
         pip install -r requirements.txt
+    
     - name: Test with pytest
       env:
         DEBUG_API_ID: ${{ secrets.DEBUG_API_ID }}
