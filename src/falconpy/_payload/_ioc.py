@@ -70,7 +70,7 @@ def indicator_object(passed_keywords: dict) -> dict:
         "mobile_action", "severity", "source", "type", "value"
         ]
     for key in keys:
-        if passed_keywords.get(key, None):
+        if passed_keywords.get(key, None) is not None:
             returned_payload[key] = passed_keywords.get(key, None)
 
     if not passed_keywords.get("applied_globally", None) is None:
@@ -79,7 +79,7 @@ def indicator_object(passed_keywords: dict) -> dict:
     list_keys = ["host_groups", "platforms", "tags"]
     for list_key in list_keys:
         passed_list = passed_keywords.get(list_key, None)
-        if passed_list:
+        if passed_list is not None:
             if isinstance(passed_list, str):
                 passed_list = passed_list.split(",")
             returned_payload[list_key] = passed_list
