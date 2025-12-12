@@ -20,7 +20,9 @@ jobs:
     permissions:
       contents: read
     steps:
-    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0
+      with:
+        persist-credentials: false
     
     - name: Check Spelling
       uses: SFLScientific/spellcheck-github-actions@84072e1621c56777f2da246b5eddfcb18012720d # master
