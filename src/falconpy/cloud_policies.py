@@ -148,7 +148,7 @@ class CloudPolicies(ServiceClass):
         framework_id -- The framework ID of the custom compliance control. String.
         name -- The name of the custom compliance control. String.
         section_name -- The section name of the custom compliance control. String.
-                
+
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
