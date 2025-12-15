@@ -265,7 +265,7 @@ class ThreatGraph(ServiceClass):
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_summary(self: object,
                     parameters: dict = None,
-                    vertex_type: str = "any-vertext",
+                    vertex_type: str = "any-vertex",
                     **kwargs
                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve summary for a given vertex ID.
