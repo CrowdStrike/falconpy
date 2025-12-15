@@ -98,58 +98,13 @@ def data_protection_classification_payload(
     returned_payload = {}
     resources = []
     resource = {}
-
-    if passed_keywords.get("name", None) is not None:
-        resource["name"] = passed_keywords.get("name", None)
-
-    classification_properties = {}
-
-    array_fields = ["content_patterns", "file_types", "sensitivity_labels", "web_sources"]
-    for field in array_fields:
-        if passed_keywords.get(field, None) is not None:
-            classification_properties[field] = passed_keywords.get(field, None)
-
-    simple_fields = ["evidence_duplication_enabled", "protection_mode"]
-    for field in simple_fields:
-        if passed_keywords.get(field, None) is not None:
-            classification_properties[field] = passed_keywords.get(field, None)
-
-    if passed_keywords.get("rules", None) is not None:
-        classification_properties["rules"] = passed_keywords.get("rules", None)
-    else:
-        rule = {}
-        rule_array_fields = ["ad_groups", "ad_users", "web_locations"]
-        for field in rule_array_fields:
-            if passed_keywords.get(field, None) is not None:
-                rule[field] = passed_keywords.get(field, None)
-
-        rule_string_fields = [
-            "created_time_stamp", "description", "detection_severity", "id",
-            "modified_time_stamp", "response_action", "user_scope", "web_locations_scope"
-        ]
-        for field in rule_string_fields:
-            if passed_keywords.get(field, None) is not None:
-                rule[field] = passed_keywords.get(field, None)
-
-        rule_boolean_fields = [
-            "enable_printer_egress", "enable_usb_devices", "enable_web_locations",
-            "notify_end_user", "trigger_detection"
-        ]
-        for field in rule_boolean_fields:
-            if passed_keywords.get(field, None) is not None:
-                rule[field] = passed_keywords.get(field, None)
-
-        if rule:
-            classification_properties["rules"] = [rule]
-
-    if classification_properties:
-        resource["classification_properties"] = classification_properties
-
-    if resource:
-        resources.append(resource)
-
-    if resources:
-        returned_payload["resources"] = resources
+    keys = ["name", "classification_properties"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            provided = passed_keywords.get(key, None)
+            resource[key] = provided
+    resources.append(resource)
+    returned_payload['resources'] = resources
 
     return returned_payload
 
@@ -169,19 +124,13 @@ def data_protection_cloud_app_payload(passed_keywords: dict) -> Dict[str, List[D
     }
     """
     returned_payload = {}
-    urls = []
-    url = {}
-    keys = ["description", "name"]
+    keys = ["description", "name", "urls"]
     for key in keys:
-        if passed_keywords.get(key, None) is not None:
-            returned_payload[key] = passed_keywords.get(key, None)
-    url_keys = ["fqdn", "path"]
-    for key in url_keys:
-        if passed_keywords.get(key, None) is not None:
-            url[key] = passed_keywords.get(key, None)
-
-    urls.append(url)
-    returned_payload["urls"] = urls
+        if passed_keywords.get(key, None):
+            provided = passed_keywords.get(key, None)
+            if provided == "urls" and isinstance(dict):
+                provided = [provided]
+            returned_payload[key] = provided
 
     return returned_payload
 
@@ -351,71 +300,12 @@ def data_protection_policy_payload(passed_keywords: dict) -> Dict[str, List[Dict
     resources = []
     resource = {}
 
-    resource_fields = ["description", "name", "precedence"]
+    resource_fields = ["description", "name", "precedence", "policy_properties"]
     for field in resource_fields:
         if passed_keywords.get(field, None) is not None:
             resource[field] = passed_keywords.get(field, None)
-
-    policy_properties = {}
-
-    string_fields = [
-        "allow_notifications", "be_exclude_domains", "be_paste_clipboard_max_size_unit",
-        "be_paste_clipboard_min_size_unit", "be_paste_timeout_response", "be_splash_custom_message",
-        "be_splash_message_source", "be_upload_timeout_response", "block_notifications",
-        "browsers_without_active_extension", "custom_allow_notification", "custom_block_notification",
-        "euj_dialog_box_logo", "inspection_depth", "max_file_size_to_inspect_unit",
-        "min_confidence_level", "network_inspection_files_exceeding_size_limit",
-        "similarity_threshold", "unsupported_browsers_action"
-    ]
-    for field in string_fields:
-        if passed_keywords.get(field, None) is not None:
-            policy_properties[field] = passed_keywords.get(field, None)
-
-    integer_fields = [
-        "be_paste_clipboard_max_size", "be_paste_clipboard_min_size", "be_paste_timeout_duration_milliseconds",
-        "be_upload_timeout_duration_seconds", "euj_dialog_timeout", "euj_response_cache_timeout",
-        "evidence_storage_free_disk_perc", "evidence_storage_max_size", "max_file_size_to_inspect"
-    ]
-    for field in integer_fields:
-        if passed_keywords.get(field, None) is not None:
-            policy_properties[field] = passed_keywords.get(field, None)
-
-    boolean_fields = [
-        "be_paste_clipboard_over_size_behaviour_block", "be_splash_enabled", "block_all_data_access",
-        "enable_clipboard_inspection", "enable_content_inspection", "enable_context_inspection",
-        "enable_end_user_notifications_unsupported_browser", "enable_network_inspection",
-        "euj_require_additional_details", "evidence_download_enabled", "evidence_duplication_enabled_default",
-        "evidence_encrypted_enabled", "similarity_detection"
-    ]
-    for field in boolean_fields:
-        if passed_keywords.get(field, None) is not None:
-            policy_properties[field] = passed_keywords.get(field, None)
-
-    if passed_keywords.get("classifications", None) is not None:
-        policy_properties["classifications"] = passed_keywords.get("classifications", None)
-
-    if passed_keywords.get("euj_dropdown_options", None) is not None:
-        policy_properties["euj_dropdown_options"] = passed_keywords.get("euj_dropdown_options", None)
-    elif any(passed_keywords.get(key, None) is not None for key in ["justifications"]):
-        euj_dropdown = {}
-        if passed_keywords.get("justifications", None) is not None:
-            euj_dropdown["justifications"] = passed_keywords.get("justifications", None)
-        if euj_dropdown:
-            policy_properties["euj_dropdown_options"] = euj_dropdown
-
-    if passed_keywords.get("euj_header_text", None) is not None:
-        policy_properties["euj_header_text"] = passed_keywords.get("euj_header_text", None)
-    elif passed_keywords.get("headers", None) is not None:
-        policy_properties["euj_header_text"] = {"headers": passed_keywords.get("headers", None)}
-
-    if policy_properties:
-        resource["policy_properties"] = policy_properties
-
-    if resource:
-        resources.append(resource)
-
-    if resources:
-        returned_payload["resources"] = resources
+    resources.append(resource)
+    returned_payload['resources'] = resources
 
     return returned_payload
 
@@ -429,12 +319,8 @@ def data_protection_web_locations_payload(
         "web_locations": [
             {
                 "application_id": "string",
-                "cid": "string",
-                "created": "2025-11-12T00:48:40.309Z",
                 "deleted": true,
                 "enterprise_account_id": "string",
-                "id": "string",
-                "last_updated": "2025-11-12T00:48:40.309Z",
                 "location_type": "string",
                 "name": "string",
                 "provider_location_id": "string",
@@ -447,10 +333,10 @@ def data_protection_web_locations_payload(
     returned_payload = {}
     web_locations = []
     web_location = {}
-    keys = ["application_id", "cid", "created",
-            "deleted", "enterprise_account_id", "id",
-            "last_updated", "location_type", "name",
-            "provider_location_id", "provider_location_name", "type"
+    keys = ["application_id", "deleted",
+            "enterprise_account_id", "location_type",
+            "name", "provider_location_id",
+            "provider_location_name", "type"
             ]
     for key in keys:
         if passed_keywords.get(key, None) is not None:

@@ -103,55 +103,57 @@ class DataProtectionConfiguration(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "resources": [
                 {
-                "classification_properties": {
-                    "content_patterns": [
-                    "string"
-                    ],
-                    "evidence_duplication_enabled": true,
-                    "file_types": [
-                    "string"
-                    ],
-                    "protection_mode": "monitor",
-                    "rules": [
-                    {
-                        "ad_groups": [
-                        "string"
-                        ],
-                        "ad_users": [
-                        "string"
-                        ],
-                        "created_time_stamp": "string",
-                        "description": "string",
-                        "detection_severity": "informational",
-                        "enable_printer_egress": true,
-                        "enable_usb_devices": true,
-                        "enable_web_locations": true,
-                        "id": "string",
-                        "modified_time_stamp": "string",
-                        "notify_end_user": true,
-                        "response_action": "allow",
-                        "trigger_detection": true,
-                        "user_scope": "all",
-                        "web_locations": [
-                        "string"
-                        ],
-                        "web_locations_scope": "all"
-                    }
-                    ],
-                    "sensitivity_labels": [
-                    "string"
-                    ],
-                    "web_sources": [
-                    "string"
+                    "resources": [
+                        {
+                        "classification_properties": {
+                            "content_patterns": [
+                            "string"
+                            ],
+                            "evidence_duplication_enabled": true,
+                            "file_types": [
+                            "string"
+                            ],
+                            "protection_mode": "monitor",
+                            "rules": [
+                            {
+                                "ad_groups": [
+                                "string"
+                                ],
+                                "ad_users": [
+                                "string"
+                                ],
+                                "created_time_stamp": "string",
+                                "description": "string",
+                                "detection_severity": "informational",
+                                "enable_printer_egress": true,
+                                "enable_usb_devices": true,
+                                "enable_web_locations": true,
+                                "id": "string",
+                                "modified_time_stamp": "string",
+                                "notify_end_user": true,
+                                "response_action": "allow",
+                                "trigger_detection": true,
+                                "user_scope": "all",
+                                "web_locations": [
+                                "string"
+                                ],
+                                "web_locations_scope": "all"
+                            }
+                            ],
+                            "sensitivity_labels": [
+                            "string"
+                            ],
+                            "web_sources": [
+                            "string"
+                            ]
+                        },
+                        "name": "string"
+                        }
                     ]
-                },
-                "name": "string"
                 }
-            ]
-        }
+        classification_properties -- The properties of the new classification. Dictionary.
+        name -- The name of the new classification. String.
 
         This method only supports keywords for providing arguments.
 
@@ -178,55 +180,57 @@ class DataProtectionConfiguration(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "resources": [
                 {
-                "classification_properties": {
-                    "content_patterns": [
-                    "string"
-                    ],
-                    "evidence_duplication_enabled": true,
-                    "file_types": [
-                    "string"
-                    ],
-                    "protection_mode": "monitor",
-                    "rules": [
-                    {
-                        "ad_groups": [
-                        "string"
-                        ],
-                        "ad_users": [
-                        "string"
-                        ],
-                        "created_time_stamp": "string",
-                        "description": "string",
-                        "detection_severity": "informational",
-                        "enable_printer_egress": true,
-                        "enable_usb_devices": true,
-                        "enable_web_locations": true,
-                        "id": "string",
-                        "modified_time_stamp": "string",
-                        "notify_end_user": true,
-                        "response_action": "allow",
-                        "trigger_detection": true,
-                        "user_scope": "all",
-                        "web_locations": [
-                        "string"
-                        ],
-                        "web_locations_scope": "all"
-                    }
-                    ],
-                    "sensitivity_labels": [
-                    "string"
-                    ],
-                    "web_sources": [
-                    "string"
+                    "resources": [
+                        {
+                        "classification_properties": {
+                            "content_patterns": [
+                            "string"
+                            ],
+                            "evidence_duplication_enabled": true,
+                            "file_types": [
+                            "string"
+                            ],
+                            "protection_mode": "monitor",
+                            "rules": [
+                            {
+                                "ad_groups": [
+                                "string"
+                                ],
+                                "ad_users": [
+                                "string"
+                                ],
+                                "created_time_stamp": "string",
+                                "description": "string",
+                                "detection_severity": "informational",
+                                "enable_printer_egress": true,
+                                "enable_usb_devices": true,
+                                "enable_web_locations": true,
+                                "id": "string",
+                                "modified_time_stamp": "string",
+                                "notify_end_user": true,
+                                "response_action": "allow",
+                                "trigger_detection": true,
+                                "user_scope": "all",
+                                "web_locations": [
+                                "string"
+                                ],
+                                "web_locations_scope": "all"
+                            }
+                            ],
+                            "sensitivity_labels": [
+                            "string"
+                            ],
+                            "web_sources": [
+                            "string"
+                            ]
+                        },
+                        "name": "string"
+                        }
                     ]
-                },
-                "name": "string"
                 }
-            ]
-        }
+        classification_properties -- The properties of the new classification. Dictionary.
+        name -- The name of the new classification. String.
 
         This method only supports keywords for providing arguments.
 
@@ -315,16 +319,19 @@ class DataProtectionConfiguration(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "description": "string",
-            "name": "string",
-            "urls": [
                 {
-                "fqdn": "string",
-                "path": "string"
+                    "description": "string",
+                    "name": "string",
+                    "urls": [
+                        {
+                        "fqdn": "string",
+                        "path": "string"
+                        }
+                    ]
                 }
-            ]
-        }
+        description -- The description of the cloud application. String.
+        name -- The name of the cloud application. String.
+        urls -- The fields contain the FQDN and the path. List of dictionaries.
 
         This method only supports keywords for providing arguments.
 
@@ -354,8 +361,22 @@ class DataProtectionConfiguration(ServiceClass):
         """Update a cloud application.
 
         Keyword arguments:
-        id -- The cloud app id to update.
+        id -- The cloud app id to update. String.
         body -- The new cloud-application definition.
+                {
+                    "description": "string",
+                    "name": "string",
+                    "urls": [
+                        {
+                        "fqdn": "string",
+                        "path": "string"
+                        }
+                    ]
+                }
+        description -- The description of the cloud application. String.
+        name -- The name of the cloud application. String.
+        urls -- The fields contain the FQDN and the path. List of dictionaries.
+
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -447,17 +468,24 @@ class DataProtectionConfiguration(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "category": "string",
-            "description": "string",
-            "example": "string",
-            "min_match_threshold": 0,
-            "name": "string",
-            "regexes": [
-                "string"
-            ],
-            "region": "string"
-        }
+                {
+                    "category": "string",
+                    "description": "string",
+                    "example": "string",
+                    "min_match_threshold": 0,
+                    "name": "string",
+                    "regexes": [
+                        "string"
+                    ],
+                    "region": "string"
+                }
+        category -- The content pattern category. String.
+        description -- The description of the content pattern. String.
+        example -- The new content pattern demonstration. String.
+        min_match_threshold -- Integer.
+        name -- The name of the new content pattern. String.
+        regexes -- List of strings.
+        region -- The region for the content pattern. String.
 
         This method only supports keywords for providing arguments.
 
@@ -489,6 +517,24 @@ class DataProtectionConfiguration(ServiceClass):
         Keyword arguments:
         id -- The id of the content pattern to patch.
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "category": "string",
+                    "description": "string",
+                    "example": "string",
+                    "min_match_threshold": 0,
+                    "name": "string",
+                    "regexes": [
+                        "string"
+                    ],
+                    "region": "string"
+                }
+        category -- The content pattern category. String.
+        description -- The description of the content pattern. String.
+        example -- The new content pattern demonstration. String.
+        min_match_threshold -- Integer.
+        name -- The name of the new content pattern. String.
+        regexes -- List of strings.
+        region -- The region for the content pattern. String.
 
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
@@ -581,16 +627,19 @@ class DataProtectionConfiguration(ServiceClass):
 
         Keyword arguments:
         body -- Definition of enterprise-account to create.
-        {
-            "description": "string",
-            "name": "string",
-            "urls": [
                 {
-                "fqdn": "string",
-                "path": "string"
+                    "application_group_id": "string",
+                    "domains": [
+                        "string"
+                    ],
+                    "name": "string",
+                    "plugin_config_id": "string"
                 }
-            ]
-        }
+        application_group_id -- String.
+        domains -- List of strings.
+        name -- The name of the enterprise account. String.
+        plugin_config_id -- String.
+
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -631,6 +680,11 @@ class DataProtectionConfiguration(ServiceClass):
             "name": "string",
             "plugin_config_id": "string"
         }
+        application_group_id -- String.
+        domains -- List of strings.
+        name -- The name of the enterprise account. String.
+        plugin_config_id -- String.
+
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -746,15 +800,22 @@ class DataProtectionConfiguration(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "co_authoring": true,
-            "display_name": "string",
-            "external_id": "string",
-            "label_provider": "string",
-            "name": "string",
-            "plugins_configuration_id": "string",
-            "synced": true
-        }
+                {
+                    "co_authoring": true,
+                    "display_name": "string",
+                    "external_id": "string",
+                    "label_provider": "string",
+                    "name": "string",
+                    "plugins_configuration_id": "string",
+                    "synced": true
+                }
+        co_authoring -- Boolean.
+        display_name -- String.
+        external_id -- String.
+        label_provider -- String.
+        name -- The name of the new sensitivity label. String.
+        plugins_configuration_id -- String.
+        synced -- Boolean.
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -842,80 +903,84 @@ class DataProtectionConfiguration(ServiceClass):
         Keyword arguments:
         platform_name -- platform name of the policies to update, either 'win' or 'mac'.
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "resources": [
                 {
-                "description": "string",
-                "name": "string",
-                "policy_properties": {
-                    "allow_notifications": "default",
-                    "be_exclude_domains": "string",
-                    "be_paste_clipboard_max_size": 0,
-                    "be_paste_clipboard_max_size_unit": "Bytes",
-                    "be_paste_clipboard_min_size": 0,
-                    "be_paste_clipboard_min_size_unit": "Bytes",
-                    "be_paste_clipboard_over_size_behaviour_block": true,
-                    "be_paste_timeout_duration_milliseconds": 0,
-                    "be_paste_timeout_response": "block",
-                    "be_splash_custom_message": "string",
-                    "be_splash_enabled": true,
-                    "be_splash_message_source": "default",
-                    "be_upload_timeout_duration_seconds": 0,
-                    "be_upload_timeout_response": "block",
-                    "block_all_data_access": true,
-                    "block_notifications": "default",
-                    "browsers_without_active_extension": "allow",
-                    "classifications": [
-                    "string"
-                    ],
-                    "custom_allow_notification": "string",
-                    "custom_block_notification": "string",
-                    "enable_clipboard_inspection": true,
-                    "enable_content_inspection": true,
-                    "enable_context_inspection": true,
-                    "enable_end_user_notifications_unsupported_browser": true,
-                    "enable_network_inspection": true,
-                    "euj_dialog_box_logo": "string",
-                    "euj_dialog_timeout": 0,
-                    "euj_dropdown_options": {
-                    "justifications": [
+                    "resources": [
                         {
-                        "default": true,
-                        "id": "string",
-                        "justification": "string",
-                        "selected": true
+                        "description": "string",
+                        "name": "string",
+                        "policy_properties": {
+                            "allow_notifications": "default",
+                            "be_exclude_domains": "string",
+                            "be_paste_clipboard_max_size": 0,
+                            "be_paste_clipboard_max_size_unit": "Bytes",
+                            "be_paste_clipboard_min_size": 0,
+                            "be_paste_clipboard_min_size_unit": "Bytes",
+                            "be_paste_clipboard_over_size_behaviour_block": true,
+                            "be_paste_timeout_duration_milliseconds": 0,
+                            "be_paste_timeout_response": "block",
+                            "be_splash_custom_message": "string",
+                            "be_splash_enabled": true,
+                            "be_splash_message_source": "default",
+                            "be_upload_timeout_duration_seconds": 0,
+                            "be_upload_timeout_response": "block",
+                            "block_all_data_access": true,
+                            "block_notifications": "default",
+                            "browsers_without_active_extension": "allow",
+                            "classifications": [
+                            "string"
+                            ],
+                            "custom_allow_notification": "string",
+                            "custom_block_notification": "string",
+                            "enable_clipboard_inspection": true,
+                            "enable_content_inspection": true,
+                            "enable_context_inspection": true,
+                            "enable_end_user_notifications_unsupported_browser": true,
+                            "enable_network_inspection": true,
+                            "euj_dialog_box_logo": "string",
+                            "euj_dialog_timeout": 0,
+                            "euj_dropdown_options": {
+                            "justifications": [
+                                {
+                                "default": true,
+                                "id": "string",
+                                "justification": "string",
+                                "selected": true
+                                }
+                            ]
+                            },
+                            "euj_header_text": {
+                            "headers": [
+                                {
+                                "default": true,
+                                "header": "string",
+                                "selected": true
+                                }
+                            ]
+                            },
+                            "euj_require_additional_details": true,
+                            "euj_response_cache_timeout": 0,
+                            "evidence_download_enabled": true,
+                            "evidence_duplication_enabled_default": true,
+                            "evidence_encrypted_enabled": true,
+                            "evidence_storage_free_disk_perc": 0,
+                            "evidence_storage_max_size": 0,
+                            "inspection_depth": "balanced",
+                            "max_file_size_to_inspect": 0,
+                            "max_file_size_to_inspect_unit": "Bytes",
+                            "min_confidence_level": "low",
+                            "network_inspection_files_exceeding_size_limit": "block",
+                            "similarity_detection": true,
+                            "similarity_threshold": "10",
+                            "unsupported_browsers_action": "allow"
+                        },
+                        "precedence": 0
                         }
                     ]
-                    },
-                    "euj_header_text": {
-                    "headers": [
-                        {
-                        "default": true,
-                        "header": "string",
-                        "selected": true
-                        }
-                    ]
-                    },
-                    "euj_require_additional_details": true,
-                    "euj_response_cache_timeout": 0,
-                    "evidence_download_enabled": true,
-                    "evidence_duplication_enabled_default": true,
-                    "evidence_encrypted_enabled": true,
-                    "evidence_storage_free_disk_perc": 0,
-                    "evidence_storage_max_size": 0,
-                    "inspection_depth": "balanced",
-                    "max_file_size_to_inspect": 0,
-                    "max_file_size_to_inspect_unit": "Bytes",
-                    "min_confidence_level": "low",
-                    "network_inspection_files_exceeding_size_limit": "block",
-                    "similarity_detection": true,
-                    "similarity_threshold": "10",
-                    "unsupported_browsers_action": "allow"
-                },
-                "precedence": 0
                 }
-            ]
-        }
+        description -- The description of the new policy. String.
+        name -- The name of the new policy. String.
+        policy_properties -- The properties of the new policy. Dictionary.
+        precedence -- The order of precedence. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -950,80 +1015,84 @@ class DataProtectionConfiguration(ServiceClass):
         Keyword arguments:
         platform_name -- platform name of the policies to update, either 'win' or 'mac'.
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "resources": [
                 {
-                "description": "string",
-                "name": "string",
-                "policy_properties": {
-                    "allow_notifications": "default",
-                    "be_exclude_domains": "string",
-                    "be_paste_clipboard_max_size": 0,
-                    "be_paste_clipboard_max_size_unit": "Bytes",
-                    "be_paste_clipboard_min_size": 0,
-                    "be_paste_clipboard_min_size_unit": "Bytes",
-                    "be_paste_clipboard_over_size_behaviour_block": true,
-                    "be_paste_timeout_duration_milliseconds": 0,
-                    "be_paste_timeout_response": "block",
-                    "be_splash_custom_message": "string",
-                    "be_splash_enabled": true,
-                    "be_splash_message_source": "default",
-                    "be_upload_timeout_duration_seconds": 0,
-                    "be_upload_timeout_response": "block",
-                    "block_all_data_access": true,
-                    "block_notifications": "default",
-                    "browsers_without_active_extension": "allow",
-                    "classifications": [
-                    "string"
-                    ],
-                    "custom_allow_notification": "string",
-                    "custom_block_notification": "string",
-                    "enable_clipboard_inspection": true,
-                    "enable_content_inspection": true,
-                    "enable_context_inspection": true,
-                    "enable_end_user_notifications_unsupported_browser": true,
-                    "enable_network_inspection": true,
-                    "euj_dialog_box_logo": "string",
-                    "euj_dialog_timeout": 0,
-                    "euj_dropdown_options": {
-                    "justifications": [
+                    "resources": [
                         {
-                        "default": true,
-                        "id": "string",
-                        "justification": "string",
-                        "selected": true
+                        "description": "string",
+                        "name": "string",
+                        "policy_properties": {
+                            "allow_notifications": "default",
+                            "be_exclude_domains": "string",
+                            "be_paste_clipboard_max_size": 0,
+                            "be_paste_clipboard_max_size_unit": "Bytes",
+                            "be_paste_clipboard_min_size": 0,
+                            "be_paste_clipboard_min_size_unit": "Bytes",
+                            "be_paste_clipboard_over_size_behaviour_block": true,
+                            "be_paste_timeout_duration_milliseconds": 0,
+                            "be_paste_timeout_response": "block",
+                            "be_splash_custom_message": "string",
+                            "be_splash_enabled": true,
+                            "be_splash_message_source": "default",
+                            "be_upload_timeout_duration_seconds": 0,
+                            "be_upload_timeout_response": "block",
+                            "block_all_data_access": true,
+                            "block_notifications": "default",
+                            "browsers_without_active_extension": "allow",
+                            "classifications": [
+                            "string"
+                            ],
+                            "custom_allow_notification": "string",
+                            "custom_block_notification": "string",
+                            "enable_clipboard_inspection": true,
+                            "enable_content_inspection": true,
+                            "enable_context_inspection": true,
+                            "enable_end_user_notifications_unsupported_browser": true,
+                            "enable_network_inspection": true,
+                            "euj_dialog_box_logo": "string",
+                            "euj_dialog_timeout": 0,
+                            "euj_dropdown_options": {
+                            "justifications": [
+                                {
+                                "default": true,
+                                "id": "string",
+                                "justification": "string",
+                                "selected": true
+                                }
+                            ]
+                            },
+                            "euj_header_text": {
+                            "headers": [
+                                {
+                                "default": true,
+                                "header": "string",
+                                "selected": true
+                                }
+                            ]
+                            },
+                            "euj_require_additional_details": true,
+                            "euj_response_cache_timeout": 0,
+                            "evidence_download_enabled": true,
+                            "evidence_duplication_enabled_default": true,
+                            "evidence_encrypted_enabled": true,
+                            "evidence_storage_free_disk_perc": 0,
+                            "evidence_storage_max_size": 0,
+                            "inspection_depth": "balanced",
+                            "max_file_size_to_inspect": 0,
+                            "max_file_size_to_inspect_unit": "Bytes",
+                            "min_confidence_level": "low",
+                            "network_inspection_files_exceeding_size_limit": "block",
+                            "similarity_detection": true,
+                            "similarity_threshold": "10",
+                            "unsupported_browsers_action": "allow"
+                        },
+                        "precedence": 0
                         }
                     ]
-                    },
-                    "euj_header_text": {
-                    "headers": [
-                        {
-                        "default": true,
-                        "header": "string",
-                        "selected": true
-                        }
-                    ]
-                    },
-                    "euj_require_additional_details": true,
-                    "euj_response_cache_timeout": 0,
-                    "evidence_download_enabled": true,
-                    "evidence_duplication_enabled_default": true,
-                    "evidence_encrypted_enabled": true,
-                    "evidence_storage_free_disk_perc": 0,
-                    "evidence_storage_max_size": 0,
-                    "inspection_depth": "balanced",
-                    "max_file_size_to_inspect": 0,
-                    "max_file_size_to_inspect_unit": "Bytes",
-                    "min_confidence_level": "low",
-                    "network_inspection_files_exceeding_size_limit": "block",
-                    "similarity_detection": true,
-                    "similarity_threshold": "10",
-                    "unsupported_browsers_action": "allow"
-                },
-                "precedence": 0
                 }
-            ]
-        }
+        description -- The description of the policy. String.
+        name -- The name of the policy. String.
+        policy_properties -- The properties of the policy. Dictionary.
+        precedence -- The order of precedence. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -1053,7 +1122,7 @@ class DataProtectionConfiguration(ServiceClass):
 
         Keyword arguments:
         ids -- IDs of the policies to delete. String or list of strings.
-        platform_name -- platform name of the policies to update, either 'win' or 'mac'.
+        platform_name -- platform name of the policies to update, either 'win' or 'mac'. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
@@ -1117,11 +1186,8 @@ class DataProtectionConfiguration(ServiceClass):
                     "web_locations": [
                         {
                             "application_id": "string",
-                            "cid": "string",
-                            "created": "2025-11-12T00:48:40.309Z",
                             "deleted": true,
                             "enterprise_account_id": "string",
-                            "last_updated": "2025-11-12T00:48:40.309Z",
                             "location_type": "string",
                             "name": "string",
                             "provider_location_id": "string",
@@ -1130,11 +1196,9 @@ class DataProtectionConfiguration(ServiceClass):
                         }
                     ]
                 }
-        cid -- Customer CID. String.
-        created -- Creation date. UTC date formatted string.
+        application_id -- The ID of the application. String.
         deleted -- Flag indicating if this location is deleted. Boolean.
         enterprise_account_id -- Associated enterprise account ID. String.
-        last_updated -- Last updated date. UTC date formatted string.
         location_type -- Location type. String.
         name -- Location name. String.
         provider_location_id -- Provider location ID. String.
@@ -1175,12 +1239,8 @@ class DataProtectionConfiguration(ServiceClass):
                     "web_locations": [
                         {
                             "application_id": "string",
-                            "cid": "string",
-                            "created": "2025-11-12T00:48:40.309Z",
                             "deleted": true,
                             "enterprise_account_id": "string",
-                            "id": "string",
-                            "last_updated": "2025-11-12T00:48:40.309Z",
                             "location_type": "string",
                             "name": "string",
                             "provider_location_id": "string",
@@ -1189,15 +1249,11 @@ class DataProtectionConfiguration(ServiceClass):
                         }
                     ]
                 }
-        cid -- Customer CID. String.
-        created -- Creation date. UTC date formatted string.
-        deleted -- Flag indicating if this location has been deleted. Boolean.
-        enterprise_account_id -- Enterprise account ID. String.
-        id -- The web-location entity id to update. String.
-        last_updated -- Last updated date. UTC formatted string.
+        application_id -- The ID of the application. String.
+        deleted -- Flag indicating if this location is deleted. Boolean.
+        enterprise_account_id -- Associated enterprise account ID. String.
         location_type -- Location type. String.
         name -- Location name. String.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
         provider_location_id -- Provider location ID. String.
         provider_location_name -- Provider location name. String.
         type -- Type. String.
@@ -1554,11 +1610,12 @@ class DataProtectionConfiguration(ServiceClass):
                     name                      type
                     deleted                   application_id
                     provider_location_id      enterprise_account_id
-        type -- The type of entity to query. Allowed values are:
+        type -- The type of entity to query. String. Allowed values are:
                 predefined  custom
         limit -- The number of items to return in this response (default: 100, max: 500).
-        Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. Use with the limit parameter to manage pagination of results.
+        Use with the offset parameter to manage pagination of results. Integer.
+        offset -- The offset to start retrieving records from. Integer.
+        Use with the limit parameter to manage pagination of results. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
