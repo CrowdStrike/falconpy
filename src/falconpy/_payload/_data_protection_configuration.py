@@ -128,7 +128,7 @@ def data_protection_cloud_app_payload(passed_keywords: dict) -> Dict[str, List[D
     for key in keys:
         if passed_keywords.get(key, None):
             provided = passed_keywords.get(key, None)
-            if provided == "urls" and isinstance(dict):
+            if provided == "urls" and isinstance(provided, dict):
                 provided = [provided]
             returned_payload[key] = provided
 
