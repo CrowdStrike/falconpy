@@ -671,15 +671,15 @@ class DataProtectionConfiguration(ServiceClass):
         Keyword arguments:
         id -- The id of the enterprise account to update.
         body -- Definition of enterprise-account to create.
-        {
-            "application_group_id": "string",
-            "domains": [
-                "string"
-            ],
-            "id": "string",
-            "name": "string",
-            "plugin_config_id": "string"
-        }
+                {
+                    "application_group_id": "string",
+                    "domains": [
+                        "string"
+                    ],
+                    "id": "string",
+                    "name": "string",
+                    "plugin_config_id": "string"
+                }
         application_group_id -- String.
         domains -- List of strings.
         name -- The name of the enterprise account. String.
