@@ -698,31 +698,31 @@ class CloudPolicies(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload dictionary in JSON format. Not required if using other keywords.
-        {
-            "alert_info": "string",
-            "attack_types": [
-                    "string"
-            ],
-            "category": "string",
-            "controls": [
                 {
-                    "authority": "string",
-                    "code": "string"
+                    "alert_info": "string",
+                    "attack_types": [
+                            "string"
+                    ],
+                    "category": "string",
+                    "controls": [
+                        {
+                            "authority": "string",
+                            "code": "string"
+                        }
+                    ],
+                    "description": "string",
+                    "name": "string",
+                    "rule_logic_list": [
+                        {
+                            "logic": "string",
+                            "platform": "string",
+                            "remediation_info": "string",
+                            "remediation_url": "string"
+                        }
+                    ],
+                    "severity": 0,
+                    "uuid": "string"
                 }
-            ],
-            "description": "string",
-            "name": "string",
-            "rule_logic_list": [
-                {
-                    "logic": "string",
-                    "platform": "string",
-                    "remediation_info": "string",
-                    "remediation_url": "string"
-                }
-            ],
-            "severity": 0,
-            "uuid": "string"
-        }
         alert_info -- The info of the alert. String.
         attack_types -- The type of attacks. List of strings.
         controls -- The authority and code of the rule. List of dictionaries.
