@@ -62,12 +62,12 @@ class CorrelationRulesAdmin(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
-        {
-            "api_client_id": "string",
-            "id": "string",
-            "user_id": "string",
-            "user_uuid": "string"
-        }
+                {
+                    "api_client_id": "string",
+                    "id": "string",
+                    "user_id": "string",
+                    "user_uuid": "string"
+                }
         api_client_id -- The API client ID. String.
         id -- The rule ID. String.
         user_id -- The user ID. String.
