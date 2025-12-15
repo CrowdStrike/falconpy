@@ -64,7 +64,7 @@ class CloudSecurityDetections(ServiceClass):
         """Get IOMs based on the provided IDs.
 
         Keyword arguments:
-        ids -- List of IOMs to return (maximum 100 IDs allowed).  
+        ids -- List of IOMs to return (maximum 100 IDs allowed).
         Use POST method with same path if more entities are required. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
