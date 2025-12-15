@@ -62,19 +62,14 @@ def case_management_notification_groups_payload(passed_keywords: dict) -> Dict[s
     """
     body = {}
     returned_payload = []
-    date_ranges = []
-    date_range = {}
-    date_range_keys = ["from", "to"]
-    for key in date_range_keys:
-        if passed_keywords.get(key, None) is not None:
-            date_range[key] = passed_keywords.get(key, None)
-    date_ranges.append(date_range)
-    body["date_ranges"] = date_ranges
 
-    body_keys = ["field", "filter", "from", "name", "size", "sort", "type"]
+    body_keys = ["field", "filter", "from", "name", "size", "sort", "type", "date_ranges"]
     for key in body_keys:
         if passed_keywords.get(key, None) is not None:
-            body[key] = passed_keywords.get(key, None)
+            provided = passed_keywords.get(key, None)
+            if key == "date_ranges" and isinstance(provided, dict):
+                provided = [provided]
+            body[key] = provided
 
     returned_payload.append(body)
 
@@ -102,19 +97,14 @@ def case_management_create_notification_payload(passed_keywords: dict) -> Dict[s
         }
     """
     returned_payload = {}
-    channels = []
-    channel = {}
-    channel_keys = ["config_id", "config_name", "recipients", "severity", "type", "params"]
-    for key in channel_keys:
-        if passed_keywords.get(key, None) is not None:
-            channel[key] = passed_keywords.get(key, None)
-    channels.append(channel)
-    returned_payload["channels"] = channels
 
-    keys = ["description", "name", "id"]
+    keys = ["description", "name", "id", "channels"]
     for key in keys:
         if passed_keywords.get(key, None) is not None:
-            returned_payload[key] = passed_keywords.get(key, None)
+            provided = passed_keywords.get(key, None)
+            if key == "channels" and isinstance(provided, dict):
+                provided = [provided]
+            returned_payload[key] = provided
 
     return returned_payload
 
@@ -142,27 +132,13 @@ def case_management_sla_payload(passed_keywords: dict) -> Dict[str, List[Dict[st
     }
     """
     returned_payload = {}
-    goals = []
-    goal = {}
-    goal_keys = ["duration_seconds", "type"]
-    steps = []
-    step = {}
-    step_keys = ["escalate_after_seconds", "notification_group_id"]
-    for key in step_keys:
-        if passed_keywords.get(key, None) is not None:
-            step[key] = passed_keywords.get(key, None)
-    steps.append(step)
-    goal["escalation_policy"] = steps
 
-    for key in goal_keys:
-        if passed_keywords.get(key, None) is not None:
-            goal[key] = passed_keywords.get(key, None)
-    goals.append(goal)
-    returned_payload["goals"] = goals
-
-    keys = ["description", "name", "id"]
+    keys = ["description", "name", "id", "goals"]
     for key in keys:
         if passed_keywords.get(key, None) is not None:
+            provided = passed_keywords.get(key, None)
+            if key == "goals" and isinstance(provided, dict):
+                provided = [provided]
             returned_payload[key] = passed_keywords.get(key, None)
 
     return returned_payload
@@ -197,27 +173,12 @@ def case_management_template_payload(passed_keywords: dict) -> Dict[str, List[Di
     """
     returned_payload = {}
 
-    field = {}
-    field_keys = [
-        "data_type", "default_value",
-        "input_type", "multivalued",
-        "name", "required", "id"
-        ]
-    for key in field_keys:
-        if passed_keywords.get(key, None) is not None:
-            field[key] = passed_keywords.get(key, None)
-
-    option = {}
-    option_keys = ["id", "value"]
-    for key in option_keys:
-        if passed_keywords.get(key, None) is not None:
-            option[key] = passed_keywords.get(key, None)
-    field["options"] = [option]
-    returned_payload["fields"] = [field]
-
-    keys = ["description", "name", "sla_id", "id"]
+    keys = ["description", "name", "sla_id", "id", "fields"]
     for key in keys:
         if passed_keywords.get(key, None) is not None:
+            provided = passed_keywords.get(key, None)
+            if key == "fields" and isinstance(provided, dict):
+                provided = [provided]
             returned_payload[key] = passed_keywords.get(key, None)
 
     return returned_payload

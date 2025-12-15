@@ -39,7 +39,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._result import Result
 from ._service_class import ServiceClass
-from ._util import force_default, process_service_request, generate_error_result
+from ._util import force_default, process_service_request, generate_error_result, handle_single_argument
 from ._endpoint._case_management import _case_management_endpoints as Endpoints
 from ._payload._case_management import (
     case_management_notification_groups_payload,
@@ -71,9 +71,9 @@ class CaseManagement(ServiceClass):
         """Get file details aggregates as specified via json in the request body.
 
         Keyword arguments:
-        ids -- Resource IDs.
+        ids -- Resource IDs. String or a list of strings.
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        filter -- FQL filter expression.
+        filter -- FQL filter expression. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -99,9 +99,9 @@ class CaseManagement(ServiceClass):
         """Query file details.
 
         Keyword arguments:
-        filter -- FQL filter expression.
-        limit -- Page size.
-        offset -- Page offset.
+        filter -- FQL filter expression. String.
+        limit -- Page size. Integer.
+        offset -- Page offset. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -122,14 +122,15 @@ class CaseManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_file_details(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_file_details(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get file details by id.
 
         Keyword arguments:
-        ids -- Resource IDs.
+        ids -- Resource IDs. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -143,7 +144,7 @@ class CaseManagement(ServiceClass):
             endpoints=Endpoints,
             operation_id="entities_file_details_get_v1",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -152,10 +153,13 @@ class CaseManagement(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "description": "string",
-            "id": "string"
-        }
+                {
+                    "description": "string",
+                    "id": "string"
+                }
+        description -- File details update desecription. String.
+        id -- File details ID. String.
+
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -184,11 +188,12 @@ class CaseManagement(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "ids": [
-                "string"
-            ]
-        }
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- List of files to download. List of strings.
 
         This method only supports keywords for providing arguments.
 
@@ -200,8 +205,11 @@ class CaseManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.files_bulk-download.post.v1
         """
         if not body:
-            if kwargs.get("ids", None) is not None:
-                body["ids"] = kwargs.get("ids", None)
+            if kwargs.get("ids", None):
+                provided = kwargs.get("ids", None)
+                if provided == "ids" and isinstance(provided, str):
+                    provided = [provided]
+                body["ids"] = provided
 
         return process_service_request(
             calling_object=self,
@@ -211,14 +219,19 @@ class CaseManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def download_existing_files(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def download_existing_files(self: object,
+                                *args,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download existing file from case.
 
         Keyword arguments:
-        id -- Resource ID
+        id -- Resource ID. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -232,7 +245,7 @@ class CaseManagement(ServiceClass):
             endpoints=Endpoints,
             operation_id="entities_files_download_get_v1",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "id")
             )
 
     # @force_default(defaults=["parameters"], default_types=["dict"])
@@ -263,14 +276,19 @@ class CaseManagement(ServiceClass):
     #         )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_file_details(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def delete_file_details(self: object,
+                            *args,
+                            parameters: dict = None,
+                            **kwargs
+                            ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete file details by id.
 
         Keyword arguments:
-        ids -- Resource IDs
+        ids -- Resource IDs. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -284,7 +302,7 @@ class CaseManagement(ServiceClass):
             endpoints=Endpoints,
             operation_id="entities_files_delete_v1",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -292,9 +310,9 @@ class CaseManagement(ServiceClass):
         """Query for ids of file details.
 
         Keyword arguments:
-        filter -- FQL filter expression.
-        limit -- Page size.
-        offset -- Page offset.
+        filter -- FQL filter expression. String.
+        limit -- Page size. Integer.
+        offset -- Page offset. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -323,23 +341,31 @@ class CaseManagement(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        [
-            {
-                "date_ranges": [
-                {
-                    "from": "string",
-                    "to": "string"
-                }
-                ],
-                "field": "string",
-                "filter": "string",
-                "from": 0,
-                "name": "string",
-                "size": 0,
-                "sort": "string",
-                "type": "terms"
-            }
-        ]
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "name": "string",
+                        "size": 0,
+                        "sort": "string",
+                        "type": "terms"
+                    }
+                ]
+        date_ranges -- Date range timeframe. List of dictionaries.
+        field -- Field to retrieve. String.
+        filter -- Options filter criteria in the form of an FQL query. String.
+        from -- Integer.
+        name -- String.
+        size -- Integer.
+        sort -- The field to sort on. String.
+        type -- String.
 
         This method only supports keywords for providing arguments.
 
@@ -369,23 +395,32 @@ class CaseManagement(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        [
-            {
-                "date_ranges": [
-                {
-                    "from": "string",
-                    "to": "string"
-                }
-                ],
-                "field": "string",
-                "filter": "string",
-                "from": 0,
-                "name": "string",
-                "size": 0,
-                "sort": "string",
-                "type": "terms"
-            }
-        ]
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "name": "string",
+                        "size": 0,
+                        "sort": "string",
+                        "type": "terms"
+                    }
+                ]
+        date_ranges -- Date range timeframe. List of dictionaries.
+        field -- Field to retrieve. String.
+        filter -- Options filter criteria in the form of an FQL query. String.
+        from -- Integer.
+        name -- String.
+        size -- Integer.
+        sort -- The field to sort on. String.
+        type -- String.
+
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -411,23 +446,32 @@ class CaseManagement(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        [
-            {
-                "date_ranges": [
-                {
-                    "from": "string",
-                    "to": "string"
-                }
-                ],
-                "field": "string",
-                "filter": "string",
-                "from": 0,
-                "name": "string",
-                "size": 0,
-                "sort": "string",
-                "type": "terms"
-            }
-        ]
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "name": "string",
+                        "size": 0,
+                        "sort": "string",
+                        "type": "terms"
+                    }
+                ]
+        date_ranges -- Date range timeframe. List of dictionaries.
+        field -- Field to retrieve. String.
+        filter -- Options filter criteria in the form of an FQL query. String.
+        from -- Integer.
+        name -- String.
+        size -- Integer.
+        sort -- The field to sort on. String.
+        type -- String.
+
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -453,23 +497,31 @@ class CaseManagement(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        [
-            {
-                "date_ranges": [
-                {
-                    "from": "string",
-                    "to": "string"
-                }
-                ],
-                "field": "string",
-                "filter": "string",
-                "from": 0,
-                "name": "string",
-                "size": 0,
-                "sort": "string",
-                "type": "terms"
-            }
-        ]
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "name": "string",
+                        "size": 0,
+                        "sort": "string",
+                        "type": "terms"
+                    }
+                ]
+        date_ranges -- Date range timeframe. List of dictionaries.
+        field -- Field to retrieve. String.
+        filter -- Options filter criteria in the form of an FQL query. String.
+        from -- Integer.
+        name -- String.
+        size -- Integer.
+        sort -- The field to sort on. String.
+        type -- String.
 
         This method only supports keywords for providing arguments.
 
@@ -491,14 +543,15 @@ class CaseManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_fields(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_fields(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get fields by ID.
 
         Keyword arguments:
-        ids -- Resource IDs
+        ids -- Resource IDs. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -512,18 +565,23 @@ class CaseManagement(ServiceClass):
             endpoints=Endpoints,
             operation_id="entities_fields_get_v1",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_notification_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_notification_groups(self: object,
+                                *args,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notification groups by ID.
 
         Keyword arguments:
-        ids -- Resource IDs.
+        ids -- Resource IDs. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -537,7 +595,7 @@ class CaseManagement(ServiceClass):
             endpoints=Endpoints,
             operation_id="entities_notification_groups_get_v1",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -546,21 +604,24 @@ class CaseManagement(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "channels": [
                 {
-                "config_id": "string",
-                "config_name": "string",
-                "recipients": [
-                    "string"
-                ],
-                "severity": "string",
-                "type": "email"
+                    "channels": [
+                        {
+                            "config_id": "string",
+                            "config_name": "string",
+                            "recipients": [
+                                "string"
+                            ],
+                            "severity": "string",
+                            "type": "email"
+                        }
+                    ],
+                    "description": "string",
+                    "name": "string"
                 }
-            ],
-            "description": "string",
-            "name": "string"
-        }
+        channels -- The notification group channel configuration parameters. List of dictionaries.
+        description -- Notification group description. String.
+        name -- Notification group name. String.
 
         This method only supports keywords for providing arguments.
 
@@ -603,6 +664,10 @@ class CaseManagement(ServiceClass):
             "id": "string",
             "name": "string"
         }
+        channels -- The notification group channel configuration parameters. List of dictionaries.
+        description -- Notification group description. String.
+        id -- The ID of the notification group. String.
+        name -- Notification group name. String.
 
         This method only supports keywords for providing arguments.
 
@@ -653,16 +718,18 @@ class CaseManagement(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_notification_groups_v2(self: object,
+                                   *args,
                                    parameters: dict = None,
                                    **kwargs
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get notification groups by ID.
 
         Keyword arguments:
-        ids -- Resource IDs.
+        ids -- Resource IDs. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -676,7 +743,7 @@ class CaseManagement(ServiceClass):
             endpoints=Endpoints,
             operation_id="entities_notification_groups_get_v2",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -697,6 +764,10 @@ class CaseManagement(ServiceClass):
             "description": "string",
             "name": "string"
         }
+        channels -- The notification group channel configuration parameters. List of dictionaries.
+        description -- Notification group description. String.
+        name -- Notification group name. String.
+
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -736,6 +807,10 @@ class CaseManagement(ServiceClass):
             "name": "string"
         }
         This method only supports keywords for providing arguments.
+        channels -- The notification group channel configuration parameters. List of dictionaries.
+        description -- Notification group description. String.
+        id -- The ID of the notification group. String.
+        name -- Notification group name. String.
 
         Returns: dict object containing API response.
 
@@ -756,16 +831,18 @@ class CaseManagement(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_notification_group_v2(self: object,
+                                     *args,
                                      parameters: dict = None,
                                      **kwargs
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete notification groups by ID.
 
         Keyword arguments:
-        ids -- Resource IDs.
+        ids -- Resource IDs. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -779,18 +856,19 @@ class CaseManagement(ServiceClass):
             endpoints=Endpoints,
             operation_id="entities_notification_groups_delete_v2",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_slas(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_slas(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get SLAs by ID.
 
         Keyword arguments:
-        ids -- Resource IDs.
+        ids -- Resource IDs. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -804,7 +882,7 @@ class CaseManagement(ServiceClass):
             endpoints=Endpoints,
             operation_id="entities_slas_get_v1",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -831,6 +909,10 @@ class CaseManagement(ServiceClass):
             ],
             "name": "string"
         }
+        description -- The description of the SLA. String.
+        goals -- The SLA goals. List of dictionaries.
+        name -- The name of the SLA. String.
+
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -874,6 +956,10 @@ class CaseManagement(ServiceClass):
             ],
             "name": "string"
         }
+        description -- The description of the SLA. String.
+        goals -- The SLA goals. List of dictionaries.
+        name -- The name of the SLA. String.
+
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -894,14 +980,15 @@ class CaseManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_sla(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def delete_sla(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete SLAs.
 
         Keyword arguments:
-        ids -- Resource IDs.
+        ids -- Resource IDs. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -915,7 +1002,7 @@ class CaseManagement(ServiceClass):
             endpoints=Endpoints,
             operation_id="entities_slas_delete_v1",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -923,10 +1010,10 @@ class CaseManagement(ServiceClass):
         """Get template snapshots.
 
         Keyword arguments:
-        ids -- Snapshot IDs.
-        template_ids -- Retrieves the latest snapshot for all Template IDs.
+        ids -- Snapshot IDs. String or list of strings.
+        template_ids -- Retrieves the latest snapshot for all Template IDs. String or list of strings.
         versions -- Retrieve a specific version of the template from the parallel array `template_ids`.
-        A value of zero will return the latest snapshot.
+        A value of zero will return the latest snapshot. Integer or list of Integers.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -951,9 +1038,9 @@ class CaseManagement(ServiceClass):
         """Export templates to files in a zip archive.
 
         Keyword arguments:
-        ids -- Template IDs.
-        filter -- FQL filter expression.
-        format -- Export file format.
+        ids -- Template IDs. String or list of strings.
+        filter -- FQL filter expression. String.
+        format -- Export file format. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -978,8 +1065,8 @@ class CaseManagement(ServiceClass):
         """Import a template from a file.
 
         Keyword arguments:
-        file -- Local file.
-        dry_run -- Run validation only.
+        file -- Local file. formData.
+        dry_run -- Run validation only. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -1015,14 +1102,15 @@ class CaseManagement(ServiceClass):
         return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_templates(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_templates(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get templates by ID.
 
         Keyword arguments:
-        ids -- Resource IDs.
+        ids -- Resource IDs. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -1036,7 +1124,7 @@ class CaseManagement(ServiceClass):
             endpoints=Endpoints,
             operation_id="entities_templates_get_v1",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -1065,6 +1153,10 @@ class CaseManagement(ServiceClass):
             "name": "string",
             "sla_id": "string"
         }
+        description -- The description of the template. String.
+        fields -- The fields required to create a template. List of dictionaries.
+        name -- The name of the template. String.
+        sla_id -- The ID of the SLA. String.
 
         This method only supports keywords for providing arguments.
 
@@ -1114,6 +1206,12 @@ class CaseManagement(ServiceClass):
             "name": "string",
             "sla_id": "string"
         }
+        description -- The description of the template. String.
+        fields -- The fields required to create a template. List of dictionaries.
+        id -- The ID of the template to update. String.
+        name -- The name of the template. String.
+        sla_id -- The ID of the SLA. String.
+
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -1134,14 +1232,15 @@ class CaseManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_templates(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def delete_templates(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete templates.
 
         Keyword arguments:
-        ids -- Resource IDs.
+        ids -- Resource IDs. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -1155,7 +1254,7 @@ class CaseManagement(ServiceClass):
             endpoints=Endpoints,
             operation_id="entities_templates_delete_v1",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -1163,9 +1262,9 @@ class CaseManagement(ServiceClass):
         """Query fields.
 
         Keyword arguments:
-        filter -- FQL filter expression.
-        limit -- Page size.
-        offset -- Page offset.
+        filter -- FQL filter expression. String.
+        limit -- Page size. Integer.
+        offset -- Page offset. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -1193,10 +1292,10 @@ class CaseManagement(ServiceClass):
         """Query notification groups.
 
         Keyword arguments:
-        filter -- FQL filter expression.
-        sort -- Sort expression.
-        limit -- Page size.
-        offset -- Page offset.
+        filter -- FQL filter expression. String.
+        sort -- Sort expression. String.
+        limit -- Page size. Integer.
+        offset -- Page offset. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -1224,10 +1323,10 @@ class CaseManagement(ServiceClass):
         """Query notification groups.
 
         Keyword arguments:
-        filter -- FQL filter expression.
-        sort -- Sort expression.
-        limit -- Page size.
-        offset -- Page offset.
+        filter -- FQL filter expression. String.
+        sort -- Sort expression. String.
+        limit -- Page size. Integer.
+        offset -- Page offset. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -1252,10 +1351,10 @@ class CaseManagement(ServiceClass):
         """Query SLAs.
 
         Keyword arguments:
-        filter -- FQL filter expression.
-        sort -- Sort expression.
-        limit -- Page size.
-        offset -- Page offset.
+        filter -- FQL filter expression. String.
+        sort -- Sort expression. String.
+        limit -- Page size. Integer.
+        offset -- Page offset. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -1283,9 +1382,9 @@ class CaseManagement(ServiceClass):
         """Query template snapshots.
 
         Keyword arguments:
-        filter -- FQL filter expression.
-        limit -- Page size.
-        offset -- Page offset.
+        filter -- FQL filter expression. String.
+        limit -- Page size. Integer.
+        offset -- Page offset. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -1310,10 +1409,10 @@ class CaseManagement(ServiceClass):
         """Query templates.
 
         Keyword arguments:
-        filter -- FQL filter expression.
-        sort -- Sort expression.
-        limit -- Page size.
-        offset -- Page offset.
+        filter -- FQL filter expression. String.
+        sort -- Sort expression. String.
+        limit -- Page size. Integer.
+        offset -- Page offset. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
