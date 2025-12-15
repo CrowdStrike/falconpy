@@ -68,6 +68,10 @@ class CorrelationRulesAdmin(ServiceClass):
             "user_id": "string",
             "user_uuid": "string"
         }
+        api_client_id -- The API client ID. String.
+        id -- The rule ID. String.
+        user_id -- The user ID. String.
+        user_uuid -- The user UUID. String.
 
         This method only supports keywords for providing arguments.
 
