@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._cloud_policies import _cloud_policies_endpoints as Endpoints
@@ -80,7 +80,7 @@ class CloudPolicies(ServiceClass):
                     ]
                 }
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
+        rule_ids -- The ids of the rules to replace. List of strings.
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -103,14 +103,19 @@ class CloudPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_compliance_controls(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_compliance_controls(self: object,
+                                *args,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get compliance controls by ID.
 
         Keyword arguments:
         ids -- The uuids of compliance controls to retrieve. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -124,7 +129,7 @@ class CloudPolicies(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetComplianceControls",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -139,7 +144,11 @@ class CloudPolicies(ServiceClass):
                     "name": "string",
                     "section_name": "string"
                 }
-
+        description -- The description of hte custom compliance control. String.
+        framework_id -- The framework ID of the custom compliance control. String.
+        name -- The name of the custom compliance control. String.
+        section_name -- The section name of the custom compliance control. String.
+                
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -174,6 +183,8 @@ class CloudPolicies(ServiceClass):
                     "description": "string",
                     "name": "string"
                 }
+        description -- The description of hte custom compliance control. String.
+        name -- The name of the custom compliance control. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -199,6 +210,7 @@ class CloudPolicies(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_compliance_control(self: object,
+                                  *args,
                                   parameters: dict = None,
                                   **kwargs
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
@@ -208,7 +220,8 @@ class CloudPolicies(ServiceClass):
         ids -- The uuids of compliance control to delete. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -222,7 +235,7 @@ class CloudPolicies(ServiceClass):
             endpoints=Endpoints,
             operation_id="DeleteComplianceControl",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -240,6 +253,7 @@ class CloudPolicies(ServiceClass):
                 {
                     "section_name": "string"
                 }
+        section_name -- The new section name of the custom compliance control. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -265,6 +279,7 @@ class CloudPolicies(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_compliance_frameworks(self: object,
+                                  *args,
                                   parameters: dict = None,
                                   **kwargs
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
@@ -274,7 +289,8 @@ class CloudPolicies(ServiceClass):
         ids -- The uuids of compliance frameworks to retrieve. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -288,7 +304,7 @@ class CloudPolicies(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetComplianceFrameworks",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -302,6 +318,9 @@ class CloudPolicies(ServiceClass):
                     "description": "string",
                     "name": "string"
                 }
+        active -- Value to determine if the compliance framework will be active. Boolean.
+        description -- The description of the new compliance framework. String.
+        name -- The name of the new compliance framework. String.
 
         This method only supports keywords for providing arguments.
 
@@ -338,6 +357,9 @@ class CloudPolicies(ServiceClass):
                     "description": "string",
                     "name": "string"
                 }
+        active -- Value to determine if the compliance framework will be active. Boolean.
+        description -- The description of the new compliance framework. String.
+        name -- The name of the new compliance framework. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -363,6 +385,7 @@ class CloudPolicies(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_compliance_framework(self: object,
+                                    *args,
                                     parameters: dict = None,
                                     **kwargs
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
@@ -372,7 +395,8 @@ class CloudPolicies(ServiceClass):
         ids -- The uuids of compliance framework to delete. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -386,7 +410,7 @@ class CloudPolicies(ServiceClass):
             endpoints=Endpoints,
             operation_id="DeleteComplianceFramework",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
@@ -406,6 +430,8 @@ class CloudPolicies(ServiceClass):
                     "input": {},
                     "logic": "string"
                 }
+        input -- The input for the provided rule. Dictionary.
+        logic - The logic of the provided rule. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -430,14 +456,19 @@ class CloudPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rule_override(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_rule_override(self: object,
+                          *args,
+                          parameters: dict = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a rule override.
 
         Keyword arguments:
         ids -- The uuids of rule overrides to retrieve. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -451,7 +482,7 @@ class CloudPolicies(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetRuleOverride",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -474,6 +505,7 @@ class CloudPolicies(ServiceClass):
                         }
                     ]
                 }
+        overrides -- The new rule override. List of dictionaries.
 
         This method only supports keywords for providing arguments.
 
@@ -514,6 +546,7 @@ class CloudPolicies(ServiceClass):
                         }
                     ]
                 }
+        overrides -- The new rule override. List of dictionaries.
 
         This method only supports keywords for providing arguments.
 
@@ -535,14 +568,19 @@ class CloudPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_rule_override(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def delete_rule_override(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a rule override.
 
         Keyword arguments:
         ids -- The uuids of rule overrides to delete. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -556,18 +594,23 @@ class CloudPolicies(ServiceClass):
             endpoints=Endpoints,
             operation_id="DeleteRuleOverride",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rule(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_rule(self: object,
+                 *args,
+                 parameters: dict = None,
+                 **kwargs
+                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a rule by id.
 
         Keyword arguments:
         ids -- The uuids of rules to retrieve. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -581,7 +624,7 @@ class CloudPolicies(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetRule",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -614,6 +657,21 @@ class CloudPolicies(ServiceClass):
                     "severity": 0,
                     "subdomain": "string"
                 }
+        alert_info -- The info of the alert. String.
+        attack_types -- The type of attacks. String.
+        controls -- The authority and code of the rule. List of dictionaries.
+        description -- The description of the rule. String.
+        domain -- The domain of the rule. String.
+        logic -- The logic for the rule. String.
+        name -- The name of the rule. String.
+        parent_rule_id -- The id of the parent. String.
+        platform -- The platform covered by the rule. String.
+        provider -- The provider for the rule. String.
+        remediation_info -- The remediation info provided by the rule. String.
+        remediation_url -- The URL providing the remediation. String.
+        resource_type -- The type of the resource. String.
+        severity -- The severity level. Integer.
+        subdomain -- The subdomain for the rule. String.
 
         This method only supports keywords for providing arguments.
 
@@ -665,6 +723,14 @@ class CloudPolicies(ServiceClass):
             "severity": 0,
             "uuid": "string"
         }
+        alert_info -- The info of the alert. String.
+        attack_types -- The type of attacks. List of strings.
+        controls -- The authority and code of the rule. List of dictionaries.
+        description -- The description of the rule. String.
+        name -- The name of the rule. String.
+        rule_logic_list -- The logic list data. List of dictionaries.
+        severity -- The severity level. Integer.
+        uuid -- The uuid of the rule to update. String.
 
         This method only supports keywords for providing arguments.
 
@@ -686,14 +752,19 @@ class CloudPolicies(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def delete_rule(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def delete_rule(self: object,
+                    *args,
+                    parameters: dict = None,
+                    **kwargs
+                    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete a rule.
 
         Keyword arguments:
         ids -- The uuids of rules to delete. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -707,7 +778,7 @@ class CloudPolicies(ServiceClass):
             endpoints=Endpoints,
             operation_id="DeleteRuleMixin0",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])

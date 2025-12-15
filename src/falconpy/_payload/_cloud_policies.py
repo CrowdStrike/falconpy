@@ -107,18 +107,11 @@ def cloud_policies_rule_override_payload(passed_keywords: dict) -> Dict[str, Uni
     }
     """
     returned_payload = {}
-    if passed_keywords.get("overrides", None) is not None:
-        returned_payload["overrides"] = passed_keywords.get("overrides", None)
-    keys = ["comment", "crn",
-            "expires_at", "override_type",
-            "overrides_details", "reason",
-            "rule_id", "target_region"
-            ]
-    override = {}
-    for key in keys:
-        if passed_keywords.get(key, None) is not None:
-            override[key] = passed_keywords.get(key, None)
-    returned_payload["overrides"] = [override]
+    if passed_keywords.get("overrides", None):
+        provided = passed_keywords.get("overrides", None)
+        if isinstance(provided, dict):
+            provided = [provided]
+    returned_payload["overrides"] = provided
 
     return returned_payload
 
@@ -200,10 +193,13 @@ def cloud_policies_rule_update_payload(passed_keywords: dict) -> Dict[str, Union
     """
     returned_payload = {}
 
-    simple_keys = ["alert_info", "category", "description", "name", "severity", "uuid"]
+    simple_keys = ["alert_info", "category", "description", "name", "severity", "uuid", "rule_logic_list"]
     for key in simple_keys:
         if passed_keywords.get(key, None) is not None:
-            returned_payload[key] = passed_keywords.get(key, None)
+            provided = passed_keywords.get(key, None)
+            if provided == "rule_logic_list" and isinstance(provided, dict):
+                provided = [provided]
+            returned_payload[key] = provided
 
     if passed_keywords.get("attack_types", None) is not None:
         returned_payload["attack_types"] = passed_keywords.get("attack_types", None)
@@ -218,16 +214,5 @@ def cloud_policies_rule_update_payload(passed_keywords: dict) -> Dict[str, Union
                 control[key] = passed_keywords.get(key, None)
         if control:
             returned_payload["controls"] = [control]
-
-    if passed_keywords.get("rule_logic_list", None) is not None:
-        returned_payload["rule_logic_list"] = passed_keywords.get("rule_logic_list", None)
-    else:
-        rule_logic = {}
-        rule_logic_keys = ["logic", "platform", "remediation_info", "remediation_url"]
-        for key in rule_logic_keys:
-            if passed_keywords.get(key, None) is not None:
-                rule_logic[key] = passed_keywords.get(key, None)
-        if rule_logic:
-            returned_payload["rule_logic_list"] = [rule_logic]
 
     return returned_payload
