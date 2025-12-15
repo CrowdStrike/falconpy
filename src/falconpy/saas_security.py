@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._saas_security import _saas_security_endpoints as Endpoints
@@ -60,13 +60,24 @@ class SaasSecurity(ServiceClass):
         """GET Metrics.
 
         Keyword arguments:
-        status -- Exposure status
-        limit -- The maximum number of objects to return
-        offset -- The starting index of the results
-        integration_id -- Comma separated list of integration IDs
-        impact -- Impact
-        compliance -- Compliance
-        check_type -- Check Type
+        status -- Exposure status. String.
+                  Available values:
+                    Passed      Failed
+                    Dismissed   Pending
+                    Can't Run   Stale
+        limit -- The maximum number of objects to return. Integer.
+        offset -- The starting index of the results. Integer.
+        integration_id -- Comma separated list of integration IDs. String.
+        impact -- Impact. String.
+                  Available values:
+                    1   2   3
+        compliance -- Compliance. Boolean.
+        check_type -- Check Type. String.
+                      Available values:
+                        apps            devices
+                        users           assets
+                        permissions     Falcon Shield Security Check
+                        custom
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -91,15 +102,18 @@ class SaasSecurity(ServiceClass):
         """GET Alert by ID or GET Alerts.
 
         Keyword arguments:
-        id -- Alert ID
-        limit -- The maximum number of objects to return
-        offset -- The starting index of the results
-        last_id -- The last id of the alert you want to get
-        type -- The type of alert you want to get
-        integration_id -- Comma separated list of integration ID's of the alert you want to get
-        from_date -- The start date of the alert you want to get (in YYYY-MM-DD format)
-        to_date -- The end date of the alert you want to get (in YYYY-MM-DD format)
-        ascending -- None
+        id -- Alert ID. String
+        limit -- The maximum number of objects to return. Integer.
+        offset -- The starting index of the results. Integer.
+        last_id -- The last id of the alert you want to get. String.
+        type -- The type of alert you want to get. String.
+                Available values:
+                    configuration_drift     check_degraded
+                    integration_failure     Threat
+        integration_id -- Comma separated list of integration ID's of the alert you want to get. String
+        from_date -- The start date of the alert you want to get (in YYYY-MM-DD format). String.
+        to_date -- The end date of the alert you want to get (in YYYY-MM-DD format). String.
+        ascending -- Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -120,14 +134,19 @@ class SaasSecurity(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_application_users(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_application_users(self: object,
+                              *args,
+                              parameters: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """GET Application Users.
 
         Keyword arguments:
-        item_id -- Item ID in format: 'integration_id|||app_id' (item_id)
+        item_id -- Item ID in format: 'integration_id|||app_id' (item_id). String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'item_id'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -141,7 +160,7 @@ class SaasSecurity(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetAppInventoryUsers",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "item_id")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -152,17 +171,20 @@ class SaasSecurity(ServiceClass):
         """GET Applications Inventory.
 
         Keyword arguments:
-        type -- Comma separated list of app types
-        limit -- The maximum number of objects to return
-        offset -- The starting index of the results
-        status -- Comma separated list of application statuses (approved, in review, rejected, unclassified)
-        access_level -- Comma separated list of access levels
-        scopes -- Comma separated list of scopes
-        users -- Users. Format: 'is equal value' or 'contains value' or 'value' (implies 'is equal value')
-        groups -- Comma separated list of groups
-        last_activity -- Last activity was within or was not within the last 'value' days.
-            Format: 'was value' or 'was not value' or 'value' (implies 'was value'). 'value' is an integer
-        integration_id -- Comma separated list of integration IDs
+        type -- Comma separated list of app types. String.
+        limit -- The maximum number of objects to return. Integer.
+        offset -- The starting index of the results Integer.
+        status -- Comma separated list of application statuses. String.
+                  Available values:
+                    approved        in review
+                    rejected        unclassified
+        access_level -- Comma separated list of access levels. String.
+        scopes -- Comma separated list of scopes. String.
+        users -- Users. Format: 'is equal value' or 'contains value' or 'value' (implies 'is equal value'). String.
+        groups -- Comma separated list of groups. String
+        last_activity -- Last activity was within or was not within the last 'value' days. String.
+        Format: 'was value' or 'was not value' or 'value' (implies 'was value'). 'value' is an integer
+        integration_id -- Comma separated list of integration IDs. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -187,9 +209,9 @@ class SaasSecurity(ServiceClass):
         """GET Security Check Affected.
 
         Keyword arguments:
-        id -- Security Check ID
-        limit -- The maximum number of objects to return
-        offset -- The starting index of the results
+        id -- Security Check ID. String.
+        limit -- The maximum number of objects to return. Integer.
+        offset -- The starting index of the results. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -219,11 +241,13 @@ class SaasSecurity(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "entities": "string",
-            "reason": "string"
-        }
-        id -- Security Check ID
+                {
+                    "entities": "string",
+                    "reason": "string"
+                }
+        entities -- Entities. String.
+        reason -- Reason for dismiss. String.
+        id -- Security Check ID. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -260,10 +284,11 @@ class SaasSecurity(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "reason": "string"
-        }
-        id -- Security Check ID
+                {
+                    "reason": "string"
+                }
+        reason -- The reason for dismissal. String.
+        id -- Security Check ID. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -293,14 +318,25 @@ class SaasSecurity(ServiceClass):
         """GET Security Check by ID or GET List Security Checks.
 
         Keyword arguments:
-        id -- Security Check ID
-        limit -- The maximum number of objects to return
-        offset -- The starting index of the results
-        status -- Exposure status
-        integration_id -- Comma separated list of integration IDs
-        impact -- Impact
-        compliance -- Compliance
-        check_type -- Check Type
+        id -- Security Check ID. String
+        limit -- The maximum number of objects to return. Integer.
+        offset -- The starting index of the results. Integer.
+        status -- Exposure status. String.
+                  Available values:
+                    Passsed         Failed
+                    Dismissed       Pending
+                    Can't Run       Stale
+        integration_id -- Comma separated list of integration IDs. String.
+        impact -- Impact. String.
+                  Available values:
+                    Low     Medium     High
+        compliance -- Compliance. Boolean.
+        check_type -- Check Type. String.
+                      Available values:
+                        apps            devices
+                        users           assets
+                        permissions     Falcon Shield Security Check
+                        custom
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -322,16 +358,18 @@ class SaasSecurity(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_security_check_compliance(self: object,
+                                      *args,
                                       parameters: dict = None,
                                       **kwargs
                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """GET Compliance.
 
         Keyword arguments:
-        id -- Security Check ID
+        id -- Security Check ID. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -345,21 +383,23 @@ class SaasSecurity(ServiceClass):
             endpoints=Endpoints,
             operation_id="GetSecurityCheckComplianceV3",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "id")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def complete_integration_upload(self: object,
+                                    *args,
                                     parameters: dict = None,
                                     **kwargs
                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """POST Data Upload Transaction Completion.
 
         Keyword arguments:
-        id -- Integration ID
+        id -- Integration ID. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -373,21 +413,23 @@ class SaasSecurity(ServiceClass):
             endpoints=Endpoints,
             operation_id="IntegrationBuilderEndTransactionV3",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "id")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def reset_integration_builder(self: object,
+                                  *args,
                                   parameters: dict = None,
                                   **kwargs
                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Reset.
 
         Keyword arguments:
-        id -- Integration ID
+        id -- Integration ID. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -401,21 +443,23 @@ class SaasSecurity(ServiceClass):
             endpoints=Endpoints,
             operation_id="IntegrationBuilderResetV3",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "id")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_integration_builder_status(self: object,
+                                       *args,
                                        parameters: dict = None,
                                        **kwargs
                                        ) -> Union[Dict[str, Union[int, dict]], Result]:
         """GET Status.
 
         Keyword arguments:
-        id -- Integration ID
+        id -- Integration ID. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -429,7 +473,7 @@ class SaasSecurity(ServiceClass):
             endpoints=Endpoints,
             operation_id="IntegrationBuilderGetStatusV3",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "id")
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
@@ -442,11 +486,12 @@ class SaasSecurity(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload provided as a dictionary. Not required if using other keywords.
-        {
-            "data": "string"
-        }
-        id -- Integration ID
-        source_id -- Source ID
+                {
+                    "data": "string"
+                }
+        data -- String.
+        id -- Integration ID. String.
+        source_id -- Source ID. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -476,20 +521,20 @@ class SaasSecurity(ServiceClass):
         """GET Data Inventory.
 
         Keyword arguments:
-        integration_id -- Comma separated list of integration IDs
-        limit -- The maximum number of objects to return
-        offset -- The starting index of the results
-        resource_type -- Comma separated list of resource types
-        access_level -- Comma separated list of access levels
-        last_accessed -- Last accessed date was within or was not within the last 'value' days.
-            Format: 'was value' or 'was not value' or 'value' (implies 'was value'). 'value' is an integer
-        last_modified -- Last modified date was within or was not within the last 'value' days.
-            Format: 'was value' or 'was not value' or 'value' (implies 'was value'). 'value' is an integer
-        resource_name -- Resource name contains 'value' (case insensitive)
-        password_protected -- Password protected
-        resource_owner -- Resource owner contains 'value' (case insensitive)
-        resource_owner_enabled -- Resource owner enabled
-        unmanaged_domain -- Comma separated list of unmanaged domains
+        integration_id -- Comma separated list of integration IDs. String.
+        limit -- The maximum number of objects to return. Integer.
+        offset -- The starting index of the results. Integer.
+        resource_type -- Comma separated list of resource types. String.
+        access_level -- Comma separated list of access levels. String.
+        last_accessed -- Last accessed date was within or was not within the last 'value' days. String.
+        Format: 'was value' or 'was not value' or 'value' (implies 'was value'). 'value' is an integer
+        last_modified -- Last modified date was within or was not within the last 'value' days. String.
+        Format: 'was value' or 'was not value' or 'value' (implies 'was value'). 'value' is an integer
+        resource_name -- Resource name contains 'value' (case insensitive). String.
+        password_protected -- Password protected. Boolean.
+        resource_owner -- Resource owner contains 'value' (case insensitive). String.
+        resource_owner_enabled -- Resource owner enabled. Boolean.
+        unmanaged_domain -- Comma separated list of unmanaged domains. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -514,12 +559,12 @@ class SaasSecurity(ServiceClass):
         """GET Device Inventory.
 
         Keyword arguments:
-        integration_id -- Comma separated integration ID's
-        limit -- The maximum number of objects to return
-        offset -- The starting index of the results
-        email -- Email
-        privileged_only -- Privileged Only
-        unassociated_devices -- Unassociated Devices
+        integration_id -- Comma separated integration ID's. String.
+        limit -- The maximum number of objects to return. Integer.
+        offset -- The starting index of the results. Integer.
+        email -- Email. String.
+        privileged_only -- Privileged Only. Boolean.
+        unassociated_devices -- Unassociated Devices. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -544,7 +589,7 @@ class SaasSecurity(ServiceClass):
         """GET Integrations.
 
         Keyword arguments:
-        saas_id -- Comma separated SaaS ID's
+        saas_id -- Comma separated SaaS ID's. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -569,14 +614,14 @@ class SaasSecurity(ServiceClass):
         """GET Activity Monitor.
 
         Keyword arguments:
-        integration_id -- Integration ID
-        actor -- Actor
-        category -- Comma separated list of categories
-        projection -- Comma separated list of projections
-        from_date -- From Date
-        to_date -- To Date
-        limit -- Max number of logs to fetch
-        skip -- Number of logs to skip
+        integration_id -- Integration ID. String.
+        actor -- Actor. String.
+        category -- Comma separated list of categories. String.
+        projection -- Comma separated list of projections. String.
+        from_date -- From Date. String.
+        to_date -- To Date. String.
+        limit -- Max number of logs to fetch. Integer.
+        skip -- Number of logs to skip. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -625,11 +670,11 @@ class SaasSecurity(ServiceClass):
         """GET System Logs.
 
         Keyword arguments:
-        from_date -- From Date (in YYYY-MM-DD format)
-        limit -- The maximum number of objects to return
-        offset -- The starting index of the results
-        to_date -- To Date (in YYYY-MM-DD format)
-        total_count -- Fetch Total Count?
+        from_date -- From Date (in YYYY-MM-DD format). String.
+        limit -- The maximum number of objects to return. Integer.
+        offset -- The starting index of the results. Integer.
+        to_date -- To Date (in YYYY-MM-DD format). String.
+        total_count -- Fetch Total Count?. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -678,11 +723,11 @@ class SaasSecurity(ServiceClass):
         """GET User Inventory.
 
         Keyword arguments:
-        integration_id -- Comma separated integration ID's
-        limit -- The maximum number of objects to return
-        offset -- The starting index of the results
-        email -- Email
-        privileged_only -- Privileged Only
+        integration_id -- Comma separated integration ID's. String.
+        limit -- The maximum number of objects to return. Integer.
+        offset -- The starting index of the results. Integer.
+        email -- Email. String.
+        privileged_only -- Privileged Only. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
