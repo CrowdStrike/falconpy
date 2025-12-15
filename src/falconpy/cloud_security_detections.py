@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._cloud_security_detections import _cloud_security_detections_endpoints as Endpoints
@@ -56,14 +56,19 @@ class CloudSecurityDetections(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_iom_entities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_iom_entities(self: object,
+                         *args,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get IOMs based on the provided IDs.
 
         Keyword arguments:
-        ids -- List of IOMs to return (maximum 100 IDs allowed).  Use POST method with same path if more entities are required.
+        ids -- List of IOMs to return (maximum 100 IDs allowed).  Use POST method with same path if more entities are required. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
-        This method only supports keywords for providing arguments.
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
 
         Returns: dict object containing API response.
 
@@ -77,7 +82,7 @@ class CloudSecurityDetections(ServiceClass):
             endpoints=Endpoints,
             operation_id="cspm_evaluations_iom_entities",
             keywords=kwargs,
-            params=parameters
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -105,7 +110,7 @@ class CloudSecurityDetections(ServiceClass):
                     tag_value                 tags                      technique_id
                     technique_name
 
-        sort -- The field to sort on. Use |asc or |desc suffix to specify sort direction. Supported fields:
+        sort -- The field to sort on. Use |asc or |desc suffix to specify sort direction. String. Supported fields:
                 account_id                account_name              applicable_profile
                 attack_type               benchmark_name            benchmark_version
                 business_impact           cid                       cloud_group
@@ -124,10 +129,10 @@ class CloudSecurityDetections(ServiceClass):
                 tag_value                 tags                      technique_id
                 technique_name
         limit -- The maximum number of items to return. When not specified or 0, 500 is used.
-        When larger than 1000, 1000 is used.
-        offset -- Offset returned assets
+        When larger than 1000, 1000 is used. Integer.
+        offset -- Offset returned assets. Integer.
         after -- token-based pagination. Use for paginating through an entire result set.
-        Use only one of 'offset' and 'after' parameters for paginating
+        Use only one of 'offset' and 'after' parameters for paginating. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
