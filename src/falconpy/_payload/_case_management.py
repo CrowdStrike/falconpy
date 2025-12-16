@@ -139,7 +139,7 @@ def case_management_sla_payload(passed_keywords: dict) -> Dict[str, List[Dict[st
             provided = passed_keywords.get(key, None)
             if key == "goals" and isinstance(provided, dict):
                 provided = [provided]
-            returned_payload[key] = passed_keywords.get(key, None)
+            returned_payload[key] = provided
 
     return returned_payload
 
@@ -179,6 +179,147 @@ def case_management_template_payload(passed_keywords: dict) -> Dict[str, List[Di
             provided = passed_keywords.get(key, None)
             if key == "fields" and isinstance(provided, dict):
                 provided = [provided]
-            returned_payload[key] = passed_keywords.get(key, None)
+            returned_payload[key] = provided
+    return returned_payload
+
+
+def specified_case_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
+    """Specify case payload handler.
+
+    {
+        "alerts": [
+            {
+            "id": "string"
+            }
+        ],
+        "tags": [
+            "string"
+        ],
+        "id": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["alerts", "id", "tags"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            provided = passed_keywords.get(key, None)
+            if key == "alerts" and isinstance(provided, dict):
+                provided = [provided]
+            returned_payload[key] = provided
+
+    return returned_payload
+
+
+def case_manage_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
+    """Case manage payload handler.
+
+    {
+        "assigned_to_user_uuid": "string",
+        "description": "string",
+        "evidence": {
+            "alerts": [
+            {
+                "id": "string"
+            }
+            ],
+            "events": [
+            {
+                "id": "string"
+            }
+            ],
+            "leads": [
+            {
+                "id": "string"
+            }
+            ]
+        },
+        "name": "string",
+        "severity": 0,
+        "status": "string",
+        "tags": [
+            "string"
+        ],
+        "template": {
+            "id": "string"
+        }
+    }
+    """
+    returned_payload = {}
+
+    keys = ["assigned_to_user_uuid", "description",
+            "evidence", "name",
+            "severity", "status",
+            "tags", "template"
+            ]
+
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            provided = passed_keywords.get(key, None)
+            returned_payload[key] = provided
+
+    return returned_payload
+
+
+def update_case_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
+    """Update case payload handler.
+
+    {
+        "expected_consistency_version": 0,
+        "expected_version": 0,
+        "fields": {
+            "assigned_to_user_uuid": "string",
+            "custom_fields": [
+            {
+                "id": "string",
+                "values": [
+                "string"
+                ]
+            }
+            ],
+            "description": "string",
+            "name": "string",
+            "remove_user_assignment": true,
+            "severity": 0,
+            "slas_active": true,
+            "status": "string",
+            "template": {
+            "id": "string"
+            }
+        },
+        "id": "string"
+    }
+    """
+    returned_payload = {}
+
+    keys = ["expected_consistency_version", "expected_version", "fields", "id"]
+
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            provided = passed_keywords.get(key, None)
+            returned_payload[key] = provided
+
+    return returned_payload
+
+
+def case_evidence_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
+    """Case evidence payload handler.
+
+    {
+        "events": [
+            {
+            "id": "string"
+            }
+        ],
+        "id": "string"
+    }
+    """
+    returned_payload = {}
+
+    keys = ["events", "id"]
+
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            provided = passed_keywords.get(key, None)
+            returned_payload[key] = provided
 
     return returned_payload

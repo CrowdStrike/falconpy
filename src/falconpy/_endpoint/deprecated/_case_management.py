@@ -183,7 +183,28 @@ _case_management_endpoints = [
     "/case-files/entities/files/upload/v1",
     "Upload file for case",
     "case_management",
-    []
+    [
+      {
+        "type": "file",
+        "description": "Local file to Upload",
+        "name": "file",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Description of the file",
+        "name": "description",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "Case ID for the file",
+        "name": "case_id",
+        "in": "formData",
+        "required": True
+      }
+    ]
   ],
   [
     "entities.files.delete.v1",
@@ -201,6 +222,20 @@ _case_management_endpoints = [
         "description": "Resource IDs",
         "name": "ids",
         "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.retrieve-rtr-file.post.v1",
+    "POST",
+    "/case-files/entities/retrieve-rtr-file/v1",
+    "retrieves a file from host using RTR and adds it to a case",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
         "required": True
       }
     ]

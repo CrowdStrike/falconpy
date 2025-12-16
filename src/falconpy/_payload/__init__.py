@@ -45,7 +45,11 @@ from ._case_management import (
     case_management_notification_groups_payload,
     case_management_create_notification_payload,
     case_management_sla_payload,
-    case_management_template_payload
+    case_management_template_payload,
+    specified_case_payload,
+    case_manage_payload,
+    case_evidence_payload,
+    update_case_payload
     )
 from ._host_group import host_group_create_payload, host_group_update_payload
 from ._recon import (
@@ -225,5 +229,6 @@ __all__ = [
     "data_protection_policy_payload", "data_protection_web_locations_payload", "correlation_rules_admin_payload",
     "cloud_policies_rule_assign_payload", "cloud_policies_compliance_control_payload",
     "cloud_policies_evaluation_payload", "cloud_policies_rule_override_payload",
-    "cloud_policies_rule_create_payload", "cloud_policies_rule_update_payload"
+    "cloud_policies_rule_create_payload", "cloud_policies_rule_update_payload", "specified_case_payload",
+    "case_manage_payload", "case_evidence_payload", "update_case_payload"
 ]
