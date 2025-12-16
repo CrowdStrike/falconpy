@@ -60,7 +60,15 @@ class TestCaseManagement:
             "queries_notification_groups_get_v2": falcon.query_notification_groups_v2(),
             "queries_slas_get_v1": falcon.query_slas(),
             "queries_template_snapshots_get_v1": falcon.query_template_snapshots(),
-            "queries_templates_get_v1": falcon.query_templates()
+            "queries_templates_get_v1": falcon.query_templates(),
+            "entities_alert_evidence_post_v1": falcon.add_case_alert_evidence(body={}),
+            "entities_case_tags_post_v1": falcon.add_case_tags(body={}),
+            "entities_case_tags_delete_v1": falcon.delete_case_tags(id="1234567890", tag="todo"),
+            "entities_cases_put_v2": falcon.create_case(body={}),
+            "entities_cases_post_v2": falcon.get_cases(ids="1234567890"),
+            "entities_cases_patch_v2": falcon.update_case_fields(body={}),
+            "entities_event_evidence_post_v1": falcon.add_case_event_evidence(body={}),
+            "queries_cases_get_v1": falcon.query_case_ids()
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
