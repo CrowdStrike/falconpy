@@ -38,6 +38,37 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_aws_registration_endpoints = [
   [
+    "cloud-registration-aws-trigger-health-check",
+    "POST",
+    "/cloud-security-registration-aws/entities/account-scans/v1",
+    "Trigger health check scan for AWS accounts",
+    "cloud_aws_registration",
+    [
+      {
+        "maxItems": 50,
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "AWS Account IDs.",
+        "name": "account-ids",
+        "in": "query"
+      },
+      {
+        "maxItems": 10,
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Organization IDs",
+        "name": "organization-ids",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "cloud-registration-aws-get-accounts",
     "GET",
     "/cloud-security-registration-aws/entities/account/v1",
@@ -109,6 +140,37 @@ _cloud_aws_registration_endpoints = [
         "collectionFormat": "multi",
         "description": "AWS organization IDs to remove",
         "name": "organization-ids",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "cloud-registration-aws-validate-accounts",
+    "POST",
+    "/cloud-security-registration-aws/entities/account/validate/v1",
+    "Validates the AWS account registration status, and discover organization child accounts if organization is specified",
+    "cloud_aws_registration",
+    [
+      {
+        "pattern": "^\\d{12}$",
+        "type": "string",
+        "description": "AWS Account ID. organization-id shouldn't be specified if this is specified",
+        "name": "account-id",
+        "in": "query"
+      },
+      {
+        "pattern": "^arn:aws:iam::\\d{12}:role/.+",
+        "type": "string",
+        "description": "IAM Role ARN",
+        "name": "iam-role-arn",
+        "in": "query"
+      },
+      {
+        "pattern": "^o-[0-9a-z]{10,32}$",
+        "type": "string",
+        "description": "AWS organization ID to validate master account. account-id shouldn't be specified if "
+        "this is specified",
+        "name": "organization-id",
         "in": "query"
       }
     ]
