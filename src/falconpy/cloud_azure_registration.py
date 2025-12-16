@@ -37,7 +37,12 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import cloud_azure_registration_payload, cloud_azure_registration_create_payload, generic_payload_list
+from ._payload import (
+    cloud_azure_registration_payload,
+    cloud_azure_registration_create_payload,
+    generic_payload_list,
+    cloud_azure_registration_legacy_payload
+)
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._cloud_azure_registration import _cloud_azure_registration_endpoints as Endpoints
@@ -55,6 +60,44 @@ class CloudAzureRegistration(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def delete_legacy_subscription(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete existing legacy Azure subscriptions.
+
+        Keyword arguments:
+        body -- Full body payload as a dictionary. Not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "retain_client": true,
+                            "subscription_id": "string",
+                            "tenant_id": "string"
+                        }
+                    ]
+                }
+        retain_client -- Boolean.
+        subscription_id -- String.
+        tenant_id -- String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-delete-legacy-subscription
+        """
+        if not body:
+            body = cloud_azure_registration_legacy_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_delete_legacy_subscription",
+            body=body
+            )
 
     @force_default(defaults=["body"], default_types=["dict"])
     def health_check(self: object, *args, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
@@ -431,6 +474,33 @@ class CloudAzureRegistration(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def validate_registration(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Validate an Azure registration by checking service principal, role assignments and deployment stack.
+
+        Keyword arguments:
+        tenant_id -- Azure tenant ID to be validated. String.
+        stack_name -- Azure deployment stack name to be validated. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-validate-registration
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_azure_validate_registration",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    cloud_registration_azure_delete_legacy_subscription = delete_legacy_subscription
     cloud_registration_azure_trigger_health_check = health_check
     cloud_registration_azure_get_registration = get_registration
     cloud_registration_azure_create_registration = create_registration
@@ -438,3 +508,4 @@ class CloudAzureRegistration(ServiceClass):
     cloud_registration_azure_delete_registration = delete_registration
     download_azure_script = deployment_script
     cloud_registration_azure_download_script = download_script
+    cloud_registration_azure_validate_registration = validate_registration
