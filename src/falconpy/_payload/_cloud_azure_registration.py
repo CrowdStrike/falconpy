@@ -149,3 +149,30 @@ def cloud_azure_registration_payload(passed_keywords: dict) -> Dict[str, List[Di
     returned["resources"].append(item)
 
     return returned
+
+
+def cloud_azure_registration_legacy_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
+    """Delete existing legacy Azure subscriptions.
+
+    {
+        "resources": [
+            {
+                "retain_client": true,
+                "subscription_id": "string",
+                "tenant_id": "string"
+            }
+        ]
+    }
+    """
+    returned = {
+        "resources": []
+    }
+    keys = ["retain_client", "subscription_id", "tenant_id"]
+    item = {}
+    for key in keys:
+        if passed_keywords.get(key, None):
+            item[key] = passed_keywords.get(key, None)
+
+    returned["resources"].append(item)
+
+    return returned
