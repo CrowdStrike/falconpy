@@ -270,6 +270,47 @@ _d4c_registration_endpoints = [
           "false"
         ],
         "type": "string",
+        "name": "vulnerability_scanning_enabled",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "name": "vulnerability_scanning_regions",
+        "in": "query"
+      },
+      {
+        "pattern": "\\d{12}",
+        "type": "string",
+        "name": "vulnerability_scanning_host_account_id",
+        "in": "query"
+      },
+      {
+        "pattern": "^[a-zA-Z0-9+=,.@_-]{1,64}$",
+        "type": "string",
+        "name": "vulnerability_scanning_host_integration_role_name",
+        "in": "query"
+      },
+      {
+        "pattern": "^[a-zA-Z0-9+=,.@_-]{1,64}$",
+        "type": "string",
+        "name": "vulnerability_scanning_host_scanner_role_name",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "name": "vulnerability_scanning_role",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "true",
+          "false"
+        ],
+        "type": "string",
         "name": "use_existing_cloudtrail",
         "in": "query"
       },
