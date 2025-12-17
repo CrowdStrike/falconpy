@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-from ._util import force_default, process_service_request
+from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import aggregate_payload
 from ._result import Result
 from ._service_class import ServiceClass
@@ -55,6 +55,82 @@ class CAOHunting(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def aggregate_guides(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Aggregate Hunting Guides.
+
+        Keyword arguments:
+        body -- full body payload, not required when using other keywords.
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "exclude": "string",
+                        "extended_bounds": {
+                        "max": "string",
+                        "min": "string"
+                        },
+                        "field": "string",
+                        "filter": "string",
+                        "filters_spec": {
+                            "filters": {
+                                "additionalProp1": "string",
+                                "additionalProp2": "string",
+                                "additionalProp3": "string"
+                            },
+                            "other_bucket": boolean,
+                            "other_bucket_key": "string"
+                        },
+                        "from": integer,
+                        "include": "string",
+                        "interval": "string",
+                        "max_doc_count": integer,
+                        "min_doc_count": integer,
+                        "missing": "string",
+                        "name": "string",
+                        "percents": [
+                        integer
+                        ],
+                        "q": "string",
+                        "ranges": [
+                        {
+                            "From": integer,
+                            "To": integer
+                        }
+                        ],
+                        "size": integer,
+                        "sort": "string",
+                        "sub_aggregates": [
+                        null
+                        ],
+                        "time_zone": "string",
+                        "type": "string"
+                    }
+                ]
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cao-hunting/AggregateHuntingGuides
+        """
+        if not body:
+            body = [aggregate_payload(submitted_keywords=kwargs)]
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="AggregateHuntingGuides",
+            body=body
+            )
 
     @force_default(defaults=["body"], default_types=["dict"])
     def aggregate_queries(self: object,
@@ -183,6 +259,32 @@ class CAOHunting(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_guides(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve a list of Hunting Guides.
+
+        Keyword arguments:
+        ids -- Hunting Guides IDs. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cao-hunting/GetHuntingGuides
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetHuntingGuides",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_queries(self: object,
                     parameters: dict = None,
                     **kwargs
@@ -241,7 +343,39 @@ class CAOHunting(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_guides(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Search for Hunting Guides that match the provided conditions.
+
+        Keyword arguments:
+        offset -- Starting index of result set from which to return IDs. Integer.
+        limit -- Number of IDs to return. Integer.
+        sort -- Order by fields. String.
+        filter -- FQL query specifying the filter parameters. String.
+        q -- Match phrase_prefix query criteria; included fields: _all (all filter string fields indexed). String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cao-hunting/SearchHuntingGuides
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="SearchHuntingGuides",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    AggregateHuntingGuides = aggregate_guides
     AggregateIntelligenceQueries = aggregate_queries
     GetArchiveExport = create_export_archive
+    GetHuntingGuides = get_guides
     GetIntelligenceQueries = get_queries
     SearchIntelligenceQueries = search_queries
+    SearchHuntingGuides = search_guides
