@@ -818,7 +818,7 @@ class ODS(ServiceClass):
                   description.keyword   scan_completed_on
                   filecount.scanned     scan_started_on
                   filecount.malicious   created_on
-                  last_updated
+                  last_updated          description
         limit -- The maximum number of records to return. [Integer, 1-500]
         offset -- The integer offset to start retrieving records from. Integer.
         parameters - full parameters payload, not required if using other keywords.
@@ -831,7 +831,7 @@ class ODS(ServiceClass):
                 filecount.malicious     scan_completed_on
                 filecount.quarantined   created_on
                 filecount.skipped       created_by
-                last_updated
+                last_updated            description
 
         This method only supports keywords for providing arguments.
 
@@ -862,7 +862,7 @@ class ODS(ServiceClass):
                   description           created_on
                   initiated_from        created_by
                   status                deleted
-                  last_updated
+                  last_updated          description.keyword
         limit -- The maximum number of records to return. [Integer, 1-500]
         offset -- The integer offset to start retrieving records from. Integer.
         parameters - full parameters payload, not required if using other keywords.
@@ -872,7 +872,7 @@ class ODS(ServiceClass):
                 description             schedule.interval
                 status                  last_updated
                 created_on              created_by
-
+                description
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
