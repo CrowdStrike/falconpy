@@ -117,6 +117,7 @@ from .cloud_azure_registration import CloudAzureRegistration
 from .cloud_google_cloud_registration import CloudGoogleCloudRegistration
 from .cloud_oci_registration import CloudOCIRegistration
 from .cloud_policies import CloudPolicies
+from .cloud_security import CloudSecurity
 from .cloud_security_assets import CloudSecurityAssets
 from .cloud_security_compliance import CloudSecurityCompliance
 from .cloud_security_detections import CloudSecurityDetections
