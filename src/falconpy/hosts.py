@@ -168,7 +168,10 @@ class Hosts(ServiceClass):
                 device_policies.exposure-management.policy_id           device_policies.logscale-collector.policy_id
                 device_policies.logscale-collector.policy_type          device_policies.logscale-collector.applied
                 device_policies.cloud-ml.policy_id                      device_policies.cloud-ml.policy_type
-                device_policies.cloud-ml.applied
+                device_policies.cloud-ml.applied                        device_policies.fem-browser-extension-control.applied
+                device_policies.fem-browser-extension-control.policy_type
+                device_policies.fem-browser-extension-control.policy_id
+
 
         This method only supports keywords for providing arguments.
 
@@ -789,7 +792,9 @@ class Hosts(ServiceClass):
                 device_policies.exposure-management.policy_id           device_policies.logscale-collector.policy_id
                 device_policies.logscale-collector.policy_type          device_policies.logscale-collector.applied
                 device_policies.cloud-ml.policy_id                      device_policies.cloud-ml.policy_type
-                device_policies.cloud-ml.applied
+                device_policies.cloud-ml.applied                        device_policies.fem-browser-extension-control.applied
+                device_policies.fem-browser-extension-control.policy_id
+                device_policies.fem-browser-extension-control.policy_type
 
         This method only supports keywords for providing arguments.
 
