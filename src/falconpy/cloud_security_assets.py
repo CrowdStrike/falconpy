@@ -234,7 +234,9 @@ class CloudSecurityAssets(ServiceClass):
                     tags                               control.framework
                     control.benchmark.name             control.requirement
                     control.type                       control.version
-                    non_compliant.rule_name
+                    non_compliant.rule_name            aspm.deployment_cloud_resource_id
+                    aspm.deployment_provider           aspm.deployment_type
+                    aspm.technologies
         sort -- The field to sort on. String.
                 Use `|asc` or `|desc` suffix to specify sort direction.
                 Sortable fields include:
@@ -260,7 +262,9 @@ class CloudSecurityAssets(ServiceClass):
                     service_category                tenancy_name
                     compartment_name                tenancy_ocid
                     compartment_ocid                tenancy_type
-                    compartment_path
+                    compartment_path                aspm.deployment_cloud_resource_id
+                    aspm.deployment_provider        aspm.deployment_type
+                    aspm.technologies
         limit -- The maximum number of items to return. Integer.
                  When not specified or 0, 500 is used. When larger than 1000, 1000 is used.
         offset -- Offset returned assets. Use only one of 'offset' and 'after' parameter for paginating. Integer.
