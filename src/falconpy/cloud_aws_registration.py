@@ -260,10 +260,10 @@ class CloudAWSRegistration(ServiceClass):
         """Validate the AWS account registration status, and discover organization child accounts if organization is specified.
 
         Keyword arguments:
-        account-id -- AWS Account ID. organization-id shouldn't be specified if this is specified. String.
-        iam-role-arn -- IAM Role ARN. String.
-        organization-id -- AWS organization ID to validate master account.
-        account-id shouldn't be specified if this is specified. String.
+        account_id -- AWS Account ID. organization-id shouldn't be specified if this is specified. String.
+        iam_role_arn -- IAM Role ARN. String.
+        organization_id -- AWS organization ID to validate master account.
+        account_id shouldn't be specified if this is specified. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -275,6 +275,9 @@ class CloudAWSRegistration(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-aws-registration/cloud-registration-aws-validate-accounts
         """
+        kwargs["iam-role-arn"] = kwargs.get("iam_role_arn", None)
+        kwargs["organization-id"] = kwargs.get("organization_id", None)
+        kwargs["account-id"] = kwargs.get("account_id", None)
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
