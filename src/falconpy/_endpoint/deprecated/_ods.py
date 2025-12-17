@@ -397,7 +397,7 @@ _ods_endpoints = [
     [
       {
         "type": "string",
-        "description": "A FQL compatible query string. Terms: [id profile_id description.keyword "
+        "description": "A FQL compatible query string. Terms: [id profile_id description.keyword description "
         "initiated_from filecount.scanned filecount.malicious filecount.quarantined filecount.skipped "
         "affected_hosts_count status severity scan_started_on scan_completed_on created_on created_by last_updated "
         "targeted_host_count missing_host_count]",
@@ -427,6 +427,8 @@ _ods_endpoints = [
           "initiated_from|desc",
           "description.keyword|asc",
           "description.keyword|desc",
+          "description|asc",
+          "description|desc",
           "filecount.scanned|asc",
           "filecount.scanned|desc",
           "filecount.malicious|asc",
@@ -474,8 +476,8 @@ _ods_endpoints = [
     [
       {
         "type": "string",
-        "description": "A FQL compatible query string. Terms: [id description initiated_from status "
-        "schedule.start_timestamp schedule.Interval created_on created_by last_updated deleted]",
+        "description": "A FQL compatible query string. Terms: [id description.keyword description "
+        "initiated_from status schedule.start_timestamp schedule.Interval created_on created_by last_updated deleted]",
         "name": "filter",
         "in": "query",
         "allowEmptyValue": True
@@ -500,6 +502,8 @@ _ods_endpoints = [
           "id|desc",
           "description.keyword|asc",
           "description.keyword|desc",
+          "description|asc",
+          "description|desc",
           "status|asc",
           "status|desc",
           "schedule.start_timestamp|asc",
