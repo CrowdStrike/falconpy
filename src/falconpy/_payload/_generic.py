@@ -101,6 +101,9 @@ def aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R091
         "min_doc_count": integer,
         "missing": "string",
         "name": "string",
+        "percents": [
+        integer
+        ],
         "q": "string",
         "ranges": [
             {
@@ -121,6 +124,7 @@ def aggregate_payload(submitted_keywords: dict) -> dict:  # pylint: disable=R091
 
     keys = ["date_ranges", "exclude", "include", "field", "filter", "interval", "missing",
             "name", "q", "ranges", "sort", "sub_aggregates", "time_zone", "type", "extended_bounds"
+            "filters_spec", "percents"
             ]
 
     int_keys = ["from", "max_doc_count", "min_doc_count", "size"]
