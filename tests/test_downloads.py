@@ -23,6 +23,7 @@ class TestDownloads:
         error_checks = True
         tests = {
             "FetchFilesDownloadInfo": falcon.fetch_download_info(),
+            "FetchFilesDownloadInfoV2": falcon.fetch_download_info_v2(),
             "DownloadFile": falcon.download(file_name="the_file_named_jeff.txt", file_version="1"),
             "EnumerateFile": falcon.enumerate()
         }

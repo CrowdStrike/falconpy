@@ -60,6 +60,40 @@ _downloads_endpoints = [
     ]
   ],
   [
+    "FetchFilesDownloadInfoV2",
+    "GET",
+    "/csdownloads/combined/files-download/v2",
+    "Get cloud security tools info and pre-signed download URLs",
+    "downloads",
+    [
+      {
+        "type": "string",
+        "description": "Search files using various filters. Supported filters: arch,category,file_name,file_version,os",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The fields to sort records on. Supported columns:   arch  category  file_name  file_version  os",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "The upper-bound on the number of records to retrieve. Maximum limit: 100.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin. Maximum offset = 1000 - limit.",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "DownloadFile",
     "GET",
     "/csdownloads/entities/files/download/v1",
