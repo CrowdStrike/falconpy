@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 _correlation_rules_admin_endpoints = [
   [
-    "ChangeCorrelationRuleOwner",
+    "entities.rules_ownership.put.v1",
     "PUT",
     "/correlation-rules/entities/rules/ownership/v1",
     "Change the owner of an existing Correlation Rule",
