@@ -90,6 +90,42 @@ class Downloads(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def fetch_download_info_v2(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get cloud security tools info and pre-signed download URLs.
+
+        Keyword arguments:
+        filter -- Search files using various filters. String.
+                  Supported filters:
+                    arch        category
+                    file_name   file_version
+                    os
+        sort -- The fields to sort records on. String.
+                Supported columns:
+                    arch        category
+                    file_name   file_version
+                    os
+        limit -- The upper-bound on the number of records to retrieve. Maximum limit: 100. String.
+        offset -- The offset from where to begin. Maximum offset = 1000 - limit. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/downloads-api/FetchFilesDownloadInfoV2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="FetchFilesDownloadInfoV2",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def download(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve a pre-signed URL for the requested file.
 
@@ -150,5 +186,6 @@ class Downloads(ServiceClass):
             )
 
     FetchFilesDownloadInfo = fetch_download_info
+    FetchFilesDownloadInfoV2 = fetch_download_info_v2
     DownloadFile = download
     EnumerateFile = enumerate
