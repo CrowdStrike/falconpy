@@ -206,35 +206,39 @@ class D4CRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_aws_account_scripts(self: object,
-                                *args,
                                 parameters: dict = None,
                                 **kwargs
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Return a script for customer to run in their cloud environment to grant CrowdStrike access.
 
         Keyword arguments:
-        accounts -- List of accounts to register. String or list of strings.
+        ids -- AWS account IDs. String.
+        template -- Template to be rendered. String
+        accounts -- The list of accounts to register. String or list of strings.
+        behavior_assessment_enabled -- Available values: true, false. Boolean.
+        sensor_management_enabled -- Available values: true, false. Boolean.
+        dspm_enabled -- Available values: true, false. Boolean.
+        dspm_regions -- DSPM Regions. String.
+        dspm_host_account_id -- DSPM Host Account ID. String.
+        dspm_host_integration_role_name -- DSPM Host Integration Role Name. String.
+        dspm_host_scanner_role_name -- DSPM Host Scanner Role Name. String.
+        dspm_role -- DSPM Role. String.
+        vulnerability_scanning_enabled -- Enabled. Available values: true, false. Boolean.
+
+        vulnerability_scanning_regions -- Regions. String or list of strings.
+        vulnerability_scanning_host_account_id -- Account ID. String.
+        vulnerability_scanning_host_integration_role_name -- Host Integration Role Name. String.
+        vulnerability_scanning_host_scanner_role_name -- Host Scanner Role Name. String.
+        vulnerability_scanning_role -- Role. String.
+        use_existing_cloudtrail -- Use Existing CloudTrail. Available values: true, false. Boolean.
+        organization_id -- The AWS organization ID to be registered. String.
+        organizational_unit_ids -- The AWS Organizational Unit IDs to be registered. String or list of strings.
         aws_profile -- The AWS profile to be used during registration. String.
         aws_region -- The AWS region to be used during registration. String.
-        behavior_assessment_enabled -- Enable behavior assessment. String. Allowed values: true, false
-        custom_role_name -- The custom IAM role to be used during registration. Same as iam_role_arn. String.
-        dspm_enabled -- Flag indicating if DSPM is enabled. String. Allowed values: true, false
-        dspm_regions -- List of DSPM regions. Comma delimited string.
-        dspm_host_account_id -- DSPM host account ID. String.
-        dspm_host_integration_role_name -- DSPM host integration role name. String.
-        dspm_host_scanner_role_name -- DSPM host scanner role name. String.
-        dspm_role -- DSPM role. String.
-        iam_role_arn -- The custom IAM role to be used during registration. Same as custom_role_name. String.
-        idp_enabled -- Flag indicating if IDP protection is enabled. String. Allowed values: true, false
-        ids -- List of AWS Account IDs to retrieve the script for. String or list of strings.
+        iam_role_arn -- The custom IAM role to be used during registration. String.
         falcon_client_id -- The Falcon client ID used during registration. String.
-        organization_id -- The AWS organization ID to be registered. String.
-        organization_unit_ids -- The AWS Organizational unit IDs to be registered. String or list of strings.
-        parameters -- full parameters payload, not required if ids is provided as a keyword.
-        sensor_management_enabled -- Enable sensor management. String. Allowed values: true, false
+        idp_enabled -- Set to true to enable Identity Protection feature. String.
         tags -- Base64 encoded JSON string to be used as AWS tags. String.
-        template -- Template to be rendered. String. Allowed values: aws-bash, aws-terraform
-        use_existing_cloudtrail -- Use the existing cloudtrail log. String. Allowed values: true, false
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
@@ -246,15 +250,12 @@ class D4CRegistration(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/d4c-registration/GetD4CAWSAccountScriptsAttachment
         """
-        if kwargs.get("custom_role_name", None):
-            kwargs["iam_role_arn"] = kwargs.get("custom_role_name", None)
-
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
             operation_id="GetD4CAWSAccountScriptsAttachment",
             keywords=kwargs,
-            params=handle_single_argument(args, parameters, "ids")
+            params=parameters
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
