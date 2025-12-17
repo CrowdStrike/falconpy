@@ -109,7 +109,7 @@ class CloudSecurityDetections(ServiceClass):
                     status                    suppressed_by             suppression_reason
                     tactic_id                 tactic_name               tag_key
                     tag_value                 tags                      technique_id
-                    technique_name
+                    technique_name            tags_string               resource_parent
 
         sort -- The field to sort on. Use |asc or |desc suffix to specify sort direction. String. Supported fields:
                 account_id                account_name              applicable_profile
@@ -121,14 +121,15 @@ class CloudSecurityDetections(ServiceClass):
                 last_detected             policy_id                 policy_name
                 policy_uuid               region                    requirement
                 requirement_name          resource_gcrn             resource_id
-                resource_status           resource_type             resource_type_name
+                resource_parent           resource_status           resource_type_name
                 rule_group                rule_id                   rule_name
                 rule_origin               rule_remediation          section
                 service                   service_category          severity
                 status                    suppressed_by             suppression_reason
                 tactic_id                 tactic_name               tag_key
                 tag_value                 tags                      technique_id
-                technique_name
+                technique_name            tags_string
+
         limit -- The maximum number of items to return. When not specified or 0, 500 is used.
         When larger than 1000, 1000 is used. Integer.
         offset -- Offset returned assets. Integer.
