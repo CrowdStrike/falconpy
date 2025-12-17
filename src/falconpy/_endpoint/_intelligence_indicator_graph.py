@@ -53,7 +53,11 @@ _intelligence_indicator_graph_endpoints = [
       },
       {
         "type": "string",
-        "description": "FQL query specifying the filter parameters.",
+        "description": "\nFQL query specifying the filter parameters.\n\t\t\t\t\t\t\n**Filter parameters "
+        "include:** Type, LastUpdated, KillChain, MaliciousConfidence, MaliciousConfidenceValidatedTime, FirstSeen, "
+        "LastSeen, \nAdversaries.Name, Adversaries.Slug, Reports.Title, Reports.Slug, Threats.FamilyName, "
+        "Vulnerabilities.CVE, Sectors.Name, FileDetails.SHA256, \nFileDetails.SHA1, FileDetails.MD5, "
+        "DomainDetails.Detail, IPv4Details.IPv4, IPv6Details.IPv6, URLDetails.URL and others",
         "name": "filter",
         "in": "query"
       },

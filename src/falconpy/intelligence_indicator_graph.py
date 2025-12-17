@@ -76,7 +76,19 @@ class IntelligenceIndicatorGraph(ServiceClass):
                         }
                     ]
                 }
-        filter -- FQL formatted filter. String.
+        filter -- The filter expression that should be used to limit the results. String. FQL syntax.
+                  Available values:
+                    Type                            LastUpdated
+                    KillChain                       MaliciousConfidence
+                    MaliciousConfidenceValidatedTime
+                    FirstSeen                       LastSeen
+                    Adversaries.Name                Adversaries.Slug
+                    Reports.Title                   Reports.Slug
+                    Threats.FamilyName              Vulnerabilities.CVE
+                    Sectors.Name                    FileDetails.SHA256
+                    FileDetails.SHA1                FileDetails.MD5
+                    DomainDetails.Detail            IPv4Details.IPv4
+                    IPv6Details.IPv6                URLDetails.URL
         limit -- Returned record limit. Integer.
         offset -- Offset to start returning results. Integer.
         sort -- List of sort operations to perform on the returnset. String.
