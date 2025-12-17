@@ -56,6 +56,38 @@ class CloudSecurityAssets(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def combined_application_findings(self: object,
+                                      parameters: dict = None,
+                                      **kwargs
+                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get findings for an application resource with pagination.
+
+        Keyword arguments:
+        crn -- Application CRN. String.
+        type -- Finding type. String.
+        filter -- FQL string to filter findings. String.
+        offset -- Pagination offset. Integer.
+        limit -- Page size. Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-assets/cloud-security-assets-combined-application-findings
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_security_assets_combined_application_findings",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_combined_compliance_by_account(self: object,
                                            parameters: dict = None,
                                            **kwargs
@@ -253,6 +285,7 @@ class CloudSecurityAssets(ServiceClass):
             params=parameters
             )
 
+    cloud_security_assets_combined_application_findings = combined_application_findings
     cloud_security_assets_combined_compliance_by_account = get_combined_compliance_by_account
     cloud_security_assets_entities_get = get_assets
     cloud_security_assets_queries = query_assets
