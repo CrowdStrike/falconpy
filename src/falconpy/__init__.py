@@ -262,7 +262,7 @@ __all__ = [
     "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch", "ITAutomation", "F4IT",
     "CloudSecurityCompliance", "CaseManagement", "SaasSecurity", "SpotlightVulnerabilityMetadata",
     "DataProtectionConfiguration", "CorrelationRulesAdmin", "CloudSecurityDetections",
-    "CloudPolicies", "CloudGoogleCloudRegistration"
+    "CloudPolicies", "CloudGoogleCloudRegistration", "CloudSecurity"
     ]
 """
 This is free and unencumbered software released into the public domain.
