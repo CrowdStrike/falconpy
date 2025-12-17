@@ -70,10 +70,10 @@ _cloud_security_detections_endpoints = [
         "account_id  account_name  applicable_profile  attack_type  benchmark_name  benchmark_version  business_impact "
         "  cid  cloud_group  cloud_label  cloud_label_id  cloud_provider  cloud_scope  created_at  environment  "
         "extension_status  first_detected  framework  last_detected  policy_id  policy_name  policy_uuid  region  "
-        "requirement  requirement_name  resource_gcrn  resource_id  resource_status  resource_type  resource_type_name "
-        "  rule_group  rule_id  rule_name  rule_origin  rule_remediation  section  service  service_category  severity "
-        "  status  suppressed_by  suppression_reason  tactic_id  tactic_name  tag_key  tag_value  tags  technique_id  "
-        "technique_name",
+        "requirement  requirement_name  resource_gcrn  resource_id  resource_parent  resource_status  resource_type  "
+        "resource_type_name  rule_group  rule_id  rule_name  rule_origin  rule_remediation  section  service  "
+        "service_category  severity  status  suppressed_by  suppression_reason  tactic_id  tactic_name  tag_key  "
+        "tag_value  tags  tags_string  technique_id  technique_name",
         "name": "filter",
         "in": "query"
       },
@@ -83,10 +83,10 @@ _cloud_security_detections_endpoints = [
         "fields:   account_id  account_name  applicable_profile  attack_type  benchmark_name  benchmark_version  "
         "business_impact  cid  cloud_group  cloud_label  cloud_label_id  cloud_provider  cloud_scope  created_at  "
         "environment  extension_status  first_detected  framework  last_detected  policy_id  policy_name  policy_uuid  "
-        "region  requirement  requirement_name  resource_gcrn  resource_id  resource_status  resource_type  "
-        "resource_type_name  rule_group  rule_id  rule_name  rule_origin  rule_remediation  section  service  "
-        "service_category  severity  status  suppressed_by  suppression_reason  tactic_id  tactic_name  tag_key  "
-        "tag_value  tags  technique_id  technique_name",
+        "region  requirement  requirement_name  resource_gcrn  resource_id  resource_parent  resource_status  "
+        "resource_type  resource_type_name  rule_group  rule_id  rule_name  rule_origin  rule_remediation  section  "
+        "service  service_category  severity  status  suppressed_by  suppression_reason  tactic_id  tactic_name  "
+        "tag_key  tag_value  tags  tags_string  technique_id  technique_name",
         "name": "sort",
         "in": "query"
       },
