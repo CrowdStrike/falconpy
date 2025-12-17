@@ -71,10 +71,16 @@ class TestRTRAdmin:
     def rtra_generate_errors(self):
         error_checks = True
         script_test = falcon.create_scripts(data={})
+        script_test_v2 = falcon.create_scripts_v2(data={})
         putfile_test = falcon.create_put_files(data={}, files=[])
+        putfile_v2_test = falcon.create_put_files_v2(data={}, files=[])
         if script_test["status_code"] not in [406, 415]:
             error_checks = False
             print(script_test)
+
+        if script_test_v2["status_code"] not in [406, 415]:
+            error_checks = False
+            print(script_test_v2)
 
         if putfile_test["status_code"] not in [406, 415]:
             error_checks = False
@@ -121,6 +127,7 @@ class TestRTRAdmin:
             "execute_admin_command": falcon.RTR_ExecuteAdminCommand(body={})["status_code"],                    # 400
             "get_falcon_script": falcon.RTR_GetFalconScripts(ids="12345678")["status_code"],
             "create_put_files": falcon.RTR_CreatePut_Files(data=file_payload, files=files_detail)["status_code"],
+            "create_put_files_v2": falcon.RTR_CreatePut_FilesV2(data=file_payload, files=files_detail)["status_code"],
             # Expanding the result to retrieve the status code
             "get_contents": falcon.RTR_GetPutFileContents(self.rtra_retrieve_file_id(file_name=upload_filename), expand_result=True)[0],
             "get_again": falcon.RTR_GetPut_FilesV2(self.rtra_retrieve_file_id(file_name=upload_filename, ver=2))["status_code"],
@@ -128,7 +135,18 @@ class TestRTRAdmin:
                 ids=self.rtra_retrieve_file_id(file_name=upload_filename)
                 )["status_code"],
             "create_scripts": falcon.RTR_CreateScripts(data=script_payload, files=script_detail)["status_code"],
+            "create_scripts_v2": falcon.RTR_CreateScriptsV2(data=script_payload, files=script_detail)["status_code"],
             "update_scripts": falcon.RTR_UpdateScripts(
+                id=self.rtra_create_updated_payload(script_filename, new_script_payload),
+                files=script_detail,
+                description="UnitTesting",
+                name=f"UnitTesting{jdate}",
+                platform="windows",
+                permission_type="private",
+                comments_for_audit_log="Unit Testing",
+                content="#!/bin/bash"
+                )["status_code"],
+            "update_scripts_v2": falcon.RTR_UpdateScriptsV2(
                 id=self.rtra_create_updated_payload(script_filename, new_script_payload),
                 files=script_detail,
                 description="UnitTesting",

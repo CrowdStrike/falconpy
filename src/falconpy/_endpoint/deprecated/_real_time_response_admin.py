@@ -214,6 +214,43 @@ _real_time_response_admin_endpoints = [
     ]
   ],
   [
+    "RTR-CreatePut-FilesV2",
+    "POST",
+    "/real-time-response/entities/put-files/v2",
+    "Upload a new put-file to use for the RTR `put` command.",
+    "real_time_response_admin",
+    [
+      {
+        "type": "file",
+        "description": "put-file to upload",
+        "name": "file",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "File description",
+        "name": "description",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "maxLength": 32766,
+        "type": "string",
+        "description": "File name (if different than actual file name)",
+        "name": "name",
+        "in": "formData"
+      },
+      {
+        "maxLength": 4096,
+        "type": "string",
+        "description": "The audit log comment",
+        "name": "comments_for_audit_log",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
     "RTR-GetScripts",
     "GET",
     "/real-time-response/entities/scripts/v1",
@@ -396,6 +433,136 @@ _real_time_response_admin_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      }
+    ]
+  ],
+  [
+    "RTR-CreateScriptsV2",
+    "POST",
+    "/real-time-response/entities/scripts/v2",
+    "Upload a new custom-script to use for the RTR `runscript` command.",
+    "real_time_response_admin",
+    [
+      {
+        "type": "file",
+        "description": "custom-script file to upload.  These should be powershell scripts.",
+        "name": "file",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "File description",
+        "name": "description",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "maxLength": 32766,
+        "type": "string",
+        "description": "File name (if different than actual file name)",
+        "name": "name",
+        "in": "formData"
+      },
+      {
+        "maxLength": 4096,
+        "type": "string",
+        "description": "The audit log comment",
+        "name": "comments_for_audit_log",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "default": "none",
+        "description": "Permission for the custom-script. Valid permission values: \n - private, usable by "
+        "only the user who uploaded it \n - group, usable by all RTR Admins \n - public, usable by all active-"
+        "responders and RTR admins",
+        "name": "permission_type",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "The script text that you want to use to upload",
+        "name": "content",
+        "in": "formData"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Platforms for the file. Currently supports: windows, mac, linux, . If no platform is "
+        "provided, it will default to 'windows'",
+        "name": "platform",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
+    "RTR-UpdateScriptsV2",
+    "PATCH",
+    "/real-time-response/entities/scripts/v2",
+    "Upload a new scripts to replace an existing one.",
+    "real_time_response_admin",
+    [
+      {
+        "type": "string",
+        "description": "ID to update",
+        "name": "id",
+        "in": "formData",
+        "required": True
+      },
+      {
+        "type": "file",
+        "description": "custom-script file to upload.  These should be powershell scripts.",
+        "name": "file",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "File description",
+        "name": "description",
+        "in": "formData"
+      },
+      {
+        "maxLength": 32766,
+        "type": "string",
+        "description": "File name (if different than actual file name)",
+        "name": "name",
+        "in": "formData"
+      },
+      {
+        "maxLength": 4096,
+        "type": "string",
+        "description": "The audit log comment",
+        "name": "comments_for_audit_log",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "default": "none",
+        "description": "Permission for the custom-script. Valid permission values: \n - private, usable by "
+        "only the user who uploaded it \n - group, usable by all RTR Admins \n - public, usable by all active-"
+        "responders and RTR admins",
+        "name": "permission_type",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "The script text that you want to use to upload",
+        "name": "content",
+        "in": "formData"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Platforms for the file. Currently supports: windows, mac, linux, ",
+        "name": "platform",
+        "in": "formData"
       }
     ]
   ],
