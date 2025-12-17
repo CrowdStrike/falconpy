@@ -67,6 +67,9 @@ from ._cloud_azure_registration import (
     cloud_azure_registration_create_payload,
     cloud_azure_registration_legacy_payload
     )
+from ._cloud_google_cloud_registration import (
+    cloud_google_registration_create_payload
+)
 from ._cloud_oci_registration import (
     cloud_oci_refresh_payload,
     cloud_oci_validate_payload,
@@ -232,5 +235,5 @@ __all__ = [
     "cloud_policies_evaluation_payload", "cloud_policies_rule_override_payload",
     "cloud_policies_rule_create_payload", "cloud_policies_rule_update_payload", "specified_case_payload",
     "case_manage_payload", "case_evidence_payload", "update_case_payload",
-    "cloud_azure_registration_legacy_payload"
+    "cloud_azure_registration_legacy_payload", "cloud_google_registration_create_payload"
 ]

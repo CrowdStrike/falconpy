@@ -114,6 +114,7 @@ from .case_management import CaseManagement
 from .certificate_based_exclusions import CertificateBasedExclusions
 from .cloud_aws_registration import CloudAWSRegistration
 from .cloud_azure_registration import CloudAzureRegistration
+from .cloud_google_cloud_registration import CloudGoogleCloudRegistration
 from .cloud_oci_registration import CloudOCIRegistration
 from .cloud_policies import CloudPolicies
 from .cloud_security_assets import CloudSecurityAssets
@@ -260,7 +261,7 @@ __all__ = [
     "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch", "ITAutomation", "F4IT",
     "CloudSecurityCompliance", "CaseManagement", "SaasSecurity", "SpotlightVulnerabilityMetadata",
     "DataProtectionConfiguration", "CorrelationRulesAdmin", "CloudSecurityDetections",
-    "CloudPolicies"
+    "CloudPolicies", "CloudGoogleCloudRegistration"
     ]
 """
 This is free and unencumbered software released into the public domain.
