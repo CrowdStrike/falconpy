@@ -63,6 +63,34 @@ class CloudPolicies(ServiceClass):
     - a valid token provided by the authentication service class (oauth2.py)
     """
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_rule_input_schema(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get rule input schema for given resource type.
+
+        Keyword arguments:
+        domain -- domain. String.
+        subdomain -- subdomain. String.
+        cloud_provider -- Cloud service provider for the resource type. String.
+        resource_type -- Selects the resource type for which to retrieve the rule input schema. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/GetRuleInputSchema
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetRuleInputSchema",
+            keywords=kwargs,
+            params=parameters
+            )
+
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
     def replace_control_rules(self: object,
                               body: dict = None,
@@ -409,6 +437,36 @@ class CloudPolicies(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="DeleteComplianceFramework",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_enriched_asset(self: object,
+                           *args,
+                           parameters: dict = None,
+                           **kwargs
+                           ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get enriched assets that combine a primary resource with all its related resources.
+
+        Keyword arguments:
+        ids -- List of asset IDs (maximum 100 IDs allowed). String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'id'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/GetEnrichedAsset
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetEnrichedAsset",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
@@ -929,3 +987,5 @@ class CloudPolicies(ServiceClass):
     QueryComplianceControls = query_compliance_controls
     QueryComplianceFrameworks = query_compliance_frameworks
     QueryRule = query_rule
+    GetRuleInputSchema = get_rule_input_schema
+    GetEnrichedAsset = get_enriched_asset

@@ -49,11 +49,13 @@ class TestCloudPolicies:
             "DeleteRuleMixin0": falcon.DeleteRuleMixin0(ids="1234567"),
             "QueryComplianceControls": falcon.QueryComplianceControls(),
             "QueryComplianceFrameworks": falcon.QueryComplianceFrameworks(),
-            "QueryRule": falcon.QueryRule()
+            "QueryRule": falcon.QueryRule(),
+            "GetRuleInputSchema": falcon.GetRuleInputSchema(domain="whatever", subdomain="whatever", resource_type="whatever"),
+            "GetEnrichedAsset": falcon.GetEnrichedAsset(ids="1234567")
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
-                print(key)
-                print(tests[key])
+                # print(key)
+                # print(tests[key])
         assert error_checks
