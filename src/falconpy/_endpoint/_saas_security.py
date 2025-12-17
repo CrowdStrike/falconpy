@@ -418,6 +418,12 @@ _saas_security_endpoints = [
         "description": "Check Type",
         "name": "check_type",
         "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Comma separated list of check tags names or ids",
+        "name": "check_tags",
+        "in": "query"
       }
     ]
   ],

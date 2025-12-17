@@ -337,6 +337,7 @@ class SaasSecurity(ServiceClass):
                         users           assets
                         permissions     Falcon Shield Security Check
                         custom
+        check_tags -- Comma separated list of check tags names or ids. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
