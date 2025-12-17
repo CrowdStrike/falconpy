@@ -1,11 +1,147 @@
 # Version 1.5.5
 ## Added features and functionality
-+ Added: Added two new operations to the __ASPM__ service collection.
++ Added: Added 4 new filter and sort options as an allowed value to the _QueryRulesV1_ operation within the __Recon__ service collection.
+    - _permissions_
+    - _priority_
+    - _template_priority_
+    - _topic_
+    - `_endpoint/_recon.py`
+    - `recon.py`
+
++ Added: Added 21 new filter options as an allowed value to the _SearchIndicators_ operation within the __Intelligence Indicator Graph__ service collection.
+    - _Type_
+    - _LastUpdated_
+    - _KillChain_
+    - _MaliciousConfidence_
+    - _MaliciousConfidenceValidatedTime_
+    - _FirstSeen_
+    - _LastSeen_
+    - _Adversaries.Name_
+    - _Adversaries.Slug_
+    - _Reports.Title_
+    - _Reports.Slug_
+    - _Threats.FamilyName_
+    - _Vulnerabilities.CVE_
+    - _Sectors.Name_
+    - _FileDetails.SHA256_
+    - _FileDetails.SHA1_
+    - _FileDetails.MD5_
+    - _DomainDetails.Detail_
+    - _IPv4Details.IPv4_
+    - _IPv6Details.IPv6_
+    - _URLDetails.URL_
+    - `_endpoint/_intelligence_indicator_graph.py`
+    - `intelligence_indicator_graph.py`
+
++ Added: Added new filter and sort options as an allowed value to the _CombinedDevicesByFilter_ and _CombinedHiddenDevicesByFilter_ operations within the __Hosts__ service collection.
+    - _device_policies.fem-browser-extension-control.applied_
+    - _device_policies.fem-browser-extension-control.policy_type_
+    - _device_policies.fem-browser-extension-control.policy_id_
+    - `_endpoint/_hosts.py`
+    - `hosts.py`
+
++ Updated: Removed one resource option (`network.events`) from the resource parameter as an allowed value to the _LaunchExportJob_ operation in the __Falcon Container__ service collection.
+    - `_endpoint/_falcon_container.py`
+    - `falcon_container.py`
+
++ Added: Added one new operation to the __Downloads__ service collection.
+    - _FetchFilesDownloadInfoV2_
+    - `_endpoint/_downloads.py`
+    - `downloads.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_downloads.py`
+
++ Updated: Adjusted the operation _GetD4CAWSAccountScriptsAttachment_ within the __D4C Registration__ service class to align with new endpoint parameters.
+    - `_endpoint/_d4c_registration.py`
+    - `d4c_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_d4c_registration.py`
+
++ Added: Added three new operations to the __CAO Hunting__ service collection.
+    - _AggregateHuntingGuides_
+    - _GetHuntingGuides_
+    - _SearchHuntingGuides_
+    - `_endpoint/_cao_hunting.py`
+    - `cao_hunting.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cao_hunting.py`
+
++ Added: Added three new operations to the __Real Time Response Admin__ service collection.
+    - _RTR_CreatePut_FilesV2_
+    - _RTR_CreateScriptsV2_
+    - _RTR_UpdateScriptsV2_
+    - `_endpoint/_real_time_response_admin.py`
+    - `_endpoint/deprecated/_real_time_response_admin.py`
+    - `real_time_response_admin.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_real_time_response_admin.py`
+
++ Added: Added new filter and sort options (`description`, `aspm.description.keyword`) as an allowed value to the _query_scheduled_scans_ and _query_scans_ operations within the __On Demand Scan__ service collection.
+    - `_endpoint/_ods.py`
+    - `_endpoint/deprecated/_ods.py`
+    - `ods.py`
+
++ Added: Added new filter and sort options as an allowed value to the _cloud_security_assets_queries_ operation within the __Cloud Security Assets__ service collection.
+    - _aspm.deployment_cloud_resource_id_
+    - _aspm.deployment_provider_
+    - _aspm.deployment_type_
+    - _aspm.technologies_
+    - `_endpoint/_cloud_security_assets.py`
+    - `_endpoint/deprecated/_cloud_security_assets.py`
+    - `cloud_security_assets.py`
+
++ Added: Added one new operation to the __Cloud Security Assets__ service collection.
+    - _cloud_security_assets_combined_application_findings_
+    - `_endpoint/_cloud_security_assets.py`
+    - `_endpoint/deprecated/_cloud_security_assets.py`
+    - `cloud_security_assets.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_security_assets.py`
+
++ Added: Added the new __Cloud Google Cloud Registration__ service collection with 6 operations.
+    - _cloud_registration_gcp_trigger_health_check_
+    - _cloud_registration_gcp_get_registration_
+    - _cloud_registration_gcp_put_registration_
+    - _cloud_registration_gcp_create_registration_
+    - _cloud_registration_gcp_update_registration_
+    - _cloud_registration_gcp_delete_registration_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_cloud_google_cloud_registration.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_cloud_google_cloud_registration.py`
+    - `_payload/__init__.py`
+    - `_payload/_cloud_google_cloud_registration.py`
+    - `__init__.py`
+    - `cloud_google_cloud_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_google_cloud_registration.py`
+
++ Added: Added two new operations to the __Cloud Azure Registration__ service collection.
+    - _cloud_registration_azure_delete_legacy_subscription_
+    - _cloud_registration_azure_validate_registration_
+    - `_endpoint/_cloud_azure_registration.py`
+    - `_endpoint/deprecated/_cloud_azure_registration.py`
+    - `_payload/__init__.py`
+    - `_payload/_cloud_azure_registration.py`
+    - `cloud_azure_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_azure_registration.py`
+
++ Added: Added two new operations to the __Cloud AWS Registration__ service collection.
+    - _cloud_registration_aws_trigger_health_check_
+    - _cloud_registration_aws_validate_accounts_
+    - `_endpoint/_cloud_aws_registration.py`
+    - `_endpoint/deprecated/_cloud_aws_registration.py`
+    - `cloud_aws_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_aws_registration.py`
+
++ Removed: Removed two operations from the __ASPM__ service collection.
     - _GetCSPMInventoryBAServices_
     - _GetCSPMInventoryServiceDetails_
     - `_endpoint/_aspm.py`
     - `aspm.py`
-    > Unit testing expanded to complete code coverage.
+    > Unit testing adjusted to complete code coverage.
     - `tests/test_aspm.py`
 
 + Added: Added "SPL", "AI translated" and "__all__" as allowed values for the `language` argument in the _GetArchiveExport_ operation within the __CAO Hunting__ service collection.
@@ -16,7 +152,7 @@
     - `_endpoint/_cao_hunting.py`
     - `cao_hunting.py`
 
-+ Added: Added the new __Case Management__ service collection with 39 operations.
++ Added: Added the new __Case Management__ service collection with 48 operations.
     - _aggregates_file_details_post_v1_
     - _combined_file_details_get_v1_
     - _entities_file_details_get_v1_
@@ -56,6 +192,14 @@
     - _queries_slas_get_v1_
     - _queries_template_snapshots_get_v1_
     - _queries_templates_get_v1_
+    - _entities_alert_evidence_post_v1_
+    - _entities_case_tags_post_v1_
+    - _entities_case_tags_delete_v1_
+    - _entities_cases_put_v2_
+    - _entities_cases_post_v2_
+    - _entities_cases_patch_v2_
+    - _entities_event_evidence_post_v1_
+    - _queries_cases_get_v1_
     - `_endpoint/__init__.py`
     - `_endpoint/_case_management.py`
     - `_endpoint/deprecated/__init__.py`
@@ -98,7 +242,7 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_security_detections.py`
 
-+ Added: Added the new __Cloud Policies__ service collection with 22 operations.
++ Added: Added the new __Cloud Policies__ service collection with 24 operations.
     - _ReplaceControlRules_
     - _GetComplianceControls_
     - _CreateComplianceControl_
@@ -121,6 +265,8 @@
     - _QueryComplianceControls_
     - _QueryComplianceFrameworks_
     - _QueryRule_
+    - _GetRuleInputSchema_
+    - _GetEnrichedAsset_
     - `_endpoint/__init__.py`
     - `_endpoint/_cloud_policies.py`
     - `_payload/__init__.py`
