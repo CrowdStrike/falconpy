@@ -32,7 +32,6 @@ from .deprecated import _correlation_rules_admin_deprecated
 from .deprecated import _correlation_rules_deprecated
 from .deprecated import _custom_ioa_deprecated
 from .deprecated import _d4c_registration_deprecated
-from .deprecated import _datascanner_deprecated
 from .deprecated import _data_protection_configuration_deprecated
 from .deprecated import _device_content_deprecated
 from .deprecated import _discover_deprecated
@@ -277,7 +276,6 @@ deprecated_endpoints.extend(_correlation_rules_deprecated)
 deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)
 deprecated_endpoints.extend(_d4c_registration_deprecated)
-deprecated_endpoints.extend(_datascanner_deprecated)
 deprecated_endpoints.extend(_data_protection_configuration_deprecated)
 deprecated_endpoints.extend(_device_content_deprecated)
 deprecated_endpoints.extend(_discover_deprecated)
