@@ -86,7 +86,7 @@ _falcon_container_endpoints = [
         "images.images-assessment-expanded  images.images-assessment-vulnerabilities-expanded  images.images-assessment "
         "  images.images-detections  images.packages  images.vulnerabilities  investigate.container-alerts  "
         "investigate.drift-indicators  investigate.kubernetes-ioms  investigate.runtime-detections  "
-        "investigate.unidentified-containers  network.events  policies.exclusions",
+        "investigate.unidentified-containers  policies.exclusions",
         "name": "body",
         "in": "body",
         "required": True
