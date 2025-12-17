@@ -38,6 +38,48 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_policies_endpoints = [
   [
+    "GetRuleInputSchema",
+    "GET",
+    "/cloud-policies/combined/rules/input-schema/v1",
+    "Get rule input schema for given resource type",
+    "cloud_policies",
+    [
+      {
+        "type": "string",
+        "description": "domain",
+        "name": "domain",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "subdomain",
+        "name": "subdomain",
+        "in": "query",
+        "required": True
+      },
+      {
+        "enum": [
+          "aws",
+          "azure",
+          "gcp",
+          "oci"
+        ],
+        "type": "string",
+        "description": "Cloud service provider for the resource type",
+        "name": "cloud_provider",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Selects the resource type for which to retrieve the rule input schema",
+        "name": "resource_type",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "ReplaceControlRules",
     "PUT",
     "/cloud-policies/entities/compliance/control-rule-assignments/v1",
@@ -229,6 +271,25 @@ _cloud_policies_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      }
+    ]
+  ],
+  [
+    "GetEnrichedAsset",
+    "GET",
+    "/cloud-policies/entities/enriched-resources/v1",
+    "Gets enriched assets that combine a primary resource with all its related resources",
+    "cloud_policies",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "List of asset IDs (maximum 100 IDs allowed).",
+        "name": "ids",
+        "in": "query"
       }
     ]
   ],
