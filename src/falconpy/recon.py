@@ -1098,10 +1098,17 @@ class Recon(ServiceClass):
                   Use with the limit parameter to manage pagination of results.
         parameters - full parameters payload, not required if using other keywords.
         q -- Free text search across all indexed fields.
-        secondary_sort -- Possible order by fields: created_timestamp, last_updated_timestamp.
+        secondary_sort -- Possible order by fields:
+                            created_timestamp       last_updated_timestamp,
+                            permissions             priority
+                            template_priority       topic
                           Ex: last_updated_timestamp|desc
                           The keyword "secondarySort" will also be accepted for this value.
         sort -- The property to sort by. FQL syntax.
+                Possible order by fields:
+                    created_timestamp       last_updated_timestamp,
+                    permissions             priority
+                    template_priority       topic
                 (e.g. created_timestamp|asc, last_updated_timestamp|desc)
 
         This method only supports keywords for providing arguments.
