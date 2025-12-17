@@ -381,6 +381,47 @@ class RealTimeResponseAdmin(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
+    @force_default(defaults=["data", "files"], default_types=["dict", "list"])
+    def create_put_files_v2(self: object,
+                            files: list,
+                            data: dict = None,
+                            **kwargs
+                            ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Upload a new put-file to use for the RTR `put` command.
+
+        Keyword arguments:
+        data -- full formData payload, not required if other keywords are used. formData.
+                {
+                    "description": "string",
+                    "name": "string",
+                    "comments_for_audit_log": "string"
+                }
+        files -- File to be uploaded. List of tuples. *REQUIRED*
+                 Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
+        description -- File description. String.
+        name -- File name (if different than actual file name). String.
+        comments_for_audit_log -- Audit log comment. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-CreatePut-FilesV2
+        """
+        if not data:
+            data = data_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_CreatePut_FilesV2",
+            data=data,
+            files=files
+            )
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_scripts(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get custom-scripts based on the ID's given.
@@ -513,6 +554,112 @@ class RealTimeResponseAdmin(ServiceClass):
             operation_id="RTR_DeleteScripts",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["data", "files"], default_types=["dict", "list"])
+    def create_scripts_v2(self: object,
+                          data: dict = None,
+                          files: list = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Upload a new custom-script to use for the RTR `runscript` command.
+
+        Keyword arguments:
+        data -- full formData payload, not required if other keywords are used. formData.
+                {
+                    "description": "string",
+                    "name": "string",
+                    "comments_for_audit_log": "string",
+                    "content": "string",
+                    "platform": "string",
+                    "permission_type": "string"
+                }
+        files -- File to be uploaded. List of tuples. *REQUIRED*
+                 Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
+        description -- File description. String.
+        name -- File name (if different than actual file name). String.
+        comments_for_audit_log -- Audit log comment. String.
+        permission_type -- Permission for the custom-script. STring.
+                           Valid permission values:
+                             `private` - usable by only the user who uploaded it
+                             `group` - usable by all RTR Admins
+                             `public` - usable by all active-responders and RTR admins
+        content -- The script text that you want to use to upload. String.
+        platform -- Platforms for the file. Currently supports: windows, mac, linux. String.
+                    If no platform is provided, it will default to 'windows'.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-CreateScriptsV2
+        """
+        if not data:
+            data = data_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_CreateScriptsV2",
+            data=data,
+            files=files
+            )
+
+    @force_default(defaults=["data", "files"], default_types=["dict", "list"])
+    def update_scripts_v2(self: object,
+                          data: dict = None,
+                          files: list = None,
+                          **kwargs
+                          ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Upload a new scripts to replace an existing one.
+
+        Keyword arguments:
+        data -- full formData payload, not required if other keywords are used. formData.
+                {
+                    "id": "string",
+                    "description": "string",
+                    "name": "string",
+                    "comments_for_audit_log": "string",
+                    "content": "string",
+                    "platform": "string",
+                    "permission_type": "string"
+                }
+        files -- File to be uploaded. List of tuples. *REQUIRED*
+                 Ex: [('file', ('file.ext', open('file.ext','rb').read(), 'application/script'))]
+        description -- File description. String.
+        id -- Script ID to be updated. String.
+        name -- File name (if different than actual file name). String.
+        comments_for_audit_log -- Audit log comment. String.
+        permission_type -- Permission for the custom-script. String.
+                           Valid permission values:
+                             `private` - usable by only the user who uploaded it
+                             `group` - usable by all RTR Admins
+                             `public` - usable by all active-responders and RTR admins
+        content -- The script text that you want to use to upload. String.
+        platform -- Platforms for the file. Currently supports: windows, mac, linux. String.
+                    If no platform is provided, it will default to 'windows'.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/real-time-response-admin/RTR-UpdateScriptsV2
+        """
+        if not data:
+            data = data_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="RTR_UpdateScriptsV2",
+            data=data,
+            files=files
             )
 
     @force_default(defaults=["data", "files"], default_types=["dict", "list"])
@@ -673,10 +820,13 @@ class RealTimeResponseAdmin(ServiceClass):
     RTR_GetPut_FilesV2 = get_put_files_v2
     RTR_CreatePut_Files = create_put_files
     RTR_DeletePut_Files = delete_put_files
+    RTR_CreatePut_FilesV2 = create_put_files_v2
     RTR_GetScripts = get_scripts
     RTR_GetScriptsV2 = get_scripts_v2
     RTR_CreateScripts = create_scripts
     RTR_DeleteScripts = delete_scripts
+    RTR_CreateScriptsV2 = create_scripts_v2
+    RTR_UpdateScriptsV2 = update_scripts_v2
     RTR_UpdateScripts = update_scripts
     RTR_ListFalconScripts = list_falcon_scripts
     RTR_ListPut_Files = list_put_files
