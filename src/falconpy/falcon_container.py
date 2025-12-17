@@ -172,8 +172,7 @@ class FalconContainer(ServiceClass):
             assets.pods                                             investigate.kubernetes-ioms
             images.images-assessment-detections-expanded            investigate.runtime-detections
             images.images-assessment-expanded                       investigate.unidentified-containers
-            images.images-assessment-vulnerabilities-expanded       network.events
-            policies.exclusions
+            images.images-assessment-vulnerabilities-expanded       policies.exclusions
         sort : str
             Falcon Query Language sort string defining the export sort.
 
