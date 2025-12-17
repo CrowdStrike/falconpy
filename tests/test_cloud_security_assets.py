@@ -23,6 +23,7 @@ class TestCloudSecurityAssets:
     def test_all_code_paths(self):
         error_checks = True
         tests = {
+            "cloud_security_assets_combined_application_findings": falcon.combined_application_findings(crn="12345678", type="whatever"),
             "cloud_security_assets_combined_compliance_by_account": falcon.get_combined_compliance_by_account(limit=1),
             "cloud_security_assets_entities_get": falcon.get_assets("12345678"),
             "cloud_security_assets_queries": falcon.query_assets(filter="zone:'bob'"),
