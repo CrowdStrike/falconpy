@@ -1,0 +1,36 @@
+name: Publish Development Package
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  deploy-package:
+    if: >
+      ${{ github.event.pull_request.merged == true && 
+      contains(github.event.pull_request.labels.*.name, 'bleeding-edge') }}
+    timeout-minutes: 45
+    environment: release
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+    - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0
+
+    - name: Development package updates
+      run: |
+        git switch dev
+        sed -i '' 's/src\/falconpy/src\/falconpydev/g' pyproject.toml
+        sed -i '' 's/name = "crowdstrike-falconpy"/name = "crowdstrike-falconpy-dev"/g' pyproject.toml
+        sed -i '' 's/from falconpy import/from falconpydev import/g' README.md
+        sed -i '' 's/install crowdstrike-falconpy/install crowdstrike-falconpy-dev/g' README.md
+        sed -i '' "5,/FalconPy - The CrowdStrike Falcon SDK for Python/s/FalconPy - The CrowdStrike Falcon SDK for Python/$header/" README.md
+        sed -i '' 's/badgeFalconPy - The CrowdStrike Falcon SDK for Pythonlogo/badge&logo/g' README.md
+        sed -i '' 's/!\[CrowdStrike FalconPy\](https:\/\/raw.githubusercontent.com\/CrowdStrike\/falconpy\/main\/docs\/asset\/cs-logo-red.png#gh-dark-mode-only)//g' README.md
+        mv src/falconpy src/falconpydev
+
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e # v1.13.0
