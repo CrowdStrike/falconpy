@@ -16,7 +16,9 @@ jobs:
       ${{ github.event.pull_request.merged == true && 
       contains(github.event.pull_request.labels.*.name, 'bleeding-edge') }}
     timeout-minutes: 45
-    environment: bleeding-edge
+    environment:
+      name: bleeding-edge
+      url: https://test.pypi.org/p/crowdstrike-falconpy-dev
     runs-on: ubuntu-24.04
     permissions:
       contents: read
