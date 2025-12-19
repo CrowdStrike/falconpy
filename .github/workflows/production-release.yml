@@ -4,6 +4,9 @@ on:
   release:
     types: [created]
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     timeout-minutes: 45
@@ -11,6 +14,7 @@ jobs:
     runs-on: ubuntu-24.04
     permissions:
       contents: read
+      id-token: write
     steps:
     - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0
 

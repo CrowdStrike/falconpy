@@ -7,6 +7,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 jobs:
   deploy-package:
     if: >
@@ -17,11 +20,14 @@ jobs:
     runs-on: ubuntu-24.04
     permissions:
       contents: read
+      id-token: write
     steps:
     - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0
+      with:
+        fetch-depth: 0
+        ref: dev
     - name: Development package updates
       run: |
-        git switch dev
         sed -i '' 's/src\/falconpy/src\/falconpydev/g' pyproject.toml
         sed -i '' 's/name = "crowdstrike-falconpy"/name = "crowdstrike-falconpy-dev"/g' pyproject.toml
         sed -i '' 's/from falconpy import/from falconpydev import/g' README.md
