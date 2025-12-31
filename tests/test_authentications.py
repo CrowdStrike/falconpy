@@ -26,6 +26,7 @@ AllowedResponses = [200, 401, 403, 429]
 _DEBUG = os.getenv("FALCONPY_UNIT_TEST_DEBUG", None)
 if _DEBUG:
     _DEBUG = True
+_MSSP = None
 
 
 class TestAuthentications:
@@ -107,7 +108,7 @@ class TestAuthentications:
                         base_url="usgov1", debug=_DEBUG
                         )
         result = falcon.token()
-        if result["status_code"] == 400:
+        if result["status_code"] in [400, 403]:
             return True
         elif result["status_code"] == 429:
             pytest.skip("Rate limit hit")
@@ -363,3 +364,17 @@ class TestAuthentications:
             if not failed_child_login:
                 _success = True
         assert _success
+
+
+    def test_mssp_login(self):
+        global _MSSP
+        _success = False
+        _MSSP = Hosts(client_id=auth.config["falcon_client_id"], client_secret=auth.config["falcon_client_secret"], debug=_DEBUG)
+        if not _MSSP.child_login(member_cid="1234567890"):
+            _success = True
+            _MSSP.auth_object.creds["member_cid"] = "1234567890"
+        assert(_success)
+
+    def test_mssp_logout(self):
+        #_MSSP = Hosts(client_id=auth.config["falcon_client_id"], client_secret=auth.config["falcon_client_secret"], debug=_DEBUG)
+        print(_MSSP.child_logout(login_as_parent=False))

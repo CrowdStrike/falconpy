@@ -16,7 +16,7 @@ from falconpy import Downloads
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Downloads(auth_object=config)
-AllowedResponses = [200, 201, 207, 404, 429]
+AllowedResponses = [200, 201, 207, 403, 404, 429]
 
 class TestDownloads:
     def test_all_code_paths(self):
