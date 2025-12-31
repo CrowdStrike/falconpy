@@ -1,3 +1,13 @@
+# Version 1.6.0
+## Other
++ Dropped: Support for Python version `3.7`. Developers using this version of Python should pin to versions below `1.6.0`.
+    > Unit testing adjusted to reflect supported versions.
+    - `.github/workflows/unit_testing_ubuntu.yml`
+    - `pyproject.toml`
+    - `README.md`
+    - `SECURITY.md`
+---
+
 # Version 1.5.5
 ## Added features and functionality
 + Added: Added "SPL", "AI translated" and "__all__" as allowed values for the `language` argument in the _GetArchiveExport_ operation within the __CAO Hunting__ service collection.

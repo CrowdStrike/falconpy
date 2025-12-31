@@ -32,10 +32,11 @@ The CrowdStrike Falcon SDK for Python completely abstracts token management, whi
 [![Development Installs](https://static.pepy.tech/personalized-badge/crowdstrike-falconpy-dev?left_text=development%20package%20installs/month&left_color=grey&right_color=blue&period=month)](https://pepy.tech/project/crowdstrike-falconpy-dev)
 
 #### Supported versions of Python
-The CrowdStrike Falcon SDK for Python was developed for Python 3. Current versions of FalconPy provide support for Python versions `3.7` - `3.13`. Every commit to the FalconPy code base is unit tested for functionality using all versions of Python the library currently supports.
+The CrowdStrike Falcon SDK for Python was developed for Python 3. Current versions of FalconPy provide support for Python versions `3.8` - `3.13`. Every commit to the FalconPy code base is unit tested for functionality using all versions of Python the library currently supports.
 
 > [!NOTE]
-> Developers working with Python version `3.6` will need to leverage versions of FalconPy less than `1.4.0`.
+> Developers working with Python version `3.6` will need to leverage versions of FalconPy less than `1.4.0`. 
+> Developers working with Python version `3.7` will need to leverage version of FalconPy less than `1.6.0`.
 
 [![PyPI - Implementation](https://img.shields.io/pypi/implementation/crowdstrike-falconpy)](https://pypi.org/project/crowdstrike-falconpy/#files)
 [![PyPI - Wheel](https://img.shields.io/pypi/wheel/crowdstrike-falconpy)](https://pypi.org/project/crowdstrike-falconpy/#files)
