@@ -211,7 +211,7 @@ class CaseManagement(ServiceClass):
         if not body:
             if kwargs.get("ids", None):
                 provided = kwargs.get("ids", None)
-                if provided == "ids" and isinstance(provided, str):
+                if isinstance(provided, str):
                     provided = [provided]
                 body["ids"] = provided
 
@@ -1635,7 +1635,7 @@ class CaseManagement(ServiceClass):
         if not body:
             if kwargs.get("ids", None):
                 provided = kwargs.get("ids", None)
-                if provided == "ids" and isinstance(provided, str):
+                if isinstance(provided, str):
                     provided = [provided]
                 body["ids"] = provided
 
