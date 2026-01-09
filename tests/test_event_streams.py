@@ -46,7 +46,7 @@ class TestEventStreams:
                     avail["body"]["resources"][0]["sessionToken"]["token"]
                     ), 'Date': current_time, 'Connection': 'Keep-Alive'
                 }
-            stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True)
+            stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True, verify=False)
             with stream:
                 result = falcon.refreshActiveStreamSession(app_id=f"{APP_ID}",
                                                         action_name="refresh_active_stream_session",
@@ -68,9 +68,9 @@ class TestEventStreams:
                     ), 'Date': current_time, 'Connection': 'Keep-Alive'
                 }
 
-            stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True)
+            stream = requests.get(avail["body"]["resources"][0]["dataFeedURL"], headers=headers, stream=True, verify=False)
             with stream:
-                result = falcon.refreshActiveStreamSession(appId=f"{APP_ID}",
+                result = falcon.refreshActiveStreamSession(app_id=f"{APP_ID}",
                                                         partition="0"
                                                         )
                 return bool(result["status_code"] in AllowedResponses)
