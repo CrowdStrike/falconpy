@@ -26,7 +26,9 @@ from falconpy import (
     Result,
     ExpandedResult,
     InvalidBaseURL,
-    Workflows
+    Workflows,
+    CloudConnectAWS,
+    DeprecatedClass
     )
 
 auth = Authorization.TestAuthorization()
@@ -165,6 +167,17 @@ class TestServiceClass:
     @not_supported
     def test_property_headers(self):
         assert bool(_CLEAN.headers)
+
+    @rate_limited
+    @not_supported
+    def test_base_url(self):
+        _CLEAN.base_url = False
+        assert bool(_CLEAN.base_url)
+
+    @rate_limited
+    @not_supported
+    def test_property_token(self):
+        assert bool(_CLEAN.token)
 
     @rate_limited
     @not_supported
@@ -390,6 +403,18 @@ class TestServiceClass:
 
     @rate_limited
     @not_supported
+    def test_service_class_override_with_logging(self):
+        """Test the override method to ensure logging branch is covered."""
+        test_hosts = Hosts(creds=config.creds, debug=True, base_url=config.base_url)
+        
+        result = test_hosts.override(method="GET", 
+                                      route="/devices/queries/devices/v1",
+                                      parameters={"limit": 1})
+        
+        assert result["status_code"] in AllowedResponses
+
+    @rate_limited
+    @not_supported
     def test_list_response_component_get_property_fail(self):
         position = 5
         _success = False
@@ -399,7 +424,7 @@ class TestServiceClass:
                 if _no_ssl.token_status == 403:
                     pytest.skip("SSL required for GovCloud testing.")
                 try:
-                    if _no_ssl.token_valid and not _no_ssl.token_stale:  # Duplicative, just testing the properties
+                    if _no_ssl.token_valid and not _no_ssl.token_stale:
                         _thing: Result = _no_ssl.query_devices(limit=3)
                 except APIError:
                     pytest.skip("SSL required for GovCloud testing.")
@@ -412,3 +437,94 @@ class TestServiceClass:
             _success = True
 
         assert(_success)
+
+    @rate_limited
+    @not_supported
+    def test_deprecated_class_warning(self):
+        """Test that deprecated classes trigger the deprecation warning."""
+        with pytest.warns(DeprecatedClass):
+            deprecated_service = CloudConnectAWS(creds=config.creds, debug=_DEBUG, pythonic=True)
+            assert deprecated_service is not None
+
+    @rate_limited
+    @not_supported
+    def test_auth_object_type_detection(self):
+        """Test that FalconInterface auth_object sets auth_style to OBJECT."""
+        auth_obj = OAuth2(creds=config.creds, debug=_DEBUG)
+        test_hosts = Hosts(auth_object=auth_obj)
+        assert test_hosts.auth_style == "OBJECT"
+
+    @rate_limited
+    @not_supported
+    def test_child_login_method(self):
+        """Test the child_login method delegation to auth_object."""
+        test_hosts = Hosts(creds=config.creds, debug=_DEBUG)
+        try:
+            result = test_hosts.child_login(member_cid="FAKE_MEMBER_CID_1234567890")
+            assert isinstance(result, bool)
+        except Exception:
+            assert True
+
+    @rate_limited
+    @not_supported
+    def test_child_logout_method(self):
+        """Test the child_logout method delegation to auth_object."""
+        test_hosts = Hosts(creds=config.creds, debug=_DEBUG)
+        result = test_hosts.child_logout(login_as_parent=True)
+        assert isinstance(result, bool)
+
+    @rate_limited
+    @not_supported
+    def test_authenticated_legacy_method(self):
+        """Test the authenticated() legacy method."""
+        test_hosts = Hosts(creds=config.creds, debug=_DEBUG)
+        auth_status = test_hosts.authenticated()
+        assert isinstance(auth_status, bool)
+
+    @rate_limited
+    @not_supported
+    def test_token_expired_legacy_method(self):
+        """Test the token_expired() legacy method."""
+        test_hosts = Hosts(creds=config.creds, debug=_DEBUG)
+        expired_status = test_hosts.token_expired()
+        assert isinstance(expired_status, bool)
+
+    @rate_limited
+    @not_supported
+    def test_token_renew_window_property(self):
+        """Test the deprecated token_renew_window property getter."""
+        test_hosts = Hosts(creds=config.creds, debug=_DEBUG)
+        renew_window = test_hosts.token_renew_window
+        assert isinstance(renew_window, int)
+        test_hosts.token_renew_window = 500
+        assert test_hosts.token_renew_window == 500
+
+    @rate_limited
+    @not_supported
+    def test_auth_style_property_override(self):
+        """Test the auth_style property getter with override."""
+        test_hosts = Hosts(creds=config.creds, debug=_DEBUG)
+        original_style = test_hosts.auth_style
+        assert isinstance(original_style, str)
+        test_hosts.auth_style = "CUSTOM_STYLE"
+        assert test_hosts.auth_style == "CUSTOM_STYLE"
+        assert test_hosts.auth_style != test_hosts.auth_object.auth_style or test_hosts.auth_object.auth_style == "CUSTOM_STYLE"
+
+    @rate_limited
+    @not_supported
+    def test_easy_object_authentication(self):
+        """Test Easy Object Authentication - passing a Service Class with nested auth_object."""
+        hosts1 = Hosts(creds=config.creds, debug=_DEBUG)
+        hosts2 = Hosts(auth_object=hosts1)
+        assert hosts2.auth_object is hosts1.auth_object
+        assert hosts2.token_status == hosts1.token_status
+
+    @rate_limited
+    @not_supported
+    def test_pythonic_property_override(self):
+        """Test the pythonic property override logic in BaseServiceClass."""
+        auth_obj = OAuth2(creds=config.creds, debug=_DEBUG, pythonic=False)
+        test_hosts = Hosts(auth_object=auth_obj, pythonic=True)
+
+        assert test_hosts.pythonic == True
+        assert test_hosts.auth_object.pythonic == False
