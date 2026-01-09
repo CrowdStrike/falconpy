@@ -26,12 +26,61 @@ class TestCloudPolicies:
                         )
     def test_all_code_paths(self):
         error_checks = True
+        
+        create_selectors = {
+            "cloud_resources": [{
+                "account_ids": ["123"],
+                "cloud_provider": "aws",
+                "filters": {
+                    "region": ["us-east-1"],
+                    "tags": ["prod"]
+                }
+            }],
+            "images": [{
+                "filters": {
+                    "repository": ["repo"],
+                    "tag": ["latest"]
+                },
+                "registry": "registry1"
+            }]
+        }
+        
+        update_selectors = {
+            "cloud_resources": [{
+                "account_ids": ["456"],
+                "cloud_provider": "azure",
+                "filters": {
+                    "region": ["east-us"],
+                    "tags": ["test"]
+                }
+            }],
+            "images": [{
+                "filters": {
+                    "repository": ["repo2"],
+                    "tag": ["v1.0"]
+                },
+                "registry": "registry2"
+            }]
+        }
+        
         tests = {
             "combined_cloud_risks": falcon.combined_cloud_risks(filter="severity:'high'", sort="account_id|asc", limit=100, offset=0),
             "ListCloudGroupsExternal": falcon.list_cloud_groups(filter="name:'test'", sort="created_at|desc", offset=0, limit=50),
             "ListCloudGroupsByIDExternal": falcon.list_cloud_groups_by_id(ids="1234567"),
-            "CreateCloudGroupExternal": falcon.create_cloud_group(business_impact="high", business_unit="engineering", description="test group", environment="dev", name="test-group", owners=["user1", "user2"], selectors={"cloud_resources": [{"account_ids": ["123"], "cloud_provider": "aws", "filters": {"region": ["us-east-1"], "tags": ["prod"]}}], "images": [{"filters": {"repository": ["repo"], "tag": ["latest"]}, "registry": "registry1"}]}),
-            "UpdateCloudGroupExternal": falcon.update_cloud_group(business_impact="medium", business_unit="operations", description="updated group", environment="prod", name="updated-group", owners=["user3", "user4"], selectors={"cloud_resources": [{"account_ids": ["456"], "cloud_provider": "azure", "filters": {"region": ["east-us"], "tags": ["test"]}}], "images": [{"filters": {"repository": ["repo2"], "tag": ["v1.0"]}, "registry": "registry2"}]}),
+            "CreateCloudGroupExternal": falcon.create_cloud_group(business_impact="high",
+                                                                  business_unit="engineering",
+                                                                  description="test group",
+                                                                  environment="dev",
+                                                                  name="test-group",
+                                                                  owners=["user1", "user2"],
+                                                                  selectors=create_selectors),
+            "UpdateCloudGroupExternal": falcon.update_cloud_group(business_impact="medium",
+                                                                  business_unit="operations",
+                                                                  description="updated group",
+                                                                  environment="prod",
+                                                                  name="updated-group",
+                                                                  owners=["user3", "user4"],
+                                                                  selectors=update_selectors),
             "DeleteCloudGroupsExternal": falcon.delete_cloud_groups(ids="1234567"),
             "ListCloudGroupIDsExternal": falcon.list_group_ids(filter="environment:'prod'", sort="name|asc", offset=0, limit=100)
         }
