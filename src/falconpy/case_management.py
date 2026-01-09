@@ -212,7 +212,7 @@ class CaseManagement(ServiceClass):
             if kwargs.get("ids", None):
                 provided = kwargs.get("ids", None)
                 if isinstance(provided, str):
-                    provided = [provided]
+                    provided = provided.split(',') if ',' in provided else [provided]
                 body["ids"] = provided
 
         return process_service_request(
@@ -1635,8 +1635,8 @@ class CaseManagement(ServiceClass):
         if not body:
             if kwargs.get("ids", None):
                 provided = kwargs.get("ids", None)
-                if isinstance(provided, str):
-                    provided = [provided]
+            if isinstance(provided, str):
+                provided = provided.split(',') if ',' in provided else [provided]
                 body["ids"] = provided
 
         return process_service_request(
