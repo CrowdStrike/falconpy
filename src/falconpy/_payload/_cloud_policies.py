@@ -197,7 +197,7 @@ def cloud_policies_rule_update_payload(passed_keywords: dict) -> Dict[str, Union
     for key in simple_keys:
         if passed_keywords.get(key, None) is not None:
             provided = passed_keywords.get(key, None)
-            if provided == "rule_logic_list" and isinstance(provided, dict):
+            if key == "rule_logic_list" and isinstance(provided, dict):
                 provided = [provided]
             returned_payload[key] = provided
 
