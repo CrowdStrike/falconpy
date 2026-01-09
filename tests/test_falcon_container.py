@@ -495,7 +495,9 @@ class TestFalconContainer:
             "PostImageScanInventory": falcon.scan_inventory(**SCAN_INVENTORY_SAMPLE_PAYLOAD),
             "PolicyChecks": falcon.check_prevention_policies(),
             "GetReportByReference": falcon.get_report_by_reference(),
-            "GetReportByScanID": falcon.get_report_by_id()
+            "GetReportByScanID": falcon.get_report_by_id(),
+            "GetReportByScanIDWithUUID": falcon.get_report_by_id(uuid="0c049620-3c14-4caa-a649-f3ee7831122c")
+
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
