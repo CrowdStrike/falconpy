@@ -86,7 +86,8 @@ class TestKubeProtect:
             "ReadNamespacesByDateRangeCount": falcon.read_namespaces_by_date_range_count(),
             "ReadNamespaceCount": falcon.read_namespace_count(filter="something"),
             "ReadClusterCombinedV2": falcon.read_clusters_combined_v2(filter="whatever"),
-            "PostSearchKubernetesIOMEntities": falcon.search_kubernetes_ioms(limit=1)
+            "PostSearchKubernetesIOMEntities": falcon.search_kubernetes_ioms(limit=1),
+            "PostSearchKubernetesIOMEntitiesWithParams": falcon.search_kubernetes_ioms(pit="whatever", search_after="whatever")
         }
 
         for key in tests:
