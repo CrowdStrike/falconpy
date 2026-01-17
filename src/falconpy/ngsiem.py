@@ -408,8 +408,9 @@ class NGSIEM(ServiceClass):
         """Stop search.
 
         Keyword arguments:
-        repository -- name of repository
-        id -- id of query
+        repository -- Name of repository. String.
+        id -- ID of the query. String. Can be used instead of search_id keyword.
+        search_id -- ID of the query. String. Can be used instead of id keyword.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -422,12 +423,15 @@ class NGSIEM(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/humio-auth-proxy/StopSearchV1
         """
         repository = kwargs.get("repository", None)
-        search_id = kwargs.get("search_id", None)
+        search_id = kwargs.get("id", kwargs.get("search_id", None))
         if repository and search_id:
             # Pop the path variables from the keywords dictionary
             # before processing query string arguments.
             kwargs.pop("repository")
-            kwargs.pop("search_id")
+            if "id" in kwargs:
+                kwargs.pop("id")
+            if "search_id" in kwargs:
+                kwargs.pop("search_id")
             returned = process_service_request(
                 calling_object=self,
                 endpoints=Endpoints,
@@ -438,7 +442,7 @@ class NGSIEM(ServiceClass):
                 search_id=search_id
                 )
         else:
-            returned = generate_error_result("You must provide a repository and search_id "
+            returned = generate_error_result("You must provide a repository and id "
                                              "argument in order to use this operation."
                                              )
         return returned
