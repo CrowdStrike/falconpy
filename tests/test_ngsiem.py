@@ -52,8 +52,9 @@ class TestNGSIEM:
 
         follow_up_tests = {
             "GetSearchStatusV1": falcon.get_search_status(repository="search-all", search_id=search_id),
-            "GetSearchStatusV1": falcon.get_search_status(repository="search-all", id=search_id),
-            "StopSearchV1": falcon.stop_search(repository="search-all", search_id=search_id)
+            "GetSearchStatusV1-id": falcon.get_search_status(repository="search-all", id=search_id),
+            "StopSearchV1-search_id": falcon.stop_search(repository="search-all", search_id=search_id),
+            "StopSearchV1-id": falcon.stop_search(repository="search-all", id=search_id)
         }
         for follow_key in follow_up_tests:
             if follow_up_tests[follow_key]["status_code"] not in AllowedResponses:
@@ -131,6 +132,20 @@ class TestNGSIEM:
             if more_tests[test]["status_code"] not in AllowedResponses:
                 error_checks = False
         return error_checks
+
+    def test_stop_search_parameter_handling(self):
+        """Test that stop_search accepts both 'id' and 'search_id' parameters (Issue #1398)."""
+        # Test with search_id parameter
+        result_search_id = falcon.stop_search(repository="search-all", search_id="test-id-123")
+        assert result_search_id["status_code"] in AllowedResponses
+
+        # Test with id parameter (should also work)
+        result_id = falcon.stop_search(repository="search-all", id="test-id-456")
+        assert result_id["status_code"] in AllowedResponses
+
+        # Test error case - missing search_id
+        result_error = falcon.stop_search(repository="search-all")
+        assert result_error["status_code"] == 500
 
     def test_all_functionality(self):
         assert self.run_all_tests() is True
