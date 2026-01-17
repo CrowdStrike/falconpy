@@ -364,6 +364,10 @@ class NGSIEM(ServiceClass):
         repository -- Name of repository. String.
         id -- ID of the query. String. Can be used instead of search_id keyword.
         search_id -- ID of the query. String. Can be used instead of id keyword.
+        paginationLimit -- Optional pagination limit. Integer.
+        paginationOffset -- Optional pagination offset. Integer.
+        pagination_limit -- Optional pagination limit (alias for paginationLimit). Integer.
+        pagination_offset -- Optional pagination offset (alias for paginationOffset). Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -377,6 +381,11 @@ class NGSIEM(ServiceClass):
         """
         repository = kwargs.get("repository", None)
         search_id = kwargs.get("id", kwargs.get("search_id", None))
+        # Allow pythonic aliasing for query string parameters (Issue #1383)
+        if "pagination_limit" in kwargs and "paginationLimit" not in kwargs:
+            kwargs["paginationLimit"] = kwargs.pop("pagination_limit")
+        if "pagination_offset" in kwargs and "paginationOffset" not in kwargs:
+            kwargs["paginationOffset"] = kwargs.pop("pagination_offset")
         if repository and search_id:
             # Pop the path variables from the keywords dictionary
             # before processing query string arguments.
