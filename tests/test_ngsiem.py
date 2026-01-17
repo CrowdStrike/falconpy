@@ -149,3 +149,23 @@ class TestNGSIEM:
 
     def test_all_functionality(self):
         assert self.run_all_tests() is True
+
+    def test_pagination_params(self):
+        """Test that pagination parameters are properly handled (Issue #1383)."""
+        # Test with camelCase parameters
+        result = falcon.get_search_status(
+            repository="search-all",
+            id="test-id",
+            paginationLimit=100,
+            paginationOffset=0
+        )
+        assert result["status_code"] in AllowedResponses
+
+        # Test with pythonic parameters
+        result = falcon.get_search_status(
+            repository="search-all",
+            id="test-id",
+            pagination_limit=100,
+            pagination_offset=0
+        )
+        assert result["status_code"] in AllowedResponses

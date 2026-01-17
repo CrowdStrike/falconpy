@@ -192,6 +192,18 @@ _ngsiem_endpoints = [
         "name": "id",
         "in": "path",
         "required": True
+      },
+      {
+        "type": "integer",
+        "description": "pagination limit",
+        "name": "paginationLimit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "pagination offset",
+        "name": "paginationOffset",
+        "in": "query"
       }
     ]
   ],
