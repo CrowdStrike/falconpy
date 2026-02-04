@@ -41,7 +41,7 @@ _incidents_endpoints = [
     "CrowdScore",
     "GET",
     "/incidents/combined/crowdscores/v1",
-    "Query environment wide CrowdScore and return the entity data",
+    "DEPRECATED: the incidentapi will be removed in March 2026. Query environment wide CrowdScore and return the entity data",
     "incidents",
     [
       {
@@ -85,7 +85,7 @@ _incidents_endpoints = [
     "GetBehaviors",
     "POST",
     "/incidents/entities/behaviors/GET/v1",
-    "Get details on behaviors by providing behavior IDs",
+    "DEPRECATED: the incidentapi will be removed in March 2026. Get details on behaviors by providing behavior IDs",
     "incidents",
     [
       {
@@ -99,8 +99,8 @@ _incidents_endpoints = [
     "PerformIncidentAction",
     "POST",
     "/incidents/entities/incident-actions/v1",
-    "Perform a set of actions on one or more incidents, such as adding tags or comments or updating the "
-    "incident name or description",
+    "DEPRECATED: the incidentapi will be removed in March 2026. Perform a set of actions on one or more "
+    "incidents, such as adding tags or comments or updating the incident name or description",
     "incidents",
     [
       {
@@ -134,7 +134,7 @@ _incidents_endpoints = [
     "GetIncidents",
     "POST",
     "/incidents/entities/incidents/GET/v1",
-    "Get details on incidents by providing incident IDs",
+    "DEPRECATED: the incidentapi will be removed in March 2026. Get details on incidents by providing incident IDs",
     "incidents",
     [
       {
@@ -148,7 +148,8 @@ _incidents_endpoints = [
     "QueryBehaviors",
     "GET",
     "/incidents/queries/behaviors/v1",
-    "Search for behaviors by providing an FQL filter, sorting, and paging details",
+    "DEPRECATED: the incidentapi will be removed in March 2026. Search for behaviors by providing an FQL "
+    "filter, sorting, and paging details",
     "incidents",
     [
       {
@@ -200,7 +201,8 @@ _incidents_endpoints = [
     "QueryIncidents",
     "GET",
     "/incidents/queries/incidents/v1",
-    "Search for incidents by providing an FQL filter, sorting, and paging details",
+    "DEPRECATED: the incidentapi will be removed in March 2026. Search for incidents by providing an FQL "
+    "filter, sorting, and paging details",
     "incidents",
     [
       {
