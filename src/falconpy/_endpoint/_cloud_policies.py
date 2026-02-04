@@ -431,8 +431,10 @@ _cloud_policies_endpoints = [
     "cloud_policies",
     [
       {
-        "description": "For Custom Rule, logic is mandatory and parent_rule_id should not be specified.\nFor "
-        "Managed Rule duplication, parent_rule_id is mandatory and logic should be not specified.",
+        "description": "Rule severity integer to provide maps to the following: 0=Critical, 1=High, 2=Medium "
+        "and 3=Low.\nFor CSPM IOM Custom Rules, logic is mandatory and parent_rule_id should not be specified.\nFor "
+        "Runtime IOM Custom Rules (KAC), logic is mandatory, and resource_type + parent_rule_id should not be "
+        "specified.\nFor Managed Rule duplication, parent_rule_id is mandatory and logic should be not specified.",
         "name": "body",
         "in": "body",
         "required": True
@@ -467,6 +469,74 @@ _cloud_policies_endpoints = [
         },
         "collectionFormat": "multi",
         "description": "The uuids of rules to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetSuppressionRules",
+    "GET",
+    "/cloud-policies/entities/suppression-rules/v1",
+    "Get Suppression Rules by ID",
+    "cloud_policies",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The uuids of the suppression rules to retrieve",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "CreateSuppressionRule",
+    "POST",
+    "/cloud-policies/entities/suppression-rules/v1",
+    "Create a new suppression rule",
+    "cloud_policies",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateSuppressionRule",
+    "PATCH",
+    "/cloud-policies/entities/suppression-rules/v1",
+    "Update a suppression rule",
+    "cloud_policies",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DeleteSuppressionRules",
+    "DELETE",
+    "/cloud-policies/entities/suppression-rules/v1",
+    "Delete Suppression Rules by ID",
+    "cloud_policies",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The uuids of the suppression rules to delete. A maximum of 10 IDs can be provided.",
         "name": "ids",
         "in": "query",
         "required": True
@@ -561,10 +631,11 @@ _cloud_policies_endpoints = [
       {
         "type": "string",
         "description": "FQL filter, allowed properties: \n\t\n*rule_origin*\t\n*rule_parent_uuid*\t\n*rule_nam "
-        "e*\t\n*rule_description*\t\n*rule_domain*\t\n*rule_status*\t\n*rule_severity*\t\n*rule_short_code*\t\n*rule_se "
-        "rvice*\t\n*rule_resource_type*\t\n*rule_provider*\t\n*rule_subdomain*\t\n*rule_auto_remediable*\t\n*rule_contr "
-        "ol_requirement*\t\n*rule_control_section*\t\n*rule_compliance_benchmark*\t\n*rule_compliance_framework*\t\n*ru "
-        "le_mitre_tactic*\t\n*rule_mitre_technique*\t\n*rule_created_at*\t\n*rule_updated_at*\t\n*rule_updated_by*\t\n  ",
+        "e*\t\n*rule_cloneable*\t\n*rule_description*\t\n*rule_domain*\t\n*rule_status*\t\n*rule_severity*\t\n*rule_sho "
+        "rt_code*\t\n*rule_service*\t\n*rule_resource_type*\t\n*rule_resource_type_name*\t\n*rule_provider*\t\n*rule_su "
+        "bdomain*\t\n*rule_auto_remediable*\t\n*rule_control_requirement*\t\n*rule_control_section*\t\n*rule_compliance "
+        "_benchmark*\t\n*rule_compliance_framework*\t\n*rule_mitre_tactic*\t\n*rule_mitre_technique*\t\n*rule_created_a "
+        "t*\t\n*rule_updated_at*\t\n*rule_updated_by*\t\n*rule_risk_factor*\t\n",
         "name": "filter",
         "in": "query"
       },
@@ -585,11 +656,51 @@ _cloud_policies_endpoints = [
       {
         "type": "string",
         "description": "Field to sort on. Sortable fields: \n\t\n*rule_origin*\t\n*rule_parent_uuid*\t\n*rule_"
-        "name*\t\n*rule_description*\t\n*rule_domain*\t\n*rule_status*\t\n*rule_severity*\t\n*rule_short_code*\t\n*rule "
-        "_service*\t\n*rule_resource_type*\t\n*rule_provider*\t\n*rule_subdomain*\t\n*rule_auto_remediable*\t\n*rule_co "
-        "ntrol_requirement*\t\n*rule_control_section*\t\n*rule_compliance_benchmark*\t\n*rule_compliance_framework*\t\n "
-        "*rule_mitre_tactic*\t\n*rule_mitre_technique*\t\n*rule_created_at*\t\n*rule_updated_at*\t\n*rule_updated_by*\t "
-        "\n \n\nUse the |asc or |desc suffix to specify sort direction.",
+        "name*\t\n*rule_cloneable*\t\n*rule_description*\t\n*rule_domain*\t\n*rule_status*\t\n*rule_severity*\t\n*rule_"
+        "short_code*\t\n*rule_service*\t\n*rule_resource_type*\t\n*rule_resource_type_name*\t\n*rule_provider*\t\n*rule "
+        "_subdomain*\t\n*rule_auto_remediable*\t\n*rule_control_requirement*\t\n*rule_control_section*\t\n*rule_complia "
+        "nce_benchmark*\t\n*rule_compliance_framework*\t\n*rule_mitre_tactic*\t\n*rule_mitre_technique*\t\n*rule_create "
+        "d_at*\t\n*rule_updated_at*\t\n*rule_updated_by*\t\n*rule_risk_factor*\t\n \n\nUse the |asc or |desc suffix to "
+        "specify sort direction.",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "QuerySuppressionRules",
+    "GET",
+    "/cloud-policies/queries/suppression-rules/v1",
+    "Query suppression rules with filtering, sorting and pagination",
+    "cloud_policies",
+    [
+      {
+        "type": "string",
+        "description": "FQL expression to filter suppression rules. The allowed properties are: \n\t\n*name*\t "
+        "\n*description*\t\n*domain*\t\n*subdomain*\t\n*suppression_expiration_date*\t\n*suppression_reason*\t\n*create "
+        "d_by*\t\n*created_at*\t\n*last_modified_at*\t\n*disabled*\t\n*groups*\t\n",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 20,
+        "description": "The maximum number of resources to return. The maximum allowed is 50.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 0,
+        "description": "The number of results to skip before starting to return results.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Field to sort on. Sortable fields: \n\t\n*name*\t\n*description*\t\n*domain*\t\n*subdo "
+        "main*\t\n*suppression_expiration_date*\t\n*suppression_reason*\t\n*created_by*\t\n*created_at*\t\n*last_modifi "
+        "ed_at*\t\n*disabled*\t\n*groups*\t\n \n\nUse the .asc or .desc suffix to specify sort direction.",
         "name": "sort",
         "in": "query"
       }
