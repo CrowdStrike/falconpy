@@ -37,7 +37,7 @@ For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
-from ._payload import correlation_rules_payload, correlation_rules_export_payload
+from ._payload import correlation_rules_payload, correlation_rules_export_payload, correlation_rules_template_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._correlation_rules import _correlation_rules_endpoints as Endpoints
@@ -637,6 +637,177 @@ class CorrelationRules(ServiceClass):
             operation_id="queries_rules_get_v2",
             keywords=kwargs,
             params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def search_rule_template_ids(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Search rule template IDs matching the filter.
+
+        Keyword arguments:
+        filter -- FQL query specifying the filter parameters. String.
+                  Supported filters:
+                    name            description             vendor
+                    outcome         mitre_attack.tactic_id  mitre_attack.technique_id
+                    type            created_on              last_updated_on
+        sort -- Rule property to sort on. String.
+        offset -- Starting index of overall result set from which to return IDs. Integer.
+        limit -- Number of IDs to return. Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/queries.templates.get.v1Mixin0
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queries_templates_get_v1Mixin0",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_rule_from_template(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create rule from template.
+
+        Keyword arguments:
+        body -- Full body payload as JSON formatted dictionary.
+                [
+                {
+                    "customer_id": "string",
+                    "templates": [
+                    {
+                        "comment": "string",
+                        "description": "string",
+                        "guardrail_notifications": [
+                        {
+                            "config": {
+                            "cid": "string",
+                            "config_id": "string",
+                            "plugin_id": "string",
+                            "recipients": [
+                                "string"
+                            ],
+                            "severity": "string"
+                            },
+                            "options": {
+                            "additionalProp1": "string",
+                            "additionalProp2": "string",
+                            "additionalProp3": "string"
+                            },
+                            "type": "string"
+                        }
+                        ],
+                        "mitre_attack": [
+                        {
+                            "tactic_id": "string",
+                            "technique_id": "string"
+                        }
+                        ],
+                        "name": "string",
+                        "notifications": [
+                        {
+                            "config": {
+                            "cid": "string",
+                            "config_id": "string",
+                            "plugin_id": "string",
+                            "recipients": [
+                                "string"
+                            ],
+                            "severity": "string"
+                            },
+                            "options": {
+                            "additionalProp1": "string",
+                            "additionalProp2": "string",
+                            "additionalProp3": "string"
+                            },
+                            "type": "string"
+                        }
+                        ],
+                        "operation": {
+                        "schedule": {
+                            "definition": "string"
+                        },
+                        "start_on": "2026-02-04T21:13:29.753Z",
+                        "stop_on": "2026-02-04T21:13:29.753Z",
+                        "suppression": {
+                            "filter": {
+                            "field_based": {
+                                "field": "string"
+                            }
+                            },
+                            "suppression_period": "string"
+                        }
+                        },
+                        "search": {
+                        "case_template_id": "string",
+                        "execution_mode": "string",
+                        "filter": "string",
+                        "lookback": "string",
+                        "outcome": "string",
+                        "trigger_mode": "string",
+                        "use_ingest_time": true
+                        },
+                        "severity": 0,
+                        "status": "string",
+                        "template_id": "string",
+                        "trigger_on_create": true
+                    }
+                    ]
+                }
+                ]
+        customer_id -- String.
+        templates -- List of dictionaries.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.templates_rules.post.v1
+        """
+
+        if not body:
+            body = correlation_rules_template_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_templates_rules_post_v1",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_rule_templates_by_id(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve rule templates by IDs
+
+        Keyword arguments:
+        ids -- The IDs. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.templates.get.v1Mixin0
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_templates_get_v1Mixin0",
+            params=handle_single_argument(args, parameters, "ids"),
+            keywords=kwargs,
             )
 
     aggregates_rule_versions_post_v1 = aggregate_rule_versions
