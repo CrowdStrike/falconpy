@@ -125,3 +125,102 @@ def correlation_rules_export_payload(passed_keywords: dict) -> Dict[str, List[Di
             returned[key] = passed_keywords.get(key, None)
 
     return returned
+
+def correlation_rules_template_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int, bool]]]]:
+    """Craft a properly formatted correlation rule export payload.
+    [
+    {
+        "customer_id": "string",
+        "templates": [
+        {
+            "comment": "string",
+            "description": "string",
+            "guardrail_notifications": [
+            {
+                "config": {
+                "cid": "string",
+                "config_id": "string",
+                "plugin_id": "string",
+                "recipients": [
+                    "string"
+                ],
+                "severity": "string"
+                },
+                "options": {
+                "additionalProp1": "string",
+                "additionalProp2": "string",
+                "additionalProp3": "string"
+                },
+                "type": "string"
+            }
+            ],
+            "mitre_attack": [
+            {
+                "tactic_id": "string",
+                "technique_id": "string"
+            }
+            ],
+            "name": "string",
+            "notifications": [
+            {
+                "config": {
+                "cid": "string",
+                "config_id": "string",
+                "plugin_id": "string",
+                "recipients": [
+                    "string"
+                ],
+                "severity": "string"
+                },
+                "options": {
+                "additionalProp1": "string",
+                "additionalProp2": "string",
+                "additionalProp3": "string"
+                },
+                "type": "string"
+            }
+            ],
+            "operation": {
+            "schedule": {
+                "definition": "string"
+            },
+            "start_on": "2026-02-04T21:13:29.753Z",
+            "stop_on": "2026-02-04T21:13:29.753Z",
+            "suppression": {
+                "filter": {
+                "field_based": {
+                    "field": "string"
+                }
+                },
+                "suppression_period": "string"
+            }
+            },
+            "search": {
+            "case_template_id": "string",
+            "execution_mode": "string",
+            "filter": "string",
+            "lookback": "string",
+            "outcome": "string",
+            "trigger_mode": "string",
+            "use_ingest_time": true
+            },
+            "severity": 0,
+            "status": "string",
+            "template_id": "string",
+            "trigger_on_create": true
+        }
+        ]
+    }
+    ]
+    """
+    returned_payload = []
+    returned = {}
+    keys = ["customer_id", "templates"]
+
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned[key] = passed_keywords.get(key, None)
+    
+    returned_payload.append(returned)
+
+    return returned_payload

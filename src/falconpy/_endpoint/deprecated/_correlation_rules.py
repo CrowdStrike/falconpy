@@ -333,6 +333,40 @@ _correlation_rules_endpoints = [
     ]
   ],
   [
+    "entities.templates_rules.post.v1",
+    "POST",
+    "/correlation-rules/entities/templates/rules/v1",
+    "Create rule from template",
+    "correlation_rules",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.templates.get.v1Mixin0",
+    "GET",
+    "/correlation-rules/entities/templates/v1",
+    "Retrieve rule templates by IDs",
+    "correlation_rules",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "queries.rules.get.v1",
     "GET",
     "/correlation-rules/queries/rules/v1",
@@ -401,6 +435,50 @@ _correlation_rules_endpoints = [
         "type": "string",
         "description": "Match query criteria, which includes all the filter string fields",
         "name": "q",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "created_on",
+          "created_on|desc",
+          "last_updated_on",
+          "last_updated_on|desc"
+        ],
+        "type": "string",
+        "default": "created_on",
+        "description": "Rule property to sort on",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 0,
+        "description": "Starting index of overall result set from which to return IDs",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "Number of IDs to return",
+        "name": "limit",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "queries.templates.get.v1Mixin0",
+    "GET",
+    "/correlation-rules/queries/templates/v1",
+    "Search rule template IDs matching the filter.\nSupported filters: "
+    "name,description,vendor,outcome,mitre_attack.tactic_id,mitre_attack.technique_id,type\nSupported range "
+    "filters: created_on,last_updated_on",
+    "correlation_rules",
+    [
+      {
+        "type": "string",
+        "description": "FQL query specifying the filter parameters",
+        "name": "filter",
         "in": "query"
       },
       {
