@@ -216,3 +216,80 @@ def cloud_policies_rule_update_payload(passed_keywords: dict) -> Dict[str, Union
             returned_payload["controls"] = [control]
 
     return returned_payload
+
+def cloud_policies_suppression_rule_payload(passed_keywords: dict) -> Dict[str, Union[dict, str, int, list]]:
+    """
+    {
+        "description": "string",
+        "domain": "string",
+        "id": "string",
+        "name": "string",
+        "rule_selection_filter": {
+            "rule_ids": [
+            "string"
+            ],
+            "rule_names": [
+            "string"
+            ],
+            "rule_origins": [
+            "string"
+            ],
+            "rule_providers": [
+            "string"
+            ],
+            "rule_services": [
+            "string"
+            ],
+            "rule_severities": [
+            "string"
+            ]
+        },
+        "rule_selection_type": "string",
+        "scope_asset_filter": {
+            "account_ids": [
+            "string"
+            ],
+            "cloud_group_ids": [
+            "string"
+            ],
+            "cloud_providers": [
+            "string"
+            ],
+            "regions": [
+            "string"
+            ],
+            "resource_ids": [
+            "string"
+            ],
+            "resource_names": [
+            "string"
+            ],
+            "resource_types": [
+            "string"
+            ],
+            "service_categories": [
+            "string"
+            ],
+            "tags": [
+            "string"
+            ]
+        },
+        "scope_type": "string",
+        "subdomain": "string",
+        "suppression_comment": "string",
+        "suppression_expiration_date": "string",
+        "suppression_reason": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["description", "id", "name", "rule_selection_filter",
+            "rule_selection_type", "scope_asset_filter", "scope_type",
+            "suppression_comment", "suppression_expiration_date",
+            "suppression_reason", "domain", "subdomain"
+            ]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            provided = passed_keywords.get(key, None)
+            returned_payload[key] = provided
+
+    return returned_payload

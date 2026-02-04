@@ -46,7 +46,8 @@ from ._payload._cloud_policies import (
     cloud_policies_evaluation_payload,
     cloud_policies_rule_override_payload,
     cloud_policies_rule_create_payload,
-    cloud_policies_rule_update_payload
+    cloud_policies_rule_update_payload,
+    cloud_policies_suppression_rule_payload
     )
 
 
@@ -691,7 +692,9 @@ class CloudPolicies(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload dictionary in JSON format. Not required if using other keywords.
-                For Custom Rule, logic is mandatory and parent_rule_id should not be specified.
+                Rule severity integer to provide maps to the following: 0=Critical, 1=High, 2=Medium and 3=Low.
+                For CSPM IOM Custom Rules, logic is mandatory and parent_rule_id should not be specified.
+                For Runtime IOM Custom Rules (KAC), logic is mandatory, and resource_type + parent_rule_id should not be specified.
                 For Managed Rule duplication, parent_rule_id is mandatory and logic should be not specified.
                 {
                     "alert_info": "string",
@@ -965,6 +968,296 @@ class CloudPolicies(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_suppression_rules(self: object,
+                              *args,
+                              parameters: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get Suppression Rules by ID.
+
+        Keyword arguments:
+        ids -- The uuids of the suppression rules to retrieve. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/GetSuppressionRules
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetSuppressionRules",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_suppression_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create a new suppression rule.
+
+        Keyword arguments:
+        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+                {
+                    "description": "string",
+                    "id": "string",
+                    "name": "string",
+                    "rule_selection_filter": {
+                        "rule_ids": [
+                        "string"
+                        ],
+                        "rule_names": [
+                        "string"
+                        ],
+                        "rule_origins": [
+                        "string"
+                        ],
+                        "rule_providers": [
+                        "string"
+                        ],
+                        "rule_services": [
+                        "string"
+                        ],
+                        "rule_severities": [
+                        "string"
+                        ]
+                    },
+                    "rule_selection_type": "string",
+                    "scope_asset_filter": {
+                        "account_ids": [
+                        "string"
+                        ],
+                        "cloud_group_ids": [
+                        "string"
+                        ],
+                        "cloud_providers": [
+                        "string"
+                        ],
+                        "regions": [
+                        "string"
+                        ],
+                        "resource_ids": [
+                        "string"
+                        ],
+                        "resource_names": [
+                        "string"
+                        ],
+                        "resource_types": [
+                        "string"
+                        ],
+                        "service_categories": [
+                        "string"
+                        ],
+                        "tags": [
+                        "string"
+                        ]
+                    },
+                    "scope_type": "string",
+                    "suppression_comment": "string",
+                    "suppression_expiration_date": "string",
+                    "suppression_reason": "string"
+                }
+        description -- String.
+        domain -- String.
+        name -- String.
+        rule_selection_filter -- Dictionary of lists.
+        rule_selection_type -- String.
+        scope_asset_filter -- Dictionary of lists.
+        scope_type -- String.
+        subdomain -- String.
+        suppression_comment -- String.
+        suppression_expiration_date -- String.
+        suppression_reason -- String.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/CreateSuppressionRule
+        """
+        if not body:
+            body = cloud_policies_suppression_rule_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateSuppressionRule",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_suppression_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update a suppression rule.
+
+        Keyword arguments:
+        body -- Full body payload dictionary in JSON format. Not required if using other keywords.
+                {
+                    "description": "string",
+                    "id": "string",
+                    "name": "string",
+                    "rule_selection_filter": {
+                        "rule_ids": [
+                        "string"
+                        ],
+                        "rule_names": [
+                        "string"
+                        ],
+                        "rule_origins": [
+                        "string"
+                        ],
+                        "rule_providers": [
+                        "string"
+                        ],
+                        "rule_services": [
+                        "string"
+                        ],
+                        "rule_severities": [
+                        "string"
+                        ]
+                    },
+                    "rule_selection_type": "string",
+                    "scope_asset_filter": {
+                        "account_ids": [
+                        "string"
+                        ],
+                        "cloud_group_ids": [
+                        "string"
+                        ],
+                        "cloud_providers": [
+                        "string"
+                        ],
+                        "regions": [
+                        "string"
+                        ],
+                        "resource_ids": [
+                        "string"
+                        ],
+                        "resource_names": [
+                        "string"
+                        ],
+                        "resource_types": [
+                        "string"
+                        ],
+                        "service_categories": [
+                        "string"
+                        ],
+                        "tags": [
+                        "string"
+                        ]
+                    },
+                    "scope_type": "string",
+                    "suppression_comment": "string",
+                    "suppression_expiration_date": "string",
+                    "suppression_reason": "string"
+                }
+        description -- String.
+        id -- String.
+        name -- String.
+        rule_selection_filter -- Dictionary of lists.
+        rule_selection_type -- String.
+        scope_asset_filter -- Dictionary of lists.
+        scope_type -- String.
+        suppression_comment -- String.
+        suppression_expiration_date -- String.
+        suppression_reason -- String.
+        
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/UpdateSuppressionRule
+        """
+        if not body:
+            body = cloud_policies_suppression_rule_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateSuppressionRule",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_suppression_rules(self: object,
+                                 *args,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete Suppression Rules by ID.
+
+        Keyword arguments:
+        ids -- The uuids of the suppression rules to delete. A maximum of 10 IDs can be provided. String or array of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/DeleteSuppressionRules
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="DeleteSuppressionRules",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_suppression_rules(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Query suppression rules with filtering, sorting and pagination.
+
+        Keyword arguments:
+        filter -- FQL expression to filter suppression rules. String.
+                  The allowed properties are:
+                      name        description         domain
+                      subdomain   suppression_reason  suppression_expiration_date
+                      create_by   created_at          last_modified_at
+                      disabled    groups
+            
+        limit -- The maximum number of resources to return. The maximum allowed is 50. Integer.
+        offset -- The number of results to skip before starting to return results. Integer.
+        sort -- Field to sort on. String.
+                Sortable fields: 
+                    name        description         domain
+                    subdomain   suppression_reason  suppression_expiration_date
+                    create_by   created_at          last_modified_at
+                    disabled    groups
+                Use the `.asc` or `.desc` suffix to specify sort direction.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-policies/QuerySuppressionRules
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="QuerySuppressionRules",
+            keywords=kwargs,
+            params=parameters
+            )
+
+
+
     ReplaceControlRules = replace_control_rules
     GetComplianceControls = get_compliance_controls
     CreateComplianceControl = create_compliance_control
@@ -989,3 +1282,8 @@ class CloudPolicies(ServiceClass):
     QueryRule = query_rule
     GetRuleInputSchema = get_rule_input_schema
     GetEnrichedAsset = get_enriched_asset
+    QuerySuppressionRules = query_suppression_rules
+    DeleteSuppressionRules = delete_suppression_rules
+    UpdateSuppressionRule = update_suppression_rule
+    CreateSuppressionRule = create_suppression_rule
+    GetSuppressionRules = get_suppression_rules

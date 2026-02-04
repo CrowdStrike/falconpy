@@ -121,7 +121,47 @@ class TestCloudPolicies:
             "QueryComplianceFrameworks": falcon.QueryComplianceFrameworks(filter="whatever", limit=100, offset=0, sort="compliance_framework_name|asc"),
             "QueryRule": falcon.QueryRule(filter="whatever", limit=100, offset=0, sort="rule_name|asc"),
             "GetRuleInputSchema": falcon.GetRuleInputSchema(domain="whatever", subdomain="whatever", resource_type="whatever"),
-            "GetEnrichedAsset": falcon.GetEnrichedAsset(ids="1234567")
+            "GetEnrichedAsset": falcon.GetEnrichedAsset(ids="1234567"),
+            "GetSuppressionRules": falcon.GetSuppressionRules(ids="1234567"),
+            "CreateSuppressionRule": falcon.CreateSuppressionRule(
+                description="test suppression rule",
+                name="test suppression",
+                rule_selection_filter={
+                    "rule_ids": ["rule1", "rule2"],
+                    "rule_severities": ["Critical", "High"]
+                },
+                rule_selection_type="all",
+                scope_asset_filter={
+                    "account_ids": ["account123"],
+                    "cloud_providers": ["aws"],
+                    "regions": ["us-east-1"]
+                },
+                scope_type="account",
+                suppression_comment="test comment",
+                suppression_expiration_date="2026-12-31T23:59:59Z",
+                suppression_reason="testing"
+            ),
+            "UpdateSuppressionRule": falcon.UpdateSuppressionRule(
+                id="suppression123",
+                description="updated suppression rule",
+                name="updated suppression",
+                rule_selection_filter={
+                    "rule_ids": ["rule3", "rule4"],
+                    "rule_severities": ["Medium"]
+                },
+                rule_selection_type="specific",
+                scope_asset_filter={
+                    "account_ids": ["account456"],
+                    "cloud_providers": ["azure"],
+                    "regions": ["eastus"]
+                },
+                scope_type="resource",
+                suppression_comment="updated comment",
+                suppression_expiration_date="2027-12-31T23:59:59Z",
+                suppression_reason="update testing"
+            ),
+            "DeleteSuppressionRules": falcon.DeleteSuppressionRules(ids="1234567"),
+            "QuerySuppressionRules": falcon.QuerySuppressionRules(filter="name:*test*", limit=50, offset=0, sort="name.asc")
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

@@ -82,7 +82,8 @@ from ._cloud_policies import (
     cloud_policies_evaluation_payload,
     cloud_policies_rule_override_payload,
     cloud_policies_rule_create_payload,
-    cloud_policies_rule_update_payload
+    cloud_policies_rule_update_payload,
+    cloud_policies_suppression_rule_payload
     )
 from ._cloud_security import cloud_security_create_group_payload
 
@@ -239,5 +240,5 @@ __all__ = [
     "cloud_policies_rule_create_payload", "cloud_policies_rule_update_payload", "specified_case_payload",
     "case_manage_payload", "case_evidence_payload", "update_case_payload",
     "cloud_azure_registration_legacy_payload", "cloud_google_registration_create_payload",
-    "cloud_security_create_group_payload", "aspm_group_payload"
+    "cloud_security_create_group_payload", "aspm_group_payload", "cloud_policies_suppression_rule_payload"
 ]
