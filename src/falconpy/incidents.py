@@ -60,6 +60,8 @@ class Incidents(ServiceClass):
     def crowdscore(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query environment wide CrowdScore and return the entity data.
 
+        DEPRECATED: the Incidents API will be removed in March 2026.
+
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
         limit -- The maximum number of records to return in this response. [Integer, 1-2500]
@@ -89,6 +91,8 @@ class Incidents(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def get_behaviors(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on behaviors by providing behavior IDs.
+
+        DEPRECATED: the Incidents API will be removed in March 2026.
 
         Keyword arguments:
         body -- full body payload, not required if ids are provided as keyword.
@@ -125,6 +129,8 @@ class Incidents(ServiceClass):
                                 **kwargs
                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Perform a set of actions on one or more incidents.
+
+        DEPRECATED: the Incidents API will be removed in March 2026.
 
         Such as: adding tags or updating the incident name or description.
 
@@ -205,6 +211,8 @@ class Incidents(ServiceClass):
     def get_incidents(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get details on incidents by providing incident IDs.
 
+        DEPRECATED: the Incidents API will be removed in March 2026.
+        
         Keyword arguments:
         body -- full body payload, not required if ids are provided as keyword.
                 {
@@ -237,6 +245,8 @@ class Incidents(ServiceClass):
     def query_behaviors(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for behaviors by providing an FQL filter, sorting, and paging details.
 
+        DEPRECATED: the Incidents API will be removed in March 2026.
+        
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
         limit -- The maximum number of records to return in this response. [Integer, 1-500]
@@ -267,6 +277,8 @@ class Incidents(ServiceClass):
     def query_incidents(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for incidents by providing an FQL filter, sorting, and paging details.
 
+        DEPRECATED: the Incidents API will be removed in March 2026.
+        
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
         limit -- The maximum number of records to return in this response. [Integer, 1-500]
