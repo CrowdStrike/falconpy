@@ -594,10 +594,9 @@ _data_protection_configuration_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter results by specific attributes , allowed attributes are "
-        "[properties.protection_mode properties.web_sources created_by modified_at properties.file_types "
-        "properties.sensitivity_labels name created_at modified_by properties.content_patterns "
-        "properties.evidence_duplication_enabled]",
+        "description": "Filter results by specific attributes , allowed attributes are [modified_at "
+        "properties.file_types properties.protection_mode properties.sensitivity_labels properties.web_sources "
+        "created_at modified_by properties.content_patterns properties.evidence_duplication_enabled name created_by]",
         "name": "filter",
         "in": "query"
       },
@@ -620,7 +619,7 @@ _data_protection_configuration_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort by, allowed fields are :[name created_at modified_at]",
+        "description": "The property to sort by, allowed fields are :[modified_at name created_at]",
         "name": "sort",
         "in": "query"
       }
@@ -833,23 +832,23 @@ _data_protection_configuration_endpoints = [
       {
         "type": "string",
         "description": "Filter results by specific attributes , allowed attributes are "
-        "[properties.network_inspection_files_exceeding_size_limit properties.be_paste_timeout_duration_milliseconds "
-        "properties.max_file_size_to_inspect created_at modified_by properties.min_confidence_level "
-        "properties.max_file_size_to_inspect_unit properties.custom_block_notification "
-        "properties.evidence_download_enabled properties.classifications properties.be_paste_timeout_response "
-        "description properties.besplash_custom_message properties.be_paste_clipboard_min_size "
-        "properties.be_paste_clipboard_max_size properties.evidence_storage_free_disk_perc is_enabled "
-        "properties.similarity_detection properties.be_exclude_domains properties.evidence_storage_max_size "
-        "properties.browsers_without_active_extension properties.unsupported_browsers_action "
-        "properties.besplash_message_source properties.be_paste_clipboard_min_size_unit "
-        "properties.be_paste_clipboard_max_size_unit precedence properties.block_all_data_access "
-        "properties.enable_clipboard_inspection properties.allow_notifications properties.block_notifications "
-        "properties.be_upload_timeout_duration_seconds properties.be_paste_clipboard_over_size_behaviour_block "
-        "properties.enable_context_inspection properties.custom_allow_notification properties.besplash_enabled "
-        "properties.be_upload_timeout_response created_by modified_at properties.enable_content_inspection "
-        "properties.inspection_depth properties.similarity_threshold "
-        "properties.enable_end_user_notifications_unsupported_browser properties.evidence_duplication_enabled_default "
-        "properties.evidence_encrypted_enabled name is_default properties.enable_network_inspection]",
+        "[properties.be_upload_timeout_duration_seconds properties.inspection_depth properties.block_notifications "
+        "properties.besplash_message_source modified_by properties.evidence_duplication_enabled_default "
+        "properties.enable_network_inspection properties.classifications properties.be_paste_clipboard_min_size "
+        "properties.evidence_storage_max_size created_at created_by properties.custom_block_notification "
+        "properties.evidence_download_enabled properties.be_paste_clipboard_min_size_unit "
+        "properties.max_file_size_to_inspect is_enabled modified_at properties.enable_clipboard_inspection "
+        "properties.enable_end_user_notifications_unsupported_browser properties.be_upload_timeout_response "
+        "properties.be_paste_timeout_response properties.be_paste_clipboard_max_size_unit "
+        "properties.be_paste_clipboard_over_size_behaviour_block name properties.enable_content_inspection "
+        "properties.enable_context_inspection properties.similarity_threshold properties.evidence_encrypted_enabled "
+        "properties.be_exclude_domains properties.besplash_enabled properties.besplash_custom_message "
+        "properties.block_all_data_access properties.be_paste_timeout_duration_milliseconds "
+        "properties.be_paste_clipboard_max_size properties.evidence_storage_free_disk_perc description precedence "
+        "properties.min_confidence_level properties.unsupported_browsers_action properties.allow_notifications "
+        "properties.network_inspection_files_exceeding_size_limit is_default properties.max_file_size_to_inspect_unit "
+        "properties.browsers_without_active_extension properties.similarity_detection "
+        "properties.custom_allow_notification]",
         "name": "filter",
         "in": "query"
       },
@@ -872,7 +871,7 @@ _data_protection_configuration_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort by, allowed fields are :[name precedence created_at modified_at]",
+        "description": "The property to sort by, allowed fields are :[precedence created_at modified_at name]",
         "name": "sort",
         "in": "query"
       }
