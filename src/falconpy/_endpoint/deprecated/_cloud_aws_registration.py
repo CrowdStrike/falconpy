@@ -72,7 +72,7 @@ _cloud_aws_registration_endpoints = [
     "cloud-registration-aws-get-accounts",
     "GET",
     "/cloud-security-registration-aws/entities/account/v1",
-    "Retrieve existing AWS accounts by account IDs",
+    "Retrieve existing AWS accounts by account IDs or organization IDs",
     "cloud_aws_registration",
     [
       {
@@ -83,6 +83,16 @@ _cloud_aws_registration_endpoints = [
         "collectionFormat": "multi",
         "description": "AWS account IDs to filter",
         "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "AWS organization IDs to filter",
+        "name": "organization-ids",
         "in": "query"
       }
     ]
