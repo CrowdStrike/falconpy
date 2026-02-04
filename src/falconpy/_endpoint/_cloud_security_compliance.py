@@ -60,7 +60,7 @@ _cloud_security_compliance_endpoints = [
         "type": "string",
         "description": "FQL filter, supported properties:\n  - account_id  account_name  business_impact  "
         "cloud_label  cloud_label_id  cloud_provider  environment  groups  region  resource_type  resource_type_name  "
-        "tag_key  tag_value",
+        "tag_key  tag_value  tags_string",
         "name": "filter",
         "in": "query"
       }
@@ -89,7 +89,7 @@ _cloud_security_compliance_endpoints = [
         "type": "string",
         "description": "FQL filter, supported properties:\n  - account_id  account_name  business_impact  "
         "cloud_label  cloud_label_id  cloud_provider  environment  groups  region  resource_type  resource_type_name  "
-        "tag_key  tag_value",
+        "tag_key  tag_value  tags_string",
         "name": "filter",
         "in": "query"
       }
