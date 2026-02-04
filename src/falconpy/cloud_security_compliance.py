@@ -72,7 +72,7 @@ class CloudSecurityCompliance(ServiceClass):
                     environment         groups
                     region              resource_type
                     resource_type_name  tag_key
-                    tag_value
+                    tag_value           tags_string
         ids -- The UUIDs of compliance frameworks to retrieve (maximum 20 IDs allowed). String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
@@ -112,7 +112,7 @@ class CloudSecurityCompliance(ServiceClass):
                     environment         groups
                     region              resource_type
                     resource_type_name  tag_key
-                    tag_value
+                    tag_value           tags_string
         ids -- The uuids of compliance rules to retrieve (maximum 350 IDs allowed).
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
