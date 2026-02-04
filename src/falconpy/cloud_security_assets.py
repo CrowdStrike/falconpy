@@ -63,7 +63,8 @@ class CloudSecurityAssets(ServiceClass):
         """Get findings for an application resource with pagination.
 
         Keyword arguments:
-        crn -- Application CRN. String.
+        crn -- Deprecated: Use 'gcrn' instead. Application CRN. String.
+        gcrn -- Application GCRN. String.
         type -- Finding type. String.
         filter -- FQL string to filter findings. String.
         offset -- Pagination offset. Integer.
