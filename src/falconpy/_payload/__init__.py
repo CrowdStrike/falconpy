@@ -38,7 +38,8 @@ from ._aspm import (
     aspm_integration_task_payload,
     aspm_node_payload,
     aspm_application_payload,
-    retrieve_relay_node_payload
+    retrieve_relay_node_payload,
+    aspm_group_payload
 )
 from ._correlation_rules import correlation_rules_payload, correlation_rules_export_payload
 from ._case_management import (
@@ -238,5 +239,5 @@ __all__ = [
     "cloud_policies_rule_create_payload", "cloud_policies_rule_update_payload", "specified_case_payload",
     "case_manage_payload", "case_evidence_payload", "update_case_payload",
     "cloud_azure_registration_legacy_payload", "cloud_google_registration_create_payload",
-    "cloud_security_create_group_payload"
+    "cloud_security_create_group_payload", "aspm_group_payload"
 ]

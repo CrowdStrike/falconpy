@@ -806,3 +806,34 @@ def retrieve_relay_node_payload(passed_keywords: dict) -> dict:
         returned["useJobs"] = passed_keywords.get("use_jobs", None)
 
     return returned
+
+def aspm_group_payload(passed_keywords: dict) -> dict:
+    """Craft a properly formatted ASPM group update payload.
+
+    {
+        "children": [
+            0
+        ],
+        "description": "string",
+        "groupType": "string",
+        "isDefault": true,
+        "name": "string",
+        "parentId": 0,
+        "scope": "string"
+    }
+    """
+    keys = ["children", "description", "name", "scope"]
+    
+    returned = {}
+
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned[key] = passed_keywords.get(key, None)
+    if passed_keywords.get("group_type", None) is not None:
+        returned["groupType"] = passed_keywords.get("group_type", None)
+    if passed_keywords.get("is_default", None) is not None:
+        returned["isDefault"] = passed_keywords.get("is_default", None)
+    if passed_keywords.get("parent_id", None) is not None:
+        returned["parentId"] = passed_keywords.get("parent_id", None)
+
+    return returned
