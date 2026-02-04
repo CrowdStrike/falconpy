@@ -87,10 +87,11 @@ class CloudAWSRegistration(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_accounts(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Retrieve existing AWS accounts by account IDs.
+        """Retrieve existing AWS accounts by account IDs OR organization IDs.
 
         Keyword arguments:
         ids -- AWS account IDs to filter. String or list of strings.
+        organization_ids -- AWS organization IDs to filter. String or list of strings.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -102,6 +103,8 @@ class CloudAWSRegistration(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-aws-registration/cloud-registration-aws-get-accounts
         """
+        kwargs["organization-ids"] = kwargs.get("organization_ids", None)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,

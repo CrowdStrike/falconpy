@@ -25,6 +25,7 @@ class TestCloudAWSRegistration:
         tests = {
             "cloud_registration_aws_trigger_health_check": falcon.trigger_health_check(account_ids="whatever", organization_ids="whatever"),
             "cloud_registration_aws_get_accounts": falcon.get_accounts(ids="12345678"),
+            "cloud_registration_aws_get_accounts_orgs": falcon.get_accounts(organization_ids="12345678"),
             "cloud_registration_aws_create_account": falcon.create_account(account_type="whatever", csp_events=False, products={"product": "whatever"}),
             "cloud_registration_aws_update_account": falcon.update_account(account_type="whatever", csp_events=True),
             "cloud_registration_aws_delete_account": falcon.delete_account(organization_ids="12345678"),
