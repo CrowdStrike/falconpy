@@ -91,6 +91,26 @@ class TestASPM:
             "GetCloudSecurityIntegrationState": falcon.get_cloud_security_integration_state(),
             "SetCloudSecurityIntegrationState": falcon.set_cloud_security_integration_state(is_enabled=False),
             "SetCloudSecurityIntegrationState2": falcon.set_cloud_security_integration_state(body={"is_enabled": False}),
+            "GetUsersV2": falcon.get_users_v2(pagination=""),
+            "PostGroupV2": falcon.post_group_v2(children=[0],
+                                                group_type="string",
+                                                is_default=True,
+                                                name="string",
+                                                parent_id=1,
+                                                scope="string"
+                                                ),
+            "DeleteGroup": falcon.delete_group(id=42),
+            "UpdateDefaultGroup": falcon.update_default_group(id=42),
+            "GetGroupV2": falcon.get_group_v2(id=42),
+            "UpdateGroup": falcon.update_group(id=42,
+                                               children=[1],
+                                               group_type="string",
+                                               is_default="True",
+                                               parent_id=1,
+                                               scope="string"
+                                               ),
+            "GetGroupHierarchy": falcon.get_group_hierarchy(),
+            "GetGroupsV2": falcon.get_groups_v2(type="string")
         }
         for key in tests:
             if not isinstance(tests[key], bytes):

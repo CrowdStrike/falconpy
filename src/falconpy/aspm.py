@@ -49,7 +49,8 @@ from ._payload import (
     aspm_node_payload,
     aspm_application_payload,
     aspm_update_tag_payload,
-    retrieve_relay_node_payload
+    retrieve_relay_node_payload,
+    aspm_group_payload
     )
 from ._result import Result
 from ._service_class import ServiceClass
@@ -2581,6 +2582,265 @@ class ASPM(ServiceClass):
             operation_id="DeleteTags",
             keywords=kwargs,
             body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_users_v2(self: object,
+                     parameters: dict = None,
+                     **kwargs
+                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """List users.
+
+        Keyword arguments:
+        pagination -- URL encoded pagination JSON - limit, offset, direction, orderBy. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/get_%2Fusers%2Fv2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_/users/v2",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def post_group_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create group
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "children": [
+                        0
+                    ],
+                    "description": "string",
+                    "groupType": "string",
+                    "isDefault": true,
+                    "name": "string",
+                    "parentId": 0,
+                    "scope": "string"
+                }
+        children -- List of Integers.
+        group_type -- String.
+        is_default -- Boolean.
+        name -- String.
+        parent_id -- Integer.
+        scope -- String.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/post_%2Fgroup%2Fv2
+        """
+        if not body:
+            body = aspm_group_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="post_/group/v2",
+            body=body,
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_group(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete group.
+
+        Keyword arguments:
+        id -- Group ID. Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/delete_%2Fgroup%2F%7BID%3A%5B0-9%5D%2B%7D
+        """
+        target_id = kwargs.get("id", parameters.get("id", None))
+        if not target_id:
+            return generate_error_result(
+                message="You must provide the id keyword or parameter in order to use this operation.",
+                code=400
+                )
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="delete_/group/{ID:[0_9]+}",
+            path_id=target_id
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def update_default_group(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update default group.
+
+        Keyword arguments:
+        id -- Group ID. Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/post_%2Fgroup%2F%7BID%3A%5B0-9%5D%2B%7D%2Fupdate_default
+        """
+        target_id = kwargs.get("id", parameters.get("id", None))
+        if not target_id:
+            return generate_error_result(
+                message="You must provide the id keyword or parameter in order to use this operation.",
+                code=400
+                )
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="post_/group/{ID:[0_9]+}/update_default",
+            path_id=target_id
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_group_v2(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get group details.
+
+        Keyword arguments:
+        id -- Group ID. Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/post_%2Fgroup%2F%7BID%3A%5B0-9%5D%2B%7D%2Fupdate_default
+        """
+        target_id = kwargs.get("id", parameters.get("id", None))
+        if not target_id:
+            return generate_error_result(
+                message="You must provide the id keyword or parameter in order to use this operation.",
+                code=400
+                )
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_/group/{ID:[0_9]+}/v2",
+            path_id=target_id
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def update_group(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update group.
+
+        Keyword arguments:
+        id -- Group ID. Integer.
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "children": [
+                        0
+                    ],
+                    "description": "string",
+                    "groupType": "string",
+                    "isDefault": true,
+                    "name": "string",
+                    "parentId": 0,
+                    "scope": "string"
+                }
+        children -- List of Integers.
+        group_type -- String.
+        is_default -- Boolean.
+        name -- String.
+        parent_id -- Integer.
+        scope -- String.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/post_%2Fgroup%2F%7BID%3A%5B0-9%5D%2B%7D%2Fv2
+        """
+        target_id = kwargs.get("id", parameters.get("id", None))
+        if not target_id:
+            return generate_error_result(
+                message="You must provide the id keyword or parameter in order to use this operation.",
+                code=400
+                )
+
+        if not body:
+            body = aspm_group_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="post_/group/{ID:[0_9]+}/v2",
+            body=body,
+            path_id=target_id
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_group_hierarchy(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get group hierarchy
+
+        Keyword arguments:
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/get_%2Fgroups%2Fhier%2Fv2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_/groups/hier/v2",
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_groups_v2(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get groups V2.
+
+        Keyword arguments:
+        type -- Group types to query - can either be empty (all), parents, children. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/get_%2Fgroups%2Flist%2Fv2
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="get_/groups/list/v2",
+            keywords=kwargs,
+            params=parameters
             )
 
     ExecuteFunctionDataCount = execute_function_data_count

@@ -568,7 +568,7 @@ _aspm_endpoints = [
     ]
   ],
   [
-    "RetrieveRelayInstances",
+    "get_/executor_nodes/{ID:[0_9]+}/instances/csv",
     "GET",
     "/aspm-api-gateway/api/v1/executor_nodes/{}/instances/csv",
     "Retrieve the relay instances in CSV format",
@@ -585,6 +585,116 @@ _aspm_endpoints = [
         "name": "body",
         "in": "body",
         "required": True
+      }
+    ]
+  ],
+  [
+    "post_/group/v2",
+    "POST",
+    "/aspm-api-gateway/api/v1/group/v2",
+    "Create group",
+    "aspm",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "delete_/group/{ID:[0_9]+}",
+    "DELETE",
+    "/aspm-api-gateway/api/v1/group/{}",
+    "",
+    "aspm",
+    [
+      {
+        "pattern": "[0-9]+",
+        "type": "integer",
+        "description": "Group ID",
+        "name": "ID",
+        "in": "path",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "post_/group/{ID:[0_9]+}/update_default",
+    "POST",
+    "/aspm-api-gateway/api/v1/group/{}/update_default",
+    "Update default group",
+    "aspm",
+    [
+      {
+        "pattern": "[0-9]+",
+        "type": "integer",
+        "description": "Group ID",
+        "name": "ID",
+        "in": "path",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "get_/group/{ID:[0_9]+}/v2",
+    "GET",
+    "/aspm-api-gateway/api/v1/group/{}/v2",
+    "Get group details",
+    "aspm",
+    [
+      {
+        "pattern": "[0-9]+",
+        "type": "integer",
+        "description": "Group ID",
+        "name": "ID",
+        "in": "path",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "post_/group/{ID:[0_9]+}/v2",
+    "POST",
+    "/aspm-api-gateway/api/v1/group/{}/v2",
+    "Update group",
+    "aspm",
+    [
+      {
+        "pattern": "[0-9]+",
+        "type": "integer",
+        "description": "Group ID",
+        "name": "ID",
+        "in": "path",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "get_/groups/hier/v2",
+    "GET",
+    "/aspm-api-gateway/api/v1/groups/hier/v2",
+    "Get group hierarchy",
+    "aspm",
+    []
+  ],
+  [
+    "get_/groups/list/v2",
+    "GET",
+    "/aspm-api-gateway/api/v1/groups/list/v2",
+    "",
+    "aspm",
+    [
+      {
+        "type": "string",
+        "description": "Group types to query - can either be empty (all), parents, children",
+        "name": "type",
+        "in": "query"
       }
     ]
   ],
@@ -1218,6 +1328,21 @@ _aspm_endpoints = [
         "name": "body",
         "in": "body",
         "required": True
+      }
+    ]
+  ],
+  [
+    "get_/users/v2",
+    "GET",
+    "/aspm-api-gateway/api/v1/users/v2",
+    "List users",
+    "aspm",
+    [
+      {
+        "type": "string",
+        "description": "URL encoded pagination JSON - limit, offset, direction, orderBy",
+        "name": "pagination",
+        "in": "query"
       }
     ]
   ]
