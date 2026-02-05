@@ -171,6 +171,11 @@ from ._filevantage import (
     filevantage_scheduled_exclusion_payload,
     filevantage_start_payload
     )
+from ._ml_exclusions import (
+    ml_exclusions_actions_payload,
+    ml_exclusions_report_payload,
+    ml_exclusions_update_payload
+)
 from ._mssp import mssp_payload
 from ._firewall import (
     firewall_policy_payload,
@@ -250,5 +255,6 @@ __all__ = [
     "case_manage_payload", "case_evidence_payload", "update_case_payload",
     "cloud_azure_registration_legacy_payload", "cloud_google_registration_create_payload",
     "cloud_security_create_group_payload", "aspm_group_payload", "cloud_policies_suppression_rule_payload",
-    "correlation_rules_template_payload", "ioa_ss_exclusion_payload", "ioa_ss_default_exclusion_payload"
+    "correlation_rules_template_payload", "ioa_ss_exclusion_payload", "ioa_ss_default_exclusion_payload",
+    "ml_exclusions_actions_payload", "ml_exclusions_report_payload", "ml_exclusions_update_payload"
 ]

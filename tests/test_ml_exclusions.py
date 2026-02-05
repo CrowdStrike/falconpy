@@ -53,8 +53,84 @@ class TestMLExclusions:
 
         return error_checks
 
+    def serviceMLE_V2Exclusions(self):
+        error_checks = True
+        tests = {
+            "aggregate_exclusions": falcon.aggregate_exclusions(
+                field="value",
+                filter="created_by:'test'",
+                size=10
+            ),
+            "get_all_exclusions": falcon.get_all_exclusions(),
+            "perform_actions": falcon.perform_actions(
+                action_name="validate_filepath",
+                action_parameters=[{"name": "test", "value": "test"}],
+                available=True,
+                description="test",
+                group="test",
+                label="test",
+                name="test"
+            ),
+            "get_reports": falcon.get_reports(
+                report_format="csv",
+                search={"filter": "value:'test'", "sort": "value.asc"}
+            ),
+            "get_exclusions_by_id": falcon.get_exclusions_by_id(ids="12345678"),
+            "create_exclusions_v2": falcon.create_exclusions(
+                exclusions=[{
+                    "comment": "Unit Testing",
+                    "excluded_from": ["blocking"],
+                    "grandparent_value": "test",
+                    "groups": ["12345678"],
+                    "parent_value": "test",
+                    "value": "test"
+                }]
+            ),
+            "update_exclusions_v2": falcon.update_exclusions_v2(
+                comment="Unit Testing",
+                excluded_from=["blocking"],
+                grandparent_value="test",
+                groups=["12345678"],
+                id="12345678",
+                parent_value="test",
+                value="test"
+            ),
+            "delete_exclusions_v2": falcon.delete_exclusions_v2(
+                ids="12345678",
+                comment="Unit Testing"
+            ),
+            "search_exclusions_v2": falcon.search_exclusions_v2(
+                filter="value:'test'",
+                offset=0,
+                limit=10,
+                sort="value.asc"
+            ),
+            "get_ml_exclusion_sets": falcon.get_ml_exclusion_sets(ids="12345678"),
+            "create_ml_exclusions_v2": falcon.create_ml_exclusions_v2(
+                comment="Unit Testing",
+                excluded_from=["blocking"],
+                groups=["12345678"],
+                value="test"
+            ),
+            "update_ml_exclusions": falcon.update_ml_exclusions(
+                comment="Unit Testing",
+                groups=["12345678"],
+                id="12345678",
+                is_descendant_process=True,
+                value="test"
+            ),
+        }
+        for key in tests:
+            if tests[key]["status_code"] not in AllowedResponses:
+                error_checks = False
+
+        return error_checks
+
     def test_Find(self):
         assert self.serviceMLE_ListExclusions() is True
 
     def test_Errors(self):
         assert self.serviceMLE_GenerateErrors() is True
+
+    def test_V2Exclusions(self):
+        assert self.serviceMLE_V2Exclusions() is True
