@@ -64,8 +64,99 @@ class TestIOAExclusions:
 
         return error_checks
 
+    def serviceIOAE_SSExclusions(self):
+        error_checks = True
+        tests = {
+            "get_ss_exclusion_aggregates": falcon.get_ss_exclusion_aggregates(
+                ifn_regex="test",
+                cl_regex="test",
+                field="pattern_id",
+                filter="name:'test'",
+                size=10
+            ),
+            "get_ss_exclusion_reports_v2": falcon.get_ss_exclusion_reports_v2(
+                report_format="csv",
+                search={"filter": "name:'test'", "sort": "name.asc"}
+            ),
+            "get_ss_exclusion_rules_v2": falcon.get_ss_exclusion_rules_v2(ids="12345678"),
+            "create_ss_exclusions": falcon.create_ss_exclusions(
+                exclusions=[{
+                    "cl_regex": "test",
+                    "comment": "Unit Testing",
+                    "description": "test",
+                    "detection_json": "{}",
+                    "grandparent_cl_regex": "test",
+                    "grandparent_ifn_regex": "test",
+                    "host_groups": ["12345678"],
+                    "ifn_regex": "test",
+                    "name": "test",
+                    "parent_cl_regex": "test",
+                    "parent_ifn_regex": "test",
+                    "pattern_id": "12345678",
+                    "pattern_name": "test"
+                }]
+            ),
+            "update_ss_exclusions": falcon.update_ss_exclusions(
+                exclusions=[{
+                    "cl_regex": "test",
+                    "comment": "Unit Testing",
+                    "description": "test",
+                    "detection_json": "{}",
+                    "grandparent_cl_regex": "test",
+                    "grandparent_ifn_regex": "test",
+                    "host_groups": ["12345678"],
+                    "id": "12345678",
+                    "ifn_regex": "test",
+                    "name": "test",
+                    "parent_cl_regex": "test",
+                    "parent_ifn_regex": "test",
+                    "pattern_id": "12345678",
+                    "pattern_name": "test"
+                }]
+            ),
+            "delete_ss_exclusions": falcon.delete_ss_exclusions(
+                ids="12345678",
+                comment="Unit Testing"
+            ),
+            "get_ss_exclusion_matched_rules": falcon.get_ss_exclusion_matched_rules(
+                aid="12345678",
+                command_line="test",
+                grandparent_command_line="test",
+                grandparent_image_file_name="test",
+                image_file_name="test",
+                parent_command_line="test",
+                parent_image_file_name="test",
+                pattern_ids=["12345678"]
+            ),
+            "get_default_ss_exclusions": falcon.get_default_ss_exclusions(
+                aid="12345678",
+                command_line="test",
+                grandparent_command_line="test",
+                grandparent_image_file_name="test",
+                image_file_name="test",
+                parent_command_line="test",
+                parent_image_file_name="test"
+            ),
+            "query_ss_exclusions": falcon.query_ss_exclusions(
+                filter="name:'test'",
+                ifn_regex="test",
+                cl_regex="test",
+                offset=0,
+                limit=10,
+                sort="name.asc"
+            ),
+        }
+        for key in tests:
+            if tests[key]["status_code"] not in AllowedResponses:
+                error_checks = False
+
+        return error_checks
+
     def test_Find(self):
         assert self.serviceIOAE_ListExclusions() is True
 
     def test_Errors(self):
         assert self.serviceIOAE_GenerateErrors() is True
+
+    def test_SSExclusions(self):
+        assert self.serviceIOAE_SSExclusions() is True

@@ -53,6 +53,7 @@ from ._firewall_management import _firewall_management_endpoints
 from ._hosts import _hosts_endpoints
 from ._identity_protection import _identity_protection_endpoints
 from ._installation_tokens import _installation_tokens_endpoints
+from ._ioa_exclusions import _ioa_exclusions_endpoints
 from ._ioc import _ioc_endpoints
 from ._iocs import _iocs_endpoints
 from ._ods import _ods_endpoints
@@ -86,6 +87,7 @@ _firewall_management_deprecated = _firewall_management_endpoints
 _hosts_deprecated = _hosts_endpoints
 _identity_protection_deprecated = _identity_protection_endpoints
 _installation_tokens_deprecated = _installation_tokens_endpoints
+_ioa_exclusions_deprecated = _ioa_exclusions_endpoints
 _ioc_deprecated = _ioc_endpoints
 _iocs_deprecated = _iocs_endpoints
 _ods_deprecated = _ods_endpoints
