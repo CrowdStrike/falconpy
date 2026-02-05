@@ -125,7 +125,8 @@ class ITAutomation(ServiceClass):
                     end_time            task_id
                     is_active           task_name
                     last_run            task_type
-                    modified_by
+                    modified_by         group_ids
+                    group_names
                   Example:
                     filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
         sort -- The sort expression that should be used to sort the results. String.
@@ -136,6 +137,7 @@ class ITAutomation(ServiceClass):
                     end_time            task_id
                     last_run            task_name
                     modified_by         task_type
+                    group_ids           group_names
                 Example: example_field|asc
         offset -- Starting index for record retrieval. Integer.
                   Example:
@@ -2051,7 +2053,8 @@ class ITAutomation(ServiceClass):
                     end_time            task_id
                     is_active           task_name
                     last_run            task_type
-                    modified_by
+                    modified_by         group_ids
+                    group_names
                   Example:
                     filter="example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'"
         sort -- The sort expression that should be used to sort the results. String.
@@ -2062,6 +2065,7 @@ class ITAutomation(ServiceClass):
                     end_time            task_id
                     last_run            task_name
                     modified_by         task_type
+                    group_ids           group_names
                 Example:
                     sort="example_field|asc"
         offset -- Starting index for record retrieval. Integer.

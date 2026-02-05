@@ -96,8 +96,8 @@ _it_automation_endpoints = [
       {
         "type": "string",
         "description": "The filter expression that should be used to limit the results. Allowed filter fields: "
-        " [created_by, created_time, end_time, is_active, last_run, modified_by, modified_time, start_time, task_id, "
-        "task_name, task_type] Example: "
+        " [created_by, created_time, end_time, group_ids, group_names, is_active, last_run, modified_by, modified_time, "
+        " start_time, task_id, task_name, task_type] Example: "
         "example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'",
         "name": "filter",
         "in": "query"
@@ -105,8 +105,9 @@ _it_automation_endpoints = [
       {
         "type": "string",
         "description": "The sort expression that should be used to sort the results. Allowed sort fields: "
-        "[created_by, created_time, end_time, last_run, modified_by, modified_time, start_time, task_id, task_name, "
-        "task_type]. Sort either asc (ascending) or desc (descending). Example: example_field|asc",
+        "[created_by, created_time, end_time, group_ids, group_names, last_run, modified_by, modified_time, start_time, "
+        " task_id, task_name, task_type]. Sort either asc (ascending) or desc (descending). Example: "
+        "example_field|asc",
         "name": "sort",
         "in": "query"
       },
@@ -991,8 +992,8 @@ _it_automation_endpoints = [
       {
         "type": "string",
         "description": "The filter expression that should be used to limit the results. Allowed filter fields: "
-        " [created_by, created_time, end_time, is_active, last_run, modified_by, modified_time, start_time, task_id, "
-        "task_name, task_type] Example: "
+        " [created_by, created_time, end_time, group_ids, group_names, is_active, last_run, modified_by, modified_time, "
+        " start_time, task_id, task_name, task_type] Example: "
         "example_string_field:'example@example.com'+example_date_field:>='2024-08-27T03:21:32Z'",
         "name": "filter",
         "in": "query"
@@ -1000,8 +1001,9 @@ _it_automation_endpoints = [
       {
         "type": "string",
         "description": "The sort expression that should be used to sort the results. Allowed sort fields: "
-        "[created_by, created_time, end_time, last_run, modified_by, modified_time, start_time, task_id, task_name, "
-        "task_type]. Sort either asc (ascending) or desc (descending). Example: example_field|asc",
+        "[created_by, created_time, end_time, group_ids, group_names, last_run, modified_by, modified_time, start_time, "
+        " task_id, task_name, task_type]. Sort either asc (ascending) or desc (descending). Example: "
+        "example_field|asc",
         "name": "sort",
         "in": "query"
       },
