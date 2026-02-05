@@ -50,6 +50,7 @@ from .deprecated import _real_time_response_deprecated
 from .deprecated import _real_time_response_admin_deprecated
 from .deprecated import _report_executions_deprecated
 from .deprecated import _scheduled_reports_deprecated
+from .deprecated import _workflows_deprecated
 from .deprecated import _zero_trust_assessment_deprecated
 from .deprecated import _certificate_based_exclusions_deprecated
 from .deprecated import _deprecated_operation_mapping
@@ -295,6 +296,7 @@ deprecated_endpoints.extend(_real_time_response_deprecated)
 deprecated_endpoints.extend(_real_time_response_admin_deprecated)
 deprecated_endpoints.extend(_report_executions_deprecated)
 deprecated_endpoints.extend(_scheduled_reports_deprecated)
+deprecated_endpoints.extend(_workflows_deprecated)
 deprecated_endpoints.extend(_zero_trust_assessment_deprecated)
 
 # Mapping of manually deprecated endpoints

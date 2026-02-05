@@ -197,6 +197,8 @@ class Workflows(ServiceClass):
 
         Keyword arguments:
         filter -- FQL query specifying filter parameters. String.
+        offset -- Starting pagination offset of records to return. String.
+        limit -- Maximum number of records to return. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -901,6 +903,80 @@ class Workflows(ServiceClass):
 
         return returned
 
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def execute_single_activity_node(self: object,
+                                     body: dict = None,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Executes a single activity node.
+        Results in an execution where test_mode=true and single_node_execution=true, associated with a definition ID if provided.
+
+        Keyword arguments:
+        execution_cid -- CID(s) to execute on. String.
+        This can be a child if this is a flight control enabled definition.
+        definition_id -- Definition ID to execute. String.
+        name -- Workflow name to execute. String.
+        Either a name or an ID, or the definition itself in the request body, can be specified.
+        key -- Key used to help deduplicate executions, if unset a new UUID is used. String.
+        depth -- Used to record the execution depth to help limit execution loops when a workflow triggers another. Integer.
+        The maximum depth is 4.
+        body -- full body payload, not required if ids are provided as keyword.
+        Please visit the Swagger URL to view the full payload. It's long.
+        definition -- Dictionary.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowExecuteSingleNodeV1
+        """
+        if not body:
+            if kwargs.get("definition", None):
+                body["definition"] = kwargs.get("definition", None)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowExecuteSingleNodeV1",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_child_executions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Search for child executions by providing a FQL filter and paging details. 
+        Returns the set of child workflow execution IDs which match the filter criteria.
+
+        Keyword arguments:
+        filter -- FQL query specifying filter parameters. String.
+        offset -- Starting pagination offset of records to return. Integer.
+        limit -- Maximum number of records to return. Integer.
+        sort -- Sort items by providing a comma separated list of property and direction (eg name.desc,time.asc). String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/v1.child-executions.query
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="v1_child_executions_query",
+            keywords=kwargs,
+            params=parameters
+            )
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
@@ -924,3 +1000,5 @@ class Workflows(ServiceClass):
     WorkflowSystemDefinitionsDeProvision = deprovision
     WorkflowSystemDefinitionsPromote = promote
     WorkflowSystemDefinitionsProvision = provision
+    WorkflowExecuteSingleNodeV1 = execute_single_activity_node
+    v1_child_executions_query = query_child_executions

@@ -196,6 +196,18 @@ _workflows_endpoints = [
         "name": "filter",
         "in": "query",
         "allowEmptyValue": True
+      },
+      {
+        "type": "string",
+        "description": "Starting pagination offset of records to return.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Maximum number of records to return.",
+        "name": "limit",
+        "in": "query"
       }
     ]
   ],
@@ -598,6 +610,96 @@ _workflows_endpoints = [
         "name": "body",
         "in": "body",
         "required": True
+      }
+    ]
+  ],
+  [
+    "WorkflowExecuteSingleNodeV1",
+    "POST",
+    "/workflows/entities/single-node-executions/v1",
+    "Executes a single activity node, resulting in an execution where test_mode=true and "
+    "single_node_execution=true, associated with a definition ID if provided",
+    "workflows",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "CID(s) to execute on. This can be a child if this is a flight control enabled "
+        "definition. If unset the definition CID is used.",
+        "name": "execution_cid",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Definition ID to execute, either a name or an ID, or the definition itself in the "
+        "request body, can be specified.",
+        "name": "definition_id",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Workflow name to execute, either a name or an ID, or the definition itself in the "
+        "request body, can be specified.",
+        "name": "name",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Key used to help deduplicate executions, if unset a new UUID is used",
+        "name": "key",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Used to record the execution depth to help limit execution loops when a workflow "
+        "triggers another. The maximum depth is 4.",
+        "name": "depth",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "v1_child_executions_query",
+    "GET",
+    "/workflows/queries/child-executions/v1",
+    "Search for child executions by providing a FQL filter and paging details. Returns the set of child "
+    "workflow execution IDs which match the filter criteria",
+    "workflows",
+    [
+      {
+        "type": "string",
+        "description": "FQL query specifying filter parameters.",
+        "name": "filter",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "type": "string",
+        "description": "Starting pagination offset of records to return.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Maximum number of records to return.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "pattern": "^\\w+(\\.asc|\\.desc)?(,\\w+(\\.asc|\\.desc)?)*$",
+        "type": "string",
+        "description": "Sort items by providing a comma separated list of property and direction (eg "
+        "name.desc,time.asc). If direction is omitted, defaults to descending.",
+        "name": "sort",
+        "in": "query"
       }
     ]
   ],
