@@ -2614,7 +2614,7 @@ class ASPM(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def post_group_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Create group
+        """Create group.
 
         Keyword arguments:
         body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
@@ -2798,7 +2798,7 @@ class ASPM(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_group_hierarchy(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Get group hierarchy
+        """Get group hierarchy.
 
         Keyword arguments:
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
