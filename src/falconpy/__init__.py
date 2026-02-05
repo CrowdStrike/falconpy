@@ -105,6 +105,7 @@ from ._ngsiem import (
     SessionManager
 )
 from ._helper import random_string, Indicator, Color, find_operation
+from .admission_control_policies import AdmissionControlPolicies
 from .alerts import Alerts
 from .api_integrations import APIIntegrations
 from .api_complete import APIHarness, APIHarnessV2
@@ -260,7 +261,7 @@ __all__ = [
     "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch", "ITAutomation", "F4IT",
     "CloudSecurityCompliance", "CaseManagement", "SaasSecurity", "DataProtectionConfiguration",
     "CorrelationRulesAdmin", "CloudSecurityDetections", "CloudPolicies", "CloudGoogleCloudRegistration",
-    "CloudSecurity"
+    "CloudSecurity", "AdmissionControlPolicies"
     ]
 """
 This is free and unencumbered software released into the public domain.

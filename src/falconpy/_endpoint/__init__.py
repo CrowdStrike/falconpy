@@ -20,6 +20,7 @@
                                                         `---' OAuth2 API SDK for Python 3 `---'
 """
 from typing import List, Any
+from .deprecated import _admission_control_policies_deprecated
 from .deprecated import _case_management_deprecated
 from .deprecated import _cloud_aws_registration_deprecated
 from .deprecated import _cloud_azure_registration_deprecated
@@ -56,6 +57,7 @@ from .deprecated import _certificate_based_exclusions_deprecated
 from .deprecated import _deprecated_operation_mapping
 from .deprecated import _deprecated_class_mapping
 
+from ._admission_control_policies import _admission_control_policies_endpoints
 from ._alerts import _alerts_endpoints
 from ._api_integrations import _api_integrations_endpoints
 from ._aspm import _aspm_endpoints
@@ -160,6 +162,7 @@ from ._workflows import _workflows_endpoints
 from ._zero_trust_assessment import _zero_trust_assessment_endpoints
 
 api_endpoints: List[Any] = []
+api_endpoints.extend(_admission_control_policies_endpoints)
 api_endpoints.extend(_alerts_endpoints)
 api_endpoints.extend(_api_integrations_endpoints)
 api_endpoints.extend(_aspm_endpoints)
@@ -265,6 +268,7 @@ api_endpoints.extend(_zero_trust_assessment_endpoints)
 
 # Deprecated endpoints
 deprecated_endpoints = []
+deprecated_endpoints.extend(_admission_control_policies_deprecated)
 deprecated_endpoints.extend(_case_management_deprecated)
 deprecated_endpoints.extend(_cloud_aws_registration_deprecated)
 deprecated_endpoints.extend(_cloud_azure_registration_deprecated)
