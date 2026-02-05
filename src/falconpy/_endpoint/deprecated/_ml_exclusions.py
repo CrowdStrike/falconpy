@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library.
+"""Internal API endpoint constant library (deprecated operations).
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 _ml_exclusions_endpoints = [
   [
-    "exclusions_aggregates_v2",
+    "exclusions.aggregates.v2",
     "POST",
     "/exclusions/aggregates/exclusions/GET/v2",
     "Get exclusion aggregates as specified via json in request body.",
@@ -52,7 +52,7 @@ _ml_exclusions_endpoints = [
     ]
   ],
   [
-    "exclusions_get_all_v2",
+    "exclusions.get-all.v2",
     "GET",
     "/exclusions/entities/all-exclusions/v2",
     "Get all exclusions.",
@@ -60,7 +60,7 @@ _ml_exclusions_endpoints = [
     []
   ],
   [
-    "exclusions_perform_action_v2",
+    "exclusions.perform-action.v2",
     "POST",
     "/exclusions/entities/exclusion-actions/v2",
     "Actions used to manipulate the content of exclusions, with ancestor fields.",
@@ -86,7 +86,7 @@ _ml_exclusions_endpoints = [
     ]
   ],
   [
-    "exclusions_get_reports_v2",
+    "exclusions.get-reports.v2",
     "POST",
     "/exclusions/entities/exclusions/reports/v2",
     "Create a report of ML exclusions scoped by the given filters",
@@ -100,7 +100,7 @@ _ml_exclusions_endpoints = [
     ]
   ],
   [
-    "exclusions_get_v2",
+    "exclusions.get.v2",
     "GET",
     "/exclusions/entities/exclusions/v2",
     "Get the exclusions by id, with ancestor fields.",
@@ -120,7 +120,7 @@ _ml_exclusions_endpoints = [
     ]
   ],
   [
-    "exclusions_create_v2",
+    "exclusions.create.v2",
     "POST",
     "/exclusions/entities/exclusions/v2",
     "Create the exclusions, with ancestor fields.",
@@ -134,7 +134,7 @@ _ml_exclusions_endpoints = [
     ]
   ],
   [
-    "exclusions_update_v2",
+    "exclusions.update.v2",
     "PATCH",
     "/exclusions/entities/exclusions/v2",
     "Update the exclusions by id, with ancestor fields.",
@@ -148,7 +148,7 @@ _ml_exclusions_endpoints = [
     ]
   ],
   [
-    "exclusions_delete_v2",
+    "exclusions.delete.v2",
     "DELETE",
     "/exclusions/entities/exclusions/v2",
     "Delete the exclusions by id, with ancestor fields.",
@@ -174,7 +174,7 @@ _ml_exclusions_endpoints = [
     ]
   ],
   [
-    "exclusions_search_v2",
+    "exclusions.search.v2",
     "GET",
     "/exclusions/queries/exclusions/v2",
     "Search for exclusions, with ancestor fields.",
@@ -209,127 +209,6 @@ _ml_exclusions_endpoints = [
           "last_modified",
           "modified_by",
           "is_descendant_process"
-        ],
-        "type": "string",
-        "description": "The sort expression that should be used to sort the results.",
-        "name": "sort",
-        "in": "query"
-      }
-    ]
-  ],
-  [
-    "getMLExclusionsV1",
-    "GET",
-    "/policy/entities/ml-exclusions/v1",
-    "Get a set of ML Exclusions by specifying their IDs",
-    "ml_exclusions",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "The ids of the exclusions to retrieve",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "createMLExclusionsV1",
-    "POST",
-    "/policy/entities/ml-exclusions/v1",
-    "Create the ML exclusions",
-    "ml_exclusions",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "updateMLExclusionsV1",
-    "PATCH",
-    "/policy/entities/ml-exclusions/v1",
-    "Update the ML exclusions",
-    "ml_exclusions",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "deleteMLExclusionsV1",
-    "DELETE",
-    "/policy/entities/ml-exclusions/v1",
-    "Delete the ML exclusions by id",
-    "ml_exclusions",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "The ids of the exclusions to delete",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      },
-      {
-        "type": "string",
-        "description": "Explains why this exclusions was deleted",
-        "name": "comment",
-        "in": "query"
-      }
-    ]
-  ],
-  [
-    "queryMLExclusionsV1",
-    "GET",
-    "/policy/queries/ml-exclusions/v1",
-    "Search for ML exclusions.",
-    "ml_exclusions",
-    [
-      {
-        "type": "string",
-        "description": "The filter expression that should be used to limit the results.",
-        "name": "filter",
-        "in": "query"
-      },
-      {
-        "type": "integer",
-        "description": "The offset to start retrieving records from",
-        "name": "offset",
-        "in": "query"
-      },
-      {
-        "type": "integer",
-        "description": "The maximum records to return. [1-500]",
-        "name": "limit",
-        "in": "query"
-      },
-      {
-        "enum": [
-          "applied_globally.asc",
-          "applied_globally.desc",
-          "created_by.asc",
-          "created_by.desc",
-          "created_on.asc",
-          "created_on.desc",
-          "last_modified.asc",
-          "last_modified.desc",
-          "modified_by.asc",
-          "modified_by.desc",
-          "value.asc",
-          "value.desc"
         ],
         "type": "string",
         "description": "The sort expression that should be used to sort the results.",

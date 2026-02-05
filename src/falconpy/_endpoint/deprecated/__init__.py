@@ -56,6 +56,7 @@ from ._installation_tokens import _installation_tokens_endpoints
 from ._ioa_exclusions import _ioa_exclusions_endpoints
 from ._ioc import _ioc_endpoints
 from ._iocs import _iocs_endpoints
+from ._ml_exclusions import _ml_exclusions_endpoints
 from ._ods import _ods_endpoints
 from ._real_time_response import _real_time_response_endpoints
 from ._real_time_response_admin import _real_time_response_admin_endpoints
@@ -90,6 +91,7 @@ _installation_tokens_deprecated = _installation_tokens_endpoints
 _ioa_exclusions_deprecated = _ioa_exclusions_endpoints
 _ioc_deprecated = _ioc_endpoints
 _iocs_deprecated = _iocs_endpoints
+_ml_exclusions_deprecated = _ml_exclusions_endpoints
 _ods_deprecated = _ods_endpoints
 _real_time_response_deprecated = _real_time_response_endpoints
 _real_time_response_admin_deprecated = _real_time_response_admin_endpoints
