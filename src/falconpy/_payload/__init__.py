@@ -136,7 +136,11 @@ from ._it_automation import (
     automation_user_group_payload
     )
 from ._mobile_enrollment import mobile_enrollment_payload
-from ._ngsiem import ngsiem_search_payload, ngsiem_parser_payload
+from ._ngsiem import (
+    ngsiem_search_payload,
+    ngsiem_parser_payload,
+    ngsiem_data_connection_payload
+)
 from ._prevention_policy import prevention_policy_payload
 from ._sensor_update_policy import sensor_policy_payload
 from ._response_policy import response_policy_payload
@@ -256,5 +260,6 @@ __all__ = [
     "cloud_azure_registration_legacy_payload", "cloud_google_registration_create_payload",
     "cloud_security_create_group_payload", "aspm_group_payload", "cloud_policies_suppression_rule_payload",
     "correlation_rules_template_payload", "ioa_ss_exclusion_payload", "ioa_ss_default_exclusion_payload",
-    "ml_exclusions_actions_payload", "ml_exclusions_report_payload", "ml_exclusions_update_payload"
+    "ml_exclusions_actions_payload", "ml_exclusions_report_payload", "ml_exclusions_update_payload",
+    "ngsiem_data_connection_payload"
 ]

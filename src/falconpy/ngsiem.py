@@ -38,8 +38,13 @@ For more information, please refer to <https://unlicense.org>
 # pylint: disable=C0302
 from typing import Dict, Union
 from requests import Response
-from ._util import force_default, process_service_request, generate_error_result
-from ._payload import ngsiem_search_payload, ngsiem_parser_payload
+from ._util import (
+    force_default,
+    process_service_request,
+    generate_error_result,
+    handle_single_argument
+)
+from ._payload import ngsiem_search_payload, ngsiem_parser_payload, ngsiem_data_connection_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._ngsiem import _ngsiem_endpoints as Endpoints
@@ -1295,6 +1300,440 @@ class NGSIEM(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def update_lookup_file_entries(self: object,
+                                   parameters: dict = None,
+                                   **kwargs
+                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update entries in an existing Lookup File in NGSIEM.
+
+        Keyword arguments:
+        search_domain -- name of search domain (view or repo). String.
+        filename -- Filename of the lookup file to update. String.
+        file -- The file content for updating or appending the entries. Binary data.
+        update_mode -- How to update the file entries. String.
+                       Available values:
+                            append      update
+        key_columns -- For update mode, the comma separated list of key columns to use when matching entries. String.
+        (REQUIRED when update_mode=update)
+        ignore_case -- For update mode, whether to ignore case when matching keys. String.
+                       Available values:
+                            true    false
+        (REQUIRED when update_mode=update)
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateLookupFileEntries
+        """
+        file_name = kwargs.get("filename", None)
+        file_data = kwargs.get("file", None)
+        file_extended = {"search_domain": kwargs.get("search_domain", "all")}
+        if file_name and file_data:
+            kwargs.pop("file", None)
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="UpdateLookupFileEntries",
+                keywords=kwargs,
+                params=parameters,
+                data=file_extended,
+                files=[("file", (file_name, file_data))]
+                )
+        else:
+            returned = generate_error_result("You must provide the filename and file in order to use this method.", code=400)
+
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_data_connections(self: object,
+                              parameters: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """List and search data connections.
+
+        Keyword arguments:
+        filter -- Optional filter criteria in FQL format. String.
+        offset -- Starting position for pagination. Integer.
+        limit -- Maximum number of items to return. Integer.
+        sort -- Sort field and direction. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalListDataConnections
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalListDataConnections",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_data_connectors(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """List available data connectors.
+
+        Keyword arguments:
+        filter -- Optional filter criteria in FQL format. String.
+        offset -- Starting position for pagination. Integer.
+        limit -- Maximum number of items to return. Integer.
+        sort -- Sort field and direction. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalListDataConnectors
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalListDataConnectors",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_provisioning_status(self: object,
+                                *args,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get data connection provisioning status.
+
+        Keyword arguments:
+        ids -- Unique identifier of the data connection. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalGetDataConnectionStatus
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalGetDataConnectionStatus",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def update_connection_status(self: object,
+                                 body: dict = None,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update data connection status.
+
+        Keyword arguments:
+        ids -- Unique identifier of the data connection. String or list of strings.
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "status": "string"
+                }
+        status -- String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalUpdateDataConnectionStatus
+        """
+        if not body:
+            body["status"] = kwargs.get("status", None)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalUpdateDataConnectionStatus",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_ingest_token(self: object,
+                         *args,
+                         parameters: dict = None,
+                         **kwargs
+                         ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get Ingest token for data connection.
+
+        Keyword arguments:
+        ids -- Unique identifier of the data connection. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalGetDataConnectionToken
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalGetDataConnectionToken",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def regenerate_ingest_token(self: object,
+                                *args,
+                                parameters: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Regenerate Ingest token for data connection.
+
+        Keyword arguments:
+        ids -- Unique identifier of the data connection. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalRegenerateDataConnectionToken
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalRegenerateDataConnectionToken",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_connection_by_id(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get data connection by ID.
+
+        Keyword arguments:
+        ids -- Unique identifier of the data connection. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalGetDataConnectionByID
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalGetDataConnectionByID",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_data_connection(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create a new data connection.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "config": {
+                        "auth": {},
+                        "name": "string",
+                        "params": {}
+                    },
+                    "config_id": "string",
+                    "connector_id": "string",
+                    "connector_type": "string",
+                    "description": "string",
+                    "enable_host_enrichment": true,
+                    "enable_user_enrichment": true,
+                    "log_sources": [
+                        "string"
+                    ],
+                    "name": "string",
+                    "parser": "string",
+                    "vendor_name": "string",
+                    "vendor_product_name": "string"
+                }
+        config -- Dictionary.
+        config_id -- String.
+        connector_id -- String.
+        connector_type -- String.
+        description -- String.
+        enable_host_enrichment -- Boolean.
+        enable_user_enrichment -- Boolean.
+        log_sources -- String or list of strings.
+        name -- String.
+        parser -- String.
+        vendor_name -- String.
+        vendor_product_name -- String.
+                
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalCreateDataConnection
+        """
+        if not body:
+            body = ngsiem_data_connection_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalCreateDataConnection",
+            body=body
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def update_data_connection(self: object,
+                               body: dict = None,
+                               parameters: dict = None,
+                               **kwargs
+                               ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update a data connection.
+
+        Keyword arguments:
+        ids -- Unique identifier of the data connection. String.
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "config": {
+                        "auth": {},
+                        "name": "string",
+                        "params": {}
+                    },
+                    "config_id": "string",
+                    "description": "string",
+                    "enable_host_enrichment": true,
+                    "enable_user_enrichment": true,
+                    "name": "string",
+                    "parser": "string"
+                }
+        config -- Dictionary.
+        config_id -- String.
+        description -- String.
+        enable_host_enrichment -- Boolean.
+        enable_user_enrichment -- Boolean.
+        name -- String.
+        parser -- String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalUpdateDataConnection
+        """
+        if not body:
+            body = ngsiem_data_connection_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalUpdateDataConnection",
+            body=body,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_data_connection(self: object,
+                               *args,
+                               parameters: dict = None,
+                               **kwargs
+                               ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete a data connection.
+
+        Keyword arguments:
+        ids -- Unique identifier of the data connection. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalDeleteDataConnection
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalDeleteDataConnection",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def list_connector_configs(self: object,
+                               *args,
+                               parameters: dict = None,
+                               **kwargs
+                               ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """List configurations for a data connector.
+
+        Keyword arguments:
+        ids -- Unique identifier of the data connector. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalListConnectorConfigs
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalListConnectorConfigs",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
     UploadLookupV1 = upload_file
     GetLookupV1 = get_file
     GetLookupFromPackageWithNamespaceV1 = get_file_from_package_with_namespace
@@ -1324,3 +1763,15 @@ class NGSIEM(ServiceClass):
     ListLookupFiles = list_lookup_files
     ListParsers = list_parsers
     ListSavedQueries = list_saved_queries
+    UpdateLookupFileEntries = update_lookup_file_entries
+    ExternalListDataConnections = list_data_connections
+    ExternalListDataConnectors = list_data_connectors
+    ExternalGetDataConnectionStatus = get_provisioning_status
+    ExternalUpdateDataConnectionStatus = update_data_connection
+    ExternalGetDataConnectionToken = get_ingest_token
+    ExternalRegenerateDataConnectionToken = regenerate_ingest_token
+    ExternalGetDataConnectionByID = get_connection_by_id
+    ExternalCreateDataConnection = create_data_connection
+    ExternalUpdateDataConnection = update_data_connection
+    ExternalDeleteDataConnection = delete_data_connection
+    ExternalListConnectorConfigs = list_connector_configs

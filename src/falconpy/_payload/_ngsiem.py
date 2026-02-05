@@ -143,3 +143,40 @@ def ngsiem_parser_payload(passed_keywords: dict) -> dict:
             returned[key] = keyval
 
     return returned
+
+def ngsiem_data_connection_payload(passed_keywords: dict) -> dict:
+    """Data connecton payload handler.
+    {
+        "config": {
+            "auth": {},
+            "name": "string",
+            "params": {}
+        },
+        "config_id": "string",
+        "connector_id": "string",
+        "connector_type": "string",
+        "description": "string",
+        "enable_host_enrichment": true,
+        "enable_user_enrichment": true,
+        "log_sources": [
+            "string"
+        ],
+        "name": "string",
+        "parser": "string",
+        "vendor_name": "string",
+        "vendor_product_name": "string"
+    }
+    """
+    returned: dict = {}
+    keys = ["config", "config_id", "connector_id", "connector_type", "description", "enable_host_enrichment"
+            "enable_user_enrichment", "name", "parser", "vendor_name", "vendor_product_name"
+            ]
+    list_keys = ["log_sources"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            keyval = passed_keywords.get(key, None)
+            if key in list_keys and isinstance(keyval, str):
+                keyval = keyval.split(",")
+            returned[key] = keyval
+
+    return returned
