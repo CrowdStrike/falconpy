@@ -36,6 +36,50 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 
+def ioa_ss_default_exclusion_payload(passed_keywords: dict) -> dict:
+    """Generate payload for Self Service IOA Exclusions based on provided IFN/CLI for child, parent and grandparent.
+
+    {
+        "aid": "string",
+        "command_line": "string",
+        "grandparent_command_line": "string",
+        "grandparent_image_file_name": "string",
+        "image_file_name": "string",
+        "parent_command_line": "string",
+        "parent_image_file_name": "string"
+    }
+    """
+    returned_payload = {}
+
+    keys = ["aid", "command_line", "grandparent_command_line",
+            "grandparent_image_file_name", "image_file_name",
+            "parent_command_line", "parent_image_file_name"
+            ]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    return returned_payload
+
+def ioa_ss_exclusion_payload(passed_keywords: dict) -> dict:
+    """Create a report payload of Self Service IOA Exclusions scoped by the given filters.
+
+    {
+        "report_format": "string",
+        "search": {
+            "filter": "string",
+            "sort": "string"
+        }
+    }
+    """
+    returned_payload = {}
+
+    keys = ["report_format", "search"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    return returned_payload
 
 def ioa_exclusion_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted exclusion payload.

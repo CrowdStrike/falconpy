@@ -41,6 +41,7 @@ from .deprecated import _firewall_management_deprecated
 from .deprecated import _hosts_deprecated
 from .deprecated import _identity_protection_deprecated
 from .deprecated import _installation_tokens_deprecated
+from .deprecated import _ioa_exclusions_deprecated
 from .deprecated import _ioc_deprecated
 from .deprecated import _iocs_deprecated
 from .deprecated import _ods_deprecated
@@ -284,6 +285,7 @@ deprecated_endpoints.extend(_firewall_management_deprecated)
 deprecated_endpoints.extend(_hosts_deprecated)
 deprecated_endpoints.extend(_identity_protection_deprecated)
 deprecated_endpoints.extend(_installation_tokens_deprecated)
+deprecated_endpoints.extend(_ioa_exclusions_deprecated)
 deprecated_endpoints.extend(_ioc_deprecated)
 deprecated_endpoints.extend(_iocs_deprecated)
 deprecated_endpoints.extend(_ods_deprecated)

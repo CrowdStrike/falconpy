@@ -118,7 +118,12 @@ from ._detects import update_detects_payload
 from ._identity_protection import idp_policy_payload
 from ._incidents import incident_action_parameters
 # from ._intelligence_indicator_graph import indicator_graph_payload
-from ._ioa import ioa_exclusion_payload, ioa_custom_payload
+from ._ioa import (
+    ioa_exclusion_payload,
+    ioa_custom_payload,
+    ioa_ss_exclusion_payload,
+    ioa_ss_default_exclusion_payload
+    )
 from ._it_automation import (
     task_payload,
     task_execution_payload,
@@ -245,5 +250,5 @@ __all__ = [
     "case_manage_payload", "case_evidence_payload", "update_case_payload",
     "cloud_azure_registration_legacy_payload", "cloud_google_registration_create_payload",
     "cloud_security_create_group_payload", "aspm_group_payload", "cloud_policies_suppression_rule_payload",
-    "correlation_rules_template_payload"
+    "correlation_rules_template_payload", "ioa_ss_exclusion_payload", "ioa_ss_default_exclusion_payload"
 ]
