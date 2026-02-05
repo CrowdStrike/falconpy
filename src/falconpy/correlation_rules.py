@@ -784,7 +784,7 @@ class CorrelationRules(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_rule_templates_by_id(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Retrieve rule templates by IDs
+        """Retrieve rule templates by IDs.
 
         Keyword arguments:
         ids -- The IDs. String or list of strings.
@@ -825,3 +825,6 @@ class CorrelationRules(ServiceClass):
     entities_rules_patch_v1 = update_rule
     queries_rules_get_v1 = query_rules
     queries_rules_get_v2 = query_rules_v2
+    queries_templates_get_v1Mixin0 = search_rule_template_ids
+    entities_templates_rules_post_v1 = create_rule_from_template
+    entities_templates_get_v1Mixin0 = get_rule_templates_by_id
