@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302
 
 _ngsiem_endpoints = [
   [
@@ -232,8 +233,14 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party",
+          "dashboards"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party, dashboards",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
       }
@@ -247,8 +254,13 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "formData"
       },
@@ -259,7 +271,7 @@ _ngsiem_endpoints = [
         "in": "formData"
       },
       {
-        "type": "string",
+        "type": "file",
         "description": "LogScale dashboard YAML template content, see schema at https://schemas.humio.com/",
         "name": "yaml_template",
         "in": "formData"
@@ -270,13 +282,17 @@ _ngsiem_endpoints = [
     "UpdateDashboardFromTemplate",
     "PATCH",
     "/ngsiem-content/entities/dashboards-template/v1",
-    "Update Dashboard from LogScale YAML Template in NGSIEM. Please note a successful update will result in a "
-    "new ID value being returned.",
+    "Update Dashboard from LogScale YAML Template in NGSIEM.",
     "ngsiem",
     [
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "formData"
       },
@@ -287,7 +303,7 @@ _ngsiem_endpoints = [
         "in": "formData"
       },
       {
-        "type": "string",
+        "type": "file",
         "description": "LogScale dashboard YAML template content, see schema at https://schemas.humio.com/",
         "name": "yaml_template",
         "in": "formData"
@@ -308,10 +324,75 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "UpdateLookupFileEntries",
+    "PATCH",
+    "/ngsiem-content/entities/lookupfiles-entries/v1",
+    "Update entries in an existing Lookup File in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party",
+          "parsers-repository"
+        ],
+        "type": "string",
+        "description": "name of search domain (view or repo)",
+        "name": "search_domain",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "Filename of the lookup file to update",
+        "name": "filename",
+        "in": "formData"
+      },
+      {
+        "type": "file",
+        "description": "The file content for updating or appending the entries",
+        "name": "file",
+        "in": "formData"
+      },
+      {
+        "enum": [
+          "append",
+          "update"
+        ],
+        "type": "string",
+        "description": "How to update the file entries",
+        "name": "update_mode",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "For update mode, the comma separated list of key columns to use when matching entries "
+        "(REQUIRED when update_mode=update)",
+        "name": "key_columns",
+        "in": "formData"
+      },
+      {
+        "enum": [
+          "true",
+          "false"
+        ],
+        "type": "string",
+        "description": "For update mode, whether to ignore case when matching keys (REQUIRED when update_mode=update)",
+        "name": "ignore_case",
+        "in": "formData"
       }
     ]
   ],
@@ -329,9 +410,15 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party",
+          "dashboards",
+          "parsers-repository"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party, dashboards, "
-        "parsers-repository",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
       }
@@ -345,8 +432,14 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party",
+          "parsers-repository"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party, parsers-repository",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "formData"
       },
@@ -357,7 +450,7 @@ _ngsiem_endpoints = [
         "in": "formData"
       },
       {
-        "type": "string",
+        "type": "file",
         "description": "file content to upload",
         "name": "file",
         "in": "formData"
@@ -368,12 +461,18 @@ _ngsiem_endpoints = [
     "UpdateLookupFile",
     "PATCH",
     "/ngsiem-content/entities/lookupfiles/v1",
-    "Update Lookup File in NGSIEM",
+    "Update an entire Lookup File in NGSIEM",
     "ngsiem",
     [
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party",
+          "parsers-repository"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party, parsers-repository",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "formData"
       },
@@ -384,7 +483,7 @@ _ngsiem_endpoints = [
         "in": "formData"
       },
       {
-        "type": "string",
+        "type": "file",
         "description": "file content to upload",
         "name": "file",
         "in": "formData"
@@ -405,8 +504,14 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party",
+          "parsers-repository"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party, parsers-repository",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
       }
@@ -426,8 +531,11 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "parsers-repository"
+        ],
         "type": "string",
-        "description": "name of repository, options; parsers-repository",
+        "description": "name of repository",
         "name": "repository",
         "in": "query"
       }
@@ -441,19 +549,47 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
+        "enum": [
+          "parsers-repository"
+        ],
         "type": "string",
-        "description": "name of repository, options; parsers-repository",
+        "description": "name of repository",
+        "name": "repository",
+        "in": "formData"
+      },
+      {
+        "type": "file",
+        "description": "LogScale Parser YAML template content, see schema at https://schemas.humio.com/",
+        "name": "yaml_template",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
+    "UpdateParserFromTemplate",
+    "PATCH",
+    "/ngsiem-content/entities/parsers-template/v1",
+    "Update Parser in NGSIEM from YAML Template. Please note that name changes are not supported, but rather "
+    "should be created as a new parser.",
+    "ngsiem",
+    [
+      {
+        "enum": [
+          "parsers-repository"
+        ],
+        "type": "string",
+        "description": "name of repository",
         "name": "repository",
         "in": "formData"
       },
       {
         "type": "string",
-        "description": "name of the parser",
-        "name": "name",
+        "description": "id of the parser",
+        "name": "ids",
         "in": "formData"
       },
       {
-        "type": "string",
+        "type": "file",
         "description": "LogScale Parser YAML template content, see schema at https://schemas.humio.com/",
         "name": "yaml_template",
         "in": "formData"
@@ -464,7 +600,7 @@ _ngsiem_endpoints = [
     "GetParser",
     "GET",
     "/ngsiem-content/entities/parsers/v1",
-    "Retrieve Parser in NGSIEM",
+    "Retrieve Parser in NGSIEM. This endpoint has been deprecated in favour of the GET /entities/parsers-template/v1 API.",
     "ngsiem",
     [
       {
@@ -474,8 +610,11 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "parsers-repository"
+        ],
         "type": "string",
-        "description": "name of repository, options; parsers-repository",
+        "description": "name of repository",
         "name": "repository",
         "in": "query"
       }
@@ -485,7 +624,7 @@ _ngsiem_endpoints = [
     "CreateParser",
     "POST",
     "/ngsiem-content/entities/parsers/v1",
-    "Create Parser in NGSIEM",
+    "Create Parser in NGSIEM. This endpoint has been deprecated in favour of the POST /entities/parsers-template/v1 API.",
     "ngsiem",
     [
       {
@@ -500,7 +639,8 @@ _ngsiem_endpoints = [
     "UpdateParser",
     "PATCH",
     "/ngsiem-content/entities/parsers/v1",
-    "Update Parser in NGSIEM. Please note that name changes are not supported, but rather should be created as a new parser.",
+    "Update Parser in NGSIEM. Please note that name changes are not supported, but rather should be created as "
+    "a new parser.  This endpoint has been deprecated in favour of the PATCH /entities/parsers-template/v1 API.",
     "ngsiem",
     [
       {
@@ -525,8 +665,11 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "parsers-repository"
+        ],
         "type": "string",
-        "description": "name of repository, options; parsers-repository",
+        "description": "name of repository",
         "name": "repository",
         "in": "query"
       }
@@ -546,8 +689,14 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party",
+          "dashboards"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party, dashboards",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
       }
@@ -561,13 +710,18 @@ _ngsiem_endpoints = [
     "ngsiem",
     [
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "formData"
       },
       {
-        "type": "string",
+        "type": "file",
         "description": "LogScale Saved Query YAML template content, see schema at https://schemas.humio.com/",
         "name": "yaml_template",
         "in": "formData"
@@ -578,24 +732,28 @@ _ngsiem_endpoints = [
     "UpdateSavedQueryFromTemplate",
     "PATCH",
     "/ngsiem-content/entities/savedqueries-template/v1",
-    "Update Saved Query from LogScale YAML Template in NGSIEM. Please note a successful update will result in "
-    "a new ID value being returned.",
+    "Update Saved Query from LogScale YAML Template in NGSIEM.",
     "ngsiem",
     [
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "formData"
       },
       {
         "type": "string",
-        "description": "id of the dashboard",
+        "description": "id of the saved query",
         "name": "ids",
         "in": "formData"
       },
       {
-        "type": "string",
+        "type": "file",
         "description": "LogScale Saved Query YAML template content, see schema at https://schemas.humio.com/",
         "name": "yaml_template",
         "in": "formData"
@@ -616,8 +774,13 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
       }
@@ -654,8 +817,14 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party",
+          "dashboards"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party, dashboards",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
       }
@@ -692,9 +861,15 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party",
+          "dashboards",
+          "parsers-repository"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party, dashboards, "
-        "parsers-repository",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
       }
@@ -731,8 +906,11 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "parsers-repository"
+        ],
         "type": "string",
-        "description": "name of repository, options; parsers-repository",
+        "description": "name of repository",
         "name": "repository",
         "in": "query"
       }
@@ -769,10 +947,242 @@ _ngsiem_endpoints = [
         "in": "query"
       },
       {
+        "enum": [
+          "all",
+          "falcon",
+          "third-party",
+          "dashboards"
+        ],
         "type": "string",
-        "description": "name of search domain (view or repo), options; all, falcon, third-party, dashboards",
+        "description": "name of search domain (view or repo)",
         "name": "search_domain",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "ExternalListDataConnections",
+    "GET",
+    "/ngsiem/combined/connections/v1",
+    "List and search data connections",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "Optional filter criteria in FQL format",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Starting position for pagination",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Maximum number of items to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort field and direction",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ExternalListDataConnectors",
+    "GET",
+    "/ngsiem/combined/connectors/v1",
+    "List available data connectors",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "Optional filter criteria in FQL format",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Starting position for pagination",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Maximum number of items to return",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort field and direction",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "ExternalGetDataConnectionStatus",
+    "GET",
+    "/ngsiem/entities/connections/status/v1",
+    "Get data connection provisioning status",
+    "ngsiem",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Unique identifier of the data connection",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ExternalUpdateDataConnectionStatus",
+    "PATCH",
+    "/ngsiem/entities/connections/status/v1",
+    "Update data connection status",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "Unique identifier of the data connection",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ExternalGetDataConnectionToken",
+    "GET",
+    "/ngsiem/entities/connections/token/v1",
+    "Get Ingest token for data connection",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "Unique identifier of the data connection",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ExternalRegenerateDataConnectionToken",
+    "POST",
+    "/ngsiem/entities/connections/token/v1",
+    "Regenerate Ingest token for data connection",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "Unique identifier of the data connection",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ExternalGetDataConnectionByID",
+    "GET",
+    "/ngsiem/entities/connections/v1",
+    "Get data connection by ID",
+    "ngsiem",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Unique identifier of the data connection",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ExternalCreateDataConnection",
+    "POST",
+    "/ngsiem/entities/connections/v1",
+    "Create a new data connection",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ExternalUpdateDataConnection",
+    "PATCH",
+    "/ngsiem/entities/connections/v1",
+    "Update a data connection",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "Unique identifier of the data connection",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ExternalDeleteDataConnection",
+    "DELETE",
+    "/ngsiem/entities/connections/v1",
+    "Delete a data connection",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "Unique identifier of the data connection",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ExternalListConnectorConfigs",
+    "GET",
+    "/ngsiem/entities/connectors/configs/v1",
+    "List configurations for a data connector",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "Unique identifier of the data connector",
+        "name": "ids",
+        "in": "query",
+        "required": True
       }
     ]
   ]

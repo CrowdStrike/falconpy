@@ -125,6 +125,42 @@ class TestNGSIEM:
             "ListLookupFiles": falcon.list_lookup_files(limit="1"),
             "ListParsers": falcon.list_parsers(limit="1"),
             "ListSavedQueries": falcon.list_saved_queries(limit="1"),
+            "UpdateLookupFileEntries": falcon.update_lookup_file_entries(search_domain="all", filename="testfile.csv", file=test_db, update_mode="append"),
+            "UpdateLookupFileEntriesUpdate": falcon.update_lookup_file_entries(search_domain="all", filename="testfile.csv", file=test_db, update_mode="update", key_columns="id", ignore_case="false"),
+            "UpdateLookupFileEntriesFail": falcon.update_lookup_file_entries(search_domain="all", filename="testfile.csv"),
+            "ListDataConnections": falcon.list_data_connections(limit=10, offset=0),
+            "ListDataConnectors": falcon.list_data_connectors(limit=10, offset=0),
+            "GetProvisioningStatus": falcon.get_provisioning_status(ids="12345678"),
+            "UpdateConnectionStatus": falcon.update_connection_status(ids="12345678", status="active"),
+            "GetIngestToken": falcon.get_ingest_token(ids="12345678"),
+            "RegenerateIngestToken": falcon.regenerate_ingest_token(ids="12345678"),
+            "GetConnectionById": falcon.get_connection_by_id(ids="12345678"),
+            "CreateDataConnection": falcon.create_data_connection(
+                config={"name": "test", "auth": {}, "params": {}},
+                config_id="12345678",
+                connector_id="12345678",
+                connector_type="test",
+                description="test",
+                enable_host_enrichment=True,
+                enable_user_enrichment=True,
+                log_sources=["test"],
+                name="test",
+                parser="test",
+                vendor_name="test",
+                vendor_product_name="test"
+            ),
+            "UpdateDataConnection": falcon.update_data_connection(
+                ids="12345678",
+                config={"name": "test", "auth": {}, "params": {}},
+                config_id="12345678",
+                description="test",
+                enable_host_enrichment=True,
+                enable_user_enrichment=True,
+                name="test",
+                parser="test"
+            ),
+            "DeleteDataConnection": falcon.delete_data_connection(ids="12345678"),
+            "ListConnectorConfigs": falcon.list_connector_configs(ids="12345678"),
         }
 
         for test in more_tests:
