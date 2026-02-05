@@ -66,6 +66,20 @@ _quick_scan_pro_endpoints = [
         "description": "If true, after upload, it starts scanning immediately. Default scan mode is 'false'",
         "name": "scan",
         "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "MULTIPART ONLY - Password for encrypted archives (use for multipart/form-data "
+        "uploads). If 'scan' is true, the value is used for the scan just starting.",
+        "name": "password",
+        "in": "formData"
+      },
+      {
+        "type": "string",
+        "description": "OCTET-STREAM ONLY - Password for encrypted archives (use for octet-stream uploads). If "
+        "'scan' is true, the value is used for the scan just starting.",
+        "name": "X-File-Password",
+        "in": "header"
       }
     ]
   ],

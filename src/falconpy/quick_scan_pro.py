@@ -68,6 +68,10 @@ class QuickScanPro(ServiceClass):
         file -- Binary file to be uploaded. Max file size: 256 MB.
         scan -- If true, after upload, it starts scanning immediately. Default scan mode is 'false'
         file_name -- Name of the file uploaded. Defaults to "UploadedFile".
+        password -- MULTIPART ONLY - Password for encrypted archives (use for multipart/form-data uploads).
+        If 'scan' is true, the value is used for the scan just starting. String.
+        X-File-Password -- OCTET-STREAM ONLY - Password for encrypted archives (use for octet-stream uploads).
+        If 'scan' is true, the value is used for the scan just starting. String.
 
         This method only supports keywords for providing arguments.
 
