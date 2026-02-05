@@ -62,6 +62,7 @@ from ._real_time_response import _real_time_response_endpoints
 from ._real_time_response_admin import _real_time_response_admin_endpoints
 from ._report_executions import _report_executions_endpoints
 from ._scheduled_reports import _scheduled_reports_endpoints
+from ._workflows import _workflows_endpoints
 from ._zero_trust_assessment import _zero_trust_assessment_endpoints
 from ._mapping import _deprecated_op_mapping, _deprecated_cls_mapping
 from ._certificate_based_exclusions import _certificate_based_exclusions_endpoints
@@ -97,6 +98,7 @@ _real_time_response_deprecated = _real_time_response_endpoints
 _real_time_response_admin_deprecated = _real_time_response_admin_endpoints
 _report_executions_deprecated = _report_executions_endpoints
 _scheduled_reports_deprecated = _scheduled_reports_endpoints
+_workflows_deprecated = _workflows_endpoints
 _zero_trust_assessment_deprecated = _zero_trust_assessment_endpoints
 _certificate_based_exclusions_deprecated = _certificate_based_exclusions_endpoints
 _deprecated_operation_mapping = _deprecated_op_mapping
