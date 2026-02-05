@@ -114,6 +114,44 @@ _sensor_download_endpoints = [
     ]
   ],
   [
+    "GetCombinedSensorInstallersByQueryV3",
+    "GET",
+    "/sensors/combined/installers/v3",
+    "Get sensor installer details by provided query",
+    "sensor_download",
+    [
+      {
+        "type": "integer",
+        "description": "The first item to return, where 0 is the latest item. Use with the limit parameter to "
+        "manage pagination of results.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The number of items to return in this response (default: 100, max: 500). Use with the "
+        "offset parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort items using their properties. Common sort options "
+        "include:\\n\\n<ul><li>version|asc</li><li>release_date|desc</li></ul>",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter items using a query in Falcon Query Language (FQL). An asterisk wildcard * "
+        "includes all results.\\n\\nCommon filter options "
+        "include:\\n<ul><li>platform:\\\"windows\\\"</li><li>version:>\\\"5.2\\\"</li></ul>",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "DownloadSensorInstallerById",
     "GET",
     "/sensors/entities/download-installer/v1",
@@ -133,6 +171,22 @@ _sensor_download_endpoints = [
     "DownloadSensorInstallerByIdV2",
     "GET",
     "/sensors/entities/download-installer/v2",
+    "Download sensor installer by SHA256 ID",
+    "sensor_download",
+    [
+      {
+        "type": "string",
+        "description": "SHA256 of the installer to download",
+        "name": "id",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "DownloadSensorInstallerByIdV3",
+    "GET",
+    "/sensors/entities/download-installer/v3",
     "Download sensor installer by SHA256 ID",
     "sensor_download",
     [
@@ -169,6 +223,26 @@ _sensor_download_endpoints = [
     "GetSensorInstallersEntitiesV2",
     "GET",
     "/sensors/entities/installers/v2",
+    "Get sensor installer details by provided SHA256 IDs",
+    "sensor_download",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The IDs of the installers",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetSensorInstallersEntitiesV3",
+    "GET",
+    "/sensors/entities/installers/v3",
     "Get sensor installer details by provided SHA256 IDs",
     "sensor_download",
     [
@@ -264,6 +338,44 @@ _sensor_download_endpoints = [
         "description": "Filter items using a query in Falcon Query Language (FQL). An asterisk wildcard * "
         "includes all results.\n\nCommon filter options "
         "include:\n<ul><li>platform:\"windows\"</li><li>version:>\"5.2\"</li></ul>",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "GetSensorInstallersByQueryV3",
+    "GET",
+    "/sensors/queries/installers/v3",
+    "Get sensor installer IDs by provided query",
+    "sensor_download",
+    [
+      {
+        "type": "integer",
+        "description": "The first item to return, where 0 is the latest item. Use with the limit parameter to "
+        "manage pagination of results.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The number of items to return in this response (default: 100, max: 500). Use with the "
+        "offset parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort items using their properties. Common sort options "
+        "include:\\n\\n<ul><li>version|asc</li><li>release_date|desc</li></ul>",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter items using a query in Falcon Query Language (FQL). An asterisk wildcard * "
+        "includes all results.\\n\\nCommon filter options "
+        "include:\\n<ul><li>platform:\\\"windows\\\"</li><li>version:>\\\"5.2\\\"</li></ul>",
         "name": "filter",
         "in": "query"
       }

@@ -83,6 +83,11 @@ class TestSensorDownload():
         resp = sensor_download_client.GetCombinedSensorInstallersByQueryV2(filter='platform:"windows"', sort="release_date|desc")
         return True if resp["status_code"] in AllowedResponses else False
 
+    @staticmethod
+    def _get_metadata_for_filter_v3():
+        resp = sensor_download_client.get_combined_sensor_installers_by_query_v3(filter='platform:"windows"', sort="release_date|desc")
+        return True if resp["status_code"] in AllowedResponses else False
+
     def _get_metadata_for_ids(self):
         sha_ids = self._get_multiple_shas()
         resp = sensor_download_client.GetSensorInstallersEntities(ids=sha_ids)
@@ -93,6 +98,11 @@ class TestSensorDownload():
         resp = sensor_download_client.GetSensorInstallersEntitiesV2(ids=sha_ids)
         return True if resp["status_code"] in AllowedResponses else False
 
+    def _get_metadata_for_ids_v3(self):
+        sha_ids = self._get_multiple_shas()
+        resp = sensor_download_client.get_sensor_installer_entities_v3(ids=sha_ids)
+        return True if resp["status_code"] in AllowedResponses else False
+
     @staticmethod
     def _get_all_metadata():
         resp = sensor_download_client.GetCombinedSensorInstallersByQuery()
@@ -101,6 +111,16 @@ class TestSensorDownload():
     @staticmethod
     def _get_all_metadata2():
         resp = sensor_download_client.GetSensorInstallersByQuery()
+        return True if resp["status_code"] in AllowedResponses else False
+
+    @staticmethod
+    def _get_all_metadata_v3():
+        resp = sensor_download_client.get_sensor_installers_by_query_v3(filter='platform:"linux"', sort="release_date|desc")
+        return True if resp["status_code"] in AllowedResponses else False
+
+    def _download_sensor_v3(self):
+        sha_id = self._get_multiple_shas()[0]
+        resp = sensor_download_client.download_sensor_installer_v3(id=sha_id)
         return True if resp["status_code"] in AllowedResponses else False
 
     def test_download_windows_sensor(self):
@@ -138,3 +158,15 @@ class TestSensorDownload():
 
     def test_get_all_metadata2(self):
         assert self._get_all_metadata2() is True
+
+    def test_get_sha_window_sensor_v3(self):
+        assert self._get_metadata_for_filter_v3() is True
+
+    def test_get_multiple_shas_v3(self):
+        assert self._get_metadata_for_ids_v3() is True
+
+    def test_get_all_metadata_v3(self):
+        assert self._get_all_metadata_v3() is True
+
+    def test_download_sensor_v3(self):
+        assert self._download_sensor_v3() is True
