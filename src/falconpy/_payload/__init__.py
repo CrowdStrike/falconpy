@@ -27,6 +27,7 @@ from ._generic import (
     simple_action_parameter,
     token_settings_payload
     )
+from ._admission_control_policies import acp_custom_rules_policy_payload
 from ._api_integrations import api_plugin_command_payload
 from ._aspm import (
     aspm_delete_tag_payload,
@@ -261,5 +262,5 @@ __all__ = [
     "cloud_security_create_group_payload", "aspm_group_payload", "cloud_policies_suppression_rule_payload",
     "correlation_rules_template_payload", "ioa_ss_exclusion_payload", "ioa_ss_default_exclusion_payload",
     "ml_exclusions_actions_payload", "ml_exclusions_report_payload", "ml_exclusions_update_payload",
-    "ngsiem_data_connection_payload"
+    "ngsiem_data_connection_payload", "acp_custom_rules_policy_payload"
 ]
