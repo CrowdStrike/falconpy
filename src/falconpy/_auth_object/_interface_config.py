@@ -74,7 +74,8 @@ class InterfaceConfiguration:
     @base_url.setter
     def base_url(self, value: str):
         """Change the base URL."""
-        self._base_url = value
+        if value and isinstance(value, str):
+            self._base_url = value
 
     @property
     def proxy(self) -> Optional[Dict[str, str]]:
