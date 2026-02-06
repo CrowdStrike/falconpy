@@ -36,8 +36,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 from typing import Dict, Union
-
-from samples.sensor_update_policies.policy_wonk import create_policy
 from ._util import force_default, process_service_request, handle_single_argument
 from ._payload import acp_custom_rules_policy_payload
 from ._result import Result
@@ -57,6 +55,7 @@ class AdmissionControlPolicies(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (oauth2.py)
     """
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_policies(self: object,
                      *args,
@@ -223,15 +222,14 @@ class AdmissionControlPolicies(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-add-host-groups
         """
         if not body:
+            body = {}
             keys = ["host_groups", "id"]
             for key in keys:
                 provided = kwargs.get(key, None)
                 if provided:
-                    if provided == "host_groups" and isinstance(provided, str):
+                    if key == "host_groups" and isinstance(provided, str):
                         provided = provided.split(",")
-                        body[provided] = kwargs.get(key, None)
-                    else:
-                        body[provided] = kwargs.get(key, None)
+                    body[key] = provided
 
         return process_service_request(
             calling_object=self,
@@ -306,6 +304,7 @@ class AdmissionControlPolicies(ServiceClass):
     @force_default(defaults=["body"], default_types=["dict"])
     def add_custom_rules(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Add one or more custom Rego rules to a rule group in an admission control policy.
+
         The requested custom rules are also added to all other unspecified rule groups in the policy with action 'Disabled'.
 
         Keyword arguments:
@@ -462,9 +461,10 @@ class AdmissionControlPolicies(ServiceClass):
             body=body
             )
 
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def create_rule_groups(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_rule_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create one or more rule groups and add them to an existing admission control policy.
+
         The list of new rule groups will be created with the last rule group having highest precedence,
         second to last with second highest precedence, and so on.
 
@@ -503,7 +503,7 @@ class AdmissionControlPolicies(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def update_rule_groups(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Update a rule group. 
+        """Update a rule group.
 
         Keyword arguments:
         body -- full body payload, not required when using other keywords.
@@ -538,7 +538,7 @@ class AdmissionControlPolicies(ServiceClass):
                 }
         id -- String.
         rule_groups -- List of dictionaries.
-        
+
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -548,6 +548,9 @@ class AdmissionControlPolicies(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-update-rule-groups
         """
+        if not body:
+            body = acp_custom_rules_policy_payload(passed_keywords=kwargs)
+
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -587,7 +590,7 @@ class AdmissionControlPolicies(ServiceClass):
 
         Keyword arguments:
         filter -- FQL filter. String.
-                  Allowed properties: 
+                  Allowed properties:
                     precedence          created_timestamp
                     modified_timestamp  name
                     description
