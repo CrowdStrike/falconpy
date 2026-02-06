@@ -807,6 +807,7 @@ def retrieve_relay_node_payload(passed_keywords: dict) -> dict:
 
     return returned
 
+
 def aspm_group_payload(passed_keywords: dict) -> dict:
     """Craft a properly formatted ASPM group update payload.
 
@@ -823,7 +824,7 @@ def aspm_group_payload(passed_keywords: dict) -> dict:
     }
     """
     keys = ["children", "description", "name", "scope"]
-    
+
     returned = {}
 
     for key in keys:

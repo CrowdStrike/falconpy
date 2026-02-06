@@ -16,7 +16,7 @@ from falconpy import ASPM
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = ASPM(auth_object=config)
-AllowedResponses = [200, 201, 204, 207, 400, 403, 404, 406, 429, 500, 503]
+AllowedResponses = [200, 201, 204, 207, 400, 403, 404, 405, 406, 429, 500, 503]
 
 
 class TestASPM:
@@ -100,8 +100,11 @@ class TestASPM:
                                                 scope="string"
                                                 ),
             "DeleteGroup": falcon.delete_group(id=42),
+            "DeleteGroupFail": falcon.delete_group(),
             "UpdateDefaultGroup": falcon.update_default_group(id=42),
+            "UpdateDefaultGroupFail": falcon.update_default_group(),
             "GetGroupV2": falcon.get_group_v2(id=42),
+            "GetGroupV2Fail": falcon.get_group_v2(),
             "UpdateGroup": falcon.update_group(id=42,
                                                children=[1],
                                                group_type="string",
@@ -109,6 +112,12 @@ class TestASPM:
                                                parent_id=1,
                                                scope="string"
                                                ),
+            "UpdateGroupFail": falcon.update_group(children=[1],
+                                                   group_type="string",
+                                                   is_default="True",
+                                                   parent_id=1,
+                                                   scope="string"
+                                                   ),
             "GetGroupHierarchy": falcon.get_group_hierarchy(),
             "GetGroupsV2": falcon.get_groups_v2(type="string")
         }
@@ -116,7 +125,7 @@ class TestASPM:
             if not isinstance(tests[key], bytes):
                 if tests[key]["status_code"] not in AllowedResponses:
                     error_checks = False
-                    # print(key)
-                    # print(tests[key])
+                    print(key)
+                    print(tests[key])
                 
         assert error_checks
