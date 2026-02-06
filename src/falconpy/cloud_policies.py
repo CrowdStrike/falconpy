@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302
 from typing import Dict, Union
 from ._util import force_default, process_service_request, handle_single_argument
 from ._result import Result
@@ -692,10 +693,14 @@ class CloudPolicies(ServiceClass):
 
         Keyword arguments:
         body -- Full body payload dictionary in JSON format. Not required if using other keywords.
-                Rule severity integer to provide maps to the following: 0=Critical, 1=High, 2=Medium and 3=Low.
-                For CSPM IOM Custom Rules, logic is mandatory and parent_rule_id should not be specified.
-                For Runtime IOM Custom Rules (KAC), logic is mandatory, and resource_type + parent_rule_id should not be specified.
-                For Managed Rule duplication, parent_rule_id is mandatory and logic should be not specified.
+                Rule severity integer to provide maps to the following:
+                0=Critical, 1=High, 2=Medium and 3=Low.
+                For CSPM IOM Custom Rules, logic is mandatory and
+                parent_rule_id should not be specified.
+                For Runtime IOM Custom Rules (KAC), logic is mandatory,
+                and resource_type + parent_rule_id should not be specified.
+                For Managed Rule duplication, parent_rule_id is mandatory
+                and logic should be not specified.
                 {
                     "alert_info": "string",
                     "attack_types": "string",
@@ -998,7 +1003,6 @@ class CloudPolicies(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
-
     @force_default(defaults=["body"], default_types=["dict"])
     def create_suppression_rule(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create a new suppression rule.
@@ -1168,7 +1172,7 @@ class CloudPolicies(ServiceClass):
         suppression_comment -- String.
         suppression_expiration_date -- String.
         suppression_reason -- String.
-        
+
         Returns: dict object containing API response.
 
         HTTP Method: PATCH
@@ -1227,11 +1231,11 @@ class CloudPolicies(ServiceClass):
                       subdomain   suppression_reason  suppression_expiration_date
                       create_by   created_at          last_modified_at
                       disabled    groups
-            
+
         limit -- The maximum number of resources to return. The maximum allowed is 50. Integer.
         offset -- The number of results to skip before starting to return results. Integer.
         sort -- Field to sort on. String.
-                Sortable fields: 
+                Sortable fields:
                     name        description         domain
                     subdomain   suppression_reason  suppression_expiration_date
                     create_by   created_at          last_modified_at
@@ -1255,8 +1259,6 @@ class CloudPolicies(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
-
-
 
     ReplaceControlRules = replace_control_rules
     GetComplianceControls = get_compliance_controls
@@ -1283,6 +1285,7 @@ class CloudPolicies(ServiceClass):
     GetRuleInputSchema = get_rule_input_schema
     GetEnrichedAsset = get_enriched_asset
     QuerySuppressionRules = query_suppression_rules
+
     DeleteSuppressionRules = delete_suppression_rules
     UpdateSuppressionRule = update_suppression_rule
     CreateSuppressionRule = create_suppression_rule
