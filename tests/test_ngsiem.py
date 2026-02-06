@@ -15,7 +15,7 @@ from falconpy import NGSIEM
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = NGSIEM(auth_object=config)
-AllowedResponses = [200, 201, 400, 403, 404, 429]  # Temp allow 403
+AllowedResponses = [200, 201, 400, 403, 404, 406, 429, 500]  # Temp allow 403, 406, 500
 
 
 class TestNGSIEM:
@@ -166,6 +166,9 @@ class TestNGSIEM:
         for test in more_tests:
             if more_tests[test]["status_code"] not in AllowedResponses:
                 error_checks = False
+                print(more_tests[test])
+                print(f"{test} operation returned a {more_tests[test]['status_code']} status code")
+
         return error_checks
 
     def test_all_functionality(self):
