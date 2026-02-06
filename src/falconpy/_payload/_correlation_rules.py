@@ -35,10 +35,9 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, List, Union
 
 
-def correlation_rules_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int, bool]]]]:
+def correlation_rules_payload(passed_keywords: dict) -> dict:
     """Craft a properly formatted correlation rules payload.
 
     {
@@ -98,7 +97,7 @@ def correlation_rules_payload(passed_keywords: dict) -> Dict[str, List[Dict[str,
     return returned
 
 
-def correlation_rules_export_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int, bool]]]]:
+def correlation_rules_export_payload(passed_keywords: dict) -> dict:
     """Craft a properly formatted correlation rule export payload.
 
     {
@@ -126,8 +125,10 @@ def correlation_rules_export_payload(passed_keywords: dict) -> Dict[str, List[Di
 
     return returned
 
-def correlation_rules_template_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int, bool]]]]:
+
+def correlation_rules_template_payload(passed_keywords: dict) -> dict:
     """Craft a properly formatted correlation rule export payload.
+
     [
     {
         "customer_id": "string",
@@ -220,7 +221,7 @@ def correlation_rules_template_payload(passed_keywords: dict) -> Dict[str, List[
     for key in keys:
         if passed_keywords.get(key, None) is not None:
             returned[key] = passed_keywords.get(key, None)
-    
+
     returned_payload.append(returned)
 
     return returned_payload

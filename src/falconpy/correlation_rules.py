@@ -640,7 +640,9 @@ class CorrelationRules(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_rule_template_ids(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def search_rule_template_ids(
+            self: object, parameters: dict = None, **kwargs
+    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search rule template IDs matching the filter.
 
         Keyword arguments:
@@ -771,7 +773,6 @@ class CorrelationRules(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/correlation-rules/entities.templates_rules.post.v1
         """
-
         if not body:
             body = correlation_rules_template_payload(passed_keywords=kwargs)
 
@@ -783,7 +784,9 @@ class CorrelationRules(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rule_templates_by_id(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_rule_templates_by_id(
+            self: object, *args, parameters: dict = None, **kwargs
+    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve rule templates by IDs.
 
         Keyword arguments:
