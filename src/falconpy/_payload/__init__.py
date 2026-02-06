@@ -119,7 +119,7 @@ from ._detects import update_detects_payload
 from ._identity_protection import idp_policy_payload
 from ._incidents import incident_action_parameters
 # from ._intelligence_indicator_graph import indicator_graph_payload
-from ._ioa import (
+from ._ioa_exclusions import (
     ioa_exclusion_payload,
     ioa_custom_payload,
     ioa_ss_exclusion_payload,
