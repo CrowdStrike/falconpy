@@ -35,11 +35,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, List, Union
 
 
 def ml_exclusions_actions_payload(passed_keywords: dict) -> dict:
     """Actions used to manipulate the content of exclusions, with ancestor fields.
+
     {
         "action_parameters": [
             {
@@ -63,6 +63,7 @@ def ml_exclusions_actions_payload(passed_keywords: dict) -> dict:
 
     return returned_payload
 
+
 def ml_exclusions_report_payload(passed_keywords: dict) -> dict:
     """Create a report of ML exclusions scoped by the given filters.
 
@@ -83,8 +84,10 @@ def ml_exclusions_report_payload(passed_keywords: dict) -> dict:
 
     return returned_payload
 
+
 def ml_exclusions_update_payload(passed_keywords: dict) -> dict:
-    """Generic update the exclusions by id, with ancestor fields.
+    """Update the exclusions by id, with ancestor fields.
+
     {
         "comment": "string",
         "excluded_from": [
