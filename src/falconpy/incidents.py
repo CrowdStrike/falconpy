@@ -212,7 +212,7 @@ class Incidents(ServiceClass):
         """Get details on incidents by providing incident IDs.
 
         DEPRECATED: the Incidents API will be removed in March 2026.
-        
+
         Keyword arguments:
         body -- full body payload, not required if ids are provided as keyword.
                 {
@@ -246,7 +246,7 @@ class Incidents(ServiceClass):
         """Search for behaviors by providing an FQL filter, sorting, and paging details.
 
         DEPRECATED: the Incidents API will be removed in March 2026.
-        
+
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
         limit -- The maximum number of records to return in this response. [Integer, 1-500]
@@ -278,7 +278,7 @@ class Incidents(ServiceClass):
         """Search for incidents by providing an FQL filter, sorting, and paging details.
 
         DEPRECATED: the Incidents API will be removed in March 2026.
-        
+
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
         limit -- The maximum number of records to return in this response. [Integer, 1-500]
