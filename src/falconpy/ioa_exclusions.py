@@ -60,6 +60,7 @@ class IOAExclusions(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
     def get_ss_exclusion_aggregates(self: object,
                                     body: dict = None,
@@ -206,7 +207,9 @@ class IOAExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_ss_exclusion_rules_v2(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_ss_exclusion_rules_v2(
+            self: object, *args, parameters: dict = None, **kwargs
+    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the Self Service IOA Exclusions rules by id.
 
         Keyword arguments:
@@ -361,8 +364,12 @@ class IOAExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_ss_exclusion_matched_rules(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Get Self Service IOA Exclusions rules for matched IFN/CLI for child, parent and grandparent.
+    def get_ss_exclusion_matched_rules(
+            self: object, body: dict = None, **kwargs
+    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get Self Service IOA Exclusions rules for matched IFN/CLI.
+
+        For child, parent and grandparent.
 
         Keyword arguments:
         body -- full body payload, not required when ids keyword is provided.
@@ -698,6 +705,15 @@ class IOAExclusions(ServiceClass):
     deleteIOAExclusionsV1 = delete_exclusions
     updateIOAExclusionsV1 = update_exclusions
     queryIOAExclusionsV1 = query_exclusions
+    ss_ioa_exclusions_aggregates_v2 = get_ss_exclusion_aggregates
+    ss_ioa_exclusions_get_reports_v2 = get_ss_exclusion_reports_v2
+    ss_ioa_exclusions_get_v2 = get_ss_exclusion_rules_v2
+    ss_ioa_exclusions_create_v2 = create_ss_exclusions
+    ss_ioa_exclusions_update_v2 = update_ss_exclusions
+    ss_ioa_exclusions_delete_v2 = delete_ss_exclusions
+    ss_ioa_exclusions_matched_rule_v2 = get_ss_exclusion_matched_rules
+    ss_ioa_exclusions_new_rules_v2 = get_default_ss_exclusions
+    ss_ioa_exclusions_query_v2 = query_ss_exclusions
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
