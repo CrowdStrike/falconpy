@@ -120,7 +120,7 @@ class TestCSPMRegistration:
             if tests[key]["status_code"] != 500:
                 error_checks = False
 
-                # print(f"{key} operation returned a {tests[key]} status code")
+                print(f"{key} operation returned a {tests[key]} status code")
 
         return error_checks
 

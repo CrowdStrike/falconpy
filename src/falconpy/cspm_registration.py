@@ -809,7 +809,7 @@ class CSPMRegistration(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="GetCSPMCGPAccount",
+            operation_id="GetCSPMGCPAccount",
             keywords=kwargs,
             params=parameters
             )
