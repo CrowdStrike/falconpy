@@ -144,8 +144,10 @@ def ngsiem_parser_payload(passed_keywords: dict) -> dict:
 
     return returned
 
+
 def ngsiem_data_connection_payload(passed_keywords: dict) -> dict:
-    """Data connecton payload handler.
+    """Create data connection payload.
+
     {
         "config": {
             "auth": {},
@@ -168,8 +170,9 @@ def ngsiem_data_connection_payload(passed_keywords: dict) -> dict:
     }
     """
     returned: dict = {}
-    keys = ["config", "config_id", "connector_id", "connector_type", "description", "enable_host_enrichment"
-            "enable_user_enrichment", "name", "parser", "vendor_name", "vendor_product_name"
+    keys = ["config", "config_id", "connector_id", "connector_type", "description",
+            "enable_host_enrichment", "enable_user_enrichment", "name", "parser",
+            "vendor_name", "vendor_product_name"
             ]
     list_keys = ["log_sources"]
     for key in keys:

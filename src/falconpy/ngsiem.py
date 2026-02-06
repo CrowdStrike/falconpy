@@ -35,7 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-# pylint: disable=C0302
+# pylint: disable=C0302,R0904
 from typing import Dict, Union
 from requests import Response
 from ._util import (
@@ -1538,7 +1538,9 @@ class NGSIEM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_connection_by_id(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_connection_by_id(
+            self: object, *args, parameters: dict = None, **kwargs
+    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get data connection by ID.
 
         Keyword arguments:
@@ -1601,7 +1603,7 @@ class NGSIEM(ServiceClass):
         parser -- String.
         vendor_name -- String.
         vendor_product_name -- String.
-                
+
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
