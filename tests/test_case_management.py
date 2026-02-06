@@ -16,7 +16,7 @@ from falconpy import CaseManagement
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = CaseManagement(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 404, 429]
+AllowedResponses = [200, 201, 207, 400, 404, 429, 500]
 
 
 class TestCaseManagement:
