@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 
+
 def ioa_ss_default_exclusion_payload(passed_keywords: dict) -> dict:
     """Generate payload for Self Service IOA Exclusions based on provided IFN/CLI for child, parent and grandparent.
 
@@ -61,6 +62,7 @@ def ioa_ss_default_exclusion_payload(passed_keywords: dict) -> dict:
 
     return returned_payload
 
+
 def ioa_ss_exclusion_payload(passed_keywords: dict) -> dict:
     """Create a report payload of Self Service IOA Exclusions scoped by the given filters.
 
@@ -80,6 +82,7 @@ def ioa_ss_exclusion_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords.get(key, None)
 
     return returned_payload
+
 
 def ioa_exclusion_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted exclusion payload.
