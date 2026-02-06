@@ -48,7 +48,7 @@ class TestWorkflows:
             "WorkflowGetHumanInputV1": falcon.get_human_input(ids="1234567"),
             "WorkflowUpdateHumanInputV1": falcon.update_human_input(input="whatever", note="whatever"),
             "WorkflowActivitiesContentCombined": falcon.search_activities_content(limit=1),
-            "WorkflowExecuteSingleNodeV1": falcon.execute_single_activity_node(definition_id="12345678", execution_cid="12345678", depth=1),
+            "WorkflowExecuteSingleNodeV1": falcon.execute_single_activity_node(definition = {"Definition": {}}, definition_id="12345678", execution_cid="12345678", depth=1),
             "QueryChildExecutions": falcon.query_child_executions(filter="status:'running'", limit=10, offset=0)
         }
         for key in tests:

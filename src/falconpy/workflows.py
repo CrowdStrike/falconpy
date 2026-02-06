@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302,R0904
 import re
 from os.path import exists
 from typing import Dict, Union
@@ -909,8 +910,10 @@ class Workflows(ServiceClass):
                                      parameters: dict = None,
                                      **kwargs
                                      ) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Executes a single activity node.
-        Results in an execution where test_mode=true and single_node_execution=true, associated with a definition ID if provided.
+        """Execute a single activity node.
+
+        Results in an execution where test_mode=true and
+        single_node_execution=true, associated with a definition ID if provided.
 
         Keyword arguments:
         execution_cid -- CID(s) to execute on. String.
@@ -950,7 +953,8 @@ class Workflows(ServiceClass):
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def query_child_executions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Search for child executions by providing a FQL filter and paging details. 
+        """Search for child executions by providing a FQL filter and paging details.
+
         Returns the set of child workflow execution IDs which match the filter criteria.
 
         Keyword arguments:
