@@ -35,11 +35,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
-from typing import Dict, List, Union
 
 
 def acp_custom_rules_policy_payload(passed_keywords: dict) -> dict:
-    """
+    """Add one or more custom Rego rules to a rule group in an admission control policy.
+
     {
         "id": "string",
         "rule_groups": [
@@ -71,5 +71,5 @@ def acp_custom_rules_policy_payload(passed_keywords: dict) -> dict:
                 returned_payload[key] = provided
             else:
                 returned_payload[key] = provided
-    
+
     return returned_payload

@@ -158,6 +158,8 @@ class TestAdmissionControlPolicies:
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
+                print(tests[key])
+                print(f"{key} operation returned a {tests[key]['status_code']} status code")
 
         return error_checks
 
