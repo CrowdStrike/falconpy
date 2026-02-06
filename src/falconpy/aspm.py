@@ -829,7 +829,7 @@ class ASPM(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="RetrieveRelayInstances",
+            operation_id="get_/executor_nodes/{ID:[0_9]+}/instances/csv",
             path_id=target_id,
             body=body
             )
@@ -2747,7 +2747,9 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def update_group(self: object, body: dict = None, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def update_group(
+            self: object, body: dict = None, parameters: dict = None, **kwargs
+    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update group.
 
         Keyword arguments:
@@ -2816,6 +2818,8 @@ class ASPM(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="get_/groups/hier/v2",
+            params=parameters,
+            keywords=kwargs
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
