@@ -61,6 +61,7 @@ class MLExclusions(ServiceClass):
     - a previously-authenticated instance of the authentication service class (oauth2.py)
     - a valid token provided by the authentication service class (OAuth2.token())
     """
+
     @force_default(defaults=["body"], default_types=["dict"])
     def aggregate_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get exclusion aggregates as specified via json in request body.
@@ -139,8 +140,6 @@ class MLExclusions(ServiceClass):
     def get_all_exclusions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get all exclusions.
 
-        Keyword arguments:
-
         Returns: dict object containing API response.
 
         HTTP Method: GET
@@ -151,7 +150,9 @@ class MLExclusions(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="exclusions_get_all_v2"
+            operation_id="exclusions_get_all_v2",
+            params=parameters,
+            kwargs=kwargs
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
@@ -243,7 +244,9 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_exclusions_by_id(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_exclusions_by_id(
+            self: object, *args, parameters: dict = None, **kwargs
+    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the exclusions by id, with ancestor fields.
 
         Keyword arguments:
@@ -269,7 +272,7 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def create_exclusions_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create the exclusions, with ancestor fields.
 
         Keyword arguments:
@@ -303,7 +306,7 @@ class MLExclusions(ServiceClass):
         """
         if not body:
             if kwargs.get("exclusions", None):
-                body = kwargs.get("exclusions", None)
+                body["exclusions"] = kwargs.get("exclusions", None)
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
@@ -411,7 +414,9 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_ml_exclusion_sets(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_ml_exclusion_sets(
+            self: object, *args, parameters: dict = None, **kwargs
+    ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a set of ML Exclusions by specifying their IDs.
 
         Keyword arguments:
@@ -420,7 +425,7 @@ class MLExclusions(ServiceClass):
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
                    All others are ignored.
-        
+
         Returns: dict object containing API response.
 
         HTTP Method: GET
@@ -542,7 +547,7 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def create_ml_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create the ML exclusions.
 
         Keyword arguments:
@@ -583,6 +588,9 @@ class MLExclusions(ServiceClass):
             operation_id="createMLExclusionsV1",
             body=body
             )
+
+    # Alias for backwards compatibility
+    create_exclusions = create_ml_exclusions
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
@@ -697,7 +705,7 @@ class MLExclusions(ServiceClass):
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
     getMLExclusionsV1 = get_exclusions
-    createMLExclusionsV1 = create_exclusions
+    createMLExclusionsV1 = create_ml_exclusions
     deleteMLExclusionsV1 = delete_exclusions
     updateMLExclusionsV1 = update_exclusions
     queryMLExclusionsV1 = query_exclusions

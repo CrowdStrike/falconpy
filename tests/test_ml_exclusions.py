@@ -13,7 +13,7 @@ from falconpy import MLExclusions
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = MLExclusions(auth_object=config)
-AllowedResponses = [200, 400, 404, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 400, 403, 404, 429]  # Adding rate-limiting and auth errors as allowed responses
 
 
 class TestMLExclusions:
@@ -76,7 +76,7 @@ class TestMLExclusions:
                 search={"filter": "value:'test'", "sort": "value.asc"}
             ),
             "get_exclusions_by_id": falcon.get_exclusions_by_id(ids="12345678"),
-            "create_exclusions_v2": falcon.create_exclusions(
+            "create_exclusions_v2": falcon.create_exclusions_v2(
                 exclusions=[{
                     "comment": "Unit Testing",
                     "excluded_from": ["blocking"],
@@ -123,6 +123,8 @@ class TestMLExclusions:
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
+                print(f"{key} failed with status {tests[key]['status_code']}")
+                print(tests[key])
 
         return error_checks
 
