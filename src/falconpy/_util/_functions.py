@@ -774,7 +774,7 @@ def handle_path_variables(passed: dict, route_url: str):
     # Falcon Container
     passed_uuid = passed.get("uuid", None)
     if passed_uuid:
-        route_url = route_url.format(str(passed_uuid))
+        route_url = route_url.format(uuid=str(passed_uuid))
     # NGSIEM
     passed_repository = passed.get("repository", None)
     if passed_repository:
