@@ -121,7 +121,10 @@ class TestSensorDownload():
     def _download_sensor_v3(self):
         sha_id = self._get_multiple_shas()[0]
         resp = sensor_download_client.download_sensor_installer_v3(id=sha_id)
-        return True if resp["status_code"] in AllowedResponses else False
+        if isinstance(resp, bytes):
+            return True
+        else:
+            return False
 
     def test_download_windows_sensor(self):
         assert self._download_sensor(style="v1") is True
