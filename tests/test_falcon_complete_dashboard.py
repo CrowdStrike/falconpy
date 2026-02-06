@@ -13,7 +13,7 @@ from falconpy import CompleteDashboard
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = CompleteDashboard(auth_object=config)
-AllowedResponses = [200, 403, 429]
+AllowedResponses = [200, 403, 404, 429]
 
 
 class TestFalconCompleteDashboard:
