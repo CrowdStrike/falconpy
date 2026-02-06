@@ -34,6 +34,8 @@ HEC = HTTPEventCollector(api_key=API_KEY,
                          ingest_region=BASE_REGION,
                          debug=True
                          )
+# Check if NGSIEM is properly configured
+NGSIEM_CONFIGURED = API_KEY and URL_KEY and HEC.test_connection()
 AllowedResponses = [200]
 
 simple_payload = {"host": random_string(8).upper(), "timestamp": int(datetime.now(timezone.utc).timestamp() * TimeUnit["NANOSECONDS"].value)}
@@ -55,9 +57,11 @@ class TestHTTPEventCollector:
         bad_hec.thread_count = 2
         assert bad_hec.test_connection() == False
 
+    @pytest.mark.skipif(not NGSIEM_CONFIGURED, reason="NGSIEM not properly configured")
     def test_connection(self):
         assert HEC.test_connection()
 
+    @pytest.mark.skipif(not NGSIEM_CONFIGURED, reason="NGSIEM not properly configured")
     def test_simple_ingest(self):
         error_check = True
         result = HEC.send_event(simple_payload)
@@ -66,6 +70,7 @@ class TestHTTPEventCollector:
 
         assert error_check
 
+    @pytest.mark.skipif(not NGSIEM_CONFIGURED, reason="NGSIEM not properly configured")
     def test_list_ingest(self):
         result = 0
         result = HEC.send_event_list([simple_payload])
@@ -80,6 +85,7 @@ class TestHTTPEventCollector:
 
         assert result>1
 
+    @pytest.mark.skipif(not NGSIEM_CONFIGURED, reason="NGSIEM not properly configured")
     def test_raw_ingest(self):
         error_check = True
         ingest_format_name = None
