@@ -171,8 +171,11 @@ class TestServiceClass:
     @rate_limited
     @not_supported
     def test_base_url(self):
-        _CLEAN.base_url = False
-        assert bool(_CLEAN.base_url)
+        if _CLEAN:
+            _CLEAN.base_url = False
+            assert bool(_CLEAN.base_url)
+        else:
+            pytest.skip("_CLEAN not initialized")
 
     @rate_limited
     @not_supported
