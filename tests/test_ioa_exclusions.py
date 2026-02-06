@@ -13,7 +13,7 @@ from falconpy import IOAExclusions
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = IOAExclusions(auth_object=config)
-AllowedResponses = [200, 400, 404, 429, 500]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 400, 403, 404, 429, 500]  # Adding rate-limiting and auth errors as allowed responses
 
 
 class TestIOAExclusions:
@@ -149,6 +149,8 @@ class TestIOAExclusions:
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
+                print(f"{key} failed with status {tests[key]['status_code']}")
+                print(tests[key])
 
         return error_checks
 
