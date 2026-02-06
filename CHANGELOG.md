@@ -1,3 +1,230 @@
+# Version 1.6.1
+## Added features and functionality
++ Added: New __Admission Control Policies__ service collection with 15 operations.
+    - _admission_control_get_policies_
+    - _admission_control_create_policy_
+    - _admission_control_update_policy_
+    - _admission_control_delete_policies_
+    - _admission_control_add_host_groups_
+    - _admission_control_remove_host_groups_
+    - _admission_control_update_policy_precedence_
+    - _admission_control_add_rule_group_custom_rule_
+    - _admission_control_remove_rule_group_custom_rule_
+    - _admission_control_set_rule_group_precedence_
+    - _admission_control_replace_rule_group_selectors_
+    - _admission_control_create_rule_groups_
+    - _admission_control_update_rule_groups_
+    - _admission_control_delete_rule_groups_
+    - _admission_control_query_policies_
+    - `__init__.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_admission_control_policies.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_admission_control_policies.py`
+    - `_payload/__init__.py`
+    - `_payload/_admission_control_policies.py`
+    - `admission_control_policies.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_admission_control_policies.py`
+
++ Added: Added two new operations to the __Workflows__ service collection.
+    - _WorkflowExecuteSingleNodeV1_
+    - _v1_child_executions_query_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_workflows.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_workflows.py`
+    - `workflows.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_workflows.py`
+
++ Added: Added `offset` and `limit` parameters to the _WorkflowExecutionsCombined_ operation within the __Workflows__ service collection.
+    - `_endpoint/_workflows.py`
+    - `workflows.py`
+
++ Added: Added `triggered_custom_ioa` as an allowed value for the `edge_type` argument in the _combined_edges_get_ operation within the __Threat Graph__ service collection.
+    - `_endpoint/_threatgraph.py`
+    - `threatgraph.py`
+
++ Added: Added `custom_ioa` and `custom_ioas` as allowed values for the `vertex_type` argument in the _combined_ran_on_get_, _entities_vertices_get_, and _entities_vertices_getv2_ operations within the __Threat Graph__ service collection.
+    - `_endpoint/_threatgraph.py`
+    - `threatgraph.py`
+
++ Added: Added four new operations to the __Sensor Download__ service collection.
+    - _GetCombinedSensorInstallersByQueryV3_
+    - _DownloadSensorInstallerByIdV3_
+    - _GetSensorInstallersEntitiesV3_
+    - _GetSensorInstallersByQueryV3_
+    - `_endpoint/_sensor_download.py`
+    - `sensor_download.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_sensor_download.py`
+
++ Added: Added `password` and `X-File-Password` parameters to the _UploadSampleV3_ operation within the __Quick Scan Pro__ service collection.
+    - `_endpoint/_quick_scan_pro.py`
+    - `quick_scan_pro.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_quick_scan_pro.py`
+
++ Added: Added twelve new operations to the __NGSIEM__ service collection.
+    - _UpdateLookupFileEntries_
+    - _UpdateParserFromTemplate_
+    - _ExternalListDataConnections_
+    - _ExternalListDataConnectors_
+    - _ExternalGetDataConnectionStatus_
+    - _ExternalUpdateDataConnectionStatus_
+    - _ExternalGetDataConnectionToken_
+    - _ExternalRegenerateDataConnectionToken_
+    - _ExternalGetDataConnectionByID_
+    - _ExternalCreateDataConnection_
+    - _ExternalUpdateDataConnection_
+    - _ExternalDeleteDataConnection_
+    - _ExternalListDataConnectorConfigs_
+    - `_endpoint/_ngsiem.py`
+    - `_payload/__init__.py`
+    - `_payload/_ngsiem.py`
+    - `ngsiem.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ngsiem.py`
+
++ Added: Added twelve new operations to the __ML Exclusions__ service collection.
+    - _exclusions_aggregates_v2_
+    - _exclusions_get_all_v2_
+    - _exclusions_perform_action_v2_
+    - _exclusions_get_reports_v2_
+    - _exclusions_get_v2_
+    - _exclusions_create_v2_
+    - _exclusions_update_v2_
+    - _exclusions_delete_v2_
+    - _exclusions_query_v2_
+    - _ml_exclusion_sets_get_v2_
+    - _ml_exclusions_create_v2_
+    - _ml_exclusions_update_v2_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_ml_exclusions.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_ml_exclusions.py`
+    - `_payload/__init__.py`
+    - `_payload/_ml_exclusions.py`
+    - `ml_exclusions.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ml_exclusions.py`
+
++ Added: Added `group_ids` and `group_names` as allowed values for the `filter` and `sort` arguments in the _searches_get_ and _searches_advanced_get_ operations within the __IT Automation__ service collection.
+    - `_endpoint/_it_automation.py`
+    - `it_automation.py`
+
++ Added: Added nine new operations to the __IOA Exclusions__ service collection.
+    - _ss_ioa_exclusions_aggregates_v2_
+    - _ss_ioa_exclusions_get_reports_v2_
+    - _ss_ioa_exclusions_get_v2_
+    - _ss_ioa_exclusions_create_v2_
+    - _ss_ioa_exclusions_update_v2_
+    - _ss_ioa_exclusions_delete_v2_
+    - _ss_ioa_exclusions_matched_rule_v2_
+    - _ss_ioa_exclusions_get_default_v2_
+    - _ss_ioa_exclusions_query_v2_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_ioa_exclusions.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_ioa_exclusions.py`
+    - `_payload/__init__.py`
+    - `_payload/_ioa.py`
+    - `ioa_exclusions.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ioa_exclusions.py`
+
++ Updated: Added deprecation notices to all operations within the __Incidents__ service collection (API will be removed in March 2026).
+    - `_endpoint/_incidents.py`
+    - `incidents.py`
+
++ Added: Added three new operations to the __Correlation Rules__ service collection.
+    - _entities_templates_rules_post_v1_
+    - _entities_templates_get_v1Mixin0_
+    - _queries_templates_get_v1Mixin0_
+    - `_endpoint/_correlation_rules.py`
+    - `_endpoint/deprecated/_correlation_rules.py`
+    - `_payload/__init__.py`
+    - `_payload/_correlation_rules.py`
+    - `correlation_rules.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_correlation_rules.py`
+
++ Added: Added `category` as an allowed filter field in the _query_applications_ operation within the __Discover__ service collection.
+    - `_endpoint/_discover.py`
+    - `_endpoint/deprecated/_discover.py`
+
++ Added: Added `tags_string` as an allowed filter field in the _cloud_security_compliance_by_framework_ and _cloud_security_compliance_by_rule_ operations within the __Cloud Security Compliance__ service collection.
+    - `_endpoint/_cloud_security_compliance.py`
+    - `_endpoint/deprecated/_cloud_security_compliance.py`
+    - `cloud_security_compliance.py`
+
++ Added: Added `gcrn` parameter to the _combined_application_findings_ operation within the __Cloud Security Assets__ service collection (deprecating the `crn` parameter).
+    - `_endpoint/_cloud_security_assets.py`
+    - `_endpoint/deprecated/_cloud_security_assets.py`
+
++ Added: Added `cloud_risks.rule`, `cloud_risks.severity`, and `cloud_risks.status` as allowed filter fields in the _cloud_security_assets_queries_ operation within the __Cloud Security Assets__ service collection.
+    - `_endpoint/_cloud_security_assets.py`
+    - `_endpoint/deprecated/_cloud_security_assets.py`
+    - `cloud_security_assets.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_security_assets.py`
+
++ Added: Added `cloud_risks.open_risk_count`, `publiclyExposedToTheInternet`, `publiclyExposedAccessRange`, and `publiclyExposedExposureMethod` as allowed sort fields in the _cloud_security_assets_queries_ operation within the __Cloud Security Assets__ service collection.
+    - `_endpoint/_cloud_security_assets.py`
+    - `_endpoint/deprecated/_cloud_security_assets.py`
+
++ Removed: Removed deprecated _GetCSPMCGPAccount_ operation from the __CSPM Registration__ service collection.
+    - `_endpoint/_cspm_registration.py`
+
++ Added: Added `organization_ids` parameter to the _cloud_registration_aws_get_accounts_ operation within the __Cloud AWS Registration__ service collection.
+    - `_endpoint/_cloud_aws_registration.py`
+    - `_endpoint/deprecated/_cloud_aws_registration.py`
+    - `cloud_aws_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_aws_registration.py`
+
++ Added: Added five new operations to the __Cloud Policies__ service collection.
+    - _GetSuppressionRules_
+    - _CreateSuppressionRule_
+    - _UpdateSuppressionRule_
+    - _DeleteSuppressionRules_
+    - _QuerySuppressionRules_
+    - `_endpoint/_cloud_policies.py`
+    - `_payload/__init__.py`
+    - `_payload/_cloud_policies.py`
+    - `cloud_policies.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_policies.py`
+
++ Added: Added eight new operations to the __ASPM__ service collection.
+    - _post_/group/v2_
+    - _delete_/group/{ID:[0_9]+}_
+    - _post_/group/{ID:[0_9]+}/update_default_
+    - _get_/group/{ID:[0_9]+}/v2_
+    - _post_/group/{ID:[0_9]+}/v2_
+    - _get_/groups/hier/v2_
+    - _get_/groups/list/v2_
+    - _get_/users_v2_
+    - `_endpoint/_aspm.py`
+    - `_payload/__init__.py`
+    - `_payload/_aspm.py`
+    - `aspm.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_aspm.py`
+
+## Other
++ Removed: Overwatch Dashboard service collection endpoint definitions.
+    - `_endpoint/_overwatch_dashboard.py`
+
++ Removed: Spotlight Vulnerability Metadata service collection.
+    - `__init__.py`
+    - `_endpoint/__init__.py`
+    - `_endpoint/_spotlight_vulnerability_metadata.py`
+    - `spotlight_vulnerability_metadata.py`
+    - `tests/test_spotlight_vulnerability_metadata.py`
+---
+
 # Version 1.6.0
 ## Other
 + Dropped: Support for Python version `3.7`. Developers using this version of Python should pin to versions below `1.6.0`.
