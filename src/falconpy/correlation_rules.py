@@ -640,9 +640,10 @@ class CorrelationRules(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def search_rule_template_ids(
-            self: object, parameters: dict = None, **kwargs
-    ) -> Union[Dict[str, Union[int, dict]], Result]:
+    def search_rule_template_ids(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search rule template IDs matching the filter.
 
         Keyword arguments:
@@ -784,9 +785,11 @@ class CorrelationRules(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_rule_templates_by_id(
-            self: object, *args, parameters: dict = None, **kwargs
-    ) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_rule_templates_by_id(self: object,
+                                 *args,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Retrieve rule templates by IDs.
 
         Keyword arguments:
