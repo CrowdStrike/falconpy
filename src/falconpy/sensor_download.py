@@ -365,9 +365,10 @@ class SensorDownload(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_combined_sensor_installers_by_query_v3(
-            self: object, parameters: dict = None, **kwargs
-    ) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_combined_sensor_installers_by_query_v3(self: object,
+                                                   parameters: dict = None,
+                                                   **kwargs
+                                                   ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get sensor installer details by provided query.
 
         Keyword arguments:
@@ -395,9 +396,11 @@ class SensorDownload(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def download_sensor_installer_v3(
-            self: object, *args, parameters: dict = None, **kwargs
-    ) -> Union[Dict[str, Union[int, dict]], Result]:
+    def download_sensor_installer_v3(self: object,
+                                     *args,
+                                     parameters: dict = None,
+                                     **kwargs
+                                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Download sensor installer by SHA256 ID.
 
         Keyword arguments:
@@ -423,9 +426,11 @@ class SensorDownload(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_sensor_installer_entities_v3(
-            self: object, *args, parameters: dict = None, **kwargs
-    ) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_sensor_installer_entities_v3(self: object,
+                                         *args,
+                                         parameters: dict = None,
+                                         **kwargs
+                                         ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get sensor installer details by provided SHA256 IDs.
 
         Keyword arguments:
@@ -451,9 +456,11 @@ class SensorDownload(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_sensor_installers_by_query_v3(
-            self: object, *args, parameters: dict = None, **kwargs
-    ) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_sensor_installers_by_query_v3(self: object,
+                                          *args,
+                                          parameters: dict = None,
+                                          **kwargs
+                                          ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get sensor installer IDs by provided query.
 
         Keyword arguments:
