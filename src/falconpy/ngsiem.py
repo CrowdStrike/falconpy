@@ -1525,9 +1525,11 @@ class NGSIEM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_connection_by_id(
-            self: object, *args, parameters: dict = None, **kwargs
-    ) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_connection_by_id(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get data connection by ID.
 
         Keyword arguments:
