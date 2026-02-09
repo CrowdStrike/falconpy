@@ -257,7 +257,7 @@ class AlertManager:
             alert -- The dictionary of alerts.
         """
         print("=" * 70)
-        print(f"Alert ID:    {alert.get('composite_id', 'N/A')}")
+        print(f"Composite ID:    {alert.get('composite_id', 'N/A')}")
         print(f"Status:      {alert.get('status', 'N/A')}")
         print(f"Severity:    {alert.get('severity_name', 'N/A')}")
         print(f"Product:     {alert.get('product', 'N/A')}")
