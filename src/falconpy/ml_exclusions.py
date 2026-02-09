@@ -244,9 +244,11 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_exclusions_by_id(
-            self: object, *args, parameters: dict = None, **kwargs
-    ) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_exclusions_by_id(self: object,
+                             *args,
+                             parameters: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the exclusions by id, with ancestor fields.
 
         Keyword arguments:
