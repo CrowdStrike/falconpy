@@ -207,9 +207,11 @@ class IOAExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_ss_exclusion_rules_v2(
-            self: object, *args, parameters: dict = None, **kwargs
-    ) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_ss_exclusion_rules_v2(self: object,
+                                  *args,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get the Self Service IOA Exclusions rules by id.
 
         Keyword arguments:
@@ -364,9 +366,10 @@ class IOAExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def get_ss_exclusion_matched_rules(
-            self: object, body: dict = None, **kwargs
-    ) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_ss_exclusion_matched_rules(self: object,
+                                       body: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get Self Service IOA Exclusions rules for matched IFN/CLI.
 
         For child, parent and grandparent.
