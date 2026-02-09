@@ -1,0 +1,14 @@
+{
+  "type": "indicator",
+  "spec_version": "2.1",
+  "id": "indicator--8e2e2d2b-17d4-4cbf-938f-98ee46b3cd3f",
+  "created": "2023-01-01T00:00:00.000Z",
+  "modified": "2023-01-01T00:00:00.000Z",
+  "name": "Malicious IP",
+  "description": "C2 server for malware campaign",
+  "indicator_types": ["malicious-activity"],
+  "pattern": "[ipv4-addr:value = '192.168.1.1']",
+  "pattern_type": "stix",
+  "valid_from": "2023-01-01T00:00:00Z",
+  "valid_until": "2024-01-01T00:00:00Z"
+}
