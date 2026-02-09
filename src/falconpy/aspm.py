@@ -2747,9 +2747,11 @@ class ASPM(ServiceClass):
             )
 
     @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
-    def update_group(
-            self: object, body: dict = None, parameters: dict = None, **kwargs
-    ) -> Union[Dict[str, Union[int, dict]], Result]:
+    def update_group(self: object,
+                     body: dict = None,
+                     parameters: dict = None,
+                     **kwargs
+                     ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update group.
 
         Keyword arguments:
