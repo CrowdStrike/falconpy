@@ -16,13 +16,13 @@
     - _admission_control_update_rule_groups_
     - _admission_control_delete_rule_groups_
     - _admission_control_query_policies_
-    - `__init__.py`
     - `_endpoint/__init__.py`
     - `_endpoint/_admission_control_policies.py`
     - `_endpoint/deprecated/__init__.py`
     - `_endpoint/deprecated/_admission_control_policies.py`
     - `_payload/__init__.py`
     - `_payload/_admission_control_policies.py`
+    - `__init__.py`
     - `admission_control_policies.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_admission_control_policies.py`
