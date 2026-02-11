@@ -201,3 +201,48 @@ class InvalidCredentialFormat(SDKError):
     """Credentials dictionary was provided as a datatype that will not convert to a dictionary."""
 
     _message = "Invalid credential format. This keyword must be provided as a dictionary."
+
+
+class ContentDecodingError(SDKError):
+    """The API response body could not be decoded with the expected encoding.
+
+    This typically occurs when the API returns a JSON response containing
+    non-ASCII characters (e.g. accented names) and the SDK attempts to
+    decode the raw bytes with the wrong codec (Issue #1298).
+    """
+
+    _code = 500
+    _message = "Unable to decode API response content."
+
+    def __init__(self,
+                 code: int = None,
+                 message: str = None,
+                 headers: dict = None,
+                 encoding: str = None,
+                 position: int = None
+                 ):
+        """Construct an instance of the exception.
+
+        Keyword arguments:
+        encoding -- The codec that failed (e.g. 'ascii', 'utf-8').
+        position -- The byte position where decoding failed.
+        """
+        self._encoding = encoding
+        self._position = position
+        if not message and encoding:
+            message = (
+                f"Unable to decode API response using '{encoding}' codec"
+                f"{f' at byte position {position}' if position is not None else ''}"
+                ". The response likely contains non-ASCII characters."
+            )
+        super().__init__(code=code, message=message, headers=headers)
+
+    @property
+    def encoding(self) -> str:
+        """Return the codec that failed."""
+        return self._encoding
+
+    @property
+    def position(self) -> int:
+        """Return the byte position where decoding failed."""
+        return self._position

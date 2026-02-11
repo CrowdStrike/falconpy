@@ -78,6 +78,20 @@ class BaseResult:
             self.headers = Headers(_headers)
             self._parse_body(body_rcv=body)
 
+    @staticmethod
+    def _safe_decode_body(body: bytes) -> str:
+        """Safely decode response body bytes for Result construction.
+
+        Tries UTF-8 first (RFC 8259 standard for JSON), then falls
+        back to latin-1 which maps every byte 0x00-0xFF and never
+        raises UnicodeDecodeError.  This prevents crashes when the
+        API returns content with non-ASCII characters (Issue #1298).
+        """
+        try:
+            return body.decode("utf-8")
+        except (UnicodeDecodeError, ValueError):
+            return body.decode("latin-1")
+
     def _parse_body(self, body_rcv: Dict[str, Union[str, dict, list, int, float, bytes]]):
         if isinstance(body_rcv, list):
             # Specific to report_executions_download_get returning raw
@@ -85,7 +99,18 @@ class BaseResult:
             # branch in this response.
             self.resources = Resources(body_rcv)  # pragma: no cover
         elif isinstance(body_rcv, bytes):
-            # Binary response
+            # Binary response — attempt safe text decoding first so that
+            # non-ASCII JSON payloads can still be parsed (Issue #1298).
+            decoded = self._safe_decode_body(body_rcv)
+            try:
+                from json import loads as _loads
+                parsed = _loads(decoded)
+                if isinstance(parsed, dict):
+                    self._parse_body(body_rcv=parsed)
+                    return
+            except (ValueError, TypeError):
+                pass
+            # Genuine binary data (e.g. file downloads)
             self.resources = BinaryFile(body_rcv)
             self.meta = Meta()
             self.errors = Errors()

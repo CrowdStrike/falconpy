@@ -220,7 +220,14 @@ class APIHarness:
                 self._token_fail_headers = result["headers"]
                 if "errors" in result["body"]:
                     if result["body"]["errors"]:
-                        self.token_fail_reason = result["body"]["errors"][0]["message"]
+                        err = result["body"]["errors"][0]
+                        # Handle both standard API error dicts and
+                        # non-standard entries (e.g. from decode failures).
+                        if isinstance(err, dict):
+                            self.token_fail_reason = err.get(
+                                "message", str(err))
+                        else:
+                            self.token_fail_reason = str(err)
         else:  # pragma: no cover
             self.authenticated = False
             self.token_fail_reason = TokenFailReason["UNEXPECTED"].value

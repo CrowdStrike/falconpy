@@ -89,10 +89,38 @@ class SSLDisabledWarning(SDKWarning):
 
 
 class NoContentWarning(SDKWarning):
-    """No content was received."""
+    """No content was received or the content could not be decoded.
+
+    When content decoding fails, the encoding that was attempted is
+    preserved in this warning for diagnostic purposes (Issue #1298).
+    """
 
     _code = 204
     _message = "No content was received for this request."
+
+    def __init__(self,
+                 code: int = None,
+                 message: str = None,
+                 headers: dict = None,
+                 encoding: str = None
+                 ):
+        """Construct an instance of the warning.
+
+        Keyword arguments:
+        encoding -- The encoding that was attempted when decoding failed.
+        """
+        self._encoding = encoding
+        if encoding and not message:
+            message = (
+                f"No content could be decoded for this request "
+                f"(attempted encoding: {encoding})."
+            )
+        super().__init__(code=code, message=message, headers=headers)
+
+    @property
+    def encoding(self) -> str:
+        """Return the encoding that was attempted, if available."""
+        return self._encoding
 
 
 class NoAuthenticationMechanism(SDKWarning):
