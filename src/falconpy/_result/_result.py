@@ -78,6 +78,19 @@ class BaseResult:
             self.headers = Headers(_headers)
             self._parse_body(body_rcv=body)
 
+    @staticmethod
+    def _is_text_error_body(body: dict) -> bool:
+        """Detect a structured text error body from _build_text_error_body.
+
+        These bodies contain only "errors" and "resources" keys with no
+        "meta" or "access_token", indicating they were generated from a
+        non-JSON text response rather than returned directly by the API.
+        """
+        if not isinstance(body, dict):
+            return False
+        keys = set(body.keys())
+        return keys == {"errors", "resources"} and "meta" not in keys
+
     def _parse_body(self, body_rcv: Dict[str, Union[str, dict, list, int, float, bytes]]):
         if isinstance(body_rcv, list):
             # Specific to report_executions_download_get returning raw
@@ -97,6 +110,14 @@ class BaseResult:
             self.meta = Meta()
             self.resources = Resources()
             self.errors = Errors()
+        elif self._is_text_error_body(body_rcv):
+            # Structured text error body produced by _build_text_error_body.
+            # Contains only "errors" and "resources" keys (no "meta" or
+            # "access_token"). Route through the standard Meta / Errors /
+            # Resources path so downstream consumers work uniformly.
+            self.meta = Meta()
+            self.errors = Errors(body_rcv.get("errors", []))
+            self.resources = Resources(body_rcv.get("resources", []))
         elif body_rcv.get("access_token", None):
             # Authentication response
             self.raw = RawBody(body_rcv)

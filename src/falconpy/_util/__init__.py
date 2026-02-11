@@ -59,6 +59,7 @@ from ._functions import (
     deprecated_operation,
     deprecated_class,
     params_to_keywords,
+    _build_text_error_body,
     _ALLOWED_METHODS
 )
 from ._service import service_override_payload
@@ -79,5 +80,5 @@ __all__ = ["create_uber_header_payload", "handle_body_payload_ids", "scrub_targe
            "_ALLOWED_METHODS", "login_payloads", "logout_payloads", "sanitize_dictionary",
            "calc_content_return", "log_class_startup", "service_override_payload",
            "deprecated_operation", "deprecated_class", "review_provided_credentials",
-           "params_to_keywords"
+           "params_to_keywords", "_build_text_error_body"
            ]

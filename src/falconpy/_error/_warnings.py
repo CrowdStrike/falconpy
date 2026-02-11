@@ -89,10 +89,44 @@ class SSLDisabledWarning(SDKWarning):
 
 
 class NoContentWarning(SDKWarning):
-    """No content was received."""
+    """No content was received or the content could not be parsed.
+
+    When non-JSON text content is received from the API, the original
+    response body is preserved in this warning so callers can still
+    access the raw error text (Issue #1154).
+    """
 
     _code = 204
     _message = "No content was received for this request."
+
+    def __init__(self,
+                 code: int = None,
+                 message: str = None,
+                 headers: dict = None,
+                 response_body: str = None,
+                 content_type: str = None
+                 ):
+        """Construct an instance of the warning.
+
+        Keyword arguments:
+        response_body -- The raw text body received from the API.
+        content_type  -- The Content-Type header from the response.
+        """
+        self._response_body = response_body
+        self._content_type = content_type
+        if response_body and not message:
+            message = response_body.strip()
+        super().__init__(code=code, message=message, headers=headers)
+
+    @property
+    def response_body(self) -> str:
+        """Return the raw response body text, if available."""
+        return self._response_body
+
+    @property
+    def content_type(self) -> str:
+        """Return the Content-Type of the original response."""
+        return self._content_type
 
 
 class NoAuthenticationMechanism(SDKWarning):

@@ -54,6 +54,7 @@ from .._util import (
     args_to_params,
     return_preferred_default,
     autodiscover_region,
+    _build_text_error_body,
     )
 from .._enum import BaseURL, ContainerBaseURL, TokenFailReason
 from .._constant import PREFER_IDS_IN_BODY, MOCK_OPERATIONS
@@ -220,7 +221,14 @@ class APIHarness:
                 self._token_fail_headers = result["headers"]
                 if "errors" in result["body"]:
                     if result["body"]["errors"]:
-                        self.token_fail_reason = result["body"]["errors"][0]["message"]
+                        err = result["body"]["errors"][0]
+                        # Text error bodies from _build_text_error_body
+                        # use a "code" key alongside "message".
+                        if isinstance(err, dict):
+                            self.token_fail_reason = err.get("message",
+                                                            str(err))
+                        else:
+                            self.token_fail_reason = str(err)
         else:  # pragma: no cover
             self.authenticated = False
             self.token_fail_reason = TokenFailReason["UNEXPECTED"].value
