@@ -39,6 +39,16 @@ class TestSpotlight:
         else:
             return False
 
+    def spotlight_query_installed_patches_combined(self):
+        allowed = AllowedResponses + [404]
+        if falcon.query_installed_patches_combined(
+                limit=1,
+                filter="hostname:'falconpy-unit-testing'"
+                )["status_code"] in allowed:
+            return True
+        else:
+            return False
+
     def spotlight_getVulnerabilities(self):
         try:
             id_lookup = falcon.queryVulnerabilities(limit=1,
@@ -61,6 +71,8 @@ class TestSpotlight:
         errorChecks = True
         if falcon.combinedQueryVulnerabilities()["status_code"] != 500:
             errorChecks = False
+        if falcon.combinedQueryInstalledPatches()["status_code"] != 500:
+            errorChecks = False
         if falcon.queryVulnerabilities(parameters={})["status_code"] != 500:
             errorChecks = False
         if falcon.getVulnerabilities(ids="12345678")["status_code"] != 500:
@@ -79,6 +91,9 @@ class TestSpotlight:
 
     def test_queryVulnerabilities_combined(self):
         assert self.spotlight_query_vulnerabilities_combined() is True
+
+    def test_queryInstalledPatches_combined(self):
+        assert self.spotlight_query_installed_patches_combined() is True
 
     @pytest.mark.skipif(falcon.queryVulnerabilities(
                                                     parameters={"limit": 1,
