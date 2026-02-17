@@ -8,6 +8,7 @@ The examples within this folder focus on leveraging CrowdStrike's Falcon Spotlig
 
 - [Identify hosts with vulnerabilities by CVE](#identify-hosts-with-vulnerabilities-by-cve)
 - [CISA Known exploited vulnerabilities](CISA_known_exploited_vulns)
+- [Query installed patches](#query-installed-patches)
 - [Spotlight Quick Report](#spotlight-quick-report)
 
 ## Identify hosts with vulnerabilities by CVE
@@ -182,6 +183,49 @@ optional arguments:
 
 ### Example source code
 The source code for this example can be found [here](find_hosts_by_cve.py).
+
+## Query installed patches
+Retrieve Falcon Spotlight installed patch records and output the JSON response structure.
+
+### Running the program
+In order to run this demonstration, you will need access to CrowdStrike API keys with the following scopes:
+
+| Service Collection | Scope |
+| :---- | :---- |
+| Spotlight Vulnerabilities | __READ__ |
+
+### Execution syntax
+The following command will query installed patch data with the specified FQL filter.
+
+#### Basic usage
+```shell
+python3 spotlight_installed_patches.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f "hostname:'my-hostname'"
+```
+
+#### Saving output to file
+```shell
+python3 spotlight_installed_patches.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f "hostname:'my-hostname'" -o installed_patches.json
+```
+
+#### Retrieving all pages
+```shell
+python3 spotlight_installed_patches.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f "hostname:'my-hostname'" -a
+```
+
+#### Sorting and limiting
+```shell
+python3 spotlight_installed_patches.py -k $FALCON_CLIENT_ID -s $FALCON_CLIENT_SECRET -f "hostname:'my-hostname'" --sort "hostname|asc" -l 200
+```
+
+#### Command-line help
+Command-line help is available via the `-h` argument.
+
+```shell
+python3 spotlight_installed_patches.py -h
+```
+
+### Example source code
+The source code for this example can be found [here](spotlight_installed_patches.py).
 
 ## Spotlight Quick Report
 Produce a quick report of CVE vulnerabilities discovered within your Falcon tenant.
