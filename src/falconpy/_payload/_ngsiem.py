@@ -171,8 +171,8 @@ def ngsiem_data_connection_payload(passed_keywords: dict) -> dict:
     """
     returned: dict = {}
     keys = ["config", "config_id", "connector_id", "connector_type", "description",
-            "enable_host_enrichment", "enable_user_enrichment", "name", "parser",
-            "vendor_name", "vendor_product_name"
+            "enable_host_enrichment", "enable_user_enrichment", "log_sources", "name",
+            "parser", "vendor_name", "vendor_product_name"
             ]
     list_keys = ["log_sources"]
     for key in keys:
