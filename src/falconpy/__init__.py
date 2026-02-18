@@ -183,6 +183,7 @@ from .mssp import FlightControl
 from .ngsiem import NGSIEM
 from .oauth2 import OAuth2
 from .ods import ODS
+from .overwatch_dashboard import OverwatchDashboard
 from .prevention_policy import PreventionPolicy, PreventionPolicies
 from .quarantine import Quarantine
 from .quick_scan import QuickScan
@@ -202,6 +203,7 @@ from .sensor_usage import SensorUsage
 from .sensor_visibility_exclusions import SensorVisibilityExclusions
 from .serverless_vulnerabilities import ServerlessVulnerabilities
 from .spotlight_vulnerabilities import SpotlightVulnerabilities
+from .spotlight_vulnerability_metadata import SpotlightVulnerabilityMetadata
 from .spotlight_evaluation_logic import SpotlightEvaluationLogic
 from .tailored_intelligence import TailoredIntelligence
 from .threatgraph import ThreatGraph
@@ -261,7 +263,8 @@ __all__ = [
     "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch", "ITAutomation", "F4IT",
     "CloudSecurityCompliance", "CaseManagement", "SaasSecurity", "DataProtectionConfiguration",
     "CorrelationRulesAdmin", "CloudSecurityDetections", "CloudPolicies", "CloudGoogleCloudRegistration",
-    "CloudSecurity", "AdmissionControlPolicies"
+    "CloudSecurity", "AdmissionControlPolicies", "OverwatchDashboard",
+    "SpotlightVulnerabilityMetadata"
     ]
 """
 This is free and unencumbered software released into the public domain.

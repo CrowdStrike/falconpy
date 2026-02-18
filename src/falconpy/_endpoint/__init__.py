@@ -54,6 +54,8 @@ from .deprecated import _scheduled_reports_deprecated
 from .deprecated import _workflows_deprecated
 from .deprecated import _zero_trust_assessment_deprecated
 from .deprecated import _certificate_based_exclusions_deprecated
+from .deprecated import _overwatch_dashboard_deprecated
+from .deprecated import _spotlight_vulnerability_metadata_deprecated
 from .deprecated import _deprecated_operation_mapping
 from .deprecated import _deprecated_class_mapping
 
@@ -302,6 +304,8 @@ deprecated_endpoints.extend(_report_executions_deprecated)
 deprecated_endpoints.extend(_scheduled_reports_deprecated)
 deprecated_endpoints.extend(_workflows_deprecated)
 deprecated_endpoints.extend(_zero_trust_assessment_deprecated)
+deprecated_endpoints.extend(_overwatch_dashboard_deprecated)
+deprecated_endpoints.extend(_spotlight_vulnerability_metadata_deprecated)
 
 # Mapping of manually deprecated endpoints
 operation_deprecation_mapping = _deprecated_operation_mapping
