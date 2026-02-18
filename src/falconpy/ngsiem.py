@@ -1758,7 +1758,7 @@ class NGSIEM(ServiceClass):
     ExternalListDataConnections = list_data_connections
     ExternalListDataConnectors = list_data_connectors
     ExternalGetDataConnectionStatus = get_provisioning_status
-    ExternalUpdateDataConnectionStatus = update_data_connection
+    ExternalUpdateDataConnectionStatus = update_connection_status
     ExternalGetDataConnectionToken = get_ingest_token
     ExternalRegenerateDataConnectionToken = regenerate_ingest_token
     ExternalGetDataConnectionByID = get_connection_by_id
