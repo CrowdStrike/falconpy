@@ -183,6 +183,7 @@ class DataProtectionConfiguration(ServiceClass):
                 {
                     "resources": [
                         {
+                        "id": "string",
                         "classification_properties": {
                             "content_patterns": [
                             "string"
@@ -229,8 +230,9 @@ class DataProtectionConfiguration(ServiceClass):
                         }
                     ]
                 }
-        classification_properties -- The properties of the new classification. Dictionary.
-        name -- The name of the new classification. String.
+        id -- The ID of the classification to update. String. Required for update operations.
+        classification_properties -- The properties of the classification. Dictionary.
+        name -- The name of the classification. String.
 
         This method only supports keywords for providing arguments.
 
@@ -1018,6 +1020,7 @@ class DataProtectionConfiguration(ServiceClass):
                 {
                     "resources": [
                         {
+                        "id": "string",
                         "description": "string",
                         "name": "string",
                         "policy_properties": {
@@ -1089,6 +1092,7 @@ class DataProtectionConfiguration(ServiceClass):
                         }
                     ]
                 }
+        id -- The ID of the policy to update. String. Required for update operations.
         description -- The description of the policy. String.
         name -- The name of the policy. String.
         policy_properties -- The properties of the policy. Dictionary.
