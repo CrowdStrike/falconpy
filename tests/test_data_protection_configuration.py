@@ -51,7 +51,7 @@ class TestDataProtectionConfiguration:
         tests = {
             "entities_classification_get_v2": falcon.get_classification(ids="test-id"),
             "entities_classification_post_v2": falcon.create_classification(name="test-classification", classification_properties=classification_props),
-            "entities_classification_patch_v2": falcon.update_classifications(name="updated-classification", classification_properties=classification_props),
+            "entities_classification_patch_v2": falcon.update_classifications(id="test-id", name="updated-classification", classification_properties=classification_props),
             "entities_classification_delete_v2": falcon.delete_classification(ids="test-id"),
 
             "entities_cloud_application_get": falcon.get_cloud_application(ids="test-id"),
@@ -115,7 +115,7 @@ class TestDataProtectionConfiguration:
             "entities_policy_get_v2": falcon.get_policies(ids="test-id"),
             "entities_policy_post_v2": falcon.create_policy(resources=[]),
             "entities_policy_post_v2": falcon.create_policy(platform_name="win", description="test policy", name="test-policy", policy_properties=policy_props, precedence=1),
-            "entities_policy_patch_v2": falcon.update_policies(platform_name="win", description="updated policy", name="updated-policy", policy_properties=policy_props, precedence=2),
+            "entities_policy_patch_v2": falcon.update_policies(id="test-id", platform_name="win", description="updated policy", name="updated-policy", policy_properties=policy_props, precedence=2),
             "entities_policy_delete_v2": falcon.delete_policies(ids="test-id", platform_name="win"),
 
             "entities_web_location_get_v2": falcon.get_web_location(ids="test-id"),

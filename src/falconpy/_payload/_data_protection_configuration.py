@@ -43,11 +43,12 @@ from typing import Dict, List, Union
 def data_protection_classification_payload(
         passed_keywords: dict
         ) -> Dict[str, List[Dict[str, Union[str, int, bool, list, dict]]]]:
-    """Create classifications.
+    """Create or update classifications.
 
     {
         "resources": [
             {
+            "id": "string",
             "classification_properties": {
                 "content_patterns": [
                 "string"
@@ -98,7 +99,7 @@ def data_protection_classification_payload(
     returned_payload = {}
     resources = []
     resource = {}
-    keys = ["name", "classification_properties"]
+    keys = ["id", "name", "classification_properties"]
     for key in keys:
         if passed_keywords.get(key, None):
             provided = passed_keywords.get(key, None)
@@ -214,11 +215,12 @@ def data_protection_sensitivity_label_payload(
 
 # pylint: disable=R0912
 def data_protection_policy_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int, bool, list, dict]]]]:
-    """Create data protection policies.
+    """Create or update data protection policies.
 
     {
         "resources": [
             {
+            "id": "string",
             "description": "string",
             "name": "string",
             "policy_properties": {
@@ -300,7 +302,7 @@ def data_protection_policy_payload(passed_keywords: dict) -> Dict[str, List[Dict
     resources = []
     resource = {}
 
-    resource_fields = ["description", "name", "precedence", "policy_properties"]
+    resource_fields = ["id", "description", "name", "precedence", "policy_properties"]
     for field in resource_fields:
         if passed_keywords.get(field, None) is not None:
             resource[field] = passed_keywords.get(field, None)
