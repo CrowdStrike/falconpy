@@ -38,6 +38,51 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_security_detections_endpoints = [
   [
+    "cspm_evaluations_combined_iom_by_rule",
+    "GET",
+    "/cloud-security-evaluations/combined/ioms-by-rule/v1",
+    "returns ioms grouped by rule",
+    "cloud_security_detections",
+    [
+      {
+        "type": "string",
+        "description": "FQL string to filter results in Falcon Query Language (FQL). Supported fields:   "
+        "account_id  account_name  applicable_profile  attack_type  benchmark_name  benchmark_version  business_impact "
+        "  cid  cloud_group  cloud_label  cloud_label_id  cloud_provider  cloud_scope  created_at  environment  "
+        "extension_status  first_detected  framework  last_detected  policy_id  policy_name  region  requirement  "
+        "resource_gcrn  resource_id  resource_parent  resource_status  resource_type  resource_type_name  rule_group  "
+        "rule_id  rule_name  rule_origin  section  service  service_category  severity  status  suppressed_by  "
+        "tactic_id  tactic_name  tag_key  tag_value  tags  tags_string  technique_id  technique_name  zone",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The field to sort on.  Sortable fields include:  assessed_assets  cloud_provider  "
+        "misconfigurations  rule_id  severity\n\nUse |asc or |desc suffix to specify sort direction.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "maximum": 1000,
+        "minimum": 0,
+        "type": "integer",
+        "default": 500,
+        "description": "The maximum number of items to return. When not specified or 0, 500 is used. When "
+        "larger than 1000, 1000 is used.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "integer",
+        "description": "Offset returned assets",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "cspm_evaluations_iom_entities",
     "GET",
     "/cloud-security-evaluations/entities/ioms/v1",

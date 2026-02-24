@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library (deprecated operations).
+"""Internal API endpoint constant library.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_security_detections_endpoints = [
   [
-    "cspm-evaluations-iom-entities",
+    "cspm_evaluations_iom_entities",
     "GET",
     "/cloud-security-evaluations/entities/ioms/v1",
     "Gets IOMs based on the provided IDs",
@@ -58,7 +58,7 @@ _cloud_security_detections_endpoints = [
     ]
   ],
   [
-    "cspm-evaluations-iom-queries",
+    "cspm_evaluations_iom_queries",
     "GET",
     "/cloud-security-evaluations/queries/ioms/v1",
     "Gets a list of IOM IDs for the given parameters, filters and sort criteria.",

@@ -56,6 +56,60 @@ class CloudSecurityDetections(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_combined_iom_by_rule(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Return IOMs grouped by rule.
+
+        Keyword arguments:
+        filter -- FQL string to filter results. String.
+                  Supported fields:
+                    account_id            account_name          applicable_profile
+                    attack_type           benchmark_name        benchmark_version
+                    business_impact       cid                   cloud_group
+                    cloud_label           cloud_label_id        cloud_provider
+                    cloud_scope           created_at            environment
+                    extension_status      first_detected        framework
+                    last_detected         policy_id             policy_name
+                    region                requirement           resource_gcrn
+                    resource_id           resource_parent       resource_status
+                    resource_type         resource_type_name    rule_group
+                    rule_id               rule_name             rule_origin
+                    section               service               service_category
+                    severity              status                suppressed_by
+                    tactic_id             tactic_name           tag_key
+                    tag_value             tags                  tags_string
+                    technique_id          technique_name        zone
+        sort -- The field to sort on. String.
+                Sortable fields:
+                    assessed_assets       cloud_provider
+                    misconfigurations     rule_id
+                    severity
+                Use |asc or |desc suffix to specify sort direction.
+        limit -- The maximum number of items to return. When not specified or 0, 500 is used.
+                 When larger than 1000, 1000 is used. Integer.
+        offset -- Offset returned assets. Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-security-detections/cspm-evaluations-combined-iom-by-rule
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cspm_evaluations_combined_iom_by_rule",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_iom_entities(self: object,
                          *args,
                          parameters: dict = None,
@@ -154,5 +208,6 @@ class CloudSecurityDetections(ServiceClass):
             params=parameters
             )
 
+    cspm_evaluations_combined_iom_by_rule = get_combined_iom_by_rule
     cspm_evaluations_iom_entities = get_iom_entities
     cspm_evaluations_iom_queries = query_iom_entities
