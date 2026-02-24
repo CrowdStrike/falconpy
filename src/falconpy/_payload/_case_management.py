@@ -301,6 +301,85 @@ def update_case_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union
     return returned_payload
 
 
+def case_management_file_ids_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
+    """Craft a properly formatted file IDs payload for file download operations.
+
+    {
+        "ids": [
+            "string"
+        ]
+    }
+    """
+    returned_payload = {}
+
+    if passed_keywords.get("ids", None) is not None:
+        provided = passed_keywords.get("ids", None)
+        if isinstance(provided, str):
+            provided = provided.split(',') if ',' in provided else [provided]
+        returned_payload["ids"] = provided
+
+    return returned_payload
+
+
+def case_management_rtr_file_metadata_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
+    """Craft a properly formatted payload for retrieving RTR file metadata.
+
+    {
+        "aid": "string",
+        "file_path": "string"
+    }
+    """
+    returned_payload = {}
+
+    keys = ["aid", "file_path"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    return returned_payload
+
+
+def case_management_rtr_file_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
+    """Craft a properly formatted payload for retrieving a file via RTR.
+
+    {
+        "aid": "string",
+        "case_id": "string",
+        "description": "string",
+        "file_path": "string"
+    }
+    """
+    returned_payload = {}
+
+    keys = ["aid", "case_id", "description", "file_path"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    return returned_payload
+
+
+def case_management_rtr_recent_file_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
+    """Craft a properly formatted payload for retrieving a recently fetched RTR file.
+
+    {
+        "aid": "string",
+        "case_id": "string",
+        "description": "string",
+        "session_id": "string",
+        "sha256": "string"
+    }
+    """
+    returned_payload = {}
+
+    keys = ["aid", "case_id", "description", "session_id", "sha256"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    return returned_payload
+
+
 def case_evidence_payload(passed_keywords: dict) -> Dict[str, List[Dict[str, Union[str, int]]]]:
     """Case evidence payload handler.
 

@@ -164,6 +164,20 @@ _case_management_endpoints = [
     ]
   ],
   [
+    "entities_files_download_post_v1",
+    "POST",
+    "/case-files/entities/files/download/v1",
+    "Download existing files from case",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_files_upload_post_v1",
     "POST",
     "/case-files/entities/files/upload/v1",
@@ -213,10 +227,38 @@ _case_management_endpoints = [
     ]
   ],
   [
+    "entities_get_rtr_file_metadata_post_v1",
+    "POST",
+    "/case-files/entities/get-rtr-file-metadata/v1",
+    "gets metadata for a file via RTR without retrieving it",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_retrieve_rtr_file_post_v1",
     "POST",
     "/case-files/entities/retrieve-rtr-file/v1",
     "retrieves a file from host using RTR and adds it to a case",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_retrieve_rtr_recent_file_post_v1",
+    "POST",
+    "/case-files/entities/retrieve-rtr-recent-file/v1",
+    "RetrieveRecentRTRFile retrieves a recently fetched RTR file and adds it to a case",
     "case_management",
     [
       {
@@ -253,6 +295,20 @@ _case_management_endpoints = [
         "description": "Page offset",
         "name": "offset",
         "in": "query"
+      }
+    ]
+  ],
+  [
+    "aggregates_access_tags_post_v1",
+    "POST",
+    "/casemgmt/aggregates/access-tags/v1",
+    "Get access tag aggregates",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
       }
     ]
   ],
@@ -308,6 +364,27 @@ _case_management_endpoints = [
       {
         "name": "body",
         "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_access_tags_get_v1",
+    "GET",
+    "/casemgmt/entities/access-tags/v1",
+    "Get access tags",
+    "case_management",
+    [
+      {
+        "uniqueItems": True,
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Resource IDs",
+        "name": "ids",
+        "in": "query",
         "required": True
       }
     ]
@@ -711,6 +788,41 @@ _case_management_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      }
+    ]
+  ],
+  [
+    "queries_access_tags_get_v1",
+    "GET",
+    "/casemgmt/queries/access-tags/v1",
+    "Query access tags",
+    "case_management",
+    [
+      {
+        "type": "string",
+        "description": "FQL filter expression",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort expression",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "maximum": 200,
+        "minimum": 1,
+        "type": "integer",
+        "description": "Page size",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Pagination token",
+        "name": "after",
+        "in": "query"
       }
     ]
   ],

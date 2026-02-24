@@ -46,6 +46,10 @@ from ._payload._case_management import (
     case_management_create_notification_payload,
     case_management_sla_payload,
     case_management_template_payload,
+    case_management_file_ids_payload,
+    case_management_rtr_file_metadata_payload,
+    case_management_rtr_file_payload,
+    case_management_rtr_recent_file_payload,
     specified_case_payload,
     case_manage_payload,
     case_evidence_payload,
@@ -252,6 +256,38 @@ class CaseManagement(ServiceClass):
             params=handle_single_argument(args, parameters, "id")
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def download_files(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Download existing file from case.
+
+        Keyword arguments:
+        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "ids": [
+                        "string"
+                    ]
+                }
+        ids -- List of file IDs to download. String or list of strings.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.files_download.post.v1
+        """
+        if not body:
+            body = case_management_file_ids_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_files_download_post_v1",
+            body=body
+            )
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def upload_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload file for case.
@@ -349,6 +385,112 @@ class CaseManagement(ServiceClass):
             operation_id="queries_file_details_get_v1",
             keywords=kwargs,
             params=parameters
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_rtr_file_metadata(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get metadata for a file via RTR without retrieving it.
+
+        Keyword arguments:
+        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "aid": "string",
+                    "file_path": "string"
+                }
+        aid -- The agent ID of the host to retrieve file metadata from. String.
+        file_path -- The path to the file on the host. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.get-rtr-file-metadata.post.v1
+        """
+        if not body:
+            body = case_management_rtr_file_metadata_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_get_rtr_file_metadata_post_v1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def retrieve_rtr_file(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve a file from host using RTR and add it to a case.
+
+        Keyword arguments:
+        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "aid": "string",
+                    "case_id": "string",
+                    "description": "string",
+                    "file_path": "string"
+                }
+        aid -- The agent ID of the host to retrieve the file from. String.
+        case_id -- The ID of the case to add the file to. String.
+        description -- A description of the file being retrieved. String.
+        file_path -- The path to the file on the host. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.retrieve-rtr-file.post.v1
+        """
+        if not body:
+            body = case_management_rtr_file_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_retrieve_rtr_file_post_v1",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def retrieve_rtr_recent_file(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve a recently fetched RTR file and add it to a case.
+
+        Keyword arguments:
+        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "aid": "string",
+                    "case_id": "string",
+                    "description": "string",
+                    "session_id": "string",
+                    "sha256": "string"
+                }
+        aid -- The agent ID of the host. String.
+        case_id -- The ID of the case to add the file to. String.
+        description -- A description of the file being retrieved. String.
+        session_id -- The RTR session ID for the file retrieval. String.
+        sha256 -- The SHA256 hash of the file to retrieve. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.retrieve-rtr-recent-file.post.v1
+        """
+        if not body:
+            body = case_management_rtr_recent_file_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_retrieve_rtr_recent_file_post_v1",
+            body=body
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -559,6 +701,87 @@ class CaseManagement(ServiceClass):
             endpoints=Endpoints,
             operation_id="aggregates_templates_post_v1",
             body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def get_access_tag_aggregations(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get access tag aggregates.
+
+        Keyword arguments:
+        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+                [
+                    {
+                        "date_ranges": [
+                        {
+                            "from": "string",
+                            "to": "string"
+                        }
+                        ],
+                        "field": "string",
+                        "filter": "string",
+                        "from": 0,
+                        "name": "string",
+                        "size": 0,
+                        "sort": "string",
+                        "type": "terms"
+                    }
+                ]
+        date_ranges -- Date range timeframe. List of dictionaries.
+        field -- Field to retrieve. String.
+        filter -- Options filter criteria in the form of an FQL query. String.
+        from -- Integer.
+        name -- String.
+        size -- Integer.
+        sort -- The field to sort on. String.
+        type -- String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/aggregates.access-tags.post.v1
+        """
+        if not body:
+            body = case_management_notification_groups_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="aggregates_access_tags_post_v1",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_access_tags(self: object,
+                        *args,
+                        parameters: dict = None,
+                        **kwargs
+                        ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get access tags.
+
+        Keyword arguments:
+        ids -- Resource IDs. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/entities.access-tags.get.v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_access_tags_get_v1",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -1277,6 +1500,34 @@ class CaseManagement(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_access_tags(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Query access tags.
+
+        Keyword arguments:
+        filter -- FQL filter expression. String.
+        sort -- Sort expression. String.
+        limit -- Page size. Integer.
+        after -- Pagination token. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-management/queries.access-tags.get.v1
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queries_access_tags_get_v1",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def query_fields(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Query fields.
 
@@ -1780,13 +2031,19 @@ class CaseManagement(ServiceClass):
     entities_file_details_patch_v1 = update_file_details
     entities_files_bulk_download_post_v1 = bulk_download_files
     entities_files_download_get_v1 = download_existing_files
+    entities_files_download_post_v1 = download_files
     entities_files_upload_post_v1 = upload_file
     entities_files_delete_v1 = delete_file_details
     queries_file_details_get_v1 = query_file_detail_ids
+    entities_get_rtr_file_metadata_post_v1 = get_rtr_file_metadata
+    entities_retrieve_rtr_file_post_v1 = retrieve_rtr_file
+    entities_retrieve_rtr_recent_file_post_v1 = retrieve_rtr_recent_file
     aggregates_notification_groups_post_v1 = get_notification_groups
     aggregates_notification_groups_post_v2 = get_notification_groups_v2
     aggregates_slas_post_v1 = get_sla_aggregations
     aggregates_templates_post_v1 = get_template_aggregations
+    aggregates_access_tags_post_v1 = get_access_tag_aggregations
+    entities_access_tags_get_v1 = get_access_tags
     entities_fields_get_v1 = get_fields
     entities_notification_groups_get_v1 = get_notification_groups
     entities_notification_groups_post_v1 = create_notification_group
@@ -1808,6 +2065,7 @@ class CaseManagement(ServiceClass):
     entities_templates_patch_v1 = update_template
     entities_templates_delete_v1 = delete_templates
     queries_fields_get_v1 = query_fields
+    queries_access_tags_get_v1 = query_access_tags
     queries_notification_groups_get_v1 = query_notification_groups
     queries_notification_groups_get_v2 = query_notification_groups_v2
     queries_slas_get_v1 = query_slas
