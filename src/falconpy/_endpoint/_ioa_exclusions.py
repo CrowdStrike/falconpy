@@ -46,7 +46,7 @@ _ioa_exclusions_endpoints = [
     [
       {
         "type": "string",
-        "description": "The `ifn_regex` expression to filter exclusion aggregations by, used alongside filter "
+        "description": "The ifn_regex expression to filter exclusion aggregations by, used alongside filter "
         "expressions provided in the request body.",
         "name": "ifn_regex",
         "in": "query"
@@ -219,7 +219,7 @@ _ioa_exclusions_endpoints = [
       {
         "type": "string",
         "description": "The filter expression that should be used to limit the results. Filtered queries "
-        "involving regex fields should specify their expressions in the `ifn_regex` and `cl_regex` parameters.",
+        "involving regex fields should specify their expressions in the ifn_regex and cl_regex parameters.",
         "name": "filter",
         "in": "query"
       },
@@ -279,12 +279,18 @@ _ioa_exclusions_endpoints = [
       },
       {
         "enum": [
-          "created_by.raw",
-          "last_modified",
-          "modified_by.raw",
-          "name.raw",
-          "pattern_id",
-          "pattern_name.raw"
+          "name.asc",
+          "name.desc",
+          "pattern_id.asc",
+          "pattern_id.desc",
+          "pattern_name.asc",
+          "pattern_name.desc",
+          "created_by.asc",
+          "created_by.desc",
+          "last_modified.asc",
+          "last_modified.desc",
+          "modified_by.asc",
+          "modified_by.desc"
         ],
         "type": "string",
         "description": "The sort expression that should be used to sort the results.",
