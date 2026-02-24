@@ -54,6 +54,7 @@ from .deprecated import _scheduled_reports_deprecated
 from .deprecated import _workflows_deprecated
 from .deprecated import _zero_trust_assessment_deprecated
 from .deprecated import _certificate_based_exclusions_deprecated
+from .deprecated import _cloud_connect_aws_deprecated
 from .deprecated import _overwatch_dashboard_deprecated
 from .deprecated import _spotlight_vulnerability_metadata_deprecated
 from .deprecated import _deprecated_operation_mapping
@@ -75,7 +76,6 @@ from ._cloud_security import _cloud_security_endpoints
 from ._cloud_security_assets import _cloud_security_assets_endpoints
 from ._cloud_security_compliance import _cloud_security_compliance_endpoints
 from ._cloud_security_detections import _cloud_security_detections_endpoints
-from ._cloud_connect_aws import _cloud_connect_aws_endpoints
 from ._cloud_snapshots import _cloud_snapshots_endpoints
 from ._container_image_compliance import _container_image_compliance_endpoints
 from ._configuration_assessment_evaluation_logic import _configuration_assessment_evaluation_logic_endpoints
@@ -171,7 +171,6 @@ api_endpoints.extend(_aspm_endpoints)
 api_endpoints.extend(_cao_hunting_endpoints)
 api_endpoints.extend(_case_management_endpoints)
 api_endpoints.extend(_certificate_based_exclusions_endpoints)
-api_endpoints.extend(_cloud_connect_aws_endpoints)
 api_endpoints.extend(_cloud_aws_registration_endpoints)
 api_endpoints.extend(_cloud_azure_registration_endpoints)
 api_endpoints.extend(_cloud_google_cloud_registration_endpoints)
@@ -283,6 +282,7 @@ deprecated_endpoints.extend(_cloud_security_detections_deprecated)
 deprecated_endpoints.extend(_correlation_rules_admin_deprecated)
 deprecated_endpoints.extend(_correlation_rules_deprecated)
 deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
+deprecated_endpoints.extend(_cloud_connect_aws_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)
 deprecated_endpoints.extend(_d4c_registration_deprecated)
 deprecated_endpoints.extend(_data_protection_configuration_deprecated)
