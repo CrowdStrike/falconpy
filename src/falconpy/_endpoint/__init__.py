@@ -57,6 +57,7 @@ from .deprecated import _certificate_based_exclusions_deprecated
 from .deprecated import _cloud_connect_aws_deprecated
 from .deprecated import _overwatch_dashboard_deprecated
 from .deprecated import _spotlight_vulnerability_metadata_deprecated
+from .deprecated import _tailored_intelligence_deprecated
 from .deprecated import _deprecated_operation_mapping
 from .deprecated import _deprecated_class_mapping
 
@@ -156,7 +157,6 @@ from ._sensor_visibility_exclusions import _sensor_visibility_exclusions_endpoin
 from ._serverless_vulnerabilities import _serverless_vulnerabilities_endpoints
 from ._spotlight_evaluation_logic import _spotlight_evaluation_logic_endpoints
 from ._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints
-from ._tailored_intelligence import _tailored_intelligence_endpoints
 from ._threatgraph import _threatgraph_endpoints
 from ._unidentified_containers import _unidentified_containers_endpoints
 from ._user_management import _user_management_endpoints
@@ -260,7 +260,6 @@ api_endpoints.extend(_sensor_visibility_exclusions_endpoints)
 api_endpoints.extend(_serverless_vulnerabilities_endpoints)
 api_endpoints.extend(_spotlight_evaluation_logic_endpoints)
 api_endpoints.extend(_spotlight_vulnerabilities_endpoints)
-api_endpoints.extend(_tailored_intelligence_endpoints)
 api_endpoints.extend(_threatgraph_endpoints)
 api_endpoints.extend(_unidentified_containers_endpoints)
 api_endpoints.extend(_user_management_endpoints)
@@ -306,6 +305,7 @@ deprecated_endpoints.extend(_workflows_deprecated)
 deprecated_endpoints.extend(_zero_trust_assessment_deprecated)
 deprecated_endpoints.extend(_overwatch_dashboard_deprecated)
 deprecated_endpoints.extend(_spotlight_vulnerability_metadata_deprecated)
+deprecated_endpoints.extend(_tailored_intelligence_deprecated)
 
 # Mapping of manually deprecated endpoints
 operation_deprecation_mapping = _deprecated_operation_mapping

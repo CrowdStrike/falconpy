@@ -1,4 +1,7 @@
-"""Tailored Intelligence API Interface Class.
+"""Tailored Intelligence API Interface Class (Deprecated).
+
+This service collection has been removed from the CrowdStrike API swagger.
+It is retained here for backwards compatibility only.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -40,7 +43,7 @@ from ._util import process_service_request, force_default, handle_single_argumen
 from ._payload import generic_payload_list
 from ._result import Result
 from ._service_class import ServiceClass
-from ._endpoint._tailored_intelligence import _tailored_intelligence_endpoints as Endpoints
+from ._endpoint.deprecated._tailored_intelligence import _tailored_intelligence_endpoints as Endpoints
 
 
 class TailoredIntelligence(ServiceClass):
