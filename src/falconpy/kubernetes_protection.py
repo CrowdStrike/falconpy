@@ -1864,12 +1864,13 @@ class KubernetesProtection(ServiceClass):
         Keyword arguments:
         ids -- AWS Account IDs. String or list of strings.
         is_horizon_acct -- Filter by whether an account originates from Horizon or not. String.
-        limit -- The maximum number of records to return in this response. [Integer, 1-500]
+        limit -- The maximum number of records to return in this response. [Integer, 0-1000]
                  Use with the offset parameter to manage pagination of results.
-        offset -- The offset to start retrieving records from. String.
+        offset -- The offset to start retrieving records from. Integer.
                   Use with the limit parameter to manage pagination of results.
         parameters - full parameters payload, not required if using other keywords.
         status -- Filter by account status. String.
+                  Supported values: operational, provisioned.
 
         This method only supports keywords for providing arguments.
 
@@ -1878,12 +1879,12 @@ class KubernetesProtection(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/GetAWSAccountsMixin0
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/GetAWSAccounts
         """
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="GetAWSAccountsMixin0",
+            operation_id="GetAWSAccounts",
             keywords=kwargs,
             params=parameters
             )
@@ -1949,12 +1950,12 @@ class KubernetesProtection(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/DeleteAWSAccountsMixin0
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/DeleteAWSAccounts
         """
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="DeleteAWSAccountsMixin0",
+            operation_id="DeleteAWSAccounts",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
@@ -2450,9 +2451,9 @@ class KubernetesProtection(ServiceClass):
     ReadPodCombined = read_pods_combined
     ReadKubernetesIomEntities = read_iom_entities
     SearchKubernetesIoms = search_ioms
-    GetAWSAccountsMixin0 = get_aws_accounts
+    GetAWSAccounts = get_aws_accounts
     CreateAWSAccount = create_aws_account
-    DeleteAWSAccountsMixin0 = delete_aws_accounts
+    DeleteAWSAccounts = delete_aws_accounts
     UpdateAWSAccount = update_aws_account
     ListAzureAccounts = list_azure_accounts
     CreateAzureSubscription = create_azure_subscription
