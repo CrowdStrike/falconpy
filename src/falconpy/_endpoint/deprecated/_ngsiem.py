@@ -193,18 +193,6 @@ _ngsiem_endpoints = [
         "name": "id",
         "in": "path",
         "required": True
-      },
-      {
-        "type": "integer",
-        "description": "pagination limit",
-        "name": "paginationLimit",
-        "in": "query"
-      },
-      {
-        "type": "integer",
-        "description": "pagination offset",
-        "name": "paginationOffset",
-        "in": "query"
       }
     ]
   ],
@@ -1192,70 +1180,6 @@ _ngsiem_endpoints = [
       {
         "type": "string",
         "description": "Unique identifier of the data connector",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "ExternalCreateConnectorConfig",
-    "POST",
-    "/ngsiem/entities/connectors/configs/v1",
-    "Create a new configuration for a data connector",
-    "ngsiem",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "ExternalPatchConnectorConfig",
-    "PATCH",
-    "/ngsiem/entities/connectors/configs/v1",
-    "Patch configurations for a data connector",
-    "ngsiem",
-    [
-      {
-        "type": "string",
-        "description": "Unique id of the config to update",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      },
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "ExternalDeleteConnectorConfigs",
-    "DELETE",
-    "/ngsiem/entities/connectors/configs/v1",
-    "Delete data connection config",
-    "ngsiem",
-    [
-      {
-        "type": "string",
-        "description": "Unique identifier of the connector",
-        "name": "connector_id",
-        "in": "query",
-        "required": True
-      },
-      {
-        "maxItems": 20,
-        "uniqueItems": True,
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "csv",
-        "description": "Unique identifiers of the config(s) to delete",
         "name": "ids",
         "in": "query",
         "required": True

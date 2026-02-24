@@ -145,6 +145,27 @@ def ngsiem_parser_payload(passed_keywords: dict) -> dict:
     return returned
 
 
+def ngsiem_connector_config_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted connector config payload.
+
+    {
+        "config": {
+            "auth": {},
+            "name": "string",
+            "params": {}
+        },
+        "connector_id": "string"
+    }
+    """
+    returned: dict = {}
+    keys = ["config", "connector_id"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned[key] = passed_keywords.get(key, None)
+
+    return returned
+
+
 def ngsiem_data_connection_payload(passed_keywords: dict) -> dict:
     """Create data connection payload.
 

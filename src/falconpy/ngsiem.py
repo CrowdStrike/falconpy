@@ -44,7 +44,12 @@ from ._util import (
     generate_error_result,
     handle_single_argument
 )
-from ._payload import ngsiem_search_payload, ngsiem_parser_payload, ngsiem_data_connection_payload
+from ._payload import (
+    ngsiem_search_payload,
+    ngsiem_parser_payload,
+    ngsiem_data_connection_payload,
+    ngsiem_connector_config_payload
+)
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._ngsiem import _ngsiem_endpoints as Endpoints
@@ -1738,6 +1743,115 @@ class NGSIEM(ServiceClass):
             params=handle_single_argument(args, parameters, "ids")
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_connector_config(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create a new configuration for a data connector.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "config": {
+                        "auth": {},
+                        "name": "string",
+                        "params": {}
+                    },
+                    "connector_id": "string"
+                }
+        config -- Configuration details for the connector including authentication and parameters. Dictionary.
+        connector_id -- Unique identifier of the data connector. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalCreateConnectorConfig
+        """
+        if not body:
+            body = ngsiem_connector_config_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalCreateConnectorConfig",
+            body=body
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def patch_connector_config(self: object,
+                               body: dict = None,
+                               parameters: dict = None,
+                               **kwargs
+                               ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Patch configurations for a data connector.
+
+        Keyword arguments:
+        ids -- Unique id of the config to update. String.
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "config": {
+                        "auth": {},
+                        "name": "string",
+                        "params": {}
+                    },
+                    "connector_id": "string"
+                }
+        config -- Configuration details for the connector including authentication and parameters. Dictionary.
+        connector_id -- Unique identifier of the data connector. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalPatchConnectorConfig
+        """
+        if not body:
+            body = ngsiem_connector_config_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalPatchConnectorConfig",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_connector_configs(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Delete data connection config.
+
+        Keyword arguments:
+        connector_id -- Unique identifier of the connector. String.
+        ids -- Unique identifiers of the config(s) to delete. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/ExternalDeleteConnectorConfigs
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="ExternalDeleteConnectorConfigs",
+            keywords=kwargs,
+            params=parameters
+            )
+
     UploadLookupV1 = upload_file
     GetLookupV1 = get_file
     GetLookupFromPackageWithNamespaceV1 = get_file_from_package_with_namespace
@@ -1779,3 +1893,6 @@ class NGSIEM(ServiceClass):
     ExternalUpdateDataConnection = update_data_connection
     ExternalDeleteDataConnection = delete_data_connection
     ExternalListConnectorConfigs = list_connector_configs
+    ExternalCreateConnectorConfig = create_connector_config
+    ExternalPatchConnectorConfig = patch_connector_config
+    ExternalDeleteConnectorConfigs = delete_connector_configs
