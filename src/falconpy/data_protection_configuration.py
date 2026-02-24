@@ -619,7 +619,7 @@ class DataProtectionConfiguration(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.policy-precedence.post.v1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.policy.precedence.post.v1
         """
         if not body:
             body = data_protection_policy_precedence_payload(passed_keywords=kwargs)
