@@ -213,16 +213,219 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_aspm.py`
 
++ Deprecated: __CloudConnectAWS__ service collection (removed from swagger).
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_cloud_connect_aws.py`
+    - `cloud_connect_aws.py`
+
++ Deprecated: __TailoredIntelligence__ service collection (removed from swagger).
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_tailored_intelligence.py`
+    - `tailored_intelligence.py`
+
++ Updated: Updated __AdmissionControlPolicies__ endpoint definitions.
+    - `_endpoint/_admission_control_policies.py`
+    - `_endpoint/deprecated/_admission_control_policies.py`
+
++ Updated: Updated __CloudOCIRegistration__ endpoint definitions and docstrings.
+    - `_endpoint/_cloud_oci_registration.py`
+    - `_endpoint/deprecated/_cloud_oci_registration.py`
+    - `cloud_oci_registration.py`
+
++ Updated: Updated __CloudPolicies__ endpoint definitions and docstrings.
+    - `_endpoint/_cloud_policies.py`
+    - `_endpoint/deprecated/_cloud_policies.py`
+    - `cloud_policies.py`
+
++ Updated: Updated __ContainerImageCompliance__ endpoint definitions.
+    - `_endpoint/_container_image_compliance.py`
+    - `_endpoint/deprecated/_container_image_compliance.py`
+
++ Updated: Updated __HostMigration__ endpoint definitions.
+    - `_endpoint/_host_migration.py`
+    - `_endpoint/deprecated/_host_migration.py`
+
++ Updated: Updated __Hosts__ endpoint definitions.
+    - `_endpoint/_hosts.py`
+    - `_endpoint/deprecated/_hosts.py`
+
++ Updated: Updated __IOAExclusions__ endpoint definitions.
+    - `_endpoint/_ioa_exclusions.py`
+    - `_endpoint/deprecated/_ioa_exclusions.py`
+
++ Updated: Updated __QuickScanPro__ endpoint definitions.
+    - `_endpoint/_quick_scan_pro.py`
+    - `_endpoint/deprecated/_quick_scan_pro.py`
+
++ Updated: Updated __Recon__ endpoint definitions.
+    - `_endpoint/_recon.py`
+    - `_endpoint/deprecated/_recon.py`
+
++ Updated: Updated __ServerlessVulnerabilities__ endpoint definitions and docstrings.
+    - `_endpoint/_serverless_vulnerabilities.py`
+    - `_endpoint/deprecated/_serverless_vulnerabilities.py`
+    - `serverless_vulnerabilities.py`
+
++ Updated: Updated __UnidentifiedContainers__ endpoint definitions and docstrings.
+    - `_endpoint/_unidentified_containers.py`
+    - `_endpoint/deprecated/_unidentified_containers.py`
+    - `unidentified_containers.py`
+
++ Updated: Updated __UserManagement__ endpoint definitions and docstrings.
+    - `_endpoint/_user_management.py`
+    - `_endpoint/deprecated/_user_management.py`
+    - `user_management.py`
+
++ Added: Added 7 new operations to the __CaseManagement__ service collection.
+    - _queries_access_tags_get_v1_
+    - _entities_files_download_post_v1_
+    - _entities_access_tags_get_v1_
+    - _aggregates_access_tags_post_v1_
+    - _entities_retrieve_rtr_recent_file_post_v1_
+    - _entities_get_rtr_file_metadata_post_v1_
+    - _entities_retrieve_rtr_file_post_v1_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_case_management.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_case_management.py`
+    - `_payload/__init__.py`
+    - `_payload/_case_management.py`
+    - `case_management.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_case_management.py`
+
++ Added: Added new _cloud_registration_gcp_get_entities_ operation to the __CloudGoogleCloudRegistration__ service collection.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_cloud_google_cloud_registration.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_cloud_google_cloud_registration.py`
+    - `cloud_google_cloud_registration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_google_cloud_registration.py`
+
++ Added: Added new _cspm_evaluations_combined_iom_by_rule_ operation to the __CloudSecurityDetections__ service collection.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_cloud_security_detections.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_cloud_security_detections.py`
+    - `cloud_security_detections.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_security_detections.py`
+
++ Added: Added new _GetCredentialsMixin0Mixin53_ operation to the __CloudSnapshots__ service collection.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_cloud_snapshots.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_cloud_snapshots.py`
+    - `cloud_snapshots.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_cloud_snapshots.py`
+
++ Removed: Removed deprecated _GetCredentialsMixin0_ and _CreateInventory_ operations from the __CloudSnapshots__ service collection.
+    - `_endpoint/_cloud_snapshots.py`
+    - `cloud_snapshots.py`
+
++ Added: Added new _entities_policy_precedence_post_v1_ operation to the __DataProtectionConfiguration__ service collection.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_data_protection_configuration.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_data_protection_configuration.py`
+    - `_payload/_data_protection_configuration.py`
+    - `data_protection_configuration.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_data_protection_configuration.py`
+
++ Removed: Removed deprecated _AggregateDetections_ and _QueryDetectionIdsByFilter_ operations from the __FalconCompleteDashboard__ service collection.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_falcon_complete_dashboard.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_falcon_complete_dashboard.py`
+    - `falcon_complete_dashboard.py`
+
++ Added: Replaced _QuerySubmissions_ with _QuerySubmissionsMixin0_ in the __FalconXSandbox__ service collection.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_falconx_sandbox.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_falconx_sandbox.py`
+    - `falconx_sandbox.py`
+
++ Added: Replaced _GetAWSAccountsMixin0_ and _DeleteAWSAccountsMixin0_ with _GetAWSAccounts_ and _DeleteAWSAccounts_ in the __KubernetesProtection__ service collection.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_kubernetes_protection.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+
++ Added: Added 3 new connector config operations to the __NGSIEM__ service collection.
+    - _ExternalCreateConnectorConfig_
+    - _ExternalPatchConnectorConfig_
+    - _ExternalDeleteConnectorConfigs_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_ngsiem.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_ngsiem.py`
+    - `_payload/_ngsiem.py`
+    - `ngsiem.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ngsiem.py`
+
++ Added: Replaced _QuerySubmissionsMixin0_ with _QuerySubmissions_ in the __QuickScan__ service collection.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_quick_scan.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_quick_scan.py`
+    - `quick_scan.py`
+
++ Added: New __ServerlessExports__ service collection with 4 operations.
+    - _QueryExportJobsMixin0_
+    - _LaunchExportJobMixin0_
+    - _ReadExportJobsMixin0_
+    - _DownloadExportFileMixin0_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_serverless_exports.py`
+    - `_payload/__init__.py`
+    - `_payload/_serverless_exports.py`
+    - `__init__.py`
+    - `serverless_exports.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_serverless_exports.py`
+
++ Added: New __SpotlightSupportedEvaluation__ service collection with 1 operation.
+    - _combinedSupportedEvaluationExt_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_spotlight_supported_evaluation.py`
+    - `__init__.py`
+    - `spotlight_supported_evaluation.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_spotlight_supported_evaluation.py`
+
++ Added: New __MaintenanceToken__ service collection with 1 operation.
+    - _incrementUninstallToken_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_maintenance_token.py`
+    - `_payload/__init__.py`
+    - `_payload/_maintenance_token.py`
+    - `__init__.py`
+    - `maintenance_token.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_maintenance_token.py`
+
++ Restored: __SpotlightVulnerabilityMetadata__ service collection (restored to swagger).
+    - `_endpoint/__init__.py`
+    - `_endpoint/_spotlight_vulnerability_metadata.py`
+    - `spotlight_vulnerability_metadata.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_spotlight_vulnerability_metadata.py`
+
 ## Other
 + Removed: Overwatch Dashboard service collection endpoint definitions.
     - `_endpoint/_overwatch_dashboard.py`
 
-+ Removed: Spotlight Vulnerability Metadata service collection.
-    - `__init__.py`
-    - `_endpoint/__init__.py`
-    - `_endpoint/_spotlight_vulnerability_metadata.py`
-    - `spotlight_vulnerability_metadata.py`
-    - `tests/test_spotlight_vulnerability_metadata.py`
++ Changed: Updated swagger definitions from latest CrowdStrike API specifications.
+    > 24 total new operations added.
+
 ---
 
 # Version 1.6.0
