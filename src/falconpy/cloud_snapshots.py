@@ -243,8 +243,7 @@ class CloudSnapshots(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        ----
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/GetCredentialsMixin0
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/GetCredentialsMixin0Mixin53
 
         Keyword arguments
         ----
@@ -262,7 +261,7 @@ class CloudSnapshots(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="GetCredentialsMixin0"
+            operation_id="GetCredentialsMixin0Mixin53"
             )
 
     def get_iac_credentials(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
@@ -354,6 +353,6 @@ class CloudSnapshots(ServiceClass):
     ReadDeploymentsEntities = get_scan_jobs
     CreateDeploymentEntity = launch_scan_job
     GetScanReport = get_scan_reports
-    GetCredentialsMixin0 = get_credentials
+    GetCredentialsMixin0Mixin53 = get_credentials
     GetCredentialsIAC = get_iac_credentials
     RegisterCspmSnapshotAccount = register_account
