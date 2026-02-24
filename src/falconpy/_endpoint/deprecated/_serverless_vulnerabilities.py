@@ -48,8 +48,8 @@ _serverless_vulnerabilities_endpoints = [
         "type": "string",
         "description": "Filter lambda vulnerabilities using a query in Falcon Query Language (FQL).Supported "
         "filters:  application_name,application_name_version,cid,cloud_account_id,cloud_account_name,cloud_provider,cve "
-        "_id,cve_reachable,cvss_base_score,exprt_rating,first_seen_timestamp,function_name,function_resource_id,is_supp "
-        "orted,is_valid_asset_id,layer,region,runtime,severity,timestamp,type",
+        "_id,cvss_base_score,exprt_rating,first_seen_timestamp,function_name,function_resource_id,is_supported,is_valid "
+        "_asset_id,layer,region,runtime,severity,timestamp,type",
         "name": "filter",
         "in": "query"
       },

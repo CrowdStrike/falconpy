@@ -69,9 +69,10 @@ class ServerlessVulnerabilities(ServiceClass):
                     cloud_account_name              layer
                     cloud_provider                  region
                     cve_id                          runtime
-                    cvss_base_score                 severity
-                    exprt_rating                    timestamp
-                    first_seen_timestamp            type
+                    cve_reachable                   severity
+                    cvss_base_score                 timestamp
+                    exprt_rating                    type
+                    first_seen_timestamp
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- The fields to sort the records on.
