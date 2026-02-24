@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library (deprecated operations).
+"""Internal API endpoint constant library.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_oci_registration_endpoints = [
   [
-    "cloud-security-registration-oci-get-account",
+    "cloud_security_registration_oci_get_account",
     "GET",
     "/cloud-security-registration-oci/combined/accounts/v1",
     "Retrieve a list of OCI tenancies with support for FQL filtering, sorting, and pagination",
@@ -84,7 +84,7 @@ _cloud_oci_registration_endpoints = [
     ]
   ],
   [
-    "cloud-security-registration-oci-rotate-key",
+    "cloud_security_registration_oci_rotate_key",
     "POST",
     "/cloud-security-registration-oci/entities/account-rotate-keys/v1",
     "Refresh key for the OCI Tenancy",
@@ -98,7 +98,7 @@ _cloud_oci_registration_endpoints = [
     ]
   ],
   [
-    "cloud-security-registration-oci-validate-tenancy",
+    "cloud_security_registration_oci_validate_tenancy",
     "POST",
     "/cloud-security-registration-oci/entities/account-validate/v1",
     "Validate the OCI account in CSPM for a provided CID. For internal clients only.",
@@ -112,7 +112,7 @@ _cloud_oci_registration_endpoints = [
     ]
   ],
   [
-    "cloud-security-registration-oci-create-account",
+    "cloud_security_registration_oci_create_account",
     "POST",
     "/cloud-security-registration-oci/entities/accounts/v1",
     "Create OCI tenancy account in CSPM",
@@ -126,7 +126,7 @@ _cloud_oci_registration_endpoints = [
     ]
   ],
   [
-    "cloud-security-registration-oci-update-account",
+    "cloud_security_registration_oci_update_account",
     "PATCH",
     "/cloud-security-registration-oci/entities/accounts/v1",
     "Patch an existing OCI account in our system for a customer.",
@@ -140,7 +140,7 @@ _cloud_oci_registration_endpoints = [
     ]
   ],
   [
-    "cloud-security-registration-oci-delete-account",
+    "cloud_security_registration_oci_delete_account",
     "DELETE",
     "/cloud-security-registration-oci/entities/accounts/v1",
     "Delete an existing OCI tenancy in CSPM.",
@@ -159,7 +159,7 @@ _cloud_oci_registration_endpoints = [
     ]
   ],
   [
-    "cloud-security-registration-oci-download-script",
+    "cloud_security_registration_oci_download_script",
     "POST",
     "/cloud-security-registration-oci/entities/scripts/v1",
     "Retrieve script to create resources in tenancy OCID",

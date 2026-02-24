@@ -133,7 +133,7 @@ class CloudOCIRegistration(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def validate_tenancy(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Validate the OCI account in CSPM for a provided CID. For internal clients only.
+        """Validate the OCI account in CSPM for a provided CID.
 
         Keyword arguments:
         body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
