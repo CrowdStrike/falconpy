@@ -143,6 +143,7 @@ from ._iocs import _iocs_endpoints
 from ._it_automation import _it_automation_endpoints
 from ._kubernetes_container_compliance import _kubernetes_container_compliance_endpoints
 from ._kubernetes_protection import _kubernetes_protection_endpoints
+from ._maintenance_token import _maintenance_token_endpoints
 from ._malquery import _malquery_endpoints
 from ._message_center import _message_center_endpoints
 from ._ml_exclusions import _ml_exclusions_endpoints
@@ -169,7 +170,10 @@ from ._sensor_update_policies import _sensor_update_policies_endpoints
 from ._sensor_usage import _sensor_usage_endpoints
 from ._sensor_visibility_exclusions import _sensor_visibility_exclusions_endpoints
 from ._serverless_vulnerabilities import _serverless_vulnerabilities_endpoints
+from ._serverless_exports import _serverless_exports_endpoints
 from ._spotlight_evaluation_logic import _spotlight_evaluation_logic_endpoints
+from ._spotlight_supported_evaluation import _spotlight_supported_evaluation_endpoints
+from ._spotlight_vulnerability_metadata import _spotlight_vulnerability_metadata_endpoints
 from ._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints
 from ._threatgraph import _threatgraph_endpoints
 from ._unidentified_containers import _unidentified_containers_endpoints
@@ -247,6 +251,7 @@ api_endpoints.extend(_it_automation_endpoints)
 api_endpoints.extend(_kubernetes_container_compliance_endpoints)
 api_endpoints.extend(_kubernetes_protection_endpoints)
 api_endpoints.extend(_malquery_endpoints)
+api_endpoints.extend(_maintenance_token_endpoints)
 api_endpoints.extend(_message_center_endpoints)
 api_endpoints.extend(_ml_exclusions_endpoints)
 api_endpoints.extend(_mobile_enrollment_endpoints)
@@ -272,7 +277,10 @@ api_endpoints.extend(_sensor_update_policies_endpoints)
 api_endpoints.extend(_sensor_usage_endpoints)
 api_endpoints.extend(_sensor_visibility_exclusions_endpoints)
 api_endpoints.extend(_serverless_vulnerabilities_endpoints)
+api_endpoints.extend(_serverless_exports_endpoints)
 api_endpoints.extend(_spotlight_evaluation_logic_endpoints)
+api_endpoints.extend(_spotlight_supported_evaluation_endpoints)
+api_endpoints.extend(_spotlight_vulnerability_metadata_endpoints)
 api_endpoints.extend(_spotlight_vulnerabilities_endpoints)
 api_endpoints.extend(_threatgraph_endpoints)
 api_endpoints.extend(_unidentified_containers_endpoints)

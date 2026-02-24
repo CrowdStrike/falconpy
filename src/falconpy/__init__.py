@@ -176,6 +176,7 @@ from .it_automation import ITAutomation, F4IT
 from .kubernetes_container_compliance import KubernetesContainerCompliance
 from .kubernetes_protection import KubernetesProtection
 from .malquery import MalQuery
+from .maintenance_token import MaintenanceToken
 from .message_center import MessageCenter
 from .ml_exclusions import MLExclusions
 from .mobile_enrollment import MobileEnrollment
@@ -202,9 +203,11 @@ from .sensor_update_policy import SensorUpdatePolicy, SensorUpdatePolicies
 from .sensor_usage import SensorUsage
 from .sensor_visibility_exclusions import SensorVisibilityExclusions
 from .serverless_vulnerabilities import ServerlessVulnerabilities
+from .serverless_exports import ServerlessExports
 from .spotlight_vulnerabilities import SpotlightVulnerabilities
 from .spotlight_vulnerability_metadata import SpotlightVulnerabilityMetadata
 from .spotlight_evaluation_logic import SpotlightEvaluationLogic
+from .spotlight_supported_evaluation import SpotlightSupportedEvaluation
 from .tailored_intelligence import TailoredIntelligence
 from .threatgraph import ThreatGraph
 from .unidentified_containers import UnidentifiedContainers
@@ -264,7 +267,8 @@ __all__ = [
     "CloudSecurityCompliance", "CaseManagement", "SaasSecurity", "DataProtectionConfiguration",
     "CorrelationRulesAdmin", "CloudSecurityDetections", "CloudPolicies", "CloudGoogleCloudRegistration",
     "CloudSecurity", "AdmissionControlPolicies", "OverwatchDashboard",
-    "SpotlightVulnerabilityMetadata"
+    "SpotlightVulnerabilityMetadata", "SpotlightSupportedEvaluation",
+    "MaintenanceToken", "ServerlessExports"
     ]
 """
 This is free and unencumbered software released into the public domain.
