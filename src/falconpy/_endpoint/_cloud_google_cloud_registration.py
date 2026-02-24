@@ -38,6 +38,58 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_google_cloud_registration_endpoints = [
   [
+    "cloud_registration_gcp_get_entities",
+    "GET",
+    "/cloud-security-registration-google-cloud/entities/accounts/v1",
+    "Retrieve all GCP entities (organizations, folders, projects) grouped by type with support for FQL "
+    "filtering, sorting, and pagination.",
+    "cloud_google_cloud_registration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Google Cloud Registration IDs to filter by",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL (Falcon Query Language) string for filtering results. Allowed filters are "
+        "entity_type, entity_id, entity_name, registration_id, registration_name, registration_scope, parent_id, "
+        "ioa_status, iom_status, created, updated",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Field and direction for sorting results (e.g., 'created|desc'). Sorting applies across "
+        "all entity types before grouping.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "maximum": 500,
+        "minimum": 0,
+        "type": "integer",
+        "default": 100,
+        "description": "Maximum number of records to return (default: 100, max: 500). Limit applies across all entity types.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "integer",
+        "default": 0,
+        "description": "Starting index of result",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "cloud_registration_gcp_trigger_health_check",
     "POST",
     "/cloud-security-registration-google-cloud/entities/registration-scans/v1",

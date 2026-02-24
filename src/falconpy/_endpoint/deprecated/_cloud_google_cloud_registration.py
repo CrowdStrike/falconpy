@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library (deprecated operations).
+"""Internal API endpoint constant library.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_google_cloud_registration_endpoints = [
   [
-    "cloud-registration-gcp-trigger-health-check",
+    "cloud_registration_gcp_trigger_health_check",
     "POST",
     "/cloud-security-registration-google-cloud/entities/registration-scans/v1",
     "Trigger health check scan for GCP registrations",
@@ -57,7 +57,7 @@ _cloud_google_cloud_registration_endpoints = [
     ]
   ],
   [
-    "cloud-registration-gcp-get-registration",
+    "cloud_registration_gcp_get_registration",
     "GET",
     "/cloud-security-registration-google-cloud/entities/registrations/v1",
     "Retrieve a Google Cloud Registration.",
@@ -73,7 +73,7 @@ _cloud_google_cloud_registration_endpoints = [
     ]
   ],
   [
-    "cloud-registration-gcp-put-registration",
+    "cloud_registration_gcp_put_registration",
     "PUT",
     "/cloud-security-registration-google-cloud/entities/registrations/v1",
     "Creates/Updates a Google Cloud Registration.",
@@ -87,7 +87,7 @@ _cloud_google_cloud_registration_endpoints = [
     ]
   ],
   [
-    "cloud-registration-gcp-create-registration",
+    "cloud_registration_gcp_create_registration",
     "POST",
     "/cloud-security-registration-google-cloud/entities/registrations/v1",
     "Create a Google Cloud Registration.",
@@ -101,7 +101,7 @@ _cloud_google_cloud_registration_endpoints = [
     ]
   ],
   [
-    "cloud-registration-gcp-update-registration",
+    "cloud_registration_gcp_update_registration",
     "PATCH",
     "/cloud-security-registration-google-cloud/entities/registrations/v1",
     "Update a Google Cloud Registration.",
@@ -122,7 +122,7 @@ _cloud_google_cloud_registration_endpoints = [
     ]
   ],
   [
-    "cloud-registration-gcp-delete-registration",
+    "cloud_registration_gcp_delete_registration",
     "DELETE",
     "/cloud-security-registration-google-cloud/entities/registrations/v1",
     "Deletes a Google Cloud Registration and returns the deleted registration in the response body.",

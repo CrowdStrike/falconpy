@@ -57,6 +57,44 @@ class CloudGoogleCloudRegistration(ServiceClass):
     """
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_entities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve all GCP entities (organizations, folders, projects) grouped by type.
+
+        Supports FQL filtering, sorting, and pagination.
+
+        Keyword arguments:
+        ids -- Google Cloud Registration IDs to filter by. String or list of strings.
+        filter -- FQL (Falcon Query Language) string for filtering results. String.
+                  Allowed filters:
+                    entity_type           entity_id             entity_name
+                    registration_id       registration_name     registration_scope
+                    parent_id             ioa_status            iom_status
+                    created               updated
+        sort -- Field and direction for sorting results (e.g., 'created|desc'). String.
+                Sorting applies across all entity types before grouping.
+        limit -- Maximum number of records to return (default: 100, max: 500). Integer.
+                 Limit applies across all entity types.
+        offset -- Starting index of result. Integer.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-google-cloud-registration/cloud-registration-gcp-get-entities
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="cloud_registration_gcp_get_entities",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def trigger_health_check(self: object,
                              *args,
                              parameters: dict = None,
@@ -378,6 +416,7 @@ class CloudGoogleCloudRegistration(ServiceClass):
             params=parameters
             )
 
+    cloud_registration_gcp_get_entities = get_entities
     cloud_registration_gcp_trigger_health_check = trigger_health_check
     cloud_registration_gcp_get_registration = get_registration
     cloud_registration_gcp_put_registration = update_registration
