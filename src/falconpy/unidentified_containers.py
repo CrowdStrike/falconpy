@@ -68,10 +68,14 @@ class UnidentifiedContainers(ServiceClass):
                   Supported filters:
                     assessed_images_count               last_seen
                     cid                                 namespace
-                    cluster_name                        node_name
-                    containers_impacted_count           severity
-                    detections_count                    unassessed_images_count
-                    image_assessment_detections_count   visible_to_k8s
+                    cloud_account_id                    node_name
+                    cloud_name                          severity
+                    cloud_region                        unassessed_images_count
+                    cluster_id                          visible_to_k8s
+                    cluster_name
+                    containers_impacted_count
+                    detections_count
+                    image_assessment_detections_count
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -102,10 +106,14 @@ class UnidentifiedContainers(ServiceClass):
                   Supported filters:
                     assessed_images_count               last_seen
                     cid                                 namespace
-                    cluster_name                        node_name
-                    containers_impacted_count           severity
-                    detections_count                    unassessed_images_count
-                    image_assessment_detections_count   visible_to_k8s
+                    cloud_account_id                    node_name
+                    cloud_name                          severity
+                    cloud_region                        unassessed_images_count
+                    cluster_id                          visible_to_k8s
+                    cluster_name
+                    containers_impacted_count
+                    detections_count
+                    image_assessment_detections_count
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -136,10 +144,14 @@ class UnidentifiedContainers(ServiceClass):
                   Supported filters:
                     assessed_images_count               last_seen
                     cid                                 namespace
-                    cluster_name                        node_name
-                    containers_impacted_count           severity
-                    detections_count                    unassessed_images_count
-                    image_assessment_detections_count   visible_to_k8s
+                    cloud_account_id                    node_name
+                    cloud_name                          severity
+                    cloud_region                        unassessed_images_count
+                    cluster_id                          visible_to_k8s
+                    cluster_name
+                    containers_impacted_count
+                    detections_count
+                    image_assessment_detections_count
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- The fields to sort the records on. String.
