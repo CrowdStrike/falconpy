@@ -954,7 +954,7 @@ class KubernetesProtection(ServiceClass):
                                    parameters: dict = None,
                                    **kwargs
                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Retrieve container enrichment data.
+        """Retrieve deployment enrichment data.
 
         Keyword arguments:
         deployment_id -- One or more deployment ids for which to retrieve enrichment info
