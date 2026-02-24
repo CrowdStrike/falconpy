@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library (deprecated operations).
+"""Internal API endpoint constant library.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 _admission_control_policies_endpoints = [
   [
-    "admission-control-get-policies",
+    "admission_control_get_policies",
     "GET",
     "/admission-control-policies/entities/policies/v1",
     "Get admission control policies.",
@@ -59,7 +59,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-create-policy",
+    "admission_control_create_policy",
     "POST",
     "/admission-control-policies/entities/policies/v1",
     "Create an admission control policy.",
@@ -73,7 +73,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-update-policy",
+    "admission_control_update_policy",
     "PATCH",
     "/admission-control-policies/entities/policies/v1",
     "Update an admission control policy.",
@@ -94,7 +94,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-delete-policies",
+    "admission_control_delete_policies",
     "DELETE",
     "/admission-control-policies/entities/policies/v1",
     "Delete an admission control policy.",
@@ -115,7 +115,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-add-host-groups",
+    "admission_control_add_host_groups",
     "POST",
     "/admission-control-policies/entities/policy-host-groups/v1",
     "Add one or more host groups to an admission control policy.",
@@ -129,7 +129,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-remove-host-groups",
+    "admission_control_remove_host_groups",
     "DELETE",
     "/admission-control-policies/entities/policy-host-groups/v1",
     "Remove one or more host groups from an admission control policy.",
@@ -157,7 +157,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-update-policy-precedence",
+    "admission_control_update_policy_precedence",
     "PATCH",
     "/admission-control-policies/entities/policy-precedence/v1",
     "Update admission control policy precedence.",
@@ -171,7 +171,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-add-rule-group-custom-rule",
+    "admission_control_add_rule_group_custom_rule",
     "POST",
     "/admission-control-policies/entities/policy-rule-group-custom-rules/v1",
     "Add one or more custom Rego rules to a rule group in an admission control policy. The requested custom "
@@ -186,7 +186,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-remove-rule-group-custom-rule",
+    "admission_control_remove_rule_group_custom_rule",
     "DELETE",
     "/admission-control-policies/entities/policy-rule-group-custom-rules/v1",
     "Delete one or more custom Rego rules from all rule groups in an admission control policy.",
@@ -214,7 +214,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-set-rule-group-precedence",
+    "admission_control_set_rule_group_precedence",
     "PUT",
     "/admission-control-policies/entities/policy-rule-group-precedence/v1",
     "Change precedence of rule groups within an admission control policy.",
@@ -228,7 +228,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-replace-rule-group-selectors",
+    "admission_control_replace_rule_group_selectors",
     "PUT",
     "/admission-control-policies/entities/policy-rule-group-selectors/v1",
     "Replace labels and/or namespaces of a rule group within an admission control policy.",
@@ -242,7 +242,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-create-rule-groups",
+    "admission_control_create_rule_groups",
     "POST",
     "/admission-control-policies/entities/policy-rule-groups/v1",
     "Create one or more rule groups and add them to an existing admission control policy. The list of new rule "
@@ -258,7 +258,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-update-rule-groups",
+    "admission_control_update_rule_groups",
     "PATCH",
     "/admission-control-policies/entities/policy-rule-groups/v1",
     "Update a rule group. Change rule group name, description, deny on error, Image Assessment settings, "
@@ -287,7 +287,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-delete-rule-groups",
+    "admission_control_delete_rule_groups",
     "DELETE",
     "/admission-control-policies/entities/policy-rule-groups/v1",
     "Delete rule groups.",
@@ -315,7 +315,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission-control-query-policies",
+    "admission_control_query_policies",
     "GET",
     "/admission-control-policies/queries/policies/v1",
     "Search admission control policies.",

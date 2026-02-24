@@ -272,14 +272,15 @@ _admission_control_policies_endpoints = [
         "Container(s) run as root  201005: Container(s) without runAsNonRoot  201006: Privilege escalation allowed  "
         "201007: Container(s) with network capabilities  201008: Container(s) with unsafe procMount  201009: "
         "Container(s) using unsafe sysctls  201010: Container(s) without resource limits  201011: Sensitive host "
-        "directories mounted in container(s)  201012: Container(s) with sysadmin capability  201015: Host port attached "
-        " to container(s)  201016: Host network attached to container(s)  201017: Container(s) in host PID namespace  "
-        "201018: Container(s) in host IPC namespace  201019: Workload in default namespace  201020: Workload with "
-        "unconfined seccomp profile  201021: Workload without SELinux or AppArmor  201022: Container(s) with many "
-        "capabilities  201023: Workload without recommended seccomp profile  201024: Workload without securityContext  "
-        "201025: Container runtime socket in container(s)  201026: Container(s) entrypoint contains network scanning "
-        "command  201027: Container(s) entrypoint contains chroot command  201028: Malformed sysctl value  201029: "
-        "Service account token automounted\n",
+        "directories mounted in container(s)  201012: Container(s) with sysadmin capability  201013: Service attached "
+        "to load balancer  201014: Service attached to node port  201015: Host port attached to container(s)  201016: "
+        "Host network attached to container(s)  201017: Container(s) in host PID namespace  201018: Container(s) in "
+        "host IPC namespace  201019: Workload in default namespace  201020: Workload with unconfined seccomp profile  "
+        "201021: Workload without SELinux or AppArmor  201022: Container(s) with many capabilities  201023: Workload "
+        "without recommended seccomp profile  201024: Workload without securityContext  201025: Container runtime "
+        "socket in container(s)  201026: Container(s) entrypoint contains network scanning command  201027: "
+        "Container(s) entrypoint contains chroot command  201028: Malformed sysctl value  201029: Service account token "
+        "automounted\n",
         "name": "body",
         "in": "body",
         "required": True
