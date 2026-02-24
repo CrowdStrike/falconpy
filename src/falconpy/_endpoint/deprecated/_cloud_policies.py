@@ -433,9 +433,8 @@ _cloud_policies_endpoints = [
       {
         "description": "Rule severity integer to provide maps to the following: 0=Critical, 1=High, 2=Medium "
         "and 3=Low.\nFor CSPM IOM Custom Rules, logic is mandatory and parent_rule_id should not be specified.\nFor "
-        "Runtime IOM Custom Rules (KAC), logic is mandatory. Fields controls, resource_type, and parent_rule_id should "
-        "not be specified.\nFor Managed Rule duplication, parent_rule_id is mandatory and logic should be not "
-        "specified.",
+        "Runtime IOM Custom Rules (KAC), logic is mandatory, and resource_type + parent_rule_id should not be "
+        "specified.\nFor Managed Rule duplication, parent_rule_id is mandatory and logic should be not specified.",
         "name": "body",
         "in": "body",
         "required": True
@@ -631,13 +630,12 @@ _cloud_policies_endpoints = [
     [
       {
         "type": "string",
-        "description": "FQL filter, allowed properties: \n\t\n*rule_auto_remediable*\t\n*rule_category*\t\n*ru "
-        "le_cloneable*\t\n*rule_compliance_benchmark*\t\n*rule_compliance_benchmark_uuid*\t\n*rule_compliance_framework "
-        "*\t\n*rule_control_requirement*\t\n*rule_control_section*\t\n*rule_created_at*\t\n*rule_description*\t\n*rule_"
-        "domain*\t\n*rule_mitre_tactic*\t\n*rule_mitre_technique*\t\n*rule_name*\t\n*rule_origin*\t\n*rule_parent_uuid* "
-        "\t\n*rule_provider*\t\n*rule_resource_type*\t\n*rule_resource_type_name*\t\n*rule_risk_factor*\t\n*rule_servic "
-        "e*\t\n*rule_severity*\t\n*rule_short_code*\t\n*rule_status*\t\n*rule_subdomain*\t\n*rule_updated_at*\t\n*rule_"
-        "updated_by*\t\n",
+        "description": "FQL filter, allowed properties: \n\t\n*rule_origin*\t\n*rule_parent_uuid*\t\n*rule_nam "
+        "e*\t\n*rule_cloneable*\t\n*rule_description*\t\n*rule_domain*\t\n*rule_status*\t\n*rule_severity*\t\n*rule_sho "
+        "rt_code*\t\n*rule_service*\t\n*rule_resource_type*\t\n*rule_resource_type_name*\t\n*rule_provider*\t\n*rule_su "
+        "bdomain*\t\n*rule_auto_remediable*\t\n*rule_control_requirement*\t\n*rule_control_section*\t\n*rule_compliance "
+        "_benchmark*\t\n*rule_compliance_framework*\t\n*rule_mitre_tactic*\t\n*rule_mitre_technique*\t\n*rule_created_a "
+        "t*\t\n*rule_updated_at*\t\n*rule_updated_by*\t\n*rule_risk_factor*\t\n",
         "name": "filter",
         "in": "query"
       },
@@ -657,13 +655,13 @@ _cloud_policies_endpoints = [
       },
       {
         "type": "string",
-        "description": "Field to sort on. Sortable fields: \n\t\n*rule_auto_remediable*\t\n*rule_category*\t\n "
-        "*rule_cloneable*\t\n*rule_compliance_benchmark*\t\n*rule_compliance_benchmark_uuid*\t\n*rule_compliance_framew "
-        "ork*\t\n*rule_control_requirement*\t\n*rule_control_section*\t\n*rule_created_at*\t\n*rule_description*\t\n*ru "
-        "le_domain*\t\n*rule_mitre_tactic*\t\n*rule_mitre_technique*\t\n*rule_name*\t\n*rule_origin*\t\n*rule_parent_uu "
-        "id*\t\n*rule_provider*\t\n*rule_resource_type*\t\n*rule_resource_type_name*\t\n*rule_risk_factor*\t\n*rule_ser "
-        "vice*\t\n*rule_severity*\t\n*rule_short_code*\t\n*rule_status*\t\n*rule_subdomain*\t\n*rule_updated_at*\t\n*ru "
-        "le_updated_by*\t\n \n\nUse the |asc or |desc suffix to specify sort direction.",
+        "description": "Field to sort on. Sortable fields: \n\t\n*rule_origin*\t\n*rule_parent_uuid*\t\n*rule_"
+        "name*\t\n*rule_cloneable*\t\n*rule_description*\t\n*rule_domain*\t\n*rule_status*\t\n*rule_severity*\t\n*rule_"
+        "short_code*\t\n*rule_service*\t\n*rule_resource_type*\t\n*rule_resource_type_name*\t\n*rule_provider*\t\n*rule "
+        "_subdomain*\t\n*rule_auto_remediable*\t\n*rule_control_requirement*\t\n*rule_control_section*\t\n*rule_complia "
+        "nce_benchmark*\t\n*rule_compliance_framework*\t\n*rule_mitre_tactic*\t\n*rule_mitre_technique*\t\n*rule_create "
+        "d_at*\t\n*rule_updated_at*\t\n*rule_updated_by*\t\n*rule_risk_factor*\t\n \n\nUse the |asc or |desc suffix to "
+        "specify sort direction.",
         "name": "sort",
         "in": "query"
       }
