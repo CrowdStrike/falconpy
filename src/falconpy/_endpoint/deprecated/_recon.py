@@ -42,8 +42,8 @@ _recon_endpoints = [
     "POST",
     "/recon/aggregates/notifications-exposed-data-records/GET/v1",
     "Get notification exposed data record aggregates as specified via JSON in request body. The valid "
-    "aggregation fields are: [cid notification_id notification_group_id created_date rule.id rule.name rule.topic "
-    "source_category site author file.name credential_status bot.operating_system.hardware_id bot.bot_id]",
+    "aggregation fields are: [cid notification_id created_date rule.id rule.name rule.topic source_category site "
+    "author file.name credential_status bot.operating_system.hardware_id bot.bot_id]",
     "recon",
     [
       {
@@ -506,14 +506,14 @@ _recon_endpoints = [
       {
         "type": "string",
         "description": "FQL query to filter notifications by. Possible filter properties are: [id cid "
-        "user_uuid created_date exposure_date rule.id rule.name rule.topic notification_id notification_group_id "
-        "source_category site site_id author author_id user_id user_name credentials_url credentials_domain "
-        "credentials_ip email domain hash_type display_name full_name user_ip phone_number company job_position "
-        "file.name file.complete_data_set file.download_urls location.postal_code location.city location.state "
-        "location.federal_district location.federal_admin_region location.country_code social.twitter_id "
-        "social.facebook_id social.vk_id social.vk_token social.aim_id social.icq_id social.msn_id social.instagram_id "
-        "social.skype_id financial.credit_card financial.bank_account financial.crypto_currency_addresses login_id "
-        "credential_status _all bot.operating_system.hardware_id bot.bot_id]",
+        "user_uuid created_date exposure_date rule.id rule.name rule.topic notification_id source_category site site_id "
+        " author author_id user_id user_name credentials_url credentials_domain credentials_ip email domain hash_type "
+        "display_name full_name user_ip phone_number company job_position file.name file.complete_data_set "
+        "file.download_urls location.postal_code location.city location.state location.federal_district "
+        "location.federal_admin_region location.country_code social.twitter_id social.facebook_id social.vk_id "
+        "social.vk_token social.aim_id social.icq_id social.msn_id social.instagram_id social.skype_id "
+        "financial.credit_card financial.bank_account financial.crypto_currency_addresses login_id credential_status "
+        "_all bot.operating_system.hardware_id bot.bot_id]",
         "name": "filter",
         "in": "query"
       },
