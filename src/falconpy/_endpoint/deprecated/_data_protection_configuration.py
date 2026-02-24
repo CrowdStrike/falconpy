@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library (deprecated operations).
+"""Internal API endpoint constant library.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 _data_protection_configuration_endpoints = [
   [
-    "entities.classification.get.v2",
+    "entities_classification_get_v2",
     "GET",
     "/data-protection/entities/classifications/v2",
     "Gets the classifications that match the provided ids",
@@ -60,7 +60,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.classification.post.v2",
+    "entities_classification_post_v2",
     "POST",
     "/data-protection/entities/classifications/v2",
     "Create classifications",
@@ -74,7 +74,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.classification.patch.v2",
+    "entities_classification_patch_v2",
     "PATCH",
     "/data-protection/entities/classifications/v2",
     "Update classifications",
@@ -88,7 +88,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.classification.delete.v2",
+    "entities_classification_delete_v2",
     "DELETE",
     "/data-protection/entities/classifications/v2",
     "Deletes classifications that match the provided ids",
@@ -110,7 +110,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.cloud-application.get",
+    "entities_cloud_application_get",
     "GET",
     "/data-protection/entities/cloud-applications/v1",
     "Get a particular cloud-application",
@@ -130,7 +130,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.cloud-application.create",
+    "entities_cloud_application_create",
     "POST",
     "/data-protection/entities/cloud-applications/v1",
     "Persist the given cloud application for the provided entity instance",
@@ -145,7 +145,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.cloud-application.patch",
+    "entities_cloud_application_patch",
     "PATCH",
     "/data-protection/entities/cloud-applications/v1",
     "Update a cloud application",
@@ -167,7 +167,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.cloud-application.delete",
+    "entities_cloud_application_delete",
     "DELETE",
     "/data-protection/entities/cloud-applications/v1",
     "Delete cloud application",
@@ -187,7 +187,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.content-pattern.get",
+    "entities_content_pattern_get",
     "GET",
     "/data-protection/entities/content-patterns/v1",
     "Get a particular content-pattern(s)",
@@ -207,7 +207,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.content-pattern.create",
+    "entities_content_pattern_create",
     "POST",
     "/data-protection/entities/content-patterns/v1",
     "Persist the given content pattern for the provided entity instance",
@@ -222,7 +222,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.content-pattern.patch",
+    "entities_content_pattern_patch",
     "PATCH",
     "/data-protection/entities/content-patterns/v1",
     "Update a content pattern",
@@ -244,7 +244,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.content-pattern.delete",
+    "entities_content_pattern_delete",
     "DELETE",
     "/data-protection/entities/content-patterns/v1",
     "Delete content pattern",
@@ -264,7 +264,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.enterprise-account.get",
+    "entities_enterprise_account_get",
     "GET",
     "/data-protection/entities/enterprise-accounts/v1",
     "Get a particular enterprise-account(s)",
@@ -284,7 +284,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.enterprise-account.create",
+    "entities_enterprise_account_create",
     "POST",
     "/data-protection/entities/enterprise-accounts/v1",
     "Persist the given enterprise account for the provided entity instance",
@@ -299,7 +299,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.enterprise-account.patch",
+    "entities_enterprise_account_patch",
     "PATCH",
     "/data-protection/entities/enterprise-accounts/v1",
     "Update a enterprise account",
@@ -321,7 +321,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.enterprise-account.delete",
+    "entities_enterprise_account_delete",
     "DELETE",
     "/data-protection/entities/enterprise-accounts/v1",
     "Delete enterprise account",
@@ -341,7 +341,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.file-type.get",
+    "entities_file_type_get",
     "GET",
     "/data-protection/entities/file-types/v1",
     "Get a particular file-type",
@@ -361,7 +361,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.sensitivity-label.get-v2",
+    "entities_sensitivity_label_get_v2",
     "GET",
     "/data-protection/entities/labels/v2",
     "Get sensitivity label matching the IDs (V2)",
@@ -381,7 +381,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.sensitivity-label.create-v2",
+    "entities_sensitivity_label_create_v2",
     "POST",
     "/data-protection/entities/labels/v2",
     "Create new sensitivity label (V2)",
@@ -396,7 +396,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.sensitivity-label.delete-v2",
+    "entities_sensitivity_label_delete_v2",
     "DELETE",
     "/data-protection/entities/labels/v2",
     "Delete sensitivity labels matching the IDs (V2)",
@@ -416,7 +416,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.policy.get.v2",
+    "entities_policy_get_v2",
     "GET",
     "/data-protection/entities/policies/v2",
     "Gets policies that match the provided ids",
@@ -438,7 +438,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.policy.post.v2",
+    "entities_policy_post_v2",
     "POST",
     "/data-protection/entities/policies/v2",
     "Create policies",
@@ -459,7 +459,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.policy.patch.v2",
+    "entities_policy_patch_v2",
     "PATCH",
     "/data-protection/entities/policies/v2",
     "Update policies",
@@ -480,7 +480,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.policy.delete.v2",
+    "entities_policy_delete_v2",
     "DELETE",
     "/data-protection/entities/policies/v2",
     "Deletes policies that match the provided ids",
@@ -509,7 +509,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.web-location.get-v2",
+    "entities_web_location_get_v2",
     "GET",
     "/data-protection/entities/web-locations/v2",
     "Get web-location entities matching the provided ID(s)",
@@ -529,7 +529,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.web-location.create-v2",
+    "entities_web_location_create_v2",
     "POST",
     "/data-protection/entities/web-locations/v2",
     "Persist the given web-locations",
@@ -544,7 +544,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.web-location.patch-v2",
+    "entities_web_location_patch_v2",
     "PATCH",
     "/data-protection/entities/web-locations/v2",
     "Update a web-location",
@@ -566,7 +566,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities.web-location.delete-v2",
+    "entities_web_location_delete_v2",
     "DELETE",
     "/data-protection/entities/web-locations/v2",
     "Delete web-location",
@@ -586,7 +586,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries.classification.get.v2",
+    "queries_classification_get_v2",
     "GET",
     "/data-protection/queries/classifications/v2",
     "Search for classifications that match the provided criteria",
@@ -626,7 +626,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries.cloud-application.get-v2",
+    "queries_cloud_application_get_v2",
     "GET",
     "/data-protection/queries/cloud-applications/v2",
     "Get all cloud-application IDs matching the query with filter",
@@ -666,7 +666,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries.content-pattern.get-v2",
+    "queries_content_pattern_get_v2",
     "GET",
     "/data-protection/queries/content-patterns/v2",
     "Get all content-pattern IDs matching the query with filter",
@@ -704,7 +704,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries.enterprise-account.get-v2",
+    "queries_enterprise_account_get_v2",
     "GET",
     "/data-protection/queries/enterprise-accounts/v2",
     "Get all enterprise-account IDs matching the query with filter",
@@ -742,7 +742,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries.file-type.get-v2",
+    "queries_file_type_get_v2",
     "GET",
     "/data-protection/queries/file-types/v2",
     "Get all file-type IDs matching the query with filter",
@@ -778,7 +778,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries.sensitivity-label.get-v2",
+    "queries_sensitivity_label_get_v2",
     "GET",
     "/data-protection/queries/labels/v2",
     "Get all sensitivity label IDs matching the query with filter",
@@ -816,7 +816,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries.policy.get.v2",
+    "queries_policy_get_v2",
     "GET",
     "/data-protection/queries/policies/v2",
     "Search for policies that match the provided criteria",
@@ -878,7 +878,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries.web-location.get-v2",
+    "queries_web_location_get_v2",
     "GET",
     "/data-protection/queries/web-locations/v2",
     "Get web-location IDs matching the query with filter",

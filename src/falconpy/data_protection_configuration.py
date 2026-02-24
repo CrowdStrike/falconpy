@@ -48,7 +48,8 @@ from ._payload._data_protection_configuration import (
     data_protection_enterprise_account_payload,
     data_protection_sensitivity_label_payload,
     data_protection_policy_payload,
-    data_protection_web_locations_payload
+    data_protection_web_locations_payload,
+    data_protection_policy_precedence_payload
     )
 
 
@@ -590,6 +591,44 @@ class DataProtectionConfiguration(ServiceClass):
             operation_id="entities_content_pattern_delete",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_policy_precedence(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update policy precedence.
+
+        Keyword arguments:
+        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "resources": [
+                        {
+                            "platform": "string",
+                            "precedence": [
+                                "string"
+                            ]
+                        }
+                    ]
+                }
+        platform -- The platform for the policy precedence update (e.g., 'win' or 'mac'). String.
+        precedence -- Ordered list of policy IDs defining the precedence order. List of strings.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.policy-precedence.post.v1
+        """
+        if not body:
+            body = data_protection_policy_precedence_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_policy_precedence_post_v1",
+            body=body
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
@@ -1651,6 +1690,7 @@ class DataProtectionConfiguration(ServiceClass):
     entities_content_pattern_create = create_content_pattern
     entities_content_pattern_patch = update_content_pattern
     entities_content_pattern_delete = delete_content_pattern
+    entities_policy_precedence_post_v1 = update_policy_precedence
     entities_enterprise_account_get = get_enterprise_account
     entities_enterprise_account_create = create_enterprise_account
     entities_enterprise_account_patch = update_enterprise_account

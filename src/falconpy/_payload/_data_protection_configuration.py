@@ -347,3 +347,37 @@ def data_protection_web_locations_payload(
     returned_payload["web_locations"] = web_locations
 
     return returned_payload
+
+
+def data_protection_policy_precedence_payload(
+        passed_keywords: dict
+        ) -> Dict[str, List[Dict[str, Union[str, int, bool, list, dict]]]]:
+    """Update policy precedence.
+
+    {
+        "resources": [
+            {
+                "platform": "string",
+                "precedence": [
+                    "object"
+                ]
+            }
+        ]
+    }
+    """
+    returned_payload = {}
+
+    if passed_keywords.get("resources", None) is not None:
+        returned_payload["resources"] = passed_keywords.get("resources", None)
+        return returned_payload
+
+    resources = []
+    resource = {}
+    keys = ["platform", "precedence"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            resource[key] = passed_keywords.get(key, None)
+    resources.append(resource)
+    returned_payload["resources"] = resources
+
+    return returned_payload
