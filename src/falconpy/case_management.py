@@ -2038,8 +2038,8 @@ class CaseManagement(ServiceClass):
     entities_get_rtr_file_metadata_post_v1 = get_rtr_file_metadata
     entities_retrieve_rtr_file_post_v1 = retrieve_rtr_file
     entities_retrieve_rtr_recent_file_post_v1 = retrieve_rtr_recent_file
-    aggregates_notification_groups_post_v1 = get_notification_groups
-    aggregates_notification_groups_post_v2 = get_notification_groups_v2
+    aggregates_notification_groups_post_v1 = get_notification_groups_aggregation
+    aggregates_notification_groups_post_v2 = get_notification_groups_aggregation_v2
     aggregates_slas_post_v1 = get_sla_aggregations
     aggregates_templates_post_v1 = get_template_aggregations
     aggregates_access_tags_post_v1 = get_access_tag_aggregations
@@ -2049,7 +2049,7 @@ class CaseManagement(ServiceClass):
     entities_notification_groups_post_v1 = create_notification_group
     entities_notification_groups_patch_v1 = update_notification_group
     entities_notification_groups_delete_v1 = delete_notification_group
-    entities_notification_groups_get_v2 = get_notification_groups
+    entities_notification_groups_get_v2 = get_notification_groups_v2
     entities_notification_groups_post_v2 = create_notification_group_v2
     entities_notification_groups_patch_v2 = update_notification_group_v2
     entities_notification_groups_delete_v2 = delete_notification_group_v2
