@@ -998,22 +998,25 @@ class Recon(ServiceClass):
                   rule.name           location.postal_code
                   rule.topic          location.city
                   notification_id     location.state
-                  source_category     location.federal_district
-                  site                location.federal_admin_region
-                  site_id             location.country_code
-                  author              social.twitter_id
-                  author_id           social.facebook_id
-                  user_id             social.vk_id
-                  user_name           social.vk_token
-                  impacted_url        social.aim_id
-                  impacted_domain     social.icq_id
-                  impacted_ip         social.msn_id
-                  email               social.instagram_id
-                  email_domain        social.skype_id
-                  hash_type           financial.credit_card
-                  display_name        financial.bank_account
-                  full_name           financial.crypto_currency_addresses
-                  user_ip             login_id
+                  notification_group_id  location.federal_district
+                  source_category     location.federal_admin_region
+                  site                location.country_code
+                  site_id             social.twitter_id
+                  author              social.facebook_id
+                  author_id           social.vk_id
+                  user_id             social.vk_token
+                  user_name           social.aim_id
+                  credentials_url     social.icq_id
+                  credentials_domain  social.msn_id
+                  credentials_ip      social.instagram_id
+                  email               social.skype_id
+                  domain              financial.credit_card
+                  hash_type           financial.bank_account
+                  display_name        financial.crypto_currency_addresses
+                  full_name           login_id
+                  user_ip             credential_status
+                  bot.operating_system.hardware_id
+                  bot.bot_id
                   _all
         limit -- The maximum number of IDs to return. [integer, 1-500]
         offset -- The first item to return, where 0 is the latest item. (Integer)
