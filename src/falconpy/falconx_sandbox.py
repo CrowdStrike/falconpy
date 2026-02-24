@@ -428,12 +428,12 @@ class FalconXSandbox(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QuerySubmissions
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/falconx-sandbox/QuerySubmissionsMixin0
         """
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="QuerySubmissions",
+            operation_id="QuerySubmissionsMixin0",
             keywords=kwargs,
             params=parameters
             )
@@ -696,7 +696,7 @@ class FalconXSandbox(ServiceClass):
     GetSubmissions = get_submissions
     Submit = submit
     QueryReports = query_reports
-    QuerySubmissions = query_submissions
+    QuerySubmissionsMixin0 = query_submissions
     UploadSampleV2 = upload_sample
     GetReports = get_reports
     DeleteReport = delete_report
