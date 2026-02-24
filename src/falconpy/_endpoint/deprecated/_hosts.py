@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library (deprecated operations).
+"""Internal API endpoint constant library.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,653 @@ For more information, please refer to <https://unlicense.org>
 
 _hosts_endpoints = [
   [
-    "entities.perform_action",
+    "CombinedHiddenDevicesByFilter",
+    "GET",
+    "/devices/combined/devices-hidden/v1",
+    "Search for hidden hosts in your environment by platform, hostname, IP, and other criteria. Returns full device records.",
+    "hosts",
+    [
+      {
+        "type": "string",
+        "description": "The offset to page from, provided from the previous call as the \"next\" value, for "
+        "the next result set. For the first call, do not supply an offset.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "The maximum records to return. [1-10000]",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "config_id_base",
+          "first_seen",
+          "policies.applied",
+          "device_policies.prevention.policy_id",
+          "device_policies.jumpcloud.policy_type",
+          "device_policies.consumer-subscription.policy_type",
+          "device_policies.aws-verified-access.applied",
+          "detection_suppression_status",
+          "minor_version",
+          "device_policies.airlock.policy_type",
+          "device_policies.cloud-ml.policy_type",
+          "device_policies.browser-extension.policy_type",
+          "device_policies.network-scan-content.applied",
+          "device_policies.fem-browser-extension-control.applied",
+          "device_policies.airlock.policy_id",
+          "device_policies.netskope.policy_id",
+          "device_policies.data-protection.policy_type",
+          "device_policies.host-retention.policy_type",
+          "local_ip.raw",
+          "group_hash",
+          "pod_service_account_name",
+          "hostname",
+          "device_policies.identity-protection.policy_type",
+          "device_policies.sca.policy_type",
+          "pod_annotations",
+          "device_policies.data-protection.applied",
+          "device_policies.remote_response.applied",
+          "zone_group",
+          "pod_host_ip4",
+          "internet_exposure",
+          "agent_version",
+          "bios_manufacturer",
+          "device_policies.device_control.policy_type",
+          "device_policies.ztl.policy_type",
+          "device_policies.vulnerability-management.policy_type",
+          "device_policies.data-protection.policy_id",
+          "service_provider",
+          "device_policies.remote_response.policy_id",
+          "product_type",
+          "site_name",
+          "device_policies.jumpcloud.applied",
+          "k8s_cluster_version",
+          "linux_sensor_mode",
+          "chassis_type_desc",
+          "device_policies.logscale-collector.policy_type",
+          "device_policies.prevention.applied",
+          "device_policies.jumpcloud.policy_id",
+          "device_policies.cloud-ml.policy_id",
+          "cpu_vendor",
+          "pod_ip4",
+          "machine_domain",
+          "device_policies.ztl.policy_id",
+          "device_policies.fim.policy_id",
+          "rtr_state",
+          "config_id_build",
+          "first_login_timestamp",
+          "device_policies.netskope.applied",
+          "device_policies.mobile.applied",
+          "email",
+          "pod_ip6",
+          "default_gateway_ip",
+          "k8s_cluster_id",
+          "first_login_user",
+          "system_manufacturer",
+          "device_policies.sensor_update.uninstall_protection",
+          "device_policies.airlock.applied",
+          "device_policies.identity-endpoint.applied",
+          "device_policies.kubernetes-admission-control.applied",
+          "device_policies.sca.applied",
+          "device_policies.aws-verified-access.policy_id",
+          "system_product_name",
+          "device_policies.automox.applied",
+          "device_policies.system-tray.policy_id",
+          "device_policies.it-automation.policy_type",
+          "device_policies.host-retention.policy_id",
+          "k8s_cluster_git_version",
+          "deployment_type",
+          "filesystem_containment_status",
+          "status",
+          "policies.policy_type",
+          "policies.policy_id",
+          "device_policies.sensor_update.policy_id",
+          "device_policies.identity-endpoint.policy_type",
+          "device_policies.cloud-ml.applied",
+          "service_provider_account_id",
+          "device_policies.firewall.policy_id",
+          "agent_load_flags",
+          "external_ip",
+          "last_login_user",
+          "managed_apps.airlock.version",
+          "last_reboot",
+          "device_policies.browser-extension.applied",
+          "device_policies.logscale-collector.policy_id",
+          "groups",
+          "device_policies.browser-extension.policy_id",
+          "device_policies.exposure-management.policy_id",
+          "last_login_timestamp",
+          "local_ip",
+          "major_version",
+          "modified_timestamp",
+          "device_policies.identity-endpoint.policy_id",
+          "device_policies.kubernetes-admission-control.policy_type",
+          "device_policies.system-tray.applied",
+          "_all",
+          "product_type_desc",
+          "policy_id",
+          "device_policies.identity-protection.applied",
+          "device_policies.system-tray.policy_type",
+          "device_policies.consumer-subscription.policy_id",
+          "device_policies.firewall.applied",
+          "managed_apps.netskope.version",
+          "managed_apps.jumpcloud.version",
+          "bios_version",
+          "safe_mode",
+          "pod_namespace",
+          "device_policies.device_control.policy_id",
+          "managed_apps.aws-verified-access.version",
+          "device_policies.it-automation.policy_id",
+          "device_policies.it-automation.applied",
+          "device_policies.firewall.rule_set_id",
+          "device_policies.fem-browser-extension-control.policy_type",
+          "device_policies.application-abuse-prevention.policy_type",
+          "device_policies.application-abuse-prevention.applied",
+          "device_policies.vulnerability-management.policy_id",
+          "device_policies.content-update.policy_type",
+          "device_policies.content-update.policy_id",
+          "device_policies.content-update.applied",
+          "device_policies.mobile.policy_type",
+          "managed_apps.automox.version",
+          "device_policies.remote_response.policy_type",
+          "device_policies.fem-browser-extension-control.policy_id",
+          "platform_id",
+          "managed_apps.identity-protection.version",
+          "tags",
+          "pod_host_ip6",
+          "last_login_uid",
+          "platform_name",
+          "device_policies.prevention.policy_type",
+          "device_policies.kubernetes-admission-control.policy_id",
+          "os_product_name",
+          "last_login_user_sid",
+          "device_policies.sca.policy_id",
+          "mac_address",
+          "serial_number",
+          "kernel_version",
+          "connection_ip",
+          "migration_completed_time",
+          "cid",
+          "config_id_platform",
+          "os_version",
+          "release_group",
+          "device_policies.sensor_update.applied",
+          "device_policies.fim.policy_type",
+          "device_policies.host-retention.applied",
+          "device_policies.logscale-collector.applied",
+          "device_policies.ztl.applied",
+          "device_policies.vulnerability-management.applied",
+          "cpu_signature",
+          "device_policies.network-scan-content.policy_type",
+          "device_policies.exposure-management.applied",
+          "os_build",
+          "device_policies.sensor_update.policy_type",
+          "device_policies.device_control.applied",
+          "device_policies.automox.policy_id",
+          "device_policies.netskope.policy_type",
+          "instance_id",
+          "pod_name",
+          "ou",
+          "reduced_functionality_mode",
+          "license_activation_state",
+          "connection_mac_address",
+          "device_id",
+          "device_policies.fim.applied",
+          "pod_hostname",
+          "pod_id",
+          "pod_labels",
+          "host_utc_offset",
+          "last_seen",
+          "device_policies.identity-protection.policy_id",
+          "device_policies.firewall.policy_type",
+          "device_policies.mobile.policy_id",
+          "device_policies.network-scan-content.policy_id",
+          "device_policies.exposure-management.policy_type",
+          "device_policies.application-abuse-prevention.policy_id",
+          "device_policies.automox.policy_type",
+          "device_policies.consumer-subscription.applied",
+          "device_policies.aws-verified-access.policy_type",
+          "chassis_type"
+        ],
+        "type": "string",
+        "description": "The property to sort by (e.g. status.desc or hostname.asc). If not specified, the "
+        "default sort will be device_id.asc. This should be supplied for each consecutive call.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The filter expression that should be used to limit the results. This should be "
+        "supplied for each consecutive call.",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The fields to return, comma delimited if specifying more than one field. For example: "
+        "fields=hostname,device_id would return device records only containing the hostname and device_id",
+        "name": "fields",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "QueryDeviceLoginHistory",
+    "POST",
+    "/devices/combined/devices/login-history/v1",
+    "Retrieve details about recent login sessions for a set of devices.",
+    "hosts",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "QueryDeviceLoginHistoryV2",
+    "POST",
+    "/devices/combined/devices/login-history/v2",
+    "Retrieve details about recent interactive login sessions for a set of devices powered by the Host "
+    "Timeline. A max of 10 device ids can be specified",
+    "hosts",
+    [
+      {
+        "type": "integer",
+        "default": 10,
+        "description": "The maximum number of results to return [1-100].",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "now-7d",
+        "description": "The inclusive beginning of the time window to search.",
+        "name": "from",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "default": "now",
+        "description": "The inclusive end of the time window to search.",
+        "name": "to",
+        "in": "query"
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "QueryGetNetworkAddressHistoryV1",
+    "POST",
+    "/devices/combined/devices/network-address-history/v1",
+    "Retrieve history of IP and MAC addresses of devices.",
+    "hosts",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "CombinedDevicesByFilter",
+    "GET",
+    "/devices/combined/devices/v1",
+    "Search for hosts in your environment by platform, hostname, IP, and other criteria. Returns full device records.",
+    "hosts",
+    [
+      {
+        "type": "string",
+        "description": "The offset to page from, provided from the previous call as the \"next\" value, for "
+        "the next result set. For the first call, do not supply an offset.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "The maximum records to return. [1-10000]",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "enum": [
+          "config_id_base",
+          "first_seen",
+          "policies.applied",
+          "device_policies.prevention.policy_id",
+          "device_policies.jumpcloud.policy_type",
+          "device_policies.consumer-subscription.policy_type",
+          "device_policies.aws-verified-access.applied",
+          "detection_suppression_status",
+          "minor_version",
+          "device_policies.airlock.policy_type",
+          "device_policies.cloud-ml.policy_type",
+          "device_policies.browser-extension.policy_type",
+          "device_policies.network-scan-content.applied",
+          "device_policies.fem-browser-extension-control.applied",
+          "device_policies.airlock.policy_id",
+          "device_policies.netskope.policy_id",
+          "device_policies.data-protection.policy_type",
+          "device_policies.host-retention.policy_type",
+          "local_ip.raw",
+          "group_hash",
+          "pod_service_account_name",
+          "hostname",
+          "device_policies.identity-protection.policy_type",
+          "device_policies.sca.policy_type",
+          "pod_annotations",
+          "device_policies.data-protection.applied",
+          "device_policies.remote_response.applied",
+          "zone_group",
+          "pod_host_ip4",
+          "internet_exposure",
+          "agent_version",
+          "bios_manufacturer",
+          "device_policies.device_control.policy_type",
+          "device_policies.ztl.policy_type",
+          "device_policies.vulnerability-management.policy_type",
+          "device_policies.data-protection.policy_id",
+          "service_provider",
+          "device_policies.remote_response.policy_id",
+          "product_type",
+          "site_name",
+          "device_policies.jumpcloud.applied",
+          "k8s_cluster_version",
+          "linux_sensor_mode",
+          "chassis_type_desc",
+          "device_policies.logscale-collector.policy_type",
+          "device_policies.prevention.applied",
+          "device_policies.jumpcloud.policy_id",
+          "device_policies.cloud-ml.policy_id",
+          "cpu_vendor",
+          "pod_ip4",
+          "machine_domain",
+          "device_policies.ztl.policy_id",
+          "device_policies.fim.policy_id",
+          "rtr_state",
+          "config_id_build",
+          "first_login_timestamp",
+          "device_policies.netskope.applied",
+          "device_policies.mobile.applied",
+          "email",
+          "pod_ip6",
+          "default_gateway_ip",
+          "k8s_cluster_id",
+          "first_login_user",
+          "system_manufacturer",
+          "device_policies.sensor_update.uninstall_protection",
+          "device_policies.airlock.applied",
+          "device_policies.identity-endpoint.applied",
+          "device_policies.kubernetes-admission-control.applied",
+          "device_policies.sca.applied",
+          "device_policies.aws-verified-access.policy_id",
+          "system_product_name",
+          "device_policies.automox.applied",
+          "device_policies.system-tray.policy_id",
+          "device_policies.it-automation.policy_type",
+          "device_policies.host-retention.policy_id",
+          "k8s_cluster_git_version",
+          "deployment_type",
+          "filesystem_containment_status",
+          "status",
+          "policies.policy_type",
+          "policies.policy_id",
+          "device_policies.sensor_update.policy_id",
+          "device_policies.identity-endpoint.policy_type",
+          "device_policies.cloud-ml.applied",
+          "service_provider_account_id",
+          "device_policies.firewall.policy_id",
+          "agent_load_flags",
+          "external_ip",
+          "last_login_user",
+          "managed_apps.airlock.version",
+          "last_reboot",
+          "device_policies.browser-extension.applied",
+          "device_policies.logscale-collector.policy_id",
+          "groups",
+          "device_policies.browser-extension.policy_id",
+          "device_policies.exposure-management.policy_id",
+          "last_login_timestamp",
+          "local_ip",
+          "major_version",
+          "modified_timestamp",
+          "device_policies.identity-endpoint.policy_id",
+          "device_policies.kubernetes-admission-control.policy_type",
+          "device_policies.system-tray.applied",
+          "_all",
+          "product_type_desc",
+          "policy_id",
+          "device_policies.identity-protection.applied",
+          "device_policies.system-tray.policy_type",
+          "device_policies.consumer-subscription.policy_id",
+          "device_policies.firewall.applied",
+          "managed_apps.netskope.version",
+          "managed_apps.jumpcloud.version",
+          "bios_version",
+          "safe_mode",
+          "pod_namespace",
+          "device_policies.device_control.policy_id",
+          "managed_apps.aws-verified-access.version",
+          "device_policies.it-automation.policy_id",
+          "device_policies.it-automation.applied",
+          "device_policies.firewall.rule_set_id",
+          "device_policies.fem-browser-extension-control.policy_type",
+          "device_policies.application-abuse-prevention.policy_type",
+          "device_policies.application-abuse-prevention.applied",
+          "device_policies.vulnerability-management.policy_id",
+          "device_policies.content-update.policy_type",
+          "device_policies.content-update.policy_id",
+          "device_policies.content-update.applied",
+          "device_policies.mobile.policy_type",
+          "managed_apps.automox.version",
+          "device_policies.remote_response.policy_type",
+          "device_policies.fem-browser-extension-control.policy_id",
+          "platform_id",
+          "managed_apps.identity-protection.version",
+          "tags",
+          "pod_host_ip6",
+          "last_login_uid",
+          "platform_name",
+          "device_policies.prevention.policy_type",
+          "device_policies.kubernetes-admission-control.policy_id",
+          "os_product_name",
+          "last_login_user_sid",
+          "device_policies.sca.policy_id",
+          "mac_address",
+          "serial_number",
+          "kernel_version",
+          "connection_ip",
+          "migration_completed_time",
+          "cid",
+          "config_id_platform",
+          "os_version",
+          "release_group",
+          "device_policies.sensor_update.applied",
+          "device_policies.fim.policy_type",
+          "device_policies.host-retention.applied",
+          "device_policies.logscale-collector.applied",
+          "device_policies.ztl.applied",
+          "device_policies.vulnerability-management.applied",
+          "cpu_signature",
+          "device_policies.network-scan-content.policy_type",
+          "device_policies.exposure-management.applied",
+          "os_build",
+          "device_policies.sensor_update.policy_type",
+          "device_policies.device_control.applied",
+          "device_policies.automox.policy_id",
+          "device_policies.netskope.policy_type",
+          "instance_id",
+          "pod_name",
+          "ou",
+          "reduced_functionality_mode",
+          "license_activation_state",
+          "connection_mac_address",
+          "device_id",
+          "device_policies.fim.applied",
+          "pod_hostname",
+          "pod_id",
+          "pod_labels",
+          "host_utc_offset",
+          "last_seen",
+          "device_policies.identity-protection.policy_id",
+          "device_policies.firewall.policy_type",
+          "device_policies.mobile.policy_id",
+          "device_policies.network-scan-content.policy_id",
+          "device_policies.exposure-management.policy_type",
+          "device_policies.application-abuse-prevention.policy_id",
+          "device_policies.automox.policy_type",
+          "device_policies.consumer-subscription.applied",
+          "device_policies.aws-verified-access.policy_type",
+          "chassis_type"
+        ],
+        "type": "string",
+        "description": "The property to sort by (e.g. status.desc or hostname.asc). If not specified, the "
+        "default sort will be device_id.asc. This should be supplied for each consecutive call.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The filter expression that should be used to limit the results. This should be "
+        "supplied for each consecutive call.",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The fields to return, comma delimited if specifying more than one field. For example: "
+        "fields=hostname,device_id would return device records only containing the hostname and device_id",
+        "name": "fields",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "PerformActionV2",
+    "POST",
+    "/devices/entities/devices-actions/v2",
+    "Take various actions on the hosts in your environment. Contain or lift containment on a host. Delete or restore a host.",
+    "hosts",
+    [
+      {
+        "type": "string",
+        "description": "Specify one of these actions:\n  contain - This action contains the host, which stops "
+        "any network communications to locations other than the CrowdStrike cloud and IPs specified in your "
+        "[containment policy](https://falcon.crowdstrike.com/support/documentation/11/getting-started-"
+        "guide#containmentpolicy)  lift_containment: This action lifts containment on the host, which returns its "
+        "network communications to normal  hide_host: This action will delete a host. After the host is deleted, no new "
+        " detections for that host will be reported via UI or APIs  unhide_host: This action will restore a host. "
+        "Detection reporting will resume after the host is restored",
+        "name": "action_name",
+        "in": "query",
+        "required": True
+      },
+      {
+        "description": "The host agent ID (AID) of the host you want to contain. Get an agent ID from a "
+        "detection, the Falcon console, or the Streaming API.\n\nProvide the ID in JSON format with the key ids and the "
+        "value in square brackets, such as: \n\n\"ids\": [\"123456789\"]",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "UpdateDeviceTags",
+    "PATCH",
+    "/devices/entities/devices/tags/v1",
+    "Append or remove one or more Falcon Grouping Tags on one or more hosts.  Tags must be of the form FalconGroupingTags/",
+    "hosts",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetDeviceDetails",
+    "POST",
+    "/devices/entities/devices/v2",
+    "Get details on one or more hosts by providing host IDs in a POST body.  Supports up to a maximum 5000 IDs.",
+    "hosts",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetDeviceDetailsV1",
+    "GET",
+    "/devices/entities/devices/v1",
+    "Get details on one or more hosts by providing agent IDs (AID). You can get a host's agent IDs (AIDs) from "
+    "the /devices/queries/devices/v1 endpoint, the Falcon console or the Streaming API",
+    "hosts",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The host agentIDs used to get details on",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "GetDeviceDetailsV2",
+    "GET",
+    "/devices/entities/devices/v2",
+    "Get details on one or more hosts by providing host IDs as a query parameter.  Supports up to a maximum 100 IDs.",
+    "hosts",
+    [
+      {
+        "maxItems": 100,
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The host agentIDs used to get details on",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "PostDeviceDetailsV2",
+    "POST",
+    "/devices/entities/devices/v2",
+    "Get details on one or more hosts by providing host IDs in a POST body.  Supports up to a maximum 5000 IDs.",
+    "hosts",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_perform_action",
     "POST",
     "/devices/entities/group-actions/v1",
     "Performs the specified action on the provided group IDs.",
@@ -82,7 +728,7 @@ _hosts_endpoints = [
     ]
   ],
   [
-    "GetOnlineState.V1",
+    "GetOnlineState_V1",
     "GET",
     "/devices/entities/online-state/v1",
     "Get the online status for one or more hosts by specifying each host’s unique ID. Successful requests "
@@ -101,6 +747,107 @@ _hosts_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      }
+    ]
+  ],
+  [
+    "QueryHiddenDevices",
+    "GET",
+    "/devices/queries/devices-hidden/v1",
+    "Retrieve hidden hosts that match the provided filter criteria.",
+    "hosts",
+    [
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The maximum records to return. [1-5000]",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The property to sort by (e.g. status.desc or hostname.asc)",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The filter expression that should be used to limit the results",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "QueryDevicesByFilterScroll",
+    "GET",
+    "/devices/queries/devices-scroll/v1",
+    "Search for hosts in your environment by platform, hostname, IP, and other criteria with continuous "
+    "pagination capability (based on offset pointer which expires after 2 minutes with no maximum limit)",
+    "hosts",
+    [
+      {
+        "type": "string",
+        "description": "The offset to page from, provided from the previous scroll call, for the next result "
+        "set. For the first call, do not supply an offset.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The maximum records to return. [1-10000]",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The property to sort by (e.g. status.desc or hostname.asc)",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The filter expression that should be used to limit the results",
+        "name": "filter",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "QueryDevicesByFilter",
+    "GET",
+    "/devices/queries/devices/v1",
+    "Search for hosts in your environment by platform, hostname, IP, and other criteria.",
+    "hosts",
+    [
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The maximum records to return. [1-5000]",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The property to sort by (e.g. status.desc or hostname.asc)",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The filter expression that should be used to limit the results",
+        "name": "filter",
+        "in": "query"
       }
     ]
   ]
