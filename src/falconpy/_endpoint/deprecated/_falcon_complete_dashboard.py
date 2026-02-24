@@ -80,6 +80,20 @@ _falcon_complete_dashboard_endpoints = [
     ]
   ],
   [
+    "AggregateDetections",
+    "POST",
+    "/falcon-complete-dashboards/aggregates/detects/GET/v1",
+    "Retrieve aggregate detection values based on the matched filter",
+    "falcon_complete_dashboard",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "AggregateDeviceCountCollection",
     "POST",
     "/falcon-complete-dashboards/aggregates/devicecount-collections/GET/v1",
@@ -304,6 +318,42 @@ _falcon_complete_dashboard_endpoints = [
     "GET",
     "/falcon-complete-dashboards/queries/blocklist/v1",
     "Retrieve block listtickets that match the provided filter criteria with scrolling enabled",
+    "falcon_complete_dashboard",
+    [
+      {
+        "type": "integer",
+        "description": "The maximum records to return. [1-500]",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The property to sort on, followed by a dot (.), followed by the sort direction, either "
+        "\"asc\" or \"desc\".",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Optional filter and sort criteria in the form of an FQL query. For more information "
+        "about FQL queries, see [our FQL documentation in "
+        "Falcon](https://falcon.crowdstrike.com/support/documentation/45/falcon-query-language-feature-guide).",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Starting index of overall result set from which to return ids.",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "QueryDetectionIdsByFilter",
+    "GET",
+    "/falcon-complete-dashboards/queries/detects/v1",
+    "Retrieve DetectionsIds that match the provided FQL filter, criteria with scrolling enabled",
     "falcon_complete_dashboard",
     [
       {
