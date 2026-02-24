@@ -55,9 +55,17 @@ from .deprecated import _workflows_deprecated
 from .deprecated import _zero_trust_assessment_deprecated
 from .deprecated import _certificate_based_exclusions_deprecated
 from .deprecated import _cloud_connect_aws_deprecated
+from .deprecated import _cloud_policies_deprecated
+from .deprecated import _container_image_compliance_deprecated
+from .deprecated import _host_migration_deprecated
 from .deprecated import _overwatch_dashboard_deprecated
+from .deprecated import _quick_scan_pro_deprecated
+from .deprecated import _recon_deprecated
+from .deprecated import _serverless_vulnerabilities_deprecated
 from .deprecated import _spotlight_vulnerability_metadata_deprecated
 from .deprecated import _tailored_intelligence_deprecated
+from .deprecated import _unidentified_containers_deprecated
+from .deprecated import _user_management_deprecated
 from .deprecated import _deprecated_operation_mapping
 from .deprecated import _deprecated_class_mapping
 
@@ -282,6 +290,8 @@ deprecated_endpoints.extend(_correlation_rules_admin_deprecated)
 deprecated_endpoints.extend(_correlation_rules_deprecated)
 deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
 deprecated_endpoints.extend(_cloud_connect_aws_deprecated)
+deprecated_endpoints.extend(_cloud_policies_deprecated)
+deprecated_endpoints.extend(_container_image_compliance_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)
 deprecated_endpoints.extend(_d4c_registration_deprecated)
 deprecated_endpoints.extend(_data_protection_configuration_deprecated)
@@ -289,6 +299,7 @@ deprecated_endpoints.extend(_device_content_deprecated)
 deprecated_endpoints.extend(_discover_deprecated)
 deprecated_endpoints.extend(_fdr_deprecated)
 deprecated_endpoints.extend(_firewall_management_deprecated)
+deprecated_endpoints.extend(_host_migration_deprecated)
 deprecated_endpoints.extend(_hosts_deprecated)
 deprecated_endpoints.extend(_identity_protection_deprecated)
 deprecated_endpoints.extend(_installation_tokens_deprecated)
@@ -297,10 +308,15 @@ deprecated_endpoints.extend(_ioc_deprecated)
 deprecated_endpoints.extend(_iocs_deprecated)
 deprecated_endpoints.extend(_ml_exclusions_deprecated)
 deprecated_endpoints.extend(_ods_deprecated)
+deprecated_endpoints.extend(_quick_scan_pro_deprecated)
 deprecated_endpoints.extend(_real_time_response_deprecated)
 deprecated_endpoints.extend(_real_time_response_admin_deprecated)
+deprecated_endpoints.extend(_recon_deprecated)
 deprecated_endpoints.extend(_report_executions_deprecated)
 deprecated_endpoints.extend(_scheduled_reports_deprecated)
+deprecated_endpoints.extend(_serverless_vulnerabilities_deprecated)
+deprecated_endpoints.extend(_unidentified_containers_deprecated)
+deprecated_endpoints.extend(_user_management_deprecated)
 deprecated_endpoints.extend(_workflows_deprecated)
 deprecated_endpoints.extend(_zero_trust_assessment_deprecated)
 deprecated_endpoints.extend(_overwatch_dashboard_deprecated)

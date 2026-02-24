@@ -42,6 +42,8 @@ from ._cloud_security import _cloud_security_endpoints
 from ._cloud_security_assets import _cloud_security_assets_endpoints
 from ._cloud_security_compliance import _cloud_security_compliance_endpoints
 from ._cloud_security_detections import _cloud_security_detections_endpoints
+from ._cloud_policies import _cloud_policies_endpoints
+from ._container_image_compliance import _container_image_compliance_endpoints
 from ._custom_ioa import _custom_ioa_endpoints
 from ._correlation_rules import _correlation_rules_endpoints
 from ._correlation_rules_admin import _correlation_rules_admin_endpoints
@@ -52,6 +54,7 @@ from ._discover import _discover_endpoints
 from ._exposure_management import _exposure_management_endpoints
 from ._fdr import _fdr_endpoints
 from ._firewall_management import _firewall_management_endpoints
+from ._host_migration import _host_migration_endpoints
 from ._hosts import _hosts_endpoints
 from ._identity_protection import _identity_protection_endpoints
 from ._installation_tokens import _installation_tokens_endpoints
@@ -60,10 +63,15 @@ from ._ioc import _ioc_endpoints
 from ._iocs import _iocs_endpoints
 from ._ml_exclusions import _ml_exclusions_endpoints
 from ._ods import _ods_endpoints
+from ._quick_scan_pro import _quick_scan_pro_endpoints
 from ._real_time_response import _real_time_response_endpoints
 from ._real_time_response_admin import _real_time_response_admin_endpoints
+from ._recon import _recon_endpoints
 from ._report_executions import _report_executions_endpoints
 from ._scheduled_reports import _scheduled_reports_endpoints
+from ._serverless_vulnerabilities import _serverless_vulnerabilities_endpoints
+from ._unidentified_containers import _unidentified_containers_endpoints
+from ._user_management import _user_management_endpoints
 from ._workflows import _workflows_endpoints
 from ._zero_trust_assessment import _zero_trust_assessment_endpoints
 from ._mapping import _deprecated_op_mapping, _deprecated_cls_mapping
@@ -83,6 +91,8 @@ _cloud_security_deprecated = _cloud_security_endpoints
 _cloud_security_assets_deprecated = _cloud_security_assets_endpoints
 _cloud_security_compliance_deprecated = _cloud_security_compliance_endpoints
 _cloud_security_detections_deprecated = _cloud_security_detections_endpoints
+_cloud_policies_deprecated = _cloud_policies_endpoints
+_container_image_compliance_deprecated = _container_image_compliance_endpoints
 _correlation_rules_admin_deprecated = _correlation_rules_admin_endpoints
 _correlation_rules_deprecated = _correlation_rules_endpoints
 _custom_ioa_deprecated = _custom_ioa_endpoints
@@ -93,6 +103,7 @@ _discover_deprecated = _discover_endpoints
 _exposure_management_deprecated = _exposure_management_endpoints
 _fdr_deprecated = _fdr_endpoints
 _firewall_management_deprecated = _firewall_management_endpoints
+_host_migration_deprecated = _host_migration_endpoints
 _hosts_deprecated = _hosts_endpoints
 _identity_protection_deprecated = _identity_protection_endpoints
 _installation_tokens_deprecated = _installation_tokens_endpoints
@@ -101,10 +112,15 @@ _ioc_deprecated = _ioc_endpoints
 _iocs_deprecated = _iocs_endpoints
 _ml_exclusions_deprecated = _ml_exclusions_endpoints
 _ods_deprecated = _ods_endpoints
+_quick_scan_pro_deprecated = _quick_scan_pro_endpoints
 _real_time_response_deprecated = _real_time_response_endpoints
 _real_time_response_admin_deprecated = _real_time_response_admin_endpoints
+_recon_deprecated = _recon_endpoints
 _report_executions_deprecated = _report_executions_endpoints
 _scheduled_reports_deprecated = _scheduled_reports_endpoints
+_serverless_vulnerabilities_deprecated = _serverless_vulnerabilities_endpoints
+_unidentified_containers_deprecated = _unidentified_containers_endpoints
+_user_management_deprecated = _user_management_endpoints
 _workflows_deprecated = _workflows_endpoints
 _zero_trust_assessment_deprecated = _zero_trust_assessment_endpoints
 _certificate_based_exclusions_deprecated = _certificate_based_exclusions_endpoints
