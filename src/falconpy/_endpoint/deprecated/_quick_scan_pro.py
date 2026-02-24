@@ -191,14 +191,14 @@ _quick_scan_pro_endpoints = [
         "type": "string",
         "description": "Empty value means to not filter on anything\nAvailable filter fields that supports "
         "match (~): _all, mitre_attacks.description\nAvailable filter fields that supports exact match: cid,sha256,id,s "
-        "tatus,type,entity,executor,verdict,verdict_reason,verdict_source,file_size,file_type_short,artifacts.file_arti "
-        "facts.sha256,artifacts.file_artifacts.filename,artifacts.file_artifacts.verdict,artifacts.file_artifacts.verdi "
-        "ct_reasons,artifacts.url_artifacts.url,artifacts.url_artifacts.verdict,artifacts.url_artifacts.verdict_reasons "
-        ",mitre_attacks.attack_id,mitre_attacks.attack_id_wiki,mitre_attacks.tactic,mitre_attacks.technique,mitre_attac "
-        "ks.capec_id,mitre_attacks.parent.attack_id,mitre_attacks.parent.attack_id_wiki,mitre_attacks.parent.technique\n"
-        "Available filter fields that supports wildcard (*): mitre_attacks.description\nAvailable filter fields that "
-        "supports range comparisons (>, <, >=, <=): created_timestamp, updated_timestamp, file_size\nAll filter fields "
-        "and operations supports negation (!).\n_all field is used to search between all fields.",
+        "tatus,type,entity,executor,verdict,verdict_reason,verdict_source,artifacts.file_artifacts.sha256,artifacts.fil "
+        "e_artifacts.filename,artifacts.file_artifacts.verdict,artifacts.file_artifacts.verdict_reasons,artifacts.url_a "
+        "rtifacts.url,artifacts.url_artifacts.verdict,artifacts.url_artifacts.verdict_reasons,mitre_attacks.attack_id,m "
+        "itre_attacks.attack_id_wiki,mitre_attacks.tactic,mitre_attacks.technique,mitre_attacks.capec_id,mitre_attacks. "
+        "parent.attack_id,mitre_attacks.parent.attack_id_wiki,mitre_attacks.parent.technique\nAvailable filter fields "
+        "that supports wildcard (*): mitre_attacks.description\nAvailable filter fields that supports range comparisons "
+        " (>, <, >=, <=): created_timestamp, updated_timestamp\nAll filter fields and operations supports negation "
+        "(!).\n_all field is used to search between all fields.",
         "name": "filter",
         "in": "query",
         "required": True
