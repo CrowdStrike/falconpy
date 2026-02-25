@@ -213,11 +213,7 @@ class CaseManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.files_bulk-download.post.v1
         """
         if not body:
-            if kwargs.get("ids", None):
-                provided = kwargs.get("ids", None)
-                if isinstance(provided, str):
-                    provided = provided.split(',') if ',' in provided else [provided]
-                body["ids"] = provided
+            body = case_management_file_ids_payload(passed_keywords=kwargs)
 
         return process_service_request(
             calling_object=self,
@@ -1852,11 +1848,7 @@ class CaseManagement(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cases/entities.cases.post.v2
         """
         if not body:
-            if kwargs.get("ids", None):
-                provided = kwargs.get("ids", None)
-            if isinstance(provided, str):
-                provided = provided.split(',') if ',' in provided else [provided]
-                body["ids"] = provided
+            body = case_management_file_ids_payload(passed_keywords=kwargs)
 
         return process_service_request(
             calling_object=self,
