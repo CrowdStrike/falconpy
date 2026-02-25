@@ -256,38 +256,6 @@ class CaseManagement(ServiceClass):
             params=handle_single_argument(args, parameters, "id")
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def download_files(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Download existing file from case.
-
-        Keyword arguments:
-        body -- Full body payload provided as a dictionary. Not required if using other keywords.
-                {
-                    "ids": [
-                        "string"
-                    ]
-                }
-        ids -- List of file IDs to download. String or list of strings.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/case-files/entities.files_download.post.v1
-        """
-        if not body:
-            body = case_management_file_ids_payload(passed_keywords=kwargs)
-
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="entities_files_download_post_v1",
-            body=body
-            )
-
     @force_default(defaults=["parameters"], default_types=["dict"])
     def upload_file(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Upload file for case.
@@ -2031,7 +1999,6 @@ class CaseManagement(ServiceClass):
     entities_file_details_patch_v1 = update_file_details
     entities_files_bulk_download_post_v1 = bulk_download_files
     entities_files_download_get_v1 = download_existing_files
-    entities_files_download_post_v1 = download_files
     entities_files_upload_post_v1 = upload_file
     entities_files_delete_v1 = delete_file_details
     queries_file_details_get_v1 = query_file_detail_ids
