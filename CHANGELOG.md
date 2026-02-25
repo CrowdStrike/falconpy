@@ -369,7 +369,6 @@
 ## Other
 + Removed: Overwatch Dashboard service collection endpoint definitions.
     - `_endpoint/_overwatch_dashboard.py`
-
 ---
 
 # Version 1.6.0
