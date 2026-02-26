@@ -47,6 +47,9 @@ from ._util import (
 from ._payload import (
     ngsiem_search_payload,
     ngsiem_parser_payload,
+    ngsiem_auto_update_policy_payload,
+    ngsiem_install_parser_payload,
+    ngsiem_bulk_install_parsers_payload,
     ngsiem_data_connection_payload,
     ngsiem_connector_config_payload
 )
@@ -1026,6 +1029,117 @@ class NGSIEM(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def update_parser_auto_update_policy(self: object,
+                                         body: dict = None,
+                                         **kwargs
+                                         ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update a parser auto update policy.
+
+        Enables or disables auto-updates for parsers.
+
+        Keyword arguments:
+        autoupdate_policy -- The auto update policy setting ('on' or 'off'). String.
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "autoupdate_policy": "string",
+                    "reason": "string"
+                }
+        reason -- Reason for changing the auto update policy. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PUT
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateParserAutoUpdatePolicy
+        """
+        if not body:
+            body = ngsiem_auto_update_policy_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="UpdateParserAutoUpdatePolicy",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def install_parser(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Install a CrowdStrike-managed out-of-the-box (OOTB) parser.
+
+        Provisions a pre-built parser with a specific version for the requesting customer ID (CID).
+        The parser is installed as-is and cannot be modified by the customer.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "parser_id": "string",
+                    "version": "string"
+                }
+        parser_id -- The unique identifier of the parser to install. String.
+        version -- The version of the parser to install. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/InstallParser
+        """
+        if not body:
+            body = ngsiem_install_parser_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="InstallParser",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def bulk_install_parsers(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Install multiple CrowdStrike-managed out-of-the-box (OOTB) parsers.
+
+        Provisions multiple pre-built parsers with their specific versions for the requesting
+        customer ID (CID). The parsers are installed as-is and cannot be modified by the customer.
+        Maximum 100 parsers per request.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "parsers": [
+                        {
+                            "parser_id": "string",
+                            "version": "string"
+                        }
+                    ]
+                }
+        parsers -- List of parser objects containing parser_id and version. List of dictionaries.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/BulkInstallParsers
+        """
+        if not body:
+            body = ngsiem_bulk_install_parsers_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="BulkInstallParsers",
+            body=body
+            )
+
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_saved_query_template(self: object,
                                  parameters: dict = None,
@@ -1254,6 +1368,10 @@ class NGSIEM(ServiceClass):
                   Only currently support text match on name field: name:~'value'
         repository -- Name of repository.
                       Allowed options: parsers-repository
+        update_available -- Filter parsers by update availability. String.
+                           Allowed values: true, false
+        parser_type -- Filter parsers by type. String.
+                       Allowed values: ootb, custom
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -1873,6 +1991,9 @@ class NGSIEM(ServiceClass):
     CreateParser = create_parser
     UpdateParser = update_parser
     DeleteParser = delete_parser
+    UpdateParserAutoUpdatePolicy = update_parser_auto_update_policy
+    InstallParser = install_parser
+    BulkInstallParsers = bulk_install_parsers
     GetSavedQueryTemplate = get_saved_query_template
     CreateSavedQuery = create_saved_query
     UpdateSavedQueryFromTemplate = update_saved_query_from_template

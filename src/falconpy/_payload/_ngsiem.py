@@ -145,6 +145,59 @@ def ngsiem_parser_payload(passed_keywords: dict) -> dict:
     return returned
 
 
+def ngsiem_auto_update_policy_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted parser auto update policy payload.
+
+    {
+        "autoupdate_policy": "string",
+        "reason": "string"
+    }
+    """
+    returned: dict = {}
+    keys = ["autoupdate_policy", "reason"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned[key] = passed_keywords.get(key, None)
+
+    return returned
+
+
+def ngsiem_install_parser_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted install parser payload.
+
+    {
+        "parser_id": "string",
+        "version": "string"
+    }
+    """
+    returned: dict = {}
+    keys = ["parser_id", "version"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned[key] = passed_keywords.get(key, None)
+
+    return returned
+
+
+def ngsiem_bulk_install_parsers_payload(passed_keywords: dict) -> dict:
+    """Create a properly formatted bulk install parsers payload.
+
+    {
+        "parsers": [
+            {
+                "parser_id": "string",
+                "version": "string"
+            }
+        ]
+    }
+    """
+    returned: dict = {}
+    if passed_keywords.get("parsers", None) is not None:
+        returned["parsers"] = passed_keywords["parsers"]
+
+    return returned
+
+
 def ngsiem_connector_config_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted connector config payload.
 

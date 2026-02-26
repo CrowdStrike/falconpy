@@ -146,6 +146,9 @@ from ._mobile_enrollment import mobile_enrollment_payload
 from ._ngsiem import (
     ngsiem_search_payload,
     ngsiem_parser_payload,
+    ngsiem_auto_update_policy_payload,
+    ngsiem_install_parser_payload,
+    ngsiem_bulk_install_parsers_payload,
     ngsiem_connector_config_payload,
     ngsiem_data_connection_payload
 )
@@ -272,7 +275,9 @@ __all__ = [
     "cloud_security_create_group_payload", "aspm_group_payload", "cloud_policies_suppression_rule_payload",
     "correlation_rules_template_payload", "ioa_ss_exclusion_payload", "ioa_ss_default_exclusion_payload",
     "ml_exclusions_actions_payload", "ml_exclusions_report_payload", "ml_exclusions_update_payload",
-    "ngsiem_data_connection_payload", "ngsiem_connector_config_payload", "acp_custom_rules_policy_payload",
+    "ngsiem_data_connection_payload", "ngsiem_connector_config_payload",
+    "ngsiem_auto_update_policy_payload", "ngsiem_install_parser_payload",
+    "ngsiem_bulk_install_parsers_payload", "acp_custom_rules_policy_payload",
     "data_protection_policy_precedence_payload", "serverless_exports_launch_payload",
     "maintenance_token_payload"
 ]

@@ -609,6 +609,56 @@ _ngsiem_endpoints = [
     ]
   ],
   [
+    "UpdateParserAutoUpdatePolicy",
+    "PUT",
+    "/ngsiem-content/entities/parsers/autoupdate/v1",
+    "Updates a parser auto update policy - 'on' enables auto-updates, 'off' disables them",
+    "ngsiem",
+    [
+      {
+        "description": "update parser auto update policy request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "BulkInstallParsers",
+    "POST",
+    "/ngsiem-content/entities/parsers/bulk-install/v1",
+    "Installs multiple CrowdStrike-managed out-of-the-box (OOTB) parsers into the customer's repository in a "
+    "single operation. This endpoint provisions multiple pre-built parsers with their specific versions for the "
+    "requesting customer ID (CID). The parsers are installed as-is and cannot be modified by the customer. Requires "
+    "an array of parsers with parser_id and version in the request body. Maximum 100 parsers per request.",
+    "ngsiem",
+    [
+      {
+        "description": "bulk install parsers request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "InstallParser",
+    "POST",
+    "/ngsiem-content/entities/parsers/install/v1",
+    "Installs a CrowdStrike-managed out-of-the-box (OOTB) parser into the customer's repository. This endpoint "
+    " provisions a pre-built parser with a specific version for the requesting customer ID (CID). The parser is "
+    "installed as-is and cannot be modified by the customer. Requires parser_id and version in the request body.",
+    "ngsiem",
+    [
+      {
+        "description": "create parser install request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "GetParser",
     "GET",
     "/ngsiem-content/entities/parsers/v1",
@@ -925,6 +975,28 @@ _ngsiem_endpoints = [
         "description": "name of repository",
         "name": "repository",
         "in": "query"
+      },
+      {
+        "enum": [
+          "true",
+          "false"
+        ],
+        "type": "string",
+        "description": "filter parsers by update availability",
+        "name": "update_available",
+        "in": "query",
+        "allowEmptyValue": True
+      },
+      {
+        "enum": [
+          "ootb",
+          "custom"
+        ],
+        "type": "string",
+        "description": "filter parsers by type",
+        "name": "parser_type",
+        "in": "query",
+        "allowEmptyValue": True
       }
     ]
   ],

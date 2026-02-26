@@ -14,6 +14,9 @@ from falconpy import NGSIEM
 from falconpy._payload import (
     ngsiem_connector_config_payload,
     ngsiem_data_connection_payload,
+    ngsiem_auto_update_policy_payload,
+    ngsiem_install_parser_payload,
+    ngsiem_bulk_install_parsers_payload,
 )
 
 auth = Authorization.TestAuthorization()
@@ -120,6 +123,17 @@ class TestNGSIEM:
             "CreateParser": falcon.create_parser(script=test_db, repository="whatever", fields_to_tag="bob,larry"),
             "UpdateParser": falcon.update_parser(script=test_db, repository="whatever", fields_to_tag="bob,larry", id="12345678"),
             "DeleteParser": falcon.delete_parser(ids="12345678"),
+            "UpdateParserAutoUpdatePolicy": falcon.update_parser_auto_update_policy(
+                autoupdate_policy="on",
+                reason="Enable auto updates"
+            ),
+            "InstallParser": falcon.install_parser(
+                parser_id="12345678",
+                version="1.0.0"
+            ),
+            "BulkInstallParsers": falcon.bulk_install_parsers(
+                parsers=[{"parser_id": "12345678", "version": "1.0.0"}]
+            ),
             "GetSavedQueryTemplate": falcon.get_saved_query_template(ids="12345678"),
             "CreateSavedQuery": falcon.create_saved_query(search_domain="all", yaml_template=test_db),
             "CreateSavedQueryFail": falcon.create_saved_query(search_domain="all"),
@@ -129,6 +143,7 @@ class TestNGSIEM:
             "ListDashboards": falcon.list_dashboards(limit="1"),
             "ListLookupFiles": falcon.list_lookup_files(limit="1"),
             "ListParsers": falcon.list_parsers(limit="1"),
+            "ListParsersFiltered": falcon.list_parsers(limit="1", update_available="true", parser_type="ootb"),
             "ListSavedQueries": falcon.list_saved_queries(limit="1"),
             "UpdateLookupFileEntries": falcon.update_lookup_file_entries(search_domain="all", filename="testfile.csv", file=test_db, update_mode="append"),
             "UpdateLookupFileEntriesUpdate": falcon.update_lookup_file_entries(search_domain="all", filename="testfile.csv", file=test_db, update_mode="update", key_columns="id", ignore_case="false"),
@@ -245,6 +260,45 @@ class TestNGSIEMPayloadCoverage:
             "log_sources": ["source1", "source2"]
         })
         assert result["log_sources"] == ["source1", "source2"]
+
+    def test_ngsiem_auto_update_policy_payload(self):
+        """Cover auto update policy payload."""
+        result = ngsiem_auto_update_policy_payload({
+            "autoupdate_policy": "on",
+            "reason": "Enable updates"
+        })
+        assert result["autoupdate_policy"] == "on"
+        assert result["reason"] == "Enable updates"
+
+    def test_ngsiem_auto_update_policy_empty(self):
+        """Cover empty auto update policy payload."""
+        result = ngsiem_auto_update_policy_payload({})
+        assert result == {}
+
+    def test_ngsiem_install_parser_payload(self):
+        """Cover install parser payload."""
+        result = ngsiem_install_parser_payload({
+            "parser_id": "abc123",
+            "version": "1.0.0"
+        })
+        assert result["parser_id"] == "abc123"
+        assert result["version"] == "1.0.0"
+
+    def test_ngsiem_install_parser_empty(self):
+        """Cover empty install parser payload."""
+        result = ngsiem_install_parser_payload({})
+        assert result == {}
+
+    def test_ngsiem_bulk_install_parsers_payload(self):
+        """Cover bulk install parsers payload."""
+        parsers = [{"parser_id": "abc", "version": "1.0"}]
+        result = ngsiem_bulk_install_parsers_payload({"parsers": parsers})
+        assert result["parsers"] == parsers
+
+    def test_ngsiem_bulk_install_parsers_empty(self):
+        """Cover empty bulk install parsers payload."""
+        result = ngsiem_bulk_install_parsers_payload({})
+        assert result == {}
 
 
 class TestNGSIEMConnectorCoverage:

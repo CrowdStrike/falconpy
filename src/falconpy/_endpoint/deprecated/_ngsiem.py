@@ -1185,5 +1185,69 @@ _ngsiem_endpoints = [
         "required": True
       }
     ]
+  ],
+  [
+    "ExternalCreateConnectorConfig",
+    "POST",
+    "/ngsiem/entities/connectors/configs/v1",
+    "Create a new configuration for a data connector",
+    "ngsiem",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ExternalPatchConnectorConfig",
+    "PATCH",
+    "/ngsiem/entities/connectors/configs/v1",
+    "Patch configurations for a data connector",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "Unique id of the config to update",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      },
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "ExternalDeleteConnectorConfigs",
+    "DELETE",
+    "/ngsiem/entities/connectors/configs/v1",
+    "Delete data connection config",
+    "ngsiem",
+    [
+      {
+        "type": "string",
+        "description": "Unique identifier of the connector",
+        "name": "connector_id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "maxItems": 20,
+        "uniqueItems": True,
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "csv",
+        "description": "Unique identifiers of the config(s) to delete",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
   ]
 ]
