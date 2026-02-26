@@ -366,6 +366,36 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_spotlight_vulnerability_metadata.py`
 
++ Added: Updated the _GetCredentialsMixin0Mixin61_ operation ID to _GetCredentialsMixin0Mixin54_ within the __Cloud Snapshots__ service collection.
+    - `_endpoint/_cloud_snapshots.py`
+    - `_endpoint/deprecated/_cloud_snapshots.py`
+    - `cloud_snapshots.py`
+
++ Added: Added three new operations to the __NGSIEM__ service collection.
+    - _UpdateParserAutoUpdatePolicy_
+    - _InstallParser_
+    - _BulkInstallParsers_
+    - `_endpoint/_ngsiem.py`
+    - `_endpoint/deprecated/_ngsiem.py`
+    - `_payload/__init__.py`
+    - `_payload/_ngsiem.py`
+    - `ngsiem.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ngsiem.py`
+
++ Added: Added `update_available` and `parser_type` as query parameters to the _ListParsers_ operation within the __NGSIEM__ service collection.
+    - `_endpoint/_ngsiem.py`
+    - `ngsiem.py`
+
++ Updated: Updated deprecated endpoint definitions for the __Quick Scan Pro__ service collection.
+    - `_endpoint/deprecated/_quick_scan_pro.py`
+
+## Other
++ Changed: Updated swagger definitions from latest CrowdStrike API specifications.
+    > 3 total new operations added.
+
+---
+
 ## Other
 + Removed: Overwatch Dashboard service collection endpoint definitions.
     - `_endpoint/_overwatch_dashboard.py`
