@@ -119,6 +119,13 @@ class TestMLExclusions:
                 is_descendant_process=True,
                 value="test"
             ),
+            "update_ml_exclusions_2": falcon.update_ml_exclusions(
+                comment="Unit Testing",
+                groups="12345678,987654321",
+                id="12345678",
+                is_descendant_process=True,
+                value="test"
+            ),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
