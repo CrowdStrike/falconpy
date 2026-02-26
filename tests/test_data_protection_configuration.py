@@ -148,6 +148,8 @@ class TestDataProtectionConfiguration:
             "queries_sensitivity_label_get_v2": falcon.query_sensitivity_label(filter="name:'test'", sort="name|asc", limit=50, offset=0),
             "queries_policy_get_v2": falcon.query_policies(platform_name="win", filter="name:'test'", offset=0, limit=50, sort="name|asc"),
             "queries_web_location_get_v2": falcon.query_web_locations(filter="name:'test'", type="custom", limit=50, offset=0),
+            "entities_policy_precedence_post_v1": falcon.update_policy_precedence(platform="win", precedence=["string"]),
+            "entities_policy_precedence_post_v1_2": falcon.update_policy_precedence(resources=[{"platform":"win", "precedence":["string"]}])
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
