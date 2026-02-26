@@ -65,3 +65,13 @@ class TestHelper:
             error_checks = True
 
         assert error_checks
+
+
+class TestArgsToParamsCoverage:
+    """Cover _util/_functions.py args_to_params URL-encoded warning with log."""
+
+    def test_urlencoded_warning_with_log(self):
+        """args_to_params URL-encoded arg non-pythonic with logger."""
+        h = Hosts(client_id="fake", client_secret="fake", debug=True, pythonic=False)
+        result = h.query_devices(filter="platform_name%3A'Windows'")
+        assert isinstance(result, dict)
