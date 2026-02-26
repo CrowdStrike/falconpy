@@ -33,6 +33,7 @@ from falconpy import (
     SDKDeprecationWarning
     )
 from falconpy._result._base_dictionary import UnsupportedPythonVersion
+from falconpy._result._result import BaseResult
 
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
@@ -777,3 +778,52 @@ class TestResults:
                     _success = True  # This op is fully deprecated
 
         assert _success
+
+
+class TestWarningsCoverage:
+    """Cover _error/_warnings.py DeprecatedClass with code."""
+
+    def test_deprecated_class_with_code(self):
+        """DeprecatedClass with a code argument."""
+        dc = DeprecatedClass(code=500, class_name="OldClass", new_class_name="NewClass")
+        assert dc.code == 500
+        assert "OldClass" in dc.message
+        assert "NewClass" in dc.message
+
+    def test_deprecated_class_without_code(self):
+        """DeprecatedClass without code keeps default."""
+        dc = DeprecatedClass(class_name="OldClass")
+        assert dc.code == 299
+        assert "OldClass" in dc.message
+
+
+class TestResultNextCoverage:
+    """Cover _result/_result.py __next__ return path."""
+
+    def test_next_returns_value(self):
+        """Test that __next__ returns the value."""
+        r = Result(
+            status_code=200,
+            headers={"Content-Type": "application/json"},
+            body={
+                "meta": {"trace_id": "abc"},
+                "resources": ["item1", "item2", "item3"],
+                "errors": []
+            }
+        )
+        val = next(iter(r))
+        assert val == "item1"
+
+    def test_base_result_next_returns_value(self):
+        """Cover BaseResult.__next__ return directly."""
+        r = BaseResult(
+            status_code=200,
+            headers={"Content-Type": "application/json"},
+            body={
+                "meta": {"trace_id": "abc"},
+                "resources": ["item1", "item2"],
+                "errors": []
+            }
+        )
+        val = next(r)
+        assert val == "item1"
