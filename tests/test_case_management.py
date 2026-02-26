@@ -5,8 +5,11 @@
 import os
 import sys
 
+from tomlkit import key
+
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
+import tests
 
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
@@ -16,7 +19,7 @@ from falconpy import CaseManagement
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = CaseManagement(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 404, 429, 500]
+AllowedResponses = [200, 201, 207, 400, 403, 404, 429, 500]
 
 
 class TestCaseManagement:
@@ -150,11 +153,36 @@ class TestCaseManagement:
             "entities_cases_post_v2": falcon.get_cases(ids="ids"),
             "entities_cases_patch_v2": falcon.update_case_fields(id="1234567", expected_consistency_version=0, expected_version=0, fields={}),
             "entities_event_evidence_post_v1": falcon.add_case_event_evidence(id="12345678", events=[{"id": "123"}]),
-            "queries_cases_get_v1": falcon.query_case_ids(limit=10, offset=0, sort="name", filter="whatever", q="search")
+            "queries_cases_get_v1": falcon.query_case_ids(limit=10, offset=0, sort="name", filter="whatever", q="search"),
+            "entities_get_rtr_file_metadata_post_v1": falcon.get_rtr_file_metadata(aid="aid123", file_path="/tmp/test"),
+            "entities_retrieve_rtr_file_post_v1": falcon.retrieve_rtr_file(aid="aid123",
+                                                                           case_id="case123",
+                                                                           description="test",
+                                                                           file_path="/tmp/test"
+                                                                           ),
+            "entities_retrieve_rtr_recent_file_post_v1": falcon.retrieve_rtr_recent_file(aid="aid123",
+                                                                                         case_id="case123",
+                                                                                         description="test",
+                                                                                         session_id="session123",
+                                                                                         sha256="abc123"
+                                                                                         ),
+            "aggregates_access_tags_post_v1": falcon.get_access_tag_aggregations(**{"date_ranges": {},
+                                                                                    "from": 0,
+                                                                                    "field": "whatever",
+                                                                                    "filter": "whatever",
+                                                                                    "name": "whatever",
+                                                                                    "size": 0,
+                                                                                    "sort": "whatever",
+                                                                                    "type": "terms"}
+                                                                                    ),
+            "entities_access_tags_get_v1": falcon.get_access_tags(ids="1234567890"),
+            "queries_access_tags_get_v1": falcon.query_access_tags(filter="whatever", sort="name", limit=10, after="token123")
         }
+        failed_keys = []
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
                 error_checks = False
-                # print(key)
-                # print(tests[key])
-        assert error_checks
+                print(key)
+                print(tests[key])
+                failed_keys.append(f"{key}: {tests[key]['status_code']}")
+        assert error_checks, f"Failed: {failed_keys}"
