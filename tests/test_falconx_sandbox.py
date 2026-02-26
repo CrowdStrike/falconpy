@@ -47,7 +47,7 @@ class TestFalconXSandbox:
                                     user_tags="apples,bananas"
                                     ),
             "query_reports": falcon.QueryReports(),
-            "query_submissions": falcon.QuerySubmissions(),
+            "query_submissions": falcon.QuerySubmissionsMixin0(),
             "get_sample": falcon.GetSampleV2(ids='12345678'),
             "upload_sample": falcon.UploadSampleV2(file_name=filename, upfile=PAYLOAD, comment="testing", is_confidential=True),
             "upload_sample": falcon.UploadSampleV2(file_data=PAYLOAD),
@@ -74,7 +74,7 @@ class TestFalconXSandbox:
 
     def test_query_submissions(self):
         """Pytest harness hook"""
-        assert bool(falcon.QuerySubmissions(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
+        assert bool(falcon.QuerySubmissionsMixin0(parameters={"limit": 1})["status_code"] in AllowedResponses) is True
 
     @pytest.mark.skipif(falcon.QueryReports(parameters={"limit": 1})["status_code"] == 429, reason="API rate limit reached")
     def test_get_summary_reports(self):
