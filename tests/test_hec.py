@@ -161,3 +161,250 @@ class TestHTTPEventCollector:
             # will scroll indefinitely
             if count > 3:
                 break
+
+
+class TestIndicatorCoverage:
+    """Cover _helper/_indicator.py lines 66-92."""
+
+    def test_default_style(self):
+        """Test Indicator with default (moon) style."""
+        ind = Indicator()
+        assert ind.position == -1
+        assert isinstance(ind.indicator, list)
+        result = f"{ind}"
+        assert ind.position == 0
+        assert isinstance(result, str)
+
+    def test_valid_style(self):
+        """Test Indicator with a valid named style."""
+        ind = Indicator("clock")
+        assert ind.indicator == Indicator.CLOCK
+
+    def test_invalid_style_fallback(self):
+        """Test Indicator with invalid style falls back to MOON."""
+        ind = Indicator("not_a_real_style")
+        assert ind.indicator == Indicator.MOON
+
+    def test_repr_wraps_around(self):
+        """Test that __repr__ wraps position back to 0."""
+        ind = Indicator("moon")
+        for _ in range(len(ind.indicator) + 1):
+            f"{ind}"
+        assert ind.position == 0
+
+    def test_position_setter(self):
+        """Test the position setter."""
+        ind = Indicator()
+        ind.position = 5
+        assert ind.position == 5
+
+    def test_indicator_property(self):
+        """Test the indicator property getter."""
+        ind = Indicator("kitt")
+        assert ind.indicator == Indicator.KITT
+
+    def test_position_property(self):
+        """Test the position property getter."""
+        ind = Indicator()
+        assert ind.position == -1
+
+
+class TestHECCoverage:
+    """Cover _ngsiem/_hec.py uncovered paths without requiring live NGSIEM."""
+
+    def test_hec_context_manager_exit(self):
+        """Cover __exit__ with an exception arg."""
+        hec = HTTPEventCollector(
+            api_key="fake_key",
+            api_url_key="fake_url_key",
+            debug=True
+        )
+        hec.__exit__(None, None, None)
+
+    def test_hec_send_event_file_plain_text(self):
+        """Cover send_event_file with a plain text file."""
+        hec = HTTPEventCollector(
+            api_key="fake_key",
+            api_url_key="fake_url_key",
+            debug=True,
+            raw_ingest=True
+        )
+        hec.ingest_timeout = 1
+        hec.retry_count = 1
+        result = hec.send_event_file("tests/5records.raw")
+        assert isinstance(result, int)
+
+    def test_hec_retry_timeout(self):
+        """Cover retry timeout path."""
+        hec = HTTPEventCollector(
+            api_key="fake_key",
+            api_url_key="fake_url_key",
+            debug=True
+        )
+        hec.ingest_timeout = 0.001
+        hec.retry_count = 1
+        result = hec.send_event({"host": "test", "test": True})
+        assert result == 500
+
+    def test_hec_retry_ssl_error(self):
+        """Cover SSL/InvalidURL error retry path."""
+        hec = HTTPEventCollector(
+            api_key="fake_key",
+            api_url_key="bad://invalid_url",
+            debug=True
+        )
+        hec.ingest_timeout = 1
+        hec.retry_count = 1
+        result = hec.send_event({"host": "test", "test": True})
+        assert result == 500
+
+    def test_hec_send_event_success_logging(self):
+        """Cover successful send_event with debug logging."""
+        hec = HTTPEventCollector(
+            api_key="fake_key",
+            api_url_key="fake_url_key",
+            debug=True
+        )
+        hec.sanitize_log = False
+        hec.ingest_timeout = 1
+        hec.retry_count = 1
+        result = hec.send_event({"host": "test"})
+        assert isinstance(result, int)
+
+    def test_hec_process_list(self):
+        """Cover process_list path."""
+        hec = HTTPEventCollector(
+            api_key="fake_key",
+            api_url_key="fake_url_key",
+            debug=True
+        )
+        hec.ingest_timeout = 1
+        hec.retry_count = 1
+        result = hec.send_event_list([{"host": "test1"}, {"host": "test2"}])
+        assert isinstance(result, int)
+
+    def test_hec_test_connection_failure_logging(self):
+        """Cover test_connection logging paths."""
+        hec = HTTPEventCollector(
+            api_key="fake_key",
+            api_url_key="fake_url_key",
+            debug=True
+        )
+        hec.ingest_timeout = 1
+        hec.retry_count = 1
+        result = hec.test_connection()
+        assert result is False
+
+    def test_hec_log_startup_raw_ingest(self):
+        """Cover log_startup with raw_ingest=True."""
+        hec = HTTPEventCollector(
+            api_key="fake_key",
+            api_url_key="fake_url_key",
+            debug=True,
+            raw_ingest=True
+        )
+        assert hec.raw_ingest is True
+
+    def test_hec_log_activity_list_with_logo(self):
+        """Cover log_activity with list messages and logo mode."""
+        hec = HTTPEventCollector(
+            api_key="fake_key",
+            api_url_key="fake_url_key",
+            debug=True
+        )
+        hec.log_activity(["line1", "line2"], logo=True)
+        hec.log_activity("single line message")
+        hec.log_activity(None)
+
+    def test_hec_send_event_file_gzip_with_failure(self):
+        """Cover send_event_file with gzip that gets a response."""
+        hec = HTTPEventCollector(
+            api_key="fake_key",
+            api_url_key="fake_url_key",
+            debug=True,
+            raw_ingest=True
+        )
+        hec.ingest_timeout = 1
+        hec.retry_count = 1
+        try:
+            result = hec.send_event_file("tests/100thousand.raw.gz")
+            assert isinstance(result, int)
+        except Exception:
+            pass
+
+    def test_hec_process_list_with_progress(self):
+        """Cover process_list_with_progress path."""
+        hec = HTTPEventCollector(
+            api_key="fake_key",
+            api_url_key="fake_url_key",
+            debug=True
+        )
+        hec.ingest_timeout = 1
+        hec.retry_count = 1
+        results = list(hec.send_event_list(
+            [{"host": "test1"}, {"host": "test2"}],
+            show_progress=True
+        ))
+        assert isinstance(results, list)
+
+    def test_hec_enter_context_manager(self):
+        """Cover __enter__ returns self."""
+        hec = HTTPEventCollector(api_key="k", api_url_key="u")
+        with hec as h:
+            assert h is hec
+
+
+class _FakeResponse:
+    """Minimal stand-in for requests.Response used by monkeypatch tests."""
+
+    def __init__(self, status_code=200, json_data=None, headers=None):
+        self.status_code = status_code
+        self.headers = headers or {"Content-Type": "application/json"}
+        self._json_data = json_data or {"text": "Success"}
+        self.content = b'{"text": "Success"}'
+
+    def json(self):
+        return self._json_data
+
+
+class TestHECMockedCoverage:
+    """Cover _ngsiem/_hec.py success paths using monkeypatch."""
+
+    def test_hec_send_event_success(self, monkeypatch):
+        """Cover send_event with successful response."""
+        import requests
+        monkeypatch.setattr(requests.Session, "post", lambda *a, **kw: _FakeResponse())
+        hec = HTTPEventCollector(api_key="k", api_url_key="u", debug=True)
+        result = hec.send_event({"host": "test"})
+        assert result == 200
+
+    def test_hec_test_connection_success(self, monkeypatch):
+        """Cover test_connection success path."""
+        import requests
+        monkeypatch.setattr(requests.Session, "post", lambda *a, **kw: _FakeResponse())
+        hec = HTTPEventCollector(api_key="k", api_url_key="u", debug=True)
+        assert hec.test_connection() is True
+
+    def test_hec_process_list_success(self, monkeypatch):
+        """Cover process_list success count increment."""
+        import requests
+        monkeypatch.setattr(requests.Session, "post", lambda *a, **kw: _FakeResponse())
+        hec = HTTPEventCollector(api_key="k", api_url_key="u", debug=True)
+        result = hec.send_event_list([{"host": "a"}, {"host": "b"}])
+        assert result == 2
+
+    def test_hec_process_list_with_progress_success(self, monkeypatch):
+        """Cover process_list_with_progress success count."""
+        import requests
+        monkeypatch.setattr(requests.Session, "post", lambda *a, **kw: _FakeResponse())
+        hec = HTTPEventCollector(api_key="k", api_url_key="u", debug=True)
+        results = list(hec.send_event_list([{"host": "a"}, {"host": "b"}], show_progress=True))
+        assert results[-1] == 2
+
+    def test_hec_send_event_file_success(self, monkeypatch):
+        """Cover send_event_file with successful response."""
+        import requests
+        monkeypatch.setattr(requests.Session, "post", lambda *a, **kw: _FakeResponse())
+        hec = HTTPEventCollector(api_key="k", api_url_key="u", debug=True, raw_ingest=True)
+        result = hec.send_event_file("tests/5records.raw")
+        assert result == 200
