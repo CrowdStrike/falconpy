@@ -11,6 +11,10 @@ from tests import test_authorization as Authorization
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
 from falconpy import NGSIEM
+from falconpy._payload import (
+    ngsiem_connector_config_payload,
+    ngsiem_data_connection_payload,
+)
 
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
@@ -208,3 +212,66 @@ class TestNGSIEM:
             pagination_offset=0
         )
         assert result["status_code"] in AllowedResponses
+
+class TestNGSIEMPayloadCoverage:
+    """Cover _payload/_ngsiem.py gaps."""
+
+    def test_ngsiem_connector_config_payload(self):
+        """Cover connector_config_payload."""
+        result = ngsiem_connector_config_payload({
+            "config": {"auth": {}, "name": "test", "params": {}},
+            "connector_id": "conn123"
+        })
+        assert result["config"]["name"] == "test"
+        assert result["connector_id"] == "conn123"
+
+    def test_ngsiem_connector_config_empty(self):
+        """Cover empty input path."""
+        result = ngsiem_connector_config_payload({})
+        assert result == {}
+
+    def test_ngsiem_data_connection_log_sources_string(self):
+        """Cover log_sources string split."""
+        result = ngsiem_data_connection_payload({
+            "name": "test",
+            "log_sources": "source1,source2,source3"
+        })
+        assert result["log_sources"] == ["source1", "source2", "source3"]
+
+    def test_ngsiem_data_connection_log_sources_list(self):
+        """Cover normal list path."""
+        result = ngsiem_data_connection_payload({
+            "name": "test",
+            "log_sources": ["source1", "source2"]
+        })
+        assert result["log_sources"] == ["source1", "source2"]
+
+
+class TestNGSIEMConnectorCoverage:
+    """Cover ngsiem.py connector config operations."""
+
+    def test_connector_config_operations(self):
+        """Test create, patch, delete connector config operations."""
+        error_checks = True
+
+        tests = {
+            "CreateConnectorConfig": falcon.create_connector_config(
+                config={"auth": {}, "name": "test", "params": {}},
+                connector_id="12345678"
+            ),
+            "PatchConnectorConfig": falcon.patch_connector_config(
+                ids="12345678",
+                config={"auth": {}, "name": "test", "params": {}},
+                connector_id="12345678"
+            ),
+            "DeleteConnectorConfigs": falcon.delete_connector_configs(
+                ids="12345678",
+                connector_id="12345678"
+            ),
+        }
+        for key in tests:
+            if tests[key]["status_code"] not in AllowedResponses:
+                error_checks = False
+                print(f"{key} returned {tests[key]['status_code']}")
+
+        assert error_checks
