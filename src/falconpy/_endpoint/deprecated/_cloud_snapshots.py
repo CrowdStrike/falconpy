@@ -165,26 +165,12 @@ _cloud_snapshots_endpoints = [
     ]
   ],
   [
-    "GetCredentialsMixin0",
+    "GetCredentialsMixin0Mixin61",
     "GET",
     "/snapshots/entities/image-registry-credentials/v1",
     "Gets the registry credentials",
     "cloud_snapshots",
     []
-  ],
-  [
-    "CreateInventory",
-    "POST",
-    "/snapshots/entities/inventories/v1",
-    "Create inventory from data received from snapshot",
-    "cloud_snapshots",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
   ],
   [
     "GetScanReport",
