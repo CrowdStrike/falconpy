@@ -15,6 +15,8 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import APIHarnessV2, APIError, SDKError
 # Import perform_request from _util so we can test generating 405's directly
 from falconpy._util import perform_request, force_default
+from falconpy._util._uber import scrub_target
+from tests import test_authorization as Authorization
 
 
 AllowedResponses = [200, 400, 401, 403, 404, 405, 415, 418, 429]
@@ -417,3 +419,140 @@ class TestUber:
             _success = True
         assert _success
 
+
+_auth = Authorization.TestAuthorization()
+_auth.getConfig()
+
+
+class TestUberScrubTargetCoverage:
+    """Cover _util/_uber.py GetSearchStatusV1 search_id fallback."""
+
+    def test_scrub_target_search_status_search_id(self):
+        """GetSearchStatusV1 with search_id but no id."""
+        kwas = {
+            "search_id": "abc123",
+            "repository": "search-all"
+        }
+        target = "https://api.crowdstrike.com/humio/api/v1/repositories/{repository}/savedsearches/{id}"
+        result = scrub_target("GetSearchStatusV1", target, kwas)
+        assert "abc123" in result
+        assert "{id}" not in result
+
+
+class TestAdvancedUberCoverage:
+    """Cover api_complete/_advanced.py debug logging paths."""
+
+    def test_uber_v2_debug_logging(self):
+        """V2 debug logging on operation."""
+        uber = APIHarnessV2(
+            client_id=_auth.config["falcon_client_id"],
+            client_secret=_auth.config["falcon_client_secret"],
+            base_url=_auth.config["falcon_base_url"],
+            debug=True
+        )
+        result = uber.command(api_operation="queryDevicesByFilter", parameters={"limit": 1})
+        assert result is not None
+
+    def test_uber_v2_invalid_operation_logging(self):
+        """log_failure path when InvalidOperation is raised."""
+        uber = APIHarnessV2(
+            client_id=_auth.config["falcon_client_id"],
+            client_secret=_auth.config["falcon_client_secret"],
+            base_url=_auth.config["falcon_base_url"],
+            debug=True
+        )
+        result = uber.command(api_operation="not_a_real_operation")
+        assert isinstance(result, dict)
+        assert result["status_code"] == 418
+
+
+class TestUberStreamDebugCoverageV2:
+    """Cover _util/_functions.py stream with debug logging (V2)."""
+
+    def test_uber_v2_stream_with_debug(self):
+        """Streaming request with debug enabled."""
+        uber = APIHarnessV2(
+            client_id=_auth.config["falcon_client_id"],
+            client_secret=_auth.config["falcon_client_secret"],
+            base_url=_auth.config["falcon_base_url"],
+            debug=True
+        )
+        result = uber.command(
+            api_operation="queryDevicesByFilter",
+            parameters={"limit": 1},
+            stream=True
+        )
+        assert result is not None
+
+
+class _FakeResponse:
+    """Minimal stand-in for requests.Response used by monkeypatch tests."""
+
+    def __init__(self, status_code=200, body=None, headers=None, content=None):
+        self.status_code = status_code
+        self.headers = headers or {"Content-Type": "application/json"}
+        self._body = body or {"meta": {"trace_id": "abc"}, "resources": [], "errors": []}
+        self.content = content or b'{"resources":[]}'
+
+    def json(self):
+        return self._body
+
+
+class TestPerformRequestMockedCoverage:
+    """Cover _util/_functions.py and api_complete/_advanced.py using monkeypatch."""
+
+    def test_uber_v2_debug_operation_logging(self, monkeypatch):
+        """Cover APIHarnessV2 debug logging on normal operation."""
+        import falconpy._util._functions as _funcs
+        responses = iter([
+            _FakeResponse(201, {"access_token": "fake_token_123", "expires_in": 1799}),
+            _FakeResponse(200, {"meta": {"trace_id": "abc"}, "resources": [], "errors": []}),
+        ])
+        monkeypatch.setattr(_funcs.requests, "request", lambda *a, **kw: next(responses))
+        uber = APIHarnessV2(
+            client_id="fake_id",
+            client_secret="fake_secret",
+            debug=True
+        )
+        result = uber.command(api_operation="QueryDevicesByFilter", parameters={"limit": 1})
+        assert isinstance(result, dict)
+        assert result.get("status_code") == 200
+
+    def test_perform_request_stream_with_logging(self, monkeypatch):
+        """Cover stream response with debug logging."""
+        import falconpy._util._functions as _funcs
+        responses = iter([
+            _FakeResponse(201, {"access_token": "fake_token_123", "expires_in": 1799}),
+            _FakeResponse(200, headers={"Content-Type": "application/octet-stream"},
+                          content=b"streaming data"),
+        ])
+        monkeypatch.setattr(_funcs.requests, "request", lambda *a, **kw: next(responses))
+        uber = APIHarnessV2(
+            client_id="fake_id",
+            client_secret="fake_secret",
+            debug=True
+        )
+        result = uber.command(
+            api_operation="QueryDevicesByFilter",
+            parameters={"limit": 1},
+            stream=True
+        )
+        assert result is not None
+
+    def test_perform_request_region_select_error(self, monkeypatch):
+        """Cover RegionSelectError from empty binary during auth."""
+        import falconpy._util._functions as _funcs
+        fake_resp = _FakeResponse(
+            200, headers={"Content-Type": "application/octet-stream", "X-Cs-Region": "us-1"},
+            content=b""
+        )
+        monkeypatch.setattr(_funcs.requests, "request", lambda *a, **kw: fake_resp)
+        result = _funcs.perform_request(
+            method="POST",
+            endpoint="https://api.crowdstrike.com/oauth2/token",
+            data={"client_id": "x", "client_secret": "y"},
+            headers={},
+            verify=True,
+            authenticating=True
+        )
+        assert result is not None
