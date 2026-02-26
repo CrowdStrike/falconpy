@@ -15,6 +15,7 @@ sys.path.append(os.path.abspath('src'))
 from falconpy import APIHarness, APIError
 # Import perform_request from _util so we can test generating 405's directly
 from falconpy._util import perform_request, force_default
+from tests import test_authorization as Authorization
 
 
 AllowedResponses = [200, 400, 401, 403, 404, 405, 415, 418, 429]
@@ -397,3 +398,107 @@ class TestUber:
     #     except APIError:
     #         _success = True
     #     assert _success
+
+
+_auth = Authorization.TestAuthorization()
+_auth.getConfig()
+
+
+class TestLegacyUberCoverage:
+    """Cover api_complete/_legacy.py debug properties and command logging."""
+
+    def test_legacy_uber_debug_properties(self):
+        """Test the debug-mode properties on the legacy APIHarness."""
+        uber = APIHarness(
+            client_id="fake_id",
+            client_secret="fake_secret",
+            debug=True,
+            debug_record_count=50,
+            sanitize_log=True
+        )
+        assert uber.debug is True
+        assert uber.log is not None
+        assert uber.debug_record_count == 50
+        uber.debug_record_count = 25
+        assert uber.debug_record_count == 25
+        assert uber.sanitize_log is True
+        uber.sanitize_log = False
+        assert uber.sanitize_log is False
+
+    def test_legacy_uber_no_debug_properties(self):
+        """Test debug properties with no debug mode."""
+        uber = APIHarness(
+            client_id="fake_id",
+            client_secret="fake_secret",
+            debug=False
+        )
+        assert uber.debug is False
+        assert uber.log is None
+        assert uber.debug_record_count == 100
+        assert uber.sanitize_log is True
+
+    def test_legacy_uber_command_logging(self):
+        """Legacy command logging of operation when authenticated with debug."""
+        uber = APIHarness(
+            client_id="fake_id",
+            client_secret="fake_secret",
+            debug=True
+        )
+        uber.authenticated = True
+        uber.token = "fake_token"
+        result = uber.command(action="queryDevicesByFilter", parameters={"limit": 1})
+        assert isinstance(result, dict)
+
+
+class TestLegacyUberStreamDebugCoverage:
+    """Cover _util/_functions.py stream with debug logging (legacy)."""
+
+    def test_legacy_uber_stream_with_debug(self):
+        """Streaming request via legacy uber with debug."""
+        uber = APIHarness(
+            client_id=_auth.config["falcon_client_id"],
+            client_secret=_auth.config["falcon_client_secret"],
+            base_url=_auth.config["falcon_base_url"],
+            debug=True
+        )
+        uber.authenticate()
+        if uber.authenticated:
+            result = uber.command(
+                action="queryDevicesByFilter",
+                parameters={"limit": 1}
+            )
+            assert isinstance(result, dict)
+
+
+class _FakeResponse:
+    """Minimal stand-in for requests.Response used by monkeypatch tests."""
+
+    def __init__(self, status_code=200, body=None, headers=None, content=None):
+        self.status_code = status_code
+        self.headers = headers or {"Content-Type": "application/json"}
+        self._body = body or {"meta": {"trace_id": "abc"}, "resources": [], "errors": []}
+        self.content = content or b'{"resources":[]}'
+
+    def json(self):
+        return self._body
+
+
+class TestLegacyPerformRequestMockedCoverage:
+    """Cover legacy uber debug logging with monkeypatch."""
+
+    def test_legacy_uber_debug_operation_logging(self, monkeypatch):
+        """Cover legacy APIHarness debug logging on normal operation."""
+        import falconpy._util._functions as _funcs
+        responses = iter([
+            _FakeResponse(201, {"access_token": "fake_token_123", "expires_in": 1799}),
+            _FakeResponse(200, {"meta": {"trace_id": "abc"}, "resources": [], "errors": []}),
+        ])
+        monkeypatch.setattr(_funcs.requests, "request", lambda *a, **kw: next(responses))
+        uber = APIHarness(
+            client_id="fake_id",
+            client_secret="fake_secret",
+            debug=True
+        )
+        uber.authenticate()
+        result = uber.command(action="QueryDevicesByFilter", parameters={"limit": 1})
+        assert isinstance(result, dict)
