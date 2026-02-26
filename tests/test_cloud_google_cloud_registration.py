@@ -71,7 +71,8 @@ class TestCloudGoogleCloudRegistration:
                                                                                                             resource_name_suffix="suffix",
                                                                                                             tags={"tag1": "value1"},
                                                                                                             wif_project_id="wif-project-123"),
-            "cloud_registration_gcp_delete_registration": falcon.delete_registration(ids="12345678")
+            "cloud_registration_gcp_delete_registration": falcon.delete_registration(ids="12345678"),
+            "cloud_registration_gcp_get_entities": falcon.get_entities(ids=["string"])
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:
