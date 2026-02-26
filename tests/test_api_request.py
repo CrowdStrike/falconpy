@@ -20,6 +20,11 @@ from falconpy import (
     InterfaceConfiguration
     )
 from falconpy._result._base_dictionary import UnsupportedPythonVersion
+from falconpy._util._functions import (
+    log_api_activity,
+    log_api_payloads,
+    perform_request,
+)
 
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
@@ -145,3 +150,94 @@ class TestAPIRequest:
                 _RATE_LIMITED = True
                 pytest.skip("Rate limited")
         assert _success
+
+
+class TestLogApiCoverage:
+    """Cover _util/_functions.py log_api_payloads and log_api_activity uncovered lines."""
+
+    def _make_api_request(self, stream=False, sanitize=True):
+        """Build an APIRequest with needed properties."""
+        logger = logging.getLogger("test_log_api")
+        logger.setLevel(logging.DEBUG)
+        handler = logging.StreamHandler()
+        logger.addHandler(handler)
+        api = APIRequest("https://api.crowdstrike.com/test", {
+            "method": "GET",
+            "params": {"limit": 1},
+            "body": {"test": "value"},
+            "data": {},
+            "verify": True,
+            "stream": stream,
+            "log_util": logger,
+            "sanitize": sanitize,
+            "debug_record_count": 100,
+        })
+        return api, logger, handler
+
+    def test_log_api_payloads_with_stream(self):
+        """Cover log_api_payloads when stream=True."""
+        api, logger, handler = self._make_api_request(stream=True)
+        log_api_payloads(api, {"Authorization": "Bearer test"})
+        logger.removeHandler(handler)
+
+    def test_log_api_activity_non_sanitized_json(self):
+        """Cover log_api_activity with JSON content, sanitize=False."""
+        api, logger, handler = self._make_api_request(sanitize=False)
+        content = {"status_code": 200, "body": {"resources": []}}
+        log_api_activity(content, "application/json", api)
+        logger.removeHandler(handler)
+
+    def test_log_api_activity_text_plain(self):
+        """Cover log_api_activity with text/plain content type."""
+        api, logger, handler = self._make_api_request()
+        log_api_activity("plain text response", "text/plain", api)
+        logger.removeHandler(handler)
+
+
+class TestPerformRequestLogCoverage:
+    """Cover _api_request/_request.py log_error and log_warning."""
+
+    def test_perform_request_region_select_error_with_logging(self, monkeypatch):
+        """Cover log_error with log_util."""
+        import falconpy._util._functions as _funcs
+
+        class _FakeResp:
+            status_code = 200
+            headers = {"Content-Type": "application/octet-stream", "X-Cs-Region": "us-1"}
+            content = b""
+            def json(self):
+                return {}
+
+        monkeypatch.setattr(_funcs.requests, "request", lambda *a, **kw: _FakeResp())
+        logger = logging.getLogger("test_log_error")
+        logger.setLevel(logging.DEBUG)
+        handler = logging.StreamHandler()
+        logger.addHandler(handler)
+        result = perform_request(
+            method="POST",
+            endpoint="https://api.crowdstrike.com/oauth2/token",
+            data={"client_id": "x", "client_secret": "y"},
+            headers={},
+            verify=True,
+            authenticating=True,
+            log_util=logger
+        )
+        logger.removeHandler(handler)
+        assert isinstance(result, dict)
+
+    def test_perform_request_ssl_disabled_warning_with_logging(self):
+        """Cover log_warning with log_util."""
+        logger = logging.getLogger("test_log_warning")
+        logger.setLevel(logging.DEBUG)
+        handler = logging.StreamHandler()
+        logger.addHandler(handler)
+        result = perform_request(
+            method="GET",
+            endpoint="https://api.crowdstrike.com/test",
+            headers={},
+            verify=False,
+            log_util=logger,
+            timeout=1
+        )
+        logger.removeHandler(handler)
+        assert result is not None
