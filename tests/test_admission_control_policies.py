@@ -9,6 +9,7 @@ from tests import test_authorization as Authorization
 sys.path.append(os.path.abspath('src'))
 
 from falconpy import AdmissionControlPolicies
+from falconpy._payload._admission_control_policies import acp_custom_rules_policy_payload
 
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
@@ -165,3 +166,24 @@ class TestAdmissionControlPolicies:
 
     def test_all_functionality(self):
         assert self.run_all_tests() is True
+
+
+class TestACPPayloadCoverage:
+    """Cover _payload/_admission_control_policies.py dict-to-list coercion."""
+
+    def test_acp_rule_groups_dict_coercion(self):
+        """When rule_groups is a dict instead of a list, it wraps in a list."""
+        result = acp_custom_rules_policy_payload({
+            "id": "test123",
+            "rule_groups": {"id": "rg1", "labels": []}
+        })
+        assert isinstance(result["rule_groups"], list)
+        assert result["rule_groups"][0]["id"] == "rg1"
+
+    def test_acp_rule_groups_list_passthrough(self):
+        """When rule_groups is already a list, it passes through."""
+        result = acp_custom_rules_policy_payload({
+            "id": "test123",
+            "rule_groups": [{"id": "rg1"}]
+        })
+        assert isinstance(result["rule_groups"], list)
