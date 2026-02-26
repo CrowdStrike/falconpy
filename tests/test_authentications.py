@@ -4,6 +4,7 @@ import logging
 import os
 import sys
 import pytest
+import warnings
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 # Import our sibling src folder into the path
@@ -18,6 +19,16 @@ from falconpy import (
     Hosts,
     )
 from falconpy._util import confirm_base_region, confirm_base_url
+from falconpy import (
+    DeprecatedOperation,
+    DeprecatedClass,
+    InvalidBaseURL,
+)
+from falconpy._util._functions import (
+    confirm_base_url as confirm_base_url_func,
+    deprecated_operation,
+    deprecated_class,
+)
 from falconpy._version import _TITLE, _VERSION
 
 auth = Authorization.TestAuthorization()
@@ -378,3 +389,188 @@ class TestAuthentications:
     def test_mssp_logout(self):
         #_MSSP = Hosts(client_id=auth.config["falcon_client_id"], client_secret=auth.config["falcon_client_secret"], debug=_DEBUG)
         print(_MSSP.child_logout(login_as_parent=False))
+
+
+class TestUtilFunctionsCoverage:
+    """Cover _util/_functions.py uncovered lines."""
+
+    def test_confirm_base_url_none_raises(self):
+        """confirm_base_url(None) raises InvalidBaseURL."""
+        try:
+            confirm_base_url_func(None)
+            assert False, "Should have raised InvalidBaseURL"
+        except InvalidBaseURL:
+            pass
+
+    def test_deprecated_operation_with_log(self):
+        """deprecated_operation non-pythonic with logger."""
+        logger = logging.getLogger("test_deprecated_op")
+        logger.setLevel(logging.DEBUG)
+        handler = logging.StreamHandler()
+        logger.addHandler(handler)
+        deprecated_operation(False, logger, "OldOp", "NewOp")
+        logger.removeHandler(handler)
+
+    def test_deprecated_operation_no_log(self):
+        """deprecated_operation non-pythonic with no logger."""
+        deprecated_operation(False, None, "OldOp", "NewOp")
+
+    def test_deprecated_class_with_log(self):
+        """deprecated_class non-pythonic with logger."""
+        logger = logging.getLogger("test_deprecated_cls")
+        logger.setLevel(logging.DEBUG)
+        handler = logging.StreamHandler()
+        logger.addHandler(handler)
+        deprecated_class(False, logger, "OldCls", "NewCls")
+        logger.removeHandler(handler)
+
+    def test_deprecated_class_no_log(self):
+        """deprecated_class non-pythonic with no logger."""
+        deprecated_class(False, None, "OldCls", "NewCls")
+
+    def test_deprecated_operation_pythonic(self):
+        """deprecated_operation in pythonic mode issues a FutureWarning."""
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            deprecated_operation(True, None, "OldOp", "NewOp")
+            assert len(w) == 1
+            assert issubclass(w[0].category, FutureWarning)
+
+    def test_deprecated_class_pythonic(self):
+        """deprecated_class in pythonic mode issues a FutureWarning."""
+        with warnings.catch_warnings(record=True) as w:
+            warnings.simplefilter("always")
+            deprecated_class(True, None, "OldCls", "NewCls")
+            assert len(w) == 1
+            assert issubclass(w[0].category, FutureWarning)
+
+
+class TestOAuth2LogoutCoverage:
+    """Cover oauth2.py logout with logging."""
+
+    def test_logout_with_logging_fails(self):
+        """OAuth2.logout() with log enabled hitting CannotRevokeToken."""
+        oauth = OAuth2(
+            client_id="fake_id",
+            client_secret="fake_secret",
+            debug=True
+        )
+        result = oauth.logout()
+        assert isinstance(result, dict)
+        assert result["status_code"] != 200
+
+
+class TestFalconInterfaceCoverage:
+    """Cover _auth_object/_falcon_interface.py remaining lines."""
+
+    def test_environment_auth(self):
+        """Cover environment variable auth and env_secret property."""
+        orig_id = os.environ.get("FALCON_CLIENT_ID")
+        orig_secret = os.environ.get("FALCON_CLIENT_SECRET")
+        try:
+            os.environ["FALCON_CLIENT_ID"] = "env_test_id"
+            os.environ["FALCON_CLIENT_SECRET"] = "env_test_secret"
+            oauth = OAuth2()
+            assert oauth.auth_style == "ENVIRONMENT"
+            assert oauth.env_secret == "CLIENT_SECRET"
+        finally:
+            if orig_id is not None:
+                os.environ["FALCON_CLIENT_ID"] = orig_id
+            else:
+                os.environ.pop("FALCON_CLIENT_ID", None)
+            if orig_secret is not None:
+                os.environ["FALCON_CLIENT_SECRET"] = orig_secret
+            else:
+                os.environ.pop("FALCON_CLIENT_SECRET", None)
+
+    def test_environment_auth_with_member_cid(self):
+        """Cover environment auth with member_cid."""
+        orig_id = os.environ.get("FALCON_CLIENT_ID")
+        orig_secret = os.environ.get("FALCON_CLIENT_SECRET")
+        try:
+            os.environ["FALCON_CLIENT_ID"] = "env_test_id"
+            os.environ["FALCON_CLIENT_SECRET"] = "env_test_secret"
+            oauth = OAuth2(member_cid="test_member_cid")
+            assert oauth.auth_style == "ENVIRONMENT"
+            assert oauth.creds.get("member_cid") == "test_member_cid"
+        finally:
+            if orig_id is not None:
+                os.environ["FALCON_CLIENT_ID"] = orig_id
+            else:
+                os.environ.pop("FALCON_CLIENT_ID", None)
+            if orig_secret is not None:
+                os.environ["FALCON_CLIENT_SECRET"] = orig_secret
+            else:
+                os.environ.pop("FALCON_CLIENT_SECRET", None)
+
+    def test_environment_auth_custom_env(self):
+        """Cover custom environment secret name."""
+        orig_id = os.environ.get("MY_PREFIX_MY_ID")
+        orig_secret = os.environ.get("MY_PREFIX_MY_SECRET")
+        try:
+            os.environ["MY_PREFIX_MY_ID"] = "custom_env_id"
+            os.environ["MY_PREFIX_MY_SECRET"] = "custom_env_secret"
+            oauth = OAuth2(environment={
+                "prefix": "MY_PREFIX_",
+                "id_name": "MY_ID",
+                "secret_name": "MY_SECRET"
+            })
+            assert oauth.auth_style == "ENVIRONMENT"
+            assert oauth.env_secret == "MY_SECRET"
+        finally:
+            if orig_id is not None:
+                os.environ["MY_PREFIX_MY_ID"] = orig_id
+            else:
+                os.environ.pop("MY_PREFIX_MY_ID", None)
+            if orig_secret is not None:
+                os.environ["MY_PREFIX_MY_SECRET"] = orig_secret
+            else:
+                os.environ.pop("MY_PREFIX_MY_SECRET", None)
+
+    def test_child_login_pythonic(self):
+        """Cover child_login where login() returns bool."""
+        oauth = OAuth2(
+            client_id="fake_id",
+            client_secret="fake_secret",
+        )
+        oauth.login = lambda: True
+        oauth.creds["member_cid"] = None
+        result = oauth.child_login(member_cid="test_child_cid")
+        assert result is True
+
+    def test_child_login_dict_success(self, monkeypatch):
+        """Cover child_login where login() returns dict with 201."""
+        import falconpy._util._functions as _funcs
+
+        class _FakeResp:
+            status_code = 201
+            headers = {"Content-Type": "application/json", "X-Cs-Region": "us-1"}
+            content = b'{"access_token": "child_token", "expires_in": 1799}'
+            def json(self):
+                return {"access_token": "child_token", "expires_in": 1799}
+
+        monkeypatch.setattr(_funcs.requests, "request", lambda *a, **kw: _FakeResp())
+        oauth = OAuth2(
+            client_id="fake_id",
+            client_secret="fake_secret"
+        )
+        result = oauth.child_login(member_cid="test_child_cid")
+        assert result is True
+
+    def test_child_logout_pythonic(self):
+        """Cover child_logout where login() returns bool."""
+        oauth = OAuth2(
+            client_id="fake_id",
+            client_secret="fake_secret",
+        )
+        oauth.creds["member_cid"] = "test_child_cid"
+        oauth.login = lambda: True
+        result = oauth.child_logout(login_as_parent=True)
+        assert result is True
+
+    def test_logout_handler_invalid_creds_with_logging(self):
+        """Cover InvalidCredentials caught in _logout_handler with debug."""
+        oauth = OAuth2(debug=True)
+        result = oauth.logout()
+        assert isinstance(result, dict)
+        assert result.get("status_code") is not None
