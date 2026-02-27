@@ -107,6 +107,7 @@ class TestFalconSensorUpdate:
         error_checks = True
         tests = {
             "uninstall_token": falcon.reveal_uninstall_token(device_id="MAINTENANCE"),
+            "increment_uninstall_token": falcon.increment_uninstall_token(audit_message="test increment"),
             "delete_policy": falcon.delete_policies(ids="12345678"),
             "update_policy": falcon.update_policies(description="whatever",
                                                     name="unit test",
