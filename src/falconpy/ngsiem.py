@@ -1716,18 +1716,18 @@ class NGSIEM(ServiceClass):
                     "vendor_name": "string",
                     "vendor_product_name": "string"
                 }
-        config -- Dictionary.
-        config_id -- String.
-        connector_id -- String.
-        connector_type -- String.
-        description -- String.
-        enable_host_enrichment -- Boolean.
-        enable_user_enrichment -- Boolean.
-        log_sources -- String or list of strings.
-        name -- String.
-        parser -- String.
-        vendor_name -- String.
-        vendor_product_name -- String.
+        config -- Configuration settings for the data connection, including auth and params. Dictionary.
+        config_id -- Identifier of the connector configuration to use. String.
+        connector_id -- Identifier of the connector for this data connection. String.
+        connector_type -- Type of the connector. String.
+        description -- Description of the data connection. String.
+        enable_host_enrichment -- Flag to enable host enrichment on ingested data. Boolean.
+        enable_user_enrichment -- Flag to enable user enrichment on ingested data. Boolean.
+        log_sources -- Log sources associated with this data connection. String or list of strings.
+        name -- Name of the data connection. String.
+        parser -- Parser to use for processing ingested data. String.
+        vendor_name -- Name of the vendor providing the data. String.
+        vendor_product_name -- Name of the vendor product providing the data. String.
 
         This method only supports keywords for providing arguments.
 
@@ -1772,13 +1772,13 @@ class NGSIEM(ServiceClass):
                     "name": "string",
                     "parser": "string"
                 }
-        config -- Dictionary.
-        config_id -- String.
-        description -- String.
-        enable_host_enrichment -- Boolean.
-        enable_user_enrichment -- Boolean.
-        name -- String.
-        parser -- String.
+        config -- Configuration settings for the data connection, including auth and params. Dictionary.
+        config_id -- Identifier of the connector configuration to use. String.
+        description -- Description of the data connection. String.
+        enable_host_enrichment -- Flag to enable host enrichment on ingested data. Boolean.
+        enable_user_enrichment -- Flag to enable user enrichment on ingested data. Boolean.
+        name -- Name of the data connection. String.
+        parser -- Parser to use for processing ingested data. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
