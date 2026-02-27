@@ -213,17 +213,14 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_aspm.py`
 
-+ Deprecated: __Cloud Connect AWS__ service collection.
-    - `_endpoint/__init__.py`
-    - `_endpoint/deprecated/__init__.py`
-    - `_endpoint/deprecated/_cloud_connect_aws.py`
-    - `cloud_connect_aws.py`
-
 + Deprecated: __Tailored Intelligence__ service collection.
     - `_endpoint/__init__.py`
     - `_endpoint/deprecated/__init__.py`
     - `_endpoint/deprecated/_tailored_intelligence.py`
     - `tailored_intelligence.py`
+
++ Deprecated: __Overwatch Dashboard__ service collection.
+    - `_endpoint/_overwatch_dashboard.py`
 
 + Added: Added 7 new operations to the __Case Management__ service collection.
     - _queries_access_tags_get_v1_
@@ -261,23 +258,25 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_security_detections.py`
 
-+ Added: Added new _GetCredentialsMixin0Mixin53_ operation to the __Cloud Snapshots__ service collection.
-    - `_endpoint/__init__.py`
++ Added: Added new _CreateInventory_ operation and renamed _GetCredentialsMixin0Mixin54_ to _GetCredentialsMixin0_ in the __Cloud Snapshots__ service collection.
     - `_endpoint/_cloud_snapshots.py`
-    - `_endpoint/deprecated/__init__.py`
     - `_endpoint/deprecated/_cloud_snapshots.py`
     - `cloud_snapshots.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_snapshots.py`
 
-+ Removed: Removed deprecated _GetCredentialsMixin0_ and _CreateInventory_ operations from the __Cloud Snapshots__ service collection.
-    - `_endpoint/_cloud_snapshots.py`
-    - `cloud_snapshots.py`
-
-+ Added: Added new _entities_policy_precedence_post_v1_ operation to the __Data Protection Configuration__ service collection.
-    - `_endpoint/__init__.py`
++ Added: Added 10 new local application operations and updated endpoint definitions for the __Data Protection Configuration__ service collection.
+    - _entities_local_applications_get_v1_
+    - _entities_local_applications_create_v1_
+    - _entities_local_applications_update_v1_
+    - _entities_local_applications_delete_v1_
+    - _entities_local_application_groups_get_v1_
+    - _entities_local_application_groups_create_v1_
+    - _entities_local_application_groups_update_v1_
+    - _entities_local_application_groups_delete_v1_
+    - _queries_local_applications_get_v1_
+    - _queries_local_application_groups_get_v1_
     - `_endpoint/_data_protection_configuration.py`
-    - `_endpoint/deprecated/__init__.py`
     - `_endpoint/deprecated/_data_protection_configuration.py`
     - `_payload/_data_protection_configuration.py`
     - `data_protection_configuration.py`
@@ -291,17 +290,13 @@
     - `_endpoint/deprecated/_falcon_complete_dashboard.py`
     - `falcon_complete_dashboard.py`
 
-+ Added: Replaced _QuerySubmissions_ with _QuerySubmissionsMixin0_ in the __FalconX Sandbox__ service collection.
-    - `_endpoint/__init__.py`
++ Updated: Renamed _QuerySubmissionsMixin0_ to _QuerySubmissions_ in the __FalconX Sandbox__ service collection.
     - `_endpoint/_falconx_sandbox.py`
-    - `_endpoint/deprecated/__init__.py`
     - `_endpoint/deprecated/_falconx_sandbox.py`
     - `falconx_sandbox.py`
 
-+ Added: Replaced _GetAWSAccountsMixin0_ and _DeleteAWSAccountsMixin0_ with _GetAWSAccounts_ and _DeleteAWSAccounts_ in the __Kubernetes Protection__ service collection.
-    - `_endpoint/__init__.py`
++ Updated: Renamed _GetAWSAccounts_ to _GetAWSAccountsMixin0_ and _DeleteAWSAccounts_ to _DeleteAWSAccountsMixin0_ in the __Kubernetes Protection__ service collection.
     - `_endpoint/_kubernetes_protection.py`
-    - `_endpoint/deprecated/__init__.py`
     - `_endpoint/deprecated/_kubernetes_protection.py`
     - `kubernetes_protection.py`
 
@@ -318,10 +313,8 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_ngsiem.py`
 
-+ Added: Replaced _QuerySubmissionsMixin0_ with _QuerySubmissions_ in the __QuickScan__ service collection.
-    - `_endpoint/__init__.py`
++ Updated: Renamed _QuerySubmissions_ to _QuerySubmissionsMixin0_ in the __Quick Scan__ service collection.
     - `_endpoint/_quick_scan.py`
-    - `_endpoint/deprecated/__init__.py`
     - `_endpoint/deprecated/_quick_scan.py`
     - `quick_scan.py`
 
@@ -366,7 +359,7 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_spotlight_vulnerability_metadata.py`
 
-+ Added: Updated the _GetCredentialsMixin0Mixin61_ operation ID to _GetCredentialsMixin0Mixin54_ within the __Cloud Snapshots__ service collection.
++ Updated: Renamed _GetCredentialsMixin0Mixin54_ to _GetCredentialsMixin0_ within the __Cloud Snapshots__ service collection.
     - `_endpoint/_cloud_snapshots.py`
     - `_endpoint/deprecated/_cloud_snapshots.py`
     - `cloud_snapshots.py`
@@ -390,15 +383,33 @@
 + Updated: Updated deprecated endpoint definitions for the __Quick Scan Pro__ service collection.
     - `_endpoint/deprecated/_quick_scan_pro.py`
 
-## Other
-+ Changed: Updated swagger definitions from latest CrowdStrike API specifications.
-    > 3 total new operations added.
++ Updated: Updated endpoint definitions for the __Cloud OCI Registration__ service collection.
+    - `_endpoint/_cloud_oci_registration.py`
+    - `_endpoint/deprecated/_cloud_oci_registration.py`
 
----
++ Updated: Updated endpoint definitions for the __Container Image Compliance__ service collection.
+    - `_endpoint/_container_image_compliance.py`
+    - `_endpoint/deprecated/_container_image_compliance.py`
+
++ Updated: Updated endpoint definitions and docstrings for the __Container Images__ service collection.
+    - `_endpoint/_container_images.py`
+    - `_endpoint/deprecated/_container_images.py`
+    - `container_images.py`
+
++ Updated: Updated endpoint definitions and docstrings for the __Container Vulnerabilities__ service collection.
+    - `_endpoint/_container_vulnerabilities.py`
+    - `_endpoint/deprecated/_container_vulnerabilities.py`
+    - `container_vulnerabilities.py`
+
++ Updated: Updated endpoint definitions for the __Host Migration__ service collection.
+    - `_endpoint/_host_migration.py`
+    - `_endpoint/deprecated/_host_migration.py`
+
++ Updated: Updated endpoint definitions for the __Hosts__ service collection.
+    - `_endpoint/_hosts.py`
+    - `_endpoint/deprecated/_hosts.py`
 
 ## Other
-+ Removed: Overwatch Dashboard service collection endpoint definitions.
-    - `_endpoint/_overwatch_dashboard.py`
 ---
 
 # Version 1.6.0
