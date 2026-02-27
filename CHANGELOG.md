@@ -213,12 +213,6 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_aspm.py`
 
-+ Deprecated: __Tailored Intelligence__ service collection.
-    - `_endpoint/__init__.py`
-    - `_endpoint/deprecated/__init__.py`
-    - `_endpoint/deprecated/_tailored_intelligence.py`
-    - `tailored_intelligence.py`
-
 + Deprecated: __Overwatch Dashboard__ service collection.
     - `_endpoint/_overwatch_dashboard.py`
 
@@ -341,17 +335,6 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_spotlight_supported_evaluation.py`
 
-+ Added: New __Maintenance Token__ service collection with 1 operation.
-    - _incrementUninstallToken_
-    - `_endpoint/__init__.py`
-    - `_endpoint/_maintenance_token.py`
-    - `_payload/__init__.py`
-    - `_payload/_maintenance_token.py`
-    - `__init__.py`
-    - `maintenance_token.py`
-    > Unit testing expanded to complete code coverage.
-    - `tests/test_maintenance_token.py`
-
 + Restored: __Spotlight Vulnerability Metadata__ service collection.
     - `_endpoint/__init__.py`
     - `_endpoint/_spotlight_vulnerability_metadata.py`
@@ -408,6 +391,18 @@
 + Updated: Updated endpoint definitions for the __Hosts__ service collection.
     - `_endpoint/_hosts.py`
     - `_endpoint/deprecated/_hosts.py`
+
++ Renamed: Renamed __Sensor Update Policy__ service collection to __Sensor Update Policies__.
+    - `__init__.py`
+    - `_payload/_sensor_update_policies.py`
+    - `sensor_update_policies.py`
+    - `tests/test_sensor_update_policies.py`
+
++ Restored: __Tailored Intelligence__ service collection.
+    - `_endpoint/__init__.py`
+    - `_endpoint/_tailored_intelligence.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `tailored_intelligence.py`
 
 ## Other
 ---
