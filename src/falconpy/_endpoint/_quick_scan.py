@@ -90,7 +90,7 @@ _quick_scan_endpoints = [
     ]
   ],
   [
-    "QuerySubmissions",
+    "QuerySubmissionsMixin0",
     "GET",
     "/scanner/queries/scans/v1",
     "Find IDs for submitted scans by providing an FQL filter and paging details. Returns a set of volume IDs "

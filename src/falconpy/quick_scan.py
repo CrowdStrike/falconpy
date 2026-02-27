@@ -214,12 +214,12 @@ class QuickScan(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/QuerySubmissions
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan/QuerySubmissionsMixin0
         """
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="QuerySubmissions",
+            operation_id="QuerySubmissionsMixin0",
             keywords=kwargs,
             params=parameters
             )
@@ -230,6 +230,7 @@ class QuickScan(ServiceClass):
     GetScansAggregates = get_scans_aggregates
     GetScans = get_scans
     ScanSamples = scan_samples
+    QuerySubmissionsMixin0 = query_submissions
     QuerySubmissions = query_submissions
 
 
