@@ -750,10 +750,10 @@ class UserManagement(ServiceClass):
                 assigned_cids           last_name
                 cid                     name
                 direct_assigned_cids    status
+                factors                 temporarily_assigned_cids
                 first_name              uid
-                has_temporary_roles     temporarily_assigned_cids
-                uuid
-        limit : int (range 1-500, default 0)
+                has_temporary_roles     uuid
+        limit : int (range 1-500, default 100)
             The maximum number of records to return.
         offset : int (default 0)
             The offset to start retrieving records from.
