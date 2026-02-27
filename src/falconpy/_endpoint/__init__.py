@@ -54,7 +54,6 @@ from .deprecated import _scheduled_reports_deprecated
 from .deprecated import _workflows_deprecated
 from .deprecated import _zero_trust_assessment_deprecated
 from .deprecated import _certificate_based_exclusions_deprecated
-from .deprecated import _cloud_connect_aws_deprecated
 from .deprecated import _cloud_policies_deprecated
 from .deprecated import _cloud_snapshots_deprecated
 from .deprecated import _container_image_compliance_deprecated
@@ -84,6 +83,7 @@ from ._case_management import _case_management_endpoints
 from ._certificate_based_exclusions import _certificate_based_exclusions_endpoints
 from ._cloud_aws_registration import _cloud_aws_registration_endpoints
 from ._cloud_azure_registration import _cloud_azure_registration_endpoints
+from ._cloud_connect_aws import _cloud_connect_aws_endpoints
 from ._cloud_google_cloud_registration import _cloud_google_cloud_registration_endpoints
 from ._cloud_oci_registration import _cloud_oci_registration_endpoints
 from ._cloud_policies import _cloud_policies_endpoints
@@ -190,6 +190,7 @@ api_endpoints.extend(_case_management_endpoints)
 api_endpoints.extend(_certificate_based_exclusions_endpoints)
 api_endpoints.extend(_cloud_aws_registration_endpoints)
 api_endpoints.extend(_cloud_azure_registration_endpoints)
+api_endpoints.extend(_cloud_connect_aws_endpoints)
 api_endpoints.extend(_cloud_google_cloud_registration_endpoints)
 api_endpoints.extend(_cloud_oci_registration_endpoints)
 api_endpoints.extend(_cloud_policies_endpoints)
@@ -302,7 +303,6 @@ deprecated_endpoints.extend(_cloud_snapshots_deprecated)
 deprecated_endpoints.extend(_correlation_rules_admin_deprecated)
 deprecated_endpoints.extend(_correlation_rules_deprecated)
 deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
-deprecated_endpoints.extend(_cloud_connect_aws_deprecated)
 deprecated_endpoints.extend(_cloud_policies_deprecated)
 deprecated_endpoints.extend(_container_image_compliance_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)

@@ -1,7 +1,4 @@
-"""CrowdStrike Falcon Discover for AWS API Interface Class (Deprecated).
-
-This service collection has been removed from the CrowdStrike API swagger.
-It is retained here for backwards compatibility only.
+"""CrowdStrike Falcon Discover for AWS API Interface Class.
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -43,7 +40,7 @@ from ._util import force_default, process_service_request, handle_single_argumen
 from ._payload import aws_registration_payload
 from ._result import Result
 from ._service_class import ServiceClass
-from ._endpoint.deprecated._cloud_connect_aws import _cloud_connect_aws_endpoints as Endpoints
+from ._endpoint._cloud_connect_aws import _cloud_connect_aws_endpoints as Endpoints
 
 
 class CloudConnectAWS(ServiceClass):
