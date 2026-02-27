@@ -349,6 +349,51 @@ def data_protection_web_locations_payload(
     return returned_payload
 
 
+def data_protection_local_application_payload(
+        passed_keywords: dict
+        ) -> Dict[str, List[Dict[str, Union[str, int, bool, list, dict]]]]:
+    """Create or update a local application.
+
+    {
+        "apply_rules_for_children_processes": boolean,
+        "executable_name": "string",
+        "group_ids": [
+            "string"
+        ],
+        "name": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["apply_rules_for_children_processes", "executable_name", "group_ids", "name"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    return returned_payload
+
+
+def data_protection_local_application_group_payload(
+        passed_keywords: dict
+        ) -> Dict[str, List[Dict[str, Union[str, int, bool, list, dict]]]]:
+    """Create or update a local application group.
+
+    {
+        "description": "string",
+        "local_application_ids": [
+            "string"
+        ],
+        "name": "string"
+    }
+    """
+    returned_payload = {}
+    keys = ["description", "local_application_ids", "name"]
+    for key in keys:
+        if passed_keywords.get(key, None) is not None:
+            returned_payload[key] = passed_keywords.get(key, None)
+
+    return returned_payload
+
+
 def data_protection_policy_precedence_payload(
         passed_keywords: dict
         ) -> Dict[str, List[Dict[str, Union[str, int, bool, list, dict]]]]:

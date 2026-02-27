@@ -149,7 +149,48 @@ class TestDataProtectionConfiguration:
             "queries_policy_get_v2": falcon.query_policies(platform_name="win", filter="name:'test'", offset=0, limit=50, sort="name|asc"),
             "queries_web_location_get_v2": falcon.query_web_locations(filter="name:'test'", type="custom", limit=50, offset=0),
             "entities_policy_precedence_post_v1": falcon.update_policy_precedence(platform="win", precedence=["string"]),
-            "entities_policy_precedence_post_v1_2": falcon.update_policy_precedence(resources=[{"platform":"win", "precedence":["string"]}])
+            "entities_policy_precedence_post_v1_2": falcon.update_policy_precedence(resources=[{"platform":"win", "precedence":["string"]}]),
+
+            "entities_local_application_group_get": falcon.get_local_application_group(ids="test-id"),
+            "entities_local_application_group_create": falcon.create_local_application_group(
+                description="test group",
+                local_application_ids=["app-id-1"],
+                name="test-local-app-group"
+            ),
+            "entities_local_application_group_patch": falcon.update_local_application_group(
+                id="test-id",
+                description="updated group",
+                local_application_ids=["app-id-2"],
+                name="updated-local-app-group"
+            ),
+            "entities_local_application_group_delete": falcon.delete_local_application_group(ids="test-id"),
+
+            "entities_local_application_get": falcon.get_local_application(ids="test-id"),
+            "entities_local_application_create": falcon.create_local_application(
+                apply_rules_for_children_processes=True,
+                executable_name="test.exe",
+                group_ids=["group-id-1"],
+                name="test-local-app"
+            ),
+            "entities_local_application_patch": falcon.update_local_application(
+                id="test-id",
+                apply_rules_for_children_processes=False,
+                executable_name="updated.exe",
+                group_ids=["group-id-2"],
+                name="updated-local-app"
+            ),
+            "entities_local_application_delete": falcon.delete_local_application(ids="test-id"),
+
+            "queries_local_application_group_get": falcon.query_local_application_groups(
+                filter="name:'test'",
+                limit=50,
+                offset=0
+            ),
+            "queries_local_application_get": falcon.query_local_applications(
+                filter="name:'test'",
+                limit=50,
+                offset=0
+            )
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

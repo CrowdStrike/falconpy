@@ -35,6 +35,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302
 
 _data_protection_configuration_endpoints = [
   [
@@ -430,6 +431,160 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
+    "entities_local_application_group_get",
+    "GET",
+    "/data-protection/entities/local-application-groups/v1",
+    "Get particular local application groups",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The local application group id(s) to get.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_local_application_group_create",
+    "POST",
+    "/data-protection/entities/local-application-groups/v1",
+    "Persist the given local application group for the provided entity instance",
+    "data_protection_configuration",
+    [
+      {
+        "description": "The local-application group definition to create",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_local_application_group_patch",
+    "PATCH",
+    "/data-protection/entities/local-application-groups/v1",
+    "Update a local application group",
+    "data_protection_configuration",
+    [
+      {
+        "type": "string",
+        "description": "The local app id to update.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "description": "The new local-application group definition",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_local_application_group_delete",
+    "DELETE",
+    "/data-protection/entities/local-application-groups/v1",
+    "Soft Delete local application. The application won't be visible anymore, but will still be in the database",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The id of the local application group to delete.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_local_application_get",
+    "GET",
+    "/data-protection/entities/local-applications/v1",
+    "Get a particular local application",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The local application id(s) to get.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_local_application_create",
+    "POST",
+    "/data-protection/entities/local-applications/v1",
+    "Persist the given local application for the provided entity instance",
+    "data_protection_configuration",
+    [
+      {
+        "description": "The local-application definition to create",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_local_application_patch",
+    "PATCH",
+    "/data-protection/entities/local-applications/v1",
+    "Update a local application",
+    "data_protection_configuration",
+    [
+      {
+        "type": "string",
+        "description": "The local app id to update.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "description": "The new local-application definition",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities_local_application_delete",
+    "DELETE",
+    "/data-protection/entities/local-applications/v1",
+    "Soft Delete local application. The application wont be visible anymore, but will still be in the database",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The id of the local application to delete.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
     "entities_policy_get_v2",
     "GET",
     "/data-protection/entities/policies/v2",
@@ -608,9 +763,10 @@ _data_protection_configuration_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter results by specific attributes , allowed attributes are [modified_at "
-        "properties.content_patterns properties.evidence_duplication_enabled properties.sensitivity_labels created_at "
-        "properties.file_types properties.protection_mode properties.web_sources name created_by modified_by]",
+        "description": "Filter results by specific attributes , allowed attributes are [name created_at "
+        "modified_at properties.content_patterns properties.content_patterns_operator properties.file_types "
+        "properties.sensitivity_labels created_by modified_by properties.evidence_duplication_enabled "
+        "properties.protection_mode properties.web_sources]",
         "name": "filter",
         "in": "query"
       },
@@ -830,6 +986,68 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
+    "queries_local_application_group_get",
+    "GET",
+    "/data-protection/queries/local-application-groups/v1",
+    "Get all local application group IDs matching the query with filter",
+    "data_protection_configuration",
+    [
+      {
+        "type": "string",
+        "description": "Optional filter for searching local application group. Allowed filters are 'name' "
+        "(string), is_deleted (boolean), platform (string), 'created_at' and 'updated_at'",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "The number of items to return in this response (default: 100, max: 500). Use with the "
+        "offset parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from. Use with the limit parameter to manage "
+        "pagination of results.",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "queries_local_application_get",
+    "GET",
+    "/data-protection/queries/local-applications/v1",
+    "Get all local-application IDs matching the query with filter",
+    "data_protection_configuration",
+    [
+      {
+        "type": "string",
+        "description": "Optional filter for searching local applications. Allowed filters are 'name' (string), "
+        "is_deleted (boolean), 'created_at' and 'updated_at'",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "The number of items to return in this response (default: 100, max: 500). Use with the "
+        "offset parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from. Use with the limit parameter to manage "
+        "pagination of results.",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
     "queries_policy_get_v2",
     "GET",
     "/data-protection/queries/policies/v2",
@@ -845,25 +1063,23 @@ _data_protection_configuration_endpoints = [
       },
       {
         "type": "string",
-        "description": "Filter results by specific attributes , allowed attributes are "
-        "[properties.unsupported_browsers_action properties.evidence_download_enabled "
-        "properties.enable_network_inspection properties.be_paste_clipboard_min_size_unit "
-        "properties.be_paste_clipboard_over_size_behaviour_block description modified_at "
-        "properties.enable_clipboard_inspection properties.block_notifications properties.custom_allow_notification "
-        "properties.evidence_storage_free_disk_perc name properties.inspection_depth properties.block_all_data_access "
-        "properties.evidence_duplication_enabled_default properties.classifications is_default "
-        "properties.min_confidence_level properties.allow_notifications properties.be_exclude_domains "
-        "properties.besplash_message_source properties.be_paste_clipboard_min_size "
-        "properties.be_paste_clipboard_max_size_unit properties.max_file_size_to_inspect is_enabled "
-        "properties.enable_content_inspection properties.max_file_size_to_inspect_unit "
-        "properties.browsers_without_active_extension properties.besplash_enabled "
-        "properties.be_paste_clipboard_max_size properties.evidence_storage_max_size created_by "
-        "properties.similarity_detection properties.similarity_threshold created_at modified_by "
-        "properties.custom_block_notification properties.enable_end_user_notifications_unsupported_browser "
-        "properties.evidence_encrypted_enabled properties.network_inspection_files_exceeding_size_limit "
-        "properties.besplash_custom_message properties.be_upload_timeout_duration_seconds "
-        "properties.be_upload_timeout_response properties.be_paste_timeout_duration_milliseconds "
-        "properties.be_paste_timeout_response precedence properties.enable_context_inspection]",
+        "description": "Filter results by specific attributes , allowed attributes are [name "
+        "properties.enable_content_inspection properties.be_exclude_domains properties.be_upload_timeout_response "
+        "properties.be_paste_clipboard_max_size properties.evidence_storage_max_size precedence created_at modified_at "
+        "properties.similarity_threshold properties.enable_clipboard_inspection properties.evidence_encrypted_enabled "
+        "properties.enable_network_inspection properties.besplash_message_source properties.min_confidence_level "
+        "properties.unsupported_browsers_action properties.similarity_detection properties.classifications "
+        "properties.besplash_enabled properties.be_paste_timeout_response properties.be_paste_clipboard_min_size_unit "
+        "properties.be_paste_clipboard_over_size_behaviour_block properties.browsers_without_active_extension "
+        "description is_enabled created_by properties.max_file_size_to_inspect_unit properties.block_all_data_access "
+        "properties.be_paste_timeout_duration_milliseconds properties.be_paste_clipboard_min_size is_default "
+        "modified_by properties.enable_context_inspection properties.inspection_depth "
+        "properties.evidence_download_enabled properties.besplash_custom_message "
+        "properties.be_upload_timeout_duration_seconds properties.enable_end_user_notifications_unsupported_browser "
+        "properties.custom_allow_notification properties.custom_block_notification "
+        "properties.be_paste_clipboard_max_size_unit properties.evidence_storage_free_disk_perc "
+        "properties.max_file_size_to_inspect properties.allow_notifications properties.block_notifications "
+        "properties.evidence_duplication_enabled_default properties.network_inspection_files_exceeding_size_limit]",
         "name": "filter",
         "in": "query"
       },
@@ -886,7 +1102,7 @@ _data_protection_configuration_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort by, allowed fields are :[name precedence created_at modified_at]",
+        "description": "The property to sort by, allowed fields are :[modified_at name precedence created_at]",
         "name": "sort",
         "in": "query"
       }

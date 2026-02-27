@@ -117,7 +117,9 @@ from ._data_protection_configuration import (
     data_protection_sensitivity_label_payload,
     data_protection_policy_payload,
     data_protection_web_locations_payload,
-    data_protection_policy_precedence_payload
+    data_protection_policy_precedence_payload,
+    data_protection_local_application_payload,
+    data_protection_local_application_group_payload
     )
 from ._delivery_settings import delivery_settings_payload
 from ._detects import update_detects_payload
@@ -152,7 +154,7 @@ from ._ngsiem import (
     ngsiem_data_connection_payload
 )
 from ._prevention_policy import prevention_policy_payload
-from ._sensor_update_policy import sensor_policy_payload, maintenance_token_payload
+from ._sensor_update_policies import sensor_policy_payload, maintenance_token_payload
 from ._response_policy import response_policy_payload
 from ._real_time_response import command_payload, data_payload
 from ._certificate_based_exclusions import certificate_based_exclusions_payload
@@ -278,5 +280,7 @@ __all__ = [
     "ngsiem_auto_update_policy_payload", "ngsiem_install_parser_payload",
     "ngsiem_bulk_install_parsers_payload", "acp_custom_rules_policy_payload",
     "data_protection_policy_precedence_payload", "serverless_exports_launch_payload",
-    "maintenance_token_payload"
+    "maintenance_token_payload",
+    "data_protection_local_application_payload",
+    "data_protection_local_application_group_payload"
 ]

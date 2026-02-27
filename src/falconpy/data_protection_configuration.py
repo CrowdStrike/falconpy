@@ -49,7 +49,9 @@ from ._payload._data_protection_configuration import (
     data_protection_sensitivity_label_payload,
     data_protection_policy_payload,
     data_protection_web_locations_payload,
-    data_protection_policy_precedence_payload
+    data_protection_policy_precedence_payload,
+    data_protection_local_application_payload,
+    data_protection_local_application_group_payload
     )
 
 
@@ -908,6 +910,307 @@ class DataProtectionConfiguration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_local_application_group(self: object,
+                                    *args,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get particular local application groups.
+
+        Keyword arguments:
+        ids -- The local application group id(s) to get. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /data-protection-configuration/entities.local-application-group.get
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_local_application_group_get",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_local_application_group(self: object,
+                                       body: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Persist the given local application group for the provided entity instance.
+
+        Keyword arguments:
+        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "description": "string",
+                    "local_application_ids": [
+                        "string"
+                    ],
+                    "name": "string"
+                }
+        description -- The description of the local application group. String.
+        local_application_ids -- List of local application IDs to include in the group.
+                                 List of strings.
+        name -- The name of the local application group. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application-group.create
+        """
+        if not body:
+            body = data_protection_local_application_group_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_local_application_group_create",
+            body=body
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def update_local_application_group(self: object,
+                                       body: dict = None,
+                                       parameters: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update a local application group.
+
+        Keyword arguments:
+        id -- The local application group id to update. String.
+        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "description": "string",
+                    "local_application_ids": [
+                        "string"
+                    ],
+                    "name": "string"
+                }
+        description -- The description of the local application group. String.
+        local_application_ids -- List of local application IDs to include in the group.
+                                 List of strings.
+        name -- The name of the local application group. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application-group.patch
+        """
+        if not body:
+            body = data_protection_local_application_group_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_local_application_group_patch",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_local_application_group(self: object,
+                                       *args,
+                                       parameters: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Soft delete local application group.
+
+        The application group will not be visible anymore, but will still be in the database.
+
+        Keyword arguments:
+        ids -- The id of the local application group to delete. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /data-protection-configuration/entities.local-application-group.delete
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_local_application_group_delete",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_local_application(self: object,
+                              *args,
+                              parameters: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get a particular local application.
+
+        Keyword arguments:
+        ids -- The local application id(s) to get. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /data-protection-configuration/entities.local-application.get
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_local_application_get",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_local_application(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Persist the given local application for the provided entity instance.
+
+        Keyword arguments:
+        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "apply_rules_for_children_processes": true,
+                    "executable_name": "string",
+                    "group_ids": [
+                        "string"
+                    ],
+                    "name": "string"
+                }
+        apply_rules_for_children_processes -- Whether to apply rules for children processes
+                                              of this application. Boolean.
+        executable_name -- The executable name of the local application. String.
+        group_ids -- List of group IDs to associate with this local application.
+                     List of strings.
+        name -- The name of the local application. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application.create
+        """
+        if not body:
+            body = data_protection_local_application_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_local_application_create",
+            body=body
+            )
+
+    @force_default(defaults=["body", "parameters"], default_types=["dict", "dict"])
+    def update_local_application(self: object,
+                                 body: dict = None,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update a local application.
+
+        Keyword arguments:
+        id -- The local application id to update. String.
+        body -- Full body payload provided as a dictionary. Not required if using other keywords.
+                {
+                    "apply_rules_for_children_processes": true,
+                    "executable_name": "string",
+                    "group_ids": [
+                        "string"
+                    ],
+                    "name": "string"
+                }
+        apply_rules_for_children_processes -- Whether to apply rules for children processes
+                                              of this application. Boolean.
+        executable_name -- The executable name of the local application. String.
+        group_ids -- List of group IDs to associate with this local application.
+                     List of strings.
+        name -- The name of the local application. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application.patch
+        """
+        if not body:
+            body = data_protection_local_application_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_local_application_patch",
+            keywords=kwargs,
+            params=parameters,
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def delete_local_application(self: object,
+                                 *args,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Soft delete local application.
+
+        The application will not be visible anymore, but will still be in the database.
+
+        Keyword arguments:
+        ids -- The id of the local application to delete. String or list of strings.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
+                   All others are ignored.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: DELETE
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
+            /data-protection-configuration/entities.local-application.delete
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="entities_local_application_delete",
+            keywords=kwargs,
+            params=handle_single_argument(args, parameters, "ids")
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def get_policies(self: object, *args, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get policies that match the provided ids.
 
@@ -1359,11 +1662,12 @@ class DataProtectionConfiguration(ServiceClass):
         Keyword arguments:
         filter -- Filter results by specific attributes. String.
                   Allowed attributes are:
-                    created_by                  modified_by
-                    modified_at                 properties.content_patterns
-                    properties.file_types       properties.evidence_duplication_enabled
-                    properties.protection_mode  properties.sensitivity_labels
-                    properties.web_sources      name
+                    created_by                             modified_by
+                    modified_at                            properties.content_patterns
+                    properties.content_patterns_operator   properties.file_types
+                    properties.evidence_duplication_enabled
+                    properties.protection_mode             properties.sensitivity_labels
+                    properties.web_sources                 name
                     created_at
         offset -- The offset to start retrieving records from. Integer.
         limit -- The maximum records to return. Integer.
@@ -1586,6 +1890,77 @@ class DataProtectionConfiguration(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_local_application_groups(self: object,
+                                       parameters: dict = None,
+                                       **kwargs
+                                       ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get all local application group IDs matching the query with filter.
+
+        Keyword arguments:
+        filter -- Optional filter for searching local application groups. String.
+                  Allowed filters are:
+                    name          is_deleted
+                    platform      created_at
+                    updated_at
+        limit -- The number of items to return in this response (default: 100, max: 500). Integer.
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries.local-application-group.get
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queries_local_application_group_get",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def query_local_applications(self: object,
+                                 parameters: dict = None,
+                                 **kwargs
+                                 ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Get all local-application IDs matching the query with filter.
+
+        Keyword arguments:
+        filter -- Optional filter for searching local applications. String.
+                  Allowed filters are:
+                    name          is_deleted
+                    created_at    updated_at
+        limit -- The number of items to return in this response (default: 100, max: 500). Integer.
+                 Use with the offset parameter to manage pagination of results.
+        offset -- The offset to start retrieving records from. Integer.
+                  Use with the limit parameter to manage pagination of results.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/queries.local-application.get
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="queries_local_application_get",
+            keywords=kwargs,
+            params=parameters
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def query_policies(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Search for policies that match the provided criteria.
 
@@ -1699,6 +2074,14 @@ class DataProtectionConfiguration(ServiceClass):
     entities_sensitivity_label_get_v2 = get_sensitivity_label
     entities_sensitivity_label_create_v2 = create_sensitivity_label
     entities_sensitivity_label_delete_v2 = delete_sensitivity_label
+    entities_local_application_group_get = get_local_application_group
+    entities_local_application_group_create = create_local_application_group
+    entities_local_application_group_patch = update_local_application_group
+    entities_local_application_group_delete = delete_local_application_group
+    entities_local_application_get = get_local_application
+    entities_local_application_create = create_local_application
+    entities_local_application_patch = update_local_application
+    entities_local_application_delete = delete_local_application
     entities_policy_get_v2 = get_policies
     entities_policy_post_v2 = create_policy
     entities_policy_patch_v2 = update_policies
@@ -1713,5 +2096,7 @@ class DataProtectionConfiguration(ServiceClass):
     queries_enterprise_account_get_v2 = query_enterprise_accounts
     queries_file_type_get_v2 = query_file_type
     queries_sensitivity_label_get_v2 = query_sensitivity_label
+    queries_local_application_group_get = query_local_application_groups
+    queries_local_application_get = query_local_applications
     queries_policy_get_v2 = query_policies
     queries_web_location_get_v2 = query_web_locations
