@@ -115,8 +115,7 @@ class CloudAzureRegistration(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-azure-registration/cloud-registration-azure-trigger-health-check
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-trigger-health-check
         """
         kwargs = handle_single_argument(args, kwargs, "tenant_ids")
         if not body:
@@ -144,8 +143,7 @@ class CloudAzureRegistration(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-azure-registration/cloud-registration-azure-get-registration
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-get-registration
         """
         return process_service_request(
             calling_object=self,
@@ -260,8 +258,7 @@ class CloudAzureRegistration(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-azure-registration/cloud-registration-azure-create-registration
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-create-registration
         """
         if not body:
             body = cloud_azure_registration_create_payload(passed_keywords=kwargs)
@@ -375,8 +372,7 @@ class CloudAzureRegistration(ServiceClass):
         HTTP Method: PATCH
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-azure-registration/cloud-registration-azure-delete-registration
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-delete-registration
         """
         if not body:
             body = cloud_azure_registration_create_payload(passed_keywords=kwargs)
@@ -403,8 +399,7 @@ class CloudAzureRegistration(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-azure-registration/cloud-registration-azure-delete-registration
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-delete-registration
         """
         return process_service_request(
             calling_object=self,
@@ -461,8 +456,7 @@ class CloudAzureRegistration(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-azure-registration/cloud-registration-azure-download-script
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-azure-registration/cloud-registration-azure-download-script
         """
         if not body:
             body = cloud_azure_registration_payload(kwargs)
