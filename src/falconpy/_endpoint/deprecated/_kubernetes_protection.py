@@ -410,7 +410,8 @@ _kubernetes_protection_endpoints = [
       },
       {
         "type": "string",
-        "description": "Supported filter fields:  last_seen",
+        "description": "Supported filter fields:  cloud_account_id  cloud_name  cloud_region  cluster_id  "
+        "cluster_name  last_seen  namespace",
         "name": "filter",
         "in": "query"
       }
@@ -436,7 +437,8 @@ _kubernetes_protection_endpoints = [
       },
       {
         "type": "string",
-        "description": "Supported filter fields:  last_seen",
+        "description": "Supported filter fields:  cloud_account_id  cloud_name  cloud_region  cluster_id  "
+        "cluster_name  last_seen  namespace",
         "name": "filter",
         "in": "query"
       }
@@ -462,7 +464,8 @@ _kubernetes_protection_endpoints = [
       },
       {
         "type": "string",
-        "description": "Supported filter fields:  last_seen",
+        "description": "Supported filter fields:  cloud_account_id  cloud_name  cloud_region  cluster_id  "
+        "cluster_name  last_seen  namespace",
         "name": "filter",
         "in": "query"
       }
@@ -488,7 +491,8 @@ _kubernetes_protection_endpoints = [
       },
       {
         "type": "string",
-        "description": "Supported filter fields:  last_seen",
+        "description": "Supported filter fields:  cloud_account_id  cloud_name  cloud_region  cluster_id  "
+        "cluster_name  last_seen  namespace",
         "name": "filter",
         "in": "query"
       }
@@ -514,7 +518,8 @@ _kubernetes_protection_endpoints = [
       },
       {
         "type": "string",
-        "description": "Supported filter fields:  last_seen",
+        "description": "Supported filter fields:  cloud_account_id  cloud_name  cloud_region  cluster_id  "
+        "cluster_name  last_seen  namespace",
         "name": "filter",
         "in": "query"
       }
@@ -814,8 +819,9 @@ _kubernetes_protection_endpoints = [
       {
         "type": "string",
         "description": "Retrieve list of images on running containers using a query in Falcon Query Language "
-        "(FQL). Supported filter fields:  cid  cluster_id  cluster_name  hosts  image_digest  image_has_been_assessed  "
-        "image_id  image_name  image_registry  image_repository  image_tag  last_seen  running_status",
+        "(FQL). Supported filter fields:  cid  cloud_account_id  cloud_name  cloud_region  cluster_id  cluster_name  "
+        "hosts  image_digest  image_has_been_assessed  image_id  image_name  image_registry  image_repository  "
+        "image_tag  last_seen  namespace  running_status",
         "name": "filter",
         "in": "query"
       },
@@ -1127,7 +1133,7 @@ _kubernetes_protection_endpoints = [
     ]
   ],
   [
-    "GetAWSAccountsMixin0",
+    "GetAWSAccounts",
     "GET",
     "/kubernetes-protection/entities/accounts/aws/v1",
     "Provides a list of AWS accounts.",
@@ -1224,7 +1230,7 @@ _kubernetes_protection_endpoints = [
     ]
   ],
   [
-    "DeleteAWSAccountsMixin0",
+    "DeleteAWSAccounts",
     "DELETE",
     "/kubernetes-protection/entities/accounts/aws/v1",
     "Delete AWS accounts.",

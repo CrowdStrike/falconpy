@@ -1133,7 +1133,7 @@ _kubernetes_protection_endpoints = [
     ]
   ],
   [
-    "GetAWSAccounts",
+    "GetAWSAccountsMixin0",
     "GET",
     "/kubernetes-protection/entities/accounts/aws/v1",
     "Provides a list of AWS accounts.",
@@ -1230,7 +1230,7 @@ _kubernetes_protection_endpoints = [
     ]
   ],
   [
-    "DeleteAWSAccounts",
+    "DeleteAWSAccountsMixin0",
     "DELETE",
     "/kubernetes-protection/entities/accounts/aws/v1",
     "Delete AWS accounts.",

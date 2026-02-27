@@ -1890,12 +1890,12 @@ class KubernetesProtection(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/GetAWSAccounts
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/GetAWSAccountsMixin0
         """
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="GetAWSAccounts",
+            operation_id="GetAWSAccountsMixin0",
             keywords=kwargs,
             params=parameters
             )
@@ -1961,12 +1961,12 @@ class KubernetesProtection(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/DeleteAWSAccounts
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/kubernetes-protection/DeleteAWSAccountsMixin0
         """
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="DeleteAWSAccounts",
+            operation_id="DeleteAWSAccountsMixin0",
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
@@ -2462,8 +2462,10 @@ class KubernetesProtection(ServiceClass):
     ReadPodCombined = read_pods_combined
     ReadKubernetesIomEntities = read_iom_entities
     SearchKubernetesIoms = search_ioms
+    GetAWSAccountsMixin0 = get_aws_accounts
     GetAWSAccounts = get_aws_accounts
     CreateAWSAccount = create_aws_account
+    DeleteAWSAccountsMixin0 = delete_aws_accounts
     DeleteAWSAccounts = delete_aws_accounts
     UpdateAWSAccount = update_aws_account
     ListAzureAccounts = list_azure_accounts
