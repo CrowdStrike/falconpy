@@ -405,9 +405,7 @@ class Workflows(ServiceClass):
         Keyword arguments:
         batch_size -- Used to set the size of the batch. Integer.
         body -- full body payload, not required if using other keywords.
-                {
-                    Workflow schema
-                }
+                {}
         definition_id -- Definition ID to execute. Either a name or ID can be specified.
                          String or List of Strings.
         execution_cid -- CID(s) to execute on. This can be a child for Flight Control scenarios.
@@ -771,18 +769,12 @@ class Workflows(ServiceClass):
 
     @force_default(defaults=["body"], default_types=["dict"])
     def provision(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Promote a version of a system definition.
-
-        Tenant must be already provisioned. This allows the caller to apply an updated template
-        version on a CID and expects all parameters to be supplied. If the template supports
-        multi-instance, the customer scope definition ID must be supplied to determine which
-        customer workflow should be update.
+        """Provision a system definition onto the target CID by using the template and provided parameters.
 
         Keyword arguments:
         activities -- Dictionary.
-        body -- Template to use for update. Not required if using other keywords. Dictionary.
+        body -- Template to provision. Not required if using other keywords. Dictionary.
                 {
-                    "customer_definition_id": "string",
                     "name": "string",
                     "parameters": {
                         "activities": {
@@ -821,12 +813,12 @@ class Workflows(ServiceClass):
                     "template_version": "string"
                 }
         conditions -- List of dictionaries.
-        customer_definition_id -- String.
-        name -- String.
-        parameters -- Dictionary. Overrides specified activities, conditions and trigger keywords.
-        template_id -- String.
-        template_name -- String.
-        template_version -- String.
+        name -- Optional name to be set on the customer scope definition. Must be unique within a given CID. String.
+        parameters -- Runtime parameters to be interpolated to template model. Dictionary.
+                      Overrides specified activities, conditions and trigger keywords.
+        template_id -- ID of the system definition template that was previously created. String.
+        template_name -- Name of the system definition template to provision. String.
+        template_version -- Version of system definition template, if omitted the latest version will be used. String.
         trigger -- Dictionary.
 
         This method only supports keywords for providing arguments.
@@ -959,7 +951,7 @@ class Workflows(ServiceClass):
 
         Keyword arguments:
         filter -- FQL query specifying filter parameters. String.
-        offset -- Starting pagination offset of records to return. Integer.
+        offset -- Starting pagination offset of records to return. String.
         limit -- Maximum number of records to return. Integer.
         sort -- Sort items by providing a comma separated list of property and direction (eg name.desc,time.asc). String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
