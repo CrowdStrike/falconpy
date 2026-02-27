@@ -2629,12 +2629,13 @@ class ASPM(ServiceClass):
                     "parentId": 0,
                     "scope": "string"
                 }
-        children -- List of Integers.
-        group_type -- String.
-        is_default -- Boolean.
-        name -- String.
-        parent_id -- Integer.
-        scope -- String.
+        children -- IDs of child groups. List of Integers.
+        description -- Description of the group. String.
+        group_type -- Type of the group. String.
+        is_default -- Flag indicating if this is the default group. Boolean.
+        name -- Name of the group. String.
+        parent_id -- ID of the parent group. Integer.
+        scope -- Scope of the group. String.
 
         Returns: dict object containing API response.
 
@@ -2768,12 +2769,13 @@ class ASPM(ServiceClass):
                     "parentId": 0,
                     "scope": "string"
                 }
-        children -- List of Integers.
-        group_type -- String.
-        is_default -- Boolean.
-        name -- String.
-        parent_id -- Integer.
-        scope -- String.
+        children -- IDs of child groups. List of Integers.
+        description -- Description of the group. String.
+        group_type -- Type of the group. String.
+        is_default -- Flag indicating if this is the default group. Boolean.
+        name -- Name of the group. String.
+        parent_id -- ID of the parent group. Integer.
+        scope -- Scope of the group. String.
 
         Returns: dict object containing API response.
 
@@ -2893,3 +2895,11 @@ class ASPM(ServiceClass):
     GetTags = get_tags
     UpsertTags = update_tags
     DeleteTags = delete_tags
+    GetUsersV2 = get_users_v2
+    PostGroupV2 = post_group_v2
+    DeleteGroup = delete_group
+    UpdateDefaultGroup = update_default_group
+    GetGroupV2 = get_group_v2
+    UpdateGroup = update_group
+    GetGroupHierarchy = get_group_hierarchy
+    GetGroupsV2 = get_groups_v2
