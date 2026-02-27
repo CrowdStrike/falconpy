@@ -243,7 +243,7 @@ class CloudSnapshots(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/GetCredentialsMixin0Mixin54
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/GetCredentialsMixin0
 
         Keyword arguments
         ----
@@ -261,7 +261,7 @@ class CloudSnapshots(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="GetCredentialsMixin0Mixin54"
+            operation_id="GetCredentialsMixin0"
             )
 
     def get_iac_credentials(self: object) -> Union[Dict[str, Union[int, dict]], Result]:
@@ -345,6 +345,29 @@ class CloudSnapshots(ServiceClass):
             body=body
             )
 
+    @force_default(defaults=["body"], default_types=["dict"])
+    def create_inventory(self: object, body: dict = None) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Create inventory from data received from a snapshot.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/CreateInventory
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CreateInventory",
+            body=body
+            )
+
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here
     # for backwards compatibility / ease of use purposes
@@ -353,6 +376,8 @@ class CloudSnapshots(ServiceClass):
     ReadDeploymentsEntities = get_scan_jobs
     CreateDeploymentEntity = launch_scan_job
     GetScanReport = get_scan_reports
+    GetCredentialsMixin0 = get_credentials
     GetCredentialsMixin0Mixin54 = get_credentials
     GetCredentialsIAC = get_iac_credentials
     RegisterCspmSnapshotAccount = register_account
+    CreateInventory = create_inventory

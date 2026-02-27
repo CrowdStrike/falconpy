@@ -29,7 +29,8 @@ class TestCloudSnapshots:
             "ReadDeploymentsCombined": falcon.search_scan_jobs(),
             "ReadDeploymentEntities": falcon.get_scan_jobs(ids="ABCDEF12-1234-ABCD-5678-ABCDEF123456"),
             "GetScanReport": falcon.get_scan_reports(ids="12345678"),
-            "CreateDeploymentEntity": falcon.launch_scan_job(account_id="12345", asset_identifier="123456", cloud_provider="aws", region="us-east-2")
+            "CreateDeploymentEntity": falcon.launch_scan_job(account_id="12345", asset_identifier="123456", cloud_provider="aws", region="us-east-2"),
+            "CreateInventory": falcon.create_inventory(body={})
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

@@ -165,7 +165,7 @@ _cloud_snapshots_endpoints = [
     ]
   ],
   [
-    "GetCredentialsMixin0Mixin61",
+    "GetCredentialsMixin0Mixin54",
     "GET",
     "/snapshots/entities/image-registry-credentials/v1",
     "Gets the registry credentials",
