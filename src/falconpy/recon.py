@@ -339,7 +339,7 @@ class Recon(ServiceClass):
 
         Returns: dict object containing API response.
 
-        HTTP Method: PATCH
+        HTTP Method: POST
 
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/recon/CreateActionsV1
