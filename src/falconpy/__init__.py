@@ -176,7 +176,6 @@ from .it_automation import ITAutomation, F4IT
 from .kubernetes_container_compliance import KubernetesContainerCompliance
 from .kubernetes_protection import KubernetesProtection
 from .malquery import MalQuery
-from .maintenance_token import MaintenanceToken
 from .message_center import MessageCenter
 from .ml_exclusions import MLExclusions
 from .mobile_enrollment import MobileEnrollment
@@ -268,7 +267,7 @@ __all__ = [
     "CorrelationRulesAdmin", "CloudSecurityDetections", "CloudPolicies", "CloudGoogleCloudRegistration",
     "CloudSecurity", "AdmissionControlPolicies", "OverwatchDashboard",
     "SpotlightVulnerabilityMetadata", "SpotlightSupportedEvaluation",
-    "MaintenanceToken", "ServerlessExports"
+    "ServerlessExports"
     ]
 """
 This is free and unencumbered software released into the public domain.

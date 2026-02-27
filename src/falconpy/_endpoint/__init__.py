@@ -143,7 +143,6 @@ from ._iocs import _iocs_endpoints
 from ._it_automation import _it_automation_endpoints
 from ._kubernetes_container_compliance import _kubernetes_container_compliance_endpoints
 from ._kubernetes_protection import _kubernetes_protection_endpoints
-from ._maintenance_token import _maintenance_token_endpoints
 from ._malquery import _malquery_endpoints
 from ._message_center import _message_center_endpoints
 from ._ml_exclusions import _ml_exclusions_endpoints
@@ -251,7 +250,6 @@ api_endpoints.extend(_it_automation_endpoints)
 api_endpoints.extend(_kubernetes_container_compliance_endpoints)
 api_endpoints.extend(_kubernetes_protection_endpoints)
 api_endpoints.extend(_malquery_endpoints)
-api_endpoints.extend(_maintenance_token_endpoints)
 api_endpoints.extend(_message_center_endpoints)
 api_endpoints.extend(_ml_exclusions_endpoints)
 api_endpoints.extend(_mobile_enrollment_endpoints)

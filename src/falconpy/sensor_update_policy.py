@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 from typing import Dict, Union
 from ._util import generate_error_result, args_to_params, force_default
 from ._util import handle_single_argument, process_service_request
-from ._payload import generic_payload_list, sensor_policy_payload
+from ._payload import generic_payload_list, sensor_policy_payload, maintenance_token_payload
 from ._result import Result
 from ._service_class import ServiceClass
 from ._endpoint._sensor_update_policies import _sensor_update_policies_endpoints as Endpoints
@@ -92,6 +92,39 @@ class SensorUpdatePolicy(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="revealUninstallToken",
+            body=body
+            )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def increment_uninstall_token(self: object,
+                                  body: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Increment a bulk maintenance token.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "audit_message": "string"
+                }
+        audit_message -- The audit message for the token increment operation. String.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/maintenance-token/incrementUninstallToken
+        """
+        if not body:
+            body = maintenance_token_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="incrementUninstallToken",
             body=body
             )
 
@@ -853,6 +886,7 @@ class SensorUpdatePolicy(ServiceClass):
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
     revealUninstallToken = reveal_uninstall_token
+    incrementUninstallToken = increment_uninstall_token
     queryCombinedSensorUpdateBuilds = query_combined_builds
     queryCombinedSensorUpdateKernels = query_combined_kernels
     queryCombinedSensorUpdatePolicyMembers = query_combined_policy_members

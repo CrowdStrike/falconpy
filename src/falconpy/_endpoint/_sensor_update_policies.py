@@ -53,6 +53,20 @@ _sensor_update_policies_endpoints = [
     ]
   ],
   [
+    "incrementUninstallToken",
+    "POST",
+    "/policy/combined/increment-uninstall-token/v1",
+    "Increments a bulk maintenance token.",
+    "sensor_update_policies",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
     "queryCombinedSensorUpdateBuilds",
     "GET",
     "/policy/combined/sensor-update-builds/v1",
