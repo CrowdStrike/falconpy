@@ -36,18 +36,3 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 
-
-def maintenance_token_payload(passed_keywords: dict) -> dict:
-    """Create a properly formatted payload for incrementing an uninstall token.
-
-    {
-        "audit_message": "string"
-    }
-    """
-    returned_payload = {}
-    keys = ["audit_message"]
-    for key in keys:
-        if passed_keywords.get(key, None) is not None:
-            returned_payload[key] = passed_keywords[key]
-
-    return returned_payload

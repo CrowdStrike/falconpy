@@ -71,7 +71,6 @@ from ._recon import (
     recon_export_job_payload
     )
 from ._malquery import malquery_exact_search_payload, malquery_hunt_payload, malquery_fuzzy_payload
-from ._maintenance_token import maintenance_token_payload
 from ._cloud_aws_registration import cloud_aws_registration_payload
 from ._cloud_azure_registration import (
     cloud_azure_registration_payload,
@@ -153,7 +152,7 @@ from ._ngsiem import (
     ngsiem_data_connection_payload
 )
 from ._prevention_policy import prevention_policy_payload
-from ._sensor_update_policy import sensor_policy_payload
+from ._sensor_update_policy import sensor_policy_payload, maintenance_token_payload
 from ._response_policy import response_policy_payload
 from ._real_time_response import command_payload, data_payload
 from ._certificate_based_exclusions import certificate_based_exclusions_payload
