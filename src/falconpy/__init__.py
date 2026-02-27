@@ -198,7 +198,7 @@ from .saas_security import SaasSecurity
 from .sample_uploads import SampleUploads
 from .scheduled_reports import ScheduledReports
 from .sensor_download import SensorDownload
-from .sensor_update_policy import SensorUpdatePolicy, SensorUpdatePolicies
+from .sensor_update_policies import SensorUpdatePolicy, SensorUpdatePolicies
 from .sensor_usage import SensorUsage
 from .sensor_visibility_exclusions import SensorVisibilityExclusions
 from .serverless_vulnerabilities import ServerlessVulnerabilities
