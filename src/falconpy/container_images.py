@@ -97,7 +97,11 @@ class ContainerImages(ServiceClass):
 
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:  arch, base_os, cid, registry, repository, tag
+                  Supported filters:
+                    arch            image_digest    repository
+                    base_os         image_id        source
+                    cid             index_digest    tag
+                    first_seen      registry
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -128,7 +132,11 @@ class ContainerImages(ServiceClass):
 
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:  cid, last_seen, registry, repository
+                  Supported filters:
+                    arch            image_digest    repository
+                    base_os         image_id        source
+                    cid             index_digest    tag
+                    first_seen      registry
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -139,8 +147,7 @@ class ContainerImages(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-                /container-images/AggregateImageCountByState
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/container-images/AggregateImageCountByState
         """
         return process_service_request(
             calling_object=self,
@@ -161,17 +168,19 @@ class ContainerImages(ServiceClass):
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    arch                        first_seen
-                    base_os                     image_digest
-                    cid                         image_id
+                    ai_related                  first_seen
+                    ai_vulnerability_count      image_digest
+                    arch                        image_id
+                    base_os                     include_base_image_vuln
+                    cid                         index_digest
                     container_id                layer_digest
                     container_running_status    package_name_version
                     cps_rating                  registry
                     crowdstrike_user            repository
-                    cve_id                      tag
-                    detection_count             vulnerability_count
-                    detection_name              vulnerability_severity
-                    detection_severity          include_base_image_vuln
+                    cve_id                      source
+                    detection_count             tag
+                    detection_name              vulnerability_count
+                    detection_severity          vulnerability_severity
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -228,8 +237,9 @@ class ContainerImages(ServiceClass):
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    container_id                image_digest
-                    container_running_status    image_id
+                    ai_related                  image_digest
+                    container_id                image_id
+                    container_running_status    index_digest
                     cve_id                      registry
                     detection_name              repository
                     detection_severity          tag
@@ -271,7 +281,11 @@ class ContainerImages(ServiceClass):
 
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:  arch, base_os, cid, registry, repository, tag
+                  Supported filters:
+                    arch            image_digest    repository
+                    base_os         image_id        source
+                    cid             index_digest    tag
+                    first_seen      registry
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- This is not used in the backend but is added here for compatibility
                   purposes as some clients expects this i.e UI widgets. Integer.
@@ -300,7 +314,11 @@ class ContainerImages(ServiceClass):
 
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL). String.
-                  Supported filters:  registry, repository, tag
+                  Supported filters:
+                    arch            image_digest    repository
+                    base_os         image_id        source
+                    cid             index_digest    tag
+                    first_seen      registry
         with_config -- Include image config. Boolean. Defaults true false.
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
@@ -331,33 +349,35 @@ class ContainerImages(ServiceClass):
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL).
                   Supported filters:
-                    arch                        first_seen
-                    base_os                     image_digest
-                    cid                         image_id
+                    ai_related                  first_seen
+                    ai_vulnerability_count      image_digest
+                    arch                        image_id
+                    base_os                     include_base_image_vuln
+                    cid                         index_digest
                     container_id                layer_digest
                     container_running_status    package_name_version
                     cps_rating                  registry
                     crowdstrike_user            repository
-                    cve_id                      tag
-                    detection_count             vulnerability_count
-                    detection_name              vulnerability_severity
-                    detection_severity          include_base_image_vuln
+                    cve_id                      source
+                    detection_count             tag
+                    detection_name              vulnerability_count
+                    detection_severity          vulnerability_severity
         expand_vulnerabilities -- Expand vulnerabilities. Boolean.
         expand_detections -- Expand detections. Boolean.
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- The fields to sort the records on. String.
                 Supported columns:
-                base_os                             image_id
-                cid                                 last_seen
-                containers                          layers_with_vulnerabilities
-                detections                          packages
-                firstScanned                        registry
-                first_seen                          repository
-                highest_detection_severity          tag
-                highest_vulnerability_severity      vulnerabilities
-                image_digest                        highest_cps_current_rating
-                source
+                ai_vulnerabilities              image_id
+                base_os                         last_seen
+                cid                             layers_with_vulnerabilities
+                detections                      packages
+                firstScanned                    registry
+                first_seen                      repository
+                highest_cps_current_rating      source
+                highest_detection_severity      tag
+                highest_vulnerability_severity  vulnerabilities
+                image_digest
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
