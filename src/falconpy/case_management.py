@@ -484,13 +484,13 @@ class CaseManagement(ServiceClass):
                     }
                 ]
         date_ranges -- Date range timeframe. List of dictionaries.
-        field -- Field to retrieve. String.
-        filter -- Options filter criteria in the form of an FQL query. String.
-        from -- Integer.
-        name -- String.
-        size -- Integer.
+        field -- Field to aggregate on. String.
+        filter -- Filter criteria in the form of an FQL query. String.
+        from -- Starting index of overall result set. Integer.
+        name -- Name of the aggregation. String.
+        size -- Maximum number of records to return. Integer.
         sort -- The field to sort on. String.
-        type -- String.
+        type -- Type of aggregation to perform. String.
 
         This method only supports keywords for providing arguments.
 
@@ -538,13 +538,13 @@ class CaseManagement(ServiceClass):
                     }
                 ]
         date_ranges -- Date range timeframe. List of dictionaries.
-        field -- Field to retrieve. String.
-        filter -- Options filter criteria in the form of an FQL query. String.
-        from -- Integer.
-        name -- String.
-        size -- Integer.
+        field -- Field to aggregate on. String.
+        filter -- Filter criteria in the form of an FQL query. String.
+        from -- Starting index of overall result set. Integer.
+        name -- Name of the aggregation. String.
+        size -- Maximum number of records to return. Integer.
         sort -- The field to sort on. String.
-        type -- String.
+        type -- Type of aggregation to perform. String.
 
         This method only supports keywords for providing arguments.
 
@@ -589,13 +589,13 @@ class CaseManagement(ServiceClass):
                     }
                 ]
         date_ranges -- Date range timeframe. List of dictionaries.
-        field -- Field to retrieve. String.
-        filter -- Options filter criteria in the form of an FQL query. String.
-        from -- Integer.
-        name -- String.
-        size -- Integer.
+        field -- Field to aggregate on. String.
+        filter -- Filter criteria in the form of an FQL query. String.
+        from -- Starting index of overall result set. Integer.
+        name -- Name of the aggregation. String.
+        size -- Maximum number of records to return. Integer.
         sort -- The field to sort on. String.
-        type -- String.
+        type -- Type of aggregation to perform. String.
 
         This method only supports keywords for providing arguments.
 
@@ -640,13 +640,13 @@ class CaseManagement(ServiceClass):
                     }
                 ]
         date_ranges -- Date range timeframe. List of dictionaries.
-        field -- Field to retrieve. String.
-        filter -- Options filter criteria in the form of an FQL query. String.
-        from -- Integer.
-        name -- String.
-        size -- Integer.
+        field -- Field to aggregate on. String.
+        filter -- Filter criteria in the form of an FQL query. String.
+        from -- Starting index of overall result set. Integer.
+        name -- Name of the aggregation. String.
+        size -- Maximum number of records to return. Integer.
         sort -- The field to sort on. String.
-        type -- String.
+        type -- Type of aggregation to perform. String.
 
         This method only supports keywords for providing arguments.
 
@@ -691,13 +691,13 @@ class CaseManagement(ServiceClass):
                     }
                 ]
         date_ranges -- Date range timeframe. List of dictionaries.
-        field -- Field to retrieve. String.
-        filter -- Options filter criteria in the form of an FQL query. String.
-        from -- Integer.
-        name -- String.
-        size -- Integer.
+        field -- Field to aggregate on. String.
+        filter -- Filter criteria in the form of an FQL query. String.
+        from -- Starting index of overall result set. Integer.
+        name -- Name of the aggregation. String.
+        size -- Maximum number of records to return. Integer.
         sort -- The field to sort on. String.
-        type -- String.
+        type -- Type of aggregation to perform. String.
 
         This method only supports keywords for providing arguments.
 
