@@ -307,8 +307,7 @@ class DataProtectionConfiguration(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.cloud-application.get
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.cloud-application.get
         """
         return process_service_request(
             calling_object=self,
@@ -425,8 +424,7 @@ class DataProtectionConfiguration(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.cloud-application.delete
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.cloud-application.delete
         """
         return process_service_request(
             calling_object=self,
@@ -456,8 +454,7 @@ class DataProtectionConfiguration(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.content-pattern.get
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.content-pattern.get
         """
         return process_service_request(
             calling_object=self,
@@ -584,8 +581,7 @@ class DataProtectionConfiguration(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.content-pattern.delete
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.content-pattern.delete
         """
         return process_service_request(
             calling_object=self,
@@ -653,8 +649,7 @@ class DataProtectionConfiguration(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.enterprise-account.get
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.enterprise-account.get
         """
         return process_service_request(
             calling_object=self,
@@ -898,8 +893,7 @@ class DataProtectionConfiguration(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.sensitivity-label.delete-v2
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.sensitivity-label.delete-v2
         """
         return process_service_request(
             calling_object=self,
@@ -929,8 +923,7 @@ class DataProtectionConfiguration(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.local-application-group.get
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application-group.get
         """
         return process_service_request(
             calling_object=self,
@@ -1047,8 +1040,7 @@ class DataProtectionConfiguration(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.local-application-group.delete
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application-group.delete
         """
         return process_service_request(
             calling_object=self,
@@ -1078,8 +1070,7 @@ class DataProtectionConfiguration(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.local-application.get
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application.get
         """
         return process_service_request(
             calling_object=self,
@@ -1199,8 +1190,7 @@ class DataProtectionConfiguration(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.local-application.delete
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.local-application.delete
         """
         return process_service_request(
             calling_object=self,
@@ -1479,8 +1469,7 @@ class DataProtectionConfiguration(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.policy.delete.v2
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.policy.delete.v2
         """
         return process_service_request(
             calling_object=self,
@@ -1510,8 +1499,7 @@ class DataProtectionConfiguration(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /data-protection-configuration/entities.web-location.get-v2
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/data-protection-configuration/entities.web-location.get-v2
         """
         return process_service_request(
             calling_object=self,
