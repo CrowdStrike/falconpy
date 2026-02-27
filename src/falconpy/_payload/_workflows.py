@@ -60,7 +60,6 @@ def workflow_template_payload(passed_keywords: dict):
     """Create a properly formatted workflow template payload.
 
     {
-        "customer_definition_id": "string",
         "name": "string",
         "parameters": {
             "activities": {
@@ -113,8 +112,8 @@ def workflow_template_payload(passed_keywords: dict):
     }
     """
     returned_payload = {}
-    keys = ["customer_definition_id", "name", "parameters",
-            "template_id", "template_name", "template_version"
+    keys = ["name", "parameters", "template_id",
+            "template_name", "template_version"
             ]
 
     for key in keys:
