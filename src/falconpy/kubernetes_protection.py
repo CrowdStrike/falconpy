@@ -874,7 +874,8 @@ class KubernetesProtection(ServiceClass):
 
         Keyword arguments:
         cluster_id -- One or more cluster ids for which to retrieve enrichment info
-        filter -- Supported filters:  last_seen
+        filter -- Supported filters:  cloud_account_id, cloud_name, cloud_region, cluster_id,
+                  cluster_name, last_seen, namespace
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -903,7 +904,8 @@ class KubernetesProtection(ServiceClass):
 
         Keyword arguments:
         container_id -- One or more container ids for which to retrieve enrichment info
-        filter -- Supported filters:  last_seen
+        filter -- Supported filters:  cloud_account_id, cloud_name, cloud_region, cluster_id,
+                  cluster_name, last_seen, namespace
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -929,7 +931,8 @@ class KubernetesProtection(ServiceClass):
 
         Keyword arguments:
         pod_id -- One or more pod ids for which to retrieve enrichment info
-        filter -- Supported filters:  last_seen
+        filter -- Supported filters:  cloud_account_id, cloud_name, cloud_region, cluster_id,
+                  cluster_name, last_seen, namespace
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -958,7 +961,8 @@ class KubernetesProtection(ServiceClass):
 
         Keyword arguments:
         deployment_id -- One or more deployment ids for which to retrieve enrichment info
-        filter -- Supported filters:  last_seen
+        filter -- Supported filters:  cloud_account_id, cloud_name, cloud_region, cluster_id,
+                  cluster_name, last_seen, namespace
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -987,7 +991,8 @@ class KubernetesProtection(ServiceClass):
 
         Keyword arguments:
         node_name -- One or more node names for which to retrieve enrichment info
-        filter -- Supported filters:  last_seen
+        filter -- Supported filters:  cloud_account_id, cloud_name, cloud_region, cluster_id,
+                  cluster_name, last_seen, namespace
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -1461,6 +1466,7 @@ class KubernetesProtection(ServiceClass):
                     cluster_id          tags
                     cluster_name        pod_name
                     namespace
+        include_counts -- Flag to include node, pod and container counts in the response. Boolean.
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- Field to sort results by. String.
@@ -1491,10 +1497,15 @@ class KubernetesProtection(ServiceClass):
         filter -- Retrieve list of images on running containers using a query in Falcon Query Language (FQL). String.
                   Supported filters:
                     cid                         image_registry
-                    hosts                       image_repository
-                    image_digest                image_tag
-                    image_has_been_assessed     last_seen
-                    image_id                    running_status
+                    cloud_account_id            image_repository
+                    cloud_name                  image_tag
+                    cloud_region                last_seen
+                    cluster_id                  namespace
+                    cluster_name                running_status
+                    hosts
+                    image_digest
+                    image_has_been_assessed
+                    image_id
                     image_name
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
