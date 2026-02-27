@@ -57,6 +57,8 @@ from .deprecated import _certificate_based_exclusions_deprecated
 from .deprecated import _cloud_policies_deprecated
 from .deprecated import _cloud_snapshots_deprecated
 from .deprecated import _container_image_compliance_deprecated
+from .deprecated import _container_images_deprecated
+from .deprecated import _container_vulnerabilities_deprecated
 from .deprecated import _falcon_complete_dashboard_deprecated
 from .deprecated import _falconx_sandbox_deprecated
 from .deprecated import _host_migration_deprecated
@@ -68,7 +70,6 @@ from .deprecated import _quick_scan_pro_deprecated
 from .deprecated import _recon_deprecated
 from .deprecated import _serverless_vulnerabilities_deprecated
 from .deprecated import _spotlight_vulnerability_metadata_deprecated
-from .deprecated import _tailored_intelligence_deprecated
 from .deprecated import _unidentified_containers_deprecated
 from .deprecated import _user_management_deprecated
 from .deprecated import _deprecated_operation_mapping
@@ -175,6 +176,7 @@ from ._spotlight_supported_evaluation import _spotlight_supported_evaluation_end
 from ._spotlight_vulnerability_metadata import _spotlight_vulnerability_metadata_endpoints
 from ._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints
 from ._threatgraph import _threatgraph_endpoints
+from ._tailored_intelligence import _tailored_intelligence_endpoints
 from ._unidentified_containers import _unidentified_containers_endpoints
 from ._user_management import _user_management_endpoints
 from ._workflows import _workflows_endpoints
@@ -282,6 +284,7 @@ api_endpoints.extend(_spotlight_supported_evaluation_endpoints)
 api_endpoints.extend(_spotlight_vulnerability_metadata_endpoints)
 api_endpoints.extend(_spotlight_vulnerabilities_endpoints)
 api_endpoints.extend(_threatgraph_endpoints)
+api_endpoints.extend(_tailored_intelligence_endpoints)
 api_endpoints.extend(_unidentified_containers_endpoints)
 api_endpoints.extend(_user_management_endpoints)
 api_endpoints.extend(_workflows_endpoints)
@@ -305,6 +308,8 @@ deprecated_endpoints.extend(_correlation_rules_deprecated)
 deprecated_endpoints.extend(_certificate_based_exclusions_deprecated)
 deprecated_endpoints.extend(_cloud_policies_deprecated)
 deprecated_endpoints.extend(_container_image_compliance_deprecated)
+deprecated_endpoints.extend(_container_images_deprecated)
+deprecated_endpoints.extend(_container_vulnerabilities_deprecated)
 deprecated_endpoints.extend(_custom_ioa_deprecated)
 deprecated_endpoints.extend(_d4c_registration_deprecated)
 deprecated_endpoints.extend(_data_protection_configuration_deprecated)
@@ -339,7 +344,6 @@ deprecated_endpoints.extend(_workflows_deprecated)
 deprecated_endpoints.extend(_zero_trust_assessment_deprecated)
 deprecated_endpoints.extend(_overwatch_dashboard_deprecated)
 deprecated_endpoints.extend(_spotlight_vulnerability_metadata_deprecated)
-deprecated_endpoints.extend(_tailored_intelligence_deprecated)
 
 # Mapping of manually deprecated endpoints
 operation_deprecation_mapping = _deprecated_operation_mapping
