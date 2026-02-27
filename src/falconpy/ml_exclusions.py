@@ -116,6 +116,27 @@ class MLExclusions(ServiceClass):
                     "time_zone": "string",
                     "type": "string"
                 }
+        date_ranges -- Date range timeframe. List of dictionaries.
+        exclude -- Fields to exclude from results. String.
+        extended_bounds -- Extended bounds for histogram aggregations. Dictionary.
+        field -- Field to aggregate on. String.
+        filter -- Filter criteria in the form of an FQL query. String.
+        filters_spec -- Additional filter specifications. Dictionary.
+        from -- Starting index of overall result set. Integer.
+        include -- Fields to include in results. String.
+        interval -- Time interval for date histogram aggregations. String.
+        max_doc_count -- Maximum number of documents per bucket. Integer.
+        min_doc_count -- Minimum number of documents per bucket. Integer.
+        missing -- Value to use for documents missing the field. String.
+        name -- Name of the aggregation. String.
+        percents -- Percentile values to calculate. List of floats.
+        q -- Full text search query. String.
+        ranges -- Range boundaries for range aggregations. List of dictionaries.
+        size -- Maximum number of records to return. Integer.
+        sort -- The field to sort on. String.
+        sub_aggregates -- Nested aggregation definitions. List of dictionaries.
+        time_zone -- Time zone for date histogram aggregations. String.
+        type -- Type of aggregation to perform. String.
 
         This method only supports keywords for providing arguments.
 
@@ -181,12 +202,12 @@ class MLExclusions(ServiceClass):
                     "label": "string",
                     "name": "string"
                 }
-        action_parameters -- List of dictionary.
-        available -- Boolean.
-        description -- String.
-        group -- String.
-        label -- String.
-        name -- String.
+        action_parameters -- Action-specific parameters. List of dictionary.
+        available -- Flag indicating if the action is available. Boolean.
+        description -- Description of the exclusion action. String.
+        group -- Group associated with the action. String.
+        label -- Display label for the action. String.
+        name -- Name of the action. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -335,13 +356,13 @@ class MLExclusions(ServiceClass):
                     "parent_value": "string",
                     "value": "string"
                 }
-        comment -- String.
-        excluded_from -- String or list of strings.
-        grandparent_value -- String.
-        groups -- String or list of strings.
-        id -- String.
-        parent_value -- String.
-        value -- String.
+        comment -- Comment describing why the exclusion is updated. String.
+        excluded_from -- Exclusion sources. String or list of strings.
+        grandparent_value -- Grandparent process value for the exclusion. String.
+        groups -- Group IDs to associate with the exclusion. String or list of strings.
+        id -- Identifier of the exclusion to update. String.
+        parent_value -- Parent process value for the exclusion. String.
+        value -- Value to exclude. String.
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -416,9 +437,11 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_ml_exclusion_sets(
-            self: object, *args, parameters: dict = None, **kwargs
-    ) -> Union[Dict[str, Union[int, dict]], Result]:
+    def get_ml_exclusion_sets(self: object,
+                              *args,
+                              parameters: dict = None,
+                              **kwargs
+                              ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Get a set of ML Exclusions by specifying their IDs.
 
         Keyword arguments:
@@ -444,7 +467,10 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_ml_exclusions_v2(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def create_ml_exclusions_v2(self: object,
+                                body: dict = None,
+                                **kwargs
+                                ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create the ML exclusions.
 
         Keyword arguments:
@@ -484,7 +510,10 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def update_ml_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def update_ml_exclusions(self: object,
+                             body: dict = None,
+                             **kwargs
+                             ) -> Union[Dict[str, Union[int, dict]], Result]:
         """Update the ML exclusions.
 
         Keyword arguments:
@@ -500,8 +529,8 @@ class MLExclusions(ServiceClass):
                 }
         comment -- Comment describing why the exclusion is entered. String.
         groups -- Group IDs to exclude. List of strings.
-        id -- String.
-        is_descendant_process -- Boolean.
+        id -- Identifier of the exclusion to update. String.
+        is_descendant_process -- Flag indicating if the exclusion applies to descendant processes. Boolean.
         value -- Value to exclude. String.
 
         This method only supports keywords for providing arguments.
@@ -711,6 +740,15 @@ class MLExclusions(ServiceClass):
     deleteMLExclusionsV1 = delete_exclusions
     updateMLExclusionsV1 = update_exclusions
     queryMLExclusionsV1 = query_exclusions
+    exclusions_aggregates_v2 = aggregate_exclusions
+    exclusions_get_all_v2 = get_all_exclusions
+    exclusions_perform_action_v2 = perform_actions
+    exclusions_get_reports_v2 = get_reports
+    exclusions_get_v2 = get_exclusions_by_id
+    exclusions_create_v2 = create_exclusions_v2
+    exclusions_update_v2 = update_exclusions_v2
+    exclusions_delete_v2 = delete_exclusions_v2
+    exclusions_search_v2 = search_exclusions_v2
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
