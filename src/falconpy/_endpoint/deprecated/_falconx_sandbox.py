@@ -312,7 +312,7 @@ _falconx_sandbox_endpoints = [
     ]
   ],
   [
-    "QuerySubmissions",
+    "QuerySubmissionsMixin0",
     "GET",
     "/falconx/queries/submissions/v1",
     "Find submission IDs for uploaded files by providing an FQL filter and paging details. Returns a set of "
