@@ -908,7 +908,7 @@ class Workflows(ServiceClass):
         single_node_execution=true, associated with a definition ID if provided.
 
         Keyword arguments:
-        execution_cid -- CID(s) to execute on. String.
+        execution_cid -- CID(s) to execute on. String or list of strings.
         This can be a child if this is a flight control enabled definition.
         definition_id -- Definition ID to execute. String.
         name -- Workflow name to execute. String.
