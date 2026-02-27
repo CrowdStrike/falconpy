@@ -65,17 +65,18 @@ class ContainerVulnerabilities(ServiceClass):
         Keyword arguments:
         filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    base_os                     exploited_status_name
-                    cid                         fix_status
-                    container_id                image_digest
-                    container_running_status    image_id
-                    containers_impacted_range   images_impacted_range
+                    ai_related                  fix_status
+                    base_os                     image_digest
+                    cid                         image_id
+                    container_id                images_impacted_range
+                    container_running_status    include_base_image_vuln
+                    containers_impacted_range   index_digest
                     cps_rating                  package_name_version
                     cve_id                      registry
                     cvss_score                  repository
                     description                 severity
                     exploited_status            tag
-                    include_base_image_vuln
+                    exploited_status_name
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -108,17 +109,18 @@ class ContainerVulnerabilities(ServiceClass):
         Keyword arguments:
         filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    base_os                     exploited_status_name
-                    cid                         fix_status
-                    container_id                image_digest
-                    container_running_status    image_id
-                    containers_impacted_range   images_impacted_range
+                    ai_related                  fix_status
+                    base_os                     image_digest
+                    cid                         image_id
+                    container_id                images_impacted_range
+                    container_running_status    include_base_image_vuln
+                    containers_impacted_range   index_digest
                     cps_rating                  package_name_version
                     cve_id                      registry
                     cvss_score                  repository
                     description                 severity
                     exploited_status            tag
-                    include_base_image_vuln
+                    exploited_status_name
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -151,17 +153,18 @@ class ContainerVulnerabilities(ServiceClass):
         Keyword arguments:
         filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    base_os                     exploited_status_name
-                    cid                         fix_status
-                    container_id                image_digest
-                    container_running_status    image_id
-                    containers_impacted_range   images_impacted_range
+                    ai_related                  fix_status
+                    base_os                     image_digest
+                    cid                         image_id
+                    container_id                images_impacted_range
+                    container_running_status    include_base_image_vuln
+                    containers_impacted_range   index_digest
                     cps_rating                  package_name_version
                     cve_id                      registry
                     cvss_score                  repository
                     description                 severity
                     exploited_status            tag
-                    include_base_image_vuln
+                    exploited_status_name
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -194,17 +197,18 @@ class ContainerVulnerabilities(ServiceClass):
         Keyword arguments:
         filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    base_os                     exploited_status_name
-                    cid                         fix_status
-                    container_id                image_digest
-                    container_running_status    image_id
-                    containers_impacted_range   images_impacted_range
+                    ai_related                  fix_status
+                    base_os                     image_digest
+                    cid                         image_id
+                    container_id                images_impacted_range
+                    container_running_status    include_base_image_vuln
+                    containers_impacted_range   index_digest
                     cps_rating                  package_name_version
                     cve_id                      registry
                     cvss_score                  repository
                     description                 severity
                     exploited_status            tag
-                    include_base_image_vuln
+                    exploited_status_name
         limit -- The upper-bound on the number of records to retrieve. String.
         offset -- The offset from where to begin. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -237,17 +241,18 @@ class ContainerVulnerabilities(ServiceClass):
         Keyword arguments:
         filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    base_os                     exploited_status_name
-                    cid                         fix_status
-                    container_id                image_digest
-                    container_running_status    image_id
-                    containers_impacted_range   images_impacted_range
+                    ai_related                  fix_status
+                    base_os                     image_digest
+                    cid                         image_id
+                    container_id                images_impacted_range
+                    container_running_status    include_base_image_vuln
+                    containers_impacted_range   index_digest
                     cps_rating                  package_name_version
                     cve_id                      registry
                     cvss_score                  repository
                     description                 severity
                     exploited_status            tag
-                    include_base_image_vuln
+                    exploited_status_name
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
@@ -412,17 +417,18 @@ class ContainerVulnerabilities(ServiceClass):
         Keyword arguments:
         filter -- Filter vulnerabilities using a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    base_os                     exploited_status_name
-                    cid                         fix_status
-                    container_id                image_digest
-                    container_running_status    image_id
-                    containers_impacted_range   images_impacted_range
+                    ai_related                  fix_status
+                    base_os                     image_digest
+                    cid                         image_id
+                    container_id                images_impacted_range
+                    container_running_status    include_base_image_vuln
+                    containers_impacted_range   index_digest
                     cps_rating                  package_name_version
                     cve_id                      registry
                     cvss_score                  repository
                     description                 severity
                     exploited_status            tag
-                    include_base_image_vuln
+                    exploited_status_name
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- The fields to sort the records on. String.

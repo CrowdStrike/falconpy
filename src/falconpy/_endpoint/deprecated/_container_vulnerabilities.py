@@ -49,8 +49,8 @@ _container_vulnerabilities_endpoints = [
         "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
         "fields:  ai_related  base_os  cid  container_id  container_running_status  containers_impacted_range  "
         "cps_rating  cve_id  cvss_score  description  exploited_status_name  exploited_status  fix_status  image_digest"
-        "  image_id  images_impacted_range  include_base_image_vuln  index_digest  package_name_version  registry  "
-        "repository  severity  tag",
+        "  image_id  images_impacted_range  include_base_image_vuln  package_name_version  registry  repository  "
+        "severity  tag",
         "name": "filter",
         "in": "query"
       },
@@ -81,8 +81,8 @@ _container_vulnerabilities_endpoints = [
         "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
         "fields:  ai_related  base_os  cid  container_id  container_running_status  containers_impacted_range  "
         "cps_rating  cve_id  cvss_score  description  exploited_status_name  exploited_status  fix_status  image_digest"
-        "  image_id  images_impacted_range  include_base_image_vuln  index_digest  package_name_version  registry  "
-        "repository  severity  tag",
+        "  image_id  images_impacted_range  include_base_image_vuln  package_name_version  registry  repository  "
+        "severity  tag",
         "name": "filter",
         "in": "query"
       },
@@ -113,8 +113,8 @@ _container_vulnerabilities_endpoints = [
         "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
         "fields:  ai_related  base_os  cid  container_id  container_running_status  containers_impacted_range  "
         "cps_rating  cve_id  cvss_score  description  exploited_status_name  exploited_status  fix_status  image_digest"
-        "  image_id  images_impacted_range  include_base_image_vuln  index_digest  package_name_version  registry  "
-        "repository  severity  tag",
+        "  image_id  images_impacted_range  include_base_image_vuln  package_name_version  registry  repository  "
+        "severity  tag",
         "name": "filter",
         "in": "query"
       },
@@ -145,8 +145,8 @@ _container_vulnerabilities_endpoints = [
         "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
         "fields:  ai_related  base_os  cid  container_id  container_running_status  containers_impacted_range  "
         "cps_rating  cve_id  cvss_score  description  exploited_status_name  exploited_status  fix_status  image_digest"
-        "  image_id  images_impacted_range  include_base_image_vuln  index_digest  package_name_version  registry  "
-        "repository  severity  tag",
+        "  image_id  images_impacted_range  include_base_image_vuln  package_name_version  registry  repository  "
+        "severity  tag",
         "name": "filter",
         "in": "query"
       },
@@ -177,8 +177,8 @@ _container_vulnerabilities_endpoints = [
         "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
         "fields:  ai_related  base_os  cid  container_id  container_running_status  containers_impacted_range  "
         "cps_rating  cve_id  cvss_score  description  exploited_status_name  exploited_status  fix_status  image_digest"
-        "  image_id  images_impacted_range  include_base_image_vuln  index_digest  package_name_version  registry  "
-        "repository  severity  tag",
+        "  image_id  images_impacted_range  include_base_image_vuln  package_name_version  registry  repository  "
+        "severity  tag",
         "name": "filter",
         "in": "query"
       },
@@ -334,8 +334,8 @@ _container_vulnerabilities_endpoints = [
         "description": "Filter vulnerabilities using a query in Falcon Query Language (FQL). Supported filter "
         "fields:  ai_related  base_os  cid  container_id  container_running_status  containers_impacted_range  "
         "cps_rating  cve_id  cvss_score  description  exploited_status_name  exploited_status  fix_status  image_digest"
-        "  image_id  images_impacted_range  include_base_image_vuln  index_digest  package_name_version  registry  "
-        "repository  severity  tag",
+        "  image_id  images_impacted_range  include_base_image_vuln  package_name_version  registry  repository  "
+        "severity  tag",
         "name": "filter",
         "in": "query"
       },
