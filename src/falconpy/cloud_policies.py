@@ -1068,17 +1068,17 @@ class CloudPolicies(ServiceClass):
                     "suppression_expiration_date": "string",
                     "suppression_reason": "string"
                 }
-        description -- String.
-        domain -- String.
-        name -- String.
-        rule_selection_filter -- Dictionary of lists.
-        rule_selection_type -- String.
-        scope_asset_filter -- Dictionary of lists.
-        scope_type -- String.
-        subdomain -- String.
-        suppression_comment -- String.
-        suppression_expiration_date -- String.
-        suppression_reason -- String.
+        description -- Description of the suppression rule. String.
+        domain -- Policy domain for the rule. String.
+        name -- Name of the suppression rule. String.
+        rule_selection_filter -- Filter criteria for selecting rules. Dictionary of lists.
+        rule_selection_type -- Type of rule selection. String.
+        scope_asset_filter -- Filter criteria for scoping assets. Dictionary of lists.
+        scope_type -- Type of scope for the rule. String.
+        subdomain -- Policy subdomain for the rule. String.
+        suppression_comment -- Comment explaining the suppression. String.
+        suppression_expiration_date -- Expiration date for the suppression. String.
+        suppression_reason -- Reason for the suppression. String.
 
         Returns: dict object containing API response.
 
@@ -1162,16 +1162,16 @@ class CloudPolicies(ServiceClass):
                     "suppression_expiration_date": "string",
                     "suppression_reason": "string"
                 }
-        description -- String.
-        id -- String.
-        name -- String.
-        rule_selection_filter -- Dictionary of lists.
-        rule_selection_type -- String.
-        scope_asset_filter -- Dictionary of lists.
-        scope_type -- String.
-        suppression_comment -- String.
-        suppression_expiration_date -- String.
-        suppression_reason -- String.
+        description -- Description of the suppression rule. String.
+        id -- Identifier of the suppression rule to update. String.
+        name -- Name of the suppression rule. String.
+        rule_selection_filter -- Filter criteria for selecting rules. Dictionary of lists.
+        rule_selection_type -- Type of rule selection. String.
+        scope_asset_filter -- Filter criteria for scoping assets. Dictionary of lists.
+        scope_type -- Type of scope for the rule. String.
+        suppression_comment -- Comment explaining the suppression. String.
+        suppression_expiration_date -- Expiration date for the suppression. String.
+        suppression_reason -- Reason for the suppression. String.
 
         Returns: dict object containing API response.
 
@@ -1285,7 +1285,6 @@ class CloudPolicies(ServiceClass):
     GetRuleInputSchema = get_rule_input_schema
     GetEnrichedAsset = get_enriched_asset
     QuerySuppressionRules = query_suppression_rules
-
     DeleteSuppressionRules = delete_suppression_rules
     UpdateSuppressionRule = update_suppression_rule
     CreateSuppressionRule = create_suppression_rule
