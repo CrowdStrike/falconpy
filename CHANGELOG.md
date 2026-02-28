@@ -66,7 +66,7 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_quick_scan_pro.py`
 
-+ Added: Added twelve new operations to the __NGSIEM__ service collection.
++ Added: Added thirteen new operations to the __NGSIEM__ service collection.
     - _UpdateLookupFileEntries_
     - _UpdateParserFromTemplate_
     - _ExternalListDataConnections_
@@ -79,7 +79,7 @@
     - _ExternalCreateDataConnection_
     - _ExternalUpdateDataConnection_
     - _ExternalDeleteDataConnection_
-    - _ExternalListDataConnectorConfigs_
+    - _ExternalListConnectorConfigs_
     - `_endpoint/_ngsiem.py`
     - `_payload/__init__.py`
     - `_payload/_ngsiem.py`
@@ -213,14 +213,14 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_aspm.py`
 
-+ Deprecated: __Tailored Intelligence__ service collection.
-    - `_endpoint/__init__.py`
-    - `_endpoint/deprecated/__init__.py`
-    - `_endpoint/deprecated/_tailored_intelligence.py`
-    - `tailored_intelligence.py`
-
 + Deprecated: __Overwatch Dashboard__ service collection.
+    - `__init__.py`
+    - `_endpoint/__init__.py`
     - `_endpoint/_overwatch_dashboard.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_overwatch_dashboard.py`
+    - `overwatch_dashboard.py`
+    - `tests/test_overwatch_dashboard.py`
 
 + Added: Added 7 new operations to the __Case Management__ service collection.
     - _queries_access_tags_get_v1_
@@ -230,9 +230,7 @@
     - _entities_retrieve_rtr_recent_file_post_v1_
     - _entities_get_rtr_file_metadata_post_v1_
     - _entities_retrieve_rtr_file_post_v1_
-    - `_endpoint/__init__.py`
     - `_endpoint/_case_management.py`
-    - `_endpoint/deprecated/__init__.py`
     - `_endpoint/deprecated/_case_management.py`
     - `_payload/__init__.py`
     - `_payload/_case_management.py`
@@ -241,18 +239,14 @@
     - `tests/test_case_management.py`
 
 + Added: Added new _cloud_registration_gcp_get_entities_ operation to the __Cloud Google Cloud Registration__ service collection.
-    - `_endpoint/__init__.py`
     - `_endpoint/_cloud_google_cloud_registration.py`
-    - `_endpoint/deprecated/__init__.py`
     - `_endpoint/deprecated/_cloud_google_cloud_registration.py`
     - `cloud_google_cloud_registration.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_google_cloud_registration.py`
 
 + Added: Added new _cspm_evaluations_combined_iom_by_rule_ operation to the __Cloud Security Detections__ service collection.
-    - `_endpoint/__init__.py`
     - `_endpoint/_cloud_security_detections.py`
-    - `_endpoint/deprecated/__init__.py`
     - `_endpoint/deprecated/_cloud_security_detections.py`
     - `cloud_security_detections.py`
     > Unit testing expanded to complete code coverage.
@@ -265,7 +259,7 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_snapshots.py`
 
-+ Added: Added 10 new local application operations and updated endpoint definitions for the __Data Protection Configuration__ service collection.
++ Added: Added 10 new operations for the __Data Protection Configuration__ service collection.
     - _entities_local_applications_get_v1_
     - _entities_local_applications_create_v1_
     - _entities_local_applications_update_v1_
@@ -278,15 +272,14 @@
     - _queries_local_application_groups_get_v1_
     - `_endpoint/_data_protection_configuration.py`
     - `_endpoint/deprecated/_data_protection_configuration.py`
+    - `_payload/__init__.py`
     - `_payload/_data_protection_configuration.py`
     - `data_protection_configuration.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_data_protection_configuration.py`
 
 + Removed: Removed deprecated _AggregateDetections_ and _QueryDetectionIdsByFilter_ operations from the __Falcon Complete Dashboard__ service collection.
-    - `_endpoint/__init__.py`
     - `_endpoint/_falcon_complete_dashboard.py`
-    - `_endpoint/deprecated/__init__.py`
     - `_endpoint/deprecated/_falcon_complete_dashboard.py`
     - `falcon_complete_dashboard.py`
 
@@ -304,14 +297,10 @@
     - _ExternalCreateConnectorConfig_
     - _ExternalPatchConnectorConfig_
     - _ExternalDeleteConnectorConfigs_
-    - `_endpoint/__init__.py`
     - `_endpoint/_ngsiem.py`
-    - `_endpoint/deprecated/__init__.py`
     - `_endpoint/deprecated/_ngsiem.py`
     - `_payload/_ngsiem.py`
     - `ngsiem.py`
-    > Unit testing expanded to complete code coverage.
-    - `tests/test_ngsiem.py`
 
 + Updated: Renamed _QuerySubmissions_ to _QuerySubmissionsMixin0_ in the __Quick Scan__ service collection.
     - `_endpoint/_quick_scan.py`
@@ -323,46 +312,18 @@
     - _LaunchExportJobMixin0_
     - _ReadExportJobsMixin0_
     - _DownloadExportFileMixin0_
-    - `_endpoint/__init__.py`
     - `_endpoint/_serverless_exports.py`
-    - `_payload/__init__.py`
     - `_payload/_serverless_exports.py`
-    - `__init__.py`
     - `serverless_exports.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_serverless_exports.py`
 
 + Added: New __Spotlight Supported Evaluation__ service collection with 1 operation.
     - _combinedSupportedEvaluationExt_
-    - `_endpoint/__init__.py`
     - `_endpoint/_spotlight_supported_evaluation.py`
-    - `__init__.py`
     - `spotlight_supported_evaluation.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_spotlight_supported_evaluation.py`
-
-+ Added: New __Maintenance Token__ service collection with 1 operation.
-    - _incrementUninstallToken_
-    - `_endpoint/__init__.py`
-    - `_endpoint/_maintenance_token.py`
-    - `_payload/__init__.py`
-    - `_payload/_maintenance_token.py`
-    - `__init__.py`
-    - `maintenance_token.py`
-    > Unit testing expanded to complete code coverage.
-    - `tests/test_maintenance_token.py`
-
-+ Restored: __Spotlight Vulnerability Metadata__ service collection.
-    - `_endpoint/__init__.py`
-    - `_endpoint/_spotlight_vulnerability_metadata.py`
-    - `spotlight_vulnerability_metadata.py`
-    > Unit testing expanded to complete code coverage.
-    - `tests/test_spotlight_vulnerability_metadata.py`
-
-+ Updated: Renamed _GetCredentialsMixin0Mixin54_ to _GetCredentialsMixin0_ within the __Cloud Snapshots__ service collection.
-    - `_endpoint/_cloud_snapshots.py`
-    - `_endpoint/deprecated/_cloud_snapshots.py`
-    - `cloud_snapshots.py`
 
 + Added: Added three new operations to the __NGSIEM__ service collection.
     - _UpdateParserAutoUpdatePolicy_
@@ -380,34 +341,25 @@
     - `_endpoint/_ngsiem.py`
     - `ngsiem.py`
 
-+ Updated: Updated deprecated endpoint definitions for the __Quick Scan Pro__ service collection.
-    - `_endpoint/deprecated/_quick_scan_pro.py`
++ Added: Added `cve_reachable` as an allowed filter field in the _get_vulnerabilities_ operation within the __Serverless Vulnerabilities__ service collection.
+    - `_endpoint/_serverless_vulnerabilities.py`
+    - `_endpoint/deprecated/_serverless_vulnerabilities.py`
+    - `serverless_vulnerabilities.py`
 
-+ Updated: Updated endpoint definitions for the __Cloud OCI Registration__ service collection.
-    - `_endpoint/_cloud_oci_registration.py`
-    - `_endpoint/deprecated/_cloud_oci_registration.py`
++ Added: Added `cloud_account_id`, `cloud_name`, `cloud_region`, and `cluster_id` as allowed filter fields in the _read_count_by_date_range_, _read_count_, and _search_and_read_ operations within the __Unidentified Containers__ service collection.
+    - `_endpoint/_unidentified_containers.py`
+    - `_endpoint/deprecated/_unidentified_containers.py`
+    - `unidentified_containers.py`
 
-+ Updated: Updated endpoint definitions for the __Container Image Compliance__ service collection.
-    - `_endpoint/_container_image_compliance.py`
-    - `_endpoint/deprecated/_container_image_compliance.py`
++ Added: Added `cid_name`, `created_at`, `last_login_at`, `status`, and `temporarily_assigned_cids` as allowed sort values for the _query_users_ operation within the __User Management__ service collection.
+    - `_endpoint/_user_management.py`
+    - `_endpoint/deprecated/_user_management.py`
+    - `user_management.py`
 
-+ Updated: Updated endpoint definitions and docstrings for the __Container Images__ service collection.
-    - `_endpoint/_container_images.py`
-    - `_endpoint/deprecated/_container_images.py`
-    - `container_images.py`
-
-+ Updated: Updated endpoint definitions and docstrings for the __Container Vulnerabilities__ service collection.
-    - `_endpoint/_container_vulnerabilities.py`
-    - `_endpoint/deprecated/_container_vulnerabilities.py`
-    - `container_vulnerabilities.py`
-
-+ Updated: Updated endpoint definitions for the __Host Migration__ service collection.
-    - `_endpoint/_host_migration.py`
-    - `_endpoint/deprecated/_host_migration.py`
-
-+ Updated: Updated endpoint definitions for the __Hosts__ service collection.
++ Added: Added 11 new sort fields including `device_policies.application-abuse-prevention`, `device_policies.data-protection-cloud`, `device_policies.identity-endpoint`, `pointer_size`, and `safe_mode` to the _combined_hidden_devices_by_filter_ and _query_devices_by_filter_combined_ operations within the __Hosts__ service collection.
     - `_endpoint/_hosts.py`
     - `_endpoint/deprecated/_hosts.py`
+    - `hosts.py`
 
 ## Other
 ---
