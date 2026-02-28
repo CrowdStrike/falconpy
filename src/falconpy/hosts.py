@@ -171,6 +171,16 @@ class Hosts(ServiceClass):
                 device_policies.cloud-ml.applied                        device_policies.fem-browser-extension-control.applied
                 device_policies.fem-browser-extension-control.policy_type
                 device_policies.fem-browser-extension-control.policy_id
+                device_policies.application-abuse-prevention.applied
+                device_policies.application-abuse-prevention.policy_id
+                device_policies.application-abuse-prevention.policy_type
+                device_policies.data-protection-cloud.applied
+                device_policies.data-protection-cloud.policy_id
+                device_policies.data-protection-cloud.policy_type
+                device_policies.identity-endpoint.applied
+                device_policies.identity-endpoint.policy_id
+                device_policies.identity-endpoint.policy_type
+                pointer_size                                            safe_mode
 
 
         This method only supports keywords for providing arguments.
@@ -795,6 +805,16 @@ class Hosts(ServiceClass):
                 device_policies.cloud-ml.applied                        device_policies.fem-browser-extension-control.applied
                 device_policies.fem-browser-extension-control.policy_id
                 device_policies.fem-browser-extension-control.policy_type
+                device_policies.application-abuse-prevention.applied
+                device_policies.application-abuse-prevention.policy_id
+                device_policies.application-abuse-prevention.policy_type
+                device_policies.data-protection-cloud.applied
+                device_policies.data-protection-cloud.policy_id
+                device_policies.data-protection-cloud.policy_type
+                device_policies.identity-endpoint.applied
+                device_policies.identity-endpoint.policy_id
+                device_policies.identity-endpoint.policy_type
+                pointer_size                                            safe_mode
 
         This method only supports keywords for providing arguments.
 
