@@ -201,43 +201,44 @@ class CloudSecurityAssets(ServiceClass):
                     cloud_label                        non_compliant.policy_id
                     cloud_label_id                     non_compliant.requirement
                     cloud_provider                     non_compliant.rule
-                    cloud_scope                        non_compliant.section
-                    cluster_id                         non_compliant.severity
-                    cluster_name                       organization_Id
-                    compartment_ocid                   os_version
-                    compliant.benchmark_name           platform_name
-                    compliant.benchmark_version        publicly_exposed
-                    compliant.framework                region
-                    compliant.policy_id                resource_id
-                    compliant.requirement              resource_name
-                    compliant.rule                     resource_type
-                    compliant.section                  resource_type_name
-                    configuration.id                   sensor_priority
-                    creation_time                      service
-                    cve_ids                            service_category
-                    data_classifications.found         severity
-                    data_classifications.label         snapshot_detections
-                    data_classifications.label_id      ssm_managed
-                    data_classifications.scanned       status
-                    data_classifications.tag           tag_key
-                    data_classifications.tag_id        tag_value
-                    environment                        tenant_id
-                    exprt_ratings                      updated_at
-                    first_seen                         vmware.guest_os_id
-                    highest_severity                   vmware.guest_os_version
-                    id                                 vmware.host_system_name
-                    insights.boolean_value             vmware.host_type
-                    insights.id                        vmware.instance_uuid
-                    instance_id                        vmware.vm_host_name
-                    instance_state                     vmware.vm_tools_status
-                    ioa_count                          zone
-                    iom_count                          control.benchmark.version
-                    tags                               control.framework
-                    control.benchmark.name             control.requirement
-                    control.type                       control.version
-                    non_compliant.rule_name            aspm.deployment_cloud_resource_id
-                    aspm.deployment_provider           aspm.deployment_type
-                    aspm.technologies
+                    cloud_risks.rule                   non_compliant.section
+                    cloud_risks.severity               non_compliant.severity
+                    cloud_risks.status                 organization_Id
+                    cloud_scope                        os_version
+                    cluster_id                         platform_name
+                    cluster_name                       publicly_exposed
+                    compartment_ocid                   region
+                    compliant.benchmark_name           resource_id
+                    compliant.benchmark_version        resource_name
+                    compliant.framework                resource_type
+                    compliant.policy_id                resource_type_name
+                    compliant.requirement              sensor_priority
+                    compliant.rule                     service
+                    compliant.section                  service_category
+                    configuration.id                   severity
+                    creation_time                      snapshot_detections
+                    cve_ids                            ssm_managed
+                    data_classifications.found         status
+                    data_classifications.label         tag_key
+                    data_classifications.label_id      tag_value
+                    data_classifications.scanned       tenant_id
+                    data_classifications.tag           updated_at
+                    data_classifications.tag_id        vmware.guest_os_id
+                    environment                        vmware.guest_os_version
+                    exprt_ratings                      vmware.host_system_name
+                    first_seen                         vmware.host_type
+                    highest_severity                   vmware.instance_uuid
+                    id                                 vmware.vm_host_name
+                    insights.boolean_value             vmware.vm_tools_status
+                    insights.id                        zone
+                    instance_id                        control.benchmark.name
+                    instance_state                     control.benchmark.version
+                    ioa_count                          control.framework
+                    iom_count                          control.requirement
+                    tags                               control.type
+                    non_compliant.rule_name            control.version
+                    aspm.deployment_cloud_resource_id  aspm.deployment_type
+                    aspm.deployment_provider           aspm.technologies
         sort -- The field to sort on. String.
                 Use `|asc` or `|desc` suffix to specify sort direction.
                 Sortable fields include:
@@ -245,9 +246,10 @@ class CloudSecurityAssets(ServiceClass):
                     account_name                    region
                     active                          resource_id
                     cloud_provider                  resource_name
-                    cluster_id                      resource_type
-                    cluster_name                    resource_type_name
-                    creation_time                   service
+                    cloud_risks.open_risk_count     resource_type
+                    cluster_id                      resource_type_name
+                    cluster_name                    service
+                    creation_time                   service_category
                     data_classifications.found      ssm_managed
                     data_classifications.scanned    status
                     first_seen                      tenant_id
@@ -265,7 +267,8 @@ class CloudSecurityAssets(ServiceClass):
                     compartment_ocid                tenancy_type
                     compartment_path                aspm.deployment_cloud_resource_id
                     aspm.deployment_provider        aspm.deployment_type
-                    aspm.technologies
+                    aspm.technologies               publiclyExposedToTheInternet
+                    publiclyExposedAccessRange      publiclyExposedExposureMethod
         limit -- The maximum number of items to return. Integer.
                  When not specified or 0, 500 is used. When larger than 1000, 1000 is used.
         offset -- Offset returned assets. Use only one of 'offset' and 'after' parameter for paginating. Integer.
