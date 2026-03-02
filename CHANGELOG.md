@@ -318,12 +318,10 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_serverless_exports.py`
 
-+ Added: New __Spotlight Supported Evaluation__ service collection with 1 operation.
++ Added: Added one new operation to the __Spotlight Evaluation Logic__ service collection.
     - _combinedSupportedEvaluationExt_
-    - `_endpoint/_spotlight_supported_evaluation.py`
-    - `spotlight_supported_evaluation.py`
-    > Unit testing expanded to complete code coverage.
-    - `tests/test_spotlight_supported_evaluation.py`
+    - `_endpoint/_spotlight_evaluation_logic.py`
+    - `spotlight_evaluation_logic.py`
 
 + Added: Added three new operations to the __NGSIEM__ service collection.
     - _UpdateParserAutoUpdatePolicy_
