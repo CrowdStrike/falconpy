@@ -137,6 +137,12 @@ class TestIOAExclusions:
                 parent_command_line="test",
                 parent_image_file_name="test"
             ),
+            "get_default_ss_exclusions_str_ids": falcon.get_default_ss_exclusions(
+                aid="12345678",
+                command_line="test",
+                image_file_name="test",
+                pattern_ids="12345678,87654321"
+            ),
             "query_ss_exclusions": falcon.query_ss_exclusions(
                 filter="name:'test'",
                 ifn_regex="test",
