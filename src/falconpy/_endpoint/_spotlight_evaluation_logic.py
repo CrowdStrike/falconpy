@@ -130,5 +130,69 @@ _spotlight_evaluation_logic_endpoints = [
         "in": "query"
       }
     ]
+  ],
+  [
+    "combinedSupportedEvaluationExt",
+    "GET",
+    "/spotlight/combined/supported-evaluation-external/v1",
+    "Performs a combined query and get operation for retrieving RiskSupportedEvaluation entities.",
+    "spotlight_evaluation_logic",
+    [
+      {
+        "type": "string",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
+        "name": "after",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "string",
+        "description": "Starting index of overall result set from which to return ids.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "maximum": 400,
+        "minimum": 1,
+        "type": "integer",
+        "default": 100,
+        "description": "The number of items to return in this response (default: 100, max: 400). Use with the "
+        "after parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort vulnerabilities by their properties. Available sort options: "
+        "<ul><li>created_timestamp|asc/desc</li><li>updated_timestamp|asc/desc</li></ul>. Can be used in a format "
+        "<field>|asc for ascending order or <field>|desc for descending order.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Filter items using a query in Falcon Query Language (FQL). Wildcards * and empty "
+        "filter values are unsupported.\n\t\t\t\tAvailable filter fields that supports match (~): "
+        "N/A\n\t\t\t\tAvailable filter fields that supports exact match: id, risk_id, risk_provider, finding_provider, "
+        "platform\n\t\t\t\tAvailable filter fields that supports wildcard (*): N/A\n\t\t\t\tAvailable filter fields "
+        "that supports range comparisons (>, <, >=, <=): created_timestamp, updated_timestamp\n\t\t\t\t",
+        "name": "filter",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "zero or more risk providers - zero means all. Supported values:\n\n<ul><li>S for "
+        "Falcon sensor</li><li>See RiskProvider for all values.</li></ul>",
+        "name": "risk_provider",
+        "in": "query"
+      }
+    ]
   ]
 ]

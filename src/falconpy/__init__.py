@@ -206,7 +206,6 @@ from .serverless_exports import ServerlessExports
 from .spotlight_vulnerabilities import SpotlightVulnerabilities
 from .spotlight_vulnerability_metadata import SpotlightVulnerabilityMetadata
 from .spotlight_evaluation_logic import SpotlightEvaluationLogic
-from .spotlight_supported_evaluation import SpotlightSupportedEvaluation
 from .tailored_intelligence import TailoredIntelligence
 from .threatgraph import ThreatGraph
 from .unidentified_containers import UnidentifiedContainers
@@ -266,7 +265,7 @@ __all__ = [
     "CloudSecurityCompliance", "CaseManagement", "SaasSecurity", "DataProtectionConfiguration",
     "CorrelationRulesAdmin", "CloudSecurityDetections", "CloudPolicies", "CloudGoogleCloudRegistration",
     "CloudSecurity", "AdmissionControlPolicies", "OverwatchDashboard",
-    "SpotlightVulnerabilityMetadata", "SpotlightSupportedEvaluation",
+    "SpotlightVulnerabilityMetadata",
     "ServerlessExports"
     ]
 """

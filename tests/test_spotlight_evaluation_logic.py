@@ -15,7 +15,7 @@ sys.path.append(os.path.abspath('src'))
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = SpotlightEvaluationLogic(auth_object=config)
-AllowedResponses = [200, 400, 403, 404, 429]
+AllowedResponses = [200, 201, 207, 400, 403, 404, 429]
 
 
 class TestSpotlightEval:

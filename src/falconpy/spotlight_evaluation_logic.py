@@ -177,12 +177,59 @@ class SpotlightEvaluationLogic(ServiceClass):
             params=parameters
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_supported_evaluations(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Perform a combined query and get for RiskSupportedEvaluation entities.
+
+        Keyword arguments:
+        after -- A pagination token used with the limit parameter to manage pagination
+                 of results. On your first request, don't provide an after token. On
+                 subsequent requests, provide the after token from the previous response
+                 to continue from that place in the results. String.
+        filter -- Filter items using a query in Falcon Query Language (FQL). String.
+                  Wildcards * and empty filter values are unsupported.
+                  Available filter fields that support exact match:
+                    id                risk_id
+                    risk_provider     finding_provider
+                    platform
+                  Available filter fields that support range comparisons (>, <, >=, <=):
+                    created_timestamp   updated_timestamp
+        limit -- The number of items to return in this response (default: 100, max: 400).
+                 Use with the after parameter to manage pagination of results. Integer.
+        offset -- Starting index of overall result set from which to return ids. String.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+        risk_provider -- Zero or more risk providers. Zero means all. String or list of strings.
+                         Supported values: S (for Falcon sensor).
+        sort -- Sort vulnerabilities by their properties. String.
+                Available sort options: created_timestamp|asc/desc, updated_timestamp|asc/desc.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-supported-evaluation/combinedSupportedEvaluationExt
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="combinedSupportedEvaluationExt",
+            keywords=kwargs,
+            params=parameters
+            )
+
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
     combinedQueryEvaluationLogic = query_evaluation_logic_combined
     getEvaluationLogic = get_evaluation_logic
     queryEvaluationLogic = query_evaluation_logic
+    combinedSupportedEvaluationExt = get_supported_evaluations
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
