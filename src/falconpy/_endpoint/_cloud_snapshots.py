@@ -173,20 +173,6 @@ _cloud_snapshots_endpoints = [
     []
   ],
   [
-    "CreateInventory",
-    "POST",
-    "/snapshots/entities/inventories/v1",
-    "Create inventory from data received from snapshot",
-    "cloud_snapshots",
-    [
-      {
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
     "GetScanReport",
     "GET",
     "/snapshots/entities/scanreports/v1",

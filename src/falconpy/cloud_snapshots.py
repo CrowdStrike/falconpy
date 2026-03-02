@@ -345,29 +345,6 @@ class CloudSnapshots(ServiceClass):
             body=body
             )
 
-    @force_default(defaults=["body"], default_types=["dict"])
-    def create_inventory(self: object, body: dict = None) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Create inventory from data received from a snapshot.
-
-        Keyword arguments:
-        body -- Full body payload as a JSON formatted dictionary.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: POST
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-snapshots/CreateInventory
-        """
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="CreateInventory",
-            body=body
-            )
-
     # This method name aligns to the operation ID in the API but
     # does not conform to snake_case / PEP8 and is defined here
     # for backwards compatibility / ease of use purposes
@@ -380,4 +357,3 @@ class CloudSnapshots(ServiceClass):
     GetCredentialsMixin0Mixin61 = get_credentials
     GetCredentialsIAC = get_iac_credentials
     RegisterCspmSnapshotAccount = register_account
-    CreateInventory = create_inventory
