@@ -194,7 +194,58 @@ class ServerlessExports(ServiceClass):
             params=handle_single_argument(args, parameters, "filter")
             )
 
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def get_vulnerabilities(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Retrieve all lambda vulnerabilities that match the given query and return in the SARIF format.
+
+        Keyword arguments:
+        filter -- Filter lambda vulnerabilities using a query in Falcon Query Language (FQL). String.
+                  Supported filters:
+                    application_name                function_name
+                    application_name_version        function_resource_id
+                    cid                             is_supported
+                    cloud_account_id                is_valid_asset_id
+                    cloud_account_name              layer
+                    cloud_provider                  region
+                    cve_id                          runtime
+                    cve_reachable                   severity
+                    cvss_base_score                 timestamp
+                    exprt_rating                    type
+                    first_seen_timestamp
+        limit -- The upper-bound on the number of records to retrieve. Integer.
+        offset -- The offset from where to begin. Integer.
+        sort -- The fields to sort the records on.
+                Supported columns:
+                    application_name                first_seen_timestamp
+                    application_name_version        function_resource_id
+                    cid                             is_supported
+                    cloud_account_id                layer
+                    cloud_account_name              region
+                    cloud_provider                  runtime
+                    cve_id                          severity
+                    cvss_base_score                 timestamp
+                    exprt_rating                    type
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: GET
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/serverless-vulnerabilities/GetCombinedVulnerabilitiesSARIF
+        """
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="GetCombinedVulnerabilitiesSARIF",
+            keywords=kwargs,
+            params=parameters
+            )
+
     DownloadExportFileMixin0 = download_export_file
     ReadExportJobsMixin0 = read_export_jobs
     LaunchExportJobMixin0 = launch_export_job
     QueryExportJobsMixin0 = query_export_jobs
+    GetCombinedVulnerabilitiesSARIF = get_vulnerabilities

@@ -105,5 +105,44 @@ _serverless_exports_endpoints = [
         "in": "query"
       }
     ]
+  ],
+  [
+    "GetCombinedVulnerabilitiesSARIF",
+    "GET",
+    "/lambdas/combined/vulnerabilities/sarif/v1",
+    "Retrieve all lambda vulnerabilities that match the given query and return in the SARIF format",
+    "serverless_exports",
+    [
+      {
+        "type": "string",
+        "description": "Filter lambda vulnerabilities using a query in Falcon Query Language (FQL).Supported "
+        "filters:  application_name,application_name_version,cid,cloud_account_id,cloud_account_name,cloud_provider,cve "
+        "_id,cve_reachable,cvss_base_score,exprt_rating,first_seen_timestamp,function_name,function_resource_id,is_supp "
+        "orted,is_valid_asset_id,layer,region,runtime,severity,timestamp,type",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The fields to sort the records on. Supported columns:  [application_name "
+        "application_name_version cid cloud_account_id cloud_account_name cloud_provider cve_id cvss_base_score "
+        "exprt_rating first_seen_timestamp function_resource_id is_supported layer region runtime severity timestamp "
+        "type]",
+        "name": "sort",
+        "in": "query"
+      }
+    ]
   ]
 ]

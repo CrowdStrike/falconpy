@@ -27,6 +27,7 @@ class TestServerlessExports:
             "LaunchExportJobMixin0": falcon.launch_export_job(resource="function.detections", format="csv"),
             "ReadExportJobsMixin0": falcon.read_export_jobs(ids="12345"),
             "DownloadExportFileMixin0": falcon.download_export_file(id="12345"),
+            "GetCombinedVulnerabilitiesSARIF": falcon.get_vulnerabilities(limit=1),
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

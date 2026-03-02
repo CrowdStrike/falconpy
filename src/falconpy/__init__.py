@@ -201,7 +201,6 @@ from .sensor_download import SensorDownload
 from .sensor_update_policy import SensorUpdatePolicy, SensorUpdatePolicies
 from .sensor_usage import SensorUsage
 from .sensor_visibility_exclusions import SensorVisibilityExclusions
-from .serverless_vulnerabilities import ServerlessVulnerabilities
 from .serverless_exports import ServerlessExports
 from .spotlight_vulnerabilities import SpotlightVulnerabilities
 from .spotlight_vulnerability_metadata import SpotlightVulnerabilityMetadata
@@ -256,7 +255,7 @@ __all__ = [
     "CertificateBasedExclusions", "ComplianceAssessments", "HostMigration", "QuickScanPro",
     "SensorUsage", "Downloads", "DeliverySettings", "ASPM", "IntelligenceFeeds",
     "NGSIEM", "CorrelationRules", "CloudAWSRegistration", "CloudAzureRegistration",
-    "CloudOCIRegistration", "CloudSecurityAssets", "Deployments", "ServerlessVulnerabilities",
+    "CloudOCIRegistration", "CloudSecurityAssets", "Deployments",
     "DeviceContent", "IntelligenceIndicatorGraph", "ContentUpdatePolicies", "CAOHunting",
     "ContainerImageCompliance", "FaaSExecution", "HEC", "IngestBaseURL", "IngestFormat",
     "IngestPayload", "HTTPEventCollector", "IngestConfig", "SessionManager", "TimeUnit",

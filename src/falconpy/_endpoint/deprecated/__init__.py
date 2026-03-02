@@ -76,7 +76,6 @@ from ._real_time_response_admin import _real_time_response_admin_endpoints
 from ._recon import _recon_endpoints
 from ._report_executions import _report_executions_endpoints
 from ._scheduled_reports import _scheduled_reports_endpoints
-from ._serverless_vulnerabilities import _serverless_vulnerabilities_endpoints
 from ._unidentified_containers import _unidentified_containers_endpoints
 from ._user_management import _user_management_endpoints
 from ._workflows import _workflows_endpoints
@@ -130,7 +129,6 @@ _real_time_response_admin_deprecated = _real_time_response_admin_endpoints
 _recon_deprecated = _recon_endpoints
 _report_executions_deprecated = _report_executions_endpoints
 _scheduled_reports_deprecated = _scheduled_reports_endpoints
-_serverless_vulnerabilities_deprecated = _serverless_vulnerabilities_endpoints
 _unidentified_containers_deprecated = _unidentified_containers_endpoints
 _user_management_deprecated = _user_management_endpoints
 _workflows_deprecated = _workflows_endpoints
