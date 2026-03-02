@@ -801,7 +801,7 @@ class CSPMRegistration(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMCGPAccount
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cspm-registration/GetCSPMGCPAccount
         """
         if kwargs.get("scan_type", None):
             kwargs["scan-type"] = kwargs.get("scan_type", None)
