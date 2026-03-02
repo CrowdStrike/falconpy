@@ -131,25 +131,25 @@ class IOAExclusions(ServiceClass):
                     "time_zone": "string",
                     "type": "string"
                 }
-        date_ranges -- List of dictionary.
-        exclude -- String.
-        extended_bounds -- Dictionary.
-        field -- String.
-        filters_spec -- Dictionary.
-        from -- Integer.
-        include -- String.
-        max_doc_count -- Integer.
-        min_doc_count -- Integer.
-        missing -- String.
-        name -- String.
-        percents -- List of integers.
-        q -- String.
-        ranges -- List of dictionary.
-        size -- Integer.
-        sort -- String.
-        sub_aggregates -- List.
-        time_zone -- String.
-        type -- String.
+        date_ranges -- Date range timeframe. List of dictionaries.
+        exclude -- Fields to exclude from results. String.
+        extended_bounds -- Extended bounds for histogram aggregations. Dictionary.
+        field -- Field to aggregate on. String.
+        filters_spec -- Additional filter specifications. Dictionary.
+        from -- Starting index of overall result set. Integer.
+        include -- Fields to include in results. String.
+        max_doc_count -- Maximum number of documents per bucket. Integer.
+        min_doc_count -- Minimum number of documents per bucket. Integer.
+        missing -- Value to use for documents missing the field. String.
+        name -- Name of the aggregation. String.
+        percents -- Percentile values to calculate. List of integers.
+        q -- Full text search query. String.
+        ranges -- Range boundaries for range aggregations. List of dictionaries.
+        size -- Maximum number of records to return. Integer.
+        sort -- The field to sort on. String.
+        sub_aggregates -- Nested aggregation definitions. List.
+        time_zone -- Time zone for date histogram aggregations. String.
+        type -- Type of aggregation to perform. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -167,6 +167,7 @@ class IOAExclusions(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="ss_ioa_exclusions_aggregates_v2",
+            keywords=kwargs,
             params=parameters,
             body=body
             )
@@ -184,8 +185,8 @@ class IOAExclusions(ServiceClass):
                         "sort": "string"
                     }
                 }
-        report_format -- String.
-        search -- Dictionary.
+        report_format -- Format of the report to generate. String.
+        search -- Search criteria including filter and sort options. Dictionary.
 
         This method only supports keywords for providing arguments.
 
@@ -263,7 +264,7 @@ class IOAExclusions(ServiceClass):
                         }
                     ]
                 }
-        exclusions -- List of dictionaries.
+        exclusions -- List of exclusion definitions to create. List of dictionaries.
 
         This method only supports keywords for providing arguments.
 
@@ -315,7 +316,7 @@ class IOAExclusions(ServiceClass):
                         }
                     ]
                 }
-        exclusions -- List of dictionaries.
+        exclusions -- List of exclusion definitions to update. List of dictionaries.
 
         This method only supports keywords for providing arguments.
 
@@ -388,14 +389,14 @@ class IOAExclusions(ServiceClass):
                         "string"
                     ]
                 }
-        aid -- String.
-        command_line -- String.
-        grandparent_command_line -- String.
-        grandparent_image_file_name -- String.
-        image_file_name -- String.
-        parent_command_line -- String.
-        parent_image_file_name -- String.
-        pattern_ids -- List of strings.
+        aid -- Agent ID to match exclusions against. String.
+        command_line -- Command line of the child process. String.
+        grandparent_command_line -- Command line of the grandparent process. String.
+        grandparent_image_file_name -- Image file name of the grandparent process. String.
+        image_file_name -- Image file name of the child process. String.
+        parent_command_line -- Command line of the parent process. String.
+        parent_image_file_name -- Image file name of the parent process. String.
+        pattern_ids -- Pattern IDs to match exclusions against. List of strings.
 
         This method only supports keywords for providing arguments.
 
@@ -431,13 +432,13 @@ class IOAExclusions(ServiceClass):
                     "parent_command_line": "string",
                     "parent_image_file_name": "string"
                 }
-        aid -- String.
-        command_line -- String.
-        grandparent_command_line -- String.
-        grandparent_image_file_name -- String.
-        image_file_name -- String.
-        parent_command_line -- String.
-        parent_image_file_name -- String.
+        aid -- Agent ID to get default exclusions for. String.
+        command_line -- Command line of the child process. String.
+        grandparent_command_line -- Command line of the grandparent process. String.
+        grandparent_image_file_name -- Image file name of the grandparent process. String.
+        image_file_name -- Image file name of the child process. String.
+        parent_command_line -- Command line of the parent process. String.
+        parent_image_file_name -- Image file name of the parent process. String.
 
         This method only supports keywords for providing arguments.
 
@@ -539,15 +540,15 @@ class IOAExclusions(ServiceClass):
                 "pattern_id": "string",
                 "pattern_name": "string"
             }
-        cl_regex -- string
-        comment -- String comment describing why the exclusion is entered.
-        description --
-        detection_json --
+        cl_regex -- Command line regex value for the exclusion. String.
+        comment -- Comment describing why the exclusion is entered. String.
+        description -- Description of the exclusion. String.
+        detection_json -- Detection JSON payload for the exclusion. String.
         groups -- Group IDs to exclude. List of strings.
-        ifn_regex --
-        name --
-        pattern_id --
-        pattern_name --
+        ifn_regex -- Image file name regex value for the exclusion. String.
+        name -- Name of the exclusion. String.
+        pattern_id -- Pattern ID associated with the exclusion. String.
+        pattern_name -- Pattern name associated with the exclusion. String.
 
         This method only supports keywords for providing arguments.
 
@@ -615,16 +616,16 @@ class IOAExclusions(ServiceClass):
                 "pattern_id": "string",
                 "pattern_name": "string"
             }
-        cl_regex -- string
-        comment -- String comment describing why the exclusion is entered.
-        description --
-        detection_json --
+        cl_regex -- Command line regex value for the exclusion. String.
+        comment -- Comment describing why the exclusion is updated. String.
+        description -- Description of the exclusion. String.
+        detection_json -- Detection JSON payload for the exclusion. String.
         groups -- Group IDs to exclude. List of strings.
-        id --
-        ifn_regex --
-        name --
-        pattern_id --
-        pattern_name --
+        id -- Identifier of the exclusion to update. String.
+        ifn_regex -- Image file name regex value for the exclusion. String.
+        name -- Name of the exclusion. String.
+        pattern_id -- Pattern ID associated with the exclusion. String.
+        pattern_name -- Pattern name associated with the exclusion. String.
 
         This method only supports keywords for providing arguments.
 

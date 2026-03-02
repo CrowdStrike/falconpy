@@ -60,6 +60,12 @@ def ioa_ss_default_exclusion_payload(passed_keywords: dict) -> dict:
         if passed_keywords.get(key, None):
             returned_payload[key] = passed_keywords.get(key, None)
 
+    passed_list = passed_keywords.get("pattern_ids", None)
+    if passed_list:
+        if isinstance(passed_list, str):
+            passed_list = passed_list.split(",")
+        returned_payload["pattern_ids"] = passed_list
+
     return returned_payload
 
 
