@@ -68,6 +68,7 @@ from .deprecated import _overwatch_dashboard_deprecated
 from .deprecated import _quick_scan_deprecated
 from .deprecated import _quick_scan_pro_deprecated
 from .deprecated import _recon_deprecated
+from .deprecated import _serverless_vulnerabilities_deprecated
 from .deprecated import _spotlight_vulnerability_metadata_deprecated
 from .deprecated import _unidentified_containers_deprecated
 from .deprecated import _user_management_deprecated
@@ -169,6 +170,7 @@ from ._sensor_update_policies import _sensor_update_policies_endpoints
 from ._sensor_usage import _sensor_usage_endpoints
 from ._sensor_visibility_exclusions import _sensor_visibility_exclusions_endpoints
 from ._serverless_exports import _serverless_exports_endpoints
+from ._serverless_vulnerabilities import _serverless_vulnerabilities_endpoints
 from ._spotlight_evaluation_logic import _spotlight_evaluation_logic_endpoints
 from ._spotlight_vulnerability_metadata import _spotlight_vulnerability_metadata_endpoints
 from ._spotlight_vulnerabilities import _spotlight_vulnerabilities_endpoints
@@ -275,6 +277,7 @@ api_endpoints.extend(_sensor_update_policies_endpoints)
 api_endpoints.extend(_sensor_usage_endpoints)
 api_endpoints.extend(_sensor_visibility_exclusions_endpoints)
 api_endpoints.extend(_serverless_exports_endpoints)
+api_endpoints.extend(_serverless_vulnerabilities_endpoints)
 api_endpoints.extend(_spotlight_evaluation_logic_endpoints)
 api_endpoints.extend(_spotlight_vulnerability_metadata_endpoints)
 api_endpoints.extend(_spotlight_vulnerabilities_endpoints)
@@ -337,6 +340,7 @@ deprecated_endpoints.extend(_user_management_deprecated)
 deprecated_endpoints.extend(_workflows_deprecated)
 deprecated_endpoints.extend(_zero_trust_assessment_deprecated)
 deprecated_endpoints.extend(_overwatch_dashboard_deprecated)
+deprecated_endpoints.extend(_serverless_vulnerabilities_deprecated)
 deprecated_endpoints.extend(_spotlight_vulnerability_metadata_deprecated)
 
 # Mapping of manually deprecated endpoints

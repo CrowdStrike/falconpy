@@ -36,72 +36,42 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 
-_serverless_exports_endpoints = [
+_serverless_vulnerabilities_endpoints = [
   [
-    "DownloadExportFileMixin0",
+    "GetCombinedVulnerabilitiesSARIF",
     "GET",
-    "/lambdas/entities/exports/files/v1",
-    "Download an export file",
-    "serverless_exports",
+    "/lambdas/combined/vulnerabilities/sarif/v1",
+    "Retrieve all lambda vulnerabilities that match the given query and return in the SARIF format",
+    "serverless_vulnerabilities",
     [
       {
         "type": "string",
-        "description": "Export job ID.",
-        "name": "id",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "ReadExportJobsMixin0",
-    "GET",
-    "/lambdas/entities/exports/v1",
-    "Read export jobs entities",
-    "serverless_exports",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "csv",
-        "description": "Export Job IDs to read. Allowed up to 100 IDs per request.",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "LaunchExportJobMixin0",
-    "POST",
-    "/lambdas/entities/exports/v1",
-    "Launch an export job of a Lambda Security resource. Maximum of 1 job in progress per resource. Use "
-    "expand_vulnerabilities=true to get detailed vulnerability information.",
-    "serverless_exports",
-    [
-      {
-        "description": "Supported resources:  function.detections  function.vulnerabilities-expanded  "
-        "function.vulnerabilities",
-        "name": "body",
-        "in": "body",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "QueryExportJobsMixin0",
-    "GET",
-    "/lambdas/queries/exports/v1",
-    "Query export jobs entities",
-    "serverless_exports",
-    [
-      {
-        "type": "string",
-        "description": "Filter exports using a query in Falcon Query Language (FQL). Only the last 100 jobs "
-        "are returned. Supported filter fields:  resource  status",
+        "description": "Filter lambda vulnerabilities using a query in Falcon Query Language (FQL).Supported "
+        "filters:  application_name,application_name_version,cid,cloud_account_id,cloud_account_name,cloud_provider,cve "
+        "_id,cve_reachable,cvss_base_score,exprt_rating,first_seen_timestamp,function_name,function_resource_id,is_supp "
+        "orted,is_valid_asset_id,layer,region,runtime,severity,timestamp,type",
         "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The upper-bound on the number of records to retrieve.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset from where to begin.",
+        "name": "offset",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "The fields to sort the records on. Supported columns:  [application_name "
+        "application_name_version cid cloud_account_id cloud_account_name cloud_provider cve_id cvss_base_score "
+        "exprt_rating first_seen_timestamp function_resource_id is_supported layer region runtime severity timestamp "
+        "type]",
+        "name": "sort",
         "in": "query"
       }
     ]

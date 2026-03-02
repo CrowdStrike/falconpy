@@ -1,32 +1,32 @@
-# test_serverless_exports.py
-# This class tests the ServerlessExports service class
+# test_serverless_vulnerabilities.py
+# This class tests the serverless_vulnerabilities service class
 
 # import json
 import os
 import sys
-
+import pytest
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 
 # Import our sibling src folder into the path
 sys.path.append(os.path.abspath('src'))
 # Classes to test - manually imported from sibling folder
-from falconpy import ServerlessExports
+from falconpy import ServerlessVulnerabilities
 
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
-falcon = ServerlessExports(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 403, 404, 429]
+falcon = ServerlessVulnerabilities(auth_object=config)
+AllowedResponses = [200, 201, 207, 400, 403, 429]
 
 
-class TestServerlessExports:
+class TestServerlessVulnerabilities:
+    @pytest.mark.skipif(config.base_url == "https://api.laggar.gcw.crowdstrike.com",
+                        reason="Unit testing unavailable on US-GOV-1"
+                        )
     def test_all_code_paths(self):
         error_checks = True
         tests = {
-            "QueryExportJobsMixin0": falcon.query_export_jobs(),
-            "LaunchExportJobMixin0": falcon.launch_export_job(resource="function.detections", format="csv"),
-            "ReadExportJobsMixin0": falcon.read_export_jobs(ids="12345"),
-            "DownloadExportFileMixin0": falcon.download_export_file(id="12345"),
+            "GetCombinedVulnerabilitiesSARIF": falcon.get_vulnerabilities(limit=1)
         }
         for key in tests:
             if tests[key]["status_code"] not in AllowedResponses:

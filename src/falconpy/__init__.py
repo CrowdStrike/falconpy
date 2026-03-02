@@ -202,6 +202,7 @@ from .sensor_update_policy import SensorUpdatePolicy, SensorUpdatePolicies
 from .sensor_usage import SensorUsage
 from .sensor_visibility_exclusions import SensorVisibilityExclusions
 from .serverless_exports import ServerlessExports
+from .serverless_vulnerabilities import ServerlessVulnerabilities
 from .spotlight_vulnerabilities import SpotlightVulnerabilities
 from .spotlight_vulnerability_metadata import SpotlightVulnerabilityMetadata
 from .spotlight_evaluation_logic import SpotlightEvaluationLogic
@@ -265,7 +266,8 @@ __all__ = [
     "CorrelationRulesAdmin", "CloudSecurityDetections", "CloudPolicies", "CloudGoogleCloudRegistration",
     "CloudSecurity", "AdmissionControlPolicies", "OverwatchDashboard",
     "SpotlightVulnerabilityMetadata",
-    "ServerlessExports"
+    "ServerlessExports",
+    "ServerlessVulnerabilities"
     ]
 """
 This is free and unencumbered software released into the public domain.
