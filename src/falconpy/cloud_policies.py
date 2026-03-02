@@ -933,27 +933,39 @@ class CloudPolicies(ServiceClass):
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. String.
                   Allowed filter fields:
-                    rule_origin                         rule_parent_uuid                    rule_name
-                    rule_description                    rule_domain                         rule_status
-                    rule_severity                       rule_short_code                     rule_service
-                    rule_resource_type                  rule_provider                       rule_subdomain
-                    rule_auto_remediable                rule_control_requirement            rule_control_section
-                    rule_compliance_benchmark           rule_compliance_framework           rule_mitre_tactic
-                    rule_mitre_technique                rule_created_at                     rule_updated_at
+                    rule_auto_remediable                rule_mitre_tactic
+                    rule_category                       rule_mitre_technique
+                    rule_cloneable                      rule_name
+                    rule_compliance_benchmark            rule_origin
+                    rule_compliance_benchmark_uuid       rule_parent_uuid
+                    rule_compliance_framework            rule_provider
+                    rule_control_requirement             rule_resource_type
+                    rule_control_section                 rule_resource_type_name
+                    rule_created_at                      rule_risk_factor
+                    rule_description                     rule_service
+                    rule_domain                          rule_severity
+                    rule_short_code                      rule_status
+                    rule_subdomain                       rule_updated_at
                     rule_updated_by
         limit -- The maximum number of resources to return. The maximum allowed is 500.
         offset -- The number of results to skip before starting to return results.
         sort -- The sort expression that should be used to sort the results. String.
                 Use the '|asc' or '|desc' suffix to specify sort direction.
                 Sortable fields:
-                  rule_origin                         rule_parent_uuid                    rule_name
-                  rule_description                    rule_domain                         rule_status
-                  rule_severity                       rule_short_code                     rule_service
-                  rule_resource_type                  rule_provider                       rule_subdomain
-                  rule_auto_remediable                rule_control_requirement            rule_control_section
-                  rule_compliance_benchmark           rule_compliance_framework           rule_mitre_tactic
-                  rule_mitre_technique                rule_created_at                     rule_updated_at
-                  rule_updated_by
+                    rule_auto_remediable                rule_mitre_tactic
+                    rule_category                       rule_mitre_technique
+                    rule_cloneable                      rule_name
+                    rule_compliance_benchmark            rule_origin
+                    rule_compliance_benchmark_uuid       rule_parent_uuid
+                    rule_compliance_framework            rule_provider
+                    rule_control_requirement             rule_resource_type
+                    rule_control_section                 rule_resource_type_name
+                    rule_created_at                      rule_risk_factor
+                    rule_description                     rule_service
+                    rule_domain                          rule_severity
+                    rule_short_code                      rule_status
+                    rule_subdomain                       rule_updated_at
+                    rule_updated_by
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
