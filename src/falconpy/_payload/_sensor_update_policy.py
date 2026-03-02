@@ -36,6 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 
+
 def maintenance_token_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted payload for incrementing an uninstall token.
 
@@ -50,6 +51,7 @@ def maintenance_token_payload(passed_keywords: dict) -> dict:
             returned_payload[key] = passed_keywords[key]
 
     return returned_payload
+
 
 def sensor_policy_payload(passed_keywords: dict) -> dict:
     """Create a properly formatted prevention policy payload.

@@ -154,7 +154,7 @@ from ._ngsiem import (
     ngsiem_data_connection_payload
 )
 from ._prevention_policy import prevention_policy_payload
-from ._sensor_update_policies import sensor_policy_payload, maintenance_token_payload
+from ._sensor_update_policy import sensor_policy_payload, maintenance_token_payload
 from ._response_policy import response_policy_payload
 from ._real_time_response import command_payload, data_payload
 from ._certificate_based_exclusions import certificate_based_exclusions_payload
