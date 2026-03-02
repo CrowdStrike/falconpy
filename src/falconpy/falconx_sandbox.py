@@ -697,7 +697,6 @@ class FalconXSandbox(ServiceClass):
     Submit = submit
     QueryReports = query_reports
     QuerySubmissions = query_submissions
-    QuerySubmissionsMixin0 = query_submissions
     UploadSampleV2 = upload_sample
     GetReports = get_reports
     DeleteReport = delete_report
