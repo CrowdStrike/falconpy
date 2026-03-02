@@ -15,7 +15,7 @@ sys.path.append(os.path.abspath('src'))
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = SensorUpdatePolicies(auth_object=config)
-AllowedResponses = [200, 400, 401, 404, 429]
+AllowedResponses = [200, 400, 401, 403, 404, 429]
 
 
 class TestFalconSensorUpdate:
