@@ -764,8 +764,8 @@ class CorrelationRules(ServiceClass):
                     ]
                 }
                 ]
-        customer_id -- String.
-        templates -- List of dictionaries.
+        customer_id -- Customer ID for the rule template. String.
+        templates -- List of rule template definitions to create rules from. List of dictionaries.
 
         Returns: dict object containing API response.
 
