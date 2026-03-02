@@ -237,59 +237,6 @@ class SpotlightVulnerabilities(ServiceClass):
             keywords=kwargs,
             params=handle_single_argument(args, parameters, "ids")
             )
-
-    @force_default(defaults=["parameters"], default_types=["dict"])
-    def get_cve_metadata(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
-        """Perform a combined query and get operation for retrieving Risk (vulnerability metadata) entities.
-
-        Keyword arguments:
-        after -- A pagination token used with the `limit` parameter to manage pagination of results. String.
-                 On your first request, don't provide an `after` token. On subsequent requests, provide
-                 the `after` token from the previous response to continue from that place in the results.
-        offset -- Starting index of overall result set from which to return IDs. String.
-        limit -- The number of items to return in this response (default: 100, max: 400). Integer.
-                 Use with the after parameter to manage pagination of results.
-        sort -- Sort vulnerabilities by their properties. String.
-                Can be used in a format <field>|asc for ascending order or <field>|desc for descending order.
-                Available sort options:
-                  created_timestamp|asc/desc
-                  updated_timestamp|asc/desc
-        filter -- Filter items using a query in Falcon Query Language (FQL). String. Required.
-                  Wildcards * and empty filter values are unsupported.
-                  Available filter fields that supports exact match:
-                    id                                            provider
-                    cve_ids                                       cwe_ids
-                    impact.cvss_v2.base_metrics.vector            impact.cvss_v2.temporal_metrics.vector
-                    impact.cvss_v3.base_metrics.integrity_impact  impact.cvss_v3.base_metrics.vector
-                    impact.cvss_v3.temporal_metrics.vector
-                  Available filter fields that supports range comparisons (>, <, >=, <=):
-                    created_timestamp                               impact.cvss_v2.base_metrics.base_score
-                    impact.cvss_v3.base_metrics.base_score          impact.cvss_v2.temporal_metrics.temporal_score
-                    impact.cvss_v3.temporal_metrics.temporal_score  source_created_timestamp
-                    source_updated_timestamp                        updated_timestamp
-        risk_provider -- Zero or more risk providers. Zero means all. String or list of strings.
-                         Supported values:
-                           S - Falcon sensor
-                           See RiskProvider for all values.
-        parameters -- Full parameters payload dictionary. Not required if using other keywords.
-
-        This method only supports keywords for providing arguments.
-
-        Returns: dict object containing API response.
-
-        HTTP Method: GET
-
-        Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/spotlight-vulnerability-metadata/combineVulnMetadataExt
-        """
-        return process_service_request(
-            calling_object=self,
-            endpoints=Endpoints,
-            operation_id="combineVulnMetadataExt",
-            keywords=kwargs,
-            params=parameters
-            )
-
     # These method names align to the operation IDs in the API but
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
@@ -298,7 +245,6 @@ class SpotlightVulnerabilities(ServiceClass):
     combinedQueryVulnerabilities = query_vulnerabilities_combined
     getRemediations = get_remediations
     getRemediationsV2 = get_remediations_v2
-    combineVulnMetadataExt = get_cve_metadata
 
 
 # The legacy name for this class does not conform to PascalCase / PEP8
