@@ -352,7 +352,8 @@ class SensorUpdatePolicy(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#
                         /sensor-update-policies/performSensorUpdatePoliciesAction
         """
-        _allowed_actions = ['add-host-group', 'disable', 'enable', 'remove-host-group']
+        _allowed_actions = ['add-host-group', 'add-rule-group', 'disable', 'enable',
+                            'remove-host-group', 'remove-rule-group']
         operation_id = "performSensorUpdatePoliciesAction"
         parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
         action_name = parameter_payload.get("action_name", "Not Specified")
