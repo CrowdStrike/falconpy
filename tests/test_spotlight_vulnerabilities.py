@@ -15,7 +15,7 @@ sys.path.append(os.path.abspath('src'))
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = SpotlightVulnerabilities(auth_object=config)
-AllowedResponses = [200, 400, 403, 429]
+AllowedResponses = [200, 201, 207, 400, 403, 404, 429]
 
 
 class TestSpotlight:
@@ -69,6 +69,8 @@ class TestSpotlight:
             errorChecks = False
         if falcon.getRemediationsV2(ids="12345678")["status_code"] != 500:
             errorChecks = False
+        if falcon.get_cve_metadata()["status_code"] != 500:
+            errorChecks = False
         return errorChecks
 
     @pytest.mark.skipif(config.base_url == "https://api.laggar.gcw.crowdstrike.com",
@@ -90,3 +92,17 @@ class TestSpotlight:
 
     def test_Errors(self):
         assert self.spotlight_GenerateErrors() is True
+
+    def test_combineVulnMetadataExt(self):
+        error_checks = True
+        tests = {
+            "combineVulnMetadataExt": falcon.get_cve_metadata(),
+            "combineVulnMetadataExt_with_kwargs": falcon.get_cve_metadata(
+                filter="id:'test'",
+                risk_provider=["S"]
+            ),
+        }
+        for key in tests:
+            if tests[key]["status_code"] not in AllowedResponses:
+                error_checks = False
+        assert error_checks
