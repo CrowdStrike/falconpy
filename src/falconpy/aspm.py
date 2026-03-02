@@ -2731,7 +2731,7 @@ class ASPM(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/post_%2Fgroup%2F%7BID%3A%5B0-9%5D%2B%7D%2Fupdate_default
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ASPM/get_%2Fgroup%2F%7BID%3A%5B0-9%5D%2B%7D%2Fv2
         """
         target_id = kwargs.get("id", parameters.get("id", None))
         if not target_id:
