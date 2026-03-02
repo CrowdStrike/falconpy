@@ -173,7 +173,7 @@ class MLExclusions(ServiceClass):
             endpoints=Endpoints,
             operation_id="exclusions_get_all_v2",
             params=parameters,
-            kwargs=kwargs
+            keywords=kwargs
             )
 
     @force_default(defaults=["parameters", "body"], default_types=["dict", "dict"])
@@ -228,7 +228,7 @@ class MLExclusions(ServiceClass):
             operation_id="exclusions_perform_action_v2",
             body=body,
             params=parameters,
-            kwargs=kwargs
+            keywords=kwargs
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
@@ -328,6 +328,7 @@ class MLExclusions(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ml-exclusions/exclusions.create.v2
         """
         if not body:
+            body = {}
             if kwargs.get("exclusions", None):
                 body["exclusions"] = kwargs.get("exclusions", None)
         return process_service_request(
@@ -594,7 +595,7 @@ class MLExclusions(ServiceClass):
                     "value": "string"
                 }
         comment -- String comment describing why the exclusion is entered.
-        excluded_from --
+        excluded_from -- Exclusion sources to apply. String or list of strings.
         groups -- Group IDs to exclude. List of strings.
         value -- Value to exclude. String
 
@@ -736,7 +737,7 @@ class MLExclusions(ServiceClass):
     # do not conform to snake_case / PEP8 and are defined here for
     # backwards compatibility / ease of use purposes
     getMLExclusionsV1 = get_exclusions
-    createMLExclusionsV1 = create_ml_exclusions
+    createMLExclusionsV1 = create_exclusions
     deleteMLExclusionsV1 = delete_exclusions
     updateMLExclusionsV1 = update_exclusions
     queryMLExclusionsV1 = query_exclusions
