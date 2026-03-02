@@ -96,8 +96,9 @@ class AdmissionControlPolicies(ServiceClass):
                     "description": "string",
                     "name": "string"
                 }
-        description -- String.
-        name -- String.
+        description -- Description for the new policy. String.
+        name -- Name of the new policy. String.
+
         This method only supports keywords for providing arguments.
 
         Returns: dict object containing API response.
@@ -108,6 +109,7 @@ class AdmissionControlPolicies(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-create-policy
         """
         if not body:
+            body = {}
             keys = ["description", "name"]
             for key in keys:
                 provided = kwargs.get(key, None)
@@ -137,9 +139,9 @@ class AdmissionControlPolicies(ServiceClass):
                     "is_enabled": true,
                     "name": "string"
                 }
-        description -- String.
-        is_enabled - Boolean.
-        name -- String.
+        description -- Description for the policy. String.
+        is_enabled -- Flag indicating if the policy is enabled. Boolean.
+        name -- Name of the policy. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -152,6 +154,7 @@ class AdmissionControlPolicies(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-update-policy
         """
         if not body:
+            body = {}
             keys = ["description", "name", "is_enabled"]
             for key in keys:
                 provided = kwargs.get(key, None)
@@ -209,8 +212,8 @@ class AdmissionControlPolicies(ServiceClass):
                     ],
                     "id": "string"
                 }
-        host_groups -- String or list of strings.
-        id -- String.
+        host_groups -- List of host group IDs to add to the policy. String or list of strings.
+        id -- The ID of the admission control policy to modify. String.
 
         This method only supports keywords for providing arguments.
 
@@ -274,8 +277,8 @@ class AdmissionControlPolicies(ServiceClass):
                     "id": "string",
                     "precedence": 0
                 }
-        id -- String.
-        precendence -- Integer.
+        id -- The ID of the admission control policy. String.
+        precedence -- Policy precedence value. Integer.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
@@ -288,6 +291,7 @@ class AdmissionControlPolicies(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/admission-control-policies/admission-control-update-policy-precedence
         """
         if not body:
+            body = {}
             keys = ["id", "precedence"]
             for key in keys:
                 provided = kwargs.get(key, None)
@@ -323,8 +327,8 @@ class AdmissionControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        id -- String.
-        rule_groups -- List of dictionary.
+        id -- The ID of the admission control policy. String.
+        rule_groups -- List of rule group definitions containing custom rules to add. List of dictionaries.
 
         This method only supports keywords for providing arguments.
 
@@ -388,8 +392,8 @@ class AdmissionControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        id -- String.
-        rule_groups -- List of dictionary.
+        id -- The ID of the admission control policy. String.
+        rule_groups -- List of rule group definitions specifying the new precedence order. List of dictionaries.
 
         This method only supports keywords for providing arguments.
 
@@ -439,8 +443,8 @@ class AdmissionControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        id -- String.
-        rule_groups -- List of dictionary.
+        id -- The ID of the admission control policy. String.
+        rule_groups -- List of rule group definitions with replacement labels and namespaces. List of dictionaries.
 
         This method only supports keywords for providing arguments.
 
@@ -479,8 +483,8 @@ class AdmissionControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        id -- String.
-        rule_groups -- List of dictionary.
+        id -- The ID of the admission control policy. String.
+        rule_groups -- List of rule group definitions to create. List of dictionaries.
 
         This method only supports keywords for providing arguments.
 
@@ -536,8 +540,8 @@ class AdmissionControlPolicies(ServiceClass):
                         }
                     ]
                 }
-        id -- String.
-        rule_groups -- List of dictionaries.
+        id -- The ID of the admission control policy. String.
+        rule_groups -- List of rule group definitions to update. List of dictionaries.
 
         This method only supports keywords for providing arguments.
 
