@@ -89,7 +89,7 @@ def cloud_google_registration_create_payload(passed_keywords: dict) -> Dict[str,
     item = {}
     keys = ["deployment_method", "entity_id", "excluded_project_patterns",
             "falcon_client_key_id", "falcon_client_key_type", "infra_manager_region",
-            "infra_project_id", "labels", "products", "registration_name", "registration_scope"
+            "infra_project_id", "labels", "products", "registration_name", "registration_scope",
             "resource_name_prefix", "resource_name_suffix", "tags", "wif_project_id"
             ]
 

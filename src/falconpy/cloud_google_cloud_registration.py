@@ -387,6 +387,7 @@ class CloudGoogleCloudRegistration(ServiceClass):
             calling_object=self,
             endpoints=Endpoints,
             operation_id="cloud_registration_gcp_update_registration",
+            keywords=kwargs,
             params=parameters,
             body=body
             )
