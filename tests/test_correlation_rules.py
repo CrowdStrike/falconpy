@@ -17,7 +17,7 @@ from falconpy import CorrelationRules
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = CorrelationRules(auth_object=config)
-AllowedResponses = [200, 201, 207, 400, 401, 404, 429]  # 400, 403, 404, 
+AllowedResponses = [200, 201, 207, 400, 401, 403, 404, 429]  # 400, 403, 404,
 
 
 class TestCorrelationRules:
