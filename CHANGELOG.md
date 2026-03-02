@@ -38,7 +38,7 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_workflows.py`
 
-+ Added: Added `offset` and `limit` parameters to the _WorkflowExecutionsCombined_ operation within the __Workflows__ service collection.
++ Added: Added `offset` and `limit` parameters to the _WorkflowTriggersCombined_ operation within the __Workflows__ service collection.
     - `_endpoint/_workflows.py`
     - `workflows.py`
 
@@ -46,7 +46,7 @@
     - `_endpoint/_threatgraph.py`
     - `threatgraph.py`
 
-+ Added: Added `custom_ioa` and `custom_ioas` as allowed values for the `vertex_type` argument in the _combined_ran_on_get_, _entities_vertices_get_, and _entities_vertices_getv2_ operations within the __Threat Graph__ service collection.
++ Added: Added `custom_ioa` and `custom_ioas` as allowed values for the `vertex_type` argument in the _combined_summary_get_, _entities_vertices_get_, and _entities_vertices_getv2_ operations within the __Threat Graph__ service collection.
     - `_endpoint/_threatgraph.py`
     - `threatgraph.py`
 
@@ -60,34 +60,13 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_sensor_download.py`
 
-+ Added: Added `password` and `X-File-Password` parameters to the _UploadSampleV3_ operation within the __Quick Scan Pro__ service collection.
++ Added: Added `password` and `X-File-Password` parameters to the _UploadFileQuickScanPro_ operation within the __Quick Scan Pro__ service collection.
     - `_endpoint/_quick_scan_pro.py`
     - `quick_scan_pro.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_quick_scan_pro.py`
 
-+ Added: Added thirteen new operations to the __NGSIEM__ service collection.
-    - _UpdateLookupFileEntries_
-    - _UpdateParserFromTemplate_
-    - _ExternalListDataConnections_
-    - _ExternalListDataConnectors_
-    - _ExternalGetDataConnectionStatus_
-    - _ExternalUpdateDataConnectionStatus_
-    - _ExternalGetDataConnectionToken_
-    - _ExternalRegenerateDataConnectionToken_
-    - _ExternalGetDataConnectionByID_
-    - _ExternalCreateDataConnection_
-    - _ExternalUpdateDataConnection_
-    - _ExternalDeleteDataConnection_
-    - _ExternalListConnectorConfigs_
-    - `_endpoint/_ngsiem.py`
-    - `_payload/__init__.py`
-    - `_payload/_ngsiem.py`
-    - `ngsiem.py`
-    > Unit testing expanded to complete code coverage.
-    - `tests/test_ngsiem.py`
-
-+ Added: Added twelve new operations to the __ML Exclusions__ service collection.
++ Added: Added nine new operations to the __ML Exclusions__ service collection.
     - _exclusions_aggregates_v2_
     - _exclusions_get_all_v2_
     - _exclusions_perform_action_v2_
@@ -96,10 +75,7 @@
     - _exclusions_create_v2_
     - _exclusions_update_v2_
     - _exclusions_delete_v2_
-    - _exclusions_query_v2_
-    - _ml_exclusion_sets_get_v2_
-    - _ml_exclusions_create_v2_
-    - _ml_exclusions_update_v2_
+    - _exclusions_search_v2_
     - `_endpoint/__init__.py`
     - `_endpoint/_ml_exclusions.py`
     - `_endpoint/deprecated/__init__.py`
@@ -110,7 +86,7 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_ml_exclusions.py`
 
-+ Added: Added `group_ids` and `group_names` as allowed values for the `filter` and `sort` arguments in the _searches_get_ and _searches_advanced_get_ operations within the __IT Automation__ service collection.
++ Added: Added `group_ids` and `group_names` as allowed values for the `filter` and `sort` arguments in the _ITAutomationCombinedScheduledTasks_ and _ITAutomationSearchScheduledTasks_ operations within the __IT Automation__ service collection.
     - `_endpoint/_it_automation.py`
     - `it_automation.py`
 
@@ -122,8 +98,8 @@
     - _ss_ioa_exclusions_update_v2_
     - _ss_ioa_exclusions_delete_v2_
     - _ss_ioa_exclusions_matched_rule_v2_
-    - _ss_ioa_exclusions_get_default_v2_
-    - _ss_ioa_exclusions_query_v2_
+    - _ss_ioa_exclusions_new_rules_v2_
+    - _ss_ioa_exclusions_search_v2_
     - `_endpoint/__init__.py`
     - `_endpoint/_ioa_exclusions.py`
     - `_endpoint/deprecated/__init__.py`
@@ -154,7 +130,7 @@
     - `_endpoint/_discover.py`
     - `_endpoint/deprecated/_discover.py`
 
-+ Added: Added `tags_string` as an allowed filter field in the _cloud_security_compliance_by_framework_ and _cloud_security_compliance_by_rule_ operations within the __Cloud Security Compliance__ service collection.
++ Added: Added `tags_string` as an allowed filter field in the _cloud_compliance_framework_posture_summaries_ and _cloud_compliance_rule_posture_summaries_ operations within the __Cloud Security Compliance__ service collection.
     - `_endpoint/_cloud_security_compliance.py`
     - `_endpoint/deprecated/_cloud_security_compliance.py`
     - `cloud_security_compliance.py`
@@ -174,8 +150,9 @@
     - `_endpoint/_cloud_security_assets.py`
     - `_endpoint/deprecated/_cloud_security_assets.py`
 
-+ Removed: Removed deprecated _GetCSPMCGPAccount_ operation from the __CSPM Registration__ service collection.
++ Removed: Removed deprecated _GetCSPMCGPAccount_ operation from the __CSPM Registration__ service collection. The corrected _GetCSPMGCPAccount_ operation is now the sole endpoint.
     - `_endpoint/_cspm_registration.py`
+    - `cspm_registration.py`
 
 + Added: Added `organization_ids` parameter to the _cloud_registration_aws_get_accounts_ operation within the __Cloud AWS Registration__ service collection.
     - `_endpoint/_cloud_aws_registration.py`
@@ -197,6 +174,14 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_policies.py`
 
++ Added: Added `rule_category`, `rule_cloneable`, `rule_compliance_benchmark_uuid`, `rule_resource_type_name`, and `rule_risk_factor` as allowed filter and sort fields in the _QueryRules_ operation within the __Cloud Policies__ service collection.
+    - `_endpoint/_cloud_policies.py`
+    - `cloud_policies.py`
+
++ Updated: Updated the _CreateRule_ operation description within the __Cloud Policies__ service collection to document rule severity mapping and Runtime IOM Custom Rule requirements.
+    - `_endpoint/_cloud_policies.py`
+    - `cloud_policies.py`
+
 + Added: Added eight new operations to the __ASPM__ service collection.
     - _post_/group/v2_
     - _delete_/group/{ID:[0_9]+}_
@@ -212,6 +197,10 @@
     - `aspm.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_aspm.py`
+
++ Updated: Renamed _RetrieveRelayInstances_ to _get_/executor_nodes/{ID:[0_9]+}/instances/csv_ in the __ASPM__ service collection.
+    - `_endpoint/_aspm.py`
+    - `aspm.py`
 
 + Deprecated: __Overwatch Dashboard__ service collection.
     - `__init__.py`
@@ -238,6 +227,9 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_case_management.py`
 
++ Fixed: Fixed three incorrect aliases in the __Case Management__ service collection. The `aggregates_notification_groups_post_v1` and `aggregates_notification_groups_post_v2` aliases were incorrectly pointing to the entities GET methods instead of the aggregation POST methods, and `entities_notification_groups_get_v2` was pointing to the v1 method instead of v2.
+    - `case_management.py`
+
 + Added: Added new _cloud_registration_gcp_get_entities_ operation to the __Cloud Google Cloud Registration__ service collection.
     - `_endpoint/_cloud_google_cloud_registration.py`
     - `_endpoint/deprecated/_cloud_google_cloud_registration.py`
@@ -252,24 +244,21 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_security_detections.py`
 
-+ Added: Added new _CreateInventory_ operation and renamed _GetCredentialsMixin0Mixin54_ to _GetCredentialsMixin0_ in the __Cloud Snapshots__ service collection.
-    - `_endpoint/_cloud_snapshots.py`
-    - `_endpoint/deprecated/_cloud_snapshots.py`
++ Fixed: Fixed _get\_credentials_ method in the __Cloud Snapshots__ service collection to use correct _GetCredentialsMixin0_ operation ID.
     - `cloud_snapshots.py`
-    > Unit testing expanded to complete code coverage.
-    - `tests/test_cloud_snapshots.py`
 
-+ Added: Added 10 new operations for the __Data Protection Configuration__ service collection.
-    - _entities_local_applications_get_v1_
-    - _entities_local_applications_create_v1_
-    - _entities_local_applications_update_v1_
-    - _entities_local_applications_delete_v1_
-    - _entities_local_application_groups_get_v1_
-    - _entities_local_application_groups_create_v1_
-    - _entities_local_application_groups_update_v1_
-    - _entities_local_application_groups_delete_v1_
-    - _queries_local_applications_get_v1_
-    - _queries_local_application_groups_get_v1_
++ Added: Added 11 new operations for the __Data Protection Configuration__ service collection.
+    - _entities_policy_precedence_post_v1_
+    - _entities_local_application_get_
+    - _entities_local_application_create_
+    - _entities_local_application_patch_
+    - _entities_local_application_delete_
+    - _entities_local_application_group_get_
+    - _entities_local_application_group_create_
+    - _entities_local_application_group_patch_
+    - _entities_local_application_group_delete_
+    - _queries_local_application_get_
+    - _queries_local_application_group_get_
     - `_endpoint/_data_protection_configuration.py`
     - `_endpoint/deprecated/_data_protection_configuration.py`
     - `_payload/__init__.py`
@@ -283,29 +272,55 @@
     - `_endpoint/deprecated/_falcon_complete_dashboard.py`
     - `falcon_complete_dashboard.py`
 
-+ Updated: Renamed _QuerySubmissionsMixin0_ to _QuerySubmissions_ in the __FalconX Sandbox__ service collection.
-    - `_endpoint/_falconx_sandbox.py`
-    - `_endpoint/deprecated/_falconx_sandbox.py`
-    - `falconx_sandbox.py`
 
 + Updated: Renamed _GetAWSAccounts_ to _GetAWSAccountsMixin0_ and _DeleteAWSAccounts_ to _DeleteAWSAccountsMixin0_ in the __Kubernetes Protection__ service collection.
     - `_endpoint/_kubernetes_protection.py`
     - `_endpoint/deprecated/_kubernetes_protection.py`
     - `kubernetes_protection.py`
 
-+ Added: Added 3 new connector config operations to the __NGSIEM__ service collection.
++ Added: Added `cloud_account_id`, `cloud_name`, `cloud_region`, `cluster_id`, `cluster_name`, and `namespace` as supported filter fields in the _ReadClusterEnrichment_, _ReadContainerEnrichment_, _ReadDeploymentEnrichment_, _ReadNodeEnrichment_, and _ReadPodEnrichment_ operations within the __Kubernetes Protection__ service collection.
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+
++ Added: Added `include_counts` as a query parameter to the _ReadClusterCombinedV2_ operation within the __Kubernetes Protection__ service collection.
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+
++ Added: Added `cloud_account_id`, `cloud_name`, `cloud_region`, `cluster_id`, `cluster_name`, `image_name`, and `namespace` as supported filter fields in the _ReadRunningContainerImages_ operation within the __Kubernetes Protection__ service collection.
+    - `_endpoint/_kubernetes_protection.py`
+    - `kubernetes_protection.py`
+
++ Updated: Updated `limit` range from 1-500 to 0-1000, corrected `offset` type from String to Integer, and documented supported values for `status` in the _GetAWSAccountsMixin0_ operation within the __Kubernetes Protection__ service collection.
+    - `kubernetes_protection.py`
+
++ Added: Added nineteen new operations to the __NGSIEM__ service collection.
+    - _UpdateLookupFileEntries_
+    - _UpdateParserFromTemplate_
+    - _ExternalListDataConnections_
+    - _ExternalListDataConnectors_
+    - _ExternalGetDataConnectionStatus_
+    - _ExternalUpdateDataConnectionStatus_
+    - _ExternalGetDataConnectionToken_
+    - _ExternalRegenerateDataConnectionToken_
+    - _ExternalGetDataConnectionByID_
+    - _ExternalCreateDataConnection_
+    - _ExternalUpdateDataConnection_
+    - _ExternalDeleteDataConnection_
+    - _ExternalListConnectorConfigs_
     - _ExternalCreateConnectorConfig_
     - _ExternalPatchConnectorConfig_
     - _ExternalDeleteConnectorConfigs_
+    - _UpdateParserAutoUpdatePolicy_
+    - _InstallParser_
+    - _BulkInstallParsers_
     - `_endpoint/_ngsiem.py`
     - `_endpoint/deprecated/_ngsiem.py`
+    - `_payload/__init__.py`
     - `_payload/_ngsiem.py`
     - `ngsiem.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ngsiem.py`
 
-+ Updated: Renamed _QuerySubmissions_ to _QuerySubmissionsMixin0_ in the __Quick Scan__ service collection.
-    - `_endpoint/_quick_scan.py`
-    - `_endpoint/deprecated/_quick_scan.py`
-    - `quick_scan.py`
 
 + Added: New __Serverless Exports__ service collection with 4 operations.
     - _QueryExportJobsMixin0_
@@ -322,18 +337,6 @@
     - _combinedSupportedEvaluationExt_
     - `_endpoint/_spotlight_evaluation_logic.py`
     - `spotlight_evaluation_logic.py`
-
-+ Added: Added three new operations to the __NGSIEM__ service collection.
-    - _UpdateParserAutoUpdatePolicy_
-    - _InstallParser_
-    - _BulkInstallParsers_
-    - `_endpoint/_ngsiem.py`
-    - `_endpoint/deprecated/_ngsiem.py`
-    - `_payload/__init__.py`
-    - `_payload/_ngsiem.py`
-    - `ngsiem.py`
-    > Unit testing expanded to complete code coverage.
-    - `tests/test_ngsiem.py`
 
 + Added: Added `update_available` and `parser_type` as query parameters to the _ListParsers_ operation within the __NGSIEM__ service collection.
     - `_endpoint/_ngsiem.py`
@@ -990,11 +993,22 @@
 + Updated: Cosmetic update to operation and parameter descriptions in the _GetCombinedImages_, _CombinedImageDetail_, and _ReadCombinedImagesExport_ operations within the __Container Images__ service collection.
     - `_endpoint/_container_images.py`
 
++ Added: Added `index_digest` as an allowed filter field in the _AggregateImageCountByBaseOS_, _AggregateImageCountByState_, _AggregateImageCount_, _CombinedImageIssuesSummary_, _GetCombinedImages_, _CombinedImageDetail_, and _ReadCombinedImagesExport_ operations within the __Container Images__ service collection.
+    - `_endpoint/_container_images.py`
+    - `container_images.py`
+
++ Added: Added `ai_related`, `ai_vulnerability_count`, and `ai_vulnerabilities` as allowed filter and sort fields in the _AggregateImageCount_, _CombinedImageIssuesSummary_, and _ReadCombinedImagesExport_ operations within the __Container Images__ service collection.
+    - `container_images.py`
+
 + Updated: Cosmetic update to operation and parameter descriptions in the _ReadPackagesByFixableVulnCount_, _ReadPackagesByVulnCount_, _ReadPackagesCombinedExport_, _ReadPackagesCombined_, and _ReadPackagesCombinedV2_ operations within the __Container Packages__ service collection.
     - `_endpoint/_container_packages.py`
 
 + Updated: Cosmetic update to operation and parameter descriptions in the _ReadVulnerabilityCountByActivelyExploited_, _ReadVulnerabilityCountByCPSRating_, _ReadVulnerabilityCountByCVSSScore_, _ReadVulnerabilityCountBySeverity_, _ReadVulnerabilityCount_, _ReadVulnerabilitiesByImageCount_, _ReadVulnerabilitiesPublicationDate_, _ReadCombinedVulnerabilitiesDetails_, _ReadCombinedVulnerabilitiesInfo_, and _ReadCombinedVulnerabilities_ operations within the __Container Vulnerabilities__ service collection.
     - `_endpoint/_container_vulnerabilities.py`
+
++ Added: Added `ai_related` and `index_digest` as allowed filter fields in the _ReadVulnerabilityCountByActivelyExploited_, _ReadVulnerabilityCountByCPSRating_, _ReadVulnerabilityCountByCVSSScore_, _ReadVulnerabilityCountBySeverity_, _ReadVulnerabilityCount_, and _ReadCombinedVulnerabilities_ operations within the __Container Vulnerabilities__ service collection.
+    - `_endpoint/_container_vulnerabilities.py`
+    - `container_vulnerabilities.py`
 
 + Deprecated: Deprecated the __Detects__ service collection and all included endpoints. Closes #1378.
     - `_endpoint/_detects.py`
