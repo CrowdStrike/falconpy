@@ -931,6 +931,7 @@ class Workflows(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/workflows/WorkflowExecuteSingleNodeV1
         """
         if not body:
+            body = {}
             if kwargs.get("definition", None):
                 body["definition"] = kwargs.get("definition", None)
 
