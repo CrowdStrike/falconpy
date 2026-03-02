@@ -62,6 +62,8 @@ class TestSpotlightEval:
             errorChecks = False
         if falcon.getEvaluationLogic(ids="12345678")["status_code"] != 500:
             errorChecks = False
+        if falcon.get_supported_evaluations(filter="id:'12345678'")["status_code"] != 500:
+            errorChecks = False
         return errorChecks
 
     def test_queryEvaluationLogic(self):
