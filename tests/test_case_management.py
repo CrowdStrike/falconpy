@@ -5,8 +5,6 @@
 import os
 import sys
 
-from tomlkit import key
-
 # Authentication via the test_authorization.py
 from tests import test_authorization as Authorization
 import tests
