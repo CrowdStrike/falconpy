@@ -41,7 +41,7 @@ from ._util import handle_single_argument, process_service_request
 from ._payload import generic_payload_list, sensor_policy_payload, maintenance_token_payload
 from ._result import Result
 from ._service_class import ServiceClass
-from ._endpoint._sensor_update_policies import _sensor_update_policies_endpoints as Endpoints
+from ._endpoint._sensor_update_policy import _sensor_update_policies_endpoints as Endpoints
 
 
 class SensorUpdatePolicy(ServiceClass):
