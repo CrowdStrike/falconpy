@@ -399,7 +399,7 @@ class ThreatGraphManager:
                         if proc.get('details'):
                             d = proc['details']
                             print(f"\n\t\t\tProcess: {d.get('image_file', 'Unknown')}")
-                            print(f"\t\t\t\tCommand Line: {d.get('command_line', 'N/A')[:50] + "..."}")
+                            print(f"\t\t\t\tCommand Line: {d.get('command_line', 'N/A')[:50] + '...'}")
                             print(f"\t\t\t\tUser SID: {d.get('user_sid', 'N/A')}")
                             print(f"\t\t\t\tStart Time: {d.get('start_time', 'N/A')}")
                             print(f"\t\t\t\tSHA256: {d.get('sha256', 'N/A')}")
