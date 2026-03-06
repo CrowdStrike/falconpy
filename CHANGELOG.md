@@ -293,9 +293,8 @@
 + Updated: Updated `limit` range from 1-500 to 0-1000, corrected `offset` type from String to Integer, and documented supported values for `status` in the _GetAWSAccountsMixin0_ operation within the __Kubernetes Protection__ service collection.
     - `kubernetes_protection.py`
 
-+ Added: Added nineteen new operations to the __NGSIEM__ service collection.
++ Added: Added eighteen new operations to the __NGSIEM__ service collection.
     - _UpdateLookupFileEntries_
-    - _UpdateParserFromTemplate_
     - _ExternalListDataConnections_
     - _ExternalListDataConnectors_
     - _ExternalGetDataConnectionStatus_

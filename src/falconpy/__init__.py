@@ -265,9 +265,7 @@ __all__ = [
     "CloudSecurityCompliance", "CaseManagement", "SaasSecurity", "DataProtectionConfiguration",
     "CorrelationRulesAdmin", "CloudSecurityDetections", "CloudPolicies", "CloudGoogleCloudRegistration",
     "CloudSecurity", "AdmissionControlPolicies", "OverwatchDashboard",
-    "SpotlightVulnerabilityMetadata",
-    "ServerlessExports",
-    "ServerlessVulnerabilities"
+    "SpotlightVulnerabilityMetadata", "ServerlessExports", "ServerlessVulnerabilities"
     ]
 """
 This is free and unencumbered software released into the public domain.

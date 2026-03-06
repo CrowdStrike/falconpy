@@ -566,37 +566,6 @@ _ngsiem_endpoints = [
     ]
   ],
   [
-    "UpdateParserFromTemplate",
-    "PATCH",
-    "/ngsiem-content/entities/parsers-template/v1",
-    "Update Parser in NGSIEM from YAML Template. Please note that name changes are not supported, but rather "
-    "should be created as a new parser.",
-    "ngsiem",
-    [
-      {
-        "enum": [
-          "parsers-repository"
-        ],
-        "type": "string",
-        "description": "name of repository",
-        "name": "repository",
-        "in": "formData"
-      },
-      {
-        "type": "string",
-        "description": "id of the parser",
-        "name": "ids",
-        "in": "formData"
-      },
-      {
-        "type": "file",
-        "description": "LogScale Parser YAML template content, see schema at https://schemas.humio.com/",
-        "name": "yaml_template",
-        "in": "formData"
-      }
-    ]
-  ],
-  [
     "GetParser",
     "GET",
     "/ngsiem-content/entities/parsers/v1",
