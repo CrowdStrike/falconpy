@@ -579,7 +579,7 @@ class MLExclusions(ServiceClass):
             )
 
     @force_default(defaults=["body"], default_types=["dict"])
-    def create_ml_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+    def create_exclusions(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Create the ML exclusions.
 
         Keyword arguments:
@@ -620,9 +620,6 @@ class MLExclusions(ServiceClass):
             operation_id="createMLExclusionsV1",
             body=body
             )
-
-    # Alias for backwards compatibility
-    create_exclusions = create_ml_exclusions
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_exclusions(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
