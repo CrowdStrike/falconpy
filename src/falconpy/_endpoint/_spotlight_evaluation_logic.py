@@ -75,63 +75,6 @@ _spotlight_evaluation_logic_endpoints = [
     ]
   ],
   [
-    "getEvaluationLogic",
-    "GET",
-    "/spotlight/entities/evaluation-logic/v1",
-    "Get details on evaluation logic items by providing one or more IDs.",
-    "spotlight_evaluation_logic",
-    [
-      {
-        "type": "array",
-        "items": {
-          "type": "string"
-        },
-        "collectionFormat": "multi",
-        "description": "One or more evaluation logic IDs.",
-        "name": "ids",
-        "in": "query",
-        "required": True
-      }
-    ]
-  ],
-  [
-    "queryEvaluationLogic",
-    "GET",
-    "/spotlight/queries/evaluation-logic/v1",
-    "Search for evaluation logic in your environment by providing a FQL filter and paging details. Returns a "
-    "set of evaluation logic IDs which match the filter criteria.",
-    "spotlight_evaluation_logic",
-    [
-      {
-        "type": "string",
-        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
-        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
-        "previous response to continue from that place in the results.",
-        "name": "after",
-        "in": "query"
-      },
-      {
-        "type": "integer",
-        "description": "Maximum number of entities to return.",
-        "name": "limit",
-        "in": "query"
-      },
-      {
-        "type": "string",
-        "description": "FQL query specifying the filter parameters.",
-        "name": "filter",
-        "in": "query",
-        "required": True
-      },
-      {
-        "type": "string",
-        "description": "Sort evaluation logic by their properties.",
-        "name": "sort",
-        "in": "query"
-      }
-    ]
-  ],
-  [
     "combinedSupportedEvaluationExt",
     "GET",
     "/spotlight/combined/supported-evaluation-external/v1",
@@ -191,6 +134,63 @@ _spotlight_evaluation_logic_endpoints = [
         "description": "zero or more risk providers - zero means all. Supported values:\n\n<ul><li>S for "
         "Falcon sensor</li><li>See RiskProvider for all values.</li></ul>",
         "name": "risk_provider",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "getEvaluationLogic",
+    "GET",
+    "/spotlight/entities/evaluation-logic/v1",
+    "Get details on evaluation logic items by providing one or more IDs.",
+    "spotlight_evaluation_logic",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "One or more evaluation logic IDs.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "queryEvaluationLogic",
+    "GET",
+    "/spotlight/queries/evaluation-logic/v1",
+    "Search for evaluation logic in your environment by providing a FQL filter and paging details. Returns a "
+    "set of evaluation logic IDs which match the filter criteria.",
+    "spotlight_evaluation_logic",
+    [
+      {
+        "type": "string",
+        "description": "A pagination token used with the limit parameter to manage pagination of results. On "
+        "your first request, don't provide an after token. On subsequent requests, provide the after token from the "
+        "previous response to continue from that place in the results.",
+        "name": "after",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "Maximum number of entities to return.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL query specifying the filter parameters.",
+        "name": "filter",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "string",
+        "description": "Sort evaluation logic by their properties.",
+        "name": "sort",
         "in": "query"
       }
     ]
