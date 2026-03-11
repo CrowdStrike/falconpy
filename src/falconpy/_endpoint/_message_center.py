@@ -238,7 +238,7 @@ _message_center_endpoints = [
         "description": "Optional filter and sort criteria in the form of an FQL query. Allowed filters are: _a "
         "ll\nactivity.body\ncase.aids\ncase.assigner.display_name\ncase.assigner.first_name\ncase.assigner.last_name\nc "
         "ase.assigner.uid\ncase.assigner.uuid\ncase.body\ncase.created_time\ncase.detections.id\ncase.hosts\ncase.id\nc "
-        "ase.incidents.id\ncase.ip_addresses\ncase.key\ncase.last_modified_time\ncase.status\ncase.status\ncase.title\n "
+        "ase.incidents.id\ncase.ip_addresses\ncase.key\ncase.last_modified_time\ncase.status\ncase.status\ncase.title\n"
         "case.type",
         "name": "filter",
         "in": "query"
