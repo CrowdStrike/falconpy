@@ -334,6 +334,27 @@ class Discover(ServiceClass):
 
         Keyword arguments:
         filter -- The filter expression that should be used to limit the results. FQL syntax.
+                  Available Filters:
+                    name                            last_used_user_name
+                    version                         last_used_file_name
+                    vendor                          last_used_file_hash
+                    name_vendor                     last_used_timestamp
+                    name_vendor_version             last_updated_timestamp
+                    first_seen_timestamp            is_suspicious
+                    installation_timestamp          category
+                    architectures                   host.id
+                    installation_paths              host.platform_name
+                    versioning_scheme               host.hostname
+                    groups                          cid
+                    is_normalized                   host.os_version
+                    last_used_user_sid              host.machine_domain
+                    host.ou                         host.site_name
+                    host.country                    host.current_mac_address
+                    host.current_network_prefix     host.tags
+                    host.groups                     host.product_type_desc
+                    host.kernel_version             host.system_manufacturer
+                    host.internet_exposure          host.agent_version
+                    host.external_ip                host.aid
         limit -- The number of account IDs to return in this response. (Max: 100, default: 100)
                  Use with the offset parameter to manage pagination of results.
         offset -- An offset used with the limit parameter to manage pagination of results.
