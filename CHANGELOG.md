@@ -211,9 +211,8 @@
     - `overwatch_dashboard.py`
     - `tests/test_overwatch_dashboard.py`
 
-+ Added: Added 7 new operations to the __Case Management__ service collection.
++ Added: Added 6 new operations to the __Case Management__ service collection.
     - _queries_access_tags_get_v1_
-    - _entities_files_download_post_v1_
     - _entities_access_tags_get_v1_
     - _aggregates_access_tags_post_v1_
     - _entities_retrieve_rtr_recent_file_post_v1_
@@ -244,9 +243,6 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_cloud_security_detections.py`
 
-+ Fixed: Fixed _get\_credentials_ method in the __Cloud Snapshots__ service collection to use correct _GetCredentialsMixin0_ operation ID.
-    - `cloud_snapshots.py`
-
 + Added: Added 11 new operations for the __Data Protection Configuration__ service collection.
     - _entities_policy_precedence_post_v1_
     - _entities_local_application_get_
@@ -267,13 +263,21 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_data_protection_configuration.py`
 
++ Added: Added `properties.content_patterns_operator` as a supported filter field in the _queries_classification_get_v2_ operation within the __Data Protection Configuration__ service collection.
+    - `_endpoint/_data_protection_configuration.py`
+    - `data_protection_configuration.py`
+
++ Added: Added `id` as a supported parameter in _entities_policy_patch_v2_ and _entities_classification_patch_v2_ operations within the __Data Protection Configuration__ service collection.
+    - `_endpoint/_data_protection_configuration.py`
+    - `data_protection_configuration.py`
+
 + Removed: Removed deprecated _AggregateDetections_ and _QueryDetectionIdsByFilter_ operations from the __Falcon Complete Dashboard__ service collection.
     - `_endpoint/_falcon_complete_dashboard.py`
     - `_endpoint/deprecated/_falcon_complete_dashboard.py`
     - `falcon_complete_dashboard.py`
 
 
-+ Updated: Renamed _GetAWSAccounts_ to _GetAWSAccountsMixin0_ and _DeleteAWSAccounts_ to _DeleteAWSAccountsMixin0_ in the __Kubernetes Protection__ service collection.
++ Updated: Renamed _GetAWSAccounts_ to _GetAWSAccountsMixin0_ and _DeleteAWSAccounts_ to _DeleteAWSAccountsMixin0_ in the __Kubernetes Protection__ service collection. Old names are retained for backward compatibility.
     - `_endpoint/_kubernetes_protection.py`
     - `_endpoint/deprecated/_kubernetes_protection.py`
     - `kubernetes_protection.py`
@@ -320,6 +324,9 @@
     > Unit testing expanded to complete code coverage.
     - `tests/test_ngsiem.py`
 
++ Added: Added `update_available` and `parser_type` as fields to the _ListParsers_ operation within the __NGSIEM__ service collection.
+    - `_endpoint/_ngsiem.py`
+    - `ngsiem.py`
 
 + Added: New __Serverless Exports__ service collection with 4 operations.
     - _QueryExportJobsMixin0_
@@ -336,10 +343,8 @@
     - _combinedSupportedEvaluationExt_
     - `_endpoint/_spotlight_evaluation_logic.py`
     - `spotlight_evaluation_logic.py`
-
-+ Added: Added `update_available` and `parser_type` as query parameters to the _ListParsers_ operation within the __NGSIEM__ service collection.
-    - `_endpoint/_ngsiem.py`
-    - `ngsiem.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_spotlight_evaluation_logic.py`
 
 + Added: Added `cve_reachable` as an allowed filter field in the _get_vulnerabilities_ operation within the __Serverless Vulnerabilities__ service collection.
     - `_endpoint/_serverless_vulnerabilities.py`
@@ -360,6 +365,54 @@
     - `_endpoint/_hosts.py`
     - `_endpoint/deprecated/_hosts.py`
     - `hosts.py`
+
++ Added: Added `ai_related` and `ai_vulnerability_count` as allowed filter fields in the _AggregateImageCount_ operation within the __Container Images__ service collection.
+    - `container_images.py`
+
++ Added: Added `ai_related` and `index_digest` as allowed filter fields in the _GetCombinedImages_ operation within the __Container Images__ service collection.
+    - `container_images.py`
+
++ Added: Added `ai_related` and `ai_vulnerability_count` as allowed filter fields and `ai_vulnerabilities` and `source` as allowed sort fields in the _ReadCombinedImagesExport_ operation within the __Container Images__ service collection.
+    - `container_images.py`
+
++ Added: Added `image_digest`, `image_id`, `index_digest`, `first_seen`, and `source` as allowed filter fields in the _AggregateImageCountByBaseOS_ and _CombinedImageByVulnerabilityCount_ operations within the __Container Images__ service collection.
+    - `container_images.py`
+
++ Added: Added `arch`, `base_os`, `image_digest`, `image_id`, `index_digest`, `first_seen`, `source`, and `tag` as allowed filter fields in the _AggregateImageCountByState_ operation within the __Container Images__ service collection.
+    - `container_images.py`
+
++ Added: Added `arch`, `base_os`, `cid`, `image_digest`, `image_id`, `index_digest`, `first_seen`, and `source` as allowed filter fields in the _CombinedImageDetail_ operation within the __Container Images__ service collection.
+    - `container_images.py`
+
++ Added: Added `ai_related` and `index_digest` as allowed filter fields in the _ReadVulnerabilityCountByActivelyExploited_, _ReadVulnerabilityCountByCPSRating_, _ReadVulnerabilityCountByCVSSScore_, _ReadVulnerabilityCountBySeverity_, _ReadVulnerabilityCount_, and _ReadCombinedVulnerabilities_ operations within the __Container Vulnerabilities__ service collection.
+    - `container_vulnerabilities.py`
+
++ Added: Added `notification_group_id`, `credentials_url`, `credentials_domain`, `credentials_ip`, `domain`, `credential_status`, `bot.operating_system.hardware_id`, and `bot.bot_id` as allowed filter fields in the _QueryNotificationsExposedDataRecordsV1_ operation within the __Recon__ service collection.
+    - `recon.py`
+
++ Added: Added new _incrementUninstallToken_ operation to the __Sensor Update Policy__ service collection.
+    - `_endpoint/_sensor_update_policy.py`
+    - `_payload/__init__.py`
+    - `_payload/_sensor_update_policy.py`
+    - `sensor_update_policy.py`
+
++ Added: Added `add-rule-group` and `remove-rule-group` as allowed action values in the _performSensorUpdatePoliciesAction_ operation within the __Sensor Update Policy__ service collection.
+    - `sensor_update_policy.py`
+
++ Added: Added `risk_provider` parameter to the _getCombinedVulnerabilitiesMetadata_ operation within the __Spotlight Vulnerability Metadata__ service collection.
+    - `_endpoint/_spotlight_vulnerability_metadata.py`
+    - `_endpoint/deprecated/_spotlight_vulnerability_metadata.py`
+    - `spotlight_vulnerability_metadata.py`
+
+## Issues resolved
++ Fixed: Corrected HTTP Method from PATCH to POST for the _CreateActionsV1_ operation within the __Recon__ service collection.
+    - `recon.py`
+
++ Fixed: Swagger URLs within the __Cloud Azure Registration__ service collection.
+    - `cloud_azure_registration.py`
+
++ Fixed: Swagger URLs within the __Cloud OCI Registration__ service collection.
+    - `cloud_oci_registration.py`
 
 ## Other
 ---
