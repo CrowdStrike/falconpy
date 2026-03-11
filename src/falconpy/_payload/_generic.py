@@ -186,7 +186,7 @@ def installation_token_payload(passed_keywords: dict) -> dict:
     }
     """
     returned_payload = {}
-    if passed_keywords.get("expires_timestamp", None):
+    if "expires_timestamp" in passed_keywords:
         returned_payload["expires_timestamp"] = passed_keywords.get("expires_timestamp", None)
     if passed_keywords.get("label", None):
         returned_payload["label"] = passed_keywords.get("label", None)
