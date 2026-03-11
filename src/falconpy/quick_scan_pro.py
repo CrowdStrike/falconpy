@@ -71,7 +71,7 @@ class QuickScanPro(ServiceClass):
         file_name -- Name of the file uploaded. Defaults to "UploadedFile".
         password -- MULTIPART ONLY - Password for encrypted archives (use for multipart/form-data uploads).
         If 'scan' is true, the value is used for the scan just starting. String.
-        X_File_Password -- OCTET-STREAM ONLY - Password for encrypted archives (use for octet-stream uploads).
+        x_file_password -- OCTET-STREAM ONLY - Password for encrypted archives (use for octet-stream uploads).
         If 'scan' is true, the value is used for the scan just starting. String.
 
         This method only supports keywords for providing arguments.
@@ -84,8 +84,8 @@ class QuickScanPro(ServiceClass):
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/quick-scan-pro/UploadFileQuickScanPro
         """
         header_payload = json.loads(json.dumps(self.headers))
-        if kwargs.get("X_File_Password"):
-            header_payload["X-File-Password"] = kwargs.pop("X_File_Password")
+        if kwargs.get("x_file_password"):
+            header_payload["X-File-Password"] = kwargs.pop("x_file_password")
         method_args = ["file", "scan"]
         file_name = kwargs.get("file_name", "UploadedFile")
         kwargs = params_to_keywords(method_args,
