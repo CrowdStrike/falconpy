@@ -119,6 +119,8 @@ class TestNGSIEM:
             "GetParserTemplate": falcon.get_parser_template(ids="12345678"),
             "CreateParserFromTemplate": falcon.create_parser_from_template(repository="whatever", name="whatever", yaml_template=test_db),
             "CreateParserFromTemplateFail": falcon.create_parser_from_template(repository="whatever", name="whatever"),
+            "UpdateParserFromTemplate": falcon.update_parser_from_template(repository="whatever", ids="12345678", yaml_template=test_db),
+            "UpdateParserFromTemplateFail": falcon.update_parser_from_template(repository="whatever", ids="12345678"),
             "GetParser": falcon.get_parser(ids="12345678"),
             "CreateParser": falcon.create_parser(script=test_db, repository="whatever", fields_to_tag="bob,larry"),
             "UpdateParser": falcon.update_parser(script=test_db, repository="whatever", fields_to_tag="bob,larry", id="12345678"),

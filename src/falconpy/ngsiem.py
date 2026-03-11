@@ -1003,6 +1003,54 @@ class NGSIEM(ServiceClass):
             )
 
     @force_default(defaults=["parameters"], default_types=["dict"])
+    def update_parser_from_template(self: object,
+                                    parameters: dict = None,
+                                    **kwargs
+                                    ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Update Parser in NGSIEM from YAML Template.
+
+        Please note that name changes are not supported, but rather should be
+        created as a new parser.
+
+        Keyword arguments:
+        repository -- Name of repository. String.
+                      Allowed options: parsers-repository
+        ids -- ID of the parser. String.
+        yaml_template -- LogScale Parser YAML template content, see schema at https://schemas.humio.com/. Binary data.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: PATCH
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UpdateParserFromTemplate
+        """
+        yaml_data = kwargs.get("yaml_template", None)
+        file_extended = {}
+        if kwargs.get("repository", None):
+            file_extended["repository"] = kwargs.get("repository")
+        if kwargs.get("ids", None):
+            file_extended["ids"] = kwargs.get("ids")
+        if yaml_data:
+            kwargs.pop("yaml_data", None)
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="UpdateParserFromTemplate",
+                keywords=kwargs,
+                params=parameters,
+                data=file_extended,
+                files=[("yaml_template", (file_extended.get("ids", "parser"), yaml_data))]
+                )
+        else:
+            returned = generate_error_result("You must provide a YAML template for the parser to upload", code=400)
+
+        return returned
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
     def delete_parser(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
         """Delete Parser in NGSIEM.
 
@@ -1990,6 +2038,7 @@ class NGSIEM(ServiceClass):
     GetParser = get_parser
     CreateParser = create_parser
     UpdateParser = update_parser
+    UpdateParserFromTemplate = update_parser_from_template
     DeleteParser = delete_parser
     UpdateParserAutoUpdatePolicy = update_parser_auto_update_policy
     InstallParser = install_parser
