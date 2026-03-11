@@ -1576,7 +1576,7 @@ class NGSIEM(ServiceClass):
                 {
                     "status": "string"
                 }
-        status -- String.
+        status -- The status of the data connection. String.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         This method only supports keywords for providing arguments.
