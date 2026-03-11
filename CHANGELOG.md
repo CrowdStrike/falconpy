@@ -183,24 +183,20 @@
     - `cloud_policies.py`
 
 + Added: Added eight new operations to the __ASPM__ service collection.
-    - _post_/group/v2_
-    - _delete_/group/{ID:[0_9]+}_
-    - _post_/group/{ID:[0_9]+}/update_default_
-    - _get_/group/{ID:[0_9]+}/v2_
-    - _post_/group/{ID:[0_9]+}/v2_
-    - _get_/groups/hier/v2_
-    - _get_/groups/list/v2_
-    - _get_/users_v2_
+    - _PostGroupV2_
+    - _DeleteGroup_
+    - _UpdateDefaultGroup_
+    - _GetGroupV2_
+    - _UpdateGroup_
+    - _GetGroupHierarchy_
+    - _GetGroupsV2_
+    - _GetUsersV2_
     - `_endpoint/_aspm.py`
     - `_payload/__init__.py`
     - `_payload/_aspm.py`
     - `aspm.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_aspm.py`
-
-+ Updated: Renamed _RetrieveRelayInstances_ to _get_/executor_nodes/{ID:[0_9]+}/instances/csv_ in the __ASPM__ service collection.
-    - `_endpoint/_aspm.py`
-    - `aspm.py`
 
 + Deprecated: __Overwatch Dashboard__ service collection.
     - `__init__.py`
