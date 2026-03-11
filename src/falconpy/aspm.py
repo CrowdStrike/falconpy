@@ -829,7 +829,7 @@ class ASPM(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="get_/executor_nodes/{ID:[0_9]+}/instances/csv",
+            operation_id="RetrieveRelayInstances",
             path_id=target_id,
             body=body
             )
@@ -2607,7 +2607,7 @@ class ASPM(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="get_/users/v2",
+            operation_id="GetUsersV2",
             keywords=kwargs,
             params=parameters
             )
@@ -2650,7 +2650,7 @@ class ASPM(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="post_/group/v2",
+            operation_id="PostGroupV2",
             body=body,
             )
 
@@ -2681,7 +2681,7 @@ class ASPM(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="delete_/group/{ID:[0_9]+}",
+            operation_id="DeleteGroup",
             path_id=target_id
             )
 
@@ -2712,7 +2712,7 @@ class ASPM(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="post_/group/{ID:[0_9]+}/update_default",
+            operation_id="UpdateDefaultGroup",
             path_id=target_id
             )
 
@@ -2743,7 +2743,7 @@ class ASPM(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="get_/group/{ID:[0_9]+}/v2",
+            operation_id="GetGroupV2",
             path_id=target_id
             )
 
@@ -2797,7 +2797,7 @@ class ASPM(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="post_/group/{ID:[0_9]+}/v2",
+            operation_id="UpdateGroup",
             body=body,
             path_id=target_id
             )
@@ -2821,7 +2821,7 @@ class ASPM(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="get_/groups/hier/v2",
+            operation_id="GetGroupHierarchy",
             params=parameters,
             keywords=kwargs
             )
@@ -2846,7 +2846,7 @@ class ASPM(ServiceClass):
         return process_service_request(
             calling_object=self,
             endpoints=Endpoints,
-            operation_id="get_/groups/list/v2",
+            operation_id="GetGroupsV2",
             keywords=kwargs,
             params=parameters
             )

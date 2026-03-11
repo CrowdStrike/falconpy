@@ -568,7 +568,7 @@ _aspm_endpoints = [
     ]
   ],
   [
-    "get_/executor_nodes/{ID:[0_9]+}/instances/csv",
+    "RetrieveRelayInstances",
     "GET",
     "/aspm-api-gateway/api/v1/executor_nodes/{}/instances/csv",
     "Retrieve the relay instances in CSV format",
@@ -589,7 +589,7 @@ _aspm_endpoints = [
     ]
   ],
   [
-    "post_/group/v2",
+    "PostGroupV2",
     "POST",
     "/aspm-api-gateway/api/v1/group/v2",
     "Create group",
@@ -603,7 +603,7 @@ _aspm_endpoints = [
     ]
   ],
   [
-    "delete_/group/{ID:[0_9]+}",
+    "DeleteGroup",
     "DELETE",
     "/aspm-api-gateway/api/v1/group/{}",
     "",
@@ -620,7 +620,7 @@ _aspm_endpoints = [
     ]
   ],
   [
-    "post_/group/{ID:[0_9]+}/update_default",
+    "UpdateDefaultGroup",
     "POST",
     "/aspm-api-gateway/api/v1/group/{}/update_default",
     "Update default group",
@@ -637,7 +637,7 @@ _aspm_endpoints = [
     ]
   ],
   [
-    "get_/group/{ID:[0_9]+}/v2",
+    "GetGroupV2",
     "GET",
     "/aspm-api-gateway/api/v1/group/{}/v2",
     "Get group details",
@@ -654,7 +654,7 @@ _aspm_endpoints = [
     ]
   ],
   [
-    "post_/group/{ID:[0_9]+}/v2",
+    "UpdateGroup",
     "POST",
     "/aspm-api-gateway/api/v1/group/{}/v2",
     "Update group",
@@ -676,7 +676,7 @@ _aspm_endpoints = [
     ]
   ],
   [
-    "get_/groups/hier/v2",
+    "GetGroupHierarchy",
     "GET",
     "/aspm-api-gateway/api/v1/groups/hier/v2",
     "Get group hierarchy",
@@ -684,7 +684,7 @@ _aspm_endpoints = [
     []
   ],
   [
-    "get_/groups/list/v2",
+    "GetGroupsV2",
     "GET",
     "/aspm-api-gateway/api/v1/groups/list/v2",
     "",
@@ -1332,7 +1332,7 @@ _aspm_endpoints = [
     ]
   ],
   [
-    "get_/users/v2",
+    "GetUsersV2",
     "GET",
     "/aspm-api-gateway/api/v1/users/v2",
     "List users",
