@@ -657,7 +657,7 @@ _cloud_policies_endpoints = [
       },
       {
         "type": "string",
-        "description": "Field to sort on. Sortable fields: \n\t\n*rule_auto_remediable*\t\n*rule_category*\t\n "
+        "description": "Field to sort on. Sortable fields: \n\t\n*rule_auto_remediable*\t\n*rule_category*\t\n"
         "*rule_cloneable*\t\n*rule_compliance_benchmark*\t\n*rule_compliance_benchmark_uuid*\t\n*rule_compliance_framew "
         "ork*\t\n*rule_control_requirement*\t\n*rule_control_section*\t\n*rule_created_at*\t\n*rule_description*\t\n*ru "
         "le_domain*\t\n*rule_mitre_tactic*\t\n*rule_mitre_technique*\t\n*rule_name*\t\n*rule_origin*\t\n*rule_parent_uu "
@@ -678,7 +678,7 @@ _cloud_policies_endpoints = [
     [
       {
         "type": "string",
-        "description": "FQL expression to filter suppression rules. The allowed properties are: \n\t\n*name*\t "
+        "description": "FQL expression to filter suppression rules. The allowed properties are: \n\t\n*name*\t"
         "\n*description*\t\n*domain*\t\n*subdomain*\t\n*suppression_expiration_date*\t\n*suppression_reason*\t\n*create "
         "d_by*\t\n*created_at*\t\n*last_modified_at*\t\n*disabled*\t\n*groups*\t\n",
         "name": "filter",
