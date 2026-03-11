@@ -85,8 +85,7 @@ class CloudOCIRegistration(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-oci-registration/cloud-security-registration-oci-get-account
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-get-account
         """
         return process_service_request(
             calling_object=self,
@@ -118,8 +117,7 @@ class CloudOCIRegistration(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-oci-registration/cloud-security-registration-oci-rotate-key
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-rotate-key
         """
         if not body:
             body = cloud_oci_refresh_payload(kwargs)
@@ -162,8 +160,7 @@ class CloudOCIRegistration(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-oci-registration/cloud-security-registration-oci-validate-tenancy
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-validate-tenancy
         """
         if not body:
             body = cloud_oci_validate_payload(kwargs)
@@ -222,8 +219,7 @@ class CloudOCIRegistration(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-oci-registration/cloud-security-registration-oci-create-account
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-create-account
         """
         if not body:
             body = cloud_oci_create_payload(kwargs)
@@ -286,8 +282,7 @@ class CloudOCIRegistration(ServiceClass):
         HTTP Method: PATCH
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-oci-registration/cloud-security-registration-oci-update-account
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-update-account
         """
         if not body:
             body = cloud_oci_create_payload(kwargs)
@@ -319,8 +314,7 @@ class CloudOCIRegistration(ServiceClass):
         HTTP Method: DELETE
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-oci-registration/cloud-security-registration-oci-delete-account
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-delete-account
         """
         return process_service_request(
             calling_object=self,
@@ -356,8 +350,7 @@ class CloudOCIRegistration(ServiceClass):
         HTTP Method: POST
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#
-            /cloud-oci-registration/cloud-security-registration-oci-download-script
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/cloud-oci-registration/cloud-security-registration-oci-download-script
         """
         if not body:
             body = cloud_oci_refresh_payload(kwargs)
