@@ -183,7 +183,6 @@ from .mssp import FlightControl
 from .ngsiem import NGSIEM
 from .oauth2 import OAuth2
 from .ods import ODS
-from .overwatch_dashboard import OverwatchDashboard
 from .prevention_policy import PreventionPolicy, PreventionPolicies
 from .quarantine import Quarantine
 from .quick_scan import QuickScan
@@ -264,7 +263,7 @@ __all__ = [
     "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch", "ITAutomation", "F4IT",
     "CloudSecurityCompliance", "CaseManagement", "SaasSecurity", "DataProtectionConfiguration",
     "CorrelationRulesAdmin", "CloudSecurityDetections", "CloudPolicies", "CloudGoogleCloudRegistration",
-    "CloudSecurity", "AdmissionControlPolicies", "OverwatchDashboard",
+    "CloudSecurity", "AdmissionControlPolicies",
     "SpotlightVulnerabilityMetadata", "ServerlessExports", "ServerlessVulnerabilities"
     ]
 """

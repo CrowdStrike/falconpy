@@ -64,7 +64,6 @@ from .deprecated import _falconx_sandbox_deprecated
 from .deprecated import _host_migration_deprecated
 from .deprecated import _kubernetes_protection_deprecated
 from .deprecated import _ngsiem_deprecated
-from .deprecated import _overwatch_dashboard_deprecated
 from .deprecated import _quick_scan_deprecated
 from .deprecated import _quick_scan_pro_deprecated
 from .deprecated import _recon_deprecated
@@ -339,7 +338,6 @@ deprecated_endpoints.extend(_unidentified_containers_deprecated)
 deprecated_endpoints.extend(_user_management_deprecated)
 deprecated_endpoints.extend(_workflows_deprecated)
 deprecated_endpoints.extend(_zero_trust_assessment_deprecated)
-deprecated_endpoints.extend(_overwatch_dashboard_deprecated)
 deprecated_endpoints.extend(_serverless_vulnerabilities_deprecated)
 deprecated_endpoints.extend(_spotlight_vulnerability_metadata_deprecated)
 
