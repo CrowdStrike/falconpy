@@ -546,7 +546,7 @@ _filevantage_endpoints = [
         "directory monitoring:\n\n * watch_delete_directory_changes\n\n * watch_create_directory_changes\n\n * "
         "watch_rename_directory_changes\n\n * watch_attributes_directory_changes (macOS is not supported at this "
         "time)\n\n * watch_permissions_directory_changes (macOS is not supported at this time)\n\nFile system file "
-        "monitoring:\n\n * watch_rename_file_changes\n\n * watch_write_file_changes\n\n * watch_create_file_changes\n\n "
+        "monitoring:\n\n * watch_rename_file_changes\n\n * watch_write_file_changes\n\n * watch_create_file_changes\n\n"
         " * watch_delete_file_changes\n\n * watch_attributes_file_changes (macOS is not supported at this time)\n\n * "
         "watch_permissions_file_changes (macOS is not supported at this time)\n\nWindows registry key and value "
         "monitoring: \n\n * watch_create_key_changes\n\n * watch_delete_key_changes\n\n * watch_rename_key_changes\n\n "
