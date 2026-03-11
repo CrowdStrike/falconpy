@@ -728,6 +728,7 @@ class CaseManagement(ServiceClass):
 
         Keyword arguments:
         ids -- Resource IDs. String or list of strings.
+        with_has_access -- Evaluate FGAC and return has_access property. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.
@@ -1313,6 +1314,7 @@ class CaseManagement(ServiceClass):
 
         Keyword arguments:
         ids -- Resource IDs. String or list of strings.
+        with_has_access -- Evaluate FGAC and return has_access property. Boolean.
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'ids'.

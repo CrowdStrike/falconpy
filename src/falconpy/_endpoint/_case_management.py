@@ -386,6 +386,12 @@ _case_management_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "boolean",
+        "description": "Evaluate FGAC and return has_access property",
+        "name": "with_has_access",
+        "in": "query"
       }
     ]
   ],
@@ -739,6 +745,12 @@ _case_management_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "boolean",
+        "description": "Evaluate FGAC and return has_access property",
+        "name": "with_has_access",
+        "in": "query"
       }
     ]
   ],
