@@ -614,7 +614,7 @@ class CorrelationRules(ServiceClass):
         Keyword arguments:
         filter -- FQL query specifying the filter parameters. FQL formatted string.
                   Supported filters: customer_id, user_id, user_uuid, status, name, created_on,
-                                     last_updated_on
+                                     last_updated_on, state, version, rule_id, executor_rule_id
                   Supported range filters: created_on, last_updated_on
         q -- Match query criteria, which includes all the filter string fields. String.
         sort -- Rule property to sort on. FQL formatted string.
