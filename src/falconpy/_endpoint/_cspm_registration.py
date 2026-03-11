@@ -1330,7 +1330,7 @@ _cspm_registration_endpoints = [
       {
         "type": "string",
         "description": "use_current_scan_ids - *use this to get records for latest scans (ignored when "
-        "next_token is set)*\naccount_name\naccount_id\nagent_id\nattack_types\nazure_subscription_id\ncloud_provider\n "
+        "next_token is set)*\naccount_name\naccount_id\nagent_id\nattack_types\nazure_subscription_id\ncloud_provider\n"
         "cloud_service_keyword\ncustom_policy_id\nis_managed\npolicy_id\npolicy_type\nresource_id\nregion\nstatus\nscan "
         "_time\nseverity\nseverity_string\n",
         "name": "filter",
