@@ -43,8 +43,7 @@ from ._util import (
     force_default,
     process_service_request,
     handle_single_argument,
-    generate_error_result,
-    args_to_params
+    generate_error_result
     )
 from ._payload import (
     simple_action_parameter,
@@ -875,24 +874,14 @@ class Workflows(ServiceClass):
         if not body:
             body = generic_payload_list(submitted_keywords=kwargs, payload_value="ids")
 
-        _allowed_actions = ['enable', 'disable', 'cancel']
-        operation_id = "WorkflowDefinitionsAction"
-        parameter_payload = args_to_params(parameters, kwargs, Endpoints, operation_id)
-        action_name = parameter_payload.get("action_name", "Not Specified")
-        # Only process allowed actions
-        if action_name.lower() in _allowed_actions:
-            returned = process_service_request(
-                calling_object=self,
-                endpoints=Endpoints,
-                operation_id=operation_id,
-                body=body,
-                keywords=kwargs,
-                params=parameters,
-                body_validator={"ids": list} if self.validate_payloads else None,
-                body_required=["ids"] if self.validate_payloads else None
-                )
-        else:
-            returned = generate_error_result("Invalid value specified for action_name parameter.")
+        returned = process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="WorkflowDefinitionsAction",
+            body=body,
+            keywords=kwargs,
+            params=parameters,
+            )
 
         return returned
 
