@@ -63,6 +63,7 @@ from ._ioa_exclusions import _ioa_exclusions_endpoints
 from ._ioc import _ioc_endpoints
 from ._iocs import _iocs_endpoints
 from ._ml_exclusions import _ml_exclusions_endpoints
+from ._mssp import _mssp_endpoints
 from ._ods import _ods_endpoints
 from ._ngsiem import _ngsiem_endpoints
 from ._real_time_response import _real_time_response_endpoints
@@ -106,6 +107,7 @@ _ioa_exclusions_deprecated = _ioa_exclusions_endpoints
 _ioc_deprecated = _ioc_endpoints
 _iocs_deprecated = _iocs_endpoints
 _ml_exclusions_deprecated = _ml_exclusions_endpoints
+_mssp_deprecated = _mssp_endpoints
 _ods_deprecated = _ods_endpoints
 _ngsiem_deprecated = _ngsiem_endpoints
 _real_time_response_deprecated = _real_time_response_endpoints

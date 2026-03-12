@@ -51,6 +51,7 @@ from .deprecated import _ioa_exclusions_deprecated
 from .deprecated import _ioc_deprecated
 from .deprecated import _iocs_deprecated
 from .deprecated import _ml_exclusions_deprecated
+from .deprecated import _mssp_deprecated
 from .deprecated import _ods_deprecated
 from .deprecated import _real_time_response_deprecated
 from .deprecated import _real_time_response_admin_deprecated
@@ -310,6 +311,7 @@ deprecated_endpoints.extend(_ioa_exclusions_deprecated)
 deprecated_endpoints.extend(_ioc_deprecated)
 deprecated_endpoints.extend(_iocs_deprecated)
 deprecated_endpoints.extend(_ml_exclusions_deprecated)
+deprecated_endpoints.extend(_mssp_deprecated)
 deprecated_endpoints.extend(_ods_deprecated)
 deprecated_endpoints.extend(_ngsiem_deprecated)
 deprecated_endpoints.extend(_real_time_response_deprecated)
