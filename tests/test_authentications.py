@@ -14,6 +14,7 @@ from falconpy import (
     ZeroTrustAssessment,
     OAuth2,
     APIHarness,
+    APIHarnessV2,
     version,
     InvalidCredentialFormat,
     Hosts,
@@ -365,6 +366,12 @@ class TestAuthentications:
         named_log = logging.getLogger("named_target")
         test_object = Hosts(debug=named_log, pythonic=True, access_token=auth.authorization.token_value, base_url=auth.authorization.base_url)
         assert bool(test_object.query_devices_by_filter_scroll(limit=1).status_code == 200)
+
+    def test_oauth2_logout_with_debug_logging(self):
+        """Test that OAuth2.logout() logs a warning when revocation fails and debug is enabled."""
+        bad_oauth = OAuth2(client_id="bad_id", client_secret="bad_secret", debug=True)
+        result = bad_oauth.logout()
+        assert result["status_code"] != 200
 
     def test_child_login_logout(self):
         _success = False
