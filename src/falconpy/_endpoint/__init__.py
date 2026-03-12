@@ -22,6 +22,7 @@
 from typing import List, Any
 from .deprecated import _admission_control_policies_deprecated
 from .deprecated import _alerts_deprecated
+from .deprecated import _aspm_deprecated
 from .deprecated import _case_management_deprecated
 from .deprecated import _cloud_aws_registration_deprecated
 from .deprecated import _cloud_azure_registration_deprecated
@@ -275,6 +276,7 @@ api_endpoints.extend(_zero_trust_assessment_endpoints)
 deprecated_endpoints = []
 deprecated_endpoints.extend(_admission_control_policies_deprecated)
 deprecated_endpoints.extend(_alerts_deprecated)
+deprecated_endpoints.extend(_aspm_deprecated)
 deprecated_endpoints.extend(_case_management_deprecated)
 deprecated_endpoints.extend(_cloud_aws_registration_deprecated)
 deprecated_endpoints.extend(_cloud_azure_registration_deprecated)
