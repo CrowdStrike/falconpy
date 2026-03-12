@@ -420,9 +420,9 @@ _correlation_rules_endpoints = [
     "queries.rules.get.v2",
     "GET",
     "/correlation-rules/queries/rules/v2",
-    "Find all rule version IDs matching the query and filter.\nSupported filters: "
-    "customer_id,user_id,user_uuid,status,name,created_on,last_updated_on,state,version,rule_id\nSupported range "
-    "filters: created_on,last_updated_on",
+    "Find all rule version IDs matching the query and filter.\nSupported filters: customer_id,user_id,user_uui "
+    "d,status,name,created_on,last_updated_on,state,version,rule_id,executor_rule_id\nSupported range filters: "
+    "created_on,last_updated_on",
     "correlation_rules",
     [
       {
