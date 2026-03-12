@@ -442,7 +442,6 @@
 + Fixed: Swagger URLs within the __Cloud OCI Registration__ service collection.
     - `cloud_oci_registration.py`
 
-## Other
 + Fixed: Added missing `id` parameter to _entities_policy_patch_v2_ and _entities_classification_patch_v2_ operations within the __Data Protection Configuration__ service collection.
     - `_endpoint/_data_protection_configuration.py`
     - `data_protection_configuration.py`
@@ -455,6 +454,8 @@
 
 + Fixed: Added validation to the `base_url` setter in `InterfaceConfiguration` to prevent `None`, empty strings, or non-string values from overwriting the base URL.
     - `_auth_object/_interface_config.py`
+
+## Other
 
 ---
 
