@@ -69,6 +69,7 @@ from ._ngsiem import _ngsiem_endpoints
 from ._real_time_response import _real_time_response_endpoints
 from ._real_time_response_admin import _real_time_response_admin_endpoints
 from ._report_executions import _report_executions_endpoints
+from ._sample_uploads import _sample_uploads_endpoints
 from ._scheduled_reports import _scheduled_reports_endpoints
 from ._user_management import _user_management_endpoints
 from ._workflows import _workflows_endpoints
@@ -113,6 +114,7 @@ _ngsiem_deprecated = _ngsiem_endpoints
 _real_time_response_deprecated = _real_time_response_endpoints
 _real_time_response_admin_deprecated = _real_time_response_admin_endpoints
 _report_executions_deprecated = _report_executions_endpoints
+_sample_uploads_deprecated = _sample_uploads_endpoints
 _scheduled_reports_deprecated = _scheduled_reports_endpoints
 _user_management_deprecated = _user_management_endpoints
 _workflows_deprecated = _workflows_endpoints

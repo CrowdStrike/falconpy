@@ -56,6 +56,7 @@ from .deprecated import _ods_deprecated
 from .deprecated import _real_time_response_deprecated
 from .deprecated import _real_time_response_admin_deprecated
 from .deprecated import _report_executions_deprecated
+from .deprecated import _sample_uploads_deprecated
 from .deprecated import _scheduled_reports_deprecated
 from .deprecated import _workflows_deprecated
 from .deprecated import _certificate_based_exclusions_deprecated
@@ -317,6 +318,7 @@ deprecated_endpoints.extend(_ngsiem_deprecated)
 deprecated_endpoints.extend(_real_time_response_deprecated)
 deprecated_endpoints.extend(_real_time_response_admin_deprecated)
 deprecated_endpoints.extend(_report_executions_deprecated)
+deprecated_endpoints.extend(_sample_uploads_deprecated)
 deprecated_endpoints.extend(_scheduled_reports_deprecated)
 deprecated_endpoints.extend(_user_management_deprecated)
 deprecated_endpoints.extend(_workflows_deprecated)
