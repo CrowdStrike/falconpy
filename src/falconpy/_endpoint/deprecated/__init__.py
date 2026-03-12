@@ -48,6 +48,7 @@ from ._custom_ioa import _custom_ioa_endpoints
 from ._correlation_rules import _correlation_rules_endpoints
 from ._correlation_rules_admin import _correlation_rules_admin_endpoints
 from ._data_protection_configuration import _data_protection_configuration_endpoints
+from ._detects import _detects_endpoints
 from ._device_content import _device_content_endpoints
 from ._discover import _discover_endpoints
 from ._exposure_management import _exposure_management_endpoints
@@ -88,6 +89,7 @@ _cspm_registration_deprecated = _cspm_registration_endpoints
 _correlation_rules_deprecated = _correlation_rules_endpoints
 _custom_ioa_deprecated = _custom_ioa_endpoints
 _data_protection_configuration_deprecated = _data_protection_configuration_endpoints
+_detects_deprecated = _detects_endpoints
 _device_content_deprecated = _device_content_endpoints
 _discover_deprecated = _discover_endpoints
 _exposure_management_deprecated = _exposure_management_endpoints
