@@ -150,10 +150,6 @@
     - `_endpoint/_cloud_security_assets.py`
     - `_endpoint/deprecated/_cloud_security_assets.py`
 
-+ Removed: Removed deprecated _GetCSPMCGPAccount_ operation from the __CSPM Registration__ service collection. The corrected _GetCSPMGCPAccount_ operation is now the sole endpoint.
-    - `_endpoint/_cspm_registration.py`
-    - `cspm_registration.py`
-
 + Added: Added `organization_ids` parameter to the _cloud_registration_aws_get_accounts_ operation within the __Cloud AWS Registration__ service collection.
     - `_endpoint/_cloud_aws_registration.py`
     - `_endpoint/deprecated/_cloud_aws_registration.py`
@@ -221,9 +217,6 @@
     - `case_management.py`
     > Unit testing expanded to complete code coverage.
     - `tests/test_case_management.py`
-
-+ Fixed: Fixed three incorrect aliases in the __Case Management__ service collection. The `aggregates_notification_groups_post_v1` and `aggregates_notification_groups_post_v2` aliases were incorrectly pointing to the entities GET methods instead of the aggregation POST methods, and `entities_notification_groups_get_v2` was pointing to the v1 method instead of v2.
-    - `case_management.py`
 
 + Added: Added new _cloud_registration_gcp_get_entities_ operation to the __Cloud Google Cloud Registration__ service collection.
     - `_endpoint/_cloud_google_cloud_registration.py`
@@ -446,7 +439,7 @@
     - `_endpoint/_data_protection_configuration.py`
     - `data_protection_configuration.py`
 
-+ Fixed: Fixed `expires_timestamp` truthiness check in the __Installation Tokens__ payload builder that prevented `None` from being serialized as JSON `null`. Closes [#1431](https://github.com/CrowdStrike/falconpy/issues/1431).
++ Fixed: Fixed `expires_timestamp` truthiness check in the __Installation Tokens__ payload builder that prevented `None` from being serialized as JSON `null`. Closes #1431.
     - `_payload/_generic.py`
 
 + Fixed: Fixed route URL formatting for __Falcon Container__ operations that use named `{uuid}` path placeholders. Positional `.format()` was replaced with keyword `.format(uuid=...)` to correctly substitute the UUID in routes like `/image-assessment/entities/reports/v2/{uuid}`.
@@ -454,6 +447,9 @@
 
 + Fixed: Added validation to the `base_url` setter in `InterfaceConfiguration` to prevent `None`, empty strings, or non-string values from overwriting the base URL.
     - `_auth_object/_interface_config.py`
+
++ Fixed: Fixed three incorrect aliases in the __Case Management__ service collection. The `aggregates_notification_groups_post_v1` and `aggregates_notification_groups_post_v2` aliases were incorrectly pointing to the entities GET methods instead of the aggregation POST methods, and `entities_notification_groups_get_v2` was pointing to the v1 method instead of v2.
+    - `case_management.py`
 
 ## Other
 
