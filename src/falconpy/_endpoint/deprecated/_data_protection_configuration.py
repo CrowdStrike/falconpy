@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library.
+"""Internal API endpoint constant library (deprecated operations).
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -35,10 +35,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+# pylint: disable=C0302
 
 _data_protection_configuration_endpoints = [
   [
-    "entities_classification_get_v2",
+    "entities.classification.get.v2",
     "GET",
     "/data-protection/entities/classifications/v2",
     "Gets the classifications that match the provided ids",
@@ -60,7 +61,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_classification_post_v2",
+    "entities.classification.post.v2",
     "POST",
     "/data-protection/entities/classifications/v2",
     "Create classifications",
@@ -74,7 +75,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_classification_patch_v2",
+    "entities.classification.patch.v2",
     "PATCH",
     "/data-protection/entities/classifications/v2",
     "Update classifications",
@@ -88,7 +89,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_classification_delete_v2",
+    "entities.classification.delete.v2",
     "DELETE",
     "/data-protection/entities/classifications/v2",
     "Deletes classifications that match the provided ids",
@@ -110,7 +111,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_cloud_application_get",
+    "entities.cloud-application.get",
     "GET",
     "/data-protection/entities/cloud-applications/v1",
     "Get a particular cloud-application",
@@ -130,7 +131,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_cloud_application_create",
+    "entities.cloud-application.create",
     "POST",
     "/data-protection/entities/cloud-applications/v1",
     "Persist the given cloud application for the provided entity instance",
@@ -145,7 +146,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_cloud_application_patch",
+    "entities.cloud-application.patch",
     "PATCH",
     "/data-protection/entities/cloud-applications/v1",
     "Update a cloud application",
@@ -167,7 +168,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_cloud_application_delete",
+    "entities.cloud-application.delete",
     "DELETE",
     "/data-protection/entities/cloud-applications/v1",
     "Delete cloud application",
@@ -187,7 +188,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_content_pattern_get",
+    "entities.content-pattern.get",
     "GET",
     "/data-protection/entities/content-patterns/v1",
     "Get a particular content-pattern(s)",
@@ -207,7 +208,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_content_pattern_create",
+    "entities.content-pattern.create",
     "POST",
     "/data-protection/entities/content-patterns/v1",
     "Persist the given content pattern for the provided entity instance",
@@ -222,7 +223,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_content_pattern_patch",
+    "entities.content-pattern.patch",
     "PATCH",
     "/data-protection/entities/content-patterns/v1",
     "Update a content pattern",
@@ -244,7 +245,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_content_pattern_delete",
+    "entities.content-pattern.delete",
     "DELETE",
     "/data-protection/entities/content-patterns/v1",
     "Delete content pattern",
@@ -264,7 +265,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_policy_precedence_post_v1",
+    "entities.policy.precedence.post.v1",
     "POST",
     "/data-protection/entities/data-protection-precedence/v1",
     "Update Policy Precedence",
@@ -278,7 +279,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_enterprise_account_get",
+    "entities.enterprise-account.get",
     "GET",
     "/data-protection/entities/enterprise-accounts/v1",
     "Get a particular enterprise-account(s)",
@@ -298,7 +299,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_enterprise_account_create",
+    "entities.enterprise-account.create",
     "POST",
     "/data-protection/entities/enterprise-accounts/v1",
     "Persist the given enterprise account for the provided entity instance",
@@ -313,7 +314,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_enterprise_account_patch",
+    "entities.enterprise-account.patch",
     "PATCH",
     "/data-protection/entities/enterprise-accounts/v1",
     "Update a enterprise account",
@@ -335,7 +336,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_enterprise_account_delete",
+    "entities.enterprise-account.delete",
     "DELETE",
     "/data-protection/entities/enterprise-accounts/v1",
     "Delete enterprise account",
@@ -355,7 +356,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_file_type_get",
+    "entities.file-type.get",
     "GET",
     "/data-protection/entities/file-types/v1",
     "Get a particular file-type",
@@ -375,7 +376,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_sensitivity_label_get_v2",
+    "entities.sensitivity-label.get-v2",
     "GET",
     "/data-protection/entities/labels/v2",
     "Get sensitivity label matching the IDs (V2)",
@@ -395,7 +396,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_sensitivity_label_create_v2",
+    "entities.sensitivity-label.create-v2",
     "POST",
     "/data-protection/entities/labels/v2",
     "Create new sensitivity label (V2)",
@@ -410,7 +411,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_sensitivity_label_delete_v2",
+    "entities.sensitivity-label.delete-v2",
     "DELETE",
     "/data-protection/entities/labels/v2",
     "Delete sensitivity labels matching the IDs (V2)",
@@ -430,7 +431,161 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_policy_get_v2",
+    "entities.local-application-group.get",
+    "GET",
+    "/data-protection/entities/local-application-groups/v1",
+    "Get particular local application groups",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The local application group id(s) to get.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.local-application-group.create",
+    "POST",
+    "/data-protection/entities/local-application-groups/v1",
+    "Persist the given local application group for the provided entity instance",
+    "data_protection_configuration",
+    [
+      {
+        "description": "The local-application group definition to create",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.local-application-group.patch",
+    "PATCH",
+    "/data-protection/entities/local-application-groups/v1",
+    "Update a local application group",
+    "data_protection_configuration",
+    [
+      {
+        "type": "string",
+        "description": "The local app id to update.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "description": "The new local-application group definition",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.local-application-group.delete",
+    "DELETE",
+    "/data-protection/entities/local-application-groups/v1",
+    "Soft Delete local application. The application won't be visible anymore, but will still be in the database",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The id of the local application group to delete.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.local-application.get",
+    "GET",
+    "/data-protection/entities/local-applications/v1",
+    "Get a particular local application",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The local application id(s) to get.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.local-application.create",
+    "POST",
+    "/data-protection/entities/local-applications/v1",
+    "Persist the given local application for the provided entity instance",
+    "data_protection_configuration",
+    [
+      {
+        "description": "The local-application definition to create",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.local-application.patch",
+    "PATCH",
+    "/data-protection/entities/local-applications/v1",
+    "Update a local application",
+    "data_protection_configuration",
+    [
+      {
+        "type": "string",
+        "description": "The local app id to update.",
+        "name": "id",
+        "in": "query",
+        "required": True
+      },
+      {
+        "description": "The new local-application definition",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.local-application.delete",
+    "DELETE",
+    "/data-protection/entities/local-applications/v1",
+    "Soft Delete local application. The application wont be visible anymore, but will still be in the database",
+    "data_protection_configuration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "The id of the local application to delete.",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.policy.get.v2",
     "GET",
     "/data-protection/entities/policies/v2",
     "Gets policies that match the provided ids",
@@ -452,7 +607,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_policy_post_v2",
+    "entities.policy.post.v2",
     "POST",
     "/data-protection/entities/policies/v2",
     "Create policies",
@@ -473,7 +628,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_policy_patch_v2",
+    "entities.policy.patch.v2",
     "PATCH",
     "/data-protection/entities/policies/v2",
     "Update policies",
@@ -494,7 +649,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_policy_delete_v2",
+    "entities.policy.delete.v2",
     "DELETE",
     "/data-protection/entities/policies/v2",
     "Deletes policies that match the provided ids",
@@ -523,7 +678,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_web_location_get_v2",
+    "entities.web-location.get-v2",
     "GET",
     "/data-protection/entities/web-locations/v2",
     "Get web-location entities matching the provided ID(s)",
@@ -543,7 +698,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_web_location_create_v2",
+    "entities.web-location.create-v2",
     "POST",
     "/data-protection/entities/web-locations/v2",
     "Persist the given web-locations",
@@ -558,7 +713,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_web_location_patch_v2",
+    "entities.web-location.patch-v2",
     "PATCH",
     "/data-protection/entities/web-locations/v2",
     "Update a web-location",
@@ -580,7 +735,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "entities_web_location_delete_v2",
+    "entities.web-location.delete-v2",
     "DELETE",
     "/data-protection/entities/web-locations/v2",
     "Delete web-location",
@@ -600,7 +755,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries_classification_get_v2",
+    "queries.classification.get.v2",
     "GET",
     "/data-protection/queries/classifications/v2",
     "Search for classifications that match the provided criteria",
@@ -608,9 +763,10 @@ _data_protection_configuration_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter results by specific attributes , allowed attributes are [modified_at "
-        "properties.content_patterns properties.evidence_duplication_enabled properties.sensitivity_labels created_at "
-        "properties.file_types properties.protection_mode properties.web_sources name created_by modified_by]",
+        "description": "Filter results by specific attributes , allowed attributes are [name created_at "
+        "modified_at properties.content_patterns properties.content_patterns_operator properties.file_types "
+        "properties.sensitivity_labels created_by modified_by properties.evidence_duplication_enabled "
+        "properties.protection_mode properties.web_sources]",
         "name": "filter",
         "in": "query"
       },
@@ -640,7 +796,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries_cloud_application_get_v2",
+    "queries.cloud-application.get-v2",
     "GET",
     "/data-protection/queries/cloud-applications/v2",
     "Get all cloud-application IDs matching the query with filter",
@@ -680,7 +836,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries_content_pattern_get_v2",
+    "queries.content-pattern.get-v2",
     "GET",
     "/data-protection/queries/content-patterns/v2",
     "Get all content-pattern IDs matching the query with filter",
@@ -718,7 +874,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries_enterprise_account_get_v2",
+    "queries.enterprise-account.get-v2",
     "GET",
     "/data-protection/queries/enterprise-accounts/v2",
     "Get all enterprise-account IDs matching the query with filter",
@@ -756,7 +912,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries_file_type_get_v2",
+    "queries.file-type.get-v2",
     "GET",
     "/data-protection/queries/file-types/v2",
     "Get all file-type IDs matching the query with filter",
@@ -792,7 +948,7 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries_sensitivity_label_get_v2",
+    "queries.sensitivity-label.get-v2",
     "GET",
     "/data-protection/queries/labels/v2",
     "Get all sensitivity label IDs matching the query with filter",
@@ -830,7 +986,69 @@ _data_protection_configuration_endpoints = [
     ]
   ],
   [
-    "queries_policy_get_v2",
+    "queries.local-application-group.get",
+    "GET",
+    "/data-protection/queries/local-application-groups/v1",
+    "Get all local application group IDs matching the query with filter",
+    "data_protection_configuration",
+    [
+      {
+        "type": "string",
+        "description": "Optional filter for searching local application group. Allowed filters are 'name' "
+        "(string), is_deleted (boolean), platform (string), 'created_at' and 'updated_at'",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "The number of items to return in this response (default: 100, max: 500). Use with the "
+        "offset parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from. Use with the limit parameter to manage "
+        "pagination of results.",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "queries.local-application.get",
+    "GET",
+    "/data-protection/queries/local-applications/v1",
+    "Get all local-application IDs matching the query with filter",
+    "data_protection_configuration",
+    [
+      {
+        "type": "string",
+        "description": "Optional filter for searching local applications. Allowed filters are 'name' (string), "
+        "is_deleted (boolean), 'created_at' and 'updated_at'",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "default": 100,
+        "description": "The number of items to return in this response (default: 100, max: 500). Use with the "
+        "offset parameter to manage pagination of results.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "integer",
+        "description": "The offset to start retrieving records from. Use with the limit parameter to manage "
+        "pagination of results.",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "queries.policy.get.v2",
     "GET",
     "/data-protection/queries/policies/v2",
     "Search for policies that match the provided criteria",
@@ -845,25 +1063,23 @@ _data_protection_configuration_endpoints = [
       },
       {
         "type": "string",
-        "description": "Filter results by specific attributes , allowed attributes are "
-        "[properties.unsupported_browsers_action properties.evidence_download_enabled "
-        "properties.enable_network_inspection properties.be_paste_clipboard_min_size_unit "
-        "properties.be_paste_clipboard_over_size_behaviour_block description modified_at "
-        "properties.enable_clipboard_inspection properties.block_notifications properties.custom_allow_notification "
-        "properties.evidence_storage_free_disk_perc name properties.inspection_depth properties.block_all_data_access "
-        "properties.evidence_duplication_enabled_default properties.classifications is_default "
-        "properties.min_confidence_level properties.allow_notifications properties.be_exclude_domains "
-        "properties.besplash_message_source properties.be_paste_clipboard_min_size "
-        "properties.be_paste_clipboard_max_size_unit properties.max_file_size_to_inspect is_enabled "
-        "properties.enable_content_inspection properties.max_file_size_to_inspect_unit "
-        "properties.browsers_without_active_extension properties.besplash_enabled "
-        "properties.be_paste_clipboard_max_size properties.evidence_storage_max_size created_by "
-        "properties.similarity_detection properties.similarity_threshold created_at modified_by "
-        "properties.custom_block_notification properties.enable_end_user_notifications_unsupported_browser "
-        "properties.evidence_encrypted_enabled properties.network_inspection_files_exceeding_size_limit "
-        "properties.besplash_custom_message properties.be_upload_timeout_duration_seconds "
-        "properties.be_upload_timeout_response properties.be_paste_timeout_duration_milliseconds "
-        "properties.be_paste_timeout_response precedence properties.enable_context_inspection]",
+        "description": "Filter results by specific attributes , allowed attributes are [name "
+        "properties.enable_content_inspection properties.be_exclude_domains properties.be_upload_timeout_response "
+        "properties.be_paste_clipboard_max_size properties.evidence_storage_max_size precedence created_at modified_at "
+        "properties.similarity_threshold properties.enable_clipboard_inspection properties.evidence_encrypted_enabled "
+        "properties.enable_network_inspection properties.besplash_message_source properties.min_confidence_level "
+        "properties.unsupported_browsers_action properties.similarity_detection properties.classifications "
+        "properties.besplash_enabled properties.be_paste_timeout_response properties.be_paste_clipboard_min_size_unit "
+        "properties.be_paste_clipboard_over_size_behaviour_block properties.browsers_without_active_extension "
+        "description is_enabled created_by properties.max_file_size_to_inspect_unit properties.block_all_data_access "
+        "properties.be_paste_timeout_duration_milliseconds properties.be_paste_clipboard_min_size is_default "
+        "modified_by properties.enable_context_inspection properties.inspection_depth "
+        "properties.evidence_download_enabled properties.besplash_custom_message "
+        "properties.be_upload_timeout_duration_seconds properties.enable_end_user_notifications_unsupported_browser "
+        "properties.custom_allow_notification properties.custom_block_notification "
+        "properties.be_paste_clipboard_max_size_unit properties.evidence_storage_free_disk_perc "
+        "properties.max_file_size_to_inspect properties.allow_notifications properties.block_notifications "
+        "properties.evidence_duplication_enabled_default properties.network_inspection_files_exceeding_size_limit]",
         "name": "filter",
         "in": "query"
       },
@@ -886,14 +1102,14 @@ _data_protection_configuration_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort by, allowed fields are :[name precedence created_at modified_at]",
+        "description": "The property to sort by, allowed fields are :[modified_at name precedence created_at]",
         "name": "sort",
         "in": "query"
       }
     ]
   ],
   [
-    "queries_web_location_get_v2",
+    "queries.web-location.get-v2",
     "GET",
     "/data-protection/queries/web-locations/v2",
     "Get web-location IDs matching the query with filter",
