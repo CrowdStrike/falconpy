@@ -36,7 +36,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 """
 
-_sensor_update_policy_endpoints = [
+_sensor_update_policies_endpoints = [
   [
     "incrementUninstallToken",
     "POST",
