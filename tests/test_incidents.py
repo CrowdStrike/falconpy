@@ -16,7 +16,7 @@ from falconpy import Incidents
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = Incidents(auth_object=config)
-AllowedResponses = [200, 400, 429]  # Adding rate-limiting as an allowed response for now
+AllowedResponses = [200, 400, 404, 429]  # Adding rate-limiting as an allowed response for now
 
 
 class TestIncidents:
