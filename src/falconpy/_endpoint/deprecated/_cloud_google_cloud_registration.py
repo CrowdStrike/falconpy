@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library.
+"""Internal API endpoint constant library (deprecated operations).
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,59 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_google_cloud_registration_endpoints = [
   [
-    "cloud_registration_gcp_trigger_health_check",
+    "cloud-registration-gcp-get-entities",
+    "GET",
+    "/cloud-security-registration-google-cloud/entities/accounts/v1",
+    "Retrieve all GCP entities (organizations, folders, projects) grouped by type with support for FQL "
+    "filtering, sorting, and pagination.",
+    "cloud_google_cloud_registration",
+    [
+      {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Google Cloud Registration IDs to filter by",
+        "name": "ids",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "FQL (Falcon Query Language) string for filtering results. Allowed filters are "
+        "entity_type, entity_id, entity_name, registration_id, registration_name, registration_scope, parent_id, "
+        "ioa_status, iom_status, created, updated",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Field and direction for sorting results (e.g., 'created|desc'). Sorting applies across "
+        "all entity types before grouping.",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "maximum": 500,
+        "minimum": 0,
+        "type": "integer",
+        "default": 100,
+        "description": "Maximum number of records to return (default: 100, max: 500). Limit applies across all entity types.",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "minimum": 0,
+        "type": "integer",
+        "default": 0,
+        "description": "Starting index of result",
+        "name": "offset",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "cloud-registration-gcp-trigger-health-check",
     "POST",
     "/cloud-security-registration-google-cloud/entities/registration-scans/v1",
     "Trigger health check scan for GCP registrations",
@@ -57,7 +109,7 @@ _cloud_google_cloud_registration_endpoints = [
     ]
   ],
   [
-    "cloud_registration_gcp_get_registration",
+    "cloud-registration-gcp-get-registration",
     "GET",
     "/cloud-security-registration-google-cloud/entities/registrations/v1",
     "Retrieve a Google Cloud Registration.",
@@ -73,7 +125,7 @@ _cloud_google_cloud_registration_endpoints = [
     ]
   ],
   [
-    "cloud_registration_gcp_put_registration",
+    "cloud-registration-gcp-put-registration",
     "PUT",
     "/cloud-security-registration-google-cloud/entities/registrations/v1",
     "Creates/Updates a Google Cloud Registration.",
@@ -87,7 +139,7 @@ _cloud_google_cloud_registration_endpoints = [
     ]
   ],
   [
-    "cloud_registration_gcp_create_registration",
+    "cloud-registration-gcp-create-registration",
     "POST",
     "/cloud-security-registration-google-cloud/entities/registrations/v1",
     "Create a Google Cloud Registration.",
@@ -101,7 +153,7 @@ _cloud_google_cloud_registration_endpoints = [
     ]
   ],
   [
-    "cloud_registration_gcp_update_registration",
+    "cloud-registration-gcp-update-registration",
     "PATCH",
     "/cloud-security-registration-google-cloud/entities/registrations/v1",
     "Update a Google Cloud Registration.",
@@ -122,7 +174,7 @@ _cloud_google_cloud_registration_endpoints = [
     ]
   ],
   [
-    "cloud_registration_gcp_delete_registration",
+    "cloud-registration-gcp-delete-registration",
     "DELETE",
     "/cloud-security-registration-google-cloud/entities/registrations/v1",
     "Deletes a Google Cloud Registration and returns the deleted registration in the response body.",
