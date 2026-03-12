@@ -52,6 +52,7 @@ from ._detects import _detects_endpoints
 from ._device_content import _device_content_endpoints
 from ._device_control_policies import _device_control_policies_endpoints
 from ._discover import _discover_endpoints
+from ._downloads import _downloads_endpoints
 from ._exposure_management import _exposure_management_endpoints
 from ._fdr import _fdr_endpoints
 from ._firewall_management import _firewall_management_endpoints
@@ -94,6 +95,7 @@ _detects_deprecated = _detects_endpoints
 _device_content_deprecated = _device_content_endpoints
 _device_control_policies_deprecated = _device_control_policies_endpoints
 _discover_deprecated = _discover_endpoints
+_downloads_deprecated = _downloads_endpoints
 _exposure_management_deprecated = _exposure_management_endpoints
 _fdr_deprecated = _fdr_endpoints
 _firewall_management_deprecated = _firewall_management_endpoints

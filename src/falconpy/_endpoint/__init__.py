@@ -41,6 +41,7 @@ from .deprecated import _detects_deprecated
 from .deprecated import _device_content_deprecated
 from .deprecated import _device_control_policies_deprecated
 from .deprecated import _discover_deprecated
+from .deprecated import _downloads_deprecated
 from .deprecated import _fdr_deprecated
 from .deprecated import _firewall_management_deprecated
 from .deprecated import _hosts_deprecated
@@ -299,6 +300,7 @@ deprecated_endpoints.extend(_detects_deprecated)
 deprecated_endpoints.extend(_device_content_deprecated)
 deprecated_endpoints.extend(_device_control_policies_deprecated)
 deprecated_endpoints.extend(_discover_deprecated)
+deprecated_endpoints.extend(_downloads_deprecated)
 deprecated_endpoints.extend(_fdr_deprecated)
 deprecated_endpoints.extend(_firewall_management_deprecated)
 deprecated_endpoints.extend(_hosts_deprecated)
