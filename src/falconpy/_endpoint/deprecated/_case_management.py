@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library.
+"""Internal API endpoint constant library (deprecated operations).
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -39,7 +39,7 @@ For more information, please refer to <https://unlicense.org>
 
 _case_management_endpoints = [
   [
-    "aggregates_file_details_post_v1",
+    "aggregates.file-details.post.v1",
     "POST",
     "/case-files/aggregates/file-details/v1",
     "Get file details aggregates as specified via json in the request body.",
@@ -70,7 +70,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "combined_file_details_get_v1",
+    "combined.file-details.get.v1",
     "GET",
     "/case-files/combined/file-details/v1",
     "Query file details",
@@ -100,7 +100,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_file_details_get_v1",
+    "entities.file-details.get.v1",
     "GET",
     "/case-files/entities/file-details/v1",
     "Get file details by id",
@@ -120,7 +120,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_file_details_patch_v1",
+    "entities.file-details.patch.v1",
     "PATCH",
     "/case-files/entities/file-details/v1",
     "Update file details",
@@ -134,7 +134,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_files_bulk_download_post_v1",
+    "entities.files_bulk-download.post.v1",
     "POST",
     "/case-files/entities/files/bulk-download/v1",
     "Download multiple existing file from case as a ZIP",
@@ -148,7 +148,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_files_download_get_v1",
+    "entities.files_download.get.v1",
     "GET",
     "/case-files/entities/files/download/v1",
     "Download existing file from case",
@@ -164,7 +164,21 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_files_upload_post_v1",
+    "entities.files_download.post.v1",
+    "POST",
+    "/case-files/entities/files/download/v1",
+    "Download existing files from case",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.files_upload.post.v1",
     "POST",
     "/case-files/entities/files/upload/v1",
     "Upload file for case",
@@ -193,7 +207,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_files_delete_v1",
+    "entities.files.delete.v1",
     "DELETE",
     "/case-files/entities/files/v1",
     "Delete file details by id",
@@ -213,7 +227,21 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_retrieve_rtr_file_post_v1",
+    "entities.get-rtr-file-metadata.post.v1",
+    "POST",
+    "/case-files/entities/get-rtr-file-metadata/v1",
+    "gets metadata for a file via RTR without retrieving it",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "entities.retrieve-rtr-file.post.v1",
     "POST",
     "/case-files/entities/retrieve-rtr-file/v1",
     "retrieves a file from host using RTR and adds it to a case",
@@ -227,7 +255,21 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "queries_file_details_get_v1",
+    "entities.retrieve-rtr-recent-file.post.v1",
+    "POST",
+    "/case-files/entities/retrieve-rtr-recent-file/v1",
+    "RetrieveRecentRTRFile retrieves a recently fetched RTR file and adds it to a case",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "queries.file-details.get.v1",
     "GET",
     "/case-files/queries/file-details/v1",
     "Query for ids of file details",
@@ -257,7 +299,21 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "aggregates_notification_groups_post_v1",
+    "aggregates.access-tags.post.v1",
+    "POST",
+    "/casemgmt/aggregates/access-tags/v1",
+    "Get access tag aggregates",
+    "case_management",
+    [
+      {
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "aggregates.notification-groups.post.v1",
     "POST",
     "/casemgmt/aggregates/notification-groups/v1",
     "Get notification groups aggregations",
@@ -271,7 +327,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "aggregates_notification_groups_post_v2",
+    "aggregates.notification-groups.post.v2",
     "POST",
     "/casemgmt/aggregates/notification-groups/v2",
     "Get notification groups aggregations",
@@ -285,7 +341,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "aggregates_slas_post_v1",
+    "aggregates.slas.post.v1",
     "POST",
     "/casemgmt/aggregates/slas/v1",
     "Get SLA aggregations",
@@ -299,7 +355,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "aggregates_templates_post_v1",
+    "aggregates.templates.post.v1",
     "POST",
     "/casemgmt/aggregates/templates/v1",
     "Get templates aggregations",
@@ -313,7 +369,34 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_fields_get_v1",
+    "entities.access-tags.get.v1",
+    "GET",
+    "/casemgmt/entities/access-tags/v1",
+    "Get access tags",
+    "case_management",
+    [
+      {
+        "uniqueItems": True,
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "collectionFormat": "multi",
+        "description": "Resource IDs",
+        "name": "ids",
+        "in": "query",
+        "required": True
+      },
+      {
+        "type": "boolean",
+        "description": "Evaluate FGAC and return has_access property",
+        "name": "with_has_access",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "entities.fields.get.v1",
     "GET",
     "/casemgmt/entities/fields/v1",
     "Get fields by ID",
@@ -334,7 +417,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_notification_groups_get_v1",
+    "entities.notification-groups.get.v1",
     "GET",
     "/casemgmt/entities/notification-groups/v1",
     "Get notification groups by ID",
@@ -355,7 +438,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_notification_groups_post_v1",
+    "entities.notification-groups.post.v1",
     "POST",
     "/casemgmt/entities/notification-groups/v1",
     "Create notification group",
@@ -369,7 +452,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_notification_groups_patch_v1",
+    "entities.notification-groups.patch.v1",
     "PATCH",
     "/casemgmt/entities/notification-groups/v1",
     "Update notification group",
@@ -383,7 +466,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_notification_groups_delete_v1",
+    "entities.notification-groups.delete.v1",
     "DELETE",
     "/casemgmt/entities/notification-groups/v1",
     "Delete notification groups by ID",
@@ -404,7 +487,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_notification_groups_get_v2",
+    "entities.notification-groups.get.v2",
     "GET",
     "/casemgmt/entities/notification-groups/v2",
     "Get notification groups by ID",
@@ -425,7 +508,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_notification_groups_post_v2",
+    "entities.notification-groups.post.v2",
     "POST",
     "/casemgmt/entities/notification-groups/v2",
     "Create notification group",
@@ -439,7 +522,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_notification_groups_patch_v2",
+    "entities.notification-groups.patch.v2",
     "PATCH",
     "/casemgmt/entities/notification-groups/v2",
     "Update notification group",
@@ -453,7 +536,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_notification_groups_delete_v2",
+    "entities.notification-groups.delete.v2",
     "DELETE",
     "/casemgmt/entities/notification-groups/v2",
     "Delete notification groups by ID",
@@ -474,7 +557,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_slas_get_v1",
+    "entities.slas.get.v1",
     "GET",
     "/casemgmt/entities/slas/v1",
     "Get SLAs by ID",
@@ -495,7 +578,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_slas_post_v1",
+    "entities.slas.post.v1",
     "POST",
     "/casemgmt/entities/slas/v1",
     "Create SLA",
@@ -509,7 +592,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_slas_patch_v1",
+    "entities.slas.patch.v1",
     "PATCH",
     "/casemgmt/entities/slas/v1",
     "Update SLA",
@@ -523,7 +606,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_slas_delete_v1",
+    "entities.slas.delete.v1",
     "DELETE",
     "/casemgmt/entities/slas/v1",
     "Delete SLAs",
@@ -544,7 +627,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_template_snapshots_get_v1",
+    "entities.template-snapshots.get.v1",
     "GET",
     "/casemgmt/entities/template-snapshots/v1",
     "Get template snapshots",
@@ -586,7 +669,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_templates_export_get_v1",
+    "entities.templates_export.get.v1",
     "GET",
     "/casemgmt/entities/templates/export/v1",
     "Export templates to files in a zip archive",
@@ -623,7 +706,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_templates_import_post_v1",
+    "entities.templates_import.post.v1",
     "POST",
     "/casemgmt/entities/templates/import/v1",
     "Import a template from a file",
@@ -645,7 +728,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_templates_get_v1",
+    "entities.templates.get.v1",
     "GET",
     "/casemgmt/entities/templates/v1",
     "Get templates by ID",
@@ -662,11 +745,17 @@ _case_management_endpoints = [
         "name": "ids",
         "in": "query",
         "required": True
+      },
+      {
+        "type": "boolean",
+        "description": "Evaluate FGAC and return has_access property",
+        "name": "with_has_access",
+        "in": "query"
       }
     ]
   ],
   [
-    "entities_templates_post_v1",
+    "entities.templates.post.v1",
     "POST",
     "/casemgmt/entities/templates/v1",
     "Create template",
@@ -680,7 +769,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_templates_patch_v1",
+    "entities.templates.patch.v1",
     "PATCH",
     "/casemgmt/entities/templates/v1",
     "Update template",
@@ -694,7 +783,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_templates_delete_v1",
+    "entities.templates.delete.v1",
     "DELETE",
     "/casemgmt/entities/templates/v1",
     "Delete templates",
@@ -715,7 +804,42 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "queries_fields_get_v1",
+    "queries.access-tags.get.v1",
+    "GET",
+    "/casemgmt/queries/access-tags/v1",
+    "Query access tags",
+    "case_management",
+    [
+      {
+        "type": "string",
+        "description": "FQL filter expression",
+        "name": "filter",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Sort expression",
+        "name": "sort",
+        "in": "query"
+      },
+      {
+        "maximum": 200,
+        "minimum": 1,
+        "type": "integer",
+        "description": "Page size",
+        "name": "limit",
+        "in": "query"
+      },
+      {
+        "type": "string",
+        "description": "Pagination token",
+        "name": "after",
+        "in": "query"
+      }
+    ]
+  ],
+  [
+    "queries.fields.get.v1",
     "GET",
     "/casemgmt/queries/fields/v1",
     "Query fields",
@@ -745,7 +869,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "queries_notification_groups_get_v1",
+    "queries.notification-groups.get.v1",
     "GET",
     "/casemgmt/queries/notification-groups/v1",
     "Query notification groups",
@@ -781,7 +905,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "queries_notification_groups_get_v2",
+    "queries.notification-groups.get.v2",
     "GET",
     "/casemgmt/queries/notification-groups/v2",
     "Query notification groups",
@@ -817,7 +941,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "queries_slas_get_v1",
+    "queries.slas.get.v1",
     "GET",
     "/casemgmt/queries/slas/v1",
     "Query SLAs",
@@ -853,7 +977,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "queries_template_snapshots_get_v1",
+    "queries.template-snapshots.get.v1",
     "GET",
     "/casemgmt/queries/template-snapshots/v1",
     "Query template snapshots",
@@ -883,7 +1007,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "queries_templates_get_v1",
+    "queries.templates.get.v1",
     "GET",
     "/casemgmt/queries/templates/v1",
     "Query templates",
@@ -919,7 +1043,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_alert_evidence_post_v1",
+    "entities.alert-evidence.post.v1",
     "POST",
     "/cases/entities/alert-evidence/v1",
     "Adds the given list of alert evidence to the specified case.",
@@ -933,7 +1057,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_case_tags_post_v1",
+    "entities.case-tags.post.v1",
     "POST",
     "/cases/entities/case-tags/v1",
     "Adds the given list of tags to the specified case.",
@@ -947,7 +1071,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_case_tags_delete_v1",
+    "entities.case-tags.delete.v1",
     "DELETE",
     "/cases/entities/case-tags/v1",
     "Removes the specified tags from the specified case.",
@@ -974,7 +1098,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_cases_put_v2",
+    "entities.cases.put.v2",
     "PUT",
     "/cases/entities/cases/v2",
     "Creates the given Case",
@@ -988,7 +1112,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_cases_post_v2",
+    "entities.cases.post.v2",
     "POST",
     "/cases/entities/cases/v2",
     "Retrieves all Cases given their IDs.",
@@ -1002,7 +1126,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_cases_patch_v2",
+    "entities.cases.patch.v2",
     "PATCH",
     "/cases/entities/cases/v2",
     "Updates given fields on the specified case.",
@@ -1016,7 +1140,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "entities_event_evidence_post_v1",
+    "entities.event-evidence.post.v1",
     "POST",
     "/cases/entities/event-evidence/v1",
     "Adds the given list of event evidence to the specified case.",
@@ -1030,7 +1154,7 @@ _case_management_endpoints = [
     ]
   ],
   [
-    "queries_cases_get_v1",
+    "queries.cases.get.v1",
     "GET",
     "/cases/queries/cases/v1",
     "Retrieves all Cases IDs that match a given query.",
