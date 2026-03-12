@@ -263,10 +263,6 @@
     - `_endpoint/_data_protection_configuration.py`
     - `data_protection_configuration.py`
 
-+ Added: Added `id` as a supported parameter in _entities_policy_patch_v2_ and _entities_classification_patch_v2_ operations within the __Data Protection Configuration__ service collection.
-    - `_endpoint/_data_protection_configuration.py`
-    - `data_protection_configuration.py`
-
 + Removed: Removed deprecated _AggregateDetections_ and _QueryDetectionIdsByFilter_ operations from the __Falcon Complete Dashboard__ service collection.
     - `_endpoint/_falcon_complete_dashboard.py`
     - `_endpoint/deprecated/_falcon_complete_dashboard.py`
@@ -312,6 +308,7 @@
     - _UpdateParserAutoUpdatePolicy_
     - _InstallParser_
     - _BulkInstallParsers_
+    - _UpdateParserFromTemplate_
     - `_endpoint/_ngsiem.py`
     - `_endpoint/deprecated/_ngsiem.py`
     - `_payload/__init__.py`
@@ -400,6 +397,41 @@
     - `_endpoint/deprecated/_spotlight_vulnerability_metadata.py`
     - `spotlight_vulnerability_metadata.py`
 
++ Deprecated: Deprecated four operations within the __Alerts__ service collection: _PostAggregatesAlertsV1_, _PostEntitiesAlertsV1_, _PatchEntitiesAlertsV2_, and _GetQueriesAlertsV1_.
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_alerts.py`
+
++ Deprecated: Deprecated one operation within the __CSPM Registration__ service collection: _GetConfigurationDetections_.
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_cspm_registration.py`
+
++ Deprecated: Deprecated four operations within the __Detects__ service collection: _GetAggregateDetects_, _UpdateDetectsByIdsV2_, _GetDetectSummaries_, and _QueryDetects_.
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_detects.py`
+
++ Deprecated: Deprecated five operations within the __Device Control Policies__ service collection: _getDefaultDeviceControlPolicies_, _updateDefaultDeviceControlPolicies_, _getDeviceControlPolicies_, _updateDeviceControlPolicies_, and _createDeviceControlPolicies_.
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_device_control_policies.py`
+
++ Deprecated: Deprecated three operations within the __Downloads__ service collection: _FetchFilesDownloadInfo_, _DownloadFile_, and _EnumerateFile_.
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_downloads.py`
+
++ Deprecated: Deprecated five operations within the __MSSP__ service collection: _getCIDGroupMembersBy_, _deleteCIDGroupMembers_, _getCIDGroupById_, _getUserGroupMembersByID_, and _getUserGroupsByID_.
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_mssp.py`
+
++ Deprecated: Deprecated one operation within the __Sample Uploads__ service collection: _ArchiveUploadV1_.
+    - `_endpoint/__init__.py`
+    - `_endpoint/deprecated/__init__.py`
+    - `_endpoint/deprecated/_sample_uploads.py`
+
 ## Issues resolved
 + Fixed: Corrected HTTP Method from PATCH to POST for the _CreateActionsV1_ operation within the __Recon__ service collection.
     - `recon.py`
@@ -411,6 +443,19 @@
     - `cloud_oci_registration.py`
 
 ## Other
++ Fixed: Added missing `id` parameter to _entities_policy_patch_v2_ and _entities_classification_patch_v2_ operations within the __Data Protection Configuration__ service collection.
+    - `_endpoint/_data_protection_configuration.py`
+    - `data_protection_configuration.py`
+
++ Fixed: Fixed `expires_timestamp` truthiness check in the __Installation Tokens__ payload builder that prevented `None` from being serialized as JSON `null`. Closes [#1431](https://github.com/CrowdStrike/falconpy/issues/1431).
+    - `_payload/_generic.py`
+
++ Fixed: Fixed route URL formatting for __Falcon Container__ operations that use named `{uuid}` path placeholders. Positional `.format()` was replaced with keyword `.format(uuid=...)` to correctly substitute the UUID in routes like `/image-assessment/entities/reports/v2/{uuid}`.
+    - `_util/_functions.py`
+
++ Fixed: Added validation to the `base_url` setter in `InterfaceConfiguration` to prevent `None`, empty strings, or non-string values from overwriting the base URL.
+    - `_auth_object/_interface_config.py`
+
 ---
 
 # Version 1.6.0
