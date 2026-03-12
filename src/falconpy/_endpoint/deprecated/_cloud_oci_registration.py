@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library.
+"""Internal API endpoint constant library (deprecated operations).
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 _cloud_oci_registration_endpoints = [
   [
-    "cloud_security_registration_oci_get_account",
+    "cloud-security-registration-oci-get-account",
     "GET",
     "/cloud-security-registration-oci/combined/accounts/v1",
     "Retrieve a list of OCI tenancies with support for FQL filtering, sorting, and pagination",
@@ -47,14 +47,14 @@ _cloud_oci_registration_endpoints = [
       {
         "type": "string",
         "description": "FQL (Falcon Query Language) string for filtering results. Allowed filters are "
-        "Set{tenancy_ocid, tenancy_name, home_region, key_age, overall_status, created_at, updated_at}",
+        "Set{updated_at, tenancy_ocid, tenancy_name, home_region, key_age, overall_status, created_at}",
         "name": "filter",
         "in": "query"
       },
       {
         "type": "string",
-        "description": "Field and direction for sorting results - allowed sort fields are Set{tenancy_ocid, "
-        "tenancy_name, home_region, key_age, overall_status, created_at, updated_at}",
+        "description": "Field and direction for sorting results - allowed sort fields are Set{tenancy_name, "
+        "home_region, key_age, overall_status, created_at, updated_at, tenancy_ocid}",
         "name": "sort",
         "in": "query"
       },
@@ -84,7 +84,7 @@ _cloud_oci_registration_endpoints = [
     ]
   ],
   [
-    "cloud_security_registration_oci_rotate_key",
+    "cloud-security-registration-oci-rotate-key",
     "POST",
     "/cloud-security-registration-oci/entities/account-rotate-keys/v1",
     "Refresh key for the OCI Tenancy",
@@ -98,7 +98,7 @@ _cloud_oci_registration_endpoints = [
     ]
   ],
   [
-    "cloud_security_registration_oci_validate_tenancy",
+    "cloud-security-registration-oci-validate-tenancy",
     "POST",
     "/cloud-security-registration-oci/entities/account-validate/v1",
     "Validate the OCI account in CSPM for a provided CID.",
@@ -112,7 +112,7 @@ _cloud_oci_registration_endpoints = [
     ]
   ],
   [
-    "cloud_security_registration_oci_create_account",
+    "cloud-security-registration-oci-create-account",
     "POST",
     "/cloud-security-registration-oci/entities/accounts/v1",
     "Create OCI tenancy account in CSPM",
@@ -126,7 +126,7 @@ _cloud_oci_registration_endpoints = [
     ]
   ],
   [
-    "cloud_security_registration_oci_update_account",
+    "cloud-security-registration-oci-update-account",
     "PATCH",
     "/cloud-security-registration-oci/entities/accounts/v1",
     "Patch an existing OCI account in our system for a customer.",
@@ -140,7 +140,7 @@ _cloud_oci_registration_endpoints = [
     ]
   ],
   [
-    "cloud_security_registration_oci_delete_account",
+    "cloud-security-registration-oci-delete-account",
     "DELETE",
     "/cloud-security-registration-oci/entities/accounts/v1",
     "Delete an existing OCI tenancy in CSPM.",
@@ -159,7 +159,7 @@ _cloud_oci_registration_endpoints = [
     ]
   ],
   [
-    "cloud_security_registration_oci_download_script",
+    "cloud-security-registration-oci-download-script",
     "POST",
     "/cloud-security-registration-oci/entities/scripts/v1",
     "Retrieve script to create resources in tenancy OCID",
