@@ -21,6 +21,7 @@
 """
 from typing import List, Any
 from .deprecated import _admission_control_policies_deprecated
+from .deprecated import _alerts_deprecated
 from .deprecated import _case_management_deprecated
 from .deprecated import _cloud_aws_registration_deprecated
 from .deprecated import _cloud_azure_registration_deprecated
@@ -148,7 +149,7 @@ from ._saas_security import _saas_security_endpoints
 from ._sample_uploads import _sample_uploads_endpoints
 from ._scheduled_reports import _scheduled_reports_endpoints
 from ._sensor_download import _sensor_download_endpoints
-from ._sensor_update_policy import _sensor_update_policies_endpoints
+from ._sensor_update_policies import _sensor_update_policies_endpoints
 from ._sensor_usage import _sensor_usage_endpoints
 from ._sensor_visibility_exclusions import _sensor_visibility_exclusions_endpoints
 from ._serverless_exports import _serverless_exports_endpoints
@@ -273,6 +274,7 @@ api_endpoints.extend(_zero_trust_assessment_endpoints)
 # Deprecated endpoints
 deprecated_endpoints = []
 deprecated_endpoints.extend(_admission_control_policies_deprecated)
+deprecated_endpoints.extend(_alerts_deprecated)
 deprecated_endpoints.extend(_case_management_deprecated)
 deprecated_endpoints.extend(_cloud_aws_registration_deprecated)
 deprecated_endpoints.extend(_cloud_azure_registration_deprecated)

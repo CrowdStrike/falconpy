@@ -32,6 +32,7 @@
 # references to use the new operations IDs defined above that align with the IDs defined in
 # the service classes.
 from ._admission_control_policies import _admission_control_policies_endpoints
+from ._alerts import _alerts_endpoints
 from ._case_management import _case_management_endpoints
 from ._cloud_aws_registration import _cloud_aws_registration_endpoints
 from ._cloud_azure_registration import _cloud_azure_registration_endpoints
@@ -69,6 +70,7 @@ from ._mapping import _deprecated_op_mapping, _deprecated_cls_mapping
 from ._certificate_based_exclusions import _certificate_based_exclusions_endpoints
 
 _admission_control_policies_deprecated = _admission_control_policies_endpoints
+_alerts_deprecated = _alerts_endpoints
 _case_management_deprecated = _case_management_endpoints
 _cloud_aws_registration_deprecated = _cloud_aws_registration_endpoints
 _cloud_azure_registration_deprecated = _cloud_azure_registration_endpoints
