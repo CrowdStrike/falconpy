@@ -1,4 +1,4 @@
-"""Internal API endpoint constant library.
+"""Internal API endpoint constant library (deprecated operations).
 
  _______                        __ _______ __        __ __
 |   _   .----.-----.--.--.--.--|  |   _   |  |_.----|__|  |--.-----.
@@ -38,7 +38,7 @@ For more information, please refer to <https://unlicense.org>
 
 _admission_control_policies_endpoints = [
   [
-    "admission_control_get_policies",
+    "admission-control-get-policies",
     "GET",
     "/admission-control-policies/entities/policies/v1",
     "Get admission control policies.",
@@ -59,7 +59,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_create_policy",
+    "admission-control-create-policy",
     "POST",
     "/admission-control-policies/entities/policies/v1",
     "Create an admission control policy.",
@@ -73,7 +73,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_update_policy",
+    "admission-control-update-policy",
     "PATCH",
     "/admission-control-policies/entities/policies/v1",
     "Update an admission control policy.",
@@ -94,7 +94,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_delete_policies",
+    "admission-control-delete-policies",
     "DELETE",
     "/admission-control-policies/entities/policies/v1",
     "Delete an admission control policy.",
@@ -115,7 +115,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_add_host_groups",
+    "admission-control-add-host-groups",
     "POST",
     "/admission-control-policies/entities/policy-host-groups/v1",
     "Add one or more host groups to an admission control policy.",
@@ -129,7 +129,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_remove_host_groups",
+    "admission-control-remove-host-groups",
     "DELETE",
     "/admission-control-policies/entities/policy-host-groups/v1",
     "Remove one or more host groups from an admission control policy.",
@@ -157,7 +157,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_update_policy_precedence",
+    "admission-control-update-policy-precedence",
     "PATCH",
     "/admission-control-policies/entities/policy-precedence/v1",
     "Update admission control policy precedence.",
@@ -171,7 +171,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_add_rule_group_custom_rule",
+    "admission-control-add-rule-group-custom-rule",
     "POST",
     "/admission-control-policies/entities/policy-rule-group-custom-rules/v1",
     "Add one or more custom Rego rules to a rule group in an admission control policy. The requested custom "
@@ -186,7 +186,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_remove_rule_group_custom_rule",
+    "admission-control-remove-rule-group-custom-rule",
     "DELETE",
     "/admission-control-policies/entities/policy-rule-group-custom-rules/v1",
     "Delete one or more custom Rego rules from all rule groups in an admission control policy.",
@@ -214,7 +214,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_set_rule_group_precedence",
+    "admission-control-set-rule-group-precedence",
     "PUT",
     "/admission-control-policies/entities/policy-rule-group-precedence/v1",
     "Change precedence of rule groups within an admission control policy.",
@@ -228,7 +228,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_replace_rule_group_selectors",
+    "admission-control-replace-rule-group-selectors",
     "PUT",
     "/admission-control-policies/entities/policy-rule-group-selectors/v1",
     "Replace labels and/or namespaces of a rule group within an admission control policy.",
@@ -242,7 +242,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_create_rule_groups",
+    "admission-control-create-rule-groups",
     "POST",
     "/admission-control-policies/entities/policy-rule-groups/v1",
     "Create one or more rule groups and add them to an existing admission control policy. The list of new rule "
@@ -258,7 +258,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_update_rule_groups",
+    "admission-control-update-rule-groups",
     "PATCH",
     "/admission-control-policies/entities/policy-rule-groups/v1",
     "Update a rule group. Change rule group name, description, deny on error, Image Assessment settings, "
@@ -272,14 +272,15 @@ _admission_control_policies_endpoints = [
         "Container(s) run as root  201005: Container(s) without runAsNonRoot  201006: Privilege escalation allowed  "
         "201007: Container(s) with network capabilities  201008: Container(s) with unsafe procMount  201009: "
         "Container(s) using unsafe sysctls  201010: Container(s) without resource limits  201011: Sensitive host "
-        "directories mounted in container(s)  201012: Container(s) with sysadmin capability  201015: Host port attached "
-        " to container(s)  201016: Host network attached to container(s)  201017: Container(s) in host PID namespace  "
-        "201018: Container(s) in host IPC namespace  201019: Workload in default namespace  201020: Workload with "
-        "unconfined seccomp profile  201021: Workload without SELinux or AppArmor  201022: Container(s) with many "
-        "capabilities  201023: Workload without recommended seccomp profile  201024: Workload without securityContext  "
-        "201025: Container runtime socket in container(s)  201026: Container(s) entrypoint contains network scanning "
-        "command  201027: Container(s) entrypoint contains chroot command  201028: Malformed sysctl value  201029: "
-        "Service account token automounted\n",
+        "directories mounted in container(s)  201012: Container(s) with sysadmin capability  201013: Service attached "
+        "to load balancer  201014: Service attached to node port  201015: Host port attached to container(s)  201016: "
+        "Host network attached to container(s)  201017: Container(s) in host PID namespace  201018: Container(s) in "
+        "host IPC namespace  201019: Workload in default namespace  201020: Workload with unconfined seccomp profile  "
+        "201021: Workload without SELinux or AppArmor  201022: Container(s) with many capabilities  201023: Workload "
+        "without recommended seccomp profile  201024: Workload without securityContext  201025: Container runtime "
+        "socket in container(s)  201026: Container(s) entrypoint contains network scanning command  201027: "
+        "Container(s) entrypoint contains chroot command  201028: Malformed sysctl value  201029: Service account token "
+        "automounted\n",
         "name": "body",
         "in": "body",
         "required": True
@@ -287,7 +288,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_delete_rule_groups",
+    "admission-control-delete-rule-groups",
     "DELETE",
     "/admission-control-policies/entities/policy-rule-groups/v1",
     "Delete rule groups.",
@@ -315,7 +316,7 @@ _admission_control_policies_endpoints = [
     ]
   ],
   [
-    "admission_control_query_policies",
+    "admission-control-query-policies",
     "GET",
     "/admission-control-policies/queries/policies/v1",
     "Search admission control policies.",
