@@ -47,6 +47,7 @@ from ._cspm_registration import _cspm_registration_endpoints
 from ._custom_ioa import _custom_ioa_endpoints
 from ._correlation_rules import _correlation_rules_endpoints
 from ._correlation_rules_admin import _correlation_rules_admin_endpoints
+from ._d4c_registration import _d4c_registration_endpoints
 from ._data_protection_configuration import _data_protection_configuration_endpoints
 from ._detects import _detects_endpoints
 from ._device_content import _device_content_endpoints
@@ -92,6 +93,7 @@ _correlation_rules_admin_deprecated = _correlation_rules_admin_endpoints
 _cspm_registration_deprecated = _cspm_registration_endpoints
 _correlation_rules_deprecated = _correlation_rules_endpoints
 _custom_ioa_deprecated = _custom_ioa_endpoints
+_d4c_registration_deprecated = _d4c_registration_endpoints
 _data_protection_configuration_deprecated = _data_protection_configuration_endpoints
 _detects_deprecated = _detects_endpoints
 _device_content_deprecated = _device_content_endpoints
