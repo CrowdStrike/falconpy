@@ -35,9 +35,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, List, Union
 
 
-def correlation_rules_payload(passed_keywords: dict) -> dict:
+def correlation_rules_payload(passed_keywords: dict) -> Dict[str, Union[str, int, list, bool]]:
     """Craft a properly formatted correlation rules payload.
 
     {
@@ -97,7 +98,7 @@ def correlation_rules_payload(passed_keywords: dict) -> dict:
     return returned
 
 
-def correlation_rules_export_payload(passed_keywords: dict) -> dict:
+def correlation_rules_export_payload(passed_keywords: dict) -> Dict[str, Union[str, bool, dict]]:
     """Craft a properly formatted correlation rule export payload.
 
     {
@@ -126,7 +127,7 @@ def correlation_rules_export_payload(passed_keywords: dict) -> dict:
     return returned
 
 
-def correlation_rules_template_payload(passed_keywords: dict) -> dict:
+def correlation_rules_template_payload(passed_keywords: dict) -> List[Dict[str, Union[str, list]]]:
     """Craft a properly formatted correlation rule export payload.
 
     [
