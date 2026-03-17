@@ -74,6 +74,7 @@ from ._sample_uploads import _sample_uploads_endpoints
 from ._scheduled_reports import _scheduled_reports_endpoints
 from ._user_management import _user_management_endpoints
 from ._workflows import _workflows_endpoints
+from ._zero_trust_assessment import _zero_trust_assessment_endpoints
 from ._mapping import _deprecated_op_mapping, _deprecated_cls_mapping
 from ._certificate_based_exclusions import _certificate_based_exclusions_endpoints
 
@@ -120,6 +121,7 @@ _sample_uploads_deprecated = _sample_uploads_endpoints
 _scheduled_reports_deprecated = _scheduled_reports_endpoints
 _user_management_deprecated = _user_management_endpoints
 _workflows_deprecated = _workflows_endpoints
+_zero_trust_assessment_deprecated = _zero_trust_assessment_endpoints
 _certificate_based_exclusions_deprecated = _certificate_based_exclusions_endpoints
 _deprecated_operation_mapping = _deprecated_op_mapping
 _deprecated_class_mapping = _deprecated_cls_mapping
