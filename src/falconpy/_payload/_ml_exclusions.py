@@ -35,9 +35,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, Union
 
 
-def ml_exclusions_actions_payload(passed_keywords: dict) -> dict:
+def ml_exclusions_actions_payload(passed_keywords: dict) -> Dict[str, Union[str, bool, list]]:
     """Actions used to manipulate the content of exclusions, with ancestor fields.
 
     {
@@ -64,7 +65,7 @@ def ml_exclusions_actions_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def ml_exclusions_report_payload(passed_keywords: dict) -> dict:
+def ml_exclusions_report_payload(passed_keywords: dict) -> Dict[str, Union[str, dict]]:
     """Create a report of ML exclusions scoped by the given filters.
 
     {
@@ -85,7 +86,7 @@ def ml_exclusions_report_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def ml_exclusions_update_payload(passed_keywords: dict) -> dict:
+def ml_exclusions_update_payload(passed_keywords: dict) -> Dict[str, Union[str, bool, list]]:
     """Update the exclusions by id, with ancestor fields.
 
     {
@@ -105,7 +106,8 @@ def ml_exclusions_update_payload(passed_keywords: dict) -> dict:
     """
     returned_payload = {}
 
-    keys = ["comment", "excluded_from", "grandparent_value", "groups", "id", "parent_value", "value", "is_descendant_process"]
+    keys = ["comment", "excluded_from", "grandparent_value", "groups", "id",
+            "parent_value", "value", "is_descendant_process"]
     list_keys = ["excluded_from", "groups"]
     for key in keys:
         if passed_keywords.get(key, None):
