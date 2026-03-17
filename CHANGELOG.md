@@ -352,25 +352,15 @@
     - `_endpoint/deprecated/_hosts.py`
     - `hosts.py`
 
-+ Added: Added `ai_related` and `ai_vulnerability_count` as allowed filter fields in the _AggregateImageCount_ operation within the __Container Images__ service collection.
++ Added: Added `index_digest` as an allowed filter field in the _AggregateImageCountByBaseOS_, _AggregateImageCountByState_, _AggregateImageCount_, _CombinedImageIssuesSummary_, _GetCombinedImages_, _CombinedImageDetail_, and _ReadCombinedImagesExport_ operations within the __Container Images__ service collection.
+    - `_endpoint/_container_images.py`
     - `container_images.py`
 
-+ Added: Added `ai_related` and `index_digest` as allowed filter fields in the _GetCombinedImages_ operation within the __Container Images__ service collection.
-    - `container_images.py`
-
-+ Added: Added `ai_related` and `ai_vulnerability_count` as allowed filter fields and `ai_vulnerabilities` and `source` as allowed sort fields in the _ReadCombinedImagesExport_ operation within the __Container Images__ service collection.
-    - `container_images.py`
-
-+ Added: Added `image_digest`, `image_id`, `index_digest`, `first_seen`, and `source` as allowed filter fields in the _AggregateImageCountByBaseOS_ and _CombinedImageByVulnerabilityCount_ operations within the __Container Images__ service collection.
-    - `container_images.py`
-
-+ Added: Added `arch`, `base_os`, `image_digest`, `image_id`, `index_digest`, `first_seen`, `source`, and `tag` as allowed filter fields in the _AggregateImageCountByState_ operation within the __Container Images__ service collection.
-    - `container_images.py`
-
-+ Added: Added `arch`, `base_os`, `cid`, `image_digest`, `image_id`, `index_digest`, `first_seen`, and `source` as allowed filter fields in the _CombinedImageDetail_ operation within the __Container Images__ service collection.
++ Added: Added `ai_related`, `ai_vulnerability_count`, and `ai_vulnerabilities` as allowed filter and sort fields in the _AggregateImageCount_, _CombinedImageIssuesSummary_, and _ReadCombinedImagesExport_ operations within the __Container Images__ service collection.
     - `container_images.py`
 
 + Added: Added `ai_related` and `index_digest` as allowed filter fields in the _ReadVulnerabilityCountByActivelyExploited_, _ReadVulnerabilityCountByCPSRating_, _ReadVulnerabilityCountByCVSSScore_, _ReadVulnerabilityCountBySeverity_, _ReadVulnerabilityCount_, and _ReadCombinedVulnerabilities_ operations within the __Container Vulnerabilities__ service collection.
+    - `_endpoint/_container_vulnerabilities.py`
     - `container_vulnerabilities.py`
 
 + Added: Added `notification_group_id`, `credentials_url`, `credentials_domain`, `credentials_ip`, `domain`, `credential_status`, `bot.operating_system.hardware_id`, and `bot.bot_id` as allowed filter fields in the _QueryNotificationsExposedDataRecordsV1_ operation within the __Recon__ service collection.
@@ -1083,22 +1073,11 @@
 + Updated: Cosmetic update to operation and parameter descriptions in the _GetCombinedImages_, _CombinedImageDetail_, and _ReadCombinedImagesExport_ operations within the __Container Images__ service collection.
     - `_endpoint/_container_images.py`
 
-+ Added: Added `index_digest` as an allowed filter field in the _AggregateImageCountByBaseOS_, _AggregateImageCountByState_, _AggregateImageCount_, _CombinedImageIssuesSummary_, _GetCombinedImages_, _CombinedImageDetail_, and _ReadCombinedImagesExport_ operations within the __Container Images__ service collection.
-    - `_endpoint/_container_images.py`
-    - `container_images.py`
-
-+ Added: Added `ai_related`, `ai_vulnerability_count`, and `ai_vulnerabilities` as allowed filter and sort fields in the _AggregateImageCount_, _CombinedImageIssuesSummary_, and _ReadCombinedImagesExport_ operations within the __Container Images__ service collection.
-    - `container_images.py`
-
 + Updated: Cosmetic update to operation and parameter descriptions in the _ReadPackagesByFixableVulnCount_, _ReadPackagesByVulnCount_, _ReadPackagesCombinedExport_, _ReadPackagesCombined_, and _ReadPackagesCombinedV2_ operations within the __Container Packages__ service collection.
     - `_endpoint/_container_packages.py`
 
 + Updated: Cosmetic update to operation and parameter descriptions in the _ReadVulnerabilityCountByActivelyExploited_, _ReadVulnerabilityCountByCPSRating_, _ReadVulnerabilityCountByCVSSScore_, _ReadVulnerabilityCountBySeverity_, _ReadVulnerabilityCount_, _ReadVulnerabilitiesByImageCount_, _ReadVulnerabilitiesPublicationDate_, _ReadCombinedVulnerabilitiesDetails_, _ReadCombinedVulnerabilitiesInfo_, and _ReadCombinedVulnerabilities_ operations within the __Container Vulnerabilities__ service collection.
     - `_endpoint/_container_vulnerabilities.py`
-
-+ Added: Added `ai_related` and `index_digest` as allowed filter fields in the _ReadVulnerabilityCountByActivelyExploited_, _ReadVulnerabilityCountByCPSRating_, _ReadVulnerabilityCountByCVSSScore_, _ReadVulnerabilityCountBySeverity_, _ReadVulnerabilityCount_, and _ReadCombinedVulnerabilities_ operations within the __Container Vulnerabilities__ service collection.
-    - `_endpoint/_container_vulnerabilities.py`
-    - `container_vulnerabilities.py`
 
 + Deprecated: Deprecated the __Detects__ service collection and all included endpoints. Closes #1378.
     - `_endpoint/_detects.py`
