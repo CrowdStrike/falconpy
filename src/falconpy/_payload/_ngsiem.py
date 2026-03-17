@@ -35,9 +35,10 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <https://unlicense.org>
 """
+from typing import Dict, List, Union
 
 
-def ngsiem_search_payload(passed_keywords: dict) -> dict:
+def ngsiem_search_payload(passed_keywords: dict) -> Dict[str, Union[str, bool, int, dict]]:
     """Generate a properly formatted NGSIEM search payload.
 
     {
@@ -91,7 +92,7 @@ def ngsiem_search_payload(passed_keywords: dict) -> dict:
     return returned
 
 
-def ngsiem_parser_payload(passed_keywords: dict) -> dict:
+def ngsiem_parser_payload(passed_keywords: dict) -> Dict[str, Union[str, list]]:
     """Craft a properly formatted parser payload.
 
     {
@@ -145,7 +146,7 @@ def ngsiem_parser_payload(passed_keywords: dict) -> dict:
     return returned
 
 
-def ngsiem_auto_update_policy_payload(passed_keywords: dict) -> dict:
+def ngsiem_auto_update_policy_payload(passed_keywords: dict) -> Dict[str, str]:
     """Create a properly formatted parser auto update policy payload.
 
     {
@@ -162,7 +163,7 @@ def ngsiem_auto_update_policy_payload(passed_keywords: dict) -> dict:
     return returned
 
 
-def ngsiem_install_parser_payload(passed_keywords: dict) -> dict:
+def ngsiem_install_parser_payload(passed_keywords: dict) -> Dict[str, str]:
     """Create a properly formatted install parser payload.
 
     {
@@ -179,7 +180,7 @@ def ngsiem_install_parser_payload(passed_keywords: dict) -> dict:
     return returned
 
 
-def ngsiem_bulk_install_parsers_payload(passed_keywords: dict) -> dict:
+def ngsiem_bulk_install_parsers_payload(passed_keywords: dict) -> Dict[str, List[dict]]:
     """Create a properly formatted bulk install parsers payload.
 
     {
@@ -198,7 +199,7 @@ def ngsiem_bulk_install_parsers_payload(passed_keywords: dict) -> dict:
     return returned
 
 
-def ngsiem_connector_config_payload(passed_keywords: dict) -> dict:
+def ngsiem_connector_config_payload(passed_keywords: dict) -> Dict[str, Union[str, dict]]:
     """Create a properly formatted connector config payload.
 
     {
@@ -219,7 +220,7 @@ def ngsiem_connector_config_payload(passed_keywords: dict) -> dict:
     return returned
 
 
-def ngsiem_data_connection_payload(passed_keywords: dict) -> dict:
+def ngsiem_data_connection_payload(passed_keywords: dict) -> Dict[str, Union[str, bool, dict, list]]:
     """Create data connection payload.
 
     {
