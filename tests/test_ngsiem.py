@@ -22,7 +22,7 @@ from falconpy._payload import (
 auth = Authorization.TestAuthorization()
 config = auth.getConfigObject()
 falcon = NGSIEM(auth_object=config)
-AllowedResponses = [200, 201, 400, 403, 404, 406, 429, 500]  # Temp allow 403, 406, 500
+AllowedResponses = [200, 201, 400, 403, 404, 406, 429]  # Temp allow 403, 406
 
 
 class TestNGSIEM:
