@@ -37,7 +37,10 @@ For more information, please refer to <https://unlicense.org>
 """
 
 
-def cloud_policies_rule_assign_payload(passed_keywords: dict) -> dict:
+from typing import Dict, List, Union
+
+
+def cloud_policies_rule_assign_payload(passed_keywords: dict) -> Dict[str, List[str]]:
     """Assign rules to a compliance control (full replace).
 
     {
@@ -52,7 +55,7 @@ def cloud_policies_rule_assign_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def cloud_policies_compliance_control_payload(passed_keywords: dict) -> dict:
+def cloud_policies_compliance_control_payload(passed_keywords: dict) -> Dict[str, Union[str, bool]]:
     """Body payload generator for compliance control operations.
 
     {
@@ -71,7 +74,7 @@ def cloud_policies_compliance_control_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def cloud_policies_evaluation_payload(passed_keywords: dict) -> dict:
+def cloud_policies_evaluation_payload(passed_keywords: dict) -> Dict[str, Union[dict, str]]:
     """Get evaluation results based on the provided rule.
 
     {
@@ -87,7 +90,7 @@ def cloud_policies_evaluation_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def cloud_policies_rule_override_payload(passed_keywords: dict) -> dict:
+def cloud_policies_rule_override_payload(passed_keywords: dict) -> Dict[str, List[dict]]:
     """Create a new rule override.
 
     {
@@ -115,7 +118,7 @@ def cloud_policies_rule_override_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def cloud_policies_rule_create_payload(passed_keywords: dict) -> dict:
+def cloud_policies_rule_create_payload(passed_keywords: dict) -> Dict[str, Union[str, int, list]]:
     """Create a new rule.
 
     {
@@ -161,7 +164,7 @@ def cloud_policies_rule_create_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def cloud_policies_rule_update_payload(passed_keywords: dict) -> dict:
+def cloud_policies_rule_update_payload(passed_keywords: dict) -> Dict[str, Union[str, int, list, dict]]:
     """Update a rule.
 
     {
@@ -217,7 +220,7 @@ def cloud_policies_rule_update_payload(passed_keywords: dict) -> dict:
     return returned_payload
 
 
-def cloud_policies_suppression_rule_payload(passed_keywords: dict) -> dict:
+def cloud_policies_suppression_rule_payload(passed_keywords: dict) -> Dict[str, Union[str, dict]]:
     """Suppression rule payload.
 
     {
