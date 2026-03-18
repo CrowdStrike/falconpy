@@ -258,6 +258,20 @@ def service_request(caller: ServiceClass = None, **kwargs) -> Union[Dict[str, Un
                            )
 
 
+def _build_text_error_body(text: str, status_code: int) -> dict:
+    """Build a standard error body from a non-JSON text response.
+
+    When the API returns a text/plain or text/html response that is not
+    valid JSON, wrap the raw text in the standard CrowdStrike error
+    format so downstream code (error logging, pythonic mode, Result
+    parsing) behaves consistently.
+    """
+    return {
+        "errors": [{"code": status_code, "message": text.strip()}],
+        "resources": []
+    }
+
+
 # pylint: disable=R0912  # I don't disagree, but this will work for now.
 def calc_content_return(resp: requests.Response,
                         contain: bool,
@@ -289,11 +303,25 @@ def calc_content_return(resp: requests.Response,
                               head_request=bool(api_method == "HEAD")
                               ).full_return
     elif returned_content_type.startswith("text/plain"):
-        # Assuming UTF-8 for now
-        returned = Result(resp.status_code,
-                          resp.headers,
-                          loads(resp.content.decode("utf-8"))
-                          ).full_return
+        # Attempt to parse as JSON first for backward compatibility
+        # with text/plain responses that carry valid JSON payloads.
+        # Fall back to wrapping raw text in a standard error body
+        # so the actual message is surfaced to the caller (Issue #1154).
+        text_body = resp.content.decode("utf-8")
+        try:
+            json_body = loads(text_body)
+        except (JSONDecodeError, ValueError):
+            json_body = _build_text_error_body(text_body, resp.status_code)
+        returned = Result(resp.status_code, resp.headers, json_body).full_return
+    elif returned_content_type.startswith("text/html"):
+        # Some proxy and WAF error pages arrive as HTML.
+        # Surface the raw HTML in the standard error format.
+        html_body = resp.content.decode("utf-8", errors="replace")
+        returned = Result(
+            resp.status_code,
+            resp.headers,
+            _build_text_error_body(html_body, resp.status_code)
+        ).full_return
     elif contain:
         returned = Result(resp.status_code, resp.headers, resp.json()).full_return
     else:
@@ -526,6 +554,8 @@ def log_api_activity(content_return: Union[dict, bytes], content_type: str, api:
             else:
                 api.log_util.debug("RESULT: %s", content_return)
         elif content_type.startswith("text/plain"):
+            api.log_util.debug("RESULT: %s", content_return)
+        elif content_type.startswith("text/html"):
             api.log_util.debug("RESULT: %s", content_return)
         else:
             api.log_util.debug("RESULT: binary response received from API")
