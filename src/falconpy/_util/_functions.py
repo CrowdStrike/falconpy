@@ -64,6 +64,7 @@ from .._constant import (
 from .._error import (
     RegionSelectError,
     SDKError,
+    ContentDecodingError,
     InvalidMethod,
     KeywordsOnly,
     APIError,
@@ -258,6 +259,23 @@ def service_request(caller: ServiceClass = None, **kwargs) -> Union[Dict[str, Un
                            )
 
 
+def _safe_decode_content(content: bytes) -> str:
+    """Safely decode response content bytes to a string.
+
+    Tries UTF-8 first (the standard encoding for JSON per RFC 8259),
+    then falls back to latin-1 which never raises UnicodeDecodeError
+    because every byte 0x00-0xFF is a valid latin-1 code point.
+
+    This replaces the previous ``content.decode("ascii")`` call that
+    crashed on any response containing non-ASCII characters such as
+    accented names (Issue #1298).
+    """
+    try:
+        return content.decode("utf-8")
+    except (UnicodeDecodeError, ValueError):
+        return content.decode("latin-1")
+
+
 # pylint: disable=R0912  # I don't disagree, but this will work for now.
 def calc_content_return(resp: requests.Response,
                         contain: bool,
@@ -280,7 +298,7 @@ def calc_content_return(resp: requests.Response,
         except JSONDecodeError:
             if api_method != "HEAD":
                 # It says JSON in the headers but it came back to us as a binary string.
-                json_resp = loads(resp.content.decode("ascii"))
+                json_resp = loads(_safe_decode_content(resp.content))
         finally:
             # Default behavior is to return results as a standardized dictionary.
             returned = Result(status_code=resp.status_code,
@@ -472,6 +490,24 @@ def perform_request(endpoint: str = "",  # noqa: C901
                 raise NoContentWarning(headers=response.headers,
                                        code=response.status_code
                                        ) from json_decode_error
+
+            except UnicodeDecodeError as decode_error:
+                # The response contains bytes that could not be decoded.
+                # This commonly happens when the API returns JSON with
+                # non-ASCII characters (e.g. accented names) and a
+                # fallback codec is too restrictive (Issue #1298).
+                _enc = getattr(decode_error, 'encoding', 'unknown')
+                _pos = getattr(decode_error, 'start', None)
+                api.log_warning(
+                    f"WARNING: Content decoding failed "
+                    f"(encoding={_enc}, position={_pos})"
+                )
+                raise ContentDecodingError(
+                    code=500,
+                    headers=api.debug_headers,
+                    encoding=_enc,
+                    position=_pos
+                ) from decode_error
 
             except Exception as havoc:  # pylint: disable=W0703
                 # General catch-all for anything coming          ____ ____ _ _      \\       o   o

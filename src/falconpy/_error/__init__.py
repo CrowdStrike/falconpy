@@ -53,7 +53,8 @@ from ._exceptions import (
     InvalidCredentialFormat,
     InvalidRoute,
     InvalidServiceCollection,
-    InvalidOperationSearch
+    InvalidOperationSearch,
+    ContentDecodingError
     )
 from ._warnings import (
     SDKWarning,
@@ -74,5 +75,6 @@ __all__ = ["SDKError", "RegionSelectError", "InvalidMethod", "InvalidOperation",
            "NoAuthenticationMechanism", "FeatureNotSupportedByPythonVersion",
            "InvalidIndex", "InvalidCredentialFormat", "UnnecessaryEncodingUsed",
            "SDKDeprecationWarning", "DeprecatedOperation", "DeprecatedClass",
-           "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch"
+           "InvalidRoute", "InvalidServiceCollection", "InvalidOperationSearch",
+           "ContentDecodingError"
            ]
