@@ -12,6 +12,7 @@ The FalconPy project exists to enable developer interactions with the CrowdStrik
 | Joshua Hiller, `@jshcodes` | [Lord of the FalconPys](https://xkcd.com/1604/) [:fly:](https://xkcd.com/1856/) |
 | Dixon Styres, `@crowdstrikedcs` | [Author](https://xkcd.com/1646/) |
 | Timothy Sullivan, `@tsullivan06` | [Author](https://xkcd.com/1349/) |
+| Alexander Moomaw, `@alhumaw` | [Author](https://xkcd.com/565/) |
 | Devin Cargill, `@dcargs` | [Author](https://xkcd.com/722/) |
 
 <BR/>
@@ -29,7 +30,6 @@ These coders deserve accolades and laurels as well as cool titles and cartoons. 
 
 | Name | Role |
 | :--- | :--- |
-| Alexander Moomaw, `@alhumaw` | [Framework Facilitator](https://xkcd.com/565/) |
 | Christopher Hammond, `@ChristopherHammond13` | [Technical Debt Collector](https://xkcd.com/2138/) |
 | Gabe Alford, `@redhatrises` | [Git Whisperer](https://xkcd.com/1597/) |
 | Brendan Kremian, `@bk-cs` | [Disparate Ringbearer](https://xkcd.com/353/)
@@ -111,6 +111,7 @@ This has been a critical element in the development of the FalconPy project.
 + `@dweissbacher`
 + `@atav928`
 + `@subbu-cs`
++ Jay Prajapati, `@jayy-77`
 
 ## Sponsors
 Without the support of these executives, the FalconPy project would not have happened.
