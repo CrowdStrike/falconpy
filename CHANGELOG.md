@@ -416,7 +416,7 @@
     - `_endpoint/deprecated/_sample_uploads.py`
 
 ## Issues resolved
-+ Fixed: Corrected HTTP Method from PATCH to POST for the _CreateActionsV1_ operation within the __Recon__ service collection.
++ Fixed: Corrected HTTP Method from PATCH to POST for the _CreateActionsV1_ operation docstring within the __Recon__ service collection.
     - `recon.py`
 
 + Fixed: Swagger URLs within the __Cloud Azure Registration__ service collection.
@@ -441,7 +441,11 @@
 + Fixed: Fixed three incorrect aliases in the __Case Management__ service collection. The `aggregates_notification_groups_post_v1` and `aggregates_notification_groups_post_v2` aliases were incorrectly pointing to the entities GET methods instead of the aggregation POST methods, and `entities_notification_groups_get_v2` was pointing to the v1 method instead of v2.
     - `case_management.py`
 
-## Other
++ Fixed: Resolves _GetSearchStatusV1_ pagination support. Closes #1383.
+    - Thanks go out to @jayy-77 for identifying and submitting this fix! 🙇
+
++ Fixed: Parameter mismatch / alias support in the _StopSearchV1_ parameter handling. Closes #1398.
+    - Thanks go out to @jayy-77 for identifying and submitting this fix! 🙇
 
 ---
 
