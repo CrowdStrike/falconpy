@@ -34,7 +34,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pipx install hatch==1.14.1
+        pipx install hatch==1.16.5
 
     - name: Development package updates
       run: |
