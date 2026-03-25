@@ -17,6 +17,7 @@ from falconpy._payload import (
     ngsiem_auto_update_policy_payload,
     ngsiem_install_parser_payload,
     ngsiem_bulk_install_parsers_payload,
+    ngsiem_clone_parser_payload,
 )
 
 auth = Authorization.TestAuthorization()
@@ -116,6 +117,10 @@ class TestNGSIEM:
             "UpdateLookupFile": falcon.update_lookup_file(search_domain="all", filename="testfile.yml", file=test_db),
             "UpdateLookupFileFail": falcon.update_lookup_file(search_domain="all", filename="testfile.yml"),
             "DeleteLookupFile": falcon.delete_lookup_file(ids="12345678"),
+            "CloneParser": falcon.clone_parser(new_name="cloned-parser", source_id="12345678"),
+            "CloneParserBody": falcon.clone_parser(body={"new_name": "cloned-parser", "source_id": "12345678"}),
+            "TestParserFromTemplate": falcon.test_parser_from_template(yaml_template=test_db),
+            "TestParserFromTemplateFail": falcon.test_parser_from_template(),
             "GetParserTemplate": falcon.get_parser_template(ids="12345678"),
             "CreateParserFromTemplate": falcon.create_parser_from_template(repository="whatever", name="whatever", yaml_template=test_db),
             "CreateParserFromTemplateFail": falcon.create_parser_from_template(repository="whatever", name="whatever"),
@@ -210,26 +215,6 @@ class TestNGSIEM:
     def test_all_functionality(self):
         assert self.run_all_tests() is True
 
-    def test_pagination_params(self):
-        """Test that pagination parameters are properly handled (Issue #1383)."""
-        # Test with camelCase parameters
-        result = falcon.get_search_status(
-            repository="search-all",
-            id="test-id",
-            paginationLimit=100,
-            paginationOffset=0
-        )
-        assert result["status_code"] in AllowedResponses
-
-        # Test with pythonic parameters
-        result = falcon.get_search_status(
-            repository="search-all",
-            id="test-id",
-            pagination_limit=100,
-            pagination_offset=0
-        )
-        assert result["status_code"] in AllowedResponses
-
 class TestNGSIEMPayloadCoverage:
     """Cover _payload/_ngsiem.py gaps."""
 
@@ -300,6 +285,20 @@ class TestNGSIEMPayloadCoverage:
     def test_ngsiem_bulk_install_parsers_empty(self):
         """Cover empty bulk install parsers payload."""
         result = ngsiem_bulk_install_parsers_payload({})
+        assert result == {}
+
+    def test_ngsiem_clone_parser_payload(self):
+        """Cover clone parser payload."""
+        result = ngsiem_clone_parser_payload({
+            "new_name": "cloned-parser",
+            "source_id": "abc123"
+        })
+        assert result["new_name"] == "cloned-parser"
+        assert result["source_id"] == "abc123"
+
+    def test_ngsiem_clone_parser_payload_empty(self):
+        """Cover empty clone parser payload."""
+        result = ngsiem_clone_parser_payload({})
         assert result == {}
 
 

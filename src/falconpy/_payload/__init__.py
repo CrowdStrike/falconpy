@@ -151,7 +151,8 @@ from ._ngsiem import (
     ngsiem_install_parser_payload,
     ngsiem_bulk_install_parsers_payload,
     ngsiem_connector_config_payload,
-    ngsiem_data_connection_payload
+    ngsiem_data_connection_payload,
+    ngsiem_clone_parser_payload
 )
 from ._prevention_policy import prevention_policy_payload
 from ._sensor_update_policy import sensor_policy_payload, maintenance_token_payload
@@ -278,7 +279,7 @@ __all__ = [
     "ml_exclusions_actions_payload", "ml_exclusions_report_payload", "ml_exclusions_update_payload",
     "ngsiem_data_connection_payload", "ngsiem_connector_config_payload",
     "ngsiem_auto_update_policy_payload", "ngsiem_install_parser_payload",
-    "ngsiem_bulk_install_parsers_payload", "acp_custom_rules_policy_payload",
+    "ngsiem_bulk_install_parsers_payload", "ngsiem_clone_parser_payload", "acp_custom_rules_policy_payload",
     "data_protection_policy_precedence_payload", "serverless_exports_launch_payload",
     "maintenance_token_payload",
     "data_protection_local_application_payload",
