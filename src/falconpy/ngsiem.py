@@ -51,7 +51,8 @@ from ._payload import (
     ngsiem_install_parser_payload,
     ngsiem_bulk_install_parsers_payload,
     ngsiem_data_connection_payload,
-    ngsiem_connector_config_payload
+    ngsiem_connector_config_payload,
+    ngsiem_clone_parser_payload
 )
 from ._result import Result
 from ._service_class import ServiceClass
@@ -767,6 +768,74 @@ class NGSIEM(ServiceClass):
             keywords=kwargs,
             params=parameters
             )
+
+    @force_default(defaults=["body"], default_types=["dict"])
+    def clone_parser(self: object, body: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Clone an existing parser with a new name.
+
+        Keyword arguments:
+        body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
+                {
+                    "new_name": "string",
+                    "source_id": "string"
+                }
+        new_name -- The name for the cloned parser. String. Required.
+        source_id -- The ID of the source parser to clone. String. Required.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/CloneParser
+        """
+        if not body:
+            body = ngsiem_clone_parser_payload(passed_keywords=kwargs)
+
+        return process_service_request(
+            calling_object=self,
+            endpoints=Endpoints,
+            operation_id="CloneParser",
+            body=body
+            )
+
+    @force_default(defaults=["parameters"], default_types=["dict"])
+    def test_parser_from_template(self: object,
+                                  parameters: dict = None,
+                                  **kwargs
+                                  ) -> Union[Dict[str, Union[int, dict]], Result]:
+        """Test Parser from LogScale YAML Template in NGSIEM.
+
+        Keyword arguments:
+        yaml_template -- LogScale Parser YAML template content, see schema at https://schemas.humio.com/. Binary data.
+        parameters -- Full parameters payload dictionary. Not required if using other keywords.
+
+        This method only supports keywords for providing arguments.
+
+        Returns: dict object containing API response.
+
+        HTTP Method: POST
+
+        Swagger URL
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/TestParserFromTemplate
+        """
+        yaml_data = kwargs.get("yaml_template", None)
+        if yaml_data:
+            kwargs.pop("yaml_template", None)
+            returned = process_service_request(
+                calling_object=self,
+                endpoints=Endpoints,
+                operation_id="TestParserFromTemplate",
+                files=[("yaml_template", (None, yaml_data))],
+                params=parameters,
+                keywords=kwargs
+                )
+        else:
+            returned = generate_error_result("You must provide a YAML template to test.", code=400)
+
+        return returned
 
     @force_default(defaults=["parameters"], default_types=["dict"])
     def get_parser_template(self: object, parameters: dict = None, **kwargs) -> Union[Dict[str, Union[int, dict]], Result]:
@@ -2033,6 +2102,8 @@ class NGSIEM(ServiceClass):
     CreateLookupFile = create_lookup_file
     UpdateLookupFile = update_lookup_file
     DeleteLookupFile = delete_lookup_file
+    CloneParser = clone_parser
+    TestParserFromTemplate = test_parser_from_template
     GetParserTemplate = get_parser_template
     CreateParserFromTemplate = create_parser_from_template
     GetParser = get_parser
