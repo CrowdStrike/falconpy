@@ -220,6 +220,23 @@ def ngsiem_connector_config_payload(passed_keywords: dict) -> Dict[str, Union[st
     return returned
 
 
+def ngsiem_clone_parser_payload(passed_keywords: dict) -> Dict[str, str]:
+    """Create a properly formatted clone parser payload.
+
+    {
+        "new_name": "string",
+        "source_id": "string"
+    }
+    """
+    returned: dict = {}
+    keys = ["new_name", "source_id"]
+    for key in keys:
+        if passed_keywords.get(key, None):
+            returned[key] = passed_keywords.get(key, None)
+
+    return returned
+
+
 def ngsiem_data_connection_payload(passed_keywords: dict) -> Dict[str, Union[str, bool, dict, list]]:
     """Create data connection payload.
 

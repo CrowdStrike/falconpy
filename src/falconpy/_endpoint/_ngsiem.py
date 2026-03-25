@@ -530,6 +530,36 @@ _ngsiem_endpoints = [
     ]
   ],
   [
+    "CloneParser",
+    "POST",
+    "/ngsiem-content/entities/parsers-clone/v1",
+    "Clone an existing parser with a new name",
+    "ngsiem",
+    [
+      {
+        "description": "clone parser request",
+        "name": "body",
+        "in": "body",
+        "required": True
+      }
+    ]
+  ],
+  [
+    "TestParserFromTemplate",
+    "POST",
+    "/ngsiem-content/entities/parsers-template-test/v1",
+    "Test Parser from LogScale YAML Template in NGSIEM",
+    "ngsiem",
+    [
+      {
+        "type": "file",
+        "description": "LogScale Parser YAML template content, see schema at https://schemas.humio.com/",
+        "name": "yaml_template",
+        "in": "formData"
+      }
+    ]
+  ],
+  [
     "GetParserTemplate",
     "GET",
     "/ngsiem-content/entities/parsers-template/v1",
