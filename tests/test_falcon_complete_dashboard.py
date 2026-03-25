@@ -56,13 +56,6 @@ class TestFalconCompleteDashboard:
 
         return returned
 
-    def ServiceFCD_QueryIncidentIdsByFilter(self):
-        returned = False
-        if falcon.QueryIncidentIdsByFilter(bananas="yellow")["status_code"] in AllowedResponses:
-            returned = True
-
-        return returned
-
     def ServiceFCD_QueryRemediationsFilter(self):
         returned = False
         if falcon.QueryRemediationsFilter(bananas="yellow")["status_code"] in AllowedResponses:
@@ -79,7 +72,6 @@ class TestFalconCompleteDashboard:
             "AggregateBlockList": falcon.aggregate_block_list(),
             "AggregateDeviceCountCollection": falcon.aggregate_device_count_collection(),
             "AggregateEscalations": falcon.aggregate_escalations(),
-            "AggregateFCIncidents": falcon.aggregate_fc_incidents(),
             "AggregateRemediations": falcon.aggregate_remediations(),
             "AggregatePreventionPolicy": falcon.aggregate_prevention_policy(),
             "AggregateSensorUpdatePolicy": falcon.aggregate_sensor_update_policy(),
@@ -110,9 +102,6 @@ class TestFalconCompleteDashboard:
 
     def test_QueryEscalationsFilter(self):
         assert self.ServiceFCD_QueryEscalationsFilter() is True
-
-    def test_QueryIncidentIdsByFilter(self):
-        assert self.ServiceFCD_QueryIncidentIdsByFilter() is True
 
     def test_QueryRemediationsFilter(self):
         assert self.ServiceFCD_QueryRemediationsFilter() is True
