@@ -98,10 +98,10 @@ class ContainerImages(ServiceClass):
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    arch            image_digest    repository
-                    base_os         image_id        source
-                    cid             index_digest    tag
-                    first_seen      registry
+                    arch            image_digest    registry
+                    base_os         image_id        repository
+                    cid             index_digest    source
+                    first_seen      multi_arch      tag
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -133,10 +133,10 @@ class ContainerImages(ServiceClass):
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    arch            image_digest    repository
-                    base_os         image_id        source
-                    cid             index_digest    tag
-                    first_seen      registry
+                    arch            image_digest    registry
+                    base_os         image_id        repository
+                    cid             index_digest    source
+                    first_seen      multi_arch      tag
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -174,13 +174,14 @@ class ContainerImages(ServiceClass):
                     base_os                     include_base_image_vuln
                     cid                         index_digest
                     container_id                layer_digest
-                    container_running_status    package_name_version
-                    cps_rating                  registry
-                    crowdstrike_user            repository
-                    cve_id                      source
-                    detection_count             tag
-                    detection_name              vulnerability_count
-                    detection_severity          vulnerability_severity
+                    container_running_status    multi_arch
+                    cps_rating                  package_name_version
+                    crowdstrike_user            registry
+                    cve_id                      repository
+                    detection_count             source
+                    detection_name              tag
+                    detection_severity          vulnerability_count
+                    vulnerability_severity
         parameters -- Full parameters payload dictionary. Not required if using other keywords.
 
         Arguments: When not specified, the first argument to this method is assumed to be 'filter'.
@@ -240,10 +241,11 @@ class ContainerImages(ServiceClass):
                     ai_related                  image_digest
                     container_id                image_id
                     container_running_status    index_digest
-                    cve_id                      registry
-                    detection_name              repository
-                    detection_severity          tag
-                    first_seen                  vulnerability_severity
+                    cve_id                      multi_arch
+                    detection_name              registry
+                    detection_severity          repository
+                    first_seen                  tag
+                    vulnerability_severity
         limit -- The upper-bound on the number of records to retrieve [1-100]. Integer.
         offset -- The offset from where to begin. Integer.
         sort -- The fields to sort the records on. String.
@@ -282,10 +284,10 @@ class ContainerImages(ServiceClass):
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    arch            image_digest    repository
-                    base_os         image_id        source
-                    cid             index_digest    tag
-                    first_seen      registry
+                    arch            image_digest    registry
+                    base_os         image_id        repository
+                    cid             index_digest    source
+                    first_seen      multi_arch      tag
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- This is not used in the backend but is added here for compatibility
                   purposes as some clients expects this i.e UI widgets. Integer.
@@ -315,10 +317,10 @@ class ContainerImages(ServiceClass):
         Keyword arguments:
         filter -- Filter images using a query in Falcon Query Language (FQL). String.
                   Supported filters:
-                    arch            image_digest    repository
-                    base_os         image_id        source
-                    cid             index_digest    tag
-                    first_seen      registry
+                    arch            image_digest    registry
+                    base_os         image_id        repository
+                    cid             index_digest    source
+                    first_seen      multi_arch      tag
         with_config -- Include image config. Boolean. Defaults true false.
         limit -- The upper-bound on the number of records to retrieve. Integer.
         offset -- The offset from where to begin. Integer.
@@ -355,13 +357,14 @@ class ContainerImages(ServiceClass):
                     base_os                     include_base_image_vuln
                     cid                         index_digest
                     container_id                layer_digest
-                    container_running_status    package_name_version
-                    cps_rating                  registry
-                    crowdstrike_user            repository
-                    cve_id                      source
-                    detection_count             tag
-                    detection_name              vulnerability_count
-                    detection_severity          vulnerability_severity
+                    container_running_status    multi_arch
+                    cps_rating                  package_name_version
+                    crowdstrike_user            registry
+                    cve_id                      repository
+                    detection_count             source
+                    detection_name              tag
+                    detection_severity          vulnerability_count
+                    vulnerability_severity
         expand_vulnerabilities -- Expand vulnerabilities. Boolean.
         expand_detections -- Expand detections. Boolean.
         limit -- The upper-bound on the number of records to retrieve. Integer.
