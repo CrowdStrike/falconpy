@@ -386,7 +386,7 @@ _ods_endpoints = [
         "description": "A FQL compatible query string. Terms: [id profile_id description.keyword description "
         "initiated_from filecount.scanned filecount.malicious filecount.quarantined filecount.skipped "
         "affected_hosts_count status severity scan_started_on scan_completed_on created_on created_by last_updated "
-        "targeted_host_count missing_host_count]",
+        "targeted_host_count missing_host_count targeted_platforms targeted_platforms.keyword]",
         "name": "filter",
         "in": "query",
         "allowEmptyValue": True
