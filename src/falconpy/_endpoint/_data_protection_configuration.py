@@ -763,10 +763,10 @@ _data_protection_configuration_endpoints = [
     [
       {
         "type": "string",
-        "description": "Filter results by specific attributes , allowed attributes are [name created_at "
-        "modified_at properties.content_patterns properties.content_patterns_operator properties.file_types "
-        "properties.sensitivity_labels created_by modified_by properties.evidence_duplication_enabled "
-        "properties.protection_mode properties.web_sources]",
+        "description": "Filter results by specific attributes , allowed attributes are [created_at created_by "
+        "modified_by modified_at properties.content_patterns properties.content_patterns_operator "
+        "properties.evidence_duplication_enabled properties.file_types properties.protection_mode "
+        "properties.sensitivity_labels properties.web_sources name]",
         "name": "filter",
         "in": "query"
       },
@@ -1102,7 +1102,7 @@ _data_protection_configuration_endpoints = [
       },
       {
         "type": "string",
-        "description": "The property to sort by, allowed fields are :[modified_at name precedence created_at]",
+        "description": "The property to sort by, allowed fields are :[name precedence created_at modified_at]",
         "name": "sort",
         "in": "query"
       }
