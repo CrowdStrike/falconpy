@@ -1753,8 +1753,7 @@ class CSPMRegistration(ServiceClass):
     DeleteCSPMAzureManagementGroup = delete_azure_management_group
     AzureRefreshCertificate = azure_refresh_certificate
     CreateCSPMAzureManagementGroup = create_azure_management_group
-    GetCSPMCGPAccount = get_gcp_account
-    GetCSPMGCPAccount = get_gcp_account  # Typo fix
+    GetCSPMGCPAccount = get_gcp_account
     CreateCSPMGCPAccount = create_gcp_account
     DeleteCSPMGCPAccount = delete_gcp_account
     UpdateCSPMGCPAccount = update_gcp_account
