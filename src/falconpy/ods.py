@@ -819,6 +819,8 @@ class ODS(ServiceClass):
                   filecount.scanned     scan_started_on
                   filecount.malicious   created_on
                   last_updated          description
+                  targeted_host_count   missing_host_count
+                  targeted_platforms    targeted_platforms.keyword
         limit -- The maximum number of records to return. [Integer, 1-500]
         offset -- The integer offset to start retrieving records from. Integer.
         parameters - full parameters payload, not required if using other keywords.
