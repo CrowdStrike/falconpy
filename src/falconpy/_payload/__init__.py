@@ -151,6 +151,10 @@ from ._network_scan_networks import (
     network_scan_network_create_payload,
     network_scan_network_update_payload
     )
+from ._network_scan_scans import (
+    network_scan_scan_create_payload,
+    network_scan_scan_update_payload
+    )
 from ._network_scan_templates import (
     network_scan_template_create_payload,
     network_scan_template_update_payload
@@ -302,5 +306,7 @@ __all__ = [
     "network_scan_template_create_payload",
     "network_scan_template_update_payload",
     "network_scan_network_create_payload",
-    "network_scan_network_update_payload"
+    "network_scan_network_update_payload",
+    "network_scan_scan_create_payload",
+    "network_scan_scan_update_payload"
 ]
