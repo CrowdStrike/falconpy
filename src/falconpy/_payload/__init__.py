@@ -147,6 +147,10 @@ from ._mobile_enrollment import mobile_enrollment_payload
 from ._network_scan_global_configs import network_scan_global_configs_payload
 from ._network_scan_scan_runs import scan_run_create_payload, scan_run_update_payload
 from ._network_scan_scanners import network_scan_scanners_payload
+from ._network_scan_networks import (
+    network_scan_network_create_payload,
+    network_scan_network_update_payload
+    )
 from ._network_scan_templates import (
     network_scan_template_create_payload,
     network_scan_template_update_payload
@@ -296,5 +300,7 @@ __all__ = [
     "scan_run_update_payload",
     "network_scan_scanners_payload",
     "network_scan_template_create_payload",
-    "network_scan_template_update_payload"
+    "network_scan_template_update_payload",
+    "network_scan_network_create_payload",
+    "network_scan_network_update_payload"
 ]
