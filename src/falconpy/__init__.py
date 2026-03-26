@@ -181,6 +181,7 @@ from .ml_exclusions import MLExclusions
 from .mobile_enrollment import MobileEnrollment
 from .mssp import FlightControl
 from .network_scan_global_configs import NetworkScanGlobalConfigs
+from .network_scan_networks import NetworkScanNetworks
 from .network_scan_scan_run_reports import NetworkScanScanRunReports
 from .network_scan_scan_runs import NetworkScanScanRuns
 from .network_scan_scanners import NetworkScanScanners
@@ -271,6 +272,7 @@ __all__ = [
     "CloudSecurity", "AdmissionControlPolicies",
     "SpotlightVulnerabilityMetadata", "ServerlessExports", "ServerlessVulnerabilities",
     "NetworkScanGlobalConfigs",
+    "NetworkScanNetworks",
     "NetworkScanScanRunReports",
     "NetworkScanScanRuns",
     "NetworkScanScanners",
