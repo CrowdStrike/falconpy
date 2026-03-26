@@ -181,6 +181,7 @@ from .ml_exclusions import MLExclusions
 from .mobile_enrollment import MobileEnrollment
 from .mssp import FlightControl
 from .network_scan_global_configs import NetworkScanGlobalConfigs
+from .network_scan_scan_run_reports import NetworkScanScanRunReports
 from .ngsiem import NGSIEM
 from .oauth2 import OAuth2
 from .ods import ODS
@@ -266,7 +267,8 @@ __all__ = [
     "CorrelationRulesAdmin", "CloudSecurityDetections", "CloudPolicies", "CloudGoogleCloudRegistration",
     "CloudSecurity", "AdmissionControlPolicies",
     "SpotlightVulnerabilityMetadata", "ServerlessExports", "ServerlessVulnerabilities",
-    "NetworkScanGlobalConfigs"
+    "NetworkScanGlobalConfigs",
+    "NetworkScanScanRunReports"
     ]
 """
 This is free and unencumbered software released into the public domain.
