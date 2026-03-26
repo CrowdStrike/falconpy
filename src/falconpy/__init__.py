@@ -185,6 +185,7 @@ from .network_scan_networks import NetworkScanNetworks
 from .network_scan_scan_run_reports import NetworkScanScanRunReports
 from .network_scan_scan_runs import NetworkScanScanRuns
 from .network_scan_scanners import NetworkScanScanners
+from .network_scan_scans import NetworkScanScans
 from .network_scan_templates import NetworkScanTemplates
 from .ngsiem import NGSIEM
 from .oauth2 import OAuth2
@@ -276,6 +277,7 @@ __all__ = [
     "NetworkScanScanRunReports",
     "NetworkScanScanRuns",
     "NetworkScanScanners",
+    "NetworkScanScans",
     "NetworkScanTemplates"
     ]
 """
