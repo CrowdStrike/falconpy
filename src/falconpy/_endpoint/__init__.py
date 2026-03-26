@@ -142,6 +142,7 @@ from ._ml_exclusions import _ml_exclusions_endpoints
 from ._mobile_enrollment import _mobile_enrollment_endpoints
 from ._mssp import _mssp_endpoints
 from ._network_scan_global_configs import _network_scan_global_configs_endpoints
+from ._network_scan_networks import _network_scan_networks_endpoints
 from ._network_scan_scan_run_reports import _network_scan_scan_run_reports_endpoints
 from ._network_scan_scan_runs import _network_scan_scan_runs_endpoints
 from ._network_scan_scanners import _network_scan_scanners_endpoints
@@ -254,6 +255,7 @@ api_endpoints.extend(_ml_exclusions_endpoints)
 api_endpoints.extend(_mobile_enrollment_endpoints)
 api_endpoints.extend(_mssp_endpoints)
 api_endpoints.extend(_network_scan_global_configs_endpoints)
+api_endpoints.extend(_network_scan_networks_endpoints)
 api_endpoints.extend(_network_scan_scan_run_reports_endpoints)
 api_endpoints.extend(_network_scan_scan_runs_endpoints)
 api_endpoints.extend(_network_scan_scanners_endpoints)
