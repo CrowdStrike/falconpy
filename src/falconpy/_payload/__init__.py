@@ -159,6 +159,10 @@ from ._network_scan_templates import (
     network_scan_template_create_payload,
     network_scan_template_update_payload
     )
+from ._network_scan_zones import (
+    network_scan_zone_create_payload,
+    network_scan_zone_update_payload
+    )
 from ._ngsiem import (
     ngsiem_search_payload,
     ngsiem_parser_payload,
@@ -308,5 +312,7 @@ __all__ = [
     "network_scan_network_create_payload",
     "network_scan_network_update_payload",
     "network_scan_scan_create_payload",
-    "network_scan_scan_update_payload"
+    "network_scan_scan_update_payload",
+    "network_scan_zone_create_payload",
+    "network_scan_zone_update_payload"
 ]
