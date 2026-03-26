@@ -148,6 +148,7 @@ from ._network_scan_scan_runs import _network_scan_scan_runs_endpoints
 from ._network_scan_scanners import _network_scan_scanners_endpoints
 from ._network_scan_scans import _network_scan_scans_endpoints
 from ._network_scan_templates import _network_scan_templates_endpoints
+from ._network_scan_zones import _network_scan_zones_endpoints
 from ._ngsiem import _ngsiem_endpoints
 from ._oauth2 import _oauth2_endpoints
 from ._ods import _ods_endpoints
@@ -262,6 +263,7 @@ api_endpoints.extend(_network_scan_scan_runs_endpoints)
 api_endpoints.extend(_network_scan_scanners_endpoints)
 api_endpoints.extend(_network_scan_scans_endpoints)
 api_endpoints.extend(_network_scan_templates_endpoints)
+api_endpoints.extend(_network_scan_zones_endpoints)
 api_endpoints.extend(_ngsiem_endpoints)
 api_endpoints.extend(_oauth2_endpoints)
 api_endpoints.extend(_ods_endpoints)
