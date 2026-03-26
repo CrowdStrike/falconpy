@@ -145,6 +145,7 @@ from ._it_automation import (
     )
 from ._mobile_enrollment import mobile_enrollment_payload
 from ._network_scan_global_configs import network_scan_global_configs_payload
+from ._network_scan_scan_runs import scan_run_create_payload, scan_run_update_payload
 from ._ngsiem import (
     ngsiem_search_payload,
     ngsiem_parser_payload,
@@ -285,5 +286,7 @@ __all__ = [
     "maintenance_token_payload",
     "data_protection_local_application_payload",
     "data_protection_local_application_group_payload",
-    "network_scan_global_configs_payload"
+    "network_scan_global_configs_payload",
+    "scan_run_create_payload",
+    "scan_run_update_payload"
 ]

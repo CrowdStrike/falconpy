@@ -42,12 +42,54 @@ def network_scan_global_configs_payload(passed_keywords: dict) -> Dict[str, Unio
     """Create a body payload for the update_global_configs operation.
 
     {
-        "auto_confirm_ownership": {},
+        "auto_confirm_ownership": {
+            "min_managed_assets": integer
+        },
         "max_concurrent_tasks": integer,
         "network_scanning_enabled": boolean,
-        "scan_exclusion": {},
-        "scanners": [{}],
-        "scanners_exclusion": [{}]
+        "scan_exclusion": {
+            "exclude_all_managed_hosts": boolean,
+            "host_groups": ["string"],
+            "hosts": ["string"],
+            "zone_level_scan_exclusions": [
+                {
+                    "cidrs": [
+                        {
+                            "active": boolean,
+                            "value": "string"
+                        }
+                    ],
+                    "ip_ranges": [
+                        {
+                            "active": boolean,
+                            "from": "string",
+                            "to": "string"
+                        }
+                    ],
+                    "ips": [
+                        {
+                            "active": boolean,
+                            "value": "string"
+                        }
+                    ],
+                    "zone_id": "string"
+                }
+            ]
+        },
+        "scanners": [
+            {
+                "enabled": boolean,
+                "id": "string",
+                "type": "string"
+            }
+        ],
+        "scanners_exclusion": [
+            {
+                "enabled": boolean,
+                "id": "string",
+                "type": "string"
+            }
+        ]
     }
     """
     returned_payload = {}
