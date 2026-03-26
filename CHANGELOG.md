@@ -1,3 +1,153 @@
+# Version 1.6.2
+## Added features and functionality
++ Added: New __Network Scan Global Configs__ service collection with two operations.
+    - _get_global_configs_
+    - _update_global_configs_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_network_scan_global_configs.py`
+    - `_payload/__init__.py`
+    - `_payload/_network_scan_global_configs.py`
+    - `__init__.py`
+    - `network_scan_global_configs.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_network_scan_global_configs.py`
+
++ Added: New __Network Scan Scan Run Reports__ service collection with one operation.
+    - _get_scan_run_reports_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_network_scan_scan_run_reports.py`
+    - `__init__.py`
+    - `network_scan_scan_run_reports.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_network_scan_scan_run_reports.py`
+
++ Added: New __Network Scan Scan Runs__ service collection with five operations.
+    - _aggregate_scan_runs_
+    - _get_scan_runs_
+    - _create_scan_runs_
+    - _update_scan_runs_
+    - _query_scan_runs_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_network_scan_scan_runs.py`
+    - `_payload/__init__.py`
+    - `_payload/_network_scan_scan_runs.py`
+    - `__init__.py`
+    - `network_scan_scan_runs.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_network_scan_scan_runs.py`
+
++ Added: New __Network Scan Scanners__ service collection with four operations.
+    - _aggregate_scanners_
+    - _get_scanners_
+    - _update_scanners_
+    - _query_scanners_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_network_scan_scanners.py`
+    - `_payload/__init__.py`
+    - `_payload/_network_scan_scanners.py`
+    - `__init__.py`
+    - `network_scan_scanners.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_network_scan_scanners.py`
+
++ Added: New __Network Scan Templates__ service collection with six operations.
+    - _get_template_configs_
+    - _get_templates_
+    - _create_templates_
+    - _update_templates_
+    - _delete_templates_
+    - _query_templates_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_network_scan_templates.py`
+    - `_payload/__init__.py`
+    - `_payload/_network_scan_templates.py`
+    - `__init__.py`
+    - `network_scan_templates.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_network_scan_templates.py`
+
++ Added: New __Network Scan Networks__ service collection with six operations.
+    - _aggregate_networks_
+    - _get_networks_
+    - _create_networks_
+    - _update_networks_
+    - _delete_networks_
+    - _query_networks_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_network_scan_networks.py`
+    - `_payload/__init__.py`
+    - `_payload/_network_scan_networks.py`
+    - `__init__.py`
+    - `network_scan_networks.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_network_scan_networks.py`
+
++ Added: New __Network Scan Scans__ service collection with six operations.
+    - _aggregate_scans_
+    - _get_scans_
+    - _create_scans_
+    - _update_scans_
+    - _delete_scans_
+    - _query_scans_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_network_scan_scans.py`
+    - `_payload/__init__.py`
+    - `_payload/_network_scan_scans.py`
+    - `__init__.py`
+    - `network_scan_scans.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_network_scan_scans.py`
+
++ Added: New __Network Scan Zones__ service collection with seven operations.
+    - _aggregate_zones_
+    - _combined_zones_
+    - _get_zones_
+    - _create_zones_
+    - _update_zones_
+    - _delete_zones_
+    - _query_zones_
+    - `_endpoint/__init__.py`
+    - `_endpoint/_network_scan_zones.py`
+    - `_payload/__init__.py`
+    - `_payload/_network_scan_zones.py`
+    - `__init__.py`
+    - `network_scan_zones.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_network_scan_zones.py`
+
++ Added: New __Network Scan__ parent service collection aggregating all eight Network Scan sub-services via multiple inheritance.
+    - `__init__.py`
+    - `network_scan.py`
+
++ Added: Added two new operations to the __NGSIEM__ service collection.
+    - _CloneParser_
+    - _TestParserFromTemplate_
+    - `_endpoint/_ngsiem.py`
+    - `_endpoint/deprecated/_ngsiem.py`
+    - `_payload/__init__.py`
+    - `_payload/_ngsiem.py`
+    - `ngsiem.py`
+    > Unit testing expanded to complete code coverage.
+    - `tests/test_ngsiem.py`
+
++ Added: Added `device_policies.data-protection.applied`, `device_policies.data-protection.policy_id`, `device_policies.data-protection.policy_type`, `device_policies.data-protection-cloud.applied`, `device_policies.data-protection-cloud.policy_id`, `device_policies.data-protection-cloud.policy_type`, `device_policies.network-scan-content.applied`, `device_policies.network-scan-content.policy_id`, and `device_policies.network-scan-content.policy_type` as allowed filter and sort fields in the _CombinedHiddenDevicesByFilter_, _QueryDevicesByFilter_, and _QueryDevicesByFilterScroll_ operations within the __Hosts__ service collection.
+    - `_endpoint/_hosts.py`
+    - `_endpoint/deprecated/_hosts.py`
+    - `hosts.py`
+
++ Added: Added `multi_arch` as an allowed filter keyword in the _AggregateImageCountByBaseOS_, _AggregateImageCountByState_, _AggregateImageCount_, _GetCombinedImages_, _CombinedImageByVulnerabilityCount_, _CombinedImageDetail_, and _ReadCombinedImagesExport_ operations within the __Container Images__ service collection.
+    - `_endpoint/_container_images.py`
+    - `container_images.py`
+
++ Removed: Removed the _AggregateFCIncidents_ and _QueryIncidentIdsByFilter_ operations from the __Falcon Complete Dashboard__ service collection.
+    - `_endpoint/_falcon_complete_dashboard.py`
+    - `falcon_complete_dashboard.py`
+    > Unit testing updated to reflect removed operations.
+    - `tests/test_falcon_complete_dashboard.py`
+
++ Removed: Removed the stale `GetCSPMCGPAccount` backward-compatibility alias from the __CSPM Registration__ service collection.
+    - `cspm_registration.py`
+
 # Version 1.6.1
 ## Added features and functionality
 + Added: New __Admission Control Policies__ service collection with 15 operations.
