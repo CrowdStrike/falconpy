@@ -188,6 +188,7 @@ from .network_scan_scanners import NetworkScanScanners
 from .network_scan_scans import NetworkScanScans
 from .network_scan_templates import NetworkScanTemplates
 from .network_scan_zones import NetworkScanZones
+from .network_scan import NetworkScan
 from .ngsiem import NGSIEM
 from .oauth2 import OAuth2
 from .ods import ODS
@@ -280,7 +281,8 @@ __all__ = [
     "NetworkScanScanners",
     "NetworkScanScans",
     "NetworkScanTemplates",
-    "NetworkScanZones"
+    "NetworkScanZones",
+    "NetworkScan"
     ]
 """
 This is free and unencumbered software released into the public domain.
