@@ -274,15 +274,9 @@ __all__ = [
     "CorrelationRulesAdmin", "CloudSecurityDetections", "CloudPolicies", "CloudGoogleCloudRegistration",
     "CloudSecurity", "AdmissionControlPolicies",
     "SpotlightVulnerabilityMetadata", "ServerlessExports", "ServerlessVulnerabilities",
-    "NetworkScanGlobalConfigs",
-    "NetworkScanNetworks",
-    "NetworkScanScanRunReports",
-    "NetworkScanScanRuns",
-    "NetworkScanScanners",
-    "NetworkScanScans",
-    "NetworkScanTemplates",
-    "NetworkScanZones",
-    "NetworkScan"
+    "NetworkScanGlobalConfigs", "NetworkScanNetworks", "NetworkScanScanRunReports",
+    "NetworkScanScanRuns", "NetworkScanScanners", "NetworkScanScans",
+    "NetworkScanTemplates", "NetworkScanZones", "NetworkScan"
     ]
 """
 This is free and unencumbered software released into the public domain.
