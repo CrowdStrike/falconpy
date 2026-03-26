@@ -144,6 +144,7 @@ from ._it_automation import (
     automation_user_group_payload
     )
 from ._mobile_enrollment import mobile_enrollment_payload
+from ._network_scan_global_configs import network_scan_global_configs_payload
 from ._ngsiem import (
     ngsiem_search_payload,
     ngsiem_parser_payload,
@@ -283,5 +284,6 @@ __all__ = [
     "data_protection_policy_precedence_payload", "serverless_exports_launch_payload",
     "maintenance_token_payload",
     "data_protection_local_application_payload",
-    "data_protection_local_application_group_payload"
+    "data_protection_local_application_group_payload",
+    "network_scan_global_configs_payload"
 ]
