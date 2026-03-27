@@ -92,7 +92,10 @@ class NGSIEM(ServiceClass):
         Swagger URL
         https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ngsiem/UploadLookupV1
         """
-        lookup_file = kwargs.get("lookup_file", None)
+        if kwargs.get("lookup_file", None):
+            lookup_file = kwargs.get("lookup_file", None)
+        else:
+            lookup_file = kwargs.get("file", None)
         repository = kwargs.get("repository", None)
         if repository and lookup_file:
             # Pop the path variables from the keywords dictionary

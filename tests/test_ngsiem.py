@@ -39,6 +39,7 @@ class TestNGSIEM:
         tests = {
             "UploadLookupV1" : falcon.upload_file(repository="search-all", lookup_file="tests/testfile.csv"),
             "UploadLookupV1" : falcon.upload_file(repository="search-all", lookup_file="tests/testfile.json"),
+            "UploadLookupV1" : falcon.upload_file(repository="search-all", file="tests/testfile.json"),
             "GetLookupFromPackageWithNamespaceV1": falcon.get_file_from_package_with_namespace(repository="search-all",
                                                                                                filename="manny",
                                                                                                package="moe",
@@ -70,6 +71,7 @@ class TestNGSIEM:
 
         fail_tests = {
             "UploadLookupV1-fail": falcon.upload_file(repository="search-all", lookup_file="tests/badfile.csv"),
+            "UploadLookupV1-fail1": falcon.upload_file(repository="search-all", file="tests/badfile.csv"),
             "UploadLookupV1-fail2": falcon.upload_file(repository="search-all"),
             "GetLookupV1-fail": falcon.get_file(),
             "GetLookupFromPackageWithNamespaceV1Fail": falcon.get_file_from_package_with_namespace(),
@@ -211,6 +213,16 @@ class TestNGSIEM:
         # Test error case - missing search_id
         result_error = falcon.stop_search(repository="search-all")
         assert result_error["status_code"] == 500
+
+    def test_get_search_status_pagination_aliases(self):
+        """Test get_search_status accepts pythonic pagination_limit/pagination_offset aliases."""
+        result = falcon.get_search_status(
+            repository="search-all",
+            search_id="test-id",
+            pagination_limit=10,
+            pagination_offset=0
+        )
+        assert result["status_code"] in AllowedResponses
 
     def test_all_functionality(self):
         assert self.run_all_tests() is True
