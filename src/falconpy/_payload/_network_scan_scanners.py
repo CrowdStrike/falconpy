@@ -41,13 +41,12 @@ from typing import Dict, Union
 def network_scan_scanners_payload(passed_keywords: dict) -> Dict[str, Union[str, list]]:
     """Create a properly formatted payload for the update_scanners operation.
 
-    body -- Full body payload as a JSON formatted dictionary. Not required if using other keywords.
-            {
-                "action": "string",
-                "aids": [
-                    "string"
-                ]
-            }
+    {
+        "action": "string",
+        "aids": [
+            "string"
+        ]
+    }
     """
     returned_payload = {}
     keys = ["action", "aids"]
