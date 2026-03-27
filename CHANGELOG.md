@@ -148,6 +148,16 @@
 + Removed: Removed the stale `GetCSPMCGPAccount` backward-compatibility alias from the __CSPM Registration__ service collection.
     - `cspm_registration.py`
 
+## Issues resolved
++ Fixed: Added missing parameters `is_enabled` and `host_groups` to the _entities_policy_patch_v2_ operation from the __Data Protection Configuration__ service collection.
+    - `_payload/_data_protection_configuration.py`
+    - `data_protection_configuration.py`
+
++ Fixed: Added backward compatibility for `file` and `lookup_file` parameters. Closes #1372.
+    - `ngsiem.py`
+    > Unit testing updated to reflect modified operations.
+    - `tests/test_ngsiem.py`
+
 # Version 1.6.1
 ## Added features and functionality
 + Added: New __Admission Control Policies__ service collection with 15 operations.
