@@ -307,7 +307,7 @@ def data_protection_policy_payload(passed_keywords: dict) -> Dict[str, List[Dict
     resource = {}
 
     resource_fields = ["id", "description",
-                       "host_groups","is_enabled",
+                       "host_groups", "is_enabled",
                        "name", "precedence",
                        "policy_properties"
                        ]
