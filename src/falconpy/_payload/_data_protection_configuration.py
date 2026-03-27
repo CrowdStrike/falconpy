@@ -220,8 +220,12 @@ def data_protection_policy_payload(passed_keywords: dict) -> Dict[str, List[Dict
     {
         "resources": [
             {
-            "id": "string",
             "description": "string",
+            "host_groups": [
+                "string"
+            ],
+            "id": "string",
+            "is_enabled": true,
             "name": "string",
             "policy_properties": {
                 "allow_notifications": "default",
@@ -264,13 +268,13 @@ def data_protection_policy_payload(passed_keywords: dict) -> Dict[str, List[Dict
                 ]
                 },
                 "euj_header_text": {
-                    "headers": [
-                        {
-                        "default": true,
-                        "header": "string",
-                        "selected": true
-                        }
-                    ]
+                "headers": [
+                    {
+                    "default": true,
+                    "header": "string",
+                    "selected": true
+                    }
+                ]
                 },
                 "euj_require_additional_details": true,
                 "euj_response_cache_timeout": 0,
@@ -302,7 +306,11 @@ def data_protection_policy_payload(passed_keywords: dict) -> Dict[str, List[Dict
     resources = []
     resource = {}
 
-    resource_fields = ["id", "description", "name", "precedence", "policy_properties"]
+    resource_fields = ["id", "description",
+                       "host_groups","is_enabled",
+                       "name", "precedence",
+                       "policy_properties"
+                       ]
     for field in resource_fields:
         if passed_keywords.get(field, None) is not None:
             resource[field] = passed_keywords.get(field, None)
