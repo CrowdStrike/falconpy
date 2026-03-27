@@ -1352,8 +1352,12 @@ class DataProtectionConfiguration(ServiceClass):
                 {
                     "resources": [
                         {
-                        "id": "string",
                         "description": "string",
+                        "host_groups": [
+                            "string"
+                        ],
+                        "id": "string",
+                        "is_enabled": true,
                         "name": "string",
                         "policy_properties": {
                             "allow_notifications": "default",
@@ -1425,6 +1429,8 @@ class DataProtectionConfiguration(ServiceClass):
                     ]
                 }
         id -- The ID of the policy to update. String. Required for update operations.
+        is_enabled -- Flag indicating if the policy is enabled. Boolean.
+        host_groups -- List of host group IDs to assign to the policy. List of strings.
         description -- The description of the policy. String.
         name -- The name of the policy. String.
         policy_properties -- The properties of the policy. Dictionary.
