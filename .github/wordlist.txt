@@ -1836,3 +1836,7 @@ pipenv
 STIX
 jayy
 Prajapati
+TestParserFromTemplate
+CloneParser
+Configs
+configs
