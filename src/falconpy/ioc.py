@@ -888,7 +888,7 @@ class IOC(ServiceClass):
         HTTP Method: GET
 
         Swagger URL
-        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.processes.ran.on.v1
+        https://assets.falcon.crowdstrike.com/support/api/swagger.html#/ioc/indicator.get.processes_ran_on.v1
         """
         return process_service_request(
             calling_object=self,
