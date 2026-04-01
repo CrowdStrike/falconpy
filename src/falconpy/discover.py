@@ -104,6 +104,11 @@ class Discover(ServiceClass):
         Returns details on assets which match the filter criteria.
 
         Keyword arguments:
+        facet -- Select various details blocks to be returned for each host entity.
+                 String or list of strings.
+                 Supported values:
+                   system_insights      third_party
+                   risk_factors
         filter -- The filter expression that should be used to limit the results. FQL syntax.
                   Available Filters:
                     agent_version                   kernel_version
