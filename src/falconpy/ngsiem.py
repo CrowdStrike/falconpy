@@ -105,14 +105,32 @@ class NGSIEM(ServiceClass):
                 with open(lookup_file, "rb") as upload_file:
                     # Create a multipart form payload for our upload file
                     file_extended = {"file": upload_file}
-                    returned = process_service_request(calling_object=self,
-                                                       endpoints=Endpoints,
-                                                       operation_id="UploadLookupV1",
-                                                       keywords=kwargs,
-                                                       params=parameters,
-                                                       repository=repository,
-                                                       files=file_extended
-                                                       )
+                    raw = process_service_request(calling_object=self,
+                                                  endpoints=Endpoints,
+                                                  operation_id="UploadLookupV1",
+                                                  keywords=kwargs,
+                                                  params=parameters,
+                                                  repository=repository,
+                                                  files=file_extended,
+                                                  stream=True
+                                                  )
+                    # The humio upload API returns a plain text file ID
+                    # instead of standard JSON. Parse the raw response
+                    # and wrap it in the standard FalconPy result format.
+                    if isinstance(raw, Response):
+                        content_type = raw.headers.get("Content-Type", "")
+                        if content_type.startswith("text/plain"):
+                            returned = Result(status_code=raw.status_code,
+                                              headers=raw.headers,
+                                              body={"resources": [raw.content.decode("utf-8")]}
+                                              ).full_return
+                        else:
+                            returned = Result(status_code=raw.status_code,
+                                              headers=raw.headers,
+                                              body=raw.json()
+                                              ).full_return
+                    else:
+                        returned = raw
             except FileNotFoundError:
                 returned = generate_error_result("Invalid upload file specified.")
         else:
