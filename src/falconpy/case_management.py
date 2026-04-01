@@ -273,18 +273,22 @@ class CaseManagement(ServiceClass):
         """
         file = kwargs.get("file", None)
         if file:
-            # Pop the path variables from the keywords dictionary
-            # before processing query string arguments.
             try:
                 with open(file, "rb") as upload_file:
                     # Create a multipart form payload for our upload file
                     file_extended = {"file": upload_file}
+                    # case_id and description are formData fields, not query params.
+                    # Pass them via data= so they're sent as multipart form data.
+                    data_fields = {}
+                    if kwargs.get("case_id", None):
+                        data_fields["case_id"] = kwargs.get("case_id")
+                    if kwargs.get("description", None):
+                        data_fields["description"] = kwargs.get("description")
                     returned = process_service_request(calling_object=self,
                                                        endpoints=Endpoints,
                                                        operation_id="entities_files_upload_post_v1",
-                                                       keywords=kwargs,
-                                                       params=parameters,
-                                                       files=file_extended
+                                                       files=file_extended,
+                                                       data=data_fields
                                                        )
             except FileNotFoundError:
                 returned = generate_error_result("Invalid upload file specified.")
