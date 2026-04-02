@@ -287,6 +287,7 @@ class CaseManagement(ServiceClass):
                     returned = process_service_request(calling_object=self,
                                                        endpoints=Endpoints,
                                                        operation_id="entities_files_upload_post_v1",
+                                                       params=parameters,
                                                        files=file_extended,
                                                        data=data_fields
                                                        )
