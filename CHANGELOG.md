@@ -158,7 +158,7 @@
     > Unit testing updated to reflect modified operations.
     - `tests/test_ngsiem.py`
 
-+ Fixed: Fixed `case_id` and `description` not being sent as form data in the _upload_file_ operation within the __CaseManagement__ service collection. Closes #1445.
++ Fixed: Fixed `case_id` and `description` not being sent as form data in the _upload_file_ operation within the __Case Management__ service collection. Closes #1445.
     - `case_management.py`
 
 + Fixed: Added missing `facet` keyword argument documentation to the _query_combined_hosts_ operation within the __Discover__ service collection. Closes #1382.
