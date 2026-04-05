@@ -14,6 +14,7 @@ The examples within this folder focus on leveraging CrowdStrike's Real Time Resp
 - [Script Manager](#script-manager) - Upload and delete RTR scripts for use on endpoints.
 - [Dump Process Memory](pid-dump) - Dumps the memory for a running process on a target system.
 - [My Little RTR](pony) - Retrieve System Information and draws ASCII art.
+- [RTR Session Replay](rtr-replay) - Replay the command history of historical RTR audit sessions (terminal and GUI).
 - [Streaming File Download](#streaming-file-download) - Stream download a file from a target host.
 
 
